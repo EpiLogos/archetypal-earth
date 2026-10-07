@@ -1,0 +1,28 @@
+{
+  "name": "archetypal-earth",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "ingest": "node scripts/ingest.mjs",
+    "images": "node scripts/images.mjs",
+    "data": "npm run ingest && npm run images && npm run ingest",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "globe.gl": "^2.46.2",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "gray-matter": "^4.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3",
+    "yaml": "^2.9.1"
+  }
+}
