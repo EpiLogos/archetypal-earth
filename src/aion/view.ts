@@ -31,6 +31,10 @@ export class AionView {
   private threadEvents: AeonEvent[] = [];
   private threadToggle: HTMLButtonElement | null = null;
   private ring: EquinoxRing;
+  /** The field as the cursor has reached it: what has entered the world by now stands; what came later recedes. */
+  private fieldRel: Float32Array | null = null;
+  private revealYearKey = Number.NaN;
+  private revealEventId = '';
 
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
     readonly history: History, private navigate: (state: AppState) => void) {
@@ -106,6 +110,10 @@ export class AionView {
     this.engine.arcs.clear();
     this.reading = null;
     this.state = undefined;
+    // the field reveal recomputes from scratch on the next entry
+    this.fieldRel = null;
+    this.revealYearKey = Number.NaN;
+    this.revealEventId = '';
   }
 
   private select(selection?: Selection) {
@@ -135,7 +143,7 @@ export class AionView {
     // heading, and the quieter browsing controls open only when requested.
     this.heading.append(this.history.readings.length > 1 ? readingSelect : el('h1', { class: 'fl-name', text: reading.title }),
       el('p', { class: 'aion-context', text: `${reading.author} · An archetypal reading of history` }),
-      el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Explore history' }),
+      el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Browse' }),
         el('div', { class: 'aion-choices' }, [el('label', {}, [el('span', { text: 'Events' }), eventSelect]), el('label', {}, [el('span', { text: 'Threads' }), threadSelect])])]));
   }
 
@@ -174,10 +182,15 @@ export class AionView {
   private showEpoch(epoch: Epoch) {
     const text = this.openCard();
     const children = this.reading!.epochs.filter(e => e.parentId === epoch.id);
+    const links = el('div', { class: 'aion-links' });
+    for (const id of epoch.archetypeIds ?? []) {
+      const archetype = this.model.archById.get(id);
+      if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
+    }
+    for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
     text.append(el('p', { class: 'aion-date rv-line', text: `${yearLabel(epoch.from)} – ${yearLabel(epoch.to)} · approximate` }),
       el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
-      el('div', { class: 'aion-links' }, children.map(e => el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }))), this.sources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
-    this.engine.setEmphasis(null, null);
+      links, this.sources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
   }
 
   private showEvent(event: AeonEvent, move: boolean) {
@@ -187,10 +200,6 @@ export class AionView {
       this.time.scrub(this.model.scale.toU(event.year));
       if (Number.isFinite(event.lat) && Number.isFinite(event.lon)) this.engine.rig.flyTo(event.lat!, event.lon!, 2.8, { duration: 1.8 });
     }
-    const indices = eventOccurrences(this.model, event);
-    const rel = new Float32Array(this.model.occ.length).fill(0.12);
-    for (const i of indices) rel[i] = 1.6;
-    this.engine.setEmphasis(indices.length ? rel : null, null);
     const text = this.openCard();
     const specific = event.occurrenceIds.map(id => this.model.occIndex.get(id)).find(i => i !== undefined);
     const image = specific !== undefined ? this.model.occ[specific].image : undefined;
@@ -198,6 +207,10 @@ export class AionView {
     text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
       el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...event.body.map(text => el('p', { class: 'rv-para', text })), this.sources(event.passages));
     const links = el('div', { class: 'aion-links' });
+    for (const id of event.archetypeIds ?? []) {
+      const archetype = this.model.archById.get(id);
+      if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
+    }
     for (const id of event.familyIds) {
       const family = this.model.famById.get(id);
       if (family) links.append(el('button', { type: 'button', class: 'link-quiet', text: family.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id } }, deep: false }) }));
@@ -231,6 +244,23 @@ export class AionView {
     if (this.threadToggle) this.threadToggle.textContent = 'Play thread';
   }
 
+  /**
+   * The field as of the cursor's year: what has entered the world stands (the standing epoch brightest, earlier
+   * epochs receded), what came later recedes to a presence — never invisible, never unclickable. The standing
+   * event's own occurrences stay brightest of all.
+   */
+  private updateFieldReveal(year: number, epoch: ReturnType<typeof epochAt>) {
+    const m = this.model;
+    const rel = (this.fieldRel ??= new Float32Array(m.occ.length));
+    for (let i = 0; i < m.occ.length; i++) {
+      if (!m.located[i]) { rel[i] = 1; continue; }
+      const y = m.occ[i].year;
+      rel[i] = y > year ? 0.05 : y >= (epoch?.from ?? y) ? 1 : 0.3;
+    }
+    if (this.currentEvent) for (const i of eventOccurrences(m, this.currentEvent)) if (m.located[i]) rel[i] = 1.6;
+    this.engine.setEmphasis(rel, null);
+  }
+
   update(dt: number) {
     if (this.root.hidden || !this.reading) return;
     const year = this.model.scale.fromU(this.time.cursorU);
@@ -247,6 +277,14 @@ export class AionView {
       }
     }
     this.ring.update(year);
+    // the field follows the cursor: recomputed only when the year or the standing event changes
+    const yearKey = Math.floor(year);
+    const eventId = this.currentEvent?.id ?? '';
+    if (yearKey !== this.revealYearKey || eventId !== this.revealEventId) {
+      this.revealYearKey = yearKey;
+      this.revealEventId = eventId;
+      this.updateFieldReveal(year, epoch);
+    }
     const projected = { x: 0, y: 0, facing: 0 };
     for (const dot of this.dots) {
       this.engine.project(dot.dir, projected, 1.008);

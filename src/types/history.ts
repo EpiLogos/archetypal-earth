@@ -36,6 +36,8 @@ export interface Epoch {
   oneLine: string; // ≤ 90 chars, the reading's own claim in plain words
   body: string[]; // short plain paragraphs, the site's summary (not the author's words)
   passages: Passage[]; // the author's own words that ground it
+  /** field archetypes the epoch bears on (the Self, the Shadow…), when the reading itself names them */
+  archetypeIds?: string[];
 }
 
 export interface AeonEvent {
@@ -52,6 +54,8 @@ export interface AeonEvent {
   body: string[];
   passages: Passage[];
   familyIds: FamilyId[]; // field families this event bears on (fish, antichrist…)
+  /** field archetypes the event bears on (the Self, the Shadow…), when the reading itself names them */
+  archetypeIds?: string[];
   occurrenceIds: OccurrenceId[]; // field occurrences it gathers
 }
 

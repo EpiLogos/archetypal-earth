@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T09:03:36.732Z",
+  "generatedAt": "2026-10-08T20:39:35.242Z",
   "readings": [
     {
       "id": "jung-aion",
@@ -69,9 +69,22 @@
               "work": "cw10",
               "locator": "¶589 (pdf p284)",
               "text": "This transformation started in the historical era and left its traces first in the passing of the aeon of Taurus into that of Aries, and then of Aries into Pisces, whose beginning coincides with the rise of Christianity. We are now nearing that great change which may be expected when the spring-point enters Aquarius."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶147, n.74 (pdf p102)",
+              "text": "We said . . . that Isaac bore the form of Christ, but that the ram also seems no less to bear the form of Christ."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶147, n.74 (pdf p102)",
+              "text": "Who was that ram by the offering whereof was made a complete sacrifice in typical blood . . . who was prefigured thereby but Jesus . . . ?"
             }
           ],
-          "sign": "Aries"
+          "sign": "Aries",
+          "archetypeIds": [
+            "self"
+          ]
         },
         {
           "id": "pisces",
@@ -113,7 +126,11 @@
               "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
             }
           ],
-          "sign": "Pisces"
+          "sign": "Pisces",
+          "archetypeIds": [
+            "self",
+            "shadow"
+          ]
         },
         {
           "id": "pisces-first-fish",
@@ -151,7 +168,10 @@
             }
           ],
           "sign": "Pisces",
-          "parentId": "pisces"
+          "parentId": "pisces",
+          "archetypeIds": [
+            "self"
+          ]
         },
         {
           "id": "pisces-second-fish",
@@ -186,10 +206,18 @@
               "work": "cw09ii",
               "locator": "¶141 (pdf p98)",
               "text": "The antichristian era is to blame that the spirit became non-spiritual and that the vitalizing archetype gradually degenerated into rationalism, intellectualism, and doctrinairism, all of which leads straight to the tragedy of modern times now hanging over our heads like a sword of Damocles,"
+            },
+            {
+              "work": "cw09ii",
+              "locator": "pdf p162",
+              "text": "With the year 1000 a new world begins, proclaiming its advent in a strange medley of religious movements such as the Bogomils, Cathari, Albigenses, Waldenses, Poor Men of Lyons, Brethren of the Free Spirit, Beguins, Beghards, etc., and in the Holy Ghost Movement of Joachim of Flora."
             }
           ],
           "sign": "Pisces",
-          "parentId": "pisces"
+          "parentId": "pisces",
+          "archetypeIds": [
+            "shadow"
+          ]
         },
         {
           "id": "pisces-commissure",
@@ -227,7 +255,10 @@
             }
           ],
           "sign": "Pisces",
-          "parentId": "pisces-second-fish"
+          "parentId": "pisces-second-fish",
+          "archetypeIds": [
+            "syzygy"
+          ]
         },
         {
           "id": "aquarius",
@@ -262,9 +293,17 @@
               "work": "cw10",
               "locator": "¶589 (pdf p284)",
               "text": "This transformation started in the historical era and left its traces first in the passing of the aeon of Taurus into that of Aries, and then of Aries into Pisces, whose beginning coincides with the rise of Christianity. We are now nearing that great change which may be expected when the spring-point enters Aquarius."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "pdf p99",
+              "text": "It will then no longer be possible to write off evil as the mere privation of good; its real existence will have to be recognized."
             }
           ],
-          "sign": "Aquarius"
+          "sign": "Aquarius",
+          "archetypeIds": [
+            "self"
+          ]
         }
       ],
       "events": [
@@ -303,7 +342,7 @@
           "yearDisplay": "7 BCE · May 29 in Jung’s account",
           "epochId": "aries",
           "polarity": "union",
-          "oneLine": "Jung reads the conjunction of beneficent Jupiter and Saturn as opposed powers.",
+          "oneLine": "Jung reads beneficent Jupiter and Saturn in conjunction as united opposites.",
           "body": [
             "Jung reports three conjunctions in Pisces in 7 BCE and dates their closest approach to May 29. Its astrological sign is Pisces; the event lies before the atlas’s approximate historical year-0 boundary. No birthplace or earthly observing site is asserted."
           ],
@@ -316,9 +355,13 @@
           ],
           "familyIds": [
             "fish",
-            "god-image"
+            "god-image",
+            "coniunctio"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [
+            "coniunctio-maxima-triple-jupiter-saturn-pisces-7bce",
+            "antichrist-abarbanel-pisces-messiah-ferrara-1551"
+          ]
         },
         {
           "id": "christ-first-fish",
@@ -351,9 +394,19 @@
           "familyIds": [
             "fish",
             "christ-figure",
-            "god-image"
+            "god-image",
+            "antichrist",
+            "ram",
+            "lamb",
+            "sacrifice"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [
+            "lamb-wrathful-seven-horns-eyes-rev-5-6-patmos-95ce",
+            "god-image-barabbas-year-god-passover-jerusalem-30ce"
+          ],
+          "archetypeIds": [
+            "self"
+          ]
         },
         {
           "id": "valentinus-shadow",
@@ -380,15 +433,18 @@
           ],
           "familyIds": [
             "christ-figure",
-            "antichrist",
-            "god-image"
+            "antichrist"
           ],
           "occurrenceIds": [
             "christ-figure-valentinus-shadow-rome-140"
           ],
           "place": "Rome? (Valentinus; reported by Irenaeus, Adv. haer. I, 11, 1; II, 5, 1)",
           "lat": 41.9822,
-          "lon": 12.4781
+          "lon": 12.4781,
+          "archetypeIds": [
+            "self",
+            "shadow"
+          ]
         },
         {
           "id": "farnese-atlas",
@@ -441,7 +497,9 @@
             "fish",
             "christ-figure"
           ],
-          "occurrenceIds": [],
+          "occurrenceIds": [
+            "fish-sibylline-acrostic-ichthys-rome-2c"
+          ],
           "place": "Alexandria · tradition named by Jung",
           "lat": 31.2,
           "lon": 29.92
@@ -469,7 +527,8 @@
             "christ-figure"
           ],
           "occurrenceIds": [
-            "fish-abericius-inscription-phrygia-3c"
+            "fish-abericius-inscription-phrygia-3c",
+            "fish-pectorios-inscription-autun-4c"
           ],
           "place": "Phrygia / Hierapolis (Abercius epitaph)",
           "lat": 37.8675,
@@ -560,7 +619,10 @@
           ],
           "place": "Jerusalem → Latin West",
           "lat": 31.7801,
-          "lon": 35.265
+          "lon": 35.265,
+          "archetypeIds": [
+            "self"
+          ]
         },
         {
           "id": "millennial-reversal",
@@ -585,7 +647,13 @@
             "christ-figure",
             "antichrist"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [
+            "devil-satanael-gods-first-son-bogomil-10c"
+          ],
+          "archetypeIds": [
+            "self",
+            "shadow"
+          ]
         },
         {
           "id": "cathar-bogomil-fishes",
@@ -615,14 +683,19 @@
             "fish",
             "christ-figure",
             "antichrist",
-            "devil"
+            "devil",
+            "hostile-brothers"
           ],
           "occurrenceIds": [
-            "cathar-two-fishes-osob-revelation-1111"
+            "cathar-two-fishes-osob-revelation-1111",
+            "devil-satanael-gods-first-son-bogomil-10c"
           ],
           "place": "Carcassonne · later archival transmission",
           "lat": 43.2189,
-          "lon": 2.2954
+          "lon": 2.2954,
+          "archetypeIds": [
+            "shadow"
+          ]
         },
         {
           "id": "joachim-holy-ghost",
@@ -648,7 +721,8 @@
             "antichrist"
           ],
           "occurrenceIds": [
-            "holy-ghost-joachim-third-aeon-1202"
+            "holy-ghost-joachim-third-aeon-1202",
+            "brethren-free-spirit-transmittere-aeternitatem-germany-13c"
           ],
           "place": "Calabria (Joachim d. 1202; condemned Lateran IV 1215)",
           "lat": 39.4527,
@@ -677,7 +751,10 @@
             "mercurius",
             "fish"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [
+            "fish-round-fish-allegoriae-turba-11c",
+            "rosinus-ad-sarratantam-lapis-animalis"
+          ]
         },
         {
           "id": "lateran-condemnation",
@@ -756,7 +833,8 @@
             }
           ],
           "familyIds": [
-            "antichrist"
+            "antichrist",
+            "coniunctio"
           ],
           "occurrenceIds": [
             "antichrist-pierre-dailly-concordantia-1414"
@@ -809,10 +887,11 @@
           ],
           "familyIds": [
             "fish",
-            "christ-figure",
             "antichrist"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [
+            "devil-luther-inkstand-wartburg-1521"
+          ]
         },
         {
           "id": "nostradamus-letter",
@@ -833,8 +912,7 @@
             }
           ],
           "familyIds": [
-            "antichrist",
-            "god-image"
+            "antichrist"
           ],
           "occurrenceIds": [
             "antichrist-nostradamus-letter-henry-ii-1558"
@@ -867,11 +945,15 @@
             "coniunctio"
           ],
           "occurrenceIds": [
-            "dorn-transmutemini-living-stones-16c"
+            "dorn-transmutemini-living-stones-16c",
+            "dorn-self-knowledge-speculum-1569"
           ],
           "place": "Germany (2nd half 16th c.)",
           "lat": 49.6539,
-          "lon": 9.3682
+          "lon": 9.3682,
+          "archetypeIds": [
+            "self"
+          ]
         },
         {
           "id": "lambspringk-opposed-fishes",
@@ -923,8 +1005,7 @@
           ],
           "familyIds": [
             "lapis",
-            "mercurius",
-            "god-image"
+            "mercurius"
           ],
           "occurrenceIds": []
         },
@@ -971,8 +1052,7 @@
             }
           ],
           "familyIds": [
-            "antichrist",
-            "god-image"
+            "antichrist"
           ],
           "occurrenceIds": [
             "antichrist-nostradamus-letter-henry-ii-1558"
@@ -1009,7 +1089,11 @@
             "god-image",
             "antichrist"
           ],
-          "occurrenceIds": []
+          "occurrenceIds": [],
+          "archetypeIds": [
+            "self",
+            "shadow"
+          ]
         },
         {
           "id": "aquarius-alternative-1997",
@@ -1035,8 +1119,7 @@
             }
           ],
           "familyIds": [
-            "fish",
-            "god-image"
+            "fish"
           ],
           "occurrenceIds": []
         },
@@ -1064,8 +1147,7 @@
             }
           ],
           "familyIds": [
-            "fish",
-            "god-image"
+            "fish"
           ],
           "occurrenceIds": []
         }

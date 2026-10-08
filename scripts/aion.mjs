@@ -62,6 +62,7 @@ export function validateHistory(history, { field } = {}) {
   const readingIds = ids(readings, 'readings');
   const familyIds = field ? new Set(field.families.map((x) => x.id)) : null;
   const occurrenceIds = field ? new Set(field.occurrences.map((x) => x.id)) : null;
+  const archetypeIds = field ? new Set(field.archetypes.map((x) => x.id)) : null;
   for (const reading of readings) {
     if (!reading || typeof reading !== 'object') continue;
     const rw = `reading ${reading.id}`;
@@ -106,6 +107,14 @@ export function validateHistory(history, { field } = {}) {
           seen.add(ancestor.id); ancestor = epochIds.get(ancestor.parentId);
         }
       }
+      if (epoch.archetypeIds !== undefined) {
+        const values = list(epoch.archetypeIds, `${ew}.archetypeIds`);
+        if (new Set(values).size !== values.length) fail(ew, 'duplicate archetypeIds');
+        for (const id of values) {
+          string(id, `${ew}.archetypeIds`);
+          if (archetypeIds && !archetypeIds.has(id)) fail(ew, `unresolved archetypeIds: ${id}`);
+        }
+      }
     }
     // Nested spans are allowed. Siblings may meet at a boundary but cannot overlap.
     for (let i = 0; i < epochs.length; i++) for (let j = i + 1; j < epochs.length; j++) {
@@ -134,6 +143,14 @@ export function validateHistory(history, { field } = {}) {
         for (const id of values) {
           string(id, `${ew}.${key}`);
           if (known && !known.has(id)) fail(ew, `unresolved ${key}: ${id}`);
+        }
+      }
+      if (event.archetypeIds !== undefined) {
+        const values = list(event.archetypeIds, `${ew}.archetypeIds`);
+        if (new Set(values).size !== values.length) fail(ew, 'duplicate archetypeIds');
+        for (const id of values) {
+          string(id, `${ew}.archetypeIds`);
+          if (archetypeIds && !archetypeIds.has(id)) fail(ew, `unresolved archetypeIds: ${id}`);
         }
       }
     }
