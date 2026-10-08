@@ -26,6 +26,8 @@ export class TimeControl {
   private scheduled = false;
   private dragging = false;
   private bins = 160;
+  /** While a thread's walk stands, the one transport button serves it; the clock's own play yields. */
+  private tour: { playing: boolean; onToggle: () => void } | null = null;
 
   constructor(parent: HTMLElement, private model: Model, private time: TimeModel, private onUserScrub: () => void) {
     this.fromU = model.scale.toU(model.field.meta.yearMin);
@@ -58,7 +60,17 @@ export class TimeControl {
     this.render();
   }
 
+  /** Hand the transport button to a standing thread walk (null gives it back to the clock). */
+  setTour(playing: boolean | null, onToggle?: () => void) {
+    this.tour = playing === null ? null : { playing, onToggle: onToggle ?? this.tour?.onToggle ?? (() => {}) };
+    this.render();
+  }
+
   private togglePlay() {
+    if (this.tour) {
+      this.tour.onToggle();
+      return;
+    }
     this.onUserScrub();
     if (this.time.playing) this.time.pause();
     else this.time.play();
@@ -208,11 +220,13 @@ export class TimeControl {
     this.track.setAttribute('aria-valuemin', String(Math.round(sc.fromU(this.fromU))));
     this.track.setAttribute('aria-valuemax', String(Math.round(sc.fromU(this.toU))));
     this.track.setAttribute('aria-valuenow', String(Math.round(year)));
-    const icon = t.playing ? PAUSE_ICON : PLAY_ICON;
-    if (this.play.dataset.icon !== String(t.playing)) {
-      this.play.dataset.icon = String(t.playing);
+    const playing = this.tour ? this.tour.playing : t.playing;
+    const icon = playing ? PAUSE_ICON : PLAY_ICON;
+    if (this.play.dataset.icon !== String(playing)) {
+      this.play.dataset.icon = String(playing);
       this.play.innerHTML = icon;
-      this.play.setAttribute('aria-label', t.playing ? 'Pause' : 'Play history');
+      this.play.setAttribute('aria-label', this.tour ? (playing ? 'Pause tour' : 'Resume tour') : playing ? 'Pause' : 'Play history');
+      this.play.title = this.tour ? (playing ? 'Pause the walk' : 'Resume the walk') : 'Play history';
     }
   }
 }

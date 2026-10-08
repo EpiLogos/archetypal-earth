@@ -33,7 +33,7 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     expect(live.following).toBe(true);
     expect(live.moment()).toBe(NOW);
     expect(describeLive(s).label).toBe('Live');
-    expect(describeLive(s).detail).toMatch(/checked against the ephemeris sidecar at 16:40 UTC/);
+    expect(describeLive(s).detail).toMatch(/checked against the sidecar at 16:40 UTC/);
   });
 
   it('is a snapshot, frozen at the moment it was taken, when no sidecar answers', async () => {

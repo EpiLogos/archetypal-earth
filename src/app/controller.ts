@@ -42,7 +42,8 @@ import { systemViewLatLon } from '../sky/frames';
 import { skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
-const REL_RECEDED = 0.2;
+// outside a focus the field recedes to a presence, never to a wall: everything stays pickable
+const REL_RECEDED = 0.07;
 const REL_RELATED = 1.5;
 
 interface Tour {
@@ -135,10 +136,10 @@ export class Controller {
     this.strip = new Strip(root, m, {
       onSelect: (i) => this.tourJump(i),
       onOpen: (i) => this.tour && this.openOccurrence(this.tour.steps[i].occ),
-      onToggle: () => this.tourToggle(),
     });
     this.hover = new HoverLabel(root);
     this.timeControl = new TimeControl(root, m, time, () => this.onUserTime());
+    this.timeControl.setTour(null, () => this.tourToggle());
     this.search = new SearchUI(root, this.searchIndex, (r) => this.chooseResult(r), (open) => {
       document.body.classList.toggle('search-open', open);
       if (open) this.hover.hide();
@@ -164,6 +165,7 @@ export class Controller {
     });
     this.skyCard = new SkyCard(root, {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
+      onOccurrence: (id) => this.openOccurrenceId(id),
       onClose: () => this.stepBack(),
     });
     this.sidecar = new SidecarClient({ base: SIDECAR_BASE, local: isLocalHost() });
@@ -1032,7 +1034,11 @@ export class Controller {
 
   private setLabelFor(subject: Subject) {
     const m = this.m;
-    const content: LabelContent = { name: subjectName(m, subject), line: subjectLine(m, subject) || undefined, links: [] };
+    const v = this.state.view;
+    const up = v.kind === 'focus' && v.crumbs?.length
+      ? [...v.crumbs.slice().reverse().map((c) => ({ text: subjectName(m, c), onClick: () => this.stepBack() })), { text: 'the whole field', onClick: () => this.wholeField() }]
+      : [{ text: 'the whole field', onClick: () => this.wholeField() }];
+    const content: LabelContent = { name: subjectName(m, subject), line: subjectLine(m, subject) || undefined, up, links: [] };
     if (subject.type === 'family') {
       const fam = m.famById.get(subject.id)!;
       const ties = archetypesOfFamily(m, fam);
@@ -1055,6 +1061,11 @@ export class Controller {
 
   private setBody(_k: string | null) {
     // reserved: per-kind styling hooks
+  }
+
+  /** Out of every focus at once: the whole field, as the globe or as the graph — the breadcrumb's last door. */
+  private wholeField() {
+    this.navigate(this.state.graph ? { view: { kind: 'world' }, deep: false, graph: true } : WORLD);
   }
 
   private onFloatSelect(t: FloatTarget) {
@@ -1222,17 +1233,20 @@ export class Controller {
     this.label.set({
       name,
       line: target.type === 'parallels' ? `${m.occ[m.occIndex.get(target.id)!].label} and its parallels` : `${eraShort(first0.yearDisplay, 22)} → ${eraShort(last.yearDisplay, 22)}`,
+      up: [{ text: 'the whole field', onClick: () => this.stepBack() }],
       links: [{ text: 'Reading', onClick: () => this.setDeep(true) }],
     }, `t:${target.type}:${target.id}`);
     document.title = `${name}, the thread — An Archetypal Earth`;
 
     this.tour = { steps, i: -1, playing: true, phase: 'intro', timer: first || e.reduced ? 0.4 : 3.1, tok: ++this.tokCounter, draw: first ? 1 : 0, head: 0, subject, target };
+    this.timeControl.setTour(true, () => this.tourToggle());
   }
 
   private endThread() {
     const e = this.engine;
     this.tour = null;
     this.tokCounter++;
+    this.timeControl.setTour(null);
     e.arcs.clear();
     e.arcs.uniforms.uTour.value = 0;
     e.markers.head.hide();
@@ -1254,6 +1268,7 @@ export class Controller {
     if (!t) return;
     t.playing = false;
     this.strip.setPlaying(false);
+    this.timeControl.setTour(false);
   }
 
   private tourResume() {
@@ -1261,6 +1276,7 @@ export class Controller {
     if (!t) return;
     t.playing = true;
     this.strip.setPlaying(true);
+    this.timeControl.setTour(true);
     if (t.phase === 'done') this.startStep(0);
     else if (t.phase === 'fly') this.startStep(Math.max(0, t.i));
     else if (t.phase === 'intro') t.timer = Math.min(t.timer, 0.4);
@@ -1313,6 +1329,7 @@ export class Controller {
     t.phase = 'done';
     t.playing = false;
     this.strip.setPlaying(false);
+    this.timeControl.setTour(false);
     this.engine.markers.head.hide();
     this.engine.arcs.uniforms.uTour.value = 0;
     if (this.timeSnap) this.time.restore(this.timeSnap);

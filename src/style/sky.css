@@ -46,6 +46,14 @@ body.search-open .sky-switch, body.deep-open .sky-switch { opacity: 0; pointer-e
 .sky-tie-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font: 12px var(--sans); }
 .sky-kind { color: var(--ink-3); font-size: 10.5px; letter-spacing: .06em; }
 .sky-tie-note { margin: 6px 0 0; font: 12px/1.55 var(--sans); color: var(--ink-3); }
+.sky-earth { margin-top: 4px; }
+.sky-earth-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px 0; border-top: 1px solid var(--hair); text-align: left; transition: opacity .3s; }
+.sky-earth-row:hover { opacity: .82; }
+.sky-earth-plate { flex: none; width: 44px; height: 34px; border-radius: 2px; outline: 1px solid rgb(var(--core-rgb) / .3); outline-offset: 2px; }
+.sky-earth-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sky-earth-label { font: 600 .95rem var(--serif); color: var(--ink-2); line-height: 1.25; }
+.sky-earth-row:hover .sky-earth-label { color: var(--ink); }
+.sky-earth-era { font: 10.5px var(--sans); letter-spacing: .04em; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sky-basis { display: inline-block; padding: 1px 7px; border: 1px solid var(--hair); border-radius: 99px; font: 10px/1.5 var(--sans); letter-spacing: .05em; color: var(--ink-3); cursor: help; }
 .sky-basis-jung { color: var(--core); border-color: rgb(var(--core-rgb) / .5); }
 .sky-reading { margin-top: 20px; padding: 14px 0 0; border-top: 1px solid var(--hair); }

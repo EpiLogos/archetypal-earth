@@ -8,9 +8,9 @@ import type { Model } from '../data/model';
 import { subjectExists, subjectName } from '../data/model';
 import type { TieBasis } from '../types/field';
 import type { BodyKey, SkyBody, SkyCite, SkyData, SkyReading, SkyTie } from '../types/sky';
-import { clear, el } from '../ui/dom';
+import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
-import { shortLocator, shortWork } from '../ui/format';
+import { eraShort, shortLocator, shortWork } from '../ui/format';
 import type { SkyEphemeris } from './ephemeris';
 import { signOf } from './frames';
 import { moonPhase, nextSyzygies } from './luminaries';
@@ -19,6 +19,8 @@ export interface FieldTarget { type: 'family' | 'archetype'; id: string }
 
 export interface SkyCardHandlers {
   onField(target: FieldTarget): void;
+  /** open one of the body's earth-bound occurrences, leaving the sky for the field */
+  onOccurrence(id: string): void;
   onClose(): void;
 }
 
@@ -175,6 +177,10 @@ export class SkyCard {
     for (const t of resolved) ties.append(this.tie(t, m));
     text.append(ties);
 
+    // the tie made flesh: occurrences on the ground the presiding families carry
+    const earth = this.earthSection(m, resolved);
+    if (earth) text.append(earth);
+
     // sources, plainly
     if (body.sources.length) {
       text.append(el('details', { class: 'aion-sources sky-body-sources' }, [
@@ -202,6 +208,40 @@ export class SkyCard {
     ]);
     if (t.cites?.length) row.append(passages(t.cites, 'Read the passage'));
     return row;
+  }
+
+  /**
+   * Where the body's families touch the ground: one representative occurrence per family, at most three, each a
+   * real field node that opens in place. An occurrence with its own image stands for the family; otherwise the
+   * family's median occurrence (by year) does — deterministic, never a rotation of favourites.
+   */
+  private earthSection(m: Model, resolved: SkyTie[]): HTMLElement | null {
+    const picks: number[] = [];
+    const seenFam = new Set<string>();
+    for (const t of resolved) {
+      if (t.target.type !== 'family' || seenFam.has(t.target.id)) continue;
+      seenFam.add(t.target.id);
+      const list = (m.famOcc.get(t.target.id) ?? []).filter((i) => m.located[i]);
+      if (!list.length) continue;
+      const withImage = list.filter((i) => m.occ[i].image);
+      const pool = withImage.length ? withImage : list;
+      picks.push(pool[Math.floor(pool.length / 2)]);
+      if (picks.length >= 3) break;
+    }
+    if (!picks.length) return null;
+    const sec = el('div', { class: 'sky-earth' }, [el('h3', { class: 'sky-h', text: 'On the earth' })]);
+    for (const i of picks) {
+      const o = m.occ[i];
+      const fam = m.famById.get(o.familyId);
+      sec.append(el('button', { class: 'sky-earth-row', type: 'button', onclick: () => this.h.onOccurrence(o.id) }, [
+        plate(o.image ?? fam?.image, { thumb: true, className: 'sky-earth-plate', palette: fam?.palette, alt: '' }),
+        el('span', { class: 'sky-earth-text' }, [
+          el('span', { class: 'sky-earth-label', text: o.label }),
+          el('span', { class: 'sky-earth-era', text: `${eraShort(o.yearDisplay, 26)} · ${fam?.name ?? ''}` }),
+        ]),
+      ]));
+    }
+    return sec;
   }
 
   private reading(r: SkyReading): HTMLElement {

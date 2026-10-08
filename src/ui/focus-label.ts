@@ -4,6 +4,8 @@ import { clear, el } from './dom';
 export interface LabelContent {
   name: string;
   line?: string;
+  /** the way out, one level at a time (the drilled route, then the whole field); rendered above the name */
+  up?: { text: string; onClick: () => void }[];
   /** small serif-italic row of related names that can be followed (e.g. a form's archetypes) */
   ties?: { text: string; onClick: () => void }[];
   tiesPrefix?: string;
@@ -43,6 +45,14 @@ export class FocusLabel {
         ? el('button', { class: 'fl-name fl-backlink', type: 'button', 'aria-label': `Back to ${content.name}`, onclick: content.back }, [el('span', { class: 'fl-chev', 'aria-hidden': 'true', text: '‹' }), content.name])
         : el('h1', { class: 'fl-name', text: content.name });
       this.root.append(name);
+      if (content.up?.length) {
+        const up = el('nav', { class: 'fl-up', 'aria-label': 'Where you came from' });
+        content.up.forEach((c, i) => {
+          if (i) up.append(' · ');
+          up.append(el('button', { class: 'link-quiet', type: 'button', text: `‹ ${c.text}`, onclick: c.onClick }));
+        });
+        this.root.prepend(up);
+      }
       if (content.line) this.root.append(el('p', { class: 'fl-line', text: content.line }));
       if (content.ties?.length) {
         const row = el('p', { class: 'fl-ties' });

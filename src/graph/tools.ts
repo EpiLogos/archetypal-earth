@@ -106,7 +106,7 @@ export class GraphTools {
     this.sky.disabled = s.sky === 'loading';
     const note = s.sky === 'on' ? `Bodies stand at their geocentric ecliptic longitudes, ${s.skyAsOf ?? 'now'}. In a local graph they are ordinary neighbours.`
       : s.sky === 'loading' ? 'Loading the sky…'
-      : s.sky === 'unavailable' ? 'The sky\u2019s data could not be loaded, so there is nothing to hang.' : '';
+      : s.sky === 'unavailable' ? 'The sky\u2019s data is unavailable.' : '';
     this.skyNote.textContent = note;
     this.skyNote.hidden = !note;
     this.root.classList.toggle('is-local', s.local);

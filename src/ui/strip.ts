@@ -1,4 +1,5 @@
 // THREAD: the image sequence strip — plays through the thread oldest to newest.
+// Transport lives in the one time-control button (bottom right): never a second play/pause here.
 import type { Model } from '../data/model';
 import { occurrenceImage } from '../data/model';
 import { clear, el, plate } from './dom';
@@ -7,11 +8,7 @@ import { eraShort, placeLine } from './format';
 export interface StripHandlers {
   onSelect(i: number): void;
   onOpen(i: number): void;
-  onToggle(): void;
 }
-
-const PLAY = '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 1.8v8.4L10.2 6z" fill="currentColor"/></svg>';
-const PAUSE = '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg>';
 
 export class Strip {
   readonly root: HTMLElement;
@@ -20,7 +17,6 @@ export class Strip {
   private caption: HTMLElement;
   private captionName: HTMLElement;
   private captionLine: HTMLElement;
-  private toggle: HTMLButtonElement;
   private index = -1;
 
   constructor(parent: HTMLElement, private model: Model, private h: StripHandlers) {
@@ -28,10 +24,8 @@ export class Strip {
     this.captionName = el('span', { class: 'st-name' });
     this.captionLine = el('span', { class: 'st-line' });
     this.caption = el('button', { class: 'st-caption', type: 'button', 'aria-label': 'Open this presence', onclick: () => this.index >= 0 && this.h.onOpen(this.index) }, [this.captionName, this.captionLine]);
-    this.toggle = el('button', { class: 'st-toggle', type: 'button', 'aria-label': 'Pause tour', onclick: () => h.onToggle() }) as HTMLButtonElement;
-    this.toggle.innerHTML = PAUSE;
     const viewport = el('div', { class: 'st-viewport' }, [this.rail]);
-    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest', 'aria-hidden': 'true' }, [this.caption, el('div', { class: 'st-row' }, [this.toggle, viewport])]);
+    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest', 'aria-hidden': 'true' }, [this.caption, el('div', { class: 'st-row' }, [viewport])]);
     this.root.inert = true;
     parent.append(this.root);
   }
@@ -70,8 +64,6 @@ export class Strip {
   }
 
   setPlaying(playing: boolean) {
-    this.toggle.innerHTML = playing ? PAUSE : PLAY;
-    this.toggle.setAttribute('aria-label', playing ? 'Pause tour' : 'Resume tour');
     this.root.classList.toggle('paused', !playing);
   }
 

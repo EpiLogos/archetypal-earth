@@ -19,7 +19,7 @@ export interface SkyState {
 
 export type View =
   | { kind: 'world' }
-  | { kind: 'focus'; subject: Subject }
+  | { kind: 'focus'; subject: Subject; /** the subjects drilled through to arrive here, outermost first (a link route, never in the hash) */ crumbs?: Subject[] }
   | { kind: 'manifest'; occId: string; context: Subject }
   | { kind: 'thread'; target: ThreadTarget; from: View };
 
@@ -43,7 +43,18 @@ function inMode(from: AppState, next: AppState): AppState {
 }
 
 export function focusOn(s: AppState, subject: Subject): AppState {
-  return inMode(s, { view: { kind: 'focus', subject }, deep: false });
+  return inMode(s, { view: { kind: 'focus', subject, crumbs: focusCrumbs(s) }, deep: false });
+}
+
+/** The route drilled through to reach a focus: what stood focused one level up. A manifestation leaves its context; the world leaves no crumb. */
+function focusCrumbs(s: AppState): Subject[] | undefined {
+  const v = s.view;
+  if (v.kind === 'focus') {
+    const crumbs = [...(v.crumbs ?? []), v.subject];
+    return crumbs.slice(Math.max(0, crumbs.length - 3));
+  }
+  if (v.kind === 'manifest') return [v.context];
+  return undefined;
 }
 
 /** Switch between the globe and the graph, keeping what is in view (a thread has no graph: it returns to where it began). */
@@ -92,7 +103,7 @@ export function setDeep(s: AppState, deep: boolean): AppState {
   return { ...s, deep };
 }
 
-/** One step back: deep → manifestation → focus → world (thread → where it began). */
+/** One step back: deep → manifestation → focus (up the drilled route) → world (thread → where it began). */
 export function back(s: AppState): AppState {
   if (s.deep) return { ...s, deep: false };
   if (s.sky) {
@@ -105,8 +116,14 @@ export function back(s: AppState): AppState {
   switch (v.kind) {
     case 'world':
       return s;
-    case 'focus':
+    case 'focus': {
+      const crumbs = v.crumbs ?? [];
+      if (crumbs.length) {
+        const up = crumbs[crumbs.length - 1];
+        return inMode(s, { view: { kind: 'focus', subject: up, crumbs: crumbs.slice(0, -1) }, deep: false });
+      }
       return inMode(s, WORLD);
+    }
     case 'manifest':
       if (s.trail) return { view: s.trail, deep: false };
       return inMode(s, { view: { kind: 'focus', subject: v.context }, deep: false });

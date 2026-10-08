@@ -149,7 +149,7 @@ const deg = (d: number) => `${d.toFixed(3)}°`;
 export function describeLive(s: LiveState): { label: string; detail: string } {
   switch (s.kind) {
     case 'live':
-      return { label: 'Live', detail: `Positions follow the clock, checked against the ephemeris sidecar at ${hhmm(s.checkedAt)} (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)} from the generated grids).` };
+      return { label: 'Live', detail: `Following the clock, checked against the sidecar at ${hhmm(s.checkedAt)} (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)}).` };
     case 'snapshot': {
       const why = s.why === 'not-local' ? 'The live ephemeris is only reachable when the site runs beside its local sidecar.'
         : s.why === 'unsupported' ? 'The sidecar did not answer as expected.'
@@ -158,8 +158,8 @@ export function describeLive(s: LiveState): { label: string; detail: string } {
       return { label: 'Snapshot', detail: `Computed from the generated ephemeris as of ${formatMoment(s.asOf)}; it does not follow the clock. ${why}` };
     }
     case 'diverged':
-      return { label: 'Snapshot', detail: `Computed from the generated ephemeris as of ${formatMoment(s.asOf)}. The sidecar disagrees with it (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)}), so the sky is not called live; regenerate it with npm run sky.` };
+      return { label: 'Snapshot', detail: `Computed from the generated ephemeris as of ${formatMoment(s.asOf)}. The sidecar disagrees with it (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)}), so the sky is not called live.` };
     case 'beyond':
-      return { label: 'Beyond the generated sky', detail: `${formatMoment(s.asOf)} lies outside ${s.from.slice(0, 4)}–${Number(s.to.slice(0, 4)) - 1}: the bodies hold their nearest generated positions, and the Earth keeps its own light. Regenerate with npm run sky.` };
+      return { label: 'Beyond the generated sky', detail: `${formatMoment(s.asOf)} lies outside ${s.from.slice(0, 4)}–${Number(s.to.slice(0, 4)) - 1}: the bodies hold their nearest generated positions, and the Earth keeps its own light.` };
   }
 }
