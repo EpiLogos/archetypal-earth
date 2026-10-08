@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-08T17:17:23.422Z",
+    "generatedAt": "2026-10-08T19:28:11.260Z",
     "sidecar": {
       "name": "archetypal-earth-ephemeris",
       "version": "1.2.0",
@@ -1056,8 +1056,8 @@
       "venus": {
         "name": "Aphrodite",
         "kind": "deity",
-        "basis": "jung",
-        "source": "planetary-gods table, Venus × Greek (J: sem-zarathustra pdf p1441 copper=Venus)"
+        "basis": "site",
+        "source": "planetary-gods table, Venus × Greek (the table marks J for the planet–metal link, sem-zarathustra pdf p1441 copper=Venus; the Greek name is the classical one, not Jung's word)"
       },
       "mercury": {
         "name": "Hermes",
@@ -1068,8 +1068,8 @@
       "moon": {
         "name": "Selene",
         "kind": "deity",
-        "basis": "jung",
-        "source": "planetary-gods table, Moon × Greek (J: sem-zarathustra pdf p1441 silver=moon)"
+        "basis": "site",
+        "source": "planetary-gods table, Moon × Greek (the table marks J for the planet–metal link, sem-zarathustra pdf p1441 silver=moon; the Greek name is the classical one, not Jung's word)"
       }
     },
     "roman": {

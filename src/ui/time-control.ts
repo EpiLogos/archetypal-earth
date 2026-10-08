@@ -16,6 +16,10 @@ export class TimeControl {
   private readout: HTMLButtonElement;
   private play: HTMLButtonElement;
   private canvas: HTMLCanvasElement;
+  private eras: HTMLElement;
+  private fromU = 0;
+  private toU = 1;
+  private subjectIndices: number[] | null = null;
   private dens: Float32Array;
   private subjectDens: Float32Array | null = null;
   private subjectColour = '#ffffff';
@@ -24,22 +28,20 @@ export class TimeControl {
   private bins = 160;
 
   constructor(parent: HTMLElement, private model: Model, private time: TimeModel, private onUserScrub: () => void) {
+    this.fromU = model.scale.toU(model.field.meta.yearMin);
+    this.toU = model.scale.toU(model.field.meta.yearMax);
+    time.setRange(this.fromU, this.toU);
     this.dens = this.density(null);
     this.canvas = el('canvas', { class: 't-dens', 'aria-hidden': 'true' });
     this.handle = el('div', { class: 't-handle' });
     this.band = el('div', { class: 't-band' });
-    const eras = el('div', { class: 't-eras', 'aria-hidden': 'true' });
+    this.eras = el('div', { class: 't-eras', 'aria-hidden': 'true' });
     const sc = model.scale;
-    sc.eras.forEach((e, i) => {
-      const a = sc.toU(e.from);
-      const b = sc.toU(e.to);
-      eras.append(el('span', { class: 't-era', style: `left:${((a + b) / 2) * 100}%`, text: e.name }));
-      if (i > 0) eras.append(el('span', { class: 't-tick', style: `left:${a * 100}%` }));
-    });
+    this.renderEras();
     this.track = el('div', {
       class: 't-track', role: 'slider', tabindex: 0, 'aria-label': 'Time',
       'aria-valuemin': Math.round(sc.yearMin), 'aria-valuemax': Math.round(sc.yearMax), 'aria-valuetext': 'All time',
-    }, [this.canvas, el('div', { class: 't-line' }), this.band, this.handle, eras]);
+    }, [this.canvas, el('div', { class: 't-line' }), this.band, this.handle, this.eras]);
     this.readout = el('button', { class: 't-readout', type: 'button', 'aria-label': 'Show all time', title: 'All time', onclick: () => this.time.setAll() }) as HTMLButtonElement;
     this.play = el('button', { class: 't-play', type: 'button', 'aria-label': 'Play history', title: 'Play history', onclick: () => this.togglePlay() }) as HTMLButtonElement;
     this.play.innerHTML = PLAY_ICON;
@@ -64,9 +66,35 @@ export class TimeControl {
 
   /** Brighten the time-density of the focused subject along the track. */
   setSubject(occ: number[] | null, colour: string) {
+    this.subjectIndices = occ;
     this.subjectDens = occ ? this.density(occ) : null;
     this.subjectColour = colour;
     this.drawDensity();
+  }
+
+  /** Remap this control and playback to a view's span, expressed in the shared scale. */
+  setRange(fromU = this.model.scale.toU(this.model.field.meta.yearMin), toU = this.model.scale.toU(this.model.field.meta.yearMax)) {
+    this.time.setRange(fromU, toU);
+    this.fromU = this.time.fromU;
+    this.toU = this.time.toU;
+    this.dens = this.density(null);
+    this.subjectDens = this.subjectIndices ? this.density(this.subjectIndices) : null;
+    this.renderEras();
+    this.drawDensity();
+    this.render();
+  }
+
+  private position(u: number) { return Math.max(0, Math.min(1, (u - this.fromU) / (this.toU - this.fromU))); }
+
+  private renderEras() {
+    this.eras.replaceChildren();
+    for (const e of this.model.scale.eras) {
+      const a = Math.max(this.fromU, this.model.scale.toU(e.from));
+      const b = Math.min(this.toU, this.model.scale.toU(e.to));
+      if (b <= a) continue;
+      this.eras.append(el('span', { class: 't-era', style: `left:${this.position((a + b) / 2) * 100}%`, text: e.name }));
+      if (a > this.fromU) this.eras.append(el('span', { class: 't-tick', style: `left:${this.position(a) * 100}%` }));
+    }
   }
 
   private density(subset: number[] | null): Float32Array {
@@ -74,7 +102,8 @@ export class TimeControl {
     const m = this.model;
     const add = (i: number) => {
       if (!m.located[i]) return;
-      const b = Math.min(this.bins - 1, Math.floor(m.u[i] * this.bins));
+      if (m.u[i] < this.fromU || m.u[i] > this.toU) return;
+      const b = Math.min(this.bins - 1, Math.floor(this.position(m.u[i]) * this.bins));
       for (let k = -2; k <= 2; k++) {
         const j = b + k;
         if (j >= 0 && j < this.bins) out[j] += Math.exp(-(k * k) / 2.2);
@@ -115,7 +144,7 @@ export class TimeControl {
 
   private uFromEvent(e: PointerEvent): number {
     const r = this.track.getBoundingClientRect();
-    return Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    return this.fromU + Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (this.toU - this.fromU);
   }
 
   private onDown = (e: PointerEvent) => {
@@ -137,11 +166,11 @@ export class TimeControl {
   };
 
   private onKey = (e: KeyboardEvent) => {
-    const step = e.shiftKey ? 0.06 : 0.015;
+    const step = (e.shiftKey ? 0.06 : 0.015) * (this.toU - this.fromU);
     const t = this.time;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { this.onUserScrub(); t.pause(); t.scrub((t.mode === 'all' ? 1 : t.cursorU) - step); }
-    else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { this.onUserScrub(); t.pause(); t.scrub((t.mode === 'all' ? 0 : t.cursorU) + step); }
-    else if (e.key === 'Home') { this.onUserScrub(); t.scrub(0); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { this.onUserScrub(); t.pause(); t.scrub((t.mode === 'all' ? this.toU : t.cursorU) - step); }
+    else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { this.onUserScrub(); t.pause(); t.scrub((t.mode === 'all' ? this.fromU : t.cursorU) + step); }
+    else if (e.key === 'Home') { this.onUserScrub(); t.pause(); t.scrub(this.fromU); }
     else if (e.key === 'End' || e.key === 'Escape') { if (e.key === 'End') t.setAll(); else return; }
     else if (e.key === ' ' || e.key === 'Enter') { this.togglePlay(); }
     else return;
@@ -165,16 +194,19 @@ export class TimeControl {
     this.root.classList.toggle('is-cursor', on);
     this.root.classList.toggle('is-playing', t.playing);
     const u = t.cursorU;
-    this.handle.style.left = `${u * 100}%`;
+    this.handle.style.left = `${this.position(u) * 100}%`;
     this.handle.style.opacity = String(Math.min(1, t.on * 1.4));
-    const trail = Math.min(t.trail, u);
-    this.band.style.left = `${(u - trail) * 100}%`;
-    this.band.style.width = `${trail * 100}%`;
+    const end = Math.min(u, this.toU);
+    const start = Math.max(this.fromU, end - t.trail);
+    this.band.style.left = `${this.position(start) * 100}%`;
+    this.band.style.width = `${Math.max(0, this.position(end) - this.position(start)) * 100}%`;
     this.band.style.opacity = String(t.on * 0.9);
     const year = sc.fromU(u);
     const label = on ? formatYear(year) : 'All time';
     if (this.readout.textContent !== label) this.readout.textContent = label;
     this.track.setAttribute('aria-valuetext', on ? formatYear(year) : 'All time');
+    this.track.setAttribute('aria-valuemin', String(Math.round(sc.fromU(this.fromU))));
+    this.track.setAttribute('aria-valuemax', String(Math.round(sc.fromU(this.toU))));
     this.track.setAttribute('aria-valuenow', String(Math.round(year)));
     const icon = t.playing ? PAUSE_ICON : PLAY_ICON;
     if (this.play.dataset.icon !== String(t.playing)) {

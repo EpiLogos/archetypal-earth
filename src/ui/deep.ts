@@ -5,6 +5,7 @@ import { archetypesOfFamily, occurrenceImage, subjectOccurrences } from '../data
 import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
 import { closeGlyph } from './reveal';
+import { symbolReading } from './symbol-reading';
 import { eraShort, jungLine, placeLine, shortWork } from './format';
 
 export interface DeepHandlers {
@@ -90,6 +91,8 @@ export class DeepSheet {
       a.append(el('h2', { class: 'dp-title', text: fam.name }), el('p', { class: 'dp-lede', text: fam.oneLine }));
       if (fam.image) a.append(plate(fam.image, { credit: true, className: 'dp-figure', palette: fam.palette, eager: true }));
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
+      const symbolic = symbolReading(m, fam.id, id => this.h.onSubject({ type: 'family', id }));
+      if (symbolic) a.append(symbolic);
       const ties = archetypesOfFamily(m, fam);
       if (ties.length) {
         a.append(el('h3', { class: 'dp-sub', text: 'Archetypal ground' }));
@@ -173,6 +176,8 @@ export class DeepSheet {
       a.append(el('h3', { class: 'dp-sub', text: 'Of the form' }));
       a.append(el('p', { class: 'dp-flow' }, [el('button', { class: 'link-quiet', type: 'button', text: fam.name, onclick: () => this.h.onSubject({ type: 'family', id: fam.id }) })]));
     }
+    const symbolic = symbolReading(m, o.familyId, id => this.h.onSubject({ type: 'family', id }));
+    if (symbolic) a.append(symbolic);
     const par = o.parallelIds.map((p) => m.occIndex.get(p)).filter((x): x is number => x !== undefined);
     if (par.length) {
       a.append(el('h3', { class: 'dp-sub', text: 'Parallels' }));

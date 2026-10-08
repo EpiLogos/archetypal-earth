@@ -1,0 +1,1145 @@
+{
+  "generatedAt": "2026-10-08T09:03:36.732Z",
+  "readings": [
+    {
+      "id": "jung-aion",
+      "title": "Aion",
+      "author": "C. G. Jung",
+      "work": "cw09ii",
+      "from": -4286,
+      "to": 4343,
+      "epochs": [
+        {
+          "id": "taurus",
+          "name": "Taurus · the bull",
+          "from": -4286,
+          "to": -2143,
+          "polarity": "neutral",
+          "spectrum": 0.32,
+          "palette": {
+            "core": "#c3b7a2",
+            "glow": "#aa9bac",
+            "fog": "#332d39",
+            "deep": "#121018"
+          },
+          "oneLine": "Jung places the bull before the ram in the changing archetypal dominants.",
+          "body": [
+            "Jung names Taurus as the first of this sequence in his later Flying Saucers preface (CW10 ¶589), rather than assigning it fixed dates in Aion.",
+            "The atlas uses two equal 2,143-year months before year 0 to make the sequence traversable. These ancient boundaries are display approximations calculated from Aion ¶149 n.84, not dates Jung gives for Taurus."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶589 (pdf p284)",
+              "text": "This transformation started in the historical era and left its traces first in the passing of the aeon of Taurus into that of Aries, and then of Aries into Pisces, whose beginning coincides with the rise of Christianity. We are now nearing that great change which may be expected when the spring-point enters Aquarius."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            }
+          ],
+          "sign": "Taurus"
+        },
+        {
+          "id": "aries",
+          "name": "Aries · the ram",
+          "from": -2143,
+          "to": 0,
+          "polarity": "light",
+          "spectrum": 0.63,
+          "palette": {
+            "core": "#dedcca",
+            "glow": "#b8c9da",
+            "fog": "#343649",
+            "deep": "#10101c"
+          },
+          "oneLine": "Jung reads Christ as the last ram of Aries and the first fish of Pisces.",
+          "body": [
+            "For Jung, the sacrificial lamb carries the departing ram symbolism into the new fish symbolism. The passage describes symbolic overlap, not a precise boundary.",
+            "The start at 2143 BCE is an equal-month display approximation. Jung does not fix this Aries boundary in Aion."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶147 (pdf p102)",
+              "text": "But, to the extent that Christ was regarded as the new aeon, it would be clear to anyone acquainted with astrology that he was born as the first fish of the Pisces era, and was doomed to die as the last ram74 (άρνίον, lamb) of the declining Aries era.75"
+            },
+            {
+              "work": "cw10",
+              "locator": "¶589 (pdf p284)",
+              "text": "This transformation started in the historical era and left its traces first in the passing of the aeon of Taurus into that of Aries, and then of Aries into Pisces, whose beginning coincides with the rise of Christianity. We are now nearing that great change which may be expected when the spring-point enters Aquarius."
+            }
+          ],
+          "sign": "Aries"
+        },
+        {
+          "id": "pisces",
+          "name": "Pisces · the two fishes",
+          "from": 0,
+          "to": 2200,
+          "polarity": "neutral",
+          "spectrum": 0.55,
+          "palette": {
+            "core": "#c3b7a2",
+            "glow": "#aa9bac",
+            "fog": "#332d39",
+            "deep": "#121018"
+          },
+          "oneLine": "Jung reads the Christian aeon through the tension of Christ and Antichrist.",
+          "body": [
+            "Jung reads the two fishes as opposed principles within one aeon. His account of religious and psychic history remains an interpretation; Aion explicitly says no connection between Christ and the astrological age can be proved.",
+            "The atlas spans approximately 0–2200 CE. Jung qualifies the Aquarian boundary as indefinite, gives 1997 and 2154 for different reference stars, and also gives a 2000–2200 range."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶148 (pdf p104)",
+              "text": "Although no connection of any kind can be proved between the figure of Christ and the inception of the astrological age of the fishes, the simultaneity of the fish symbolism of the Redeemer with the astrological symbol of the new aeon seems to me important enough to warrant the emphasis we place upon it."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p106)",
+              "text": "Astrologically interpreted, the designation of Christ as one of the fishes identifies him with the first fish, the vertical one. Christ is followed by the Antichrist, at the end of time. The beginning of the enantiodromia would fall, logically, midway between the two fishes. We have seen that this is so."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Since the delimitation of the constellations is known to be somewhat arbitrary, this date is very indefinite. It refers to the actual constellation of fixed stars, not to fhe zodion noeton, i.e., the zodiac divided into sectors of 30° each. Astrologically the beginning of the next aeon, according to the starting-point you select, falls between A.D. 2000 and 2200."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            }
+          ],
+          "sign": "Pisces"
+        },
+        {
+          "id": "pisces-first-fish",
+          "name": "The first fish · Christ",
+          "from": 0,
+          "to": 1000,
+          "polarity": "light",
+          "spectrum": 0.82,
+          "palette": {
+            "core": "#dedcca",
+            "glow": "#b8c9da",
+            "fog": "#343649",
+            "deep": "#10101c"
+          },
+          "oneLine": "Jung associates the first, vertical fish with the Christian light figure.",
+          "body": [
+            "In Jung’s reading, Christ is the bright image of the self. Its exclusion of the dark side leaves a counterpart, the Antichrist.",
+            "The approximate year-1000 boundary follows Jung’s account of an enantiodromia, a reversal toward the opposite. It is a symbolic periodisation."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶70 (pdf p49)",
+              "text": "Christ exemplifies the archetype of the self.5 He represents a totality of a divine or heavenly kind, a glorified man, a son of God sine macula peccati, unspotted by sin."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p106)",
+              "text": "Astrologically interpreted, the designation of Christ as one of the fishes identifies him with the first fish, the vertical one. Christ is followed by the Antichrist, at the end of time. The beginning of the enantiodromia would fall, logically, midway between the two fishes. We have seen that this is so."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶231 (pdf p161)",
+              "text": "Thus God not only foresaw the enantiodromia that began in the year 1000, but also intended it. The Platonic month of the Fishes is to be ruled by two principles. The fishes in our text are parallel, like the oxen, and point to the same goal, although one is Christ and the other the Antichrist."
+            }
+          ],
+          "sign": "Pisces",
+          "parentId": "pisces"
+        },
+        {
+          "id": "pisces-second-fish",
+          "name": "The second fish · Antichrist",
+          "from": 1000,
+          "to": 2200,
+          "polarity": "shadow",
+          "spectrum": 0.28,
+          "palette": {
+            "core": "#ad6c7e",
+            "glow": "#81719c",
+            "fog": "#35243d",
+            "deep": "#100e1b"
+          },
+          "oneLine": "Jung traces the second fish from religious upheaval toward the modern crisis.",
+          "body": [
+            "Jung connects the turn around 1000 with the Holy Ghost movement, religious dissent and later alchemy, Reformation and science. He does not treat each reformer as evil: Joachim may also carry a mediating spirit.",
+            "Jung’s description of rationalism and materialism as antichristian expresses his psychological reading of Western history, not the atlas’s judgement."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶231 (pdf p161)",
+              "text": "Thus God not only foresaw the enantiodromia that began in the year 1000, but also intended it. The Platonic month of the Fishes is to be ruled by two principles. The fishes in our text are parallel, like the oxen, and point to the same goal, although one is Christ and the other the Antichrist."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶76 (pdf p54)",
+              "text": "If we see the traditional figure of Christ as a parallel to the psychic manifestation of the self, then the Antichrist would correspond to the shadow of the self, namely the dark half of the human totality, which ought not to be judged too optimistically."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶141 (pdf p98)",
+              "text": "The antichristian era is to blame that the spirit became non-spiritual and that the vitalizing archetype gradually degenerated into rationalism, intellectualism, and doctrinairism, all of which leads straight to the tragedy of modern times now hanging over our heads like a sword of Damocles,"
+            }
+          ],
+          "sign": "Pisces",
+          "parentId": "pisces"
+        },
+        {
+          "id": "pisces-commissure",
+          "name": "The commissure · the connecting band",
+          "from": 1000,
+          "to": 1500,
+          "polarity": "union",
+          "spectrum": 0.56,
+          "palette": {
+            "core": "#b4c9c4",
+            "glow": "#98a3c5",
+            "fog": "#293846",
+            "deep": "#0b111d"
+          },
+          "oneLine": "For Jung, the band between the fishes frames a passage through opposites.",
+          "body": [
+            "Jung describes the commissure as the band of faint stars connecting the fishes and places the beginning of reversal midway between them.",
+            "The atlas uses approximately 1000–1500 for this transition, within the second-fish phase. Jung gives a rough sixteenth-century correspondence at the second fish’s tail; he does not date the band’s exact edges."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p105)",
+              "text": "The northerly, or easterly, fish, which the spring-point entered at about the beginning of our era,83 is joined to the southerly, or westerly, fish by the so-called commissure. This consists of a band of faint stars forming the middle sector of the constellation, and the spring-point gradually moved along its southern edge."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p106)",
+              "text": "Astrologically interpreted, the designation of Christ as one of the fishes identifies him with the first fish, the vertical one. Christ is followed by the Antichrist, at the end of time. The beginning of the enantiodromia would fall, logically, midway between the two fishes. We have seen that this is so."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p105)",
+              "text": "The point where the ecliptic intersects with the meridian at the tail of the second fish coincides roughly with the sixteenth century, the time of the Reformation, which as we know is so extraordinarily important for the history of Western symbols."
+            }
+          ],
+          "sign": "Pisces",
+          "parentId": "pisces-second-fish"
+        },
+        {
+          "id": "aquarius",
+          "name": "Aquarius · union of opposites",
+          "from": 2200,
+          "to": 4343,
+          "polarity": "union",
+          "spectrum": 0.69,
+          "palette": {
+            "core": "#b4c9c4",
+            "glow": "#98a3c5",
+            "fog": "#293846",
+            "deep": "#0b111d"
+          },
+          "oneLine": "Jung expects Aquarius to constellate the problem of uniting the opposites.",
+          "body": [
+            "Jung anticipates an individual confrontation with good and evil rather than a solution supplied by politics or philosophy. This is his expectation, not a promised future.",
+            "The atlas starts this display span at the upper edge of Jung’s 2000–2200 range. Its end at 4343 is an illustrative 2,143-year month; Jung supplies no historical events or fixed endpoint for Aquarius."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "pdf p99",
+              "text": "If, as seems probable, the aeon of the fishes is ruled by the archetypal motif of the hostile brothers, then the approach of the next Platonic month, namely Aquarius, will constellate the problem of the union of opposites."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Since the delimitation of the constellations is known to be somewhat arbitrary, this date is very indefinite. It refers to the actual constellation of fixed stars, not to fhe zodion noeton, i.e., the zodiac divided into sectors of 30° each. Astrologically the beginning of the next aeon, according to the starting-point you select, falls between A.D. 2000 and 2200."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶589 (pdf p284)",
+              "text": "This transformation started in the historical era and left its traces first in the passing of the aeon of Taurus into that of Aries, and then of Aries into Pisces, whose beginning coincides with the rise of Christianity. We are now nearing that great change which may be expected when the spring-point enters Aquarius."
+            }
+          ],
+          "sign": "Aquarius"
+        }
+      ],
+      "events": [
+        {
+          "id": "denderah-zodiac",
+          "name": "The fishes at Denderah",
+          "year": -50,
+          "yearDisplay": "1st century BCE · approximate midpoint",
+          "epochId": "aries",
+          "polarity": "neutral",
+          "oneLine": "Jung observes two fishes facing the same way before Christianity.",
+          "body": [
+            "Jung cites the first-century-BCE zodiac at Hathor’s temple as a counterexample to an ancient opposition of the fishes. The year is the atlas’s century midpoint."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶147 (pdf p103)",
+              "text": "The zodiac from the temple of Hathor at Denderah (ist cent. B.C.) shows the fishes, but they both face the same way."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": [
+            "fish-denderah-zodiac-temple-hathor-1c-bce"
+          ],
+          "place": "Denderah, Egypt (temple of Hathor)",
+          "lat": 26.1085,
+          "lon": 32.6557
+        },
+        {
+          "id": "pisces-conjunction",
+          "name": "Jupiter–Saturn in Pisces",
+          "year": -7,
+          "yearDisplay": "7 BCE · May 29 in Jung’s account",
+          "epochId": "aries",
+          "polarity": "union",
+          "oneLine": "Jung reads the conjunction of beneficent Jupiter and Saturn as opposed powers.",
+          "body": [
+            "Jung reports three conjunctions in Pisces in 7 BCE and dates their closest approach to May 29. Its astrological sign is Pisces; the event lies before the atlas’s approximate historical year-0 boundary. No birthplace or earthly observing site is asserted."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶130 (pdf p89)",
+              "text": "In the year 7 B.C. this famed conjunction took place no less than three times in the sign of the Fishes. The greatest approximation occurred on May 29 of that year, the planets being only 0.21 degrees apart, less than half the width of the full moon.37"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "god-image"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "christ-first-fish",
+          "name": "Christ as the first fish",
+          "year": 0,
+          "yearDisplay": "Beginning of the Christian era · symbolic boundary",
+          "epochId": "pisces-first-fish",
+          "polarity": "light",
+          "oneLine": "Jung reads Christ as the first fish and the last sacrificial ram.",
+          "body": [
+            "Year 0 is an atlas boundary for the beginning of the era, not a claimed historical birth year. Jung’s argument concerns the Christ image and the overlapping ram and fish symbols."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶147 (pdf p102)",
+              "text": "But, to the extent that Christ was regarded as the new aeon, it would be clear to anyone acquainted with astrology that he was born as the first fish of the Pisces era, and was doomed to die as the last ram74 (άρνίον, lamb) of the declining Aries era.75"
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p106)",
+              "text": "Astrologically interpreted, the designation of Christ as one of the fishes identifies him with the first fish, the vertical one. Christ is followed by the Antichrist, at the end of time. The beginning of the enantiodromia would fall, logically, midway between the two fishes. We have seen that this is so."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶70 (pdf p49)",
+              "text": "Christ exemplifies the archetype of the self.5 He represents a totality of a divine or heavenly kind, a glorified man, a son of God sine macula peccati, unspotted by sin."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure",
+            "god-image"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "valentinus-shadow",
+          "name": "Christ casts off his shadow",
+          "year": 140,
+          "yearDisplay": "~140 CE · existing field dating",
+          "epochId": "pisces-first-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung reads the Gnostic discarded shadow as a precursor of Antichrist.",
+          "body": [
+            "Jung cites the Gnostic teaching of Christ casting off his shadow. The approximate year and tentative Rome placement come from the existing field occurrence, not a date assigned to the teaching by Aion."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶75 (pdf p53)",
+              "text": "For instance, one of the things they taught was that Christ \"cast off his shadow from himself.\" 23"
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶76 (pdf p54)",
+              "text": "If we see the traditional figure of Christ as a parallel to the psychic manifestation of the self, then the Antichrist would correspond to the shadow of the self, namely the dark half of the human totality, which ought not to be judged too optimistically."
+            }
+          ],
+          "familyIds": [
+            "christ-figure",
+            "antichrist",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "christ-figure-valentinus-shadow-rome-140"
+          ],
+          "place": "Rome? (Valentinus; reported by Irenaeus, Adv. haer. I, 11, 1; II, 5, 1)",
+          "lat": 41.9822,
+          "lon": 12.4781
+        },
+        {
+          "id": "farnese-atlas",
+          "name": "The vertical and horizontal fishes",
+          "year": 150,
+          "yearDisplay": "~2nd century CE copy · existing field dating",
+          "epochId": "pisces-first-fish",
+          "polarity": "neutral",
+          "oneLine": "Jung uses the Farnese globe to distinguish orientation from moral opposition.",
+          "body": [
+            "Jung describes a vertical northern fish and a horizontal southern fish. The existing field dates the Roman copy approximately; Naples is its later museum location, not a claim about the place of manufacture."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶147 (pdf p103)",
+              "text": "This is the globe of the heavens from the Farnese Atlas in Naples. The first fish, depicted north of the equator, is vertical, with its head pointing to the celestial Pole; the second fish, south of the equator, is horizontal, with its head pointing West. The picture follows the astronomical configuration and is therefore naturalistic.76"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "cross"
+          ],
+          "occurrenceIds": [
+            "fish-farnese-atlas-pisces-naples"
+          ],
+          "place": "Naples · later museum location",
+          "lat": 40.8961,
+          "lon": 14.2259
+        },
+        {
+          "id": "alexandria-ichthys",
+          "name": "The early Christian fish",
+          "year": 200,
+          "yearDisplay": "Around 200 CE · Jung citing Doelger",
+          "epochId": "pisces-first-fish",
+          "polarity": "light",
+          "oneLine": "Jung locates the Christian fish symbol around 200 CE in Alexandria.",
+          "body": [
+            "Jung follows Doelger in giving Alexandria around 200 as the first appearance of the Christian fish symbol. This reported chronology differs from dating the earlier fish motif itself."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶145 (pdf p101)",
+              "text": "According to Doelger, the Christian fish symbol first appeared in Alexandria around A.D. 200; 71 similarly, the baptismal bath was described as a piscina (fish-pond) quite early."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure"
+          ],
+          "occurrenceIds": [],
+          "place": "Alexandria · tradition named by Jung",
+          "lat": 31.2,
+          "lon": 29.92
+        },
+        {
+          "id": "abercius-fish",
+          "name": "The great, pure fish of Abercius",
+          "year": 217,
+          "yearDisplay": "After 216 CE · lower-bound display year",
+          "epochId": "pisces-first-fish",
+          "polarity": "neutral",
+          "oneLine": "Jung questions a purely Christian reading of the Abercius fish.",
+          "body": [
+            "Jung dates the inscription after 216 and warns that its Christian origin is doubtful. The atlas uses 217 as a lower-bound display marker, not a precise composition date."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶145, n.71 (pdf p101)",
+              "text": "Though the Abercius inscription, which dates from the beginning of the 3rd cent, (after A.D. 216), is of importance in this connection, it is of doubtful Christian origin."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure"
+          ],
+          "occurrenceIds": [
+            "fish-abericius-inscription-phrygia-3c"
+          ],
+          "place": "Phrygia / Hierapolis (Abercius epitaph)",
+          "lat": 37.8675,
+          "lon": 29.1259
+        },
+        {
+          "id": "augustine-two-powers",
+          "name": "Augustine’s king and priest",
+          "year": 390,
+          "yearDisplay": "~388–396 CE · existing field dating",
+          "epochId": "pisces-first-fish",
+          "polarity": "light",
+          "oneLine": "Jung follows Augustine’s two fishes as ruling powers united in Christ.",
+          "body": [
+            "Jung uses Augustine’s kingly and priestly interpretation to explain fishes as ruling powers. The approximate date comes from the linked field, not the quoted paragraph."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶228 (pdf p159)",
+              "text": "To this end I must recall to the reader St. Augustine's interpretation of the two fishes in the miraculous feeding of the five thousand: for him they represent the kingly and the priestly person or power,91 because, like fishes surviving the tempests of the sea, they outlast the turbulence of the multitude. These two powers are united in Christ: he is the king and priest.92"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure"
+          ],
+          "occurrenceIds": [
+            "augustine-two-fishes-kingly-priestly-390"
+          ],
+          "place": "Hippo Regius",
+          "lat": 36.8466,
+          "lon": 7.7164
+        },
+        {
+          "id": "benedict-latent-spirit",
+          "name": "Benedict and the latent age of spirit",
+          "year": 530,
+          "yearDisplay": "A few years after 529 · approximate marker",
+          "epochId": "pisces-first-fish",
+          "polarity": "union",
+          "oneLine": "Jung reports Joachim’s third age as secretly beginning with Benedict.",
+          "body": [
+            "Jung says Joachim placed the beginning of the Holy Ghost’s third aeon with Benedict and a monastery built a few years after 529. Year 530 is approximate; the event presents Joachim’s chronology as Jung reports it."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶137 (pdf p94)",
+              "text": "This third aeon, he says, had already begun with St. Benedict, the founder of the Benedictine Order (the first monastery was supposed to have been built a few years after 529)."
+            }
+          ],
+          "familyIds": [
+            "holy-ghost",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "holy-ghost-joachim-third-aeon-1202"
+          ],
+          "place": "Monte Cassino · monastery named in Aion ¶139",
+          "lat": 41.49,
+          "lon": 13.81
+        },
+        {
+          "id": "morienus-inner-work",
+          "name": "Morienus and the inner work",
+          "year": 700,
+          "yearDisplay": "7th–8th century · approximate midpoint",
+          "epochId": "pisces-first-fish",
+          "polarity": "union",
+          "oneLine": "Jung traces alchemical self-knowledge back to Morienus.",
+          "body": [
+            "Jung dates Morienus Romanus to the seventh–eighth century and reads the vessel’s maxim as a moral demand. Year 700 is a display midpoint; the linked occurrence supplies the geographical tradition."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶256 (pdf p178)",
+              "text": "The idea itself is much older and goes back to Morienus Romanus (7th-8th cent.), in the saying which he wrote on the rim of the Hermetic vessel: \"All those who have all things with them have no need of outside aid.\" 48"
+            }
+          ],
+          "familyIds": [
+            "lapis",
+            "coniunctio"
+          ],
+          "occurrenceIds": [
+            "morienus-thing-extracted-from-thee-7c"
+          ],
+          "place": "Jerusalem → Latin West",
+          "lat": 31.7801,
+          "lon": 35.265
+        },
+        {
+          "id": "millennial-reversal",
+          "name": "The reversal around 1000",
+          "year": 1000,
+          "yearDisplay": "Around 1000 CE · Jung’s periodisation",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung places the beginning of the enantiodromia around the year 1000.",
+          "body": [
+            "Jung interprets the second millennium as a reversal within the Christian aeon. His two principles still belong to one process; this is not a claim that every subsequent movement is evil."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶231 (pdf p161)",
+              "text": "Thus God not only foresaw the enantiodromia that began in the year 1000, but also intended it. The Platonic month of the Fishes is to be ruled by two principles. The fishes in our text are parallel, like the oxen, and point to the same goal, although one is Christ and the other the Antichrist."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure",
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "cathar-bogomil-fishes",
+          "name": "The Cathar–Bogomil two fishes",
+          "year": 1111,
+          "yearDisplay": "1111 confession · later Cathar transmission",
+          "epochId": "pisces-commissure",
+          "polarity": "shadow",
+          "oneLine": "Jung conjectures Christ and Satanael behind the two fishes yoked together.",
+          "body": [
+            "Jung traces the text to Basilius’s confession before Alexius Comnenus in 1111. Its place on the globe is the later Carcassonne archive named by Jung and carried by the existing field, not the place of that confession.",
+            "Jung calls the two-person interpretation a conjecture. The atlas preserves that qualification."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶229 (pdf p159–160)",
+              "text": "Since the text is indubitably heretical and a Bogomil document at that, there can be no question of a uniform interpretation of the two fishes as Christ. It may be that they symbolize, as might easily be conjectured, two different persons or powers, from before the creation of the world: Satanael the elder son of God, and Christ the younger."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶229 (pdf p160)",
+              "text": "Our document is nothing but a Latin version of the report in the Panoplia of Euthymios Zigabenos, which in its turn goes back to the confession of faith made before the emperor Alexius Comnenus by the Bogomil bishop Basilius in the year 111 i.BB"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure",
+            "antichrist",
+            "devil"
+          ],
+          "occurrenceIds": [
+            "cathar-two-fishes-osob-revelation-1111"
+          ],
+          "place": "Carcassonne · later archival transmission",
+          "lat": 43.2189,
+          "lon": 2.2954
+        },
+        {
+          "id": "joachim-holy-ghost",
+          "name": "Joachim’s third aeon",
+          "year": 1200,
+          "yearDisplay": "~1185–1202 · existing field dating",
+          "epochId": "pisces-commissure",
+          "polarity": "union",
+          "oneLine": "Jung reads Joachim’s new age of spirit as potentially mediating the opposites.",
+          "body": [
+            "Jung reports Joachim’s expected age of the Holy Ghost and his death in 1202. He distinguishes Joachim’s experience from the inflated claims of some adherents. The marker uses the linked field’s approximate dating."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶137 (pdf p94)",
+              "text": "One of the most powerful and influential voices to announce the coming of a \"new age of the spirit\" was Joachim of Flora (d. 1202), whose teachings were condemned by the Fourth Lateran Council in 1215. He expected the opening of the seventh seal in the fairly near future, the advent of the \"everlasting gospel\" and the reign of the \"intellectus spiritualis,\" the age of the Holy Ghost."
+            }
+          ],
+          "familyIds": [
+            "holy-ghost",
+            "god-image",
+            "antichrist"
+          ],
+          "occurrenceIds": [
+            "holy-ghost-joachim-third-aeon-1202"
+          ],
+          "place": "Calabria (Joachim d. 1202; condemned Lateran IV 1215)",
+          "lat": 39.4527,
+          "lon": 16.7425
+        },
+        {
+          "id": "latin-alchemy",
+          "name": "Latin alchemy emerges",
+          "year": 1200,
+          "yearDisplay": "12th–13th centuries · approximate midpoint",
+          "epochId": "pisces-commissure",
+          "polarity": "union",
+          "oneLine": "Jung connects Latin alchemy with the religious currents of the Middle Ages.",
+          "body": [
+            "Jung places the beginnings of Latin alchemy around the twelfth and thirteenth centuries. Year 1200 is a display midpoint; the text does not assign this collective process one city."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶143 (pdf p99)",
+              "text": "At about the time of the twelfth and thirteenth centuries we find also the beginnings of Latin alchemy, whose philosophical and spiritual content I have tried to elucidate in my book Psychology and Alchemy."
+            }
+          ],
+          "familyIds": [
+            "lapis",
+            "mercurius",
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "lateran-condemnation",
+          "name": "Joachim condemned at Lateran",
+          "year": 1215,
+          "yearDisplay": "1215 CE · Fourth Lateran Council",
+          "epochId": "pisces-commissure",
+          "polarity": "neutral",
+          "oneLine": "Jung marks the Church’s condemnation of Joachim’s teachings in 1215.",
+          "body": [
+            "Jung places the condemnation inside a spiritually unstable epoch. The same paragraph also reports Joachim’s expectation of a new age; the atlas does not equate ecclesiastical condemnation with Jung’s own verdict."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶137 (pdf p94)",
+              "text": "One of the most powerful and influential voices to announce the coming of a \"new age of the spirit\" was Joachim of Flora (d. 1202), whose teachings were condemned by the Fourth Lateran Council in 1215. He expected the opening of the seventh seal in the fairly near future, the advent of the \"everlasting gospel\" and the reign of the \"intellectus spiritualis,\" the age of the Holy Ghost."
+            }
+          ],
+          "familyIds": [
+            "holy-ghost",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "holy-ghost-joachim-third-aeon-1202"
+          ],
+          "place": "Rome · Fourth Lateran Council",
+          "lat": 41.89,
+          "lon": 12.49
+        },
+        {
+          "id": "gerard-eternal-gospel",
+          "name": "The everlasting gospel in Paris",
+          "year": 1254,
+          "yearDisplay": "1254 CE · publication",
+          "epochId": "pisces-commissure",
+          "polarity": "union",
+          "oneLine": "Jung follows Gerard’s claim that Joachim’s writings were the everlasting gospel.",
+          "body": [
+            "Jung dates Gerard of Borgo San Donnino’s Introductorius to 1254 in Paris. It announces 1260 as the expected replacement of Christ’s gospel; that subsequent date is a prophecy, not an accomplished historical event."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶137 (pdf p94)",
+              "text": "One of Joachim's followers, the Franciscan friar Gerard of Borgo San Donnino, proclaimed in his Introductorius in evangelium aeternum, which appeared in 1254 in Paris, that Joachim's three main treatises were in fact the everlasting gospel, and that in the year 1260 this would replace the"
+            }
+          ],
+          "familyIds": [
+            "holy-ghost",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "holy-ghost-joachim-third-aeon-1202"
+          ],
+          "place": "Paris · publication named by Jung",
+          "lat": 48.86,
+          "lon": 2.35
+        },
+        {
+          "id": "dailly-antichrist",
+          "name": "Pierre d’Ailly’s calculation",
+          "year": 1414,
+          "yearDisplay": "~1414 CE · existing field dating",
+          "epochId": "pisces-commissure",
+          "polarity": "shadow",
+          "oneLine": "Jung follows d’Ailly’s astrological conjecture about religious change.",
+          "body": [
+            "Jung relates d’Ailly’s calculation of 1789 and its possible Antichrist interpretation. The year 1414 is the existing field’s dating of the text, not the date of the predicted event. Jung says he cannot claim to have understood every step of the argument."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶153 (pdf p108)",
+              "text": "There are historical determinants that may have moved Nostradamus to give the year 1792 as the beginning of the new aeon. For instance, Cardinal Pierre d'Ailly, basing himself on Albumasar, writes in his Concordantia 5 on the eighth coniunctio maxima {u ό >? in τ), which had been calculated for 1693:"
+            }
+          ],
+          "familyIds": [
+            "antichrist"
+          ],
+          "occurrenceIds": [
+            "antichrist-pierre-dailly-concordantia-1414"
+          ],
+          "place": "France (Cardinal Pierre d'Ailly, 1356-1420)",
+          "lat": 47.517,
+          "lon": 3.8972
+        },
+        {
+          "id": "renaissance-outward-turn",
+          "name": "The Renaissance turns outward",
+          "year": 1500,
+          "yearDisplay": "Renaissance · approximate display marker",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung reads the Renaissance as a turn toward the second fish and modernity.",
+          "body": [
+            "Jung connects the Renaissance with the spirit that culminates in the modern age. Year 1500 is a rough display marker for that process, not a beginning he fixes."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p106)",
+              "text": "The time of the Renaissance begins in the immediate vicinity of the second fish, and with it comes that spirit which culminates in the modern age.85"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "reformation-threshold",
+          "name": "The Reformation threshold",
+          "year": 1550,
+          "yearDisplay": "16th century · approximate midpoint",
+          "epochId": "pisces-second-fish",
+          "polarity": "neutral",
+          "oneLine": "Jung places the Reformation at the passage toward the second fish.",
+          "body": [
+            "Jung gives a rough sixteenth-century correspondence between the second fish’s tail and the Reformation. The atlas uses 1550 as a century midpoint; it does not invent a precise date or city from this collective process."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p105)",
+              "text": "The point where the ecliptic intersects with the meridian at the tail of the second fish coincides roughly with the sixteenth century, the time of the Reformation, which as we know is so extraordinarily important for the history of Western symbols."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure",
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "nostradamus-letter",
+          "name": "Nostradamus writes to Henry II",
+          "year": 1558,
+          "yearDisplay": "27 June 1558 · letter to Henry II",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung reads the letter’s 1792 prophecy within the Christian aeon’s reversal.",
+          "body": [
+            "Jung explicitly cites the 1558 letter, not merely the 1555 publication of the Centuries. Its predicted second Antichrist is part of Jung’s interpretation of the document. The existing field places the letter regionally in France."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶151 (pdf p107)",
+              "text": "With this background in mind, I would like to mention the astrological prophecies of Nostradamus, written in a letter1 to Henry II of France, on June 27, 1558."
+            }
+          ],
+          "familyIds": [
+            "antichrist",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "antichrist-nostradamus-letter-henry-ii-1558"
+          ],
+          "place": "France (letter of June 27, 1558, to Henry II)",
+          "lat": 46.241,
+          "lon": 1.3275
+        },
+        {
+          "id": "dorn-unified-self",
+          "name": "Dorn’s living stone",
+          "year": 1570,
+          "yearDisplay": "Second half of the 16th century · existing field dating",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "Jung reads the union in the stone as the adept’s own individuation.",
+          "body": [
+            "Jung interprets the alchemical stone as a projection of the unified self, while preserving its transcendent character. The approximate year and regional location come from the existing field."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶264 (pdf p182)",
+              "text": "The union of opposites in the stone is possible only when the adept has become One himself. The unity of the stone is the equivalent of individuation, by which man is made one; we would say that the stone is a projection of the unified self."
+            }
+          ],
+          "familyIds": [
+            "lapis",
+            "god-image",
+            "coniunctio"
+          ],
+          "occurrenceIds": [
+            "dorn-transmutemini-living-stones-16c"
+          ],
+          "place": "Germany (2nd half 16th c.)",
+          "lat": 49.6539,
+          "lon": 9.3682
+        },
+        {
+          "id": "lambspringk-opposed-fishes",
+          "name": "Lambspringk’s reversed fishes",
+          "year": 1590,
+          "yearDisplay": "Late 16th century · approximate marker",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "Jung reads Lambspringk’s fishes as a revitalized archetype of inner opposition.",
+          "body": [
+            "Jung places the symbol near the end of the sixteenth century. The linked occurrence dates a later 1678 print in Frankfurt; that later print location is shown on the globe, not an asserted place of the original image.",
+            "Jung says he has found no text proving transmission of the Cathar fish into alchemy. The thread marks a comparison, not an established genealogy."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "pdf p162",
+              "text": "I have not, however, come across any texts which would prove that the Catharist fish symbol was assimilated into the alchemical tradition and so could be held responsible for Lambspringk's fish symbol, signifying the arcane substance and its inner antinomy. Lambspringk's symbol appeared not much earlier than the end of the sixteenth century and represented a revitalization of the archetype."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "mercurius"
+          ],
+          "occurrenceIds": [
+            "lambspringk-two-reversed-fishes-1678"
+          ],
+          "place": "Frankfurt · later 1678 print",
+          "lat": 50.1009,
+          "lon": 8.5905
+        },
+        {
+          "id": "alchemy-science",
+          "name": "Alchemy gives birth to science",
+          "year": 1600,
+          "yearDisplay": "16th–17th centuries · approximate midpoint",
+          "epochId": "pisces-second-fish",
+          "polarity": "neutral",
+          "oneLine": "For Jung, alchemy gives birth to the age of science and then disappears.",
+          "body": [
+            "Jung describes Mater Alchimia as a whole epoch beginning roughly with Christianity and giving birth to science in the sixteenth and seventeenth centuries. Year 1600 is a display midpoint."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶267 (pdf p185)",
+              "text": "\"Mater Alchimia\" could serve as the name of a whole epoch. Beginning, roughly, with Christianity, it gave birth in the sixteenth and seventeenth centuries to the age of science, only to perish, unrecognized and misunderstood, and sink from sight in the stream of the centuries as an age that had been outlived."
+            }
+          ],
+          "familyIds": [
+            "lapis",
+            "mercurius",
+            "god-image"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "faith-knowledge-rift",
+          "name": "Faith and knowledge separate",
+          "year": 1750,
+          "yearDisplay": "18th century · approximate midpoint",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung diagnoses a rift in which faith lacks experience and science loses the soul.",
+          "body": [
+            "Jung dates this rift to the eighteenth century. The atlas’s midpoint is approximate and the diagnosis is explicitly his."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶268 (pdf p185)",
+              "text": "Thus, in the course of the eighteenth century, there arose that notorious rift between faith and knowledge. Faith lacked experience and science missed out the soul."
+            }
+          ],
+          "familyIds": [
+            "god-image",
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "revolutionary-calendar",
+          "name": "The revolutionary calendar",
+          "year": 1792,
+          "yearDisplay": "22 September 1792 · as cited by Jung",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung reads the French revolutionary calendar as a manifest antichristian turn.",
+          "body": [
+            "Jung connects the calendar beginning on 22 September 1792 with Nostradamus’s renovation of the age. This is his reading of the French Revolution, not the atlas’s political judgement."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶156 (pdf p110)",
+              "text": "The \"renovation of the age\" might mean a new aeon, and it coincides in a remarkable way with the new system of dating, the revolutionary calendar, which began with September 22, 1792, and had a distinctly antichristian character.®"
+            }
+          ],
+          "familyIds": [
+            "antichrist",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "antichrist-nostradamus-letter-henry-ii-1558"
+          ],
+          "place": "France · revolutionary calendar",
+          "lat": 48.86,
+          "lon": 2.35
+        },
+        {
+          "id": "jung-modern-crisis",
+          "name": "The aftermath of the Second World War",
+          "year": 1945,
+          "yearDisplay": "After the Second World War · 1945 display marker",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Jung reads the world’s division through the unrecognized inner opposite.",
+          "body": [
+            "Jung compares the destruction left by the Second World War with the New Testament’s Antichrist expectations and describes the modern world’s division through an unconscious inner opposite. These are his psychological interpretations.",
+            "The atlas uses 1945 to place the war’s aftermath. This conventional historical display year is a site gloss; the quotation does not give an exact date. Aion’s 1950 writing date belongs to the source, not this event’s historical clock."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶68 (pdf p48)",
+              "text": "The dechristianization of our world, the Luciferian development of science and technology, and the frightful material and moral destruction left behind by the second World War have been compared more than once with the eschatological events foretold in the New Testament."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶126 (pdf p82–83)",
+              "text": "Today humanity, as never before, is split into two apparently irrec- CHRIST, A SYMBOL OF THE SELF oncilable halves. The psychological rule says that when an inner situation is not made conscious, it happens outside, as fate. That is to say, when the individual remains undivided and does not become conscious of his inner opposite, the world must perforce act out the conflict and be torn into opposing halves."
+            }
+          ],
+          "familyIds": [
+            "god-image",
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aquarius-alternative-1997",
+          "name": "Aquarius from the earlier reference star",
+          "year": 1997,
+          "yearDisplay": "1997 CE · conditional calculation in Jung’s footnote",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "Jung reports 1997 as one conditional calculation of an Aquarian beginning.",
+          "body": [
+            "Jung gives 1997 when the calculation starts from star “a 113.” He calls the constellation boundary indefinite; this is an alternative calculation in a footnote, not a forecast endorsed by the atlas."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Since the delimitation of the constellations is known to be somewhat arbitrary, this date is very indefinite. It refers to the actual constellation of fixed stars, not to fhe zodion noeton, i.e., the zodiac divided into sectors of 30° each. Astrologically the beginning of the next aeon, according to the starting-point you select, falls between A.D. 2000 and 2200."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "god-image"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aquarius-alternative-2154",
+          "name": "Aquarius from the later reference star",
+          "year": 2154,
+          "yearDisplay": "2154 CE · conditional calculation in Jung’s footnote",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "Jung also reports 2154 from another starting star and a 2,143-year month.",
+          "body": [
+            "Jung gives 2154 when the calculation starts from star “O” with a 2,143-year Platonic month. It differs from the earlier alternative and remains qualified. Both markers sit inside the atlas’s broad transition range."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Since the delimitation of the constellations is known to be somewhat arbitrary, this date is very indefinite. It refers to the actual constellation of fixed stars, not to fhe zodion noeton, i.e., the zodiac divided into sectors of 30° each. Astrologically the beginning of the next aeon, according to the starting-point you select, falls between A.D. 2000 and 2200."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "god-image"
+          ],
+          "occurrenceIds": []
+        }
+      ],
+      "threads": [
+        {
+          "id": "christ-antichrist",
+          "name": "Christ and Antichrist",
+          "polarity": "shadow",
+          "eventIds": [
+            "christ-first-fish",
+            "valentinus-shadow",
+            "millennial-reversal",
+            "cathar-bogomil-fishes",
+            "joachim-holy-ghost",
+            "renaissance-outward-turn",
+            "reformation-threshold",
+            "nostradamus-letter",
+            "revolutionary-calendar",
+            "jung-modern-crisis",
+            "aquarius-alternative-2154"
+          ],
+          "oneLine": "Jung follows the excluded shadow and the demand to bring opposites into relation."
+        },
+        {
+          "id": "fish-symbol",
+          "name": "The changing fish",
+          "polarity": "neutral",
+          "eventIds": [
+            "denderah-zodiac",
+            "pisces-conjunction",
+            "christ-first-fish",
+            "farnese-atlas",
+            "alexandria-ichthys",
+            "abercius-fish",
+            "augustine-two-powers",
+            "cathar-bogomil-fishes",
+            "lambspringk-opposed-fishes"
+          ],
+          "oneLine": "Jung compares fish symbols across eras; the line does not assert direct transmission."
+        },
+        {
+          "id": "alchemical-countercurrent",
+          "name": "The alchemical countercurrent",
+          "polarity": "union",
+          "eventIds": [
+            "valentinus-shadow",
+            "morienus-inner-work",
+            "cathar-bogomil-fishes",
+            "latin-alchemy",
+            "dorn-unified-self",
+            "lambspringk-opposed-fishes",
+            "alchemy-science",
+            "faith-knowledge-rift"
+          ],
+          "oneLine": "Jung follows alchemy’s work on nature, the self, and the union of opposites."
+        },
+        {
+          "id": "living-spirit",
+          "name": "The living spirit",
+          "polarity": "union",
+          "eventIds": [
+            "benedict-latent-spirit",
+            "joachim-holy-ghost",
+            "latin-alchemy",
+            "lateran-condemnation",
+            "gerard-eternal-gospel",
+            "dorn-unified-self",
+            "jung-modern-crisis",
+            "aquarius-alternative-2154"
+          ],
+          "oneLine": "Jung reads the spirit as an ambivalent mediator rather than a fixed doctrine."
+        }
+      ]
+    }
+  ]
+}

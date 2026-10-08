@@ -31,7 +31,8 @@ export class Strip {
     this.toggle = el('button', { class: 'st-toggle', type: 'button', 'aria-label': 'Pause tour', onclick: () => h.onToggle() }) as HTMLButtonElement;
     this.toggle.innerHTML = PAUSE;
     const viewport = el('div', { class: 'st-viewport' }, [this.rail]);
-    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest' }, [this.caption, el('div', { class: 'st-row' }, [this.toggle, viewport])]);
+    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest', 'aria-hidden': 'true' }, [this.caption, el('div', { class: 'st-row' }, [this.toggle, viewport])]);
+    this.root.inert = true;
     parent.append(this.root);
   }
 
@@ -58,10 +59,14 @@ export class Strip {
 
   show() {
     this.root.classList.add('on');
+    this.root.inert = false;
+    this.root.setAttribute('aria-hidden', 'false');
   }
 
   hide() {
     this.root.classList.remove('on');
+    this.root.inert = true;
+    this.root.setAttribute('aria-hidden', 'true');
   }
 
   setPlaying(playing: boolean) {

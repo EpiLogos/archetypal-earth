@@ -22,6 +22,13 @@ export class SearchUI {
       this.input,
       this.list,
       el('div', { class: 's-hint', 'aria-hidden': 'true', text: 'enter to go · esc to close' }),
+      el('p', { class: 's-credit' }, [
+        'Imagery: ',
+        el('a', { href: 'https://visibleearth.nasa.gov/images/73751', target: '_blank', rel: 'noopener', text: 'NASA Blue Marble' }),
+        ' · ',
+        el('a', { href: 'https://earthdata.nasa.gov/gibs', target: '_blank', rel: 'noopener', text: 'NASA GIBS' }),
+        ' — public domain',
+      ]),
     ]);
     this.root = el('div', { class: 'search', hidden: true }, [box]);
     this.root.addEventListener('pointerdown', (e) => {

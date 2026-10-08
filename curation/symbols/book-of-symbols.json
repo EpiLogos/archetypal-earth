@@ -1,0 +1,1018 @@
+{
+  "schema": 1,
+  "source": {
+    "id": "book-of-symbols",
+    "title": "The Book of Symbols: Reflections on Archetypal Images",
+    "editor": "Ami Ronnberg (editor-in-chief); Kathleen Martin (editor)",
+    "year": 2010,
+    "sourcePath": "/Users/admin/Documents/The Book of Symbols. Reflections on Archetypal Images (Ami Ronnberg) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+    "pageCount": 816,
+    "sha256": "097b906f6bed45bb20eea41440c2da83d59ffd1cbdc8936bce2d304282361e23"
+  },
+  "metadataEvidence": [
+    {
+      "pdfPage": 7,
+      "anchor": "AMI RONNBERG"
+    },
+    {
+      "pdfPage": 812,
+      "anchor": "Copyright © 2010 Archive for Research in Archetypal Symbolism."
+    }
+  ],
+  "entries": [
+    {
+      "familyId": "philosophers-egg",
+      "title": "Egg",
+      "pages": [
+        14
+      ],
+      "pdfPages": [
+        18
+      ],
+      "body": [
+        "The book follows the egg from enclosed possibility to a world taking shape: cosmic eggs divide into earth and sky, while the shell shelters a life that cannot yet survive outside it. Incubation suggests a necessary interval of withdrawal before emergence.",
+        "Its alchemical reading places an almost invisible germ of renewal inside ordinary matter. Attention and warmth help latent life develop; the image joins containment with eventual release. This wider egg entry enriches the atlas’s more specific philosophical egg."
+      ],
+      "resonances": [
+        "vessel",
+        "sun",
+        "divine-child",
+        "cave",
+        "point"
+      ],
+      "evidence": [
+        {
+          "printedPage": 14,
+          "pdfPage": 18,
+          "textSha256": "9cd8af8ab978c197b6fba457f87c32820b9341842caf13611a64dd24fe141e28",
+          "anchor": "Brahmanda"
+        }
+      ]
+    },
+    {
+      "familyId": "star",
+      "title": "Star",
+      "pages": [
+        18,
+        20
+      ],
+      "pdfPages": [
+        22,
+        24
+      ],
+      "body": [
+        "Stars give bearings to travelers and become images of small lights within psychic darkness. The polar star adds a different quality: an apparently still center around which a changing world turns.",
+        "The book contrasts guiding light with constraining fate. Astrological patterns may be imagined as compulsions, yet recognizing a pattern can also make a different response possible. Its alchemical stars suggest dispersed sparks gradually gathered into a more coherent center."
+      ],
+      "resonances": [
+        "point",
+        "mandala",
+        "lumen-naturae",
+        "sun",
+        "moon"
+      ],
+      "evidence": [
+        {
+          "printedPage": 18,
+          "pdfPage": 22,
+          "textSha256": "2922170668cfc124ebb2ffa67f314a8ed8e9b750072c2c758235fb52b7c3e102",
+          "anchor": "Star"
+        },
+        {
+          "printedPage": 20,
+          "pdfPage": 24,
+          "textSha256": "9051653fdf8a27ad2758b6991494e00ca4ef8cfc1e6240200af14c878fc1ca99",
+          "anchor": "Paracelsus"
+        }
+      ]
+    },
+    {
+      "familyId": "sun",
+      "title": "Sun",
+      "pages": [
+        22,
+        24
+      ],
+      "pdfPages": [
+        26,
+        28
+      ],
+      "body": [
+        "Solar radiance carries vitality, creative power and conscious illumination. Crowns, halos and golden alchemical images borrow its authority, making the sun a figure for a center that sustains and orders life.",
+        "The same brightness can scorch or overexpose. The book uses myths of excessive solar aspiration to examine inflation, then turns to the aging alchemical sun: its renewal requires moisture, darkness and a lunar counterpart rather than endless intensification of light."
+      ],
+      "resonances": [
+        "moon",
+        "crown",
+        "king-queen-pair",
+        "eagle",
+        "sol-niger",
+        "solificatio"
+      ],
+      "evidence": [
+        {
+          "printedPage": 22,
+          "pdfPage": 26,
+          "textSha256": "b2fc4fc0ea0cccfa2ac032142dad1e0cb5a18c0311213d5067ce091716f564a9",
+          "anchor": "Sun"
+        },
+        {
+          "printedPage": 24,
+          "pdfPage": 28,
+          "textSha256": "ff2b91dcdd075581945e98c620e6f468f2b288628d4179adf8ec1e50c6a857f2",
+          "anchor": "Ovid"
+        }
+      ]
+    },
+    {
+      "familyId": "moon",
+      "title": "Moon",
+      "pages": [
+        26,
+        28
+      ],
+      "pdfPages": [
+        30,
+        32
+      ],
+      "body": [
+        "Waxing, disappearance and return make the moon an image of change that includes loss. The book relates lunar rhythms to bodily moisture, fertility and decay, and to a form of knowing that measures phases rather than insisting on constant clarity.",
+        "The lunar vessel can carry the dead or hold a tranquil fullness. Its hidden aspect also draws the psyche beyond familiar awareness: that journey may deepen self-knowledge, or leave a person adrift in fascination. The moon therefore includes danger as well as nurture."
+      ],
+      "resonances": [
+        "sun",
+        "water",
+        "vessel",
+        "king-queen-pair",
+        "toad"
+      ],
+      "evidence": [
+        {
+          "printedPage": 26,
+          "pdfPage": 30,
+          "textSha256": "ef42993d669e291db32ef0d3f5952466bc794f8c730f2c0451afaf217cdbc093",
+          "anchor": "Moon"
+        },
+        {
+          "printedPage": 28,
+          "pdfPage": 32,
+          "textSha256": "144a29fb87bd3252d5e3bc43e2fa060725407ef617a7235628808fa4aa908c1b",
+          "anchor": "Thoth"
+        }
+      ]
+    },
+    {
+      "familyId": "water",
+      "title": "Ocean / River",
+      "pages": [
+        36,
+        38,
+        40,
+        42
+      ],
+      "pdfPages": [
+        40,
+        42,
+        44,
+        46
+      ],
+      "body": [
+        "The ocean entry imagines a small conscious vessel surrounded by immense generative depths. Those waters sustain life, but their storms and engulfing force also evoke emotional conditions that exceed the vessel’s control.",
+        "The river gives water a direction and a channel. Its current becomes time, transition and a boundary to cross; sacred rivers can cleanse and revive, while the same flowing element can sweep a traveler away.",
+        "Read together, the entries distinguish immersion in an encompassing depth from movement toward another shore. Neither image is a simple promise of purification: passage requires a workable relation to a living, sometimes destructive medium."
+      ],
+      "resonances": [
+        "fish",
+        "moon",
+        "vessel",
+        "night-sea-journey",
+        "well-spring"
+      ],
+      "evidence": [
+        {
+          "printedPage": 36,
+          "pdfPage": 40,
+          "textSha256": "1c47ec9642ad0ee2171a7948975e3036957e0ee679f6050ea1e756931a0aa24f",
+          "anchor": "Ocean"
+        },
+        {
+          "printedPage": 38,
+          "pdfPage": 42,
+          "textSha256": "c1b27cfaae4e7a48d2e2b341237abec1f7bb7c6ca15e54128b82dc267eadace1",
+          "anchor": "upwelling"
+        },
+        {
+          "printedPage": 40,
+          "pdfPage": 44,
+          "textSha256": "3afaaf5370647a4e2668c51c594c82672405d9b9c70940efb5c650d2ab44e981",
+          "anchor": "River"
+        },
+        {
+          "printedPage": 42,
+          "pdfPage": 46,
+          "textSha256": "7dbb25ed8bd08b43a10d698e206e1597341ab7950e887a41453d1f6aa9c8226b",
+          "anchor": "Charon"
+        }
+      ]
+    },
+    {
+      "familyId": "wind",
+      "title": "Wind",
+      "pages": [
+        60
+      ],
+      "pdfPages": [
+        64
+      ],
+      "body": [
+        "Invisible wind becomes perceptible through what it moves. The book follows its associations with breath, speech, spirit and inspiration, including the Navajo Windway and the feathered serpent’s union of aerial and earthly life.",
+        "Wind can enliven and connect, yet it arrives with its own direction and force. The sailor’s response offers a practical image of relationship: one adjusts to the current rather than assuming inspiration can be commanded."
+      ],
+      "resonances": [
+        "bird",
+        "serpent",
+        "holy-ghost",
+        "mercurius"
+      ],
+      "evidence": [
+        {
+          "printedPage": 60,
+          "pdfPage": 64,
+          "textSha256": "37f681bd8cd0e08ba4fd958460f0741ebb6349e8ab82d242082eb47330bbcb74",
+          "anchor": "Wind"
+        }
+      ]
+    },
+    {
+      "familyId": "fire",
+      "title": "Fire · surviving continuation",
+      "pages": [
+        84
+      ],
+      "pdfPages": [
+        88
+      ],
+      "body": [
+        "The surviving continuation moves from Agni’s hearth warmth to fierce divine fire and the crafts of potter, smith and alchemist. Fire makes and destroys; its transformations cannot be reduced to either comfort or catastrophe.",
+        "Alchemy’s sulphurous fire becomes an image of affect and desire that can consume a person or bring hidden substance into a new form. Refinement requires a relation to that heat, including its power to melt, harden and clear away exhausted material.",
+        "This supplied PDF repeats printed pages 84–85 where 82–83 should appear. These notes use the surviving printed page 84 only; the missing opening of the Fire entry has not been reconstructed."
+      ],
+      "resonances": [
+        "sulphur",
+        "furnace",
+        "salamander",
+        "spark",
+        "nigredo",
+        "rubedo"
+      ],
+      "evidence": [
+        {
+          "printedPage": 84,
+          "pdfPage": 88,
+          "textSha256": "ddcb78b146d90fae80259ae43cebd6b4ca817ca0d37354d79e2e8158d37436fe",
+          "anchor": "Agni"
+        }
+      ]
+    },
+    {
+      "familyId": "stone",
+      "title": "Stone",
+      "pages": [
+        104,
+        106
+      ],
+      "pdfPages": [
+        108,
+        110
+      ],
+      "body": [
+        "A raised stone can mark a god, an ancestor or enduring remembrance. Its resistance to change supports images of permanence, while a stony heart or petrified body expresses an equally durable incapacity to respond.",
+        "The book turns from outer monument to an unknown interior. In alchemy, a commonplace, devalued stone may become the lapis: what appears inert contains a possibility that must be discovered through work on one’s own substance. Boundaries, union and embodied transformation meet in the stone."
+      ],
+      "resonances": [
+        "lapis",
+        "mercurius",
+        "hermaphrodite",
+        "lingam-yoni",
+        "prima-materia"
+      ],
+      "evidence": [
+        {
+          "printedPage": 104,
+          "pdfPage": 108,
+          "textSha256": "3be0538d3af27332c83e5ff57791bacca3b5771f1d915af86f665c0d7ccc940d",
+          "anchor": "Stone"
+        },
+        {
+          "printedPage": 106,
+          "pdfPage": 110,
+          "textSha256": "06054e9aabe32d19a3294dd86ff1af5c45068f5d3d322581b212b1cf8b1bed33",
+          "anchor": "Morienus"
+        }
+      ]
+    },
+    {
+      "familyId": "mountain",
+      "title": "Mountain",
+      "pages": [
+        108
+      ],
+      "pdfPages": [
+        112
+      ],
+      "body": [
+        "The mountain offers height, distance and pilgrimage, but also a vast bodily mass whose streams nourish the surrounding world. The book brings its summit’s revelation into relation with its interior caverns, minerals and hidden gestation.",
+        "A mountain can join worlds as an axis or sacred meeting place; a volcano or underworld entrance gives the same form a threatening aspect. The entry keeps these culturally different readings in view rather than treating every ascent as a universal spiritual advance."
+      ],
+      "resonances": [
+        "cave",
+        "stone",
+        "ascent-descent",
+        "mother-goddess",
+        "prima-materia"
+      ],
+      "evidence": [
+        {
+          "printedPage": 108,
+          "pdfPage": 112,
+          "textSha256": "06cdcccdf6d6921d6ee3aa48cdeca7594877f10732c70c6b4b9039fd78a8a056",
+          "anchor": "Mountain"
+        }
+      ]
+    },
+    {
+      "familyId": "cave",
+      "title": "Cave",
+      "pages": [
+        112
+      ],
+      "pdfPages": [
+        116
+      ],
+      "body": [
+        "The cave shelters early habitation and sacred images, opening a passage into the earth. The book brings womb and tomb together: descent may return a person to a source of life, initiate a transformation or lead into the realm of the dead.",
+        "Psychically, enclosure can allow incubation and retreat. It can also narrow the field of vision or become crushing confinement. Stories of Amaterasu, Plato’s prisoners and birth in a cave place the appearance of light against that dark interior, giving refuge and revelation different meanings."
+      ],
+      "resonances": [
+        "mother-goddess",
+        "vessel",
+        "philosophers-egg",
+        "sun",
+        "ascent-descent"
+      ],
+      "evidence": [
+        {
+          "printedPage": 112,
+          "pdfPage": 116,
+          "textSha256": "89022b98a07c6d9f3f7d85dcb72c0026f276028a4fcd2e228759d50642992c9e",
+          "anchor": "Cave"
+        }
+      ]
+    },
+    {
+      "familyId": "salt",
+      "title": "Salt",
+      "pages": [
+        114
+      ],
+      "pdfPages": [
+        118
+      ],
+      "body": [
+        "Salt’s capacity to dissolve, season and preserve makes it a meeting point of body and understanding. The book connects shared salt with hospitality and covenant, then traces how the savor of experience becomes an image of discrimination and wisdom.",
+        "Alchemical salt carries the bitterness of tears and disappointment as well as the possibility of cleansing. Its paradox is essential: what nourishes at one concentration can destroy at another. Transformation therefore involves proportion and assimilation, not simply removing everything bitter."
+      ],
+      "resonances": [
+        "water",
+        "moon",
+        "fire",
+        "quaternity",
+        "prima-materia"
+      ],
+      "evidence": [
+        {
+          "printedPage": 114,
+          "pdfPage": 118,
+          "textSha256": "f923ef446673429ac0b3480cc2b0ffd3f16bec8d2e5759855ad13af18d41272a",
+          "anchor": "Salt"
+        }
+      ]
+    },
+    {
+      "familyId": "tree",
+      "title": "Tree",
+      "pages": [
+        128,
+        130
+      ],
+      "pdfPages": [
+        132,
+        134
+      ],
+      "body": [
+        "Rooted in the earth and branching into the air, the tree gives growth a visible structure joining depth and height. Its seasonal losses and returns make renewal an ongoing rhythm rather than a single final attainment.",
+        "Yggdrasil’s roots, well, serpent and eagle connect memory, the dead and the gods, while creatures continue to damage and sustain the tree. The alchemical tree likewise holds illumination beside ordeal: hidden treasure at the roots and luminous fruit above belong to one difficult development.",
+        "The book stresses that inner growth has its own timing. A balanced crown may image the joining of opposites, but a living tree returns to drying, shedding and fresh growth; completion remains part of a cycle."
+      ],
+      "resonances": [
+        "serpent",
+        "eagle",
+        "well-spring",
+        "sun",
+        "moon",
+        "coniunctio"
+      ],
+      "evidence": [
+        {
+          "printedPage": 128,
+          "pdfPage": 132,
+          "textSha256": "6486794dda743a3ed491c666f4ecac24b490a98acae50c2f0e6f3ee2bc648e93",
+          "anchor": "Tree"
+        },
+        {
+          "printedPage": 130,
+          "pdfPage": 134,
+          "textSha256": "a61652a0c85f9bd1f5ab244bfe0cced36a45a9a85e7b67b0761a0b54b32f5664",
+          "anchor": "Yggdrasil"
+        }
+      ]
+    },
+    {
+      "familyId": "garden",
+      "title": "Garden",
+      "pages": [
+        146,
+        148
+      ],
+      "pdfPages": [
+        150,
+        152
+      ],
+      "body": [
+        "The garden begins with tending: touching soil, making room, feeding and pruning. Its enclosure offers a protected space for contemplation, and a central fountain, tree or deity may organize that space as an image of potential wholeness.",
+        "An entrance to the secret garden is often difficult to find; a Japanese garden may disclose itself gradually along a path. The book treats discovery as a relation that unfolds over time, not an interior already visible in a single glance.",
+        "Cultivation does not abolish autonomy. Growth surprises the gardener, and an untended enclosure returns to wilderness. The garden’s symbolic life depends on this negotiation between deliberate care and forces that exceed domestication."
+      ],
+      "resonances": [
+        "mandala",
+        "temenos",
+        "paradise",
+        "tree",
+        "water",
+        "quaternity"
+      ],
+      "evidence": [
+        {
+          "printedPage": 146,
+          "pdfPage": 150,
+          "textSha256": "5a78ac5957b794e5cf7a2ed51b284fd806fb063039ff74e6babf656a1f9333f4",
+          "anchor": "Garden"
+        },
+        {
+          "printedPage": 148,
+          "pdfPage": 152,
+          "textSha256": "7cff4d2183fd3020bf54a89d8e64a1165c57237aa066303b33e0cef28846c61a",
+          "anchor": "domesticate"
+        }
+      ]
+    },
+    {
+      "familyId": "lotus",
+      "title": "Lotus",
+      "pages": [
+        158
+      ],
+      "pdfPages": [
+        162
+      ],
+      "body": [
+        "The lotus rises from muddy water into an open flower. The book reads this as continuity between dense, changing conditions and luminous awareness: emergence does not require denying the medium that nourished it.",
+        "Egyptian imagery reveals a solar child from a primordial lotus, while Indian and Tibetan images place deities, meditative centers and chakras in lotus forms. In the Buddhist example, the awakened figure is undisturbed by the changing world without being separate from it."
+      ],
+      "resonances": [
+        "water",
+        "sun",
+        "divine-child",
+        "chakra",
+        "mandala",
+        "golden-flower"
+      ],
+      "evidence": [
+        {
+          "printedPage": 158,
+          "pdfPage": 162,
+          "textSha256": "e1bbcce0dcd3987102a9818eeaeca916dc1b502c6e1297cb1b4d168bb19b2f5b",
+          "anchor": "Lotus"
+        }
+      ]
+    },
+    {
+      "familyId": "rose",
+      "title": "Rose",
+      "pages": [
+        162,
+        164
+      ],
+      "pdfPages": [
+        166,
+        168
+      ],
+      "body": [
+        "The rose gathers earthly affection, sacred devotion, remembered loss and desire for something elusive. Its fragrance and layered petals allow the book to move between lovers, goddesses, the Virgin and alchemical images without assigning the flower one fixed meaning.",
+        "Red and white roses can join contrary natures, while the privacy of alchemical work resembles a life developing within closed petals. Thorns complicate the sweetness: they may protect what is vulnerable, or become a defensive barrier that prevents intimacy and growth."
+      ],
+      "resonances": [
+        "venus",
+        "virgin",
+        "garden",
+        "coniunctio",
+        "rubedo",
+        "golden-flower"
+      ],
+      "evidence": [
+        {
+          "printedPage": 162,
+          "pdfPage": 166,
+          "textSha256": "07983481873bf05ca55cb8b2b4021f87458bbdd5c0b21a9296daef828598b490",
+          "anchor": "Rose"
+        },
+        {
+          "printedPage": 164,
+          "pdfPage": 168,
+          "textSha256": "a27d7e1cf5b071f40b74efdb2b4ec8bab3089150bb80601c695047d4d1c5331c",
+          "anchor": "thorniness"
+        }
+      ]
+    },
+    {
+      "familyId": "serpent",
+      "title": "Snake",
+      "pages": [
+        194,
+        196
+      ],
+      "pdfPages": [
+        198,
+        200
+      ],
+      "body": [
+        "The snake evokes a life that moves close to the earth yet appears unexpectedly from hidden places. Its watchful eye and renewed skin support images of perception and transformation; its danger keeps those possibilities from becoming merely reassuring.",
+        "The book follows distinct serpent traditions, including kundalini and the sanctuary of Asclepius. Coiled power, dream incubation and the healing snake place renewal near death’s territory. Venom and cure belong to the same ambiguous creature, so guidance requires respect for its force."
+      ],
+      "resonances": [
+        "eye",
+        "uroboros",
+        "dragon",
+        "shiva",
+        "chakra",
+        "cave"
+      ],
+      "evidence": [
+        {
+          "printedPage": 194,
+          "pdfPage": 198,
+          "textSha256": "57e7c79e588b4187cc25a8302a6a7cfd4a1991ae7c8bbf09b75e8ea55325c955",
+          "anchor": "Snake"
+        },
+        {
+          "printedPage": 196,
+          "pdfPage": 200,
+          "textSha256": "087cbf2dfb324d887959db5ba55ce7805d2af99f405472d35e0b629ba9c2e489",
+          "anchor": "Asclepius"
+        }
+      ]
+    },
+    {
+      "familyId": "fish",
+      "title": "Fish",
+      "pages": [
+        202
+      ],
+      "pdfPages": [
+        206
+      ],
+      "body": [
+        "Paul Klee’s goldfish introduces a living image emerging from an unseen watery world. Rather than treating the unconscious as empty depth, the book considers its inhabitants: something with its own form can be encountered patiently and brought into awareness.",
+        "Christian fish and baptismal waters suggest restored participation, while the two Pisces fish carry a split between spiritual aspiration and material life. Alchemical fish eyes add small, persistent lights within matter, imagining a possibility of perception that can include both sides of that division."
+      ],
+      "resonances": [
+        "water",
+        "eye",
+        "spark",
+        "christ-figure",
+        "mercurius",
+        "grail"
+      ],
+      "evidence": [
+        {
+          "printedPage": 202,
+          "pdfPage": 206,
+          "textSha256": "b9ceec90cebad343ea4757e29355bb7ab15e3184cc821fa1190e396cf5df2226",
+          "anchor": "Fish"
+        }
+      ]
+    },
+    {
+      "familyId": "bird",
+      "title": "Bird",
+      "pages": [
+        238,
+        240
+      ],
+      "pdfPages": [
+        242,
+        244
+      ],
+      "body": [
+        "Birds travel between ground, water and air, making flight an image of communication between different realms. The book associates this movement with soul, inspiration and the creative passage from a perceived world to an inner image.",
+        "Flight is balanced by nesting, brooding, seasonal return and bodily song. Inspiration therefore includes listening to instinct and coming home, not only escaping weight. The entry places a soul’s guidance in the alternating movements of ascent, descent, reception and expression."
+      ],
+      "resonances": [
+        "soul-bird",
+        "wind",
+        "tree",
+        "philosophers-egg",
+        "ascent-descent",
+        "mercurius"
+      ],
+      "evidence": [
+        {
+          "printedPage": 238,
+          "pdfPage": 242,
+          "textSha256": "9f0a160903b0ec5bd5291c7d7738102b9fba49fc8d2fb29ed9892f1f24255463",
+          "anchor": "Bird"
+        },
+        {
+          "printedPage": 240,
+          "pdfPage": 244,
+          "textSha256": "a6a717e9dafdec8c551325baa45dfffb8ee32c305e4c01fa49e44bb4dab6142e",
+          "anchor": "song"
+        }
+      ]
+    },
+    {
+      "familyId": "dove",
+      "title": "Dove",
+      "pages": [
+        244,
+        246
+      ],
+      "pdfPages": [
+        248,
+        250
+      ],
+      "body": [
+        "The dove’s pairing, shared nest and gentle presence join love with fertile devotion. The book follows its appearances with love goddesses, the returning bird after the flood, and the Christian Holy Spirit as different forms of relationship and renewing arrival.",
+        "Alchemy’s dove moves both upward from dark waters and downward to meet them, mediating between aspiration and affect. Its apparent purity need not mean separation from ordinary life: the source also recalls the vulnerable, sometimes despised city pigeon beneath the exalted image."
+      ],
+      "resonances": [
+        "holy-ghost",
+        "venus",
+        "virgin",
+        "water",
+        "coniunctio",
+        "bird"
+      ],
+      "evidence": [
+        {
+          "printedPage": 244,
+          "pdfPage": 248,
+          "textSha256": "97c4363f85ac0f433263c3c1e7df0b9237258de00957d05e83387096fdd3af46",
+          "anchor": "Dove"
+        },
+        {
+          "printedPage": 246,
+          "pdfPage": 250,
+          "textSha256": "bb9b3fd3f9337ae90960f1e55d7d7fa80953dddbe12aab0759066d700c66a5ae",
+          "anchor": "pigeon"
+        }
+      ]
+    },
+    {
+      "familyId": "raven",
+      "title": "Crow / Raven",
+      "pages": [
+        248,
+        250
+      ],
+      "pdfPages": [
+        252,
+        254
+      ],
+      "body": [
+        "The book’s crows and ravens disturb convenient divisions between helpful and destructive. In Northwest Pacific Coast stories, Raven may bring light and useful knowledge through trickery while remaining capable of confusion and harm; Odin’s ravens probe the worlds as thought and memory.",
+        "The alchemical raven belongs to the dark phase in which flattering accounts of oneself are stripped away. Its scavenging image can feel humiliating, yet the birds’ ingenuity and play also disclose another kind of consciousness: perceptive, irreverent and hard to domesticate."
+      ],
+      "resonances": [
+        "trickster-figure",
+        "nigredo",
+        "sol-niger",
+        "magician",
+        "bird",
+        "sun"
+      ],
+      "evidence": [
+        {
+          "printedPage": 248,
+          "pdfPage": 252,
+          "textSha256": "7bf3ed26553f7d2141b69743443c5b19a6606072b09e0b3fe06dffddb7c3821c",
+          "anchor": "Crow/ Raven"
+        },
+        {
+          "printedPage": 250,
+          "pdfPage": 254,
+          "textSha256": "b9a5159d503ce10a99b7831faa0bb4e0c997fec3335d204e94740bea0169f967",
+          "anchor": "nigredo"
+        }
+      ]
+    },
+    {
+      "familyId": "eagle",
+      "title": "Eagle",
+      "pages": [
+        256,
+        258
+      ],
+      "pdfPages": [
+        260,
+        262
+      ],
+      "body": [
+        "The eagle’s height and searching gaze attract images of sovereignty, solar power and far-seeing spirit. Its predatory force prevents grandeur from becoming an innocent ideal; the book keeps imperial violence and nurturing care within the same bird.",
+        "Alchemy gives ascent an answering descent. An insight that leaves the emotional ground behind can disappear into abstraction; the sea eagle’s plunge and return instead image illumination brought into embodied life. The eagle and serpent may oppose each other, but sky and earth also exchange nourishing waters."
+      ],
+      "resonances": [
+        "sun",
+        "serpent",
+        "ascent-descent",
+        "water",
+        "phoenix",
+        "king-queen-pair"
+      ],
+      "evidence": [
+        {
+          "printedPage": 256,
+          "pdfPage": 260,
+          "textSha256": "fe62bf3bcf0dcc6b114798badb4cb47d9c675d74f312a528d7e55a6c2ff7a69f",
+          "anchor": "Eagle"
+        },
+        {
+          "printedPage": 258,
+          "pdfPage": 262,
+          "textSha256": "549df4fa51874b64c619e52b306fd2eb0b4cd7a34378f6a3428bb41619e48b42",
+          "anchor": "embodiment"
+        }
+      ]
+    },
+    {
+      "familyId": "peacock",
+      "title": "Peacock",
+      "pages": [
+        260
+      ],
+      "pdfPages": [
+        264
+      ],
+      "body": [
+        "The peacock’s radiant display evokes the sun, renewal and an apparently incorruptible life, while its burdened gait and harsh cry complicate the splendid surface. The book reads pride and vulnerability alongside the promise of resurrection.",
+        "Its many eyes and changing colors become images of enlarged vision and synthesis. Legends of turning a snake’s venom into luminous plumage suggest a symbolic transformation of poison into insight; the alchemical tail announces a new configuration of what was formerly divided."
+      ],
+      "resonances": [
+        "eye",
+        "sun",
+        "resurrection",
+        "serpent",
+        "shiva",
+        "coniunctio"
+      ],
+      "evidence": [
+        {
+          "printedPage": 260,
+          "pdfPage": 264,
+          "textSha256": "44c99a809602a0aae2837ddd3e0e3282308d79d125a94d394a711da4d2dffaac",
+          "anchor": "Peacock"
+        }
+      ]
+    },
+    {
+      "familyId": "king-queen-pair",
+      "title": "King / Queen",
+      "pages": [
+        470
+      ],
+      "pdfPages": [
+        474
+      ],
+      "body": [
+        "Royal figures embody the principles that govern a person or a community, carrying conscious authority together with powers that consciousness does not control. Sun and moon, gold and silver, throne and crown give that sovereignty a symbolic setting.",
+        "A wounded or aging ruler reveals an order that no longer nourishes its land. The book reads alchemical King Sol and Queen Luna as a union that changes both partners and ends the former arrangement; renewal may also arrive through a humble helper close to instinct."
+      ],
+      "resonances": [
+        "sun",
+        "moon",
+        "crown",
+        "coniunctio",
+        "lapis",
+        "grail"
+      ],
+      "evidence": [
+        {
+          "printedPage": 470,
+          "pdfPage": 474,
+          "textSha256": "6a105b08c38ff9a07f40e1e4921878959173e698d3a30399b7ceb989c0ea2ba7",
+          "anchor": "King /Queen"
+        }
+      ]
+    },
+    {
+      "familyId": "crown",
+      "title": "Crown",
+      "pages": [
+        540
+      ],
+      "pdfPages": [
+        544
+      ],
+      "body": [
+        "A crown concentrates radiance at the head, linking earthly authority to solar vitality. Its many gems can image diverse qualities brought into relation, and the crowning of a lowly figure can recognize a worth larger than familiar ego status.",
+        "The book also follows the crown’s weight: responsibility, anxiety, destiny and the piercing crown of thorns. To be crowned can therefore expose a person to a demanding office or suffering as well as confer splendor."
+      ],
+      "resonances": [
+        "sun",
+        "solificatio",
+        "king-queen-pair",
+        "anima-mundi",
+        "virgin",
+        "cross"
+      ],
+      "evidence": [
+        {
+          "printedPage": 540,
+          "pdfPage": 544,
+          "textSha256": "10018aefde80ded190daf9c487c5171e6e3a4ae978aa15f474e4cd09abf99bdb",
+          "anchor": "Crown"
+        }
+      ]
+    },
+    {
+      "familyId": "dragon",
+      "title": "Dragon",
+      "pages": [
+        704
+      ],
+      "pdfPages": [
+        708
+      ],
+      "body": [
+        "The dragon combines aerial and earthly powers that ordinary animals keep apart. Chinese cloud-and-water dragons give this composite a nourishing, seasonal life, while dragon-slayers confront an engulfing force. These traditions make its meaning depend on the encounter.",
+        "Alchemy’s winged and wingless dragons stage conflicts between volatile vision and embodied substance. Their poison can become medicine through the work; the treasure-bearing dragon also images a hidden process capable of initiating renewal before the conscious personality understands it."
+      ],
+      "resonances": [
+        "serpent",
+        "bird",
+        "water",
+        "fire",
+        "mercurius",
+        "pearl",
+        "uroboros"
+      ],
+      "evidence": [
+        {
+          "printedPage": 704,
+          "pdfPage": 708,
+          "textSha256": "79997c27f981600b5df97b37783a08e1863be4fed7715ed12d209ada02a7c8ee",
+          "anchor": "Dragon"
+        }
+      ]
+    },
+    {
+      "familyId": "mandala",
+      "title": "Mandala / Labyrinth",
+      "pages": [
+        712,
+        714
+      ],
+      "pdfPages": [
+        716,
+        718
+      ],
+      "body": [
+        "The mandala entry centers on Tantric Buddhist practice. A palace, its directions and its deities connect world and practitioner; guided visualization and initiation work through that ordered space toward transformation of body, speech and mind. The geometry belongs to a living ritual context.",
+        "The neighboring labyrinth entry offers a different experience of center: from above the path has order, while from inside it confuses and doubles back. In the Chartres example, circle, cross and central flower join a Christian journey of transformation.",
+        "This is an editorial comparison of two named book entries. A center can orient a person without making the route direct; the book’s labyrinth asks how confusion can gradually enlarge perspective."
+      ],
+      "resonances": [
+        "circle",
+        "quaternity",
+        "yantra",
+        "temenos",
+        "lotus",
+        "cross",
+        "rose"
+      ],
+      "evidence": [
+        {
+          "printedPage": 712,
+          "pdfPage": 716,
+          "textSha256": "a4103d88a56d37ea17531443850c642e32242410acf2b3ae1bcfb0e0e1476230",
+          "anchor": "Mandala"
+        },
+        {
+          "printedPage": 714,
+          "pdfPage": 718,
+          "textSha256": "aad0a03f17dbb3fcbbf0c5bebf5ea9d08542a2ce7977119e30190b3e2b408e54",
+          "anchor": "Labyrinth"
+        }
+      ]
+    },
+    {
+      "familyId": "cross",
+      "title": "Crucifixion",
+      "pages": [
+        744
+      ],
+      "pdfPages": [
+        748
+      ],
+      "body": [
+        "This entry concerns the crucifixion image, especially its Christian setting, rather than every cultural form of the cross. The suspended body intensifies isolation, suffering and the tension of opposed demands that cannot be resolved by an easy choice.",
+        "The book connects alchemical crucifixion with surrender of an exhausted form of consciousness, but refuses to guarantee redemption. Some suffering becomes meaningful; some remains destructive. The image marks a radical alteration whose consequences cannot be assumed in advance."
+      ],
+      "resonances": [
+        "christ-figure",
+        "sacrifice",
+        "resurrection",
+        "tree",
+        "vessel"
+      ],
+      "evidence": [
+        {
+          "printedPage": 744,
+          "pdfPage": 748,
+          "textSha256": "4249321aa3692a9d6ed3b6949f0302f9f0a9085f162709dd9d390f2fc10687bf",
+          "anchor": "Crucifixion"
+        }
+      ]
+    },
+    {
+      "familyId": "pearl",
+      "title": "Pearl",
+      "pages": [
+        784
+      ],
+      "pdfPages": [
+        788
+      ],
+      "body": [
+        "A luminous treasure hidden in an ordinary shell becomes an image of something precious within embodied life. The book follows the pearl through Persian soul imagery, the Gnostic return to self-knowledge and Chinese dragons retrieving wisdom from mist.",
+        "Its symbolic attraction also rests on a persistent irritant gradually clothed in new substance. The entry uses that growth to imagine suffering taking on meaning over time; it is a possibility of transformation, not a claim that every wound automatically produces a treasure."
+      ],
+      "resonances": [
+        "dragon",
+        "water",
+        "treasure",
+        "lapis",
+        "mercurius"
+      ],
+      "evidence": [
+        {
+          "printedPage": 784,
+          "pdfPage": 788,
+          "textSha256": "c35beea9de6bc0ceaf29071bbe41a13117c4bc5119f2337bab77538dfd83a96a",
+          "anchor": "Pearl"
+        }
+      ]
+    },
+    {
+      "familyId": "grail",
+      "title": "Grail",
+      "pages": [
+        786
+      ],
+      "pdfPages": [
+        790
+      ],
+      "body": [
+        "The Grail can appear as vessel, abundant nourishment and the elusive goal of a quest. The book moves between a cauldron of plenty, Christian communion and medieval romance, allowing the sought object to take different forms rather than restricting it to one cup.",
+        "The quest involves detours, dangerous crossings and help beyond personal mastery. The wounded Fisher King makes the goal relational: healing restores the life of a realm. An enclosed garden and a rose flowering from the vessel join source, center and the gradual growth of an inner life."
+      ],
+      "resonances": [
+        "vessel",
+        "chalice",
+        "rose",
+        "garden",
+        "lapis",
+        "king-queen-pair",
+        "night-sea-journey"
+      ],
+      "evidence": [
+        {
+          "printedPage": 786,
+          "pdfPage": 790,
+          "textSha256": "b03d33ea67abd16da4e092fdfd68a69e5f4d4847d06875d8ad48fca780894f3d",
+          "anchor": "Grail"
+        }
+      ]
+    }
+  ]
+}

@@ -15,9 +15,9 @@
       "jupiter": { "name": "Zeus", "kind": "deity", "basis": "site", "source": "planetary-gods table, Jupiter × Greek (no mark: classical name)" },
       "mars": { "name": "Ares", "kind": "deity", "basis": "site", "source": "planetary-gods table, Mars × Greek (no mark: classical name)" },
       "sun": { "name": "Helios", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Sun × Greek (J: cw12 ¶66 sun-god goal of ascent)" },
-      "venus": { "name": "Aphrodite", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Venus × Greek (J: sem-zarathustra pdf p1441 copper=Venus)" },
+      "venus": { "name": "Aphrodite", "kind": "deity", "basis": "site", "source": "planetary-gods table, Venus × Greek (the table marks J for the planet–metal link, sem-zarathustra pdf p1441 copper=Venus; the Greek name is the classical one, not Jung's word)" },
       "mercury": { "name": "Hermes", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Mercury × Greek (J: cw12 ¶84 Hermes = quicksilver)" },
-      "moon": { "name": "Selene", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Moon × Greek (J: sem-zarathustra pdf p1441 silver=moon)" }
+      "moon": { "name": "Selene", "kind": "deity", "basis": "site", "source": "planetary-gods table, Moon × Greek (the table marks J for the planet–metal link, sem-zarathustra pdf p1441 silver=moon; the Greek name is the classical one, not Jung's word)" }
     },
     "roman": {
       "saturn": { "name": "Saturnus", "kind": "deity", "basis": "site", "source": "planetary-gods table, Saturn × Roman (no mark: classical name)" },

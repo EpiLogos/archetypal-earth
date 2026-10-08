@@ -8,6 +8,7 @@ import { DEFAULT_VAULT, readNotes, asList, linkTargets, slugify, stripLinks } fr
 import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse } from './lib/text.mjs';
 import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT } from './lib/geo.mjs';
 import { validateField } from './validate.mjs';
+import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -62,6 +63,30 @@ const gaz = loadGazetteer(CUR('gazetteer.json'));
 const { aliases: cultAliases, cultures: cultTable } = loadCultures(CUR('cultures.json'));
 const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
 const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, occurrences: {} });
+
+// ---------- scan-error normaliser ----------
+// Vocabulary comes from the vault's own clean volumes (see scripts/lib/ocr.mjs); cached in .cache/.
+const ocrExceptions = readJson(CUR('ocr-exceptions.json'), {});
+const ocrVocab = buildVocab({ vault: VAULT, cacheDir: path.join(ROOT, '.cache'), log: (m) => console.log(m) });
+const ocr = createNormalizer(ocrVocab, ocrExceptions);
+const ocrLog = new Map(); // "kind | before -> after" -> { kind, before, after, count, where: [] }
+let ocrTouched = 0;
+function ocrRecord(where, changes) {
+  for (const c of changes) {
+    const key = `${c.kind} | ${c.before} -> ${c.after}`;
+    let e = ocrLog.get(key);
+    if (!e) ocrLog.set(key, (e = { kind: c.kind, before: c.before, after: c.after, count: 0, where: [] }));
+    e.count++;
+    if (e.where.length < 3 && !e.where.includes(where)) e.where.push(where);
+  }
+}
+/** Normalise one string, logging what changed. */
+function fixText(text, where, mode = 'prose') {
+  if (typeof text !== 'string' || !text) return text;
+  const r = ocr.normalize(text, { mode });
+  if (r.text !== text) { ocrTouched++; ocrRecord(where, r.changes); }
+  return r.text;
+}
 
 // ---------- load vault ----------
 const W = (d) => path.join(VAULT, 'wiki', d);
@@ -161,6 +186,7 @@ for (const e of lexicon) {
   lexAliases[slug] = (lexAliases[slug] || []).concat(asList(e.aliases));
 }
 for (const n of imgNotes.filter((x) => !x.failed)) {
+  if (String(n.data.status || '').toLowerCase() === 'redirect') continue; // canonical family is the merge target
   const over = famOver[n.slug] || {};
   const st = String(n.data.subtype || '').toLowerCase();
   const als = [...asList(n.data.aliases), ...(lexAliases[n.slug] || [])].map((x) => collapse(plain(x).replace(/^["']|["']$/g, ''))).filter(Boolean);
@@ -224,7 +250,7 @@ function guessYear(display) {
 for (const n of instNotes.filter((x) => !x.failed)) {
   const d = n.data;
   const id = n.slug;
-  const title = collapse(plain(d.title || ''));
+  const title = fixText(collapse(plain(d.title || '')), `occ:${id}.title`);
   if (!title) { skip('instance', id, 'no title'); continue; }
   const primaryRaw = linkTargets(d.instance_of)[0];
   if (!primaryRaw) { skip('instance', id, 'no instance_of'); continue; }
@@ -250,7 +276,7 @@ for (const n of instNotes.filter((x) => !x.failed)) {
   }
   for (const c of cultureIds) cultureCount[c] = (cultureCount[c] || 0) + 1;
 
-  let place = collapse(plain(d.place ?? ''));
+  let place = fixText(collapse(plain(d.place ?? '')), `occ:${id}.place`);
   if (/^(undefined|null|none|n\/a|\?)$/i.test(place)) place = '';
 
   // geocoding chain
@@ -290,6 +316,8 @@ for (const n of instNotes.filter((x) => !x.failed)) {
   }
 
   const parsed = parseInstanceBody(n.body);
+  parsed.body = parsed.body.map((b, k) => fixText(b, `occ:${id}.body[${k}]`));
+  if (parsed.quote) parsed.quote = fixText(parsed.quote, `occ:${id}.quote`);
   const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
   let yearRange;
   const yr = Array.isArray(d.year_range) ? d.year_range.map(Number) : null;
@@ -356,6 +384,17 @@ for (const o of occList) {
 if (Object.keys(droppedCo).length) warn(`co_manifests dropped (not a family): ${Object.entries(droppedCo).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}x${v}`).join(', ')}`);
 
 // ---------- ties, palettes, spectrum ----------
+/** Vault `expresses_*` may name an archetype or another family; families inherit that family's curation ties (one hop). */
+const absorbExpressLink = (ties, put, slug, basis, depth = 0) => {
+  const s = famMerges[slug] || slug;
+  if (archById[s]) { put(s, basis); return; }
+  if (depth > 1) return;
+  for (const t of curTies[s] || []) put(t.archetype, t.basis);
+  const note = imgNotes.find((n) => n.slug === s && !n.failed);
+  if (!note) return;
+  for (const a of linkTargets(note.data.expresses_jung)) absorbExpressLink(ties, put, a, 'jung', depth + 1);
+  for (const a of linkTargets(note.data.expresses_inferred)) absorbExpressLink(ties, put, a, 'inferred', depth + 1);
+};
 for (const fam of Object.values(famMap)) {
   const ties = new Map();
   const put = (a, basis) => {
@@ -363,10 +402,11 @@ for (const fam of Object.values(famMap)) {
     const cur = ties.get(a);
     if (cur === undefined || BASIS_RANK[basis] < BASIS_RANK[cur]) ties.set(a, basis);
   };
-  for (const t of curTies[fam.id] || []) put(t.archetype, t.basis);
+  for (const key of new Set([fam.id, famMerges[fam.id]].filter(Boolean)))
+    for (const t of curTies[key] || []) put(t.archetype, t.basis);
   if (fam._vault) {
-    for (const a of linkTargets(fam._vault.data.expresses_jung)) put(a, 'jung');
-    for (const a of linkTargets(fam._vault.data.expresses_inferred)) put(a, 'inferred');
+    for (const a of linkTargets(fam._vault.data.expresses_jung)) absorbExpressLink(ties, put, a, 'jung');
+    for (const a of linkTargets(fam._vault.data.expresses_inferred)) absorbExpressLink(ties, put, a, 'inferred');
   }
   fam.archetypes = [...ties.entries()]
     .map(([id, basis]) => ({ id, basis }))
@@ -448,6 +488,32 @@ const field = {
   cultures,
 };
 
+// Final pass over EVERY human-readable string that reaches field.json (the early passes above cover the
+// occurrence fields the geocoder and label derivation read; this one catches the rest and proves the lot).
+for (const [kind, list] of [['arch', field.archetypes], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+  for (const item of list) {
+    visitFieldText(item, (where, value, mode, set) => {
+      const r = ocr.normalize(value, { mode });
+      if (r.text !== value) { set(r.text); ocrTouched++; ocrRecord(`${kind}:${item.id}${where}`, r.changes); }
+    });
+  }
+}
+// residual scanner: whatever still looks like scan damage (target: none; reviewed exceptions live in curation/ocr-exceptions.json)
+const ocrResidual = [];
+for (const [kind, list] of [['arch', field.archetypes], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+  for (const item of list) {
+    visitFieldText(item, (where, value, mode) => {
+      if (mode === 'safe') return;
+      for (const h of ocr.scan(value)) ocrResidual.push({ where: `${kind}:${item.id}${where}`, ...h });
+    });
+  }
+}
+if (ocrResidual.length) {
+  console.error(`OCR RESIDUAL: ${ocrResidual.length} suspect(s) remain (fix the rule or add a reviewed entry to curation/ocr-exceptions.json):`);
+  ocrResidual.slice(0, 40).forEach((h) => console.error(`  - ${h.where} [${h.kind}] ${h.token} :: ${h.context}`));
+  if (process.env.OCR_STRICT === '1') process.exit(3);
+}
+
 const errors = validateField(field);
 if (errors.length) {
   console.error(`VALIDATION FAILED (${errors.length} errors):`);
@@ -484,6 +550,17 @@ const stats = {
   droppedCoManifests: droppedCo,
   culturePrecisionPlaces: [...new Set(unresolvedPlaces)].sort(),
   archetypesWithDefinition: archList.filter((a) => a.definition).map((a) => a.id),
+  ocr: {
+    vocabulary: ocrVocab.source,
+    stringsChanged: ocrTouched,
+    changes: [...ocrLog.values()].reduce((n, e) => n + e.count, 0),
+    byKind: [...ocrLog.values()].reduce((m, e) => ((m[e.kind] = (m[e.kind] || 0) + e.count), m), {}),
+    unique: ocrLog.size,
+    residual: ocrResidual.length,
+    residualSuspects: ocrResidual,
+    // every distinct repair with its count and up to three places it was made, so the work is auditable
+    samples: [...ocrLog.values()].sort((a, b) => b.count - a.count || a.before.localeCompare(b.before)),
+  },
   skips,
   warnings,
 };
@@ -493,4 +570,5 @@ console.log(`field.json: ${archList.length} archetypes, ${cleanFam.length} famil
 console.log(`geo: place ${hist.place} (${pct(hist.place)}%), region ${hist.region} (${pct(hist.region)}%), culture ${hist.culture} (${pct(hist.culture)}%), none ${hist.none} | place+region ${pct(hist.place + hist.region)}%`);
 console.log(`skips: ${skips.length}${skips.length ? ' -> ' + skips.map((s) => `${s.kind}:${s.id} (${s.reason})`).join('; ') : ''}`);
 console.log(`warnings: ${warnings.length} (see field.stats.json)`);
+console.log(`ocr: ${stats.ocr.changes} repairs in ${stats.ocr.stringsChanged} strings (${stats.ocr.unique} distinct), residual suspects: ${stats.ocr.residual}`);
 if (formFallbacks.length) console.log(`families lacking a oneLine: ${formFallbacks.join(', ')}`);

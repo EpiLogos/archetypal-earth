@@ -1,128 +1,500 @@
 {
   "counts": {
     "archetypes": 13,
-    "families": 137,
-    "occurrences": 819,
+    "families": 324,
+    "occurrences": 2705,
     "cultures": 64,
-    "images": 220
+    "images": 321
   },
   "vaultLedgerLine": "2026-10-08 — Wave 1 harvests landing",
   "geoPrecision": {
-    "place": 508,
-    "region": 306,
-    "culture": 5,
-    "none": 0,
-    "place+region %": 99.4,
+    "place": 1511,
+    "region": 981,
+    "culture": 199,
+    "none": 14,
+    "place+region %": 92.1,
     "pct": {
-      "place": 62,
-      "region": 37.4,
-      "culture": 0.6,
-      "none": 0
+      "place": 55.9,
+      "region": 36.3,
+      "culture": 7.4,
+      "none": 0.5
     }
   },
   "geoSource": {
-    "place": 813,
-    "patient-default": 1,
-    "title": 0,
-    "culture": 5,
-    "none": 0
+    "place": 2423,
+    "patient-default": 51,
+    "title": 18,
+    "culture": 199,
+    "none": 14
   },
-  "imagesAttached": 220,
+  "imagesAttached": 321,
   "locusTypes": {
-    "artifact": 179,
-    "text-passage": 320,
-    "myth-episode": 104,
-    "vision": 47,
-    "dream": 64,
-    "ritual": 40,
-    "historical-event": 16,
-    "clinical-case": 18,
-    "active-imagination": 31
+    "ritual": 163,
+    "myth-episode": 310,
+    "artifact": 420,
+    "text-passage": 929,
+    "vision": 248,
+    "clinical-case": 121,
+    "historical-event": 118,
+    "dream": 339,
+    "active-imagination": 57
   },
-  "quotes": 391,
-  "occurrencesWithJungCites": 814,
+  "quotes": 1595,
+  "occurrencesWithJungCites": 2705,
   "labelMaxLen": 48,
   "yearRange": [
     -10000,
-    1952
+    1958
   ],
   "familiesSynthesised": [
-    "i-ching-hexagram"
+    "adam",
+    "ascension",
+    "ecclesia-synagoga"
   ],
   "unresolvedFamilyTargets": {
-    "i-ching-hexagram": 1
+    "adam": 1,
+    "ecclesia-synagoga": 1,
+    "ascension": 1
   },
   "mergedFamilyTargets": {
     "quaternion": "quaternity",
     "cauda-pavonis": "peacock",
-    "self": "god-image"
+    "self": "god-image",
+    "seven-planets": "planetary-gods",
+    "trickster": "trickster-figure",
+    "wise-old-man": "senex-figure",
+    "shadow": "devil"
   },
   "familiesWithoutOccurrences": [
-    "chakra",
-    "crown",
-    "demiurge",
-    "furnace",
-    "head",
-    "heart",
-    "island",
-    "lamia",
-    "lotus",
+    "battle-with-dragon",
+    "butterfly",
+    "cauda-pavonis",
+    "circumambulatio",
+    "clairvoyance",
+    "cloud",
+    "diamond-body",
+    "faust-figure",
+    "frog",
+    "harpy",
+    "imp",
+    "incubus",
+    "jupiter",
+    "leopard",
     "magnet",
+    "mars",
+    "monad",
     "moth",
-    "mountain",
+    "necklace",
     "nixie",
-    "raven",
-    "rotundum",
-    "salamander",
-    "shiva",
-    "sol-niger",
-    "swan",
-    "tao",
-    "tetramorph",
-    "treasure",
-    "worm",
+    "pegasus",
+    "playing-card",
+    "radioactive-nucleus",
+    "saturn",
+    "scorpion",
+    "soul-image",
+    "spear",
+    "spindle",
+    "vajra",
+    "wand",
     "yantra"
   ],
-  "familiesOneLineFallback": [],
-  "familiesOneLineFromVault": 0,
-  "unknownCultures": {},
+  "familiesOneLineFallback": [
+    "ancestor",
+    "apple",
+    "armor",
+    "bear",
+    "blood",
+    "book",
+    "butterfly",
+    "cap",
+    "carcinoma",
+    "cathedral",
+    "circumambulatio",
+    "clairvoyance",
+    "dance",
+    "dew",
+    "dioscuri",
+    "divination",
+    "dwarf",
+    "egg",
+    "elf",
+    "fettered-soul",
+    "frog",
+    "goat",
+    "golden-ball",
+    "grandfather",
+    "hostile-brothers",
+    "house",
+    "idol",
+    "labrys",
+    "last-man",
+    "laughter",
+    "light",
+    "louse",
+    "mars",
+    "materialization",
+    "melothesia",
+    "monocolus",
+    "mummy",
+    "number",
+    "orb",
+    "pig",
+    "placenta",
+    "playing-card",
+    "premonition",
+    "prometheus",
+    "puer-aeternus",
+    "pyramid",
+    "quincunx",
+    "radioactive-nucleus",
+    "ring",
+    "scales",
+    "scorpion",
+    "shepherd",
+    "ship",
+    "spindle",
+    "statue",
+    "sun-woman",
+    "tightrope-walker",
+    "transitus",
+    "uebermensch",
+    "ufo",
+    "viriditas",
+    "wolf",
+    "zarathustra-figure",
+    "adam",
+    "ecclesia-synagoga",
+    "ascension"
+  ],
+  "familiesOneLineFromVault": 121,
+  "unknownCultures": {
+    "ethnographic-primitive": 11,
+    "ancient-near-east": 1,
+    "syriac": 1,
+    "mandaeans": 2,
+    "phrygian": 4,
+    "medieval-christian": 6,
+    "australian-aboriginal": 4,
+    "medieval-western": 1,
+    "jewish-hellenistic": 2,
+    "israelite": 5,
+    "victorian-spiritualism": 1,
+    "mesoamerican": 5,
+    "french": 3,
+    "babylonian": 2,
+    "sumatran-batak": 2,
+    "celto-roman": 1,
+    "swiss": 8,
+    "western-esoteric": 1,
+    "bedouin": 1,
+    "egyptian-arab": 1,
+    "european-folk": 1,
+    "greek-folklore": 1,
+    "phoenician-punic": 1,
+    "phoenician": 2,
+    "german-romantic": 2,
+    "persian-islamic": 1,
+    "medieval": 3,
+    "french-medieval": 1,
+    "latin-american": 1,
+    "early-christian": 7,
+    "spiritist-modern": 10,
+    "scandinavian-folklore": 1,
+    "christian-medieval": 3,
+    "italian": 2,
+    "british-romantic": 1,
+    "greek-orphic": 1,
+    "coptic": 2,
+    "renaissance-italian": 1,
+    "astrological": 1,
+    "swedish": 1,
+    "greek-orthodox": 1,
+    "mozarabic": 1,
+    "indian-vedic": 2,
+    "near-eastern": 1,
+    "british": 1,
+    "spiritualist": 1,
+    "harranite": 2,
+    "renaissance": 4,
+    "taoist": 8,
+    "canaanite": 1,
+    "islam": 1,
+    "i-ching": 1,
+    "theosophical": 1,
+    "chinese-buddhist": 2,
+    "renaissance-occult": 1,
+    "indian-buddhist": 1,
+    "caucasus": 1,
+    "welsh": 1,
+    "arthurian": 4,
+    "european": 2,
+    "islamic-mughal": 1,
+    "european-bronze-age": 1,
+    "occultism": 4,
+    "swazi-bantu": 1,
+    "european-literature": 1,
+    "kurdish-yazidi": 1,
+    "greek-italiotic": 1,
+    "catholic": 1,
+    "tibetan-buddhist": 3,
+    "mandean-gnostic": 1,
+    "greek-roman": 4,
+    "judaean-herodian": 1,
+    "arabic-hermetic": 1,
+    "harranian": 1,
+    "hebrew-biblical": 2,
+    "european-scientific": 1,
+    "indian-tantric": 1,
+    "german-romantic-occultism": 1,
+    "roman-egyptian": 1,
+    "roman-mithraic": 1,
+    "east-african-colonial": 1,
+    "modern-literature": 1,
+    "christian-legend": 1,
+    "islamic-sufi": 3,
+    "italian-folk": 1,
+    "western-european": 1,
+    "minoan": 1,
+    "norse": 1,
+    "jewish-apocalyptic": 1,
+    "late-medieval-europe": 1
+  },
   "droppedCoManifests": {
-    "great-mother": 3,
+    "axiom-of-maria": 1,
+    "great-mother": 5,
     "dream": 1,
-    "shadow": 2,
+    "grave": 2,
     "syzygy": 4,
-    "faust-figure": 3,
+    "mass": 1,
     "bath": 1,
+    "devouring-mother": 1,
     "city-as-mother": 1,
+    "hero": 4,
+    "individuation": 1,
     "lament": 1,
-    "spiral": 1,
-    "ship": 2,
+    "gnostic": 1,
+    "vision": 2,
     "psychopomp": 2,
     "kore": 1,
-    "mummy": 1,
+    "trident": 1,
+    "gate": 1,
     "animus": 1,
-    "lightning": 2,
-    "crab": 1,
+    "time-god": 1,
+    "knife": 1,
+    "mana-personality": 1,
+    "lightning": 3,
     "abraxas": 1,
+    "synchronicity": 2,
+    "anima": 2,
     "cow": 1,
-    "anima": 1,
+    "castle": 1,
+    "train": 1,
+    "chinese-dragon": 3,
+    "inflation": 1,
     "squaring-the-circle": 1,
-    "chinese-dragon": 1,
+    "coronation": 1,
+    "ascension-descent": 2,
+    "active-imagination": 1,
     "devouring": 1,
-    "wise-old-man": 3,
-    "ascension": 1,
+    "visionary-rumour": 1,
     "flood": 1,
     "behemoth-leviathan": 1,
     "ascetic": 1,
-    "bull": 1,
-    "ascension-descent": 1
+    "glass-wall": 1,
+    "fountain-of-youth": 1
   },
   "culturePrecisionPlaces": [
     "(none)",
+    "Aegean (the god crossing the sea)",
+    "Aegean sea (Faust II, Klassische Walpurgisnacht)",
     "Albertus Magnus, Philosophia naturalis (1650 edition)",
+    "American South",
+    "Arab world (Book of Ostanes, Kitâb el Foçoul; Berthelot, Chimie au moyen-âge III)",
+    "Arles",
+    "Baffin Bay / Polar Eskimos (Rasmussen, Neue Menschen)",
+    "Balkans (Bogomils)",
+    "Basle",
+    "Bengal",
+    "Bengal (Śrī-tattva-cintāmaṇi, ch. 6; trans. Woodroffe as The Serpent Power, 1919)",
+    "Bethlehem",
+    "Bethlehem, Church of the Nativity",
+    "Bibliotheca chemica curiosa II (1702), p. 475",
+    "Black Sea entrance (Bosporus); also Scylla and Charybdis (Aeneas's passage)",
+    "Boghazköy (Hattusa), Anatolia",
+    "Book of Job 40-41",
+    "Boston, Massachusetts (sittings with the medium Leonora Piper)",
+    "Brabant",
+    "Bremen",
+    "Bulgaria / Balkans",
+    "Byzantium (John Malalas, Chronographia)",
+    "Byzantium → medieval West",
+    "Cambridge, University Library",
+    "Caucasus Mountains",
+    "Celebes (Sulawesi; Sarasin expeditions)",
+    "Chalcedon (Bithynia)",
+    "Chapel of the monastery of St. George, Stein am Rhein",
+    "Chartres/Tours school (contemporary of William of Champeaux, 1070–1121)",
+    "Christendom (legend)",
+    "Christian legend (Jung cites from memory, no source given)",
     "Chryse (island and nymph of the same name)",
+    "Clairvaux",
+    "Constance",
+    "Croton (Pythagorean school)",
+    "Cumae → St Petersburg, Hermitage",
+    "Dublin (Ulysses, 1922)",
+    "Dublin, 7 Eccles Street",
+    "Durham, North Carolina ↔ Zagreb, Yugoslavia (~4,000 miles)",
+    "Ecbatana (Hamadan), Media",
+    "Ecbatana (Media); Jewish diaspora composition",
+    "Egyptian / Libyan desert",
+    "Egyptian desert",
+    "Egyptian desert (mount Pispir?)",
+    "Elephanta island, near Bombay",
+    "Endor (narrative), Galilee",
+    "European churches",
+    "European monasteries",
+    "Flanders (Quentin Matsys)",
+    "Gadara region (Decapolis); Gospel of Mark",
+    "Gazelle Garden (Deer Park), Benares / Sarnath",
+    "Genoa? (Nietzsche writing)",
+    "Germanic Museum, Nuremberg; also Norman monasteries and churches",
+    "Germanic North (Edda / Nibelungen tradition)",
+    "Germanic north",
+    "Gnostic circles",
+    "Golgotha (John 19:23-24)",
+    "Grail legend (Wagner, Parsifal, 1882)",
+    "Greenland -> Baffin Bay -> North American shore",
+    "Groenendaal, near Brussels",
+    "Guatemala highlands",
+    "Horeb/Sinai",
+    "Ice Cape, North Greenland",
+    "Iceland",
+    "Iceland (Codex Regius copy; mythic material older)",
+    "Iceland (Eddic tradition)",
+    "Iceland (Snorri's Edda)",
+    "Jewish apocalyptic (transmitted in Christian apocrypha)",
+    "Jewish cabalistic tradition",
+    "Jewish cabalistic tradition (Zohar-era)",
+    "Jewish diaspora (custom attested from antiquity, ongoing today)",
+    "Jewish tradition (Lurianic tzimtzum parallels)",
+    "Jewish tradition (book burned repeatedly by the church in the Middle Ages)",
+    "Jinja, north shore of Lake Victoria, Uganda",
+    "Joppa",
+    "Judah (composition)",
+    "Kurdistan (Jung undated)",
+    "Königsberg (Kant's psychology lectures)",
+    "Land of Uz (literary setting)",
+    "Land of the West, beyond the waters of death (Gilgamesh, tablet XI)",
+    "Lower Rhine (cited from Salzer, Sinnbilder und Beiworte Mariens, p. 21)",
+    "Lugano (unidentified collection)",
+    "Mainz",
+    "Matthean text (Novum Testamentum Graece et Latine)",
+    "Memphis",
+    "Memphis (Serapeum)",
+    "Mesoamerica",
+    "Migne, P.L., vol. 184, col. 752",
+    "Monastery of the White Clouds (Baiyun Guan), Peking",
+    "Moscow, Red Square",
+    "Möttlingen, Württemberg (inferred from Zündel)",
+    "Mühlhausen",
+    "Naxos (myth); Nietzsche's late poem",
+    "Near East (Astarte/Atargatis cult)",
+    "Near Penzance / Madron, Cornwall (Men-an-Tol, also Menetol)",
+    "Neocaesarea, Pontus",
+    "Nicaea (Bithynia)",
+    "Nietzsche writing",
+    "Nietzsche writing (Genoa/Rapallo)",
+    "Nuremberg",
+    "Nuremberg, Germanic Museum",
+    "Paracelsan corpus (Huser edn., pp. 534f)",
+    "Philadelphia (first publication)",
+    "Phoenician setting (Plutarch, De Iside et Osiride)",
+    "Polar Eskimo country (NW Greenland)",
+    "Potsdam",
+    "Ravenna, Baptistry of the Orthodox (Neonian)",
     "Renaissance printed edition (1597), p. 5 vignette",
-    "printed 1620"
+    "River Liffey, Dublin",
+    "Röcken/Naumburg",
+    "Safed, Galilee",
+    "Sans Souci, Potsdam",
+    "Sarnath",
+    "Sarnath/Benares",
+    "Saxony",
+    "Shanghai",
+    "Siena (Tuscany)",
+    "Silesia (Breslau)",
+    "Sils-Maria (composition)",
+    "Sils-Maria (composition) / library at Prevorst (source)",
+    "Sils-Maria (composition); rococo/Biedermeier image-world",
+    "Sils-Maria / Turin (composition and collapse)",
+    "Sinai",
+    "Sinai wilderness",
+    "Sinai wilderness (Numbers 21:6-9)",
+    "Sky (constellation between the Bears)",
+    "Soissons (synod)",
+    "South America",
+    "Sparta",
+    "Speyer (published 1489)",
+    "Stockholm (vision at Gothenburg)",
+    "Stockholm? (Swedenborg's journals)",
+    "Sumatra",
+    "Sumatra (Batak country)",
+    "Sumatra (Indonesia), Batak people",
+    "Swiss Alps (mountain-artillery emplacement)",
+    "Taranto, Apulia",
+    "Tours → Chantilly, Musée Condé",
+    "Turin",
+    "Turin (written; recollecting the Sils-Maria summers)",
+    "Ulm/Würzburg",
+    "University of St. Petersburg",
+    "Ur",
+    "Vulgate text tradition (origin disputed; African?)",
+    "Wales (Red Book of Hergest ms)",
+    "Wartburg",
+    "Western liturgy",
+    "Wittenberg",
+    "Württemberg (author: Johann Valentin Andreae, theologian)",
+    "Zarathustra I, 'The Bestowing Virtue' (ch. 22)",
+    "Zarathustra I, 'Voluntary Death' (closing)",
+    "Zarathustra I, ch. 18",
+    "Zarathustra I, ch. 19 ('On the Adder's Bite')",
+    "Zarathustra I.5 'On the Joys and Passions' (1883)",
+    "Zarathustra II, 'The Soothsayer'",
+    "Zarathustra II, 'The Stillest Hour'",
+    "Zarathustra III, 'Old and New Tables'",
+    "Zarathustra III, 'The Three Evil Things' (ch. 54)",
+    "Zarathustra III, 'The Wanderer' → 'On the Vision and the Riddle'",
+    "at sea, returning from the Clark University trip",
+    "countryside (unspecified; early 19th c.)",
+    "dreamt at university; verified in a Spanish city",
+    "early Christian apocryphal tradition (cf. Origen)",
+    "eastern Black Forest (oral peasant tradition)",
+    "marketplace between two towers",
+    "monastery (Silesius, 1624-1677)",
+    "n/a (Nietzsche's solitude, written summer 1883)",
+    "n/a (attrib. Hermes Trismegistus)",
+    "northern California (Achomawi / Pit River people)",
+    "northern California (Fire Lakes, reached in sunset light)",
+    "picture in Wilhelm/Jung, The Secret of the Golden Flower (1929)",
+    "printed 1616 (pp. 15, 27, 39)",
+    "printed 1620",
+    "sign of Pisces / Bethlehem (tradition)",
+    "the Underworld (Odyssey, Nekyia)",
+    "the anchorite's solitude (Zarathustra I)",
+    "the city of the lustful (Zarathustra I)",
+    "the desert (Also sprach Zarathustra IV, 'Unter Töchtern der Wüste')",
+    "the forest (Zarathustra ch. 8)",
+    "the forest adjoining Zarathustra's mountain",
+    "the kennel under the heights (Zarathustra I)",
+    "the marketplace (Zarathustra's second sermon)",
+    "the marketplace; the rope over the abyss between house and church tower",
+    "the modern state (Zarathustra I)",
+    "the thick forest",
+    "the town adjoining the forest, the marketplace",
+    "the town gate",
+    "unknown (contemporary painter, Plate II)",
+    "unknown (contemporary painter, Plate III)",
+    "unknown provenance"
   ],
   "archetypesWithDefinition": [
     "self",
@@ -138,70 +510,3709 @@
     "trickster",
     "wise-old-man"
   ],
-  "skips": [],
+  "ocr": {
+    "vocabulary": {
+      "files": [
+        "cw01.md",
+        "cw02.md",
+        "cw03.md",
+        "cw04.md",
+        "cw05.md",
+        "cw06.md",
+        "cw07.md",
+        "cw08.md",
+        "cw09ii.md",
+        "cw10.md",
+        "cw11.md",
+        "cw12.md",
+        "cw14.md",
+        "cw15.md",
+        "cw16.md",
+        "cw17.md",
+        "cw18.md",
+        "letters-pauli.md",
+        "sem-1925.md",
+        "sem-childrens-dreams.md",
+        "sem-dream-analysis.md",
+        "sem-kundalini.md",
+        "sem-visions.md",
+        "sem-zarathustra.md",
+        "sup-zofingia.md",
+        "sync.md"
+      ],
+      "key": "a59175cc925c5917",
+      "words": 45768,
+      "cached": true
+    },
+    "stringsChanged": 164,
+    "changes": 557,
+    "byKind": {
+      "join": 514,
+      "curated": 29,
+      "reflow": 13,
+      "hyphen-break": 1
+    },
+    "unique": 389,
+    "residual": 3,
+    "residualSuspects": [
+      {
+        "where": "occ:coronis-crow-maiden-asklepios-birth-greece.body[0]",
+        "kind": "split-word",
+        "token": "the rapist",
+        "context": "kin of the rapist Ixion"
+      },
+      {
+        "where": "occ:redeemer-figure-manda-dhaje-mandean-john-book.quote",
+        "kind": "stray-letter",
+        "token": "d",
+        "context": "Manda d 'haje, meaning"
+      },
+      {
+        "where": "occ:saturn-invocation-jewish-dress-ghaya-al-hakim-1000.quote",
+        "kind": "stray-letter",
+        "token": "à",
+        "context": "\\\"Arrive vêtu à la manière"
+      }
+    ],
+    "samples": [
+      {
+        "kind": "join",
+        "before": "m an",
+        "after": "man",
+        "count": 14,
+        "where": [
+          "occ:atman-self-light-yajnavalkya-brihadaranyaka-700bc.quote",
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]",
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Th e",
+        "after": "The",
+        "count": 13,
+        "where": [
+          "occ:hermaphrodite-statue-fish-meal-bm-add-15268-13c.quote",
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]",
+          "occ:quaternion-ezekiel-merkabah-vision-jerusalem-6cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "th e",
+        "after": "the",
+        "count": 10,
+        "where": [
+          "occ:filius-regis-mystagogue-lambspringk-musaeum-1678.quote",
+          "occ:leonardo-st-anne-virgin-child-1510.body[0]",
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "nam ed",
+        "after": "named",
+        "count": 7,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[0]",
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[0]",
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bu t",
+        "after": "but",
+        "count": 6,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]",
+          "occ:tree-picture-animus-gambler-patient-1935.body[1]",
+          "occ:tree-picture-lotus-gnome-corona-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an,",
+        "after": "man,",
+        "count": 6,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]",
+          "occ:deification-know-thyself-hippolytus-3c.body[0]",
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "pow er",
+        "after": "power",
+        "count": 6,
+        "where": [
+          "occ:lion-rose-blood-khunrath-chaos-1597.body[0]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dow n",
+        "after": "down",
+        "count": 5,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]",
+          "occ:tree-bata-acacia-egypt-19dyn.body[0]",
+          "occ:tree-bata-acacia-egypt-19dyn.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "fem inine",
+        "after": "feminine",
+        "count": 5,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[1]",
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]",
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "grow s",
+        "after": "grows",
+        "count": 5,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]",
+          "occ:tree-gaokerena-vourukasha-persia.body[2]",
+          "occ:tree-sun-moon-island-mylius-1622.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "him self",
+        "after": "himself",
+        "count": 5,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[0]",
+          "occ:anthropos-man-of-light-zosimos-panopolis-3c.quote",
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know ledge",
+        "after": "knowledge",
+        "count": 5,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]",
+          "occ:tree-baruch-wood-of-life-justin-2c.body[2]",
+          "occ:tree-gnosis-barbeliots-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Prim ordial",
+        "after": "Primordial",
+        "count": 5,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[0]",
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[1]",
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "wom an",
+        "after": "woman",
+        "count": 5,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]",
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[2]",
+          "occ:tree-picture-animus-gambler-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"Th e",
+        "after": "\"The",
+        "count": 4,
+        "where": [
+          "occ:mercurius-four-forms-astrampsychos-pgm-egypt.body[1]",
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "becom e",
+        "after": "become",
+        "count": 4,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]",
+          "occ:deification-know-thyself-hippolytus-3c.body[2]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com e",
+        "after": "come",
+        "count": 4,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]",
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]",
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "elem ents",
+        "after": "elements",
+        "count": 4,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[1]",
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]",
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hum an",
+        "after": "human",
+        "count": 4,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m asculine",
+        "after": "masculine",
+        "count": 4,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]",
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]",
+          "occ:tree-picture-animus-gambler-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ost",
+        "after": "most",
+        "count": 4,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]",
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[2]",
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sam e",
+        "after": "same",
+        "count": 4,
+        "where": [
+          "occ:tree-gnosis-barbeliots-2c.body[1]",
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]",
+          "occ:tree-sun-moon-island-mylius-1622.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "alchem ical",
+        "after": "alchemical",
+        "count": 3,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[1]",
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[1]",
+          "occ:tree-life-father-god-nelken-schizophrenia-1912.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "am ong",
+        "after": "among",
+        "count": 3,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]",
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com plete",
+        "after": "complete",
+        "count": 3,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]",
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[1]",
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ade",
+        "after": "made",
+        "count": 3,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]",
+          "occ:marriage-of-the-lamb-revelation-patmos-95.quote",
+          "occ:tree-gnosis-barbeliots-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etals",
+        "after": "metals",
+        "count": 3,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[0]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[1]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m icrocosm",
+        "after": "microcosm",
+        "count": 3,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]",
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[2]",
+          "occ:water-zosimos-divine-water-hen-to-pan-alexandria-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m idst",
+        "after": "midst",
+        "count": 3,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[2]",
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m y",
+        "after": "my",
+        "count": 3,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]",
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sham an",
+        "after": "shaman",
+        "count": 3,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]",
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[1]",
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w orld",
+        "after": "world",
+        "count": 3,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]",
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "an d",
+        "after": "and",
+        "count": 2,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bath tub",
+        "after": "bathtub",
+        "count": 2,
+        "where": [
+          "occ:body-alienation-bathtub-girl-balloon-dream-1933.body[0]",
+          "occ:dream-balloon-rifle-girl-body-zurich-1934.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "be in g",
+        "after": "being",
+        "count": 2,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]",
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "beau tiful",
+        "after": "beautiful",
+        "count": 2,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]",
+          "occ:rose-mechthild-five-petalled-breast-13c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com bined",
+        "after": "combined",
+        "count": 2,
+        "where": [
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]",
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com mon",
+        "after": "common",
+        "count": 2,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com paring",
+        "after": "comparing",
+        "count": 2,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]",
+          "occ:tree-sefiroth-inverted-cabala-1677.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "contem plationis\"",
+        "after": "contemplationis\"",
+        "count": 2,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[0]",
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "daem onic",
+        "after": "daemonic",
+        "count": 2,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[0]",
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "drea m",
+        "after": "dream",
+        "count": 2,
+        "where": [
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[0]",
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "em pty",
+        "after": "empty",
+        "count": 2,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]",
+          "occ:sophia-achamoth-fall-plenum-2c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "exanim ated,",
+        "after": "exanimated,",
+        "count": 2,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]",
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "in stead",
+        "after": "instead",
+        "count": 2,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]",
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "in to ex isten ce in de p en d en tly",
+        "after": "into existence independently",
+        "count": 2,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]",
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know n",
+        "after": "known",
+        "count": 2,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]",
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m acrocosm i,",
+        "after": "macrocosmi,",
+        "count": 2,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]",
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m agnet",
+        "after": "magnet",
+        "count": 2,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]",
+          "occ:tree-sun-moon-island-mylius-1622.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ake",
+        "after": "make",
+        "count": 2,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an.",
+        "after": "man.",
+        "count": 2,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[2]",
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an's",
+        "after": "man's",
+        "count": 2,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]",
+          "occ:tree-wisdom-enoch-western-land-2cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an\"",
+        "after": "man\"",
+        "count": 2,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[0]",
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m aterial",
+        "after": "material",
+        "count": 2,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ay",
+        "after": "may",
+        "count": 2,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[1]",
+          "occ:mercurius-rebirth-poem-verus-hermes-1620.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m edieval",
+        "after": "medieval",
+        "count": 2,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[1]",
+          "occ:tree-wisdom-enoch-western-land-2cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etallic",
+        "after": "metallic",
+        "count": 2,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m idway",
+        "after": "midway",
+        "count": 2,
+        "where": [
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m onstrous",
+        "after": "monstrous",
+        "count": 2,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m oral",
+        "after": "moral",
+        "count": 2,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[1]",
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m otherly",
+        "after": "motherly",
+        "count": 2,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]",
+          "occ:tree-baruch-wood-of-life-justin-2c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ust",
+        "after": "must",
+        "count": 2,
+        "where": [
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[0]",
+          "occ:spirit-in-bottle-grimm-germany-1815.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ystical",
+        "after": "mystical",
+        "count": 2,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]",
+          "occ:tree-sefiroth-inverted-cabala-1677.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "pow ers",
+        "after": "powers",
+        "count": 2,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[0]",
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "q u ite",
+        "after": "quite",
+        "count": 2,
+        "where": [
+          "occ:tree-life-father-god-nelken-schizophrenia-1912.body[1]",
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "represents am an.",
+        "after": "represents a man.",
+        "count": 2,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]",
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[2]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "sunand-m oon",
+        "after": "sun-and-moon",
+        "count": 2,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]",
+          "occ:tree-sun-moon-island-mylius-1622.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "th ird",
+        "after": "third",
+        "count": 2,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]",
+          "occ:tree-baruch-wood-of-life-justin-2c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "tim es",
+        "after": "times",
+        "count": 2,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "transform ation",
+        "after": "transformation",
+        "count": 2,
+        "where": [
+          "occ:tree-zosimos-well-tended-plant-alexandria-3c.body[1]",
+          "occ:tree-zosimos-well-tended-plant-alexandria-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w onderful",
+        "after": "wonderful",
+        "count": 2,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]",
+          "occ:tree-sun-moon-island-mylius-1622.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w orld-tree.",
+        "after": "world-tree.",
+        "count": 2,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]",
+          "occ:tree-sefiroth-inverted-cabala-1677.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "wom b,",
+        "after": "womb,",
+        "count": 2,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]",
+          "occ:tree-dorn-genealogia-mineralium-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "'Ich bin dein Labyrinth'",
+        "after": "'Ich bind ein Labyrinth'",
+        "count": 1,
+        "where": [
+          "occ:labyrinth-ariadne-naxos-nietzsche-1888.title"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "'J ahveh'",
+        "after": "'Jahveh'",
+        "count": 1,
+        "where": [
+          "occ:god-image-burning-bush-jahveh-exodus-3-horeb-1250bce.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "'stage coach'",
+        "after": "'stagecoach'",
+        "count": 1,
+        "where": [
+          "occ:carriage-train-falls-dream-anna-1909.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"alm ost",
+        "after": "\"almost",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"c o rre sp on d s",
+        "after": "\"corresponds",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"clover leaf\"",
+        "after": "\"cloverleaf\"",
+        "count": 1,
+        "where": [
+          "occ:anima-unknown-woman-diffraction-dream-1955.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"discrim inate",
+        "after": "\"discriminate",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"ex illis\"",
+        "after": "\"exillis\"",
+        "count": 1,
+        "where": [
+          "occ:grail-lapsit-exillis-wolfram-1210.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "“H erm",
+        "after": "“Herm",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-sapphire-uroboros-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"H orus",
+        "after": "\"Horus",
+        "count": 1,
+        "where": [
+          "occ:quaternion-ezekiel-merkabah-vision-jerusalem-6cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"m an",
+        "after": "\"man",
+        "count": 1,
+        "where": [
+          "occ:anthropos-man-rising-from-river-splendor-solis-germany-1532.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"m an's",
+        "after": "\"man's",
+        "count": 1,
+        "where": [
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"M an's",
+        "after": "\"Man's",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"m ixed",
+        "after": "\"mixed",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"m uch",
+        "after": "\"much",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"nam ed",
+        "after": "\"named",
+        "count": 1,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"show ing",
+        "after": "\"showing",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"Sym posium",
+        "after": "\"Symposium",
+        "count": 1,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "\"Th ese",
+        "after": "\"These",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "\"the c o unte rpa rto f Osiris\"",
+        "after": "\"the counterpart of Osiris\"",
+        "count": 1,
+        "where": [
+          "occ:quaternion-ezekiel-merkabah-vision-jerusalem-6cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "(T he",
+        "after": "(The",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-birth-black-sun-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "(Tim aeus",
+        "after": "(Timaeus",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "(Windischm ann,",
+        "after": "(Windischmann,",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "a kin do f",
+        "after": "a kind of",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "a lone",
+        "after": "alone",
+        "count": 1,
+        "where": [
+          "occ:ufo-drop-champs-elysees-dream-paris-1957.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "A nahita.",
+        "after": "Anahita.",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "A nthropos\"",
+        "after": "Anthropos\"",
+        "count": 1,
+        "where": [
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "a u to c h th on o us",
+        "after": "autochthonous",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "acosm ic",
+        "after": "acosmic",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "adeep",
+        "after": "a deep",
+        "count": 1,
+        "where": [
+          "occ:hymn-of-the-pearl-bardesanes-2c.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "aface",
+        "after": "a face",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[2]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "aflower",
+        "after": "a flower",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-birth-black-sun-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Ahrim anic",
+        "after": "Ahrimanic",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "alch em ical",
+        "after": "alchemical",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "alchem ists.",
+        "after": "alchemists.",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "alchem y\"",
+        "after": "alchemy\"",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Alm ighty",
+        "after": "Almighty",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "alm ost",
+        "after": "almost",
+        "count": 1,
+        "where": [
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "am asculine",
+        "after": "a masculine",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "am odern",
+        "after": "a modern",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Am ong",
+        "after": "Among",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "am ountain",
+        "after": "a mountain",
+        "count": 1,
+        "where": [
+          "occ:filius-regis-mystagogue-lambspringk-musaeum-1678.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "am plify",
+        "after": "amplify",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-sun-quaternity-rivers-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "anim a",
+        "after": "anima",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "anim ating",
+        "after": "animating",
+        "count": 1,
+        "where": [
+          "occ:tree-simon-magus-supracelestial-fire-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "aone-legged",
+        "after": "a one-legged",
+        "count": 1,
+        "where": [
+          "occ:senex-one-sided-old-man-siberian-tale.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "ArdvI Sura",
+        "after": "Ardvi Sura",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "arm s",
+        "after": "arms",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "astream",
+        "after": "a stream",
+        "count": 1,
+        "where": [
+          "occ:fish-moses-joshua-two-seas-quran-18-arabia-7c.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "aT yrian",
+        "after": "a Tyrian",
+        "count": 1,
+        "where": [
+          "occ:simon-magus-helen-tyre-2c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "auth en tic",
+        "after": "authentic",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "aw atered",
+        "after": "a watered",
+        "count": 1,
+        "where": [
+          "occ:tree-zosimos-well-tended-plant-alexandria-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Bar do",
+        "after": "Bardo",
+        "count": 1,
+        "where": [
+          "fam:bardo.aliases[6]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "be in g\"",
+        "after": "being\"",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "becom es",
+        "after": "becomes",
+        "count": 1,
+        "where": [
+          "occ:tree-wisdom-enoch-western-land-2cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bedcham ber",
+        "after": "bedchamber",
+        "count": 1,
+        "where": [
+          "occ:venus-episode-chymical-wedding-strasbourg-1616.quote"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "being taken fro mA dam's side,",
+        "after": "being taken from Adam's side,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "being taken fro mA dam’s side,",
+        "after": "being taken from Adam’s side,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bew ilderment,",
+        "after": "bewilderment,",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bib lic al",
+        "after": "biblical",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "blossom ing",
+        "after": "blossoming",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-gnome-corona-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "bot tom",
+        "after": "bottom",
+        "count": 1,
+        "where": [
+          "occ:hymn-of-the-pearl-bardesanes-2c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "c h ild",
+        "after": "child",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "C hrist,",
+        "after": "Christ,",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "C hrist\"",
+        "after": "Christ\"",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "c re a tio nof",
+        "after": "creation of",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "cam e",
+        "after": "came",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "chem icae",
+        "after": "chemicae",
+        "count": 1,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "chess board\"",
+        "after": "chessboard\"",
+        "count": 1,
+        "where": [
+          "occ:god-impersonator-sacrificed-sunset-mexico-babylonia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "clim bed",
+        "after": "climbed",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-boy-dragons-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "clim bs",
+        "after": "climbs",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com bative",
+        "after": "combative",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com e,",
+        "after": "come,",
+        "count": 1,
+        "where": [
+          "occ:marriage-of-the-lamb-revelation-patmos-95.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com m entariis:",
+        "after": "commentariis:",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com pelled",
+        "after": "compelled",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "com plex",
+        "after": "complex",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "contem plated",
+        "after": "contemplated",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "cor pore.",
+        "after": "corpore.",
+        "count": 1,
+        "where": [
+          "occ:melusina-anima-ripley-scrowle-bm-sloane-5025-1588.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "d re w",
+        "after": "drew",
+        "count": 1,
+        "where": [
+          "occ:mandala-university-trained-woman-golden-flower-fig-a4-1928.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "d up lex\"",
+        "after": "duplex\"",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "da m's",
+        "after": "dam's",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "da m’s",
+        "after": "dam’s",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "da n",
+        "after": "dan",
+        "count": 1,
+        "where": [
+          "occ:hermes-hymn-magic-papyrus-egypt-3c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "de mon",
+        "after": "demon",
+        "count": 1,
+        "where": [
+          "occ:quaternity-preacher-french-formulas-dream-1955.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "determ ined",
+        "after": "determined",
+        "count": 1,
+        "where": [
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dew fall",
+        "after": "dewfall",
+        "count": 1,
+        "where": [
+          "occ:dew-gideon-fleece-sign-israel-1100bce.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "diam eter,",
+        "after": "diameter,",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dilem m a",
+        "after": "dilemma",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dim ensions...",
+        "after": "dimensions...",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dow n,",
+        "after": "down,",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dow nward",
+        "after": "downward",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "em blema",
+        "after": "emblema",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "em erging",
+        "after": "emerging",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "em phasis",
+        "after": "emphasis",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Emblem ata",
+        "after": "Emblemata",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "en tered",
+        "after": "entered",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "en titled",
+        "after": "entitled",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "enlighten er\";",
+        "after": "enlightener\";",
+        "count": 1,
+        "where": [
+          "occ:quaternion-ezekiel-merkabah-vision-jerusalem-6cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "enlightenm ent...",
+        "after": "enlightenment...",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "Enthym esis",
+        "after": "Enthymesis",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "everyw here,",
+        "after": "everywhere,",
+        "count": 1,
+        "where": [
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "ex p er ie n ce",
+        "after": "experience",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "exam ple",
+        "after": "example",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "exam ples",
+        "after": "examples",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "F rench",
+        "after": "French",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "fem ale,",
+        "after": "female,",
+        "count": 1,
+        "where": [
+          "occ:water-zosimos-divine-water-hen-to-pan-alexandria-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "ferm ent",
+        "after": "ferment",
+        "count": 1,
+        "where": [
+          "occ:tree-zosimos-well-tended-plant-alexandria-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "filom ena,",
+        "after": "filomena,",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "firm am ent",
+        "after": "firmament",
+        "count": 1,
+        "where": [
+          "occ:quaternion-ezekiel-merkabah-vision-jerusalem-6cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "fo r",
+        "after": "for",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "for e)",
+        "after": "fore)",
+        "count": 1,
+        "where": [
+          "occ:light-ericipaeus-hymn-dream-patient-1918.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "for e).",
+        "after": "fore).",
+        "count": 1,
+        "where": [
+          "occ:light-ericipaeus-hymn-dream-patient-1918.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "form ed",
+        "after": "formed",
+        "count": 1,
+        "where": [
+          "occ:secret-inscription-magic-papyrus-paris-egypt-4c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "form s",
+        "after": "forms",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "G ilgam esh,",
+        "after": "Gilgamesh,",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "gem inae",
+        "after": "geminae",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Germ any",
+        "after": "Germany",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "gnaw ing",
+        "after": "gnawing",
+        "count": 1,
+        "where": [
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "gnom elike",
+        "after": "gnomelike",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-gnome-corona-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "gol den",
+        "after": "golden",
+        "count": 1,
+        "where": [
+          "occ:mandala-miss-x-picture-2-lightning-rotundum-1928.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "grow ing",
+        "after": "growing",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-birth-black-sun-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Hauptproblem e",
+        "after": "Hauptprobleme",
+        "count": 1,
+        "where": [
+          "occ:anthropos-bait-manichaean-primordial-man-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "he rm a p h ro dite",
+        "after": "hermaphrodite",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Hegem onius's",
+        "after": "Hegemonius's",
+        "count": 1,
+        "where": [
+          "occ:tree-gnosis-barbeliots-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "herm aphrodite",
+        "after": "hermaphrodite",
+        "count": 1,
+        "where": [
+          "occ:hermaphrodite-statue-fish-meal-bm-add-15268-13c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Herm etic",
+        "after": "Hermetic",
+        "count": 1,
+        "where": [
+          "occ:patrizi-hermes-gregory-rome-1591.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Him alaya",
+        "after": "Himalaya",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "him self,",
+        "after": "himself,",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hu m anist",
+        "after": "humanist",
+        "count": 1,
+        "where": [
+          "occ:patrizi-hermes-gregory-rome-1591.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hum anist",
+        "after": "humanist",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hum anity",
+        "after": "humanity",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hum anity,",
+        "after": "humanity,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "hum ble",
+        "after": "humble",
+        "count": 1,
+        "where": [
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "I n.",
+        "after": "In.",
+        "count": 1,
+        "where": [
+          "occ:resurrection-gloria-mundi-stone-reborn-1622.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "ibi enim existens est",
+        "after": "ibi enim exist ens est",
+        "count": 1,
+        "where": [
+          "occ:crown-shekinah-diadem-malchuth-kether-1677.quote"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "Ich bin dein Labyrinth.\"",
+        "after": "Ich bind ein Labyrinth.\"",
+        "count": 1,
+        "where": [
+          "occ:labyrinth-ariadne-naxos-nietzsche-1888.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "id en ti fy",
+        "after": "identify",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "im age",
+        "after": "image",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "im m ediately",
+        "after": "immediately",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "im m ortality,",
+        "after": "immortality,",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "im planted",
+        "after": "implanted",
+        "count": 1,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "in d icated",
+        "after": "indicated",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "in the up per world",
+        "after": "in the upper world",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "In to this world",
+        "after": "Into this world",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "indep endence",
+        "after": "independence",
+        "count": 1,
+        "where": [
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "instrum ent",
+        "after": "instrument",
+        "count": 1,
+        "where": [
+          "occ:tree-bata-acacia-egypt-19dyn.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "intercom m unicating",
+        "after": "intercommunicating",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "interm ediate",
+        "after": "intermediate",
+        "count": 1,
+        "where": [
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "J ahveh",
+        "after": "Jahveh",
+        "count": 1,
+        "where": [
+          "occ:dew-gideon-fleece-sign-israel-1100bce.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "J am es.",
+        "after": "James.",
+        "count": 1,
+        "where": [
+          "occ:mandala-hasjelti-dailjis-navaho-sand-painting-1887.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "ju st",
+        "after": "just",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "K hidr",
+        "after": "Khidr",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know eth",
+        "after": "knoweth",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know ing",
+        "after": "knowing",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know ledge,",
+        "after": "knowledge,",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know ledge:",
+        "after": "knowledge:",
+        "count": 1,
+        "where": [
+          "occ:tree-gnosis-barbeliots-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know ledge\"",
+        "after": "knowledge\"",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "know n,",
+        "after": "known,",
+        "count": 1,
+        "where": [
+          "occ:tree-gnosis-barbeliots-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Lam b",
+        "after": "Lamb",
+        "count": 1,
+        "where": [
+          "occ:marriage-of-the-lamb-revelation-patmos-95.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "lam b,",
+        "after": "lamb,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "lea st",
+        "after": "least",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "lim bs\".",
+        "after": "limbs\".",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "lis rescued",
+        "after": "is rescued",
+        "count": 1,
+        "where": [
+          "occ:simon-magus-helen-tyre-2c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Lo rd",
+        "after": "Lord",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ’s",
+        "after": "m’s",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m acrocosm",
+        "after": "macrocosm",
+        "count": 1,
+        "where": [
+          "occ:water-zosimos-divine-water-hen-to-pan-alexandria-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m agic",
+        "after": "magic",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "M agus",
+        "after": "Magus",
+        "count": 1,
+        "where": [
+          "occ:simon-magus-helen-tyre-2c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m akes",
+        "after": "makes",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "M alchuth;",
+        "after": "Malchuth;",
+        "count": 1,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ale",
+        "after": "male",
+        "count": 1,
+        "where": [
+          "occ:water-zosimos-divine-water-hen-to-pan-alexandria-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an;",
+        "after": "man;",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m an\".",
+        "after": "man\".",
+        "count": 1,
+        "where": [
+          "occ:tree-nebuchadnezzar-dream-babylon-6cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "M and",
+        "after": "Mand",
+        "count": 1,
+        "where": [
+          "occ:senex-figure-pauli-seven-diamonds-dream-zurich-1936.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m andala",
+        "after": "mandala",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ankind\"",
+        "after": "mankind\"",
+        "count": 1,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m anna,",
+        "after": "manna,",
+        "count": 1,
+        "where": [
+          "occ:tree-wisdom-enoch-western-land-2cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m anner,",
+        "after": "manner,",
+        "count": 1,
+        "where": [
+          "occ:melusina-de-vita-longa-final-chapter-1526.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "M aria",
+        "after": "Maria",
+        "count": 1,
+        "where": [
+          "occ:rebis-hermaphrodite-rosarium-1550.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m arriage",
+        "after": "marriage",
+        "count": 1,
+        "where": [
+          "occ:marriage-of-the-lamb-revelation-patmos-95.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ass",
+        "after": "mass",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m assa",
+        "after": "massa",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ateria",
+        "after": "materia",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m aterial:",
+        "after": "material:",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m aternal",
+        "after": "maternal",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m e",
+        "after": "me",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m e...",
+        "after": "me...",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m e\",",
+        "after": "me\",",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m eans",
+        "after": "means",
+        "count": 1,
+        "where": [
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m edia",
+        "after": "media",
+        "count": 1,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m eeting",
+        "after": "meeting",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m en",
+        "after": "men",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m entions",
+        "after": "mentions",
+        "count": 1,
+        "where": [
+          "occ:soul-glass-vessel-caesarius-heisterbach-1220.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etallorum",
+        "after": "metallorum",
+        "count": 1,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etals;",
+        "after": "metals;",
+        "count": 1,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "M etals\"",
+        "after": "Metals\"",
+        "count": 1,
+        "where": [
+          "occ:rebis-book-of-holy-trinity-munich-1420.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etals\";",
+        "after": "metals\";",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m etals]",
+        "after": "metals]",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ighty",
+        "after": "mighty",
+        "count": 1,
+        "where": [
+          "occ:spirit-in-bottle-grimm-germany-1815.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ineralium\"",
+        "after": "mineralium\"",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m irror",
+        "after": "mirror",
+        "count": 1,
+        "where": [
+          "occ:tree-man-inverted-alciati-emblemata-1531.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m oist",
+        "after": "moist",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m om ent",
+        "after": "moment",
+        "count": 1,
+        "where": [
+          "occ:patrizi-hermes-gregory-rome-1591.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m oon.\"",
+        "after": "moon.\"",
+        "count": 1,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m oon\"",
+        "after": "moon\"",
+        "count": 1,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ore",
+        "after": "more",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ortality",
+        "after": "mortality",
+        "count": 1,
+        "where": [
+          "occ:tree-wisdom-enoch-western-land-2cbce.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m otif",
+        "after": "motif",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ountain\"",
+        "after": "mountain\"",
+        "count": 1,
+        "where": [
+          "occ:lion-rose-blood-khunrath-chaos-1597.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ountain”",
+        "after": "mountain”",
+        "count": 1,
+        "where": [
+          "occ:lion-rose-blood-khunrath-chaos-1597.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ountains",
+        "after": "mountains",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ountains,",
+        "after": "mountains,",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m uch",
+        "after": "much",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "m ystique",
+        "after": "mystique",
+        "count": 1,
+        "where": [
+          "occ:rose-mechthild-five-petalled-breast-13c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "ma n da la,",
+        "after": "mandala,",
+        "count": 1,
+        "where": [
+          "occ:mandala-university-trained-woman-golden-flower-fig-a4-1928.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Me rc u riu s",
+        "after": "Mercurius",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "mo on,",
+        "after": "moon,",
+        "count": 1,
+        "where": [
+          "occ:hermes-hymn-magic-papyrus-egypt-3c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "mu s",
+        "after": "mus",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "my th",
+        "after": "myth",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "n ym p h",
+        "after": "nymph",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "na tu re",
+        "after": "nature",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "nam e",
+        "after": "name",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "nam es,",
+        "after": "names,",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "no t",
+        "after": "not",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-sun-quaternity-rivers-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "num en",
+        "after": "numen",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "o ut",
+        "after": "out",
+        "count": 1,
+        "where": [
+          "occ:melusina-lusignan-legend-france-1393.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "Oii p endaient Ies",
+        "after": "Où pendaient les",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "om nia",
+        "after": "omnia",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "p erson ally",
+        "after": "personally",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "P hanes...",
+        "after": "Phanes...",
+        "count": 1,
+        "where": [
+          "occ:mandala-modern-man-jung-zurich-1916.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "p rin c ip le",
+        "after": "principle",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "p ro v is io na lly",
+        "after": "provisionally",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "p s y ch o lo g ic al",
+        "after": "psychological",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Padm anabhapura",
+        "after": "Padmanabhapura",
+        "count": 1,
+        "where": [
+          "occ:senex-ithyphallicus-padmanabhapura-travancore-15c.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "pendaient Ies",
+        "after": "pendaient les",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "perm anens,",
+        "after": "permanens,",
+        "count": 1,
+        "where": [
+          "occ:tree-sun-moon-island-mylius-1622.body[1]"
+        ]
+      },
+      {
+        "kind": "hyphen-break",
+        "before": "person- ality",
+        "after": "personality",
+        "count": 1,
+        "where": [
+          "occ:medium-trance-personalities-helene-preiswerk-basel-1896.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "pneum atic",
+        "after": "pneumatic",
+        "count": 1,
+        "where": [
+          "occ:tree-simon-magus-supracelestial-fire-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "poe t",
+        "after": "poet",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "pow er\".",
+        "after": "power\".",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "pow erless",
+        "after": "powerless",
+        "count": 1,
+        "where": [
+          "occ:lapis-andalusian-prince-ostanes-arabic.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "presum ably",
+        "after": "presumably",
+        "count": 1,
+        "where": [
+          "occ:tree-abul-qasim-four-blossoms-iraq-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Presum ably",
+        "after": "Presumably",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "prim a",
+        "after": "prima",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "prim o rd ia l",
+        "after": "primordial",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "prim ordial",
+        "after": "primordial",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Prom etheus",
+        "after": "Prometheus",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "prom ised",
+        "after": "promised",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "q u atern ity",
+        "after": "quaternity",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "quatern ity",
+        "after": "quaternity",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "ratio n al",
+        "after": "rational",
+        "count": 1,
+        "where": [
+          "occ:chen-yen-true-man-wei-po-yang-china-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "rem ains",
+        "after": "remains",
+        "count": 1,
+        "where": [
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "rem in din gus",
+        "after": "reminding us",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-lotus-gnome-corona-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "Ro un dan d square...",
+        "after": "Round and square...",
+        "count": 1,
+        "where": [
+          "occ:hermes-hymn-magic-papyrus-egypt-3c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sam e\"",
+        "after": "same\"",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "Schamanenbaum \"",
+        "after": "Schamanenbaum\"",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "seco n d ary",
+        "after": "secondary",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-tree-born-eve-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sh or t-circuit,",
+        "after": "short-circuit,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sham an's",
+        "after": "shaman's",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Sham anism,",
+        "after": "Shamanism,",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "show ing",
+        "after": "showing",
+        "count": 1,
+        "where": [
+          "occ:tree-nakassa-inverted-shaman-east-siberia.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "show n",
+        "after": "shown",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "show s,",
+        "after": "shows,",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-corn-goddess-crucified-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "show s.",
+        "after": "shows.",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sim ilar",
+        "after": "similar",
+        "count": 1,
+        "where": [
+          "occ:tree-gnosis-barbeliots-2c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sim ply",
+        "after": "simply",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "som a\"",
+        "after": "soma\"",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "som e",
+        "after": "some",
+        "count": 1,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sow ing",
+        "after": "sowing",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "St ev en so n,",
+        "after": "Stevenson,",
+        "count": 1,
+        "where": [
+          "occ:mandala-hasjelti-dailjis-navaho-sand-painting-1887.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "succum bed",
+        "after": "succumbed",
+        "count": 1,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sum m it",
+        "after": "summit",
+        "count": 1,
+        "where": [
+          "occ:tree-sefiroth-inverted-cabala-1677.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sum m on",
+        "after": "summon",
+        "count": 1,
+        "where": [
+          "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "suprem e",
+        "after": "supreme",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Suprem e",
+        "after": "Supreme",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[0]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "sxvord",
+        "after": "sword",
+        "count": 1,
+        "where": [
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sym bol",
+        "after": "symbol",
+        "count": 1,
+        "where": [
+          "occ:dragon-head-christ-scriptum-alberti-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "sym bolizes",
+        "after": "symbolizes",
+        "count": 1,
+        "where": [
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "T em ptation",
+        "after": "Temptation",
+        "count": 1,
+        "where": [
+          "occ:filius-regis-mystagogue-lambspringk-musaeum-1678.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "T ransm utation",
+        "after": "Transmutation",
+        "count": 1,
+        "where": [
+          "occ:rebis-book-of-holy-trinity-munich-1420.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "T wo",
+        "after": "Two",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-boy-dragons-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "taxi fare reclaimed and",
+        "after": "tax if are re claimed and",
+        "count": 1,
+        "where": [
+          "occ:happy-neurosis-island-washing-case-zurich.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "tem peram ents,",
+        "after": "temperaments,",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "tem ple",
+        "after": "temple",
+        "count": 1,
+        "where": [
+          "occ:senex-ithyphallicus-padmanabhapura-travancore-15c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "term s,",
+        "after": "terms,",
+        "count": 1,
+        "where": [
+          "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "testim ony",
+        "after": "testimony",
+        "count": 1,
+        "where": [
+          "occ:tree-greverus-secretum-opus-garden-leiden-1588.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "th at",
+        "after": "that",
+        "count": 1,
+        "where": [
+          "occ:filius-macrocosmi-aquarium-sapientum-1608.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Th at",
+        "after": "That",
+        "count": 1,
+        "where": [
+          "occ:mercurius-rebirth-poem-verus-hermes-1620.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "th eir",
+        "after": "their",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "th eN aas.",
+        "after": "the Naas.",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[2]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "th eN aas\"",
+        "after": "the Naas\"",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Th ey",
+        "after": "They",
+        "count": 1,
+        "where": [
+          "occ:tree-contemplation-palm-seven-birds-basel-ms.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "th o ught",
+        "after": "thought",
+        "count": 1,
+        "where": [
+          "occ:tree-dorn-genealogia-mineralium-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "the Greek ton arton ton epiousion,",
+        "after": "the Greek ton art on tone pious ion,",
+        "count": 1,
+        "where": [
+          "occ:bread-epiousion-lords-prayer-matthew-1c.body[0]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "the same tim ea candelabrum.",
+        "after": "the same time a candelabrum.",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-light-candelabrum-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "tim e",
+        "after": "time",
+        "count": 1,
+        "where": [
+          "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "to identify th ea ni mus at",
+        "after": "to identify the animus at",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "topm ost",
+        "after": "topmost",
+        "count": 1,
+        "where": [
+          "occ:tree-bata-acacia-egypt-19dyn.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "transform ation\"",
+        "after": "transformation\"",
+        "count": 1,
+        "where": [
+          "occ:tree-bata-acacia-egypt-19dyn.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "transm utation",
+        "after": "transmutation",
+        "count": 1,
+        "where": [
+          "occ:deification-know-thyself-hippolytus-3c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "transm utatione",
+        "after": "transmutatione",
+        "count": 1,
+        "where": [
+          "occ:putissimus-homo-rose-blood-dorn-congeries-16c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Trin ity",
+        "after": "Trinity",
+        "count": 1,
+        "where": [
+          "occ:rebis-book-of-holy-trinity-munich-1420.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "tw oedged",
+        "after": "two-edged",
+        "count": 1,
+        "where": [
+          "occ:tree-golden-hook-dorn-speculativa-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "un io n",
+        "after": "union",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "un know n",
+        "after": "unknown",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "unknow n",
+        "after": "unknown",
+        "count": 1,
+        "where": [
+          "occ:hermaphrodite-statue-fish-meal-bm-add-15268-13c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "untim ely",
+        "after": "untimely",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w ho",
+        "after": "who",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w oman-trunk).",
+        "after": "woman-trunk).",
+        "count": 1,
+        "where": [
+          "occ:tree-yakut-eight-branches-first-man-siberia.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w orld,",
+        "after": "world,",
+        "count": 1,
+        "where": [
+          "occ:ashvattha-inverted-tree-bhagavadgita-india.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "w orld\"",
+        "after": "world\"",
+        "count": 1,
+        "where": [
+          "occ:sophia-achamoth-fall-plenum-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "wie der",
+        "after": "wieder",
+        "count": 1,
+        "where": [
+          "occ:divine-child-sleeping-gods-holderlin-hyperion-1797.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "wo ma n,",
+        "after": "woman,",
+        "count": 1,
+        "where": [
+          "occ:mandala-university-trained-woman-golden-flower-fig-a4-1928.body[1]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "wom an\"",
+        "after": "woman\"",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Zosim os",
+        "after": "Zosimos",
+        "count": 1,
+        "where": [
+          "occ:tree-zosimos-well-tended-plant-alexandria-3c.body[2]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Zosim os,",
+        "after": "Zosimos,",
+        "count": 1,
+        "where": [
+          "occ:lion-rose-blood-khunrath-chaos-1597.body[1]"
+        ]
+      }
+    ]
+  },
+  "skips": [
+    {
+      "kind": "instance",
+      "id": "dragon-chinese-inscription-sleeping-earth-undated",
+      "reason": "no usable year (year_display: undated (ancient Chinese inscription; Jung quotes from memory))"
+    },
+    {
+      "kind": "instance",
+      "id": "mamba-attack-dream-friend-jung-zurich-c1930s",
+      "reason": "no usable year (year_display: two months before the event; undated)"
+    },
+    {
+      "kind": "instance",
+      "id": "medicine-wheel-bighorn-wyoming-prehistoric",
+      "reason": "year -12939 out of range"
+    },
+    {
+      "kind": "instance",
+      "id": "rainbow-shepherd-sky-transylvania-legend",
+      "reason": "no usable year (year_display: old legend, undated (inferred))"
+    },
+    {
+      "kind": "instance",
+      "id": "wild-horse-chandelier-death-dreams-child-zurich-c1930s",
+      "reason": "no usable year (year_display: before the fatal illness; undated)"
+    }
+  ],
   "warnings": [
-    "frontmatter repaired field-by-field: antichrist",
-    "frontmatter repaired field-by-field: anthropos-basilides-three-sonships-elenchos-2c",
-    "frontmatter repaired field-by-field: ascent-descent-platonis-liber-quartorum",
-    "frontmatter repaired field-by-field: aurora-consurgens-sapientia-dei-14c",
-    "frontmatter repaired field-by-field: cantilena-riplaei-sterile-king-15c",
-    "frontmatter repaired field-by-field: christ-figure-pistis-sophia-vineyard-egypt-3c",
-    "frontmatter repaired field-by-field: christ-figure-valentinus-shadow-rome-140",
-    "frontmatter repaired field-by-field: coniunctio-miss-x-picture-14-royal-pair-1929",
-    "frontmatter repaired field-by-field: dragon-lambspringk-fire-musaeum-hermeticum-1625",
-    "frontmatter repaired field-by-field: dragon-zodiac-codex-vaticanus-190",
-    "frontmatter repaired field-by-field: dream-child-four-gods-horned-animal-1939",
-    "frontmatter repaired field-by-field: dream-miss-x-eye-fleck-golden-lamp-1928",
-    "frontmatter repaired field-by-field: dual-mother-abraham-toddler-two-mamas-berlin",
-    "frontmatter repaired field-by-field: egg-rigveda-nasadiya-hidden-one",
-    "frontmatter repaired field-by-field: ethiopian-treatise-creation-rainwater-17c",
-    "frontmatter repaired field-by-field: filius-macrocosmi-khunrath-amphitheatrum-1595",
-    "frontmatter repaired field-by-field: filius-regis-mystagogue-lambspringk-musaeum-1678",
-    "frontmatter repaired field-by-field: fish-abericius-inscription-phrygia-3c",
-    "frontmatter repaired field-by-field: fish-round-fish-allegoriae-turba-11c",
-    "frontmatter repaired field-by-field: fish-tanninim-prophecy-rashi-talmud",
-    "frontmatter repaired field-by-field: gnosis-justin-twelve-angels-baruch-naas-elenchos-2c",
-    "frontmatter repaired field-by-field: god-image-riklin-megalomania-light-wind-zurich",
-    "frontmatter repaired field-by-field: hermes-hymn-magic-papyrus-egypt-3c",
-    "frontmatter repaired field-by-field: holy-ghost-joachim-third-aeon-1202",
-    "frontmatter repaired field-by-field: homunculi-souls-codex-rhenoviensis-15c",
-    "frontmatter repaired field-by-field: mandala-1916-world-creation-four-lines-1916",
-    "frontmatter repaired field-by-field: mandala-boehme-xl-questions-1620",
-    "frontmatter repaired field-by-field: mandala-depression-black-homunculus-1920c",
-    "frontmatter repaired field-by-field: mandala-embroidery-dream-stone-spiral-1930c",
-    "frontmatter repaired field-by-field: mandala-girl-11-devil-uroboros-1930c",
-    "frontmatter repaired field-by-field: mandala-liverpool-dream-ruby-rose-1927",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-10-crab-solstice-1929",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-2-lightning-rotundum-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-3-quicksilver-snake-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-4-serpent-fecundation-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-5-quaternity-eddies-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-7-black-centre-cross-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-8-double-quaternity-1928",
-    "frontmatter repaired field-by-field: mandala-miss-x-picture-9-soul-flower-hexagrams-1928",
-    "frontmatter repaired field-by-field: melchior-cibinensis-alchemical-mass-16c",
-    "frontmatter repaired field-by-field: melusina-pandora-woodcut-basel-1588",
-    "frontmatter repaired field-by-field: mercurius-dragon-monologue-aurelia-occulta-1659",
-    "frontmatter repaired field-by-field: mercurius-rebirth-poem-verus-hermes-1620",
-    "frontmatter repaired field-by-field: opus-as-mass-melchior-cibinensis-buda-1516",
-    "frontmatter repaired field-by-field: peacock-phoenix-codex-rhenoviensis-zurich-15c",
-    "frontmatter repaired field-by-field: rebis-hermaphrodite-rosarium-1550",
-    "frontmatter repaired field-by-field: river-map-dragon-china-legendary",
-    "frontmatter repaired field-by-field: rubedo-zosimos-cinnabar-copper-man-300c",
-    "frontmatter repaired field-by-field: senex-ithyphallicus-padmanabhapura-travancore-15c",
-    "frontmatter repaired field-by-field: serpent-saviour-passion-play-dream-1951",
-    "frontmatter repaired field-by-field: spirit-in-bottle-grimm-germany-1815",
-    "frontmatter repaired field-by-field: star-greek-love-song-epirus-1902",
-    "frontmatter repaired field-by-field: sun-de-pascha-computus-sol-justitiae",
-    "frontmatter repaired field-by-field: sun-wesendonck-grief-poem",
-    "frontmatter repaired field-by-field: swastika-fossor-diogenes-catacomb-rome",
-    "frontmatter repaired field-by-field: tractatus-aristotelis-serpent-hypostatica-16c",
-    "frontmatter repaired field-by-field: tree-wak-wak-tarikh-al-hind-munich",
-    "frontmatter repaired field-by-field: venus-episode-chymical-wedding-strasbourg-1616",
-    "frontmatter repaired field-by-field: virgin-korion-festival-alexandria-4c",
-    "frontmatter repaired field-by-field: visio-arislei-glass-house-12c",
-    "frontmatter repaired field-by-field: vision-symeon-light-constantinople",
-    "frontmatter repaired field-by-field: zosimos-man-of-light-antimimos-3c",
-    "co_manifests dropped (not a family): syzygyx4, great-motherx3, faust-figurex3, wise-old-manx3, shadowx2, shipx2, psychopompx2, lightningx2, dreamx1, bathx1, city-as-motherx1, lamentx1, spiralx1, korex1, mummyx1, animusx1, crabx1, abraxasx1, cowx1, animax1, squaring-the-circlex1, chinese-dragonx1, devouringx1, ascensionx1, floodx1, behemoth-leviathanx1, asceticx1, bullx1, ascension-descentx1"
+    "frontmatter repaired field-by-field: cat-egyptian-statue-anima-projection-zurich-1930s",
+    "frontmatter repaired field-by-field: dwarf-little-man-boy-criminal-instinct-1930",
+    "frontmatter repaired field-by-field: fettered-soul-cataleptic-suitor-emma-c-zurich-1906",
+    "frontmatter repaired field-by-field: ghost-procession-servant-girl-ecstasy-zurich-1900s",
+    "frontmatter repaired field-by-field: sacrifice-hanging-by-genitals-fantasy-1911",
+    "frontmatter repaired field-by-field: sacrifice-tantalus-club-emblem-1910",
+    "frontmatter repaired field-by-field: trickster-figure-capricious-table-zurich-1905",
+    "anima-she-ayesha-haggard-1887: unknown locus_type \"text\" -> text-passage",
+    "i-ching-hexagrams-king-wen-china: unknown locus_type \"text\" -> text-passage",
+    "co_manifests dropped (not a family): great-motherx5, syzygyx4, herox4, lightningx3, chinese-dragonx3, gravex2, visionx2, psychopompx2, synchronicityx2, animax2, ascension-descentx2, axiom-of-mariax1, dreamx1, massx1, bathx1, devouring-motherx1, city-as-motherx1, individuationx1, lamentx1, gnosticx1, korex1, tridentx1, gatex1, animusx1, time-godx1, knifex1, mana-personalityx1, abraxasx1, cowx1, castlex1, trainx1, inflationx1, squaring-the-circlex1, coronationx1, active-imaginationx1, devouringx1, visionary-rumourx1, floodx1, behemoth-leviathanx1, asceticx1, glass-wallx1, fountain-of-youthx1"
   ]
 }

@@ -50,7 +50,12 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   }
   const img = el('img', { alt: opts.alt ?? ref.title ?? '', decoding: 'async', draggable: 'false' });
   if (!opts.eager) img.loading = 'lazy';
-  img.addEventListener('load', () => fig.classList.add('loaded'));
+  // decode off the main thread first, then reveal: no decode work lands inside a frame
+  img.addEventListener('load', () => {
+    const show = () => fig.classList.add('loaded');
+    if (typeof img.decode === 'function') img.decode().then(show, show);
+    else show();
+  });
   img.addEventListener('error', () => {
     img.remove();
     fig.classList.add('plate-empty', 'plate-failed');

@@ -1,6 +1,22 @@
 {
  "_note": "family slug -> ties. basis jung/inferred mirror the vault (the vault wins on re-ingest and may upgrade a basis); basis site is curation (standard Jungian amplification), never presented as Jung's word.",
  "ties": {
+  "adam": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "aion": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
   "anima-figure": [
    {
     "archetype": "anima",
@@ -53,6 +69,16 @@
     "basis": "site"
    }
   ],
+  "ascension": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
   "ascent-descent": [
    {
     "archetype": "self",
@@ -93,6 +119,22 @@
     "basis": "site"
    }
   ],
+  "bread": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "cauldron": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
   "cave": [
    {
     "archetype": "self",
@@ -123,6 +165,12 @@
     "basis": "site"
    }
   ],
+  "chance-series": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
   "christ-figure": [
    {
     "archetype": "self",
@@ -151,6 +199,12 @@
     "basis": "inferred"
    }
   ],
+  "clairvoyance": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
   "coniunctio": [
    {
     "archetype": "self",
@@ -164,6 +218,18 @@
   "corn-god": [
    {
     "archetype": "hero",
+    "basis": "inferred"
+   }
+  ],
+  "cosmic-catastrophe": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "crocodile": [
+   {
+    "archetype": "shadow",
     "basis": "inferred"
    }
   ],
@@ -210,6 +276,12 @@
    },
    {
     "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "divination": [
+   {
+    "archetype": "wise-old-man",
     "basis": "site"
    }
   ],
@@ -309,6 +381,32 @@
     "basis": "site"
    }
   ],
+  "ecclesia-synagoga": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "elephant": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   }
+  ],
+  "elf": [
+   {
+    "archetype": "trickster",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
   "eye": [
    {
     "archetype": "self",
@@ -316,6 +414,16 @@
    },
    {
     "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "father-imago": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "shadow",
     "basis": "site"
    }
   ],
@@ -349,6 +457,16 @@
     "basis": "site"
    }
   ],
+  "frontier-crossing": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
   "furnace": [
    {
     "archetype": "great-mother",
@@ -366,6 +484,22 @@
    },
    {
     "archetype": "kore",
+    "basis": "site"
+   }
+  ],
+  "gazelle": [
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   }
+  ],
+  "ghost": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
     "basis": "site"
    }
   ],
@@ -481,6 +615,12 @@
     "basis": "inferred"
    }
   ],
+  "jupiter": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
   "khidr": [
    {
     "archetype": "self",
@@ -561,6 +701,12 @@
     "basis": "site"
    }
   ],
+  "liver": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   }
+  ],
   "lotus": [
    {
     "archetype": "self",
@@ -633,6 +779,12 @@
    {
     "archetype": "self",
     "basis": "jung"
+   }
+  ],
+  "materialization": [
+   {
+    "archetype": "psychopomp",
+    "basis": "inferred"
    }
   ],
   "melusina": [
@@ -711,6 +863,18 @@
    {
     "archetype": "hero",
     "basis": "site"
+   }
+  ],
+  "mouse": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "net": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
    }
   ],
   "night-sea-journey": [
@@ -813,6 +977,12 @@
     "basis": "jung"
    }
   ],
+  "premonition": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
   "prima-materia": [
    {
     "archetype": "self",
@@ -831,6 +1001,12 @@
    {
     "archetype": "self",
     "basis": "jung"
+   }
+  ],
+  "ram": [
+   {
+    "archetype": "hero",
+    "basis": "site"
    }
   ],
   "raven": [
@@ -987,6 +1163,16 @@
     "basis": "site"
    }
   ],
+  "soma": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   }
+  ],
   "sophia": [
    {
     "archetype": "anima",
@@ -1033,6 +1219,12 @@
    {
     "archetype": "self",
     "basis": "jung"
+   }
+  ],
+  "stork": [
+   {
+    "archetype": "anima",
+    "basis": "site"
    }
   ],
   "sulphur": [
@@ -1127,6 +1319,12 @@
     "basis": "site"
    }
   ],
+  "tower": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
   "treasure": [
    {
     "archetype": "self",
@@ -1183,6 +1381,12 @@
     "basis": "inferred"
    }
   ],
+  "vajra": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
   "venus": [
    {
     "archetype": "anima",
@@ -1206,6 +1410,12 @@
    },
    {
     "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "wand": [
+   {
+    "archetype": "psychopomp",
     "basis": "site"
    }
   ],
@@ -1243,10 +1453,22 @@
     "basis": "site"
    }
   ],
+  "wish-dream": [
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   }
+  ],
   "world-clock": [
    {
     "archetype": "self",
     "basis": "jung"
+   }
+  ],
+  "world-fire": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
    }
   ],
   "world-wheel": [

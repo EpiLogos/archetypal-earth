@@ -12,7 +12,7 @@ export function imgUrl(ref: ImageRef, thumb = false): string {
   return resolveSrc(thumb && ref.thumb ? ref.thumb : ref.src);
 }
 
-/** Load the field; fall back to the synthetic fixture when the data isn't there yet. */
+/** Load the published field. Missing data must never become invented content. */
 export async function loadField(): Promise<{ field: Field; fixture: boolean }> {
   let why = 'not found';
   try {
@@ -27,7 +27,5 @@ export async function loadField(): Promise<{ field: Field; fixture: boolean }> {
   } catch (e) {
     why = String(e);
   }
-  console.warn(`[archetypal-earth] /data/field.json not available (${why}) — using the synthetic dev fixture.`);
-  const { buildFixture } = await import('../dev/fixture');
-  return { field: buildFixture(), fixture: true };
+  throw new Error(`The atlas data could not be loaded (${why}).`);
 }

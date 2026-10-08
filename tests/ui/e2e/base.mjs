@@ -1,0 +1,10 @@
+import { launch, open, look } from './lib.mjs';
+const b = await launch('chromium');
+const { page, logs } = await open(b);
+await page.waitForTimeout(5000);
+console.log(await page.evaluate(() => { const e = window.__earth.engine; return { base: e.baseKind, mix: e.earth.mesh.material.uniforms.uHiMix.value, loImg: e.earth.mesh.material.uniforms.uBaseLo.value.image?.width, hiImg: e.earth.mesh.material.uniforms.uBaseHi.value.image?.width }; }));
+await page.evaluate(() => { window.__earth.engine.tiles.enabled = false; });
+await look(page, 30, -40, 2.0, 1500);
+await page.screenshot({ path: '.cache/screens/round2/base-only.png' });
+console.log(logs.join('\n'));
+await b.close();

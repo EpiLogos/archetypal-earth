@@ -121,7 +121,11 @@ describe('field.json contract', () => {
     const imgs = [...field.archetypes, ...field.families, ...field.occurrences].filter((x) => x.image);
     for (const x of imgs) {
       for (const p of [x.image!.src, x.image!.thumb]) expect(fs.existsSync(path.join(ROOT, 'public', p)), `${x.id}: ${p}`).toBe(true);
-      expect(x.image!.license).toMatch(/Public domain|CC0|CC BY/);
+      if (x.image!.license === 'Attribution') {
+        // This Commons file grants reuse for any purpose with the named author's credit.
+        expect(x.image!.credit).toBe("Giovanni Dall'Orto");
+        expect(x.image!.sourceUrl).toBe("https://commons.wikimedia.org/wiki/File:XV01_-_Roma,_Museo_civilt%C3%A0_romana_-_Iscrizione_di_Abercio_-_Foto_Giovanni_Dall%27Orto_12-Apr-2008.jpg");
+      } else expect(x.image!.license).toMatch(/Public domain|CC0|CC BY/);
     }
     expect(field.meta.counts.images).toBe(imgs.length);
   });

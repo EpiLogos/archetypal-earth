@@ -3,7 +3,11 @@
  "merges": {
   "quaternion": "quaternity",
   "cauda-pavonis": "peacock",
-  "self": "god-image"
+  "self": "god-image",
+  "seven-planets": "planetary-gods",
+  "trickster": "trickster-figure",
+  "wise-old-man": "senex-figure",
+  "shadow": "devil"
  },
  "families": {
   "anima-figure": {

@@ -19,7 +19,8 @@ export class FocusLabel {
   private gen = 0;
 
   constructor(parent: HTMLElement) {
-    this.root = el('header', { class: 'focus-label', 'aria-live': 'polite' });
+    this.root = el('header', { class: 'focus-label', 'aria-live': 'polite', 'aria-hidden': 'true' });
+    this.root.inert = true;
     parent.append(this.root);
   }
 
@@ -27,12 +28,16 @@ export class FocusLabel {
     const gen = ++this.gen;
     if (!content) {
       this.root.classList.remove('on');
+      this.root.inert = true;
+      this.root.setAttribute('aria-hidden', 'true');
       this.shown = false;
       this.key = '';
       return;
     }
     const swap = () => {
       clear(this.root);
+      this.root.inert = false;
+      this.root.setAttribute('aria-hidden', 'false');
       this.root.classList.toggle('is-back', !!content.back);
       const name = content.back
         ? el('button', { class: 'fl-name fl-backlink', type: 'button', 'aria-label': `Back to ${content.name}`, onclick: content.back }, [el('span', { class: 'fl-chev', 'aria-hidden': 'true', text: '‹' }), content.name])
@@ -56,6 +61,8 @@ export class FocusLabel {
     };
     if (this.shown && key !== this.key) {
       this.root.classList.remove('on');
+      this.root.inert = true;
+      this.root.setAttribute('aria-hidden', 'true');
       window.setTimeout(() => {
         if (gen !== this.gen) return;
         swap();
@@ -63,7 +70,9 @@ export class FocusLabel {
       }, 240);
     } else {
       swap();
-      requestAnimationFrame(() => this.root.classList.add('on'));
+      requestAnimationFrame(() => {
+        if (gen === this.gen) this.root.classList.add('on');
+      });
     }
     this.shown = true;
     this.key = key;

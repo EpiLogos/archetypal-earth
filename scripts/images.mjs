@@ -16,12 +16,12 @@ const IMG_DIR = path.join(ROOT, 'public', 'img');
 const OUT = path.join(ROOT, 'public', 'data', 'images.json');
 const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
 const QUERIES = path.join(ROOT, 'curation', 'image-queries.json');
-const BUDGET_BYTES = 145 * 1024 * 1024;
+const BUDGET_BYTES = 175 * 1024 * 1024;
 
 // Wikimedia only serves "standard" thumbnail widths.
 const WIDTH = { archetypes: 1920, families: 1280, occurrences: 960 };
 const THUMB_W = 500;
-const OCC_CAP = 250;
+const OCC_CAP = 260;
 
 const args = process.argv.slice(2);
 const opt = (k) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : null; };
@@ -129,7 +129,7 @@ function evaluate(c, q, ctx) {
   if (c.mime !== 'image/jpeg' && !(c.mime === 'image/png' && hasSips)) return { ok: false, why: 'mime' };
   if (!licenseOk(c.license)) return { ok: false, why: `license ${c.license}` };
   const longest = Math.max(c.width, c.height);
-  if (longest < (ctx.minLongest || 900) || Math.min(c.width, c.height) < 450) return { ok: false, why: 'low-res' };
+  if (longest < (ctx.minLongest || 900) || Math.min(c.width, c.height) < (ctx.minShort || 450)) return { ok: false, why: 'low-res' };
   const ar = c.width / c.height;
   if (ar > 2.6 || ar < 0.36) return { ok: false, why: 'aspect' };
   if (BAD_TITLE.test(c.title.replace(/^File:/, '')) && !ctx.allowBad) return { ok: false, why: 'bad title' };
@@ -212,7 +212,7 @@ async function resolveFor(group, id, spec, ctx) {
   if (spec.pin) {
     const c = await fetchPinned(spec.pin, width);
     if (!c) return { error: `pin not found: ${spec.pin}` };
-    const ev = evaluate(c, spec.pin, { ...ctx, allowBad: true, reuseOk: true, require: [], exclude: [], minLongest: 600 });
+    const ev = evaluate(c, spec.pin, { ...ctx, allowBad: true, reuseOk: true, require: [], exclude: [], minLongest: 450, minShort: 300 });
     if (!ev.ok) return { error: `pin rejected (${ev.why}): ${spec.pin}`, cand: c };
     return { cand: c, score: 999, query: 'pin' };
   }

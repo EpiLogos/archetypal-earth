@@ -1,5 +1,6 @@
 // Indexes over the Field: everything the experience layer looks up by id.
 import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Occurrence, Field } from '../types/field';
+import type { Symbols, SymbolEntry } from '../types/symbols';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
@@ -18,6 +19,8 @@ export interface Place {
 
 export interface Model {
   field: Field;
+  symbols: Map<string, SymbolEntry>;
+  symbolSource?: Symbols['source'];
   scale: TimeScale;
   occ: Occurrence[];
   archById: Map<ArchetypeId, Archetype>;
@@ -61,11 +64,11 @@ export function shortPlace(place: string): string {
 
 const FALLBACK_PALETTE = { core: '#c3d2f2', glow: '#4f78cf', fog: '#10193a', deep: '#02030a' };
 
-export function buildModel(field: Field): Model {
+export function buildModel(field: Field, extent?: { from: number; to: number }, symbols?: Symbols): Model {
   const occ = field.occurrences;
   const yMin = Number.isFinite(field.meta.yearMin) ? field.meta.yearMin : Math.min(...occ.map((o) => o.year), 0);
   const yMax = Number.isFinite(field.meta.yearMax) ? field.meta.yearMax : Math.max(...occ.map((o) => o.year), 1960);
-  const scale = createTimeScale(yMin, yMax);
+  const scale = createTimeScale(Math.min(yMin, extent?.from ?? yMin), Math.max(yMax, extent?.to ?? yMax));
 
   const archById = new Map(field.archetypes.map((a) => [a.id, a]));
   const famById = new Map(field.families.map((f) => [f.id, f]));
@@ -123,7 +126,7 @@ export function buildModel(field: Field): Model {
     archOcc.set(a.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
   }
 
-  return { field, scale, occ, archById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, famOcc, archOcc, cultureOcc, places, occPlace, colour };
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, famOcc, archOcc, cultureOcc, places, occPlace, colour };
 }
 
 /** Occurrence indices (located only) that belong to a subject. */

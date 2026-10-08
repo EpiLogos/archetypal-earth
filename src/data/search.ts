@@ -40,6 +40,7 @@ interface Entry {
 export interface SearchIndex {
   entries: Entry[];
   model: Model;
+  candidates: Map<string, Entry[]>;
 }
 
 export function norm(s: string): string {
@@ -92,7 +93,21 @@ export function buildSearchIndex(m: Model): SearchIndex {
       image: o.image ?? fam?.image, tone: fam?.palette.core, bias: BIAS.occurrence,
     });
   });
-  return { entries, model: m };
+  const candidates = new Map<string, Entry[]>();
+  for (const e of entries) {
+    const keys = new Set<string>();
+    for (const text of [...e.names, ...e.aliases, ...e.secondary]) for (const word of text.split(' ')) {
+      if (!word) continue;
+      keys.add('p:' + word.slice(0, 1));
+      if (word.length >= 2) keys.add('p:' + word.slice(0, 2));
+      for (let i = 0; i <= word.length - 3; i++) keys.add('g:' + word.slice(i, i + 3));
+    }
+    for (const key of keys) {
+      const list = candidates.get(key);
+      if (list) list.push(e); else candidates.set(key, [e]);
+    }
+  }
+  return { entries, model: m, candidates };
 }
 
 function wordPrefix(text: string, tok: string): boolean {
@@ -181,8 +196,20 @@ export function search(idx: SearchIndex, query: string, limit = 7): SearchResult
     return idx.entries.filter((e) => e.kind === 'archetype').slice(0, limit).map((e) => toResult(e, e.bias));
   }
   const toks = q.split(' ');
-  const scored: SearchResult[] = [];
-  for (const e of idx.entries) {
+  // Every match must contain each token's prefix/first trigram. Scoring still
+  // applies the full rules; the smallest posting list is a conservative shortlist.
+  let entries = idx.entries;
+  for (const tok of toks) {
+    const list = idx.candidates.get(tok.length < 3 ? 'p:' + tok : 'g:' + tok.slice(0, 3)) ?? [];
+    if (list.length < entries.length) entries = list;
+  }
+  // Only a handful of results of each kind can reach the UI. Keep those while
+  // scoring rather than allocating and sorting thousands of matching occurrences.
+  const best = new Map<SearchKind, { entry: Entry; score: number; order: number }[]>();
+  let nonOcc = 0;
+  let order = 0;
+  for (const e of entries) {
+    const ordinal = order++;
     let total = 0;
     let ok = true;
     for (const t of toks) {
@@ -198,8 +225,19 @@ export function search(idx: SearchIndex, query: string, limit = 7): SearchResult
       else if (e.aliases.includes(q)) phrase = 24;
       else if (e.names.some((n) => n.startsWith(q))) phrase = 16;
     }
-    scored.push(toResult(e, total / toks.length + e.bias + phrase));
+    const score = total / toks.length + e.bias + phrase;
+    if (e.kind !== 'occurrence') nonOcc++;
+    let list = best.get(e.kind);
+    if (!list) best.set(e.kind, (list = []));
+    const cap = e.kind === 'occurrence' ? 5 : 4;
+    const at = list.findIndex((c) => score > c.score || (score === c.score && e.label.length < c.entry.label.length));
+    if (at < 0 && list.length >= cap) continue;
+    const candidate = { entry: e, score, order: ordinal };
+    if (at < 0) list.push(candidate); else list.splice(at, 0, candidate);
+    if (list.length > cap) list.pop();
   }
+  const candidates = [...best.values()].flat().sort((a, b) => b.score - a.score || a.entry.label.length - b.entry.label.length || a.order - b.order);
+  const scored: SearchResult[] = candidates.map((c) => toResult(c.entry, c.score));
   const per = new Map<string, number>();
   const period = parsePeriod(query, m.scale);
   if (period) {
@@ -211,7 +249,7 @@ export function search(idx: SearchIndex, query: string, limit = 7): SearchResult
   }
   scored.sort((a, b) => b.score - a.score || a.label.length - b.label.length);
   const out: SearchResult[] = [];
-  const nonOcc = scored.filter((r) => r.kind !== 'occurrence').length;
+  if (period) nonOcc++;
   for (const r of scored) {
     const n = per.get(r.kind) ?? 0;
     const cap = r.kind === 'occurrence' ? (nonOcc >= 3 ? 3 : 5) : 4;

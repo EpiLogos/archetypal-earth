@@ -1,0 +1,17 @@
+import { launch, open } from './lib.mjs';
+const hash = process.argv[2] ?? '#/f/serpent';
+const b = await launch('chromium');
+const { ctx, page } = await open(b, { width: 1440, height: 900, dpr: 2 });
+await page.waitForTimeout(6000);
+const c = await ctx.newCDPSession(page);
+await c.send('Profiler.enable');
+await c.send('Profiler.setSamplingInterval', { interval: 200 });
+await c.send('Profiler.start');
+await page.evaluate((h) => { location.hash = h; }, hash);
+await page.waitForTimeout(3000);
+const { profile } = await c.send('Profiler.stop');
+const self = new Map();
+const dt = profile.timeDeltas; const idToNode = new Map(profile.nodes.map((n) => [n.id, n]));
+profile.samples.forEach((id, i) => { const n = idToNode.get(id); const k = `${n.callFrame.functionName || '(anon)'} ${n.callFrame.url.split('/').slice(-2).join('/')}:${n.callFrame.lineNumber}`; self.set(k, (self.get(k) ?? 0) + (dt[i] ?? 0) / 1000); });
+console.log([...self.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14).map(([k, v]) => `${v.toFixed(1)}ms  ${k}`).join('\n'));
+await b.close();
