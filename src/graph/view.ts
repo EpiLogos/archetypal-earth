@@ -17,6 +17,9 @@ import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness
 import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
 
+// outside the local lens the field recedes to a whisper that is still clickable
+const GHOST_VIS = 0.05;
+
 export interface GraphHandlers {
   /** a node was clicked */
   onSelect(key: string): void;
@@ -532,7 +535,7 @@ export class GraphView {
     const g = this.g;
     const nb = this.computeActive();
     const wasOn = new Set<number>();
-    for (const v of this.nodes) if (v.vis > 0.05 || v.visT > 0.5) wasOn.add(v.id);
+    for (const v of this.nodes) if (v.vis >= GHOST_VIS || v.visT > 0.5) wasOn.add(v.id);
     this.active = nb.dist;
     this.activeEdges = nb.edges;
 
@@ -540,7 +543,7 @@ export class GraphView {
     const entering: number[] = [];
     for (const v of this.nodes) {
       const isOn = this.active.has(v.id);
-      v.visT = isOn ? 1 : 0;
+      v.visT = isOn ? 1 : GHOST_VIS;
       if (isOn && !wasOn.has(v.id)) entering.push(v.id);
       if (first && isOn) v.vis = 1;
       if (first && !isOn) v.vis = 0;
@@ -879,7 +882,8 @@ export class GraphView {
   // ── hit-testing ──────────────────────────────────────────────────────────
   private tree(): Quadtree<VNode> {
     if (!this.qt || this.qtStale) {
-      const items = this.nodes.filter((v) => v.vis > 0.2 && (v.live > 0.525 || v.g.kind !== 'occurrence'));
+      // anything drawn is hittable: the ghost floor stays above the 0.012 stage cutoff
+    const items = this.nodes.filter((v) => v.vis > 0.012 && (v.live > 0.525 || v.g.kind !== 'occurrence'));
       this.qt = quadtree<VNode>().x((v) => v.x).y((v) => v.y).addAll(items);
       this.qtStale = false;
     }

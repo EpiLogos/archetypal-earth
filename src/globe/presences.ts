@@ -210,8 +210,8 @@ export class Presences {
       if (!m.located[i]) continue;
       const d = m.dir[i];
       if (d[0] * this.camDirTmp.x + d[1] * this.camDirTmp.y + d[2] * this.camDirTmp.z < horizon) continue;
-      // only live presences are selectable: the same rule the shader draws them by
-      if (this.rel[i] < 0.6) continue;
+      // everything the shader draws is selectable: the receded field stays reachable
+      if (this.rel[i] < 0.02) continue;
       if (timeVisibility(m.u[i], w) < 0.5) continue;
       // view space
       const x = v[0] * d[0] + v[4] * d[1] + v[8] * d[2] + v[12];

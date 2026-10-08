@@ -18,7 +18,7 @@ float timeFlare(float u) {
 }
 `;
 
-// Emphasis semantics (aRel): 1 normal · 0.2 receded · 1.5 related · 2.3 selected
+// Emphasis semantics (aRel): 1 normal · 0.07 receded · 1.5 related · 2.4 selected
 export const REL_GLSL = /* glsl */ `
 float relAlpha(float rel) {
   return mix(0.12, 1.0, smoothstep(0.2, 1.0, rel)) * (1.0 + 0.5 * max(rel - 1.0, 0.0));
