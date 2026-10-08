@@ -1,10 +1,18 @@
 // The five-state machine of the experience, as pure transitions.
 // World · Focus · Manifestation · Thread · (Deep is a reading layer over any).
 import type { Subject } from '../data/model';
+import type { BodyKey } from '../types/sky';
 
 export interface ThreadTarget {
   type: 'family' | 'archetype' | 'parallels';
   id: string;
+}
+
+/** The sky layer's state: which body is open, or which birth moment is standing. Orthogonal to the field's views. */
+export interface SkyState {
+  body?: BodyKey;
+  /** a birth sky: wall-clock time (YYYY-MM-DDTHH:MM) at the place; the sidecar resolves the timezone */
+  birth?: { local: string; lat: number; lon: number };
 }
 
 export type View =
@@ -16,12 +24,31 @@ export type View =
 export interface AppState {
   view: View;
   deep: boolean;
+  /** the graph mode: a second view of the same field (absent = the globe) */
+  graph?: true;
+  /** the sky: the same scene pulled back past the Moon to the whole system (a flag, as `graph` is, but it needs the world view) */
+  sky?: SkyState;
+  history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread'; id: string } };
+  /** The live path remains standing while one of its presences is inspected. */
+  trail?: Extract<View, { kind: 'thread' }>;
 }
 
 export const WORLD: AppState = { view: { kind: 'world' }, deep: false };
 
-export function focusOn(_s: AppState, subject: Subject): AppState {
-  return { view: { kind: 'focus', subject }, deep: false };
+/** Carry the mode of `from` onto a fresh state. */
+function inMode(from: AppState, next: AppState): AppState {
+  return from.graph ? { ...next, graph: true } : next;
+}
+
+export function focusOn(s: AppState, subject: Subject): AppState {
+  return inMode(s, { view: { kind: 'focus', subject }, deep: false });
+}
+
+/** Switch between the globe and the graph, keeping what is in view (a thread has no graph: it returns to where it began). */
+export function withMode(s: AppState, graph: boolean): AppState {
+  const view = s.view.kind === 'thread' ? s.view.from : s.view;
+  // the sky is a scale of the globe: the graph has none, so switching modes leaves it
+  return graph ? { view, deep: s.deep, graph: true } : { view, deep: s.deep };
 }
 
 /** Select an occurrence. `fallbackContext` is its family, used when no focus is standing. */
@@ -31,7 +58,8 @@ export function manifest(s: AppState, occId: string, fallbackContext: Subject): 
   if (v.kind === 'focus') context = v.subject;
   else if (v.kind === 'manifest') context = v.context;
   else if (v.kind === 'thread') context = threadSubject(v.target, fallbackContext);
-  return { view: { kind: 'manifest', occId, context }, deep: false };
+  const trail = v.kind === 'thread' ? v : s.trail;
+  return trail ? { view: { kind: 'manifest', occId, context }, deep: false, trail } : inMode(s, { view: { kind: 'manifest', occId, context }, deep: false });
 }
 
 export function threadSubject(t: ThreadTarget, fallback: Subject): Subject {
@@ -43,27 +71,45 @@ export function threadSubject(t: ThreadTarget, fallback: Subject): Subject {
 export function startThread(s: AppState, target: ThreadTarget): AppState {
   const v = s.view;
   const from: View = v.kind === 'thread' ? v.from : v;
+  // a thread travels the globe: it leaves the graph
   return { view: { kind: 'thread', target, from }, deep: false };
+}
+
+/** Enter (or change) the sky. The sky stands over the world view: any focus is left behind, the field stays as it was. */
+export function inSky(sky: SkyState = {}): AppState {
+  return { view: { kind: 'world' }, deep: false, sky };
+}
+
+export function skyEq(a: SkyState | undefined, b: SkyState | undefined): boolean {
+  if (!a || !b) return !a && !b;
+  return a.body === b.body && a.birth?.local === b.birth?.local && a.birth?.lat === b.birth?.lat && a.birth?.lon === b.birth?.lon;
 }
 
 export function setDeep(s: AppState, deep: boolean): AppState {
   if (s.view.kind === 'world') return s;
-  return { view: s.view, deep };
+  return { ...s, deep };
 }
 
 /** One step back: deep → manifestation → focus → world (thread → where it began). */
 export function back(s: AppState): AppState {
-  if (s.deep) return { view: s.view, deep: false };
+  if (s.deep) return { ...s, deep: false };
+  if (s.sky) {
+    // a card closes onto the sky; the sky closes onto the Earth
+    if (s.sky.body) return inSky(s.sky.birth ? { birth: s.sky.birth } : {});
+    return WORLD;
+  }
+  if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;
   const v = s.view;
   switch (v.kind) {
     case 'world':
       return s;
     case 'focus':
-      return WORLD;
+      return inMode(s, WORLD);
     case 'manifest':
-      return { view: { kind: 'focus', subject: v.context }, deep: false };
+      if (s.trail) return { view: s.trail, deep: false };
+      return inMode(s, { view: { kind: 'focus', subject: v.context }, deep: false });
     case 'thread':
-      return { view: v.from, deep: false };
+      return inMode(s, { view: v.from, deep: false });
   }
 }
 
@@ -88,11 +134,15 @@ export function viewEq(a: View, b: View): boolean {
 }
 
 export function stateEq(a: AppState, b: AppState): boolean {
-  return a.deep === b.deep && viewEq(a.view, b.view);
+  return a.deep === b.deep && !!a.graph === !!b.graph && viewEq(a.view, b.view) && skyEq(a.sky, b.sky)
+    && a.history?.reading === b.history?.reading
+    && a.history?.selection?.kind === b.history?.selection?.kind
+    && a.history?.selection?.id === b.history?.selection?.id
+    && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)));
 }
 
 /** Depth used to decide whether a move is an ascent (zoom out) or descent. */
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
-  return base + (s.deep ? 1 : 0);
+  return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0);
 }

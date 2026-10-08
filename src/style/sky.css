@@ -1,0 +1,31 @@
+/* The sky layer's quiet DOM: body labels over the scene, the caption that says the scale is a diagram. */
+.sky-layer { position: fixed; inset: 0; z-index: 12; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease); }
+.sky-layer.on { opacity: 1; }
+.sky-label {
+  position: absolute; left: 0; top: 0; pointer-events: auto;
+  font: 11.5px/1 var(--sans); letter-spacing: .05em; color: var(--ink-2);
+  padding: 4px 6px; border-radius: 3px; white-space: nowrap;
+  text-shadow: 0 1px 14px rgb(var(--deep-rgb) / .95);
+  opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), color .3s;
+}
+.sky-label.on { opacity: 1; visibility: visible; }
+.sky-label:hover, .sky-label:focus-visible, .sky-label[aria-pressed=true] { color: var(--sl, var(--core)); }
+.sky-label:focus-visible { outline: 1px solid rgb(var(--core-rgb) / .55); outline-offset: 1px; }
+.sky-caption {
+  position: fixed; left: 24px; bottom: 22px; z-index: 12; margin: 0; max-width: min(27ch, calc(100vw - 48px));
+  font: 11px/1.45 var(--sans); letter-spacing: .01em; color: var(--ink-3);
+  text-shadow: 0 1px 14px rgb(var(--deep-rgb)); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease);
+}
+.sky-caption.on { opacity: 1; }
+.sky-switch { position: fixed; top: 24px; right: 226px; z-index: 21; color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
+.sky-switch:hover { color: var(--ink); }
+.sky-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
+.sky-switch:disabled { opacity: .35; cursor: default; }
+body.search-open .sky-switch, body.deep-open .sky-switch { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) {
+  .sky-switch { top: 16px; right: 160px; font-size: 11px; }
+  .sky-caption { left: 18px; bottom: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-layer, .sky-label, .sky-caption { transition: none; }
+}

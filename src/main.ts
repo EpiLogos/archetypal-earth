@@ -1,4 +1,8 @@
 import './style/main.css';
+import './style/aion.css';
+import './style/sky.css';
+import { loadSymbols } from './data/symbols';
+import { historyExtent, loadHistory } from './aion/model';
 import { Controller } from './app/controller';
 import { loadField } from './data/load';
 import { buildModel } from './data/model';
@@ -25,7 +29,11 @@ async function boot() {
   const loading = document.getElementById('loading')!;
   try {
     const { field } = await loadField();
-    const model = buildModel(field);
+    const [history, symbols] = await Promise.all([
+      loadHistory().catch(error => { console.warn(error); return undefined; }),
+      loadSymbols().catch(error => { console.warn(error); return undefined; }),
+    ]);
+    const model = buildModel(field, history ? historyExtent(history) : undefined, symbols);
     const time = new TimeModel();
     let ctl: Controller | null = null;
     const engine = new GlobeEngine(
@@ -38,10 +46,11 @@ async function boot() {
         onInteract: () => ctl?.onInteract(),
         onGrab: () => ctl?.onGrab(),
         onPalette: setPaletteVars,
+        onSkyPick: (key) => ctl?.onSkyPick(key),
       },
       prefersReducedMotion(),
     );
-    ctl = new Controller(model, engine, time, app);
+    ctl = new Controller(model, engine, time, app, history);
     await engine.ready;
     ctl.boot();
     requestAnimationFrame(() => loading.classList.add('done'));
@@ -49,7 +58,7 @@ async function boot() {
   } catch (err) {
     console.error(err);
     loading.classList.add('failed');
-    loading.textContent = 'This device could not start the globe (WebGL is required).';
+    loading.textContent = err instanceof Error && err.message.startsWith('The atlas data') ? err.message : 'This device could not start the globe (WebGL is required).';
   }
 }
 

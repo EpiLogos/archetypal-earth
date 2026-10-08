@@ -8,7 +8,7 @@ import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { hashToState, stateToHash } from '../state/router';
-import { back, focusOn, startThread, stateEq, threadSubject, viewEq, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
+import { back, focusOn, inSky, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
 import type { TimeModel, TimeSnapshot } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
@@ -21,6 +21,17 @@ import { Strip } from '../ui/strip';
 import { TimeControl } from '../ui/time-control';
 import { isNarrow } from '../ui/dom';
 import { eraShort } from '../data/text';
+import { GraphView, type Insets } from '../graph/view';
+import { ModeSwitch } from '../graph/switch';
+import { AionView } from '../aion/view';
+import type { History } from '../types/history';
+import { el } from '../ui/dom';
+import { loadSky } from '../sky/load';
+import { SkyLayer } from '../sky/layer';
+import { SkyView } from '../sky/view';
+import { systemViewLatLon } from '../sky/frames';
+import { skyMaxDist, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import type { BodyKey } from '../types/sky';
 
 const REL_RECEDED = 0.2;
 const REL_RELATED = 1.5;
@@ -57,8 +68,25 @@ export class Controller {
   private setCache: { key: string; set: Set<number> } = { key: '', set: new Set() };
   private tokCounter = 0;
   private labelRect = { x: 0, y: 0, w: 380, h: 170 };
+  private graph: GraphView;
+  private modeSwitch: ModeSwitch;
+  /** true while the graph mode (not the globe) is the main view */
+  private graphMode = false;
+  private pauseTimer = 0;
+  private aion: AionView | null = null;
+  private aionSwitch: HTMLButtonElement;
+  private aionTime: TimeSnapshot | null = null;
+  // the sky: a scale of the same globe, reached by the zoom gesture, by S, or by link
+  private skyView: SkyView;
+  private skySwitch: HTMLButtonElement;
+  private skyLayer: SkyLayer | null = null;
+  private skyRequested = false;
+  private skyFailed = false;
+  /** the next sky transition came from the user's own zoom: the camera is theirs, do not fly it */
+  private skyByGesture = false;
+  private pendingSkyEntry: 'instant' | 'fly' | null = null;
 
-  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement) {
+  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, history?: History) {
     this.rel = new Float32Array(m.occ.length);
     this.searchIndex = buildSearchIndex(m);
 
@@ -71,6 +99,7 @@ export class Controller {
       onParallelThread: () => this.followParallels(),
       onDeep: () => this.setDeep(true),
       onClose: () => this.stepBack(),
+      onFamily: id => this.navigate(focusOn(this.state, { type: 'family', id })),
     });
     this.deep = new DeepSheet(root, m, {
       onClose: () => this.setDeep(false),
@@ -89,10 +118,31 @@ export class Controller {
       if (open) this.hover.hide();
     });
 
+    // the graph: a second view of the same field, between the globe and the quiet overlay
+    this.graph = new GraphView(document.body, m, time, {
+      onSelect: (key) => this.onGraphSelect(key),
+      onEarth: (key) => this.onGraphEarth(key),
+      onWhole: () => this.navigate({ view: { kind: 'world' }, deep: false, graph: true }),
+    }, engine.reduced);
+    root.before(this.graph.root);
+    this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
+    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state));
+    this.aionSwitch = el('button', { type: 'button', class: 'aion-switch', text: 'Aion', title: history ? 'Archetypal history (A)' : 'Aion history data is unavailable', 'aria-pressed': 'false', disabled: !history,
+      onclick: () => this.toggleAion() });
+    document.body.append(this.aionSwitch);
+
+    this.skyView = new SkyView(document.body, {
+      onBody: (key) => this.onSkyPick(key),
+      nameOf: (key) => this.skyLayer?.data.bodies.find((b) => b.key === key)?.name ?? key,
+    });
+    this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
+      onclick: () => this.toggleSky() });
+    document.body.append(this.skySwitch);
+
     document.getElementById('search-btn')?.addEventListener('click', (e) => this.search.open(e.currentTarget as HTMLElement));
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('hashchange', this.onHash);
-    window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); });
+    window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); this.syncGraphInsets(); });
     engine.onFrame((dt) => this.tick(dt));
   }
 
@@ -102,7 +152,9 @@ export class Controller {
   }
 
   private syncRig() {
-    this.engine.rig.maxDist = Math.max(5.4, this.worldDist() + 0.9);
+    // once the sky has loaded the pull-back is one continuous gesture, out to past Neptune
+    const aspect = this.engine.width / Math.max(1, this.engine.height);
+    this.engine.rig.maxDist = this.skyLayer ? skyMaxDist(aspect, FOV) : Math.max(5.4, this.worldDist() + 0.9);
   }
 
   // ── engine callbacks ──────────────────────────────────────────────────
@@ -111,10 +163,12 @@ export class Controller {
   }
 
   onGrab() {
+    this.aion?.pauseThread();
     if (this.tour && this.tour.playing && this.tour.phase !== 'intro') this.tourPause();
   }
 
   onUserTime() {
+    this.aion?.pauseThread();
     // scrubbing the time control takes the cursor from a running tour
     if (this.tour && this.tour.playing) this.tourPause();
     this.engine.rig.interacted = true;
@@ -174,6 +228,12 @@ export class Controller {
         const i = m.occIndex.get(id);
         return i === undefined ? undefined : m.occ[i].familyId;
       },
+      hasBody: (id: string) => !!this.skyLayer?.data.bodies.some((b) => b.key === id) || ['sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'].includes(id),
+      hasReading: (id: string) => !!this.aion?.history.readings.some(r => r.id === id),
+      hasHistorySelection: (id: string, kind: string, selection: string) => {
+        const reading = this.aion?.history.readings.find(r => r.id === id);
+        return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
+      },
     };
   }
 
@@ -202,7 +262,7 @@ export class Controller {
     location.hash = h;
   }
 
-  navigate(next: AppState) {
+  navigate(next: AppState, opts: { replace?: boolean } = {}) {
     if (stateEq(next, this.state)) return;
     if (next.view.kind === 'thread') {
       const t = next.view.target;
@@ -210,7 +270,7 @@ export class Controller {
       if (stateEq(next, this.state)) return;
     }
     this.apply(next);
-    this.syncHash(next);
+    this.syncHash(next, opts.replace);
   }
 
   stepBack() {
@@ -223,7 +283,7 @@ export class Controller {
 
   private setDeep(deep: boolean) {
     if (this.state.view.kind === 'world') return;
-    this.navigate({ view: this.state.view, deep });
+    this.navigate({ ...this.state, deep });
   }
 
   private openOccurrence(idx: number) {
@@ -231,11 +291,17 @@ export class Controller {
   }
 
   private openOccurrenceId(id: string) {
+    const next = this.occurrenceState(this.state, id);
+    if (next) this.navigate(next);
+  }
+
+  /** The manifestation state for an occurrence, keeping the context it was reached from when it still holds. */
+  private occurrenceState(s: AppState, id: string): AppState | null {
     const i = this.m.occIndex.get(id);
-    if (i === undefined) return;
+    if (i === undefined) return null;
     const o = this.m.occ[i];
     const famSubject: Subject = { type: 'family', id: o.familyId };
-    const v = this.state.view;
+    const v = s.view;
     let ctx: Subject = famSubject;
     if (v.kind === 'focus' && this.inSubject(v.subject, i)) ctx = v.subject;
     else if (v.kind === 'manifest' && this.inSubject(v.context, i)) ctx = v.context;
@@ -243,7 +309,9 @@ export class Controller {
       const ts = threadSubject(v.target, famSubject);
       if (v.target.type !== 'parallels' && this.inSubject(ts, i)) ctx = ts;
     }
-    this.navigate({ view: { kind: 'manifest', occId: id, context: ctx }, deep: false });
+    const trail = v.kind === 'thread' ? v : s.trail;
+    const inTrail = trail && planThread(this.m, trail.target.type, trail.target.id).some(step => step.occ === i);
+    return { view: { kind: 'manifest', occId: id, context: ctx }, deep: false, ...(inTrail ? { trail } : {}), ...(s.graph && !inTrail ? { graph: true as const } : {}) };
   }
 
   private followThread() {
@@ -268,7 +336,7 @@ export class Controller {
     if (a.type === 'subject') this.navigate(focusOn(this.state, a.subject));
     else if (a.type === 'occurrence') {
       const i = this.m.occIndex.get(a.occId);
-      if (i !== undefined) this.navigate({ view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false });
+      if (i !== undefined) this.navigate({ view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false, ...(this.state.graph ? { graph: true as const } : {}) });
     } else {
       // a period: set the time window; leave the current state where it is
       const sc = this.m.scale;
@@ -297,13 +365,39 @@ export class Controller {
       return;
     }
     if (this.search.isOpen) return;
+    if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.toggleAion(); e.preventDefault(); return;
+    }
+    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history) {
+      this.toggleSky(); e.preventDefault(); return;
+    }
+    if ((e.key === 'g' || e.key === 'G') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.toggleMode();
+      e.preventDefault();
+      return;
+    }
     if (e.key === 'Escape') {
       this.stepBack();
       e.preventDefault();
       return;
     }
-    const onBody = !t || t === document.body || t.classList?.contains('globe-canvas');
+    const onBody = !t || t === document.body || t.classList?.contains('globe-canvas') || t.classList?.contains('gv-canvas');
     if (!onBody || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (this.graphMode) {
+      // in the graph the same keys move the graph, not the hidden globe
+      const step = 60;
+      switch (e.key) {
+        case 'ArrowLeft': this.graph.panBy(step, 0); break;
+        case 'ArrowRight': this.graph.panBy(-step, 0); break;
+        case 'ArrowUp': this.graph.panBy(0, step); break;
+        case 'ArrowDown': this.graph.panBy(0, -step); break;
+        case '+': case '=': this.graph.zoomBy(1.3); break;
+        case '-': case '_': this.graph.zoomBy(1 / 1.3); break;
+        default: return;
+      }
+      e.preventDefault();
+      return;
+    }
     const rig = this.engine.rig;
     const k = Math.max(0.25, (rig.dist - 1) / 2.2) * 34;
     switch (e.key) {
@@ -326,21 +420,248 @@ export class Controller {
     const v = next.view;
     const pv = prev.view;
     document.body.dataset.state = v.kind;
-    const sameView = !first && viewEq(pv, v);
+    const graph = !!next.graph;
+    const modeChanged = first ? graph : !!prev.graph !== graph;
+    this.syncMode(graph, first, modeChanged);
+    this.aionSwitch.setAttribute('aria-pressed', String(!!next.history));
+    if (next.history && this.aion) {
+      if (this.tour) this.endThread();
+      if (!prev.history) this.aionTime = this.time.snapshot();
+      const reading = this.aion.history.readings.find(r => r.id === next.history!.reading)!;
+      if (prev.history?.reading !== reading.id) this.timeControl.setRange(this.m.scale.toU(reading.from), this.m.scale.toU(reading.to));
+      if (!prev.history) {
+        this.time.pause();
+        this.time.setCumulative(false);
+        this.time.scrub(this.m.scale.toU(0));
+        this.enterWorld(first);
+      }
+      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+      document.body.classList.remove('deep-open', 'thread-inspecting');
+      this.engine.rig.setShift(next.history.selection ? -0.18 : 0, 0);
+      this.aion.show(next.history);
+      return;
+    }
+    if (prev.history) {
+      this.aion?.hide();
+      this.timeControl.setRange();
+      if (this.aionTime) this.time.restore(this.aionTime);
+      this.aionTime = null;
+    }
+    // a change of mode re-enters the view: the globe flies to what the graph was showing, and back
+    const sameView = !first && !modeChanged && !prev.history && viewEq(pv, v);
+    const previousTrail = pv.kind === 'thread' ? pv : prev.trail;
+    const nextTrail = v.kind === 'thread' ? v : next.trail;
+    const keepsTrail = previousTrail && nextTrail && viewEq(previousTrail, nextTrail);
+    if (previousTrail && !keepsTrail) this.endThread();
+    if (next.trail && !this.tour) this.enterThread(next.trail.target, next.trail.from, first);
+    if (next.trail) this.tourPause();
+    document.body.classList.toggle('thread-inspecting', !!next.trail);
 
     if (!sameView) {
-      if (pv.kind === 'thread') this.endThread();
       if (v.kind !== 'world') this.engine.rig.interacted = true;
       switch (v.kind) {
         case 'world': this.enterWorld(first); break;
         case 'focus': this.enterFocus(v.subject, first); break;
         case 'manifest': this.enterManifest(v.occId, v.context, first); break;
-        case 'thread': this.enterThread(v.target, v.from, first); break;
+        case 'thread':
+          if (keepsTrail && this.tour) {
+            this.reveal.hide(); this.deep.hide(); this.engine.markers.sel.hide(); this.strip.show();
+            const subject = this.tour.subject;
+            this.engine.setPalette(this.subjectPal(subject), 1.2);
+            this.engine.setEmphasis(this.emphasise(this.tour.steps.map(s => s.occ), { relatedLevel: 1.8 }), this.subjectPal(subject).core);
+            this.label.set({ name: subjectName(this.m, subject), line: 'Following the thread', links: [{ text: 'Reading', onClick: () => this.setDeep(true) }] }, `t:${v.target.type}:${v.target.id}`);
+            this.tourJump(Math.max(0, this.tour.i));
+          } else this.enterThread(v.target, v.from, first);
+          break;
       }
     }
     this.syncDeep(next);
     this.syncShift();
     this.measureLabel();
+    this.syncGraph();
+    this.syncSky(prev, next, first);
+  }
+
+  // ── the sky ───────────────────────────────────────────────────────────
+  toggleSky() {
+    if (this.graphMode || this.state.history) return;
+    this.navigate(this.state.sky ? WORLD : inSky());
+  }
+
+  /** Fetch and build the sky layer once; the Earth stage never waits for it. */
+  private requestSky() {
+    if (this.skyRequested) return;
+    this.skyRequested = true;
+    loadSky().then((data) => {
+      const layer = new SkyLayer(data);
+      this.skyLayer = layer;
+      this.engine.attachSky(layer);
+      this.skyView.setLayer(layer);
+      this.syncRig();
+      document.body.classList.add('sky-ready');
+      if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
+      this.pendingSkyEntry = null;
+    }).catch((err) => {
+      this.skyFailed = true;
+      console.warn(err);
+      this.skySwitch.disabled = true;
+      this.skySwitch.title = 'The sky data is unavailable (run npm run sky)';
+      this.pendingSkyEntry = null;
+    });
+  }
+
+  /** Carry the camera out to the whole system, in the default orientation for the moment. */
+  private enterSkyView(instant: boolean) {
+    const layer = this.skyLayer;
+    if (!layer) return;
+    const e = this.engine;
+    const aspect = e.width / Math.max(1, e.height);
+    layer.prepare(e.rig.dist);
+    const ll = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+    e.rig.interacted = true;
+    document.body.classList.add('interacted');
+    e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+  }
+
+  private syncSky(prev: AppState, next: AppState, first: boolean) {
+    const on = !!next.sky;
+    this.skyView.setActive(on, next.sky?.body ?? null);
+    this.skySwitch.setAttribute('aria-pressed', String(on));
+    if (on && !prev.sky) {
+      this.requestSky();
+      if (this.skyByGesture) this.skyByGesture = false;
+      else if (this.skyLayer) this.enterSkyView(first);
+      else if (!this.skyFailed) this.pendingSkyEntry = first ? 'instant' : 'fly';
+    } else if (!on && prev.sky) {
+      this.pendingSkyEntry = null;
+      if (this.skyByGesture) this.skyByGesture = false;
+      else {
+        // leave the way we came: the same orientation, down to the Earth
+        const rig = this.engine.rig;
+        const c = rig.centre();
+        rig.flyTo(c.lat, c.lon, this.worldDist(), { duration: 3.4 });
+      }
+    }
+  }
+
+  /** The zoom gesture crossing the Moon's edge sets and clears the sky flag; the camera stays the user's. */
+  private watchSkyGesture() {
+    const rig = this.engine.rig;
+    if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
+    if (!this.skyLayer || this.graphMode || this.state.history || rig.flying) return;
+    const d = rig.dist;
+    if (!this.state.sky && d > SKY_ENTER) {
+      this.skyByGesture = true;
+      this.navigate(inSky());
+    } else if (this.state.sky && d < SKY_EXIT) {
+      this.skyByGesture = true;
+      this.navigate(WORLD, { replace: true });
+    }
+  }
+
+  onSkyPick(key: BodyKey) {
+    if (this.graphMode || this.state.history) return;
+    if (!this.state.sky) this.skyByGesture = true;
+    this.navigate(inSky({ ...(this.state.sky ?? {}), body: key }));
+  }
+
+  // ── graph mode ────────────────────────────────────────────────────────
+  toggleMode() {
+    this.navigate(withMode(this.state, !this.state.graph));
+  }
+  private toggleAion() {
+    if (!this.aion) return;
+    this.navigate(this.state.history ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading: this.aion.history.readings[0].id } });
+  }
+
+  private syncMode(graph: boolean, first: boolean, changed: boolean) {
+    this.graphMode = graph;
+    this.modeSwitch.set(graph);
+    if (!changed) return;
+    window.clearTimeout(this.pauseTimer);
+    if (graph) {
+      this.graph.show(first);
+      this.hover.hide();
+      // the globe is not seen: once the cross-fade has covered it, stop drawing it
+      if (first) this.engine.setPaused(true);
+      else this.pauseTimer = window.setTimeout(() => { if (this.graphMode) this.engine.setPaused(true); }, 1100);
+    } else {
+      this.engine.setPaused(false);
+      this.graph.hide();
+    }
+  }
+
+  /** The shared view, as the graph sees it: a local subject, a selected occurrence, or lit occurrences. */
+  private syncGraph() {
+    const s = this.state;
+    if (!s.graph) return;
+    const m = this.m;
+    const v = s.view;
+    let subject: string | null = null;
+    let selected: string | null = null;
+    let emphasis: number[] | null = null;
+    const keyOf = (sub: Subject): string | null => (sub.type === 'archetype' ? `a:${sub.id}` : sub.type === 'family' ? `f:${sub.id}` : null);
+    if (v.kind === 'focus') {
+      subject = keyOf(v.subject);
+      if (!subject) emphasis = subjectOccurrences(m, v.subject);
+    } else if (v.kind === 'manifest') {
+      selected = `o:${v.occId}`;
+      subject = keyOf(v.context);
+      if (!subject) {
+        const i = m.occIndex.get(v.occId);
+        if (i !== undefined) subject = `f:${m.occ[i].familyId}`;
+      }
+    }
+    this.graph.setInsets(this.graphInsets());
+    this.graph.setTarget({ subject, selected, emphasis });
+  }
+
+  private graphInsets(): Insets {
+    const s = this.state;
+    const narrow = isNarrow();
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    const ins: Insets = { l: 0, t: narrow ? 84 : 64, r: 0, b: narrow ? 136 : 92 };
+    if (s.deep && s.view.kind !== 'world') {
+      if (!narrow) ins.r = Math.min(W * 0.58, 780) + 10;
+    } else if (s.view.kind === 'manifest') {
+      if (narrow) ins.b = H * 0.54 + 18;
+      else ins.r = Math.min(410, W * 0.4) + 34 + 28;
+    }
+    return ins;
+  }
+
+  private syncGraphInsets() {
+    if (this.state.graph) this.graph.setInsets(this.graphInsets());
+  }
+
+  private splitKey(key: string): { t: string; id: string } {
+    const i = key.indexOf(':');
+    return { t: key.slice(0, i), id: key.slice(i + 1) };
+  }
+
+  private onGraphSelect(key: string) {
+    const { t, id } = this.splitKey(key);
+    if (t === 'a') this.navigate(focusOn(this.state, { type: 'archetype', id }));
+    else if (t === 'f') this.navigate(focusOn(this.state, { type: 'family', id }));
+    else this.openOccurrenceId(id);
+  }
+
+  /** Back to the globe, flying to a node (or to whatever is in view when none is given). */
+  private onGraphEarth(key: string | null) {
+    const earth = withMode(this.state, false);
+    if (key) {
+      const { t, id } = this.splitKey(key);
+      if (t === 'a') return this.navigate(focusOn(earth, { type: 'archetype', id }));
+      if (t === 'f') return this.navigate(focusOn(earth, { type: 'family', id }));
+      const occ = this.occurrenceState(earth, id);
+      if (occ) return this.navigate(occ);
+    } else if (this.state.view.kind === 'focus') {
+      return this.navigate(earth);
+    } else if (this.state.view.kind === 'world') {
+      return this.navigate(earth);
+    }
+    this.navigate(earth);
   }
 
   private measureLabel() {
@@ -394,7 +715,7 @@ export class Controller {
     this.timeControl.setSubject(null, '#ffffff');
     this.setBody(null);
     document.title = 'An Archetypal Earth';
-    if (!first) {
+    if (!first && !this.graphMode) {
       const c = e.rig.centre();
       e.rig.flyTo(c.lat, c.lon, Math.max(e.rig.dist, this.worldDist()), { duration: 2.0 });
     }
@@ -442,9 +763,18 @@ export class Controller {
     const idx = subjectOccurrences(m, subject);
     const pal = this.subjectPal(subject);
     e.setPalette(pal, first ? 0.01 : 1.5);
-    e.setEmphasis(this.emphasise(idx), pal.core);
     this.reveal.hide();
     e.markers.sel.hide();
+    if (this.graphMode) {
+      // the graph is the main view: the shared layers follow, the globe is left as it was
+      this.floats.clear();
+      this.timeControl.setSubject(idx, rgbToHex(pal.core));
+      this.setLabelFor(subject);
+      this.setBody(subject.type);
+      document.title = `${subjectName(m, subject)} — An Archetypal Earth`;
+      return;
+    }
+    e.setEmphasis(this.emphasise(idx), pal.core);
     const sp = idx.length ? this.frameSet(idx, { duration: first ? 0.01 : undefined }) : null;
     if (first && sp) e.rig.flyTo(sp.lat, sp.lon, this.frameDistance(sp.radius * 1.18 + 0.07), { instant: true });
     this.floats.set(this.pickShowcase(subject, idx, sp ? { lat: sp.lat, lon: sp.lon } : null), isNarrow());
@@ -587,12 +917,14 @@ export class Controller {
     const ctxIdx = subjectOccurrences(m, context);
     const par = o.parallelIds.map((id) => m.occIndex.get(id)).filter((i): i is number => i !== undefined);
     e.setPalette(famPal, first ? 0.01 : 1.4);
-    e.setEmphasis(this.emphasise(ctxIdx, { selected: oi, relatedLevel: 1.15, extra: { idx: par, level: 1.6 } }), famPal.core);
     this.floats.clear();
-    const dist = o.geoPrecision === 'culture' ? 3.0 : o.geoPrecision === 'region' ? 2.6 : 2.25;
-    e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
-    if (m.located[oi]) e.markers.sel.show(m.dir[oi], famPal.core);
-    else e.markers.sel.hide();
+    if (!this.graphMode) {
+      e.setEmphasis(this.emphasise(ctxIdx, { selected: oi, relatedLevel: 1.15, extra: { idx: par, level: 1.6 } }), famPal.core);
+      const dist = o.geoPrecision === 'culture' ? 3.0 : o.geoPrecision === 'region' ? 2.6 : 2.25;
+      e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
+      if (m.located[oi]) e.markers.sel.show(m.dir[oi], famPal.core);
+      else e.markers.sel.hide();
+    }
     this.reveal.show(oi);
     this.timeControl.setSubject(m.famOcc.get(o.familyId) ?? null, rgbToHex(famPal.core));
     this.label.set({ name: subjectName(m, context), back: () => this.stepBack() }, `m:${context.type}:${context.id}`);
@@ -743,6 +1075,9 @@ export class Controller {
 
   // ── per-frame ─────────────────────────────────────────────────────────
   private tick(dt: number) {
+    this.watchSkyGesture();
+    this.skyView.tick();
+    this.aion?.update(dt);
     this.floats.update(this.engine, dt);
     const t = this.tour;
     if (!t) return;

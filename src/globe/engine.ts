@@ -7,9 +7,14 @@ import type { TimeModel } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { CameraRig } from './controls';
 import { Arcs, Marker } from './arcs';
-import { Aura, AtmosphereShell, Backdrop, Earth, loadTextures } from './earth';
+import { Aura, AtmosphereShell, Backdrop, Earth, hiResChoice, loadBaseHi, loadBaseLo } from './earth';
 import { Presences } from './presences';
 import { createShared, type Shared } from './shared';
+import { TileLayer } from './tiles';
+import { depthPlanes, surfaceWeight } from '../sky/stages';
+import type { SkyLayer } from '../sky/layer';
+import type { BodyKey } from '../types/sky';
+import { wrapLon } from '../data/geo';
 
 export interface ScreenPoint {
   x: number;
@@ -24,6 +29,8 @@ export interface EngineCallbacks {
   onInteract(): void;
   onGrab(): void;
   onPalette(p: RGBPalette): void;
+  /** a body of the sky layer was picked */
+  onSkyPick?(key: BodyKey): void;
 }
 
 export const FOV = 38;
@@ -37,7 +44,12 @@ export class GlobeEngine {
   readonly arcs: Arcs;
   readonly markers: { sel: Marker; hover: Marker; head: Marker };
   presences!: Presences;
-  private earth!: Earth;
+  earth!: Earth;
+  tiles!: TileLayer;
+  /** the sky layer, once its data has loaded (absent: the atlas exactly as it was) */
+  sky: SkyLayer | null = null;
+  /** false once the globe is too small for its constant-pixel surface layers to read (sky stages) */
+  private surfaceOn = true;
   private backdrop: Backdrop;
   private aura: Aura;
   private shell: AtmosphereShell;
@@ -62,7 +74,10 @@ export class GlobeEngine {
   private hoverIdx = -1;
   private tmpV = new THREE.Vector3();
   private raf = 0;
+  baseKind: '2k' | '4k' | '8k' = '2k';
+  baseUploadMs = 0;
   private running = true;
+  private paused = false;
 
   constructor(private parent: HTMLElement, private model: Model, private time: TimeModel, private cb: EngineCallbacks, readonly reduced: boolean) {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
@@ -76,6 +91,7 @@ export class GlobeEngine {
       onInteract: () => cb.onInteract(),
       onGrab: () => cb.onGrab(),
       onClick: (x, y) => this.handleClick(x, y),
+      isOverPresence: (x, y) => !!this.presences && this.surfaceOn && this.presences.pick(x, y, this.camera, this.width, this.height, this.pickRadius()) >= 0,
       onHover: (x, y, inside) => {
         this.pointer.x = x;
         this.pointer.y = y;
@@ -96,10 +112,11 @@ export class GlobeEngine {
   }
 
   private async init() {
-    const tex = await loadTextures(this.renderer);
+    const lo = await loadBaseLo(this.renderer);
     this.presences = new Presences(this.model, this.shared, this.renderer);
-    this.earth = new Earth(this.shared, tex, this.presences.densityTarget.texture);
-    this.scene.add(this.backdrop.mesh, this.earth.mesh, this.shell.mesh, this.presences.mesh, this.arcs.group, this.aura.points, this.markers.sel.mesh, this.markers.hover.mesh, this.markers.head.mesh);
+    this.earth = new Earth(this.shared, lo, this.presences.densityTarget.texture);
+    this.tiles = new TileLayer(this.renderer, this.earth.u, this.reduced);
+    this.scene.add(this.backdrop.mesh, this.earth.mesh, this.tiles.group, this.shell.mesh, this.presences.mesh, this.arcs.group, this.aura.points, this.markers.sel.mesh, this.markers.hover.mesh, this.markers.head.mesh);
     this.palDirty = true;
     this.last = performance.now();
     const loop = () => {
@@ -108,6 +125,36 @@ export class GlobeEngine {
       this.frame();
     };
     loop();
+    void this.upgradeBase();
+  }
+
+  /** After first paint: fetch the sharp base, upload it quietly, then blend it in. */
+  private async upgradeBase() {
+    const which = hiResChoice(this.renderer);
+    this.tiles.minEmit = which === '8k' ? 6 : 5;
+    if (!which) return;
+    try {
+      await new Promise((r) => setTimeout(r, 700));
+      const hi = await loadBaseHi(this.renderer, which);
+      // wait for a calm frame: the upload of a big texture is one long GPU call
+      await new Promise((r) => requestAnimationFrame(() => r(null)));
+      const t0 = performance.now();
+      this.renderer.initTexture(hi);
+      this.baseUploadMs = performance.now() - t0;
+      this.earth.setHi(hi);
+      this.baseKind = which;
+    } catch (err) {
+      console.warn('hi-res base unavailable', err);
+    }
+  }
+
+  /**
+   * Stop drawing the globe (the graph mode is up) without stopping the clock: time, the camera rig, the
+   * palette tween and frame callbacks keep running; the GPU work (presences, tiles, markers, render) does not.
+   */
+  setPaused(paused: boolean) {
+    this.paused = paused;
+    if (!paused) this.last = performance.now();
   }
 
   dispose() {
@@ -158,6 +205,19 @@ export class GlobeEngine {
     out.r = (1 / Math.sqrt(Math.max(d * d - 1, 0.01)) / t) * 0.5 * this.height;
   }
 
+  /** Add the sky layer to the scene. Idempotent. */
+  attachSky(layer: SkyLayer) {
+    if (this.sky === layer) return;
+    this.sky = layer;
+    this.scene.add(layer.group);
+    layer.setSize(this.width, this.height, this.pr);
+    // compile the sky's programs now, while the Earth is on screen, so the first pull-back does not hitch
+    const was: [THREE.Object3D, boolean][] = [];
+    layer.group.traverse((o) => { was.push([o, o.visible]); o.visible = true; });
+    try { this.renderer.compile(this.scene, this.camera); } catch { /* compiled on first draw instead */ }
+    for (const [o, v] of was) o.visible = v;
+  }
+
   private onResize = () => {
     const w = this.parent.clientWidth || window.innerWidth;
     const h = this.parent.clientHeight || window.innerHeight;
@@ -170,15 +230,22 @@ export class GlobeEngine {
     this.camera.updateProjectionMatrix();
     this.shared.res.value.set(w * this.pr, h * this.pr);
     this.shared.px.value = this.pr;
+    this.sky?.setSize(w, h, this.pr);
   };
 
   // ── picking ────────────────────────────────────────────────────────────
   private pickRadius(): number {
-    return (matchMedia('(pointer: coarse)').matches ? 26 : 15);
+    // generous and magnetic: the nearest live presence within reach is the one you mean
+    return matchMedia('(pointer: coarse)').matches ? 34 : 22;
   }
 
   private handleClick(x: number, y: number) {
-    const idx = this.presences ? this.presences.pick(x, y, this.camera, this.width, this.height, this.pickRadius() * 1.15) : -1;
+    const body = this.sky?.pick(x, y, this.pickRadius() * 0.8);
+    if (body) {
+      this.cb.onSkyPick?.(body);
+      return;
+    }
+    const idx = this.presences && this.surfaceOn ? this.presences.pick(x, y, this.camera, this.width, this.height, this.pickRadius() * 1.2) : -1;
     this.cb.onPick(idx);
   }
 
@@ -209,7 +276,18 @@ export class GlobeEngine {
     S.ramp.value = DEFAULT_RAMP;
     S.timeOn.value = this.time.on;
 
+    // the sky: where the camera looks, and carrying the camera with the sky as the pull-back hands off
+    if (this.sky) {
+      const { focus, dLon } = this.sky.prepare(this.rig.dist);
+      this.rig.focus.copy(focus);
+      if (dLon) this.rig.lon = wrapLon(this.rig.lon + dLon);
+    }
     this.rig.update(dt);
+    // the clip planes follow the altitude so depth stays precise from orbit to the ground
+    const camDist = this.camera.position.length();
+    const planes = depthPlanes(camDist, !!this.sky);
+    this.camera.near = planes.near;
+    this.camera.far = planes.far;
     this.camera.updateMatrixWorld();
     this.camera.updateProjectionMatrix();
     const e = this.camera.projectionMatrix.elements;
@@ -217,6 +295,7 @@ export class GlobeEngine {
     e[9] = -this.rig.shiftY;
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
     this.camera.matrixWorldInverse.copy(this.camera.matrixWorld).invert();
+    this.sky?.update(this.camera, this.rig.dist, this.width, this.height);
 
     const dist = this.camera.position.length();
     S.camDist.value = dist;
@@ -239,6 +318,11 @@ export class GlobeEngine {
       this.cb.onPalette(p);
     }
 
+    if (this.paused) {
+      for (const f of this.frameCbs) f(dt, t);
+      return;
+    }
+
     // light follows the camera: always a soft key from upper-left
     const m = this.camera.matrixWorld.elements;
     this.earth.lightDir.value.set(
@@ -254,18 +338,22 @@ export class GlobeEngine {
     this.backdrop.radius.value = 1 / Math.sqrt(Math.max(dist * dist - 1, 0.01)) / tanH;
     this.backdrop.parallax.value.set(this.rig.lon * 0.018, this.rig.lat * 0.018);
 
-    this.presences.setSizeFor(dist);
+    const surface = this.sky ? surfaceWeight(dist) : 1;
+    this.presences.setSizeFor(dist, surface);
+    this.setSurface(surface);
     this.presences.step(dt);
     if (render) this.presences.renderDensity();
-    this.markers.sel.step(dt, this.pr);
-    this.markers.hover.step(dt, this.pr);
-    this.markers.head.step(dt, this.pr);
+    this.earth.step(dt, this.reduced);
+    this.tiles.update(this.camera, dt, this.width, this.height);
+    this.markers.sel.step(dt, this.camera, this.height);
+    this.markers.hover.step(dt, this.camera, this.height);
+    this.markers.head.step(dt, this.camera, this.height);
 
     // hover (CPU pick, once per frame, only when the pointer moved)
     if (this.pointer.dirty) {
       this.pointer.dirty = false;
       let idx = -1;
-      if (this.pointer.inside && !this.rig.dragging && !this.rig.flying) {
+      if (this.pointer.inside && this.surfaceOn && !this.rig.dragging && !this.rig.flying) {
         idx = this.presences.pick(this.pointer.x, this.pointer.y, this.camera, this.width, this.height, this.pickRadius());
       }
       this.hoverIdx = idx;
@@ -277,6 +365,17 @@ export class GlobeEngine {
 
     for (const f of this.frameCbs) f(dt, t);
     if (render) this.renderer.render(this.scene, this.camera);
+  }
+
+  /** The atlas's surface layers fade as the pull-back passes the Moon; fully off, they are not drawn. */
+  private setSurface(w: number) {
+    const on = w > 0.002;
+    this.surfaceOn = on;
+    this.presences.mesh.visible = on;
+    this.aura.points.visible = on;
+    this.arcs.group.visible = on;
+    this.tiles.group.visible = on;
+    for (const m of [this.markers.sel, this.markers.hover, this.markers.head]) m.suppressed = !on;
   }
 
   /** Test/debug hook: current camera state. */

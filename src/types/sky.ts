@@ -109,6 +109,14 @@ export interface SkyGrid {
   bodies: Partial<Record<BodyKey, SkyColumns>>;
 }
 
+/** One real period of an orbit, for drawing its ring: heliocentric, ecliptic, precession since 2026.0 removed. */
+export interface SkyOrbitPath extends SkyColumns {
+  start: string;
+  stepHours: number;
+  count: number;
+  frame: string;
+}
+
 export interface GoldenEpoch {
   label: string;
   iso: string;
@@ -164,6 +172,8 @@ export interface SkyData {
   cultures: Record<string, Partial<Record<BodyKey, CultureProjection>>>;
   planets: SkyGrid;
   moon: SkyGrid;
+  /** the rings of the system view: one period of each heliocentric body */
+  orbits: Partial<Record<BodyKey, SkyOrbitPath>>;
   golden: {
     epochs: GoldenEpoch[];
     ayanamsa: {

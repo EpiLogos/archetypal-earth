@@ -111,25 +111,56 @@ export class Arcs {
   }
 }
 
-/** A quiet ring that seats on one point of the globe (selection, hover, tour head). */
+/**
+ * A quiet ring that lies in the surface at one point of the globe (selection,
+ * hover, tour head): a polar patch of the sphere centred on the point, lifted a
+ * hair, depth-tested with a polygon offset so it never cuts into or flickers
+ * against the terrain, foreshortening with the surface toward the limb and
+ * fading out as it goes round the horizon. Its size is held in screen terms.
+ */
 export class Marker {
   readonly mesh: THREE.Mesh;
   readonly u = {
     uDir: { value: new THREE.Vector3(0, 0, 1) },
-    uRes: { value: new THREE.Vector2(1, 1) },
-    uSize: { value: 22 },
+    uE: { value: new THREE.Vector3(1, 0, 0) },
+    uN: { value: new THREE.Vector3(0, 1, 0) },
+    uWorld: { value: 0.04 },
+    uLift: { value: 1.0016 },
     uColor: { value: new THREE.Vector3(1, 1, 1) },
     uAlpha: { value: 0 },
     uTime: { value: 0 },
   };
   private target = 0;
+  private p = new THREE.Vector3();
+  /** held off while the globe is too small for a constant-pixel decal (the sky stages) */
+  suppressed = false;
 
-  constructor(shared: Shared, public sizePx = 22) {
-    this.u.uRes = shared.res;
+  /** `sizePx`: outer radius of the decal in css px, wherever it sits on screen */
+  constructor(shared: Shared, public sizePx = 26) {
     this.u.uTime = shared.time;
+    const RINGS = 9;
+    const SEGS = 72;
+    const pos: number[] = [0, 0, 0];
+    for (let r = 1; r <= RINGS; r++) {
+      const rho = r / RINGS;
+      for (let s = 0; s < SEGS; s++) {
+        const th = (s / SEGS) * Math.PI * 2;
+        pos.push(Math.cos(th) * rho, Math.sin(th) * rho, 0);
+      }
+    }
+    const idx: number[] = [];
+    for (let s = 0; s < SEGS; s++) idx.push(0, 1 + s, 1 + ((s + 1) % SEGS));
+    for (let r = 1; r < RINGS; r++) {
+      const a = 1 + (r - 1) * SEGS;
+      const b = 1 + r * SEGS;
+      for (let s = 0; s < SEGS; s++) {
+        const s1 = (s + 1) % SEGS;
+        idx.push(a + s, b + s, a + s1, a + s1, b + s, b + s1);
+      }
+    }
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 1, -1, 0, 1, 1, 0, -1, 1, 0], 3));
-    geo.setIndex([0, 1, 2, 0, 2, 3]);
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    geo.setIndex(idx);
     const mat = new THREE.ShaderMaterial({
       vertexShader: MARKER_VERT,
       fragmentShader: MARKER_FRAG,
@@ -137,7 +168,11 @@ export class Marker {
       transparent: true,
       depthWrite: false,
       depthTest: true,
+      side: THREE.DoubleSide,
       blending: THREE.AdditiveBlending,
+      polygonOffset: true,
+      polygonOffsetFactor: -4,
+      polygonOffsetUnits: -4,
     });
     this.mesh = new THREE.Mesh(geo, mat);
     this.mesh.frustumCulled = false;
@@ -146,20 +181,33 @@ export class Marker {
   }
 
   show(dir: Vec3, colour: [number, number, number]) {
-    this.u.uDir.value.set(dir[0], dir[1], dir[2]);
+    const d = this.u.uDir.value.set(dir[0], dir[1], dir[2]).normalize();
+    // local surface frame: east and north tangents at the point
+    const e = this.u.uE.value.set(d.z, 0, -d.x);
+    if (e.lengthSq() < 1e-6) e.set(1, 0, 0);
+    e.normalize();
+    this.u.uN.value.crossVectors(d, e).normalize();
     this.u.uColor.value.set(colour[0], colour[1], colour[2]);
     this.target = 1;
-    this.mesh.visible = true;
+    this.mesh.visible = !this.suppressed;
   }
 
   hide() {
     this.target = 0;
   }
 
-  step(dt: number, px: number) {
+  /** `heightCss`: viewport height in css px; the decal's world size follows the camera so it stays readable. */
+  step(dt: number, camera: THREE.PerspectiveCamera, heightCss: number) {
     const a = this.u.uAlpha.value;
     this.u.uAlpha.value = a + (this.target - a) * (1 - Math.exp(-dt * 8));
-    this.u.uSize.value = this.sizePx * px;
+    if (this.suppressed) { this.mesh.visible = false; return; }
+    if (this.target === 1) this.mesh.visible = true;
     if (this.target === 0 && this.u.uAlpha.value < 0.01) this.mesh.visible = false;
+    if (!this.mesh.visible) return;
+    const me = camera.matrixWorldInverse.elements;
+    this.p.copy(this.u.uDir.value).multiplyScalar(this.u.uLift.value);
+    const depth = -(me[2] * this.p.x + me[6] * this.p.y + me[10] * this.p.z + me[14]);
+    const perPx = (2 * Math.tan((camera.fov * Math.PI) / 360) * Math.max(depth, 0.05)) / Math.max(heightCss, 1);
+    this.u.uWorld.value = this.sizePx * perPx;
   }
 }

@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import engine
 
 SIDECAR_NAME = "archetypal-earth-ephemeris"
-SIDECAR_VERSION = "1.0.0"
+SIDECAR_VERSION = "1.1.0"
 PORT = int(os.environ.get("EPHEMERIS_PORT", "5187"))
 
 app = FastAPI(title=SIDECAR_NAME, version=SIDECAR_VERSION, docs_url=None, redoc_url=None)
@@ -84,7 +84,7 @@ def now():
 def positions(
     t: str | None = None,
     start: str | None = None,
-    stepHours: Annotated[float, Query(gt=0, le=24 * 400)] = 48.0,
+    stepHours: Annotated[float, Query(gt=0, le=24 * 1000)] = 48.0,
     count: Annotated[int, Query(ge=1, le=200000)] = 1,
     bodies: str = "mercury,venus,mars,jupiter,saturn,uranus,neptune,pluto,earth",
     frame: Annotated[str, Query(pattern="^(helio|geo)$")] = "helio",
@@ -128,6 +128,8 @@ def golden():
         "epochs": [
             engine.golden_epoch("J2000.0", "2000-01-01T12:00:00Z"),
             engine.golden_epoch("Modern sample", "2026-10-08T12:00:00Z"),
+            # an instant that is on no sample grid: the interpolation's honest probe
+            engine.golden_epoch("Off-grid probe", "2026-03-17T07:23:00Z"),
             engine.golden_julian(
                 "Jupiter–Saturn conjunction of Aion's account (29 May 7 BCE, Julian calendar)",
                 -6, 5, 29, 12.0, "7 BCE-05-29 (Julian)",

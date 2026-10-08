@@ -21,7 +21,7 @@ npx vitest run tests/data/sky.test.ts
 
 | Component | Pin | Role |
 | --- | --- | --- |
-| `archetypal-earth-ephemeris` | 1.0.0 (`ephemeris/app.py`) | the local service; version reported by `/ping` |
+| `archetypal-earth-ephemeris` | 1.1.0 (`ephemeris/app.py`) | the local service; version reported by `/ping` |
 | kerykeion | 6.0.5 | charts, houses, aspects, lunar phase (factories) |
 | libephemeris | 3.2.2 | Swiss-Ephemeris-compatible API over JPL DE440 (Skyfield, jplephem, pyerfa) |
 | fastapi / uvicorn | 0.143.0 / 0.54.0 | HTTP |
@@ -59,7 +59,8 @@ All GET, JSON, bound to 127.0.0.1:5187 (`EPHEMERIS_PORT` overrides). CORS allows
 - `cultures` — the cultural reprojection of the classical seven into the field's own cultures.
 - `planets` — heliocentric ecliptic grid, every 48 hours, 2015-01-01 → 2039-12-31 (4,566 samples; the Earth's grid gives the Sun's direction).
 - `moon` — geocentric ecliptic grid, every 6 hours, same span (36,525 samples).
-- `golden` — pinned epochs (J2000.0; a modern sample; the 7 BCE conjunction as `outside-ephemeris-range`), the ayanamsa table (Fagan-Bradley and Lahiri, ±13,000 years, 500-year steps plus −6, 0, 1900, 2000, 2026), and the 13 IAU constellation boundaries along the J2000.0 ecliptic.
+- `orbits` — one sidereal period of each heliocentric body (180 samples, ecliptic of date with the precession since 2026.0 removed, so a ring is a closed curve in the 2026 frame). The rings of the system view are these real orbits, not drawn ellipses; Sun-centred.
+- `golden` — pinned epochs (J2000.0; a modern sample; an off-grid probe at 2026-03-17T07:23Z that the client's interpolation is tested against; the 7 BCE conjunction as `outside-ephemeris-range`), the ayanamsa table (Fagan-Bradley and Lahiri, ±13,000 years, 500-year steps plus −6, 0, 1900, 2000, 2026), and the 13 IAU constellation boundaries along the J2000.0 ecliptic.
 - `meta` — `generatedAt`, the sidecar name/version/packages, the ephemeris kernel and range, the span, the frame, and counts.
 
 ## Sources
@@ -111,6 +112,17 @@ Recorded with the full thing in view; none was left blocking on the owner. D1–
 9. **Culture reprojection is the vault's table, transcribed.** `cultures.json` copies `planetary-gods.md`; where that table marks a cell `(J)` the basis is `jung`, `(S)` is `inferred`, unmarked classical names are `site`. The Chinese wuxing set has five terms: Sun and Moon have no cell, and the sky says so rather than inventing one.
 10. **Generated output is committed, reviewable and diff-checked.** `public/data/sky.json` is 2.1 MB because the grids are the data; it is lazy-loaded by the experience layer so Earth mode pays nothing for it.
 11. **A phase commit stages only its own files.** The working tree carries the owner's uncommitted changes (README.md, curation/image-queries.json, index.html, package-lock.json, and earlier edits in several tracked files). Where a file of mine was already dirty (`package.json`), the commit stages only my hunks.
+
+### Phase 1 — the sky as a scale of the globe
+
+12. **One camera, one frame.** The scene is Earth-fixed (Earth radius 1, +Y north). The sky is drawn in that frame by rotating the ecliptic of date into it (obliquity IAU 2006, mean sidereal time Meeus 12.4): ecliptic → equator (ε) → scene with latitude = declination, longitude = right ascension − GMST. The client keeps *mean* sidereal time; the sidecar's is apparent, and the equation of the equinoxes (≤ 0.005°) is the whole difference — far below a pixel, so it is tested to 0.006° rather than silently ignored.
+13. **Stages are a pure function of distance.** Edges at 40 (lunar), 600 (handoff) and 3000 (system) Earth radii. Between 600 and 3000 the look-at point moves from the Earth to the Sun and the camera rides the sky (the rig rotates against the Earth's turning) so the sky stays still while the Earth turns beneath it. All distance weights use distance to the focus; depth planes and Earth uniforms use distance to the origin.
+14. **Radial compression: `900 R⊕ × √(au)`.** True scale cannot show Mercury and Neptune together; a power scale keeps order and shows all eleven. The factor is printed in the view caption, and angles, longitudes and inclinations are true. Pluto's typical reach (≈ 39 au → 5,620 R⊕) sets the framing, so every body is in frame at the system home (tested on a wide and a phone viewport).
+15. **Earth mode is pixel-identical.** Below distance 6 the depth planes are exactly the atlas's own expressions, the sky group is not drawn below distance 20, and the drag cap (0.25°/px) exceeds the old maximum (0.2°/px). `tests/ui/e2e/sky-pixels.mjs` renders seven Earth poses against a build of the pre-sky source and demands zero differing pixels (with a negative control that must fail).
+16. **The atlas's constant-pixel layers give way to the sky.** Presences, arcs, tiles and marker decals are sized in screen pixels, so on a shrinking globe they smear into a white blob. Between 6 and 36 Earth radii they fade (presence size × a smoothstep) and are not drawn beyond. At 6 and below the weight is exactly 1.
+17. **Sky state is a flag with its own lifecycle.** `AppState.sky = {body?, birth?}`, valid only over the world view; focusing anything, or switching mode, drops it. The zoom gesture sets it at distance 40 and clears it at 30 (hysteresis, so a hovering wheel cannot flicker the sky); gesture transitions never fly the camera, and leaving by gesture replaces the history entry rather than pushing one. `S`, the Sky switch and `#/sky…` links fly to the system home; Back flies to the Earth.
+18. **The sky layer is lazy.** Its 2.1 MB of data is fetched only once the user pulls back past 4.4 Earth radii, presses `S` or follows a link. Earth mode pays nothing. The sky's shader programs are compiled when the layer attaches, while the Earth is on screen.
+19. **Sidecar 1.1.0.** The step limit rose to 1,000 days per sample (orbit sampling needs one sidereal period of Neptune at coarse steps) and the off-grid probe epoch was added.
 
 ## Draft vault schema proposal (`wiki/sky/`, for the owner)
 

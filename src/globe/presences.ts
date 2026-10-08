@@ -79,6 +79,7 @@ export class Presences {
       depthWrite: false,
       depthTest: true,
       blending: THREE.CustomBlending,
+      // screen blend: overlaps keep their hue and can never exceed white
       blendEquation: THREE.AddEquation,
       blendSrc: THREE.OneFactor,
       blendDst: THREE.OneMinusSrcColorFactor,
@@ -136,9 +137,9 @@ export class Presences {
     this.focusMixTarget = on ? 1 : 0;
   }
 
-  setSizeFor(dist: number) {
-    // regional zoom lets the presences breathe a little larger
-    this.sizeK.value = 0.92 + Math.max(0, 2.6 - dist) * 0.32;
+  setSizeFor(dist: number, surface = 1) {
+    // regional zoom lets the presences breathe a little larger; the sky stages shrink them away with the globe
+    this.sizeK.value = (1 + Math.max(0, 2.4 - dist) * 0.12) * surface;
   }
 
   step(dt: number) {
@@ -200,7 +201,7 @@ export class Presences {
     const cam = camera.position;
     const camLen = cam.length();
     this.camDirTmp.copy(cam).divideScalar(camLen);
-    const horizon = 1 / camLen + 0.03;
+    const horizon = 1 / camLen + 0.04;
     const e = camera.projectionMatrix.elements;
     const v = camera.matrixWorldInverse.elements;
     let best = -1;
@@ -209,8 +210,9 @@ export class Presences {
       if (!m.located[i]) continue;
       const d = m.dir[i];
       if (d[0] * this.camDirTmp.x + d[1] * this.camDirTmp.y + d[2] * this.camDirTmp.z < horizon) continue;
-      if (this.rel[i] < 0.5) continue;
-      if (timeVisibility(m.u[i], w) < 0.35) continue;
+      // only live presences are selectable: the same rule the shader draws them by
+      if (this.rel[i] < 0.6) continue;
+      if (timeVisibility(m.u[i], w) < 0.5) continue;
       // view space
       const x = v[0] * d[0] + v[4] * d[1] + v[8] * d[2] + v[12];
       const y = v[1] * d[0] + v[5] * d[1] + v[9] * d[2] + v[13];

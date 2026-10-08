@@ -12,12 +12,17 @@ import { DEFAULT_VAULT, normalizePassage } from './aion.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const SIDECAR_URL = process.env.EPHEMERIS_URL || 'http://127.0.0.1:5187';
 export const SIDECAR_NAME = 'archetypal-earth-ephemeris';
-export const SIDECAR_VERSION = '1.0.0';
+export const SIDECAR_VERSION = '1.1.0';
 /** the packages whose exact versions the sidecar must report (single-sourced from requirements.txt) */
 const PINNED_PACKAGES = ['kerykeion', 'libephemeris', 'fastapi', 'uvicorn', 'timezonefinder'];
 
 export const SPAN = { from: '2015-01-01T00:00:00Z', to: '2040-01-01T00:00:00Z' };
 const PLANET_STEP_HOURS = 48;
+/** one sidereal period of each orbit, sampled around this epoch to draw the rings from real positions */
+const ORBIT_EPOCH = '2026-01-01T00:00:00Z';
+const ORBIT_SAMPLES = 180;
+/** general precession in longitude, degrees per Julian century (IAU 2006 linear term) */
+const PRECESSION_DEG_PER_CENTURY = 1.3969713;
 const MOON_STEP_HOURS = 6;
 const BODY_KEYS = ['sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
 const HELIO = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
@@ -257,11 +262,31 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
   // floor: a grid never runs past the stated span
   const planetCount = Math.floor((spanTo - spanFrom) / 3_600_000 / PLANET_STEP_HOURS) + 1;
   const moonCount = Math.floor((spanTo - spanFrom) / 3_600_000 / MOON_STEP_HOURS) + 1;
-  const [planetRaw, moonRaw, golden] = await Promise.all([
+  const orbitJobs = curation.bodies.bodies.filter((b) => b.orbit && HELIO.includes(b.key));
+  const orbitEpoch = Date.parse(ORBIT_EPOCH);
+  const [planetRaw, moonRaw, golden, orbitRaw] = await Promise.all([
     get('/positions', { start: SPAN.from, stepHours: PLANET_STEP_HOURS, count: planetCount, bodies: HELIO.join(','), frame: 'helio' }),
     get('/positions', { start: SPAN.from, stepHours: MOON_STEP_HOURS, count: moonCount, bodies: 'moon', frame: 'geo' }),
     get('/golden'),
+    Promise.all(orbitJobs.map((b) => {
+      const periodHours = b.orbit.siderealDays * 24;
+      const start = new Date(orbitEpoch - (periodHours / 2) * 3_600_000).toISOString().replace(/\.\d+Z$/, 'Z');
+      return get('/positions', { start, stepHours: Number((periodHours / ORBIT_SAMPLES).toFixed(4)), count: ORBIT_SAMPLES, bodies: b.key, frame: 'helio' });
+    })),
   ]);
+  // Orbit rings: one real period of each body, with the precession accumulated since the epoch taken
+  // out so the ring closes on itself instead of shearing across centuries.
+  const orbits = Object.fromEntries(orbitJobs.map((b, i) => {
+    const raw = orbitRaw[i];
+    const col = raw.bodies[b.key];
+    const startMs = Date.parse(raw.start);
+    const lon = col.lon.map((x, k) => {
+      const years = (startMs + k * raw.stepHours * 3_600_000 - orbitEpoch) / (365.25 * 86_400_000);
+      const corrected = (((x - (PRECESSION_DEG_PER_CENTURY / 100) * years) % 360) + 360) % 360;
+      return Number(corrected.toFixed(3));
+    });
+    return [b.key, { start: raw.start, stepHours: raw.stepHours, count: raw.count, frame: 'heliocentric ecliptic, precession since 2026.0 removed', lon, lat: col.lat.map(clean), r: col.r.map(clean) }];
+  }));
   const planets = {
     start: planetRaw.start, stepHours: planetRaw.stepHours, count: planetRaw.count,
     bodies: Object.fromEntries(HELIO.map((k) => [k, tidy(planetRaw.bodies[k])])),
@@ -300,6 +325,7 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
     cultures: curation.cultures.cultures,
     planets,
     moon,
+    orbits,
     golden: {
       epochs: golden.epochs,
       ayanamsa: golden.ayanamsa,
