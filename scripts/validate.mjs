@@ -62,7 +62,8 @@ export function validateField(f) {
     if (!isStr(fam.name) || !fam.name) err(`${w}: name`);
     if (!SUBTYPE.has(fam.subtype)) err(`${w}: subtype ${fam.subtype}`);
     if (!Array.isArray(fam.aliases)) err(`${w}: aliases`);
-    if (!isStr(fam.oneLine) || !fam.oneLine || fam.oneLine.length > 90) err(`${w}: oneLine empty or >90 (${(fam.oneLine || '').length})`);
+    // a family the vault gives no line for has no line; invented filler is the violation
+    if (!isStr(fam.oneLine) || fam.oneLine.length > 90) err(`${w}: oneLine >90 (${(fam.oneLine || '').length})`);
     if (!Array.isArray(fam.archetypes) || fam.archetypes.length < 1) err(`${w}: needs >=1 archetype tie`);
     else
       for (const t of fam.archetypes) {

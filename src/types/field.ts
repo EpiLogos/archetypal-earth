@@ -77,7 +77,7 @@ export interface Palette {
 export interface Archetype {
   id: ArchetypeId;
   name: string; // display, e.g. "Great Mother"
-  oneLine: string; // ≤ 90 chars, orienting
+  oneLine: string; // ≤ 90 chars, orienting; empty when the vault gives no line
   prime: boolean; // true only for "self"
   spectrum: Spectrum;
   palette: Palette;
@@ -95,7 +95,7 @@ export interface Family {
   name: string; // display, e.g. "Serpent"
   subtype: 'figure' | 'object' | 'process' | 'scene' | 'unknown';
   aliases: string[];
-  oneLine: string; // ≤ 90 chars
+  oneLine: string; // ≤ 90 chars; empty when the vault gives no line
   archetypes: { id: ArchetypeId; basis: TieBasis }[];
   /** Blended from its archetypes, or set directly in curation. */
   spectrum: Spectrum;

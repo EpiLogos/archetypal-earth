@@ -437,7 +437,8 @@ for (const o of occList) famMap[o.familyId]?.occurrenceIds.push(o.id);
 const formFallbacks = [];
 for (const fam of Object.values(famMap)) {
   fam.occurrenceIds.sort((a, b) => occById[a].year - occById[b].year || a.localeCompare(b));
-  if (!fam.oneLine) { formFallbacks.push(fam.id); fam.oneLine = 'A recurring image of the archetypal field.'; }
+  // a family the vault gives no line for simply has no line; the interface lets the image show
+  if (!fam.oneLine) { formFallbacks.push(fam.id); fam.oneLine = ''; }
 }
 
 // ---------- archetype membership ----------

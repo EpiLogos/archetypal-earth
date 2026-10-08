@@ -77,12 +77,13 @@ describe('field.json contract', () => {
     }
   });
 
-  it('length limits hold: label <= 48, oneLine <= 90', () => {
+  it('length limits hold: label <= 48, oneLine <= 90 (families may have no line)', () => {
     for (const o of field.occurrences) expect(o.label.length, o.id).toBeLessThanOrEqual(48);
-    for (const x of [...field.archetypes, ...field.families]) {
-      expect(x.oneLine.length, x.id).toBeLessThanOrEqual(90);
-      expect(x.oneLine.length, x.id).toBeGreaterThan(0);
+    for (const a of field.archetypes) {
+      expect(a.oneLine.length, a.id).toBeLessThanOrEqual(90);
+      expect(a.oneLine.length, a.id).toBeGreaterThan(0);
     }
+    for (const f of field.families) expect(f.oneLine.length, f.id).toBeLessThanOrEqual(90);
   });
 
   it('parallelIds only reference existing occurrences', () => {
