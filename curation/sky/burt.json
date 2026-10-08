@@ -1,0 +1,781 @@
+{
+  "source": {
+    "title": "Archetypes of the Zodiac",
+    "author": "Kathleen Burt",
+    "year": 1988,
+    "note": "PDF in the owner's library; quotes transcribed from rendered pages. Copyright page prints 1988 (first edition); the digitized copy is the 1999 ninth printing. pdfPage is the PDF page index; bookPage is the printed page (pdf = book + 22). Curly quotes and dashes are normalized to ASCII; wording is verbatim.",
+    "file": "~/Documents/books/Archetypes of the zodiac (Burt, Kathleen, 1943-) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+    "sha256": "927638d67c2b72068229b42844d71240ac5bcdbfdbb380f91d07133777d81713"
+  },
+  "retrieved": "2026-10-08",
+  "entries": [
+    {
+      "subject": "planet:sun",
+      "pdfPage": 175,
+      "bookPage": 153,
+      "quote": "In Leo, we arrive at the solar, or Masculine principle—the confident energy of the Sun.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 175,
+      "bookPage": 153,
+      "quote": "There is a constancy to the Leo archetype which seems to be derived from the orbit of Sol himself.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 176,
+      "bookPage": 154,
+      "quote": "The Sun, then, was dependable; one could count on it. It was always the same orange disc; it didn't change its shape or go through phases.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 178,
+      "bookPage": 156,
+      "quote": "This hymn collection gives a good indication of the two levels at which the sun operates in ruling Leo—as mundane and as esoteric ruler.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 178,
+      "bookPage": 156,
+      "quote": "Esoterically, the sun represents illumination, and in India, the Sun Center or point between the eyebrows is the area where a yogi concentrates during his meditation as he seeks enlightenment.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 24,
+      "bookPage": 2,
+      "quote": "Thus, astrologers say that the Sun is exalted in Aries. An exuberant planet in an exuberant sign leads to an exalted personality.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 137,
+      "bookPage": 115,
+      "quote": "The Moon represents feelings and emotions. She is an instinctual, intuitive, nurturing planet, but also a planet that fosters emotional attachment to the form she provides.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 136,
+      "bookPage": 114,
+      "quote": "The Moon, Cancer's ruler, has been called in both India and the West (in Plato's writings, particularly) the Giver of Form.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 136,
+      "bookPage": 114,
+      "quote": "The Moon was a bestower of the gifts of feeling, of intuition, and of nurturing instincts which men did not seem to possess.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 18,
+      "bookPage": null,
+      "quote": "Here, the most feminine planet rules the most feminine sign. The Moon has many phases, corresponding to the many moods of Cancer.",
+      "chapter": "Introduction",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 135,
+      "bookPage": 113,
+      "quote": "Cancer, the Cosmic Womb, is also the first Water sign.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "sign:Cancer"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 135,
+      "bookPage": 113,
+      "quote": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "sign:Cancer"
+    },
+    {
+      "subject": "planet:moon",
+      "pdfPage": 137,
+      "bookPage": 115,
+      "quote": "Within the Great Mother archetype are two distinct personalities—the Gentle Mother like Kwan Yin the Merciful and Compassionate of Chinese Mythology, and the Terrible Mother, like India's Kali Ma and the Greek Medusa.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "sign:Cancer"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 96,
+      "bookPage": 74,
+      "quote": "Jung tells us that in alchemy the \"astrological Mercury\" was the fluid, mobile, quicksilver mind. The mind by itself (apart from the rest of the psyche) is dual and amoral.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 95,
+      "bookPage": 73,
+      "quote": "He is the only one of the Greek Pantheon who had no home on Olympus but was always in transit among the three worlds. He was the Guide and Messenger for Olympus, Earth and Hades.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 95,
+      "bookPage": 73,
+      "quote": "Hermes' gifts to Gemini and Virgo include a Mutable or flexible attitude towards life's changing circumstances; the ability to analyze one's errors and adapt one's behavior; a sense of humor about oneself, and a lively mental curiosity about life.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 211,
+      "bookPage": 189,
+      "quote": "As ruler of the Earth sign Virgo, Hermes seems less flighty, more grounded, stable and consistent in his behavior than he was as ruler of airy Gemini.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 212,
+      "bookPage": 190,
+      "quote": "In the process of alchemical purification Hermes' virtues are those of the Virgo archetype: patience, purification or perfectionism, meticulous attention to technique and procedure, obedience to methodology, industriousness, and most important, humility.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 30,
+      "bookPage": 8,
+      "quote": "In Greek mythology, particularly in Homer's epics, Mercury's thinking, counseling role as wise Messenger God was played by Hermes or Athene, two almost interchangeable Logos symbols.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 30,
+      "bookPage": 8,
+      "quote": "The Aries at the esoteric level has begun to work consciously with Mercury (Logos), his/her spiritual ruler.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "ruler-of:Aries"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 212,
+      "bookPage": 190,
+      "quote": "Behind many a shy, simple Virgo personality hides magical Hermes.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "ruler-of:Virgo"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 95,
+      "bookPage": 73,
+      "quote": "Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "sign:Gemini"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 59,
+      "bookPage": 37,
+      "quote": "As the mundane, instinctual ruler of Taurus, Venus, the principle of attraction, has a strong physical magnetism.",
+      "chapter": "TAURUS: The Search for Value and Meaning",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 122,
+      "bookPage": 100,
+      "quote": "In Labours of Hercules, Alice Bailey amplifies Aphrodite's role as esoteric ruler when she reminds us that she is harmony—the Eros' power to reconcile opposites, to heal all misunderstandings and transcend duality in all its forms.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 122,
+      "bookPage": 100,
+      "quote": "She is the unity principle that spans the Gates of Hercules.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 253,
+      "bookPage": 231,
+      "quote": "She is Aphrodite, Goddess of Love, aesthetics and civilized good taste.",
+      "chapter": "LIBRA: The Search for the Soul Mate",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 253,
+      "bookPage": 231,
+      "quote": "The Greeks saw Ares (Aries) and Aphrodite as particularly potent deities because they were among the few divinities who could actually possess mortals. Ares could possess a man with rage, and Aphrodite with her spell of longing, yearning, and love.",
+      "chapter": "LIBRA: The Search for the Soul Mate",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 88,
+      "bookPage": 66,
+      "quote": "It is important for them to work consciously with the planets aspecting natal Venus to help Venus express its positive instincts—warmth, grace of self-expression, social comfort, artistic expression, and charm.",
+      "chapter": "TAURUS: The Search for Value and Meaning",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 123,
+      "bookPage": 101,
+      "quote": "Most important, however, in my experience with Geminis who have developed their Venus (or esoteric ruler), is the warmth they project to others. Others in their lives feel loved, as well as analyzed.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "ruler-of:Gemini"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 123,
+      "bookPage": 101,
+      "quote": "Consciousness (Hermes) and love (Venus and Eros) combined form a very intuitive, creative partnership.",
+      "chapter": "GEMINI: The Search for Variety",
+      "about": "ruler-of:Gemini"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 59,
+      "bookPage": 37,
+      "quote": "Passive, patient, and placid, Taurus earth is fertile and fecund sexuality.",
+      "chapter": "TAURUS: The Search for Value and Meaning",
+      "about": "sign:Taurus"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 27,
+      "bookPage": 5,
+      "quote": "Mars is passionate, but not exactly tender or aware of others' feelings!",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 27,
+      "bookPage": 5,
+      "quote": "Mars needs to temper Logos with Eros.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 28,
+      "bookPage": 6,
+      "quote": "Mars rules adrenalin, and the true Mars type is an adrenalin junkie.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 28,
+      "bookPage": 6,
+      "quote": "Archetypally, we think of Mars as a sports car driver or even a professional racer in the Indianapolis 500.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 296,
+      "bookPage": 274,
+      "quote": "Thus, in Scorpio, Mars is not the outspoken, direct planetary ruler we encountered in Aries (see Chapter 1), but a much subtler energy.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 296,
+      "bookPage": 274,
+      "quote": "An intense, focused Scorpio-will directed by Mars' dynamic thrust is capable of achieving a major breakthrough this lifetime.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 295,
+      "bookPage": 273,
+      "quote": "According to Alice Bailey it is Mars, not Pluto, that functions as esoteric ruler of Scorpio.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "ruler-of:Scorpio"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 296,
+      "bookPage": 274,
+      "quote": "Mars also makes sense as esoteric ruler if we consider it in its retrograde phase, as the introverted, sublimated instincts consciously focused upon a specific goal.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "ruler-of:Scorpio"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 23,
+      "bookPage": 1,
+      "quote": "The Age of Aries is a solar, or masculine age. It is the Age of the Ram, of Mars and of the Hero.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "sign:Aries"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 24,
+      "bookPage": 2,
+      "quote": "Aries' energy is like the Sun's rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "sign:Aries"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 25,
+      "bookPage": 3,
+      "quote": "Aries represents the \"Irresistible Force,\" as Dane Rudhyar put it. This is the power of the ram's horns.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "sign:Aries"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 349,
+      "bookPage": 327,
+      "quote": "Jupiter is not only the mundane ruler of Sagittarius and the Ninth House but, because of his grandiose nature, Zeus the All Highest exerts so strong an influence that no other planet could be exalted in his sign.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 350,
+      "bookPage": 328,
+      "quote": "Like the ancient Greeks we are aware that Jupiter is the great benefic. Like Venus, the lesser Benefic, it shines with a bright light.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 350,
+      "bookPage": 328,
+      "quote": "Therefore we can easily appreciate the positive key words the Greeks attributed to Zeus—magnanimity, majesty or power, beneficence, abundance, spirituality, gravity, joviality or optimism, justice, truth, wisdom, etc.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 350,
+      "bookPage": 328,
+      "quote": "In every Sagittarian client—even those who seem to burn like forest fires out of control—there is this pure spark of Zeus' enthusiasm.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 369,
+      "bookPage": 347,
+      "quote": "In astrology, we normally use transiting Jupiter to answer questions about moves and long-distance travel—about motion in the outer world. However, apparently the esoteric tradition experienced Jupiter through dreams and meditation as inner space, as what Jung called psychic space.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 369,
+      "bookPage": 347,
+      "quote": "In India, Jupiter is known as Guru by astrologers.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 455,
+      "bookPage": 433,
+      "quote": "Jupiter (opportunity) is the esoteric ruler of Aquarius.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "ruler-of:Aquarius"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 455,
+      "bookPage": 433,
+      "quote": "Combining Jupiter and Uranus (the esoteric and mundane rulers of Aquarius) is the work of the New Age.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "ruler-of:Aquarius"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 349,
+      "bookPage": 327,
+      "quote": "The Sagittarian, like his ruler, manifests big virtues and big vices.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "ruler-of:Sagittarius"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 385,
+      "bookPage": 363,
+      "quote": "The Greeks were aware of the Saturn principle: \"Know thyself, accept thyself, be thyself.\"",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 385,
+      "bookPage": 363,
+      "quote": "Clearly, we need both Jupiter and Saturn in our lives, that's why we came to Earth through Time (Saturn) and Space (Jupiter); but most of us have a pattern of attunement to one and underdevelopment of the other.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 398,
+      "bookPage": 376,
+      "quote": "Two gifts of Saturn are patience and introspection.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 399,
+      "bookPage": 377,
+      "quote": "Saturn as the Cross of Matter can mean that attachment to these mundane things interferes with true happiness.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 399,
+      "bookPage": 377,
+      "quote": "Saturn simplifies our lives by dissolving things we hang onto that don't really make us happy, so that we can get on with life.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 399,
+      "bookPage": 377,
+      "quote": "Saturn is the greatest of teachers for those of us who are observant. How we react to Saturn transits indicates the level of our attunement.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 379,
+      "bookPage": 357,
+      "quote": "One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle, while people make these Winter Solstice remarks.",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "ruler-of:Capricorn"
+    },
+    {
+      "subject": "planet:saturn",
+      "pdfPage": 379,
+      "bookPage": 357,
+      "quote": "At the mundane level, the Capricorn archetype can be recognized every year in conversations about shoulds and oughts, conflicting family duties, traditions, growing older, and an overwhelming feeling of being under pressure because \"there's so little time.\"",
+      "chapter": "CAPRICORN: The Search for Dharma",
+      "about": "sign:Capricorn"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 241,
+      "bookPage": 219,
+      "quote": "Uranus is a planet of quick insight.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 241,
+      "bookPage": 219,
+      "quote": "Uranus helps Virgo to quickly take in the entire forest, rather than keep sketching the same tree over and again, to perfection.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 453,
+      "bookPage": 431,
+      "quote": "Uranus is anxious to grow, to live in the now, while Saturn seeks to protect past traditions.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 453,
+      "bookPage": 431,
+      "quote": "Uranus needs to be honored through discovery of new concepts, ideas, friends, organizations.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 459,
+      "bookPage": 437,
+      "quote": "Uranus, more than any other transiting planet, forces us to hear the Muezzin's call from the tower, to wake up. Sometimes it seems that must be its major cosmic purpose.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 460,
+      "bookPage": 438,
+      "quote": "Uranus transits, if constructively used, may be productive time out from mundane, routinized living, to detach, gain perspective and look more objectively at the world through different and clearer lenses.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 241,
+      "bookPage": 219,
+      "quote": "Uranus is the esoteric ruler of Libra. It's also the higher octave planet for Mercury, Virgo's mundane ruler. It refers to objectivity on the material, the data, the approach to the service.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "ruler-of:Libra"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 270,
+      "bookPage": 248,
+      "quote": "Uranus has an objectivity about life's situations and injustices that helps Libra to stand back and detach rather than yield to Aphrodite, the mundane ruler, when she tries to take things too personally.",
+      "chapter": "LIBRA: The Search for the Soul Mate",
+      "about": "ruler-of:Libra"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 159,
+      "bookPage": 137,
+      "quote": "In Greek mythology, Poseidon (Neptune), God of the Seas, was also a great dissolver or destroyer, and he, too, used a trident to bring down attachment.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 162,
+      "bookPage": 140,
+      "quote": "Neptune is the planet of faith, and faith is needed to let go of the past and open up to the future, rather than attempt to hang on to outworn forms with crab-like tenacity.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 162,
+      "bookPage": 140,
+      "quote": "For those who can willingly sacrifice the old way, the old role, the old career, the old attachments, to Neptune; for those who dare to create, to use their imagination, to trust their intuition, Neptune is a liberator.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 162,
+      "bookPage": 140,
+      "quote": "Remember—Poseidon does not dissolve anything we still need. He only prevents a Seeker from clinging to that which limits him, or stands in the way of his growth.",
+      "chapter": "CANCER: The Search for the Mother Goddess",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 543,
+      "bookPage": 521,
+      "quote": "Neptune is not about apathy or feeling good in meditation, but about hearing and acting upon what God tells us to do in the outer world—acting from the inside (the Spiritual Center) outward.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 546,
+      "bookPage": 524,
+      "quote": "Neptune's message is \"Relax. Let go and let God have some room. Resign yourself to the idea that maybe you won't get there this lifetime, quit striving so hard, and then maybe you will get there after all.\"",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 543,
+      "bookPage": 521,
+      "quote": "Also, these rulers of Pisces point toward deeper truths, eternal truths in the depths of the cosmic ocean.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "ruler-of:Pisces"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 295,
+      "bookPage": 273,
+      "quote": "The mundane rulers of Scorpio are Mars and Pluto. Pluto, appropriately, is Hades, Lord of the Greek Underworld.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 295,
+      "bookPage": 273,
+      "quote": "Pluto rules the unconscious depths of the Scorpio or Eighth House personality, with its residue of instinctual drives, emotional attachments, and compulsive-obsessive tendencies carried forward from past lives to the present.",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 40,
+      "bookPage": 18,
+      "quote": "Pluto, for example, is a reclusive planet which can, in the chart for a scientist, help Mars sublimate sexual energy into the work of discovery.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 41,
+      "bookPage": 19,
+      "quote": "This accords, too, with the esoteric tradition in which Pluto is the higher octave planet for Mars.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 556,
+      "bookPage": 534,
+      "quote": "Though you may view Pluto as a malefic planet, its prime objectives are transformation and transcendence.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 556,
+      "bookPage": 534,
+      "quote": "Pluto should put you into contact with your inner resources in time of crisis, help you face your worst fears and transcend.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 40,
+      "bookPage": 18,
+      "quote": "As ruler of Scorpio, Pluto brings fixity of purpose and will to power to the Mars personality.",
+      "chapter": "ARIES: The Search For a Separate Identity",
+      "about": "ruler-of:Scorpio"
+    },
+    {
+      "subject": "planet:pluto",
+      "pdfPage": 556,
+      "bookPage": 534,
+      "quote": "At the esoteric level Pluto's role is to free Pisces from attachment during the night sea journey.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "ruler-of:Pisces"
+    },
+    {
+      "subject": "planet:earth",
+      "pdfPage": 370,
+      "bookPage": 348,
+      "quote": "The Four is a solid cube. In Pythagorean geometry it is the first solid figure. It meant Earth or matter to the Greeks and to the Chinese.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:earth",
+      "pdfPage": 370,
+      "bookPage": 348,
+      "quote": "Matter is solid ground—the foundation, cornerstone, or Nadir. Earth is the esoteric ruler of Sagittarius.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:earth",
+      "pdfPage": 370,
+      "bookPage": 348,
+      "quote": "Earth also relates to the body.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "planet"
+    },
+    {
+      "subject": "planet:earth",
+      "pdfPage": 370,
+      "bookPage": 348,
+      "quote": "Yoganandaji said that his Master was teaching him the secret of balanced living—keeping one's head in the clouds and one's feet on the ground.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "ruler-of:Sagittarius"
+    },
+    {
+      "subject": "planet:venus",
+      "pdfPage": 253,
+      "bookPage": 231,
+      "quote": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign.",
+      "chapter": "LIBRA: The Search for the Soul Mate",
+      "about": "sign:Libra"
+    },
+    {
+      "subject": "planet:mercury",
+      "pdfPage": 211,
+      "bookPage": 189,
+      "quote": "Each year as we enter Virgo, the mood of the Earth itself seems to become more withdrawn, introspective, quieter.",
+      "chapter": "VIRGO: The Search for Meaningful Service",
+      "about": "sign:Virgo"
+    },
+    {
+      "subject": "planet:mars",
+      "pdfPage": 295,
+      "bookPage": 273,
+      "quote": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio).",
+      "chapter": "SCORPIO: The Search for the Transformation",
+      "about": "sign:Scorpio"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 339,
+      "bookPage": 317,
+      "quote": "Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or \"fire up\" others.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "sign:Sagittarius"
+    },
+    {
+      "subject": "planet:jupiter",
+      "pdfPage": 340,
+      "bookPage": 318,
+      "quote": "There is a sense of playfulness to Sagittarius. It's rather like the stage in alchemy where hard work is over and there is the joy of spontaneous growth.",
+      "chapter": "SAGITTARIUS: The Search for Wisdom",
+      "about": "sign:Sagittarius"
+    },
+    {
+      "subject": "planet:sun",
+      "pdfPage": 183,
+      "bookPage": 161,
+      "quote": "For Leo, who proceeds from the heart (that's Leo in medical astrology), the issue is self-control—self-mastery is the road to success and fulfillment.",
+      "chapter": "LEO: The Search for Being and Wholeness",
+      "about": "sign:Leo"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 447,
+      "bookPage": 425,
+      "quote": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "sign:Aquarius"
+    },
+    {
+      "subject": "planet:uranus",
+      "pdfPage": 447,
+      "bookPage": 425,
+      "quote": "Aquarius is an Air sign and as such has a mental approach to life and decision making in the beginning stages of his life journey.",
+      "chapter": "AQUARIUS: The Search for the Holy Grail",
+      "about": "sign:Aquarius"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 509,
+      "bookPage": 487,
+      "quote": "Pisces is the last of the four Mutable signs—Mutable Water. As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, \"Who shall bind the Infinite?\"",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "sign:Pisces"
+    },
+    {
+      "subject": "planet:neptune",
+      "pdfPage": 509,
+      "bookPage": 487,
+      "quote": "Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
+      "chapter": "PISCES: The Search for the Castle of Peace",
+      "about": "sign:Pisces"
+    }
+  ]
+}

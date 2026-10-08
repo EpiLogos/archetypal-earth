@@ -6,6 +6,8 @@
 // generatedAt) and also checks the running sidecar against the version pin in ephemeris/requirements.txt.
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT, normalizePassage } from './aion.mjs';
 
@@ -184,6 +186,103 @@ export function collectCites({ ties }) {
   return out;
 }
 
+// ── the zodiac book (read-only, the owner's library) ───────────────────────
+
+/** Comparison form for book text: curly quotes and dashes to ASCII, soft hyphens gone, whitespace collapsed. */
+function normalizeBookText(text) {
+  return text
+    .replace(/[\u00AD\u201A\u201B]/g, '')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D\u201E\u201F]/g, '"')
+    .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Letters and digits only, case-folded: the text layer's spacing, case and hyphen-line-breaks are noise, its letters are the evidence. */
+function canonicalBookText(text) {
+  return normalizeBookText(text).toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+/** Smallest edit distance from the quote to any substring of the page (Sellers' search). */
+function approximateSubstringDistance(page, quote) {
+  const m = quote.length;
+  let prev = new Array(m + 1).fill(0).map((_, j) => j);
+  let best = m;
+  for (let i = 1; i <= page.length; i++) {
+    const cur = [0];
+    for (let j = 1; j <= m; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (page[i - 1] === quote[j - 1] ? 0 : 1));
+    }
+    best = Math.min(best, cur[m]);
+    prev = cur;
+  }
+  return best;
+}
+
+/** Shape checks for curation/sky/burt.json: one file, one source, short page-cited quotations. */
+export function validateBurt(burt) {
+  const errors = [];
+  const fail = (w, m) => errors.push(`${w}: ${m}`);
+  if (!burt || typeof burt !== 'object') return ['burt: expected object'];
+  const src = burt.source;
+  if (!src || typeof src !== 'object') return ['burt.source: expected object'];
+  for (const k of ['title', 'author', 'file']) if (typeof src[k] !== 'string' || !src[k].trim()) fail(`burt.source.${k}`, 'expected nonempty string');
+  if (!/^[0-9a-f]{64}$/.test(src.sha256 || '')) fail('burt.source.sha256', 'expected the PDF revision hash');
+  if (!Number.isFinite(src.year)) fail('burt.source.year', 'expected number');
+  if (!Array.isArray(burt.entries) || !burt.entries.length) return [...errors, 'burt.entries: expected a nonempty array'];
+  burt.entries.forEach((e, i) => {
+    const w = `burt.entries[${i}]`;
+    if (!/^(?:planet|sign|ruler-of):[a-z]+$/.test(e?.subject || '')) fail(w, `unsupported subject ${e?.subject}`);
+    if (!Number.isInteger(e?.pdfPage) || e.pdfPage < 1) fail(w, 'pdfPage must be a positive integer');
+    if (e.bookPage !== undefined && e.bookPage !== null && !Number.isFinite(e.bookPage)) fail(w, 'bookPage must be a number');
+    const words = typeof e.quote === 'string' ? e.quote.trim().split(/\s+/).filter(Boolean).length : 0;
+    if (!words || words > 45) fail(w, `quote must be 1..45 words (got ${words})`);
+  });
+  return errors;
+}
+
+/**
+ * Every Burt quotation must sit verbatim (book-text normalisation only) on its cited PDF page of the
+ * library copy, whose revision hash must equal the pin. Fails loudly when pdftotext or the book is absent:
+ * an unverifiable quotation is not shipped.
+ */
+export function verifyBurtQuotes(burt, { root = ROOT } = {}) {
+  const errors = [];
+  const fail = (w, m) => errors.push(`${w}: ${m}`);
+  if (!burt?.source?.file || !burt.source.sha256) return ['burt.source: file and sha256 are required before any quotation is verified'];
+  const pdf = burt.source.file.replace(/^~(?=\/|$)/, process.env.HOME ?? '');
+  if (!fs.existsSync(pdf)) return [`burt: the book is not in the library: ${pdf}`];
+  const hash = crypto.createHash('sha256');
+  hash.update(fs.readFileSync(pdf));
+  if (hash.digest('hex') !== burt.source.sha256) {
+    fail('burt.source.sha256', 'the library copy changed; recheck every quotation before updating the pin');
+  }
+  const tool = spawnSync('pdftotext', [pdf, '-'], { maxBuffer: 512 * 1024 * 1024, encoding: 'utf8' });
+  if (tool.error || tool.status !== 0) {
+    return [...errors, 'burt: pdftotext is required to verify quotations against the cited pages (install poppler)'];
+  }
+  const pages = tool.stdout.split('\f');
+  const pageText = (n) => canonicalBookText(pages[n - 1] ?? '');
+  for (const [i, e] of (burt.entries || []).entries()) {
+    if (!e?.quote || !Number.isInteger(e.pdfPage)) continue; // shape is validateBurt's report
+    // the text layer mis-spaces, mis-hyphenates and occasionally mis-letters what the rendered page
+    // shows plainly; a real misquotation cannot hide inside a 1%-of-characters tolerance
+    const quote = canonicalBookText(e.quote);
+    const tol = Math.max(2, Math.ceil(quote.length * 0.01));
+    const page = pageText(e.pdfPage);
+    if (approximateSubstringDistance(page, quote) > tol) fail(`burt.entries[${i}] (${e.subject})`, `quotation not verbatim on pdf p${e.pdfPage}`);
+  }
+  return errors;
+}
+
+/** A body's page-cited quotations from the book, in curation order (empty for bodies the book does not define). */
+export function burtQuotesFor(burt, key) {
+  return (burt.entries || [])
+    .filter((e) => e.subject === `planet:${key}`)
+    .map(({ subject: _s, pdfPage, bookPage, chapter, quote }) => ({ text: quote, page: pdfPage, ...(Number.isFinite(bookPage) ? { bookPage } : {}), ...(chapter ? { chapter } : {}) }));
+}
+
 // ── sidecar ────────────────────────────────────────────────────────────────
 
 export function pinnedPackages(root = ROOT) {
@@ -272,8 +371,9 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
     cultures: readJson(path.join(root, 'curation/sky/cultures.json')),
   };
   const gazetteer = readJson(path.join(root, 'curation/sky/gazetteer.json'));
+  const burt = readJson(path.join(root, 'curation/sky/burt.json'));
   const field = readJson(path.join(root, 'public/data/field.json'));
-  const errors = [...validateCuration(curation, { field }), ...validateGazetteer(gazetteer), ...verifyCitations(collectCites(curation), { vault })];
+  const errors = [...validateCuration(curation, { field }), ...validateGazetteer(gazetteer), ...validateBurt(burt), ...verifyCitations(collectCites(curation), { vault }), ...verifyBurtQuotes(burt, { root })];
   if (errors.length) throw new Error(errors.join('\n'));
 
   const ping = await get('/ping');
@@ -322,12 +422,16 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
 
   const bodies = curation.bodies.bodies
     .slice().sort((a, b) => a.order - b.order)
-    .map(({ palette_from, ...b }) => ({
-      ...b,
-      paletteFrom: palette_from,
-      ties: curation.ties.ties.filter((t) => t.body === b.key).map(({ body, ...t }) => t),
-      provenance: 'curation',
-    }));
+    .map(({ palette_from, ...b }) => {
+      const quotes = burtQuotesFor(burt, b.key);
+      return {
+        ...b,
+        paletteFrom: palette_from,
+        ties: curation.ties.ties.filter((t) => t.body === b.key).map(({ body, ...t }) => t),
+        ...(quotes.length ? { quotes } : {}),
+        provenance: 'curation',
+      };
+    });
   const orbitErrors = crossCheckOrbits(bodies, planets, moon);
   if (orbitErrors.length) throw new Error(orbitErrors.join('\n'));
 

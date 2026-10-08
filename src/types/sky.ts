@@ -71,6 +71,16 @@ export interface CultureProjection {
   source: string;
 }
 
+/** A page-cited quotation from Kathleen Burt's *Archetypes of the Zodiac* — her reading, named as hers, never Jung's. */
+export interface SkyBodyQuote {
+  text: string;
+  /** the PDF page of the library copy the generator verified the words against */
+  page: number;
+  /** the book's own printed page, when the two differ */
+  bookPage?: number;
+  chapter?: string;
+}
+
 export interface SkyBody {
   key: BodyKey;
   order: number;
@@ -89,6 +99,8 @@ export interface SkyBody {
   discovered?: { year: number };
   sources: SkySource[];
   ties: SkyTie[];
+  /** the book's own definitions of this body (curation/sky/burt.json), when it gives any */
+  quotes?: SkyBodyQuote[];
   /** where the mythic layer comes from: the site's curation now, the vault's wiki/sky/ tier if adopted */
   provenance: 'curation' | 'vault';
 }

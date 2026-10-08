@@ -162,6 +162,17 @@ export class SkyCard {
 
     text.append(el('p', { class: 'rv-para', text: body.oneLine }));
 
+    // the book's own definition of the body, in her words and under her name
+    if (body.quotes?.length) {
+      text.append(el('details', { class: 'aion-sources sky-burt' }, [
+        el('summary', { text: 'Kathleen Burt · Archetypes of the Zodiac' }),
+        ...body.quotes.map((q) => el('blockquote', {}, [
+          el('p', { text: `“${q.text}”` }),
+          el('cite', { text: `p. ${q.bookPage ?? q.page}${q.chapter ? ` · ${q.chapter}` : ''}` }),
+        ])),
+      ]));
+    }
+
     const pos = describePosition(body.key, ctx.eph, ctx.ms, ctx.asOf);
     text.append(el('p', { class: `sky-position${pos.known ? '' : ' sky-position-none'}`, text: pos.line }));
 
