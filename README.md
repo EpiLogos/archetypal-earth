@@ -74,7 +74,8 @@ rewriting his dataset. See [AION-SOURCES.md](docs/AION-SOURCES.md).
 published equality. This does not re-ingest the growing Jung vault.
 
 **G** switches Earth and Graph. Graph **Settings** contains local depth,
-occurrence visibility, relation filters and Reframe. The bottom clock is shared
+occurrence visibility, relation filters, the layout's link space and
+gravity, and Reframe. The bottom clock is shared
 by both views. Playing time highlights the current historical window; the
 all-time readout restores the full field. Opening a presence from a traced path
 pauses inspection without discarding the path; closing its detail returns to
