@@ -1,0 +1,71 @@
+// The minimal focus label: a name, one line, and (only in focus) two quiet links.
+import { clear, el } from './dom';
+
+export interface LabelContent {
+  name: string;
+  line?: string;
+  /** small serif-italic row of related names that can be followed (e.g. a form's archetypes) */
+  ties?: { text: string; onClick: () => void }[];
+  tiesPrefix?: string;
+  links?: { text: string; onClick: () => void }[];
+  /** when set the label is a breadcrumb: click returns up one level */
+  back?: () => void;
+}
+
+export class FocusLabel {
+  readonly root: HTMLElement;
+  private shown = false;
+  private key = '';
+  private gen = 0;
+
+  constructor(parent: HTMLElement) {
+    this.root = el('header', { class: 'focus-label', 'aria-live': 'polite' });
+    parent.append(this.root);
+  }
+
+  set(content: LabelContent | null, key = '') {
+    const gen = ++this.gen;
+    if (!content) {
+      this.root.classList.remove('on');
+      this.shown = false;
+      this.key = '';
+      return;
+    }
+    const swap = () => {
+      clear(this.root);
+      this.root.classList.toggle('is-back', !!content.back);
+      const name = content.back
+        ? el('button', { class: 'fl-name fl-backlink', type: 'button', 'aria-label': `Back to ${content.name}`, onclick: content.back }, [el('span', { class: 'fl-chev', 'aria-hidden': 'true', text: '‹' }), content.name])
+        : el('h1', { class: 'fl-name', text: content.name });
+      this.root.append(name);
+      if (content.line) this.root.append(el('p', { class: 'fl-line', text: content.line }));
+      if (content.ties?.length) {
+        const row = el('p', { class: 'fl-ties' });
+        if (content.tiesPrefix) row.append(el('span', { text: content.tiesPrefix + ' ' }));
+        content.ties.forEach((t, i) => {
+          if (i) row.append(' · ');
+          row.append(el('button', { class: 'link-quiet', type: 'button', text: t.text, onclick: t.onClick }));
+        });
+        this.root.append(row);
+      }
+      if (content.links?.length) {
+        const nav = el('nav', { class: 'fl-links', 'aria-label': 'Go further' });
+        content.links.forEach((l) => nav.append(el('button', { class: 'link-quiet', type: 'button', text: l.text, onclick: l.onClick })));
+        this.root.append(nav);
+      }
+    };
+    if (this.shown && key !== this.key) {
+      this.root.classList.remove('on');
+      window.setTimeout(() => {
+        if (gen !== this.gen) return;
+        swap();
+        this.root.classList.add('on');
+      }, 240);
+    } else {
+      swap();
+      requestAnimationFrame(() => this.root.classList.add('on'));
+    }
+    this.shown = true;
+    this.key = key;
+  }
+}

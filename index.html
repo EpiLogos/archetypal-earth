@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#02030a" />
+    <meta name="description" content="An Archetypal Earth — Jung’s archetypes across place and time, explored on a living globe." />
+    <title>An Archetypal Earth</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='34%25' r='75%25'%3E%3Cstop offset='0' stop-color='%23c3d2f2'/%3E%3Cstop offset='.55' stop-color='%234f78cf'/%3E%3Cstop offset='1' stop-color='%2310193a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='13' fill='url(%23g)'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-state="world">
+    <div id="globe"></div>
+    <div class="veil" aria-hidden="true"></div>
+    <div id="app"></div>
+    <button id="search-btn" class="search-glyph" type="button" aria-label="Search (press slash or Command K)">
+      <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span class="sg-key">⌘K</span>
+    </button>
+    <div id="loading" aria-hidden="true"><span class="ld-dot"></span></div>
+    <noscript><p style="color:#cfd8ee;font:16px Georgia,serif;padding:2rem">An Archetypal Earth needs JavaScript and WebGL.</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
