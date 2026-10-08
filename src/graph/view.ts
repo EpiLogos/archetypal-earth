@@ -157,6 +157,10 @@ export class GraphView {
   private depth = 1;
   private dust = true;
   private ties: TieBasis[] = ['jung', 'inferred', 'site'];
+  /** link-space multiplier on every edge distance: >1 spreads the field, <1 gathers it */
+  private spreadK = 1.25;
+  /** gravity multiplier on repulsion and centring: <1 lets the field breathe, >1 pulls it together */
+  private gravityK = 0.8;
   private emph: Set<number> | null = null;
   private active = new Map<number, number>();
   private activeEdges: number[] = [];
@@ -201,6 +205,8 @@ export class GraphView {
       onDepth: (d) => this.setDepth(d),
       onDust: (on) => this.setDust(on),
       onTies: (bases) => this.setTies(bases),
+      onSpread: (v) => this.setForces(v, this.gravityK),
+      onGravity: (v) => this.setForces(this.spreadK, v),
       onSky: (on) => this.setSkyAnchors(on),
       onFit: () => { this.autoFit = true; this.follow = 1.2; this.refit(0.8); this.wake(); },
       onEarth: () => this.h_.onEarth(this.target.selected ?? this.target.subject),
@@ -423,7 +429,7 @@ export class GraphView {
   }
 
   private toolState(): ToolState {
-    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, hasSubject: this.subject >= 0 || this.selected >= 0, sky: this.sky.status, skyAsOf: this.sky.asOf };
+    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, hasSubject: this.subject >= 0 || this.selected >= 0, sky: this.sky.status, skyAsOf: this.sky.asOf, spread: this.spreadK, gravity: this.gravityK };
   }
 
   private pushTools() {
@@ -507,6 +513,19 @@ export class GraphView {
     this.ties = bases;
     this.pushTools();
     if (this.visible) { this.rebuild(false); this.wake(); }
+  }
+
+  /** Reshape the layout: link space and gravity, exposed in the settings like Obsidian's forces. */
+  private setForces(spread: number, gravity: number) {
+    this.spreadK = spread;
+    this.gravityK = gravity;
+    this.pushTools();
+    if (this.visible) {
+      this.rebuild(false);
+      // a changed shape should be seen settling into it
+      this.sim.alpha(Math.max(this.sim.alpha(), 0.5));
+      this.wake();
+    }
   }
 
   private computeActive(): Neighbourhood {
@@ -598,12 +617,13 @@ export class GraphView {
       links.push({ source: this.nodes[e.s], target: this.nodes[e.t], e, k });
     }
     const local = this.mode === 'local';
+    const sp = this.spreadK;
     const kDist = (e: GEdge) => {
-      const f = local ? 1.18 : 1;
+      const f = (local ? 1.18 : 1) * sp;
       switch (e.kind) {
         case 'tie': return (e.basis === 'jung' ? 92 : e.basis === 'inferred' ? 118 : 148) * f;
         case 'sky': return (e.basis === 'jung' ? 150 : e.basis === 'inferred' ? 190 : 240) * f;
-        case 'instance': return (local ? 30 : 17) + 0;
+        case 'instance': return ((local ? 30 : 17) + 0) * Math.max(sp, 1);
         case 'co': return 80 * f;
         default: return 96 * f;
       }
@@ -619,21 +639,21 @@ export class GraphView {
       }
     };
     const n = this.simNodes.length;
+    const gr = (local ? 1.2 : 1) * this.gravityK;
     const charge = (v: VNode) => {
-      const f = local ? 1.2 : 1;
-      if (v.g.kind === 'archetype') return -(v.g.prime ? 1500 : 880) * f;
-      if (v.g.kind === 'family') return -(90 + 170 * v.g.rank) * f;
-      if (v.g.kind === 'body') return -60;
-      return -13 * f;
+      if (v.g.kind === 'archetype') return -(v.g.prime ? 1500 : 880) * gr;
+      if (v.g.kind === 'family') return -(90 + 170 * v.g.rank) * gr;
+      if (v.g.kind === 'body') return -60 * this.gravityK;
+      return -13 * gr;
     };
     const decay = n > 1500 ? 0.032 : n > 700 ? 0.026 : 0.0228;
     this.sim
       .nodes(this.simNodes)
       .force('link', forceLink<VNode, SimLink>(links).distance((l) => kDist(l.e)).strength((l) => kStr(l.e)).iterations(1))
-      .force('charge', forceManyBody<VNode>().strength(charge).theta(0.95).distanceMax(780))
+      .force('charge', forceManyBody<VNode>().strength(charge).theta(0.95).distanceMax(780 * Math.max(1, this.spreadK)))
       .force('collide', forceCollide<VNode>((v) => v.r * 1.12 + 2.2).strength(0.7))
-      .force('x', forceX<VNode>(0).strength(local ? 0 : 0.018))
-      .force('y', forceY<VNode>(0).strength(local ? 0 : 0.018))
+      .force('x', forceX<VNode>(0).strength((local ? 0 : 0.018) * this.gravityK))
+      .force('y', forceY<VNode>(0).strength((local ? 0 : 0.018) * this.gravityK))
       .force('heart', local ? null : (() => {
         const self = this.g.archetypeIds.map((i) => this.nodes[i]).find((v) => v.g.prime);
         return () => {
@@ -1107,6 +1127,8 @@ export class GraphView {
     const margin = 90;
     const stage: VNode[] = [];
     const grow = Math.pow(k, 0.55);
+    // level of detail: the dust and the strands recede as the whole field comes into view
+    const dustK = local ? 1 : 0.5 + 0.5 * smoothstep(0.55, 1.5, k);
     for (const v of this.nodes) {
       if (v.vis < 0.012) { v.on = false; continue; }
       v.sx = tx + v.x * k;
@@ -1143,7 +1165,7 @@ export class GraphView {
     for (const pass of ['occurrence', 'family', 'archetype', 'body'] as const) {
       for (const v of stage) {
         if (v.g.kind !== pass) continue;
-        const a = v.vis * (0.28 + 0.72 * v.hl) * (pass === 'occurrence' ? v.live : 0.35 + 0.65 * v.live);
+        const a = v.vis * (0.28 + 0.72 * v.hl) * (pass === 'occurrence' ? v.live * dustK : 0.35 + 0.65 * v.live);
         if (a < 0.015) continue;
         if (pass === 'occurrence') {
           const sel = v.id === this.selected;
@@ -1238,6 +1260,8 @@ export class GraphView {
     // in the whole graph the fine strands appear only as you come close
     const fine = local ? 1 : smoothstep(1.05, 1.9, k);
     const parFine = local ? 1 : smoothstep(1.5, 2.6, k);
+    // and every relation recedes a little as the whole field comes into view
+    const edgeK = local ? 1 : 0.62 + 0.38 * smoothstep(0.6, 1.5, k);
     for (const ek of this.activeEdges) {
       const e = g.edges[ek];
       const a = this.nodes[e.s];
@@ -1253,7 +1277,7 @@ export class GraphView {
       const vis = Math.min(a.vis, b.vis);
       const lit = Math.min(a.hl, b.hl);
       const live = Math.min(a.live, b.live);
-      let alpha = style.alpha * vis * gate * (0.15 + 0.85 * lit) * (0.3 + 0.7 * live);
+      let alpha = style.alpha * vis * gate * edgeK * (0.15 + 0.85 * lit) * (0.3 + 0.7 * live);
       if (isHot) { hot.push(e); alpha = 0; }
       if (alpha < 0.012) continue;
       // cheap cull: both ends off the same side of the screen

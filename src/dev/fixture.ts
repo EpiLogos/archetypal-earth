@@ -241,7 +241,7 @@ export function buildFixture(): Field {
       lat: Math.max(-80, Math.min(80, pl.lat + jitterLat)), lon: pl.lon + jitterLon, geoPrecision: prec, year, yearDisplay: display,
       jung: [{ work: work[0], workTitle: work[1], year: work[2], locator: `¶${100 + Math.floor(rand() * 600)} (pdf p${100 + Math.floor(rand() * 400)})` }],
       quote: rand() < 0.5 ? 'It is as though the image remembered something the people who made it never knew they knew.' : undefined,
-      body: [`${label} at ${pl.n}, taken here as a ${fam.name.toLowerCase()} expression. ${fam.oneLine}`, rand() < 0.6 ? 'Jung returns to this form to show how an image survives the culture that produced it, reappearing in dreams and in the work of alchemists alike.' : ''].filter(Boolean),
+      body: [`${label} at ${pl.n}, taken here as a ${fam.name.toLowerCase()} expression.`, fam.oneLine, rand() < 0.6 ? 'Jung returns to this form to show how an image survives the culture that produced it, reappearing in dreams and in the work of alchemists alike.' : ''].filter(Boolean),
       parallelIds: [], image: hasImg ? plate(imgSeed++, fam.palette, w[0], w[1], label) : undefined,
     };
     occurrences.push(o);

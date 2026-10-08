@@ -54,6 +54,8 @@ try {
   assert(Math.abs(playback.fromYear - playback.min) < 1e-6);
   assert(Math.abs(playback.toYear - playback.max) < 1e-6);
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
+  // let the frame already in flight land: the property under test is a frozen clock, not the click's latency
+  await page.waitForTimeout(150);
   const yearBefore = await page.locator('.t-track').getAttribute('aria-valuenow');
   await page.waitForTimeout(400);
   assert.equal(await page.locator('.t-track').getAttribute('aria-valuenow'), yearBefore);
