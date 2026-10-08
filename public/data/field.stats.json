@@ -1,38 +1,38 @@
 {
   "counts": {
     "archetypes": 13,
-    "families": 324,
-    "occurrences": 2705,
+    "families": 325,
+    "occurrences": 2704,
     "cultures": 64,
-    "images": 321
+    "images": 331
   },
   "vaultLedgerLine": "2026-10-08 — Wave 1 harvests landing",
   "geoPrecision": {
-    "place": 1511,
+    "place": 1510,
     "region": 981,
     "culture": 199,
     "none": 14,
     "place+region %": 92.1,
     "pct": {
-      "place": 55.9,
+      "place": 55.8,
       "region": 36.3,
       "culture": 7.4,
       "none": 0.5
     }
   },
   "geoSource": {
-    "place": 2423,
+    "place": 2422,
     "patient-default": 51,
     "title": 18,
     "culture": 199,
     "none": 14
   },
-  "imagesAttached": 321,
+  "imagesAttached": 331,
   "locusTypes": {
     "ritual": 163,
     "myth-episode": 310,
-    "artifact": 420,
-    "text-passage": 929,
+    "artifact": 421,
+    "text-passage": 927,
     "vision": 248,
     "clinical-case": 121,
     "historical-event": 118,
@@ -40,7 +40,7 @@
     "active-imagination": 57
   },
   "quotes": 1595,
-  "occurrencesWithJungCites": 2705,
+  "occurrencesWithJungCites": 2704,
   "labelMaxLen": 48,
   "yearRange": [
     -10000,
@@ -87,6 +87,7 @@
     "necklace",
     "nixie",
     "pegasus",
+    "philemon",
     "playing-card",
     "radioactive-nucleus",
     "saturn",
@@ -138,6 +139,7 @@
     "mummy",
     "number",
     "orb",
+    "philemon",
     "pig",
     "placenta",
     "playing-card",
@@ -260,7 +262,6 @@
     "late-medieval-europe": 1
   },
   "droppedCoManifests": {
-    "axiom-of-maria": 1,
     "great-mother": 5,
     "dream": 1,
     "grave": 2,
@@ -289,6 +290,7 @@
     "cow": 1,
     "castle": 1,
     "train": 1,
+    "leviathan": 1,
     "chinese-dragon": 3,
     "inflation": 1,
     "squaring-the-circle": 1,
@@ -553,27 +555,8 @@
       "hyphen-break": 1
     },
     "unique": 389,
-    "residual": 3,
-    "residualSuspects": [
-      {
-        "where": "occ:coronis-crow-maiden-asklepios-birth-greece.body[0]",
-        "kind": "split-word",
-        "token": "the rapist",
-        "context": "kin of the rapist Ixion"
-      },
-      {
-        "where": "occ:redeemer-figure-manda-dhaje-mandean-john-book.quote",
-        "kind": "stray-letter",
-        "token": "d",
-        "context": "Manda d 'haje, meaning"
-      },
-      {
-        "where": "occ:saturn-invocation-jewish-dress-ghaya-al-hakim-1000.quote",
-        "kind": "stray-letter",
-        "token": "à",
-        "context": "\\\"Arrive vêtu à la manière"
-      }
-    ],
+    "residual": 0,
+    "residualSuspects": [],
     "samples": [
       {
         "kind": "join",
@@ -4205,14 +4188,6 @@
   ],
   "warnings": [
     "frontmatter repaired field-by-field: cat-egyptian-statue-anima-projection-zurich-1930s",
-    "frontmatter repaired field-by-field: dwarf-little-man-boy-criminal-instinct-1930",
-    "frontmatter repaired field-by-field: fettered-soul-cataleptic-suitor-emma-c-zurich-1906",
-    "frontmatter repaired field-by-field: ghost-procession-servant-girl-ecstasy-zurich-1900s",
-    "frontmatter repaired field-by-field: sacrifice-hanging-by-genitals-fantasy-1911",
-    "frontmatter repaired field-by-field: sacrifice-tantalus-club-emblem-1910",
-    "frontmatter repaired field-by-field: trickster-figure-capricious-table-zurich-1905",
-    "anima-she-ayesha-haggard-1887: unknown locus_type \"text\" -> text-passage",
-    "i-ching-hexagrams-king-wen-china: unknown locus_type \"text\" -> text-passage",
-    "co_manifests dropped (not a family): great-motherx5, syzygyx4, herox4, lightningx3, chinese-dragonx3, gravex2, visionx2, psychopompx2, synchronicityx2, animax2, ascension-descentx2, axiom-of-mariax1, dreamx1, massx1, bathx1, devouring-motherx1, city-as-motherx1, individuationx1, lamentx1, gnosticx1, korex1, tridentx1, gatex1, animusx1, time-godx1, knifex1, mana-personalityx1, abraxasx1, cowx1, castlex1, trainx1, inflationx1, squaring-the-circlex1, coronationx1, active-imaginationx1, devouringx1, visionary-rumourx1, floodx1, behemoth-leviathanx1, asceticx1, glass-wallx1, fountain-of-youthx1"
+    "co_manifests dropped (not a family): great-motherx5, syzygyx4, herox4, lightningx3, chinese-dragonx3, gravex2, visionx2, psychopompx2, synchronicityx2, animax2, ascension-descentx2, dreamx1, massx1, bathx1, devouring-motherx1, city-as-motherx1, individuationx1, lamentx1, gnosticx1, korex1, tridentx1, gatex1, animusx1, time-godx1, knifex1, mana-personalityx1, abraxasx1, cowx1, castlex1, trainx1, leviathanx1, inflationx1, squaring-the-circlex1, coronationx1, active-imaginationx1, devouringx1, visionary-rumourx1, floodx1, behemoth-leviathanx1, asceticx1, glass-wallx1, fountain-of-youthx1"
   ]
 }

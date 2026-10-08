@@ -388,9 +388,8 @@
   },
   "giant": {
    "queries": [
-    "Gigantomachy Pergamon altar relief",
-    "Atlas giant statue Farnese",
-    "David and Goliath painting"
+    "Pergamon altar gigantomachy Athena frieze",
+    "gigantomachy giants Pergamon relief"
    ]
   },
   "god-image": {
@@ -1123,6 +1122,559 @@
     "sand mandala Tibetan"
    ],
    "pin": "File:Sri Yantra copper.jpg"
+  },
+  "clear-light": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "apple": {
+   "queries": [
+    "Cranach Adam and Eve apple Fall painting",
+    "Durer Adam and Eve engraving apple"
+   ]
+  },
+  "bear": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "albedo": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "book": {
+   "queries": [
+    "evangelist writing codex Lindisfarne portrait",
+    "scribe manuscript illumination medieval"
+   ]
+  },
+  "adam": {
+   "queries": [
+    "Masaccio Adam and Eve expulsion Brancacci",
+    "Durer Adam and Eve engraving"
+   ]
+  },
+  "aion": {
+   "queries": [
+    "Mithraic Aion leontocephaline relief",
+    "Phanes Orphic egg Modena relief"
+   ]
+  },
+  "apocalypse": {
+   "queries": [
+    "Durer Apocalypse four horsemen woodcut",
+    "Beatus Apocalypse four horsemen manuscript"
+   ]
+  },
+  "ascension": {
+   "queries": [
+    "Ascension of Christ Rabbula Gospels illumination",
+    "Giotto Ascension Scrovegni fresco"
+   ]
+  },
+  "battle-with-dragon": {
+   "queries": [
+    "Thor fishing Jormungandr serpent illustration",
+    "Winge Thor fight giants painting"
+   ]
+  },
+  "black-man": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "blood": {
+   "queries": [
+    "Grunewald Isenheim Crucifixion",
+    "Cranach Weimar altarpiece blood Christ"
+   ]
+  },
+  "bread": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "bridge": {
+   "queries": [
+    "Devil's Bridge Gotthard painting",
+    "Canaletto Rialto Bridge painting"
+   ]
+  },
+  "butterfly": {
+   "queries": [
+    "Psyche butterfly Cupid fresco Pompeii",
+    "Merian metamorphosis butterfly plate Surinam"
+   ]
+  },
+  "cap": {
+   "queries": [
+    "Mithras Phrygian cap relief",
+    "Attis Phrygian cap sculpture"
+   ]
+  },
+  "carriage": {
+   "queries": [
+    "Petrarch Trionfi triumph chariot engraving",
+    "Elijah fiery chariot painting"
+   ]
+  },
+  "cat": {
+   "queries": [
+    "Gayer-Anderson Bastet cat bronze",
+    "bestiary cat medieval manuscript"
+   ]
+  },
+  "cathedral": {
+   "queries": [
+    "Chartres cathedral nave interior",
+    "Salisbury cathedral gothic interior"
+   ]
+  },
+  "celestial-city": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "cloud": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "communion": {
+   "queries": [
+    "Fra Angelico Communion of the Apostles",
+    "Last Supper communion of apostles painting"
+   ]
+  },
+  "crab": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "crocodile": {
+   "queries": [
+    "Sobek crocodile statue Kom Ombo",
+    "Sobek crocodile god Egyptian bronze"
+   ]
+  },
+  "dance": {
+   "queries": [
+    "maenads dance Dionysus vase painting",
+    "dancers Greek vase red-figure krater"
+   ]
+  },
+  "dew": {
+   "queries": [
+    "Eos dawn goddess vase painting",
+    "manna desert gathering painting"
+   ]
+  },
+  "divination": {
+   "queries": [
+    "John Collier Priestess of Delphi",
+    "Piacenza bronze liver Etruscan"
+   ]
+  },
+  "dionysus": {
+   "queries": [
+    "Exekias Dionysus cup pirates Munich",
+    "Dionysus mosaic Sousse"
+   ]
+  },
+  "dwarf": {
+   "queries": [
+    "Velazquez court dwarf portrait Sebastian",
+    "Bes dwarf god Egyptian amulet"
+   ]
+  },
+  "elf": {
+   "queries": [
+    "Midsummer Night's Dream fairies painting",
+    "elves Norse mythology illustration"
+   ]
+  },
+  "fairy": {
+   "queries": [
+    "Titania fairies Midsummer Night's Dream painting",
+    "fairy ring dance painting Victorian"
+   ]
+  },
+  "faun": {
+   "queries": [
+    "Barberini Faun Munich sculpture",
+    "dancing faun Pompeii mosaic"
+   ]
+  },
+  "frontier-crossing": {
+   "queries": [
+    "Israelites crossing Red Sea painting",
+    "Turner Hannibal crossing the Alps"
+   ]
+  },
+  "gazelle": {
+   "queries": [
+    "gazelle hunt Assyrian relief",
+    "gazelles mosaic early Christian floor"
+   ]
+  },
+  "ghost": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "golden-ball": {
+   "queries": [
+    "Frog Prince golden ball illustration",
+    "princess golden ball fairy tale illustration"
+   ]
+  },
+  "grandfather": {
+   "queries": [
+    "Rublev Old Testament Trinity hospitality Abraham",
+    "Aeneas carrying Anchises painting"
+   ]
+  },
+  "harpy": {
+   "queries": [
+    "harpy tomb Xanthos relief",
+    "Harpies Phineus vase painting"
+   ]
+  },
+  "herb-of-life": {
+   "queries": [
+    "Vienna Dioscorides plants illustration",
+    "Tacuinum Sanitatis herbs miniature"
+   ]
+  },
+  "holy-man": {
+   "queries": [
+    "Desert Fathers monks miniature manuscript",
+    "dervish Sufi Persian miniature"
+   ]
+  },
+  "hostile-brothers": {
+   "queries": [
+    "Romulus Remus Capitoline wolf",
+    "Jacob Esau meeting painting"
+   ]
+  },
+  "house": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "idol": {
+   "queries": [
+    "Pompeii lararium household gods fresco",
+    "golden calf Israelites painting"
+   ]
+  },
+  "imp": {
+   "queries": [
+    "Bruegel Dulle Griet demons",
+    "devil demons marginalia medieval manuscript"
+   ]
+  },
+  "jewel": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "jupiter": {
+   "queries": [
+    "Zeus Artemision bronze statue",
+    "Jupiter Verospi bust Vatican"
+   ]
+  },
+  "key": {
+   "queries": [
+    "Perugino Delivery of the Keys",
+    "Saint Peter keys illumination"
+   ]
+  },
+  "last-man": {
+   "queries": [
+    "Holbein Dance of Death woodcut",
+    "Bosch Death and the Miser"
+   ]
+  },
+  "leopard": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "light": {
+   "queries": [
+    "Raphael Transfiguration painting",
+    "Gerard Dou candlelight hermit painting"
+   ]
+  },
+  "machine": {
+   "queries": [
+    "Leonardo codex gears machine drawing",
+    "Antikythera mechanism fragment"
+   ]
+  },
+  "mirror": {
+   "queries": [
+    "Titian Venus with mirror painting",
+    "woman at mirror Italian Renaissance painting"
+   ]
+  },
+  "mouse": {
+   "queries": [
+    "bestiary mouse medieval manuscript",
+    "mouse Roman bronze sculpture"
+   ]
+  },
+  "mummy": {
+   "queries": [
+    "Egyptian mummy coffin museum",
+    "Fayum mummy portrait encaustic"
+   ]
+  },
+  "net": {
+   "queries": [
+    "Vulcan catches Mars Venus net painting",
+    "miraculous draft of fish net painting"
+   ]
+  },
+  "number": {
+   "queries": [
+    "School of Athens Pythagoras Raphael",
+    "Boethius arithmetic manuscript miniature"
+   ]
+  },
+  "orb": {
+   "queries": [
+    "Reichsapfel imperial orb Holy Roman Empire",
+    "Salvator Mundi orb painting"
+   ]
+  },
+  "pan": {
+   "queries": [
+    "Pan Syrinx painting",
+    "Pan god flute vase painting"
+   ]
+  },
+  "pelican": {
+   "queries": [
+    "pelican in her piety medieval",
+    "pelican vulning bestiary illumination"
+   ]
+  },
+  "pentagram": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "persona": {
+   "queries": [
+    "Greek theatre masks terracotta",
+    "Roman theatre masks mosaic"
+   ]
+  },
+  "pig": {
+   "queries": [
+    "Circe swine Odysseus painting",
+    "Calydonian boar hunt vase"
+   ]
+  },
+  "pope-figure": {
+   "queries": [
+    "Raphael Portrait Julius II",
+    "Velazquez Pope Innocent X"
+   ]
+  },
+  "possession": {
+   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+  },
+  "hierosgamos": {
+   "queries": [
+    "Rosarium philosophorum coniunctio king queen manuscript",
+    "hieros gamos alchemical illustration",
+    "Wedding Mars Venus allegory painting Renaissance"
+   ]
+  },
+  "kundalini": {
+   "queries": [
+    "kundalini",
+    "kundalini painting"
+   ],
+   "require": [
+    [
+     "kundalini"
+    ]
+   ]
+  },
+  "mandrake": {
+   "queries": [
+    "mandrake medieval manuscript illustration",
+    "mandragora herbal Tacuinum",
+    "mandrake botanical miniature"
+   ],
+   "require": [
+    [
+     "mandrake",
+     "mandragora"
+    ]
+   ]
+  },
+  "cauda-pavonis": {
+   "queries": [
+    "cauda pavonis alchemical peacock engraving",
+    "peacock alchemy stage Splendor Solis",
+    "mutus liber peacock"
+   ],
+   "require": [
+    [
+     "peacock",
+     "cauda",
+     "alchemy",
+     "alchemical"
+    ]
+   ]
+  },
+  "monad": {
+   "queries": [
+    "Monas Hieroglyphica Dee",
+    "monad alchemy emblem"
+   ],
+   "require": [
+    [
+     "monas",
+     "monad",
+     "hieroglyphica",
+     "dee"
+    ]
+   ]
+  },
+  "ring": {
+   "queries": [
+    "Arnolfini wedding portrait van Eyck",
+    "betrothal ring painting hands Renaissance",
+    "wedding ring painting 15th century"
+   ],
+   "require": [
+    [
+     "ring",
+     "arnolfini"
+    ]
+   ]
+  },
+  "spiral": {
+   "queries": [
+    "Newgrange spiral megalithic art",
+    "spiral fresco Pompeii decoration",
+    "spiral ornament illuminated manuscript"
+   ]
+  },
+  "tower": {
+   "queries": [
+    "Tower of Babel Brueghel painting",
+    "Tower of Babel manuscript illumination"
+   ]
+  },
+  "ship": {
+   "queries": [
+    "ship storm painting Romantic seascape",
+    "ship of fools Bosch",
+    "viking ship carving"
+   ]
+  },
+  "wolf": {
+   "queries": [
+    "she-wolf Capitoline bronze",
+    "wolf painting 19th century art",
+    "Odin wolves painting"
+   ]
+  },
+  "sphinx": {
+   "queries": [
+    "Oedipus and the Sphinx Ingres",
+    "sphinx Greek vase painting Thebes",
+    "sphinx fresco Pompeii"
+   ]
+  },
+  "spider": {
+   "queries": [
+    "Arachne Minerva painting weaving",
+    "spider engraving scientific illustration antique",
+    "spider web painting dew"
+   ]
+  },
+  "skull": {
+   "queries": [
+    "vanitas still life skull painting",
+    "memento mori skull baroque",
+    "Hamlet Yorick skull painting"
+   ]
+  },
+  "scales": {
+   "queries": [
+    "psychostasis weighing of the souls",
+    "Libra zodiac manuscript illumination",
+    "Michael weighing souls painting"
+   ],
+   "require": [
+    [
+     "psychostasis",
+     "weighing",
+     "libra"
+    ]
+   ]
+  },
+  "rainbow": {
+   "queries": [
+    "rainbow landscape painting 19th century",
+    "Noah rainbow covenant illumination",
+    "Iris rainbow goddess painting"
+   ],
+   "require": [
+    [
+     "rainbow",
+     "iris"
+    ]
+   ]
+  },
+  "pyramid": {
+   "skip": "no free image that is itself a pyramid (2026-10 pass): the only metadata match was a study portrait with a model in it"
+  },
+  "wand": {
+   "queries": [
+    "caduceus Hermes engraving",
+    "mercury caduceus emblem",
+    "Hermes kerykeion vase"
+   ],
+   "require": [
+    [
+     "caduceus",
+     "kerykeion",
+     "hermes",
+     "mercury"
+    ]
+   ],
+   "exclude": [
+    "fig.",
+    "vol.",
+    "frontispiece"
+   ]
+  },
+  "sword": {
+   "queries": [
+    "sword Damocles painting",
+    "swords medieval manuscript illumination",
+    "sword altar painting saint"
+   ]
+  },
+  "veil": {
+   "queries": [
+    "veiled lady marble sculpture",
+    "Veiled Rebekah sculpture Monti",
+    "Isis veil statue"
+   ],
+   "require": [
+    [
+     "veil",
+     "veiled"
+    ]
+   ]
+  },
+  "prometheus": {
+   "queries": [
+    "Prometheus eagle painting Rubens",
+    "Prometheus fire engraving",
+    "Prometheus bound sculpture"
+   ]
+  },
+  "wotan": {
+   "queries": [
+    "Odin wanderer painting",
+    "Wotan painting",
+    "Odin Norse mythology painting 19th century"
+   ],
+   "require": [
+    [
+     "odin",
+     "wotan"
+    ]
+   ]
   }
  },
  "occurrences": {
@@ -1190,8 +1742,7 @@
   },
   "ascent-descent-ripley-scrowle-england-16c": {
    "queries": [
-    "Ripley Scroll alchemical Huntington",
-    "Ripley Scroll Yale Beinecke"
+    "Ripley Scroll alchemical"
    ],
    "require": [
     [
@@ -1201,8 +1752,7 @@
   },
   "golden-flower-ripley-scrowle-1588": {
    "queries": [
-    "Ripley Scroll British Museum Sloane",
-    "Ripley Scroll roses"
+    "Ripley Scroll alchemical"
    ],
    "require": [
     [
@@ -1212,8 +1762,7 @@
   },
   "tree-ripley-scrowle-bm-sloane-5025-london-1588": {
    "queries": [
-    "Ripley Scroll Sloane 5025",
-    "Ripley Scroll tree alchemical"
+    "Ripley Scroll tree"
    ],
    "require": [
     [
@@ -1235,8 +1784,7 @@
   },
   "fons-mercurialis-rosarium-1550": {
    "queries": [
-    "Rosarium philosophorum Mercurial fountain woodcut",
-    "Rosarium philosophorum 1550 fons"
+    "Rosarium philosophorum"
    ],
    "require": [
     [
@@ -1279,8 +1827,7 @@
   },
   "risen-christ-filius-philosophorum-rosarium-1550": {
    "queries": [
-    "Rosarium philosophorum resurrection woodcut",
-    "Rosarium philosophorum risen"
+    "Rosarium philosophorum Christ"
    ],
    "require": [
     [
@@ -1290,8 +1837,7 @@
   },
   "moon-luna-adoption-mutus-liber-1702": {
    "queries": [
-    "Mutus liber plate alchemy",
-    "Mutus liber engraving 1677"
+    "Mutus Liber alchemy"
    ],
    "require": [
     [
@@ -1384,8 +1930,7 @@
   },
   "dragon-lambspringk-fire-musaeum-hermeticum-1625": {
    "queries": [
-    "Lambspringk Musaeum hermeticum figures",
-    "Lambspringk Symbols alchemy emblem"
+    "Lambspringk"
    ],
    "require": [
     [
@@ -1395,8 +1940,7 @@
   },
   "lambspringk-two-reversed-fishes-1678": {
    "queries": [
-    "Lambspringk two fishes alchemy",
-    "Lambspringk Symbols emblem fishes"
+    "Lambspringk"
    ],
    "require": [
     [
@@ -1406,8 +1950,7 @@
   },
   "stag-unicorn-soul-spirit-lambspringk-1625": {
    "queries": [
-    "Lambspringk Symbols stag unicorn",
-    "Lambspringk deer unicorn alchemical"
+    "Lambspringk unicorn"
    ],
    "require": [
     [
@@ -1417,8 +1960,7 @@
   },
   "filius-regis-mystagogue-lambspringk-musaeum-1678": {
    "queries": [
-    "Lambspringk Symbols mountain king son",
-    "Lambspringk Musaeum hermeticum king's son"
+    "Lambspringk king"
    ],
    "require": [
     [
@@ -2087,14 +2629,18 @@
   },
   "serpent-puri-temple-chariot-india-1150": {
    "queries": [
-    "Jagannath Temple Puri",
-    "Puri Jagannath Rath Yatra chariots"
+    "Jagannath Rath Yatra chariots Puri festival",
+    "Puri Rath Yatra chariot festival crowd"
    ],
    "require": [
     [
-     "puri",
-     "jagannath"
+     "rath",
+     "chariot",
+     "yatra"
     ]
+   ],
+   "exclude": [
+    "night"
    ]
   },
   "shri-yantra-serpent-power": {

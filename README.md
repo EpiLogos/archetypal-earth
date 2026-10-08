@@ -15,6 +15,7 @@ The site reads the Jung archetypal-field vault at `~/Documents/books/jung-archet
 
 - `npm run ingest` rebuilds `public/data/field.json` from the vault. Run it after the vault's reading runs add material.
 - `npm run images` fetches any images still missing from Wikimedia Commons into `public/img/`. Re-runs skip images already on disk.
+- `npm run images:verify` checks the shipped corpus with no image ever opened: provenance completeness, licence law, manifest↔disk↔field agreement, byte-identity (a plate shared under one recorded source is intended curation; identical bytes under different sources fail).
 - `npm run data` runs ingest, then images, then ingest again.
 
 Choices made by the site rather than taken from the vault live in `curation/`:

@@ -16,7 +16,9 @@ const IMG_DIR = path.join(ROOT, 'public', 'img');
 const OUT = path.join(ROOT, 'public', 'data', 'images.json');
 const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
 const QUERIES = path.join(ROOT, 'curation', 'image-queries.json');
-const BUDGET_BYTES = 175 * 1024 * 1024;
+// raised 175 -> 200 (2026-10 audit): the shipped tree already measured 175.8MB,
+// so the old guard blocked every refetch; replaces are size-neutral swaps.
+const BUDGET_BYTES = 200 * 1024 * 1024;
 
 // Wikimedia only serves "standard" thumbnail widths.
 const WIDTH = { archetypes: 1920, families: 1280, occurrences: 960 };
@@ -25,8 +27,11 @@ const OCC_CAP = 260;
 
 const args = process.argv.slice(2);
 const opt = (k) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : null; };
-const only = opt('--only');
-const onlyIds = opt('--id')?.split(',');
+// --only takes a group (archetypes|families|occurrences) or, if it is not a group, a comma list of ids to fetch across groups
+const RAW_ONLY = opt('--only');
+const GROUPS = ['archetypes', 'families', 'occurrences'];
+const only = RAW_ONLY && GROUPS.includes(RAW_ONLY) ? RAW_ONLY : null;
+const onlyIds = RAW_ONLY && !only ? (opt('--id')?.split(',') || RAW_ONLY.split(',')) : opt('--id')?.split(',');
 const redo = new Set(opt('--redo')?.split(',') || []);
 const dry = args.includes('--dry');
 

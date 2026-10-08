@@ -62,7 +62,8 @@ export function validateSymbols(symbols, { field } = {}) {
 }
 
 function findPython(explicit) {
-  const candidates = [explicit || process.env.SYMBOLS_PYTHON, 'python3'];
+  // plain python3 first, then the versioned interpreters a dependency runtime may have installed pypdf into
+  const candidates = [explicit || process.env.SYMBOLS_PYTHON, 'python3', 'python3.13', 'python3.12'];
   // Discover a bundled dependency Python from the installed tool directory, if available.
   for (const dir of (process.env.PATH || '').split(path.delimiter)) {
     if (fs.existsSync(path.join(dir, 'pdfinfo'))) candidates.push(path.resolve(dir, '../../python/bin/python3'));
@@ -71,6 +72,8 @@ function findPython(explicit) {
     const result = spawnSync(candidate, ['-c', 'import pypdf'], { encoding: 'utf8' });
     if (result.status === 0) return candidate;
   }
+  // an explicitly asked-for runtime is never silently swapped for another one
+  if (explicit || process.env.SYMBOLS_PYTHON) throw new Error(`SYMBOLS_PYTHON (${explicit || process.env.SYMBOLS_PYTHON}) has no pypdf; fix it or unset it.`);
   throw new Error('PDF verification requires Python with pypdf; set SYMBOLS_PYTHON to the dependency runtime.');
 }
 
