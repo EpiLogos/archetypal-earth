@@ -1,0 +1,11 @@
+# Direct dependencies of the ephemeris sidecar, pinned exactly (docs/SKY-SOURCES.md → "Sidecar version pin").
+# requirements.lock.txt is the full resolved set (pip freeze) the sidecar was verified against.
+# Licensing: kerykeion and libephemeris are AGPL-3.0; the sidecar is a separate local process and
+# the site never bundles them (see docs/SKY-SOURCES.md).
+kerykeion==6.0.5
+libephemeris==3.2.2
+fastapi==0.143.0
+uvicorn==0.54.0
+timezonefinder==9.0.0
+httpx==0.28.1
+pytest==9.1.1

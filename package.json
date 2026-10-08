@@ -11,7 +11,9 @@
     "images": "node scripts/images.mjs",
     "data": "npm run ingest && npm run images && npm run ingest",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sky": "node scripts/sky.mjs",
+    "sky:check": "node scripts/sky.mjs --check"
   },
   "dependencies": {
     "globe.gl": "^2.46.2",

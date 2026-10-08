@@ -1,0 +1,388 @@
+{
+  "_note": "Astronomical fact for the sky layer, site-side and sourced. Orbital constants are display constants for the diagram, never the positions (positions come from the ephemeris sidecar, see docs/SKY-SOURCES.md). `palette_from` records how each palette was chosen from the tied families (D4); palettes and spectrum values are the atlas's visual interpretation, not measurements. `modern` marks bodies the classical seven do not include.",
+  "bodies": [
+    {
+      "key": "sun",
+      "order": 0,
+      "modern": false,
+      "name": "Sol",
+      "oneLine": "Sol — gold; Jung's classical symbol for the unity and divinity of the Self",
+      "radiusKm": 695700,
+      "palette": {
+        "core": "#f7f0d6",
+        "glow": "#e6dcb4",
+        "fog": "#2c2e36",
+        "deep": "#0b0b0e"
+      },
+      "spectrum": 0.53,
+      "palette_from": "family sun (0.525) toward the SPEC §8 solar gold-white",
+      "sources": [
+        {
+          "claim": "nominal solar radius, 695,700 km",
+          "ref": "IAU 2015 Resolution B3 (nominal solar radius)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "moon",
+      "order": 1,
+      "modern": false,
+      "name": "Luna",
+      "oneLine": "Luna — silver; the guardian of the seed, gathering-place of departed souls",
+      "orbit": {
+        "around": "earth",
+        "au": 0.00256956,
+        "eccentricity": 0.0549,
+        "siderealDays": 27.3217,
+        "inclinationDeg": 5.145
+      },
+      "radiusKm": 1737.4,
+      "palette": {
+        "core": "#b4bccb",
+        "glow": "#82778e",
+        "fog": "#1f262f",
+        "deep": "#090b11"
+      },
+      "spectrum": 0.26,
+      "palette_from": "family moon (0.255)",
+      "sources": [
+        {
+          "claim": "mean radius, semimajor axis, eccentricity, sidereal period, inclination to the ecliptic",
+          "ref": "NASA NSSDCA Moon Fact Sheet (https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "earth",
+      "order": 2,
+      "modern": false,
+      "name": "Terra",
+      "oneLine": "Terra — the atlas's home; the ground every presence in the field stands on",
+      "orbit": {
+        "au": 1.00000261,
+        "eccentricity": 0.01671123,
+        "siderealDays": 365.256,
+        "inclinationDeg": 0.0
+      },
+      "radiusKm": 6371.0084,
+      "palette": {
+        "core": "#86b4c0",
+        "glow": "#4f7f9a",
+        "fog": "#16303a",
+        "deep": "#050f14"
+      },
+      "spectrum": 0.28,
+      "palette_from": "site: the home body, a blue-green between the water and the earthbound families",
+      "sources": [
+        {
+          "claim": "semimajor axis and eccentricity of the Earth–Moon barycentre; inclination to the ecliptic is zero by definition",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "mercury",
+      "order": 3,
+      "modern": false,
+      "name": "Mercurius",
+      "oneLine": "Mercurius — quicksilver; lowest as prima materia, highest as lapis",
+      "orbit": {
+        "au": 0.38709927,
+        "eccentricity": 0.20563593,
+        "siderealDays": 87.969,
+        "inclinationDeg": 7.00497902
+      },
+      "radiusKm": 2439.4,
+      "palette": {
+        "core": "#b9bea5",
+        "glow": "#b5aa83",
+        "fog": "#212a2a",
+        "deep": "#090b0c"
+      },
+      "spectrum": 0.41,
+      "palette_from": "family mercurius (0.412)",
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "venus",
+      "order": 4,
+      "modern": false,
+      "name": "Venus",
+      "oneLine": "Venus — copper; Jung's anima met in her historic dress",
+      "orbit": {
+        "au": 0.72333566,
+        "eccentricity": 0.00677672,
+        "siderealDays": 224.701,
+        "inclinationDeg": 3.39467605
+      },
+      "radiusKm": 6051.8,
+      "palette": {
+        "core": "#7ec4d6",
+        "glow": "#6a8ee0",
+        "fog": "#14304a",
+        "deep": "#040e1c"
+      },
+      "spectrum": 0.36,
+      "palette_from": "family venus (0.36), the anima's blue-green liquidity",
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "mars",
+      "order": 5,
+      "modern": false,
+      "name": "Mars",
+      "oneLine": "Mars — iron, heat and the warrior; a temperament, a psychic factor",
+      "orbit": {
+        "au": 1.52371034,
+        "eccentricity": 0.0933941,
+        "siderealDays": 686.98,
+        "inclinationDeg": 1.84969142
+      },
+      "radiusKm": 3389.5,
+      "palette": {
+        "core": "#c96a4a",
+        "glow": "#8a3b2e",
+        "fog": "#3a1c18",
+        "deep": "#160b0a"
+      },
+      "spectrum": 0.3,
+      "palette_from": "site: the chthonic warm register of SPEC §8 (nearest tied family: dragon 0.222)",
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "jupiter",
+      "order": 6,
+      "modern": false,
+      "name": "Iuppiter",
+      "oneLine": "Jupiter — tin; with Saturn, the great conjunctions that date the aeons",
+      "orbit": {
+        "au": 5.202887,
+        "eccentricity": 0.04838624,
+        "siderealDays": 4332.82,
+        "inclinationDeg": 1.30439695
+      },
+      "radiusKm": 69911,
+      "palette": {
+        "core": "#d5c3a6",
+        "glow": "#a98f72",
+        "fog": "#2b2420",
+        "deep": "#0d0a09"
+      },
+      "spectrum": 0.62,
+      "palette_from": "family planetary-gods (0.53) warmed toward sand; no gold-and-black cliché (SPEC §14)",
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "saturn",
+      "order": 7,
+      "modern": false,
+      "name": "Saturnus",
+      "oneLine": "Saturn — lead; the sinister Senex, the black sun, the ladder's first door",
+      "orbit": {
+        "au": 9.53667594,
+        "eccentricity": 0.05386179,
+        "siderealDays": 10755.699,
+        "inclinationDeg": 2.48599187
+      },
+      "radiusKm": 58232,
+      "palette": {
+        "core": "#9a8fa8",
+        "glow": "#5d5675",
+        "fog": "#191729",
+        "deep": "#07060e"
+      },
+      "spectrum": 0.2,
+      "palette_from": "family sol-niger (0.272), its shadow tie",
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "uranus",
+      "order": 8,
+      "modern": true,
+      "name": "Uranus",
+      "oneLine": "Uranus — named for the sky; found in 1781, outside the old seven",
+      "orbit": {
+        "au": 19.18916464,
+        "eccentricity": 0.04725744,
+        "siderealDays": 30687.153,
+        "inclinationDeg": 0.77263783
+      },
+      "radiusKm": 25362,
+      "palette": {
+        "core": "#d4e6ee",
+        "glow": "#9fc7e0",
+        "fog": "#1c2e40",
+        "deep": "#070d14"
+      },
+      "spectrum": 0.72,
+      "palette_from": "family star (0.50), clearer and cooler",
+      "discovered": {
+        "year": 1781
+      },
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "discovery, 1781 (William Herschel)",
+          "ref": "JPL SSD, Planetary Discovery Circumstances (https://ssd.jpl.nasa.gov/planets/discovery.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "neptune",
+      "order": 9,
+      "modern": true,
+      "name": "Neptunus",
+      "oneLine": "Neptune — named for the sea; found in 1846, outside the old seven",
+      "orbit": {
+        "au": 30.06992276,
+        "eccentricity": 0.00859048,
+        "siderealDays": 60190.03,
+        "inclinationDeg": 1.77004347
+      },
+      "radiusKm": 24622,
+      "palette": {
+        "core": "#8aa4e0",
+        "glow": "#5a6fb8",
+        "fog": "#141b3a",
+        "deep": "#060914"
+      },
+      "spectrum": 0.4,
+      "palette_from": "family night-sea-journey (0.375), pushed to blue-violet",
+      "discovered": {
+        "year": 1846
+      },
+      "sources": [
+        {
+          "claim": "orbital elements",
+          "ref": "JPL SSD, Approximate Positions of the Planets, Table 1 (https://ssd.jpl.nasa.gov/planets/approx_pos.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius and sidereal orbital period",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "discovery, 1846 (Le Verrier's prediction; observed by Galle)",
+          "ref": "JPL SSD, Planetary Discovery Circumstances (https://ssd.jpl.nasa.gov/planets/discovery.html)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "key": "pluto",
+      "order": 10,
+      "modern": true,
+      "name": "Pluto",
+      "oneLine": "Pluto — named for the underworld; found in 1930, a dwarf planet since 2006",
+      "orbit": {
+        "au": 39.48185,
+        "eccentricity": 0.244,
+        "siderealDays": 90560.0,
+        "inclinationDeg": 17.2
+      },
+      "radiusKm": 1188.3,
+      "palette": {
+        "core": "#9c5a78",
+        "glow": "#3a2a5e",
+        "fog": "#130a1c",
+        "deep": "#06030c"
+      },
+      "spectrum": 0.1,
+      "palette_from": "family nigredo (0.12)",
+      "discovered": {
+        "year": 1930
+      },
+      "sources": [
+        {
+          "claim": "orbital elements (semimajor axis from 5906.4 × 10^6 km, eccentricity, inclination, sidereal period)",
+          "ref": "NASA NSSDCA Planetary Fact Sheet (https://nssdc.gsfc.nasa.gov/planetary/factsheet/)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "mean radius",
+          "ref": "JPL SSD, Planetary Physical Parameters (https://ssd.jpl.nasa.gov/planets/phys_par.html)",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "claim": "discovery, 1930; reclassified a dwarf planet in 2006",
+          "ref": "NASA Science, Pluto Facts (https://science.nasa.gov/dwarf-planets/pluto/facts/)",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "_note": "Body → field ties. basis: jung = Jung makes the link in the cited text (quote verified against the read-only corpus by `npm run sky:check`); inferred = the vault or the atlas infers it, justified in the note; site = editorial. Never present inferred or site as Jung's word. Locators follow the Aion convention: a paragraph number only where the nearest paragraph marker in the corpus agrees, otherwise the PDF page alone.",
+  "ties": [
+    {
+      "body": "sun",
+      "target": {
+        "type": "family",
+        "id": "sun"
+      },
+      "basis": "jung",
+      "note": "Jung calls the sun the classical symbol for the unity and divinity of the Self.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶108 (pdf p109)",
+          "quote": "First it produces the classical symbol for the unity and divinity of the self, the sun"
+        }
+      ]
+    },
+    {
+      "body": "sun",
+      "target": {
+        "type": "archetype",
+        "id": "self"
+      },
+      "basis": "jung",
+      "note": "The same sentence: the sun as symbol of the Self's unity and divinity.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶108 (pdf p109)",
+          "quote": "First it produces the classical symbol for the unity and divinity of the self, the sun"
+        }
+      ]
+    },
+    {
+      "body": "sun",
+      "target": {
+        "type": "family",
+        "id": "solificatio"
+      },
+      "basis": "jung",
+      "note": "The planetary ladder ends in the solificatio, where the initiand is crowned as Helios.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶66 (pdf p82)",
+          "quote": "where the initiand was crowned as Helios"
+        }
+      ]
+    },
+    {
+      "body": "sun",
+      "target": {
+        "type": "family",
+        "id": "coniunctio"
+      },
+      "basis": "jung",
+      "note": "Sol, with Luna, enacts the coniunctio; Jung names the pair King and Queen.",
+      "cites": [
+        {
+          "work": "cw14",
+          "workTitle": "Mysterium Coniunctionis (CW14)",
+          "locator": "¶109 (pdf p74)",
+          "quote": "in alchemy King and Queen, Sol and Luna"
+        }
+      ]
+    },
+    {
+      "body": "sun",
+      "target": {
+        "type": "archetype",
+        "id": "syzygy"
+      },
+      "basis": "inferred",
+      "note": "Jung's own sentence names the coniunctio oppositorum; the vault reads the coniunctio as the syzygy's consummation, and the atlas keeps that link as an inference rather than Jung's word.",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "pdf p284",
+          "quote": "The coniunctio oppositorum engaged the speculations of the alchemists"
+        }
+      ]
+    },
+    {
+      "body": "sun",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "The sun is one of the seven gods of the planets, the goal of the stairway.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶84 (pdf p90)",
+          "quote": "they form what the Pyramid inscriptions call a paut neteru"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "family",
+        "id": "moon"
+      },
+      "basis": "jung",
+      "note": "Jung describes the moon as guardian of the seed and a source of life with a feminine significance.",
+      "cites": [
+        {
+          "work": "cw05",
+          "workTitle": "Symbols of Transformation (CW5)",
+          "locator": "¶487 (pdf p361)",
+          "quote": "a guardian of the seed, and hence a source of life with a feminine significance"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "archetype",
+        "id": "anima"
+      },
+      "basis": "inferred",
+      "note": "The vault reads Jung's feminine moon as the anima by inference; in this passage Jung does not name the anima.",
+      "cites": [
+        {
+          "work": "cw05",
+          "workTitle": "Symbols of Transformation (CW5)",
+          "locator": "¶487 (pdf p361)",
+          "quote": "a guardian of the seed, and hence a source of life with a feminine significance"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "archetype",
+        "id": "great-mother"
+      },
+      "basis": "inferred",
+      "note": "The vault reads the seed-guarding, soul-gathering moon as the Great Mother by inference; Jung does not name her in the passage.",
+      "cites": [
+        {
+          "work": "cw05",
+          "workTitle": "Symbols of Transformation (CW5)",
+          "locator": "¶487 (pdf p361)",
+          "quote": "a guardian of the seed, and hence a source of life with a feminine significance"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "family",
+        "id": "coniunctio"
+      },
+      "basis": "jung",
+      "note": "Luna, with Sol, enacts the coniunctio; Jung names the pair King and Queen.",
+      "cites": [
+        {
+          "work": "cw14",
+          "workTitle": "Mysterium Coniunctionis (CW14)",
+          "locator": "¶109 (pdf p74)",
+          "quote": "in alchemy King and Queen, Sol and Luna"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "archetype",
+        "id": "syzygy"
+      },
+      "basis": "inferred",
+      "note": "As for the sun: the coniunctio is read as the syzygy's consummation by the vault, not stated so by Jung in the cited sentence.",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "pdf p284",
+          "quote": "The coniunctio oppositorum engaged the speculations of the alchemists"
+        }
+      ]
+    },
+    {
+      "body": "moon",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Silver is the moon's sign among the planetary metals Jung lists.",
+      "cites": [
+        {
+          "work": "sem-zarathustra",
+          "workTitle": "Nietzsche's Zarathustra seminar (1934–39)",
+          "locator": "pdf p1441",
+          "quote": "silver, the sign of the moon"
+        }
+      ]
+    },
+    {
+      "body": "mercury",
+      "target": {
+        "type": "family",
+        "id": "mercurius"
+      },
+      "basis": "jung",
+      "note": "Jung joins the planet Mercury and the alchemical spirit Mercurius in one sentence: nearest the sun, hence related to gold.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶84 (pdf p91)",
+          "quote": "As the planet Mercury, he is nearest to the sun, hence he is pre-eminently related to gold"
+        }
+      ]
+    },
+    {
+      "body": "mercury",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Hermes, who is quicksilver, belongs to the company of the seven planetary gods.",
+      "cites": [
+        {
+          "work": "cw12",
+          "workTitle": "Psychology and Alchemy (CW12)",
+          "locator": "¶84 (pdf p91)",
+          "quote": "a chthonic god of revelation and also the spirit of quicksilver"
+        }
+      ]
+    },
+    {
+      "body": "mercury",
+      "target": {
+        "type": "archetype",
+        "id": "psychopomp"
+      },
+      "basis": "inferred",
+      "note": "The vault reads Mercurius as the redeeming psychopomp (CW13, printed p237) by inference; the cited passage is the planetary link only."
+    },
+    {
+      "body": "mercury",
+      "target": {
+        "type": "archetype",
+        "id": "trickster"
+      },
+      "basis": "inferred",
+      "note": "The vault reads Mercurius as trickster by inference (CW13, printed pp203, 237); the cited passage is the planetary link only."
+    },
+    {
+      "body": "venus",
+      "target": {
+        "type": "family",
+        "id": "venus"
+      },
+      "basis": "jung",
+      "note": "In the anima's historic dress, Poliphilo conjures Queen Venus.",
+      "cites": [
+        {
+          "work": "cw09i",
+          "workTitle": "The Archetypes and the Collective Unconscious (CW9i)",
+          "locator": "¶60 (pdf p39)",
+          "quote": "Poliphilo conjured up Queen Venus"
+        }
+      ]
+    },
+    {
+      "body": "venus",
+      "target": {
+        "type": "archetype",
+        "id": "anima"
+      },
+      "basis": "jung",
+      "note": "Jung brings Queen Venus into his discussion of the classic anima stories.",
+      "cites": [
+        {
+          "work": "cw09i",
+          "workTitle": "The Archetypes and the Collective Unconscious (CW9i)",
+          "locator": "¶60 (pdf p39)",
+          "quote": "Poliphilo conjured up Queen Venus"
+        }
+      ]
+    },
+    {
+      "body": "venus",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Copper is Venus's sign among the planetary metals Jung lists.",
+      "cites": [
+        {
+          "work": "sem-zarathustra",
+          "workTitle": "Nietzsche's Zarathustra seminar (1934–39)",
+          "locator": "pdf p1441",
+          "quote": "copper, the sign of Venus"
+        }
+      ]
+    },
+    {
+      "body": "earth",
+      "target": {
+        "type": "archetype",
+        "id": "great-mother"
+      },
+      "basis": "site",
+      "note": "The atlas names the Earth its home body; reading it as mother is an editorial gloss, not Jung's statement about the planet."
+    },
+    {
+      "body": "earth",
+      "target": {
+        "type": "family",
+        "id": "mother-goddess"
+      },
+      "basis": "site",
+      "note": "An editorial link to the field's mother-goddess figures; they are cultural figures, not the planet."
+    },
+    {
+      "body": "mars",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Iron is Mars's sign among the planetary metals Jung lists.",
+      "cites": [
+        {
+          "work": "sem-zarathustra",
+          "workTitle": "Nietzsche's Zarathustra seminar (1934–39)",
+          "locator": "pdf p1441",
+          "quote": "iron is the sign of Mars"
+        }
+      ]
+    },
+    {
+      "body": "mars",
+      "target": {
+        "type": "archetype",
+        "id": "hero"
+      },
+      "basis": "inferred",
+      "note": "Jung says the planetary names refer to the temperaments, which are psychic factors; the vault reads Mars's martial factor as the hero by inference. Jung's hero analyses never name the planet.",
+      "cites": [
+        {
+          "work": "cw13",
+          "workTitle": "Alchemical Studies (CW13)",
+          "locator": "¶354 (pdf p339)",
+          "quote": "the (astrological) temperaments, that is, to psychic factors"
+        }
+      ]
+    },
+    {
+      "body": "jupiter",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Tin is Jupiter's sign among the planetary metals Jung lists.",
+      "cites": [
+        {
+          "work": "sem-zarathustra",
+          "workTitle": "Nietzsche's Zarathustra seminar (1934–39)",
+          "locator": "pdf p1441",
+          "quote": "tin, the sign of Jupiter"
+        }
+      ]
+    },
+    {
+      "body": "jupiter",
+      "target": {
+        "type": "family",
+        "id": "fish"
+      },
+      "basis": "inferred",
+      "note": "Aion's astrological argument places the great conjunction of Jupiter and Saturn in Pisces; linking the planet to the fish family is the atlas's inference, not Jung's claim that the planet is a fish.",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "pdf p123",
+          "quote": "coniunctio maxima of Jupiter and Saturn in Pisces"
+        }
+      ]
+    },
+    {
+      "body": "saturn",
+      "target": {
+        "type": "family",
+        "id": "sol-niger"
+      },
+      "basis": "jung",
+      "note": "Jung writes that Saturn is even called the black sun.",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "¶215 (pdf p151)",
+          "quote": "is even called \"sol niger\""
+        }
+      ]
+    },
+    {
+      "body": "saturn",
+      "target": {
+        "type": "family",
+        "id": "senex-figure"
+      },
+      "basis": "jung",
+      "note": "Maier's journey begins with Saturn, the sinister Senex.",
+      "cites": [
+        {
+          "work": "cw14",
+          "workTitle": "Mysterium Coniunctionis (CW14)",
+          "locator": "¶298 (pdf p168)",
+          "quote": "the maleficus and abode of evil, the mysterious and sinister Senex"
+        }
+      ]
+    },
+    {
+      "body": "saturn",
+      "target": {
+        "type": "archetype",
+        "id": "shadow"
+      },
+      "basis": "inferred",
+      "note": "The vault's sol-niger note expresses the Shadow on Jung's authority; applying it to the planet is an inference.",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "¶215 (pdf p151)",
+          "quote": "is even called \"sol niger\""
+        }
+      ]
+    },
+    {
+      "body": "saturn",
+      "target": {
+        "type": "archetype",
+        "id": "wise-old-man"
+      },
+      "basis": "inferred",
+      "note": "The vault reads Saturn's Senex as the Wise Old Man by inference.",
+      "cites": [
+        {
+          "work": "cw14",
+          "workTitle": "Mysterium Coniunctionis (CW14)",
+          "locator": "¶298 (pdf p168)",
+          "quote": "the maleficus and abode of evil, the mysterious and sinister Senex"
+        }
+      ]
+    },
+    {
+      "body": "saturn",
+      "target": {
+        "type": "family",
+        "id": "planetary-gods"
+      },
+      "basis": "jung",
+      "note": "Zosimos' leaden homunculus is the leaden spirit or planetary demon Saturn.",
+      "cites": [
+        {
+          "work": "cw11",
+          "workTitle": "Psychology and Religion: West and East (CW11)",
+          "locator": "¶350 (pdf p191)",
+          "quote": "the leaden spirit or planetary demon Saturn"
+        }
+      ]
+    },
+    {
+      "body": "uranus",
+      "target": {
+        "type": "family",
+        "id": "star"
+      },
+      "basis": "site",
+      "note": "Named for the sky-father Ouranos. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+    },
+    {
+      "body": "neptune",
+      "target": {
+        "type": "family",
+        "id": "water"
+      },
+      "basis": "site",
+      "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+    },
+    {
+      "body": "neptune",
+      "target": {
+        "type": "family",
+        "id": "night-sea-journey"
+      },
+      "basis": "site",
+      "note": "The sea-god's namesake planet, read beside the night sea journey. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+    },
+    {
+      "body": "pluto",
+      "target": {
+        "type": "family",
+        "id": "nigredo"
+      },
+      "basis": "site",
+      "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+    },
+    {
+      "body": "pluto",
+      "target": {
+        "type": "archetype",
+        "id": "shadow"
+      },
+      "basis": "site",
+      "note": "The underworld namesake, read beside the Shadow. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+    }
+  ],
+  "readings": [
+    {
+      "id": "self-as-coniunctio",
+      "bodies": [
+        "sun",
+        "moon"
+      ],
+      "name": "The Self as their coniunctio",
+      "statement": "Sol and Luna, joined: the coniunctio oppositorum, which Jung calls the form the alchemists gave to the union of opposites. Of the Self he writes that it is a union of conscious (masculine) and unconscious (feminine).",
+      "targets": [
+        {
+          "type": "family",
+          "id": "coniunctio"
+        },
+        {
+          "type": "archetype",
+          "id": "syzygy"
+        },
+        {
+          "type": "archetype",
+          "id": "self"
+        }
+      ],
+      "basis": "jung",
+      "cites": [
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "pdf p284",
+          "quote": "The coniunctio oppositorum engaged the speculations of the alchemists"
+        },
+        {
+          "work": "cw09ii",
+          "workTitle": "Aion (CW9ii)",
+          "locator": "¶426 (pdf p284)",
+          "quote": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine)"
+        }
+      ]
+    }
+  ]
+}

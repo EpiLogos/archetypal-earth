@@ -1,0 +1,48 @@
+{
+  "_note": "Cultural re-projection of the astronomical bodies. Names transcribed from the vault note wiki/images/planetary-gods.md (Cross-cultural correspondences). basis follows the note's own marking: jung = cell cites Jung (J); inferred = standard comparative scholarship the note marks (S); site = unmarked classical name the atlas supplies. Never present inferred or site as Jung's word.",
+  "cultures": {
+    "mesopotamian": {
+      "saturn": { "name": "Ninurta/Ninib", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Saturn × Babylonian (S)" },
+      "jupiter": { "name": "Marduk", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Jupiter × Babylonian (S)" },
+      "mars": { "name": "Nergal", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Mars × Babylonian (S)" },
+      "sun": { "name": "Shamash/Utu", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Sun × Babylonian (S)" },
+      "venus": { "name": "Ishtar/Inanna", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Venus × Babylonian (S)" },
+      "mercury": { "name": "Nabu", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Mercury × Babylonian (S)" },
+      "moon": { "name": "Sin/Nanna", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Moon × Babylonian (S)" }
+    },
+    "greek": {
+      "saturn": { "name": "Kronos", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Saturn × Greek (J: cw09ii ¶215 \"Chronos (Saturn)\"; cw11 ¶350)" },
+      "jupiter": { "name": "Zeus", "kind": "deity", "basis": "site", "source": "planetary-gods table, Jupiter × Greek (no mark: classical name)" },
+      "mars": { "name": "Ares", "kind": "deity", "basis": "site", "source": "planetary-gods table, Mars × Greek (no mark: classical name)" },
+      "sun": { "name": "Helios", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Sun × Greek (J: cw12 ¶66 sun-god goal of ascent)" },
+      "venus": { "name": "Aphrodite", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Venus × Greek (J: sem-zarathustra pdf p1441 copper=Venus)" },
+      "mercury": { "name": "Hermes", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Mercury × Greek (J: cw12 ¶84 Hermes = quicksilver)" },
+      "moon": { "name": "Selene", "kind": "deity", "basis": "jung", "source": "planetary-gods table, Moon × Greek (J: sem-zarathustra pdf p1441 silver=moon)" }
+    },
+    "roman": {
+      "saturn": { "name": "Saturnus", "kind": "deity", "basis": "site", "source": "planetary-gods table, Saturn × Roman (no mark: classical name)" },
+      "jupiter": { "name": "Iuppiter", "kind": "deity", "basis": "site", "source": "planetary-gods table, Jupiter × Roman (no mark: classical name)" },
+      "mars": { "name": "Mars", "kind": "deity", "basis": "site", "source": "planetary-gods table, Mars × Roman (no mark: classical name)" },
+      "sun": { "name": "Sol", "kind": "deity", "basis": "site", "source": "planetary-gods table, Sun × Roman (no mark: classical name)" },
+      "venus": { "name": "Venus", "kind": "deity", "basis": "site", "source": "planetary-gods table, Venus × Roman (no mark: classical name)" },
+      "mercury": { "name": "Mercurius", "kind": "deity", "basis": "site", "source": "planetary-gods table, Mercury × Roman (no mark: classical name)" },
+      "moon": { "name": "Luna", "kind": "deity", "basis": "site", "source": "planetary-gods table, Moon × Roman (no mark: classical name)" }
+    },
+    "indian": {
+      "saturn": { "name": "Shani", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Saturn × Hindu navagraha (S)" },
+      "jupiter": { "name": "Brihaspati/Guru", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Jupiter × Hindu navagraha (S)" },
+      "mars": { "name": "Mangala", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Mars × Hindu navagraha (S)" },
+      "sun": { "name": "Surya", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Sun × Hindu navagraha (S)" },
+      "venus": { "name": "Shukra", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Venus × Hindu navagraha (S)" },
+      "mercury": { "name": "Budha", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Mercury × Hindu navagraha (S)" },
+      "moon": { "name": "Chandra/Soma", "kind": "deity", "basis": "inferred", "source": "planetary-gods table, Moon × Hindu navagraha (S)" }
+    },
+    "chinese": {
+      "saturn": { "name": "earth", "kind": "element", "basis": "inferred", "source": "planetary-gods table, Saturn × Chinese wuxing (S)" },
+      "jupiter": { "name": "wood", "kind": "element", "basis": "inferred", "source": "planetary-gods table, Jupiter × Chinese wuxing (S)" },
+      "mars": { "name": "fire", "kind": "element", "basis": "inferred", "source": "planetary-gods table, Mars × Chinese wuxing (S)" },
+      "venus": { "name": "metal", "kind": "element", "basis": "inferred", "source": "planetary-gods table, Venus × Chinese wuxing (S)" },
+      "mercury": { "name": "water", "kind": "element", "basis": "inferred", "source": "planetary-gods table, Mercury × Chinese wuxing (S)" }
+    }
+  }
+}

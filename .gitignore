@@ -3,3 +3,7 @@ dist/
 .cache/
 *.log
 .DS_Store
+
+# ephemeris sidecar
+ephemeris/.venv/
+ephemeris/__pycache__/
