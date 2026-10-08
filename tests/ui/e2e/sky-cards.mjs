@@ -79,9 +79,11 @@ try {
   const reading = await page.evaluate(() => {
     const r = document.querySelector('.sky-reading');
     const d = r?.querySelector('details');
-    return { has: !!r, h: r?.querySelector('.sky-h')?.textContent, links: [...(r?.querySelectorAll('.aion-links button') ?? [])].map((b) => b.textContent), open0: d?.open, bq0: d?.querySelectorAll('blockquote').length };
+    const events = [...document.querySelectorAll('.sky-syzygy .sky-event')].map((e) => ({ fact: e.querySelector('.sky-fact')?.textContent, links: [...e.querySelectorAll('.aion-links button')].map((b) => b.textContent) }));
+    return { has: !!r, h: r?.querySelector('.sky-h')?.textContent, links: [...(r?.querySelectorAll('.aion-links button') ?? [])].map((b) => b.textContent), events, open0: d?.open, bq0: d?.querySelectorAll('blockquote').length };
   });
-  check(reading.has && /coniunctio/i.test(reading.h ?? '') && reading.h.includes('Jung') && reading.links.length === 3, 'the Sun carries the pair reading with its basis and three field links', JSON.stringify(reading));
+  check(reading.has && /coniunctio/i.test(reading.h ?? '') && reading.h.includes('Jung'), 'the Sun carries the pair reading with its basis', JSON.stringify(reading.h));
+  check(reading.events.length === 2 && reading.events.every((e) => e.links.length === 3), 'each of the next conjunction and opposition links the three field entries Jung\u2019s reading names', JSON.stringify(reading.events));
   await page.click('.sky-reading summary');
   const after = await page.evaluate(() => ({ open: document.querySelector('.sky-reading details').open, quote: document.querySelector('.sky-reading blockquote p')?.textContent, cite: document.querySelector('.sky-reading blockquote cite')?.textContent }));
   check(after.open && /coniunctio oppositorum/.test(after.quote ?? '') && /Aion/.test(after.cite ?? ''), 'passages expand in place, quoted and cited', `${after.quote?.slice(0, 60)}… ${after.cite}`);

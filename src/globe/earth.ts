@@ -4,38 +4,130 @@ import type { Shared } from './shared';
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
 
-export function loadTextures(renderer: THREE.WebGLRenderer): Promise<{ base: THREE.Texture; water: THREE.Texture; topo: THREE.Texture }> {
-  const loader = new THREE.TextureLoader();
-  const load = (name: string, srgb: boolean) =>
-    new Promise<THREE.Texture>((resolve, reject) => {
-      loader.load(`${BASE}/textures/${name}`, (t) => {
-        t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
-        t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-        t.wrapS = THREE.RepeatWrapping;
-        t.wrapT = THREE.ClampToEdgeWrapping;
-        resolve(t);
-      }, undefined, reject);
-    });
-  return Promise.all([load('earth-dark.jpg', false), load('earth-water.png', false), load('earth-topology.png', false)]).then(([base, water, topo]) => ({ base, water, topo }));
+/** Uniforms every earth-graded surface (the sphere and the close-zoom tiles) shares. */
+export interface EarthUniforms {
+  uDensity: THREE.IUniform<THREE.Texture>;
+  uLightDir: THREE.IUniform<THREE.Vector3>;
+  uSunDir: THREE.IUniform<THREE.Vector3>;
+  uSunMix: THREE.IUniform<number>;
+  uFog: THREE.IUniform<THREE.Vector3>;
+  uGlow: THREE.IUniform<THREE.Vector3>;
+  uDeep: THREE.IUniform<THREE.Vector3>;
+  uCore: THREE.IUniform<THREE.Vector3>;
+  uSpec: THREE.IUniform<number>;
+}
+
+function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => {
+      // decode off the main thread before the texture ever sees it
+      (img.decode ? img.decode().catch(() => undefined) : Promise.resolve()).then(() => resolve(img));
+    };
+    img.onerror = () => reject(new Error(`failed to load ${url}`));
+    img.src = url;
+  });
+}
+
+function baseTexture(img: HTMLImageElement | ImageBitmap, renderer: THREE.WebGLRenderer): THREE.Texture {
+  const t = new THREE.Texture(img);
+  t.colorSpace = THREE.NoColorSpace; // graded in display space by the earth shader
+  t.flipY = img instanceof HTMLImageElement; // bitmaps are flipped when decoded
+  t.anisotropy = Math.min(16, renderer.capabilities.getMaxAnisotropy());
+  t.wrapS = THREE.RepeatWrapping;
+  t.wrapT = THREE.ClampToEdgeWrapping;
+  t.minFilter = THREE.LinearMipmapLinearFilter;
+  t.magFilter = THREE.LinearFilter;
+  t.generateMipmaps = true;
+  t.needsUpdate = true;
+  return t;
+}
+
+/** Decode in a worker thread where possible, so the main thread only pays for the upload. */
+async function loadDecoded(url: string): Promise<HTMLImageElement | ImageBitmap> {
+  if (typeof createImageBitmap === 'function') {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(String(res.status));
+      return await createImageBitmap(await res.blob(), { imageOrientation: 'flipY', premultiplyAlpha: 'none', colorSpaceConversion: 'none' });
+    } catch {
+      /* fall through to an <img> */
+    }
+  }
+  return loadImage(url);
+}
+
+/** The small first-paint texture (2k): tiny, so the globe is up almost at once. */
+export async function loadBaseLo(renderer: THREE.WebGLRenderer): Promise<THREE.Texture> {
+  return baseTexture(await loadImage(`${BASE}/textures/earth-2k.jpg`), renderer);
+}
+
+/** Which hi-res base this GPU/device should get: 8k, 4k, or none for weak hardware. */
+export function hiResChoice(renderer: THREE.WebGLRenderer): '8k' | '4k' | null {
+  const max = renderer.capabilities.maxTextureSize;
+  const coarse = typeof matchMedia !== 'undefined' && matchMedia('(pointer: coarse)').matches;
+  if (max >= 8192 && !coarse) return '8k';
+  if (max >= 4096) return '4k';
+  return null;
+}
+
+/** The sharp base, swapped in once loaded (and uploaded) so first paint never waits for it. */
+export async function loadBaseHi(renderer: THREE.WebGLRenderer, which: '8k' | '4k'): Promise<THREE.Texture> {
+  return baseTexture(await loadDecoded(`${BASE}/textures/earth-${which}.jpg`), renderer);
 }
 
 export class Earth {
   readonly mesh: THREE.Mesh;
-  readonly lightDir = { value: new THREE.Vector3(-0.5, 0.6, 1) };
+  /** shared with the tile layer so both are graded identically */
+  readonly u: EarthUniforms;
+  readonly lightDir: THREE.IUniform<THREE.Vector3> = { value: new THREE.Vector3(-0.5, 0.6, 1) };
+  /** the true Sun's direction (scene axes) and its share of the light: 0 until the sky has said where the Sun is */
+  readonly sunDir: THREE.IUniform<THREE.Vector3> = { value: new THREE.Vector3(1, 0, 0) };
+  readonly sunMix: THREE.IUniform<number> = { value: 0 };
+  private hiMix = { value: 0 };
+  private baseHi: THREE.IUniform<THREE.Texture>;
+  private baseLo: THREE.IUniform<THREE.Texture>;
+  private fade = -1;
 
-  constructor(shared: Shared, tex: { base: THREE.Texture; water: THREE.Texture; topo: THREE.Texture }, density: THREE.Texture) {
+  constructor(shared: Shared, lo: THREE.Texture, density: THREE.Texture) {
+    this.u = {
+      uDensity: { value: density },
+      uLightDir: this.lightDir,
+      uSunDir: this.sunDir,
+      uSunMix: this.sunMix,
+      uFog: shared.fog, uGlow: shared.glow, uDeep: shared.deep, uCore: shared.core, uSpec: shared.spec,
+    };
+    this.baseLo = { value: lo };
+    this.baseHi = { value: lo };
     const geo = new THREE.SphereGeometry(1, 192, 96);
     const mat = new THREE.ShaderMaterial({
       vertexShader: EARTH_VERT,
       fragmentShader: EARTH_FRAG,
-      uniforms: {
-        uBase: { value: tex.base }, uWater: { value: tex.water }, uTopo: { value: tex.topo }, uDensity: { value: density },
-        uLightDir: this.lightDir, uFog: shared.fog, uGlow: shared.glow, uDeep: shared.deep, uCore: shared.core, uSpec: shared.spec,
-        uTexel: { value: new THREE.Vector2(1 / 1600, 1 / 800) },
-      },
+      uniforms: { ...this.u, uBaseLo: this.baseLo, uBaseHi: this.baseHi, uHiMix: this.hiMix },
     });
     this.mesh = new THREE.Mesh(geo, mat);
     this.mesh.renderOrder = 0;
+  }
+
+  /** Blend the sharp base in over about half a second, then let the small one go. */
+  setHi(hi: THREE.Texture) {
+    this.baseHi.value = hi;
+    this.hiMix.value = 0;
+    this.fade = 0;
+  }
+
+  step(dt: number, reduced: boolean) {
+    if (this.fade < 0) return;
+    this.fade = Math.min(1, this.fade + dt / (reduced ? 0.05 : 0.7));
+    this.hiMix.value = this.fade * this.fade * (3 - 2 * this.fade);
+    if (this.fade >= 1) {
+      this.fade = -1;
+      const lo = this.baseLo.value;
+      this.baseLo.value = this.baseHi.value;
+      this.hiMix.value = 0;
+      lo.dispose();
+    }
   }
 }
 

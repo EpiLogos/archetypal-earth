@@ -3,6 +3,7 @@
 import type { BodyKey } from '../types/sky';
 import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
+import { describeLive, type LiveState } from './live';
 import { COMPRESSION_CAPTION } from './stages';
 
 export interface SkyViewHooks {
@@ -28,6 +29,7 @@ export class SkyView {
   private culture: HTMLElement;
   private cultureSelect: HTMLSelectElement;
   private cultureNote: HTMLElement;
+  private liveNote: HTMLElement;
 
   constructor(parent: HTMLElement, private hooks: SkyViewHooks) {
     this.root = el('div', { class: 'sky-layer', 'aria-label': 'The sky: Sun, Moon and planets', role: 'group' });
@@ -35,7 +37,8 @@ export class SkyView {
     this.caption = el('p', { class: 'sky-caption', text: COMPRESSION_CAPTION, 'aria-hidden': 'true' });
     this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
     this.cultureNote = el('p', { class: 'sky-culture-note' });
-    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote]);
+    this.liveNote = el('p', { class: 'sky-live', role: 'status' });
+    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote]);
     this.culture.inert = true;
     parent.append(this.root, this.caption, this.culture);
   }
@@ -70,6 +73,14 @@ export class SkyView {
     this.cultureNote.textContent = id
       ? `Names read through ${name ?? id}, after the vault's table of planetary gods; each is tagged with its basis on the body's card.`
       : '';
+  }
+
+  /** The sky's live state, in words: live and checked, a snapshot and why, or beyond the generated span. */
+  setLive(state: LiveState) {
+    const d = describeLive(state);
+    this.liveNote.dataset.state = state.kind;
+    clear(this.liveNote);
+    this.liveNote.append(el('strong', { text: d.label }), ` · ${d.detail}`);
   }
 
   /** Re-label after the standing culture changed. */

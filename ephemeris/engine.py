@@ -315,7 +315,9 @@ def _epoch_record(label: str, iso: str, jd: float, calendar: str) -> dict[str, A
         snap = snapshot(jd)
     except RangeError as e:
         rec["status"] = "outside-ephemeris-range"
-        rec["reason"] = f"{e}. The loaded kernel is DE440; DE441 (≈3 GB) would be required."
+        # The library's own message varies with its backend mode (file vs LEB), so it is not stored:
+        # generated output must be reproducible byte for byte.
+        rec["reason"] = "The instant lies outside the loaded DE440 kernel (1549–2650); DE441 (≈3 GB) would be required."
         rec["ayanamsa"] = {k: ayanamsa(jd, k) for k in AYANAMSA_MODES}
         return rec
     rec["status"] = "ok"

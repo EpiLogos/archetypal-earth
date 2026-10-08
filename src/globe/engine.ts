@@ -11,7 +11,7 @@ import { Aura, AtmosphereShell, Backdrop, Earth, hiResChoice, loadBaseHi, loadBa
 import { Presences } from './presences';
 import { createShared, type Shared } from './shared';
 import { TileLayer } from './tiles';
-import { depthPlanes, surfaceWeight } from '../sky/stages';
+import { depthPlanes, sunWeight, surfaceWeight } from '../sky/stages';
 import type { SkyLayer } from '../sky/layer';
 import type { BodyKey } from '../types/sky';
 import { wrapLon } from '../data/geo';
@@ -218,6 +218,19 @@ export class GlobeEngine {
     for (const [o, v] of was) o.visible = v;
   }
 
+  /**
+   * The Earth's light: the atlas's composed key light near the surface, the true Sun's from the lunar stage outward.
+   * The share eases (never pops) when the sky's data arrives or the distance changes quickly; where the sky cannot
+   * say where the Sun is (a moment outside the generated span) it stays the atlas's.
+   */
+  private sunShare = 0;
+  private stepSun(dt: number) {
+    const target = this.sky?.sunKnown ? sunWeight(this.rig.dist) : 0;
+    this.sunShare = this.reduced || Math.abs(target - this.sunShare) < 1e-4 ? target : this.sunShare + (target - this.sunShare) * (1 - Math.exp(-dt * 3.5));
+    if (this.sky?.sunKnown) this.earth.sunDir.value.copy(this.sky.sunDir);
+    this.earth.sunMix.value = this.sunShare;
+  }
+
   private onResize = () => {
     const w = this.parent.clientWidth || window.innerWidth;
     const h = this.parent.clientHeight || window.innerHeight;
@@ -282,6 +295,7 @@ export class GlobeEngine {
       this.rig.focus.copy(focus);
       if (dLon) this.rig.lon = wrapLon(this.rig.lon + dLon);
     }
+    this.stepSun(dt);
     this.rig.update(dt);
     // the clip planes follow the altitude so depth stays precise from orbit to the ground
     const camDist = this.camera.position.length();

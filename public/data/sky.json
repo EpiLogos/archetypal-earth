@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-08T15:40:17.089Z",
+    "generatedAt": "2026-10-08T17:02:16.243Z",
     "sidecar": {
       "name": "archetypal-earth-ephemeris",
       "version": "1.1.0",
@@ -1618,7 +1618,7 @@
         "jd": 1719015,
         "calendar": "julian",
         "status": "outside-ephemeris-range",
-        "reason": "calc_ut: Cannot calculate Sun (ID 0) for JD 1719015.000000 (-6-05-27): date is outside ephemeris range.. The loaded kernel is DE440; DE441 (≈3 GB) would be required.",
+        "reason": "The instant lies outside the loaded DE440 kernel (1549–2650); DE441 (≈3 GB) would be required.",
         "ayanamsa": {
           "fagan-bradley": 356.8474633085794,
           "lahiri": 355.9641522488353

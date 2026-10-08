@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import type { BodyKey, SkyBody, SkyData } from '../types/sky';
 import { SkyEphemeris, type SkyPoint } from './ephemeris';
 import { eclipticVector, gmstDeg, obliquityDeg, sceneBasis, sceneFromEcliptic, wrap180 } from './frames';
+import { sunScene } from './luminaries';
 import { AU_IN_EARTH_RADII, compressAu, skyVisible, stageWeights, SKY_EXTENT, type StageWeights } from './stages';
 
 const BODY_VERT = /* glsl */ `
@@ -35,7 +36,8 @@ void main() {
   if (a <= 0.0) discard;
   vec3 n = vec3(vP, sqrt(max(1.0 - r2, 0.0)));
   float lit = dot(n, normalize(uLight));
-  float day = smoothstep(-0.08, 0.34, lit);
+  // centred on zero: the terminator is where the light grazes, so the lit share of the disc is the true phase
+  float day = smoothstep(-0.16, 0.16, lit);
   vec3 shade = mix(uFog * 0.9 + uDeep * 0.2, uCore, day);
   float rim = pow(1.0 - n.z, 2.2);
   shade += uGlow * rim * (0.16 + 0.34 * day);
@@ -107,6 +109,10 @@ export class SkyLayer {
   gmst = 0;
   eps = 23.44;
   moment = Date.now();
+  /** the unit direction from the Earth to the Sun, scene axes, at the moment; valid only while `sunKnown` */
+  readonly sunDir = new THREE.Vector3(1, 0, 0);
+  /** false when the moment lies outside the generated span: there is no true Sun to light the Earth with */
+  sunKnown = false;
 
   private frame = new THREE.Group(); // Sun-centred, ecliptic axes: orbit rings and the ecliptic plane
   private earthFrame = new THREE.Group(); // Earth-centred, ecliptic axes: the Moon's ring
@@ -116,6 +122,7 @@ export class SkyLayer {
   private moonRingAt = -Infinity;
   private plane: THREE.Mesh;
   private sunScene = new THREE.Vector3();
+  private sunVec: [number, number, number] = [0, 0, 0];
   private sunGeoDir = new THREE.Vector3();
   private tmp2 = new THREE.Vector3();
   private p: SkyPoint = { lon: 0, lat: 0, r: 0 };
@@ -234,6 +241,9 @@ export class SkyLayer {
     // the Sun sits opposite the Earth's heliocentric vector, in scene axes
     const s = sceneFromEcliptic([-ev[0], -ev[1], -ev[2]], this.gmst, this.eps);
     this.sunScene.set(s[0], s[1], s[2]);
+    const sd = sunScene(this.eph, this.moment, this.sunVec);
+    this.sunKnown = !!sd;
+    if (sd) this.sunDir.set(sd[0], sd[1], sd[2]);
     this.focus.copy(this.sunScene).multiplyScalar(w.handoff);
 
     let dLon = 0;

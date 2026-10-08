@@ -20,6 +20,15 @@ export const LEGACY_DEPTH_MAX = 6;
 /** The diagram's radial compression: a body at r au from the Sun is drawn at K·r^P R⊕ from it. */
 export const COMPRESSION = { K: 900, P: 0.5 } as const;
 
+/**
+ * How much of the Earth's light is the true Sun's: 0 near the surface, where the atlas keeps its composed key light
+ * (exactly zero, so the near-surface look is unchanged), rising to 1 at the lunar stage's edge and beyond.
+ */
+export const SUN_BLEND = { from: 8, to: 40 } as const;
+export function sunWeight(dist: number): number {
+  return smoothstep((dist - SUN_BLEND.from) / (SUN_BLEND.to - SUN_BLEND.from));
+}
+
 /** Real distances, for the lunar stage: 1 au in Earth radii. */
 export const AU_IN_EARTH_RADII = 149597870.7 / 6371.0084;
 

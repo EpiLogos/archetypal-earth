@@ -13,6 +13,7 @@ import { closeGlyph } from '../ui/reveal';
 import { shortLocator, shortWork } from '../ui/format';
 import type { SkyEphemeris } from './ephemeris';
 import { signOf } from './frames';
+import { moonPhase, nextSyzygies } from './luminaries';
 
 export interface FieldTarget { type: 'family' | 'archetype'; id: string }
 
@@ -160,8 +161,11 @@ export class SkyCard {
     const pos = describePosition(body.key, ctx.eph, ctx.ms, ctx.asOf);
     text.append(el('p', { class: `sky-position${pos.known ? '' : ' sky-position-none'}`, text: pos.line }));
 
+    // the luminaries' astronomy first, in its own words; Jung's reading beneath it, attributed
+    if (body.key === 'sun' || body.key === 'moon') text.append(this.syzygy(ctx));
+
     // the pair reading, for the luminaries
-    for (const r of ctx.data.readings.filter((x) => x.bodies.includes(body.key))) text.append(this.reading(r, ctx));
+    for (const r of ctx.data.readings.filter((x) => x.bodies.includes(body.key))) text.append(this.reading(r));
 
     // ties
     const { resolved } = resolveTies(body, m);
@@ -198,17 +202,50 @@ export class SkyCard {
     return row;
   }
 
-  private reading(r: SkyReading, ctx: CardContext): HTMLElement {
-    const m = ctx.model;
+  private reading(r: SkyReading): HTMLElement {
     const box = el('section', { class: 'sky-reading' }, [
       el('h3', { class: 'sky-h' }, [r.name, ' ', basisChip(r.basis)]),
       el('p', { class: 'rv-para', text: r.statement }),
     ]);
-    const links = r.targets.filter((t) => subjectExists(m, t));
-    if (links.length) {
-      box.append(el('div', { class: 'aion-links' }, links.map((t) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, t), onclick: () => this.h.onField(t) }))));
-    }
     box.append(passages(r.cites, 'Read the passages'));
+    return box;
+  }
+
+  /**
+   * Sun and Moon now: the elongation and the Moon's lit share, and when they next stand together and opposed. The
+   * facts are the ephemeris's; each event is linked to the field entries Jung's reading of the pair names (Syzygy,
+   * Coniunctio, the Self) and says whose reading that is. Nothing more is claimed about them.
+   */
+  private syzygy(ctx: CardContext): HTMLElement {
+    const m = ctx.model;
+    const box = el('section', { class: 'sky-syzygy' }, [el('h3', { class: 'sky-h', text: 'Sun and Moon now' })]);
+    const phase = moonPhase(ctx.eph, ctx.ms);
+    if (!phase) {
+      box.append(el('p', { class: 'sky-fact sky-position-none', text: `No elongation for ${ctx.asOf}: it lies outside the generated sky.` }));
+      return box;
+    }
+    box.append(el('p', { class: 'sky-fact', text: `Elongation ${phase.elongation.toFixed(2)}° — the Moon is ${Math.round(phase.illuminated * 100)}% lit, ${phase.name}.` }));
+    const reading = ctx.data.readings.find((r) => r.bodies.includes('sun') && r.bodies.includes('moon'));
+    const links = (reading?.targets ?? []).filter((t) => subjectExists(m, t));
+    const event = (what: string, t: number | null) => {
+      const row = el('div', { class: 'sky-event' });
+      if (t === null) {
+        row.append(el('p', { class: 'sky-fact sky-position-none', text: `${what}: none within the generated sky.` }));
+        return row;
+      }
+      const days = (t - ctx.ms) / 86_400_000;
+      row.append(el('p', { class: 'sky-fact', text: `${what}: ${formatMoment(t)}, in ${days < 1 ? `${Math.max(1, Math.round(days * 24))} hours` : `${days.toFixed(1)} days`}.` }));
+      if (links.length) {
+        row.append(el('div', { class: 'aion-links sky-event-links' }, [
+          el('span', { class: 'sky-source', text: 'Read in Jung\u2019s keys:' }),
+          ...links.map((l) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, l), onclick: () => this.h.onField(l) })),
+        ]));
+      }
+      return row;
+    };
+    const next = nextSyzygies(ctx.eph, ctx.ms);
+    box.append(event('Next conjunction in longitude (new Moon)', next.conjunction), event('Next opposition (full Moon)', next.opposition));
+    box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'The dates are computed from the generated ephemeris. The links lead to Jung\u2019s reading of the pair, given below with his passages.' }));
     return box;
   }
 }

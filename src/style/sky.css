@@ -69,3 +69,15 @@ body.search-open .sky-switch, body.deep-open .sky-switch { opacity: 0; pointer-e
 .rv-sky[hidden] { display: none; }
 .rv-sky-mark { color: rgb(var(--core-rgb) / .6); margin-right: 8px; }
 .rv-sky-glyph { font-family: var(--sans); opacity: .85; }
+
+/* the live state: one quiet, honest line under the culture selector */
+.sky-culture .sky-live { margin: 8px 0 0; max-width: 34ch; font-size: 10.5px; line-height: 1.5; color: var(--ink-3); }
+.sky-culture .sky-live strong { font-weight: 600; color: var(--ink-2); letter-spacing: .04em; }
+.sky-culture .sky-live[data-state=live] strong::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: rgb(var(--core-rgb) / .85); }
+.sky-culture .sky-live:empty { display: none; }
+/* Sun and Moon now */
+.sky-syzygy { margin: 18px 0 0; }
+.sky-fact { margin: 8px 0 0; font: 13px/1.55 var(--serif); color: var(--ink-2); }
+.sky-event + .sky-event { margin-top: 4px; }
+.sky-event-links { margin-top: 6px; align-items: baseline; }
+.sky-syzygy-note { margin: 10px 0 0; }

@@ -28,6 +28,7 @@ import type { History } from '../types/history';
 import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
+import { SkyLive } from '../sky/live';
 import type { SkyAnchorSource } from '../graph/build';
 import type { SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
@@ -533,12 +534,37 @@ export class Controller {
     }
   }
 
+  private skyLive: SkyLive | null = null;
+  /** The sky's live state (diagnostics, tests): null until the sky has loaded. */
+  get skyLiveState() { return this.skyLive?.state ?? null; }
+
+  /** The sky's clock: follows the wall clock only while the sidecar vouches for the grids; otherwise a labelled snapshot. */
+  private startSkyLive(layer: SkyLayer) {
+    const host = typeof location === 'undefined' ? '' : location.hostname;
+    const local = host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1';
+    const live = new SkyLive(layer.eph, {
+      base: (import.meta.env.VITE_EPHEMERIS_URL as string | undefined) ?? 'http://127.0.0.1:5187',
+      local,
+      onChange: (s) => {
+        this.skyView.setLive(s);
+        layer.setMoment(live.moment());
+        if (this.state.sky) this.syncSkyCard();
+      },
+    });
+    this.skyLive = live;
+    layer.setMoment(live.moment());
+    this.skyView.setLive(live.state);
+    this.engine.onFrame(() => { if (live.following) layer.setMoment(live.moment()); });
+    live.start();
+  }
+
   private requestSky() {
     if (this.skyRequested) return;
     this.skyRequested = true;
     this.skyData().then((data) => {
       const layer = new SkyLayer(data);
       this.skyLayer = layer;
+      this.startSkyLive(layer);
       this.engine.attachSky(layer);
       this.skyView.setLayer(layer);
       this.syncRig();

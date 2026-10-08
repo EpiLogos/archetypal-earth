@@ -13,6 +13,8 @@ ephemeris/run.sh                 # serves http://127.0.0.1:5187
 npm run sky                      # curation + sidecar + vault → public/data/sky.json
 npm run sky:check                # regeneration equality + sidecar pin + every reference resolves
 npx vitest run tests/data/sky.test.ts
+node scripts/sky-golden.mjs      # (re)write tests/sky/golden/luminaries.json from the sidecar
+node scripts/sky-golden.mjs --check   # the sidecar still agrees with the pinned golden luminaries
 ```
 
 `npm run sky` fails loudly when the sidecar is not running (no fixture, no cache, no second ephemeris). `--check` regenerates in memory and compares everything except `meta.generatedAt`, which is preserved when nothing else changed. It also verifies that the running sidecar's name, version and package versions equal the pin below, that every body, tie and culture resolves against `public/data/field.json`, and that every cited quotation is verbatim on its cited page of the read-only vault corpus. `JUNG_VAULT` can point at another vault with the same `corpus/` layout; the vault is only ever read.
@@ -148,6 +150,18 @@ Recorded with the full thing in view; none was left blocking on the owner. D1–
 35. **A click on a body goes to the sky.** Choosing a body in the graph (or its Earth shortcut) leaves graph mode for the sky on that body's card, the same as clicking it there. A body with no field link opens the plain sky (decision 21).
 36. **Reproducibility, stated plainly.** The ring is exact: two fresh sessions put a body within 0.5 graph units of the same place. The force simulation steps with the frame clock, as the graph always has, so the settled field differs by a few graph units between sessions (Δ up to ~9 observed in WebKit over a ~1100-unit span); the arrangement does not. The unit tests pin what is pure: the same sky gives the same nodes, edges and ring.
 37. **The ties index carries the palette.** `sky.ties.json` gained each body's two palette colours and spectrum so the graph can colour a body without loading the 2 MB `sky.json` for anything but the longitudes it asks for on the toggle.
+
+### Phase 4 — the live luminaries
+
+38. **The true sun direction reaches the Earth only from altitude.** The Earth shader takes a sun direction and a mix (`sunWeight`, 0 at or below distance 8, 1 from 40, smoothstepped). Near the surface the mix is exactly 0, so the atlas's artistic light is untouched; the pixel gate (`sky-pixels.mjs`) measures 0 differing pixels across seven poses on Chromium and WebKit, with a 0.5° negative control detecting 177,000+ pixels. The share eases in time (instant under reduced motion).
+39. **Night is dark, not black.** True light is `mix(0.14, 0.8→1.0, day)` with the terminator centred on the geometric one (`smoothstep(-0.07, 0.16, sun·normal)`), plus a faint warm glow along the terminator. Seen 90° to the side of the Sun the lit half is 2.5× the dark half's luminance.
+40. **Beyond the generated span the Earth keeps the atlas's light.** The grids cover 2015–2039; outside, no sun direction is known, so none is invented (`sunKnown` false, mix 0).
+41. **Live state is one of live, snapshot, diverged, beyond, each labelled.** With the sidecar reachable the client polls slowly (`/positions?t=`) and compares the sidecar with its own interpolation (tolerance Sun 0.05°, Moon 0.1°, clock skew 5 min). Otherwise it shows a snapshot with an "as of" time and the reason (absent, not-local, unreachable, unsupported). Diverged and beyond-range states are named, never silent. The page only probes the sidecar from localhost/127.0.0.1/[::1]; a deployed copy never makes the request.
+42. **Illuminated fraction** is (1 − cos ψ)/2 with ψ the true angular separation of Moon and Sun (not the ecliptic-longitude elongation), which differs from the sidecar's by at most 0.0017. Phase names are the eight octants centred on multiples of 45°. Verified geometrically against seven golden instants; the Moon disc itself is not pixel-measured.
+43. **Syzygies** (conjunction and opposition) are found by a three-hour scan and 48-step bisection of the Moon−Sun ecliptic longitude, within the generated span only (null otherwise). Each card states the astronomical fact, lists the next two events with their links (`a:syzygy`, `f:coniunctio`, `self`), and gives Jung's reading beneath, attributed; no more.
+44. **Golden luminaries.** `scripts/sky-golden.mjs` records seven instants and three syzygy pairs from the sidecar into `tests/sky/golden/luminaries.json`; `--check` fails if the sidecar moves. The unit tests hold the client to those values.
+45. **The sidecar stores no library message.** Its out-of-range reason used to embed the library's own exception text, which differs between the file and LEB backends, making `sky.json` irreproducible between sidecar restarts (found when `sky:check` failed after a restart). The reason is now a fixed sentence and `sky.json` was regenerated; `sky:check` passes twice in a row.
+46. **Black Marble night lights are deferred** (SPEC marks them optional); no new imagery was added.
 
 ## Draft vault schema proposal (`wiki/sky/`, for the owner)
 
