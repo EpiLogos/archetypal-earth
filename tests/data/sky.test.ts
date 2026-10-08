@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 // @ts-expect-error Plain ESM data generator, shared with the CLI.
-import { checkSidecarPin, collectCites, crossCheckOrbits, formatSky, pinnedPackages, validateCuration, verifyCitations } from '../../scripts/sky.mjs';
+import { checkSidecarPin, collectCites, crossCheckOrbits, formatSky, pinnedPackages, validateCuration, validateGazetteer, verifyCitations } from '../../scripts/sky.mjs';
 import type { Field } from '../../src/types/field';
 import { BODY_KEYS, HELIO_KEYS, type SkyData } from '../../src/types/sky';
 
@@ -13,6 +13,39 @@ const field: Field = readJson('public/data/field.json');
 const curation = { bodies: readJson('curation/sky/bodies.json'), ties: readJson('curation/sky/ties.json'), cultures: readJson('curation/sky/cultures.json') };
 const copy = <T,>(value: T): T => structuredClone(value);
 const angDiff = (a: number, b: number) => Math.abs(((a - b + 540) % 360) - 180);
+
+describe('the gazetteer behind the birth sky', () => {
+  const gaz = readJson('curation/sky/gazetteer.json');
+
+  it('is valid, sourced, and published into sky.json unchanged', () => {
+    expect(validateGazetteer(gaz)).toEqual([]);
+    expect(sky.gazetteer).toEqual(gaz);
+  });
+
+  it('refuses a missing source, a place off the Earth, and a duplicate', () => {
+    const bad = copy(gaz);
+    bad.source.ref = '';
+    bad.places[0].lat = 91;
+    bad.places[1].lon = -181;
+    bad.places.push(copy(bad.places[2]));
+    const errors = validateGazetteer(bad).join('\n');
+    expect(errors).toMatch(/source\.ref/);
+    expect(errors).toMatch(/lat must be within/);
+    expect(errors).toMatch(/lon must be within/);
+    expect(errors).toMatch(/duplicate place/);
+    expect(validateGazetteer({})).not.toEqual([]);
+  });
+
+  it('holds the places of Jung\u2019s own life and a spread of the world\u2019s time zones', () => {
+    const names = gaz.places.map((p: { name: string }) => p.name);
+    for (const n of ['Kesswil', 'Basel', 'Zürich', 'Küsnacht', 'Bollingen', 'Vienna']) expect(names).toContain(n);
+    const lons = gaz.places.map((p: { lon: number }) => p.lon);
+    expect(Math.min(...lons)).toBeLessThan(-150);
+    expect(Math.max(...lons)).toBeGreaterThan(170);
+    const lats = gaz.places.map((p: { lat: number }) => p.lat);
+    expect(Math.min(...lats)).toBeLessThan(-35);
+  });
+});
 
 describe('sky curation', () => {
   it('satisfies the contract and resolves every body, tie and culture against the published field', () => {

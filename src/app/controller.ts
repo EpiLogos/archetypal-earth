@@ -30,13 +30,16 @@ import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
 import { SkyLive } from '../sky/live';
 import type { SkyAnchorSource } from '../graph/build';
-import type { SkyData } from '../types/sky';
+import type { SidecarChart, SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
 import { SkyView } from '../sky/view';
-import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
+import { SkyCard, canOpenCard, formatMoment, resolveTies } from '../sky/card';
+import { BirthPanel } from '../sky/birth';
+import { chartMoment } from '../sky/chart';
+import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { skyMaxDist, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import { skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 const REL_RECEDED = 0.2;
@@ -54,6 +57,14 @@ interface Tour {
   subject: Subject;
   target: ThreadTarget;
 }
+
+/** The local ephemeris sidecar's address; a site build can point it elsewhere with VITE_EPHEMERIS_URL. */
+const SIDECAR_BASE = (import.meta.env.VITE_EPHEMERIS_URL as string | undefined) ?? 'http://127.0.0.1:5187';
+/** A deployed copy of the site never talks to a sidecar: only a page served from this machine does. */
+const isLocalHost = (): boolean => {
+  const host = typeof location === 'undefined' ? '' : location.hostname;
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1';
+};
 
 export class Controller {
   state: AppState = WORLD;
@@ -88,6 +99,12 @@ export class Controller {
   private skyTies = new SkyTies();
   private skySwitch: HTMLButtonElement;
   private skyLayer: SkyLayer | null = null;
+  private birthPanel: BirthPanel;
+  private sidecar: SidecarClient;
+  /** the chart standing in the sky, once the sidecar has answered; null in the present sky */
+  private birthChart: SidecarChart | null = null;
+  private birthGen = 0;
+  private layerWaiters: ((l: SkyLayer | null) => void)[] = [];
   private skyRequested = false;
   private skyFailed = false;
   /** the next sky transition came from the user's own zoom: the camera is theirs, do not fly it */
@@ -148,6 +165,18 @@ export class Controller {
     this.skyCard = new SkyCard(root, {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
       onClose: () => this.stepBack(),
+    });
+    this.sidecar = new SidecarClient({ base: SIDECAR_BASE, local: isLocalHost() });
+    this.birthPanel = new BirthPanel(this.skyView.birthHost, {
+      onCast: (b) => this.castBirth(b),
+      onLeave: () => this.leaveBirth(),
+      onBody: (key) => this.navigate(inSky({ ...(this.state.sky ?? {}), body: key })),
+      onField: (t) => this.navigate(focusOn(WORLD, t)),
+      onDraw: (o) => this.skyLayer?.chart.setOptions(o),
+      lookup: (q) => this.sidecar.geocode(q),
+      descent: (key) => this.birthDescent(key),
+      nameOf: (key) => this.skyName(key),
+      onOpen: () => void this.probeSidecar(),
     });
     this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
       onclick: () => this.toggleSky() });
@@ -537,24 +566,25 @@ export class Controller {
   private skyLive: SkyLive | null = null;
   /** The sky's live state (diagnostics, tests): null until the sky has loaded. */
   get skyLiveState() { return this.skyLive?.state ?? null; }
+  /** The birth chart standing in the sky (diagnostics, tests): null in the present sky. */
+  get skyBirthChart() { return this.birthChart; }
 
   /** The sky's clock: follows the wall clock only while the sidecar vouches for the grids; otherwise a labelled snapshot. */
   private startSkyLive(layer: SkyLayer) {
-    const host = typeof location === 'undefined' ? '' : location.hostname;
-    const local = host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1';
-    const live = new SkyLive(layer.eph, {
-      base: (import.meta.env.VITE_EPHEMERIS_URL as string | undefined) ?? 'http://127.0.0.1:5187',
-      local,
+    const live = new SkyLive(layer.baseEph, {
+      base: SIDECAR_BASE,
+      local: isLocalHost(),
       onChange: (s) => {
         this.skyView.setLive(s);
-        layer.setMoment(live.moment());
+        // a birth sky holds its own moment; the clock resumes when it is left
+        if (!this.state.sky?.birth) layer.setMoment(live.moment());
         if (this.state.sky) this.syncSkyCard();
       },
     });
     this.skyLive = live;
     layer.setMoment(live.moment());
     this.skyView.setLive(live.state);
-    this.engine.onFrame(() => { if (live.following) layer.setMoment(live.moment()); });
+    this.engine.onFrame(() => { if (live.following && !this.state.sky?.birth) layer.setMoment(live.moment()); });
     live.start();
   }
 
@@ -567,6 +597,10 @@ export class Controller {
       this.startSkyLive(layer);
       this.engine.attachSky(layer);
       this.skyView.setLayer(layer);
+      this.birthPanel.setBodies(data.bodies);
+      this.birthPanel.setGazetteer(data.gazetteer);
+      void this.probeSidecar();
+      for (const w of this.layerWaiters.splice(0)) w(layer);
       this.syncRig();
       const cultures = Object.keys(data.cultures).filter((id) => this.m.cultureById.has(id)).map((id) => ({ id, name: this.m.cultureById.get(id)!.name }));
       this.skyView.setCultures(cultures, (id) => this.setSkyCulture(id));
@@ -576,6 +610,7 @@ export class Controller {
       if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
+      for (const w of this.layerWaiters.splice(0)) w(null);
       console.warn(err);
       this.skySwitch.disabled = true;
       this.skySwitch.title = 'The sky data is unavailable (run npm run sky)';
@@ -620,7 +655,8 @@ export class Controller {
       this.navigate(inSky(rest), { replace: true });
       return;
     }
-    this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: `as of ${formatMoment(layer.moment)}`, culture: sky.culture });
+    const birth = !!sky.birth;
+    this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: birth ? `at the birth moment, ${formatMoment(layer.moment)}` : `as of ${formatMoment(layer.moment)}`, culture: sky.culture, birth });
   }
 
   private syncSky(prev: AppState, next: AppState, first: boolean) {
@@ -630,6 +666,7 @@ export class Controller {
     this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
     if (on) this.syncSkyCard(); else this.skyCard.hide();
     this.skySwitch.setAttribute('aria-pressed', String(on));
+    this.syncBirth(prev.sky?.birth, next.sky?.birth, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
       if (this.skyByGesture) this.skyByGesture = false;
@@ -644,6 +681,98 @@ export class Controller {
         const c = rig.centre();
         rig.flyTo(c.lat, c.lon, this.worldDist(), { duration: 3.4 });
       }
+    }
+  }
+
+  // ── the birth sky ─────────────────────────────────────────────────────
+
+  /** The sky layer, once built (null if the sky data cannot be had). */
+  private whenLayer(): Promise<SkyLayer | null> {
+    if (this.skyLayer) return Promise.resolve(this.skyLayer);
+    if (this.skyFailed) return Promise.resolve(null);
+    this.requestSky();
+    return new Promise((res) => this.layerWaiters.push(res));
+  }
+
+  /** Is the sidecar there? Asked once the sky is built, and again whenever the disclosure is opened while it was not. */
+  private async probeSidecar() {
+    if (!isLocalHost()) { this.birthPanel.setAvailability({ kind: 'off', why: 'not-local' }); return; }
+    if (this.birthPanel.availability.kind === 'ready') return;
+    const ok = await this.sidecar.available();
+    this.birthPanel.setAvailability(ok ? { kind: 'ready' } : { kind: 'off', why: 'absent' });
+  }
+
+  /** The first mythic node a body descends through: Jung's own link before the atlas's, and only ones that resolve. */
+  private birthDescent(key: BodyKey): { label: string; target: { type: 'family' | 'archetype'; id: string } } | null {
+    const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
+    if (!body) return null;
+    const { resolved } = resolveTies(body, this.m);
+    const first = resolved.find((t) => t.basis !== 'site') ?? resolved[0];
+    return first ? { label: subjectName(this.m, first.target), target: first.target } : null;
+  }
+
+  private castBirth(b: BirthInput) {
+    this.navigate(inSky({ ...(this.state.sky ?? {}), birth: b }));
+  }
+
+  private leaveBirth() {
+    const { birth: _b, ...rest } = this.state.sky ?? {};
+    this.navigate(inSky(rest));
+  }
+
+  /** The state's birth changed (a cast, a link, a leaving): bring the sky to that moment, or back to the clock. */
+  private syncBirth(prev: BirthInput | undefined, next: BirthInput | undefined, inSkyNow: boolean) {
+    const same = prev && next ? prev.local === next.local && prev.lat === next.lat && prev.lon === next.lon : !prev && !next;
+    if (same) return;
+    void this.applyBirth(next, inSkyNow);
+  }
+
+  private async applyBirth(birth: BirthInput | undefined, visible: boolean) {
+    const gen = ++this.birthGen;
+    const layer = await this.whenLayer();
+    if (!layer || gen !== this.birthGen) return;
+    const duration = this.engine.reduced || !visible ? 0 : 2600;
+    if (!birth) {
+      // back to the present: the chart is taken away and the bodies travel home to the clock
+      this.birthChart = null;
+      layer.chart.set(null);
+      this.birthPanel.clearChart();
+      this.skyView.setHeld(null);
+      layer.travel(layer.baseEph, this.skyLive?.moment() ?? Date.now(), duration);
+      if (this.state.sky) this.syncSkyCard();
+      return;
+    }
+    this.birthPanel.setInput(birth);
+    this.birthPanel.setStatus('working', 'Computing the sky at that moment…');
+    try {
+      const chart = await this.sidecar.chart(birth);
+      if (gen !== this.birthGen) return;
+      const win = await this.sidecar.window(chartMoment(chart));
+      if (gen !== this.birthGen) return;
+      const eph = new SkyEphemeris(dataWithWindow(layer.data, win));
+      this.birthChart = chart;
+      layer.chart.set(chart);
+      layer.chart.setOptions(this.birthPanel.drawn);
+      layer.travel(eph, chartMoment(chart), duration, true);
+      this.birthPanel.showChart(chart);
+      this.skyView.setHeld(`The sky is held at ${formatMoment(chartMoment(chart))}, the moment you gave; it does not follow the clock.`);
+      this.birthPanel.setAvailability({ kind: 'ready' });
+      // the ring stands around the Earth at the scale of the system: bring the camera out to see it
+      if (visible && this.engine.rig.dist < STAGE_EDGES.handoff) this.enterSkyView(this.engine.reduced);
+      this.syncSkyCard();
+    } catch (e) {
+      if (gen !== this.birthGen) return;
+      const message = e instanceof SidecarError ? e.message : 'The birth sky could not be computed.';
+      if (!(e instanceof SidecarError)) console.warn(e);
+      if (e instanceof SidecarError && (e.kind === 'absent' || e.kind === 'not-local')) this.birthPanel.setAvailability({ kind: 'off', why: e.kind === 'absent' ? 'absent' : 'not-local' });
+      // the link must not claim a sky that is not shown: step the state back to the present sky, and keep the reason on screen
+      this.birthChart = null;
+      layer.chart.set(null);
+      this.birthPanel.clearChart();
+      this.skyView.setHeld(null);
+      const { birth: _b, ...rest } = this.state.sky ?? {};
+      if (this.state.sky?.birth) this.navigate(inSky(rest), { replace: true });
+      this.birthPanel.setStatus('error', message);
     }
   }
 

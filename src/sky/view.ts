@@ -3,8 +3,9 @@
 import type { BodyKey } from '../types/sky';
 import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
+import type { ChartScreenMark } from './chart-overlay';
 import { describeLive, type LiveState } from './live';
-import { COMPRESSION_CAPTION } from './stages';
+import { COMPRESSION_CAPTION, GEOCENTRIC_CAPTION } from './stages';
 
 export interface SkyViewHooks {
   onBody(key: BodyKey): void;
@@ -30,6 +31,11 @@ export class SkyView {
   private cultureSelect: HTMLSelectElement;
   private cultureNote: HTMLElement;
   private liveNote: HTMLElement;
+  /** where the birth-sky disclosure stands: under the culture selector and the live note */
+  readonly birthHost: HTMLElement;
+  private marks = new Map<string, HTMLElement>();
+  private lastLive: LiveState | null = null;
+  private held: string | null = null;
 
   constructor(parent: HTMLElement, private hooks: SkyViewHooks) {
     this.root = el('div', { class: 'sky-layer', 'aria-label': 'The sky: Sun, Moon and planets', role: 'group' });
@@ -38,7 +44,8 @@ export class SkyView {
     this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
     this.cultureNote = el('p', { class: 'sky-culture-note' });
     this.liveNote = el('p', { class: 'sky-live', role: 'status' });
-    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote]);
+    this.birthHost = el('div', { class: 'sky-birth-host' });
+    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote, this.birthHost]);
     this.culture.inert = true;
     parent.append(this.root, this.caption, this.culture);
   }
@@ -77,9 +84,26 @@ export class SkyView {
 
   /** The sky's live state, in words: live and checked, a snapshot and why, or beyond the generated span. */
   setLive(state: LiveState) {
-    const d = describeLive(state);
-    this.liveNote.dataset.state = state.kind;
+    this.lastLive = state;
+    this.paintLive();
+  }
+
+  /** While a birth sky stands, the clock is not followed: say what the sky is held at instead of "live". Null returns to the live state. */
+  setHeld(detail: string | null) {
+    this.held = detail;
+    this.paintLive();
+  }
+
+  private paintLive() {
     clear(this.liveNote);
+    if (this.held) {
+      this.liveNote.dataset.state = 'held';
+      this.liveNote.append(el('strong', { text: 'Birth sky' }), ` · ${this.held}`);
+      return;
+    }
+    if (!this.lastLive) return;
+    const d = describeLive(this.lastLive);
+    this.liveNote.dataset.state = this.lastLive.kind;
     this.liveNote.append(el('strong', { text: d.label }), ` · ${d.detail}`);
   }
 
@@ -114,6 +138,8 @@ export class SkyView {
       return;
     }
     this.root.classList.add('on');
+    const text = layer.geoShare > 0.5 ? GEOCENTRIC_CAPTION : COMPRESSION_CAPTION;
+    if (this.caption.textContent !== text) this.caption.textContent = text;
     this.caption.classList.toggle('on', layer.weights.rings > 0.55);
     const bodies = layer.screenBodies(this.scratch);
     const placed: { x: number; y: number; w: number }[] = [];
@@ -134,11 +160,30 @@ export class SkyView {
       l.node.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
       if (on) placed.push({ x: x + l.w / 2, y, w: l.w });
     }
+    this.drawMarks(layer.chartMarks);
+  }
+
+  /** The ring's sign names and the two angles of a birth chart, as quiet text; the readout beside the form is the accessible statement. */
+  private drawMarks(marks: ChartScreenMark[]) {
+    const seen = new Set<string>();
+    for (const m of marks) {
+      seen.add(m.id);
+      let n = this.marks.get(m.id);
+      if (!n) {
+        n = el('span', { class: `sky-chart-mark sky-chart-${m.kind}`, 'aria-hidden': 'true', text: m.text });
+        this.marks.set(m.id, n);
+        this.root.append(n);
+      }
+      n.classList.toggle('on', m.on);
+      n.style.transform = `translate(${m.x.toFixed(1)}px, ${m.y.toFixed(1)}px) translate(-50%, -50%)`;
+    }
+    for (const [id, n] of this.marks) if (!seen.has(id)) { n.remove(); this.marks.delete(id); }
   }
 
   private hideAll() {
     this.root.classList.remove('on');
     this.caption.classList.remove('on');
     for (const l of this.labels.values()) l.node.classList.remove('on');
+    for (const n of this.marks.values()) n.classList.remove('on');
   }
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-10-08T16:44:17.536Z",
-    "sidecar": "archetypal-earth-ephemeris@1.1.0",
+    "generatedAt": "2026-10-08T17:17:10.218Z",
+    "sidecar": "archetypal-earth-ephemeris@1.2.0",
     "kernel": "de440",
     "note": "subsolar/sublunar: lat = declination, lon = right ascension − apparent GMST; syzygies by bisection on the sidecar elongation to ~2 s"
   },

@@ -6,7 +6,9 @@ import * as THREE from 'three';
 import type { BodyKey, SkyBody, SkyData } from '../types/sky';
 import { SkyEphemeris, type SkyPoint } from './ephemeris';
 import { eclipticVector, gmstDeg, obliquityDeg, sceneBasis, sceneFromEcliptic, wrap180 } from './frames';
-import { sunScene } from './luminaries';
+import type { Vec3 } from '../data/geo';
+import { blendPose, easeInOut, lerpAngle } from './flight';
+import { ChartOverlay, type ChartScreenMark } from './chart-overlay';
 import { AU_IN_EARTH_RADII, compressAu, skyVisible, stageWeights, SKY_EXTENT, type StageWeights } from './stages';
 
 const BODY_VERT = /* glsl */ `
@@ -100,9 +102,24 @@ export interface ScreenBody {
   facing: boolean;
 }
 
+/** Where the bodies were when a journey to another moment began, and the clock they stood on. */
+interface Flight {
+  t0: number;
+  dur: number;
+  poses: Map<BodyKey, Vec3>;
+  gmst: number;
+  eps: number;
+  geo: number;
+}
+
 export class SkyLayer {
   readonly group = new THREE.Group();
-  readonly eph: SkyEphemeris;
+  /** the ephemeris the sky reads now: the generated grids, or a birth window the page was given */
+  eph: SkyEphemeris;
+  /** the generated sky's own ephemeris, the one live following returns to */
+  readonly baseEph: SkyEphemeris;
+  /** the Earth-centred, ecliptic-axes frame (the Moon's ring, the chart overlay): public so the overlay can stand in it */
+  readonly earthFrame = new THREE.Group();
   /** where the camera looks, scene coordinates: the Earth at 0 → the Sun across the handoff */
   readonly focus = new THREE.Vector3();
   weights: StageWeights = stageWeights(1);
@@ -115,14 +132,25 @@ export class SkyLayer {
   sunKnown = false;
 
   private frame = new THREE.Group(); // Sun-centred, ecliptic axes: orbit rings and the ecliptic plane
-  private earthFrame = new THREE.Group(); // Earth-centred, ecliptic axes: the Moon's ring
   private draws = new Map<BodyKey, BodyDraw>();
   private rings = new Map<BodyKey, THREE.LineLoop>();
   private moonRing: THREE.LineLoop;
   private moonRingAt = -Infinity;
   private plane: THREE.Mesh;
   private sunScene = new THREE.Vector3();
-  private sunVec: [number, number, number] = [0, 0, 0];
+  /** each body's ecliptic-axes vector from the Earth, diagram units, as shown this frame (blended while travelling) */
+  readonly poses = new Map<BodyKey, Vec3>();
+  private flight: Flight | null = null;
+  /** true while a birth chart stands: the diagram is drawn from the Earth, every body along its true geocentric direction */
+  private geo = false;
+  /** 0 → 1: how far the diagram has turned from the Sun-centred system to the Earth's own sky (eased across a flight) */
+  geoShare = 0;
+  /** 0 → 1 across a journey: how far the bodies have arrived (1 when still) */
+  arrival = 1;
+  /** a birth chart drawn in place, when there is one */
+  readonly chart: ChartOverlay;
+  /** where the chart's ring labels fall on the screen this frame */
+  readonly chartMarks: ChartScreenMark[] = [];
   private sunGeoDir = new THREE.Vector3();
   private tmp2 = new THREE.Vector3();
   private p: SkyPoint = { lon: 0, lat: 0, r: 0 };
@@ -134,12 +162,14 @@ export class SkyLayer {
   inSpan = true;
 
   constructor(readonly data: SkyData) {
-    this.eph = new SkyEphemeris(data);
+    this.eph = this.baseEph = new SkyEphemeris(data);
     this.group.visible = false;
     this.group.name = 'sky';
     this.frame.matrixAutoUpdate = false;
     this.earthFrame.matrixAutoUpdate = false;
     this.group.add(this.frame, this.earthFrame);
+    this.chart = new ChartOverlay(data.bodies);
+    this.earthFrame.add(this.chart.group);
 
     // the ecliptic plane: a very faint disc, the stage the rings stand on
     const planeMat = new THREE.ShaderMaterial({
@@ -217,14 +247,68 @@ export class SkyLayer {
     this.moment = ms;
   }
 
+  /**
+   * Carry the sky to another ephemeris and moment — a birth window, or back to the grids and the clock. The bodies
+   * sweep from where they stand to where they will stand over `durationMs` (instantly when 0: reduced motion, or a
+   * first arrival with nothing yet to travel from).
+   */
+  travel(eph: SkyEphemeris, ms: number, durationMs: number, geo = false) {
+    if (this.poses.size && durationMs > 0) {
+      const poses = new Map<BodyKey, Vec3>();
+      for (const [k, v] of this.poses) poses.set(k, [v[0], v[1], v[2]]);
+      this.flight = { t0: performance.now(), dur: durationMs, poses, gmst: this.gmst, eps: this.eps, geo: this.geoShare };
+    } else this.flight = null;
+    this.eph = eph;
+    this.geo = geo;
+    this.moment = ms;
+    this.moonRingAt = -Infinity;
+  }
+
+  /** True while the bodies are travelling between two moments. */
+  get travelling(): boolean {
+    return this.flight !== null;
+  }
+
   setSize(width: number, height: number, dpr: number) {
     this.res.set(width * dpr, height * dpr);
     this.dpr = dpr;
   }
 
+  /** Each body's ecliptic-axes vector from the Earth, in diagram units, at `ms` on `eph`; the Earth itself at the origin. */
+  private computePoses(eph: SkyEphemeris, ms: number, geo: boolean) {
+    const set = (k: BodyKey, x: number, y: number, z: number) => {
+      const v = this.poses.get(k);
+      if (v) { v[0] = x; v[1] = y; v[2] = z; } else this.poses.set(k, [x, y, z]);
+    };
+    const earth = eph.helio('earth', ms, this.e)!;
+    const ev = eclipticVector(earth.lon, earth.lat, compressAu(earth.r));
+    // the Sun sits opposite the Earth's heliocentric vector
+    set('sun', -ev[0], -ev[1], -ev[2]);
+    set('earth', 0, 0, 0);
+    const m = eph.moon(ms, this.p)!;
+    const mv = eclipticVector(m.lon, m.lat, m.r * AU_IN_EARTH_RADII);
+    set('moon', mv[0], mv[1], mv[2]);
+    for (const body of this.data.bodies) {
+      const key = body.key;
+      if (key === 'sun' || key === 'earth' || key === 'moon') continue;
+      const h = eph.helio(key, ms, this.p);
+      if (!h) { this.poses.delete(key); continue; }
+      if (geo) {
+        // the Earth's own sky: the true geocentric direction, the distance drawn with the same compression
+        const g = eph.geo(key, ms, this.p);
+        if (!g) { this.poses.delete(key); continue; }
+        const gv = eclipticVector(g.lon, g.lat, compressAu(g.r));
+        set(key, gv[0], gv[1], gv[2]);
+        continue;
+      }
+      const pv = eclipticVector(h.lon, h.lat, compressAu(h.r));
+      set(key, pv[0] - ev[0], pv[1] - ev[1], pv[2] - ev[2]);
+    }
+  }
+
   /**
-   * Before the camera moves this frame: update the moment's frame (GMST, obliquity), the Sun's scene
-   * position, and the look-at focus; and carry the camera with the sky as the handoff proceeds, so the
+   * Before the camera moves this frame: update the moment's frame (GMST, obliquity), every body's place, the Sun's
+   * scene position, and the look-at focus; and carry the camera with the sky as the handoff proceeds, so the
    * sky stays still in the view while the Earth turns beneath it (rig.lon is Earth-fixed).
    * Returns the lon correction to apply to the rig, degrees.
    */
@@ -234,17 +318,34 @@ export class SkyLayer {
     const clamped = this.eph.clamp(this.moment);
     this.inSpan = clamped.inside;
     const ms = clamped.ms;
-    this.gmst = gmstDeg(this.moment);
-    this.eps = obliquityDeg(this.moment);
-    const earth = this.eph.helio('earth', ms, this.e)!;
-    const ev = eclipticVector(earth.lon, earth.lat, compressAu(earth.r));
-    // the Sun sits opposite the Earth's heliocentric vector, in scene axes
-    const s = sceneFromEcliptic([-ev[0], -ev[1], -ev[2]], this.gmst, this.eps);
+    let gmst = gmstDeg(this.moment);
+    let eps = obliquityDeg(this.moment);
+    this.computePoses(this.eph, ms, this.geo);
+    const f = this.flight;
+    const geoTo = this.geo ? 1 : 0;
+    this.geoShare = geoTo;
+    this.arrival = 1;
+    if (f) {
+      const raw = (performance.now() - f.t0) / f.dur;
+      if (raw >= 1) this.flight = null;
+      else {
+        const s = easeInOut(raw);
+        this.arrival = s;
+        this.geoShare = f.geo + (geoTo - f.geo) * s;
+        gmst = lerpAngle(f.gmst, gmst, s);
+        eps = f.eps + (eps - f.eps) * s;
+        for (const [k, v] of this.poses) { const from = f.poses.get(k); if (from) blendPose(from, v, s, v); }
+      }
+    }
+    this.gmst = gmst;
+    this.eps = eps;
+    const sv = this.poses.get('sun')!;
+    const s = sceneFromEcliptic(sv, this.gmst, this.eps);
     this.sunScene.set(s[0], s[1], s[2]);
-    const sd = sunScene(this.eph, this.moment, this.sunVec);
-    this.sunKnown = !!sd;
-    if (sd) this.sunDir.set(sd[0], sd[1], sd[2]);
-    this.focus.copy(this.sunScene).multiplyScalar(w.handoff);
+    // the Earth's true light: only where the Sun is known (inside the span the ephemeris covers)
+    this.sunKnown = this.eph.covers(this.moment);
+    if (this.sunKnown) this.sunDir.copy(this.sunScene).normalize();
+    this.focus.copy(this.sunScene).multiplyScalar(w.handoff * (1 - this.geoShare));
 
     let dLon = 0;
     if (this.prevGmst !== null && w.handoff > 0) dLon = -w.handoff * wrap180(this.gmst - this.prevGmst);
@@ -258,6 +359,7 @@ export class SkyLayer {
     this.group.visible = visible;
     if (!visible) {
       for (const d of this.draws.values()) d.screen.on = false;
+      this.chartMarks.length = 0;
       return;
     }
     const w = this.weights;
@@ -273,22 +375,23 @@ export class SkyLayer {
     this.earthFrame.matrixWorldNeedsUpdate = true;
 
     // orbit rings and the ecliptic plane
-    const ringAlpha = w.rings * 0.34;
+    const sunRings = w.rings * (1 - this.geoShare);
+    const ringAlpha = sunRings * 0.34;
     for (const ring of this.rings.values()) (ring.material as THREE.LineBasicMaterial).opacity = ringAlpha;
-    (this.plane.material as THREE.ShaderMaterial).uniforms.uAlpha.value = w.rings * 0.085;
-    this.plane.visible = w.rings > 0.01;
+    (this.plane.material as THREE.ShaderMaterial).uniforms.uAlpha.value = sunRings * 0.085;
+    this.plane.visible = sunRings > 0.01;
+
+    // a birth chart, when one stands: the ring, natal markers and sight lines
+    this.chart.update(this.poses, w.rings, this.arrival);
+    this.chart.project(camera, this.earthFrame.matrix, width, height, w.rings * this.arrival, this.chartMarks);
 
     // the Moon's ring: refreshed when the moment has moved by more than an hour
     (this.moonRing.material as THREE.LineBasicMaterial).opacity = w.moon * 0.42;
     this.moonRing.visible = w.moon > 0.01;
     if (this.moonRing.visible && Math.abs(ms - this.moonRingAt) > 3_600_000) this.refreshMoonRing(ms);
 
-    // bodies
-    const earth = this.eph.helio('earth', ms, this.e)!;
-    const earthV = eclipticVector(earth.lon, earth.lat, compressAu(earth.r));
-    const sunGeo = this.eph.sunGeo(ms, this.p)!;
-    const sg = sceneFromEcliptic(eclipticVector(sunGeo.lon, sunGeo.lat, 1), this.gmst, this.eps);
-    this.sunGeoDir.set(sg[0], sg[1], sg[2]);
+    // bodies: each stands where `prepare` put it (the Sun's direction lights the Moon's phase)
+    this.sunGeoDir.copy(this.sunScene).normalize();
     const camInv = camera.matrixWorldInverse;
     const tanH = Math.tan((camera.fov * Math.PI) / 360);
     const pxPerRad = (height * this.dpr * 0.5) / tanH;
@@ -306,8 +409,8 @@ export class SkyLayer {
         d.mat.uniforms.uCorePx.value = core;
         px = core * (7 + 5 * (1 - w.handoff));
       } else if (key === 'moon') {
-        const m = this.eph.moon(ms, this.p)!;
-        const v = sceneFromEcliptic(eclipticVector(m.lon, m.lat, m.r * AU_IN_EARTH_RADII), this.gmst, this.eps);
+        const mv = this.poses.get('moon')!;
+        const v = sceneFromEcliptic(mv, this.gmst, this.eps);
         pos.set(v[0], v[1], v[2]);
         alpha = w.moon;
         const trueRad = d.body.radiusKm / 6371.0084;
@@ -319,10 +422,9 @@ export class SkyLayer {
         alpha = w.earthPoint;
         d.mat.uniforms.uLight.value.copy(this.sunScene).normalize().transformDirection(camInv);
       } else {
-        const h = this.eph.helio(key, ms, this.p);
-        if (!h) { d.mesh.visible = false; d.screen.on = false; continue; }
-        const pv = eclipticVector(h.lon, h.lat, compressAu(h.r));
-        const v = sceneFromEcliptic([pv[0] - earthV[0], pv[1] - earthV[1], pv[2] - earthV[2]], this.gmst, this.eps);
+        const pv = this.poses.get(key);
+        if (!pv) { d.mesh.visible = false; d.screen.on = false; continue; }
+        const v = sceneFromEcliptic(pv, this.gmst, this.eps);
         pos.set(v[0], v[1], v[2]);
         alpha = w.planets;
         d.mat.uniforms.uLight.value.copy(this.sunScene).sub(pos).normalize().transformDirection(camInv);

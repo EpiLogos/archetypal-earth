@@ -1,0 +1,471 @@
+{
+  "source": {
+    "claim": "City-centre coordinates, rounded to 0.01° (about a kilometre), compiled by this site for the birth-sky place field. They place a city, not a house or a hospital; a chart for a precise place should use the sidecar's geocoder or exact coordinates.",
+    "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see docs/SKY-SOURCES.md",
+    "retrieved": "2026-10-08"
+  },
+  "places": [
+    {
+      "name": "Amsterdam",
+      "country": "Netherlands",
+      "lat": 52.37,
+      "lon": 4.9
+    },
+    {
+      "name": "Anchorage",
+      "country": "United States",
+      "lat": 61.22,
+      "lon": -149.9
+    },
+    {
+      "name": "Athens",
+      "country": "Greece",
+      "lat": 37.98,
+      "lon": 23.73
+    },
+    {
+      "name": "Auckland",
+      "country": "New Zealand",
+      "lat": -36.85,
+      "lon": 174.76
+    },
+    {
+      "name": "Baghdad",
+      "country": "Iraq",
+      "lat": 33.31,
+      "lon": 44.37
+    },
+    {
+      "name": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.76,
+      "lon": 100.5
+    },
+    {
+      "name": "Basel",
+      "country": "Switzerland",
+      "lat": 47.56,
+      "lon": 7.59
+    },
+    {
+      "name": "Beijing",
+      "country": "China",
+      "lat": 39.9,
+      "lon": 116.41
+    },
+    {
+      "name": "Berlin",
+      "country": "Germany",
+      "lat": 52.52,
+      "lon": 13.4
+    },
+    {
+      "name": "Bern",
+      "country": "Switzerland",
+      "lat": 46.95,
+      "lon": 7.45
+    },
+    {
+      "name": "Bogotá",
+      "country": "Colombia",
+      "lat": 4.71,
+      "lon": -74.07
+    },
+    {
+      "name": "Bollingen",
+      "country": "Switzerland",
+      "lat": 47.22,
+      "lon": 8.94
+    },
+    {
+      "name": "Boston",
+      "country": "United States",
+      "lat": 42.36,
+      "lon": -71.06
+    },
+    {
+      "name": "Brussels",
+      "country": "Belgium",
+      "lat": 50.85,
+      "lon": 4.35
+    },
+    {
+      "name": "Budapest",
+      "country": "Hungary",
+      "lat": 47.5,
+      "lon": 19.04
+    },
+    {
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "lat": -34.6,
+      "lon": -58.38
+    },
+    {
+      "name": "Cairo",
+      "country": "Egypt",
+      "lat": 30.04,
+      "lon": 31.24
+    },
+    {
+      "name": "Cape Town",
+      "country": "South Africa",
+      "lat": -33.92,
+      "lon": 18.42
+    },
+    {
+      "name": "Chicago",
+      "country": "United States",
+      "lat": 41.88,
+      "lon": -87.63
+    },
+    {
+      "name": "Colombo",
+      "country": "Sri Lanka",
+      "lat": 6.93,
+      "lon": 79.86
+    },
+    {
+      "name": "Copenhagen",
+      "country": "Denmark",
+      "lat": 55.68,
+      "lon": 12.57
+    },
+    {
+      "name": "Delhi",
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21
+    },
+    {
+      "name": "Denver",
+      "country": "United States",
+      "lat": 39.74,
+      "lon": -104.99
+    },
+    {
+      "name": "Dublin",
+      "country": "Ireland",
+      "lat": 53.35,
+      "lon": -6.26
+    },
+    {
+      "name": "Edinburgh",
+      "country": "United Kingdom",
+      "lat": 55.95,
+      "lon": -3.19
+    },
+    {
+      "name": "Geneva",
+      "country": "Switzerland",
+      "lat": 46.2,
+      "lon": 6.14
+    },
+    {
+      "name": "Helsinki",
+      "country": "Finland",
+      "lat": 60.17,
+      "lon": 24.94
+    },
+    {
+      "name": "Hong Kong",
+      "country": "China",
+      "lat": 22.32,
+      "lon": 114.17
+    },
+    {
+      "name": "Honolulu",
+      "country": "United States",
+      "lat": 21.31,
+      "lon": -157.86
+    },
+    {
+      "name": "Houston",
+      "country": "United States",
+      "lat": 29.76,
+      "lon": -95.37
+    },
+    {
+      "name": "Istanbul",
+      "country": "Türkiye",
+      "lat": 41.01,
+      "lon": 28.98
+    },
+    {
+      "name": "Jerusalem",
+      "country": "Israel",
+      "lat": 31.77,
+      "lon": 35.22
+    },
+    {
+      "name": "Johannesburg",
+      "country": "South Africa",
+      "lat": -26.2,
+      "lon": 28.05
+    },
+    {
+      "name": "Kathmandu",
+      "country": "Nepal",
+      "lat": 27.72,
+      "lon": 85.32
+    },
+    {
+      "name": "Kesswil",
+      "country": "Switzerland",
+      "lat": 47.55,
+      "lon": 9.32
+    },
+    {
+      "name": "Kolkata",
+      "country": "India",
+      "lat": 22.57,
+      "lon": 88.36
+    },
+    {
+      "name": "Kyoto",
+      "country": "Japan",
+      "lat": 35.01,
+      "lon": 135.77
+    },
+    {
+      "name": "Küsnacht",
+      "country": "Switzerland",
+      "lat": 47.32,
+      "lon": 8.58
+    },
+    {
+      "name": "Lagos",
+      "country": "Nigeria",
+      "lat": 6.52,
+      "lon": 3.38
+    },
+    {
+      "name": "Lima",
+      "country": "Peru",
+      "lat": -12.05,
+      "lon": -77.04
+    },
+    {
+      "name": "Lisbon",
+      "country": "Portugal",
+      "lat": 38.72,
+      "lon": -9.14
+    },
+    {
+      "name": "London",
+      "country": "United Kingdom",
+      "lat": 51.51,
+      "lon": -0.13
+    },
+    {
+      "name": "Los Angeles",
+      "country": "United States",
+      "lat": 34.05,
+      "lon": -118.24
+    },
+    {
+      "name": "Madrid",
+      "country": "Spain",
+      "lat": 40.42,
+      "lon": -3.7
+    },
+    {
+      "name": "Melbourne",
+      "country": "Australia",
+      "lat": -37.81,
+      "lon": 144.96
+    },
+    {
+      "name": "Mexico City",
+      "country": "Mexico",
+      "lat": 19.43,
+      "lon": -99.13
+    },
+    {
+      "name": "Montréal",
+      "country": "Canada",
+      "lat": 45.5,
+      "lon": -73.57
+    },
+    {
+      "name": "Moscow",
+      "country": "Russia",
+      "lat": 55.76,
+      "lon": 37.62
+    },
+    {
+      "name": "Mumbai",
+      "country": "India",
+      "lat": 19.08,
+      "lon": 72.88
+    },
+    {
+      "name": "Munich",
+      "country": "Germany",
+      "lat": 48.14,
+      "lon": 11.58
+    },
+    {
+      "name": "Nairobi",
+      "country": "Kenya",
+      "lat": -1.29,
+      "lon": 36.82
+    },
+    {
+      "name": "New York",
+      "country": "United States",
+      "lat": 40.71,
+      "lon": -74.01
+    },
+    {
+      "name": "Oslo",
+      "country": "Norway",
+      "lat": 59.91,
+      "lon": 10.75
+    },
+    {
+      "name": "Paris",
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35
+    },
+    {
+      "name": "Prague",
+      "country": "Czechia",
+      "lat": 50.08,
+      "lon": 14.44
+    },
+    {
+      "name": "Reykjavík",
+      "country": "Iceland",
+      "lat": 64.15,
+      "lon": -21.94
+    },
+    {
+      "name": "Rio de Janeiro",
+      "country": "Brazil",
+      "lat": -22.91,
+      "lon": -43.17
+    },
+    {
+      "name": "Rome",
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5
+    },
+    {
+      "name": "Saint Petersburg",
+      "country": "Russia",
+      "lat": 59.93,
+      "lon": 30.34
+    },
+    {
+      "name": "San Francisco",
+      "country": "United States",
+      "lat": 37.77,
+      "lon": -122.42
+    },
+    {
+      "name": "Santiago",
+      "country": "Chile",
+      "lat": -33.45,
+      "lon": -70.67
+    },
+    {
+      "name": "Seattle",
+      "country": "United States",
+      "lat": 47.61,
+      "lon": -122.33
+    },
+    {
+      "name": "Seoul",
+      "country": "South Korea",
+      "lat": 37.57,
+      "lon": 126.98
+    },
+    {
+      "name": "Shanghai",
+      "country": "China",
+      "lat": 31.23,
+      "lon": 121.47
+    },
+    {
+      "name": "Singapore",
+      "country": "Singapore",
+      "lat": 1.35,
+      "lon": 103.82
+    },
+    {
+      "name": "Stockholm",
+      "country": "Sweden",
+      "lat": 59.33,
+      "lon": 18.07
+    },
+    {
+      "name": "Sydney",
+      "country": "Australia",
+      "lat": -33.87,
+      "lon": 151.21
+    },
+    {
+      "name": "São Paulo",
+      "country": "Brazil",
+      "lat": -23.55,
+      "lon": -46.63
+    },
+    {
+      "name": "Tehran",
+      "country": "Iran",
+      "lat": 35.69,
+      "lon": 51.39
+    },
+    {
+      "name": "Tokyo",
+      "country": "Japan",
+      "lat": 35.68,
+      "lon": 139.69
+    },
+    {
+      "name": "Toronto",
+      "country": "Canada",
+      "lat": 43.65,
+      "lon": -79.38
+    },
+    {
+      "name": "Vancouver",
+      "country": "Canada",
+      "lat": 49.28,
+      "lon": -123.12
+    },
+    {
+      "name": "Varanasi",
+      "country": "India",
+      "lat": 25.32,
+      "lon": 83.01
+    },
+    {
+      "name": "Vienna",
+      "country": "Austria",
+      "lat": 48.21,
+      "lon": 16.37
+    },
+    {
+      "name": "Warsaw",
+      "country": "Poland",
+      "lat": 52.23,
+      "lon": 21.01
+    },
+    {
+      "name": "Washington, D.C.",
+      "country": "United States",
+      "lat": 38.91,
+      "lon": -77.04
+    },
+    {
+      "name": "Zürich",
+      "country": "Switzerland",
+      "lat": 47.37,
+      "lon": 8.54
+    }
+  ]
+}

@@ -12,7 +12,7 @@ import { DEFAULT_VAULT, normalizePassage } from './aion.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const SIDECAR_URL = process.env.EPHEMERIS_URL || 'http://127.0.0.1:5187';
 export const SIDECAR_NAME = 'archetypal-earth-ephemeris';
-export const SIDECAR_VERSION = '1.1.0';
+export const SIDECAR_VERSION = '1.2.0';
 /** the packages whose exact versions the sidecar must report (single-sourced from requirements.txt) */
 const PINNED_PACKAGES = ['kerykeion', 'libephemeris', 'fastapi', 'uvicorn', 'timezonefinder'];
 
@@ -238,6 +238,26 @@ export function crossCheckOrbits(bodies, planets, moon) {
   return errors;
 }
 
+/** The gazetteer behind the birth-sky place field: named places with coordinates, and where they come from. */
+export function validateGazetteer(g) {
+  const errors = [];
+  const src = g?.source;
+  for (const k of ['claim', 'ref', 'retrieved']) if (typeof src?.[k] !== 'string' || !src[k].trim()) errors.push(`gazetteer.source.${k}: expected nonempty string`);
+  if (!Array.isArray(g?.places) || !g.places.length) return [...errors, 'gazetteer.places: expected a nonempty array'];
+  const seen = new Set();
+  for (const [i, p] of g.places.entries()) {
+    const w = `gazetteer.places[${i}]${p?.name ? ` ${p.name}` : ''}`;
+    if (typeof p?.name !== 'string' || !p.name.trim()) errors.push(`${w}: expected nonempty name`);
+    if (typeof p?.country !== 'string' || !p.country.trim()) errors.push(`${w}: expected nonempty country`);
+    if (!Number.isFinite(p?.lat) || Math.abs(p.lat) > 90) errors.push(`${w}: lat must be within ±90`);
+    if (!Number.isFinite(p?.lon) || Math.abs(p.lon) > 180) errors.push(`${w}: lon must be within ±180`);
+    const id = `${p?.name}|${p?.country}`.toLowerCase();
+    if (seen.has(id)) errors.push(`${w}: duplicate place`);
+    seen.add(id);
+  }
+  return errors;
+}
+
 // ── assemble ───────────────────────────────────────────────────────────────
 
 const equalIgnoringGeneratedAt = (a, b) => {
@@ -251,8 +271,9 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
     ties: readJson(path.join(root, 'curation/sky/ties.json')),
     cultures: readJson(path.join(root, 'curation/sky/cultures.json')),
   };
+  const gazetteer = readJson(path.join(root, 'curation/sky/gazetteer.json'));
   const field = readJson(path.join(root, 'public/data/field.json'));
-  const errors = [...validateCuration(curation, { field }), ...verifyCitations(collectCites(curation), { vault })];
+  const errors = [...validateCuration(curation, { field }), ...validateGazetteer(gazetteer), ...verifyCitations(collectCites(curation), { vault })];
   if (errors.length) throw new Error(errors.join('\n'));
 
   const ping = await get('/ping');
@@ -323,6 +344,7 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
     bodies,
     readings: curation.ties.readings || [],
     cultures: curation.cultures.cultures,
+    gazetteer,
     planets,
     moon,
     orbits,

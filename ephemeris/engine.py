@@ -346,8 +346,12 @@ except Exception:  # pragma: no cover - reported by /ping
     _TF = None
 
 
-def local_to_utc(local: datetime, tz: str) -> tuple[datetime, int, list[str]]:
-    """Resolve a naive local time in an IANA zone. Returns (utc, offset_minutes, warnings)."""
+def local_to_utc(local: datetime, tz: str) -> tuple[datetime, int, list[str], bool]:
+    """Resolve a naive local time in an IANA zone. Returns (utc, offset_minutes, warnings, larger_offset).
+
+    `larger_offset` says which reading was taken when the wall time is not unique (twice, or never): True for the
+    larger UTC offset, False for the smaller, in the sense Kerykeion's `is_dst` uses, so the two agree on the instant.
+    """
     warnings: list[str] = []
     try:
         zone = ZoneInfo(tz)
@@ -364,7 +368,7 @@ def local_to_utc(local: datetime, tz: str) -> tuple[datetime, int, list[str]]:
             warnings.append("This wall-clock time occurred twice (clocks went back); the first occurrence is used.")
     off = a.utcoffset()
     assert off is not None
-    return a.astimezone(timezone.utc), int(off.total_seconds() // 60), warnings
+    return a.astimezone(timezone.utc), int(off.total_seconds() // 60), warnings, a.utcoffset() >= b.utcoffset()
 
 
 def _point(p: Any) -> dict[str, Any]:
@@ -388,7 +392,7 @@ def chart(local_iso: str, lat: float, lon: float, tz: str | None, name: str = "B
     if local.tzinfo is not None:
         raise ValueError("pass local wall-clock time without an offset; the zone is resolved from the place")
     tz_name = tz or resolve_timezone(lat, lon)
-    utc, off_min, warnings = local_to_utc(local, tz_name)
+    utc, off_min, warnings, larger_offset = local_to_utc(local, tz_name)
     jd = jd_ut(utc)
     kr = kernel_range()
     if not (kr["fromJd"] <= jd <= kr["toJd"]):
@@ -404,7 +408,7 @@ def chart(local_iso: str, lat: float, lon: float, tz: str | None, name: str = "B
 
     subject = AstrologicalSubjectFactory.from_birth_data(
         name=name, year=local.year, month=local.month, day=local.day, hour=local.hour, minute=local.minute,
-        lng=lon, lat=lat, tz_str=tz_name, online=False, active_points=KERYKEION_POINTS + ["Ascendant", "Medium_Coeli"],
+        lng=lon, lat=lat, tz_str=tz_name, is_dst=larger_offset, online=False, active_points=KERYKEION_POINTS + ["Ascendant", "Medium_Coeli"],
     )
     k_utc = parse_iso_utc(subject.iso_formatted_utc_datetime)
     if abs((k_utc - utc).total_seconds()) > 1.0:

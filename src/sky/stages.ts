@@ -39,6 +39,9 @@ export function compressAu(rAu: number): number {
 /** The caption the view carries while the diagram is compressed: the house labels its approximations. */
 export const COMPRESSION_CAPTION = `Radial scale is diagrammatic: distance from the Sun is drawn as ${COMPRESSION.K} R⊕ × √(au). Angles, longitudes and inclinations are true.`;
 
+/** The caption while a birth sky stands: drawn from the Earth, so every direction is the true one. */
+export const GEOCENTRIC_CAPTION = `Drawn from the Earth: each body lies along its true direction in the ecliptic; distance is diagrammatic, ${COMPRESSION.K} R⊕ × √(au). The orbit rings of the Sun-centred system are set aside.`;
+
 export const clamp01 = (x: number): number => Math.max(0, Math.min(1, x));
 export const smoothstep = (t: number): number => {
   const x = clamp01(t);

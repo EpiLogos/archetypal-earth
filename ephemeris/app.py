@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import engine
 
 SIDECAR_NAME = "archetypal-earth-ephemeris"
-SIDECAR_VERSION = "1.1.0"
+SIDECAR_VERSION = "1.2.0"
 PORT = int(os.environ.get("EPHEMERIS_PORT", "5187"))
 
 app = FastAPI(title=SIDECAR_NAME, version=SIDECAR_VERSION, docs_url=None, redoc_url=None)

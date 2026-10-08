@@ -77,6 +77,8 @@ export interface CardContext {
   asOf: string;
   /** field culture id the names are read through, if any */
   culture?: string;
+  /** the card stands inside a birth sky: the moment is the birth moment, and "next" events are not asked */
+  birth?: boolean;
 }
 
 export class SkyCard {
@@ -218,7 +220,7 @@ export class SkyCard {
    */
   private syzygy(ctx: CardContext): HTMLElement {
     const m = ctx.model;
-    const box = el('section', { class: 'sky-syzygy' }, [el('h3', { class: 'sky-h', text: 'Sun and Moon now' })]);
+    const box = el('section', { class: 'sky-syzygy' }, [el('h3', { class: 'sky-h', text: ctx.birth ? 'Sun and Moon at that moment' : 'Sun and Moon now' })]);
     const phase = moonPhase(ctx.eph, ctx.ms);
     if (!phase) {
       box.append(el('p', { class: 'sky-fact sky-position-none', text: `No elongation for ${ctx.asOf}: it lies outside the generated sky.` }));
@@ -243,6 +245,15 @@ export class SkyCard {
       }
       return row;
     };
+    // a birth sky answers where they stood, not when they will next meet
+    if (ctx.birth) {
+      box.append(el('div', { class: 'aion-links sky-event-links' }, [
+        el('span', { class: 'sky-source', text: 'Read in Jung\u2019s keys:' }),
+        ...links.map((l) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, l), onclick: () => this.h.onField(l) })),
+      ]));
+      box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'The elongation and the lit share are computed for the birth moment. The links lead to Jung\u2019s reading of the pair, given below with his passages.' }));
+      return box;
+    }
     const next = nextSyzygies(ctx.eph, ctx.ms);
     box.append(event('Next conjunction in longitude (new Moon)', next.conjunction), event('Next opposition (full Moon)', next.opposition));
     box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'The dates are computed from the generated ephemeris. The links lead to Jung\u2019s reading of the pair, given below with his passages.' }));

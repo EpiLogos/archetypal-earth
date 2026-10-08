@@ -170,6 +170,8 @@ export interface SkyData {
   readings: SkyReading[];
   /** culture id → body → projection (default projection is the body's own name/oneLine) */
   cultures: Record<string, Partial<Record<BodyKey, CultureProjection>>>;
+  /** named places for the birth-sky place field, with their source */
+  gazetteer: Gazetteer;
   planets: SkyGrid;
   moon: SkyGrid;
   /** the rings of the system view: one period of each heliocentric body */
@@ -246,6 +248,18 @@ export interface SidecarChart {
   aspects: { a: BodyKey; b: BodyKey; type: ChartAspectType; orb: number }[];
   moon: { name: string; major: string; stage: string } | null;
   gmst: number;
+}
+
+export interface GazetteerPlace {
+  name: string;
+  country: string;
+  lat: number;
+  lon: number;
+}
+
+export interface Gazetteer {
+  source: { claim: string; ref: string; retrieved: string };
+  places: GazetteerPlace[];
 }
 
 export interface GeocodeResult {
