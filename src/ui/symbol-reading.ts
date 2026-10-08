@@ -19,6 +19,6 @@ export function symbolReading(model: Model, familyId: string, onFamily: (id: str
     }
     section.append(links);
   }
-  section.append(el('p', { class: 'symbol-source', text: `${source.title} · edited by ${source.editor}. Condensed reading of this source.` }));
+  section.append(el('p', { class: 'symbol-source', text: `${source.title} · edited by ${source.editor}` }));
   return section;
 }

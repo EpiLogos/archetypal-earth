@@ -71,7 +71,7 @@ export class BirthPanel {
     this.lat = el('input', { type: 'text', name: 'lat', inputmode: 'decimal', placeholder: '47.37', autocomplete: 'off', 'aria-label': 'Latitude, degrees north (south is negative)' }) as HTMLInputElement;
     this.lon = el('input', { type: 'text', name: 'lon', inputmode: 'decimal', placeholder: '8.54', autocomplete: 'off', 'aria-label': 'Longitude, degrees east (west is negative)' }) as HTMLInputElement;
     this.suggest = el('div', { class: 'sky-birth-suggest', role: 'group', 'aria-label': 'Matching places' });
-    this.lookupBtn = el('button', { type: 'button', class: 'link-quiet', text: 'Look up elsewhere', title: 'Asks OpenStreetMap, through the local sidecar, for the text you typed' }) as HTMLButtonElement;
+    this.lookupBtn = el('button', { type: 'button', class: 'link-quiet', text: 'Look up elsewhere', title: 'Search beyond the atlas\u2019s own list of cities' }) as HTMLButtonElement;
     this.castBtn = el('button', { type: 'submit', class: 'sky-birth-cast', text: 'Show this sky' }) as HTMLButtonElement;
     this.status = el('p', { class: 'sky-birth-status', role: 'status', 'aria-live': 'polite' });
     this.result = el('div', { class: 'sky-birth-result' });
@@ -83,7 +83,7 @@ export class BirthPanel {
       ]),
       el('label', { class: 'sky-birth-place' }, [el('span', { text: 'Place' }), this.place]),
       this.suggest,
-      el('p', { id: 'sky-birth-place-help', class: 'sky-birth-help', text: 'Choose from the list, or give the coordinates; the zone is worked out from the place.' }),
+      el('p', { id: 'sky-birth-place-help', class: 'sky-birth-help', text: 'From the list, or as coordinates; the time zone follows the place.' }),
       el('div', { class: 'sky-birth-row' }, [
         el('label', {}, [el('span', { text: 'Latitude °' }), this.lat]),
         el('label', {}, [el('span', { text: 'Longitude °' }), this.lon]),
@@ -198,13 +198,13 @@ export class BirthPanel {
   private async lookup() {
     const q = this.place.value.trim();
     if (q.length < 2) { this.setStatus('error', 'Type a place first.'); return; }
-    this.setStatus('working', 'Asking OpenStreetMap, through the sidecar…');
+    this.setStatus('working', 'Looking up the place…');
     try {
       const results = await this.h.lookup(q);
       clear(this.suggest);
       if (!results.length) this.suggest.append(el('p', { class: 'sky-birth-help', text: `No place found for “${q}”.` }));
       for (const r of results) this.suggest.append(el('button', { type: 'button', class: 'link-quiet', 'data-choice': '', onclick: () => this.choose(fromGeocode(r)) }, [fromGeocode(r).name]));
-      this.setStatus('idle', results.length ? `${results.length} found; the text you typed was sent to OpenStreetMap.` : '');
+      this.setStatus('idle', results.length ? `${results.length} found.` : '');
     } catch (e) {
       this.setStatus('error', e instanceof SidecarError ? e.message : 'The place lookup failed.');
     }

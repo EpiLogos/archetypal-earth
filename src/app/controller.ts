@@ -615,7 +615,7 @@ export class Controller {
       for (const w of this.layerWaiters.splice(0)) w(null);
       console.warn(err);
       this.skySwitch.disabled = true;
-      this.skySwitch.title = 'The sky data is unavailable (run npm run sky)';
+      this.skySwitch.title = 'The sky data is unavailable.';
       this.pendingSkyEntry = null;
     });
   }

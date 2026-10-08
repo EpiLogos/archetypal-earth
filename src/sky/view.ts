@@ -77,7 +77,7 @@ export class SkyView {
   /** Reflect the standing culture in the selector and its note. */
   setCulture(id: string | null, name?: string) {
     this.cultureSelect.value = id ?? '';
-    this.cultureNote.textContent = id ? `Names read through ${name ?? id}, after the vault's table of planetary gods.` : '';
+    this.cultureNote.textContent = id ? `Names read through ${name ?? id}, after the table of planetary gods.` : '';
   }
 
   /** The sky's live state, in words: live and checked, a snapshot and why, or beyond the generated span. */

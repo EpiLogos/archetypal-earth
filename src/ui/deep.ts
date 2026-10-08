@@ -68,7 +68,8 @@ export class DeepSheet {
     if (s.type === 'archetype') {
       const arch = m.archById.get(s.id);
       if (!arch) return;
-      a.append(el('h2', { class: 'dp-title', text: arch.name }), el('p', { class: 'dp-lede', text: arch.oneLine }));
+      a.append(el('h2', { class: 'dp-title', text: arch.name }));
+      if (arch.oneLine) a.append(el('p', { class: 'dp-lede', text: arch.oneLine }));
       if (arch.image) a.append(plate(arch.image, { credit: true, className: 'dp-figure', palette: arch.palette, eager: true }));
       if (arch.definition) {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: arch.definition.text }), el('footer', { text: arch.definition.cite })]));
@@ -88,7 +89,8 @@ export class DeepSheet {
     } else if (s.type === 'family') {
       const fam = m.famById.get(s.id);
       if (!fam) return;
-      a.append(el('h2', { class: 'dp-title', text: fam.name }), el('p', { class: 'dp-lede', text: fam.oneLine }));
+      a.append(el('h2', { class: 'dp-title', text: fam.name }));
+      if (fam.oneLine) a.append(el('p', { class: 'dp-lede', text: fam.oneLine }));
       if (fam.image) a.append(plate(fam.image, { credit: true, className: 'dp-figure', palette: fam.palette, eager: true }));
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
       const symbolic = symbolReading(m, fam.id, id => this.h.onSubject({ type: 'family', id }));
