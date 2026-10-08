@@ -557,6 +557,18 @@
   "yantra": {
    "name": "Yantra",
    "oneLine": "Geometric instrument of ritual: triangles, lotuses and circles round a point."
+  },
+  "hero": {
+   "name": "Hero",
+   "oneLine": "The overcoming young hero: Jung’s Siegfried dream, and every young champion after."
+  },
+  "death": {
+   "name": "Death",
+   "oneLine": "The dying that turns into its opposite — the enantiodromia wheel."
+  },
+  "greening-tree": {
+   "name": "Greening tree",
+   "oneLine": "The greening man growing from the temple’s ruins — nature overtaking the ideal."
   }
  }
 }

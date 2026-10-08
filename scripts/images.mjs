@@ -18,7 +18,9 @@ const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
 const QUERIES = path.join(ROOT, 'curation', 'image-queries.json');
 // raised 175 -> 200 (2026-10 audit): the shipped tree already measured 175.8MB,
 // so the old guard blocked every refetch; replaces are size-neutral swaps.
-const BUDGET_BYTES = 200 * 1024 * 1024;
+// raised 200 -> 240 (2026-10 coverage round): the owner asked that every family
+// with a depictable tradition carry a plate; ~100 more families ≈ 40-55MB.
+const BUDGET_BYTES = 240 * 1024 * 1024;
 
 // Wikimedia only serves "standard" thumbnail widths.
 const WIDTH = { archetypes: 1920, families: 1280, occurrences: 960 };
@@ -122,7 +124,8 @@ function toCandidate(p, rank, widthReq) {
 const IMPROPER_LICENSE = /\b(NC|ND|GFDL|fair use|all rights reserved|non-?commercial)\b/i;
 function licenseOk(l) {
   if (!l || IMPROPER_LICENSE.test(l)) return false;
-  return /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution)/i.test(l);
+  // "No restrictions" is Commons' marker for no known copyright restrictions (public domain)
+  return /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution|no restrictions)/i.test(l);
 }
 const BAD_TITLE = /\b(logo|icon|flag|map|maps|diagram|chart|graph|coat of arms|stamp|banner|screenshot|template|poster|pdf|djvu|index|contents|cover|title ?page|signature|autograph|catalogue|wikimania|selfie|bookplate|invoice|passport|typeface|font|sketch of)\b|\b(IMG|DSC|DSCN|DSCF|PXL|P\d{7}|SAM)[_ -]?\d{3,}/i;
 const BAD_CATS = /(portraits of living|photographs by|wikimania|maps of|diagrams|logos|flags of|coats of arms|postage stamps|selfies|banknotes|coins of the|bookplates|signatures|text pages|book covers|title pages)/i;
@@ -278,7 +281,8 @@ async function download(group, id, pick) {
     ...(pr.tone ? { tone: pr.tone } : {}),
     title: (c.objectName || c.title.replace(/^File:/, '').replace(/\.[a-z]+$/i, '').replace(/_/g, ' ')).slice(0, 160),
     credit: (c.artist || c.credit || 'Wikimedia Commons').slice(0, 220),
-    license: c.license.replace(/^(PD|PDM)\b[-\w]*/i, 'Public domain'),
+    // Commons' "No restrictions" is its marker for no known copyright restrictions — public domain, said in full
+    license: c.license.replace(/^No restrictions$/i, 'Public domain (no known restrictions)').replace(/^(PD|PDM)\b[-\w]*/i, 'Public domain'),
     sourceUrl: c.page,
   };
   return ref;

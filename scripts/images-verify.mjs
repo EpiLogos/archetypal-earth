@@ -14,10 +14,11 @@ const OUT = path.join(ROOT, 'public', 'data', 'images.json');
 const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
 const GROUPS = ['archetypes', 'families', 'occurrences'];
 
-// the same licence law the fetcher enforces (scripts/images.mjs)
+// the same licence law the fetcher enforces (scripts/images.mjs); "No restrictions"
+// is Commons' marker for no known copyright restrictions
 const IMPROPER_LICENSE = /\b(NC|ND|GFDL|fair use|all rights reserved|non-?commercial)\b/i;
 const licenseOk = (l) => !!l && !IMPROPER_LICENSE.test(l) &&
-  /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution)/i.test(l);
+  /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution|no restrictions)/i.test(l);
 
 const errors = [];
 const warnings = [];
@@ -126,7 +127,7 @@ if (field.meta?.counts?.images !== attached) {
 const mb = (n) => (n / 1048576).toFixed(1);
 const total = fs.readdirSync(IMG_DIR, { recursive: true, withFileTypes: true })
   .filter((e) => e.isFile()).reduce((s, e) => s + fs.statSync(path.join(e.parentPath ?? e.path, e.name)).size, 0);
-const BUDGET_BYTES = 200 * 1024 * 1024;
+const BUDGET_BYTES = 240 * 1024 * 1024; // kept in step with scripts/images.mjs (2026-10 coverage round)
 if (total > BUDGET_BYTES) err(`image dir ${mb(total)} MB over budget`);
 else if (total > BUDGET_BYTES * 0.9) warn(`image dir ${mb(total)} MB is above 90% of budget`);
 

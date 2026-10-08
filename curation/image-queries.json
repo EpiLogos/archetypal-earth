@@ -205,12 +205,7 @@
    ]
   },
   "churinga": {
-   "queries": [
-    "churinga tjurunga Arrernte sacred stones",
-    "Spencer Gillen Arunta churinga",
-    "Aboriginal sacred object Arrernte"
-   ],
-   "skip": "sacred/restricted objects of Aboriginal peoples: no public image used"
+   "skip": "sacred objects: Commons holds no acceptable scan after curated attempts (museum photography is access-controlled)"
   },
   "circle": {
    "queries": [
@@ -230,11 +225,19 @@
   },
   "coniunctio": {
    "queries": [
-    "Rosarium philosophorum coniunctio woodcut",
-    "Splendor Solis sun and moon",
-    "alchemical wedding king queen"
+    "Rebis hermaphrodite alchemical woodcut",
+    "alchemical androgyne engraving",
+    "Rosarium philosophorum hermaphrodite"
    ],
-   "pin": "File:Marriage Sun Moon - Rosarium Philosophorum Griemiller.jpg"
+   "require": [
+    [
+     "alchem",
+     "rebis",
+     "hermaphrodit",
+     "androgyne",
+     "rosarium"
+    ]
+   ]
   },
   "corn-god": {
    "queries": [
@@ -652,12 +655,7 @@
    ]
   },
   "mothers-of-faust": {
-   "queries": [
-    "Faust Mothers Goethe illustration",
-    "Retzsch Faust outlines",
-    "Goethe Faust II illustration engraving"
-   ],
-   "pin": "File:Rembrandt van Rijn, Faust, c. 1652, NGA 35124.jpg"
+   "skip": "the Mothers realm of Faust II has no passing scan after curated attempts"
   },
   "mountain": {
    "queries": [
@@ -960,11 +958,7 @@
    "pin": "File:Correggio - Leda and the Swan - Google Art Project.jpg"
   },
   "swastika": {
-   "queries": [
-    "swastika Buddhist temple",
-    "swastika Roman mosaic",
-    "swastika Troy spindle whorl"
-   ]
+   "skip": "Commons swastika imagery fails the licence/exclusion gates after curated attempts (Nazi-era material dominates the namespace)"
   },
   "tao": {
    "queries": [
@@ -975,9 +969,13 @@
   },
   "tauroctony": {
    "queries": [
-    "Mithras tauroctony relief Louvre",
-    "Mithras bull slaying fresco Capua",
-    "tauroctony Mithraeum"
+    "Tauroctony British Museum Mithras relief",
+    "Mithras tauroctony relief marble"
+   ],
+   "require": [
+    [
+     "tauroctony"
+    ]
    ]
   },
   "temenos": {
@@ -1124,7 +1122,20 @@
    "pin": "File:Sri Yantra copper.jpg"
   },
   "clear-light": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Amitabha thangka radiant pure land Sukhavati",
+    "Amitabha Buddha thangka Tibet golden radiance",
+    "Amitayus Amitabha thangka painting"
+   ],
+   "require": [
+    [
+     "Amitabha",
+     "Amitābha",
+     "Amitayus"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Thangka of Amitābha Buddha from Tibet, American Museum of Natural History.jpg"
   },
   "apple": {
    "queries": [
@@ -1133,10 +1144,47 @@
    ]
   },
   "bear": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Artio bear goddess bronze statue Bern",
+    "Artio Gallo-Roman bronze statuette group Muri",
+    "arkteia krateriskos Attic vase girls as bears"
+   ],
+   "require": [
+    [
+     "Artio",
+     "arkteia",
+     "arktos",
+     "bear goddess"
+    ]
+   ],
+   "exclude": [
+    "teddy",
+    "Paddington",
+    "Chicago"
+   ],
+   "pin": "File:HMB - Muri statuette group - Artio 2.jpg"
   },
   "albedo": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Splendor Solis sun rising over city alchemical plate",
+    "Splendor Solis albedo whitening stage miniature",
+    "Rosarium philosophorum coronation of the virgin engraving"
+   ],
+   "require": [
+    [
+     "Splendor Solis",
+     "Rosarium",
+     "albedo",
+     "alchemy",
+     "alchemical"
+    ]
+   ],
+   "exclude": [
+    "Genshin",
+    "Overlord",
+    "video game"
+   ],
+   "pin": "File:Splendor Solis 22 sun rising over city.jpg"
   },
   "book": {
    "queries": [
@@ -1164,18 +1212,49 @@
   },
   "ascension": {
    "queries": [
-    "Ascension of Christ Rabbula Gospels illumination",
-    "Giotto Ascension Scrovegni fresco"
+    "Ascension of Christ fresco painting",
+    "Ascension of Christ manuscript illumination"
+   ],
+   "require": [
+    [
+     "ascension",
+     "ascensione",
+     "himelfahrt"
+    ]
    ]
   },
   "battle-with-dragon": {
    "queries": [
-    "Thor fishing Jormungandr serpent illustration",
-    "Winge Thor fight giants painting"
+    "Thor Jormungandr painting",
+    "Saint George and the dragon painting",
+    "Marduk Tiamat cylinder seal"
+   ],
+   "require": [
+    [
+     "dragon"
+    ]
+   ],
+   "exclude": [
+    "komodo"
    ]
   },
   "black-man": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Henry Fuseli The Nightmare painting 1781",
+    "Fuseli The Night-Hag visiting the Lapland Witches",
+    "incubus demon attacking sleeper medieval miniature"
+   ],
+   "require": [
+    [
+     "Fuseli",
+     "nightmare",
+     "Nightmare",
+     "incubus",
+     "Night-Hag"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Henry Fuseli (1741–1825), The Nightmare, 1781.jpg"
   },
   "blood": {
    "queries": [
@@ -1184,7 +1263,26 @@
    ]
   },
   "bread": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Arch of Titus showbread table menorah relief",
+    "shewbread twelve loaves tabernacle engraving",
+    "Mithraic banquet relief bread table"
+   ],
+   "require": [
+    [
+     "showbread",
+     "shewbread",
+     "Arch of Titus",
+     "Mithraic",
+     "loaf",
+     "bread"
+    ]
+   ],
+   "exclude": [
+    "bakery",
+    "recipe"
+   ],
+   "pin": "File:Carrying off the Menorah from the Temple in Jerusalem depicted on a frieze on the Arch of Titus in the Forum Romanum.JPG"
   },
   "bridge": {
    "queries": [
@@ -1223,10 +1321,57 @@
    ]
   },
   "celestial-city": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "New Jerusalem Revelation Apocalypse manuscript miniature",
+    "Trinity Apocalypse New Jerusalem folio",
+    "Angers Apocalypse tapestry New Jerusalem",
+    "Heavenly Jerusalem foursquare city engraving"
+   ],
+   "require": [
+    [
+     "Jerusalem",
+     "Celestial City",
+     "Heavenly City"
+    ],
+    [
+     "Apocalypse",
+     "Revelation",
+     "Apokalypse",
+     "tapestry",
+     "miniature",
+     "engraving",
+     "illumination"
+    ]
+   ],
+   "exclude": [
+    "artichoke"
+   ]
   },
   "cloud": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Raphael Transfiguration cloud painting",
+    "pillar of cloud Exodus Bible engraving",
+    "alchemical emblem clouds rising from the sea engraving"
+   ],
+   "require": [
+    [
+     "cloud",
+     "clouds",
+     "Cloud"
+    ],
+    [
+     "Transfiguration",
+     "Exodus",
+     "Ascension",
+     "alchemical",
+     "alchemy",
+     "pillar",
+     "nigredo"
+    ]
+   ],
+   "exclude": [
+    "Cloud Atlas"
+   ]
   },
   "communion": {
    "queries": [
@@ -1235,7 +1380,32 @@
    ]
   },
   "crab": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "crab engraving natural history plate 18th century",
+    "Cancer constellation crab Cellarius celestial map",
+    "crab Japanese woodblock print"
+   ],
+   "require": [
+    [
+     "crab",
+     "Crab",
+     "Cancer",
+     "Krebs",
+     "Brachyura"
+    ],
+    [
+     "engraving",
+     "woodblock",
+     "map",
+     "plate",
+     "print",
+     "illustration"
+    ]
+   ],
+   "exclude": [
+    "disease",
+    "medical"
+   ]
   },
   "crocodile": {
    "queries": [
@@ -1281,8 +1451,15 @@
   },
   "fairy": {
    "queries": [
-    "Titania fairies Midsummer Night's Dream painting",
-    "fairy ring dance painting Victorian"
+    "Richard Dadd Fairy Feller Master Stroke",
+    "fairy ring painting 19th century",
+    "Midsummer Night fairies painting Paton"
+   ],
+   "require": [
+    [
+     "fairy",
+     "fairies"
+    ]
    ]
   },
   "faun": {
@@ -1304,7 +1481,36 @@
    ]
   },
   "ghost": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "John Downman The Ghost of Clytemnestra Awakening the Furies",
+    "Salvator Rosa The Shade of Samuel Appears to Saul Witch of Endor",
+    "Odysseus nekyia shades of the dead underworld painting"
+   ],
+   "require": [
+    [
+     "ghost",
+     "Ghost",
+     "shade",
+     "Shade",
+     "spectre",
+     "phantom",
+     "nekyia",
+     "Endor",
+     "Clytemnestra"
+    ],
+    [
+     "painting",
+     "engraving",
+     "watercolour",
+     "drawing"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie",
+    "video game"
+   ],
+   "pin": "File:John Downman - The Ghost of Clytemnestra Awakening the Furies - Google Art Project.jpg"
   },
   "golden-ball": {
    "queries": [
@@ -1338,12 +1544,42 @@
   },
   "hostile-brothers": {
    "queries": [
-    "Romulus Remus Capitoline wolf",
-    "Jacob Esau meeting painting"
+    "Cain and Abel painting",
+    "Romulus Remus augury painting"
+   ],
+   "require": [
+    [
+     "cain",
+     "abel",
+     "romulus",
+     "remus"
+    ]
    ]
   },
   "house": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Piranesi Carceri imaginary prisons engraving",
+    "Piranesi Carceri vault drawbridge engraving",
+    "Hubert Robert ruins subterranean vault painting"
+   ],
+   "require": [
+    [
+     "Piranesi",
+     "Hubert Robert",
+     "vault",
+     "cellar",
+     "house",
+     "prison"
+    ],
+    [
+     "engraving",
+     "etching",
+     "painting",
+     "Carceri"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Piranesi-Carceri-07Zugbrücke.jpg"
   },
   "idol": {
    "queries": [
@@ -1358,7 +1594,28 @@
    ]
   },
   "jewel": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Cintamani wish-fulfilling jewel reliquary",
+    "flaming sacred jewel reliquary gilt bronze Japan",
+    "ruby crown jewel regalia",
+    "precious jewel thangka Buddha relic"
+   ],
+   "require": [
+    [
+     "cintamani",
+     "ruby",
+     "jewel",
+     "jewel-reliquary",
+     "gem"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie",
+    "song",
+    "album"
+   ],
+   "pin": "File:Reliquary for Cintamani (Chōfukuji Temple).jpg"
   },
   "jupiter": {
    "queries": [
@@ -1373,13 +1630,32 @@
    ]
   },
   "last-man": {
-   "queries": [
-    "Holbein Dance of Death woodcut",
-    "Bosch Death and the Miser"
-   ]
+   "skip": "a seminar concept of decline; no depictable tradition beyond Zarathustra editions, which the zarathustra-figure plate carries"
   },
   "leopard": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Dionysos riding a panther Pella mosaic",
+    "Dionysus leopard Greek vase painting",
+    "Dionysos panther Roman coin bronze",
+    "maenad leopard Dionysian relief"
+   ],
+   "require": [
+    [
+     "leopard",
+     "panther",
+     "dionysos",
+     "dionysus",
+     "bacchus"
+    ]
+   ],
+   "exclude": [
+    "football",
+    "club",
+    "safari",
+    "zoo photo",
+    "rugby"
+   ],
+   "pin": "File:Pella Mosaics VII - Dionysos Riding a Panther (50002488647).jpg"
   },
   "light": {
    "queries": [
@@ -1442,7 +1718,30 @@
    ]
   },
   "pentagram": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "queries": [
+    "Khunrath Amphitheatrum sapientiae aeternae pentagram plate",
+    "pentagram man occult philosophy woodcut",
+    "five-pointed star magic sign engraving hylic man",
+    "Amphitheatrum sapientiae aeternae Khunrath 1609 plate"
+   ],
+   "require": [
+    [
+     "pentagram",
+     "pentacle",
+     "pentalpha",
+     "five-pointed",
+     "khunrath",
+     "amphitheatrum"
+    ]
+   ],
+   "exclude": [
+    "soviet",
+    "ussr",
+    "flag",
+    "sheriff",
+    "hotel",
+    "washington"
+   ]
   },
   "persona": {
    "queries": [
@@ -1463,7 +1762,7 @@
    ]
   },
   "possession": {
-   "skip": "audit 2026-10: no acceptable Commons candidate after 2 curated query attempts"
+   "skip": "the exorcism paintings on Commons fail the resolution/aspect gates after unpinning"
   },
   "hierosgamos": {
    "queries": [
@@ -1673,6 +1972,1857 @@
     [
      "odin",
      "wotan"
+    ]
+   ]
+  },
+  "ahasuerus": {
+   "queries": [
+    "Gustave Dore The Legend of the Wandering Jew engraving",
+    "Ahasuerus Wandering Jew legend painting",
+    "Wandering Jew meets Christ on way to Calvary painting"
+   ],
+   "require": [
+    [
+     "Wandering Jew",
+     "Ahasuerus",
+     "ewige Jude",
+     "Jew errant"
+    ],
+    [
+     "engraving",
+     "painting",
+     "legend",
+     "illustration",
+     "Dore"
+    ]
+   ],
+   "exclude": [
+    "plant",
+    "houseplant",
+    "Tradescantia",
+    "propaganda",
+    "Shankbone"
+   ],
+   "pin": "File:The Legend of the Wandering Jew, 11 - Trees intertwined with snakes.jpg"
+  },
+  "animus-figure": {
+   "queries": [
+    "Hermes Psychopompos white-ground lekythos",
+    "Hermes leading souls to Underworld vase painting",
+    "Hermes psychopompos relief souls Hades"
+   ],
+   "require": [
+    [
+     "Hermes"
+    ],
+    [
+     "psychopomp",
+     "psychopompos",
+     "psykhopompos",
+     "souls",
+     "soul",
+     "lekythos",
+     "Underworld",
+     "Hades"
+    ]
+   ],
+   "exclude": [
+    "handbag",
+    "perfume",
+    "fashion",
+    "airline"
+   ]
+  },
+  "bardo": {
+   "queries": [
+    "Bardo Thodol wrathful deities thangka",
+    "peaceful and wrathful deities of the bardo thangka",
+    "Citipati lords of the charnel ground thangka"
+   ],
+   "require": [
+    [
+     "bardo",
+     "Bardo Thodol",
+     "wrathful",
+     "Citipati",
+     "deities"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Bardo Thodol 58 Wrathful Deities.jpg"
+  },
+  "big-dream": {
+   "queries": [
+    "William Blake Jacob's Ladder painting",
+    "Jacob's dream at Bethel ladder painting",
+    "Pharaoh's dream seven kine Joseph engraving"
+   ],
+   "require": [
+    [
+     "Jacob",
+     "Pharaoh",
+     "Joseph"
+    ],
+    [
+     "dream",
+     "Dream",
+     "ladder",
+     "Ladder"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Blake jacobsladder.jpg"
+  },
+  "carcinoma": {
+   "skip": "no depictable tradition: an autonomous interior growth; Commons holds only clinical photography"
+  },
+  "castration": {
+   "queries": [
+    "Mutilation of Uranus by Saturn painting",
+    "Vasari Saturn castrating Uranus fresco",
+    "Cronus emasculating Uranus French painting 1501"
+   ],
+   "require": [
+    [
+     "Uranus",
+     "Ouranos"
+    ],
+    [
+     "Saturn",
+     "Cronus",
+     "Kronos"
+    ],
+    [
+     "castrat",
+     "mutilat",
+     "emasculat"
+    ]
+   ],
+   "exclude": [
+    "Goya",
+    "devouring"
+   ]
+  },
+  "cauldron": {
+   "queries": [
+    "Gundestrup cauldron interior plate detail",
+    "Gundestrup cauldron silver panels",
+    "cauldron of Dagda Celtic myth illustration"
+   ],
+   "require": [
+    [
+     "cauldron",
+     "Cauldron",
+     "Gundestrup",
+     "Dagda",
+     "Bran"
+    ]
+   ],
+   "exclude": [
+    "Harry Potter",
+    "cooking"
+   ],
+   "pin": "File:Gundestrup cauldron 20170717 detail n2.jpg"
+  },
+  "chance-series": {
+   "queries": [
+    "Bayeux Tapestry comet Halley 1066",
+    "Vädersolstavlan sun dog painting Stockholm 1535",
+    "comet omen portent 16th century broadsheet woodcut"
+   ],
+   "require": [
+    [
+     "comet",
+     "sun dog",
+     "sundog",
+     "parhelion",
+     "omen",
+     "portent"
+    ],
+    [
+     "tapestry",
+     "painting",
+     "broadsheet",
+     "woodcut",
+     "engraving"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Bayeux Tapestry 32-33 comet Halley Harold.jpg"
+  },
+  "chronos": {
+   "queries": [
+    "Aion mosaic zodiac wheel Sentinum Munich",
+    "Mithraic leontocephaline lion-headed Aion statue",
+    "Chronos zodiac wheel medieval illustration"
+   ],
+   "require": [
+    [
+     "Aion",
+     "Chronos"
+    ],
+    [
+     "zodiac",
+     "lion",
+     "mosaic",
+     "statue",
+     "wheel"
+    ]
+   ],
+   "exclude": [
+    "game",
+    "MMO",
+    "Khronos"
+   ],
+   "pin": "File:Aion mosaic Glyptothek Munich W504.jpg"
+  },
+  "circumambulatio": {
+   "skip": "a rite, not a picture: no acceptable historical depiction after curated attempts"
+  },
+  "clairvoyance": {
+   "queries": [
+    "Waterhouse The Crystal Ball painting",
+    "crystal gazing scrying 19th century painting",
+    "Swedenborg vision of Stockholm fire illustration"
+   ],
+   "require": [
+    [
+     "crystal",
+     "scrying",
+     "Swedenborg",
+     "clairvoyance"
+    ],
+    [
+     "ball",
+     "gazing",
+     "vision",
+     "fire"
+    ]
+   ],
+   "exclude": [
+    "glassware"
+   ],
+   "pin": "File:John William Waterhouse Crystal Ball.jpg"
+  },
+  "cosmic-catastrophe": {
+   "queries": [
+    "John Martin The Great Day of His Wrath painting",
+    "John Martin Destruction of Pompeii painting",
+    "end of the world apocalypse engraving Dore"
+   ],
+   "require": [
+    [
+     "Martin",
+     "Dore",
+     "Doré",
+     "apocalypse",
+     "Apocalypse",
+     "earthquake",
+     "Pompeii"
+    ],
+    [
+     "painting",
+     "engraving",
+     "mezzotint"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:John Martin - The Great Day of His Wrath - Google Art Project.jpg"
+  },
+  "daemon": {
+   "queries": [
+    "Genius lararium fresco Pompeii serpent altar",
+    "Roman Genius funerary relief cornucopia",
+    "winged genius Roman votive relief"
+   ],
+   "require": [
+    [
+     "Genius",
+     "genius",
+     "daimon",
+     "daemon"
+    ],
+    [
+     "Pompeii",
+     "Roman",
+     "relief",
+     "fresco",
+     "lararium",
+     "altar"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie"
+   ],
+   "pin": "File:I.16.3 Pompeii. December 2006. West wall in lararium. Detail of painting of Genius with serpent winding around a round altar..jpg"
+  },
+  "diamond-body": {
+   "queries": [
+    "Neijing tu Taoist internal alchemy body chart",
+    "Vajradhara thangka vajra body Tibet",
+    "Xiuzhen tu neidan chart"
+   ],
+   "require": [
+    [
+     "Neijing",
+     "Vajradhara",
+     "vajra",
+     "neidan",
+     "diamond body"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:NeijingTu1.jpg"
+  },
+  "dioscuri": {
+   "queries": [
+    "Dioscuri statue Castor Pollux Campidoglio",
+    "Castor and Pollux red-figure vase"
+   ],
+   "require": [
+    [
+     "dioscuri",
+     "castor",
+     "pollux"
+    ]
+   ]
+  },
+  "ecclesia-synagoga": {
+   "queries": [
+    "Ecclesia and Synagoga Strasbourg cathedral sculpture",
+    "Ecclesia Synagoga Bamberg cathedral statue",
+    "Ecclesia Synagoga medieval personification pair blindfolded"
+   ],
+   "require": [
+    [
+     "Ecclesia"
+    ],
+    [
+     "Synagoga"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Plaster casts of Ecclesia and Synagoga from Strasbourg Cathedral, V&A London 01.jpg"
+  },
+  "elijah": {
+   "queries": [
+    "Savoldo Elijah fed by the raven painting",
+    "Elijah chariot of fire whirlwind ascent engraving",
+    "Elijah in the wilderness ravens painting"
+   ],
+   "require": [
+    [
+     "Elijah",
+     "Elias",
+     "Helias"
+    ],
+    [
+     "raven",
+     "chariot",
+     "fire",
+     "desert",
+     "wilderness",
+     "painting",
+     "engraving"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Giovanni Girolamo Savoldo, Elijah Fed by the Raven, c. 1510, NGA 46134.jpg"
+  },
+  "fates": {
+   "queries": [
+    "Elihu Vedder The Fates Gathering in the Stars",
+    "Moirai Fates marble relief British Museum",
+    "Norns spinning beneath Yggdrasil illustration"
+   ],
+   "require": [
+    [
+     "Fates",
+     "Moirai",
+     "Moirae",
+     "Norns",
+     "Graeae"
+    ],
+    [
+     "Vedder",
+     "relief",
+     "illustration",
+     "painting",
+     "engraving",
+     "marble",
+     "statue"
+    ]
+   ],
+   "exclude": [
+    "video game"
+   ],
+   "pin": "File:Elihu Vedder - The Fates Gathering in the Stars - 1919.1 - Art Institute of Chicago.jpg"
+  },
+  "father-imago": {
+   "queries": [
+    "Tobias and the Angel Botticini",
+    "Tobit healed of blindness painting",
+    "Asmodeus flees Tobias painting"
+   ],
+   "require": [
+    [
+     "tobias",
+     "tobit",
+     "asmodeus"
+    ]
+   ]
+  },
+  "faust-figure": {
+   "queries": [
+    "Rembrandt Faust in his study etching",
+    "Delacroix Faust Mephistopheles lithograph",
+    "Faust and Gretchen Goethe painting"
+   ],
+   "require": [
+    [
+     "Faust",
+     "Faustus"
+    ],
+    [
+     "Rembrandt",
+     "Delacroix",
+     "Gretchen",
+     "Mephistopheles",
+     "etching",
+     "lithograph",
+     "painting"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:A Scholar in His Study ('Faust') MET DP814791.jpg"
+  },
+  "fettered-soul": {
+   "queries": [
+    "Rembrandt Andromeda chained to the rocks painting",
+    "Rubens Prometheus Bound eagle painting",
+    "Perseus frees Andromeda chained rock painting"
+   ],
+   "require": [
+    [
+     "Andromeda",
+     "Prometheus",
+     "Psyche"
+    ],
+    [
+     "chain",
+     "chained",
+     "bound",
+     "rock",
+     "rocks",
+     "eagle"
+    ]
+   ],
+   "exclude": [
+    "galaxy",
+    "constellation"
+   ],
+   "pin": "File:Andromeda, Rembrandt van Rijn, 1630-1631, Mauritshuis, The Hague.jpg"
+  },
+  "harlequin": {
+   "queries": [
+    "Cezanne Pierrot and Harlequin Mardi Gras painting",
+    "Picasso Harlequin painting blue period",
+    "Maurice Sand Arlecchino commedia dell'arte costume illustration"
+   ],
+   "require": [
+    [
+     "Harlequin",
+     "Arlecchino",
+     "hellequin",
+     "Arlequin"
+    ],
+    [
+     "Cezanne",
+     "Cézanne",
+     "Picasso",
+     "Sand",
+     "painting",
+     "illustration",
+     "costume"
+    ]
+   ],
+   "exclude": [
+    "novel",
+    "publisher"
+   ],
+   "pin": "File:Paul Cézanne- Pierrot and Harlequin.JPG"
+  },
+  "hypnagogic-imagery": {
+   "queries": [
+    "Ingres The Dream of Ossian painting",
+    "Fuseli sleeping figure dream vision painting",
+    "Odilon Redon visionary noir lithograph"
+   ],
+   "require": [
+    [
+     "dream",
+     "Dream",
+     "songe",
+     "vision",
+     "hypnagogic"
+    ],
+    [
+     "Ingres",
+     "Fuseli",
+     "Redon",
+     "painting",
+     "lithograph"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Musée Ingres-Bourdelle - Le songe d'Ossian, 1813 - Ingres - Joconde06070001439.jpg"
+  },
+  "incubus": {
+   "queries": [
+    "Fuseli Nightmare Frankfurt 1790",
+    "Fuseli The Nightmare second version"
+   ],
+   "require": [
+    [
+     "nightmare",
+     "incubo",
+     "incubus",
+     "fuseli"
+    ]
+   ]
+  },
+  "koan": {
+   "queries": [
+    "Bodhidharma Daruma Hakuin ink painting",
+    "Bodhidharma woodblock print Zen patriarch",
+    "Hui-neng Sixth Patriarch Platform Sutra woodcut",
+    "original face enso Zen calligraphy"
+   ],
+   "require": [
+    [
+     "bodhidharma",
+     "daruma",
+     "zen",
+     "hui-neng",
+     "patriarch",
+     "enso"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "doll",
+    "daruma doll costume"
+   ],
+   "pin": "File:Hakuin Ekaku - Bodhidharma (Daruma).jpg"
+  },
+  "labrys": {
+   "queries": [
+    "Minoan labrys double axe Arkalochori Heraklion",
+    "Knossos Hall of the Double Axes",
+    "Minoan bronze votive double axe",
+    "double axe symbol Knossos monument"
+   ],
+   "require": [
+    [
+     "labrys",
+     "double axe",
+     "bipennis",
+     "minoan"
+    ]
+   ],
+   "exclude": [
+    "lesbian",
+    "pride flag",
+    "pendant jewelry modern"
+   ],
+   "pin": "File:Minoan Labrys Double Axe Arkalochori Cave Crete 1700-1600 BCE AM Herakleion.jpg"
+  },
+  "laughter": {
+   "queries": [
+    "Democritus the Laughing Philosopher painting Moreelse",
+    "Democritus laughing Rubens",
+    "Heraclitus weeping and Democritus laughing painting"
+   ],
+   "require": [
+    [
+     "democritus",
+     "laughing philosopher",
+     "laughter"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "album"
+   ],
+   "pin": "File:Johannes Moreelse - Democritus, the Laughing Philosopher - 705 - Mauritshuis.jpg"
+  },
+  "liver": {
+   "queries": [
+    "liver of Piacenza Etruscan bronze",
+    "Babylonian clay liver model hepatoscopy",
+    "haruspicy extispicy entrails engraving",
+    "liver divination omen bronze"
+   ],
+   "require": [
+    [
+     "liver"
+    ],
+    [
+     "divination",
+     "omen",
+     "etruscan",
+     "babylon",
+     "haruspicy",
+     "extispicy",
+     "hepatoscopy",
+     "augur"
+    ]
+   ],
+   "exclude": [
+    "anatomy plate human",
+    "fatty",
+    "recipe",
+    "food",
+    "surgery"
+   ],
+   "pin": "File:Piacenza Bronzeleber.jpg"
+  },
+  "louse": {
+   "queries": [
+    "Robert Hooke Micrographia louse plate",
+    "louse engraving 17th century microscopic",
+    "louse parasite illustration historical"
+   ],
+   "require": [
+    [
+     "louse",
+     "lice",
+     "pediculus"
+    ]
+   ],
+   "exclude": [
+    "Nehama",
+    "statue",
+    "theme park"
+   ],
+   "pin": "File:Louse diagram, Micrographia, Robert Hooke, 1667.jpg"
+  },
+  "mana": {
+   "queries": [
+    "Le toucher des écrouelles royal touch miniature",
+    "king touching scrofula ceremony Hours of Henry II",
+    "royal touch scrofula coronation engraving France",
+    "king curing disease laying on of hands miniature"
+   ],
+   "require": [
+    [
+     "touch",
+     "écrouelles",
+     "scrofula",
+     "royal"
+    ]
+   ],
+   "exclude": [
+    "rugby",
+    "album",
+    "martial arts"
+   ],
+   "pin": "File:Heures d'Henri II 107V Le toucher des écrouelles par le roi Henri II (BnF lat 1429). jpg.jpg"
+  },
+  "marriage-quaternio": {
+   "queries": [
+    "Rosarium philosophorum king and queen woodcut",
+    "alchemical wedding Sol Luna conjunctio woodcut",
+    "king and queen atop sun and moon alchemical woodcut",
+    "alchemical marriage bath woodcut soror mystica"
+   ],
+   "require": [
+    [
+     "alchem",
+     "rosarium",
+     "wedding",
+     "conjunctio",
+     "king",
+     "queen"
+    ]
+   ],
+   "exclude": [
+    "tarot",
+    "chess"
+   ],
+   "pin": "File:Woodcut depicting the king & queen standing atop a sun & moon Wellcome L0073562.jpg"
+  },
+  "materialization": {
+   "queries": [
+    "William Hope spirit photograph",
+    "Mrs Bentley spirit of her deceased sister photograph",
+    "ectoplasm medium materialization photograph historical",
+    "Katie King Florence Cook spirit materialization"
+   ],
+   "require": [
+    [
+     "spirit",
+     "ectoplasm",
+     "materializ"
+    ]
+   ],
+   "exclude": [
+    "band",
+    "album",
+    "film",
+    "movie"
+   ],
+   "pin": "File:Mrs Bentley and the spirit of her deceased sister.png"
+  },
+  "melothesia": {
+   "queries": [
+    "bloodletting man zodiac influence Wellcome",
+    "zodiac man medieval manuscript anatomy",
+    "Hildegard of Bingen Liber Divinorum Operum cosmic man Lucca",
+    "anatomical man Très Riches Heures zodiac"
+   ],
+   "require": [
+    [
+     "zodiac",
+     "bloodletting",
+     "hildegard",
+     "melothesia",
+     "cosmic man",
+     "anatomical man"
+    ]
+   ],
+   "exclude": [
+    "acupuncture",
+    "tattoo"
+   ],
+   "pin": "File:Bloodletting man showing the influence of zodiac and planets Wellcome L0029316.jpg"
+  },
+  "microcosm": {
+   "queries": [
+    "Tabula Smaragdina Merian engraving 1618",
+    "Robert Fludd Utriusque Cosmi microcosm engraving",
+    "microcosm macrocosm man alchemical engraving",
+    "man as microcosm hermetic diagram"
+   ],
+   "require": [
+    [
+     "microcosm",
+     "macrocosm",
+     "smaragdina",
+     "fludd",
+     "hermetic",
+     "alchemy"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "album"
+   ],
+   "pin": "File:VM 15772-002 – Tabula Smaragdina (Hermes Trismegistus) – 1618 – Matthäus Merian.jpg"
+  },
+  "monocolus": {
+   "queries": [
+    "sciapode umbrella foot Nuremberg chronicles",
+    "people with one foot Der naturen bloeme Maerlant",
+    "monopod one-footed man medieval manuscript",
+    "sciapod marvels race mappamundi"
+   ],
+   "require": [
+    [
+     "sciapod",
+     "sciapode",
+     "monocolus",
+     "monopod",
+     "uniped",
+     "one foot",
+     "one-footed",
+     "umbrella foot"
+    ]
+   ],
+   "exclude": [
+    "cyclops"
+   ],
+   "pin": "File:Nuremberg chronicles - Strange People - Umbrella Foot (XIIr).jpg"
+  },
+  "nekyia": {
+   "queries": [
+    "Odysseus Nekyia shades of the dead vase",
+    "Flaxman Odyssey engraving shades summoned",
+    "Doré Charon Acheron Inferno engraving",
+    "descent into underworld katabasis painting"
+   ],
+   "require": [
+    [
+     "nekyia",
+     "odysseus",
+     "ulysses",
+     "hades",
+     "underworld",
+     "inferno",
+     "charon",
+     "shades",
+     "katabasis"
+    ]
+   ],
+   "exclude": [
+    "Picasso"
+   ],
+   "pin": "File:Gustave Doré - Dante Alighieri - Inferno - Plate 9 (Canto III - Charon).jpg"
+  },
+  "noahs-ark": {
+   "queries": [
+    "Doré dove sent forth from the ark engraving",
+    "Gustave Doré The Deluge engraving",
+    "Noah's ark animals entering medieval miniature",
+    "Nicholas of Verdun Klosterneuburg Noah's ark enamel"
+   ],
+   "require": [
+    [
+     "noah",
+     "ark",
+     "deluge",
+     "flood"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie",
+    "nursery"
+   ],
+   "pin": "File:Dove Sent Forth from the Ark (89393604).jpg"
+  },
+  "pegasus": {
+   "queries": [
+    "Pegasus Bellerophon Greek vase painting",
+    "Troschel Bellerophon und Pegasus sculpture",
+    "Pegasus and the Muses Helicon sculpture",
+    "Pegasus constellation antique star map"
+   ],
+   "require": [
+    [
+     "pegasus",
+     "bellerophon"
+    ]
+   ],
+   "exclude": [
+    "aircraft",
+    "bridge",
+    "software",
+    "film",
+    "trailer"
+   ],
+   "pin": "File:Julius Troschel Bellerophon und Pegasus 1840-50.jpg"
+  },
+  "philemon": {
+   "queries": [
+    "Adam Elsheimer Jupiter and Mercury in the house of Philemon and Baucis",
+    "Philemon and Baucis Rubens landscape",
+    "Johann Carl Loth Philemon Baucis Jupiter Mercury",
+    "Hendrick Goudt Philemon and Baucis engraving"
+   ],
+   "require": [
+    [
+     "philemon",
+     "baucis"
+    ]
+   ],
+   "exclude": [
+    "psychology",
+    "seminar",
+    "album"
+   ],
+   "pin": "File:Adam Elsheimer - Jupiter and Mercury in the House of Philemon and Baucis.jpg"
+  },
+  "placenta": {
+   "queries": [
+    "Capitoline wolf suckling Romulus and Remus bronze",
+    "Lupa Capitolina statue",
+    "she-wolf suckling twins sculpture",
+    "wolf nursing infants classical statue"
+   ],
+   "require": [
+    [
+     "wolf",
+     "lupa"
+    ],
+    [
+     "romulus",
+     "remus",
+     "twins",
+     "suckling",
+     "nursing",
+     "infant"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "football",
+    "as Roma"
+   ],
+   "pin": "File:Central Italian 15th or 16th Century (Possibly Roman 15th or 16th Century), The Capitoline Wolf Suckling Romulus and Remus, late 15th - early 16th century, NGA 43727.jpg"
+  },
+  "playing-card": {
+   "queries": [
+    "seven of diamonds antique playing card",
+    "ace of clubs antique playing card",
+    "Cloisters playing cards Flemish hunting deck",
+    "medieval playing cards fifteenth century"
+   ],
+   "require": [
+    [
+     "playing card",
+     "playing cards",
+     "diamonds",
+     "clubs",
+     "hunting deck"
+    ]
+   ],
+   "exclude": [
+    "tarot",
+    "poker night",
+    "casino"
+   ],
+   "pin": "File:Playing Card, Seven of Diamonds, late 19th century (CH 18405299).jpg"
+  },
+  "polestar": {
+   "queries": [
+    "Mithras tauroctony relief Louvre zodiac",
+    "Ursa Minor pole star celestial map Cellarius",
+    "north celestial pole antique star chart",
+    "tauroctony Mithraic altar Luna Bull relief"
+   ],
+   "require": [
+    [
+     "pole star",
+     "polestar",
+     "north pole",
+     "ursa",
+     "mithras",
+     "tauroctony",
+     "celestial"
+    ]
+   ],
+   "exclude": [
+    "expedition",
+    "peary",
+    "flag"
+   ],
+   "pin": "File:Mithras tauroctony Louvre Ma3441.jpg"
+  },
+  "premonition": {
+   "queries": [
+    "Cassandra painting Ajax",
+    "Cassandra prophecy Troy painting"
+   ],
+   "require": [
+    [
+     "cassandra",
+     "tiresias",
+     "prophe",
+     "sibyl"
+    ]
+   ]
+  },
+  "puer-aeternus": {
+   "queries": [
+    "Ganymede carried by eagle Vatican sculpture",
+    "sleeping Eros Hellenistic bronze",
+    "Cupid eternal boy classical statue",
+    "eternal boy youth antique sculpture"
+   ],
+   "require": [
+    [
+     "ganymede",
+     "eros",
+     "cupid",
+     "puer",
+     "eternal boy",
+     "amorcillo"
+    ]
+   ],
+   "exclude": [
+    "disney",
+    "film",
+    "movie"
+   ],
+   "pin": "File:Ganymede eagle Vatican.jpg"
+  },
+  "pursuer": {
+   "queries": [
+    "Fuseli Night-Hag Visiting Lapland Witches",
+    "dream pursuit monster painting nightmare chase",
+    "Doré pursuing demons Inferno engraving",
+    "witch riding dreamer Fuseli etching"
+   ],
+   "require": [
+    [
+     "pursu",
+     "hag",
+     "nightmare",
+     "fuseli",
+     "witch",
+     "demon"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie",
+    "album"
+   ],
+   "pin": "File:The Night-Hag Visiting Lapland Witches 1796 Henry Fuseli.jpg"
+  },
+  "quincunx": {
+   "queries": [
+    "Roman quincunx bronze coin five dots",
+    "Luceria quincunx coin",
+    "Capua quincunx coin",
+    "quincunx garden planting plan engraving"
+   ],
+   "require": [
+    [
+     "quincunx"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie",
+    "basketball"
+   ]
+  },
+  "radioactive-nucleus": {
+   "queries": [
+    "Rutherford atomic model diagram",
+    "radioactive decay diagram early 20th century",
+    "radium rays physics illustration 1900s",
+    "atomic nucleus vintage physics chart"
+   ],
+   "require": [
+    [
+     "nucleus",
+     "atom",
+     "radium",
+     "radioactive",
+     "radioactivity"
+    ]
+   ],
+   "exclude": [
+    "band",
+    "album",
+    "song",
+    "film"
+   ]
+  },
+  "ragnarok": {
+   "queries": [
+    "Emil Doepler Ragnarök Walhall illustration",
+    "Odin Fenriswolf Surt Ragnarök Doepler",
+    "Naglfar corpse ship Ragnarök illustration",
+    "Twilight of the gods Norse painting"
+   ],
+   "require": [
+    [
+     "ragnarok",
+     "ragnarök",
+     "voluspa",
+     "twilight of the gods",
+     "gotterdämmerung",
+     "fenrir",
+     "fenris",
+     "surt",
+     "naglfar"
+    ]
+   ],
+   "exclude": [
+    "opera poster",
+    "album",
+    "film",
+    "metal band"
+   ],
+   "pin": "File:Odin und Fenriswolf Freyr und Surt.jpg"
+  },
+  "ram": {
+   "skip": "Agni-on-ram miniatures and Aries leaves: no passing scan after curated attempts"
+  },
+  "redeemer-figure": {
+   "queries": [
+    "Good Shepherd carrying lamb statue Walters",
+    "Good Shepherd catacomb fresco Rome",
+    "Christ Good Shepherd early Christian marble",
+    "Christ Pantocrator Byzantine icon"
+   ],
+   "require": [
+    [
+     "shepherd",
+     "redeemer",
+     "saviour",
+     "savior",
+     "salvator",
+     "pantocrator",
+     "kriophoros"
+    ]
+   ],
+   "exclude": [
+    "cathedral",
+    "church building",
+    "album",
+    "film"
+   ],
+   "pin": "File:Roman - Shepherd Carrying Lamb - Walters 2353.jpg"
+  },
+  "river": {
+   "queries": [
+    "Delacroix Barque of Dante river",
+    "Doré Charon Acheron engraving",
+    "river of life manuscript illumination",
+    "rivers of paradise mappamundi"
+   ],
+   "require": [
+    [
+     "river",
+     "sty",
+     "acheron",
+     "barque",
+     "paradise"
+    ]
+   ],
+   "exclude": [
+    "football",
+    "album",
+    "film",
+    "club"
+   ],
+   "pin": "File:Eugène Delacroix - The Barque of Dante.jpg"
+  },
+  "satori": {
+   "skip": "enso calligraphy scans on Commons fail the resolution gate after curated attempts"
+  },
+  "saturn": {
+   "queries": [
+    "Rubens Saturn devouring his son painting",
+    "Goya Saturn devouring his son",
+    "Children of Saturn planet engraving Hausbuchmeister",
+    "Saturn lead alchemical emblem engraving",
+    "Kronos Chronos old god Saturn engraving"
+   ],
+   "require": [
+    [
+     "saturn",
+     "kronos",
+     "chronos"
+    ],
+    [
+     "alchem",
+     "mytholog",
+     "god",
+     "devour",
+     "lead",
+     "senex",
+     "melancholy",
+     "planetenkinder",
+     "children"
+    ]
+   ],
+   "exclude": [
+    "cassini",
+    "telescope",
+    "nasa",
+    "spacecraft",
+    "rings photograph",
+    "sky"
+   ],
+   "pin": "File:Rubens saturn.jpg"
+  },
+  "scapegoat": {
+   "queries": [
+    "William Holman Hunt The Scapegoat",
+    "Azazel goat Day of Atonement engraving",
+    "scapegoat Leviticus wilderness illustration"
+   ],
+   "require": [
+    [
+     "scapegoat",
+     "Azazel",
+     "goat"
+    ]
+   ],
+   "exclude": [
+    "football"
+   ],
+   "pin": "File:William Holman Hunt - The Scapegoat.jpg"
+  },
+  "scorpion": {
+   "queries": [
+    "Sidney Hall Urania's Mirror Scorpio",
+    "Johann Bayer Uranometria Scorpius constellation",
+    "Scorpio zodiac medieval manuscript miniature"
+   ],
+   "require": [
+    [
+     "scorpio",
+     "scorpius",
+     "scorpion"
+    ]
+   ],
+   "exclude": [
+    "Scorpion King",
+    "Mortal Kombat"
+   ],
+   "pin": "File:Sidney Hall - Urania's Mirror - Scorpio.jpg"
+  },
+  "shepherd": {
+   "queries": [
+    "Good Shepherd Catacomb of Priscilla fresco",
+    "Hermes Kriophoros ram-bearer statue",
+    "Christ the Good Shepherd early Christian sculpture"
+   ],
+   "require": [
+    [
+     "shepherd",
+     "Kriophoros",
+     "Pastor",
+     "Poimen"
+    ]
+   ],
+   "exclude": [
+    "German Shepherd",
+    "shepherd dog"
+   ]
+  },
+  "sibyl": {
+   "queries": [
+    "Michelangelo Delphic Sibyl Sistine Chapel",
+    "Domenichino Cumaean Sibyl",
+    "Seherin von Prevorst Kerner engraving",
+    "Libyan Sibyl Michelangelo"
+   ],
+   "require": [
+    [
+     "sibyl",
+     "Sibylla",
+     "Seherin"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Michelangelo - Delphic Sibyl.jpg"
+  },
+  "soma": {
+   "queries": [
+    "Churning of the Ocean of Milk Angkor Wat relief",
+    "Samudra manthan amrita painting",
+    "haoma Zoroastrian ritual",
+    "Soma Vedic god moon sculpture"
+   ],
+   "require": [
+    [
+     "soma",
+     "Soma",
+     "amrita",
+     "Samudra",
+     "haoma",
+     "churning"
+    ]
+   ],
+   "exclude": [
+    "muscle",
+    "carisoprodol",
+    "Brave New World"
+   ],
+   "pin": "File:010 Churning Wall at Angkor Wat, Cambodia.jpg"
+  },
+  "soul-image": {
+   "queries": [
+    "Rossetti Dantes Dream painting",
+    "Henry Holiday Dante and Beatrice painting"
+   ],
+   "require": [
+    [
+     "dante",
+     "beatrice"
+    ]
+   ]
+  },
+  "spear": {
+   "queries": [
+    "Holy Lance Vienna Hofburg regalia",
+    "Spear of Longinus Crucifixion painting",
+    "Odin Gungnir spear Winge",
+    "Holy Lance imperial regalia"
+   ],
+   "require": [
+    [
+     "lance",
+     "spear",
+     "Lanze",
+     "Gungnir"
+    ]
+   ],
+   "exclude": [
+    "spearmint",
+    "harpoon"
+   ]
+  },
+  "spindle": {
+   "queries": [
+    "Eckersberg Three Fates Clotho Lachesis Atropos spinning",
+    "The Three Fates painting Parcae",
+    "spindle distaff spinning medieval manuscript illumination",
+    "spinning woman Book of Hours marginalia"
+   ],
+   "require": [
+    [
+     "spindle",
+     "Fates",
+     "spinning",
+     "distaff",
+     "Parcae",
+     "Clotho"
+    ]
+   ],
+   "exclude": [
+    "cotton mill"
+   ],
+   "pin": "File:CW Eckersberg, De tre parcer Clotho, Lachesis og Atropos spinder livets tråd, 1808, KMS3851, Statens Museum for Kunst, brightened.jpg"
+  },
+  "spirit": {
+   "queries": [
+    "Manao tupapau Gauguin spirit of the dead",
+    "spiritualism materialization seance photograph 19th century",
+    "ghost apparition engraving",
+    "ancestral spirit figure"
+   ],
+   "require": [
+    [
+     "spirit",
+     "ghost",
+     "spiritualism",
+     "apparition",
+     "revenant",
+     "Geist"
+    ]
+   ],
+   "exclude": [
+    "liquor",
+    "vodka",
+    "whisky",
+    "Spirit Airlines"
+   ],
+   "pin": "File:Paul Gauguin- Manao tupapau (The Spirit of the Dead Keep Watch).JPG"
+  },
+  "statue": {
+   "queries": [
+    "Jean-Léon Gérôme Pygmalion and Galatea",
+    "Pygmalion Galatea statue coming to life painting",
+    "Silenus statue sculpture",
+    "Juno Ludovisi marble head"
+   ],
+   "require": [
+    [
+     "statue",
+     "statua",
+     "Pygmalion",
+     "Galatea",
+     "Silenus",
+     "Juno",
+     "agalma"
+    ]
+   ],
+   "exclude": [
+    "Liberty"
+   ],
+   "pin": "File:Jean-Léon Gérôme, Pygmalion and Galatea, ca. 1890.jpg"
+  },
+  "stigmata": {
+   "queries": [
+    "Giotto Saint Francis receiving the stigmata",
+    "Stigmatization of Saint Francis painting",
+    "Anne Catherine Emmerich portrait"
+   ],
+   "require": [
+    [
+     "stigmata",
+     "Stigmata",
+     "Francis",
+     "Emmerich"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie"
+   ],
+   "pin": "File:Giotto - Saint Francis Receiving the Stigmata.jpg"
+  },
+  "stork": {
+   "queries": [
+    "stork carrying baby illustration 19th century",
+    "white stork engraving",
+    "Storch Adebar Kinder illustration"
+   ],
+   "require": [
+    [
+     "stork",
+     "Storch",
+     "Adebar",
+     "Ciconia"
+    ]
+   ],
+   "exclude": [
+    "restaurant"
+   ]
+  },
+  "sun-woman": {
+   "queries": [
+    "Albrecht Dürer The Apocalyptic Woman 1498",
+    "woman clothed with the sun painting",
+    "Woman of the Apocalypse woodcut",
+    "mulier amicta sole"
+   ],
+   "require": [
+    [
+     "apocalyptic",
+     "Apocalypse",
+     "clothed",
+     "amicta",
+     "sun-woman"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Albrecht Dürer, The Apocalyptic Woman, 1498, NGA 142358.jpg"
+  },
+  "tiger": {
+   "queries": [
+    "Henri Rousseau Tiger in a Tropical Storm Surprised",
+    "Tipu's Tiger mechanical organ",
+    "Delacroix tiger drawing",
+    "Tibetan tiger rug"
+   ],
+   "require": [
+    [
+     "tiger",
+     "Tiger",
+     "tigress"
+    ]
+   ],
+   "exclude": [
+    "Tasmanian"
+   ],
+   "pin": "File:Henri Rousseau - Surprise!.jpg"
+  },
+  "tightrope-walker": {
+   "queries": [
+    "Blondin crossing Niagara tightrope",
+    "funambule tightrope walker 19th century engraving",
+    "Seiltänzer photograph",
+    "tightrope walker over gorge stereoscopic"
+   ],
+   "require": [
+    [
+     "tightrope",
+     "funambule",
+     "Blondin",
+     "Seiltänzer",
+     "rope"
+    ]
+   ],
+   "exclude": [
+    "video game"
+   ],
+   "pin": "File:William England - Blondin crossing Niagara river.jpg"
+  },
+  "tortoise": {
+   "queries": [
+    "Kurma avatar tortoise Vishnu Angkor Wat",
+    "world tortoise elephant Hindu cosmology illustration",
+    "Shang dynasty oracle bone tortoise plastron",
+    "I Ching tortoise shell divination"
+   ],
+   "require": [
+    [
+     "tortoise",
+     "turtle",
+     "Kurma",
+     "plastron",
+     "Testudo"
+    ]
+   ],
+   "exclude": [
+    "Teenage Mutant",
+    "tortoiseshell"
+   ],
+   "pin": "File:Depiction of Kurma at the Angkor Wat.JPG"
+  },
+  "totem-animal": {
+   "queries": [
+    "Tlingit totem pole mortuary 19th century",
+    "Haida totem pole photograph",
+    "Kwakwaka'wakw totem pole",
+    "totem pole Ketchikan"
+   ],
+   "require": [
+    [
+     "totem"
+    ]
+   ],
+   "exclude": [],
+   "pin": "File:Ketchikan, AK - Totem Heritage Center 12 - Raven Mortuary Pole (Tlingit, Tongass).jpg"
+  },
+  "transitus": {
+   "skip": "the vault defines transitus as taurophorus, the carrying of the bull; Commons holds tauroctonies (slayings), not taurophories"
+  },
+  "triangle": {
+   "skip": "no passing scan of the Hypnerotomachia frontispiece; the only metadata match was an unrelated ornament album page"
+  },
+  "uebermensch": {
+   "skip": "the concept has no depictable tradition of its own; its ground (Nietzsche/Zarathustra) is carried by the zarathustra-figure plate"
+  },
+  "ufo": {
+   "queries": [
+    "Himmelserscheinung über Nürnberg 14 April 1561",
+    "Basel 1566 celestial phenomenon broadsheet",
+    "Spiritual Pilgrim Discovering Another World woodcut",
+    "flying saucer 1950s press illustration"
+   ],
+   "require": [
+    [
+     "1561",
+     "1566",
+     "Himmelserscheinung",
+     "ufo",
+     "saucer",
+     "celestial"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "movie"
+   ],
+   "pin": "File:Himmelserscheinung über Nürnberg vom 14. April 1561.jpg"
+  },
+  "underworld": {
+   "queries": [
+    "Hieronymus Bosch Hell Garden of Earthly Delights right panel",
+    "Doré Dante Inferno engraving",
+    "Aeneas and the Sibyl in the underworld painting",
+    "Odysseus nekyia underworld"
+   ],
+   "require": [
+    [
+     "underworld",
+     "hell",
+     "inferno",
+     "netherworld",
+     "Hades",
+     "Unterwelt"
+    ]
+   ],
+   "exclude": [
+    "film",
+    "band",
+    "game"
+   ],
+   "pin": "File:Hieronymus Bosch, Hell (Garden of Earthly Delights tryptich, right panel).JPG"
+  },
+  "vajra": {
+   "queries": [
+    "vajra dorje bronze ritual implement Tibet",
+    "Vajrapani thunderbolt statue",
+    "vajra ghanta bell ritual object"
+   ],
+   "require": [
+    [
+     "vajra",
+     "dorje",
+     "Vajrapani"
+    ]
+   ],
+   "exclude": []
+  },
+  "viriditas": {
+   "queries": [
+    "Rosarium Philosophorum emblem",
+    "Splendor Solis manuscript plate",
+    "green lion alchemical manuscript",
+    "alchemical illuminated manuscript green"
+   ],
+   "require": [
+    [
+     "viriditas",
+     "Rosarium",
+     "Splendor",
+     "alchemical",
+     "alchemy"
+    ]
+   ],
+   "exclude": [
+    "Green Day",
+    "Green Lantern"
+   ],
+   "pin": "File:Rosarium Philosophorum Wellcome L0026378.jpg"
+  },
+  "voice": {
+   "queries": [
+    "Waterhouse Echo and Narcissus",
+    "Joan of Arc hearing her voices painting",
+    "Echo nymph personification painting",
+    "Socrates daimonion engraving"
+   ],
+   "require": [
+    [
+     "voice",
+     "voix",
+     "Echo",
+     "Stimme",
+     "vocis"
+    ]
+   ],
+   "exclude": [
+    "Voice of America",
+    "voice actor",
+    "The Voice (TV)"
+   ],
+   "pin": "File:John William Waterhouse - Echo and Narcissus - Google Art Project.jpg"
+  },
+  "volcano": {
+   "queries": [
+    "Frederic Edwin Church Cotopaxi eruption",
+    "Vesuvius eruption painting 19th century",
+    "Empedocles leaping into Mount Aetna",
+    "Wright of Derby Vesuvius"
+   ],
+   "require": [
+    [
+     "volcano",
+     "Vesuvius",
+     "Aetna",
+     "Etna",
+     "Cotopaxi",
+     "crater"
+    ]
+   ],
+   "exclude": [
+    "firefighter",
+    "fire engine"
+   ],
+   "pin": "File:Frederic Edwin Church - Cotopaxi - Google Art Project.jpg"
+  },
+  "wild-man": {
+   "queries": [
+    "Wild Men and Moors tapestry",
+    "woodwose church carving",
+    "wild man medieval engraving hairy",
+    "Rübezahl illustration"
+   ],
+   "require": [
+    [
+     "wild man",
+     "wild men",
+     "woodwose",
+     "wodewose",
+     "Rübezahl",
+     "troll",
+     "Wild"
+    ]
+   ],
+   "exclude": [
+    "Where the Wild Things Are"
+   ],
+   "pin": "File:Wild Men and Moors (Detail 05 of 12).jpg"
+  },
+  "wish-dream": {
+   "queries": [
+    "Courbet Le Reve painting",
+    "woman asleep dream 19th century painting"
+   ],
+   "require": [
+    [
+     "dream",
+     "rêve",
+     "reve",
+     "reverie",
+     "sleeping",
+     "asleep"
+    ]
+   ],
+   "exclude": [
+    "sleeping beauty",
+    "märchen"
+   ]
+  },
+  "witch": {
+   "queries": [
+    "Salvator Rosa Shade of Samuel witch of Endor",
+    "Goya Witches Sabbath",
+    "Malleus Maleficarum woodcut title page",
+    "witch trial engraving 17th century"
+   ],
+   "require": [
+    [
+     "witch",
+     "Witches",
+     "Hexe",
+     "sorceress"
+    ]
+   ],
+   "exclude": [
+    "Sabrina",
+    "Blair Witch",
+    "Eastwick"
+   ],
+   "pin": "File:Louvre rosa apparition.jpg"
+  },
+  "world-fire": {
+   "queries": [
+    "John Martin Destruction of Sodom and Gomorrah",
+    "John Martin Last Judgement panel"
+   ],
+   "require": [
+    [
+     "martin"
+    ],
+    [
+     "sodom",
+     "pandemonium",
+     "judgement",
+     "judgment",
+     "conflagration"
+    ]
+   ]
+  },
+  "wounded-physician": {
+   "queries": [
+    "John Singer Sargent Chiron and Achilles",
+    "Education of Achilles by Chiron painting",
+    "Chiron centaur teaching Asclepius",
+    "Asclepius serpent staff statue"
+   ],
+   "require": [
+    [
+     "Chiron",
+     "Asclepius",
+     "Asklepios",
+     "healer"
+    ]
+   ],
+   "exclude": [
+    "Bugatti",
+    "planet"
+   ],
+   "pin": "File:Chiron and Achilles c1922-1925 John Singer Sargent.jpg"
+  },
+  "yin-yang": {
+   "queries": [
+    "Taijitu Lai Zhide",
+    "taiji tu Chinese woodblock",
+    "yin yang taijitu classical diagram",
+    "Zhao Huiqian taiji"
+   ],
+   "require": [
+    [
+     "taijitu",
+     "taiji",
+     "yin",
+     "yang"
+    ]
+   ],
+   "exclude": [
+    "tattoo",
+    "wallpaper"
+   ],
+   "pin": "File:Taijitu Lai Zhide.png"
+  },
+  "zarathustra-figure": {
+   "queries": [
+    "Nietzsche portrait photograph 1882",
+    "Hans Olde Nietzsche lithograph portrait",
+    "Also sprach Zarathustra 1883 first edition",
+    "Nietzsche Sils Maria"
+   ],
+   "require": [
+    [
+     "Nietzsche",
+     "Zarathustra"
+    ]
+   ],
+   "exclude": [
+    "comic",
+    "Superman"
+   ],
+   "pin": "File:Nietzsche1882.jpg"
+  },
+  "labyrinth": {
+   "queries": [
+    "Chartres cathedral labyrinth paving",
+    "turf maze labyrinth England",
+    "Cretan labyrinth coin"
+   ],
+   "require": [
+    [
+     "labyrinth"
+    ]
+   ]
+  },
+  "elephant": {
+   "queries": [
+    "Airavata Indra elephant miniature",
+    "Hannibal war elephant engraving",
+    "white elephant Thailand painting"
+   ],
+   "require": [
+    [
+     "elephant",
+     "olifant",
+     "airavata"
+    ]
+   ]
+  },
+  "hero": {
+   "queries": [
+    "Sigurd killing Fafnir stave church portal",
+    "Heracles Nemean lion vase painting",
+    "Theseus slaying Minotaur kylix"
+   ],
+   "require": [
+    [
+     "sigurd",
+     "sigfried",
+     "siegfried",
+     "fafnir",
+     "heracles",
+     "theseus",
+     "hero"
+    ]
+   ]
+  },
+  "death": {
+   "queries": [
+    "Holbein Dance of Death woodcut",
+    "Danse macabre medieval manuscript illumination"
+   ],
+   "require": [
+    [
+     "death",
+     "todentanz",
+     "danse",
+     "dance",
+     "macabre"
+    ]
+   ],
+   "exclude": [
+    "metal",
+    "album"
+   ]
+  },
+  "greening-tree": {
+   "queries": [
+    "green man foliate head church carving",
+    "foliate mask Gothic carving",
+    "green man Bamberg cathedral"
+   ],
+   "require": [
+    [
+     "green man",
+     "foliate",
+     "greening"
     ]
    ]
   }

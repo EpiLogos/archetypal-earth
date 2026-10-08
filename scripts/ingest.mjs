@@ -360,7 +360,9 @@ const unresolvedFamilies = {};
 for (const o of occList) {
   for (const f of [o.familyId, ...o.coFamilyIds]) {
     if (famMap[f]) continue;
-    if (archSlugs.has(f) || !/^[a-z0-9][a-z0-9-]*$/.test(f)) continue; // co_manifest naming an archetype / junk: not a family
+    // an archetype slug becomes a family only when curation claims it with a tie —
+    // deliberate, reviewable, and the vault wins it back the moment it lands a note
+    if ((archSlugs.has(f) && !famOver[f] && !curTies[f]) || !/^[a-z0-9][a-z0-9-]*$/.test(f)) continue; // co_manifest naming an archetype / junk: not a family
     if (f === o.familyId) {
       unresolvedFamilies[f] = (unresolvedFamilies[f] || 0) + 1;
       const over = famOver[f] || {};

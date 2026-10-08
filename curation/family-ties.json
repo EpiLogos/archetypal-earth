@@ -1496,6 +1496,24 @@
     "archetype": "self",
     "basis": "inferred"
    }
+  ],
+  "death": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "greening-tree": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "hero": [
+   {
+    "archetype": "hero",
+    "basis": "jung"
+   }
   ]
  }
 }
