@@ -98,6 +98,23 @@ Jung explicitly says no connection between Christ and the astrological inception
 
 Not included as fabricated events: a precise Taurus boundary attributed to Jung; a fixed first birth year for Christ; a literal fulfilled Aquarian prophecy; a proven Cathar-to-Lambspringk transmission; an accomplished 1260 replacement of the gospel; precise cities or founding dates for collective scientific and religious transformations. No owner-authored Antichrist material is inserted into Jung’s reading.
 
+## Remediation, 8 October 2026 — riding on Aion
+
+A recovery pass re-grounded the reading in the actual text after the owner found the events linking out to generic
+archetypal families. 17 of the 28 events had their `familyIds`/`occurrenceIds` retightened to what the event's own
+cited passage names (every id resolved against `field.json`; the considered-and-rejected candidates are listed in the
+pass report kept beside the work). Epochs and events now also carry optional `archetypeIds` — the Self, the Shadow and
+Syzygy stand exactly where Jung's own sentences carry them (Christ/first-fish, Valentinus, the year-1000 reversal, the
+Bogomil fishes, Morienus, Dorn, the modern crisis, and the Platonic months themselves) — rendered as quiet links on the
+cards. Three passages were added, each verified verbatim on its cited page by the generator: Origen and Augustine on
+the ram that bears the form of Christ (¶147, n.74, pdf p102, new source binding), the year-1000 awakening of the
+movements (pdf p162), and the Aquarian union of opposites (pdf p99).
+
+The globe also follows the reading's cursor now: what has entered the world by the cursor's year stands (the standing
+epoch brightest, earlier epochs receded to 0.3), what came later recedes to a presence (0.05) — never invisible, never
+unclickable. The corpus is dense late (97.7% of it exists by 1945), so the early sweeps are honestly sparse and the
+Aquarian span shows a world already full; no sampling or padding was introduced to make either prettier.
+
 ## Further authored readings
 
 A later reading belongs in its own file under `curation/aion/`, with its own sources, source bindings and `readings` array. It names `extends: "jung-aion"` and carries its own author, epochs, events and threads on the same year axis. The generator discovers these files and validates the extension relation while preserving Jung’s curation. IDs are scoped to each reading, so an extension must resolve its own epochs and thread events rather than modifying Jung’s objects.

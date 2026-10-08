@@ -83,6 +83,7 @@ Retrieved 2026-10-08 unless stated; each body's `sources` array in `curation/sky
 | nominal solar radius 695,700 km | IAU 2015 Resolution B3 |
 | Jung's quotations (every `cites` entry) | the read-only vault corpus `corpus/<work>.md`; verified verbatim on the cited PDF page by `sky:check` |
 | the planetary-god, metal and culture correspondences | the vault note `wiki/images/planetary-gods.md`, whose own `(J)`/`(S)` marks decide each cell's `basis` |
+| the bodies' zodiacal definitions (`quotes` on a body) | Kathleen Burt, *Archetypes of the Zodiac* (1988), the owner's library copy — `curation/sky/burt.json`, sha-pinned, every quotation machine-checked against its cited PDF page by `sky:check` |
 
 The Jung works cited: CW5 (*Symbols of Transformation*), CW9i, CW9ii (*Aion*), CW11, CW12 (*Psychology and Alchemy*), CW13 (*Alchemical Studies*), CW14 (*Mysterium Coniunctionis*), and the Nietzsche's *Zarathustra* seminar.
 
@@ -93,6 +94,8 @@ The Jung works cited: CW5 (*Symbols of Transformation*), CW9i, CW9ii (*Aion*), C
 - **jung** — Jung makes the link in the cited sentence. A `jung` tie without a quotation fails generation.
 - **inferred** — the vault or the atlas infers the link; the note says why. Never presented as Jung's word.
 - **site** — editorial. No citation. All the links for Uranus, Neptune, Pluto and the Earth are `site`: Jung's alchemical and astrological sources know only the seven classical bodies, and the sky says so.
+
+A body's `quotes` are a quotation layer, not a tie basis: Burt's words are shown under her own name and book, never dressed as Jung's, and they carry no tie weight. The generator pins the library PDF's sha256 and checks every quotation against its cited page in a canonical-letter comparison with a 1%-of-characters tolerance — the text layer mis-spaces, mis-hyphenates and occasionally mis-letters what the rendered page shows plainly, but a real misquotation cannot hide inside it (a forged quotation fails the check).
 
 Palettes and spectrum positions are the atlas's visual interpretation of the tied families' own palettes (D4), recorded per body in `paletteFrom`; they are not measurements.
 
@@ -197,6 +200,14 @@ Sources, tables and verification are in `docs/PRECESSION-NOTES.md`; the decision
 68. **The two clocks never meet except here, and here they are labelled.** Choosing a convention, opening the disclosure and playing the equinox leave the historical cursor where it was (e2e `aion-clock.mjs` checks this in the page); the sky layer's own moment is untouched.
 69. **Tests.** 19 in `tests/aion/precession.test.ts` (golden table, definitions and boundaries equal the sidecar's, IAU cross-check bounds, the conventions' known crossings); 11 in `tests/aion/skyclock.test.ts` (Jung's boundaries primary and unchanged, the Aquarian rows from the reading, no prediction language); the e2e on Chromium and WebKit.
 70. **Where the integration sits.** The pure module, the view-model, the ring and disclosure components, their tests and notes are committed. Their wiring into `src/aion/view.ts` (the ring in the constructor and `update`, the disclosure on the epoch and event cards) and the ring's styles in `src/style/aion.css` are in the working tree but not in this commit: both files, with `src/aion/model.ts` and `public/data/history.json`, are the owner's still-uncommitted Aion work, and committing them would adopt all of it. The edits to them are small and additive (three lines in `view.ts`, appended rules in `aion.css`).
+
+### Remediation, 8 October 2026
+
+71. **The bodies are defined by the book's own words.** The owner added Burt's *Archetypes of the Zodiac* to the library and asked for quote-driven definitions instead of editorial one-lines. The one-line identities stay (they are already sourced formulas); each body's card now opens her page-cited quotations beneath them, under her name. The book's sign and rulership material ships in `curation/sky/burt.json` for later use; only the eleven planet sets are rendered.
+72. **The card descends to the earth.** A tie's target is a family or archetype; the owner wanted the planets' relations present to the earth-bound discoveries. Each body's card now carries an "On the earth" section: one representative occurrence per presiding family (its own image where it has one, else the median by year — deterministic), each opening in place as a manifestation.
+73. **A way out of every state.** Focus labels and the thread label carry a breadcrumb row — the drilled route, then the whole field — and Escape walks the chain one step at a time. The route lives in the state (`crumbs`), never in the hash: a link still opens exactly what it names.
+74. **Less visibility, no lock.** Outside a focus the field recedes to 0.07 (was 0.2) and every node stays pickable (picking is CPU-side, independent of emphasis): what is not the subject nearly vanishes, nothing is unreachable.
+75. **One transport button.** The strip's second play/pause toggle is gone. The bottom-right button serves the clock and, while a walk stands, the walk ("Pause/Resume tour"), then hands the clock back. The Aion thread's own step controls (←/→ with Play/Pause thread) remain, being the thread player itself, not a duplicate transport.
 
 ## Draft vault schema proposal (`wiki/sky/`, for the owner)
 
