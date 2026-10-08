@@ -352,6 +352,20 @@ export function formatSky(value, indent = 0) {
   return JSON.stringify(value);
 }
 
+/**
+ * The few kilobytes the atlas needs *before* the sky is loaded: which field families and archetypes stand in a
+ * tie with which body, and on what basis. Earth mode shows a quiet glyph from this without fetching the 2 MB of grids.
+ * Derived from sky.json only (same `generatedAt`), so it cannot disagree with it.
+ */
+export function tiesIndex(sky) {
+  return {
+    meta: { generatedAt: sky.meta.generatedAt, from: 'public/data/sky.json' },
+    bodies: sky.bodies.map((b) => ({ key: b.key, name: b.name, order: b.order, modern: b.modern })),
+    ties: sky.bodies.flatMap((b) => b.ties.map((t) => ({ body: b.key, type: t.target.type, id: t.target.id, basis: t.basis }))),
+    readings: sky.readings.map((r) => ({ id: r.id, bodies: r.bodies, targets: r.targets, basis: r.basis })),
+  };
+}
+
 export async function generateSky({ root = ROOT, vault, check = false } = {}) {
   const target = path.join(root, 'public/data/sky.json');
   const previous = fs.existsSync(target) ? readJson(target) : null;
@@ -362,6 +376,13 @@ export async function generateSky({ root = ROOT, vault, check = false } = {}) {
     if (!previous) throw new Error('public/data/sky.json is missing; run npm run sky');
     if (!same) throw new Error('public/data/sky.json differs from a fresh regeneration (curation, sidecar or vault moved); run npm run sky and review the diff');
   } else if (!same) fs.writeFileSync(target, `${formatSky(sky)}\n`);
+  // the ties index is derived from sky.json and must match it byte for byte
+  const indexTarget = path.join(root, 'public/data/sky.ties.json');
+  const indexText = `${formatSky(tiesIndex(sky))}\n`;
+  const indexSame = fs.existsSync(indexTarget) && fs.readFileSync(indexTarget, 'utf8') === indexText;
+  if (check) {
+    if (!indexSame) throw new Error('public/data/sky.ties.json is missing or differs from sky.json; run npm run sky');
+  } else if (!indexSame) fs.writeFileSync(indexTarget, indexText);
   return { bodies: sky.bodies.length, ties: sky.meta.counts.ties, readings: sky.readings.length, planetSamples: sky.meta.counts.planetSamples, moonSamples: sky.meta.counts.moonSamples, sidecar: `${sky.meta.sidecar.name}@${sky.meta.sidecar.version}`, kernel: sky.meta.ephemeris.kernel, unchanged: Boolean(same) };
 }
 

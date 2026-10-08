@@ -60,6 +60,7 @@ All GET, JSON, bound to 127.0.0.1:5187 (`EPHEMERIS_PORT` overrides). CORS allows
 - `planets` — heliocentric ecliptic grid, every 48 hours, 2015-01-01 → 2039-12-31 (4,566 samples; the Earth's grid gives the Sun's direction).
 - `moon` — geocentric ecliptic grid, every 6 hours, same span (36,525 samples).
 - `orbits` — one sidereal period of each heliocentric body (180 samples, ecliptic of date with the precession since 2026.0 removed, so a ring is a closed curve in the 2026 frame). The rings of the system view are these real orbits, not drawn ellipses; Sun-centred.
+- `public/data/sky.ties.json` — a derived index of body ↔ field ties (see decision 26); same `generatedAt`.
 - `golden` — pinned epochs (J2000.0; a modern sample; an off-grid probe at 2026-03-17T07:23Z that the client's interpolation is tested against; the 7 BCE conjunction as `outside-ephemeris-range`), the ayanamsa table (Fagan-Bradley and Lahiri, ±13,000 years, 500-year steps plus −6, 0, 1900, 2000, 2026), and the 13 IAU constellation boundaries along the J2000.0 ecliptic.
 - `meta` — `generatedAt`, the sidecar name/version/packages, the ephemeris kernel and range, the span, the frame, and counts.
 
@@ -123,6 +124,17 @@ Recorded with the full thing in view; none was left blocking on the owner. D1–
 17. **Sky state is a flag with its own lifecycle.** `AppState.sky = {body?, birth?}`, valid only over the world view; focusing anything, or switching mode, drops it. The zoom gesture sets it at distance 40 and clears it at 30 (hysteresis, so a hovering wheel cannot flicker the sky); gesture transitions never fly the camera, and leaving by gesture replaces the history entry rather than pushing one. `S`, the Sky switch and `#/sky…` links fly to the system home; Back flies to the Earth.
 18. **The sky layer is lazy.** Its 2.1 MB of data is fetched only once the user pulls back past 4.4 Earth radii, presses `S` or follows a link. Earth mode pays nothing. The sky's shader programs are compiled when the layer attaches, while the Earth is on screen.
 19. **Sidecar 1.1.0.** The step limit rose to 1,000 days per sample (orbit sampling needs one sidereal period of Neptune at coarse steps) and the off-grid probe epoch was added.
+
+### Phase 2 — bodies that mean
+
+20. **A body's card is the reveal pattern.** Hero, name, one line, position, then ties; the same panel, motion and close behaviour as a family's reveal, so the sky reads as the same instrument. The hero is the body's own palette as a lit sphere, not an image: no photograph is claimed, none is invented (real planet textures are Phase 7).
+21. **A card is earned.** It opens only for a body with at least one tie that resolves to a living field node (`canOpenCard`); a deep link to a body without one opens the plain sky. The unit test holds all eleven to this against the shipped `field.json`.
+22. **Every tie shows its basis, in words.** `Jung` (he makes the link in the passage cited, shown on request), `inferred` (the atlas or vault infers it; the tooltip says so), `the atlas's reading` (editorial, no citation, never dressed with one). A `jung` tie without a quotation, or a `site` tie with one, fails the test.
+23. **Position is geocentric, tropical, of date — and says so.** The sign and degree come from the Earth's heliocentric vector subtracted from the body's (Sun: the Earth turned around; Moon: its own grid), read at the sky's moment, with that moment printed. Outside the generated 2015–2039 span the card declines and states the span; the Earth has no place in its own sky and the card says why.
+24. **Culture reprojection is a sky-local selector, not a focus.** The spec reads "when a culture focus stands"; but a focus leaves the sky by design (decision 17), so the two cannot stand together. The equivalent is a "Names read through" selector that is part of the sky state and link (`#/sky/mars/c/indian`). It re-names labels and cards from the transcribed table, names the culture and the table on the card, tags each cell with its basis, and states that the character beneath is the default one. A culture with no cell for a body (Chinese for Sun and Moon; every culture for the modern three) keeps the default name and says so.
+25. **Sun and Moon carry the pair reading.** "The Self as their coniunctio" with its basis, three field links (Coniunctio, Syzygy, the Self) and the cited passages in an in-place expander like Aion's sources. The astronomical fact (the card's position line) and Jung's reading are separate blocks.
+26. **A small ties index precedes the sky.** `public/data/sky.ties.json` (5 kB, derived from `sky.json` by the generator and byte-checked by `sky:check`) lets a family's reveal show a quiet glyph — ☿ Mercurius — in Earth mode without fetching the sky's 2 MB. The glyph opens the body in the sky.
+27. **Labels are real buttons.** Visible body labels are in the tab order; hidden or inactive ones are `visibility: hidden` and the sky's panels are `inert` in Earth mode.
 
 ## Draft vault schema proposal (`wiki/sky/`, for the owner)
 

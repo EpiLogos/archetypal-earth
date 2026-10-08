@@ -39,6 +39,23 @@ describe('the client ephemeris is an interpolation of the sidecar grids, nothing
     expect(Math.abs(wrap180(s.lon - probe.sun!.lon))).toBeLessThan(0.05);
   });
 
+  it('a planet\'s geocentric longitude is its heliocentric vector less the Earth\'s (checked at the probe epoch, 0.1°) and is absent outside the span', () => {
+    // the reference is an independent subtraction of the sidecar's own golden heliocentric vectors at the probe epoch
+    const g = data.golden.epochs.find((e) => e.label === 'J2000.0')!;
+    const rad = Math.PI / 180;
+    const vec = (p: { lon: number; lat: number; r: number }) => [p.r * Math.cos(p.lat * rad) * Math.cos(p.lon * rad), p.r * Math.cos(p.lat * rad) * Math.sin(p.lon * rad), p.r * Math.sin(p.lat * rad)];
+    const t = Date.parse(g.iso);
+    const probeEarth = vec(probe.earth!);
+    for (const key of ['mars', 'jupiter', 'saturn'] as BodyKey[]) {
+      const b = vec(probe.planets![key]!);
+      const want = ((Math.atan2(b[1] - probeEarth[1], b[0] - probeEarth[0]) / rad) + 360) % 360;
+      expect(Math.abs(wrap180(eph.geo(key, ms)!.lon - want)), key).toBeLessThan(0.1);
+    }
+    expect(t).toBeLessThan(eph.from); // J2000 itself is outside the generated span, and geo() says so
+    expect(eph.geo('mars', t)).toBeNull();
+    expect(eph.geo('earth', ms)).toBeNull();
+  });
+
   it('reproduces grid nodes exactly', () => {
     const t0 = Date.parse(data.planets.start);
     const k = 100;

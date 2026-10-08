@@ -13,6 +13,8 @@ export interface SkyState {
   body?: BodyKey;
   /** a birth sky: wall-clock time (YYYY-MM-DDTHH:MM) at the place; the sidecar resolves the timezone */
   birth?: { local: string; lat: number; lon: number };
+  /** the field culture the bodies' names and characters are read through (cultures.json); absent: the Greco-Roman default */
+  culture?: string;
 }
 
 export type View =
@@ -82,7 +84,7 @@ export function inSky(sky: SkyState = {}): AppState {
 
 export function skyEq(a: SkyState | undefined, b: SkyState | undefined): boolean {
   if (!a || !b) return !a && !b;
-  return a.body === b.body && a.birth?.local === b.birth?.local && a.birth?.lat === b.birth?.lat && a.birth?.lon === b.birth?.lon;
+  return a.body === b.body && a.culture === b.culture && a.birth?.local === b.birth?.local && a.birth?.lat === b.birth?.lat && a.birth?.lon === b.birth?.lon;
 }
 
 export function setDeep(s: AppState, deep: boolean): AppState {
@@ -95,7 +97,7 @@ export function back(s: AppState): AppState {
   if (s.deep) return { ...s, deep: false };
   if (s.sky) {
     // a card closes onto the sky; the sky closes onto the Earth
-    if (s.sky.body) return inSky(s.sky.birth ? { birth: s.sky.birth } : {});
+    if (s.sky.body) return inSky({ ...(s.sky.birth ? { birth: s.sky.birth } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
     return WORLD;
   }
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;

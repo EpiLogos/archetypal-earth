@@ -1,8 +1,11 @@
 // MANIFESTATION: the quiet contextual reveal for one occurrence.
 import type { Model } from '../data/model';
 import { occurrenceImage } from '../data/model';
+import { symbolReading } from './symbol-reading';
 import { clear, el, plate } from './dom';
 import { clipText, jungLine, placeLine } from './format';
+import { glyphOf, type SkyTies } from '../sky/ties';
+import type { BodyKey } from '../types/sky';
 
 export interface RevealHandlers {
   onParallel(occId: string): void;
@@ -10,6 +13,9 @@ export interface RevealHandlers {
   onParallelThread(): void;
   onDeep(): void;
   onClose(): void;
+  onFamily(id: string): void;
+  /** open a body of the sky (the family has a standing tie to it) */
+  onBody?(key: BodyKey): void;
 }
 
 export class Reveal {
@@ -18,15 +24,17 @@ export class Reveal {
   private foot: HTMLElement;
   private shown = false;
   private currentId = '';
+  private gen = 0;
 
-  constructor(parent: HTMLElement, private model: Model, private h: RevealHandlers) {
+  constructor(parent: HTMLElement, private model: Model, private h: RevealHandlers, private skyTies?: SkyTies) {
     this.body = el('div', { class: 'rv-body' });
     this.foot = el('nav', { class: 'rv-links', 'aria-label': 'Go further' });
-    this.root = el('aside', { class: 'reveal', 'aria-label': 'Selected presence' }, [
+    this.root = el('aside', { class: 'reveal', 'aria-label': 'Selected presence', 'aria-hidden': 'true' }, [
       el('button', { class: 'rv-close', type: 'button', 'aria-label': 'Close', onclick: () => h.onClose() }, [closeGlyph()]),
       this.body,
       this.foot,
     ]);
+    this.root.inert = true;
     parent.append(this.root);
   }
 
@@ -34,6 +42,7 @@ export class Reveal {
     const m = this.model;
     const o = m.occ[occIdx];
     if (o.id === this.currentId && this.shown) return;
+    const gen = ++this.gen;
     const render = () => {
       this.currentId = o.id;
       clear(this.body);
@@ -52,6 +61,10 @@ export class Reveal {
         const j = o.jung[0];
         text.append(el('p', { class: 'rv-jung' }, [el('span', { class: 'rv-jung-mark', 'aria-hidden': 'true', text: '◦' }), jungLine(j)]));
       }
+      const symbolic = symbolReading(m, o.familyId, id => this.h.onFamily(id), true);
+      if (symbolic) text.append(symbolic);
+      const tie = this.skyRow(o.familyId, gen);
+      if (tie) text.append(tie);
       const par = o.parallelIds.map((id) => m.occIndex.get(id)).filter((i): i is number => i !== undefined && !!m.located[i]).slice(0, 4);
       if (par.length) {
         const row = el('div', { class: 'rv-parallels', role: 'list', 'aria-label': 'Parallels' });
@@ -76,6 +89,7 @@ export class Reveal {
       // swap content with a quiet cross-fade rather than re-mounting the panel
       this.root.classList.add('swap');
       window.setTimeout(() => {
+        if (gen !== this.gen) return;
         render();
         this.root.classList.remove('swap');
       }, 220);
@@ -83,13 +97,40 @@ export class Reveal {
       render();
     }
     this.shown = true;
+    this.root.inert = false;
+    this.root.setAttribute('aria-hidden', 'false');
     this.root.classList.add('on');
   }
 
+  /** A quiet line when the family stands in a tie with a body of the sky. The index loads once, after the card is up. */
+  private skyRow(familyId: string, gen: number): HTMLElement | null {
+    const src = this.skyTies;
+    if (!src || !this.h.onBody) return null;
+    const fill = (row: HTMLElement) => {
+      const ties = src.forFamily(familyId);
+      clear(row);
+      row.hidden = ties.length === 0;
+      if (!ties.length) return;
+      row.append(el('span', { class: 'rv-sky-mark', 'aria-hidden': 'true', text: '◦' }), 'In the sky: ');
+      ties.forEach((t, i) => {
+        if (i) row.append(' · ');
+        row.append(el('button', { class: 'link-quiet rv-sky-body', type: 'button', title: `${t.name} — tie basis: ${t.basis}`, onclick: () => this.h.onBody?.(t.body) }, [el('span', { class: 'rv-sky-glyph', 'aria-hidden': 'true', text: glyphOf(t.body) }), ` ${t.name}`]));
+      });
+    };
+    const row = el('p', { class: 'rv-sky' });
+    row.hidden = true;
+    if (src.loaded) fill(row);
+    else void src.ensure().then(() => { if (gen === this.gen) fill(row); });
+    return row;
+  }
+
   hide() {
+    ++this.gen;
     this.shown = false;
     this.currentId = '';
     this.root.classList.remove('on', 'swap');
+    this.root.inert = true;
+    this.root.setAttribute('aria-hidden', 'true');
   }
 }
 

@@ -1,0 +1,310 @@
+{
+  "meta": {
+    "generatedAt": "2026-10-08T15:40:17.089Z",
+    "from": "public/data/sky.json"
+  },
+  "bodies": [
+    {
+      "key": "sun",
+      "name": "Sol",
+      "order": 0,
+      "modern": false
+    },
+    {
+      "key": "moon",
+      "name": "Luna",
+      "order": 1,
+      "modern": false
+    },
+    {
+      "key": "earth",
+      "name": "Terra",
+      "order": 2,
+      "modern": false
+    },
+    {
+      "key": "mercury",
+      "name": "Mercurius",
+      "order": 3,
+      "modern": false
+    },
+    {
+      "key": "venus",
+      "name": "Venus",
+      "order": 4,
+      "modern": false
+    },
+    {
+      "key": "mars",
+      "name": "Mars",
+      "order": 5,
+      "modern": false
+    },
+    {
+      "key": "jupiter",
+      "name": "Iuppiter",
+      "order": 6,
+      "modern": false
+    },
+    {
+      "key": "saturn",
+      "name": "Saturnus",
+      "order": 7,
+      "modern": false
+    },
+    {
+      "key": "uranus",
+      "name": "Uranus",
+      "order": 8,
+      "modern": true
+    },
+    {
+      "key": "neptune",
+      "name": "Neptunus",
+      "order": 9,
+      "modern": true
+    },
+    {
+      "key": "pluto",
+      "name": "Pluto",
+      "order": 10,
+      "modern": true
+    }
+  ],
+  "ties": [
+    {
+      "body": "sun",
+      "type": "family",
+      "id": "sun",
+      "basis": "jung"
+    },
+    {
+      "body": "sun",
+      "type": "archetype",
+      "id": "self",
+      "basis": "jung"
+    },
+    {
+      "body": "sun",
+      "type": "family",
+      "id": "solificatio",
+      "basis": "jung"
+    },
+    {
+      "body": "sun",
+      "type": "family",
+      "id": "coniunctio",
+      "basis": "jung"
+    },
+    {
+      "body": "sun",
+      "type": "archetype",
+      "id": "syzygy",
+      "basis": "inferred"
+    },
+    {
+      "body": "sun",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "moon",
+      "type": "family",
+      "id": "moon",
+      "basis": "jung"
+    },
+    {
+      "body": "moon",
+      "type": "archetype",
+      "id": "anima",
+      "basis": "inferred"
+    },
+    {
+      "body": "moon",
+      "type": "archetype",
+      "id": "great-mother",
+      "basis": "inferred"
+    },
+    {
+      "body": "moon",
+      "type": "family",
+      "id": "coniunctio",
+      "basis": "jung"
+    },
+    {
+      "body": "moon",
+      "type": "archetype",
+      "id": "syzygy",
+      "basis": "inferred"
+    },
+    {
+      "body": "moon",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "earth",
+      "type": "archetype",
+      "id": "great-mother",
+      "basis": "site"
+    },
+    {
+      "body": "earth",
+      "type": "family",
+      "id": "mother-goddess",
+      "basis": "site"
+    },
+    {
+      "body": "mercury",
+      "type": "family",
+      "id": "mercurius",
+      "basis": "jung"
+    },
+    {
+      "body": "mercury",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "mercury",
+      "type": "archetype",
+      "id": "psychopomp",
+      "basis": "inferred"
+    },
+    {
+      "body": "mercury",
+      "type": "archetype",
+      "id": "trickster",
+      "basis": "inferred"
+    },
+    {
+      "body": "venus",
+      "type": "family",
+      "id": "venus",
+      "basis": "jung"
+    },
+    {
+      "body": "venus",
+      "type": "archetype",
+      "id": "anima",
+      "basis": "jung"
+    },
+    {
+      "body": "venus",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "mars",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "mars",
+      "type": "archetype",
+      "id": "hero",
+      "basis": "inferred"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "fish",
+      "basis": "inferred"
+    },
+    {
+      "body": "saturn",
+      "type": "family",
+      "id": "sol-niger",
+      "basis": "jung"
+    },
+    {
+      "body": "saturn",
+      "type": "family",
+      "id": "senex-figure",
+      "basis": "jung"
+    },
+    {
+      "body": "saturn",
+      "type": "archetype",
+      "id": "shadow",
+      "basis": "inferred"
+    },
+    {
+      "body": "saturn",
+      "type": "archetype",
+      "id": "wise-old-man",
+      "basis": "inferred"
+    },
+    {
+      "body": "saturn",
+      "type": "family",
+      "id": "planetary-gods",
+      "basis": "jung"
+    },
+    {
+      "body": "uranus",
+      "type": "family",
+      "id": "star",
+      "basis": "site"
+    },
+    {
+      "body": "neptune",
+      "type": "family",
+      "id": "water",
+      "basis": "site"
+    },
+    {
+      "body": "neptune",
+      "type": "family",
+      "id": "night-sea-journey",
+      "basis": "site"
+    },
+    {
+      "body": "pluto",
+      "type": "family",
+      "id": "nigredo",
+      "basis": "site"
+    },
+    {
+      "body": "pluto",
+      "type": "archetype",
+      "id": "shadow",
+      "basis": "site"
+    }
+  ],
+  "readings": [
+    {
+      "id": "self-as-coniunctio",
+      "bodies": [
+        "sun",
+        "moon"
+      ],
+      "targets": [
+        {
+          "type": "family",
+          "id": "coniunctio"
+        },
+        {
+          "type": "archetype",
+          "id": "syzygy"
+        },
+        {
+          "type": "archetype",
+          "id": "self"
+        }
+      ],
+      "basis": "jung"
+    }
+  ]
+}

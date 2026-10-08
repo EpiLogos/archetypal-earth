@@ -5,7 +5,7 @@ import { hashToState, stateToHash, type Resolver } from '../../src/state/router'
 const r: Resolver = {
   hasArchetype: (id) => ['self', 'shadow', 'syzygy'].includes(id),
   hasFamily: (id) => ['serpent'].includes(id),
-  hasCulture: (id) => id === 'norse',
+  hasCulture: (id) => ['norse', 'greek'].includes(id),
   hasPlace: (id) => id === 'chartres',
   familyOf: () => undefined,
   hasBody: (id) => ['sun', 'moon', 'mars'].includes(id),
@@ -39,7 +39,7 @@ describe('the sky state', () => {
 
   it('round-trips through the hash', () => {
     const birth = { local: '1875-07-26T19:25', lat: 47.55, lon: 9.2 };
-    for (const s of [inSky(), inSky({ body: 'mars' }), inSky({ birth }), inSky({ birth, body: 'sun' })]) {
+    for (const s of [inSky(), inSky({ body: 'mars' }), inSky({ birth }), inSky({ birth, body: 'sun' }), inSky({ culture: 'norse' }), inSky({ body: 'mars', culture: 'norse' }), inSky({ birth, body: 'sun', culture: 'greek' })]) {
       const h = stateToHash(s);
       expect(h.startsWith('#/sky')).toBe(true);
       expect(hashToState(h, r).state, h).toEqual(s);
@@ -50,6 +50,15 @@ describe('the sky state', () => {
     expect(hashToState('#/sky', r).state).toEqual(inSky());
     expect(hashToState('#/sky/moon', r).state).toEqual(inSky({ body: 'moon' }));
     expect(hashToState('#/sky/birth/1875-07-26T19:25/47.55/9.2', r).state.sky?.birth).toEqual({ local: '1875-07-26T19:25', lat: 47.55, lon: 9.2 });
+  });
+
+  it('closing a card keeps the culture the sky is read through', () => {
+    expect(back(inSky({ body: 'mars', culture: 'norse' }))).toEqual(inSky({ culture: 'norse' }));
+    expect(stateEq(inSky({ culture: 'norse' }), inSky())).toBe(false);
+  });
+
+  it('ignores a culture the field does not have', () => {
+    expect(hashToState('#/sky/mars/c/atlantis', r).state).toEqual(inSky({ body: 'mars' }));
   });
 
   it('refuses what it cannot honour: unknown bodies and malformed or out-of-range births fall back to the plain sky', () => {

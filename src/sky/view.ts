@@ -1,7 +1,7 @@
 // The sky's quiet DOM: body labels (real buttons, so the sky is reachable by keyboard and by touch) and the
 // caption that says the radial scale is diagrammatic. Nothing here owns state: the controller does.
 import type { BodyKey } from '../types/sky';
-import { el } from '../ui/dom';
+import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
 import { COMPRESSION_CAPTION } from './stages';
 
@@ -25,12 +25,19 @@ export class SkyView {
   private active = false;
   private selected: BodyKey | null = null;
   private scratch: ScreenBody[] = [];
+  private culture: HTMLElement;
+  private cultureSelect: HTMLSelectElement;
+  private cultureNote: HTMLElement;
 
   constructor(parent: HTMLElement, private hooks: SkyViewHooks) {
     this.root = el('div', { class: 'sky-layer', 'aria-label': 'The sky: Sun, Moon and planets', role: 'group' });
     this.root.inert = true;
     this.caption = el('p', { class: 'sky-caption', text: COMPRESSION_CAPTION, 'aria-hidden': 'true' });
-    parent.append(this.root, this.caption);
+    this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
+    this.cultureNote = el('p', { class: 'sky-culture-note' });
+    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote]);
+    this.culture.inert = true;
+    parent.append(this.root, this.caption, this.culture);
   }
 
   setLayer(layer: SkyLayer) {
@@ -45,6 +52,24 @@ export class SkyView {
       this.root.append(node);
       this.labels.set(body.key, { key: body.key, node, w: 0 });
     }
+    // the layer arrives after the state that asked for it: bring the labels to the standing state
+    this.setActive(this.active, this.selected);
+  }
+
+  /** The cultures the names can be read through (the field's own, those with a table in cultures.json). */
+  setCultures(options: { id: string; name: string }[], onChange: (id: string | null) => void) {
+    clear(this.cultureSelect);
+    this.cultureSelect.append(el('option', { value: '', text: 'Greco-Roman (default)' }));
+    for (const o of options) this.cultureSelect.append(el('option', { value: o.id, text: o.name }));
+    this.cultureSelect.onchange = () => onChange(this.cultureSelect.value || null);
+  }
+
+  /** Reflect the standing culture in the selector and its note. */
+  setCulture(id: string | null, name?: string) {
+    this.cultureSelect.value = id ?? '';
+    this.cultureNote.textContent = id
+      ? `Names read through ${name ?? id}, after the vault's table of planetary gods; each is tagged with its basis on the body's card.`
+      : '';
   }
 
   /** Re-label after the standing culture changed. */
@@ -59,6 +84,8 @@ export class SkyView {
     this.active = on;
     this.selected = body ?? null;
     this.root.inert = !on;
+    this.culture.inert = !on;
+    this.culture.classList.toggle('on', on);
     document.body.classList.toggle('sky-on', on);
     for (const l of this.labels.values()) {
       l.node.tabIndex = on ? 0 : -1;

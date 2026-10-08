@@ -1,5 +1,5 @@
 /* The sky layer's quiet DOM: body labels over the scene, the caption that says the scale is a diagram. */
-.sky-layer { position: fixed; inset: 0; z-index: 12; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease); }
+.sky-layer { position: fixed; inset: 0; z-index: 10; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease); }
 .sky-layer.on { opacity: 1; }
 .sky-label {
   position: absolute; left: 0; top: 0; pointer-events: auto;
@@ -29,3 +29,43 @@ body.search-open .sky-switch, body.deep-open .sky-switch { opacity: 0; pointer-e
 @media (prefers-reduced-motion: reduce) {
   .sky-layer, .sky-label, .sky-caption { transition: none; }
 }
+
+/* ── the body card (the reveal pattern, for the sky) ───────────────── */
+.sky-card .rv-hero { max-height: 22vh; min-height: 110px; }
+.sky-portrait { position: relative; margin: 0; overflow: hidden; background: radial-gradient(120% 140% at 50% 120%, var(--sp-fog), var(--sp-deep) 70%); }
+.sky-orb { position: absolute; left: 50%; top: 50%; width: min(34%, 120px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #fff 0%, var(--sp-core) 34%, var(--sp-glow) 78%, var(--sp-deep) 100%);
+  box-shadow: 0 0 46px 6px color-mix(in srgb, var(--sp-glow) 55%, transparent); }
+.sky-position { margin: 14px 0 0; font: 12px/1.5 var(--sans); letter-spacing: .02em; color: var(--ink-2); }
+.sky-position-none { color: var(--ink-3); }
+.sky-reproject { margin: 12px 0 0; padding-left: 12px; border-left: 1px solid rgb(var(--core-rgb) / .4); font: 11.5px/1.55 var(--sans); color: var(--ink-3); }
+.sky-source { color: var(--ink-3); }
+.sky-h { margin: 22px 0 8px; font: 500 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.sky-tie { padding: 10px 0; border-top: 1px solid var(--hair); }
+.sky-tie:first-of-type { border-top: 0; }
+.sky-tie-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font: 12px var(--sans); }
+.sky-kind { color: var(--ink-3); font-size: 10.5px; letter-spacing: .06em; }
+.sky-tie-note { margin: 6px 0 0; font: 12px/1.55 var(--sans); color: var(--ink-3); }
+.sky-basis { display: inline-block; padding: 1px 7px; border: 1px solid var(--hair); border-radius: 99px; font: 10px/1.5 var(--sans); letter-spacing: .05em; color: var(--ink-3); cursor: help; }
+.sky-basis-jung { color: var(--core); border-color: rgb(var(--core-rgb) / .5); }
+.sky-reading { margin-top: 20px; padding: 14px 0 0; border-top: 1px solid var(--hair); }
+.sky-reading .sky-h { margin-top: 0; }
+.sky-source-row { margin: 8px 0; font: 11px/1.5 var(--sans); color: var(--ink-2); }
+.sky-source-row cite { color: var(--ink-3); font-style: normal; }
+.sky-card .aion-sources { margin-top: 12px; padding-top: 10px; }
+.sky-card .aion-sources blockquote p { font-size: .98rem; }
+
+/* ── culture selector ──────────────────────────────────────────────── */
+.sky-culture { position: fixed; left: 24px; top: 24px; z-index: 12; font: 11.5px/1.5 var(--sans); letter-spacing: .03em; color: var(--ink-3); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease); }
+.sky-culture.on { opacity: 1; pointer-events: auto; }
+.sky-culture label { display: grid; gap: 3px; }
+.sky-culture select { font: 12px var(--sans); color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 4px 16px 4px 0; max-width: 220px; }
+.sky-culture option { background: #0a1020; color: #e5eafa; }
+.sky-culture .sky-culture-note { margin: 6px 0 0; max-width: 30ch; color: var(--ink-3); font-size: 10.5px; line-height: 1.5; }
+@media (max-width: 760px) { .sky-culture { left: 18px; top: 16px; } }
+
+/* the quiet glyph on a family's reveal */
+.rv-sky { margin: 14px 0 0; font: 11.5px/1.6 var(--sans); letter-spacing: .02em; color: var(--ink-3); }
+.rv-sky[hidden] { display: none; }
+.rv-sky-mark { color: rgb(var(--core-rgb) / .6); margin-right: 8px; }
+.rv-sky-glyph { font-family: var(--sans); opacity: .85; }

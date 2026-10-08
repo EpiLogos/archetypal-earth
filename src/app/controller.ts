@@ -29,6 +29,8 @@ import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
 import { SkyLayer } from '../sky/layer';
 import { SkyView } from '../sky/view';
+import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
+import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
 import { skyMaxDist, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
@@ -78,6 +80,8 @@ export class Controller {
   private aionTime: TimeSnapshot | null = null;
   // the sky: a scale of the same globe, reached by the zoom gesture, by S, or by link
   private skyView: SkyView;
+  private skyCard: SkyCard;
+  private skyTies = new SkyTies();
   private skySwitch: HTMLButtonElement;
   private skyLayer: SkyLayer | null = null;
   private skyRequested = false;
@@ -100,7 +104,8 @@ export class Controller {
       onDeep: () => this.setDeep(true),
       onClose: () => this.stepBack(),
       onFamily: id => this.navigate(focusOn(this.state, { type: 'family', id })),
-    });
+      onBody: (key) => this.openBody(key),
+    }, this.skyTies);
     this.deep = new DeepSheet(root, m, {
       onClose: () => this.setDeep(false),
       onSubject: (s) => this.navigate(focusOn(this.state, s)),
@@ -131,9 +136,13 @@ export class Controller {
       onclick: () => this.toggleAion() });
     document.body.append(this.aionSwitch);
 
-    this.skyView = new SkyView(document.body, {
+    this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
-      nameOf: (key) => this.skyLayer?.data.bodies.find((b) => b.key === key)?.name ?? key,
+      nameOf: (key) => this.skyName(key),
+    });
+    this.skyCard = new SkyCard(root, {
+      onField: (t) => this.navigate(focusOn(WORLD, t)),
+      onClose: () => this.stepBack(),
     });
     this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
       onclick: () => this.toggleSky() });
@@ -498,9 +507,12 @@ export class Controller {
       this.engine.attachSky(layer);
       this.skyView.setLayer(layer);
       this.syncRig();
+      const cultures = Object.keys(data.cultures).filter((id) => this.m.cultureById.has(id)).map((id) => ({ id, name: this.m.cultureById.get(id)!.name }));
+      this.skyView.setCultures(cultures, (id) => this.setSkyCulture(id));
       document.body.classList.add('sky-ready');
       if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
       this.pendingSkyEntry = null;
+      if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
       console.warn(err);
@@ -523,9 +535,39 @@ export class Controller {
     e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
   }
 
+  /** The label for a body under the standing culture: its table name where there is one, else the default. */
+  private skyName(key: BodyKey): string {
+    const data = this.skyLayer?.data;
+    const culture = this.state.sky?.culture;
+    return (culture && data?.cultures[culture]?.[key]?.name) || data?.bodies.find((b) => b.key === key)?.name || key;
+  }
+
+  private setSkyCulture(id: string | null) {
+    const { culture: _drop, ...rest } = this.state.sky ?? {};
+    this.navigate(inSky(id ? { ...rest, culture: id } : rest), { replace: true });
+  }
+
+  /** The body card follows the state; a body without a resolved field link opens no card. */
+  private syncSkyCard() {
+    const layer = this.skyLayer;
+    const sky = this.state.sky;
+    if (!layer || !sky?.body) { this.skyCard.hide(); return; }
+    const body = layer.data.bodies.find((b) => b.key === sky.body);
+    if (!body || !canOpenCard(body, this.m)) {
+      this.skyCard.hide();
+      const { body: _b, ...rest } = sky;
+      this.navigate(inSky(rest), { replace: true });
+      return;
+    }
+    this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: `as of ${formatMoment(layer.moment)}`, culture: sky.culture });
+  }
+
   private syncSky(prev: AppState, next: AppState, first: boolean) {
     const on = !!next.sky;
     this.skyView.setActive(on, next.sky?.body ?? null);
+    this.skyView.relabel();
+    this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
+    if (on) this.syncSkyCard(); else this.skyCard.hide();
     this.skySwitch.setAttribute('aria-pressed', String(on));
     if (on && !prev.sky) {
       this.requestSky();
@@ -557,6 +599,12 @@ export class Controller {
       this.skyByGesture = true;
       this.navigate(WORLD, { replace: true });
     }
+  }
+
+  /** Open a body from outside the sky (a family's reveal, a link): the camera flies out to meet it. */
+  openBody(key: BodyKey) {
+    if (this.graphMode || this.state.history) return;
+    this.navigate(inSky({ ...(this.state.sky ?? {}), body: key }));
   }
 
   onSkyPick(key: BodyKey) {
@@ -693,7 +741,8 @@ export class Controller {
     let x = 0, y = 0;
     if (s.deep && s.view.kind !== 'world') {
       if (!narrow) x = -0.46;
-    } else if (s.view.kind === 'manifest') {
+    } else if (s.view.kind === 'manifest' || s.sky?.body) {
+      // a card stands on the right (or the bottom, on a phone): the scene gives it room
       if (narrow) y = 0.34; else x = -0.27;
     } else if (s.view.kind === 'thread') {
       y = narrow ? 0.1 : 0.1;

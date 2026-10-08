@@ -22,13 +22,14 @@ export interface Parsed {
 
 const enc = encodeURIComponent;
 
-/** `#/sky`, `#/sky/<body>`, `#/sky/birth/<local>/<lat>/<lon>`: the sky is linkable at every depth. */
+/** `#/sky`, `#/sky/<body>`, `#/sky/birth/<local>/<lat>/<lon>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. */
 const num = (n: number) => String(Number(n.toFixed(4)));
 
 export function stateToHash(s: AppState): string {
   if (s.sky) {
-    if (s.sky.birth) return `#/sky/birth/${enc(s.sky.birth.local)}/${num(s.sky.birth.lat)}/${num(s.sky.birth.lon)}${s.sky.body ? `/${enc(s.sky.body)}` : ''}`;
-    return `#/sky${s.sky.body ? `/${enc(s.sky.body)}` : ''}`;
+    const tail = `${s.sky.body ? `/${enc(s.sky.body)}` : ''}${s.sky.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
+    if (s.sky.birth) return `#/sky/birth/${enc(s.sky.birth.local)}/${num(s.sky.birth.lat)}/${num(s.sky.birth.lon)}${tail}`;
+    return `#/sky${tail}`;
   }
   if (s.history) {
     const h = s.history;
@@ -76,7 +77,8 @@ export function hashToState(hash: string, r: Resolver): Parsed {
         rest = rest.slice(4);
       } else rest = [];
     }
-    if (rest[0] && r.hasBody?.(rest[0])) sky.body = rest[0] as NonNullable<AppState['sky']>['body'];
+    if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
+    if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     return { state: { view: { kind: 'world' }, deep: false, sky } };
   }
   if (parts[0] === 'aion') {

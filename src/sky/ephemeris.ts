@@ -115,6 +115,29 @@ export class SkyEphemeris {
     return e;
   }
 
+  /**
+   * Geocentric ecliptic of date for any body but the Earth (the observer): the heliocentric vectors subtracted.
+   * This is the longitude an astronomer calls "in Gemini 14°" — tropical, of date.
+   */
+  geo(key: BodyKey, ms: number, out: SkyPoint = { lon: 0, lat: 0, r: 0 }): SkyPoint | null {
+    if (key === 'earth') return null;
+    if (key === 'moon') return this.moon(ms, out);
+    if (key === 'sun') return this.sunGeo(ms, out);
+    const b = this.helio(key, ms);
+    const e = this.helio('earth', ms);
+    if (!b || !e) return null;
+    const rad = Math.PI / 180;
+    const vec = (p: SkyPoint): [number, number, number] => [p.r * Math.cos(p.lat * rad) * Math.cos(p.lon * rad), p.r * Math.cos(p.lat * rad) * Math.sin(p.lon * rad), p.r * Math.sin(p.lat * rad)];
+    const vb = vec(b);
+    const ve = vec(e);
+    const d: [number, number, number] = [vb[0] - ve[0], vb[1] - ve[1], vb[2] - ve[2]];
+    const r = Math.hypot(d[0], d[1], d[2]);
+    out.lon = ((Math.atan2(d[1], d[0]) / rad) + 360) % 360;
+    out.lat = Math.asin(d[2] / r) / rad;
+    out.r = r;
+    return out;
+  }
+
   /** The Moon's actual geocentric path for one revolution centred on `ms`, as ecliptic samples (for its ring). */
   moonPath(ms: number, samples = 96, periodDays = 27.321661): SkyPoint[] | null {
     const half = (periodDays * 86_400_000) / 2;
