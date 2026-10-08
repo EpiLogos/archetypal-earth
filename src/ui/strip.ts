@@ -39,11 +39,15 @@ export class Strip {
     clear(this.rail);
     this.frames = [];
     const m = this.model;
+    // a borrowed family image appears once; later frames stay tonal rather than repeat it
+    const used = new Set<string>();
     occIdx.forEach((oi, i) => {
       const o = m.occ[oi];
       const fam = m.famById.get(o.familyId);
+      let img = occurrenceImage(m, o);
+      if (img && !o.image) img = used.has(img.src) ? undefined : (used.add(img.src), img);
       const f = el('button', { class: 'st-frame', type: 'button', 'aria-label': `${o.label}, ${eraShort(o.yearDisplay, 40)}`, onclick: () => this.h.onSelect(i) }, [
-        plate(occurrenceImage(m, o), { thumb: true, className: 'st-plate', palette: fam?.palette, alt: '' }),
+        plate(img, { thumb: true, className: 'st-plate', palette: fam?.palette, alt: '' }),
         el('span', { class: 'st-year', text: eraShort(o.yearDisplay, 13) }),
       ]);
       this.rail.append(f);

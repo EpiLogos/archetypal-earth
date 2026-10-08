@@ -191,7 +191,14 @@ export function search(idx: SearchIndex, query: string, limit = 7): SearchResult
       total += sc;
     }
     if (!ok) continue;
-    scored.push(toResult(e, total / toks.length + e.bias));
+    // the whole phrase matters more than its words: "great mother" is the archetype
+    let phrase = 0;
+    if (toks.length > 1) {
+      if (e.names.includes(q)) phrase = 40;
+      else if (e.aliases.includes(q)) phrase = 24;
+      else if (e.names.some((n) => n.startsWith(q))) phrase = 16;
+    }
+    scored.push(toResult(e, total / toks.length + e.bias + phrase));
   }
   const per = new Map<string, number>();
   const period = parsePeriod(query, m.scale);

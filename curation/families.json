@@ -1,0 +1,558 @@
+{
+ "_note": "Family curation. `merges` folds vault instance_of targets that have no note into an existing family. `families.<slug>` may override name, oneLine, body (plain site prose, never Jung's words), spectrum.position, palette.",
+ "merges": {
+  "quaternion": "quaternity",
+  "cauda-pavonis": "peacock",
+  "self": "god-image"
+ },
+ "families": {
+  "anima-figure": {
+   "name": "Anima figure",
+   "oneLine": "The woman behind a man's moods and projections: muse, siren, unknown guide."
+  },
+  "anima-mundi": {
+   "name": "Anima mundi",
+   "oneLine": "The world-soul pictured as a guiding woman between God and nature."
+  },
+  "anthropos": {
+   "name": "Anthropos",
+   "oneLine": "The primordial cosmic man in whom the divine world-principle appears."
+  },
+  "antichrist": {
+   "name": "Antichrist",
+   "oneLine": "The adversary who follows Christ as a shadow follows the body."
+  },
+  "ape": {
+   "name": "Ape",
+   "oneLine": "The divine, archaic and diabolical ape: instinct that mimics the spirit."
+  },
+  "arrow": {
+   "name": "Arrow",
+   "oneLine": "The wound shot from outside that proves to come from within."
+  },
+  "ascent-descent": {
+   "name": "Ascent and descent",
+   "oneLine": "The work as a cycle: spirit rises to fetch the seed, then falls to fertilize the earth."
+  },
+  "ass": {
+   "name": "Ass",
+   "oneLine": "The ass as bearer of mana: humble beast, sacred burden."
+  },
+  "atman-brahman": {
+   "name": "Atman and Brahman",
+   "oneLine": "The Upanishadic self as light and cosmic ground; the golden germ."
+  },
+  "bird": {
+   "name": "Bird",
+   "oneLine": "Winged carriers of spirit and thought, messengers between worlds."
+  },
+  "cave": {
+   "name": "Cave",
+   "oneLine": "The dark enclosure of birth, initiation and rebirth, where the hidden is kept."
+  },
+  "chakra": {
+   "name": "Chakra",
+   "oneLine": "The yogic body-map of wheel and lotus centres, climbing from root to crown."
+  },
+  "chalice": {
+   "name": "Chalice",
+   "oneLine": "The vessel that heals, sanctifies and divines; the hollowed horn."
+  },
+  "christ-figure": {
+   "name": "Christ figure",
+   "oneLine": "Christ as ideal, mediator and shepherd: the figure of wholeness in the Christian world."
+  },
+  "churinga": {
+   "name": "Churinga",
+   "oneLine": "Decorated sacred stones of Central Australian tribes, bearers of ancestral soul."
+  },
+  "circle": {
+   "name": "Circle",
+   "oneLine": "The closed round form: wholeness without beginning or end."
+  },
+  "circulation-of-light": {
+   "name": "Circulation of light",
+   "oneLine": "Rotation about a centre as the movement of the psyche and of light."
+  },
+  "coniunctio": {
+   "name": "Coniunctio",
+   "oneLine": "The union of opposites: king and queen, sun and moon, conscious and unconscious."
+  },
+  "corn-god": {
+   "name": "Corn god",
+   "oneLine": "The god who is food: the grain buried, sprouting and eaten."
+  },
+  "cross": {
+   "name": "Cross",
+   "oneLine": "Four directions met at a centre: instrument of suffering and sign of the quaternity."
+  },
+  "crown": {
+   "name": "Crown",
+   "oneLine": "The circle of rule and radiance set on the head of the transformed."
+  },
+  "demiurge": {
+   "name": "Demiurge",
+   "oneLine": "The ignorant or flawed maker-god of the Gnostic cosmos."
+  },
+  "devil": {
+   "name": "Devil",
+   "oneLine": "The adversary as intellect: Mephisto, the shadow side of the sacred."
+  },
+  "dismemberment": {
+   "name": "Dismemberment",
+   "oneLine": "The god torn apart and scattered so that he can be gathered anew."
+  },
+  "divine-child": {
+   "name": "Divine child",
+   "oneLine": "The newborn god, threatened at birth and strangely invincible."
+  },
+  "divine-pair": {
+   "name": "Divine pair",
+   "oneLine": "God and goddess as one paired form: majestic father and majestic mother."
+  },
+  "dog": {
+   "name": "Dog",
+   "oneLine": "Loyal companion and guardian of the threshold, hound of the underworld."
+  },
+  "double": {
+   "name": "Double",
+   "oneLine": "The paired mortal and immortal twin: the Dioscuri, the second bird in the tree."
+  },
+  "dove": {
+   "name": "Dove",
+   "oneLine": "The white bird of the whitening: the pneuma that descends and purifies."
+  },
+  "dragon": {
+   "name": "Dragon",
+   "oneLine": "The chaos-monster set against the highest god, and the hero's first adversary."
+  },
+  "dual-mother": {
+   "name": "Dual mother",
+   "oneLine": "Being born of two mothers, one human and one divine."
+  },
+  "eagle": {
+   "name": "Eagle",
+   "oneLine": "The bird of spirit and sun, the high counterpart of the serpent."
+  },
+  "eye": {
+   "name": "Eye",
+   "oneLine": "The eye as seeing and as womb: the little image in the pupil."
+  },
+  "filius-philosophorum": {
+   "name": "Filius philosophorum",
+   "oneLine": "The alchemists' son: a hermaphroditic child born of the prima materia."
+  },
+  "fire": {
+   "name": "Fire",
+   "oneLine": "The transforming flame of the work, at once purifying and consuming."
+  },
+  "fish": {
+   "name": "Fish",
+   "oneLine": "Redeemer, soul and food: Oannes, Ichthys, the double fish of the zodiac."
+  },
+  "furnace": {
+   "name": "Furnace",
+   "oneLine": "The athanor, the fiery kiln where the matter is tried and changed."
+  },
+  "garden": {
+   "name": "Garden",
+   "oneLine": "The walled green space of the work: paradise recovered, where the sun rises."
+  },
+  "giant": {
+   "name": "Giant",
+   "oneLine": "The oversized primordial being: ogre, titan, threat to the child-hero."
+  },
+  "god-image": {
+   "name": "God image",
+   "oneLine": "The inherited set of images in which the divine is pictured."
+  },
+  "golden-flower": {
+   "name": "Golden flower",
+   "oneLine": "The solar essence blooming as a flower: Chinese golden flower, Western rose."
+  },
+  "grail": {
+   "name": "Grail",
+   "oneLine": "The shining vessel and castle at the end of the quest."
+  },
+  "head": {
+   "name": "Head",
+   "oneLine": "The head as seat of mind and omega element: the sons of the Golden Head."
+  },
+  "heart": {
+   "name": "Heart",
+   "oneLine": "The bodily centre and the deep heart of the mystics."
+  },
+  "helen-of-troy": {
+   "name": "Helen of Troy",
+   "oneLine": "The ever-returning beauty: cause of war, companion of Simon Magus, Faust's Helen."
+  },
+  "hermaphrodite": {
+   "name": "Hermaphrodite",
+   "oneLine": "Primal bisexual wholeness: Plato's original man, the alchemical double being."
+  },
+  "holy-ghost": {
+   "name": "Holy Ghost",
+   "oneLine": "The third person of the Trinity, descending into matter in alchemical thought."
+  },
+  "homunculus": {
+   "name": "Homunculus",
+   "oneLine": "The little man of the alchemists, formed in the vessel."
+  },
+  "horn": {
+   "name": "Horn",
+   "oneLine": "The single pointed outgrowth that heals: unicorn, rhinoceros, antelope."
+  },
+  "horse": {
+   "name": "Horse",
+   "oneLine": "The spirit-animal that talks and knows: the unconscious as swift, miraculous beast."
+  },
+  "i-ching-hexagram": {
+   "name": "I Ching hexagram",
+   "oneLine": "The line-figures of the I Ching, from the river-map of the dragon's magic signs."
+  },
+  "island": {
+   "name": "Island",
+   "oneLine": "The enclosed land in the sea: castle-rock and paradise as refuge."
+  },
+  "khidr": {
+   "name": "Khidr",
+   "oneLine": "The ever-living guide of Islamic tradition who teaches at the meeting of the seas."
+  },
+  "king-queen-pair": {
+   "name": "King and queen",
+   "oneLine": "The royal pair of the work: sun and moon, brother and sister in the bath."
+  },
+  "lamb": {
+   "name": "Lamb",
+   "oneLine": "The sacrificial white animal and its Christian sublimation, the Lamb of God."
+  },
+  "lamia": {
+   "name": "Lamia",
+   "oneLine": "The woman-monster who takes children and lovers."
+  },
+  "lapis": {
+   "name": "Lapis",
+   "oneLine": "The stone that is no stone: end of the work, body, spirit and medicine at once."
+  },
+  "lingam-yoni": {
+   "name": "Lingam and yoni",
+   "oneLine": "Union as image: the standing stone in its base, Shiva and Shakti."
+  },
+  "lion": {
+   "name": "Lion",
+   "oneLine": "The royal, devouring beast of the alchemists: Mercurius in his volatile form."
+  },
+  "lion-headed-god": {
+   "name": "Lion-headed god",
+   "oneLine": "The leontocephalic figure of unending time: Mithraic Aion, the lion-faced demiurge."
+  },
+  "lotus": {
+   "name": "Lotus",
+   "oneLine": "The seated flower in which gods are born and enthroned."
+  },
+  "lumen-naturae": {
+   "name": "Lumen naturae",
+   "oneLine": "The innate light of nature, a second source of knowledge beside revelation."
+  },
+  "magical-companion": {
+   "name": "Magical companion",
+   "oneLine": "The unrecognized fellow-traveller who joins the quester on the road."
+  },
+  "magician": {
+   "name": "Magician",
+   "oneLine": "The old master of dream and fairytale, in white and in black."
+  },
+  "magnet": {
+   "name": "Magnet",
+   "oneLine": "The attractive stone: an invisible pull toward the centre."
+  },
+  "maiden": {
+   "name": "Maiden",
+   "oneLine": "The young woman of dream and myth: helper, bride, bait, soul in bloom."
+  },
+  "mandala": {
+   "name": "Mandala",
+   "oneLine": "Circles and centred quaternary figures that arise spontaneously: pictures of wholeness."
+  },
+  "melusina": {
+   "name": "Melusina",
+   "oneLine": "The half-woman, half-serpent water-spirit of Lusignan."
+  },
+  "mercurius": {
+   "name": "Mercurius",
+   "oneLine": "The double-natured spirit of quicksilver: thief's god, guide and trickster."
+  },
+  "merkabah": {
+   "name": "Merkabah",
+   "oneLine": "Ezekiel's throne-chariot: four living creatures, four wheels, the glory enthroned."
+  },
+  "monster": {
+   "name": "Monster",
+   "oneLine": "The many-membered composite beast of the prima materia."
+  },
+  "moon": {
+   "name": "Moon",
+   "oneLine": "The night light that holds the dead and the seed."
+  },
+  "moth": {
+   "name": "Moth",
+   "oneLine": "The soul-creature drawn fatally to the flame."
+  },
+  "mother-goddess": {
+   "name": "Mother goddess",
+   "oneLine": "Goddess, Mother of God, Virgin, Sophia: the many figures of the mother."
+  },
+  "mothers-of-faust": {
+   "name": "Mothers of Faust",
+   "oneLine": "The formless, generative realm of the Mothers, reached by a key in Faust II."
+  },
+  "mountain": {
+   "name": "Mountain",
+   "oneLine": "The high place of ascent and vision, the axis of the world."
+  },
+  "night-sea-journey": {
+   "name": "Night sea journey",
+   "oneLine": "The hero's descent into the monster's belly and the deep, to rise renewed."
+  },
+  "nigredo": {
+   "name": "Nigredo",
+   "oneLine": "The blackening: first stage of the work, putrefaction and melancholy."
+  },
+  "nixie": {
+   "name": "Nixie",
+   "oneLine": "The half-fish water-maiden of the fisherman's net: siren, nymph, lamia."
+  },
+  "paradise": {
+   "name": "Paradise",
+   "oneLine": "The enclosed garden of origin and end, with the tree of life."
+  },
+  "peacock": {
+   "name": "Peacock",
+   "oneLine": "The spread tail of all colours, seen just before the whitening."
+  },
+  "pearl": {
+   "name": "Pearl",
+   "oneLine": "The treasure at the bottom of the water, guarded by the dragon."
+  },
+  "phallus": {
+   "name": "Phallus",
+   "oneLine": "The ithyphallic old man and the generative power: Hermes Kyllenios."
+  },
+  "philosophers-egg": {
+   "name": "Philosophers' egg",
+   "oneLine": "The sealed vessel as egg: the germ of the stone."
+  },
+  "phoenix": {
+   "name": "Phoenix",
+   "oneLine": "The fire-bird that renews itself from its own ashes."
+  },
+  "planetary-gods": {
+   "name": "Planetary gods",
+   "oneLine": "The seven planetary deities of ascent-rites, of Hades and of the metals."
+  },
+  "plough": {
+   "name": "Plough",
+   "oneLine": "The tool that makes the earth fruitful, echoing the marriage act."
+  },
+  "point": {
+   "name": "Point",
+   "oneLine": "The dimensionless centre from which the circle is drawn."
+  },
+  "prima-materia": {
+   "name": "Prima materia",
+   "oneLine": "The initial stuff of the work: dragon, tail-eater, dark chaos."
+  },
+  "quaternity": {
+   "name": "Quaternity",
+   "oneLine": "Four-ness of the whole: four functions round a centre, four gates, four evangelists."
+  },
+  "raven": {
+   "name": "Raven",
+   "oneLine": "The black bird of the blackening, messenger of the dark stage of the work."
+  },
+  "rebis": {
+   "name": "Rebis",
+   "oneLine": "The two-bodied child of the coniunctio, half male and half female."
+  },
+  "resurrection": {
+   "name": "Resurrection",
+   "oneLine": "The dead awakened: the king reborn from the dungeon."
+  },
+  "rose": {
+   "name": "Rose",
+   "oneLine": "The rose as mandala-centre and the philosophers' rose garden."
+  },
+  "rotundum": {
+   "name": "Rotundum",
+   "oneLine": "The round thing of alchemy, the perfect sphere of the work."
+  },
+  "rubedo": {
+   "name": "Rubedo",
+   "oneLine": "The reddening: last stage of the work, the dawn after the whitening."
+  },
+  "sacrifice": {
+   "name": "Sacrifice",
+   "oneLine": "The act of transformation in which priest and victim are one."
+  },
+  "salamander": {
+   "name": "Salamander",
+   "oneLine": "The fire-dwelling lizard that lives in the flame and is not consumed."
+  },
+  "salt": {
+   "name": "Salt",
+   "oneLine": "Salt as arcane substance: a cosmic, lunar and feminine principle in alchemy."
+  },
+  "scarab": {
+   "name": "Scarab",
+   "oneLine": "The dung-beetle as emblem of self-generation, pushing its ball from the earth."
+  },
+  "senex-figure": {
+   "name": "Senex",
+   "oneLine": "The old man of dream and myth: guide, teacher, bearer of meaning."
+  },
+  "serpent": {
+   "name": "Serpent",
+   "oneLine": "Circle-maker, earth-power, mercurial spirit: the snake in its many valences."
+  },
+  "shiva": {
+   "name": "Shiva",
+   "oneLine": "The Indian god with his Shakti: the Tantric pair in continuous union."
+  },
+  "sol-niger": {
+   "name": "Sol niger",
+   "oneLine": "The blackened sun: the centre darkened at the start of the work."
+  },
+  "solificatio": {
+   "name": "Solificatio",
+   "oneLine": "Becoming sun: the crowned initiate, the face that shines like the sun."
+  },
+  "sophia": {
+   "name": "Sophia",
+   "oneLine": "Divine Wisdom personified as feminine, bride and teacher of the art."
+  },
+  "soul-bird": {
+   "name": "Soul bird",
+   "oneLine": "The soul as a small bird, led out of the grave by the guide of souls."
+  },
+  "spark": {
+   "name": "Spark",
+   "oneLine": "The scintilla: a small light hidden in the dark of matter."
+  },
+  "stag": {
+   "name": "Stag",
+   "oneLine": "The fleeing, uncatchable deer of the alchemists, paired with the unicorn."
+  },
+  "star": {
+   "name": "Star",
+   "oneLine": "Rays from a centre: pentagram, many-rayed star, star-cross."
+  },
+  "stone": {
+   "name": "Stone",
+   "oneLine": "The stone that kills and quickens, found on the dunghill and crowned as king."
+  },
+  "sulphur": {
+   "name": "Sulphur",
+   "oneLine": "Sulphur, the fiery active principle of the metals in alchemy."
+  },
+  "sun": {
+   "name": "Sun",
+   "oneLine": "Source of life and wholeness: Helios, the shining face, the red ball, the gold."
+  },
+  "sun-hero": {
+   "name": "Sun hero",
+   "oneLine": "The solar hero who is swallowed and born again with each day."
+  },
+  "swan": {
+   "name": "Swan",
+   "oneLine": "The white water-bird of the soul, between earth and sky."
+  },
+  "swastika": {
+   "name": "Swastika",
+   "oneLine": "The gamma-cross in right- and left-hand rotation, alone and inside mandalas."
+  },
+  "tao": {
+   "name": "Tao",
+   "oneLine": "The Way: the central light between the eyes, the unity of life and consciousness."
+  },
+  "tauroctony": {
+   "name": "Tauroctony",
+   "oneLine": "The Mithraic scene of the god kneeling on the bull, sword at its shoulder."
+  },
+  "temenos": {
+   "name": "Temenos",
+   "oneLine": "The delimited sacred space: snake-circle, city wall, church precinct, cloister garden."
+  },
+  "tetramorph": {
+   "name": "Tetramorph",
+   "oneLine": "The four creatures of man, lion, ox and eagle about the throne."
+  },
+  "toad": {
+   "name": "Toad",
+   "oneLine": "The chthonic, devouring creature of damp and dark."
+  },
+  "treasure": {
+   "name": "Treasure",
+   "oneLine": "The precious thing guarded in the dark by snake or dragon."
+  },
+  "tree": {
+   "name": "Tree",
+   "oneLine": "The cosmic and philosophical tree: axis, shelter and body of the work."
+  },
+  "trickster-figure": {
+   "name": "Trickster figure",
+   "oneLine": "The shape-shifting fool of myth: culture-bringer, blunderer and scapegoat."
+  },
+  "trinity": {
+   "name": "Trinity",
+   "oneLine": "Three in one: the stone trinus et unus, king, son and spirit."
+  },
+  "unicorn": {
+   "name": "Unicorn",
+   "oneLine": "The wild, chaste horned beast, where Christ and Mercurius meet in one image."
+  },
+  "uroboros": {
+   "name": "Uroboros",
+   "oneLine": "The serpent or dragon devouring its own tail, closing the circle."
+  },
+  "venus": {
+   "name": "Venus",
+   "oneLine": "Queen Venus: heavenly beauty set against terrible Proserpina."
+  },
+  "vessel": {
+   "name": "Vessel",
+   "oneLine": "The sealed glass vessel of the work: retort, pelican, womb."
+  },
+  "virgin": {
+   "name": "Virgin",
+   "oneLine": "The feminine carrier of the work in its virginal aspect: Mary, virgo terrae."
+  },
+  "water": {
+   "name": "Water",
+   "oneLine": "Descent-water: the dark lake, the deep well, the underworldly stream."
+  },
+  "well-spring": {
+   "name": "Well and spring",
+   "oneLine": "The life-water and its source: fountain, spring, aqua nostra."
+  },
+  "wind": {
+   "name": "Wind",
+   "oneLine": "The fertilizing breath: the West Wind, father of the winds, spirit that conceives."
+  },
+  "world-clock": {
+   "name": "World clock",
+   "oneLine": "A clock-like mandala with a dark centre and turning rings."
+  },
+  "world-wheel": {
+   "name": "World wheel",
+   "oneLine": "The wheel of existence with the cock, snake and pig at its hub."
+  },
+  "worm": {
+   "name": "Worm",
+   "oneLine": "The lowest, first form of renewal, from which the phoenix rises."
+  },
+  "yantra": {
+   "name": "Yantra",
+   "oneLine": "Geometric instrument of ritual: triangles, lotuses and circles round a point."
+  }
+ }
+}

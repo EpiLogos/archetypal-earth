@@ -71,13 +71,17 @@ export class Floats {
 
   set(items: FloatItem[], narrow: boolean) {
     this.clear();
-    const maxW = narrow ? 112 : 214;
-    const maxH = narrow ? 140 : 262;
+    // scale with the viewport so five plates still fit a small window
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
+    const vh = typeof window !== 'undefined' ? window.innerHeight : 900;
+    const k = Math.max(0.56, Math.min(1, Math.min(vw / 1440, vh / 900)));
+    const maxW = narrow ? 112 : Math.round(214 * k);
+    const maxH = narrow ? 140 : Math.round(262 * k);
     const now = performance.now();
     items.forEach((item, idx) => {
       const hasImg = !!item.img;
       const ar = item.img && item.img.width && item.img.height ? item.img.width / item.img.height : 1.5;
-      let w = hasImg ? maxW : narrow ? 118 : 156;
+      let w = hasImg ? maxW : narrow ? 118 : Math.round(156 * k);
       let h = w / ar;
       if (h > maxH) { h = maxH; w = h * ar; }
       const frame = plate(item.img, { thumb: true, eager: true, palette: item.palette, className: 'float-plate', credit: true, alt: item.label });
@@ -150,7 +154,7 @@ export class Floats {
     this.live.forEach((l, i) => clampT(l, targets[i]));
 
     const obs = this.obstacles();
-    for (let it = 0; it < 8; it++) {
+    for (let it = 0; it < 24; it++) {
       for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
           const a = this.live[i], b = this.live[j];
@@ -175,6 +179,16 @@ export class Floats {
       }
     }
 
+    // whatever relaxation could not separate gives way to the earlier plate
+    const yields: boolean[] = new Array(n).fill(false);
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < i; j++) {
+        if (yields[j]) continue;
+        const a = this.live[i], b = this.live[j], ta = targets[i], tb = targets[j];
+        if (Math.abs(ta.cx - tb.cx) < (a.w + b.w) / 2 + 6 && Math.abs(ta.cy - tb.cy) < (a.h + b.h) / 2 + 4) { yields[i] = true; break; }
+      }
+    }
+
     const k = 1 - Math.exp(-dt * 5);
     this.live.forEach((l, i) => {
       const t = targets[i];
@@ -182,7 +196,7 @@ export class Floats {
       if (!l.placed) { l.x = t.cx; l.y = t.cy; l.placed = true; } else { l.x += (t.cx - l.x) * k; l.y += (t.cy - l.y) * k; }
       const appear = Math.max(0, Math.min(1, (now - l.born) / 1100));
       const e = appear * appear * (3 - 2 * appear);
-      const op = p.vis * e;
+      const op = yields[i] ? 0 : p.vis * e;
       l.node.style.opacity = String(op);
       l.node.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
       l.node.style.transform = `translate3d(${l.x - l.w / 2}px, ${l.y - l.h / 2 + (1 - e) * 10}px, 0)`;

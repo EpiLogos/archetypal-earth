@@ -1,0 +1,2541 @@
+{
+ "_note": "Hand-curated place table. Keys are normalised (lowercase, no diacritics/apostrophes, punctuation->space). Matching: word-boundary substring on the normalised vault place string; precision tier (place > region) first, then longest key, then earliest. `jit` = max deterministic jitter in degrees (default 0.08 place / 0.5 region).",
+ "places": {
+  "1925 seminar": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "abbey of saint denis": {
+   "lat": 48.9356,
+   "lon": 2.3539,
+   "precision": "place"
+  },
+  "acropolis": {
+   "lat": 37.9838,
+   "lon": 23.7275,
+   "precision": "place",
+   "jit": 0.06
+  },
+  "africa": {
+   "lat": 3,
+   "lon": 22,
+   "precision": "region",
+   "jit": 8
+  },
+  "akhmim": {
+   "lat": 26.5614,
+   "lon": 31.7461,
+   "precision": "place"
+  },
+  "alaska": {
+   "lat": 64,
+   "lon": -150,
+   "precision": "region",
+   "jit": 3
+  },
+  "alchemical collection": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "aldine": {
+   "lat": 45.4408,
+   "lon": 12.3155,
+   "precision": "place"
+  },
+  "aldus manutius": {
+   "lat": 45.4408,
+   "lon": 12.3155,
+   "precision": "place"
+  },
+  "alexandria": {
+   "lat": 31.2001,
+   "lon": 29.9187,
+   "precision": "place",
+   "jit": 0.08
+  },
+  "alexandria egypt": {
+   "lat": 31.2001,
+   "lon": 29.9187,
+   "precision": "place",
+   "jit": 0.08
+  },
+  "alexandria gnosis": {
+   "lat": 31.2001,
+   "lon": 29.9187,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "alexandrian": {
+   "lat": 31.2001,
+   "lon": 29.9187,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "alpine glacier": {
+   "lat": 46.55,
+   "lon": 8.2,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "alsace": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "place"
+  },
+  "alte pinakothek": {
+   "lat": 48.1426,
+   "lon": 11.5798,
+   "precision": "place"
+  },
+  "amarna": {
+   "lat": 27.6459,
+   "lon": 30.9007,
+   "precision": "place"
+  },
+  "amente": {
+   "lat": 25.7,
+   "lon": 32.6,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "angkor wat": {
+   "lat": 13.4125,
+   "lon": 103.867,
+   "precision": "place"
+  },
+  "antioch": {
+   "lat": 36.2,
+   "lon": 36.16,
+   "precision": "place"
+  },
+  "antwerp": {
+   "lat": 51.2194,
+   "lon": 4.4025,
+   "precision": "place"
+  },
+  "arabia": {
+   "lat": 24,
+   "lon": 45,
+   "precision": "region",
+   "jit": 3
+  },
+  "arabia felix": {
+   "lat": 15.35,
+   "lon": 44.2,
+   "precision": "region",
+   "jit": 1
+  },
+  "arabic": {
+   "lat": 33.3,
+   "lon": 44.4,
+   "precision": "region",
+   "jit": 3
+  },
+  "arabic style": {
+   "lat": 33.3,
+   "lon": 44.4,
+   "precision": "region",
+   "jit": 3
+  },
+  "argos": {
+   "lat": 37.6336,
+   "lon": 22.73,
+   "precision": "place"
+  },
+  "aricia": {
+   "lat": 41.7167,
+   "lon": 12.7,
+   "precision": "place"
+  },
+  "arizona": {
+   "lat": 34.3,
+   "lon": -111.7,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "ars chemica": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "artis auriferae": {
+   "lat": 47.5596,
+   "lon": 7.5886,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "asia minor": {
+   "lat": 39,
+   "lon": 32,
+   "precision": "region",
+   "jit": 2
+  },
+  "assyria": {
+   "lat": 35.5,
+   "lon": 43.2,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "aswan": {
+   "lat": 24.0889,
+   "lon": 32.8998,
+   "precision": "place"
+  },
+  "athens": {
+   "lat": 37.9838,
+   "lon": 23.7275,
+   "precision": "place",
+   "jit": 0.06
+  },
+  "attica": {
+   "lat": 38,
+   "lon": 23.8,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "augsburg": {
+   "lat": 48.3705,
+   "lon": 10.8978,
+   "precision": "place"
+  },
+  "aureum vellus": {
+   "lat": 47.48,
+   "lon": 9.49,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "australia": {
+   "lat": -25,
+   "lon": 134,
+   "precision": "region",
+   "jit": 3
+  },
+  "austria": {
+   "lat": 47.5,
+   "lon": 14.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "autun": {
+   "lat": 46.95,
+   "lon": 4.3,
+   "precision": "place"
+  },
+  "avignon": {
+   "lat": 43.9493,
+   "lon": 4.8055,
+   "precision": "place"
+  },
+  "ayodhya": {
+   "lat": 26.7922,
+   "lon": 82.1998,
+   "precision": "place"
+  },
+  "aztec": {
+   "lat": 23.6,
+   "lon": -102.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "babylon": {
+   "lat": 32.5363,
+   "lon": 44.4275,
+   "precision": "place"
+  },
+  "babylonia": {
+   "lat": 32.5,
+   "lon": 44.4,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "babylonian": {
+   "lat": 32.5,
+   "lon": 44.4,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "baden wurttemberg": {
+   "lat": 48.6,
+   "lon": 9,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "baghdad": {
+   "lat": 33.3152,
+   "lon": 44.3661,
+   "precision": "place"
+  },
+  "basel": {
+   "lat": 47.5596,
+   "lon": 7.5886,
+   "precision": "place",
+   "jit": 0.08
+  },
+  "basel universitatsbibliothek": {
+   "lat": 47.5596,
+   "lon": 7.5886,
+   "precision": "place",
+   "jit": 0.08
+  },
+  "basutoland": {
+   "lat": -29.6,
+   "lon": 28.2,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "bavaria": {
+   "lat": 48.9,
+   "lon": 11.4,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "bayerische staatsbibliothek": {
+   "lat": 48.1426,
+   "lon": 11.5798,
+   "precision": "place"
+  },
+  "bayerische staatsgemaldesammlungen": {
+   "lat": 48.1426,
+   "lon": 11.5798,
+   "precision": "place"
+  },
+  "bayreuth": {
+   "lat": 49.9427,
+   "lon": 11.5761,
+   "precision": "place"
+  },
+  "beauvais": {
+   "lat": 49.43,
+   "lon": 2.0833,
+   "precision": "place"
+  },
+  "berlin": {
+   "lat": 52.52,
+   "lon": 13.405,
+   "precision": "place"
+  },
+  "bern": {
+   "lat": 46.948,
+   "lon": 7.4474,
+   "precision": "place"
+  },
+  "berry": {
+   "lat": 47,
+   "lon": 2.4,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "bhutia busty": {
+   "lat": 27.04,
+   "lon": 88.26,
+   "precision": "place"
+  },
+  "biblioteca marciana": {
+   "lat": 45.4408,
+   "lon": 12.3155,
+   "precision": "place"
+  },
+  "bingen": {
+   "lat": 49.9667,
+   "lon": 7.9,
+   "precision": "place"
+  },
+  "birs river cave": {
+   "lat": 47.495,
+   "lon": 7.6,
+   "precision": "place"
+  },
+  "boeotia": {
+   "lat": 38.3195,
+   "lon": 23.3178,
+   "precision": "place"
+  },
+  "bollingen": {
+   "lat": 47.2,
+   "lon": 8.93,
+   "precision": "place"
+  },
+  "bologna": {
+   "lat": 44.4949,
+   "lon": 11.3426,
+   "precision": "place"
+  },
+  "bostra": {
+   "lat": 32.52,
+   "lon": 36.48,
+   "precision": "place"
+  },
+  "bridlington": {
+   "lat": 54.0831,
+   "lon": -0.1923,
+   "precision": "place"
+  },
+  "britain": {
+   "lat": 52.5,
+   "lon": -1.5,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "british museum": {
+   "lat": 51.5074,
+   "lon": -0.1278,
+   "precision": "place"
+  },
+  "bruges": {
+   "lat": 51.2093,
+   "lon": 3.2247,
+   "precision": "place"
+  },
+  "buda": {
+   "lat": 47.4979,
+   "lon": 19.0402,
+   "precision": "place"
+  },
+  "bundahish": {
+   "lat": 32,
+   "lon": 53,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "burgaschi": {
+   "lat": 47.17,
+   "lon": 7.68,
+   "precision": "place"
+  },
+  "burgaschi lake": {
+   "lat": 47.17,
+   "lon": 7.68,
+   "precision": "place"
+  },
+  "burghoelzli": {
+   "lat": 47.3547,
+   "lon": 8.7,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "burgholzli": {
+   "lat": 47.3547,
+   "lon": 8.7,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "burgholzli clinic": {
+   "lat": 47.3547,
+   "lon": 8.7,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "byblos": {
+   "lat": 34.1208,
+   "lon": 35.6511,
+   "precision": "place"
+  },
+  "caesarea": {
+   "lat": 32.5,
+   "lon": 34.9,
+   "precision": "place"
+  },
+  "caesarea cappadocia": {
+   "lat": 38.7,
+   "lon": 35.5,
+   "precision": "place"
+  },
+  "cairo": {
+   "lat": 30.0444,
+   "lon": 31.2357,
+   "precision": "place"
+  },
+  "calabria": {
+   "lat": 39,
+   "lon": 16.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "campania": {
+   "lat": 40.9,
+   "lon": 14.5,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "canton bern": {
+   "lat": 46.9,
+   "lon": 7.45,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "capitol": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "cappadocia": {
+   "lat": 38.6,
+   "lon": 34.8,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "carcassonne": {
+   "lat": 43.213,
+   "lon": 2.3491,
+   "precision": "place"
+  },
+  "carinthia": {
+   "lat": 46.75,
+   "lon": 13.9,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "carthage": {
+   "lat": 36.8528,
+   "lon": 10.3233,
+   "precision": "place"
+  },
+  "castile": {
+   "lat": 41.5,
+   "lon": -4.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "catalonia": {
+   "lat": 41.8,
+   "lon": 1.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "central australia": {
+   "lat": -23.7,
+   "lon": 133.9,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "chalis": {
+   "lat": 49.1356,
+   "lon": 2.7225,
+   "precision": "place"
+  },
+  "cherokee country": {
+   "lat": 35.5,
+   "lon": -83.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "chimbote": {
+   "lat": -9.0745,
+   "lon": -78.5936,
+   "precision": "place"
+  },
+  "china": {
+   "lat": 35,
+   "lon": 105,
+   "precision": "region",
+   "jit": 3
+  },
+  "chinese": {
+   "lat": 35,
+   "lon": 105,
+   "precision": "region",
+   "jit": 3
+  },
+  "codex vossianus": {
+   "lat": 52.1601,
+   "lon": 4.497,
+   "precision": "place"
+  },
+  "cologne": {
+   "lat": 50.9375,
+   "lon": 6.9603,
+   "precision": "place"
+  },
+  "colonus": {
+   "lat": 37.99,
+   "lon": 23.69,
+   "precision": "place"
+  },
+  "colosseum": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "constantinople": {
+   "lat": 41.0082,
+   "lon": 28.9784,
+   "precision": "place"
+  },
+  "coptic": {
+   "lat": 26.8,
+   "lon": 30.8,
+   "precision": "region",
+   "jit": 2
+  },
+  "crete": {
+   "lat": 35.2,
+   "lon": 24.9,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "ctesiphon": {
+   "lat": 33.0933,
+   "lon": 44.5806,
+   "precision": "place"
+  },
+  "cumberland": {
+   "lat": 54.6,
+   "lon": -3.1,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "cyprus": {
+   "lat": 35,
+   "lon": 33.2,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "cyrene": {
+   "lat": 32.82,
+   "lon": 21.86,
+   "precision": "place"
+  },
+  "damascus": {
+   "lat": 33.5138,
+   "lon": 36.2765,
+   "precision": "place"
+  },
+  "darjeeling": {
+   "lat": 27.04,
+   "lon": 88.26,
+   "precision": "place"
+  },
+  "deir el bahari": {
+   "lat": 25.7384,
+   "lon": 32.6066,
+   "precision": "place"
+  },
+  "dendera": {
+   "lat": 26.1416,
+   "lon": 32.6702,
+   "precision": "place"
+  },
+  "denderah": {
+   "lat": 26.1416,
+   "lon": 32.6702,
+   "precision": "place"
+  },
+  "dendereh": {
+   "lat": 26.1416,
+   "lon": 32.6702,
+   "precision": "place"
+  },
+  "denmark": {
+   "lat": 56,
+   "lon": 10,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "der el medina": {
+   "lat": 25.7273,
+   "lon": 32.6024,
+   "precision": "place"
+  },
+  "dinkelsbuhl": {
+   "lat": 49.07,
+   "lon": 10.32,
+   "precision": "place"
+  },
+  "dream told to jung": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "dreamer": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "dresden": {
+   "lat": 51.0504,
+   "lon": 13.7373,
+   "precision": "place"
+  },
+  "dulmen": {
+   "lat": 51.8333,
+   "lon": 7.2833,
+   "precision": "place"
+  },
+  "east siberia": {
+   "lat": 58,
+   "lon": 118,
+   "precision": "region",
+   "jit": 3
+  },
+  "edessa": {
+   "lat": 37.1591,
+   "lon": 38.7969,
+   "precision": "place"
+  },
+  "egypt": {
+   "lat": 26.8,
+   "lon": 30.8,
+   "precision": "region",
+   "jit": 2
+  },
+  "eleusis": {
+   "lat": 38.0417,
+   "lon": 23.54,
+   "precision": "place"
+  },
+  "emmaus": {
+   "lat": 31.84,
+   "lon": 34.99,
+   "precision": "place"
+  },
+  "engadine": {
+   "lat": 46.7,
+   "lon": 10,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "engelberg": {
+   "lat": 46.82,
+   "lon": 8.4,
+   "precision": "place"
+  },
+  "england": {
+   "lat": 52.5,
+   "lon": -1.5,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "english": {
+   "lat": 52,
+   "lon": -1.5,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "ephesus": {
+   "lat": 37.9411,
+   "lon": 27.3417,
+   "precision": "place"
+  },
+  "epiphanius": {
+   "lat": 35,
+   "lon": 33.2,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "epirus": {
+   "lat": 39.6,
+   "lon": 20.8,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "erfurt": {
+   "lat": 50.9848,
+   "lon": 11.0299,
+   "precision": "place"
+  },
+  "esne": {
+   "lat": 25.2933,
+   "lon": 32.5539,
+   "precision": "place"
+  },
+  "estonia": {
+   "lat": 58.7,
+   "lon": 25.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "etna": {
+   "lat": 37.751,
+   "lon": 14.9934,
+   "precision": "place"
+  },
+  "etruria": {
+   "lat": 43,
+   "lon": 11.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "europe": {
+   "lat": 50,
+   "lon": 10,
+   "precision": "region",
+   "jit": 3
+  },
+  "europe frankfurt printing": {
+   "lat": 50,
+   "lon": 10,
+   "precision": "region",
+   "jit": 3
+  },
+  "fenton": {
+   "lat": 55.95,
+   "lon": -3,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "ferrara": {
+   "lat": 44.8381,
+   "lon": 11.6198,
+   "precision": "place"
+  },
+  "florence": {
+   "lat": 43.7696,
+   "lon": 11.2558,
+   "precision": "place"
+  },
+  "forum": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "france": {
+   "lat": 46.6,
+   "lon": 2.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "frankfort": {
+   "lat": 50.1109,
+   "lon": 8.6821,
+   "precision": "place",
+   "jit": 0.12
+  },
+  "frankfurt": {
+   "lat": 50.1109,
+   "lon": 8.6821,
+   "precision": "place",
+   "jit": 0.12
+  },
+  "frankfurt am main": {
+   "lat": 50.1109,
+   "lon": 8.6821,
+   "precision": "place",
+   "jit": 0.12
+  },
+  "french": {
+   "lat": 46.6,
+   "lon": 2.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "gandhara": {
+   "lat": 34,
+   "lon": 71.8,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "gargaphie": {
+   "lat": 38.3195,
+   "lon": 23.3178,
+   "precision": "place"
+  },
+  "gaul": {
+   "lat": 46.5,
+   "lon": 2.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "geneva": {
+   "lat": 46.2044,
+   "lon": 6.1432,
+   "precision": "place"
+  },
+  "german": {
+   "lat": 50.5,
+   "lon": 10,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "germany": {
+   "lat": 51,
+   "lon": 10,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "ghent": {
+   "lat": 51.0543,
+   "lon": 3.7174,
+   "precision": "place"
+  },
+  "giza": {
+   "lat": 29.9792,
+   "lon": 31.1342,
+   "precision": "place"
+  },
+  "gnosis": {
+   "lat": 45.764,
+   "lon": 4.8357,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "gorlitz": {
+   "lat": 51.1527,
+   "lon": 14.9886,
+   "precision": "place"
+  },
+  "gosforth": {
+   "lat": 54.4283,
+   "lon": -3.4403,
+   "precision": "place"
+  },
+  "gotland": {
+   "lat": 57.5,
+   "lon": 18.5,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "great britain": {
+   "lat": 52.5,
+   "lon": -1.5,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "greece": {
+   "lat": 39,
+   "lon": 22,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "greek": {
+   "lat": 39,
+   "lon": 22,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "hal saflieni": {
+   "lat": 35.87,
+   "lon": 14.5,
+   "precision": "place"
+  },
+  "hamburg": {
+   "lat": 53.5511,
+   "lon": 9.9937,
+   "precision": "place"
+  },
+  "harran": {
+   "lat": 36.8667,
+   "lon": 39.0333,
+   "precision": "place"
+  },
+  "hawaii": {
+   "lat": 20.8,
+   "lon": -156.3,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "heddernheim": {
+   "lat": 50.16,
+   "lon": 8.65,
+   "precision": "place"
+  },
+  "heisterbach": {
+   "lat": 50.66,
+   "lon": 7.2,
+   "precision": "place"
+  },
+  "helfta": {
+   "lat": 51.53,
+   "lon": 11.51,
+   "precision": "place"
+  },
+  "heliopolis": {
+   "lat": 30.13,
+   "lon": 31.3,
+   "precision": "place"
+  },
+  "hermannstadt": {
+   "lat": 45.7983,
+   "lon": 24.1256,
+   "precision": "place"
+  },
+  "hibis": {
+   "lat": 25.48,
+   "lon": 30.55,
+   "precision": "place"
+  },
+  "hierapolis": {
+   "lat": 37.9293,
+   "lon": 29.1275,
+   "precision": "place"
+  },
+  "hippo": {
+   "lat": 36.9,
+   "lon": 7.7667,
+   "precision": "place"
+  },
+  "hippo regius": {
+   "lat": 36.9,
+   "lon": 7.7667,
+   "precision": "place"
+  },
+  "hippolytus": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "hormanuthi": {
+   "lat": 25.62,
+   "lon": 32.54,
+   "precision": "place"
+  },
+  "hungary": {
+   "lat": 47.2,
+   "lon": 19.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "iberia": {
+   "lat": 40,
+   "lon": -4,
+   "precision": "region",
+   "jit": 2
+  },
+  "iberian": {
+   "lat": 40,
+   "lon": -4,
+   "precision": "region",
+   "jit": 2
+  },
+  "india": {
+   "lat": 22,
+   "lon": 79,
+   "precision": "region",
+   "jit": 3
+  },
+  "indian": {
+   "lat": 22,
+   "lon": 79,
+   "precision": "region",
+   "jit": 3
+  },
+  "iran": {
+   "lat": 32,
+   "lon": 53,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "iraq": {
+   "lat": 33,
+   "lon": 44,
+   "precision": "region",
+   "jit": 1
+  },
+  "iraqi": {
+   "lat": 33,
+   "lon": 44,
+   "precision": "region",
+   "jit": 1
+  },
+  "ireland": {
+   "lat": 53.3,
+   "lon": -7.9,
+   "precision": "region",
+   "jit": 1
+  },
+  "irenaeus": {
+   "lat": 45.764,
+   "lon": 4.8357,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "irish": {
+   "lat": 53.3,
+   "lon": -7.9,
+   "precision": "region",
+   "jit": 1
+  },
+  "iroquois": {
+   "lat": 43,
+   "lon": -76.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "israel": {
+   "lat": 31.5,
+   "lon": 34.9,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "isthmus of suez": {
+   "lat": 30.5,
+   "lon": 32.3,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "italy": {
+   "lat": 42.5,
+   "lon": 12.5,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "japan": {
+   "lat": 36,
+   "lon": 138,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "java": {
+   "lat": -7.6,
+   "lon": 111,
+   "precision": "region",
+   "jit": 1
+  },
+  "jerusalem": {
+   "lat": 31.7683,
+   "lon": 35.2137,
+   "precision": "place"
+  },
+  "judea": {
+   "lat": 31.7,
+   "lon": 35,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "jung family household": {
+   "lat": 47.5596,
+   "lon": 7.5886,
+   "precision": "place"
+  },
+  "jungs acquaintance": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "jungs clinical material": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "jungs medical studies": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "jungs patient": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "jungs practice": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "kalhu": {
+   "lat": 36.0983,
+   "lon": 43.3283,
+   "precision": "place"
+  },
+  "kassel": {
+   "lat": 51.3127,
+   "lon": 9.4797,
+   "precision": "place"
+  },
+  "kenya": {
+   "lat": 0.5,
+   "lon": 37.5,
+   "precision": "region",
+   "jit": 1
+  },
+  "klagenfurt": {
+   "lat": 46.6247,
+   "lon": 14.3053,
+   "precision": "place"
+  },
+  "klosterneuburg": {
+   "lat": 48.3055,
+   "lon": 16.3253,
+   "precision": "place"
+  },
+  "krakow": {
+   "lat": 50.0647,
+   "lon": 19.945,
+   "precision": "place"
+  },
+  "kuesnacht": {
+   "lat": 47.3186,
+   "lon": 8.5819,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "kurukshetra": {
+   "lat": 29.9695,
+   "lon": 76.8783,
+   "precision": "place"
+  },
+  "kusnacht": {
+   "lat": 47.3186,
+   "lon": 8.5819,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "kuyunjik": {
+   "lat": 36.359,
+   "lon": 43.152,
+   "precision": "place"
+  },
+  "la rochelle": {
+   "lat": 46.1603,
+   "lon": -1.1511,
+   "precision": "place"
+  },
+  "laconia": {
+   "lat": 36.9,
+   "lon": 22.4,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "land of israel": {
+   "lat": 31.5,
+   "lon": 34.9,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "lanka": {
+   "lat": 7.9,
+   "lon": 80.7,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "late antique mediterranean": {
+   "lat": 36,
+   "lon": 15,
+   "precision": "region",
+   "jit": 5
+  },
+  "latin": {
+   "lat": 48.5,
+   "lon": 8,
+   "precision": "region",
+   "jit": 2
+  },
+  "latin alchemical": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "latin alchemy": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "latin west": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "latopolis": {
+   "lat": 25.2933,
+   "lon": 32.5539,
+   "precision": "place"
+  },
+  "leghorn": {
+   "lat": 43.5485,
+   "lon": 10.3106,
+   "precision": "place"
+  },
+  "leiden": {
+   "lat": 52.1601,
+   "lon": 4.497,
+   "precision": "place"
+  },
+  "leiden universiteitsbibliotheek": {
+   "lat": 52.1601,
+   "lon": 4.497,
+   "precision": "place"
+  },
+  "leipzig": {
+   "lat": 51.3397,
+   "lon": 12.3731,
+   "precision": "place"
+  },
+  "leningrad": {
+   "lat": 59.9343,
+   "lon": 30.3351,
+   "precision": "place"
+  },
+  "lesotho": {
+   "lat": -29.6,
+   "lon": 28.2,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "libya": {
+   "lat": 27,
+   "lon": 17,
+   "precision": "region",
+   "jit": 2
+  },
+  "limburg an der lahn": {
+   "lat": 50.3836,
+   "lon": 8.0673,
+   "precision": "place"
+  },
+  "limmat": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "liverpool": {
+   "lat": 53.4084,
+   "lon": -2.9916,
+   "precision": "place"
+  },
+  "livorno": {
+   "lat": 43.5485,
+   "lon": 10.3106,
+   "precision": "place"
+  },
+  "loir et cher": {
+   "lat": 47.6,
+   "lon": 1.3,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "lombardy": {
+   "lat": 45.6,
+   "lon": 9.8,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "london": {
+   "lat": 51.5074,
+   "lon": -0.1278,
+   "precision": "place"
+  },
+  "london british museum": {
+   "lat": 51.5194,
+   "lon": -0.1269,
+   "precision": "place"
+  },
+  "lorraine": {
+   "lat": 49,
+   "lon": 6,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "lotharingia": {
+   "lat": 49,
+   "lon": 6,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "lothian": {
+   "lat": 55.95,
+   "lon": -3,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "lower saxony": {
+   "lat": 52.6,
+   "lon": 9.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "loyola": {
+   "lat": 43.1768,
+   "lon": -2.3394,
+   "precision": "place"
+  },
+  "lubeck": {
+   "lat": 53.8655,
+   "lon": 10.6866,
+   "precision": "place"
+  },
+  "lucca": {
+   "lat": 43.8429,
+   "lon": 10.5027,
+   "precision": "place"
+  },
+  "lucerne": {
+   "lat": 47.05,
+   "lon": 8.31,
+   "precision": "place"
+  },
+  "lumbini": {
+   "lat": 27.4833,
+   "lon": 83.2833,
+   "precision": "place"
+  },
+  "lusignan": {
+   "lat": 46.43,
+   "lon": 0.12,
+   "precision": "place"
+  },
+  "luxor": {
+   "lat": 25.6872,
+   "lon": 32.6396,
+   "precision": "place"
+  },
+  "lyon": {
+   "lat": 45.764,
+   "lon": 4.8357,
+   "precision": "place"
+  },
+  "lyons": {
+   "lat": 45.764,
+   "lon": 4.8357,
+   "precision": "place"
+  },
+  "lysimacheia": {
+   "lat": 40.4,
+   "lon": 26.9,
+   "precision": "place"
+  },
+  "madura": {
+   "lat": 9.9252,
+   "lon": 78.1198,
+   "precision": "place"
+  },
+  "magdeburg": {
+   "lat": 52.1205,
+   "lon": 11.6276,
+   "precision": "place"
+  },
+  "majorca": {
+   "lat": 39.6,
+   "lon": 3,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "malta": {
+   "lat": 35.9,
+   "lon": 14.4,
+   "precision": "region",
+   "jit": 0.2
+  },
+  "manresa": {
+   "lat": 41.7288,
+   "lon": 1.826,
+   "precision": "place"
+  },
+  "maori": {
+   "lat": -41,
+   "lon": 174,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "mediterranean": {
+   "lat": 36,
+   "lon": 15,
+   "precision": "region",
+   "jit": 5
+  },
+  "melk": {
+   "lat": 48.2279,
+   "lon": 15.3307,
+   "precision": "place"
+  },
+  "mellon collection": {
+   "lat": 41.3163,
+   "lon": -72.9223,
+   "precision": "place"
+  },
+  "mendes": {
+   "lat": 30.94,
+   "lon": 31.52,
+   "precision": "place"
+  },
+  "meroe": {
+   "lat": 16.94,
+   "lon": 33.75,
+   "precision": "place"
+  },
+  "mesopotamia": {
+   "lat": 33,
+   "lon": 44,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "mesopotamian": {
+   "lat": 33,
+   "lon": 44,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "mexico": {
+   "lat": 23.6,
+   "lon": -102.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "middle america": {
+   "lat": 17,
+   "lon": -92,
+   "precision": "region",
+   "jit": 2
+  },
+  "milan": {
+   "lat": 45.4642,
+   "lon": 9.19,
+   "precision": "place"
+  },
+  "miscellanea dalchimia": {
+   "lat": 43.7696,
+   "lon": 11.2558,
+   "precision": "place"
+  },
+  "mithraea": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "modena": {
+   "lat": 44.6471,
+   "lon": 10.9252,
+   "precision": "place"
+  },
+  "moknine": {
+   "lat": 35.6333,
+   "lon": 10.9,
+   "precision": "place"
+  },
+  "mosque of omar": {
+   "lat": 31.7683,
+   "lon": 35.2137,
+   "precision": "place"
+  },
+  "mount athos": {
+   "lat": 40.1575,
+   "lon": 24.3267,
+   "precision": "place"
+  },
+  "mt elgon": {
+   "lat": 1.13,
+   "lon": 34.55,
+   "precision": "place"
+  },
+  "munich": {
+   "lat": 48.1351,
+   "lon": 11.582,
+   "precision": "place"
+  },
+  "musaeum hermeticum": {
+   "lat": 50.1109,
+   "lon": 8.6821,
+   "precision": "place",
+   "jit": 0.12
+  },
+  "museo archeologico florence": {
+   "lat": 43.7696,
+   "lon": 11.2558,
+   "precision": "place"
+  },
+  "muysca country": {
+   "lat": 5,
+   "lon": -73,
+   "precision": "region",
+   "jit": 1
+  },
+  "naples": {
+   "lat": 40.8518,
+   "lon": 14.2681,
+   "precision": "place"
+  },
+  "narbonne": {
+   "lat": 43.1839,
+   "lon": 3.0042,
+   "precision": "place"
+  },
+  "natal": {
+   "lat": -29,
+   "lon": 30.9,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "navaho": {
+   "lat": 36.2,
+   "lon": -109.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "navaho country": {
+   "lat": 36.2,
+   "lon": -109.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "navajo": {
+   "lat": 36.2,
+   "lon": -109.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "nemi": {
+   "lat": 41.7167,
+   "lon": 12.7,
+   "precision": "place"
+  },
+  "netherlands": {
+   "lat": 52.2,
+   "lon": 5.3,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "new mexico": {
+   "lat": 34.4,
+   "lon": -106.1,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "new york": {
+   "lat": 40.7128,
+   "lon": -74.006,
+   "precision": "place"
+  },
+  "new zealand": {
+   "lat": -41,
+   "lon": 174,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "nida": {
+   "lat": 50.16,
+   "lon": 8.65,
+   "precision": "place"
+  },
+  "nile": {
+   "lat": 26.8,
+   "lon": 30.8,
+   "precision": "region",
+   "jit": 2
+  },
+  "nimrud": {
+   "lat": 36.0983,
+   "lon": 43.3283,
+   "precision": "place"
+  },
+  "nineveh": {
+   "lat": 36.359,
+   "lon": 43.152,
+   "precision": "place"
+  },
+  "nisibis": {
+   "lat": 37.0714,
+   "lon": 41.2142,
+   "precision": "place"
+  },
+  "noricum": {
+   "lat": 47,
+   "lon": 14,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "normandy": {
+   "lat": 49,
+   "lon": 0,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "norse": {
+   "lat": 62,
+   "lon": 12,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "north africa": {
+   "lat": 34,
+   "lon": 9,
+   "precision": "region",
+   "jit": 2
+  },
+  "north america": {
+   "lat": 45,
+   "lon": -100,
+   "precision": "region",
+   "jit": 5
+  },
+  "notre dame": {
+   "lat": 48.853,
+   "lon": 2.3499,
+   "precision": "place"
+  },
+  "ojibwe country": {
+   "lat": 46.8,
+   "lon": -90.5,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "olympia": {
+   "lat": 37.6439,
+   "lon": 21.6297,
+   "precision": "place"
+  },
+  "oppenheim": {
+   "lat": 49.8545,
+   "lon": 8.3597,
+   "precision": "place"
+  },
+  "oropos": {
+   "lat": 38.3,
+   "lon": 23.75,
+   "precision": "place"
+  },
+  "oropus": {
+   "lat": 38.3,
+   "lon": 23.75,
+   "precision": "place"
+  },
+  "oselberg": {
+   "lat": 49.07,
+   "lon": 10.32,
+   "precision": "place"
+  },
+  "osnabruck": {
+   "lat": 52.2799,
+   "lon": 8.0472,
+   "precision": "place"
+  },
+  "osterburken": {
+   "lat": 49.4278,
+   "lon": 9.4219,
+   "precision": "place"
+  },
+  "ostia": {
+   "lat": 41.7556,
+   "lon": 12.2889,
+   "precision": "place"
+  },
+  "oxyrhynchus": {
+   "lat": 28.5333,
+   "lon": 30.6667,
+   "precision": "place"
+  },
+  "paderborn": {
+   "lat": 51.7189,
+   "lon": 8.7575,
+   "precision": "place"
+  },
+  "padmanabhapura": {
+   "lat": 8.2486,
+   "lon": 77.3007,
+   "precision": "place"
+  },
+  "pahlavi": {
+   "lat": 32,
+   "lon": 53,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "palatine": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "palenque": {
+   "lat": 17.4838,
+   "lon": -92.0463,
+   "precision": "place"
+  },
+  "palestine": {
+   "lat": 31.9,
+   "lon": 35.2,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "panopolis": {
+   "lat": 26.5614,
+   "lon": 31.7461,
+   "precision": "place"
+  },
+  "paola": {
+   "lat": 35.87,
+   "lon": 14.5,
+   "precision": "place"
+  },
+  "papremis": {
+   "lat": 31.1,
+   "lon": 31,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "paris": {
+   "lat": 48.8566,
+   "lon": 2.3522,
+   "precision": "place",
+   "jit": 0.08
+  },
+  "patient hypnagogic": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "patient of jung": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "patmos": {
+   "lat": 37.3136,
+   "lon": 26.5467,
+   "precision": "place"
+  },
+  "pavia": {
+   "lat": 45.1847,
+   "lon": 9.1582,
+   "precision": "place"
+  },
+  "pavia vercelli": {
+   "lat": 45.25,
+   "lon": 8.8,
+   "precision": "region"
+  },
+  "persia": {
+   "lat": 32,
+   "lon": 53,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "persian": {
+   "lat": 32,
+   "lon": 53,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "peru": {
+   "lat": -9.2,
+   "lon": -75,
+   "precision": "region",
+   "jit": 2
+  },
+  "pessinus": {
+   "lat": 39.2,
+   "lon": 31.6,
+   "precision": "place"
+  },
+  "peterhofstatt": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "pharos": {
+   "lat": 31.2139,
+   "lon": 29.8856,
+   "precision": "place"
+  },
+  "philae": {
+   "lat": 24.0252,
+   "lon": 32.8841,
+   "precision": "place"
+  },
+  "phrygia": {
+   "lat": 39,
+   "lon": 31,
+   "precision": "region",
+   "jit": 1
+  },
+  "phrygian": {
+   "lat": 39,
+   "lon": 31,
+   "precision": "region",
+   "jit": 1
+  },
+  "pisa": {
+   "lat": 43.7228,
+   "lon": 10.4017,
+   "precision": "place"
+  },
+  "poitou": {
+   "lat": 46.6,
+   "lon": 0.3,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "polynesia": {
+   "lat": -17.5,
+   "lon": -149.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "pomerania": {
+   "lat": 54,
+   "lon": 15,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "praeneste": {
+   "lat": 41.8333,
+   "lon": 12.8833,
+   "precision": "place"
+  },
+  "prague": {
+   "lat": 50.0755,
+   "lon": 14.4378,
+   "precision": "place"
+  },
+  "presented to jung": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "priscillianist": {
+   "lat": 40,
+   "lon": -4,
+   "precision": "region",
+   "jit": 2
+  },
+  "provence": {
+   "lat": 43.9,
+   "lon": 5.9,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "ptolemais": {
+   "lat": 26,
+   "lon": 31.8,
+   "precision": "region",
+   "jit": 0.3
+  },
+  "pueblo": {
+   "lat": 35.5,
+   "lon": -106,
+   "precision": "region",
+   "jit": 1
+  },
+  "puri": {
+   "lat": 19.8135,
+   "lon": 85.8312,
+   "precision": "place"
+  },
+  "pyramid of unas": {
+   "lat": 29.8713,
+   "lon": 31.2164,
+   "precision": "place"
+  },
+  "rajput": {
+   "lat": 26.9,
+   "lon": 73,
+   "precision": "region",
+   "jit": 1
+  },
+  "ranft": {
+   "lat": 46.87,
+   "lon": 8.28,
+   "precision": "place"
+  },
+  "ras shamra": {
+   "lat": 35.6016,
+   "lon": 35.7827,
+   "precision": "place"
+  },
+  "religiously brought up young patient": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "rheinau": {
+   "lat": 47.64,
+   "lon": 8.6,
+   "precision": "place"
+  },
+  "rhodesia": {
+   "lat": -19,
+   "lon": 29.8,
+   "precision": "region",
+   "jit": 1
+  },
+  "rijksuniversiteit": {
+   "lat": 52.1601,
+   "lon": 4.497,
+   "precision": "place"
+  },
+  "road to damascus": {
+   "lat": 33.5138,
+   "lon": 36.2765,
+   "precision": "place"
+  },
+  "roman": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "roman empire": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "roman gaul": {
+   "lat": 46.5,
+   "lon": 2.5,
+   "precision": "region",
+   "jit": 2
+  },
+  "roman north africa": {
+   "lat": 34,
+   "lon": 9,
+   "precision": "region",
+   "jit": 2
+  },
+  "roman world": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "rome": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "rome recorded": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "rupertsberg": {
+   "lat": 49.9667,
+   "lon": 7.9,
+   "precision": "place"
+  },
+  "russia": {
+   "lat": 56,
+   "lon": 38,
+   "precision": "region",
+   "jit": 3
+  },
+  "sachseln": {
+   "lat": 46.87,
+   "lon": 8.24,
+   "precision": "place"
+  },
+  "sachsische landesbibliothek": {
+   "lat": 51.0504,
+   "lon": 13.7373,
+   "precision": "place"
+  },
+  "saint denis": {
+   "lat": 48.9356,
+   "lon": 2.3539,
+   "precision": "place"
+  },
+  "saint jacques des guerets": {
+   "lat": 47.7646,
+   "lon": 0.8714,
+   "precision": "place"
+  },
+  "sakkara": {
+   "lat": 29.8713,
+   "lon": 31.2164,
+   "precision": "place"
+  },
+  "salzburg": {
+   "lat": 47.8095,
+   "lon": 13.055,
+   "precision": "place"
+  },
+  "samaria": {
+   "lat": 32.2736,
+   "lon": 35.2,
+   "precision": "place"
+  },
+  "same dreamer": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "same series as dream": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "samos": {
+   "lat": 37.75,
+   "lon": 26.98,
+   "precision": "place"
+  },
+  "samothrace": {
+   "lat": 40.5,
+   "lon": 25.5,
+   "precision": "place"
+  },
+  "saqqara": {
+   "lat": 29.8713,
+   "lon": 31.2164,
+   "precision": "place"
+  },
+  "sardis": {
+   "lat": 38.4881,
+   "lon": 28.0359,
+   "precision": "place"
+  },
+  "scandinavia": {
+   "lat": 62,
+   "lon": 12,
+   "precision": "region",
+   "jit": 2.5
+  },
+  "scotland": {
+   "lat": 56.5,
+   "lon": -4,
+   "precision": "region",
+   "jit": 1
+  },
+  "sent to jung": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "siberia": {
+   "lat": 60,
+   "lon": 100,
+   "precision": "region",
+   "jit": 5
+  },
+  "sibiu": {
+   "lat": 45.7983,
+   "lon": 24.1256,
+   "precision": "place"
+  },
+  "sicily": {
+   "lat": 37.6,
+   "lon": 14,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "sioux": {
+   "lat": 44,
+   "lon": -100,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "spain": {
+   "lat": 40,
+   "lon": -3.7,
+   "precision": "region",
+   "jit": 2
+  },
+  "st urbans monastery": {
+   "lat": 47.18,
+   "lon": 7.9,
+   "precision": "place"
+  },
+  "staatliche gemaldegalerie": {
+   "lat": 52.52,
+   "lon": 13.405,
+   "precision": "place"
+  },
+  "stoudios": {
+   "lat": 41.0082,
+   "lon": 28.9784,
+   "precision": "place"
+  },
+  "strasbourg": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "place"
+  },
+  "student unknown to him": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "sudan": {
+   "lat": 16.94,
+   "lon": 33.75,
+   "precision": "place"
+  },
+  "sulzbach": {
+   "lat": 49.5,
+   "lon": 11.75,
+   "precision": "place"
+  },
+  "surlei": {
+   "lat": 46.45,
+   "lon": 9.8,
+   "precision": "place"
+  },
+  "surlej": {
+   "lat": 46.45,
+   "lon": 9.8,
+   "precision": "place"
+  },
+  "swabia": {
+   "lat": 48.3,
+   "lon": 9.5,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "sweden": {
+   "lat": 60,
+   "lon": 15,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "switzerland": {
+   "lat": 46.8,
+   "lon": 8.2,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "syria": {
+   "lat": 34.8,
+   "lon": 38.9,
+   "precision": "region",
+   "jit": 1
+  },
+  "syriac": {
+   "lat": 34.8,
+   "lon": 38.9,
+   "precision": "region",
+   "jit": 1
+  },
+  "syrian": {
+   "lat": 34.8,
+   "lon": 38.9,
+   "precision": "region",
+   "jit": 1
+  },
+  "taos pueblo": {
+   "lat": 36.4072,
+   "lon": -105.5734,
+   "precision": "place"
+  },
+  "temple mount": {
+   "lat": 31.7683,
+   "lon": 35.2137,
+   "precision": "place"
+  },
+  "theatr chem": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "theatrum chemicum": {
+   "lat": 48.5734,
+   "lon": 7.7521,
+   "precision": "region",
+   "jit": 1.2
+  },
+  "theatrum chemicum britannicum": {
+   "lat": 51.5074,
+   "lon": -0.1278,
+   "precision": "place"
+  },
+  "thebes": {
+   "lat": 38.3195,
+   "lon": 23.3178,
+   "precision": "place"
+  },
+  "thebes boeotia": {
+   "lat": 38.3195,
+   "lon": 23.3178,
+   "precision": "place"
+  },
+  "thebes egypt": {
+   "lat": 25.6872,
+   "lon": 32.6396,
+   "precision": "place"
+  },
+  "thebes greece": {
+   "lat": 38.3195,
+   "lon": 23.3178,
+   "precision": "place"
+  },
+  "thesmophorion": {
+   "lat": 37.9838,
+   "lon": 23.7275,
+   "precision": "place",
+   "jit": 0.06
+  },
+  "thessaly": {
+   "lat": 39.6,
+   "lon": 22.2,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "thrace": {
+   "lat": 41.5,
+   "lon": 26,
+   "precision": "region",
+   "jit": 0.8
+  },
+  "tibet": {
+   "lat": 31,
+   "lon": 88,
+   "precision": "region",
+   "jit": 2
+  },
+  "tibetan": {
+   "lat": 31,
+   "lon": 88,
+   "precision": "region",
+   "jit": 2
+  },
+  "tlingit": {
+   "lat": 64,
+   "lon": -150,
+   "precision": "region",
+   "jit": 3
+  },
+  "told to jung": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "toledo": {
+   "lat": 39.8628,
+   "lon": -4.0273,
+   "precision": "place"
+  },
+  "tomb of seti i": {
+   "lat": 25.7402,
+   "lon": 32.6014,
+   "precision": "place"
+  },
+  "tractatus aureus": {
+   "lat": 51.34,
+   "lon": 12.37,
+   "precision": "region",
+   "jit": 0.4
+  },
+  "travancore": {
+   "lat": 8.9,
+   "lon": 76.9,
+   "precision": "region",
+   "jit": 0.5
+  },
+  "treviso": {
+   "lat": 45.6669,
+   "lon": 12.2431,
+   "precision": "place"
+  },
+  "tribsees": {
+   "lat": 54.0786,
+   "lon": 12.7742,
+   "precision": "place"
+  },
+  "tsou": {
+   "lat": 35.4,
+   "lon": 116.97,
+   "precision": "place"
+  },
+  "tunis": {
+   "lat": 36.8065,
+   "lon": 10.1815,
+   "precision": "place"
+  },
+  "turukalukundram": {
+   "lat": 12.5,
+   "lon": 80,
+   "precision": "place"
+  },
+  "tyre": {
+   "lat": 33.2704,
+   "lon": 35.2038,
+   "precision": "place"
+  },
+  "ugarit": {
+   "lat": 35.6016,
+   "lon": 35.7827,
+   "precision": "place"
+  },
+  "undated patient": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "united states": {
+   "lat": 39.8,
+   "lon": -98.6,
+   "precision": "region",
+   "jit": 5
+  },
+  "universiteitsbibliotheek": {
+   "lat": 52.1601,
+   "lon": 4.497,
+   "precision": "place"
+  },
+  "uppsala": {
+   "lat": 59.8586,
+   "lon": 17.6389,
+   "precision": "place"
+  },
+  "uruk": {
+   "lat": 31.3225,
+   "lon": 45.6361,
+   "precision": "place"
+  },
+  "usa": {
+   "lat": 39.8,
+   "lon": -98.6,
+   "precision": "region",
+   "jit": 5
+  },
+  "valley of the kings": {
+   "lat": 25.7402,
+   "lon": 32.6014,
+   "precision": "place"
+  },
+  "vatican": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "place",
+   "jit": 0.1
+  },
+  "vatopedi": {
+   "lat": 40.1575,
+   "lon": 24.3267,
+   "precision": "place"
+  },
+  "venice": {
+   "lat": 45.4408,
+   "lon": 12.3155,
+   "precision": "place"
+  },
+  "vercelli": {
+   "lat": 45.3203,
+   "lon": 8.4186,
+   "precision": "place"
+  },
+  "verona": {
+   "lat": 45.4384,
+   "lon": 10.9916,
+   "precision": "place"
+  },
+  "verteuil": {
+   "lat": 45.96,
+   "lon": 0.16,
+   "precision": "place"
+  },
+  "via hippolytus": {
+   "lat": 41.9028,
+   "lon": 12.4964,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "vienna": {
+   "lat": 48.2082,
+   "lon": 16.3738,
+   "precision": "place"
+  },
+  "weimar": {
+   "lat": 50.9794,
+   "lon": 11.3235,
+   "precision": "place"
+  },
+  "wesendonck circle": {
+   "lat": 47.37,
+   "lon": 8.54,
+   "precision": "place"
+  },
+  "west africa": {
+   "lat": 8,
+   "lon": -2,
+   "precision": "region",
+   "jit": 3
+  },
+  "westphalia": {
+   "lat": 51.9,
+   "lon": 8,
+   "precision": "region",
+   "jit": 0.6
+  },
+  "winterthur": {
+   "lat": 47.5,
+   "lon": 8.72,
+   "precision": "place"
+  },
+  "woman doctor pupil": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "yakut": {
+   "lat": 62,
+   "lon": 129.7,
+   "precision": "region",
+   "jit": 1
+  },
+  "yale university library": {
+   "lat": 41.3163,
+   "lon": -72.9223,
+   "precision": "place"
+  },
+  "yoruba": {
+   "lat": 7.8,
+   "lon": 4,
+   "precision": "region",
+   "jit": 1.5
+  },
+  "young woman patient": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "yucatan": {
+   "lat": 20.5,
+   "lon": -89,
+   "precision": "region",
+   "jit": 1
+  },
+  "zimbabwe": {
+   "lat": -19,
+   "lon": 29.8,
+   "precision": "region",
+   "jit": 1
+  },
+  "zuerich": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "zurich": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "zurich central library": {
+   "lat": 47.3769,
+   "lon": 8.5417,
+   "precision": "place",
+   "jit": 0.15
+  },
+  "zwiefalten": {
+   "lat": 48.23,
+   "lon": 9.46,
+   "precision": "place"
+  }
+ }
+}

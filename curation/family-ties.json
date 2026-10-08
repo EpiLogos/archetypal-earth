@@ -1,0 +1,1279 @@
+{
+ "_note": "family slug -> ties. basis jung/inferred mirror the vault (the vault wins on re-ingest and may upgrade a basis); basis site is curation (standard Jungian amplification), never presented as Jung's word.",
+ "ties": {
+  "anima-figure": [
+   {
+    "archetype": "anima",
+    "basis": "jung"
+   }
+  ],
+  "anima-mundi": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "anthropos": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "antichrist": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "jung"
+   }
+  ],
+  "ape": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "arrow": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "ascent-descent": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "ass": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "atman-brahman": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "bird": [
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "cave": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "chakra": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "chalice": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "christ-figure": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "churinga": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "circle": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "circulation-of-light": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "coniunctio": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "syzygy",
+    "basis": "inferred"
+   }
+  ],
+  "corn-god": [
+   {
+    "archetype": "hero",
+    "basis": "inferred"
+   }
+  ],
+  "cross": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "crown": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "site"
+   }
+  ],
+  "demiurge": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   }
+  ],
+  "devil": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "dismemberment": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "divine-child": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "divine-pair": [
+   {
+    "archetype": "syzygy",
+    "basis": "jung"
+   }
+  ],
+  "dog": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "double": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "dove": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
+  "dragon": [
+   {
+    "archetype": "shadow",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "dual-mother": [
+   {
+    "archetype": "great-mother",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "eagle": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "animus",
+    "basis": "site"
+   }
+  ],
+  "eye": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "filius-philosophorum": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "fire": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "fish": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "furnace": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   }
+  ],
+  "garden": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "kore",
+    "basis": "site"
+   }
+  ],
+  "giant": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   }
+  ],
+  "god-image": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "golden-flower": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "grail": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "head": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "heart": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "helen-of-troy": [
+   {
+    "archetype": "anima",
+    "basis": "jung"
+   }
+  ],
+  "hermaphrodite": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "holy-ghost": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "homunculus": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "horn": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "horse": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "animus",
+    "basis": "site"
+   }
+  ],
+  "i-ching-hexagram": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "island": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "khidr": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "inferred"
+   }
+  ],
+  "king-queen-pair": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "lamb": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "lamia": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "lapis": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "lingam-yoni": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "lion": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "lion-headed-god": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "site"
+   }
+  ],
+  "lotus": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "lumen-naturae": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "magical-companion": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "magician": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "jung"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "site"
+   }
+  ],
+  "magnet": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "maiden": [
+   {
+    "archetype": "kore",
+    "basis": "jung"
+   },
+   {
+    "archetype": "anima",
+    "basis": "jung"
+   },
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "mandala": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "melusina": [
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "mercurius": [
+   {
+    "archetype": "trickster",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "merkabah": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "monster": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "moon": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   }
+  ],
+  "moth": [
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   }
+  ],
+  "mother-goddess": [
+   {
+    "archetype": "great-mother",
+    "basis": "jung"
+   }
+  ],
+  "mothers-of-faust": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   }
+  ],
+  "mountain": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "night-sea-journey": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "nigredo": [
+   {
+    "archetype": "shadow",
+    "basis": "jung"
+   }
+  ],
+  "nixie": [
+   {
+    "archetype": "anima",
+    "basis": "jung"
+   }
+  ],
+  "paradise": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "peacock": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "pearl": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "phallus": [
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "site"
+   }
+  ],
+  "philosophers-egg": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "phoenix": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "planetary-gods": [
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "plough": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "point": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "prima-materia": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "quaternity": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "raven": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "rebis": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "resurrection": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "rose": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "rotundum": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "rubedo": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "sacrifice": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "salamander": [
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "salt": [
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "scarab": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "senex-figure": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "jung"
+   },
+   {
+    "archetype": "mana-personality",
+    "basis": "inferred"
+   }
+  ],
+  "serpent": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "shiva": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "sol-niger": [
+   {
+    "archetype": "shadow",
+    "basis": "jung"
+   },
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "solificatio": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "sophia": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "soul-bird": [
+   {
+    "archetype": "psychopomp",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "spark": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "stag": [
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "star": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "stone": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "sulphur": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "jung"
+   }
+  ],
+  "sun": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "sun-hero": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "animus",
+    "basis": "site"
+   }
+  ],
+  "swan": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   },
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
+  "swastika": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "tao": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "tauroctony": [
+   {
+    "archetype": "hero",
+    "basis": "jung"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   }
+  ],
+  "temenos": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "tetramorph": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "toad": [
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "treasure": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "tree": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "trickster-figure": [
+   {
+    "archetype": "trickster",
+    "basis": "jung"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "inferred"
+   }
+  ],
+  "trinity": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "unicorn": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "kore",
+    "basis": "site"
+   }
+  ],
+  "uroboros": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "venus": [
+   {
+    "archetype": "anima",
+    "basis": "jung"
+   }
+  ],
+  "vessel": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "virgin": [
+   {
+    "archetype": "kore",
+    "basis": "site"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "water": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "well-spring": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "wind": [
+   {
+    "archetype": "great-mother",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "animus",
+    "basis": "site"
+   },
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "world-clock": [
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "world-wheel": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   },
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "worm": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   },
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "yantra": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ]
+ }
+}

@@ -94,6 +94,17 @@ body.search-open .search-glyph { opacity: 0; pointer-events: none; }
 }
 .plate img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.9s ease; user-select: none; -webkit-user-drag: none; }
 .plate.loaded img { opacity: 1; }
+/* One grade for every source: museum photos, white-ground scans and paintings
+   are brought into the same light, tinted toward the entity's tone, vignetted. */
+.plate img { filter: saturate(0.74) contrast(1.05) brightness(0.88) sepia(0.06); }
+.plate.loaded::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(130% 110% at 50% 45%, transparent 52%, rgb(0 0 0 / 0.42)),
+    linear-gradient(var(--pc, #46557f), var(--pc, #46557f));
+  mix-blend-mode: soft-light; opacity: 0.62;
+}
+.plate-credit { z-index: 2; }
 .plate-empty::after {
   content: ''; position: absolute; inset: 0; opacity: 0.5;
   background:

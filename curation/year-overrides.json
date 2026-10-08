@@ -1,0 +1,18 @@
+{
+  "_note": "Representative years for instances whose vault year_int is missing (vault year_display kept as written). Negative = BCE. Approximate by design.",
+  "years": {
+    "cave-virginity-test-serpent-greece": -400,
+    "churinga-soul-stones-birs-burgaschi-switzerland": -3000,
+    "churinga-soul-stones-central-australia": 1900,
+    "serpent-cecrops-athenian-citadel": -500,
+    "stone-basuto-hero-transitus": 1900,
+    "stone-estsanatlehi-turquoise-navaho": 1930,
+    "stone-orestes-cure-laconia": 170,
+    "sun-moon-oiled-paper-schizophrenic-dream": 1930,
+    "resurrection-old-woman-skin-casting-africa": 1900,
+    "stone-quetzalcoatl-green-stone-aztec": 1400,
+    "stone-flint-man-iroquois": 1850,
+    "tree-aswatha-village-tree-india": 1900,
+    "tree-zarathustra-metallic-branches-iran": -600
+  }
+}

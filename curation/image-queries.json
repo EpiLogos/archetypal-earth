@@ -1,0 +1,2544 @@
+{
+ "_note": "Curated Commons search queries (2-4 each). Optional per entry: pin (a File: title, forces it), require (groups of alternative tokens that must all appear in title/description/categories), exclude (substrings that ban a candidate), exhaustive (search every query before picking).",
+ "archetypes": {
+  "self": {
+   "queries": [
+    "Gustave Doré Paradiso empyrean celestial rose engraving",
+    "mandala thangka Tibetan painting",
+    "Hildegard of Bingen Liber Divinorum Operum universal man"
+   ]
+  },
+  "shadow": {
+   "queries": [
+    "Goya sleep of reason produces monsters",
+    "Fuseli The Nightmare painting",
+    "Gustave Doré Inferno engraving darkness"
+   ]
+  },
+  "anima": {
+   "queries": [
+    "Waterhouse Hylas and the Nymphs",
+    "Waterhouse Lamia painting",
+    "nymph water spirit painting 19th century"
+   ]
+  },
+  "animus": {
+   "queries": [
+    "Gerard Psyche receiving the first kiss of Cupid",
+    "Odin the wanderer painting",
+    "Apollo and Daphne Bernini"
+   ],
+   "pin": "File:Gerard FrancoisPascalSimon-Cupid Psyche end.jpg"
+  },
+  "great-mother": {
+   "queries": [
+    "Venus of Willendorf",
+    "Isis nursing Horus statuette",
+    "Cybele goddess statue Magna Mater"
+   ]
+  },
+  "child": {
+   "queries": [
+    "Harpocrates child god statuette",
+    "Madonna and Child painting Renaissance",
+    "infant Christ Child in manger Nativity"
+   ],
+   "pin": "File:Clevelandart 1972.6.jpg"
+  },
+  "kore": {
+   "queries": [
+    "Peplos Kore Acropolis",
+    "Rossetti Proserpine painting",
+    "Botticelli Primavera Flora"
+   ]
+  },
+  "trickster": {
+   "queries": [
+    "Reynard the Fox medieval manuscript",
+    "Loki Norse mythology illustration Frølich",
+    "Hermes infant stealing cattle Apollo vase"
+   ]
+  },
+  "hero": {
+   "queries": [
+    "Raphael Saint George and the Dragon",
+    "Perseus Cellini Medusa head statue",
+    "Heracles Farnese"
+   ]
+  },
+  "wise-old-man": {
+   "queries": [
+    "Hermes Trismegistus Siena Cathedral mosaic",
+    "Rembrandt philosopher in meditation",
+    "Merlin Arthurian manuscript illumination"
+   ]
+  },
+  "mana-personality": {
+   "queries": [
+    "Michelangelo Moses statue San Pietro in Vincoli",
+    "Rider Waite Magician tarot",
+    "shaman drum painting Siberian"
+   ]
+  },
+  "psychopomp": {
+   "queries": [
+    "Patinir Charon crossing the Styx",
+    "Hermes Psychopompos Attic lekythos",
+    "Anubis weighing of the heart Book of the Dead"
+   ],
+   "pin": "File:Crossing the River Styx.jpg"
+  },
+  "syzygy": {
+   "queries": [
+    "Rosarium philosophorum conjunction sun moon woodcut",
+    "Ardhanarishvara Shiva Parvati sculpture",
+    "Isis Osiris relief"
+   ],
+   "pin": "File:Ardhanarishvara, Chola period, 11th century, Government Museum, Chennai.jpg"
+  }
+ },
+ "families": {
+  "anima-figure": {
+   "queries": [
+    "Rossetti Beata Beatrix",
+    "muse woman painting Pre-Raphaelite",
+    "Ayesha She Rider Haggard illustration"
+   ]
+  },
+  "anima-mundi": {
+   "queries": [
+    "Fludd Utriusque cosmi anima mundi engraving",
+    "world soul Hildegard of Bingen vision",
+    "Sophia wisdom allegory engraving woman cosmos"
+   ],
+   "pin": "File:Anima Mundi, Christ, Adam Kadmon with the four elements.jpg"
+  },
+  "anthropos": {
+   "queries": [
+    "Adam Kadmon primordial man Kabbalah",
+    "Hildegard Liber Divinorum Operum man microcosm macrocosm",
+    "cosmic man Purusha painting"
+   ],
+   "pin": "File:Hildegard, Liber divinorum operum simplicis hominis, 1200 Wellcome M0013223.jpg"
+  },
+  "antichrist": {
+   "queries": [
+    "Signorelli Antichrist Orvieto fresco",
+    "Antichrist woodcut Nuremberg Chronicle",
+    "Antichrist medieval manuscript illumination"
+   ],
+   "pin": "File:Luca Signorelli - Sermon and Deeds of the Antichrist - WGA21202.jpg"
+  },
+  "ape": {
+   "queries": [
+    "Thoth baboon Egyptian relief",
+    "ape medieval manuscript devil monkey",
+    "ape alchemical emblem engraving"
+   ],
+   "pin": "File:Thoth as baboon MET LC-10 130 1940 EGDP023516.jpg"
+  },
+  "arrow": {
+   "queries": [
+    "Cupid arrow Eros painting",
+    "Saint Sebastian arrows painting",
+    "Death the archer engraving Danse macabre"
+   ]
+  },
+  "ascent-descent": {
+   "queries": [
+    "Jacob's ladder angels ascending descending",
+    "Ripley Scroll alchemical manuscript",
+    "Hermes Trismegistus ascent heaven engraving"
+   ]
+  },
+  "ass": {
+   "queries": [
+    "Gnostic gem donkey ass",
+    "Apuleius Golden Ass illustration",
+    "donkey Dionysus Silenus"
+   ],
+   "pin": "File:Rembrandt - L'Ânesse du prophète Balaam - L'Ânesse de Balaam - Musée Cognacq-Jay - 2.jpg"
+  },
+  "atman-brahman": {
+   "queries": [
+    "Brahma lotus navel Vishnu Indian painting",
+    "Hiranyagarbha golden germ painting",
+    "Hindu painting Brahman light"
+   ]
+  },
+  "bird": {
+   "queries": [
+    "Egyptian ba bird human-headed soul",
+    "Birds of Hermes alchemical emblem engraving",
+    "medieval manuscript bird soul"
+   ]
+  },
+  "cave": {
+   "queries": [
+    "Lascaux cave paintings",
+    "Nativity icon cave Bethlehem",
+    "Plato allegory of the cave engraving"
+   ]
+  },
+  "chakra": {
+   "queries": [
+    "chakras Indian painting kundalini",
+    "Tantric chakras lotus painting",
+    "seven chakras Kundalini yoga manuscript"
+   ],
+   "pin": "File:Kundalini Tantra painting (Rajasthan, 18th century).png"
+  },
+  "chalice": {
+   "queries": [
+    "Holy Grail Galahad Pre-Raphaelite",
+    "Ardagh Chalice",
+    "medieval chalice gold"
+   ]
+  },
+  "christ-figure": {
+   "queries": [
+    "Christ Pantocrator Sinai icon",
+    "Good Shepherd mosaic Galla Placidia",
+    "Christ in majesty fresco mandorla"
+   ]
+  },
+  "churinga": {
+   "queries": [
+    "churinga tjurunga Arrernte sacred stones",
+    "Spencer Gillen Arunta churinga",
+    "Aboriginal sacred object Arrernte"
+   ],
+   "skip": "sacred/restricted objects of Aboriginal peoples: no public image used"
+  },
+  "circle": {
+   "queries": [
+    "Hildegard of Bingen circular vision manuscript",
+    "Leonardo Vitruvian man circle square",
+    "Giotto circle O"
+   ],
+   "pin": "File:Aurora consurgens zurich 023 f-11r-23 zodiac.jpg"
+  },
+  "circulation-of-light": {
+   "queries": [
+    "Dante Paradiso Doré circles of light",
+    "Fludd celestial spheres engraving",
+    "Hildegard of Bingen vision light"
+   ],
+   "pin": "File:Paradiso Canto 31 (no caption).jpg"
+  },
+  "coniunctio": {
+   "queries": [
+    "Rosarium philosophorum coniunctio woodcut",
+    "Splendor Solis sun and moon",
+    "alchemical wedding king queen"
+   ],
+   "pin": "File:Marriage Sun Moon - Rosarium Philosophorum Griemiller.jpg"
+  },
+  "corn-god": {
+   "queries": [
+    "Maya maize god vessel",
+    "Osiris grain corn germinating",
+    "Demeter Triptolemos relief"
+   ]
+  },
+  "cross": {
+   "queries": [
+    "Celtic high cross",
+    "ankh crux ansata relief",
+    "Byzantine jeweled cross"
+   ]
+  },
+  "crown": {
+   "queries": [
+    "Imperial Crown of the Holy Roman Empire",
+    "Iron Crown of Lombardy",
+    "Coronation of the Virgin painting"
+   ],
+   "pin": "File:Imperial Crown of the Holy Roman Empire front.jpg"
+  },
+  "demiurge": {
+   "queries": [
+    "Ialdabaoth lion-headed Gnostic",
+    "Blake Ancient of Days",
+    "Gnostic Demiurge gem"
+   ]
+  },
+  "devil": {
+   "queries": [
+    "Giotto Last Judgment devil",
+    "Mephistopheles Delacroix lithograph",
+    "Doré Satan Paradise Lost"
+   ]
+  },
+  "dismemberment": {
+   "queries": [
+    "Osiris dismembered body Isis",
+    "Orpheus torn by Maenads vase",
+    "Dionysus Zagreus Titans"
+   ],
+   "pin": "File:Dood van Orpheus Orpheé tué par les Baccantes (titel op object), RP-P-OB-51.288.jpg"
+  },
+  "divine-child": {
+   "queries": [
+    "Harpocrates child god statuette",
+    "Christ Child Madonna painting",
+    "Horus child lotus"
+   ],
+   "pin": "File:Madonna Litta Hermitage.jpg"
+  },
+  "divine-pair": {
+   "queries": [
+    "hieros gamos Zeus Hera relief",
+    "Shiva Parvati painting",
+    "Isis Osiris relief"
+   ]
+  },
+  "dog": {
+   "queries": [
+    "Anubis jackal god Egypt",
+    "Cerberus hound Hades engraving",
+    "hunting dog medieval tapestry"
+   ]
+  },
+  "double": {
+   "queries": [
+    "Dioscuri Castor Pollux statue",
+    "twin gods relief",
+    "Gemini twins medieval manuscript"
+   ]
+  },
+  "dove": {
+   "queries": [
+    "Holy Spirit dove Bernini Gloria",
+    "Mercurius dove alchemical emblem",
+    "Noah dove olive branch painting"
+   ],
+   "pin": "File:Rom, Vatikan, Basilika St. Peter, Die Taube des Heiligen Geistes (Cathedra Petri, Bernini).jpg"
+  },
+  "dragon": {
+   "queries": [
+    "Marduk Tiamat Assyrian cylinder seal",
+    "Saint George and the Dragon painting",
+    "Chinese dragon painting nine dragons",
+    "dragon alchemical engraving"
+   ]
+  },
+  "dual-mother": {
+   "queries": [
+    "Leonardo Virgin and Child with Saint Anne",
+    "Anne Mary Child Masaccio",
+    "Hera Heracles nursing"
+   ]
+  },
+  "eagle": {
+   "queries": [
+    "Eagle Zeus Ganymede",
+    "Eagle of Saint John evangelist",
+    "double-headed eagle medieval manuscript"
+   ]
+  },
+  "eye": {
+   "queries": [
+    "Eye of Horus wedjat",
+    "Eye of Providence painting",
+    "All-seeing eye engraving"
+   ]
+  },
+  "filius-philosophorum": {
+   "queries": [
+    "Rosarium philosophorum resurrection risen Christ",
+    "homunculus alchemical Faust",
+    "child alchemical Mutus liber"
+   ],
+   "pin": "File:Splendor Solis 08 resurrection out of swamp.jpg"
+  },
+  "fire": {
+   "queries": [
+    "alchemist furnace fire engraving",
+    "Prometheus fire painting",
+    "burning bush Moses painting"
+   ]
+  },
+  "fish": {
+   "queries": [
+    "Ichthys fish early Christian mosaic",
+    "Oannes apkallu relief Nimrud",
+    "Pisces zodiac two fishes manuscript",
+    "Jonah and the whale painting"
+   ]
+  },
+  "furnace": {
+   "queries": [
+    "Athanor alchemical furnace engraving",
+    "fiery furnace three young men Daniel fresco",
+    "alchemical laboratory Khunrath furnace"
+   ]
+  },
+  "garden": {
+   "queries": [
+    "hortus conclusus Virgin garden painting",
+    "Garden of Eden Cranach",
+    "rose garden of the philosophers alchemical"
+   ]
+  },
+  "giant": {
+   "queries": [
+    "Gigantomachy Pergamon altar relief",
+    "Atlas giant statue Farnese",
+    "David and Goliath painting"
+   ]
+  },
+  "god-image": {
+   "queries": [
+    "Blake Ancient of Days",
+    "Rublev Trinity icon",
+    "Michelangelo Creation of Adam"
+   ],
+   "pin": "File:Michelangelo - Creation of Adam (cropped).jpg"
+  },
+  "golden-flower": {
+   "queries": [
+    "Chinese painting golden lotus flower",
+    "Red and white rose alchemy emblem",
+    "Taoist alchemy flower painting"
+   ],
+   "pin": "File:元 佚名 蓮花圖 軸-Lotus and waterbirds MET DT242921.jpg"
+  },
+  "grail": {
+   "queries": [
+    "Burne-Jones Holy Grail tapestry",
+    "Quest of the Holy Grail Galahad manuscript",
+    "Lancelot Grail vision illumination"
+   ]
+  },
+  "head": {
+   "queries": [
+    "Golden mask of Agamemnon Mycenae",
+    "brazen head Roger Bacon engraving",
+    "head of Mercury alchemy"
+   ],
+   "pin": "File:Golden mask of Agamemnon.jpg"
+  },
+  "heart": {
+   "queries": [
+    "Sacred Heart of Jesus painting",
+    "Weighing of the heart Book of the Dead",
+    "medieval anatomical heart illustration"
+   ]
+  },
+  "helen-of-troy": {
+   "queries": [
+    "Evelyn De Morgan Helen of Troy",
+    "Gustave Moreau Helen",
+    "Faust and Helen illustration"
+   ]
+  },
+  "hermaphrodite": {
+   "queries": [
+    "Sleeping Hermaphroditus Louvre",
+    "Rebis alchemical hermaphrodite engraving",
+    "androgyne Rosarium philosophorum"
+   ]
+  },
+  "holy-ghost": {
+   "queries": [
+    "Pentecost icon tongues of fire",
+    "Holy Spirit dove stained glass",
+    "Pentecost manuscript illumination"
+   ]
+  },
+  "homunculus": {
+   "queries": [
+    "homunculus alchemical Paracelsus illustration",
+    "homunculus Faust Goethe illustration",
+    "homunculus vial engraving"
+   ]
+  },
+  "horn": {
+   "queries": [
+    "narwhal tusk unicorn horn",
+    "cornucopia horn of plenty painting",
+    "horned Moses Michelangelo"
+   ]
+  },
+  "horse": {
+   "queries": [
+    "Sleipnir Odin Gotland picture stone",
+    "Pegasus painting",
+    "Lascaux horse cave painting"
+   ]
+  },
+  "i-ching-hexagram": {
+   "queries": [
+    "I Ching hexagrams woodcut Chinese",
+    "Fu Xi bagua trigrams painting",
+    "dragon horse river map Chinese"
+   ],
+   "pin": "File:Diagram of I Ching hexagrams owned by Gottfried Wilhelm Leibniz, 1701.jpg"
+  },
+  "island": {
+   "queries": [
+    "Böcklin Isle of the Dead",
+    "Isle of Avalon Burne-Jones",
+    "Saint Brendan island legend manuscript"
+   ]
+  },
+  "khidr": {
+   "queries": [
+    "Khidr Persian miniature",
+    "Alexander and Khidr water of life miniature",
+    "Moses and Khidr Persian manuscript"
+   ]
+  },
+  "king-queen-pair": {
+   "queries": [
+    "Rosarium philosophorum king and queen",
+    "sun and moon king queen alchemy",
+    "alchemical king queen bath"
+   ],
+   "pin": "File:Marriage Sol Moon - Rosarium Philosophorum Griemiller02.jpg"
+  },
+  "lamb": {
+   "queries": [
+    "Ghent Altarpiece Adoration of the Mystic Lamb",
+    "Agnus Dei Zurbaran",
+    "Lamb of God mosaic"
+   ]
+  },
+  "lamia": {
+   "queries": [
+    "Waterhouse Lamia",
+    "Lilith Rossetti Lady Lilith",
+    "Lamia mythology painting"
+   ]
+  },
+  "lapis": {
+   "queries": [
+    "philosophers stone alchemy engraving",
+    "Lapis philosophorum emblem",
+    "alchemy stone Splendor Solis"
+   ]
+  },
+  "lingam-yoni": {
+   "queries": [
+    "Shiva lingam yoni temple",
+    "Kbal Spean lingam carving",
+    "Shiva linga stone India"
+   ],
+   "pin": "File:Shiva Linga near Gudilova.jpg"
+  },
+  "lion": {
+   "queries": [
+    "green lion devouring the sun alchemy",
+    "Nemean lion Heracles vase",
+    "Lion of Saint Mark relief"
+   ]
+  },
+  "lion-headed-god": {
+   "queries": [
+    "Mithraic Aion leontocephaline Vatican",
+    "leontocephaline Mithras statue",
+    "Zurvan Aion lion-headed"
+   ]
+  },
+  "lotus": {
+   "queries": [
+    "Buddha seated lotus painting",
+    "Brahma on lotus Vishnu painting",
+    "blue lotus Egyptian relief"
+   ]
+  },
+  "lumen-naturae": {
+   "queries": [
+    "Paracelsus portrait engraving",
+    "Fludd Utriusque cosmi sun nature light",
+    "light of nature alchemy engraving"
+   ]
+  },
+  "magical-companion": {
+   "queries": [
+    "Tobias and the Angel painting",
+    "Raphael Tobias angel",
+    "Emmaus road Christ appears painting"
+   ]
+  },
+  "magician": {
+   "queries": [
+    "Magician tarot card Marseille",
+    "Merlin Arthurian manuscript",
+    "Hermes Trismegistus woodcut"
+   ]
+  },
+  "magnet": {
+   "queries": [
+    "Gilbert De Magnete engraving",
+    "Kircher magnet engraving",
+    "lodestone 17th century illustration"
+   ],
+   "pin": "File:Gilbert De Magnete Illo191.jpg"
+  },
+  "maiden": {
+   "queries": [
+    "Rossetti Proserpine painting",
+    "Botticelli Primavera",
+    "Peplos Kore Acropolis"
+   ]
+  },
+  "mandala": {
+   "queries": [
+    "Tibetan mandala thangka",
+    "Kalachakra mandala painting",
+    "rose window cathedral stained glass"
+   ],
+   "pin": "File:Amitayus Mandala.jpeg"
+  },
+  "melusina": {
+   "queries": [
+    "Melusine Lusignan manuscript illumination",
+    "Melusine woodcut",
+    "Melusine fairy serpent medieval"
+   ]
+  },
+  "mercurius": {
+   "queries": [
+    "Mercurius alchemical engraving",
+    "Giambologna Mercury",
+    "Rosarium philosophorum Mercurius"
+   ],
+   "pin": "File:Giambologna-Flying Mercury-Louvre.jpg"
+  },
+  "merkabah": {
+   "queries": [
+    "Raphael Vision of Ezekiel",
+    "Ezekiel vision chariot illustration",
+    "four living creatures Ezekiel"
+   ]
+  },
+  "monster": {
+   "queries": [
+    "Doré Leviathan engraving",
+    "sea monster Carta marina Olaus Magnus",
+    "medieval bestiary monster"
+   ]
+  },
+  "moon": {
+   "queries": [
+    "Selene Endymion painting",
+    "Diana Artemis moon fresco",
+    "alchemical moon Luna engraving"
+   ]
+  },
+  "moth": {
+   "queries": [
+    "Psyche butterfly soul Greek",
+    "Merian metamorphosis insectorum",
+    "death's-head hawkmoth engraving"
+   ]
+  },
+  "mother-goddess": {
+   "queries": [
+    "Isis nursing Horus statuette",
+    "Cybele goddess statue",
+    "Venus of Willendorf",
+    "mother goddess terracotta figurine"
+   ]
+  },
+  "mothers-of-faust": {
+   "queries": [
+    "Faust Mothers Goethe illustration",
+    "Retzsch Faust outlines",
+    "Goethe Faust II illustration engraving"
+   ]
+  },
+  "mountain": {
+   "queries": [
+    "Michelspacher Cabala mountain of the adepts",
+    "Mount Sinai Moses painting",
+    "Mount Meru painting"
+   ]
+  },
+  "night-sea-journey": {
+   "queries": [
+    "Jonah and the whale Lastman",
+    "Ra solar barque night journey papyrus",
+    "Heracles sun cup Helios vase"
+   ]
+  },
+  "nigredo": {
+   "queries": [
+    "nigredo alchemy crow skull illustration",
+    "Splendor Solis black nigredo",
+    "Basil Valentine vitriol emblem"
+   ],
+   "pin": "File:Aurora consurgens zurich 060 f-29v-60 darkangel.jpg"
+  },
+  "nixie": {
+   "queries": [
+    "Undine nixie painting",
+    "Waterhouse siren mermaid",
+    "Lorelei Rhine painting"
+   ],
+   "pin": "File:John William Waterhouse - MermaidFXD.jpg"
+  },
+  "paradise": {
+   "queries": [
+    "Cranach Garden of Eden",
+    "Jan Brueghel Paradise",
+    "Doré Paradiso engraving"
+   ]
+  },
+  "peacock": {
+   "queries": [
+    "peacock alchemy cauda pavonis emblem",
+    "Byzantine mosaic peacock",
+    "peacock Persian miniature"
+   ]
+  },
+  "pearl": {
+   "queries": [
+    "Cleopatra dissolving pearl Tiepolo",
+    "pearl oyster Renaissance engraving",
+    "Hymn of the Pearl illustration"
+   ],
+   "pin": "File:Jan de Bray - Cleopatra puts the pearl in the wine - Royal Collection - 1652 - RCIN 404756.jpg"
+  },
+  "phallus": {
+   "queries": [
+    "Herm of Hermes statue",
+    "Priapus fresco House of the Vettii",
+    "ithyphallic Hermes Kyllenios"
+   ]
+  },
+  "philosophers-egg": {
+   "queries": [
+    "alchemical egg philosophers egg engraving",
+    "Orphic egg Phanes relief",
+    "Splendor Solis vessel egg"
+   ],
+   "pin": "File:Splendor Solis 09 hermaphrodite with egg.jpg"
+  },
+  "phoenix": {
+   "queries": [
+    "Phoenix bird medieval bestiary",
+    "Fenghuang painting",
+    "phoenix rising flames engraving"
+   ]
+  },
+  "planetary-gods": {
+   "queries": [
+    "Beham children of the planets woodcut",
+    "Chronograph of 354 planetary gods",
+    "seven planets gods engraving"
+   ],
+   "pin": "File:Suite des sept planètes - (d'après) Hans Sebald Beham - btv1b8418775z.jpg"
+  },
+  "plough": {
+   "queries": [
+    "Egyptian plough tomb painting Sennedjem",
+    "Tres Riches Heures ploughing",
+    "Bronze Age plough rock carving"
+   ]
+  },
+  "point": {
+   "queries": [
+    "Hildegard of Bingen cosmic sphere",
+    "Kircher circle center engraving",
+    "Dante Paradiso point of light Doré"
+   ],
+   "pin": "File:UtriusqueCosmiMacrocosm.png"
+  },
+  "prima-materia": {
+   "queries": [
+    "Fludd chaos primordial Utriusque cosmi",
+    "prima materia alchemy engraving",
+    "Saturn devouring son Goya"
+   ]
+  },
+  "quaternity": {
+   "queries": [
+    "four evangelists symbols Book of Kells",
+    "Christ in majesty tetramorph",
+    "four rivers of Paradise"
+   ]
+  },
+  "raven": {
+   "queries": [
+    "Odin ravens Huginn Muninn",
+    "raven alchemy nigredo engraving",
+    "Edmund Dulac raven"
+   ]
+  },
+  "rebis": {
+   "queries": [
+    "Rebis alchemical Basil Valentine",
+    "Buch der heiligen Dreifaltigkeit Rebis",
+    "Rosarium philosophorum hermaphrodite"
+   ],
+   "pin": "File:Atalanta Fugiens 38 Rebis.jpg"
+  },
+  "resurrection": {
+   "queries": [
+    "Piero della Francesca Resurrection",
+    "Rosarium philosophorum resurrection",
+    "raising of Lazarus painting"
+   ]
+  },
+  "rose": {
+   "queries": [
+    "Rosarium philosophorum red and white rose",
+    "Doré celestial rose Paradiso",
+    "rose window"
+   ]
+  },
+  "rotundum": {
+   "queries": [
+    "armillary sphere Renaissance engraving",
+    "Mercurius uroboros alchemical circle",
+    "perfect sphere alchemy"
+   ],
+   "pin": "File:Kepler Celestial Spheres.jpg"
+  },
+  "rubedo": {
+   "queries": [
+    "Splendor Solis red king",
+    "alchemical red lion",
+    "rubedo alchemy illustration"
+   ]
+  },
+  "sacrifice": {
+   "queries": [
+    "Caravaggio Sacrifice of Isaac",
+    "Aztec sacrifice Codex Magliabechiano",
+    "Mithras tauroctony relief"
+   ]
+  },
+  "salamander": {
+   "queries": [
+    "salamander alchemical fire emblem",
+    "Francis I salamander emblem",
+    "salamander fire engraving"
+   ]
+  },
+  "salt": {
+   "queries": [
+    "Lot's wife pillar of salt painting",
+    "alchemical salt symbol engraving",
+    "tria prima mercury sulphur salt"
+   ],
+   "pin": "File:William de Brailes - Lot and his Family Flee Sodom (Genesis 19 -15-26) - Walters W1064R - Full Page.jpg"
+  },
+  "scarab": {
+   "queries": [
+    "Egyptian scarab amulet",
+    "Khepri scarab sun papyrus",
+    "winged scarab pectoral Tutankhamun"
+   ]
+  },
+  "senex-figure": {
+   "queries": [
+    "Rembrandt old man portrait",
+    "Father Time engraving",
+    "hermit old man Tarot"
+   ],
+   "pin": "File:Rembrandt Harmenszoon van Rijn - An Old Man in Red.JPG"
+  },
+  "serpent": {
+   "queries": [
+    "ouroboros alchemical manuscript",
+    "Mercurius serpent alchemy engraving",
+    "Minoan snake goddess",
+    "brazen serpent Moses painting"
+   ]
+  },
+  "shiva": {
+   "queries": [
+    "Shiva Nataraja bronze",
+    "Shiva Parvati Chola sculpture",
+    "Shiva meditating painting"
+   ]
+  },
+  "sol-niger": {
+   "queries": [
+    "sol niger black sun alchemy",
+    "Splendor Solis black sun",
+    "eclipse black sun woodcut"
+   ]
+  },
+  "solificatio": {
+   "queries": [
+    "Helios chariot sun god mosaic",
+    "Christ Helios Vatican necropolis mosaic",
+    "Apollo Helios relief"
+   ],
+   "pin": "File:Helios metope from Temple of Athena at Troy (Berlin Altes Museum LV 21.1).jpg"
+  },
+  "sophia": {
+   "queries": [
+    "Sophia Divine Wisdom icon",
+    "Hagia Sophia mosaic",
+    "Pistis Sophia Gnostic"
+   ],
+   "pin": "File:Holy Wisdom created home.jpg"
+  },
+  "soul-bird": {
+   "queries": [
+    "Egyptian ba bird soul",
+    "soul bird Greek vase",
+    "human-headed bird tomb"
+   ]
+  },
+  "spark": {
+   "queries": [
+    "Prometheus stealing fire painting",
+    "alchemy scintilla flame engraving",
+    "fire spark darkness painting"
+   ]
+  },
+  "stag": {
+   "queries": [
+    "Saint Hubert vision stag",
+    "Gundestrup cauldron Cernunnos",
+    "Lambspringk stag unicorn emblem"
+   ]
+  },
+  "star": {
+   "queries": [
+    "Adoration of the Magi Star of Bethlehem",
+    "pentagram Agrippa occult philosophy",
+    "star of Venus morning star painting"
+   ]
+  },
+  "stone": {
+   "queries": [
+    "Omphalos Delphi",
+    "Jacob's pillar stone Bethel painting",
+    "philosophers stone alchemy engraving"
+   ]
+  },
+  "sulphur": {
+   "queries": [
+    "Emblem representing the path to the philosopher's stone Wellcome",
+    "Basil Valentine Keys alchemy Wellcome"
+   ]
+  },
+  "sun": {
+   "queries": [
+    "Aten sun disc Akhenaten relief",
+    "Apollo Helios sun chariot",
+    "Splendor Solis sun"
+   ],
+   "pin": "File:Relief depicting Akhenaton and Nefertiti with three of their daughters under the rays of Aton 01.jpg"
+  },
+  "sun-hero": {
+   "queries": [
+    "Heracles twelve labours Greek vase",
+    "Gilgamesh relief Khorsabad",
+    "Horus Ra Egypt relief"
+   ]
+  },
+  "swan": {
+   "queries": [
+    "Leda and the Swan Leonardo",
+    "Lohengrin swan knight",
+    "Atalanta fugiens swan emblem"
+   ]
+  },
+  "swastika": {
+   "queries": [
+    "swastika Buddhist temple",
+    "swastika Roman mosaic",
+    "swastika Troy spindle whorl"
+   ]
+  },
+  "tao": {
+   "queries": [
+    "Laozi riding ox painting",
+    "Chinese taiji yin yang painting",
+    "Taoist immortal painting"
+   ]
+  },
+  "tauroctony": {
+   "queries": [
+    "Mithras tauroctony relief Louvre",
+    "Mithras bull slaying fresco Capua",
+    "tauroctony Mithraeum"
+   ]
+  },
+  "temenos": {
+   "queries": [
+    "Delphi sanctuary Apollo temple",
+    "monastery cloister garden",
+    "temple precinct sacred enclosure"
+   ],
+   "pin": "File:Sanctuary of Apollo at Delphi from the Phaedriades 03.jpg"
+  },
+  "tetramorph": {
+   "queries": [
+    "Christ in majesty tetramorph",
+    "Evangelist symbols Book of Kells",
+    "four evangelists symbols fresco"
+   ]
+  },
+  "toad": {
+   "queries": [
+    "toad alchemical engraving",
+    "Ripley Scroll toad",
+    "toad witch medieval woodcut"
+   ],
+   "pin": "File:Ripley alchemical scroll - Prime matter as a toad putrefying in a vessel - Leonard Smethley, Princeton University Library, 1624.jpg"
+  },
+  "treasure": {
+   "queries": [
+    "Rackham Fafnir dragon treasure",
+    "Sigurd Fafnir carving",
+    "Nibelung hoard illustration"
+   ],
+   "pin": "File:Sigurd pierced him with his sword (1901) by Arthur Rackham.jpg"
+  },
+  "tree": {
+   "queries": [
+    "Yggdrasil Norse",
+    "Tree of Life medieval manuscript",
+    "arbor philosophica alchemical tree",
+    "world tree Mesoamerican Codex"
+   ],
+   "pin": "File:Om Yggdrasil by Frølich.jpg"
+  },
+  "trickster-figure": {
+   "queries": [
+    "Loki Norse mythology illustration",
+    "Coyote trickster Native American",
+    "Till Eulenspiegel woodcut"
+   ]
+  },
+  "trinity": {
+   "queries": [
+    "Rublev Trinity icon",
+    "Masaccio Holy Trinity fresco",
+    "Throne of mercy Trinity painting"
+   ]
+  },
+  "unicorn": {
+   "queries": [
+    "Lady and the Unicorn tapestry",
+    "Unicorn tapestries Cloisters hunt",
+    "unicorn virgin lap medieval manuscript"
+   ]
+  },
+  "uroboros": {
+   "queries": [
+    "ouroboros alchemical",
+    "Codex Marcianus ouroboros",
+    "ouroboros Egyptian Tutankhamun shrine"
+   ],
+   "pin": "File:Chrysopoea of Cleopatra 1.png"
+  },
+  "venus": {
+   "queries": [
+    "Botticelli Birth of Venus",
+    "Hypnerotomachia Poliphili woodcut Venus",
+    "Venus de Milo"
+   ]
+  },
+  "vessel": {
+   "queries": [
+    "alchemical vessel alembic retort engraving",
+    "pelican alchemical vessel",
+    "Greek krater vase"
+   ]
+  },
+  "virgin": {
+   "queries": [
+    "Virgin of Vladimir icon",
+    "Madonna enthroned icon",
+    "Annunciation painting"
+   ]
+  },
+  "water": {
+   "queries": [
+    "fountain of life Van Eyck",
+    "Hokusai Great Wave",
+    "fountain of youth Cranach"
+   ]
+  },
+  "well-spring": {
+   "queries": [
+    "Fons vitae fountain of life",
+    "Fons mercurialis Rosarium",
+    "fountain of youth Cranach painting"
+   ]
+  },
+  "wind": {
+   "queries": [
+    "Tower of the Winds Athens relief",
+    "Boreas wind god vase",
+    "Fujin Raijin wind god screen"
+   ]
+  },
+  "world-clock": {
+   "queries": [
+    "Prague astronomical clock Orloj",
+    "Strasbourg astronomical clock",
+    "astrolabe clock Renaissance"
+   ]
+  },
+  "world-wheel": {
+   "queries": [
+    "Bhavachakra wheel of life Tibetan",
+    "Wheel of Fortune Rota fortunae medieval",
+    "wheel of life thangka"
+   ]
+  },
+  "worm": {
+   "queries": [
+    "Merian metamorphosis silkworm",
+    "alchemical dragon worm engraving",
+    "caterpillar chrysalis butterfly engraving"
+   ],
+   "pin": "File:Metamorphosis of the Lappet (SM 1495z).png"
+  },
+  "yantra": {
+   "queries": [
+    "Sri Yantra Tantric painting",
+    "yantra Indian manuscript",
+    "sand mandala Tibetan"
+   ],
+   "pin": "File:Sri Yantra copper.jpg"
+  }
+ },
+ "occurrences": {
+  "uroboros-codex-marcianus-venice-11c": {
+   "queries": [
+    "Codex Marcianus ouroboros Chrysopoeia of Cleopatra",
+    "ouroboros Greek alchemical manuscript Venice Marciana"
+   ],
+   "require": [
+    [
+     "ouroboros",
+     "uroboros",
+     "chrysopoeia",
+     "marcian"
+    ]
+   ]
+  },
+  "anthropos-man-rising-from-river-splendor-solis-germany-1532": {
+   "queries": [
+    "Splendor Solis man rising from the river",
+    "Splendor Solis Harley 3469 illumination"
+   ],
+   "require": [
+    [
+     "splendor"
+    ]
+   ],
+   "pin": "File:Splendor Solis 08 resurrection out of swamp.jpg"
+  },
+  "coniunctio-solis-et-lunae-splendor-solis-1582": {
+   "queries": [
+    "Splendor Solis Harley 3469 sun moon conjunction",
+    "Splendor Solis alchemical illumination king queen"
+   ],
+   "require": [
+    [
+     "splendor"
+    ]
+   ],
+   "pin": "File:Splendor Solis 04 solar king and lunar queen meet.jpg"
+  },
+  "rex-marinus-splendor-solis-1582": {
+   "queries": [
+    "Splendor Solis sea king Harley 3469",
+    "Splendor Solis alchemical illumination sea"
+   ],
+   "require": [
+    [
+     "splendor"
+    ]
+   ],
+   "pin": "File:Splendor Solis 07 drowning king.jpg"
+  },
+  "anthropos-three-forms-ripley-scrowle-1588": {
+   "queries": [
+    "Ripley Scroll alchemical",
+    "Ripley Scrowle manuscript"
+   ],
+   "require": [
+    [
+     "ripley"
+    ]
+   ]
+  },
+  "ascent-descent-ripley-scrowle-england-16c": {
+   "queries": [
+    "Ripley Scroll alchemical Huntington",
+    "Ripley Scroll Yale Beinecke"
+   ],
+   "require": [
+    [
+     "ripley"
+    ]
+   ]
+  },
+  "golden-flower-ripley-scrowle-1588": {
+   "queries": [
+    "Ripley Scroll British Museum Sloane",
+    "Ripley Scroll roses"
+   ],
+   "require": [
+    [
+     "ripley"
+    ]
+   ]
+  },
+  "tree-ripley-scrowle-bm-sloane-5025-london-1588": {
+   "queries": [
+    "Ripley Scroll Sloane 5025",
+    "Ripley Scroll tree alchemical"
+   ],
+   "require": [
+    [
+     "ripley"
+    ]
+   ]
+  },
+  "melusina-anima-ripley-scrowle-bm-sloane-5025-1588": {
+   "queries": [
+    "Ripley Scroll mermaid Melusine",
+    "Ripley Scroll Wellcome"
+   ],
+   "require": [
+    [
+     "ripley"
+    ]
+   ]
+  },
+  "fons-mercurialis-rosarium-1550": {
+   "queries": [
+    "Rosarium philosophorum Mercurial fountain woodcut",
+    "Rosarium philosophorum 1550 fons"
+   ],
+   "require": [
+    [
+     "rosarium"
+    ]
+   ]
+  },
+  "sol-luna-allegory-rosarium-1550": {
+   "queries": [
+    "Rosarium philosophorum Sol and Luna woodcut",
+    "Rosarium philosophorum 1550 sun moon"
+   ],
+   "require": [
+    [
+     "rosarium"
+    ]
+   ]
+  },
+  "green-lion-devouring-sun-rosarium-1550": {
+   "queries": [
+    "green lion devouring the sun alchemy",
+    "Rosarium philosophorum lion sun"
+   ],
+   "require": [
+    [
+     "lion"
+    ]
+   ]
+  },
+  "rebis-hermaphrodite-rosarium-1550": {
+   "queries": [
+    "Rosarium philosophorum hermaphrodite woodcut",
+    "Rosarium philosophorum rebis"
+   ],
+   "require": [
+    [
+     "rosarium"
+    ]
+   ]
+  },
+  "risen-christ-filius-philosophorum-rosarium-1550": {
+   "queries": [
+    "Rosarium philosophorum resurrection woodcut",
+    "Rosarium philosophorum risen"
+   ],
+   "require": [
+    [
+     "rosarium"
+    ]
+   ]
+  },
+  "moon-luna-adoption-mutus-liber-1702": {
+   "queries": [
+    "Mutus liber plate alchemy",
+    "Mutus liber engraving 1677"
+   ],
+   "require": [
+    [
+     "mutus"
+    ]
+   ]
+  },
+  "oculatus-abis-mutus-liber-1702": {
+   "queries": [
+    "Mutus liber final plate",
+    "Mutus liber alchemical engraving"
+   ],
+   "require": [
+    [
+     "mutus"
+    ]
+   ]
+  },
+  "nigredo-sol-niger-mylius-1622": {
+   "queries": [
+    "Mylius Philosophia reformata engraving",
+    "Mylius Philosophia reformata 1622"
+   ],
+   "require": [
+    [
+     "mylius"
+    ]
+   ]
+  },
+  "alchemist-nigredo-meditatio-jamsthaler-1625": {
+   "queries": [
+    "Jamsthaler Viatorium spagyricum",
+    "Jamsthaler alchemy engraving"
+   ],
+   "require": [
+    [
+     "jamsth",
+     "viatorium"
+    ]
+   ]
+  },
+  "anima-mundi-fludd-utriusque-cosmi-1617": {
+   "queries": [
+    "Fludd Utriusque cosmi anima mundi",
+    "Robert Fludd Utriusque Cosmi Historia engraving"
+   ],
+   "require": [
+    [
+     "fludd"
+    ]
+   ]
+  },
+  "peacock-rebis-khunrath-1595": {
+   "queries": [
+    "Khunrath Amphitheatrum sapientiae aeternae",
+    "Khunrath alchemical engraving"
+   ],
+   "require": [
+    [
+     "khunrath"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "four-seasons-goddesses-round-table-stolcius-1624": {
+   "queries": [
+    "Stolcius Viridarium chymicum",
+    "Viridarium chymicum alchemical emblem"
+   ],
+   "require": [
+    [
+     "stolcius",
+     "viridarium"
+    ]
+   ]
+  },
+  "coniunctio-woman-dragon-grave-scrutinium-1687": {
+   "queries": [
+    "Maier Scrutinium chymicum emblem",
+    "Michael Maier Scrutinium chymicum"
+   ],
+   "require": [
+    [
+     "maier"
+    ]
+   ]
+  },
+  "dragon-lambspringk-fire-musaeum-hermeticum-1625": {
+   "queries": [
+    "Lambspringk Musaeum hermeticum figures",
+    "Lambspringk Symbols alchemy emblem"
+   ],
+   "require": [
+    [
+     "lambspringk"
+    ]
+   ]
+  },
+  "lambspringk-two-reversed-fishes-1678": {
+   "queries": [
+    "Lambspringk two fishes alchemy",
+    "Lambspringk Symbols emblem fishes"
+   ],
+   "require": [
+    [
+     "lambspringk"
+    ]
+   ]
+  },
+  "stag-unicorn-soul-spirit-lambspringk-1625": {
+   "queries": [
+    "Lambspringk Symbols stag unicorn",
+    "Lambspringk deer unicorn alchemical"
+   ],
+   "require": [
+    [
+     "lambspringk"
+    ]
+   ]
+  },
+  "filius-regis-mystagogue-lambspringk-musaeum-1678": {
+   "queries": [
+    "Lambspringk Symbols mountain king son",
+    "Lambspringk Musaeum hermeticum king's son"
+   ],
+   "require": [
+    [
+     "lambspringk"
+    ]
+   ]
+  },
+  "michelspacher-mountain-of-adepts-1654": {
+   "queries": [
+    "Michelspacher Cabala mountain of the adepts",
+    "Cabala Speculum artis et naturae Michelspacher"
+   ],
+   "require": [
+    [
+     "michelspacher"
+    ]
+   ]
+  },
+  "pelican-vessel-rhenanus-frankfurt-1613": {
+   "queries": [
+    "Rhenanus Solis e puteo emanantis",
+    "pelican alchemical vessel engraving"
+   ],
+   "require": [
+    [
+     "pelican",
+     "pelikan",
+     "rhenan"
+    ]
+   ]
+  },
+  "rebis-book-of-holy-trinity-munich-1420": {
+   "queries": [
+    "Buch der heiligen Dreifaltigkeit Rebis",
+    "Book of the Holy Trinity alchemy manuscript"
+   ],
+   "require": [
+    [
+     "dreifaltigkeit",
+     "trinity"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "tree-buch-der-heiligen-dreifaltigkeit-cod-germ-598-munich-1420": {
+   "queries": [
+    "Buch der heiligen Dreifaltigkeit Cod. germ. 598 tree",
+    "Book of the Holy Trinity Munich manuscript"
+   ],
+   "require": [
+    [
+     "dreifaltigkeit",
+     "trinity"
+    ]
+   ]
+  },
+  "homunculi-souls-codex-rhenoviensis-15c": {
+   "queries": [
+    "Codex Rhenoviensis Aurora consurgens",
+    "Aurora consurgens Zurich Rhenoviensis"
+   ],
+   "require": [
+    [
+     "rhenoviensis",
+     "aurora consurgens"
+    ]
+   ]
+  },
+  "peacock-phoenix-codex-rhenoviensis-zurich-15c": {
+   "queries": [
+    "Aurora consurgens Zurich Codex Rhenoviensis",
+    "Aurora consurgens Zentralbibliothek Rhenoviensis"
+   ],
+   "require": [
+    [
+     "rhenoviensis",
+     "aurora consurgens"
+    ]
+   ]
+  },
+  "senex-senior-tabula-chymica-wise-old-man-10c": {
+   "queries": [
+    "Senior Zadith Tabula chymica",
+    "Senior Zadith alchemy engraving"
+   ],
+   "require": [
+    [
+     "senior",
+     "zadith"
+    ]
+   ]
+  },
+  "unicorn-captive-verteuil-tapestry-15c": {
+   "queries": [
+    "Unicorn in Captivity Unicorn Tapestries Cloisters",
+    "Unicorn tapestry captive fence"
+   ],
+   "require": [
+    [
+     "unicorn"
+    ]
+   ]
+  },
+  "unicorn-slaying-virgin-lap-harley-4751-london-13c": {
+   "queries": [
+    "Harley 4751 bestiary unicorn virgin",
+    "bestiary unicorn maiden lap manuscript"
+   ],
+   "require": [
+    [
+     "unicorn"
+    ]
+   ]
+  },
+  "hildegard-macrocosm-microcosm-12c": {
+   "queries": [
+    "Hildegard of Bingen Liber Divinorum Operum macrocosm microcosm",
+    "Hildegard Lucca codex universal man"
+   ],
+   "require": [
+    [
+     "hildegard"
+    ]
+   ]
+  },
+  "cosmology-hildegard-bingen-lucca-12c": {
+   "queries": [
+    "Hildegard Liber Divinorum Operum Lucca cosmos",
+    "Hildegard of Bingen vision cosmos wheel"
+   ],
+   "require": [
+    [
+     "hildegard"
+    ]
+   ]
+  },
+  "tree-wak-wak-tarikh-al-hind-munich": {
+   "queries": [
+    "Waqwaq tree Tarih-i Hind-i Garbi",
+    "Wakwak tree human fruit Ottoman manuscript"
+   ],
+   "require": [
+    [
+     "waq",
+     "wak"
+    ]
+   ]
+  },
+  "mayan-tree-serpent-dresden-codex": {
+   "queries": [
+    "Dresden Codex Maya page",
+    "Dresden Codex Mayan manuscript"
+   ],
+   "require": [
+    [
+     "dresden"
+    ]
+   ]
+  },
+  "grail-vision-lancelot-15c": {
+   "queries": [
+    "Lancelot Grail manuscript Holy Grail vision",
+    "Lancelot du Lac manuscript miniature Grail"
+   ],
+   "require": [
+    [
+     "grail"
+    ]
+   ]
+  },
+  "fountain-youth-codex-de-sphaera-modena-15c": {
+   "queries": [
+    "Codex de Sphaera Modena Estense",
+    "De Sphaera Estense miniature"
+   ],
+   "require": [
+    [
+     "sphaera"
+    ]
+   ]
+  },
+  "joachim-trinity-diagram-zurich-ms": {
+   "queries": [
+    "Joachim of Fiore Trinity Liber figurarum",
+    "Joachim of Fiore figura trinity"
+   ],
+   "require": [
+    [
+     "joachim",
+     "fiore",
+     "flora"
+    ]
+   ]
+  },
+  "night-sea-journey-biblia-pauperum-1471": {
+   "queries": [
+    "Biblia pauperum Jonah whale blockbook",
+    "Biblia pauperum 1471 woodcut"
+   ],
+   "require": [
+    [
+     "biblia pauperum"
+    ]
+   ]
+  },
+  "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s": {
+   "queries": [
+    "Opicinus de Canistris drawing",
+    "Opicinus de Canistris manuscript Vaticanus"
+   ],
+   "require": [
+    [
+     "opicinus"
+    ]
+   ]
+  },
+  "whore-of-babylon-burgkmair-augsburg-1523": {
+   "queries": [
+    "Whore of Babylon Burgkmair Luther Bible woodcut",
+    "Burgkmair Apocalypse woodcut"
+   ],
+   "require": [
+    [
+     "burgkmair",
+     "babylon"
+    ]
+   ]
+  },
+  "wheel-picture-brother-klaus-pilgrims-tract-1488": {
+   "queries": [
+    "Niklaus von Flüe wheel vision Pilgertraktat",
+    "Brother Klaus mandala vision wheel"
+   ],
+   "require": [
+    [
+     "flue",
+     "flüe",
+     "klaus"
+    ]
+   ]
+  },
+  "aelia-laelia-crispis-epitaph-bologna-16c": {
+   "queries": [
+    "Aelia Laelia Crispis Bologna",
+    "Aelia Laelia Crispis epitaph"
+   ],
+   "require": [
+    [
+     "aelia"
+    ]
+   ]
+  },
+  "leonardo-st-anne-virgin-child-1510": {
+   "queries": [
+    "Leonardo Virgin and Child with Saint Anne Louvre",
+    "Leonardo da Vinci Saint Anne Virgin Child lamb"
+   ],
+   "require": [
+    [
+     "anne"
+    ]
+   ]
+  },
+  "dragon-tiamat-marduk-assyrian-cylinder-seal": {
+   "queries": [
+    "Marduk Tiamat Assyrian relief Nimrud",
+    "Marduk dragon Mušḫuššu Babylon cylinder seal"
+   ],
+   "require": [
+    [
+     "marduk",
+     "tiamat"
+    ]
+   ]
+  },
+  "marduk-slaying-tiamat-enuma-elish-babylon-2000bce": {
+   "queries": [
+    "Marduk Tiamat Enuma Elish illustration",
+    "Marduk battle Tiamat relief"
+   ],
+   "require": [
+    [
+     "marduk",
+     "tiamat"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "oannes-fish-mask-relief-nimrud": {
+   "queries": [
+    "Apkallu fish-garbed Nimrud relief",
+    "Nimrud relief fish-cloaked genie"
+   ],
+   "require": [
+    [
+     "apkallu",
+     "nimrud",
+     "fish"
+    ]
+   ]
+  },
+  "anubis-mummy-thebes-egypt-13cbce": {
+   "queries": [
+    "Anubis mummy tomb Sennedjem",
+    "Anubis embalming mummy tomb painting Thebes"
+   ],
+   "require": [
+    [
+     "anubis"
+    ]
+   ]
+  },
+  "nut-heavenly-cow-birth-of-sun-egypt-13cbce": {
+   "queries": [
+    "Book of the Heavenly Cow Seti I tomb",
+    "Nut sky goddess tomb Seti I ceiling"
+   ],
+   "require": [
+    [
+     "nut",
+     "heavenly cow",
+     "seti"
+    ]
+   ]
+  },
+  "osiris-four-sons-horus-lotus": {
+   "queries": [
+    "Book of the Dead Osiris four sons of Horus lotus",
+    "Papyrus of Hunefer Osiris Four Sons of Horus"
+   ],
+   "require": [
+    [
+     "horus",
+     "osiris"
+    ]
+   ]
+  },
+  "quaternity-horus-four-sons-animal-human-heads-egypt": {
+   "queries": [
+    "Canopic jars four sons of Horus",
+    "Four Sons of Horus canopic Imsety Hapi"
+   ],
+   "require": [
+    [
+     "canopic",
+     "sons of horus"
+    ]
+   ]
+  },
+  "cross-crux-ansata-luxor-14cbce": {
+   "queries": [
+    "Luxor temple Amenhotep III birth reliefs",
+    "Luxor temple divine birth relief Thoth Hathor"
+   ],
+   "require": [
+    [
+     "luxor"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "fish-denderah-zodiac-temple-hathor-1c-bce": {
+   "queries": [
+    "Dendera zodiac ceiling",
+    "Dendera Hathor temple zodiac"
+   ],
+   "require": [
+    [
+     "dendera",
+     "denderah"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "fish-farnese-atlas-pisces-naples": {
+   "queries": [
+    "Farnese Atlas Naples celestial globe",
+    "Farnese Atlas"
+   ],
+   "require": [
+    [
+     "farnese"
+    ]
+   ]
+  },
+  "fish-abercius-inscription-phrygia-200": {
+   "queries": [
+    "Abercius inscription Lateran",
+    "Abercius epitaph Vatican"
+   ],
+   "require": [
+    [
+     "abercius"
+    ]
+   ]
+  },
+  "fish-abericius-inscription-phrygia-3c": {
+   "queries": [
+    "Epitaph of Abercius",
+    "Abercius stele fish"
+   ],
+   "require": [
+    [
+     "abercius"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "fish-pectorios-inscription-autun-4c": {
+   "queries": [
+    "Pectorius inscription Autun",
+    "Epitaph of Pectorius Autun"
+   ],
+   "require": [
+    [
+     "pector"
+    ]
+   ]
+  },
+  "christ-figure-alexamenos-graffito-palatine-rome-200": {
+   "queries": [
+    "Alexamenos graffito",
+    "Alexamenos graffiti Palatine"
+   ],
+   "require": [
+    [
+     "alexamenos"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "cross-mock-crucifixion-graffito-palatine": {
+   "queries": [
+    "Alexamenos graffito Palatine Rome",
+    "Alexamenos graffito crucifixion donkey"
+   ],
+   "require": [
+    [
+     "alexamenos"
+    ]
+   ]
+  },
+  "hercules-sun-vessel-attic-5c-bc": {
+   "queries": [
+    "Herakles in the sun cup Helios Athenian vase",
+    "Heracles Helios cup vase Geryon"
+   ],
+   "require": [
+    [
+     "heracles",
+     "herakles",
+     "hercules"
+    ]
+   ]
+  },
+  "hermes-soul-urn-attic-lekythos": {
+   "queries": [
+    "Hermes psychopompos lekythos",
+    "Hermes Psyche eidolon Attic lekythos"
+   ],
+   "require": [
+    [
+     "hermes"
+    ]
+   ]
+  },
+  "tauroctony-osterburken-monument-germany": {
+   "queries": [
+    "Osterburken Mithras relief",
+    "Osterburken Mithraeum Roman relief"
+   ],
+   "require": [
+    [
+     "osterburken"
+    ]
+   ]
+  },
+  "mithraic-bull-sacrifice-heddernheim-relief-2c": {
+   "queries": [
+    "Heddernheim Mithras relief",
+    "Mithras relief Nida Heddernheim Frankfurt"
+   ],
+   "require": [
+    [
+     "heddernheim",
+     "nida"
+    ]
+   ]
+  },
+  "dadophors-cautes-cautopates-mithraic-relief-2c": {
+   "queries": [
+    "Cautes and Cautopates Mithras relief",
+    "Cautes Cautopates torchbearers"
+   ],
+   "require": [
+    [
+     "cautes",
+     "cautopates"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "lion-headed-god-mithraic-aion-vatican-2c-3c": {
+   "queries": [
+    "Mithraic Aion leontocephaline Vatican",
+    "Leontocephaline Mithraic Aion statue"
+   ],
+   "require": [
+    [
+     "aion",
+     "leontocephal",
+     "lion-headed",
+     "lion headed"
+    ]
+   ]
+  },
+  "stone-mithras-rock-birth-mithraic-2c": {
+   "queries": [
+    "Mithras born from the rock petra genetrix",
+    "Mithras birth rock relief"
+   ],
+   "require": [
+    [
+     "mithras"
+    ]
+   ]
+  },
+  "diana-ephesus-mural-crown-rome-2c": {
+   "queries": [
+    "Artemis of Ephesus statue",
+    "Diana of Ephesus Roman statue"
+   ],
+   "require": [
+    [
+     "ephes"
+    ]
+   ]
+  },
+  "mother-goddess-matuta-ossuary-florence": {
+   "queries": [
+    "Mater Matuta Florence archaeological museum",
+    "Mater Matuta Pietà Etruscan"
+   ],
+   "require": [
+    [
+     "matuta"
+    ]
+   ]
+  },
+  "mother-goddess-sleeper-hal-saflieni-malta-3000bce": {
+   "queries": [
+    "Sleeping Lady Hal Saflieni Malta",
+    "Sleeping Lady Valletta museum"
+   ],
+   "require": [
+    [
+     "sleeping lady",
+     "sleeper",
+     "saflieni"
+    ]
+   ]
+  },
+  "cave-hal-saflieni-hypogeum-malta": {
+   "queries": [
+    "Hal Saflieni Hypogeum Malta",
+    "Hypogeum of Hal Saflieni"
+   ],
+   "require": [
+    [
+     "saflieni",
+     "hypogeum"
+    ]
+   ]
+  },
+  "cave-holy-sepulchre-san-stefano-bologna": {
+   "queries": [
+    "Basilica of Santo Stefano Bologna Holy Sepulchre",
+    "Santo Stefano Bologna Sette Chiese"
+   ],
+   "require": [
+    [
+     "stefano"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "monster-vidarr-fenriswolf-gosforth-cross": {
+   "queries": [
+    "Gosforth Cross Vidar Fenrir",
+    "Gosforth Cross"
+   ],
+   "require": [
+    [
+     "gosforth"
+    ]
+   ]
+  },
+  "horse-wotan-sleipnir-tombstone-gotland": {
+   "queries": [
+    "Sleipnir Tjängvide picture stone",
+    "Gotland picture stone Odin Sleipnir"
+   ],
+   "require": [
+    [
+     "sleipnir",
+     "tjängvide",
+     "tjangvide",
+     "picture stone"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "horn-lysimachus-coin-ammon": {
+   "queries": [
+    "Lysimachus tetradrachm Alexander horned Ammon",
+    "Lysimachus coin Alexander diadem horn"
+   ],
+   "require": [
+    [
+     "lysimach"
+    ]
+   ]
+  },
+  "star-maya-elephant-dream-gandhara": {
+   "queries": [
+    "Maya's dream white elephant Gandhara relief",
+    "Gandhara relief Queen Maya dream"
+   ],
+   "require": [
+    [
+     "maya",
+     "elephant"
+    ]
+   ]
+  },
+  "churning-milky-ocean-amrita-rajput-india": {
+   "queries": [
+    "Churning of the ocean of milk painting",
+    "Samudra manthan Churning of the Ocean of Milk"
+   ],
+   "require": [
+    [
+     "churn",
+     "manthan",
+     "milk"
+    ]
+   ]
+  },
+  "ardhanari-shiva-parvati-india-19c": {
+   "queries": [
+    "Ardhanari Shiva Parvati",
+    "Ardhanarishvara"
+   ],
+   "require": [
+    [
+     "ardhanar"
+    ]
+   ]
+  },
+  "serpent-puri-temple-chariot-india-1150": {
+   "queries": [
+    "Jagannath Temple Puri",
+    "Puri Jagannath Rath Yatra chariots"
+   ],
+   "require": [
+    [
+     "puri",
+     "jagannath"
+    ]
+   ]
+  },
+  "shri-yantra-serpent-power": {
+   "queries": [
+    "Sri Yantra",
+    "Shri Yantra painting"
+   ],
+   "require": [
+    [
+     "yantra"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "world-wheel-sidpe-korlo-tibetan-banner": {
+   "queries": [
+    "Bhavachakra wheel of life Tibetan thangka",
+    "Bhavacakra Tibetan painting"
+   ],
+   "require": [
+    [
+     "bhavachakra",
+     "bhavacakra",
+     "wheel of life"
+    ]
+   ]
+  },
+  "lingam-yoni-angkor-wat-cambodia-12c": {
+   "queries": [
+    "Lingam yoni Angkor",
+    "Kbal Spean lingam"
+   ],
+   "require": [
+    [
+     "lingam",
+     "linga"
+    ]
+   ]
+  },
+  "tang-mirror-chien-pearl-8c": {
+   "queries": [
+    "Tang dynasty bronze mirror dragon",
+    "Chinese bronze mirror Tang dragons"
+   ],
+   "require": [
+    [
+     "mirror"
+    ]
+   ]
+  },
+  "serpent-stuck-sin-painting-munich-1893": {
+   "queries": [
+    "Franz von Stuck Die Sünde",
+    "Franz Stuck Sin painting"
+   ],
+   "require": [
+    [
+     "stuck"
+    ]
+   ]
+  },
+  "serpent-castration-rubens-last-judgment": {
+   "queries": [
+    "Rubens Last Judgement Alte Pinakothek",
+    "Rubens Great Last Judgment"
+   ],
+   "require": [
+    [
+     "rubens"
+    ]
+   ]
+  },
+  "serpent-lovatelli-urn-rome": {
+   "queries": [
+    "Lovatelli urn",
+    "Lovatelli urn Palazzo Massimo Eleusinian"
+   ],
+   "require": [
+    [
+     "lovatelli"
+    ]
+   ]
+  },
+  "vessel-lovatelli-urn-rome": {
+   "queries": [
+    "Lovatelli urn Eleusinian rites relief",
+    "Lovatelli urn Museo Nazionale Romano"
+   ],
+   "require": [
+    [
+     "lovatelli"
+    ]
+   ]
+  },
+  "vessel-cista-mystica-ephesus-coin": {
+   "queries": [
+    "Cistophorus Ephesus cista mystica coin",
+    "cistophoric tetradrachm cista serpents"
+   ],
+   "require": [
+    [
+     "cista"
+    ]
+   ]
+  },
+  "serpent-agathodaimon-antique-gem": {
+   "queries": [
+    "Chnoubis gem lion-headed serpent",
+    "Gnostic gem Chnoubis Agathodaimon"
+   ],
+   "require": [
+    [
+     "agathodaimon",
+     "chnoubis",
+     "chnouphis",
+     "knoubis"
+    ]
+   ]
+  },
+  "telesphorus-asclepius-familiaris-roman-gaul": {
+   "queries": [
+    "Telesphorus statuette bronze",
+    "Telesphorus Asclepius child"
+   ],
+   "require": [
+    [
+     "telesphor"
+    ]
+   ]
+  },
+  "noah-ark-nicholas-verdun-klosterneuburg-1186": {
+   "queries": [
+    "Verdun Altar Klosterneuburg Nicholas of Verdun",
+    "Verduner Altar enamel Noah"
+   ],
+   "require": [
+    [
+     "verdun",
+     "klosterneuburg"
+    ]
+   ]
+  },
+  "merkabah-quadriga-aminadab-saint-denis-1144": {
+   "queries": [
+    "Saint-Denis Suger stained glass Aminadab",
+    "Abbey of Saint-Denis Suger window quadriga"
+   ],
+   "require": [
+    [
+     "denis"
+    ]
+   ]
+  },
+  "mill-of-the-host-tribsees-15c": {
+   "queries": [
+    "Mystic mill Tribsees altar",
+    "Hostienmühle Tribsees Altar"
+   ],
+   "require": [
+    [
+     "tribsees",
+     "mystic mill",
+     "mühle",
+     "muhle"
+    ]
+   ]
+  },
+  "hares-rotation-paderborn-gothic": {
+   "queries": [
+    "Three hares Paderborn Cathedral",
+    "Dreihasenfenster Paderborn"
+   ],
+   "require": [
+    [
+     "hares",
+     "hasen"
+    ]
+   ]
+  },
+  "trickster-festum-stultorum-notre-dame-paris-1198": {
+   "queries": [
+    "Feast of Fools medieval illustration",
+    "Feast of Fools Notre-Dame"
+   ],
+   "require": [
+    [
+     "fools"
+    ]
+   ]
+  },
+  "oedipus-sphinx-riddle-thebes-greece": {
+   "queries": [
+    "Ingres Oedipus and the Sphinx",
+    "Oedipus Sphinx Attic vase"
+   ],
+   "require": [
+    [
+     "oedipus"
+    ]
+   ]
+  },
+  "dismemberment-pentheus-maenads-thebes": {
+   "queries": [
+    "Pentheus torn by Maenads Pompeii fresco House of the Vettii",
+    "Pentheus Maenads vase"
+   ],
+   "require": [
+    [
+     "pentheus"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "stag-actaeon-diana-hounds-thebes-greece": {
+   "queries": [
+    "Titian Diana and Actaeon",
+    "Death of Actaeon Titian"
+   ],
+   "require": [
+    [
+     "actaeon"
+    ]
+   ]
+  },
+  "lilith-demon-wife-adam-jewish-legend": {
+   "queries": [
+    "Rossetti Lady Lilith",
+    "Lilith Burney Relief Queen of the Night"
+   ],
+   "require": [
+    [
+     "lilith",
+     "queen of the night"
+    ]
+   ]
+  },
+  "sun-aton-reform-amenophis-iv-egypt": {
+   "queries": [
+    "Akhenaten Aten sun disc relief Amarna",
+    "Akhenaten Nefertiti Aten stele"
+   ],
+   "require": [
+    [
+     "aten",
+     "akhenaten"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "corn-god-mondamin-hiawatha": {
+   "queries": [
+    "Hiawatha wrestling Mondamin illustration",
+    "Song of Hiawatha illustration Frederic Remington"
+   ],
+   "require": [
+    [
+     "hiawatha",
+     "mondamin"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "night-sea-journey-hiawatha-mishe-nahma": {
+   "queries": [
+    "Hiawatha Mishe-Nahma illustration",
+    "Song of Hiawatha sturgeon illustration"
+   ],
+   "require": [
+    [
+     "hiawatha"
+    ]
+   ]
+  },
+  "fire-brunhilde-ring-of-fire-mountain": {
+   "queries": [
+    "Rackham Brünnhilde Ring of the Nibelung",
+    "Arthur Rackham Siegfried Brunnhilde"
+   ],
+   "require": [
+    [
+     "brunnh",
+     "brünnh",
+     "siegfried"
+    ]
+   ]
+  },
+  "anima-figure-brunhilde-spirit-mother-ring": {
+   "queries": [
+    "Arthur Rackham Brünnhilde Valkyrie",
+    "Brünnhilde Walküre Wagner illustration"
+   ],
+   "require": [
+    [
+     "brunnh",
+     "brünnh",
+     "valkyr",
+     "walkür"
+    ]
+   ]
+  },
+  "fire-izanagi-izanami-underworld-japan": {
+   "queries": [
+    "Izanagi Izanami Japanese print",
+    "Izanagi Izanami Kobayashi Eitaku"
+   ],
+   "require": [
+    [
+     "izanagi"
+    ]
+   ]
+  },
+  "tree-wotan-hanged-hovamol-norse": {
+   "queries": [
+    "Odin hanging Yggdrasil illustration",
+    "Odin Yggdrasil Hávamál"
+   ],
+   "require": [
+    [
+     "odin",
+     "wotan",
+     "yggdrasil"
+    ]
+   ]
+  },
+  "baldur-mistletoe-death-norse": {
+   "queries": [
+    "Death of Baldr Frølich illustration",
+    "Baldr mistletoe Loki Höðr"
+   ],
+   "require": [
+    [
+     "baldr",
+     "baldur"
+    ]
+   ]
+  },
+  "serpent-gilgamesh-robbed-herb-mesopotamia": {
+   "queries": [
+    "Gilgamesh serpent herb",
+    "Gilgamesh epic tablet XI flood"
+   ],
+   "require": [
+    [
+     "gilgamesh"
+    ]
+   ]
+  },
+  "fish-vishnu-matsya-vedas-india": {
+   "queries": [
+    "Matsya avatar Vishnu painting",
+    "Vishnu Matsya fish avatar"
+   ],
+   "require": [
+    [
+     "matsya"
+    ]
+   ]
+  },
+  "fish-manu-shatapatha-brahmana-india": {
+   "queries": [
+    "Matsya Manu fish avatar Vishnu painting",
+    "Manu Matsya flood"
+   ],
+   "require": [
+    [
+     "matsya",
+     "manu"
+    ]
+   ]
+  },
+  "rama-sita-furrow-marriage-ramayana-india": {
+   "queries": [
+    "Rama Sita Ramayana miniature painting",
+    "Ramayana Sita born from furrow"
+   ],
+   "require": [
+    [
+     "sita"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "hanuman-sea-monsters-ramayana-india": {
+   "queries": [
+    "Hanuman leaping sea Ramayana painting",
+    "Hanuman Surasa Simhika Ramayana"
+   ],
+   "require": [
+    [
+     "hanuman"
+    ]
+   ]
+  },
+  "pentecost-tongues-of-fire-jerusalem-30ce": {
+   "queries": [
+    "Pentecost El Greco",
+    "Pentecost Descent of the Holy Spirit painting"
+   ],
+   "require": [
+    [
+     "pentecost"
+    ]
+   ]
+  },
+  "seven-sleepers-cave-ephesus-250": {
+   "queries": [
+    "Seven Sleepers of Ephesus",
+    "Seven Sleepers medieval illumination"
+   ],
+   "require": [
+    [
+     "sleepers"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "melusina-lusignan-legend-france-1393": {
+   "queries": [
+    "Melusine Jean d'Arras manuscript",
+    "Melusine Lusignan Livre de Lusignan"
+   ],
+   "require": [
+    [
+     "melusin"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "mercurius-spirit-in-bottle-grimm-khm99-germany-1815": {
+   "queries": [
+    "Spirit in the Bottle Grimm illustration",
+    "Der Geist im Glas Grimm"
+   ],
+   "require": [
+    [
+     "geist",
+     "spirit in the bottle"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "spirit-in-bottle-grimm-germany-1815": {
+   "queries": [
+    "Grimm fairy tale Spirit in the Bottle illustration",
+    "Der Geist im Glas illustration"
+   ],
+   "require": [
+    [
+     "geist",
+     "spirit in the bottle"
+    ]
+   ]
+  },
+  "theotokos-council-ephesus-431": {
+   "queries": [
+    "Council of Ephesus fresco",
+    "Council of Ephesus 431 illustration"
+   ],
+   "require": [
+    [
+     "ephesus"
+    ]
+   ],
+   "skip": "rejected on visual review: not a confident match"
+  },
+  "mother-goddess-gilded-cow-mykerinos-egypt-26cbce": {
+   "queries": [
+    "Gilded wooden cow Mykerinos Cairo museum",
+    "Hathor cow Menkaure"
+   ],
+   "require": [
+    [
+     "cow"
+    ]
+   ]
+  }
+ }
+}
