@@ -27,6 +27,9 @@ import { AionView } from '../aion/view';
 import type { History } from '../types/history';
 import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
+import { SkyEphemeris } from '../sky/ephemeris';
+import type { SkyAnchorSource } from '../graph/build';
+import type { SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
 import { SkyView } from '../sky/view';
 import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
@@ -128,6 +131,7 @@ export class Controller {
       onSelect: (key) => this.onGraphSelect(key),
       onEarth: (key) => this.onGraphEarth(key),
       onWhole: () => this.navigate({ view: { kind: 'world' }, deep: false, graph: true }),
+      loadSky: () => this.skyAnchors(),
     }, engine.reduced);
     root.before(this.graph.root);
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
@@ -498,10 +502,41 @@ export class Controller {
   }
 
   /** Fetch and build the sky layer once; the Earth stage never waits for it. */
+  private skyDataP: Promise<SkyData> | null = null;
+  private skyData(): Promise<SkyData> {
+    this.skyDataP ??= loadSky();
+    return this.skyDataP;
+  }
+
+  /**
+   * What the graph's Sky anchors need: the bodies, their ties, and each body's geocentric ecliptic longitude at
+   * the standing moment (now). Null — never a guess — when the data is missing or the moment lies outside the
+   * generated span.
+   */
+  private async skyAnchors(): Promise<{ source: SkyAnchorSource; asOf: string } | null> {
+    try {
+      const [data, ties] = await Promise.all([this.skyData(), this.skyTies.ensure()]);
+      if (!ties) return null;
+      const ms = Date.now();
+      const eph = new SkyEphemeris(data);
+      if (!eph.covers(ms)) return null;
+      const lon: SkyAnchorSource['lon'] = {};
+      for (const b of ties.bodies) {
+        if (b.key === 'earth') continue; // the observer has no geocentric longitude: it is where we stand
+        const p = eph.geo(b.key, ms);
+        if (p) lon[b.key] = p.lon;
+      }
+      return { source: { bodies: ties.bodies, ties: ties.ties, lon }, asOf: `as of ${formatMoment(ms)}` };
+    } catch (err) {
+      console.warn(err);
+      return null;
+    }
+  }
+
   private requestSky() {
     if (this.skyRequested) return;
     this.skyRequested = true;
-    loadSky().then((data) => {
+    this.skyData().then((data) => {
       const layer = new SkyLayer(data);
       this.skyLayer = layer;
       this.engine.attachSky(layer);
@@ -690,9 +725,15 @@ export class Controller {
 
   private onGraphSelect(key: string) {
     const { t, id } = this.splitKey(key);
+    if (t === 'b') return this.onGraphBody(id as BodyKey);
     if (t === 'a') this.navigate(focusOn(this.state, { type: 'archetype', id }));
     else if (t === 'f') this.navigate(focusOn(this.state, { type: 'family', id }));
     else this.openOccurrenceId(id);
+  }
+
+  /** A body in the graph opens in the sky, on its card, as the S key's flight would. */
+  private onGraphBody(key: BodyKey) {
+    this.navigate(inSky({ body: key }));
   }
 
   /** Back to the globe, flying to a node (or to whatever is in view when none is given). */
@@ -700,6 +741,7 @@ export class Controller {
     const earth = withMode(this.state, false);
     if (key) {
       const { t, id } = this.splitKey(key);
+      if (t === 'b') return this.onGraphBody(id as BodyKey);
       if (t === 'a') return this.navigate(focusOn(earth, { type: 'archetype', id }));
       if (t === 'f') return this.navigate(focusOn(earth, { type: 'family', id }));
       const occ = this.occurrenceState(earth, id);

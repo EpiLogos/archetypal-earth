@@ -360,7 +360,7 @@ export function formatSky(value, indent = 0) {
 export function tiesIndex(sky) {
   return {
     meta: { generatedAt: sky.meta.generatedAt, from: 'public/data/sky.json' },
-    bodies: sky.bodies.map((b) => ({ key: b.key, name: b.name, order: b.order, modern: b.modern })),
+    bodies: sky.bodies.map((b) => ({ key: b.key, name: b.name, order: b.order, modern: b.modern, palette: { core: b.palette.core, glow: b.palette.glow }, spectrum: b.spectrum })),
     ties: sky.bodies.flatMap((b) => b.ties.map((t) => ({ body: b.key, type: t.target.type, id: t.target.id, basis: t.basis }))),
     readings: sky.readings.map((r) => ({ id: r.id, bodies: r.bodies, targets: r.targets, basis: r.basis })),
   };

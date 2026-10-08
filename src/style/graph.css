@@ -1,0 +1,89 @@
+/* The graph mode — a second view of the same field, in the same light.
+   It sits over the globe and under the quiet overlay (label, reveal, time, search), so everything
+   that already works keeps working. Colours are the atmosphere's custom properties (see main.ts). */
+
+.gv {
+  position: fixed; inset: 0; overflow: hidden;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.95s ease;
+  background-color: rgb(var(--deep-rgb));
+  background-image:
+    radial-gradient(ellipse 78% 72% at 50% 47%, rgb(var(--fog-rgb) / 0.62), transparent 74%),
+    radial-gradient(ellipse 46% 42% at 50% 50%, rgb(var(--glow-rgb) / 0.075), transparent 72%);
+  -webkit-user-select: none; user-select: none;
+}
+.gv::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 80% at 50% 48%, transparent 56%, rgb(0 0 0 / 0.46) 100%);
+}
+.gv.on { opacity: 1; pointer-events: auto; }
+.gv.instant { transition-duration: 0.01s; }
+.gv-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; cursor: grab; }
+.gv-canvas:active { cursor: grabbing; }
+.gv-canvas:focus-visible { outline: none; }
+
+/* the globe is not drawn while the graph is up; these only keep stray overlays from the other mode out of sight */
+body.mode-graph .floats, body.mode-graph .float-lines, body.mode-graph .strip, body.mode-graph .hover-label { display: none !important; }
+body.mode-graph #globe { pointer-events: none; }
+
+/* ── the quiet controls ─────────────────────────────────────────── */
+.gv-tools {
+  position: absolute; right: 28px; top: 65px; z-index: 3;
+  display: flex; align-items: center; justify-content: flex-end; gap: 20px;
+  font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.07em; color: var(--ink-3);
+  opacity: 0.78; transition: opacity 0.4s;
+}
+.gv-tools:hover, .gv-tools:focus-within { opacity: 1; }
+.gv-tools [hidden] { display: none !important; }
+.gvt-depth { display: inline-flex; align-items: center; gap: 9px; }
+.gvt-n { min-width: 4.4em; text-align: center; font-feature-settings: 'tnum'; color: var(--ink-2); }
+.gvt-step { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--hair); border-radius: 50%; color: var(--ink-2); font-size: 14px; line-height: 1; transition: color 0.3s, border-color 0.3s, opacity 0.3s; }
+.gvt-step:hover:not(:disabled) { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
+.gvt-step:disabled { opacity: 0.3; cursor: default; }
+.gvt-link { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
+.gvt-link:hover { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
+.gvt-earth { color: rgb(var(--core-rgb) / 0.88); }
+.gvt-panel {
+  position: absolute; top: 29px; right: 0; width: 218px; max-width: calc(100vw - 32px);
+  padding: 17px; border: 1px solid var(--hair); border-radius: 14px;
+  background: var(--glass); backdrop-filter: blur(20px) saturate(1.15); box-shadow: 0 20px 60px rgb(0 0 0 / 0.4);
+  display: grid; gap: 17px; letter-spacing: 0.03em; color: var(--ink-2);
+}
+.gvt-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+.gvt-row .gvt-n { min-width: 1.1em; }
+.gvt-option { display: flex; align-items: center; justify-content: space-between; color: var(--ink-2); text-align: left; }
+.gvt-option[aria-pressed]::after { content: ''; width: 13px; height: 13px; border: 1px solid var(--hair); border-radius: 3px; }
+.gvt-option[aria-pressed="true"]::after { background: rgb(var(--core-rgb) / 0.7); box-shadow: inset 0 0 0 3px rgb(var(--deep-rgb)); }
+.gvt-caption { display: block; margin-bottom: 9px; color: var(--ink-3); }
+.gvt-ties { display: flex; gap: 6px; }
+.gvt-filter { padding: 5px 7px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
+.gvt-filter[aria-pressed="true"] { color: var(--ink); background: rgb(var(--core-rgb) / 0.1); border-color: rgb(var(--core-rgb) / 0.3); }
+.gvt-settings[aria-expanded="true"] { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
+.gv-tools button:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 4px; }
+
+/* ── Earth ⇄ Graph: one pill beside the search glyph ───────────── */
+.mode-switch {
+  position: fixed; top: 18px; right: 94px; z-index: 20;
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center; justify-items: center;
+  width: 58px; height: 28px; border-radius: 15px;
+  border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.34); backdrop-filter: blur(8px);
+  color: var(--ink-3); opacity: 0.72; transition: opacity 0.4s, border-color 0.4s;
+}
+.mode-switch:hover { opacity: 1; border-color: rgb(var(--core-rgb) / 0.4); }
+.ms-thumb { position: absolute; left: 2px; top: 2px; width: 27px; height: 22px; border-radius: 12px; background: rgb(var(--core-rgb) / 0.13); box-shadow: 0 0 14px rgb(var(--glow-rgb) / 0.18) inset; transition: transform 0.55s var(--ease); }
+.mode-switch.is-graph .ms-thumb { transform: translateX(25px); }
+.ms-ico { position: relative; display: grid; place-items: center; transition: color 0.4s, opacity 0.4s; opacity: 0.62; }
+.mode-switch:not(.is-graph) .ms-earth, .mode-switch.is-graph .ms-graph { color: var(--ink); opacity: 1; }
+body.search-open .mode-switch { opacity: 0; pointer-events: none; }
+body.deep-open .mode-switch { opacity: 0; pointer-events: none; }
+
+@media (max-width: 760px) {
+  .mode-switch { top: 10px; right: 46px; }
+  .gv-tools { right: 16px; top: 57px; gap: 16px; font-size: 10.5px; }
+  .gvt-n { min-width: 3.8em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gv { transition-duration: 0.01s; }
+  .ms-thumb { transition-duration: 0.01s; }
+}
+.gvt-sky-note { margin: 0 0 9px; line-height: 1.4; max-width: 26ch; }

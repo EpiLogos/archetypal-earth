@@ -7,7 +7,7 @@ const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
 
 export interface TiesIndex {
   meta: { generatedAt: string; from: string };
-  bodies: { key: BodyKey; name: string; order: number; modern: boolean }[];
+  bodies: { key: BodyKey; name: string; order: number; modern: boolean; palette: { core: string; glow: string }; spectrum: number }[];
   ties: { body: BodyKey; type: 'family' | 'archetype'; id: string; basis: TieBasis }[];
   readings: { id: string; bodies: BodyKey[]; targets: { type: 'family' | 'archetype'; id: string }[]; basis: TieBasis }[];
 }

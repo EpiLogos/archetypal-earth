@@ -8,67 +8,122 @@
       "key": "sun",
       "name": "Sol",
       "order": 0,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#f7f0d6",
+        "glow": "#e6dcb4"
+      },
+      "spectrum": 0.53
     },
     {
       "key": "moon",
       "name": "Luna",
       "order": 1,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#b4bccb",
+        "glow": "#82778e"
+      },
+      "spectrum": 0.26
     },
     {
       "key": "earth",
       "name": "Terra",
       "order": 2,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#86b4c0",
+        "glow": "#4f7f9a"
+      },
+      "spectrum": 0.28
     },
     {
       "key": "mercury",
       "name": "Mercurius",
       "order": 3,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#b9bea5",
+        "glow": "#b5aa83"
+      },
+      "spectrum": 0.41
     },
     {
       "key": "venus",
       "name": "Venus",
       "order": 4,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#7ec4d6",
+        "glow": "#6a8ee0"
+      },
+      "spectrum": 0.36
     },
     {
       "key": "mars",
       "name": "Mars",
       "order": 5,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#c96a4a",
+        "glow": "#8a3b2e"
+      },
+      "spectrum": 0.3
     },
     {
       "key": "jupiter",
       "name": "Iuppiter",
       "order": 6,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#d5c3a6",
+        "glow": "#a98f72"
+      },
+      "spectrum": 0.62
     },
     {
       "key": "saturn",
       "name": "Saturnus",
       "order": 7,
-      "modern": false
+      "modern": false,
+      "palette": {
+        "core": "#9a8fa8",
+        "glow": "#5d5675"
+      },
+      "spectrum": 0.2
     },
     {
       "key": "uranus",
       "name": "Uranus",
       "order": 8,
-      "modern": true
+      "modern": true,
+      "palette": {
+        "core": "#d4e6ee",
+        "glow": "#9fc7e0"
+      },
+      "spectrum": 0.72
     },
     {
       "key": "neptune",
       "name": "Neptunus",
       "order": 9,
-      "modern": true
+      "modern": true,
+      "palette": {
+        "core": "#8aa4e0",
+        "glow": "#5a6fb8"
+      },
+      "spectrum": 0.4
     },
     {
       "key": "pluto",
       "name": "Pluto",
       "order": 10,
-      "modern": true
+      "modern": true,
+      "palette": {
+        "core": "#9c5a78",
+        "glow": "#3a2a5e"
+      },
+      "spectrum": 0.1
     }
   ],
   "ties": [
