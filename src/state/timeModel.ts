@@ -11,6 +11,47 @@ export interface TimeSnapshot {
 const CUMULATIVE_TRAIL = 3;
 export const PLAY_SECONDS = 42;
 
+/** A range on the shared scale, in slider-positions. */
+export interface TimeSpan {
+  fromU: number;
+  toU: number;
+}
+/** The breathing room either side of a span, as a share of the span. */
+const SPAN_PAD = 0.04;
+/** The narrowest range a scoped track may show, as a share of the full scale (u runs 0..1). */
+const MIN_SPAN = 0.03;
+
+/**
+ * The track's range for a set of years (slider-positions): their extent, padded, and never narrower than MIN_SPAN,
+ * clamped to the scale. Null when the years are fewer than two distinct ones (a single year scopes nothing).
+ */
+export function uSpan(us: ArrayLike<number>): TimeSpan | null {
+  const distinct = new Set<number>();
+  let lo = Infinity;
+  let hi = -Infinity;
+  for (let i = 0; i < us.length; i++) {
+    const u = us[i];
+    if (!Number.isFinite(u)) continue;
+    distinct.add(u);
+    lo = Math.min(lo, u);
+    hi = Math.max(hi, u);
+  }
+  if (distinct.size < 2) return null;
+  const pad = (hi - lo) * SPAN_PAD;
+  const width = Math.max(hi - lo + 2 * pad, MIN_SPAN);
+  const mid = (lo + hi) / 2;
+  let from = mid - width / 2;
+  let to = mid + width / 2;
+  if (from < 0) { to -= from; from = 0; }
+  if (to > 1) { from -= to - 1; to = 1; }
+  return { fromU: Math.max(0, from), toU: Math.min(1, to) };
+}
+
+/** The track's range for a subject: the span of its located occurrences (`idx`) on the shared scale. */
+export function subjectSpan(m: { u: ArrayLike<number> }, idx: readonly number[]): TimeSpan | null {
+  return uSpan(idx.map((i) => m.u[i]));
+}
+
 export class TimeModel {
   mode: 'all' | 'cursor' = 'all';
   cursorU = 1;
@@ -133,8 +174,10 @@ export class TimeModel {
         this.setAll();
         return;
       }
-    } else if (!this.direct && Math.abs(this.targetU - this.cursorU) > 1e-4) {
-      this.cursorU += (this.targetU - this.cursorU) * (1 - Math.exp(-dt * 2.4));
+    } else if (!this.direct && this.cursorU !== this.targetU) {
+      // a glide eases, then lands exactly on its target (a stop short of it reads a year off, and a restore must return the clock exactly)
+      if (Math.abs(this.targetU - this.cursorU) > 1e-4) this.cursorU += (this.targetU - this.cursorU) * (1 - Math.exp(-dt * 2.4));
+      else this.cursorU = this.targetU;
       changed = true;
     }
     const tt = this.trailTarget - this.trail;

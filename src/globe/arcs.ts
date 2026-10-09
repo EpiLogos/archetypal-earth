@@ -1,8 +1,50 @@
-// Migratory arcs for the thread being followed — and only that thread.
+// Migratory arcs: the thread being followed (driven by the tour), and a subject's chronology drawn along the cursor.
 import * as THREE from 'three';
 import { slerp, angleBetween, type Vec3 } from '../data/geo';
+import { CHRONO_MAX_HOPS, chronologyProgress } from './chronology';
 import { ARC_FRAG, ARC_VERT, MARKER_FRAG, MARKER_VERT } from './shaders';
 import type { Shared } from './shared';
+
+// The chronology's arcs: the thread's look (the flow along the line, the same blend toward white), with each arc's
+// own travel and presence from the cursor. A separate material, so the thread's shaders and uniforms are untouched.
+const CHRONO_VERT = /* glsl */ `
+attribute float aSeg;
+attribute float aT;
+attribute float aDist;
+uniform float uSegDraw[${CHRONO_MAX_HOPS}];
+uniform float uSegAlpha[${CHRONO_MAX_HOPS}];
+varying float vT;
+varying float vDist;
+varying float vDraw;
+varying float vAlpha;
+void main() {
+  int k = int(aSeg + 0.5);
+  vDraw = uSegDraw[k];
+  vAlpha = uSegAlpha[k];
+  vT = aT;
+  vDist = aDist;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+const CHRONO_FRAG = /* glsl */ `
+uniform vec3 uColor;
+uniform float uTime;
+uniform float uOn;
+varying float vT;
+varying float vDist;
+varying float vDraw;
+varying float vAlpha;
+void main() {
+  // the head sits at vDraw along the arc: ahead of it nothing, behind it the whole line (a finished arc is whole)
+  float head = step(0.001, vDraw) * max(step(0.999, vDraw), 1.0 - smoothstep(vDraw - 0.02, vDraw + 0.02, vT));
+  float a = vAlpha * head * uOn;
+  if (a < 0.002) discard;
+  float dash = fract(vDist * 5.5 - uTime * 0.22);
+  float flow = smoothstep(0.0, 0.5, dash) * smoothstep(1.0, 0.5, dash);
+  float v = (0.28 + 0.72 * flow * flow) * a;
+  gl_FragColor = vec4(mix(uColor, vec3(1.0), 0.12 + 0.3 * flow), clamp(v * 0.4, 0.0, 1.0));
+}
+`;
 
 export class Arcs {
   readonly group = new THREE.Group();
@@ -17,13 +59,34 @@ export class Arcs {
     uFade: { value: 1 },
   };
   steps = 0;
+  // the chronology: its own geometry and material; arc k (0-based) runs between nodes k and k+1
+  private chrono: THREE.Mesh | null = null;
+  private chronoMat: THREE.ShaderMaterial;
+  private chronoU = {
+    uColor: { value: new THREE.Vector3(1, 1, 1) },
+    uTime: { value: 0 },
+    uOn: { value: 0 },
+    uSegDraw: { value: new Array<number>(CHRONO_MAX_HOPS).fill(0) },
+    uSegAlpha: { value: new Array<number>(CHRONO_MAX_HOPS).fill(0) },
+  };
+  private chronoNodeU: number[] = [];
 
   constructor(shared: Shared) {
     this.uniforms.uTime = shared.time;
+    this.chronoU.uTime = shared.time;
     this.mat = new THREE.ShaderMaterial({
       vertexShader: ARC_VERT,
       fragmentShader: ARC_FRAG,
       uniforms: this.uniforms,
+      transparent: true,
+      depthWrite: false,
+      depthTest: true,
+      blending: THREE.AdditiveBlending,
+    });
+    this.chronoMat = new THREE.ShaderMaterial({
+      vertexShader: CHRONO_VERT,
+      fragmentShader: CHRONO_FRAG,
+      uniforms: this.chronoU,
       transparent: true,
       depthWrite: false,
       depthTest: true,
@@ -39,6 +102,121 @@ export class Arcs {
       this.mesh = null;
     }
     this.steps = 0;
+  }
+
+  /** Remove the chronology (the thread's arcs are untouched). */
+  clearChronology() {
+    if (this.chrono) {
+      this.group.remove(this.chrono);
+      this.chrono.geometry.dispose();
+      this.chrono = null;
+    }
+    this.chronoNodeU = [];
+    this.chronoU.uOn.value = 0;
+  }
+
+  /**
+   * A subject's chronology: `dirs` are the path's places in date order, `nodeU` their slider-positions. Arc k runs from
+   * place k to place k+1; `updateChronology` draws them along the cursor.
+   */
+  buildChronology(dirs: Vec3[], nodeU: number[], colour: [number, number, number]) {
+    this.clearChronology();
+    const N = dirs.length;
+    if (N < 2 || N > CHRONO_MAX_HOPS + 1) return;
+    this.chronoU.uColor.value.set(colour[0], colour[1], colour[2]);
+    this.chronoNodeU = nodeU.slice();
+    const pos: number[] = [];
+    const aSeg: number[] = [];
+    const aT: number[] = [];
+    const aDist: number[] = [];
+    const idx: number[] = [];
+    const SIDES = 5;
+    const R = 0.0021;
+    let cum = 0;
+    const a: Vec3 = [0, 0, 0];
+    const p: Vec3 = [0, 0, 0];
+    let prevCentre: Vec3 | null = null;
+    for (let k = 1; k < N; k++) {
+      const seg = k - 1;
+      const ang = angleBetween(dirs[k - 1], dirs[k]);
+      const n = Math.max(14, Math.ceil(ang * 46));
+      const lift = 0.016 + 0.12 * (ang / Math.PI);
+      const base = pos.length / 3;
+      for (let s = 0; s <= n; s++) {
+        const t = s / n;
+        slerp(dirs[k - 1], dirs[k], t, a);
+        const r = 1.004 + lift * Math.sin(Math.PI * t);
+        p[0] = a[0] * r; p[1] = a[1] * r; p[2] = a[2] * r;
+        if (prevCentre) cum += Math.hypot(p[0] - prevCentre[0], p[1] - prevCentre[1], p[2] - prevCentre[2]);
+        prevCentre = [p[0], p[1], p[2]];
+        const t0 = Math.max(0, t - 0.01), t1 = Math.min(1, t + 0.01);
+        const A: Vec3 = slerp(dirs[k - 1], dirs[k], t0, [0, 0, 0]);
+        const B: Vec3 = slerp(dirs[k - 1], dirs[k], t1, [0, 0, 0]);
+        const tx = B[0] - A[0], ty = B[1] - A[1], tz = B[2] - A[2];
+        let sx = a[1] * tz - a[2] * ty, sy = a[2] * tx - a[0] * tz, sz = a[0] * ty - a[1] * tx;
+        const sl = Math.hypot(sx, sy, sz) || 1;
+        sx /= sl; sy /= sl; sz /= sl;
+        for (let q = 0; q < SIDES; q++) {
+          const th = (q / SIDES) * Math.PI * 2;
+          const c = Math.cos(th), si = Math.sin(th);
+          pos.push(p[0] + (a[0] * c + sx * si) * R, p[1] + (a[1] * c + sy * si) * R, p[2] + (a[2] * c + sz * si) * R);
+          aSeg.push(seg);
+          aT.push(t);
+          aDist.push(cum);
+        }
+      }
+      for (let s = 0; s < n; s++) {
+        for (let q = 0; q < SIDES; q++) {
+          const q1 = (q + 1) % SIDES;
+          const i0 = base + s * SIDES + q, i1 = base + s * SIDES + q1;
+          const j0 = base + (s + 1) * SIDES + q, j1 = base + (s + 1) * SIDES + q1;
+          idx.push(i0, j0, i1, i1, j0, j1);
+        }
+      }
+    }
+    if (!pos.length) return;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute('aSeg', new THREE.Float32BufferAttribute(aSeg, 1));
+    geo.setAttribute('aT', new THREE.Float32BufferAttribute(aT, 1));
+    geo.setAttribute('aDist', new THREE.Float32BufferAttribute(aDist, 1));
+    geo.setIndex(idx);
+    this.chrono = new THREE.Mesh(geo, this.chronoMat);
+    this.chrono.frustumCulled = false;
+    this.group.add(this.chrono);
+  }
+
+  /**
+   * The chronology at the cursor. `on` is the time window's blend (0 = all time: nothing drawn). Reduced motion:
+   * the arcs appear whole and fade, without the travel.
+   */
+  updateChronology(cursorU: number, trail: number, ramp: number, on: number, reduced: boolean) {
+    this.chronoU.uOn.value = on;
+    if (!this.chrono) return;
+    this.chrono.visible = on > 0.002;
+    const prog = chronologyProgress(this.chronoNodeU, cursorU, trail, ramp, reduced);
+    const draw = this.chronoU.uSegDraw.value;
+    const alpha = this.chronoU.uSegAlpha.value;
+    for (let k = 0; k < CHRONO_MAX_HOPS; k++) {
+      draw[k] = k < prog.length ? prog[k].draw : 0;
+      alpha[k] = k < prog.length ? prog[k].alpha : 0;
+    }
+  }
+
+  /** The chronology's state, for tests and diagnostics: its arcs, how many have begun, the total travel, how many are visible. */
+  chronoState(): { segments: number; begun: number; travel: number; visible: number; on: number } {
+    const n = this.chronoNodeU.length ? this.chronoNodeU.length - 1 : 0;
+    const draw = this.chronoU.uSegDraw.value;
+    const alpha = this.chronoU.uSegAlpha.value;
+    let begun = 0, travel = 0, visible = 0;
+    for (let k = 0; k < n; k++) {
+      if (draw[k] > 0) begun++;
+      travel += draw[k];
+      if (alpha[k] > 0.05) visible++;
+    }
+    const on = this.chronoU.uOn.value;
+    const shown = !!this.chrono && on > 0.002;
+    return { segments: n, begun: shown ? begun : 0, travel: shown ? travel : 0, visible: shown ? visible : 0, on };
   }
 
   /** dirs: located steps in chronological order; arc[k] says whether to draw k-1 → k. */

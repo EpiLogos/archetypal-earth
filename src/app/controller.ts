@@ -7,9 +7,10 @@ import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../da
 import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
+import { chronologyPath } from '../globe/chronology';
 import { hashToState, stateToHash } from '../state/router';
 import { back, focusOn, inSky, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
-import type { TimeModel, TimeSnapshot } from '../state/timeModel';
+import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
 import { DeepSheet, type DeepTarget } from '../ui/deep';
@@ -101,6 +102,11 @@ export class Controller {
   private redbook: RedBookView | null = null;
   private redbookSwitch: HTMLButtonElement;
   private rbTime: TimeSnapshot | null = null;
+  /** the range the control held before the Red Book (restored with rbTime), and the Book's own span on the scale */
+  private rbRange: TimeSpan | null = null;
+  private rbSpan: TimeSpan | null = null;
+  /** the focused subject whose chronology stands on the globe (empty: none) */
+  private chronoKey = '';
   private redbookStops = new Set<string>();
   /** the corpus reading sheet: a cite opened at its source */
   private passage: PassageSheet;
@@ -182,8 +188,9 @@ export class Controller {
       onclick: () => this.toggleAion() });
     document.body.append(this.aionSwitch);
 
-    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state)) : null;
+    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id)) : null;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
+    if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]));
     this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
       onclick: () => this.toggleRedbook() });
     document.body.append(this.redbookSwitch);
@@ -509,6 +516,44 @@ export class Controller {
     e.preventDefault();
   };
 
+  /** The whole scale, as the time control rests on it. */
+  private fullSpan(): TimeSpan {
+    return { fromU: this.m.scale.toU(this.m.field.meta.yearMin), toU: this.m.scale.toU(this.m.field.meta.yearMax) };
+  }
+
+  /** A focus (and a manifestation within one) scopes the time control to its subject's own span; any other view keeps the whole scale. */
+  private syncTimeScope(s: AppState) {
+    const v = s.view;
+    const subject = s.graph || s.trail ? null : v.kind === 'focus' ? v.subject : v.kind === 'manifest' ? v.context : null;
+    const span = subject ? subjectSpan(this.m, subjectOccurrences(this.m, subject)) : null;
+    const to = span ?? this.fullSpan();
+    if (to.fromU !== this.time.fromU || to.toU !== this.time.toU) this.timeControl.setRange(to.fromU, to.toU);
+  }
+
+  /** The focused subject's chronology, built when it stands on the globe with no walk and no Aion or Red Book. */
+  private syncChronology(s: AppState) {
+    const v = s.view;
+    const subject = v.kind === 'focus' && !s.graph && !s.trail && !s.history && !s.redbook && !s.sky ? v.subject : null;
+    const key = subject ? `${subject.type}:${subject.id}` : '';
+    if (key === this.chronoKey) return;
+    this.chronoKey = key;
+    if (!subject) { this.engine.arcs.clearChronology(); return; }
+    const m = this.m;
+    const idx = subjectOccurrences(m, subject);
+    const path = chronologyPath(idx.map((i) => ({ u: m.u[i], dir: m.dir[i] })));
+    const steps = path.map((k) => idx[k]);
+    this.engine.arcs.buildChronology(steps.map((i) => m.dir[i]), steps.map((i) => m.u[i]), this.subjectPal(subject).core);
+  }
+
+  /** The Red Book's standing folio: the clock glides to its year (never a scrub, never a play); the control's readout shows the year. */
+  private tuneToFolio(stopId: string) {
+    const i = this.m.occIndex.get(stopId);
+    if (i === undefined) return;
+    this.time.pause();
+    this.time.setCumulative(false);
+    this.time.glideTo(this.m.u[i]);
+  }
+
   /** Leave Aion's mode: its view, the time range it set, and the clock it held. */
   private leaveAion() {
     this.aion?.hide();
@@ -522,6 +567,7 @@ export class Controller {
     const prev = this.state;
     const first = !this.started;
     this.state = next;
+    this.syncChronology(next);
     const v = next.view;
     const pv = prev.view;
     document.body.dataset.state = v.kind;
@@ -533,7 +579,13 @@ export class Controller {
     if (next.redbook && this.redbook) {
       if (this.tour) this.endThread();
       if (prev.history) this.leaveAion();
-      if (!prev.redbook) this.rbTime = this.time.snapshot();
+      if (!prev.redbook) {
+        this.rbTime = this.time.snapshot();
+        this.rbRange = { fromU: this.time.fromU, toU: this.time.toU };
+        // the Book's own span: the control reads as its chronology (the walk then glides the clock folio by folio)
+        const span = this.rbSpan ?? this.fullSpan();
+        this.timeControl.setRange(span.fromU, span.toU);
+      }
       this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
       // the Red Book holds no shift of its own: Aion's card offset does not carry over
@@ -541,12 +593,19 @@ export class Controller {
       // a mode that returns early must still let the sky go (before its own flight, which then wins)
       this.syncSky(prev, next, first, false);
       this.redbook.show(next.redbook);
+      // the genesis table stands over the whole field's time
+      if (next.redbook.genesis) this.time.setAll();
       return;
     }
     if (prev.redbook) {
       this.redbook?.hide();
-      if (this.rbTime) this.time.restore(this.rbTime);
+      if (this.rbTime) {
+        // the range first: a cursor snapshot taken in cursor mode is clamped into the range it was taken in
+        if (this.rbRange) this.timeControl.setRange(this.rbRange.fromU, this.rbRange.toU);
+        this.time.restore(this.rbTime);
+      }
       this.rbTime = null;
+      this.rbRange = null;
       // leaving to the plain world: the Red Book's red must give way (not when
       // a link is carrying us straight into Aion or a focus, which set palettes)
       if (v.kind === 'world' && !next.sky && !graph && !next.history) this.enterWorld(false);
@@ -570,6 +629,7 @@ export class Controller {
       return;
     }
     if (prev.history) this.leaveAion();
+    this.syncTimeScope(next);
     // a change of mode re-enters the view: the globe flies to what the graph was showing, and back
     const sameView = !first && !modeChanged && !prev.history && viewEq(pv, v);
     const previousTrail = pv.kind === 'thread' ? pv : prev.trail;
@@ -1488,6 +1548,11 @@ export class Controller {
     this.skyView.tick();
     this.aion?.update(dt);
     this.floats.update(this.engine, dt);
+    // the chronology travels with the cursor; a walk's arcs own the field while one stands
+    if (this.chronoKey) {
+      const tm = this.time;
+      this.engine.arcs.updateChronology(tm.cursorU, tm.trail, DEFAULT_RAMP, this.tour ? 0 : tm.on, this.engine.reduced);
+    }
     const t = this.tour;
     if (!t) return;
     const u = this.engine.arcs.uniforms;
