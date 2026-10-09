@@ -22,6 +22,39 @@ export function jungLine(c: Cite): string {
   return ['Jung', shortWork(c.workTitle), c.year, shortLocator(c.locator)].filter(Boolean).join(' · ');
 }
 
+/** work key → the title (and the year, when every cite of that work agrees on one) the field's own cites give it. */
+const workIndex = new WeakMap<Model, Map<string, { title: string; year: string }>>();
+function worksOf(m: Model): Map<string, { title: string; year: string }> {
+  let idx = workIndex.get(m);
+  if (idx) return idx;
+  idx = new Map();
+  const years = new Map<string, Set<string>>();
+  const seen = (c: Cite) => {
+    if (!c.work || !c.workTitle || c.workTitle === c.work) return;
+    if (!idx!.has(c.work)) idx!.set(c.work, { title: c.workTitle, year: '' });
+    const ys = years.get(c.work) ?? years.set(c.work, new Set()).get(c.work)!;
+    ys.add(c.year);
+  };
+  for (const o of m.occ) for (const c of o.jung) seen(c);
+  for (const [work, w] of idx) {
+    const ys = years.get(work)!;
+    // a lone, plain year only — a work cited under several dates is not dated here
+    if (ys.size === 1) { const y = [...ys][0]; if (/^\d{4}$/.test(y)) w.year = y; }
+  }
+  workIndex.set(m, idx);
+  return idx;
+}
+
+/** A passage's cite in the same voice as every other: "Jung · Aion (CW9ii) · 1951 · ¶149". Never a raw work key. */
+export function passageCite(m: Model, work: string, locator: string): Cite {
+  const w = worksOf(m).get(work);
+  return { work, workTitle: w?.title ?? work, year: w?.year ?? '', locator };
+}
+
+export function passageLine(m: Model, work: string, locator: string): string {
+  return jungLine(passageCite(m, work, locator));
+}
+
 
 export function cultureNames(m: Model, o: Occurrence, limit = 2): string[] {
   return o.cultureIds.slice(0, limit).map((c) => m.cultureById.get(c)?.name ?? '').filter(Boolean);

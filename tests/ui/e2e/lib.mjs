@@ -4,8 +4,18 @@ import { chromium, webkit } from 'playwright';
 
 export const URL = process.env.EARTH_URL ?? 'http://localhost:5183/';
 
-export async function launch(kind = 'chromium', { headed = true } = {}) {
+// EARTH_HEADLESS=1 runs without a display (a cloud clone): software GL through the system Chromium.
+const CLOUD = process.env.EARTH_HEADLESS === '1';
+
+export async function launch(kind = 'chromium', { headed = !CLOUD } = {}) {
   if (kind === 'webkit') return webkit.launch({ headless: !headed });
+  if (CLOUD) {
+    return chromium.launch({
+      headless: true,
+      executablePath: process.env.CHROMIUM_PATH ?? '/opt/pw-browsers/chromium',
+      args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+    });
+  }
   return chromium.launch({
     headless: !headed,
     args: ['--use-angle=metal', '--ignore-gpu-blocklist', '--enable-gpu-rasterization', '--enable-zero-copy', '--disable-renderer-backgrounding', '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows'],
