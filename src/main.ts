@@ -1,8 +1,11 @@
 import './style/main.css';
 import './style/aion.css';
 import './style/sky.css';
+import './style/redbook.css';
 import { loadSymbols } from './data/symbols';
 import { historyExtent, loadHistory } from './aion/model';
+import { loadCorpusIndex } from './data/corpus';
+import { loadRedbook } from './redbook/load';
 import { Controller } from './app/controller';
 import { loadField } from './data/load';
 import { buildModel } from './data/model';
@@ -29,9 +32,11 @@ async function boot() {
   const loading = document.getElementById('loading')!;
   try {
     const { field } = await loadField();
-    const [history, symbols] = await Promise.all([
+    const [history, symbols, corpus, redbook] = await Promise.all([
       loadHistory().catch(error => { console.warn(error); return undefined; }),
       loadSymbols().catch(error => { console.warn(error); return undefined; }),
+      loadCorpusIndex(),
+      loadRedbook(),
     ]);
     const model = buildModel(field, history ? historyExtent(history) : undefined, symbols);
     const time = new TimeModel();
@@ -50,7 +55,7 @@ async function boot() {
       },
       prefersReducedMotion(),
     );
-    ctl = new Controller(model, engine, time, app, history);
+    ctl = new Controller(model, engine, time, app, history, corpus, redbook ?? undefined);
     await engine.ready;
     ctl.boot();
     requestAnimationFrame(() => loading.classList.add('done'));

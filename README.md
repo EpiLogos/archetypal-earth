@@ -24,8 +24,16 @@ Choices made by the site rather than taken from the vault live in `curation/`:
 - `archetypes.json` sets the instinct–spirit spectrum and atmosphere colours.
 - `family-ties.json` links symbols to archetypes, marked `jung`, `inferred` or `site`.
 - `image-queries.json` holds the Commons search queries and pinned image choices.
+- `aion/` curates the historical readings (see below); `redbook.json` curates the Red Book walk.
 
 The shared data contract is [src/types/field.ts](src/types/field.ts).
+
+The vault's `corpus/` (all 28 volumes, page-anchored) is also ingested: `npm run ingest` builds
+`public/data/corpus/` (an index plus one file per volume: chapters, pages, ¶ anchor spans), and any
+citing card in the site opens the actual passage at its source — "cw12 ¶452 (pdf p350)" becomes a
+deep link with the whole page behind it. The corpus text is the owner's own local copy of
+copyrighted translations: treat `public/data/corpus/` like the vault, not like redistributable
+content.
 
 ## Imagery
 
@@ -59,19 +67,32 @@ Zoom out past the Moon and the globe becomes a scale model of the sky: the Sun, 
 npm run typecheck && npm test && npm run build
 ```
 
-### Aion, time and graph controls
+### Aion, the Red Book, time and graph controls
 
-**Aion** (or **A**) opens Jung's reading of archetypal history on the same globe.
-Choose an epoch to inspect its nested periods, select a historical event, or
-follow one of four historical threads. Source passages remain expandable in
-place. Approximate dates and conditional Aquarian boundaries are labelled;
-this is Jung's reading, with the atlas's explanatory gloss distinguished in the
-source notes. Future readings can declare `extends: "jung-aion"` without
-rewriting his dataset. See [AION-SOURCES.md](docs/AION-SOURCES.md).
+**Aion** (or **A**) opens the archetypal readings of history on the same globe.
+Three readings now stand there: Jung's **Aion** itself (the Pisces arc, 45
+events), **The Turn** (the epoch's hinge 1914→1958 in five phases: forecast,
+eruption, catastrophe, compensation, horizon), and **The Aquarius Horizon**
+(every dated forecast, 1929→1958, with the reckoned threshold beside it).
+Choose an epoch, a historical event, or a thread; source passages expand in
+place and open the actual corpus passage. Jung-claims and standard scholarship
+are labelled J/S exactly as the vault labels them; approximate dates and
+conditional Aquarian boundaries stay labelled. See [AION-SOURCES.md](docs/AION-SOURCES.md).
 
-`npm run aion` regenerates `public/data/history.json` from the curated reading;
+`npm run aion` regenerates `public/data/history.json` from the curated readings;
 `npm run aion:check` verifies actual corpus passages, field references and
 published equality. This does not re-ingest the growing Jung vault.
+
+**The Red Book** (or **R**) walks Liber Novus in folio order — the descent that
+generated half the archetypes in the field, every stop `subject: Jung`. Each
+folio stop shows its facsimile plate beside the translated text where one
+exists (plates are copyrighted Norton pages: they load only from the vault on
+this machine, never from any build — the licence law is in
+[curation/redbook.json](curation/redbook.json) and
+[REDBOOK-SOURCES.md](docs/REDBOOK-SOURCES.md)); the genesis view links each
+symbol-episode forward to the archetype it became and its globe occurrences.
+`npm run redbook` regenerates `public/data/redbook.json`;
+`npm run redbook:check` verifies it.
 
 **G** switches Earth and Graph. Graph **Settings** contains local depth,
 occurrence visibility, relation filters, the layout's link space and

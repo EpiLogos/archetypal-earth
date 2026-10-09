@@ -4033,6 +4033,66 @@
    "license": "Public domain",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nietzsche187a.jpg",
    "_file": "File:Nietzsche187a.jpg"
+  },
+  "desert": {
+   "src": "img/families/desert.jpg",
+   "thumb": "img/families/desert.thumb.jpg",
+   "width": 1280,
+   "height": 1455,
+   "tone": "#988666",
+   "title": "A history of all nations from the earliest times; being a universal historical library (1905) (14595470240)",
+   "credit": "Internet Archive Book Images",
+   "license": "Public domain (no known restrictions)",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_history_of_all_nations_from_the_earliest_times;_being_a_universal_historical_library_(1905)_(14595470240).jpg",
+   "_file": "File:A history of all nations from the earliest times; being a universal historical library (1905) (14595470240).jpg"
+  },
+  "helios": {
+   "src": "img/families/helios.jpg",
+   "thumb": "img/families/helios.thumb.jpg",
+   "width": 1280,
+   "height": 1260,
+   "tone": "#bbaa9c",
+   "title": "Menorah Token",
+   "credit": "Anonymous ( Byzantine Empire ) Unknown author",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Byzantine_-_Menorah_Token_-_Walters_47654.jpg",
+   "_file": "File:Byzantine - Menorah Token - Walters 47654.jpg"
+  },
+  "kabir": {
+   "src": "img/families/kabir.jpg",
+   "thumb": "img/families/kabir.thumb.jpg",
+   "width": 1280,
+   "height": 839,
+   "tone": "#b6aa8e",
+   "title": "The Great Umayyed Mosque of Damascus, Syria - 6",
+   "credit": "James Gordon from Los Angeles, California, USA",
+   "license": "CC BY 2.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Umayyed_Mosque_of_Damascus,_Syria_-_6.jpg",
+   "_file": "File:The Great Umayyed Mosque of Damascus, Syria - 6.jpg"
+  },
+  "kali": {
+   "src": "img/families/kali.jpg",
+   "thumb": "img/families/kali.thumb.jpg",
+   "width": 1280,
+   "height": 2065,
+   "tone": "#a0734e",
+   "title": "Kali and all her symbols. Watercolour drawing.",
+   "credit": "https://wellcomeimages.org/indexplus/obf_images/2c/a3/a8ca607de4510861d292dd911169.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0045000.html Wellcome Collection gallery (2018-03-30): https://wellcomecollectio",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kali_and_all_her_symbols._Watercolour_drawing._Wellcome_V0045000.jpg",
+   "_file": "File:Kali and all her symbols. Watercolour drawing. Wellcome V0045000.jpg"
+  },
+  "the-red-one": {
+   "src": "img/families/the-red-one.jpg",
+   "thumb": "img/families/the-red-one.thumb.jpg",
+   "width": 1280,
+   "height": 1057,
+   "tone": "#434343",
+   "title": "Red-Figure Rhyton",
+   "credit": "Sotades Painter",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sotades_Painter_-_Red-Figure_Rhyton_-_Walters_482050_-_Detail_A.jpg",
+   "_file": "File:Sotades Painter - Red-Figure Rhyton - Walters 482050 - Detail A.jpg"
   }
  },
  "occurrences": {
@@ -5175,6 +5235,42 @@
    "license": "Public domain",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Splendor_Solis_07_drowning_king.jpg",
    "_file": "File:Splendor Solis 07 drowning king.jpg"
+  },
+  "ascent-descent-ripley-scrowle-england-16c": {
+   "src": "img/occurrences/ascent-descent-ripley-scrowle-england-16c.jpg",
+   "thumb": "img/occurrences/ascent-descent-ripley-scrowle-england-16c.thumb.jpg",
+   "width": 960,
+   "height": 1386,
+   "tone": "#76654f",
+   "title": "WMS 693, Ripley Scroll, Golden winged bird",
+   "credit": "https://wellcomeimages.org/indexplus/obf_images/21/dd/909d460b8d2b5514016cd4b1bfbf.jpg Gallery: https://wellcomeimages.org/indexplus/image/L0068463.html",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:WMS_693,_Ripley_Scroll,_Golden_winged_bird_Wellcome_L0068463.jpg",
+   "_file": "File:WMS 693, Ripley Scroll, Golden winged bird Wellcome L0068463.jpg"
+  },
+  "coniunctio-woman-dragon-grave-scrutinium-1687": {
+   "src": "img/occurrences/coniunctio-woman-dragon-grave-scrutinium-1687.jpg",
+   "thumb": "img/occurrences/coniunctio-woman-dragon-grave-scrutinium-1687.thumb.jpg",
+   "width": 960,
+   "height": 887,
+   "tone": "#8e8a75",
+   "title": "Michaelis Majeri Secretioris naturae secretorum scrutinium chymicum - per oculis et intellectui accuratè accommodata, figuris cupro appositissimè incisa, ingeni",
+   "credit": "Internet Archive Book Images",
+   "license": "Public domain (no known restrictions)",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Michaelis_Majeri_Secretioris_naturae_secretorum_scrutinium_chymicum_-_per_oculis_et_intellectui_accurat%C3%A8_accommodata,_figuris_cupro_appositissim%C3%A8_incisa,_ingeniosissima_emblemata,_hisque_confines,_and_(14751087115).jpg",
+   "_file": "File:Michaelis Majeri Secretioris naturae secretorum scrutinium chymicum - per oculis et intellectui accuratè accommodata, figuris cupro appositissimè incisa, ingeniosissima emblemata, hisque confines, and (14751087115).jpg"
+  },
+  "tree-buch-der-heiligen-dreifaltigkeit-cod-germ-598-munich-1420": {
+   "src": "img/occurrences/tree-buch-der-heiligen-dreifaltigkeit-cod-germ-598-munich-1420.jpg",
+   "thumb": "img/occurrences/tree-buch-der-heiligen-dreifaltigkeit-cod-germ-598-munich-1420.thumb.jpg",
+   "width": 960,
+   "height": 1360,
+   "tone": "#bfb99d",
+   "title": "Engraving and etching - a handbook for the use of students and print collectors (1907) (14774017535)",
+   "credit": "Internet Archive Book Images",
+   "license": "Public domain (no known restrictions)",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Engraving_and_etching_-_a_handbook_for_the_use_of_students_and_print_collectors_(1907)_(14774017535).jpg",
+   "_file": "File:Engraving and etching - a handbook for the use of students and print collectors (1907) (14774017535).jpg"
   }
  }
 }
