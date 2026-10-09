@@ -160,6 +160,7 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && a.history?.reading === b.history?.reading
     && a.history?.selection?.kind === b.history?.selection?.kind
     && a.history?.selection?.id === b.history?.selection?.id
+    && !!a.redbook === !!b.redbook
     && a.redbook?.stop === b.redbook?.stop
     && !!a.redbook?.genesis === !!b.redbook?.genesis
     && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)));

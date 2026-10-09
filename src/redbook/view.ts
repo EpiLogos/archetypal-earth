@@ -49,7 +49,10 @@ export class RedBookView {
     this.card.hidden = false;
     if (state?.genesis) this.showGenesis();
     else {
-      const stop = (state?.stop && this.stops.find((s) => s.id === state.stop)) || this.stops[0];
+      // the null landing centres The Self: the stop its genesis row names (as the graph's null state does), else the first folio
+      const selfRow = this.mode.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
+      const selfStop = selfRow && this.stops.find((s) => s.id === selfRow.stopId);
+      const stop = (state?.stop && this.stops.find((s) => s.id === state.stop)) || selfStop || this.stops[0];
       this.showStop(stop);
     }
   }
