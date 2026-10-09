@@ -1,0 +1,435 @@
+{
+  "generatedAt": "2026-10-09T01:05:07.106Z",
+  "licence": {
+    "plates": "The facsimile plates are copyrighted pages of the Norton/Liber Novus facsimile (W. W. Norton, 2009). The site’s Commons-only provenance law applies to anything shipped or committed: the plates therefore never enter git and never enter dist. They are referenced as LOCAL-ONLY runtime assets, read at runtime from the owner’s own vault copy over a dev-server-only route; any served build degrades gracefully to a cited note.",
+    "text": "The mode’s translated text comes from the vault’s Red Book harvest (Reader-edition English, folio/ms/pdf-cited) and follows the vault’s quotation law; translation quotes are cited to the Reader pagination as the vault cites them.",
+    "vaultPathNote": "The plate directory lives inside the Jung archetypal-field vault, which this repo never writes to."
+  },
+  "plates": {
+    "vaultRelativeDir": "_raw/redbook/plates",
+    "urlPrefix": "/redbook-plates/",
+    "served": "dev-only",
+    "note": "Plate files are named for the facsimile’s own pdf pages, p0014–p0223; the vault’s plate mapping (plate pNNNN = ms page NNNN − 31, once the manuscript numbering begins) is the vault’s, not ours."
+  },
+  "mode": {
+    "title": "The Red Book",
+    "subtitle": "Liber Novus, 1913–1930 · Jung’s own record of the descent",
+    "subject": "jung",
+    "oneLine": "The folio-sequence walk through Liber Novus — every stop subject: Jung."
+  },
+  "sections": [
+    {
+      "id": "flood-and-soul",
+      "name": "The flood and the refound soul",
+      "oneLine": "October–December 1913: the visions break in, and Jung answers the summons."
+    },
+    {
+      "id": "siegfried",
+      "name": "Siegfried",
+      "oneLine": "The hero shot dead at the foot of a mountain — the first killing."
+    },
+    {
+      "id": "elijah-salome",
+      "name": "Elijah and Salome",
+      "oneLine": "The prophet and the blind pleasure: Logos and Eros as living figures."
+    },
+    {
+      "id": "the-red-one",
+      "name": "The Red One",
+      "oneLine": "The joy of the serious person: the devil met on the road."
+    },
+    {
+      "id": "the-desert",
+      "name": "The desert",
+      "oneLine": "The desert of the self, the four horses of the sun, the greening remains."
+    },
+    {
+      "id": "izdubar",
+      "name": "Izdubar",
+      "oneLine": "The bull-man lamed by science, carried westward like an egg."
+    },
+    {
+      "id": "the-egg",
+      "name": "The egg",
+      "oneLine": "The god incubated in the egg, and reborn as the sun."
+    },
+    {
+      "id": "philemon",
+      "name": "Philemon and the second layer",
+      "oneLine": "The magician with four keys, the mandalas, the lapis — the years of images."
+    },
+    {
+      "id": "the-sermones",
+      "name": "The Sermones",
+      "oneLine": "Philemon preaches to the dead: Septem Sermones ad Mortuos, 1916."
+    },
+    {
+      "id": "the-epilogue",
+      "name": "The epilogue",
+      "oneLine": "1959: sixteen years, closed by alchemy."
+    }
+  ],
+  "stops": [
+    {
+      "id": "liber-novus-flood-vision-northern-lands-fol1v",
+      "sectionId": "flood-and-soul"
+    },
+    {
+      "id": "liber-novus-soul-white-bird-refinding-fol2r",
+      "sectionId": "flood-and-soul",
+      "plate": "p0019.jpg",
+      "plateCaption": "illuminated initial D of \"Die Wiederfindung der Seele Cap I\" — a white bird (the soul) on a dark blue ground — heading the chapter; lower right the S initial of \"Seele und Gott Cap II.\""
+    },
+    {
+      "id": "liber-novus-descent-into-hell-cave-fol3v",
+      "sectionId": "flood-and-soul"
+    },
+    {
+      "id": "liber-novus-three-prophecies-war-magic-religion-1914",
+      "sectionId": "flood-and-soul"
+    },
+    {
+      "id": "liber-novus-siegfried-murder-hero-fol4v",
+      "sectionId": "siegfried",
+      "plate": "p0025.jpg",
+      "plateCaption": "top left, framed illumination of a radiant golden sun-star flanked by two robed figures (the white-silk garden); mid-page the heading \"Heldenmord. Cap VII\"; lower left, a framed mountain landscape at dawn with a tiny chariot-figure on the pass (the murder scene); below, \"Des Gottes Empfängnis Cap VIII\" with flowering border panel."
+    },
+    {
+      "id": "liber-novus-coming-god-proclamation-fol4v",
+      "sectionId": "elijah-salome",
+      "plate": "p0026.jpg",
+      "plateCaption": "a full illuminated page — the proclamation set in white script on a deep red-blue diagonally striped frame, a compass/wind-rose star at the head, a chalice at the foot; opposite, a painted border of red flowers on orange ground."
+    },
+    {
+      "id": "liber-novus-elijah-salome-mysterium-fol5v",
+      "sectionId": "elijah-salome",
+      "plate": "p0028.jpg",
+      "plateCaption": "the famous painting atop the chapter — night-blue mountains, a white-domed columned house at right, Elijah in white-blue robe leading red-robed Salome toward the door, a white bird on the ground before them, and red serpents writhing around all four sides of the frame; above, \"MYSTERIUM\" in gold Gothic on a red-gold chevron band over the great B initial \"Begegnung. Cap. IX.\""
+    },
+    {
+      "id": "liber-novus-crucifixion-salome-healing-fol6v",
+      "sectionId": "elijah-salome",
+      "plate": "p0031.jpg",
+      "plateCaption": "tiny figures in white and red within the Auflösung initial; the full scene is text-borne — the only surviving image evidence of the mystery in this range."
+    },
+    {
+      "id": "liber-novus-instruction-crystal-visions-kali-fol6r",
+      "sectionId": "elijah-salome",
+      "plate": "p0027.jpg",
+      "plateCaption": "\"Die Belehrung Cap X\" — great blue B initial hung with red flame-spikes (the Buddha in the circle of fire) in a dense text spread."
+    },
+    {
+      "id": "liber-novus-serpents-duel-sun-temple-fol6v",
+      "sectionId": "elijah-salome",
+      "plate": "p0031.jpg",
+      "plateCaption": "\"Die Auflösung Cap XI\" — illuminated initial inset with a miniature painting of white- and red-robed figures (the serpents' meeting), red marginalia; the book's own \"finis partis primi\" follows at fol. vii(r) (plate p0029)."
+    },
+    {
+      "id": "liber-novus-castle-maiden-red-roses-fol05",
+      "sectionId": "elijah-salome",
+      "plate": "p0036.jpg",
+      "plateCaption": "illuminated D of \"Das Schloß im Walde. Cap. II\" — a night-blue castle with lit windows and moon above dark water, painted inside the initial."
+    },
+    {
+      "id": "liber-novus-red-one-joy-devil-fol01",
+      "sectionId": "the-red-one"
+    },
+    {
+      "id": "liber-novus-one-of-the-lowly-tramp-death-fol12",
+      "sectionId": "the-red-one"
+    },
+    {
+      "id": "liber-novus-death-dark-one-sea-of-dead-fol29",
+      "sectionId": "the-red-one",
+      "plate": "p0061.jpg",
+      "plateCaption": "text page with small red-and-green initial at \"Ich schreite um...\" — the sea-of-blood passage and the note \"es war die zweite Nacht des Jahres 1914\" are text-borne here."
+    },
+    {
+      "id": "liber-novus-desert-of-self-fol3r",
+      "sectionId": "the-desert",
+      "plate": "p0021.jpg",
+      "plateCaption": "illuminated D of \"Die Wüste Cap. IV\" — a small human figure standing within the initial on deep color grounds."
+    },
+    {
+      "id": "liber-novus-helios-four-horses-dawn-fol20",
+      "sectionId": "the-desert",
+      "plate": "p0052.jpg",
+      "plateCaption": "the great Gothic display page of Dies II — \"Wenn du schläfst, so ruhst du, wie all das was je war...\" in large black and red textura — the sleep through the millennia and the temple chants; no figurative painting."
+    },
+    {
+      "id": "liber-novus-remains-temples-greening-fol33",
+      "sectionId": "the-desert",
+      "plate": "p0065.jpg",
+      "plateCaption": "display page of ch. vii — \"Nach Flucht kommt das Licht, damit die Ferne errettet werde von dem Tod\" in large textura with A initials; the greening is text-borne in this range."
+    },
+    {
+      "id": "liber-novus-izdubar-serpent-weave-image-fol36",
+      "sectionId": "izdubar",
+      "plate": "p0067.jpg",
+      "plateCaption": "a frontal standing giant filling the page — black-bearded, crowned with bull horns, eyes wide, wearing a blue-black scale corselet and a red kilt patterned with cuneiform-like ornament; his right hand plants a double-axe (the bull-slaying labrys) point-down. The entire ground is a tiled textile of pale-blue serpents interlaced with brown winged dragons on blue; stepped ziggurat-like brick flanks descend at both sides, rows of dark serpents crawling on them; at the bottom, behind a fence, a tiny white-robed human figure with raised arms faces the colossus. Jung's margin inscription records that the image was painted around Christmas 1913 — i.e. BEFORE the Jan 8, 1914 fantasy it \"illustrates\": the painting led the text."
+    },
+    {
+      "id": "liber-novus-izdubar-bull-man-first-day-fol37",
+      "sectionId": "izdubar",
+      "plate": "p0068.jpg",
+      "plateCaption": "\"Erster Tag. Cap. VIII.\" — the great E initial on deep-blue starfield with a golden rayed sun-disc at its center and a red-orange serpent coiling down the panel's right edge; the meeting scene itself is text-borne."
+    },
+    {
+      "id": "liber-novus-izdubar-carried-fantasy-egg-fol46",
+      "sectionId": "izdubar"
+    },
+    {
+      "id": "liber-novus-god-in-egg-incantations-ms50",
+      "sectionId": "the-egg"
+    },
+    {
+      "id": "liber-novus-izdubar-reborn-from-egg-ms65",
+      "sectionId": "the-egg"
+    },
+    {
+      "id": "liber-novus-anchorite-ammonius-fol15",
+      "sectionId": "philemon",
+      "plate": "p0046.jpg",
+      "plateCaption": "\"Der Anachoret. Cap. IV. Dies. I.\" — the great illuminated D set inside a square panel of Ravenna-like mosaic: interlaced red-orange-purple maze bands around a blue field; the eye-opening page of the desert cycle."
+    },
+    {
+      "id": "liber-novus-mandala-four-cardinal-figures-ms105",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-dead-serpent-umbilical-cord-ms111",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-atmavictu-kabir-manikin-ms117",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-cabiri-holy-water-caster-ms123",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-philemon-magician-baucis-garden-ms139",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-lapis-atmavictu-stone-face-ms122",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-sigg-memorial-mandala-liverpool-ms159",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-satan-dialogue-absolute-vs-life-ms162",
+      "sectionId": "philemon"
+    },
+    {
+      "id": "liber-novus-phallos-hap-daimons-of-the-dead-pdf370",
+      "sectionId": "the-sermones"
+    },
+    {
+      "id": "liber-novus-communion-of-the-dead-last-supper-1916",
+      "sectionId": "the-sermones"
+    },
+    {
+      "id": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377",
+      "sectionId": "the-sermones"
+    },
+    {
+      "id": "liber-novus-sermones-abraxas-hymn-pdf381",
+      "sectionId": "the-sermones"
+    },
+    {
+      "id": "liber-novus-sermones-man-is-a-gateway-lonely-star-pdf385",
+      "sectionId": "the-sermones"
+    },
+    {
+      "id": "liber-novus-epilogue-1959-ms190",
+      "sectionId": "the-epilogue"
+    }
+  ],
+  "genesis": [
+    {
+      "id": "genesis-philemon",
+      "name": "Philemon",
+      "target": {
+        "kind": "archetype",
+        "id": "wise-old-man"
+      },
+      "also": {
+        "kind": "family",
+        "id": "philemon"
+      },
+      "stopId": "liber-novus-philemon-magician-baucis-garden-ms139",
+      "words": "It was he who taught me psychic objectivity, the reality of the psyche",
+      "cite": "redbook pdf p232",
+      "doctrine": "The wise old man named (cw9i ¶79); the meaning-regulator (cw14 ¶313); Mercurius-senex (cw13 ¶218); the murdered senex via Goethe (cw12 ¶561)."
+    },
+    {
+      "id": "genesis-anima",
+      "name": "The anima",
+      "target": {
+        "kind": "archetype",
+        "id": "anima"
+      },
+      "stopId": "liber-novus-elijah-salome-mysterium-fol5v",
+      "words": "she is my own soul",
+      "cite": "redbook pdf p279",
+      "doctrine": "Salome → Kali → “case Z” in the Kore essay (cw9i ¶361, ¶371); the ladder (cw16 ¶361); the map anima-genealogy."
+    },
+    {
+      "id": "genesis-wise-old-man",
+      "name": "The wise old man / mana-personality",
+      "target": {
+        "kind": "archetype",
+        "id": "mana-personality"
+      },
+      "also": {
+        "kind": "archetype",
+        "id": "wise-old-man"
+      },
+      "stopId": "liber-novus-elijah-salome-mysterium-fol5v",
+      "words": "An old man stood before me. He looked like one of the old prophets",
+      "cite": "redbook pdf p276",
+      "doctrine": "The naming (cw9i ¶79); the mana-personality chapter (cw7 ¶377–80); 1925: “the wise man, the medicine man, the mana man” (sem-1925 pdf p113)."
+    },
+    {
+      "id": "genesis-serpent",
+      "name": "The serpent",
+      "target": {
+        "kind": "family",
+        "id": "serpent"
+      },
+      "stopId": "liber-novus-serpents-duel-sun-temple-fol6v",
+      "words": "If one waits long enough, one sees how the Gods all change into serpents and underworld dragons in the end.",
+      "cite": "redbook pdf p311",
+      "doctrine": "The whole serpent-row chain: lowest-and-highest (cw9ii ¶293); serpent-Christ (cw12 ¶184); serpens mercurialis (cw13 ¶448–49)."
+    },
+    {
+      "id": "genesis-anthropos",
+      "name": "Anthropos / Izdubar",
+      "target": {
+        "kind": "family",
+        "id": "izdubar"
+      },
+      "stopId": "liber-novus-izdubar-bull-man-first-day-fol37",
+      "words": "this is Izdubar, the mighty, the bull-man",
+      "cite": "redbook pdf p309",
+      "doctrine": "The renewed God = renewed attitude (cw6 ¶301, editor n.137); Anthropos = self (cw13 ¶269); Aion’s Anthropos chapters."
+    },
+    {
+      "id": "genesis-mandala-self",
+      "name": "The mandala and the self",
+      "target": {
+        "kind": "archetype",
+        "id": "self"
+      },
+      "also": {
+        "kind": "family",
+        "id": "mandala"
+      },
+      "stopId": "liber-novus-mandala-four-cardinal-figures-ms105",
+      "words": "And that is the self, the wholeness of the personality",
+      "cite": "redbook pdf p237",
+      "doctrine": "Mandala doctrine (cw9i, “Mandala Symbolism” — the ms 105 mandala published as “a male patient’s”); the self-symbol (cw9ii ¶426)."
+    },
+    {
+      "id": "genesis-aeon",
+      "name": "The aeon doctrine",
+      "target": {
+        "kind": "reading",
+        "id": "jung-aion"
+      },
+      "stopId": "liber-novus-izdubar-bull-man-first-day-fol37",
+      "words": "the month of the fish will soon be over",
+      "cite": "redbook pdf p345–46",
+      "doctrine": "Aion 1951: the Platonic month (cw9ii ¶135–49) and the aeon thesis of the foreword — the Red Book is the doctrine’s earliest witness, forty years on."
+    },
+    {
+      "id": "genesis-pleroma",
+      "name": "The pleroma",
+      "target": {
+        "kind": "family",
+        "id": "pleroma"
+      },
+      "stopId": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377",
+      "words": "Now hear: I begin with nothingness. Nothingness is the same as the fullness",
+      "cite": "redbook pdf p377",
+      "doctrine": "Tao (cw6 ¶363); Bardo-pleroma (cw11 ¶629); unus mundus (cw14 ¶660)."
+    },
+    {
+      "id": "genesis-transcendent-function",
+      "name": "The transcendent function",
+      "target": null,
+      "stopId": "liber-novus-soul-white-bird-refinding-fol2r",
+      "words": "we are real and not symbols",
+      "cite": "redbook pdf p277",
+      "doctrine": "The 1916 essay (cw8 pdf p79) and the 1921 definition (cw6 ¶184) — theory and practice written the same year."
+    },
+    {
+      "id": "genesis-turn",
+      "name": "The war prophecies → the Turn",
+      "target": {
+        "kind": "reading",
+        "id": "jung-turn"
+      },
+      "stopId": "liber-novus-three-prophecies-war-magic-religion-1914",
+      "words": "it is completely real, and it will come to pass",
+      "cite": "redbook pdf p262",
+      "doctrine": "The 1918 forecast (cw10 ¶17); the possession doctrine (cw10 ¶437); the printed arc assembled at the Turn reading — which begins where the manuscript’s prophecy already stood."
+    },
+    {
+      "id": "genesis-abraxas",
+      "name": "The new God in the relative / Abraxas",
+      "target": {
+        "kind": "family",
+        "id": "abraxas"
+      },
+      "stopId": "liber-novus-sermones-abraxas-hymn-pdf381",
+      "words": "Effectiveness... is a God above God... We call him by his name ABRAXAS",
+      "cite": "redbook pdf p379",
+      "doctrine": "The Christ↔Antichrist doctrine (Aion ch. III, cw9ii ¶76); the anti-privatio-boni argument of Aion and Answer to Job."
+    },
+    {
+      "id": "genesis-divine-child",
+      "name": "The divine child",
+      "target": {
+        "kind": "archetype",
+        "id": "child"
+      },
+      "stopId": "liber-novus-coming-god-proclamation-fol4v",
+      "words": "I have received your sprout, you who are to come!",
+      "cite": "redbook pdf p273",
+      "doctrine": "The child-archetype essay (cw9i, 1940); individuation’s beginning (editor n.123)."
+    },
+    {
+      "id": "genesis-shadow",
+      "name": "The shadow",
+      "target": {
+        "kind": "archetype",
+        "id": "shadow"
+      },
+      "also": {
+        "kind": "family",
+        "id": "the-red-one"
+      },
+      "stopId": "liber-novus-red-one-joy-devil-fol01",
+      "words": "he was my joy, the joy of the serious person",
+      "cite": "redbook pdf p292",
+      "doctrine": "The shadow essays (cw9i / cw9ii ¶13–19); the flaying before one’s own I, later read as shadow-confrontation (editor n.8, citing CW9i)."
+    },
+    {
+      "id": "genesis-antichrist",
+      "name": "Christ ↔ Antichrist",
+      "target": {
+        "kind": "family",
+        "id": "antichrist"
+      },
+      "stopId": "liber-novus-coming-god-proclamation-fol4v",
+      "words": "The image of the Antichrist, which has come down to us from the ancients, announces the new God",
+      "cite": "redbook pdf p274",
+      "doctrine": "Aion ch. III: “an imitating spirit of evil who follows in Christ’s footsteps like a shadow” (cw9ii ¶76); “an inexorable psychological law” (¶77)."
+    }
+  ]
+}
