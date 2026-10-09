@@ -8,6 +8,22 @@
     "cw10": {
       "file": "corpus/cw10.md",
       "sha256": "d6568d43ce9f2d59cf5789dcb730f5d629259c6d6ebf2d4481e564fa70231bb0"
+    },
+    "cw12": {
+      "file": "corpus/cw12.md",
+      "sha256": "56121c7dc375963ffbcd1a1301b8dcea3f958d173bfeec4d34739fc3621322cf"
+    },
+    "sem-childrens-dreams": {
+      "file": "corpus/sem-childrens-dreams.md",
+      "sha256": "1e5b5699a01547cc42aaf1584310d2ec9828cdc9de75e3ce8dfc771c6b067251"
+    },
+    "sem-visions": {
+      "file": "corpus/sem-visions.md",
+      "sha256": "d266ebe9c5da435a600e9b26175d946872b75d252d866f441a8c5362d1dbd708"
+    },
+    "sync": {
+      "file": "corpus/sync.md",
+      "sha256": "d64f04b3fe3b1322b51b3058f235b180d0074c9c3b6aee2fd32eb1696c000707"
     }
   },
   "sourceBindings": {
@@ -264,6 +280,112 @@
         102
       ],
       "witness": "Origen, In Genesim"
+    },
+    "cw09ii:¶149, n.83 (pdf p105)": {
+      "work": "cw09ii",
+      "locator": "¶149, n.83 (pdf p105)",
+      "pages": [
+        105
+      ]
+    },
+    "cw09ii:¶167–168 (pdf p118)": {
+      "work": "cw09ii",
+      "locator": "¶167–168 (pdf p118)",
+      "pages": [
+        118
+      ]
+    },
+    "cw09ii:¶175 (pdf p125)": {
+      "work": "cw09ii",
+      "locator": "¶175 (pdf p125)",
+      "pages": [
+        125
+      ]
+    },
+    "cw09ii:¶133 (pdf p91–92)": {
+      "work": "cw09ii",
+      "locator": "¶133 (pdf p91–92)",
+      "pages": [
+        91,
+        92
+      ]
+    },
+    "cw09ii:¶133 (pdf p92)": {
+      "work": "cw09ii",
+      "locator": "¶133 (pdf p92)",
+      "pages": [
+        92
+      ]
+    },
+    "cw09ii:¶235 (pdf p162)": {
+      "work": "cw09ii",
+      "locator": "¶235 (pdf p162)",
+      "pages": [
+        162
+      ]
+    },
+    "cw12:pdf p654": {
+      "work": "cw12",
+      "locator": "pdf p654",
+      "pages": [
+        654
+      ]
+    },
+    "sem-visions:pdf p613": {
+      "work": "sem-visions",
+      "locator": "pdf p613",
+      "pages": [
+        613
+      ]
+    },
+    "cw09ii:¶115 (pdf p74)": {
+      "work": "cw09ii",
+      "locator": "¶115 (pdf p74)",
+      "pages": [
+        74
+      ]
+    },
+    "sem-visions:pdf p612": {
+      "work": "sem-visions",
+      "locator": "pdf p612",
+      "pages": [
+        612
+      ]
+    },
+    "sem-childrens-dreams:pdf p371": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p371",
+      "pages": [
+        371
+      ]
+    },
+    "sync:pdf p25": {
+      "work": "sync",
+      "locator": "pdf p25",
+      "pages": [
+        25
+      ]
+    },
+    "cw10:¶614 (pdf p294)": {
+      "work": "cw10",
+      "locator": "¶614 (pdf p294)",
+      "pages": [
+        294
+      ]
+    },
+    "cw10:¶622 (pdf p298)": {
+      "work": "cw10",
+      "locator": "¶622 (pdf p298)",
+      "pages": [
+        298
+      ]
+    },
+    "cw09ii:pdf p9": {
+      "work": "cw09ii",
+      "locator": "pdf p9",
+      "pages": [
+        9
+      ]
     }
   },
   "readings": [
@@ -574,6 +696,29 @@
       ],
       "events": [
         {
+          "id": "spring-point-crossings",
+          "name": "The spring point crosses into the Fishes",
+          "year": -146,
+          "yearDisplay": "~146 BCE / AD 11 · astronomical anchors",
+          "epochId": "aries",
+          "polarity": "neutral",
+          "oneLine": "Jung’s two anchor dates for the ingress of the spring point into the Fishes.",
+          "body": [
+            "The row is Jung’s own astronomical anchor (J): the meridians of the two reference stars give the ingress “about the beginning of our era.” The epoch boundary in this atlas stays at year 0 as a symbolic display choice."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.83 (pdf p105)",
+              "text": "The meridian of the star \"0\" in the commissure passed through the springpoint in A.D. 11, and that of the star \"a 113\" in 146 B.C."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
           "id": "denderah-zodiac",
           "name": "The fishes at Denderah",
           "year": -50,
@@ -673,6 +818,57 @@
           "archetypeIds": [
             "self"
           ]
+        },
+        {
+          "id": "fishers-of-men",
+          "name": "Fishers of men",
+          "year": 30,
+          "yearDisplay": "~30 CE · the ministry",
+          "epochId": "pisces-first-fish",
+          "polarity": "light",
+          "oneLine": "The apostles as fishers: the age’s first symbolic catch.",
+          "body": [
+            "Jung reads the gospel fishers (J) as the new age announcing itself in the symbol of its sign."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶145 (pdf p101)",
+              "text": "There Christ wants to make Peter and Andrew \"fishers of men,\" and the miraculous draught of fishes (Luke 5 : 10) is used by Christ himself as a paradigm for Peter's missionary activity."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "apocalypse-lamb",
+          "name": "The warlike lamb of the Apocalypse",
+          "year": 90,
+          "yearDisplay": "~90 CE · the Apocalypse",
+          "epochId": "pisces-first-fish",
+          "polarity": "shadow",
+          "oneLine": "The Aries residue returns as the warlike lamb, Christ’s shadow-figure.",
+          "body": [
+            "The ram of the declining Aries era comes back as the Apocalypse’s warlike lamb (J) — the age’s first shadow-figure, “umbra Jesu” in Jung’s reading of the counter-image."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶167–168 (pdf p118)",
+              "text": "For although the monstrous, warlike lamb is a shadowfigure in the sense that he is the counterpart of the lamb who was sacrificed, he is not nearly so irreconcilable with Christ as the Antichrist would have to be."
+            }
+          ],
+          "familyIds": [
+            "antichrist",
+            "christ-figure"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": []
         },
         {
           "id": "valentinus-shadow",
@@ -801,6 +997,31 @@
           "lon": 29.1259
         },
         {
+          "id": "pectrorios-inscription",
+          "name": "The Pectorios inscription",
+          "year": 375,
+          "yearDisplay": "4th c. (dating uncertain) · Autun",
+          "epochId": "pisces-first-fish",
+          "polarity": "light",
+          "oneLine": "Believers as the “divine descendants of the heavenly fish.”",
+          "body": [
+            "The eucharistic fish-meal inscription of Autun (J), a dating-uncertain pillar of the Christian fish record."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶175 (pdf p125)",
+              "text": "In the Pectorios inscription (beginning of the fourth century), believers are called the \"divine descendants of the heavenly fish.\""
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": [
+            "fish-pectorios-inscription-autun-4c"
+          ]
+        },
+        {
           "id": "augustine-two-powers",
           "name": "Augustine’s king and priest",
           "year": 390,
@@ -857,6 +1078,36 @@
           "place": "Monte Cassino · monastery named in Aion ¶139",
           "lat": 41.49,
           "lon": 13.81
+        },
+        {
+          "id": "tanninim-prophecy",
+          "name": "The war of the fishes",
+          "year": 530,
+          "yearDisplay": "~530 · Talmud, Sanhedrin 97b",
+          "epochId": "pisces-first-fish",
+          "polarity": "shadow",
+          "oneLine": "The tanninim war: the age’s eschatological double, read by Rashi as fishes.",
+          "body": [
+            "Jung calls the Talmud’s war of the tanninim (J) “probably the oldest testimony to the antithetical nature of the fishes”; Rashi’s gloss makes them two fishes at war before the Messiah."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶133 (pdf p91–92)",
+              "text": "There will follow the war of the tanninim [sea-monsters], the war of Gog and Magog"
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶133 (pdf p92)",
+              "text": "The Talmud commentator Solomon ben Isaac, alias Rashi (1039-1105), remarks that the tanninim are fishes, presumably basing himself on an older source, since he does not give this as his own opinion, as he usually does."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": [
+            "fish-tanninim-prophecy-rashi-talmud"
+          ]
         },
         {
           "id": "morienus-inner-work",
@@ -922,6 +1173,34 @@
           ]
         },
         {
+          "id": "messiah-in-pisces",
+          "name": "The Messiah expected in the Fishes",
+          "year": 1100,
+          "yearDisplay": "11th–14th c. · Jewish messianic astrology",
+          "epochId": "pisces-second-fish",
+          "polarity": "neutral",
+          "oneLine": "The great conjunction in Pisces read as the Messiah’s clock.",
+          "body": [
+            "From the 11th-century astrologers to Abarbanel (J, as Jung cites them), the Jupiter–Saturn conjunction in Pisces carries the messianic expectation — the age’s own astrology turned toward its sign."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶128 (pdf p86)",
+              "text": "Jeremias8 adopts the same view and mentions that a Jewish commentary on Daniel, written in the fourteenth century, expected the coming of the Messiah in the sign of the Fishes."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶128 (pdf p86)",
+              "text": "This commentary is mentioned by Muenter in a later publication 9 as stemming from Don Isaac Abarbanel, who was born in Lisbon in 1437 and died in Venice in 1508."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
           "id": "cathar-bogomil-fishes",
           "name": "The Cathar–Bogomil two fishes",
           "year": 1111,
@@ -962,6 +1241,35 @@
           "archetypeIds": [
             "shadow"
           ]
+        },
+        {
+          "id": "second-fish-dawn",
+          "name": "The second fish surfaces",
+          "year": 1150,
+          "yearDisplay": "~1000–1260 · the second fish’s dawn",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "Heresies, Joachim and the mendicants: the antichristian fish appears.",
+          "body": [
+            "Jung dates the second fish’s surfacing (J) from the early-eleventh-century movements onward, and reads the era’s religious revolutions as its rising."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶141 (pdf p98)",
+              "text": "It was therefore very natural, in an age which coincided with the beginning of the second Fish"
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶235 (pdf p162)",
+              "text": "These movements are also associated with the rise of alchemy, Protestantism, the Enlightenment, and natural science"
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "antichrist"
+          ],
+          "occurrenceIds": []
         },
         {
           "id": "joachim-holy-ghost",
@@ -1020,6 +1328,31 @@
           "occurrenceIds": [
             "fish-round-fish-allegoriae-turba-11c",
             "rosinus-ad-sarratantam-lapis-animalis"
+          ]
+        },
+        {
+          "id": "grail-lapsit-exillis",
+          "name": "The Grail-stone as lapis exilis",
+          "year": 1210,
+          "yearDisplay": "~1210 · Wolfram’s Grail",
+          "epochId": "pisces-second-fish",
+          "polarity": "light",
+          "oneLine": "The fish-age’s compensating symbol of wholeness: the Grail as lapis.",
+          "body": [
+            "Jung’s footnote chain (J) ties Wolfram’s lapsit exillis to the lapis exilis of the alchemists — the age’s counter-symbol of the self, parallel to Christ. Standard Grail philology (S) still debates the phrase’s origin; the reading here is Jung’s."
+          ],
+          "passages": [
+            {
+              "work": "cw12",
+              "locator": "pdf p654",
+              "text": "Wolfram von Eschenbach calls the stone of the grail “lapsit exillis.” Arnold of Villanova (d. ? 1312) calls the lapis “lapis exilis,” the uncomely stone (Rosarium, Art. aurif., II, p. 210), which may be of importance for the interpretation of Wolfram’s term."
+            }
+          ],
+          "familyIds": [
+            "grail"
+          ],
+          "occurrenceIds": [
+            "grail-lapsit-exillis-wolfram-1210"
           ]
         },
         {
@@ -1108,6 +1441,31 @@
           "place": "France (Cardinal Pierre d'Ailly, 1356-1420)",
           "lat": 47.517,
           "lon": 3.8972
+        },
+        {
+          "id": "abarbanel-house-of-fishes",
+          "name": "Abarbanel’s House of the Fishes",
+          "year": 1470,
+          "yearDisplay": "~1437–1508 · Abarbanel, Ferrara 1551",
+          "epochId": "pisces-second-fish",
+          "polarity": "neutral",
+          "oneLine": "The House of the Fishes as the house of justice and splendour.",
+          "body": [
+            "Abarbanel’s commentary (J, as Jung cites it) expects the Messiah under the conjunction in Pisces."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶128 (pdf p86)",
+              "text": "It is explained here that the House of the Fishes (K) is the house of justice and of brilliant splendour"
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": [
+            "antichrist-abarbanel-pisces-messiah-ferrara-1551"
+          ]
         },
         {
           "id": "renaissance-outward-turn",
@@ -1276,6 +1634,29 @@
           "occurrenceIds": []
         },
         {
+          "id": "enlightenment-tail",
+          "name": "The tail of the horizontal fish",
+          "year": 1720,
+          "yearDisplay": "~1720 · the Enlightenment",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "The Enlightenment as the chthonic fish’s tail: Christianity overthrown.",
+          "body": [
+            "Jung’s seminar dating (J) of the second fish’s chthonic ascent, from the Goddess of Reason onward."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p613",
+              "text": "And we entered the tail of the horizontal fish in about 1720, when the French Enlightenment began, when Christianity was overthrown and the Goddess of Reason was enthroned in Paris instead."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
           "id": "faith-knowledge-rift",
           "name": "Faith and knowledge separate",
           "year": 1750,
@@ -1328,6 +1709,82 @@
           "lon": 2.35
         },
         {
+          "id": "wars-end-of-aeon",
+          "name": "The aeon running to its end",
+          "year": 1914,
+          "yearDisplay": "1914–1945 · the wars",
+          "epochId": "pisces-second-fish",
+          "polarity": "shadow",
+          "oneLine": "The aeon “of the Fishes, now running to its end” — Jung’s 1951 summary.",
+          "body": [
+            "Jung’s 1951 summary (J) of his own lifetime: the Antichrist figure anticipated and reflected in the wars. The arc’s shadow-counterpart is followed event by event in the atlas’s Turn reading."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶115 (pdf p74)",
+              "text": "This unavoidable consequence is anticipated in the figure of the Antichrist and is reflected in the course of contemporary events, whose nature is in accord with the Christian aeon of the Fishes, now running to its end."
+            }
+          ],
+          "familyIds": [
+            "antichrist",
+            "wotan"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "visions-aeon-clock",
+          "name": "The aeon clock stated",
+          "year": 1932,
+          "yearDisplay": "27 Jan 1932 · Visions Seminar",
+          "epochId": "pisces-second-fish",
+          "polarity": "neutral",
+          "oneLine": "The two-fishes scheme taught: upright Christ-fish, horizontal chthonic fish.",
+          "body": [
+            "Jung lays out the full precessional clock in seminar (J) — and adds “of course there are no definite lines in the sky which would indicate the exact borderline,” his own refusal of precision (see the Aquarius Horizon reading)."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p612",
+              "text": "According to the actual position of the astronomical constellation of the Fishes, one fish is upright and the other fish is horizontal, and between is the commissura, a sort of string from tail to tail."
+            },
+            {
+              "work": "sem-visions",
+              "locator": "pdf p612",
+              "text": "Of course there are no definite lines in the sky which would indicate the exact borderline but in 1940 I 1950 we shall be in the vicinity of Aquarius."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "childrens-fish-1940",
+          "name": "The fish taught as the age-symbol",
+          "year": 1940,
+          "yearDisplay": "1940 · Children’s Dreams Seminar",
+          "epochId": "pisces-second-fish",
+          "polarity": "light",
+          "oneLine": "The fish as Christ “after the constellation of Pisces” — the doctrine taught.",
+          "body": [
+            "The aeon doctrine as seminar instruction (J), four years before the lectures that became Aion."
+          ],
+          "passages": [
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p371",
+              "text": "The fish is Christ, so called after the constellation of Pisces, in which the vernal equinox entered after the beginning of Christianity."
+            }
+          ],
+          "familyIds": [
+            "fish",
+            "christ-figure"
+          ],
+          "occurrenceIds": []
+        },
+        {
           "id": "jung-modern-crisis",
           "name": "The aftermath of the Second World War",
           "year": 1945,
@@ -1359,6 +1816,113 @@
           "archetypeIds": [
             "self",
             "shadow"
+          ]
+        },
+        {
+          "id": "april-fish",
+          "name": "Jung’s April fish",
+          "year": 1949,
+          "yearDisplay": "1–2 Apr 1949 · Zürich",
+          "epochId": "pisces-second-fish",
+          "polarity": "light",
+          "place": "Zürich (Küsnacht, the lake)",
+          "lat": 47.2796,
+          "lon": 8.5657,
+          "oneLine": "The age-symbol surfaces synchronistically in Jung’s own life.",
+          "body": [
+            "The famous synchronistic cluster (J): the piscis inscription, a patient’s fish pictures, fish-run embroidery — “Est homo totus medius piscis ab imo,” the century’s turn marked in his own material."
+          ],
+          "passages": [
+            {
+              "work": "sync",
+              "locator": "pdf p25",
+              "text": "That same morning I made a note of an inscription which read: \"Est homo totus medius piscis ab imo.\" In the afternoon a former patient of mine, whom I had not seen for months, showed me some extremely impressive pictures of fish which she had painted in the meantime."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": [
+            "fish-april-fools-run-zurich-1949"
+          ]
+        },
+        {
+          "id": "assumption-declared",
+          "name": "The Assumption declared",
+          "year": 1950,
+          "yearDisplay": "1 Nov 1950 · Munificentissimus Deus",
+          "epochId": "pisces-second-fish",
+          "polarity": "light",
+          "place": "Rome (St Peter’s)",
+          "lat": 41.9022,
+          "lon": 12.4539,
+          "oneLine": "The feminine counter-move as the age closes: symbols developing “through the ages.”",
+          "body": [
+            "Jung reads the 1950 dogma (J) as the age’s closing counter-move — the example he gives of symbols developing through the ages, and the hinge the Turn reading’s compensation phase stands on."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "pdf p99",
+              "text": "The solemn proclamation of the Assumptio Mariae which we have experienced in our own day is an example of the way symbols develop through the ages."
+            }
+          ],
+          "familyIds": [
+            "mother-goddess"
+          ],
+          "occurrenceIds": [
+            "assumption-dogma-munificentissimus-deus-1950"
+          ]
+        },
+        {
+          "id": "aion-published",
+          "name": "Aion published",
+          "year": 1951,
+          "yearDisplay": "1951 · Aion (CW 9ii)",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "The aeon doctrine’s monument: Christian, Gnostic and alchemical symbols of the self.",
+          "body": [
+            "The reading this atlas layer is built on (J), announced in its own foreword."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "pdf p9",
+              "text": "My investigation seeks, with the help of Christian, Gnostic, and alchemical symbols of the self, to throw light on the change of psychic situation within the \"Christian aeon.\""
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "ufo-end-of-era",
+          "name": "Flying Saucers: a living myth",
+          "year": 1958,
+          "yearDisplay": "1958 · Flying Saucers (CW 10)",
+          "epochId": "pisces-second-fish",
+          "polarity": "union",
+          "oneLine": "The ufo round mandala “in the skies”: the self compensating at the aeon’s end.",
+          "body": [
+            "Jung’s last warning (J): the rumour as a living myth whose round form portrays the self, suited “to compensate the splitmindedness of our age.” The Turn reading carries the full compensation row."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶614 (pdf p294)",
+              "text": "one thing is certain: they have become a living myth"
+            },
+            {
+              "work": "cw10",
+              "locator": "¶622 (pdf p298)",
+              "text": "They are impressive manifestations of totality whose simple, round form portrays the archetype of the self"
+            }
+          ],
+          "familyIds": [
+            "ufo"
+          ],
+          "occurrenceIds": [
+            "ufo-rumour-worldwide-1947-1958"
           ]
         },
         {
@@ -1425,15 +1989,20 @@
           "polarity": "shadow",
           "eventIds": [
             "christ-first-fish",
+            "apocalypse-lamb",
             "valentinus-shadow",
             "millennial-reversal",
             "cathar-bogomil-fishes",
+            "second-fish-dawn",
             "joachim-holy-ghost",
             "renaissance-outward-turn",
             "reformation-threshold",
             "nostradamus-letter",
             "revolutionary-calendar",
+            "wars-end-of-aeon",
             "jung-modern-crisis",
+            "assumption-declared",
+            "ufo-end-of-era",
             "aquarius-alternative-2154"
           ],
           "oneLine": "Jung follows the excluded shadow and the demand to bring opposites into relation."
@@ -1443,15 +2012,25 @@
           "name": "The changing fish",
           "polarity": "neutral",
           "eventIds": [
+            "spring-point-crossings",
             "denderah-zodiac",
             "pisces-conjunction",
             "christ-first-fish",
+            "fishers-of-men",
             "farnese-atlas",
             "alexandria-ichthys",
             "abercius-fish",
+            "pectrorios-inscription",
             "augustine-two-powers",
+            "tanninim-prophecy",
+            "messiah-in-pisces",
             "cathar-bogomil-fishes",
-            "lambspringk-opposed-fishes"
+            "grail-lapsit-exillis",
+            "abarbanel-house-of-fishes",
+            "lambspringk-opposed-fishes",
+            "childrens-fish-1940",
+            "april-fish",
+            "aion-published"
           ],
           "oneLine": "Jung compares fish symbols across eras; the line does not assert direct transmission."
         },

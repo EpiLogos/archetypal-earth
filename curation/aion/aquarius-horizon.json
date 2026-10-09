@@ -1,0 +1,744 @@
+{
+  "schema": 1,
+  "sources": {
+    "cw09ii": {
+      "file": "corpus/cw09ii.md",
+      "sha256": "617ae92d0baaafd95f35eecf10ecd7784a1ebebf6d309213d773822d9f4ae5e6"
+    },
+    "cw10": {
+      "file": "corpus/cw10.md",
+      "sha256": "d6568d43ce9f2d59cf5789dcb730f5d629259c6d6ebf2d4481e564fa70231bb0"
+    },
+    "cw11": {
+      "file": "corpus/cw11.md",
+      "sha256": "fbeea3e90c5a516793c83f4530bfd5598cb98cc3aaaa71c4d0b61447c8c03084"
+    },
+    "cw15": {
+      "file": "corpus/cw15.md",
+      "sha256": "c9d4fe535e25501b585740003a75573d2cc43a876c8c578cf1dddc865d3ba761"
+    },
+    "sem-childrens-dreams": {
+      "file": "corpus/sem-childrens-dreams.md",
+      "sha256": "1e5b5699a01547cc42aaf1584310d2ec9828cdc9de75e3ce8dfc771c6b067251"
+    },
+    "sem-dream-analysis": {
+      "file": "corpus/sem-dream-analysis.md",
+      "sha256": "287335a80bed8624bfa881966ef4688d966c14687c429fe0d630280789530dd5"
+    },
+    "sem-visions": {
+      "file": "corpus/sem-visions.md",
+      "sha256": "d266ebe9c5da435a600e9b26175d946872b75d252d866f441a8c5362d1dbd708"
+    },
+    "sem-zarathustra": {
+      "file": "corpus/sem-zarathustra.md",
+      "sha256": "0246e83dbcf4b3e5ad568bf193de4602528b81a34fda5efb3bd7c5c4db2851ba"
+    }
+  },
+  "sourceBindings": {
+    "sem-dream-analysis:pdf p144": {
+      "work": "sem-dream-analysis",
+      "locator": "pdf p144",
+      "pages": [
+        144
+      ]
+    },
+    "cw09ii:¶149, n.84 (pdf p106)": {
+      "work": "cw09ii",
+      "locator": "¶149, n.84 (pdf p106)",
+      "pages": [
+        106
+      ]
+    },
+    "cw09ii:pdf p93": {
+      "work": "cw09ii",
+      "locator": "pdf p93",
+      "pages": [
+        93
+      ]
+    },
+    "sem-dream-analysis:pdf p633": {
+      "work": "sem-dream-analysis",
+      "locator": "pdf p633",
+      "pages": [
+        633
+      ]
+    },
+    "cw15:¶82 (pdf p51–52)": {
+      "work": "cw15",
+      "locator": "¶82 (pdf p51–52)",
+      "pages": [
+        51,
+        52
+      ]
+    },
+    "sem-visions:pdf p612": {
+      "work": "sem-visions",
+      "locator": "pdf p612",
+      "pages": [
+        612
+      ]
+    },
+    "sem-visions:pdf p801": {
+      "work": "sem-visions",
+      "locator": "pdf p801",
+      "pages": [
+        801
+      ]
+    },
+    "sem-zarathustra:pdf p404": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p404",
+      "pages": [
+        404
+      ]
+    },
+    "sem-zarathustra:pdf p528": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p528",
+      "pages": [
+        528
+      ]
+    },
+    "cw10:¶398 (pdf p181)": {
+      "work": "cw10",
+      "locator": "¶398 (pdf p181)",
+      "pages": [
+        181
+      ]
+    },
+    "sem-childrens-dreams:pdf p240": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p240",
+      "pages": [
+        240
+      ]
+    },
+    "sem-childrens-dreams:pdf p375": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p375",
+      "pages": [
+        375
+      ]
+    },
+    "cw09ii:¶149 (pdf p105–106)": {
+      "work": "cw09ii",
+      "locator": "¶149 (pdf p105–106)",
+      "pages": [
+        105,
+        106
+      ]
+    },
+    "cw09ii:pdf p99": {
+      "work": "cw09ii",
+      "locator": "pdf p99",
+      "pages": [
+        99
+      ]
+    },
+    "cw09ii:¶136 (pdf p93–94)": {
+      "work": "cw09ii",
+      "locator": "¶136 (pdf p93–94)",
+      "pages": [
+        93,
+        94
+      ]
+    },
+    "cw11:¶733 (pdf p372)": {
+      "work": "cw11",
+      "locator": "¶733 (pdf p372)",
+      "pages": [
+        372
+      ]
+    },
+    "cw11:pdf p751": {
+      "work": "cw11",
+      "locator": "pdf p751",
+      "pages": [
+        751
+      ]
+    },
+    "cw10:¶488 (pdf p228)": {
+      "work": "cw10",
+      "locator": "¶488 (pdf p228)",
+      "pages": [
+        228
+      ]
+    },
+    "cw10:¶585 (pdf p279)": {
+      "work": "cw10",
+      "locator": "¶585 (pdf p279)",
+      "pages": [
+        279
+      ]
+    },
+    "cw10:pdf p626": {
+      "work": "cw10",
+      "locator": "pdf p626",
+      "pages": [
+        626
+      ]
+    },
+    "cw10:¶589 (pdf p284)": {
+      "work": "cw10",
+      "locator": "¶589 (pdf p284)",
+      "pages": [
+        284
+      ]
+    },
+    "cw10:¶696 (pdf p334)": {
+      "work": "cw10",
+      "locator": "¶696 (pdf p334)",
+      "pages": [
+        334
+      ]
+    }
+  },
+  "readings": [
+    {
+      "id": "jung-aquarius-horizon",
+      "title": "The Aquarius Horizon",
+      "author": "after C. G. Jung",
+      "extends": "jung-turn",
+      "from": 1929,
+      "to": 3239,
+      "epochs": [
+        {
+          "id": "aqh-forecasting-years",
+          "name": "The forecasting years",
+          "from": 1929,
+          "to": 1958,
+          "polarity": "neutral",
+          "spectrum": 0.55,
+          "palette": {
+            "core": "#b8b0a2",
+            "glow": "#8a8378",
+            "fog": "#292723",
+            "deep": "#11100c"
+          },
+          "oneLine": "Every dated Jung forecast of the coming age, 1929 → 1958.",
+          "body": [
+            "The inventory (J): from the 1929 seminar aside to the 1958 Flying Saucers preface — the forecasts gathered, each dated to where Jung spoke it. He forecasts a problem (the union of opposites, the reality of evil), never dated events or a new age-symbol.",
+            "Label law: J rows are Jung’s own text; where standard scholarship corrects the astronomy it is marked S and kept beside the claim, never reconciled into it."
+          ],
+          "passages": [
+            {
+              "work": "sem-dream-analysis",
+              "locator": "pdf p144",
+              "text": "The spring point is about to enter Aquarius."
+            }
+          ]
+        },
+        {
+          "id": "aqh-threshold",
+          "name": "The reckoned threshold",
+          "from": 1958,
+          "to": 3239,
+          "polarity": "union",
+          "spectrum": 0.8,
+          "palette": {
+            "core": "#a9b8d8",
+            "glow": "#6f83b8",
+            "fog": "#222838",
+            "deep": "#0c0f1a"
+          },
+          "oneLine": "The sky-reckonings: 1997, 2154, the third millennium — none of them an event.",
+          "body": [
+            "Every date here is a sky-reckoning and Jung marks the arbitrariness himself: his own two reckonings disagree (1997 vs 2154), the Talmudic world-week runs to A.D. 3239, and fn84 calls the dating “very indefinite.” He dated the sky, not the event, and declined to predict the new age’s content.",
+            "S-correction, kept beside the claim: modern constants enter the corpus only as Jung’s citation; the IAU’s 1930 constellation boundaries (not in the corpus) put the ecliptic’s exit from Pisces near A.D. 2600 — later than every date Jung prints."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            },
+            {
+              "work": "cw09ii",
+              "locator": "pdf p93",
+              "text": "The constant for the precession is 50.3708 seconds and the total cycle (360°) takes 25,725.6 years",
+              "basis": "S"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "aqh-1929-spring-point",
+          "name": "29° of Pisces",
+          "year": 1929,
+          "yearDisplay": "13 Feb 1929 · Dream Analysis Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The first dated forecast: the spring point “about to enter Aquarius.”",
+          "body": [
+            "Delivered as an aside in the astrology-as-projection frame (J)."
+          ],
+          "passages": [
+            {
+              "work": "sem-dream-analysis",
+              "locator": "pdf p144",
+              "text": "The spring point is about to enter Aquarius."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1929-theosophists",
+          "name": "The theosophists’ new age",
+          "year": 1929,
+          "yearDisplay": "1929/30 · Dream Analysis Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "Others’ expectation reported: Aquarius as the third condition.",
+          "body": [
+            "Delivered as report (J): the theosophical reading of the coming age in the Joachim frame — Jung citing, not endorsing."
+          ],
+          "passages": [
+            {
+              "work": "sem-dream-analysis",
+              "locator": "pdf p633",
+              "text": "people think that the coming of the new age—Aquarius—will be the third condition, the new revelation of the Trinity."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1930-time-quality",
+          "name": "The time-quality doctrine",
+          "year": 1930,
+          "yearDisplay": "1930 · the Wilhelm address (CW 15)",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The warrant for any forecast: the moment’s quality stamps what is born in it.",
+          "body": [
+            "Doctrine, not forecast (J): “our own hypothetical time qualities” — the synchronistic bridge on which the whole horizon rests."
+          ],
+          "passages": [
+            {
+              "work": "cw15",
+              "locator": "¶82 (pdf p51–52)",
+              "text": "whatever is born or done at this particular moment of time has the quality of this moment of time."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1932-first-stars",
+          "name": "The first stars of Aquarius",
+          "year": 1932,
+          "yearDisplay": "27 Jan 1932 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "“In about 1940 we shall be approaching the first stars of the next sign.”",
+          "body": [
+            "The astronomical-constellation reading (J), with “of course there are no definite lines in the sky” a breath away."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p612",
+              "text": "In about 1940 we shall be approaching the first stars of the next sign, Aquarius."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1932-water-bearer",
+          "name": "The water-bearer’s ideal",
+          "year": 1932,
+          "yearDisplay": "1932 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The sign whose ideal is “the union, the oneness, of animal and divine.”",
+          "body": [
+            "Sky-lore anticipation (J): the iconography read forward — Piscis Austrinus as the Fishes sunk into the unconscious."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p801",
+              "text": "Aquarius, then, is the sign of the man whose ideal is the union, the oneness, of animal and divine, and in the square the two things are brought together."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1935-aerial-sign",
+          "name": "The aerial sign",
+          "year": 1935,
+          "yearDisplay": "1935 · Zarathustra Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "Aquarius as air: “the sign of this actual time.”",
+          "body": [
+            "The epoch-reading (J): the spring equinox’s transit into Aquarius read coincident with the mass-movements; Uranus as unforeseen events."
+          ],
+          "passages": [
+            {
+              "work": "sem-zarathustra",
+              "locator": "pdf p404",
+              "text": "Aquarius has always been characterized as an aerial sign, and it has to do with the wind of spring which brings the rain clouds; it is the sign of this actual time, which is the rainy season in those countries where the old Babylonian zodiac originated, in Mesopotamia for instance."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1935-vessel",
+          "name": "The vessel-man",
+          "year": 1935,
+          "yearDisplay": "1935 · Zarathustra Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "“Aquarius, the man with the vessel to catch whatever flows.”",
+          "body": [
+            "The age’s symbolic task (J), with the powers of darkness “coming up” beside it."
+          ],
+          "passages": [
+            {
+              "work": "sem-zarathustra",
+              "locator": "pdf p528",
+              "text": "The symbol of our time and the coming time is Aquarius, the man with the vessel to catch whatever flows, and he must transform it into the fertile water of life."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1936-kairos",
+          "name": "The kairos named Wotan",
+          "year": 1936,
+          "yearDisplay": "1936 · “Wotan” (CW 10)",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "shadow",
+          "oneLine": "The transition read as possession, not progress.",
+          "body": [
+            "The transition-as-possession row (J) — the dark tinge the horizon keeps throughout."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶398 (pdf p181)",
+              "text": "it is rather the fault of kairos— the present moment in time—whose name on closer investigation turns out to be Wotan."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1940-second-fish",
+          "name": "The anti-Christian age",
+          "year": 1940,
+          "yearDisplay": "1938/39 · position-finding",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "shadow",
+          "oneLine": "“Around 125 b.c., the age of Pisces began” — our era its second fish.",
+          "body": [
+            "Position-finding (J): where in the Platonic month we stand, dated to the seminar year."
+          ],
+          "passages": [
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p240",
+              "text": "Around 125 b.c., the age of Pisces began, coinciding with the beginnings of Christianity."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1940-threshold",
+          "name": "On the threshold",
+          "year": 1940,
+          "yearDisplay": "1938/39 · Children’s Dreams Seminar",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "“Now we are on the threshold of the sign of Aquarius” — the air-age task.",
+          "body": [
+            "The full four-age scheme (J), delivered at the war’s onset: “the spirit is meant to become something subtle again, and man to become who he is” — his boldest content-statement, seminar register."
+          ],
+          "passages": [
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p375",
+              "text": "And now we are on the threshold of the sign of Aquarius."
+            },
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p375",
+              "text": "Here the spirit is meant to become something subtle again, and man to become who he is."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1950-third-millennium",
+          "name": "The reckoned dates",
+          "year": 1950,
+          "yearDisplay": "1950 · Aion ¶149 + n.84 — conditional",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The third millennium; 2154 or 1997 by the starting star — “very indefinite.”",
+          "body": [
+            "The reckoned dates (J), with the arbitrariness conceded in his own footnote: two disagreeing reckonings, fn84’s 2000–2200 range, and the IAU’s later crossing (S, not in corpus) kept beside them."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶149 (pdf p105–106)",
+              "text": "Since then the spring-point has moved along the southern edge of the second fish, and will enter Aquarius in the 82 A clear reference to astrology can be found in Pistis Sophia, where Jesus converses with the \"ordainers of the nativity\": \"But Jesus answered and said to Mary: If the ordainers of the nativity find Heimarmene and the Sphere turned to the left in accordance with their first circulation, then their words will be true, and they will say what must come to pass. But if they find Heimarmene or the Sphere turned to the right, then they will not say anything true, because I have changed their influences and their squares and their triangles and their octants.\" (Cf. Mead trans., p. 29.) SSThe meridian of the star \"0\" in the commissure passed through the springpoint in A.D. 11, and that of the star \"a 113\" in 146 B.C. Calculated on the basis of Peters and Knobel, Ptolemy's Catalogue of Stars. AION course of the third millennium."
+            },
+            {
+              "work": "cw09ii",
+              "locator": "¶149, n.84 (pdf p106)",
+              "text": "Starting from star \"O\" and assuming a Platonic month of 2,143 years, one would arrive at A.D. 2154 for the beginning of the Aquarian Age, and at A.D. 1997 if you start from star \"a 113.\""
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1950-union-of-opposites",
+          "name": "The union of opposites",
+          "year": 1950,
+          "yearDisplay": "1950 · Aion — THE forecast",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "union",
+          "oneLine": "What the new month will constellate: the problem of the union of opposites.",
+          "body": [
+            "THE forecast (J): evil’s real existence to be recognized, the problem solvable “neither by philosophy, nor by economics, nor by politics, but only by the individual human being” — a problem forecast, never a dated event or a new symbol."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "pdf p99",
+              "text": "the approach of the next Platonic month, namely Aquarius, will constellate the problem of the union of opposites."
+            }
+          ],
+          "familyIds": [],
+          "archetypeIds": [
+            "self"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1950-world-week",
+          "name": "The Water Carrier named",
+          "year": 1950,
+          "yearDisplay": "1950 · Aion ¶136",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The Talmudic world-week and “the next aeon, that of the Water Carrier.”",
+          "body": [
+            "The chronology row (J): anno mundi 7000 = A.D. 3239, the latest date in the corpus — a pre-modern chronology reported sympathetically, not endorsed as astronomy (S)."
+          ],
+          "passages": [
+            {
+              "work": "cw09ii",
+              "locator": "¶136 (pdf p93–94)",
+              "text": "spring-point will have moved from its present position 18 degrees into Aquarius, the next aeon, that of the Water Carrier."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1952-lucifer",
+          "name": "Lucifer’s harsh forces",
+          "year": 1952,
+          "yearDisplay": "1952 · Answer to Job ¶733",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "shadow",
+          "oneLine": "“Aquarius sets aflame Lucifer’s harsh forces” — the dark-forecast verse.",
+          "body": [
+            "The dark end of the horizon (J): the alchemical emblem deployed against any millenarian optimism — the aeon’s “dark end which we have still to experience.”"
+          ],
+          "passages": [
+            {
+              "work": "cw11",
+              "locator": "¶733 (pdf p372)",
+              "text": "Luciferi vires accendit Aquarius acres —“Aquarius sets aflame Lucifer’s harsh forces.” Could anyone in his right senses deny that John correctly foresaw at least some of the possible dangers which threaten our world in the final phase of the Christian aeon?"
+            }
+          ],
+          "familyIds": [
+            "devil"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1952-pegasus",
+          "name": "Pegasus the paranatellon",
+          "year": 1952,
+          "yearDisplay": "1952 · Answer to Job, footnote",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "The white horse of Revelation as Aquarius’s rising constellation — “may be implied.”",
+          "body": [
+            "Hedged conjecture (J), kept at its own strength: “astrological speculations … may be implied.”"
+          ],
+          "passages": [
+            {
+              "work": "cw11",
+              "locator": "pdf p751",
+              "text": "Here again astrological speculations concerning the second half of the Christian aeon may be implied, with Pegasus as paranatellon of Aquarius."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1957-apocalyptic",
+          "name": "Apocalyptic images",
+          "year": 1957,
+          "yearDisplay": "1956/57 · The Undiscovered Self",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "shadow",
+          "oneLine": "The horizon as mass-psychological fact: apocalyptic images near the millennium’s end.",
+          "body": [
+            "The kairos row beside it (J): the metamorphosis of the gods, and Coming generations’ account to give."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶488 (pdf p228)",
+              "text": "Today, as the end of the second millennium draws near, we are again living in an age filled with apocalyptic images of universal destruction."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶585 (pdf p279)",
+              "text": "Coming generations will have to take account of this momentous transformation"
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1957-checkpoints",
+          "name": "The footnotes’ checkpoints",
+          "year": 1957,
+          "yearDisplay": "1956/57 · self-correction apparatus",
+          "epochId": "aqh-forecasting-years",
+          "polarity": "neutral",
+          "oneLine": "Jung footnoting his own essay against the news: Suez as the shadow’s answer.",
+          "body": [
+            "The empiric checkpoints (J): the essay’s footnotes correcting it against events — the apparatus of a man refusing prophecy’s certainty."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "pdf p626",
+              "text": "the shadow has followed up this overbright picture hotfoot with the Charge of the Light Brigade to Suez."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "aqh-1958-coming-events",
+          "name": "Coming events of an era’s end",
+          "year": 1958,
+          "yearDisplay": "1958 · Flying Saucers ¶589",
+          "epochId": "aqh-threshold",
+          "polarity": "union",
+          "oneLine": "The fullest forecast: “coming events which are in accord with the end of an era.”",
+          "body": [
+            "The 1958 preface (J), with the Taurus→Aries→Pisces→Aquarius chain in the same breath — and the ufo-mandala as the change’s sky-symbol."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶589 (pdf p284)",
+              "text": "It is not presumption that drives me, but my conscience as a psychiatrist that bids me fulfil my duty and prepare those few who will hear me for coming events which are in accord with the end of an era."
+            }
+          ],
+          "familyIds": [
+            "ufo"
+          ],
+          "occurrenceIds": [
+            "ufo-rumour-worldwide-1947-1958"
+          ]
+        },
+        {
+          "id": "aqh-1958-ticking",
+          "name": "The dread ticking of the clock",
+          "year": 1958,
+          "yearDisplay": "1958 · Flying Saucers ¶696",
+          "epochId": "aqh-threshold",
+          "polarity": "shadow",
+          "oneLine": "The transition felt as time-anxiety: the aeons’ rhythm exchanged for the clock.",
+          "body": [
+            "The horizon’s phenomenology (J): what the end of an era does to the people living it."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶696 (pdf p334)",
+              "text": "forcing them to exchange the life-preserving rhythm of the aeons for the dread ticking of the clock."
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        }
+      ],
+      "threads": [
+        {
+          "id": "aqh-forecast-arc",
+          "name": "The forecast arc",
+          "polarity": "neutral",
+          "oneLine": "1929 → 1958: every dated forecast, in order — the problem named, the event refused.",
+          "eventIds": [
+            "aqh-1929-spring-point",
+            "aqh-1929-theosophists",
+            "aqh-1930-time-quality",
+            "aqh-1932-first-stars",
+            "aqh-1932-water-bearer",
+            "aqh-1935-vessel",
+            "aqh-1935-aerial-sign",
+            "aqh-1936-kairos",
+            "aqh-1940-threshold",
+            "aqh-1940-second-fish",
+            "aqh-1950-world-week",
+            "aqh-1950-union-of-opposites",
+            "aqh-1950-third-millennium",
+            "aqh-1952-lucifer",
+            "aqh-1952-pegasus",
+            "aqh-1957-apocalyptic",
+            "aqh-1957-checkpoints",
+            "aqh-1958-coming-events",
+            "aqh-1958-ticking"
+          ]
+        }
+      ]
+    }
+  ]
+}

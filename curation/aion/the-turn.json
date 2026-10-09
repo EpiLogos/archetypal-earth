@@ -1,0 +1,1124 @@
+{
+  "schema": 1,
+  "sources": {
+    "cw09i": {
+      "file": "corpus/cw09i.md",
+      "sha256": "fd1ffad7562301f1e54f32e9787aac6ea687d39ba408904de2ca8aca60fbad78"
+    },
+    "cw10": {
+      "file": "corpus/cw10.md",
+      "sha256": "d6568d43ce9f2d59cf5789dcb730f5d629259c6d6ebf2d4481e564fa70231bb0"
+    },
+    "cw11": {
+      "file": "corpus/cw11.md",
+      "sha256": "fbeea3e90c5a516793c83f4530bfd5598cb98cc3aaaa71c4d0b61447c8c03084"
+    },
+    "cw12": {
+      "file": "corpus/cw12.md",
+      "sha256": "56121c7dc375963ffbcd1a1301b8dcea3f958d173bfeec4d34739fc3621322cf"
+    },
+    "cw18": {
+      "file": "corpus/cw18.md",
+      "sha256": "8ad032367d8fa1b4593628c03f7316f8b4d1d30b61581c112f26785ed92896e7"
+    },
+    "sem-childrens-dreams": {
+      "file": "corpus/sem-childrens-dreams.md",
+      "sha256": "1e5b5699a01547cc42aaf1584310d2ec9828cdc9de75e3ce8dfc771c6b067251"
+    },
+    "sem-visions": {
+      "file": "corpus/sem-visions.md",
+      "sha256": "d266ebe9c5da435a600e9b26175d946872b75d252d866f441a8c5362d1dbd708"
+    },
+    "sem-zarathustra": {
+      "file": "corpus/sem-zarathustra.md",
+      "sha256": "0246e83dbcf4b3e5ad568bf193de4602528b81a34fda5efb3bd7c5c4db2851ba"
+    }
+  },
+  "sourceBindings": {
+    "cw10:¶17 (pdf p23)": {
+      "work": "cw10",
+      "locator": "¶17 (pdf p23)",
+      "pages": [
+        23
+      ]
+    },
+    "cw10:¶385 (pdf p175)": {
+      "work": "cw10",
+      "locator": "¶385 (pdf p175)",
+      "pages": [
+        175
+      ]
+    },
+    "cw10:¶432 (pdf p199)": {
+      "work": "cw10",
+      "locator": "¶432 (pdf p199)",
+      "pages": [
+        199
+      ]
+    },
+    "cw10:¶622 (pdf p298)": {
+      "work": "cw10",
+      "locator": "¶622 (pdf p298)",
+      "pages": [
+        298
+      ]
+    },
+    "cw10:¶585 (pdf p279)": {
+      "work": "cw10",
+      "locator": "¶585 (pdf p279)",
+      "pages": [
+        279
+      ]
+    },
+    "cw10:¶371 (pdf p171)": {
+      "work": "cw10",
+      "locator": "¶371 (pdf p171)",
+      "pages": [
+        171
+      ]
+    },
+    "sem-visions:pdf p299": {
+      "work": "sem-visions",
+      "locator": "pdf p299",
+      "pages": [
+        299
+      ]
+    },
+    "cw10:¶174 (pdf p88)": {
+      "work": "cw10",
+      "locator": "¶174 (pdf p88)",
+      "pages": [
+        88
+      ]
+    },
+    "sem-visions:pdf p352": {
+      "work": "sem-visions",
+      "locator": "pdf p352",
+      "pages": [
+        352
+      ]
+    },
+    "sem-visions:pdf p893": {
+      "work": "sem-visions",
+      "locator": "pdf p893",
+      "pages": [
+        893
+      ]
+    },
+    "sem-visions:pdf p912": {
+      "work": "sem-visions",
+      "locator": "pdf p912",
+      "pages": [
+        912
+      ]
+    },
+    "sem-visions:pdf p1415": {
+      "work": "sem-visions",
+      "locator": "pdf p1415",
+      "pages": [
+        1415
+      ]
+    },
+    "sem-zarathustra:pdf p401": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p401",
+      "pages": [
+        401
+      ]
+    },
+    "cw09i:¶97–99 (pdf p58–59)": {
+      "work": "cw09i",
+      "locator": "¶97–99 (pdf p58–59)",
+      "pages": [
+        58,
+        59
+      ]
+    },
+    "cw10:pdf p619": {
+      "work": "cw10",
+      "locator": "pdf p619",
+      "pages": [
+        619
+      ]
+    },
+    "cw11:¶778–779 (pdf p402–403)": {
+      "work": "cw11",
+      "locator": "¶778–779 (pdf p402–403)",
+      "pages": [
+        402,
+        403
+      ]
+    },
+    "cw18:¶1328–1333 (pdf p534–536)": {
+      "work": "cw18",
+      "locator": "¶1328–1333 (pdf p534–536)",
+      "pages": [
+        534,
+        535,
+        536
+      ]
+    },
+    "cw10:¶398 (pdf p181)": {
+      "work": "cw10",
+      "locator": "¶398 (pdf p181)",
+      "pages": [
+        181
+      ]
+    },
+    "cw10:¶399 (pdf p181)": {
+      "work": "cw10",
+      "locator": "¶399 (pdf p181)",
+      "pages": [
+        181
+      ]
+    },
+    "sem-zarathustra:pdf p1454": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p1454",
+      "pages": [
+        1454
+      ]
+    },
+    "sem-childrens-dreams:pdf p375": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p375",
+      "pages": [
+        375
+      ]
+    },
+    "cw18:pdf p600": {
+      "work": "cw18",
+      "locator": "pdf p600",
+      "pages": [
+        600
+      ]
+    },
+    "cw12:¶563 (pdf p459–460)": {
+      "work": "cw12",
+      "locator": "¶563 (pdf p459–460)",
+      "pages": [
+        459,
+        460
+      ]
+    },
+    "cw10:¶454 (pdf p209)": {
+      "work": "cw10",
+      "locator": "¶454 (pdf p209)",
+      "pages": [
+        209
+      ]
+    },
+    "cw10:¶465 (pdf p217)": {
+      "work": "cw10",
+      "locator": "¶465 (pdf p217)",
+      "pages": [
+        217
+      ]
+    },
+    "cw09i:pdf p119": {
+      "work": "cw09i",
+      "locator": "pdf p119",
+      "pages": [
+        119
+      ]
+    },
+    "cw09i:pdf p120": {
+      "work": "cw09i",
+      "locator": "pdf p120",
+      "pages": [
+        120
+      ]
+    },
+    "cw11:¶752 (pdf p383)": {
+      "work": "cw11",
+      "locator": "¶752 (pdf p383)",
+      "pages": [
+        383
+      ]
+    },
+    "cw10:¶589 (pdf p284)": {
+      "work": "cw10",
+      "locator": "¶589 (pdf p284)",
+      "pages": [
+        284
+      ]
+    },
+    "cw10:¶614 (pdf p294)": {
+      "work": "cw10",
+      "locator": "¶614 (pdf p294)",
+      "pages": [
+        294
+      ]
+    },
+    "cw10:¶723 (pdf p347)": {
+      "work": "cw10",
+      "locator": "¶723 (pdf p347)",
+      "pages": [
+        347
+      ]
+    },
+    "cw10:¶701 (pdf p337)": {
+      "work": "cw10",
+      "locator": "¶701 (pdf p337)",
+      "pages": [
+        337
+      ]
+    }
+  },
+  "readings": [
+    {
+      "id": "jung-turn",
+      "title": "The Turn",
+      "author": "after C. G. Jung",
+      "extends": "jung-aion",
+      "from": 1914,
+      "to": 2154,
+      "epochs": [
+        {
+          "id": "turn-forecast",
+          "name": "Forecast · the cracked dam",
+          "from": 1914,
+          "to": 1932,
+          "polarity": "neutral",
+          "spectrum": 0.42,
+          "palette": {
+            "core": "#c9b298",
+            "glow": "#9d8a6f",
+            "fog": "#2c2822",
+            "deep": "#131009"
+          },
+          "oneLine": "Jung forecasts the eruption from the unconscious of his German patients.",
+          "body": [
+            "The arc’s first phase runs from the pre-war baseline to the last seminar years before the seizure of power (J, each row dated). The 1914 row is retrospective — written in 1936 — and the 1918 forecast rests on the printed essay, not on surviving case records.",
+            "“Wotan” as the name of the eruption is Jung’s heretical suggestion, offered as his claim about history, not as established history (S keeps the historians’ economic and political factors)."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶17 (pdf p23)",
+              "text": "As the Christian view of the world loses its authority, the more menacingly will the “blond beast” be heard prowling about in its underground prison, ready at any moment to burst out with devastating consequences."
+            }
+          ]
+        },
+        {
+          "id": "turn-eruption",
+          "name": "Eruption · the possession",
+          "from": 1933,
+          "to": 1939,
+          "polarity": "shadow",
+          "spectrum": 0.2,
+          "palette": {
+            "core": "#c25a44",
+            "glow": "#8f3a2e",
+            "fog": "#301410",
+            "deep": "#140705"
+          },
+          "oneLine": "Wotan’s fires: a nation reviving an archaic symbol at mass scale.",
+          "body": [
+            "The essays and seminars of 1933–38 name what Jung watched: the counter-sun, the possession, the kairos whose name turns out to be Wotan (J). His own risk-flag stands with the claim: he calls the suggestion heretical and labels it his mantic reading."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶385 (pdf p175)",
+              "text": "In fact I venture the heretical suggestion that the unfathomable depths of Wotan’s character explain more of National Socialism than all three reasonable factors put together."
+            }
+          ]
+        },
+        {
+          "id": "turn-catastrophe",
+          "name": "Catastrophe · the epidemic",
+          "from": 1939,
+          "to": 1946,
+          "polarity": "shadow",
+          "spectrum": 0.12,
+          "palette": {
+            "core": "#a03a30",
+            "glow": "#6e2620",
+            "fog": "#26100e",
+            "deep": "#100404"
+          },
+          "oneLine": "“The first outbreak of epidemic insanity”: the myth fulfilled in ruins.",
+          "body": [
+            "The post-mortem rows (J): the epidemic-insanity diagnosis, the personified shadow, the projection-return law — Jung reading the catastrophe his forecast had named."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶432 (pdf p199)",
+              "text": "The phenomenon we have witnessed in Germany was nothing less than the first outbreak of epidemic insanity, an irruption of the unconscious into what seemed to be a tolerably well-ordered world."
+            }
+          ]
+        },
+        {
+          "id": "turn-compensation",
+          "name": "Compensation · the counter-move",
+          "from": 1946,
+          "to": 1958,
+          "polarity": "light",
+          "spectrum": 0.62,
+          "palette": {
+            "core": "#7fb4a8",
+            "glow": "#4f8a80",
+            "fog": "#1c2b28",
+            "deep": "#0a1210"
+          },
+          "oneLine": "What surfaces against the eruption: the Assumption, the ufo-mandala, the kairos.",
+          "body": [
+            "The compensation rows (J): the 1950 Assumption as the feminine counter-move, the sky-mandala of the saucer rumour as the self’s symbol at the turn, the kairos for a “metamorphosis of the gods.” Not all compensations are light — the seminar years’ dark counter-saviors stand in the forecast phase."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶622 (pdf p298)",
+              "text": "They are impressive manifestations of totality whose simple, round form portrays the archetype of the self"
+            }
+          ]
+        },
+        {
+          "id": "turn-horizon",
+          "name": "Horizon · Aquarius",
+          "from": 1958,
+          "to": 2154,
+          "polarity": "union",
+          "spectrum": 0.78,
+          "palette": {
+            "core": "#9fa8d8",
+            "glow": "#6a74b0",
+            "fog": "#232640",
+            "deep": "#0d0f1e"
+          },
+          "oneLine": "The turn’s forward edge: the threshold of the sign of Aquarius.",
+          "body": [
+            "The arc ends looking forward (J): the 1940 element-scheme’s air-age, the 1958 warning of “coming events which are in accord with the end of an era.” What Jung forecast for the coming age is gathered in the Aquarius Horizon reading; he dates the sky, never the event.",
+            "The horizon boundary 2154 is one of Jung’s own two conditional reckonings (fn84), kept as a display edge, not a prediction (S notes the IAU’s constellation boundaries put the crossing far later)."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶585 (pdf p279)",
+              "text": "We are living in what the Greeks called the καιρός— the right moment—for a “metamorphosis of the gods,” of the fundamental principles and symbols."
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "turn-baseline-1914",
+          "name": "The world before 1914",
+          "year": 1914,
+          "yearDisplay": "1914 · the pre-war baseline",
+          "epochId": "turn-forecast",
+          "polarity": "neutral",
+          "oneLine": "The rationalist world-order as the cracked dam — seen from 1936.",
+          "body": [
+            "Retrospective baseline (J): the “Wotan” essay opens on the inconceivability of the pre-war world and the witches’ sabbath that followed."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶371 (pdf p171)",
+              "text": "When we look back to the time before 1914, we find ourselves living in a world of events which would have been inconceivable before the war."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶371 (pdf p171)",
+              "text": "And what came after the war was a veritable witches’ sabbath."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-blond-beast-1918",
+          "name": "The blond beast forecast",
+          "year": 1918,
+          "yearDisplay": "1918 · the forecast",
+          "epochId": "turn-forecast",
+          "polarity": "shadow",
+          "oneLine": "“The ‘blond beast’ … prowling about in its underground prison.”",
+          "body": [
+            "The 1918 essay’s forecast (J), re-read aloud by Jung in 1934 as “a rather good diagnosis of the present political conditions.” The clinical prehistory he later claimed (¶447, written 1946) rests on self-report; the printed forecast is the checkable witness."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶17 (pdf p23)",
+              "text": "As the Christian view of the world loses its authority, the more menacingly will the “blond beast” be heard prowling about in its underground prison, ready at any moment to burst out with devastating consequences."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": [
+            "blond-beast-underground-prison-forecast-1918"
+          ]
+        },
+        {
+          "id": "turn-discover-shadow-1931",
+          "name": "“Discover our shadow”",
+          "year": 1931,
+          "yearDisplay": "18 Feb 1931 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-forecast",
+          "polarity": "shadow",
+          "oneLine": "The war named as the shadow’s price, two years before the seizure of power.",
+          "body": [
+            "Seminar aside (J): without the shadow-work, “we are driven into a world war in order to see what beasts we are.”"
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p299",
+              "text": "We have to discover our shadow."
+            }
+          ],
+          "familyIds": [
+            "devil"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": [
+            "vision-discover-our-shadow-world-war-zurich-1931"
+          ]
+        },
+        {
+          "id": "turn-oak-deposal-1931",
+          "name": "The oak and the Goddess of Reason",
+          "year": 1931,
+          "yearDisplay": "1931 · the deposal thesis",
+          "epochId": "turn-forecast",
+          "polarity": "shadow",
+          "oneLine": "Wotan’s oak hewn, Reason enthroned: two depositions, no thunderbolt.",
+          "body": [
+            "The deposal pairing (J): 1793’s Goddess of Reason and the missionaries’ hewing of Wotan’s oak — both gods felled with no avenging bolt, both with the god’s return in store."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶174 (pdf p88)",
+              "text": "The enthronement of the Goddess of Reason in Notre Dame seems to have been a symbolic gesture of great significance for the Western world—rather like the hewing down of Wotan’s oak by Christian missionaries. On both occasions no avenging bolt from heaven struck the blasphemer down."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": [
+            "wotan-oak-hewn-geismar-c724",
+            "god-image-deesse-raison-notre-dame-paris-1793"
+          ]
+        },
+        {
+          "id": "turn-wotans-fires-1931",
+          "name": "Wotan’s fires",
+          "year": 1931,
+          "yearDisplay": "11 Mar 1931 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-forecast",
+          "polarity": "shadow",
+          "oneLine": "“Those swastika people are building Wotan’s fires again” — five years early.",
+          "body": [
+            "The naming before the essay (J): the 1931 seminar aside that the 1936 “Wotan” paper later argued at length."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p352",
+              "text": "And in Germany those National Socialists, those swastika people, are building Wotan's fires again."
+            }
+          ],
+          "familyIds": [
+            "wotan",
+            "swastika"
+          ],
+          "occurrenceIds": [
+            "wotans-fires-national-socialists-zurich-1931"
+          ]
+        },
+        {
+          "id": "turn-iron-wolf-1932",
+          "name": "The iron wolf’s child",
+          "year": 1932,
+          "yearDisplay": "23 Nov – 7 Dec 1932 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-forecast",
+          "polarity": "shadow",
+          "oneLine": "A white placenta, a child suckled by an iron wolf: the dark counter-savior born.",
+          "body": [
+            "The seminar vision-row’s darkest birth (J): “the birth of a most dangerous warlike spirit, fed by a wolf with iron milk” — the age’s war-charge in symbol, three years before the counter-sun reading and the essay."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p893",
+              "text": "From a white placenta emerged a creature in the shape of a child."
+            },
+            {
+              "work": "sem-visions",
+              "locator": "pdf p912",
+              "text": "Whilst our patient's unconscious points to the birth of a most dangerous warlike spirit, fed by a wolf with iron milk."
+            }
+          ],
+          "familyIds": [
+            "wolf"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": [
+            "placenta-white-birth-iron-wolf-suckling-vision-zurich-1932"
+          ]
+        },
+        {
+          "id": "turn-re-reading-1934",
+          "name": "The forecast re-read",
+          "year": 1934,
+          "yearDisplay": "14 Mar 1934 · Visions Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "Jung reads his 1918 article aloud: “a rather good diagnosis.”",
+          "body": [
+            "Self-verification in public (J): one of the few forecasts Jung re-confirmed against his own earlier print while the events ran."
+          ],
+          "passages": [
+            {
+              "work": "sem-visions",
+              "locator": "pdf p1415",
+              "text": "I published an article which I will translate to you, as it is a rather good diagnosis of the present political conditions."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-counter-sun-1935",
+          "name": "The counter-sun",
+          "year": 1935,
+          "yearDisplay": "13 Feb 1935 · Zarathustra Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "The swastika turning the wrong way: black, left-turning, a counter-sun.",
+          "body": [
+            "The seminar reading (J): the arrested progress of a sun-wheel turned backwards — the symbol read live as the eruption ran."
+          ],
+          "passages": [
+            {
+              "work": "sem-zarathustra",
+              "locator": "pdf p401",
+              "text": "And those rather competent National Socialists to whom I talked in Germany did not know that their swastika was turning the wrong way."
+            }
+          ],
+          "familyIds": [
+            "swastika"
+          ],
+          "occurrenceIds": [
+            "swastika-nazi-black-left-turning-germany-1935"
+          ]
+        },
+        {
+          "id": "turn-archaic-symbol-1936",
+          "name": "A nation revives an archaic symbol",
+          "year": 1936,
+          "yearDisplay": "1936 · beyond Germany",
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "The Wotan eruption generalized: mass emotion revolutionizing individual life.",
+          "body": [
+            "The 1936 generalization (J): the archaic symbol luring “millions of warriors ready for death” — “all this absurdity is a horrible reality.”"
+          ],
+          "passages": [
+            {
+              "work": "cw09i",
+              "locator": "¶97–99 (pdf p58–59)",
+              "text": "Can we not see how a whole nation is reviving an archaic symbol, yes, even archaic religious forms, and how this mass emotion is influencing and revolutionizing the life of the individual in a catastrophic manner? The man of the past is alive in us today to a degree undreamt of before the war, and in the last analysis what is the fate of great nations but a summation of the psychic changes in individuals?"
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-churches-seized-1936",
+          "name": "The churches seized",
+          "year": 1936,
+          "yearDisplay": "1936/47 · the footnotes",
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "German Christians, and Valhalla preached from a funeral pulpit.",
+          "body": [
+            "The footnote record (J): the Protestant movement inside the church, and Langmann in S.A. uniform directing the Gustloff dead “to Valhalla.”"
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "pdf p619",
+              "text": "A National Socialist movement inside the Protestant Church, which tried to eliminate all vestiges of the Old Testament from Christianity."
+            },
+            {
+              "work": "cw10",
+              "locator": "pdf p619",
+              "text": "Langmann, an evangelical clergyman and high dignitary of the Church, at the funeral of the late Gustloff."
+            }
+          ],
+          "familyIds": [
+            "wotan",
+            "swastika"
+          ],
+          "occurrenceIds": [
+            "wotan-langmann-gustloff-funeral-sermon-germany-1936",
+            "swastika-german-christians-germany-1933"
+          ]
+        },
+        {
+          "id": "turn-ideologies-antichrist-1936",
+          "name": "“The longexpected Antichrist”",
+          "year": 1936,
+          "yearDisplay": "1936 · ideologies as Antichrist",
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "“Our blight is ideologies—they are the longexpected Antichrist!”",
+          "body": [
+            "The aeon-name applied to politics (J): the Antichrist doctrine landing on the mass-movements of the age."
+          ],
+          "passages": [
+            {
+              "work": "cw11",
+              "locator": "¶778–779 (pdf p402–403)",
+              "text": "Our blight is ideologies—they are the longexpected Antichrist!"
+            }
+          ],
+          "familyIds": [
+            "antichrist"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-symptom-track-1936",
+          "name": "The parallel symptom-track",
+          "year": 1936,
+          "yearDisplay": "1936/38 · the symbols compared",
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "“Just as Christianity had a cross … so Hitler has a swastika.”",
+          "body": [
+            "The symptom comparison (J), with the War of the Worlds panic beside it as the latent-emotion precedent."
+          ],
+          "passages": [
+            {
+              "work": "cw18",
+              "locator": "¶1328–1333 (pdf p534–536)",
+              "text": "Just as Christianity had a cross to symbolize its essential teaching, so Hitler has a swastika, a symbol as old and widespread as the cross."
+            }
+          ],
+          "familyIds": [
+            "swastika"
+          ],
+          "occurrenceIds": [
+            "god-image-hitler-altar-pictures-germany-1936",
+            "martian-invasion-radio-panic-usa-1938"
+          ]
+        },
+        {
+          "id": "turn-wotan-essay-1936",
+          "name": "“Wotan”: the essay",
+          "year": 1936,
+          "yearDisplay": "Mar 1936 · “Wotan” (CW 10)",
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "The heretical suggestion: kairos whose name, on closer investigation, is Wotan.",
+          "body": [
+            "THE ESSAY (J): Nostradamus motto, the white-horse sect, Ergriffenheit, the kairos naming, and the mantic close — “National Socialism would not be the last word.” Jung labels the core claim heresy himself; the vault keeps it as his claim, not history (S)."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶385 (pdf p175)",
+              "text": "In fact I venture the heretical suggestion that the unfathomable depths of Wotan’s character explain more of National Socialism than all three reasonable factors put together."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶398 (pdf p181)",
+              "text": "it is rather the fault of kairos— the present moment in time—whose name on closer investigation turns out to be Wotan."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶399 (pdf p181)",
+              "text": "If this conclusion is correct, National Socialism would not be the last word."
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": [
+            "wotan-nostradamus-epistle-motto-france-1550s",
+            "wotan-christ-white-horse-sect-north-germany-1920s",
+            "ragnarok-prophecy-voluspa-iceland-13c"
+          ]
+        },
+        {
+          "id": "turn-holocaust-aside-1938",
+          "name": "“The beginning of the holocaust”",
+          "year": 1938,
+          "yearDisplay": "30 Nov 1938 · Zarathustra Seminar",
+          "place": "Zürich",
+          "lat": 47.3769,
+          "lon": 8.5417,
+          "epochId": "turn-eruption",
+          "polarity": "shadow",
+          "oneLine": "The dated aside: “we are now exactly in the beginning of the holocaust.”",
+          "body": [
+            "Preserved verbatim (J), no more weight claimed: the sacrificial-conflagration sense in seminar speech, three years before the war — the word’s later history is not Jung’s meaning here."
+          ],
+          "passages": [
+            {
+              "work": "sem-zarathustra",
+              "locator": "pdf p1454",
+              "text": "I rather insist upon these passages, because we are now exactly in the beginning of the holocaust."
+            }
+          ],
+          "familyIds": [
+            "wotan",
+            "fire"
+          ],
+          "occurrenceIds": [
+            "holocaust-beginning-zarathustra-seminar-1938"
+          ]
+        },
+        {
+          "id": "turn-aeon-scheme-1940",
+          "name": "The aeon scheme in a child’s dream",
+          "year": 1940,
+          "yearDisplay": "1939/40 · Children’s Dreams Seminar",
+          "epochId": "turn-catastrophe",
+          "polarity": "light",
+          "oneLine": "Taurus → Aries → Pisces → “the threshold of the sign of Aquarius.”",
+          "body": [
+            "The full element-cycle taught at the war’s onset (J): air assigned to Aquarius — “the spirit is meant to become something subtle again, and man to become who he is.”"
+          ],
+          "passages": [
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p375",
+              "text": "And now we are on the threshold of the sign of Aquarius."
+            },
+            {
+              "work": "sem-childrens-dreams",
+              "locator": "pdf p375",
+              "text": "Here the spirit is meant to become something subtle again, and man to become who he is."
+            }
+          ],
+          "familyIds": [
+            "fish"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-dark-brother-1944",
+          "name": "The dark brother",
+          "year": 1944,
+          "yearDisplay": "1944 · “Why I Am Not a Catholic”",
+          "epochId": "turn-catastrophe",
+          "polarity": "shadow",
+          "oneLine": "“My unexpectedly dark brother … though I deny it a thousand times, it is also in me.”",
+          "body": [
+            "The shadow internalized (J): the European’s own antichristian Neo-Paganism, owned rather than projected."
+          ],
+          "passages": [
+            {
+              "work": "cw18",
+              "locator": "pdf p600",
+              "text": "As a European, I am burdened most heavily by my unexpectedly dark brother, who confronts me with his antichristian Neo-Paganism."
+            },
+            {
+              "work": "cw18",
+              "locator": "pdf p600",
+              "text": "And though I deny it a thousand times, it is also in me."
+            }
+          ],
+          "familyIds": [
+            "antichrist"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-possession-1944",
+          "name": "Possession at war’s height",
+          "year": 1944,
+          "yearDisplay": "1944 · Psychology and Alchemy",
+          "epochId": "turn-catastrophe",
+          "polarity": "shadow",
+          "oneLine": "“European man was possessed by something that robbed him of all free will.”",
+          "body": [
+            "The possession doctrine written mid-war (J): unconscious possession ending only with the scare of our “god-almightiness” — and only individuals, “for the masses are blind brutes.”"
+          ],
+          "passages": [
+            {
+              "work": "cw12",
+              "locator": "¶563 (pdf p459–460)",
+              "text": "Nobody realized that European man was possessed by something that robbed him of all free will."
+            },
+            {
+              "work": "cw12",
+              "locator": "¶563 (pdf p459–460)",
+              "text": "And this state of unconscious possession will continue undeterred until we Europeans become scared of our “god-almightiness.” Such a change can begin only with individuals, for the masses are blind brutes, as we know to our cost."
+            }
+          ],
+          "familyIds": [
+            "god-image"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-after-catastrophe-1945",
+          "name": "After the catastrophe",
+          "year": 1945,
+          "yearDisplay": "1945–46 · the post-mortem",
+          "epochId": "turn-catastrophe",
+          "polarity": "shadow",
+          "oneLine": "Epidemic insanity, the personified shadow, the mass psychoses named.",
+          "body": [
+            "The post-mortem rows (J): “He represented the shadow, the inferior part of everybody’s personality”; “the political mass movements of our time are psychic epidemics.” Jung’s own ethnic psychology of the 1918/1934 stratum stands in the vault as his claim, historically compromised — not softened here."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶454 (pdf p209)",
+              "text": "He represented the shadow, the inferior part of everybody’s personality, in an overwhelming degree, and this was another reason why they fell for him."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶465 (pdf p217)",
+              "text": "the political mass movements of our time are psychic epidemics, in other words, mass psychoses."
+            }
+          ],
+          "familyIds": [
+            "devil"
+          ],
+          "archetypeIds": [
+            "shadow"
+          ],
+          "occurrenceIds": [
+            "wild-huntsman-junger-marble-cliffs-germany-1939"
+          ]
+        },
+        {
+          "id": "turn-assumption-1950",
+          "name": "The Assumption",
+          "year": 1950,
+          "yearDisplay": "1 Nov 1950 · the feminine counter-move",
+          "place": "Rome (St Peter’s)",
+          "lat": 41.9022,
+          "lon": 12.4539,
+          "epochId": "turn-compensation",
+          "polarity": "light",
+          "oneLine": "The dogma as compensating symptom in an age of the greatest political schism.",
+          "body": [
+            "The feminine counter-move (J): the hydrogen-bomb age arming itself “for a stupendous crime,” and against it the Mother of God enthroned — for Jung the most important religious event since the Reformation, foretelling the god-image’s incarnation in creaturely man."
+          ],
+          "passages": [
+            {
+              "work": "cw09i",
+              "locator": "pdf p119",
+              "text": "Humanity is arming itself, in dread and fascinated horror, for a stupendous crime."
+            },
+            {
+              "work": "cw09i",
+              "locator": "pdf p120",
+              "text": "The dogma of the Assumption, proclaimed in an age suffering from the greatest political schism history has ever known, is a compensating symptom that reflects the strivings of science for a uniform world-picture."
+            },
+            {
+              "work": "cw11",
+              "locator": "¶752 (pdf p383)",
+              "text": "I consider to be the most important religious event since the Reformation."
+            }
+          ],
+          "familyIds": [
+            "mother-goddess",
+            "god-image"
+          ],
+          "occurrenceIds": [
+            "assumption-dogma-munificentissimus-deus-1950",
+            "virgin-assumption-glorification-reusner-pandora-1588"
+          ]
+        },
+        {
+          "id": "turn-kairos-1957",
+          "name": "The kairos of the gods’ metamorphosis",
+          "year": 1957,
+          "yearDisplay": "1956/57 · The Undiscovered Self",
+          "epochId": "turn-compensation",
+          "polarity": "union",
+          "oneLine": "“We are living in what the Greeks called the kairos — the right moment.”",
+          "body": [
+            "The last framing (J): the moment for a “metamorphosis of the gods,” with the H-bomb question standing beside it."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶585 (pdf p279)",
+              "text": "We are living in what the Greeks called the καιρός— the right moment—for a “metamorphosis of the gods,” of the fundamental principles and symbols."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶585 (pdf p279)",
+              "text": "Coming generations will have to take account of this momentous transformation"
+            }
+          ],
+          "familyIds": [],
+          "occurrenceIds": []
+        },
+        {
+          "id": "turn-ufo-myth-1958",
+          "name": "The ufo-mandala",
+          "year": 1958,
+          "yearDisplay": "1957–58 · Flying Saucers",
+          "epochId": "turn-compensation",
+          "polarity": "union",
+          "oneLine": "A living myth of round totalities: “remember his own soul … wholeness.”",
+          "body": [
+            "The compensation in the sky (J), opened as a self-declared second Wotan warning. Jung’s own risk-flag stays with it: the reflection comes “perilously close to those turbid fantasies which becloud the minds of world-reformers” — “But I must take this risk” (¶590)."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶589 (pdf p284)",
+              "text": "It is not presumption that drives me, but my conscience as a psychiatrist that bids me fulfil my duty and prepare those few who will hear me for coming events which are in accord with the end of an era."
+            },
+            {
+              "work": "cw10",
+              "locator": "¶614 (pdf p294)",
+              "text": "one thing is certain: they have become a living myth"
+            },
+            {
+              "work": "cw10",
+              "locator": "¶723 (pdf p347)",
+              "text": "They bid each of us remember his own soul and his own wholeness, because this is the answer the West should give to the danger of mass-mindedness."
+            }
+          ],
+          "familyIds": [
+            "ufo",
+            "mandala"
+          ],
+          "occurrenceIds": [
+            "ufo-rumour-worldwide-1947-1958",
+            "ufo-nuremberg-broadsheet-1561",
+            "ufo-basel-broadsheet-1566",
+            "mandala-quadrant-disk-picture-1919"
+          ]
+        },
+        {
+          "id": "turn-wotans-host-1958",
+          "name": "“Wotan’s host” still roams",
+          "year": 1958,
+          "yearDisplay": "1958 · the Swiss bridge",
+          "epochId": "turn-horizon",
+          "polarity": "shadow",
+          "oneLine": "The wizard with the Merseburg spell-book: the god’s “timelessness.”",
+          "body": [
+            "The bridge row (J): the eruption’s god not a closed chapter but a standing presence in the Swiss cantons — the arc handed to the horizon."
+          ],
+          "passages": [
+            {
+              "work": "cw10",
+              "locator": "¶701 (pdf p337)",
+              "text": "Anyone who does not know that “Wotan’s host”—enlightenment or no enlightenment—still roams about our Swiss cantons"
+            }
+          ],
+          "familyIds": [
+            "wotan"
+          ],
+          "occurrenceIds": [
+            "wotan-reich-ohne-raum-goetz-germany-1919",
+            "wotan-wild-hunter-teutschtal-nietzsche-1850s",
+            "wotan-ninck-schicksalsglaube-germany-1935",
+            "odin-sheep-sacrifice-summer-solstice-germany-1933",
+            "ahasuerus-wandering-jew-legend-europe-14c",
+            "wotan-renounced-devil-saxon-baptismal-vow-9c"
+          ]
+        }
+      ],
+      "threads": [
+        {
+          "id": "turn-wotan-arc",
+          "name": "The Wotan arc",
+          "polarity": "shadow",
+          "oneLine": "From the deposed oak to Wotan’s host still roaming: the eruption row.",
+          "eventIds": [
+            "turn-oak-deposal-1931",
+            "turn-wotans-fires-1931",
+            "turn-re-reading-1934",
+            "turn-wotan-essay-1936",
+            "turn-churches-seized-1936",
+            "turn-holocaust-aside-1938",
+            "turn-after-catastrophe-1945",
+            "turn-wotans-host-1958"
+          ]
+        },
+        {
+          "id": "turn-counter-sun",
+          "name": "The counter-sun",
+          "polarity": "shadow",
+          "oneLine": "The swastika rows: the age’s symbol turned backwards.",
+          "eventIds": [
+            "turn-counter-sun-1935",
+            "turn-archaic-symbol-1936",
+            "turn-ideologies-antichrist-1936",
+            "turn-symptom-track-1936"
+          ]
+        },
+        {
+          "id": "turn-dark-counter-saviors",
+          "name": "The dark counter-saviors",
+          "polarity": "shadow",
+          "oneLine": "Not all compensations are round and light: the shadow owned.",
+          "eventIds": [
+            "turn-discover-shadow-1931",
+            "turn-iron-wolf-1932",
+            "turn-dark-brother-1944",
+            "turn-possession-1944",
+            "turn-after-catastrophe-1945"
+          ]
+        },
+        {
+          "id": "turn-compensation-row",
+          "name": "The compensation",
+          "polarity": "light",
+          "oneLine": "What surfaces against the eruption: the scheme, the Assumption, the sky-mandala.",
+          "eventIds": [
+            "turn-aeon-scheme-1940",
+            "turn-assumption-1950",
+            "turn-kairos-1957",
+            "turn-ufo-myth-1958"
+          ]
+        }
+      ]
+    }
+  ]
+}

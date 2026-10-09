@@ -7,6 +7,7 @@ import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage } from '../types/history';
 import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
+import type { PassageBridge } from '../ui/passage';
 import { epochAt, eventOccurrences } from './model';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 
@@ -37,7 +38,7 @@ export class AionView {
   private revealEventId = '';
 
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
-    readonly history: History, private navigate: (state: AppState) => void) {
+    readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge) {
     this.heading = el('header', { class: 'aion-heading' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
@@ -160,8 +161,14 @@ export class AionView {
   }
 
   private sources(passages: Passage[]): HTMLElement {
+    const cite = (p: Passage) => {
+      const text = `${p.work} · ${p.locator}`;
+      const mark = p.basis === 'S' ? el('span', { class: 'aion-basis', text: 'S · standard scholarship' }) : el('span', { class: 'aion-basis', text: 'J' });
+      if (!this.passages?.known(p.work)) return el('cite', {}, [mark, text]);
+      return el('cite', {}, [mark, el('button', { class: 'link-quiet', type: 'button', text, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })]);
+    };
     return el('details', { class: 'aion-sources' }, [el('summary', { text: 'Read the source' }), ...passages.map(p => el('blockquote', {}, [
-      el('p', { text: p.text }), el('cite', { text: `${p.work} · ${p.locator}` }),
+      el('p', { text: p.text }), cite(p),
     ]))]);
   }
 
