@@ -29,6 +29,8 @@ import type { History } from '../types/history';
 import type { CorpusIndex } from '../types/corpus';
 import type { RedBook } from '../types/redbook';
 import { RedBookView } from '../redbook/view';
+import { DynamicsView, selfSubject } from '../dynamics/view';
+import { loadDynamics } from '../dynamics/load';
 import { PassageSheet } from '../ui/passage';
 import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
@@ -105,6 +107,11 @@ export class Controller {
   /** the range the control held before the Red Book (restored with rbTime), and the Book's own span on the scale */
   private rbRange: TimeSpan | null = null;
   private rbSpan: TimeSpan | null = null;
+  /** the dynamical lens: a third mode over the world view; its clock and range are restored on leaving (as the Red Book's are) */
+  private lens: DynamicsView;
+  private lensSwitch: HTMLButtonElement;
+  private lensTime: TimeSnapshot | null = null;
+  private lensRange: TimeSpan | null = null;
   /** the focused subject whose chronology stands on the globe (empty: none) */
   private chronoKey = '';
   private redbookStops = new Set<string>();
@@ -194,6 +201,13 @@ export class Controller {
     this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
       onclick: () => this.toggleRedbook() });
     document.body.append(this.redbookSwitch);
+
+    // the concept data is optional (absent is the normal state, shown as none); a malformed file is reported, never hidden
+    this.lens = new DynamicsView(root, m, engine, time, state => this.navigate(state), passages, null);
+    void loadDynamics().then((data) => this.lens.setConcepts(data)).catch((err) => console.error(err));
+    this.lensSwitch = el('button', { type: 'button', class: 'dy-switch', text: 'Dynamics', title: 'The field as a dynamical system (D)', 'aria-pressed': 'false',
+      onclick: () => this.toggleLens() });
+    document.body.append(this.lensSwitch);
 
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
@@ -346,6 +360,7 @@ export class Controller {
   }
 
   navigate(next: AppState, opts: { replace?: boolean } = {}) {
+    next = this.lensRoute(next);
     if (stateEq(next, this.state)) return;
     if (next.view.kind === 'thread') {
       const t = next.view.target;
@@ -354,6 +369,12 @@ export class Controller {
     }
     this.apply(next);
     this.syncHash(next, opts.replace);
+  }
+
+  /** Inside the lens a subject is picked, not left: a focus becomes the lens on that subject, over the same world view. */
+  private lensRoute(next: AppState): AppState {
+    if (!this.state.dynamics || next.dynamics || next.view.kind !== 'focus') return next;
+    return { view: { kind: 'world' }, deep: false, dynamics: { subject: next.view.subject } };
   }
 
   stepBack() {
@@ -467,12 +488,15 @@ export class Controller {
     if (e.key.toLowerCase() === 'r' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleRedbook(); e.preventDefault(); return;
     }
+    if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.toggleLens(); e.preventDefault(); return;
+    }
     if (this.state.redbook && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
       this.redbook?.walk(e.key === 'ArrowRight' ? 1 : -1);
       e.preventDefault();
       return;
     }
-    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history && !this.state.redbook) {
+    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history && !this.state.redbook && !this.state.dynamics) {
       this.toggleSky(); e.preventDefault(); return;
     }
     if ((e.key === 'g' || e.key === 'G') && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -533,7 +557,9 @@ export class Controller {
   /** The focused subject's chronology, built when it stands on the globe with no walk and no Aion or Red Book. */
   private syncChronology(s: AppState) {
     const v = s.view;
-    const subject = v.kind === 'focus' && !s.graph && !s.trail && !s.history && !s.redbook && !s.sky ? v.subject : null;
+    // the lens's subject travels the same arcs a focus does: its chronology runs along the cursor
+    const subject = s.dynamics && !s.graph ? this.lensSubject(s)
+      : v.kind === 'focus' && !s.graph && !s.trail && !s.history && !s.redbook && !s.sky ? v.subject : null;
     const key = subject ? `${subject.type}:${subject.id}` : '';
     if (key === this.chronoKey) return;
     this.chronoKey = key;
@@ -562,6 +588,78 @@ export class Controller {
     this.aionTime = null;
   }
 
+  /** Leave the Red Book: its folio view, and the range and clock it held. */
+  private leaveRedbook(next: AppState) {
+    const v = next.view;
+    const graph = !!next.graph;
+    this.redbook?.hide();
+    if (this.rbTime) {
+      // the range first: a cursor snapshot taken in cursor mode is clamped into the range it was taken in
+      if (this.rbRange) this.timeControl.setRange(this.rbRange.fromU, this.rbRange.toU);
+      this.time.restore(this.rbTime);
+    }
+    this.rbTime = null;
+    this.rbRange = null;
+    // leaving to the plain world: the Red Book's red must give way (not when a link is carrying us straight
+    // into Aion, a focus or the lens, which set palettes)
+    if (v.kind === 'world' && !next.sky && !graph && !next.history && !next.dynamics) this.enterWorld(false);
+  }
+
+  /** The lens's subject: the one it was given, else The Self (the same landing the lens itself makes). */
+  private lensSubject(s: AppState): Subject {
+    return s.dynamics?.subject ?? selfSubject(this.m);
+  }
+
+  /** The lens: the world view with the field read as a dynamical system. Whatever it hands over is torn down first. */
+  private enterLens(prev: AppState, next: AppState, first: boolean) {
+    const m = this.m;
+    if (this.tour) this.endThread();
+    if (prev.history) this.leaveAion();
+    if (prev.redbook) this.leaveRedbook(next);
+    // a change of subject inside the lens keeps the clock the lens was entered with
+    if (!prev.dynamics) {
+      this.lensTime = this.time.snapshot();
+      this.lensRange = { fromU: this.time.fromU, toU: this.time.toU };
+    }
+    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    document.body.classList.remove('deep-open', 'thread-inspecting');
+    this.syncShift();
+    // a mode that returns early must still let the sky go (the sky's own flight, if any, then wins)
+    this.syncSky(prev, next, first, false);
+    const subject = this.lensSubject(next);
+    const idx = subjectOccurrences(m, subject);
+    // the clock is scoped to the subject's own span, as a focus scopes it; the strip reads the same range
+    const span = subjectSpan(m, idx) ?? this.fullSpan();
+    this.timeControl.setRange(span.fromU, span.toU);
+    const pal = this.subjectPal(subject);
+    this.engine.setPalette(pal, first ? 0.01 : 1.6);
+    this.engine.setEmphasis(this.emphasise(idx), pal.core);
+    this.timeControl.setSubject(idx, rgbToHex(pal.core));
+    this.lens.show(next.dynamics);
+    document.title = `${subjectName(m, subject)}, the dynamical lens — An Archetypal Earth`;
+  }
+
+  /** Leave the lens: its panel and strip go, the globe's emphasis goes, and the clock and range it held are given back. */
+  private leaveLens(next: AppState) {
+    this.lens.hide();
+    this.engine.setEmphasis(null, null);
+    this.timeControl.setSubject(null, '#ffffff');
+    // the range first, as the Red Book does: a snapshot in cursor mode is clamped into the range it was taken in
+    if (this.lensRange) this.timeControl.setRange(this.lensRange.fromU, this.lensRange.toU);
+    if (this.lensTime) this.time.restore(this.lensTime);
+    this.lensTime = null;
+    this.lensRange = null;
+    // the world's palette returns unless the next state sets its own (a focus, Aion or the Red Book do; the sky holds its own)
+    if (next.view.kind === 'world' && !next.history && !next.redbook) {
+      if (next.sky) this.engine.setPalette(WORLD_PALETTE, 1.6);
+      else this.enterWorld(false);
+    }
+  }
+
+  private toggleLens() {
+    this.navigate(this.state.dynamics ? WORLD : { view: { kind: 'world' }, deep: false, dynamics: {} });
+  }
+
   // ── applying a state ──────────────────────────────────────────────────
   private apply(next: AppState) {
     const prev = this.state;
@@ -576,6 +674,10 @@ export class Controller {
     this.syncMode(graph, first, modeChanged);
     this.aionSwitch.setAttribute('aria-pressed', String(!!next.history));
     this.redbookSwitch.setAttribute('aria-pressed', String(!!next.redbook));
+    this.lensSwitch.setAttribute('aria-pressed', String(!!next.dynamics));
+    // the lens hands its clock back before anything else takes the clock (a Red Book or Aion entry snapshots the restored one)
+    if (prev.dynamics && !next.dynamics) this.leaveLens(next);
+    if (next.dynamics) { this.enterLens(prev, next, first); return; }
     if (next.redbook && this.redbook) {
       if (this.tour) this.endThread();
       if (prev.history) this.leaveAion();
@@ -597,19 +699,7 @@ export class Controller {
       if (next.redbook.genesis) this.time.setAll();
       return;
     }
-    if (prev.redbook) {
-      this.redbook?.hide();
-      if (this.rbTime) {
-        // the range first: a cursor snapshot taken in cursor mode is clamped into the range it was taken in
-        if (this.rbRange) this.timeControl.setRange(this.rbRange.fromU, this.rbRange.toU);
-        this.time.restore(this.rbTime);
-      }
-      this.rbTime = null;
-      this.rbRange = null;
-      // leaving to the plain world: the Red Book's red must give way (not when
-      // a link is carrying us straight into Aion or a focus, which set palettes)
-      if (v.kind === 'world' && !next.sky && !graph && !next.history) this.enterWorld(false);
-    }
+    if (prev.redbook) this.leaveRedbook(next);
     if (next.history && this.aion) {
       if (this.tour) this.endThread();
       if (!prev.history) this.aionTime = this.time.snapshot();
@@ -669,7 +759,7 @@ export class Controller {
 
   // ── the sky ───────────────────────────────────────────────────────────
   toggleSky() {
-    if (this.graphMode || this.state.history || this.state.redbook) return;
+    if (this.graphMode || this.state.history || this.state.redbook || this.state.dynamics) return;
     this.navigate(this.state.sky ? WORLD : inSky());
   }
 
@@ -981,7 +1071,7 @@ export class Controller {
   private watchSkyGesture() {
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
-    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || rig.flying) return;
+    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || this.state.dynamics || rig.flying) return;
     // the stage's distance, not the rig's: an approach to a planet holds the camera close to it, and is not a zoom to the Earth
     const d = this.engine.stageDist;
     if (!this.state.sky && d > SKY_ENTER) {
@@ -1547,6 +1637,7 @@ export class Controller {
     this.watchSkyGesture();
     this.skyView.tick();
     this.aion?.update(dt);
+    this.lens.update(dt);
     this.floats.update(this.engine, dt);
     // the chronology travels with the cursor; a walk's arcs own the field while one stands
     if (this.chronoKey) {

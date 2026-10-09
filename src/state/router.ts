@@ -40,6 +40,11 @@ export function stateToHash(s: AppState): string {
     const rb = s.redbook;
     return `#/redbook${rb.genesis ? '/genesis' : rb.stop ? `/${enc(rb.stop)}` : ''}`;
   }
+  if (s.dynamics) {
+    // the lens: #/dynamics (the Self), or #/dynamics/<a|f|c|p>/<id> for a subject, the focus route's own codes
+    const sub = s.dynamics.subject;
+    return `#/dynamics${sub ? `/${{ archetype: 'a', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}`;
+  }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
   }
@@ -91,6 +96,17 @@ export function hashToState(hash: string, r: Resolver): Parsed {
     if (parts[1] === 'genesis') rb.genesis = true;
     else if (parts[1] && r.hasRedBookStop?.(parts[1])) rb.stop = parts[1];
     return { state: { view: { kind: 'world' }, deep: false, redbook: rb } };
+  }
+  if (parts[0] === 'dynamics') {
+    // an unknown subject is the lens with the Self, never a silent world
+    const [, k, id] = parts;
+    const subject: Subject | undefined = !id ? undefined
+      : k === 'a' && r.hasArchetype(id) ? { type: 'archetype', id }
+      : k === 'f' && r.hasFamily(id) ? { type: 'family', id }
+      : k === 'c' && r.hasCulture(id) ? { type: 'culture', id }
+      : k === 'p' && r.hasPlace(id) ? { type: 'place', id }
+      : undefined;
+    return { state: { view: { kind: 'world' }, deep: false, dynamics: subject ? { subject } : {} } };
   }
   if (parts[0] === 'aion') {
     const [, reading, kind, id] = parts;
