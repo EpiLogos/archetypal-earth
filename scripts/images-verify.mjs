@@ -127,7 +127,7 @@ if (field.meta?.counts?.images !== attached) {
 const mb = (n) => (n / 1048576).toFixed(1);
 const total = fs.readdirSync(IMG_DIR, { recursive: true, withFileTypes: true })
   .filter((e) => e.isFile()).reduce((s, e) => s + fs.statSync(path.join(e.parentPath ?? e.path, e.name)).size, 0);
-const BUDGET_BYTES = 240 * 1024 * 1024; // kept in step with scripts/images.mjs (2026-10 coverage round)
+const BUDGET_BYTES = 320 * 1024 * 1024; // kept in step with scripts/images.mjs (2026-10 uniqueness round)
 if (total > BUDGET_BYTES) err(`image dir ${mb(total)} MB over budget`);
 else if (total > BUDGET_BYTES * 0.9) warn(`image dir ${mb(total)} MB is above 90% of budget`);
 

@@ -20,7 +20,9 @@ const QUERIES = path.join(ROOT, 'curation', 'image-queries.json');
 // so the old guard blocked every refetch; replaces are size-neutral swaps.
 // raised 200 -> 240 (2026-10 coverage round): the owner asked that every family
 // with a depictable tradition carry a plate; ~100 more families ≈ 40-55MB.
-const BUDGET_BYTES = 240 * 1024 * 1024;
+// raised 240 -> 320 (2026-10 uniqueness round): the owner asked for complete
+// coverage and accepted close-match plates where the best scan is scarce.
+const BUDGET_BYTES = 320 * 1024 * 1024;
 
 // Wikimedia only serves "standard" thumbnail widths.
 const WIDTH = { archetypes: 1920, families: 1280, occurrences: 960 };
@@ -136,8 +138,11 @@ function evaluate(c, q, ctx) {
   const hay = `${c.title} ${c.descr} ${c.cats.join(' ')} ${c.objectName}`.toLowerCase();
   if (c.mime !== 'image/jpeg' && !(c.mime === 'image/png' && hasSips)) return { ok: false, why: 'mime' };
   if (!licenseOk(c.license)) return { ok: false, why: `license ${c.license}` };
+  // a spec may ask for close-match plates: scarce scans pass a lower resolution floor
+  const minLongest = ctx.relaxed ? 600 : (ctx.minLongest || 900);
+  const minShort = ctx.relaxed ? 320 : (ctx.minShort || 450);
   const longest = Math.max(c.width, c.height);
-  if (longest < (ctx.minLongest || 900) || Math.min(c.width, c.height) < (ctx.minShort || 450)) return { ok: false, why: 'low-res' };
+  if (longest < minLongest || Math.min(c.width, c.height) < minShort) return { ok: false, why: 'low-res' };
   const ar = c.width / c.height;
   if (ar > 2.6 || ar < 0.36) return { ok: false, why: 'aspect' };
   if (BAD_TITLE.test(c.title.replace(/^File:/, '')) && !ctx.allowBad) return { ok: false, why: 'bad title' };
@@ -230,7 +235,7 @@ async function resolveFor(group, id, spec, ctx) {
     let cands;
     try { cands = await searchOne(q, width); } catch (e) { say(`  search failed (${q}): ${e.message}`); continue; }
     for (const c of cands) {
-      const ev = evaluate(c, q, { ...ctx, require: spec.require, exclude: spec.exclude, allowPage: spec.allowPage });
+      const ev = evaluate(c, q, { ...ctx, require: spec.require, exclude: spec.exclude, allowPage: spec.allowPage, relaxed: spec.relaxed });
       if (!ev.ok) continue;
       const score = ev.score + (qi === 0 ? 6 : qi === 1 ? 3 : 0);
       if (!best || score > best.score) best = { cand: c, score, query: q };

@@ -205,7 +205,19 @@
    ]
   },
   "churinga": {
-   "skip": "sacred objects: Commons holds no acceptable scan after curated attempts (museum photography is access-controlled)"
+   "queries": [
+    "tjurunga churinga stone",
+    "bull-roarer Australia museum"
+   ],
+   "require": [
+    [
+     "tjurunga",
+     "churinga",
+     "bull-roarer",
+     "bullroarer"
+    ]
+   ],
+   "relaxed": true
   },
   "circle": {
    "queries": [
@@ -655,7 +667,7 @@
    ]
   },
   "mothers-of-faust": {
-   "skip": "the Mothers realm of Faust II has no passing scan after curated attempts"
+   "skip": "the Mothers realm of Faust II: no passing scan; the only matches are opera-book pages, not the motif"
   },
   "mountain": {
    "queries": [
@@ -958,7 +970,25 @@
    "pin": "File:Correggio - Leda and the Swan - Google Art Project.jpg"
   },
   "swastika": {
-   "skip": "Commons swastika imagery fails the licence/exclusion gates after curated attempts (Nazi-era material dominates the namespace)"
+   "queries": [
+    "swastika temple carving China",
+    "Buddhist swastika stone carving Sanchi",
+    "manji temple gable Japan"
+   ],
+   "require": [
+    [
+     "swastika",
+     "manji",
+     "wanzi"
+    ]
+   ],
+   "exclude": [
+    "nazi",
+    "reich",
+    "hitler",
+    "flag"
+   ],
+   "relaxed": true
   },
   "tao": {
    "queries": [
@@ -1762,7 +1792,19 @@
    ]
   },
   "possession": {
-   "skip": "the exorcism paintings on Commons fail the resolution/aspect gates after unpinning"
+   "queries": [
+    "Exorcism painting Baroque possessed woman",
+    "Exorcism of the possessed engraving",
+    "Possessed nun convent painting"
+   ],
+   "require": [
+    [
+     "exorcis",
+     "possess",
+     "demoniac"
+    ]
+   ],
+   "relaxed": true
   },
   "hierosgamos": {
    "queries": [
@@ -1913,7 +1955,17 @@
    ]
   },
   "pyramid": {
-   "skip": "no free image that is itself a pyramid (2026-10 pass): the only metadata match was a study portrait with a model in it"
+   "queries": [
+    "Piranesi Pyramid of Cestius",
+    "Pyramid of Caius Cestius Rome engraving",
+    "Veduta del Sepolcro di Caio Cestio"
+   ],
+   "require": [
+    [
+     "cestius",
+     "pyramid"
+    ]
+   ]
   },
   "wand": {
    "queries": [
@@ -2177,7 +2229,21 @@
    "pin": "File:Aion mosaic Glyptothek Munich W504.jpg"
   },
   "circumambulatio": {
-   "skip": "a rite, not a picture: no acceptable historical depiction after curated attempts"
+   "queries": [
+    "whirling dervishes sema painting",
+    "tawaf Kaaba old photograph",
+    "circular dance medieval illumination"
+   ],
+   "require": [
+    [
+     "dervish",
+     "whirling",
+     "tawaf",
+     "circumambul",
+     "circular dance"
+    ]
+   ],
+   "relaxed": true
   },
   "clairvoyance": {
    "queries": [
@@ -3042,7 +3108,19 @@
    "pin": "File:Odin und Fenriswolf Freyr und Surt.jpg"
   },
   "ram": {
-   "skip": "Agni-on-ram miniatures and Aries leaves: no passing scan after curated attempts"
+   "queries": [
+    "Agni riding ram miniature",
+    "Aries zodiac miniature ram",
+    "Sacrifice of Isaac ram painting"
+   ],
+   "require": [
+    [
+     "ram",
+     "aries",
+     "agni"
+    ]
+   ],
+   "relaxed": true
   },
   "redeemer-figure": {
    "queries": [
@@ -3095,7 +3173,19 @@
    "pin": "File:Eugène Delacroix - The Barque of Dante.jpg"
   },
   "satori": {
-   "skip": "enso calligraphy scans on Commons fail the resolution gate after curated attempts"
+   "queries": [
+    "enso calligraphy Hakuin",
+    "ensō circle zen brush"
+   ],
+   "require": [
+    [
+     "enso",
+     "ensō",
+     "zen",
+     "calligraphy"
+    ]
+   ],
+   "relaxed": true
   },
   "saturn": {
    "queries": [
@@ -3467,13 +3557,46 @@
    "pin": "File:Ketchikan, AK - Totem Heritage Center 12 - Raven Mortuary Pole (Tlingit, Tongass).jpg"
   },
   "transitus": {
-   "skip": "the vault defines transitus as taurophorus, the carrying of the bull; Commons holds tauroctonies (slayings), not taurophories"
+   "queries": [
+    "Christ carrying the cross Bosch",
+    "Carrying of the cross Simone Martini",
+    "Christ carrying the cross Passion painting"
+   ],
+   "require": [
+    [
+     "carrying",
+     "cross",
+     "calvary",
+     "golgotha"
+    ]
+   ]
   },
   "triangle": {
-   "skip": "no passing scan of the Hypnerotomachia frontispiece; the only metadata match was an unrelated ornament album page"
+   "queries": [
+    "Tetragrammaton triangle engraving",
+    "Holy Trinity emblem triangle engraving",
+    "triangle alchemical emblem fire water"
+   ],
+   "require": [
+    [
+     "triangle",
+     "trigonon",
+     "trinity",
+     "tetragrammaton"
+    ]
+   ]
   },
   "uebermensch": {
-   "skip": "the concept has no depictable tradition of its own; its ground (Nietzsche/Zarathustra) is carried by the zarathustra-figure plate"
+   "queries": [
+    "Hans Olde Nietzsche photograph 1899",
+    "Nietzsche portrait photograph"
+   ],
+   "require": [
+    [
+     "nietzsche"
+    ]
+   ],
+   "pin": "File:Nietzsche187a.jpg"
   },
   "ufo": {
    "queries": [
