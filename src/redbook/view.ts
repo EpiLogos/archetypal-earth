@@ -29,7 +29,8 @@ export class RedBookView {
   private current: RedBookStop | undefined;
   private sectionName = new Map<string, string>();
 
-  constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void) {
+  /** `onStop`: a folio stands (by its stop id); the controller tunes the clock to its year. */
+  constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void, private onStop: (stopId: string) => void = () => {}) {
     this.mode = redbook;
     this.navigate = navigate;
     for (const s of redbook.sections) this.sectionName.set(s.id, s.name);
@@ -163,6 +164,7 @@ export class RedBookView {
     body.append(text);
     this.card.append(body);
     this.emphasise(o.familyId, i);
+    this.onStop(stop.id);
     // the standing stop is where the world looks: all stops are the book's one place
     if (m.located[i]) this.engine.rig.flyTo(o.lat, o.lon, 2.55, { duration: 1.7 });
   }
