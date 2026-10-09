@@ -16,19 +16,22 @@ import type { TimeModel } from '../state/timeModel';
 import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, type GEdge, type GNode, type Graph, type Neighbourhood, type SkyAnchorSource } from './build';
 import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
-import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, linkDistance, linkStrength, type Forces } from './forces';
-import { clampZoom, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
+import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, dustLiveFactor, linkDistance, linkStrength, liveFactor, type Forces } from './forces';
+import { clampZoom, Coast, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
+import { loadSettings, saveSettings } from './settings';
 
 // outside the local lens the field recedes to a whisper that is still clickable
 const GHOST_VIS = 0.05;
+// a cursor that has stopped for this long (frame seconds) is when the layout re-reads who is live
+const LIVE_SETTLE = 0.2;
+// and the heat it is given then: enough to re-arrange the links, not to explode the field
+const LIVE_REHEAT = 0.15;
 
 export interface GraphHandlers {
   /** a node was clicked */
   onSelect(key: string): void;
   /** the person wants to see this node (or, with null, the current subject) on Earth */
   onEarth(key: string | null): void;
-  /** back to the whole graph */
-  onWhole(): void;
   /** The sky's bodies, ties and standing longitudes, loaded on demand; null when the sky cannot be had. */
   loadSky?(): Promise<{ source: SkyAnchorSource; asOf: string } | null>;
 }
@@ -182,6 +185,15 @@ export class GraphView {
   private follow = 0; // seconds of "keep framing the subject" left
   private camAnim: { from: ZoomTransform; to: ZoomTransform; t: number; dur: number } | null = null;
   private autoFit = true;
+  /** the pan's inertia: it coasts on after the pointer lets go */
+  private coast: Coast;
+  /** a pan (not a pinch, not a node drag) is in progress */
+  private panning = false;
+
+  // time-aware layout: 1 while the cursor is scrubbing (the links of the live are held harder), 0 in 'all time'
+  private liveOn = 0;
+  /** seconds until the layout re-reads liveness; -1 when nothing is waiting */
+  private liveWait = -1;
 
   private labelW = new Map<string, number>();
   private fontsReady = false;
@@ -189,6 +201,12 @@ export class GraphView {
 
   constructor(parent: HTMLElement, private model: Model, private time: TimeModel, private h_: GraphHandlers, reduced = false) {
     this.reduced = reduced;
+    this.coast = new Coast(reduced);
+    // what the person chose last time, on this browser (forces, occurrences, relations); depth is per subject
+    const saved = loadSettings();
+    this.forces = saved.forces;
+    this.dust = saved.dust;
+    this.ties = saved.ties;
     this.gBase = this.g = buildGraph(model);
     this.live = new Float32Array(this.g.nodes.length).fill(1);
     this.nodes = this.g.nodes.map((n) => this.makeNode(n));
@@ -224,16 +242,40 @@ export class GraphView {
       .scaleExtent([MIN_K, MAX_K])
       .filter((ev: Event) => this.zoomFilter(ev))
       .on('zoom', (ev) => {
+        const prev = this.t;
         this.t = ev.transform;
-        if (ev.sourceEvent) {
+        const src = ev.sourceEvent as Event | null;
+        if (src) {
           // the person took the camera: stop framing for them
           this.follow = 0;
           this.camAnim = null;
           this.autoFit = false;
+          if (src.type === 'wheel') {
+            this.coast.stop();
+            this.panning = false;
+          }
+          // a drag that only moves the camera is a pan: its deltas are what the release will carry on with
+          if (src.type === 'mousemove' || src.type === 'pointermove' || src.type === 'touchmove') {
+            if (ev.transform.k === prev.k) {
+              this.panning = true;
+              this.coast.record(ev.transform.x - prev.x, ev.transform.y - prev.y, performance.now());
+            } else this.panning = false;
+          }
         }
         this.qtStale = false;
         this.dirty = true;
         this.wake();
+      })
+      .on('end', () => {
+        // the pointer let go of a pan: it coasts on if it was moving fast enough when it did
+        if (!this.panning) return;
+        this.panning = false;
+        if (this.coast.release(performance.now())) {
+          this.follow = 0;
+          this.camAnim = null;
+          this.autoFit = false;
+          this.wake();
+        }
       });
     select(this.canvas).call(this.zoomB).on('dblclick.zoom', null);
 
@@ -257,6 +299,7 @@ export class GraphView {
         if (this.visible) this.wake();
       });
     }
+    this.pushTools();
     this.resize();
   }
 
@@ -316,6 +359,9 @@ export class GraphView {
   show(instant = false) {
     if (this.visible) return;
     this.visible = true;
+    // a touch that was down when the graph hid never lifts on this canvas: it must not make the next touch a pinch
+    this.touches.clear();
+    this.coast.stop();
     this.root.inert = false;
     this.root.setAttribute('aria-hidden', 'false');
     this.root.classList.add('on');
@@ -337,6 +383,9 @@ export class GraphView {
     this.tools.close();
     this.hover = -1;
     this.press = null;
+    this.touches.clear();
+    this.coast.stop();
+    this.panning = false;
     // let the cross-fade finish, then stop spending anything
     window.setTimeout(() => {
       if (!this.visible && this.raf) {
@@ -403,7 +452,7 @@ export class GraphView {
     let bodyLive = 1;
     for (const id of this.active.keys()) if (this.nodes[id].g.kind === 'body') { bodies++; bodyLive = Math.min(bodyLive, this.nodes[id].live); }
     const skyEdges = this.activeEdges.filter((k) => this.g.edges[k].kind === 'sky').length;
-    return { sky: this.sky.status, bodies, bodyLive, skyEdges, nodes: n, edges: this.activeEdges.length, alpha: this.sim.alpha(), k: this.t.k, mode: this.mode, depth: this.depth, hover: this.hover, subject: this.subject, tieBases: this.ties.slice(), occurrences: this.dust };
+    return { sky: this.sky.status, bodies, bodyLive, skyEdges, nodes: n, edges: this.activeEdges.length, alpha: this.sim.alpha(), k: this.t.k, mode: this.mode, depth: this.depth, hover: this.hover, subject: this.subject, tieBases: this.ties.slice(), occurrences: this.dust, liveOn: this.liveOn, coasting: this.coast.moving, touching: this.touches.size };
   }
 
   /** Settle the simulation synchronously (tests, screenshots). */
@@ -501,9 +550,15 @@ export class GraphView {
     this.setTarget(this.target);
   }
 
+  /** What the person keeps between visits (depth is per subject, so it is not among them). */
+  private remember() {
+    saveSettings({ forces: this.forces, dust: this.dust, ties: this.ties });
+  }
+
   private setDust(on: boolean) {
     if (on === this.dust) return;
     this.dust = on;
+    this.remember();
     this.pushTools();
     this.lastTargetKey = '';
     this.setTarget(this.target);
@@ -512,6 +567,7 @@ export class GraphView {
   // ── which nodes are shown ────────────────────────────────────────────────
   private setTies(bases: TieBasis[]) {
     this.ties = bases;
+    this.remember();
     this.pushTools();
     if (this.visible) { this.rebuild(false); this.wake(); }
   }
@@ -519,6 +575,7 @@ export class GraphView {
   /** The four forces, as the person set them: re-set on the live layout (the nodes keep their places) and reheated, so the change is seen settling. */
   private setForces(f: Forces) {
     this.forces = { ...f };
+    this.remember();
     this.pushTools();
     if (this.visible) {
       this.applyForces();
@@ -531,10 +588,13 @@ export class GraphView {
   private forceFns() {
     const local = this.mode === 'local';
     const f = this.forces;
+    const on = this.liveOn;
     return {
       dist: (l: SimLink) => linkDistance(l.e, local, f),
-      str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f),
-      charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime, v.g.rank, local, f),
+      // time-aware (audit T1): the ties and instances of the live hold harder than those of the ghosts; exactly as drawn in 'all time'
+      str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f)
+        * (l.e.kind === 'tie' || l.e.kind === 'instance' ? liveFactor(this.nodes[l.e.s].live, this.nodes[l.e.t].live, on) : 1),
+      charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime, v.g.rank, local, f) * dustLiveFactor(v.g.kind, v.live, on),
       centre: centreStrength(local, f),
       reach: chargeReach(f),
     };
@@ -765,14 +825,36 @@ export class GraphView {
     if (this.timeDirty) {
       this.timeDirty = false;
       nodeLiveness(this.g, this.model, this.time.window, this.live);
-      for (const v of this.nodes) v.live = this.live[v.id];
+      let moved = false;
+      for (const v of this.nodes) {
+        const nl = this.live[v.id];
+        if (Math.abs(nl - v.live) > 1e-3) moved = true;
+        v.live = nl;
+      }
       this.qtStale = true;
       if (this.hover >= 0 && this.nodes[this.hover].g.kind === 'occurrence' && this.nodes[this.hover].live <= 0.525) {
         this.hover = -1;
         this.canvas.style.cursor = '';
         this.refreshLit();
       }
+      // the layout takes the new liveness once the cursor has been still for a moment, not on every frame of a scrub
+      const on = this.time.mode === 'cursor' ? 1 : 0;
+      if (on !== this.liveOn) {
+        this.liveOn = on;
+        this.liveWait = on ? LIVE_SETTLE : 0;
+      } else if (on && moved) {
+        this.liveWait = LIVE_SETTLE;
+      }
       this.dirty = true;
+    }
+    if (this.liveWait >= 0) {
+      this.liveWait -= dt;
+      busy = true;
+      if (this.liveWait <= 0) {
+        this.liveWait = -1;
+        this.applyForces();
+        this.sim.alpha(Math.max(this.sim.alpha(), LIVE_REHEAT));
+      }
     }
     // the time model eases its own window; keep drawing while it moves
     if (this.time.mode === 'cursor' && (this.time.playing || Math.abs(this.time.targetU - this.time.cursorU) > 1e-3 || Math.abs(this.time.on - 1) > 1e-3 || Math.abs(this.time.trail - this.time.trailTarget) > 1e-3)) {
@@ -795,6 +877,12 @@ export class GraphView {
     } else if (this.follow > 0 && this.autoFit) {
       this.follow -= dt;
       this.followCamera(dt);
+      busy = true;
+    }
+    // the pan's inertia: the release's velocity, decayed; every step goes through setCamera (NaN-guarded)
+    if (this.coast.moving) {
+      const d = this.coast.step(dt);
+      this.setCamera(this.t.x + d.dx, this.t.y + d.dy, this.t.k);
       busy = true;
     }
     return busy;
@@ -848,6 +936,7 @@ export class GraphView {
   }
 
   private refit(seconds: number) {
+    this.coast.stop();
     const to = this.fitCamera();
     if (seconds <= 0 || this.reduced) {
       this.camAnim = null;
@@ -880,6 +969,7 @@ export class GraphView {
   }
 
   private nudgeCamera(dx: number, dy: number, f: number) {
+    this.coast.stop();
     this.follow = 0;
     this.camAnim = null;
     this.autoFit = false;
@@ -984,6 +1074,8 @@ export class GraphView {
 
   private onDown = (ev: PointerEvent) => {
     if (ev.button > 0) return;
+    // a new touch on the field catches the coasting camera where it is
+    this.coast.stop();
     if (ev.pointerType !== 'mouse') {
       // a second finger on the canvas is a pinch: no node is grabbed for it
       this.touches.add(ev.pointerId);

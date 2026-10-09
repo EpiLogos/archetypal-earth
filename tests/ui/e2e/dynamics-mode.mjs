@@ -123,6 +123,7 @@ try {
     await page.waitForTimeout(800);
     s = await snap(page);
     check(!s.lens && isWorldHash(s.hash), 'a deep link to the bare lens is not a trap: Escape leaves it');
+    check(!/dynamical lens/.test(await page.title()), 'leaving the lens gives the title back to the world', JSON.stringify(await page.title()));
     track(logs);
     await ctx.close();
   }
@@ -187,6 +188,44 @@ try {
     await ctx.close();
   }
 
+  // ── (ii-b) a subject picked inside the lens glides the clock to its span (SPEC §9): the cursor never snaps ─────────
+  {
+    const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/dynamics' });
+    await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); });
+    await page.waitForTimeout(1500);
+    // the clock held in cursor mode at the Self's first occurrence; the serpent's clock span begins later, so the cursor is outside it
+    const start = await page.evaluate(() => {
+      const { time } = window.__earth;
+      time.scrub(time.fromU);
+      return { u0: time.cursorU, mode: time.mode };
+    });
+    check(start.mode === 'cursor', 'the clock is in cursor mode inside the Self\'s span', `cursor ${start.u0.toFixed(4)}`);
+    await page.evaluate(() => {
+      window.__glide = [];
+      const frame = () => { window.__glide.push(window.__earth.time.cursorU); if (window.__glide.length < 4000) requestAnimationFrame(frame); };
+      requestAnimationFrame(frame);
+    });
+    await page.evaluate(() => { location.hash = '#/dynamics/f/serpent'; });
+    await wait(page, () => location.hash === '#/dynamics/f/serpent');
+    // the glide lands on the nearest edge of the serpent's clock span (the span is padded, so that edge is its start)
+    const edge = await page.evaluate(() => window.__earth.time.fromU);
+    check(start.u0 < edge - 1e-3, 'the cursor starts before the serpent\'s clock span (the glide has somewhere to go)', `cursor ${start.u0.toFixed(4)}, span starts ${edge.toFixed(4)}`);
+    await page.waitForFunction(() => { const t = window.__earth.time; return t.mode === 'cursor' && t.cursorU === t.targetU; }, null, { timeout: 150000 }).catch(() => {});
+    const seq = await page.evaluate(() => window.__glide.slice());
+    const moved = seq.map((v, i) => (i ? v - seq[i - 1] : 0));
+    const total = edge - start.u0;
+    const sign = Math.sign(total);
+    const monotone = moved.every((d) => sign * d >= -1e-9);
+    const biggest = Math.max(0, ...moved.map((d) => Math.abs(d)));
+    const final = seq[seq.length - 1];
+    check(seq.length > 2 && moved.some((d) => Math.abs(d) > 1e-9), 'the cursor moves while the clock glides', `${seq.length} frames`);
+    check(monotone, 'the cursor glides monotonically toward the serpent\'s span', `${moved.filter((d) => Math.abs(d) > 1e-9).length} steps`);
+    check(biggest < 0.6 * Math.abs(total), 'no single frame jumps the cursor across the span', `largest step ${(biggest / Math.abs(total) * 100).toFixed(0)}% of the distance`);
+    check(Math.abs(final - edge) < 1e-3, 'and it lands on the nearest edge of the span', `final ${final.toFixed(4)}, edge ${edge.toFixed(4)}`);
+    track(logs);
+    await ctx.close();
+  }
+
   // ── (iii) the handovers: Aion, the Red Book, the sky, and back — each leaves nothing behind ───────────────
   {
     const { ctx, page, logs } = await open(browser, { width: 1280, height: 800 });
@@ -212,6 +251,7 @@ try {
     await page.waitForTimeout(1500);
     s = await snap(page);
     check(s.redbook && s.redbookMode && !s.lens && !s.lensMode, 'the lens → the Red Book: the lens goes, the Book stands alone', `redbook ${s.redbook}, lens ${s.lens}`);
+    check(!/dynamical lens/.test(await page.title()), 'and the lens title does not survive into the Red Book', JSON.stringify(await page.title()));
     check(s.chrono.segments === 0, 'and the globe carries none of the lens\'s chronology arcs (the Book lights its own folio)', `arcs ${s.chrono.segments}`);
 
     await page.click('.dy-switch');

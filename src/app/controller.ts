@@ -185,7 +185,6 @@ export class Controller {
     this.graph = new GraphView(document.body, m, time, {
       onSelect: (key) => this.onGraphSelect(key),
       onEarth: (key) => this.onGraphEarth(key),
-      onWhole: () => this.navigate({ view: { kind: 'world' }, deep: false, graph: true }),
       loadSky: () => this.skyAnchors(),
     }, engine.reduced);
     root.before(this.graph.root);
@@ -648,7 +647,9 @@ export class Controller {
     const idx = subjectOccurrences(m, subject);
     // the clock is scoped to the subject's own span, as a focus scopes it; the strip reads the same range
     const span = subjectSpan(m, idx, this.fullSpan()) ?? this.fullSpan();
-    this.timeControl.setRange(span.fromU, span.toU);
+    // a subject picked inside the lens glides the clock to the new span, as a focus does (SPEC §9); entering it snaps the range
+    if (prev.dynamics) this.rescope(span.fromU, span.toU);
+    else this.timeControl.setRange(span.fromU, span.toU);
     const pal = this.subjectPal(subject);
     this.engine.setPalette(pal, first ? 0.01 : 1.6);
     this.engine.setEmphasis(this.emphasise(idx), pal.core);
@@ -667,6 +668,8 @@ export class Controller {
     if (this.lensTime) this.time.restore(this.lensTime);
     this.lensTime = null;
     this.lensRange = null;
+    // the lens's own title goes with it: the next state sets its own (a focus or a thread does), else the world's
+    document.title = 'An Archetypal Earth';
     // the world's palette returns unless the next state sets its own (a focus, Aion or the Red Book do; the sky holds its own)
     if (next.view.kind === 'world' && !next.history && !next.redbook) {
       if (next.sky) this.engine.setPalette(WORLD_PALETTE, 1.6);

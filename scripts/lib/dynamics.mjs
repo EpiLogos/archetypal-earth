@@ -1,7 +1,10 @@
 // The dynamical lens's data rail, pure core (docs/DYNAMICAL.md §5): curated concept choices become
 // public/data/dynamics.json, and every quotation is matched VERBATIM against the vault corpus page it names.
 //   · a Van Eenwyk quotation (voice V) is never typed in the site: the curation names its corpus work, page and match;
-//   · a Jung quotation (voice J) is matched the same way and cited by its corpus locator;
+//     its cite is the printed page the corpus marker gives that pdf page (`print pNN`), and nothing else;
+//   · a Jung quotation (voice J) is matched the same way and cited by its corpus locator, which must name the matched pdf page;
+//   · a match is one bounded run of at least six words, found once on the page, and never spans a hyphen at a printed line
+//     break (de-hyphenating would guess a word: the rail refuses rather than publish one it cannot be sure of);
 //   · a mismatch, a missing page, an ambiguous match, or a changed corpus file is a loud failure that names the concept.
 // The vault is read-only. Nothing here reads the vault unless a curated concept asks it to.
 import fs from 'node:fs';
@@ -21,17 +24,24 @@ const WORK_KEY = /^[\w-]+$/;
 const SHA256 = /^[0-9a-f]{64}$/;
 // the corpus page marker, as scripts/lib/corpus.mjs reads it: <!-- work · pdf p110 · print p96 -->
 const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>]+))?\s*-->\s*$/;
+/** A match names one place on the page: at least this many words. */
+export const MIN_WORDS = 6;
+/** Internal only, never published: marks a hyphen that ends a printed line, so the matcher can refuse a span over it. */
+const BREAK_MARK = '\u0001';
+const WORD_CHAR = /[\p{L}\p{N}]/u;
 
 const isStr = (v) => typeof v === 'string' && v.trim().length > 0;
 const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 
 /**
- * Read one corpus file's pages for one work. Returns the page text by pdf page, and any page that is marked twice.
- * A marker for another work ends the current page: its text belongs to no page of this work.
+ * Read one corpus file's pages for one work. Returns the page text by pdf page, the printed page label of each page
+ * (`print pNN`, or null), and any page that is marked twice. A marker for another work ends the current page: its text
+ * belongs to no page of this work.
  */
 export function parseCorpusPages(raw, work) {
   const lines = raw.split(/\r?\n/);
   const pages = new Map();
+  const labels = new Map();
   const duplicates = [];
   let current = null;
   for (const line of lines) {
@@ -42,21 +52,48 @@ export function parseCorpusPages(raw, work) {
       if (pages.has(page)) { duplicates.push(page); current = null; continue; }
       current = [];
       pages.set(page, current);
+      labels.set(page, m[3] ?? null);
       continue;
     }
     if (current) current.push(line);
   }
   const text = new Map([...pages].map(([page, ls]) => [page, ls.join('\n').replace(/\s+$/, '')]));
-  return { pages: text, duplicates };
+  return { pages: text, labels, duplicates };
 }
 
-/** The verbatim test: the normalized match must occur exactly once in the normalized page. */
-export function matchQuotation(pageText, match) {
+/**
+ * The normalized page, and the index in it of every hyphen that ends a printed line. A line-break hyphen is marked before
+ * normalization and the mark removed after, so the page text is exactly what normalizePassage gives, with the breaks known.
+ */
+function pageText(raw) {
+  const marked = normalizePassage(raw.replace(/-\n/g, `-${BREAK_MARK}\n`));
+  const breaks = [];
+  let out = '';
+  for (const ch of marked) {
+    if (ch === BREAK_MARK) { breaks.push(out.length - 1); continue; }
+    out += ch;
+  }
+  return { hay: out, breaks };
+}
+
+/**
+ * The verbatim test: the normalized match must occur exactly once in the normalized page, start and end at a word boundary,
+ * be at least MIN_WORDS words, and not include a hyphen that ends a printed line.
+ */
+export function matchQuotation(pageTextIn, match) {
   const needle = normalizePassage(match);
-  const hay = normalizePassage(pageText);
+  if (needle.split(' ').length < MIN_WORDS) return { ok: false, reason: `the match must be at least ${MIN_WORDS} words, so that it names one place on the page` };
+  const { hay, breaks } = pageText(pageTextIn);
   const at = hay.indexOf(needle);
   if (at < 0) return { ok: false, reason: 'the match is not found verbatim on the page' };
   if (hay.indexOf(needle, at + 1) >= 0) return { ok: false, reason: 'the match occurs more than once on the page; it must be unique' };
+  const end = at + needle.length;
+  if ((at > 0 && WORD_CHAR.test(hay[at - 1])) || (end < hay.length && WORD_CHAR.test(hay[end]))) {
+    return { ok: false, reason: 'the match begins or ends inside a word; it must start and end at a word boundary' };
+  }
+  if (breaks.some((h) => h >= at && h < end)) {
+    return { ok: false, reason: 'the match spans a hyphen at a printed line break (e.g. "re- peats"); de-hyphenating would guess the word, so choose a match that avoids the break' };
+  }
   return { ok: true, text: needle };
 }
 
@@ -94,6 +131,7 @@ export function validateCuration(curation, { families } = {}) {
     if (!isStr(q.locator)) fail(where, 'locator (the cite shown) is required');
     if (!isStr(q.match)) fail(where, 'match is required');
     else if (q.match !== q.match.trim() || normalizePassage(q.match) !== q.match) fail(where, 'match must be written in its normalized form (single spaces, no ligatures)');
+    else if (q.match.split(' ').length < MIN_WORDS) fail(where, `match must be at least ${MIN_WORDS} words, so that it names one place on the page`);
   };
 
   if (!Array.isArray(curation.concepts)) { fail('curation', 'concepts must be an array'); return errors; }
@@ -116,10 +154,14 @@ export function validateCuration(curation, { families } = {}) {
   return errors;
 }
 
-/** Read every declared corpus file under the vault: the hash must be the curated one, and the file never written. */
+/**
+ * Read every declared corpus file under the vault: the hash must be the curated one, and the file never written.
+ * Returns the pages and printed labels by work key, and any error.
+ */
 export function loadSourcePages(curation, vault) {
   const errors = [];
   const pages = new Map();
+  const labels = new Map();
   const root = path.resolve(vault);
   for (const [key, s] of Object.entries(curation.sources ?? {})) {
     const file = path.resolve(root, s.file);
@@ -131,22 +173,24 @@ export function loadSourcePages(curation, vault) {
     const parsed = parseCorpusPages(raw.toString('utf8'), key);
     for (const page of parsed.duplicates) errors.push(`sources.${key}: pdf page ${page} is marked twice in the corpus`);
     pages.set(key, parsed.pages);
+    labels.set(key, parsed.labels);
   }
-  return { pages, errors };
+  return { pages, labels, errors };
 }
 
 /**
- * The published data from a curation and the corpus pages it names (pages: work key → pdf page → text). Returns
- * { data, errors }: data is null whenever an error stands. Output has exactly the shape of src/types/dynamics.ts.
+ * The published data from a curation and the corpus pages it names (pages: work key → pdf page → text; labels: work key →
+ * pdf page → printed label). Returns { data, errors }: data is null whenever an error stands. Output has exactly the shape
+ * of src/types/dynamics.ts.
  */
-export function buildDynamics(curation, { families, pages }) {
+export function buildDynamics(curation, { families, pages, labels = new Map() }) {
   const errors = validateCuration(curation, { families });
   if (errors.length) return { data: null, errors };
   const concepts = [];
   for (const c of curation.concepts) {
     const where = `concept ${c.id}`;
-    const quote = resolveQuote(curation, pages, c.quote, 'V', `${where} quote`, errors);
-    const jung = c.jung === undefined ? undefined : resolveQuote(curation, pages, c.jung, 'J', `${where} jung`, errors);
+    const quote = resolveQuote(curation, pages, labels, c.quote, 'V', `${where} quote`, errors);
+    const jung = c.jung === undefined ? undefined : resolveQuote(curation, pages, labels, c.jung, 'J', `${where} jung`, errors);
     if (!quote || (c.jung !== undefined && !jung)) continue;
     const out = { id: c.id, name: c.name, quote, familyIds: [...c.familyIds] };
     if (jung) out.jung = jung;
@@ -157,16 +201,25 @@ export function buildDynamics(curation, { families, pages }) {
   return { data: { version: 1, concepts }, errors: [] };
 }
 
-function resolveQuote(curation, pages, q, voice, where, errors) {
+function resolveQuote(curation, pages, labels, q, voice, where, errors) {
   const src = curation.sources[q.work];
-  const doc = pages.get(q.work);
-  const text = doc?.get(q.page);
+  const text = pages.get(q.work)?.get(q.page);
   if (text === undefined) { errors.push(`${where}: pdf page ${q.page} of ${q.work} is not in the corpus`); return null; }
   const m = matchQuotation(text, q.match);
   if (!m.ok) { errors.push(`${where}: ${m.reason} (pdf page ${q.page} of ${q.work})`); return null; }
-  const cite = voice === 'V'
-    ? { workTitle: curation.source.work, year: String(curation.source.year), locator: q.locator }
-    : { work: q.work, workTitle: src.title, year: String(src.year), locator: q.locator };
+  if (voice === 'V') {
+    // a Van Eenwyk cite names the printed page the passage is on, as the corpus marker gives it: never a freehand locator
+    const print = labels.get(q.work)?.get(q.page) ?? null;
+    if (!print) { errors.push(`${where}: pdf page ${q.page} of ${q.work} has no printed page label, so the cite cannot name its page`); return null; }
+    if (q.locator !== `p. ${print}`) { errors.push(`${where}: locator "${q.locator}" must be "p. ${print}", the printed page of pdf page ${q.page} of ${q.work}`); return null; }
+  } else if (!new RegExp(`pdf p${q.page}(?!\\d)`).test(q.locator)) {
+    // a Jung cite is his paragraph or page; it must name the pdf page the passage was matched on
+    errors.push(`${where}: locator "${q.locator}" must name the matched page (pdf p${q.page})`);
+    return null;
+  }
+  // the cite is the matched source's own title and year: a Van Eenwyk passage from any V source is cited to that source
+  const cite = { workTitle: src.title, year: String(src.year), locator: q.locator };
+  if (voice === 'J') cite.work = q.work;
   return { text: m.text, cite };
 }
 
@@ -174,8 +227,8 @@ function resolveQuote(curation, pages, q, voice, where, errors) {
 export function buildFromVault(curation, { families, vault }) {
   const shape = validateCuration(curation, { families });
   if (shape.length) return { data: null, errors: shape };
-  const { pages, errors: corpusErrors } = loadSourcePages(curation, vault);
-  const built = buildDynamics(curation, { families, pages });
+  const { pages, labels, errors: corpusErrors } = loadSourcePages(curation, vault);
+  const built = buildDynamics(curation, { families, pages, labels });
   const errors = [...corpusErrors, ...built.errors];
   // a corpus that has changed or is absent is a failure of the whole build: no data is returned beside an error
   return { data: errors.length ? null : built.data, errors };

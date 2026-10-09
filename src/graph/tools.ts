@@ -3,7 +3,7 @@
 // the sheet does not repeat them.
 import { el } from '../ui/dom';
 import type { TieBasis } from '../types/field';
-import { DEFAULT_FORCES, FORCE_ROWS, type Forces } from './forces';
+import { DEFAULT_FORCES, FORCE_ROWS, forceMultiple, type Forces } from './forces';
 
 export interface ToolHandlers {
   onDepth(depth: number): void;
@@ -70,6 +70,9 @@ export class GraphTools {
       this.forceN.set(row.key, out);
       forces.append(el('div', { class: 'gvt-row', title: row.tip }, [el('span', { text: row.label }), out, input]));
     }
+    // back to the arrangement as drawn: a quiet text link, the same caption typography as the rest of the sheet
+    forces.append(el('button', { class: 'gvt-caption gvt-reset', type: 'button', text: 'Reset', title: 'Restore the arrangement as drawn',
+      onclick: () => h.onForces({ ...DEFAULT_FORCES }) }));
     const fit = el('button', { class: 'gvt-option', type: 'button', text: 'Reframe graph', onclick: () => { h.onFit(); this.close(); } });
     this.panel = el('section', { class: 'gvt-panel', id: 'graph-settings', 'aria-label': 'Graph settings' }, [
       this.dust,
@@ -122,7 +125,8 @@ export class GraphTools {
       const input = this.forceIn.get(row.key);
       if (input) input.value = String(v);
       const out = this.forceN.get(row.key);
-      if (out) out.textContent = `${v.toFixed(2)}×`;
+      // a readout is a multiple of the arrangement as drawn: 1.00× at rest, whatever the stored number
+      if (out) out.textContent = `${forceMultiple(row.key, v).toFixed(2)}×`;
     }
     this.sky.setAttribute('aria-pressed', String(s.sky === 'on' || s.sky === 'loading'));
     this.sky.disabled = s.sky === 'loading';

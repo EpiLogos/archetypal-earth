@@ -1,14 +1,16 @@
 // Gate: the dynamical lens (DynamicsView + PhaseStrip), walked on a standalone harness page over the dev server.
 //   · the strip draws for the Self and for 'serpent' (non-blank pixels);
 //   · the cursor point moves when the shared clock's cursor moves;
-//   · V marks stand only at midpoint transitions, and each carries the V title;
+//   · the strip carries no V chip: a sustained midpoint crossing is one neutral tick, one per crossing, with the rule's count;
+//   · a flat subject (a single family) is a band and no trace; the Self's trace is drawn;
+//   · the card's caption names the native system (never the subject); no line of Jung's sits under the hero;
 //   · the card and heading carry no sentences of the mode's own (names, the field's one-liners and labels only);
 //   · inactive = hidden + inert + aria-hidden, and out of the document's voice;
 //   · reduced motion: no animated trail;
 //   · the Lorenz hero is non-blank and identical across two renders;
 //   · the strip sits above the time track and lines up with it; the card sits above the strip; no horizontal scroll;
 //   · the concept card renders only from data (the placeholder fixture), and not without it.
-// Screenshots: .cache/screens/remediation-2026-10-09/dynamics/
+// Screenshots: .cache/screens/remediation-2026-10-09/dynamics/honest/
 //   npx vite --port 5183 --strictPort &
 //   EARTH_HEADLESS=1 node tests/ui/e2e/dynamics-view.mjs
 import fs from 'node:fs';
@@ -16,8 +18,10 @@ import { launch, URL as APP_URL } from './lib.mjs';
 
 const BASE = APP_URL.replace(/\/$/, '');
 const HARNESS = `${BASE}/tests/ui/e2e/dynamics-harness.html`;
-const SHOTS = '/home/user/archetypal-earth/.cache/screens/remediation-2026-10-09/dynamics';
-const V_TITLE = "Van Eenwyk's reading — not Jung's";
+const SHOTS = '/home/user/archetypal-earth/.cache/screens/remediation-2026-10-09/dynamics/honest';
+const TICK_TITLE = 'crosses the midpoint · drawn here';
+const V_TITLE = "Van Eenwyk's reading — not Jung's"; // the concept card's V chip (section 4)
+const CAPTION = 'Lorenz attractor · drawn here';
 fs.mkdirSync(SHOTS, { recursive: true });
 
 let failed = 0;
@@ -26,8 +30,13 @@ const check = (ok, label, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${label}${detail ? ` — ${detail}` : ''}`);
 };
 const SELF = 'archetype:self';
+const HERO = 'archetype:hero';
+const SHADOW = 'archetype:shadow';
+const PSYCHO = 'archetype:psychopomp';
 const SERPENT = 'family:serpent';
 const ABRAXAS = 'family:abraxas';
+/** the sustained-crossing rule on the published field (unit-tested in tests/dynamics/trajectory.test.ts) */
+const EXPECTED_CROSSINGS = { [SELF]: 0, [HERO]: 0, [SHADOW]: 0, [PSYCHO]: 1 };
 
 const browser = await launch();
 const errors = [];
@@ -72,7 +81,9 @@ const heroPixels = (page) => page.evaluate(() => {
 
 const settle = (page, ms = 250) => page.waitForTimeout(ms);
 
-// ── 1. the strip draws for the Self and for the serpent, and each mode's markers are the transitions ───────────
+// ── 1. the strip: the Self is a trace; ticks are the sustained crossings (one each, neutral, never a V chip); a flat subject is a band
+const strip = (page) => page.evaluate(() => window.__dy.view.strip.inspect());
+const ticks = (page) => page.$$eval('.dy-tick', (els) => els.map((e) => ({ title: e.title, text: e.textContent })));
 for (const [label, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['phone', { width: 390, height: 844 }, true]]) {
   const { ctx, page } = await open(viewport, { mobile });
   await page.evaluate((v) => window.__dy.show(v), SELF);
@@ -81,22 +92,37 @@ for (const [label, viewport, mobile] of [['desktop', { width: 1440, height: 900 
   check(selfInk > 500, `${label}: the strip draws the Self`, `${selfInk} inked pixels`);
   const heading = await page.textContent('.dy-heading h1');
   check(heading === 'The Self', `${label}: the heading names the Self`, `"${heading}"`);
-  const marks = await page.$$eval('.dy-v', (els) => els.map((e) => ({ text: e.textContent, title: e.title, u: Number(e.dataset.u), n: Number(e.dataset.n) })));
-  const transitions = await page.evaluate((s) => window.__dy.transitionCount(s), SELF);
-  check(marks.length > 0 && marks.every((m) => m.text === 'V' && m.title === V_TITLE), `${label}: the Self carries V marks with the V title`, `${marks.length} marks`);
-  check(marks.reduce((n, m) => n + m.n, 0) === transitions, `${label}: every midpoint transition is covered by exactly one mark`, `${transitions} transitions`);
-  const mids = await page.evaluate((s) => window.__dy.transitionMids(s), SELF);
-  const lo = Math.min(...mids), hi = Math.max(...mids);
-  check(marks.every((m) => m.u >= lo - 1e-6 && m.u <= hi + 1e-6), `${label}: marks stand only within the transitions' span`);
+  const st = await strip(page);
+  check(st.trace && !st.flat, `${label}: the Self is drawn as a trace (its era series varies)`, `${st.bins} eras with occurrences`);
+  check(st.companions === 0, `${label}: no companion trace is drawn (each parallel is one family level)`, `${st.companions} drawn`);
+  check((await page.$$('.dy-strip .dy-chip, .dy-strip .dy-v')).length === 0, `${label}: the strip carries no V chip`);
+  check((await page.$('.dy-line')) === null, `${label}: the card carries no line of Jung's under the hero`);
+  const caption = await page.textContent('.dy-caption');
+  check(caption === CAPTION, `${label}: the hero is captioned as the system drawn`, `"${caption}"`);
   await settle(page, 0);
   await page.screenshot({ path: `${SHOTS}/${label}-self.png` });
 
+  // the ticks are the sustained crossings: one neutral tick each, with the rule's count for the subject
+  for (const subject of [SELF, HERO, SHADOW, PSYCHO]) {
+    await page.evaluate((v) => window.__dy.show(v), subject);
+    await settle(page, 300);
+    const t = await ticks(page);
+    const expected = await page.evaluate((v) => window.__dy.crossings(v).length, subject);
+    const s2 = await strip(page);
+    check(expected === EXPECTED_CROSSINGS[subject], `${label}: ${subject} keeps ${EXPECTED_CROSSINGS[subject]} sustained crossing(s) under the rule`, `rule says ${expected}`);
+    check(t.length === expected && t.every((x) => x.title === TICK_TITLE && x.text === '') && s2.ticks === expected && s2.crossings === expected, `${label}: ${subject} draws one neutral tick per crossing`, `${t.length} ticks`);
+    if (subject === HERO) await page.screenshot({ path: `${SHOTS}/${label}-hero.png` });
+    if (subject === SHADOW) await page.screenshot({ path: `${SHOTS}/${label}-shadow.png` });
+  }
+
+  // the serpent: one family, so a single level: a band, no trace, no tick, no companion
   await page.evaluate((v) => window.__dy.show(v), SERPENT);
   await settle(page, 400);
   const serpentInk = await stripInk(page);
-  check(serpentInk > 300, `${label}: the strip draws the serpent`, `${serpentInk} inked pixels`);
-  const serpentMarks = await page.$$eval('.dy-v', (els) => els.length);
-  check(serpentMarks === 0, `${label}: the serpent (flat in s) carries no V mark`, `${serpentMarks} marks`);
+  const sp = await strip(page);
+  check(sp.flat && !sp.trace, `${label}: the serpent is a flat subject: a band, not a trace`);
+  check(serpentInk > 300, `${label}: the serpent's band is drawn (not blank)`, `${serpentInk} inked pixels`);
+  check(sp.ticks === 0 && sp.companions === 0, `${label}: the serpent carries no tick and no companion`);
   const serpentHeading = await page.textContent('.dy-heading h1');
   check(serpentHeading === 'Serpent', `${label}: the heading names the serpent`, `"${serpentHeading}"`);
   await page.screenshot({ path: `${SHOTS}/${label}-serpent.png` });

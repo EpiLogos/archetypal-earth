@@ -19,7 +19,7 @@ import { buildModel } from '/src/data/model.ts';
 import { TimeModel } from '/src/state/timeModel.ts';
 import { DynamicsView } from '/src/dynamics/view.ts';
 import { parseDynamics } from '/src/dynamics/load.ts';
-import { basinsOf, transitions, trajectoryOf } from '/src/dynamics/trajectory.ts';
+import { basinsOf, eraSeries, ERA_BINS, smoothEra, sustainedCrossings, trajectoryOf } from '/src/dynamics/trajectory.ts';
 
 const q = new URLSearchParams(location.search);
 const field = await (await fetch('/data/field.json')).json();
@@ -40,8 +40,8 @@ window.__dy = {
   show: (v) => view.show(subjectOf(v) ? { subject: subjectOf(v) } : {}),
   hide: () => view.hide(),
   scrub: (u) => time.scrub(u),
-  transitionCount: (s) => transitions(trajOf(s)).length,
-  transitionMids: (s) => { const t = trajOf(s); return transitions(t).map((j) => (t.points[j - 1].u + t.points[j].u) / 2); },
+  /** the midpoint crossings the rule keeps for the subject: the strip's ticks, one each */
+  crossings: (s) => sustainedCrossings(smoothEra(eraSeries(trajOf(s), ERA_BINS))).map((c) => c.u),
   basinCount: (s) => basinsOf(trajOf(s)).length,
   /** the slider-positions of the subject's first and last located occurrence */
   span: (s) => { const p = trajOf(s).points; return p.length ? [p[0].u, p[p.length - 1].u] : null; },
@@ -50,8 +50,8 @@ window.__dy = {
     const s = subjectOf(v) ?? { type: 'archetype', id: model.field.archetypes.find((a) => a.prime).id };
     const names = basinsOf(trajOf(s)).map((b) => model.famById.get(b.familyId)?.name ?? b.familyId);
     const name = s.type === 'archetype' ? model.archById.get(s.id)?.name : s.type === 'family' ? model.famById.get(s.id)?.name : s.id;
-    const line = s.type === 'archetype' ? model.archById.get(s.id)?.oneLine : s.type === 'family' ? model.famById.get(s.id)?.oneLine : '';
-    return [name, line, ...names, 'V', 'J', 'drawn here', 'Next'].filter(Boolean);
+    // the hero's caption names the native system drawn (never the subject); the card carries no line of its own
+    return [name, ...names, 'V', 'J', 'Next', 'Lorenz attractor · drawn here', 'Mandelbrot set · drawn here', 'Julia set · drawn here'].filter(Boolean);
   },
   ready: true,
 };

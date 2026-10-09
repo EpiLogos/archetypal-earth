@@ -64,7 +64,7 @@ body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-option[aria-pressed]::after { content: ''; width: 13px; height: 13px; border: 1px solid var(--hair); border-radius: 3px; }
 .gvt-option[aria-pressed="true"]::after { background: rgb(var(--core-rgb) / 0.7); box-shadow: inset 0 0 0 3px rgb(var(--deep-rgb)); }
 .gvt-caption { display: block; margin-bottom: 9px; color: var(--ink-3); }
-.gvt-range { width: 96px; height: 14px; accent-color: rgb(var(--core-rgb)); cursor: ew-resize; }
+.gvt-range { width: 72px; height: 14px; accent-color: rgb(var(--core-rgb)); cursor: ew-resize; }
 .gvt-row .gvt-n { font-feature-settings: 'tnum'; color: var(--ink-3); }
 .gvt-ties { display: flex; gap: 6px; }
 .gvt-filter { padding: 5px 7px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
@@ -78,6 +78,9 @@ body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-forces > summary:hover, .gvt-forces[open] > summary { color: var(--ink-2); }
 .gvt-forces > .gvt-row { margin-top: 14px; }
 .gvt-forces > .gvt-row + .gvt-row { margin-top: 12px; }
+/* Reset: a quiet text link at the foot of the disclosure, the sheet's own caption type, right-aligned */
+.gvt-reset { display: block; margin: 12px 0 0 auto; padding: 0 0 1px; background: none; border: 0; border-bottom: 1px solid transparent; font: inherit; cursor: pointer; transition: color 0.3s, border-color 0.3s; }
+.gvt-reset:hover { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
 .gv-tools button:focus-visible, .gvt-forces > summary:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 4px; }
 
 /* ── Earth ⇄ Graph: one pill beside the search glyph ───────────── */

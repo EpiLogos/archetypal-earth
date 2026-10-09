@@ -3,7 +3,7 @@
 // The globe is not touched here: the engine is exposed read-only, and the controller owns every globe effect
 // (the chronology is offered by chronology() for it to light).
 import { averagePalettes, rgbToHex } from '../data/palette';
-import { subjectExists, subjectLine, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
+import { subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
@@ -14,8 +14,15 @@ import type { PassageBridge } from '../ui/passage';
 import { closeGlyph } from '../ui/reveal';
 import { jMark, vMark } from './marks';
 import { paintJulia, paintLorenz, paintMandelbrot } from './paint';
-import { PhaseStrip } from './strip';
+import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
+
+/** The caption under the hero names the native system drawn, never the subject. */
+const HERO_CAPTION: Record<DynamicsRender, string> = {
+  lorenz: 'Lorenz attractor · drawn here',
+  mandelbrot: 'Mandelbrot set · drawn here',
+  julia: 'Julia set · drawn here',
+};
 
 /** Used when neither the subject nor its occupants carry a palette. The world's own resting tone. */
 const FALLBACK: Palette = { core: '#c3d2f2', glow: '#4f78cf', fog: '#10193a', deep: '#02030a' };
@@ -50,6 +57,9 @@ export class DynamicsView {
   private heading: HTMLElement;
   private card: HTMLElement;
   private heroCanvas: HTMLCanvasElement | null = null;
+  private heroKind: DynamicsRender = 'lorenz';
+  /** repaints the hero when its box changes size */
+  private heroRo: ResizeObserver | null = null;
   private subject: Subject | null = null;
   private traj: Trajectory | null = null;
   private palette: Palette = FALLBACK;
@@ -68,6 +78,8 @@ export class DynamicsView {
     private navigate: (state: AppState) => void, private passages?: PassageBridge, concepts: DynamicsData | null = null) {
     this.concepts = concepts?.concepts ?? [];
     this.strip = new PhaseStrip();
+    // the hero is painted at the device's pixel ratio, so a zoom or a move between screens repaints it too
+    onPixelRatio(() => this.paintHero()); // the lens lives as long as the page: its disposer is not needed
     this.heading = el('header', { class: 'dy-heading' });
     this.card = el('aside', { class: 'dy-card reveal on', 'aria-label': 'Dynamical reading' });
     this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.heading, this.strip.root, this.card]);
@@ -90,6 +102,8 @@ export class DynamicsView {
     this.setActive(false);
     document.body.classList.remove('dynamics-mode');
     clear(this.card);
+    this.heroRo?.disconnect();
+    this.heroRo = null;
     this.heroCanvas = null;
     this.cursorSent = undefined;
   }
@@ -172,20 +186,28 @@ export class DynamicsView {
     return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close the dynamical lens', onclick: () => this.navigate({ view: { kind: 'world' }, deep: false }) }, [closeGlyph()]);
   }
 
-  /** The reveal card: the hero, then one concept if the data offers one, then the subject's own line. */
+  /**
+   * The reveal card: the hero, captioned with the native system it draws (an illustration of the lens, not of the
+   * subject), then one concept only when the data offers one. The subject's name is the heading; no line of Jung's is
+   * set under the hero.
+   */
   private renderCard() {
     if (!this.subject) return;
     clear(this.card);
     const concept = this.related[this.conceptAt];
-    const render: DynamicsRender = concept?.render ?? 'lorenz';
-    const hero = el('figure', { class: 'dy-hero' }, [el('canvas', { class: 'dy-hero-canvas', 'aria-hidden': 'true' }), el('figcaption', { class: 'dy-caption', text: 'drawn here' })]);
+    this.heroKind = concept?.render ?? 'lorenz';
+    const hero = el('figure', { class: 'dy-hero' }, [el('canvas', { class: 'dy-hero-canvas', 'aria-hidden': 'true' }), el('figcaption', { class: 'dy-caption', text: HERO_CAPTION[this.heroKind] })]);
     this.heroCanvas = hero.querySelector('canvas');
+    this.heroRo?.disconnect();
+    this.heroRo = null;
+    if (this.heroCanvas && typeof ResizeObserver !== 'undefined') {
+      this.heroRo = new ResizeObserver(() => this.paintHero());
+      this.heroRo.observe(this.heroCanvas);
+    }
     const text = el('div', { class: 'rv-text' }, [hero]);
     if (concept) text.append(...this.conceptBlock(concept));
-    const line = subjectLine(this.model, this.subject);
-    if (line) text.append(el('p', { class: 'dy-line', text: line }));
     this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
-    this.paintHero(render);
+    this.paintHero();
   }
 
   private conceptBlock(c: DynamicsConcept): (HTMLElement | string)[] {
@@ -215,9 +237,9 @@ export class DynamicsView {
   }
 
   /** The native hero, painted at the box's device size. Deterministic: the same subject paints the same pixels. */
-  private paintHero(kind: DynamicsRender) {
+  private paintHero() {
     const canvas = this.heroCanvas;
-    if (!canvas) return;
+    if (!canvas || this.root.hidden) return;
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
     if (!w || !h) return;
@@ -227,6 +249,7 @@ export class DynamicsView {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const p = this.palette;
+    const kind = this.heroKind;
     if (kind === 'mandelbrot') paintMandelbrot(ctx, canvas.width, canvas.height, p);
     else if (kind === 'julia') paintJulia(ctx, canvas.width, canvas.height, p);
     else paintLorenz(ctx, canvas.width, canvas.height, p);

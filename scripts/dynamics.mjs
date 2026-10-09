@@ -26,7 +26,10 @@ export function generateDynamics({ root = ROOT, vault = process.env.JUNG_VAULT |
   const shape = validateCuration(curation);
   if (shape.length) throw new Error(shape.join('\n'));
   if (!curation.concepts.length) {
+    // --check never passes vacuously: with no concepts there is nothing to verify, and a published file with no curation
+    // behind it is a failure, not an absence
     if (check && exists) throw new Error(`${TARGET} exists but ${CURATION} curates no concepts; remove the published file deliberately, or curate the concepts`);
+    if (check) return { status: 'none', message: 'no concepts curated: nothing to check' };
     return { status: 'none', message: exists ? `no concepts curated; ${TARGET} is left as it is` : 'no concepts curated; nothing written' };
   }
   const field = JSON.parse(fs.readFileSync(path.join(root, 'public/data/field.json'), 'utf8'));
