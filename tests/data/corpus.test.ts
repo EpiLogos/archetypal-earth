@@ -55,6 +55,19 @@ describe('corpus index (citation deep links)', () => {
     expect(page!.text.length).toBeGreaterThan(200);
   });
 
+  it('resolves a lane volume by its printed page: Burt p. 9 opens the pdf page behind it', () => {
+    const burt = loadWork('burt-zodiac');
+    expect(burt.pages.length).toBeGreaterThan(500);
+    // the sky card's Burt cites carry the verified pdf page in the locator; the
+    // book's own printed page is what the reader knows, and the corpus keeps it
+    const ref = resolveInWork(burt, 'p. 9 (pdf p31)');
+    expect(ref).not.toBeNull();
+    expect(ref!.page).toBe(31);
+    expect(ref!.print).toBe('9');
+    expect(ref!.text).toContain('Aries energy');
+    expect(ref!.para).toBeUndefined();
+  });
+
   it('keeps page-true anchors for ¶ numbers that restart across essays', () => {
     // same ¶ number twice in one volume resolves by the cited page
     const dup = cw09ii.paras.filter((p) => p.para === 1);

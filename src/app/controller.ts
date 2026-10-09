@@ -189,6 +189,7 @@ export class Controller {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onClose: () => this.stepBack(),
+      passage: this.passage.bridge(),
     });
     this.sidecar = new SidecarClient({ base: SIDECAR_BASE, local: isLocalHost() });
     this.birthPanel = new BirthPanel(this.skyView.birthHost, {

@@ -11,6 +11,7 @@ import type { BodyKey, SkyBody, SkyCite, SkyData, SkyReading, SkyTie } from '../
 import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort, shortLocator, shortWork } from '../ui/format';
+import type { PassageBridge } from '../ui/passage';
 import type { SkyEphemeris } from './ephemeris';
 import { signOf } from './frames';
 import { moonPhase, nextSyzygies } from './luminaries';
@@ -22,6 +23,8 @@ export interface SkyCardHandlers {
   /** open one of the body's earth-bound occurrences, leaving the sky for the field */
   onOccurrence(id: string): void;
   onClose(): void;
+  /** the corpus bridge: a Burt cite is a link only when her book stands in the corpus (wave 4) */
+  passage?: PassageBridge;
 }
 
 /** What each basis says, in the words the card shows (and the tooltip explains). */
@@ -166,10 +169,18 @@ export class SkyCard {
     if (body.quotes?.length) {
       text.append(el('details', { class: 'aion-sources sky-burt' }, [
         el('summary', { text: 'Kathleen Burt · Archetypes of the Zodiac' }),
-        ...body.quotes.map((q) => el('blockquote', {}, [
-          el('p', { text: `“${q.text}”` }),
-          el('cite', { text: `p. ${q.bookPage ?? q.page}${q.chapter ? ` · ${q.chapter}` : ''}` }),
-        ])),
+        ...body.quotes.map((q) => {
+          const citeText = `p. ${q.bookPage ?? q.page}${q.chapter ? ` · ${q.chapter}` : ''}`;
+          // wave 4 put her pages in the corpus: the cite opens the page it was verified against
+          const cite = this.h.passage?.known('burt-zodiac')
+            ? el('button', {
+              class: 'link-quiet dp-cite-link', type: 'button', text: citeText,
+              title: 'Open the page in the corpus', 'aria-label': `${citeText} — open the page`,
+              onclick: () => this.h.passage!.open('burt-zodiac', `p. ${q.bookPage ?? q.page} (pdf p${q.page})`),
+            })
+            : el('cite', { text: citeText });
+          return el('blockquote', {}, [el('p', { text: `“${q.text}”` }), cite]);
+        }),
       ]));
     }
 
