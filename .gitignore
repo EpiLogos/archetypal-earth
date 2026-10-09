@@ -12,3 +12,4 @@ ephemeris/__pycache__/
 dist-downloads/
 .central/
 ProjectCentral/
+.vercel
