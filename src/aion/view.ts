@@ -7,8 +7,9 @@ import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage } from '../types/history';
 import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
+import { passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
-import { epochAt, eventOccurrences } from './model';
+import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 
@@ -161,16 +162,34 @@ export class AionView {
     }
   }
 
-  private sources(passages: Passage[]): HTMLElement {
-    const cite = (p: Passage) => {
-      const text = `${p.work} · ${p.locator}`;
-      const mark = p.basis === 'S' ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' }) : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
-      if (!this.passages?.known(p.work)) return el('cite', {}, [mark, text]);
-      return el('cite', {}, [mark, el('button', { class: 'link-quiet', type: 'button', text, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })]);
-    };
-    return el('details', { class: 'aion-sources' }, [el('summary', { text: 'Read the source' }), ...passages.map(p => el('blockquote', {}, [
-      el('p', { text: p.text }), cite(p),
-    ]))]);
+  /** The passage a card leads with: the first Jung's own text grounds (basis J, the default), else the first. */
+  private keyPassage(passages: Passage[]): Passage | undefined {
+    return passages.find(p => (p.basis ?? 'J') === 'J') ?? passages[0];
+  }
+
+  /** One passage as an open quotation, its cite in the same voice as every other cite in the field. */
+  private quote(p: Passage): HTMLElement {
+    const line = passageLine(this.model, p.work, p.locator);
+    const cite = this.passages?.known(p.work)
+      ? el('button', { class: 'link-quiet', type: 'button', text: line, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })
+      : line;
+    const mark = p.basis === 'S'
+      ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' })
+      : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
+    return el('blockquote', { class: 'dp-def' }, [el('p', { text: p.text }), el('footer', {}, [cite, ' ', mark])]);
+  }
+
+  /** The key passage, open, before the body. */
+  private keyQuote(passages: Passage[]): HTMLElement[] {
+    const key = this.keyPassage(passages);
+    return key ? [this.quote(key)] : [];
+  }
+
+  /** Every other passage, quietly, after the links. */
+  private moreSources(passages: Passage[]): HTMLElement[] {
+    const key = this.keyPassage(passages);
+    const rest = passages.filter(p => p !== key);
+    return rest.length ? [el('details', { class: 'aion-sources' }, [el('summary', { text: 'More from the text' }), ...rest.map(p => this.quote(p))])] : [];
   }
 
   private closeButton() {
@@ -196,9 +215,11 @@ export class AionView {
       if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
     }
     for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
+    text.before(plate(epochHeroImage(this.model, this.reading!, epoch), { className: 'rv-hero', credit: true, palette: epoch.palette, alt: epoch.name }));
     text.append(el('p', { class: 'aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
-      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
-      links, this.sources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
+      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }),
+      ...this.keyQuote(epoch.passages), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
+      links, ...this.moreSources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
   }
 
   private showEvent(event: AeonEvent, move: boolean) {
@@ -209,11 +230,8 @@ export class AionView {
       if (Number.isFinite(event.lat) && Number.isFinite(event.lon)) this.engine.rig.flyTo(event.lat!, event.lon!, 2.8, { duration: 1.8 });
     }
     const text = this.openCard();
-    const specific = event.occurrenceIds.map(id => this.model.occIndex.get(id)).find(i => i !== undefined);
-    const image = specific !== undefined ? this.model.occ[specific].image : undefined;
-    if (image) text.before(plate(image, { className: 'rv-hero', credit: true }));
-    text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
-      el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...event.body.map(text => el('p', { class: 'rv-para', text })), this.sources(event.passages));
+    const epoch = this.reading!.epochs.find(e => e.id === event.epochId);
+    text.before(plate(eventHeroImage(this.model, event), { className: 'rv-hero', credit: true, palette: epoch?.palette, alt: event.name }));
     const links = el('div', { class: 'aion-links' });
     for (const id of event.archetypeIds ?? []) {
       const archetype = this.model.archById.get(id);
@@ -227,7 +245,9 @@ export class AionView {
       const i = this.model.occIndex.get(id);
       if (i !== undefined) links.append(el('button', { type: 'button', class: 'link-quiet', text: this.model.occ[i].label, onclick: () => this.navigate({ view: { kind: 'manifest', occId: id, context: { type: 'family', id: this.model.occ[i].familyId } }, deep: false }) }));
     }
-    text.append(links, skyClockDisclosure(this.reading!, event));
+    text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
+      el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...this.keyQuote(event.passages), ...event.body.map(text => el('p', { class: 'rv-para', text })),
+      links, ...this.moreSources(event.passages), skyClockDisclosure(this.reading!, event));
   }
 
   private showThreadEvent() {
