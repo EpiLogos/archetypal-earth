@@ -1,5 +1,6 @@
 import type { History, HistoryReading, Epoch, AeonEvent } from '../types/history';
-import type { Model } from '../data/model';
+import type { ImageRef } from '../types/field';
+import { occurrenceImage, type Model } from '../data/model';
 
 /** Nested intervals are half-open; the narrowest epoch supplies the atmosphere. */
 export function epochAt(reading: HistoryReading, year: number): Epoch | undefined {
@@ -15,6 +16,44 @@ export function eventOccurrences(model: Model, event: AeonEvent): number[] {
   }
   for (const id of event.familyIds) for (const i of model.famOcc.get(id) ?? []) indices.add(i);
   return [...indices].sort((a, b) => model.occ[a].year - model.occ[b].year);
+}
+
+/** An epoch and every epoch nested inside it (the two fishes inside Pisces). */
+function spanIds(reading: HistoryReading, epoch: Epoch): Set<string> {
+  const ids = new Set([epoch.id]);
+  for (let grew = true; grew;) {
+    grew = false;
+    for (const e of reading.epochs) if (e.parentId && ids.has(e.parentId) && !ids.has(e.id)) { ids.add(e.id); grew = true; }
+  }
+  return ids;
+}
+
+/**
+ * The hero of an event: its first gathered occurrence's own image (or that occurrence's family image), then the
+ * first family with an image, then the first archetype with one. Undefined leaves the card a tonal plate.
+ */
+export function eventHeroImage(model: Model, event: AeonEvent): ImageRef | undefined {
+  for (const id of event.occurrenceIds) {
+    const i = model.occIndex.get(id);
+    if (i !== undefined) { const image = occurrenceImage(model, model.occ[i]); if (image) return image; }
+  }
+  for (const id of event.familyIds) { const image = model.famById.get(id)?.image; if (image) return image; }
+  for (const id of event.archetypeIds ?? []) { const image = model.archById.get(id)?.image; if (image) return image; }
+  return undefined;
+}
+
+/**
+ * The hero of an epoch: the archetypes it names, then the families of the events inside it (nested epochs
+ * included), the most-cited family first. Undefined leaves the card a tonal plate in the epoch's palette.
+ */
+export function epochHeroImage(model: Model, reading: HistoryReading, epoch: Epoch): ImageRef | undefined {
+  for (const id of epoch.archetypeIds ?? []) { const image = model.archById.get(id)?.image; if (image) return image; }
+  const inside = spanIds(reading, epoch);
+  const counts = new Map<string, number>();
+  for (const event of reading.events) if (inside.has(event.epochId)) for (const id of event.familyIds) counts.set(id, (counts.get(id) ?? 0) + 1);
+  const ranked = [...counts].sort((a, b) => b[1] - a[1]).map(([id]) => id);
+  for (const id of ranked) { const image = model.famById.get(id)?.image; if (image) return image; }
+  return undefined;
 }
 
 export function historyExtent(history: History): { from: number; to: number } | undefined {
