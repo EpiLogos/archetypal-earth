@@ -22,6 +22,25 @@ export function clear(node: Element) {
   while (node.firstChild) node.removeChild(node.firstChild);
 }
 
+/** Controls inside a read surface keep their own single-click behaviour: a double-click on them does nothing new. */
+const CONTROL = 'a, button, summary, input, select, textarea, [role="button"], [role="link"], .rv-close, .link-quiet';
+
+/**
+ * A double-click on a card surface opens its reading (SPEC §12: layer 3 is one gesture away from layer 1).
+ * The same action the surface's own 'Reading' link takes; no visible affordance is added.
+ * A double-click on an interactive control inside the surface is left to that control, and the word
+ * selection the gesture made is cleared before `open` runs.
+ */
+export function onReadGesture(surface: HTMLElement, open: () => void): void {
+  surface.addEventListener('dblclick', (e) => {
+    const target = e.target instanceof Element ? e.target : null;
+    const control = target?.closest(CONTROL);
+    if (control && control !== surface && surface.contains(control)) return;
+    globalThis.getSelection?.()?.removeAllRanges();
+    open();
+  });
+}
+
 export interface PlateOptions {
   /** show credit · license over the image, in small type */
   credit?: boolean;

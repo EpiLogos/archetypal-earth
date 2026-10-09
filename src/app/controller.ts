@@ -19,7 +19,7 @@ import { Reveal } from '../ui/reveal';
 import { SearchUI } from '../ui/search';
 import { Strip } from '../ui/strip';
 import { TimeControl } from '../ui/time-control';
-import { isNarrow } from '../ui/dom';
+import { isNarrow, onReadGesture } from '../ui/dom';
 import { eraShort } from '../data/text';
 import { GraphView, type Insets } from '../graph/view';
 import { ModeSwitch } from '../graph/switch';
@@ -43,7 +43,7 @@ import { chartMoment } from '../sky/chart';
 import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import { approachDist, isApproachBody, skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -121,6 +121,10 @@ export class Controller {
   /** the next sky transition came from the user's own zoom: the camera is theirs, do not fly it */
   private skyByGesture = false;
   private pendingSkyEntry: 'instant' | 'fly' | null = null;
+  /** the planet or Sun the camera is approaching for its open card, as the layer was last told (null: none) */
+  private approachOn: BodyKey | null = null;
+  /** bumped by each change of approach: a flight's follow-on from an earlier change does nothing */
+  private approachTok = 0;
 
   constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, history?: History, corpus?: CorpusIndex | null, redbook?: RedBook) {
     this.rel = new Float32Array(m.occ.length);
@@ -133,6 +137,8 @@ export class Controller {
     this.floats = new Floats(root, (t) => this.onFloatSelect(t));
     this.floats.obstacles = () => [this.labelRect];
     this.label = new FocusLabel(root);
+    // the focus card: a double-click opens the subject's reading, as its 'Reading' link does
+    onReadGesture(this.label.root, () => { if (this.state.view.kind === 'focus') this.setDeep(true); });
     this.reveal = new Reveal(root, m, {
       onParallel: (id) => this.openOccurrenceId(id),
       onThread: () => this.followThread(),
@@ -152,6 +158,7 @@ export class Controller {
     this.strip = new Strip(root, m, {
       onSelect: (i) => this.tourJump(i),
       onOpen: (i) => this.tour && this.openOccurrence(this.tour.steps[i].occ),
+      onRead: (i) => this.tourRead(i),
     });
     this.hover = new HoverLabel(root);
     this.timeControl = new TimeControl(root, m, time, () => this.onUserTime());
@@ -366,6 +373,15 @@ export class Controller {
   private openOccurrenceId(id: string) {
     const next = this.occurrenceState(this.state, id);
     if (next) this.navigate(next);
+  }
+
+  /** A thumbnail's double-click: the step (if it is not already the current one), then its reading, in the thread. */
+  private tourRead(i: number) {
+    const t = this.tour;
+    if (!t || !t.steps[i]) return;
+    if (t.i !== i) this.tourJump(i);
+    const next = this.occurrenceState(this.state, this.m.occ[t.steps[i].occ].id);
+    if (next) this.navigate({ ...next, deep: true });
   }
 
   /** The manifestation state for an occurrence, keeping the context it was reached from when it still holds. */
@@ -673,6 +689,7 @@ export class Controller {
       document.body.classList.add('sky-ready');
       if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
       this.pendingSkyEntry = null;
+      this.syncApproach();
       if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
@@ -684,7 +701,7 @@ export class Controller {
     });
   }
 
-  /** Carry the camera out to the whole system, in the default orientation for the moment. */
+  /** Carry the camera out to the whole system, in the default orientation for the moment (a planet's card lands on it). */
   private enterSkyView(instant: boolean) {
     const layer = this.skyLayer;
     if (!layer) return;
@@ -694,7 +711,62 @@ export class Controller {
     const ll = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
     e.rig.interacted = true;
     document.body.classList.add('interacted');
-    e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+    const key = this.approachFor(this.state.sky);
+    this.approachOn = key;
+    layer.setApproach(key, instant);
+    if (key) e.rig.flyTo(ll.lat, ll.lon, this.approachDistOf(key, aspect), { instant, duration: 3.2 });
+    else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+  }
+
+  /** The body the camera approaches for its open card: a planet or the Sun, with no birth sky standing. */
+  private approachFor(sky: AppState['sky']): BodyKey | null {
+    return sky?.body && !sky.birth && isApproachBody(sky.body) ? sky.body : null;
+  }
+
+  /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
+  private approachDistOf(key: BodyKey, aspect: number): number {
+    const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
+    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect);
+  }
+
+  /**
+   * The sky's approach follows the open card: a planet's card eases the look-at onto the planet and flies the camera to
+   * its disc, keeping the current orientation; any other state (no card, the Moon, Earth, a birth sky) flies the camera
+   * back to the system home. Idempotent: it acts only when the approached body changes.
+   */
+  private syncApproach() {
+    const layer = this.skyLayer;
+    if (!layer) return;
+    const key = this.approachFor(this.state.sky);
+    if (key === this.approachOn) return;
+    const from = this.approachOn;
+    this.approachOn = key;
+    const tok = ++this.approachTok;
+    layer.setApproach(key);
+    const e = this.engine;
+    const aspect = e.width / Math.max(1, e.height);
+    const c = e.rig.centre();
+    if (key && from) {
+      // planet for planet: pull back until both stand in the view, then approach the new one (no sweep through empty space)
+      const a = layer.positionOf(from);
+      const b = layer.positionOf(key);
+      const span = a && b ? a.distanceTo(b) : 0;
+      e.rig.flyTo(c.lat, c.lon, Math.min(e.rig.maxDist, Math.max(this.approachDistOf(key, aspect), span)), { duration: 1.6 });
+      e.rig.onFlyEnd(() => {
+        if (tok !== this.approachTok || this.approachOn !== key) return;
+        const now = e.rig.centre();
+        e.rig.flyTo(now.lat, now.lon, this.approachDistOf(key, aspect), { duration: 1.6 });
+      });
+      return;
+    }
+    e.rig.flyTo(c.lat, c.lon, key ? this.approachDistOf(key, aspect) : systemHomeDist(aspect, FOV), { duration: 3.2 });
+  }
+
+  /** The sky is left: the approach lets go (the look-at eases back to the Sun; the caller's flight brings the camera). */
+  private releaseApproach() {
+    this.approachOn = null;
+    this.approachTok++;
+    this.skyLayer?.setApproach(null);
   }
 
   /** The label for a body under the standing culture: its table name where there is one, else the default. */
@@ -740,6 +812,7 @@ export class Controller {
       else if (!this.skyFailed) this.pendingSkyEntry = first ? 'instant' : 'fly';
     } else if (!on && prev.sky) {
       this.pendingSkyEntry = null;
+      this.releaseApproach();
       if (this.skyByGesture) this.skyByGesture = false;
       else if (!reframed) {
         // leave the way we came: the same orientation, down to the Earth
@@ -748,6 +821,8 @@ export class Controller {
         rig.flyTo(c.lat, c.lon, this.worldDist(), { duration: 3.4 });
       }
     }
+    // the open card's body is what the camera approaches (a no-op where the entry above has already framed it)
+    if (on) this.syncApproach();
   }
 
   // ── the birth sky ─────────────────────────────────────────────────────
@@ -847,7 +922,8 @@ export class Controller {
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
     if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || rig.flying) return;
-    const d = rig.dist;
+    // the stage's distance, not the rig's: an approach to a planet holds the camera close to it, and is not a zoom to the Earth
+    const d = this.engine.stageDist;
     if (!this.state.sky && d > SKY_ENTER) {
       this.skyByGesture = true;
       this.navigate(inSky());
@@ -1010,8 +1086,9 @@ export class Controller {
     if (s.deep && s.view.kind !== 'world') {
       if (!narrow) x = -0.46;
     } else if (s.view.kind === 'manifest' || s.sky?.body) {
-      // a card stands on the right (or the bottom, on a phone): the scene gives it room
-      if (narrow) y = 0.34; else x = -0.27;
+      // a card stands on the right (or the bottom, on a phone): the scene gives it room. An approached planet's disc
+      // is centred in the space the sheet leaves above it, so the disc is not drawn under the sheet.
+      if (narrow) y = this.approachFor(s.sky) ? 0.56 : 0.34; else x = -0.27;
     } else if (s.view.kind === 'thread') {
       y = narrow ? 0.1 : 0.1;
     } else if (s.view.kind === 'focus' && narrow) {
