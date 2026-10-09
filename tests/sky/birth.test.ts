@@ -150,8 +150,8 @@ describe('the sidecar client asks exactly what the golden recorded, and explains
     const broken = structuredClone(summer.chart) as Record<string, any>;
     delete broken.bodies.venus;
     const client = new SidecarClient({ base: 'http://sidecar', local: true, fetch: fakeFetch({ [summer.requests.chart]: broken, [summer.requests.planets]: { ...summer.window.planets, bodies: { ...summer.window.planets.bodies, mars: { lon: [1], lat: [1], r: [1] } } }, [summer.requests.moon]: summer.window.moon }) });
-    await expect(client.chart(summer.input)).rejects.toMatchObject({ kind: 'unsupported', message: expect.stringMatching(/bodies\.venus: missing/) });
-    await expect(client.window(chartMoment(chartOf(summer)))).rejects.toMatchObject({ kind: 'unsupported', message: expect.stringMatching(/malformed mars column/) });
+    await expect(client.chart(summer.input)).rejects.toMatchObject({ kind: 'unsupported', message: expect.stringMatching(/malformed/) });
+    await expect(client.window(chartMoment(chartOf(summer)))).rejects.toMatchObject({ kind: 'unsupported', message: expect.stringMatching(/malformed \(mars column\)/) });
   });
 
   it('filters place answers that are not places', async () => {

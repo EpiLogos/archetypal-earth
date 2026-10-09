@@ -1,5 +1,5 @@
 {
- "_note": "Family curation. `merges` folds vault instance_of targets that have no note into an existing family. `families.<slug>` may override name, oneLine, body (plain site prose, never Jung's words), spectrum.position, palette.",
+ "_note": "Family curation. `merges` folds vault instance_of targets that have no note into an existing family. `families.<slug>` may override name, oneLine, body (plain site prose, never Jung's words), spectrum.position, palette. `definitionPick` selects verbatim records from the vault data/mentions.jsonl (vol + para + quote prefix) for a family definition — the quote is never typed here; a pick that does not match verbatim is omitted loudly by the ingest.",
  "merges": {
   "quaternion": "quaternity",
   "cauda-pavonis": "peacock",
@@ -68,7 +68,14 @@
   },
   "churinga": {
    "name": "Churinga",
-   "oneLine": "Decorated sacred stones of Central Australian tribes, bearers of ancestral soul."
+   "oneLine": "Decorated sacred stones of Central Australian tribes, bearers of ancestral soul.",
+   "definitionPick": [
+    {
+     "vol": "cw08",
+     "para": 119,
+     "starts": "The churinga of the Australian aborigines is a similar energ"
+    }
+   ]
   },
   "circle": {
    "name": "Circle",
@@ -569,6 +576,898 @@
   "greening-tree": {
    "name": "Greening tree",
    "oneLine": "The greening man growing from the temple’s ruins — nature overtaking the ideal."
+  },
+  "ahasuerus": {
+   "definitionPick": [
+    {
+     "vol": "cw05",
+     "para": 281,
+     "starts": "Ahasuerus is the Wandering Jew, whose main characteristic wa"
+    }
+   ]
+  },
+  "animus-figure": {
+   "definitionPick": [
+    {
+     "vol": "cw05",
+     "para": 462,
+     "starts": "Chiwantopel is a typical animus-figure, that is to say, a pe"
+    }
+   ]
+  },
+  "bardo": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 831,
+     "starts": "The text falls into three parts. The first part, called Chik"
+    }
+   ]
+  },
+  "bear": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "In later life, too, whenever something is about the female i"
+    },
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "In Switzerland, after all, we had a bear goddess. In the His"
+    }
+   ]
+  },
+  "big-dream": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 1159,
+     "starts": "There are, however, comparatively rare dreams (the “big” dre"
+    }
+   ]
+  },
+  "black-man": {
+   "definitionPick": [
+    {
+     "vol": "cw04",
+     "para": 733,
+     "starts": "it seemed to him that a wicked black man with a sword or a g"
+    }
+   ]
+  },
+  "bread": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "Bread means, in the language of symbols, the nurturing subst"
+    }
+   ]
+  },
+  "carcinoma": {
+   "definitionPick": [
+    {
+     "vol": "cw17",
+     "para": 313,
+     "starts": "the idea of the carcinoma has imagined itself in him without"
+    }
+   ]
+  },
+  "castration": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 823,
+     "starts": "the operation affects an organ that is the object of a colle"
+    }
+   ]
+  },
+  "celestial-city": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 269,
+     "starts": "Strive therefore to know yourselves, and ye shall be aware t"
+    }
+   ]
+  },
+  "chance-series": {
+   "definitionPick": [
+    {
+     "vol": "cw10",
+     "para": 121,
+     "starts": "The law of the duplication of cases is known to all doctors "
+    }
+   ]
+  },
+  "chronos": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "The vizier in turn brought the ring to the bey, and there wa"
+    }
+   ]
+  },
+  "circumambulatio": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "the circumambulatio, which is one of the origins of the mand"
+    }
+   ]
+  },
+  "clairvoyance": {
+   "definitionPick": [
+    {
+     "vol": "sup-zofingia",
+     "para": 129,
+     "starts": "In this letter Kant describes how Swedenborg, while he was i"
+    }
+   ]
+  },
+  "clear-light": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 837,
+     "starts": "O nobly-born, thy present intellect, in real nature void, no"
+    },
+    {
+     "vol": "cw11",
+     "para": 838,
+     "starts": "This realization is the Dharmakāya state of perfect enlighte"
+    }
+   ]
+  },
+  "cloud": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 610,
+     "starts": "I came out of the mouth of the most High, and covered the ea"
+    }
+   ]
+  },
+  "cosmic-catastrophe": {
+   "definitionPick": [
+    {
+     "vol": "cw03",
+     "para": 522,
+     "starts": "They appear in projection as earthquakes, cosmic catastrophe"
+    }
+   ]
+  },
+  "crab": {
+   "definitionPick": [
+    {
+     "vol": "cw07",
+     "para": 138,
+     "starts": "The crab is therefore the symbol for the unconscious content"
+    }
+   ]
+  },
+  "daemon": {
+   "definitionPick": [
+    {
+     "vol": "cw04",
+     "para": 727,
+     "starts": "the power which shapes the life of the psyche has the charac"
+    }
+   ]
+  },
+  "diamond-body": {
+   "definitionPick": [
+    {
+     "vol": "cw09i",
+     "para": 637,
+     "starts": "In Chinese alchemy this state is called the \"Diamond Body,\" "
+    }
+   ]
+  },
+  "dioscuri": {
+   "definitionPick": [
+    {
+     "vol": "cw09ii",
+     "para": 134,
+     "starts": "The Greeks interpreted them as the Dioscuri ('boys of Zeus')"
+    }
+   ]
+  },
+  "elijah": {
+   "definitionPick": [
+    {
+     "vol": "sem-1925",
+     "para": null,
+     "starts": "Elijah is the personification of the cognitional element, Sa"
+    }
+   ]
+  },
+  "fates": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "Here one would also have to mention the Graeae, the three of"
+    },
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "Worthy of consideration as a further parallel are also the t"
+    }
+   ]
+  },
+  "father-imago": {
+   "definitionPick": [
+    {
+     "vol": "cw04",
+     "para": 728,
+     "starts": "For the parental imago is possessed of a quite extraordinary"
+    },
+    {
+     "vol": "cw04",
+     "para": 728,
+     "starts": "Freud was of the opinion that all “divine” figures have thei"
+    }
+   ]
+  },
+  "faust-figure": {
+   "definitionPick": [
+    {
+     "vol": "cw15",
+     "para": 159,
+     "starts": "It is not Goethe that creates Faust, but Faust that creates "
+    }
+   ]
+  },
+  "fettered-soul": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": null,
+     "starts": "This idea was formulated in the conception of the “anima in "
+    },
+    {
+     "vol": "cw11",
+     "para": null,
+     "starts": "Those “enchained in Hades” are mentioned very early on, in t"
+    }
+   ]
+  },
+  "ghost": {
+   "definitionPick": [
+    {
+     "vol": "cw08",
+     "para": 522,
+     "starts": "The unconscious imago, which no longer has an object to corr"
+    }
+   ]
+  },
+  "harlequin": {
+   "definitionPick": [
+    {
+     "vol": "cw15",
+     "para": 214,
+     "starts": "Harlequin is a tragically ambiguous figure, even though—as t"
+    }
+   ]
+  },
+  "house": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "the house is a symbol of a most complete system of adaptatio"
+    }
+   ]
+  },
+  "hypnagogic-imagery": {
+   "definitionPick": [
+    {
+     "vol": "cw01",
+     "para": 101,
+     "starts": "It is very probable that hypnagogic images are identical wit"
+    }
+   ]
+  },
+  "incubus": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "The Romans called those wood people sylvani, which leads rig"
+    }
+   ]
+  },
+  "jewel": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "The great jewel in Buddhism, the mani, is of course of Brahm"
+    }
+   ]
+  },
+  "koan": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 894,
+     "starts": "The koan is understood to be a paradoxical question, stateme"
+    }
+   ]
+  },
+  "labrys": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 416,
+     "starts": "Take as an example the image of the double adze that occurs "
+    }
+   ]
+  },
+  "laughter": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "That coffin full of laughter is the paradoxical pair of oppo"
+    }
+   ]
+  },
+  "leopard": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "You see, that was the old animus that was no good any longer"
+    }
+   ]
+  },
+  "liver": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "he was not only chained to the rocks but an eagle was consta"
+    }
+   ]
+  },
+  "louse": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "Yes, the lice are vampires, often also spirits."
+    },
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "When a child is born in the Caucasus Mountains, they take a "
+    }
+   ]
+  },
+  "mana": {
+   "definitionPick": [
+    {
+     "vol": "cw16",
+     "para": 4,
+     "starts": "This fact finds the simplest and most nearly perfect express"
+    }
+   ]
+  },
+  "marriage-quaternio": {
+   "definitionPick": [
+    {
+     "vol": "cw16",
+     "para": 425,
+     "starts": "These counter-crossing transference relationships are foresh"
+    }
+   ]
+  },
+  "materialization": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "I should make it clear here that we use our libido for such "
+    },
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "And we know, in cases of materialization, that it is chiefly"
+    }
+   ]
+  },
+  "melothesia": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": null,
+     "starts": "The “blood-letting manikins” are melothesiae. [These are the"
+    }
+   ]
+  },
+  "microcosm": {
+   "definitionPick": [
+    {
+     "vol": "cw10",
+     "para": 540,
+     "starts": "The helpful medieval view that man is a microcosm, a reflect"
+    }
+   ]
+  },
+  "monocolus": {
+   "definitionPick": [
+    {
+     "vol": "cw14",
+     "para": 720,
+     "starts": "On the left there is a crowned man in a yellow robe, and on "
+    },
+    {
+     "vol": "cw14",
+     "para": 720,
+     "starts": "It seems to me that this must be an alchemical [technical te"
+    }
+   ]
+  },
+  "nekyia": {
+   "definitionPick": [
+    {
+     "vol": "cw15",
+     "para": 213,
+     "starts": "The Nekyia is no aimless and purely destructive fall into th"
+    }
+   ]
+  },
+  "noahs-ark": {
+   "definitionPick": [
+    {
+     "vol": "cw17",
+     "para": 32,
+     "starts": "“I had a dream last night about Noah’s Ark and there were lo"
+    }
+   ]
+  },
+  "pegasus": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "The interesting thing is that Pegasus is entirely symbolic, "
+    }
+   ]
+  },
+  "pentagram": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "The five-rayed star is the pentagram, and because it is the "
+    }
+   ]
+  },
+  "philemon": {
+   "definitionPick": [
+    {
+     "vol": "redbook",
+     "para": null,
+     "starts": "He recalled that Philemon evolved out of the figure of Elija"
+    },
+    {
+     "vol": "redbook",
+     "para": null,
+     "starts": "It was he who taught me psychic objectivity, the reality of "
+    }
+   ]
+  },
+  "placenta": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "they believe that man always has a double, the double being "
+    }
+   ]
+  },
+  "polestar": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "This is because the archetype of the North Pole has a center"
+    }
+   ]
+  },
+  "possession": {
+   "definitionPick": [
+    {
+     "vol": "cw09i",
+     "para": 221,
+     "starts": "One of the most important forms is the phenomenon of possess"
+    }
+   ]
+  },
+  "premonition": {
+   "definitionPick": [
+    {
+     "vol": "sup-zofingia",
+     "para": 131,
+     "starts": "The theory of long-range effects in time is among the most o"
+    }
+   ]
+  },
+  "puer-aeternus": {
+   "definitionPick": [
+    {
+     "vol": "cw05",
+     "para": 393,
+     "starts": "The lovely apparition of the puer aeternus is, alas, a form "
+    }
+   ]
+  },
+  "quincunx": {
+   "definitionPick": [
+    {
+     "vol": "cw10",
+     "para": 738,
+     "starts": "This is a symbol of the quinta essentia, which is identical "
+    }
+   ]
+  },
+  "radioactive-nucleus": {
+   "definitionPick": [
+    {
+     "vol": "letters-pauli",
+     "para": null,
+     "starts": "The radioactive nucleus is an excellent symbol for the IIOII"
+    }
+   ]
+  },
+  "ragnarok": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "When the world of consciousness is invalidated, the world fi"
+    }
+   ]
+  },
+  "ram": {
+   "definitionPick": [
+    {
+     "vol": "sem-kundalini",
+     "para": null,
+     "starts": "In maõipÖra the ram is the symbolic animal, and the ram is t"
+    }
+   ]
+  },
+  "redeemer-figure": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 1744,
+     "starts": "the figure of the redeemer is universal because it partakes "
+    }
+   ]
+  },
+  "river": {
+   "definitionPick": [
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "he becomes aware that they are nothing but the surface of a "
+    }
+   ]
+  },
+  "satori": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 877,
+     "starts": "“Satori is the raison d’être of Zen without which Zen is not"
+    }
+   ]
+  },
+  "saturn": {
+   "definitionPick": [
+    {
+     "vol": "cw09ii",
+     "para": 215,
+     "starts": "Saturn, in astrology the \"star of the sun,\" is alchemically "
+    }
+   ]
+  },
+  "scapegoat": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 210,
+     "starts": "This is the deeper meaning of the fact that Christ as the re"
+    }
+   ]
+  },
+  "scorpion": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": null,
+     "starts": "One of its symbols is the scorpion, which stings itself to d"
+    }
+   ]
+  },
+  "shepherd": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 255,
+     "starts": "The spiritual teacher who appears to Hermas is called the Po"
+    }
+   ]
+  },
+  "sibyl": {
+   "definitionPick": [
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "such stories, where boys or little girls functioned as mediu"
+    },
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "They discovered a list of the servants in the house of a Rom"
+    }
+   ]
+  },
+  "soma": {
+   "definitionPick": [
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "Yes, soma is a mythological drink in the Vedic religion, mag"
+    }
+   ]
+  },
+  "soul-image": {
+   "definitionPick": [
+    {
+     "vol": "cw06",
+     "para": 808,
+     "starts": "The soul-image is a specific image (q.v.) among those produc"
+    }
+   ]
+  },
+  "spear": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "It is the spear of Longin us which pierced Christ's side, pr"
+    }
+   ]
+  },
+  "spirit": {
+   "definitionPick": [
+    {
+     "vol": "cw08",
+     "para": 585,
+     "starts": "Spirits, therefore, viewed from the psychological angle, are"
+    }
+   ]
+  },
+  "statue": {
+   "definitionPick": [
+    {
+     "vol": "cw14",
+     "para": 569,
+     "starts": "The statue stands for the inert materiality of Adam, who sti"
+    }
+   ]
+  },
+  "stigmata": {
+   "definitionPick": [
+    {
+     "vol": "cw06",
+     "para": 531,
+     "starts": "The stigmatization of saints in medieval and even in recent "
+    }
+   ]
+  },
+  "sun-woman": {
+   "definitionPick": [
+    {
+     "vol": "cw11",
+     "para": 710,
+     "starts": "there appeared in heaven, after the destruction of Jerusalem"
+    }
+   ]
+  },
+  "tiger": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "the tiger, just like the bull, is always a personification o"
+    }
+   ]
+  },
+  "tightrope-walker": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "this rope-dancer symbolizes Nietzsche himself, though in a w"
+    }
+   ]
+  },
+  "tortoise": {
+   "definitionPick": [
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "The characteristics of the tortoise are the characteristics "
+    }
+   ]
+  },
+  "totem-animal": {
+   "definitionPick": [
+    {
+     "vol": "cw10",
+     "para": 129,
+     "starts": "They explain that the crocodile was a certain old woman in t"
+    }
+   ]
+  },
+  "transitus": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "The concept of the transitus is part of the mystery rituals,"
+    },
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "Transitus means the passing over or the change from one cond"
+    }
+   ]
+  },
+  "triangle": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "that triangle joined to the upper triangle of the trinity wo"
+    }
+   ]
+  },
+  "uebermensch": {
+   "definitionPick": [
+    {
+     "vol": "cw09i",
+     "para": 191,
+     "starts": "the psychology of the \"Superman\" for whom God is dead, and w"
+    }
+   ]
+  },
+  "ufo": {
+   "definitionPick": [
+    {
+     "vol": "cw10",
+     "para": 622,
+     "starts": "They are impressive manifestations of totality whose simple,"
+    }
+   ]
+  },
+  "underworld": {
+   "definitionPick": [
+    {
+     "vol": "cw18",
+     "para": 1252,
+     "starts": "They communicate their frightening, daemonic content to the "
+    }
+   ]
+  },
+  "vajra": {
+   "definitionPick": [
+    {
+     "vol": "cw09i",
+     "para": 636,
+     "starts": "The diamond thunderbolt, the dorje in the centre, symbolizes"
+    }
+   ]
+  },
+  "viriditas": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "The prairie is the desert that starts to turn green. Where t"
+    }
+   ]
+  },
+  "voice": {
+   "definitionPick": [
+    {
+     "vol": "sem-dream-analysis",
+     "para": null,
+     "starts": "That voice was really the beginning of a sort of autonomous "
+    }
+   ]
+  },
+  "volcano": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "I stood on the edge of a volcano. I looked into the crater a"
+    }
+   ]
+  },
+  "wild-man": {
+   "definitionPick": [
+    {
+     "vol": "sem-visions",
+     "para": null,
+     "starts": "it is a man covered with hair, a rather dangerous-looking in"
+    }
+   ]
+  },
+  "wish-dream": {
+   "definitionPick": [
+    {
+     "vol": "cw02",
+     "para": null,
+     "starts": "After the unhappy end of her love-affair the subject had a w"
+    }
+   ]
+  },
+  "witch": {
+   "definitionPick": [
+    {
+     "vol": "cw07",
+     "para": 280,
+     "starts": "She appeared in the dreams as a witch, as a ghost, as a purs"
+    }
+   ]
+  },
+  "world-fire": {
+   "definitionPick": [
+    {
+     "vol": "sem-childrens-dreams",
+     "para": null,
+     "starts": "A long tail of a comet swishes over the Earth; the Earth cat"
+    }
+   ]
+  },
+  "wounded-physician": {
+   "definitionPick": [
+    {
+     "vol": "cw16",
+     "para": 239,
+     "starts": "it is his own hurt that gives the measure of his power to he"
+    }
+   ]
+  },
+  "yin-yang": {
+   "definitionPick": [
+    {
+     "vol": "cw13",
+     "para": 13,
+     "starts": "When yang has reached its greatest strength, the dark power "
+    }
+   ]
+  },
+  "zarathustra-figure": {
+   "definitionPick": [
+    {
+     "vol": "sem-zarathustra",
+     "para": null,
+     "starts": "Zarathustra is a figure of the unconscious that not only liv"
+    }
+   ]
   }
  }
 }

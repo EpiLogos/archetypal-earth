@@ -171,6 +171,26 @@ for (const n of archNotes.filter((x) => !x.failed)) {
   archById[a.id] = a;
   archList.push(a);
 }
+
+// families carry the same rail: a definition is never typed, it is picked verbatim
+// from the vault's own mention records (vol + para + quote prefix), or it is omitted.
+// Seminar and Red Book records carry no paragraph numbers: there the verified prefix
+// alone (plus the volume) identifies the record, and the cite names the pdf page.
+function foldFamilyDefinition(over, fam) {
+  if (!over.definitionPick?.length) return;
+  const recs = over.definitionPick.map((p) => mentions.find((m) => m.vol === p.vol
+    && (p.para == null || Number(m.para) === Number(p.para))
+    && String(m.quote).trimStart().startsWith(p.starts)));
+  if (recs.every(Boolean)) {
+    const p0 = over.definitionPick[0];
+    const wl = workLabel(p0.vol);
+    const short = (wl.bare || wl.title).split(':')[0];
+    fam.definition = {
+      text: collapse(recs.map((r) => r.quote).join(' ')),
+      cite: p0.para != null ? `${short} (${wl.short}) ¶${p0.para}` : `${short} (${wl.short}) pdf p${recs[0].pdf_page}`,
+    };
+  } else warn(`definitionPick for ${fam.id} not found verbatim in mentions.jsonl; definition omitted`);
+}
 for (const k of Object.keys(curArch)) if (!archSlugs.has(k)) warn(`curation archetype ${k} has no vault note`);
 archList.sort((a, b) => (b.prime - a.prime) || a.id.localeCompare(b.id));
 
@@ -206,6 +226,7 @@ for (const n of imgNotes.filter((x) => !x.failed)) {
     synthesised: false,
     _vault: n,
   };
+  foldFamilyDefinition(over, famMap[n.slug]);
 }
 // alias -> family (only unambiguous aliases), so [[snake]] resolves to serpent
 const aliasIndex = {};
@@ -372,6 +393,7 @@ for (const o of occList) {
         oneLine: over.oneLine || null, _form: false, _over: over, archetypes: [], body: (over.body || []).map(collapse),
         occurrenceIds: [], synthesised: true, _vault: null,
       };
+      foldFamilyDefinition(over, famMap[f]);
     }
   }
 }
@@ -474,7 +496,7 @@ const cultures = Object.keys(cultureCount).sort().map((id) => ({
 // ---------- assemble ----------
 const cleanFam = famList.map((f) => {
   const { _aliases, _form, _over, _vault, ...rest } = f;
-  return { id: rest.id, name: rest.name, subtype: rest.subtype, aliases: rest.aliases, oneLine: rest.oneLine, archetypes: rest.archetypes, spectrum: rest.spectrum, palette: rest.palette, body: rest.body, ...(rest.image ? { image: rest.image } : {}), occurrenceIds: rest.occurrenceIds, synthesised: rest.synthesised };
+  return { id: rest.id, name: rest.name, subtype: rest.subtype, aliases: rest.aliases, oneLine: rest.oneLine, archetypes: rest.archetypes, spectrum: rest.spectrum, palette: rest.palette, body: rest.body, ...(rest.definition ? { definition: rest.definition } : {}), ...(rest.image ? { image: rest.image } : {}), occurrenceIds: rest.occurrenceIds, synthesised: rest.synthesised };
 });
 const years = occList.map((o) => o.year);
 const field = {

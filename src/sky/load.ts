@@ -9,6 +9,6 @@ export async function loadSky(): Promise<SkyData> {
   // vite's dev server answers unknown paths with index.html (200) — treat as absent
   if (!res.ok || type.includes('text/html')) throw new Error(`The sky data could not be loaded (HTTP ${res.status} ${type}).`);
   const sky = (await res.json()) as SkyData;
-  if (!sky?.bodies?.length || !sky.planets || !sky.moon || !sky.orbits) throw new Error('The sky data is incomplete; run npm run sky.');
+  if (!sky?.bodies?.length || !sky.planets || !sky.moon || !sky.orbits) throw new Error('The sky data is incomplete.');
   return sky;
 }

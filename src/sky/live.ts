@@ -143,23 +143,22 @@ export class SkyLive {
 }
 
 const hhmm = (ms: number) => formatMoment(ms).slice(11);
-const deg = (d: number) => `${d.toFixed(3)}°`;
 
 /** The sentence the sky wears for a live state: what it is, how it was checked, and when. */
 export function describeLive(s: LiveState): { label: string; detail: string } {
   switch (s.kind) {
     case 'live':
-      return { label: 'Live', detail: `Following the clock, checked against the sidecar at ${hhmm(s.checkedAt)} (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)}).` };
+      return { label: 'Live', detail: `Following the clock, checked at ${hhmm(s.checkedAt)}.` };
     case 'snapshot': {
-      const why = s.why === 'not-local' ? 'The live ephemeris is only reachable when the site runs beside its local sidecar.'
-        : s.why === 'unsupported' ? 'The sidecar did not answer as expected.'
-        : s.why === 'unreachable' ? 'The ephemeris sidecar answered with an error.'
-        : 'The ephemeris sidecar is not running.';
-      return { label: 'Snapshot', detail: `Computed from the generated ephemeris as of ${formatMoment(s.asOf)}; it does not follow the clock. ${why}` };
+      const why = s.why === 'not-local' ? 'The live sky is only reachable from its home machine.'
+        : s.why === 'unsupported' ? 'The live ephemeris did not answer.'
+        : s.why === 'unreachable' ? 'The live ephemeris answered with an error.'
+        : 'The live ephemeris is not running.';
+      return { label: 'Snapshot', detail: `Computed from the ephemeris as of ${formatMoment(s.asOf)}; it does not follow the clock. ${why}` };
     }
     case 'diverged':
-      return { label: 'Snapshot', detail: `Computed from the generated ephemeris as of ${formatMoment(s.asOf)}. The sidecar disagrees with it (Sun ${deg(s.sunDelta)}, Moon ${deg(s.moonDelta)}), so the sky is not called live.` };
+      return { label: 'Snapshot', detail: `Computed from the ephemeris as of ${formatMoment(s.asOf)}. It disagrees with the live check, so it is not called live.` };
     case 'beyond':
-      return { label: 'Beyond the generated sky', detail: `${formatMoment(s.asOf)} lies outside ${s.from.slice(0, 4)}–${Number(s.to.slice(0, 4)) - 1}: the bodies hold their nearest generated positions, and the Earth keeps its own light.` };
+      return { label: 'Beyond the ephemeris', detail: `${formatMoment(s.asOf)} lies outside ${s.from.slice(0, 4)}–${Number(s.to.slice(0, 4)) - 1}: the bodies hold their nearest computed positions, and the Earth keeps its own light.` };
   }
 }

@@ -96,6 +96,9 @@ export class DeepSheet {
       a.append(el('h2', { class: 'dp-title', text: fam.name }));
       if (fam.oneLine) a.append(el('p', { class: 'dp-lede', text: fam.oneLine }));
       if (fam.image) a.append(plate(fam.image, { credit: true, className: 'dp-figure', palette: fam.palette, eager: true }));
+      if (fam.definition) {
+        a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: fam.definition.text }), el('footer', { text: fam.definition.cite })]));
+      }
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
       const symbolic = symbolReading(m, fam.id, id => this.h.onSubject({ type: 'family', id }));
       if (symbolic) a.append(symbolic);
@@ -205,8 +208,6 @@ export class DeepSheet {
   }
 
   private appendFooter() {
-    const meta = this.model.field.meta;
-    const line = meta.vaultLedgerLine ? `Drawn from the Jung archetypal-field vault · ${meta.vaultLedgerLine}` : 'Drawn from the Jung archetypal-field vault';
-    this.article.append(el('p', { class: 'dp-foot', text: line }));
+    this.article.append(el('p', { class: 'dp-foot', text: 'Drawn from the Jung corpus' }));
   }
 }

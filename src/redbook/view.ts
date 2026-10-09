@@ -102,9 +102,9 @@ export class RedBookView {
   /** The plate: a local-only runtime asset — absent outside the dev server, and the note says so. */
   private plate(stop: RedBookStop): HTMLElement | null {
     if (!stop.plate) return null;
-    const img = el('img', { class: 'rv-hero rb-plate', alt: `Facsimile plate ${stop.plate} (${this.model.occIndex.get(stop.id) !== undefined ? 'Liber Novus' : ''})`, src: `${this.mode.plates.urlPrefix}${stop.plate}` }) as HTMLImageElement;
+    const img = el('img', { class: 'rv-hero rb-plate', alt: 'Facsimile plate — Liber Novus', src: `${this.mode.plates.urlPrefix}${stop.plate}` }) as HTMLImageElement;
     const note = el('p', { class: 'rb-plate-note', hidden: true,
-      text: `The facsimile plate (${stop.plate}) is not served — it stays out of every build by licence law and loads only from the vault on this machine (${this.mode.plates.vaultRelativeDir}/${stop.plate}).` });
+      text: 'The facsimile plate for this folio is withheld under the Norton licence; it appears only in the owner\u2019s own copy of Liber Novus.' });
     img.addEventListener('error', () => { img.hidden = true; note.hidden = false; });
     const host = el('div', {}, [img, note]);
     return host;
@@ -128,10 +128,10 @@ export class RedBookView {
     text.append(
       el('p', { class: 'aion-date rv-line', text: [this.sectionName.get(stop.sectionId) ?? '', eraShort(o.yearDisplay, 40)].filter(Boolean).join(' · ') }),
       el('h2', { class: 'rv-name', text: o.title }),
-      el('p', { class: 'rv-para rb-folio', text: `${folio}${folio ? ' · ' : ''}subject: Jung` }),
+      el('p', { class: 'rv-para rb-folio', text: folio }),
     );
     if (stop.plateCaption) text.append(el('p', { class: 'rv-para rb-caption', text: stop.plateCaption }));
-    if (o.quote) text.append(el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: o.quote })]));
+    if (o.quote) text.append(el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${o.quote}”` }), el('footer', { text: o.jung[0] ? jungLine(o.jung[0]) : '' })]));
     for (const para of o.body.filter((p) => !p.startsWith('PLATE ('))) text.append(el('p', { class: 'rv-para', text: para }));
     const links = el('div', { class: 'aion-links' });
     for (const t of fam?.archetypes ?? []) {
@@ -158,7 +158,7 @@ export class RedBookView {
     const text = el('div', { class: 'rv-text' });
     text.append(
       el('h2', { class: 'rv-name', text: 'Genesis' }),
-      el('p', { class: 'rv-para aion-lede', text: 'Every symbol-episode of the book, linked forward to what it became — the archetypal-field vault’s genesis table.' }),
+      el('p', { class: 'rv-para aion-lede', text: 'Each vision of the book, and what it became in Jung\u2019s later work.' }),
     );
     for (const row of this.mode.genesis) text.append(this.genesisRow(row, m));
     body.append(text);

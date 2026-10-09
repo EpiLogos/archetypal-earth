@@ -86,6 +86,17 @@ describe('field.json contract', () => {
     for (const f of field.families) expect(f.oneLine.length, f.id).toBeLessThanOrEqual(90);
   });
 
+  it('family definitions, where present, are quoted passages with a locating cite', () => {
+    let seen = 0;
+    for (const f of field.families) {
+      if (!f.definition) continue;
+      seen++;
+      expect(f.definition.text.length, f.id).toBeGreaterThan(40);
+      expect(f.definition.cite, f.id).toMatch(/¶|pdf p/);
+    }
+    expect(seen, 'the enrichment pass has landed').toBeGreaterThan(50);
+  });
+
   it('parallelIds only reference existing occurrences', () => {
     const ids = new Set(field.occurrences.map((o) => o.id));
     for (const o of field.occurrences) for (const p of o.parallelIds) expect(ids.has(p), `${o.id} -> ${p}`).toBe(true);

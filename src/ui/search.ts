@@ -69,7 +69,7 @@ export class SearchUI {
   private renderList() {
     clear(this.list);
     if (!this.results.length) {
-      if (this.input.value.trim()) this.list.append(el('li', { class: 's-empty', text: 'Nothing resonates yet' }));
+      if (this.input.value.trim()) this.list.append(el('li', { class: 's-empty', text: 'Nothing found' }));
       return;
     }
     this.results.forEach((r, i) => {

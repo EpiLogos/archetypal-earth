@@ -569,17 +569,17 @@
       ],
       "key": "203b15fbde3d4c97",
       "words": 48006,
-      "cached": false
+      "cached": true
     },
-    "stringsChanged": 167,
-    "changes": 558,
+    "stringsChanged": 168,
+    "changes": 559,
     "byKind": {
-      "join": 515,
+      "join": 516,
       "curated": 29,
       "reflow": 13,
       "hyphen-break": 1
     },
-    "unique": 389,
+    "unique": 390,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -2831,6 +2831,15 @@
         "count": 1,
         "where": [
           "occ:rose-mechthild-five-petalled-breast-13c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Longin us",
+        "after": "Longinus",
+        "count": 1,
+        "where": [
+          "fam:spear.definition.text"
         ]
       },
       {
