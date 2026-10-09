@@ -1,0 +1,65 @@
+/* ── the dynamical lens ─────────────────────────────────────────────────────────────────────────────────
+   A third mode beside Aion and the Red Book. The layer is inert and hidden when down (see DynamicsView).
+   Layout constants, documented once here:
+     · the time track sits at bottom 20px (mobile 10px) and is 46px tall, so its top is 66px (56px) up;
+     · the strip stands 10px above that, and its horizontal extent is the track's (the handle's x is the cursor's x);
+     · the reveal card stands 14px above the strip.
+   Stacking matches the other mode layers: the layer at z 10, the reveal at 11, the time control at 12. */
+.dynamics {
+  --dy-strip-h: 84px;
+  --dy-strip-bottom: 76px;
+  --dy-time-w: min(780px, 90vw);
+  --dy-track-l: 112px;
+  --dy-track-r: 44px;
+  position: fixed; inset: 0; z-index: 10; pointer-events: none;
+}
+.dynamics[hidden] { display: none; }
+
+.dy-heading { position: absolute; top: 30px; left: 36px; max-width: min(400px, calc(100vw - 340px)); pointer-events: auto; }
+.dy-heading > h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.1; letter-spacing: -0.006em; color: var(--ink); }
+.dy-basins { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font: 11.5px var(--sans); letter-spacing: 0.04em; }
+.dy-basins button { color: var(--ink-3); transition: color 0.4s; }
+.dy-basins button:hover { color: var(--ink); }
+
+/* the phase strip: one canvas, aligned with the time track above it */
+.dy-strip {
+  position: absolute; margin: 0; pointer-events: none;
+  left: calc(50% - var(--dy-time-w) / 2 + var(--dy-track-l));
+  width: calc(var(--dy-time-w) - var(--dy-track-l) - var(--dy-track-r));
+  bottom: var(--dy-strip-bottom); height: var(--dy-strip-h);
+}
+.dy-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.dy-marks { position: absolute; inset: 0; pointer-events: none; }
+
+/* the voice marks: a V (Van Eenwyk) or a J (Jung), the Aion basis chip's look */
+.dy-chip { flex: none; display: inline-block; min-width: 14px; text-align: center; border: 1px solid var(--hair); border-radius: 3px; padding: 0 4px; font: 9px/1.6 var(--sans); letter-spacing: 0.08em; color: var(--ink-3); }
+.dy-v { position: absolute; transform: translate(-50%, 0); min-width: 11px; padding: 0 3px; font-size: 8px; line-height: 1.5; background: rgb(var(--deep-rgb) / 0.85); color: var(--ink-2); pointer-events: auto; cursor: help; }
+
+/* the reveal card: the Red Book's and Aion's card rules, stood above the strip */
+.reveal.dy-card {
+  bottom: calc(var(--dy-strip-bottom) + var(--dy-strip-h) + 14px);
+  max-height: calc(100vh - var(--dy-strip-bottom) - var(--dy-strip-h) - 52px);
+}
+.dy-hero { margin: 0; }
+.dy-hero-canvas { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.25); outline-offset: 5px; background: rgb(var(--deep-rgb)); }
+.dy-caption { display: block; margin-top: 12px; font: 10px var(--sans); letter-spacing: 0.06em; color: var(--ink-3); }
+.dy-name { margin-top: 0; }
+.dy-name .dy-chip { vertical-align: middle; margin-left: 6px; font-size: 9px; }
+.dy-quote { margin: 18px 0 4px; }
+.dy-quote footer .dy-chip { flex: none; }
+.dy-line { margin: 18px 0 0; font: 11.5px/1.6 var(--sans); letter-spacing: 0.01em; color: var(--ink-2); }
+.dy-next { margin-top: 14px; font: 11px var(--sans); letter-spacing: 0.04em; color: var(--ink-3); }
+.dy-next:hover { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .dynamics { --dy-strip-h: 64px; --dy-strip-bottom: 64px; --dy-track-l: 72px; --dy-track-r: 36px; }
+  .dy-heading { left: 18px; top: 16px; max-width: calc(100vw - 36px); }
+  .dy-heading > h1 { font-size: 1.5rem; }
+  .dy-basins { font-size: 11px; gap: 6px 14px; }
+  .dy-hero-canvas { aspect-ratio: 2 / 1; }
+  .reveal.dy-card { max-height: 44vh; bottom: calc(var(--dy-strip-bottom) + var(--dy-strip-h) + 12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dynamics, .dynamics * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
