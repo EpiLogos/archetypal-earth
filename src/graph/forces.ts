@@ -25,9 +25,36 @@ export const FORCE_ROWS: { key: keyof Forces; label: string; min: number; max: n
   { key: 'distance', label: 'Link distance', min: 0.7, max: 1.8, step: 0.05, tip: 'How far apart each tie holds its two ends. More lengthens every link.' },
 ];
 
-/** The pull toward the heart: none in a local graph, where the subject holds the middle. */
+/**
+ * The pull toward the heart. A local graph has a small base of its own, so that Centre visibly gathers the
+ * neighbourhood (the subject is pinned; the rest are drawn toward the heart), but far less than the whole field.
+ */
 export function centreStrength(local: boolean, f: Forces): number {
-  return (local ? 0 : 0.018) * f.centre;
+  return (local ? 0.004 : 0.018) * f.centre;
+}
+
+/** The readout of a force, as a multiple of the arrangement as drawn: 1.00× at rest, whatever the stored value is. */
+export function forceMultiple(key: keyof Forces, value: number): number {
+  return value / DEFAULT_FORCES[key];
+}
+
+const clamp01 = (x: number) => (Number.isFinite(x) ? Math.min(1, Math.max(0, x)) : 0);
+
+/**
+ * Time-aware layout (audit T1): a tie or an instance holds its two ends harder when both are live under the
+ * cursor, and lets go of a ghost. `on` is 1 while the cursor is scrubbing and exactly 0 in 'all time', where the
+ * factor is 1 and nothing changes. Monotone in both liveness values; 0.25 at the weakest.
+ */
+export function liveFactor(liveS: number, liveT: number, on: number): number {
+  const raw = 0.25 + 0.75 * clamp01(liveS) * clamp01(liveT);
+  return 1 + (raw - 1) * clamp01(on);
+}
+
+/** The push of an occurrence scales with its liveness: a ghost repels half as hard and gathers about its form. Exactly 1 when `on` is 0. */
+export function dustLiveFactor(kind: string, live: number, on: number): number {
+  if (kind !== 'occurrence') return 1;
+  const raw = 0.5 + 0.5 * clamp01(live);
+  return 1 + (raw - 1) * clamp01(on);
 }
 
 /** The push between nodes: negative (repulsive). The Self and the archetypes push hardest; the dust hardly at all. */

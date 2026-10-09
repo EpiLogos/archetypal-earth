@@ -31,9 +31,10 @@
 .dy-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .dy-marks { position: absolute; inset: 0; pointer-events: none; }
 
-/* the voice marks: a V (Van Eenwyk) or a J (Jung), the Aion basis chip's look */
+/* the voice marks on concept quotations: a V (Van Eenwyk) or a J (Jung), the Aion basis chip's look (never on the strip) */
 .dy-chip { flex: none; display: inline-block; min-width: 14px; text-align: center; border: 1px solid var(--hair); border-radius: 3px; padding: 0 4px; font: 9px/1.6 var(--sans); letter-spacing: 0.08em; color: var(--ink-3); }
-.dy-v { position: absolute; transform: translate(-50%, 0); min-width: 11px; padding: 0 3px; font-size: 8px; line-height: 1.5; background: rgb(var(--deep-rgb) / 0.85); color: var(--ink-2); pointer-events: auto; cursor: help; }
+/* a midpoint crossing that survives the sustained rule: one neutral tick on the 0.5 line (computed here, not a voice) */
+.dy-tick { position: absolute; width: 1px; height: 9px; transform: translate(-50%, -50%); background: var(--ink-2); pointer-events: auto; cursor: help; }
 
 /* the reveal card: the Red Book's and Aion's card rules, stood above the strip */
 .reveal.dy-card {
@@ -47,7 +48,6 @@
 .dy-name .dy-chip { vertical-align: middle; margin-left: 6px; font-size: 9px; }
 .dy-quote { margin: 18px 0 4px; }
 .dy-quote footer .dy-chip { flex: none; }
-.dy-line { margin: 18px 0 0; font: 11.5px/1.6 var(--sans); letter-spacing: 0.01em; color: var(--ink-2); }
 .dy-next { margin-top: 14px; font: 11px var(--sans); letter-spacing: 0.04em; color: var(--ink-3); }
 .dy-next:hover { color: var(--ink); }
 

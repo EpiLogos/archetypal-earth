@@ -1,7 +1,12 @@
 // The field as dynamics, computed from the published data. PURE: no DOM, no clock, deterministic.
 //   family  → basin           spectrum.position (s) → order parameter      occurrences by year → trajectory
-//   parallelIds → companion trajectories         s crossing 0.5 with a large jump → transition (V: phase transition)
+//   parallelIds → companion trajectories
 // Everything derived here is "drawn here": a measure of the published data, not a finding about Jung or Van Eenwyk.
+//
+// What is drawn is an ERA SERIES: the occurrences binned along the subject's own span, each bin's count-weighted mean
+// s, lightly smoothed. Bins with no occurrence are gaps, never interpolated across. A midpoint crossing is marked only
+// where the smoothed series crosses 0.5 with hysteresis and at least MIN_SIDE occurrences on each side.
+// A subject whose era series does not vary is a single level: drawn as a band, not a trace.
 import { subjectOccurrences, type Model, type Subject } from '../data/model';
 
 export interface TrajPoint {
@@ -37,9 +42,30 @@ export interface Companion extends Trajectory {
   links: number;
 }
 
-/** A crossing of the midpoint (side changes at 0.5) with a jump of at least this size. */
-export const TRANSITION_JUMP = 0.15;
+/** One era bin: its slider-position span, the count-weighted mean s (null when empty), and its occurrence count. */
+export interface EraBin {
+  u0: number;
+  u1: number;
+  mean: number | null;
+  n: number;
+}
+
+/** A midpoint crossing that survives the sustained rule: the slider-position it is drawn at, and the occurrences on each side. */
+export interface Crossing {
+  u: number;
+  before: number;
+  after: number;
+}
+
 export const MIDPOINT = 0.5;
+/** The subject's span is binned into this many eras. */
+export const ERA_BINS = 40;
+/** A side is entered only past the midpoint by this much (hysteresis), so a series hovering at 0.5 does not flicker. */
+export const HYSTERESIS = 0.03;
+/** A crossing counts only when at least this many occurrences lie on each side of it. */
+export const MIN_SIDE = 5;
+/** An era series whose spread (standard deviation of its bin means) is at most this is a single level, not a trace. */
+export const VARIES = 0.03;
 
 /** The subject's located occurrences in order of year, with the order parameter of each. */
 export function trajectoryOf(m: Model, subject: Subject): Trajectory {
@@ -68,21 +94,6 @@ export function basinsOf(traj: Trajectory): Basin[] {
     }
   }
   return [...acc].map(([familyId, a]) => ({ familyId, from: a.from, to: a.to, fromU: a.fromU, toU: a.toU, meanS: a.sum / a.count, count: a.count }));
-}
-
-const side = (s: number) => (s >= MIDPOINT ? 1 : 0);
-
-/**
- * Indices j (into traj.points) such that the pair (j−1, j) crosses the midpoint with a jump of at least
- * TRANSITION_JUMP. Only consecutive pairs ever qualify.
- */
-export function transitions(traj: Trajectory): number[] {
-  const out: number[] = [];
-  const p = traj.points;
-  for (let j = 1; j < p.length; j++) {
-    if (side(p[j - 1].s) !== side(p[j].s) && Math.abs(p[j].s - p[j - 1].s) >= TRANSITION_JUMP) out.push(j);
-  }
-  return out;
 }
 
 /**
@@ -115,31 +126,121 @@ export function companions(m: Model, traj: Trajectory, max = 3): Companion[] {
     });
 }
 
-/** Evenly spaced points, endpoints kept, deterministic. Returns the trajectory unchanged when it is short enough. */
-export function downsample(traj: Trajectory, maxPoints: number): Trajectory {
-  const n = traj.points.length;
-  const k = Math.max(2, Math.floor(maxPoints));
-  if (n <= k) return traj;
-  const points: TrajPoint[] = [];
-  for (let j = 0; j < k; j++) points.push(traj.points[Math.round((j * (n - 1)) / (k - 1))]);
-  return { subject: traj.subject, points };
+/**
+ * The era series of a trajectory: its occurrences binned into `bins` equal slices of `span` (slider-positions; by default
+ * the trajectory's own first-to-last span). Each bin carries the count-weighted mean s of its occurrences, or null when
+ * it holds none. Occurrences outside the span are not counted. A span of zero width is one bin.
+ */
+export function eraSeries(traj: { points: readonly TrajPoint[] }, bins = ERA_BINS, span?: { fromU: number; toU: number }): EraBin[] {
+  const pts = traj.points;
+  if (!pts.length) return [];
+  const a = span ? span.fromU : pts[0].u;
+  const b = span ? span.toU : pts[pts.length - 1].u;
+  const k = Math.max(1, Math.floor(bins));
+  if (!(b > a)) {
+    let sum = 0;
+    let n = 0;
+    for (const p of pts) if (p.u >= a - 1e-12 && p.u <= b + 1e-12) { sum += p.s; n++; }
+    return [{ u0: a, u1: b, mean: n ? sum / n : null, n }];
+  }
+  const width = (b - a) / k;
+  const sum = new Float64Array(k);
+  const n = new Int32Array(k);
+  for (const p of pts) {
+    if (p.u < a || p.u > b) continue;
+    const j = Math.min(k - 1, Math.max(0, Math.floor((p.u - a) / width)));
+    sum[j] += p.s;
+    n[j]++;
+  }
+  const out: EraBin[] = [];
+  for (let j = 0; j < k; j++) {
+    out.push({ u0: a + j * width, u1: j === k - 1 ? b : a + (j + 1) * width, mean: n[j] ? sum[j] / n[j] : null, n: n[j] });
+  }
+  return out;
 }
 
 /**
- * The order parameter at a point on the shared scale, interpolated linearly between the neighbouring occurrences.
- * Null before the first occurrence; held at the last value after it.
+ * The drawn series: each non-empty bin's mean averaged with its non-empty neighbours (weights 1, 2, 1, each weighted by
+ * its count). Empty bins stay empty; nothing is filled in across them.
  */
-export function sAt(points: readonly TrajPoint[], u: number): number | null {
-  const n = points.length;
-  if (!n || u < points[0].u) return null;
-  if (u >= points[n - 1].u) return points[n - 1].s;
-  let lo = 0, hi = n - 1;
-  while (hi - lo > 1) {
-    const mid = (lo + hi) >> 1;
-    if (points[mid].u <= u) lo = mid;
-    else hi = mid;
+export function smoothEra(bins: readonly EraBin[]): EraBin[] {
+  return bins.map((b, k) => {
+    if (b.mean === null) return { ...b };
+    let num = 0;
+    let den = 0;
+    for (let j = k - 1; j <= k + 1; j++) {
+      const o = bins[j];
+      if (!o || o.mean === null) continue;
+      const w = (j === k ? 2 : 1) * o.n;
+      num += w * o.mean;
+      den += w;
+    }
+    return { ...b, mean: num / den };
+  });
+}
+
+/** The spread of an era series: the standard deviation of its non-empty bin means. Zero for fewer than two. */
+export function spreadOf(bins: readonly EraBin[]): number {
+  const v = bins.filter((b) => b.mean !== null).map((b) => b.mean as number);
+  if (v.length < 2 || Math.max(...v) - Math.min(...v) < 1e-12) return 0;
+  const mu = v.reduce((x, y) => x + y, 0) / v.length;
+  return Math.sqrt(v.reduce((x, y) => x + (y - mu) * (y - mu), 0) / v.length);
+}
+
+/** Whether an era series varies enough to be drawn as a trace (otherwise it is a single level: a band). */
+export const variesEnough = (bins: readonly EraBin[]) => spreadOf(bins) > VARIES;
+
+/**
+ * The midpoint crossings that survive. The smoothed series is read as runs of one side each: a bin enters the high side
+ * at ≥ 0.5 + HYSTERESIS and the low side at ≤ 0.5 − HYSTERESIS; bins in between belong to no side. A crossing is the
+ * boundary between two runs, and it survives only when the run on each side holds at least MIN_SIDE occurrences.
+ * It is placed midway between the last bin of the old run and the first of the new.
+ */
+export function sustainedCrossings(series: readonly EraBin[]): Crossing[] {
+  const lo = MIDPOINT - HYSTERESIS;
+  const hi = MIDPOINT + HYSTERESIS;
+  type Run = { side: 1 | -1; n: number; firstU: number; lastU: number };
+  const runs: Run[] = [];
+  for (const b of series) {
+    if (b.mean === null || b.n === 0) continue;
+    const side = b.mean >= hi ? 1 : b.mean <= lo ? -1 : 0;
+    if (!side) continue;
+    const mid = (b.u0 + b.u1) / 2;
+    const last = runs[runs.length - 1];
+    if (last && last.side === side) {
+      last.n += b.n;
+      last.lastU = mid;
+    } else runs.push({ side, n: b.n, firstU: mid, lastU: mid });
   }
-  const a = points[lo], b = points[hi];
-  const t = b.u === a.u ? 0 : (u - a.u) / (b.u - a.u);
-  return a.s + (b.s - a.s) * t;
+  const out: Crossing[] = [];
+  for (let r = 1; r < runs.length; r++) {
+    const before = runs[r - 1];
+    const after = runs[r];
+    if (before.n >= MIN_SIDE && after.n >= MIN_SIDE) out.push({ u: (before.lastU + after.firstU) / 2, before: before.n, after: after.n });
+  }
+  return out;
+}
+
+/**
+ * The drawn value at a slider-position. Linear between the centres of neighbouring non-empty eras, held within an era
+ * whose neighbour is empty. Inside an empty era there is no value (null): nothing is interpolated across a gap. Before
+ * the first occurrence there is none; after the last, the trajectory has ended and holds where it ended.
+ */
+export function seriesAt(series: readonly EraBin[], u: number): number | null {
+  const n = series.length;
+  if (!n || u < series[0].u0) return null;
+  if (u > series[n - 1].u1) {
+    for (let j = n - 1; j >= 0; j--) if (series[j].mean !== null) return series[j].mean;
+    return null;
+  }
+  let k = 0;
+  for (let j = 0; j < n; j++) if (u >= series[j].u0) k = j;
+  const b = series[k];
+  if (b.mean === null) return null;
+  const c = (b.u0 + b.u1) / 2;
+  const o = series[u < c ? k - 1 : k + 1];
+  if (!o || o.mean === null) return b.mean;
+  const co = (o.u0 + o.u1) / 2;
+  if (co === c) return b.mean;
+  return b.mean + (o.mean - b.mean) * ((u - c) / (co - c));
 }

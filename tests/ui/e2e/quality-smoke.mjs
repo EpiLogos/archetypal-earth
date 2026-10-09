@@ -45,7 +45,8 @@ try {
   if (await page.locator('#intro:not(.dismissed)').count()) await page.getByRole('button', { name: 'Enter the globe' }).click();
   await page.getByRole('button', { name: 'Play history', exact: true }).click();
   const start = await page.evaluate(() => ({ cursor: window.__earth.time.cursorU, from: window.__earth.time.fromU, to: window.__earth.time.toU }));
-  await page.waitForTimeout(1200);
+  // the window's blend eases over frames; a fixed wait races the frame rate (about 5 fps in a software-GL sandbox), so wait for it
+  await page.waitForFunction(() => window.__earth.engine.shared.timeOn.value > 0.9, null, { timeout: 20000 });
   const playback = await page.evaluate(() => {
     const { engine, time, model } = window.__earth;
     return { playing: time.playing, cursor: time.cursorU, shaderCursor: engine.shared.cursor.value, blend: engine.shared.timeOn.value, fromYear: model.scale.fromU(time.fromU), toYear: model.scale.fromU(time.toU), min: model.field.meta.yearMin, max: model.field.meta.yearMax };
@@ -56,8 +57,21 @@ try {
   assert(Math.abs(playback.fromYear - playback.min) < 1e-6);
   assert(Math.abs(playback.toYear - playback.max) < 1e-6);
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
-  // let the frame already in flight land: the property under test is a frozen clock, not the click's latency
-  await page.waitForTimeout(150);
+  // let the frame already in flight land: wait until the clock is unchanged across two animation frames (the property under
+  // test is a frozen clock, not the click's latency; a fixed wait races the frame rate)
+  await page.evaluate(() => new Promise((resolve, reject) => {
+    const limit = setTimeout(() => reject(new Error('the clock never settled after Pause')), 20000);
+    let last = window.__earth.time.cursorU;
+    let still = 0;
+    const frame = () => {
+      const now = window.__earth.time.cursorU;
+      still = now === last ? still + 1 : 0;
+      last = now;
+      if (still >= 2) { clearTimeout(limit); resolve(); }
+      else requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }));
   const yearBefore = await page.locator('.t-track').getAttribute('aria-valuenow');
   await page.waitForTimeout(400);
   assert.equal(await page.locator('.t-track').getAttribute('aria-valuenow'), yearBefore);
