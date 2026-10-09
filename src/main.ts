@@ -2,6 +2,7 @@ import './style/main.css';
 import './style/aion.css';
 import './style/sky.css';
 import './style/redbook.css';
+import './style/dynamics.css';
 import { loadSymbols } from './data/symbols';
 import { historyExtent, loadHistory } from './aion/model';
 import { loadCorpusIndex } from './data/corpus';

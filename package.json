@@ -18,6 +18,8 @@
     "aion:check": "node scripts/aion.mjs --check",
     "redbook": "node scripts/redbook.mjs",
     "redbook:check": "node scripts/redbook.mjs --check",
+    "dynamics": "node scripts/dynamics.mjs",
+    "dynamics:check": "node scripts/dynamics.mjs --check",
     "symbols": "node scripts/symbols.mjs",
     "symbols:check": "node scripts/symbols.mjs --check",
     "sky": "node scripts/sky.mjs",
