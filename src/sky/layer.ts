@@ -403,11 +403,12 @@ export class SkyLayer {
     // the Earth's true light: only where the Sun is known (inside the span the ephemeris covers)
     this.sunKnown = this.eph.covers(this.moment);
     if (this.sunKnown) this.sunDir.copy(this.sunScene).normalize();
-    this.sunFocus.copy(this.sunScene).multiplyScalar(w.handoff * (1 - this.geoShare));
+    // the look-at and the camera's ride with the sky share one weight (`focus`), so the sky holds still in the view as it turns
+    this.sunFocus.copy(this.sunScene).multiplyScalar(w.focus * (1 - this.geoShare));
     this.aimFocus(this.clock);
 
     let dLon = 0;
-    if (this.prevGmst !== null && w.handoff > 0) dLon = -w.handoff * wrap180(this.gmst - this.prevGmst);
+    if (this.prevGmst !== null && w.focus > 0) dLon = -w.focus * wrap180(this.gmst - this.prevGmst);
     this.prevGmst = this.gmst;
     return { focus: this.focus, dLon };
   }

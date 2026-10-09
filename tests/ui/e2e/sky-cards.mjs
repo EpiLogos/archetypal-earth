@@ -84,7 +84,8 @@ try {
   const re = await page.evaluate(() => ({
     name: document.querySelector('.sky-card .rv-name')?.textContent, note: document.querySelector('.sky-reproject')?.textContent,
     chip: document.querySelector('.sky-reproject .sky-basis')?.title ?? '',
-    label: [...document.querySelectorAll('.sky-label.on')].map((l) => l.textContent), hash: location.hash, sel: document.querySelector('.sky-culture-note')?.textContent,
+    // the approached body's own label stands down while its card is open (the card names it): read every label, shown or not
+    label: [...document.querySelectorAll('.sky-label')].map((l) => l.textContent), hash: location.hash, sel: document.querySelector('.sky-culture-note')?.textContent,
   }));
   check(re.name === 'Mangala' && /^Read through Indian: Mangala \S+\. The character below is the default one \(Mars\)\.$/.test(re.note ?? ''), 'reprojected card reads through the culture and says the character is the default, with no source clause in the text', re.note);
   check(/Source: .+/.test(re.chip) && !/\bafter\b/.test(re.note ?? '') && !/\bcw\d/i.test(re.note ?? ''), 'the table the reading comes from is the basis chip\'s tooltip, not the text', re.chip.slice(0, 120));

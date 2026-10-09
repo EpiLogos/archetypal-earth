@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
-  AU_IN_EARTH_RADII, APPROACH_BODIES, APPROACH_FILL, COMPRESSION, EARTH_RADIUS_KM, SKY_ENTER, SKY_EXIT, SKY_EXTENT, STAGE_EDGES, approachDist,
-  compressAu, depthPlanes, isApproachBody, skyMaxDist, stageDistance, stageOf, stageWeights, surfaceWeight, systemHomeDist, LEGACY_DEPTH_MAX,
+  AU_IN_EARTH_RADII, APPROACH_BODIES, APPROACH_FILL, COMPRESSION, EARTH_RADIUS_KM, SKY_ENTER, SKY_EXIT, SKY_EXTENT, SKY_OVERSHOOT, STAGE_EDGES, approachDist,
+  compressAu, depthPlanes, handoffFocusWeight, isApproachBody, skyMaxDist, stageDistance, stageOf, stageWeights, surfaceWeight, systemHomeDist, LEGACY_DEPTH_MAX,
 } from '../../src/sky/stages';
 
 /** Every body's true radius, as the generator wrote it (public/data/sky.json). */
@@ -20,14 +20,25 @@ describe('stages', () => {
 
   it('weights are in [0,1] and monotone through the handoff', () => {
     let prev = stageWeights(10).handoff;
+    let prevFocus = stageWeights(10).focus;
     for (let d = 10; d < 12000; d *= 1.15) {
       const w = stageWeights(d);
       for (const v of Object.values(w)) { expect(v).toBeGreaterThanOrEqual(0); expect(v).toBeLessThanOrEqual(1); }
       expect(w.handoff).toBeGreaterThanOrEqual(prev - 1e-12);
+      expect(w.focus).toBeGreaterThanOrEqual(prevFocus - 1e-12);
       prev = w.handoff;
+      prevFocus = w.focus;
     }
     expect(stageWeights(100).handoff).toBe(0);
     expect(stageWeights(5000).handoff).toBe(1);
+  });
+
+  it('the look-at\'s share of the Sun is 0 across the Earth and lunar stages, and 1 once the Sun is the subject', () => {
+    for (const d of [1.05, 6, 40, 300, 600]) expect(stageWeights(d).focus).toBe(0);
+    expect(stageWeights(1750).focus).toBe(1);
+    expect(stageWeights(5000).focus).toBe(1);
+    expect(handoffFocusWeight(900)).toBeGreaterThan(0);
+    expect(handoffFocusWeight(900)).toBeLessThan(1);
   });
 
   it('entry and exit thresholds have hysteresis, so a hovering wheel cannot flicker the sky', () => {
@@ -64,6 +75,14 @@ describe('stages', () => {
     for (const aspect of [0.5, 1, 1.6, 2.4]) {
       expect(systemHomeDist(aspect, 45)).toBeGreaterThanOrEqual(9000);
       expect(skyMaxDist(aspect, 45)).toBeGreaterThan(systemHomeDist(aspect, 45));
+    }
+  });
+
+  it('pins the pull-back\'s overshoot past the system home at 1.35× (it was 2.2×: a dead zone, audit S3 (c))', () => {
+    // 1.35 leaves room to read the system's extent past its own framing; 2.2 left ~1.2 home-distances of nothing to see.
+    expect(SKY_OVERSHOOT).toBe(1.35);
+    for (const aspect of [0.46, 1, 1.6, 2.2]) {
+      expect(skyMaxDist(aspect, 38)).toBeCloseTo(systemHomeDist(aspect, 38) * 1.35, 9);
     }
   });
 });

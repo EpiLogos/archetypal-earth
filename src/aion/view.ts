@@ -5,7 +5,7 @@ import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage } from '../types/history';
-import { clear, el, plate } from '../ui/dom';
+import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import { passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
@@ -39,8 +39,13 @@ export class AionView {
   private revealYearKey = Number.NaN;
   private revealEventId = '';
 
+  /**
+   * `onRead`: the core reading of an occurrence, opened from this mode (a double-click on an event card). The
+   * controller carries the mode state with it, so Escape returns here.
+   */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
-    readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge) {
+    readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge,
+    private onRead: (occId: string) => void = () => {}) {
     this.heading = el('header', { class: 'aion-heading' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
@@ -48,6 +53,16 @@ export class AionView {
     this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.heading, this.markers, this.epochs, this.card]);
     parent.append(this.root);
     this.ring = new EquinoxRing(this.root);
+    // a double-click on an event card opens the reading of its first resolvable occurrence; an epoch's card has none
+    onReadGesture(this.card, () => this.readEvent());
+  }
+
+  /** The event's first occurrence that exists in the field, opened as its core reading. Nothing when it has none. */
+  private readEvent() {
+    const event = this.currentEvent;
+    if (!this.reading || !event || this.state?.selection?.kind === 'epoch') return;
+    const occId = event.occurrenceIds.find((id) => this.model.occIndex.has(id));
+    if (occId !== undefined) this.onRead(occId);
   }
 
   show(state: NonNullable<AppState['history']>) {

@@ -13,6 +13,8 @@ export interface Resolver {
   hasHistorySelection?(reading: string, kind: string, id: string): boolean;
   hasRedBookStop?(id: string): boolean;
   hasBody?(id: string): boolean;
+  /** the reading Aion opens on when no reading is named (the same one its switch opens) */
+  defaultReading?(): string | undefined;
 }
 
 export interface Parsed {
@@ -22,6 +24,11 @@ export interface Parsed {
 }
 
 const enc = encodeURIComponent;
+
+/** The reading Aion opens on when no reading is named: the first of the authored readings. The switch and `#/aion` both use it. */
+export function defaultReadingId(readings: readonly { id: string }[]): string | undefined {
+  return readings[0]?.id;
+}
 
 /** `#/sky`, `#/sky/<body>`, `#/sky/birth/<local>/<lat>/<lon>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. */
 const num = (n: number) => String(Number(n.toFixed(4)));
@@ -109,7 +116,9 @@ export function hashToState(hash: string, r: Resolver): Parsed {
     return { state: { view: { kind: 'world' }, deep: false, dynamics: subject ? { subject } : {} } };
   }
   if (parts[0] === 'aion') {
-    const [, reading, kind, id] = parts;
+    // `#/aion` alone is the default reading, as the switch opens it; `#/aion/<reading>[/<kind>/<id>]` names one
+    const [, named, kind, id] = parts;
+    const reading = named ?? r.defaultReading?.();
     if (!reading || !r.hasReading?.(reading)) return { state: WORLD };
     const selection: NonNullable<AppState['history']>['selection'] = (kind === 'epoch' || kind === 'event' || kind === 'thread') && id && r.hasHistorySelection?.(reading, kind, id) ? { kind, id } : undefined;
     return { state: { view: { kind: 'world' }, deep: false, history: { reading, ...(selection ? { selection } : {}) } } };
