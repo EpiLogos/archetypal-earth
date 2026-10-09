@@ -33,7 +33,8 @@ try {
   await page.getByRole('button', { name: 'Occurrences', exact: true }).click();
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#graph-settings').isVisible(), false);
-  await page.getByRole('button', { name: 'On Earth', exact: false }).click();
+  // the mode pill is the way back to the Earth from the graph (the On Earth button it replaces is gone)
+  await page.locator('.mode-switch').click();
   await page.waitForFunction(() => !document.body.classList.contains('mode-graph'));
   assert(await page.evaluate(() => document.querySelector('.gv').inert), 'Hidden graph controls must be inert');
   assert.equal(await page.locator('.gv').getAttribute('aria-hidden'), 'true');
