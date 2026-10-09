@@ -1,12 +1,15 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
+  AFTER_ALPHA,
   DEFAULT_RAMP,
   DEFAULT_TRAIL,
   EMERGE_RAMPS,
   GHOST_ALPHA,
+  PIN_ALPHA,
   STANDING_REL,
   effectiveVisibility,
+  pickablePresence,
   presenceCurve,
   presenceState,
   presenceWeights,
@@ -247,5 +250,63 @@ describe('GLSL mirror guard', () => {
     expect(src).toContain('float fl = 1.0 + 0.5 * flare;');
     expect(src).toContain('mix(0.32, 1.0, focus)');
     expect(src).toContain('vec4 presenceCurve(float u, float rel) {');
+  });
+});
+
+describe('pick follows the draw (audit T2/pick): a node is pickable where it is drawn at a half presence', () => {
+  // the draw's own presence (presenceWeights.present, through effectiveVisibility) is the pick's gate
+  const drawn = (u: number, c: number, rel: number, on = 1) => effectiveVisibility(presenceWeights(c - u, win(c, on), rel).present, rel);
+  const E_HALF = (DEFAULT_RAMP * EMERGE_RAMPS) / 2; // present = 0.5 where arrive = 0.5 (the emergence's midpoint)
+
+  it('a node the draw has not yet arrived for is not pickable, however far it has come (the old gate picked it at d = ramp/2)', () => {
+    const d = DEFAULT_RAMP * 0.6; // timeVisibility(0.6 ramp) >= 0.5 — the old pick accepted it
+    expect(timeVisibility(0, win(d))).toBeGreaterThanOrEqual(0.5);
+    expect(pickablePresence(0, win(d), 1)).toBe(false);
+    expect(drawn(0, d, 1)).toBeLessThan(0.5);
+  });
+
+  it('the boundary is the draw\'s half presence: just below is not pickable, just above is', () => {
+    expect(pickablePresence(0, win(E_HALF - 1e-4), 1)).toBe(false);
+    expect(pickablePresence(0, win(E_HALF + 1e-4), 1)).toBe(true);
+    expect(drawn(0, E_HALF - 1e-4, 1)).toBeLessThan(0.5);
+    expect(drawn(0, E_HALF + 1e-4, 1)).toBeGreaterThanOrEqual(0.5);
+  });
+
+  it('the dissolution boundary is the draw\'s: pickable while present is at least a half, not after', () => {
+    // leave = 0.5 at the midpoint of the dissolution window (0.55 trail .. trail)
+    const mid = DEFAULT_TRAIL * 0.775;
+    expect(pickablePresence(0, win(mid - 1e-3), 1)).toBe(true);
+    expect(pickablePresence(0, win(mid + 1e-3), 1)).toBe(false);
+  });
+
+  it('agrees with the draw weights across the whole cursor range, for ordinary and standing nodes', () => {
+    for (const rel of [0.07, 1, 1.5, 1.55, 2.2]) {
+      for (let c = -0.1; c <= 1.1; c += 0.0025) {
+        for (const u of [0, 0.3]) {
+          expect(pickablePresence(u, win(c), rel)).toBe(drawn(u, c, rel) >= 0.5);
+        }
+      }
+    }
+  });
+
+  it('a standing node is pickable at any cursor (it is drawn at full presence at any cursor)', () => {
+    for (let c = -0.5; c <= 1.5; c += 0.05) expect(pickablePresence(0, win(c), 1.6)).toBe(true);
+  });
+
+  it('all time: every node is pickable, as it is drawn', () => {
+    for (let c = -0.2; c <= 1.2; c += 0.05) expect(pickablePresence(0.5, win(c, 0), 1)).toBe(true);
+  });
+});
+
+describe('the lifecycle colours and alphas: not-yet is a cool pinprick, after a warm-grey dot, both stronger than before', () => {
+  const src = readFileSync(new URL('../../src/globe/shaders.ts', import.meta.url), 'utf8');
+  it('the constants are mirrored in the CPU module', () => {
+    expect(PIN_ALPHA).toBe(0.2);
+    expect(AFTER_ALPHA).toBe(0.3);
+  });
+  it('the vertex and fragment shaders carry the same alphas', () => {
+    expect(src).toContain('float total = alpha + 0.2 * pinW + 0.3 * aftW + 0.6 * ringW;');
+    expect(src).toContain('* pinD * 0.2 * vPin;');
+    expect(src).toContain('* afterD * 0.3 * vAfter;');
   });
 });

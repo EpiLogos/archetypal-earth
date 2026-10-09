@@ -25,18 +25,26 @@ export function clear(node: Element) {
 
 /** Controls inside a read surface keep their own single-click behaviour: a double-click on them does nothing new. */
 const CONTROL = 'a, button, summary, input, select, textarea, [role="button"], [role="link"], .rv-close, .link-quiet';
+/**
+ * Running text belongs to the reader: a double-click on a word in a quotation or a paragraph selects that word (the way
+ * a quotation is copied), and opens nothing. The reading is reached from the plate, the title, the header, the
+ * surface's whitespace, or the 'Reading' link.
+ */
+const PROSE = 'blockquote, p, li, q, cite, figcaption, dd, pre, .dp-def';
 
 /**
  * A double-click on a card surface opens its reading (SPEC §12: layer 3 is one gesture away from layer 1).
  * The same action the surface's own 'Reading' link takes; no visible affordance is added.
- * A double-click on an interactive control inside the surface is left to that control, and the word
- * selection the gesture made is cleared before `open` runs.
+ * A double-click on an interactive control inside the surface is left to that control. A double-click on running
+ * text is left to the browser, as word selection, and the surface does nothing; on the plate, the title, the header
+ * or whitespace the word selection the gesture made is cleared before `open` runs.
  */
 export function onReadGesture(surface: HTMLElement, open: () => void): void {
   surface.addEventListener('dblclick', (e) => {
     const target = e.target instanceof Element ? e.target : null;
     const control = target?.closest(CONTROL);
     if (control && control !== surface && surface.contains(control)) return;
+    if (target?.closest(PROSE) && surface.contains(target)) return;
     globalThis.getSelection?.()?.removeAllRanges();
     open();
   });

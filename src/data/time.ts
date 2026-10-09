@@ -125,10 +125,10 @@ export function effectiveVisibility(vis: number, rel: number): number {
 // ── T1: the per-node lifecycle, a function of d = cursor - u alone ───────
 /** Emergence lasts 1.5 ramps. Dissolution runs from 0.55 trail to trail (as the fade always did). */
 export const EMERGE_RAMPS = 1.5;
-/** Alpha of a node before its date: a barely-there cool pinprick. */
-export const PIN_ALPHA = 0.1;
-/** Alpha of a node after it has dissolved: a small warm-grey dot ("it has been"). */
-export const AFTER_ALPHA = 0.16;
+/** Alpha of a node before its date: a cool blue pinprick, quieter than the warm dot after it. Mirrored in GLSL (PRESENCE_FRAG). */
+export const PIN_ALPHA = 0.2;
+/** Alpha of a node after it has dissolved: a small warm-grey dot ("it has been"). Mirrored in GLSL (PRESENCE_FRAG). */
+export const AFTER_ALPHA = 0.3;
 /** Alpha of an attentionally receded node: the small hollow ring (unchanged look). */
 export const GHOST_ALPHA = 0.32;
 
@@ -195,6 +195,17 @@ export function presenceWeights(d: number, w: TimeWindow, rel: number): Presence
     pin: 1 - c.arrive,
     after: c.leave,
   };
+}
+
+/** The CPU pick takes a node where the draw has it at least this present (the draw's own presence, see pickablePresence). */
+export const PICK_PRESENCE = 0.5;
+
+/**
+ * Whether a node at slider-position `u` may be picked at this window: the draw's own presence (presenceWeights.present,
+ * through effectiveVisibility, so a standing node is always pickable) is at least PICK_PRESENCE. Pick and draw share one gate.
+ */
+export function pickablePresence(u: number, w: TimeWindow, rel: number): boolean {
+  return effectiveVisibility(presenceWeights(w.cursorU - u, w, rel).present, rel) >= PICK_PRESENCE;
 }
 
 export type PresenceState = 'notYet' | 'emerging' | 'live' | 'dissolving' | 'after';

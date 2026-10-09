@@ -116,6 +116,36 @@ try {
     const s2 = await state(page);
     check(!s2.deep && s2.kind === 'manifest', 'Escape closes the reading back to the card', s2.hash);
 
+    // the hero plate is a gesture surface too: a double-click on the image opens the reading
+    await page.locator('.reveal .rv-hero').dblclick({ position: { x: 40, y: 40 } });
+    const heroOpen = await until(page, () => document.body.classList.contains('deep-open'));
+    check(heroOpen && (await state(page)).deep, 'a double-click on the hero plate opens the deep reading');
+    await page.keyboard.press('Escape');
+    await until(page, () => !document.body.classList.contains('deep-open'));
+    await page.waitForTimeout(700); // the card settles back from the reading before its text is pointed at
+
+    // a word in a paragraph is the reader's to select (audit W1 follow-up): its double-click selects the word and opens nothing
+    const word = await page.evaluate(() => {
+      const p = document.querySelector('.reveal .rv-para');
+      const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const m = /\b[A-Za-z]{4,}(?:['’][a-z]+)?/.exec(node.data); // a word, with its possessive: the browser selects both
+        if (!m) continue;
+        const range = document.createRange();
+        range.setStart(node, m.index);
+        range.setEnd(node, m.index + m[0].length);
+        const r = range.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2, text: m[0] };
+      }
+      return null;
+    });
+    if (word) {
+      await page.mouse.dblclick(word.x, word.y);
+      await page.waitForTimeout(400);
+      const sw = await state(page);
+      check(sw.selection.trim() === word.text && !sw.deep && !sw.deepOpen, 'a double-click on a word in a paragraph selects that word and does not open the reading', `selected "${sw.selection}", deep ${sw.deep}`);
+    } else check(false, 'a paragraph of the card holds a word to double-click');
+
     // the card's own single-click 'Reading' still works (unchanged)
     await page.locator('.reveal .rv-links button', { hasText: 'Reading' }).click();
     await until(page, () => document.body.classList.contains('deep-open'));

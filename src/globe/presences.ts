@@ -2,7 +2,7 @@
 // one instanced pass into an equirect density texture that the earth samples.
 import * as THREE from 'three';
 import type { Model } from '../data/model';
-import { effectiveVisibility, timeVisibility, type TimeWindow } from '../data/time';
+import { pickablePresence, type TimeWindow } from '../data/time';
 import { PRESENCE_FRAG, PRESENCE_VERT, SPLAT_FRAG, SPLAT_VERT } from './shaders';
 import type { Shared } from './shared';
 
@@ -212,8 +212,8 @@ export class Presences {
       if (d[0] * this.camDirTmp.x + d[1] * this.camDirTmp.y + d[2] * this.camDirTmp.z < horizon) continue;
       // everything the shader draws is selectable: the receded field stays reachable
       if (this.rel[i] < 0.02) continue;
-      // T2: the standing reading (rel >= 1.55) is never time-gated, so it stays pickable at any cursor
-      if (effectiveVisibility(timeVisibility(m.u[i], w), this.rel[i]) < 0.5) continue;
+      // the pick gate is the draw's gate (T1/T2): pickable where the shader draws the node at least half present
+      if (!pickablePresence(m.u[i], w, this.rel[i])) continue;
       // view space
       const x = v[0] * d[0] + v[4] * d[1] + v[8] * d[2] + v[12];
       const y = v[1] * d[0] + v[5] * d[1] + v[9] * d[2] + v[13];

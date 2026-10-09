@@ -30,15 +30,15 @@ const check = (ok, label, detail = '') => {
 };
 const near = (a, b, eps = 1e-6) => Math.abs(a - b) <= eps;
 
-/** The padded span the scoping rule gives a set of slider-positions (the expectation, computed here). */
-const expectSpan = (us) => {
+/** The padded span the scoping rule gives a set of slider-positions, within the field's own extent (the expectation, computed here). */
+const expectSpan = (us, bounds = { fromU: 0, toU: 1 }) => {
   const lo = Math.min(...us), hi = Math.max(...us);
   const width = Math.max(hi - lo + 2 * (hi - lo) * 0.04, 0.03);
   const mid = (lo + hi) / 2;
   let from = mid - width / 2, to = mid + width / 2;
-  if (from < 0) { to -= from; from = 0; }
-  if (to > 1) { from -= to - 1; to = 1; }
-  return { fromU: Math.max(0, from), toU: Math.min(1, to) };
+  if (from < bounds.fromU) { to += bounds.fromU - from; from = bounds.fromU; }
+  if (to > bounds.toU) { from -= to - bounds.toU; to = bounds.toU; }
+  return { fromU: Math.max(bounds.fromU, from), toU: Math.min(bounds.toU, to) };
 };
 
 /** The whole field's range on the shared scale, as the time control starts on it (the scale runs past the field's last year). */
@@ -59,6 +59,8 @@ const clock = (page) => page.evaluate(() => {
   return { mode: t.mode, cursorU: t.cursorU, targetU: t.targetU, on: t.on, trail: t.trail, trailTarget: t.trailTarget, cumulative: t.cumulative, fromU: t.fromU, toU: t.toU, playing: t.playing };
 });
 const settleOn = (page) => page.waitForFunction(() => window.__earth.time.on > 0.995, null, { timeout: 60000, polling: 100 });
+/** The clock has landed: the cursor is at its target (a glide has ended). */
+const settleClock = (page) => page.waitForFunction(() => Math.abs(window.__earth.time.cursorU - window.__earth.time.targetU) < 1e-5, null, { timeout: 60000, polling: 100 }).catch(() => {});
 const settleOff = (page) => page.waitForFunction(() => window.__earth.time.on < 0.001, null, { timeout: 60000, polling: 100 });
 
 const browser = await launch('chromium', { headed: false });
@@ -180,10 +182,30 @@ const pageErrors = [];
       const { model } = window.__earth;
       return model.famOcc.get('serpent').filter((i) => model.located[i]).map((i) => model.u[i]);
     });
-    const want = expectSpan(us);
+    const full = await fullRange(page);
+    const want = expectSpan(us, full);
     const got = await clock(page);
     check(near(got.fromU, want.fromU, 1e-6) && near(got.toU, want.toU, 1e-6), 'focus: the track is the subject\'s span (padded, min 3%)', `${got.fromU.toFixed(4)}..${got.toU.toFixed(4)} (expected ${want.fromU.toFixed(4)}..${want.toU.toFixed(4)})`);
-    const full = await fullRange(page);
+    // audit #9: a subject at the field's last year pads no further than the field's data
+    const late = await page.evaluate(() => {
+      const { model } = window.__earth;
+      let best = null;
+      for (const f of model.field.families) {
+        const us = model.famOcc.get(f.id)?.filter((i) => model.located[i]).map((i) => model.u[i]) ?? [];
+        if (us.length > 1 && (!best || Math.max(...us) > best.hi)) best = { id: f.id, hi: Math.max(...us), us };
+      }
+      return best;
+    });
+    if (late) {
+      const lateWant = expectSpan(late.us, full);
+      check(lateWant.toU <= full.toU + 1e-12, 'a subject at the field\'s last year: the expected track stops at the field\'s last year', `${late.id}: ${lateWant.toU.toFixed(4)} ≤ ${full.toU.toFixed(4)}`);
+      await page.evaluate((id) => window.__earth.ctl.navigate({ view: { kind: 'focus', subject: { type: 'family', id } }, deep: false }), late.id);
+      await frames(page, 2);
+      const lc = await clock(page);
+      check(lc.toU <= full.toU + 1e-9 && near(lc.toU, lateWant.toU, 1e-6) && near(lc.fromU, lateWant.fromU, 1e-6), 'focus on the late subject: the track is bounded by the field\'s own extent (no dead track)', `${lc.fromU.toFixed(4)}..${lc.toU.toFixed(4)} (expected ${lateWant.fromU.toFixed(4)}..${lateWant.toU.toFixed(4)})`);
+      await page.evaluate(() => window.__earth.ctl.navigate({ view: { kind: 'world' }, deep: false }));
+      await frames(page, 2);
+    }
     check(got.toU - got.fromU < full.toU - full.fromU - 1e-6, 'focus: the track is narrower than the whole field', `${(got.toU - got.fromU).toFixed(4)} < ${(full.toU - full.fromU).toFixed(4)}`);
     await page.locator('.t-track').focus();
     await page.keyboard.press('Escape');
@@ -222,7 +244,7 @@ const pageErrors = [];
       const { model } = window.__earth;
       return model.u[model.occIndex.get(id)];
     }), rb.stops.map((s) => s.id));
-    const want = expectSpan(bookU);
+    const want = expectSpan(bookU, await fullRange(page));
 
     await page.evaluate((id) => window.__earth.ctl.navigate({ view: { kind: 'world' }, deep: false, redbook: { stop: id } }), stops[0]);
     await page.waitForFunction(() => window.__earth.ctl.state.redbook, null, { timeout: 30000, polling: 100 });
@@ -286,7 +308,84 @@ const pageErrors = [];
   }
 }
 
-// ── (iv) no page errors ────────────────────────────────────────────────────────────────────────────────────────
+// ── (iv) a focus whose span excludes the cursor glides the clock (SPEC §9); a period search reaches its period from a focus ──
+{
+  const { ctx, page, logs } = await open(browser, { hash: '', width: 1280, height: 800 });
+  try {
+    await page.waitForFunction(() => window.__earth.engine.presences, null, { timeout: 30000, polling: 200 });
+    const full = await fullRange(page);
+    const phoenix = await page.evaluate(() => {
+      const { model } = window.__earth;
+      const us = model.famOcc.get('phoenix').filter((i) => model.located[i]).map((i) => model.u[i]);
+      return { us, lo: Math.min(...us), hi: Math.max(...us) };
+    });
+    const span = expectSpan(phoenix.us, full);
+    const cursor0 = Math.max(0.9, span.toU + 0.3); // well past Phoenix's own span (the cursor is outside it)
+    await page.evaluate((c) => window.__earth.time.scrub(c), cursor0);
+    await settleOn(page);
+    await frames(page, 2);
+    // the focus, and the cursor sampled frame by frame from the moment the focus is taken
+    const glide = await page.evaluate(() => new Promise((res) => {
+      const { ctl, time } = window.__earth;
+      const start = time.cursorU;
+      const immediate = [];
+      ctl.navigate({ view: { kind: 'focus', subject: { type: 'family', id: 'phoenix' } }, deep: false });
+      immediate.push(time.cursorU);
+      const samples = [];
+      const t0 = performance.now();
+      const f = () => {
+        samples.push(time.cursorU);
+        if (performance.now() - t0 < 2600) requestAnimationFrame(f);
+        else res({ start, immediate, samples, toU: time.toU, fromU: time.fromU, mode: time.mode });
+      };
+      requestAnimationFrame(f);
+    }));
+    const dist = glide.start - glide.toU;
+    let maxStep = 0, monotone = true;
+    for (let k = 1; k < glide.samples.length; k++) {
+      const step = glide.samples[k - 1] - glide.samples[k];
+      if (step < -1e-9) monotone = false;
+      maxStep = Math.max(maxStep, step);
+    }
+    check(glide.mode === 'cursor' && near(glide.immediate[0], glide.start, 1e-12), 'focus that excludes the cursor: the clock does not snap on the navigation itself', `cursor ${glide.start.toFixed(4)} → ${glide.immediate[0].toFixed(4)} at once`);
+    check(glide.samples.length >= 5 && monotone && maxStep <= 0.4 * dist, 'focus that excludes the cursor: the clock glides to the span edge (monotone, no frame jump over 40% of the way)', `${glide.samples.length} frames, largest step ${(maxStep / dist * 100).toFixed(0)}% of ${dist.toFixed(3)}`);
+    // the sampled window is short under software GL: let the glide land, then read where it settled
+    await settleClock(page);
+    const landed = await page.evaluate(() => window.__earth.time.cursorU);
+    check(near(landed, glide.toU, 2e-4), 'focus that excludes the cursor: the clock settles on the span\'s edge', `${landed.toFixed(4)} vs edge ${glide.toU.toFixed(4)}`);
+
+    // (v) a period search from that focus reaches the period, not the span's edge
+    const edgeBefore = glide.toU;
+    await page.keyboard.press('/');
+    await page.keyboard.type('1600s');
+    await page.waitForFunction(() => [...document.querySelectorAll('.s-list li')].some((li) => /1600/.test(li.textContent)), null, { timeout: 15000, polling: 100 }).catch(() => {});
+    const pick = await page.evaluate(() => {
+      const li = [...document.querySelectorAll('.s-list li')].find((x) => /1600/.test(x.textContent));
+      return li ? li.textContent : null;
+    });
+    if (pick) await page.keyboard.press('Enter');
+    await settleClock(page);
+    const per = await page.evaluate(() => {
+      const { model, time, ctl } = window.__earth;
+      return { cursorU: time.cursorU, targetU: time.targetU, fromU: time.fromU, toU: time.toU, view: ctl.state.view.kind, from1600: model.scale.toU(1600), to1700: model.scale.toU(1700), ramp: 0.022 };
+    });
+    const inPeriod = per.cursorU >= per.from1600 - 2e-3 && per.cursorU <= per.to1700 + per.ramp;
+    check(!!pick && inPeriod && per.cursorU > edgeBefore + 0.02, 'period search 1600s from Phoenix: the cursor reaches the period, not the span\'s edge', `picked "${pick ?? 'none'}"; cursor ${per.cursorU.toFixed(4)} in [${per.from1600.toFixed(4)}, ${(per.to1700 + per.ramp).toFixed(4)}] (edge ${edgeBefore.toFixed(4)})`);
+    check(near(per.fromU, full.fromU, 1e-9) && near(per.toU, full.toU, 1e-9), 'period search: the track is the whole field\'s range while the period is reached', `${per.fromU.toFixed(4)}..${per.toU.toFixed(4)}`);
+
+    // Esc keeps it: stepping back from the focus to the world does not pull the clock back to the span
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(() => window.__earth.ctl.state.view.kind === 'world', null, { timeout: 15000, polling: 100 }).catch(() => {});
+    await settleClock(page);
+    const esc = await page.evaluate(() => ({ cursorU: window.__earth.time.cursorU, view: window.__earth.ctl.state.view.kind }));
+    check(esc.cursorU >= per.from1600 - 2e-3 && esc.cursorU <= per.to1700 + per.ramp, 'Esc afterwards keeps the period', `${esc.view}, cursor ${esc.cursorU.toFixed(4)}`);
+    logs.forEach((l) => { if (/pageerror/.test(l)) pageErrors.push(l); });
+  } finally {
+    await ctx.close();
+  }
+}
+
+// ── (vi) no page errors ────────────────────────────────────────────────────────────────────────────────────────
 check(pageErrors.length === 0, 'no page errors', pageErrors.slice(0, 3).join(' | '));
 await browser.close();
 console.log(failed ? `\n${failed} check(s) failed` : '\nall checks passed');
