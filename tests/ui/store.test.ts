@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { back, focusOn, manifest, setDeep, startThread, stateEq, WORLD } from '../../src/state/store';
-import { hashToState, stateToHash, type Resolver } from '../../src/state/router';
+import { back, focusOn, inSky, manifest, openedFrom, setDeep, startThread, stateEq, WORLD, type AppState } from '../../src/state/store';
+import { defaultReadingId, hashToState, stateToHash, type Resolver } from '../../src/state/router';
 
 const serpent = { type: 'family', id: 'serpent' } as const;
 
@@ -115,5 +115,82 @@ describe('hash router', () => {
 
   it('reads a time cursor', () => {
     expect(hashToState('#/y/1600', r).year).toBe(1600);
+  });
+});
+
+describe('the Aion switch and #/aion agree', () => {
+  const readings = [{ id: 'jung-aion' }, { id: 'jung-turn' }];
+  const r: Resolver = {
+    hasArchetype: () => false,
+    hasFamily: () => false,
+    hasCulture: () => false,
+    hasPlace: () => false,
+    familyOf: () => undefined,
+    hasReading: (id) => readings.some((x) => x.id === id),
+    hasHistorySelection: () => false,
+    defaultReading: () => defaultReadingId(readings),
+  };
+
+  it('a bare #/aion opens the default reading, the one the switch opens', () => {
+    const parsed = hashToState('#/aion', r).state;
+    expect(parsed.history).toEqual({ reading: 'jung-aion' });
+    expect(parsed.view).toEqual({ kind: 'world' });
+    expect(stateToHash(parsed)).toBe('#/aion/jung-aion');
+  });
+
+  it('keeps a named reading and its selection exactly as before', () => {
+    expect(hashToState('#/aion/jung-turn', r).state.history).toEqual({ reading: 'jung-turn' });
+    expect(hashToState('#/aion/nope', r).state).toEqual(WORLD);
+  });
+
+  it('falls back to the world when there is no reading to open', () => {
+    const none: Resolver = { ...r, hasReading: () => false, defaultReading: () => defaultReadingId([]) };
+    expect(hashToState('#/aion', none).state).toEqual(WORLD);
+  });
+});
+
+describe('a reading a mode opened returns to that mode (Escape, once)', () => {
+  const serpent = { type: 'family', id: 'serpent' } as const;
+  const aion: AppState = { view: { kind: 'world' }, deep: false, history: { reading: 'jung-aion', selection: { kind: 'event', id: 'e1' } } };
+  const redbook: AppState = { view: { kind: 'world' }, deep: false, redbook: { stop: 'folio-7' } };
+  const sky: AppState = inSky({ body: 'venus' });
+  const reading = (from: AppState) => openedFrom(from, { view: { kind: 'manifest', occId: 'serpent-1', context: { type: 'family', id: 'serpent' } }, deep: true });
+
+  it('Escape from the core reading returns to the Aion event, the Red Book folio and the sky body it came from', () => {
+    expect(back(reading(aion))).toEqual(aion);
+    expect(back(reading(redbook))).toEqual(redbook);
+    expect(back(reading(sky))).toEqual(sky);
+  });
+
+  it('the return is taken once: the mode state it returns to carries no memory', () => {
+    const back1 = back(reading(redbook));
+    expect(back1.from).toBeUndefined();
+    // the next Escape walks the mode's own ladder, not a second return
+    expect(back(back1)).toEqual({ view: { kind: 'world' }, deep: false, redbook: {} }); // the book's own ladder: folio → the null book
+  });
+
+  it('the memory is cleared by any navigation that is not the reading itself', () => {
+    const r = reading(redbook);
+    expect(focusOn(r, serpent).from).toBeUndefined();
+    expect(manifest(r, 'serpent-2', serpent).from).toBeUndefined();
+    // a deep layer that is closed keeps the return (it is the same reading)
+    expect(back(setDeep(r, false)).from).toBeUndefined();
+    expect(setDeep(r, false).from).toEqual(redbook);
+  });
+
+  it('is never in the hash: the reading serialises as the reading alone', () => {
+    expect(stateToHash(reading(aion))).toBe(stateToHash({ view: { kind: 'manifest', occId: 'serpent-1', context: { type: 'family', id: 'serpent' } }, deep: true }));
+  });
+
+  it('is compared by presence only', () => {
+    const plain = { view: { kind: 'manifest' as const, occId: 'serpent-1', context: { type: 'family' as const, id: 'serpent' } }, deep: true };
+    expect(stateEq(reading(redbook), plain)).toBe(false);
+    expect(stateEq(reading(redbook), reading(sky))).toBe(true);
+  });
+
+  it('does not change what Escape does where no mode opened the reading', () => {
+    const plainDeep = setDeep(manifest(focusOn(WORLD, serpent), 'serpent-1', serpent), true);
+    expect(back(plainDeep).deep).toBe(false);
+    expect(back(plainDeep).view.kind).toBe('manifest');
   });
 });

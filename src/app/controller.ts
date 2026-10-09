@@ -8,8 +8,8 @@ import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
-import { hashToState, stateToHash } from '../state/router';
-import { back, focusOn, inSky, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
+import { defaultReadingId, hashToState, stateToHash } from '../state/router';
+import { back, focusOn, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
@@ -46,7 +46,7 @@ import { chartMoment } from '../sky/chart';
 import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { approachDist, isApproachBody, skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -189,24 +189,21 @@ export class Controller {
     }, engine.reduced);
     root.before(this.graph.root);
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
-    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages);
+    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages, occId => this.openReading(occId));
     this.aionSwitch = el('button', { type: 'button', class: 'aion-switch', text: 'Aion', title: history ? 'Archetypal history (A)' : 'Aion history data is unavailable', 'aria-pressed': 'false', disabled: !history,
       onclick: () => this.toggleAion() });
-    document.body.append(this.aionSwitch);
 
-    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id)) : null;
+    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id), occId => this.openReading(occId)) : null;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
     if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]), this.fullSpan());
     this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
       onclick: () => this.toggleRedbook() });
-    document.body.append(this.redbookSwitch);
 
     // the concept data is optional (absent is the normal state, shown as none); a malformed file is reported, never hidden
     this.lens = new DynamicsView(root, m, engine, time, state => this.navigate(state), passages, null);
     void loadDynamics().then((data) => this.lens.setConcepts(data)).catch((err) => console.error(err));
     this.lensSwitch = el('button', { type: 'button', class: 'dy-switch', text: 'Dynamics', title: 'The field as a dynamical system (D)', 'aria-pressed': 'false',
       onclick: () => this.toggleLens() });
-    document.body.append(this.lensSwitch);
 
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
@@ -215,6 +212,7 @@ export class Controller {
     this.skyCard = new SkyCard(root, {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
       onOccurrence: (id) => this.openOccurrenceId(id),
+      onReading: (target) => this.openSubjectReading(target),
       onClose: () => this.stepBack(),
       passage: this.passage.bridge(),
     });
@@ -232,13 +230,22 @@ export class Controller {
     });
     this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
       onclick: () => this.toggleSky() });
-    document.body.append(this.skySwitch);
+    // the four switches stand in one row, in the order they read (Dynamics · Red Book · Sky · Aion), so the gaps are even and
+    // Tab follows the eye; the row sits before the mode pill and the search glyph, which follow it in the same order
+    const modeRow = el('nav', { class: 'mode-row', 'aria-label': 'Modes' }, [this.lensSwitch, this.redbookSwitch, this.skySwitch, this.aionSwitch]);
+    const search = document.getElementById('search-btn');
+    if (search) search.before(modeRow, this.modeSwitch.root);
+    else document.body.append(modeRow, this.modeSwitch.root);
 
     document.getElementById('search-btn')?.addEventListener('click', (e) => this.search.open(e.currentTarget as HTMLElement));
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('hashchange', this.onHash);
     window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); this.syncGraphInsets(); });
     engine.onFrame((dt) => this.tick(dt));
+    // the sky's data is fetched at idle, so the first pull-back never waits on it (audit S3 (d)); never on the boot path
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void, opts: { timeout: number }) => number }).requestIdleCallback;
+    if (idle) idle(() => this.requestSky(), { timeout: 4000 });
+    else window.setTimeout(() => this.requestSky(), 1500);
   }
 
   /** The distance at which the whole earth sits in view for this viewport. */
@@ -247,9 +254,17 @@ export class Controller {
   }
 
   private syncRig() {
-    // once the sky has loaded the pull-back is one continuous gesture, out to past Neptune
+    // once the sky has loaded the pull-back is one continuous gesture, out to past Neptune; until then it resists beyond the
+    // atlas's own limit, toward the sky's, so the first pull-back never stalls and then jumps (audit S3 (d))
     const aspect = this.engine.width / Math.max(1, this.engine.height);
-    this.engine.rig.maxDist = this.skyLayer ? skyMaxDist(aspect, FOV) : Math.max(5.4, this.worldDist() + 0.9);
+    const rig = this.engine.rig;
+    if (this.skyLayer) {
+      rig.maxDist = skyMaxDist(aspect, FOV);
+      rig.softMaxDist = 0;
+    } else {
+      rig.maxDist = Math.max(5.4, this.worldDist() + 0.9);
+      rig.softMaxDist = this.skyFailed ? 0 : skyMaxDist(aspect, FOV);
+    }
   }
 
   // ── engine callbacks ──────────────────────────────────────────────────
@@ -330,6 +345,7 @@ export class Controller {
         return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
       },
       hasRedBookStop: (id: string) => this.redbookStops.has(id),
+      defaultReading: () => defaultReadingId(this.aion?.history.readings ?? []),
     };
   }
 
@@ -605,6 +621,18 @@ export class Controller {
     this.aionTime = null;
   }
 
+  /** A mode's core reading of an occurrence (a double-click on its card): Escape returns to the mode it was opened from. */
+  private openReading(occId: string) {
+    const i = this.m.occIndex.get(occId);
+    if (i === undefined) return;
+    this.navigate(openedFrom(this.state, { view: { kind: 'manifest', occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: true }));
+  }
+
+  /** A sky body's core reading (a double-click on its card): the field target it descends to, read at depth; Escape returns to the sky. */
+  private openSubjectReading(subject: Subject) {
+    this.navigate(openedFrom(this.state, { view: { kind: 'focus', subject }, deep: true }));
+  }
+
   /** Leave the Red Book: its folio view, and the range and clock it held. */
   private leaveRedbook(next: AppState) {
     const v = next.view;
@@ -617,6 +645,8 @@ export class Controller {
     }
     this.rbTime = null;
     this.rbRange = null;
+    // the Red Book's title goes with it: the next state sets its own (a focus, Aion or the world does), else the world's
+    document.title = 'An Archetypal Earth';
     // leaving to the plain world: the Red Book's red must give way (not when a link is carrying us straight
     // into Aion, a focus or the lens, which set palettes)
     if (v.kind === 'world' && !next.sky && !graph && !next.history && !next.dynamics) this.enterWorld(false);
@@ -864,6 +894,7 @@ export class Controller {
       if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
+      this.syncRig(); // no sky is coming: the pull-back's resistance beyond the atlas's limit ends
       for (const w of this.layerWaiters.splice(0)) w(null);
       console.warn(err);
       this.skySwitch.disabled = true;
@@ -1088,8 +1119,26 @@ export class Controller {
     }
   }
 
+  /**
+   * The arrival settle (audit S3 (b)): a wheel or pinch that has carried the camera into the system, once it rests, eases the
+   * orientation to the canonical system view, the room the S key composes, at the same distance. It acts only after a wheel
+   * or pinch with no drag since; never in an approach, a birth sky, or under reduced motion. Any input cancels it (controls.ts).
+   */
+  private settleArrival() {
+    const rig = this.engine.rig;
+    const layer = this.skyLayer;
+    const sky = this.state.sky;
+    const now = performance.now();
+    const eligible = !!layer && !!sky && !sky.birth && !this.approachFor(sky) && !layer.approach && !this.engine.reduced
+      && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
+      && now - rig.lastWheelAt >= SETTLE.idleMs && now - rig.lastDragAt >= SETTLE.quietDragMs;
+    if (!eligible || !layer) { rig.settleTo = null; return; }
+    rig.settleTo = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+  }
+
   /** The zoom gesture crossing the Moon's edge sets and clears the sky flag; the camera stays the user's. */
   private watchSkyGesture() {
+    this.settleArrival();
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
     if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || this.state.dynamics || rig.flying) return;
@@ -1122,7 +1171,8 @@ export class Controller {
   }
   private toggleAion() {
     if (!this.aion) return;
-    this.navigate(this.state.history ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading: this.aion.history.readings[0].id } });
+    const reading = defaultReadingId(this.aion.history.readings);
+    this.navigate(this.state.history || !reading ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading } });
   }
 
   private toggleRedbook() {

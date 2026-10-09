@@ -66,10 +66,10 @@
 }
 
 /* the switch: the Red Book's quiet switch, set beside it on the same line */
-.dy-switch { position: fixed; top: 24px; right: 352px; z-index: 21; color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
+.dy-switch { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
 .dy-switch:hover { color: var(--ink); }
 .dy-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
 body.search-open .dy-switch, body.deep-open .dy-switch { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .dy-switch { top: 16px; right: 304px; font-size: 11px; }
+  .dy-switch { font-size: 11px; }
 }

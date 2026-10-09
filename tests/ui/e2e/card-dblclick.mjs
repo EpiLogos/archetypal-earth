@@ -5,8 +5,10 @@
 //   · thread strip: single tap jumps at once; dblclick on step 5 lands on 5 and opens its reading, with the rail held
 //     still (run twice: with the rail's own transition, and with it removed, which re-creates the old i=5 → i=9 jump)
 //   · strip caption: dblclick opens the current step's reading
-//   · Red Book stop card and its Back path: NOT wired (audit W1c: Escape from a core reading does not return to the
-//     Red Book stop; see the report). Those checks print GAP and do not fail the walk.
+//   · Red Book stop card: dblclick → the stop's core reading; Escape returns to the same Red Book stop (W1c)
+//   · Aion event card: dblclick → the event's first occurrence as its core reading; Escape returns to the same event;
+//     an epoch card and an event with no occurrence do nothing
+//   · sky body card: dblclick → the body's descent target as its core reading; Escape returns to the same body
 //   · no page errors
 //   npx vite --port 5183 --strictPort &
 //   EARTH_HEADLESS=1 node tests/ui/e2e/card-dblclick.mjs [chromium|webkit]
@@ -19,16 +21,24 @@ const kind = process.argv[2] ?? 'chromium';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json'), 'utf8'));
 const serpentOcc = field.occurrences.find((o) => o.familyId === 'serpent' && o.geoPrecision !== 'none').id;
+const history = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/history.json'), 'utf8'));
+const redbook = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/redbook.json'), 'utf8'));
+const sky = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/sky.json'), 'utf8'));
+const occIds = new Set(field.occurrences.map((o) => o.id));
+const aionReading = history.readings[0];
+const aionEvent = aionReading.events.find((e) => (e.occurrenceIds ?? []).some((id) => occIds.has(id)));
+const aionEventOcc = aionEvent.occurrenceIds.find((id) => occIds.has(id));
+const aionBare = aionReading.events.find((e) => !(e.occurrenceIds ?? []).some((id) => occIds.has(id)));
+const aionEpoch = aionReading.epochs.find((e) => !e.parentId);
+// the null landing centres The Self: the folio its genesis row names (as modes-switch.mjs reads it)
+const rbSelfStop = redbook.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self').stopId;
+const skyBody = 'venus';
+const skyTarget = sky.bodies.find((b) => b.key === skyBody).ties.find((t) => t.basis !== 'site' && t.target)?.target;
 
 let failed = 0;
-let gaps = 0;
 const check = (ok, label, detail = '') => {
   if (!ok) failed++;
   console.log(`${ok ? 'PASS' : 'FAIL'} ${kind} ${label}${detail ? ` — ${detail}` : ''}`);
-};
-const gap = (ok, label, detail = '') => {
-  if (!ok) gaps++;
-  console.log(`${ok ? 'PASS' : 'GAP '} ${kind} ${label}${detail ? ` — ${detail}` : ''}`);
 };
 
 const state = (page) => page.evaluate(() => {
@@ -41,6 +51,12 @@ const state = (page) => page.evaluate(() => {
     deepOpen: document.body.classList.contains('deep-open') && !!deep && !deep.hidden,
     trail: !!c.state.trail,
     redbook: !!c.state.redbook,
+    redbookStop: c.state.redbook?.stop ?? null,
+    occId: c.state.view.kind === 'manifest' ? c.state.view.occId : null,
+    subject: c.state.view.kind === 'focus' ? `${c.state.view.subject.type}/${c.state.view.subject.id}` : null,
+    aion: c.state.history ? { reading: c.state.history.reading, selection: c.state.history.selection ?? null } : null,
+    sky: c.state.sky ? (c.state.sky.body ?? '') : null,
+    from: !!c.state.from,
     tourI: c.tour ? c.tour.i : null,
     selection: window.getSelection()?.toString() ?? '',
   };
@@ -246,35 +262,108 @@ try {
     }
   }
 
-  // ── (iii) the Red Book stop card: not wired (W1c), reported as GAPs ─────
+  // ── (iii) the Red Book folio card: dblclick → its core reading; Escape → the same folio (W1c) ───────
   {
     const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: '#/redbook' });
     track(page);
     await until(page, () => document.querySelector('.redbook .rv-name')?.textContent);
     await page.waitForTimeout(300);
+    const before = await state(page);
+    const landingName = await page.locator('.redbook .rv-name').textContent();
+    check(before.redbook && before.redbookStop === null && before.kind === 'world', 'the Red Book stands on its null landing before the gesture', before.hash);
     await page.locator('.redbook .rv-name').dblclick();
-    await page.waitForTimeout(600);
+    await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
+    await page.waitForTimeout(500);
     const rb = await state(page);
-    gap(rb.kind === 'manifest' && rb.deep, 'a double-click on a Red Book stop opens its core reading (not wired yet)', rb.hash);
-    // the Back machinery, probed directly: from the core reading of a stop, Escape should return to that Red Book stop
-    const stop = await page.evaluate(async () => {
-      const rb = await fetch('/data/redbook.json').then((r) => r.json());
-      return rb.stops[3].id;
-    });
-    await page.evaluate((id) => {
-      const c = window.__earth.ctl; const mdl = window.__earth.model; const o = mdl.occ[mdl.occIndex.get(id)];
-      c.navigate({ view: { kind: 'manifest', occId: id, context: { type: 'family', id: o.familyId } }, deep: true });
-    }, stop);
-    await until(page, () => window.__earth.ctl.state.deep === true);
+    check(rb.kind === 'manifest' && rb.deep && rb.deepOpen && rb.from, 'a double-click on a Red Book folio opens that folio\'s core reading, at depth', rb.hash);
+    const landedOn = rb.occId;
+    check(landedOn === rbSelfStop, 'the reading is the standing folio\'s own occurrence (The Self\'s folio on the null landing)', `${landedOn}`);
     await page.keyboard.press('Escape');
-    await page.waitForTimeout(800);
+    await until(page, () => window.__earth.ctl.state.redbook && !window.__earth.ctl.state.deep);
+    await page.waitForTimeout(500);
     const back = await state(page);
-    gap(back.redbook, 'Escape from that core reading returns to the same Red Book stop', back.hash);
+    const backName = await page.locator('.redbook .rv-name').textContent();
+    check(back.redbook && !back.deep && !back.from && backName === landingName, 'Escape returns to the Red Book folio the reader was on (the null landing), and the memory is spent', `${back.hash}, "${backName}"`);
+    // the same walk, from a folio the reader walked to: the return is to that folio, not the landing
+    await page.keyboard.press('ArrowRight');
+    await until(page, (id) => !!window.__earth.ctl.state.redbook?.stop && window.__earth.ctl.state.redbook.stop !== id, landedOn);
+    await page.waitForTimeout(500);
+    const next = await state(page);
+    await page.locator('.redbook .rv-name').dblclick();
+    await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
+    await page.waitForTimeout(400);
+    await page.keyboard.press('Escape');
+    await until(page, () => window.__earth.ctl.state.redbook && !window.__earth.ctl.state.deep);
+    await page.waitForTimeout(500);
+    const back2 = await state(page);
+    check(back2.redbookStop === next.redbookStop && back2.redbookStop !== landedOn, 'after walking on, Escape returns to the folio the reader was on', `${back2.redbookStop}`);
+    await ctx.close();
+  }
+
+  // ── (iv) the Aion event card: dblclick → its occurrence's core reading; Escape → the same event ───────
+  {
+    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: `#/aion/${aionReading.id}/event/${aionEvent.id}` });
+    track(page);
+    await until(page, (name) => document.querySelector('.aion-card .rv-name')?.textContent === name, aionEvent.name);
+    await page.waitForTimeout(500);
+    const a0 = await state(page);
+    check(a0.aion?.selection?.id === aionEvent.id, 'the Aion event card stands for the event', a0.hash);
+    await page.locator('.aion-card .rv-name').dblclick();
+    await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
+    await page.waitForTimeout(500);
+    const a1 = await state(page);
+    check(a1.occId === aionEventOcc && a1.deep && a1.deepOpen && !a1.aion, 'a double-click on the event card opens its first occurrence as the core reading', `${a1.hash}`);
+    await page.keyboard.press('Escape');
+    await until(page, () => window.__earth.ctl.state.history && !window.__earth.ctl.state.deep);
+    await page.waitForTimeout(500);
+    const a2 = await state(page);
+    check(a2.aion?.reading === aionReading.id && a2.aion?.selection?.id === aionEvent.id && !a2.from, 'Escape returns to the same Aion event', a2.hash);
+
+    // an event whose occurrence is not in the field does nothing (never an invented target)
+    if (aionBare) {
+      await page.evaluate((hash) => { location.hash = hash; }, `#/aion/${aionReading.id}/event/${aionBare.id}`);
+      await until(page, (id) => window.__earth.ctl.state.aion?.selection?.id === id, aionBare.id);
+      await page.waitForTimeout(500);
+      await page.locator('.aion-card .rv-name').dblclick();
+      await page.waitForTimeout(500);
+      const bare = await state(page);
+      check(!bare.deep && bare.kind === 'world' && bare.aion?.selection?.id === aionBare.id, 'an event with no occurrence in the field opens nothing', bare.hash);
+    } else console.log(`SKIP ${kind} event without occurrence: none in ${aionReading.id}`);
+
+    // an epoch card has no occurrence of its own: its double-click does nothing
+    await page.evaluate((hash) => { location.hash = hash; }, `#/aion/${aionReading.id}/epoch/${aionEpoch.id}`);
+    await until(page, (id) => window.__earth.ctl.state.aion?.selection?.id === id, aionEpoch.id);
+    await page.waitForTimeout(500);
+    await page.locator('.aion-card .rv-name').dblclick();
+    await page.waitForTimeout(500);
+    const ep = await state(page);
+    check(!ep.deep && ep.kind === 'world' && ep.aion?.selection?.id === aionEpoch.id, 'an epoch card\'s double-click opens nothing', ep.hash);
+    await ctx.close();
+  }
+
+  // ── (v) the sky body card: dblclick → its descent target as the core reading; Escape → the same body ─────
+  {
+    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: `#/sky/${skyBody}` });
+    track(page);
+    await until(page, () => document.querySelector('.sky-card.on .rv-name')?.textContent);
+    await page.waitForTimeout(600);
+    const k0 = await state(page);
+    check(k0.sky === skyBody, 'the sky body card stands for the body', k0.hash);
+    await page.locator('.sky-card .rv-name').dblclick();
+    await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'focus');
+    await page.waitForTimeout(500);
+    const k1 = await state(page);
+    check(k1.subject === `${skyTarget.type}/${skyTarget.id}` && k1.deep && k1.deepOpen && !k1.sky, 'a double-click on the body card opens its descent target as the core reading', `${k1.subject}, ${k1.hash}`);
+    await page.keyboard.press('Escape');
+    await until(page, () => window.__earth.ctl.state.sky && !window.__earth.ctl.state.deep);
+    await page.waitForTimeout(500);
+    const k2 = await state(page);
+    check(k2.sky === skyBody && !k2.from, 'Escape returns to the same sky body', k2.hash);
     await ctx.close();
   }
 } finally {
   await browser.close();
 }
 check(!logs.some((l) => /pageerror/.test(l)), 'no page errors across the walk', logs.join(' | ').slice(0, 300));
-console.log(`${gaps ? `${gaps} known gap(s) open (W1c, Red Book)` : 'no known gaps'}; ${failed ? `${failed} check(s) failed` : 'all checks passed'}`);
+console.log(`${failed ? `${failed} check(s) failed` : 'all checks passed'}`);
 process.exit(failed ? 1 : 0);

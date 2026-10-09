@@ -10,7 +10,7 @@ import type { Model } from '../data/model';
 import { subjectExists, subjectName } from '../data/model';
 import type { TieBasis } from '../types/field';
 import type { BodyKey, SkyBody, SkyBodyQuote, SkyCite, SkyData, SkyReading, SkyTie } from '../types/sky';
-import { clear, el, plate } from '../ui/dom';
+import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort, passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
@@ -22,6 +22,8 @@ export interface FieldTarget { type: 'family' | 'archetype'; id: string }
 
 export interface SkyCardHandlers {
   onField(target: FieldTarget): void;
+  /** the body's core reading: a double-click on the card opens the field target it descends to, as a reading */
+  onReading?(target: FieldTarget): void;
   /** open one of the body's earth-bound occurrences, leaving the sky for the field */
   onOccurrence(id: string): void;
   onClose(): void;
@@ -145,6 +147,8 @@ export class SkyCard {
   private shown = false;
   private key: string = '';
   private gen = 0;
+  /** the target the card descends to, which its double-click opens as a reading (none when no tie resolves) */
+  private descent: FieldTarget | undefined;
 
   constructor(parent: HTMLElement, private h: SkyCardHandlers) {
     this.body = el('div', { class: 'rv-body' });
@@ -156,6 +160,7 @@ export class SkyCard {
     ]);
     this.root.inert = true;
     parent.append(this.root);
+    onReadGesture(this.root, () => { if (this.descent) this.h.onReading?.(this.descent); });
   }
 
   show(key: BodyKey, ctx: CardContext) {
@@ -266,8 +271,10 @@ export class SkyCard {
     }
     this.body.append(text);
 
-    // the way down to the Earth
+    // the way down to the Earth, and (by a double-click on the card) its reading: the first curated (non-editorial)
+    // tie that resolves, else the first resolved one
     const first = resolved.find((t) => t.basis !== 'site') ?? resolved[0];
+    this.descent = first?.target;
     if (first) this.foot.append(el('button', { class: 'link-quiet', type: 'button', text: `Descend to ${subjectName(m, first.target)}`, onclick: () => this.h.onField(first.target) }));
     this.foot.append(el('button', { class: 'link-quiet', type: 'button', text: 'Back to the sky', onclick: () => this.h.onClose() }));
   }

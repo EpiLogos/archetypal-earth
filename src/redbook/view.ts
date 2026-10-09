@@ -9,7 +9,7 @@ import { toRgbPalette } from '../data/palette';
 import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
-import { clear, el, plate } from '../ui/dom';
+import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
@@ -29,8 +29,12 @@ export class RedBookView {
   private current: RedBookStop | undefined;
   private sectionName = new Map<string, string>();
 
-  /** `onStop`: a folio stands (by its stop id); the controller tunes the clock to its year. */
-  constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void, private onStop: (stopId: string) => void = () => {}) {
+  /**
+   * `onStop`: a folio stands (by its stop id); the controller tunes the clock to its year.
+   * `onRead`: the standing folio's core reading, opened by a double-click on its card (the controller keeps this mode to return to).
+   */
+  constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void,
+    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}) {
     this.mode = redbook;
     this.navigate = navigate;
     for (const s of redbook.sections) this.sectionName.set(s.id, s.name);
@@ -41,12 +45,16 @@ export class RedBookView {
     this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.heading, this.rail, this.card]);
     this.setCardActive(false);
     parent.append(this.root);
+    // a double-click on a folio's card opens its occurrence's core reading; the genesis table has no folio to open
+    onReadGesture(this.card, () => { if (this.current) this.onRead(this.current.id); });
   }
 
   show(state: AppState['redbook']) {
     this.state = state;
     this.root.hidden = false;
     document.body.classList.add('redbook-mode');
+    // the book's own title stands unless a folio does (showStop names the folio)
+    document.title = `${this.mode.mode.title} — An Archetypal Earth`;
     this.buildHeading();
     this.buildRail();
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
@@ -139,6 +147,7 @@ export class RedBookView {
     if (i === undefined) return;
     const o = m.occ[i];
     const fam = m.famById.get(o.familyId);
+    document.title = `${o.title} — An Archetypal Earth`;
     clear(this.card);
     this.card.append(this.closeButton());
     const body = el('div', { class: 'rv-body' });

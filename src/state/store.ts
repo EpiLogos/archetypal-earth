@@ -37,9 +37,21 @@ export interface AppState {
   dynamics?: { subject?: Subject };
   /** The live path remains standing while one of its presences is inspected. */
   trail?: Extract<View, { kind: 'thread' }>;
+  /**
+   * The mode a core reading was opened from (a double-click on an Aion event, a Red Book stop or a sky body). Escape
+   * and close return to it once; it is session-local (never in the hash) and any other navigation drops it.
+   */
+  from?: AppState;
 }
 
 export const WORLD: AppState = { view: { kind: 'world' }, deep: false };
+
+/** `next`, a reading a mode opened, remembering the mode state it was opened from so `back` can return there. */
+export function openedFrom(from: AppState, next: AppState): AppState {
+  const mode: AppState = { ...from };
+  delete mode.from;
+  return { ...next, from: mode };
+}
 
 /** Carry the mode of `from` onto a fresh state. */
 function inMode(from: AppState, next: AppState): AppState {
@@ -109,6 +121,8 @@ export function setDeep(s: AppState, deep: boolean): AppState {
 
 /** One step back: deep → manifestation → focus (up the drilled route) → world (thread → where it began). */
 export function back(s: AppState): AppState {
+  // a reading a mode opened returns to that mode, once (the memory is the mode state itself, so it is cleared with it)
+  if (s.from) return s.from;
   if (s.deep) return { ...s, deep: false };
   if (s.sky) {
     // a card closes onto the sky; the sky closes onto the Earth
@@ -170,7 +184,8 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && !!a.dynamics === !!b.dynamics
     && (!a.dynamics?.subject) === (!b.dynamics?.subject)
     && (!a.dynamics?.subject || !b.dynamics?.subject || subjectEq(a.dynamics.subject, b.dynamics.subject))
-    && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)));
+    && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)))
+    && !!a.from === !!b.from;
 }
 
 /** Depth used to decide whether a move is an ascent (zoom out) or descent. */
