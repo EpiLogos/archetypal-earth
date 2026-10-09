@@ -22,9 +22,11 @@
 body.search-open .rb-switch, body.deep-open .rb-switch { opacity: 0; pointer-events: none; }
 
 .rb-plate { width: 100%; aspect-ratio: 0.72; object-fit: cover; object-position: center; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.25); outline-offset: 5px; }
-.rb-plate-note { margin: 14px 0 0; font: 11px/1.6 var(--sans); color: var(--ink-3); letter-spacing: 0.02em; }
-.rb-folio { margin-top: 8px !important; font: 11.5px var(--sans) !important; color: var(--ink-3); letter-spacing: 0.02em; }
-.rb-caption { font-style: italic; color: var(--ink-3) !important; font-size: 0.95rem !important; }
+/* the card: the Red Book's own aside (its look is the reveal's, as the Aion card's is) */
+.rb-card { bottom: 126px; max-height: calc(100vh - 210px); }
+.rb-card[hidden] { display: none; }
+.rb-card .aion-date { margin: 0 22px 9px 0; }
+.rb-card .aion-lede { color: var(--ink); }
 .rb-quote { margin: 18px 0 4px; }
 .rb-doctrine { color: var(--ink-3) !important; font-size: 0.98rem !important; }
 
@@ -41,4 +43,5 @@ body.redbook-mode .aion-switch, body.redbook-mode .sky-switch { opacity: 0.4; }
   .rb-heading { left: 22px; top: 74px; max-width: calc(100vw - 44px); }
   .rb-switch { top: 16px; right: 240px; font-size: 11px; }
   .rb-section { display: none; }
+  .rb-card { bottom: 108px; max-height: 48vh; }
 }

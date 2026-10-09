@@ -4,13 +4,15 @@
 // Everything here is subject: Jung — the book is the one corpus-document
 // where analyst, patient and commentator are the same body.
 import type { Model } from '../data/model';
+import { occurrenceImage } from '../data/model';
 import { toRgbPalette } from '../data/palette';
 import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
-import { clear, el } from '../ui/dom';
+import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
-import { eraShort, jungLine } from '../ui/format';
+import { eraShort } from '../ui/format';
+import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
 
 /** The mode's own atmosphere: the book's red, deep and bounded. */
 const REDBOOK_PALETTE = { core: '#c0554a', glow: '#8a342e', fog: '#2a1110', deep: '#120606' };
@@ -34,7 +36,7 @@ export class RedBookView {
     this.stops = redbook.stops;
     this.heading = el('header', { class: 'rb-heading' });
     this.rail = el('nav', { class: 'rb-rail', 'aria-label': 'Folio walk' });
-    this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Red Book reading' });
+    this.card = el('aside', { class: 'rb-card reveal on', 'aria-label': 'Red Book reading', hidden: true });
     this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.heading, this.rail, this.card]);
     parent.append(this.root);
   }
@@ -46,7 +48,7 @@ export class RedBookView {
     this.buildHeading();
     this.buildRail();
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
-    this.card.hidden = false;
+    this.setCardActive(true);
     if (state?.genesis) this.showGenesis();
     else {
       // the null landing centres The Self: the stop its genesis row names (as the graph's null state does), else the first folio
@@ -61,8 +63,17 @@ export class RedBookView {
     if (this.root.hidden) return;
     this.root.hidden = true;
     document.body.classList.remove('redbook-mode');
+    this.setCardActive(false);
     this.current = undefined;
     this.state = undefined;
+  }
+
+  /** The aside is out of the keyboard path and the accessibility tree whenever the mode is not showing. */
+  private setCardActive(active: boolean) {
+    this.card.hidden = !active;
+    this.card.inert = !active;
+    if (active) this.card.removeAttribute('aria-hidden');
+    else this.card.setAttribute('aria-hidden', 'true');
   }
 
   private select(next: AppState['redbook']) {
@@ -102,15 +113,20 @@ export class RedBookView {
     return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close Red Book', onclick: () => this.navigate({ view: { kind: 'world' }, deep: false }) }, [closeGlyph()]);
   }
 
-  /** The plate: a local-only runtime asset — absent outside the dev server, and the note says so. */
-  private plate(stop: RedBookStop): HTMLElement | null {
-    if (!stop.plate) return null;
-    const img = el('img', { class: 'rv-hero rb-plate', alt: 'Facsimile plate — Liber Novus', src: `${this.mode.plates.urlPrefix}${stop.plate}` }) as HTMLImageElement;
-    const note = el('p', { class: 'rb-plate-note', hidden: true,
-      text: 'The facsimile plate for this folio is withheld under the Norton licence; it appears only in the owner\u2019s own copy of Liber Novus.' });
-    img.addEventListener('error', () => { img.hidden = true; note.hidden = false; });
-    const host = el('div', {}, [img, note]);
-    return host;
+  /**
+   * The dev-only facsimile: an extra beside the hero, present only on the dev server and gone the moment
+   * it cannot load. Its alt text is the vault's plate note; nothing about it is shown to the reader.
+   */
+  private facsimile(stop: RedBookStop): HTMLElement | null {
+    if (!import.meta.env.DEV || !stop.plate) return null;
+    const img = el('img', { class: 'rb-plate', alt: stop.plateCaption ?? 'Facsimile plate — Liber Novus', loading: 'lazy', src: `${this.mode.plates.urlPrefix}${stop.plate}` });
+    img.addEventListener('error', () => img.remove());
+    return img;
+  }
+
+  /** The key words, open: a blockquote that is never collapsed, its footer the cite. */
+  private quote(words: string, footer: string): HTMLElement {
+    return el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${words}”` }), footer ? el('footer', { text: footer }) : null]);
   }
 
   private showStop(stop: RedBookStop) {
@@ -120,35 +136,38 @@ export class RedBookView {
     const i = m.occIndex.get(stop.id);
     if (i === undefined) return;
     const o = m.occ[i];
+    const fam = m.famById.get(o.familyId);
     clear(this.card);
     this.card.append(this.closeButton());
     const body = el('div', { class: 'rv-body' });
     const text = el('div', { class: 'rv-text' });
-    const plate = this.plate(stop);
-    if (plate) body.append(plate);
-    const fam = m.famById.get(o.familyId);
-    const folio = o.jung[0] ? jungLine(o.jung[0]).replace(/^Jung · /, '') : '';
+    body.append(plate(occurrenceImage(m, o), { className: 'rv-hero', credit: true, palette: fam?.palette, alt: o.title, eager: true }));
+    const facsimile = this.facsimile(stop);
+    if (facsimile) body.append(facsimile);
     text.append(
       el('p', { class: 'aion-date rv-line', text: [this.sectionName.get(stop.sectionId) ?? '', eraShort(o.yearDisplay, 40)].filter(Boolean).join(' · ') }),
       el('h2', { class: 'rv-name', text: o.title }),
-      el('p', { class: 'rv-para rb-folio', text: folio }),
     );
-    if (stop.plateCaption) text.append(el('p', { class: 'rv-para rb-caption', text: stop.plateCaption }));
-    if (o.quote) text.append(el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${o.quote}”` }), el('footer', { text: o.jung[0] ? jungLine(o.jung[0]) : '' })]));
-    for (const para of o.body.filter((p) => !p.startsWith('PLATE ('))) text.append(el('p', { class: 'rv-para', text: para }));
+    const key = keyPassage(o, this.genesisFor(stop.id));
+    if (key) text.append(this.quote(key.words, key.footer));
+    for (const para of readerBody(o.body)) text.append(el('p', { class: 'rv-para', text: para }));
     const links = el('div', { class: 'aion-links' });
     for (const t of fam?.archetypes ?? []) {
       const archetype = m.archById.get(t.id);
-      if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: `became ${archetype.name}`, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id: archetype.id } }, deep: false }) }));
+      if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id: archetype.id } }, deep: false }) }));
     }
-    if (fam) links.append(el('button', { type: 'button', class: 'link-quiet', text: `the ${fam.name} family in the field`, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: fam.id } }, deep: false }) }));
-    links.append(el('button', { type: 'button', class: 'link-quiet', text: 'this manifestation on the globe', onclick: () => this.navigate({ view: { kind: 'manifest', occId: o.id, context: { type: 'family', id: o.familyId } }, deep: false }) }));
+    if (fam) links.append(el('button', { type: 'button', class: 'link-quiet', text: fam.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: fam.id } }, deep: false }) }));
+    links.append(el('button', { type: 'button', class: 'link-quiet', text: 'On the globe', onclick: () => this.navigate({ view: { kind: 'manifest', occId: o.id, context: { type: 'family', id: o.familyId } }, deep: false }) }));
     text.append(links);
     body.append(text);
     this.card.append(body);
     this.emphasise(o.familyId, i);
     // the standing stop is where the world looks: all stops are the book's one place
     if (m.located[i]) this.engine.rig.flyTo(o.lat, o.lon, 2.55, { duration: 1.7 });
+  }
+
+  private genesisFor(stopId: string): GenesisRow | undefined {
+    return this.mode.genesis.find((g) => g.stopId === stopId);
   }
 
   private showGenesis() {
@@ -161,7 +180,7 @@ export class RedBookView {
     const text = el('div', { class: 'rv-text' });
     text.append(
       el('h2', { class: 'rv-name', text: 'Genesis' }),
-      el('p', { class: 'rv-para aion-lede', text: 'Each vision of the book, and what it became in Jung\u2019s later work.' }),
+      el('p', { class: 'rv-para aion-lede', text: 'Each vision of the book, and what it became in Jung’s later work.' }),
     );
     for (const row of this.mode.genesis) text.append(this.genesisRow(row, m));
     body.append(text);
@@ -174,7 +193,9 @@ export class RedBookView {
     const head = el('p', { class: 'rb-genesis-name' });
     const link = (target: Exclude<GenesisRow['target'], null>) => {
       if (target.kind === 'reading') {
-        head.append(el('button', { type: 'button', class: 'link-quiet', text: 'the Aion reading it became', onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: target.id } }) }));
+        const title = READING_TITLES[target.id];
+        if (!title) return;
+        head.append(el('button', { type: 'button', class: 'link-quiet', text: title, onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: target.id } }) }));
         return;
       }
       const name = target.kind === 'archetype' ? m.archById.get(target.id)?.name : m.famById.get(target.id)?.name;
@@ -188,11 +209,12 @@ export class RedBookView {
     if (row.also) { sep(); link(row.also); }
     row2.append(
       head,
-      el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${row.words}”` }), el('footer', { text: row.cite })]),
+      el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${row.words}”` }), el('footer', { text: genesisCite(row.cite) })]),
       el('p', { class: 'rv-para rb-doctrine', text: row.doctrine }),
     );
     const stop = this.stops.find((s) => s.id === row.stopId);
-    if (stop) row2.append(el('button', { type: 'button', class: 'link-quiet rb-genesis-stop', text: `the root locus: ${this.sectionName.get(stop.sectionId) ?? ''}`, onclick: () => this.select({ stop: stop.id }) }));
+    const o = stop && m.occIndex.has(stop.id) ? m.occ[m.occIndex.get(stop.id)!] : undefined;
+    if (stop && o) row2.append(el('button', { type: 'button', class: 'link-quiet rb-genesis-stop', text: o.label, onclick: () => this.select({ stop: stop.id }) }));
     return row2;
   }
 
