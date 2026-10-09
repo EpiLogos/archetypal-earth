@@ -1,0 +1,106 @@
+{
+  "source": {
+    "title": "Archetypes & Strange Attractors: The Chaotic World of Symbols",
+    "author": "John R. Van Eenwyk",
+    "publisher": "Inner City Books, Toronto, 1997",
+    "isbn": "0-919123-76-7 (ISBN-13 978-0-919123-76-2; barcode on back cover)",
+    "scan": "Archetypes  strange attractors  the chaotic world of symbols (Van Eenwyk, John R) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+    "scan_provenance": "Internet Archive (archive.org/details/archetypesstrang0000vane), digitized 2024",
+    "pages": 196,
+    "series": "Studies in Jungian Psychology by Jungian Analysts (Inner City Books)"
+  },
+  "licence_tension": "COPYRIGHTED BOOK FIGURES — STAGING ONLY. These are page renders from a copyrighted monograph (c. Inner City Books, Toronto, 1997; fractal images courtesy Art Matrix, Ithaca NY; sculpture photo of the Capitoline Eros and Psyche). The site's licence law is Commons-only: these must NOT be promoted to public/ without rights clearance (Inner City Books permissions / Art Matrix credit / museum photo licence). They are landed in curation/ purely so the site owner can decide promotion. The two 'courtesy Art Matrix' credits in the book do not amount to an open licence for redistribution.",
+  "figure_count": 10,
+  "figures": [
+    {
+      "pdf_page": 0,
+      "printed_page": "cover",
+      "file": "fig-p000-01.jpg",
+      "caption": "Cover: \"Crown of Thorns,\" fractal image, (c) 1992 Art Matrix, Ithaca NY (per copyright page, pdf p5)",
+      "context": "Cover art of the Inner City Books paperback.",
+      "render": "full-page render at 2x (754x1180px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 11,
+      "printed_page": "frontispiece",
+      "file": "fig-p011-01.jpg",
+      "caption": "The alchemical prima materia, or massa confusa, as a black, chaotic cloud (Marolles, Tableaux du temple des Muses, 1655; British Museum)",
+      "context": "Frontispiece; the book's founding image — chaos as the matter out of which order emerges.",
+      "render": "full-page render at 2x (740x1165px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 56,
+      "printed_page": "55",
+      "file": "fig-p056-01.jpg",
+      "caption": "Lorenz attractor",
+      "context": "Faces p.54: 'when Edward Lorenz programmed his computer to map the attractor that underlay his \"weather machine,\" it turned out like the figure opposite' — the first strange attractor, order visible in chaos.",
+      "render": "full-page render at 2x (751x1167px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 60,
+      "printed_page": "59",
+      "file": "fig-p060-01.jpg",
+      "caption": "Mandelbrot Set (courtesy Art Matrix)",
+      "context": "Faces the Fractal Dimension section (pp.56-59): fractals' dimensions transcend categories; 'Mandelbrot considers all strange attractors to be fractal'.",
+      "render": "full-page render at 2x (752x1164px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 65,
+      "printed_page": "64",
+      "file": "fig-p065-01.jpg",
+      "caption": "Emerald Pearl (courtesy Art Matrix)",
+      "context": "Faces pp.62-64 (Self-Organizing Chaos) and the run-in to 'Archetypal Attractors of Neuronal Firings' (Walter Freeman's olfactory-bulb research, pp.65-67).",
+      "render": "full-page render at 2x (757x1176px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 109,
+      "printed_page": "108",
+      "file": "fig-p109-01.jpg",
+      "caption": "Evil Q (courtesy Art Matrix)",
+      "context": "Frontispiece region of ch.5, 'The Chaotic Dynamics of Symbols' (from p.108/109): the fractal face of symbolic dynamics.",
+      "render": "full-page render at 2x (752x1178px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 122,
+      "printed_page": "121",
+      "file": "fig-p122-01.jpg",
+      "caption": "Fractal image (courtesy Art Matrix)",
+      "context": "Closes ch.5 (printed p.121): the page argues folk tales and myths 'are mandalas' of chaotic dynamics; both tales analysed next are 'chaotic'.",
+      "render": "full-page render at 2x (752x1164px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 139,
+      "printed_page": "138",
+      "file": "fig-p139-01.jpg",
+      "caption": "Eros and Psyche (antique sculpture, Capitoline Museum, Rome)",
+      "context": "Frontispiece of ch.7, the myth analysed as chaotic dynamics: 'Eros (god of love) and Psyche (soul) — a union of opposites'.",
+      "render": "full-page render at 2x (752x1176px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 157,
+      "printed_page": "156",
+      "file": "fig-p157-01.jpg",
+      "caption": "Candy (courtesy Art Matrix)",
+      "context": "Frontispiece of ch.8, 'The Psychodynamics of Transformation' (from p.156): self-similar spirals as the geometry of transformation.",
+      "render": "full-page render at 2x (749x1184px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    },
+    {
+      "pdf_page": 178,
+      "printed_page": "177",
+      "file": "fig-p178-01.jpg",
+      "caption": "Berceau Léger (courtesy Art Matrix)",
+      "context": "Appendix 3 region; faces Appendix 2 (printed p.176): 'The same dynamic that led to chaos now leads to the emergence of order from that chaos, as shown in the figure opposite.'",
+      "render": "full-page render at 2x (754x1170px) from Internet Archive scan",
+      "identification": "visual census of all 196 pages (contact sheets) + ink-band detection + index cross-check ('Page numbers in italics refer to illustrations' — printed pp. 55, 59, 64, 108, 121, 138, 156, 177 + frontispiece + cover). There are NO inline figures; all mathematics is typeset as text."
+    }
+  ]
+}
