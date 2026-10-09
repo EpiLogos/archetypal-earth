@@ -7,3 +7,8 @@ dist/
 # ephemeris sidecar
 ephemeris/.venv/
 ephemeris/__pycache__/
+
+# local build + control artifacts
+dist-downloads/
+.central/
+ProjectCentral/
