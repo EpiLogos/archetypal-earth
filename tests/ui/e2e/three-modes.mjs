@@ -2,6 +2,10 @@
 // Run against a dev server:  npx vite --port 5183 --strictPort &
 import { launch, open, URL } from './lib.mjs';
 
+// Fails loudly: every Red Book selector this walk reads must resolve, or the run exits nonzero.
+let failed = 0;
+const must = (label, value) => { if (value === null || value === undefined || value === '') { failed++; console.log(`FAIL selector resolved to nothing: ${label}`); } return value; };
+
 const b = await launch('chromium', { headed: false });
 const { page, logs } = await open(b, { hash: '' });
 const shots = '.cache/screens/three-modes';
@@ -74,22 +78,31 @@ report.redbook = await page.evaluate(() => ({
   subject: document.querySelector('.rb-subject')?.textContent,
   progress: document.querySelector('.rb-progress')?.textContent,
   section: document.querySelector('.rb-section')?.textContent,
-  stopName: document.querySelector('.rb-rail') ? document.querySelector('.redbook .aion-card .rv-name')?.textContent : null,
-  plateLoaded: (() => { const img = document.querySelector('.rb-plate'); return img ? img.naturalWidth > 0 : null; })(),
-  plateNoteShown: !!document.querySelector('.rb-plate-note:not([hidden])'),
+  stopName: document.querySelector('.rb-rail') ? document.querySelector('.redbook .rb-card .rv-name')?.textContent : null,
+  plateLoaded: (() => { const img = document.querySelector('.redbook .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
 }));
+must('.redbook .rb-card .rv-name', report.redbook.stopName);
+must('.rb-progress', report.redbook.progress);
+must('.redbook .rv-hero img', report.redbook.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-flood.png` });
 
-// walk to Elijah–Salome (index 6) via next clicks
-await page.evaluate(() => { for (let i = 0; i < 6; i++) document.querySelectorAll('.rb-rail button')[1].click(); });
+// walk to Elijah–Salome, folio 6 of 37 (The conception of the God: a field quote), one next-click at a time
+for (let k = 0; k < 40; k++) {
+  if ((await page.textContent('.rb-progress')) === '6 / 37') break;
+  await page.click('.rb-rail button[aria-label="Next folio"]');
+  await page.waitForTimeout(150);
+}
 await page.waitForTimeout(1600);
 report.redbookWalk = await page.evaluate(() => ({
   progress: document.querySelector('.rb-progress')?.textContent,
   section: document.querySelector('.rb-section')?.textContent,
-  stopName: document.querySelector('.redbook .aion-card .rv-name')?.textContent,
-  folio: document.querySelector('.rb-folio')?.textContent,
-  plateLoaded: (() => { const img = document.querySelector('.rb-plate'); return img ? img.naturalWidth > 0 : null; })(),
+  stopName: document.querySelector('.redbook .rb-card .rv-name')?.textContent,
+  folio: document.querySelector('.redbook .rb-quote footer')?.textContent,
+  plateLoaded: (() => { const img = document.querySelector('.redbook .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
 }));
+must('.redbook .rb-card .rv-name (walk)', report.redbookWalk.stopName);
+must('.redbook .rb-quote footer (walk)', report.redbookWalk.folio);
+must('.redbook .rv-hero img (walk)', report.redbookWalk.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-elijah.png` });
 
 // genesis view
@@ -115,3 +128,5 @@ report.leftMode = await page.evaluate(() => ({
 report.logs = logs;
 console.log(JSON.stringify(report, null, 1));
 await b.close();
+console.log(failed ? `${failed} selector(s) resolved to nothing` : 'all Red Book selectors resolved');
+process.exit(failed ? 1 : 0);

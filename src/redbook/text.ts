@@ -51,42 +51,20 @@ export function genesisCite(cite: string): string {
   return m && title ? jungLine({ work: m[1], workTitle: title, year: '', locator: m[2] }) : cite;
 }
 
-const GERMAN_WORDS = /\b(die|der|das|und|einer|einen|auf|ich|nicht|ist|den|dem|sich|Die|Der|Das|Und|Ich|Nicht|Ist|Auf)\b/g;
-const MAX_QUOTE_WORDS = 90;
-
-const wordCount = (s: string) => s.split(/\s+/).filter(Boolean).length;
-
-/** The blackletter folios are quoted in German beside the English translation: only the translation is a key passage. */
-export function isGerman(s: string): boolean {
-  return /[äöüßÄÖÜ]/.test(s) || (s.match(GERMAN_WORDS)?.length ?? 0) >= 2;
-}
-
-/** One quotation, fitted to a card: a whole sentence, six words or more, never a fragment or a caption. */
-function fitQuotation(t: string): string | null {
-  if (!t || t.endsWith(':') || isGerman(t) || wordCount(t) < 6) return null;
-  // a lower-case opening is a sentence torn from its narration: only accepted when it is long enough to stand
-  if (!/^[A-Z]/.test(t) && wordCount(t) < 10) return null;
-  if (wordCount(t) <= MAX_QUOTE_WORDS) return t;
-  let out = '';
-  for (const s of t.match(/[^.!?]+[.!?]+(\s|$)/g) ?? []) {
-    if (wordCount(out + s) > MAX_QUOTE_WORDS) break;
-    out += s;
-  }
-  out = out.trim();
-  return wordCount(out) >= 6 ? out : null;
-}
-
-/** The first verbatim quotation in the body: quotes are the odd-numbered segments of the split on the double quote. */
-export function firstQuotation(paragraphs: readonly string[]): string | null {
-  for (const p of readerBody(paragraphs)) {
-    const parts = p.split('"');
-    for (let i = 1; i < parts.length; i += 2) {
-      const q = fitQuotation(parts[i].trim());
-      if (q) return q;
-    }
-  }
-  return null;
-}
+/**
+ * Body-derived key passages, vetted one by one: the only stops whose key words are a quotation the field
+ * holds in the stop's own body. Each is verbatim in that body (the unit test checks it against field.json).
+ * Any other stop with neither a field quote nor a curated genesis word has no key passage: nothing is invented.
+ */
+export const VETTED_BODY_QUOTES: Record<string, string> = {
+  "liber-novus-god-in-egg-incantations-ms50": "Set the egg before you, the God in his beginning. / And behold it. / And incubate it with the magical warmth of your gaze",
+  "liber-novus-dead-serpent-umbilical-cord-ms111": "The serpent fell dead unto the earth. And that was the umbilical cord of a new birth",
+  "liber-novus-atmavictu-kabir-manikin-ms117": "The dragon wants to eat the sun and the youth beseeches him not to. But he eats it nevertheless.",
+  "liber-novus-cabiri-holy-water-caster-ms123": "This is the caster of holy water. The Cabiri grow out of the flowers which spring from the body of the dragon. Above is the temple",
+  "liber-novus-lapis-atmavictu-stone-face-ms122": "This stone, set so beautifully, is certainly the Lapis Philosophorum. It is harder than diamond. But it expands into space through four distinct qualities, namely breadth, height, depth, and time. It is hence invisible and you can pass through it without noticing it. The four streams of Aquarius flow from the stone. This is the incorruptible seed that lies between the father and the mother and prevents the heads of both cones from touching: it is the monad which countervails the Pleroma.",
+  "liber-novus-sermones-man-is-a-gateway-lonely-star-pdf385": "Man is a gateway, through which you pass from the outer world of Gods, daimons, and souls into the inner world, out of the greater, into the smaller world... At immeasurable distance a lonely star stands in the zenith. This is the one God of this one man, this is his world, his Pleroma, his divinity. In this world, man is Abraxas, the creator and destroyer of his own world. This star is the God and the goal of man",
+  "liber-novus-epilogue-1959-ms190": "I worked on this book for 16 years. My acquaintance with alchemy in 1930 took me away from it. The beginning of the end came in 1928, when Wilhelm sent me the text of the 'Golden Flower,' an alchemical treatise. There the contents of this book found their way into actuality and I could no longer continue working on it. To the superficial observer, it will appear like madness. It would also have developed into one, had I not been able to absorb the overpowering force of the original experiences.",
+};
 
 export interface KeyPassage {
   words: string;
@@ -95,12 +73,12 @@ export interface KeyPassage {
 
 /**
  * The stop's key words, leading the card: the field's own quote; else the curated genesis words that
- * name this stop; else the first verbatim quotation in its body. Each carries its own cite.
+ * name this stop; else a vetted quotation from its body. Each carries its own cite. Else none.
  */
 export function keyPassage(o: Occurrence, genesis?: GenesisRow): KeyPassage | null {
   const cite = o.jung[0];
   if (o.quote) return { words: o.quote, footer: cite ? citeLine(cite) : '' };
   if (genesis) return { words: genesis.words, footer: genesisCite(genesis.cite) };
-  const words = firstQuotation(o.body ?? []);
-  return words ? { words, footer: cite ? citeLine(cite) : '' } : null;
+  const words = VETTED_BODY_QUOTES[o.id];
+  return words && cite ? { words, footer: citeLine(cite) } : null;
 }
