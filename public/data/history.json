@@ -24,8 +24,8 @@
           },
           "oneLine": "Jung places the bull before the ram in the changing archetypal dominants.",
           "body": [
-            "Jung names Taurus as the first of this sequence in his later Flying Saucers preface (CW10 ¶589), rather than assigning it fixed dates in Aion.",
-            "The atlas uses two equal 2,143-year months before year 0 to make the sequence traversable. These ancient boundaries are display approximations calculated from Aion ¶149 n.84, not dates Jung gives for Taurus."
+            "Jung names Taurus as the first of this sequence in his later Flying Saucers preface, rather than assigning it fixed dates in Aion.",
+            "These ancient boundaries are display approximations calculated from Aion ¶149 n.84, not dates Jung gives for Taurus."
           ],
           "passages": [
             {
@@ -56,8 +56,8 @@
           },
           "oneLine": "Jung reads Christ as the last ram of Aries and the first fish of Pisces.",
           "body": [
-            "For Jung, the sacrificial lamb carries the departing ram symbolism into the new fish symbolism. The passage describes symbolic overlap, not a precise boundary.",
-            "The start at 2143 BCE is an equal-month display approximation. Jung does not fix this Aries boundary in Aion."
+            "For Jung, the sacrificial lamb carries the departing ram symbolism into the new fish symbolism.",
+            "Jung does not fix this Aries boundary in Aion."
           ],
           "passages": [
             {
@@ -102,7 +102,7 @@
           "oneLine": "Jung reads the Christian aeon through the tension of Christ and Antichrist.",
           "body": [
             "Jung reads the two fishes as opposed principles within one aeon. His account of religious and psychic history remains an interpretation; Aion explicitly says no connection between Christ and the astrological age can be proved.",
-            "The atlas spans approximately 0–2200 CE. Jung qualifies the Aquarian boundary as indefinite, gives 1997 and 2154 for different reference stars, and also gives a 2000–2200 range."
+            "Jung qualifies the Aquarian boundary as indefinite, gives 1997 and 2154 for different reference stars, and also gives a 2000–2200 range."
           ],
           "passages": [
             {
@@ -148,7 +148,7 @@
           "oneLine": "Jung associates the first, vertical fish with the Christian light figure.",
           "body": [
             "In Jung’s reading, Christ is the bright image of the self. Its exclusion of the dark side leaves a counterpart, the Antichrist.",
-            "The approximate year-1000 boundary follows Jung’s account of an enantiodromia, a reversal toward the opposite. It is a symbolic periodisation."
+            "The approximate year-1000 boundary follows Jung’s account of an enantiodromia, a reversal toward the opposite."
           ],
           "passages": [
             {
@@ -188,8 +188,7 @@
           },
           "oneLine": "Jung traces the second fish from religious upheaval toward the modern crisis.",
           "body": [
-            "Jung connects the turn around 1000 with the Holy Ghost movement, religious dissent and later alchemy, Reformation and science. He does not treat each reformer as evil: Joachim may also carry a mediating spirit.",
-            "Jung’s description of rationalism and materialism as antichristian expresses his psychological reading of Western history, not the atlas’s judgement."
+            "Jung connects the turn around 1000 with the Holy Ghost movement, religious dissent and later alchemy, Reformation and science. He does not treat each reformer as evil: Joachim may also carry a mediating spirit."
           ],
           "passages": [
             {
@@ -235,7 +234,7 @@
           "oneLine": "For Jung, the band between the fishes frames a passage through opposites.",
           "body": [
             "Jung describes the commissure as the band of faint stars connecting the fishes and places the beginning of reversal midway between them.",
-            "The atlas uses approximately 1000–1500 for this transition, within the second-fish phase. Jung gives a rough sixteenth-century correspondence at the second fish’s tail; he does not date the band’s exact edges."
+            "Jung gives a rough sixteenth-century correspondence at the second fish’s tail; he does not date the band’s exact edges."
           ],
           "passages": [
             {
@@ -276,7 +275,7 @@
           "oneLine": "Jung expects Aquarius to constellate the problem of uniting the opposites.",
           "body": [
             "Jung anticipates an individual confrontation with good and evil rather than a solution supplied by politics or philosophy. This is his expectation, not a promised future.",
-            "The atlas starts this display span at the upper edge of Jung’s 2000–2200 range. Its end at 4343 is an illustrative 2,143-year month; Jung supplies no historical events or fixed endpoint for Aquarius."
+            "Jung supplies no historical events or fixed endpoint for Aquarius."
           ],
           "passages": [
             {
@@ -311,12 +310,12 @@
           "id": "spring-point-crossings",
           "name": "The spring point crosses into the Fishes",
           "year": -146,
-          "yearDisplay": "~146 BCE / AD 11 · astronomical anchors",
+          "yearDisplay": "~146 BCE / AD 11",
           "epochId": "aries",
           "polarity": "neutral",
           "oneLine": "Jung’s two anchor dates for the ingress of the spring point into the Fishes.",
           "body": [
-            "The row is Jung’s own astronomical anchor (J): the meridians of the two reference stars give the ingress “about the beginning of our era.” The epoch boundary in this atlas stays at year 0 as a symbolic display choice."
+            "The meridians of the two reference stars give the ingress “about the beginning of our era.”"
           ],
           "passages": [
             {
@@ -334,12 +333,12 @@
           "id": "denderah-zodiac",
           "name": "The fishes at Denderah",
           "year": -50,
-          "yearDisplay": "1st century BCE · approximate midpoint",
+          "yearDisplay": "~1st century BCE",
           "epochId": "aries",
           "polarity": "neutral",
           "oneLine": "Jung observes two fishes facing the same way before Christianity.",
           "body": [
-            "Jung cites the first-century-BCE zodiac at Hathor’s temple as a counterexample to an ancient opposition of the fishes. The year is the atlas’s century midpoint."
+            "Jung cites the first-century-BCE zodiac at Hathor’s temple as a counterexample to an ancient opposition of the fishes."
           ],
           "passages": [
             {
@@ -367,7 +366,7 @@
           "polarity": "union",
           "oneLine": "Jung reads beneficent Jupiter and Saturn in conjunction as united opposites.",
           "body": [
-            "Jung reports three conjunctions in Pisces in 7 BCE and dates their closest approach to May 29. Its astrological sign is Pisces; the event lies before the atlas’s approximate historical year-0 boundary. No birthplace or earthly observing site is asserted."
+            "Jung reports three conjunctions in Pisces in 7 BCE and dates their closest approach to May 29. No birthplace or earthly observing site is asserted."
           ],
           "passages": [
             {
@@ -395,7 +394,7 @@
           "polarity": "light",
           "oneLine": "Jung reads Christ as the first fish and the last sacrificial ram.",
           "body": [
-            "Year 0 is an atlas boundary for the beginning of the era, not a claimed historical birth year. Jung’s argument concerns the Christ image and the overlapping ram and fish symbols."
+            "Jung’s argument concerns the Christ image and the overlapping ram and fish symbols."
           ],
           "passages": [
             {
@@ -440,7 +439,7 @@
           "polarity": "light",
           "oneLine": "The apostles as fishers: the age’s first symbolic catch.",
           "body": [
-            "Jung reads the gospel fishers (J) as the new age announcing itself in the symbol of its sign."
+            "Jung reads the gospel fishers as the new age announcing itself in the symbol of its sign."
           ],
           "passages": [
             {
@@ -464,7 +463,7 @@
           "polarity": "shadow",
           "oneLine": "The Aries residue returns as the warlike lamb, Christ’s shadow-figure.",
           "body": [
-            "The ram of the declining Aries era comes back as the Apocalypse’s warlike lamb (J) — the age’s first shadow-figure, “umbra Jesu” in Jung’s reading of the counter-image."
+            "The ram of the declining Aries era comes back as the Apocalypse’s warlike lamb — the age’s first shadow-figure, “umbra Jesu” in Jung’s reading of the counter-image."
           ],
           "passages": [
             {
@@ -486,12 +485,12 @@
           "id": "valentinus-shadow",
           "name": "Christ casts off his shadow",
           "year": 140,
-          "yearDisplay": "~140 CE · existing field dating",
+          "yearDisplay": "~140 CE",
           "epochId": "pisces-first-fish",
           "polarity": "shadow",
           "oneLine": "Jung reads the Gnostic discarded shadow as a precursor of Antichrist.",
           "body": [
-            "Jung cites the Gnostic teaching of Christ casting off his shadow. The approximate year and tentative Rome placement come from the existing field occurrence, not a date assigned to the teaching by Aion."
+            "Jung cites the Gnostic teaching of Christ casting off his shadow."
           ],
           "passages": [
             {
@@ -524,12 +523,12 @@
           "id": "farnese-atlas",
           "name": "The vertical and horizontal fishes",
           "year": 150,
-          "yearDisplay": "~2nd century CE copy · existing field dating",
+          "yearDisplay": "~2nd century CE copy",
           "epochId": "pisces-first-fish",
           "polarity": "neutral",
           "oneLine": "Jung uses the Farnese globe to distinguish orientation from moral opposition.",
           "body": [
-            "Jung describes a vertical northern fish and a horizontal southern fish. The existing field dates the Roman copy approximately; Naples is its later museum location, not a claim about the place of manufacture."
+            "Jung describes a vertical northern fish and a horizontal southern fish."
           ],
           "passages": [
             {
@@ -558,7 +557,7 @@
           "polarity": "light",
           "oneLine": "Jung locates the Christian fish symbol around 200 CE in Alexandria.",
           "body": [
-            "Jung follows Doelger in giving Alexandria around 200 as the first appearance of the Christian fish symbol. This reported chronology differs from dating the earlier fish motif itself."
+            "Jung follows Doelger in giving Alexandria around 200 as the first appearance of the Christian fish symbol."
           ],
           "passages": [
             {
@@ -582,12 +581,12 @@
           "id": "abercius-fish",
           "name": "The great, pure fish of Abercius",
           "year": 217,
-          "yearDisplay": "After 216 CE · lower-bound display year",
+          "yearDisplay": "After 216 CE",
           "epochId": "pisces-first-fish",
           "polarity": "neutral",
           "oneLine": "Jung questions a purely Christian reading of the Abercius fish.",
           "body": [
-            "Jung dates the inscription after 216 and warns that its Christian origin is doubtful. The atlas uses 217 as a lower-bound display marker, not a precise composition date."
+            "Jung dates the inscription after 216 and warns that its Christian origin is doubtful."
           ],
           "passages": [
             {
@@ -617,7 +616,7 @@
           "polarity": "light",
           "oneLine": "Believers as the “divine descendants of the heavenly fish.”",
           "body": [
-            "The eucharistic fish-meal inscription of Autun (J), a dating-uncertain pillar of the Christian fish record."
+            "The eucharistic fish-meal inscription of Autun, a dating-uncertain pillar of the Christian fish record."
           ],
           "passages": [
             {
@@ -637,12 +636,12 @@
           "id": "augustine-two-powers",
           "name": "Augustine’s king and priest",
           "year": 390,
-          "yearDisplay": "~388–396 CE · existing field dating",
+          "yearDisplay": "~388–396 CE",
           "epochId": "pisces-first-fish",
           "polarity": "light",
           "oneLine": "Jung follows Augustine’s two fishes as ruling powers united in Christ.",
           "body": [
-            "Jung uses Augustine’s kingly and priestly interpretation to explain fishes as ruling powers. The approximate date comes from the linked field, not the quoted paragraph."
+            "Jung uses Augustine’s kingly and priestly interpretation to explain fishes as ruling powers."
           ],
           "passages": [
             {
@@ -666,12 +665,12 @@
           "id": "benedict-latent-spirit",
           "name": "Benedict and the latent age of spirit",
           "year": 530,
-          "yearDisplay": "A few years after 529 · approximate marker",
+          "yearDisplay": "A few years after 529",
           "epochId": "pisces-first-fish",
           "polarity": "union",
           "oneLine": "Jung reports Joachim’s third age as secretly beginning with Benedict.",
           "body": [
-            "Jung says Joachim placed the beginning of the Holy Ghost’s third aeon with Benedict and a monastery built a few years after 529. Year 530 is approximate; the event presents Joachim’s chronology as Jung reports it."
+            "Jung says Joachim placed the beginning of the Holy Ghost’s third aeon with Benedict and a monastery built a few years after 529."
           ],
           "passages": [
             {
@@ -700,7 +699,7 @@
           "polarity": "shadow",
           "oneLine": "The tanninim war: the age’s eschatological double, read by Rashi as fishes.",
           "body": [
-            "Jung calls the Talmud’s war of the tanninim (J) “probably the oldest testimony to the antithetical nature of the fishes”; Rashi’s gloss makes them two fishes at war before the Messiah."
+            "Jung calls the Talmud’s war of the tanninim “probably the oldest testimony to the antithetical nature of the fishes”; Rashi’s gloss makes them two fishes at war before the Messiah."
           ],
           "passages": [
             {
@@ -725,12 +724,12 @@
           "id": "morienus-inner-work",
           "name": "Morienus and the inner work",
           "year": 700,
-          "yearDisplay": "7th–8th century · approximate midpoint",
+          "yearDisplay": "~7th–8th century",
           "epochId": "pisces-first-fish",
           "polarity": "union",
           "oneLine": "Jung traces alchemical self-knowledge back to Morienus.",
           "body": [
-            "Jung dates Morienus Romanus to the seventh–eighth century and reads the vessel’s maxim as a moral demand. Year 700 is a display midpoint; the linked occurrence supplies the geographical tradition."
+            "Jung dates Morienus Romanus to the seventh–eighth century and reads the vessel’s maxim as a moral demand."
           ],
           "passages": [
             {
@@ -762,7 +761,7 @@
           "polarity": "shadow",
           "oneLine": "Jung places the beginning of the enantiodromia around the year 1000.",
           "body": [
-            "Jung interprets the second millennium as a reversal within the Christian aeon. His two principles still belong to one process; this is not a claim that every subsequent movement is evil."
+            "Jung interprets the second millennium as a reversal within the Christian aeon. His two principles still belong to one process."
           ],
           "passages": [
             {
@@ -793,7 +792,7 @@
           "polarity": "neutral",
           "oneLine": "The great conjunction in Pisces read as the Messiah’s clock.",
           "body": [
-            "From the 11th-century astrologers to Abarbanel (J, as Jung cites them), the Jupiter–Saturn conjunction in Pisces carries the messianic expectation — the age’s own astrology turned toward its sign."
+            "From the 11th-century astrologers to Abarbanel, as Jung cites them, the Jupiter–Saturn conjunction in Pisces carries the messianic expectation — the age’s own astrology turned toward its sign."
           ],
           "passages": [
             {
@@ -816,13 +815,13 @@
           "id": "cathar-bogomil-fishes",
           "name": "The Cathar–Bogomil two fishes",
           "year": 1111,
-          "yearDisplay": "1111 confession · later Cathar transmission",
+          "yearDisplay": "1111 confession",
           "epochId": "pisces-commissure",
           "polarity": "shadow",
           "oneLine": "Jung conjectures Christ and Satanael behind the two fishes yoked together.",
           "body": [
-            "Jung traces the text to Basilius’s confession before Alexius Comnenus in 1111. Its place on the globe is the later Carcassonne archive named by Jung and carried by the existing field, not the place of that confession.",
-            "Jung calls the two-person interpretation a conjecture. The atlas preserves that qualification."
+            "Jung traces the text to Basilius’s confession before Alexius Comnenus in 1111.",
+            "Jung calls the two-person interpretation a conjecture."
           ],
           "passages": [
             {
@@ -863,7 +862,7 @@
           "polarity": "shadow",
           "oneLine": "Heresies, Joachim and the mendicants: the antichristian fish appears.",
           "body": [
-            "Jung dates the second fish’s surfacing (J) from the early-eleventh-century movements onward, and reads the era’s religious revolutions as its rising."
+            "Jung dates the second fish’s surfacing from the early-eleventh-century movements onward, and reads the era’s religious revolutions as its rising."
           ],
           "passages": [
             {
@@ -887,12 +886,12 @@
           "id": "joachim-holy-ghost",
           "name": "Joachim’s third aeon",
           "year": 1200,
-          "yearDisplay": "~1185–1202 · existing field dating",
+          "yearDisplay": "~1185–1202",
           "epochId": "pisces-commissure",
           "polarity": "union",
           "oneLine": "Jung reads Joachim’s new age of spirit as potentially mediating the opposites.",
           "body": [
-            "Jung reports Joachim’s expected age of the Holy Ghost and his death in 1202. He distinguishes Joachim’s experience from the inflated claims of some adherents. The marker uses the linked field’s approximate dating."
+            "Jung reports Joachim’s expected age of the Holy Ghost and his death in 1202. He distinguishes Joachim’s experience from the inflated claims of some adherents."
           ],
           "passages": [
             {
@@ -918,12 +917,12 @@
           "id": "latin-alchemy",
           "name": "Latin alchemy emerges",
           "year": 1200,
-          "yearDisplay": "12th–13th centuries · approximate midpoint",
+          "yearDisplay": "~12th–13th centuries",
           "epochId": "pisces-commissure",
           "polarity": "union",
           "oneLine": "Jung connects Latin alchemy with the religious currents of the Middle Ages.",
           "body": [
-            "Jung places the beginnings of Latin alchemy around the twelfth and thirteenth centuries. Year 1200 is a display midpoint; the text does not assign this collective process one city."
+            "Jung places the beginnings of Latin alchemy around the twelfth and thirteenth centuries."
           ],
           "passages": [
             {
@@ -951,7 +950,7 @@
           "polarity": "light",
           "oneLine": "The fish-age’s compensating symbol of wholeness: the Grail as lapis.",
           "body": [
-            "Jung’s footnote chain (J) ties Wolfram’s lapsit exillis to the lapis exilis of the alchemists — the age’s counter-symbol of the self, parallel to Christ. Standard Grail philology (S) still debates the phrase’s origin; the reading here is Jung’s."
+            "Jung’s footnote chain ties Wolfram’s lapsit exillis to the lapis exilis of the alchemists — the age’s counter-symbol of the self, parallel to Christ. Standard Grail philology still debates the phrase’s origin."
           ],
           "passages": [
             {
@@ -976,7 +975,7 @@
           "polarity": "neutral",
           "oneLine": "Jung marks the Church’s condemnation of Joachim’s teachings in 1215.",
           "body": [
-            "Jung places the condemnation inside a spiritually unstable epoch. The same paragraph also reports Joachim’s expectation of a new age; the atlas does not equate ecclesiastical condemnation with Jung’s own verdict."
+            "Jung places the condemnation inside a spiritually unstable epoch. The same paragraph also reports Joachim’s expectation of a new age."
           ],
           "passages": [
             {
@@ -1029,12 +1028,12 @@
           "id": "dailly-antichrist",
           "name": "Pierre d’Ailly’s calculation",
           "year": 1414,
-          "yearDisplay": "~1414 CE · existing field dating",
+          "yearDisplay": "~1414 CE",
           "epochId": "pisces-commissure",
           "polarity": "shadow",
           "oneLine": "Jung follows d’Ailly’s astrological conjecture about religious change.",
           "body": [
-            "Jung relates d’Ailly’s calculation of 1789 and its possible Antichrist interpretation. The year 1414 is the existing field’s dating of the text, not the date of the predicted event. Jung says he cannot claim to have understood every step of the argument."
+            "Jung relates d’Ailly’s calculation of 1789 and its possible Antichrist interpretation. Jung says he cannot claim to have understood every step of the argument."
           ],
           "passages": [
             {
@@ -1063,7 +1062,7 @@
           "polarity": "neutral",
           "oneLine": "The House of the Fishes as the house of justice and splendour.",
           "body": [
-            "Abarbanel’s commentary (J, as Jung cites it) expects the Messiah under the conjunction in Pisces."
+            "Abarbanel’s commentary, as Jung cites it, expects the Messiah under the conjunction in Pisces."
           ],
           "passages": [
             {
@@ -1083,12 +1082,12 @@
           "id": "renaissance-outward-turn",
           "name": "The Renaissance turns outward",
           "year": 1500,
-          "yearDisplay": "Renaissance · approximate display marker",
+          "yearDisplay": "Renaissance",
           "epochId": "pisces-second-fish",
           "polarity": "shadow",
           "oneLine": "Jung reads the Renaissance as a turn toward the second fish and modernity.",
           "body": [
-            "Jung connects the Renaissance with the spirit that culminates in the modern age. Year 1500 is a rough display marker for that process, not a beginning he fixes."
+            "Jung connects the Renaissance with the spirit that culminates in the modern age."
           ],
           "passages": [
             {
@@ -1107,12 +1106,12 @@
           "id": "reformation-threshold",
           "name": "The Reformation threshold",
           "year": 1550,
-          "yearDisplay": "16th century · approximate midpoint",
+          "yearDisplay": "~16th century",
           "epochId": "pisces-second-fish",
           "polarity": "neutral",
           "oneLine": "Jung places the Reformation at the passage toward the second fish.",
           "body": [
-            "Jung gives a rough sixteenth-century correspondence between the second fish’s tail and the Reformation. The atlas uses 1550 as a century midpoint; it does not invent a precise date or city from this collective process."
+            "Jung gives a rough sixteenth-century correspondence between the second fish’s tail and the Reformation."
           ],
           "passages": [
             {
@@ -1138,7 +1137,7 @@
           "polarity": "shadow",
           "oneLine": "Jung reads the letter’s 1792 prophecy within the Christian aeon’s reversal.",
           "body": [
-            "Jung explicitly cites the 1558 letter, not merely the 1555 publication of the Centuries. Its predicted second Antichrist is part of Jung’s interpretation of the document. The existing field places the letter regionally in France."
+            "Jung explicitly cites the 1558 letter, not merely the 1555 publication of the Centuries. Its predicted second Antichrist is part of Jung’s interpretation of the document."
           ],
           "passages": [
             {
@@ -1161,12 +1160,12 @@
           "id": "dorn-unified-self",
           "name": "Dorn’s living stone",
           "year": 1570,
-          "yearDisplay": "Second half of the 16th century · existing field dating",
+          "yearDisplay": "Second half of the 16th century",
           "epochId": "pisces-second-fish",
           "polarity": "union",
           "oneLine": "Jung reads the union in the stone as the adept’s own individuation.",
           "body": [
-            "Jung interprets the alchemical stone as a projection of the unified self, while preserving its transcendent character. The approximate year and regional location come from the existing field."
+            "Jung interprets the alchemical stone as a projection of the unified self, while preserving its transcendent character."
           ],
           "passages": [
             {
@@ -1195,13 +1194,13 @@
           "id": "lambspringk-opposed-fishes",
           "name": "Lambspringk’s reversed fishes",
           "year": 1590,
-          "yearDisplay": "Late 16th century · approximate marker",
+          "yearDisplay": "Late 16th century",
           "epochId": "pisces-second-fish",
           "polarity": "union",
           "oneLine": "Jung reads Lambspringk’s fishes as a revitalized archetype of inner opposition.",
           "body": [
-            "Jung places the symbol near the end of the sixteenth century. The linked occurrence dates a later 1678 print in Frankfurt; that later print location is shown on the globe, not an asserted place of the original image.",
-            "Jung says he has found no text proving transmission of the Cathar fish into alchemy. The thread marks a comparison, not an established genealogy."
+            "Jung places the symbol near the end of the sixteenth century.",
+            "Jung says he has found no text proving transmission of the Cathar fish into alchemy."
           ],
           "passages": [
             {
@@ -1225,12 +1224,12 @@
           "id": "alchemy-science",
           "name": "Alchemy gives birth to science",
           "year": 1600,
-          "yearDisplay": "16th–17th centuries · approximate midpoint",
+          "yearDisplay": "~16th–17th centuries",
           "epochId": "pisces-second-fish",
           "polarity": "neutral",
           "oneLine": "For Jung, alchemy gives birth to the age of science and then disappears.",
           "body": [
-            "Jung describes Mater Alchimia as a whole epoch beginning roughly with Christianity and giving birth to science in the sixteenth and seventeenth centuries. Year 1600 is a display midpoint."
+            "Jung describes Mater Alchimia as a whole epoch beginning roughly with Christianity and giving birth to science in the sixteenth and seventeenth centuries."
           ],
           "passages": [
             {
@@ -1254,7 +1253,7 @@
           "polarity": "shadow",
           "oneLine": "The Enlightenment as the chthonic fish’s tail: Christianity overthrown.",
           "body": [
-            "Jung’s seminar dating (J) of the second fish’s chthonic ascent, from the Goddess of Reason onward."
+            "Jung’s seminar dating of the second fish’s chthonic ascent, from the Goddess of Reason onward."
           ],
           "passages": [
             {
@@ -1272,12 +1271,12 @@
           "id": "faith-knowledge-rift",
           "name": "Faith and knowledge separate",
           "year": 1750,
-          "yearDisplay": "18th century · approximate midpoint",
+          "yearDisplay": "~18th century",
           "epochId": "pisces-second-fish",
           "polarity": "shadow",
           "oneLine": "Jung diagnoses a rift in which faith lacks experience and science loses the soul.",
           "body": [
-            "Jung dates this rift to the eighteenth century. The atlas’s midpoint is approximate and the diagnosis is explicitly his."
+            "Jung dates this rift to the eighteenth century."
           ],
           "passages": [
             {
@@ -1301,7 +1300,7 @@
           "polarity": "shadow",
           "oneLine": "Jung reads the French revolutionary calendar as a manifest antichristian turn.",
           "body": [
-            "Jung connects the calendar beginning on 22 September 1792 with Nostradamus’s renovation of the age. This is his reading of the French Revolution, not the atlas’s political judgement."
+            "Jung connects the calendar beginning on 22 September 1792 with Nostradamus’s renovation of the age."
           ],
           "passages": [
             {
@@ -1329,7 +1328,7 @@
           "polarity": "shadow",
           "oneLine": "The aeon “of the Fishes, now running to its end” — Jung’s 1951 summary.",
           "body": [
-            "Jung’s 1951 summary (J) of his own lifetime: the Antichrist figure anticipated and reflected in the wars. The arc’s shadow-counterpart is followed event by event in the atlas’s Turn reading."
+            "Jung’s 1951 summary of his own lifetime: the Antichrist figure anticipated and reflected in the wars."
           ],
           "passages": [
             {
@@ -1353,7 +1352,7 @@
           "polarity": "neutral",
           "oneLine": "The two-fishes scheme taught: upright Christ-fish, horizontal chthonic fish.",
           "body": [
-            "Jung lays out the full precessional clock in seminar (J) — and adds “of course there are no definite lines in the sky which would indicate the exact borderline,” his own refusal of precision (see the Aquarius Horizon reading)."
+            "Jung lays out the full precessional clock in seminar"
           ],
           "passages": [
             {
@@ -1381,7 +1380,7 @@
           "polarity": "light",
           "oneLine": "The fish as Christ “after the constellation of Pisces” — the doctrine taught.",
           "body": [
-            "The aeon doctrine as seminar instruction (J), four years before the lectures that became Aion."
+            "The aeon doctrine as seminar instruction, four years before the lectures that became Aion."
           ],
           "passages": [
             {
@@ -1400,13 +1399,12 @@
           "id": "jung-modern-crisis",
           "name": "The aftermath of the Second World War",
           "year": 1945,
-          "yearDisplay": "After the Second World War · 1945 display marker",
+          "yearDisplay": "After the Second World War",
           "epochId": "pisces-second-fish",
           "polarity": "shadow",
           "oneLine": "Jung reads the world’s division through the unrecognized inner opposite.",
           "body": [
-            "Jung compares the destruction left by the Second World War with the New Testament’s Antichrist expectations and describes the modern world’s division through an unconscious inner opposite. These are his psychological interpretations.",
-            "The atlas uses 1945 to place the war’s aftermath. This conventional historical display year is a site gloss; the quotation does not give an exact date. Aion’s 1950 writing date belongs to the source, not this event’s historical clock."
+            "Jung compares the destruction left by the Second World War with the New Testament’s Antichrist expectations and describes the modern world’s division through an unconscious inner opposite. These are his psychological interpretations."
           ],
           "passages": [
             {
@@ -1442,7 +1440,7 @@
           "lon": 8.5657,
           "oneLine": "The age-symbol surfaces synchronistically in Jung’s own life.",
           "body": [
-            "The famous synchronistic cluster (J): the piscis inscription, a patient’s fish pictures, fish-run embroidery — “Est homo totus medius piscis ab imo,” the century’s turn marked in his own material."
+            "The famous synchronistic cluster: the piscis inscription, a patient’s fish pictures, fish-run embroidery — “Est homo totus medius piscis ab imo,” the century’s turn marked in his own material."
           ],
           "passages": [
             {
@@ -1470,7 +1468,7 @@
           "lon": 12.4539,
           "oneLine": "The feminine counter-move as the age closes: symbols developing “through the ages.”",
           "body": [
-            "Jung reads the 1950 dogma (J) as the age’s closing counter-move — the example he gives of symbols developing through the ages, and the hinge the Turn reading’s compensation phase stands on."
+            "Jung reads the 1950 dogma as the age’s closing counter-move — the example he gives of symbols developing through the ages."
           ],
           "passages": [
             {
@@ -1490,12 +1488,12 @@
           "id": "aion-published",
           "name": "Aion published",
           "year": 1951,
-          "yearDisplay": "1951 · Aion (CW 9ii)",
+          "yearDisplay": "1951 · Aion",
           "epochId": "pisces-second-fish",
           "polarity": "union",
           "oneLine": "The aeon doctrine’s monument: Christian, Gnostic and alchemical symbols of the self.",
           "body": [
-            "The reading this atlas layer is built on (J), announced in its own foreword."
+            "Announced in its own foreword."
           ],
           "passages": [
             {
@@ -1511,12 +1509,12 @@
           "id": "ufo-end-of-era",
           "name": "Flying Saucers: a living myth",
           "year": 1958,
-          "yearDisplay": "1958 · Flying Saucers (CW 10)",
+          "yearDisplay": "1958 · Flying Saucers",
           "epochId": "pisces-second-fish",
           "polarity": "union",
           "oneLine": "The ufo round mandala “in the skies”: the self compensating at the aeon’s end.",
           "body": [
-            "Jung’s last warning (J): the rumour as a living myth whose round form portrays the self, suited “to compensate the splitmindedness of our age.” The Turn reading carries the full compensation row."
+            "Jung’s last warning: the rumour as a living myth whose round form portrays the self, suited “to compensate the splitmindedness of our age.”"
           ],
           "passages": [
             {
@@ -1546,7 +1544,7 @@
           "polarity": "union",
           "oneLine": "Jung reports 1997 as one conditional calculation of an Aquarian beginning.",
           "body": [
-            "Jung gives 1997 when the calculation starts from star “a 113.” He calls the constellation boundary indefinite; this is an alternative calculation in a footnote, not a forecast endorsed by the atlas."
+            "Jung gives 1997 when the calculation starts from star “a 113.” He calls the constellation boundary indefinite."
           ],
           "passages": [
             {
@@ -1574,7 +1572,7 @@
           "polarity": "union",
           "oneLine": "Jung also reports 2154 from another starting star and a 2,143-year month.",
           "body": [
-            "Jung gives 2154 when the calculation starts from star “O” with a 2,143-year Platonic month. It differs from the earlier alternative and remains qualified. Both markers sit inside the atlas’s broad transition range."
+            "Jung gives 2154 when the calculation starts from star “O” with a 2,143-year Platonic month. It differs from the earlier alternative and remains qualified."
           ],
           "passages": [
             {
@@ -1703,8 +1701,7 @@
           },
           "oneLine": "Every dated Jung forecast of the coming age, 1929 → 1958.",
           "body": [
-            "The inventory (J): from the 1929 seminar aside to the 1958 Flying Saucers preface — the forecasts gathered, each dated to where Jung spoke it. He forecasts a problem (the union of opposites, the reality of evil), never dated events or a new age-symbol.",
-            "Label law: J rows are Jung’s own text; where standard scholarship corrects the astronomy it is marked S and kept beside the claim, never reconciled into it."
+            "From the 1929 seminar aside to the 1958 Flying Saucers preface. He forecasts a problem (the union of opposites, the reality of evil), never dated events or a new age-symbol."
           ],
           "passages": [
             {
@@ -1730,7 +1727,7 @@
           "oneLine": "The sky-reckonings: 1997, 2154, the third millennium — none of them an event.",
           "body": [
             "Every date here is a sky-reckoning and Jung marks the arbitrariness himself: his own two reckonings disagree (1997 vs 2154), the Talmudic world-week runs to A.D. 3239, and fn84 calls the dating “very indefinite.” He dated the sky, not the event, and declined to predict the new age’s content.",
-            "S-correction, kept beside the claim: modern constants enter the corpus only as Jung’s citation; the IAU’s 1930 constellation boundaries (not in the corpus) put the ecliptic’s exit from Pisces near A.D. 2600 — later than every date Jung prints."
+            "the IAU’s 1930 constellation boundaries (not in the corpus) put the ecliptic’s exit from Pisces near A.D. 2600 — later than every date Jung prints."
           ],
           "passages": [
             {
@@ -1760,7 +1757,7 @@
           "polarity": "neutral",
           "oneLine": "The first dated forecast: the spring point “about to enter Aquarius.”",
           "body": [
-            "Delivered as an aside in the astrology-as-projection frame (J)."
+            "Delivered as an aside in the astrology-as-projection frame."
           ],
           "passages": [
             {
@@ -1784,7 +1781,7 @@
           "polarity": "neutral",
           "oneLine": "Others’ expectation reported: Aquarius as the third condition.",
           "body": [
-            "Delivered as report (J): the theosophical reading of the coming age in the Joachim frame — Jung citing, not endorsing."
+            "Delivered as report: the theosophical reading of the coming age in the Joachim frame — Jung citing, not endorsing."
           ],
           "passages": [
             {
@@ -1800,12 +1797,12 @@
           "id": "aqh-1930-time-quality",
           "name": "The time-quality doctrine",
           "year": 1930,
-          "yearDisplay": "1930 · the Wilhelm address (CW 15)",
+          "yearDisplay": "1930 · the Wilhelm address",
           "epochId": "aqh-forecasting-years",
           "polarity": "neutral",
           "oneLine": "The warrant for any forecast: the moment’s quality stamps what is born in it.",
           "body": [
-            "Doctrine, not forecast (J): “our own hypothetical time qualities” — the synchronistic bridge on which the whole horizon rests."
+            "Doctrine, not forecast: “our own hypothetical time qualities” — the synchronistic bridge on which the whole horizon rests."
           ],
           "passages": [
             {
@@ -1829,7 +1826,7 @@
           "polarity": "neutral",
           "oneLine": "“In about 1940 we shall be approaching the first stars of the next sign.”",
           "body": [
-            "The astronomical-constellation reading (J), with “of course there are no definite lines in the sky” a breath away."
+            "The astronomical-constellation reading, with “of course there are no definite lines in the sky” a breath away."
           ],
           "passages": [
             {
@@ -1853,7 +1850,7 @@
           "polarity": "neutral",
           "oneLine": "The sign whose ideal is “the union, the oneness, of animal and divine.”",
           "body": [
-            "Sky-lore anticipation (J): the iconography read forward — Piscis Austrinus as the Fishes sunk into the unconscious."
+            "Sky-lore anticipation: the iconography read forward — Piscis Austrinus as the Fishes sunk into the unconscious."
           ],
           "passages": [
             {
@@ -1879,7 +1876,7 @@
           "polarity": "neutral",
           "oneLine": "Aquarius as air: “the sign of this actual time.”",
           "body": [
-            "The epoch-reading (J): the spring equinox’s transit into Aquarius read coincident with the mass-movements; Uranus as unforeseen events."
+            "The epoch-reading: the spring equinox’s transit into Aquarius read coincident with the mass-movements; Uranus as unforeseen events."
           ],
           "passages": [
             {
@@ -1903,7 +1900,7 @@
           "polarity": "neutral",
           "oneLine": "“Aquarius, the man with the vessel to catch whatever flows.”",
           "body": [
-            "The age’s symbolic task (J), with the powers of darkness “coming up” beside it."
+            "The age’s symbolic task, with the powers of darkness “coming up” beside it."
           ],
           "passages": [
             {
@@ -1919,12 +1916,12 @@
           "id": "aqh-1936-kairos",
           "name": "The kairos named Wotan",
           "year": 1936,
-          "yearDisplay": "1936 · “Wotan” (CW 10)",
+          "yearDisplay": "1936 · “Wotan”",
           "epochId": "aqh-forecasting-years",
           "polarity": "shadow",
           "oneLine": "The transition read as possession, not progress.",
           "body": [
-            "The transition-as-possession row (J) — the dark tinge the horizon keeps throughout."
+            "The transition-as-possession row — the dark tinge the horizon keeps throughout."
           ],
           "passages": [
             {
@@ -1942,12 +1939,12 @@
           "id": "aqh-1940-second-fish",
           "name": "The anti-Christian age",
           "year": 1940,
-          "yearDisplay": "1938/39 · position-finding",
+          "yearDisplay": "1938/39",
           "epochId": "aqh-forecasting-years",
           "polarity": "shadow",
           "oneLine": "“Around 125 b.c., the age of Pisces began” — our era its second fish.",
           "body": [
-            "Position-finding (J): where in the Platonic month we stand, dated to the seminar year."
+            "Position-finding: where in the Platonic month we stand, dated to the seminar year."
           ],
           "passages": [
             {
@@ -1970,7 +1967,7 @@
           "polarity": "neutral",
           "oneLine": "“Now we are on the threshold of the sign of Aquarius” — the air-age task.",
           "body": [
-            "The full four-age scheme (J), delivered at the war’s onset: “the spirit is meant to become something subtle again, and man to become who he is” — his boldest content-statement, seminar register."
+            "The full four-age scheme, delivered at the war’s onset: “the spirit is meant to become something subtle again, and man to become who he is” — his boldest content-statement, seminar register."
           ],
           "passages": [
             {
@@ -1991,12 +1988,12 @@
           "id": "aqh-1950-third-millennium",
           "name": "The reckoned dates",
           "year": 1950,
-          "yearDisplay": "1950 · Aion ¶149 + n.84 — conditional",
+          "yearDisplay": "1950 · Aion (conditional)",
           "epochId": "aqh-forecasting-years",
           "polarity": "neutral",
           "oneLine": "The third millennium; 2154 or 1997 by the starting star — “very indefinite.”",
           "body": [
-            "The reckoned dates (J), with the arbitrariness conceded in his own footnote: two disagreeing reckonings, fn84’s 2000–2200 range, and the IAU’s later crossing (S, not in corpus) kept beside them."
+            "The reckoned dates, with the arbitrariness conceded in his own footnote: two disagreeing reckonings, fn84’s 2000–2200 range, and the IAU’s later crossing (S, not in corpus)."
           ],
           "passages": [
             {
@@ -2017,12 +2014,12 @@
           "id": "aqh-1950-union-of-opposites",
           "name": "The union of opposites",
           "year": 1950,
-          "yearDisplay": "1950 · Aion — THE forecast",
+          "yearDisplay": "1950 · Aion",
           "epochId": "aqh-forecasting-years",
           "polarity": "union",
           "oneLine": "What the new month will constellate: the problem of the union of opposites.",
           "body": [
-            "THE forecast (J): evil’s real existence to be recognized, the problem solvable “neither by philosophy, nor by economics, nor by politics, but only by the individual human being” — a problem forecast, never a dated event or a new symbol."
+            "Evil’s real existence to be recognized, the problem solvable “neither by philosophy, nor by economics, nor by politics, but only by the individual human being” — a problem forecast, never a dated event or a new symbol."
           ],
           "passages": [
             {
@@ -2041,12 +2038,12 @@
           "id": "aqh-1950-world-week",
           "name": "The Water Carrier named",
           "year": 1950,
-          "yearDisplay": "1950 · Aion ¶136",
+          "yearDisplay": "1950 · Aion",
           "epochId": "aqh-forecasting-years",
           "polarity": "neutral",
           "oneLine": "The Talmudic world-week and “the next aeon, that of the Water Carrier.”",
           "body": [
-            "The chronology row (J): anno mundi 7000 = A.D. 3239, the latest date in the corpus — a pre-modern chronology reported sympathetically, not endorsed as astronomy (S)."
+            "Anno mundi 7000 = A.D. 3239, the latest date in the corpus — a pre-modern chronology reported sympathetically, not endorsed as astronomy."
           ],
           "passages": [
             {
@@ -2062,12 +2059,12 @@
           "id": "aqh-1952-lucifer",
           "name": "Lucifer’s harsh forces",
           "year": 1952,
-          "yearDisplay": "1952 · Answer to Job ¶733",
+          "yearDisplay": "1952 · Answer to Job",
           "epochId": "aqh-forecasting-years",
           "polarity": "shadow",
           "oneLine": "“Aquarius sets aflame Lucifer’s harsh forces” — the dark-forecast verse.",
           "body": [
-            "The dark end of the horizon (J): the alchemical emblem deployed against any millenarian optimism — the aeon’s “dark end which we have still to experience.”"
+            "The dark end of the horizon: the alchemical emblem deployed against any millenarian optimism — the aeon’s “dark end which we have still to experience.”"
           ],
           "passages": [
             {
@@ -2090,7 +2087,7 @@
           "polarity": "neutral",
           "oneLine": "The white horse of Revelation as Aquarius’s rising constellation — “may be implied.”",
           "body": [
-            "Hedged conjecture (J), kept at its own strength: “astrological speculations … may be implied.”"
+            "Hedged conjecture: “astrological speculations … may be implied.”"
           ],
           "passages": [
             {
@@ -2111,7 +2108,7 @@
           "polarity": "shadow",
           "oneLine": "The horizon as mass-psychological fact: apocalyptic images near the millennium’s end.",
           "body": [
-            "The kairos row beside it (J): the metamorphosis of the gods, and Coming generations’ account to give."
+            "The kairos row beside it: the metamorphosis of the gods, and Coming generations’ account to give."
           ],
           "passages": [
             {
@@ -2132,12 +2129,12 @@
           "id": "aqh-1957-checkpoints",
           "name": "The footnotes’ checkpoints",
           "year": 1957,
-          "yearDisplay": "1956/57 · self-correction apparatus",
+          "yearDisplay": "1956/57",
           "epochId": "aqh-forecasting-years",
           "polarity": "neutral",
           "oneLine": "Jung footnoting his own essay against the news: Suez as the shadow’s answer.",
           "body": [
-            "The empiric checkpoints (J): the essay’s footnotes correcting it against events — the apparatus of a man refusing prophecy’s certainty."
+            "The empiric checkpoints: the essay’s footnotes correcting it against events — the apparatus of a man refusing prophecy’s certainty."
           ],
           "passages": [
             {
@@ -2153,12 +2150,12 @@
           "id": "aqh-1958-coming-events",
           "name": "Coming events of an era’s end",
           "year": 1958,
-          "yearDisplay": "1958 · Flying Saucers ¶589",
+          "yearDisplay": "1958 · Flying Saucers",
           "epochId": "aqh-threshold",
           "polarity": "union",
           "oneLine": "The fullest forecast: “coming events which are in accord with the end of an era.”",
           "body": [
-            "The 1958 preface (J), with the Taurus→Aries→Pisces→Aquarius chain in the same breath — and the ufo-mandala as the change’s sky-symbol."
+            "The 1958 preface, with the Taurus→Aries→Pisces→Aquarius chain in the same breath — and the ufo-mandala as the change’s sky-symbol."
           ],
           "passages": [
             {
@@ -2178,12 +2175,12 @@
           "id": "aqh-1958-ticking",
           "name": "The dread ticking of the clock",
           "year": 1958,
-          "yearDisplay": "1958 · Flying Saucers ¶696",
+          "yearDisplay": "1958 · Flying Saucers",
           "epochId": "aqh-threshold",
           "polarity": "shadow",
           "oneLine": "The transition felt as time-anxiety: the aeons’ rhythm exchanged for the clock.",
           "body": [
-            "The horizon’s phenomenology (J): what the end of an era does to the people living it."
+            "The horizon’s phenomenology: what the end of an era does to the people living it."
           ],
           "passages": [
             {
@@ -2249,8 +2246,8 @@
           },
           "oneLine": "Jung forecasts the eruption from the unconscious of his German patients.",
           "body": [
-            "The arc’s first phase runs from the pre-war baseline to the last seminar years before the seizure of power (J, each row dated). The 1914 row is retrospective — written in 1936 — and the 1918 forecast rests on the printed essay, not on surviving case records.",
-            "“Wotan” as the name of the eruption is Jung’s heretical suggestion, offered as his claim about history, not as established history (S keeps the historians’ economic and political factors)."
+            "The 1914 row is retrospective — written in 1936 — and the 1918 forecast rests on the printed essay, not on surviving case records.",
+            "“Wotan” as the name of the eruption is Jung’s heretical suggestion, offered as his claim about history, not as established history."
           ],
           "passages": [
             {
@@ -2275,7 +2272,7 @@
           },
           "oneLine": "Wotan’s fires: a nation reviving an archaic symbol at mass scale.",
           "body": [
-            "The essays and seminars of 1933–38 name what Jung watched: the counter-sun, the possession, the kairos whose name turns out to be Wotan (J). His own risk-flag stands with the claim: he calls the suggestion heretical and labels it his mantic reading."
+            "The essays and seminars of 1933–38 name what Jung watched: the counter-sun, the possession, the kairos whose name turns out to be Wotan."
           ],
           "passages": [
             {
@@ -2300,7 +2297,7 @@
           },
           "oneLine": "“The first outbreak of epidemic insanity”: the myth fulfilled in ruins.",
           "body": [
-            "The post-mortem rows (J): the epidemic-insanity diagnosis, the personified shadow, the projection-return law — Jung reading the catastrophe his forecast had named."
+            "The post-mortem rows: the epidemic-insanity diagnosis, the personified shadow, the projection-return law — Jung reading the catastrophe his forecast had named."
           ],
           "passages": [
             {
@@ -2325,7 +2322,7 @@
           },
           "oneLine": "What surfaces against the eruption: the Assumption, the ufo-mandala, the kairos.",
           "body": [
-            "The compensation rows (J): the 1950 Assumption as the feminine counter-move, the sky-mandala of the saucer rumour as the self’s symbol at the turn, the kairos for a “metamorphosis of the gods.” Not all compensations are light — the seminar years’ dark counter-saviors stand in the forecast phase."
+            "The compensation rows: the 1950 Assumption as the feminine counter-move, the sky-mandala of the saucer rumour as the self’s symbol at the turn, the kairos for a “metamorphosis of the gods.” Not all compensations are light — the seminar years’ dark counter-saviors stand in the forecast phase."
           ],
           "passages": [
             {
@@ -2350,8 +2347,8 @@
           },
           "oneLine": "The turn’s forward edge: the threshold of the sign of Aquarius.",
           "body": [
-            "The arc ends looking forward (J): the 1940 element-scheme’s air-age, the 1958 warning of “coming events which are in accord with the end of an era.” What Jung forecast for the coming age is gathered in the Aquarius Horizon reading; he dates the sky, never the event.",
-            "The horizon boundary 2154 is one of Jung’s own two conditional reckonings (fn84), kept as a display edge, not a prediction (S notes the IAU’s constellation boundaries put the crossing far later)."
+            "The arc ends looking forward: the 1940 element-scheme’s air-age, the 1958 warning of “coming events which are in accord with the end of an era.”",
+            "The horizon boundary 2154 is one of Jung’s own two conditional reckonings (fn84)."
           ],
           "passages": [
             {
@@ -2372,7 +2369,7 @@
           "polarity": "neutral",
           "oneLine": "The rationalist world-order as the cracked dam — seen from 1936.",
           "body": [
-            "Retrospective baseline (J): the “Wotan” essay opens on the inconceivability of the pre-war world and the witches’ sabbath that followed."
+            "Retrospective baseline: the “Wotan” essay opens on the inconceivability of the pre-war world and the witches’ sabbath that followed."
           ],
           "passages": [
             {
@@ -2400,7 +2397,7 @@
           "polarity": "shadow",
           "oneLine": "“The ‘blond beast’ … prowling about in its underground prison.”",
           "body": [
-            "The 1918 essay’s forecast (J), re-read aloud by Jung in 1934 as “a rather good diagnosis of the present political conditions.” The clinical prehistory he later claimed (¶447, written 1946) rests on self-report; the printed forecast is the checkable witness."
+            "The 1918 essay’s forecast, re-read aloud by Jung in 1934 as “a rather good diagnosis of the present political conditions.” The clinical prehistory he later claimed (¶447, written 1946) rests on self-report;"
           ],
           "passages": [
             {
@@ -2431,7 +2428,7 @@
           "polarity": "shadow",
           "oneLine": "The war named as the shadow’s price, two years before the seizure of power.",
           "body": [
-            "Seminar aside (J): without the shadow-work, “we are driven into a world war in order to see what beasts we are.”"
+            "Seminar aside: without the shadow-work, “we are driven into a world war in order to see what beasts we are.”"
           ],
           "passages": [
             {
@@ -2459,7 +2456,7 @@
           "polarity": "shadow",
           "oneLine": "Wotan’s oak hewn, Reason enthroned: two depositions, no thunderbolt.",
           "body": [
-            "The deposal pairing (J): 1793’s Goddess of Reason and the missionaries’ hewing of Wotan’s oak — both gods felled with no avenging bolt, both with the god’s return in store."
+            "The deposal pairing: 1793’s Goddess of Reason and the missionaries’ hewing of Wotan’s oak — both gods felled with no avenging bolt, both with the god’s return in store."
           ],
           "passages": [
             {
@@ -2488,7 +2485,7 @@
           "polarity": "shadow",
           "oneLine": "“Those swastika people are building Wotan’s fires again” — five years early.",
           "body": [
-            "The naming before the essay (J): the 1931 seminar aside that the 1936 “Wotan” paper later argued at length."
+            "The naming before the essay: the 1931 seminar aside that the 1936 “Wotan” paper later argued at length."
           ],
           "passages": [
             {
@@ -2517,7 +2514,7 @@
           "polarity": "shadow",
           "oneLine": "A white placenta, a child suckled by an iron wolf: the dark counter-savior born.",
           "body": [
-            "The seminar vision-row’s darkest birth (J): “the birth of a most dangerous warlike spirit, fed by a wolf with iron milk” — the age’s war-charge in symbol, three years before the counter-sun reading and the essay."
+            "The seminar vision-row’s darkest birth: “the birth of a most dangerous warlike spirit, fed by a wolf with iron milk” — the age’s war-charge in symbol, three years before the counter-sun reading and the essay."
           ],
           "passages": [
             {
@@ -2553,7 +2550,7 @@
           "polarity": "shadow",
           "oneLine": "Jung reads his 1918 article aloud: “a rather good diagnosis.”",
           "body": [
-            "Self-verification in public (J): one of the few forecasts Jung re-confirmed against his own earlier print while the events ran."
+            "Self-verification in public: one of the few forecasts Jung re-confirmed against his own earlier print while the events ran."
           ],
           "passages": [
             {
@@ -2579,7 +2576,7 @@
           "polarity": "shadow",
           "oneLine": "The swastika turning the wrong way: black, left-turning, a counter-sun.",
           "body": [
-            "The seminar reading (J): the arrested progress of a sun-wheel turned backwards — the symbol read live as the eruption ran."
+            "The seminar reading: the arrested progress of a sun-wheel turned backwards — the symbol read live as the eruption ran."
           ],
           "passages": [
             {
@@ -2604,7 +2601,7 @@
           "polarity": "shadow",
           "oneLine": "The Wotan eruption generalized: mass emotion revolutionizing individual life.",
           "body": [
-            "The 1936 generalization (J): the archaic symbol luring “millions of warriors ready for death” — “all this absurdity is a horrible reality.”"
+            "The 1936 generalization: the archaic symbol luring “millions of warriors ready for death” — “all this absurdity is a horrible reality.”"
           ],
           "passages": [
             {
@@ -2627,7 +2624,7 @@
           "polarity": "shadow",
           "oneLine": "German Christians, and Valhalla preached from a funeral pulpit.",
           "body": [
-            "The footnote record (J): the Protestant movement inside the church, and Langmann in S.A. uniform directing the Gustloff dead “to Valhalla.”"
+            "The footnote record: the Protestant movement inside the church, and Langmann in S.A. uniform directing the Gustloff dead “to Valhalla.”"
           ],
           "passages": [
             {
@@ -2659,7 +2656,7 @@
           "polarity": "shadow",
           "oneLine": "“Our blight is ideologies—they are the longexpected Antichrist!”",
           "body": [
-            "The aeon-name applied to politics (J): the Antichrist doctrine landing on the mass-movements of the age."
+            "The aeon-name applied to politics: the Antichrist doctrine landing on the mass-movements of the age."
           ],
           "passages": [
             {
@@ -2682,7 +2679,7 @@
           "polarity": "shadow",
           "oneLine": "“Just as Christianity had a cross … so Hitler has a swastika.”",
           "body": [
-            "The symptom comparison (J), with the War of the Worlds panic beside it as the latent-emotion precedent."
+            "The symptom comparison, with the War of the Worlds panic beside it as the latent-emotion precedent."
           ],
           "passages": [
             {
@@ -2703,12 +2700,12 @@
           "id": "turn-wotan-essay-1936",
           "name": "“Wotan”: the essay",
           "year": 1936,
-          "yearDisplay": "Mar 1936 · “Wotan” (CW 10)",
+          "yearDisplay": "Mar 1936 · “Wotan”",
           "epochId": "turn-eruption",
           "polarity": "shadow",
           "oneLine": "The heretical suggestion: kairos whose name, on closer investigation, is Wotan.",
           "body": [
-            "THE ESSAY (J): Nostradamus motto, the white-horse sect, Ergriffenheit, the kairos naming, and the mantic close — “National Socialism would not be the last word.” Jung labels the core claim heresy himself; the vault keeps it as his claim, not history (S)."
+            "The essay: Nostradamus motto, the white-horse sect, Ergriffenheit, the kairos naming, and the mantic close — “National Socialism would not be the last word.” Jung labels the core claim heresy himself."
           ],
           "passages": [
             {
@@ -2748,7 +2745,7 @@
           "polarity": "shadow",
           "oneLine": "The dated aside: “we are now exactly in the beginning of the holocaust.”",
           "body": [
-            "Preserved verbatim (J), no more weight claimed: the sacrificial-conflagration sense in seminar speech, three years before the war — the word’s later history is not Jung’s meaning here."
+            "The sacrificial-conflagration sense in seminar speech, three years before the war."
           ],
           "passages": [
             {
@@ -2774,7 +2771,7 @@
           "polarity": "light",
           "oneLine": "Taurus → Aries → Pisces → “the threshold of the sign of Aquarius.”",
           "body": [
-            "The full element-cycle taught at the war’s onset (J): air assigned to Aquarius — “the spirit is meant to become something subtle again, and man to become who he is.”"
+            "The full element-cycle taught at the war’s onset: air assigned to Aquarius — “the spirit is meant to become something subtle again, and man to become who he is.”"
           ],
           "passages": [
             {
@@ -2802,7 +2799,7 @@
           "polarity": "shadow",
           "oneLine": "“My unexpectedly dark brother … though I deny it a thousand times, it is also in me.”",
           "body": [
-            "The shadow internalized (J): the European’s own antichristian Neo-Paganism, owned rather than projected."
+            "The shadow internalized: the European’s own antichristian Neo-Paganism, owned rather than projected."
           ],
           "passages": [
             {
@@ -2833,7 +2830,7 @@
           "polarity": "shadow",
           "oneLine": "“European man was possessed by something that robbed him of all free will.”",
           "body": [
-            "The possession doctrine written mid-war (J): unconscious possession ending only with the scare of our “god-almightiness” — and only individuals, “for the masses are blind brutes.”"
+            "The possession doctrine written mid-war: unconscious possession ending only with the scare of our “god-almightiness” — and only individuals, “for the masses are blind brutes.”"
           ],
           "passages": [
             {
@@ -2864,7 +2861,7 @@
           "polarity": "shadow",
           "oneLine": "Epidemic insanity, the personified shadow, the mass psychoses named.",
           "body": [
-            "The post-mortem rows (J): “He represented the shadow, the inferior part of everybody’s personality”; “the political mass movements of our time are psychic epidemics.” Jung’s own ethnic psychology of the 1918/1934 stratum stands in the vault as his claim, historically compromised — not softened here."
+            "“He represented the shadow, the inferior part of everybody’s personality”; “the political mass movements of our time are psychic epidemics.”"
           ],
           "passages": [
             {
@@ -2900,7 +2897,7 @@
           "polarity": "light",
           "oneLine": "The dogma as compensating symptom in an age of the greatest political schism.",
           "body": [
-            "The feminine counter-move (J): the hydrogen-bomb age arming itself “for a stupendous crime,” and against it the Mother of God enthroned — for Jung the most important religious event since the Reformation, foretelling the god-image’s incarnation in creaturely man."
+            "The feminine counter-move: the hydrogen-bomb age arming itself “for a stupendous crime,” and against it the Mother of God enthroned — for Jung the most important religious event since the Reformation, foretelling the god-image’s incarnation in creaturely man."
           ],
           "passages": [
             {
@@ -2937,7 +2934,7 @@
           "polarity": "union",
           "oneLine": "“We are living in what the Greeks called the kairos — the right moment.”",
           "body": [
-            "The last framing (J): the moment for a “metamorphosis of the gods,” with the H-bomb question standing beside it."
+            "The last framing: the moment for a “metamorphosis of the gods,” with the H-bomb question standing beside it."
           ],
           "passages": [
             {
@@ -2963,7 +2960,7 @@
           "polarity": "union",
           "oneLine": "A living myth of round totalities: “remember his own soul … wholeness.”",
           "body": [
-            "The compensation in the sky (J), opened as a self-declared second Wotan warning. Jung’s own risk-flag stays with it: the reflection comes “perilously close to those turbid fantasies which becloud the minds of world-reformers” — “But I must take this risk” (¶590)."
+            "The compensation in the sky, opened as a self-declared second Wotan warning. The reflection comes “perilously close to those turbid fantasies which becloud the minds of world-reformers” — “But I must take this risk” (¶590)."
           ],
           "passages": [
             {
@@ -3002,7 +2999,7 @@
           "polarity": "shadow",
           "oneLine": "The wizard with the Merseburg spell-book: the god’s “timelessness.”",
           "body": [
-            "The bridge row (J): the eruption’s god not a closed chapter but a standing presence in the Swiss cantons — the arc handed to the horizon."
+            "The bridge row: the eruption’s god not a closed chapter but a standing presence in the Swiss cantons — the arc handed to the horizon."
           ],
           "passages": [
             {
