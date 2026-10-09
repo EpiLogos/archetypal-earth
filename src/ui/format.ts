@@ -10,10 +10,17 @@ export function shortWork(workTitle: string): string {
   return workTitle.replace(/\s*\((?:cw|CW)[^)]*\)\s*$/, '').trim();
 }
 
-/** "fig. 131, ¶357 (pdf p268)" → "¶357" — falls back to the locator minus pdf noise. */
+/**
+ * "fig. 131, ¶357 (pdf p268)" → "¶357"; "¶149, n.84 (pdf p106)" → "¶149, n.84" (a footnote the paragraph carries stays);
+ * anything without a paragraph falls back to the locator minus pdf noise.
+ */
 export function shortLocator(loc: string): string {
   const para = loc.match(/¶\s*[\d][\d\s,–\-¶]*/);
-  if (para) return para[0].replace(/\s+$/, '').replace(/\s*,\s*$/, '');
+  if (para) {
+    const base = para[0].replace(/\s+$/, '').replace(/\s*,\s*$/, '');
+    const note = loc.match(/,\s*n\.\s*\d+(?:[–-]\d+)?/);
+    return note && note.index! > para.index! ? `${base}${note[0].replace(/\s+/g, ' ')}` : base;
+  }
   const t = loc.replace(/\(\s*pdf[^)]*\)/gi, '').replace(/\s+/g, ' ').trim();
   return t.length > 36 ? clipText(t, 36) : t;
 }

@@ -75,8 +75,10 @@ export interface KeyPassage {
 }
 
 /**
- * The one passage the card leads with: the body's first Burt quote when the book defines it, else the first passage
- * Jung cites for a tie that Jung makes (or for a reading of this body). Never the atlas's own link: that has no quotation.
+ * The one passage the card leads with. The Sun and the Moon lead with the pair reading Jung gives them (the coniunctio),
+ * and Burt's definition sits in her disclosure. Every other body leads with Burt's definition when the book gives one,
+ * else with the first passage Jung cites for a tie that Jung makes (or for a reading of this body). Never the atlas's
+ * own link: that has no quotation.
  */
 export function keyPassageOf(
   body: Pick<SkyBody, 'key' | 'quotes'>,
@@ -84,12 +86,17 @@ export function keyPassageOf(
   readings: SkyReading[],
   m: Model,
 ): KeyPassage | null {
+  const jungKey = (cite: SkyCite): KeyPassage => ({ voice: 'jung', quote: cite.quote, footer: passageLine(m, cite.work, cite.locator), cite });
+  if (body.key === 'sun' || body.key === 'moon') {
+    const pair = readings.find((r) => r.basis === 'jung' && r.bodies.includes(body.key) && r.cites.length)?.cites[0];
+    if (pair) return jungKey(pair);
+  }
   const q = body.quotes?.[0];
   if (q) return { voice: 'burt', quote: q.text, footer: burtFooter(q), burt: q };
   const cite = resolved.find((t) => t.basis === 'jung' && t.cites?.length)?.cites?.[0]
     ?? readings.find((r) => r.basis === 'jung' && r.bodies.includes(body.key) && r.cites.length)?.cites[0];
   if (!cite) return null;
-  return { voice: 'jung', quote: cite.quote, footer: passageLine(m, cite.work, cite.locator), cite };
+  return jungKey(cite);
 }
 
 export interface PositionReading {
@@ -198,19 +205,19 @@ export class SkyCard {
 
     // the hero: a genuine picture of the body when one is curated, else the drawn orb (the tonal plate of this mode)
     this.body.append(body.image
-      ? plate(body.image, { className: 'rv-hero sky-portrait', credit: true, palette: body.palette, eager: true })
+      ? plate(body.image, { className: 'rv-hero sky-portrait', credit: true, palette: body.palette, eager: true, alt: body.name })
       : portrait(body));
     const text = el('div', { class: 'rv-text' });
     text.append(el('h2', { class: 'rv-name', text: projection ? projection.name : body.name }));
     text.append(el('p', { class: 'rv-line', text: kindLine(body, !!projection) }));
 
-    // culture reprojection is always named, and always says what it is not
+    // culture reprojection is always named, and always says what it is not; its table is the chip's own tooltip
     if (ctx.culture) {
       text.append(projection
         ? el('p', { class: 'sky-reproject' }, [
           `Read through ${cultureName}: ${projection.name} `,
-          basisChip(projection.basis),
-          el('span', { class: 'sky-source', text: ` after ${projection.source}. The character below is the default one (${body.name}).` }),
+          basisChip(projection.basis, projection.source),
+          `. The character below is the default one (${body.name}).`,
         ])
         : el('p', { class: 'sky-reproject' }, [`${cultureName} gives ${body.name} no name of its own; it stands under its default name.`]));
     }
@@ -229,9 +236,15 @@ export class SkyCard {
       ]));
     }
 
+    // each quiet disclosure of further passages is named for what it adds to, once the card has more than one
+    const pairs = ctx.data.readings.filter((x) => x.bodies.includes(body.key));
+    const disclosures = resolved.filter((t) => (t.cites ?? []).some((c) => c !== skip)).length
+      + pairs.filter((r) => r.cites.some((c) => c !== skip)).length;
+    const moreLabel = (name: string) => (disclosures > 1 ? `More on ${name}` : 'More from the text');
+
     // the field the body is tied to, then the ground those families touch
     const ties = el('div', { class: 'sky-ties' }, [el('h3', { class: 'sky-h', text: 'In the field' })]);
-    for (const t of resolved) ties.append(this.tie(t, m, skip));
+    for (const t of resolved) ties.append(this.tie(t, m, skip, moreLabel));
     text.append(ties);
     const earth = this.earthSection(m, resolved);
     if (earth) text.append(earth);
@@ -242,7 +255,7 @@ export class SkyCard {
     if (body.key === 'sun' || body.key === 'moon') text.append(this.syzygy(ctx));
 
     // the pair reading, for the luminaries
-    for (const r of ctx.data.readings.filter((x) => x.bodies.includes(body.key))) text.append(this.reading(r, m, skip));
+    for (const r of pairs) text.append(this.reading(r, m, skip, moreLabel));
 
     // sources, plainly, last
     if (body.sources.length) {
@@ -290,7 +303,7 @@ export class SkyCard {
     return el('blockquote', {}, [el('p', { text: `“${q.text}”` }), cite]);
   }
 
-  private tie(t: SkyTie, m: Model, skip?: SkyCite): HTMLElement {
+  private tie(t: SkyTie, m: Model, skip: SkyCite | undefined, moreLabel: (name: string) => string): HTMLElement {
     const name = subjectName(m, t.target);
     const row = el('div', { class: 'sky-tie' }, [
       el('div', { class: 'sky-tie-head' }, [
@@ -302,7 +315,7 @@ export class SkyCard {
     const note = tieNote(t);
     if (note) row.append(el('p', { class: 'sky-tie-note', text: note }));
     const cites = (t.cites ?? []).filter((c) => c !== skip);
-    if (cites.length) row.append(passages(m, cites, 'More from the text'));
+    if (cites.length) row.append(passages(m, cites, moreLabel(name)));
     return row;
   }
 
@@ -340,13 +353,13 @@ export class SkyCard {
     return sec;
   }
 
-  private reading(r: SkyReading, m: Model, skip?: SkyCite): HTMLElement {
+  private reading(r: SkyReading, m: Model, skip: SkyCite | undefined, moreLabel: (name: string) => string): HTMLElement {
     const box = el('section', { class: 'sky-reading' }, [
       el('h3', { class: 'sky-h' }, [r.name, ' ', basisChip(r.basis)]),
       el('p', { class: 'rv-para', text: r.statement }),
     ]);
     const cites = r.cites.filter((c) => c !== skip);
-    if (cites.length) box.append(passages(m, cites, 'More from the text'));
+    if (cites.length) box.append(passages(m, cites, moreLabel(r.name)));
     return box;
   }
 
@@ -403,9 +416,14 @@ function kindLine(body: SkyBody, reprojected: boolean): string {
   return reprojected ? `${kind} · default name ${body.name}` : kind;
 }
 
-export function basisChip(basis: TieBasis): HTMLElement {
-  const b = BASIS_LABEL[basis];
-  return el('span', { class: `sky-basis sky-basis-${basis}`, title: b.title, text: b.chip });
+export function basisChip(basis: TieBasis, source?: string): HTMLElement {
+  return el('span', { class: `sky-basis sky-basis-${basis}`, title: basisTitle(basis, source), text: BASIS_LABEL[basis].chip });
+}
+
+/** The chip's tooltip: what the basis says and, for a culture's reading, the table it is transcribed from. */
+export function basisTitle(basis: TieBasis, source?: string): string {
+  const title = BASIS_LABEL[basis].title;
+  return source ? `${title} Source: ${source}` : title;
 }
 
 /** A quiet disclosure of further passages, each cited in the site's one voice: "Jung · Aion · 1951 · ¶149". */

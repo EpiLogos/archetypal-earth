@@ -30,7 +30,8 @@ function spanIds(reading: HistoryReading, epoch: Epoch): Set<string> {
 
 /**
  * The hero of an event: its first gathered occurrence's own image (or that occurrence's family image), then the
- * first family with an image, then the first archetype with one. Undefined leaves the card a tonal plate.
+ * first family with an image. An archetype's picture is not a hero: it stands for the whole archetype on every card
+ * that names it, so it says nothing about this event. Undefined leaves the card a tonal plate.
  */
 export function eventHeroImage(model: Model, event: AeonEvent): ImageRef | undefined {
   for (const id of event.occurrenceIds) {
@@ -38,16 +39,14 @@ export function eventHeroImage(model: Model, event: AeonEvent): ImageRef | undef
     if (i !== undefined) { const image = occurrenceImage(model, model.occ[i]); if (image) return image; }
   }
   for (const id of event.familyIds) { const image = model.famById.get(id)?.image; if (image) return image; }
-  for (const id of event.archetypeIds ?? []) { const image = model.archById.get(id)?.image; if (image) return image; }
   return undefined;
 }
 
 /**
- * The hero of an epoch: the archetypes it names, then the families of the events inside it (nested epochs
- * included), the most-cited family first. Undefined leaves the card a tonal plate in the epoch's palette.
+ * The hero of an epoch: the families of the events inside it (nested epochs included), the most-cited family first.
+ * An archetype's picture is not used here either. Undefined leaves the card a tonal plate in the epoch's palette.
  */
 export function epochHeroImage(model: Model, reading: HistoryReading, epoch: Epoch): ImageRef | undefined {
-  for (const id of epoch.archetypeIds ?? []) { const image = model.archById.get(id)?.image; if (image) return image; }
   const inside = spanIds(reading, epoch);
   const counts = new Map<string, number>();
   for (const event of reading.events) if (inside.has(event.epochId)) for (const id of event.familyIds) counts.set(id, (counts.get(id) ?? 0) + 1);

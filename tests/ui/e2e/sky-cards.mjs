@@ -45,9 +45,9 @@ try {
   });
   check(card.on && !card.inert && card.name === 'Mars', 'the card opens under the default name', `"${card.name}"`);
   check(/^(Aries|Taurus|Gemini|Cancer|Leo|Virgo|Libra|Scorpio|Sagittarius|Capricorn|Aquarius|Pisces) \d+°\d\d′ — tropical, ecliptic of date · as of \d{4}-\d\d-\d\d \d\d:\d\d UTC$/.test(card.position ?? ''), 'its position is a sign and degree, labelled tropical, with its moment', card.position);
-  check(card.ties.length > 0 && card.ties.every((t) => ['Jung', 'inferred', 'the atlas\'s reading'].includes(t.basis)), 'every displayed tie carries its basis', JSON.stringify(card.ties.map((t) => `${t.name}:${t.basis}`)));
+  check(card.ties.length > 0 && card.ties.every((t) => ['Jung', 'inferred', 'read here'].includes(t.basis)), 'every displayed tie carries its basis', JSON.stringify(card.ties.map((t) => `${t.name}:${t.basis}`)));
   check(card.ties.filter((t) => t.basis === 'Jung').every((t) => t.hasPassage), 'every tie that claims Jung shows his passage');
-  check(card.ties.filter((t) => t.basis === 'the atlas\'s reading').every((t) => !t.hasPassage), 'no tie of the atlas\'s own is dressed with a quotation');
+  check(card.ties.filter((t) => t.basis === 'read here').every((t) => !t.hasPassage), 'no tie of the atlas\'s own is dressed with a quotation');
 
   // the tooltip explains the basis
   const title = await page.evaluate(() => document.querySelector('.sky-card .sky-basis')?.title);
@@ -83,9 +83,11 @@ try {
   await page.waitForTimeout(1200);
   const re = await page.evaluate(() => ({
     name: document.querySelector('.sky-card .rv-name')?.textContent, note: document.querySelector('.sky-reproject')?.textContent,
+    chip: document.querySelector('.sky-reproject .sky-basis')?.title ?? '',
     label: [...document.querySelectorAll('.sky-label.on')].map((l) => l.textContent), hash: location.hash, sel: document.querySelector('.sky-culture-note')?.textContent,
   }));
-  check(re.name === 'Mangala' && /Read through Indian/.test(re.note ?? '') && /after /.test(re.note ?? '') && /default one \(Mars\)/.test(re.note ?? ''), 'reprojected card is named, sourced and says the character is the default', re.note);
+  check(re.name === 'Mangala' && /^Read through Indian: Mangala \S+\. The character below is the default one \(Mars\)\.$/.test(re.note ?? ''), 'reprojected card reads through the culture and says the character is the default, with no source clause in the text', re.note);
+  check(/Source: .+/.test(re.chip) && !/\bafter\b/.test(re.note ?? '') && !/\bcw\d/i.test(re.note ?? ''), 'the table the reading comes from is the basis chip\'s tooltip, not the text', re.chip.slice(0, 120));
   check(re.label.includes('Mangala'), 'the scene\'s labels follow the culture', re.label.join(', '));
   check(re.hash.endsWith('/c/indian'), 'the culture is part of the link', re.hash);
   check(/Names read through Indian/.test(re.sel ?? ''), 'the selector names what it is doing');
@@ -111,12 +113,31 @@ try {
   });
   check(reading.has && /coniunctio/i.test(reading.h ?? '') && reading.h.includes('Jung'), 'the Sun carries the pair reading with its basis', JSON.stringify(reading.h));
   check(reading.events.length === 2 && reading.events.every((e) => e.links.length === 3), 'each of the next conjunction and opposition links the three field entries Jung\u2019s reading names', JSON.stringify(reading.events));
+  // the Sun leads with Jung's pair reading, not with Burt; her definitions wait in her own disclosure
+  const sunLead = await page.evaluate(() => { const f = document.querySelector('.sky-card blockquote.sky-key'); return { cls: f?.className ?? '', footer: f?.querySelector('footer')?.textContent?.trim() ?? '' }; });
+  check(/sky-key-jung/.test(sunLead.cls) && /^Jung · /.test(sunLead.footer), 'the Sun leads with Jung’s pair reading, footed in the field’s voice', sunLead.footer);
+  const sunMore = await page.evaluate(() => [...document.querySelectorAll('.sky-card details.aion-sources > summary')].map((x) => x.textContent.trim()).filter((t) => /^More/.test(t)));
+  check(sunMore.length > 1 && sunMore.every((t) => /^More on \S/.test(t)), 'the Sun has several passage disclosures, and each is named for what it adds to', sunMore.join(' | '));
   await page.click('.sky-reading summary');
   const after = await page.evaluate(() => ({ open: document.querySelector('.sky-reading details').open, quote: document.querySelector('.sky-reading blockquote p')?.textContent, cite: document.querySelector('.sky-reading blockquote cite')?.textContent }));
-  check(after.open && /coniunctio oppositorum/.test(after.quote ?? '') && /Aion/.test(after.cite ?? ''), 'passages expand in place, quoted and cited', `${after.quote?.slice(0, 60)}… ${after.cite}`);
+  // the pair reading's first cite leads the card above, so the disclosure holds the reading's other cite, not a repeat of it
+  check(after.open && /union of conscious/.test(after.quote ?? '') && /Aion/.test(after.cite ?? '') && /¶426/.test(after.cite ?? '') && !/coniunctio oppositorum/.test(after.quote ?? ''),
+    'passages expand in place, quoted and cited; the cite the card leads with is not repeated beneath it', `${after.quote?.slice(0, 60)}… ${after.cite}`);
   await page.evaluate(() => window.__earth.ctl.openBody('moon'));
   await page.waitForTimeout(1300);
   check(await page.evaluate(() => !!document.querySelector('.sky-card .sky-reading')), 'the Moon carries it too');
+
+  // ── a body with site ties only: the Earth's own card, whose two ties are the atlas's, never Jung's ──
+  await page.evaluate(() => window.__earth.ctl.openBody('earth'));
+  await page.waitForTimeout(1300);
+  const earth = await page.evaluate(() => {
+    const c = document.querySelector('.sky-card');
+    return { on: c.classList.contains('on'), name: c.querySelector('.rv-name')?.textContent, ties: [...c.querySelectorAll('.sky-tie')].map((t) => ({
+      basis: t.querySelector('.sky-basis')?.textContent, hasPassage: !!t.querySelector('details blockquote'), note: t.querySelector('.sky-tie-note')?.textContent ?? null })) };
+  });
+  check(earth.on && earth.name === 'Terra' && earth.ties.length === 2, 'the Earth opens its card through its two site ties', JSON.stringify(earth));
+  check(earth.ties.every((t) => t.basis === 'read here' && !t.hasPassage), 'each atlas tie is chipped "read here" and quotes nothing', JSON.stringify(earth.ties.map((t) => t.basis)));
+  check(earth.ties.every((t) => t.note && !/vault|by inference/i.test(t.note)), 'the atlas\'s own ties say in plain words what they are', earth.ties.map((t) => t.note).join(' | '));
 
   // ── descend to the Earth through a field link ──
   await page.evaluate(() => window.__earth.ctl.openBody('mercury'));

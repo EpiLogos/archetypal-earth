@@ -92,6 +92,22 @@ describe('text formatting', () => {
     expect(shortLocator('p. 12 (pdf p40)')).toBe('p. 12');
   });
 
+  it('keeps a footnote the paragraph carries, and still strips the pdf noise around it', () => {
+    expect(shortLocator('¶149, n.84 (pdf p106)')).toBe('¶149, n.84');
+    expect(shortLocator('¶149, n.84')).toBe('¶149, n.84');
+    expect(shortLocator('¶149,  n. 84 (pdf p106)')).toBe('¶149, n. 84');
+    expect(shortLocator('¶149 (pdf p105–106)')).toBe('¶149');
+    expect(shortLocator('¶149, n.84–85 (pdf p106)')).toBe('¶149, n.84–85');
+    expect(shortLocator('fig. 131, ¶357, n.2 (pdf p268)')).toBe('¶357, n.2');
+  });
+
+  it('never shows a parenthesised pdf locator, with or without a paragraph or a footnote', () => {
+    expect(shortLocator('p. 12 (pdf p40)')).not.toMatch(/pdf|\(/);
+    expect(shortLocator('¶149 (pdf p105–106)')).not.toMatch(/pdf|\(/);
+    expect(shortLocator('¶149, n.84 (pdf p106)')).not.toMatch(/pdf|\(/);
+    expect(shortLocator('footnote n.84 (pdf p106)')).not.toMatch(/pdf|\(/);
+  });
+
   it('clips at a sentence when it can', () => {
     const t = 'One short sentence here. Another sentence that runs on for quite a while longer than the limit allows.';
     expect(clipText(t, 40)).toBe('One short sentence here.');

@@ -19,6 +19,7 @@ const check = (ok, label, detail = '') => {
 // Excuse-narration and metadata that the text pass removed. Matched against everything a card shows.
 const REMOVED = [
   /the atlas/i, /this atlas/i, /the vault/i, /not softened/i, /S-correction/, /kept beside/i, /\(S\)/, /\(J\)/,
+  /\(S[,)]/, /\(J[,)]/, /\(not in (the )?corpus\)/i, /\brows?\b/i, /\bfn\d+/i,
   /display choice/i, /approximate midpoint/i, /approximate marker/i, /display marker/i, /astronomical anchors/i,
   /existing field dating/i, /lower-bound display/i, /THE forecast/, /Aion — /, /Label law/i, /site.s summary/i,
 ];
@@ -74,6 +75,11 @@ try {
 
       const more = await card.locator('details.aion-sources summary').allTextContents();
       check(more.every((t) => t.trim() === 'More from the text'), `${scene.name}: remaining passages are filed under 'More from the text'`, more.join(' | ') || 'none');
+
+      // every body paragraph is a finished sentence: a terminal stop (or a closing quotation after one), a capital, no ';' ending
+      const bodyParas = (await card.locator('.rv-text > p.rv-para:not(.aion-lede)').allTextContents()).map((t) => t.trim());
+      const fragments = bodyParas.filter((t) => /;$/.test(t) || !/[.!?…]["”’)\]]*$/.test(t) || /^[a-z]/.test(t));
+      check(bodyParas.length > 0 && fragments.length === 0, `${scene.name}: every body paragraph is a finished sentence`, fragments.join(' | ') || `${bodyParas.length} paragraph(s)`);
 
       const { card: text, browse } = await readerText(page);
       const hits = [...REMOVED.map((re) => re.exec(text + '\n' + browse)?.[0]).filter(Boolean)];
