@@ -56,6 +56,13 @@ describe('state transitions', () => {
     expect(stateEq(focusOn(WORLD, serpent), focusOn(WORLD, serpent))).toBe(true);
     expect(stateEq(focusOn(WORLD, serpent), WORLD)).toBe(false);
   });
+
+  it('the Red Book null state is a state of its own: entering and leaving it are both moves', () => {
+    const redbook = { ...WORLD, redbook: {} };
+    expect(stateEq(redbook, WORLD)).toBe(false); // navigate() accepts the launch
+    expect(stateEq(WORLD, redbook)).toBe(false); // ...and closing it (redbook removed)
+    expect(stateEq(redbook, { ...WORLD, redbook: {} })).toBe(true);
+  });
 });
 
 describe('hash router', () => {

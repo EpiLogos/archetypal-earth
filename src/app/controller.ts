@@ -493,6 +493,14 @@ export class Controller {
     e.preventDefault();
   };
 
+  /** Leave Aion's mode: its view, the time range it set, and the clock it held. */
+  private leaveAion() {
+    this.aion?.hide();
+    this.timeControl.setRange();
+    if (this.aionTime) this.time.restore(this.aionTime);
+    this.aionTime = null;
+  }
+
   // ── applying a state ──────────────────────────────────────────────────
   private apply(next: AppState) {
     const prev = this.state;
@@ -508,9 +516,12 @@ export class Controller {
     this.redbookSwitch.setAttribute('aria-pressed', String(!!next.redbook));
     if (next.redbook && this.redbook) {
       if (this.tour) this.endThread();
+      if (prev.history) this.leaveAion();
       if (!prev.redbook) this.rbTime = this.time.snapshot();
       this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
+      // the Red Book holds no shift of its own: Aion's card offset does not carry over
+      this.syncShift();
       this.redbook.show(next.redbook);
       return;
     }
@@ -539,12 +550,7 @@ export class Controller {
       this.aion.show(next.history);
       return;
     }
-    if (prev.history) {
-      this.aion?.hide();
-      this.timeControl.setRange();
-      if (this.aionTime) this.time.restore(this.aionTime);
-      this.aionTime = null;
-    }
+    if (prev.history) this.leaveAion();
     // a change of mode re-enters the view: the globe flies to what the graph was showing, and back
     const sameView = !first && !modeChanged && !prev.history && viewEq(pv, v);
     const previousTrail = pv.kind === 'thread' ? pv : prev.trail;
@@ -577,7 +583,8 @@ export class Controller {
     this.syncShift();
     this.measureLabel();
     this.syncGraph();
-    this.syncSky(prev, next, first);
+    // a view that framed itself (or a thread's walk) keeps its flight: the sky's descent must not overwrite it
+    this.syncSky(prev, next, first, !sameView || !!next.trail);
   }
 
   // ── the sky ───────────────────────────────────────────────────────────
@@ -714,7 +721,7 @@ export class Controller {
     this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: birth ? `at the birth moment, ${formatMoment(layer.moment)}` : `as of ${formatMoment(layer.moment)}`, culture: sky.culture, birth });
   }
 
-  private syncSky(prev: AppState, next: AppState, first: boolean) {
+  private syncSky(prev: AppState, next: AppState, first: boolean, reframed: boolean) {
     const on = !!next.sky;
     this.skyView.setActive(on, next.sky?.body ?? null);
     this.skyView.relabel();
@@ -730,7 +737,7 @@ export class Controller {
     } else if (!on && prev.sky) {
       this.pendingSkyEntry = null;
       if (this.skyByGesture) this.skyByGesture = false;
-      else {
+      else if (!reframed) {
         // leave the way we came: the same orientation, down to the Earth
         const rig = this.engine.rig;
         const c = rig.centre();

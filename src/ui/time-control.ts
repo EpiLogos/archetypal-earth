@@ -222,8 +222,10 @@ export class TimeControl {
     this.track.setAttribute('aria-valuenow', String(Math.round(year)));
     const playing = this.tour ? this.tour.playing : t.playing;
     const icon = playing ? PAUSE_ICON : PLAY_ICON;
-    if (this.play.dataset.icon !== String(playing)) {
-      this.play.dataset.icon = String(playing);
+    // the label depends on whether a walk stands as well as on playing: refresh when either changes
+    const mode = `${!!this.tour}:${playing}`;
+    if (this.play.dataset.mode !== mode) {
+      this.play.dataset.mode = mode;
       this.play.innerHTML = icon;
       this.play.setAttribute('aria-label', this.tour ? (playing ? 'Pause tour' : 'Resume tour') : playing ? 'Pause' : 'Play history');
       this.play.title = this.tour ? (playing ? 'Pause the walk' : 'Resume the walk') : 'Play history';
