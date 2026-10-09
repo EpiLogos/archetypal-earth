@@ -1,6 +1,7 @@
 // Tiny DOM helpers + the image plate (an image, or a tonal plate when there is none).
 import type { ImageRef, Palette } from '../types/field';
 import { imgUrl } from '../data/load';
+import { creditLine, creditLineFull, sanitiseTitle } from './credit';
 
 type Attrs = Record<string, string | number | boolean | undefined | ((e: Event) => void)>;
 
@@ -67,7 +68,7 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
     fig.classList.add('plate-empty');
     return fig;
   }
-  const img = el('img', { alt: opts.alt ?? ref.title ?? '', decoding: 'async', draggable: 'false' });
+  const img = el('img', { alt: opts.alt ?? sanitiseTitle(ref.title), decoding: 'async', draggable: 'false' });
   if (!opts.eager) img.loading = 'lazy';
   // decode off the main thread first, then reveal: no decode work lands inside a frame
   img.addEventListener('load', () => {
@@ -81,10 +82,8 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   });
   img.src = imgUrl(ref, opts.thumb);
   fig.append(img);
-  if (opts.credit && (ref.credit || ref.license)) {
-    const parts = [ref.credit, ref.license].filter(Boolean).join(' · ');
-    fig.append(el('figcaption', { class: 'plate-credit', text: parts }));
-  }
+  const credit = opts.credit ? creditLine(ref) : '';
+  if (credit) fig.append(el('figcaption', { class: 'plate-credit', text: credit, title: creditLineFull(ref) }));
   return fig;
 }
 

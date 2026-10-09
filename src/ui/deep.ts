@@ -4,6 +4,7 @@ import type { Model, Subject } from '../data/model';
 import { archetypesOfFamily, occurrenceImage, subjectOccurrences } from '../data/model';
 import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
+import { sanitiseTitle } from './credit';
 import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
@@ -171,7 +172,7 @@ export class DeepSheet {
     const img = occurrenceImage(m, o);
     if (img) {
       a.append(plate(img, { credit: true, className: 'dp-figure', palette: fam?.palette, eager: true, alt: o.title }));
-      if (img.sourceUrl) a.append(el('p', { class: 'dp-source' }, [img.title ? `${img.title} — ` : '', el('a', { href: img.sourceUrl, target: '_blank', rel: 'noopener noreferrer', text: 'source' })]));
+      if (img.sourceUrl) a.append(el('p', { class: 'dp-source' }, [sanitiseTitle(img.title) ? `${sanitiseTitle(img.title)} — ` : '', el('a', { href: img.sourceUrl, target: '_blank', rel: 'noopener noreferrer', text: 'source' })]));
     }
     if (o.quote) a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: o.quote })]));
     o.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
