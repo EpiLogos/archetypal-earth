@@ -171,6 +171,12 @@ try {
   check(s.sky?.body === 'mercury', 'the glyph opens the body in the sky', JSON.stringify(s.sky));
 
   // ── keyboard: visible labels are real buttons in the tab order ──
+  // Mercury is approached (its card names it, its label stands down): Escape returns to the system view, and the labels
+  // are counted once the approach has eased back and the flight is done
+  await page.keyboard.press('Escape');
+  await settle(page);
+  await page.waitForFunction(() => window.__earth.engine.sky && window.__earth.engine.sky.approach < 0.01, null, { timeout: 30000, polling: 150 });
+  await page.waitForTimeout(800);
   const tab = await page.evaluate(() => [...document.querySelectorAll('.sky-label.on')].map((l) => l.tabIndex));
   check(tab.length > 3 && tab.every((t) => t === 0), 'visible body labels are reachable by keyboard', `${tab.length} labels`);
 

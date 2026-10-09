@@ -23,9 +23,10 @@ const MIN_SPAN = 0.03;
 
 /**
  * The track's range for a set of years (slider-positions): their extent, padded, and never narrower than MIN_SPAN,
- * clamped to the scale. Null when the years are fewer than two distinct ones (a single year scopes nothing).
+ * clamped to `bounds` (the field's own extent, so no dead track past its last year; the whole scale by default).
+ * Null when the years are fewer than two distinct ones (a single year scopes nothing).
  */
-export function uSpan(us: ArrayLike<number>): TimeSpan | null {
+export function uSpan(us: ArrayLike<number>, bounds: TimeSpan = { fromU: 0, toU: 1 }): TimeSpan | null {
   const distinct = new Set<number>();
   let lo = Infinity;
   let hi = -Infinity;
@@ -42,14 +43,14 @@ export function uSpan(us: ArrayLike<number>): TimeSpan | null {
   const mid = (lo + hi) / 2;
   let from = mid - width / 2;
   let to = mid + width / 2;
-  if (from < 0) { to -= from; from = 0; }
-  if (to > 1) { from -= to - 1; to = 1; }
-  return { fromU: Math.max(0, from), toU: Math.min(1, to) };
+  if (from < bounds.fromU) { to += bounds.fromU - from; from = bounds.fromU; }
+  if (to > bounds.toU) { from -= to - bounds.toU; to = bounds.toU; }
+  return { fromU: Math.max(bounds.fromU, from), toU: Math.min(bounds.toU, to) };
 }
 
-/** The track's range for a subject: the span of its located occurrences (`idx`) on the shared scale. */
-export function subjectSpan(m: { u: ArrayLike<number> }, idx: readonly number[]): TimeSpan | null {
-  return uSpan(idx.map((i) => m.u[i]));
+/** The track's range for a subject: the span of its located occurrences (`idx`) on the shared scale, within `bounds`. */
+export function subjectSpan(m: { u: ArrayLike<number> }, idx: readonly number[], bounds?: TimeSpan): TimeSpan | null {
+  return uSpan(idx.map((i) => m.u[i]), bounds);
 }
 
 export class TimeModel {

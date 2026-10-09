@@ -150,10 +150,13 @@ export class SkyView {
       const b = byKey.get(key);
       if (!b) { l.node.classList.remove('on'); continue; }
       if (!l.w) l.w = l.node.getBoundingClientRect().width || 60;
-      const x = b.x + 12;
+      // clear of the drawn disc: a grown body's name sits beyond its edge, not on its centre
+      const x = b.x + Math.max(12, b.px / 2 + 8);
       const y = b.y - 8;
       const clash = placed.some((p) => Math.abs(p.x - x) < (p.w + l.w) / 2 + 6 && Math.abs(p.y - y) < 17);
-      const on = !clash && b.alpha > 0.45;
+      // the approached body's card names it: its label stands down (hidden, so out of the tab order too)
+      const approached = layer.approach > 0.05 && key === this.selected;
+      const on = !clash && !approached && b.alpha > 0.45;
       l.node.classList.toggle('on', on);
       l.node.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
       if (on) placed.push({ x: x + l.w / 2, y, w: l.w });

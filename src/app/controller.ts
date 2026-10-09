@@ -197,7 +197,7 @@ export class Controller {
 
     this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id)) : null;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
-    if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]));
+    if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]), this.fullSpan());
     this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
       onclick: () => this.toggleRedbook() });
     document.body.append(this.redbookSwitch);
@@ -460,6 +460,8 @@ export class Controller {
       const uTo = sc.toU(a.to);
       const span = Math.max(0.05, sc.toU(a.to) - sc.toU(a.from));
       this.onUserTime();
+      // the period is searched on the whole field's track, not the focus's span (a mode's own range stays as it is)
+      if (!this.state.history && !this.state.redbook && !this.state.dynamics) this.timeControl.setRange();
       this.time.setCumulative(false);
       this.time.glideTo(a.from === a.to ? uTo + DEFAULT_RAMP : uTo + DEFAULT_RAMP * 0.5, Math.min(0.5, Math.max(0.1, span * 1.15)));
       this.engine.rig.interacted = true;
@@ -549,9 +551,25 @@ export class Controller {
   private syncTimeScope(s: AppState) {
     const v = s.view;
     const subject = s.graph || s.trail ? null : v.kind === 'focus' ? v.subject : v.kind === 'manifest' ? v.context : null;
-    const span = subject ? subjectSpan(this.m, subjectOccurrences(this.m, subject)) : null;
-    const to = span ?? this.fullSpan();
-    if (to.fromU !== this.time.fromU || to.toU !== this.time.toU) this.timeControl.setRange(to.fromU, to.toU);
+    const full = this.fullSpan();
+    const span = subject ? subjectSpan(this.m, subjectOccurrences(this.m, subject), full) : null;
+    const to = span ?? full;
+    if (to.fromU !== this.time.fromU || to.toU !== this.time.toU) this.rescope(to.fromU, to.toU);
+  }
+
+  /**
+   * Move the time control to a new range. A clock in cursor mode keeps its place, and a cursor the new range excludes
+   * glides to the nearest edge: a focus never snaps the clock (SPEC §9). In all-time mode the range simply moves.
+   */
+  private rescope(fromU: number, toU: number) {
+    const t = this.time;
+    const before = t.cursorU;
+    const inCursor = t.mode === 'cursor';
+    this.timeControl.setRange(fromU, toU);
+    if (!inCursor || t.cursorU === before) return;
+    const edge = t.cursorU;
+    t.cursorU = before;
+    t.glideTo(edge);
   }
 
   /** The focused subject's chronology, built when it stands on the globe with no walk and no Aion or Red Book. */
@@ -629,7 +647,7 @@ export class Controller {
     const subject = this.lensSubject(next);
     const idx = subjectOccurrences(m, subject);
     // the clock is scoped to the subject's own span, as a focus scopes it; the strip reads the same range
-    const span = subjectSpan(m, idx) ?? this.fullSpan();
+    const span = subjectSpan(m, idx, this.fullSpan()) ?? this.fullSpan();
     this.timeControl.setRange(span.fromU, span.toU);
     const pal = this.subjectPal(subject);
     this.engine.setPalette(pal, first ? 0.01 : 1.6);

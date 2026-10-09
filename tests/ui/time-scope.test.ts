@@ -66,6 +66,39 @@ describe('uSpan: the track a subject scopes to', () => {
   });
 });
 
+describe('uSpan: bounded by the field\'s own extent, not the scale past its last year (audit #9)', () => {
+  it('a padded span never runs past the field\'s last year', () => {
+    // the field ends at u = 0.9 (the Aion-extended scale runs on to 1); a subject at 0.5..0.9 must not pad into the dead track
+    const s = uSpan([0.5, 0.9], { fromU: 0, toU: 0.9 });
+    expect(s!.toU).toBe(0.9);
+    near(s!.toU - s!.fromU, 0.432);
+    near(s!.fromU, 0.468);
+  });
+  it('the span holds the subject and stays inside the field at either end', () => {
+    const low = uSpan([0.1, 0.2], { fromU: 0.1, toU: 0.9 });
+    expect(low!.fromU).toBe(0.1);
+    expect(low!.toU).toBeLessThanOrEqual(0.9);
+    const high = uSpan([0.85, 0.9], { fromU: 0.1, toU: 0.9 });
+    expect(high!.toU).toBe(0.9);
+    expect(high!.fromU).toBeGreaterThanOrEqual(0.1);
+  });
+  it('for any spread of years, inside the given bounds, ordered, and holding every year', () => {
+    let seed = 11;
+    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const bounds = { fromU: 0.12, toU: 0.8 };
+    for (let trial = 0; trial < 300; trial++) {
+      const n = 2 + Math.floor(rnd() * 12);
+      const us = Array.from({ length: n }, () => bounds.fromU + rnd() * (bounds.toU - bounds.fromU));
+      const s = uSpan(us, bounds)!;
+      expect(s.fromU).toBeGreaterThanOrEqual(bounds.fromU - 1e-12);
+      expect(s.toU).toBeLessThanOrEqual(bounds.toU + 1e-12);
+      expect(s.toU).toBeGreaterThan(s.fromU);
+      expect(s.fromU).toBeLessThanOrEqual(Math.min(...us) + 1e-12);
+      expect(s.toU).toBeGreaterThanOrEqual(Math.max(...us) - 1e-12);
+    }
+  });
+});
+
 describe('subjectSpan: the span of a subject\'s located occurrences', () => {
   // a model stub: only the positions matter; occurrences 1 and 3 belong to the subject
   const m = { u: [0.9, 0.2, 0.95, 0.6, 0.05] };

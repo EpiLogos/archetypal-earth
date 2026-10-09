@@ -59,8 +59,8 @@ float relSize(float rel) {
 //                         in focus (aRel ~ 1)             receded (aRel ~ 0.07)
 //   inside the window     LIVE: sharp core, tight halo    ATTENTIONAL ABSENCE: small hollow
 //                                                         desaturated ring (the look it always had)
-//   NOT YET (d < 0)       TEMPORAL ABSENCE: 1.5 px cool pinprick, alpha 0.10 (focus does not matter)
-//   AFTER (dissolved)     TEMPORAL ABSENCE: 2 px warm-grey dot, alpha 0.16 (focus does not matter)
+//   NOT YET (d < 0)       TEMPORAL ABSENCE: 1.5 px cool blue pinprick, alpha 0.20 (focus does not matter)
+//   AFTER (dissolved)     TEMPORAL ABSENCE: 2 px warm-grey dot, alpha 0.30 (focus does not matter)
 //
 // Emergence (0 <= d < 1.5 ramp): the pinprick blooms to live while one soft ring expands from the core.
 // Dissolution (0.55 trail <= d < trail): the live core contracts and warms into the after-dot.
@@ -117,7 +117,7 @@ void main() {
   float pinW = face * fl * (1.0 - arrive);
   float aftW = face * fl * leave;
   float ringW = face * fl * ringAmp;
-  float total = alpha + 0.1 * pinW + 0.16 * aftW + 0.6 * ringW;
+  float total = alpha + 0.2 * pinW + 0.3 * aftW + 0.6 * ringW;
   if (prec > 2.5 || total < 0.004) {
     gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
     return;
@@ -193,13 +193,13 @@ void main() {
 
   vec3 rgb = mix(ghost, live, vFocus) * vAlpha;
 
-  // ── NOT YET: temporal absence before the date, a 1.5 px cool pinprick
+  // ── NOT YET: temporal absence before the date, a 1.5 px cool blue pinprick (alpha 0.20 = PIN_ALPHA)
   float pinD = 1.0 - smoothstep(0.6, 1.9, rPx);
-  rgb += mix(vec3(luma), vec3(0.5, 0.64, 1.0), 0.85) * pinD * 0.1 * vPin;
+  rgb += vec3(0.36, 0.56, 1.0) * pinD * 0.2 * vPin;
 
-  // ── AFTER: temporal absence once dissolved, a 2 px warm-grey dot ("it has been")
+  // ── AFTER: temporal absence once dissolved, a 2 px warm-grey dot ("it has been"; alpha 0.30 = AFTER_ALPHA)
   float afterD = 1.0 - smoothstep(1.2, 2.6, rPx);
-  rgb += warm * afterD * 0.16 * vAfter;
+  rgb += vec3(0.74, 0.65, 0.55) * afterD * 0.3 * vAfter;
 
   // ── emergence: one soft ring expanding outward from the core
   float er = exp(-pow((rPx - vRingPx) / 1.1, 2.0));

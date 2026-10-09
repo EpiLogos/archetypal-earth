@@ -133,6 +133,8 @@ export interface ScreenBody {
   key: BodyKey;
   x: number;
   y: number;
+  /** the drawn disc's diameter, CSS px (its glow or its true disc, whichever is larger) */
+  px: number;
   /** 0..1, how present the body is in this stage */
   alpha: number;
   facing: boolean;
@@ -510,8 +512,8 @@ export class SkyLayer {
         alpha = w.sun;
         core = (9 + 14 * (1 - w.handoff)) * this.dpr;
         px = core * (7 + 5 * (1 - w.handoff));
-        // the glow stands as it always did; the disc is the Sun's true one once the camera is near enough
-        const truePx = this.trueDiskPx(d.body.radiusKm, pos, camera.position, pxPerRad);
+        // the glow stands as it always did; the Sun grows to its true disc only as the approached body (its card open)
+        const truePx = this.approachKey === 'sun' ? this.trueDiskPx(d.body.radiusKm, pos, camera.position, pxPerRad) * this.approach : 0;
         core = Math.max(core, truePx);
         px = Math.max(px, truePx);
       } else if (key === 'moon') {
@@ -569,7 +571,7 @@ export class SkyLayer {
     out.length = 0;
     for (const d of this.draws.values()) {
       if (!d.screen.on) continue;
-      out.push({ key: d.key, x: d.screen.x, y: d.screen.y, alpha: d.weight, facing: true });
+      out.push({ key: d.key, x: d.screen.x, y: d.screen.y, px: d.screen.px, alpha: d.weight, facing: true });
     }
     return out;
   }
