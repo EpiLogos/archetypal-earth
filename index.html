@@ -30,52 +30,33 @@
     </div>
     <div id="loading" aria-hidden="true"><span class="ld-dot"></span></div>
 
-    <div id="intro" role="dialog" aria-label="About An Archetypal Earth">
-      <div class="intro-card">
-        <div class="intro-portrait">
-          <img src="/img/jung-portrait.jpg" alt="Carl Gustav Jung — public-domain photograph, via Wikimedia Commons" />
-          <span class="intro-portrait-credit">C. G. Jung — public domain, via Wikimedia Commons</span>
+    <div id="intro" role="dialog" aria-label="An Archetypal Earth">
+      <div class="intro-inner">
+        <img class="intro-portrait" src="/img/jung-portrait.jpg" alt="Carl Gustav Jung" />
+        <h1>An Archetypal Earth</h1>
+        <p class="intro-lede">Jung's archetypes across place and time — 30 volumes, every claim traceable to volume, paragraph, and page.</p>
+        <div class="intro-actions">
+          <button id="intro-enter" type="button">Enter the globe</button>
+          <a href="https://github.com/EpiLogos/archetypal-earth/releases" target="_blank" rel="noopener">Downloads</a>
+          <a href="https://github.com/EpiLogos/archetypal-earth/issues" target="_blank" rel="noopener">Issues</a>
         </div>
-        <div class="intro-body">
-          <div class="intro-glyph" aria-hidden="true">🜍</div>
-          <h1>An Archetypal Earth</h1>
-          <p class="intro-lede">Jung's archetypes across place and time — the complete field, navigable. Every archetype he distinguished, every image through which it appears, every dated instance he discussed: from a 1900&nbsp;BCE pyramid text to a physicist's dream in 1955.</p>
-          <p class="intro-sub">30 volumes of the Collected Works and every major seminar, every claim traceable to volume, paragraph, and page. Built on his own method: <em>amplification</em> — line up the parallels until the pattern shows itself.</p>
-          <div class="intro-actions">
-            <button id="intro-enter" class="intro-primary" type="button">Enter the globe</button>
-            <a class="intro-secondary" href="https://github.com/EpiLogos/archetypal-earth/releases" target="_blank" rel="noopener">Downloads</a>
-            <a class="intro-secondary" href="https://github.com/EpiLogos/archetypal-earth/issues" target="_blank" rel="noopener">Open an issue</a>
-          </div>
-          <div class="intro-about">
-            <p>Alongside the globe, the project carries doctrine maps written from the harvest: the serpent chain from Gnostic <em>Agathodaimon</em> to the Self; the 3→4 problem traced 1900→1958; the anima's four-stage ladder; the god-image doctrine; the aeon thesis — the fish age ending, Aquarius beginning, and Jung's fifty years of forecasts. In every cross-cultural table, claims from Jung's text are marked <strong>J</strong>; claims from standard scholarship are marked <strong>S</strong>. Nothing smuggled.</p>
-            <p class="intro-fine">A personal research edition. Corpus citations from the Princeton/Bollingen and Routledge editions are included for study; the works themselves remain the court of appeal. Portrait: public domain, via Wikimedia Commons. Globe imagery: NASA.</p>
-          </div>
-        </div>
+        <p class="intro-fine">Personal research edition · portrait &amp; imagery public domain</p>
       </div>
     </div>
 
     <style>
-      #intro{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 100% at 50% 0%, #0b1230 0%, #02030a 70%);padding:1.5rem;overflow:auto}
+      #intro{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(2,3,10,.5);backdrop-filter:blur(3px)}
       #intro.dismissed{display:none}
-      .intro-card{display:flex;gap:2.2rem;max-width:56rem;background:rgba(8,12,28,.82);border:1px solid rgba(120,146,220,.22);border-radius:14px;padding:2.2rem 2.4rem;backdrop-filter:blur(6px);box-shadow:0 30px 80px rgba(0,0,0,.55)}
-      .intro-portrait{flex:0 0 200px;display:flex;flex-direction:column;gap:.45rem}
-      .intro-portrait img{width:100%;border-radius:8px;border:1px solid rgba(120,146,220,.25);filter:grayscale(35%) contrast(1.05)}
-      .intro-portrait-credit{font:400 .62rem/1.35 "IBM Plex Sans",sans-serif;color:#6f7ba3;letter-spacing:.02em}
-      .intro-body{flex:1;color:#cfd8ee;display:flex;flex-direction:column}
-      .intro-glyph{font-size:1.5rem;color:#c9a94e;margin-bottom:.3rem}
-      .intro-body h1{font:600 2.1rem/1.1 "Source Serif 4",Georgia,serif;color:#eef2ff;margin:0 0 .7rem;letter-spacing:.01em}
-      .intro-lede{font:400 1.02rem/1.55 "Source Serif 4",Georgia,serif;color:#dde4f7;margin:0 0 .8rem}
-      .intro-sub{font:400 .86rem/1.55 "IBM Plex Sans",sans-serif;color:#9aa6cc;margin:0 0 1.2rem}
-      .intro-actions{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem}
-      .intro-primary{font:500 .92rem "IBM Plex Sans",sans-serif;color:#0b1230;background:#c3d2f2;border:none;border-radius:8px;padding:.7rem 1.4rem;cursor:pointer;transition:background .15s}
-      .intro-primary:hover{background:#dde6fb}
-      .intro-secondary{font:500 .82rem "IBM Plex Sans",sans-serif;color:#aebbe4;text-decoration:none;border:1px solid rgba(120,146,220,.35);border-radius:8px;padding:.62rem 1rem;transition:border-color .15s,color .15s}
-      .intro-secondary:hover{color:#e6ecff;border-color:rgba(120,146,220,.7)}
-      .intro-about p{font:400 .78rem/1.55 "IBM Plex Sans",sans-serif;color:#8391bd;margin:0 0 .5rem}
-      .intro-fine{color:#5f6a92 !important;font-size:.68rem !important}
-      .credit-sep{color:#5f6a92;margin:0 .4rem}
-      .credit-link{color:#9aa6cc}
-      @media(max-width:46rem){.intro-card{flex-direction:column;padding:1.4rem}.intro-portrait{flex-direction:row;align-items:center;flex-basis:auto}.intro-portrait img{width:88px}}
+      .intro-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:2rem;max-width:36rem}
+      .intro-portrait{width:74px;height:74px;border-radius:50%;object-fit:cover;border:1px solid rgba(195,210,242,.3);filter:grayscale(30%);margin-bottom:1.3rem}
+      .intro-inner h1{font:600 2.5rem/1.05 "Source Serif 4",Georgia,serif;color:#eef2ff;margin:0 0 .7rem;letter-spacing:.01em}
+      .intro-lede{font:400 1rem/1.6 "Source Serif 4",Georgia,serif;color:#b9c4e4;margin:0 0 1.5rem}
+      .intro-actions{display:flex;gap:1.5rem;align-items:center;margin-bottom:1.6rem}
+      #intro-enter{font:500 .92rem "IBM Plex Sans",sans-serif;color:#0b1230;background:#c3d2f2;border:none;border-radius:8px;padding:.72rem 1.5rem;cursor:pointer;transition:background .15s}
+      #intro-enter:hover{background:#e2eafc}
+      .intro-actions a{font:400 .85rem "IBM Plex Sans",sans-serif;color:#8d9ac6;text-decoration:none;transition:color .15s}
+      .intro-actions a:hover{color:#dde4f7}
+      .intro-fine{font:400 .64rem/1.5 "IBM Plex Sans",sans-serif;color:#5f6a92;margin:0}
     </style>
     <script>
       (function(){
