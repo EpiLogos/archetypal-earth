@@ -1,16 +1,18 @@
-// A body's card: the existing reveal pattern (hero, name, one line, position, ties) for a planet, the Sun or the Moon.
+// A body's card: the existing reveal pattern for a planet, the Sun or the Moon. Order is the dossier's: the hero, the
+// name and kind, one key passage in its own voice, the one-line identity, what the body is tied to in the field, its
+// earthly occurrences, then its position and (for the luminaries) its syzygy, the readings, and the sources last.
 //
 // Honesty: every tie carries its basis and either Jung's cited passage or an honest "the atlas's reading"; a card is
 // only ever opened for a body with at least one tie that resolves to a living field node; a culture's name is shown with
 // the table it is transcribed from, never as the body's own character; a position outside the generated span is not
-// invented, it is declined with the span stated.
+// invented, it is declined with the span stated. Words are Burt's under her name, Jung's under his, never swapped.
 import type { Model } from '../data/model';
 import { subjectExists, subjectName } from '../data/model';
 import type { TieBasis } from '../types/field';
-import type { BodyKey, SkyBody, SkyCite, SkyData, SkyReading, SkyTie } from '../types/sky';
+import type { BodyKey, SkyBody, SkyBodyQuote, SkyCite, SkyData, SkyReading, SkyTie } from '../types/sky';
 import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
-import { eraShort, shortLocator, shortWork } from '../ui/format';
+import { eraShort, passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
 import type { SkyEphemeris } from './ephemeris';
 import { signOf } from './frames';
@@ -30,7 +32,7 @@ export interface SkyCardHandlers {
 /** What each basis says, in the words the card shows (and the tooltip explains). */
 export const BASIS_LABEL: Record<TieBasis, { chip: string; title: string }> = {
   jung: { chip: 'Jung', title: 'Jung makes this link himself, in the passage cited.' },
-  inferred: { chip: 'inferred', title: 'Inferred from the sources; it is not Jung\u2019s own statement.' },
+  inferred: { chip: 'inferred', title: 'Inferred from the sources; it is not Jung’s own statement.' },
   site: { chip: 'read here', title: 'An editorial link this atlas supplies; Jung does not make it and none is cited.' },
 };
 
@@ -47,6 +49,49 @@ export function canOpenCard(body: Pick<SkyBody, 'ties'>, model: Model): boolean 
   return resolveTies(body, model).resolved.length > 0;
 }
 
+/**
+ * A tie's note as the card draws it, or null. A note the curation marks `restates` only says what the basis chip beside
+ * it already says (an inference, an editorial link) and is kept in the data, not drawn. Every other note is drawn.
+ */
+export function tieNote(t: Pick<SkyTie, 'note' | 'restates'>): string | null {
+  return t.restates || !t.note.trim() ? null : t.note;
+}
+
+/** Burt's footer, in her name and her book's own page. */
+export function burtFooter(q: SkyBodyQuote): string {
+  return `Kathleen Burt · Archetypes of the Zodiac · p. ${q.bookPage ?? q.page}`;
+}
+
+export interface KeyPassage {
+  /** whose words: Kathleen Burt's definition of the body, or a passage Jung cites for a tie or the pair reading */
+  voice: 'burt' | 'jung';
+  quote: string;
+  /** the footer line, in the same voice as every other cite on the site */
+  footer: string;
+  /** Burt's page, when the quote is hers (the corpus bridge opens it) */
+  burt?: SkyBodyQuote;
+  /** the Jung cite that leads the card; it is not repeated in its own tie's disclosure */
+  cite?: SkyCite;
+}
+
+/**
+ * The one passage the card leads with: the body's first Burt quote when the book defines it, else the first passage
+ * Jung cites for a tie that Jung makes (or for a reading of this body). Never the atlas's own link: that has no quotation.
+ */
+export function keyPassageOf(
+  body: Pick<SkyBody, 'key' | 'quotes'>,
+  resolved: SkyTie[],
+  readings: SkyReading[],
+  m: Model,
+): KeyPassage | null {
+  const q = body.quotes?.[0];
+  if (q) return { voice: 'burt', quote: q.text, footer: burtFooter(q), burt: q };
+  const cite = resolved.find((t) => t.basis === 'jung' && t.cites?.length)?.cites?.[0]
+    ?? readings.find((r) => r.basis === 'jung' && r.bodies.includes(body.key) && r.cites.length)?.cites[0];
+  if (!cite) return null;
+  return { voice: 'jung', quote: cite.quote, footer: passageLine(m, cite.work, cite.locator), cite };
+}
+
 export interface PositionReading {
   /** the line to show */
   line: string;
@@ -60,7 +105,7 @@ export function describePosition(key: BodyKey, eph: SkyEphemeris, ms: number, as
   const p = eph.geo(key, ms);
   if (!p) {
     const span = `${eph.data.meta.span.from.slice(0, 4)}–${(Number(eph.data.meta.span.to.slice(0, 4)) - 1)}`;
-    return { known: false, line: `No position for ${asOf}: the generated sky covers ${span} only.` };
+    return { known: false, line: `No position for ${asOf}: the sky tables cover ${span} only.` };
   }
   const s = signOf(p.lon);
   return { known: true, line: `${s.sign} ${s.degree}°${String(s.minute).padStart(2, '0')}′ — tropical, ecliptic of date · ${asOf}` };
@@ -146,8 +191,15 @@ export class SkyCard {
     const m = ctx.model;
     const projection = ctx.culture ? ctx.data.cultures[ctx.culture]?.[body.key] : undefined;
     const cultureName = ctx.culture ? m.cultureById.get(ctx.culture)?.name ?? ctx.culture : undefined;
+    const { resolved } = resolveTies(body, m);
+    const key = keyPassageOf(body, resolved, ctx.data.readings, m);
+    // the passage the card leads with is not repeated in a disclosure beneath it
+    const skip = key?.cite;
 
-    this.body.append(portrait(body));
+    // the hero: a genuine picture of the body when one is curated, else the drawn orb (the tonal plate of this mode)
+    this.body.append(body.image
+      ? plate(body.image, { className: 'rv-hero sky-portrait', credit: true, palette: body.palette, eager: true })
+      : portrait(body));
     const text = el('div', { class: 'rv-text' });
     text.append(el('h2', { class: 'rv-name', text: projection ? projection.name : body.name }));
     text.append(el('p', { class: 'rv-line', text: kindLine(body, !!projection) }));
@@ -163,47 +215,36 @@ export class SkyCard {
         : el('p', { class: 'sky-reproject' }, [`${cultureName} gives ${body.name} no name of its own; it stands under its default name.`]));
     }
 
+    // the key passage, open: one quotation, in its own voice and under its own name
+    if (key) text.append(this.keyBlock(key));
+
     text.append(el('p', { class: 'rv-para', text: body.oneLine }));
 
-    // the book's own definition of the body, in her words and under her name
-    if (body.quotes?.length) {
+    // the rest of the book's own definitions of the body, in her words and under her name, quietly
+    const more = (body.quotes ?? []).slice(key?.burt ? 1 : 0);
+    if (more.length) {
       text.append(el('details', { class: 'aion-sources sky-burt' }, [
         el('summary', { text: 'Kathleen Burt · Archetypes of the Zodiac' }),
-        ...body.quotes.map((q) => {
-          const citeText = `p. ${q.bookPage ?? q.page}${q.chapter ? ` · ${q.chapter}` : ''}`;
-          // wave 4 put her pages in the corpus: the cite opens the page it was verified against
-          const cite = this.h.passage?.known('burt-zodiac')
-            ? el('button', {
-              class: 'link-quiet dp-cite-link', type: 'button', text: citeText,
-              title: 'Open the page in the corpus', 'aria-label': `${citeText} — open the page`,
-              onclick: () => this.h.passage!.open('burt-zodiac', `p. ${q.bookPage ?? q.page} (pdf p${q.page})`),
-            })
-            : el('cite', { text: citeText });
-          return el('blockquote', {}, [el('p', { text: `“${q.text}”` }), cite]);
-        }),
+        ...more.map((q) => this.burtQuote(q)),
       ]));
     }
 
-    const pos = describePosition(body.key, ctx.eph, ctx.ms, ctx.asOf);
-    text.append(el('p', { class: `sky-position${pos.known ? '' : ' sky-position-none'}`, text: pos.line }));
-
-    // the luminaries' astronomy first, in its own words; Jung's reading beneath it, attributed
-    if (body.key === 'sun' || body.key === 'moon') text.append(this.syzygy(ctx));
-
-    // the pair reading, for the luminaries
-    for (const r of ctx.data.readings.filter((x) => x.bodies.includes(body.key))) text.append(this.reading(r));
-
-    // ties
-    const { resolved } = resolveTies(body, m);
+    // the field the body is tied to, then the ground those families touch
     const ties = el('div', { class: 'sky-ties' }, [el('h3', { class: 'sky-h', text: 'In the field' })]);
-    for (const t of resolved) ties.append(this.tie(t, m));
+    for (const t of resolved) ties.append(this.tie(t, m, skip));
     text.append(ties);
-
-    // the tie made flesh: occurrences on the ground the presiding families carry
     const earth = this.earthSection(m, resolved);
     if (earth) text.append(earth);
 
-    // sources, plainly
+    // then the position, and for the luminaries their syzygy: the astronomy in its own words, Jung's reading beneath
+    const pos = describePosition(body.key, ctx.eph, ctx.ms, ctx.asOf);
+    text.append(el('p', { class: `sky-position${pos.known ? '' : ' sky-position-none'}`, text: pos.line }));
+    if (body.key === 'sun' || body.key === 'moon') text.append(this.syzygy(ctx));
+
+    // the pair reading, for the luminaries
+    for (const r of ctx.data.readings.filter((x) => x.bodies.includes(body.key))) text.append(this.reading(r, m, skip));
+
+    // sources, plainly, last
     if (body.sources.length) {
       text.append(el('details', { class: 'aion-sources sky-body-sources' }, [
         el('summary', { text: 'Sources for this body' }),
@@ -218,7 +259,38 @@ export class SkyCard {
     this.foot.append(el('button', { class: 'link-quiet', type: 'button', text: 'Back to the sky', onclick: () => this.h.onClose() }));
   }
 
-  private tie(t: SkyTie, m: Model): HTMLElement {
+  /** the open key passage: a blockquote in the field's own definition pattern, its footer in the voice of its author */
+  private keyBlock(k: KeyPassage): HTMLElement {
+    const footer = el('footer', {});
+    if (k.burt) {
+      // wave 4 put her pages in the corpus: the cite opens the page it was verified against
+      const page = `p. ${k.burt.bookPage ?? k.burt.page}`;
+      footer.append('Kathleen Burt · Archetypes of the Zodiac · ');
+      footer.append(this.h.passage?.known('burt-zodiac')
+        ? el('button', {
+          class: 'link-quiet dp-cite-link', type: 'button', text: page,
+          title: 'Open the page in the corpus', 'aria-label': `${page} — open the page`,
+          onclick: () => this.h.passage!.open('burt-zodiac', `${page} (pdf p${k.burt!.page})`),
+        })
+        : page);
+    } else footer.append(k.footer);
+    return el('blockquote', { class: `dp-def sky-key sky-key-${k.voice}` }, [el('p', { text: `“${k.quote}”` }), footer]);
+  }
+
+  private burtQuote(q: SkyBodyQuote): HTMLElement {
+    const citeText = `p. ${q.bookPage ?? q.page}${q.chapter ? ` · ${q.chapter}` : ''}`;
+    // wave 4 put her pages in the corpus: the cite opens the page it was verified against
+    const cite = this.h.passage?.known('burt-zodiac')
+      ? el('button', {
+        class: 'link-quiet dp-cite-link', type: 'button', text: citeText,
+        title: 'Open the page in the corpus', 'aria-label': `${citeText} — open the page`,
+        onclick: () => this.h.passage!.open('burt-zodiac', `p. ${q.bookPage ?? q.page} (pdf p${q.page})`),
+      })
+      : el('cite', { text: citeText });
+    return el('blockquote', {}, [el('p', { text: `“${q.text}”` }), cite]);
+  }
+
+  private tie(t: SkyTie, m: Model, skip?: SkyCite): HTMLElement {
     const name = subjectName(m, t.target);
     const row = el('div', { class: 'sky-tie' }, [
       el('div', { class: 'sky-tie-head' }, [
@@ -226,9 +298,11 @@ export class SkyCard {
         el('span', { class: 'sky-kind', text: t.target.type === 'archetype' ? 'archetype' : 'family' }),
         basisChip(t.basis),
       ]),
-      el('p', { class: 'sky-tie-note', text: t.note }),
     ]);
-    if (t.cites?.length) row.append(passages(t.cites, 'Read the passage'));
+    const note = tieNote(t);
+    if (note) row.append(el('p', { class: 'sky-tie-note', text: note }));
+    const cites = (t.cites ?? []).filter((c) => c !== skip);
+    if (cites.length) row.append(passages(m, cites, 'More from the text'));
     return row;
   }
 
@@ -266,12 +340,13 @@ export class SkyCard {
     return sec;
   }
 
-  private reading(r: SkyReading): HTMLElement {
+  private reading(r: SkyReading, m: Model, skip?: SkyCite): HTMLElement {
     const box = el('section', { class: 'sky-reading' }, [
       el('h3', { class: 'sky-h' }, [r.name, ' ', basisChip(r.basis)]),
       el('p', { class: 'rv-para', text: r.statement }),
     ]);
-    box.append(passages(r.cites, 'Read the passages'));
+    const cites = r.cites.filter((c) => c !== skip);
+    if (cites.length) box.append(passages(m, cites, 'More from the text'));
     return box;
   }
 
@@ -285,7 +360,7 @@ export class SkyCard {
     const box = el('section', { class: 'sky-syzygy' }, [el('h3', { class: 'sky-h', text: ctx.birth ? 'Sun and Moon at that moment' : 'Sun and Moon now' })]);
     const phase = moonPhase(ctx.eph, ctx.ms);
     if (!phase) {
-      box.append(el('p', { class: 'sky-fact sky-position-none', text: `No elongation for ${ctx.asOf}: it lies outside the generated sky.` }));
+      box.append(el('p', { class: 'sky-fact sky-position-none', text: `No elongation for ${ctx.asOf}: it lies outside the sky tables.` }));
       return box;
     }
     box.append(el('p', { class: 'sky-fact', text: `Elongation ${phase.elongation.toFixed(2)}° — the Moon is ${Math.round(phase.illuminated * 100)}% lit, ${phase.name}.` }));
@@ -294,14 +369,14 @@ export class SkyCard {
     const event = (what: string, t: number | null) => {
       const row = el('div', { class: 'sky-event' });
       if (t === null) {
-        row.append(el('p', { class: 'sky-fact sky-position-none', text: `${what}: none within the generated sky.` }));
+        row.append(el('p', { class: 'sky-fact sky-position-none', text: `${what}: none within the sky tables.` }));
         return row;
       }
       const days = (t - ctx.ms) / 86_400_000;
       row.append(el('p', { class: 'sky-fact', text: `${what}: ${formatMoment(t)}, in ${days < 1 ? `${Math.max(1, Math.round(days * 24))} hours` : `${days.toFixed(1)} days`}.` }));
       if (links.length) {
         row.append(el('div', { class: 'aion-links sky-event-links' }, [
-          el('span', { class: 'sky-source', text: 'Read in Jung\u2019s keys:' }),
+          el('span', { class: 'sky-source', text: 'Read in Jung’s keys:' }),
           ...links.map((l) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, l), onclick: () => this.h.onField(l) })),
         ]));
       }
@@ -310,7 +385,7 @@ export class SkyCard {
     // a birth sky answers where they stood, not when they will next meet
     if (ctx.birth) {
       box.append(el('div', { class: 'aion-links sky-event-links' }, [
-        el('span', { class: 'sky-source', text: 'Read in Jung\u2019s keys:' }),
+        el('span', { class: 'sky-source', text: 'Read in Jung’s keys:' }),
         ...links.map((l) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, l), onclick: () => this.h.onField(l) })),
       ]));
       box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'Computed for the birth moment.' }));
@@ -333,10 +408,11 @@ export function basisChip(basis: TieBasis): HTMLElement {
   return el('span', { class: `sky-basis sky-basis-${basis}`, title: b.title, text: b.chip });
 }
 
-function passages(cites: SkyCite[], summary: string): HTMLElement {
+/** A quiet disclosure of further passages, each cited in the site's one voice: "Jung · Aion · 1951 · ¶149". */
+function passages(m: Model, cites: SkyCite[], summary: string): HTMLElement {
   return el('details', { class: 'aion-sources' }, [
     el('summary', { text: summary }),
-    ...cites.map((c) => el('blockquote', {}, [el('p', { text: `“${c.quote}”` }), el('cite', { text: `Jung · ${shortWork(c.workTitle)} · ${shortLocator(c.locator)}` })])),
+    ...cites.map((c) => el('blockquote', {}, [el('p', { text: `“${c.quote}”` }), el('cite', { text: passageLine(m, c.work, c.locator) })])),
   ]);
 }
 

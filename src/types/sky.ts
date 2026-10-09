@@ -5,7 +5,7 @@
 // Astronomy comes from one authority, the ephemeris sidecar (Kerykeion / libephemeris, JPL DE440);
 // mythic character is authored in curation/sky/. The vault's `wiki/sky/` tier, if the owner adopts it,
 // replaces `provenance: 'curation'` with `'vault'` without changing this shape.
-import type { Cite, Palette, TieBasis } from './field';
+import type { Cite, ImageRef, Palette, TieBasis } from './field';
 
 export type BodyKey =
   | 'sun' | 'moon' | 'earth'
@@ -44,6 +44,8 @@ export interface SkyTie {
   basis: TieBasis;
   /** justification in plain words; always present */
   note: string;
+  /** the note only restates what the basis chip says (an inference, an editorial link): kept in the data, not drawn */
+  restates?: boolean;
   /** the passages that carry it; required for `jung`, expected for `inferred`, absent for `site` */
   cites?: SkyCite[];
 }
@@ -101,6 +103,8 @@ export interface SkyBody {
   ties: SkyTie[];
   /** the book's own definitions of this body (curation/sky/burt.json), when it gives any */
   quotes?: SkyBodyQuote[];
+  /** a genuine picture of the body (public-domain or licensed, credited), when one is curated; the drawn orb stands in */
+  image?: ImageRef;
   /** where the mythic layer comes from: the site's curation now, the vault's wiki/sky/ tier if adopted */
   provenance: 'curation' | 'vault';
 }

@@ -3,6 +3,8 @@
 // passages that expand in place; a family's reveal shows the quiet glyph; inactive panels are out of the keyboard path.
 //   npx vite --port 5183 --strictPort &
 //   node tests/ui/e2e/sky-cards.mjs [chromium|webkit]
+import { mkdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { launch, open } from './lib.mjs';
 
 const kind = process.argv[2] ?? 'chromium';
@@ -12,7 +14,7 @@ const check = (ok, label, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${kind} ${label}${detail ? ` — ${detail}` : ''}`);
 };
 const state = (page) => page.evaluate(() => JSON.parse(JSON.stringify(window.__earth.ctl.state)));
-const settle = async (page) => { for (let i = 0; i < 80; i++) { await page.waitForTimeout(150); if (!(await page.evaluate(() => window.__earth.engine.rig.flying))) break; } await page.waitForTimeout(500); };
+const settle = async (page) => { for (let i = 0; i < 240; i++) { await page.waitForTimeout(150); if (!(await page.evaluate(() => window.__earth.engine.rig.flying))) break; } await page.waitForTimeout(500); };
 
 const browser = await launch(kind, { headed: false });
 try {
@@ -51,6 +53,31 @@ try {
   const title = await page.evaluate(() => document.querySelector('.sky-card .sky-basis')?.title);
   check(!!title && title.length > 20, 'the basis chip explains itself', title);
 
+  // ── the dossier: a key passage leads, open; the hero is there; the order is the card's ──
+  const lead = await page.evaluate(() => {
+    const c = document.querySelector('.sky-card');
+    const text = c.querySelector('.rv-text');
+    const first = [...c.querySelectorAll('blockquote')][0];
+    const r = first?.getBoundingClientRect();
+    const hero = c.querySelector('.rv-body > .rv-hero');
+    const known = ['rv-name', 'rv-line', 'sky-reproject', 'sky-key', 'rv-para', 'sky-burt', 'sky-ties', 'sky-earth', 'sky-position', 'sky-syzygy', 'sky-reading', 'sky-body-sources'];
+    const order = [...text.children].map((n) => known.find((k) => n.classList.contains(k)) ?? n.tagName.toLowerCase());
+    return {
+      firstIsKey: !!first && first.matches('blockquote.dp-def') && first.parentElement === text,
+      visible: !!r && r.height > 0 && !first.closest('details:not([open])'),
+      quote: first?.querySelector('p')?.textContent ?? '', footer: first?.querySelector('footer')?.textContent?.trim() ?? '',
+      hero: !!hero && hero.getBoundingClientRect().height > 0, heroKind: hero?.classList.contains('sky-portrait') ? 'orb' : 'image',
+      order, text: c.textContent,
+    };
+  });
+  check(lead.firstIsKey && lead.visible, 'the card leads with an open key passage, visible without interaction', lead.quote.slice(0, 60));
+  check(/^Kathleen Burt · Archetypes of the Zodiac · p\. \d+$/.test(lead.footer), 'the key passage is footed in Burt’s own name and page', lead.footer);
+  check(lead.hero, 'the card has its hero', lead.heroKind);
+  const at = (k) => lead.order.indexOf(k);
+  check(at('rv-name') < at('rv-line') && at('rv-line') < at('sky-key') && at('sky-key') < at('rv-para') && at('rv-para') < at('sky-ties') && at('sky-ties') < at('sky-position') && at('sky-position') < at('sky-body-sources') && lead.order.at(-1) === 'sky-body-sources',
+    'the dossier runs name, kind, key passage, one line, field, position, sources last', lead.order.join(' › '));
+  check(!/generated|vault|sidecar|npm run|\(S\)/i.test(lead.text), 'no jargon on the Mars card (no "generated", "vault", "sidecar", "npm run", "(S)")');
+
   // ── culture reprojection is visible and truthful ──
   await page.selectOption('.sky-culture select', 'indian');
   await page.waitForTimeout(1200);
@@ -71,7 +98,7 @@ try {
   await page.evaluate(() => window.__earth.ctl.openBody('sun'));
   await page.waitForTimeout(1300);
   const cn = await page.evaluate(() => ({ name: document.querySelector('.sky-card .rv-name')?.textContent, note: document.querySelector('.sky-reproject')?.textContent }));
-  check(cn.name === 'Sol' && /no cell for Sol/.test(cn.note ?? ''), 'a culture with no cell for the Sun says so and keeps the default name', cn.note);
+  check(cn.name === 'Sol' && /gives Sol no name of its own/.test(cn.note ?? ''), 'a culture with no cell for the Sun says so and keeps the default name', cn.note);
   await page.selectOption('.sky-culture select', '');
   await page.waitForTimeout(500);
 
@@ -125,6 +152,28 @@ try {
   // ── keyboard: visible labels are real buttons in the tab order ──
   const tab = await page.evaluate(() => [...document.querySelectorAll('.sky-label.on')].map((l) => l.tabIndex));
   check(tab.length > 3 && tab.every((t) => t === 0), 'visible body labels are reachable by keyboard', `${tab.length} labels`);
+
+  // ── a tie whose note only restates its basis chip is not drawn; the others are, in plain words ──
+  await page.evaluate(() => window.__earth.ctl.openBody('saturn'));
+  await page.waitForTimeout(1300);
+  const sat = await page.evaluate(() => {
+    const ties = [...document.querySelectorAll('.sky-card .sky-tie')];
+    return { n: ties.length, notes: ties.map((t) => t.querySelector('.sky-tie-note')?.textContent ?? null) };
+  });
+  const drawn = sat.notes.filter((n) => n !== null);
+  check(drawn.length > 0 && drawn.length < sat.n, 'Saturn’s restating tie shows no note; the others show theirs', `${drawn.length} of ${sat.n} notes drawn`);
+  check(!drawn.some((n) => /vault|generated|sidecar|npm run|\(S\)/i.test(n)), 'no drawn tie note speaks of the vault, the tables or the scripts');
+
+  // ── the cards as a reader sees them: Mercury, Saturn, Sun ──
+  const shots = fileURLToPath(new URL('../../../.cache/screens/remediation-2026-10-09/sky/', import.meta.url));
+  mkdirSync(shots, { recursive: true });
+  for (const k of ['mercury', 'saturn', 'sun']) {
+    await page.evaluate((x) => window.__earth.ctl.openBody(x), k);
+    await page.waitForTimeout(1400);
+    await page.screenshot({ path: `${shots}/card-${k}.png` });
+    const word = await page.evaluate(() => document.querySelector('.sky-card .rv-name')?.textContent);
+    console.log(`  screenshot card-${k}.png (${word})`);
+  }
   check(!logs.some((l) => /error/i.test(l)), 'no console errors', logs.join(' | ').slice(0, 300));
 } finally {
   await browser.close();
