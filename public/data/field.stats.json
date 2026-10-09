@@ -538,6 +538,8 @@
   "ocr": {
     "vocabulary": {
       "files": [
+        "a-blue-fire.md",
+        "burt-zodiac.md",
         "cw01.md",
         "cw02.md",
         "cw03.md",
@@ -565,11 +567,11 @@
         "sup-zofingia.md",
         "sync.md"
       ],
-      "key": "a59175cc925c5917",
-      "words": 45768,
-      "cached": true
+      "key": "203b15fbde3d4c97",
+      "words": 48006,
+      "cached": false
     },
-    "stringsChanged": 165,
+    "stringsChanged": 167,
     "changes": 558,
     "byKind": {
       "join": 515,
@@ -577,7 +579,7 @@
       "reflow": 13,
       "hyphen-break": 1
     },
-    "unique": 390,
+    "unique": 389,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1046,6 +1048,16 @@
         "where": [
           "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]",
           "occ:coniunctio-crucified-royal-pair-ripley-15c.body[2]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "Heliae Artistae quo tempore nihil tam occultum quod",
+        "after": "He li ae Artist ae quo tempore nihil tam occultum quod",
+        "count": 2,
+        "where": [
+          "occ:mercurius-helyas-artista-dorn-theatrum-1602.body[0]",
+          "occ:mercurius-helyas-artista-dorn-theatrum-1602.quote"
         ]
       },
       {
@@ -1950,15 +1962,6 @@
       },
       {
         "kind": "join",
-        "before": "chess board\"",
-        "after": "chessboard\"",
-        "count": 1,
-        "where": [
-          "occ:god-impersonator-sacrificed-sunset-mexico-babylonia.body[1]"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "clim bed",
         "after": "climbed",
         "count": 1,
@@ -2573,6 +2576,15 @@
         "kind": "join",
         "before": "id en ti fy",
         "after": "identify",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "identify th ea ni mus at",
+        "after": "identify the animus at",
         "count": 1,
         "where": [
           "occ:tree-picture-animus-gambler-patient-1935.body[0]"
@@ -3947,24 +3959,6 @@
         ]
       },
       {
-        "kind": "reflow",
-        "before": "th eN aas.",
-        "after": "the Naas.",
-        "count": 1,
-        "where": [
-          "occ:tree-baruch-wood-of-life-justin-2c.body[2]"
-        ]
-      },
-      {
-        "kind": "reflow",
-        "before": "th eN aas\"",
-        "after": "the Naas\"",
-        "count": 1,
-        "where": [
-          "occ:tree-baruch-wood-of-life-justin-2c.body[0]"
-        ]
-      },
-      {
         "kind": "join",
         "before": "Th ey",
         "after": "They",
@@ -3992,6 +3986,15 @@
         ]
       },
       {
+        "kind": "join",
+        "before": "the rapist",
+        "after": "therapist",
+        "count": 1,
+        "where": [
+          "occ:coronis-crow-maiden-asklepios-birth-greece.body[0]"
+        ]
+      },
+      {
         "kind": "reflow",
         "before": "the same tim ea candelabrum.",
         "after": "the same time a candelabrum.",
@@ -4007,15 +4010,6 @@
         "count": 1,
         "where": [
           "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
-        ]
-      },
-      {
-        "kind": "reflow",
-        "before": "to identify th ea ni mus at",
-        "after": "to identify the animus at",
-        "count": 1,
-        "where": [
-          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
         ]
       },
       {
