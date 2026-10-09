@@ -25,11 +25,11 @@ try {
   await page.getByRole('button', { name: 'Occurrences', exact: true }).click();
   assert.equal((await graphStats()).occurrences, false);
   await page.getByRole('button', { name: 'Inferred', exact: true }).click();
-  await page.getByRole('button', { name: 'Site', exact: true }).click();
+  await page.getByRole('button', { name: 'Read here', exact: true }).click();
   assert.deepEqual((await graphStats()).tieBases, ['jung']);
   await page.screenshot({ path: `${directory}/${kind}-graph-settings.png` });
   await page.getByRole('button', { name: 'Inferred', exact: true }).click();
-  await page.getByRole('button', { name: 'Site', exact: true }).click();
+  await page.getByRole('button', { name: 'Read here', exact: true }).click();
   await page.getByRole('button', { name: 'Occurrences', exact: true }).click();
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#graph-settings').isVisible(), false);
@@ -41,6 +41,7 @@ try {
   await page.goto(URL, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__earth?.engine?.presences && document.getElementById('loading')?.classList.contains('done'));
   await page.waitForTimeout(5000);
+  if (await page.locator('#intro:not(.dismissed)').count()) await page.getByRole('button', { name: 'Enter the globe' }).click();
   await page.getByRole('button', { name: 'Play history', exact: true }).click();
   const start = await page.evaluate(() => ({ cursor: window.__earth.time.cursorU, from: window.__earth.time.fromU, to: window.__earth.time.toU }));
   await page.waitForTimeout(1200);

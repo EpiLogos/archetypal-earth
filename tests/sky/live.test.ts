@@ -33,7 +33,7 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     expect(live.following).toBe(true);
     expect(live.moment()).toBe(NOW);
     expect(describeLive(s).label).toBe('Live');
-    expect(describeLive(s).detail).toMatch(/checked against the sidecar at 16:40 UTC/);
+    expect(describeLive(s).detail).toMatch(/checked at 16:40 UTC/);
   });
 
   it('is a snapshot, frozen at the moment it was taken, when no sidecar answers', async () => {
@@ -44,7 +44,7 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     const text = describeLive(s);
     expect(text.label).toBe('Snapshot');
     expect(text.detail).toMatch(/as of 2026-10-08 16:40 UTC; it does not follow the clock/);
-    expect(text.detail).toMatch(/sidecar is not running/);
+    expect(text.detail).toMatch(/ephemeris is not running/);
   });
 
   it('keeps the first snapshot\u2019s moment through later failed asks (it is a moment, not a clock)', async () => {
@@ -62,17 +62,17 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     live.start();
     expect(asked).toBe(0);
     expect(live.state).toEqual({ kind: 'snapshot', asOf: NOW, why: 'not-local' });
-    expect(describeLive(live.state).detail).toMatch(/only reachable when the site runs beside its local sidecar/);
+    expect(describeLive(live.state).detail).toMatch(/only reachable from its home machine/);
     live.stop();
   });
 
-  it('refuses to call the sky live when the sidecar disagrees with the grids, and states by how much', async () => {
+  it('refuses to call the sky live when the live check disagrees with the grids, and says so', async () => {
     const { live } = make(respond(answer(LIVE_TOLERANCE.sun * 4, 0)));
     const s = await live.poll();
     expect(s.kind).toBe('diverged');
     expect(live.following).toBe(false);
-    expect(describeLive(s).detail).toMatch(/sidecar disagrees/);
-    expect(describeLive(s).detail).toMatch(/Sun 0\.200°/);
+    expect(describeLive(s).detail).toMatch(/disagrees with the live check/);
+    expect(describeLive(s).detail).toMatch(/disagrees with the live check/);
   });
 
   it('does not compare two different instants: a sidecar clock far from the page\u2019s is not a check', async () => {
@@ -91,7 +91,7 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     const s = await live.poll();
     expect(asked).toBe(0);
     expect(s.kind).toBe('beyond');
-    expect(describeLive(s).label).toBe('Beyond the generated sky');
+    expect(describeLive(s).label).toBe('Beyond the ephemeris');
     expect(describeLive(s).detail).toMatch(/outside 2015–2039/);
   });
 

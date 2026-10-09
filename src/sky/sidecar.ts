@@ -102,7 +102,10 @@ export function chartProblems(c: unknown): string[] {
 /** The chart, or an error naming every way it broke the contract. */
 export function validateChart(c: unknown): SidecarChart {
   const problems = chartProblems(c);
-  if (problems.length) throw new SidecarError('unsupported', `The sidecar's chart does not match its contract: ${problems.join('; ')}`);
+  if (problems.length) {
+    console.warn('birth chart contract:', problems.join('; '));
+    throw new SidecarError('unsupported', 'The birth chart came back malformed and cannot be shown.');
+  }
   return c as SidecarChart;
 }
 
@@ -122,11 +125,11 @@ export interface BirthWindow {
 
 const iso = (ms: number) => new Date(ms).toISOString().replace(/\.\d+Z$/, 'Z');
 
-function checkGrid(g: SkyGrid, bodies: string[], where: string) {
-  if (!g || typeof g.start !== 'string' || !isNum(g.stepHours) || !isNum(g.count) || !g.bodies) throw new SidecarError('unsupported', `The sidecar's ${where} grid is malformed.`);
+function checkGrid(g: SkyGrid, bodies: string[]) {
+  if (!g || typeof g.start !== 'string' || !isNum(g.stepHours) || !isNum(g.count) || !g.bodies) throw new SidecarError('unsupported', `The ephemeris window came back malformed.`);
   for (const b of bodies) {
     const col = g.bodies[b as BodyKey] as SkyColumns | undefined;
-    if (!col || [col.lon, col.lat, col.r].some((a) => !Array.isArray(a) || a.length !== g.count || a.some((x) => !isNum(x)))) throw new SidecarError('unsupported', `The sidecar's ${where} grid has a malformed ${b} column.`);
+    if (!col || [col.lon, col.lat, col.r].some((a) => !Array.isArray(a) || a.length !== g.count || a.some((x) => !isNum(x)))) throw new SidecarError('unsupported', `The ephemeris window came back malformed (${b} column).`);
   }
 }
 
@@ -143,7 +146,7 @@ export class SidecarClient {
   }
 
   private async get<T>(path: string, params: Record<string, string | number>, timeout = this.o.timeout): Promise<T> {
-    if (!this.o.local) throw new SidecarError('not-local', 'The ephemeris sidecar is only reachable when the site runs beside it, on this machine.');
+    if (!this.o.local) throw new SidecarError('not-local', 'The live ephemeris runs only on its home machine.');
     const url = `${this.o.base}${path}?${new URLSearchParams(Object.entries(params).map(([k, v]) => [k, String(v)])).toString()}`;
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), timeout);
@@ -151,7 +154,7 @@ export class SidecarClient {
     try {
       res = await this.o.fetch(url, { signal: ctl.signal });
     } catch {
-      throw new SidecarError('absent', 'The ephemeris sidecar is not running (start it with ephemeris/run.sh).');
+      throw new SidecarError('absent', 'The ephemeris is not running; a birth sky cannot be computed.');
     } finally {
       clearTimeout(timer);
     }
@@ -161,8 +164,8 @@ export class SidecarClient {
       const d = detail && typeof detail === 'object' ? detail : undefined;
       if (d?.error === 'outside-ephemeris-range') throw new SidecarError('out-of-range', `${d.message ?? 'That instant'} — the sky is computed only within the JPL DE440 ephemeris, 1549–2650.`);
       if (d?.error === 'geocoder-unreachable') throw new SidecarError('geocoder', 'The place lookup could not reach its service; choose a listed place or enter the coordinates.');
-      if (res.status === 422) throw new SidecarError('bad-input', typeof detail === 'string' ? detail : d?.message ?? 'The sidecar did not accept that input.');
-      throw new SidecarError('unsupported', `The sidecar answered ${res.status}.`);
+      if (res.status === 422) throw new SidecarError('bad-input', typeof detail === 'string' ? detail : d?.message ?? 'That birth moment could not be cast as given.');
+      throw new SidecarError('unsupported', 'The ephemeris could not be reached.');
     }
     try { return (await res.json()) as T; } catch { throw new SidecarError('unsupported', 'The sidecar did not answer with JSON.'); }
   }
@@ -195,8 +198,8 @@ export class SidecarClient {
       this.get<SkyGrid>('/positions', { start, stepHours: PLANET_STEP_HOURS, count: (2 * WINDOW_DAYS * 24) / PLANET_STEP_HOURS + 1, bodies: HELIO.join(','), frame: 'helio' }),
       this.get<SkyGrid>('/positions', { start, stepHours: MOON_STEP_HOURS, count: (2 * WINDOW_DAYS * 24) / MOON_STEP_HOURS + 1, bodies: 'moon', frame: 'geo' }),
     ]);
-    checkGrid(planets, HELIO, 'planet');
-    checkGrid(moon, ['moon'], 'Moon');
+    checkGrid(planets, HELIO);
+    checkGrid(moon, ['moon']);
     return { planets, moon, from: iso(centreMs - half), to: iso(centreMs + half) };
   }
 }

@@ -30,8 +30,8 @@ export interface SkyCardHandlers {
 /** What each basis says, in the words the card shows (and the tooltip explains). */
 export const BASIS_LABEL: Record<TieBasis, { chip: string; title: string }> = {
   jung: { chip: 'Jung', title: 'Jung makes this link himself, in the passage cited.' },
-  inferred: { chip: 'inferred', title: 'The atlas or the vault infers this link from the sources; it is not Jung\'s own statement.' },
-  site: { chip: 'the atlas\'s reading', title: 'An editorial link this atlas supplies; Jung does not make it and none is cited.' },
+  inferred: { chip: 'inferred', title: 'Inferred from the sources; it is not Jung\u2019s own statement.' },
+  site: { chip: 'read here', title: 'An editorial link this atlas supplies; Jung does not make it and none is cited.' },
 };
 
 /** Ties of a body whose target exists in the field, in curation order; the rest are reported, never silently shown. */
@@ -160,7 +160,7 @@ export class SkyCard {
           basisChip(projection.basis),
           el('span', { class: 'sky-source', text: ` after ${projection.source}. The character below is the default one (${body.name}).` }),
         ])
-        : el('p', { class: 'sky-reproject' }, [`${cultureName} has no cell for ${body.name} in the table this is transcribed from, so it is shown under its default name.`]));
+        : el('p', { class: 'sky-reproject' }, [`${cultureName} gives ${body.name} no name of its own; it stands under its default name.`]));
     }
 
     text.append(el('p', { class: 'rv-para', text: body.oneLine }));
@@ -313,12 +313,12 @@ export class SkyCard {
         el('span', { class: 'sky-source', text: 'Read in Jung\u2019s keys:' }),
         ...links.map((l) => el('button', { type: 'button', class: 'link-quiet', text: subjectName(m, l), onclick: () => this.h.onField(l) })),
       ]));
-      box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'The elongation and the lit share are computed for the birth moment. The links lead to Jung\u2019s reading of the pair, given below with his passages.' }));
+      box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'Computed for the birth moment.' }));
       return box;
     }
     const next = nextSyzygies(ctx.eph, ctx.ms);
     box.append(event('Next conjunction in longitude (new Moon)', next.conjunction), event('Next opposition (full Moon)', next.opposition));
-    box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'The dates are computed from the generated ephemeris. The links lead to Jung\u2019s reading of the pair, given below with his passages.' }));
+    box.append(el('p', { class: 'sky-source sky-syzygy-note', text: 'Computed from the ephemeris.' }));
     return box;
   }
 }

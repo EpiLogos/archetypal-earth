@@ -86,7 +86,7 @@ export class PassageSheet {
          el('button', { type: 'button', class: 'link-quiet', text: 'next ¶ →', onclick: () => void this.step(1) })]);
       this.article.append(nav);
     }
-    this.article.append(el('p', { class: 'dp-foot', text: 'Read from the vault corpus · machine-anchored, page-true' }));
+    this.article.append(el('p', { class: 'dp-foot', text: `Drawn from the corpus${ref.title ? ` · ${ref.title}` : ''}` }));
     (this.root.querySelector('.dp-scroll') as HTMLElement).scrollTop = 0;
   }
 

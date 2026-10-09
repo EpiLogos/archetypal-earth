@@ -21,6 +21,9 @@ export async function open(browser, { width = 1440, height = 900, dpr = 1, hash 
   await page.goto(URL + hash, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__earth && window.__earth.engine && window.__earth.engine.presences, null, { timeout: 30000 });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 30000 });
+  // the entry dialog shows once per fresh context: walk through it like a person
+  const intro = page.locator('#intro:not(.dismissed)');
+  if (await intro.count()) await page.getByRole('button', { name: 'Enter the globe' }).click();
   await page.waitForTimeout(600);
   return { ctx, page, logs };
 }

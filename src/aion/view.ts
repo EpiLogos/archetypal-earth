@@ -9,6 +9,7 @@ import { clear, el, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import type { PassageBridge } from '../ui/passage';
 import { epochAt, eventOccurrences } from './model';
+import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 
 type Selection = NonNullable<NonNullable<AppState['history']>['selection']>;
@@ -143,7 +144,7 @@ export class AionView {
     // Extend the existing focus-label vocabulary; the current reading is a
     // heading, and the quieter browsing controls open only when requested.
     this.heading.append(this.history.readings.length > 1 ? readingSelect : el('h1', { class: 'fl-name', text: reading.title }),
-      el('p', { class: 'aion-context', text: `${reading.author} · An archetypal reading of history` }),
+      el('p', { class: 'aion-context', text: reading.author }),
       el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Browse' }),
         el('div', { class: 'aion-choices' }, [el('label', {}, [el('span', { text: 'Events' }), eventSelect]), el('label', {}, [el('span', { text: 'Threads' }), threadSelect])])]));
   }
@@ -163,7 +164,7 @@ export class AionView {
   private sources(passages: Passage[]): HTMLElement {
     const cite = (p: Passage) => {
       const text = `${p.work} · ${p.locator}`;
-      const mark = p.basis === 'S' ? el('span', { class: 'aion-basis', text: 'S · standard scholarship' }) : el('span', { class: 'aion-basis', text: 'J' });
+      const mark = p.basis === 'S' ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' }) : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
       if (!this.passages?.known(p.work)) return el('cite', {}, [mark, text]);
       return el('cite', {}, [mark, el('button', { class: 'link-quiet', type: 'button', text, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })]);
     };
@@ -195,7 +196,7 @@ export class AionView {
       if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
     }
     for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
-    text.append(el('p', { class: 'aion-date rv-line', text: `${yearLabel(epoch.from)} – ${yearLabel(epoch.to)} · approximate` }),
+    text.append(el('p', { class: 'aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
       el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
       links, this.sources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
   }

@@ -58,7 +58,7 @@ try {
     const live = await page.evaluate(() => window.__earth.ctl.skyLiveState);
     check(live?.kind === 'live', 'with the sidecar answering, the sky is live and following the clock', JSON.stringify(live));
     const note = await liveNote(page);
-    check(note.state === 'live' && /^Live · .*checked against the ephemeris sidecar at \d\d:\d\d UTC/.test(note.text ?? ''), 'and says so, with the check it passed', note.text);
+    check(note.state === 'live' && /^Live · .*checked at \d\d:\d\d UTC/.test(note.text ?? ''), 'and says so, with the check it passed', note.text);
     const side = await page.evaluate(async () => (await (await fetch('http://127.0.0.1:5187/now')).json()).subsolar);
     const now = await sunUniform(page);
     check(Math.abs(now.lat - side.lat) < 0.1 && Math.abs(wrap180(now.lon - side.lon)) < 0.1, 'the subsolar point under the shader is the sidecar\u2019s now, to display accuracy', `site ${now.lat.toFixed(3)},${now.lon.toFixed(3)} · sidecar ${side.lat.toFixed(3)},${side.lon.toFixed(3)}`);

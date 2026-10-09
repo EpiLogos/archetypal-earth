@@ -27,5 +27,6 @@ export async function loadField(): Promise<{ field: Field; fixture: boolean }> {
   } catch (e) {
     why = String(e);
   }
-  throw new Error(`The atlas data could not be loaded (${why}).`);
+  console.warn('atlas data unavailable:', why);
+  throw new Error('The atlas could not be loaded.');
 }

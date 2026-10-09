@@ -57,7 +57,7 @@ export class GraphTools {
     this.depthWrap = el('div', { class: 'gvt-row', role: 'group', 'aria-label': 'Depth of the local graph' }, [el('span', { text: 'Steps' }), el('span', { class: 'gvt-depth' }, [this.minus, this.depthN, this.plus])]);
     this.dust = el('button', { class: 'gvt-option', type: 'button', 'aria-pressed': 'true', onclick: () => h.onDust(!this.state.dust) }) as HTMLButtonElement;
     const tieGroup = el('div', { class: 'gvt-ties', role: 'group', 'aria-label': 'Family to archetype relations' });
-    for (const [basis, label] of [['jung', 'Jung'], ['inferred', 'Inferred'], ['site', 'Site']] as const) {
+    for (const [basis, label] of [['jung', 'Jung'], ['inferred', 'Inferred'], ['site', 'Read here']] as const) {
       const button = el('button', { class: 'gvt-filter', type: 'button', text: label, 'aria-pressed': 'true', onclick: () => h.onTies(this.state.ties.includes(basis) ? this.state.ties.filter((b) => b !== basis) : [...this.state.ties, basis]) }) as HTMLButtonElement;
       this.ties.set(basis, button);
       tieGroup.append(button);

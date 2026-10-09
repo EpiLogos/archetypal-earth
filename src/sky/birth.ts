@@ -36,8 +36,8 @@ export type BirthAvailability =
   | { kind: 'off'; why: 'absent' | 'not-local' };
 
 const WHY_OFF: Record<'absent' | 'not-local', string> = {
-  absent: 'The ephemeris sidecar is not running, so a birth sky cannot be computed. Start it with ephemeris/run.sh and reload; everything else in the sky works without it.',
-  'not-local': 'A birth sky is computed by the ephemeris sidecar, which only runs on the machine that serves this site. This copy cannot reach one.',
+  absent: 'A birth sky cannot be computed here — its ephemeris is not running. Everything else in the sky works without it.',
+  'not-local': 'A birth sky is computed by an ephemeris that runs only on its home machine; this one cannot reach it.',
 };
 
 export class BirthPanel {
@@ -71,7 +71,7 @@ export class BirthPanel {
     this.lat = el('input', { type: 'text', name: 'lat', inputmode: 'decimal', placeholder: '47.37', autocomplete: 'off', 'aria-label': 'Latitude, degrees north (south is negative)' }) as HTMLInputElement;
     this.lon = el('input', { type: 'text', name: 'lon', inputmode: 'decimal', placeholder: '8.54', autocomplete: 'off', 'aria-label': 'Longitude, degrees east (west is negative)' }) as HTMLInputElement;
     this.suggest = el('div', { class: 'sky-birth-suggest', role: 'group', 'aria-label': 'Matching places' });
-    this.lookupBtn = el('button', { type: 'button', class: 'link-quiet', text: 'Look up elsewhere', title: 'Search beyond the atlas\u2019s own list of cities' }) as HTMLButtonElement;
+    this.lookupBtn = el('button', { type: 'button', class: 'link-quiet', text: 'Look up elsewhere', title: 'Search beyond the places listed here' }) as HTMLButtonElement;
     this.castBtn = el('button', { type: 'submit', class: 'sky-birth-cast', text: 'Show this sky' }) as HTMLButtonElement;
     this.status = el('p', { class: 'sky-birth-status', role: 'status', 'aria-live': 'polite' });
     this.result = el('div', { class: 'sky-birth-result' });
@@ -134,7 +134,7 @@ export class BirthPanel {
     const a = this.availability_;
     const off = a.kind === 'off';
     this.root.dataset.availability = a.kind;
-    this.notice.textContent = a.kind === 'off' ? WHY_OFF[a.why] : a.kind === 'checking' ? 'Looking for the ephemeris sidecar…' : '';
+    this.notice.textContent = a.kind === 'off' ? WHY_OFF[a.why] : a.kind === 'checking' ? 'Looking for the ephemeris…' : '';
     this.notice.hidden = a.kind === 'ready';
     this.form.toggleAttribute('inert', off);
     this.form.classList.toggle('off', off);
@@ -192,7 +192,7 @@ export class BirthPanel {
     this.lat.value = String(p.lat);
     this.lon.value = String(p.lon);
     clear(this.suggest);
-    this.suggest.append(el('p', { class: 'sky-birth-help sky-birth-chosen', text: `${formatCoordinates(p.lat, p.lon)} · ${p.source === 'gazetteer' ? 'from the atlas\u2019s list of cities' : p.source === 'geocoder' ? 'from OpenStreetMap, through the sidecar' : 'as given'}` }));
+    this.suggest.append(el('p', { class: 'sky-birth-help sky-birth-chosen', text: `${formatCoordinates(p.lat, p.lon)} · ${p.source === 'gazetteer' ? 'from the listed places' : p.source === 'geocoder' ? 'from OpenStreetMap' : 'as given'}` }));
   }
 
   private async lookup() {
@@ -280,7 +280,7 @@ export class BirthPanel {
       this.result.append(el('details', { class: 'sky-birth-aspects' }, [
         el('summary', { text: 'The aspects, listed' }),
         el('ul', {}, chart.aspects.map((a) => el('li', { text: describeAspect(a, nameOf) }))),
-        el('p', { class: 'sky-source', text: 'Angles between bodies as the sidecar found them, with their orb. They are geometry; this atlas gives them no meaning.' }),
+        el('p', { class: 'sky-source', text: 'Angles between bodies, with their orb. They are geometry; the sky gives them no meaning here.' }),
       ]));
     }
     this.result.append(el('button', { type: 'button', class: 'link-quiet sky-birth-leave', text: 'Return to the present sky', onclick: () => this.h.onLeave() }));

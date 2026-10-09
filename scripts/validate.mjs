@@ -74,6 +74,7 @@ export function validateField(f) {
     palette(w, fam.palette);
     if (!Array.isArray(fam.body)) err(`${w}: body`);
     else fam.body.forEach((p) => noLinks(w, p));
+    if (fam.definition && (!isStr(fam.definition.text) || !isStr(fam.definition.cite))) err(`${w}: definition shape`);
     image(w, fam.image);
     if (typeof fam.synthesised !== 'boolean') err(`${w}: synthesised`);
     for (const k of ['name', 'oneLine']) noLinks(w, fam[k]);

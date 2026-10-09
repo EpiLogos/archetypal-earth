@@ -101,6 +101,8 @@ export interface Family {
   spectrum: Spectrum;
   palette: Palette;
   body: string[]; // plain text paragraphs; may be empty
+  /** Verbatim Jung quote with cite, picked from the vault's mentions — never typed. */
+  definition?: { text: string; cite: string };
   image?: ImageRef;
   occurrenceIds: OccurrenceId[]; // sorted by year ascending
   /** True when the vault has no note for this family yet (only instance_of refs). */
