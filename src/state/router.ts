@@ -11,6 +11,7 @@ export interface Resolver {
   familyOf(occId: string): string | undefined;
   hasReading?(id: string): boolean;
   hasHistorySelection?(reading: string, kind: string, id: string): boolean;
+  hasRedBookStop?(id: string): boolean;
   hasBody?(id: string): boolean;
 }
 
@@ -34,6 +35,10 @@ export function stateToHash(s: AppState): string {
   if (s.history) {
     const h = s.history;
     return `#/aion/${enc(h.reading)}${h.selection ? `/${h.selection.kind}/${enc(h.selection.id)}` : ''}`;
+  }
+  if (s.redbook) {
+    const rb = s.redbook;
+    return `#/redbook${rb.genesis ? '/genesis' : rb.stop ? `/${enc(rb.stop)}` : ''}`;
   }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
@@ -80,6 +85,12 @@ export function hashToState(hash: string, r: Resolver): Parsed {
     if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     return { state: { view: { kind: 'world' }, deep: false, sky } };
+  }
+  if (parts[0] === 'redbook') {
+    const rb: NonNullable<AppState['redbook']> = {};
+    if (parts[1] === 'genesis') rb.genesis = true;
+    else if (parts[1] && r.hasRedBookStop?.(parts[1])) rb.stop = parts[1];
+    return { state: { view: { kind: 'world' }, deep: false, redbook: rb } };
   }
   if (parts[0] === 'aion') {
     const [, reading, kind, id] = parts;

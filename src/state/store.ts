@@ -31,6 +31,8 @@ export interface AppState {
   /** the sky: the same scene pulled back past the Moon to the whole system (a flag, as `graph` is, but it needs the world view) */
   sky?: SkyState;
   history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread'; id: string } };
+  /** the Red Book: Liber Novus as a folio walk (or the genesis table) over the world view */
+  redbook?: { stop?: string; genesis?: true };
   /** The live path remains standing while one of its presences is inspected. */
   trail?: Extract<View, { kind: 'thread' }>;
 }
@@ -112,6 +114,7 @@ export function back(s: AppState): AppState {
     return WORLD;
   }
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;
+  if (s.redbook) return s.redbook.stop || s.redbook.genesis ? { ...s, redbook: {} } : WORLD;
   const v = s.view;
   switch (v.kind) {
     case 'world':
@@ -157,11 +160,13 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && a.history?.reading === b.history?.reading
     && a.history?.selection?.kind === b.history?.selection?.kind
     && a.history?.selection?.id === b.history?.selection?.id
+    && a.redbook?.stop === b.redbook?.stop
+    && !!a.redbook?.genesis === !!b.redbook?.genesis
     && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)));
 }
 
 /** Depth used to decide whether a move is an ascent (zoom out) or descent. */
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
-  return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0);
+  return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0);
 }

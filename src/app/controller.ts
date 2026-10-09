@@ -25,6 +25,10 @@ import { GraphView, type Insets } from '../graph/view';
 import { ModeSwitch } from '../graph/switch';
 import { AionView } from '../aion/view';
 import type { History } from '../types/history';
+import type { CorpusIndex } from '../types/corpus';
+import type { RedBook } from '../types/redbook';
+import { RedBookView } from '../redbook/view';
+import { PassageSheet } from '../ui/passage';
 import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
@@ -94,6 +98,12 @@ export class Controller {
   private aion: AionView | null = null;
   private aionSwitch: HTMLButtonElement;
   private aionTime: TimeSnapshot | null = null;
+  private redbook: RedBookView | null = null;
+  private redbookSwitch: HTMLButtonElement;
+  private rbTime: TimeSnapshot | null = null;
+  private redbookStops = new Set<string>();
+  /** the corpus reading sheet: a cite opened at its source */
+  private passage: PassageSheet;
   // the sky: a scale of the same globe, reached by the zoom gesture, by S, or by link
   private skyView: SkyView;
   private skyCard: SkyCard;
@@ -112,9 +122,13 @@ export class Controller {
   private skyByGesture = false;
   private pendingSkyEntry: 'instant' | 'fly' | null = null;
 
-  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, history?: History) {
+  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, history?: History, corpus?: CorpusIndex | null, redbook?: RedBook) {
     this.rel = new Float32Array(m.occ.length);
     this.searchIndex = buildSearchIndex(m);
+
+    this.passage = new PassageSheet(root, corpus ?? null);
+    const passages = this.passage.bridge();
+    const openCite = (work: string, locator: string) => void this.passage.show(work, locator);
 
     this.floats = new Floats(root, (t) => this.onFloatSelect(t));
     this.floats.obstacles = () => [this.labelRect];
@@ -132,6 +146,8 @@ export class Controller {
       onClose: () => this.setDeep(false),
       onSubject: (s) => this.navigate(focusOn(this.state, s)),
       onOccurrence: (id) => this.openOccurrenceId(id),
+      onCite: openCite,
+      passage: passages,
     });
     this.strip = new Strip(root, m, {
       onSelect: (i) => this.tourJump(i),
@@ -154,10 +170,16 @@ export class Controller {
     }, engine.reduced);
     root.before(this.graph.root);
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
-    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state));
+    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages);
     this.aionSwitch = el('button', { type: 'button', class: 'aion-switch', text: 'Aion', title: history ? 'Archetypal history (A)' : 'Aion history data is unavailable', 'aria-pressed': 'false', disabled: !history,
       onclick: () => this.toggleAion() });
     document.body.append(this.aionSwitch);
+
+    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state)) : null;
+    if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
+    this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
+      onclick: () => this.toggleRedbook() });
+    document.body.append(this.redbookSwitch);
 
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
@@ -279,6 +301,7 @@ export class Controller {
         const reading = this.aion?.history.readings.find(r => r.id === id);
         return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
       },
+      hasRedBookStop: (id: string) => this.redbookStops.has(id),
     };
   }
 
@@ -319,6 +342,10 @@ export class Controller {
   }
 
   stepBack() {
+    if (this.passage.isOpen) {
+      this.passage.hide();
+      return;
+    }
     if (this.search.isOpen) {
       this.search.close();
       return;
@@ -413,7 +440,15 @@ export class Controller {
     if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleAion(); e.preventDefault(); return;
     }
-    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history) {
+    if (e.key.toLowerCase() === 'r' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.toggleRedbook(); e.preventDefault(); return;
+    }
+    if (this.state.redbook && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      this.redbook?.walk(e.key === 'ArrowRight' ? 1 : -1);
+      e.preventDefault();
+      return;
+    }
+    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history && !this.state.redbook) {
       this.toggleSky(); e.preventDefault(); return;
     }
     if ((e.key === 'g' || e.key === 'G') && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -469,6 +504,23 @@ export class Controller {
     const modeChanged = first ? graph : !!prev.graph !== graph;
     this.syncMode(graph, first, modeChanged);
     this.aionSwitch.setAttribute('aria-pressed', String(!!next.history));
+    this.redbookSwitch.setAttribute('aria-pressed', String(!!next.redbook));
+    if (next.redbook && this.redbook) {
+      if (this.tour) this.endThread();
+      if (!prev.redbook) this.rbTime = this.time.snapshot();
+      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+      document.body.classList.remove('deep-open', 'thread-inspecting');
+      this.redbook.show(next.redbook);
+      return;
+    }
+    if (prev.redbook) {
+      this.redbook?.hide();
+      if (this.rbTime) this.time.restore(this.rbTime);
+      this.rbTime = null;
+      // leaving to the plain world: the Red Book's red must give way (not when
+      // a link is carrying us straight into Aion or a focus, which set palettes)
+      if (v.kind === 'world' && !next.sky && !graph && !next.history) this.enterWorld(false);
+    }
     if (next.history && this.aion) {
       if (this.tour) this.endThread();
       if (!prev.history) this.aionTime = this.time.snapshot();
@@ -529,7 +581,7 @@ export class Controller {
 
   // ── the sky ───────────────────────────────────────────────────────────
   toggleSky() {
-    if (this.graphMode || this.state.history) return;
+    if (this.graphMode || this.state.history || this.state.redbook) return;
     this.navigate(this.state.sky ? WORLD : inSky());
   }
 
@@ -782,7 +834,7 @@ export class Controller {
   private watchSkyGesture() {
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
-    if (!this.skyLayer || this.graphMode || this.state.history || rig.flying) return;
+    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || rig.flying) return;
     const d = rig.dist;
     if (!this.state.sky && d > SKY_ENTER) {
       this.skyByGesture = true;
@@ -812,6 +864,11 @@ export class Controller {
   private toggleAion() {
     if (!this.aion) return;
     this.navigate(this.state.history ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading: this.aion.history.readings[0].id } });
+  }
+
+  private toggleRedbook() {
+    if (!this.redbook) return;
+    this.navigate(this.state.redbook ? WORLD : { view: { kind: 'world' }, deep: false, redbook: {} });
   }
 
   private syncMode(graph: boolean, first: boolean, changed: boolean) {
