@@ -205,8 +205,11 @@ export function verifySourcePassages(curated, { vault = DEFAULT_VAULT } = {}) {
 
 export function loadCuration(root = ROOT) {
   // Each author owns a separate curation file. Extensions never modify jung-aion.json.
+  // jung-aion loads first so the core reading stays the mode's default and history
+  // keeps its shape for everything that reads readings[0].
   const dir = path.join(root, 'curation/aion');
-  const files = fs.readdirSync(dir).filter((name) => name.endsWith('.json')).sort();
+  const order = (name) => (name === 'jung-aion.json' ? `0-${name}` : name);
+  const files = fs.readdirSync(dir).filter((name) => name.endsWith('.json')).sort((a, b) => order(a).localeCompare(order(b)));
   return files.map((name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')));
 }
 

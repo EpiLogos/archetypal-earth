@@ -25,7 +25,8 @@
 .aion-sources summary { cursor: pointer; }
 .aion-sources blockquote { margin: 16px 0; border-left: 1px solid var(--core); padding-left: 14px; }
 .aion-sources blockquote p { font: italic 1.02rem/1.55 var(--serif); color: var(--ink-2); }
-.aion-sources cite { color: var(--ink-3); font: 10px var(--sans); }
+.aion-sources cite { color: var(--ink-3); font: 10px var(--sans); display: flex; gap: 8px; align-items: baseline; }
+.aion-basis { flex: none; min-width: 14px; text-align: center; border: 1px solid var(--hair); border-radius: 3px; padding: 0 4px; font: 9px/1.6 var(--sans); letter-spacing: 0.08em; color: var(--ink-3); }
 .aion-links { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 18px; }
 .aion-links button { text-align: left; }
 .aion-thread { margin: 0 20px 16px 0; border-bottom: 1px solid var(--hair); padding-bottom: 14px; }

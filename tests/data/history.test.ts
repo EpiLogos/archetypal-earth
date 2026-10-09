@@ -51,8 +51,10 @@ describe('Aion curation and generated history', () => {
 
   it('rejects broken field links and incomplete geographic placement', () => {
     const altered = copy(history);
-    altered.readings[0].events[0].occurrenceIds.push('not-in-the-existing-field');
-    delete altered.readings[0].events[0].lon;
+    // a located event, so the coordinate pair is present to be broken
+    const located = altered.readings.flatMap((r) => r.events).find((e) => e.lat !== undefined)!;
+    located.occurrenceIds.push('not-in-the-existing-field');
+    delete located.lon;
     expect(validateHistory(altered, { field })).toEqual(expect.arrayContaining([
       expect.stringContaining('unresolved occurrenceIds'), expect.stringContaining('coordinate pair incomplete'),
     ]));

@@ -15,6 +15,9 @@ export interface Passage {
   work: string;
   /** "¶127" or "¶127–128"; pdf page when the paragraph is unresolved. */
   locator: string;
+  /** The vault's sourcing label, kept exactly: J = asserted in Jung's own text
+   *  (the default when absent); S = standard scholarship, quoted for orientation. */
+  basis?: 'J' | 'S';
 }
 
 /** Where a reading places the moral/psychic charge of a span of time. */
