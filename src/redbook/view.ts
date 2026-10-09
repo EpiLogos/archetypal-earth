@@ -38,6 +38,7 @@ export class RedBookView {
     this.rail = el('nav', { class: 'rb-rail', 'aria-label': 'Folio walk' });
     this.card = el('aside', { class: 'rb-card reveal on', 'aria-label': 'Red Book reading', hidden: true });
     this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.heading, this.rail, this.card]);
+    this.setCardActive(false);
     parent.append(this.root);
   }
 
