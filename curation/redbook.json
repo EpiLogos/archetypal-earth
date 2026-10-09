@@ -75,7 +75,7 @@
       "stopId": "liber-novus-philemon-magician-baucis-garden-ms139",
       "words": "It was he who taught me psychic objectivity, the reality of the psyche",
       "cite": "redbook pdf p232",
-      "doctrine": "The wise old man named (cw9i ¶79); the meaning-regulator (cw14 ¶313); Mercurius-senex (cw13 ¶218); the murdered senex via Goethe (cw12 ¶561)."
+      "doctrine": "The wise old man named (The Archetypes and the Collective Unconscious ¶79); the meaning-regulator (Mysterium Coniunctionis ¶313); Mercurius-senex (Alchemical Studies ¶218); the murdered senex via Goethe (Psychology and Alchemy ¶561)."
     },
     {
       "id": "genesis-anima", "name": "The anima",
@@ -83,7 +83,7 @@
       "stopId": "liber-novus-elijah-salome-mysterium-fol5v",
       "words": "she is my own soul",
       "cite": "redbook pdf p279",
-      "doctrine": "Salome → Kali → “case Z” in the Kore essay (cw9i ¶361, ¶371); the ladder (cw16 ¶361); the map anima-genealogy."
+      "doctrine": "Salome → Kali → “case Z” in the Kore essay (The Archetypes and the Collective Unconscious ¶361, ¶371); the ladder (The Practice of Psychotherapy ¶361)."
     },
     {
       "id": "genesis-wise-old-man", "name": "The wise old man / mana-personality",
@@ -91,7 +91,7 @@
       "stopId": "liber-novus-elijah-salome-mysterium-fol5v",
       "words": "An old man stood before me. He looked like one of the old prophets",
       "cite": "redbook pdf p276",
-      "doctrine": "The naming (cw9i ¶79); the mana-personality chapter (cw7 ¶377–80); 1925: “the wise man, the medicine man, the mana man” (sem-1925 pdf p113)."
+      "doctrine": "The naming (The Archetypes and the Collective Unconscious ¶79); the mana-personality chapter (Two Essays on Analytical Psychology ¶377–80); 1925: “the wise man, the medicine man, the mana man” (Analytical Psychology: Notes of the 1925 Seminar pdf p113)."
     },
     {
       "id": "genesis-serpent", "name": "The serpent",
@@ -99,7 +99,7 @@
       "stopId": "liber-novus-serpents-duel-sun-temple-fol6v",
       "words": "If one waits long enough, one sees how the Gods all change into serpents and underworld dragons in the end.",
       "cite": "redbook pdf p311",
-      "doctrine": "The whole serpent-row chain: lowest-and-highest (cw9ii ¶293); serpent-Christ (cw12 ¶184); serpens mercurialis (cw13 ¶448–49)."
+      "doctrine": "The whole serpent-row chain: lowest-and-highest (Aion: Researches into the Phenomenology of the Self ¶293); serpent-Christ (Psychology and Alchemy ¶184); serpens mercurialis (Alchemical Studies ¶448–49)."
     },
     {
       "id": "genesis-anthropos", "name": "Anthropos / Izdubar",
@@ -107,7 +107,7 @@
       "stopId": "liber-novus-izdubar-bull-man-first-day-fol37",
       "words": "this is Izdubar, the mighty, the bull-man",
       "cite": "redbook pdf p309",
-      "doctrine": "The renewed God = renewed attitude (cw6 ¶301, editor n.137); Anthropos = self (cw13 ¶269); Aion’s Anthropos chapters."
+      "doctrine": "The renewed God = renewed attitude (Psychological Types ¶301, editor n.137); Anthropos = self (Alchemical Studies ¶269); Aion’s Anthropos chapters."
     },
     {
       "id": "genesis-mandala-self", "name": "The mandala and the self",
@@ -115,7 +115,7 @@
       "stopId": "liber-novus-mandala-four-cardinal-figures-ms105",
       "words": "And that is the self, the wholeness of the personality",
       "cite": "redbook pdf p237",
-      "doctrine": "Mandala doctrine (cw9i, “Mandala Symbolism” — the ms 105 mandala published as “a male patient’s”); the self-symbol (cw9ii ¶426)."
+      "doctrine": "Mandala doctrine (The Archetypes and the Collective Unconscious, “Mandala Symbolism” — the ms 105 mandala published as “a male patient’s”); the self-symbol (Aion: Researches into the Phenomenology of the Self ¶426)."
     },
     {
       "id": "genesis-aeon", "name": "The aeon doctrine",
@@ -123,7 +123,7 @@
       "stopId": "liber-novus-izdubar-bull-man-first-day-fol37",
       "words": "the month of the fish will soon be over",
       "cite": "redbook pdf p345–46",
-      "doctrine": "Aion 1951: the Platonic month (cw9ii ¶135–49) and the aeon thesis of the foreword — the Red Book is the doctrine’s earliest witness, forty years on."
+      "doctrine": "Aion 1951: the Platonic month (Aion: Researches into the Phenomenology of the Self ¶135–49) and the aeon thesis of the foreword — the Red Book is the doctrine’s earliest witness, forty years on."
     },
     {
       "id": "genesis-pleroma", "name": "The pleroma",
@@ -131,7 +131,7 @@
       "stopId": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377",
       "words": "Now hear: I begin with nothingness. Nothingness is the same as the fullness",
       "cite": "redbook pdf p377",
-      "doctrine": "Tao (cw6 ¶363); Bardo-pleroma (cw11 ¶629); unus mundus (cw14 ¶660)."
+      "doctrine": "Tao (Psychological Types ¶363); Bardo-pleroma (Psychology and Religion: West and East ¶629); unus mundus (Mysterium Coniunctionis ¶660)."
     },
     {
       "id": "genesis-transcendent-function", "name": "The transcendent function",
@@ -139,7 +139,7 @@
       "stopId": "liber-novus-soul-white-bird-refinding-fol2r",
       "words": "we are real and not symbols",
       "cite": "redbook pdf p277",
-      "doctrine": "The 1916 essay (cw8 pdf p79) and the 1921 definition (cw6 ¶184) — theory and practice written the same year."
+      "doctrine": "The 1916 essay (The Structure and Dynamics of the Psyche pdf p79) and the 1921 definition (Psychological Types ¶184) — theory and practice written the same year."
     },
     {
       "id": "genesis-turn", "name": "The war prophecies → the Turn",
@@ -147,7 +147,7 @@
       "stopId": "liber-novus-three-prophecies-war-magic-religion-1914",
       "words": "it is completely real, and it will come to pass",
       "cite": "redbook pdf p262",
-      "doctrine": "The 1918 forecast (cw10 ¶17); the possession doctrine (cw10 ¶437); the printed arc assembled at the Turn reading — which begins where the manuscript’s prophecy already stood."
+      "doctrine": "The 1918 forecast (Civilization in Transition ¶17); the possession doctrine (Civilization in Transition ¶437)."
     },
     {
       "id": "genesis-abraxas", "name": "The new God in the relative / Abraxas",
@@ -155,7 +155,7 @@
       "stopId": "liber-novus-sermones-abraxas-hymn-pdf381",
       "words": "Effectiveness... is a God above God... We call him by his name ABRAXAS",
       "cite": "redbook pdf p379",
-      "doctrine": "The Christ↔Antichrist doctrine (Aion ch. III, cw9ii ¶76); the anti-privatio-boni argument of Aion and Answer to Job."
+      "doctrine": "The Christ↔Antichrist doctrine (Aion ch. III, Aion: Researches into the Phenomenology of the Self ¶76); the anti-privatio-boni argument of Aion and Answer to Job."
     },
     {
       "id": "genesis-divine-child", "name": "The divine child",
@@ -163,7 +163,7 @@
       "stopId": "liber-novus-coming-god-proclamation-fol4v",
       "words": "I have received your sprout, you who are to come!",
       "cite": "redbook pdf p273",
-      "doctrine": "The child-archetype essay (cw9i, 1940); individuation’s beginning (editor n.123)."
+      "doctrine": "The child-archetype essay (The Archetypes and the Collective Unconscious, 1940); individuation’s beginning (editor n.123)."
     },
     {
       "id": "genesis-shadow", "name": "The shadow",
@@ -171,7 +171,7 @@
       "stopId": "liber-novus-red-one-joy-devil-fol01",
       "words": "he was my joy, the joy of the serious person",
       "cite": "redbook pdf p292",
-      "doctrine": "The shadow essays (cw9i / cw9ii ¶13–19); the flaying before one’s own I, later read as shadow-confrontation (editor n.8, citing CW9i)."
+      "doctrine": "The shadow essays (The Archetypes and the Collective Unconscious / Aion: Researches into the Phenomenology of the Self ¶13–19); the flaying before one’s own I, later read as shadow-confrontation (editor n.8, citing The Archetypes and the Collective Unconscious)."
     },
     {
       "id": "genesis-antichrist", "name": "Christ ↔ Antichrist",
@@ -179,7 +179,7 @@
       "stopId": "liber-novus-coming-god-proclamation-fol4v",
       "words": "The image of the Antichrist, which has come down to us from the ancients, announces the new God",
       "cite": "redbook pdf p274",
-      "doctrine": "Aion ch. III: “an imitating spirit of evil who follows in Christ’s footsteps like a shadow” (cw9ii ¶76); “an inexorable psychological law” (¶77)."
+      "doctrine": "Aion ch. III: “an imitating spirit of evil who follows in Christ’s footsteps like a shadow” (Aion: Researches into the Phenomenology of the Self ¶76); “an inexorable psychological law” (¶77)."
     }
   ]
 }
