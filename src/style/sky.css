@@ -12,7 +12,7 @@
 .sky-label:hover, .sky-label:focus-visible, .sky-label[aria-pressed=true] { color: var(--sl, var(--core)); }
 .sky-label:focus-visible { outline: 1px solid rgb(var(--core-rgb) / .55); outline-offset: 1px; }
 .sky-caption {
-  position: fixed; left: 24px; bottom: 22px; z-index: 12; margin: 0; max-width: min(27ch, calc(100vw - 48px));
+  position: fixed; left: 24px; bottom: 92px; z-index: 12; margin: 0; max-width: min(27ch, calc(100vw - 48px));
   font: 11px/1.45 var(--sans); letter-spacing: .01em; color: var(--ink-3);
   text-shadow: 0 1px 14px rgb(var(--deep-rgb)); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease);
 }
