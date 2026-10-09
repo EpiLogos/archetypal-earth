@@ -132,6 +132,7 @@
           },
           "basis": "inferred",
           "note": "Jung's own sentence names the coniunctio oppositorum; the vault reads the coniunctio as the syzygy's consummation, and the atlas keeps that link as an inference rather than Jung's word.",
+          "restates": true,
           "cites": [
             {
               "work": "cw09ii",
@@ -257,6 +258,7 @@
           },
           "basis": "inferred",
           "note": "The vault reads Jung's feminine moon as the anima by inference; in this passage Jung does not name the anima.",
+          "restates": true,
           "cites": [
             {
               "work": "cw05",
@@ -273,6 +275,7 @@
           },
           "basis": "inferred",
           "note": "The vault reads the seed-guarding, soul-gathering moon as the Great Mother by inference; Jung does not name her in the passage.",
+          "restates": true,
           "cites": [
             {
               "work": "cw05",
@@ -305,6 +308,7 @@
           },
           "basis": "inferred",
           "note": "As for the sun: the coniunctio is read as the syzygy's consummation by the vault, not stated so by Jung in the cited sentence.",
+          "restates": true,
           "cites": [
             {
               "work": "cw09ii",
@@ -416,7 +420,8 @@
             "id": "great-mother"
           },
           "basis": "site",
-          "note": "The atlas names the Earth its home body; reading it as mother is an editorial gloss, not Jung's statement about the planet."
+          "note": "The atlas names the Earth its home body; reading it as mother is an editorial gloss, not Jung's statement about the planet.",
+          "restates": true
         },
         {
           "target": {
@@ -424,7 +429,8 @@
             "id": "mother-goddess"
           },
           "basis": "site",
-          "note": "An editorial link to the field's mother-goddess figures; they are cultural figures, not the planet."
+          "note": "An editorial link to the field's mother-goddess figures; they are cultural figures, not the planet.",
+          "restates": true
         }
       ],
       "quotes": [
@@ -527,7 +533,8 @@
             "id": "psychopomp"
           },
           "basis": "inferred",
-          "note": "The vault reads Mercurius as the redeeming psychopomp (CW13, printed p237) by inference; the cited passage is the planetary link only."
+          "note": "The vault reads Mercurius as the redeeming psychopomp (CW13, printed p237) by inference; the cited passage is the planetary link only.",
+          "restates": true
         },
         {
           "target": {
@@ -535,7 +542,8 @@
             "id": "trickster"
           },
           "basis": "inferred",
-          "note": "The vault reads Mercurius as trickster by inference (CW13, printed pp203, 237); the cited passage is the planetary link only."
+          "note": "The vault reads Mercurius as trickster by inference (CW13, printed pp203, 237); the cited passage is the planetary link only.",
+          "restates": true
         }
       ],
       "quotes": [
@@ -805,7 +813,7 @@
             "id": "hero"
           },
           "basis": "inferred",
-          "note": "Jung says the planetary names refer to the temperaments, which are psychic factors; the vault reads Mars's martial factor as the hero by inference. Jung's hero analyses never name the planet.",
+          "note": "Jung says the planetary names refer to the temperaments, which are psychic factors. Jung's hero analyses never name the planet.",
           "cites": [
             {
               "work": "cw13",
@@ -948,7 +956,7 @@
             "id": "fish"
           },
           "basis": "inferred",
-          "note": "Aion's astrological argument places the great conjunction of Jupiter and Saturn in Pisces; linking the planet to the fish family is the atlas's inference, not Jung's claim that the planet is a fish.",
+          "note": "Aion's astrological argument places the great conjunction of Jupiter and Saturn in Pisces.",
           "cites": [
             {
               "work": "cw09ii",
@@ -1101,7 +1109,7 @@
             "id": "shadow"
           },
           "basis": "inferred",
-          "note": "The vault's sol-niger note expresses the Shadow on Jung's authority; applying it to the planet is an inference.",
+          "note": "The sol-niger note expresses the Shadow on Jung's authority.",
           "cites": [
             {
               "work": "cw09ii",
@@ -1118,6 +1126,7 @@
           },
           "basis": "inferred",
           "note": "The vault reads Saturn's Senex as the Wise Old Man by inference.",
+          "restates": true,
           "cites": [
             {
               "work": "cw14",
@@ -1244,7 +1253,7 @@
             "id": "star"
           },
           "basis": "site",
-          "note": "Named for the sky-father Ouranos. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+          "note": "Named for the sky-father Ouranos. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
         }
       ],
       "quotes": [
@@ -1359,7 +1368,7 @@
             "id": "water"
           },
           "basis": "site",
-          "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+          "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
         },
         {
           "target": {
@@ -1367,7 +1376,7 @@
             "id": "night-sea-journey"
           },
           "basis": "site",
-          "note": "The sea-god's namesake planet, read beside the night sea journey. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+          "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
         }
       ],
       "quotes": [
@@ -1476,7 +1485,7 @@
             "id": "nigredo"
           },
           "basis": "site",
-          "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+          "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
         },
         {
           "target": {
@@ -1484,7 +1493,7 @@
             "id": "shadow"
           },
           "basis": "site",
-          "note": "The underworld namesake, read beside the Shadow. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies; this link is an editorial reading of the namesake figure, not a Jung statement."
+          "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
         }
       ],
       "quotes": [
@@ -1586,43 +1595,43 @@
         "name": "Ninurta/Ninib",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Saturn × Babylonian (S)"
+        "source": "planetary-gods table, Saturn × Babylonian"
       },
       "jupiter": {
         "name": "Marduk",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Jupiter × Babylonian (S)"
+        "source": "planetary-gods table, Jupiter × Babylonian"
       },
       "mars": {
         "name": "Nergal",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Mars × Babylonian (S)"
+        "source": "planetary-gods table, Mars × Babylonian"
       },
       "sun": {
         "name": "Shamash/Utu",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Sun × Babylonian (S)"
+        "source": "planetary-gods table, Sun × Babylonian"
       },
       "venus": {
         "name": "Ishtar/Inanna",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Venus × Babylonian (S)"
+        "source": "planetary-gods table, Venus × Babylonian"
       },
       "mercury": {
         "name": "Nabu",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Mercury × Babylonian (S)"
+        "source": "planetary-gods table, Mercury × Babylonian"
       },
       "moon": {
         "name": "Sin/Nanna",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Moon × Babylonian (S)"
+        "source": "planetary-gods table, Moon × Babylonian"
       }
     },
     "greek": {
@@ -1718,43 +1727,43 @@
         "name": "Shani",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Saturn × Hindu navagraha (S)"
+        "source": "planetary-gods table, Saturn × Hindu navagraha"
       },
       "jupiter": {
         "name": "Brihaspati/Guru",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Jupiter × Hindu navagraha (S)"
+        "source": "planetary-gods table, Jupiter × Hindu navagraha"
       },
       "mars": {
         "name": "Mangala",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Mars × Hindu navagraha (S)"
+        "source": "planetary-gods table, Mars × Hindu navagraha"
       },
       "sun": {
         "name": "Surya",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Sun × Hindu navagraha (S)"
+        "source": "planetary-gods table, Sun × Hindu navagraha"
       },
       "venus": {
         "name": "Shukra",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Venus × Hindu navagraha (S)"
+        "source": "planetary-gods table, Venus × Hindu navagraha"
       },
       "mercury": {
         "name": "Budha",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Mercury × Hindu navagraha (S)"
+        "source": "planetary-gods table, Mercury × Hindu navagraha"
       },
       "moon": {
         "name": "Chandra/Soma",
         "kind": "deity",
         "basis": "inferred",
-        "source": "planetary-gods table, Moon × Hindu navagraha (S)"
+        "source": "planetary-gods table, Moon × Hindu navagraha"
       }
     },
     "chinese": {
@@ -1762,31 +1771,31 @@
         "name": "earth",
         "kind": "element",
         "basis": "inferred",
-        "source": "planetary-gods table, Saturn × Chinese wuxing (S)"
+        "source": "planetary-gods table, Saturn × Chinese wuxing"
       },
       "jupiter": {
         "name": "wood",
         "kind": "element",
         "basis": "inferred",
-        "source": "planetary-gods table, Jupiter × Chinese wuxing (S)"
+        "source": "planetary-gods table, Jupiter × Chinese wuxing"
       },
       "mars": {
         "name": "fire",
         "kind": "element",
         "basis": "inferred",
-        "source": "planetary-gods table, Mars × Chinese wuxing (S)"
+        "source": "planetary-gods table, Mars × Chinese wuxing"
       },
       "venus": {
         "name": "metal",
         "kind": "element",
         "basis": "inferred",
-        "source": "planetary-gods table, Venus × Chinese wuxing (S)"
+        "source": "planetary-gods table, Venus × Chinese wuxing"
       },
       "mercury": {
         "name": "water",
         "kind": "element",
         "basis": "inferred",
-        "source": "planetary-gods table, Mercury × Chinese wuxing (S)"
+        "source": "planetary-gods table, Mercury × Chinese wuxing"
       }
     }
   },
