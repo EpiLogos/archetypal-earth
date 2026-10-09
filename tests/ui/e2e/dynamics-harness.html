@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamics harness</title>
+<link rel="stylesheet" href="/src/style/main.css">
+<link rel="stylesheet" href="/src/style/dynamics.css">
+<style>html, body { margin: 0; min-height: 100%; background: #02030a; }</style>
+</head>
+<body>
+<!-- the time track's box, so the strip's alignment with it can be measured (no controls: the harness drives time) -->
+<div class="time" aria-hidden="true"><button class="t-readout" type="button" tabindex="-1"></button><div class="t-track"></div><button class="t-play" type="button" tabindex="-1"></button></div>
+<div id="host"></div>
+<script type="module">
+// Mounts the real DynamicsView over the published field with a real TimeModel and a stub engine (the view only reads it).
+// Serves only for the e2e walk: nothing here is part of the site.
+import { buildModel } from '/src/data/model.ts';
+import { TimeModel } from '/src/state/timeModel.ts';
+import { DynamicsView } from '/src/dynamics/view.ts';
+import { parseDynamics } from '/src/dynamics/load.ts';
+import { basinsOf, transitions, trajectoryOf } from '/src/dynamics/trajectory.ts';
+
+const q = new URLSearchParams(location.search);
+const field = await (await fetch('/data/field.json')).json();
+const model = buildModel(field);
+const time = new TimeModel();
+time.setRange(model.scale.toU(field.meta.yearMin), model.scale.toU(field.meta.yearMax));
+const concepts = q.get('concepts') ? parseDynamics(await (await fetch('/tests/ui/e2e/dynamics-fixture.json')).json()) : null;
+const view = new DynamicsView(document.getElementById('host'), model, {}, time, () => {}, undefined, concepts);
+const parse = (v) => { const [type, id] = v.split(':'); return { type, id }; };
+const subjectOf = (v) => (v ? parse(v) : undefined);
+const asSubject = (s) => (typeof s === 'string' ? parse(s) : s);
+const trajOf = (s) => trajectoryOf(model, asSubject(s));
+
+window.__dy = {
+  view,
+  model,
+  time,
+  show: (v) => view.show(subjectOf(v) ? { subject: subjectOf(v) } : {}),
+  hide: () => view.hide(),
+  scrub: (u) => time.scrub(u),
+  transitionCount: (s) => transitions(trajOf(s)).length,
+  transitionMids: (s) => { const t = trajOf(s); return transitions(t).map((j) => (t.points[j - 1].u + t.points[j].u) / 2); },
+  basinCount: (s) => basinsOf(trajOf(s)).length,
+  /** the slider-positions of the subject's first and last located occurrence */
+  span: (s) => { const p = trajOf(s).points; return p.length ? [p[0].u, p[p.length - 1].u] : null; },
+  /** every string a sentence-free card may show for this subject: names and the field's own one-line identity */
+  allowedText: (v) => {
+    const s = subjectOf(v) ?? { type: 'archetype', id: model.field.archetypes.find((a) => a.prime).id };
+    const names = basinsOf(trajOf(s)).map((b) => model.famById.get(b.familyId)?.name ?? b.familyId);
+    const name = s.type === 'archetype' ? model.archById.get(s.id)?.name : s.type === 'family' ? model.famById.get(s.id)?.name : s.id;
+    const line = s.type === 'archetype' ? model.archById.get(s.id)?.oneLine : s.type === 'family' ? model.famById.get(s.id)?.oneLine : '';
+    return [name, line, ...names, 'V', 'J', 'drawn here', 'Next'].filter(Boolean);
+  },
+  ready: true,
+};
+
+// the globe's frame loop, reduced to the one call this view makes each frame
+let last = performance.now();
+const frame = (t) => { view.update(t - last); last = t; requestAnimationFrame(frame); };
+requestAnimationFrame(frame);
+
+view.show(subjectOf(q.get('subject')) ? { subject: subjectOf(q.get('subject')) } : {});
+</script>
+</body>
+</html>

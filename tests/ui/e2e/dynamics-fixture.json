@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "concepts": [
+    {
+      "id": "fixture-placeholder",
+      "name": "Placeholder concept",
+      "familyIds": ["serpent"],
+      "render": "julia",
+      "quote": {
+        "text": "PLACEHOLDER: test fixture, not a quotation.",
+        "cite": { "workTitle": "Fixture work", "year": "0000", "locator": "p. 0" }
+      },
+      "jung": {
+        "text": "PLACEHOLDER: test fixture, not a quotation.",
+        "cite": { "workTitle": "Fixture CW", "year": "0000", "locator": "¶0" }
+      }
+    }
+  ]
+}
