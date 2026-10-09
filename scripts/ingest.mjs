@@ -9,6 +9,7 @@ import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse } from 
 import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT } from './lib/geo.mjs';
 import { validateField } from './validate.mjs';
 import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
+import { buildCorpusIndex } from './lib/corpus.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -569,7 +570,28 @@ const stats = {
 };
 fs.writeFileSync(path.join(OUT_DIR, 'field.stats.json'), JSON.stringify(stats, null, 2) + '\n');
 
+// ---------- corpus index (citation deep links) ----------
+// The read-only vault corpus becomes public/data/corpus/: index.json plus one
+// file per volume (chapters, pages, ¶ anchor spans). field.json is untouched.
+let corpus = null;
+try {
+  const spineLines = fs.existsSync(path.join(VAULT, 'data', 'paragraphs.jsonl'))
+    ? fs.readFileSync(path.join(VAULT, 'data', 'paragraphs.jsonl'), 'utf8').split('\n').filter(Boolean)
+    : [];
+  corpus = buildCorpusIndex({
+    vault: VAULT,
+    outDir: path.join(OUT_DIR, 'corpus'),
+    manifest,
+    spineLines,
+    log: (m) => console.log(m),
+  });
+  stats.corpus = corpus;
+} catch (e) {
+  warn(`corpus index not built: ${e.message}`);
+}
+
 console.log(`field.json: ${archList.length} archetypes, ${cleanFam.length} families (${stats.familiesSynthesised.length} synthesised), ${occList.length} occurrences, ${cultures.length} cultures, ${imageCount} images`);
+if (corpus) console.log(`corpus: ${corpus.works} volumes, ${corpus.pages} pages, ${corpus.paras} ¶ anchors${corpus.spine ? ` (spine: ${corpus.spine.checked} checked, ${corpus.spine.missing} off-page)` : ''}`);
 console.log(`geo: place ${hist.place} (${pct(hist.place)}%), region ${hist.region} (${pct(hist.region)}%), culture ${hist.culture} (${pct(hist.culture)}%), none ${hist.none} | place+region ${pct(hist.place + hist.region)}%`);
 console.log(`skips: ${skips.length}${skips.length ? ' -> ' + skips.map((s) => `${s.kind}:${s.id} (${s.reason})`).join('; ') : ''}`);
 console.log(`warnings: ${warnings.length} (see field.stats.json)`);

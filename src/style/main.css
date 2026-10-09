@@ -251,6 +251,17 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-foot { margin: 56px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); letter-spacing: 0.03em; }
 body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body.deep-open .reveal { opacity: 0 !important; pointer-events: none !important; }
 
+/* ── passage (a cite opened at its corpus source) ──────────────────── */
+.ps-article { max-width: 33rem; }
+.ps-where { margin: 4px 0 0; font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.85); }
+.ps-mark { margin: 26px 0 0; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; color: var(--ink-3); }
+.ps-text { margin: 8px 0 0; font-family: var(--serif); font-weight: 400; font-size: 1.13rem; line-height: 1.68; color: rgb(236 241 252 / 0.88); white-space: pre-wrap; hyphens: auto; }
+.ps-page { margin: 34px 0 0; border-top: 1px solid var(--hair); }
+.ps-page summary { cursor: pointer; padding-top: 14px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
+.ps-page-text { font-size: 0.94rem; line-height: 1.55; color: rgb(236 241 252 / 0.62); }
+.ps-nav { display: flex; gap: 20px; margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--hair); }
+.dp-cite-link { text-align: left; }
+
 /* ── thread strip ──────────────────────────────────────────────────── */
 .strip {
   position: fixed; left: 50%; bottom: 86px; z-index: 9; width: min(760px, 92vw);

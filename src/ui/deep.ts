@@ -6,12 +6,16 @@ import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
 import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
+import type { PassageBridge } from './passage';
 import { eraShort, jungLine, placeLine, shortWork } from './format';
 
 export interface DeepHandlers {
   onClose(): void;
   onSubject(s: Subject): void;
   onOccurrence(id: string): void;
+  /** present when the corpus index is available: cites become deep links */
+  onCite?(work: string, locator: string): void;
+  passage?: PassageBridge;
 }
 
 export type DeepTarget = { kind: 'subject'; subject: Subject } | { kind: 'occurrence'; occId: string };
@@ -171,7 +175,7 @@ export class DeepSheet {
     if (o.jung.length) {
       a.append(el('h3', { class: 'dp-sub', text: 'Where Jung meets it' }));
       const ul = el('ul', { class: 'dp-cites' });
-      o.jung.forEach((c) => ul.append(el('li', { text: jungLine(c) })));
+      o.jung.forEach((c) => ul.append(el('li', {}, [this.citeLine(c)])));
       a.append(ul);
     }
     if (fam) {
@@ -191,6 +195,13 @@ export class DeepSheet {
       a.append(ul);
     }
     this.appendFooter();
+  }
+
+  /** A cite line; when the corpus holds the work it opens the actual passage. */
+  private citeLine(c: Cite): HTMLElement {
+    const text = jungLine(c);
+    if (!this.h.onCite || !this.h.passage?.known(c.work)) return el('span', { text });
+    return el('button', { class: 'link-quiet dp-cite-link', type: 'button', text, title: 'Open the passage in the corpus', 'aria-label': `${text} — open the passage`, onclick: () => this.h.onCite!(c.work, c.locator) });
   }
 
   private appendFooter() {
