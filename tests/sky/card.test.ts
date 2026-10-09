@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { buildModel, subjectExists } from '../../src/data/model';
 import type { Field } from '../../src/types/field';
 import type { BodyKey, SkyData } from '../../src/types/sky';
-import { BASIS_LABEL, burtFooter, canOpenCard, describePosition, formatMoment, keyPassageOf, resolveTies, tieNote } from '../../src/sky/card';
+import { BASIS_LABEL, basisTitle, burtFooter, canOpenCard, describePosition, formatMoment, keyPassageOf, resolveTies, tieNote } from '../../src/sky/card';
 import { jungLine, passageCite, passageLine } from '../../src/ui/format';
 import { SkyEphemeris } from '../../src/sky/ephemeris';
 import { signOf } from '../../src/sky/frames';
@@ -138,8 +138,8 @@ describe('the key passage leads the card, in its author\'s voice', () => {
   const sun = data.bodies.find((b) => b.key === 'sun')!;
   const resolvedOf = (b: typeof sun) => resolveTies(b, model).resolved;
 
-  it('every body leads with Burt\'s own definition when the book gives one, under her name and page', () => {
-    for (const b of data.bodies) {
+  it('every body but the luminaries leads with Burt\'s own definition when the book gives one, under her name and page', () => {
+    for (const b of data.bodies.filter((x) => x.key !== 'sun' && x.key !== 'moon')) {
       expect(b.quotes?.length, `${b.key} has Burt quotes`).toBeGreaterThan(0);
       const k = keyPassageOf(b, resolvedOf(b), data.readings, model)!;
       expect(k.voice, b.key).toBe('burt');
@@ -149,15 +149,36 @@ describe('the key passage leads the card, in its author\'s voice', () => {
     }
   });
 
+  it('the Sun and the Moon lead with Jung\'s pair reading, its first cite; Burt\'s definitions wait in her disclosure', () => {
+    const pair = data.readings.find((r) => r.bodies.includes('sun') && r.bodies.includes('moon'))!;
+    for (const b of [sun, data.bodies.find((x) => x.key === 'moon')!]) {
+      const k = keyPassageOf(b, resolvedOf(b), data.readings, model)!;
+      expect(k.voice, b.key).toBe('jung');
+      expect(k.cite, b.key).toBe(pair.cites[0]);
+      expect(k.quote, b.key).toBe(pair.cites[0].quote);
+      expect(k.footer, b.key).toBe(passageLine(model, pair.cites[0].work, pair.cites[0].locator));
+      expect(b.quotes!.length, `${b.key} keeps Burt's quotes for her disclosure`).toBeGreaterThan(0);
+    }
+  });
+
   it('falls back to the first Jung-basis passage, cited in jungLine\'s voice, never the atlas\'s own link', () => {
-    const bare = { ...sun, quotes: undefined };
-    const k = keyPassageOf(bare, resolvedOf(sun), data.readings, model)!;
-    const firstJung = resolvedOf(sun).find((t) => t.basis === 'jung')!;
+    // Mercury has no pair reading and, here, no Burt quote: the first Jung tie leads
+    const mercury = { ...data.bodies.find((x) => x.key === 'mercury')!, quotes: undefined };
+    const merc = resolvedOf(mercury);
+    const k = keyPassageOf(mercury, merc, data.readings, model)!;
+    const firstJung = merc.find((t) => t.basis === 'jung')!;
     expect(k.voice).toBe('jung');
     expect(k.cite).toBe(firstJung.cites![0]);
     expect(k.quote).toBe(firstJung.cites![0].quote);
     expect(k.footer).toBe(passageLine(model, firstJung.cites![0].work, firstJung.cites![0].locator));
     expect(k.footer.startsWith('Jung · ')).toBe(true);
+  });
+
+  it('the basis chip\'s tooltip carries a culture\'s table as its source, and says what the basis is', () => {
+    expect(basisTitle('site')).toBe(BASIS_LABEL.site.title);
+    const t = basisTitle('inferred', 'planetary-gods table, Saturn × Babylonian (J: cw09ii ¶215)');
+    expect(t.startsWith(BASIS_LABEL.inferred.title)).toBe(true);
+    expect(t).toContain('Source: planetary-gods table, Saturn × Babylonian (J: cw09ii ¶215)');
   });
 
   it('declines to lead with anything when neither Burt nor Jung speaks for the body', () => {

@@ -29,25 +29,35 @@ await page.evaluate(() => document.querySelector('.aion-sources')?.setAttribute(
 await page.waitForTimeout(400);
 report.aionEvent = await page.evaluate(() => ({
   name: document.querySelector('.aion-card .rv-name')?.textContent,
-  sources: [...document.querySelectorAll('.aion-sources cite')].slice(0, 3).map((c) => c.textContent),
-  basis: [...document.querySelectorAll('.aion-sources .aion-basis')].slice(0, 3).map((b) => b.textContent),
+  // the key passage is an open blockquote with its cite in the footer; the rest sit in 'More from the text'
+  sources: [...document.querySelectorAll('.aion-card blockquote.dp-def footer')].slice(0, 3).map((f) => f.textContent),
+  basis: [...document.querySelectorAll('.aion-card .aion-basis')].slice(0, 3).map((b) => b.textContent),
 }));
+must('aion event name (.aion-card .rv-name)', report.aionEvent.name);
+must('aion key passage footer (.aion-card blockquote.dp-def footer)', report.aionEvent.sources.length ? 'yes' : null);
+must('aion basis chip (.aion-card .aion-basis)', report.aionEvent.basis.length ? 'yes' : null);
 await page.screenshot({ path: `${shots}/aion-event.png` });
 
-// corpus deep link: open the first source passage
-await page.click('.aion-sources cite button');
-await page.waitForSelector('.passage.on', { timeout: 8000 });
-await page.waitForTimeout(600);
-report.passage = await page.evaluate(() => ({
-  where: document.querySelector('.ps-where')?.textContent,
-  mark: document.querySelector('.ps-mark')?.textContent,
-  text: document.querySelector('.ps-text')?.textContent?.slice(0, 110),
-  nav: !!document.querySelector('.ps-nav'),
-}));
-await page.screenshot({ path: `${shots}/passage.png` });
-await page.keyboard.press('Escape');
-await page.waitForTimeout(400);
-report.passageClosed = await page.evaluate(() => document.querySelector('.passage')?.classList.contains('on') === false);
+// corpus deep link: open the key passage's cite (a button only where the corpus holds the work)
+const aionCite = '.aion-card blockquote footer button';
+const hasAionCite = (await page.$(aionCite)) !== null;
+must(`aion cite button (${aionCite})`, hasAionCite ? 'yes' : null);
+if (hasAionCite) {
+  await page.click(aionCite);
+  await page.waitForSelector('.passage.on', { timeout: 8000 });
+  await page.waitForTimeout(600);
+  report.passage = await page.evaluate(() => ({
+    where: document.querySelector('.ps-where')?.textContent,
+    mark: document.querySelector('.ps-mark')?.textContent,
+    text: document.querySelector('.ps-text')?.textContent?.slice(0, 110),
+    nav: !!document.querySelector('.ps-nav'),
+  }));
+  must('passage .ps-where', report.passage.where);
+  await page.screenshot({ path: `${shots}/passage.png` });
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+  report.passageClosed = await page.evaluate(() => document.querySelector('.passage')?.classList.contains('on') === false);
+}
 
 // ── Aquarius horizon reading ──
 await page.goto(URL + '#/aion/jung-aquarius-horizon', { waitUntil: 'load' });

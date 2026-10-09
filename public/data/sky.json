@@ -131,8 +131,7 @@
             "id": "syzygy"
           },
           "basis": "inferred",
-          "note": "Jung's own sentence names the coniunctio oppositorum; the vault reads the coniunctio as the syzygy's consummation, and the atlas keeps that link as an inference rather than Jung's word.",
-          "restates": true,
+          "note": "Jung's own sentence names the coniunctio oppositorum; the atlas keeps that link as an inference rather than Jung's word.",
           "cites": [
             {
               "work": "cw09ii",
@@ -257,8 +256,7 @@
             "id": "anima"
           },
           "basis": "inferred",
-          "note": "The vault reads Jung's feminine moon as the anima by inference; in this passage Jung does not name the anima.",
-          "restates": true,
+          "note": "In this passage Jung does not name the anima.",
           "cites": [
             {
               "work": "cw05",
@@ -274,8 +272,7 @@
             "id": "great-mother"
           },
           "basis": "inferred",
-          "note": "The vault reads the seed-guarding, soul-gathering moon as the Great Mother by inference; Jung does not name her in the passage.",
-          "restates": true,
+          "note": "Jung does not name her in the passage.",
           "cites": [
             {
               "work": "cw05",
@@ -307,8 +304,7 @@
             "id": "syzygy"
           },
           "basis": "inferred",
-          "note": "As for the sun: the coniunctio is read as the syzygy's consummation by the vault, not stated so by Jung in the cited sentence.",
-          "restates": true,
+          "note": "Not stated so by Jung in the cited sentence.",
           "cites": [
             {
               "work": "cw09ii",
@@ -385,7 +381,7 @@
       "order": 2,
       "modern": false,
       "name": "Terra",
-      "oneLine": "Terra — the atlas's home; the ground every presence in the field stands on",
+      "oneLine": "Terra — the ground every presence in the field stands on",
       "orbit": {
         "au": 1.00000261,
         "eccentricity": 0.01671123,
@@ -420,8 +416,7 @@
             "id": "great-mother"
           },
           "basis": "site",
-          "note": "The atlas names the Earth its home body; reading it as mother is an editorial gloss, not Jung's statement about the planet.",
-          "restates": true
+          "note": "The atlas names the Earth its home body; reading it as mother is a gloss, not Jung's statement about the planet."
         },
         {
           "target": {
@@ -429,8 +424,7 @@
             "id": "mother-goddess"
           },
           "basis": "site",
-          "note": "An editorial link to the field's mother-goddess figures; they are cultural figures, not the planet.",
-          "restates": true
+          "note": "A link to the field's mother-goddess figures; they are cultural figures, not the planet."
         }
       ],
       "quotes": [
@@ -533,8 +527,7 @@
             "id": "psychopomp"
           },
           "basis": "inferred",
-          "note": "The vault reads Mercurius as the redeeming psychopomp (CW13, printed p237) by inference; the cited passage is the planetary link only.",
-          "restates": true
+          "note": "Mercurius as the redeeming psychopomp (CW13, printed p237); the cited passage is the planetary link only."
         },
         {
           "target": {
@@ -542,8 +535,7 @@
             "id": "trickster"
           },
           "basis": "inferred",
-          "note": "The vault reads Mercurius as trickster by inference (CW13, printed pp203, 237); the cited passage is the planetary link only.",
-          "restates": true
+          "note": "Mercurius as trickster (CW13, printed pp203, 237); the cited passage is the planetary link only."
         }
       ],
       "quotes": [
@@ -1109,7 +1101,7 @@
             "id": "shadow"
           },
           "basis": "inferred",
-          "note": "The sol-niger note expresses the Shadow on Jung's authority.",
+          "note": "Sol niger is Jung's image of the shadow; he does not say so of the planet.",
           "cites": [
             {
               "work": "cw09ii",
@@ -1376,7 +1368,8 @@
             "id": "night-sea-journey"
           },
           "basis": "site",
-          "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
+          "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+          "restates": true
         }
       ],
       "quotes": [
@@ -1493,7 +1486,8 @@
             "id": "shadow"
           },
           "basis": "site",
-          "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies."
+          "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+          "restates": true
         }
       ],
       "quotes": [
