@@ -20,7 +20,8 @@
 .gv.instant { transition-duration: 0.01s; }
 .gv-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; cursor: grab; }
 .gv-canvas:active { cursor: grabbing; }
-.gv-canvas:focus-visible { outline: none; }
+/* keyboard focus: a thin, low ring inside the field (the canvas is the whole frame, so it sits inset) */
+.gv-canvas:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.32); outline-offset: -6px; }
 
 /* the globe is not drawn while the graph is up; these only keep stray overlays from the other mode out of sight */
 body.mode-graph .floats, body.mode-graph .float-lines, body.mode-graph .strip, body.mode-graph .hover-label { display: none !important; }
@@ -31,10 +32,15 @@ body.mode-graph #globe { pointer-events: none; }
   position: absolute; right: 28px; top: 65px; z-index: 3;
   display: flex; align-items: center; justify-content: flex-end; gap: 20px;
   font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.07em; color: var(--ink-3);
-  opacity: 0.78; transition: opacity 0.4s;
+  opacity: 0.78; transition: opacity 0.4s, right 0.6s var(--ease);
 }
 .gv-tools:hover, .gv-tools:focus-within { opacity: 1; }
 .gv-tools [hidden] { display: none !important; }
+/* the manifest card hangs from the right edge: the settings keep to its left, and under the reading column they are not there */
+@media (min-width: 761px) {
+  body[data-state="manifest"] .gv-tools { right: calc(34px + min(410px, 40vw) + 16px); }
+}
+body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-depth { display: inline-flex; align-items: center; gap: 9px; }
 .gvt-n { min-width: 4.4em; text-align: center; font-feature-settings: 'tnum'; color: var(--ink-2); }
 .gvt-step { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--hair); border-radius: 50%; color: var(--ink-2); font-size: 14px; line-height: 1; transition: color 0.3s, border-color 0.3s, opacity 0.3s; }
@@ -42,7 +48,9 @@ body.mode-graph #globe { pointer-events: none; }
 .gvt-step:disabled { opacity: 0.3; cursor: default; }
 .gvt-link { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
 .gvt-link:hover { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
-.gvt-earth { color: rgb(var(--core-rgb) / 0.88); }
+/* a 44 px target around the small word, drawn by a pseudo-element so the layout and the look stay as they are */
+.gvt-link { position: relative; }
+.gvt-link::before { content: ''; position: absolute; inset: -16px -14px; }
 .gvt-panel {
   position: absolute; top: 29px; right: 0; width: 218px; max-width: calc(100vw - 32px);
   max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain;
@@ -62,7 +70,15 @@ body.mode-graph #globe { pointer-events: none; }
 .gvt-filter { padding: 5px 7px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
 .gvt-filter[aria-pressed="true"] { color: var(--ink); background: rgb(var(--core-rgb) / 0.1); border-color: rgb(var(--core-rgb) / 0.3); }
 .gvt-settings[aria-expanded="true"] { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
-.gv-tools button:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 4px; }
+/* the forces: one quiet disclosure under the filters; its rows are the sliders */
+.gvt-forces > summary { display: block; margin: 0; cursor: pointer; list-style: none; transition: color 0.3s; }
+.gvt-forces > summary::-webkit-details-marker { display: none; }
+.gvt-forces > summary::after { content: '+'; float: right; color: var(--ink-3); }
+.gvt-forces[open] > summary::after { content: '−'; }
+.gvt-forces > summary:hover, .gvt-forces[open] > summary { color: var(--ink-2); }
+.gvt-forces > .gvt-row { margin-top: 14px; }
+.gvt-forces > .gvt-row + .gvt-row { margin-top: 12px; }
+.gv-tools button:focus-visible, .gvt-forces > summary:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 4px; }
 
 /* ── Earth ⇄ Graph: one pill beside the search glyph ───────────── */
 .mode-switch {
@@ -87,6 +103,7 @@ body.deep-open .mode-switch { opacity: 0; pointer-events: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .gv { transition-duration: 0.01s; }
+  .gv-tools { transition-duration: 0.01s; }
   .ms-thumb { transition-duration: 0.01s; }
 }
 .gvt-sky-note { margin: 0 0 9px; line-height: 1.4; max-width: 26ch; }

@@ -5,7 +5,7 @@
 // goes fully idle otherwise. Nothing here knows about the controller: it is told what to show (setTarget)
 // and reports what the person chose (GraphHandlers).
 import '../style/graph.css';
-import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type Simulation, type SimulationLinkDatum } from 'd3-force';
+import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type ForceLink, type ForceManyBody, type ForceX, type ForceY, type Simulation, type SimulationLinkDatum } from 'd3-force';
 import { quadtree, type Quadtree } from 'd3-quadtree';
 import { select } from 'd3-selection';
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from 'd3-zoom';
@@ -16,6 +16,8 @@ import type { TimeModel } from '../state/timeModel';
 import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, type GEdge, type GNode, type Graph, type Neighbourhood, type SkyAnchorSource } from './build';
 import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
+import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, linkDistance, linkStrength, type Forces } from './forces';
+import { clampZoom, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
 
 // outside the local lens the field recedes to a whisper that is still clickable
 const GHOST_VIS = 0.05;
@@ -118,8 +120,8 @@ const STYLE: Record<string, EdgeStyle> = {
 };
 const styleOf = (e: GEdge) => (e.kind === 'tie' ? `tie-${e.basis ?? 'site'}` : e.kind === 'sky' ? `sky-${e.basis ?? 'site'}` : e.kind);
 
-const MAX_K = 9;
-const MIN_K = 0.1;
+const MAX_K = MAX_ZOOM;
+const MIN_K = MIN_ZOOM;
 
 export class GraphView {
   readonly root: HTMLElement;
@@ -157,10 +159,8 @@ export class GraphView {
   private depth = 1;
   private dust = true;
   private ties: TieBasis[] = ['jung', 'inferred', 'site'];
-  /** link-space multiplier on every edge distance: >1 spreads the field, <1 gathers it */
-  private spreadK = 1.25;
-  /** gravity multiplier on repulsion and centring: <1 lets the field breathe, >1 pulls it together */
-  private gravityK = 0.8;
+  /** the layout's four forces, as the person set them (forces.ts) */
+  private forces: Forces = { ...DEFAULT_FORCES };
   private emph: Set<number> | null = null;
   private active = new Map<number, number>();
   private activeEdges: number[] = [];
@@ -170,9 +170,11 @@ export class GraphView {
 
   // interaction
   private hover = -1;
-  private press: { id: number; x: number; y: number; t: number; moved: boolean; pid: number } | null = null;
+  private press: { id: number; x: number; y: number; t: number; moved: boolean; pid: number; again: boolean } | null = null;
   private dragging = -1;
-  private lastClick: { id: number; x: number; y: number; t: number } | null = null;
+  private lastClick: (Click & { id: number }) | null = null;
+  /** the touches down on the canvas: a second one makes the gesture a pinch */
+  private touches = new Set<number>();
   private pulse = 0;
 
   // camera
@@ -195,7 +197,7 @@ export class GraphView {
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'gv-canvas';
     this.canvas.setAttribute('role', 'img');
-    this.canvas.setAttribute('aria-label', 'The archetypes, their forms and their occurrences, drawn as a graph. Click a node to focus it.');
+    this.canvas.setAttribute('aria-label', 'The archetypes, their forms and their occurrences, drawn as a graph. Click a node to focus it, double-click a node to open it on the Earth. Press 0 to reframe.');
     this.canvas.tabIndex = 0;
     const ctx = this.canvas.getContext('2d', { alpha: true });
     if (!ctx) throw new Error('2d canvas unavailable');
@@ -205,12 +207,9 @@ export class GraphView {
       onDepth: (d) => this.setDepth(d),
       onDust: (on) => this.setDust(on),
       onTies: (bases) => this.setTies(bases),
-      onSpread: (v) => this.setForces(v, this.gravityK),
-      onGravity: (v) => this.setForces(this.spreadK, v),
+      onForces: (f) => this.setForces(f),
       onSky: (on) => this.setSkyAnchors(on),
-      onFit: () => { this.autoFit = true; this.follow = 1.2; this.refit(0.8); this.wake(); },
-      onEarth: () => this.h_.onEarth(this.target.selected ?? this.target.subject),
-      onWhole: () => this.h_.onWhole(),
+      onFit: () => this.reframe(),
     });
     this.root = document.createElement('div');
     this.root.className = 'gv';
@@ -358,16 +357,18 @@ export class GraphView {
     const prevSelected = this.selected;
     this.selected = selected;
     this.emph = emph;
-    this.tools.setState({ ...this.toolState(), local: subject >= 0, hasSubject: subject >= 0 || selected >= 0 });
+    this.tools.setState({ ...this.toolState(), local: subject >= 0 });
     if (key === this.lastTargetKey) return;
     // a selected occurrence the shown set lacks brings its form in: that is a change of layout too
     const layoutChanged = layoutKey !== this.lastTargetKey.split('|').slice(0, 3).join('|') || this.active.size === 0 || (selected >= 0 && !this.active.has(selected));
+    // a new subject, or a selection that is new, is a new frame; filters and forces keep the person's camera
+    const reframe = subject !== this.subject || (selected >= 0 && selected !== prevSelected);
     this.lastTargetKey = key;
     this.subject = subject;
     this.mode = subject >= 0 ? 'local' : 'global';
     if (selected >= 0 && selected !== prevSelected) this.pulse = 1;
     if (this.visible) {
-      if (layoutChanged) this.rebuild(false);
+      if (layoutChanged) this.rebuild(false, reframe);
       else this.refreshLit();
       this.wake();
     } else {
@@ -429,7 +430,7 @@ export class GraphView {
   }
 
   private toolState(): ToolState {
-    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, hasSubject: this.subject >= 0 || this.selected >= 0, sky: this.sky.status, skyAsOf: this.sky.asOf, spread: this.spreadK, gravity: this.gravityK };
+    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, sky: this.sky.status, skyAsOf: this.sky.asOf, forces: this.forces };
   }
 
   private pushTools() {
@@ -515,17 +516,36 @@ export class GraphView {
     if (this.visible) { this.rebuild(false); this.wake(); }
   }
 
-  /** Reshape the layout: link space and gravity, exposed in the settings like Obsidian's forces. */
-  private setForces(spread: number, gravity: number) {
-    this.spreadK = spread;
-    this.gravityK = gravity;
+  /** The four forces, as the person set them: re-set on the live layout (the nodes keep their places) and reheated, so the change is seen settling. */
+  private setForces(f: Forces) {
+    this.forces = { ...f };
     this.pushTools();
     if (this.visible) {
-      this.rebuild(false);
-      // a changed shape should be seen settling into it
+      this.applyForces();
       this.sim.alpha(Math.max(this.sim.alpha(), 0.5));
       this.wake();
     }
+  }
+
+  /** The force functions of the current layout, read from the settings: built per layout, and re-set in place when a setting moves. */
+  private forceFns() {
+    const local = this.mode === 'local';
+    const f = this.forces;
+    return {
+      dist: (l: SimLink) => linkDistance(l.e, local, f),
+      str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f),
+      charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime, v.g.rank, local, f),
+      centre: centreStrength(local, f),
+      reach: chargeReach(f),
+    };
+  }
+
+  private applyForces() {
+    const fns = this.forceFns();
+    (this.sim.force('link') as ForceLink<VNode, SimLink> | undefined)?.distance(fns.dist).strength(fns.str);
+    (this.sim.force('charge') as ForceManyBody<VNode> | undefined)?.strength(fns.charge).distanceMax(fns.reach);
+    (this.sim.force('x') as ForceX<VNode> | undefined)?.strength(fns.centre);
+    (this.sim.force('y') as ForceY<VNode> | undefined)?.strength(fns.centre);
   }
 
   private computeActive(): Neighbourhood {
@@ -550,7 +570,7 @@ export class GraphView {
     return nb;
   }
 
-  private rebuild(first: boolean) {
+  private rebuild(first: boolean, reframe = first) {
     const g = this.g;
     const nb = this.computeActive();
     const wasOn = new Set<number>();
@@ -617,43 +637,16 @@ export class GraphView {
       links.push({ source: this.nodes[e.s], target: this.nodes[e.t], e, k });
     }
     const local = this.mode === 'local';
-    const sp = this.spreadK;
-    const kDist = (e: GEdge) => {
-      const f = (local ? 1.18 : 1) * sp;
-      switch (e.kind) {
-        case 'tie': return (e.basis === 'jung' ? 92 : e.basis === 'inferred' ? 118 : 148) * f;
-        case 'sky': return (e.basis === 'jung' ? 150 : e.basis === 'inferred' ? 190 : 240) * f;
-        case 'instance': return ((local ? 30 : 17) + 0) * Math.max(sp, 1);
-        case 'co': return 80 * f;
-        default: return 96 * f;
-      }
-    };
-    const kStr = (e: GEdge) => {
-      switch (e.kind) {
-        case 'tie': return e.basis === 'jung' ? 0.5 : e.basis === 'inferred' ? 0.26 : 0.12;
-        // the Self holds the centre: a tie to it is drawn, but never drags it from its place
-        case 'sky': return this.nodes[e.t].g.prime ? 0.004 : e.basis === 'jung' ? 0.2 : e.basis === 'inferred' ? 0.1 : 0.05;
-        case 'instance': return 0.85;
-        case 'co': return 0.05;
-        default: return 0.035;
-      }
-    };
+    const fns = this.forceFns();
     const n = this.simNodes.length;
-    const gr = (local ? 1.2 : 1) * this.gravityK;
-    const charge = (v: VNode) => {
-      if (v.g.kind === 'archetype') return -(v.g.prime ? 1500 : 880) * gr;
-      if (v.g.kind === 'family') return -(90 + 170 * v.g.rank) * gr;
-      if (v.g.kind === 'body') return -60 * this.gravityK;
-      return -13 * gr;
-    };
     const decay = n > 1500 ? 0.032 : n > 700 ? 0.026 : 0.0228;
     this.sim
       .nodes(this.simNodes)
-      .force('link', forceLink<VNode, SimLink>(links).distance((l) => kDist(l.e)).strength((l) => kStr(l.e)).iterations(1))
-      .force('charge', forceManyBody<VNode>().strength(charge).theta(0.95).distanceMax(780 * Math.max(1, this.spreadK)))
+      .force('link', forceLink<VNode, SimLink>(links).distance(fns.dist).strength(fns.str).iterations(1))
+      .force('charge', forceManyBody<VNode>().strength(fns.charge).theta(0.95).distanceMax(fns.reach))
       .force('collide', forceCollide<VNode>((v) => v.r * 1.12 + 2.2).strength(0.7))
-      .force('x', forceX<VNode>(0).strength((local ? 0 : 0.018) * this.gravityK))
-      .force('y', forceY<VNode>(0).strength((local ? 0 : 0.018) * this.gravityK))
+      .force('x', forceX<VNode>(0).strength(fns.centre))
+      .force('y', forceY<VNode>(0).strength(fns.centre))
       .force('heart', local ? null : (() => {
         const self = this.g.archetypeIds.map((i) => this.nodes[i]).find((v) => v.g.prime);
         return () => {
@@ -675,8 +668,14 @@ export class GraphView {
     this.qtStale = true;
     this.refreshLit();
     this.timeDirty = true;
-    this.autoFit = true;
-    this.follow = this.reduced ? 0.1 : 3.4;
+    if (reframe) {
+      // a new subject, or a first show: a new composition, framed afresh
+      this.autoFit = true;
+      this.follow = this.reduced ? 0.1 : 3.4;
+    } else if (this.autoFit) {
+      // a filter or a force reshapes the frame the person already has: ease to it, and leave their own camera alone
+      this.follow = Math.max(this.follow, 1.2);
+    }
     if (first) this.refit(0);
     this.dirty = true;
   }
@@ -712,7 +711,7 @@ export class GraphView {
   private loop = (ts: number) => {
     this.raf = 0;
     if (!this.visible) return;
-    const dt = Math.min(0.06, (ts - this.lastTs) / 1000 || 0.016);
+    const dt = frameSeconds(ts - this.lastTs);
     this.lastTs = ts;
     const busy = this.step(dt);
     if (this.dirty || busy) {
@@ -859,8 +858,22 @@ export class GraphView {
     }
   }
 
+  /** Frame what is shown afresh: the way back once the person has moved the camera (Reframe, the key 0). */
+  private reframe() {
+    this.autoFit = true;
+    this.follow = 1.2;
+    this.refit(0.8);
+    this.wake();
+  }
+
   private setCamera(x: number, y: number, k: number) {
-    this.t = zoomIdentity.translate(x, y).scale(k);
+    // no NaN, and no zoom past the extent, ever reaches the transform: a bad camera frames the subject instead
+    let c = { x, y, k };
+    if (!isCamera(c.x, c.y, c.k)) {
+      c = this.fitCamera();
+      if (!isCamera(c.x, c.y, c.k)) return;
+    }
+    this.t = zoomIdentity.translate(c.x, c.y).scale(clampZoom(c.k));
     // keep d3-zoom's own state in step so the next wheel / drag starts from here
     (this.canvas as unknown as { __zoom: ZoomTransform }).__zoom = this.t;
     this.dirty = true;
@@ -950,6 +963,11 @@ export class GraphView {
 
   private zoomFilter(ev: Event): boolean {
     if (ev.type === 'wheel') return true;
+    // a second finger makes it a pinch: a node the first finger was holding gives way to the camera
+    if (ev.type === 'touchstart' && (ev as TouchEvent).touches.length > 1) {
+      this.releasePress();
+      return true;
+    }
     if (this.press || this.dragging >= 0) return false;
     if (ev.type === 'dblclick') return false;
     const me = ev as MouseEvent;
@@ -966,13 +984,23 @@ export class GraphView {
 
   private onDown = (ev: PointerEvent) => {
     if (ev.button > 0) return;
+    if (ev.pointerType !== 'mouse') {
+      // a second finger on the canvas is a pinch: no node is grabbed for it
+      this.touches.add(ev.pointerId);
+      if (this.touches.size > 1) {
+        this.releasePress();
+        return;
+      }
+    }
     const p = this.local(ev);
-    const hit = this.pick(p.x, p.y, ev.pointerType !== 'mouse');
+    // the second click of a double-click is the first click's node, wherever the field has carried it since
+    const first = this.lastClick && isDoubleClick(this.lastClick, { x: p.x, y: p.y, t: performance.now() }) ? this.lastClick : null;
+    const hit = first ? this.nodes[first.id] : this.pick(p.x, p.y, ev.pointerType !== 'mouse');
     if (!hit) {
       this.press = null;
       return;
     }
-    this.press = { id: hit.id, x: p.x, y: p.y, t: performance.now(), moved: false, pid: ev.pointerId };
+    this.press = { id: hit.id, x: p.x, y: p.y, t: performance.now(), moved: false, pid: ev.pointerId, again: !!first };
     this.canvas.setPointerCapture?.(ev.pointerId);
   };
 
@@ -1011,31 +1039,44 @@ export class GraphView {
     }
   };
 
+  /** Let go of the node the pointer holds: a second finger has made the gesture a pinch. */
+  private releasePress() {
+    const press = this.press;
+    if (!press) return;
+    this.press = null;
+    this.canvas.releasePointerCapture?.(press.pid);
+    if (this.dragging >= 0) this.dropNode();
+  }
+
+  /** A dragged node is let go: free again, unless it holds a ring place or is the subject holding the neighbourhood together. */
+  private dropNode() {
+    const v = this.nodes[this.dragging];
+    this.dragging = -1;
+    const ring = this.ringPlace(v);
+    if (ring) { v.fx = ring.x; v.fy = ring.y; } else if (v.pinned) { v.fx = v.x; v.fy = v.y; } else { v.fx = v.fy = null; }
+    this.sim.alphaTarget(0);
+    this.wake();
+  }
+
   private onUp = (ev: PointerEvent) => {
+    this.touches.delete(ev.pointerId);
     const press = this.press;
     if (!press || ev.pointerId !== press.pid) return;
     this.press = null;
     this.canvas.releasePointerCapture?.(ev.pointerId);
     if (this.dragging >= 0) {
-      const v = this.nodes[this.dragging];
-      this.dragging = -1;
-      // released: free again, unless it is the subject holding the neighbourhood together
-      const ring = this.ringPlace(v);
-      if (ring) { v.fx = ring.x; v.fy = ring.y; } else if (v.pinned) { v.fx = v.x; v.fy = v.y; } else { v.fx = v.fy = null; }
-      this.sim.alphaTarget(0);
-      this.wake();
+      this.dropNode();
       return;
     }
     if (ev.type === 'pointercancel') return;
-    const now = performance.now();
-    const lc = this.lastClick;
-    const p = this.local(ev);
-    if (lc && lc.id === press.id && now - lc.t < 420 && Math.hypot(p.x - lc.x, p.y - lc.y) < 14) {
+    if (press.again) {
+      // the second click of a double-click: that node, on the Earth
       this.lastClick = null;
-      this.h_.onEarth(this.g.nodes[lc.id].key);
+      this.h_.onEarth(this.g.nodes[press.id].key);
       return;
     }
-    this.lastClick = { id: press.id, x: p.x, y: p.y, t: now };
+    const p = this.local(ev);
+    this.lastClick = { id: press.id, x: p.x, y: p.y, t: performance.now() };
     this.h_.onSelect(this.g.nodes[press.id].key);
   };
 
@@ -1058,6 +1099,7 @@ export class GraphView {
       case 'ArrowDown': this.panBy(0, -k); break;
       case '+': case '=': this.zoomBy(1.3); break;
       case '-': case '_': this.zoomBy(1 / 1.3); break;
+      case '0': this.reframe(); break;
       default: return;
     }
     ev.preventDefault();

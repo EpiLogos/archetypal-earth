@@ -101,13 +101,13 @@ try {
   const all = (await stats(page)).skyEdges;
   await openSettings(page);
   await page.getByRole('button', { name: 'Inferred', exact: true }).click();
-  await page.getByRole('button', { name: 'Site', exact: true }).click();
+  await page.getByRole('button', { name: 'Read here', exact: true }).click();
   const jungOnly = (await stats(page)).skyEdges;
   check(jungOnly < all && jungOnly > 0, 'with only Jung\u2019s relations on, only Jung\u2019s sky ties remain', `${all} → ${jungOnly}`);
   await page.getByRole('button', { name: 'Jung', exact: true }).click();
   const none = await stats(page);
   check(none.skyEdges === 0 && none.bodies === 10, 'with every relation off no strand remains, but the ring stays', `skyEdges=${none.skyEdges} bodies=${none.bodies}`);
-  for (const n of ['Jung', 'Inferred', 'Site']) await page.getByRole('button', { name: n, exact: true }).click();
+  for (const n of ['Jung', 'Inferred', 'Read here']) await page.getByRole('button', { name: n, exact: true }).click();
   check((await stats(page)).skyEdges === all, 'turning them back restores the strands');
   await page.keyboard.press('Escape');
 
