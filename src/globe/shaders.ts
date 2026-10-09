@@ -16,7 +16,29 @@ float timeFlare(float u) {
   float d = uCursor - u;
   return uTimeOn * smoothstep(0.0, uRamp * 0.5, d) * exp(-max(d, 0.0) / (uRamp * 2.6));
 }
+// T2: a standing occurrence (rel >= 1.55: the reading's own) is never time-gated. Mirrors standingWeight in src/data/time.ts.
+float standingWeight(float rel) {
+  return smoothstep(1.52, 1.55, rel);
+}
+// Mirrors effectiveVisibility(timeVisibility(u), rel) in src/data/time.ts.
+float timeVisRel(float u, float rel) {
+  return mix(timeVis(u), 1.0, standingWeight(rel));
+}
+// T1 lifecycle, a function of d alone. Mirrors presenceCurve in src/data/time.ts (keep the constants identical).
+// x: arrive (0 before the date .. 1), y: leave (0 present .. 1 dissolved), z: emergence ring amplitude, w: ring radius 0..1
+vec4 presenceCurve(float u, float rel) {
+  float d = uCursor - u;
+  float on = uTimeOn * (1.0 - standingWeight(rel));
+  float e = uRamp * 1.5;
+  float arrive = smoothstep(0.0, e, d);
+  float leave = smoothstep(uTrail * 0.55, uTrail, d);
+  float t = clamp(d / e, 0.0, 1.0);
+  float ring = smoothstep(0.0, 0.3, t) * pow(1.0 - t, 1.5);
+  float ringR = 1.0 - pow(1.0 - t, 3.0);
+  return vec4(mix(1.0, arrive, on), mix(0.0, leave, on), ring * on, ringR);
+}
 `;
+
 
 // Emphasis semantics (aRel): 1 normal · 0.07 receded · 1.5 related · 2.4 selected
 export const REL_GLSL = /* glsl */ `
@@ -31,13 +53,21 @@ float relSize(float rel) {
 }
 `;
 
-// ── presences: the live points ───────────────────────────────────────────
-// The visual hierarchy of the globe, strictest first:
-//   live presence  — sharp luminous core + tight halo: the brightest thing on the disc
-//   not-live       — a small hollow, desaturated ring (outside the time window, or
-//                    unrelated to the focus): present, but plainly not selectable
-//   everything decorative (density field, aura, stars, terrain) stays below the
-//   dimmest live presence and has no point-like form.
+// ── presences: the points, and the four states a node can be in ──────────
+// Two axes, drawn as separate terms; temporal absence wins over attentional absence.
+//
+//                         in focus (aRel ~ 1)             receded (aRel ~ 0.07)
+//   inside the window     LIVE: sharp core, tight halo    ATTENTIONAL ABSENCE: small hollow
+//                                                         desaturated ring (the look it always had)
+//   NOT YET (d < 0)       TEMPORAL ABSENCE: 1.5 px cool pinprick, alpha 0.10 (focus does not matter)
+//   AFTER (dissolved)     TEMPORAL ABSENCE: 2 px warm-grey dot, alpha 0.16 (focus does not matter)
+//
+// Emergence (0 <= d < 1.5 ramp): the pinprick blooms to live while one soft ring expands from the core.
+// Dissolution (0.55 trail <= d < trail): the live core contracts and warms into the after-dot.
+// Standing occurrences (aRel >= 1.55, T2) are always the in-focus LIVE state.
+// Everything is a function of d and aRel alone, so scrubbing either way retraces the same curve.
+// uCalm (reduced motion): no emergence ring and no flare; the states still fade.
+// Everything decorative (density field, aura, stars, terrain) stays below the dimmest live presence.
 export const PRESENCE_VERT = /* glsl */ `
 attribute vec3 aDir;
 attribute vec3 aColor;
@@ -49,50 +79,72 @@ uniform vec2 uRes;
 uniform float uPx;
 uniform float uSizeK;
 uniform float uTime;
+uniform float uCalm;
 uniform vec3 uFocusCore;
 uniform float uFocusMix;
 varying vec2 vC;
 varying vec3 vCol;
-varying float vA;
-varying float vLive;
-varying float vPrec;
 varying float vHalf;
-varying float vPx;
+varying float vPrec;
 varying float vSel;
+varying float vFocus;
+varying float vAlpha;
+varying float vArr;
+varying float vLeave;
+varying float vPin;
+varying float vAfter;
+varying float vRing;
+varying float vRingPx;
 ${TIME_GLSL}
 ${REL_GLSL}
 void main() {
   float prec = aMeta.z;
-  float vis = timeVis(aMeta.x);
-  float flare = timeFlare(aMeta.x);
+  float calm = 1.0 - uCalm;
+  float flare = timeFlare(aMeta.x) * calm;
   float horizon = 1.0 / uCamDist;
   float face = smoothstep(horizon - 0.02, horizon + 0.09, dot(aDir, uCamDir));
-  // live = inside the time window AND part of what is in focus (same rule as the CPU pick)
-  float live = smoothstep(0.35, 0.65, vis) * smoothstep(0.42, 0.78, aRel);
-  // not-live ghosts are quieter still when the time window has passed them by
-  float ghostA = mix(0.2, 0.32, smoothstep(0.2, 0.8, vis));
-  float a = face * mix(ghostA, 1.0, live);
-  if (prec > 2.5 || a < 0.004) {
+  // T1: the node's own lifecycle from its date (T2 inside presenceCurve: standing occurrences are never gated)
+  vec4 pc = presenceCurve(aMeta.x, aRel);
+  float arrive = pc.x;
+  float leave = pc.y;
+  float ringAmp = pc.z * calm;
+  float ringPx = mix(3.3, 12.0, pc.w);
+  float present = arrive * (1.0 - leave);
+  // T3: attentional focus is a separate axis (the receded blend keeps its old alpha)
+  float focus = smoothstep(0.42, 0.78, aRel);
+  float fl = 1.0 + 0.5 * flare;
+  float alpha = face * fl * mix(0.32, 1.0, focus) * present;
+  float pinW = face * fl * (1.0 - arrive);
+  float aftW = face * fl * leave;
+  float ringW = face * fl * ringAmp;
+  float total = alpha + 0.1 * pinW + 0.16 * aftW + 0.6 * ringW;
+  if (prec > 2.5 || total < 0.004) {
     gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
     return;
   }
   float emph = max(aRel - 1.0, 0.0);
-  // quad half-extent in css px: wide enough for the halo and the uncertainty ring
+  // quad half-extent in css px: wide enough for the halo and the uncertainty ring, and for the emergence ring
   float liveHalf = (prec < 0.5 ? 17.0 : (prec < 1.5 ? 22.0 : 30.0)) * (1.0 + 0.2 * emph) + 10.0 * flare;
-  float hx = mix(8.0, liveHalf, live) * uSizeK;
+  float hx = mix(8.0, liveHalf, present * focus) * uSizeK;
+  if (ringAmp > 0.0) hx = max(hx, ringPx + 4.0);
   vec4 clip = projectionMatrix * viewMatrix * vec4(aDir * 1.003, 1.0);
   clip.xy += position.xy * (2.0 * hx * uPx / uRes) * clip.w;
   gl_Position = clip;
   vC = position.xy;
   vHalf = hx;
-  vPx = uPx;
   float luma = dot(aColor, vec3(0.3, 0.59, 0.11));
   float sat = smoothstep(0.2, 0.95, aRel);
   vec3 c = mix(vec3(luma) * 0.7, mix(vec3(luma), aColor, 1.35), sat);
   c = mix(c, uFocusCore, uFocusMix * 0.3 * clamp(aRel - 1.0, 0.0, 1.0));
   vCol = c;
-  vA = a * (1.0 + 0.5 * flare);
-  vLive = live;
+  vFocus = focus;
+  vAlpha = alpha;
+  vArr = arrive;
+  vLeave = leave;
+  vPin = pinW;
+  vAfter = aftW;
+  vRing = ringW;
+  vRingPx = ringPx;
   vPrec = prec;
   vSel = clamp(aRel - 1.6, 0.0, 1.0);
 }
@@ -101,34 +153,58 @@ void main() {
 export const PRESENCE_FRAG = /* glsl */ `
 varying vec2 vC;
 varying vec3 vCol;
-varying float vA;
-varying float vLive;
-varying float vPrec;
 varying float vHalf;
-varying float vPx;
+varying float vPrec;
 varying float vSel;
+varying float vFocus;
+varying float vAlpha;
+varying float vArr;
+varying float vLeave;
+varying float vPin;
+varying float vAfter;
+varying float vRing;
+varying float vRingPx;
 void main() {
   float rPx = length(vC) * vHalf;           // css px from the centre
   if (rPx > vHalf) discard;
   float aa = 0.7;
+  float luma = dot(vCol, vec3(0.3, 0.59, 0.11));
+  vec3 cool = vec3(0.62, 0.7, 0.86);
+  vec3 warm = vec3(0.7, 0.56, 0.4);      // the remembered tone
 
-  // ── live: a crisp core and a tight halo
+  // ── live (and the receded blend): a crisp core and a tight halo. The core grows from a pinprick as the
+  // node arrives, and contracts and warms into the remembered dot as it dissolves.
   float rc = (vPrec < 0.5 ? 3.3 : (vPrec < 1.5 ? 3.0 : 2.7)) * (1.0 + 0.18 * vSel);
-  float core = 1.0 - smoothstep(rc - aa, rc + aa, rPx);
-  float halo = exp(-pow(rPx / (rc * 1.9), 2.0)) * 0.24;
+  float rcL = mix(mix(1.5, rc, vArr), 2.0, vLeave);
+  float core = 1.0 - smoothstep(rcL - aa, rcL + aa, rPx);
+  float halo = exp(-pow(rPx / (rcL * 1.9), 2.0)) * 0.24;
   // imprecise places carry a faint ring of uncertainty around the sharp core
   float ur = vPrec < 0.5 ? 0.0 : (vPrec < 1.5 ? 12.0 : 19.0);
   float unc = ur > 0.0 ? exp(-pow((rPx - ur) / 1.15, 2.0)) * 0.2 + (1.0 - smoothstep(0.0, ur, rPx)) * 0.035 : 0.0;
-  vec3 hot = mix(vCol, vec3(1.0), 0.6);
-  vec3 live = hot * core + vCol * (halo + unc);
+  vec3 tone = mix(vCol, warm, vLeave * 0.7);
+  vec3 hot = mix(tone, vec3(1.0), 0.6);
+  vec3 live = hot * core + tone * (halo + unc);
 
-  // ── not live: a small hollow ring, drained of colour
+  // ── attentionally receded: a small hollow ring, drained of colour (unchanged)
   float gr = 4.4;
   float ring = exp(-pow((rPx - gr) / 0.85, 2.0));
-  vec3 gcol = mix(vec3(dot(vCol, vec3(0.3, 0.59, 0.11))), vec3(0.62, 0.7, 0.86), 0.5);
+  vec3 gcol = mix(vec3(luma), cool, 0.5);
   vec3 ghost = gcol * ring * 0.9;
 
-  vec3 rgb = mix(ghost, live, vLive) * vA;
+  vec3 rgb = mix(ghost, live, vFocus) * vAlpha;
+
+  // ── NOT YET: temporal absence before the date, a 1.5 px cool pinprick
+  float pinD = 1.0 - smoothstep(0.6, 1.9, rPx);
+  rgb += mix(vec3(luma), vec3(0.5, 0.64, 1.0), 0.85) * pinD * 0.1 * vPin;
+
+  // ── AFTER: temporal absence once dissolved, a 2 px warm-grey dot ("it has been")
+  float afterD = 1.0 - smoothstep(1.2, 2.6, rPx);
+  rgb += warm * afterD * 0.16 * vAfter;
+
+  // ── emergence: one soft ring expanding outward from the core
+  float er = exp(-pow((rPx - vRingPx) / 1.1, 2.0));
+  rgb += mix(vCol, vec3(1.0), 0.4) * er * 0.6 * vRing;
+
   float edge = 1.0 - smoothstep(0.82, 1.0, length(vC));
   gl_FragColor = vec4(rgb * edge, 1.0);
 }
@@ -148,7 +224,7 @@ ${TIME_GLSL}
 ${REL_GLSL}
 void main() {
   float prec = aMeta.z;
-  float a = timeVis(aMeta.x) * relDensity(aRel) * (prec < 0.5 ? 1.0 : (prec < 1.5 ? 0.55 : 0.3));
+  float a = timeVisRel(aMeta.x, aRel) * relDensity(aRel) * (prec < 0.5 ? 1.0 : (prec < 1.5 ? 0.55 : 0.3));
   if (prec > 2.5 || a < 0.004) {
     gl_Position = vec4(3.0, 3.0, 3.0, 1.0);
     return;
