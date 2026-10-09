@@ -522,6 +522,8 @@ export class Controller {
       document.body.classList.remove('deep-open', 'thread-inspecting');
       // the Red Book holds no shift of its own: Aion's card offset does not carry over
       this.syncShift();
+      // a mode that returns early must still let the sky go (before its own flight, which then wins)
+      this.syncSky(prev, next, first, false);
       this.redbook.show(next.redbook);
       return;
     }
@@ -547,6 +549,7 @@ export class Controller {
       this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
       this.engine.rig.setShift(next.history.selection ? -0.18 : 0, 0);
+      this.syncSky(prev, next, first, false);
       this.aion.show(next.history);
       return;
     }
@@ -584,7 +587,8 @@ export class Controller {
     this.measureLabel();
     this.syncGraph();
     // a view that framed itself (or a thread's walk) keeps its flight: the sky's descent must not overwrite it
-    this.syncSky(prev, next, first, !sameView || !!next.trail);
+    // the graph starts no framing flight, so a graph arrival still needs the plain descent
+    this.syncSky(prev, next, first, (!sameView && !this.graphMode) || !!next.trail);
   }
 
   // ── the sky ───────────────────────────────────────────────────────────
