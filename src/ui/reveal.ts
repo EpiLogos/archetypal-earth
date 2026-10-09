@@ -2,7 +2,7 @@
 import type { Model } from '../data/model';
 import { occurrenceImage } from '../data/model';
 import { symbolReading } from './symbol-reading';
-import { clear, el, plate } from './dom';
+import { clear, el, onReadGesture, plate } from './dom';
 import { clipText, jungLine, placeLine } from './format';
 import { glyphOf, type SkyTies } from '../sky/ties';
 import type { BodyKey } from '../types/sky';
@@ -35,6 +35,7 @@ export class Reveal {
       this.foot,
     ]);
     this.root.inert = true;
+    onReadGesture(this.root, () => this.h.onDeep());
     parent.append(this.root);
   }
 
