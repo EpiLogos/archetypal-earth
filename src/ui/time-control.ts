@@ -7,6 +7,10 @@ import { el } from './dom';
 
 const PLAY_ICON = '<svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 1.8v8.4L10.2 6z" fill="currentColor"/></svg>';
 const PAUSE_ICON = '<svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg>';
+/** The clear space (px) an era name keeps from the one drawn before it on the track. */
+const ERA_GAP = 6;
+
+interface EraSpan { el: HTMLElement; name: string; a: number; b: number; skipped: boolean }
 
 export class TimeControl {
   readonly root: HTMLElement;
@@ -17,6 +21,7 @@ export class TimeControl {
   private play: HTMLButtonElement;
   private canvas: HTMLCanvasElement;
   private eras: HTMLElement;
+  private eraSpans: EraSpan[] = [];
   private fromU = 0;
   private toU = 1;
   private subjectIndices: number[] | null = null;
@@ -39,11 +44,11 @@ export class TimeControl {
     this.band = el('div', { class: 't-band' });
     this.eras = el('div', { class: 't-eras', 'aria-hidden': 'true' });
     const sc = model.scale;
-    this.renderEras();
     this.track = el('div', {
       class: 't-track', role: 'slider', tabindex: 0, 'aria-label': 'Time',
       'aria-valuemin': Math.round(sc.yearMin), 'aria-valuemax': Math.round(sc.yearMax), 'aria-valuetext': 'All time',
     }, [this.canvas, el('div', { class: 't-line' }), this.band, this.handle, this.eras]);
+    this.renderEras();
     this.readout = el('button', { class: 't-readout', type: 'button', 'aria-label': 'Show all time', title: 'All time', onclick: () => this.time.setAll() }) as HTMLButtonElement;
     this.play = el('button', { class: 't-play', type: 'button', 'aria-label': 'Play history', title: 'Play history', onclick: () => this.togglePlay() }) as HTMLButtonElement;
     this.play.innerHTML = PLAY_ICON;
@@ -56,7 +61,9 @@ export class TimeControl {
     this.track.addEventListener('pointercancel', this.onUp);
     this.track.addEventListener('keydown', this.onKey);
     time.subscribe(() => this.schedule());
-    new ResizeObserver(() => this.drawDensity()).observe(this.track);
+    new ResizeObserver(() => { this.drawDensity(); this.layoutEras(); }).observe(this.track);
+    // the names are measured, so lay them out again once the label face has loaded
+    document.fonts.ready.then(() => this.layoutEras());
     this.render();
   }
 
@@ -100,13 +107,44 @@ export class TimeControl {
 
   private renderEras() {
     this.eras.replaceChildren();
+    this.eraSpans = [];
     for (const e of this.model.scale.eras) {
       const a = Math.max(this.fromU, this.model.scale.toU(e.from));
       const b = Math.min(this.toU, this.model.scale.toU(e.to));
       if (b <= a) continue;
-      this.eras.append(el('span', { class: 't-era', style: `left:${this.position((a + b) / 2) * 100}%`, text: e.name }));
+      const name = el('span', { class: 't-era', style: `left:${this.position((a + b) / 2) * 100}%`, text: e.name });
+      this.eras.append(name);
+      this.eraSpans.push({ el: name, name: e.name, a, b, skipped: false });
       if (a > this.fromU) this.eras.append(el('span', { class: 't-tick', style: `left:${this.position(a) * 100}%` }));
     }
+    this.layoutEras();
+  }
+
+  /**
+   * Draw an era name only if its box clears the last drawn name by ERA_GAP px: the first always stands, a later one
+   * that would crowd it yields. A name the CSS hides (a narrow track) counts as skipped, so the cursor still speaks it.
+   * Runs again on every resize, and does nothing until the track has a width.
+   */
+  private layoutEras() {
+    const w = this.track.clientWidth;
+    if (!w) return;
+    // measure every name, drawn or not: a name skipped last time has no width while it is hidden
+    for (const s of this.eraSpans) s.el.classList.remove('is-skip');
+    let right: number | null = null;
+    for (const s of this.eraSpans) {
+      const width = s.el.offsetWidth;
+      const left = this.position((s.a + s.b) / 2) * w - width / 2;
+      s.skipped = width === 0 || (right !== null && left < right + ERA_GAP);
+      s.el.classList.toggle('is-skip', s.skipped);
+      if (!s.skipped) right = left + width;
+    }
+    this.schedule();
+  }
+
+  /** The cursor's year, with its era's name when that era's label is not drawn, so the name is still spoken. */
+  private spokenYear(u: number, year: number): string {
+    const era = this.eraSpans.find((s) => u >= s.a && u <= s.b);
+    return era?.skipped ? `${formatYear(year)}, ${era.name}` : formatYear(year);
   }
 
   private density(subset: number[] | null): Float32Array {
@@ -216,7 +254,7 @@ export class TimeControl {
     const year = sc.fromU(u);
     const label = on ? formatYear(year) : 'All time';
     if (this.readout.textContent !== label) this.readout.textContent = label;
-    this.track.setAttribute('aria-valuetext', on ? formatYear(year) : 'All time');
+    this.track.setAttribute('aria-valuetext', on ? this.spokenYear(u, year) : 'All time');
     this.track.setAttribute('aria-valuemin', String(Math.round(sc.fromU(this.fromU))));
     this.track.setAttribute('aria-valuemax', String(Math.round(sc.fromU(this.toU))));
     this.track.setAttribute('aria-valuenow', String(Math.round(year)));

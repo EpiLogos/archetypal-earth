@@ -79,12 +79,16 @@ body.hovering .globe-canvas { cursor: pointer; }
 .sg-key { font-feature-settings: 'tnum'; }
 body.search-open .search-glyph { opacity: 0; pointer-events: none; }
 
-/* ── credit: a small ⓘ, quiet until hovered ─────────────────────────── */
-.credit { position: fixed; left: 24px; bottom: 22px; z-index: 8; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
+/* ── credit: a small ⓘ, quiet until hovered or focused; its text and issue link rise above it ───── */
+.credit { position: fixed; left: 24px; bottom: 22px; z-index: 13; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
 .credit-i { width: 17px; height: 17px; display: grid; place-items: center; border: 1px solid rgb(var(--core-rgb) / 0.3); border-radius: 50%; font-size: 10px; font-weight: 500; line-height: 1; opacity: 0.45; transition: opacity 0.3s; cursor: default; }
-.credit-t { opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.4s var(--ease); pointer-events: none; white-space: nowrap; }
+/* hidden by opacity, not display, so the link stays in the Tab order; out of the flex row, stacked above the ⓘ */
+.credit-t, .credit-link { position: absolute; left: 0; padding: 4px 0; line-height: 13px; white-space: nowrap; opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.4s var(--ease); pointer-events: none; }
+.credit-t { bottom: 100%; }
+.credit-link { bottom: calc(100% + 21px); }
+.credit-sep { display: none; }
 .credit:hover .credit-i, .credit:focus-within .credit-i { opacity: 0.9; }
-.credit:hover .credit-t, .credit:focus-within .credit-t { opacity: 0.85; transform: none; pointer-events: auto; }
+.credit:hover .credit-t, .credit:focus-within .credit-t, .credit:hover .credit-link, .credit:focus-within .credit-link { opacity: 0.85; transform: none; pointer-events: auto; }
 .credit a { text-decoration: none; border-bottom: 1px solid rgb(var(--core-rgb) / 0.25); }
 body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointer-events: none; }
 
@@ -303,6 +307,7 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .t-dens { position: absolute; left: 0; right: 0; top: 8px; width: 100%; height: 14px; pointer-events: none; }
 .t-eras { position: absolute; inset: 0; pointer-events: none; }
 .t-era { position: absolute; top: 31px; transform: translateX(-50%); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); opacity: 0.85; white-space: nowrap; }
+.t-era.is-skip { display: none; }
 .t-tick { position: absolute; top: 19px; width: 1px; height: 9px; background: rgb(var(--core-rgb) / 0.32); }
 .t-band { position: absolute; top: 21px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.55)); pointer-events: none; opacity: 0; }
 .t-handle { position: absolute; top: 23px; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--core); box-shadow: 0 0 0 5px rgb(var(--core-rgb) / 0.14), 0 0 22px 3px rgb(var(--core-rgb) / 0.75); pointer-events: none; opacity: 0; transition: box-shadow 0.3s; }
