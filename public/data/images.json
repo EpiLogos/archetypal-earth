@@ -4093,6 +4093,54 @@
    "license": "Public domain",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sotades_Painter_-_Red-Figure_Rhyton_-_Walters_482050_-_Detail_A.jpg",
    "_file": "File:Sotades Painter - Red-Figure Rhyton - Walters 482050 - Detail A.jpg"
+  },
+  "abraxas": {
+   "src": "img/families/abraxas.jpg",
+   "thumb": "img/families/abraxas.thumb.jpg",
+   "width": 1280,
+   "height": 1542,
+   "tone": "#5f5f54",
+   "title": "Abraxas I1679",
+   "credit": "Jakob Faurvig",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abraxas_I1679.jpg",
+   "_file": "File:Abraxas I1679.jpg"
+  },
+  "izdubar": {
+   "src": "img/families/izdubar.jpg",
+   "thumb": "img/families/izdubar.thumb.jpg",
+   "width": 1280,
+   "height": 1857,
+   "tone": "#bababa",
+   "title": "ASSYRIE et BABYLONIE - ASSYRIA and BABYLONIA Public domain book illustration from French encyclopedia Larousse du XXème siècle 1932",
+   "credit": "EN NOIR & BLANC",
+   "license": "CC0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:ASSYRIE_et_BABYLONIE_-_ASSYRIA_and_BABYLONIA_Public_domain_book_illustration_from_French_encyclopedia_Larousse_du_XX%C3%A8me_si%C3%A8cle_1932.jpg",
+   "_file": "File:ASSYRIE et BABYLONIE - ASSYRIA and BABYLONIA Public domain book illustration from French encyclopedia Larousse du XXème siècle 1932.jpg"
+  },
+  "salome": {
+   "src": "img/families/salome.jpg",
+   "thumb": "img/families/salome.thumb.jpg",
+   "width": 1280,
+   "height": 1892,
+   "tone": "#382110",
+   "title": "Salome label QS:Les,\"Salomé tatuada\" label QS:Lfr,\"Salomé\" label QS:Lpt,\"Salomé\" label QS:Len,\"Salome\" label QS:Lvi,\"Salome\" label QS:Lko,\"문신을 한 살로메\" label QS:L",
+   "credit": "Gustave Moreau",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gustave_Moreau_Salom%C3%A9_1876.jpg",
+   "_file": "File:Gustave Moreau Salomé 1876.jpg"
+  },
+  "siegfried": {
+   "src": "img/families/siegfried.jpg",
+   "thumb": "img/families/siegfried.thumb.jpg",
+   "width": 1280,
+   "height": 1707,
+   "tone": "#83694d",
+   "title": "Sigurd portal",
+   "credit": "mararie",
+   "license": "CC BY-SA 2.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sigurd_portal.jpg",
+   "_file": "File:Sigurd portal.jpg"
   }
  },
  "occurrences": {
