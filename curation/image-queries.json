@@ -3948,6 +3948,69 @@
      "greening"
     ]
    ]
+  },
+  "abraxas": {
+   "queries": [
+    "Abraxas gem engraved antique",
+    "Abraxas gemstone Basilides",
+    "abraxas gem cock serpent whip"
+   ],
+   "require": [
+    [
+     "abraxas"
+    ]
+   ]
+  },
+  "izdubar": {
+   "queries": [
+    "Gilgamesh dominating a lion relief",
+    "Gilgamesh Enkidu cylinder seal",
+    "Gilgamesh Louvre Assyrian relief"
+   ],
+   "require": [
+    [
+     "gilgamesh",
+     "izdubar"
+    ]
+   ]
+  },
+  "pleroma": {
+   "queries": [
+    "pleroma gnostic diagram",
+    "Valentinian pleroma illustration"
+   ],
+   "require": [
+    [
+     "pleroma"
+    ]
+   ]
+  },
+  "salome": {
+   "queries": [
+    "Salome painting Gustave Moreau",
+    "Salome with the head of John the Baptist painting",
+    "Salome Beardsley drawing"
+   ],
+   "require": [
+    [
+     "salome"
+    ]
+   ]
+  },
+  "siegfried": {
+   "queries": [
+    "Sigurd slaying Fafnir carving",
+    "Siegfried Fafnir illustration",
+    "Sigurd portal stave church"
+   ],
+   "require": [
+    [
+     "siegfried",
+     "sigurd",
+     "fafnir",
+     "dragon"
+    ]
+   ]
   }
  },
  "occurrences": {
