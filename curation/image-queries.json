@@ -4013,16 +4013,6 @@
    ],
    "skip": "rejected on visual review: whole annotated scroll thumbnail; not the specific panel"
   },
-  "ascent-descent-ripley-scrowle-england-16c": {
-   "queries": [
-    "Ripley Scroll alchemical"
-   ],
-   "require": [
-    [
-     "ripley"
-    ]
-   ]
-  },
   "golden-flower-ripley-scrowle-1588": {
    "queries": [
     "Ripley Scroll alchemical"
