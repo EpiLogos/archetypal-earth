@@ -38,8 +38,16 @@ try {
     check(s.hash === '#/redbook' && s.redbook, 'the Red Book switch opens the Red Book from the plain world', `hash "${s.hash}", redbook visible ${s.redbook}`);
     check(!s.aion, 'and the Aion panel stays down');
     // the null landing centres The Self: the folio its genesis row names (the mandala), not the first folio
-    const landing = await page.evaluate(() => ({ name: document.querySelector('.redbook .aion-card .rv-name')?.textContent, progress: document.querySelector('.rb-progress')?.textContent }));
-    check(landing.progress === '24 / 37' && /mandala of the four cardinal figures/i.test(landing.name ?? ''), 'the null landing centres The Self (the mandala folio)', `"${landing.name}", ${landing.progress}`);
+    // the expected folio is read from the data, not written in: the stop of the genesis row that targets archetype 'self'
+    const expected = await page.evaluate(async () => {
+      const [rb, field] = await Promise.all([fetch('/data/redbook.json').then((r) => r.json()), fetch('/data/field.json').then((r) => r.json())]);
+      const row = rb.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
+      const i = rb.stops.findIndex((s) => s.id === row?.stopId);
+      const occ = field.occurrences.find((o) => o.id === row?.stopId);
+      return { progress: i < 0 ? null : `${i + 1} / ${rb.stops.length}`, title: occ?.title ?? null };
+    });
+    const landing = await page.evaluate(() => ({ name: document.querySelector('.redbook .rv-name')?.textContent, progress: document.querySelector('.rb-progress')?.textContent }));
+    check(!!expected.progress && landing.progress === expected.progress && landing.name === expected.title, 'the null landing centres The Self (its genesis-row folio)', `"${landing.name}", ${landing.progress}; expected "${expected.title}", ${expected.progress}`);
     await page.keyboard.press('Escape');
     await wait(page, () => !location.hash.startsWith('#/redbook'));
     await page.waitForTimeout(600);
