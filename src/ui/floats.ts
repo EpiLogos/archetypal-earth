@@ -171,8 +171,11 @@ export class Floats {
           const ox = (l.w + o.w) / 2 - Math.abs(t.cx - (o.x + o.w / 2));
           const oy = (l.h + o.h) / 2 - Math.abs(t.cy - (o.y + o.h / 2));
           if (ox > 0 && oy > 0) {
-            if (oy < ox) t.cy += (t.cy < o.y + o.h / 2 ? -1 : 1) * oy;
-            else t.cx += (t.cx < o.x + o.w / 2 ? -1 : 1) * ox;
+            const sideX = t.cx + (t.cx < o.x + o.w / 2 ? -1 : 1) * ox;
+            // a sideways push the screen edge would undo (a phone, where the label spans the width) goes down instead
+            const fitsX = sideX - l.w / 2 >= marginX && sideX + l.w / 2 <= W - marginX;
+            if (oy < ox || !fitsX) t.cy += (t.cy < o.y + o.h / 2 && fitsX ? -1 : 1) * (fitsX ? oy : (o.y + o.h + l.h / 2) - t.cy);
+            else t.cx = sideX;
           }
         }
         clampT(l, t);
