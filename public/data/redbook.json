@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T22:18:46.123Z",
+  "generatedAt": "2026-10-10T22:45:22.003Z",
   "licence": {
     "plates": "The facsimile plates are copyrighted pages of the Norton/Liber Novus facsimile (W. W. Norton, 2009). The site’s Commons-only provenance law applies to anything shipped or committed: the plates therefore never enter git and never enter dist. They are referenced as LOCAL-ONLY runtime assets, read at runtime from the owner’s own vault copy over a dev-server-only route; any served build degrades gracefully to a cited note.",
     "text": "The mode’s translated text comes from the vault’s Red Book harvest (Reader-edition English, folio/ms/pdf-cited) and follows the vault’s quotation law; translation quotes are cited to the Reader pagination as the vault cites them.",

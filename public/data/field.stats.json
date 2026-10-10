@@ -570,19 +570,19 @@
         "sync.md",
         "vonzfranz-number-time.md"
       ],
-      "key": "3a45fdabb3ddb446",
+      "key": "3aa20930e8ddec20",
       "words": 50976,
       "cached": true
     },
-    "stringsChanged": 170,
-    "changes": 562,
+    "stringsChanged": 167,
+    "changes": 558,
     "byKind": {
-      "join": 520,
+      "join": 515,
       "curated": 29,
-      "reflow": 12,
+      "reflow": 13,
       "hyphen-break": 1
     },
-    "unique": 394,
+    "unique": 390,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1747,15 +1747,6 @@
         ]
       },
       {
-        "kind": "join",
-        "before": "aqua fortis,",
-        "after": "aquafortis,",
-        "count": 1,
-        "where": [
-          "occ:dragon-swallows-own-tail-museum-hermeticum-1625.body[1]"
-        ]
-      },
-      {
         "kind": "curated",
         "before": "ArdvI Sura",
         "after": "Ardvi Sura",
@@ -2117,15 +2108,6 @@
       },
       {
         "kind": "join",
-        "before": "dew falls",
-        "after": "dewfalls",
-        "count": 1,
-        "where": [
-          "occ:dew-gedeonis-purification-rosarium-1550.body[0]"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "diam eter,",
         "after": "diameter,",
         "count": 1,
@@ -2468,15 +2450,6 @@
       },
       {
         "kind": "join",
-        "before": "He sped",
-        "after": "Hesped",
-        "count": 1,
-        "where": [
-          "occ:wotan-langmann-gustloff-funeral-sermon-germany-1936.quote"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "Hegem onius's",
         "after": "Hegemonius's",
         "count": 1,
@@ -2572,6 +2545,15 @@
         "count": 1,
         "where": [
           "occ:resurrection-gloria-mundi-stone-reborn-1622.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "ibi enim existens est",
+        "after": "ibi enim exist ens est",
+        "count": 1,
+        "where": [
+          "occ:crown-shekinah-diadem-malchuth-kether-1677.quote"
         ]
       },
       {
@@ -3493,15 +3475,6 @@
         ]
       },
       {
-        "kind": "join",
-        "before": "par les",
-        "after": "parles",
-        "count": 1,
-        "where": [
-          "occ:christ-crucified-by-virtues-besancon-13c.title"
-        ]
-      },
-      {
         "kind": "curated",
         "before": "pendaient Ies",
         "after": "pendaient les",
@@ -3925,6 +3898,15 @@
         ]
       },
       {
+        "kind": "reflow",
+        "before": "taxi fare reclaimed and",
+        "after": "tax if are re claimed and",
+        "count": 1,
+        "where": [
+          "occ:happy-neurosis-island-washing-case-zurich.body[1]"
+        ]
+      },
+      {
         "kind": "join",
         "before": "tem peram ents,",
         "after": "temperaments,",
@@ -4003,15 +3985,6 @@
         "count": 1,
         "where": [
           "occ:tree-dorn-genealogia-mineralium-16c.body[1]"
-        ]
-      },
-      {
-        "kind": "reflow",
-        "before": "the Gaokerena com plex Jung invokes",
-        "after": "the Gaokerena complex Jung invokes",
-        "count": 1,
-        "where": [
-          "occ:tree-gaokerena-vourukasha-persia.body[0]"
         ]
       },
       {
@@ -4183,15 +4156,6 @@
         "count": 1,
         "where": [
           "occ:divine-child-sleeping-gods-holderlin-hyperion-1797.body[0]"
-        ]
-      },
-      {
-        "kind": "join",
-        "before": "window panes.",
-        "after": "windowpanes.",
-        "count": 1,
-        "where": [
-          "occ:open-manholes-underground-street-dream-zurich-1930s.body[1]"
         ]
       },
       {
