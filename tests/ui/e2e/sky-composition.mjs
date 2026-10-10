@@ -2,7 +2,8 @@
 //   npx vite --port 5183 --strictPort &
 //   EARTH_HEADLESS=1 node tests/ui/e2e/sky-composition.mjs [chromium|webkit]
 //
-//   (a) the Earth and the Sun inside the central 70% from 1 330 R⊕ on, at the canonical pose, on four dates of the year, on a desktop and on a phone
+//   (a) the Earth and the Sun inside the central 70% through the handoff's second half (canonical pose), on dates across the year
+//       (the sky's moment is set per date), on a desktop viewport and on a phone viewport
 //   (b) a wheel that rests in the system settles the orientation to the canonical pose (capped speed, eased); a drag or a key cancels
 //   (c) the pull-back's limit is 1.35× the system's home, not 2.2×
 //   (d) a pull-back before the sky has loaded resists, never stalls, and is monotone (sky.json held back by the route)
@@ -29,16 +30,18 @@ const EARTH_BEFORE = {
   5.4: 'a2f41ee5c07b28218cbea1852c8909617ad9787e5556ebe38ed44c4bd1842028',
 };
 
-// the canonical system view (frames.ts systemViewLatLon, camera toward the Sun's geocentric longitude) at the layer's own clock, computed in the page
-const CANON = `(() => {
+// the canonical system view (frames.ts systemViewLatLon, azimuth stages.ts systemViewLongitude) at the layer's own clock, computed
+// in the page from the dev server's own modules, so the walk follows the rule rather than a copy of it
+const CANON = `(async () => {
   const { engine } = window.__earth; const L = engine.sky; const D2R = Math.PI / 180;
-  const lo = L.sunLonDeg * D2R, la = 38 * D2R, cg = Math.cos(la);
+  const { systemViewLongitude, SYSTEM_VIEW_ELEVATION } = await import('/src/sky/stages.ts');
+  const lo = systemViewLongitude(L.sunLongitude()) * D2R, la = SYSTEM_VIEW_ELEVATION * D2R, cg = Math.cos(la);
   const v = [cg * Math.cos(lo), cg * Math.sin(lo), Math.sin(la)];
   const ce = Math.cos(L.eps * D2R), se = Math.sin(L.eps * D2R);
   const X = v[0], Y = v[1] * ce - v[2] * se, Z = v[1] * se + v[2] * ce;
   const cgm = Math.cos(L.gmst * D2R), sgm = Math.sin(L.gmst * D2R);
   const s = [X * cgm + Y * sgm, Z, -(Y * cgm - X * sgm)];
-  return { lat: Math.asin(s[1]) / D2R, lon: Math.atan2(-s[2], s[0]) / D2R };
+  return { lat: Math.asin(s[1]) / D2R, lon: Math.atan2(-s[2], s[0]) / D2R, sunLon: L.sunLongitude() };
 })()`;
 
 const pose = (page) => page.evaluate(() => {
@@ -84,42 +87,43 @@ const wheelUntil = async (page, pred, dy, maxSteps = 400, gap = 16) => {
 
 const browser = await launch(kind, { headed: false });
 try {
-  // ── (a) the composition, the canonical pose: four dates, a desktop and a phone ─────
-  {
-    const DATES = ['2026-03-20T12:00:00Z', '2026-06-21T12:00:00Z', '2026-09-23T12:00:00Z', '2026-12-21T12:00:00Z'];
-    for (const vp of [{ name: 'desktop', width: 1280, height: 800 }, { name: 'phone', width: 390, height: 844 }]) {
-      const { ctx, page } = await open(browser, { width: vp.width, height: vp.height, hash: '#/sky' });
-      await page.waitForFunction(() => window.__earth.engine.sky && document.body.classList.contains('sky-ready'), null, { timeout: 60000 });
-      await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); window.__earth.engine.rig.autoRotate = false; });
-      await settled(page);
-      for (const iso of DATES) {
-        const ms = Date.parse(iso);
-        // the clock may follow the wall clock when the sidecar vouches for it: set the moment, and say so if it does not hold
-        await page.evaluate((m) => window.__earth.engine.sky.setMoment(m), ms);
-        await page.waitForTimeout(900);
-        const held = await page.evaluate(() => window.__earth.engine.sky.moment);
-        if (Math.abs(held - ms) > 3600_000) { check(true, `${vp.name} ${iso.slice(0, 10)}: skipped — the sky's clock follows the wall clock here (sidecar live), the moment cannot be held`); continue; }
-        const lon = await page.evaluate(() => window.__earth.engine.sky.sunLonDeg);
-        const rows = [];
-        for (const d of [1400, 2000, 3000]) {
-          const c = await page.evaluate(`${CANON}`);
-          await page.evaluate(([cc, dd]) => { const { engine } = window.__earth; engine.sky.setMoment(engine.sky.moment); engine.rig.flyTo(cc.lat, cc.lon, dd, { instant: true }); }, [c, d]);
-          await page.waitForTimeout(1800);
-          rows.push(await page.evaluate(() => {
-            const { engine } = window.__earth;
-            const ndc = (p) => (p ? { x: (p.x / engine.width) * 2 - 1, y: 1 - (p.y / engine.height) * 2 } : null);
-            return { dist: engine.rig.dist, earth: ndc(engine.sky.screenDisc('earth')), sun: ndc(engine.sky.screenDisc('sun')) };
-          }));
-        }
-        for (const r of rows) {
-          const inside = (p) => !!p && Math.abs(p.x) <= 0.7 && Math.abs(p.y) <= 0.7;
-          check(inside(r.earth) && inside(r.sun), `${vp.name} ${iso.slice(0, 10)} (Sun at ${lon.toFixed(0)}°): the Earth and the Sun inside the central 70% at ${Math.round(r.dist)} R⊕`,
-            r.earth && r.sun ? `Earth (${r.earth.x.toFixed(2)}, ${r.earth.y.toFixed(2)}), Sun (${r.sun.x.toFixed(2)}, ${r.sun.y.toFixed(2)})` : 'a body is not drawn');
-        }
-        if (iso.startsWith('2026-06')) writeFileSync(`${SHOTS}canonical-${vp.name}-1400.png`, await page.locator('canvas.globe-canvas').screenshot());
+  // ── (a) the composition, the canonical pose, across the year, desktop and phone ──
+  for (const vp of [{ name: 'desktop 1280×800', width: 1280, height: 800, mobile: false }, { name: 'phone 390×844', width: 390, height: 844, mobile: true }]) {
+    const { ctx, page } = await open(browser, { width: vp.width, height: vp.height, hash: '#/sky', mobile: vp.mobile });
+    await page.waitForFunction(() => window.__earth.engine.sky && document.body.classList.contains('sky-ready'), null, { timeout: 60000 });
+    await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); window.__earth.engine.rig.autoRotate = false; });
+    await settled(page);
+    // the reference date first (the sandbox's), then the year: the camera sits over the Sun's longitude, so the pair holds the central 70%
+    // on every date. The sandbox has no sidecar, so the sky is a snapshot and holds the moment it is given.
+    const DATES = ['2026-10-09', '2026-12-21', '2027-02-05', '2027-03-20', '2027-04-25', '2027-06-21', '2027-08-15'];
+    let worstOverall = 0;
+    for (const iso of DATES) {
+      await page.evaluate((t) => window.__earth.engine.sky.setMoment(t), Date.parse(`${iso}T12:00:00Z`));
+      await page.waitForTimeout(900);
+      const canon = await page.evaluate(`${CANON}`);
+      const rows = [];
+      for (const d of [1100, 1200, 1500, 2200, 3000]) {
+        await page.evaluate(([c, dd]) => { const { engine } = window.__earth; engine.rig.flyTo(c.lat, c.lon, dd, { instant: true }); }, [canon, d]);
+        await page.waitForTimeout(iso === DATES[0] ? 1800 : 1400);
+        rows.push(await page.evaluate(() => {
+          const { engine } = window.__earth;
+          const ndc = (p) => (p ? { x: (p.x / engine.width) * 2 - 1, y: 1 - (p.y / engine.height) * 2 } : null);
+          return { dist: engine.rig.dist, earth: ndc(engine.sky.screenDisc('earth')), sun: ndc(engine.sky.screenDisc('sun')), known: engine.sky.sunKnown };
+        }));
       }
-      await ctx.close();
+      const at = (d) => rows.find((r) => r.dist > d - 1 && r.dist < d + 1);
+      const ext = (p) => (p ? Math.max(Math.abs(p.x), Math.abs(p.y)) : Infinity);
+      for (const d of [1100, 1200, 1500, 2200, 3000]) {
+        const r = at(d);
+        const e = r ? Math.max(ext(r.earth), ext(r.sun)) : Infinity;
+        if (r) worstOverall = Math.max(worstOverall, e);
+        check(!!r && r.known && e <= 0.7, `${vp.name} ${iso} (Sun ${canon.sunLon.toFixed(0)}°): the Earth and the Sun inside the central 70% at ${d} R⊕`,
+          r ? `Earth (${r.earth.x.toFixed(2)}, ${r.earth.y.toFixed(2)}), Sun (${r.sun.x.toFixed(2)}, ${r.sun.y.toFixed(2)}), extent ${e.toFixed(2)}` : 'no sample');
+      }
+      if (iso === DATES[0]) writeFileSync(`${SHOTS}after-e2e-${vp.mobile ? 'phone' : 'desktop'}-1500.png`, await page.locator('canvas.globe-canvas').screenshot());
     }
+    check(worstOverall <= 0.7, `${vp.name}: on every sampled date the pair stays inside the central 70% through the handoff`, `worst extent ${worstOverall.toFixed(2)}`);
+    await ctx.close();
   }
 
   // ── (f) the Earth stage: pixel-identical at fixed Earth poses ──────────────
