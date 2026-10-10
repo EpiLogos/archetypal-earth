@@ -1,6 +1,33 @@
 # An Archetypal Earth
 
-A globe for moving through Jung's archetypes as they recur across place and time. The spec is in [docs/SPEC.md](docs/SPEC.md).
+A globe for moving through Jung's archetypes as they recur across place and time. The spec is in [docs/SPEC.md](docs/SPEC.md);
+the shell and lens design is [docs/MODES-RFC.md](docs/MODES-RFC.md).
+
+## The shell and its lenses
+
+One menu (top left, or **M**) and one title hold everything. Each way of reading the field is a lens, a plugin
+`{ id, label, icon, load() }` in `src/shell/lens.ts` whose code is fetched the first time it opens:
+
+- **Read the field.** Field (**F**: the globe and the graph), Theory (**T**: how psychic energy moves, and number as an
+  archetype), Aion (**A**), the Red Book (**R**).
+- **Bring your own material.** Astrology (your birth sky beside Jung's, walked planet by planet to the Sun and the
+  Self), Dreams (a journal whose images are amplified against the corpus's dreams and visions), Symbols (one symbol
+  through its history and doctrine), Coincidences (a synchronicity log and its series).
+
+Slices by source, culture, era and kind are a filter in the menu, not lenses; the filter is part of the link
+(`#/a/self?w=cw12&k=dream`). The landing is the globe with one line and "Start at the Self".
+
+Every interpretive line in a lens is a verbatim corpus quotation with its cite. The generators place each quotation in
+the corpus text and write the locator from the corpus itself; `npm run <lens>:check` re-verifies the published file.
+
+**Personal data.** Birth data, dreams and coincidences are kept in this browser's localStorage only
+(`src/practice/store.ts`, prefix `aae.practice.v1.*`), never sent anywhere, and each tool says so where you enter it.
+Export and delete-all are in each tool. Birth charts are computed in the page (astronomy-engine, MIT); no route ever
+carries a birth.
+
+The Great Mother is the first **deep field** (`#/symbols/archetype/great-mother`, or "The deep field" on her label):
+Jung's distinction between image and archetype, Neumann's structure and stages, her images, dreams and dated
+instances, built from `curation/depth/` by `npm run depth`.
 
 ## Run
 
@@ -16,7 +43,9 @@ The site reads the Jung archetypal-field vault at `~/Documents/books/jung-archet
 - `npm run ingest` rebuilds `public/data/field.json` from the vault. Run it after the vault's reading runs add material.
 - `npm run images` fetches any images still missing from Wikimedia Commons into `public/img/`. Re-runs skip images already on disk.
 - `npm run images:verify` checks the shipped corpus with no image ever opened: provenance completeness, licence law, manifest↔disk↔field agreement, byte-identity (a plate shared under one recorded source is intended curation; identical bytes under different sources fail).
-- `npm run data` runs ingest, then images, then ingest again.
+- `npm run data` runs ingest, then images, then ingest again, then every generator (Aion, the Red Book, Theory,
+  Astrology, Practice, the deep field). The images step needs Wikimedia Commons; everything else reads only the vault.
+- `npm run harvest:check` checks the reading-pass records for the newest texts against the corpus text.
 
 Choices made by the site rather than taken from the vault live in `curation/`:
 
@@ -28,7 +57,8 @@ Choices made by the site rather than taken from the vault live in `curation/`:
 
 The shared data contract is [src/types/field.ts](src/types/field.ts).
 
-The vault's `corpus/` (all 28 volumes, page-anchored) is also ingested: `npm run ingest` builds
+The vault's `corpus/` (33 works, page-anchored: the Collected Works, the seminars, the Pauli letters and the
+secondary texts the lenses quote) is also ingested: `npm run ingest` builds
 `public/data/corpus/` (an index plus one file per volume: chapters, pages, ¶ anchor spans), and any
 citing card in the site opens the actual passage at its source — "cw12 ¶452 (pdf p350)" becomes a
 deep link with the whole page behind it. The corpus text is the owner's own local copy of
@@ -55,9 +85,9 @@ node tests/ui/e2e/shots.mjs webkit
 
 Zoom out past the Moon and the globe becomes a scale model of the sky: the Sun, Moon and planets stand where they really are, each linked to what Jung wrote of it. The full design is [docs/SKY-SPEC.md](docs/SKY-SPEC.md); sources, pins and every decision taken are in [docs/SKY-SOURCES.md](docs/SKY-SOURCES.md); the precession work is in [docs/PRECESSION-NOTES.md](docs/PRECESSION-NOTES.md).
 
-- **What it does.** The sky is one more scale of the globe (`S`, or zoom out): the Moon's ring, the planets on their real orbits (radial distance compressed, and captioned as such), the Earth lit by the true Sun, the phase of the Moon, and the bodies as anchors in the graph. A **Birth sky** disclosure takes a date, a time and a place and draws the sky at that moment from the Earth, in Jung's keys; it makes no forecast and passes no verdict. In **Aion**, the equinox ring and a "The sky's clock" disclosure show where the spring equinox lies among the stars under stated conventions beside Jung's own months.
+- **What it does.** The sky is one more scale of the globe (`S`, or zoom out): the Moon's ring, the planets on their real orbits (radial distance compressed, and captioned as such), the Earth lit by the true Sun, the phase of the Moon, and the bodies as anchors in the graph. A birth sky is opened from the Astrology lens, which computes the chart in the page, and the sky then draws it from the Earth, in Jung's keys; it makes no forecast and passes no verdict. In **Aion**, the equinox ring and a "The sky's clock" disclosure show where the spring equinox lies among the stars under stated conventions beside Jung's own months.
 - **The data.** `npm run sky` generates `public/data/sky.json` (positions 2015–2039 from JPL DE440, the mythic ties, a gazetteer, golden values) and `npm run sky:check` verifies it is reproducible. Choices the site makes live in `curation/sky/`. The vault is read, never written.
-- **The sidecar (optional, local).** Everything above works without it, except generating the data and the birth sky. `cd ephemeris && ./run.sh` serves `http://127.0.0.1:5187` (Python ≥ 3.11; setup in SKY-SOURCES.md): live Sun and Moon, birth charts, and place lookup. It is AGPL (Kerykeion, libephemeris), runs only on your machine, and the page only talks to it from localhost. A place *lookup* (as opposed to choosing from the built-in gazetteer) sends the text you typed to OpenStreetMap through the sidecar, and the page says so.
+- **The sidecar (optional, local).** Everything above works without it, birth charts included; it is needed only to generate the sky data. `cd ephemeris && ./run.sh` serves `http://127.0.0.1:5187` (Python ≥ 3.11; setup in SKY-SOURCES.md): live Sun and Moon, birth charts, and place lookup. It is AGPL (Kerykeion, libephemeris), runs only on your machine, and the page only talks to it from localhost. A place *lookup* (as opposed to choosing from the built-in gazetteer) sends the text you typed to OpenStreetMap through the sidecar, and the page says so.
 - **Honesty.** Approximate things are labelled (charts before 1900; the radial scale; calculated boundaries after the present). Ephemeris range is 1549–2650; outside it nothing is computed or approximated, and the page says so.
 - **Checks.** `npx vitest run tests/sky tests/aion`; `node scripts/sky-golden.mjs --check`; browser walks under `tests/ui/e2e/` (`sky-*.mjs`, `aion-clock.mjs`), run against `npx vite --port 5183 --strictPort`.
 

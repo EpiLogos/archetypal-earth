@@ -190,4 +190,55 @@ before the field has been seen"). Three.js (525 kB of the remaining 777 kB) is t
 
 ## As built
 
-(Filled in after the refactor.)
+Written 2026-10-10, after Threads 0–7. Where the build departs from the plan above, it says so here.
+
+**Shell and lenses.** As planned: one menu, one title (`.sh-title`, the page's only `h1`; hidden on the Field lens,
+where the focus label names the selection), lenses as `{ id, label, icon, load() }` in `src/shell/lens.ts`. Per-mode
+chrome is gone: Aion's readings, the Red Book's walk/genesis switch and the dynamical lens's basins are handed to the
+shell as controls. Two departures:
+
+- Symbols sits in the second menu group ("Bring your own material") beside Dreams, because it starts from a word
+  the visitor types and shares the amplification view with Dreams.
+- The QL lens is not a separate lens. Number became a section of Theory (`#/theory/number`), with each number's
+  corpus quotations beside its QL position, marked QL. Number is part of Jung's theory, and a lens of its own would
+  have been one page long. Sources and the open question about the mapping are in `docs/ql-reference.md`.
+
+**Routes as built.**
+
+```
+#/theory[/<section>]                 #/theory/number
+#/astrology[/<chart>[/<body>]]       chart: "you" (this browser) or "jung"
+#/symbols[/<family>]                 #/symbols/archetype/<id>   (the deep field where one exists)
+#/dreams[/new | /<id>[/edit | /<family>]]
+#/coincidences[/new | /<id>[/edit]]
+```
+
+The old `#/sky/birth/<moment>/<lat>/<lon>` links open Astrology empty and drop the moment. §5 planned to pre-fill the
+form instead, but a birth moment in a link is personal data, so it is no longer read at all. The natal sky is
+`sky.natal = <chartId>`. It never holds a birth.
+
+**Astrology.** The chart is computed in the page with astronomy-engine (MIT, 52 kB, loaded with the lens), so the
+local sidecar is no longer needed for birth charts. Houses are equal. With no birth time the chart is cast for local
+noon and no angles are drawn. Jung's own chart is cast this way because the corpus gives no birth time (CW1 gives
+"northeastern Switzerland", 1875; the day and Kesswil are from the public record).
+
+**Practice storage.** As in §8. One module (`src/practice/store.ts`), one prefix, export, import and delete-all,
+behind a backend interface so a shared layer can be added as a second backend.
+
+**Citations.** Each lens has a generator (`npm run theory|astrology|practice|depth`) that places every curated
+quotation in the flattened corpus text and writes the locator from the corpus's own markers: `¶N (pdf pP)`, or
+`pdf pP` alone where the vault note's ¶ disagrees with the corpus marker. `:check` re-verifies each published file.
+Quotations that do not place exactly are left out and reported, never shown.
+
+**Deep fields.** `src/lenses/depth.ts` renders an archetype at maximum depth from `curation/depth/<id>.json`. The
+Great Mother is the first: 14 placed quotations, 15 of Neumann's dated instances (the plates section of the scan is
+too damaged for more, and the page says so), her 49 image families, 654 instances and 139 dreams and visions.
+
+**Filter.** The filter dims what it excludes. Below an alpha of 0.035 a presence is culled in the shader and is not
+pickable, so a filtered-out instance cannot be clicked.
+
+**Final sizes** (`vite build`, after every thread). The entry chunk is 766 kB / 210 kB gzip, down from 916 / 261 kB
+before Thread 2, with all four new lenses added. Fetched on first use: graph + d3 101 kB, astronomy-engine 52 kB,
+Aion 25 kB, dynamical lens 19 kB, Astrology 12 kB, Red Book 10 kB, Coincidences 8 kB, Dreams 7 kB, Theory 6 kB,
+Symbols with the deep field 7 kB, shared amplification 6 kB, practice store 2 kB. Lighthouse was not re-run after
+Thread 2: the lenses added since load only on demand, so first paint is unchanged.

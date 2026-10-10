@@ -13,7 +13,7 @@ import { astrologyAt, back, focusOn, inLens, inSky, openedFrom, startThread, sta
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
-import { DEEP_FIELDS } from '../lenses/depth';
+import { DEEP_FIELDS } from '../lenses/deep-fields';
 import { lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
 import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
