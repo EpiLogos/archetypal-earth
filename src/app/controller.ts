@@ -46,7 +46,7 @@ import { chartMoment } from '../sky/chart';
 import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -910,7 +910,7 @@ export class Controller {
     const e = this.engine;
     const aspect = e.width / Math.max(1, e.height);
     layer.prepare(e.rig.dist);
-    const ll = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+    const ll = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
     e.rig.interacted = true;
     document.body.classList.add('interacted');
     const key = this.approachFor(this.state.sky);
@@ -1133,7 +1133,7 @@ export class Controller {
       && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
       && now - rig.lastWheelAt >= SETTLE.idleMs && now - rig.lastDragAt >= SETTLE.quietDragMs;
     if (!eligible || !layer) { rig.settleTo = null; return; }
-    rig.settleTo = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+    rig.settleTo = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
   }
 
   /** The zoom gesture crossing the Moon's edge sets and clears the sky flag; the camera stays the user's. */

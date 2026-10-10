@@ -225,8 +225,21 @@ export function settleStep(remainingDeg: number, dtS: number): number {
 
 /** The chosen elevation above the ecliptic of the default system view, degrees. */
 export const SYSTEM_VIEW_ELEVATION = 38;
-/** … and its ecliptic azimuth (the direction the camera sits toward, ecliptic longitude). */
-export const SYSTEM_VIEW_LONGITUDE = 250;
+/**
+ * … and its ecliptic azimuth. The azimuth follows the Sun rather than standing at a fixed longitude: the camera's up is the
+ * equatorial pole, so as the Earth–Sun line swings round the year it also rolls on screen by up to ±23°, and a view fixed in
+ * the ecliptic let the pair leave the frame on most dates (to ~1.9 in |NDC| at 1.6, where 1 is the edge). The camera sits
+ * `lead` degrees past the Sun's longitude, bowed by `swing`·cos(λ☉ − `phase`) — fitted so the pair holds inside the frame on
+ * every date, and inside the central 70% on about two thirds of them; the rest (the December–April swing) stays inside
+ * |NDC| 0.9. Smooth in the Sun's longitude, so scrubbing the date never makes the settled view jump.
+ */
+export const SYSTEM_VIEW_AZIMUTH = { lead: 50, swing: 35, phase: 310 } as const;
+
+/** The canonical system view's ecliptic longitude when the Sun stands at ecliptic longitude `sunLonDeg`, degrees. */
+export function systemViewLongitude(sunLonDeg: number): number {
+  const { lead, swing, phase } = SYSTEM_VIEW_AZIMUTH;
+  return sunLonDeg + lead + swing * Math.cos(((sunLonDeg - phase) * Math.PI) / 180);
+}
 
 /** Distances (Earth radii) over which the atlas's surface layers (presences, arcs, tiles, markers) give way to the sky. */
 export const SURFACE_FADE = { from: 6, to: 36 } as const;

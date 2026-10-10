@@ -1,18 +1,19 @@
 // The handoff's composition (audit S3 (a)) and the arrival settle (S3 (b)), as pure maths.
 //
-// The geometry is the canonical system view the S key composes (frames.ts systemViewLatLon), read at real moments, and the
-// Sun's true direction from the Earth. The invariant is stated for the reference moment below. The limits the geometry
-// imposes are pinned, not hidden: no look-at centres the pair on a desktop below ~950 R⊕ (1.6) or on a phone at all, and the
-// canonical azimuth is fixed in the ecliptic, so over the year the pair leaves the frame on some dates.
+// The geometry is the canonical system view the S key composes (stages.ts systemViewLongitude: the azimuth follows the Sun;
+// frames.ts systemViewLatLon), read at real moments, and the Sun's true direction from the Earth. The invariant is stated for
+// the reference moment below and then asserted across the whole year. The limits the geometry imposes are pinned, not hidden:
+// no azimuth that varies smoothly with the Sun brings the pair inside the central 70% of a desktop view on the December–April
+// dates (it stays inside the frame, within |NDC| 0.9), and a phone is centred only at the very end of the handoff.
 import { describe, expect, it } from 'vitest';
 import { dirFromLatLon, type Vec3 } from '../../src/data/geo';
 import { eclipticVector, gmstDeg, obliquityDeg, sceneFromEcliptic, systemViewLatLon } from '../../src/sky/frames';
 import {
-  bothInFrame, FRAME_CENTRAL, handoffFocusWeight, FOCUS_HANDOFF, ndcOf, pairExtent, SETTLE, settleStep, STAGE_EDGES, SUN_DIAGRAM_DIST,
+  bothInFrame, FRAME_CENTRAL, handoffFocusWeight, FOCUS_HANDOFF, ndcOf, pairExtent, SETTLE, settleStep, STAGE_EDGES, SUN_DIAGRAM_DIST, SYSTEM_VIEW_ELEVATION, systemViewLongitude,
 } from '../../src/sky/stages';
 
 const FOV = 38;
-/** The reference moment: the sandbox's date (2026-10-09). The invariant is measured here; the season is tested separately. */
+/** The reference moment: the sandbox's date (2026-10-09). The invariant is measured here; the year is asserted separately. */
 const REF = Date.parse('2026-10-09T12:00:00Z');
 
 /** The Sun's ecliptic longitude, degrees (Meeus, ch. 25, low precision: well within a tenth of a degree for this purpose). */
@@ -24,10 +25,10 @@ function sunLongitudeDeg(ms: number): number {
 }
 
 /** The canonical system view at `ms`: the camera's direction from the focus, and the Sun's direction from the Earth (scene axes). */
-function canonical(ms: number): { camDir: Vec3; sunDir: Vec3 } {
+function canonical(ms: number, longitude = systemViewLongitude(sunLongitudeDeg(ms))): { camDir: Vec3; sunDir: Vec3 } {
   const gmst = gmstDeg(ms);
   const eps = obliquityDeg(ms);
-  const ll = systemViewLatLon(250, 38, gmst, eps);
+  const ll = systemViewLatLon(longitude, SYSTEM_VIEW_ELEVATION, gmst, eps);
   return { camDir: dirFromLatLon(ll.lat, ll.lon), sunDir: sceneFromEcliptic(eclipticVector(sunLongitudeDeg(ms), 0, 1), gmst, eps) };
 }
 
@@ -89,15 +90,17 @@ describe('the framing of the Earth and the Sun, the reference view', () => {
     expect(first!).toBeLessThanOrEqual(1100);
   });
 
-  it('the geometric limit: the best possible look-at first centres the pair on a desktop at ~950 R⊕; the curve gets there at ~1 070', () => {
-    // the Sun is ~900 R⊕ from the Earth, so below ~950 R⊕ no look-at holds both inside 70% of a 1.6 viewport (the curve's cost
-    // is the difference between the two, ~120 R⊕ of its ramp); a 2.2 viewport has more width and gets there at ~665 R⊕
+  it('the geometric limit: the best possible look-at first centres the pair on a desktop at ~715 R⊕; the curve gets there at ~1 070', () => {
+    // the Sun is ~900 R⊕ from the Earth; in this view (the azimuth following the Sun) the Earth–Sun line is foreshortened, so the
+    // best look-at holds both inside 70% of a 1.6 viewport from ~715 R⊕ (the curve's cost is the difference, ~350 R⊕ of its ramp);
+    // a 2.2 viewport has more width and holds them from the handoff's start
     let limit: number | null = null;
     for (let d = 600; d <= 1100 && limit === null; d += 5) if (bestPossibleExtent(d, 1.6) <= FRAME_CENTRAL) limit = d;
     expect(limit).not.toBeNull();
-    expect(limit!).toBeGreaterThanOrEqual(930);
-    expect(limit!).toBeLessThanOrEqual(970);
+    expect(limit!).toBeGreaterThanOrEqual(690);
+    expect(limit!).toBeLessThanOrEqual(740);
     expect(limit!).toBeLessThan(FOCUS_HANDOFF.from + 400);
+    expect(bestPossibleExtent(STAGE_EDGES.handoff, 2.2)).toBeLessThanOrEqual(FRAME_CENTRAL);
   });
 
   it('keeps the pair inside the frame (|NDC| ≤ 1, not merely the central 70%) from 1 000 R⊕ on a desktop view', () => {
@@ -107,22 +110,66 @@ describe('the framing of the Earth and the Sun, the reference view', () => {
     }
   });
 
-  it('pins the phone\'s limit: at this view no look-at centres the pair on a 0.46 viewport anywhere in the handoff', () => {
-    // the phone is narrow and the Earth–Sun line runs across it: the best any look-at does is ~0.86 at 2 800 R⊕
-    for (const d of [1000, 1500, 2000, 2500, 2900]) expect(bestPossibleExtent(d, 0.46), `${d} R⊕`).toBeGreaterThan(FRAME_CENTRAL);
+  it('pins the phone\'s limit: on a 0.46 viewport no look-at centres the pair before ~2 800 R⊕, and none does better than ~0.65', () => {
+    // the phone is narrow and the Earth–Sun line runs across it: it is the sibling of the desktop limit, kept visible here
+    for (const d of [1000, 1500, 2000, 2500]) expect(bestPossibleExtent(d, 0.46), `${d} R⊕`).toBeGreaterThan(FRAME_CENTRAL);
+    expect(bestPossibleExtent(2900, 0.46)).toBeLessThanOrEqual(FRAME_CENTRAL);
+    let min = Infinity;
+    for (let d = 1000; d <= 3000; d += 50) min = Math.min(min, bestPossibleExtent(d, 0.46));
+    expect(min).toBeGreaterThan(0.6);
   });
 
-  it('pins the seasonal limit: the canonical azimuth is fixed in the ecliptic, so on some dates the pair leaves the frame', () => {
-    // the frame is the reference moment's; over the year the Earth–Sun line swings past the camera's line of sight, and at a
-    // mid-year date the Earth leaves the frame at ~1 400 R⊕. Changing the canonical azimuth to follow the Sun would remove it.
-    let worst = 0;
-    for (let k = 0; k < 36; k++) {
-      const c = canonical(REF + k * 10.15 * 86_400_000);
-      for (let d = 1070; d <= 3000; d += 10) worst = Math.max(worst, pairExtent(d, 1.6, FOV, c.camDir, c.sunDir));
+  it('the azimuth follows the Sun smoothly: the settled view never jumps as the date scrubs', () => {
+    // a degree of the Sun's longitude moves the canonical azimuth by 1 ± swing·sin(·) degrees: never more than 1 + swing in magnitude
+    const step = 0.5;
+    for (let l = 0; l < 360; l += step) {
+      const dAz = systemViewLongitude(l + step) - systemViewLongitude(l);
+      expect(dAz / step).toBeGreaterThan(0.3);
+      expect(dAz / step).toBeLessThan(1.7);
     }
-    expect(worst).toBeGreaterThan(1);
+    expect(systemViewLongitude(sunLongitudeDeg(REF))).toBeCloseTo(sunLongitudeDeg(REF) + 50 + 35 * Math.cos(((sunLongitudeDeg(REF) - 310) * Math.PI) / 180), 9);
+  });
+});
+
+describe('the framing of the Earth and the Sun, across the year', () => {
+  /** The worst |NDC| extent of the pair over the handoff's second half (1 070–3 000 R⊕), both desktop aspects, on each day of a year. */
+  function yearWorst(longitudeOf: (ms: number) => number | undefined): number[] {
+    const out: number[] = [];
+    for (let k = 0; k < 366; k++) {
+      const c = canonical(REF + k * 86_400_000, longitudeOf(REF + k * 86_400_000));
+      let w = 0;
+      for (const aspect of [1.6, 2.2]) for (let d = 1070; d <= 3000; d += 10) w = Math.max(w, pairExtent(d, aspect, FOV, c.camDir, c.sunDir));
+      out.push(w);
+    }
+    return out;
+  }
+
+  const year = yearWorst(() => undefined);
+
+  it('keeps the Earth and the Sun inside the frame (|NDC| < 1, with room to spare: ≤ 0.9) on every day of the year', () => {
+    expect(Math.max(...year)).toBeLessThan(1);
+    expect(Math.max(...year)).toBeLessThanOrEqual(0.9);
   });
 
+  it('holds them inside the central 70% on most days (at least 60%); the rest are the December–April swing, still inside 0.9', () => {
+    const inside = year.filter((w) => w <= FRAME_CENTRAL).length;
+    expect(inside / year.length).toBeGreaterThanOrEqual(0.6);
+    // the days outside the central 70% are the Sun at ecliptic longitude ~250°–50° (December–April)
+    for (let k = 0; k < year.length; k++) {
+      if (year[k] <= FRAME_CENTRAL) continue;
+      const l = sunLongitudeDeg(REF + k * 86_400_000);
+      expect(l >= 240 || l <= 50, `day ${k}: Sun at ${l.toFixed(0)}° is outside the central 70% (${year[k].toFixed(2)})`).toBe(true);
+    }
+  });
+
+  it('measures what the change bought: the fixed azimuth (250°) it replaced left the pair far outside the frame on some dates', () => {
+    const fixed = yearWorst(() => 250);
+    expect(Math.max(...fixed)).toBeGreaterThan(1.8);
+    expect(Math.max(...fixed)).toBeGreaterThan(Math.max(...year) * 2);
+  });
+});
+
+describe('the framing of the Earth and the Sun, the reference view (continued)', () => {
   it('the Earth itself stays on screen across the handoff on a desktop view (its own |NDC| is at most ~0.75)', () => {
     for (const aspect of [1.6, 2.2]) {
       for (let d = 1000; d <= 3000; d += 50) {
