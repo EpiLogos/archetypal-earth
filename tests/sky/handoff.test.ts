@@ -1,19 +1,23 @@
 // The handoff's composition (audit S3 (a)) and the arrival settle (S3 (b)), as pure maths.
 //
-// The geometry is the canonical system view the S key composes (frames.ts systemViewLatLon), read at real moments, and the
-// Sun's true direction from the Earth. The invariant is stated for the reference moment below. The limits the geometry
-// imposes are pinned, not hidden: no look-at centres the pair on a desktop below ~950 R⊕ (1.6) or on a phone at all, and the
-// canonical azimuth is fixed in the ecliptic, so over the year the pair leaves the frame on some dates.
+// The geometry is the canonical system view the S key composes (frames.ts systemViewLatLon at stages.ts systemViewAzimuth: the
+// camera sits toward the Sun's geocentric longitude), read at real moments across a whole year and at four viewport aspects,
+// and the Sun's true direction from the Earth. The invariant holds on every date and on a phone. The limit the geometry
+// imposes is pinned, not hidden: below ~1 200 R⊕ the Earth–Sun separation (~900 R⊕) is wider than the frame can hold.
 import { describe, expect, it } from 'vitest';
 import { dirFromLatLon, type Vec3 } from '../../src/data/geo';
 import { eclipticVector, gmstDeg, obliquityDeg, sceneFromEcliptic, systemViewLatLon } from '../../src/sky/frames';
 import {
   bothInFrame, FRAME_CENTRAL, handoffFocusWeight, FOCUS_HANDOFF, ndcOf, pairExtent, SETTLE, settleStep, STAGE_EDGES, SUN_DIAGRAM_DIST,
+  SYSTEM_VIEW_ELEVATION, systemViewAzimuth,
 } from '../../src/sky/stages';
 
 const FOV = 38;
-/** The reference moment: the sandbox's date (2026-10-09). The invariant is measured here; the season is tested separately. */
+/** The reference moment (2026-10-09); the year is walked from here in 36 steps of ~10 days. */
 const REF = Date.parse('2026-10-09T12:00:00Z');
+const YEAR = Array.from({ length: 36 }, (_, k) => REF + k * 10.15 * 86_400_000);
+/** A phone in portrait, a squarish tablet, a desktop, an ultra-wide. */
+const ASPECTS = [0.46, 0.75, 1.6, 2.2] as const;
 
 /** The Sun's ecliptic longitude, degrees (Meeus, ch. 25, low precision: well within a tenth of a degree for this purpose). */
 function sunLongitudeDeg(ms: number): number {
@@ -27,18 +31,8 @@ function sunLongitudeDeg(ms: number): number {
 function canonical(ms: number): { camDir: Vec3; sunDir: Vec3 } {
   const gmst = gmstDeg(ms);
   const eps = obliquityDeg(ms);
-  const ll = systemViewLatLon(250, 38, gmst, eps);
+  const ll = systemViewLatLon(systemViewAzimuth(sunLongitudeDeg(ms)), SYSTEM_VIEW_ELEVATION, gmst, eps);
   return { camDir: dirFromLatLon(ll.lat, ll.lon), sunDir: sceneFromEcliptic(eclipticVector(sunLongitudeDeg(ms), 0, 1), gmst, eps) };
-}
-
-const ref = canonical(REF);
-const within = (d: number, aspect: number) => pairExtent(d, aspect, FOV, ref.camDir, ref.sunDir);
-
-/** The smallest |NDC| extent any look-at weight in [0,1] achieves for the pair at this distance and aspect. */
-function bestPossibleExtent(d: number, aspect: number): number {
-  let best = Infinity;
-  for (let w = 0; w <= 1 + 1e-9; w += 0.005) best = Math.min(best, pairExtent(d, aspect, FOV, ref.camDir, ref.sunDir, Math.min(1, w)));
-  return best;
 }
 
 describe('the look-at weight across the handoff', () => {
@@ -60,8 +54,8 @@ describe('the look-at weight across the handoff', () => {
 
   it('is one half at the middle of the ramp: there the look-at is the midpoint of the Earth and the Sun', () => {
     const mid = FOCUS_HANDOFF.from * Math.sqrt(FOCUS_HANDOFF.to / FOCUS_HANDOFF.from);
-    expect(mid).toBeGreaterThan(1000);
-    expect(mid).toBeLessThan(1050);
+    expect(mid).toBeGreaterThan(1150);
+    expect(mid).toBeLessThan(1250);
     expect(handoffFocusWeight(mid)).toBeCloseTo(0.5, 9);
   });
 
@@ -70,66 +64,122 @@ describe('the look-at weight across the handoff', () => {
   });
 });
 
-describe('the framing of the Earth and the Sun, the reference view', () => {
-  it('keeps both the Earth and the Sun inside the central 70% of a desktop viewport from ~1 070 R⊕ across the rest of the handoff', () => {
-    for (const aspect of [1.6, 2.2]) {
-      for (let d = 1070; d <= 3000; d += 20) {
-        expect(within(d, aspect), `aspect ${aspect} at ${d} R⊕`).toBeLessThanOrEqual(FRAME_CENTRAL + 1e-9);
+/** The distance from which the pair stays inside `fraction` of the frame all the way to the system edge. */
+function firstHeld(c: { camDir: Vec3; sunDir: Vec3 }, aspect: number, fraction: number): number {
+  let first = STAGE_EDGES.handoff;
+  for (let d = STAGE_EDGES.system; d >= STAGE_EDGES.handoff; d -= 5) {
+    if (pairExtent(d, aspect, FOV, c.camDir, c.sunDir) > fraction) { first = d + 5; break; }
+  }
+  return first;
+}
+
+describe('the canonical azimuth follows the Sun', () => {
+  it('is the Sun\'s geocentric longitude, wrapped to 0–360', () => {
+    expect(systemViewAzimuth(0)).toBe(0);
+    expect(systemViewAzimuth(196.5)).toBe(196.5);
+    expect(systemViewAzimuth(-10)).toBeCloseTo(350, 12);
+    expect(systemViewAzimuth(725)).toBeCloseTo(5, 12);
+  });
+
+  it('puts the camera on the Sun\'s side: the Earth is farther from it than the Sun, whatever the date', () => {
+    // camDir·sunDir > 0 means the camera sits on the Sun's side of the focus, looking along the line toward the Earth
+    for (const ms of YEAR) {
+      const c = canonical(ms);
+      const dot = c.camDir[0] * c.sunDir[0] + c.camDir[1] * c.sunDir[1] + c.camDir[2] * c.sunDir[2];
+      expect(dot, new Date(ms).toISOString()).toBeGreaterThan(Math.cos((SYSTEM_VIEW_ELEVATION * Math.PI) / 180) - 0.02);
+    }
+  });
+});
+
+describe('the framing of the Earth and the Sun, every date and every viewport', () => {
+  it('keeps both inside the central 70% from 1 330 R⊕ on, on a phone, a tablet, a desktop and an ultra-wide, all year', () => {
+    for (const ms of YEAR) {
+      const c = canonical(ms);
+      for (const aspect of ASPECTS) {
+        for (let d = 1330; d <= STAGE_EDGES.system; d += 10) {
+          expect(pairExtent(d, aspect, FOV, c.camDir, c.sunDir), `${new Date(ms).toISOString().slice(0, 10)} aspect ${aspect} at ${d} R⊕`).toBeLessThanOrEqual(FRAME_CENTRAL + 1e-9);
+        }
       }
     }
   });
 
-  it('first frames both inside that central 70% at 1 030–1 100 R⊕ (the boundary is pinned, not hoped for)', () => {
-    let first: number | null = null;
-    for (let d = 600; d <= 3000 && first === null; d += 5) {
-      if (bothInFrame(d, 1.6, FOV, ref.camDir, ref.sunDir) && bothInFrame(d, 2.2, FOV, ref.camDir, ref.sunDir)) first = d;
-    }
-    expect(first).not.toBeNull();
-    expect(first!).toBeGreaterThanOrEqual(1030);
-    expect(first!).toBeLessThanOrEqual(1100);
-  });
-
-  it('the geometric limit: the best possible look-at first centres the pair on a desktop at ~950 R⊕; the curve gets there at ~1 070', () => {
-    // the Sun is ~900 R⊕ from the Earth, so below ~950 R⊕ no look-at holds both inside 70% of a 1.6 viewport (the curve's cost
-    // is the difference between the two, ~120 R⊕ of its ramp); a 2.2 viewport has more width and gets there at ~665 R⊕
-    let limit: number | null = null;
-    for (let d = 600; d <= 1100 && limit === null; d += 5) if (bestPossibleExtent(d, 1.6) <= FRAME_CENTRAL) limit = d;
-    expect(limit).not.toBeNull();
-    expect(limit!).toBeGreaterThanOrEqual(930);
-    expect(limit!).toBeLessThanOrEqual(970);
-    expect(limit!).toBeLessThan(FOCUS_HANDOFF.from + 400);
-  });
-
-  it('keeps the pair inside the frame (|NDC| ≤ 1, not merely the central 70%) from 1 000 R⊕ on a desktop view', () => {
-    for (let d = 1000; d <= 3000; d += 25) {
-      expect(within(d, 1.6), `1.6 at ${d} R⊕`).toBeLessThanOrEqual(1);
-      expect(within(d, 2.2), `2.2 at ${d} R⊕`).toBeLessThanOrEqual(1);
-    }
-  });
-
-  it('pins the phone\'s limit: at this view no look-at centres the pair on a 0.46 viewport anywhere in the handoff', () => {
-    // the phone is narrow and the Earth–Sun line runs across it: the best any look-at does is ~0.86 at 2 800 R⊕
-    for (const d of [1000, 1500, 2000, 2500, 2900]) expect(bestPossibleExtent(d, 0.46), `${d} R⊕`).toBeGreaterThan(FRAME_CENTRAL);
-  });
-
-  it('pins the seasonal limit: the canonical azimuth is fixed in the ecliptic, so on some dates the pair leaves the frame', () => {
-    // the frame is the reference moment's; over the year the Earth–Sun line swings past the camera's line of sight, and at a
-    // mid-year date the Earth leaves the frame at ~1 400 R⊕. Changing the canonical azimuth to follow the Sun would remove it.
+  it('first frames both inside that central 70% between 1 250 and 1 330 R⊕ — the boundary is pinned, not hoped for', () => {
     let worst = 0;
-    for (let k = 0; k < 36; k++) {
-      const c = canonical(REF + k * 10.15 * 86_400_000);
-      for (let d = 1070; d <= 3000; d += 10) worst = Math.max(worst, pairExtent(d, 1.6, FOV, c.camDir, c.sunDir));
+    let best = Infinity;
+    for (const ms of YEAR) {
+      const c = canonical(ms);
+      for (const aspect of ASPECTS) {
+        const first = firstHeld(c, aspect, FRAME_CENTRAL);
+        worst = Math.max(worst, first);
+        best = Math.min(best, first);
+        expect(bothInFrame(first, aspect, FOV, c.camDir, c.sunDir)).toBe(true);
+      }
     }
-    expect(worst).toBeGreaterThan(1);
+    expect(worst).toBeGreaterThanOrEqual(1280);
+    expect(worst).toBeLessThanOrEqual(1330);
+    expect(best).toBeGreaterThanOrEqual(1200);
   });
 
-  it('the Earth itself stays on screen across the handoff on a desktop view (its own |NDC| is at most ~0.75)', () => {
-    for (const aspect of [1.6, 2.2]) {
-      for (let d = 1000; d <= 3000; d += 50) {
-        const focus: Vec3 = ref.sunDir.map((x) => x * SUN_DIAGRAM_DIST * handoffFocusWeight(d)) as Vec3;
-        const p = ndcOf([0, 0, 0], focus, ref.camDir, d, aspect, FOV);
-        expect(Math.max(Math.abs(p.x), Math.abs(p.y)), `aspect ${aspect} at ${d} R⊕`).toBeLessThanOrEqual(0.76);
+  it('is the same view on every date: the first-framed distance moves by under 100 R⊕ across the year, whatever the aspect', () => {
+    for (const aspect of ASPECTS) {
+      const firsts = YEAR.map((ms) => firstHeld(canonical(ms), aspect, FRAME_CENTRAL));
+      expect(Math.max(...firsts) - Math.min(...firsts), `aspect ${aspect}`).toBeLessThan(100);
+    }
+  });
+
+  it('keeps the pair inside the frame (|NDC| ≤ 1, not merely the central 70%) from 1 230 R⊕, all year, on a phone too', () => {
+    for (const ms of YEAR) {
+      const c = canonical(ms);
+      for (const aspect of ASPECTS) {
+        for (let d = 1230; d <= STAGE_EDGES.system; d += 25) {
+          expect(pairExtent(d, aspect, FOV, c.camDir, c.sunDir), `${new Date(ms).toISOString().slice(0, 10)} aspect ${aspect} at ${d} R⊕`).toBeLessThanOrEqual(1);
+        }
       }
+    }
+  });
+
+  it('the geometric limit: the best possible look-at is ~100–240 R⊕ ahead of the curve: the price of one ramp for every viewport', () => {
+    // below ~1 050 R⊕ (desktop) / ~1 170 R⊕ (phone) no look-at at all holds the ~900 R⊕ separation inside 70% of the frame; the
+    // curve ends later so that the phone, which needs the Sun alone to hold both only from ~2 300 R⊕, is held too (aspect-
+    // aware ramps would buy a desktop ~100 R⊕ and cost a second code path: not taken)
+    for (const aspect of ASPECTS) {
+      let worstBest = 0;
+      let worstCurve = 0;
+      for (const ms of YEAR.filter((_, k) => k % 6 === 0)) {
+        const c = canonical(ms);
+        let best = STAGE_EDGES.handoff;
+        for (let d = STAGE_EDGES.system; d >= STAGE_EDGES.handoff; d -= 10) {
+          let m = Infinity;
+          for (let w = 0; w <= 1 + 1e-9; w += 0.01) m = Math.min(m, pairExtent(d, aspect, FOV, c.camDir, c.sunDir, Math.min(1, w)));
+          if (m > FRAME_CENTRAL) { best = d + 10; break; }
+        }
+        worstBest = Math.max(worstBest, best);
+        worstCurve = Math.max(worstCurve, firstHeld(c, aspect, FRAME_CENTRAL));
+      }
+      expect(worstBest, `aspect ${aspect}`).toBeGreaterThan(1000);
+      expect(worstCurve - worstBest, `aspect ${aspect}`).toBeLessThan(260);
+    }
+  });
+
+  it('the Earth itself stays on screen across the handoff on every viewport and date (its own |NDC| is at most ~0.7)', () => {
+    for (const ms of YEAR.filter((_, k) => k % 3 === 0)) {
+      const c = canonical(ms);
+      for (const aspect of ASPECTS) {
+        for (let d = 1000; d <= STAGE_EDGES.system; d += 50) {
+          const focus: Vec3 = c.sunDir.map((x) => x * SUN_DIAGRAM_DIST * handoffFocusWeight(d)) as Vec3;
+          const p = ndcOf([0, 0, 0], focus, c.camDir, d, aspect, FOV);
+          expect(Math.max(Math.abs(p.x), Math.abs(p.y)), `aspect ${aspect} at ${d} R⊕`).toBeLessThanOrEqual(0.7);
+        }
+      }
+    }
+  });
+
+  it('once the ramp has ended the Sun is the look-at: it sits at the centre', () => {
+    const c = canonical(REF);
+    for (const aspect of ASPECTS) {
+      const sun: Vec3 = c.sunDir.map((x) => x * SUN_DIAGRAM_DIST) as Vec3;
+      const p = ndcOf(sun, sun, c.camDir, STAGE_EDGES.system, aspect, FOV);
+      expect(Math.hypot(p.x, p.y)).toBeLessThan(1e-9);
     }
   });
 });
