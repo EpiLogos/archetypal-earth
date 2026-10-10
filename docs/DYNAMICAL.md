@@ -79,8 +79,14 @@ The cite is taken from the corpus, not typed: a Van Eenwyk locator must be the p
 the matched pdf page (`print pNN` → `p. NN`), and a Van Eenwyk cite carries the matched source's own title and year.
 A Jung locator must name the matched pdf page. Until `public/data/dynamics.json` exists the mode renders everything
 computed from `field.json` (strip, arcs, native renders) and shows no concept cards. `npm run dynamics:check` with
-no concepts curated prints *nothing to check* and fails if a published file exists without its curation. Cloud
-sessions cannot run the rail; the owner runs `npm run dynamics:check`.
+no concepts curated prints *nothing to check* and fails if a published file exists without its curation.
+
+A source may be a corpus volume (`corpus/<work>.md`, pinned by its sha256) or a work the vault keeps outside `corpus/`
+(`_raw-ext/<work>/pages`, pinned by the digest of its page files in pdf order and read in the corpus's shape by
+`scripts/lib/external.mjs`: running heads become `print` labels, kept where they agree with their neighbours). Van
+Eenwyk's book is the second kind. A Jung volume's `year` may be empty, because the vault records no essay dates, and
+the cite then names the volume and the ¶. Run with `VAULT=<vault> npm run dynamics` (or `dynamics:check`); `npm run data` runs it last.
+14 concepts ship, from the vault's chaos-dynamics map (2026-10-10).
 
 ## 6. Out of scope / honest limits
 No claim that the field *is* chaotic; no Lyapunov exponents or fitted models presented as findings; no prediction
@@ -94,5 +100,8 @@ drawn. Most subjects therefore carry no tick, and that is the reading, not a fau
 drawn as a band; the three parallel groups of the Self are one level each, so none is drawn.
 
 The correspondence rows (attractor-generating pattern; mandala as fractal attractor, Van Eenwyk pp. 110–111;
-enantiodromia as phase transition; health at the chaotic edge) are named by the audit from the vault harvest and
-remain to be verified verbatim by the rail in §5.
+enantiodromia as phase transition; health at the chaotic edge) are named by the audit from the vault harvest. They
+are now verified verbatim by the rail in §5 and ship as concept cards, with the map's other rows: oscillation,
+cascade into chaos, symmetry-building bifurcation, symbols generating chaos then symmetry, the homoclinic point,
+compensation as self-organization, the stuck attractor, irreducible interpretation, relationship, and the
+symbol as manifold.

@@ -686,7 +686,7 @@
       "terms": [
        "astarte-gold-plaque-syria"
       ],
-      "text": "ASTARTE",
+      "text": "ASTARTE Gold plaque, Syria, c. xu century B.c.",
       "cite": {
        "work": "neumann-great-mother",
        "workTitle": "The Great Mother",
@@ -1730,12 +1730,13 @@
       "terms": [
        "baptism-les-grandes-heures"
       ],
-      "text": "BAPTISM",
+      "text": "BAPTISM Miniature from the manuscript Les Grandes Heures du duc de Berry, ¢, £400",
       "cite": {
        "work": "neumann-great-mother",
        "workTitle": "The Great Mother",
        "locator": "pdf p300"
       },
+      "scan": true,
       "families": []
      },
      {
@@ -9688,7 +9689,7 @@
       "terms": [
        "ta-urt"
       ],
-      "text": "TA-URT",
+      "text": "TA-URT Green schist, Thebes, xxvi Dynasty",
       "cite": {
        "work": "neumann-great-mother",
        "workTitle": "The Great Mother",
@@ -9811,7 +9812,7 @@
       "terms": [
        "chimu-owl-god-clay-vessel"
       ],
-      "text": "Owl god",
+      "text": "CLAY VESSELS Chimu Indians, Peru",
       "cite": {
        "work": "neumann-great-mother",
        "workTitle": "The Great Mother",
