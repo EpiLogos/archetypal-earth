@@ -358,3 +358,7 @@ body.landing-on .time { opacity: 0.35; }
 .dp-place { display: block; font: 12px var(--sans); color: var(--ink-2); margin-top: 2px; }
 .dp-instances .lq { margin: 6px 0 4px; }
 .dp-dreams { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 12px; }
+
+.dp-term { display: block; font: 600 13px var(--sans); color: var(--ink); }
+.dp-scan { display: inline-block; margin: 0 0 6px; font: 11px var(--sans); color: var(--ink-3); }
+.dp-group summary { min-height: 44px; display: flex; align-items: center; }

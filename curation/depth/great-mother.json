@@ -1,5 +1,5 @@
 {
-  "_note": "The Great Mother at full depth: the exemplar of what one archetype's whole field looks like. Jung's definition and his catalogue, Neumann's structure (The Great Mother) and his placing of it in the growth of consciousness (The Origins and History of Consciousness, with Jung's own foreword), and the field's images, instances and dreams. Quotations name only their work and words and are placed by the corpus at build time (`npm run depth`). `speaker` marks words that are not the volume author's (Jung's foreword inside Neumann's book). Neumann's dated instances are taken from the reading-pass records (data/mentions/neumann-great-mother), only those that place exactly and carry no scan damage.",
+  "_note": "The Great Mother at full depth: the exemplar of what one archetype's whole field looks like. Jung's definition and his catalogue, Neumann's structure (The Great Mother) and his placing of it in the growth of consciousness (The Origins and History of Consciousness, with Jung's own foreword), and the field's images, instances and dreams. Quotations name only their work and words and are placed by the corpus at build time (`npm run depth`). `speaker` marks words that are not the volume author's (Jung's foreword inside Neumann's book). Neumann's instances are taken from the reading-pass records (data/mentions/neumann-great-mother, and the great-mother and uroboros records of neumann-origins): every one whose quotation places on its page; damaged scan text is marked, not dropped.",
   "version": 1,
   "archetype": "great-mother",
   "line": "Jung drew a line between the Great Mother, a figure of comparative religion, and the mother archetype behind it. Neumann, his student, gave the archetype its fullest single study. This page holds both, then the images, the instances and the dreams the field has for it.",
@@ -49,5 +49,11 @@
       "families": ["uroboros", "battle-with-dragon"]
     }
   ],
-  "instances": { "vol": "neumann-great-mother", "line": "Neumann's book is built on its plates. The scan of the plates section is too damaged to read most captions, so only the dated instances that can be quoted exactly are listed here." }
+  "instances": {
+    "sources": [
+      { "vol": "neumann-great-mother" },
+      { "vol": "neumann-origins", "terms": ["great-mother", "uroboros"] }
+    ],
+    "line": "Every instance Neumann gives of her, as the reading passes recorded them from The Great Mother, with the instances Origins records of the Great Mother and the uroboros: dated ones in order, the rest by the kind of thing they are. Where the scan of a plate caption is damaged, the words are as the scan reads them and the entry says so."
+  }
 }
