@@ -4,7 +4,7 @@
 //
 //   earth    1.05 → 40        the atlas as it always was; no sky layer
 //   lunar    40 → 600         the Moon's ring and body, the Sun as a bright direction
-//   handoff  600 → 3 000      the look-at eases from the Earth to the Sun (by 1 750, see FOCUS_HANDOFF); rings and planets arrive
+//   handoff  600 → 3 000      the look-at eases from the Earth to the Sun (by 2 400, see FOCUS_HANDOFF); rings and planets arrive
 //   system   beyond           the heliocentric field, radial scale diagrammatic and said so
 import { MIN_DIST } from '../globe/zoom';
 import type { Vec3 } from '../data/geo';
@@ -16,12 +16,16 @@ export const STAGE_EDGES = { lunar: 40, handoff: 600, system: 3000 } as const;
 
 /**
  * The look-at's share of the Sun across the handoff, 0 → 1, as a function of distance alone. It is 0 at the Earth stage's
- * edge (so the atlas's framing is unchanged there) and 1 once the Sun is the subject. It reaches 1 at 1 750 R⊕ rather than at
- * the system edge: on a desktop view of the canonical system pose, the Earth and the Sun are both inside the central 70% from
- * ~1 070 R⊕ on (`bothInFrame`). The former ramp to 3 000 R⊕ got there only at ~1 170 R⊕ (aspect 2.2) and ~1 290 R⊕ (1.6).
- * Its midpoint (0.5) falls at ~1 024 R⊕, where the look-at is the midpoint of the Earth and the Sun.
+ * edge (so the atlas's framing is unchanged there) and 1 once the Sun is the subject. It reaches 1 at 2 400 R⊕, not at the
+ * system edge: the canonical system view (`systemViewAzimuth`) lays the Earth–Sun line along the line of sight, so the Sun
+ * stands ~554 R⊕ above the Earth on screen (tilted a little off the vertical by the obliquity, which the north-up rig does not
+ * follow) whatever the date or the viewport, and the look-at must stay between the two until the Sun alone can hold them both
+ * inside the central 70% (~2 300 R⊕ at a 38° elevation). From ~1 320 R⊕ on, the Earth and the Sun are both inside it on every
+ * date, on a phone and on a desktop (`bothInFrame`). The former ramp to 1 750 R⊕ held
+ * only for a camera azimuth fixed in the ecliptic, and only on one date of the year. Its midpoint (0.5) falls at 1 200 R⊕,
+ * where the look-at is the midpoint of the Earth and the Sun.
  */
-export const FOCUS_HANDOFF = { from: STAGE_EDGES.handoff, to: 1750 } as const;
+export const FOCUS_HANDOFF = { from: STAGE_EDGES.handoff, to: 2400 } as const;
 export function handoffFocusWeight(dist: number): number {
   return logStep(dist, FOCUS_HANDOFF.from, FOCUS_HANDOFF.to);
 }
@@ -225,8 +229,17 @@ export function settleStep(remainingDeg: number, dtS: number): number {
 
 /** The chosen elevation above the ecliptic of the default system view, degrees. */
 export const SYSTEM_VIEW_ELEVATION = 38;
-/** … and its ecliptic azimuth (the direction the camera sits toward, ecliptic longitude). */
-export const SYSTEM_VIEW_LONGITUDE = 250;
+/**
+ * … and its ecliptic azimuth (the direction the camera sits toward, ecliptic longitude): the Sun's geocentric longitude, so
+ * the camera looks along the Earth–Sun line from beyond the Sun, with the Earth's lit side toward it. At the fixed azimuth the
+ * view used to have (250°), the line swung across the screen over the year — the Earth left the frame at some dates, and on a
+ * phone the line ran across a viewport too narrow to hold it. Along the line of sight it projects (nearly) onto the vertical,
+ * which every viewport holds alike, and the framing is the same on every date and every aspect. The system's own composition (the
+ * rings, the planets) does not depend on the azimuth: the fit is symmetric in it.
+ */
+export function systemViewAzimuth(sunLonDeg: number): number {
+  return ((sunLonDeg % 360) + 360) % 360;
+}
 
 /** Distances (Earth radii) over which the atlas's surface layers (presences, arcs, tiles, markers) give way to the sky. */
 export const SURFACE_FADE = { from: 6, to: 36 } as const;

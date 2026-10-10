@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   AU_IN_EARTH_RADII, APPROACH_BODIES, APPROACH_FILL, COMPRESSION, EARTH_RADIUS_KM, SKY_ENTER, SKY_EXIT, SKY_EXTENT, SKY_OVERSHOOT, STAGE_EDGES, approachDist,
-  compressAu, depthPlanes, handoffFocusWeight, isApproachBody, skyMaxDist, stageDistance, stageOf, stageWeights, surfaceWeight, systemHomeDist, LEGACY_DEPTH_MAX,
+  compressAu, depthPlanes, FOCUS_HANDOFF, handoffFocusWeight, isApproachBody, skyMaxDist, stageDistance, stageOf, stageWeights, surfaceWeight, systemHomeDist, LEGACY_DEPTH_MAX,
 } from '../../src/sky/stages';
 
 /** Every body's true radius, as the generator wrote it (public/data/sky.json). */
@@ -35,7 +35,8 @@ describe('stages', () => {
 
   it('the look-at\'s share of the Sun is 0 across the Earth and lunar stages, and 1 once the Sun is the subject', () => {
     for (const d of [1.05, 6, 40, 300, 600]) expect(stageWeights(d).focus).toBe(0);
-    expect(stageWeights(1750).focus).toBe(1);
+    expect(stageWeights(FOCUS_HANDOFF.to).focus).toBe(1);
+    expect(stageWeights(1750).focus).toBeLessThan(1);
     expect(stageWeights(5000).focus).toBe(1);
     expect(handoffFocusWeight(900)).toBeGreaterThan(0);
     expect(handoffFocusWeight(900)).toBeLessThan(1);

@@ -164,6 +164,11 @@ export class SkyLayer {
   gmst = 0;
   eps = 23.44;
   moment = Date.now();
+  /** The Sun's geocentric ecliptic longitude, degrees, at the standing moment: where the canonical system view looks from. */
+  get sunLonDeg(): number {
+    const v = this.poses.get('sun');
+    return v ? (Math.atan2(v[1], v[0]) * 180) / Math.PI : 0;
+  }
   /** the unit direction from the Earth to the Sun, scene axes, at the moment; valid only while `sunKnown` */
   readonly sunDir = new THREE.Vector3(1, 0, 0);
   /** false when the moment lies outside the generated span: there is no true Sun to light the Earth with */
