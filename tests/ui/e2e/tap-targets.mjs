@@ -16,7 +16,9 @@ for (const h of hashes) {
     const out = [];
     const sel = 'button, a[href], select, input, textarea, summary, [role="button"], [role="switch"], [tabindex="0"]';
     for (const e of document.querySelectorAll(sel)) {
-      const r = e.getBoundingClientRect();
+      // a checkbox or radio inside its label is tapped through the label: measure that
+      const lab = e.matches('input[type="checkbox"], input[type="radio"]') ? e.closest('label') : null;
+      const r = (lab ?? e).getBoundingClientRect();
       if (!r.width || !r.height) continue;
       const cs = getComputedStyle(e);
       if (cs.visibility === 'hidden' || cs.pointerEvents === 'none') continue;

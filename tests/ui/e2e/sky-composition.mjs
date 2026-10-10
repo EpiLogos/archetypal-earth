@@ -23,11 +23,15 @@ const check = (ok, label, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${kind} ${label}${detail ? ` — ${detail}` : ''}`);
 };
 
-/** The Earth-stage canvas hashes, recorded from the unchanged code on this sandbox's renderer (SwiftShader, 1280×800). */
+/**
+ * The Earth-stage canvas hashes, recorded from the unchanged code on this sandbox's renderer (SwiftShader, 1280×800).
+ * Re-recorded after the lens-system branch (its filter cull changes how faint presences draw) from the commit before the
+ * S3 fold-in; the fold-in reproduces them exactly. The first run after the dev server re-optimizes can differ (cold tiles).
+ */
 const EARTH_BEFORE = {
-  1.5: '5d6baa36289f60fcc07649504da7913b791fc2ac4654da766670d313667608d8',
-  3.8: '65bf68b4c05a14f223c2952f0cf2722f908e0683cd8a76159fa90af47fd13055',
-  5.4: 'a2f41ee5c07b28218cbea1852c8909617ad9787e5556ebe38ed44c4bd1842028',
+  1.5: '5db8831d0075481a43a4de7d4f187bc3705dede799352dee35d5ab7808a333fa',
+  3.8: '2e550af6a018b0f26187a9690bc6d1df7927109360b60f5d9b964858d9c07281',
+  5.4: 'a05bb45532c934ee45ab141fbf1a492e43854c0c3ce8702846030581a4e71832',
 };
 
 // the canonical system view (frames.ts systemViewLatLon, azimuth stages.ts systemViewLongitude) at the layer's own clock, computed
