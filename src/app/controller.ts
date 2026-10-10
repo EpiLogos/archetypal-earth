@@ -8,7 +8,7 @@ import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
-import { defaultReadingId, hashToState, hashWithFilter } from '../state/router';
+import { defaultReadingId, hashToState, hashWithFilter, type BirthPrefill } from '../state/router';
 import { astrologyAt, back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
@@ -82,6 +82,8 @@ export class Controller {
   state: AppState = WORLD;
   private started = false;
   private pendingHash: string | null = null;
+  /** a birth from an old link, in memory until the Astrology form takes it */
+  private birthPrefill: BirthPrefill | null = null;
   private rel: Float32Array;
   private searchIndex;
   private floats: Floats;
@@ -314,6 +316,7 @@ export class Controller {
     const rig = this.engine.rig;
     rig.dist = rig.targetDist = this.worldDist();
     const parsed = hashToState(location.hash, this.resolver());
+    if (parsed.birthPrefill) this.birthPrefill = parsed.birthPrefill;
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
       this.time.pause();
@@ -359,6 +362,11 @@ export class Controller {
     }
     this.pendingHash = null;
     const parsed = hashToState(h, this.resolver());
+    if (parsed.birthPrefill) {
+      // the birth leaves the address bar and history at once; the form holds it until it is saved or left
+      this.birthPrefill = parsed.birthPrefill;
+      history.replaceState(history.state, '', hashWithFilter(parsed.state, this.filter));
+    }
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
     }
@@ -855,6 +863,7 @@ export class Controller {
       openOccurrence: (occId) => this.openReading(occId),
       setPath: (path, opts) => { if (this.activeLens === id) this.navigate(inLens(id, path), opts); },
       refreshNatal: () => this.refreshNatal(),
+      takeBirthPrefill: () => { const b = this.birthPrefill; this.birthPrefill = null; return b; },
     };
   }
 

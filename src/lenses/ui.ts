@@ -25,6 +25,7 @@ export function voiceOf(work: string): string | null {
   if (work.startsWith('neumann')) return 'Neumann';
   if (work === 'burt-zodiac') return 'Burt';
   if (work === 'a-blue-fire') return 'Hillman';
+  if (work === 'van-eenwyk') return 'Van Eenwyk';
   return null;
 }
 

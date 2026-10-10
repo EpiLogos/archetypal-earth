@@ -47,7 +47,7 @@ export function buildAstrology({ vault = DEFAULT_VAULT } = {}) {
       if (local.length) { warnings.push(`left out (does not place exactly in the corpus text): ${local[0]}`); continue; }
       burtQuotes.push({ ...placed[0], voice: 'burt' });
     }
-    bodies[key] = { key, name: c.name, line: c.line, quotes: cite(c.quotes, `body ${key}`), ties: fieldTies, burt: burtQuotes.slice(0, 3) };
+    bodies[key] = { key, name: c.name, line: c.line, quotes: cite(c.quotes, `body ${key}`), ties: fieldTies, burt: burtQuotes };
   }
 
   const signs = {};

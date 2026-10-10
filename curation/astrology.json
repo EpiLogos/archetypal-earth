@@ -194,13 +194,14 @@
       "label": "C. G. Jung",
       "birth": {
         "date": "1875-07-26",
-        "time": null,
+        "time": "19:32",
+        "timeSource": "Gret Baumann-Jung, his daughter, who cast his chart (published in Jung on Astrology, 2017). Other records give 19:20 to 19:41, so the rising degree is approximate.",
         "place": "Kesswil, Thurgau",
         "lat": 47.6,
         "lon": 9.32,
         "offset": "mean-time"
       },
-      "line": "Jung is the first chart here. The corpus gives the year and the region; the day and the village come from the public record. It gives no birth time, so his chart is cast for local noon: no rising sign, and the Moon may be a few degrees off.",
+      "line": "Jung is the first chart here. The corpus gives the year and the region. The day, the village and the time, 19:32 local mean time, come from the public record: the time is the one his daughter Gret Baumann-Jung used when she cast his chart.",
       "quote": {
         "work": "cw01",
         "quote": "Jung was born in northeastern Switzerland in 1875, a Protestant clergyman’s son."

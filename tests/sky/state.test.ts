@@ -63,8 +63,12 @@ describe('the sky state', () => {
   it('reads the deep-link forms', () => {
     expect(hashToState('#/sky', r).state).toEqual(inSky());
     expect(hashToState('#/sky/moon', r).state).toEqual(inSky({ body: 'moon' }));
-    // the old birth links carried a birth moment: they open Astrology empty, and the moment is dropped
-    expect(hashToState('#/sky/birth/1875-07-26T19:25/47.55/9.2', r).state).toEqual(astrologyAt([]));
+    // the old birth links carried a birth moment: they open Astrology with the form filled from it; the state names no birth
+    const old = hashToState('#/sky/birth/1875-07-26T19:25/47.55/9.2', r);
+    expect(old.state).toEqual(astrologyAt([]));
+    expect(old.birthPrefill).toEqual({ date: '1875-07-26', time: '19:25', lat: 47.55, lon: 9.2 });
+    expect(hashToState('#/sky/birth/not-a-date/1/2', r).birthPrefill).toBeUndefined();
+    expect(hashToState('#/sky/birth/1875-07-26T19:25/95/9.2', r).birthPrefill).toBeUndefined();
   });
 
   it('closing a card keeps the culture the sky is read through', () => {

@@ -7,6 +7,7 @@
 //     break (de-hyphenating would guess a word: the rail refuses rather than publish one it cannot be sure of);
 //   · a mismatch, a missing page, an ambiguous match, or a changed corpus file is a loud failure that names the concept.
 // The vault is read-only. Nothing here reads the vault unless a curated concept asks it to.
+import { externalDigest, externalMarkdown } from './external.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -114,10 +115,12 @@ export function validateCuration(curation, { families } = {}) {
     const w = `sources.${key}`;
     if (!WORK_KEY.test(key)) fail(w, 'the key must be a corpus work key');
     if (!isObj(s)) { fail(w, 'expected an object'); continue; }
-    if (typeof s.file !== 'string' || !s.file.startsWith('corpus/') || s.file.split('/').includes('..')) fail(w, 'file must be a corpus/ path inside the vault');
+    if (typeof s.file !== 'string' || !(s.file.startsWith('corpus/') || s.file === `_raw-ext/${key}/pages`) || s.file.split('/').includes('..')) fail(w, 'file must be a corpus/ path, or _raw-ext/<key>/pages, inside the vault');
     if (!SHA256.test(s.sha256 ?? '')) fail(w, 'sha256 must be the 64-character hex digest of the corpus file');
     if (!isStr(s.title)) fail(w, 'title is required');
-    if (!isStr(s.year)) fail(w, 'year is required');
+    // a Van Eenwyk source carries its year; a Jung volume's essays span decades and the vault records no essay dates, so
+    // its year may be left empty (the cite then names the volume and the ¶ alone)
+    if (s.voice === 'V' ? !isStr(s.year) : typeof s.year !== 'string') fail(w, s.voice === 'V' ? 'year is required' : 'year must be a string (empty when the vault gives none)');
     if (s.voice !== 'V' && s.voice !== 'J') fail(w, 'voice must be "V" (Van Eenwyk) or "J" (Jung)');
   }
   const checkQuote = (q, label, voice, w) => {
@@ -167,10 +170,12 @@ export function loadSourcePages(curation, vault) {
     const file = path.resolve(root, s.file);
     if (!file.startsWith(`${root}${path.sep}`)) { errors.push(`sources.${key}: file is outside the vault`); continue; }
     if (!fs.existsSync(file)) { errors.push(`sources.${key}: corpus file unavailable: ${file}`); continue; }
-    const raw = fs.readFileSync(file);
-    const hash = crypto.createHash('sha256').update(raw).digest('hex');
+    // a work kept outside corpus/ is its page files, read in the corpus's shape and pinned by their digest
+    const external = s.file.startsWith('_raw-ext/');
+    const raw = external ? null : fs.readFileSync(file);
+    const hash = external ? externalDigest(vault, key) : crypto.createHash('sha256').update(raw).digest('hex');
     if (hash !== s.sha256) errors.push(`sources.${key}: corpus file changed (sha256 ${hash}); recheck the curation before updating its hash`);
-    const parsed = parseCorpusPages(raw.toString('utf8'), key);
+    const parsed = parseCorpusPages(external ? externalMarkdown(vault, key, s.title) : raw.toString('utf8'), key);
     for (const page of parsed.duplicates) errors.push(`sources.${key}: pdf page ${page} is marked twice in the corpus`);
     pages.set(key, parsed.pages);
     labels.set(key, parsed.labels);

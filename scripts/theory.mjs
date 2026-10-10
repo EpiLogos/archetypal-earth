@@ -43,7 +43,7 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     series: one(ql.series, 'number.series'),
     numbers: ql.numbers.map((n) => ({ n: n.n, position: n.position, ql: { ...qlText(n.ql, `number ${n.n}`), ...(n.ql.also ? { also: qlText(n.ql.also, `number ${n.n} also`) } : {}) }, quotes: many(n.quotes, `number ${n.n}`) })),
     psychoid: { line: ql.psychoid.line, quotes: many(ql.psychoid.quotes, 'psychoid'), ql: qlText(ql.psychoid.ql, 'psychoid ql') },
-    time: { line: ql.time.line, quotes: many(ql.time.quotes, 'time'), quaternio: { intro: one(ql.time.quaternio.intro, 'quaternio'), terms: ql.time.quaternio.terms }, vaneenwyk: ql.time.vaneenwyk },
+    time: { line: ql.time.line, quotes: many(ql.time.quotes, 'time'), quaternio: { intro: one(ql.time.quaternio.intro, 'quaternio'), terms: ql.time.quaternio.terms }, vaneenwyk: { line: ql.time.vaneenwyk.line, quotes: many(ql.time.vaneenwyk.quotes, 'time.vaneenwyk').map((q) => ({ ...q, voice: 'vaneenwyk' })) } },
   };
   return { data: { version: 1, sections, number }, errors, warnings };
 }

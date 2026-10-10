@@ -477,7 +477,7 @@
    "cite": {
     "work": "cw13",
     "workTitle": "Alchemical Studies",
-    "locator": "pdf p339"
+    "locator": "¶355 (pdf p339)"
    }
   },
   {
@@ -647,7 +647,8 @@
        "cite": {
         "work": "cw09ii",
         "workTitle": "Aion: Researches into the Phenomenology of the Self",
-        "locator": "¶424 (pdf p284)"
+        "locator": "¶424 (pdf p284)",
+        "print": "268"
        }
       }
      ]
@@ -659,7 +660,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p137"
+      "locator": "pdf p137",
+      "print": "115"
      },
      "voice": "burt"
     },
@@ -668,7 +670,18 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p136"
+      "locator": "pdf p136",
+      "print": "114"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Moon was a bestower of the gifts of feeling, of intuition, and of nurturing instincts which men did not seem to possess.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p136",
+      "print": "114"
      },
      "voice": "burt"
     },
@@ -678,6 +691,34 @@
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
       "locator": "pdf p18"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Cancer, the Cosmic Womb, is also the first Water sign.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p135"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p135"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Within the Great Mother archetype are two distinct personalities—the Gentle Mother like Kwan Yin the Merciful and Compassionate of Chinese Mythology, and the Terrible Mother, like India's Kali Ma and the Greek Medusa.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p137",
+      "print": "115"
      },
      "voice": "burt"
     }
@@ -750,7 +791,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p96"
+      "locator": "pdf p96",
+      "print": "74"
      },
      "voice": "burt"
     },
@@ -769,6 +811,73 @@
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
       "locator": "pdf p95"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "As ruler of the Earth sign Virgo, Hermes seems less flighty, more grounded, stable and consistent in his behavior than he was as ruler of airy Gemini.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p211"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In the process of alchemical purification Hermes' virtues are those of the Virgo archetype: patience, purification or perfectionism, meticulous attention to technique and procedure, obedience to methodology, industriousness, and most important, humility.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p212",
+      "print": "190"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In Greek mythology, particularly in Homer's epics, Mercury's thinking, counseling role as wise Messenger God was played by Hermes or Athene, two almost interchangeable Logos symbols.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p30",
+      "print": "8"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Aries at the esoteric level has begun to work consciously with Mercury (Logos), his/her spiritual ruler.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p30",
+      "print": "8"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Behind many a shy, simple Virgo personality hides magical Hermes.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p212",
+      "print": "190"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p95"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Each year as we enter Virgo, the mood of the Earth itself seems to become more withdrawn, introspective, quieter.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p211"
      },
      "voice": "burt"
     }
@@ -802,7 +911,8 @@
        "cite": {
         "work": "cw09i",
         "workTitle": "The Archetypes and the Collective Unconscious",
-        "locator": "¶60 (pdf p39)"
+        "locator": "¶60 (pdf p39)",
+        "print": "28"
        }
       }
      ]
@@ -820,7 +930,8 @@
        "cite": {
         "work": "cw09i",
         "workTitle": "The Archetypes and the Collective Unconscious",
-        "locator": "¶60 (pdf p39)"
+        "locator": "¶60 (pdf p39)",
+        "print": "28"
        }
       }
      ]
@@ -859,7 +970,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p122"
+      "locator": "pdf p122",
+      "print": "100"
      },
      "voice": "burt"
     },
@@ -868,7 +980,74 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p122"
+      "locator": "pdf p122",
+      "print": "100"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "She is Aphrodite, Goddess of Love, aesthetics and civilized good taste.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Greeks saw Ares (Aries) and Aphrodite as particularly potent deities because they were among the few divinities who could actually possess mortals. Ares could possess a man with rage, and Aphrodite with her spell of longing, yearning, and love.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "It is important for them to work consciously with the planets aspecting natal Venus to help Venus express its positive instincts—warmth, grace of self-expression, social comfort, artistic expression, and charm.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p88",
+      "print": "66"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Most important, however, in my experience with Geminis who have developed their Venus (or esoteric ruler), is the warmth they project to others. Others in their lives feel loved, as well as analyzed.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p123",
+      "print": "101"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Consciousness (Hermes) and love (Venus and Eros) combined form a very intuitive, creative partnership.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p123",
+      "print": "101"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Passive, patient, and placid, Taurus earth is fertile and fecund sexuality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p59"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
      },
      "voice": "burt"
     }
@@ -932,7 +1111,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p27"
+      "locator": "pdf p27",
+      "print": "5"
      },
      "voice": "burt"
     },
@@ -941,7 +1121,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p27"
+      "locator": "pdf p27",
+      "print": "5"
      },
      "voice": "burt"
     },
@@ -950,7 +1131,95 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p28"
+      "locator": "pdf p28",
+      "print": "6"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Archetypally, we think of Mars as a sports car driver or even a professional racer in the Indianapolis 500.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p28",
+      "print": "6"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Thus, in Scorpio, Mars is not the outspoken, direct planetary ruler we encountered in Aries (see Chapter 1), but a much subtler energy.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "An intense, focused Scorpio-will directed by Mars' dynamic thrust is capable of achieving a major breakthrough this lifetime.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "According to Alice Bailey it is Mars, not Pluto, that functions as esoteric ruler of Scorpio.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Mars also makes sense as esoteric ruler if we consider it in its retrograde phase, as the introverted, sublimated instincts consciously focused upon a specific goal.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Age of Aries is a solar, or masculine age. It is the Age of the Ram, of Mars and of the Hero.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p23"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aries' energy is like the Sun's rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p24",
+      "print": "2"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aries represents the \"Irresistible Force,\" as Dane Rudhyar put it. This is the power of the ram's horns.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p25",
+      "print": "3"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio).",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
      },
      "voice": "burt"
     }
@@ -1014,7 +1283,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p349"
+      "locator": "pdf p349",
+      "print": "327"
      },
      "voice": "burt"
     },
@@ -1023,7 +1293,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p350"
+      "locator": "pdf p350",
+      "print": "328"
      },
      "voice": "burt"
     },
@@ -1032,7 +1303,87 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p350"
+      "locator": "pdf p350",
+      "print": "328"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In every Sagittarian client—even those who seem to burn like forest fires out of control—there is this pure spark of Zeus' enthusiasm.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p350",
+      "print": "328"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In astrology, we normally use transiting Jupiter to answer questions about moves and long-distance travel—about motion in the outer world. However, apparently the esoteric tradition experienced Jupiter through dreams and meditation as inner space, as what Jung called psychic space.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p369",
+      "print": "347"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In India, Jupiter is known as Guru by astrologers.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p369",
+      "print": "347"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Jupiter (opportunity) is the esoteric ruler of Aquarius.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p455",
+      "print": "433"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Combining Jupiter and Uranus (the esoteric and mundane rulers of Aquarius) is the work of the New Age.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p455",
+      "print": "433"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Sagittarian, like his ruler, manifests big virtues and big vices.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p349",
+      "print": "327"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or \"fire up\" others.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p339"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "There is a sense of playfulness to Sagittarius. It's rather like the stage in alchemy where hard work is over and there is the joy of spontaneous growth.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p340",
+      "print": "318"
      },
      "voice": "burt"
     }
@@ -1158,7 +1509,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p385"
+      "locator": "pdf p385",
+      "print": "363"
      },
      "voice": "burt"
     },
@@ -1167,7 +1519,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p385"
+      "locator": "pdf p385",
+      "print": "363"
      },
      "voice": "burt"
     },
@@ -1176,7 +1529,56 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p398"
+      "locator": "pdf p398",
+      "print": "376"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn as the Cross of Matter can mean that attachment to these mundane things interferes with true happiness.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn simplifies our lives by dissolving things we hang onto that don't really make us happy, so that we can get on with life.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn is the greatest of teachers for those of us who are observant. How we react to Saturn transits indicates the level of our attunement.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle, while people make these Winter Solstice remarks.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p379"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "At the mundane level, the Capricorn archetype can be recognized every year in conversations about shoulds and oughts, conflicting family duties, traditions, growing older, and an overwhelming feeling of being under pressure because \"there's so little time.\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p379"
      },
      "voice": "burt"
     }
@@ -1204,7 +1606,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p241"
+      "locator": "pdf p241",
+      "print": "219"
      },
      "voice": "burt"
     },
@@ -1213,7 +1616,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p241"
+      "locator": "pdf p241",
+      "print": "219"
      },
      "voice": "burt"
     },
@@ -1222,7 +1626,76 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p453"
+      "locator": "pdf p453",
+      "print": "431"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus needs to be honored through discovery of new concepts, ideas, friends, organizations.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p453",
+      "print": "431"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus, more than any other transiting planet, forces us to hear the Muezzin's call from the tower, to wake up. Sometimes it seems that must be its major cosmic purpose.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p459",
+      "print": "437"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus transits, if constructively used, may be productive time out from mundane, routinized living, to detach, gain perspective and look more objectively at the world through different and clearer lenses.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p460",
+      "print": "438"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus is the esoteric ruler of Libra. It's also the higher octave planet for Mercury, Virgo's mundane ruler. It refers to objectivity on the material, the data, the approach to the service.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p241",
+      "print": "219"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus has an objectivity about life's situations and injustices that helps Libra to stand back and detach rather than yield to Aphrodite, the mundane ruler, when she tries to take things too personally.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p270",
+      "print": "248"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p447"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aquarius is an Air sign and as such has a mental approach to life and decision making in the beginning stages of his life journey.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p447"
      },
      "voice": "burt"
     }
@@ -1259,7 +1732,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p159"
+      "locator": "pdf p159",
+      "print": "137"
      },
      "voice": "burt"
     },
@@ -1268,7 +1742,8 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p162"
+      "locator": "pdf p162",
+      "print": "140"
      },
      "voice": "burt"
     },
@@ -1277,7 +1752,66 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p162"
+      "locator": "pdf p162",
+      "print": "140"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Remember—Poseidon does not dissolve anything we still need. He only prevents a Seeker from clinging to that which limits him, or stands in the way of his growth.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p162",
+      "print": "140"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Neptune is not about apathy or feeling good in meditation, but about hearing and acting upon what God tells us to do in the outer world—acting from the inside (the Spiritual Center) outward.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p543",
+      "print": "521"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Neptune's message is \"Relax. Let go and let God have some room. Resign yourself to the idea that maybe you won't get there this lifetime, quit striving so hard, and then maybe you will get there after all.\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p546",
+      "print": "524"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Also, these rulers of Pisces point toward deeper truths, eternal truths in the depths of the cosmic ocean.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p543",
+      "print": "521"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pisces is the last of the four Mutable signs—Mutable Water. As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, \"Who shall bind the Infinite?\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p509"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p509"
      },
      "voice": "burt"
     }
@@ -1328,11 +1862,62 @@
      "voice": "burt"
     },
     {
+     "text": "Pluto, for example, is a reclusive planet which can, in the chart for a scientist, help Mars sublimate sexual energy into the work of discovery.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p40",
+      "print": "18"
+     },
+     "voice": "burt"
+    },
+    {
      "text": "This accords, too, with the esoteric tradition in which Pluto is the higher octave planet for Mars.",
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p41"
+      "locator": "pdf p41",
+      "print": "19"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Though you may view Pluto as a malefic planet, its prime objectives are transformation and transcendence.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pluto should put you into contact with your inner resources in time of crisis, help you face your worst fears and transcend.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "As ruler of Scorpio, Pluto brings fixity of purpose and will to power to the Mars personality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p40",
+      "print": "18"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "At the esoteric level Pluto's role is to free Pisces from attachment during the night sea journey.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
      },
      "voice": "burt"
     }
@@ -1447,7 +2032,8 @@
        "cite": {
         "work": "cw09ii",
         "workTitle": "Aion: Researches into the Phenomenology of the Self",
-        "locator": "¶424 (pdf p284)"
+        "locator": "¶424 (pdf p284)",
+        "print": "268"
        }
       }
      ]
@@ -1477,7 +2063,48 @@
      "cite": {
       "work": "burt-zodiac",
       "workTitle": "Archetypes of the Zodiac",
-      "locator": "pdf p176"
+      "locator": "pdf p176",
+      "print": "154"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "This hymn collection gives a good indication of the two levels at which the sun operates in ruling Leo—as mundane and as esoteric ruler.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p178",
+      "print": "156"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Esoterically, the sun represents illumination, and in India, the Sun Center or point between the eyebrows is the area where a yogi concentrates during his meditation as he seeks enlightenment.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p178",
+      "print": "156"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Thus, astrologers say that the Sun is exalted in Aries. An exuberant planet in an exuberant sign leads to an exalted personality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p24",
+      "print": "2"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "For Leo, who proceeds from the heart (that's Leo in medical astrology), the issue is self-control—self-mastery is the road to success and fulfillment.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p183",
+      "print": "161"
      },
      "voice": "burt"
     }
@@ -1600,13 +2227,14 @@
    "label": "C. G. Jung",
    "birth": {
     "date": "1875-07-26",
-    "time": null,
+    "time": "19:32",
+    "timeSource": "Gret Baumann-Jung, his daughter, who cast his chart (published in Jung on Astrology, 2017). Other records give 19:20 to 19:41, so the rising degree is approximate.",
     "place": "Kesswil, Thurgau",
     "lat": 47.6,
     "lon": 9.32,
     "offset": "mean-time"
    },
-   "line": "Jung is the first chart here. The corpus gives the year and the region; the day and the village come from the public record. It gives no birth time, so his chart is cast for local noon: no rising sign, and the Moon may be a few degrees off.",
+   "line": "Jung is the first chart here. The corpus gives the year and the region. The day, the village and the time, 19:32 local mean time, come from the public record: the time is the one his daughter Gret Baumann-Jung used when she cast his chart.",
    "quote": {
     "text": "Jung was born in northeastern Switzerland in 1875, a Protestant clergyman’s son.",
     "cite": {

@@ -24,7 +24,7 @@
    "cite": {
     "work": "cw08",
     "workTitle": "The Structure and Dynamics of the Psyche",
-    "locator": "pdf p275"
+    "locator": "¶505 (pdf p275)"
    }
   },
   "compensation": [
@@ -52,7 +52,8 @@
    "cite": {
     "work": "cw08",
     "workTitle": "The Structure and Dynamics of the Psyche",
-    "locator": "pdf p453"
+    "locator": "¶850 (pdf p453)",
+    "print": "441"
    }
   },
   "factors": [
@@ -61,7 +62,7 @@
     "cite": {
      "work": "cw08",
      "workTitle": "The Structure and Dynamics of the Psyche",
-     "locator": "pdf p459"
+     "locator": "¶858 (pdf p459)"
     }
    },
    {
@@ -69,7 +70,7 @@
     "cite": {
      "work": "cw08",
      "workTitle": "The Structure and Dynamics of the Psyche",
-     "locator": "pdf p459"
+     "locator": "¶858 (pdf p459)"
     }
    }
   ],

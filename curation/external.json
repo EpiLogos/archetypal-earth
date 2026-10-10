@@ -1,0 +1,9 @@
+{
+  "_note": "Works the vault keeps outside corpus/ (_raw-ext/<work>/pages, one file per pdf page, counted from 0 at the cover). scripts/lib/external.mjs reads them in the corpus's own shape. The title is the book's, as the vault note records it (author and year in the form the corpus uses).",
+  "works": {
+    "van-eenwyk": {
+      "title": "Archetypes & Strange Attractors: The Chaotic World of Symbols (John R. Van Eenwyk, 1997)",
+      "note": "wiki/texts/archetypes-and-strange-attractors.md"
+    }
+  }
+}
