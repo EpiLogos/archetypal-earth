@@ -175,3 +175,9 @@ export function occurrenceImage(m: Model, o: Occurrence): ImageRef | undefined {
 export function archetypesOfFamily(m: Model, f: Family): Archetype[] {
   return f.archetypes.map((t) => m.archById.get(t.id)).filter((x): x is Archetype => !!x);
 }
+
+/** The prime archetype (the Self): the centre every lens lands on when no subject is given. */
+export function selfSubject(m: Model): Subject {
+  const prime = m.field.archetypes.find((a) => a.prime);
+  return { type: 'archetype', id: prime?.id ?? 'self' };
+}

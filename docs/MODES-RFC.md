@@ -172,10 +172,21 @@ second backend behind the same interface without touching the lenses.
 Recorded with `vite build` (Rollup chunk sizes) and Lighthouse mobile (simulated Moto G Power, headless Chromium with
 software GL in the cloud container, so absolute scores are pessimistic; compare before and after only).
 
-| | before | after |
+| | before (one bundle) | after Thread 2 |
 |---|---|---|
-| JS on first load (raw / gzip) | 916 kB / 261 kB (one chunk) | see "As built" |
-| Lighthouse mobile performance | see "As built" | see "As built" |
+| JS parsed before the globe draws (raw / gzip) | 916 kB / 261 kB | 777 kB / 212 kB |
+| Fetched on first use instead | — | graph + d3 101 kB · Aion 24 kB · dynamical lens 19 kB · Red Book 10 kB · Theory 3 kB |
+| Lighthouse mobile: performance score (2 runs) | 0.28, 0.29 | 0.29, 0.31 |
+| Total blocking time (2 runs) | 12.1 s, 4.0 s | 4.5 s, 2.8 s |
+| Boot-up time (2 runs) | 18.1 s, 8.2 s | 9.1 s, 5.8 s |
+| Largest contentful paint (2 runs) | 16.6 s, 22.5 s | 21.9 s, 22.0 s |
+| Bytes transferred | 4,191 KiB | 4,055 KiB |
+
+Read these with care. The container has no GPU, so WebGL runs on SwiftShader at about 2 frames a second, and the
+numbers swing a lot between runs. What holds across runs is that blocking time and boot-up roughly halve once the graph
+and the lenses stop being parsed up front. LCP does not improve, and that is by design: the old intro painted its text
+in the HTML before anything else, while the new landing paints its line only after the field has drawn ("nothing
+before the field has been seen"). Three.js (525 kB of the remaining 777 kB) is the globe itself and cannot be deferred.
 
 ## As built
 

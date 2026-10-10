@@ -1,0 +1,40 @@
+/* The thumb pass (MODES-RFC §7): on a phone or any coarse pointer every control's real box is at least 44×44 px.
+   Where a control must keep its visual size and place, the box grows by padding and the same negative margin, so the
+   layout does not move; text links carry their underline as text-decoration, so it stays under the word. */
+@media (max-width: 760px), (pointer: coarse) {
+  .link-quiet {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; margin-block: -12px;
+    border-bottom-color: transparent; text-decoration: underline; text-decoration-color: rgb(var(--core-rgb) / 0.3); text-underline-offset: 4px;
+  }
+  .link-quiet:hover { border-bottom-color: transparent; text-decoration-color: rgb(var(--core-rgb) / 0.8); }
+  .fl-ties, .fl-links, .fl-up { row-gap: 4px; }
+  summary, .aion-browse > summary { display: inline-flex; align-items: center; min-height: 44px; }
+
+  .t-play { width: 44px; height: 44px; margin: -8px; }
+  .t-readout { display: inline-flex; align-items: center; justify-content: flex-end; min-height: 44px; margin-block: -15px; padding-inline: 4px; }
+
+  .aion-dot { width: 44px; height: 44px; left: -22px; top: -22px; background: transparent; box-shadow: none; }
+  .aion-dot::before { content: ''; position: absolute; left: 17px; top: 17px; width: 10px; height: 10px; border-radius: 50%; background: var(--core); box-shadow: 0 0 0 4px rgb(var(--core-rgb) / .12), 0 0 16px rgb(var(--core-rgb) / .7); }
+  .aion-dot.selected { box-shadow: none; }
+  .aion-dot.selected::before { box-shadow: 0 0 0 7px rgb(var(--core-rgb) / .2), 0 0 20px var(--core); }
+  .aion-dot span { left: 36px; top: 14px; }
+  .aion-epochs button { min-height: 44px; min-width: 44px; }
+
+  .sh-controls select, .aion-choices select, .sky-culture select, .gv-tools select { min-height: 44px; }
+  .rb-rail button { width: 44px; height: 44px; }
+  .rv-close, .dp-close { width: 44px; height: 44px; }
+  .st-frame { min-width: 50px; }  /* drawn at scale(0.9): 50 px is 45 on screen */
+  .gvt-link { min-height: 44px; min-width: 44px; justify-content: center; }
+  .sky-label { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; margin: -12px -8px; }
+}
+
+/* the lens's own dropdowns become bottom sheets on a phone, like the shell's menu */
+@media (max-width: 760px) {
+  .aion-choices, .gvt-panel {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: auto; max-width: none; max-height: 70vh; z-index: 45;
+    padding: 20px 18px calc(22px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; border-bottom: 0;
+    background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);
+  }
+  .gvt-option, .gvt-filter { min-height: 44px; }
+  .gvt-range { width: 140px; height: 32px; }
+}

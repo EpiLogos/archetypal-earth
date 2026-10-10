@@ -19,7 +19,7 @@ fetched, nothing was invented**. Everything below is measured from `public/data/
 
 No dead references: all 442 shipped files exist. `ImageRef.width/height` record the Commons *source* size, not
 the shipped file (416/442 differ; aspect ratios match). Shipped long edge ≈ 800 px — soft on large screens.
-`public/img/jung-portrait.jpg` (landing) has no recorded provenance in `images.json`.
+`public/img/jung-portrait.jpg` (landing) has no recorded provenance in `images.json`. *(Resolved 2026-10-10: the landing no longer uses an image and the file is removed.)*
 
 ## Reader-visible credit defects (display-fix shipped; data-fix pending)
 The plate's credit overlay prints `credit · licence`. Found: Met Museum donor boilerplate (8), doubled

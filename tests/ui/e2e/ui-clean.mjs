@@ -1,6 +1,6 @@
-// Gate (UI cleanliness, SPEC §10 and §14): on the chrome, nothing overlaps. The credit (icon, and its text and link
-// when revealed), the era labels, the time readout, the play button and the sky caption are measured on every route
-// at three widths. The credit is revealed by keyboard Tab (focus-within), and the era labels must never overlap each other.
+// Gate (UI cleanliness, SPEC §10 and §14): on the chrome, nothing overlaps. The era labels, the time readout, the play
+// button and the sky caption are measured on every route at three widths, and the era labels must never overlap each
+// other. (The corner credit this gate once walked now lives in the shell's menu footer, MODES-RFC §2.)
 // Screenshots go to .cache/screens/remediation-2026-10-09/ui-clean/, named by UI_CLEAN_TAG (default 'after'):
 // capture the 'before' state first with UI_CLEAN_TAG=before.
 //   npx vite --port 5183 --strictPort &
@@ -142,35 +142,8 @@ try {
       check(idle.minEraGap === null || idle.minEraGap >= 5.5, `${tag}: neighbouring era labels keep a 6 px gap (idle)`, `smallest gap ${idle.minEraGap === null ? 'n/a' : idle.minEraGap.toFixed(1) + ' px'}`);
       await page.screenshot({ path: resolve(OUT, `${name}.png`) });
 
-      // ── revealed by keyboard: Tab lands on the link, and focus-within shows the credit ──
-      if (desktop) {
-        const stops = await tabToCreditLink(page);
-        await page.waitForTimeout(600);
-        const rev = await snapshot(page);
-        console.log(`[${tag}] credit revealed by Tab (stops: ${stops.join(' > ') || 'none'})`);
-        printBoxes(rev.boxes);
-        check(stops.length > 0 && stops[stops.length - 1] === 'credit-link' && stops[0] === 'credit-i',
-          `${tag}: Tab reaches the credit link, icon first`, `stops ${stops.join(' > ') || 'none'}`);
-        check(rev.credit.focusWithin && rev.credit.linkOpacity !== null && rev.credit.linkOpacity > 0.5,
-          `${tag}: the credit link is revealed on focus-within`, `focus-within ${rev.credit.focusWithin}, link opacity ${rev.credit.linkOpacity?.toFixed(2)}`);
-        check(rev.overlaps.length === 0, `${tag}: no two visible boxes intersect (credit revealed by Tab)`,
-          rev.overlaps.map((o) => `${o.a} × ${o.b}`).join(' | ') || 'none');
-        const revEra = rev.overlaps.filter((o) => o.eraPair);
-        check(revEra.length === 0, `${tag}: era labels never overlap each other (credit revealed)`,
-          revEra.map((o) => `${o.a} × ${o.b}`).join(' | ') || 'none');
-        if (vp.width === 1280) await page.screenshot({ path: resolve(OUT, `${name}-credit-focus.png`) });
-
-        // ── revealed by hover: the same boxes must stay clear ───────────────────────────
-        await page.evaluate(() => document.activeElement?.blur());
-        await page.hover('.credit-i');
-        await page.waitForTimeout(600);
-        const hov = await snapshot(page);
-        check(hov.overlaps.length === 0, `${tag}: no two visible boxes intersect (credit revealed by hover)`,
-          hov.overlaps.map((o) => `${o.a} × ${o.b}`).join(' | ') || 'none');
-        if (vp.width === 1280) await page.screenshot({ path: resolve(OUT, `${name}-credit-hover.png`) });
-      } else {
-        console.log(`[${tag}] credit hidden below 760px (the existing narrow-width rule); reveal walk not applicable`);
-      }
+      // the credits and the issue link moved into the shell's menu footer (MODES-RFC §2): no corner reveal to walk
+      check(!(await page.$('.credit')), `${tag}: no corner credit (the credits are in the menu footer)`);
       await ctx.close();
     }
   }

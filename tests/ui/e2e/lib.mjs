@@ -22,18 +22,17 @@ export async function launch(kind = 'chromium', { headed = !CLOUD } = {}) {
   });
 }
 
-export async function open(browser, { width = 1440, height = 900, dpr = 1, hash = '', mobile = false } = {}) {
+export async function open(browser, { width = 1440, height = 900, dpr = 1, hash = '', mobile = false, landing = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: dpr, hasTouch: mobile, isMobile: mobile });
   const page = await ctx.newPage();
+  // the landing shows once per browser; a walk starts past it unless it is what the walk is about
+  if (!landing) await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   const logs = [];
   page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) logs.push(`${m.type()}: ${m.text()}`); });
   page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
   await page.goto(URL + hash, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__earth && window.__earth.engine && window.__earth.engine.presences, null, { timeout: 30000 });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 30000 });
-  // the entry dialog shows once per fresh context: walk through it like a person
-  const intro = page.locator('#intro:not(.dismissed)');
-  if (await intro.count()) await page.getByRole('button', { name: 'Enter the globe' }).click();
   await page.waitForTimeout(600);
   return { ctx, page, logs };
 }

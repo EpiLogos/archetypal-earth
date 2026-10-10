@@ -218,3 +218,26 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
   .lp-btn { min-height: var(--tap); }
 }
 .sh-controls .dy-theory { display: inline-block; margin-top: 12px; font-size: 11.5px; }
+
+/* ── the landing: one line of mine and one action, over the field (MODES-RFC §6) ───── */
+.landing {
+  position: fixed; left: 50%; bottom: 118px; z-index: 30; width: min(560px, calc(100vw - 32px)); transform: translate(-50%, 10px);
+  display: grid; justify-items: center; gap: 18px; text-align: center; opacity: 0; pointer-events: none;
+  transition: opacity 1.1s ease, transform 1.1s var(--ease);
+  padding: 28px 34px 22px; background: radial-gradient(ellipse closest-side, rgb(var(--deep-rgb) / 0.82), rgb(var(--deep-rgb) / 0.55) 62%, transparent);
+}
+.landing.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.ld-copy { margin: 0; font: 400 1.04rem/1.6 var(--serif); color: var(--ink); text-shadow: 0 1px 3px rgb(0 0 0 / 0.9), 0 2px 26px rgb(var(--deep-rgb) / 0.95); }
+.ld-start {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px 0 18px; border-radius: 23px;
+  background: var(--core); color: var(--deep); font: 500 14px var(--sans); letter-spacing: 0.02em;
+  box-shadow: 0 0 0 6px rgb(var(--core-rgb) / 0.12), 0 12px 40px rgb(0 0 0 / 0.45); transition: filter 0.2s, box-shadow 0.3s;
+}
+.ld-start:hover { filter: brightness(1.08); box-shadow: 0 0 0 8px rgb(var(--core-rgb) / 0.18), 0 12px 40px rgb(0 0 0 / 0.45); }
+body.landing-on .time { opacity: 0.35; }
+@media (max-width: 760px) {
+  .landing { bottom: 96px; gap: 16px; }
+  .ld-copy { font-size: 0.98rem; }
+  .ld-start { min-height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .landing { transition: opacity 0.3s; } }
