@@ -2,7 +2,7 @@
 
 ## Model
 - **App on Vercel** (static Vite build; framework auto-detected as Vite, build `npm run build`, output `dist`).
-- **Data is baked, not read at runtime.** The ingest scripts read the local vault; Vercel cannot. So: run `VAULT=~/Documents/Books/jung-archetypal-field npm run data` locally, check with `npm run typecheck && npm test && npm run build`, commit the regenerated `public/data/*.json` (field, corpus, history, redbook, theory, astrology, practice, depth), then deploy. Redeploy whenever the vault's reading runs add material.
+- **Data is baked, not read at runtime.** The ingest scripts read the local vault; Vercel cannot. So: run `VAULT=~/Documents/Books/jung-archetypal-field npm run data` locally, check with `npm run typecheck && npm test && npm run build`, commit the regenerated `public/data/*.json` (field, corpus, history, redbook, theory, astrology, practice, depth, dynamics), then deploy. The corpus now includes Van Eenwyk's book, read from the vault's `_raw-ext/`; like the rest of `public/data/corpus/`, it is the owner's copy of copyrighted text, so whether it is served publicly is the owner's call. Redeploy whenever the vault's reading runs add material.
 - **Downloads on GitHub Releases** (no repo bloat, no Vercel size limits): `./scripts/package-downloads.sh` → upload `dist-downloads/*.zip` + `SHA256SUMS` to a Release tagged e.g. `field-v1`; the menu's Downloads link already points at the Releases URL.
 - **Big media (plates, future audio/video)**: self-host on omarchy behind a Cloudflare Tunnel if ever needed — the app references external URLs, so no redeploy required.
 
