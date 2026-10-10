@@ -1,9 +1,6 @@
 /* ── the Red Book (Liber Novus) ─────────────────────────────────────── */
 .redbook { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
 .redbook[hidden] { display: none; }
-.rb-heading { position: absolute; top: 30px; left: 36px; max-width: min(400px, calc(100vw - 340px)); pointer-events: auto; }
-.rb-heading > h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.1; letter-spacing: -0.006em; color: var(--ink); }
-.rb-subject { color: rgb(var(--core-rgb) / 0.95) !important; }
 .rb-modes { display: flex; gap: 18px; margin-top: 12px; }
 .rb-modes button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: 0.04em; padding-bottom: 2px; border-bottom: 1px solid transparent; }
 .rb-modes button[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / 0.5); }
@@ -15,11 +12,6 @@
 .rb-progress { font: 11px var(--sans); letter-spacing: 0.1em; color: var(--ink-3); font-feature-settings: 'tnum'; }
 .rb-section { font: 11.5px var(--sans); letter-spacing: 0.04em; color: var(--ink-2); max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.rb-switch { position: fixed; top: 24px; right: 286px; z-index: 21; color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
-.rb-switch:hover { color: var(--ink); }
-.rb-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
-.rb-switch:disabled { opacity: .35; cursor: default; }
-body.search-open .rb-switch, body.deep-open .rb-switch { opacity: 0; pointer-events: none; }
 
 .rb-plate { width: 100%; aspect-ratio: 0.72; object-fit: cover; object-position: center; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.25); outline-offset: 5px; }
 /* the card: the Red Book's own aside (its look is the reveal's, as the Aion card's is) */
@@ -37,11 +29,8 @@ body.search-open .rb-switch, body.deep-open .rb-switch { opacity: 0; pointer-eve
 .rb-genesis-stop { display: inline-block; margin-top: 8px; }
 
 body.redbook-mode .time { opacity: 0.35; }
-body.redbook-mode .aion-switch, body.redbook-mode .sky-switch { opacity: 0.4; }
 
 @media (max-width: 760px) {
-  .rb-heading { left: 22px; top: 74px; max-width: calc(100vw - 44px); }
-  .rb-switch { top: 16px; right: 240px; font-size: 11px; }
   .rb-section { display: none; }
   .rb-card { bottom: 108px; max-height: 48vh; }
 }

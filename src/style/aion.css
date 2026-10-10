@@ -1,10 +1,7 @@
 .aion { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
 .aion[hidden], .aion-card[hidden], .aion-dot[hidden] { display: none; }
-.aion-heading { position: absolute; top: 30px; left: 36px; max-width: min(380px, calc(100vw - 230px)); pointer-events: auto; }
-.aion-heading > select { font-family: var(--serif); font-size: clamp(1.7rem, 2.3vw, 2.2rem); padding-top: 0; }
 .aion select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; }
 .aion option { background: #0a1020; color: #e5eafa; }
-.aion-context { color: var(--ink-3); font: 11.5px/1.5 var(--sans); margin: 9px 0 0; letter-spacing: .02em; text-shadow: 0 1px 18px rgb(var(--deep-rgb)); }
 .aion-browse { position: relative; margin-top: 14px; font: 11.5px var(--sans); letter-spacing: .05em; }
 .aion-browse > summary { display: inline-block; list-style: none; cursor: pointer; }
 .aion-browse > summary::-webkit-details-marker { display: none; }
@@ -36,16 +33,8 @@
 .aion-dot.selected { box-shadow: 0 0 0 7px rgb(var(--core-rgb) / .2), 0 0 20px var(--core); }
 .aion-dot span { display: none; position: absolute; left: 15px; top: -4px; width: max-content; max-width: 220px; padding: 4px 8px; background: rgb(var(--deep-rgb) / .9); color: var(--ink); font: 11px/1.3 var(--sans); text-align: left; }
 .aion-dot:hover span, .aion-dot:focus-visible span { display: block; }
-.aion-switch { position: fixed; top: 24px; right: 172px; z-index: 21; color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
-.aion-switch:hover { color: var(--ink); }
-.aion-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
-body.search-open .aion-switch, body.deep-open .aion-switch { opacity: 0; pointer-events: none; }
-.aion-switch:disabled { opacity: .35; cursor: default; }
 body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .aion-switch { top: 16px; right: 119px; font-size: 11px; }
-  .aion-heading { top: 16px; left: 18px; max-width: calc(100vw - 162px); }
-  .aion-heading .fl-name, .aion-heading > select { font-size: 1.5rem; }
   .aion-context { font-size: 10.5px; }
   .aion-card { bottom: 108px; max-height: 48vh; }
   .aion-epochs { bottom: 70px; gap: 24px; }

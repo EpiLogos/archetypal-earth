@@ -16,7 +16,8 @@ import { fileURLToPath } from 'node:url';
 import { createNormalizer } from './lib/ocr.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const DEFAULT_VAULT = process.env.VAULT || '/Users/admin/Documents/books/jung-archetypal-field';
+export { DEFAULT_VAULT } from './lib/vault.mjs';
+import { DEFAULT_VAULT } from './lib/vault.mjs';
 const normalizer = createNormalizer({ freq: new Map(), english: new Set(), pairs: new Map() });
 const norm = (t) => normalizer.normalize(t, { mode: 'safe' }).text;
 const PLATE_RE = /PLATE \((p\d{4})\.jpg[\s\S]*?\)\s*[:：]\s*([\s\S]+)/;

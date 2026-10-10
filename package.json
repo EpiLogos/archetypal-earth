@@ -10,7 +10,7 @@
     "ingest": "node scripts/ingest.mjs",
     "images": "node scripts/images.mjs",
     "images:verify": "node scripts/images-verify.mjs",
-    "data": "npm run ingest && npm run images && npm run ingest && npm run aion && npm run redbook",
+    "data": "npm run ingest && npm run images && npm run ingest && npm run aion && npm run redbook && npm run theory",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "textures": "node scripts/textures/prepare.mjs",
@@ -23,9 +23,12 @@
     "symbols": "node scripts/symbols.mjs",
     "symbols:check": "node scripts/symbols.mjs --check",
     "sky": "node scripts/sky.mjs",
-    "sky:check": "node scripts/sky.mjs --check"
+    "sky:check": "node scripts/sky.mjs --check",
+    "theory": "node scripts/theory.mjs",
+    "theory:check": "node scripts/theory.mjs --check"
   },
   "dependencies": {
+    "astronomy-engine": "2.1.19",
     "d3-drag": "^3.0.0",
     "d3-force": "^3.0.0",
     "d3-quadtree": "^3.0.1",

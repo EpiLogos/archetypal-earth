@@ -211,7 +211,7 @@ export class Presences {
       const d = m.dir[i];
       if (d[0] * this.camDirTmp.x + d[1] * this.camDirTmp.y + d[2] * this.camDirTmp.z < horizon) continue;
       // everything the shader draws is selectable: the receded field stays reachable
-      if (this.rel[i] < 0.02) continue;
+      if (this.rel[i] < 0.035) continue; // filtered out (and so culled by the shader): never picked
       // the pick gate is the draw's gate (T1/T2): pickable where the shader draws the node at least half present
       if (!pickablePresence(m.u[i], w, this.rel[i])) continue;
       // view space

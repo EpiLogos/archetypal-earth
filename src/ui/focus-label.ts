@@ -43,7 +43,7 @@ export class FocusLabel {
       this.root.classList.toggle('is-back', !!content.back);
       const name = content.back
         ? el('button', { class: 'fl-name fl-backlink', type: 'button', 'aria-label': `Back to ${content.name}`, onclick: content.back }, [el('span', { class: 'fl-chev', 'aria-hidden': 'true', text: '‹' }), content.name])
-        : el('h1', { class: 'fl-name', text: content.name });
+        : el('h2', { class: 'fl-name', text: content.name });
       this.root.append(name);
       if (content.up?.length) {
         const up = el('nav', { class: 'fl-up', 'aria-label': 'Where you came from' });

@@ -6,7 +6,7 @@ import { averagePalettes, rgbToHex } from '../data/palette';
 import { subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
-import type { AppState } from '../state/store';
+import { inLens, type AppState } from '../state/store';
 import type { Palette } from '../types/field';
 import type { DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender } from '../types/dynamics';
 import { clear, el } from '../ui/dom';
@@ -16,6 +16,7 @@ import { jMark, vMark } from './marks';
 import { paintJulia, paintLorenz, paintMandelbrot } from './paint';
 import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
+import type { LensChrome } from '../shell/lens';
 
 /** The caption under the hero names the native system drawn, never the subject. */
 const HERO_CAPTION: Record<DynamicsRender, string> = {
@@ -75,14 +76,15 @@ export class DynamicsView {
    * when its work is in the corpus. `concepts` is the optional public/data/dynamics.json; null (absent) shows none.
    */
   constructor(parent: HTMLElement, private model: Model, readonly engine: GlobeEngine, private time: TimeModel,
-    private navigate: (state: AppState) => void, private passages?: PassageBridge, concepts: DynamicsData | null = null) {
+    private navigate: (state: AppState) => void, private passages?: PassageBridge, concepts: DynamicsData | null = null, private chrome?: LensChrome) {
     this.concepts = concepts?.concepts ?? [];
     this.strip = new PhaseStrip();
     // the hero is painted at the device's pixel ratio, so a zoom or a move between screens repaints it too
     onPixelRatio(() => this.paintHero()); // the lens lives as long as the page: its disposer is not needed
-    this.heading = el('header', { class: 'dy-heading' });
+    // the subject is the shell's context line; the visited families are this lens's controls (MODES-RFC §2)
+    this.heading = el('div', { class: 'dy-controls' });
     this.card = el('aside', { class: 'dy-card reveal on', 'aria-label': 'Dynamical reading' });
-    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.heading, this.strip.root, this.card]);
+    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root, this.card]);
     this.setActive(false);
     parent.append(this.root);
   }
@@ -93,6 +95,8 @@ export class DynamicsView {
     this.setActive(true);
     document.body.classList.add('dynamics-mode');
     if (!this.subject || keyOf(this.subject) !== keyOf(requested)) this.setSubject(requested);
+    this.chrome?.setContext(`${subjectName(this.model, requested)} as a dynamical system`);
+    this.chrome?.setControls([this.heading]);
     this.renderCard();
     this.update(0);
   }
@@ -179,7 +183,10 @@ export class DynamicsView {
     );
     const links = basins.filter((b) => top.has(b.familyId)).map((b) => el('button', { type: 'button', class: 'link-quiet', text: m.famById.get(b.familyId)?.name ?? b.familyId,
       onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: b.familyId } }, deep: false }) }));
-    this.heading.append(el('h1', { class: 'fl-name', text: subjectName(m, subject) }), el('nav', { class: 'dy-basins', 'aria-label': 'Families visited' }, links));
+    this.heading.append(
+      el('nav', { class: 'dy-basins', 'aria-label': 'Families visited' }, links),
+      el('button', { type: 'button', class: 'link-quiet dy-theory', text: 'Read the theory', onclick: () => this.navigate(inLens('theory', ['transcendent-function'])) }),
+    );
   }
 
   private closeButton() {

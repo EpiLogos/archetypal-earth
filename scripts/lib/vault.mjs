@@ -1,9 +1,11 @@
 // Defensive vault reading: frontmatter via YAML with per-field regex fallback.
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import YAML from 'yaml';
 
-export const DEFAULT_VAULT = '/Users/admin/Documents/books/jung-archetypal-field';
+/** The vault: VAULT (or JUNG_VAULT) when set, else ~/Documents/books/jung-archetypal-field. Every script and test reads this one. */
+export const DEFAULT_VAULT = process.env.VAULT || process.env.JUNG_VAULT || path.join(os.homedir(), 'Documents/books/jung-archetypal-field');
 
 export function splitFrontmatter(raw) {
   const m = raw.replace(/^﻿/, '').match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);

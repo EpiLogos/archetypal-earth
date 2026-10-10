@@ -15,8 +15,6 @@
 }
 .dynamics[hidden] { display: none; }
 
-.dy-heading { position: absolute; top: 30px; left: 36px; max-width: min(400px, calc(100vw - 340px)); pointer-events: auto; }
-.dy-heading > h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.1; letter-spacing: -0.006em; color: var(--ink); }
 .dy-basins { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font: 11.5px var(--sans); letter-spacing: 0.04em; }
 .dy-basins button { color: var(--ink-3); transition: color 0.4s; }
 .dy-basins button:hover { color: var(--ink); }
@@ -54,8 +52,6 @@
 @media (max-width: 760px) {
   .dynamics { --dy-strip-h: 64px; --dy-strip-bottom: 64px; --dy-track-l: 72px; --dy-track-r: 36px; }
   /* below the top line of switches (the Red Book's phone heading sits at the same height) */
-  .dy-heading { left: 22px; top: 74px; max-width: calc(100vw - 44px); }
-  .dy-heading > h1 { font-size: 1.5rem; }
   .dy-basins { font-size: 11px; gap: 6px 14px; }
   .dy-hero-canvas { aspect-ratio: 2 / 1; }
   .reveal.dy-card { max-height: 44vh; bottom: calc(var(--dy-strip-bottom) + var(--dy-strip-h) + 12px); }
@@ -66,10 +62,5 @@
 }
 
 /* the switch: the Red Book's quiet switch, set beside it on the same line */
-.dy-switch { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
-.dy-switch:hover { color: var(--ink); }
-.dy-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
-body.search-open .dy-switch, body.deep-open .dy-switch { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .dy-switch { font-size: 11px; }
 }

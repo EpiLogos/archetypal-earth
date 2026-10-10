@@ -1,0 +1,147 @@
+{
+  "_note": "The Theory lens. Each section's quotations name only their work and their exact words (taken from the vault's concept notes: wiki/concepts/*.md and wiki/archetypes/self.md); `npm run theory` finds each one in the read-only corpus and writes its locator (pdf page, nearest ¶) from the corpus itself, failing on any quotation it cannot place exactly once. `para` is the ¶ the vault note gives, checked against the corpus. The `line` is mine: one plain sentence or two that says what the section is about. Families and archetypes named are links into the field, and are checked to exist.",
+  "version": 1,
+  "sections": [
+    {
+      "id": "self",
+      "name": "The Self",
+      "line": "Everything here turns on one centre. Jung calls it the self: not the ego but the whole psyche, conscious and unconscious together, known only through its symbols.",
+      "quotes": [
+        {
+          "work": "cw09ii",
+          "para": 426,
+          "quote": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine). It stands for the psychic totality."
+        },
+        {
+          "work": "cw09ii",
+          "para": 426,
+          "quote": "Empirically, however, the self appears spontaneously in the shape of specific symbols, and its totality is discernible above all in the mandala and its countless variants."
+        }
+      ],
+      "links": [
+        {
+          "type": "archetype",
+          "id": "self"
+        },
+        {
+          "type": "family",
+          "id": "mandala"
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "name": "Energy",
+      "line": "Jung's break with Freud began over one word. Libido stops meaning sexual desire and becomes psychic energy as such: a quantity that can flow into anything.",
+      "quotes": [
+        {
+          "work": "cw05",
+          "para": 197,
+          "quote": "We would be better advised, therefore, when speaking of libido, to understand it as an energy-value which is able to communicate itself to any field of activity whatsoever, be it power, hunger, hatred, sexuality, or religion, without ever being itself a specific instinct."
+        },
+        {
+          "work": "cw04",
+          "para": 567,
+          "quote": "All psychological phenomena can be considered as manifestations of energy, in the same way that all physical phenomena have been understood as energic manifestations ever since Robert Mayer"
+        }
+      ],
+      "links": [
+        {
+          "type": "family",
+          "id": "sun"
+        },
+        {
+          "type": "family",
+          "id": "fire"
+        },
+        {
+          "type": "family",
+          "id": "serpent"
+        }
+      ]
+    },
+    {
+      "id": "compensation",
+      "name": "Compensation",
+      "line": "The unconscious does not only hold what we push away. It answers the conscious attitude by supplying what that attitude leaves out, which is why Jung read most dreams as compensations.",
+      "quotes": [
+        {
+          "work": "cw06",
+          "para": 694,
+          "quote": "Whereas Adler restricts his concept of compensation to the balancing of inferiority feelings, I conceive it as functional adjustment in general, an inherent self-regulation of the psychic apparatus."
+        },
+        {
+          "work": "cw07",
+          "para": 170,
+          "quote": "in my experience the vast majority of dreams are compensatory"
+        },
+        {
+          "work": "cw07",
+          "para": 170,
+          "quote": "They always stress the other side in order to maintain the psychic equilibrium."
+        }
+      ],
+      "links": [
+        {
+          "type": "lens",
+          "id": "dreams"
+        }
+      ]
+    },
+    {
+      "id": "enantiodromia",
+      "name": "Enantiodromia",
+      "line": "Push a one-sided attitude far enough and its opposite rises from the unconscious. Jung took the word from Heraclitus and used it for one life and for whole ages.",
+      "quotes": [
+        {
+          "work": "cw06",
+          "para": 709,
+          "quote": "I use the term enantiodromia for the emergence of the unconscious opposite in the course of time"
+        },
+        {
+          "work": "cw13",
+          "para": 294,
+          "quote": "every psychic development, whether individual or collective, possesses an optimum which, when exceeded, produces an enantiodromia, that is, turns into its opposite"
+        },
+        {
+          "work": "cw07",
+          "para": 114,
+          "quote": "the steady forward movement no longer denotes an increase, but a decrease, in strength"
+        }
+      ],
+      "links": [
+        {
+          "type": "lens",
+          "id": "aion"
+        }
+      ]
+    },
+    {
+      "id": "transcendent-function",
+      "name": "The transcendent function",
+      "line": "When conscious and unconscious are held together, rather than one defeating the other, something appears that neither side contained. Jung called that process the transcendent function.",
+      "quotes": [
+        {
+          "work": "cw06",
+          "para": 184,
+          "quote": "This function of mediation between the opposites I have termed the transcendent function, by which I mean nothing mysterious, but merely a combined function of conscious and unconscious elements"
+        },
+        {
+          "work": "cw08",
+          "para": 131,
+          "quote": "The psychological \"transcendent function\" arises from the union of conscious and unconscious contents."
+        }
+      ],
+      "links": [
+        {
+          "type": "family",
+          "id": "coniunctio"
+        },
+        {
+          "type": "lens",
+          "id": "dynamics"
+        }
+      ]
+    }
+  ]
+}

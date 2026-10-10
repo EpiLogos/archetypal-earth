@@ -85,9 +85,6 @@ body.search-open .search-glyph { opacity: 0; pointer-events: none; }
    Dynamics · Red Book · Sky · Aion, in that order, beside the mode pill and the search glyph. Each switch keeps its own
    type and underline (dynamics.css, sky.css, aion.css, redbook.css); the row alone places them, so no switch carries a
    fixed offset of its own. The row is the one fixed element; its children are static in it. */
-.mode-row { position: fixed; top: 24px; right: 178px; z-index: 21; display: flex; align-items: baseline; gap: var(--mode-gap); }
-.mode-row > button { position: static; top: auto; right: auto; }
-body.search-open .mode-row, body.deep-open .mode-row { opacity: 0; pointer-events: none; }
 
 /* ── credit: a small ⓘ, quiet until hovered or focused; its text and issue link rise above it ───── */
 .credit { position: fixed; left: 24px; bottom: 22px; z-index: 13; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
@@ -356,7 +353,6 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 
 /* ── small screens ─────────────────────────────────────────────────── */
 @media (max-width: 760px) {
-  .mode-row { top: 16px; right: 122px; --mode-gap: 18px; }
   .search-glyph { top: 16px; right: 16px; }
   .sg-key { display: none; }
   .focus-label { left: 18px; top: 16px; max-width: calc(100vw - 80px); }

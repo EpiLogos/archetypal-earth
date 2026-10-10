@@ -1,6 +1,7 @@
 // URL hash <-> state, so every state is linkable and Back works.
 import type { Subject } from '../data/model';
-import { WORLD, type AppState, type ThreadTarget } from './store';
+import { PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
+import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 
 export interface Resolver {
   hasArchetype(id: string): boolean;
@@ -21,6 +22,14 @@ export interface Parsed {
   state: AppState;
   /** a time cursor requested by the hash (#/y/1600) */
   year?: number;
+  /** the field filter the hash carries after `?` (empty when none) */
+  filter: FieldFilter;
+}
+
+/** The hash for a state with the field filter appended (`#/a/self?w=cw12`). */
+export function hashWithFilter(s: AppState, f: FieldFilter): string {
+  const q = filterQuery(f);
+  return q ? `${stateToHash(s)}?${q}` : stateToHash(s);
 }
 
 const enc = encodeURIComponent;
@@ -34,6 +43,7 @@ export function defaultReadingId(readings: readonly { id: string }[]): string | 
 const num = (n: number) => String(Number(n.toFixed(4)));
 
 export function stateToHash(s: AppState): string {
+  if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
   if (s.sky) {
     const tail = `${s.sky.body ? `/${enc(s.sky.body)}` : ''}${s.sky.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
     if (s.sky.birth) return `#/sky/birth/${enc(s.sky.birth.local)}/${num(s.sky.birth.lat)}/${num(s.sky.birth.lon)}${tail}`;
@@ -78,10 +88,20 @@ export function stateToHash(s: AppState): string {
 }
 
 export function hashToState(hash: string, r: Resolver): Parsed {
+  const q = hash.indexOf('?');
+  const filter = q >= 0 ? parseFilter(hash.slice(q + 1)) : {};
+  const parsed = routeToState(q >= 0 ? hash.slice(0, q) : hash, r);
+  return { ...parsed, filter };
+}
+
+function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   let parts: string[];
   try { parts = hash.replace(/^#\/?/, '').split('/').filter(Boolean).map((p) => decodeURIComponent(p)); }
   catch { return { state: WORLD }; }
   if (!parts.length) return { state: WORLD };
+  if ((PANEL_LENSES as readonly string[]).includes(parts[0])) {
+    return { state: { view: { kind: 'world' }, deep: false, lens: { id: parts[0] as PanelLensId, path: parts.slice(1, 4) } } };
+  }
   if (parts[0] === 'sky') {
     const sky: NonNullable<AppState['sky']> = {};
     let rest = parts.slice(1);
@@ -129,7 +149,7 @@ export function hashToState(hash: string, r: Resolver): Parsed {
   if (deep) parts.pop();
   const [kind, a, b] = parts;
   // a thread travels the globe, so `#/graph/t/...` falls back to the globe
-  const withDeep = (state: AppState): Parsed => ({ state: { view: state.view, deep, ...(graph && state.view.kind !== 'thread' ? { graph: true as const } : {}) } });
+  const withDeep = (state: AppState): Omit<Parsed, "filter"> => ({ state: { view: state.view, deep, ...(graph && state.view.kind !== 'thread' ? { graph: true as const } : {}) } });
   if (graph && !kind) return { state: { view: { kind: 'world' }, deep: false, graph: true } };
   const focusState = (subject: Subject): AppState => ({ view: { kind: 'focus', subject }, deep: false });
 

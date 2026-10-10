@@ -40,7 +40,7 @@ vec4 presenceCurve(float u, float rel) {
 `;
 
 
-// Emphasis semantics (aRel): 1 normal · 0.07 receded · 1.5 related · 2.4 selected
+// Emphasis semantics (aRel): 0 filtered out (not drawn) · 1 normal · 0.07 receded · 1.5 related · 2.4 selected
 export const REL_GLSL = /* glsl */ `
 float relAlpha(float rel) {
   return mix(0.12, 1.0, smoothstep(0.2, 1.0, rel)) * (1.0 + 0.5 * max(rel - 1.0, 0.0));
@@ -98,6 +98,8 @@ varying float vRingPx;
 ${TIME_GLSL}
 ${REL_GLSL}
 void main() {
+  // aRel 0 is the field filter's exclusion (MODES-RFC §4): not drawn at all (culled as it eases below half the receded 0.07)
+  if (aRel < 0.035) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
   float prec = aMeta.z;
   float calm = 1.0 - uCalm;
   float flare = timeFlare(aMeta.x) * calm;
