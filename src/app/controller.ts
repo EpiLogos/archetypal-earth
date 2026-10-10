@@ -166,7 +166,8 @@ export class Controller {
     const openCite = (work: string, locator: string) => void this.passage.show(work, locator);
 
     this.floats = new Floats(root, (t) => this.onFloatSelect(t));
-    this.floats.obstacles = () => [this.labelRect];
+    // measured as the plates lay out, not once: the label's links and wrapped lines settle after it is first drawn
+    this.floats.obstacles = () => { if (this.label?.root.isConnected) this.measureLabel(); return [this.labelRect]; };
     this.label = new FocusLabel(root);
     // the focus card: a double-click opens the subject's reading, as its 'Reading' link does
     onReadGesture(this.label.root, () => { if (this.state.view.kind === 'focus') this.setDeep(true); });

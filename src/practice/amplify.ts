@@ -17,8 +17,9 @@ const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/\p{M}+/gu,
 /** A naive singular: enough to meet "snakes" with "snake" and "boxes" with "box", never to invent a word. */
 const singular = (w: string) => (w.length > 4 && w.endsWith('ies') ? `${w.slice(0, -3)}y` : w.length > 3 && /(ches|shes|xes|ses)$/.test(w) ? w.slice(0, -2) : w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w);
 
-/** Words too common to name an image on their own, even where a vault alias happens to be one. */
-const TOO_COMMON = new Set(['the', 'a', 'an', 'one', 'man', 'woman', 'old', 'it', 'he', 'she', 'world', 'life', 'god', 'self']);
+/** Words too common to name an image on their own, even where a vault alias happens to be one. "God" and "self" are
+ * kept: in a dream they name the God-image and the Self, which is what Jung would amplify. */
+const TOO_COMMON = new Set(['the', 'a', 'an', 'one', 'man', 'woman', 'old', 'it', 'he', 'she', 'world', 'life']);
 
 export interface Vocabulary {
   /** phrase (normalised, singular last word) → target */
