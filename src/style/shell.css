@@ -160,7 +160,7 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
   }
   .lens-panel[data-height="full"] { height: 88vh; }
   @keyframes lp-up { from { transform: translateY(60px); } to { transform: none; } }
-  .lp-handle { display: grid; place-items: center; flex: none; height: 28px; width: 100%; cursor: grab; touch-action: none; }
+  .lp-handle { display: grid; place-items: center; flex: none; height: var(--tap); margin-bottom: -12px; width: 100%; cursor: grab; touch-action: none; }
   .lp-grip { width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.35); }
   .lp-close { top: 4px; right: 6px; min-width: var(--tap); min-height: var(--tap); }
   .lp-body { padding: 4px 18px calc(24px + env(safe-area-inset-bottom)); }
@@ -282,6 +282,47 @@ body.landing-on .time { opacity: 0.35; }
 .as-to-self { margin: 6px 0 4px; }
 .as-own { margin-top: 18px; }
 @media (max-width: 760px) {
-  .as-steps { margin-right: 44px; }
+  .as-steps { margin-right: 44px; grid-template-columns: repeat(5, 1fr); }
   .as-step { min-height: var(--tap); }
+}
+
+/* ── practice: Symbols, Dreams, Coincidences ───────────────────────── */
+.am-back { display: inline-flex; align-items: center; gap: 6px; margin: 0 40px 12px 0; font: 12px var(--sans); }
+.am-kicker { margin: 0; font: 500 10.5px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.am-sec { margin-top: 6px; }
+.am-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.am-inst { display: grid; grid-template-columns: 86px 1fr; gap: 10px; width: 100%; min-height: 36px; padding: 6px 6px; text-align: left; border-radius: 7px; font: 13px/1.35 var(--sans); color: var(--ink-2); }
+.am-inst:hover { background: rgb(var(--core-rgb) / 0.07); color: var(--ink); }
+.am-year { font: 11.5px var(--sans); color: var(--ink-3); font-feature-settings: 'tnum'; }
+.am-more { margin: 8px 0 0 6px; font-size: 12px; }
+.am-dream { margin: 10px 0 14px; }
+.am-dream-h { display: grid; gap: 2px; text-align: left; font: 600 0.98rem/1.3 var(--serif); color: var(--ink); }
+.am-dream-h:hover { color: var(--core); }
+.am-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; align-items: center; }
+.sy-search .lp-field { margin-bottom: 4px; }
+.sy-results { display: grid; margin-bottom: 12px; }
+.dr-list { list-style: none; margin: 14px 0; padding: 0; border-top: 1px solid var(--hair); }
+.dr-list li { border-bottom: 1px solid var(--hair); }
+.dr-row { display: grid; grid-template-columns: 84px 1fr auto; gap: 10px; align-items: baseline; width: 100%; min-height: 46px; padding: 10px 4px; text-align: left; font: 13.5px/1.35 var(--sans); color: var(--ink-2); }
+.dr-row:hover { color: var(--ink); background: rgb(var(--core-rgb) / 0.05); }
+.dr-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.dr-n { font: 11px var(--sans); color: var(--ink-3); white-space: nowrap; }
+.dr-form { margin-top: 4px; }
+.dr-found { margin-top: -4px; }
+.dr-text { margin: 10px 0 8px; font: 400 1.04rem/1.7 var(--serif); color: var(--ink); white-space: pre-wrap; }
+.dr-img { display: inline; padding: 0 1px; font: inherit; color: var(--core); text-decoration: underline; text-decoration-color: rgb(var(--core-rgb) / 0.5); text-underline-offset: 3px; text-decoration-thickness: 1.5px; border-radius: 3px; }
+.dr-img:hover { background: rgb(var(--core-rgb) / 0.12); }
+.dr-saved { display: block; min-height: 1em; }
+.co-figure { margin: 4px 0 6px; }
+.co-chart { width: 100%; height: auto; overflow: visible; }
+.co-row { fill: var(--ink-3); font: 11px var(--sans); }
+.co-row.series { fill: var(--ink); font-weight: 500; }
+.co-rule { stroke: var(--hair); stroke-width: 1; }
+.co-run { stroke: rgb(var(--core-rgb) / 0.55); stroke-width: 2.5; stroke-linecap: round; }
+.co-dot { fill: var(--core); stroke: var(--deep); stroke-width: 2; cursor: pointer; }
+.co-dot:hover, .co-dot:focus { r: 8; outline: none; }
+.co-axis { fill: var(--ink-3); font: 10px var(--sans); }
+@media (max-width: 760px) {
+  .am-inst, .dr-row { min-height: var(--tap); }
+  .dr-img { padding: 6px 1px; margin: -6px 0; }
 }

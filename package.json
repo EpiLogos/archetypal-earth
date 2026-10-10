@@ -10,7 +10,7 @@
     "ingest": "node scripts/ingest.mjs",
     "images": "node scripts/images.mjs",
     "images:verify": "node scripts/images-verify.mjs",
-    "data": "npm run ingest && npm run images && npm run ingest && npm run aion && npm run redbook && npm run theory && npm run astrology",
+    "data": "npm run ingest && npm run images && npm run ingest && npm run aion && npm run redbook && npm run theory && npm run astrology && npm run practice",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "textures": "node scripts/textures/prepare.mjs",
@@ -27,7 +27,9 @@
     "theory": "node scripts/theory.mjs",
     "theory:check": "node scripts/theory.mjs --check",
     "astrology": "node scripts/astrology.mjs",
-    "astrology:check": "node scripts/astrology.mjs --check"
+    "astrology:check": "node scripts/astrology.mjs --check",
+    "practice": "node scripts/practice.mjs",
+    "practice:check": "node scripts/practice.mjs --check"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19",
