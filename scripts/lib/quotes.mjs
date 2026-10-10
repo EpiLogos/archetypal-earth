@@ -19,11 +19,13 @@ export function workTitles(root) {
 export function citeQuotes(load, titles, quotes, where, errors, warnings) {
   const out = [];
   for (const q of quotes) {
-    const r = locate(load, q.work, q.quote, { para: q.para });
+    const r = locate(load, q.work, q.quote, { para: q.para, page: q.page });
     if (r.error) { errors.push(`${where}: ${r.error}`); continue; }
     let locator = r.locator;
     if (r.warning) { warnings.push(`${where}: ${r.warning}`); locator = `pdf p${r.page}`; }
-    out.push({ text: q.quote, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}) });
+    // the corpus's printed-page labels are not trusted for display (some are paragraph numbers the scan misread as
+    // folios): the pdf page is the locator, and the passage sheet shows the page itself
+    out.push({ text: q.quote, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator }, ...(q.voice ? { voice: q.voice } : {}) });
   }
   return out;
 }

@@ -48,9 +48,10 @@ export class Panel {
   }
 
   /** Replace the body, keeping the frame (and its height) as it stands. */
-  replace(content: Node[]) {
+  replace(content: Node[], opts: { keepScroll?: boolean } = {}) {
     clear(this.body);
     this.body.append(...content);
+    if (!opts.keepScroll) this.body.scrollTop = 0;
   }
 
   close() {

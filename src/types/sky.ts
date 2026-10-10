@@ -264,6 +264,8 @@ export interface SidecarChart {
   aspects: { a: BodyKey; b: BodyKey; type: ChartAspectType; orb: number }[];
   moon: { name: string; major: string; stage: string } | null;
   gmst: number;
+  /** false when no birth time was given (the in-browser chart): the angles and houses are then not drawn or stated */
+  timeKnown?: boolean;
 }
 
 export interface GazetteerPlace {

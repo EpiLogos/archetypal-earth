@@ -128,7 +128,8 @@ export class ChartOverlay {
 
     // the angles: longer, plainer ticks
     const ap = new Float32Array(2 * 6);
-    [chart.angles.ascendant.lon, chart.angles.midheaven.lon].forEach((lon, i) => {
+    // with no birth time there are no angles to draw (a noon chart's Ascendant would be invented)
+    (chart.timeKnown === false ? [] : [chart.angles.ascendant.lon, chart.angles.midheaven.lon]).forEach((lon, i) => {
       ap.set(ringPoint(lon, CHART_RADIUS * 0.82), i * 6);
       ap.set(ringPoint(lon, CHART_RADIUS * 1.14), i * 6 + 3);
     });

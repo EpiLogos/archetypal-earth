@@ -112,7 +112,7 @@ body.deep-open .sh-chips, body.panel-open .sh-chips { opacity: 0; pointer-events
 /* ── the panel for panel lenses ────────────────────────────────────── */
 .lens-panel {
   position: fixed; right: 26px; top: 70px; bottom: 96px; z-index: 15; width: min(440px, 42vw);
-  display: flex; flex-direction: column; background: var(--glass); background-color: rgb(var(--deep-rgb) / 0.5);
+  display: flex; flex-direction: column; pointer-events: auto; background: var(--glass); background-color: rgb(var(--deep-rgb) / 0.5);
   backdrop-filter: blur(20px) saturate(1.15); border: 1px solid var(--hair); border-radius: 16px; overflow: hidden;
   box-shadow: 0 30px 90px rgb(0 0 0 / 0.55), 0 0 80px rgb(var(--glow-rgb) / 0.1);
   animation: lp-in 0.5s var(--ease);
@@ -241,3 +241,47 @@ body.landing-on .time { opacity: 0.35; }
   .ld-start { min-height: 48px; }
 }
 @media (prefers-reduced-motion: reduce) { .landing { transition: opacity 0.3s; } }
+
+/* ── Astrology ─────────────────────────────────────────────────────── */
+.as-card { margin: 16px 0; padding: 14px 16px; border: 1px solid var(--hair); border-radius: 12px; background: rgb(var(--core-rgb) / 0.03); }
+.as-card-h { margin: 0 0 4px; font: 600 1.08rem var(--serif); color: var(--ink); }
+.as-card-p { margin: 0 0 6px; font: 12px var(--sans); color: var(--ink-3); }
+.as-pillars { margin: 0; font: 13px/1.5 var(--sans); color: var(--ink-2); }
+.as-h3 { margin: 20px 0 8px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.as-form { margin: 16px 0; padding: 14px 16px 6px; border: 1px solid rgb(var(--core-rgb) / 0.3); border-radius: 12px; }
+.as-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.as-check { display: flex; align-items: center; gap: 8px; min-height: 44px; margin-bottom: 12px; font: 12.5px var(--sans); color: var(--ink-2); }
+.as-check input { width: 18px; height: 18px; accent-color: rgb(var(--core-rgb)); }
+.as-errors p { margin: 4px 0; font: 12.5px/1.4 var(--sans); color: #f2b8a8; }
+.as-more { margin: 12px 0; font: 12.5px var(--sans); color: var(--ink-2); }
+.as-more > summary { cursor: pointer; color: var(--ink-2); }
+.as-figure { margin: 6px 0 4px; display: grid; place-items: center; }
+.as-self { width: 100%; max-width: 320px; height: auto; overflow: visible; }
+.as-orbit { fill: none; stroke: var(--hair); stroke-dasharray: 2 4; }
+.as-link { stroke: rgb(var(--core-rgb) / 0.55); stroke-width: 1.2; }
+.as-node { fill: var(--deep); stroke: var(--core); stroke-width: 1.4; }
+.as-node.local { fill: var(--core); }
+.as-centre { fill: var(--core); filter: drop-shadow(0 0 8px rgb(var(--core-rgb) / 0.8)); }
+.as-label { fill: var(--ink-2); font: 11px var(--sans); }
+.as-label.centre { fill: var(--ink); font: 600 12px var(--serif); }
+.as-steps { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: 0 40px 14px 0; }
+.as-step { min-height: 36px; border-radius: 8px; border: 1px solid var(--hair); font: 500 11px var(--sans); color: var(--ink-3); }
+.as-step.past { color: var(--ink-2); border-color: rgb(var(--core-rgb) / 0.25); }
+.as-step[aria-current="step"] { color: var(--deep); background: var(--core); border-color: var(--core); }
+.as-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 4px 0 12px; }
+.as-cmp { display: grid; gap: 2px; padding: 9px 12px; border: 1px solid var(--hair); border-radius: 10px; }
+.as-cmp.mine { border-color: rgb(var(--core-rgb) / 0.5); background: rgb(var(--core-rgb) / 0.06); }
+.as-cmp-who { font: 500 10.5px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.as-cmp-pos { font: 600 1rem var(--serif); color: var(--ink); }
+.as-shared { margin: 8px 0; font: 13px var(--sans); color: var(--core); }
+.as-tie { margin: 4px 0 10px; }
+.as-tie-name { display: block; color: var(--ink); }
+.as-basis { display: block; font-size: 11px; color: var(--ink-3); }
+.as-aspects ul { margin: 0; padding-left: 18px; font: 13px/1.7 var(--sans); color: var(--ink-2); }
+.as-why { margin-top: 0; }
+.as-to-self { margin: 6px 0 4px; }
+.as-own { margin-top: 18px; }
+@media (max-width: 760px) {
+  .as-steps { margin-right: 44px; }
+  .as-step { min-height: var(--tap); }
+}

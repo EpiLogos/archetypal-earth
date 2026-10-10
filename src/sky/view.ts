@@ -31,8 +31,6 @@ export class SkyView {
   private cultureSelect: HTMLSelectElement;
   private cultureNote: HTMLElement;
   private liveNote: HTMLElement;
-  /** where the birth-sky disclosure stands: under the culture selector and the live note */
-  readonly birthHost: HTMLElement;
   private marks = new Map<string, HTMLElement>();
   private lastLive: LiveState | null = null;
   private held: string | null = null;
@@ -44,8 +42,7 @@ export class SkyView {
     this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
     this.cultureNote = el('p', { class: 'sky-culture-note' });
     this.liveNote = el('p', { class: 'sky-live', role: 'status' });
-    this.birthHost = el('div', { class: 'sky-birth-host' });
-    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote, this.birthHost]);
+    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote]);
     this.culture.inert = true;
     parent.append(this.root, this.caption, this.culture);
   }

@@ -1,0 +1,210 @@
+{
+  "_note": "The Astrology lens: planet → god-image → archetype → corpus quotes. Quotations name only their work and words; `npm run astrology` places each in the read-only corpus (scripts/lib/cite.mjs) and fails on any it cannot place once. The field ties per body (and their Jung quotes, basis jung / inferred / site) come from curation/sky/ties.json, and Burt's planet quotes from curation/sky/burt.json, both already verified by `npm run sky:check`. Lines are mine: they say only what the quotes under them show. Outer planets: Jung's sources stop at Saturn; for Uranus, Neptune and Pluto the reading is Burt's, and the lens says so.",
+  "version": 1,
+  "frame": [
+    {
+      "work": "cw13",
+      "para": 355,
+      "quote": "The planetary names refer ultimately not only to metals but, as every alchemist knew, to the (astrological) temperaments, that is, to psychic factors."
+    },
+    {
+      "work": "cw14",
+      "para": 309,
+      "quote": "the journey through the planetary houses boils down to becoming conscious of the good and the bad qualities in our character, and the apotheosis means no more than maximum consciousness"
+    },
+    {
+      "work": "cw12",
+      "para": 314,
+      "quote": "The horoscope (fig. 100) is itself a mandala (a clock) with a dark centre"
+    }
+  ],
+  "pillars": {
+    "work": "cw18",
+    "para": 1180,
+    "quote": "The positions of sun, moon, and ascendant form the three main pillars of the horoscope."
+  },
+  "order": {
+    "bodies": [
+      "moon",
+      "mercury",
+      "venus",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "pluto",
+      "sun"
+    ],
+    "line": "The walk climbs the planetary ladder, Moon to Saturn, past the three planets Jung's sources did not know, and ends at the Sun. That is where the old ascent ended too.",
+    "quote": {
+      "work": "cw12",
+      "para": 66,
+      "quote": "where the initiand was crowned as Helios"
+    }
+  },
+  "bodies": {
+    "moon": {
+      "name": "Moon",
+      "line": "The nearest light, and silver.",
+      "quotes": [
+        {
+          "work": "sem-zarathustra",
+          "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus."
+        }
+      ]
+    },
+    "mercury": {
+      "name": "Mercury",
+      "line": "Quicksilver. In alchemy Mercurius is both the first matter of the work and its goal.",
+      "quotes": []
+    },
+    "venus": {
+      "name": "Venus",
+      "line": "Copper. Jung places the anima's image here.",
+      "quotes": [
+        {
+          "work": "sem-zarathustra",
+          "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus."
+        }
+      ]
+    },
+    "mars": {
+      "name": "Mars",
+      "line": "Iron. Jung says little of Mars himself.",
+      "quotes": [
+        {
+          "work": "sem-zarathustra",
+          "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus."
+        }
+      ]
+    },
+    "jupiter": {
+      "name": "Jupiter",
+      "line": "Tin. In Jung, Jupiter matters mostly through his conjunctions with Saturn.",
+      "quotes": [
+        {
+          "work": "sem-zarathustra",
+          "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus."
+        }
+      ]
+    },
+    "saturn": {
+      "name": "Saturn",
+      "line": "Lead, the old king, the dark sun: the heaviest of the seven and the one the alchemists conjured as a familiar.",
+      "quotes": [
+        {
+          "work": "cw11",
+          "para": 350,
+          "quote": "is none other than the leaden spirit or planetary demon Saturn"
+        },
+        {
+          "work": "cw14",
+          "para": 504,
+          "quote": "When, therefore, an alchemist conjured up the spirit of Saturn as his familiar, this was an attempt to bring to consciousness a standpoint outside the ego"
+        }
+      ]
+    },
+    "uranus": {
+      "name": "Uranus",
+      "line": "Found in 1781. Jung's sources never knew it; the reading here is Burt's.",
+      "quotes": []
+    },
+    "neptune": {
+      "name": "Neptune",
+      "line": "Found in 1846. Jung's sources never knew it; the reading here is Burt's.",
+      "quotes": []
+    },
+    "pluto": {
+      "name": "Pluto",
+      "line": "Found in 1930. Jung's sources never knew it; the reading here is Burt's.",
+      "quotes": []
+    },
+    "sun": {
+      "name": "Sun",
+      "line": "Gold, the end of the ascent. Every chart has a Sun, and Jung reads the sun as a symbol of the self. That is the link every walk ends on.",
+      "quotes": []
+    }
+  },
+  "signs": {
+    "Aries": {
+      "work": "burt-zodiac",
+      "quote": "ARIES: The Search for a Separate Identity",
+      "page": 11
+    },
+    "Taurus": {
+      "work": "burt-zodiac",
+      "quote": "TAURUS: The Search for Value and Meaning",
+      "page": 11
+    },
+    "Gemini": {
+      "work": "burt-zodiac",
+      "quote": "GEMINI: The Search for Variety",
+      "page": 11
+    },
+    "Cancer": {
+      "work": "burt-zodiac",
+      "quote": "CANCER: The Search for the Mother Goddess",
+      "page": 11
+    },
+    "Leo": {
+      "work": "burt-zodiac",
+      "quote": "LEO: The Search for Being and Wholeness",
+      "page": 11
+    },
+    "Virgo": {
+      "work": "burt-zodiac",
+      "quote": "VIRGO: The Search for Meaningful Service",
+      "page": 11
+    },
+    "Libra": {
+      "work": "burt-zodiac",
+      "quote": "LIBRA: The Search for the Soul Mate",
+      "page": 11
+    },
+    "Scorpio": {
+      "work": "burt-zodiac",
+      "quote": "SCORPIO: The Search for the Transformation",
+      "page": 11
+    },
+    "Sagittarius": {
+      "work": "burt-zodiac",
+      "quote": "SAGITTARIUS: The Search for Wisdom",
+      "page": 11
+    },
+    "Capricorn": {
+      "work": "burt-zodiac",
+      "quote": "CAPRICORN: The Search for Dharma",
+      "page": 11
+    },
+    "Aquarius": {
+      "work": "burt-zodiac",
+      "quote": "AQUARIUS: The Search for the Holy Grail",
+      "page": 12
+    },
+    "Pisces": {
+      "work": "burt-zodiac",
+      "quote": "PISCES: The Search for the Castle of Peace",
+      "page": 12
+    }
+  },
+  "people": [
+    {
+      "id": "jung",
+      "label": "C. G. Jung",
+      "birth": {
+        "date": "1875-07-26",
+        "time": null,
+        "place": "Kesswil, Thurgau",
+        "lat": 47.6,
+        "lon": 9.32,
+        "offset": "mean-time"
+      },
+      "line": "Jung is the first chart here. The corpus gives the year and the region; the day and the village come from the public record. It gives no birth time, so his chart is cast for local noon: no rising sign, and the Moon may be a few degrees off.",
+      "quote": {
+        "work": "cw01",
+        "quote": "Jung was born in northeastern Switzerland in 1875, a Protestant clergyman’s son."
+      }
+    }
+  ]
+}

@@ -56,7 +56,9 @@ function pageOf(corpus, at) {
 
 /** Every place the words stand, any run of whitespace between them matching any other (a removed marker leaves a gap). */
 function findAll(hay, needle) {
-  const words = needle.split(/\s+/).filter(Boolean).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  // typography only is folded (curly and straight quotes, the three dashes); every letter must still match
+  const fold = (w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/['‘’]/g, "['‘’]").replace(/["“”]/g, '["“”]').replace(/[-–—]/g, '[-–—]');
+  const words = needle.split(/\s+/).filter(Boolean).map(fold);
   const re = new RegExp(words.join('\\s+'), 'gu');
   return [...hay.matchAll(re)].map((m) => m.index);
 }
@@ -65,12 +67,17 @@ function findAll(hay, needle) {
  * Find a quotation in a work. Returns { locator, page, para, print } or { error }. Markdown emphasis and the
  * corpus's own ¶ markers inside a quote's span are tolerated by stripping them from both sides.
  */
-export function locate(load, work, quote, { para: expect } = {}) {
+export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
   const corpus = load(work);
   if (!corpus) return { error: `${work}: corpus file missing` };
   const needle = norm(quote).replace(/\*\*¶\d+\*\*\s*/g, '').trim();
   if (needle.split(' ').length < 5) return { error: `${work}: a quotation needs at least five words to name one place` };
-  const hits = findAll(corpus.text, needle);
+  let hits = findAll(corpus.text, needle);
+  // a curated page chooses among repeats (a chapter title also printed in the contents); it must still be found there
+  if (onPage !== undefined && onPage !== null) {
+    hits = hits.filter((h) => corpus.pages[pageOf(corpus, h)]?.page === onPage);
+    if (!hits.length) return { error: `${work}: quotation not found on pdf p${onPage}: "${quote.slice(0, 70)}…"` };
+  }
   if (!hits.length) return { error: `${work}: quotation not found verbatim: "${quote.slice(0, 70)}…"` };
   const pageIdx = [...new Set(hits.map((h) => pageOf(corpus, h)))];
   if (pageIdx.length > 1) return { error: `${work}: quotation found on ${pageIdx.length} pages; lengthen it so it names one: "${quote.slice(0, 70)}…"` };

@@ -92,59 +92,9 @@
 .sky-syzygy-note { margin: 10px 0 0; }
 
 /* ── the birth sky: a quiet disclosure under the culture selector ───── */
-.sky-birth-host { margin-top: 14px; }
-.sky-birth { max-width: 292px; font: 11.5px/1.5 var(--sans); color: var(--ink-3); }
-.sky-birth > summary { cursor: pointer; list-style: none; display: inline-block; padding-bottom: 2px; border-bottom: 1px solid transparent; color: var(--ink-2); letter-spacing: .05em; transition: color .3s, border-color .3s; }
-.sky-birth > summary::-webkit-details-marker { display: none; }
-.sky-birth > summary::after { content: ' +'; color: var(--ink-3); }
-.sky-birth[open] > summary::after { content: ' \2212'; }
-.sky-birth > summary:hover, .sky-birth > summary:focus-visible { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / .4); outline: none; }
-.sky-birth-body { margin-top: 10px; padding: 12px 14px 14px; max-height: calc(100vh - 345px); min-height: 120px; overflow-y: auto; border: 1px solid var(--hair); border-radius: 4px; background: rgb(var(--deep-rgb) / .72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); scrollbar-width: thin; }
-.sky-birth-frame { margin: 0; font: italic 13px/1.45 var(--serif); color: var(--ink-2); }
-.sky-birth-limits { margin: 6px 0 0; font-size: 10.5px; line-height: 1.5; }
-.sky-birth-notice { margin: 10px 0 0; padding-left: 10px; border-left: 1px solid rgb(var(--core-rgb) / .45); font-size: 11px; color: var(--ink-2); }
-.sky-birth-notice[hidden] { display: none; }
-.sky-birth-form { margin-top: 12px; display: grid; gap: 8px; }
-.sky-birth-form.off { opacity: .45; }
-.sky-birth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.sky-birth-form label { display: grid; gap: 2px; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
-.sky-birth-form input { font: 12.5px var(--sans); letter-spacing: .02em; text-transform: none; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 4px 0; min-width: 0; width: 100%; border-radius: 0; }
-.sky-birth-form input:focus-visible { outline: none; border-bottom-color: rgb(var(--core-rgb) / .7); }
-.sky-birth-form input::placeholder { color: var(--ink-3); opacity: .6; }
-.sky-birth-suggest { display: grid; gap: 1px; justify-items: start; }
-.sky-birth-suggest:empty { display: none; }
-.sky-birth-suggest button { font: 12px var(--sans); padding: 3px 0; text-align: left; }
-.sky-birth-help { margin: 0; font-size: 10.5px; line-height: 1.45; color: var(--ink-3); }
-.sky-birth-actions { display: flex; align-items: baseline; gap: 16px; margin-top: 2px; }
-.sky-birth-cast { font: 12px var(--sans); letter-spacing: .05em; color: var(--core); padding: 3px 0; border-bottom: 1px solid rgb(var(--core-rgb) / .45); }
-.sky-birth-cast:disabled { color: var(--ink-3); border-bottom-color: transparent; cursor: default; }
-.sky-birth-status { margin: 8px 0 0; min-height: 0; font-size: 11px; color: var(--ink-3); }
-.sky-birth-status:empty { display: none; }
-.sky-birth-status[data-state=error] { color: #e8b4a8; }
-.sky-birth-result { margin-top: 12px; }
-.sky-birth-result:empty { display: none; }
-.sky-birth-when { margin: 0; font-size: 11px; color: var(--ink-2); word-break: break-word; }
-.sky-birth-approx { margin: 8px 0 0; padding-left: 10px; border-left: 1px solid rgb(var(--core-rgb) / .45); font-size: 10.5px; color: var(--ink-2); }
-.sky-birth-moon { margin: 8px 0 0; font-size: 11px; color: var(--ink-2); }
-.sky-birth-rows { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
-.sky-birth-rows li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; padding: 3px 0; border-top: 1px solid var(--hair); }
-.sky-birth-rows li:first-child { border-top: 0; }
-.sky-birth-name { font: 12.5px var(--sans); min-width: 68px; text-align: left; color: var(--ink); }
-.sky-birth-place-at { color: var(--ink-2); font-size: 11.5px; letter-spacing: .02em; }
-.sky-birth-retro { color: var(--ink-3); font-size: 11px; cursor: help; }
-.sky-birth-descend { font-size: 11px; color: var(--ink-3); margin-left: auto; }
-.sky-birth-angles { margin: 10px 0 0; font-size: 11px; color: var(--ink-2); }
-.sky-birth-draw { margin: 12px 0 0; display: grid; gap: 4px; }
-.sky-birth-draw label { display: flex; align-items: center; gap: 8px; font: 11.5px var(--sans); letter-spacing: .02em; text-transform: none; color: var(--ink-2); }
-.sky-birth-draw input { accent-color: var(--core); }
-.sky-birth-aspects { margin: 10px 0 0; font-size: 11px; }
-.sky-birth-aspects summary { cursor: pointer; color: var(--ink-3); }
-.sky-birth-aspects ul { margin: 6px 0; padding-left: 16px; color: var(--ink-2); }
-.sky-birth-leave { display: inline-block; margin-top: 14px; font-size: 11.5px; }
 
 /* the chart ring's own names: sign names and the two angles, placed over the scene */
 .sky-chart-mark { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity .4s var(--ease); font: 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); text-shadow: 0 1px 12px rgb(var(--deep-rgb)); white-space: nowrap; }
 .sky-chart-mark.on { opacity: .8; }
 .sky-chart-angle { color: var(--ink-2); letter-spacing: .08em; }
-@media (max-width: 760px) { .sky-birth { max-width: calc(100vw - 36px); } .sky-birth-body { max-height: 52vh; } }
 @media (prefers-reduced-motion: reduce) { .sky-chart-mark { transition: none; } }
