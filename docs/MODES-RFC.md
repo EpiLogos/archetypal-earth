@@ -213,26 +213,44 @@ shell as controls. Two departures:
 #/coincidences[/new | /<id>[/edit]]
 ```
 
-The old `#/sky/birth/<moment>/<lat>/<lon>` links open Astrology empty and drop the moment. §5 planned to pre-fill the
-form instead, but a birth moment in a link is personal data, so it is no longer read at all. The natal sky is
-`sky.natal = <chartId>`. It never holds a birth.
+The old `#/sky/birth/<moment>/<lat>/<lon>` links open Astrology with the form filled from the link, as §5 planned. The
+birth is held in memory until the chart is cast, nothing is saved from the link alone, and the address is replaced so
+the moment does not stay in history. The natal sky is `sky.natal = <chartId>`. It never holds a birth.
 
 **Astrology.** The chart is computed in the page with astronomy-engine (MIT, 52 kB, loaded with the lens), so the
 local sidecar is no longer needed for birth charts. Houses are equal. With no birth time the chart is cast for local
-noon and no angles are drawn. Jung's own chart is cast this way because the corpus gives no birth time (CW1 gives
-"northeastern Switzerland", 1875; the day and Kesswil are from the public record).
+noon and no angles are drawn. Jung's chart: the corpus gives the year and region (CW1, "northeastern Switzerland",
+1875); the day, Kesswil and the time come from the public record. The time is 19:32 local mean time, as his daughter
+Gret Baumann-Jung gave it; other records give 19:20 to 19:41, and the lens says so. It gives Aquarius 1.6° rising and
+the Midheaven at Scorpio 29°. Every Burt passage on a planet ships (two shown, the rest under "More from Burt").
 
 **Practice storage.** As in §8. One module (`src/practice/store.ts`), one prefix, export, import and delete-all,
 behind a backend interface so a shared layer can be added as a second backend.
 
 **Citations.** Each lens has a generator (`npm run theory|astrology|practice|depth`) that places every curated
-quotation in the flattened corpus text and writes the locator from the corpus's own markers: `¶N (pdf pP)`, or
-`pdf pP` alone where the vault note's ¶ disagrees with the corpus marker. `:check` re-verifies each published file.
-Quotations that do not place exactly are left out and reported, never shown.
+quotation in the flattened corpus text and writes the locator from the corpus's own markers: `¶N (pdf pP)`. Three
+repairs replace what used to be omissions (`scripts/lib/cite.mjs`, tested in `tests/data/cite-repair.test.ts`):
+
+- *A ¶ the scan lost.* Where the vault note's ¶ falls in a gap between the corpus's markers and no marker for it stands
+  anywhere in the volume, the note's ¶ is cited. Where the corpus contradicts it, the pdf page alone is cited.
+- *Words the scan ran together* ("wasa", "forexample") or the l/i/1 misread ("seif" for "self"): on the page the
+  curator names, and only there, a quotation is placed through the damage, and the generator reports it.
+- *Printed pages* are shown (`· p. N`), in cites and in the passage viewer, where the scan's label agrees with its
+  neighbours. A lone label, or a ¶ number misread as a folio, is not shown.
+
+`:check` re-verifies each published file. A quotation that cannot be placed even so fails the build.
+
+**External works.** Van Eenwyk's *Archetypes & Strange Attractors* lives in the vault outside `corpus/`
+(`_raw-ext/van-eenwyk/pages`). `scripts/lib/external.mjs` reads it in the corpus's shape: its running heads become page
+labels. The corpus index (now 34 works), the cite locator and the dynamics rail all read it. The dynamical lens ships 14
+concept cards from the vault's chaos-dynamics map. Each Van Eenwyk passage stands beside the Jung passage the map pairs
+it with, both matched verbatim by the rail. Theory's time section quotes him on synchronic and diachronic dynamics.
 
 **Deep fields.** `src/lenses/depth.ts` renders an archetype at maximum depth from `curation/depth/<id>.json`. The
-Great Mother is the first: 14 placed quotations, 15 of Neumann's dated instances (the plates section of the scan is
-too damaged for more, and the page says so), her 49 image families, 654 instances and 139 dreams and visions.
+Great Mother is the first: 14 placed quotations; 722 of Neumann's instances from the reading passes (The Great Mother,
+plus Origins' great-mother and uroboros records), 109 dated and 613 dated by era or not at all, grouped by kind. Where
+the plate-caption scan is damaged, the words are as the scan reads them and the entry says so. Beside them are her 49
+image families, 654 field instances and 139 dreams and visions.
 
 **Filter.** The filter dims what it excludes. Below an alpha of 0.035 a presence is culled in the shader and is not
 pickable, so a filtered-out instance cannot be clicked.
@@ -240,5 +258,8 @@ pickable, so a filtered-out instance cannot be clicked.
 **Final sizes** (`vite build`, after every thread). The entry chunk is 766 kB / 210 kB gzip, down from 916 / 261 kB
 before Thread 2, with all four new lenses added. Fetched on first use: graph + d3 101 kB, astronomy-engine 52 kB,
 Aion 25 kB, dynamical lens 19 kB, Astrology 12 kB, Red Book 10 kB, Coincidences 8 kB, Dreams 7 kB, Theory 6 kB,
-Symbols with the deep field 7 kB, shared amplification 6 kB, practice store 2 kB. Lighthouse was not re-run after
-Thread 2: the lenses added since load only on demand, so first paint is unchanged.
+Symbols with the deep field 7 kB, shared amplification 6 kB, practice store 2 kB.
+
+Lighthouse mobile on the final build (same container, same caveats as §9), two runs: performance 0.30 and 0.33;
+total blocking time 3.6 s and 2.0 s; boot-up 7.6 s and 4.3 s; LCP 21.6 s (by design, as in §9); 4,001 KiB
+transferred. That is as good as after Thread 2, or a little better, with four more lenses.

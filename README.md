@@ -26,8 +26,13 @@ Export and delete-all are in each tool. Birth charts are computed in the page (a
 carries a birth.
 
 The Great Mother is the first **deep field** (`#/symbols/archetype/great-mother`, or "The deep field" on her label):
-Jung's distinction between image and archetype, Neumann's structure and stages, her images, dreams and dated
-instances, built from `curation/depth/` by `npm run depth`.
+Jung's distinction between image and archetype, Neumann's structure and stages, her images and dreams, and all 722 of
+Neumann's instances from the reading passes. It is built from `curation/depth/` by `npm run depth`.
+
+The **dynamical lens** (`#/dynamics`, from Theory) carries 14 concept cards. Each sets a passage from John Van Eenwyk's
+*Archetypes & Strange Attractors* (marked V) beside the Jung passage the vault pairs it with (marked J), built by
+`VAULT=<vault> npm run dynamics`. Van Eenwyk's book is read from the vault's `_raw-ext/` pages
+(`curation/external.json`, `scripts/lib/external.mjs`).
 
 ## Run
 
@@ -44,7 +49,7 @@ The site reads the Jung archetypal-field vault at `~/Documents/books/jung-archet
 - `npm run images` fetches any images still missing from Wikimedia Commons into `public/img/`. Re-runs skip images already on disk.
 - `npm run images:verify` checks the shipped corpus with no image ever opened: provenance completeness, licence law, manifest↔disk↔field agreement, byte-identity (a plate shared under one recorded source is intended curation; identical bytes under different sources fail).
 - `npm run data` runs ingest, then images, then ingest again, then every generator (Aion, the Red Book, Theory,
-  Astrology, Practice, the deep field). The images step needs Wikimedia Commons; everything else reads only the vault.
+  Astrology, Practice, the deep field, the dynamical lens). The images step needs Wikimedia Commons; everything else reads only the vault.
 - `npm run harvest:check` checks the reading-pass records for the newest texts against the corpus text.
 
 Choices made by the site rather than taken from the vault live in `curation/`:

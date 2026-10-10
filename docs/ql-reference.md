@@ -5,9 +5,10 @@ from its source. My words appear only in headings, in "How the lens uses it" and
 
 ## Sources
 
-The brief named epi-logos.org as the source. It could not be reached from the cloud environment this was built in: the
-environment's network policy refused the host (the proxy answered 403 to `CONNECT epi-logos.org:443`; DNS lookup from
-the fetch tool failed). Nothing was read from the site.
+The brief named epi-logos.org as the source. It could not be reached. The build environment's proxy refused the host
+(403 to `CONNECT epi-logos.org:443`), and on 2026-10-10 a fetch from outside that network failed DNS too
+(`getaddrinfo ENOTFOUND` for both `epi-logos.org` and `www.epi-logos.org`), and a web search found no page of it. So
+either the site is not published at that name or it is served only somewhere private. Nothing was read from it.
 
 What was read instead is the owner's own QL material as installed in the build session (the owner's account skills):
 
