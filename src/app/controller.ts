@@ -13,6 +13,7 @@ import { astrologyAt, back, focusOn, inLens, inSky, openedFrom, startThread, sta
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
+import { DEEP_FIELDS } from '../lenses/depth';
 import { lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
 import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
@@ -1601,6 +1602,8 @@ export class Controller {
       }
     }
     if (subject.type === 'family' || subject.type === 'archetype') content.links!.push({ text: 'Follow the thread', onClick: () => this.followThread() });
+    // an archetype with a deep field (the Great Mother is the first) opens it from its focus
+    if (subject.type === 'archetype' && DEEP_FIELDS.has(subject.id)) content.links!.push({ text: 'The deep field', onClick: () => this.navigate(inLens('symbols', ['archetype', subject.id])) });
     content.links!.push({ text: 'Reading', onClick: () => this.setDeep(true) });
     this.label.set(content, `f:${subject.type}:${subject.id}`);
   }

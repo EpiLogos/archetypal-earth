@@ -9,6 +9,7 @@ import { passes } from '../shell/filter';
 import { amplify, findImages, vocabulary, type Vocabulary } from '../practice/amplify';
 import { amplificationView, type AmplifyActions } from '../practice/amplify-view';
 import { loadLensData, quoteBlock, tuneGlobe, type LensQuote } from './ui';
+import { DEEP_FIELDS, depthView, type DepthData } from './depth';
 
 interface PracticeData { dreams: { method: LensQuote[] } }
 
@@ -73,7 +74,31 @@ export function mount(ctx: LensContext): LensInstance {
     ]);
   };
 
+  const deep = (id: string) => {
+    ctx.setContext(m.archById.get(id)!.name);
+    tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok));
+    loadLensData<DepthData>('depth').then((d) => {
+      const entry = d.archetypes[id];
+      if (!entry) { plainArchetype(id); return; }
+      const nodes = [
+        el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another symbol' })]),
+        ...depthView(m, entry, {
+          amplifyFamily: (fid) => ctx.setPath([fid]),
+          openOccurrence: (oid) => ctx.openOccurrence(oid),
+          focus: () => ctx.focus({ type: 'archetype', id }),
+          walk: () => ctx.navigate(startThread(WORLD, { type: 'archetype', id })),
+        }, ctx.passages, ok),
+      ];
+      if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('The deep field', nodes, { height: 'full', wide: true });
+    }).catch(() => plainArchetype(id));
+  };
+
   const archetype = (id: string) => {
+    if (DEEP_FIELDS.has(id) && m.archById.has(id)) { deep(id); return; }
+    plainArchetype(id);
+  };
+
+  const plainArchetype = (id: string) => {
     const arch = m.archById.get(id);
     if (!arch) { home(); return; }
     ctx.setContext(arch.name);

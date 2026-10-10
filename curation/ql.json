@@ -1,0 +1,60 @@
+{
+  "_note": "The QL lens on number (Theory → Number). Corpus quotations (Jung, von Franz) name only their work and words and are placed by the corpus at build time. QL formulations are the framework's own words, quoted from the sources listed in docs/ql-reference.md (S1–S4); they are never placed in the corpus and are always shown marked as QL. The mapping (archetypal numbers 1–6 ↔ positions #0–#5) is the owner's, from the brief; the alternative alignment in S2 is recorded in docs/ql-reference.md.",
+  "version": 1,
+  "line": "Jung came to think numbers are found as much as invented: archetypes of order that run through psyche and matter alike. Marie-Louise von Franz worked that out number by number. The QL framework names six positions. Here the two stand side by side, each in its own words.",
+  "matheme": { "text": "0/1 = 4+2 = 5→0 = 0/1", "source": "S4" },
+  "jung": [
+    { "work": "cw08", "para": 870, "quote": "From this it follows irrefutably that the unconscious uses number as an ordering factor." },
+    { "work": "cw08", "para": 871, "quote": "I must confess that I incline to the view that numbers were as much found as invented, and that in consequence they possess a relative autonomy analogous to that of the archetypes." },
+    { "work": "cw08", "para": 871, "quote": "Accordingly it would seem that natural numbers have an archetypal character." }
+  ],
+  "series": { "work": "vonzfranz-number-time", "quote": "One comprises wholeness, two divides, repeats, and engenders symmetries, three centers the symmetries and initiates linear succession, four acts as a stabilizer by turning back to the one as well as bringing forth observables by creating boundaries, and so on." },
+  "numbers": [
+    { "n": 1, "position": "#0", "ql": { "name": "Archetypal Foundation", "text": "Pre-reflective ground, implicit assumptions, void-potential before differentiation", "source": "S1" },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "quantitatively it forms the unit, qualitatively it contains the whole sequence of natural numbers" },
+        { "work": "vonzfranz-number-time", "quote": "in this manner the one becomes the principium individuationis" }
+      ] },
+    { "n": 2, "position": "#1", "ql": { "name": "Causal/Material", "text": "Material substrate, what-is, components, concrete being (Aristotle's material cause)", "source": "S1" },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "In this context, twoness signifies oscillation and rhythm, but not yet linear time." },
+        { "work": "vonzfranz-number-time", "quote": "The dualism of zero and one, or one and two, furthermore, contains within itself the potential concept of fourfoldness" }
+      ] },
+    { "n": 3, "position": "#2", "ql": { "name": "Logical/Methodological", "text": "Epistemological frameworks, how-we-know, navigation tools, tetralemma (efficient cause)", "source": "S1" },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "According to this view the three then represents the unitary aspect of the bipolar one-continuum that has become conscious." },
+        { "work": "vonzfranz-number-time", "quote": "This is the reason why in number symbolism three is so often connected with time." }
+      ] },
+    { "n": 4, "position": "#3", "ql": { "name": "Processual/Ontological", "text": "Becoming, organic unfolding, developmental stages, how-things-change (formal cause)", "source": "S1" },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "The fact that mankind's repeated attempts to establish an orientation toward wholeness possess a quaternary structure appears to correspond to an archetypal psychic structural predisposition in man." },
+        { "work": "cw08", "para": 870, "quote": "They are as a rule quaternities (or their multiples)." }
+      ] },
+    { "n": 5, "position": "#4", "ql": { "name": "Meta-Epistemic/Contextual", "text": "Purpose, telos, context, situated knowing, reflexive awareness (final cause)", "source": "S1" },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "It is included in the concept of the “philosophers’ stone” as the quinta essentia." }
+      ] },
+    { "n": 6, "position": "#5", "ql": { "name": "Divine-Scalar/Synthetic", "text": "Integration, synthesis, quintessence, transcendent wholeness, completion", "source": "S1", "also": { "text": "#5 The modular return (6 ≡ 0 mod 6)", "source": "S4" } },
+      "quotes": [
+        { "work": "vonzfranz-number-time", "quote": "six is the first numeral of the series to represent the sum of its divisors (one, two, and three)" }
+      ] }
+  ],
+  "psychoid": {
+    "line": "What holds this together is the psychoid: Jung's word for the layer where the archetype reaches past the psyche into matter. Number is the plainest case of it.",
+    "quotes": [
+      { "work": "cw08", "para": 840, "quote": "on account of its “irrepresentable” nature I have called it “psychoid.”" },
+      { "work": "vonzfranz-number-time", "quote": "Jung expressly stated that his archetypes possess a “psychoid” aspect overlapping outer material reality." }
+    ],
+    "ql": { "text": "Numbers as psychoid archetypes—common denominators of matter and psyche.", "source": "S3" }
+  },
+  "time": {
+    "line": "And number is bound up with time. Von Franz says two gives rhythm before there is any line of time, and three starts the line; Jung's Aion is time that holds the opposites; synchronicity is a meaning that crosses causal time.",
+    "quotes": [
+      { "work": "vonzfranz-number-time", "quote": "In other words, linear or cyclical time does not initially exist." },
+      { "work": "sem-childrens-dreams", "quote": "This is the deus leontocephalus, that is, Aion, meaning infinitely long time, the god of time who combines the opposites." },
+      { "work": "cw09ii", "quote": "psychically relative space-time continuum that is characteristic" }
+    ],
+    "quaternio": { "intro": { "work": "cw08", "para": 963, "quote": "We finally agreed on the following quaternio:" }, "terms": ["Indestructible Energy", "Space-Time Continuum", "Constant Connection through Effect (Causality)", "Inconstant Connection through Contingence, Equivalence, or \"Meaning\" (Synchronicity)"] },
+    "vaneenwyk": "John Van Eenwyk names the same split as synchronic and diachronic dynamics; the vault maps it (chaos-dynamics). His book is not in the corpus, so it is not quoted here: the dynamical lens draws it."
+  }
+}

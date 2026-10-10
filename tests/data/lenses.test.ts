@@ -27,7 +27,7 @@ function quotes(node: unknown, out: Q[] = []): Q[] {
 
 describe('the lens data: provenance lives in the quotes', () => {
   const load = workLoader(DEFAULT_VAULT);
-  for (const file of ['theory.json', 'astrology.json', 'practice.json']) {
+  for (const file of ['theory.json', 'astrology.json', 'practice.json', 'depth.json']) {
     it(`${file}: every quotation stands verbatim on its cited page of the read-only vault`, () => {
       const qs = quotes(read(file));
       expect(qs.length).toBeGreaterThan(10);
@@ -47,6 +47,11 @@ describe('the lens data: provenance lives in the quotes', () => {
     expect(a.errors).toEqual([]);
     expect(read('theory.json')).toEqual(t.data);
     expect(read('astrology.json')).toEqual(a.data);
+  });
+
+  it('the deep fields the site links to are the ones the curation builds', async () => {
+    const { DEEP_FIELDS } = await import('../../src/lenses/depth');
+    expect([...DEEP_FIELDS].sort()).toEqual(Object.keys(read('depth.json').archetypes).sort());
   });
 
   it('Jung, the first chart, carries no birth time the corpus does not give', () => {

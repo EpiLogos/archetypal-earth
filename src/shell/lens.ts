@@ -67,7 +67,7 @@ export interface LensModule {
 
 export const LENSES: readonly LensDef[] = [
   { id: 'field', label: 'Field', icon: 'field', group: 'read', blurb: 'Every archetype, symbol and instance on the globe.', key: 'F' },
-  { id: 'theory', label: 'Theory', icon: 'theory', group: 'read', blurb: 'How psychic energy moves: compensation, reversal, the third.', key: 'T' },
+  { id: 'theory', label: 'Theory', icon: 'theory', group: 'read', blurb: 'How psychic energy moves, and number as an archetype.', key: 'T' },
   { id: 'aion', label: 'Aion', icon: 'aion', group: 'read', blurb: 'Jung’s history of the aeons, Pisces to Aquarius.', key: 'A' },
   { id: 'redbook', label: 'Red Book', icon: 'redbook', group: 'read', blurb: 'The book the rest of the field grew from.', key: 'R' },
   { id: 'astrology', label: 'Astrology', icon: 'astrology', group: 'practice', blurb: 'Your birth sky beside Jung’s, read through the corpus.' },
