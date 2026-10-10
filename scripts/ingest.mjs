@@ -9,7 +9,7 @@ import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse } from 
 import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT } from './lib/geo.mjs';
 import { validateField } from './validate.mjs';
 import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
-import { buildCorpusIndex } from './lib/corpus.mjs';
+import { buildCorpusIndex, corpusTitles } from './lib/corpus.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -95,7 +95,7 @@ const archNotes = readNotes(W('archetypes'));
 const imgNotes = readNotes(W('images'));
 const instNotes = readNotes(W('instances'));
 const manifest = readJson(path.join(VAULT, '_raw', 'manifest.json'), []);
-const workTitles = Object.fromEntries(manifest.map((m) => [m.vol, m.title]));
+const workTitles = { ...corpusTitles(VAULT), ...Object.fromEntries(manifest.map((m) => [m.vol, m.title])) };
 let mentions = [];
 try {
   mentions = fs.readFileSync(path.join(VAULT, 'data', 'mentions.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => {

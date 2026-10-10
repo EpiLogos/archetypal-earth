@@ -6,7 +6,7 @@
     "cultures": 64,
     "images": 442
   },
-  "vaultLedgerLine": "2026-10-09 — VAN EENWYK LANE COMPLETE ✅ (external-lens)",
+  "vaultLedgerLine": "2026-10-10 — THREE NEW TEXTS INGESTED + CLOUD HANDOFF ✅",
   "geoPrecision": {
     "place": 1548,
     "region": 983,
@@ -558,6 +558,8 @@
         "cw17.md",
         "cw18.md",
         "letters-pauli.md",
+        "neumann-great-mother.md",
+        "neumann-origins.md",
         "sem-1925.md",
         "sem-childrens-dreams.md",
         "sem-dream-analysis.md",
@@ -565,21 +567,22 @@
         "sem-visions.md",
         "sem-zarathustra.md",
         "sup-zofingia.md",
-        "sync.md"
+        "sync.md",
+        "vonzfranz-number-time.md"
       ],
-      "key": "203b15fbde3d4c97",
-      "words": 48006,
+      "key": "3a45fdabb3ddb446",
+      "words": 50976,
       "cached": true
     },
-    "stringsChanged": 168,
-    "changes": 559,
+    "stringsChanged": 170,
+    "changes": 562,
     "byKind": {
-      "join": 516,
+      "join": 520,
       "curated": 29,
-      "reflow": 13,
+      "reflow": 12,
       "hyphen-break": 1
     },
-    "unique": 390,
+    "unique": 394,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1051,16 +1054,6 @@
         ]
       },
       {
-        "kind": "reflow",
-        "before": "Heliae Artistae quo tempore nihil tam occultum quod",
-        "after": "He li ae Artist ae quo tempore nihil tam occultum quod",
-        "count": 2,
-        "where": [
-          "occ:mercurius-helyas-artista-dorn-theatrum-1602.body[0]",
-          "occ:mercurius-helyas-artista-dorn-theatrum-1602.quote"
-        ]
-      },
-      {
         "kind": "join",
         "before": "in stead",
         "after": "instead",
@@ -1413,15 +1406,6 @@
       },
       {
         "kind": "join",
-        "before": "\"ex illis\"",
-        "after": "\"exillis\"",
-        "count": 1,
-        "where": [
-          "occ:grail-lapsit-exillis-wolfram-1210.body[0]"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "“H erm",
         "after": "“Herm",
         "count": 1,
@@ -1763,6 +1747,15 @@
         ]
       },
       {
+        "kind": "join",
+        "before": "aqua fortis,",
+        "after": "aquafortis,",
+        "count": 1,
+        "where": [
+          "occ:dragon-swallows-own-tail-museum-hermeticum-1625.body[1]"
+        ]
+      },
+      {
         "kind": "curated",
         "before": "ArdvI Sura",
         "after": "Ardvi Sura",
@@ -2016,15 +2009,6 @@
       },
       {
         "kind": "join",
-        "before": "com plex",
-        "after": "complex",
-        "count": 1,
-        "where": [
-          "occ:tree-gaokerena-vourukasha-persia.body[0]"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "contem plated",
         "after": "contemplated",
         "count": 1,
@@ -2096,6 +2080,24 @@
         ]
       },
       {
+        "kind": "reflow",
+        "before": "De stella nova in pede serpentarii",
+        "after": "De stella no vain pe de serpent ar ii",
+        "count": 1,
+        "where": [
+          "occ:serpent-stella-nova-ophiuchus-prague-1606.title"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "De stella nova in pede serpentarii.",
+        "after": "De stella no vain pe de serpent ar ii.",
+        "count": 1,
+        "where": [
+          "occ:serpent-stella-nova-ophiuchus-prague-1606.quote"
+        ]
+      },
+      {
         "kind": "join",
         "before": "determ ined",
         "after": "determined",
@@ -2111,6 +2113,15 @@
         "count": 1,
         "where": [
           "occ:dew-gideon-fleece-sign-israel-1100bce.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dew falls",
+        "after": "dewfalls",
+        "count": 1,
+        "where": [
+          "occ:dew-gedeonis-purification-rosarium-1550.body[0]"
         ]
       },
       {
@@ -2457,6 +2468,15 @@
       },
       {
         "kind": "join",
+        "before": "He sped",
+        "after": "Hesped",
+        "count": 1,
+        "where": [
+          "occ:wotan-langmann-gustloff-funeral-sermon-germany-1936.quote"
+        ]
+      },
+      {
+        "kind": "join",
         "before": "Hegem onius's",
         "after": "Hegemonius's",
         "count": 1,
@@ -2556,15 +2576,6 @@
       },
       {
         "kind": "reflow",
-        "before": "ibi enim existens est",
-        "after": "ibi enim exist ens est",
-        "count": 1,
-        "where": [
-          "occ:crown-shekinah-diadem-malchuth-kether-1677.quote"
-        ]
-      },
-      {
-        "kind": "reflow",
         "before": "Ich bin dein Labyrinth.\"",
         "after": "Ich bind ein Labyrinth.\"",
         "count": 1,
@@ -2588,6 +2599,15 @@
         "count": 1,
         "where": [
           "occ:tree-picture-animus-gambler-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "Il y",
+        "after": "Ily",
+        "count": 1,
+        "where": [
+          "occ:quaternity-preacher-french-formulas-dream-1955.quote"
         ]
       },
       {
@@ -3473,6 +3493,15 @@
         ]
       },
       {
+        "kind": "join",
+        "before": "par les",
+        "after": "parles",
+        "count": 1,
+        "where": [
+          "occ:christ-crucified-by-virtues-besancon-13c.title"
+        ]
+      },
+      {
         "kind": "curated",
         "before": "pendaient Ies",
         "after": "pendaient les",
@@ -3896,15 +3925,6 @@
         ]
       },
       {
-        "kind": "reflow",
-        "before": "taxi fare reclaimed and",
-        "after": "tax if are re claimed and",
-        "count": 1,
-        "where": [
-          "occ:happy-neurosis-island-washing-case-zurich.body[1]"
-        ]
-      },
-      {
         "kind": "join",
         "before": "tem peram ents,",
         "after": "temperaments,",
@@ -3983,6 +4003,15 @@
         "count": 1,
         "where": [
           "occ:tree-dorn-genealogia-mineralium-16c.body[1]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "the Gaokerena com plex Jung invokes",
+        "after": "the Gaokerena complex Jung invokes",
+        "count": 1,
+        "where": [
+          "occ:tree-gaokerena-vourukasha-persia.body[0]"
         ]
       },
       {
@@ -4154,6 +4183,15 @@
         "count": 1,
         "where": [
           "occ:divine-child-sleeping-gods-holderlin-hyperion-1797.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "window panes.",
+        "after": "windowpanes.",
+        "count": 1,
+        "where": [
+          "occ:open-manholes-underground-street-dream-zurich-1930s.body[1]"
         ]
       },
       {
