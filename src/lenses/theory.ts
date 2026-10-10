@@ -22,7 +22,7 @@ interface NumberData {
   series: LensQuote;
   numbers: NumberRow[];
   psychoid: { line: string; quotes: LensQuote[]; ql: QL };
-  time: { line: string; quotes: LensQuote[]; quaternio: { intro: LensQuote; terms: string[] }; vaneenwyk: string };
+  time: { line: string; quotes: LensQuote[]; quaternio: { intro: LensQuote; terms: string[] }; vaneenwyk: { line: string; quotes: LensQuote[] } };
 }
 interface TheoryData { version: 1; sections: TheorySection[]; number?: NumberData }
 
@@ -115,7 +115,8 @@ export function mount(ctx: LensContext): LensInstance {
       ...d.time.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
       quoteBlock(d.time.quaternio.intro, ctx.passages, { compact: true }),
       q(d.time.quaternio),
-      el('p', { class: 'lp-note', text: d.time.vaneenwyk }),
+      el('p', { class: 'th-line', text: d.time.vaneenwyk.line }),
+      ...d.time.vaneenwyk.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: {} }) }, [el('span', { text: 'The dynamical lens' }), icon('next', 14)]),
     ];
     const nodes = body.filter((n): n is HTMLElement => !!n);

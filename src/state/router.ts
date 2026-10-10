@@ -24,6 +24,21 @@ export interface Parsed {
   year?: number;
   /** the field filter the hash carries after `?` (empty when none) */
   filter: FieldFilter;
+  /**
+   * An old birth-sky link (`#/sky/birth/<local>/<lat>/<lon>`) carried a birth in the URL. It opens Astrology with the form
+   * filled from it, nothing saved; the caller replaces the hash so the moment does not stay in history.
+   */
+  birthPrefill?: BirthPrefill;
+}
+
+export interface BirthPrefill { date: string; time: string | null; lat: number; lon: number }
+
+/** The birth an old link names, or null when it does not parse as a date, a time and a place on the Earth. */
+export function parseBirthLink(local: string, lat: string, lon: string): BirthPrefill | null {
+  const m = /^(\d{4}-\d{2}-\d{2})(?:T(\d{2}:\d{2}))?/.exec(local ?? '');
+  const la = Number(lat), lo = Number(lon);
+  if (!m || !Number.isFinite(la) || !Number.isFinite(lo) || Math.abs(la) > 90 || Math.abs(lo) > 180) return null;
+  return { date: m[1], time: m[2] ?? null, lat: la, lon: lo };
 }
 
 /** The hash for a state with the field filter appended (`#/a/self?w=cw12`). */
@@ -108,8 +123,11 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   if (parts[0] === 'sky') {
     const sky: NonNullable<AppState['sky']> = {};
     let rest = parts.slice(1);
-    // the old birth-sky links carried a birth moment in the URL: they now open Astrology empty, and the moment is dropped
-    if (rest[0] === 'birth') return { state: astrologyAt([]) };
+    // the old birth-sky links carried a birth moment in the URL: they open Astrology with the form filled from it (not saved)
+    if (rest[0] === 'birth') {
+      const pre = parseBirthLink(rest[1], rest[2], rest[3]);
+      return { state: astrologyAt([]), ...(pre ? { birthPrefill: pre } : {}) };
+    }
     if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     return { state: { view: { kind: 'world' }, deep: false, sky } };

@@ -6,6 +6,400 @@
     "publisher": "Inner City Books",
     "year": "1997"
   },
-  "sources": {},
-  "concepts": []
+  "sources": {
+    "van-eenwyk": {
+      "file": "_raw-ext/van-eenwyk/pages",
+      "sha256": "fda6dc168d1d5447e18e0813a569c26aa837f4c87f1ccd1286a4e31ff55198c5",
+      "title": "Archetypes & Strange Attractors",
+      "year": "1997",
+      "voice": "V"
+    },
+    "cw05": {
+      "file": "corpus/cw05.md",
+      "sha256": "095737b8166302f3eedae36ddbf4ff4af5bbaf578326b484bfcb57ac734811eb",
+      "title": "Symbols of Transformation",
+      "year": "",
+      "voice": "J"
+    },
+    "cw06": {
+      "file": "corpus/cw06.md",
+      "sha256": "ae4fdc90e51c7c350d97fe78e317bb5f93791de81374c2a4ea79e94380db5b79",
+      "title": "Psychological Types",
+      "year": "",
+      "voice": "J"
+    },
+    "cw07": {
+      "file": "corpus/cw07.md",
+      "sha256": "b176ca75a06ce3307ffa1b5660b3d7d7a93ee89b437a5cf6f2ae1d40e44e635e",
+      "title": "Two Essays on Analytical Psychology",
+      "year": "",
+      "voice": "J"
+    },
+    "cw08": {
+      "file": "corpus/cw08.md",
+      "sha256": "4a4d4331ffc2265210f9da44520efe260f89e118d1b3946fe2a95635ee36f75c",
+      "title": "The Structure and Dynamics of the Psyche",
+      "year": "",
+      "voice": "J"
+    },
+    "cw09i": {
+      "file": "corpus/cw09i.md",
+      "sha256": "fd1ffad7562301f1e54f32e9787aac6ea687d39ba408904de2ca8aca60fbad78",
+      "title": "The Archetypes and the Collective Unconscious",
+      "year": "",
+      "voice": "J"
+    },
+    "cw13": {
+      "file": "corpus/cw13.md",
+      "sha256": "0e6a6bbddb0c76bafbf67f83fab82fede1d0ee36bbf681e779d8da8438fdb86d",
+      "title": "Alchemical Studies",
+      "year": "",
+      "voice": "J"
+    },
+    "cw14": {
+      "file": "corpus/cw14.md",
+      "sha256": "ecda6a4cb9732eef4854d2497f72c76118cadf71ea41101bf2b2e21d80782778",
+      "title": "Mysterium Coniunctionis",
+      "year": "",
+      "voice": "J"
+    }
+  },
+  "concepts": [
+    {
+      "id": "strange-attractor",
+      "name": "Attractor-generating pattern",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 68,
+        "locator": "p. 67",
+        "match": "resemble the archetypes in their self-organized self-similarity across scale"
+      },
+      "jung": {
+        "work": "cw07",
+        "page": 64,
+        "locator": "¶109 (pdf p64)",
+        "match": "a kind of readiness to produce over and over again the same or similar mythical ideas"
+      },
+      "familyIds": [
+        "mandala",
+        "serpent",
+        "tree",
+        "spiral",
+        "uroboros",
+        "circle"
+      ]
+    },
+    {
+      "id": "alternating-current",
+      "name": "Energy as an oscillation between poles",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 29,
+        "locator": "p. 28",
+        "match": "Archetypes play a key role in the synchronic dynamics of individuation by mobilizing psychic energy into a kind of alternating current between consciousness and the unconscious."
+      },
+      "jung": {
+        "work": "cw06",
+        "page": 194,
+        "locator": "¶337 (pdf p194)",
+        "match": "a current of energy necessarily presupposes two different states, or poles, without which there can be no current"
+      },
+      "familyIds": [
+        "sun",
+        "fire",
+        "serpent",
+        "water",
+        "sun-hero",
+        "helios"
+      ]
+    },
+    {
+      "id": "cascade-into-chaos",
+      "name": "Oscillation cascading into chaos",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 113,
+        "locator": "p. 112",
+        "match": "The oscillatory nature of the tension of opposites leads to chaos when the oscillations themselves begin to oscillate"
+      },
+      "jung": {
+        "work": "cw14",
+        "page": 272,
+        "locator": "¶506 (pdf p272)",
+        "match": "what looked like death and destruction will settle down into a latent state of concord"
+      },
+      "familyIds": [
+        "dismemberment",
+        "prima-materia",
+        "nigredo",
+        "nekyia",
+        "night-sea-journey",
+        "dragon"
+      ]
+    },
+    {
+      "id": "symmetry-building",
+      "name": "Symmetry-building bifurcation",
+      "render": "julia",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 92,
+        "locator": "p. 91",
+        "match": "Thus, they make it possible for “either-or” situations to become more symmetrical"
+      },
+      "jung": {
+        "work": "cw08",
+        "page": 102,
+        "locator": "¶189 (pdf p102)",
+        "match": "The confrontation of the two positions generates a tension charged with energy and creates a living, third thing"
+      },
+      "familyIds": [
+        "coniunctio",
+        "divine-pair",
+        "yin-yang",
+        "tao",
+        "quaternity",
+        "cross"
+      ]
+    },
+    {
+      "id": "symbol-emergence",
+      "name": "Symbols: chaos first, then symmetry",
+      "render": "mandelbrot",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 115,
+        "locator": "p. 114",
+        "match": "Thus, symbols first generate chaos, then build symmetry."
+      },
+      "jung": {
+        "work": "cw05",
+        "page": 215,
+        "locator": "¶344 (pdf p215)",
+        "match": "The symbols act as transformers, their function being to convert libido from a “lower” into a “higher” form."
+      },
+      "familyIds": [
+        "prima-materia",
+        "vessel",
+        "coniunctio",
+        "lapis",
+        "serpent",
+        "fire"
+      ]
+    },
+    {
+      "id": "phase-transition",
+      "name": "Enantiodromia as phase transition",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 172,
+        "locator": "p. 171",
+        "match": "For order is never pure. Like the yin and the yang, it carries within it the potential to turn into its opposite. The same is true for chaos."
+      },
+      "jung": {
+        "work": "cw09i",
+        "page": 283,
+        "locator": "¶488 (pdf p283)",
+        "match": "shadow contains within it the seed of an enantiodromia, of a conversion into its opposite."
+      },
+      "familyIds": [
+        "yin-yang",
+        "tao",
+        "trickster-figure",
+        "mercurius",
+        "dragon",
+        "antichrist"
+      ]
+    },
+    {
+      "id": "homoclinic-point",
+      "name": "Homoclinic point",
+      "render": "julia",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 63,
+        "locator": "p. 62",
+        "match": "a homoclinic point, which designates not only where a dynamic becomes unstable, but where it becomes stable as well."
+      },
+      "jung": {
+        "work": "cw13",
+        "page": 277,
+        "locator": "¶294 (pdf p277)",
+        "match": "every psychic development, whether individual or collective, possesses an optimum which, when exceeded, produces an enantiodromia, that is, turns into its opposite."
+      },
+      "familyIds": [
+        "spiral",
+        "labyrinth",
+        "uroboros",
+        "yin-yang"
+      ]
+    },
+    {
+      "id": "self-organization",
+      "name": "Compensation as self-organization",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 94,
+        "locator": "p. 93",
+        "match": "Because the shadow compensates consciousness, whenever we think we know what the shadow is, its opposite automatically begins to emerge from the unconscious."
+      },
+      "jung": {
+        "work": "cw08",
+        "page": 91,
+        "locator": "pdf p91",
+        "match": "Since the psyche is a self-regulating system, just as the body is"
+      },
+      "familyIds": [
+        "dragon",
+        "nigredo",
+        "sol-niger",
+        "antichrist",
+        "desert",
+        "sulphur",
+        "persona"
+      ]
+    },
+    {
+      "id": "stuck-attractor",
+      "name": "A symptom as a stuck attractor",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 130,
+        "locator": "p. 129",
+        "match": "It simply repeats itself over and over."
+      },
+      "jung": {
+        "work": "cw06",
+        "page": 197,
+        "locator": "¶346 (pdf p197)",
+        "match": "A conscious capacity for one-sidedness is a sign of the highest culture, but involuntary one-sidedness, i.e., the inability to be anything but one-sided, is a sign of barbarism."
+      },
+      "familyIds": [
+        "mother-goddess",
+        "dual-mother",
+        "wolf",
+        "monster",
+        "dragon"
+      ]
+    },
+    {
+      "id": "chaotic-edge",
+      "name": "Health at the edge of chaos",
+      "render": "lorenz",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 14,
+        "locator": "p. 13",
+        "match": "chaos is not only unavoidable, but necessary."
+      },
+      "jung": {
+        "work": "cw08",
+        "page": 91,
+        "locator": "¶160 (pdf p91)",
+        "match": "begins to have an accelerating and intensifying effect on the conscious process"
+      },
+      "familyIds": [
+        "prima-materia",
+        "nigredo",
+        "night-sea-journey",
+        "nekyia"
+      ]
+    },
+    {
+      "id": "fractal-irreducibility",
+      "name": "Interpretation that never closes",
+      "render": "mandelbrot",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 107,
+        "locator": "p. 106",
+        "match": "In effect, the constructive approach is asymptotic: it approaches certainty, but never achieves it."
+      },
+      "jung": {
+        "work": "cw09i",
+        "page": 190,
+        "locator": "¶301 (pdf p190)",
+        "match": "a vessel which we can never empty, and never fill"
+      },
+      "familyIds": [
+        "vessel",
+        "god-image",
+        "anthropos",
+        "lapis",
+        "tree"
+      ]
+    },
+    {
+      "id": "mandala-attractor",
+      "name": "Mandala and fractal attractor",
+      "render": "mandelbrot",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 112,
+        "locator": "p. 111",
+        "match": "Could mandalas and fractal attractors be two versions of the same reality?"
+      },
+      "jung": {
+        "work": "cw08",
+        "page": 469,
+        "locator": "¶870 (pdf p469)",
+        "match": "These structures not only express order, they also create it."
+      },
+      "familyIds": [
+        "mandala",
+        "quaternity",
+        "circle",
+        "cross",
+        "lapis"
+      ]
+    },
+    {
+      "id": "relationship",
+      "name": "Relationship turns chaos orderly",
+      "render": "julia",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 156,
+        "locator": "p. 155",
+        "match": "Chaos becomes orderly when it finds its reflection."
+      },
+      "familyIds": [
+        "divine-pair",
+        "anima-figure",
+        "soul-image",
+        "maiden",
+        "coniunctio"
+      ]
+    },
+    {
+      "id": "manifold",
+      "name": "The symbol as a manifold",
+      "render": "julia",
+      "quote": {
+        "work": "van-eenwyk",
+        "page": 70,
+        "locator": "p. 69",
+        "match": "We go from stability to instability and hopefully—back again."
+      },
+      "jung": {
+        "work": "cw08",
+        "page": 57,
+        "locator": "¶88 (pdf p57)",
+        "match": "The psychological mechanism that transforms energy is the symbol."
+      },
+      "familyIds": [
+        "sun",
+        "serpent",
+        "fire",
+        "tree",
+        "water"
+      ]
+    }
+  ]
 }

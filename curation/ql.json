@@ -55,6 +55,12 @@
       { "work": "cw09ii", "quote": "psychically relative space-time continuum that is characteristic" }
     ],
     "quaternio": { "intro": { "work": "cw08", "para": 963, "quote": "We finally agreed on the following quaternio:" }, "terms": ["Indestructible Energy", "Space-Time Continuum", "Constant Connection through Effect (Causality)", "Inconstant Connection through Contingence, Equivalence, or \"Meaning\" (Synchronicity)"] },
-    "vaneenwyk": "John Van Eenwyk names the same split as synchronic and diachronic dynamics; the vault maps it (chaos-dynamics). His book is not in the corpus, so it is not quoted here: the dynamical lens draws it."
+    "vaneenwyk": {
+      "line": "John Van Eenwyk reads the same split as two kinds of dynamics: what every psyche does, and what one life does with it through time.",
+      "quotes": [
+        { "work": "van-eenwyk", "quote": "Jung developed the idea that the diachronic dynamics of development unfold from the synchronic dynamics." },
+        { "work": "van-eenwyk", "quote": "Then, the relatively automatic processes of synchronic dynamics can generate diachronic dynamics, which are the developmental processes of the individual." }
+      ]
+    }
   }
 }

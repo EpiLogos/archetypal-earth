@@ -23,7 +23,7 @@ export function workTitles(root) {
 /**
  * Place each quotation; push failures to `errors`, disagreements with the vault note's ¶ to `warnings`. Where the
  * corpus marker and the note disagree the locator is the pdf page alone, so no ¶ is ever printed that the corpus
- * does not support.
+ * contradicts; where the scan merely lost the marker, the note's ¶ stands (locate()).
  */
 export function citeQuotes(load, titles, quotes, where, errors, warnings) {
   const out = [];
@@ -32,9 +32,10 @@ export function citeQuotes(load, titles, quotes, where, errors, warnings) {
     if (r.error) { errors.push(`${where}: ${r.error}`); continue; }
     let locator = r.locator;
     if (r.warning) { warnings.push(`${where}: ${r.warning}`); locator = `pdf p${r.page}`; }
-    // the corpus's printed-page labels are not trusted for display (some are paragraph numbers the scan misread as
-    // folios): the pdf page is the locator, and the passage sheet shows the page itself
-    out.push({ text: q.quote, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator }, ...(q.voice ? { voice: q.voice } : {}) });
+    if (r.note) warnings.push(`${where}: ${r.note}`);
+    if (r.scan) warnings.push(`${where}: ${q.work} pdf p${r.page}: placed through scan damage (the printed words; the scan joins or misreads letters)`);
+    // the printed page is shown only where the scan's label agrees with its neighbours (trustedPrint)
+    out.push({ text: q.quote, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}) });
   }
   return out;
 }

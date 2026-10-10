@@ -11,6 +11,8 @@
 // never as a source: spans come from the corpus files alone.
 import fs from 'node:fs';
 import path from 'node:path';
+import { trustedPrint } from './cite.mjs';
+import { externalMarkdown } from './external.mjs';
 
 const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>]+))?\s*-->\s*$/;
 const PARA_RE = /\*\*¶(\d+)\*\*/g;
@@ -111,7 +113,7 @@ export function checkAgainstSpine(built, spineLines, log) {
 }
 
 /** Build every volume and write public/data/corpus/. Returns the summary for stats. */
-export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], log = () => {} }) {
+export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], externals = {}, log = () => {} }) {
   const srcDir = path.join(vault, 'corpus');
   if (!fs.existsSync(srcDir)) throw new Error(`no corpus at ${srcDir}`);
   const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.md')).sort();
@@ -119,10 +121,22 @@ export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = []
   fs.mkdirSync(outDir, { recursive: true });
   const works = [];
   const built = new Map();
-  for (const f of files) {
-    const work = f.replace(/\.md$/, '');
-    const raw = fs.readFileSync(path.join(srcDir, f), 'utf8');
+  // the corpus volumes, then the works the vault keeps outside corpus/ (external.mjs), read in the same shape
+  const sources = [
+    ...files.map((f) => ({ work: f.replace(/\.md$/, ''), read: () => fs.readFileSync(path.join(srcDir, f), 'utf8') })),
+    ...Object.entries(externals).filter(([w]) => !files.includes(`${w}.md`)).map(([work, x]) => ({ work, read: () => externalMarkdown(vault, work, x.title) })),
+  ];
+  for (const { work, read } of sources) {
+    const raw = read();
+    if (raw === null) { log(`corpus ${work}: no pages in the vault (skipped)`); continue; }
     const parsed = parseCorpusMarkdown(work, raw);
+    // a printed page is kept only where the scan's label agrees with its neighbours (cite.mjs trustedPrint)
+    const probe = { pages: parsed.pages.map((pg) => ({ page: pg.p, print: pg.print ?? null })) };
+    parsed.pages = parsed.pages.map((pg, i) => {
+      const keep = trustedPrint(probe, i);
+      const { print, ...rest } = pg;
+      return keep ? { ...rest, print: keep } : rest;
+    });
     const doc = {
       work,
       title: titles[work] || parsed.title || work,

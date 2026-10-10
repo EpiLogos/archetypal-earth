@@ -1,3 +1,4 @@
+import type { BirthPrefill } from '../state/router';
 // The lens contract (docs/MODES-RFC.md §2): a lens is a plugin the shell lists and loads on first use.
 // The four reading lenses over the globe (Field, Theory, Aion, Red Book) are driven by the controller's state;
 // the panel lenses (Theory's text, Astrology and the practice tools) mount into the shell's panel.
@@ -48,6 +49,8 @@ export interface LensContext {
   openOccurrence(occId: string): void;
   /** the visitor's own chart changed (saved, edited, deleted): the sky re-reads the standing natal chart */
   refreshNatal(): void;
+  /** a birth an old link carried, handed over once and kept nowhere (the Astrology form fills from it) */
+  takeBirthPrefill(): BirthPrefill | null;
   /** the route this lens stands at changed from inside it (no reload): keeps the hash and Back in step */
   setPath(path: string[], opts?: { replace?: boolean }): void;
 }

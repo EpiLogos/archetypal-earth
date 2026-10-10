@@ -2,6 +2,7 @@
 // Red Book, built to the same pattern: show(state) / hide() / update(dt), a root section, a reveal card.
 // The globe is not touched here: the engine is exposed read-only, and the controller owns every globe effect
 // (the chronology is offered by chronology() for it to light).
+import { entered } from '../lenses/ui';
 import { averagePalettes, rgbToHex } from '../data/palette';
 import { subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
@@ -230,7 +231,7 @@ export class DynamicsView {
     const cited = c.work && this.passages?.known(c.work)
       ? el('button', { type: 'button', class: 'link-quiet', text: label, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(c.work!, c.locator) })
       : label;
-    return el('blockquote', { class: 'dp-def dy-quote' }, [el('p', { text: q.text }), el('footer', {}, [cited, ' ', voice ? vMark() : jMark()])]);
+    return el('blockquote', { class: 'dp-def dy-quote' }, [el('p', { text: entered(q.text) }), el('footer', {}, [cited, ' ', voice ? vMark() : jMark()])]);
   }
 
   private step(delta: number) {

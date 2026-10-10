@@ -8,6 +8,7 @@ import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { subjectName, type Subject } from '../data/model';
 import { astrologyAt } from '../state/store';
+import type { BirthPrefill } from '../state/router';
 import type { LensContext, LensInstance } from '../shell/lens';
 import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData, type ChartBody } from '../astro/natal';
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
@@ -38,6 +39,8 @@ export function mount(ctx: LensContext): LensInstance {
   let data: AstrologyData | null = null;
   let failed = false;
   let editing = false;
+  // a birth an old link carried: fills the form until the chart is cast, then is gone (never stored from here)
+  let prefill = ctx.takeBirthPrefill();
   const charts = new Map<string, { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }>();
 
   const refreshCharts = () => {
@@ -94,7 +97,7 @@ export function mount(ctx: LensContext): LensInstance {
     const mine = charts.get(YOU);
     const chartCard = (c: { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }, mineToo: boolean) => el('section', { class: 'as-card' }, [
       el('h3', { class: 'as-card-h', text: c.rec.label }),
-      el('p', { class: 'as-card-p', text: `${c.rec.birth.date}${c.rec.birth.time ? `, ${c.rec.birth.time}` : ''} · ${c.rec.birth.place || formatCoordinates(c.rec.birth.lat, c.rec.birth.lon)}` }),
+      el('p', { class: 'as-card-p', text: `${c.rec.birth.date}${c.rec.birth.time ? `, ${c.rec.birth.time}${c.rec.clock ? ` ${c.rec.clock}` : ''}` : ''} · ${c.rec.birth.place || formatCoordinates(c.rec.birth.lat, c.rec.birth.lon)}` }),
       el('p', { class: 'as-pillars', text: `Sun ${placeIn(c.chart, 'sun')} · Moon ${placeIn(c.chart, 'moon')}${c.chart.timeKnown ? ` · Rising ${c.chart.angles.ascendant.sign} ${fmtDeg(c.chart.angles.ascendant.degree)}` : ''}` }),
       el('div', { class: 'lp-row' }, [
         el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.navigate(astrologyAt([c.rec.id])) }, [icon('astrology', 15), el('span', { text: c.rec.id === YOU ? 'Walk your sky' : `Walk ${c.rec.label}’s sky` })]),
@@ -105,9 +108,11 @@ export function mount(ctx: LensContext): LensInstance {
       privacyLine('Your birth data and your chart are kept only in this browser’s storage, and you can delete them below.'),
       el('p', { class: 'th-line', text: 'Enter a birthday and you get a walk through that sky, planet by planet, with what Jung and Kathleen Burt wrote about each planet and sign. Jung’s own chart is here as the first one, so you can read yours beside his.' }),
       quoteBlock(data.frame[0], ctx.passages),
-      mine && !editing ? chartCard(mine, true) : form(mine?.rec),
+      prefill ? el('p', { class: 'lp-note', text: 'Filled in from the link you opened. Nothing is kept until you cast the chart.' }) : null,
+      mine && !editing && !prefill ? chartCard(mine, true) : form(prefill ? undefined : mine?.rec, prefill),
       jung ? chartCard(jung, false) : null,
       jung ? el('p', { class: 'lp-note', text: jung.rec.line ?? '' }) : null,
+      jung?.rec.timeSource ? el('p', { class: 'lp-note', text: `The time is from ${jung.rec.timeSource}` }) : null,
       jung ? quoteBlock(data.people.find((p) => p.id === 'jung')!.quote, ctx.passages, { compact: true }) : null,
       el('hr', { class: 'lp-divider' }),
       el('h3', { class: 'as-h3', text: 'Where every chart meets the field' }),
@@ -128,16 +133,16 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   // ── the birth form ─────────────────────────────────────────────────────
-  const form = (existing?: ChartRecord): HTMLElement => {
+  const form = (existing?: ChartRecord, pre?: BirthPrefill | null): HTMLElement => {
     const b = existing?.birth;
     const name = el('input', { type: 'text', value: existing?.label && existing.label !== 'You' ? existing.label : '', placeholder: 'You', autocomplete: 'off', maxlength: 40 });
-    const date = el('input', { type: 'date', value: b?.date ?? '', min: '1600-01-01', max: '2400-12-31', required: true });
-    const time = el('input', { type: 'time', value: b?.time ?? '', step: 60 });
+    const date = el('input', { type: 'date', value: b?.date ?? pre?.date ?? '', min: '1600-01-01', max: '2400-12-31', required: true });
+    const time = el('input', { type: 'time', value: b?.time ?? pre?.time ?? '', step: 60 });
     const noTime = el('input', { type: 'checkbox', checked: !!b && !b.time });
     const place = el('input', { type: 'text', value: b?.place ?? '', placeholder: 'Start typing a city', autocomplete: 'off', list: 'as-places' });
     const datalist = el('datalist', { id: 'as-places' });
-    const lat = el('input', { type: 'number', step: '0.01', min: -89.9, max: 89.9, value: b ? String(b.lat) : '', placeholder: 'Latitude, e.g. 47.37' });
-    const lon = el('input', { type: 'number', step: '0.01', min: -180, max: 180, value: b ? String(b.lon) : '', placeholder: 'Longitude, e.g. 8.54' });
+    const lat = el('input', { type: 'number', step: '0.01', min: -89.9, max: 89.9, value: b ? String(b.lat) : pre ? String(pre.lat) : '', placeholder: 'Latitude, e.g. 47.37' });
+    const lon = el('input', { type: 'number', step: '0.01', min: -180, max: 180, value: b ? String(b.lon) : pre ? String(pre.lon) : '', placeholder: 'Longitude, e.g. 8.54' });
     const offset = el('input', { type: 'number', step: '0.25', min: -14, max: 14, value: b ? String(b.offsetMinutes / 60) : '' });
     const offsetWhy = el('p', { class: 'lp-note' });
     const errors = el('div', { class: 'as-errors', role: 'alert' });
@@ -178,6 +183,7 @@ export function mount(ctx: LensContext): LensInstance {
       if (offset.value === '') problems.push('Give the clock’s offset from UTC.');
       errors.replaceChildren(...problems.map((p) => el('p', { text: p })));
       if (problems.length) return;
+      prefill = null;
       saveLocalChart(name.value.trim() || 'You', birth);
       editing = false;
       refreshCharts();
@@ -191,7 +197,7 @@ export function mount(ctx: LensContext): LensInstance {
       field('Date of birth', date),
       el('div', { class: 'as-two' }, [field('Time', time), el('label', { class: 'as-check' }, [noTime, el('span', { text: 'I don’t know the time' })])]),
       field('Place', place, datalist),
-      el('details', { class: 'as-more', open: !!b && !places.some((p) => `${p.name}, ${p.country}` === b.place) }, [
+      el('details', { class: 'as-more', open: !!pre || (!!b && !places.some((p) => `${p.name}, ${p.country}` === b.place)) }, [
         el('summary', { text: 'Not in the list? Enter coordinates' }),
         el('div', { class: 'as-two' }, [field('Latitude', lat), field('Longitude', lon)]),
       ]),
@@ -269,6 +275,7 @@ export function mount(ctx: LensContext): LensInstance {
       el('h3', { class: 'as-h3', text: `${r.name} in ${pos.sign}, as Kathleen Burt reads it` }),
       signQuote ? quoteBlock(signQuote, ctx.passages, { compact: true }) : null,
       ...r.burt.slice(0, 2).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
+      r.burt.length > 2 ? el('details', { class: 'as-more' }, [el('summary', { text: `More from Burt on ${r.name} (${r.burt.length - 2})` }), ...r.burt.slice(2).map((q) => quoteBlock(q, ctx.passages, { compact: true }))]) : null,
       aspects.length ? el('div', { class: 'as-aspects' }, [el('h3', { class: 'as-h3', text: 'How it stands to the others' }), el('ul', {}, aspects.map((a) => el('li', { text: a })))]) : null,
       i === 0 ? quoteBlock(data.pillars, ctx.passages, { compact: true }) : null,
       last ? el('hr', { class: 'lp-divider' }) : null,

@@ -54,9 +54,11 @@ describe('the lens data: provenance lives in the quotes', () => {
     expect([...DEEP_FIELDS].sort()).toEqual(Object.keys(read('depth.json').archetypes).sort());
   });
 
-  it('Jung, the first chart, carries no birth time the corpus does not give', () => {
+  it('Jung, the first chart: the corpus gives the year and region; the time from the record names who gave it', () => {
     const jung = read('astrology.json').people.find((p: { id: string }) => p.id === 'jung');
-    expect(jung.birth.time).toBeNull();
     expect(jung.quote.cite.work).toBe('cw01');
+    expect(jung.birth.time).toBe('19:32');
+    expect(jung.birth.timeSource).toMatch(/Gret Baumann-Jung/);
+    expect(jung.birth.timeSource).toMatch(/19:20 to 19:41/);
   });
 });

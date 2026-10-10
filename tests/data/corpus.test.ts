@@ -1,5 +1,6 @@
 // @ts-expect-error Plain ESM shared with the CLI.
 import { DEFAULT_VAULT } from '../../scripts/lib/vault.mjs';
+import { externalRegister } from '../../scripts/lib/external.mjs';
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,9 +22,10 @@ const semVisions = loadWork('sem-visions');
 
 describe('corpus index (citation deep links)', () => {
   it('holds every vault volume with its pages and ¶ anchors', () => {
+    // every corpus volume, then each external work the site registers whose pages the vault holds (_raw-ext)
     const files = fs.readdirSync(path.join(vault, 'corpus')).filter((f) => f.endsWith('.md')).sort();
-    expect(index.works.length).toBe(files.length);
-    expect(index.works.map((w) => w.work)).toEqual(files.map((f) => f.replace(/\.md$/, '')));
+    const externals = Object.keys(externalRegister(path.resolve(__dirname, '../..'))).filter((w) => fs.existsSync(path.join(vault, '_raw-ext', w, 'pages')));
+    expect(index.works.map((w) => w.work)).toEqual([...files.map((f) => f.replace(/\.md$/, '')), ...externals]);
     for (const entry of index.works) {
       const doc = loadWork(entry.work);
       expect(doc.pages.length).toBe(entry.pages);

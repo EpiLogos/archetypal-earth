@@ -12,6 +12,10 @@ export interface ChartRecord {
   source: 'curated' | 'local';
   /** a curated chart's own words on where its data comes from */
   line?: string;
+  /** who gave a curated chart's birth time, and how far the records agree */
+  timeSource?: string;
+  /** the clock the time is read on, when it is not the visitor's own */
+  clock?: string;
 }
 
 /** The visitor's chart as stored (practice store, collection 'charts'). One chart, id 'you'. */
@@ -25,14 +29,15 @@ export const YOU = 'you';
 export interface CuratedPerson {
   id: string;
   label: string;
-  birth: { date: string; time: string | null; place: string; lat: number; lon: number; offset: 'mean-time' | number };
+  birth: { date: string; time: string | null; timeSource?: string; place: string; lat: number; lon: number; offset: 'mean-time' | number };
   line: string;
 }
 
 export function curatedChart(p: CuratedPerson): ChartRecord {
   const offsetMinutes = p.birth.offset === 'mean-time' ? meanTimeOffset(p.birth.lon) : p.birth.offset;
   return {
-    id: p.id, label: p.label, source: 'curated', line: p.line,
+    id: p.id, label: p.label, source: 'curated', line: p.line, timeSource: p.birth.timeSource,
+    clock: p.birth.offset === 'mean-time' ? 'local mean time' : undefined,
     birth: { date: p.birth.date, time: p.birth.time, offsetMinutes, lat: p.birth.lat, lon: p.birth.lon, place: p.birth.place },
   };
 }
