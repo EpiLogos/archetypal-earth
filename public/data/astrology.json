@@ -2242,6 +2242,16 @@
      "workTitle": "Psychiatric Studies",
      "locator": "pdf p5"
     }
+   },
+   "portrait": {
+    "src": "/img/jung-portrait.jpg",
+    "title": "Carl Gustav Jung",
+    "credit": "Unknown author",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+    "_file": "File:Carl Gustav Jung portrait.jpg",
+    "width": 366,
+    "height": 567
    }
   }
  ]

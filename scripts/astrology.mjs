@@ -53,7 +53,7 @@ export function buildAstrology({ vault = DEFAULT_VAULT } = {}) {
   const signs = {};
   for (const [sign, q] of Object.entries(cur.signs)) signs[sign] = { ...one(q, `sign ${sign}`), voice: 'burt' };
 
-  const people = cur.people.map((p) => ({ id: p.id, label: p.label, birth: p.birth, line: p.line, quote: one(p.quote, `person ${p.id}`) }));
+  const people = cur.people.map((p) => ({ id: p.id, label: p.label, birth: p.birth, line: p.line, quote: one(p.quote, `person ${p.id}`), portrait: p.portrait ?? null }));
 
   // the place list for the form: the sky's own sourced gazetteer, so a birth place is chosen here, never looked up online
   const sky = read('public', 'data', 'sky.json');

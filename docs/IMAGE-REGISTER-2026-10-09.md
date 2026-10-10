@@ -19,7 +19,13 @@ fetched, nothing was invented**. Everything below is measured from `public/data/
 
 No dead references: all 442 shipped files exist. `ImageRef.width/height` record the Commons *source* size, not
 the shipped file (416/442 differ; aspect ratios match). Shipped long edge ≈ 800 px — soft on large screens.
-`public/img/jung-portrait.jpg` (landing) has no recorded provenance in `images.json`. *(Resolved 2026-10-10: the landing no longer uses an image and the file is removed.)*
+`public/img/jung-portrait.jpg` (landing) has no recorded provenance in `images.json`. *(Resolved 2026-10-10: the
+landing no longer uses an image and the file is removed. Resolved again the same day: the drawing was found on
+Commons — `File:Carl Gustav Jung portrait.jpg`, licence "Public domain" (`PD-self` by the 2006 el.wikipedia
+uploader; author unknown; source: a sonoma.edu psychology-art page) — and the Commons original now ships at the
+same path, provenance recorded in `curation/astrology.json` and shown, credited, on Jung's chart card. The landing's
+old caption called it a "photograph"; it is a pencil drawing. The PD claim is the uploader's own and unverifiable in
+authorship, so it ships with the claim recorded — the register's "checks owed" spirit.)*
 
 ## Reader-visible credit defects (display-fix shipped; data-fix pending)
 The plate's credit overlay prints `credit · licence`. Found: Met Museum donor boilerplate (8), doubled

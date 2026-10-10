@@ -243,9 +243,12 @@ body.landing-on .time { opacity: 0.35; }
 @media (prefers-reduced-motion: reduce) { .landing { transition: opacity 0.3s; } }
 
 /* ── Astrology ─────────────────────────────────────────────────────── */
-.as-card { margin: 16px 0; padding: 14px 16px; border: 1px solid var(--hair); border-radius: 12px; background: rgb(var(--core-rgb) / 0.03); }
+.as-card { display: flow-root; margin: 16px 0; padding: 14px 16px; border: 1px solid var(--hair); border-radius: 12px; background: rgb(var(--core-rgb) / 0.03); }
 .as-card-h { margin: 0 0 4px; font: 600 1.08rem var(--serif); color: var(--ink); }
 .as-card-p { margin: 0 0 6px; font: 12px var(--sans); color: var(--ink-3); }
+.as-portrait { float: left; margin: 2px 14px 6px 0; }
+.as-portrait img { display: block; width: 96px; height: auto; border: 1px solid var(--hair); border-radius: 8px; filter: grayscale(35%) contrast(1.05); }
+.as-portrait-credit { max-width: 96px; margin-top: 4px; font: 400 9px/1.35 var(--sans); color: var(--ink-3); }
 .as-pillars { margin: 0; font: 13px/1.5 var(--sans); color: var(--ink-2); }
 .as-h3 { margin: 20px 0 8px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 .as-form { margin: 16px 0; padding: 14px 16px 6px; border: 1px solid rgb(var(--core-rgb) / 0.3); border-radius: 12px; }

@@ -205,6 +205,16 @@
       "quote": {
         "work": "cw01",
         "quote": "Jung was born in northeastern Switzerland in 1875, a Protestant clergyman’s son."
+      },
+      "portrait": {
+        "src": "/img/jung-portrait.jpg",
+        "title": "Carl Gustav Jung",
+        "credit": "Unknown author",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+        "_file": "File:Carl Gustav Jung portrait.jpg",
+        "width": 366,
+        "height": 567
       }
     }
   ]
