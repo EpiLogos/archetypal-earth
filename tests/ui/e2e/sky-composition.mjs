@@ -2,8 +2,8 @@
 //   npx vite --port 5183 --strictPort &
 //   EARTH_HEADLESS=1 node tests/ui/e2e/sky-composition.mjs [chromium|webkit]
 //
-//   (a) the Earth and the Sun inside the frame through the handoff's second half (canonical pose), on dates across the year:
-//       the central 70% outside the December–April swing, and within |NDC| 0.92 inside it (the sky's moment is set per date)
+//   (a) the Earth and the Sun inside the central 70% through the handoff's second half (canonical pose), on dates across the year
+//       (the sky's moment is set per date), on a desktop viewport and on a phone viewport
 //   (b) a wheel that rests in the system settles the orientation to the canonical pose (capped speed, eased); a drag or a key cancels
 //   (c) the pull-back's limit is 1.35× the system's home, not 2.2×
 //   (d) a pull-back before the sky has loaded resists, never stalls, and is monotone (sky.json held back by the route)
@@ -87,25 +87,22 @@ const wheelUntil = async (page, pred, dy, maxSteps = 400, gap = 16) => {
 
 const browser = await launch(kind, { headed: false });
 try {
-  // ── (a) the composition, the canonical pose, desktop, across the year ────────
-  {
-    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: '#/sky' });
+  // ── (a) the composition, the canonical pose, across the year, desktop and phone ──
+  for (const vp of [{ name: 'desktop 1280×800', width: 1280, height: 800, mobile: false }, { name: 'phone 390×844', width: 390, height: 844, mobile: true }]) {
+    const { ctx, page } = await open(browser, { width: vp.width, height: vp.height, hash: '#/sky', mobile: vp.mobile });
     await page.waitForFunction(() => window.__earth.engine.sky && document.body.classList.contains('sky-ready'), null, { timeout: 60000 });
     await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); window.__earth.engine.rig.autoRotate = false; });
     await settled(page);
-    // the reference date first (the sandbox's), then the year: the azimuth follows the Sun, so the pair holds the frame on every date.
-    // The central 70% holds outside the December–April swing (the Sun at ecliptic longitude ~250°–50°); inside it the pair stays within 0.92.
+    // the reference date first (the sandbox's), then the year: the camera sits over the Sun's longitude, so the pair holds the central 70%
+    // on every date. The sandbox has no sidecar, so the sky is a snapshot and holds the moment it is given.
     const DATES = ['2026-10-09', '2026-12-21', '2027-02-05', '2027-03-20', '2027-04-25', '2027-06-21', '2027-08-15'];
     let worstOverall = 0;
     for (const iso of DATES) {
-      // the sandbox has no sidecar, so the sky is a snapshot and holds the moment it is given
       await page.evaluate((t) => window.__earth.engine.sky.setMoment(t), Date.parse(`${iso}T12:00:00Z`));
       await page.waitForTimeout(900);
       const canon = await page.evaluate(`${CANON}`);
-      const swing = canon.sunLon >= 250 || canon.sunLon <= 50;
-      const bound = swing ? 0.92 : 0.7;
       const rows = [];
-      for (const d of [900, 1200, 1500, 2200, 3000]) {
+      for (const d of [1100, 1200, 1500, 2200, 3000]) {
         await page.evaluate(([c, dd]) => { const { engine } = window.__earth; engine.rig.flyTo(c.lat, c.lon, dd, { instant: true }); }, [canon, d]);
         await page.waitForTimeout(iso === DATES[0] ? 1800 : 1400);
         rows.push(await page.evaluate(() => {
@@ -116,16 +113,16 @@ try {
       }
       const at = (d) => rows.find((r) => r.dist > d - 1 && r.dist < d + 1);
       const ext = (p) => (p ? Math.max(Math.abs(p.x), Math.abs(p.y)) : Infinity);
-      for (const d of [1200, 1500, 2200, 3000]) {
+      for (const d of [1100, 1200, 1500, 2200, 3000]) {
         const r = at(d);
         const e = r ? Math.max(ext(r.earth), ext(r.sun)) : Infinity;
         if (r) worstOverall = Math.max(worstOverall, e);
-        check(!!r && r.known && e <= bound, `${iso} (Sun ${canon.sunLon.toFixed(0)}°): the Earth and the Sun inside ${swing ? '|NDC| 0.92' : 'the central 70%'} at ${d} R⊕`,
+        check(!!r && r.known && e <= 0.7, `${vp.name} ${iso} (Sun ${canon.sunLon.toFixed(0)}°): the Earth and the Sun inside the central 70% at ${d} R⊕`,
           r ? `Earth (${r.earth.x.toFixed(2)}, ${r.earth.y.toFixed(2)}), Sun (${r.sun.x.toFixed(2)}, ${r.sun.y.toFixed(2)}), extent ${e.toFixed(2)}` : 'no sample');
       }
-      if (iso === DATES[0]) writeFileSync(`${SHOTS}after-e2e-1500.png`, await page.locator('canvas.globe-canvas').screenshot());
+      if (iso === DATES[0]) writeFileSync(`${SHOTS}after-e2e-${vp.mobile ? 'phone' : 'desktop'}-1500.png`, await page.locator('canvas.globe-canvas').screenshot());
     }
-    check(worstOverall < 1, 'on every sampled date the pair stays inside the frame through the handoff', `worst extent ${worstOverall.toFixed(2)}`);
+    check(worstOverall <= 0.7, `${vp.name}: on every sampled date the pair stays inside the central 70% through the handoff`, `worst extent ${worstOverall.toFixed(2)}`);
     await ctx.close();
   }
 
