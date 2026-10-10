@@ -1,5 +1,6 @@
 // @ts-expect-error Plain ESM shared with the CLI.
 import { DEFAULT_VAULT } from '../../scripts/lib/vault.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
 import { externalRegister } from '../../scripts/lib/external.mjs';
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
