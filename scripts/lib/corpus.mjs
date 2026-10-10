@@ -20,6 +20,22 @@ const slug = (s) => s
   .replace(/^-+|-+$/g, '')
   .slice(0, 48) || 'chapter';
 
+/** Work key → the title in each corpus file's own front matter (the manifest does not list every work). */
+export function corpusTitles(vault) {
+  const dir = path.join(vault, 'corpus');
+  const out = {};
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.md'))) {
+    const fd = fs.openSync(path.join(dir, f), 'r');
+    const buf = Buffer.alloc(4096);
+    const head = buf.subarray(0, fs.readSync(fd, buf, 0, 4096, 0)).toString('utf8');
+    fs.closeSync(fd);
+    const t = /^\s*"title"\s*:\s*"((?:[^"\\]|\\.)+)"/m.exec(head);
+    if (t) out[f.replace(/\.md$/, '')] = JSON.parse(`"${t[1]}"`);
+  }
+  return out;
+}
+
 /** Parse one volume's markdown into { title, chapters, pages, paras }. */
 export function parseCorpusMarkdown(work, raw) {
   const lines = raw.split('\n');
@@ -40,7 +56,11 @@ export function parseCorpusMarkdown(work, raw) {
       cur = { p: Number(m[2]), print: m[3] || null, ch: chapters.length ? chapters[chapters.length - 1].id : null, lines: [] };
       continue;
     }
-    if (!cur) continue; // anything before the first page marker (front matter of the file)
+    if (!cur) { // anything before the first page marker: the file's front matter, whose title is the work's own
+      const t = !title && /^\s*"title"\s*:\s*"((?:[^"\\]|\\.)+)"/.exec(line);
+      if (t) title = JSON.parse(`"${t[1]}"`);
+      continue;
+    }
     const heading = /^(#{1,3})\s+(.+?)\s*$/.exec(line);
     if (heading) {
       const dup = chapters.filter((c) => c.id === slug(heading[2])).length;

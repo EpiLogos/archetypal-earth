@@ -3,11 +3,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { locate } from './cite.mjs';
 
+/**
+ * A cite line names the book, not its catalogue entry: a title carrying "(Author, year)" is a secondary work whose
+ * author the voice chip already shows, so the parenthesis and the subtitle are dropped there. Jung's titles stay whole.
+ */
+const citeTitle = (t) => {
+  const m = /^(.*?)\s*\([^()]+,\s*\d{4}\)$/.exec(t);
+  return m ? m[1].split(':')[0].trim() : t;
+};
+
 /** Work keys → display titles, from the corpus index the ingest already built (falls back to the key). */
 export function workTitles(root) {
   const file = path.join(root, 'public', 'data', 'corpus', 'index.json');
   const map = new Map();
-  if (fs.existsSync(file)) for (const w of JSON.parse(fs.readFileSync(file, 'utf8')).works) map.set(w.work, w.title);
+  if (fs.existsSync(file)) for (const w of JSON.parse(fs.readFileSync(file, 'utf8')).works) map.set(w.work, citeTitle(w.title));
   return map;
 }
 
