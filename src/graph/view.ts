@@ -4,7 +4,8 @@
 // It renders only when something changes (a settling simulation, a tween, the pointer, the time window) and
 // goes fully idle otherwise. Nothing here knows about the controller: it is told what to show (setTarget)
 // and reports what the person chose (GraphHandlers).
-import '../style/graph.css';
+// graph.css is loaded by main.ts: the Earth ⇄ Graph pill it styles stands before the graph is ever opened
+
 import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type ForceLink, type ForceManyBody, type ForceX, type ForceY, type Simulation, type SimulationLinkDatum } from 'd3-force';
 import { quadtree, type Quadtree } from 'd3-quadtree';
 import { select } from 'd3-selection';

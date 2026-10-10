@@ -37,11 +37,8 @@ export interface DynamicsState {
 
 const keyOf = (s: Subject) => `${s.type}:${s.id}`;
 
-/** The prime archetype (the Self), the landing subject when none is given. */
-export function selfSubject(m: Model): Subject {
-  const prime = m.field.archetypes.find((a) => a.prime);
-  return { type: 'archetype', id: prime?.id ?? 'self' };
-}
+export { selfSubject } from '../data/model';
+import { selfSubject } from '../data/model';
 
 function paletteOf(m: Model, s: Subject): Palette {
   const own = s.type === 'archetype' ? m.archById.get(s.id)?.palette : s.type === 'family' ? m.famById.get(s.id)?.palette : undefined;

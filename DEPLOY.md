@@ -15,6 +15,5 @@
 6. Downloads: `./scripts/package-downloads.sh`, then `gh release create field-v1 dist-downloads/* --title "The field, v1" --notes "..."`.
 
 ## Notes
-- `public/img/jung-portrait.jpg` is public domain (Wikimedia Commons) — safe to ship.
 - `public/img/` archetype/family/occurrence images follow the repo's Commons-only law via `npm run images`.
-- The intro landing shows once per browser (localStorage `aae-intro-dismissed`); re-show by clearing that key.
+- The landing (one line and "Start at the Self") shows once per browser (localStorage `aae.landing.seen`); clear that key to see it again.

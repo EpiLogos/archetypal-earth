@@ -7,7 +7,7 @@ const browser = await chromium.launch({ headless: true, executablePath: process.
 for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {
   const ctx = await browser.newContext({ viewport: { width: s.width, height: s.height }, hasTouch: s.mobile, isMobile: s.mobile });
   const page = await ctx.newPage();
-  await page.addInitScript(() => { try { localStorage.setItem('aae-intro-dismissed', '1'); } catch {} });
+  await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   await page.goto(URL + '#/', { waitUntil: 'load' });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 45000 });
   await page.click('.sh-lens');

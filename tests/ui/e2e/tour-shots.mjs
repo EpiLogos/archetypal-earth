@@ -18,13 +18,13 @@ for (const s of sizes) {
   for (const h of hashes) {
     const ctx = await browser.newContext({ viewport: { width: s.width, height: s.height }, deviceScaleFactor: 1, hasTouch: s.mobile, isMobile: s.mobile });
     const page = await ctx.newPage();
-    if (h !== '') await page.addInitScript(() => { try { localStorage.setItem('aae-intro-dismissed', '1'); } catch {} });
+    if (h !== '') await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
     const logs = [];
     page.on('console', (m) => { if (m.type() === 'error' && !/ERR_CONNECTION_REFUSED/.test(m.text())) logs.push(m.text()); });
     page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
     await page.goto(URL + h, { waitUntil: 'load' });
     try { await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 45000 }); } catch { logs.push('loading never finished'); }
-    await page.waitForTimeout(h === '' ? 1500 : 4500);
+    await page.waitForTimeout(h === '' ? 6000 : 4500);
     const name = `${s.name}-${(h || 'landing').replace(/[#/]+/g, '_').replace(/^_|_$/g, '') || 'world'}.png`;
     await page.screenshot({ path: path.join(out, name) });
     console.log(name, logs.length ? `ERR ${logs.slice(0, 3).join(' | ')}` : 'ok');

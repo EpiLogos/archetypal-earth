@@ -20,51 +20,10 @@
     <div id="app"></div>
     <button id="search-btn" class="search-glyph" type="button" aria-label="Search (press slash or Command K)">
       <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      <span class="sg-key">⌘K</span>
+      <span class="sg-key" aria-hidden="true">⌘K</span>
     </button>
-    <div class="credit">
-      <span class="credit-i" tabindex="0" role="img" aria-label="Imagery credits">i</span>
-      <span class="credit-t">Imagery: <a href="https://visibleearth.nasa.gov/images/73751" target="_blank" rel="noopener">NASA Blue Marble</a> · <a href="https://earthdata.nasa.gov/gibs" target="_blank" rel="noopener">NASA GIBS</a></span>
-      <span class="credit-sep">·</span>
-      <a href="https://github.com/EpiLogos/archetypal-earth/issues" target="_blank" rel="noopener" class="credit-link">Found an inconsistency? Open an issue</a>
-    </div>
     <div id="loading" aria-hidden="true"><span class="ld-dot"></span></div>
 
-    <div id="intro" role="dialog" aria-label="An Archetypal Earth">
-      <div class="intro-inner">
-        <img class="intro-portrait" src="/img/jung-portrait.jpg" alt="Carl Gustav Jung" />
-        <h1>An Archetypal Earth</h1>
-        <p class="intro-lede">I built this because nobody can hold Jung's whole field in their head — the Collected Works scatter it across thirty volumes and forty years of revision. This site reassembles it. Pick a symbol — the serpent, the mandala, the philosopher's stone — and read its path through time and cultures, cited to the exact paragraph where Jung wrote it.</p>
-        <div class="intro-actions">
-          <button id="intro-enter" type="button">Enter the globe</button>
-          <a href="https://github.com/EpiLogos/archetypal-earth/releases" target="_blank" rel="noopener">Downloads</a>
-          <a href="https://github.com/EpiLogos/archetypal-earth/issues" target="_blank" rel="noopener">Issues</a>
-        </div>
-        <p class="intro-fine">Personal research edition · portrait &amp; imagery public domain</p>
-      </div>
-    </div>
-
-    <style>
-      #intro{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(2,3,10,.5);backdrop-filter:blur(3px)}
-      #intro.dismissed{display:none}
-      .intro-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:2rem;max-width:36rem}
-      .intro-portrait{width:74px;height:74px;border-radius:50%;object-fit:cover;border:1px solid rgba(195,210,242,.3);filter:grayscale(30%);margin-bottom:1.3rem}
-      .intro-inner h1{font:600 2.5rem/1.05 "Source Serif 4",Georgia,serif;color:#eef2ff;margin:0 0 .7rem;letter-spacing:.01em}
-      .intro-lede{font:400 1rem/1.6 "Source Serif 4",Georgia,serif;color:#b9c4e4;margin:0 0 1.5rem}
-      .intro-actions{display:flex;gap:1.5rem;align-items:center;margin-bottom:1.6rem}
-      #intro-enter{font:500 .92rem "IBM Plex Sans",sans-serif;color:#0b1230;background:#c3d2f2;border:none;border-radius:8px;padding:.72rem 1.5rem;cursor:pointer;transition:background .15s}
-      #intro-enter:hover{background:#e2eafc}
-      .intro-actions a{font:400 .85rem "IBM Plex Sans",sans-serif;color:#8d9ac6;text-decoration:none;transition:color .15s}
-      .intro-actions a:hover{color:#dde4f7}
-      .intro-fine{font:400 .64rem/1.5 "IBM Plex Sans",sans-serif;color:#5f6a92;margin:0}
-    </style>
-    <script>
-      (function(){
-        try{ if(localStorage.getItem("aae-intro-dismissed")==="1"){ document.getElementById("intro").classList.add("dismissed"); } }catch(e){}
-        var b=document.getElementById("intro-enter");
-        if(b){ b.addEventListener("click",function(){ document.getElementById("intro").classList.add("dismissed"); try{localStorage.setItem("aae-intro-dismissed","1");}catch(e){} }); }
-      })();
-    </script>
     <noscript><p style="color:#cfd8ee;font:16px Georgia,serif;padding:2rem">An Archetypal Earth needs JavaScript and WebGL.</p></noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
