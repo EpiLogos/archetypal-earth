@@ -1,0 +1,53 @@
+{
+  "_note": "The Great Mother at full depth: the exemplar of what one archetype's whole field looks like. Jung's definition and his catalogue, Neumann's structure (The Great Mother) and his placing of it in the growth of consciousness (The Origins and History of Consciousness, with Jung's own foreword), and the field's images, instances and dreams. Quotations name only their work and words and are placed by the corpus at build time (`npm run depth`). `speaker` marks words that are not the volume author's (Jung's foreword inside Neumann's book). Neumann's dated instances are taken from the reading-pass records (data/mentions/neumann-great-mother), only those that place exactly and carry no scan damage.",
+  "version": 1,
+  "archetype": "great-mother",
+  "line": "Jung drew a line between the Great Mother, a figure of comparative religion, and the mother archetype behind it. Neumann, his student, gave the archetype its fullest single study. This page holds both, then the images, the instances and the dreams the field has for it.",
+  "sections": [
+    {
+      "id": "as-such",
+      "title": "The archetype and the image",
+      "line": "Jung keeps the Great Mother, the goddess of the religions, apart from the mother archetype it comes from. The archetype itself is never seen; only its images are.",
+      "quotes": [
+        { "work": "cw09i", "quote": "The concept itself is of no immediate concern to psychology, because the image of a Great Mother in this form is rarely encountered in practice, and then only under very special conditions." },
+        { "work": "cw09i", "quote": "The symbol is obviously a derivative of the mother archetype." },
+        { "work": "cw16", "para": 344, "quote": "is an archetype and refers to the place of origin, to nature, to that which passively creates" }
+      ]
+    },
+    {
+      "id": "two-faces",
+      "title": "The two faces",
+      "line": "Every account of her holds both a giving and a devouring side, and refuses to split them into two figures.",
+      "quotes": [
+        { "work": "cw05", "para": 352, "quote": "The mother then appears on the one hand as the supreme goal, and on the other as the most frightful danger" },
+        { "work": "neumann-great-mother", "quote": "Great Mother, Good Mother, and Terrible Mother form a cohesive archetypal group." },
+        { "work": "neumann-great-mother", "quote": "that she grants life only through death" }
+      ]
+    },
+    {
+      "id": "structure",
+      "title": "Her structure",
+      "line": "Neumann reads two characters in the Feminine: one that holds and keeps, one that changes. Her central symbol is the vessel.",
+      "quotes": [
+        { "work": "neumann-great-mother", "quote": "The elementary character of the Feminine becomes evident wherever the ego and consciousness are still small and undeveloped and the unconscious is dominant." },
+        { "work": "neumann-great-mother", "quote": "In the transformative character, the accent is on the dynamic element of the psyche, which, in contrast to the conservative tendency of the elementary character, drives toward motion, change, and, in a word, transformation." },
+        { "work": "neumann-great-mother", "quote": "we arrive at a universal symbolic formula for the early period of mankind: Woman = body = vessel = world" }
+      ],
+      "families": ["vessel", "cave", "mother-goddess"]
+    },
+    {
+      "id": "stage",
+      "title": "Where she stands in the growth of consciousness",
+      "line": "In Origins, Neumann puts the Great Mother at the start of a sequence: the ego held in the unconscious, then slowly freed from it, until the hero. Jung wrote the book's foreword.",
+      "quotes": [
+        { "work": "neumann-origins", "quote": "The mythological stages in the evolution of consciousness begin with the stage when the ego is contained in the unconscious" },
+        { "work": "neumann-origins", "quote": "The positive side of the Great Mother seems to be embodied in this stage of the uroboros." },
+        { "work": "neumann-origins", "quote": "The Great Mother takes the little child back into herself, and always, over uroboric incest there stand the insignia of death, signifying final dissolution in union with the Mother." },
+        { "work": "neumann-origins", "quote": "While yet in the fold of the creation myth it enters upon the second cycle, namely, the hero myth" },
+        { "work": "neumann-origins", "speaker": "Jung, foreword", "quote": "It begins just where I, too, if I were granted a second lease of life, would start to gather up the disjecta membra of my own writings" }
+      ],
+      "families": ["uroboros", "battle-with-dragon"]
+    }
+  ],
+  "instances": { "vol": "neumann-great-mother", "line": "Neumann's book is built on its plates. The scan of the plates section is too damaged to read most captions, so only the dated instances that can be quoted exactly are listed here." }
+}

@@ -19,14 +19,27 @@ export interface LensQuote {
   voice?: string;
 }
 
+/** Whose words a work holds, when they are not Jung's: said beside the cite, so no one else reads as Jung. */
+export function voiceOf(work: string): string | null {
+  if (work.startsWith('vonzfranz')) return 'von Franz';
+  if (work.startsWith('neumann')) return 'Neumann';
+  if (work === 'burt-zodiac') return 'Burt';
+  if (work === 'a-blue-fire') return 'Hillman';
+  return null;
+}
+
 /** A verbatim quotation and its cite; the cite opens the passage at its source when the corpus holds the work. */
+/** A quote taken up mid-sentence is shown as such: the words stay verbatim, the ellipsis marks where they begin. */
+export const entered = (t: string) => (/^\p{Ll}/u.test(t) ? `…${t}` : t);
+
 export function quoteBlock(q: LensQuote, passages: PassageBridge | undefined, opts: { compact?: boolean } = {}): HTMLElement {
   const c = q.cite;
   const label = `${c.workTitle}, ${c.locator}${c.print ? ` · p. ${c.print}` : ''}`;
+  const voice = voiceOf(c.work);
   const cite = passages?.known(c.work)
     ? el('button', { type: 'button', class: 'link-quiet lq-cite', text: label, title: 'Open the passage in the corpus', onclick: () => passages.open(c.work, c.locator) })
     : el('span', { class: 'lq-cite', text: label });
-  return el('blockquote', { class: `lq ${opts.compact ? 'lq-compact' : ''}` }, [el('p', { text: q.text }), el('footer', {}, [cite])]);
+  return el('blockquote', { class: `lq ${opts.compact ? 'lq-compact' : ''}` }, [el('p', { text: entered(q.text) }), el('footer', {}, [voice ? el('span', { class: 'lq-voice', text: voice }) : null, cite])]);
 }
 
 /** The line every personal tool shows, plainly: where the data lives and what never happens to it. */

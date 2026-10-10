@@ -30,7 +30,22 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     const quotes = citeQuotes(load, titles, s.quotes, s.id, errors, warnings);
     return { id: s.id, name: s.name, line: s.line, quotes, links: s.links ?? [] };
   });
-  return { data: { version: 1, sections }, errors, warnings };
+  // the number section (the QL lens): corpus quotations placed as above; QL formulations kept as the framework's words
+  const ql = JSON.parse(fs.readFileSync(path.join(root, 'curation', 'ql.json'), 'utf8'));
+  const many = (qs, where) => citeQuotes(load, titles, qs, where, errors, warnings);
+  const one = (q, where) => many([q], where)[0];
+  const QL_SOURCES = new Set(['S1', 'S2', 'S3', 'S4']);
+  const qlText = (x, where) => { if (!x || !QL_SOURCES.has(x.source) || !x.text) errors.push(`${where}: a QL formulation needs its text and one of the sources in docs/ql-reference.md`); return x; };
+  const number = {
+    line: ql.line,
+    matheme: qlText(ql.matheme, 'matheme'),
+    jung: many(ql.jung, 'number.jung'),
+    series: one(ql.series, 'number.series'),
+    numbers: ql.numbers.map((n) => ({ n: n.n, position: n.position, ql: { ...qlText(n.ql, `number ${n.n}`), ...(n.ql.also ? { also: qlText(n.ql.also, `number ${n.n} also`) } : {}) }, quotes: many(n.quotes, `number ${n.n}`) })),
+    psychoid: { line: ql.psychoid.line, quotes: many(ql.psychoid.quotes, 'psychoid'), ql: qlText(ql.psychoid.ql, 'psychoid ql') },
+    time: { line: ql.time.line, quotes: many(ql.time.quotes, 'time'), quaternio: { intro: one(ql.time.quaternio.intro, 'quaternio'), terms: ql.time.quaternio.terms }, vaneenwyk: ql.time.vaneenwyk },
+  };
+  return { data: { version: 1, sections, number }, errors, warnings };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

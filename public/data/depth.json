@@ -1,0 +1,349 @@
+{
+ "version": 1,
+ "archetypes": {
+  "great-mother": {
+   "archetype": "great-mother",
+   "line": "Jung drew a line between the Great Mother, a figure of comparative religion, and the mother archetype behind it. Neumann, his student, gave the archetype its fullest single study. This page holds both, then the images, the instances and the dreams the field has for it.",
+   "sections": [
+    {
+     "id": "as-such",
+     "title": "The archetype and the image",
+     "line": "Jung keeps the Great Mother, the goddess of the religions, apart from the mother archetype it comes from. The archetype itself is never seen; only its images are.",
+     "quotes": [
+      {
+       "text": "The concept itself is of no immediate concern to psychology, because the image of a Great Mother in this form is rarely encountered in practice, and then only under very special conditions.",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "pdf p86"
+       }
+      },
+      {
+       "text": "The symbol is obviously a derivative of the mother archetype.",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "pdf p86"
+       }
+      },
+      {
+       "text": "is an archetype and refers to the place of origin, to nature, to that which passively creates",
+       "cite": {
+        "work": "cw16",
+        "workTitle": "The Practice of Psychotherapy",
+        "locator": "¶344 (pdf p151)"
+       }
+      }
+     ],
+     "families": []
+    },
+    {
+     "id": "two-faces",
+     "title": "The two faces",
+     "line": "Every account of her holds both a giving and a devouring side, and refuses to split them into two figures.",
+     "quotes": [
+      {
+       "text": "The mother then appears on the one hand as the supreme goal, and on the other as the most frightful danger",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶352 (pdf p219)"
+       }
+      },
+      {
+       "text": "Great Mother, Good Mother, and Terrible Mother form a cohesive archetypal group.",
+       "cite": {
+        "work": "neumann-great-mother",
+        "workTitle": "neumann-great-mother",
+        "locator": "pdf p33"
+       }
+      },
+      {
+       "text": "that she grants life only through death",
+       "cite": {
+        "work": "neumann-great-mother",
+        "workTitle": "neumann-great-mother",
+        "locator": "pdf p164"
+       }
+      }
+     ],
+     "families": []
+    },
+    {
+     "id": "structure",
+     "title": "Her structure",
+     "line": "Neumann reads two characters in the Feminine: one that holds and keeps, one that changes. Her central symbol is the vessel.",
+     "quotes": [
+      {
+       "text": "The elementary character of the Feminine becomes evident wherever the ego and consciousness are still small and undeveloped and the unconscious is dominant.",
+       "cite": {
+        "work": "neumann-great-mother",
+        "workTitle": "neumann-great-mother",
+        "locator": "pdf p35"
+       }
+      },
+      {
+       "text": "In the transformative character, the accent is on the dynamic element of the psyche, which, in contrast to the conservative tendency of the elementary character, drives toward motion, change, and, in a word, transformation.",
+       "cite": {
+        "work": "neumann-great-mother",
+        "workTitle": "neumann-great-mother",
+        "locator": "pdf p37"
+       }
+      },
+      {
+       "text": "we arrive at a universal symbolic formula for the early period of mankind: Woman = body = vessel = world",
+       "cite": {
+        "work": "neumann-great-mother",
+        "workTitle": "neumann-great-mother",
+        "locator": "pdf p44"
+       }
+      }
+     ],
+     "families": [
+      "vessel",
+      "cave",
+      "mother-goddess"
+     ]
+    },
+    {
+     "id": "stage",
+     "title": "Where she stands in the growth of consciousness",
+     "line": "In Origins, Neumann puts the Great Mother at the start of a sequence: the ego held in the unconscious, then slowly freed from it, until the hero. Jung wrote the book's foreword.",
+     "quotes": [
+      {
+       "text": "The mythological stages in the evolution of consciousness begin with the stage when the ego is contained in the unconscious",
+       "cite": {
+        "work": "neumann-origins",
+        "workTitle": "neumann-origins",
+        "locator": "pdf p33"
+       }
+      },
+      {
+       "text": "The positive side of the Great Mother seems to be embodied in this stage of the uroboros.",
+       "cite": {
+        "work": "neumann-origins",
+        "workTitle": "neumann-origins",
+        "locator": "pdf p43"
+       }
+      },
+      {
+       "text": "The Great Mother takes the little child back into herself, and always, over uroboric incest there stand the insignia of death, signifying final dissolution in union with the Mother.",
+       "cite": {
+        "work": "neumann-origins",
+        "workTitle": "neumann-origins",
+        "locator": "pdf p45"
+       }
+      },
+      {
+       "text": "While yet in the fold of the creation myth it enters upon the second cycle, namely, the hero myth",
+       "cite": {
+        "work": "neumann-origins",
+        "workTitle": "neumann-origins",
+        "locator": "pdf p33"
+       }
+      },
+      {
+       "text": "It begins just where I, too, if I were granted a second lease of life, would start to gather up the disjecta membra of my own writings",
+       "cite": {
+        "work": "neumann-origins",
+        "workTitle": "neumann-origins",
+        "locator": "pdf p17"
+       },
+       "speaker": "Jung, foreword"
+      }
+     ],
+     "families": [
+      "uroboros",
+      "battle-with-dragon"
+     ]
+    }
+   ],
+   "instances": {
+    "line": "Neumann's book is built on its plates. The scan of the plates section is too damaged to read most captions, so only the dated instances that can be quoted exactly are listed here.",
+    "items": [
+     {
+      "year": -4000,
+      "yearDisplay": "perhaps 4th millennium B.C. (caption)",
+      "place": "Egypt",
+      "note": "Fig. 12: vase design of women with upraised arms, large beside the men; the magic of hunting.",
+      "text": "In all probability the painting on a very early Egyptian vessel also represents hunt magic.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p82"
+      }
+     },
+     {
+      "year": -3000,
+      "yearDisplay": "c. 3000 B.C. (as printed, OCR 'S000')",
+      "place": "Sumer",
+      "note": "Plate: libation to a vessel with branches and seated goddess, stone relief, Sumer, c. 3000 B.C.",
+      "text": "LIBATION TO VESSEL WITH BRANCHES, AND SEATED GODDESS",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p276"
+      }
+     },
+     {
+      "year": -2500,
+      "yearDisplay": "middle of the third millennium B.C. (as given)",
+      "place": "Mesopotamia (Akkadian; inferred)",
+      "note": "One of the oldest representations of the Mother Goddess with child is an Akkadian relief from the middle of the third millennium; related reliefs show the son on her lap and a daughter behind her.",
+      "text": "is an Akkadian relief from the middle of the third millennium.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p181"
+      }
+     },
+     {
+      "year": -1450,
+      "yearDisplay": "c. 15th century B.C. (per caption)",
+      "place": "Greek islands",
+      "note": "The so-called island figure from Greece combines the steatopygic body with tattooing.",
+      "text": "A so-called “island figure” from Greece combines these physical characteristics with tattooing.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p75"
+      }
+     },
+     {
+      "year": -1200,
+      "yearDisplay": "Late Minoan III period",
+      "place": "Hagia Triada, Crete",
+      "note": "Fig. 18: clay female figure, Late Minoan III; mortuary stele with two pairs of breasts feeding animals, the Great Many-Breasted Mother.",
+      "text": "This mortuary stele represents a figure whose belly, the “center of life,” juts out of the earth; over it two pairs of breasts feed the animals to the left and right.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p88"
+      }
+     },
+     {
+      "year": -650,
+      "yearDisplay": "vii century B.C. (as given: 'vii century B.c.')",
+      "place": "Susa",
+      "note": "Plate: fragments of figures of the goddess Beltis, stone, Susa.",
+      "text": "FRAGMENTS OF FIGURES OF THE GODDESS BELTIS",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p220"
+      }
+     },
+     {
+      "year": -450,
+      "yearDisplay": "early V century B.C. (as given)",
+      "place": "Pharsalus, Greece",
+      "note": "Plate: Demeter and Kore (?), marble stele, Pharsalus, Greece, early V century B.C.",
+      "text": "Marble stele, Pharsalus, Greece, early v century B.C.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p290"
+      }
+     },
+     {
+      "year": -450,
+      "yearDisplay": "v century B.C. (as printed)",
+      "place": "Rome (Greek style)",
+      "note": "Plate: the birth of the goddess, marble relief, Rome (Greek style), V century B.C.",
+      "text": "THE BIRTH OF THE GODDESS",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p293"
+      }
+     },
+     {
+      "year": 50,
+      "yearDisplay": "I century A.D. (as printed)",
+      "place": "Rome",
+      "note": "Plate A: Cybele on a lion-drawn procession car, bronze, Rome, I century A.D.",
+      "text": "A. CYBELE ON A LION-DRAWN PROCESSION CAR",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p280"
+      }
+     },
+     {
+      "year": 240,
+      "yearDisplay": "epoch of Gordianus III (3rd c. A.D.)",
+      "place": "Phoenicia",
+      "note": "Phoenician coin under Gordian III shows a pithos flanked by sphinxes, grain sprouting from its shoulders; Ishtar's counterpart.",
+      "text": "The Great Goddess, e.g., Ishtar, with the branches or ears of grain sprouting from her back,",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p91"
+      }
+     },
+     {
+      "year": 1420,
+      "yearDisplay": "early XV century (as given)",
+      "place": "School of Verona",
+      "note": "Plate: The Triumph of Venus, tray painting, School of Verona, early XV century.",
+      "text": "THE TRIUMPH OF VENUS",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p247"
+      }
+     },
+     {
+      "year": 1500,
+      "yearDisplay": "c. 1500 (as printed)",
+      "place": "Lombardy",
+      "note": "Plate: The Birth of Adonis, detail of a fresco by Bernardino Luini, Lombard School, c. 1500.",
+      "text": "THE BIRTH OF ADONIS",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p268"
+      }
+     },
+     {
+      "year": 1550,
+      "yearDisplay": "16th century (Pierre Belon, as cited)",
+      "place": "Turkey",
+      "note": "Footnote quoting Pierre Belon: the Turk spends his last penny on opium, which he carries in peace and war, believed to make men braver.",
+      "text": "which he carries with him both in peace and war.",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p175"
+      }
+     },
+     {
+      "year": 1871,
+      "yearDisplay": "1871 (report by an Englishman)",
+      "place": "India (temple of the spring festival)",
+      "note": "Spring festival of the mountain daughter: each day twenty buffaloes, 250 goats and 250 pigs slaughtered; sand soaked in blood buried for fertility.",
+      "text": "An Englishman who attended the festival in 1871 reports that each day",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p100"
+      }
+     },
+     {
+      "year": 1906,
+      "yearDisplay": "c. 1906",
+      "place": "insane asylum (unnamed)",
+      "note": "Psychotic patient's vision of the sun's phallus whose movement produces wind, observed by Jung c. 1906.",
+      "text": "the sun’s phallus. If I moved my head from side to side the sun-phallus",
+      "cite": {
+       "work": "neumann-great-mother",
+       "workTitle": "neumann-great-mother",
+       "locator": "pdf p29"
+      }
+     }
+    ]
+   },
+   "records": 5280
+  }
+ }
+}
