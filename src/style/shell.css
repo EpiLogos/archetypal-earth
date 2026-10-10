@@ -195,7 +195,7 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
 .lp-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; }
 .lp-field { display: grid; gap: 5px; margin: 0 0 12px; }
 .lp-field > span { font: 500 11px var(--sans); letter-spacing: 0.06em; color: var(--ink-3); }
-.lp-field input, .lp-field select, .lp-field textarea { width: 100%; min-height: 42px; padding: 8px 11px; border-radius: 9px; border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.55); color: var(--ink); font: 14px/1.45 var(--sans); }
+.lp-field input, .lp-field select, .lp-field textarea { width: 100%; min-height: 44px; padding: 8px 11px; border-radius: 9px; border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.55); color: var(--ink); font: 14px/1.45 var(--sans); }
 .lp-field textarea { min-height: 140px; resize: vertical; font: 15px/1.55 var(--serif); }
 .lp-field input:focus, .lp-field select:focus, .lp-field textarea:focus { outline: none; border-color: rgb(var(--core-rgb) / 0.6); }
 .lp-field select option { background: #0a1020; }
