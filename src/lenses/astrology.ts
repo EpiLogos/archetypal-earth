@@ -16,9 +16,12 @@ import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
 import { findPlaces, formatCoordinates } from '../sky/gazetteer';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
+import { creditLine } from '../ui/credit';
 
 interface Tie { target: Subject; basis: 'jung' | 'inferred' | 'site'; note: string; quotes: LensQuote[] }
 interface BodyReading { key: ChartBody; name: string; line: string; quotes: LensQuote[]; ties: Tie[]; burt: LensQuote[] }
+/** A curated person's portrait: Commons provenance, the same fields the image manifest records (docs/IMAGE-REGISTER-2026-10-09.md). */
+interface Portrait { src: string; title?: string; credit?: string; license?: string }
 interface AstrologyData {
   version: 1;
   gazetteer: { source: { claim: string }; places: GazetteerPlace[] };
@@ -27,7 +30,7 @@ interface AstrologyData {
   order: { bodies: ChartBody[]; line: string; quote: LensQuote };
   bodies: Record<ChartBody, BodyReading>;
   signs: Record<string, LensQuote>;
-  people: (CuratedPerson & { quote: LensQuote })[];
+  people: (CuratedPerson & { quote: LensQuote; portrait?: Portrait | null })[];
 }
 
 const BASIS: Record<Tie['basis'], string> = { jung: 'Jung’s own link', inferred: 'the atlas’s inference', site: 'the atlas’s own link' };
@@ -95,15 +98,23 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.setContext('');
     const jung = charts.get('jung');
     const mine = charts.get(YOU);
-    const chartCard = (c: { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }, mineToo: boolean) => el('section', { class: 'as-card' }, [
-      el('h3', { class: 'as-card-h', text: c.rec.label }),
-      el('p', { class: 'as-card-p', text: `${c.rec.birth.date}${c.rec.birth.time ? `, ${c.rec.birth.time}${c.rec.clock ? ` ${c.rec.clock}` : ''}` : ''} · ${c.rec.birth.place || formatCoordinates(c.rec.birth.lat, c.rec.birth.lon)}` }),
-      el('p', { class: 'as-pillars', text: `Sun ${placeIn(c.chart, 'sun')} · Moon ${placeIn(c.chart, 'moon')}${c.chart.timeKnown ? ` · Rising ${c.chart.angles.ascendant.sign} ${fmtDeg(c.chart.angles.ascendant.degree)}` : ''}` }),
-      el('div', { class: 'lp-row' }, [
-        el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.navigate(astrologyAt([c.rec.id])) }, [icon('astrology', 15), el('span', { text: c.rec.id === YOU ? 'Walk your sky' : `Walk ${c.rec.label}’s sky` })]),
-        mineToo ? el('button', { type: 'button', class: 'lp-btn quiet', text: 'Change', onclick: () => { editing = true; renderHome(); } }) : null,
-      ]),
-    ]);
+    const portraitOf = (c: { rec: ChartRecord }) => c.rec.source === 'curated' ? (data!.people.find((p) => p.id === c.rec.id)?.portrait ?? null) : null;
+    const chartCard = (c: { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }, mineToo: boolean) => {
+      const portrait = portraitOf(c);
+      return el('section', { class: 'as-card' }, [
+        portrait ? el('figure', { class: 'as-portrait' }, [
+          el('img', { src: portrait.src, alt: portrait.title ? `${c.rec.label} — ${portrait.title}` : c.rec.label, loading: 'lazy', width: 96 }),
+          el('figcaption', { class: 'as-portrait-credit', text: creditLine(portrait) }),
+        ]) : null,
+        el('h3', { class: 'as-card-h', text: c.rec.label }),
+        el('p', { class: 'as-card-p', text: `${c.rec.birth.date}${c.rec.birth.time ? `, ${c.rec.birth.time}${c.rec.clock ? ` ${c.rec.clock}` : ''}` : ''} · ${c.rec.birth.place || formatCoordinates(c.rec.birth.lat, c.rec.birth.lon)}` }),
+        el('p', { class: 'as-pillars', text: `Sun ${placeIn(c.chart, 'sun')} · Moon ${placeIn(c.chart, 'moon')}${c.chart.timeKnown ? ` · Rising ${c.chart.angles.ascendant.sign} ${fmtDeg(c.chart.angles.ascendant.degree)}` : ''}` }),
+        el('div', { class: 'lp-row' }, [
+          el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.navigate(astrologyAt([c.rec.id])) }, [icon('astrology', 15), el('span', { text: c.rec.id === YOU ? 'Walk your sky' : `Walk ${c.rec.label}’s sky` })]),
+          mineToo ? el('button', { type: 'button', class: 'lp-btn quiet', text: 'Change', onclick: () => { editing = true; renderHome(); } }) : null,
+        ]),
+      ]);
+    };
     const body: (HTMLElement | null)[] = [
       privacyLine('Your birth data and your chart are kept only in this browser’s storage, and you can delete them below.'),
       el('p', { class: 'th-line', text: 'Enter a birthday and you get a walk through that sky, planet by planet, with what Jung and Kathleen Burt wrote about each planet and sign. Jung’s own chart is here as the first one, so you can read yours beside his.' }),
