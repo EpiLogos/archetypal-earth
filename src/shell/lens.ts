@@ -77,7 +77,7 @@ export const LENSES: readonly LensDef[] = [
 ];
 
 /** The lenses the menu offers. A lens joins when it is built and verified; the registry above is the plan. */
-export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'aion', 'redbook', 'astrology']);
+export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'aion', 'redbook', 'astrology', 'dreams', 'symbols', 'coincidences']);
 
 export function lensDef(id: LensId): LensDef {
   return LENSES.find((l) => l.id === id) ?? LENSES[0];

@@ -50,3 +50,18 @@ export function loadLensData<T>(name: string): Promise<T> {
   }
   return cache.get(name) as Promise<T>;
 }
+
+/**
+ * Tune the globe to some occurrences (a family's instances, a dream's images): they stand, the rest recede, the palette
+ * follows the first family. Unplaced occurrences keep their own standing, as the field's own focus does.
+ */
+export function tuneGlobe(ctx: { model: import('../data/model').Model; engine: import('../globe/engine').GlobeEngine }, idx: number[], familyId?: string) {
+  const m = ctx.model;
+  if (!idx.length) { ctx.engine.setEmphasis(null, null); return; }
+  const rel = new Float32Array(m.occ.length).fill(0.07);
+  for (const i of idx) rel[i] = 1.5;
+  for (let i = 0; i < rel.length; i++) if (!m.located[i]) rel[i] = 1;
+  const pal = familyId ? m.famPalette.get(familyId) : undefined;
+  if (pal) ctx.engine.setPalette(pal, 1.4);
+  ctx.engine.setEmphasis(rel, pal?.core ?? null);
+}
