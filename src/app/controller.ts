@@ -9,7 +9,7 @@ import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
 import { defaultReadingId, hashToState, hashWithFilter } from '../state/router';
-import { back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
+import { astrologyAt, back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
@@ -43,10 +43,10 @@ import type { SkyAnchorSource } from '../graph/build';
 import type { SidecarChart, SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
 import { SkyView } from '../sky/view';
-import { SkyCard, canOpenCard, formatMoment, resolveTies } from '../sky/card';
-import { BirthPanel } from '../sky/birth';
-import { chartMoment } from '../sky/chart';
-import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
+import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
+import { dataWithWindow } from '../sky/sidecar';
+import type { CuratedPerson } from '../astro/charts';
+import { loadLensData } from '../lenses/ui';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
 import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewAzimuth } from '../sky/stages';
@@ -138,11 +138,9 @@ export class Controller {
   private skyCard: SkyCard;
   private skyTies = new SkyTies();
   private skyLayer: SkyLayer | null = null;
-  private birthPanel: BirthPanel;
-  private sidecar: SidecarClient;
   /** the chart standing in the sky, once the sidecar has answered; null in the present sky */
-  private birthChart: SidecarChart | null = null;
-  private birthGen = 0;
+  private natalChart: SidecarChart | null = null;
+  private natalGen = 0;
   private layerWaiters: ((l: SkyLayer | null) => void)[] = [];
   private skyRequested = false;
   private skyFailed = false;
@@ -231,18 +229,6 @@ export class Controller {
       onReading: (target) => this.openSubjectReading(target),
       onClose: () => this.stepBack(),
       passage: this.passage.bridge(),
-    });
-    this.sidecar = new SidecarClient({ base: SIDECAR_BASE, local: isLocalHost() });
-    this.birthPanel = new BirthPanel(this.skyView.birthHost, {
-      onCast: (b) => this.castBirth(b),
-      onLeave: () => this.leaveBirth(),
-      onBody: (key) => this.navigate(inSky({ ...(this.state.sky ?? {}), body: key })),
-      onField: (t) => this.navigate(focusOn(WORLD, t)),
-      onDraw: (o) => this.skyLayer?.chart.setOptions(o),
-      lookup: (q) => this.sidecar.geocode(q),
-      descent: (key) => this.birthDescent(key),
-      nameOf: (key) => this.skyName(key),
-      onOpen: () => void this.probeSidecar(),
     });
     // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens
     this.shell.setAside(this.modeSwitch.root);
@@ -441,6 +427,9 @@ export class Controller {
   }
 
   navigate(next: AppState, opts: { replace?: boolean } = {}) {
+    // a navigation asked for while a state is being applied (a lens redirecting to its first step) runs right after it,
+    // so the hash is written in the order the states are applied
+    if (this.applying) { queueMicrotask(() => this.navigate(next, opts)); return; }
     this.landing.dismiss();
     next = this.lensRoute(next);
     if (this.whenReady(next, () => this.navigate(next, opts))) return;
@@ -864,6 +853,7 @@ export class Controller {
       focus: (subject) => this.navigate(focusOn(WORLD, subject)),
       openOccurrence: (occId) => this.openReading(occId),
       setPath: (path, opts) => { if (this.activeLens === id) this.navigate(inLens(id, path), opts); },
+      refreshNatal: () => this.refreshNatal(),
     };
   }
 
@@ -912,7 +902,14 @@ export class Controller {
   }
 
   // ── applying a state ──────────────────────────────────────────────────
+  private applying = false;
+
   private apply(next: AppState) {
+    this.applying = true;
+    try { this.applyState(next); } finally { this.applying = false; }
+  }
+
+  private applyState(next: AppState) {
     const prev = this.state;
     const first = !this.started;
     this.state = next;
@@ -1054,8 +1051,8 @@ export class Controller {
   private skyLive: SkyLive | null = null;
   /** The sky's live state (diagnostics, tests): null until the sky has loaded. */
   get skyLiveState() { return this.skyLive?.state ?? null; }
-  /** The birth chart standing in the sky (diagnostics, tests): null in the present sky. */
-  get skyBirthChart() { return this.birthChart; }
+  /** The natal chart standing in the sky (diagnostics, tests): null in the present sky. */
+  get skyNatalChart() { return this.natalChart; }
 
   /** The sky's clock: follows the wall clock only while the sidecar vouches for the grids; otherwise a labelled snapshot. */
   private startSkyLive(layer: SkyLayer) {
@@ -1064,15 +1061,15 @@ export class Controller {
       local: isLocalHost(),
       onChange: (s) => {
         this.skyView.setLive(s);
-        // a birth sky holds its own moment; the clock resumes when it is left
-        if (!this.state.sky?.birth) layer.setMoment(live.moment());
+        // a natal sky holds its own moment; the clock resumes when it is left
+        if (!this.state.sky?.natal) layer.setMoment(live.moment());
         if (this.state.sky) this.syncSkyCard();
       },
     });
     this.skyLive = live;
     layer.setMoment(live.moment());
     this.skyView.setLive(live.state);
-    this.engine.onFrame(() => { if (live.following && !this.state.sky?.birth) layer.setMoment(live.moment()); });
+    this.engine.onFrame(() => { if (live.following && !this.state.sky?.natal) layer.setMoment(live.moment()); });
     live.start();
   }
 
@@ -1085,9 +1082,6 @@ export class Controller {
       this.startSkyLive(layer);
       this.engine.attachSky(layer);
       this.skyView.setLayer(layer);
-      this.birthPanel.setBodies(data.bodies);
-      this.birthPanel.setGazetteer(data.gazetteer);
-      void this.probeSidecar();
       for (const w of this.layerWaiters.splice(0)) w(layer);
       this.syncRig();
       const cultures = Object.keys(data.cultures).filter((id) => this.m.cultureById.has(id)).map((id) => ({ id, name: this.m.cultureById.get(id)!.name }));
@@ -1123,9 +1117,9 @@ export class Controller {
     else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
   }
 
-  /** The body the camera approaches for its open card: a planet or the Sun, with no birth sky standing. */
+  /** The body the camera approaches for its open card: a planet or the Sun (in a natal sky too: Astrology walks them). */
   private approachFor(sky: AppState['sky']): BodyKey | null {
-    return sky?.body && !sky.birth && isApproachBody(sky.body) ? sky.body : null;
+    return sky?.body && isApproachBody(sky.body) ? sky.body : null;
   }
 
   /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
@@ -1198,7 +1192,9 @@ export class Controller {
       this.navigate(inSky(rest), { replace: true });
       return;
     }
-    const birth = !!sky.birth;
+    const birth = !!sky.natal;
+    // in Astrology the walk's own panel reads the body; the sky's card stands down so there is one reading surface
+    if (this.state.lens?.id === 'astrology') { this.skyCard.hide(); return; }
     this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: birth ? `at the birth moment, ${formatMoment(layer.moment)}` : `as of ${formatMoment(layer.moment)}`, culture: sky.culture, birth });
   }
 
@@ -1208,7 +1204,7 @@ export class Controller {
     this.skyView.relabel();
     this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
     if (on) this.syncSkyCard(); else this.skyCard.hide();
-    this.syncBirth(prev.sky?.birth, next.sky?.birth, !!next.sky);
+    this.syncNatal(prev.sky?.natal, next.sky?.natal, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
       if (this.skyByGesture) this.skyByGesture = false;
@@ -1239,85 +1235,66 @@ export class Controller {
     return new Promise((res) => this.layerWaiters.push(res));
   }
 
-  /** Is the sidecar there? Asked once the sky is built, and again whenever the disclosure is opened while it was not. */
-  private async probeSidecar() {
-    if (!isLocalHost()) { this.birthPanel.setAvailability({ kind: 'off', why: 'not-local' }); return; }
-    if (this.birthPanel.availability.kind === 'ready') return;
-    const ok = await this.sidecar.available();
-    this.birthPanel.setAvailability(ok ? { kind: 'ready' } : { kind: 'off', why: 'absent' });
+  /**
+   * The natal sky changed (Astrology opened a chart, changed it, or left): bring the sky to that chart's moment, or back
+   * to the clock. The chart is computed in this page (src/astro/natal.ts, loaded only now); its birth data is read from
+   * this browser's storage or from the curation (Jung), never from the URL, and nothing is sent anywhere.
+   */
+  private syncNatal(prev: string | undefined, next: string | undefined, inSkyNow: boolean) {
+    if (prev === next) return;
+    void this.applyNatal(next, inSkyNow);
   }
 
-  /** The first mythic node a body descends through: Jung's own link before the atlas's, and only ones that resolve. */
-  private birthDescent(key: BodyKey): { label: string; target: { type: 'family' | 'archetype'; id: string } } | null {
-    const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
-    if (!body) return null;
-    const { resolved } = resolveTies(body, this.m);
-    const first = resolved.find((t) => t.basis !== 'site') ?? resolved[0];
-    return first ? { label: subjectName(this.m, first.target), target: first.target } : null;
+  /** Re-read the standing natal chart (the visitor saved or changed theirs). */
+  refreshNatal() {
+    const id = this.state.sky?.natal;
+    if (id) void this.applyNatal(id, true);
   }
 
-  private castBirth(b: BirthInput) {
-    this.navigate(inSky({ ...(this.state.sky ?? {}), birth: b }));
-  }
-
-  private leaveBirth() {
-    const { birth: _b, ...rest } = this.state.sky ?? {};
-    this.navigate(inSky(rest));
-  }
-
-  /** The state's birth changed (a cast, a link, a leaving): bring the sky to that moment, or back to the clock. */
-  private syncBirth(prev: BirthInput | undefined, next: BirthInput | undefined, inSkyNow: boolean) {
-    const same = prev && next ? prev.local === next.local && prev.lat === next.lat && prev.lon === next.lon : !prev && !next;
-    if (same) return;
-    void this.applyBirth(next, inSkyNow);
-  }
-
-  private async applyBirth(birth: BirthInput | undefined, visible: boolean) {
-    const gen = ++this.birthGen;
+  private async applyNatal(id: string | undefined, visible: boolean) {
+    const gen = ++this.natalGen;
     const layer = await this.whenLayer();
-    if (!layer || gen !== this.birthGen) return;
+    if (!layer || gen !== this.natalGen) return;
     const duration = this.engine.reduced || !visible ? 0 : 2600;
-    if (!birth) {
+    if (!id) {
       // back to the present: the chart is taken away and the bodies travel home to the clock
-      this.birthChart = null;
+      this.natalChart = null;
       layer.chart.set(null);
-      this.birthPanel.clearChart();
       this.skyView.setHeld(null);
       layer.travel(layer.baseEph, this.skyLive?.moment() ?? Date.now(), duration);
       if (this.state.sky) this.syncSkyCard();
       return;
     }
-    this.birthPanel.setInput(birth);
-    this.birthPanel.setStatus('working', 'Computing the sky at that moment…');
     try {
-      const chart = await this.sidecar.chart(birth);
-      if (gen !== this.birthGen) return;
-      const win = await this.sidecar.window(chartMoment(chart));
-      if (gen !== this.birthGen) return;
-      const eph = new SkyEphemeris(dataWithWindow(layer.data, win));
-      this.birthChart = chart;
+      const [{ natalChart, natalWindow, birthInstant }, { chartSources }, data] = await Promise.all([
+        import('../astro/natal'), import('../astro/charts'), loadLensData<{ people: CuratedPerson[] }>('astrology'),
+      ]);
+      if (gen !== this.natalGen) return;
+      const rec = chartSources(data.people).find((c) => c.id === id);
+      if (!rec) {
+        // a chart this browser does not hold (a link from someone else's 'you'): the lens opens on its own landing
+        this.natalChart = null;
+        layer.chart.set(null);
+        if (this.state.sky?.natal === id) this.navigate(astrologyAt([]), { replace: true });
+        return;
+      }
+      const chart = natalChart(rec.birth);
+      const ms = birthInstant(rec.birth);
+      const eph = new SkyEphemeris(dataWithWindow(layer.data, natalWindow(ms)));
+      this.natalChart = chart;
       layer.chart.set(chart);
-      layer.chart.setOptions(this.birthPanel.drawn);
-      layer.travel(eph, chartMoment(chart), duration, true);
-      this.birthPanel.showChart(chart);
-      this.skyView.setHeld(`The sky is held at ${formatMoment(chartMoment(chart))}, the moment you gave; it does not follow the clock.`);
-      this.birthPanel.setAvailability({ kind: 'ready' });
+      layer.chart.setOptions({ aspects: true, houses: false });
+      layer.travel(eph, ms, duration, true);
+      this.skyView.setHeld(`The sky is held at ${rec.label === 'You' ? 'your birth' : `${rec.label}’s birth`}, ${formatMoment(ms)}${chart.timeKnown ? '' : ' (local noon: no time was given)'}.`);
       // the ring stands around the Earth at the scale of the system: bring the camera out to see it
-      if (visible && this.engine.rig.dist < STAGE_EDGES.handoff) this.enterSkyView(this.engine.reduced);
+      if (visible && this.engine.rig.dist < STAGE_EDGES.handoff && !this.approachFor(this.state.sky)) this.enterSkyView(this.engine.reduced);
       this.syncSkyCard();
     } catch (e) {
-      if (gen !== this.birthGen) return;
-      const message = e instanceof SidecarError ? e.message : 'The birth sky could not be computed.';
-      if (!(e instanceof SidecarError)) console.warn(e);
-      if (e instanceof SidecarError && (e.kind === 'absent' || e.kind === 'not-local')) this.birthPanel.setAvailability({ kind: 'off', why: e.kind === 'absent' ? 'absent' : 'not-local' });
-      // the link must not claim a sky that is not shown: step the state back to the present sky, and keep the reason on screen
-      this.birthChart = null;
+      if (gen !== this.natalGen) return;
+      console.error(e);
+      this.natalChart = null;
       layer.chart.set(null);
-      this.birthPanel.clearChart();
       this.skyView.setHeld(null);
-      const { birth: _b, ...rest } = this.state.sky ?? {};
-      if (this.state.sky?.birth) this.navigate(inSky(rest), { replace: true });
-      this.birthPanel.setStatus('error', message);
     }
   }
 
@@ -1331,7 +1308,7 @@ export class Controller {
     const layer = this.skyLayer;
     const sky = this.state.sky;
     const now = performance.now();
-    const eligible = !!layer && !!sky && !sky.birth && !this.approachFor(sky) && !layer.approach && !this.engine.reduced
+    const eligible = !!layer && !!sky && !sky.natal && !this.approachFor(sky) && !layer.approach && !this.engine.reduced
       && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
       && now - rig.lastWheelAt >= SETTLE.idleMs && now - rig.lastDragAt >= SETTLE.quietDragMs;
     if (!eligible || !layer) { rig.settleTo = null; return; }

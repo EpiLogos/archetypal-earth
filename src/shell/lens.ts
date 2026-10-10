@@ -46,6 +46,8 @@ export interface LensContext {
   /** open the field on a subject (leaving this lens), or keep the lens and just tune the globe to it */
   focus(subject: Subject): void;
   openOccurrence(occId: string): void;
+  /** the visitor's own chart changed (saved, edited, deleted): the sky re-reads the standing natal chart */
+  refreshNatal(): void;
   /** the route this lens stands at changed from inside it (no reload): keeps the hash and Back in step */
   setPath(path: string[], opts?: { replace?: boolean }): void;
 }
@@ -75,7 +77,7 @@ export const LENSES: readonly LensDef[] = [
 ];
 
 /** The lenses the menu offers. A lens joins when it is built and verified; the registry above is the plan. */
-export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'aion', 'redbook']);
+export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'aion', 'redbook', 'astrology']);
 
 export function lensDef(id: LensId): LensDef {
   return LENSES.find((l) => l.id === id) ?? LENSES[0];

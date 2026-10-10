@@ -1,6 +1,6 @@
 // URL hash <-> state, so every state is linkable and Back works.
 import type { Subject } from '../data/model';
-import { PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
+import { astrologyAt, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 
 export interface Resolver {
@@ -39,14 +39,12 @@ export function defaultReadingId(readings: readonly { id: string }[]): string | 
   return readings[0]?.id;
 }
 
-/** `#/sky`, `#/sky/<body>`, `#/sky/birth/<local>/<lat>/<lon>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. */
-const num = (n: number) => String(Number(n.toFixed(4)));
+/** `#/sky`, `#/sky/<body>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. A natal sky is linked only through Astrology (`#/astrology/<chart>/<body>`), which names a chart, never a birth. */
 
 export function stateToHash(s: AppState): string {
   if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
   if (s.sky) {
     const tail = `${s.sky.body ? `/${enc(s.sky.body)}` : ''}${s.sky.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
-    if (s.sky.birth) return `#/sky/birth/${enc(s.sky.birth.local)}/${num(s.sky.birth.lat)}/${num(s.sky.birth.lon)}${tail}`;
     return `#/sky${tail}`;
   }
   if (s.history) {
@@ -99,21 +97,19 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   try { parts = hash.replace(/^#\/?/, '').split('/').filter(Boolean).map((p) => decodeURIComponent(p)); }
   catch { return { state: WORLD }; }
   if (!parts.length) return { state: WORLD };
+  if (parts[0] === 'astrology') {
+    const [, chart, body] = parts;
+    const okChart = chart && /^[a-z0-9-]{1,40}$/.test(chart);
+    return { state: astrologyAt(okChart ? (body && r.hasBody?.(body) ? [chart, body] : [chart]) : []) };
+  }
   if ((PANEL_LENSES as readonly string[]).includes(parts[0])) {
     return { state: { view: { kind: 'world' }, deep: false, lens: { id: parts[0] as PanelLensId, path: parts.slice(1, 4) } } };
   }
   if (parts[0] === 'sky') {
     const sky: NonNullable<AppState['sky']> = {};
     let rest = parts.slice(1);
-    if (rest[0] === 'birth') {
-      const [, local, la, lo] = rest;
-      const lat = Number(la);
-      const lon = Number(lo);
-      if (local && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(local) && la !== undefined && lo !== undefined && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
-        sky.birth = { local, lat, lon };
-        rest = rest.slice(4);
-      } else rest = [];
-    }
+    // the old birth-sky links carried a birth moment in the URL: they now open Astrology empty, and the moment is dropped
+    if (rest[0] === 'birth') return { state: astrologyAt([]) };
     if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     return { state: { view: { kind: 'world' }, deep: false, sky } };
