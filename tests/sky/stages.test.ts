@@ -35,7 +35,7 @@ describe('stages', () => {
 
   it('the look-at\'s share of the Sun is 0 across the Earth and lunar stages, and 1 once the Sun is the subject', () => {
     for (const d of [1.05, 6, 40, 300, 600]) expect(stageWeights(d).focus).toBe(0);
-    expect(stageWeights(1750).focus).toBe(1);
+    expect(stageWeights(3000).focus).toBe(1);
     expect(stageWeights(5000).focus).toBe(1);
     expect(handoffFocusWeight(900)).toBeGreaterThan(0);
     expect(handoffFocusWeight(900)).toBeLessThan(1);

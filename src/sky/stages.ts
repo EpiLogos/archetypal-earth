@@ -4,7 +4,7 @@
 //
 //   earth    1.05 → 40        the atlas as it always was; no sky layer
 //   lunar    40 → 600         the Moon's ring and body, the Sun as a bright direction
-//   handoff  600 → 3 000      the look-at eases from the Earth to the Sun (by 1 750, see FOCUS_HANDOFF); rings and planets arrive
+//   handoff  600 → 3 000      the look-at eases from the Earth to the Sun (in two steps, see FOCUS_HANDOFF); rings and planets arrive
 //   system   beyond           the heliocentric field, radial scale diagrammatic and said so
 import { MIN_DIST } from '../globe/zoom';
 import type { Vec3 } from '../data/geo';
@@ -16,14 +16,20 @@ export const STAGE_EDGES = { lunar: 40, handoff: 600, system: 3000 } as const;
 
 /**
  * The look-at's share of the Sun across the handoff, 0 → 1, as a function of distance alone. It is 0 at the Earth stage's
- * edge (so the atlas's framing is unchanged there) and 1 once the Sun is the subject. It reaches 1 at 1 750 R⊕ rather than at
- * the system edge: on a desktop view of the canonical system pose, the Earth and the Sun are both inside the central 70% from
- * ~1 070 R⊕ on (`bothInFrame`). The former ramp to 3 000 R⊕ got there only at ~1 170 R⊕ (aspect 2.2) and ~1 290 R⊕ (1.6).
- * Its midpoint (0.5) falls at ~1 024 R⊕, where the look-at is the midpoint of the Earth and the Sun.
+ * edge (so the atlas's framing is unchanged there) and 1 at the system's edge, where the Sun is the subject. It moves in two
+ * log-smooth steps: `first` carries `share` of the way (600 → 1 170 R⊕) so that the Earth–Sun pair is framed early, then
+ * `rest` finishes the move (1 500 → 3 000 R⊕) while the pair is still held. Fitted against the canonical system view (the camera
+ * over the Sun's longitude, `systemViewLongitude`) so that on every date of the year and on every viewport from a phone (0.5) to
+ * an ultrawide (2.8) the Earth and the Sun are both inside the central 70% from ~1 070 R⊕ on (`bothInFrame`). Its steepest
+ * slope is ~1.6 weight per e-fold of distance, the same order as the single ramp it replaces (~1.4).
  */
-export const FOCUS_HANDOFF = { from: STAGE_EDGES.handoff, to: 1750 } as const;
+export const FOCUS_HANDOFF = {
+  first: { from: STAGE_EDGES.handoff, to: 1170, share: 0.7 },
+  rest: { from: 1500, to: STAGE_EDGES.system },
+} as const;
 export function handoffFocusWeight(dist: number): number {
-  return logStep(dist, FOCUS_HANDOFF.from, FOCUS_HANDOFF.to);
+  const { first, rest } = FOCUS_HANDOFF;
+  return first.share * logStep(dist, first.from, first.to) + (1 - first.share) * logStep(dist, rest.from, rest.to);
 }
 
 /** Entering and leaving the sky flag by the zoom gesture: a gap between them, so it never chatters. */
@@ -224,21 +230,17 @@ export function settleStep(remainingDeg: number, dtS: number): number {
 }
 
 /** The chosen elevation above the ecliptic of the default system view, degrees. */
-export const SYSTEM_VIEW_ELEVATION = 38;
-/**
- * … and its ecliptic azimuth. The azimuth follows the Sun rather than standing at a fixed longitude: the camera's up is the
- * equatorial pole, so as the Earth–Sun line swings round the year it also rolls on screen by up to ±23°, and a view fixed in
- * the ecliptic let the pair leave the frame on most dates (to ~1.9 in |NDC| at 1.6, where 1 is the edge). The camera sits
- * `lead` degrees past the Sun's longitude, bowed by `swing`·cos(λ☉ − `phase`) — fitted so the pair holds inside the frame on
- * every date, and inside the central 70% on about two thirds of them; the rest (the December–April swing) stays inside
- * |NDC| 0.9. Smooth in the Sun's longitude, so scrubbing the date never makes the settled view jump.
- */
-export const SYSTEM_VIEW_AZIMUTH = { lead: 50, swing: 35, phase: 310 } as const;
+export const SYSTEM_VIEW_ELEVATION = 34;
 
-/** The canonical system view's ecliptic longitude when the Sun stands at ecliptic longitude `sunLonDeg`, degrees. */
+/**
+ * … and its ecliptic azimuth: the camera sits over the Sun's longitude, so the view looks along the Earth–Sun line from the
+ * Sun's side. The line then stands vertical on the screen, foreshortened by the elevation, which is what keeps the pair
+ * inside the frame on every viewport (a phone as well as a desktop) and on every date: a view fixed in the ecliptic (it was
+ * 250°) let the pair leave the frame on most dates, up to |NDC| 1.9 against an edge at 1. The result does not depend on the
+ * date or the aspect, and it is smooth in the date, so scrubbing never makes the settled view jump.
+ */
 export function systemViewLongitude(sunLonDeg: number): number {
-  const { lead, swing, phase } = SYSTEM_VIEW_AZIMUTH;
-  return sunLonDeg + lead + swing * Math.cos(((sunLonDeg - phase) * Math.PI) / 180);
+  return sunLonDeg;
 }
 
 /** Distances (Earth radii) over which the atlas's surface layers (presences, arcs, tiles, markers) give way to the sky. */
