@@ -1,7 +1,9 @@
 // The citation rules that repair instead of omitting: a ¶ marker the scan lost, words the scan ran together, a printed
 // page shown only when its label agrees with its neighbours, and an external work's running heads read as page labels.
 import { describe, expect, it } from 'vitest';
+// @ts-expect-error Plain ESM shared with the generators.
 import { locate, trustedPrint, verify } from '../../scripts/lib/cite.mjs';
+// @ts-expect-error Plain ESM shared with the generators.
 import { splitHead } from '../../scripts/lib/external.mjs';
 
 /** A loader over one fake work: pages of text with optional ¶ markers inline, as the flattened corpus holds them. */
