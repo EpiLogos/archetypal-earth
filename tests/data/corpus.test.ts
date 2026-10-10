@@ -1,3 +1,5 @@
+// @ts-expect-error Plain ESM shared with the CLI.
+import { DEFAULT_VAULT } from '../../scripts/lib/vault.mjs';
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +12,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 // No fixtures and no skips: the corpus index is built data, and a missing
 // volume is a failed acceptance check, the same law the history tests keep.
 const index: CorpusIndex = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/corpus/index.json'), 'utf8'));
-const vault = process.env.VAULT || path.join(process.env.HOME!, 'Documents', 'books', 'jung-archetypal-field');
+const vault = DEFAULT_VAULT;
 const loadWork = (work: string): CorpusWork =>
   JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/corpus', `${work}.json`), 'utf8'));
 const cw12 = loadWork('cw12');

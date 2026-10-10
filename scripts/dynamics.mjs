@@ -11,7 +11,8 @@ import { fileURLToPath } from 'node:url';
 import { buildFromVault, validateCuration } from './lib/dynamics.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const DEFAULT_VAULT = path.join(os.homedir(), 'Documents/books/jung-archetypal-field');
+export { DEFAULT_VAULT } from './lib/vault.mjs';
+import { DEFAULT_VAULT } from './lib/vault.mjs';
 const CURATION = 'curation/dynamics.json';
 const TARGET = 'public/data/dynamics.json';
 

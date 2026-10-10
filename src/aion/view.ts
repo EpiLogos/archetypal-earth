@@ -12,6 +12,7 @@ import type { PassageBridge } from '../ui/passage';
 import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
+import type { LensChrome } from '../shell/lens';
 
 type Selection = NonNullable<NonNullable<AppState['history']>['selection']>;
 const yearLabel = (year: number) => year < 0 ? `${Math.abs(Math.round(year)).toLocaleString()} BCE` : `${Math.round(year).toLocaleString()} CE`;
@@ -45,12 +46,13 @@ export class AionView {
    */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
     readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge,
-    private onRead: (occId: string) => void = () => {}) {
-    this.heading = el('header', { class: 'aion-heading' });
+    private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome) {
+    // the lens's own controls: the shell places them under its title (MODES-RFC §2); this view draws no heading
+    this.heading = el('div', { class: 'aion-controls' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
     this.markers = el('div', { class: 'aion-markers' });
-    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.heading, this.markers, this.epochs, this.card]);
+    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.card]);
     parent.append(this.root);
     this.ring = new EquinoxRing(this.root);
     // a double-click on an event card opens the reading of its first resolvable occurrence; an epoch's card has none
@@ -117,7 +119,12 @@ export class AionView {
       this.engine.setEmphasis(null, null);
     }
     this.update(0);
-    document.title = `${reading.title} · ${reading.author} — An Archetypal Earth`;
+    const sel = state.selection;
+    const named = sel?.kind === 'epoch' ? reading.epochs.find((e) => e.id === sel.id)?.name
+      : sel?.kind === 'event' ? reading.events.find((e) => e.id === sel.id)?.name
+      : sel?.kind === 'thread' ? reading.threads.find((t) => t.id === sel.id)?.name : undefined;
+    this.chrome?.setContext(named ?? `${reading.title} · ${reading.author}`);
+    this.chrome?.setControls([this.heading]);
   }
 
   hide() {
@@ -141,10 +148,10 @@ export class AionView {
 
   private buildHeading(reading: HistoryReading) {
     clear(this.heading);
-    const readingSelect = el('select', { 'aria-label': 'Historical reading', onchange: e => {
-      this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: (e.target as HTMLSelectElement).value } });
-    } });
-    for (const r of this.history.readings) readingSelect.append(el('option', { value: r.id, text: `${r.title} · ${r.author}`, selected: r.id === reading.id }));
+    // the readings are tabs: the shell's title carries the standing selection, so no select repeats it
+    const readingTabs = el('nav', { class: 'rb-modes aion-readings', 'aria-label': 'Readings' }, [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
+      el('button', { type: 'button', class: 'link-quiet', text: r.title, 'aria-pressed': String(r.id === reading.id),
+        onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }) })));
     const eventSelect = el('select', { 'aria-label': 'Historical event', onchange: e => {
       const id = (e.target as HTMLSelectElement).value;
       (e.target as HTMLSelectElement).closest('details')?.removeAttribute('open');
@@ -159,8 +166,8 @@ export class AionView {
     for (const thread of reading.threads) threadSelect.append(el('option', { value: thread.id, text: thread.name }));
     // Extend the existing focus-label vocabulary; the current reading is a
     // heading, and the quieter browsing controls open only when requested.
-    this.heading.append(this.history.readings.length > 1 ? readingSelect : el('h1', { class: 'fl-name', text: reading.title }),
-      el('p', { class: 'aion-context', text: reading.author }),
+    if (this.history.readings.length > 1) this.heading.append(readingTabs);
+    this.heading.append(
       el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Browse' }),
         el('div', { class: 'aion-choices' }, [el('label', {}, [el('span', { text: 'Events' }), eventSelect]), el('label', {}, [el('span', { text: 'Threads' }), threadSelect])])]));
   }

@@ -13,6 +13,7 @@ import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
+import type { LensChrome } from '../shell/lens';
 
 /** The mode's own atmosphere: the book's red, deep and bounded. */
 const REDBOOK_PALETTE = { core: '#c0554a', glow: '#8a342e', fog: '#2a1110', deep: '#120606' };
@@ -34,15 +35,16 @@ export class RedBookView {
    * `onRead`: the standing folio's core reading, opened by a double-click on its card (the controller keeps this mode to return to).
    */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void,
-    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}) {
+    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome) {
     this.mode = redbook;
     this.navigate = navigate;
     for (const s of redbook.sections) this.sectionName.set(s.id, s.name);
     this.stops = redbook.stops;
-    this.heading = el('header', { class: 'rb-heading' });
+    // the walk/genesis toggle is this lens's one control; the shell places it (MODES-RFC §2)
+    this.heading = el('div', { class: 'rb-controls' });
     this.rail = el('nav', { class: 'rb-rail', 'aria-label': 'Folio walk' });
     this.card = el('aside', { class: 'rb-card reveal on', 'aria-label': 'Red Book reading', hidden: true });
-    this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.heading, this.rail, this.card]);
+    this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.rail, this.card]);
     this.setCardActive(false);
     parent.append(this.root);
     // a double-click on a folio's card opens its occurrence's core reading; the genesis table has no folio to open
@@ -53,9 +55,9 @@ export class RedBookView {
     this.state = state;
     this.root.hidden = false;
     document.body.classList.add('redbook-mode');
-    // the book's own title stands unless a folio does (showStop names the folio)
-    document.title = `${this.mode.mode.title} — An Archetypal Earth`;
     this.buildHeading();
+    this.chrome?.setContext(this.mode.mode.subtitle.split(' · ')[0]);
+    this.chrome?.setControls([this.heading]);
     this.buildRail();
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
     this.setCardActive(true);
@@ -94,9 +96,6 @@ export class RedBookView {
     clear(this.heading);
     const genesis = !!this.state?.genesis;
     this.heading.append(
-      el('h1', { class: 'fl-name', text: this.mode.mode.title }),
-      el('p', { class: 'aion-context', text: this.mode.mode.subtitle }),
-      el('p', { class: 'aion-context rb-subject', text: this.mode.mode.oneLine }),
       el('nav', { class: 'rb-modes', 'aria-label': 'Red Book views' }, [
         el('button', { type: 'button', class: 'link-quiet', text: 'The walk', 'aria-pressed': String(!genesis), onclick: () => this.select({}) }),
         el('button', { type: 'button', class: 'link-quiet', text: 'Genesis', 'aria-pressed': String(genesis), onclick: () => this.select({ genesis: true }) }),
@@ -147,7 +146,6 @@ export class RedBookView {
     if (i === undefined) return;
     const o = m.occ[i];
     const fam = m.famById.get(o.familyId);
-    document.title = `${o.title} — An Archetypal Earth`;
     clear(this.card);
     this.card.append(this.closeButton());
     const body = el('div', { class: 'rv-body' });

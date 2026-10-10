@@ -23,8 +23,14 @@ export type View =
   | { kind: 'manifest'; occId: string; context: Subject }
   | { kind: 'thread'; target: ThreadTarget; from: View };
 
+/** The lenses that mount into the shell's panel (docs/MODES-RFC.md §3). */
+export type PanelLensId = 'theory' | 'astrology' | 'dreams' | 'symbols' | 'coincidences';
+export const PANEL_LENSES: readonly PanelLensId[] = ['theory', 'astrology', 'dreams', 'symbols', 'coincidences'];
+
 export interface AppState {
   view: View;
+  /** a panel lens standing over the world view, at a sub-route (never personal data: see MODES-RFC §5) */
+  lens?: { id: PanelLensId; path: string[] };
   deep: boolean;
   /** the graph mode: a second view of the same field (absent = the globe) */
   graph?: true;
@@ -104,6 +110,11 @@ export function startThread(s: AppState, target: ThreadTarget): AppState {
   return { view: { kind: 'thread', target, from }, deep: false };
 }
 
+/** A panel lens at a sub-route, over the world view. */
+export function inLens(id: PanelLensId, path: string[] = []): AppState {
+  return { view: { kind: 'world' }, deep: false, lens: { id, path } };
+}
+
 /** Enter (or change) the sky. The sky stands over the world view: any focus is left behind, the field stays as it was. */
 export function inSky(sky: SkyState = {}): AppState {
   return { view: { kind: 'world' }, deep: false, sky };
@@ -124,6 +135,8 @@ export function back(s: AppState): AppState {
   // a reading a mode opened returns to that mode, once (the memory is the mode state itself, so it is cleared with it)
   if (s.from) return s.from;
   if (s.deep) return { ...s, deep: false };
+  // a panel lens steps up its own route, then closes onto the Earth
+  if (s.lens) return s.lens.path.length ? { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } } : WORLD;
   if (s.sky) {
     // a card closes onto the sky; the sky closes onto the Earth
     if (s.sky.body) return inSky({ ...(s.sky.birth ? { birth: s.sky.birth } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
@@ -185,12 +198,14 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && (!a.dynamics?.subject) === (!b.dynamics?.subject)
     && (!a.dynamics?.subject || !b.dynamics?.subject || subjectEq(a.dynamics.subject, b.dynamics.subject))
     && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)))
-    && !!a.from === !!b.from;
+    && !!a.from === !!b.from
+    && a.lens?.id === b.lens?.id
+    && (a.lens?.path ?? []).join('/') === (b.lens?.path ?? []).join('/');
 }
 
 /** Depth used to decide whether a move is an ascent (zoom out) or descent. */
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
   return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0)
-    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) : 0);
+    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
 }

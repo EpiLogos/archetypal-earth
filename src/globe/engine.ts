@@ -180,9 +180,31 @@ export class GlobeEngine {
   }
 
   // ── emphasis ───────────────────────────────────────────────────────────
+  /**
+   * Emphasis composes with the field filter here, in one place (MODES-RFC §4): an occurrence the filter excludes is
+   * neither drawn nor picked, whatever a lens asks for it. Lenses never see the filter.
+   */
   setEmphasis(targets: Float32Array | null, tint: [number, number, number] | null) {
-    this.presences.setTargets(targets);
+    this.emphasis = targets ? Float32Array.from(targets) : null;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
     this.presences.setFocusTint(tint ?? [1, 1, 1], !!tint);
+  }
+
+  /** The filter's mask (1 passes, 0 excluded), or null for the whole field. Re-applies the standing emphasis. */
+  setFilterMask(mask: Float32Array | null) {
+    this.filterMask = mask;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
+  }
+
+  private emphasis: Float32Array | null = null;
+  private filterMask: Float32Array | null = null;
+
+  private composeFilter(targets: Float32Array | null): Float32Array | null {
+    const mask = this.filterMask;
+    if (!mask) return targets;
+    const out = targets ? Float32Array.from(targets) : new Float32Array(mask.length).fill(1);
+    for (let i = 0; i < out.length; i++) if (!mask[i]) out[i] = 0;
+    return out;
   }
 
   // ── projection helpers for DOM overlays ────────────────────────────────

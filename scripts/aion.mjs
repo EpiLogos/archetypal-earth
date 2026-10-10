@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { createNormalizer, OCR_VERSION } from './lib/ocr.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const DEFAULT_VAULT = path.join(os.homedir(), 'Documents/books/jung-archetypal-field');
+export { DEFAULT_VAULT } from './lib/vault.mjs';
+import { DEFAULT_VAULT } from './lib/vault.mjs';
 const POLARITIES = new Set(['light', 'shadow', 'union', 'neutral']);
 const HEX = /^#[0-9a-f]{6}$/i;
 // Quotes use the existing OCR module's safe mode: whitespace/ligatures only, never word repair.

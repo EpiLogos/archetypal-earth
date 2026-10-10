@@ -17,13 +17,7 @@
   text-shadow: 0 1px 14px rgb(var(--deep-rgb)); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease);
 }
 .sky-caption.on { opacity: 1; }
-.sky-switch { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .4s, border-color .4s; }
-.sky-switch:hover { color: var(--ink); }
-.sky-switch[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / .4); }
-.sky-switch:disabled { opacity: .35; cursor: default; }
-body.search-open .sky-switch, body.deep-open .sky-switch { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .sky-switch { font-size: 11px; }
   .sky-caption { left: 18px; bottom: 92px; }
 }
 @media (prefers-reduced-motion: reduce) {

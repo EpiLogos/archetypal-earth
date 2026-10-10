@@ -8,8 +8,12 @@ import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
-import { defaultReadingId, hashToState, stateToHash } from '../state/router';
-import { back, focusOn, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
+import { defaultReadingId, hashToState, hashWithFilter } from '../state/router';
+import { back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
+import { Shell } from '../shell/shell';
+import { Panel } from '../shell/panel';
+import { lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
+import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
@@ -20,7 +24,7 @@ import { Reveal } from '../ui/reveal';
 import { SearchUI } from '../ui/search';
 import { Strip } from '../ui/strip';
 import { TimeControl } from '../ui/time-control';
-import { isNarrow, onReadGesture } from '../ui/dom';
+import { el, isNarrow, onReadGesture } from '../ui/dom';
 import { eraShort } from '../data/text';
 import { GraphView, type Insets } from '../graph/view';
 import { ModeSwitch } from '../graph/switch';
@@ -32,7 +36,6 @@ import { RedBookView } from '../redbook/view';
 import { DynamicsView, selfSubject } from '../dynamics/view';
 import { loadDynamics } from '../dynamics/load';
 import { PassageSheet } from '../ui/passage';
-import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
 import { SkyLive } from '../sky/live';
@@ -99,17 +102,24 @@ export class Controller {
   private graphMode = false;
   private pauseTimer = 0;
   private aion: AionView | null = null;
-  private aionSwitch: HTMLButtonElement;
+  /** the one frame of chrome (MODES-RFC §2) and its panel for the panel lenses */
+  readonly shell: Shell;
+  private panel: Panel;
+  private chrome: LensChrome;
+  /** the field filter (MODES-RFC §4): one for every lens; the engine composes it with any emphasis */
+  private filter: FieldFilter = {};
+  private filterMask: Float32Array | null = null;
+  private lensInst = new Map<PanelLensId, LensInstance>();
+  private activeLens: PanelLensId | null = null;
+  private lensTok = 0;
   private aionTime: TimeSnapshot | null = null;
   private redbook: RedBookView | null = null;
-  private redbookSwitch: HTMLButtonElement;
   private rbTime: TimeSnapshot | null = null;
   /** the range the control held before the Red Book (restored with rbTime), and the Book's own span on the scale */
   private rbRange: TimeSpan | null = null;
   private rbSpan: TimeSpan | null = null;
   /** the dynamical lens: a third mode over the world view; its clock and range are restored on leaving (as the Red Book's are) */
   private lens: DynamicsView;
-  private lensSwitch: HTMLButtonElement;
   private lensTime: TimeSnapshot | null = null;
   private lensRange: TimeSpan | null = null;
   /** the focused subject whose chronology stands on the globe (empty: none) */
@@ -121,7 +131,6 @@ export class Controller {
   private skyView: SkyView;
   private skyCard: SkyCard;
   private skyTies = new SkyTies();
-  private skySwitch: HTMLButtonElement;
   private skyLayer: SkyLayer | null = null;
   private birthPanel: BirthPanel;
   private sidecar: SidecarClient;
@@ -181,6 +190,20 @@ export class Controller {
       if (open) this.hover.hide();
     });
 
+    // the shell: one title, one menu, the filter, the corners. Every lens fills its chrome through it.
+    const workNames = new Map<string, string>();
+    for (const o of m.occ) for (const c of o.jung) if (!workNames.has(c.work)) workNames.set(c.work, c.workTitle);
+    this.shell = new Shell(document.body, {
+      onLens: (id) => this.openLens(id),
+      onSearch: (anchor) => this.search.open(anchor),
+      onFilter: (f) => this.setFilter(f),
+      countFor: (f) => m.occ.reduce((n, o) => n + (passes(o, f) ? 1 : 0), 0),
+      works: [...workNames].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)),
+      cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
+    });
+    this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
+    this.panel = new Panel(root, () => this.stepBack());
+
     // the graph: a second view of the same field, between the globe and the quiet overlay
     this.graph = new GraphView(document.body, m, time, {
       onSelect: (key) => this.onGraphSelect(key),
@@ -189,21 +212,15 @@ export class Controller {
     }, engine.reduced);
     root.before(this.graph.root);
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
-    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages, occId => this.openReading(occId));
-    this.aionSwitch = el('button', { type: 'button', class: 'aion-switch', text: 'Aion', title: history ? 'Archetypal history (A)' : 'Aion history data is unavailable', 'aria-pressed': 'false', disabled: !history,
-      onclick: () => this.toggleAion() });
+    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages, occId => this.openReading(occId), this.chrome);
 
-    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id), occId => this.openReading(occId)) : null;
+    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state), id => this.tuneToFolio(id), occId => this.openReading(occId), this.chrome) : null;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
     if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]), this.fullSpan());
-    this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
-      onclick: () => this.toggleRedbook() });
 
     // the concept data is optional (absent is the normal state, shown as none); a malformed file is reported, never hidden
-    this.lens = new DynamicsView(root, m, engine, time, state => this.navigate(state), passages, null);
+    this.lens = new DynamicsView(root, m, engine, time, state => this.navigate(state), passages, null, this.chrome);
     void loadDynamics().then((data) => this.lens.setConcepts(data)).catch((err) => console.error(err));
-    this.lensSwitch = el('button', { type: 'button', class: 'dy-switch', text: 'Dynamics', title: 'The field as a dynamical system (D)', 'aria-pressed': 'false',
-      onclick: () => this.toggleLens() });
 
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
@@ -228,16 +245,8 @@ export class Controller {
       nameOf: (key) => this.skyName(key),
       onOpen: () => void this.probeSidecar(),
     });
-    this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
-      onclick: () => this.toggleSky() });
-    // the four switches stand in one row, in the order they read (Dynamics · Red Book · Sky · Aion), so the gaps are even and
-    // Tab follows the eye; the row sits before the mode pill and the search glyph, which follow it in the same order
-    const modeRow = el('nav', { class: 'mode-row', 'aria-label': 'Modes' }, [this.lensSwitch, this.redbookSwitch, this.skySwitch, this.aionSwitch]);
-    const search = document.getElementById('search-btn');
-    if (search) search.before(modeRow, this.modeSwitch.root);
-    else document.body.append(modeRow, this.modeSwitch.root);
-
-    document.getElementById('search-btn')?.addEventListener('click', (e) => this.search.open(e.currentTarget as HTMLElement));
+    // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens
+    this.shell.setAside(this.modeSwitch.root);
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('hashchange', this.onHash);
     window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); this.syncGraphInsets(); });
@@ -322,6 +331,7 @@ export class Controller {
       this.time.scrub(this.m.scale.toU(parsed.year));
       this.time.pause();
     }
+    this.applyFilter(parsed.filter);
     this.apply(parsed.state);
     this.started = true;
     this.syncHash(parsed.state, true);
@@ -360,11 +370,12 @@ export class Controller {
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
     }
+    if (!filterEq(parsed.filter, this.filter)) this.applyFilter(parsed.filter);
     this.apply(parsed.state);
   };
 
   private syncHash(s: AppState, replace = false) {
-    const h = stateToHash(s);
+    const h = hashWithFilter(s, this.filter);
     if (location.hash === h || (h === '#/' && (location.hash === '' || location.hash === '#'))) return;
     if (replace) {
       history.replaceState(null, '', h);
@@ -379,7 +390,7 @@ export class Controller {
     if (stateEq(next, this.state)) return;
     if (next.view.kind === 'thread') {
       const t = next.view.target;
-      if (planThread(this.m, t.type, t.id).length < 2) next = { view: next.view.from, deep: false };
+      if (this.plan(t.type, t.id).length < 2) next = { view: next.view.from, deep: false };
       if (stateEq(next, this.state)) return;
     }
     this.apply(next);
@@ -442,7 +453,7 @@ export class Controller {
       if (v.target.type !== 'parallels' && this.inSubject(ts, i)) ctx = ts;
     }
     const trail = v.kind === 'thread' ? v : s.trail;
-    const inTrail = trail && planThread(this.m, trail.target.type, trail.target.id).some(step => step.occ === i);
+    const inTrail = trail && this.plan(trail.target.type, trail.target.id).some(step => step.occ === i);
     return { view: { kind: 'manifest', occId: id, context: ctx }, deep: false, ...(inTrail ? { trail } : {}), ...(s.graph && !inTrail ? { graph: true as const } : {}) };
   }
 
@@ -499,6 +510,16 @@ export class Controller {
       return;
     }
     if (this.search.isOpen) return;
+    if (e.key.toLowerCase() === 'm' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.shell.toggleMenu(); e.preventDefault(); return;
+    }
+    if (this.shell.menuOpen) return;
+    if (e.key.toLowerCase() === 'f' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.openLens('field'); e.preventDefault(); return;
+    }
+    if (e.key.toLowerCase() === 't' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.openLens(this.state.lens?.id === 'theory' ? 'field' : 'theory'); e.preventDefault(); return;
+    }
     if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleAion(); e.preventDefault(); return;
     }
@@ -645,8 +666,6 @@ export class Controller {
     }
     this.rbTime = null;
     this.rbRange = null;
-    // the Red Book's title goes with it: the next state sets its own (a focus, Aion or the world does), else the world's
-    document.title = 'An Archetypal Earth';
     // leaving to the plain world: the Red Book's red must give way (not when a link is carrying us straight
     // into Aion, a focus or the lens, which set palettes)
     if (v.kind === 'world' && !next.sky && !graph && !next.history && !next.dynamics) this.enterWorld(false);
@@ -685,7 +704,6 @@ export class Controller {
     this.engine.setEmphasis(this.emphasise(idx), pal.core);
     this.timeControl.setSubject(idx, rgbToHex(pal.core));
     this.lens.show(next.dynamics);
-    document.title = `${subjectName(m, subject)}, the dynamical lens — An Archetypal Earth`;
   }
 
   /** Leave the lens: its panel and strip go, the globe's emphasis goes, and the clock and range it held are given back. */
@@ -698,8 +716,6 @@ export class Controller {
     if (this.lensTime) this.time.restore(this.lensTime);
     this.lensTime = null;
     this.lensRange = null;
-    // the lens's own title goes with it: the next state sets its own (a focus or a thread does), else the world's
-    document.title = 'An Archetypal Earth';
     // the world's palette returns unless the next state sets its own (a focus, Aion or the Red Book do; the sky holds its own)
     if (next.view.kind === 'world' && !next.history && !next.redbook) {
       if (next.sky) this.engine.setPalette(WORLD_PALETTE, 1.6);
@@ -709,6 +725,133 @@ export class Controller {
 
   private toggleLens() {
     this.navigate(this.state.dynamics ? WORLD : { view: { kind: 'world' }, deep: false, dynamics: {} });
+  }
+
+  // ── the shell: lenses and the filter (MODES-RFC) ─────────────────────
+  /** Open a lens from the menu or a key: each lens's own landing state, always through navigate(). */
+  openLens(id: LensId) {
+    switch (id) {
+      case 'field': return this.navigate(this.state.graph ? { view: { kind: 'world' }, deep: false, graph: true } : WORLD);
+      case 'aion': {
+        const reading = this.aion ? defaultReadingId(this.aion.history.readings) : undefined;
+        if (reading) this.navigate({ view: { kind: 'world' }, deep: false, history: { reading } });
+        return;
+      }
+      case 'redbook': if (this.redbook) this.navigate({ view: { kind: 'world' }, deep: false, redbook: {} }); return;
+      default: this.navigate(inLens(id));
+    }
+  }
+
+  /** The shell follows the state: the active lens, and the context line reset for the lens that is about to fill it. */
+  private syncShell(next: AppState) {
+    const lens = lensOf(next);
+    this.shell.setLens(lens);
+    const fieldLens = lens === 'field';
+    this.shell.setAside(fieldLens ? this.modeSwitch.root : null);
+    // every lens fills its own context and controls as it shows; the field's context is its focus (set below)
+    this.shell.setControls(null);
+    if (fieldLens && next.view.kind === 'world') this.shell.setContext(next.sky ? 'The sky' : '');
+  }
+
+  /** A filter chosen in the menu, a chip removed, or a link's filter: the globe's mask, the walks, the hash. */
+  private setFilter(f: FieldFilter) {
+    if (filterEq(f, this.filter)) return;
+    this.applyFilter(f);
+    // the engine re-masks by itself; what reads the field's membership (a focus's framing and images, a walk) is re-entered
+    const s = this.state;
+    const v = s.view;
+    if (!s.history && !s.redbook && !s.dynamics && !s.lens && !s.graph) {
+      if (v.kind === 'focus') this.enterFocus(v.subject, false);
+      else if (v.kind === 'thread') {
+        // a walk the filter leaves too short to walk returns to where it began
+        if (this.plan(v.target.type, v.target.id).length < 2) { this.navigate({ view: v.from, deep: false }, { replace: true }); return; }
+        this.endThread(); this.enterThread(v.target, v.from, false);
+      }
+    }
+    if (s.graph) this.syncGraph();
+    this.syncHash(s, true);
+  }
+
+  private applyFilter(f: FieldFilter) {
+    this.filter = f;
+    this.filterMask = maskOf(this.m.occ, f);
+    this.engine.setFilterMask(this.filterMask);
+    this.shell.setFilter(f);
+    this.setCache.key = '';
+    document.body.classList.toggle('filtered', !isEmpty(f));
+  }
+
+  /** Does occurrence `i` pass the field filter? */
+  private passing(i: number): boolean {
+    return !this.filterMask || this.filterMask[i] > 0;
+  }
+
+  /** A thread's walk over the filtered field. */
+  private plan(type: ThreadTarget['type'], id: string): ThreadStep[] {
+    const steps = planThread(this.m, type, id);
+    return this.filterMask ? steps.filter((st) => this.passing(st.occ)) : steps;
+  }
+
+  /** The context a panel lens is given: the shell's frame and a narrow door back into the field. */
+  private lensContext(id: PanelLensId): LensContext {
+    return {
+      model: this.m,
+      engine: this.engine,
+      time: this.time,
+      panel: this.panel,
+      setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
+      setControls: (n) => { if (this.activeLens === id) this.shell.setControls(n); },
+      navigate: (st) => this.navigate(st),
+      filter: () => this.filter,
+      passages: this.passage.bridge(),
+      focus: (subject) => this.navigate(focusOn(WORLD, subject)),
+      openOccurrence: (occId) => this.openReading(occId),
+      setPath: (path, opts) => { if (this.activeLens === id) this.navigate(inLens(id, path), opts); },
+    };
+  }
+
+  /** Enter a panel lens: every other mode hands over, the code loads on first use, then the lens shows its route. */
+  private enterPanelLens(prev: AppState, next: AppState, first: boolean) {
+    const id = next.lens!.id;
+    if (this.tour) this.endThread();
+    if (prev.history) this.leaveAion();
+    if (prev.redbook) this.leaveRedbook(next);
+    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    document.body.classList.remove('deep-open', 'thread-inspecting');
+    this.syncSky(prev, next, first, false);
+    if (this.graphMode) this.syncMode(false, first, true);
+    if (!prev.lens || prev.lens.id !== id) {
+      this.engine.setEmphasis(null, null);
+      this.engine.setPalette(WORLD_PALETTE, first ? 0.01 : 1.6);
+      this.timeControl.setSubject(null, '#ffffff');
+    }
+    this.activeLens = id;
+    // the globe gives the panel room, as it does a card
+    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? 0.26 : 0);
+    const path = next.lens!.path;
+    const have = this.lensInst.get(id);
+    if (have) { have.enter(path); return; }
+    const tok = ++this.lensTok;
+    document.body.classList.add('lens-loading');
+    PANEL_LOADERS[id]().then((mod) => {
+      document.body.classList.remove('lens-loading');
+      if (!this.lensInst.has(id)) this.lensInst.set(id, mod.mount(this.lensContext(id)));
+      if (tok !== this.lensTok || this.state.lens?.id !== id) return;
+      this.lensInst.get(id)!.enter(this.state.lens.path);
+    }).catch((err) => {
+      document.body.classList.remove('lens-loading');
+      console.error(err);
+      this.panel.open('Lens unavailable', [el('p', { class: 'lp-error', text: 'This lens could not be loaded. Check the connection and try again.' })]);
+    });
+  }
+
+  private leavePanelLens() {
+    const id = this.activeLens;
+    this.activeLens = null;
+    this.lensTok++;
+    if (id) this.lensInst.get(id)?.leave();
+    this.panel.close();
+    this.engine.rig.setShift(0, 0);
   }
 
   // ── applying a state ──────────────────────────────────────────────────
@@ -723,9 +866,14 @@ export class Controller {
     const graph = !!next.graph;
     const modeChanged = first ? graph : !!prev.graph !== graph;
     this.syncMode(graph, first, modeChanged);
-    this.aionSwitch.setAttribute('aria-pressed', String(!!next.history));
-    this.redbookSwitch.setAttribute('aria-pressed', String(!!next.redbook));
-    this.lensSwitch.setAttribute('aria-pressed', String(!!next.dynamics));
+    this.syncShell(next);
+    // a panel lens hands over before anything else takes the scene; a panel lens state is handled whole here
+    if (prev.lens && prev.lens.id !== next.lens?.id) this.leavePanelLens();
+    if (next.lens) {
+      if (prev.dynamics && !next.dynamics) this.leaveLens(next);
+      this.enterPanelLens(prev, next, first);
+      return;
+    }
     // the lens hands its clock back before anything else takes the clock (a Red Book or Aion entry snapshots the restored one)
     if (prev.dynamics && !next.dynamics) this.leaveLens(next);
     if (next.dynamics) { this.enterLens(prev, next, first); return; }
@@ -897,8 +1045,6 @@ export class Controller {
       this.syncRig(); // no sky is coming: the pull-back's resistance beyond the atlas's limit ends
       for (const w of this.layerWaiters.splice(0)) w(null);
       console.warn(err);
-      this.skySwitch.disabled = true;
-      this.skySwitch.title = 'The sky data is unavailable.';
       this.pendingSkyEntry = null;
     });
   }
@@ -1005,7 +1151,6 @@ export class Controller {
     this.skyView.relabel();
     this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
     if (on) this.syncSkyCard(); else this.skyCard.hide();
-    this.skySwitch.setAttribute('aria-pressed', String(on));
     this.syncBirth(prev.sky?.birth, next.sky?.birth, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
@@ -1329,7 +1474,7 @@ export class Controller {
     e.markers.sel.hide();
     this.timeControl.setSubject(null, '#ffffff');
     this.setBody(null);
-    document.title = 'An Archetypal Earth';
+    this.shell.setContext('');
     if (!first && !this.graphMode) {
       const c = e.rig.centre();
       e.rig.flyTo(c.lat, c.lon, Math.max(e.rig.dist, this.worldDist()), { duration: 2.0 });
@@ -1375,7 +1520,7 @@ export class Controller {
   private enterFocus(subject: Subject, first: boolean) {
     const m = this.m;
     const e = this.engine;
-    const idx = subjectOccurrences(m, subject);
+    const idx = subjectOccurrences(m, subject).filter((i) => this.passing(i));
     const pal = this.subjectPal(subject);
     e.setPalette(pal, first ? 0.01 : 1.5);
     this.reveal.hide();
@@ -1386,7 +1531,7 @@ export class Controller {
       this.timeControl.setSubject(idx, rgbToHex(pal.core));
       this.setLabelFor(subject);
       this.setBody(subject.type);
-      document.title = `${subjectName(m, subject)} — An Archetypal Earth`;
+      this.shell.setContext(subjectName(m, subject));
       return;
     }
     e.setEmphasis(this.emphasise(idx), pal.core);
@@ -1396,7 +1541,7 @@ export class Controller {
     this.timeControl.setSubject(idx, rgbToHex(pal.core));
     this.setLabelFor(subject);
     this.setBody(subject.type);
-    document.title = `${subjectName(m, subject)} — An Archetypal Earth`;
+    this.shell.setContext(subjectName(m, subject));
   }
 
   private setLabelFor(subject: Subject) {
@@ -1552,14 +1697,14 @@ export class Controller {
     this.reveal.show(oi);
     this.timeControl.setSubject(m.famOcc.get(o.familyId) ?? null, rgbToHex(famPal.core));
     this.label.set({ name: subjectName(m, context), back: () => this.stepBack() }, `m:${context.type}:${context.id}`);
-    document.title = `${o.label} — An Archetypal Earth`;
+    this.shell.setContext(o.label);
   }
 
   // ── thread ────────────────────────────────────────────────────────────
   private enterThread(target: ThreadTarget, _from: View, first: boolean) {
     const m = this.m;
     const e = this.engine;
-    const steps = planThread(m, target.type, target.id);
+    const steps = this.plan(target.type, target.id);
     const subject: Subject = target.type === 'parallels'
       ? { type: 'family', id: m.occ[m.occIndex.get(target.id)!].familyId }
       : { type: target.type, id: target.id };
@@ -1603,7 +1748,7 @@ export class Controller {
       up: [{ text: 'the whole field', onClick: () => this.stepBack() }],
       links: [{ text: 'Reading', onClick: () => this.setDeep(true) }],
     }, `t:${target.type}:${target.id}`);
-    document.title = `${name}, the thread — An Archetypal Earth`;
+    this.shell.setContext(`${name}, the thread`);
 
     this.tour = { steps, i: -1, playing: true, phase: 'intro', timer: first || e.reduced ? 0.4 : 3.1, tok: ++this.tokCounter, draw: first ? 1 : 0, head: 0, subject, target };
     this.timeControl.setTour(true, () => this.tourToggle());
@@ -1709,6 +1854,7 @@ export class Controller {
     this.skyView.tick();
     this.aion?.update(dt);
     this.lens.update(dt);
+    if (this.activeLens) this.lensInst.get(this.activeLens)?.update?.(dt);
     this.floats.update(this.engine, dt);
     // the chronology travels with the cursor; a walk's arcs own the field while one stands
     if (this.chronoKey) {
@@ -1743,7 +1889,7 @@ export class Controller {
   private inSubject(s: Subject, idx: number): boolean {
     const key = `${s.type}:${s.id}`;
     if (this.setCache.key !== key) {
-      this.setCache = { key, set: new Set(subjectOccurrences(this.m, s)) };
+      this.setCache = { key, set: new Set(subjectOccurrences(this.m, s).filter((i) => this.passing(i))) };
     }
     return this.setCache.set.has(idx);
   }
