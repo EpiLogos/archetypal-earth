@@ -11,7 +11,7 @@ import { quoteBlock, type LensQuote } from './ui';
 /** The archetypes that have a deep field (kept in step with curation/depth/ by tests/data/lenses.test.ts). */
 const DREAMS = 5;
 
-export const DEEP_FIELDS: ReadonlySet<string> = new Set(['great-mother']);
+export { DEEP_FIELDS } from './deep-fields';
 
 export interface DepthSection { id: string; title: string; line: string; quotes: (LensQuote & { speaker?: string })[]; families: string[] }
 export interface DepthInstance { year: number; yearDisplay: string; place: string; note: string; text: string; cite: LensQuote['cite'] }
