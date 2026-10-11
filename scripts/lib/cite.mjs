@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createNormalizer } from './ocr.mjs';
+import { stripFootnoteMarkers } from './display.mjs';
 import { externalMarkdown } from './external.mjs';
 
 const normalizer = createNormalizer({ freq: new Map(), english: new Set(), pairs: new Map() });
@@ -104,13 +105,22 @@ function pageOf(corpus, at) {
   return best;
 }
 
-/** Every place the words stand, any run of whitespace between them matching any other (a removed marker leaves a gap). */
-function findAll(hay, needle) {
+/**
+ * Every place the words stand, as full match arrays: any run of whitespace between them matching any other (a removed
+ * marker leaves a gap). The display cleaner completes truncated quotes from the matched span's end, so the whole match
+ * is returned, not just its start.
+ */
+export function findMatches(hay, needle) {
   // typography only is folded (curly and straight quotes, the three dashes); every letter must still match
   const fold = (w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/['‘’]/g, "['‘’]").replace(/["“”]/g, '["“”]').replace(/[-–—]/g, '[-–—]');
   const words = needle.split(/\s+/).filter(Boolean).map(fold);
+  if (!words.length) return [];
   const re = new RegExp(words.join('\\s+'), 'gu');
-  return [...hay.matchAll(re)].map((m) => m.index);
+  return [...hay.matchAll(re)];
+}
+
+function findAll(hay, needle) {
+  return findMatches(hay, needle).map((m) => m.index);
 }
 
 /**
@@ -183,6 +193,11 @@ export function verify(load, { work, locator, quote }) {
   const end = idx + 1 < corpus.pages.length ? corpus.pages[idx + 1].at : corpus.text.length;
   const needle = norm(quote).replace(/\*\*¶\d+\*\*\s*/g, '').trim();
   if (findAll(corpus.text, needle).some((at) => at >= start && at < end)) return null;
+  // a published display string is cleaned of the scan's glued footnote digits after placement; the printed words it
+  // shows must still stand on the cited page once both sides fold those digits away
+  const folded = stripFootnoteMarkers(needle);
+  const displayText = corpus.displayFold || (corpus.displayFold = stripFootnoteMarkers(corpus.text));
+  if (findAll(displayText, folded).some((at) => at >= start && at < end)) return null;
   // the same scan-damage reading locate() allows on a named page
   return findOnPageThroughScan(corpus, idx, needle) >= 0 ? null : `${work} ${locator}: quotation not verbatim on the cited page: "${quote.slice(0, 60)}…"`;
 }
