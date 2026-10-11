@@ -98,3 +98,8 @@
 .sky-chart-mark.on { opacity: .8; }
 .sky-chart-angle { color: var(--ink-2); letter-spacing: .08em; }
 @media (prefers-reduced-motion: reduce) { .sky-chart-mark { transition: none; } }
+/* the zodiac glyphs, drawn in the band (src/sky/zodiac.ts): strokes in the foil's colour with a soft glow */
+.sky-chart-glyph { display: block; }
+.sky-chart-glyph.on { opacity: .95; }
+.sky-chart-glyph .zg { display: block; width: 100%; height: 100%; overflow: visible; }
+.sky-chart-glyph .zg path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; vector-effect: none; filter: drop-shadow(0 0 3px currentColor); }

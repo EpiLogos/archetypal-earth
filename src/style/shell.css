@@ -395,3 +395,4 @@ body.landing-on .time { opacity: 0.35; }
 .po-earth-mark { fill: rgb(140 190 255 / 0.8); font: 500 11px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
 .as-whole { list-style: none; margin: 8px 0 14px; padding: 0; }
 @media (max-width: 720px) { body.po-holding .sky-culture, body.po-holding .sky-caption { display: none; } }
+@media (max-width: 720px) { body.natal-sky .sky-culture, body.natal-sky .sky-caption { display: none; } }

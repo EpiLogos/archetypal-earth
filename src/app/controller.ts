@@ -1,5 +1,6 @@
 // The conductor: owns the state machine, the hash, and the choreography between
 // the globe (camera, atmosphere, emphasis, arcs) and the quiet DOM layers.
+import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
 import { archetypesOfFamily, selfSubject, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette } from '../data/model';
 import { angleBetween, dirFromLatLon, fitDistance, spreadOf, worldDistance, type Vec3 } from '../data/geo';
@@ -886,7 +887,7 @@ export class Controller {
     this.activeLens = id;
     // the globe gives the panel room, as it does a card; an approached body (the Astrology walk) is centred in the space
     // a phone's half sheet leaves above it, as a planet's card does
-    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : 0.26) : 0);
+    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
     const path = next.lens!.path;
     const have = this.lensInst.get(id);
     if (have) { have.enter(path); return; }
@@ -1126,7 +1127,11 @@ export class Controller {
     this.approachOn = key;
     layer.setApproach(key, instant);
     if (key) e.rig.flyTo(ll.lat, ll.lon, this.approachDistOf(key, aspect), { instant, duration: 3.2 });
-    else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+    else if (this.state.sky?.natal) {
+      // a birth sky: the zodiacal ring framed from above (as syncApproach does on the way back from a body)
+      const cl = systemViewLatLon(layer.sunLongitude() + 90, 58, layer.gmst, layer.eps);
+      e.rig.flyTo(cl.lat, cl.lon, Math.min(e.rig.maxDist, this.chartFrameDist(aspect)), { instant, duration: 4.2 });
+    } else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
   }
 
   /**
@@ -1177,7 +1182,22 @@ export class Controller {
       });
       return;
     }
+    if (!key && this.state.sky?.natal) {
+      // a birth sky with no body held: frame the zodiacal ring, seen from well above the ecliptic so the band and its
+      // glyphs read, filling most of the space the panel leaves
+      const ll = systemViewLatLon(layer.sunLongitude() + 90, 58, layer.gmst, layer.eps);
+      e.rig.flyTo(ll.lat, ll.lon, Math.min(e.rig.maxDist, this.chartFrameDist(aspect)), { duration: 3.2 });
+      return;
+    }
     e.rig.flyTo(c.lat, c.lon, key ? this.approachDistOf(key, aspect) : systemHomeDist(aspect, FOV), { duration: 3.2 });
+  }
+
+  /** The distance at which a birth chart's ring fills about two thirds of the view's narrower side. */
+  private chartFrameDist(aspect: number): number {
+    const tanHalf = Math.tan((FOV * Math.PI) / 360);
+    // a phone gives the ring the band between the title and the half sheet: about a quarter of the height
+    const fill = isNarrow() ? 0.5 * aspect : 0.66 * Math.min(1, aspect * 0.72);
+    return (CHART_RADIUS * 1.15) / (fill * tanHalf);
   }
 
   /** The sky is left: the approach lets go (the look-at eases back to the Sun; the caller's flight brings the camera). */
@@ -1260,6 +1280,9 @@ export class Controller {
    * this browser's storage or from the curation (Jung), never from the URL, and nothing is sent anywhere.
    */
   private syncNatal(prev: string | undefined, next: string | undefined, inSkyNow: boolean) {
+    // a phone gives a birth sky its whole upper band: the sky's names control and caption step aside (Astrology's panel
+    // carries the chart's reading)
+    document.body.classList.toggle('natal-sky', !!next && inSkyNow);
     if (prev === next) return;
     void this.applyNatal(next, inSkyNow);
   }
