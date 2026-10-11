@@ -614,7 +614,7 @@ export class Controller {
       this.openLens('field'); e.preventDefault(); return;
     }
     if (e.key.toLowerCase() === 't' && !e.metaKey && !e.ctrlKey && !e.altKey) {
-      this.openLens(this.state.lens?.id === 'theory' ? 'field' : 'theory'); e.preventDefault(); return;
+      this.openLens('theory'); e.preventDefault(); return;
     }
     if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleAion(); e.preventDefault(); return;
@@ -863,6 +863,7 @@ export class Controller {
         return;
       }
       case 'redbook': if (this.redbookData) this.navigate({ view: { kind: 'world' }, deep: false, redbook: {} }); return;
+      case 'theory': return this.navigate(this.state.dynamics ? WORLD : { view: { kind: 'world' }, deep: false, dynamics: {} });
       default: this.navigate(inLens(id));
     }
   }

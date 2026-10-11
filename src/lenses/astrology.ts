@@ -368,26 +368,10 @@ export function mount(ctx: LensContext): LensInstance {
 
   return {
     enter(path) {
-      if (data) {
-        // opening the lens with no chart lands on one, zoomed out: yours if you have cast it, otherwise Jung's
-        if (!path[0]) {
-          const id = charts.has(YOU) ? YOU : (charts.has('jung') ? 'jung' : '');
-          if (id) { ctx.setPath([id], { replace: true }); return; }
-        }
-        render(path);
-        return;
-      }
+      if (data) { render(path); return; }
       if (failed) return;
       ctx.panel.open('Astrology', [el('p', { class: 'lp-sub', text: 'Loading…' })], { height: 'full' });
-      loadLensData<AstrologyData>('astrology').then((d) => {
-        data = d;
-        refreshCharts();
-        if (!path[0]) {
-          const id = charts.has(YOU) ? YOU : (charts.has('jung') ? 'jung' : '');
-          if (id) { ctx.setPath([id], { replace: true }); return; }
-        }
-        render(path);
-      }).catch((err) => {
+      loadLensData<AstrologyData>('astrology').then((d) => { data = d; refreshCharts(); render(path); }).catch((err) => {
         failed = true;
         console.error(err);
         ctx.panel.replace([el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })]);

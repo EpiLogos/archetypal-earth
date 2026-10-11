@@ -39,7 +39,7 @@
   bottom: calc(var(--dy-strip-bottom) + var(--dy-strip-h) + 14px);
   max-height: calc(100vh - var(--dy-strip-bottom) - var(--dy-strip-h) - 52px);
 }
-.dy-hero { margin: 0; }
+.dy-hero { margin: 0 0 28px; padding-top: 14px; }
 .dy-hero-canvas { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.25); outline-offset: 5px; background: rgb(var(--deep-rgb)); }
 .dy-hero-canvas.dy-fractal { cursor: grab; touch-action: none; }
 .dy-hero-canvas.dy-fractal:active { cursor: grabbing; }
