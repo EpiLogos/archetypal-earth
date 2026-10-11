@@ -84,7 +84,8 @@ describe('corpus index (citation deep links)', () => {
     expect(parseLocator('fig. 131, ¶357 (pdf p268)')).toEqual({ para: 357, pages: [268, undefined] });
   });
 
-  it('round-trips the vault citation spine through the parsed corpus', () => {
+  // the spine round-trip parses every corpus volume; give it room beyond the 5s default under load
+  it('round-trips the vault citation spine through the parsed corpus', { timeout: 60_000 }, () => {
     const spine = fs.readFileSync(path.join(vault, 'data', 'paragraphs.jsonl'), 'utf8').split('\n').filter(Boolean);
     let checked = 0;
     for (const line of spine) {
