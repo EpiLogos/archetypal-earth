@@ -13,16 +13,28 @@ const edges = new Set(graph.edges.filter((e) => e.kind !== 'parallel').map((e) =
 
 describe('graph of the real field', () => {
   it('keeps every real entity and occurrence', () => {
-    expect(graph.nodes.length).toBe(field.archetypes.length + field.families.length + field.occurrences.length);
+    expect(graph.nodes.length).toBe(field.archetypes.length + field.theoretics.length + field.families.length + field.occurrences.length);
     expect(graph.byKey.size).toBe(graph.nodes.length);
     expect(graph.nodes[graph.byKey.get('a:self')!].prime).toBe(true);
     expect(field.occurrences.every((o) => graph.byKey.has(`o:${o.id}`))).toBe(true);
+    expect(field.theoretics.every((t) => graph.byKey.has(`t:${t.id}`))).toBe(true);
   });
 
   it('carries the source family, co-family and authored tie relations without losing their basis', () => {
     const expected = new Set<string>();
     for (const f of field.families) {
       for (const t of f.archetypes) expected.add(`f:${f.id}|a:${t.id}|tie|${t.basis}`);
+    }
+    // the archetypes' own ties to one another (the number archetypes' tie to the Self, the dyad's to syzygy and
+    // shadow): the same law as the theoretics' ties, carried from curation alone
+    for (const a of field.archetypes) {
+      for (const tie of a.archetypes ?? []) expected.add(`a:${a.id}|a:${tie.id}|tie|${tie.basis}`);
+    }
+    // the theoretics' own ties: to archetypes, to families, and to one another (the theoretical web)
+    for (const t of field.theoretics) {
+      for (const tie of t.archetypes) expected.add(`t:${t.id}|a:${tie.id}|tie|${tie.basis}`);
+      for (const tie of t.families) expected.add(`t:${t.id}|f:${tie.id}|tie|${tie.basis}`);
+      for (const tie of t.theoretics) if (tie.id !== t.id) expected.add(`t:${t.id}|t:${tie.id}|tie|${tie.basis}`);
     }
     for (const o of field.occurrences) {
       expected.add(`o:${o.id}|f:${o.familyId}|instance|`);
@@ -46,8 +58,10 @@ describe('graph of the real field', () => {
   it('shows Self’s directly tied forms at one step and their real manifestations at two', () => {
     const self = graph.byKey.get('a:self')!;
     const directFamilies = field.families.filter((f) => f.archetypes.some((t) => t.id === 'self'));
+    const directTheoretics = field.theoretics.filter((t) => t.archetypes.some((x) => x.id === 'self'));
+    const directArchetypes = field.archetypes.filter((a) => (a.archetypes ?? []).some((x) => x.id === 'self'));
     const one = neighbourhood(graph, [self], { depth: 1, cap: graph.nodes.length });
-    expect(new Set([...one.dist.keys()].map((id) => graph.nodes[id].key))).toEqual(new Set(['a:self', ...directFamilies.map((f) => `f:${f.id}`)]));
+    expect(new Set([...one.dist.keys()].map((id) => graph.nodes[id].key))).toEqual(new Set(['a:self', ...directFamilies.map((f) => `f:${f.id}`), ...directTheoretics.map((t) => `t:${t.id}`), ...directArchetypes.map((a) => `a:${a.id}`)]));
     const two = neighbourhood(graph, [self], { depth: 2, cap: graph.nodes.length });
     const formIds = new Set(directFamilies.map((f) => f.id));
     const occurrences = field.occurrences.filter((o) => formIds.has(o.familyId) || o.coFamilyIds.some((f) => formIds.has(f)));
@@ -60,14 +74,15 @@ describe('graph of the real field', () => {
     const self = graph.byKey.get('a:self')!;
     const filtered = neighbourhood(graph, [self], { depth: 1, tieBases: ['jung'], cap: graph.nodes.length });
     const authored = field.families.filter((f) => f.archetypes.some((t) => t.id === 'self' && t.basis === 'jung'));
-    expect(new Set([...filtered.dist.keys()].map((id) => graph.nodes[id].key))).toEqual(new Set(['a:self', ...authored.map((f) => `f:${f.id}`)]));
+    const authoredArchetypes = field.archetypes.filter((a) => (a.archetypes ?? []).some((x) => x.id === 'self' && x.basis === 'jung'));
+    expect(new Set([...filtered.dist.keys()].map((id) => graph.nodes[id].key))).toEqual(new Set(['a:self', ...authored.map((f) => `f:${f.id}`), ...authoredArchetypes.map((a) => `a:${a.id}`)]));
     expect(globalSet(graph, true, []).edges.every((k) => graph.edges[k].kind !== 'tie')).toBe(true);
     expect(globalSet(graph, true, []).edges.some((k) => graph.edges[k].kind === 'instance')).toBe(true);
   });
 
   it('can hide occurrence dust while retaining a selected occurrence as a local seed', () => {
     const global = globalSet(graph, false);
-    expect(global.dist.size).toBe(field.archetypes.length + field.families.length);
+    expect(global.dist.size).toBe(field.archetypes.length + field.theoretics.length + field.families.length);
     const seed = graph.occurrenceIds[0];
     const local = neighbourhood(graph, [seed], { depth: 2, occurrences: false });
     expect(local.dist.get(seed)).toBe(0);

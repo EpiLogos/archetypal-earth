@@ -1,0 +1,65 @@
+{
+  "_note": "Individuation: the definition (CW6 ¶757, ¶762), the becoming-in-dividual (CW7 ¶266, CW12 ¶330, CW9i ¶490), its two aspects (CW16 ¶448, CW7 ¶269), the aim and its cost (CW7 ¶405, CW14 ¶778, CW9i ¶705) and the dismantling it requires (CW7 ¶505). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "individuation",
+  "line": "Becoming the whole one already is: not a title or a state but a process with two faces — an inner integration and an outward relation — and a cost the ego does not choose.",
+  "sections": [
+    {
+      "id": "the-process",
+      "title": "The process",
+      "line": "The 1921 definition keeps it neutral: differentiation of the individual being, the opposite pole of collective psychology.",
+      "quotes": [
+        { "work": "cw06", "para": 757, "quote": "In general, it is the process by which individual beings are formed and differentiated; in particular, it is the development of the psychological individual (q.v.) as a being distinct from the general, collective psychology." },
+        { "work": "cw06", "para": 762, "quote": "Individuation is practically the same as the development of consciousness out of the original state of identity" }
+      ]
+    },
+    {
+      "id": "becoming-in-dividual",
+      "title": "Becoming an 'in-dividual'",
+      "line": "The word is made to say its own sense: an indivisible unit — one's own self — and not the ego's individuation, which is a different thing.",
+      "quotes": [
+        { "work": "cw07", "para": 266, "quote": "Individuation means becoming an “in-dividual,” and, in so far as “individuality” embraces our innermost, last, and incomparable uniqueness, it also implies becoming one’s own self." },
+        { "work": "cw12", "para": 330, "quote": "In the last analysis every life is the realization of a whole, that is, of a self, for which reason this realization can also be called “individuation.”" },
+        { "work": "cw09i", "para": 490, "quote": "that is, a separate, indivisible unity or \"whole.\"" }
+      ]
+    },
+    {
+      "id": "two-aspects",
+      "title": "Two aspects",
+      "line": "The process is never only inner: integration and relationship are stated as equally indispensable.",
+      "quotes": [
+        { "work": "cw16", "para": 448, "quote": "Individuation has two principal aspects: in the first place it is an internal and subjective process of integration, and in the second it is an equally indispensable process of objective relationship" },
+        { "work": "cw07", "para": 269, "quote": "The aim of individuation is nothing less than to divest the self of the false wrappings of the persona on the one hand, and of the suggestive power of primordial images on the other" }
+      ]
+    },
+    {
+      "id": "the-aim",
+      "title": "The aim, and what it costs",
+      "line": "The goal is the self as an unknown centre the ego revolves around — and meeting it is a defeat for the ego, not a promotion of it.",
+      "quotes": [
+        { "work": "cw07", "para": 405, "quote": "Sensing the self as something irrational, as an indefinable existent, to which the ego is neither opposed nor subjected, but merely attached, and about which it revolves very much as the earth revolves round the sun—thus we come to the goal of individuation." },
+        { "work": "cw14", "para": 778, "quote": "For this reason the experience of the self is always a defeat for the ego" },
+        { "work": "cw09i", "para": 705, "quote": "but the painful experience of the union of opposites." }
+      ]
+    },
+    {
+      "id": "the-dismantling",
+      "title": "What it requires",
+      "line": "Nothing here can be willed into place: the dissolution of the false face is a condition, and the intention to individuate is one more face.",
+      "quotes": [
+        { "work": "cw07", "para": 505, "quote": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention" }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "archetype", "id": "anima" },
+    { "type": "archetype", "id": "animus" },
+    { "type": "archetype", "id": "child" },
+    { "type": "archetype", "id": "self" },
+    { "type": "archetype", "id": "wise-old-man" },
+    { "type": "family", "id": "mandala" },
+    { "type": "family", "id": "persona" },
+    { "type": "theoretic", "id": "compensation" },
+    { "type": "theoretic", "id": "transcendent-function" }
+  ]
+}

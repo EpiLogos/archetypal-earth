@@ -92,14 +92,16 @@ export function citeQuotes(load, titles, quotes, where, errors, warnings) {
     // verbatim in the corpus and names one place; a completed sentence is corpus text too, but the stem is what was
     // chosen, and it can never name two pages where the whole sentence names one
     const target = completed.stem && completed.stem.split(/\s+/).length >= 5 ? completed.stem : q.quote;
-    const r = locate(load, q.work, target, { para: q.para, page: q.page });
+    const r = locate(load, q.work, target, { para: q.para, page: q.page, pageOnly: q.pageOnly });
     if (r.error) { errors.push(`${where}: ${r.error}`); continue; }
     let locator = r.locator;
     if (r.warning) { warnings.push(`${where}: ${r.warning}`); locator = `pdf p${r.page}`; }
     if (r.note) warnings.push(`${where}: ${r.note}`);
     if (r.scan) warnings.push(`${where}: ${q.work} pdf p${r.page}: placed through scan damage (the printed words; the scan joins or misreads letters)`);
     // the printed page is shown only where the scan's label agrees with its neighbours (trustedPrint)
-    out.push({ text: display, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}) });
+    // `voice` names whose words these are when not the volume author's; `scan` says a curated quotation is kept as a
+    // damaged scan reads it (attested by the curator, never a hand repair)
+    out.push({ text: display, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}), ...(q.scan ? { scan: true } : {}) });
   }
   return out;
 }

@@ -14,6 +14,7 @@ const B = occ('b', { jung: [{ work: 'sem-visions', workTitle: 'Visions', year: '
 
 const r: Resolver = {
   hasArchetype: (id) => id === 'self', hasFamily: (id) => id === 'serpent', hasCulture: (id) => id === 'gnostic', hasPlace: () => false,
+  hasTheoretic: () => false,
   familyOf: (id) => (id === 'a' ? 'serpent' : undefined),
 };
 

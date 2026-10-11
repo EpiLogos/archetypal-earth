@@ -1,11 +1,11 @@
-// Type-ahead across archetypes, families (+aliases), occurrences, cultures,
+// Type-ahead across archetypes, the theoretics, families (+aliases), occurrences, cultures,
 // places and periods. Pure: results carry an action, the UI decides how to act.
 import type { ImageRef } from '../types/field';
 import type { Model, Subject } from './model';
 import { formatYear, type TimeScale } from './time';
 import { eraShort } from './text';
 
-export type SearchKind = 'archetype' | 'family' | 'occurrence' | 'culture' | 'place' | 'period';
+export type SearchKind = 'archetype' | 'theoretic' | 'family' | 'occurrence' | 'culture' | 'place' | 'period';
 
 export type SearchAction =
   | { type: 'subject'; subject: Subject }
@@ -53,7 +53,9 @@ export function norm(s: string): string {
     .trim();
 }
 
-const BIAS: Record<SearchKind, number> = { archetype: 14, family: 12, period: 9, culture: 6, place: 5, occurrence: 0 };
+const BIAS: Record<SearchKind, number> = { theoretic: 15, archetype: 14, family: 12, period: 9, culture: 6, place: 5, occurrence: 0 };
+/** The two keystones carry this sub-line: they are the field's ground, not two more entries in it. */
+export const GROUND_SUB = 'the ground';
 
 export function buildSearchIndex(m: Model): SearchIndex {
   const entries: Entry[] = [];
@@ -61,6 +63,12 @@ export function buildSearchIndex(m: Model): SearchIndex {
     entries.push({
       kind: 'archetype', key: `a:${a.id}`, label: a.name, names: [norm(a.name)], aliases: [], secondary: [norm(a.oneLine)],
       sub: 'archetype', action: { type: 'subject', subject: { type: 'archetype', id: a.id } }, image: a.image, tone: a.palette.core, bias: BIAS.archetype,
+    });
+  }
+  for (const t of m.field.theoretics ?? []) {
+    entries.push({
+      kind: 'theoretic', key: `t:${t.id}`, label: t.name, names: [norm(t.name)], aliases: [], secondary: [norm(t.oneLine)],
+      sub: t.ground ? GROUND_SUB : 'theory', action: { type: 'subject', subject: { type: 'theoretic', id: t.id } }, image: t.image, tone: t.palette.core, bias: BIAS.theoretic,
     });
   }
   for (const f of m.field.families) {
@@ -192,8 +200,13 @@ export function search(idx: SearchIndex, query: string, limit = 7): SearchResult
   const q = norm(query);
   const m = idx.model;
   if (!q) {
-    // quiet invitation: the archetypes
-    return idx.entries.filter((e) => e.kind === 'archetype').slice(0, limit).map((e) => toResult(e, e.bias));
+    // quiet invitation: the field's ground, then the archetypes, then the rest of the theory
+    const theo = idx.entries.filter((e) => e.kind === 'theoretic');
+    return [
+      ...theo.filter((e) => e.sub === GROUND_SUB),
+      ...idx.entries.filter((e) => e.kind === 'archetype'),
+      ...theo.filter((e) => e.sub !== GROUND_SUB),
+    ].slice(0, limit).map((e) => toResult(e, e.bias));
   }
   const toks = q.split(' ');
   // Every match must contain each token's prefix/first trigram. Scoring still

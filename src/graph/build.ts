@@ -7,7 +7,7 @@ import { timeVisibility, type TimeWindow } from '../data/time';
 import { hexToRgb } from '../data/palette';
 import type { BodyKey } from '../types/sky';
 
-export type NodeKind = 'archetype' | 'family' | 'occurrence' | 'body';
+export type NodeKind = 'archetype' | 'theoretic' | 'family' | 'occurrence' | 'body';
 /** 'sky' joins a body to the family or archetype it is tied to; it carries the basis of that tie. */
 export type EdgeKind = 'instance' | 'co' | 'tie' | 'parallel' | 'sky';
 
@@ -36,6 +36,8 @@ export interface GNode {
   yearDisplay: string;
   prime: boolean;
   hasImage: boolean;
+  /** the field's ground: the two keystone theoretics (the psychoid, the archetype as such). Drawn as the base the others stand on. */
+  ground: boolean;
   /** has a place on the globe (an archetype or family: at least one placed member); unplaced nodes are drawn hollow */
   placed: boolean;
 }
@@ -57,6 +59,7 @@ export interface Graph {
   incident: number[][];
   byKey: Map<string, number>;
   archetypeIds: number[];
+  theoreticIds: number[];
   familyIds: number[];
   occurrenceIds: number[];
   /** the sky's bodies (empty unless the graph was extended with withSkyAnchors) */
@@ -64,9 +67,10 @@ export interface Graph {
 }
 
 const aKey = (id: string) => `a:${id}`;
+const tKey = (id: string) => `t:${id}`;
 const fKey = (id: string) => `f:${id}`;
 const oKey = (id: string) => `o:${id}`;
-export const graphKey = { archetype: aKey, family: fKey, occurrence: oKey };
+export const graphKey = { archetype: aKey, theoretic: tKey, family: fKey, occurrence: oKey };
 
 /** Build the whole graph of a field. Occurrences the globe cannot place are still nodes: the graph is not geographic. */
 export function buildGraph(m: Model): Graph {
@@ -90,7 +94,7 @@ export function buildGraph(m: Model): Graph {
       kind: 'archetype', key: aKey(a.id), ref: a.id, label: a.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: a.prime ? 1 : 0.55 + 0.4 * (members.length / maxArch),
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: a.spectrum?.position ?? 0.5,
-      u: NaN, yearDisplay: '', prime: a.prime, hasImage: !!a.image,
+      u: NaN, yearDisplay: '', prime: a.prime, hasImage: !!a.image, ground: false,
     });
   }
   for (const f of m.field.families) {
@@ -100,7 +104,7 @@ export function buildGraph(m: Model): Graph {
       kind: 'family', key: fKey(f.id), ref: f.id, label: f.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: Math.sqrt(members.length / maxFam),
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: f.spectrum?.position ?? 0.5,
-      u: NaN, yearDisplay: '', prime: false, hasImage: !!f.image,
+      u: NaN, yearDisplay: '', prime: false, hasImage: !!f.image, ground: false,
     });
   }
   for (let i = 0; i < m.occ.length; i++) {
@@ -109,7 +113,22 @@ export function buildGraph(m: Model): Graph {
     push({
       kind: 'occurrence', key: oKey(o.id), ref: o.id, label: o.label, occIdx: i, members: [i], count: 1, placed: !!m.located[i], rank: o.image ? 0.6 : 0.3,
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: pal?.spectrum ?? 0.5,
-      u: m.u[i], yearDisplay: o.yearDisplay, prime: false, hasImage: !!o.image,
+      u: m.u[i], yearDisplay: o.yearDisplay, prime: false, hasImage: !!o.image, ground: false,
+    });
+  }
+
+  // Theoretics are pushed after occurrences so every node the graph already had keeps its id.
+  // They carry no place of their own — they stand for the traffic of what they are tied to.
+  const maxTheo = Math.max(1, ...(m.field.theoretics ?? []).map((t) => m.theoOcc.get(t.id)?.length ?? 0));
+  for (const t of m.field.theoretics ?? []) {
+    const pal = m.theoPalette.get(t.id);
+    const members = m.theoOcc.get(t.id) ?? [];
+    push({
+      kind: 'theoretic', key: tKey(t.id), ref: t.id, label: t.name, occIdx: -1, members, count: members.length,
+      placed: members.some((i) => !!m.located[i]),
+      rank: t.ground ? 1 : 0.5 + 0.45 * (members.length / maxTheo),
+      colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: t.spectrum?.position ?? 0.5,
+      u: NaN, yearDisplay: '', prime: false, hasImage: !!t.image, ground: !!t.ground,
     });
   }
 
@@ -120,6 +139,16 @@ export function buildGraph(m: Model): Graph {
     for (const t of f.archetypes) {
       const ai = byKey.get(aKey(t.id));
       if (ai !== undefined) edges.push({ s: fi, t: ai, kind: 'tie', basis: t.basis });
+    }
+  }
+  // archetype → archetype ties (the number archetypes' ties to the Self and to the dyad's figures, from curation)
+  for (const a of m.field.archetypes) {
+    const ai = byKey.get(aKey(a.id));
+    if (ai === undefined) continue;
+    for (const tie of a.archetypes ?? []) {
+      const ti = byKey.get(aKey(tie.id));
+      if (ti === undefined || ti === ai) continue;
+      edges.push({ s: ai, t: ti, kind: 'tie', basis: tie.basis });
     }
   }
   // occurrence → family (instance_of), occurrence → co-families, occurrence ↔ occurrence parallels
@@ -143,6 +172,25 @@ export function buildGraph(m: Model): Graph {
     }
   }
 
+  // theoretic → archetype / family / theoretic ties: the theory as a piece of the same graph
+  for (const t of m.field.theoretics ?? []) {
+    const ti = byKey.get(tKey(t.id));
+    if (ti === undefined) continue;
+    for (const tie of t.archetypes) {
+      const ai = byKey.get(aKey(tie.id));
+      if (ai !== undefined) edges.push({ s: ti, t: ai, kind: 'tie', basis: tie.basis });
+    }
+    for (const tie of t.families) {
+      const fi = byKey.get(fKey(tie.id));
+      if (fi !== undefined) edges.push({ s: ti, t: fi, kind: 'tie', basis: tie.basis });
+    }
+    for (const tie of t.theoretics) {
+      const ni = byKey.get(tKey(tie.id));
+      if (ni === undefined || ni === ti) continue;
+      edges.push({ s: ti, t: ni, kind: 'tie', basis: tie.basis });
+    }
+  }
+
   const adj: number[][] = nodes.map(() => []);
   const incident: number[][] = nodes.map(() => []);
   edges.forEach((e, k) => {
@@ -155,6 +203,7 @@ export function buildGraph(m: Model): Graph {
   return {
     nodes, edges, adj, incident, byKey,
     archetypeIds: nodes.filter((n) => n.kind === 'archetype').map((n) => n.id),
+    theoreticIds: nodes.filter((n) => n.kind === 'theoretic').map((n) => n.id),
     familyIds: nodes.filter((n) => n.kind === 'family').map((n) => n.id),
     occurrenceIds: nodes.filter((n) => n.kind === 'occurrence').map((n) => n.id),
     bodyIds: [],
@@ -198,7 +247,7 @@ export function withSkyAnchors(base: Graph, src: SkyAnchorSource): Graph {
     nodes.push({
       id, kind: 'body', key: bodyKey(b.key), ref: b.key, label: b.name, occIdx: -1, members: [], count: 0, placed: true,
       rank: 0.55 + 0.35 * (1 - b.order / maxOrder), colour: pal.core, glow: pal.glow, spectrum: b.spectrum,
-      u: NaN, yearDisplay: '', prime: false, hasImage: false,
+      u: NaN, yearDisplay: '', prime: false, hasImage: false, ground: false,
     });
     byKey.set(bodyKey(b.key), id);
     bodyIds.push(id);
@@ -226,7 +275,7 @@ export interface Neighbourhood {
   edges: number[];
 }
 
-const PRIORITY: Record<NodeKind, number> = { archetype: 3, family: 2, body: 2, occurrence: 1 };
+const PRIORITY: Record<NodeKind, number> = { theoretic: 4, archetype: 3, family: 2, body: 2, occurrence: 1 };
 
 export interface NeighbourhoodOptions {
   /** breadth-first depth (Obsidian's local-graph depth) */
@@ -280,10 +329,10 @@ export function neighbourhood(g: Graph, seeds: number[], opts: NeighbourhoodOpti
   return { dist, edges };
 }
 
-/** What the global view shows: archetypes and families, and occurrences as dust when asked. */
+/** What the global view shows: archetypes, theoretics and families, and occurrences as dust when asked. */
 export function globalSet(g: Graph, occurrences: boolean, tieBases?: readonly TieBasis[]): Neighbourhood {
   const dist = new Map<number, number>();
-  for (const n of g.nodes) if (n.kind !== 'occurrence' || occurrences) dist.set(n.id, n.kind === 'archetype' || n.kind === 'body' ? 0 : n.kind === 'family' ? 1 : 2);
+  for (const n of g.nodes) if (n.kind !== 'occurrence' || occurrences) dist.set(n.id, n.kind === 'archetype' || n.kind === 'theoretic' || n.kind === 'body' ? 0 : n.kind === 'family' ? 1 : 2);
   const edges: number[] = [];
   g.edges.forEach((e, k) => {
     if (dist.has(e.s) && dist.has(e.t) && edgeAllowed(e, tieBases)) edges.push(k);

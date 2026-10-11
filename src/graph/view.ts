@@ -100,6 +100,8 @@ const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 function nodeRadius(n: GNode): number {
   if (n.kind === 'body') return 6.5 + 2.5 * n.rank;
   if (n.kind === 'archetype') return n.prime ? 23 : 12.5 + 7 * (n.rank - 0.55) / 0.4;
+  // the ground is drawn as what it is: the base the archetypes stand on, not an entry beside them
+  if (n.kind === 'theoretic') return n.ground ? 15.5 : 5 + 5.5 * n.rank;
   if (n.kind === 'family') return 3.4 + 6 * n.rank;
   return n.hasImage ? 2.3 : 1.8;
 }
@@ -1224,6 +1226,7 @@ export class GraphView {
 
   private fontSize(v: VNode, k: number): number {
     if (v.g.kind === 'archetype') return (v.g.prime ? 17.5 : 15) * Math.min(1.25, 0.88 + 0.12 * k);
+    if (v.g.kind === 'theoretic') return (v.g.ground ? 14.5 : 12 + 2.4 * v.g.rank) * Math.min(1.22, 0.9 + 0.11 * k);
     if (v.g.kind === 'family') return (12.2 + 2.6 * v.g.rank) * Math.min(1.2, 0.9 + 0.1 * k);
     if (v.g.kind === 'body') return 12.5 * Math.min(1.2, 0.9 + 0.1 * k);
     return 11.5 * Math.min(1.15, 0.92 + 0.08 * k);
@@ -1284,8 +1287,8 @@ export class GraphView {
       if (kind === 'occurrence') continue;
       const a = v.vis * v.hl * v.live;
       if (a < 0.02) continue;
-      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'body' ? 3.2 : 2.7);
-      const strength = kind === 'archetype' ? 0.36 : kind === 'body' ? 0.3 : 0.15 + 0.09 * v.g.rank;
+      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'theoretic' ? (v.g.ground ? 4.1 : 3.1) : kind === 'body' ? 3.2 : 2.7);
+      const strength = kind === 'archetype' ? 0.36 : kind === 'theoretic' ? (v.g.ground ? 0.42 : 0.16 + 0.1 * v.g.rank) : kind === 'body' ? 0.3 : 0.15 + 0.09 * v.g.rank;
       const gr = ctx.createRadialGradient(v.sx, v.sy, v.sr * 0.4, v.sx, v.sy, rad);
       gr.addColorStop(0, rgba(v.glow, strength * a));
       gr.addColorStop(1, rgba(v.glow, 0));
@@ -1482,6 +1485,7 @@ export class GraphView {
       else if (v.id === this.selected) { a = 1; pri = 80; }
       else if (kind === 'archetype') { a = 1; pri = 70 + (v.g.prime ? 5 : 0); }
       else if (kind === 'body') { a = 1; pri = 66; }
+      else if (kind === 'theoretic') { a = 1; pri = v.g.ground ? 88 : 58 + 10 * v.g.rank; }
       else if (kind === 'family') {
         // larger forms are named sooner; the rest as you come near
         const need = 1.7 - 1.15 * v.g.rank;
@@ -1496,7 +1500,7 @@ export class GraphView {
       a *= v.vis * (0.12 + 0.88 * v.hl) * (kind === 'occurrence' ? 0.25 + 0.75 * v.live : 0.5 + 0.5 * v.live);
       if (a < 0.04) continue;
       const size = this.fontSize(v, k);
-      const weight = kind === 'archetype' ? 600 : kind === 'family' || kind === 'body' ? 500 : 400;
+      const weight = kind === 'archetype' || (kind === 'theoretic' && v.g.ground) ? 600 : kind === 'family' || kind === 'body' || kind === 'theoretic' ? 500 : 400;
       cands.push({ v, a, pri, text: v.g.label, font: `${weight} ${size.toFixed(1)}px ${SERIF}`, size, kind: 'serif', sub: kind === 'occurrence' && (v === hov || v.id === this.selected) ? v.g.yearDisplay : undefined });
     }
     cands.sort((x, y) => y.pri - x.pri || y.v.g.rank - x.v.g.rank);
@@ -1531,7 +1535,7 @@ export class GraphView {
       ctx.lineWidth = Math.max(2.5, c.size * 0.26);
       ctx.strokeStyle = rgba('2 3 10', 0.62 * c.a);
       ctx.strokeText(text, x, y);
-      ctx.fillStyle = rgba(c.v.g.kind === 'occurrence' ? '226 233 249' : '240 244 253', (c.v.g.kind === 'archetype' ? 0.97 : c.v.g.kind === 'family' ? 0.86 : 0.78) * c.a);
+      ctx.fillStyle = rgba(c.v.g.kind === 'occurrence' ? '226 233 249' : '240 244 253', (c.v.g.kind === 'archetype' || c.v.g.ground ? 0.97 : c.v.g.kind === 'family' || c.v.g.kind === 'theoretic' ? 0.86 : 0.78) * c.a);
       ctx.fillText(text, x, y);
       if (c.sub) {
         ctx.font = `500 10.5px ${SANS}`;

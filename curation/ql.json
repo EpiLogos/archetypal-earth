@@ -288,7 +288,17 @@
     "ql": {
       "text": "The archetype, as Jung finally understood it, is psychoid: it is as much inside as outside, an ordering pattern that manifests simultaneously in the soul's images and the world's matter.",
       "source": "W § I"
-    }
+    },
+    "subjects": [
+      {
+        "type": "theoretic",
+        "id": "psychoid"
+      },
+      {
+        "type": "theoretic",
+        "id": "archetype-as-such"
+      }
+    ]
   },
   "time": {
     "line": "And number is bound up with time. Von Franz says two gives rhythm before there is any line of time, and three starts the line; Jung's Aion is time that holds the opposites; synchronicity is a meaning that crosses causal time.",

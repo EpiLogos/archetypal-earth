@@ -1,5 +1,5 @@
 {
-  "_note": "The Theory lens. Each section's quotations name only their work and their exact words (taken from the vault's concept notes: wiki/concepts/*.md and wiki/archetypes/self.md); `npm run theory` finds each one in the read-only corpus and writes its locator (pdf page, nearest ¶) from the corpus itself, failing on any quotation it cannot place exactly once. `para` is the ¶ the vault note gives, checked against the corpus. The `line` is mine: one plain sentence or two that says what the section is about. Families and archetypes named are links into the field, and are checked to exist.",
+  "_note": "The Theory lens. Each section's quotations name only their work and their exact words (taken from the vault's concept notes: wiki/concepts/*.md and wiki/archetypes/self.md); `npm run theory` finds each one in the read-only corpus and writes its locator (pdf page, nearest ¶) from the corpus itself, failing on any quotation it cannot place exactly once. `para` is the ¶ the vault note gives, checked against the corpus. The `line` is mine: one plain sentence or two that says what the section is about. Families, archetypes and theoretics named are links into the field, and are checked to exist. A link of type `theoretic` points at the field's own node for the concept the section is about, so a section and its node are two addresses for one thing and the globe can be tuned to either.",
   "version": 1,
   "sections": [
     {
@@ -26,6 +26,10 @@
         {
           "type": "family",
           "id": "mandala"
+        },
+        {
+          "type": "theoretic",
+          "id": "psychoid"
         }
       ]
     },
@@ -57,6 +61,10 @@
         {
           "type": "family",
           "id": "serpent"
+        },
+        {
+          "type": "theoretic",
+          "id": "libido"
         }
       ]
     },
@@ -85,6 +93,10 @@
         {
           "type": "lens",
           "id": "dreams"
+        },
+        {
+          "type": "theoretic",
+          "id": "compensation"
         }
       ]
     },
@@ -113,6 +125,10 @@
         {
           "type": "lens",
           "id": "aion"
+        },
+        {
+          "type": "theoretic",
+          "id": "aion-time"
         }
       ]
     },
@@ -140,6 +156,10 @@
         {
           "type": "lens",
           "id": "dynamics"
+        },
+        {
+          "type": "theoretic",
+          "id": "transcendent-function"
         }
       ]
     }

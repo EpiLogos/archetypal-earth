@@ -51,6 +51,7 @@ export class Shell {
     this.title = el('h1', { class: 'sh-title' });
     this.controls = el('div', { class: 'sh-controls' });
     this.scopeLine = el('p', { class: 'sh-scope', hidden: true, role: 'status' });
+    // lens → title → scope → Options (icon); Options must not sit above the title
     this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.scopeLine, this.controls]);
 
     const github = el('a', { class: 'sh-corner-btn icon-btn', href: REPO_URL, target: '_blank', rel: 'noopener', 'aria-label': 'The project on GitHub', title: 'GitHub' }, [icon('github', 17)]);
@@ -115,7 +116,7 @@ export class Shell {
     if (!scope) return;
     const n = (x: number) => x.toLocaleString();
     this.scopeLine.append(
-      el('span', { text: `${n(scope.own)} in ${scope.label}${scope.nearby ? ` · ${n(scope.nearby)} nearby, dimmed` : ''}${wholeField ? ' · the rest of the field receded' : ''}` }),
+      el('span', { text: `${n(scope.own)} in ${scope.label}${wholeField ? ' · the rest of the field receded' : ''}` }),
       ' · ',
       el('button', { type: 'button', class: 'link-quiet sh-scope-toggle', text: wholeField ? 'Only this set' : 'Show the whole field', onclick: () => onWhole(!wholeField) }),
     );

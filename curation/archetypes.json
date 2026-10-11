@@ -5,10 +5,23 @@
       "name": "The Self",
       "oneLine": "Totality of the psyche: the centre and circumference of conscious and unconscious.",
       "position": 0.5,
-      "palette": { "core": "#f1eee8", "glow": "#cdd8ee", "fog": "#232a3d", "deep": "#090b12" },
+      "palette": {
+        "core": "#f1eee8",
+        "glow": "#cdd8ee",
+        "fog": "#232a3d",
+        "deep": "#090b12"
+      },
       "definitionPick": [
-        { "vol": "cw09ii", "para": 426, "starts": "Psychologically the self is a union" },
-        { "vol": "cw09ii", "para": 426, "starts": "Empirically, however, the self appears" }
+        {
+          "vol": "cw09ii",
+          "para": 426,
+          "starts": "Psychologically the self is a union"
+        },
+        {
+          "vol": "cw09ii",
+          "para": 426,
+          "starts": "Empirically, however, the self appears"
+        }
       ],
       "body": [
         "The Self is where the map folds back on itself: the whole of the psyche, conscious and unconscious together, and the centre toward which a life is drawn. It is never met directly. It shows itself through images of wholeness, above all the circle and the quaternity.",
@@ -19,8 +32,19 @@
       "name": "Shadow",
       "oneLine": "The hidden, rejected side of the personality; everything we will not see in ourselves.",
       "position": 0.12,
-      "palette": { "core": "#a8485f", "glow": "#3a2a5e", "fog": "#130a1c", "deep": "#06030c" },
-      "definitionPick": [{ "vol": "cw09ii", "para": 422, "starts": "The first of these is the SHADOW" }],
+      "palette": {
+        "core": "#a8485f",
+        "glow": "#3a2a5e",
+        "fog": "#130a1c",
+        "deep": "#06030c"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09ii",
+          "para": 422,
+          "starts": "The first of these is the SHADOW"
+        }
+      ],
       "body": [
         "The Shadow gathers what a person or a culture pushes out of sight: the guilty, the primitive, the unlived. It is met first because it is nearest, and it tends to arrive as an enemy, a double, a dark beast or a stranger on the stair.",
         "Its images are dense and low in the spectrum: dragons, apes, the blackened sun, the devil as the other half of the sacred."
@@ -30,8 +54,19 @@
       "name": "Anima",
       "oneLine": "The inner feminine in a man: life itself, personified as soul, muse and guide.",
       "position": 0.36,
-      "palette": { "core": "#7ec4d6", "glow": "#6a8ee0", "fog": "#14304a", "deep": "#040e1c" },
-      "definitionPick": [{ "vol": "cw09i", "para": 352, "starts": "Like the 'supraordinate personality,'" }],
+      "palette": {
+        "core": "#7ec4d6",
+        "glow": "#6a8ee0",
+        "fog": "#14304a",
+        "deep": "#040e1c"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 352,
+          "starts": "Like the 'supraordinate personality,'"
+        }
+      ],
       "body": [
         "The Anima is the figure through which a man's unconscious turns toward him: siren and sophia, nymph and guide. She is watery, shifting and bipolar, and she draws the soul toward images rather than arguments.",
         "She appears wherever a threshold is crossed by water, by song, by an unknown woman."
@@ -41,8 +76,19 @@
       "name": "Animus",
       "oneLine": "The inner masculine in a woman: spirit, word and conviction.",
       "position": 0.68,
-      "palette": { "core": "#c9d6f2", "glow": "#9fb4e8", "fog": "#202a4a", "deep": "#080b18" },
-      "definitionPick": [{ "vol": "cw09ii", "para": 29, "starts": "I have called the projection-making factor" }],
+      "palette": {
+        "core": "#c9d6f2",
+        "glow": "#9fb4e8",
+        "fog": "#202a4a",
+        "deep": "#080b18"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09ii",
+          "para": 29,
+          "starts": "I have called the projection-making factor"
+        }
+      ],
       "body": [
         "The Animus is the masculine counterpart within a woman's psyche. It speaks as opinion and as spirit; at its best it is a bridge to the creative mind rather than a chorus of verdicts.",
         "Its images are quicker and cooler than the anima's: the wind, the horse, the hero-lover who arrives from elsewhere."
@@ -52,8 +98,19 @@
       "name": "Great Mother",
       "oneLine": "Giver and devourer: earth, womb, cave and the realm of the Mothers.",
       "position": 0.15,
-      "palette": { "core": "#c98f5a", "glow": "#9a5f3c", "fog": "#2a1c14", "deep": "#0d0806" },
-      "definitionPick": [{ "vol": "cw05", "para": 508, "starts": "The “mother,” as the first incarnation" }],
+      "palette": {
+        "core": "#c98f5a",
+        "glow": "#9a5f3c",
+        "fog": "#2a1c14",
+        "deep": "#0d0806"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw05",
+          "para": 508,
+          "starts": "The “mother,” as the first incarnation"
+        }
+      ],
       "body": [
         "The Great Mother holds both sides of origin: the nourishing earth and the swallowing dark. She is goddess, cave, well and tree before she is anyone's personal mother.",
         "Her images sit at the instinct end of the spectrum: dense, warm and terrestrial."
@@ -63,8 +120,19 @@
       "name": "Child",
       "oneLine": "Beginning and futurity: the newborn possibility of wholeness.",
       "position": 0.4,
-      "palette": { "core": "#f2c4b8", "glow": "#e8a4a8", "fog": "#3a2430", "deep": "#0f080c" },
-      "definitionPick": [{ "vol": "cw09i", "para": 270, "starts": "The child motif represents" }],
+      "palette": {
+        "core": "#f2c4b8",
+        "glow": "#e8a4a8",
+        "fog": "#3a2430",
+        "deep": "#0f080c"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 270,
+          "starts": "The child motif represents"
+        }
+      ],
       "body": [
         "The Child is the archetype of what has not yet happened: the threatened newborn, the abandoned and invincible one, the little figure who turns out to hold the whole.",
         "It is dawn-coloured in this atlas: soft, rising, unfinished."
@@ -74,8 +142,19 @@
       "name": "Kore",
       "oneLine": "The maiden: youth before transformation, soul in bloom and in descent.",
       "position": 0.46,
-      "palette": { "core": "#b7dca0", "glow": "#8cc09a", "fog": "#1e3426", "deep": "#070f09" },
-      "definitionPick": [{ "vol": "cw09i", "para": 306, "starts": "The 'Kore' has her psychological counterpart" }],
+      "palette": {
+        "core": "#b7dca0",
+        "glow": "#8cc09a",
+        "fog": "#1e3426",
+        "deep": "#070f09"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 306,
+          "starts": "The 'Kore' has her psychological counterpart"
+        }
+      ],
       "body": [
         "Kore is the maiden figure who is carried off, hidden or crowned: Persephone in spring and in Hades. She stands between the anima and the Self, both a young girl and an intimation of wholeness.",
         "Her images are green and early, always about to change."
@@ -85,8 +164,19 @@
       "name": "Trickster",
       "oneLine": "Shape-shifter and fool: archaic, unconscious cunning that unsettles the order.",
       "position": 0.22,
-      "palette": { "core": "#c8b560", "glow": "#8fa14a", "fog": "#232a12", "deep": "#090b04" },
-      "definitionPick": [{ "vol": "cw09i", "para": 473, "starts": "The trickster is a primitive" }],
+      "palette": {
+        "core": "#c8b560",
+        "glow": "#8fa14a",
+        "fog": "#232a12",
+        "deep": "#090b04"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 473,
+          "starts": "The trickster is a primitive"
+        }
+      ],
       "body": [
         "The Trickster is the joker and boundary-crosser: half divine, half beast, careless of rules and strangely generative. Out of his blunders something new, and sometimes something healing, gets made.",
         "Mercurius, the quicksilver spirit of alchemy, carries the trickster into the laboratory."
@@ -96,8 +186,19 @@
       "name": "Hero",
       "oneLine": "The struggle toward light: slayer of the dragon, bearer of renewed life.",
       "position": 0.6,
-      "palette": { "core": "#f6edc8", "glow": "#ffe2a0", "fog": "#3b3524", "deep": "#0e0c06" },
-      "definitionPick": [{ "vol": "cw05", "para": 580, "starts": "Taken purely as a psychologem the hero" }],
+      "palette": {
+        "core": "#f6edc8",
+        "glow": "#ffe2a0",
+        "fog": "#3b3524",
+        "deep": "#0e0c06"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw05",
+          "para": 580,
+          "starts": "Taken purely as a psychologem the hero"
+        }
+      ],
       "body": [
         "The Hero is consciousness fighting its way out of the mother, the monster and the night. Solar and lucid, the hero's journey is descent and return; its dangers are inflation and identification with the light.",
         "Its colour is the lucid white-gold of the risen sun."
@@ -107,8 +208,19 @@
       "name": "Wise Old Man",
       "oneLine": "Spirit as meaning: the guide who appears when thought has run out.",
       "position": 0.88,
-      "palette": { "core": "#c3b5f2", "glow": "#9c8be0", "fog": "#231d45", "deep": "#09061a" },
-      "definitionPick": [{ "vol": "cw09i", "para": 397, "starts": "Mostly, therefore, it is the figure of a 'wise old man'" }],
+      "palette": {
+        "core": "#c3b5f2",
+        "glow": "#9c8be0",
+        "fog": "#231d45",
+        "deep": "#09061a"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 397,
+          "starts": "Mostly, therefore, it is the figure of a 'wise old man'"
+        }
+      ],
       "body": [
         "The Wise Old Man is meaning given a face: a sage, a magician, a prophet, sometimes an animal or a gnome. He comes with knowledge the dreamer lacks, and with the reflection and resolve to use it.",
         "He sits near the spirit end of the spectrum: fine, clear, cool."
@@ -118,8 +230,19 @@
       "name": "Mana-Personality",
       "oneLine": "The charged, fascinating figure who holds numinous power over the ego.",
       "position": 0.78,
-      "palette": { "core": "#d9a8e0", "glow": "#b57ad0", "fog": "#2d1a40", "deep": "#0c0616" },
-      "definitionPick": [{ "vol": "cw05", "para": 612, "starts": "The hero is the protagonist of God's transformation" }],
+      "palette": {
+        "core": "#d9a8e0",
+        "glow": "#b57ad0",
+        "fog": "#2d1a40",
+        "deep": "#0c0616"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw05",
+          "para": 612,
+          "starts": "The hero is the protagonist of God's transformation"
+        }
+      ],
       "body": [
         "The mana-personality is the figure who has absorbed more power than any person should carry: magician, prophet, hierophant. The ego is fascinated by such a figure and tempted to become it.",
         "It sits between the wise old man and the hero, closer to the numinous than either."
@@ -129,7 +252,12 @@
       "name": "Psychopomp",
       "oneLine": "Guide of souls across thresholds: mediator between conscious and unconscious.",
       "position": 0.56,
-      "palette": { "core": "#8fb0c9", "glow": "#cf9d86", "fog": "#1f2b38", "deep": "#080c12" },
+      "palette": {
+        "core": "#8fb0c9",
+        "glow": "#cf9d86",
+        "fog": "#1f2b38",
+        "deep": "#080c12"
+      },
       "body": [
         "The Psychopomp leads across: Hermes with the dead, the bird that carries the soul out of the vessel, the unexpected companion on the road. It is a function more than a face, and it keeps the passage between worlds open.",
         "Its colour is dusk, between the instinct and spirit ends."
@@ -139,11 +267,176 @@
       "name": "Syzygy",
       "oneLine": "The divine pair: masculine and feminine joined as one image of wholeness.",
       "position": 0.5,
-      "palette": { "core": "#e3b7c2", "glow": "#a7a4e0", "fog": "#2d2340", "deep": "#0d0817" },
-      "definitionPick": [{ "vol": "cw09i", "para": 322, "starts": "This youth is an animus-figure" }],
+      "palette": {
+        "core": "#e3b7c2",
+        "glow": "#a7a4e0",
+        "fog": "#2d2340",
+        "deep": "#0d0817"
+      },
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 322,
+          "starts": "This youth is an animus-figure"
+        }
+      ],
       "body": [
         "The Syzygy is the paired opposite: king and queen, sun and moon, anima and animus held in one picture. In alchemy it is the conjunction at the centre of the work; in dreams it often arrives as a wedding.",
         "Its images show up wherever a tradition has pictured the two as one."
+      ]
+    },
+    "one": {
+      "name": "One",
+      "oneLine": "The monad: unity before division, the point that already holds the series.",
+      "position": 0.5,
+      "palette": {
+        "core": "#f4f0e6",
+        "glow": "#d8c9a8",
+        "fog": "#2a261c",
+        "deep": "#0c0a08"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw09ii",
+          "para": 340,
+          "starts": "This Man is a single Monad"
+        }
+      ],
+      "body": [
+        "One is the unit before there is a pair: the monad, the point, the circle that has not yet been divided. Jung reads Monoïmos's single Monad as a description of the self's nature — compounded and uncompounded at once.",
+        "On this globe One sits with the monad family and with the Self's own centre."
+      ]
+    },
+    "two": {
+      "name": "Two",
+      "oneLine": "The dyad: polarity, reflection, the complexio oppositorum before a third.",
+      "position": 0.48,
+      "palette": {
+        "core": "#e8d4c8",
+        "glow": "#b8a0c8",
+        "fog": "#2a2030",
+        "deep": "#0c0812"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw09ii",
+          "para": 426,
+          "starts": "Psychologically the self is a union"
+        }
+      ],
+      "body": [
+        "Two is polarity: conscious and unconscious, masculine and feminine, the pair that makes a tension possible. Jung names the self a complexio oppositorum precisely because reality needs that polarity.",
+        "Its images are the syzygy and the shadow's double — two before three arrives."
+      ],
+      "archetypes": [
+        {
+          "id": "syzygy",
+          "basis": "inferred"
+        },
+        {
+          "id": "shadow",
+          "basis": "inferred"
+        }
+      ]
+    },
+    "three": {
+      "name": "Three",
+      "oneLine": "The triad: synthesis in time, the Trinity's three before the withheld fourth.",
+      "position": 0.55,
+      "palette": {
+        "core": "#d8e4f0",
+        "glow": "#a8c0e0",
+        "fog": "#1c2838",
+        "deep": "#080c14"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw11",
+          "para": 246,
+          "starts": "The quaternity is an archetype"
+        }
+      ],
+      "body": [
+        "Three is movement and dogma's God-image: the Trinity that insists three are one while denying that four are. Jung treats three as an artificial coefficient of order against four's natural minimum.",
+        "Its field partner is the trinity family — the three that the quaternity completes."
+      ]
+    },
+    "four": {
+      "name": "Four",
+      "oneLine": "The quaternity: the whole judgment, four functions, the Pythagorean tetraktys.",
+      "position": 0.5,
+      "palette": {
+        "core": "#e8e0d0",
+        "glow": "#c8b890",
+        "fog": "#28241c",
+        "deep": "#0c0a08"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw10",
+          "para": 805,
+          "starts": "Psychologically, the rotundum or mandala"
+        }
+      ],
+      "body": [
+        "Four is the minimum for a whole judgment and the Self's arithmetical structure. Jung names the number 4, the Pythagorean tetraktys, as the especial case where whole numbers show themselves as archetypes of order.",
+        "Quaternity and mandala are its dense field — forty-eight and a hundred-and-twenty-four instances already gathered."
+      ]
+    },
+    "five": {
+      "name": "Five",
+      "oneLine": "The quintessence: the quincunx, the four with the centre, the pentadic mandala.",
+      "position": 0.52,
+      "palette": {
+        "core": "#f0e0c8",
+        "glow": "#d0a870",
+        "fog": "#2c2418",
+        "deep": "#100c08"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw09i",
+          "para": 615,
+          "starts": "In the centre is the egg encircled"
+        }
+      ],
+      "body": [
+        "Five is the four with a centre — the quinta essentia, the quincunx, the rare pentadic mandala. Jung finds it in the egg footnote and in the patient's five-fold picture with the snake around the egg.",
+        "It is among the numbers he speaks to most; the hidden one of the arithmetic."
+      ]
+    },
+    "six": {
+      "name": "Six",
+      "oneLine": "The hexad: completion and return, the first number equal to the sum of its divisors.",
+      "position": 0.5,
+      "palette": {
+        "core": "#e8ece8",
+        "glow": "#a8c8b8",
+        "fog": "#1c2824",
+        "deep": "#080c0a"
+      },
+      "synthesised": true,
+      "definitionPick": [
+        {
+          "vol": "cw12",
+          "para": 310,
+          "starts": "The self is by definition the centre"
+        }
+      ],
+      "body": [
+        "Six closes the walk: return to the ground, the Self as centre and circumference at once. Von Franz notes it is the first perfect number; the field reads it as the 5→0 return.",
+        "Its tie is to the Self — the archetype of order that the numbers themselves are."
+      ],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "jung"
+        }
       ]
     }
   }

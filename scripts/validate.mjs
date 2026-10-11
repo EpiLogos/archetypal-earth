@@ -5,6 +5,7 @@ const SUBJECT = new Set(['jung', 'patient-anon', 'n/a']);
 const PREC = new Set(['place', 'region', 'culture', 'none']);
 const BASIS = new Set(['jung', 'inferred', 'site']);
 const SUBTYPE = new Set(['figure', 'object', 'process', 'scene', 'unknown']);
+const GROUND = new Set(['ontological', 'epistemological']);
 
 export function validateField(f) {
   const errs = [];
@@ -12,7 +13,7 @@ export function validateField(f) {
   const isStr = (v) => typeof v === 'string';
   const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
   if (!f || typeof f !== 'object') return ['field is not an object'];
-  for (const k of ['meta', 'archetypes', 'families', 'occurrences', 'cultures']) if (f[k] == null) err(`missing top-level ${k}`);
+  for (const k of ['meta', 'archetypes', 'theoretics', 'families', 'occurrences', 'cultures']) if (f[k] == null) err(`missing top-level ${k}`);
   if (errs.length) return errs;
 
   const noLinks = (where, v) => {
@@ -52,6 +53,17 @@ export function validateField(f) {
     for (const k of ['name', 'oneLine']) noLinks(w, a[k]);
   }
   if (f.archetypes.filter((a) => a.prime).length !== 1) err('exactly one prime archetype expected');
+  // archetype → archetype ties (curation's own claim) resolve against the complete set, so order cannot hide one
+  for (const a of f.archetypes) {
+    const w = `archetype ${a.id}`;
+    if (a.archetypes != null && !Array.isArray(a.archetypes)) { err(`${w}: archetypes not an array`); continue; }
+    for (const tie of a.archetypes ?? []) {
+      if (!isStr(tie.id)) err(`${w}: archetype tie without id`);
+      else if (!archIds.has(tie.id)) err(`${w}: tie to unknown archetype ${tie.id}`);
+      else if (tie.id === a.id) err(`${w}: tie to itself`);
+      if (!BASIS.has(tie.basis)) err(`${w}: archetype tie ${tie.id} basis ${tie.basis}`);
+    }
+  }
 
   const famIds = new Set();
   for (const fam of f.families) {
@@ -79,6 +91,38 @@ export function validateField(f) {
     if (typeof fam.synthesised !== 'boolean') err(`${w}: synthesised`);
     for (const k of ['name', 'oneLine']) noLinks(w, fam[k]);
     (fam.aliases || []).forEach((x) => noLinks(w, x));
+  }
+
+  const theoIds = new Set(f.theoretics.map((t) => t.id));
+  for (const t of f.theoretics) {
+    const w = `theoretic ${t.id}`;
+    if (!isStr(t.id) || !t.id) err('theoretic without id');
+    if (theoIds.size !== f.theoretics.length) err('duplicate theoretic ids');
+    if (!isStr(t.name) || !t.name) err(`${w}: name`);
+    if (!isStr(t.oneLine) || !t.oneLine || t.oneLine.length > 90) err(`${w}: oneLine empty or >90 (${(t.oneLine || '').length})`);
+    if (t.ground !== null && !GROUND.has(t.ground)) err(`${w}: ground ${t.ground}`);
+    spectrum(w, t.spectrum);
+    palette(w, t.palette);
+    if (t.definition && (!isStr(t.definition.text) || !isStr(t.definition.cite))) err(`${w}: definition shape`);
+    if (!Array.isArray(t.body)) err(`${w}: body`);
+    else t.body.forEach((p) => noLinks(w, p));
+    if (!isNum(t.occurrenceCount)) err(`${w}: occurrenceCount`);
+    for (const k of ['section', 'lens']) if (t[k] != null && !isStr(t[k])) err(`${w}: ${k}`);
+    image(w, t.image);
+    for (const k of ['archetypes', 'families', 'theoretics']) {
+      if (!Array.isArray(t[k])) { err(`${w}: ${k} not an array`); continue; }
+      for (const tie of t[k]) {
+        if (!isStr(tie.id)) err(`${w}: ${k} tie without id`);
+        if (!BASIS.has(tie.basis)) err(`${w}: ${k} tie ${tie.id} basis ${tie.basis}`);
+      }
+    }
+    for (const tie of t.archetypes || []) if (!archIds.has(tie.id)) err(`${w}: tie to unknown archetype ${tie.id}`);
+    for (const tie of t.families || []) if (!famIds.has(tie.id)) err(`${w}: tie to unknown family ${tie.id}`);
+    for (const tie of t.theoretics || []) {
+      if (!theoIds.has(tie.id)) err(`${w}: tie to unknown theoretic ${tie.id}`);
+      if (tie.id === t.id) err(`${w}: tie to itself`);
+    }
+    for (const k of ['name', 'oneLine']) noLinks(w, t[k]);
   }
 
   const cultIds = new Set();
@@ -129,7 +173,7 @@ export function validateField(f) {
   for (const a of f.archetypes) for (const id of a.familyIds || []) if (!famIds.has(id)) err(`archetype ${a.id}: familyId ${id} unknown`);
   if (f.meta) {
     const c = f.meta.counts || {};
-    if (c.archetypes !== f.archetypes.length || c.families !== f.families.length || c.occurrences !== f.occurrences.length || c.cultures !== f.cultures.length) err('meta.counts disagree with arrays');
+    if (c.archetypes !== f.archetypes.length || c.theoretics !== f.theoretics.length || c.families !== f.families.length || c.occurrences !== f.occurrences.length || c.cultures !== f.cultures.length) err('meta.counts disagree with arrays');
     if (f.occurrences.length && (f.meta.yearMin !== yMin || f.meta.yearMax !== yMax)) err('meta.yearMin/Max disagree with occurrences');
   }
   return errs;

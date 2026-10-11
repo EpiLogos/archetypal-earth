@@ -26,15 +26,21 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
     if (!field.archetypes.some((a) => a.id === cur.archetype)) { errors.push(`${file}: no archetype ${cur.archetype} in the field`); continue; }
     const sections = cur.sections.map((s) => {
       for (const f of s.families ?? []) if (!field.families.some((x) => x.id === f)) errors.push(`${file} ${s.id}: no family ${f}`);
+      for (const l of s.subjects ?? []) {
+        const ok = l.type === 'family' ? field.families.some((x) => x.id === l.id) : l.type === 'archetype' ? field.archetypes.some((x) => x.id === l.id) : field.theoretics.some((x) => x.id === l.id);
+        if (!ok) errors.push(`${file} ${s.id}: no ${l.type} ${l.id} in the field`);
+      }
       const quotes = citeQuotes(load, titles, s.quotes, `${cur.archetype}.${s.id}`, errors, warnings)
         .map((q, i) => (s.quotes[i]?.speaker ? { ...q, speaker: s.quotes[i].speaker } : q));
-      return { id: s.id, title: s.title, line: s.line, quotes, families: s.families ?? [] };
+      return { id: s.id, title: s.title, line: s.line, quotes, families: s.families ?? [], ...(s.subjects?.length ? { subjects: s.subjects } : {}) };
     });
-    // every instance record of the named volumes (optionally only some of its terms) whose quotation places on its page
+    // every instance record of the named volumes (optionally only some of its terms) whose quotation places on its page.
+    // A page may name no sources at all (the Self's: no Neumann run carries instance records of the self), and then
+    // the entry carries no instances block rather than an empty apparatus
     const families = new Set(field.families.map((f) => f.id));
     const seen = new Map();
     let unplaced = 0;
-    for (const src of cur.instances.sources) {
+    for (const src of cur.instances?.sources ?? []) {
       for (const { rec: r } of readRecords(vault, src.vol)) {
         if (!r || r.kind !== 'instance' || typeof r.quote !== 'string') continue;
         if (src.terms && !src.terms.includes(r.term)) continue;
@@ -62,8 +68,8 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
     const dated = all.filter((x) => x.year !== undefined).sort((a, b) => a.year - b.year || byPage(a, b));
     const undated = all.filter((x) => x.year === undefined).sort(byPage);
     if (unplaced) warnings.push(`${cur.archetype}: ${unplaced} instance records whose quotation is too short to name one place, or does not place, are not shown`);
-    const records = cur.instances.sources.reduce((n, s) => n + readRecords(vault, s.vol).length, 0);
-    out[cur.archetype] = { archetype: cur.archetype, line: cur.line, sections, instances: { line: cur.instances.line, items: dated, undated }, records };
+    const records = (cur.instances?.sources ?? []).reduce((n, s) => n + readRecords(vault, s.vol).length, 0);
+    out[cur.archetype] = { archetype: cur.archetype, line: cur.line, sections, ...(cur.instances ? { instances: { line: cur.instances.line, items: dated, undated }, records } : {}) };
   }
   return { data: { version: 1, archetypes: out }, errors, warnings };
 }
@@ -80,6 +86,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.log('depth: verified');
   } else {
     fs.writeFileSync(out, text);
-    for (const [id, a] of Object.entries(data.archetypes)) console.log(`depth: ${id}: ${a.sections.reduce((n, s) => n + s.quotes.length, 0)} quotations placed, ${a.instances.items.length} dated instances, ${a.instances.undated.length} dated by era or not at all`);
+    for (const [id, a] of Object.entries(data.archetypes)) console.log(`depth: ${id}: ${a.sections.reduce((n, s) => n + s.quotes.length, 0)} quotations placed${a.instances ? `, ${a.instances.items.length} dated instances, ${a.instances.undated.length} dated by era or not at all` : ''}`);
   }
 }

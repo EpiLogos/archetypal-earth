@@ -12,7 +12,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMG_DIR = path.join(ROOT, 'public', 'img');
 const OUT = path.join(ROOT, 'public', 'data', 'images.json');
 const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
-const GROUPS = ['archetypes', 'families', 'occurrences'];
+const GROUPS = ['archetypes', 'families', 'theoretics', 'occurrences'];
 
 // the same licence law the fetcher enforces (scripts/images.mjs); "No restrictions"
 // is Commons' marker for no known copyright restrictions
@@ -61,6 +61,7 @@ for (const { group, id, ref } of entries) {
 const fieldIds = {
   archetypes: new Set(field.archetypes.map((x) => x.id)),
   families: new Set(field.families.map((x) => x.id)),
+  theoretics: new Set((field.theoretics || []).map((x) => x.id)),
   occurrences: new Set(field.occurrences.map((x) => x.id)),
 };
 for (const g of GROUPS) {
@@ -116,7 +117,7 @@ for (const [file, wheres] of bySource) {
 
 // ── the published fold agrees with the manifest ────────────────────────────
 let attached = 0;
-for (const [group, list] of [['archetypes', field.archetypes], ['families', field.families], ['occurrences', field.occurrences]]) {
+for (const [group, list] of [['archetypes', field.archetypes], ['families', field.families], ['theoretics', field.theoretics || []], ['occurrences', field.occurrences]]) {
   for (const obj of list) {
     if (obj.image) {
       attached++;
@@ -140,7 +141,7 @@ if (total > BUDGET_BYTES) err(`image dir ${mb(total)} MB over budget`);
 else if (total > BUDGET_BYTES * 0.9) warn(`image dir ${mb(total)} MB is above 90% of budget`);
 
 // ── report ─────────────────────────────────────────────────────────────────
-console.log(`images: ${entries.length} entries (archetypes ${Object.keys(images.archetypes || {}).length}, families ${Object.keys(images.families || {}).length}, occurrences ${Object.keys(images.occurrences || {}).length}), ${attached} folded, ${mb(total)} MB`);
+console.log(`images: ${entries.length} entries (archetypes ${Object.keys(images.archetypes || {}).length}, families ${Object.keys(images.families || {}).length}, theoretics ${Object.keys(images.theoretics || {}).length}, occurrences ${Object.keys(images.occurrences || {}).length}), ${attached} folded, ${mb(total)} MB`);
 for (const w of warnings) console.log(`warn: ${w}`);
 for (const e of errors) console.log(`ERROR: ${e}`);
 if (errors.length) {

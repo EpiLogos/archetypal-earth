@@ -7,6 +7,7 @@ import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } from '../types/history';
 import { clear, el, onReadGesture, plate } from '../ui/dom';
+import { modeOptions, optionAction } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
@@ -23,6 +24,8 @@ export class AionView {
   readonly root: HTMLElement;
   private heading: HTMLElement;
   private epochs: HTMLElement;
+  /** Shared next/prev rail over the timeline (same look as the Red Book's). */
+  private rail: HTMLElement;
   private card: HTMLElement;
   private markers: HTMLElement;
   private reading: HistoryReading | null = null;
@@ -34,10 +37,8 @@ export class AionView {
   private chapter: BookChapter | undefined;
   private bookToggle: HTMLButtonElement | null = null;
   private threadIndex = 0;
-  private threadPlaying = false;
   private threadTimer = 0;
   private threadEvents: AeonEvent[] = [];
-  private threadToggle: HTMLButtonElement | null = null;
   private ring: EquinoxRing;
   /** The field as the cursor has reached it: what has entered the world by now stands; what came later recedes. */
   private fieldRel: Float32Array | null = null;
@@ -54,9 +55,10 @@ export class AionView {
     // the lens's own controls: the shell places them under its title (MODES-RFC §2); this view draws no heading
     this.heading = el('div', { class: 'aion-controls' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
+    this.rail = el('nav', { class: 'rb-rail', hidden: true, 'aria-label': 'Walk' });
     this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
     this.markers = el('div', { class: 'aion-markers' });
-    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.card]);
+    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.rail, this.card]);
     parent.append(this.root);
     this.ring = new EquinoxRing(this.root);
     // a double-click on an event card opens the reading of its first resolvable occurrence; an epoch's card has none
@@ -82,7 +84,6 @@ export class AionView {
     if (changed) {
       this.reading = reading;
       this.epochId = '';
-      this.buildHeading(reading);
       this.buildMarkers(reading);
       clear(this.epochs);
       for (const epoch of reading.epochs.filter(e => !e.parentId)) {
@@ -90,7 +91,6 @@ export class AionView {
           onclick: () => this.select({ kind: 'epoch', id: epoch.id }) }));
       }
     }
-    this.threadPlaying = false;
     this.threadEvents = [];
     this.currentEvent = undefined;
     this.chapter = undefined;
@@ -98,8 +98,6 @@ export class AionView {
     this.engine.arcs.clear();
     this.engine.markers.sel.hide();
     const selection = state.selection;
-    (this.heading.querySelector('[aria-label="Historical event"]') as HTMLSelectElement).value = selection?.kind === 'event' ? selection.id : '';
-    (this.heading.querySelector('[aria-label="Historical thread"]') as HTMLSelectElement).value = selection?.kind === 'thread' ? selection.id : '';
     if (selection?.kind === 'epoch') {
       const epoch = reading.epochs.find(e => e.id === selection.id);
       if (epoch) {
@@ -128,20 +126,23 @@ export class AionView {
       this.engine.setEmphasis(null, null);
     }
     this.update(0);
-    const sel = state.selection;
-    const named = sel?.kind === 'epoch' ? reading.epochs.find((e) => e.id === sel.id)?.name
-      : sel?.kind === 'event' ? reading.events.find((e) => e.id === sel.id)?.name
-      : sel?.kind === 'thread' ? reading.threads.find((t) => t.id === sel.id)?.name
-      : sel?.kind === 'chapter' ? (() => { const c = this.history.book?.chapters.find((x) => x.id === sel.id); return c && `Aion, ${c.n === 'Foreword' ? 'the Foreword' : `chapter ${c.n}`}`; })() : undefined;
-    this.chrome?.setContext(named ?? `${reading.title} · ${reading.author}`);
-    this.chrome?.setControls([this.heading]);
+    const walking = selection?.kind === 'chapter' || selection?.kind === 'thread';
+    this.epochs.hidden = walking;
+    this.rail.hidden = !walking;
+    document.body.classList.toggle('aion-card-open', !!selection);
+    // a card owns the left: no title, no reading tabs under the close
+    this.chrome?.setContext(selection ? '' : `${reading.title} · ${reading.author}`);
+    if (selection) this.chrome?.setControls(null);
+    else {
+      this.buildHeading(reading);
+      this.chrome?.setControls([this.heading]);
+    }
   }
 
   hide() {
     if (this.root.hidden) return;
     this.root.hidden = true;
-    document.body.classList.remove('aion-mode');
-    this.threadPlaying = false;
+    document.body.classList.remove('aion-mode', 'aion-card-open');
     this.engine.arcs.clear();
     this.reading = null;
     this.state = undefined;
@@ -158,34 +159,28 @@ export class AionView {
 
   private buildHeading(reading: HistoryReading) {
     clear(this.heading);
-    // the readings are tabs: the shell's title carries the standing selection, so no select repeats it
-    const readingTabs = el('nav', { class: 'rb-modes aion-readings', 'aria-label': 'Readings' }, [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
-      el('button', { type: 'button', class: 'link-quiet', text: r.title, 'aria-pressed': String(r.id === reading.id),
-        onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }) })));
-    const eventSelect = el('select', { 'aria-label': 'Historical event', onchange: e => {
-      const id = (e.target as HTMLSelectElement).value;
-      (e.target as HTMLSelectElement).closest('details')?.removeAttribute('open');
-      this.select(id ? { kind: 'event', id } : undefined);
-    } }, [el('option', { value: '', text: 'Events' })]);
-    for (const event of [...reading.events].sort((a, b) => a.year - b.year)) eventSelect.append(el('option', { value: event.id, text: `${event.yearDisplay} · ${event.name}` }));
-    const threadSelect = el('select', { 'aria-label': 'Historical thread', onchange: e => {
-      const id = (e.target as HTMLSelectElement).value;
-      (e.target as HTMLSelectElement).closest('details')?.removeAttribute('open');
-      this.select(id ? { kind: 'thread', id } : undefined);
-    } }, [el('option', { value: '', text: 'Follow a thread' })]);
-    for (const thread of reading.threads) threadSelect.append(el('option', { value: thread.id, text: thread.name }));
-    // Extend the existing focus-label vocabulary; the current reading is a
-    // heading, and the quieter browsing controls open only when requested.
-    if (this.history.readings.length > 1) this.heading.append(readingTabs);
-    // the book itself, walked chapter by chapter (the way the Red Book mode walks its folios)
     const book = this.history.book;
-    this.bookToggle = book ? el('button', { type: 'button', class: 'link-quiet aion-book-toggle', text: 'Read the book', 'aria-pressed': 'false',
-      title: `${book.title}, chapter by chapter`,
-      onclick: () => this.select(this.state?.selection?.kind === 'chapter' ? undefined : { kind: 'chapter', id: book.chapters[0].id }) }) : null;
-    if (this.bookToggle) this.heading.append(this.bookToggle);
-    this.heading.append(
-      el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Browse' }),
-        el('div', { class: 'aion-choices' }, [el('label', {}, [el('span', { text: 'Events' }), eventSelect]), el('label', {}, [el('span', { text: 'Threads' }), threadSelect])])]));
+    const sel = this.state?.selection;
+    this.bookToggle = book ? optionAction('Read the book', () => this.select(sel?.kind === 'chapter' ? undefined : { kind: 'chapter', id: book.chapters[0].id }),
+      { pressed: sel?.kind === 'chapter', title: `${book.title}, chapter by chapter` }) : null;
+    const readings = [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
+      optionAction(r.title, () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }), { pressed: r.id === reading.id }));
+    const threads = reading.threads.map((thread) =>
+      optionAction(thread.name, () => this.select({ kind: 'thread', id: thread.id }), { pressed: sel?.kind === 'thread' && sel.id === thread.id }));
+    const events = [...reading.events].sort((a, b) => a.year - b.year).map((event) =>
+      optionAction(`${event.yearDisplay} · ${event.name}`, () => this.select({ kind: 'event', id: event.id }),
+        { pressed: sel?.kind === 'event' && sel.id === event.id }));
+    // labelled groups so the mode reads: what Aion is, which reading, the book, threads, then events
+    this.heading.append(modeOptions([
+      el('p', { class: 'mode-opt-blurb', text: 'Jung’s history of the aeons — the precession of the equinoxes through Pisces into Aquarius, read on the Earth.' }),
+      el('span', { class: 'mode-opt-label', text: 'Reading' }),
+      ...readings,
+      this.bookToggle,
+      threads.length ? el('span', { class: 'mode-opt-label', text: 'Threads' }) : null,
+      ...threads,
+      el('span', { class: 'mode-opt-label', text: 'Events' }),
+      ...events,
+    ]));
   }
 
   private buildMarkers(reading: HistoryReading) {
@@ -205,6 +200,15 @@ export class AionView {
     return passages.find(p => (p.basis ?? 'J') === 'J') ?? passages[0];
   }
 
+  /** Displayed prose: the scan's glued footnote digits and paragraph marks are not part of the sentence. */
+  private shown(text: string): string {
+    return text
+      .replace(/\s*¶\s*\d+[a-z]?(?:\s*,?\s*n\.\s*\d+)?/g, '')
+      .replace(/([.!?])\d{1,3}(?!\d)/g, '$1')
+      .replace(/[ \t]{2,}/g, ' ')
+      .trim();
+  }
+
   /** One passage as an open quotation, its cite in the same voice as every other cite in the field. */
   private quote(p: Passage): HTMLElement {
     const line = passageLine(this.model, p.work, p.locator);
@@ -214,7 +218,7 @@ export class AionView {
     const mark = p.basis === 'S'
       ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' })
       : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
-    return el('blockquote', { class: 'dp-def' }, [el('p', { text: p.text }), el('footer', {}, [cite, ' ', mark])]);
+    return el('blockquote', { class: 'dp-def' }, [el('p', { text: this.shown(p.text) }), el('footer', {}, [cite, ' ', mark])]);
   }
 
   /** The key passage, open, before the body. */
@@ -255,8 +259,8 @@ export class AionView {
     for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
     text.before(plate(epochHeroImage(this.model, this.reading!, epoch), { className: 'rv-hero', credit: true, palette: epoch.palette, alt: epoch.name }));
     text.append(el('p', { class: 'aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
-      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }),
-      ...this.keyQuote(epoch.passages), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
+      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: this.shown(epoch.oneLine) }),
+      ...this.keyQuote(epoch.passages), ...epoch.body.map(para => el('p', { class: 'rv-para', text: this.shown(para) })),
       links, ...this.moreSources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
   }
 
@@ -284,35 +288,46 @@ export class AionView {
       if (i !== undefined) links.append(el('button', { type: 'button', class: 'link-quiet', text: this.model.occ[i].label, onclick: () => this.navigate({ view: { kind: 'manifest', occId: id, context: { type: 'family', id: this.model.occ[i].familyId } }, deep: false }) }));
     }
     text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
-      el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...this.keyQuote(event.passages), ...event.body.map(text => el('p', { class: 'rv-para', text })),
+      el('p', { class: 'rv-para aion-lede', text: this.shown(event.oneLine) }), ...this.keyQuote(event.passages), ...event.body.map(para => el('p', { class: 'rv-para', text: this.shown(para) })),
       links, ...this.moreSources(event.passages), skyClockDisclosure(this.reading!, event));
   }
 
+  /** A chapter takes the same plate as every other card: a family it names, else an event it grounds. */
+  private chapterImage(chapter: BookChapter) {
+    for (const s of chapter.subjects) {
+      if (s.type !== 'family') continue;
+      const image = this.model.famById.get(s.id)?.image;
+      if (image) return image;
+    }
+    for (const e of chapter.events) {
+      const event = this.history.readings.find((r) => r.id === e.reading)?.events.find((x) => x.id === e.id);
+      if (event) { const image = eventHeroImage(this.model, event); if (image) return image; }
+    }
+    return undefined;
+  }
+
   /**
-   * One chapter of the book: Jung's own words from inside it, each opening its page in the corpus; the field it speaks
-   * of, tuned on the globe; and the events of the readings whose passages stand in its pages.
+   * One chapter of the book: Jung's own words from inside it; the field it speaks of, tuned on the globe; and the
+   * events of the readings whose passages stand in its pages. Walk controls sit on the timeline rail, not in the card.
    */
   private showChapter(chapter: BookChapter) {
     const book = this.history.book!;
     this.chapter = chapter;
     const all = book.chapters;
     const i = all.indexOf(chapter);
-    const text = this.openCard();
     const step = (delta: number) => this.select({ kind: 'chapter', id: all[(i + delta + all.length) % all.length].id });
-    text.append(el('div', { class: 'aion-thread aion-book' }, [
-      el('span', { text: `${book.title.split(':')[0]} · ${i + 1}/${all.length}` }),
-      el('p', { class: 'aion-thread-line', text: book.line }),
-      el('div', {}, [
-        el('button', { type: 'button', text: '←', 'aria-label': 'Previous chapter', onclick: () => step(-1) }),
-        el('span', { class: 'rb-progress', text: chapter.n }),
-        el('button', { type: 'button', text: '→', 'aria-label': 'Next chapter', onclick: () => step(1) }),
-      ]),
-    ]));
-    const [from, to] = chapter.pages;
+    clear(this.rail);
+    this.rail.append(
+      el('button', { type: 'button', text: '←', 'aria-label': 'Previous chapter', onclick: () => step(-1) }),
+      el('span', { class: 'rb-progress', text: `${i + 1} / ${all.length}` }),
+      el('button', { type: 'button', text: '→', 'aria-label': 'Next chapter', onclick: () => step(1) }),
+    );
+    const text = this.openCard();
+    const image = this.chapterImage(chapter);
+    if (image) text.before(plate(image, { className: 'rv-hero', credit: true, alt: chapter.title }));
     text.append(
-      el('p', { class: 'aion-date rv-line', text: `${chapter.n === 'Foreword' ? 'Foreword' : `Chapter ${chapter.n}`} · pdf p${from}${to ? `–${to}` : ''}` }),
       el('h2', { class: 'rv-name', text: chapter.title }),
-      el('p', { class: 'rv-para aion-lede', text: chapter.line }),
+      el('p', { class: 'rv-para aion-lede', text: this.shown(chapter.line) }),
       ...chapter.quotes.map((q) => this.quote({ text: q.text, work: q.cite.work, locator: q.cite.locator })),
     );
     const links = el('div', { class: 'aion-links' });
@@ -327,10 +342,8 @@ export class AionView {
         title: e.readingTitle, onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: e.reading, selection: { kind: 'event', id: e.id } } }) })]));
       text.append(el('details', { class: 'aion-sources', open: chapter.events.length <= 4 }, [el('summary', { text: `In the readings · ${chapter.events.length} ${chapter.events.length === 1 ? 'event' : 'events'} cite this chapter` }), list]));
     }
-    // the deep dive: the chapter's own opening page in the corpus, read in full
-    if (this.passages?.known(book.work)) text.append(el('p', { class: 'aion-book-deep' }, [el('button', { type: 'button', class: 'link-quiet', text: 'Read the chapter from its first page',
-      onclick: () => this.passages!.open(book.work, `pdf p${from}`) })]));
-    // the world looks at the first event the chapter grounds that has a place
+    if (this.passages?.known(book.work)) text.append(el('p', { class: 'aion-book-deep' }, [el('button', { type: 'button', class: 'link-quiet', text: 'Read in the corpus',
+      onclick: () => this.passages!.open(book.work, `pdf p${chapter.pages[0]}`) })]));
     const located = chapter.events.map((e) => this.history.readings.find((r) => r.id === e.reading)?.events.find((x) => x.id === e.id))
       .find((e) => e && Number.isFinite(e.lat) && Number.isFinite(e.lon));
     if (located) this.engine.rig.flyTo(located.lat!, located.lon!, 2.8, { duration: 1.8 });
@@ -349,22 +362,18 @@ export class AionView {
     const event = this.threadEvents[this.threadIndex];
     if (!event) return;
     this.showEvent(event, true);
-    const thread = this.reading!.threads.find(t => t.id === this.state?.selection?.id)!;
     const step = (delta: number) => { this.threadIndex = (this.threadIndex + delta + this.threadEvents.length) % this.threadEvents.length; this.threadTimer = 0; this.showThreadEvent(); };
-    this.threadToggle = el('button', { type: 'button', text: this.threadPlaying ? 'Pause thread' : 'Play thread', onclick: () => {
-      this.threadPlaying = !this.threadPlaying;
-      this.threadTimer = 0;
-      this.threadToggle!.textContent = this.threadPlaying ? 'Pause thread' : 'Play thread';
-    } });
-    this.card.querySelector('.rv-text')!.prepend(el('div', { class: 'aion-thread' }, [el('span', { text: `${thread.name} · ${this.threadIndex + 1}/${this.threadEvents.length}` }),
-      el('p', { class: 'aion-thread-line', text: thread.oneLine }),
-      el('div', {}, [el('button', { type: 'button', text: '←', 'aria-label': 'Previous historical event', onclick: () => step(-1) }), this.threadToggle,
-        el('button', { type: 'button', text: '→', 'aria-label': 'Next historical event', onclick: () => step(1) })])]));
+    clear(this.rail);
+    this.rail.append(
+      el('button', { type: 'button', text: '←', 'aria-label': 'Previous historical event', onclick: () => step(-1) }),
+      el('span', { class: 'rb-progress', text: `${this.threadIndex + 1} / ${this.threadEvents.length}` }),
+      el('button', { type: 'button', text: '→', 'aria-label': 'Next historical event', onclick: () => step(1) }),
+    );
   }
 
+  /** The timeline's Play walks the thread; there is no second Play on the rail. */
   pauseThread() {
-    this.threadPlaying = false;
-    if (this.threadToggle) this.threadToggle.textContent = 'Play thread';
+    this.time.pause();
   }
 
   /**
@@ -452,13 +461,14 @@ export class AionView {
       dot.element.style.pointerEvents = alpha > 0.2 ? 'auto' : 'none';
       dot.element.tabIndex = alpha > 0.2 && projected.facing > 0 ? 0 : -1;
     }
-    if (this.threadPlaying && !this.time.playing) {
+    // the clock's Play advances the thread; Pause on the clock stops it
+    if (this.threadEvents.length && this.time.playing) {
       this.threadTimer += dt;
       if (this.threadTimer > 5) {
         this.threadTimer = 0;
         if (this.threadIndex + 1 < this.threadEvents.length) { this.threadIndex++; this.showThreadEvent(); }
-        else { this.threadPlaying = false; if (this.threadToggle) this.threadToggle.textContent = 'Play thread'; }
+        else this.time.pause();
       }
-    }
+    } else this.threadTimer = 0;
   }
 }

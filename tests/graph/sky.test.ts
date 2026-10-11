@@ -32,7 +32,7 @@ describe('sky anchors in the graph', () => {
     expect(base.bodyIds).toEqual([]);
     expect(base.nodes.some((n) => n.kind === 'body')).toBe(false);
     expect(base.edges.some((e) => e.kind === 'sky')).toBe(false);
-    expect(base.nodes.length).toBe(field.archetypes.length + field.families.length + field.occurrences.length);
+    expect(base.nodes.length).toBe(field.archetypes.length + field.theoretics.length + field.families.length + field.occurrences.length);
   });
 
   it('does not touch the graph it extends, and keeps every existing node and edge where it was', () => {

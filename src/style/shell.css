@@ -30,26 +30,31 @@
 .sh-aside { display: flex; align-items: center; }
 .sh-aside .mode-switch { position: relative; top: auto; right: auto; }
 .sh-title {
-  margin: 14px 0 0 2px; font: 600 clamp(1.35rem, 1.9vw, 1.75rem)/1.12 var(--serif); letter-spacing: -0.004em; color: var(--ink);
+  margin: 12px 0 0 2px; font: 600 clamp(1.35rem, 1.9vw, 1.75rem)/1.12 var(--serif); letter-spacing: -0.004em; color: var(--ink);
   text-shadow: 0 2px 28px rgb(var(--deep-rgb) / 0.9);
 }
 .sh-title[hidden] { display: none; }
 /* on the Field the focus label carries the subject's name; the shell's title stays for assistive tech only */
 body[data-lens="field"] .sh-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
 .sh-controls { margin: 10px 0 0 2px; font: 11.5px var(--sans); letter-spacing: 0.04em; color: var(--ink-2); }
+.sh-controls:empty { display: none; }
 .sh-controls[hidden] { display: none; }
 .sh-controls select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; font: inherit; }
+.sh-controls .mode-opt-action { border-bottom: 0; text-decoration: none; }
 .sh-controls option { background: #0a1020; color: #e5eafa; }
 .sh-controls .aion-reading select { font: 400 0.98rem var(--serif); letter-spacing: 0; color: var(--ink-2); }
-.sh-controls .aion-browse { margin-top: 8px; }
+.sh-controls .mode-options, .sh-controls .aion-browse { margin-top: 2px; }
 .sh-controls .rb-modes { margin-top: 0; }
 .sh-controls .dy-basins { margin-top: 0; }
+.sh-controls .dy-theory { display: none; }
 body.search-open .shell, body.deep-open .shell { opacity: 0; pointer-events: none; }
 body.search-open .shell > *, body.deep-open .shell > * { pointer-events: none; }
 
 /* what used to sit in the top-left corner now starts under the lens button */
 .focus-label { top: var(--shell-below); left: calc(var(--shell-x) + 2px); }
 .sky-culture { top: calc(var(--shell-below) + 34px); left: calc(var(--shell-x) + 2px); }
+/* Astrology: Names + live live inside Options — the floating strip would sit under the Options icon */
+body[data-lens=astrology] .sky-culture { display: none !important; }
 
 /* ── the corners ───────────────────────────────────────────────────── */
 .sh-corner { position: fixed; top: calc(var(--shell-y) + 2px); right: calc(var(--shell-x) - 4px); z-index: 22; display: flex; align-items: center; gap: 4px; }
@@ -123,6 +128,14 @@ body.deep-open .sh-chips, body.panel-open .sh-chips { opacity: 0; pointer-events
 .lp-handle { display: none; }
 .lp-close { position: absolute; top: 10px; right: 10px; z-index: 2; }
 .lp-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 22px 24px 28px; scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent; }
+/* walk rail pinned under the scroll body — same language as rb-rail / dy-rail */
+.lp-foot {
+  flex: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.55);
+}
+.lp-foot[hidden] { display: none; }
+.lp-foot .th-step { margin: 0; padding: 0; position: static; background: none; }
 .lp-error { color: var(--ink-2); font: 13px/1.5 var(--sans); margin: 30px 0; }
 body.lens-loading .lens-panel { opacity: 0.6; }
 body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important; }
@@ -210,14 +223,25 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
 .th-links { display: grid; gap: 2px; margin: 18px 0 8px; border-top: 1px solid var(--hair); padding-top: 10px; }
 .th-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 40px; text-align: left; font: 13px var(--sans); color: var(--ink-2); border-radius: 8px; padding: 0 6px; }
 .th-link:hover { color: var(--ink); background: rgb(var(--core-rgb) / 0.06); }
-.th-step { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; }
-.th-count { font: 11.5px var(--sans); color: var(--ink-3); font-feature-settings: 'tnum'; }
+/* Theory walk rail in the panel foot: same circles as rb-rail / dy-rail */
+.th-step, .lp-foot .rb-rail {
+  position: static; transform: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin: 0; padding: 0;
+}
+.th-step button, .lp-foot .rb-rail button {
+  width: 22px; height: 22px; min-width: 22px; min-height: 22px; padding: 0; border-radius: 50%;
+  border: 1px solid var(--hair); background: rgb(0 0 0 / 0.28); color: var(--ink-2); font-size: 12px; line-height: 1;
+  display: grid; place-items: center;
+}
+.th-step button:hover, .lp-foot .rb-rail button:hover { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
+.th-count, .lp-foot .rb-progress { font: 10.5px var(--sans); letter-spacing: 0.1em; color: var(--ink-3); font-feature-settings: 'tnum'; }
 @media (max-width: 760px) {
   .th-tab { min-height: var(--tap); padding: 4px 14px; }
   .th-link { min-height: var(--tap); }
   .lp-btn { min-height: var(--tap); }
+  .th-step button, .lp-foot .rb-rail button { position: relative; }
+  .th-step button::after, .lp-foot .rb-rail button::after { content: ''; position: absolute; inset: -11px; }
 }
-.sh-controls .dy-theory { display: inline-block; margin-top: 12px; font-size: 11.5px; }
 
 /* ── the landing: one line of mine and one action, over the field (MODES-RFC §6) ───── */
 .landing {
@@ -412,3 +436,12 @@ body.landing-on .time { opacity: 0.35; }
 .sh-scope[hidden] { display: none; }
 .sh-scope-toggle { font: inherit; color: var(--ink-2); }
 @media (max-width: 720px) { .sh-scope { font-size: 11px; } body.natal-sky .sh-scope, body.po-holding .sh-scope { display: none; } }
+
+/* The number pages and the egg block (the deep sheet): the position's QL block, the count as stages, and the drawing
+   that stands beside the sentence describing it. No captions, warrants or pointers around any figure. */
+.as-figure canvas, .as-figure-canvas { width: 100%; max-width: 420px; display: block; border-radius: 10px; }
+.dp-page { margin: 2px 0 0; }
+.dp-egg { margin: 6px 0 0; }
+.dp-egg-figure { display: grid; place-items: center; margin: 2px 0 10px; }
+.ql-stages { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 2px 0 8px; align-items: baseline; }
+.ql-stage { padding: 4px 9px; border: 1px solid var(--hair); border-radius: 999px; font: 500 11.5px var(--sans); color: var(--ink-2); letter-spacing: 0.02em; }

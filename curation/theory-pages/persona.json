@@ -1,0 +1,50 @@
+{
+  "_note": "The persona: the mask (CW6 ¶800, CW7 ¶305, ¶246), the outer face and its functions (CW6 ¶801), the mask the collective psyche wears (CW7 ¶245) and the role the public attributes (CW18 ¶1334), and the dismantling that individuation requires (CW7 ¶505, CW6 ¶807). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "persona",
+  "line": "The face put on for the world: a functional compromise between individual and society — real as a function, a semblance as a self, and a disaster when worn as one.",
+  "sections": [
+    {
+      "id": "the-mask",
+      "title": "The mask",
+      "line": "The word is taken from the theatre and kept: what is worn is not who wears it.",
+      "quotes": [
+        { "work": "cw06", "para": 800, "quote": "This mask, i.e., the ad hoc adopted attitude, I have called the persona,79 which was the name for the masks worn by actors in antiquity." },
+        { "work": "cw07", "para": 305, "quote": "a complicated system of relations between the individual consciousness and society, fittingly enough a kind of mask, designed on the one hand to make a definite impression upon others, and, on the other, to conceal the true nature of the individual" },
+        { "work": "cw07", "para": 246, "quote": "Fundamentally the persona is nothing real: it is a compromise between individual and society as to what a man should appear to be." }
+      ]
+    },
+    {
+      "id": "the-function",
+      "title": "Its function",
+      "line": "The persona is not a fault but a function: the outward attitude, concerned with objects, indispensable and never the individuality.",
+      "quotes": [
+        { "work": "cw06", "para": 801, "quote": "a functional complex that comes into existence for reasons of adaptation or personal convenience, but is by no means identical with the individuality. The persona is exclusively concerned with the relation to objects" }
+      ]
+    },
+    {
+      "id": "the-collectives-mask",
+      "title": "The collective's mask",
+      "line": "Worn long enough, the mask stops feigning and becomes a collective truth speaking through a person.",
+      "quotes": [
+        { "work": "cw07", "para": 245, "quote": "It is, as its name implies, only the mask worn by the collective psyche, a mask that feigns individuality" },
+        { "work": "cw18", "para": 1334, "quote": "The persona is never the true character; it is a composite of the individual's behaviour and of the role attributed to him by the public" }
+      ]
+    },
+    {
+      "id": "the-taking-off",
+      "title": "Taking it off",
+      "line": "The danger is identification: whoever becomes the role is answered by the unconscious — and dissolution is a condition of individuation, not an achievement of will.",
+      "quotes": [
+        { "work": "cw07", "para": 505, "quote": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention" },
+        { "work": "cw06", "para": 807, "quote": "Anyone who is himself his outward role will infallibly succumb to the inner processes" }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "family", "id": "persona" },
+    { "type": "family", "id": "wounded-physician" },
+    { "type": "theoretic", "id": "compensation" },
+    { "type": "theoretic", "id": "complex" }
+  ]
+}

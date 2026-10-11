@@ -53,6 +53,10 @@ export interface LensContext {
   takeBirthPrefill(): BirthPrefill | null;
   /** the route this lens stands at changed from inside it (no reload): keeps the hash and Back in step */
   setPath(path: string[], opts?: { replace?: boolean }): void;
+  /** Birth-sky / live status line for Options (Astrology); null when nothing to say. */
+  skyStatus(): { label: string; detail: string; state: string } | null;
+  /** Body the sky is holding (Astrology / sky card), if any. */
+  skyBody(): import('../types/sky').BodyKey | null;
 }
 
 export interface LensInstance {

@@ -12,20 +12,25 @@ const shots = process.env.SHOTS;
 for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   const { ctx, page, logs } = await open(browser, { width: w, height: h, hash: '#/aion/jung-aion', mobile: w < 500 });
   await page.waitForTimeout(7000);
-  const toggle = page.locator('.aion-book-toggle');
+  const options = page.locator('.mode-options > summary');
+  check(await options.isVisible(), `${tag}: Options icon is in the shell`);
+  await options.click();
+  await page.waitForTimeout(400);
+  const toggle = page.locator('.mode-options-body button', { hasText: 'Read the book' });
   check(await toggle.isVisible(), `${tag}: the mode offers the book`);
   await toggle.click();
   await page.waitForTimeout(2500);
   check(/#\/aion\/jung-aion\/chapter\/foreword$/.test(page.url()), `${tag}: the book opens at the Foreword, and the address says so`, page.url());
   const quotes = page.locator('.aion-card blockquote');
   check(await quotes.count() >= 1, `${tag}: the chapter quotes Jung`, `${await quotes.count()} quotations`);
+  check(await page.locator('.aion .rb-rail').isVisible(), `${tag}: the walk rail sits over the timeline`);
   // walk to chapter VI
   for (let i = 0; i < 6; i++) { await page.locator('[aria-label="Next chapter"]').click(); await page.waitForTimeout(400); }
   await page.waitForTimeout(2000);
   const title = (await page.locator('.aion-card .rv-name').textContent()) ?? '';
   check(/Sign of the Fishes/.test(title), `${tag}: the arrows walk the chapters in Jung's order`, title);
-  const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
-  check(/in Aion VI/.test(line), `${tag}: the globe shows the chapter's own set`, line);
+  const drawn = await page.evaluate(() => { const t = window.__earth.engine.presences.relTarget ?? null; return t ? Array.from(t).filter((v) => v >= 0.035).length : null; });
+  check(drawn !== null && drawn < 2815 * 0.6, `${tag}: the globe shows the chapter's own set`, `${drawn} drawn`);
   const events = page.locator('.aion-book-events button');
   check(await events.count() > 5, `${tag}: the readings' events that cite the chapter are linked`, `${await events.count()} events`);
   if (shots) await page.screenshot({ path: `${shots}/aion-book-${tag}.png` });

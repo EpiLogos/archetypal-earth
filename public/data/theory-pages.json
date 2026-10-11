@@ -1,0 +1,2205 @@
+{
+ "version": 1,
+ "pages": {
+  "aion-time": {
+   "concept": "aion-time",
+   "line": "The time the field stands in: aeons that turn at the spring-point, a moment that carries its own quality, and the law that whatever runs high turns into its opposite.",
+   "sections": [
+    {
+     "id": "the-aeon",
+     "title": "The aeon",
+     "line": "Jung dates the Christian aeon to the start of Pisces and reads the coming turn as a psychological event, not merely an astronomical one.",
+     "quotes": [
+      {
+       "text": "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development.",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "pdf p9"
+       }
+      },
+      {
+       "text": "filled with intimations of a kind of enantiodromian reversal of dominants. I mean by this the dilemma of Christ and Antichrist",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "pdf p9"
+       }
+      },
+      {
+       "text": "spring-point will have moved from its present position 18 degrees into Aquarius, the next aeon, that of the Water Carrier.",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "¶136 (pdf p94)"
+       }
+      },
+      {
+       "text": "We are now nearing that great change which may be expected when the spring-point enters Aquarius",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶589 (pdf p284)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "enantiodromia",
+     "title": "Enantiodromia",
+     "line": "Heraclitus' law, kept as Jung's: every development that reaches its optimum turns into its opposite — a fact of the individual as much as of an age.",
+     "quotes": [
+      {
+       "text": "it is used to designate the play of opposites in the course of events—the view that everything that exists turns into its opposite.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶708 (pdf p389)"
+       }
+      },
+      {
+       "text": "I use the term enantiodromia for the emergence of the unconscious opposite in the course of time",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶709 (pdf p390)"
+       }
+      },
+      {
+       "text": "every psychic development, whether individual or collective, possesses an optimum which, when exceeded, produces an enantiodromia, that is, turns into its opposite",
+       "cite": {
+        "work": "cw13",
+        "workTitle": "Alchemical Studies",
+        "locator": "¶294 (pdf p277)"
+       }
+      },
+      {
+       "text": "discovered the most marvellous of all psychological laws: the regulative function of opposites",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶111 (pdf p66)"
+       }
+      },
+      {
+       "text": "What we observe here is a fundamental law of life—enantiodromia or conversion into the opposite; and it is this that makes possible the reunion of the warring halves of the personality and thereby brings the civil war to an end.",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶526 (pdf p279)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-moment",
+     "title": "The quality of the moment",
+     "line": "Time is not a neutral container: whatever is born or done at a moment carries that moment's stamp, which is what makes astrology and the mantic methods possible at all.",
+     "quotes": [
+      {
+       "text": "whatever is born or done at this particular moment of time has the quality of this moment of time",
+       "cite": {
+        "work": "cw15",
+        "workTitle": "The Spirit in Man, Art and Literature",
+        "locator": "¶82 (pdf p52)"
+       }
+      },
+      {
+       "text": "Fate evolves with time, and it is identical with time.",
+       "cite": {
+        "work": "sem-visions",
+        "workTitle": "Visions: Notes of the Seminar 1930-1934",
+        "locator": "pdf p804",
+        "print": "736"
+       }
+      },
+      {
+       "text": "Fate and time are absolutely identical, fate being the more human aspect and time the more energic aspect. And time is another aspect of energy, for without time there is no energy, and without energy there is no time. Time is measured energy",
+       "cite": {
+        "work": "sem-visions",
+        "workTitle": "Visions: Notes of the Seminar 1930-1934",
+        "locator": "pdf p804",
+        "print": "736"
+       }
+      },
+      {
+       "text": "finds itself in the psychically relative space-time continuum that is characteristic of the unconscious as such",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "¶45 (pdf p36)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-world-clock",
+     "title": "The world clock",
+     "line": "The most exact image Jung was given of it: a clock whose two circles have one centre, seen in a dream of 1913.",
+     "quotes": [
+      {
+       "text": "There is a vertical and a horizontal circle, having a common centre. This is the world clock",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶307 (pdf p220)"
+       }
+      },
+      {
+       "text": "It is a circle, the eternal return. That is probably the historical origin of the idea of the apokatastasis, but that life is a circle is psychologically an archetypal idea",
+       "cite": {
+        "work": "sem-zarathustra",
+        "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+        "locator": "pdf p1375"
+       }
+      }
+     ]
+    },
+    {
+     "id": "as-a-system",
+     "title": "The turn as a system",
+     "line": "Read as a dynamical structure, the turn has a shape: stability that carries its own instability.",
+     "quotes": [
+      {
+       "text": "designates not only where a dynamic becomes unstable, but where it becomes stable as well",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p63",
+        "print": "62"
+       }
+      },
+      {
+       "text": "order is never pure. Like the yin and the yang, it carries within it the potential to turn into its opposite. The same is true for chaos",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p172",
+        "print": "171"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "aion"
+    },
+    {
+     "type": "family",
+     "id": "world-clock"
+    },
+    {
+     "type": "theoretic",
+     "id": "synchronicity"
+    }
+   ]
+  },
+  "archetype-as-such": {
+   "concept": "archetype-as-such",
+   "line": "The keystone: an irrepresentable, purely formal model that never appears itself — only the images it pre-forms can be met, dated and compared.",
+   "sections": [
+    {
+     "id": "the-model",
+     "title": "The model",
+     "line": "The archetype in itself is hypothetical: a formal condition of image-making, never an image.",
+     "quotes": [
+      {
+       "text": "The archetype as such is a hypothetical and irrepresentable model",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶6 (pdf p16)",
+        "print": "5"
+       }
+      },
+      {
+       "text": "The archetype in itself is empty and purely formal",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶155 (pdf p90)",
+        "print": "79"
+       }
+      },
+      {
+       "text": "Any archetype is really perfectly indescribable, something perfectly empty, but capable of assimilating a certain kind of material of tremendous variation.",
+       "cite": {
+        "work": "sem-dream-analysis",
+        "workTitle": "Dream Analysis: Notes of the Seminar",
+        "locator": "pdf p551",
+        "print": "525"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-name",
+     "title": "The name",
+     "line": "The word enters Jung's vocabulary from Augustine's idea, and he never claims it as his own coinage.",
+     "quotes": [
+      {
+       "text": "down to Malebranche and Bacon, still stands on a Platonic footing in this respect.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶275 (pdf p148)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-instincts-side",
+     "title": "The instinct's side",
+     "line": "The same formal pole, seen from the body's end: the archetype is what the instinct looks like from inside.",
+     "quotes": [
+      {
+       "text": "archetypes are simply the forms which the instincts assume",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶339 (pdf p169)"
+       }
+      },
+      {
+       "text": "as the self-portrait of the instinct, in exactly the same way as consciousness is an inward perception of the objective",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶277 (pdf p148)"
+       }
+      },
+      {
+       "text": "an instinct is always and inevitably coupled with something like a philosophy of life",
+       "cite": {
+        "work": "cw16",
+        "workTitle": "The Practice of Psychotherapy",
+        "locator": "pdf p84"
+       }
+      }
+     ]
+    },
+    {
+     "id": "as-many-as-situations",
+     "title": "As many as situations",
+     "line": "There is no fixed catalogue: the psyche forms as many archetypes as there are recurring situations to meet.",
+     "quotes": [
+      {
+       "text": "as many archetypes as there are typical situations",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶99 (pdf p59)",
+        "print": "48"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "theoretic",
+     "id": "psychoid"
+    },
+    {
+     "type": "theoretic",
+     "id": "collective-unconscious"
+    },
+    {
+     "type": "theoretic",
+     "id": "complex"
+    },
+    {
+     "type": "theoretic",
+     "id": "numinosum"
+    },
+    {
+     "type": "theoretic",
+     "id": "transcendent-function"
+    }
+   ]
+  },
+  "collective-unconscious": {
+   "concept": "collective-unconscious",
+   "line": "The impersonal stratum beneath the personal one: not inherited ideas but the inherited possibility of forming them — identical in all individuals, and inferred only from what individuals live.",
+   "sections": [
+    {
+     "id": "the-deeper-layer",
+     "title": "The deeper layer",
+     "line": "The 1934 Eranos definition: a personal unconscious resting on a deeper, inborn, universal one.",
+     "quotes": [
+      {
+       "text": "A more or less superficial layer of the unconscious is undoubtedly personal. I call it the personal unconscious. But this personal unconscious rests upon a deeper layer, which does not derive from personal experience and is not a personal acquisition but is inborn. This deeper layer I call the collective unconscious. I have chosen the term \"collective\" because this part of the unconscious is not individual but universal.",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶2 (pdf p14)",
+        "print": "3"
+       }
+      },
+      {
+       "text": "The collective unconscious is a part of the psyche which can be negatively distinguished from a personal unconscious by the fact that it does not, like the latter, owe its existence to personal experience",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶88 (pdf p53)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "birth",
+     "title": "The concept's birth",
+     "line": "Before the name, the observation: a stratum of the unconscious that no personal history accounts for.",
+     "quotes": [
+      {
+       "text": "We must rather suppose that they are something like universally existent constituents of the unconscious psyche, which form, as it were, a deeper stratum of a collective nature",
+       "cite": {
+        "work": "cw03",
+        "workTitle": "Psychogenesis of Mental Disease",
+        "locator": "¶550 (pdf p220)"
+       }
+      },
+      {
+       "text": "there are other contents which do not originate in personal acquisitions but in the inherited possibility of psychic functioning in general, i.e., in the inherited structure of the brain.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶842 (pdf p440)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-formula",
+     "title": "Inherited possibilities of ideas",
+     "line": "The formula settles: what is inherited is not ideas but the possibility of ideas — conditions for representation, not representations.",
+     "quotes": [
+      {
+       "text": "There are, however, innate possibilities of ideas, a priori conditions for fantasy-production, which are somewhat similar to the Kantian categories",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶14 (pdf p21)"
+       }
+      },
+      {
+       "text": "It is rather a question of inherited possibilities of ideas, “pathways” gradually traced out through the cumulative experience of our ancestors.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶99 (pdf p65)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "instinct",
+     "title": "Instinct and its correlates",
+     "line": "The collective unconscious is not only images: it is the instincts and their correlates together.",
+     "quotes": [
+      {
+       "text": "there exists a second psychic system of a collective, universal, and impersonal nature which is identical in all individuals",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "pdf p54"
+       }
+      },
+      {
+       "text": "The collective unconscious consists of the sum of the instincts and their correlates, the archetypes. Just as everybody possesses instincts, so he also possesses a stock of archetypal images",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶280 (pdf p150)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "phenomenology",
+     "title": "Inferred from phenomenology",
+     "line": "Its existence is never observed directly — only inferred from the forms individual experience takes.",
+     "quotes": [
+      {
+       "text": "This disposition I have called the collective unconscious, the existence of which can be inferred only from individual phenomenology",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "¶278 (pdf p191)"
+       }
+      },
+      {
+       "text": "a sort of timeless and eternal world-image which counterbalances our conscious, momentary picture of the world. It means nothing less than another world, a mirrorworld if you will",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶729 (pdf p388)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    },
+    {
+     "type": "theoretic",
+     "id": "complex"
+    },
+    {
+     "type": "theoretic",
+     "id": "participation-mystique"
+    }
+   ]
+  },
+  "compensation": {
+   "concept": "compensation",
+   "line": "The psyche's self-regulation: what consciousness leaves out returns from the unconscious, not as an enemy but as an adjustment — and the dream is where this work is done.",
+   "sections": [
+    {
+     "id": "the-definition",
+     "title": "The definition",
+     "line": "Jung widens the word past Adler: compensation is not the patching of inferiority feelings but the psyche's inherent self-regulation.",
+     "quotes": [
+      {
+       "text": "Whereas Adler restricts his concept of compensation to the balancing of inferiority feelings, I conceive it as functional adjustment in general, an inherent self-regulation of the psychic apparatus.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶694 (pdf p384)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "self-regulation",
+     "title": "The self-regulating psyche",
+     "line": "The model is the body's: a system that answers imbalance with counteraction, and whose equilibrium depends on the other side being spoken.",
+     "quotes": [
+      {
+       "text": "Since the psyche is a self-regulating system, just as the body is, the regulating counteraction will always develop in the unconscious",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶159 (pdf p91)"
+       }
+      },
+      {
+       "text": "the unconscious behaves in a compensatory or complementary manner towards the conscious",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶132 (pdf p81)"
+       }
+      },
+      {
+       "text": "conscious and unconscious are not necessarily in opposition to one another, but complement one another to form a totality, which is the self",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶274 (pdf p157)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-dream",
+     "title": "The dream's other side",
+     "line": "In practice, most dreams do this work: they stress what the waking attitude left out.",
+     "quotes": [
+      {
+       "text": "in my experience the vast majority of dreams are compensatory. They always stress the other side in order to maintain the psychic equilibrium.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶170 (pdf p93)"
+       }
+      },
+      {
+       "text": "As a rule the meaning of a dream is compensatory to the conscious attitude, i.e., it adds to the latter what was lacking in it.",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶1391 (pdf p565)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "not-opposition",
+     "title": "Not opposition",
+     "line": "The word is chosen against 'contrary': the complement acts purposively, and cannot be predicted mechanically.",
+     "quotes": [
+      {
+       "text": "not merely mechanical or complementary, but rather compensatory",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶98 (pdf p81)"
+       }
+      },
+      {
+       "text": "the conscious attitude of the neurotic is unnaturally onesided and must be balanced by complementary or compensatory contents deriving from the unconscious",
+       "cite": {
+        "work": "cw16",
+        "workTitle": "The Practice of Psychotherapy",
+        "locator": "¶12 (pdf p21)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-ordering-factor",
+     "title": "The ordering factor",
+     "line": "What arrives as compensation is often a whole figure, not a patch: the ordering symbols — mandala, quaternity — surface exactly when orientation is lost.",
+     "quotes": [
+      {
+       "text": "a compensatory ordering factor which is independent of the ego and whose nature transcends consciousness",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶447 (pdf p242)"
+       }
+      },
+      {
+       "text": "Mandala symbols appear very frequently in moments of psychic disorientation as compensatory ordering factors",
+       "cite": {
+        "work": "cw03",
+        "workTitle": "Psychogenesis of Mental Disease",
+        "locator": "¶582 (pdf p235)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "as-a-system",
+     "title": "The counteraction as a system",
+     "line": "Read as a dynamical system, compensation is why a stuck state cannot simply be fixed from the side that is stuck.",
+     "quotes": [
+      {
+       "text": "Because the shadow compensates consciousness, whenever we think we know what the shadow is, its opposite automatically begins to emerge from the unconscious",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p94",
+        "print": "93"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "anima"
+    },
+    {
+     "type": "family",
+     "id": "persona"
+    },
+    {
+     "type": "theoretic",
+     "id": "complex"
+    },
+    {
+     "type": "theoretic",
+     "id": "individuation"
+    },
+    {
+     "type": "theoretic",
+     "id": "transcendent-function"
+    }
+   ]
+  },
+  "complex": {
+   "concept": "complex",
+   "line": "The psyche's autonomous parts: feeling-toned knots that behave like secondary personalities — the instrument Jung found the unconscious with.",
+   "sections": [
+    {
+     "id": "the-founding",
+     "title": "The founding definition",
+     "line": "The word starts as a technical term of the association experiments: an emotionally charged group of ideas, measurable by its disturbance of reaction.",
+     "quotes": [
+      {
+       "text": "By \"emotionally charged complex\" we mean the sum of ideas referring to a particular feeling-toned event. We shall always use the term \"complex\" in this sense in what follows.",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶166 (pdf p52)"
+       }
+      },
+      {
+       "text": "I found then that the experiments were almost regularly disturbed by psychic factors beyond the control of consciousness. I called them complexes",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶832 (pdf p335)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "how-they-behave",
+     "title": "How a complex behaves",
+     "line": "Not a content among contents: the complex acts as a personality, with intentions of its own, and the ego can be subjected to it.",
+     "quotes": [
+      {
+       "text": "The complex plays the part of a second and stronger personality, to which ego-consciousness is subjected.",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶902 (pdf p232)"
+       }
+      },
+      {
+       "text": "This second personality devours what is left of the normal ego and forces it into the role of a secondary (oppressed) complex",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶861 (pdf p225)"
+       }
+      },
+      {
+       "text": "because the complexes behave quite independently of the ego, and force upon it a quasi-foreign will",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶1353 (pdf p329)"
+       }
+      },
+      {
+       "text": "Complexes do indeed behave like secondary or partial personalities possessing a mental life of their own.",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶21 (pdf p24)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "what-one-is",
+     "title": "What one is",
+     "line": "The 1934 reformulation: a complex is the image of a situation, emotionally accentuated and incompatible with the habitual attitude — which is why it has us.",
+     "quotes": [
+      {
+       "text": "What then, scientifically speaking, is a \"feeling-toned complex\"? It is the image of a certain psychic situation which is strongly accentuated emotionally and is, moreover, incompatible with the habitual attitude of consciousness.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶201 (pdf p108)"
+       }
+      },
+      {
+       "text": "Everyone knows nowadays that people \"have complexes.\" What is not so well known, though far more important theoretically, is that complexes can have us.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶200 (pdf p108)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-ground",
+     "title": "The ground of psychic life",
+     "line": "Beyond pathology: the complex is the normal structure of the unconscious life, and the place where psychic energy collects.",
+     "quotes": [
+      {
+       "text": "The background of our consciousness (or the unconscious) consists of such complexes",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶664 (pdf p166)"
+       }
+      },
+      {
+       "text": "directed by a psychic factor that can behave like an independent being",
+       "cite": {
+        "work": "cw02",
+        "workTitle": "Experimental Researches",
+        "locator": "¶610 (pdf p142)"
+       }
+      },
+      {
+       "text": "without complexes there can be no energy. They are the focus and very mother of energy",
+       "cite": {
+        "work": "sem-dream-analysis",
+        "workTitle": "Dream Analysis: Notes of the Seminar",
+        "locator": "pdf p442",
+        "print": "416"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "mana-personality"
+    },
+    {
+     "type": "family",
+     "id": "persona"
+    },
+    {
+     "type": "family",
+     "id": "possession"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    },
+    {
+     "type": "theoretic",
+     "id": "collective-unconscious"
+    },
+    {
+     "type": "theoretic",
+     "id": "compensation"
+    }
+   ]
+  },
+  "individuation": {
+   "concept": "individuation",
+   "line": "Becoming the whole one already is: not a title or a state but a process with two faces — an inner integration and an outward relation — and a cost the ego does not choose.",
+   "sections": [
+    {
+     "id": "the-process",
+     "title": "The process",
+     "line": "The 1921 definition keeps it neutral: differentiation of the individual being, the opposite pole of collective psychology.",
+     "quotes": [
+      {
+       "text": "In general, it is the process by which individual beings are formed and differentiated; in particular, it is the development of the psychological individual (q.v.) as a being distinct from the general, collective psychology.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶757 (pdf p408)"
+       }
+      },
+      {
+       "text": "Individuation is practically the same as the development of consciousness out of the original state of identity",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶762 (pdf p410)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "becoming-in-dividual",
+     "title": "Becoming an 'in-dividual'",
+     "line": "The word is made to say its own sense: an indivisible unit — one's own self — and not the ego's individuation, which is a different thing.",
+     "quotes": [
+      {
+       "text": "Individuation means becoming an “in-dividual,” and, in so far as “individuality” embraces our innermost, last, and incomparable uniqueness, it also implies becoming one’s own self.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶266 (pdf p154)"
+       }
+      },
+      {
+       "text": "In the last analysis every life is the realization of a whole, that is, of a self, for which reason this realization can also be called “individuation.”",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶330 (pdf p238)"
+       }
+      },
+      {
+       "text": "that is, a separate, indivisible unity or \"whole.\"",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶490 (pdf p286)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "two-aspects",
+     "title": "Two aspects",
+     "line": "The process is never only inner: integration and relationship are stated as equally indispensable.",
+     "quotes": [
+      {
+       "text": "Individuation has two principal aspects: in the first place it is an internal and subjective process of integration, and in the second it is an equally indispensable process of objective relationship",
+       "cite": {
+        "work": "cw16",
+        "workTitle": "The Practice of Psychotherapy",
+        "locator": "¶448 (pdf p212)"
+       }
+      },
+      {
+       "text": "The aim of individuation is nothing less than to divest the self of the false wrappings of the persona on the one hand, and of the suggestive power of primordial images on the other",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶269 (pdf p155)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-aim",
+     "title": "The aim, and what it costs",
+     "line": "The goal is the self as an unknown centre the ego revolves around — and meeting it is a defeat for the ego, not a promotion of it.",
+     "quotes": [
+      {
+       "text": "Sensing the self as something irrational, as an indefinable existent, to which the ego is neither opposed nor subjected, but merely attached, and about which it revolves very much as the earth revolves round the sun—thus we come to the goal of individuation.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶405 (pdf p214)"
+       }
+      },
+      {
+       "text": "For this reason the experience of the self is always a defeat for the ego",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶778 (pdf p412)"
+       }
+      },
+      {
+       "text": "but the painful experience of the union of opposites.",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶705 (pdf p418)",
+        "print": "382"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-dismantling",
+     "title": "What it requires",
+     "line": "Nothing here can be willed into place: the dissolution of the false face is a condition, and the intention to individuate is one more face.",
+     "quotes": [
+      {
+       "text": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶505 (pdf p261)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "anima"
+    },
+    {
+     "type": "archetype",
+     "id": "animus"
+    },
+    {
+     "type": "archetype",
+     "id": "child"
+    },
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "archetype",
+     "id": "wise-old-man"
+    },
+    {
+     "type": "family",
+     "id": "mandala"
+    },
+    {
+     "type": "family",
+     "id": "persona"
+    },
+    {
+     "type": "theoretic",
+     "id": "compensation"
+    },
+    {
+     "type": "theoretic",
+     "id": "transcendent-function"
+    }
+   ]
+  },
+  "libido": {
+   "concept": "libido",
+   "line": "Psychic energy, de-sexualized: an energy-value that can flow into any field of activity, canalized by the archetypes as water is by river-beds — and daemonic wherever it exceeds the ego.",
+   "sections": [
+    {
+     "id": "the-redefinition",
+     "title": "The redefinition",
+     "line": "Jung's decisive break with Freud is stated in one sentence: libido is an energy-value, not a specific instinct.",
+     "quotes": [
+      {
+       "text": "We would be better advised, therefore, when speaking of libido, to understand it as an energy-value which is able to communicate itself to any field of activity whatsoever, be it power, hunger, hatred, sexuality, or religion, without ever being itself a specific instinct.",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶197 (pdf p137)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-energic-view",
+     "title": "The energic viewpoint",
+     "line": "The concept is deliberately modelled on physics: psychic phenomena are read as energy and its differences of potential.",
+     "quotes": [
+      {
+       "text": "All psychological phenomena can be considered as manifestations of energy, in the same way that all physical phenomena have been understood as energic manifestations ever since Robert Mayer discovered the law of the conservation of energy.",
+       "cite": {
+        "work": "cw04",
+        "workTitle": "Freud and Psychoanalysis",
+        "locator": "¶567 (pdf p230)"
+       }
+      },
+      {
+       "text": "the concept of libido in psychology has functionally the same significance as the concept of energy in physics since the time of Robert Mayer",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶189 (pdf p132)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "not-instinct",
+     "title": "Not one instinct",
+     "line": "The definition is one-sided precisely because the phenomena are not: no single instinct accounts for the mass of psychic life.",
+     "quotes": [
+      {
+       "text": "The very fact that it is impossible to derive the whole mass of psychic phenomena from a single instinct forbids a one-sided definition of “libido.”",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶185 (pdf p130)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "canalization",
+     "title": "Canalization",
+     "line": "Energy is not spent but converted: symbols and archetypes are the forms along which it flows, and sacrifice is the price of a higher channel.",
+     "quotes": [
+      {
+       "text": "the archetypes are the forms or river-beds along which the current of psychic life has always flowed",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶337 (pdf p211)"
+       }
+      },
+      {
+       "text": "The symbols act as transformers, their function being to convert libido from a “lower” into a “higher” form.",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶344 (pdf p215)"
+       }
+      },
+      {
+       "text": "The sacrifice is the very reverse of regression—it is a successful canalization of libido into the symbolic equivalent of the mother, and hence a spiritualization of it",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶398 (pdf p317)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-charge",
+     "title": "The charge",
+     "line": "The concept's primitive ancestors were not theories but experiences: mana is the sensed dynamism from which the energy concept grew, and the libido itself is God and devil at once.",
+     "quotes": [
+      {
+       "text": "We cannot escape the impression that the primitive view of mana is a forerunner of our concept of psychic energy and, most probably, of energy in general.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶128 (pdf p77)"
+       }
+      },
+      {
+       "text": "As a power which transcends consciousness the libido is by nature daemonic: it is both God and devil",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶170 (pdf p118)"
+       }
+      },
+      {
+       "text": "The expressions, therefore, used by James show clearly that the difference between the types is the result of a different localization of the libido, this “magical power” in the depth of our being, which, depending on the individual, is directed sometimes to our inner life, sometimes to the objective world.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶869 (pdf p454)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "as-a-system",
+     "title": "The current as a system",
+     "line": "Read as a dynamical system, the libido is an alternating current between consciousness and the unconscious.",
+     "quotes": [
+      {
+       "text": "a kind of alternating current between consciousness and the unconscious",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p29",
+        "print": "28"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "god-image"
+    },
+    {
+     "type": "theoretic",
+     "id": "compensation"
+    },
+    {
+     "type": "theoretic",
+     "id": "mana"
+    }
+   ]
+  },
+  "mana": {
+   "concept": "mana",
+   "line": "The sensed dynamism older than any theory of it: an extraordinary effectiveness that can attach to persons and things — Jung's bridge from primitive energetics to psychic energy.",
+   "sections": [
+    {
+     "id": "the-definition",
+     "title": "The definition",
+     "line": "The word arrives from ethnology with a deliberately vague sense — 'extraordinarily effective' — and Jung keeps the vagueness.",
+     "quotes": [
+      {
+       "text": "In his classic study of mana Lehmann defines it as something \"extraordinarily effective.\"",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶128 (pdf p77)"
+       }
+      },
+      {
+       "text": "We cannot escape the impression that the primitive view of mana is a forerunner of our concept of psychic energy and, most probably, of energy in general.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶128 (pdf p77)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "experience-not-concept",
+     "title": "An experience, not a concept",
+     "line": "Mana is not a primitive theory of energy but the perception of a relation — it is present in the moment something shows itself as more than itself.",
+     "quotes": [
+      {
+       "text": "In the face of something extraordinary it is not he who is astonished, but rather the thing which is astonishing.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶128 (pdf p69)"
+       }
+      },
+      {
+       "text": "Mana is a universal medicinal or healing power which renders men, animals, and plants fruitful and endows chieftain and medicine-man with magical strength.",
+       "cite": {
+        "work": "cw16",
+        "workTitle": "The Practice of Psychotherapy",
+        "locator": "¶4 (pdf p17)"
+       }
+      },
+      {
+       "text": "even at early levels of human consciousness man felt the need to represent the sensed dynamism of psychic events in a concrete way",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶130 (pdf p78)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "not-a-concept",
+     "title": "The reservations",
+     "line": "Jung keeps the term honest: it is a representation, not a concept, and nothing divine attaches to it.",
+     "quotes": [
+      {
+       "text": "Thus mana is not a concept but a representation based on the perception of a \"phenomenal\" relationship.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶127 (pdf p77)"
+       }
+      },
+      {
+       "text": "nothing \"divine\" attaches to mana, so that one cannot see in mana the original form of an idea of God.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶129 (pdf p77)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-mana-personality",
+     "title": "The mana-personality",
+     "line": "When the ego takes the charge for itself, the archetype is worn as a person: the magician, the great man, the woman who knows.",
+     "quotes": [
+      {
+       "text": "It corresponds to a dominant of the collective unconscious, to an archetype which has taken shape in the human psyche through untold ages of just that kind of experience.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶388 (pdf p208)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "mana-now",
+     "title": "Mana now",
+     "line": "The word never leaves Jung's late vocabulary: conscience itself is a manifestation of it.",
+     "quotes": [
+      {
+       "text": "Conscience is a manifestation of mana, of the “extraordinarily powerful,” a quality which is the especial peculiarity of archetypal ideas.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶845 (pdf p410)"
+       }
+      },
+      {
+       "text": "The deepening and broadening of his consciousness produce the kind of effect which the primitives call “mana.”",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶583 (pdf p279)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "mana-personality"
+    },
+    {
+     "type": "family",
+     "id": "mana"
+    },
+    {
+     "type": "theoretic",
+     "id": "libido"
+    },
+    {
+     "type": "theoretic",
+     "id": "numinosum"
+    },
+    {
+     "type": "theoretic",
+     "id": "participation-mystique"
+    },
+    {
+     "type": "theoretic",
+     "id": "psychoid"
+    }
+   ]
+  },
+  "numinosum": {
+   "concept": "numinosum",
+   "line": "The seizing quality in religious experience: a dynamic agency that takes hold of the subject rather than being produced by will — Otto's word, kept exactly because it names the experience and not its cause.",
+   "sections": [
+    {
+     "id": "the-term",
+     "title": "The term",
+     "line": "Jung takes the word from Otto and quotes his definition almost whole: religion is the careful observation of what seizes the subject.",
+     "quotes": [
+      {
+       "text": "On the contrary, it seizes and controls the human subject, who is always rather its victim than its creator.",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶6 (pdf p19)"
+       }
+      },
+      {
+       "text": "The numinosum is either a quality belonging to a visible object or the influence of an invisible presence that causes a peculiar alteration of consciousness.",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶6 (pdf p19)"
+       }
+      },
+      {
+       "text": "the attitude peculiar to a consciousness which has been changed by experience of the numinosum",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶9 (pdf p20)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "its-effect",
+     "title": "What it does to a person",
+     "line": "The experience is described from inside: criticism fails, the will is paralysed, and the ego meets something greater than itself.",
+     "quotes": [
+      {
+       "text": "the numinosum, to use an apt expression of Rudolf Otto's",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶216 (pdf p116)"
+       }
+      },
+      {
+       "text": "An integral component of any nocturnal, numinous experience is the dimming of consciousness, the feeling that one is in the grip of something greater than oneself, the impossibility of exercising criticism, and the paralysis of the will",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶787 (pdf p316)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "never-indifferent",
+     "title": "Never indifferent",
+     "line": "The presence of the numinous is always effective — healing or destroying — and it is precisely its indifference to our categories that Jung insists on.",
+     "quotes": [
+      {
+       "text": "the archetypes have, when they appear, a distinctly numinous character which can only be described as \"spiritual,\" if \"magical\" is too strong a word",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶405 (pdf p217)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "in-a-life",
+     "title": "In a life",
+     "line": "In the late writings the numinous is where a life actually meets its ground: whatever comes with this intensity is experienced as such, whatever name it is given.",
+     "quotes": [
+      {
+       "text": "Anything that comes upon me with this intensity I experience as numinous, no matter whether I call it divine or devilish or just “fate.”",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶871 (pdf p422)"
+       }
+      },
+      {
+       "text": "Consciousness experiences this supraordinate totality as something numinous, as a tremendum or fascinosum",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶874 (pdf p423)"
+       }
+      },
+      {
+       "text": "I am face to face with what Rudolf Otto calls the tremendum and fascinosum. I cannot \"conquer\" a numinosum, I can only open myself to it, let myself be overpowered by it, trusting in its meaning",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶864 (pdf p419)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "and-the-doctrine",
+     "title": "And the doctrines",
+     "line": "Dogma and theology stand downstream of the experience, not the reverse.",
+     "quotes": [
+      {
+       "text": "As the archetypes have a “numinous” quality and underlie all religious and dogmatic ideas, depth psychology is also of importance for theology.",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶1160 (pdf p454)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "god-image"
+    },
+    {
+     "type": "family",
+     "id": "mana"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    },
+    {
+     "type": "theoretic",
+     "id": "mana"
+    },
+    {
+     "type": "theoretic",
+     "id": "psychoid"
+    }
+   ]
+  },
+  "participation-mystique": {
+   "concept": "participation-mystique",
+   "line": "Unconscious identity: the state in which subject and object are not yet distinct — the primitive stratum that never disappears from relations, and the clinical fact of the transference.",
+   "sections": [
+    {
+     "id": "the-definition",
+     "title": "The definition",
+     "line": "The 1921 definition: a connection in which the subject cannot clearly distinguish itself from the object, so the relation amounts to partial identity.",
+     "quotes": [
+      {
+       "text": "It denotes a peculiar kind of psychological connection with objects, and consists in the fact that the subject cannot clearly distinguish himself from the object but is bound to it by a direct relationship which amounts to partial identity (q.v.).",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶781 (pdf p416)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "identity",
+     "title": "Identity, not sympathy",
+     "line": "The clearest formulations are the shortest: identity in mutual unconsciousness, and nothing mystical about it.",
+     "quotes": [
+      {
+       "text": "To put it briefly, it means a state of identity in mutual unconsciousness.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶69 (pdf p45)"
+       }
+      },
+      {
+       "text": "There is nothing “mystical” about identity, any more than there is anything mystical about the metabolism common to mother and embryo.",
+       "cite": {
+        "work": "cw17",
+        "workTitle": "The Development of Personality",
+        "locator": "¶83 (pdf p42)"
+       }
+      },
+      {
+       "text": "Lévy-Bruhl has coined the expression participation mystique for these remarkable relationships. It seems to me that the word “mystical” is not happily chosen.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶130 (pdf p70)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "in-the-clinic",
+     "title": "In the clinic",
+     "line": "In the consulting room the phenomenon is not exotic: when the dialogue touches something essential, two psychic spheres interpenetrate.",
+     "quotes": [
+      {
+       "text": "It is an unconscious identity in which two individual psychic spheres interpenetrate to such a degree that it is impossible to say what belongs to whom",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶852 (pdf p413)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "art-and-matter",
+     "title": "In art, and in matter",
+     "line": "The same state explains the effect of great art and the alchemists' relation to their substance.",
+     "quotes": [
+      {
+       "text": "This re-immersion in the state of participation mystique is the secret of artistic creation and of the effect which great art has upon us",
+       "cite": {
+        "work": "cw15",
+        "workTitle": "The Spirit in Man, Art and Literature",
+        "locator": "¶162 (pdf p94)"
+       }
+      },
+      {
+       "text": "a state of participation mystique, or unconscious identity, arose between them and the chemical substance",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶336 (pdf p188)"
+       }
+      },
+      {
+       "text": "In this way there came into being those intimate relationships by analogy which Lévy-Bruhl fittingly describes as “participation mystique.”",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶203 (pdf p140)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "mana-personality"
+    },
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "mana"
+    },
+    {
+     "type": "theoretic",
+     "id": "collective-unconscious"
+    },
+    {
+     "type": "theoretic",
+     "id": "mana"
+    }
+   ]
+  },
+  "persona": {
+   "concept": "persona",
+   "line": "The face put on for the world: a functional compromise between individual and society — real as a function, a semblance as a self, and a disaster when worn as one.",
+   "sections": [
+    {
+     "id": "the-mask",
+     "title": "The mask",
+     "line": "The word is taken from the theatre and kept: what is worn is not who wears it.",
+     "quotes": [
+      {
+       "text": "This mask, i.e., the ad hoc adopted attitude, I have called the persona, which was the name for the masks worn by actors in antiquity.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶800 (pdf p423)"
+       }
+      },
+      {
+       "text": "a complicated system of relations between the individual consciousness and society, fittingly enough a kind of mask, designed on the one hand to make a definite impression upon others, and, on the other, to conceal the true nature of the individual",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶305 (pdf p172)"
+       }
+      },
+      {
+       "text": "Fundamentally the persona is nothing real: it is a compromise between individual and society as to what a man should appear to be.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶246 (pdf p140)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-function",
+     "title": "Its function",
+     "line": "The persona is not a fault but a function: the outward attitude, concerned with objects, indispensable and never the individuality.",
+     "quotes": [
+      {
+       "text": "a functional complex that comes into existence for reasons of adaptation or personal convenience, but is by no means identical with the individuality. The persona is exclusively concerned with the relation to objects",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶801 (pdf p423)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-collectives-mask",
+     "title": "The collective's mask",
+     "line": "Worn long enough, the mask stops feigning and becomes a collective truth speaking through a person.",
+     "quotes": [
+      {
+       "text": "It is, as its name implies, only the mask worn by the collective psyche, a mask that feigns individuality",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶245 (pdf p247)"
+       }
+      },
+      {
+       "text": "The persona is never the true character; it is a composite of the individual's behaviour and of the role attributed to him by the public",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶1334 (pdf p537)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-taking-off",
+     "title": "Taking it off",
+     "line": "The danger is identification: whoever becomes the role is answered by the unconscious — and dissolution is a condition of individuation, not an achievement of will.",
+     "quotes": [
+      {
+       "text": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶505 (pdf p261)"
+       }
+      },
+      {
+       "text": "Anyone who is himself his outward role will infallibly succumb to the inner processes",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶807 (pdf p427)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "persona"
+    },
+    {
+     "type": "family",
+     "id": "wounded-physician"
+    },
+    {
+     "type": "theoretic",
+     "id": "compensation"
+    },
+    {
+     "type": "theoretic",
+     "id": "complex"
+    }
+   ]
+  },
+  "psychoid": {
+   "concept": "psychoid",
+   "line": "Jung borrows a word he half distrusts and ends up with the hinge of the whole field: the archetype's irrepresentable side, where psyche and matter are not yet two things.",
+   "sections": [
+    {
+     "id": "naming",
+     "title": "The naming",
+     "line": "In the synchronicity essay Jung names the irrepresentable side of the archetype, and says the naming is a confession of not-knowing.",
+     "quotes": [
+      {
+       "text": "The latter represents a psyche that is identical in all individuals.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶840 (pdf p448)"
+       }
+      },
+      {
+       "text": "It cannot be directly perceived or \"represented,\" in contrast to the perceptible psychic phenomena, and on account of its \"irrepresentable\" nature I have called it \"psychoid.\"",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶840 (pdf p448)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "reservations",
+     "title": "The three reservations",
+     "line": "The word is borrowed from Bleuler, knowingly, and Jung states at the outset exactly what it may not be taken to mean.",
+     "quotes": [
+      {
+       "text": "I do so with three reservations: firstly, I use it as an adjective, not as a noun; secondly, no psychic quality in the proper sense of the word is implied, but only a \"quasi-psychic\" one such as the reflex-processes possess; and thirdly, it is meant to distinguish a category of events from merely vitalistic phenomena on the one hand and from specifically psychic processes on the other.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶368 (pdf p189)"
+       }
+      },
+      {
+       "text": "although it is always the function that creates its own organ, and maintains or modifies it.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶368 (pdf p189)"
+       }
+      },
+      {
+       "text": "although my use of the term derives from a different field of perception, it nevertheless seeks to delineate roughly the same group of phenomena that Bleuler had in mind.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "pdf p189"
+       }
+      }
+     ]
+    },
+    {
+     "id": "under-the-image",
+     "title": "The form under the image",
+     "line": "He sets the term to work on the image: whatever the archetypal image becomes, the psychoid form beneath it stays itself.",
+     "quotes": [
+      {
+       "text": "The psychoid form underlying any archetypal image retains its character at all stages of development, though empirically it is capable of endless variations.",
+       "cite": {
+        "work": "cw13",
+        "workTitle": "Alchemical Studies",
+        "locator": "¶350 (pdf p304)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "ultra-violet",
+     "title": "The ultra-violet end",
+     "line": "The 1954 essay places the archetype as such at the far end of the psychic spectrum — a factor that cannot be made conscious and is called psychoid for that reason.",
+     "quotes": [
+      {
+       "text": "The archetypal representations (images and ideas) mediated to us by the unconscious should not be confused with the archetype as such. They are very varied structures which all point back to one essentially \"irrepresentable\" basic form.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶417 (pdf p225)"
+       }
+      },
+      {
+       "text": "The latter is characterized by certain formal elements and by certain fundamental meanings, although these can be grasped only approximately.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶417 (pdf p225)"
+       }
+      },
+      {
+       "text": "The archetype as such is a psychoid factor that belongs, as it were, to the invisible, ultraviolet end of the psychic spectrum.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶417 (pdf p225)"
+       }
+      },
+      {
+       "text": "Since other archetypes give rise to similar doubts, it seems to me probable that the real nature of the archetype is not capable of being made conscious, that it is transcendent, on which account I call it psychoid.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶417 (pdf p225)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "physics",
+     "title": "The physics parallel",
+     "line": "Psychology and physics both work with quantities they cannot represent directly, and Jung follows the parallel to its end: psyche and matter as two aspects of one thing.",
+     "quotes": [
+      {
+       "text": "When the existence of two or more irrepresentables is assumed, there is always the possibility—which we tend to overlook—that it may not be a question of two or more factors but of one only.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶419 (pdf p226)"
+       }
+      },
+      {
+       "text": "The identity or non-identity of two irrepresentable quantities is something that cannot be proved.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶419 (pdf p226)"
+       }
+      },
+      {
+       "text": "Since psyche and matter are contained in one and the same world, and moreover are in continuous contact with one another and ultimately rest on irrepresentable, transcendental factors, it is not only possible but fairly probable, even, that psyche and matter are two different aspects of one and the same thing.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶419 (pdf p227)"
+       }
+      },
+      {
+       "text": "Just as the \"psychic infra-red,\" the biological instinctual psyche, gradually passes over into the physiology of the organism and thus merges with its chemical and physical conditions, so the \"psychic ultra-violet,\" the archetype, describes a field which exhibits none of the peculiarities of the physiological and yet, in the last analysis, can no longer be regarded as psychic, although it manifests itself psychically.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶420 (pdf p227)"
+       }
+      },
+      {
+       "text": "Although there is no form of existence that is not mediated to us psychically and only psychically, it would hardly do to say that everything is merely psychic.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶420 (pdf p227)"
+       }
+      },
+      {
+       "text": "the psyche and its contents are the only reality which is given to us ioithout a medium.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶420 (pdf p228)"
+       },
+       "scan": true
+      }
+     ]
+    },
+    {
+     "id": "specific-charge",
+     "title": "The specific charge",
+     "line": "A page on from the naming, the archetypes are given their working definition — formal factors, patterns of behaviour, with a charge that turns up as affect.",
+     "quotes": [
+      {
+       "text": "The archetypes are formal factors responsible for the organization of unconscious psychic processes: they are \"patterns of behaviour.\"",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶841 (pdf p448)"
+       }
+      },
+      {
+       "text": "At the same time they have a \"specific charge\" and develop numinous effects which express themselves as affects.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶841 (pdf p448)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "not-localized",
+     "title": "Not localized in one person",
+     "line": "In Flying Saucers the psychoid archetype behaves as though it were not confined to a single person.",
+     "quotes": [
+      {
+       "text": "The psychoid archetype has a tendency to behave as though it were not localized in one person but were active in the whole environment.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶851 (pdf p413)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "correspondence",
+     "title": "The correspondence",
+     "line": "With Pauli, Jung states the double character flatly; Pauli answers, in his own voice, that the concept cannot be used so lightly in the acausalities of microphysics.",
+     "quotes": [
+      {
+       "text": "it is based on the psychoid archetype, which, as experience has shown, can be express itseII both psychically and physically.",
+       "cite": {
+        "work": "letters-pauli",
+        "workTitle": "Atom and Archetype: The Pauli/Jung Letters",
+        "locator": "pdf p160",
+        "print": "98"
+       },
+       "scan": true
+      },
+      {
+       "text": "The characteristic that is peculiar to the archetype is that it manifests itself not only psychically-subjectively but also physically-objectively",
+       "cite": {
+        "work": "letters-pauli",
+        "workTitle": "Atom and Archetype: The Pauli/Jung Letters",
+        "locator": "pdf p188",
+        "print": "126"
+       }
+      },
+      {
+       "text": "but also the concept of the (psychic or psychoid) archetype cannot be used so lightly in the acausalities of microphysics.",
+       "cite": {
+        "work": "letters-pauli",
+        "workTitle": "Atom and Archetype: The Pauli/Jung Letters",
+        "locator": "pdf p125",
+        "print": "63"
+       },
+       "voice": "Pauli"
+      }
+     ]
+    },
+    {
+     "id": "late-admission",
+     "title": "The late admission",
+     "line": "In the 1948 footnote Jung dates his own doubt: fifty years of collecting moved him further, not closer, to certainty.",
+     "quotes": [
+      {
+       "text": "Not only the findings of parapsychology, but my own theoretical reflections, outlined in \"On the Nature of the Psyche,\" have led me to certain postulates which touch on the realm of nuclear physics and the conception of the space-time continuum. This opens up the whole question of the transpsychic reality immediately underlying the psyche.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶599 (pdf p330)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "last-word",
+     "title": "The last word",
+     "line": "Writing to Fordham five years before his death, the term has become shorthand: the psychoid factor is the unconscious archetype, and never its conscious representation.",
+     "quotes": [
+      {
+       "text": "Synchronicity tells us something about the nature of what I call the psychoid factor, i.e., the unconscious archetype (not its conscious representation!).",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶1208 (pdf p474)"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "mana"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    },
+    {
+     "type": "theoretic",
+     "id": "synchronicity"
+    },
+    {
+     "type": "theoretic",
+     "id": "numinosum"
+    }
+   ]
+  },
+  "synchronicity": {
+   "concept": "synchronicity",
+   "line": "Meaningful coincidence: a psychic state and an outer event bound by meaning and simultaneity rather than by cause — proposed, carefully, as a factor equal in rank to causality.",
+   "sections": [
+    {
+     "id": "the-definition",
+     "title": "The definition",
+     "line": "The 1952 monograph states it in one sentence, and marks it off from mere synchronism, the bare coincidence of two events.",
+     "quotes": [
+      {
+       "text": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state—and, in certain cases, vice versa.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶850 (pdf p453)",
+        "print": "441"
+       }
+      },
+      {
+       "text": "I am therefore using the general concept of synchronicity in the special sense of a coincidence in time of two or more causally unrelated events which have the same or a similar meaning, in contrast to \"synchronism,\" which simply means the simultaneous occurrence of two events.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶849 (pdf p453)",
+        "print": "441"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-principle",
+     "title": "A principle, in its own right",
+     "line": "The term is picked deliberately for a factor equal in rank to causality, and the coincidence is given two constituents: an unconscious image, and an objective situation that matches it.",
+     "quotes": [
+      {
+       "text": "I have picked on the term \"synchronicity\" to designate a hypothetical factor equal in rank to causality as a principle of explanation.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶840 (pdf p447)"
+       }
+      },
+      {
+       "text": "Synchronicity therefore consists of two factors: a) An unconscious image comes into consciousness either directly (i.e., literally) or indirectly (symbolized or suggested) in the form of a dream, idea, or premonition, b) An objective situation coincides with this content",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶858 (pdf p459)"
+       }
+      },
+      {
+       "text": "The meaningful coincidence or equivalence of a psychic and a physical state that have no causal relationship to one another means, in general terms, that it is a modality without a cause, an \"acausal orderedness.\"",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶965 (pdf p528)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "not-a-cause",
+     "title": "Not a cause, an orderedness",
+     "line": "The concept is protected against its own enthusiasm: it is an abstract and irrepresentable quantity, and where meaning cannot be attributed, equivalence must be enough.",
+     "quotes": [
+      {
+       "text": "I am only too conscious that synchronicity is a highly abstract and \"irrepresentable\" quantity. It ascribes to the moving body a certain psychoid property which, like space, time, and causality, forms a criterion of its behaviour.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶947 (pdf p517)"
+       }
+      },
+      {
+       "text": "As soon as a psychic content crosses the threshold of consciousness, the synchronistic marginal phenomena disappear, time and space resume their accustomed sway, and consciousness is once more isolated in its subjectivity",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶440 (pdf p243)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-coinage",
+     "title": "The coinage",
+     "line": "The word is Jung's own, invented for what the phenomena seemed to be: occurrences stamped by the same time content.",
+     "quotes": [
+      {
+       "text": "things happening at the same moment as an expression of the same time content",
+       "cite": {
+        "work": "sem-dream-analysis",
+        "workTitle": "Dream Analysis: Notes of the Seminar",
+        "locator": "pdf p443",
+        "print": "417"
+       }
+      },
+      {
+       "text": "it was he who first started me off thinking about a possible relativity of time as well as space, and their psychic conditionality",
+       "cite": {
+        "work": "sync",
+        "workTitle": "Synchronicity: An Acausal Connecting Principle (CW8 extract)",
+        "locator": "pdf p13"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "scarab"
+    },
+    {
+     "type": "theoretic",
+     "id": "psychoid"
+    },
+    {
+     "type": "theoretic",
+     "id": "aion-time"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    }
+   ]
+  },
+  "transcendent-function": {
+   "concept": "transcendent-function",
+   "line": "The function that arises between the opposites: not a compromise but a living third, produced from the tension and making the transition to a new attitude organically possible.",
+   "sections": [
+    {
+     "id": "the-name",
+     "title": "The name",
+     "line": "The word is borrowed from mathematics — a function of real and imaginary quantities — and used with the analogy held openly.",
+     "quotes": [
+      {
+       "text": "This function of mediation between the opposites I have termed the transcendent function, by which I mean nothing mysterious, but merely a combined function of conscious and unconscious elements, or, as in mathematics, a common function of real and imaginary quantities.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶184 (pdf p116)"
+       }
+      },
+      {
+       "text": "There is nothing mysterious or metaphysical about the term \"transcendent function.\" It means a psychological function comparable in its way to a mathematical function of the same name, which is a function of real and imaginary numbers.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶131 (pdf p81)"
+       }
+      },
+      {
+       "text": "“function” being here understood not as a basic function but as a complex function made up of other functions, and “transcendent” not as denoting a metaphysical quality but merely the fact that this function facilitates a transition from one attitude to another.",
+       "cite": {
+        "work": "cw06",
+        "workTitle": "Psychological Types",
+        "locator": "¶828 (pdf p436)"
+       }
+      },
+      {
+       "text": "It has been named the “transcendent function” because it represents a function based on real and “imaginary,” or rational and irrational, data, thus bridging the yawning gulf between conscious and unconscious.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶121 (pdf p73)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-transition",
+     "title": "The transition",
+     "line": "It is called transcendent because it carries a person from one attitude to another without discarding the unconscious — a process and a method at once.",
+     "quotes": [
+      {
+       "text": "It is called \"transcendent\" because it makes the transition from one attitude to another organically possible, without loss of the unconscious.",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶145 (pdf p85)"
+       }
+      },
+      {
+       "text": "The whole process is called the “transcendent function.” It is a process and a method at the same time.",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶780 (pdf p404)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-living-third",
+     "title": "The living third",
+     "line": "The function is what happens when the confrontation is held: the tension produces a third thing that neither side contained.",
+     "quotes": [
+      {
+       "text": "The confrontation of the two positions generates a tension charged with energy and creates a living, third thing",
+       "cite": {
+        "work": "cw08",
+        "workTitle": "The Structure and Dynamics of the Psyche",
+        "locator": "¶189 (pdf p102)"
+       }
+      },
+      {
+       "text": "The secret of alchemy was in fact the transcendent function, the transformation of personality through the blending and fusion of the noble with the base components, of the differentiated with the inferior functions, of the conscious with the unconscious.",
+       "cite": {
+        "work": "cw07",
+        "workTitle": "Two Essays on Analytical Psychology",
+        "locator": "¶360 (pdf p197)"
+       }
+      },
+      {
+       "text": "The characteristics of the tortoise are the characteristics of the transcendent function, the one that unites the pairs of opposites",
+       "cite": {
+        "work": "sem-dream-analysis",
+        "workTitle": "Dream Analysis: Notes of the Seminar",
+        "locator": "pdf p674",
+        "print": "648"
+       }
+      }
+     ]
+    },
+    {
+     "id": "the-method",
+     "title": "The method",
+     "line": "In practice the function is a method as much as an event: the conscious realisation of what the unconscious has produced.",
+     "quotes": [
+      {
+       "text": "This continual process of getting to know the counterposition in the unconscious I have called the “transcendent function,” because the confrontation of conscious (rational) data with those that are unconscious (irrational) necessarily results in a modification of standpoint.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶257 (pdf p150)"
+       }
+      },
+      {
+       "text": "The cooperation of conscious reasoning with the data of the unconscious is called the “transcendent function”",
+       "cite": {
+        "work": "cw18",
+        "workTitle": "The Symbolic Life: Miscellaneous Writings",
+        "locator": "¶1554 (pdf p639)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "as-a-system",
+     "title": "The third as a system",
+     "line": "Read as a dynamical system, the function describes order emerging from tension — a result no side of the opposition could have produced alone.",
+     "quotes": [
+      {
+       "text": "whereby chaotic dynamics actually generate a higher order result coming out than existed going in",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p40",
+        "print": "39"
+       }
+      }
+     ]
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "coniunctio"
+    },
+    {
+     "type": "theoretic",
+     "id": "archetype-as-such"
+    },
+    {
+     "type": "theoretic",
+     "id": "compensation"
+    }
+   ]
+  }
+ }
+}

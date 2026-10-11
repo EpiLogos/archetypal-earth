@@ -166,8 +166,21 @@ export class SkyLayer {
   moment = Date.now();
   /** The Sun's ecliptic longitude at the moment (the geocentric direction the sky is drawn along), degrees in [0, 360). */
   sunLongitude(): number {
-    const v = this.poses.get('sun');
+    return this.bodyLongitude('sun');
+  }
+
+  /** A body's ecliptic longitude from the drawn pose, degrees in [0, 360). Falls back to the Sun when unknown. */
+  bodyLongitude(key: BodyKey): number {
+    const v = this.poses.get(key) ?? this.poses.get('sun');
     return v ? (((Math.atan2(v[1], v[0]) * 180) / Math.PI) % 360 + 360) % 360 : 0;
+  }
+
+  /** A body's current place in scene coordinates (Earth-fixed), or null when unknown. */
+  scenePosition(key: BodyKey, out = new THREE.Vector3()): THREE.Vector3 | null {
+    const v = this.poses.get(key);
+    if (!v) return null;
+    const s = sceneFromEcliptic(v, this.gmst, this.eps);
+    return out.set(s[0], s[1], s[2]);
   }
   /** the unit direction from the Earth to the Sun, scene axes, at the moment; valid only while `sunKnown` */
   readonly sunDir = new THREE.Vector3(1, 0, 0);
@@ -213,6 +226,10 @@ export class SkyLayer {
   approach = 0;
   /** the body the look-at is approached on; kept after a release so the look-at eases back from it */
   private approachKey: BodyKey | null = null;
+  /** The body currently approached (null once the look-at has let go). Orbits read this. */
+  get approached(): BodyKey | null {
+    return this.approach > 0.05 ? this.approachKey : null;
+  }
   /** the approach's clock, ms: advanced by each frame's dt (see APPROACH_EASE_MS) */
   private clock = 0;
   private approachE = new Eased();

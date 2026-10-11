@@ -1,7 +1,6 @@
 // The walk fabric and a mode's own set. A thread lists each step's period-mates (every occurrence of its subject is
 // reachable from its walk); a symbol with no placed instance says it has no thread instead of offering a dead link;
-// the Red Book and Aion show their own presences, dim the nearby, set the rest aside, and say so under the title,
-// with the whole field one click away.
+// the Red Book and Aion show their own set under the title, with the whole field one click away.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/mode-scope.mjs
 import { launch, open } from './lib.mjs';
 
@@ -40,8 +39,17 @@ const drawn = (page) => page.evaluate(() => { const t = window.__earth.engine.pr
 for (const [hash, name] of [['#/redbook', 'the Red Book'], ['#/aion/jung-aion', 'Aion']]) {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash });
   await page.waitForTimeout(8000);
+  // Red Book lands without a folio; open the walk so the mode's set is on the globe
+  if (name === 'the Red Book') {
+    const options = page.locator('.mode-options > summary');
+    if (await options.isVisible().catch(() => false)) {
+      await options.click();
+      await page.locator('.mode-options-body button', { hasText: 'The walk' }).click();
+      await page.waitForTimeout(2500);
+    }
+  }
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
-  check(/ in .* · .*nearby, dimmed · Show the whole field/.test(line), `${name} names its own set`, line);
+  check(/ in .* · Show the whole field/.test(line) && !/nearby, dimmed/.test(line), `${name} names its own set`, line);
   const before = await drawn(page);
   check(before !== null && before < 2815 * 0.6, `${name} draws its set, not the whole field`, `${before} presences drawn of 2,815`);
   await page.locator('.sh-scope-toggle').click();

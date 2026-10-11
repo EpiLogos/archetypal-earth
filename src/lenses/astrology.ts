@@ -4,12 +4,13 @@
 //
 // Privacy law: the birth data and everything computed from it stay in this browser (src/practice/store.ts). The chart
 // is computed here (src/astro/natal.ts); routes name a chart ('you', 'jung'), never a birth; nothing is sent anywhere.
-import { el } from '../ui/dom';
+import { clear, el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { subjectName, type Subject } from '../data/model';
-import { astrologyAt } from '../state/store';
+import { ASTROLOGY_LIVE, astrologyAt, astrologyLive } from '../state/store';
 import type { BirthPrefill } from '../state/router';
 import type { LensContext, LensInstance } from '../shell/lens';
+import { modeOptions, optionAction } from '../ui/mode-options';
 import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData, type ChartBody } from '../astro/natal';
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
@@ -19,6 +20,13 @@ import { PlanetOrbits } from '../sky/orbits';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { creditLine } from '../ui/credit';
+
+/** Apply a culture's planet names onto the standing Astrology sky (Charts stay put). */
+function astrologySky(path: string[], culture?: string | null): ReturnType<typeof astrologyAt> {
+  const base = astrologyAt(path);
+  if (!culture) return base;
+  return { ...base, sky: { ...base.sky, culture } };
+}
 
 interface Tie { target: Subject; basis: 'jung' | 'inferred' | 'site'; note: string; quotes: LensQuote[] }
 interface BodyReading { key: ChartBody; name: string; line: string; quotes: LensQuote[]; ties: Tie[]; burt: LensQuote[] }
@@ -46,8 +54,18 @@ export function mount(ctx: LensContext): LensInstance {
   let editing = false;
   // the chart the walk stands in: "Back to the Earth" returns to its whole birth sky
   let walking: string | null = null;
+  /** Planet names through a culture (Options → Names); stays with the Astrology sky. */
+  let nameCulture: string | null = null;
+  let pathNow: string[] = [];
+  let namesReady = false;
+  /** Body whose satellites are currently drawn — synced from the sky approach, not from the walk panel. */
+  let orbitsBody: BodyKey | null = null;
+  const liveLine = el('p', { class: 'mode-opt-live', role: 'status' });
   const orbits = new PlanetOrbits(ctx.engine.renderer.domElement.parentElement ?? document.body, () => {
-    if (walking) ctx.navigate(astrologyAt([walking, 'earth']));
+    // Whole sky: release the held planet onto the open chart / live sky (walking is unset on a live pick)
+    const chart = walking || (pathNow[0] && pathNow[0] !== ASTROLOGY_LIVE ? pathNow[0] : null);
+    if (chart) ctx.navigate(astrologyAt([chart]));
+    else ctx.navigate(astrologyLive({ culture: nameCulture || undefined }));
   });
   // a birth an old link carried: fills the form until the chart is cast, then is gone (never stored from here)
   let prefill = ctx.takeBirthPrefill();
@@ -242,28 +260,17 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   // ── the walk ───────────────────────────────────────────────────────────
-  /** The whole birth sky around the Earth (the walk's "Back to the Earth"): where each body stands, each a step in. */
+  /**
+   * The birth sky with no sheet: chart held, Options under the title, planets pickable for approach + orbits.
+   * Opening a walk step (path body) or Charts (empty path) is what brings the modal back.
+   */
   const renderWholeSky = (chartId: string, walked: { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }) => {
-    orbits.set(null);
-    const order = data!.order.bodies;
+    walking = chartId;
     const who = walked.rec.id === YOU ? 'Your' : `${walked.rec.label}’s`;
-    ctx.setContext(`${who} birth sky`);
-    const nodes = [
-      el('nav', { class: 'as-steps', 'aria-label': 'The walk' }, order.map((k) => el('button', {
-        type: 'button', class: 'as-step', 'aria-label': data!.bodies[k].name, title: data!.bodies[k].name, onclick: () => ctx.setPath([chartId, k]),
-      }, [el('span', { text: data!.bodies[k].name.slice(0, 2) })]))),
-      el('h2', { class: 'lp-h', text: `${who} sky, from the Earth` }),
-      el('p', { class: 'th-line', text: 'Every body stands along its true direction from the Earth at the birth. Choose one to go to it.' }),
-      el('ul', { class: 'as-whole' }, order.map((k) => el('li', {}, [
-        el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath([chartId, k]) }, [
-          el('span', {}, [el('span', { class: 'as-tie-name', text: data!.bodies[k].name }), el('span', { class: 'as-basis', text: placeIn(walked.chart, k) })]),
-          icon('next', 14),
-        ]),
-      ]))),
-      el('div', { class: 'lp-row' }, [el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.setPath([chartId, order[0]]) }, [icon('play', 13), el('span', { text: `Walk from the ${data!.bodies[order[0]].name}` })])]),
-    ];
-    if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('Astrology', nodes);
-    ctx.panel.setHeight('half');
+    const held = ctx.skyBody();
+    const bodyName = held && held !== 'earth' ? data!.bodies[held as ChartBody]?.name : undefined;
+    ctx.setContext(bodyName ? `${who} ${bodyName}` : `${who} birth sky`);
+    ctx.panel.close();
   };
 
   const renderWalk = (chartId: string, bodyKey?: string) => {
@@ -309,14 +316,6 @@ export function mount(ctx: LensContext): LensInstance {
     };
     const jungTies = r.ties.filter((t) => t.basis === 'jung');
     const otherTies = r.ties.filter((t) => t.basis !== 'jung');
-    // the planet's satellites: the same ties, circling it while the walk holds it up close (one per field node)
-    const satSeen = new Set<string>();
-    orbits.set(key as BodyKey, [...jungTies, ...otherTies].filter((t) => {
-      const k = `${t.target.type}:${t.target.id}`;
-      if (satSeen.has(k)) return false;
-      satSeen.add(k);
-      return true;
-    }).map((t) => ({ id: `${t.target.type}:${t.target.id}`, name: subjectName(ctx.model, t.target), inner: t.basis === 'jung', open: () => ctx.focus(t.target) })));
     const tieBlock = (t: Tie) => el('div', { class: 'as-tie' }, [
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(t.target) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), el('span', { class: 'as-basis', text: BASIS[t.basis] })]), icon('next', 14)]),
       ...t.quotes.slice(0, 1).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
@@ -360,18 +359,123 @@ export function mount(ctx: LensContext): LensInstance {
 
   const render = (path: string[]) => {
     if (!data) return;
-    if (path[0]) renderWalk(path[0], path[1]); else renderHome();
+    // ['sky'] = live Astrology sky (no modal, no natal). [chart] = birth sky. [chart, body] = walk. [] = Charts.
+    if (path[0] === ASTROLOGY_LIVE) {
+      walking = null;
+      const held = path[1] && path[1] !== 'earth' ? path[1] : ctx.skyBody();
+      const bodyName = held && held !== 'earth' ? data.bodies[held as ChartBody]?.name : undefined;
+      ctx.setContext(bodyName ?? 'The sky');
+      ctx.panel.close();
+      return;
+    }
+    if (path[0] && path[1] && path[1] !== 'earth') renderWalk(path[0], path[1]);
+    else if (path[0]) {
+      const walked = charts.get(path[0]);
+      if (!walked) { ctx.navigate(astrologyAt([])); return; }
+      renderWholeSky(path[0], walked);
+    } else renderHome();
   };
 
   // the lens lives as long as the page; another tab's change reaches it the next time it renders
   practice.onChange((c) => { if (c === 'charts') refreshCharts(); });
 
+  /**
+   * Archetype satellites for whatever body the sky is holding — canvas pick, walk step, or approach.
+   * Not gated on the walk panel: the approached body is enough.
+   */
+  const syncOrbits = () => {
+    if (!data) { if (orbitsBody) { orbits.set(null); orbitsBody = null; } return; }
+    // approached body, sky.body from a canvas pick, or the walk step — any one is enough
+    const key = ctx.engine.sky?.approached
+      ?? ctx.skyBody()
+      ?? (pathNow[1] && pathNow[1] !== 'earth' ? pathNow[1] as BodyKey : null);
+    if (!key || key === 'earth' || !data.bodies[key as ChartBody]) {
+      if (orbitsBody) { orbits.set(null); orbitsBody = null; }
+      return;
+    }
+    if (key === orbitsBody) return;
+    orbitsBody = key;
+    const r = data.bodies[key as ChartBody];
+    const satSeen = new Set<string>();
+    orbits.set(key, r.ties.filter((t) => {
+      const k = `${t.target.type}:${t.target.id}`;
+      if (satSeen.has(k)) return false;
+      satSeen.add(k);
+      return true;
+    }).map((t) => ({
+      id: `${t.target.type}:${t.target.id}`,
+      name: subjectName(ctx.model, t.target),
+      inner: t.basis === 'jung',
+      open: () => ctx.focus(t.target),
+    })));
+  };
+
+  const paintLive = () => {
+    clear(liveLine);
+    const s = ctx.skyStatus();
+    if (!s) { liveLine.removeAttribute('data-state'); return; }
+    liveLine.dataset.state = s.state;
+    liveLine.append(el('strong', { text: s.label }), ` · ${s.detail}`);
+  };
+
+  const goPath = (path: string[], culture: string | null = nameCulture) => {
+    ctx.navigate(culture ? astrologySky(path, culture) : astrologyAt(path));
+  };
+
+  const astrologyOptions = (path: string[]) => {
+    pathNow = path;
+    const skyCultures = ctx.engine.sky?.data.cultures;
+    if (skyCultures) namesReady = true;
+    paintLive();
+    const live = path[0] === ASTROLOGY_LIVE;
+    const chart = live ? null : path[0];
+    const onSky = live || (!!chart && !path[1]);
+    const names = [
+      optionAction('Greco-Roman (default)', () => {
+        nameCulture = null;
+        if (live) ctx.navigate(astrologyLive({ body: path[1] as BodyKey | undefined }));
+        else goPath(onSky && chart ? [chart] : path, null);
+      }, { pressed: !nameCulture }),
+      ...(skyCultures
+        ? Object.keys(skyCultures).map((id) => optionAction(
+          ctx.model.cultureById.get(id)?.name ?? id,
+          () => {
+            nameCulture = id;
+            if (live) ctx.navigate(astrologyLive({ body: path[1] as BodyKey | undefined, culture: id }));
+            else goPath(onSky && chart ? [chart] : path, id);
+          },
+          { pressed: nameCulture === id },
+        ))
+        : []),
+    ];
+    const walk = chart && data
+      ? optionAction('Walk the planets', () => goPath([chart, data!.order.bodies[0]]), {
+        pressed: !!path[1] && path[1] !== 'earth',
+        title: 'Planet by planet through the birth sky',
+      })
+      : null;
+    ctx.setControls([modeOptions([
+      optionAction('Charts', () => goPath([]), { pressed: !path[0], title: 'Jung’s chart and your birth form' }),
+      walk,
+      el('span', { class: 'mode-opt-label', text: 'Names' }),
+      ...names,
+      liveLine,
+    ])]);
+  };
+
   return {
     enter(path) {
-      if (data) { render(path); return; }
+      astrologyOptions(path);
+      if (data) { render(path); syncOrbits(); return; }
       if (failed) return;
       ctx.panel.open('Astrology', [el('p', { class: 'lp-sub', text: 'Loading…' })], { height: 'full' });
-      loadLensData<AstrologyData>('astrology').then((d) => { data = d; refreshCharts(); render(path); }).catch((err) => {
+      loadLensData<AstrologyData>('astrology').then((d) => {
+        data = d;
+        refreshCharts();
+        astrologyOptions(path);
+        render(path);
+        syncOrbits();
+      }).catch((err) => {
         failed = true;
         console.error(err);
         ctx.panel.replace([el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })]);
@@ -379,9 +483,16 @@ export function mount(ctx: LensContext): LensInstance {
     },
     leave() {
       editing = false;
+      nameCulture = null;
+      namesReady = false;
+      orbitsBody = null;
       orbits.set(null);
+      ctx.setControls(null);
     },
     update(dt) {
+      if (!namesReady && ctx.engine.sky?.data.cultures) astrologyOptions(pathNow);
+      paintLive();
+      syncOrbits();
       orbits.update(ctx.engine.sky ?? null, dt, ctx.engine.reduced);
     },
   };

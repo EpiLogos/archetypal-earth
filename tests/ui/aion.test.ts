@@ -12,6 +12,7 @@ const reading = history.readings[0];
 const model = buildModel(field, historyExtent(history));
 const resolver = {
   hasArchetype: (id: string) => model.archById.has(id), hasFamily: (id: string) => model.famById.has(id),
+  hasTheoretic: () => false,
   hasCulture: (id: string) => model.cultureById.has(id), hasPlace: (id: string) => model.places.has(id),
   familyOf: (id: string) => { const i = model.occIndex.get(id); return i === undefined ? undefined : model.occ[i].familyId; },
   hasReading: (id: string) => history.readings.some(r => r.id === id),

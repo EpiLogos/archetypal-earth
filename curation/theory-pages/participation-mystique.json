@@ -1,0 +1,51 @@
+{
+  "_note": "Participation mystique: the definition (CW6 ¶781), the identity it names (CW10 ¶69, CW17 ¶83), the naming's reservation (CW10 ¶130), its clinical importance (CW10 ¶852), its reach into art and matter (CW15 ¶162, CW14 ¶336, CW5 ¶203), and the retraction Jung refused to follow (CW18 ¶345, the note beside Lévy-Bruhl's own diary). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "participation-mystique",
+  "line": "Unconscious identity: the state in which subject and object are not yet distinct — the primitive stratum that never disappears from relations, and the clinical fact of the transference.",
+  "sections": [
+    {
+      "id": "the-definition",
+      "title": "The definition",
+      "line": "The 1921 definition: a connection in which the subject cannot clearly distinguish itself from the object, so the relation amounts to partial identity.",
+      "quotes": [
+        { "work": "cw06", "para": 781, "quote": "It denotes a peculiar kind of psychological connection with objects, and consists in the fact that the subject cannot clearly distinguish himself from the object but is bound to it by a direct relationship which amounts to partial identity (q.v.)." }
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Identity, not sympathy",
+      "line": "The clearest formulations are the shortest: identity in mutual unconsciousness, and nothing mystical about it.",
+      "quotes": [
+        { "work": "cw10", "para": 69, "quote": "To put it briefly, it means a state of identity in mutual unconsciousness." },
+        { "work": "cw17", "para": 83, "quote": "There is nothing “mystical” about identity, any more than there is anything mystical about the metabolism common to mother and embryo." },
+        { "work": "cw10", "para": 130, "quote": "Lévy-Bruhl has coined the expression participation mystique for these remarkable relationships. It seems to me that the word “mystical” is not happily chosen." }
+      ]
+    },
+    {
+      "id": "in-the-clinic",
+      "title": "In the clinic",
+      "line": "In the consulting room the phenomenon is not exotic: when the dialogue touches something essential, two psychic spheres interpenetrate.",
+      "quotes": [
+        { "work": "cw10", "para": 852, "quote": "It is an unconscious identity in which two individual psychic spheres interpenetrate to such a degree that it is impossible to say what belongs to whom" }
+      ]
+    },
+    {
+      "id": "art-and-matter",
+      "title": "In art, and in matter",
+      "line": "The same state explains the effect of great art and the alchemists' relation to their substance.",
+      "quotes": [
+        { "work": "cw15", "para": 162, "quote": "This re-immersion in the state of participation mystique is the secret of artistic creation and of the effect which great art has upon us" },
+        { "work": "cw14", "para": 336, "quote": "a state of participation mystique,662 or unconscious identity, arose between them and the chemical substance" },
+        { "work": "cw05", "para": 203, "quote": "In this way there came into being those intimate relationships by analogy which Lévy-Bruhl fittingly describes as “participation mystique.”" }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "archetype", "id": "mana-personality" },
+    { "type": "archetype", "id": "self" },
+    { "type": "family", "id": "mana" },
+    { "type": "theoretic", "id": "collective-unconscious" },
+    { "type": "theoretic", "id": "mana" }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_note": "Synchronicity: the definition (CW8 ¶850) and the principle's rank (¶840, ¶849, ¶965), the structural definition (¶858) and the abstraction (¶947), the coinage in the 1929 seminar and the psychoid quantity (¶440), and Einstein's part in the question (sync, prefatory note). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "synchronicity",
+  "line": "Meaningful coincidence: a psychic state and an outer event bound by meaning and simultaneity rather than by cause — proposed, carefully, as a factor equal in rank to causality.",
+  "sections": [
+    {
+      "id": "the-definition",
+      "title": "The definition",
+      "line": "The 1952 monograph states it in one sentence, and marks it off from mere synchronism, the bare coincidence of two events.",
+      "quotes": [
+        { "work": "cw08", "para": 850, "quote": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state—and, in certain cases, vice versa." },
+        { "work": "cw08", "para": 849, "quote": "I am therefore using the general concept of synchronicity in the special sense of a coincidence in time of two or more causally unrelated events which have the same or a similar meaning, in contrast to \"synchronism,\" which simply means the simultaneous occurrence of two events." }
+      ]
+    },
+    {
+      "id": "the-principle",
+      "title": "A principle, in its own right",
+      "line": "The term is picked deliberately for a factor equal in rank to causality, and the coincidence is given two constituents: an unconscious image, and an objective situation that matches it.",
+      "quotes": [
+        { "work": "cw08", "para": 840, "quote": "I have picked on the term \"synchronicity\" to designate a hypothetical factor equal in rank to causality as a principle of explanation." },
+        { "work": "cw08", "para": 858, "quote": "Synchronicity therefore consists of two factors: a) An unconscious image comes into consciousness either directly (i.e., literally) or indirectly (symbolized or suggested) in the form of a dream, idea, or premonition, b) An objective situation coincides with this content" },
+        { "work": "cw08", "para": 965, "quote": "The meaningful coincidence or equivalence of a psychic and a physical state that have no causal relationship to one another means, in general terms, that it is a modality without a cause, an \"acausal orderedness.\"" }
+      ]
+    },
+    {
+      "id": "not-a-cause",
+      "title": "Not a cause, an orderedness",
+      "line": "The concept is protected against its own enthusiasm: it is an abstract and irrepresentable quantity, and where meaning cannot be attributed, equivalence must be enough.",
+      "quotes": [
+        { "work": "cw08", "para": 947, "quote": "I am only too conscious that synchronicity is a highly abstract and \"irrepresentable\" quantity. It ascribes to the moving body a certain psychoid property which, like space, time, and causality, forms a criterion of its behaviour." },
+        { "work": "cw08", "para": 440, "quote": "As soon as a psychic content crosses the threshold of consciousness, the synchronistic marginal phenomena disappear, time and space resume their accustomed sway, and consciousness is once more isolated in its subjectivity" }
+      ]
+    },
+    {
+      "id": "the-coinage",
+      "title": "The coinage",
+      "line": "The word is Jung's own, invented for what the phenomena seemed to be: occurrences stamped by the same time content.",
+      "quotes": [
+        { "work": "sem-dream-analysis", "page": 443, "quote": "things happening at the same moment as an expression of the same time content" },
+        { "work": "sync", "page": 13, "quote": "it was he who first started me off thinking about a possible relativity of time as well as space, and their psychic conditionality" }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "family", "id": "scarab" },
+    { "type": "theoretic", "id": "psychoid" },
+    { "type": "theoretic", "id": "aion-time" },
+    { "type": "theoretic", "id": "archetype-as-such" }
+  ]
+}

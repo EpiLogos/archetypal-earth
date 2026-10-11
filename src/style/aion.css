@@ -2,21 +2,56 @@
 .aion[hidden], .aion-card[hidden], .aion-dot[hidden] { display: none; }
 .aion select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; }
 .aion option { background: #0a1020; color: #e5eafa; }
-.aion-browse { position: relative; margin-top: 14px; font: 11.5px var(--sans); letter-spacing: .05em; }
-.aion-browse > summary { display: inline-block; list-style: none; cursor: pointer; }
-.aion-browse > summary::-webkit-details-marker { display: none; }
-.aion-browse > summary::after { content: '⌄'; display: inline-block; margin-left: 7px; color: var(--ink-3); transition: transform .3s; }
-.aion-browse[open] > summary::after { transform: rotate(180deg); }
-.aion-choices { position: absolute; top: 30px; left: 0; width: 280px; max-width: calc(100vw - 36px); display: grid; gap: 18px; padding: 20px; border: 1px solid var(--hair); border-radius: 14px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.15); box-shadow: 0 20px 60px rgb(0 0 0 / .4); }
-.aion-choices label { display: grid; gap: 2px; min-width: 0; }
-.aion-choices label > span { color: var(--ink-3); font-size: 10.5px; letter-spacing: .08em; }
-.aion-choices select { width: 100%; font: 11.5px var(--sans); letter-spacing: .01em; }
-.aion-epochs { position: absolute; bottom: 89px; left: 50%; transform: translateX(-50%); display: flex; justify-content: center; gap: 32px; pointer-events: auto; }
+/* Options: icon under the title; sheet matches the timeline width, above the clock */
+.mode-options, .aion-browse { position: relative; margin-top: 8px; font: 11.5px var(--sans); letter-spacing: .05em; }
+.mode-options > summary, .aion-browse > summary { display: inline-grid; place-items: center; list-style: none; cursor: pointer; }
+.mode-options > summary::-webkit-details-marker, .aion-browse > summary::-webkit-details-marker { display: none; }
+.mode-opt-btn { width: 34px; height: 34px; color: var(--ink-2); border: 1px solid var(--hair); border-radius: 10px; background: rgb(0 0 0 / 0.22); }
+.mode-opt-btn:hover { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); }
+.mode-opt-ico { display: block; transition: transform .28s var(--ease, ease); }
+.mode-options[open] .mode-opt-ico { transform: rotate(90deg); color: var(--core); }
+.mode-options-body, .aion-choices {
+  position: fixed; left: 50%; bottom: 76px; transform: translateX(-50%);
+  width: min(780px, 90vw); max-width: calc(100vw - 24px); max-height: min(52vh, 420px); overflow-y: auto;
+  display: grid; gap: 2px; padding: 14px 22px; z-index: 30;
+  border: 1px solid var(--hair); border-radius: 14px; background: var(--glass);
+  backdrop-filter: blur(20px) saturate(1.15); box-shadow: 0 20px 60px rgb(0 0 0 / .45);
+}
+.mode-opt-field, .aion-choices label { display: grid; gap: 4px; min-width: 0; }
+.mode-opt-field > span, .aion-choices label > span { color: var(--ink-3); font-size: 10.5px; letter-spacing: .08em; }
+.mode-opt-field select, .aion-choices select, .mode-options-body select { width: 100%; font: 11.5px var(--sans); letter-spacing: .01em; border: 0; border-bottom: 0; padding: 0; }
+.mode-opt-action { display: block; width: 100%; text-align: left; padding: 8px 0; font: 13px var(--sans); color: var(--ink-2); border: 0; border-bottom: 0; background: none; text-decoration: none; }
+.mode-opt-action:hover { color: var(--ink); }
+.mode-opt-action[aria-pressed=true] { color: var(--core); }
+.mode-opt-blurb { margin: 0 0 10px; padding: 0; font: 12.5px/1.45 var(--serif); color: var(--ink-2); max-width: 48ch; }
+.mode-opt-label {
+  display: block; margin: 12px 0 2px; padding: 0;
+  font: 10.5px var(--sans); letter-spacing: .08em; color: var(--ink-3); text-transform: none;
+  border: 0;
+}
+.mode-opt-label:first-child { margin-top: 0; }
+.mode-opt-live { margin: 12px 0 4px; padding: 0; font: 11px/1.45 var(--sans); color: var(--ink-3); max-width: 42ch; }
+.mode-opt-live strong { font-weight: 600; color: var(--ink-2); letter-spacing: .04em; }
+.mode-opt-live[data-state=live] strong::before, .mode-opt-live[data-state=held] strong::before {
+  content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: rgb(var(--core-rgb) / .85);
+}
+.mode-opt-live:empty { display: none; }
+.mode-options-body .rb-modes { display: contents; }
+.mode-options-body .rb-modes button { display: block; width: 100%; text-align: left; padding: 8px 0; }
+.aion-epochs { position: absolute; bottom: 89px; left: 50%; transform: translateX(-50%); z-index: 12; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 32px; max-width: min(920px, 94vw); pointer-events: auto; }
+.aion-epochs[hidden] { display: none; }
 .aion-epochs button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding: 6px 0; border-bottom: 1px solid transparent; white-space: nowrap; transition: color .4s, border-color .4s; }
 .aion-epochs button[aria-pressed=true] { color: var(--core); border-color: var(--core); }
 .aion-card { bottom: 126px; max-height: calc(100vh - 210px); }
 .aion-card .aion-date { margin: 0 22px 9px 0; }
 .aion-card .aion-lede { color: var(--ink); }
+.aion-card .dp-def { margin: 22px 0 0; }
+.aion-card .dp-def + .dp-def { margin-top: 26px; }
+.aion-card .rv-para + .rv-para { margin-top: 16px; }
+/* card open: clear the left chrome so the close is never under the reading tabs */
+body.aion-card-open .sh-title,
+body.aion-card-open .sh-controls,
+body.aion-card-open .sh-scope { display: none; }
 .aion-sources { border-top: 1px solid var(--hair); margin-top: 22px; padding-top: 14px; }
 .aion-sources summary, .aion-links, .aion-thread { font: 11px/1.5 var(--sans); color: var(--ink-2); }
 .aion-sources summary { cursor: pointer; }
@@ -36,9 +71,11 @@
 body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
   .aion-context { font-size: 10.5px; }
-  .aion-card { bottom: 108px; max-height: 48vh; }
-  .aion-epochs { bottom: 70px; gap: 24px; }
+  .aion-card { bottom: 100px; max-height: 48vh; }
+  .aion-epochs { bottom: 56px; gap: 16px 20px; }
   .aion-epochs button { font-size: 11px; }
+  /* book/thread rail sits under the card; keep a clear gap */
+  .aion:has(.rb-rail:not([hidden])) .aion-card { bottom: 100px; }
 }
 .symbol-reading { margin-top: 22px; }
 .symbol-compact { border-top: 1px solid var(--hair); padding-top: 14px; }
@@ -74,11 +111,9 @@ body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
   .aion-ring svg { width: 120px; height: 120px; }
   .aion-ring-read, .aion-ring select { display: none; }
 }
-/* Aion, the book: the chapter walk */
+/* Aion, the book: the chapter walk (prev/next is the shared rb-rail over the timeline) */
 .aion-book-toggle { margin-top: 14px; margin-right: 18px; font: 11.5px var(--sans); letter-spacing: .05em; }
 .aion-book-toggle[aria-pressed=true] { color: var(--core); }
-.aion-book > div { align-items: center; }
-.aion-book .rb-progress { min-width: 4.5em; text-align: center; color: var(--ink); letter-spacing: .08em; }
 .aion-book-events { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
 .aion-book-events button { text-align: left; }
 .aion-book-deep { margin-top: 16px; font: 11px/1.5 var(--sans); }

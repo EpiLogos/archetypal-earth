@@ -14,7 +14,7 @@ const DATED = 24;
 
 export { DEEP_FIELDS } from './deep-fields';
 
-export interface DepthSection { id: string; title: string; line: string; quotes: (LensQuote & { speaker?: string })[]; families: string[] }
+export interface DepthSection { id: string; title: string; line: string; quotes: (LensQuote & { speaker?: string })[]; families: string[]; subjects?: { type: 'archetype' | 'family' | 'theoretic'; id: string }[] }
 export interface DepthInstance {
   year?: number;
   yearDisplay: string;
@@ -30,7 +30,7 @@ export interface DepthInstance {
   /** the reader marked the scan damaged here: the words are as the scan reads them */
   scan?: true;
 }
-export interface DepthEntry { archetype: string; line: string; sections: DepthSection[]; instances: { line: string; items: DepthInstance[]; undated: DepthInstance[] }; records: number }
+export interface DepthEntry { archetype: string; line: string; sections: DepthSection[]; instances?: { line: string; items: DepthInstance[]; undated: DepthInstance[] }; records?: number }
 export interface DepthData { version: 1; archetypes: Record<string, DepthEntry> }
 
 export interface DepthActions {
@@ -38,6 +38,8 @@ export interface DepthActions {
   openOccurrence(id: string): void;
   focus(): void;
   walk(): void;
+  /** a section's own subjects (the Self's numbers): open one, as any focus */
+  openSubject?(s: { type: 'archetype' | 'family' | 'theoretic'; id: string }): void;
 }
 
 export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: PassageBridge | undefined, ok: (i: number) => boolean): HTMLElement[] {
@@ -53,6 +55,12 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
     return b;
   };
   const chip = (id: string) => el('button', { type: 'button', class: 'sf-pill', text: m.famById.get(id)?.name ?? id, onclick: () => act.amplifyFamily(id) });
+  const nameOfSubject = (l: { type: 'archetype' | 'family' | 'theoretic'; id: string }) => (l.type === 'family' ? m.famById.get(l.id)?.name : l.type === 'archetype' ? m.archById.get(l.id)?.name : m.theoById.get(l.id)?.name) ?? l.id;
+  const subjectRow = (subjects: DepthSection['subjects']) => {
+    const row = el('div', { class: 'th-links' });
+    for (const l of subjects ?? []) row.append(el('button', { type: 'button', class: 'th-link', onclick: () => act.openSubject?.(l) }, [el('span', { text: nameOfSubject(l) })]));
+    return row.childElementCount ? row : null;
+  };
   const dreamRow = (i: number) => {
     const o = m.occ[i];
     return el('li', {}, [el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? 'Jung’s own' : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })])]);
@@ -70,10 +78,10 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
       x.families.length ? el('div', { class: 'am-chips' }, x.families.map(chip)) : null,
     ]),
   ]);
-  const datedList = el('ol', { class: 'dp-instances' }, d.instances.items.slice(0, DATED).map(instanceRow));
+  const datedList = el('ol', { class: 'dp-instances' }, (d.instances?.items ?? []).slice(0, DATED).map(instanceRow));
   const LOCUS: Record<string, string> = { artifact: 'Objects and images', ritual: 'Rites', 'myth-episode': 'Myths', 'text-passage': 'Texts', figure: 'Figures', 'clinical-case': 'Cases', 'historical-event': 'Events', dream: 'Dreams', vision: 'Visions' };
   const groups = new Map<string, DepthInstance[]>();
-  for (const x of d.instances.undated) groups.set(x.locus, [...(groups.get(x.locus) ?? []), x]);
+  for (const x of d.instances?.undated ?? []) groups.set(x.locus, [...(groups.get(x.locus) ?? []), x]);
   // each group is drawn when it is first opened: hundreds of entries stay out of the page until asked for
   const undatedGroups = [...groups].sort((a, b) => b[1].length - a[1].length).map(([locus, xs]) => {
     const box = el('details', { class: 'as-more dp-group' }, [el('summary', { text: `${LOCUS[locus] ?? (locus || 'Other')} (${xs.length})` })]);
@@ -85,10 +93,12 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
     el('h2', { class: 'lp-h', text: arch.name }),
     el('p', { class: 'th-line', text: d.line }),
     el('div', { class: 'dp-stats', role: 'list', 'aria-label': 'What the field holds for it' }, [
-      stat(fams.length, 'images'), stat(occ.length, 'instances'), stat(dreams.length, 'dreams and visions'), stat(d.instances.items.length + d.instances.undated.length, 'of Neumann’s instances'), stat(d.records, 'records read from Neumann'), stat(quotes, 'quotations here'),
+      stat(fams.length, 'images'), stat(occ.length, 'instances'), stat(dreams.length, 'dreams and visions'),
+      ...(d.instances ? [stat(d.instances.items.length + d.instances.undated.length, 'of Neumann’s instances'), stat(d.records ?? 0, 'records read from Neumann')] : []),
+      stat(quotes, 'quotations here'),
     ]),
     el('div', { class: 'lp-row' }, [
-      el('button', { type: 'button', class: 'lp-btn', onclick: act.walk }, [icon('play', 13), el('span', { text: 'Walk her through time' })]),
+      el('button', { type: 'button', class: 'lp-btn', onclick: act.walk }, [icon('play', 13), el('span', { text: 'Walk it through time' })]),
       el('button', { type: 'button', class: 'lp-btn quiet', onclick: act.focus }, [icon('field', 14), el('span', { text: 'On the globe' })]),
     ]),
     ...d.sections.flatMap((s) => [
@@ -96,8 +106,9 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
       el('p', { class: 'th-line', text: s.line }),
       ...s.quotes.map(quote),
       s.families.length ? el('div', { class: 'am-chips' }, s.families.map(chip)) : null,
+      subjectRow(s.subjects),
     ]),
-    el('h3', { class: 'as-h3', text: `Her images in the field (${fams.length})` }),
+    el('h3', { class: 'as-h3', text: `Its images in the field (${fams.length})` }),
     el('div', { class: 'am-chips' }, [...fams].sort((a, b) => b.occurrenceIds.length - a.occurrenceIds.length).slice(0, 24).map((f) => chip(f.id))),
     el('h3', { class: 'as-h3', text: `In dreams and visions (${dreams.length})` }),
     dreamList,
@@ -105,16 +116,18 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
       dreamList.replaceChildren(...dreams.map(dreamRow));
       (e.currentTarget as HTMLElement).remove();
     } }) : null,
-    el('h3', { class: 'as-h3', text: `Neumann’s instances (${(d.instances.items.length + d.instances.undated.length).toLocaleString()})` }),
-    el('p', { class: 'lp-note', text: d.instances.line }),
-    el('h3', { class: 'as-h3', text: `Dated (${d.instances.items.length})` }),
-    datedList,
-    d.instances.items.length > DATED ? el('button', { type: 'button', class: 'link-quiet am-more', text: `All ${d.instances.items.length} dated`, onclick: (e: Event) => {
-      datedList.replaceChildren(...d.instances.items.map(instanceRow));
-      (e.currentTarget as HTMLElement).remove();
-    } }) : null,
-    el('h3', { class: 'as-h3', text: `Dated by era, or not at all (${d.instances.undated.length})` }),
-    ...undatedGroups,
+    ...(d.instances ? [
+      el('h3', { class: 'as-h3', text: `Neumann’s instances (${(d.instances.items.length + d.instances.undated.length).toLocaleString()})` }),
+      el('p', { class: 'lp-note', text: d.instances.line }),
+      el('h3', { class: 'as-h3', text: `Dated (${d.instances.items.length})` }),
+      datedList,
+      d.instances.items.length > DATED ? el('button', { type: 'button', class: 'link-quiet am-more', text: `All ${d.instances.items.length} dated`, onclick: (e: Event) => {
+        datedList.replaceChildren(...d.instances!.items.map(instanceRow));
+        (e.currentTarget as HTMLElement).remove();
+      } }) : null,
+      el('h3', { class: 'as-h3', text: `Dated by era, or not at all (${d.instances.undated.length})` }),
+      ...undatedGroups,
+    ] : []),
   ];
   return nodes.filter((n): n is HTMLElement => !!n);
 }

@@ -4,13 +4,14 @@
 // (the chronology is offered by chronology() for it to light).
 import { entered } from '../lenses/ui';
 import { averagePalettes, rgbToHex } from '../data/palette';
-import { subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
+import { selfSubject, subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import { inLens, type AppState } from '../state/store';
 import type { Palette } from '../types/field';
 import type { DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender, DynamicsRoute, RouteMovement, RouteQuote, RouteStop } from '../types/dynamics';
 import { clear, el } from '../ui/dom';
+import { modeOptions, optionAction } from '../ui/mode-options';
 import type { PassageBridge } from '../ui/passage';
 import { closeGlyph } from '../ui/reveal';
 import { jMark, nMark, vMark } from './marks';
@@ -44,12 +45,13 @@ const COMPANIONS = 3;
 export interface DynamicsState {
   subject?: Subject;
   stop?: string;
+  /** open the walk overview (Theory → Dynamics); not written to the hash */
+  route?: true;
 }
 
 const keyOf = (s: Subject) => `${s.type}:${s.id}`;
 
-export { selfSubject } from '../data/model';
-import { selfSubject } from '../data/model';
+export { selfSubject };
 
 function paletteOf(m: Model, s: Subject): Palette {
   const own = s.type === 'archetype' ? m.archById.get(s.id)?.palette : s.type === 'family' ? m.famById.get(s.id)?.palette : undefined;
@@ -65,6 +67,7 @@ export class DynamicsView {
   readonly strip: PhaseStrip;
   private heading: HTMLElement;
   private card: HTMLElement;
+  private rail: HTMLElement;
   private heroKind: DynamicsRender = 'lorenz';
   /** repaints the hero when its box changes size */
   private heroRo: ResizeObserver | null = null;
@@ -104,7 +107,8 @@ export class DynamicsView {
     // the subject is the shell's context line; the visited families are this lens's controls (MODES-RFC §2)
     this.heading = el('div', { class: 'dy-controls' });
     this.card = el('aside', { class: 'dy-card reveal on', 'aria-label': 'Dynamical reading' });
-    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root, this.card]);
+    this.rail = el('nav', { class: 'dy-rail', hidden: true, 'aria-label': 'The route' });
+    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root, this.rail, this.card]);
     this.setActive(false);
     parent.append(this.root);
   }
@@ -118,35 +122,83 @@ export class DynamicsView {
     this.stateStop = state.stop;
     this.chosen = !!state.subject;
     this.resolveStop();
+    if (state.route && !state.stop) this.holdingOverview = true;
+    else if (state.stop || state.subject) this.holdingOverview = false;
+    // a stop, a chosen subject, or an overview we are holding open; plain Theory entry leaves Options waiting
+    this.routeOpen = !!state.stop || !!state.subject || this.holdingOverview || !!state.route;
+    this.root.classList.toggle('dy-route-open', this.routeOpen);
     this.refreshChrome();
-    this.renderCard();
+    if (this.routeOpen) {
+      this.card.hidden = false;
+      this.renderCard();
+    } else {
+      this.card.hidden = true;
+      this.rail.hidden = true;
+      clear(this.rail);
+      clear(this.card);
+    }
+    this.onScope();
     this.update(0);
+  }
+
+  /** Whether the walk card is open (overview or a stop). Theory landing is false. */
+  get isRouteOpen(): boolean {
+    return this.routeOpen;
   }
 
   /** whether the subject was chosen (a deep link or a pick), not the Self the lens lands on */
   private chosen = false;
   private basins: Basin[] = [];
+  /** the route card is open (overview or a stop); landing Theory keeps Options only */
+  private routeOpen = false;
+  /** overview kept open after closing a stop (plain dynamics:{} would otherwise look like a fresh landing) */
+  private holdingOverview = false;
 
   /**
-   * The title and the controls name what the globe shows: the standing stop and its families on the route; the subject
-   * and the families it passes through when one was chosen (or there is no route); the route itself on its overview.
+   * The title and the controls name what the globe shows. Options holds the two equal Theory routes — Jung's theory and
+   * the dynamical walk — plus any families the standing stop speaks of.
    */
   private refreshChrome() {
     if (!this.subject || this.root.hidden) return;
     const m = this.model;
     const standing = this.standing();
     const subject = subjectName(m, this.subject);
-    const context = standing ? (this.chosen ? `${standing.name} · ${subject}` : standing.name)
-      : this.route && !this.chosen ? this.route.title : `${subject} as a dynamical system`;
-    this.chrome?.setContext(context);
+    // landing: no context (lens already says Theory); a stop or chosen subject names itself
+    const context = !this.routeOpen && !standing ? ''
+      : standing ? (this.chosen ? `${standing.name} · ${subject}` : standing.name)
+      : this.route && !this.chosen ? this.route.title : subject;
+    this.chrome?.setContext(this.routeOpen ? '' : context);
     clear(this.heading);
-    const link = (familyId: string) => el('button', { type: 'button', class: 'link-quiet', text: m.famById.get(familyId)?.name ?? familyId,
-      onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: familyId } }, deep: false }) });
     const fams = standing ? standing.familyIds.filter((f) => m.famById.has(f))
       : this.chosen || !this.route ? this.topBasins() : [];
-    if (fams.length) this.heading.append(el('nav', { class: 'dy-basins', 'aria-label': standing ? 'The families this stop speaks of' : 'Families visited' }, fams.map(link)));
-    this.heading.append(el('button', { type: 'button', class: 'link-quiet dy-theory', text: 'Read the theory', onclick: () => this.navigate(inLens('theory', ['transcendent-function'])) }));
+    const famActions = fams.map((familyId) => optionAction(m.famById.get(familyId)?.name ?? familyId, () =>
+      this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: familyId } }, deep: false })));
+    if (this.routeOpen) { this.chrome?.setControls(null); return; }
+    this.heading.append(modeOptions([
+      optionAction("Jung's theory", () => this.navigate(inLens('theory')), { title: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
+      optionAction('Dynamics', () => this.openRoute(), { title: this.route?.title ?? 'Archetypes & Strange Attractors' }),
+      ...famActions,
+    ]));
     this.chrome?.setControls([this.heading]);
+  }
+
+  /** Open the dynamical route (overview first). Local when already on #/dynamics so hash equality cannot no-op. */
+  private openRoute() {
+    this.holdingOverview = true;
+    this.routeOpen = true;
+    this.root.classList.add('dy-route-open');
+    const sub = this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {};
+    const next = { view: { kind: 'world' } as const, deep: false, dynamics: { ...sub, route: true as const } };
+    // if the hash is already the landing, navigate would no-op — open the card here
+    if (!this.stateStop && !sub.subject) {
+      this.card.hidden = false;
+      this.renderCard();
+      this.refreshChrome();
+      this.onScope();
+      this.navigate(next);
+      return;
+    }
+    this.navigate(next);
   }
 
   /** The most-visited families the subject passes through, in the order they were first visited. */
@@ -167,7 +219,10 @@ export class DynamicsView {
     this.route = route;
     this.stops = route ? route.movements.flatMap((movement) => movement.stops.map((stop) => ({ stop, movement }))) : [];
     this.resolveStop();
-    if (!this.root.hidden) { this.renderCard(); this.refreshChrome(); }
+    if (!this.root.hidden) {
+      if (this.routeOpen) this.renderCard();
+      this.refreshChrome();
+    }
     this.onScope();
   }
 
@@ -203,6 +258,11 @@ export class DynamicsView {
     if (this.root.hidden) return;
     this.setActive(false);
     document.body.classList.remove('dynamics-mode');
+    this.root.classList.remove('dy-route-open');
+    this.routeOpen = false;
+    this.holdingOverview = false;
+    this.rail.hidden = true;
+    clear(this.rail);
     clear(this.card);
     this.heroRo?.disconnect();
     this.heroRo = null;
@@ -238,7 +298,10 @@ export class DynamicsView {
   setConcepts(data: DynamicsData | null) {
     this.concepts = data?.concepts ?? [];
     if (this.subject) this.relate();
-    if (!this.root.hidden) { this.renderCard(); this.refreshChrome(); }
+    if (!this.root.hidden) {
+      if (this.routeOpen) this.renderCard();
+      this.refreshChrome();
+    }
     this.onScope();
   }
 
@@ -274,7 +337,24 @@ export class DynamicsView {
   }
 
   private closeButton() {
-    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close the dynamical lens', onclick: () => this.navigate({ view: { kind: 'world' }, deep: false }) }, [closeGlyph()]);
+    // close the route card; stay in Theory with Options waiting
+    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close reading', onclick: () => this.dismissRoute() }, [closeGlyph()]);
+  }
+
+  private dismissRoute() {
+    // from a stop → overview; from overview → Theory landing (must work even when hash is already #/dynamics)
+    if (this.stop) { this.holdingOverview = true; this.go(); return; }
+    this.holdingOverview = false;
+    this.routeOpen = false;
+    this.root.classList.remove('dy-route-open');
+    this.card.hidden = true;
+    this.rail.hidden = true;
+    clear(this.rail);
+    clear(this.card);
+    this.refreshChrome();
+    this.onScope();
+    const sub = this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {};
+    this.navigate({ view: { kind: 'world' }, deep: false, dynamics: { ...sub } });
   }
 
   /**
@@ -286,6 +366,8 @@ export class DynamicsView {
     if (!this.subject) return;
     if (this.route) { this.renderRoute(); return; }
     this.shots = [];
+    this.rail.hidden = true;
+    clear(this.rail);
     clear(this.card);
     const concept = this.related[this.conceptAt];
     this.heroKind = concept?.render ?? 'lorenz';
@@ -448,10 +530,12 @@ export class DynamicsView {
     this.heroRo?.disconnect();
     this.heroRo = null;
     clear(this.card);
+    clear(this.rail);
     const route = this.route!;
     const text = el('div', { class: 'rv-text' });
     const cur = this.stop;
     if (!cur) {
+      this.rail.hidden = true;
       text.append(
         this.routeMap(),
         this.heroFigure(figureOf('lorenz')),
@@ -471,6 +555,12 @@ export class DynamicsView {
       const i = this.stops.indexOf(cur);
       const n = this.stops.length;
       const concept = s.concept ? this.concepts.find((c) => c.id === s.concept) : undefined;
+      this.rail.hidden = false;
+      this.rail.append(
+        el('button', { type: 'button', text: '←', 'aria-label': 'Previous stop', onclick: () => this.go(this.stops[(i - 1 + n) % n].stop.id) }),
+        el('span', { class: 'rb-progress', text: `${i + 1} / ${n}` }),
+        el('button', { type: 'button', text: '→', 'aria-label': 'Next stop', onclick: () => this.go(this.stops[(i + 1) % n].stop.id) }),
+      );
       text.append(
         this.routeMap(),
         el('p', { class: 'aion-date rv-line dy-mv-head' }, [
@@ -488,11 +578,6 @@ export class DynamicsView {
       for (const q of s.ql ?? []) text.append(el('blockquote', { class: 'lq lq-ql' }, [
         el('p', { text: entered(q.text) }),
         el('footer', {}, [el('span', { class: 'lq-voice ql', text: 'QL' }), el('span', { class: 'lq-cite', text: `epi-logos.org, ${q.source.replace(/^W /, '')}` })]),
-      ]));
-      text.append(el('div', { class: 'th-step dy-step' }, [
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Previous stop', onclick: () => this.go(this.stops[(i - 1 + n) % n].stop.id) }, ['←']),
-        el('span', { class: 'th-count', text: `${i + 1} of ${n}` }),
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Next stop', onclick: () => this.go(this.stops[(i + 1) % n].stop.id) }, ['→']),
       ]));
     }
     this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));

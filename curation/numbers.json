@@ -1,0 +1,233 @@
+{
+  "_note": "The number archetypes' pages, one to six, as archetypes of order tied to the Self. The walk material (the position, its QL formulation and gloss, the number in von Franz) comes from curation/ql.json — one address for the QL, composed here, never copied. These sections carry Jung's own number material: the monad (CW9ii ¶340-341), the dyad (CW9ii ¶426, CW10 ¶806), the triad and its dilemma (CW12 ¶25, CW11 ¶183, CW9ii ¶234), the quaternity and the archetype of order (CW10 ¶803-805, CW9ii ¶381), the quintessence (CW10 ¶738, CW11 ¶160, CW8 ¶931), and the return with the Self (CW10 ¶805, CW9i pdf p424, CW12 ¶310). The egg block carries the three witnesses to one image: Pauli's dream with the site's count as six stages (QL, W § II — the 0/1 frame's start forgone, so the shape is visible and never named), Jung's CW9ii ¶345 footnote, and the pentadic mandala of CW9i ¶615. Quotations are placed by the corpus (scripts/numbers.mjs); nothing is typed. `stages` are the site's own count for the dream and are marked QL wherever they are shown.",
+  "version": 1,
+  "line": "One to six as archetypes of order: each number a position of the same shape, from the monad's ground to the six that returns — with the Self as the number archetypes' own centre.",
+  "stages": {
+    "labels": [
+      "1 · The Seed",
+      "2 · Polarity",
+      "3 · The Third",
+      "4 · Quaternity",
+      "5 · Quintessence",
+      "5→0 · The Return"
+    ],
+    "source": "W § II"
+  },
+  "egg": {
+    "dream": {
+      "work": "letters-pauli",
+      "page": 254,
+      "voice": "Pauli",
+      "quote": "A woman comes with a bird, which lays a large egg."
+    },
+    "footnote": [
+      {
+        "work": "cw09ii",
+        "para": 345,
+        "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick."
+      },
+      {
+        "work": "cw09ii",
+        "para": 345,
+        "quote": "To the scholiast of the \"Tractatus aureus\" it is the midpoint, the \"circulus exiguus\" and \"mediator\" which reconciles the hostile elements and \"by persistent rotation changes the angular form of the square into a circular one like itself.\""
+      },
+      {
+        "work": "cw09ii",
+        "para": 345,
+        "quote": "the starting point of creation.153 Similarly John Dee says that all things originated from the point and the monad.154 Indeed, God himself is simultaneously both the centre and the circumference."
+      }
+    ],
+    "mandala": [
+      {
+        "work": "cw09i",
+        "page": 382,
+        "quote": "In the centre is the egg encircled by the snake; outside, apotropaic wings and eyes.",
+        "pageOnly": true
+      },
+      {
+        "work": "cw09i",
+        "page": 382,
+        "quote": "The mandala is exceptional in that it has a pentadic structure.",
+        "pageOnly": true
+      }
+    ]
+  },
+  "numbers": {
+    "one": {
+      "line": "The ground before anything is divided: the monad, one without a second, and with it the whole series held in advance.",
+      "sections": [
+        {
+          "id": "the-monad",
+          "title": "The monad",
+          "line": "The one is not a number beside the others: it is the unit that the self, in Monoïmos, is described by.",
+          "quotes": [
+            {
+              "work": "cw09ii",
+              "page": 230,
+              "quote": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things"
+            },
+            {
+              "work": "cw09ii",
+              "para": 341,
+              "quote": "This paradoxical idea of the Monad in Mono'imos describes the psychological nature of the self as conceived by a thinker of the second century under the influence of the Christian message."
+            }
+          ]
+        }
+      ]
+    },
+    "two": {
+      "line": "Polarity: the pair without which no tension, no reflection and no relation can exist.",
+      "sections": [
+        {
+          "id": "the-dyad",
+          "title": "The dyad",
+          "line": "The two is what makes knowing possible — an other to stand over against — and Jung reads the self itself as a union of the pair.",
+          "quotes": [
+            {
+              "work": "cw09ii",
+              "para": 426,
+              "quote": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine). It stands for the psychic totality."
+            },
+            {
+              "work": "cw10",
+              "para": 806,
+              "quote": "The symbols of the self coincide with the God-images, as, for instance, the complexio oppositorum of Cusanus with the dyad, or the definition of God as a \"circle whose centre is everywhere and the circumference nowhere\" with Angelucci’s sign of the hydrogen atom."
+            }
+          ]
+        }
+      ]
+    },
+    "three": {
+      "line": "The third that resolves a tension — and the Trinity's dilemma: three that insists it is one while four is denied.",
+      "sections": [
+        {
+          "id": "the-triad",
+          "title": "The triad, and the dilemma",
+          "line": "Jung keeps the difficulty visible: the triad is dynamic and spiritual, and it is exactly three that leaves the fourth out.",
+          "quotes": [
+            {
+              "work": "cw12",
+              "para": 25,
+              "quote": "dogma insists that three are one, while denying that four are one"
+            },
+            {
+              "work": "cw11",
+              "para": 183,
+              "quote": "the dilemma of three and four"
+            },
+            {
+              "work": "cw09ii",
+              "para": 234,
+              "quote": "the first coinciding with the fourth"
+            }
+          ]
+        }
+      ]
+    },
+    "four": {
+      "line": "The quaternity: four as the minimum of a whole judgment, the Pythagorean tetraktys, the pattern of order itself.",
+      "sections": [
+        {
+          "id": "the-archetype-of-order",
+          "title": "The archetype of order",
+          "line": "Four is where Jung's arithmetic and his psychology meet: the mandala's structure is arithmetical, and the number 4 is its especial case.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 805,
+              "quote": "Psychologically, the rotundum or mandala is a symbol of the self."
+            },
+            {
+              "work": "cw10",
+              "para": 805,
+              "quote": "The self is the archetype of order par excellence. The structure of the mandala is arithmetical, for “whole” numbers are likewise archetypes of order. This is true particularly of the number 4, the Pythagorean tetraktys."
+            }
+          ]
+        },
+        {
+          "id": "the-viewfinder",
+          "title": "The viewfinder",
+          "line": "The same pattern in its working form: a mark superimposed on the psychic chaos, gaining in importance as the ego loses it.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 803,
+              "quote": "The archetype thereby constellated represents a pattern of order which, like a psychological “viewfinder” marked with a cross or a circle divided into four, is superimposed on the psychic chaos so that each content falls into place and the weltering confusion is held together by the protective circle."
+            },
+            {
+              "work": "cw10",
+              "para": 804,
+              "quote": "I have observed these phenomena in my patients for forty years and have come to the conclusion that this archetype is of central importance, or rather, that it gains in importance to the degree that the importance of the ego is lost."
+            }
+          ]
+        },
+        {
+          "id": "the-organizing-schema",
+          "title": "The organizing schema",
+          "line": "The quaternity is not one image among others but the schema by which images are ordered at all.",
+          "quotes": [
+            {
+              "work": "cw09ii",
+              "para": 381,
+              "quote": "The quaternity is an organizing schema par excellence, something like the crossed threads in a telescope."
+            }
+          ]
+        }
+      ]
+    },
+    "five": {
+      "line": "The four with the centre: the quincunx, the quinta essentia, the rare pentadic mandala — the hidden one of the arithmetic.",
+      "sections": [
+        {
+          "id": "the-quintessence",
+          "title": "The quinta essentia",
+          "line": "Five is not appended to the four: it is the centre they are gathered around, the stone's own name for the unity of the elements.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 738,
+              "quote": "This is a symbol of the quinta essentia, which is identical with the Philosophers’ Stone. It is the circle divided into four with the centre, or the divinity extended in four directions, or the four functions of consciousness with their unitary substrate, the self."
+            },
+            {
+              "work": "cw11",
+              "para": 160,
+              "quote": "A famous alchemist, Johannes de Rupescissa (d. 1375),67 calls the quintessence “le ciel humain,” the human sky or heaven. For him it was a blue liquid and incorruptible like the sky."
+            },
+            {
+              "work": "cw08",
+              "para": 931,
+              "quote": "By the spiritus mundi, the ligamentum animae et corporis, the quinta essentia,30 which he shares with the alchemists, Agrippa probably means what we would call the unconscious."
+            }
+          ]
+        }
+      ]
+    },
+    "six": {
+      "line": "The return: the first number equal to the sum of its divisors, and the Self as centre and circumference at once — the six that is the field's own closing edge.",
+      "sections": [
+        {
+          "id": "the-self",
+          "title": "The Self",
+          "line": "The number archetypes do not merely point at the Self: Jung names the self the archetype of order par excellence, and the quaternity of the One the schema for all images of God.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 805,
+              "quote": "The self is the archetype of order par excellence. The structure of the mandala is arithmetical, for “whole” numbers are likewise archetypes of order. This is true particularly of the number 4, the Pythagorean tetraktys."
+            },
+            {
+              "work": "cw09i",
+              "page": 424,
+              "quote": "Indeed, it could even be called the archetype of wholeness. Because of this significance, the \"quaternity of the One\" is the schema for all images of God, as depicted in the visions of Ezekiel, Daniel, and Enoch, and as the representation of Horus with his four sons also shows."
+            },
+            {
+              "work": "cw12",
+              "para": 310,
+              "quote": "The self is by definition the centre and the circumference of the conscious and unconscious systems."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

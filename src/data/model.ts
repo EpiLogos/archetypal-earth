@@ -1,11 +1,11 @@
 // Indexes over the Field: everything the experience layer looks up by id.
-import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Occurrence, Field } from '../types/field';
+import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Occurrence, Field, Theoretic, TheoreticId } from '../types/field';
 import type { Symbols, SymbolEntry } from '../types/symbols';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
 
-export type SubjectType = 'archetype' | 'family' | 'culture' | 'place';
+export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place';
 export interface Subject {
   type: SubjectType;
   id: string;
@@ -24,6 +24,7 @@ export interface Model {
   scale: TimeScale;
   occ: Occurrence[];
   archById: Map<ArchetypeId, Archetype>;
+  theoById: Map<TheoreticId, Theoretic>;
   famById: Map<FamilyId, Family>;
   cultureById: Map<string, Culture>;
   occIndex: Map<string, number>;
@@ -35,8 +36,10 @@ export interface Model {
   located: Uint8Array;
   famPalette: Map<FamilyId, RGBPalette>;
   archPalette: Map<ArchetypeId, RGBPalette>;
+  theoPalette: Map<TheoreticId, RGBPalette>;
   famOcc: Map<FamilyId, number[]>; // indices, year ascending
   archOcc: Map<ArchetypeId, number[]>;
+  theoOcc: Map<TheoreticId, number[]>;
   cultureOcc: Map<string, number[]>;
   places: Map<string, Place>;
   occPlace: (string | undefined)[];
@@ -71,6 +74,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   const scale = createTimeScale(Math.min(yMin, extent?.from ?? yMin), Math.max(yMax, extent?.to ?? yMax));
 
   const archById = new Map(field.archetypes.map((a) => [a.id, a]));
+  const theoById = new Map((field.theoretics ?? []).map((t) => [t.id, t]));
   const famById = new Map(field.families.map((f) => [f.id, f]));
   const cultureById = new Map(field.cultures.map((c) => [c.id, c]));
   const occIndex = new Map(occ.map((o, i) => [o.id, i]));
@@ -79,6 +83,8 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   for (const f of field.families) famPalette.set(f.id, toRgbPalette(f.palette ?? FALLBACK_PALETTE, f.spectrum?.position ?? 0.5));
   const archPalette = new Map<ArchetypeId, RGBPalette>();
   for (const a of field.archetypes) archPalette.set(a.id, toRgbPalette(a.palette ?? FALLBACK_PALETTE, a.spectrum?.position ?? 0.5));
+  const theoPalette = new Map<TheoreticId, RGBPalette>();
+  for (const t of field.theoretics ?? []) theoPalette.set(t.id, toRgbPalette(t.palette ?? FALLBACK_PALETTE, t.spectrum?.position ?? 0.5));
 
   const n = occ.length;
   const dir: Vec3[] = new Array(n);
@@ -126,13 +132,25 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     archOcc.set(a.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, famOcc, archOcc, cultureOcc, places, occPlace, colour };
+  // A theoretic stands for everything its tied archetypes and families carry — so focusing one tunes
+  // the world to it rather than opening a page beside it. The theory rests on the field; it is not a
+  // parallel world.
+  const theoOcc = new Map<TheoreticId, number[]>();
+  for (const t of field.theoretics ?? []) {
+    const set = new Set<number>();
+    for (const tie of t.archetypes) for (const i of archOcc.get(tie.id) ?? []) set.add(i);
+    for (const tie of t.families) for (const i of famOcc.get(tie.id) ?? []) set.add(i);
+    theoOcc.set(t.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
+  }
+
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, cultureOcc, places, occPlace, colour };
 }
 
 /** Occurrence indices (located only) that belong to a subject. */
 export function subjectOccurrences(m: Model, s: Subject): number[] {
   let list: number[] | undefined;
   if (s.type === 'archetype') list = m.archOcc.get(s.id);
+  else if (s.type === 'theoretic') list = m.theoOcc.get(s.id);
   else if (s.type === 'family') list = m.famOcc.get(s.id);
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
   else list = m.places.get(s.id)?.occ;
@@ -141,6 +159,7 @@ export function subjectOccurrences(m: Model, s: Subject): number[] {
 
 export function subjectName(m: Model, s: Subject): string {
   if (s.type === 'archetype') return m.archById.get(s.id)?.name ?? s.id;
+  if (s.type === 'theoretic') return m.theoById.get(s.id)?.name ?? s.id;
   if (s.type === 'family') return m.famById.get(s.id)?.name ?? s.id;
   if (s.type === 'culture') return m.cultureById.get(s.id)?.name ?? s.id;
   return m.places.get(s.id)?.name ?? s.id;
@@ -148,12 +167,14 @@ export function subjectName(m: Model, s: Subject): string {
 
 export function subjectLine(m: Model, s: Subject): string {
   if (s.type === 'archetype') return m.archById.get(s.id)?.oneLine ?? '';
+  if (s.type === 'theoretic') return m.theoById.get(s.id)?.oneLine ?? '';
   if (s.type === 'family') return m.famById.get(s.id)?.oneLine ?? '';
   return '';
 }
 
 export function subjectExists(m: Model, s: Subject): boolean {
   if (s.type === 'archetype') return m.archById.has(s.id);
+  if (s.type === 'theoretic') return m.theoById.has(s.id);
   if (s.type === 'family') return m.famById.has(s.id);
   if (s.type === 'culture') return m.cultureById.has(s.id);
   return m.places.has(s.id);
@@ -162,6 +183,7 @@ export function subjectExists(m: Model, s: Subject): boolean {
 /** Palette of a subject: its own, or the occurrence-weighted blend for cultures/places. */
 export function subjectPalette(m: Model, s: Subject, avg: (ps: { p: RGBPalette; w: number }[]) => RGBPalette | null): RGBPalette | null {
   if (s.type === 'archetype') return m.archPalette.get(s.id) ?? null;
+  if (s.type === 'theoretic') return m.theoPalette.get(s.id) ?? null;
   if (s.type === 'family') return m.famPalette.get(s.id) ?? null;
   const items = subjectOccurrences(m, s).map((i) => ({ p: m.famPalette.get(m.occ[i].familyId)!, w: 1 })).filter((x) => x.p);
   return avg(items);

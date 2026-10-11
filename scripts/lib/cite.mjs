@@ -127,7 +127,7 @@ function findAll(hay, needle) {
  * Find a quotation in a work. Returns { locator, page, para, print } or { error }. Markdown emphasis and the
  * corpus's own ¶ markers inside a quote's span are tolerated by stripping them from both sides.
  */
-export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
+export function locate(load, work, quote, { para: expect, page: onPage, pageOnly = false } = {}) {
   const corpus = load(work);
   if (!corpus) return { error: `${work}: corpus file missing` };
   const needle = norm(quote).replace(/\*\*¶\d+\*\*\s*/g, '').trim();
@@ -152,6 +152,10 @@ export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
   const at = hits[0];
   const pg = corpus.pages[pageIdx[0]];
   if (!pg) return { error: `${work}: quotation stands before the first page marker` };
+  // A reviewed exception, chosen by the curator: some pages have no ¶ run at all — the appendix plate captions and
+  // the figure lists carry their own numbering that the scan reads as ¶ markers (CW9i's "¶4" is a caption). There
+  // the quotation is cited by its pdf page alone, and never against a number that belongs to a caption or an index.
+  if (pageOnly) return { locator: `pdf p${pg.page}`, page: pg.page, para: null, print: trustedPrint(corpus, pageIdx[0]), ...(scan ? { scan: true } : {}) };
   // a quotation that runs over a page break is cited at the page it starts on (the passage sheet shows the next page too)
   const near = [...corpus.marks].reverse().find((k) => k.at < at);
   // a ¶ is cited only when its marker stands on the same page or the quotation's page is inside the same paragraph run
@@ -159,9 +163,12 @@ export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
   let note;
   if (expect !== undefined && expect !== null && para !== expect) {
     // The scan drops ¶ markers. The vault note's ¶ stands when the corpus leaves room for it: the marker before the
-    // quotation is lower, the next one after it is higher, and no marker for that ¶ stands anywhere in the volume.
+    // quotation is lower, the next one after it is higher, and no marker for that ¶ stands inside the run the
+    // quotation sits in — only a marker between this quotation's own neighbours could show the words elsewhere. A
+    // ¶ printed far away (a contents page) cannot settle the local run, so it does not block the note's ¶.
     const next = corpus.marks.find((k) => k.at > at && (!near || k.n > near.n));
-    const gap = (!near || near.n < expect) && (!next || next.n > expect) && !corpus.marks.some((k) => k.n === expect);
+    const blocked = corpus.marks.some((k) => k.n === expect && k.at > (near ? near.at : -1) && k.at < (next ? next.at : Infinity));
+    const gap = (!near || near.n < expect) && (!next || next.n > expect) && !blocked;
     if (gap) { note = `${work}: ¶${expect} (the vault note) — its marker is missing from the scan, between ${near ? `¶${near.n}` : 'the start'} and ${next ? `¶${next.n}` : 'the end'}`; para = expect; }
   }
   if (para !== null && para !== expect && near && para === near.n) {
@@ -193,11 +200,29 @@ export function verify(load, { work, locator, quote }) {
   const end = idx + 1 < corpus.pages.length ? corpus.pages[idx + 1].at : corpus.text.length;
   const needle = norm(quote).replace(/\*\*¶\d+\*\*\s*/g, '').trim();
   if (findAll(corpus.text, needle).some((at) => at >= start && at < end)) return null;
-  // a published display string is cleaned of the scan's glued footnote digits after placement; the printed words it
-  // shows must still stand on the cited page once both sides fold those digits away
+  // A published display string is cleaned of the scan's glued footnote digits after placement; the printed words it
+  // shows must still stand on the cited page once both sides fold those digits away. The fold changes the text's
+  // length, so the page offsets are computed by folding page by page — otherwise a marker folded anywhere earlier in
+  // the volume would shift every later page and hide a perfectly placed quotation.
   const folded = stripFootnoteMarkers(needle);
-  const displayText = corpus.displayFold || (corpus.displayFold = stripFootnoteMarkers(corpus.text));
-  if (findAll(displayText, folded).some((at) => at >= start && at < end)) return null;
+  const fc = foldedCorpus(corpus);
+  const idxStart = fc.starts[idx] ?? 0;
+  const idxEnd = fc.starts[idx + 1] ?? fc.text.length;
+  if (findMatches(fc.text, folded).some((m) => m.index >= idxStart && m.index < idxEnd)) return null;
   // the same scan-damage reading locate() allows on a named page
   return findOnPageThroughScan(corpus, idx, needle) >= 0 ? null : `${work} ${locator}: quotation not verbatim on the cited page: "${quote.slice(0, 60)}…"`;
+}
+
+/** The corpus with the scan's glued footnote markers folded away, and where each page begins in the folded text. */
+function foldedCorpus(corpus) {
+  if (corpus.folded) return corpus.folded;
+  const starts = [];
+  let text = '';
+  for (let i = 0; i < corpus.pages.length; i++) {
+    const from = corpus.pages[i].at;
+    const to = i + 1 < corpus.pages.length ? corpus.pages[i + 1].at : corpus.text.length;
+    starts[i] = text.length;
+    text += stripFootnoteMarkers(corpus.text.slice(from, to));
+  }
+  return (corpus.folded = { text, starts });
 }

@@ -4,11 +4,13 @@
 // Source: the Jung archetypal-field vault (~/Documents/books/jung-archetypal-field).
 // Vault tiers map to site tiers:
 //   wiki/archetypes  → Archetype   (as-such, few)
+//   wiki/concepts    → Theoretic   (theoretics: Jung's theoretical instruments, and the field's ground)
 //   wiki/images      → Family      (symbolic form / motif; also synthesised from
 //                                    instance_of targets that have no note yet)
 //   wiki/instances   → Occurrence  (place-time manifestation — what the globe shows)
 
 export type ArchetypeId = string; // slug, e.g. "great-mother"
+export type TheoreticId = string; // slug, e.g. "psychoid"
 export type FamilyId = string; // slug, e.g. "serpent"
 export type OccurrenceId = string; // vault filename slug
 export type CultureId = string; // normalised slug, e.g. "latin-alchemy"
@@ -88,6 +90,45 @@ export interface Archetype {
   image?: ImageRef;
   familyIds: FamilyId[]; // families tied to it (any basis), most occurrences first
   occurrenceCount: number; // via its families
+  /** Ties to other archetypes, from curation alone (the numbers to the Self, the dyad to syzygy and shadow). */
+  archetypes: TheoreticTie[];
+  /** True when admitted from curation with no vault note yet (number archetypes). */
+  synthesised?: boolean;
+}
+
+/** A tie from a theoretic to a node the field holds. */
+export interface TheoreticTie {
+  id: string; // archetype / family / theoretic id
+  basis: TieBasis;
+}
+
+/**
+ * The vault's wiki/concepts/ tier: Jung's theoretical instruments, carried as a tier of the field
+ * beside archetypes, families and occurrences. Two of them are the field's own foundation and carry
+ * `ground`: the psychoid is the ontological tier-marker (where the archetype stops being psyche) and
+ * the archetype as such is the epistemological keystone (the irrepresentable pole known only through
+ * its images). Both are the reason the field has tiers at all, so they are stated as its ground
+ * rather than filed as two more entries in a list.
+ */
+export interface Theoretic {
+  id: TheoreticId;
+  name: string; // display, e.g. "The Psychoid"
+  oneLine: string; // ≤ 90 chars, orienting
+  ground: 'ontological' | 'epistemological' | null;
+  spectrum: Spectrum;
+  palette: Palette;
+  /** Verbatim Jung quote with cite, picked from the vault's mentions — never typed. */
+  definition?: { text: string; cite: string };
+  body: string[]; // plain text paragraphs; may be empty
+  archetypes: TheoreticTie[];
+  families: TheoreticTie[];
+  theoretics: TheoreticTie[]; // the theoretical web: this concept's own neighbours
+  occurrenceCount: number; // every occurrence its tied archetypes and families carry
+  /** The Theory section that already carries this concept, when one does. A link, never a choice. */
+  section?: string;
+  /** Another lens that already carries this concept (aion-time → Aion, synchronicity → Coincidences). */
+  lens?: string;
+  image?: ImageRef;
 }
 
 export interface Family {
@@ -147,7 +188,7 @@ export interface FieldMeta {
   generatedAt: string; // ISO
   vaultPath: string;
   vaultLedgerLine?: string; // last ledger heading, so the site can say how fresh it is
-  counts: { archetypes: number; families: number; occurrences: number; cultures: number; images: number };
+  counts: { archetypes: number; theoretics: number; families: number; occurrences: number; cultures: number; images: number };
   yearMin: number;
   yearMax: number;
 }
@@ -155,6 +196,7 @@ export interface FieldMeta {
 export interface Field {
   meta: FieldMeta;
   archetypes: Archetype[];
+  theoretics: Theoretic[];
   families: Family[];
   occurrences: Occurrence[];
   cultures: Culture[];

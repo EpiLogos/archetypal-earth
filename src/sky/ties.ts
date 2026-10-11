@@ -50,4 +50,13 @@ export class SkyTies {
   forFamily(id: string): BodyTie[] {
     return this.index ? bodyTiesFor(this.index, 'family', id) : [];
   }
+
+  forArchetype(id: string): BodyTie[] {
+    return this.index ? bodyTiesFor(this.index, 'archetype', id) : [];
+  }
+
+  /** Bodies tied to a family or archetype (empty when the index is not loaded or there is no link). */
+  forSubject(type: 'family' | 'archetype', id: string): BodyTie[] {
+    return this.index ? bodyTiesFor(this.index, type, id) : [];
+  }
 }

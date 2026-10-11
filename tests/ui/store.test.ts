@@ -68,6 +68,7 @@ describe('state transitions', () => {
 describe('hash router', () => {
   const r: Resolver = {
     hasArchetype: (id) => ['self', 'shadow'].includes(id),
+    hasTheoretic: () => false,
     hasFamily: (id) => ['serpent', 'tree', 'shadow'].includes(id),
     hasCulture: (id) => id === 'norse',
     hasPlace: (id) => id === 'chartres',
@@ -122,6 +123,7 @@ describe('the Aion switch and #/aion agree', () => {
   const readings = [{ id: 'jung-aion' }, { id: 'jung-turn' }];
   const r: Resolver = {
     hasArchetype: () => false,
+    hasTheoretic: () => false,
     hasFamily: () => false,
     hasCulture: () => false,
     hasPlace: () => false,

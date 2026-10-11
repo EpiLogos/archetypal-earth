@@ -8,6 +8,8 @@ export type SheetHeight = 'half' | 'full';
 export class Panel {
   readonly root: HTMLElement;
   readonly body: HTMLElement;
+  /** Walk rail / sticky chrome under the scroll body (Theory next/prev, etc.). */
+  readonly foot: HTMLElement;
   private handle: HTMLButtonElement;
   private height: SheetHeight = 'half';
   private dragY: number | null = null;
@@ -16,7 +18,8 @@ export class Panel {
     this.handle = el('button', { type: 'button', class: 'lp-handle', 'aria-label': 'Expand the panel', onclick: () => this.setHeight(this.height === 'half' ? 'full' : 'half') }, [el('span', { class: 'lp-grip', 'aria-hidden': 'true' })]);
     const close = el('button', { type: 'button', class: 'lp-close icon-btn', 'aria-label': 'Close', onclick: () => this.onClose() }, [icon('close')]);
     this.body = el('div', { class: 'lp-body' });
-    this.root = el('section', { class: 'lens-panel', hidden: true, 'aria-live': 'polite' }, [this.handle, close, this.body]);
+    this.foot = el('div', { class: 'lp-foot', hidden: true });
+    this.root = el('section', { class: 'lens-panel', hidden: true, 'aria-live': 'polite' }, [this.handle, close, this.body, this.foot]);
     parent.append(this.root);
     // a drag on the handle moves the sheet between its two heights (a tap toggles it)
     this.handle.addEventListener('pointerdown', (e) => { this.dragY = e.clientY; });
@@ -36,9 +39,10 @@ export class Panel {
   }
 
   /** Open with fresh content; `label` names the region for assistive tech. */
-  open(label: string, content: Node[], opts: { height?: SheetHeight; wide?: boolean } = {}) {
+  open(label: string, content: Node[], opts: { height?: SheetHeight; wide?: boolean; foot?: Node[] | null } = {}) {
     clear(this.body);
     this.body.append(...content);
+    this.setFoot(opts.foot ?? null);
     this.root.setAttribute('aria-label', label);
     this.root.classList.toggle('wide', !!opts.wide);
     this.root.hidden = false;
@@ -48,16 +52,26 @@ export class Panel {
   }
 
   /** Replace the body, keeping the frame (and its height) as it stands. */
-  replace(content: Node[], opts: { keepScroll?: boolean } = {}) {
+  replace(content: Node[], opts: { keepScroll?: boolean; foot?: Node[] | null } = {}) {
     clear(this.body);
     this.body.append(...content);
+    if (opts.foot !== undefined) this.setFoot(opts.foot);
     if (!opts.keepScroll) this.body.scrollTop = 0;
+  }
+
+  /** Pin chrome under the scroll body (walk rail). Null clears it. */
+  setFoot(nodes: Node[] | null) {
+    clear(this.foot);
+    if (!nodes?.length) { this.foot.hidden = true; return; }
+    this.foot.append(...nodes);
+    this.foot.hidden = false;
   }
 
   close() {
     if (this.root.hidden) return;
     this.root.hidden = true;
     clear(this.body);
+    this.setFoot(null);
     document.body.classList.remove('panel-open', 'panel-full');
   }
 

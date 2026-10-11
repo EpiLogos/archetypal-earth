@@ -1,0 +1,224 @@
+{
+  "_note": "The psychoid at full page: Jung's own CW8 material (the naming ¶840, the three reservations ¶368, the ultra-violet end ¶417, the physics parallel ¶419-420, the specific charge ¶841), the non-locality of CW10 ¶851, the psychoid form under the image (CW13 ¶350), the last-word form (CW18 ¶1208) and the correspondence with Pauli (letters 59, 63 and 47P -- Pauli's own voice there, never Jung's). Quotations name only their work and their words: scripts/theory-pages.mjs places them in the read-only corpus and writes the locator from the corpus's own markers; one it cannot place exactly once fails the build. Where the scan itself is damaged inside the sentence (letters-pauli p160), the quotation is kept as the scan reads it and says so (`scan`), never repaired by hand.",
+  "version": 1,
+  "concept": "psychoid",
+  "line": "Jung borrows a word he half distrusts and ends up with the hinge of the whole field: the archetype's irrepresentable side, where psyche and matter are not yet two things.",
+  "sections": [
+    {
+      "id": "naming",
+      "title": "The naming",
+      "line": "In the synchronicity essay Jung names the irrepresentable side of the archetype, and says the naming is a confession of not-knowing.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 840,
+          "quote": "The latter represents a psyche that is identical in all individuals."
+        },
+        {
+          "work": "cw08",
+          "para": 840,
+          "quote": "It cannot be directly perceived or \"represented,\" in contrast to the perceptible psychic phenomena, and on account of its \"irrepresentable\" nature I have called it \"psychoid.\""
+        }
+      ]
+    },
+    {
+      "id": "reservations",
+      "title": "The three reservations",
+      "line": "The word is borrowed from Bleuler, knowingly, and Jung states at the outset exactly what it may not be taken to mean.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 368,
+          "quote": "I do so with three reservations: firstly, I use it as an adjective, not as a noun; secondly, no psychic quality in the proper sense of the word is implied, but only a \"quasi-psychic\" one such as the reflex-processes possess; and thirdly, it is meant to distinguish a category of events from merely vitalistic phenomena on the one hand and from specifically psychic processes on the other."
+        },
+        {
+          "work": "cw08",
+          "para": 368,
+          "quote": "although it is always the function that creates its own organ, and maintains or modifies it."
+        },
+        {
+          "work": "cw08",
+          "para": 368,
+          "quote": "although my use of the term derives from a different field of perception, it nevertheless seeks to delineate roughly the same group of phenomena that Bleuler had in mind."
+        }
+      ]
+    },
+    {
+      "id": "under-the-image",
+      "title": "The form under the image",
+      "line": "He sets the term to work on the image: whatever the archetypal image becomes, the psychoid form beneath it stays itself.",
+      "quotes": [
+        {
+          "work": "cw13",
+          "para": 350,
+          "page": 304,
+          "quote": "The psychoid form underlying any archetypal image retains its character at all stages of development, though empirically it is capable of endless variations."
+        }
+      ]
+    },
+    {
+      "id": "ultra-violet",
+      "title": "The ultra-violet end",
+      "line": "The 1954 essay places the archetype as such at the far end of the psychic spectrum — a factor that cannot be made conscious and is called psychoid for that reason.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 417,
+          "quote": "The archetypal representations (images and ideas) mediated to us by the unconscious should not be confused with the archetype as such. They are very varied structures which all point back to one essentially \"irrepresentable\" basic form."
+        },
+        {
+          "work": "cw08",
+          "para": 417,
+          "quote": "The latter is characterized by certain formal elements and by certain fundamental meanings, although these can be grasped only approximately."
+        },
+        {
+          "work": "cw08",
+          "para": 417,
+          "quote": "The archetype as such is a psychoid factor that belongs, as it were, to the invisible, ultraviolet end of the psychic spectrum."
+        },
+        {
+          "work": "cw08",
+          "para": 417,
+          "quote": "Since other archetypes give rise to similar doubts, it seems to me probable that the real nature of the archetype is not capable of being made conscious, that it is transcendent, on which account I call it psychoid."
+        }
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "The physics parallel",
+      "line": "Psychology and physics both work with quantities they cannot represent directly, and Jung follows the parallel to its end: psyche and matter as two aspects of one thing.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 419,
+          "quote": "When the existence of two or more irrepresentables is assumed, there is always the possibility—which we tend to overlook—that it may not be a question of two or more factors but of one only."
+        },
+        {
+          "work": "cw08",
+          "para": 419,
+          "quote": "The identity or non-identity of two irrepresentable quantities is something that cannot be proved."
+        },
+        {
+          "work": "cw08",
+          "para": 419,
+          "quote": "Since psyche and matter are contained in one and the same world, and moreover are in continuous contact with one another and ultimately rest on irrepresentable, transcendental factors, it is not only possible but fairly probable, even, that psyche and matter are two different aspects of one and the same thing."
+        },
+        {
+          "work": "cw08",
+          "para": 420,
+          "quote": "Just as the \"psychic infra-red,\" the biological instinctual psyche, gradually passes over into the physiology of the organism and thus merges with its chemical and physical conditions, so the \"psychic ultra-violet,\" the archetype, describes a field which exhibits none of the peculiarities of the physiological and yet, in the last analysis, can no longer be regarded as psychic, although it manifests itself psychically."
+        },
+        {
+          "work": "cw08",
+          "para": 420,
+          "quote": "Although there is no form of existence that is not mediated to us psychically and only psychically, it would hardly do to say that everything is merely psychic."
+        },
+        {
+          "work": "cw08",
+          "para": 420,
+          "scan": true,
+          "quote": "the psyche and its contents are the only reality which is given to us ioithout a medium."
+        }
+      ]
+    },
+    {
+      "id": "specific-charge",
+      "title": "The specific charge",
+      "line": "A page on from the naming, the archetypes are given their working definition — formal factors, patterns of behaviour, with a charge that turns up as affect.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 841,
+          "quote": "The archetypes are formal factors responsible for the organization of unconscious psychic processes: they are \"patterns of behaviour.\""
+        },
+        {
+          "work": "cw08",
+          "para": 841,
+          "quote": "At the same time they have a \"specific charge\" and develop numinous effects which express themselves as affects."
+        }
+      ]
+    },
+    {
+      "id": "not-localized",
+      "title": "Not localized in one person",
+      "line": "In Flying Saucers the psychoid archetype behaves as though it were not confined to a single person.",
+      "quotes": [
+        {
+          "work": "cw10",
+          "para": 851,
+          "quote": "The psychoid archetype has a tendency to behave as though it were not localized in one person but were active in the whole environment."
+        }
+      ]
+    },
+    {
+      "id": "correspondence",
+      "title": "The correspondence",
+      "line": "With Pauli, Jung states the double character flatly; Pauli answers, in his own voice, that the concept cannot be used so lightly in the acausalities of microphysics.",
+      "quotes": [
+        {
+          "work": "letters-pauli",
+          "page": 160,
+          "scan": true,
+          "quote": "it is based on the psychoid archetype, which, as experience has shown, can be express itseII both psychically and physically."
+        },
+        {
+          "work": "letters-pauli",
+          "page": 188,
+          "quote": "The characteristic that is peculiar to the archetype is that it manifests itself not only psychically-subjectively but also physically-objectively"
+        },
+        {
+          "work": "letters-pauli",
+          "page": 125,
+          "voice": "Pauli",
+          "quote": "but also the concept of the (psychic or psychoid) archetype cannot be used so lightly in the acausalities of microphysics."
+        }
+      ]
+    },
+    {
+      "id": "late-admission",
+      "title": "The late admission",
+      "line": "In the 1948 footnote Jung dates his own doubt: fifty years of collecting moved him further, not closer, to certainty.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 599,
+          "quote": "Not only the findings of parapsychology, but my own theoretical reflections, outlined in \"On the Nature of the Psyche,\" have led me to certain postulates which touch on the realm of nuclear physics and the conception of the space-time continuum. This opens up the whole question of the transpsychic reality immediately underlying the psyche."
+        }
+      ]
+    },
+    {
+      "id": "last-word",
+      "title": "The last word",
+      "line": "Writing to Fordham five years before his death, the term has become shorthand: the psychoid factor is the unconscious archetype, and never its conscious representation.",
+      "quotes": [
+        {
+          "work": "cw18",
+          "para": 1208,
+          "quote": "Synchronicity tells us something about the nature of what I call the psychoid factor, i.e., the unconscious archetype (not its conscious representation!)."
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "type": "archetype",
+      "id": "self"
+    },
+    {
+      "type": "family",
+      "id": "mana"
+    },
+    {
+      "type": "theoretic",
+      "id": "archetype-as-such"
+    },
+    {
+      "type": "theoretic",
+      "id": "synchronicity"
+    },
+    {
+      "type": "theoretic",
+      "id": "numinosum"
+    }
+  ]
+}

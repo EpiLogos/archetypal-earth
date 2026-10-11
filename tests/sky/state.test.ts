@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { astrologyAt, back, focusOn, inSky, stateEq, withMode, WORLD } from '../../src/state/store';
+import { astrologyAt, astrologyLive, back, focusOn, inSky, stateEq, withMode, WORLD } from '../../src/state/store';
 import { hashToState, stateToHash, type Resolver } from '../../src/state/router';
 
 const r: Resolver = {
   hasArchetype: (id) => ['self', 'shadow', 'syzygy'].includes(id),
+  hasTheoretic: () => false,
   hasFamily: (id) => ['serpent'].includes(id),
   hasCulture: (id) => ['norse', 'greek'].includes(id),
   hasPlace: (id) => id === 'chartres',
@@ -30,10 +31,17 @@ describe('the sky state', () => {
     expect(back(inSky({ natal: 'jung' }))).toEqual(WORLD);
   });
 
-  it('Astrology climbs its walk: body, then chart, then its landing, then the Earth', () => {
+  it('Astrology climbs its walk: body → birth sky; Escape from sky or Charts leaves the mode', () => {
     expect(back(astrologyAt(['jung', 'saturn']))).toEqual(astrologyAt(['jung']));
-    expect(back(astrologyAt(['jung']))).toEqual(astrologyAt([]));
+    expect(back(astrologyAt(['jung']))).toEqual(WORLD);
     expect(back(astrologyAt([]))).toEqual(WORLD);
+  });
+
+  it('live Astrology sky (zoom-out) is not a natal chart; Escape releases a body then leaves', () => {
+    expect(astrologyLive().sky).toEqual({});
+    expect(astrologyLive().lens).toEqual({ id: 'astrology', path: ['sky'] });
+    expect(back(astrologyLive({ body: 'mars' }))).toEqual(astrologyLive());
+    expect(back(astrologyLive())).toEqual(WORLD);
   });
 
   it('focusing a subject or changing mode leaves the sky behind', () => {
@@ -48,7 +56,7 @@ describe('the sky state', () => {
       expect(h.startsWith('#/sky')).toBe(true);
       expect(hashToState(h, r).state, h).toEqual(s);
     }
-    for (const s of [astrologyAt([]), astrologyAt(['you']), astrologyAt(['jung', 'mars'])]) {
+    for (const s of [astrologyAt([]), astrologyLive(), astrologyLive({ body: 'mars' }), astrologyAt(['you']), astrologyAt(['jung', 'mars'])]) {
       const h = stateToHash(s);
       expect(h.startsWith('#/astrology')).toBe(true);
       expect(hashToState(h, r).state, h).toEqual(s);

@@ -1,0 +1,67 @@
+{
+  "_note": "Libido: the redefinition (CW5 ¶197, ¶189, ¶185), the energic viewpoint (CW4 ¶567), canalization and the river-beds of the archetypes (CW5 ¶337, ¶344, ¶398), the daemonic charge (CW5 ¶170), mana as the primitive forerunner of the energy concept (CW8 ¶128, CW6 ¶869), and Van Eenwyk where the concept names a dynamical system. Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "libido",
+  "line": "Psychic energy, de-sexualized: an energy-value that can flow into any field of activity, canalized by the archetypes as water is by river-beds — and daemonic wherever it exceeds the ego.",
+  "sections": [
+    {
+      "id": "the-redefinition",
+      "title": "The redefinition",
+      "line": "Jung's decisive break with Freud is stated in one sentence: libido is an energy-value, not a specific instinct.",
+      "quotes": [
+        { "work": "cw05", "para": 197, "quote": "We would be better advised, therefore, when speaking of libido, to understand it as an energy-value which is able to communicate itself to any field of activity whatsoever, be it power, hunger, hatred, sexuality, or religion, without ever being itself a specific instinct." }
+      ]
+    },
+    {
+      "id": "the-energic-view",
+      "title": "The energic viewpoint",
+      "line": "The concept is deliberately modelled on physics: psychic phenomena are read as energy and its differences of potential.",
+      "quotes": [
+        { "work": "cw04", "para": 567, "quote": "All psychological phenomena can be considered as manifestations of energy, in the same way that all physical phenomena have been understood as energic manifestations ever since Robert Mayer discovered the law of the conservation of energy." },
+        { "work": "cw05", "para": 189, "quote": "the concept of libido in psychology has functionally the same significance as the concept of energy in physics since the time of Robert Mayer" }
+      ]
+    },
+    {
+      "id": "not-instinct",
+      "title": "Not one instinct",
+      "line": "The definition is one-sided precisely because the phenomena are not: no single instinct accounts for the mass of psychic life.",
+      "quotes": [
+        { "work": "cw05", "para": 185, "quote": "The very fact that it is impossible to derive the whole mass of psychic phenomena from a single instinct forbids a one-sided definition of “libido.”" }
+      ]
+    },
+    {
+      "id": "canalization",
+      "title": "Canalization",
+      "line": "Energy is not spent but converted: symbols and archetypes are the forms along which it flows, and sacrifice is the price of a higher channel.",
+      "quotes": [
+        { "work": "cw05", "para": 337, "quote": "the archetypes are the forms or river-beds along which the current of psychic life has always flowed" },
+        { "work": "cw05", "para": 344, "quote": "The symbols act as transformers, their function being to convert libido from a “lower” into a “higher” form." },
+        { "work": "cw05", "para": 398, "quote": "The sacrifice is the very reverse of regression—it is a successful canalization of libido into the symbolic equivalent of the mother, and hence a spiritualization of it" }
+      ]
+    },
+    {
+      "id": "the-charge",
+      "title": "The charge",
+      "line": "The concept's primitive ancestors were not theories but experiences: mana is the sensed dynamism from which the energy concept grew, and the libido itself is God and devil at once.",
+      "quotes": [
+        { "work": "cw08", "para": 128, "quote": "We cannot escape the impression that the primitive view of mana is a forerunner of our concept of psychic energy and, most probably, of energy in general." },
+        { "work": "cw05", "para": 170, "quote": "As a power which transcends consciousness the libido is by nature daemonic: it is both God and devil" },
+        { "work": "cw06", "para": 869, "quote": "The expressions, therefore, used by James show clearly that the difference between the types is the result of a different localization of the libido, this “magical power” in the depth of our being, which, depending on the individual, is directed sometimes to our inner life, sometimes to the objective world." }
+      ]
+    },
+    {
+      "id": "as-a-system",
+      "title": "The current as a system",
+      "line": "Read as a dynamical system, the libido is an alternating current between consciousness and the unconscious.",
+      "quotes": [
+        { "work": "van-eenwyk", "page": 29, "quote": "a kind of alternating current between consciousness and the unconscious" }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "archetype", "id": "self" },
+    { "type": "family", "id": "god-image" },
+    { "type": "theoretic", "id": "compensation" },
+    { "type": "theoretic", "id": "mana" }
+  ]
+}

@@ -2,7 +2,7 @@
   "_note": "The dynamical lens's route (ProjectCentral/docs/DYNAMICAL.md): Van Eenwyk's terms walked in four movements, each stop drawn as the system it names (src/dynamics/figures.ts, captioned 'drawn here'). A stop with `concept` takes its Van Eenwyk and Jung quotations from public/data/dynamics.json (the hash-pinned rail); `quotes` here are further quotations (Neumann, Van Eenwyk) that scripts/dynamics-route.mjs places in the read-only corpus. `ql` entries are the QL framework's own words from the published site (W, by section), as ProjectCentral/docs/ql-reference.md records them. The order, the figures and the lines are mine; a line says only what its drawing shows and what the quotations under it say.",
   "version": 1,
   "title": "Archetypes & Strange Attractors",
-  "line": "John Van Eenwyk reads the psyche as a dynamical system: energy that swings between poles, a swing that cascades into chaos, and symbols that build order out of it. I've drawn each of his terms as the system it names, with his words, Jung's, and where he speaks to it Neumann's. The last movement sets Neumann's stages and the QL framework's own cycle beside them.",
+  "line": "Energy swings between poles. The swing cascades into chaos. Symbols build order out of it.",
   "movements": [
     {
       "id": "energy", "n": "I", "title": "Energy between poles",

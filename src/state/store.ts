@@ -2,6 +2,7 @@
 // World · Focus · Manifestation · Thread · (Deep is a reading layer over any).
 import type { Subject } from '../data/model';
 import type { BodyKey } from '../types/sky';
+import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 
 export interface ThreadTarget {
   type: 'family' | 'archetype' | 'parallels';
@@ -43,8 +44,8 @@ export interface AppState {
   /** the Red Book: Liber Novus as a folio walk (or the genesis table) over the world view */
   redbook?: { stop?: string; genesis?: true };
   /** The dynamical lens: the field read as a dynamical system over the world view. Absent subject = the Self. */
-  /** the dynamical lens: its subject (the Self when none) and the standing stop of its route (the overview when none) */
-  dynamics?: { subject?: Subject; stop?: string };
+  /** the dynamical lens: its subject (the Self when none), a stop, or `route` to open the walk overview (session-only; not in the hash) */
+  dynamics?: { subject?: Subject; stop?: string; route?: true };
   /** The live path remains standing while one of its presences is inspected. */
   trail?: Extract<View, { kind: 'thread' }>;
   /**
@@ -69,7 +70,10 @@ function inMode(from: AppState, next: AppState): AppState {
 }
 
 export function focusOn(s: AppState, subject: Subject): AppState {
-  return inMode(s, { view: { kind: 'focus', subject, crumbs: focusCrumbs(s) }, deep: false });
+  // a node whose page is its substance is focused with that page open (the deep layer is where a page renders): the
+  // theoretics and the six number archetypes. A node without its page was the defect this answers.
+  const opens = subject.type === 'theoretic' || (subject.type === 'archetype' && NUMBER_ARCHETYPES.has(subject.id));
+  return inMode(s, { view: { kind: 'focus', subject, crumbs: focusCrumbs(s) }, deep: opens });
 }
 
 /** The route drilled through to reach a focus: what stood focused one level up. A manifestation leaves its context; the world leaves no crumb. */
@@ -120,13 +124,33 @@ export function inLens(id: PanelLensId, path: string[] = []): AppState {
   return { view: { kind: 'world' }, deep: false, lens: { id, path } };
 }
 
+/**
+ * Path segment for Astrology over the live (clock) sky — not a natal chart id.
+ * Zoom-out / S enter here; Charts and Jung’s sky are chosen from Options, never forced.
+ */
+export const ASTROLOGY_LIVE = 'sky';
+
+/** Astrology over the live sky (no natal). Optional approached body + name culture. */
+export function astrologyLive(opts: { body?: BodyKey; culture?: string } = {}): AppState {
+  const sky: SkyState = {};
+  if (opts.body) sky.body = opts.body;
+  if (opts.culture) sky.culture = opts.culture;
+  return {
+    view: { kind: 'world' },
+    deep: false,
+    lens: { id: 'astrology', path: opts.body ? [ASTROLOGY_LIVE, opts.body] : [ASTROLOGY_LIVE] },
+    sky,
+  };
+}
+
 /** The Astrology lens at [chart, body]: the panel, and the sky held at that chart's moment with that body approached. */
 export function astrologyAt(path: string[]): AppState {
-  const [natal, body] = path;
+  const [a, b] = path;
+  if (a === ASTROLOGY_LIVE) return astrologyLive({ body: b as BodyKey | undefined });
   const sky: SkyState = {};
-  if (natal) sky.natal = natal;
-  if (natal && body) sky.body = body as BodyKey;
-  return { view: { kind: 'world' }, deep: false, lens: { id: 'astrology', path: path.slice(0, natal ? (body ? 2 : 1) : 0) }, sky };
+  if (a) sky.natal = a;
+  if (a && b) sky.body = b as BodyKey;
+  return { view: { kind: 'world' }, deep: false, lens: { id: 'astrology', path: path.slice(0, a ? (b ? 2 : 1) : 0) }, sky };
 }
 
 /** Enter (or change) the sky. The sky stands over the world view: any focus is left behind, the field stays as it was. */
@@ -151,8 +175,23 @@ export function back(s: AppState): AppState {
   // a reading opened on a walk's step returns to the walk where it began, not to the step's card
   if (s.deep && s.trail && s.view.kind === 'manifest') return { view: s.trail, deep: false };
   if (s.deep) return { ...s, deep: false };
-  // a panel lens steps up its own route, then closes onto the Earth
-  if (s.lens) return s.lens.path.length ? (s.lens.id === 'astrology' ? astrologyAt(s.lens.path.slice(0, -1)) : { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } }) : WORLD;
+  // a panel lens steps up its own route; Theory closes onto Theory landing (Options waiting), others onto the Earth
+  if (s.lens) {
+    if (s.lens.id === 'astrology') {
+      const p = s.lens.path;
+      // live sky: release an approached body, then leave the mode
+      if (p[0] === ASTROLOGY_LIVE) {
+        if (p.length >= 2 || s.sky?.body) return astrologyLive({ culture: s.sky?.culture });
+        return WORLD;
+      }
+      // walk → birth sky; birth sky / Charts → Field (Escape leaves; the sheet’s X stays on the sky)
+      if (p.length >= 2) return astrologyAt([p[0]]);
+      return WORLD;
+    }
+    if (s.lens.path.length) return { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } };
+    if (s.lens.id === 'theory') return { view: { kind: 'world' }, deep: false, dynamics: {} };
+    return WORLD;
+  }
   if (s.sky) {
     // a card closes onto the sky; the sky closes onto the Earth
     if (s.sky.body) return inSky({ ...(s.sky.natal ? { natal: s.sky.natal } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
@@ -214,6 +253,7 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && (!a.dynamics?.subject) === (!b.dynamics?.subject)
     && (!a.dynamics?.subject || !b.dynamics?.subject || subjectEq(a.dynamics.subject, b.dynamics.subject))
     && a.dynamics?.stop === b.dynamics?.stop
+    && !!a.dynamics?.route === !!b.dynamics?.route
     && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)))
     && !!a.from === !!b.from
     && a.lens?.id === b.lens?.id
@@ -224,5 +264,5 @@ export function stateEq(a: AppState, b: AppState): boolean {
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
   return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0)
-    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) + (s.dynamics.stop ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
+    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) + (s.dynamics.stop || s.dynamics.route ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
 }

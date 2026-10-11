@@ -57,6 +57,7 @@ const r3 = (x) => Math.round(x * 1000) / 1000;
 
 // ---------- load curation ----------
 const curArch = readJson(CUR('archetypes.json')).archetypes;
+const curTheo = readJson(CUR('theoretics.json'), { theoretics: {} }).theoretics;
 const curFam = readJson(CUR('families.json'));
 const famMerges = curFam.merges || {};
 const famOver = curFam.families || {};
@@ -64,7 +65,7 @@ const curTies = readJson(CUR('family-ties.json')).ties;
 const gaz = loadGazetteer(CUR('gazetteer.json'));
 const { aliases: cultAliases, cultures: cultTable } = loadCultures(CUR('cultures.json'));
 const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
-const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, occurrences: {} });
+const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, theoretics: {}, occurrences: {} });
 
 // ---------- scan-error normaliser ----------
 // Vocabulary comes from the vault's own clean volumes (see scripts/lib/ocr.mjs); cached in .cache/.
@@ -93,6 +94,7 @@ function fixText(text, where, mode = 'prose') {
 // ---------- load vault ----------
 const W = (d) => path.join(VAULT, 'wiki', d);
 const archNotes = readNotes(W('archetypes'));
+const theoNotes = readNotes(W('concepts'));
 const imgNotes = readNotes(W('images'));
 const instNotes = readNotes(W('instances'));
 const manifest = readJson(path.join(VAULT, '_raw', 'manifest.json'), []);
@@ -115,7 +117,7 @@ try {
   ledgerLine = dated.length ? dated.reduce((a, b) => (b.slice(0, 10) > a.slice(0, 10) ? b : a)) : heads[heads.length - 1];
 } catch { warn('LEDGER.md unreadable'); }
 
-for (const n of [...archNotes, ...imgNotes, ...instNotes]) {
+for (const n of [...archNotes, ...theoNotes, ...imgNotes, ...instNotes]) {
   if (n.failed) skip('note', n.slug, 'frontmatter unrecoverable');
   else if (n.fallback) warn(`frontmatter repaired field-by-field: ${n.slug}`);
 }
@@ -161,15 +163,7 @@ for (const n of archNotes.filter((x) => !x.failed)) {
     familyIds: [],
     occurrenceCount: 0,
   };
-  if (c.definitionPick?.length) {
-    const recs = c.definitionPick.map((p) => mentions.find((m) => m.vol === p.vol && Number(m.para) === Number(p.para) && String(m.quote).trimStart().startsWith(p.starts)));
-    if (recs.every(Boolean)) {
-      const p0 = c.definitionPick[0];
-      const wl = workLabel(p0.vol);
-      const short = (wl.bare || wl.title).split(':')[0];
-      a.definition = { text: collapse(recs.map((r) => r.quote).join(' ')), cite: `${short} (${wl.short}) ¶${p0.para}` };
-    } else warn(`definitionPick for ${n.slug} not found verbatim in mentions.jsonl; definition omitted`);
-  }
+  foldArchDefinition(c, a);
   archById[a.id] = a;
   archList.push(a);
 }
@@ -193,7 +187,40 @@ function foldFamilyDefinition(over, fam) {
     };
   } else warn(`definitionPick for ${fam.id} not found verbatim in mentions.jsonl; definition omitted`);
 }
-for (const k of Object.keys(curArch)) if (!archSlugs.has(k)) warn(`curation archetype ${k} has no vault note`);
+
+// Number archetypes (and any later synthesised archetype) are admitted from curation alone
+// when `synthesised: true` — the same law as synthesised families. The vault wins the note
+// back the moment wiki/archetypes/<id>.md lands; until then curation is the claim.
+function foldArchDefinition(c, a) {
+  if (!c.definitionPick?.length) return;
+  const recs = c.definitionPick.map((p) => mentions.find((m) => m.vol === p.vol && Number(m.para) === Number(p.para) && String(m.quote).trimStart().startsWith(p.starts)));
+  if (recs.every(Boolean)) {
+    const p0 = c.definitionPick[0];
+    const wl = workLabel(p0.vol);
+    const short = (wl.bare || wl.title).split(':')[0];
+    a.definition = { text: collapse(recs.map((r) => r.quote).join(' ')), cite: `${short} (${wl.short}) ¶${p0.para}` };
+  } else warn(`definitionPick for ${a.id} not found verbatim in mentions.jsonl; definition omitted`);
+}
+for (const [id, c] of Object.entries(curArch)) {
+  if (archById[id]) continue;
+  if (!c.synthesised) { warn(`curation archetype ${id} has no vault note`); continue; }
+  const a = {
+    id,
+    name: c.name,
+    oneLine: c.oneLine,
+    prime: false,
+    spectrum: { position: r3(c.position) },
+    palette: c.palette,
+    body: (c.body || []).map(collapse),
+    familyIds: [],
+    occurrenceCount: 0,
+    synthesised: true,
+  };
+  foldArchDefinition(c, a);
+  archById[a.id] = a;
+  archList.push(a);
+  archSlugs.add(id);
+}
 archList.sort((a, b) => (b.prime - a.prime) || a.id.localeCompare(b.id));
 
 // ---------- families ----------
@@ -476,6 +503,93 @@ for (const a of archList) {
   a.familyIds = fams.sort((x, y) => y.occurrenceIds.length - x.occurrenceIds.length || x.id.localeCompare(y.id)).map((f) => f.id);
   a.occurrenceCount = new Set(fams.flatMap((f) => f.occurrenceIds)).size;
 }
+// Ties between archetypes, from curation alone (the number archetypes to the Self, the dyad to syzygy and shadow).
+// Each is checked to resolve, so an archetype never names a node the field does not have; the basis is carried.
+for (const a of archList) {
+  a.archetypes = [];
+  for (const x of curArch[a.id]?.archetypes ?? []) {
+    if (x.id === a.id) { warn(`archetype ${a.id}: tie to itself dropped`); continue; }
+    if (!archById[x.id]) { warn(`archetype ${a.id}: tie to unknown archetype ${x.id} dropped`); continue; }
+    if (a.archetypes.some((y) => y.id === x.id)) continue;
+    a.archetypes.push({ id: x.id, basis: BASIS_RANK[x.basis] !== undefined ? x.basis : 'inferred' });
+  }
+  a.archetypes.sort((x, y) => BASIS_RANK[x.basis] - BASIS_RANK[y.basis] || x.id.localeCompare(y.id));
+}
+
+// ---------- theoretics ----------
+// The vault's wiki/concepts/ tier carried into the field: Jung's theoretical instruments, the tier
+// the vault's own SCHEMA.md names and the site spec never had. A note is admitted only when
+// curation/theoretics.json claims it, exactly as for archetypes. The two keystones carry `ground`:
+// psychoid is the vault's ontological tier-marker, archetype-as-such its epistemological keystone.
+// They sit first, because they are the field's foundation and not two more nodes beside it.
+const GROUND_RANK = { ontological: 0, epistemological: 1 };
+const theoSlugs = new Set(theoNotes.filter((n) => !n.failed).map((n) => n.slug));
+const theoById = {};
+const theoList = [];
+for (const n of theoNotes.filter((x) => !x.failed)) {
+  const c = curTheo[n.slug];
+  if (!c) { skip('theoretic', n.slug, 'no curation/theoretics.json entry'); theoSlugs.delete(n.slug); continue; }
+  const t = {
+    id: n.slug,
+    name: c.name,
+    oneLine: c.oneLine,
+    ground: GROUND_RANK[c.ground] !== undefined ? c.ground : null,
+    spectrum: { position: r3(c.position) },
+    palette: c.palette,
+    body: (c.body || []).map(collapse),
+    archetypes: [],
+    families: [],
+    theoretics: [],
+    occurrenceCount: 0,
+  };
+  if (c.section) t.section = c.section;
+  if (c.lens) t.lens = c.lens;
+  // the definition is never typed: picked verbatim from the vault's mentions, or omitted and said so
+  if (c.definitionPick?.length) {
+    const recs = c.definitionPick.map((p) => mentions.find((m) => m.vol === p.vol
+      && (p.para == null || Number(m.para) === Number(p.para))
+      && String(m.quote).trimStart().startsWith(p.starts)));
+    if (recs.every(Boolean)) {
+      const p0 = c.definitionPick[0];
+      const wl = workLabel(p0.vol);
+      const short = (wl.bare || wl.title).split(':')[0];
+      t.definition = {
+        text: collapse(recs.map((r) => r.quote).join(' ')),
+        cite: p0.para != null ? `${short} (${wl.short}) ¶${p0.para}` : `${short} (${wl.short}) pdf p${recs[0].pdf_page}`,
+      };
+    } else warn(`definitionPick for ${n.slug} not found verbatim in mentions.jsonl; definition omitted`);
+  }
+  theoById[t.id] = t;
+  theoList.push(t);
+}
+for (const k of Object.keys(curTheo)) if (!theoSlugs.has(k)) warn(`curation theoretic ${k} has no vault note`);
+theoList.sort((a, b) => (GROUND_RANK[a.ground] ?? 2) - (GROUND_RANK[b.ground] ?? 2) || a.id.localeCompare(b.id));
+
+// ties: each is checked to resolve, so a theoretic never names a node the field does not have.
+const pickTies = (t, kind, raw, has) => {
+  const out = [];
+  for (const x of raw || []) {
+    if (kind === 'theoretic' && x.id === t.id) { warn(`theoretic ${t.id}: tie to itself dropped`); continue; }
+    if (!has(x.id)) { warn(`theoretic ${t.id}: tie to unknown ${kind} ${x.id} dropped`); continue; }
+    if (out.some((o) => o.id === x.id)) continue;
+    out.push({ id: x.id, basis: BASIS_RANK[x.basis] !== undefined ? x.basis : 'inferred' });
+  }
+  return out.sort((a, b) => BASIS_RANK[a.basis] - BASIS_RANK[b.basis] || a.id.localeCompare(b.id));
+};
+for (const t of theoList) {
+  const c = curTheo[t.id];
+  t.archetypes = pickTies(t, 'archetype', c.archetypes, (id) => !!archById[id]);
+  t.families = pickTies(t, 'family', c.families, (id) => !!famMap[id]);
+  t.theoretics = pickTies(t, 'theoretic', c.theoretics, (id) => !!theoById[id]);
+}
+// how much of the field a theoretic stands for: every occurrence its tied archetypes and families carry
+for (const t of theoList) {
+  const fams = new Set(t.families.map((x) => x.id));
+  for (const x of t.archetypes) for (const fid of archById[x.id]?.familyIds ?? []) fams.add(fid);
+  const ids = new Set();
+  for (const fid of fams) for (const oid of famMap[fid]?.occurrenceIds ?? []) ids.add(oid);
+  t.occurrenceCount = ids.size;
+}
 
 // ---------- images ----------
 let imageCount = 0;
@@ -488,6 +602,7 @@ const attach = (obj, group) => {
   }
 };
 archList.forEach((a) => attach(a, 'archetypes'));
+theoList.forEach((t) => attach(t, 'theoretics'));
 famList.forEach((f) => attach(f, 'families'));
 occList.forEach((o) => attach(o, 'occurrences'));
 
@@ -507,11 +622,12 @@ const field = {
     generatedAt: process.env.FIELD_GENERATED_AT || new Date().toISOString(),
     vaultPath: VAULT,
     ...(ledgerLine ? { vaultLedgerLine: ledgerLine } : {}),
-    counts: { archetypes: archList.length, families: cleanFam.length, occurrences: occList.length, cultures: cultures.length, images: imageCount },
+    counts: { archetypes: archList.length, theoretics: theoList.length, families: cleanFam.length, occurrences: occList.length, cultures: cultures.length, images: imageCount },
     yearMin: years.length ? Math.min(...years) : 0,
     yearMax: years.length ? Math.max(...years) : 0,
   },
   archetypes: archList,
+  theoretics: theoList,
   families: cleanFam,
   occurrences: occList,
   cultures,
@@ -519,7 +635,7 @@ const field = {
 
 // Final pass over EVERY human-readable string that reaches field.json (the early passes above cover the
 // occurrence fields the geocoder and label derivation read; this one catches the rest and proves the lot).
-for (const [kind, list] of [['arch', field.archetypes], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
   for (const item of list) {
     visitFieldText(item, (where, value, mode, set) => {
       const r = ocr.normalize(value, { mode });
@@ -529,7 +645,7 @@ for (const [kind, list] of [['arch', field.archetypes], ['fam', field.families],
 }
 // residual scanner: whatever still looks like scan damage (target: none; reviewed exceptions live in curation/ocr-exceptions.json)
 const ocrResidual = [];
-for (const [kind, list] of [['arch', field.archetypes], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
   for (const item of list) {
     visitFieldText(item, (where, value, mode) => {
       if (mode === 'safe') return;
@@ -616,7 +732,7 @@ try {
   warn(`corpus index not built: ${e.message}`);
 }
 
-console.log(`field.json: ${archList.length} archetypes, ${cleanFam.length} families (${stats.familiesSynthesised.length} synthesised), ${occList.length} occurrences, ${cultures.length} cultures, ${imageCount} images`);
+console.log(`field.json: ${archList.length} archetypes, ${theoList.length} theoretics (${theoList.filter((t) => t.ground).length} keystones), ${cleanFam.length} families (${stats.familiesSynthesised.length} synthesised), ${occList.length} occurrences, ${cultures.length} cultures, ${imageCount} images`);
 if (corpus) console.log(`corpus: ${corpus.works} volumes, ${corpus.pages} pages, ${corpus.paras} ¶ anchors${corpus.spine ? ` (spine: ${corpus.spine.checked} checked, ${corpus.spine.missing} off-page)` : ''}`);
 console.log(`geo: place ${hist.place} (${pct(hist.place)}%), region ${hist.region} (${pct(hist.region)}%), culture ${hist.culture} (${pct(hist.culture)}%), none ${hist.none} | place+region ${pct(hist.place + hist.region)}%`);
 console.log(`skips: ${skips.length}${skips.length ? ' -> ' + skips.map((s) => `${s.kind}:${s.id} (${s.reason})`).join('; ') : ''}`);

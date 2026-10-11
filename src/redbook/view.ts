@@ -11,6 +11,7 @@ import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
 import { clear, el, onReadGesture, plate } from '../ui/dom';
+import { modeOptions, optionAction } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
@@ -57,18 +58,26 @@ export class RedBookView {
     this.root.hidden = false;
     document.body.classList.add('redbook-mode');
     this.buildHeading();
-    this.chrome?.setContext(this.mode.mode.subtitle.split(' · ')[0]);
-    this.chrome?.setControls([this.heading]);
-    this.buildRail();
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
-    this.setCardActive(true);
-    if (state?.genesis) this.showGenesis();
-    else {
-      // the null landing centres The Self: the stop its genesis row names (as the graph's null state does), else the first folio
-      const selfRow = this.mode.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
-      const selfStop = selfRow && this.stops.find((s) => s.id === selfRow.stopId);
-      const stop = (state?.stop && this.stops.find((s) => s.id === state.stop)) || selfStop || this.stops[0];
+    if (state?.genesis) {
+      this.chrome?.setContext('Genesis');
+      this.chrome?.setControls(null);
+      this.setCardActive(true);
+      this.showGenesis();
+    } else if (state?.stop) {
+      const stop = this.stops.find((s) => s.id === state.stop) ?? this.stops[0];
+      this.chrome?.setContext('');
+      this.chrome?.setControls(null);
+      this.setCardActive(true);
       this.showStop(stop);
+    } else {
+      // landing: Options waiting, no folio card
+      this.current = undefined;
+      this.setCardActive(false);
+      this.rail.hidden = true;
+      this.chrome?.setContext(this.mode.mode.subtitle.split(' · ')[0]);
+      this.chrome?.setControls([this.heading]);
+      this.engine.setEmphasis(null, null);
     }
   }
 
@@ -96,17 +105,19 @@ export class RedBookView {
   private buildHeading() {
     clear(this.heading);
     const genesis = !!this.state?.genesis;
-    this.heading.append(
-      el('nav', { class: 'rb-modes', 'aria-label': 'Red Book views' }, [
-        el('button', { type: 'button', class: 'link-quiet', text: 'The walk', 'aria-pressed': String(!genesis), onclick: () => this.select({}) }),
-        el('button', { type: 'button', class: 'link-quiet', text: 'Genesis', 'aria-pressed': String(genesis), onclick: () => this.select({ genesis: true }) }),
-      ]),
-    );
+    const walking = !!this.state?.stop && !genesis;
+    // first folio whose genesis row names the Self, else the first stop
+    const selfRow = this.mode.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
+    const firstId = (selfRow && this.stops.find((s) => s.id === selfRow.stopId)?.id) || this.stops[0]?.id;
+    this.heading.append(modeOptions([
+      optionAction('The walk', () => this.select(firstId ? { stop: firstId } : {}), { pressed: walking }),
+      optionAction('Genesis', () => this.select({ genesis: true }), { pressed: genesis }),
+    ]));
   }
 
   private buildRail() {
     clear(this.rail);
-    if (this.state?.genesis) { this.rail.hidden = true; return; }
+    if (this.state?.genesis || !this.current) { this.rail.hidden = true; return; }
     this.rail.hidden = false;
     const i = Math.max(0, this.stops.findIndex((s) => s.id === this.current?.id));
     const prev = () => this.select({ stop: this.stops[(i - 1 + this.stops.length) % this.stops.length].id });
@@ -120,7 +131,8 @@ export class RedBookView {
   }
 
   private closeButton() {
-    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close Red Book', onclick: () => this.navigate({ view: { kind: 'world' }, deep: false }) }, [closeGlyph()]);
+    // close the folio/genesis card; stay in the Red Book with Options waiting
+    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close reading', onclick: () => this.select({}) }, [closeGlyph()]);
   }
 
   /**

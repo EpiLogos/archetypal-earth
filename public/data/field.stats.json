@@ -1,10 +1,11 @@
 {
   "counts": {
-    "archetypes": 13,
+    "archetypes": 19,
+    "theoretics": 14,
     "families": 408,
     "occurrences": 2854,
     "cultures": 64,
-    "images": 448
+    "images": 638
   },
   "vaultLedgerLine": "2026-10-10 — THREE NEW TEXTS INGESTED + CLOUD HANDOFF ✅",
   "geoPrecision": {
@@ -27,7 +28,7 @@
     "culture": 209,
     "none": 39
   },
-  "imagesAttached": 448,
+  "imagesAttached": 638,
   "locusTypes": {
     "ritual": 166,
     "myth-episode": 310,
@@ -205,7 +206,6 @@
     "monocolus",
     "mother-goddesses-india",
     "mummy",
-    "number",
     "nut-tree-goddess-sun-disk-bronze",
     "orb",
     "philemon",
@@ -653,13 +653,19 @@
     "anima",
     "animus",
     "child",
+    "five",
+    "four",
     "great-mother",
     "hero",
     "kore",
     "mana-personality",
+    "one",
     "shadow",
+    "six",
     "syzygy",
+    "three",
     "trickster",
+    "two",
     "wise-old-man"
   ],
   "ocr": {
@@ -701,15 +707,15 @@
       "words": 50975,
       "cached": true
     },
-    "stringsChanged": 180,
-    "changes": 575,
+    "stringsChanged": 182,
+    "changes": 583,
     "byKind": {
-      "join": 513,
-      "curated": 48,
+      "join": 517,
+      "curated": 52,
       "reflow": 13,
       "hyphen-break": 1
     },
-    "unique": 394,
+    "unique": 402,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1518,6 +1524,24 @@
         ]
       },
       {
+        "kind": "curated",
+        "before": "\" archetypal",
+        "after": "\"archetypal",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "\" archetype\"",
+        "after": "\"archetype\"",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
+        ]
+      },
+      {
         "kind": "join",
         "before": "\"alm ost",
         "after": "\"almost",
@@ -1897,6 +1921,15 @@
       },
       {
         "kind": "curated",
+        "before": "apriori.",
+        "after": "a priori.",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
+        ]
+      },
+      {
+        "kind": "curated",
         "before": "ArdvI Sura",
         "after": "Ardvi Sura",
         "count": 1,
@@ -1965,6 +1998,15 @@
         "count": 1,
         "where": [
           "occ:tree-picture-tree-born-eve-patient-1935.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "be tween",
+        "after": "between",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
         ]
       },
       {
@@ -2229,6 +2271,15 @@
         ]
       },
       {
+        "kind": "join",
+        "before": "de rive",
+        "after": "derive",
+        "count": 1,
+        "where": [
+          "theo:collective-unconscious.definition.text"
+        ]
+      },
+      {
         "kind": "reflow",
         "before": "De stella nova in pede serpentarii",
         "after": "De stella no vain pe de serpent ar ii",
@@ -2262,6 +2313,15 @@
         "count": 1,
         "where": [
           "occ:dew-gideon-fleece-sign-israel-1100bce.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "di stinguish",
+        "after": "distinguish",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
         ]
       },
       {
@@ -3778,6 +3838,15 @@
       },
       {
         "kind": "join",
+        "before": "r ests",
+        "after": "rests",
+        "count": 1,
+        "where": [
+          "theo:collective-unconscious.definition.text"
+        ]
+      },
+      {
+        "kind": "join",
         "before": "ratio n al",
         "after": "rational",
         "count": 1,
@@ -4053,6 +4122,15 @@
         "count": 1,
         "where": [
           "occ:tree-picture-boy-dragons-patient-1935.body[2]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "tacultas praetormandi)",
+        "after": "facultas praeformandi,",
+        "count": 1,
+        "where": [
+          "theo:archetype-as-such.definition.text"
         ]
       },
       {

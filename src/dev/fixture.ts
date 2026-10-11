@@ -204,7 +204,7 @@ export function buildFixture(): Field {
     archetypes.push({ id, name, oneLine: line, prime: id === 'self', spectrum: { position: s }, palette: p,
       definition: { text: `The ${name.toLowerCase()} is not invented but found; it arrives as image before it arrives as idea.`, cite: 'CW9i ¶6 (fixture)' },
       body: [`${name} appears in this fixture as a stand-in for the vault's own reading. ${line}`, 'Longer deep-layer text will come from the vault body. This paragraph exists to let the typography be judged at length: the measure, the leading, the rhythm of a Garamond set quietly against a dark sheet of glass.'],
-      image: plate(imgSeed++, p, 900, 1100, name), familyIds: [], occurrenceCount: 0 });
+      image: plate(imgSeed++, p, 900, 1100, name), familyIds: [], occurrenceCount: 0, archetypes: [] });
   }
 
   for (const [id, name, subtype, aliases, archIds, line] of F) {
@@ -285,7 +285,7 @@ export function buildFixture(): Field {
 
   const years = occurrences.map((o) => o.year);
   return {
-    meta: { generatedAt: new Date().toISOString(), vaultPath: 'fixture', vaultLedgerLine: 'Synthetic dev fixture', counts: { archetypes: archetypes.length, families: families.length, occurrences: occurrences.length, cultures: cultures.length, images: 0 }, yearMin: Math.min(...years), yearMax: Math.max(...years) },
-    archetypes, families, occurrences, cultures,
+    meta: { generatedAt: new Date().toISOString(), vaultPath: 'fixture', vaultLedgerLine: 'Synthetic dev fixture', counts: { archetypes: archetypes.length, theoretics: 0, families: families.length, occurrences: occurrences.length, cultures: cultures.length, images: 0 }, yearMin: Math.min(...years), yearMax: Math.max(...years) },
+    archetypes, theoretics: [], families, occurrences, cultures,
   };
 }

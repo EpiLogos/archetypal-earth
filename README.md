@@ -25,7 +25,9 @@ The foundation is Jung's complete published psychology, machine-extracted from 2
 
 Three design decisions shape everything here, and each one guards a specific scholarly value.
 
-**1. The three-tier ontology — archetype as such → image → instance.** Jung insisted the archetype *as such* is irrepresentable — a structural pattern known only through the images that express it, which alone have history and geography. The vault encodes exactly that distinction. The irreducible **self**, **shadow**, **anima**, **Great Mother** sit at the top tier, defined only by what Jung actually wrote. Beneath them, representable **image families** (mandala, serpent, ouroboros, conjunctio — 320 of them). Beneath those, the **instances** — 2,700 individual dated, placed appearances: artifacts, myths, rituals, dreams. The rule that a note may only *instance* an image, never an archetype-as-such, is Jung's own epistemology turned into schema.
+**1. The four-tier ontology — archetype as such → image → instance, and the theory those three stand on.** Jung insisted the archetype *as such* is irrepresentable — a structural pattern known only through the images that express it, which alone have history and geography. The vault encodes exactly that distinction. The irreducible **self**, **shadow**, **anima**, **Great Mother** sit at the top tier, defined only by what Jung actually wrote. Beneath them, representable **image families** (mandala, serpent, ouroboros, conjunctio — 408 of them). Beneath those, the **instances** — 2,854 individual dated, placed appearances: artifacts, myths, rituals, dreams. The rule that a note may only *instance* an image, never an archetype-as-such, is Jung's own epistemology turned into schema.
+
+Beside those three sit the **theoretics** — Jung's theoretical instruments, carried as nodes of the field rather than left in a mode: the psychoid, the archetype as such, the collective unconscious, the complex, libido, mana, the numinosum, participation mystique, the persona, synchronicity, the transcendent function, compensation, individuation and Aion-time. They are tied into the field at every point the sources state, so focusing one tunes the globe to the presences it governs. Two of them are the field's own ground and are marked as such: the **psychoid** (the ontological tier-marker — where the archetype stops being psyche and touches matter) and **the archetype as such** (the epistemological keystone — the irrepresentable pole known only through its images). They are the reason the other tiers exist, which is why they are stated as the ground rather than filed as two more entries in the list.
 
 **2. The citation spine.** Every claim in every note resolves to a volume, paragraph, and page — and a script verifies cited paragraphs against the extracted corpus text. Quotes in the notes were sampled and matched 100% against the source. Where OCR damaged a paragraph marker, reconstructions are flagged and tracked separately, never silently substituted. What you read here can be checked against Jung himself in seconds.
 
@@ -40,12 +42,39 @@ Alongside the structure sits the interpretation layer: family deep-dives written
 | Corpus | 28 volumes, 16,077 pages, all machine-extracted |
 | Paragraph index | 12,525 entries, citation-verified |
 | Harvested records | 19,243 (statements, instances, connections, definitions) |
-| Instance notes | 2,710 — dated, placed, sourced |
-| Image families | 320+ |
-| Archetype & concept notes | 26, fully sourced |
+| Instance notes | 2,854 — dated, placed, sourced |
+| Image families | 408 |
+| Archetype notes | 13 in the vault, fully sourced — and the six number archetypes beside them in the field, admitted from curation (synthesised) with their own pages |
+| Theoretic notes | 14 — Jung's theoretical instruments, carried into the field |
 | Works, text & figure hubs | 40+ |
 | Doctrine maps & MOCs | 15 |
 | Family deep-dives | 9 (serpent row, quaternity cluster, anima genealogy, Great Mother, hero, shadow & trickster, wise old man, god-image doctrine, planetary correspondences) |
+
+## The theory and the numbers, in the site
+
+The **Theory** lens was never the whole of the theory. Its instruments are nodes of the field — the **theoretics** tier
+above — and every one of the fourteen now carries a **page of its own**, rendered where the node is focused
+(`#/th/psychoid` and from a click on its node in the graph): the concept's own account, then its sections with Jung's
+quotations placed verbatim from the corpus, each with a locating cite (¶ and pdf page) that opens the passage. The
+**psychoid** opens the set and carries its own CW8 material in full — the naming (¶840), the three reservations (¶368),
+the ultra-violet end (¶417), the physics parallel (¶419-420), the specific charge (¶841) — beside the non-locality of
+CW10 ¶851, the psychoid form under the image (CW13), the last-word form (CW18 ¶1208) and the correspondence with
+Pauli, whose own counter-pressure stands in his voice, never Jung's. Where the sources name a dynamical system (libido,
+compensation, enantiodromia, the transcendent function), Van Eenwyk's reading stands beside Jung's, marked as his.
+
+The **numbers are archetypes**, not a tier: one to six, admitted from curation as archetypes of order and tied to the
+**Self** — six to the Self in Jung's own word (CW10 ¶805, CW9i pdf p424). Each has a page carrying its QL position (the
+framework's words, marked QL), von Franz on the number, Jung's own number material — the monad of Monoïmos, the dyad's
+*complexio oppositorum*, the Trinity's withheld fourth, the archetype of order and the Pythagorean tetraktys, the
+quinta essentia and the pentadic mandala, the return — and the **egg block**: three witnesses to one image, each in its
+own voice and nothing asserted between them. Pauli's dream (letters-pauli p254) with the count given as six stages —
+*1 The Seed · 2 Polarity · 3 The Third · 4 Quaternity · 5 Quintessence · 5→0 The Return*, the `0/1` frame's start
+forgone so the shape is visible and never named; Jung's CW9ii ¶345 footnote, with the drawing the dynamical lens
+already carries (the square's angular form rotated into a circle) standing beside that sentence and no caption around
+it; and the pentadic mandala of CW9i ¶615, the egg encircled by the snake at the centre.
+
+The **Self** has its deep page at `#/symbols/archetype/self` — eight sections from the centre and the circumference to
+the numbers themselves, each number linked — the place where the arithmetic meets the archetypes.
 
 ## How to use it
 

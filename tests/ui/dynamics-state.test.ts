@@ -10,6 +10,7 @@ const lens = (subject?: { type: 'family' | 'archetype'; id: string }): AppState 
 
 const r: Resolver = {
   hasArchetype: (id) => id === 'self',
+  hasTheoretic: () => false,
   hasFamily: (id) => ['serpent', 'tree'].includes(id),
   hasCulture: (id) => id === 'norse',
   hasPlace: (id) => id === 'chartres',

@@ -5,11 +5,11 @@
 .rb-modes button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: 0.04em; padding-bottom: 2px; border-bottom: 1px solid transparent; }
 .rb-modes button[aria-pressed=true] { color: var(--core); border-bottom-color: rgb(var(--core-rgb) / 0.5); }
 
-.rb-rail { position: absolute; bottom: 89px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; pointer-events: auto; }
+.rb-rail { position: absolute; bottom: 76px; left: 50%; transform: translateX(-50%); z-index: 13; display: flex; align-items: center; gap: 10px; pointer-events: auto; }
 .rb-rail[hidden] { display: none; }
-.rb-rail button { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-2); border: 1px solid var(--hair); background: rgb(0 0 0 / 0.2); backdrop-filter: blur(6px); transition: color .3s, border-color .3s; }
+.rb-rail button { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; font-size: 12px; line-height: 1; color: var(--ink-2); border: 1px solid var(--hair); background: rgb(0 0 0 / 0.28); backdrop-filter: blur(6px); transition: color .3s, border-color .3s; }
 .rb-rail button:hover { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
-.rb-progress { font: 11px var(--sans); letter-spacing: 0.1em; color: var(--ink-3); font-feature-settings: 'tnum'; }
+.rb-progress { font: 10.5px var(--sans); letter-spacing: 0.1em; color: var(--ink-3); font-feature-settings: 'tnum'; }
 .rb-section { font: 11.5px var(--sans); letter-spacing: 0.04em; color: var(--ink-2); max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 
@@ -32,5 +32,6 @@ body.redbook-mode .time { opacity: 0.35; }
 
 @media (max-width: 760px) {
   .rb-section { display: none; }
-  .rb-card { bottom: 108px; max-height: 48vh; }
+  .rb-rail { bottom: 54px; }
+  .rb-card { bottom: 100px; max-height: 48vh; }
 }

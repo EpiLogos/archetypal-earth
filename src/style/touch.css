@@ -9,6 +9,7 @@
   .link-quiet:hover { border-bottom-color: transparent; text-decoration-color: rgb(var(--core-rgb) / 0.8); }
   .fl-ties, .fl-links, .fl-up { row-gap: 4px; }
   summary, .aion-browse > summary { display: inline-flex; align-items: center; min-height: 44px; }
+  .mode-opt-btn { width: 44px; height: 44px; }
 
   .t-play { width: 44px; height: 44px; margin: -8px; }
   .t-readout { display: inline-flex; align-items: center; justify-content: flex-end; min-height: 44px; margin-block: -15px; padding-inline: 4px; }
@@ -21,16 +22,21 @@
   .aion-epochs button { min-height: 44px; min-width: 44px; }
 
   .sh-controls select, .aion-choices select, .sky-culture select, .gv-tools select { min-height: 44px; }
-  .rb-rail button { width: 44px; height: 44px; }
+  /* rail circles stay small visually; the hit box grows around them so they don't overhang the card */
+  .rb-rail button, .dy-rail button { position: relative; }
+  .rb-rail button::after, .dy-rail button::after { content: ''; position: absolute; inset: -11px; }
   .rv-close, .dp-close { width: 44px; height: 44px; }
   .st-frame { min-width: 50px; }  /* drawn at scale(0.9): 50 px is 45 on screen */
   .gvt-link { min-height: 44px; min-width: 44px; justify-content: center; }
   .sky-label { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; margin: -12px -8px; }
 }
 
-/* the lens's own dropdowns become bottom sheets on a phone, like the shell's menu */
+/* phone: Options sheet still timeline-width, tucked above the clock; graph tools stay a full sheet */
 @media (max-width: 760px) {
-  .aion-choices, .gvt-panel {
+  .mode-options-body, .aion-choices {
+    bottom: 64px; width: min(100vw - 16px, 780px); max-height: 56vh; padding: 16px 16px calc(14px + env(safe-area-inset-bottom));
+  }
+  .gvt-panel {
     position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: auto; max-width: none; max-height: 70vh; z-index: 45;
     padding: 20px 18px calc(22px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; border-bottom: 0;
     background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);

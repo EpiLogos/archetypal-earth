@@ -103,6 +103,13 @@ export class CameraRig {
   private tmpS: Vec3 = [0, 0, 0];
   private tmpT: Vec3 = [0, 0, 0];
   private flyEndCbs: (() => void)[] = [];
+  /**
+   * Orbit-satellite gaze: freeze the camera's world position (stay at the planet) and turn only the look-at
+   * toward a point (the Earth). Null = normal orbit rig.
+   */
+  private gaze: { pos: THREE.Vector3; from: THREE.Vector3; to: THREE.Vector3; t: number; dur: number } | null = null;
+  private gazeLook = new THREE.Vector3();
+  private gazeDone: (() => void) | null = null;
 
   constructor(private camera: THREE.PerspectiveCamera, private dom: HTMLElement, private opts: RigOptions) {
     dom.addEventListener('pointerdown', this.onDown);
@@ -123,6 +130,11 @@ export class CameraRig {
     return this.fly !== null;
   }
 
+  /** True while the camera is frozen in place and only turning to look at a gaze target. */
+  get gazing(): boolean {
+    return this.gaze !== null;
+  }
+
   onFlyEnd(cb: () => void) {
     this.flyEndCbs.push(cb);
   }
@@ -132,8 +144,48 @@ export class CameraRig {
     return { lat: this.lat, lon: this.lon };
   }
 
-  /** Frame the point at (lat, lon) from distance `dist`, flying along the great circle. */
-  flyTo(lat: number, lon: number, dist: number, opts: { duration?: number; instant?: boolean } = {}) {
+  /**
+   * Stay exactly where the camera is; turn only to look at a scene point.
+   * Orbit gaze (look at Earth) and return-to-sky (look at the planet) both use this — no translation.
+   */
+  lookAtPoint(target: THREE.Vector3, opts: { duration?: number; instant?: boolean; onDone?: () => void } = {}) {
+    this.cancelFly(false);
+    this.settleTo = null;
+    this.wheelDriven = false;
+    this.vLat = this.vLon = 0;
+    this.gazeDone = opts.onDone ?? null;
+    const pos = this.camera.position.clone();
+    const from = this.focus.clone();
+    const dur = opts.instant || this.opts.reduced ? 0 : (opts.duration ?? 1.5);
+    this.gaze = { pos, from, to: target.clone(), t: dur <= 0 ? 1 : 0, dur: Math.max(dur, 1e-3) };
+    this.apply();
+    if (this.gaze.t >= 1) this.finishGaze();
+  }
+
+  /** Turn in place to look at a lat/lon on the Earth (unit sphere). */
+  lookAtEarth(lat: number, lon: number, opts: { duration?: number; instant?: boolean; onDone?: () => void } = {}) {
+    dirFromLatLon(lat, lon, this.tmpC);
+    this.lookAtPoint(new THREE.Vector3(this.tmpC[0], this.tmpC[1], this.tmpC[2]), opts);
+  }
+
+  /** End a look-at hold; the next apply() uses the normal focus/dist orbit again. */
+  clearGaze() {
+    this.gaze = null;
+    this.gazeDone = null;
+  }
+
+  private finishGaze() {
+    const cb = this.gazeDone;
+    this.gazeDone = null;
+    cb?.();
+  }
+
+  /**
+   * Frame the point at (lat, lon) from distance `dist`, flying along the great circle.
+   * `lift` (Earth radii at mid-flight) defaults from the hop's angle; pass 0 for a pure drop or a turn that must not climb.
+   */
+  flyTo(lat: number, lon: number, dist: number, opts: { duration?: number; instant?: boolean; lift?: number } = {}) {
+    this.clearGaze();
     const clampedLat = Math.max(-MAX_LAT, Math.min(MAX_LAT, lat));
     const to = dirFromLatLon(clampedLat, lon);
     const from = dirFromLatLon(this.lat, this.lon);
@@ -143,6 +195,7 @@ export class CameraRig {
     // a flight is a journey of its own: it ends any arrival settle, and the arrival it was by wheel no longer stands
     this.settleTo = null;
     this.wheelDriven = false;
+    this.flyEndCbs.length = 0;
     const ang = angleBetween(from, to);
     if (opts.instant || (ang < 1e-4 && Math.abs(d1 - this.dist) < 1e-3)) {
       this.lat = clampedLat;
@@ -155,7 +208,7 @@ export class CameraRig {
     let dur = opts.duration ?? Math.min(3.8, 1.3 + ang * 1.15 + Math.abs(Math.log((d1 - 1) / Math.max(this.dist - 1, 0.05))) * 0.42);
     if (this.opts.reduced) dur *= 0.4;
     // a long hop pulls the camera back mid-flight so the journey reads spatially
-    const lift = Math.min(1.25, ang * 0.62) * Math.min(1, 0.55 + ang);
+    const lift = opts.lift !== undefined ? opts.lift : Math.min(1.25, ang * 0.62) * Math.min(1, 0.55 + ang);
     this.fly = { t: 0, dur, from, to, d0: this.dist, d1, lift };
     this.targetDist = d1;
   }
@@ -173,6 +226,7 @@ export class CameraRig {
     // every input comes through here: it ends an arrival settle, and a key, drag or wheel that follows is its own gesture
     this.settleTo = null;
     this.wheelDriven = false;
+    this.flyEndCbs.length = 0;
     if (!this.fly) return;
     this.fly = null;
     this.targetDist = this.dist;
@@ -185,6 +239,7 @@ export class CameraRig {
   /** Keyboard / programmatic nudges. */
   nudge(dLat: number, dLon: number) {
     this.markInteracted();
+    this.clearGaze();
     this.cancelFly();
     this.anchor = null;
     this.vLat += dLat;
@@ -193,6 +248,7 @@ export class CameraRig {
 
   zoomBy(factor: number) {
     this.markInteracted();
+    this.clearGaze();
     this.cancelFly();
     this.anchor = null;
     this.targetDist = clampDist(1 + (this.targetDist - 1) * Math.pow(factor, 1.5), this.maxDist);
@@ -255,6 +311,7 @@ export class CameraRig {
     try { this.dom.setPointerCapture(e.pointerId); } catch { /* synthetic or already-gone pointer */ }
     this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     this.markInteracted();
+    this.clearGaze();
     this.opts.onGrab();
     this.cancelFly(false);
     this.vLat = this.vLon = 0;
@@ -364,6 +421,7 @@ export class CameraRig {
   /** Ease the altitude by `factor` toward the surface point under a client position. */
   zoomAt(clientX: number, clientY: number, factor: number) {
     this.markInteracted();
+    this.clearGaze();
     this.opts.onGrab();
     this.cancelFly();
     this.vLat = this.vLon = 0;
@@ -374,6 +432,7 @@ export class CameraRig {
   private onWheel = (e: WheelEvent) => {
     e.preventDefault();
     this.markInteracted();
+    this.clearGaze();
     this.opts.onGrab();
     this.cancelFly();
     if (this.pointers.size) return;
@@ -432,6 +491,18 @@ export class CameraRig {
     const sk = 1 - Math.exp(-dt * 4.2);
     this.shiftX += (this.tShiftX - this.shiftX) * sk;
     this.shiftY += (this.tShiftY - this.shiftY) * sk;
+
+    // gaze: position frozen; only the look-at eases — skip orbit/flight motion
+    if (this.gaze) {
+      if (this.gaze.t < 1) {
+        this.gaze.t = Math.min(1, this.gaze.t + dt / this.gaze.dur);
+        this.apply();
+        if (this.gaze.t >= 1) this.finishGaze();
+      } else {
+        this.apply();
+      }
+      return;
+    }
 
     if (this.fly) {
       const f = this.fly;
@@ -519,6 +590,15 @@ export class CameraRig {
   }
 
   private apply() {
+    if (this.gaze) {
+      const g = this.gaze;
+      const u = easeInOutCubic(Math.min(1, g.t));
+      this.gazeLook.lerpVectors(g.from, g.to, u);
+      this.camera.position.copy(g.pos);
+      this.camera.up.set(0, 1, 0);
+      this.camera.lookAt(this.gazeLook.x, this.gazeLook.y, this.gazeLook.z);
+      return;
+    }
     dirFromLatLon(this.lat, this.lon, this.tmpC);
     this.camera.position.set(this.focus.x + this.tmpC[0] * this.dist, this.focus.y + this.tmpC[1] * this.dist, this.focus.z + this.tmpC[2] * this.dist);
     this.camera.up.set(0, 1, 0);

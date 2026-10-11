@@ -10,11 +10,11 @@ import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '.
 import { BUILT, type LensContext, type LensInstance } from '../shell/lens';
 import type { PanelLensId } from '../state/store';
 import { inLens } from '../state/store';
-import { loadLensData, quoteBlock, type LensQuote } from './ui';
+import { modeOptions, optionAction } from '../ui/mode-options';
+import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
 
-interface TheoryLink { type: 'family' | 'archetype' | 'lens'; id: string }
+interface TheoryLink { type: 'family' | 'archetype' | 'theoretic' | 'lens'; id: string }
 interface TheorySection { id: string; name: string; line: string; quotes: LensQuote[]; links: TheoryLink[] }
-interface QL { text: string; source: string; name?: string }
 /** One stop of the walk: a QL position, the number beside it, von Franz on the number, Jung on what the position names. */
 interface NumberRow { n: number; position: string; ql: QL; gloss: QL; line: string; quotes: LensQuote[]; jung: LensQuote[]; subjects: Subject[]; section?: string }
 interface NumberData {
@@ -24,23 +24,12 @@ interface NumberData {
   jung: LensQuote[];
   series: LensQuote;
   numbers: NumberRow[];
-  psychoid: { line: string; quotes: LensQuote[]; ql: QL };
+  psychoid: { line: string; quotes: LensQuote[]; ql: QL; subjects?: TheoryLink[] };
   time: { line: string; quotes: LensQuote[]; quaternio: { intro: LensQuote; terms: string[] }; vaneenwyk: { line: string; quotes: LensQuote[] } };
 }
 interface TheoryData { version: 1; sections: TheorySection[]; number?: NumberData }
 
 const NUMBER: TheorySection = { id: 'number', name: 'Number', line: '', quotes: [], links: [] };
-
-/** Where a QL formulation is quoted from: the published site by its section (W § I), or the earlier notes (S1–S4). */
-const qlSource = (src: string) => src.startsWith('W ') ? `epi-logos.org, ${src.slice(2)}` : `the QL framework's notes, ${src}`;
-
-/** A QL formulation: the framework's own words, always marked as QL (ProjectCentral/docs/ql-reference.md names its sources). */
-function qlBlock(q: QL): HTMLElement {
-  return el('blockquote', { class: 'lq lq-ql' }, [
-    el('p', { text: q.text }),
-    el('footer', {}, [el('span', { class: 'lq-voice ql', text: 'QL' }), el('span', { class: 'lq-cite', text: qlSource(q.source) })]),
-  ]);
-}
 
 /**
  * The six positions on a circle, numbers 1–6 at #0–#5, the site's two vertical poles (origin, synthesis) dashed, and
@@ -82,7 +71,7 @@ function qlWheel(rows: NumberRow[], open?: (i: number) => void, current = -1, sm
 
 const LENS_LINK: Record<string, { text: string; state: () => import('../state/store').AppState }> = {
   aion: { text: 'Enantiodromia across the ages: Aion', state: () => ({ view: { kind: 'world' }, deep: false, history: { reading: 'jung-aion' } }) },
-  dynamics: { text: 'Watch a symbol move as a dynamical system', state: () => ({ view: { kind: 'world' }, deep: false, dynamics: {} }) },
+  dynamics: { text: 'Dynamics: Archetypes & Strange Attractors', state: () => ({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }) },
   dreams: { text: 'Bring your own dreams', state: () => inLens('dreams') },
 };
 
@@ -114,11 +103,19 @@ export function mount(ctx: LensContext): LensInstance {
   const sectionNav = (sections: TheorySection[], id: string) => el('nav', { class: 'th-nav', 'aria-label': 'Theory sections' }, sections.map((x) =>
     el('button', { type: 'button', class: 'th-tab', 'aria-current': x.id === id ? 'true' : undefined, text: x.name, onclick: () => ctx.setPath(x.id === sections[0].id ? [] : [x.id]) })));
 
-  const show = (key: string, nodes: (HTMLElement | null)[], wide = true) => {
+  const show = (key: string, nodes: (HTMLElement | null)[], foot?: HTMLElement | null, wide = true) => {
     const body = nodes.filter((n): n is HTMLElement => !!n);
-    if (ctx.panel.isOpen) ctx.panel.replace(body); else ctx.panel.open('Theory', body, { wide });
+    const footNodes = foot ? [foot] : null;
+    if (ctx.panel.isOpen) ctx.panel.replace(body, { foot: footNodes }); else ctx.panel.open('Theory', body, { wide, foot: footNodes });
     current = key;
   };
+
+  /** Same prev/next circles as the Red Book / Dynamics rail. */
+  const walkRail = (label: string, prev: () => void, next: () => void, at: string) => el('nav', { class: 'rb-rail', 'aria-label': label }, [
+    el('button', { type: 'button', text: '←', 'aria-label': 'Previous', onclick: prev }),
+    el('span', { class: 'rb-progress', text: at }),
+    el('button', { type: 'button', text: '→', 'aria-label': 'Next', onclick: next }),
+  ]);
 
   /** Number: the overview — the six positions on their wheel, Jung and von Franz on number, the psychoid and time. */
   const renderNumber = (sections: TheorySection[]) => {
@@ -145,6 +142,8 @@ export function mount(ctx: LensContext): LensInstance {
       el('p', { class: 'th-line', text: d.psychoid.line }),
       ...d.psychoid.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
       qlBlock(d.psychoid.ql),
+      ...(d.psychoid.subjects?.length ? [el('div', { class: 'th-links' }, d.psychoid.subjects.map((l) =>
+        el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(l as Subject) }, [el('span', { text: subjectName(ctx.model, l as Subject) }), icon('next', 14)])))] : []),
       el('h3', { class: 'as-h3', text: 'Time' }),
       el('p', { class: 'th-line', text: d.time.line }),
       ...d.time.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
@@ -152,7 +151,7 @@ export function mount(ctx: LensContext): LensInstance {
       q(d.time.quaternio),
       el('p', { class: 'th-line', text: d.time.vaneenwyk.line }),
       ...d.time.vaneenwyk.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
-      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: {} }) }, [el('span', { text: 'The dynamical lens' }), icon('next', 14)]),
+      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }) }, [el('span', { text: 'The dynamical lens' }), icon('next', 14)]),
     ]);
   };
 
@@ -169,7 +168,7 @@ export function mount(ctx: LensContext): LensInstance {
     const word = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'][r.n];
     ctx.setContext(`${word} at ${r.position}`);
     const links = el('div', { class: 'th-links' });
-    for (const subject of r.subjects) links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(subject) }, [el('span', { text: `${subjectName(ctx.model, subject)} on the globe` }), icon('next', 14)]));
+    for (const subject of r.subjects) links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(subject) }, [el('span', { text: subjectName(ctx.model, subject) }), icon('next', 14)]));
     const sec = r.section ? sections.find((x) => x.id === r.section) : undefined;
     if (sec) links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath([sec.id]) }, [el('span', { text: `Theory: ${sec.name}` }), icon('next', 14)]));
     const first = r.jung[0] ?? r.quotes[0];
@@ -195,12 +194,7 @@ export function mount(ctx: LensContext): LensInstance {
         ? el('button', { type: 'button', class: 'th-walk', onclick: () => ctx.passages!.open(first.cite.work, first.cite.locator) }, [el('span', { text: `Read ${first.cite.workTitle} at ${first.cite.locator}` }), icon('next', 14)])
         : null,
       links.childElementCount ? links : null,
-      el('div', { class: 'th-step' }, [
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Previous position', onclick: () => go(i - 1) }, [icon('back')]),
-        el('span', { class: 'th-count', text: `${r.position} → ${d.numbers[(i + 1) % all].position}` }),
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Next position', onclick: () => go(i + 1) }, [icon('next')]),
-      ]),
-    ]);
+    ], walkRail('Number positions', () => go(i - 1), () => go(i + 1), `${i + 1} / ${all}`));
     tuneSubjects(r.subjects, `${word.toLowerCase()} at ${r.position}`);
   };
 
@@ -226,30 +220,33 @@ export function mount(ctx: LensContext): LensInstance {
         links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate(def.state()) }, [el('span', { text: def.text }), icon('next', 14)]));
       } else {
         const subject = l as Subject;
-        links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(subject) }, [el('span', { text: `${subjectName(ctx.model, subject)} on the globe` }), icon('next', 14)]));
+        const name = subjectName(ctx.model, subject);
+        links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(subject) }, [el('span', { text: name }), icon('next', 14)]));
       }
     }
     const step = (d: number) => {
       const n = sections[(i + d + sections.length) % sections.length];
       ctx.setPath(n.id === sections[0].id ? [] : [n.id]);
     };
-    const body = [
+    show(s.id, [
       nav,
       el('p', { class: 'th-line', text: s.line }),
       ...s.quotes.map((q) => quoteBlock(q, ctx.passages)),
       links.childElementCount ? links : null,
-      el('div', { class: 'th-step' }, [
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Previous section', onclick: () => step(-1) }, [icon('back')]),
-        el('span', { class: 'th-count', text: `${i + 1} of ${sections.length}` }),
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Next section', onclick: () => step(1) }, [icon('next')]),
-      ]),
-    ].filter((n): n is HTMLElement => !!n);
-    if (ctx.panel.isOpen) ctx.panel.replace(body); else ctx.panel.open('Theory', body);
+    ], walkRail('Theory sections', () => step(-1), () => step(1), `${i + 1} / ${sections.length}`));
     tune(s);
+  };
+
+  const theoryOptions = () => {
+    ctx.setControls([modeOptions([
+      optionAction("Jung's theory", () => {}, { pressed: true }),
+      optionAction('Dynamics', () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }), { title: 'Archetypes & Strange Attractors' }),
+    ], 'Options')]);
   };
 
   return {
     enter(path) {
+      theoryOptions();
       const want = path[0] ?? '';
       const key = path[1] !== undefined ? `${want}/${path[1]}` : want;
       if (data) { if (key !== current || !ctx.panel.isOpen) render(want, path[1]); return; }
@@ -263,6 +260,7 @@ export function mount(ctx: LensContext): LensInstance {
     },
     leave() {
       current = '';
+      ctx.setControls(null);
       ctx.engine.setEmphasis(null, null);
     },
   };

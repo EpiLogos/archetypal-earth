@@ -10,6 +10,7 @@ const field = JSON.parse(readFileSync(new URL('../../public/data/field.json', im
 const model = buildModel(field);
 const resolver = {
   hasArchetype: (id: string) => model.archById.has(id),
+  hasTheoretic: () => false,
   hasFamily: (id: string) => model.famById.has(id),
   hasCulture: (id: string) => model.cultureById.has(id),
   hasPlace: (id: string) => model.places.has(id),

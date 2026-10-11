@@ -51,7 +51,7 @@ export class PlanetOrbits {
     this.earthMark.setAttribute('class', 'po-earth-mark');
     this.earthMark.textContent = 'Earth';
     this.svg.append(this.earthLine, this.earthMark);
-    this.earthBtn = el('button', { type: 'button', class: 'po-earth', text: 'Back to the Earth', 'aria-label': 'Back to the whole birth sky, around the Earth', onclick: () => this.onEarth() });
+    this.earthBtn = el('button', { type: 'button', class: 'po-earth', text: 'Whole sky', 'aria-label': 'Back to the whole sky around the Earth', onclick: () => this.onEarth() });
     this.root = el('div', { class: 'po', hidden: true }, [this.earthBtn]);
     this.root.prepend(this.svg);
     parent.append(this.root);
@@ -82,7 +82,9 @@ export class PlanetOrbits {
   update(layer: SkyLayer | null, dt: number, reduced: boolean) {
     const key = this.key;
     const disc = key && layer ? layer.screenDisc(key) : null;
-    const want = disc && disc.on && layer && layer.approach > 0.6 && disc.px > 40 ? 1 : 0;
+    // sky-gazing: stationed at the planet looking at Earth — satellites stand down so the floats read
+    const gazing = document.body.classList.contains('sky-gazing');
+    const want = !gazing && disc && disc.on && layer && layer.approach > 0.6 && disc.px > 40 ? 1 : 0;
     this.shown += (want - this.shown) * (1 - Math.exp(-dt * 4));
     // while a body is held, a phone gives the sky's own controls (names, the held note) back to it
     document.body.classList.toggle('po-holding', this.shown > 0.5);

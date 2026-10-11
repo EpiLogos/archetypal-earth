@@ -1,0 +1,118 @@
+{
+  "_note": "The complex: the founding definition of the emotional complex (CW2 ¶166, the 1904 footnote), the memoir's account of the word-finding (CW18 ¶832), how complexes behave (CW2 ¶902, ¶861, ¶610, ¶664, CW11 ¶21, CW2 ¶1353), what one is (CW8 ¶201, ¶200), and the seminar dictum on energy. Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "complex",
+  "line": "The psyche's autonomous parts: feeling-toned knots that behave like secondary personalities — the instrument Jung found the unconscious with.",
+  "sections": [
+    {
+      "id": "the-founding",
+      "title": "The founding definition",
+      "line": "The word starts as a technical term of the association experiments: an emotionally charged group of ideas, measurable by its disturbance of reaction.",
+      "quotes": [
+        {
+          "work": "cw02",
+          "para": 166,
+          "page": 52,
+          "quote": "By \"emotionally charged complex\" we mean the sum of ideas referring to a particular feeling-toned event. We shall always use the term \"complex\" in this sense in what follows."
+        },
+        {
+          "work": "cw18",
+          "para": 832,
+          "quote": "I found then that the experiments were almost regularly disturbed by psychic factors beyond the control of consciousness. I called them complexes"
+        }
+      ]
+    },
+    {
+      "id": "how-they-behave",
+      "title": "How a complex behaves",
+      "line": "Not a content among contents: the complex acts as a personality, with intentions of its own, and the ego can be subjected to it.",
+      "quotes": [
+        {
+          "work": "cw02",
+          "para": 902,
+          "quote": "The complex plays the part of a second and stronger personality, to which ego-consciousness is subjected."
+        },
+        {
+          "work": "cw02",
+          "para": 861,
+          "quote": "This second personality devours what is left of the normal ego and forces it into the role of a secondary (oppressed) complex"
+        },
+        {
+          "work": "cw02",
+          "para": 1353,
+          "quote": "because the complexes behave quite independently of the ego, and force upon it a quasi-foreign will"
+        },
+        {
+          "work": "cw11",
+          "para": 21,
+          "quote": "Complexes do indeed behave like secondary or partial personalities possessing a mental life of their own."
+        }
+      ]
+    },
+    {
+      "id": "what-one-is",
+      "title": "What one is",
+      "line": "The 1934 reformulation: a complex is the image of a situation, emotionally accentuated and incompatible with the habitual attitude — which is why it has us.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 201,
+          "quote": "What then, scientifically speaking, is a \"feeling-toned complex\"? It is the image of a certain psychic situation which is strongly accentuated emotionally and is, moreover, incompatible with the habitual attitude of consciousness."
+        },
+        {
+          "work": "cw08",
+          "para": 200,
+          "quote": "Everyone knows nowadays that people \"have complexes.\" What is not so well known, though far more important theoretically, is that complexes can have us."
+        }
+      ]
+    },
+    {
+      "id": "the-ground",
+      "title": "The ground of psychic life",
+      "line": "Beyond pathology: the complex is the normal structure of the unconscious life, and the place where psychic energy collects.",
+      "quotes": [
+        {
+          "work": "cw02",
+          "para": 664,
+          "quote": "The background of our consciousness (or the unconscious) consists of such complexes"
+        },
+        {
+          "work": "cw02",
+          "para": 610,
+          "quote": "directed by a psychic factor that can behave like an independent being"
+        },
+        {
+          "work": "sem-dream-analysis",
+          "page": 442,
+          "quote": "without complexes there can be no energy. They are the focus and very mother of energy"
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "type": "archetype",
+      "id": "mana-personality"
+    },
+    {
+      "type": "family",
+      "id": "persona"
+    },
+    {
+      "type": "family",
+      "id": "possession"
+    },
+    {
+      "type": "theoretic",
+      "id": "archetype-as-such"
+    },
+    {
+      "type": "theoretic",
+      "id": "collective-unconscious"
+    },
+    {
+      "type": "theoretic",
+      "id": "compensation"
+    }
+  ]
+}

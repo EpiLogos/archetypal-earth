@@ -25,6 +25,13 @@ const figure = (page) => page.evaluate(() => {
 for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   const { ctx, page, logs } = await open(browser, { width: w, height: h, hash: '#/dynamics', mobile: w < 500 });
   await page.waitForTimeout(6500);
+  // Theory lands with Options icon; Dynamics opens the route overview
+  const dynOpt = page.locator('.mode-options-body button', { hasText: 'Dynamics' });
+  if (!(await dynOpt.isVisible().catch(() => false))) {
+    await page.locator('.mode-opt-btn').click();
+  }
+  await dynOpt.click();
+  await page.waitForTimeout(2500);
   check(await page.locator('.dy-route-dot').count() === 16, `${tag}: the overview maps the route, sixteen stops in four movements`);
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   const own = Number((/^([\d,]+) in/.exec(line)?.[1] ?? '0').replace(/,/g, ''));

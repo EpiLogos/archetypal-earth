@@ -22,10 +22,12 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const warnings = [];
   const families = new Set(field.families.map((f) => f.id));
   const archetypes = new Set(field.archetypes.map((a) => a.id));
+  const theoretics = new Set((field.theoretics ?? []).map((t) => t.id));
   const sections = curation.sections.map((s) => {
     for (const l of s.links ?? []) {
       if (l.type === 'family' && !families.has(l.id)) errors.push(`${s.id}: no family ${l.id} in the field`);
       if (l.type === 'archetype' && !archetypes.has(l.id)) errors.push(`${s.id}: no archetype ${l.id} in the field`);
+      if (l.type === 'theoretic' && !theoretics.has(l.id)) errors.push(`${s.id}: no theoretic ${l.id} in the field`);
     }
     const quotes = citeQuotes(load, titles, s.quotes, s.id, errors, warnings);
     return { id: s.id, name: s.name, line: s.line, quotes, links: s.links ?? [] };
@@ -41,6 +43,7 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     for (const l of list ?? []) {
       if (l.type === 'family' && !families.has(l.id)) errors.push(`${where}: no family ${l.id} in the field`);
       if (l.type === 'archetype' && !archetypes.has(l.id)) errors.push(`${where}: no archetype ${l.id} in the field`);
+      if (l.type === 'theoretic' && !theoretics.has(l.id)) errors.push(`${where}: no theoretic ${l.id} in the field`);
     }
     return list ?? [];
   };
@@ -60,7 +63,7 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
         ...(n.section ? { section: n.section } : {}),
       };
     }),
-    psychoid: { line: ql.psychoid.line, quotes: many(ql.psychoid.quotes, 'psychoid'), ql: qlText(ql.psychoid.ql, 'psychoid ql') },
+    psychoid: { line: ql.psychoid.line, quotes: many(ql.psychoid.quotes, 'psychoid'), ql: qlText(ql.psychoid.ql, 'psychoid ql'), subjects: subjectsOk(ql.psychoid.subjects, 'psychoid') },
     time: { line: ql.time.line, quotes: many(ql.time.quotes, 'time'), quaternio: { intro: one(ql.time.quaternio.intro, 'quaternio'), terms: ql.time.quaternio.terms }, vaneenwyk: { line: ql.time.vaneenwyk.line, quotes: many(ql.time.vaneenwyk.quotes, 'time.vaneenwyk').map((q) => ({ ...q, voice: 'vaneenwyk' })) } },
   };
   return { data: { version: 1, sections, number }, errors, warnings };

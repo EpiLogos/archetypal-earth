@@ -130,7 +130,7 @@ describe('field.json contract', () => {
   });
 
   it('attached images point at real files', () => {
-    const imgs = [...field.archetypes, ...field.families, ...field.occurrences].filter((x) => x.image);
+    const imgs = [...field.archetypes, ...field.theoretics, ...field.families, ...field.occurrences].filter((x) => x.image);
     for (const x of imgs) {
       for (const p of [x.image!.src, x.image!.thumb]) expect(fs.existsSync(path.join(ROOT, 'public', p)), `${x.id}: ${p}`).toBe(true);
       if (x.image!.license === 'Attribution') {

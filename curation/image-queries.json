@@ -95,6 +95,55 @@
     "Isis Osiris relief"
    ],
    "pin": "File:Standing Ardhanari c.1800.jpg"
+  },
+  "one": {
+   "queries": [
+    "Robert Fludd Utriusque Cosmi Tract1",
+    "Fludd cosmic monad continuum"
+   ],
+   "pin": "File:Robert Fludd Utriusque Cosmi Tract1 Lib1 p26.jpg",
+   "title": "The monad — Fludd's unit and continuum"
+  },
+  "two": {
+   "queries": [
+    "Yin yang pond taijitu",
+    "sun and moon opposite alchemy"
+   ],
+   "pin": "File:Yin-yang-pond.jpg",
+   "title": "The dyad — yin and yang"
+  },
+  "three": {
+   "queries": [
+    "Petrus Pictaviensis Scutum Fidei",
+    "Shield of the Trinity Cotton Faustina"
+   ],
+   "pin": "File:PetrusPictaviensis CottonFaustinaBVII-folio42v ScutumFidei early13thc.jpg",
+   "title": "The triad — Scutum Fidei"
+  },
+  "four": {
+   "queries": [
+    "Raphael School of Athens Pythagoras tablet",
+    "Sanzio Pythagoras tetraktys"
+   ],
+   "pin": "File:Sanzio 01 Pythagoras.jpg",
+   "title": "The quaternity — Pythagoras with the tetraktys"
+  },
+  "five": {
+   "queries": [
+    "Durer Melencolia I",
+    "Albrecht Durer Melencolia"
+   ],
+   "pin": "File:Albrecht Dürer - Melencolia I - Google Art Project.jpg",
+   "title": "Five — Dürer's Melencolia (magic square, quinta)"
+  },
+  "six": {
+   "queries": [
+    "Michael Maier Atalanta Fugiens Emblem",
+    "hexagram Seal of Solomon alchemy engraving",
+    "Star of David manuscript illumination"
+   ],
+   "pin": "File:Michael Maier Atalanta Fugiens Emblem 14.jpeg",
+   "title": "Six — hexagram of the work"
   }
  },
  "families": {
@@ -4063,6 +4112,728 @@
   },
   "mother-goddesses-india": {
    "pin": "File:The Seven Mother Goddesses (Matrikas) Flanked by Shiva-Virabhadra and Ganesha, Lord of Obstacles LACMA M.80.157 (4 of 4).jpg"
+  },
+  "akkadian-relief-mother-with-child": {
+   "queries": [
+    "Akkadian mother goddess relief child Mesopotamia",
+    "mother and child Akkadian relief Louvre"
+   ],
+   "require": [
+    [
+     "akkadian",
+     "mesopotamia",
+     "sumer",
+     "babylon"
+    ],
+    [
+     "mother",
+     "child",
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "aphrodite-with-pomegranate-cyprus": {
+   "queries": [
+    "Aphrodite pomegranate Cyprus terracotta",
+    "Aphrodite of Cyprus holding pomegranate"
+   ],
+   "require": [
+    [
+     "aphrodite",
+     "venus"
+    ],
+    [
+     "pomegranate",
+     "cyprus"
+    ]
+   ],
+   "relaxed": true
+  },
+  "astarte-gold-plaque-syria": {
+   "queries": [
+    "Astarte gold plaque Syria",
+    "Ashtart gold plaque Near East"
+   ],
+   "require": [
+    [
+     "astarte",
+     "ashtart",
+     "ishtar"
+    ],
+    [
+     "gold",
+     "plaque"
+    ]
+   ],
+   "relaxed": true,
+   "pin": "File:Penn Museum Beth Shemesh 1.jpg",
+   "title": "Astarte plaque — Beth Shemesh (Penn Museum)"
+  },
+  "baubo-figure-priene": {
+   "queries": [
+    "Baubo Priene terracotta",
+    "Baubo figure Priene museum"
+   ],
+   "require": [
+    [
+     "baubo"
+    ],
+    [
+     "priene"
+    ]
+   ],
+   "relaxed": true,
+   "pin": "File:Terracotta Baubo figurine.jpg",
+   "title": "Baubo — terracotta figurine (Priene type)",
+   "minLongest": 300,
+   "minShort": 180
+  },
+  "belon-turkish-opium": {
+   "queries": [
+    "Belon Turkish opium woodcut",
+    "Pierre Belon opium poppy Turkey"
+   ],
+   "require": [
+    [
+     "belon",
+     "opium",
+     "papaver"
+    ]
+   ],
+   "relaxed": true
+  },
+  "birth-of-the-goddess-rome-relief": {
+   "queries": [
+    "Birth of the Goddess Rome marble relief",
+    "birth of Aphrodite Rome relief"
+   ],
+   "require": [
+    [
+     "birth",
+     "goddess",
+     "aphrodite",
+     "venus"
+    ],
+    [
+     "rome",
+     "relief"
+    ]
+   ],
+   "relaxed": true
+  },
+  "bronze-mirror-hormone-goddess": {
+   "queries": [
+    "Etruscan bronze mirror goddess",
+    "bronze mirror goddess engraved Etruscan"
+   ],
+   "require": [
+    [
+     "mirror"
+    ],
+    [
+     "bronze",
+     "etruscan",
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "burial-jar-asia-minor": {
+   "queries": [
+    "burial jar Asia Minor goddess",
+    "funerary jar Anatolia terracotta goddess"
+   ],
+   "require": [
+    [
+     "jar",
+     "urn"
+    ],
+    [
+     "burial",
+     "funerary",
+     "anatolia",
+     "asia"
+    ]
+   ],
+   "relaxed": true
+  },
+  "cabirian-group-thebes-vessel": {
+   "queries": [
+    "Cabiri Thebes vessel",
+    "Cabeiri Samothrace terracotta group"
+   ],
+   "require": [
+    [
+     "cabir",
+     "cabeir",
+     "kabir"
+    ]
+   ],
+   "relaxed": true
+  },
+  "christ-asleep-on-a-sheep": {
+   "queries": [
+    "Christ asleep sheep Good Shepherd",
+    "Christ resting on sheep sarcophagus"
+   ],
+   "require": [
+    [
+     "christ",
+     "jesus",
+     "shepherd"
+    ],
+    [
+     "sheep",
+     "lamb"
+    ]
+   ],
+   "relaxed": true
+  },
+  "cone-mesopotamia-goddesses": {
+   "queries": [
+    "Mesopotamian goddess cone terracotta",
+    "votive cone goddess Mesopotamia"
+   ],
+   "require": [
+    [
+     "cone",
+     "goddess"
+    ],
+    [
+     "mesopotamia",
+     "sumer",
+     "babylon"
+    ]
+   ],
+   "relaxed": true
+  },
+  "cow-with-emerging-calves-cylinder-seal": {
+   "queries": [
+    "cylinder seal cow calves Mesopotamia",
+    "cow emerging calves seal Near East"
+   ],
+   "require": [
+    [
+     "cow",
+     "cattle"
+    ],
+    [
+     "seal",
+     "calf",
+     "calves"
+    ]
+   ],
+   "relaxed": true
+  },
+  "demeter-and-kore-pharsalus-stele": {
+   "queries": [
+    "Demeter Kore Pharsalus stele",
+    "Demeter and Persephone Pharsalos relief"
+   ],
+   "require": [
+    [
+     "demeter"
+    ],
+    [
+     "kore",
+     "persephone",
+     "pharsal"
+    ]
+   ],
+   "relaxed": true
+  },
+  "earth-monte-cassino-manuscript": {
+   "queries": [
+    "Monte Cassino manuscript Earth goddess",
+    "Hortus Deliciarum earth"
+   ],
+   "require": [
+    [
+     "earth",
+     "terra"
+    ],
+    [
+     "manuscript",
+     "cassino",
+     "hortus"
+    ]
+   ],
+   "relaxed": true
+  },
+  "etruscan-vase-goddess-detail": {
+   "queries": [
+    "Etruscan vase goddess detail",
+    "Etruscan pottery goddess winged"
+   ],
+   "require": [
+    [
+     "etruscan"
+    ],
+    [
+     "goddess",
+     "vase",
+     "pottery"
+    ]
+   ],
+   "relaxed": true
+  },
+  "female-figurines-aegean-stone": {
+   "queries": [
+    "Cycladic female figurine marble",
+    "Aegean stone female figurine"
+   ],
+   "require": [
+    [
+     "cycladic",
+     "aegean",
+     "figurine"
+    ],
+    [
+     "female",
+     "woman",
+     "marble",
+     "stone"
+    ]
+   ],
+   "relaxed": true
+  },
+  "fertility-goddess-ivory-box-ras-shamra": {
+   "queries": [
+    "Ras Shamra ivory box goddess",
+    "Ugarit ivory fertility goddess"
+   ],
+   "require": [
+    [
+     "ras shamra",
+     "ugarit",
+     "ivory"
+    ],
+    [
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "fig-66-resurrection-of-kore-attic": {
+   "queries": [
+    "Resurrection of Kore Attic vase",
+    "Persephone rising Attic red-figure"
+   ],
+   "require": [
+    [
+     "kore",
+     "persephone"
+    ],
+    [
+     "attic",
+     "resurrection",
+     "anodos"
+    ]
+   ],
+   "relaxed": true
+  },
+  "fragments-goddess-beltis-susa": {
+   "queries": [
+    "Beltis Susa goddess fragments",
+    "Ninhursag Susa statue Louvre"
+   ],
+   "require": [
+    [
+     "susa",
+     "beltis",
+     "ninhursag"
+    ],
+    [
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "funerary-figure-tell-halaf": {
+   "queries": [
+    "Tell Halaf funerary figure",
+    "Tell Halaf statue goddess Berlin"
+   ],
+   "require": [
+    [
+     "halaf"
+    ],
+    [
+     "funerary",
+     "statue",
+     "figure"
+    ]
+   ],
+   "relaxed": true
+  },
+  "goddess-soul-birds-on-lion-sumer": {
+   "queries": [
+    "Sumerian goddess birds lion",
+    "Inanna lion birds seal"
+   ],
+   "require": [
+    [
+     "sumer",
+     "inanna",
+     "ishtar"
+    ],
+    [
+     "lion",
+     "bird"
+    ]
+   ],
+   "relaxed": true
+  },
+  "goddesses-clay-cyprus": {
+   "queries": [
+    "Cyprus clay goddess figurines",
+    "Cypriot terracotta goddesses"
+   ],
+   "require": [
+    [
+     "cyprus",
+     "cypriot"
+    ],
+    [
+     "goddess",
+     "terracotta",
+     "clay"
+    ]
+   ],
+   "relaxed": true
+  },
+  "gorgon-flanked-by-lions-perugia": {
+   "queries": [
+    "Gorgon lions Perugia pediment",
+    "Medusa flanked lions Etruscan"
+   ],
+   "require": [
+    [
+     "gorgon",
+     "medusa"
+    ],
+    [
+     "lion"
+    ]
+   ],
+   "relaxed": true
+  },
+  "great-mother ↔ cow": {
+   "queries": [
+    "Hathor cow goddess Egypt",
+    "Great Mother cow goddess Egyptian"
+   ],
+   "require": [
+    [
+     "cow",
+     "hathor"
+    ],
+    [
+     "goddess",
+     "mother"
+    ]
+   ],
+   "relaxed": true
+  },
+  "great-mother-signet-rings": {
+   "queries": [
+    "Minoan goddess signet ring",
+    "Great Mother seal ring Crete"
+   ],
+   "require": [
+    [
+     "ring",
+     "seal",
+     "signet"
+    ],
+    [
+     "goddess",
+     "minoan",
+     "mother"
+    ]
+   ],
+   "relaxed": true
+  },
+  "hercules-night-sea-journey": {
+   "queries": [
+    "Hercules night sea journey cup",
+    "Herakles sun bowl ocean"
+   ],
+   "require": [
+    [
+     "hercul",
+     "herakl"
+    ],
+    [
+     "sea",
+     "ocean",
+     "cup",
+     "bowl"
+    ]
+   ],
+   "relaxed": true
+  },
+  "isis-hathor-suckling-horus": {
+   "queries": [
+    "Isis Hathor suckling Horus bronze",
+    "Isis nursing Horus statue"
+   ],
+   "require": [
+    [
+     "isis",
+     "hathor"
+    ],
+    [
+     "horus",
+     "suckling",
+     "nursing"
+    ]
+   ],
+   "relaxed": true
+  },
+  "lady-of-the-beasts-boeotian-amphora": {
+   "queries": [
+    "Lady of the Beasts Boeotian amphora",
+    "Potnia Theron Boeotia amphora"
+   ],
+   "require": [
+    [
+     "boeot",
+     "potnia",
+     "beasts"
+    ],
+    [
+     "amphora",
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "lady-of-the-beasts-bronze-hydria": {
+   "queries": [
+    "Lady of the Beasts bronze hydria",
+    "Potnia Theron bronze hydria"
+   ],
+   "require": [
+    [
+     "hydria",
+     "beasts",
+     "potnia"
+    ],
+    [
+     "bronze"
+    ]
+   ],
+   "relaxed": true
+  },
+  "lamp-with-gorgon-head-etruscan": {
+   "queries": [
+    "Etruscan lamp Gorgon head",
+    "Gorgoneion oil lamp Etruscan"
+   ],
+   "require": [
+    [
+     "gorgon",
+     "gorgoneion"
+    ],
+    [
+     "lamp",
+     "etruscan"
+    ]
+   ],
+   "relaxed": true
+  },
+  "libation-vessel-branches-seated-goddess-sumer": {
+   "queries": [
+    "Sumerian libation seated goddess",
+    "libation vessel goddess branches Sumer"
+   ],
+   "require": [
+    [
+     "libation",
+     "goddess"
+    ],
+    [
+     "sumer",
+     "mesopotamia"
+    ]
+   ],
+   "relaxed": true
+  },
+  "madonna-of-the-sheaves": {
+   "queries": [
+    "Madonna of the Sheaves",
+    "Virgin Mary wheat sheaves painting"
+   ],
+   "require": [
+    [
+     "madonna",
+     "virgin",
+     "mary"
+    ],
+    [
+     "sheaf",
+     "sheaves",
+     "wheat"
+    ]
+   ],
+   "relaxed": true
+  },
+  "nut-tree-goddess-sun-disk-bronze": {
+   "queries": [
+    "Nut goddess sun disk bronze",
+    "Egyptian Nut sky goddess bronze"
+   ],
+   "require": [
+    [
+     "nut"
+    ],
+    [
+     "sun",
+     "disk",
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "philosophia-sophia-hortus-deliciarum": {
+   "queries": [
+    "Philosophia Hortus Deliciarum",
+    "Philosophy Hortus Deliciarum Herrad"
+   ],
+   "require": [
+    [
+     "philosoph",
+     "sophia"
+    ],
+    [
+     "hortus",
+     "deliciarum"
+    ]
+   ],
+   "relaxed": true
+  },
+  "philosophia-twelfth-century": {
+   "queries": [
+    "Philosophy personification twelfth century manuscript",
+    "Philosophia medieval manuscript"
+   ],
+   "require": [
+    [
+     "philosoph"
+    ],
+    [
+     "manuscript",
+     "medieval",
+     "century"
+    ]
+   ],
+   "relaxed": true
+  },
+  "philosophia-world-disk-flemish": {
+   "queries": [
+    "Philosophy world disk Flemish",
+    "Philosophia holding world Flemish"
+   ],
+   "require": [
+    [
+     "philosoph"
+    ],
+    [
+     "world",
+     "disk",
+     "globe",
+     "flemish"
+    ]
+   ],
+   "relaxed": true
+  },
+  "reclining-nude-goddess-megara": {
+   "queries": [
+    "reclining goddess Megara terracotta",
+    "nude goddess Megara figurine"
+   ],
+   "require": [
+    [
+     "megara",
+     "reclining"
+    ],
+    [
+     "goddess"
+    ]
+   ],
+   "relaxed": true
+  },
+  "stone-of-pessinus": {
+   "queries": [
+    "Stone of Pessinus Cybele",
+    "black stone Pessinus Magna Mater"
+   ],
+   "require": [
+    [
+     "pessinus",
+     "cybele",
+     "kybele"
+    ],
+    [
+     "stone"
+    ]
+   ],
+   "relaxed": true
+  },
+  "sun-phallus": {
+   "queries": [
+    "solar phallus Mithras",
+    "sun phallus antiquity relief"
+   ],
+   "require": [
+    [
+     "phallus",
+     "phallos"
+    ],
+    [
+     "sun",
+     "solar",
+     "mithra"
+    ]
+   ],
+   "relaxed": true
+  },
+  "symbol-of-great-mother-with-animals-sumer": {
+   "queries": [
+    "Sumerian mother goddess animals seal",
+    "Inanna animals cylinder seal"
+   ],
+   "require": [
+    [
+     "sumer",
+     "inanna",
+     "mother"
+    ],
+    [
+     "animal",
+     "seal"
+    ]
+   ],
+   "relaxed": true
+  },
+  "theseus-athene-amphitrite-bowl": {
+   "queries": [
+    "Theseus Athena Amphitrite bowl",
+    "Theseus amphitrite cup Euphronios"
+   ],
+   "require": [
+    [
+     "theseus"
+    ],
+    [
+     "amphitrite",
+     "athena",
+     "athene"
+    ]
+   ],
+   "relaxed": true
   }
  },
  "occurrences": {
@@ -4207,13 +4978,18 @@
   },
   "risen-christ-filius-philosophorum-rosarium-1550": {
    "queries": [
-    "Rosarium philosophorum Christ"
+    "Rosarium Philosophorum resurrection",
+    "Christ Rosarium philosophorum woodcut 1550"
    ],
    "require": [
     [
-     "rosarium"
+     "rosarium",
+     "christ",
+     "resurrection",
+     "filius"
     ]
-   ]
+   ],
+   "relaxed": true
   },
   "moon-luna-adoption-mutus-liber-1702": {
    "queries": [
@@ -4312,41 +5088,33 @@
    "queries": [
     "Lambspringk"
    ],
-   "require": [
-    [
-     "lambspringk"
-    ]
-   ]
+   "pin": "File:Musaeum Hermeticum 1678 p 353 Dragon 0049.JPG",
+   "title": "Lambspring — the dragon in the fire (Musaeum Hermeticum)",
+   "relaxed": true
   },
   "lambspringk-two-reversed-fishes-1678": {
    "queries": [
     "Lambspringk"
    ],
-   "require": [
-    [
-     "lambspringk"
-    ]
-   ]
+   "pin": "File:Musaeum Hermeticum Reformatum et Amplificatum - DPLA - 6a5bd595dea1c42bfc14727d15939422 (page 26).jpg",
+   "title": "Lambspring — two fishes (Musaeum Hermeticum)",
+   "relaxed": true
   },
   "stag-unicorn-soul-spirit-lambspringk-1625": {
    "queries": [
     "Lambspringk unicorn"
    ],
-   "require": [
-    [
-     "lambspringk"
-    ]
-   ]
+   "pin": "File:Licorne et cerf.JPG",
+   "title": "Lambspring — stag and unicorn",
+   "relaxed": true
   },
   "filius-regis-mystagogue-lambspringk-musaeum-1678": {
    "queries": [
     "Lambspringk king"
    ],
-   "require": [
-    [
-     "lambspringk"
-    ]
-   ]
+   "pin": "File:Musaeum Hermeticum Reformatum et Amplificatum - DPLA - 6a5bd595dea1c42bfc14727d15939422 (page 49).jpg",
+   "title": "Lambspring — the king and the mystagogue",
+   "relaxed": true
   },
   "michelspacher-mountain-of-adepts-1654": {
    "queries": [
@@ -4362,16 +5130,15 @@
   },
   "pelican-vessel-rhenanus-frankfurt-1613": {
    "queries": [
-    "Rhenanus Solis e puteo emanantis",
-    "pelican alchemical vessel engraving"
+    "alchemical pelican vessel",
+    "pelican in her piety alchemy"
    ],
    "require": [
     [
-     "pelican",
-     "pelikan",
-     "rhenan"
+     "pelican"
     ]
-   ]
+   ],
+   "relaxed": true
   },
   "rebis-book-of-holy-trinity-munich-1420": {
    "queries": [
@@ -4401,27 +5168,31 @@
   },
   "homunculi-souls-codex-rhenoviensis-15c": {
    "queries": [
-    "Codex Rhenoviensis Aurora consurgens",
-    "Aurora consurgens Zurich Rhenoviensis"
+    "Codex Rhenoviensis alchemy",
+    "Ripley Scrowle souls"
    ],
    "require": [
     [
      "rhenoviensis",
-     "aurora consurgens"
+     "ripley",
+     "alchemy"
     ]
-   ]
+   ],
+   "relaxed": true
   },
   "peacock-phoenix-codex-rhenoviensis-zurich-15c": {
    "queries": [
-    "Aurora consurgens Zurich Codex Rhenoviensis",
-    "Aurora consurgens Zentralbibliothek Rhenoviensis"
+    "peacock alchemy cauda pavonis",
+    "phoenix alchemy manuscript"
    ],
    "require": [
     [
-     "rhenoviensis",
-     "aurora consurgens"
+     "peacock",
+     "phoenix",
+     "pavonis"
     ]
-   ]
+   ],
+   "relaxed": true
   },
   "senex-senior-tabula-chymica-wise-old-man-10c": {
    "queries": [
@@ -4528,16 +5299,11 @@
   },
   "joachim-trinity-diagram-zurich-ms": {
    "queries": [
-    "Joachim of Fiore Trinity Liber figurarum",
-    "Joachim of Fiore figura trinity"
+    "Joachim of Fiore Liber Figurarum",
+    "Joachim Flora seven-headed dragon"
    ],
-   "require": [
-    [
-     "joachim",
-     "fiore",
-     "flora"
-    ]
-   ]
+   "pin": "File:Pagina Liber Figurarum, Drago dalle sette teste.jpg",
+   "title": "Joachim — Liber Figurarum"
   },
   "night-sea-journey-biblia-pauperum-1471": {
    "queries": [
@@ -5171,14 +5937,10 @@
   },
   "merkabah-quadriga-aminadab-saint-denis-1144": {
    "queries": [
-    "Saint-Denis Suger stained glass Aminadab",
-    "Abbey of Saint-Denis Suger window quadriga"
+    "Saint-Denis Suger Jesse tree window"
    ],
-   "require": [
-    [
-     "denis"
-    ]
-   ]
+   "pin": "File:Basilique Saint-Denis - Verrière de l'Arbre de Jessé - Suger.JPG",
+   "title": "Merkabah — Suger's Saint-Denis glass"
   },
   "mill-of-the-host-tribsees-15c": {
    "queries": [
@@ -5624,6 +6386,213 @@
    "queries": [
     "pin"
    ]
+  },
+  "quaternity-tetraktys-pythagoras-croton-500bce": {
+   "queries": [
+    "Pythagoras tablet of ratios"
+   ],
+   "pin": "File:Pythagoras with tablet of ratios.jpg",
+   "title": "The tetraktys — Pythagoras with the tablet of ratios"
+  },
+  "axiom-maria-one-becomes-four": {
+   "queries": [
+    "Mary the Jewess Michael Maier",
+    "Maria Prophetissa alchemy"
+   ],
+   "pin": "File:Mary the jewess by Michael Maier.jpg",
+   "relaxed": true,
+   "title": "Axiom of Maria — Mary the Jewess"
+  },
+  "quaternity-denarius-unity-dorn-16c": {
+   "queries": [
+    "Theatrum Chemicum title page"
+   ],
+   "pin": "File:Theatrum Chemicum Vol V page 1.jpg",
+   "title": "Dorn — the denarius of unity (Theatrum Chemicum)"
+  },
+  "quaternity-sommerfeld-h-atom-splitting-dream-1948": {
+   "queries": [
+    "Ehrenfest Bohr Lorentz Kamerlingh Onnes"
+   ],
+   "pin": "File:Ehrenfest Lorentz Bohr Kamerlingh Onnes.jpg",
+   "title": "Sommerfeld — the quantum atom's circle (Bohr with Ehrenfest)"
+  },
+  "quaternity-pauli-four-children-dream-zollikon-1949": {
+   "queries": [
+    "I Ching hexagram manuscript Chinese",
+    "Zhouyi hexagram silk",
+    "Book of Changes hexagram chart"
+   ],
+   "pin": "File:I Ching Song Dynasty print.jpg",
+   "title": "Pauli's four children — the I Ching book"
+  },
+  "dream-quaternity-fourth-chair-laurel-1930c": {
+   "queries": [
+    "laurel wreath Forum Romanum"
+   ],
+   "pin": "File:Laurel wreath cornice Forum Romanum Rome Italy.jpg",
+   "title": "The fourth chair — laurel fetched from further off"
+  },
+  "serpent-miss-x-picture-13-three-plus-one-1929": {
+   "queries": [
+    "four snakes quaternity alchemy",
+    "serpent caduceus four",
+    "alchemical serpents woodcut"
+   ],
+   "pin": "File:Ouroboros 1.jpg",
+   "title": "Miss X Picture 13 — 3+1 of the serpents"
+  },
+  "quaternion-christ-ahriman-ormazd-square-vision-zurich-1938": {
+   "queries": [
+    "Ahura Mazda relief Persepolis",
+    "Ahriman Zoroaster manuscript",
+    "Christ Pantocrator square nimbus"
+   ],
+   "pin": "File:Ahura Mazda.jpg",
+   "title": "Christ–Ahriman–Ormazd — the square of opposites"
+  },
+  "vision-world-clock-cw12-1933": {
+   "queries": [
+    "Prague astronomical clock Orloj",
+    "astronomical clock medieval",
+    "horologe cathedral"
+   ],
+   "pin": "File:Prague Astronomical Clock.jpg",
+   "title": "World clock — the astronomical clock"
+  },
+  "maria-prophetissa-unum-vas-1c": {
+   "queries": [
+    "Geber alembic Summa Perfectionis"
+   ],
+   "pin": "File:Geberis Philosophi Perspicacissimi Summa Perfectionis Magisterii in sua Natura ex Bibliothecae Vaticanae Exemplari Undecunque - DPLA - f2c9fe156507ddee46507bec3786f928 (page 203).jpg",
+   "title": "Maria Prophetissa — unum vas (alchemical apparatus)"
+  },
+  "goddess-alabaster-mari-syria-plate-goddess-alabaster-mari-syria-c-2500-b-c-date-mari-syria-c-250": {
+   "queries": [
+    "Goddess of the vase Mari"
+   ],
+   "pin": "File:Goddess of the vase, Mari,18th century BCE.jpg",
+   "credit": "Robsonc (photograph); Gary Todd (background)",
+   "title": "Goddess of the vase, Mari"
+  },
+  "aion-leontocephalus-zrvan-akarana-mithraeum": {
+   "pin": "File:Mithraic relief of Chronos-Aion (Vienne, Mus St-Pierre R 2001-5-131).jpg",
+   "title": "Aion / Chronos — lion-headed Mithraic relief (Vienne)",
+   "relaxed": true
+  }
+ },
+ "theoretics": {
+  "psychoid": {
+   "queries": [
+    "Newton Opticks prism refraction diagram"
+   ],
+   "pin": "File:Diagrams of optical phenomena, including the rainbow, the double Icelandic spar, and prism refraction LCCN92518614.jpg",
+   "title": "The psychoid — spectrum beyond the visible"
+  },
+  "archetype-as-such": {
+   "queries": [
+    "Fludd monochord Harmonik"
+   ],
+   "pin": "File:Fotothek df tg 0006258 Musik ^ Harmonik ^ Monochord ^ Einsaiter.jpg",
+   "title": "The archetype as such — the monochord (invisible order)"
+  },
+  "collective-unconscious": {
+   "queries": [
+    "Oceanus mosaic Bardo",
+    "primordial ocean Nun egypt",
+    "world tree Yggdrasil manuscript"
+   ],
+   "pin": "File:Tunisia-4770 - Oceanus (7864436464).jpg",
+   "title": "Collective unconscious — Oceanus, the shared sea"
+  },
+  "compensation": {
+   "queries": [
+    "Justitia Heemskerck scales"
+   ],
+   "pin": "File:Gerechtigheid (Justitia) wordt door de wereld verworpen Hoe de wereld zich niet beteugelen laat (serietitel), RP-P-BI-6585.jpg",
+   "title": "Compensation — Justitia's scales"
+  },
+  "complex": {
+   "queries": [
+    "Bayer Uranometria constellation plate",
+    "star atlas antique constellation"
+   ],
+   "pin": "File:Chart North and South Pole Star Map 01.jpg",
+   "title": "Complex — a constellation of feeling"
+  },
+  "individuation": {
+   "queries": [
+    "Atalanta Fugiens Emblem 34"
+   ],
+   "pin": "File:Michael Maier Atalanta Fugiens Emblem 34.jpeg",
+   "title": "Individuation — the alchemical opus"
+  },
+  "libido": {
+   "queries": [
+    "Head Helios Rhodes museum"
+   ],
+   "pin": "File:Head Helios AM Rhodes E49.jpg",
+   "title": "Libido — Helios, psychic energy as the sun"
+  },
+  "mana": {
+   "queries": [
+    "touching for the king's evil",
+    "royal touch scrofula engraving",
+    "Charles II touching evil"
+   ],
+   "pin": "File:Laying on of hands.jpg",
+   "title": "Mana — the transmission of power"
+  },
+  "numinosum": {
+   "queries": [
+    "Rembrandt Moses Ten Commandments"
+   ],
+   "pin": "File:Rembrandt - Moses with the Ten Commandments - Google Art Project.jpg",
+   "title": "Numinosum — Moses before the divine law"
+  },
+  "participation-mystique": {
+   "queries": [
+    "Lévy-Bruhl participation",
+    "totem animal ritual painting",
+    "shaman identification animal"
+   ],
+   "pin": "File:Aboriginal Art Australia(1).jpg",
+   "relaxed": true,
+   "title": "Participation mystique — shared identity with the image"
+  },
+  "persona": {
+   "queries": [
+    "Thalia comedy mask Louvre sarcophagus"
+   ],
+   "pin": "File:Thalia sarcophagus Louvre Ma475.jpg",
+   "title": "Persona — Thalia's comedy mask"
+  },
+  "synchronicity": {
+   "queries": [
+    "Egyptian heart scarab Walters"
+   ],
+   "pin": "File:Egyptian - Heart Scarab - Walters 4281 - Back.jpg",
+   "title": "Synchronicity — the scarab"
+  },
+  "transcendent-function": {
+   "queries": [
+    "medieval bridge illumination Saint Denis",
+    "pontifex bridge Rome",
+    "alchemical tertium woodcut"
+   ],
+   "pin": "File:Vie de Saint Denis - BNF Fr2092 37v.jpg",
+   "title": "Transcendent function — the bridge between"
+  },
+  "aion-time": {
+   "queries": [
+    "Mithraic Chronos Aion zodiac",
+    "lion headed Aion statue",
+    "Phanes zodiac relief"
+   ],
+   "pin": "File:Mithraic Kronos, zodiac signs.png",
+   "allowBad": true,
+   "relaxed": true,
+   "title": "Aion — time as the lion-headed god"
   }
  }
 }

@@ -669,6 +669,10 @@
    {
     "archetype": "self",
     "basis": "jung"
+   },
+   {
+    "archetype": "five",
+    "basis": "inferred"
    }
   ],
   "lingam-yoni": [
@@ -778,6 +782,10 @@
   "mandala": [
    {
     "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "four",
     "basis": "jung"
    }
   ],
@@ -975,6 +983,10 @@
    {
     "archetype": "self",
     "basis": "jung"
+   },
+   {
+    "archetype": "one",
+    "basis": "inferred"
    }
   ],
   "premonition": [
@@ -1000,6 +1012,10 @@
   "quaternity": [
    {
     "archetype": "self",
+    "basis": "jung"
+   },
+   {
+    "archetype": "four",
     "basis": "jung"
    }
   ],
@@ -1363,6 +1379,10 @@
    {
     "archetype": "self",
     "basis": "site"
+   },
+   {
+    "archetype": "three",
+    "basis": "jung"
    }
   ],
   "unicorn": [
@@ -1463,6 +1483,10 @@
    {
     "archetype": "self",
     "basis": "jung"
+   },
+   {
+    "archetype": "six",
+    "basis": "inferred"
    }
   ],
   "world-fire": [
@@ -1513,6 +1537,50 @@
    {
     "archetype": "hero",
     "basis": "jung"
+   }
+  ],
+  "monad": [
+   {
+    "archetype": "one",
+    "basis": "jung"
+   }
+  ],
+  "number": [
+   {
+    "archetype": "one",
+    "basis": "jung"
+   },
+   {
+    "archetype": "two",
+    "basis": "jung"
+   },
+   {
+    "archetype": "three",
+    "basis": "jung"
+   },
+   {
+    "archetype": "four",
+    "basis": "jung"
+   },
+   {
+    "archetype": "five",
+    "basis": "jung"
+   },
+   {
+    "archetype": "six",
+    "basis": "jung"
+   }
+  ],
+  "quincunx": [
+   {
+    "archetype": "five",
+    "basis": "jung"
+   }
+  ],
+  "diamond-body": [
+   {
+    "archetype": "six",
+    "basis": "inferred"
    }
   ]
  }

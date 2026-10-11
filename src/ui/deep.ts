@@ -1,7 +1,7 @@
 // DEEP: the optional reading layer — longer body text, the definition, all cites,
 // related forms. A wide translucent sheet; the globe stays visible behind it.
 import type { Model, Subject } from '../data/model';
-import { archetypesOfFamily, occurrenceImage, subjectOccurrences } from '../data/model';
+import { archetypesOfFamily, occurrenceImage, subjectName, subjectOccurrences } from '../data/model';
 import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
 import { sanitiseTitle } from './credit';
@@ -9,6 +9,36 @@ import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
 import { eraShort, jungLine, placeLine, shortWork } from './format';
+import { loadLensData, qlBlock, qlSource, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
+import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
+
+/** One theory node's page (public/data/theory-pages.json, built by scripts/theory-pages.mjs). */
+interface TheoryPage {
+  concept: string;
+  line: string;
+  sections: { id: string; title: string; line: string; quotes: LensQuote[] }[];
+  subjects: { type: Subject['type']; id: string }[];
+}
+/** The number archetypes' pages and the egg block (public/data/numbers.json, built by scripts/numbers.mjs). */
+interface NumberPage {
+  n: number;
+  position: string;
+  ql: QL;
+  gloss: QL;
+  line: string;
+  vonFranz: LensQuote[];
+  jung: LensQuote[];
+  sections: TheoryPage['sections'];
+  subjects: TheoryPage['subjects'];
+}
+interface NumbersData {
+  version: 1;
+  line: string;
+  egg: { stages: { labels: string[]; source: string }; dream: LensQuote; footnote: LensQuote[]; mandala: LensQuote[] };
+  pages: Record<string, NumberPage>;
+}
+/** The six number archetypes: NUMBER_ARCHETYPES (src/lenses/deep-fields) — the ids their pages answer to. */
+const WORD: Record<number, string> = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' };
 
 export interface DeepHandlers {
   onClose(): void;
@@ -90,6 +120,19 @@ export class DeepSheet {
         });
         a.append(row);
       }
+      // an archetype's ties to other archetypes (the numbers' tie to the Self): named, with whose word the tie is
+      const tied = (arch.archetypes ?? []).map((t) => ({ t, arch: m.archById.get(t.id) })).filter((x) => !!x.arch);
+      if (tied.length) {
+        a.append(el('h3', { class: 'dp-sub', text: 'Tied to' }));
+        const row = el('p', { class: 'dp-flow' });
+        tied.forEach(({ t, arch: other }, i) => {
+          if (i) row.append(' · ');
+          row.append(el('button', { class: 'link-quiet', type: 'button', text: other!.name, onclick: () => this.h.onSubject({ type: 'archetype', id: other!.id }) }));
+          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }));
+        });
+        a.append(row);
+      }
+      if (NUMBER_ARCHETYPES.has(s.id)) this.appendNumberPage(s.id);
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else if (s.type === 'family') {
       const fam = m.famById.get(s.id);
@@ -119,6 +162,25 @@ export class DeepSheet {
       }
       this.appendOccurrenceList(subjectOccurrences(m, s));
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
+    } else if (s.type === 'theoretic') {
+      // a theory node's page: the node's own account, then its full page (quotations placed by the corpus),
+      // then the field's evidence for it
+      const t = m.theoById.get(s.id);
+      if (!t) return;
+      a.append(el('h2', { class: 'dp-title', text: t.name }));
+      if (t.oneLine) a.append(el('p', { class: 'dp-lede', text: t.oneLine }));
+      if (t.image) a.append(plate(t.image, { credit: true, className: 'dp-figure', palette: t.palette, eager: true }));
+      if (t.definition) a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: t.definition.text }), el('footer', { text: t.definition.cite })]));
+      t.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
+      const host = el('div', { class: 'dp-page' });
+      a.append(host);
+      loadLensData<{ version: 1; pages: Record<string, TheoryPage> }>('theory-pages').then((d) => {
+        const page = d.pages[s.id];
+        if (!page) { host.replaceChildren(el('p', { class: 'lp-note', text: 'The field has no page for this concept yet.' })); return; }
+        host.replaceChildren(...this.pageNodes(page));
+      }).catch(() => host.replaceChildren(el('p', { class: 'lp-note', text: 'The pages are not available in this build.' })));
+      this.appendOccurrenceList(subjectOccurrences(m, s));
+      this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else {
       const idx = subjectOccurrences(m, s);
       const name = s.type === 'culture' ? m.cultureById.get(s.id)?.name : m.places.get(s.id)?.name;
@@ -127,6 +189,90 @@ export class DeepSheet {
       this.appendCites(idx.map((i) => m.occ[i]));
     }
     this.appendFooter();
+  }
+
+  /** A theory node's page body: the reading line, each section with its quotations, and the subjects it reaches. */
+  private pageNodes(page: TheoryPage): HTMLElement[] {
+    const out: HTMLElement[] = [];
+    if (page.line) out.push(el('p', { class: 'th-line', text: page.line }));
+    for (const s of page.sections) {
+      out.push(el('h3', { class: 'as-h3', text: s.title }));
+      if (s.line) out.push(el('p', { class: 'th-line', text: s.line }));
+      for (const q of s.quotes) out.push(quoteBlock(q, this.h.passage));
+    }
+    if (page.subjects?.length) {
+      const row = el('div', { class: 'th-links' });
+      for (const l of page.subjects) {
+        const name = subjectName(this.model, l);
+        if (name === l.id) continue;
+        row.append(el('button', { type: 'button', class: 'th-link', onclick: () => this.h.onSubject(l) }, [el('span', { text: name })]));
+      }
+      if (row.childElementCount) out.push(row);
+    }
+    return out;
+  }
+
+  /** A number archetype's page (public/data/numbers.json): its position on the wheel, von Franz on it, Jung's own
+   * number material in sections, and the egg block — three witnesses to one image, each in its own voice. */
+  private appendNumberPage(id: string): void {
+    const host = el('div', { class: 'dp-page' });
+    this.article.append(host);
+    loadLensData<NumbersData>('numbers').then((d) => {
+      const p = d.pages[id];
+      if (!p) { host.replaceChildren(el('p', { class: 'lp-note', text: 'The field has no page for this number yet.' })); return; }
+      const out: HTMLElement[] = [
+        el('h3', { class: 'as-h3', text: `${p.n} ↔ ${p.position} · ${p.ql.name ?? ''}`.trim() }),
+        qlBlock(p.ql),
+        qlBlock(p.gloss),
+        el('p', { class: 'th-line', text: p.line }),
+      ];
+      if (p.jung.length) {
+        out.push(el('h3', { class: 'as-h3', text: 'Jung' }));
+        for (const q of p.jung) out.push(quoteBlock(q, this.h.passage));
+      }
+      if (p.vonFranz.length) {
+        out.push(el('h3', { class: 'as-h3', text: `Von Franz on ${WORD[p.n] ?? String(p.n)}` }));
+        for (const q of p.vonFranz) out.push(quoteBlock(q, this.h.passage));
+      }
+      out.push(...this.pageNodes({ concept: id, line: '', sections: p.sections, subjects: p.subjects }));
+      host.replaceChildren(...out, this.eggBlock(d));
+      void this.appendEggFigure(host, d);
+    }).catch(() => host.replaceChildren(el('p', { class: 'lp-note', text: 'The pages are not available in this build.' })));
+  }
+
+  /**
+   * The egg: one image, three witnesses, nothing asserted between them — Pauli's dream with the site's count for it
+   * (six stages, the 0/1 frame's start forgone so the shape is visible and never named), Jung's CW9ii ¶345 footnote
+   * (the four things in the egg, the punctum solis apart, the square rotated into a circle), and the pentadic mandala
+   * of CW9i ¶615, the egg encircled by the snake at the centre.
+   */
+  private eggBlock(d: NumbersData): HTMLElement {
+    const box = el('div', { class: 'dp-egg' });
+    box.append(el('h3', { class: 'as-h3', text: 'The egg' }));
+    if (d.egg.stages?.labels?.length) {
+      const row = el('div', { class: 'ql-stages', role: 'img', 'aria-label': `The count as six stages: ${d.egg.stages.labels.join('; ')}` },
+        d.egg.stages.labels.map((s) => el('span', { class: 'ql-stage', text: s })));
+      box.append(row, el('blockquote', { class: 'lq lq-ql lq-compact' }, [
+        el('footer', {}, [el('span', { class: 'lq-voice ql', text: 'QL' }), el('span', { class: 'lq-cite', text: qlSource(d.egg.stages.source) })]),
+      ]));
+    }
+    box.append(quoteBlock(d.egg.dream, this.h.passage));
+    for (const q of d.egg.footnote) box.append(quoteBlock(q, this.h.passage));
+    // the drawing stands beside the sentence that describes the motion (§4.1): the square's angular form rotated
+    // into a circle. Its host stands here; the figure is painted once the drawing module has loaded.
+    box.append(el('div', { class: 'dp-egg-figure' }));
+    for (const q of d.egg.mandala) box.append(quoteBlock(q, this.h.passage));
+    return box;
+  }
+
+  private async appendEggFigure(host: HTMLElement, _d: NumbersData): Promise<void> {
+    const figHost = host.querySelector('.dp-egg-figure');
+    if (!figHost) return;
+    const five = this.model.archById.get('five') ?? this.model.archById.get('four');
+    if (!five) return;
+    try {
+      figHost.append(await stillFigure('construction', five.palette));
+    } catch { /* the drawing is optional; the words stand without it */ }
   }
 
   private appendOccurrenceList(idx: number[]) {

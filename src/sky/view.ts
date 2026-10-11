@@ -89,18 +89,20 @@ export class SkyView {
     this.paintLive();
   }
 
+  /** One line for Options (Astrology) or the floating culture strip: held birth sky, or live status. */
+  statusLine(): { label: string; detail: string; state: string } | null {
+    if (this.held) return { label: 'Birth sky', detail: this.held, state: 'held' };
+    if (!this.lastLive || this.lastLive.kind === 'snapshot' || this.lastLive.kind === 'diverged') return null;
+    const d = describeLive(this.lastLive);
+    return { label: d.label, detail: d.detail, state: this.lastLive.kind };
+  }
+
   private paintLive() {
     clear(this.liveNote);
-    if (this.held) {
-      this.liveNote.dataset.state = 'held';
-      this.liveNote.append(el('strong', { text: 'Birth sky' }), ` · ${this.held}`);
-      return;
-    }
-    // a snapshot of the grids, and the diagram's radial scale, are not announced
-    if (!this.lastLive || this.lastLive.kind === 'snapshot' || this.lastLive.kind === 'diverged') return;
-    const d = describeLive(this.lastLive);
-    this.liveNote.dataset.state = this.lastLive.kind;
-    this.liveNote.append(el('strong', { text: d.label }), ` · ${d.detail}`);
+    const s = this.statusLine();
+    if (!s) return;
+    this.liveNote.dataset.state = s.state;
+    this.liveNote.append(el('strong', { text: s.label }), ` · ${s.detail}`);
   }
 
   /** Re-label after the standing culture changed. */

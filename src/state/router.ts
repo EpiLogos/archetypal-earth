@@ -2,9 +2,11 @@
 import type { Subject } from '../data/model';
 import { astrologyAt, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
+import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 
 export interface Resolver {
   hasArchetype(id: string): boolean;
+  hasTheoretic(id: string): boolean;
   hasFamily(id: string): boolean;
   hasCulture(id: string): boolean;
   hasPlace(id: string): boolean;
@@ -71,10 +73,10 @@ export function stateToHash(s: AppState): string {
     return `#/redbook${rb.genesis ? '/genesis' : rb.stop ? `/${enc(rb.stop)}` : ''}`;
   }
   if (s.dynamics) {
-    // the lens: #/dynamics (the Self), or #/dynamics/<a|f|c|p>/<id> for a subject, the focus route's own codes
+    // the lens: #/dynamics (the Self), or #/dynamics/<code>/<id> for a subject, the focus route's own codes
     // a stop of the route follows: #/dynamics[/<code>/<id>]/s/<stop>
     const sub = s.dynamics.subject;
-    return `#/dynamics${sub ? `/${{ archetype: 'a', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
+    return `#/dynamics${sub ? `/${{ archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
   }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
@@ -87,7 +89,7 @@ export function stateToHash(s: AppState): string {
     case 'world':
       return g ? '#/graph' : '#/';
     case 'focus': {
-      const k = { archetype: 'a', family: 'f', culture: 'c', place: 'p' }[v.subject.type];
+      const k = { archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p' }[v.subject.type];
       return `#${g}/${k}/${enc(v.subject.id)}${deep}`;
     }
     case 'manifest':
@@ -148,6 +150,7 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
     const [k, id] = at === 0 ? [] : rest;
     const subject: Subject | undefined = !id ? undefined
       : k === 'a' && r.hasArchetype(id) ? { type: 'archetype', id }
+      : k === 'th' && r.hasTheoretic(id) ? { type: 'theoretic', id }
       : k === 'f' && r.hasFamily(id) ? { type: 'family', id }
       : k === 'c' && r.hasCulture(id) ? { type: 'culture', id }
       : k === 'p' && r.hasPlace(id) ? { type: 'place', id }
@@ -174,7 +177,13 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
 
   switch (kind) {
     case 'a':
-      if (a && r.hasArchetype(a)) return withDeep(focusState({ type: 'archetype', id: a }));
+      // the number archetypes are focused onto their pages, as the theoretics are (their pages are the work)
+      if (a && r.hasArchetype(a)) return { state: { ...withDeep(focusState({ type: 'archetype', id: a })).state, ...(NUMBER_ARCHETYPES.has(a) ? { deep: true } : {}) } };
+      break;
+    case 'th':
+      // the theoretics: the theory's own nodes, focusable on the globe like any other subject. A node is focused
+      // onto its page, so the reading stands open with the focus (deep layer; docs/MODES-RFC.md §3)
+      if (a && r.hasTheoretic(a)) return { state: { ...withDeep(focusState({ type: 'theoretic', id: a })).state, deep: true } };
       break;
     case 'f':
       if (a && r.hasFamily(a)) return withDeep(focusState({ type: 'family', id: a }));

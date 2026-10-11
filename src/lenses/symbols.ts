@@ -87,6 +87,7 @@ export function mount(ctx: LensContext): LensInstance {
           openOccurrence: (oid) => ctx.openOccurrence(oid),
           focus: () => ctx.focus({ type: 'archetype', id }),
           walk: () => ctx.navigate(startThread(WORLD, { type: 'archetype', id })),
+          openSubject: (s) => ctx.focus(s),
         }, ctx.passages, ok),
       ];
       if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('The deep field', nodes, { height: 'full', wide: true });

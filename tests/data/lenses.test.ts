@@ -29,7 +29,7 @@ function quotes(node: unknown, out: Q[] = []): Q[] {
 
 describe('the lens data: provenance lives in the quotes', () => {
   const load = workLoader(DEFAULT_VAULT);
-  for (const file of ['theory.json', 'astrology.json', 'practice.json', 'depth.json', 'aionbook.json']) {
+  for (const file of ['theory.json', 'theory-pages.json', 'numbers.json', 'astrology.json', 'practice.json', 'depth.json', 'aionbook.json']) {
     it(`${file}: every quotation stands verbatim on its cited page of the read-only vault`, () => {
       const qs = quotes(read(file));
       expect(qs.length).toBeGreaterThan(10);

@@ -1,0 +1,61 @@
+{
+  "_note": "The numinosum: the term from Rudolf Otto (CW11 ¶6, ¶9), the effect it has (CW8 ¶216, CW18 ¶787), that it is never indifferent (CW8 ¶405), how it is met in a life (CW10 ¶871, ¶874, ¶864) and its place beside dogma (CW18 ¶1160). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "numinosum",
+  "line": "The seizing quality in religious experience: a dynamic agency that takes hold of the subject rather than being produced by will — Otto's word, kept exactly because it names the experience and not its cause.",
+  "sections": [
+    {
+      "id": "the-term",
+      "title": "The term",
+      "line": "Jung takes the word from Otto and quotes his definition almost whole: religion is the careful observation of what seizes the subject.",
+      "quotes": [
+        { "work": "cw11", "para": 6, "quote": "On the contrary, it seizes and controls the human subject, who is always rather its victim than its creator." },
+        { "work": "cw11", "para": 6, "quote": "The numinosum is either a quality belonging to a visible object or the influence of an invisible presence that causes a peculiar alteration of consciousness." },
+        { "work": "cw11", "para": 9, "quote": "the attitude peculiar to a consciousness which has been changed by experience of the numinosum" }
+      ]
+    },
+    {
+      "id": "its-effect",
+      "title": "What it does to a person",
+      "line": "The experience is described from inside: criticism fails, the will is paralysed, and the ego meets something greater than itself.",
+      "quotes": [
+        { "work": "cw08", "para": 216, "quote": "the numinosum, to use an apt expression of Rudolf Otto's" },
+        { "work": "cw18", "para": 787, "quote": "An integral component of any nocturnal, numinous experience is the dimming of consciousness, the feeling that one is in the grip of something greater than oneself, the impossibility of exercising criticism, and the paralysis of the will" }
+      ]
+    },
+    {
+      "id": "never-indifferent",
+      "title": "Never indifferent",
+      "line": "The presence of the numinous is always effective — healing or destroying — and it is precisely its indifference to our categories that Jung insists on.",
+      "quotes": [
+        { "work": "cw08", "para": 405, "quote": "the archetypes have, when they appear, a distinctly numinous character which can only be described as \"spiritual,\" if \"magical\" is too strong a word" }
+      ]
+    },
+    {
+      "id": "in-a-life",
+      "title": "In a life",
+      "line": "In the late writings the numinous is where a life actually meets its ground: whatever comes with this intensity is experienced as such, whatever name it is given.",
+      "quotes": [
+        { "work": "cw10", "para": 871, "quote": "Anything that comes upon me with this intensity I experience as numinous, no matter whether I call it divine or devilish or just “fate.”" },
+        { "work": "cw10", "para": 874, "quote": "Consciousness experiences this supraordinate totality as something numinous, as a tremendum or fascinosum" },
+        { "work": "cw10", "para": 864, "quote": "I am face to face with what Rudolf Otto calls the tremendum and fascinosum. I cannot \"conquer\" a numinosum, I can only open myself to it, let myself be overpowered by it, trusting in its meaning" }
+      ]
+    },
+    {
+      "id": "and-the-doctrine",
+      "title": "And the doctrines",
+      "line": "Dogma and theology stand downstream of the experience, not the reverse.",
+      "quotes": [
+        { "work": "cw18", "para": 1160, "quote": "As the archetypes have a “numinous” quality and underlie all religious and dogmatic ideas, depth psychology is also of importance for theology." }
+      ]
+    }
+  ],
+  "subjects": [
+    { "type": "archetype", "id": "self" },
+    { "type": "family", "id": "god-image" },
+    { "type": "family", "id": "mana" },
+    { "type": "theoretic", "id": "archetype-as-such" },
+    { "type": "theoretic", "id": "mana" },
+    { "type": "theoretic", "id": "psychoid" }
+  ]
+}

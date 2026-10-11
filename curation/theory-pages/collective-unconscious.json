@@ -1,0 +1,113 @@
+{
+  "_note": "The collective unconscious: the definitional passage of CW9i ¶2, the concept's birth (CW3 ¶550, CW6 ¶842), the formula's evolution from inherited ideas to inherited possibilities of ideas (CW10 ¶14, CW8 ¶99), the relation to instinct (CW8 ¶271, ¶280), and its late formulation as something inferred only from individual phenomenology (CW9ii ¶278). Quotations are placed by the corpus; nothing is typed.",
+  "version": 1,
+  "concept": "collective-unconscious",
+  "line": "The impersonal stratum beneath the personal one: not inherited ideas but the inherited possibility of forming them — identical in all individuals, and inferred only from what individuals live.",
+  "sections": [
+    {
+      "id": "the-deeper-layer",
+      "title": "The deeper layer",
+      "line": "The 1934 Eranos definition: a personal unconscious resting on a deeper, inborn, universal one.",
+      "quotes": [
+        {
+          "work": "cw09i",
+          "para": 2,
+          "quote": "A more or less superficial layer of the unconscious is undoubtedly personal. I call it the personal unconscious. But this personal unconscious rests upon a deeper layer, which does not derive from personal experience and is not a personal acquisition but is inborn. This deeper layer I call the collective unconscious. I have chosen the term \"collective\" because this part of the unconscious is not individual but universal.",
+          "page": 14
+        },
+        {
+          "work": "cw09i",
+          "para": 88,
+          "quote": "The collective unconscious is a part of the psyche which can be negatively distinguished from a personal unconscious by the fact that it does not, like the latter, owe its existence to personal experience",
+          "page": 53
+        }
+      ]
+    },
+    {
+      "id": "birth",
+      "title": "The concept's birth",
+      "line": "Before the name, the observation: a stratum of the unconscious that no personal history accounts for.",
+      "quotes": [
+        {
+          "work": "cw03",
+          "para": 550,
+          "quote": "We must rather suppose that they are something like universally existent constituents of the unconscious psyche, which form, as it were, a deeper stratum of a collective nature"
+        },
+        {
+          "work": "cw06",
+          "para": 842,
+          "quote": "there are other contents which do not originate in personal acquisitions but in the inherited possibility of psychic functioning in general, i.e., in the inherited structure of the brain."
+        }
+      ]
+    },
+    {
+      "id": "the-formula",
+      "title": "Inherited possibilities of ideas",
+      "line": "The formula settles: what is inherited is not ideas but the possibility of ideas — conditions for representation, not representations.",
+      "quotes": [
+        {
+          "work": "cw10",
+          "para": 14,
+          "quote": "There are, however, innate possibilities of ideas, a priori conditions for fantasy-production, which are somewhat similar to the Kantian categories"
+        },
+        {
+          "work": "cw08",
+          "para": 99,
+          "quote": "It is rather a question of inherited possibilities of ideas, “pathways” gradually traced out through the cumulative experience of our ancestors."
+        }
+      ]
+    },
+    {
+      "id": "instinct",
+      "title": "Instinct and its correlates",
+      "line": "The collective unconscious is not only images: it is the instincts and their correlates together.",
+      "quotes": [
+        {
+          "work": "cw09i",
+          "quote": "there exists a second psychic system of a collective, universal, and impersonal nature which is identical in all individuals",
+          "page": 54
+        },
+        {
+          "work": "cw08",
+          "para": 280,
+          "quote": "The collective unconscious consists of the sum of the instincts and their correlates, the archetypes. Just as everybody possesses instincts, so he also possesses a stock of archetypal images"
+        }
+      ]
+    },
+    {
+      "id": "phenomenology",
+      "title": "Inferred from phenomenology",
+      "line": "Its existence is never observed directly — only inferred from the forms individual experience takes.",
+      "quotes": [
+        {
+          "work": "cw09ii",
+          "para": 278,
+          "quote": "This disposition I have called the collective unconscious, the existence of which can be inferred only from individual phenomenology"
+        },
+        {
+          "work": "cw08",
+          "para": 729,
+          "quote": "a sort of timeless and eternal world-image which counterbalances our conscious, momentary picture of the world. It means nothing less than another world, a mirrorworld if you will"
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "type": "archetype",
+      "id": "self"
+    },
+    {
+      "type": "theoretic",
+      "id": "archetype-as-such"
+    },
+    {
+      "type": "theoretic",
+      "id": "complex"
+    },
+    {
+      "type": "theoretic",
+      "id": "participation-mystique"
+    }
+  ]
+}

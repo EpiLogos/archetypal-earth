@@ -1,0 +1,102 @@
+{
+  "_note": "The archetype as such: Jung's epistemological keystone. The model (CW9i ¶6), the name (CW8 ¶270-275), the instinct's side (CW8 ¶339, ¶277, CW16 ¶208), the empty form and its plurality (CW9i ¶155, ¶99), and the seminar's bluntest statement of it. Quotations are placed by the corpus (scripts/theory-pages.mjs); nothing is typed.",
+  "version": 1,
+  "concept": "archetype-as-such",
+  "line": "The keystone: an irrepresentable, purely formal model that never appears itself — only the images it pre-forms can be met, dated and compared.",
+  "sections": [
+    {
+      "id": "the-model",
+      "title": "The model",
+      "line": "The archetype in itself is hypothetical: a formal condition of image-making, never an image.",
+      "quotes": [
+        {
+          "work": "cw09i",
+          "para": 6,
+          "quote": "The archetype as such is a hypothetical and irrepresentable model"
+        },
+        {
+          "work": "cw09i",
+          "para": 155,
+          "quote": "The archetype in itself is empty and purely formal"
+        },
+        {
+          "work": "sem-dream-analysis",
+          "page": 551,
+          "quote": "Any archetype is really perfectly indescribable, something perfectly empty, but capable of assimilating a certain kind of material of tremendous variation."
+        }
+      ]
+    },
+    {
+      "id": "the-name",
+      "title": "The name",
+      "line": "The word enters Jung's vocabulary from Augustine's idea, and he never claims it as his own coinage.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 275,
+          "quote": "down to Malebranche and Bacon, still stands on a Platonic footing in this respect."
+        }
+      ]
+    },
+    {
+      "id": "the-instincts-side",
+      "title": "The instinct's side",
+      "line": "The same formal pole, seen from the body's end: the archetype is what the instinct looks like from inside.",
+      "quotes": [
+        {
+          "work": "cw08",
+          "para": 339,
+          "quote": "archetypes are simply the forms which the instincts assume"
+        },
+        {
+          "work": "cw08",
+          "para": 277,
+          "quote": "as the self-portrait of the instinct, in exactly the same way as consciousness is an inward perception of the objective"
+        },
+        {
+          "work": "cw16",
+          "para": 208,
+          "quote": "an instinct is always and inevitably coupled with something like a philosophy of life"
+        }
+      ]
+    },
+    {
+      "id": "as-many-as-situations",
+      "title": "As many as situations",
+      "line": "There is no fixed catalogue: the psyche forms as many archetypes as there are recurring situations to meet.",
+      "quotes": [
+        {
+          "work": "cw09i",
+          "para": 99,
+          "quote": "as many archetypes as there are typical situations"
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "type": "archetype",
+      "id": "self"
+    },
+    {
+      "type": "theoretic",
+      "id": "psychoid"
+    },
+    {
+      "type": "theoretic",
+      "id": "collective-unconscious"
+    },
+    {
+      "type": "theoretic",
+      "id": "complex"
+    },
+    {
+      "type": "theoretic",
+      "id": "numinosum"
+    },
+    {
+      "type": "theoretic",
+      "id": "transcendent-function"
+    }
+  ]
+}
