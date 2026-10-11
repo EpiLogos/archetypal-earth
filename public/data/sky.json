@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-08T20:48:20.196Z",
+    "generatedAt": "2026-10-11T00:59:39.850Z",
     "sidecar": {
       "name": "archetypal-earth-ephemeris",
       "version": "1.2.0",
@@ -810,7 +810,7 @@
             {
               "work": "cw13",
               "workTitle": "Alchemical Studies (CW13)",
-              "locator": "¶354 (pdf p339)",
+              "locator": "¶355 (pdf p339)",
               "quote": "the (astrological) temperaments, that is, to psychic factors"
             }
           ]
@@ -1410,7 +1410,7 @@
           "chapter": "PISCES: The Search for the Castle of Peace"
         },
         {
-          "text": "Also, these rulers of Pisces point toward deeper truths, eternal truths in the depths of the cosmic ocean.",
+          "text": "Also, these rulers of Pisces point toward deeper truths, eternal truths in the depths of the cosmic Ocean.",
           "page": 543,
           "bookPage": 521,
           "chapter": "PISCES: The Search for the Castle of Peace"
@@ -1796,7 +1796,7 @@
   "gazetteer": {
     "source": {
       "claim": "City-centre coordinates, rounded to 0.01° (about a kilometre), compiled by this site for the birth-sky place field. They place a city, not a house or a hospital; a chart for a precise place should use the sidecar's geocoder or exact coordinates.",
-      "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see docs/SKY-SOURCES.md",
+      "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see ProjectCentral/docs/SKY-SOURCES.md",
       "retrieved": "2026-10-08"
     },
     "places": [
