@@ -355,6 +355,7 @@ export class Controller {
       hasReading: (id: string) => !!this.history?.readings.some(r => r.id === id),
       hasHistorySelection: (id: string, kind: string, selection: string) => {
         const reading = this.history?.readings.find(r => r.id === id);
+        if (reading && kind === 'chapter') return !!this.history?.book?.chapters.some((c) => c.id === selection);
         return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
       },
       hasRedBookStop: (id: string) => this.redbookStops.has(id),
@@ -598,6 +599,11 @@ export class Controller {
     }
     if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleLens(); e.preventDefault(); return;
+    }
+    if (this.state.history?.selection?.kind === 'chapter' && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+      && this.aion?.walkBook(e.key === 'ArrowRight' ? 1 : -1)) {
+      e.preventDefault();
+      return;
     }
     if (this.state.redbook && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
       this.redbook?.walk(e.key === 'ArrowRight' ? 1 : -1);

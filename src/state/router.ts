@@ -154,7 +154,7 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
     const [, named, kind, id] = parts;
     const reading = named ?? r.defaultReading?.();
     if (!reading || !r.hasReading?.(reading)) return { state: WORLD };
-    const selection: NonNullable<AppState['history']>['selection'] = (kind === 'epoch' || kind === 'event' || kind === 'thread') && id && r.hasHistorySelection?.(reading, kind, id) ? { kind, id } : undefined;
+    const selection: NonNullable<AppState['history']>['selection'] = (kind === 'epoch' || kind === 'event' || kind === 'thread' || kind === 'chapter') && id && r.hasHistorySelection?.(reading, kind, id) ? { kind, id } : undefined;
     return { state: { view: { kind: 'world' }, deep: false, history: { reading, ...(selection ? { selection } : {}) } } };
   }
   const graph = parts[0] === 'graph';

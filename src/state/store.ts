@@ -39,7 +39,7 @@ export interface AppState {
   graph?: true;
   /** the sky: the same scene pulled back past the Moon to the whole system (a flag, as `graph` is, but it needs the world view) */
   sky?: SkyState;
-  history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread'; id: string } };
+  history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread' | 'chapter'; id: string } };
   /** the Red Book: Liber Novus as a folio walk (or the genesis table) over the world view */
   redbook?: { stop?: string; genesis?: true };
   /** The dynamical lens: the field read as a dynamical system over the world view. Absent subject = the Self. */

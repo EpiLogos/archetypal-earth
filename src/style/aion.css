@@ -68,7 +68,17 @@ body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 .aion-sc-table td { color: var(--ink-3); }
 .aion-sc-table tr.primary th, .aion-sc-table tr.primary td { color: var(--ink); }
 @media (max-width: 760px) {
-  .aion-ring { left: 12px; bottom: auto; top: 108px; width: 120px; }
+  .aion-ring { left: 12px; bottom: auto; top: 232px; width: 120px; }
+  /* under the mode's controls; a card open over the lower half leaves it no room */
+  .aion:has(.aion-card:not([hidden])) .aion-ring { display: none; }
   .aion-ring svg { width: 120px; height: 120px; }
   .aion-ring-read, .aion-ring select { display: none; }
 }
+/* Aion, the book: the chapter walk */
+.aion-book-toggle { margin-top: 14px; margin-right: 18px; font: 11.5px var(--sans); letter-spacing: .05em; }
+.aion-book-toggle[aria-pressed=true] { color: var(--core); }
+.aion-book > div { align-items: center; }
+.aion-book .rb-progress { min-width: 4.5em; text-align: center; color: var(--ink); letter-spacing: .08em; }
+.aion-book-events { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.aion-book-events button { text-align: left; }
+.aion-book-deep { margin-top: 16px; font: 11px/1.5 var(--sans); }

@@ -37,8 +37,25 @@ describe('a ¶ the scan lost', () => {
   });
   it('does not stand when the corpus contradicts it', () => {
     const r = locate(load, 'w', 'These structures not only express order, they also create it', { para: 875 });
-    expect(r.locator).toBe('¶869 (pdf p10)'); // the corpus marker is kept…
-    expect(r.warning).toMatch(/cites ¶875/); // …and the disagreement is reported
+    // the marker before it is ¶869 and the next is ¶871, so it stands in ¶869 or ¶870: not certain, cited by its page…
+    expect(r.locator).toBe('pdf p10');
+    expect(r.warning).toMatch(/cites ¶875; the corpus marker before the quotation is ¶869/); // …and the disagreement is reported
+  });
+});
+
+describe('the marker before a quotation names its ¶ only when nothing is missing after it', () => {
+  const load = fakeLoader([
+    { page: 20, text: '[¶40] A paragraph that holds the words we are looking for in this test.' },
+    { page: 21, text: '[¶41] The very next paragraph. [¶250] A stray number the scan read as a marker, before the words of another quotation here.' },
+    { page: 22, text: '[¶44] And the run resumes.' },
+  ]);
+  it('keeps the ¶ when the next marker is the next number', () => {
+    expect(locate(load, 'w', 'holds the words we are looking for').locator).toBe('¶40 (pdf p20)');
+  });
+  it('cites the page alone after a stray or a gap, and says why', () => {
+    const r = locate(load, 'w', 'before the words of another quotation here');
+    expect(r.locator).toBe('pdf p21');
+    expect(r.note).toMatch(/the marker before the quotation is ¶250 and the next is ¶44/);
   });
 });
 

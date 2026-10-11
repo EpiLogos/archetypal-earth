@@ -1,4 +1,4 @@
-import type { History, HistoryReading, Epoch, AeonEvent } from '../types/history';
+import type { AionBook, History, HistoryReading, Epoch, AeonEvent } from '../types/history';
 import type { ImageRef } from '../types/field';
 import { occurrenceImage, type Model } from '../data/model';
 
@@ -68,5 +68,13 @@ export async function loadHistory(): Promise<History> {
   if (!Array.isArray(history.readings) || !history.readings.length || history.readings.some(r =>
     !r.id || !Number.isFinite(r.from) || !Number.isFinite(r.to) || r.from >= r.to ||
     !Array.isArray(r.epochs) || !Array.isArray(r.events) || !Array.isArray(r.threads))) throw new Error('Aion history data is invalid.');
+  // the book's chapter walk rides with the readings; without it the mode is the readings alone
+  try {
+    const b = await fetch(`${base}/data/aionbook.json`);
+    if (b.ok && !b.headers.get('content-type')?.includes('text/html')) {
+      const book = await b.json() as AionBook;
+      if (Array.isArray(book.chapters) && book.chapters.length && book.chapters.every((c) => c.id && Array.isArray(c.quotes))) history.book = book;
+    }
+  } catch { /* absent */ }
   return history;
 }

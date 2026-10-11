@@ -166,7 +166,7 @@ export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
   }
   const locator = para !== null ? `¶${para} (pdf p${pg.page})` : `pdf p${pg.page}`;
   const out = { locator, page: pg.page, para, print: trustedPrint(corpus, pageIdx[0]), ...(scan ? { scan: true } : {}), ...(note ? { note } : {}) };
-  if (expect !== undefined && expect !== null && para !== expect) out.warning = `${work}: the vault note cites ¶${expect}; the corpus marker before the quotation is ${para === null ? 'none nearby' : `¶${para}`} (cited by its pdf page alone)`;
+  if (expect !== undefined && expect !== null && para !== expect) out.warning = `${work}: the vault note cites ¶${expect}; the corpus marker before the quotation is ${near ? `¶${near.n}` : 'none nearby'} (${para === null ? 'cited by its pdf page alone' : `cited as ¶${para}`})`;
   return out;
 }
 
