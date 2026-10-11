@@ -720,7 +720,22 @@
    ]
   },
   "mothers-of-faust": {
-   "skip": "the Mothers realm of Faust II: no passing scan; the only matches are opera-book pages, not the motif"
+   "skip": "the Mothers realm of Faust II: no passing scan; the only matches are opera-book pages, not the motif",
+   "queries": [
+    "Faust Mothers Goethe illustration",
+    "Faust Die Mutter Goethe"
+   ],
+   "require": [
+    [
+     "faust",
+     "goethe"
+    ],
+    [
+     "mother",
+     "mutter"
+    ]
+   ],
+   "relaxed": true
   },
   "mountain": {
    "queries": [
@@ -1720,7 +1735,19 @@
    ]
   },
   "last-man": {
-   "skip": "a seminar concept of decline; no depictable tradition beyond Zarathustra editions, which the zarathustra-figure plate carries"
+   "skip": "a seminar concept of decline; no depictable tradition beyond Zarathustra editions, which the zarathustra-figure plate carries",
+   "queries": [
+    "Nietzsche last man illustration",
+    "Zarathustra last man"
+   ],
+   "require": [
+    [
+     "nietzsche",
+     "zarathustra",
+     "last"
+    ]
+   ],
+   "relaxed": true
   },
   "leopard": {
    "queries": [
@@ -2187,7 +2214,19 @@
    "pin": "File:Blake jacobsladder.jpg"
   },
   "carcinoma": {
-   "skip": "no depictable tradition: an autonomous interior growth; Commons holds only clinical photography"
+   "skip": "no depictable tradition: an autonomous interior growth; Commons holds only clinical photography",
+   "queries": [
+    "cancer crab constellation manuscript",
+    "Cancer zodiac medieval"
+   ],
+   "require": [
+    [
+     "cancer",
+     "carcinoma",
+     "crab"
+    ]
+   ],
+   "relaxed": true
   },
   "castration": {
    "queries": [
@@ -4046,14 +4085,17 @@
   },
   "pleroma": {
    "queries": [
-    "pleroma gnostic diagram",
-    "Valentinian pleroma illustration"
+    "gnostic pleroma diagram",
+    "pleroma aeons diagram"
    ],
    "require": [
     [
-     "pleroma"
+     "pleroma",
+     "aeon",
+     "gnostic"
     ]
-   ]
+   ],
+   "relaxed": true
   },
   "salome": {
    "queries": [
@@ -4135,8 +4177,8 @@
   },
   "aphrodite-with-pomegranate-cyprus": {
    "queries": [
-    "Aphrodite pomegranate Cyprus terracotta",
-    "Aphrodite of Cyprus holding pomegranate"
+    "Aphrodite Cyprus terracotta",
+    "Cypriot Aphrodite figurine"
    ],
    "require": [
     [
@@ -4144,8 +4186,9 @@
      "venus"
     ],
     [
-     "pomegranate",
-     "cyprus"
+     "cyprus",
+     "cypriot",
+     "terracotta"
     ]
    ],
    "relaxed": true
@@ -4168,7 +4211,7 @@
    ],
    "relaxed": true,
    "pin": "File:Penn Museum Beth Shemesh 1.jpg",
-   "title": "Astarte plaque — Beth Shemesh (Penn Museum)"
+   "title": "Astarte plaque — Beth Shemesh"
   },
   "baubo-figure-priene": {
    "queries": [
@@ -4185,14 +4228,14 @@
    ],
    "relaxed": true,
    "pin": "File:Terracotta Baubo figurine.jpg",
-   "title": "Baubo — terracotta figurine (Priene type)",
+   "title": "Baubo — terracotta figurine",
    "minLongest": 300,
    "minShort": 180
   },
   "belon-turkish-opium": {
    "queries": [
-    "Belon Turkish opium woodcut",
-    "Pierre Belon opium poppy Turkey"
+    "Pierre Belon Observations opium",
+    "Belon papauer woodcut"
    ],
    "require": [
     [
@@ -4328,17 +4371,20 @@
   },
   "demeter-and-kore-pharsalus-stele": {
    "queries": [
-    "Demeter Kore Pharsalus stele",
-    "Demeter and Persephone Pharsalos relief"
+    "Demeter Persephone relief Louvre",
+    "Exaltation of the Flower Louvre",
+    "Demeter Kore stele"
    ],
    "require": [
     [
-     "demeter"
+     "demeter",
+     "persephone",
+     "kore"
     ],
     [
-     "kore",
-     "persephone",
-     "pharsal"
+     "relief",
+     "stele",
+     "louvre"
     ]
    ],
    "relaxed": true
@@ -4417,18 +4463,18 @@
   },
   "fig-66-resurrection-of-kore-attic": {
    "queries": [
-    "Resurrection of Kore Attic vase",
-    "Persephone rising Attic red-figure"
+    "Persephone anodos vase",
+    "Kore rising from earth Attic"
    ],
    "require": [
     [
-     "kore",
-     "persephone"
+     "persephone",
+     "kore"
     ],
     [
-     "attic",
-     "resurrection",
-     "anodos"
+     "anodos",
+     "rising",
+     "attic"
     ]
    ],
    "relaxed": true
@@ -4505,8 +4551,8 @@
   },
   "gorgon-flanked-by-lions-perugia": {
    "queries": [
-    "Gorgon lions Perugia pediment",
-    "Medusa flanked lions Etruscan"
+    "Medusa pediment Corfu",
+    "Gorgon temple Artemis Corfu"
    ],
    "require": [
     [
@@ -4514,7 +4560,9 @@
      "medusa"
     ],
     [
-     "lion"
+     "lion",
+     "pediment",
+     "corfu"
     ]
    ],
    "relaxed": true
@@ -4557,8 +4605,8 @@
   },
   "hercules-night-sea-journey": {
    "queries": [
-    "Hercules night sea journey cup",
-    "Herakles sun bowl ocean"
+    "Heracles cup Helios ocean",
+    "Hercules sun bowl red figure"
    ],
    "require": [
     [
@@ -4566,10 +4614,10 @@
      "herakl"
     ],
     [
-     "sea",
-     "ocean",
      "cup",
-     "bowl"
+     "bowl",
+     "ocean",
+     "sun"
     ]
    ],
    "relaxed": true
@@ -4663,8 +4711,8 @@
   },
   "madonna-of-the-sheaves": {
    "queries": [
-    "Madonna of the Sheaves",
-    "Virgin Mary wheat sheaves painting"
+    "Madonna of the Wheat sheaves",
+    "Virgin Mary wheat sheaf painting"
    ],
    "require": [
     [
@@ -4673,9 +4721,10 @@
      "mary"
     ],
     [
+     "wheat",
      "sheaf",
      "sheaves",
-     "wheat"
+     "corn"
     ]
    ],
    "relaxed": true
@@ -4784,18 +4833,14 @@
   },
   "sun-phallus": {
    "queries": [
-    "solar phallus Mithras",
-    "sun phallus antiquity relief"
+    "Priapus herm phallus",
+    "ithyphallic herm antiquity"
    ],
    "require": [
     [
      "phallus",
-     "phallos"
-    ],
-    [
-     "sun",
-     "solar",
-     "mithra"
+     "priapus",
+     "herm"
     ]
    ],
    "relaxed": true
