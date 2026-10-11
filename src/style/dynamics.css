@@ -49,6 +49,25 @@
 .dy-next { margin-top: 14px; font: 11px var(--sans); letter-spacing: 0.04em; color: var(--ink-3); }
 .dy-next:hover { color: var(--ink); }
 
+/* the route: four movements, a dot per stop, the standing one lit (the map reads as the walk's structure) */
+.dy-route { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin: 0 34px 14px 0; }
+.dy-route-mv { display: flex; align-items: center; gap: 2px; padding: 3px 8px 3px 4px; border-radius: 14px; border: 1px solid transparent; transition: border-color 0.3s; }
+.dy-route-mv.on { border-color: rgb(var(--core-rgb) / 0.35); }
+.dy-route-n { font: 600 10.5px var(--serif); letter-spacing: 0.06em; color: var(--ink-3); margin-right: 4px; min-width: 1.6em; text-align: center; }
+.dy-route-mv.on .dy-route-n { color: var(--ink); }
+.dy-route-dot { position: relative; width: 18px; height: 22px; }
+.dy-route-dot::before { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgb(var(--core-rgb) / 0.7); transition: background 0.3s, box-shadow 0.3s; }
+.dy-route-dot:hover::before { background: rgb(var(--core-rgb) / 0.4); }
+.dy-route-dot[aria-current=step]::before { width: 9px; height: 9px; background: var(--core); box-shadow: 0 0 10px var(--core); }
+.dy-mv-head { margin: 0 0 10px; }
+.dy-mv { margin: 14px 0 0; padding-top: 10px; border-top: 1px solid var(--hair); }
+.dy-mv .as-h3 { margin: 0 0 4px; }
+.dy-mv-line { margin: 0 0 6px; font: 11.5px/1.55 var(--sans); color: var(--ink-3); }
+.dy-mv-stops { display: flex; flex-wrap: wrap; gap: 4px 14px; font: 11.5px var(--sans); }
+.dy-step { margin-top: 18px; }
+.dy-step .icon-btn { font: 16px var(--sans); color: var(--ink-2); }
+.dy-chip.dy-n { color: var(--ink-2); }
+
 @media (max-width: 760px) {
   .dynamics { --dy-strip-h: 64px; --dy-strip-bottom: 64px; --dy-track-l: 72px; --dy-track-r: 36px; }
   /* below the top line of switches (the Red Book's phone heading sits at the same height) */

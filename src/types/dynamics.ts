@@ -41,3 +41,42 @@ export interface DynamicsData {
   version: 1;
   concepts: DynamicsConcept[];
 }
+
+/** A further quotation a route stop carries (Neumann; Van Eenwyk on Neumann), placed in the corpus by its generator. */
+export interface RouteQuote {
+  text: string;
+  cite: { work: string; workTitle: string; locator: string; print?: string };
+  /** 'vaneenwyk' | 'neumann' */
+  voice?: string;
+}
+
+/** One stop of the route: a concept of the rail's (by id), or a stop of its own (a name and its families). */
+export interface RouteStop {
+  id: string;
+  /** the native figure that draws it (src/dynamics/figures.ts) */
+  figure: string;
+  /** mine: what the drawing shows and what the quotations under it say */
+  line: string;
+  concept?: string;
+  name?: string;
+  familyIds?: string[];
+  quotes?: RouteQuote[];
+  /** the QL framework's own words, from the published site by section (W § I) */
+  ql?: { text: string; source: string }[];
+}
+
+export interface RouteMovement {
+  id: string;
+  n: string;
+  title: string;
+  line: string;
+  stops: RouteStop[];
+}
+
+/** public/data/dynamics-route.json (scripts/dynamics-route.mjs): the lens's walk, in four movements. Optional. */
+export interface DynamicsRoute {
+  version: 1;
+  title: string;
+  line: string;
+  movements: RouteMovement[];
+}

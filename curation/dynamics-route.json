@@ -1,0 +1,82 @@
+{
+  "_note": "The dynamical lens's route (ProjectCentral/docs/DYNAMICAL.md): Van Eenwyk's terms walked in four movements, each stop drawn as the system it names (src/dynamics/figures.ts, captioned 'drawn here'). A stop with `concept` takes its Van Eenwyk and Jung quotations from public/data/dynamics.json (the hash-pinned rail); `quotes` here are further quotations (Neumann, Van Eenwyk) that scripts/dynamics-route.mjs places in the read-only corpus. `ql` entries are the QL framework's own words from the published site (W, by section), as ProjectCentral/docs/ql-reference.md records them. The order, the figures and the lines are mine; a line says only what its drawing shows and what the quotations under it say.",
+  "version": 1,
+  "title": "Archetypes & Strange Attractors",
+  "line": "John Van Eenwyk reads the psyche as a dynamical system: energy that swings between poles, a swing that cascades into chaos, and symbols that build order out of it. I've drawn each of his terms as the system it names, with his words, Jung's, and where he speaks to it Neumann's. The last movement sets Neumann's stages and the QL framework's own cycle beside them.",
+  "movements": [
+    {
+      "id": "energy", "n": "I", "title": "Energy between poles",
+      "line": "Jung says psychic energy only flows between two poles. Van Eenwyk draws that as oscillation.",
+      "stops": [
+        { "concept": "alternating-current", "figure": "limit-cycle",
+          "line": "Every path, from inside or outside, settles onto one loop that swings between two poles. That is a limit cycle: the system keeps alternating." },
+        { "concept": "homoclinic-point", "figure": "homoclinic",
+          "line": "Two loops meet at a saddle. A path on them slows almost to a stop at the meeting point and then leaves: the one place where the motion can come apart and where it can settle." },
+        { "concept": "stuck-attractor", "figure": "stuck",
+          "line": "A ball in one deep valley rocks and never leaves; the same small loop is drawn over itself. Van Eenwyk finds the same state at the start of Eros and Psyche, the tale Neumann read as an initiation.",
+          "quotes": [
+            { "work": "van-eenwyk", "quote": "At the beginning everything seems to be stuck. Psyche’s beauty intimidates her potential suitors, Aphrodite’s shrines are being neglected, and no solutions suggest themselves." }
+          ] }
+      ]
+    },
+    {
+      "id": "chaos", "n": "II", "title": "Into chaos",
+      "line": "Raise the tension and the swing itself begins to swing: two states, then four, then eight, then no repeat at all.",
+      "stops": [
+        { "concept": "cascade-into-chaos", "figure": "cascade",
+          "line": "The logistic map, the simplest system that does this. Left to right the drive rises; each column shows where the system ends up. One state splits into two, two into four, and then chaos." },
+        { "concept": "chaotic-edge", "figure": "edge",
+          "line": "The same map, close up where the doubling runs out and chaos begins. Van Eenwyk says chaos is not a failure here but a necessity." },
+        { "concept": "strange-attractor", "figure": "lorenz",
+          "line": "The Lorenz system never repeats a path and never leaves its shape. Van Eenwyk sees the archetypes in that: the same pattern, never the same instance." },
+        { "concept": "phase-transition", "figure": "flip",
+          "line": "The path circles one wing, then without warning crosses to the other; the trace below marks each crossing. Jung's word for a turn into the opposite is enantiodromia." }
+      ]
+    },
+    {
+      "id": "symbol", "n": "III", "title": "Symbol and order",
+      "line": "Out of the chaos, symbols build order: a symmetry where there was an either-or, a pull back to the centre, a rhythm two can share.",
+      "stops": [
+        { "concept": "symmetry-building", "figure": "pitchfork",
+          "line": "As the tension rises one valley becomes two of equal depth. The either-or becomes a symmetry: both sides held at once." },
+        { "concept": "symbol-emergence", "figure": "window",
+          "line": "Deep in the logistic map's chaos a window of order opens, three states repeating, and gives way again: chaos first, then a symmetry." },
+        { "concept": "self-organization", "figure": "focus",
+          "line": "A spiral knocked off its centre again and again returns each time. Jung calls the psyche self-regulating; Neumann calls the pull towards the centre centroversion.",
+          "quotes": [
+            { "work": "neumann-origins", "quote": "Centroversion is the innate tendency of a whole to create unity within its parts and to synthesize their differences in unified systems." }
+          ] },
+        { "concept": "relationship", "figure": "sync",
+          "line": "Two oscillators running at different speeds. As the coupling between them grows they fall into step." },
+        { "concept": "manifold", "figure": "saddle",
+          "line": "Near a saddle, paths come in along one line and leave along another: from stability to instability, and back only if something brings them round." },
+        { "concept": "mandala-attractor", "figure": "julia",
+          "line": "A Julia set: one rule repeated, a round figure with the same detail at every scale." },
+        { "concept": "fractal-irreducibility", "figure": "mandelbrot",
+          "line": "The Mandelbrot set's edge never resolves: every closer look shows more. Van Eenwyk says interpretation approaches certainty and never arrives." }
+      ]
+    },
+    {
+      "id": "return", "n": "IV", "title": "The return",
+      "line": "Neumann's stages and the QL framework's cycle both end where they began, changed.",
+      "stops": [
+        { "id": "neumann-stages", "name": "Neumann's stages", "figure": "landscape",
+          "line": "One round valley splits in two and comes back as one, higher up: Neumann's stages drawn as a landscape that changes shape. The drawing is mine; the stages and the words are his.",
+          "familyIds": ["uroboros", "dragon", "battle-with-dragon", "mandala"],
+          "quotes": [
+            { "work": "neumann-origins", "quote": "The uroboros appears as the round \"container,\" i.e., the maternal womb, but also as the union of masculine and feminine opposites, the World Parents joined in perpetual cohabitation." },
+            { "work": "neumann-origins", "quote": "The separation of the World Parents is not merely an interruption of the original cohabitation, and a destruction of the perfect cosmic state symbolized by the uroboros." },
+            { "work": "neumann-origins", "quote": "The same uroboric symbolism that stands at the beginning, before ego development starts, reappears at the end, when ego development is replaced by the development of the self, or individuation." }
+          ] },
+        { "id": "ql-cycle", "name": "The 4+2 and its return", "figure": "torus",
+          "line": "The QL framework's own figure: four positions held between two poles, and a return that does not close the circle but opens the next turn. Drawn as a path winding round a torus, never retracing itself.",
+          "familyIds": ["mandala", "quaternity", "world-wheel", "circle"],
+          "ql": [
+            { "text": "The psyche invariably produces a field of four distinct explicate positions (4) bounded by a dual vertical axis of descent and return (+2).", "source": "W § I" },
+            { "text": "It is the Möbius return that closes the cycle while simultaneously opening the next cycle's ground enriched.", "source": "W § VI" },
+            { "text": "the 4+2 structure emerges as a mathematical necessity (4g + 2g = 6 for genus g=1)", "source": "W § III" }
+          ] }
+      ]
+    }
+  ]
+}

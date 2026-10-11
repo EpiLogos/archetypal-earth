@@ -11,3 +11,9 @@ export function vMark(extraClass = ''): HTMLElement {
 export function jMark(): HTMLElement {
   return el('span', { class: 'dy-chip dy-j', title: J_TITLE, text: 'J' });
 }
+
+export const N_TITLE = "Neumann's own text";
+
+export function nMark(): HTMLElement {
+  return el('span', { class: 'dy-chip dy-n', title: N_TITLE, text: 'N' });
+}

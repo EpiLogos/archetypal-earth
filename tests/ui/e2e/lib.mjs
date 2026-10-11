@@ -29,7 +29,8 @@ export async function open(browser, { width = 1440, height = 900, dpr = 1, hash 
   if (!landing) await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   const logs = [];
   // where a warning was raised is named with it (a bare 'Failed to fetch' says nothing of which fetch)
-  page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) { const at = m.location(); logs.push(`${m.type()}: ${m.text()}${at?.url ? ` @ ${at.url.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '')}:${at.lineNumber}` : ''}`); } });
+  // (the dev server's own client, /@vite/client, warns when its ping to the server drops; that is not the app's)
+  page.on('console', (m) => { if (['error', 'warning'].includes(m.type()) && !/\/@vite\/client/.test(m.location()?.url ?? '')) { const at = m.location(); logs.push(`${m.type()}: ${m.text()}${at?.url ? ` @ ${at.url.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '')}:${at.lineNumber}` : ''}`); } });
   page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
   // a failed request is named, so a 'Failed to fetch' warning says which (map tiles and web fonts the sandbox cannot
   // reach are not counted, nor a cancelled one: a fetch the app retries, a lazy image dropped, says nothing by itself;

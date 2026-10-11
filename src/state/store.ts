@@ -43,7 +43,8 @@ export interface AppState {
   /** the Red Book: Liber Novus as a folio walk (or the genesis table) over the world view */
   redbook?: { stop?: string; genesis?: true };
   /** The dynamical lens: the field read as a dynamical system over the world view. Absent subject = the Self. */
-  dynamics?: { subject?: Subject };
+  /** the dynamical lens: its subject (the Self when none) and the standing stop of its route (the overview when none) */
+  dynamics?: { subject?: Subject; stop?: string };
   /** The live path remains standing while one of its presences is inspected. */
   trail?: Extract<View, { kind: 'thread' }>;
   /**
@@ -160,7 +161,7 @@ export function back(s: AppState): AppState {
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;
   if (s.redbook) return s.redbook.stop || s.redbook.genesis ? { ...s, redbook: {} } : WORLD;
   // the lens: a subject climbs to the lens itself (the Self), and the lens closes onto the Earth
-  if (s.dynamics) return s.dynamics.subject ? { ...s, dynamics: {} } : WORLD;
+  if (s.dynamics) return s.dynamics.stop ? { ...s, dynamics: s.dynamics.subject ? { subject: s.dynamics.subject } : {} } : s.dynamics.subject ? { ...s, dynamics: {} } : WORLD;
   const v = s.view;
   switch (v.kind) {
     case 'world':
@@ -212,6 +213,7 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && !!a.dynamics === !!b.dynamics
     && (!a.dynamics?.subject) === (!b.dynamics?.subject)
     && (!a.dynamics?.subject || !b.dynamics?.subject || subjectEq(a.dynamics.subject, b.dynamics.subject))
+    && a.dynamics?.stop === b.dynamics?.stop
     && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)))
     && !!a.from === !!b.from
     && a.lens?.id === b.lens?.id
@@ -222,5 +224,5 @@ export function stateEq(a: AppState, b: AppState): boolean {
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
   return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0)
-    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
+    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) + (s.dynamics.stop ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
 }

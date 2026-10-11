@@ -2,6 +2,7 @@
 // the globe (camera, atmosphere, emphasis, arcs) and the quiet DOM layers.
 import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
+import { scopeOf } from '../data/scope';
 import { archetypesOfFamily, selfSubject, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette } from '../data/model';
 import { angleBetween, dirFromLatLon, fitDistance, spreadOf, worldDistance, type Vec3 } from '../data/geo';
 import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../data/palette';
@@ -412,11 +413,14 @@ export class Controller {
     if (next.redbook && !this.redbook && this.redbookData) jobs.push(this.ensure('redbook', () => import('../redbook/view').then(({ RedBookView }) => {
       this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (id) => this.tuneToFolio(id), (occId) => this.openReading(occId), this.chrome);
     })));
-    if (next.dynamics && !this.lens) jobs.push(this.ensure('dynamics', () => Promise.all([import('../dynamics/view'), import('../dynamics/load')]).then(([{ DynamicsView }, { loadDynamics }]) => {
+    if (next.dynamics && !this.lens) jobs.push(this.ensure('dynamics', () => Promise.all([import('../dynamics/view'), import('../dynamics/load')]).then(([{ DynamicsView }, { loadDynamics, loadRoute }]) => {
       const lens = new DynamicsView(this.root, this.m, this.engine, this.time, (state) => this.navigate(state), this.passages, null, this.chrome);
       this.lens = lens;
-      // the concept data is optional (absent is the normal state, shown as none); a malformed file is reported, never hidden
+      // the standing stop's families join the subject on the globe whenever they change
+      lens.onScope = () => { if (this.state.dynamics) this.scopeLens(); };
+      // the concept data and the route are optional (absent is the normal state); a malformed file is reported, never hidden
       void loadDynamics().then((data) => lens.setConcepts(data)).catch((err) => console.error(err));
+      void loadRoute().then((route) => lens.setRoute(route)).catch((err) => console.error(err));
     })));
     return jobs.length ? Promise.all(jobs).then(() => undefined) : null;
   }
@@ -605,6 +609,11 @@ export class Controller {
       e.preventDefault();
       return;
     }
+    if (this.state.dynamics && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+      && this.lens?.walk(e.key === 'ArrowRight' ? 1 : -1)) {
+      e.preventDefault();
+      return;
+    }
     if (this.state.redbook && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
       this.redbook?.walk(e.key === 'ArrowRight' ? 1 : -1);
       e.preventDefault();
@@ -777,9 +786,28 @@ export class Controller {
     else this.timeControl.setRange(span.fromU, span.toU);
     const pal = this.subjectPal(subject);
     this.engine.setPalette(pal, first ? 0.01 : 1.6);
-    this.engine.setEmphasis(this.emphasise(idx), pal.core);
     this.timeControl.setSubject(idx, rgbToHex(pal.core));
     this.lens?.show(next.dynamics);
+    this.scopeLens();
+  }
+
+  /**
+   * The lens's own set on the globe: what the route speaks of — the standing stop's families, or on the overview every
+   * family the route binds — with a subject's occurrences when one was chosen. Their nearby presences dim and the rest
+   * of the field is set aside (src/data/scope.ts), named under the title. Without a route, the subject's own set.
+   */
+  private scopeLens() {
+    const m = this.m;
+    const chosen = this.state.dynamics?.subject;
+    const subject = this.lensSubject(this.state);
+    const standing = this.lens?.standing();
+    const families = standing?.familyIds ?? this.lens?.routeFamilies() ?? [];
+    const own = new Set(chosen || !families.length ? subjectOccurrences(m, subject) : []);
+    for (const f of families) for (const i of m.famOcc.get(f) ?? []) own.add(i);
+    const set = standing ? `“${standing.name}”` : families.length ? 'the route’s families' : '';
+    const label = chosen || !set ? [subjectName(m, subject), set].filter(Boolean).join(' and ') : set;
+    const sc = scopeOf(m, own, label);
+    this.engine.setEmphasis(sc.rel, this.subjectPal(subject).core, sc.info);
   }
 
   /** Leave the lens: its panel and strip go, the globe's emphasis goes, and the clock and range it held are given back. */

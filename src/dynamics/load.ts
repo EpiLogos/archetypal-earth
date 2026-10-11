@@ -1,4 +1,4 @@
-import type { DynamicsCite, DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender } from '../types/dynamics';
+import type { DynamicsCite, DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender, DynamicsRoute } from '../types/dynamics';
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
 const RENDERS: readonly DynamicsRender[] = ['lorenz', 'mandelbrot', 'julia'];
@@ -62,4 +62,23 @@ export async function loadDynamics(fetchFn: typeof fetch = fetch): Promise<Dynam
   if (type.includes('text/html')) return null;
   if (!res.ok) throw new Error(`The dynamics data could not be loaded (HTTP ${res.status}).`);
   return parseDynamics(await res.json());
+}
+
+/**
+ * Fetch public/data/dynamics-route.json, the lens's walk. Absent resolves to null (the lens then shows its concept
+ * cards one by one, as before); a file of the wrong shape rejects.
+ */
+export async function loadRoute(fetchFn: typeof fetch = fetch): Promise<DynamicsRoute | null> {
+  let res: Response;
+  try {
+    res = await fetchFn(`${BASE}/data/dynamics-route.json`);
+  } catch {
+    return null;
+  }
+  if (res.status === 404 || (res.headers.get('content-type') ?? '').includes('text/html')) return null;
+  if (!res.ok) throw new Error(`The dynamics route could not be loaded (HTTP ${res.status}).`);
+  const raw = await res.json() as DynamicsRoute;
+  if (!isObj(raw) || raw.version !== 1 || !Array.isArray(raw.movements) || raw.movements.some((m) => !Array.isArray(m.stops) || m.stops.some((s) => !s.id || !s.figure)))
+    throw new Error('dynamics route: expected { version: 1, movements: [{ stops: [{ id, figure }] }] }');
+  return raw;
 }
