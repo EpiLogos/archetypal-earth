@@ -72,8 +72,9 @@ export function stateToHash(s: AppState): string {
   }
   if (s.dynamics) {
     // the lens: #/dynamics (the Self), or #/dynamics/<a|f|c|p>/<id> for a subject, the focus route's own codes
+    // a stop of the route follows: #/dynamics[/<code>/<id>]/s/<stop>
     const sub = s.dynamics.subject;
-    return `#/dynamics${sub ? `/${{ archetype: 'a', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}`;
+    return `#/dynamics${sub ? `/${{ archetype: 'a', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
   }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
@@ -140,14 +141,18 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   }
   if (parts[0] === 'dynamics') {
     // an unknown subject is the lens with the Self, never a silent world
-    const [, k, id] = parts;
+    const rest = parts.slice(1);
+    // the stop stands first or after the subject; the lens checks it once its route has loaded (unknown: the overview)
+    const at = rest[0] === 's' ? 0 : rest[2] === 's' ? 2 : -1;
+    const stop = at >= 0 && rest[at + 1] ? rest[at + 1] : undefined;
+    const [k, id] = at === 0 ? [] : rest;
     const subject: Subject | undefined = !id ? undefined
       : k === 'a' && r.hasArchetype(id) ? { type: 'archetype', id }
       : k === 'f' && r.hasFamily(id) ? { type: 'family', id }
       : k === 'c' && r.hasCulture(id) ? { type: 'culture', id }
       : k === 'p' && r.hasPlace(id) ? { type: 'place', id }
       : undefined;
-    return { state: { view: { kind: 'world' }, deep: false, dynamics: subject ? { subject } : {} } };
+    return { state: { view: { kind: 'world' }, deep: false, dynamics: { ...(subject ? { subject } : {}), ...(stop ? { stop } : {}) } } };
   }
   if (parts[0] === 'aion') {
     // `#/aion` alone is the default reading, as the switch opens it; `#/aion/<reading>[/<kind>/<id>]` names one

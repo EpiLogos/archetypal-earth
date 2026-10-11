@@ -81,4 +81,14 @@ describe('the lens: hash route', () => {
     expect(hashToState('#/dynamics/x/serpent', r).state).toEqual(lens());
     expect(hashToState('#/dynamics/f', r).state).toEqual(lens());
   });
+
+  it('a stop of the route rides after the subject, round-trips, and Back leaves the stop before the subject', () => {
+    const at = (stop: string, subject?: { type: 'family' | 'archetype'; id: string }): AppState => ({ view: { kind: 'world' }, deep: false, dynamics: { ...(subject ? { subject } : {}), stop } });
+    expect(stateToHash(at('cascade-into-chaos'))).toBe('#/dynamics/s/cascade-into-chaos');
+    expect(stateToHash(at('ql-cycle', serpent))).toBe('#/dynamics/f/serpent/s/ql-cycle');
+    expect(hashToState('#/dynamics/s/cascade-into-chaos', r).state).toEqual(at('cascade-into-chaos'));
+    expect(hashToState('#/dynamics/f/serpent/s/ql-cycle', r).state).toEqual(at('ql-cycle', serpent));
+    expect(back(at('ql-cycle', serpent))).toEqual(lens(serpent));
+    expect(back(at('ql-cycle'))).toEqual(lens());
+  });
 });
