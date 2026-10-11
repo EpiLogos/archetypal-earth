@@ -55,7 +55,7 @@ async function boot() {
         onInteract: () => ctl?.onInteract(),
         onGrab: () => ctl?.onGrab(),
         onPalette: setPaletteVars,
-        onSkyPick: (key) => ctl?.onSkyPick(key),
+        onSkyPick: (key) => ctl?.onCanvasSkyPick(key),
       },
       prefersReducedMotion(),
     );

@@ -147,6 +147,8 @@ export function setDeep(s: AppState, deep: boolean): AppState {
 export function back(s: AppState): AppState {
   // a reading a mode opened returns to that mode, once (the memory is the mode state itself, so it is cleared with it)
   if (s.from) return s.from;
+  // a reading opened on a walk's step returns to the walk where it began, not to the step's card
+  if (s.deep && s.trail && s.view.kind === 'manifest') return { view: s.trail, deep: false };
   if (s.deep) return { ...s, deep: false };
   // a panel lens steps up its own route, then closes onto the Earth
   if (s.lens) return s.lens.path.length ? (s.lens.id === 'astrology' ? astrologyAt(s.lens.path.slice(0, -1)) : { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } }) : WORLD;

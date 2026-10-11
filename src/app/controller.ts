@@ -182,7 +182,8 @@ export class Controller {
       onBody: (key) => this.openBody(key),
     }, this.skyTies);
     this.deep = new DeepSheet(root, m, {
-      onClose: () => this.setDeep(false),
+      // the sheet's close is the same step back as Escape: a walk's reading returns to the walk (store.back)
+      onClose: () => this.closeReading(),
       onSubject: (s) => this.navigate(focusOn(this.state, s)),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onCite: openCite,
@@ -299,6 +300,8 @@ export class Controller {
   }
 
   onPick(idx: number) {
+    // a click outside an open reading (or a passage over it) closes it to where it began; it never picks through it
+    if (!this.search.isOpen && (this.state.deep || this.passage.isOpen)) { this.closeReading(); return; }
     if (idx < 0 || this.search.isOpen) return;
     const o = this.m.occ[idx];
     const v = this.state.view;
@@ -470,6 +473,12 @@ export class Controller {
       return;
     }
     this.navigate(back(this.state));
+  }
+
+  /** Leave the open reading (and any passage over it) for where it began. */
+  private closeReading() {
+    if (this.passage.isOpen) this.passage.hide();
+    if (this.state.deep) this.navigate(back(this.state));
   }
 
   private setDeep(deep: boolean) {
@@ -1378,6 +1387,12 @@ export class Controller {
   openBody(key: BodyKey) {
     if (this.graphMode || this.state.history) return;
     this.navigate(inSky({ ...(this.state.sky ?? {}), body: key }));
+  }
+
+  /** A body clicked on the canvas: as onSkyPick, except that a click outside an open reading only closes it. */
+  onCanvasSkyPick(key: BodyKey) {
+    if (!this.search.isOpen && (this.state.deep || this.passage.isOpen)) { this.closeReading(); return; }
+    this.onSkyPick(key);
   }
 
   onSkyPick(key: BodyKey) {
