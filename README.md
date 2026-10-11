@@ -1,112 +1,99 @@
-# An Archetypal Earth
+# An Archetypal Earth — site spec (owner-authored, 2026-10-08)
 
-A globe for moving through Jung's archetypes as they recur across place and time. The spec is in [docs/SPEC.md](docs/SPEC.md).
+A public exploration environment for traversing archetypes across geography, history, image and transformation.
+One-sentence brief: Build a Google-Earth-quality archetypal exploration site centred on a beautiful interactive globe,
+where imagery, atmosphere, place and time make symbolic recurrence intuitively explorable, while UI clutter,
+metadata overload, card-heavy browsing and wiki-style textuality are aggressively excluded.
 
-## Run
+## 1. Product
+High-fidelity exploratory surface, not a reading platform. Centre = the globe. Primary language = image, place,
+movement, atmosphere. Feels like Google Earth / museum-grade visual atlas / image-led symbolic cartography /
+living archetypal atmosphere. NOT a wiki, notion board, card grid, dashboard, metadata browser, academic archive
+front-end, over-labelled knowledge graph.
 
-```bash
-npm install
-npm run dev        # http://localhost:5181
-```
+## 2. Primary experience
+Land directly into a dark, rich, spatial globe, softly alive with atmosphere, sparse but legible, visibly populated
+by archetypal presences/traces. No feed, page, giant search box, or cards. User can: rotate/zoom fluidly; see regions
+of archetypal intensity; select place/symbol/figure/archetype directly from the globe; scrub time and watch patterns
+shift; move macro→local without losing orientation; follow threads across cultures and eras. Seeing first, reading second.
 
-## Data
+## 3. Show the field, not the filing system
+Encounter presences, images, patterns, trajectories, transformations, resonances — not document structure,
+taxonomic menus, categories, long titles, metadata blocks, admin filters, content cards.
 
-The site reads the Jung archetypal-field vault at `~/Documents/books/jung-archetypal-field` and never writes to it. Set `VAULT=/path` to read a different one.
+## 4. Interaction layers (all around the globe)
+A. Earth mode (default): 3D globe with symbolic density across place — clusters, glowing atmospheric zones,
+   presences, subtle image-bearing markers, conditions changing through time.
+B. Focus mode: selecting an archetype/figure/symbol/motif conditions the world — recolour atmosphere, reveal its
+   spatial distribution, surface related images in-place, linked expressions in other regions/epochs, trace
+   transformations outward. "The world tuned to a symbolic wavelength."
+C. Time mode: continuous temporal modulation of the globe (not a timeline page) — scrub, animate emergence and
+   disappearance, see patterns move/split/condense/migrate, compare eras, pause at thresholds. Elegant, immediate.
+D. Thread mode: follow one archetype through many images / one symbol through cultures / one figure through
+   transformation — a living thread, not backlinks, not graph-theory.
 
-- `npm run ingest` rebuilds `public/data/field.json` from the vault. Run it after the vault's reading runs add material.
-- `npm run images` fetches any images still missing from Wikimedia Commons into `public/img/`. Re-runs skip images already on disk.
-- `npm run images:verify` checks the shipped corpus with no image ever opened: provenance completeness, licence law, manifest↔disk↔field agreement, byte-identity (a plate shared under one recorded source is intended curation; identical bytes under different sources fail).
-- `npm run data` runs ingest, then images, then ingest again.
+## 5. Hierarchy
+1 Archetype (Great Mother, Trickster, Wise Old Man, Child, Shadow, Self, Hero, Anima, Animus…) →
+2 Symbolic form/motif (serpent, cave, tree, crown, vessel, mountain, sun, moon, labyrinth, flood, cross, mandala) →
+3 Figure/image/manifestation → 4 Place-time occurrence — the unit the globe displays. Traverse up and down.
 
-Choices made by the site rather than taken from the vault live in `curation/`:
+## 6. Image-first
+Every meaningful entity: strong representative image set, hero image, consistent presentation, large, immersive,
+elegantly framed, integrated into the field. Image-led selection, comparison, transformation trails, regional
+exploration. No thumbnail clutter.
 
-- `gazetteer.json` and `cultures.json` turn the vault's free-text place descriptions into coordinates.
-- `archetypes.json` sets the instinct–spirit spectrum and atmosphere colours.
-- `family-ties.json` links symbols to archetypes, marked `jung`, `inferred` or `site`.
-- `image-queries.json` holds the Commons search queries and pinned image choices.
-- `aion/` curates the historical readings (see below); `redbook.json` curates the Red Book walk.
+## 7. Text: present but subordinate — orient, clarify, deepen after the visual encounter.
+Avoid long essays in main view, stacked metadata, giant titles, repeated labels, explanatory clutter, category naming,
+caption overload. Globe + imagery always the anchor. One-line labels, short descriptions, concise notes, minimal
+relationship statements, deeper reading only on request.
 
-The shared data contract is [src/types/field.ts](src/types/field.ts).
+## 8. Atmosphere
+Deep, luminous, symbolic, elegant, contemplative, alive, slightly numinous, serious not heavy. Surrounding space shifts
+with the field in focus: coloured fog, particulate aura, spectral atmosphere, subtle motion fields, glowing density,
+ambient colour drift — derived from the instinct/spirit polarity and visible-spectrum logic.
+Solar/heroic → lucid radiant gold-white. Chthonic/shadow → indigo, crimson, umber, black-violet. Anima/watery →
+blue-green-violet liquidity. Spirit-heavy → cooler, clearer, finer. Instinct-heavy → denser, warmer, more terrestrial.
+Beautiful and legible, not gimmicky or psychedelic. Motion: slow, composed, smooth, subtle, alive. No twitchy micro-animation.
 
-The vault's `corpus/` (all 28 volumes, page-anchored) is also ingested: `npm run ingest` builds
-`public/data/corpus/` (an index plus one file per volume: chapters, pages, ¶ anchor spans), and any
-citing card in the site opens the actual passage at its source — "cw12 ¶452 (pdf p350)" becomes a
-deep link with the whole page behind it. The corpus text is the owner's own local copy of
-copyrighted translations: treat `public/data/corpus/` like the vault, not like redistributable
-content.
+## 9. Interaction quality: Google-Earth-grade
+Immediate pan/zoom/rotate, stable camera, inertial motion, graceful scale transitions, no janky resets, no orientation
+loss, no complicated mode changes, no teleporting panels. User always knows where they are, what's focused, how to go
+deeper, how to return. Spatially trustworthy.
 
-## Imagery
+## 10. UI: minimal, quiet, secondary
+Visible: globe, discreet time control, search/open command, minimal focus label, small contextual reveal area,
+at most one elegant mode switch. Everything else hidden until needed. No button bars, floating cards, ribbons,
+nav sections, giant filters, labelled panels, inspector overload, persistent text sidebars.
 
-The globe is NASA Blue Marble, public domain, in two layers:
+## 11. Search: a graceful entry point, not a command surface
+Search archetypes, symbols, figures, places, cultures, periods. Results never dump into a list page: a result
+focuses the globe, reveals the field, shifts atmosphere, shows the cluster. Discovery also via hover, spatial
+exploration, related suggestions, threads, time.
 
-- **Base** — Blue Marble Next Generation with topography and bathymetry (July 2004, Visible Earth 73751), prepared by `npm run textures` into `public/textures/` as 2k (first paint), 4k and 8k progressive JPEGs (~5.5 MB in all; the script downloads the 21600×10800 original from NASA into `.cache/`).
-- **Close zoom** — a quadtree of sphere patches streaming NASA GIBS `BlueMarble_ShadedRelief_Bathymetry` tiles (`GoogleMapsCompatible_Level8`, no key), see `src/globe/tiles.ts`. Both layers go through the same earth shader, so the map keeps the site's dark, palette-tinted look.
+## 12. Information layers
+1 immediate: name, image, one-line identity, relation to focus. 2 contextual: refined side/lower reveal — short
+description, period/culture, key notes, related images, linked manifestations. 3 deep: optional expanded reading —
+history, interpretation, comparison, references. Most users live in 1–2.
 
-Browser walks (frame-rate, screenshots, WebKit) live in `tests/ui/e2e/` and run against a dev server:
+## 13. Relations: clustering, transformation trails, migratory arcs, temporal continuity, image sequences,
+symbolic echoing, atmosphere shifts, linked focal transitions. Not graph lines everywhere. Not "show the graph db".
 
-```bash
-npx vite --port 5183 --strictPort &
-node tests/ui/e2e/perf.mjs        # headed Chromium, 1440x900 @2x
-node tests/ui/e2e/shots.mjs       # screenshots into .cache/screens/round2/
-node tests/ui/e2e/shots.mjs webkit
-```
+## 14. Never: metadata dumps, taxonomy panels, category trees, many buttons, many cards, visible db structure,
+repeated labels, giant banners, wiki layout, pane sprawl, graph noise, admin filters, dashboards, stats displays,
+docs-style nav, "read more" clutter, icon soup, SaaS look, fake mystical ornament, cheap occult aesthetics,
+black-and-gold cliché, over-animated transitions, noisy particles obscuring content, novelty 3D. Not educational
+sludge, museum kiosk, academic software, search portal, image grid with a globe bolted on, CMS in disguise.
 
-## The sky
+## 15. Must feel: lucid, spacious, refined, image-led, archetypally charged, geographically grounded, historically
+alive, contemplative, discoverable, premium, trustworthy, symbolically intelligent.
+"I am moving through a world of archetypal presences" — not "browsing entries in a symbolic database".
 
-Zoom out past the Moon and the globe becomes a scale model of the sky: the Sun, Moon and planets stand where they really are, each linked to what Jung wrote of it. The full design is [docs/SKY-SPEC.md](docs/SKY-SPEC.md); sources, pins and every decision taken are in [docs/SKY-SOURCES.md](docs/SKY-SOURCES.md); the precession work is in [docs/PRECESSION-NOTES.md](docs/PRECESSION-NOTES.md).
+## 16. Spectrum (instinct/spirit, Jung's visible-spectrum analogy, CW8 ¶414ff) governs colour conditions,
+atmosphere shifts, clustering, tonality, relation emphasis, transitions. Never a legend, theory diagram, or coded
+overlay to decode. Lived visually first.
 
-- **What it does.** The sky is one more scale of the globe (`S`, or zoom out): the Moon's ring, the planets on their real orbits (radial distance compressed, and captioned as such), the Earth lit by the true Sun, the phase of the Moon, and the bodies as anchors in the graph. A **Birth sky** disclosure takes a date, a time and a place and draws the sky at that moment from the Earth, in Jung's keys; it makes no forecast and passes no verdict. In **Aion**, the equinox ring and a "The sky's clock" disclosure show where the spring equinox lies among the stars under stated conventions beside Jung's own months.
-- **The data.** `npm run sky` generates `public/data/sky.json` (positions 2015–2039 from JPL DE440, the mythic ties, a gazetteer, golden values) and `npm run sky:check` verifies it is reproducible. Choices the site makes live in `curation/sky/`. The vault is read, never written.
-- **The sidecar (optional, local).** Everything above works without it, except generating the data and the birth sky. `cd ephemeris && ./run.sh` serves `http://127.0.0.1:5187` (Python ≥ 3.11; setup in SKY-SOURCES.md): live Sun and Moon, birth charts, and place lookup. It is AGPL (Kerykeion, libephemeris), runs only on your machine, and the page only talks to it from localhost. A place *lookup* (as opposed to choosing from the built-in gazetteer) sends the text you typed to OpenStreetMap through the sidecar, and the page says so.
-- **Honesty.** Approximate things are labelled (charts before 1900; the radial scale; calculated boundaries after the present). Ephemeris range is 1549–2650; outside it nothing is computed or approximated, and the page says so.
-- **Checks.** `npx vitest run tests/sky tests/aion`; `node scripts/sky-golden.mjs --check`; browser walks under `tests/ui/e2e/` (`sky-*.mjs`, `aion-clock.mjs`), run against `npx vite --port 5183 --strictPort`.
+## 17. States: 1 World · 2 Focus (archetype/symbol/figure) · 3 Manifestation (one occurrence) · 4 Thread · 5 Deep detail.
 
-## Checks
-
-```bash
-npm run typecheck && npm test && npm run build
-```
-
-### Aion, the Red Book, time and graph controls
-
-**Aion** (or **A**) opens the archetypal readings of history on the same globe.
-Three readings now stand there: Jung's **Aion** itself (the Pisces arc, 45
-events), **The Turn** (the epoch's hinge 1914→1958 in five phases: forecast,
-eruption, catastrophe, compensation, horizon), and **The Aquarius Horizon**
-(every dated forecast, 1929→1958, with the reckoned threshold beside it).
-Choose an epoch, a historical event, or a thread; source passages expand in
-place and open the actual corpus passage. Jung-claims and standard scholarship
-are labelled J/S exactly as the vault labels them; approximate dates and
-conditional Aquarian boundaries stay labelled. See [AION-SOURCES.md](docs/AION-SOURCES.md).
-
-`npm run aion` regenerates `public/data/history.json` from the curated readings;
-`npm run aion:check` verifies actual corpus passages, field references and
-published equality. This does not re-ingest the growing Jung vault.
-
-**The Red Book** (or **R**) walks Liber Novus in folio order — the descent that
-generated half the archetypes in the field, every stop `subject: Jung`. Each
-folio stop shows its facsimile plate beside the translated text where one
-exists (plates are copyrighted Norton pages: they load only from the vault on
-this machine, never from any build — the licence law is in
-[curation/redbook.json](curation/redbook.json) and
-[REDBOOK-SOURCES.md](docs/REDBOOK-SOURCES.md)); the genesis view links each
-symbol-episode forward to the archetype it became and its globe occurrences.
-`npm run redbook` regenerates `public/data/redbook.json`;
-`npm run redbook:check` verifies it.
-
-**G** switches Earth and Graph. Graph **Settings** contains local depth,
-occurrence visibility, relation filters, the layout's link space and
-gravity, and Reframe. The bottom clock is shared
-by both views. Playing time highlights the current historical window; the
-all-time readout restores the full field. Opening a presence from a traced path
-pauses inspection without discarding the path; closing its detail returns to
-the same step. Deep reading closes before returning to the thread.
-
-The **Book of Symbols** adds a separate page-cited reading to 29 existing
-symbol families. Open **Reading** from a family, or expand its section in a
-presence's detail; the original Jung text and dates remain separately sourced.
-Related-symbol links are editorial comparisons, distinct from the graph's
-Jung, inferred and site ties. `npm run symbols` regenerates this layer;
-`npm run symbols:check` verifies the supplied private PDF, page evidence and
-published output. The PDF and its plates are not served by the website.
-See [SYMBOLS-SOURCES.md](docs/SYMBOLS-SOURCES.md).
+## 18. Success: globe is the centre; fluid and immediate; imagery carries it; time and place graspable without effort;
+recurrence intuitively visible; atmosphere deepens focus; interface out of the way; long exploration without fatigue;
+singular and memorable; a new symbolic-intellectual medium without announcing itself as one.
