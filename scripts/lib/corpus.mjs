@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { trustedPrint } from './cite.mjs';
 import { externalMarkdown } from './external.mjs';
+import { stripFootnoteMarkers } from './display.mjs';
 
 const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>]+))?\s*-->\s*$/;
 const PARA_RE = /\*\*¶(\d+)\*\*/g;
@@ -76,7 +77,9 @@ export function parseCorpusMarkdown(work, raw) {
       continue;
     }
     if (cur.chPending) { cur.ch = cur.chPending; cur.chPending = null; }
-    cur.lines.push(line);
+    // the served passage text sheds the scan's glued footnote digits ("significance.43", "world.” 2");
+    // stripped per line so every offset (chapters, ¶ spans) is computed on the served text itself
+    cur.lines.push(stripFootnoteMarkers(line));
   }
   closePage();
   // ¶ anchors as spans into their own page text

@@ -40,6 +40,7 @@ export function buildRedbook({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     const dir = path.join(root, 'curation/aion');
     for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.json'))) {
       const parsed = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      if (!Array.isArray(parsed.readings)) continue;
       readingIds.push(...parsed.readings.map((r) => r.id));
     }
   } catch { warnings.push('curation/aion unreadable; reading targets unresolved'); }

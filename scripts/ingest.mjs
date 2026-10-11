@@ -339,10 +339,11 @@ for (const n of instNotes.filter((x) => !x.failed)) {
     if (f && f !== familyId && !coFamilyIds.includes(f)) coFamilyIds.push(f);
   }
 
-  const parsed = parseInstanceBody(n.body);
+  // the note's own first engagement hints which corpus completes a quote whose line names no volume
+  const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
+  const parsed = parseInstanceBody(n.body, { workHint: jung[0]?.work });
   parsed.body = parsed.body.map((b, k) => fixText(b, `occ:${id}.body[${k}]`));
   if (parsed.quote) parsed.quote = fixText(parsed.quote, `occ:${id}.quote`);
-  const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
   let yearRange;
   const yr = Array.isArray(d.year_range) ? d.year_range.map(Number) : null;
   if (yr && yr.length === 2 && yr.every(Number.isFinite)) yearRange = [Math.min(...yr), Math.max(...yr)];

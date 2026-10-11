@@ -5,6 +5,7 @@ import os from 'node:os';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createNormalizer, OCR_VERSION } from './lib/ocr.mjs';
+import { stripFootnoteMarkers } from './lib/display.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export { DEFAULT_VAULT } from './lib/vault.mjs';
@@ -197,9 +198,10 @@ export function verifySourcePassages(curated, { vault = DEFAULT_VAULT } = {}) {
     const source = sources.get(passage.work);
     if (!source) { errors.push(`${where}: source work unavailable`); continue; }
     if (!Array.isArray(binding.pages) || !binding.pages.length || binding.pages.some((p) => !source.has(p))) { errors.push(`${where}: cited source page unavailable`); continue; }
-    const content = normalizePassage(binding.pages.map((p) => source.get(p)).join(' '));
-    if (binding.witness && !content.includes(normalizePassage(binding.witness))) errors.push(`${where}: paragraph witness not found on cited pages`);
-    if (!content.includes(normalizePassage(passage.text))) errors.push(`${where}: quotation not verbatim on cited pages`);
+    // the served text sheds the scan's glued footnote digits; fold both sides so a clean quote still verifies
+    const content = normalizePassage(stripFootnoteMarkers(binding.pages.map((p) => source.get(p)).join(' ')));
+    if (binding.witness && !content.includes(normalizePassage(stripFootnoteMarkers(binding.witness)))) errors.push(`${where}: paragraph witness not found on cited pages`);
+    if (!content.includes(normalizePassage(stripFootnoteMarkers(passage.text)))) errors.push(`${where}: quotation not verbatim on cited pages`);
   }
   return errors;
 }
@@ -211,7 +213,10 @@ export function loadCuration(root = ROOT) {
   const dir = path.join(root, 'curation/aion');
   const order = (name) => (name === 'jung-aion.json' ? `0-${name}` : name);
   const files = fs.readdirSync(dir).filter((name) => name.endsWith('.json')).sort((a, b) => order(a).localeCompare(order(b)));
-  return files.map((name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')));
+  // book.json is the chapter walk (aionbook.mjs), not an authored reading
+  return files
+    .map((name) => JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')))
+    .filter((source) => Array.isArray(source.readings));
 }
 
 export function generateHistory({ root = ROOT, vault = process.env.JUNG_VAULT || DEFAULT_VAULT, check = false } = {}) {
