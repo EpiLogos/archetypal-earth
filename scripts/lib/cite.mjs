@@ -154,6 +154,16 @@ export function locate(load, work, quote, { para: expect, page: onPage } = {}) {
     const gap = (!near || near.n < expect) && (!next || next.n > expect) && !corpus.marks.some((k) => k.n === expect);
     if (gap) { note = `${work}: ¶${expect} (the vault note) — its marker is missing from the scan, between ${near ? `¶${near.n}` : 'the start'} and ${next ? `¶${next.n}` : 'the end'}`; para = expect; }
   }
+  if (para !== null && para !== expect && near && para === near.n) {
+    // The marker before a quotation names its ¶ only when nothing is missing after it: the next marker must be the next
+    // number. Where the scan lost markers (¶9, then ¶18) the quotation could stand in any of ¶9–¶17; where the marker is a
+    // stray (¶250 before ¶4) it names nothing. Unless a vault note settles it, such a quotation is cited by its page alone.
+    const after = corpus.marks.find((k) => k.at > at);
+    if (after && after.n !== near.n + 1) {
+      note = `${work}: pdf p${pg.page} cited by its page alone — the marker before the quotation is ¶${near.n} and the next is ¶${after.n}, so its ¶ is not certain`;
+      para = null;
+    }
+  }
   const locator = para !== null ? `¶${para} (pdf p${pg.page})` : `pdf p${pg.page}`;
   const out = { locator, page: pg.page, para, print: trustedPrint(corpus, pageIdx[0]), ...(scan ? { scan: true } : {}), ...(note ? { note } : {}) };
   if (expect !== undefined && expect !== null && para !== expect) out.warning = `${work}: the vault note cites ¶${expect}; the corpus marker before the quotation is ${para === null ? 'none nearby' : `¶${para}`} (cited by its pdf page alone)`;

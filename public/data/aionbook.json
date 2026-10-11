@@ -1,0 +1,964 @@
+{
+ "version": 1,
+ "work": "cw09ii",
+ "title": "Aion: Researches into the Phenomenology of the Self",
+ "line": "Jung wrote Aion in 1951 about the age of the Fishes and the figure that stands at its centre. It starts with the parts of the psyche you can meet, and ends with the self. Walk it chapter by chapter, in his order.",
+ "chapters": [
+  {
+   "id": "foreword",
+   "n": "Foreword",
+   "title": "Foreword",
+   "line": "What the book is about: the Christian aeon read through its symbols of the self, and the turn it carries inside it.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "antichrist"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "My investigation seeks, with the help of Christian, Gnostic, and alchemical symbols of the self, to throw light on the change of psychic situation within the \"Christian aeon.\"",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p9"
+     }
+    },
+    {
+     "text": "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p9"
+     }
+    }
+   ],
+   "pages": [
+    9,
+    14
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "aion-published",
+     "name": "Aion published",
+     "yearDisplay": "1951 · Aion"
+    }
+   ]
+  },
+  {
+   "id": "ch-1",
+   "n": "I",
+   "title": "The Ego",
+   "line": "He starts with the one part everyone knows: the ego, the centre of what we are aware of.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "persona"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "We understand the ego as the complex factor to which all conscious contents are related.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p15"
+     }
+    },
+    {
+     "text": "It forms, as it were, the centre of the field of consciousness",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p15"
+     }
+    }
+   ],
+   "pages": [
+    15,
+    19
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-2",
+   "n": "II",
+   "title": "The Shadow",
+   "line": "The first figure the ego meets is its own shadow, and meeting it is a moral task.",
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "shadow"
+    },
+    {
+     "type": "family",
+     "id": "sol-niger"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "The shadow is a moral problem that challenges the whole ego-personality, for no one can become conscious of the shadow without considerable moral effort.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p20"
+     }
+    },
+    {
+     "text": "Hence one meets with projections, one does not make them.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p21"
+     }
+    }
+   ],
+   "pages": [
+    20,
+    22
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-3",
+   "n": "III",
+   "title": "The Syzygy: Anima and Animus",
+   "line": "Behind the shadow stand the contrasexual figures, the anima and the animus, a pair.",
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "syzygy"
+    },
+    {
+     "type": "archetype",
+     "id": "anima"
+    },
+    {
+     "type": "archetype",
+     "id": "animus"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "What, then, is this projection-making factor? The East calls it the \"Spinning Woman\"",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p23"
+     }
+    },
+    {
+     "text": "The animus corresponds to the paternal Logos just as the anima corresponds to the maternal Eros.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p26",
+      "print": "14"
+     }
+    }
+   ],
+   "pages": [
+    23,
+    34
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-4",
+   "n": "IV",
+   "title": "The Self",
+   "line": "Then the whole: the self, whose images cannot be told apart from images of God.",
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "mandala"
+    },
+    {
+     "type": "family",
+     "id": "god-image"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "Unity and totality stand at the highest point on the scale of objective values because their symbols can no longer be distinguished from the imago Dei.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p43"
+     }
+    },
+    {
+     "text": "Experience shows that individual mandalas are symbols of order",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p43"
+     }
+    }
+   ],
+   "pages": [
+    35,
+    47
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-5",
+   "n": "V",
+   "title": "Christ, a Symbol of the Self",
+   "line": "For the Christian aeon, the self had a face: Christ, with Antichrist as his shadow.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "christ-figure"
+    },
+    {
+     "type": "family",
+     "id": "antichrist"
+    },
+    {
+     "type": "archetype",
+     "id": "self"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "Christ exemplifies the archetype of the self.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p49"
+     }
+    },
+    {
+     "text": "In the world of Christian ideas Christ undoubtedly represents the self.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p74"
+     }
+    }
+   ],
+   "pages": [
+    48,
+    83
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "christ-first-fish",
+     "name": "Christ as the first fish",
+     "yearDisplay": "Beginning of the Christian era · symbolic boundary"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "valentinus-shadow",
+     "name": "Christ casts off his shadow",
+     "yearDisplay": "~140 CE"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "wars-end-of-aeon",
+     "name": "The aeon running to its end",
+     "yearDisplay": "1914–1945 · the wars"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "jung-modern-crisis",
+     "name": "The aftermath of the Second World War",
+     "yearDisplay": "After the Second World War"
+    }
+   ]
+  },
+  {
+   "id": "ch-6",
+   "n": "VI",
+   "title": "The Sign of the Fishes",
+   "line": "Christ's age is the age of Pisces, and Pisces is two fishes, not one.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "christ-figure"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "The figure of Christ is not as simple and unequivocal as one could wish.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p84"
+     }
+    },
+    {
+     "text": "Apart from the snake, the fish is one of the oldest allegories.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p84"
+     }
+    }
+   ],
+   "pages": [
+    84,
+    106
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "spring-point-crossings",
+     "name": "The spring point crosses into the Fishes",
+     "yearDisplay": "~146 BCE / AD 11"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "denderah-zodiac",
+     "name": "The fishes at Denderah",
+     "yearDisplay": "~1st century BCE"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "pisces-conjunction",
+     "name": "Jupiter–Saturn in Pisces",
+     "yearDisplay": "7 BCE · May 29 in Jung’s account"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "christ-first-fish",
+     "name": "Christ as the first fish",
+     "yearDisplay": "Beginning of the Christian era · symbolic boundary"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "fishers-of-men",
+     "name": "Fishers of men",
+     "yearDisplay": "~30 CE · the ministry"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "farnese-atlas",
+     "name": "The vertical and horizontal fishes",
+     "yearDisplay": "~2nd century CE copy"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "alexandria-ichthys",
+     "name": "The early Christian fish",
+     "yearDisplay": "Around 200 CE · Jung citing Doelger"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "abercius-fish",
+     "name": "The great, pure fish of Abercius",
+     "yearDisplay": "After 216 CE"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "benedict-latent-spirit",
+     "name": "Benedict and the latent age of spirit",
+     "yearDisplay": "A few years after 529"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "tanninim-prophecy",
+     "name": "The war of the fishes",
+     "yearDisplay": "~530 · Talmud, Sanhedrin 97b"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "messiah-in-pisces",
+     "name": "The Messiah expected in the Fishes",
+     "yearDisplay": "11th–14th c. · Jewish messianic astrology"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "second-fish-dawn",
+     "name": "The second fish surfaces",
+     "yearDisplay": "~1000–1260 · the second fish’s dawn"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "joachim-holy-ghost",
+     "name": "Joachim’s third aeon",
+     "yearDisplay": "~1185–1202"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "latin-alchemy",
+     "name": "Latin alchemy emerges",
+     "yearDisplay": "~12th–13th centuries"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "lateran-condemnation",
+     "name": "Joachim condemned at Lateran",
+     "yearDisplay": "1215 CE · Fourth Lateran Council"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "gerard-eternal-gospel",
+     "name": "The everlasting gospel in Paris",
+     "yearDisplay": "1254 CE · publication"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "abarbanel-house-of-fishes",
+     "name": "Abarbanel’s House of the Fishes",
+     "yearDisplay": "~1437–1508 · Abarbanel, Ferrara 1551"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "renaissance-outward-turn",
+     "name": "The Renaissance turns outward",
+     "yearDisplay": "Renaissance"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "reformation-threshold",
+     "name": "The Reformation threshold",
+     "yearDisplay": "~16th century"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "assumption-declared",
+     "name": "The Assumption declared",
+     "yearDisplay": "1 Nov 1950 · Munificentissimus Deus"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "aquarius-alternative-1997",
+     "name": "Aquarius from the earlier reference star",
+     "yearDisplay": "1997 CE · conditional calculation in Jung’s footnote"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "aquarius-alternative-2154",
+     "name": "Aquarius from the later reference star",
+     "yearDisplay": "2154 CE · conditional calculation in Jung’s footnote"
+    },
+    {
+     "reading": "jung-aquarius-horizon",
+     "readingTitle": "The Aquarius Horizon",
+     "id": "aqh-1950-third-millennium",
+     "name": "The reckoned dates",
+     "yearDisplay": "1950 · Aion (conditional)"
+    },
+    {
+     "reading": "jung-aquarius-horizon",
+     "readingTitle": "The Aquarius Horizon",
+     "id": "aqh-1950-union-of-opposites",
+     "name": "The union of opposites",
+     "yearDisplay": "1950 · Aion"
+    },
+    {
+     "reading": "jung-aquarius-horizon",
+     "readingTitle": "The Aquarius Horizon",
+     "id": "aqh-1950-world-week",
+     "name": "The Water Carrier named",
+     "yearDisplay": "1950 · Aion"
+    }
+   ]
+  },
+  {
+   "id": "ch-7",
+   "n": "VII",
+   "title": "The Prophecies of Nostradamus",
+   "line": "A sixteenth-century astrologer's forecast for the second half of the aeon.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "With this background in mind, I would like to mention the astrological prophecies of Nostradamus",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p107"
+     }
+    }
+   ],
+   "pages": [
+    107,
+    114
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "dailly-antichrist",
+     "name": "Pierre d’Ailly’s calculation",
+     "yearDisplay": "~1414 CE"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "nostradamus-letter",
+     "name": "Nostradamus writes to Henry II",
+     "yearDisplay": "27 June 1558 · letter to Henry II"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "revolutionary-calendar",
+     "name": "The revolutionary calendar",
+     "yearDisplay": "22 September 1792 · as cited by Jung"
+    }
+   ]
+  },
+  {
+   "id": "ch-8",
+   "n": "VIII",
+   "title": "The Historical Significance of the Fish",
+   "line": "The shepherd and the fish meet where one aeon hands over to the next.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "shepherd"
+    },
+    {
+     "type": "family",
+     "id": "ram"
+    },
+    {
+     "type": "family",
+     "id": "lamb"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "Shepherd, ram, and lamb symbolism coincides with the expiring aeon of Aries.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p115"
+     }
+    },
+    {
+     "text": "In the first century of our era the two aeons overlap, and the two most important mystery gods of this period, Attis and Christ, are both characterized as shepherds, rams, and fishes.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p115"
+     }
+    },
+    {
+     "text": "Christ was born at the beginning of the aeon of the Fishes.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p123"
+     }
+    },
+    {
+     "text": "The Fishes, however, are a double sign.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p123"
+     }
+    }
+   ],
+   "pages": [
+    115,
+    129
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "apocalypse-lamb",
+     "name": "The warlike lamb of the Apocalypse",
+     "yearDisplay": "~90 CE · the Apocalypse"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "pectrorios-inscription",
+     "name": "The Pectorios inscription",
+     "yearDisplay": "4th c. (dating uncertain) · Autun"
+    }
+   ]
+  },
+  {
+   "id": "ch-9",
+   "n": "IX",
+   "title": "The Ambivalence of the Fish Symbol",
+   "line": "The fish is also the monster of the deep, Leviathan, waiting at the end of time.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "serpent"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "As a time-division, the number twelve points to the zodia, of which the twelfth is the Fishes.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p130"
+     }
+    },
+    {
+     "text": "Leviathan will then rise out of the sea.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p130"
+     }
+    }
+   ],
+   "pages": [
+    130,
+    137
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-10",
+   "n": "X",
+   "title": "The Fish in Alchemy",
+   "line": "In alchemy the fish turns into the arcane substance, and it still rises in dreams today.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "lapis"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "Whether he knew that the fish was a symbol for the arcane substance and the lapis is perhaps questionable",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶193 (pdf p138)",
+      "print": "126"
+     }
+    },
+    {
+     "text": "In conclusion, I would like to give a concrete example of the way the symbol of the fish springs out of the unconscious autochthonously.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p163"
+     }
+    }
+   ],
+   "pages": [
+    138,
+    165
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "augustine-two-powers",
+     "name": "Augustine’s king and priest",
+     "yearDisplay": "~388–396 CE"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "millennial-reversal",
+     "name": "The reversal around 1000",
+     "yearDisplay": "Around 1000 CE · Jung’s periodisation"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "cathar-bogomil-fishes",
+     "name": "The Cathar–Bogomil two fishes",
+     "yearDisplay": "1111 confession"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "second-fish-dawn",
+     "name": "The second fish surfaces",
+     "yearDisplay": "~1000–1260 · the second fish’s dawn"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "lambspringk-opposed-fishes",
+     "name": "Lambspringk’s reversed fishes",
+     "yearDisplay": "Late 16th century"
+    }
+   ]
+  },
+  {
+   "id": "ch-11",
+   "n": "XI",
+   "title": "The Alchemical Interpretation of the Fish",
+   "line": "The pull that once came from the fish passes to a magnet the alchemist holds.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "magnet"
+    },
+    {
+     "type": "family",
+     "id": "fish"
+    },
+    {
+     "type": "family",
+     "id": "lapis"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "in the alchemical view the attraction no longer proceeds from the fish but from a magnet which man possesses",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p166"
+     }
+    }
+   ],
+   "pages": [
+    166,
+    184
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "morienus-inner-work",
+     "name": "Morienus and the inner work",
+     "yearDisplay": "~7th–8th century"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "dorn-unified-self",
+     "name": "Dorn’s living stone",
+     "yearDisplay": "Second half of the 16th century"
+    }
+   ]
+  },
+  {
+   "id": "ch-12",
+   "n": "XII",
+   "title": "Background to the Psychology of Christian Alchemical Symbolism",
+   "line": "Alchemy as the mother of an epoch, born of the Gnostic systems and lost to the age of science.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "mercurius"
+    },
+    {
+     "type": "family",
+     "id": "prima-materia"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "\"Mater Alchimia\" could serve as the name of a whole epoch.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p185"
+     }
+    },
+    {
+     "text": "It owes its real beginnings to the Gnostic systems",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p185"
+     }
+    }
+   ],
+   "pages": [
+    185,
+    195
+   ],
+   "events": [
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "alchemy-science",
+     "name": "Alchemy gives birth to science",
+     "yearDisplay": "~16th–17th centuries"
+    },
+    {
+     "reading": "jung-aion",
+     "readingTitle": "Aion",
+     "id": "faith-knowledge-rift",
+     "name": "Faith and knowledge separate",
+     "yearDisplay": "~18th century"
+    }
+   ]
+  },
+  {
+   "id": "ch-13",
+   "n": "XIII",
+   "title": "Gnostic Symbols of the Self",
+   "line": "What the aeon slowly worked out was already pictured by the Gnostics at its start.",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "anthropos"
+    },
+    {
+     "type": "family",
+     "id": "serpent"
+    },
+    {
+     "type": "family",
+     "id": "magnet"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "Since all cognition is akin to recognition, it should not come as a surprise to find that what I have described as a gradual process of development had already been anticipated, and more or less prefigured, at the beginning of our era.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶287 (pdf p196)",
+      "print": "184"
+     }
+    }
+   ],
+   "pages": [
+    196,
+    233
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-14",
+   "n": "XIV",
+   "title": "The Structure and Dynamics of the Self",
+   "line": "He gathers the images into one picture: the self as a structure of fours that keeps transforming.",
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "quaternity"
+    },
+    {
+     "type": "family",
+     "id": "anthropos"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "The examples given in the previous chapter should be sufficient to describe the progressive assimilation and amplification of the archetype that underlies ego-consciousness.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶347 (pdf p234)"
+     }
+    },
+    {
+     "text": "it is clear beyond a doubt that many of the Gnostics were nothing other than psychologists",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶347 (pdf p234)"
+     }
+    }
+   ],
+   "pages": [
+    234,
+    277
+   ],
+   "events": []
+  },
+  {
+   "id": "ch-15",
+   "n": "XV",
+   "title": "Conclusion",
+   "line": "The book's own summary: shadow, syzygy, and the self they lead to.",
+   "subjects": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "archetype",
+     "id": "shadow"
+    },
+    {
+     "type": "archetype",
+     "id": "syzygy"
+    }
+   ],
+   "quotes": [
+    {
+     "text": "I have tried, in this book, to elucidate and amplify the various aspects of the archetype which it is most important for modern man to understand—namely, the archetype of the self.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "pdf p282",
+      "print": "266"
+     }
+    }
+   ],
+   "pages": [
+    278,
+    null
+   ],
+   "events": []
+  }
+ ]
+}

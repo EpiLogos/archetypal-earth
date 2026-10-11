@@ -1,0 +1,150 @@
+{
+  "_note": "Aion, the book (CW9ii): a walk through Jung's chapters in his own order, the way the Red Book mode walks Liber Novus by its folios. Each stop quotes its chapter verbatim; scripts/aionbook.mjs places every quotation in the read-only corpus (cw09ii) and writes its cite from the corpus, and links each chapter to the events of the authored Aion readings whose own passages cite that chapter's paragraphs. Lines are mine and only say what the quotations under them show. Subjects are field ids, checked against field.json.",
+  "work": "cw09ii",
+  "title": "Aion: Researches into the Phenomenology of the Self",
+  "line": "Jung wrote Aion in 1951 about the age of the Fishes and the figure that stands at its centre. It starts with the parts of the psyche you can meet, and ends with the self. Walk it chapter by chapter, in his order.",
+  "chapters": [
+    {
+      "id": "foreword", "n": "Foreword", "title": "Foreword",
+      "line": "What the book is about: the Christian aeon read through its symbols of the self, and the turn it carries inside it.",
+      "subjects": [{ "type": "family", "id": "fish" }, { "type": "family", "id": "antichrist" }],
+      "quotes": [
+        "My investigation seeks, with the help of Christian, Gnostic, and alchemical symbols of the self, to throw light on the change of psychic situation within the \"Christian aeon.\"",
+        "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development"
+      ]
+    },
+    {
+      "id": "ch-1", "n": "I", "title": "The Ego",
+      "line": "He starts with the one part everyone knows: the ego, the centre of what we are aware of.",
+      "subjects": [{ "type": "family", "id": "persona" }],
+      "quotes": [
+        "We understand the ego as the complex factor to which all conscious contents are related.",
+        "It forms, as it were, the centre of the field of consciousness"
+      ]
+    },
+    {
+      "id": "ch-2", "n": "II", "title": "The Shadow",
+      "line": "The first figure the ego meets is its own shadow, and meeting it is a moral task.",
+      "subjects": [{ "type": "archetype", "id": "shadow" }, { "type": "family", "id": "sol-niger" }],
+      "quotes": [
+        "The shadow is a moral problem that challenges the whole ego-personality, for no one can become conscious of the shadow without considerable moral effort.",
+        "Hence one meets with projections, one does not make them."
+      ]
+    },
+    {
+      "id": "ch-3", "n": "III", "title": "The Syzygy: Anima and Animus",
+      "line": "Behind the shadow stand the contrasexual figures, the anima and the animus, a pair.",
+      "subjects": [{ "type": "archetype", "id": "syzygy" }, { "type": "archetype", "id": "anima" }, { "type": "archetype", "id": "animus" }],
+      "quotes": [
+        "What, then, is this projection-making factor? The East calls it the \"Spinning Woman\"",
+        "The animus corresponds to the paternal Logos just as the anima corresponds to the maternal Eros."
+      ]
+    },
+    {
+      "id": "ch-4", "n": "IV", "title": "The Self",
+      "line": "Then the whole: the self, whose images cannot be told apart from images of God.",
+      "subjects": [{ "type": "archetype", "id": "self" }, { "type": "family", "id": "mandala" }, { "type": "family", "id": "god-image" }],
+      "quotes": [
+        "Unity and totality stand at the highest point on the scale of objective values because their symbols can no longer be distinguished from the imago Dei.",
+        "Experience shows that individual mandalas are symbols of order"
+      ]
+    },
+    {
+      "id": "ch-5", "n": "V", "title": "Christ, a Symbol of the Self",
+      "line": "For the Christian aeon, the self had a face: Christ, with Antichrist as his shadow.",
+      "subjects": [{ "type": "family", "id": "christ-figure" }, { "type": "family", "id": "antichrist" }, { "type": "archetype", "id": "self" }],
+      "quotes": [
+        "Christ exemplifies the archetype of the self.",
+        "In the world of Christian ideas Christ undoubtedly represents the self."
+      ]
+    },
+    {
+      "id": "ch-6", "n": "VI", "title": "The Sign of the Fishes",
+      "line": "Christ's age is the age of Pisces, and Pisces is two fishes, not one.",
+      "subjects": [{ "type": "family", "id": "fish" }, { "type": "family", "id": "christ-figure" }],
+      "quotes": [
+        "The figure of Christ is not as simple and unequivocal as one could wish.",
+        "Apart from the snake, the fish is one of the oldest allegories."
+      ]
+    },
+    {
+      "id": "ch-7", "n": "VII", "title": "The Prophecies of Nostradamus",
+      "line": "A sixteenth-century astrologer's forecast for the second half of the aeon.",
+      "subjects": [{ "type": "family", "id": "fish" }],
+      "quotes": [
+        "With this background in mind, I would like to mention the astrological prophecies of Nostradamus"
+      ]
+    },
+    {
+      "id": "ch-8", "n": "VIII", "title": "The Historical Significance of the Fish",
+      "line": "The shepherd and the fish meet where one aeon hands over to the next.",
+      "subjects": [{ "type": "family", "id": "fish" }, { "type": "family", "id": "shepherd" }, { "type": "family", "id": "ram" }, { "type": "family", "id": "lamb" }],
+      "quotes": [
+        "Shepherd, ram, and lamb symbolism coincides with the expiring aeon of Aries.",
+        "In the first century of our era the two aeons overlap, and the two most important mystery gods of this period, Attis and Christ, are both characterized as shepherds, rams, and fishes.",
+        "Christ was born at the beginning of the aeon of the Fishes.",
+        "The Fishes, however, are a double sign."
+      ]
+    },
+    {
+      "id": "ch-9", "n": "IX", "title": "The Ambivalence of the Fish Symbol",
+      "line": "The fish is also the monster of the deep, Leviathan, waiting at the end of time.",
+      "subjects": [{ "type": "family", "id": "fish" }, { "type": "family", "id": "serpent" }],
+      "quotes": [
+        "As a time-division, the number twelve points to the zodia, of which the twelfth is the Fishes.",
+        "Leviathan will then rise out of the sea."
+      ]
+    },
+    {
+      "id": "ch-10", "n": "X", "title": "The Fish in Alchemy",
+      "line": "In alchemy the fish turns into the arcane substance, and it still rises in dreams today.",
+      "subjects": [{ "type": "family", "id": "fish" }, { "type": "family", "id": "lapis" }],
+      "quotes": [
+        "Whether he knew that the fish was a symbol for the arcane substance and the lapis is perhaps questionable",
+        "In conclusion, I would like to give a concrete example of the way the symbol of the fish springs out of the unconscious autochthonously."
+      ]
+    },
+    {
+      "id": "ch-11", "n": "XI", "title": "The Alchemical Interpretation of the Fish",
+      "line": "The pull that once came from the fish passes to a magnet the alchemist holds.",
+      "subjects": [{ "type": "family", "id": "magnet" }, { "type": "family", "id": "fish" }, { "type": "family", "id": "lapis" }],
+      "quotes": [
+        "in the alchemical view the attraction no longer proceeds from the fish but from a magnet which man possesses"
+      ]
+    },
+    {
+      "id": "ch-12", "n": "XII", "title": "Background to the Psychology of Christian Alchemical Symbolism",
+      "line": "Alchemy as the mother of an epoch, born of the Gnostic systems and lost to the age of science.",
+      "subjects": [{ "type": "family", "id": "mercurius" }, { "type": "family", "id": "prima-materia" }],
+      "quotes": [
+        "\"Mater Alchimia\" could serve as the name of a whole epoch.",
+        "It owes its real beginnings to the Gnostic systems"
+      ]
+    },
+    {
+      "id": "ch-13", "n": "XIII", "title": "Gnostic Symbols of the Self",
+      "line": "What the aeon slowly worked out was already pictured by the Gnostics at its start.",
+      "subjects": [{ "type": "family", "id": "anthropos" }, { "type": "family", "id": "serpent" }, { "type": "family", "id": "magnet" }],
+      "quotes": [
+        "Since all cognition is akin to recognition, it should not come as a surprise to find that what I have described as a gradual process of development had already been anticipated, and more or less prefigured, at the beginning of our era."
+      ]
+    },
+    {
+      "id": "ch-14", "n": "XIV", "title": "The Structure and Dynamics of the Self",
+      "line": "He gathers the images into one picture: the self as a structure of fours that keeps transforming.",
+      "subjects": [{ "type": "archetype", "id": "self" }, { "type": "family", "id": "quaternity" }, { "type": "family", "id": "anthropos" }],
+      "quotes": [
+        "The examples given in the previous chapter should be sufficient to describe the progressive assimilation and amplification of the archetype that underlies ego-consciousness.",
+        "it is clear beyond a doubt that many of the Gnostics were nothing other than psychologists"
+      ]
+    },
+    {
+      "id": "ch-15", "n": "XV", "title": "Conclusion",
+      "line": "The book's own summary: shadow, syzygy, and the self they lead to.",
+      "subjects": [{ "type": "archetype", "id": "self" }, { "type": "archetype", "id": "shadow" }, { "type": "archetype", "id": "syzygy" }],
+      "quotes": [
+        "I have tried, in this book, to elucidate and amplify the various aspects of the archetype which it is most important for modern man to understand—namely, the archetype of the self."
+      ]
+    }
+  ]
+}

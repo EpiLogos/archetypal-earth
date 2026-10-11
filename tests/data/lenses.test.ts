@@ -9,6 +9,8 @@ import { verify, workLoader, locate } from '../../scripts/lib/cite.mjs';
 import { buildTheory } from '../../scripts/theory.mjs';
 // @ts-expect-error Plain ESM shared with the CLI.
 import { buildAstrology } from '../../scripts/astrology.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { buildAionBook } from '../../scripts/aionbook.mjs';
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const read = (f: string) => JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', f), 'utf8'));
@@ -27,7 +29,7 @@ function quotes(node: unknown, out: Q[] = []): Q[] {
 
 describe('the lens data: provenance lives in the quotes', () => {
   const load = workLoader(DEFAULT_VAULT);
-  for (const file of ['theory.json', 'astrology.json', 'practice.json', 'depth.json']) {
+  for (const file of ['theory.json', 'astrology.json', 'practice.json', 'depth.json', 'aionbook.json']) {
     it(`${file}: every quotation stands verbatim on its cited page of the read-only vault`, () => {
       const qs = quotes(read(file));
       expect(qs.length).toBeGreaterThan(10);
@@ -47,6 +49,14 @@ describe('the lens data: provenance lives in the quotes', () => {
     expect(a.errors).toEqual([]);
     expect(read('theory.json')).toEqual(t.data);
     expect(read('astrology.json')).toEqual(a.data);
+  });
+
+  it('Aion, the book: every chapter is quoted from inside its own pages, in Jung\'s order', () => {
+    const b = buildAionBook({ vault: DEFAULT_VAULT });
+    expect(b.errors).toEqual([]);
+    expect(read('aionbook.json')).toEqual(b.data);
+    expect(b.data.chapters.map((c: { n: string }) => c.n)).toEqual(['Foreword', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV']);
+    for (const c of b.data.chapters) expect(c.quotes.length).toBeGreaterThan(0);
   });
 
   it('the deep fields the site links to are the ones the curation builds', async () => {
