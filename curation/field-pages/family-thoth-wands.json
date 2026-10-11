@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-wands",
+ "line": "Crowley attributes Wands to Fire and Aries, and the Ace gives the suit the letter Yod, while his general account gives Fire the letter Shin.",
+ "sections": [
+  {
+   "id": "fire-and-aries",
+   "title": "Fire and Aries",
+   "line": "The suit's element and sign are stated in Crowley's own sentences on the suits and on the Wands.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Wands has the attribution of Aries, and represents swift violence of onset, the lightning flash.",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-flames-are-yods",
+   "title": "The flames are Yods",
+   "line": "The letter is given in the text of the Ace of Wands, where the flames are drawn as Yods.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These flames are Yods, arranged in the form of the Tree of Life.",
+     "page": 183,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is a solarphallic outburst of flame from which spring lightnings in every direction.",
+     "page": 183,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-letter-of-fire",
+   "title": "The letter of Fire",
+   "line": "Crowley's general account gives Fire the letter Shin, and the Ace of Wands gives the suit Yod, which is the letter of the Knights in the Name. The page keeps both as his statements.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These elements are represented in the Hebrew alphabet by the letters Shin, Mem and Aleph.",
+     "page": 23,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The letter Shin, which is the letter of Fire, has to do double duty by representing Spirit as well.",
+     "page": 175,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "thoth-minor-arcana"
+  },
+  {
+   "type": "archetype",
+   "id": "court-knight"
+  }
+ ]
+}

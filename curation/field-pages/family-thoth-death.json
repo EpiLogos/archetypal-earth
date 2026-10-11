@@ -1,0 +1,83 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-death",
+ "line": "Crowley's account of Atu XIII: the letter Nun, Scorpio ruled by Mars, and the figure of the dance of death.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter and the sign, with the ruler he names for the sign.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Nun, which means a fish;",
+     "page": 90,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It refers to the Zodiacal sign of Scorpio, which is ruled by Mars,",
+     "page": 90,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "Crowley says this path leads from Tiphareth, with the far end not named. The table gives Key Scale path 24, with no sephira pair in the text.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "On the Tree of Life, Atu XIII and XV are symmetrically placed; they lead from Tiphareth, the human consciousness, to the spheres in which Thought (on the one hand) and Bliss (on the other) are developed.",
+     "page": 95,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These paths are the paths which join the ten numbers on the",
+     "page": 36,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's description of the figure and the water imagery of the card.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card itself represents the dance of death; the figure is a skeleton bearing a scythe,",
+     "page": 91,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the symbol of life beneath the waters; life travelling through the waters.",
+     "page": 90,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "scorpio"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "psychopomp"
+  }
+ ]
+}

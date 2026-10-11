@@ -1,0 +1,102 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-five-of-wands",
+ "line": "Crowley’s Five of Wands: Strife, referred to Geburah, ruled also by Saturn and Leo.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the five of Wands is called Strife.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree",
+   "line": "The card is referred to Geburah of the suit of Fire, and the tree essay gives Geburah as the sephira of a Five.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to Geburah of the suit of Fire.",
+     "page": 189,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "and to the Sephira Geburah because it is a Five.",
+     "page": 40,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley’s account of the card’s fiery energy, the wand of the Chief Adept, and its volcanic scope.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is no limit to the scope of this volcanic energy.",
+     "page": 189,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The symbol represents the wand of the Chief Adept, showing that the authority is derived from the superiors;",
+     "page": 189,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "conflicts-and-gaps",
+   "title": "Conflicts and gaps",
+   "line": "The chapter text rules the card by Saturn and Leo. The attribution table (pdf 275, image only, not quoted) reads Saturn in Leo, and this page keeps the text reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It is ruled also by Saturn and Leo.",
+     "page": 189,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is also subject to the sign Leo, and to the planet Saturn, because this planet and sign determine the nature of the card.",
+     "page": 40,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "geburah"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  }
+ ]
+}

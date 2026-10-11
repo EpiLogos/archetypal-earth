@@ -1,0 +1,97 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "virgo",
+ "line": "Burt's chapter on Virgo, with Jung's seminar on the virgin.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Virgo, pdf pp. 211–252. Her account of the earth, the purity and the ruler.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Virgo is Mutable, or passive-responsive to events and circumstances, especially those involved with the Sixth House of labor,",
+     "page": 216,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The earthy nature of Virgo seems to provide Hermes the patience and powers of concentration required for his serious healing and alchemical work.",
+     "page": 211,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "As ruler of the Earth sign Virgo, Hermes seems less flighty, more grounded, stable and consistent in his behavior than he was as ruler of airy Gemini.",
+     "page": 211,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Virgo is pure in the sense that it is open and receptive to life.",
+     "page": 221,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Virgo, pdf pp. 211–252. Hermes as healer and the esoteric Moon.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Hermes Psychopompous (Guide to Hades)",
+     "page": 211,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The esoteric ruler of Virgo is the Moon, an intuitive, nurturing planet.",
+     "page": 236,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Virginity is a matter of attitude, not a matter of bodily intactness.",
+     "page": 221,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the virgin in his seminar.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "When man is roaring like a lion there is nothing better to tame him than a virgin.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "When the sun came into Pisces, Virgo became the autumnal sign, and astrology has connected that fact with the worship of the Virgin Mary.",
+     "page": 449,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "pisces"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  }
+ ]
+}

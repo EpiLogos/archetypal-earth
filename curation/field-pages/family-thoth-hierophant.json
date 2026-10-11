@@ -1,0 +1,62 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-hierophant",
+ "line": "Crowley's Atu V: the letter Vau, Taurus, and the uniting of microcosm and macrocosm; the text gives no path for the card.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The letter Vau, a nail, and the sign Taurus.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to the letter Vau, which means a Nail;",
+     "page": 68,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is referred to Taurus; therefore the Throne of the Hierophant is surrounded",
+     "page": 68,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures, and where it sits on the Tree",
+   "line": "The text names the card with the Child, and with the uniting of microcosm and macrocosm. It names no ends for its path; the Key Scale gives path 16. The Chariot chapter places the Hierophant on the other side of the Tree, which is not a path.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "But the main reference is to the particular arcanum which is the principal business, the essential, of all magical work; the uniting of the microcosm with the macrocosm.",
+     "page": 68,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the aeon of Horus, of the Child.",
+     "page": 69,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Hierophant, which, on the other side of the Tree of Life, brings down the fire of Chokmah.",
+     "page": 74,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "taurus"
+  },
+  {
+   "type": "archetype",
+   "id": "child"
+  }
+ ]
+}

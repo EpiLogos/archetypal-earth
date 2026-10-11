@@ -68,6 +68,8 @@ body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-row .gvt-n { font-feature-settings: 'tnum'; color: var(--ink-3); }
 .gvt-ties { display: flex; gap: 6px; }
 .gvt-filter { padding: 5px 7px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
+/* the kinds row (Occurrences · Archetypes · Theoretics · Families) wraps in the panel's own grid */
+.gvt-kinds { display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
 .gvt-filter[aria-pressed="true"] { color: var(--ink); background: rgb(var(--core-rgb) / 0.1); border-color: rgb(var(--core-rgb) / 0.3); }
 .gvt-settings[aria-expanded="true"] { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
 /* the forces: one quiet disclosure under the filters; its rows are the sliders */

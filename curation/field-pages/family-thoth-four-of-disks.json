@@ -1,0 +1,89 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-four-of-disks",
+ "line": "Crowley’s Four of Disks: Power, Chesed establishing the Universe in three dimensions, the Sun in Capricorn.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is called Power.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree and in the zodiac",
+   "line": "The Four, Chesed, shows the Universe established in three dimensions below the Abyss. The card is ruled by the Sun in Capricorn.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Four, Chesed, shows the establishment of the Universe in three dimensions, that is, below the Abyss.",
+     "page": 229,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Chesed.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is ruled by the Sun in Capricornus",
+     "page": 229,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley reads the card as Law and Order, and the disks as a fortress whose defence is valid only when violently active.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This represents Law and Order, maintained by constant authority and vigilance.",
+     "page": 229,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The disks themselves are square; revolution is very opposite to the card; and they contain the signs of the Four Elements.",
+     "page": 229,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "chesed"
+  },
+  {
+   "type": "family",
+   "id": "sun"
+  }
+ ]
+}

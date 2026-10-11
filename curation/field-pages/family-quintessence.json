@@ -1,0 +1,148 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "quintessence",
+ "line": "Jung's fifth as the unity of the four and the stone, set beside his other use of the word fifth for earth.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "Jung's own statements that the quinta essentia is the stone, and that it is the unity the four come to.",
+   "quotes": [
+    {
+     "work": "cw10",
+     "quote": "This is a symbol of the quinta essentia, which is identical with the Philosophers’ Stone.",
+     "para": 738
+    },
+    {
+     "work": "cw16",
+     "quote": "the quintessential star, symbol of the unity of the four hostile elements.",
+     "para": 403
+    },
+    {
+     "work": "cw11",
+     "quote": "Dorn breaks with the whole alchemical tradition inasmuch as he adopts the rigidly Christian standpoint that Three is One but Four is not, because Four attains to unity in the quinta essentia.",
+     "para": 104
+    },
+    {
+     "work": "cw14",
+     "quote": "Thus the square at the beginning corresponds to the quaternio of elements united in the quinta essentia at the end",
+     "para": 656
+    }
+   ]
+  },
+  {
+   "id": "apart-from-the-four",
+   "title": "Apart from the four",
+   "line": "Jung reads a fifth star and a fifth flower in pictures as the quintessence, and the alchemical egg puts a point apart from the four. Earth, which he calls the fifth element, is not the quintessence.",
+   "quotes": [
+    {
+     "work": "cw16",
+     "quote": "Above, in the centre, there is a fifth star which represents the fifth entity, the “One” derived from the four, the quinta essentia.",
+     "para": 402
+    },
+    {
+     "work": "cw16",
+     "quote": "The fifth flower comes from above and presumably represents the quinta essentia; it is brought by the dove of the Holy Ghost",
+     "para": 410
+    },
+    {
+     "work": "cw09ii",
+     "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick.",
+     "page": 232,
+     "voice": "Turba philosophorum, quoted by Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Earth occupies the central position as the fifth element, though it is not the quintessence and goal of the work but rather its basis, corresponding to terra as the arcane substance in Western alchemy.",
+     "para": 249
+    }
+   ]
+  },
+  {
+   "id": "other-names",
+   "title": "Its other names",
+   "line": "The quintessence under other names: as aether, and as one of the names given to the One.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "It is a symbol of the arcane substance and the quintessence, of the aether that contains all four elements",
+     "para": 270
+    },
+    {
+     "work": "cw14",
+     "quote": "The establishment of the Maid in the fifth circle is an indication that the quintessence, portraying the disharmonious elements as a unity, is equivalent to aether, the finest and most subtle substance.",
+     "para": 452
+    },
+    {
+     "work": "cw12",
+     "quote": "The product is generally called the “quintessence,” though this is by no means the only name for the ever-hoped-for",
+     "para": 165
+    }
+   ]
+  },
+  {
+   "id": "read-psychologically",
+   "title": "Read psychologically",
+   "line": "Jung's reading of the alchemical production as a psychic process, not a chemical one.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "For us, who know that no amount of incineration, sublimation, and centrifuging of the vinous residue can ever produce an “air-coloured” quintessence, the entire procedure is fantastic if taken literally.",
+     "para": 749
+    },
+    {
+     "work": "cw14",
+     "quote": "The Production of the Quintessence means if in the misery and incertitude of a moral or philosophical dilemma one has a quinta essentia, a lapis or a panacea so to say in one’s pocket!",
+     "para": 680
+    },
+    {
+     "work": "cw14",
+     "quote": "If it “draws out the soul of Mercurius,” this means psychologically that the image of the self (the golden quaternity) draws a quintessence out of the chthonic spirit.",
+     "para": 698
+    }
+   ]
+  },
+  {
+   "id": "von-franz",
+   "title": "Von Franz",
+   "line": "Von Franz, in her own voice, on the same question: a unity of the four, not an added fifth.",
+   "quotes": [
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "The latter is not merely a fifth element added on to the four known ones, but represents their realized unity of existence.",
+     "page": 77,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "The quinta essentia is not additively joined onto the first four as a fifth element",
+     "page": 132,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quincunx"
+  },
+  {
+   "type": "family",
+   "id": "lapis"
+  },
+  {
+   "type": "family",
+   "id": "ether"
+  },
+  {
+   "type": "archetype",
+   "id": "five"
+  },
+  {
+   "type": "archetype",
+   "id": "self"
+  }
+ ]
+}

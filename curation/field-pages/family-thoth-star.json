@@ -1,0 +1,83 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-star",
+ "line": "Crowley's account of Atu XVII: the letter He, Aquarius, Nuith, and the path of He that the Emperor's chapter also claims.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter He and the sign Aquarius, and the picture of Nuith, Lady of the Stars.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Hé, as has been explained elsewhere. It refers to the Zodiacal sign of Aquarius, the water‐ bearer.",
+     "page": 100,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The picture represents Nuith, our Lady of the Stars.",
+     "page": 100,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's description of the figure as personified in human form, with heaven a veil before the face of the goddess.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card she is definitely personified as a human‐seeming figure;",
+     "page": 100,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Heaven itself is no more than a veil before the face of the immortal goddess.",
+     "page": 101,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree-and-conflict",
+   "title": "The Tree, and a conflict that is not resolved",
+   "line": "Crowley calls the Path of He the Great Mother, the Star and Nuit. The Key Scale numbers He path 15, which runs between Chokmah and Tiphareth on the Tree. The Emperor's chapter gives those same two ends in its own text, while the table gives the Emperor Tzaddi, path 28. The two statements are not reconciled here.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Path of Hé, the Great Mother, the Star, our Lady Nuit,",
+     "page": 211,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
+     "page": 67,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "aquarius"
+  },
+  {
+   "type": "family",
+   "id": "chokmah"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "great-mother"
+  }
+ ]
+}

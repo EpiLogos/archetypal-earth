@@ -1,0 +1,119 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-fool",
+ "line": "Crowley's Atu 0 in his own sentences: its number, letter and element, and the path that joins the Crown to Wisdom.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The number zero, the letter Aleph, and the element Air.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The really important feature of this card is that its number should be 0. It represents therefore the Negative above the Tree of Life, the source of all things.",
+     "page": 46,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Aleph, which means an Ox, but by its shape the Hebrew letter (so it is said) represents a plough‐ share; thus the significance is primarily Phallic.",
+     "page": 46,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the equation of the Universe, the initial and final balance of the opposites; Air, in this card, therefore quintessentially means a vacuum.",
+     "page": 46,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The chapter names only Kether; the appendix names Wisdom and the Crown as the two ends. The Key Scale gives path 11, and Crowley identifies Wisdom with Chokmah in the Emperor chapter.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Kether: see the position of the Path of Aleph on the Tree of Life.",
+     "page": 56,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "though Wisdom be the Second Emanation of His Essence, there is a path to separate and to join them,",
+     "page": 116,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the Reference thereof being Aleph, that is One indeed,",
+     "page": 116,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the Summit of Wisdom is the Opening of the Way that leadeth unto the Crown and Essence of all",
+     "page": 116,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This is the Path of the Pure Fool.",
+     "page": 116,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
+     "page": 67,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's own description of the Fool as the negative, and of the Universe as its manifestation.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Fool is of the gold of air.",
+     "page": 56,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return.",
+     "page": 110,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "in whom all complex is resolved",
+     "page": 116,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  },
+  {
+   "type": "family",
+   "id": "chokmah"
+  },
+  {
+   "type": "archetype",
+   "id": "child"
+  }
+ ]
+}

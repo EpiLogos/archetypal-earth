@@ -1,0 +1,105 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "chokmah",
+ "line": "Crowley numbers Chokmah 2 and calls it the first manifestation; Jung names it in a passage reporting Franck's trinity, and gives it no number.",
+ "sections": [
+  {
+   "id": "crowley-number-two",
+   "title": "Crowley's number 2",
+   "line": "Crowley gives Chokmah the Two, then reads the number back to the first manifestation.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The 2 pertains to Chokmah.",
+     "page": 35,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Chokmah is really No. I and not No.2, because he is the first manifestation;",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Magical manifestation of Chokmah, Wisdom, the Logos.",
+     "page": 211,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "wisdom-the-father-mercury",
+   "title": "Wisdom, the Father and Mercury",
+   "line": "Crowley's Hermit and Magus chapters name Chokmah as Wisdom, the Father, and Mercury, the way to Kether.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Father, who is Wisdom; he is the highest form of Mercury",
+     "page": 79,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Mercury as Chokmah “through whom alone we can approach Kether.”",
+     "page": 121,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-path-to-binah",
+   "title": "The path to Binah",
+   "line": "The Daleth path joins Chokmah to Binah, uniting Father and Mother in Crowley's Empress chapter.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "On the Tree of Life, Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother.",
+     "page": 64,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-universe-list",
+   "title": "Neptune in the Universe list",
+   "line": "Item 2 of Crowley's ten-item list is the sphere of the fixed stars, under Neptune. The list does not name Chokmah, so the number is the only link to it there.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The sphere of the Zodiac or fixed stars, represented by Neptune.",
+     "page": 111,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-trinity",
+   "title": "Jung's trinity",
+   "line": "Jung names Hokhmah with Kether and Binah in Franck's trinity. He gives it no number and no planet.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "Franck establishes a connection between 32 and the cabalistic trinity, Kether, Binah, and Hokhmah",
+     "para": 313,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  },
+  {
+   "type": "family",
+   "id": "binah"
+  }
+ ]
+}

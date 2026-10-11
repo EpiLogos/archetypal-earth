@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-gemini-3",
+ "line": "Crowley's Ten of Swords is the card for the third decan of Gemini, with the Sun as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Gemini.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Swords is called Ruin.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is also ruled by the Sun in Gemini",
+     "page": 222,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It shows reason run mad, ramshackle riot of soulless mechanism",
+     "page": 222,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "group-note",
+   "title": "Crowley's group note on the Tens",
+   "line": "His note on the Tens says there is no planetary attribution to consider, yet each Ten names a planet in its sign. This page keeps the planet the chapter names.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is now no planetary attribution to consider.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "gemini"
+  },
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "thoth-ten-of-swords"
+  }
+ ]
+}

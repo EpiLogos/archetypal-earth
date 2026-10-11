@@ -3,7 +3,7 @@ import sky from '../../public/data/sky.json';
 import golden from './golden/birth.json';
 import { SkyEphemeris } from '../../src/sky/ephemeris';
 import { chartAgreement, chartMoment, chartRows, describeAspect, describeInstant, approximationNote, placeInSign, BIRTH_FRAMING, BIRTH_LIMITS } from '../../src/sky/chart';
-import { dataWithWindow, chartProblems, parseBirthInput, SidecarClient, SidecarError, validateChart, WINDOW_DAYS } from '../../src/sky/sidecar';
+import { dataWithWindow, chartProblems, fromSidecarBodies, parseBirthInput, SidecarClient, SidecarError, validateChart, WINDOW_DAYS } from '../../src/sky/sidecar';
 import { findPlaces, fold, formatCoordinates, fromGazetteer, fromGeocode } from '../../src/sky/gazetteer';
 import { blendPose, easeInOut, lerpAngle } from '../../src/sky/flight';
 import { aspectArc, CHART_RADIUS } from '../../src/sky/chart-overlay';
@@ -18,7 +18,8 @@ const j2000 = byLabel(/J2000/);
 const summer = byLabel(/summer time/);
 const gap = byLabel(/did not exist/);
 const chartOf = (c: Case) => c.chart as unknown as SidecarChart;
-const windowEph = (c: Case) => new SkyEphemeris(dataWithWindow(base, { planets: c.window.planets as never, moon: c.window.moon as never, from: c.window.planets.start, to: c.window.planets.start }));
+// the golden window is the sidecar's own answer (its `earth` column); the client re-keys it to the app's `terra`
+const windowEph = (c: Case) => new SkyEphemeris(dataWithWindow(base, { planets: { ...c.window.planets, bodies: fromSidecarBodies(c.window.planets.bodies as never) } as never, moon: c.window.moon as never, from: c.window.planets.start, to: c.window.planets.start }));
 
 describe('the chart contract: what the page believes of the sidecar', () => {
   it('accepts every golden chart as the sidecar gave it', () => {

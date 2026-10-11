@@ -199,6 +199,119 @@
      "id": "transcendent-function"
     }
    ]
+  },
+  {
+   "id": "functions",
+   "name": "Functions",
+   "line": "Jung counts four basic functions of consciousness: thinking and feeling, the rational pair, and sensation and intuition, the irrational pair. Each answers one question about a situation, and the attitudes, introversion and extraversion, make a second axis.",
+   "quotes": [
+    {
+     "text": "I distinguish four basic functions in all, two rational and two irrational (qq.v.): thinking and feeling, sensation and intuition (qq.v.).",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶731 (pdf p399)"
+     }
+    },
+    {
+     "text": "Sensation and intuition I call irrational functions, because they are both concerned simply with what happens and with actual or potential realities. Thinking and feeling, being discriminative functions, are rational.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶983 (pdf p499)"
+     }
+    },
+    {
+     "text": "Sensation establishes what is actually present, thinking enables us to recognize its meaning, feeling tells us its value, and intuition points to possibilities as to whence it came and whither it is going in a given situation.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶958 (pdf p488)"
+     }
+    },
+    {
+     "text": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶958 (pdf p488)"
+     }
+    },
+    {
+     "text": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶983 (pdf p499)"
+     }
+    },
+    {
+     "text": "So, too, there are four aspects of psychological orientation, beyond which nothing fundamental remains to be said.",
+     "cite": {
+      "work": "cw11",
+      "workTitle": "Psychology and Religion: West and East",
+      "locator": "¶246 (pdf p140)"
+     }
+    },
+    {
+     "text": "each of the two general attitudes, introversion and extraversion, manifests itself in a special way in an individual through the predominance of one of the four basic functions.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶913 (pdf p471)"
+     }
+    },
+    {
+     "text": "These contrary attitudes are in themselves no more than correlative mechanisms: a diastolic going out and seizing of the object, and a systolic concentration and detachment of energy from the object seized.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶6 (pdf p20)"
+     }
+    },
+    {
+     "text": "consciousness has four corners as it were, four different ways or aspects, which we call the four functions",
+     "cite": {
+      "work": "sem-zarathustra",
+      "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+      "locator": "pdf p1475"
+     }
+    },
+    {
+     "text": "Very frequently, indeed as a general rule, a man identifies more or less completely with the most favoured and hence the most developed function.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶763 (pdf p410)"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "family",
+     "id": "quaternity"
+    },
+    {
+     "type": "family",
+     "id": "thinking"
+    },
+    {
+     "type": "family",
+     "id": "feeling"
+    },
+    {
+     "type": "family",
+     "id": "sensation"
+    },
+    {
+     "type": "family",
+     "id": "intuition"
+    },
+    {
+     "type": "archetype",
+     "id": "four"
+    }
+   ]
   }
  ],
  "number": {

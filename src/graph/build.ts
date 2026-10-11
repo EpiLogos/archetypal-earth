@@ -191,6 +191,15 @@ export function buildGraph(m: Model): Graph {
     }
   }
 
+  // joins: curation's relations between any two nodes (an element and its suit, a sephira and its number). They are
+  // drawn as ties and answer to the same Relations filter by basis, so no new kind of edge enters the graph.
+  const joinKey = (end: { type: 'archetype' | 'theoretic' | 'family'; id: string }) => (end.type === 'archetype' ? aKey(end.id) : end.type === 'theoretic' ? tKey(end.id) : fKey(end.id));
+  for (const j of m.joins) {
+    const ai = byKey.get(joinKey(j.a));
+    const bi = byKey.get(joinKey(j.b));
+    if (ai !== undefined && bi !== undefined && ai !== bi) edges.push({ s: ai, t: bi, kind: 'tie', basis: j.basis });
+  }
+
   const adj: number[][] = nodes.map(() => []);
   const incident: number[][] = nodes.map(() => []);
   edges.forEach((e, k) => {
@@ -286,6 +295,13 @@ export interface NeighbourhoodOptions {
   occurrences?: boolean;
   /** Which authored kinds of tie (family → archetype, body → field) to follow. Other relations remain available. */
   tieBases?: readonly TieBasis[];
+  /** The tiers drawn at all: a kind left out is absent with its ties, never left stranded. Absent = every kind. */
+  kinds?: ReadonlySet<NodeKind>;
+}
+
+/** Is this node's kind drawn? A sky body answers to its own toggle, never to the tiers' filters. */
+export function kindShown(n: GNode, kinds?: ReadonlySet<NodeKind>): boolean {
+  return kinds === undefined || n.kind === 'body' || kinds.has(n.kind);
 }
 
 export function edgeAllowed(e: GEdge, tieBases?: readonly TieBasis[]): boolean {
@@ -297,6 +313,8 @@ export function neighbourhood(g: Graph, seeds: number[], opts: NeighbourhoodOpti
   const depth = Math.max(0, Math.floor(opts.depth));
   const cap = opts.cap ?? 360;
   const withOcc = opts.occurrences !== false;
+  const kinds = opts.kinds;
+  // the seeds are the person's own choice and always stand; a kind the filter removed is simply no neighbour
   const seedSet = new Set(seeds);
   const dist = new Map<number, number>();
   for (const s of seeds) dist.set(s, 0);
@@ -309,6 +327,7 @@ export function neighbourhood(g: Graph, seeds: number[], opts: NeighbourhoodOpti
         if (!edgeAllowed(e, opts.tieBases)) continue;
         const nb = e.s === n ? e.t : e.s;
         if (dist.has(nb) || found.has(nb)) continue;
+        if (!kindShown(g.nodes[nb], kinds)) continue;
         if (!withOcc && g.nodes[nb].kind === 'occurrence' && !seedSet.has(nb)) continue;
         found.add(nb);
       }
@@ -330,9 +349,9 @@ export function neighbourhood(g: Graph, seeds: number[], opts: NeighbourhoodOpti
 }
 
 /** What the global view shows: archetypes, theoretics and families, and occurrences as dust when asked. */
-export function globalSet(g: Graph, occurrences: boolean, tieBases?: readonly TieBasis[]): Neighbourhood {
+export function globalSet(g: Graph, occurrences: boolean, tieBases?: readonly TieBasis[], kinds?: ReadonlySet<NodeKind>): Neighbourhood {
   const dist = new Map<number, number>();
-  for (const n of g.nodes) if (n.kind !== 'occurrence' || occurrences) dist.set(n.id, n.kind === 'archetype' || n.kind === 'theoretic' || n.kind === 'body' ? 0 : n.kind === 'family' ? 1 : 2);
+  for (const n of g.nodes) if ((n.kind !== 'occurrence' || occurrences) && kindShown(n, kinds)) dist.set(n.id, n.kind === 'archetype' || n.kind === 'theoretic' || n.kind === 'body' ? 0 : n.kind === 'family' ? 1 : 2);
   const edges: number[] = [];
   g.edges.forEach((e, k) => {
     if (dist.has(e.s) && dist.has(e.t) && edgeAllowed(e, tieBases)) edges.push(k);

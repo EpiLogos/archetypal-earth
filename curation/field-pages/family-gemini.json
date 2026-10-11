@@ -1,0 +1,99 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "gemini",
+ "line": "Burt's chapter on Gemini, and Jung's few passages on the twins.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Gemini, pdf pp. 95–134. Her account of the sign and its ruler.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes.",
+     "page": 95,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "In Gemini, we deal with Mutable Air which represents observation, analysis, rational classification of data, and objectivity.",
+     "page": 98,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Gemini stands at a crossroads and seeks a guide.",
+     "page": 102,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Gemini is the most versatile archetype.",
+     "page": 115,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Gemini, pdf pp. 95–134. Hermes, the puer and the messenger.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Hermes was known to the Greeks as Guide to the Three Worlds, Dweller of the Twilight, Lord of the Shepherds (esoteric ruler of the ram), Patron of Merchants, Patron of Thieves.",
+     "page": 95,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Hermes was forever young—a perpetual adolescent.",
+     "page": 95,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Hermes is a catalyst; a messenger. He communicates information and brings people together.",
+     "page": 113,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Hermes corresponds to Peter Pan, the Eternal Youth (Puer Aeternis)",
+     "page": 98,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung gives the twins twice in these sources: the seminar, and a comparison with the Dioscuri.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The fertility of man. One seldom does better than twins.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "cw05",
+     "quote": "We have already pointed out that the Dioscuri represent a similar idea in somewhat different form: one sun is mortal, the other immortal.",
+     "para": 296,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "sagittarius"
+  }
+ ]
+}

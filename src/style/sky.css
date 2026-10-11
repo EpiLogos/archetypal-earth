@@ -9,6 +9,8 @@
   opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), color .3s;
 }
 .sky-label.on { opacity: 1; visibility: visible; }
+/* in a gaze the planet's satellite plates hang over the sky: a body's name must not take the click meant for a plate */
+body.sky-gazing .sky-label { pointer-events: none; }
 .sky-label:hover, .sky-label:focus-visible, .sky-label[aria-pressed=true] { color: var(--sl, var(--core)); }
 .sky-label:focus-visible { outline: 1px solid rgb(var(--core-rgb) / .55); outline-offset: 1px; }
 .sky-caption {
@@ -103,3 +105,9 @@
 .sky-chart-glyph.on { opacity: .95; }
 .sky-chart-glyph .zg { display: block; width: 100%; height: 100%; overflow: visible; }
 .sky-chart-glyph .zg path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; vector-effect: none; filter: drop-shadow(0 0 3px currentColor); }
+/* a sign whose family the field holds: a real control, drawn at the same size; its hit area is a ring of at least 44px */
+button.sky-chart-btn { appearance: none; background: none; border: 0; margin: 0; padding: 0; cursor: pointer; }
+.sky-chart-btn::before { content: ''; position: absolute; inset: calc((44px - 100%) / -2); border-radius: 50%; }
+.sky-chart-mark.sky-chart-btn.on { pointer-events: auto; }
+.sky-chart-btn:focus-visible { outline: 1px solid rgb(var(--core-rgb) / .55); outline-offset: 3px; border-radius: 50%; }
+.sky-chart-btn:hover { opacity: 1; }

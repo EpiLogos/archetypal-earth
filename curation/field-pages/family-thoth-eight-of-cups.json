@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-eight-of-cups",
+ "line": "Eight of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and planet, as the chapter gives them (pdf 179, 206).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eight of Cups is called Indolence.",
+     "page": 179,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the reference of the card to Saturn in Pisces",
+     "page": 206,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod.",
+     "page": 179,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the cups, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The cups are shallow, old and broken.",
+     "page": 206,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "hod"
+  },
+  {
+   "type": "archetype",
+   "id": "eight"
+  }
+ ]
+}

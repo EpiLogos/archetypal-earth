@@ -1,0 +1,86 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-ten-of-cups",
+ "line": "Ten of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and planet, as the chapter gives them (pdf 181, 209).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Cups is called Satiety.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This comes from the influence of Mars in Pisces.",
+     "page": 209,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The Tens belong to Malkuth (pdf 181), which is in Assiah (pdf 181).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Malkuth.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of Mars in this card, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Mars is the gross, violent and disruptive force which inevitably attacks every supposed perfection.",
+     "page": 209,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "conflicts",
+   "title": "Conflicts and gaps",
+   "line": "The Tens group intro says there is now no planetary attribution to consider (pdf 181). The card's chapter names Mars in Pisces, and the table agrees with the chapter. The record keeps the chapter's planet; the group intro is the conflict.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is now no planetary attribution to consider.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "malkuth"
+  },
+  {
+   "type": "archetype",
+   "id": "ten"
+  }
+ ]
+}

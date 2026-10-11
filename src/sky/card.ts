@@ -110,7 +110,7 @@ export interface PositionReading {
 
 /** "Gemini 14°32′ — tropical, ecliptic of date" with the moment it was read for; honest when it cannot be given. */
 export function describePosition(key: BodyKey, eph: SkyEphemeris, ms: number, asOf: string): PositionReading {
-  if (key === 'earth') return { known: false, line: 'The observer\'s own ground — the sky is read from here, so the Earth has no place in it.' };
+  if (key === 'terra') return { known: false, line: 'The observer\'s own ground — the sky is read from here, so the Earth has no place in it.' };
   const p = eph.geo(key, ms);
   if (!p) {
     const span = `${eph.data.meta.span.from.slice(0, 4)}–${(Number(eph.data.meta.span.to.slice(0, 4)) - 1)}`;
@@ -419,7 +419,7 @@ export class SkyCard {
 }
 
 function kindLine(body: SkyBody, reprojected: boolean): string {
-  const kind = body.key === 'sun' || body.key === 'moon' ? 'luminary' : body.key === 'earth' ? 'the ground' : body.modern ? `planet, known since ${body.discovered?.year ?? 'modern times'} — outside Jung's classical seven` : 'planet of the classical seven';
+  const kind = body.key === 'sun' || body.key === 'moon' ? 'luminary' : body.key === 'terra' ? 'the ground' : body.modern ? `planet, known since ${body.discovered?.year ?? 'modern times'} — outside Jung's classical seven` : 'planet of the classical seven';
   return reprojected ? `${kind} · default name ${body.name}` : kind;
 }
 

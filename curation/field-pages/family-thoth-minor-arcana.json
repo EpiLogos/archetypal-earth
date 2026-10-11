@@ -1,0 +1,104 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-minor-arcana",
+ "line": "The forty small cards and the sixteen courts, in four suits, through which Crowley carries the ten numbers.",
+ "sections": [
+  {
+   "id": "forty-small-cards-four-suits",
+   "title": "Forty small cards in four suits",
+   "line": "Crowley ties the ten numbers to the small cards and divides those cards into suits by the elements.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These ten numbers are represented in the Tarot by the forty small cards.",
+     "page": 22,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These are divided into four suits according to the four elements.",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "each-number",
+   "title": "Each number",
+   "line": "Each number has a significance of its own, in Crowley's account. He gives the number four as an example: it symbolises Law, Restraint, Power, Protection and Stability.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "each number has a significance of its own; each corresponds with all phenomena",
+     "page": 22,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It symbolises such ideas as Law, Restraint, Power, Protection and Stability.",
+     "page": 33,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "suits-and-elements",
+   "title": "Suits and elements",
+   "line": "Crowley gives the four suits their elements in one sentence, and his diagram ties the suits to the four elements.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This diagram shows the attribution of the four Suits of the pack to the four Elements.",
+     "page": 267,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-tens",
+   "title": "The Tens and their planets",
+   "line": "Crowley's text says there is now no planetary attribution for the Tens, but single Tens carry a planet and sign on their own pages. The page keeps both as his statements.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is now no planetary attribution to consider.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-tarot"
+  },
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "thoth-swords"
+  },
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  }
+ ]
+}

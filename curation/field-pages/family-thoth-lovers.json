@@ -1,0 +1,93 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-lovers",
+ "line": "Crowley's Atu VI: Gemini under Mercury, the letter Zain, and the path from Binah to Tiphareth, with the figure's analysis and synthesis.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "Gemini, ruled by Mercury; the letter Zain, a sword; more than one figure in the card.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Atu VI refers to Gemini, ruled by Mercury. It means The Twins. The Hebrew letter corresponding is Zain, which means a Sword,",
+     "page": 70,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the first card in which more than one figure appears.",
+     "page": 70,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "Gemini leads from Binah to Tiphareth, in the Lovers chapter and again in the Ace of Swords chapter. Crowley numbers the ends 3 and 6. The Key Scale gives path 17.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Gemini leads from Binah to Tiphareth.",
+     "page": 72,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "leads from the number 3 to the number 6.",
+     "page": 27,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "his mother Binah through the Path of Zain, the sublime intuitive sense,",
+     "page": 211,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's account of the card's subject, and of the Art card that completes the marriage it begins.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The subject of this card is Analysis, followed by Synthesis.",
+     "page": 71,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents the Consummation of the Royal Marriage which took place in Atu VI.",
+     "page": 92,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "gemini"
+  },
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "binah"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "syzygy"
+  }
+ ]
+}

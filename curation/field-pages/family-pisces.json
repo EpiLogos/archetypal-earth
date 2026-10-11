@@ -1,0 +1,115 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "pisces",
+ "line": "Burt's chapter on Pisces, with Jung's Aion passages on the fishes.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Pisces, pdf pp. 509–558. Her account of the sign, the ocean and its task.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Pisces is the last of the four Mutable signs—Mutable Water.",
+     "page": 509,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
+     "page": 509,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, “Who shall bind the Infinite?”",
+     "page": 509,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Astrologically, Pisces is the sign of the actor or the chameleon",
+     "page": 514,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Pisces, pdf pp. 509–558. The dolphin, the Divine Child and Piscean absolutism.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Though our modern zodiac represents Pisces as two fish swimming in opposite directions, through the ages many cultures chose the dolphin to symbolize Pisces.",
+     "page": 509,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Dionysius, the Divine Child, Zeus’ wife Hera became jealous",
+     "page": 515,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "This is what I mean by Piscean absolutism.",
+     "page": 513,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Dionysius was timid, fearful and hypersensitive as a child.",
+     "page": 517,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the fishes in Aion and in his seminar.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development.",
+     "page": 9,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "it would be clear to anyone acquainted with astrology that he was born as the first fish of the Pisces era,",
+     "page": 102,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "who was born as a fish and was sacrificed as a ram, who had fishermen for disciples",
+     "page": 104,
+     "voice": "Jung"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The fishes are represented in a peculiar way in the zodiacal sign. They lie almost tail to tail, joined by a commissure.",
+     "page": 448,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "fish"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "virgo"
+  }
+ ]
+}

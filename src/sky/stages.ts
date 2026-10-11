@@ -255,6 +255,12 @@ export const EARTH_RADIUS_KM = 6371.0084;
 /** The bodies a card can approach: the Sun and the planets. Earth keeps its own framing, the Moon its own. */
 export const APPROACH_BODIES: readonly BodyKey[] = ['sun', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
 export const isApproachBody = (key: BodyKey): boolean => APPROACH_BODIES.includes(key);
+/**
+ * The bodies the sky camera can hold: the approach bodies and the Moon. The Moon is a ruler of the sky like the planets, so its
+ * ties open in the live sky as theirs do; Earth keeps its own framing. Kept apart from `isApproachBody`, which stays the
+ * planets and the Sun (the set the approach distances are fitted over).
+ */
+export const isSkyApproachBody = (key: BodyKey): boolean => isApproachBody(key) || key === 'moon';
 
 /** The share of the viewport's height an approached body's disc fills. */
 export const APPROACH_FILL = 0.3;

@@ -1,6 +1,7 @@
 // The one filter: slices of the field (a book, a culture, an era, a kind of material) are filters, never modes
 // (ProjectCentral/docs/MODES-RFC.md §4). Pure: parse, serialise, test an occurrence, and build the engine's mask.
 import type { LocusType, Occurrence } from '../types/field';
+import type { OccurrenceTags } from '../data/model';
 
 export interface FieldFilter {
   /** Jung volumes the occurrence is cited from (Occurrence.jung[].work) */
@@ -9,6 +10,10 @@ export interface FieldFilter {
   /** inclusive year range on Occurrence.year (negative = BCE) */
   era?: [number, number];
   kinds?: LocusType[];
+  /** the archetypes whose material the occurrence is — its own family's ties (Model.tags) */
+  archetypes?: string[];
+  /** the theoretics whose material the occurrence is — the concept the field reads it under */
+  theoretics?: string[];
 }
 
 export const NO_FILTER: FieldFilter = {};
@@ -16,23 +21,32 @@ export const NO_FILTER: FieldFilter = {};
 const LOCUS: readonly LocusType[] = ['artifact', 'text-passage', 'myth-episode', 'ritual', 'dream', 'vision', 'active-imagination', 'clinical-case', 'historical-event'];
 
 export function isEmpty(f: FieldFilter): boolean {
-  return !f.works?.length && !f.cultures?.length && !f.era && !f.kinds?.length;
+  return !f.works?.length && !f.cultures?.length && !f.era && !f.kinds?.length && !f.archetypes?.length && !f.theoretics?.length;
 }
 
-/** Does the occurrence pass the filter? Every set dimension must hold; within a dimension any value may. */
-export function passes(o: Occurrence, f: FieldFilter): boolean {
+/**
+ * Does the occurrence pass the filter? Every set dimension must hold; within a dimension any value may. The
+ * archetype and theoretic dimensions test what governs the occurrence (its family's ties, `Model.tags`): without
+ * those tags the question is unanswerable, so a filter naming them passes nothing — never everything.
+ */
+export function passes(o: Occurrence, f: FieldFilter, tags?: OccurrenceTags): boolean {
   if (f.works?.length && !o.jung.some((c) => f.works!.includes(c.work))) return false;
   if (f.cultures?.length && !o.cultureIds.some((c) => f.cultures!.includes(c))) return false;
   if (f.era && (o.year < f.era[0] || o.year > f.era[1])) return false;
   if (f.kinds?.length && !f.kinds.includes(o.locusType)) return false;
+  if (f.archetypes?.length && !(tags?.archetypes ?? []).some((id) => f.archetypes!.includes(id))) return false;
+  if (f.theoretics?.length && !(tags?.theoretics ?? []).some((id) => f.theoretics!.includes(id))) return false;
   return true;
 }
 
-/** 1 for every occurrence that passes, 0 for the rest; null when nothing is filtered (the engine then draws all). */
-export function maskOf(occ: readonly Occurrence[], f: FieldFilter): Float32Array | null {
+/**
+ * 1 for every occurrence that passes, 0 for the rest; null when nothing is filtered (the engine then draws all).
+ * `tags` is the model's per-occurrence governance (Model.tags), index-aligned with `occ`.
+ */
+export function maskOf(occ: readonly Occurrence[], f: FieldFilter, tags?: readonly OccurrenceTags[]): Float32Array | null {
   if (isEmpty(f)) return null;
   const mask = new Float32Array(occ.length);
-  for (let i = 0; i < occ.length; i++) mask[i] = passes(occ[i], f) ? 1 : 0;
+  for (let i = 0; i < occ.length; i++) mask[i] = passes(occ[i], f, tags?.[i]) ? 1 : 0;
   return mask;
 }
 
@@ -53,7 +67,9 @@ export function parseFilter(query: string): FieldFilter {
     else if (key === 'k') {
       const kinds = list.filter((k): k is LocusType => (LOCUS as readonly string[]).includes(k));
       if (kinds.length) f.kinds = [...new Set(kinds)];
-    } else if (key === 'e') {
+    } else if (key === 'a' && list.length) f.archetypes = [...new Set(list)];
+    else if (key === 't' && list.length) f.theoretics = [...new Set(list)];
+    else if (key === 'e') {
       const m = /^(-?\d+)\.\.(-?\d+)$/.exec(value);
       if (m) {
         const a = Number(m[1]);
@@ -71,6 +87,8 @@ export function filterQuery(f: FieldFilter): string {
   if (f.cultures?.length) parts.push(`c=${f.cultures.map(encodeURIComponent).join(',')}`);
   if (f.era) parts.push(`e=${f.era[0]}..${f.era[1]}`);
   if (f.kinds?.length) parts.push(`k=${f.kinds.join(',')}`);
+  if (f.archetypes?.length) parts.push(`a=${f.archetypes.map(encodeURIComponent).join(',')}`);
+  if (f.theoretics?.length) parts.push(`t=${f.theoretics.map(encodeURIComponent).join(',')}`);
   return parts.join('&');
 }
 
@@ -101,7 +119,7 @@ export const KIND_LABELS: Record<LocusType, string> = {
 };
 
 /** Short chip labels for the active filter, each with the filter that removes it. */
-export function chips(f: FieldFilter, names: { work(id: string): string; culture(id: string): string }): { label: string; without: FieldFilter }[] {
+export function chips(f: FieldFilter, names: { work(id: string): string; culture(id: string): string; archetype(id: string): string; theoretic(id: string): string }): { label: string; without: FieldFilter }[] {
   const out: { label: string; without: FieldFilter }[] = [];
   for (const w of f.works ?? []) out.push({ label: names.work(w), without: { ...f, works: f.works!.filter((x) => x !== w) } });
   for (const c of f.cultures ?? []) out.push({ label: names.culture(c), without: { ...f, cultures: f.cultures!.filter((x) => x !== c) } });
@@ -111,6 +129,8 @@ export function chips(f: FieldFilter, names: { work(id: string): string; culture
     out.push({ label: era?.label ?? `${f.era[0]}–${f.era[1]}`, without: rest });
   }
   for (const k of f.kinds ?? []) out.push({ label: KIND_LABELS[k], without: { ...f, kinds: f.kinds!.filter((x) => x !== k) } });
+  for (const a of f.archetypes ?? []) out.push({ label: names.archetype(a), without: { ...f, archetypes: f.archetypes!.filter((x) => x !== a) } });
+  for (const t of f.theoretics ?? []) out.push({ label: names.theoretic(t), without: { ...f, theoretics: f.theoretics!.filter((x) => x !== t) } });
   return out.map((c) => ({ ...c, without: tidy(c.without) }));
 }
 
@@ -120,5 +140,7 @@ function tidy(f: FieldFilter): FieldFilter {
   if (f.cultures?.length) out.cultures = f.cultures;
   if (f.era) out.era = f.era;
   if (f.kinds?.length) out.kinds = f.kinds;
+  if (f.archetypes?.length) out.archetypes = f.archetypes;
+  if (f.theoretics?.length) out.theoretics = f.theoretics;
   return out;
 }

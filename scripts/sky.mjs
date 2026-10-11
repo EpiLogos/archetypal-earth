@@ -26,8 +26,13 @@ const ORBIT_SAMPLES = 180;
 /** general precession in longitude, degrees per Julian century (IAU 2006 linear term) */
 const PRECESSION_DEG_PER_CENTURY = 1.3969713;
 const MOON_STEP_HOURS = 6;
-const BODY_KEYS = ['sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
-const HELIO = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+const BODY_KEYS = ['sun', 'moon', 'terra', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+const HELIO = ['mercury', 'venus', 'terra', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+// The sidecar names the planet Earth `earth` (libephemeris); the app's body key is `terra` (D3). These mirror
+// sidecarName / canonicalBodyKey in src/types/sky.ts: requests and the sidecar's answers use the sidecar's names.
+const sidecarName = (key) => (key === 'terra' ? 'earth' : key);
+const canonicalBodyKey = (name) => (name === 'earth' ? 'terra' : name);
+const fromSidecarNames = (o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [canonicalBodyKey(k), v]));
 const BASES = new Set(['jung', 'inferred', 'site']);
 const HEX = /^#[0-9a-f]{6}$/i;
 const AU_KM = 149597870.7;
@@ -70,7 +75,7 @@ export function validateCuration({ bodies, ties, cultures }, { field } = {}) {
       else {
         num(b.orbit.au, `${w}.orbit.au`, 1e-6); num(b.orbit.eccentricity, `${w}.orbit.eccentricity`, 0, 0.99);
         num(b.orbit.siderealDays, `${w}.orbit.siderealDays`, 1); num(b.orbit.inclinationDeg, `${w}.orbit.inclinationDeg`, 0, 30);
-        if (b.key === 'moon' && b.orbit.around !== 'earth') fail(w, 'moon must orbit earth');
+        if (b.key === 'moon' && b.orbit.around !== 'terra') fail(w, 'moon must orbit terra');
       }
     }
     if (!Array.isArray(b.sources) || !b.sources.length) fail(w, 'missing sources');
@@ -386,20 +391,20 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
   const orbitJobs = curation.bodies.bodies.filter((b) => b.orbit && HELIO.includes(b.key));
   const orbitEpoch = Date.parse(ORBIT_EPOCH);
   const [planetRaw, moonRaw, golden, orbitRaw] = await Promise.all([
-    get('/positions', { start: SPAN.from, stepHours: PLANET_STEP_HOURS, count: planetCount, bodies: HELIO.join(','), frame: 'helio' }),
+    get('/positions', { start: SPAN.from, stepHours: PLANET_STEP_HOURS, count: planetCount, bodies: HELIO.map(sidecarName).join(','), frame: 'helio' }),
     get('/positions', { start: SPAN.from, stepHours: MOON_STEP_HOURS, count: moonCount, bodies: 'moon', frame: 'geo' }),
     get('/golden'),
     Promise.all(orbitJobs.map((b) => {
       const periodHours = b.orbit.siderealDays * 24;
       const start = new Date(orbitEpoch - (periodHours / 2) * 3_600_000).toISOString().replace(/\.\d+Z$/, 'Z');
-      return get('/positions', { start, stepHours: Number((periodHours / ORBIT_SAMPLES).toFixed(4)), count: ORBIT_SAMPLES, bodies: b.key, frame: 'helio' });
+      return get('/positions', { start, stepHours: Number((periodHours / ORBIT_SAMPLES).toFixed(4)), count: ORBIT_SAMPLES, bodies: sidecarName(b.key), frame: 'helio' });
     })),
   ]);
   // Orbit rings: one real period of each body, with the precession accumulated since the epoch taken
   // out so the ring closes on itself instead of shearing across centuries.
   const orbits = Object.fromEntries(orbitJobs.map((b, i) => {
     const raw = orbitRaw[i];
-    const col = raw.bodies[b.key];
+    const col = raw.bodies[sidecarName(b.key)];
     const startMs = Date.parse(raw.start);
     const lon = col.lon.map((x, k) => {
       const years = (startMs + k * raw.stepHours * 3_600_000 - orbitEpoch) / (365.25 * 86_400_000);
@@ -410,7 +415,7 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
   }));
   const planets = {
     start: planetRaw.start, stepHours: planetRaw.stepHours, count: planetRaw.count,
-    bodies: Object.fromEntries(HELIO.map((k) => [k, tidy(planetRaw.bodies[k])])),
+    bodies: Object.fromEntries(HELIO.map((k) => [k, tidy(planetRaw.bodies[sidecarName(k)])])),
   };
   const moon = {
     start: moonRaw.start, stepHours: moonRaw.stepHours, count: moonRaw.count,
@@ -453,7 +458,7 @@ export async function buildSky({ root = ROOT, vault = process.env.JUNG_VAULT || 
     moon,
     orbits,
     golden: {
-      epochs: golden.epochs,
+      epochs: golden.epochs.map(fromSidecarNames),
       ayanamsa: golden.ayanamsa,
       constellationBoundaries: golden.constellationBoundaries,
       boundaryFrame: golden.equinoxFrame,

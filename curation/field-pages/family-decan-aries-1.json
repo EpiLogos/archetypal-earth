@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-aries-1",
+ "line": "Crowley's Two of Wands is the card for the first decan of Aries, with Mars as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Aries.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Wands is called the Lord of Dominion",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The background of this card shows the power of the planet Mars in his own sign Aries,",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card, pertaining to Chokmah in the suit of Fire, represents the Will in its most exalted form.",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-decans-before-the-cards",
+   "title": "The decans before the cards",
+   "line": "Neither Jung nor Burt gives a decan system in the sources held here. The passages below are von Franz on the older decanate images. They are not a basis for the Crowley card.",
+   "quotes": [
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "Bruno arranges the thirty-six images of the decanates, the forty-nine planetary images (seven per planet), and finally the thirty-six representations said to pertain to the circle of the twelve zodiac signs, into a circular system.",
+     "page": 199,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "The complete structure, however, is not meant to represent a horoscope,",
+     "page": 199,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "representations of the decanates in the Egyptian posthumous journey to heaven) were illustrated in the tombs.",
+     "page": 302,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "aries"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "thoth-two-of-wands"
+  }
+ ]
+}

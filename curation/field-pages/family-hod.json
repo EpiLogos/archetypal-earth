@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "hod",
+ "line": "Crowley gives Hod the number 8 and Mercury, airy and mercurial; Jung names Hod as the left, feminine side that Yesod unites with Nezach.",
+ "sections": [
+  {
+   "id": "crowley-eights",
+   "title": "Crowley's Eights",
+   "line": "The four Eights are attributed to Hod, and the number Eight, Hod, represents Mercury.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod.",
+     "page": 179,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in",
+     "page": 234,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eight of Wands is called Swiftness, as one might expect from its attribution to Mercury and Sagittarius.",
+     "page": 179,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "mercury-on-the-tree",
+   "title": "Mercury on the Tree",
+   "line": "Crowley names Hod as Mercury on the Tree and calls it airy and mercurial. The field's Mercurius is the quicksilver spirit; the sky layer ties the planet Mercury to that node.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "coin in the place of Hod (Mercury) on the Tree is marked with the cipher of the Sun.",
+     "page": 237,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "for the Sephira Hod, which in our system is Airy and Mercurial",
+     "page": 263,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-hod",
+   "title": "Jung's Hod",
+   "line": "Jung's passage on Hod is ¶635, the same passage as Nezach: the left, feminine side of beauty.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty)",
+     "para": 635,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  }
+ ]
+}

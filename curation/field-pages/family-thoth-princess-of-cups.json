@@ -1,0 +1,63 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-princess-of-cups",
+ "line": "Crowley's Princess of Cups: the Hé final of the Name, the earthy part of Water, and a quadrant of the heavens that the table alone names.",
+ "sections": [
+  {
+   "id": "the-court-and-its-element",
+   "title": "The court and its element",
+   "line": "Crowley names the Princesses by the Hé final of the Name.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princesses represent the Hé final of the Name.",
+     "page": 140,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princess of Cups represents the earthy part of Water; in particular, the faculty of crystallization.",
+     "page": 155,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-place-in-the-heavens",
+   "title": "Its place in the heavens",
+   "line": "Princesses have no zodiacal attribution. The attribution table names a quadrant of the heavens for her (pdf p274); the text names none, so no quotation stands for it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princesses have no Zodiacal attribution.",
+     "page": 140,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-character",
+   "title": "Its character as Crowley describes it",
+   "line": "Crowley's description of the figure and the card, in his own words.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The character of the Princess is infinitely gracious.",
+     "page": 155,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  }
+ ]
+}

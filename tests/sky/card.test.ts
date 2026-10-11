@@ -128,7 +128,7 @@ describe('the position line', () => {
   });
 
   it('gives the Earth no place in its own sky', () => {
-    const r = describePosition('earth', eph, ms, 'x');
+    const r = describePosition('terra', eph, ms, 'x');
     expect(r.known).toBe(false);
     expect(r.line).toMatch(/observer/);
   });

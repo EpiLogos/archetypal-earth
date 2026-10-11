@@ -341,7 +341,7 @@ export class GlobeEngine {
     // the sky: where the camera looks, and carrying the camera with the sky as the pull-back hands off
     if (this.sky) {
       const { focus, dLon } = this.sky.prepare(this.stageDist, dt);
-      this.rig.focus.copy(focus);
+      this.rig.focus.copy(this.rig.focusPin ?? focus);
       if (dLon) this.rig.lon = wrapLon(this.rig.lon + dLon);
     }
     this.stepSun(dt);

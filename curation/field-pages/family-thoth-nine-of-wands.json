@@ -1,0 +1,73 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-nine-of-wands",
+ "line": "Nine of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and planet, as the chapter gives them (pdf 180, 194).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Nine of Wands is called Strength",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is also governed by the Moon in Sagittarius",
+     "page": 194,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The card is ruled by the Moon and Yesod (pdf 180); Yesod is saved by the direct ray from Tiphareth (pdf 180).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It is ruled by the Moon and Yesod.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "What saves Yesod is the direct ray from Tiphareth;",
+     "page": 180,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the Nine, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Nine represents always the fullest development of the Force",
+     "page": 194,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  },
+  {
+   "type": "archetype",
+   "id": "nine"
+  }
+ ]
+}

@@ -82,8 +82,8 @@ export class SkyEphemeris {
   constructor(readonly data: SkyData) {
     for (const [key, cols] of Object.entries(data.planets.bodies)) this.helioSeries.set(key as BodyKey, new Series(data.planets, cols!));
     this.moonSeries = new Series(data.moon, data.moon.bodies.moon!);
-    this.from = Math.max(this.helioSeries.get('earth')!.t0, this.moonSeries.t0);
-    this.to = Math.min(this.helioSeries.get('earth')!.end, this.moonSeries.end);
+    this.from = Math.max(this.helioSeries.get('terra')!.t0, this.moonSeries.t0);
+    this.to = Math.min(this.helioSeries.get('terra')!.end, this.moonSeries.end);
   }
 
   /** True when every position is available at this instant. */
@@ -108,7 +108,7 @@ export class SkyEphemeris {
 
   /** The Sun as seen from Earth: the Earth's heliocentric position turned around. */
   sunGeo(ms: number, out: SkyPoint = { lon: 0, lat: 0, r: 0 }): SkyPoint | null {
-    const e = this.helio('earth', ms, out);
+    const e = this.helio('terra', ms, out);
     if (!e) return null;
     e.lon = (e.lon + 180) % 360;
     e.lat = -e.lat;
@@ -120,11 +120,11 @@ export class SkyEphemeris {
    * This is the longitude an astronomer calls "in Gemini 14°" — tropical, of date.
    */
   geo(key: BodyKey, ms: number, out: SkyPoint = { lon: 0, lat: 0, r: 0 }): SkyPoint | null {
-    if (key === 'earth') return null;
+    if (key === 'terra') return null;
     if (key === 'moon') return this.moon(ms, out);
     if (key === 'sun') return this.sunGeo(ms, out);
     const b = this.helio(key, ms);
-    const e = this.helio('earth', ms);
+    const e = this.helio('terra', ms);
     if (!b || !e) return null;
     const rad = Math.PI / 180;
     const vec = (p: SkyPoint): [number, number, number] => [p.r * Math.cos(p.lat * rad) * Math.cos(p.lon * rad), p.r * Math.cos(p.lat * rad) * Math.sin(p.lon * rad), p.r * Math.sin(p.lat * rad)];

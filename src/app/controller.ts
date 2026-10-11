@@ -4,7 +4,7 @@ import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
 import { scopeOf } from '../data/scope';
 import { archetypesOfFamily, selfSubject, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette } from '../data/model';
-import { angleBetween, dirFromLatLon, fitDistance, spreadOf, worldDistance, type Vec3 } from '../data/geo';
+import { angleBetween, dirFromLatLon, fitDistance, latLonFromDir, spreadOf, worldDistance, type Vec3 } from '../data/geo';
 import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../data/palette';
 import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
@@ -45,6 +45,7 @@ import { SkyLive } from '../sky/live';
 import type { SkyAnchorSource } from '../graph/build';
 import type { SidecarChart, SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
+import { SkyCamera } from '../sky/camera';
 import { SkyView } from '../sky/view';
 import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
 import { dataWithWindow } from '../sky/sidecar';
@@ -52,7 +53,7 @@ import type { CuratedPerson } from '../astro/charts';
 import { loadLensData } from '../lenses/ui';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
+import { approachDist, isSkyApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -152,19 +153,15 @@ export class Controller {
   /** the next sky transition came from the user's own zoom: the camera is theirs, do not fly it */
   private skyByGesture = false;
   private pendingSkyEntry: 'instant' | 'fly' | null = null;
-  /** the planet or Sun the camera is approaching for its open card, as the layer was last told (null: none) */
-  private approachOn: BodyKey | null = null;
   /**
-   * Orbit-satellite gaze: still in the sky at the planet's distance, turned to look at Earth with field floats up.
-   * A float click (not the satellite itself) is what leaves the sky and descends.
+   * The sky camera: the one owner of every scripted move between the Earth and the sky (src/sky/camera.ts). The controller
+   * asks it for a transition and reads its `phase`, `key` and `busy`; the approach and the gaze live there, not here.
    */
-  private skyGaze: Subject | null = null;
+  readonly skyCam: SkyCamera;
+  /** a planet has been held since the sky was entered: the arrival settle stands down (cleared when the sky is left) */
+  private heldInSky = false;
   /** Field chrome (reveal / label / deep) deferred until descendFromSky finishes landing. */
   private pendingLanding: (() => void) | null = null;
-  /** bumped by each change of approach: a flight's follow-on from an earlier change does nothing */
-  private approachTok = 0;
-  /** bumped by each staged sky↔earth flight: a drop/rotate follow-on from an earlier leave does nothing */
-  private skyFlightTok = 0;
 
   constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, private history?: History, corpus?: CorpusIndex | null, private redbookData?: RedBook) {
     this.root = root;
@@ -220,9 +217,11 @@ export class Controller {
       onLens: (id) => this.openLens(id),
       onSearch: (anchor) => this.search.open(anchor),
       onFilter: (f) => this.setFilter(f),
-      countFor: (f) => m.occ.reduce((n, o) => n + (passes(o, f) ? 1 : 0), 0),
+      countFor: (f) => m.occ.reduce((n, o, i) => n + (passes(o, f, m.tags[i]) ? 1 : 0), 0),
       works: [...workNames].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)),
       cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
+      archetypes: m.field.archetypes.map((a) => ({ id: a.id, name: a.name })).sort((a, b) => a.name.localeCompare(b.name)),
+      theoretics: m.field.theoretics.map((t) => ({ id: t.id, name: t.name })).sort((a, b) => a.name.localeCompare(b.name)),
     });
     this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
     // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
@@ -264,9 +263,11 @@ export class Controller {
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
       nameOf: (key) => this.skyName(key),
+      onSign: (id) => this.openFromSky({ type: 'family', id }),
+      hasFamily: (id) => this.m.famById.has(id),
     });
     this.skyCard = new SkyCard(root, {
-      onField: (t) => this.navigate(openedFrom(this.state, focusOn(WORLD, t))),
+      onField: (t) => this.openFromSky(t),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onReading: (target) => this.openSubjectReading(target),
       onClose: () => {
@@ -281,6 +282,21 @@ export class Controller {
         }
       },
       passage: this.passage.bridge(),
+    });
+    // the sky camera: the one owner of the scripted sky moves. The layer is read when a move needs it (it loads at idle).
+    const aspect = () => this.engine.width / Math.max(1, this.engine.height);
+    this.skyCam = new SkyCamera({
+      rig: this.engine.rig,
+      layer: () => this.skyLayer,
+      frame: () => ({ fovDeg: FOV, aspect: aspect(), shiftX: this.engine.rig.tShiftX, shiftY: this.engine.rig.tShiftY, margin: 0.6 }),
+      reduced: this.engine.reduced,
+      approachDist: (k) => this.approachDistOf(k, aspect()),
+      homeDist: () => (this.state.sky?.natal ? Math.min(this.engine.rig.maxDist, this.chartFrameDist(aspect())) : systemHomeDist(aspect(), FOV)),
+      viewLatLon: (k) => this.skyViewLatLon(k),
+      setPhase: (p) => {
+        document.body.dataset.skyPhase = p;
+        document.body.classList.toggle('sky-gazing', p === 'gaze');
+      },
     });
     // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens
     this.shell.setAside(this.modeSwitch.root);
@@ -323,11 +339,19 @@ export class Controller {
     this.aion?.pauseThread();
     if (this.tour && this.tour.playing && this.tour.phase !== 'intro') this.tourPause();
     // taking the camera ends an orbit-gaze; the planet approach stays so you’re still on it
-    if (this.skyGaze) {
-      this.clearSkyGaze();
-      this.floats.clear();
-      if (this.approachOn) this.skyLayer?.setApproach(this.approachOn);
-    }
+    if (this.skyCam.phase === 'gaze') this.endGaze();
+    else this.skyCam.onUserGrab();
+  }
+
+  /**
+   * End an orbit-gaze without leaving the sky: the plates and the subject's emphasis go, and the camera eases its look back
+   * onto the held planet. It never releases the planet, never goes to the whole sky, never leaves Astrology.
+   */
+  private endGaze() {
+    if (this.skyCam.phase !== 'gaze') return;
+    this.floats.clear();
+    this.engine.setEmphasis(null, null);
+    this.skyCam.cancelGaze();
   }
 
   onUserTime() {
@@ -401,7 +425,7 @@ export class Controller {
         const i = m.occIndex.get(id);
         return i === undefined ? undefined : m.occ[i].familyId;
       },
-      hasBody: (id: string) => !!this.skyLayer?.data.bodies.some((b) => b.key === id) || ['sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'].includes(id),
+      hasBody: (id: string) => !!this.skyLayer?.data.bodies.some((b) => b.key === id) || ['sun', 'moon', 'terra', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'].includes(id),
       hasReading: (id: string) => !!this.history?.readings.some(r => r.id === id),
       hasHistorySelection: (id: string, kind: string, selection: string) => {
         const reading = this.history?.readings.find(r => r.id === id);
@@ -531,6 +555,11 @@ export class Controller {
       this.search.close();
       return;
     }
+    // in an orbit-gaze, Escape is "look back at the planet", not "let the planet go" (the spec's cancel-gaze)
+    if (this.skyCam.phase === 'gaze') {
+      this.endGaze();
+      return;
+    }
     this.navigate(back(this.state));
   }
 
@@ -645,6 +674,9 @@ export class Controller {
     }
     if (e.key.toLowerCase() === 't' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.openLens('theory'); e.preventDefault(); return;
+    }
+    if (e.key.toLowerCase() === 'l' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.openLens('alchemy'); e.preventDefault(); return;
     }
     if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleAion(); e.preventDefault(); return;
@@ -945,7 +977,7 @@ export class Controller {
 
   private applyFilter(f: FieldFilter) {
     this.filter = f;
-    this.filterMask = maskOf(this.m.occ, f);
+    this.filterMask = maskOf(this.m.occ, f, this.m.tags);
     this.engine.setFilterMask(this.filterMask);
     this.shell.setFilter(f);
     this.setCache.key = '';
@@ -1000,6 +1032,9 @@ export class Controller {
     this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
     document.body.classList.remove('deep-open', 'thread-inspecting');
     this.syncSky(prev, next, first, false);
+    // R1 (C7): the Field's time range and selection marker do not carry into Astrology
+    this.syncTimeScope(next);
+    this.engine.markers.sel.hide();
     if (this.graphMode) this.syncMode(false, first, true);
     if (!prev.lens || prev.lens.id !== id) {
       this.engine.setEmphasis(null, null);
@@ -1032,9 +1067,10 @@ export class Controller {
 
   private leavePanelLens() {
     const id = this.activeLens;
+    // the lens cleans up while it is still the active one, so its own chrome clear (Options) is not dropped (R1 F4)
+    if (id) this.lensInst.get(id)?.leave();
     this.activeLens = null;
     this.lensTok++;
-    if (id) this.lensInst.get(id)?.leave();
     this.panel.close();
     this.engine.rig.setShift(0, 0);
   }
@@ -1180,7 +1216,7 @@ export class Controller {
       if (!eph.covers(ms)) return null;
       const lon: SkyAnchorSource['lon'] = {};
       for (const b of ties.bodies) {
-        if (b.key === 'earth') continue; // the observer has no geocentric longitude: it is where we stand
+        if (b.key === 'terra') continue; // the observer has no geocentric longitude: it is where we stand
         const p = eph.geo(b.key, ms);
         if (p) lon[b.key] = p.lon;
       }
@@ -1243,56 +1279,19 @@ export class Controller {
     });
   }
 
-  /** Carry the camera out to the sky: from Earth, ease out a little, look at the planet, then climb to it. */
+  /**
+   * Carry the camera out to the sky: the sky camera's entry, a return to the held body (ascent from the Earth) or, for the
+   * whole system, a lift and one travel home.
+   */
   private enterSkyView(instant: boolean) {
-    const layer = this.skyLayer;
-    if (!layer) return;
-    const e = this.engine;
-    const aspect = e.width / Math.max(1, e.height);
-    layer.prepare(e.rig.dist);
-    const key = this.approachFor(this.state.sky);
-    const ll = this.skyViewLatLon(key);
-    const dest = key ? this.approachDistOf(key, aspect)
-      : this.state.sky?.natal ? Math.min(e.rig.maxDist, this.chartFrameDist(aspect))
-      : systemHomeDist(aspect, FOV);
-    e.rig.interacted = true;
+    if (!this.skyLayer) return;
+    // the layer's poses (the Sun, the sidereal angle) must stand before a move reads them: the first entry comes before any frame
+    this.skyLayer.prepare(this.engine.rig.dist);
+    this.engine.rig.interacted = true;
     document.body.classList.add('interacted');
-    const tok = ++this.skyFlightTok;
-    this.approachOn = key;
-    this.clearSkyGaze();
-    if (instant || e.reduced) {
-      layer.setApproach(key, true);
-      e.rig.flyTo(ll.lat, ll.lon, dest, { instant: true });
-      return;
-    }
-    const climb = () => {
-      if (tok !== this.skyFlightTok) return;
-      e.rig.clearGaze();
-      layer.setApproach(key);
-      e.rig.flyTo(ll.lat, ll.lon, dest, { duration: key ? 2.6 : 3.0, lift: 0 });
-    };
-    /** From near Earth: lift, turn in place to look at the planet, then climb. */
-    const lookThenClimb = () => {
-      if (tok !== this.skyFlightTok) return;
-      const planet = key ? layer.scenePosition(key) : null;
-      if (planet) {
-        e.rig.lookAtPoint(planet, {
-          duration: 1.4,
-          onDone: () => { if (tok === this.skyFlightTok) climb(); },
-        });
-      } else {
-        this.flyThen(ll.lat, ll.lon, e.rig.dist, { duration: 1.4, lift: 0 }, climb);
-      }
-    };
-    const nearEarth = e.rig.dist < STAGE_EDGES.handoff;
-    if (nearEarth) {
-      const c = e.rig.centre();
-      const lift = Math.min(Math.max(e.rig.dist * 1.55, e.rig.dist + 0.55), STAGE_EDGES.lunar * 0.85);
-      this.flyThen(c.lat, c.lon, lift, { duration: 1.1, lift: 0 }, lookThenClimb);
-      return;
-    }
-    // already out: look at the planet from here, then move to its framing
-    lookThenClimb();
+    const key = this.approachFor(this.state.sky);
+    if (key) this.heldInSky = true;
+    this.skyCam.enter(key, { instant });
   }
 
   /** Camera lat/lon that faces a body (or the default system / birth-chart view). */
@@ -1314,7 +1313,7 @@ export class Controller {
    */
   private approachFor(sky: AppState['sky']): BodyKey | null {
     if (!sky?.body) return null;
-    return isApproachBody(sky.body) || (sky.natal && sky.body === 'moon') ? sky.body : null;
+    return isSkyApproachBody(sky.body) ? sky.body : null;
   }
 
   /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
@@ -1330,67 +1329,16 @@ export class Controller {
    * Planet-to-planet at close range: rise just enough for a clean turn, then in. A birth sky with no body frames the ring.
    */
   private syncApproach() {
-    const layer = this.skyLayer;
-    if (!layer) return;
+    if (!this.skyLayer) return;
     const key = this.approachFor(this.state.sky);
-    // orbit-gaze owns the camera until the held body changes (Whole sky / another planet)
-    if (this.skyGaze) {
-      if (key === this.approachOn) return;
-      this.clearSkyGaze();
+    if (key === this.skyCam.key || this.skyCam.busy) return;
+    // a gaze lets go with its body: the plates go, and the gaze is released so the travel runs as an approach (not a gaze)
+    if (this.skyCam.phase === 'gaze') {
       this.floats.clear();
+      this.skyCam.release();
     }
-    if (key === this.approachOn) return;
-    const from = this.approachOn;
-    this.approachOn = key;
-    const tok = ++this.approachTok;
-    const e = this.engine;
-    const aspect = e.width / Math.max(1, e.height);
-    const home = this.state.sky?.natal
-      ? Math.min(e.rig.maxDist, this.chartFrameDist(aspect))
-      : systemHomeDist(aspect, FOV);
-
-    if (!key && this.state.sky?.natal) {
-      layer.setApproach(null);
-      const ll = this.skyViewLatLon(null);
-      e.rig.flyTo(ll.lat, ll.lon, home, { duration: 3.2 });
-      return;
-    }
-    if (!key) {
-      layer.setApproach(null);
-      const ll = this.skyViewLatLon(null);
-      e.rig.flyTo(ll.lat, ll.lon, home, { duration: 3.2 });
-      return;
-    }
-
-    const dest = this.approachDistOf(key, aspect);
-    const ll = this.skyViewLatLon(key);
-    const go = () => {
-      if (tok !== this.approachTok || this.approachOn !== key) return;
-      layer.setApproach(key);
-      e.rig.flyTo(ll.lat, ll.lon, dest, { duration: from ? 1.6 : 2.2, lift: 0 });
-    };
-
-    // already past the Moon / in the sky: face the body and approach — do not pull back to "home" first
-    if (e.rig.dist >= STAGE_EDGES.lunar) {
-      layer.setApproach(key);
-      if (from && e.rig.dist < dest * 0.92) {
-        // another close planet: a short rise, then in
-        const mid = Math.min(home, Math.max(dest * 1.35, e.rig.dist * 1.25));
-        this.flyThen(ll.lat, ll.lon, mid, { duration: 1.1, lift: 0 }, go);
-      } else {
-        go();
-      }
-      return;
-    }
-
-    // still near Earth: leave via enterSkyView's staged climb (or a short rise then approach)
-    layer.setApproach(key);
-    const c = e.rig.centre();
-    const lift = Math.min(Math.max(e.rig.dist * 1.55, e.rig.dist + 0.55), STAGE_EDGES.lunar * 0.85);
-    this.flyThen(c.lat, c.lon, lift, { duration: 1.0, lift: 0 }, () => {
-      if (tok !== this.approachTok || this.approachOn !== key) return;
-      this.flyThen(ll.lat, ll.lon, lift, { duration: 1.3, lift: 0 }, go);
-    });
+    if (key) this.heldInSky = true;
+    this.skyCam.approach(key);
   }
 
   /** The distance at which a birth chart's ring fills about two thirds of the view's narrower side. */
@@ -1401,12 +1349,9 @@ export class Controller {
     return (CHART_RADIUS * 1.15) / (fill * tanHalf);
   }
 
-  /** The sky is left: the approach lets go (the look-at eases back to the Earth; the staged descent brings the camera). */
+  /** The sky is left without a descent (a gesture out, or a re-frame): the sky camera lets go of its body. */
   private releaseApproach() {
-    this.approachOn = null;
-    this.approachTok++;
-    this.clearSkyGaze();
-    this.skyLayer?.setApproach(null);
+    this.skyCam.release();
   }
 
   /** Where a field view wants the camera once the sky has been left (focus / manifestation). */
@@ -1443,83 +1388,40 @@ export class Controller {
     return null;
   }
 
-  /** Start a flight and run `then` when it ends (immediately when the flight is a no-op). */
-  private flyThen(lat: number, lon: number, dist: number, opts: { duration?: number; lift?: number }, then?: () => void) {
-    const rig = this.engine.rig;
-    rig.flyTo(lat, lon, dist, opts);
-    if (!then) return;
-    if (!rig.flying) then();
-    else rig.onFlyEnd(then);
-  }
-
   /**
-   * Leave the sky for the field: look at the Earth's node from the planet, drop in, then settle at its framing.
-   * Escape / See in sky return through `openedFrom` to the sky the link left.
+   * Leave the sky for the field: the chrome goes at once, then the sky camera drops onto the landing and settles. The field's
+   * own chrome (label, reveal, reading) waits for the landing (`pendingLanding`). Escape / See in sky return through
+   * `openedFrom` to the sky the link left.
    */
   private descendFromSky(next: AppState, instant: boolean) {
-    const e = this.engine;
-    const rig = e.rig;
-    const held = !!this.approachOn || (this.skyLayer?.approach ?? 0) > 0.08;
-    const alreadyGazing = !!this.skyGaze;
-    // while gazing, the camera is frozen at the planet — capture that Earth-range station before the look-at lets go
-    const station = alreadyGazing ? Math.max(e.camera.position.length(), STAGE_EDGES.lunar) : 0;
-    const tok = ++this.skyFlightTok;
-    this.releaseApproach();
+    this.floats.clear();
+    this.label.set(null);
+    this.reveal.hide();
+    this.hover.hide();
+    this.deep.hide();
     const target = this.earthTargetFor(next);
-    const c = rig.centre();
-    const land = target ?? { lat: c.lat, lon: c.lon, dist: this.worldDist() };
+    // a subject with no placed instance has no node to land on: drop straight down onto the face of the Earth that the
+    // camera is looking at (the rig's lat/lon are about the planet in the sky, not about the Earth, so read the pose)
+    const [px, py, pz] = this.engine.rig.snapshot().pos;
+    const pl = Math.hypot(px, py, pz) || 1;
+    const facing = latLonFromDir([px / pl, py / pl, pz / pl]);
+    const land = target ?? { lat: facing.lat, lon: facing.lon, dist: this.worldDist() };
     // high enough to read the globe, still aimed at the node so the drop does not park on empty ocean
     const high = target
       ? Math.max(land.dist * 1.85, Math.min(this.worldDist(), land.dist + 1.35))
       : this.worldDist();
-
-    if (alreadyGazing && station > 0) {
-      // re-base onto the planet station looking at the landing — then drop in (gaze already faced Earth)
-      rig.dist = station;
-      rig.targetDist = station;
-    }
-
     const landUi = () => {
-      if (tok !== this.skyFlightTok) return;
       const ui = this.pendingLanding;
       this.pendingLanding = null;
-      ui?.();
+      if (!ui) return;
+      // the field chrome waits for a still moment on the landing (the settle's last ease must have stopped), and never shows
+      // for a state that has since been replaced
+      const landed = this.state;
+      const show = () => { if (this.state === landed) ui(); };
+      if (instant || this.engine.reduced) show();
+      else window.setTimeout(show, 300);
     };
-
-    if (instant || e.reduced) {
-      rig.flyTo(land.lat, land.lon, land.dist, { instant: true });
-      landUi();
-      return;
-    }
-
-    const settle = () => {
-      if (tok !== this.skyFlightTok) return;
-      this.flyThen(land.lat, land.lon, land.dist, { duration: 1.9, lift: 0 }, landUi);
-    };
-    const drop = () => {
-      if (tok !== this.skyFlightTok) return;
-      if (target) this.flyThen(land.lat, land.lon, high, { duration: 2.4, lift: 0 }, settle);
-      else this.flyThen(land.lat, land.lon, high, { duration: 2.4, lift: 0 }, landUi);
-    };
-    // face the landing from the present distance, then drop — gaze already turned, so drop from the station
-    const orient = () => {
-      if (tok !== this.skyFlightTok) return;
-      if (alreadyGazing) {
-        rig.flyTo(land.lat, land.lon, station, { instant: true });
-        drop();
-        return;
-      }
-      this.flyThen(land.lat, land.lon, rig.dist, { duration: 1.7, lift: 0 }, drop);
-    };
-
-    if (held && !alreadyGazing) window.setTimeout(orient, 900);
-    else orient();
-  }
-
-  private clearSkyGaze() {
-    this.skyGaze = null;
-    this.engine.rig.clearGaze();
-    document.body.classList.remove('sky-gazing');
+    this.skyCam.descend({ lat: land.lat, lon: land.lon, dist: land.dist, high }, { instant }, landUi);
   }
 
   /**
@@ -1527,37 +1429,97 @@ export class Controller {
    * No translation, no leaving Astrology, no releasing the planet. Float click descends.
    */
   private gazeEarthFromPlanet(subject: Subject) {
-    const held = this.approachOn ?? this.skyLayer?.approached ?? this.approachFor(this.state.sky);
+    const held = this.skyCam.key ?? this.skyLayer?.approached ?? this.approachFor(this.state.sky);
     if (!this.state.sky || !held) {
       this.navigate(openedFrom(this.state, focusOn(WORLD, subject)));
       return;
     }
+    // a turn is under way: the click waits for it (the satellites stand down while the camera turns)
+    if (this.skyCam.busy) return;
     const e = this.engine;
     const m = this.m;
     let idx = subjectOccurrences(m, subject).filter((i) => this.passing(i));
     if (!idx.length) idx = subjectOccurrences(m, subject);
     const target = this.earthTargetFor({ view: { kind: 'focus', subject }, deep: false });
-    const look = target ?? e.rig.centre();
-
-    this.approachTok++;
-    this.skyFlightTok++;
-    this.skyGaze = subject;
-    this.approachOn = held;
-    // keep holding the planet; only the view turns in place
-    this.skyLayer?.setApproach(held);
     e.rig.interacted = true;
-    document.body.classList.add('interacted', 'sky-gazing');
-    e.rig.lookAtEarth(look.lat, look.lon, { duration: 1.5 });
 
     const sp = spreadOf(idx.filter((i) => m.located[i]).map((i) => m.dir[i]));
-    const centre = sp ?? (target ? { lat: target.lat, lon: target.lon } : look);
-    let plates = this.pickShowcase(subject, idx, centre);
-    // some sky ties point at subjects with no located instances — still offer a plate to descend on
-    if (!plates.length) plates = this.gazeFallbackFloats(subject, centre);
-    this.floats.set(plates, isNarrow());
+    const centre = sp ?? (target ? { lat: target.lat, lon: target.lon } : e.rig.centre());
+    // the plates stand once the turn has arrived: the Earth's point is then where the camera is looking
+    const showPlates = () => this.floats.set(this.gazePlates(subject, idx, centre), isNarrow(), { anchor: 'earth-point' });
+    const gazing = (): boolean => this.skyCam.phase === 'gaze';
+    this.floats.clear();
+    if (gazing()) showPlates();
+    else {
+      this.skyCam.gaze(showPlates);
+      // a gaze that did not start (no placed planet, not stationed) still offers its plates, rather than none
+      if (!gazing()) showPlates();
+    }
     const pal = this.subjectPal(subject);
     this.engine.setEmphasis(idx.length ? this.emphasise(idx) : null, pal.core);
-    this.shell.setContext(subjectName(m, subject));
+  }
+
+  /**
+   * The plates of a gaze from a planet. The first is always the subject itself (its own image, or a tonal plate under its
+   * name), which descends to the subject. The rest are instances of the subject: those with images first, then the located
+   * ones without, each spread by distance from the rest. No family plate is offered here: a family plate would descend into
+   * another family's focus. Anchoring is the floats' job (every plate hangs from the Earth's projected point); `dir` names
+   * where the instance is.
+   */
+  private gazePlates(subject: Subject, idx: number[], centre: { lat: number; lon: number }): FloatItem[] {
+    const m = this.m;
+    const max = isNarrow() ? 3 : 5;
+    const c = dirFromLatLon(centre.lat, centre.lon);
+    const own = subject.type === 'family' ? m.famById.get(subject.id)?.image
+      : subject.type === 'archetype' ? m.archById.get(subject.id)?.image
+      : subject.type === 'theoretic' ? m.theoById.get(subject.id)?.image
+      : undefined;
+    const ownPal = subject.type === 'family' ? m.famById.get(subject.id)?.palette
+      : subject.type === 'archetype' ? m.archById.get(subject.id)?.palette
+      : subject.type === 'theoretic' ? m.theoById.get(subject.id)?.palette
+      : undefined;
+    const placed = idx.filter((i) => m.located[i]);
+    const nearest = (list: number[]) => list.reduce((a, b) => (angleBetween(c, m.dir[a]) <= angleBetween(c, m.dir[b]) ? a : b));
+    const items: FloatItem[] = [{
+      dir: placed.length ? m.dir[nearest(placed)] : c,
+      img: own,
+      label: subjectName(m, subject),
+      era: '',
+      palette: ownPal,
+      target: { type: 'subject', subject },
+    }];
+    // one image per source: an occurrence whose picture the subject already shows adds nothing
+    const seen = new Set<string>();
+    if (own?.src) seen.add(own.src);
+    const unique = (list: number[]) => list.filter((i) => {
+      const src = m.occ[i].image?.src;
+      if (!src) return true;
+      if (seen.has(src)) return false;
+      seen.add(src);
+      return true;
+    });
+    // farthest-point spread: the first pick is nearest the centre, each next is furthest from those already chosen
+    const spread = (list: number[], k: number): number[] => {
+      const left = list.slice();
+      const out: number[] = [];
+      while (out.length < k && left.length) {
+        let bj = 0, bs = -Infinity;
+        left.forEach((i, j) => {
+          const s = out.length ? Math.min(...out.map((o) => angleBetween(m.dir[i], m.dir[o]))) : -angleBetween(c, m.dir[i]);
+          if (s > bs) { bs = s; bj = j; }
+        });
+        out.push(left.splice(bj, 1)[0]);
+      }
+      return out;
+    };
+    const k = max - 1;
+    const chosen = spread(unique(placed.filter((i) => !!m.occ[i].image)), k);
+    if (chosen.length < k) chosen.push(...spread(placed.filter((i) => !m.occ[i].image), k - chosen.length));
+    for (const i of chosen) {
+      const o = m.occ[i];
+      items.push({ dir: m.dir[i], img: o.image, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } });
+    }
+    return items;
   }
 
   /** A single placard on Earth when the orbit target has no located field instances. */
@@ -1580,9 +1542,14 @@ export class Controller {
     }];
   }
 
+  /** A field subject opened from the sky (a sky card's tie, a sign's glyph): the sky stands behind the reading as `from`. */
+  private openFromSky(t: Subject) {
+    this.navigate(openedFrom(this.state, focusOn(WORLD, t)));
+  }
+
   /** Lens / orbit tie: gaze from the planet when held; otherwise leave into the field. */
   private focusFromLens(subject: Subject) {
-    const held = this.approachOn ?? this.skyLayer?.approached ?? this.approachFor(this.state.sky);
+    const held = this.skyCam.key ?? this.skyLayer?.approached ?? this.approachFor(this.state.sky);
     if (this.state.sky && held) {
       this.gazeEarthFromPlanet(subject);
       return;
@@ -1629,11 +1596,13 @@ export class Controller {
     this.syncNatal(prev.sky?.natal, next.sky?.natal, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
+      this.heldInSky = false;
       if (this.skyByGesture) this.skyByGesture = false;
       else if (this.skyLayer) this.enterSkyView(first);
       else if (!this.skyFailed) this.pendingSkyEntry = first ? 'instant' : 'fly';
     } else if (!on && prev.sky) {
       this.pendingSkyEntry = null;
+      this.heldInSky = false;
       if (this.skyByGesture) {
         this.skyByGesture = false;
         this.releaseApproach();
@@ -1734,8 +1703,9 @@ export class Controller {
     const layer = this.skyLayer;
     const sky = this.state.sky;
     const now = performance.now();
+    // a scripted sky move, or a body held since the sky was entered, never gets the arrival's rotation (the whole-sky rotation)
     const eligible = !!layer && !!sky && !sky.natal && !this.approachFor(sky) && !layer.approach && !this.engine.reduced
-      && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
+      && !this.skyCam.busy && !this.heldInSky && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
       && now - rig.lastWheelAt >= SETTLE.idleMs && now - rig.lastDragAt >= SETTLE.quietDragMs;
     if (!eligible || !layer) { rig.settleTo = null; return; }
     rig.settleTo = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
@@ -1743,6 +1713,8 @@ export class Controller {
 
   /** The zoom gesture crossing the Moon's edge enters Astrology (birth sky) or returns to the Field. */
   private watchSkyGesture() {
+    // the sky camera owns the camera while a move runs: no scripted move is read as the user's zoom (C10)
+    if (this.skyCam.busy) return;
     this.settleArrival();
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
@@ -1751,13 +1723,14 @@ export class Controller {
     if (this.state.lens && this.state.lens.id !== 'astrology') return;
     if (this.state.view.kind !== 'world') return;
     // orbit-gaze: stationed at a planet looking at Earth — never treat the look-at release as a zoom-out of the sky
-    if (this.skyGaze) return;
+    if (this.skyCam.phase === 'gaze') return;
     const d = this.engine.stageDist;
     if (!this.state.sky && d > SKY_ENTER) {
       // zooming out into the sky is entering Astrology on the live sky — not Jung’s chart, not Field+sky
       this.skyByGesture = true;
       this.navigate(astrologyLive());
-    } else if (this.state.sky && d < SKY_EXIT) {
+    } else if (this.state.sky && d < SKY_EXIT && rig.wheelDriven) {
+      // leaving by distance is the user's own zoom only: a wheel or pinch that carried the camera in (never a scripted move)
       this.skyByGesture = true;
       this.navigate(WORLD, { replace: true });
     }
@@ -2127,24 +2100,20 @@ export class Controller {
   }
 
   private onFloatSelect(t: FloatTarget) {
-    // from a planet gaze: the float is the descend — leave the sky for that target
-    if (this.state.sky && this.skyGaze) {
+    // from a planet gaze: the float is the descend — leave the sky for that target (the subject, or an instance of it)
+    if (this.state.sky && this.skyCam.phase === 'gaze') {
       const from = this.state;
-      const gaze = this.skyGaze;
       if (t.type === 'occurrence') {
         const next = this.occurrenceState(WORLD, this.m.occ[t.occIdx].id);
         if (next) this.navigate(openedFrom(from, next));
         return;
       }
-      if (t.type === 'family') {
-        this.navigate(openedFrom(from, focusOn(WORLD, { type: 'family', id: t.id })));
-        return;
-      }
-      this.navigate(openedFrom(from, { ...focusOn(WORLD, gaze), deep: true }));
+      if (t.type === 'subject') this.navigate(openedFrom(from, focusOn(WORLD, t.subject)));
       return;
     }
     if (t.type === 'occurrence') this.openOccurrence(t.occIdx);
     else if (t.type === 'family') this.navigate(focusOn(this.state, { type: 'family', id: t.id }));
+    else if (t.type === 'subject') this.navigate(focusOn(this.state, t.subject));
     else this.setDeep(true);
   }
 
@@ -2429,6 +2398,9 @@ export class Controller {
 
   // ── per-frame ─────────────────────────────────────────────────────────
   private tick(dt: number) {
+    this.skyCam.update(dt);
+    // a held body the sky camera has not been sent to (it came while a return or a descent ran) is applied once it is idle
+    if (!this.skyCam.busy && this.skyLayer && this.state.sky && this.approachFor(this.state.sky) !== this.skyCam.key) this.syncApproach();
     this.watchSkyGesture();
     this.skyView.tick();
     this.aion?.update(dt);

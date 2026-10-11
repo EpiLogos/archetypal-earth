@@ -1,0 +1,106 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "albedo",
+ "line": "The albedo as Jung states it: the moon condition, the illumination that comes out of the dark, and the routes the texts give. He describes its goal more often than its process.",
+ "sections": [
+  {
+   "id": "the-moon-condition",
+   "title": "The moon condition",
+   "line": "Jung's own sentences on what the whitening is and where it stands in the sequence.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "It is the silver or moon condition, which still has to be raised to the sun condition.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "The albedo is, so to speak, the daybreak, but not till the rubedo is it sunrise.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw16",
+     "quote": "The whitening (albedo or dealbatio) is likened to the ortus solis, the sunrise; it is the light, the illumination, that follows the darkness.",
+     "para": 484,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "illumination-and-luna",
+   "title": "Illumination and Luna",
+   "line": "Jung's reading of the whitening as the light that comes out of the unconscious, with Luna as the anima.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "From the darkness of the unconscious comes the light of illumination, the albedo.",
+     "para": 220,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "This role of Luna devolves upon the anima, as she personifies the plurality of archetypes",
+     "para": 218,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The moon with her antithetical nature is, in a sense, a prototype of individuation, a prefiguration of the self",
+     "para": 217,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-route-in",
+   "title": "The route in",
+   "line": "The washing leads into the whitening, and the calcined salt is named as a synonym for it.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "From this the washing (ablutio, baptisma) either leads direct to the whitening (albedo), or else the soul (anima) released at the “death” is reunited with the dead body and brings about its resurrection, or again the “many colours” (omnes colores), or “peacock’s tail” (cauda pavonis), lead to the one white colour that contains all colours.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Salt as much as ash is a synonym for the albedo (or dealbatio), and is identical with “the white stone, the white sun, the full moon, the fruitful white earth, cleansed and calcined.”",
+     "para": 320,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-whitest-white",
+   "title": "The whitest white",
+   "line": "The Rosarium's instruction to wait for the whitest white, and the place of the albedo as the climax of the work for many alchemists.",
+   "quotes": [
+    {
+     "work": "cw16",
+     "quote": "Therefore the artist must wait until he sees the Tincture covered over with its other colour, as with the whitest white",
+     "para": 514,
+     "voice": "Jung quoting the Rosarium"
+    },
+    {
+     "work": "cw14",
+     "quote": "They all unite in the albedo, which for many alchemists was the climax of the work.",
+     "para": 388,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "moon"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  }
+ ]
+}

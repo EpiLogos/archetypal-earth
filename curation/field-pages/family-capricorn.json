@@ -1,0 +1,103 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "capricorn",
+ "line": "Burt's chapter on Capricorn, with Jung's goat-fish.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Capricorn, pdf pp. 379–446. Her account of time, the Death Gate and the rulers.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The Capricorn archetype includes every concept, sense and meaning of time, from the most abstract Hindu, Mayan, and Greek ages of the gods, aeonic time, to the concrete calendar year and the lifespan of an individual,",
+     "page": 381,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle,",
+     "page": 379,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Symbolically, souls, which the Greeks believed to have descended through the Womb, or Gate of Cancer in fertile summertime, departed in great numbers through the Death Gate of Capricorn during Winter Solstice.",
+     "page": 381,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "These are the rulers of Sagittarius and Capricorn.",
+     "page": 384,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Capricorn, pdf pp. 379–446. The senex, the Wise Old Man and dharma.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Saturn is not a Wise Old Man but a senile, rigid symbol it has become",
+     "page": 382,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Wise Old Man who was mistakenly perceived as rigid Senex.",
+     "page": 398,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Dharma, then, astrologically represented by esoteric Saturn, is about the Soul’s evolutionary journey, over time, toward oneness with and freedom in the Divine.",
+     "page": 389,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the goat-fish, in cw05 and in his seminar.",
+   "quotes": [
+    {
+     "work": "cw05",
+     "quote": "The symbol for that portion of the zodiac in which the sun reenters the yearly cycle at the time of the winter solstice is Capricorn,",
+     "para": 290,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw05",
+     "quote": "the sun mounts like a goat to the tops of the highest mountains, and then plunges into the depths of the sea like a fish.",
+     "para": 290,
+     "voice": "Jung"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "He is half fish and half goat, meaning that at first, as the fish, he is deep down in the sea, out of sight in the unconscious.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "goat"
+  },
+  {
+   "type": "family",
+   "id": "cancer"
+  }
+ ]
+}

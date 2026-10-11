@@ -1,0 +1,81 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "court-queen",
+ "line": "Crowley's Queen is the Hé of the Name and the Mother of the pagan series. The tie to the Great Mother is a reading made here.",
+ "sections": [
+  {
+   "id": "the-letter-of-the-name",
+   "title": "The letter of the Name",
+   "line": "Crowley gives the Queens the letter Hé of the Name.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queens represent the letter Hé of the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards constitute a pictorial analysis of the powers of the four letters of the Name and the four Elements.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "mother-in-the-series",
+   "title": "Mother in the series",
+   "line": "Crowley names the Queen the Mother of the pagan series, against the Hebrew scheme in which Father and Mother issue Son and Daughter.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It has been thought better, for the present pack, to adopt the term “Knight”, “Queen”, “Prince” and “Princess”, to represent the series Father, Mother, Son, Daughter, because the doctrine involved, which is extraordinarily complex and difficult, demands it.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Court cards are referred to the numbers 2, 3, 6 and 10",
+     "page": 261,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Hebrew system is straightforward and irreversible; it postulates Father and Mother from whose union issue Son and Daughter.",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-mothers-letter",
+   "title": "The Mother's letter",
+   "line": "Crowley ties Hé to the Great Mother, and gives the Queen of Cups the power of reception and reflection. The tie to the Great Mother is this site's reading from those two statements.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This is the letter traditionally consecrated to the Great Mother.",
+     "page": 21,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queen of Cups represents the watery part of Water, its power of reception and reflection.",
+     "page": 151,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "great-mother"
+  },
+  {
+   "type": "family",
+   "id": "thoth-tarot"
+  }
+ ]
+}

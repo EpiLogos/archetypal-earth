@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-disks",
+ "line": "Crowley attributes Disks to Earth. The Ace gives the suit Hé final, the Daughter, while his general account gives Earth the letter Tau.",
+ "sections": [
+  {
+   "id": "earth-as-a-whirling-disk",
+   "title": "Earth as a whirling disk",
+   "line": "Crowley sets the suit's Earth against the old view of Earth as a passive element, and says the Disks are not coins.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Nor are the Disks any more to be considered as Coins; the Disk is a whirling emblem.",
+     "page": 225,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the old conception of the Earth as a passive, immobile, even dead, even “evil” element, had to go.",
+     "page": 225,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-daughter-on-the-throne",
+   "title": "The Daughter on the Mother's throne",
+   "line": "The letter is given in the text of the Ace of Disks, and the suits are tied to the four elements in his diagram.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the Earthy component, Hé final, the Daughter, is set upon the Throne of the Mother",
+     "page": 225,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This diagram shows the attribution of the four Suits of the pack to the four Elements.",
+     "page": 267,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-letter-of-earth",
+   "title": "The letter of Earth",
+   "line": "Crowley's general account gives Earth the letter Tau, which he also gives the Universe card. The Ace of Disks gives Hé final. The page states both, and does not reconcile them.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "represented by the last letter of the alphabet, Tau.",
+     "page": 23,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the element of earth was thrust upon the symbol.",
+     "page": 109,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "thoth-minor-arcana"
+  },
+  {
+   "type": "archetype",
+   "id": "court-princess"
+  }
+ ]
+}

@@ -36,6 +36,14 @@ export const GLYPHS: readonly string[] = [
   'M22 12 C46 34 46 66 22 88 M78 12 C54 34 54 66 78 88 M26 50 H74',
 ];
 
+/** The field family each sign stands for, Aries 0 … Pisces 11 (the same order as GLYPHS). */
+export const SIGN_FAMILY_IDS: readonly string[] = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
+
+/** A sign's family id, or undefined outside the twelve. The family may still be absent from the field: the caller checks. */
+export function signFamilyId(signIndex: number): string | undefined {
+  return Number.isInteger(signIndex) ? SIGN_FAMILY_IDS[signIndex] : undefined;
+}
+
 /** The ring's colour at a share `h` of the way round (0..1): a pale spectral foil, the shader's own formula. */
 export function holo(h: number): [number, number, number] {
   const c = (o: number) => 0.5 + 0.5 * Math.cos(2 * Math.PI * (h + o));

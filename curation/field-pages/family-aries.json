@@ -1,0 +1,115 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "aries",
+ "line": "Burt's chapter on Aries, and the places where Jung speaks of the ram.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Aries, pdf pp. 23–58. Her defining sentences.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The Age of Aries is a solar, or masculine age. It is the Age of the Ram, of Mars and of the Hero.",
+     "page": 23,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Aries’ energy is like the Sun’s rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all.",
+     "page": 24,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Aries, remember, is outward drive and Logos.",
+     "page": 25,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "When we think of Cardinal Fire (Aries) we think of the competitive drive toward success, of the quest in the outer world",
+     "page": 37,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Aries, pdf pp. 23–58. The heroic form, its shadow and its integration.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Both are solar, heroic stories about young, naive, independent, supremely confident heroes.",
+     "page": 41,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Mars needs to temper Logos with Eros.",
+     "page": 27,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Mars is passionate, but not exactly tender or aware of others’ feelings!",
+     "page": 27,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The Aries at the esoteric level has begun to work consciously with Mercury (Logos), his/her spiritual ruler.",
+     "page": 30,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "belong to the heroic Aries archetype.",
+     "page": 32,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung names the ram as the sign of the expiring aeon, in his seminar and in Aion.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The gods had bull’s horns when the sun was in Taurus, and they had ram’s horns during the Aries period. Then the Fish became the symbol.",
+     "page": 448,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The little ram, the time of little shoots and buds.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Attis, the Lord of the sacred Ram and the thousand-eyed shepherd of glittering stars.",
+     "page": 101,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "ram"
+  },
+  {
+   "type": "family",
+   "id": "libra"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-devil",
+ "line": "Crowley's account of Atu XV: the letter Ayin, Capricorn ruled by Saturn, and the figure of Pan.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter, the sign, its ruler and the name Crowley gives the figure. The table spells the letter A'ain, against the text's Ayin.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter ‘Ayin, which means an Eye, and it refers to Capricornus in the Zodiac.",
+     "page": 95,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The sign is ruled by Saturn, who makes for selfhood and perpetuity.",
+     "page": 95,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card represents Pan Pangenetor, the All‐Begetter.",
+     "page": 95,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "Crowley says this path leads from Tiphareth, with the far end not named in the text. The table gives Key Scale path 26.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "On the Tree of Life, Atu XIII and XV are symmetrically placed; they lead from Tiphareth, the human consciousness, to the spheres in which Thought (on the one hand) and Bliss (on the other) are developed.",
+     "page": 95,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These paths are the paths which join the ten numbers on the",
+     "page": 36,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "capricorn"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "shadow"
+  }
+ ]
+}

@@ -1,0 +1,104 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "binah",
+ "line": "Crowley gives Binah the number 3 and Saturn, and his own lists disagree about Saturn; Jung calls Binah the root in which the tree of life is rooted.",
+ "sections": [
+  {
+   "id": "crowley-number-three",
+   "title": "Crowley's number 3",
+   "line": "The third sephira is Binah, Understanding, and the Threes are referred to it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "shows the third Sephira, Binah, Understanding, as not yet formulated",
+     "page": 59,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Binah, the Great Mother, here rules the realm of Air.",
+     "page": 214,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "saturn-and-the-moon",
+   "title": "Saturn and the Moon",
+   "line": "Crowley gives Binah Saturn, and in another aspect the Moon.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Binah, the Great Sea, is the Moon in one aspect, but Saturn in another;",
+     "page": 199,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Yet Saturn appears in Binah in respect of its blackness in the",
+     "page": 110,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "where-the-lists-disagree",
+   "title": "Where Crowley's lists disagree",
+   "line": "The Universe list gives its third item as Saturn with the Abyss, and Diagram 5 puts Saturn in the place of the non-existent Daath. Both are Crowley's statements; the site keeps the conflict visible.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Saturn. The Abyss. This is represented by Herschel,",
+     "page": 111,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Saturn is in the position of the non‐existent Sephira, Daäth,",
+     "page": 265,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-root-of-the-tree",
+   "title": "Jung's root of the tree",
+   "line": "Jung calls Binah the upper Sefira, in which the tree of life is rooted, and the source of the middle line that brings life down. He does not number it.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "in Binah is rooted the tree of life",
+     "para": 411,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw13",
+     "quote": "which was as it were the trunk of the Sefiroth system, it brought life down to earth from Binah",
+     "para": 411,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  }
+ ]
+}

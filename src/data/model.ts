@@ -1,5 +1,5 @@
 // Indexes over the Field: everything the experience layer looks up by id.
-import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Occurrence, Field, Theoretic, TheoreticId } from '../types/field';
+import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Join, Occurrence, Field, Theoretic, TheoreticId } from '../types/field';
 import type { Symbols, SymbolEntry } from '../types/symbols';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
@@ -15,6 +15,16 @@ export interface Place {
   id: string; // slug
   name: string;
   occ: number[]; // occurrence indices
+}
+
+/**
+ * What governs one occurrence: the archetypes of its own family, and the theoretics whose material that family is
+ * (a theoretic stands for its tied families and for the families of its tied archetypes — the rule the ingest counts
+ * with). Built once per model, index-aligned with `occ`, for the field filter's archetype and theoretic dimensions.
+ */
+export interface OccurrenceTags {
+  archetypes: string[];
+  theoretics: string[];
 }
 
 export interface Model {
@@ -45,6 +55,12 @@ export interface Model {
   occPlace: (string | undefined)[];
   /** the primary colour of each occurrence (its family's core) */
   colour: RGB[];
+  /** what governs each occurrence (its family's archetypes and theoretics), index-aligned with `occ` */
+  tags: OccurrenceTags[];
+  /** the field's joins (curation/joins.json), any node to any node */
+  joins: Join[];
+  /** joins by endpoint, keyed `${type}:${id}`: each join is listed under both of its ends */
+  joinsBy: Map<string, Join[]>;
 }
 
 export function slug(s: string): string {
@@ -143,7 +159,43 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     theoOcc.set(t.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, cultureOcc, places, occPlace, colour };
+  // What governs each occurrence, by its own family: the archetypes the family is tied to, and the theoretics whose
+  // material that family is — the same sets the focus tunes to, so a filter on them slices exactly what a focus shows.
+  const famTags = new Map<FamilyId, OccurrenceTags>();
+  for (const f of field.families) famTags.set(f.id, { archetypes: f.archetypes.map((t) => t.id), theoretics: [] });
+  for (const t of field.theoretics ?? []) {
+    const fams = new Set([...t.families.map((x) => x.id), ...t.archetypes.flatMap((x) => archById.get(x.id)?.familyIds ?? [])]);
+    for (const fid of fams) famTags.get(fid)?.theoretics.push(t.id);
+  }
+  const tags: OccurrenceTags[] = occ.map((o) => famTags.get(o.familyId) ?? { archetypes: [], theoretics: [] });
+
+  const joins = field.joins ?? [];
+  const joinsBy = new Map<string, Join[]>();
+  for (const j of joins) {
+    for (const e of [j.a, j.b]) {
+      const k = `${e.type}:${e.id}`;
+      const l = joinsBy.get(k);
+      if (l) l.push(j); else joinsBy.set(k, [j]);
+    }
+  }
+
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, cultureOcc, places, occPlace, colour, tags, joins, joinsBy };
+}
+
+const BASIS_ORDER: Record<string, number> = { jung: 0, inferred: 1, site: 2 };
+
+/**
+ * The joins a subject takes part in, each with its far end (`other`). Jung before inferred before site, then by name.
+ * A join is listed under both its ends, so the far end is whichever end is not the subject.
+ */
+export function joinsOf(m: Model, s: Subject): { join: Join; other: Subject }[] {
+  const list = m.joinsBy.get(`${s.type}:${s.id}`) ?? [];
+  return list
+    .map((join) => {
+      const far = join.a.type === s.type && join.a.id === s.id ? join.b : join.a;
+      return { join, other: { type: far.type, id: far.id } };
+    })
+    .sort((x, y) => BASIS_ORDER[x.join.basis] - BASIS_ORDER[y.join.basis] || subjectName(m, x.other).localeCompare(subjectName(m, y.other)));
 }
 
 /** Occurrence indices (located only) that belong to a subject. */

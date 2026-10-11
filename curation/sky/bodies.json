@@ -31,7 +31,7 @@
       "name": "Luna",
       "oneLine": "Luna — silver; the guardian of the seed, gathering-place of departed souls",
       "orbit": {
-        "around": "earth",
+        "around": "terra",
         "au": 0.00256956,
         "eccentricity": 0.0549,
         "siderealDays": 27.3217,
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "key": "earth",
+      "key": "terra",
       "order": 2,
       "modern": false,
       "name": "Terra",

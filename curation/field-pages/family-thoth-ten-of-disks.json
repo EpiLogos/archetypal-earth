@@ -1,0 +1,92 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-ten-of-disks",
+ "line": "Ten of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and ruler, as the chapter gives them (pdf 181, 237).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Disks is called Wealth",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Mercury rules this card in Virgo",
+     "page": 237,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The Tens belong to Malkuth (pdf 181), which is in Assiah (pdf 181).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Malkuth.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the card, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is in fact a hieroglyph of the cycle of regeneration.",
+     "page": 237,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "conflicts",
+   "title": "Conflicts and gaps",
+   "line": "The Tens group intro says there is now no planetary attribution to consider (pdf 181); this card's chapter names Mercury in Virgo. The chapter also places a coin where Hod, Mercury, stands on the Tree, marked with the Sun's cipher (pdf 237). The harvest does not say what that coin is, so no reading is drawn from it here.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is now no planetary attribution to consider.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "coin in the place of Hod (Mercury) on the Tree is marked with the cipher of the Sun.",
+     "page": 237,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "family",
+   "id": "malkuth"
+  },
+  {
+   "type": "archetype",
+   "id": "ten"
+  }
+ ]
+}

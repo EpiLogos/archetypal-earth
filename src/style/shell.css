@@ -302,6 +302,13 @@ body.landing-on .time { opacity: 0.35; }
 .as-cmp-pos { font: 600 1rem var(--serif); color: var(--ink); }
 .as-shared { margin: 8px 0; font: 13px var(--sans); color: var(--core); }
 .as-tie { margin: 4px 0 10px; }
+.as-sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.as-sign { font: 13px var(--sans); }
+.as-sign:disabled { opacity: .4; cursor: default; }
+.as-sign:disabled:hover { color: var(--ink-2); background: none; }
+.as-sign-name { display: inline-flex; align-items: center; gap: 8px; }
+.as-sign-name .zg { width: 16px; height: 16px; flex: none; overflow: visible; }
+.as-sign-name .zg path { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
 .as-tie-name { display: block; color: var(--ink); }
 .as-basis { display: block; font-size: 11px; color: var(--ink-3); }
 .as-aspects ul { margin: 0; padding-left: 18px; font: 13px/1.7 var(--sans); color: var(--ink-2); }
@@ -379,6 +386,11 @@ body.landing-on .time { opacity: 0.35; }
 .ql-stop.on .ql-pos { fill: var(--ink); }
 .ql-walk-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 4px; font: 11.5px var(--sans); }
 .ql-stop-name strong { font: 600 13px var(--sans); color: var(--ink); margin-right: 4px; }
+/* the Tree of Life (src/lenses/tree.ts): quiet paths under the ten nodes; a sephira with no family in the field is not a button */
+.tree-figure { width: 100%; max-width: 240px; height: auto; overflow: visible; }
+.tree-path { stroke: var(--hair); stroke-width: 1; fill: none; }
+.tree-absent { cursor: default; }
+.tree-absent:hover .ql-node, .tree-absent:focus-visible .ql-node { fill: var(--deep); }
 .th-walk { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 44px; margin: 14px 0 4px; padding: 0 14px; border: 1px solid rgb(var(--core-rgb) / 0.45); border-radius: 22px; font: 13px var(--sans); color: var(--ink); background: rgb(var(--core-rgb) / 0.07); text-align: left; }
 .th-walk:hover { background: rgb(var(--core-rgb) / 0.14); }
 .ql-quaternio { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 6px; margin: 4px 0 12px; }

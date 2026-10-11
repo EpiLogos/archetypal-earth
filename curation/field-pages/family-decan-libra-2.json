@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-libra-2",
+ "line": "Crowley's Three of Swords is the card for the second decan of Libra, with Saturn as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Libra.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "manifests itself in the Three of Swords, the Lord of Sorrow",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This is accentuated by the Celestial Lordship of Saturn in Libra.",
+     "page": 214,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is dark and heavy; it is, so to speak, the womb of Chaos.",
+     "page": 214,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "libra"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "thoth-three-of-swords"
+  }
+ ]
+}

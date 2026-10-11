@@ -16,7 +16,7 @@ export interface BodyTie { body: BodyKey; name: string; basis: TieBasis }
 
 /** The planets' conventional signs, as text (never the emoji presentation). The Earth's is the astronomers' ⊕. */
 export const BODY_GLYPH: Record<BodyKey, string> = {
-  sun: '☉', moon: '☽', earth: '⊕', mercury: '☿', venus: '♀', mars: '♂', jupiter: '♃', saturn: '♄', uranus: '♅', neptune: '♆', pluto: '♇',
+  sun: '☉', moon: '☽', terra: '⊕', mercury: '☿', venus: '♀', mars: '♂', jupiter: '♃', saturn: '♄', uranus: '♅', neptune: '♆', pluto: '♇',
 };
 export const glyphOf = (key: BodyKey): string => `${BODY_GLYPH[key]}\uFE0E`;
 

@@ -1,0 +1,111 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "ether",
+ "line": "Jung has no essay on ether; this page shows where the word stands in his alchemy, in breath and body, and in physics.",
+ "sections": [
+  {
+   "id": "where-the-word-stands",
+   "title": "Where the word stands",
+   "line": "Jung has no essay on ether. These are the places where the word appears in the alchemy: as the quintessence, and as the lapis.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "the simple primordial ideas. Ether is the quintessence.",
+     "para": 371
+    },
+    {
+     "work": "cw14",
+     "quote": "It is a symbol of the arcane substance and the quintessence, of the aether that contains all four elements",
+     "para": 270
+    },
+    {
+     "work": "cw14",
+     "quote": "The establishment of the Maid in the fifth circle is an indication that the quintessence, portraying the disharmonious elements as a unity, is equivalent to aether, the finest and most subtle substance.",
+     "para": 452
+    },
+    {
+     "work": "cw13",
+     "quote": "the invisible, spiritual stone, or lapis aethereus.",
+     "page": 128
+    }
+   ]
+  },
+  {
+   "id": "breath-body-and-heavens",
+   "title": "Breath, body and heavens",
+   "line": "Aether as the primordial breath or soul-substance, and as Dorn's aetheric substance in the body and in the firmament.",
+   "quotes": [
+    {
+     "work": "cw07",
+     "quote": "For instance, aether, the primordial breath or soul-substance, is a concept found all over the world",
+     "para": 151
+    },
+    {
+     "work": "cw14",
+     "quote": "There is in the human body a certain aethereal substance, which preserves its other elemental parts and causes them to continue",
+     "para": 114,
+     "voice": "Dorn, quoted by Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "whose substance is the aetheric moisture and heat of the firmament, like to the sun and moon.",
+     "para": 27,
+     "voice": "Dorn, quoted by Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-physicists-ether",
+   "title": "The physicist's ether",
+   "line": "Jung lists ether among the auxiliary concepts of the exact sciences, and Pauli says relativity removed it as a substance.",
+   "quotes": [
+    {
+     "work": "cw08",
+     "quote": "This is the case, for instance, with the physicist's concept of ether, which, although a concept, is treated exactly as if it were a substance.",
+     "para": 53
+    },
+    {
+     "work": "cw08",
+     "quote": "They even appear in the exact sciences, as the foundation of certain indispensable auxiliary concepts such as energy, ether, and the atom.",
+     "para": 278
+    },
+    {
+     "work": "letters-pauli",
+     "quote": "Through the postulate of relativity, ether as a substance has been removed from physical theories",
+     "page": 18,
+     "voice": "Pauli"
+    }
+   ]
+  },
+  {
+   "id": "in-the-seminar",
+   "title": "In the seminar",
+   "line": "The seminar remarks are recorded speech, not Jung's own text. There the figure that unites pairs of opposites is called the Self, and ether is the comparison.",
+   "quotes": [
+    {
+     "work": "sem-visions",
+     "quote": "Ether is matter which is not matter, it is absolutely hypothetical; it functions as the union of pairs of opposites",
+     "page": 1336,
+     "voice": "Jung, seminar transcript (as recorded, not Jung's own text)"
+    },
+    {
+     "work": "sem-visions",
+     "quote": "It functions in about the same way in psychology as ether functions in physics.",
+     "page": 1336,
+     "voice": "Jung, seminar transcript (as recorded, not Jung's own text)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quintessence"
+  },
+  {
+   "type": "archetype",
+   "id": "five"
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-nine-of-cups",
+ "line": "Nine of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and ruler, as the chapter gives them (pdf 180, 207).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Nine of Cups is called Happiness.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ruler is Jupiter in Pisces.",
+     "page": 207,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The Nines belong to Yesod (pdf 180). The quoted record for this card does not name Yesod again.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Yesod.",
+     "page": 180,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the culmination, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card is the pageant of the culmination and perfection of the original force of Water.",
+     "page": 207,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  },
+  {
+   "type": "archetype",
+   "id": "nine"
+  }
+ ]
+}

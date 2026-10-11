@@ -1,0 +1,109 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "libra",
+ "line": "Burt's chapter on Libra, with the anima and animus in partnership.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Libra, pdf pp. 253–294. Her account of the seventh sign, Venus and the polarity.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign.",
+     "page": 253,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "She is Aphrodite, Goddess of Love, aesthetics and civilized good taste.",
+     "page": 253,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "When we consider the polarity from Aries to Libra, we are observing two Cardinal, or managerial signs.",
+     "page": 253,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The mundane ruler of Libra has an energy that is appropriate to the season.",
+     "page": 253,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Libra, pdf pp. 253–294. Anima, animus and the seventh house.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "the anima (the man’s inner feminine) as a rather naive ideal that is",
+     "page": 258,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Though she chose to live in the air, she is primarily a feeling goddess.",
+     "page": 256,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "As a benefic planet, Aphrodite does not like to work or to confront.",
+     "page": 256,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Because the Seventh House is, for Libra, life’s major issue,",
+     "page": 260,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the balance after the virgin, and on Libra as an air sign.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The balance after the virgin has done her job.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "Libra originated in the time of the Caesars; because it was invented so late, it is the only one that is an instrument.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Libra is another double sign with a pneumatic nature (air trigon), like Gemini,",
+     "page": 95,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "venus"
+  },
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "scorpio"
+  }
+ ]
+}

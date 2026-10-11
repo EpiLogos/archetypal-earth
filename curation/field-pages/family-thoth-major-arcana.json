@@ -1,0 +1,98 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-major-arcana",
+ "line": "The twenty-two trumps, which Crowley places on the Paths of the Tree of Life and reads in sequence from the Fool to the Universe.",
+ "sections": [
+  {
+   "id": "twenty-two",
+   "title": "Twenty-two",
+   "line": "The count comes from the Hebrew alphabet, and the trumps are set between the Sephiroth.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The letters of the Hebrew alphabet are twenty‐two.",
+     "page": 36,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "so that their position on the Tree of Life is significant.",
+     "page": 27,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-paths",
+   "title": "The Paths",
+   "line": "Crowley relates the trumps to the twenty-two Paths. He calls the lines between the Sephiroth Forces of Nature.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "joined together their ten numbers on the Tree of Life by twenty‐two Paths.",
+     "page": 32,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The lines joining them are Forces of Nature, of a much less complete type;",
+     "page": 25,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "refer to the twenty‐two Paths.",
+     "page": 261,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-series",
+   "title": "From the Fool to the Universe",
+   "line": "Crowley's own reading of the first and last trumps frames the series as one process.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return.",
+     "page": 110,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Universe, so states the theme, is the Celebration of the Great Work accomplished.",
+     "page": 110,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-is-not-claimed",
+   "title": "What is not claimed here",
+   "line": "Crowley does not give the trumps an archetype reading. The field's tie to the Self is a site reading, and this page states no more than the sequence above.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Tarot, while based on these theoretical attributions, was designed as a practical",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "thoth-tarot"
+  },
+  {
+   "type": "archetype",
+   "id": "self"
+  }
+ ]
+}

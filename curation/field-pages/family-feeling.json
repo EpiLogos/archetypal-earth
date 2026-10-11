@@ -1,0 +1,147 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "feeling",
+ "line": "Feeling as Jung defines it: a function in its own right, the judgment it makes, its place opposite thinking, and the diagrams.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "Feeling is one of the four basic functions, not a secondary sensation or a thought left unfinished.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "I count feeling among the four basic psychological functions (q.v.).",
+     "para": 723
+    },
+    {
+     "work": "cw06",
+     "quote": "I regard it as an independent function sui generis",
+     "para": 723
+    },
+    {
+     "work": "cw06",
+     "quote": "Feeling is primarily a process that takes place between the ego (q.v.) and a given content, a process, moreover, that imparts to the content a definite value in the sense of acceptance or rejection (“like” or “dislike”).",
+     "para": 724
+    }
+   ]
+  },
+  {
+   "id": "rational-and-opposite",
+   "title": "Judgment, rational, and opposed to thinking",
+   "line": "Feeling judges by acceptance and rejection. Directed feeling is rational; undirected feeling is what Jung calls feeling-intuition. Thinking is its opposite in the rational pair.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "Hence feeling is a kind of judgment, differing from intellectual judgment in that its aim is not to establish conceptual relations but to set up a subjective criterion of acceptance or rejection.",
+     "para": 725
+    },
+    {
+     "work": "cw06",
+     "quote": "Strictly speaking, therefore, only active, directed feeling should be termed rational, whereas passive feeling is irrational (q.v.) in so far as it confers values without the participation or even against the intentions of the subject.",
+     "para": 729
+    },
+    {
+     "work": "cw06",
+     "quote": "The latter would be undirected, passive feeling, as these expressions themselves show: the one is an activity, the other a passive state. Undirected feeling is feeling-intuition.",
+     "para": 729
+    },
+    {
+     "work": "cw06",
+     "quote": "The thinking type, for instance, must necessarily repress and exclude feeling as far as possible, since nothing disturbs thinking so much as feeling",
+     "para": 905
+    }
+   ]
+  },
+  {
+   "id": "position",
+   "title": "Its place in the order",
+   "line": "In the diagram for a thinking type, feeling is the inferior function, put below the cross, where its energy passes into the unconscious. The passage on the fourth quarter gives fire as the inferior function, whichever function that is for a given person.",
+   "quotes": [
+    {
+     "work": "cw18",
+     "quote": "Then we must put feeling (F) down below, because it is, in this case, the inferior function",
+     "para": 29
+    },
+    {
+     "work": "cw11",
+     "quote": "His inferior function will be feeling (valuation), which remains in a retarded state and is contaminated with the unconscious.",
+     "para": 245
+    },
+    {
+     "work": "cw06",
+     "quote": "the energy left to it passes into the unconscious and activates it in an unnatural way",
+     "para": 764
+    },
+    {
+     "work": "cw14",
+     "quote": "The experience of the fourth quarter, the region of fire (i.e., the inferior function), is described by Maier as an ascent and descent through the seven planetary spheres.",
+     "para": 288
+    }
+   ]
+  },
+  {
+   "id": "compass-and-cross",
+   "title": "Compass and cross",
+   "line": "The compass is Jung's image of the four, and the cross gives the rational axis that feeling shares with thinking. The ego sits at the centre of the Tavistock figure.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+     "para": 958
+    },
+    {
+     "work": "cw06",
+     "quote": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+     "para": 983
+    },
+    {
+     "work": "cw18",
+     "quote": "In the centre is the ego (E), which has a certain amount of energy at its disposal, and that energy is the will-power.",
+     "para": 29
+    }
+   ]
+  },
+  {
+   "id": "elements-and-colours",
+   "title": "Heart, element and colour",
+   "line": "The seminar gives feeling the heart, which is an organ and not an element. One vision's red jewel stands for positive feeling, and that is one reading, not a rule. The element reading of the four is conditional, offered only if we take it so.",
+   "quotes": [
+    {
+     "work": "sem-kundalini",
+     "quote": "The heart is always characteristic of feeling because feeling conditions influence the heart.",
+     "page": 95
+    },
+    {
+     "work": "sem-visions",
+     "quote": "and up comes the red jewel, the positive feeling, the heart",
+     "page": 691
+    },
+    {
+     "work": "cw11",
+     "quote": "It happens with some regularity that these colours are correlated with the four orienting functions of consciousness.",
+     "para": 281
+    },
+    {
+     "work": "cw14",
+     "quote": "If we take the four directions and the four elements (see note 505) as a symbolical equivalent of the four basic functions of consciousness, we can say that Maier had become conscious of three of them by the time he reached Asia.",
+     "para": 276
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "thinking"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  }
+ ]
+}

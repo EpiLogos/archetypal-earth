@@ -309,7 +309,7 @@
    ]
   },
   {
-   "body": "earth",
+   "body": "terra",
    "target": {
     "type": "archetype",
     "id": "great-mother"
@@ -318,7 +318,7 @@
    "note": "The atlas names the Earth its home body; reading it as mother is a gloss, not Jung's statement about the planet."
   },
   {
-   "body": "earth",
+   "body": "terra",
    "target": {
     "type": "family",
     "id": "mother-goddess"
@@ -526,6 +526,393 @@
    "basis": "site",
    "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
    "restates": true
+  },
+  {
+   "body": "mercury",
+   "target": {
+    "type": "family",
+    "id": "lapis"
+   },
+   "basis": "jung",
+   "note": "Jung says Mercurius as the lapis is a symbolic expression of the complex he calls the self, and Mercurius is the alchemical equivalent of the planet Mercury.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6296 (pdf p278)",
+     "quote": "One can hardly escape the conclusion that Mercurius as the lapis"
+    }
+   ]
+  },
+  {
+   "body": "mercury",
+   "target": {
+    "type": "archetype",
+    "id": "self"
+   },
+   "basis": "jung",
+   "note": "The same sentence as the lapis tie: Jung identifies Mercurius with the psychological complex he defines as the self.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6296 (pdf p278)",
+     "quote": "expression for the psychological complex which I have defined as the self"
+    }
+   ]
+  },
+  {
+   "body": "mercury",
+   "target": {
+    "type": "family",
+    "id": "hermaphrodite"
+   },
+   "basis": "jung",
+   "note": "Jung describes the alchemists' Mercurius as hermaphroditus and duplex, a complexio oppositorum, the alchemical equivalent of the planet.",
+   "cites": [
+    {
+     "work": "cw10",
+     "workTitle": "Civilization in Transition (CW10)",
+     "locator": "\u00b6727 (pdf p349)",
+     "quote": "Their Mercurius is hermaphroditus and duplex, a complexio oppositorum"
+    }
+   ]
+  },
+  {
+   "body": "venus",
+   "target": {
+    "type": "archetype",
+    "id": "great-mother"
+   },
+   "basis": "inferred",
+   "note": "The passage calls the primordial mother-image a terrifying paradox. The sentence before it pairs heavenly Venus with that mother-image, though Venus is not named in the quoted line itself.",
+   "cites": [
+    {
+     "work": "cw09i",
+     "workTitle": "The Archetypes and the Collective Unconscious (CW9i)",
+     "locator": "\u00b6192 (pdf p118)",
+     "quote": "it was the terrifying paradox of the primordial mother-image"
+    }
+   ]
+  },
+  {
+   "body": "venus",
+   "target": {
+    "type": "family",
+    "id": "king-queen-pair"
+   },
+   "basis": "jung",
+   "note": "In Jung's account of the alchemical texts Venus is the queen beside the king, the same pair the sun and moon form in the coniunctio.",
+   "cites": [
+    {
+     "work": "cw14",
+     "workTitle": "Mysterium Coniunctionis (CW14)",
+     "locator": "\u00b6416 (pdf p223)",
+     "quote": "Venus appears as the feminine aspect of the king"
+    }
+   ]
+  },
+  {
+   "body": "venus",
+   "target": {
+    "type": "family",
+    "id": "divine-pair"
+   },
+   "basis": "jung",
+   "note": "Jung asks why the Paracelsian image shows a hierosgamos of Venus and Mars rather than the marriage of the Lamb, so Venus is one half of a divine pair.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6227 (pdf p215)",
+     "quote": "a hierosgamos of Venus and Mars"
+    }
+   ]
+  },
+  {
+   "body": "venus",
+   "target": {
+    "type": "family",
+    "id": "well-spring"
+   },
+   "basis": "jung",
+   "note": "Jung reports Valentinus' poem, in which Venus is the fountain, the water source of the work.",
+   "cites": [
+    {
+     "work": "cw14",
+     "workTitle": "Mysterium Coniunctionis (CW14)",
+     "locator": "\u00b6415 (pdf p223)",
+     "quote": "Venus is identified with the fountain, the mother and bride of the king"
+    }
+   ]
+  },
+  {
+   "body": "mars",
+   "target": {
+    "type": "family",
+    "id": "tree"
+   },
+   "basis": "jung",
+   "note": "In Jung's account of Greverus' tree allegory the four inferior planets, Mars among them, form the trunk.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6355 (pdf p339)",
+     "quote": "Saturn, Jupiter, Mars, and Venus form the trunk"
+    }
+   ]
+  },
+  {
+   "body": "mars",
+   "target": {
+    "type": "family",
+    "id": "divine-pair"
+   },
+   "basis": "jung",
+   "note": "Jung's question about the Paracelsian image of Venus and Mars as a hierosgamos makes Mars one half of a divine pair.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6227 (pdf p215)",
+     "quote": "a hierosgamos of Venus and Mars"
+    }
+   ]
+  },
+  {
+   "body": "mars",
+   "target": {
+    "type": "family",
+    "id": "ram"
+   },
+   "basis": "inferred",
+   "note": "Burt calls Aries the Age of the Ram, of Mars and of the Hero, and gives Mars as the mundane ruler of Aries.",
+   "cites": [
+    {
+     "work": "burt-zodiac",
+     "workTitle": "Archetypes of the Zodiac (Burt, 1988)",
+     "locator": "pdf p23",
+     "quote": "It is the Age of the Ram, of Mars and of the Hero"
+    }
+   ]
+  },
+  {
+   "body": "mars",
+   "target": {
+    "type": "family",
+    "id": "fire"
+   },
+   "basis": "inferred",
+   "note": "An alchemical text that Jung quotes speaks of the fiery spirit of Mars.",
+   "cites": [
+    {
+     "work": "cw16",
+     "workTitle": "The Practice of Psychotherapy (CW16)",
+     "locator": "\u00b6509 (pdf p260)",
+     "quote": "the fiery spirit of Mars"
+    }
+   ]
+  },
+  {
+   "body": "jupiter",
+   "target": {
+    "type": "family",
+    "id": "tree"
+   },
+   "basis": "jung",
+   "note": "In Jung's account of Greverus' tree allegory the four inferior planets, Jupiter among them, form the trunk.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6355 (pdf p339)",
+     "quote": "Saturn, Jupiter, Mars, and Venus form the trunk"
+    }
+   ]
+  },
+  {
+   "body": "jupiter",
+   "target": {
+    "type": "family",
+    "id": "eagle"
+   },
+   "basis": "inferred",
+   "note": "Jung's seminar names Zeus as lord of the eagle, and Zeus is the Greek counterpart of the planet Jupiter.",
+   "cites": [
+    {
+     "work": "sem-zarathustra",
+     "workTitle": "Nietzsche's Zarathustra seminar (1934\u201339)",
+     "locator": "pdf p1339",
+     "quote": "The eagle of Zeus carried him off to the throne of the gods"
+    }
+   ]
+  },
+  {
+   "body": "jupiter",
+   "target": {
+    "type": "archetype",
+    "id": "self"
+   },
+   "basis": "jung",
+   "note": "In the Ufo dream Jung reads the Jupiter that approaches the earth as the self appearing in projection, which then breaks into numberless selves.",
+   "cites": [
+    {
+     "work": "cw10",
+     "workTitle": "Civilization in Transition (CW10)",
+     "locator": "¶695 (pdf p334)",
+     "quote": "The self then remains in projection. In our dream it appears as Jupiter, which in approaching the earth changes into a multitude of smaller heavenly bodies"
+    }
+   ]
+  },
+  {
+   "body": "jupiter",
+   "target": {
+    "type": "family",
+    "id": "quaternity"
+   },
+   "basis": "jung",
+   "note": "Jung says the planetary names make two dyads, Jupiter with Venus the benevolent one, and such dyads often constitute an alchemical quaternity.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "¶358 (pdf p342)",
+     "quote": "themselves indicate two dyads, one benevolent (Jupiter and Venus), the other malefic (Saturn and Mars), and such dyads often constitute an alchemical quaternity"
+    }
+   ]
+  },
+  {
+   "body": "jupiter",
+   "target": {
+    "type": "family",
+    "id": "divine-child"
+   },
+   "basis": "jung",
+   "note": "Jung lists Jupiter Anxurus among the figures of the divine boy, beside the puer aeternus and the young Dionysus.",
+   "cites": [
+    {
+     "work": "cw05",
+     "workTitle": "Symbols of Transformation (CW5)",
+     "locator": "¶184 (pdf p129)",
+     "quote": "the divine boy, the puer aeternus, παίς, the young Dionysus, Jupiter Anxurus, Tages"
+    }
+   ]
+  },
+  {
+   "body": "saturn",
+   "target": {
+    "type": "family",
+    "id": "demiurge"
+   },
+   "basis": "jung",
+   "note": "For the alchemists Saturn was the demiurge Ialdabaoth, and also the spiritus niger held captive in matter.",
+   "cites": [
+    {
+     "work": "cw11",
+     "workTitle": "Psychology and Religion: West and East (CW11)",
+     "locator": "\u00b6350 (pdf p191)",
+     "quote": "the demiurge Ialdabaoth, he was also the spiritus niger who lies captive in the darkness of matter"
+    }
+   ]
+  },
+  {
+   "body": "saturn",
+   "target": {
+    "type": "family",
+    "id": "devil"
+   },
+   "basis": "jung",
+   "note": "Jung says the devil is the Saturnine form of the anima.",
+   "cites": [
+    {
+     "work": "cw13",
+     "workTitle": "Alchemical Studies (CW13)",
+     "locator": "\u00b6158 (pdf p152)",
+     "quote": "devil is the Saturnine form of the anima"
+    }
+   ]
+  },
+  {
+   "body": "uranus",
+   "target": {
+    "type": "family",
+    "id": "dismemberment"
+   },
+   "basis": "site",
+   "note": "Burt's Aquarius chapter reads the dismemberment of Uranus, the sky-god the planet is named for."
+  },
+  {
+   "body": "uranus",
+   "target": {
+    "type": "family",
+    "id": "grail"
+   },
+   "basis": "site",
+   "note": "Burt ties Uranus's question \"why\" to the Grail Quest."
+  },
+  {
+   "body": "uranus",
+   "target": {
+    "type": "family",
+    "id": "ufo"
+   },
+   "basis": "site",
+   "note": "Burt reads Uranus as ruling advanced technology, and the flying-object family is that technology in its modern form."
+  },
+  {
+   "body": "neptune",
+   "target": {
+    "type": "archetype",
+    "id": "animus"
+   },
+   "basis": "site",
+   "note": "Jung's caption to a Mutus liber figure reads \"fishing for Neptune (animus)\"; the sea-god it names is the planet's namesake."
+  },
+  {
+   "body": "neptune",
+   "target": {
+    "type": "family",
+    "id": "melusina"
+   },
+   "basis": "site",
+   "note": "Jung describes the anima as Melusina, embracing a man rising out of the sea; Neptune is the sea-god."
+  },
+  {
+   "body": "neptune",
+   "target": {
+    "type": "family",
+    "id": "fish"
+   },
+   "basis": "site",
+   "note": "Burt's rulership table gives Neptune as the ruler of Pisces."
+  },
+  {
+   "body": "pluto",
+   "target": {
+    "type": "family",
+    "id": "resurrection"
+   },
+   "basis": "site",
+   "note": "Burt says what must be released in us before Pluto can initiate a rebirth."
+  },
+  {
+   "body": "pluto",
+   "target": {
+    "type": "family",
+    "id": "ascent-descent"
+   },
+   "basis": "site",
+   "note": "Jung notes that antiquity had any number of entrances to Hades, the underworld the planet's god presides over."
+  },
+  {
+   "body": "pluto",
+   "target": {
+    "type": "family",
+    "id": "underworld"
+   },
+   "basis": "site",
+   "note": "Named for the god of the underworld, Pluto in Roman myth and Hades in Greek."
   }
  ],
  "readings": [

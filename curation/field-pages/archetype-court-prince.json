@@ -1,0 +1,87 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "court-prince",
+ "line": "Crowley's Prince is the Vau of the Name and the Son of the pagan series. The tie to the child is a reading made here.",
+ "sections": [
+  {
+   "id": "the-letter-of-the-name",
+   "title": "The letter of the Name",
+   "line": "Crowley gives the Princes the forces of the letter Vau of the Name.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards constitute a pictorial analysis of the powers of the four letters of the Name and the four Elements.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "son-in-the-series",
+   "title": "Son in the series",
+   "line": "Crowley assigns the Son to the number six, the centre of his system, in the pagan series of Father, Mother, Son and Daughter.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It has been thought better, for the present pack, to adopt the term “Knight”, “Queen”, “Prince” and “Princess”, to represent the series Father, Mother, Son, Daughter, because the doctrine involved, which is extraordinarily complex and difficult, demands it.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Court cards are referred to the numbers 2, 3, 6 and 10",
+     "page": 261,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Here is the number Six, the centre of the system:",
+     "page": 21,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "son-and-the-child",
+   "title": "The Son and the child",
+   "line": "Crowley calls the Son in his most perfect manifestation, and gives the child Horus and the Aeon of the Child. The tie to the child archetype rests on those words and is a reading made here.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "her path, as shown in the diagram, makes a direct connection between the Father in his highest aspect, and the Son in his most perfect manifestation.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "As a result of the marriage of these two, the child Horus is born.",
+     "page": 107,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the aeon of Horus, of the Child.",
+     "page": 69,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "child"
+  },
+  {
+   "type": "family",
+   "id": "thoth-tarot"
+  }
+ ]
+}

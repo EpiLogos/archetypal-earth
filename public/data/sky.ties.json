@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-11T00:59:39.850Z",
+    "generatedAt": "2026-10-11T22:08:01.812Z",
     "from": "public/data/sky.json"
   },
   "bodies": [
@@ -27,7 +27,7 @@
       "spectrum": 0.26
     },
     {
-      "key": "earth",
+      "key": "terra",
       "name": "Terra",
       "order": 2,
       "modern": false,
@@ -200,13 +200,13 @@
       "basis": "jung"
     },
     {
-      "body": "earth",
+      "body": "terra",
       "type": "archetype",
       "id": "great-mother",
       "basis": "site"
     },
     {
-      "body": "earth",
+      "body": "terra",
       "type": "family",
       "id": "mother-goddess",
       "basis": "site"
@@ -236,6 +236,24 @@
       "basis": "inferred"
     },
     {
+      "body": "mercury",
+      "type": "family",
+      "id": "lapis",
+      "basis": "jung"
+    },
+    {
+      "body": "mercury",
+      "type": "archetype",
+      "id": "self",
+      "basis": "jung"
+    },
+    {
+      "body": "mercury",
+      "type": "family",
+      "id": "hermaphrodite",
+      "basis": "jung"
+    },
+    {
       "body": "venus",
       "type": "family",
       "id": "venus",
@@ -254,6 +272,30 @@
       "basis": "jung"
     },
     {
+      "body": "venus",
+      "type": "archetype",
+      "id": "great-mother",
+      "basis": "inferred"
+    },
+    {
+      "body": "venus",
+      "type": "family",
+      "id": "king-queen-pair",
+      "basis": "jung"
+    },
+    {
+      "body": "venus",
+      "type": "family",
+      "id": "divine-pair",
+      "basis": "jung"
+    },
+    {
+      "body": "venus",
+      "type": "family",
+      "id": "well-spring",
+      "basis": "jung"
+    },
+    {
       "body": "mars",
       "type": "family",
       "id": "planetary-gods",
@@ -263,6 +305,30 @@
       "body": "mars",
       "type": "archetype",
       "id": "hero",
+      "basis": "inferred"
+    },
+    {
+      "body": "mars",
+      "type": "family",
+      "id": "tree",
+      "basis": "jung"
+    },
+    {
+      "body": "mars",
+      "type": "family",
+      "id": "divine-pair",
+      "basis": "jung"
+    },
+    {
+      "body": "mars",
+      "type": "family",
+      "id": "ram",
+      "basis": "inferred"
+    },
+    {
+      "body": "mars",
+      "type": "family",
+      "id": "fire",
       "basis": "inferred"
     },
     {
@@ -276,6 +342,36 @@
       "type": "family",
       "id": "fish",
       "basis": "inferred"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "tree",
+      "basis": "jung"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "eagle",
+      "basis": "inferred"
+    },
+    {
+      "body": "jupiter",
+      "type": "archetype",
+      "id": "self",
+      "basis": "jung"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "quaternity",
+      "basis": "jung"
+    },
+    {
+      "body": "jupiter",
+      "type": "family",
+      "id": "divine-child",
+      "basis": "jung"
     },
     {
       "body": "saturn",
@@ -308,9 +404,39 @@
       "basis": "jung"
     },
     {
+      "body": "saturn",
+      "type": "family",
+      "id": "demiurge",
+      "basis": "jung"
+    },
+    {
+      "body": "saturn",
+      "type": "family",
+      "id": "devil",
+      "basis": "jung"
+    },
+    {
       "body": "uranus",
       "type": "family",
       "id": "star",
+      "basis": "site"
+    },
+    {
+      "body": "uranus",
+      "type": "family",
+      "id": "dismemberment",
+      "basis": "site"
+    },
+    {
+      "body": "uranus",
+      "type": "family",
+      "id": "grail",
+      "basis": "site"
+    },
+    {
+      "body": "uranus",
+      "type": "family",
+      "id": "ufo",
       "basis": "site"
     },
     {
@@ -326,6 +452,24 @@
       "basis": "site"
     },
     {
+      "body": "neptune",
+      "type": "archetype",
+      "id": "animus",
+      "basis": "site"
+    },
+    {
+      "body": "neptune",
+      "type": "family",
+      "id": "melusina",
+      "basis": "site"
+    },
+    {
+      "body": "neptune",
+      "type": "family",
+      "id": "fish",
+      "basis": "site"
+    },
+    {
       "body": "pluto",
       "type": "family",
       "id": "nigredo",
@@ -335,6 +479,24 @@
       "body": "pluto",
       "type": "archetype",
       "id": "shadow",
+      "basis": "site"
+    },
+    {
+      "body": "pluto",
+      "type": "family",
+      "id": "resurrection",
+      "basis": "site"
+    },
+    {
+      "body": "pluto",
+      "type": "family",
+      "id": "ascent-descent",
+      "basis": "site"
+    },
+    {
+      "body": "pluto",
+      "type": "family",
+      "id": "underworld",
       "basis": "site"
     }
   ],

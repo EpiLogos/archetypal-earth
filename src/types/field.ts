@@ -188,9 +188,25 @@ export interface FieldMeta {
   generatedAt: string; // ISO
   vaultPath: string;
   vaultLedgerLine?: string; // last ledger heading, so the site can say how fresh it is
-  counts: { archetypes: number; theoretics: number; families: number; occurrences: number; cultures: number; images: number };
+  counts: { archetypes: number; theoretics: number; families: number; occurrences: number; cultures: number; images: number; joins?: number };
   yearMin: number;
   yearMax: number;
+}
+
+/**
+ * A general relation between two nodes of the field, of any tier to any tier (curation/joins.json, nothing else).
+ * Basis says where the relation comes from, as for ties: never present "site" or "inferred" as Jung's word.
+ * `system` names the tradition the join belongs to (e.g. "thoth"); `voice` names whose reading it is.
+ * Joins carry no quotations in field.json.
+ */
+export interface Join {
+  id: string; // kebab-case, unique
+  a: { type: 'archetype' | 'theoretic' | 'family'; id: string };
+  b: { type: 'archetype' | 'theoretic' | 'family'; id: string };
+  basis: TieBasis;
+  note: string; // one plain sentence, no wikilinks, ≤ 400 chars
+  system?: string;
+  voice?: string;
 }
 
 export interface Field {
@@ -200,4 +216,6 @@ export interface Field {
   families: Family[];
   occurrences: Occurrence[];
   cultures: Culture[];
+  /** Cross-system relations between any two nodes. Optional: older field.json files carry none. */
+  joins?: Join[];
 }

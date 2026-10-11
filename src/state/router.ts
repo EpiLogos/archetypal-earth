@@ -3,6 +3,7 @@ import type { Subject } from '../data/model';
 import { astrologyAt, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
+import { canonicalBodyKey } from '../types/sky';
 
 export interface Resolver {
   hasArchetype(id: string): boolean;
@@ -116,7 +117,9 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   catch { return { state: WORLD }; }
   if (!parts.length) return { state: WORLD };
   if (parts[0] === 'astrology') {
-    const [, chart, body] = parts;
+    const [, chart, rawBody] = parts;
+    // an old link says `earth` for the planet Earth (now `terra`): both read as the same body
+    const body = rawBody ? canonicalBodyKey(rawBody) : undefined;
     const okChart = chart && /^[a-z0-9-]{1,40}$/.test(chart);
     return { state: astrologyAt(okChart ? (body && r.hasBody?.(body) ? [chart, body] : [chart]) : []) };
   }
@@ -131,7 +134,8 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
       const pre = parseBirthLink(rest[1], rest[2], rest[3]);
       return { state: astrologyAt([]), ...(pre ? { birthPrefill: pre } : {}) };
     }
-    if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
+    const skyBody = rest[0] ? canonicalBodyKey(rest[0]) : undefined;
+    if (skyBody && r.hasBody?.(skyBody)) { sky.body = skyBody as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     return { state: { view: { kind: 'world' }, deep: false, sky } };
   }

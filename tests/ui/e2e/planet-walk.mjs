@@ -33,7 +33,7 @@ check(!!disc?.on && disc.px > 120, 'Mars fills the view', disc ? `${Math.round(d
 
 await page.locator('.po-earth').click();
 s = await settle(7000);
-check(s.hash === '#/astrology/jung/earth', '"Back to the Earth" returns to the whole birth sky', s.hash);
+check(s.hash === '#/astrology/jung/terra','"Back to the Earth" returns to the whole birth sky', s.hash);
 check(s.approach < 0.05 && !s.orbits, 'and lets the planet go', `approach ${s.approach.toFixed(2)}`);
 
 await page.goto(page.url().replace(/#.*$/, '#/astrology/jung/saturn'));

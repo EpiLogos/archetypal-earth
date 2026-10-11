@@ -1,0 +1,83 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-prince-of-cups",
+ "line": "Crowley's Prince of Cups: the Vau of the Name, the airy part of Water, and a span from Libra to Scorpio.",
+ "sections": [
+  {
+   "id": "the-court-and-its-element",
+   "title": "The court and its element",
+   "line": "Crowley names the Princes by the Forces of the letter Vau in the Name.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Prince of Cups represents the airy part of Water.",
+     "page": 153,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-span-in-the-zodiac",
+   "title": "Its span in the Zodiac",
+   "line": "The text gives the 21st degree of Libra as the start and the 20th of Scorpio as the end. Crowley's attribution table (pdf p274) gives 20 degrees at both ends. The page follows the text, and the table's figures are not quoted.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "He rules from the 21st degree of Libra to the 20th degree of Scorpio.",
+     "page": 153,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-character",
+   "title": "Its character as Crowley describes it",
+   "line": "Crowley's description of the figure and the card, in his own words.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The moral characteristics of the person pictured in this card are subtlety, secret violence, and craft.",
+     "page": 153,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "libra"
+  },
+  {
+   "type": "family",
+   "id": "scorpio"
+  }
+ ]
+}

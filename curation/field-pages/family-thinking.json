@@ -1,0 +1,147 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thinking",
+ "line": "Thinking as Jung defines it: the function's definition, its place opposite feeling, its position in the order, and the diagrams.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "Jung's definition of the function, and the boundary he draws around the word.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "This I regard as one of the four basic psychological functions (q.v.). Thinking is the psychological function which, following its own laws, brings the contents of ideation into conceptual connection with one another.",
+     "para": 830
+    },
+    {
+     "work": "cw06",
+     "quote": "The term “thinking” should, in my view, be confined to the linking up of ideas by means of a concept, in other words, to an act of judgment, no matter whether this act is intentional or not.",
+     "para": 831
+    },
+    {
+     "work": "cw06",
+     "quote": "by thinking I mean the function of intellectual cognition and the forming of logical conclusions",
+     "para": 899
+    }
+   ]
+  },
+  {
+   "id": "rational-and-opposite",
+   "title": "Rational, and opposed to feeling",
+   "line": "Directed thinking is rational because its norm is known to the thinker. Thinking and feeling are the rational pair, and each excludes the other as far as it can.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "Further, I call directed thinking a rational (q.v.) function, because it arranges the contents of ideation under concepts in accordance with a rational norm of which I am conscious.",
+     "para": 832
+    },
+    {
+     "work": "cw06",
+     "quote": "Undirected thinking is in my view an irrational (q.v.) function, because it arranges and judges the contents of ideation by norms of which I am not conscious and therefore cannot recognize as being in accord with reason.",
+     "para": 832
+    },
+    {
+     "work": "cw06",
+     "quote": "Sensation and intuition I call irrational functions, because they are both concerned simply with what happens and with actual or potential realities. Thinking and feeling, being discriminative functions, are rational.",
+     "para": 983
+    },
+    {
+     "work": "cw06",
+     "quote": "The thinking type, for instance, must necessarily repress and exclude feeling as far as possible, since nothing disturbs thinking so much as feeling",
+     "para": 905
+    }
+   ]
+  },
+  {
+   "id": "position",
+   "title": "Its place in the order",
+   "line": "Jung's worked case is a rational type whose superior function is thinking, with sensation and intuition as auxiliaries and feeling inferior. The passage on the fourth quarter gives fire as the inferior function, whichever function that is for a given person.",
+   "quotes": [
+    {
+     "work": "cw11",
+     "quote": "a rational type, for instance, whose superior function is thinking, has at his disposal one, or possibly two, auxiliary functions of an irrational nature, namely sensation (the “fonction du réel”) and intuition (perception via the unconscious).",
+     "para": 245
+    },
+    {
+     "work": "cw06",
+     "quote": "Very frequently, indeed as a general rule, a man identifies more or less completely with the most favoured and hence the most developed function.",
+     "para": 763
+    },
+    {
+     "work": "cw11",
+     "quote": "His inferior function will be feeling (valuation), which remains in a retarded state and is contaminated with the unconscious.",
+     "para": 245
+    },
+    {
+     "work": "cw18",
+     "quote": "There we have an open wound, or at least an open door through which anything might enter.",
+     "para": 36
+    },
+    {
+     "work": "cw14",
+     "quote": "The experience of the fourth quarter, the region of fire (i.e., the inferior function), is described by Maier as an ascent and descent through the seven planetary spheres.",
+     "para": 288
+    }
+   ]
+  },
+  {
+   "id": "compass-and-cross",
+   "title": "Compass and cross",
+   "line": "The compass is Jung's image of the four: arbitrary and indispensable. The cross puts the rational pair on one axis and the irrational on the other, with the ego at the centre.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+     "para": 958
+    },
+    {
+     "work": "cw06",
+     "quote": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+     "para": 983
+    },
+    {
+     "work": "cw18",
+     "quote": "In the centre is the ego (E), which has a certain amount of energy at its disposal, and that energy is the will-power.",
+     "para": 29
+    }
+   ]
+  },
+  {
+   "id": "elements-and-colours",
+   "title": "Element and colour",
+   "line": "The one element the sources give thinking is the seminar's air. The colour passage gives no assignment per function. The element reading of the four is conditional: it holds if we take it so, and Jung does not name which element goes with which function.",
+   "quotes": [
+    {
+     "work": "sem-kundalini",
+     "quote": "The heart is characteristic of feeling, and air is characteristic of thought.",
+     "page": 94
+    },
+    {
+     "work": "cw11",
+     "quote": "It happens with some regularity that these colours are correlated with the four orienting functions of consciousness.",
+     "para": 281
+    },
+    {
+     "work": "cw14",
+     "quote": "If we take the four directions and the four elements (see note 505) as a symbolical equivalent of the four basic functions of consciousness, we can say that Maier had become conscious of three of them by the time he reached Asia.",
+     "para": 276
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "feeling"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  }
+ ]
+}

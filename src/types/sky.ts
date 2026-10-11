@@ -8,16 +8,29 @@
 import type { Cite, ImageRef, Palette, TieBasis } from './field';
 
 export type BodyKey =
-  | 'sun' | 'moon' | 'earth'
+  | 'sun' | 'moon' | 'terra'
   | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn'
   | 'uranus' | 'neptune' | 'pluto';
 
 export const BODY_KEYS: readonly BodyKey[] = [
-  'sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto',
+  'sun', 'moon', 'terra', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto',
 ];
 
 /** Bodies sampled heliocentrically in the grid (the Sun is the origin; the Moon is geocentric). */
-export const HELIO_KEYS: readonly BodyKey[] = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+export const HELIO_KEYS: readonly BodyKey[] = ['mercury', 'venus', 'terra', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+
+/**
+ * The planet Earth's body key was `earth` until the elemental Earth took that word (the family `earth-element`).
+ * Old links (`#/astrology/jung/earth`, `#/sky/earth`) and anything else that still says `earth` read through this.
+ */
+export function canonicalBodyKey(name: string): string {
+  return name === 'earth' ? 'terra' : name;
+}
+
+/** The ephemeris sidecar keeps its own names for bodies (libephemeris calls the planet `earth`); requests and its answers use these. */
+export function sidecarName(key: BodyKey): string {
+  return key === 'terra' ? 'earth' : key;
+}
 
 export interface SkySource {
   claim: string;
@@ -147,7 +160,7 @@ export interface GoldenEpoch {
   gmst?: number;
   subsolar?: { lat: number; lon: number };
   sublunar?: { lat: number; lon: number };
-  earth?: { lon: number; lat: number; r: number };
+  terra?: { lon: number; lat: number; r: number };
   planets?: Partial<Record<BodyKey, { lon: number; lat: number; r: number }>>;
   ayanamsa: Record<AyanamsaMode, number>;
 }
@@ -232,8 +245,9 @@ export interface SidecarSnapshot {
   gmst: number;
   subsolar: { lat: number; lon: number };
   sublunar: { lat: number; lon: number };
+  /** the sidecar's own name for the planet Earth (BodyKey `terra`) */
   earth: SidecarPoint;
-  planets: Partial<Record<BodyKey, SidecarPoint>>;
+  planets: Partial<Record<BodyKey | 'earth', SidecarPoint>>;
   phase?: { name: string; major: string; stage: string; index: number; degreesBetween: number };
 }
 

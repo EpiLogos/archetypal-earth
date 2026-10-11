@@ -5,13 +5,18 @@
 import { scopeOf } from '../data/scope';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
-import { averagePalettes } from '../data/palette';
+import { averagePalettes, rgbCss } from '../data/palette';
 import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '../data/model';
 import { BUILT, type LensContext, type LensInstance } from '../shell/lens';
 import type { PanelLensId } from '../state/store';
 import { inLens } from '../state/store';
 import { modeOptions, optionAction } from '../ui/mode-options';
 import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
+import { treeFigure } from './tree';
+
+/** The number archetypes past six, and the family the Tree of Life is filed under (both added by the data lanes). */
+const NUMBER_PAST_SIX = ['seven', 'eight', 'nine', 'ten'];
+const TREE_FAMILY = 'tree';
 
 interface TheoryLink { type: 'family' | 'archetype' | 'theoretic' | 'lens'; id: string }
 interface TheorySection { id: string; name: string; line: string; quotes: LensQuote[]; links: TheoryLink[] }
@@ -117,6 +122,17 @@ export function mount(ctx: LensContext): LensInstance {
     el('button', { type: 'button', text: '→', 'aria-label': 'Next', onclick: next }),
   ]);
 
+  /** The number archetypes seven to ten, and the Tree's family, as links where the field holds them; null when it holds none. */
+  const pastSixLinks = (): HTMLElement | null => {
+    const subjects: Subject[] = [
+      ...NUMBER_PAST_SIX.filter((id) => ctx.model.archById.has(id)).map((id): Subject => ({ type: 'archetype', id })),
+      ...(ctx.model.famById.has(TREE_FAMILY) ? [{ type: 'family', id: TREE_FAMILY } as Subject] : []),
+    ];
+    if (!subjects.length) return null;
+    return el('div', { class: 'th-links' }, subjects.map((s) =>
+      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(s) }, [el('span', { text: subjectName(ctx.model, s) }), icon('next', 14)])));
+  };
+
   /** Number: the overview — the six positions on their wheel, Jung and von Franz on number, the psychoid and time. */
   const renderNumber = (sections: TheorySection[]) => {
     const d = data!.number!;
@@ -138,6 +154,14 @@ export function mount(ctx: LensContext): LensInstance {
       quoteBlock(d.series, ctx.passages, { compact: true }),
       el('button', { type: 'button', class: 'th-walk', onclick: () => openStop(0) }, [el('span', { text: 'Walk the six positions' }), icon('next', 14)]),
       stops,
+      el('h3', { class: 'as-h3', text: 'Seven to ten and the Tree' }),
+      el('p', { class: 'th-line', text: 'The numbers seven to ten are archetypes of the field; the Tree’s ten sephiroth carry them.' }),
+      el('figure', { class: 'as-figure' }, [treeFigure({
+        palette: (id) => { const p = ctx.model.famPalette.get(id); return p ? { core: rgbCss(p.core) } : undefined; },
+        has: (id) => ctx.model.famById.has(id),
+        open: (id) => ctx.focus({ type: 'family', id }),
+      })]),
+      pastSixLinks(),
       el('h3', { class: 'as-h3', text: 'The psychoid' }),
       el('p', { class: 'th-line', text: d.psychoid.line }),
       ...d.psychoid.quotes.map((x) => quoteBlock(x, ctx.passages, { compact: true })),

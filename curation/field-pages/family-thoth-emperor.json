@@ -1,0 +1,93 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-emperor",
+ "line": "Crowley's Atu IV: the letter Tzaddi, Aries under Mars, and a path whose ends his own text gives in two conflicting ways.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The letter Tzaddi and the sign Aries, ruled by Mars.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Tzaddi, and it refers to the sign of Aries in the Zodiac.",
+     "page": 66,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This sign is ruled by Mars, and therein the Sun is exalted.",
+     "page": 66,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree, and a conflict in the text",
+   "line": "The Emperor chapter places the card on the path from Chokmah to Tiphareth. The Ace of Swords chapter gives the same two ends to the Path of He (the Star). The Key Scale numbers the Emperor's path 28 and the Star's path 15. This page leaves the conflict open.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
+     "page": 67,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the white light which descends upon him indicates the position of this card in the Tree of Life",
+     "page": 67,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Path of Hé, the Great Mother, the Star, our Lady Nuit,",
+     "page": 211,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's description of the figure and of the activity the card represents.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card represents a crowned male figure, with imperial vestments and regalia.",
+     "page": 66,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "With regard to the quality of this power, it must be noted that it represents sudden, violent, but impermanent activity.",
+     "page": 67,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "aries"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "chokmah"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "mana-personality"
+  }
+ ]
+}

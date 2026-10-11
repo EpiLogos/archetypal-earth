@@ -20,6 +20,29 @@ import { AU_IN_EARTH_RADII, compressAu, EARTH_RADIUS_KM, skyVisible, stageWeight
 const APPROACH_EASE_MS = 1800;
 const APPROACH_RELEASE_MS = 3200;
 
+/** The presence a beckoned body must stand at to count as beckoned (its `beckoned` getter, and the pure helpers). */
+export const BECKONED_ABOVE = 0.05;
+
+/**
+ * The body a beckon names while it is present enough to be the one held up: `key` when its presence is above
+ * `BECKONED_ABOVE`, else null. Pure, so the return's choreography and its tests read the same rule.
+ */
+export function beckonedBody(key: BodyKey | null, presence: number): BodyKey | null {
+  return key && presence > BECKONED_ABOVE ? key : null;
+}
+
+/**
+ * Whether the sky group draws this frame. The sky's own distance rule holds (`skyVisible`: nothing inside dist 20), and
+ * a beckon lifts it: any presence at all draws the group, and only the beckoned body carries alpha (every other body's
+ * stage weight is zero inside the Earth stage, so nothing else appears). Limit, not handled here: the depth planes
+ * (`depthPlanes`, stages.ts, set by engine.ts) still clip at `far`, which is dist + 3.2 + SKY_EXTENT·smoothstep((dist−6)/34):
+ * about 290 R⊕ at dist 10, 1 260 at 15, 3 050 at 20. A planet further than that from the camera is clipped while dist < 20,
+ * whatever beckon says. The return lifts to ~34 R⊕, where the far plane holds the planets.
+ */
+export function skyGroupShown(dist: number, beckonPresence: number): boolean {
+  return skyVisible(dist) || beckonPresence > 0;
+}
+
 const BODY_VERT = /* glsl */ `
 uniform vec2 uRes;
 uniform float uPx;
@@ -175,6 +198,12 @@ export class SkyLayer {
     return v ? (((Math.atan2(v[1], v[0]) * 180) / Math.PI) % 360 + 360) % 360 : 0;
   }
 
+  /** A body's true radius in Earth radii (the sky camera's framer needs it); 1 for a body the data does not know. */
+  bodyRadiusR(key: BodyKey): number {
+    const km = this.data.bodies.find((b) => b.key === key)?.radiusKm;
+    return km && km > 0 ? km / 6371.0084 : 1;
+  }
+
   /** A body's current place in scene coordinates (Earth-fixed), or null when unknown. */
   scenePosition(key: BodyKey, out = new THREE.Vector3()): THREE.Vector3 | null {
     const v = this.poses.get(key);
@@ -229,6 +258,13 @@ export class SkyLayer {
   /** The body currently approached (null once the look-at has let go). Orbits read this. */
   get approached(): BodyKey | null {
     return this.approach > 0.05 ? this.approachKey : null;
+  }
+  /** the body beckoned up close (see `beckon`); kept after a release so it eases out where it stood */
+  private beckonKey: BodyKey | null = null;
+  private beckonE = new Eased();
+  /** The body beckoned at full presence this moment (null once it has let go). The return's compose reads this. */
+  get beckoned(): BodyKey | null {
+    return beckonedBody(this.beckonKey, this.beckonE.value(this.clock));
   }
   /** the approach's clock, ms: advanced by each frame's dt (see APPROACH_EASE_MS) */
   private clock = 0;
@@ -360,17 +396,17 @@ export class SkyLayer {
       const v = this.poses.get(k);
       if (v) { v[0] = x; v[1] = y; v[2] = z; } else this.poses.set(k, [x, y, z]);
     };
-    const earth = eph.helio('earth', ms, this.e)!;
+    const earth = eph.helio('terra', ms, this.e)!;
     const ev = eclipticVector(earth.lon, earth.lat, compressAu(earth.r));
     // the Sun sits opposite the Earth's heliocentric vector
     set('sun', -ev[0], -ev[1], -ev[2]);
-    set('earth', 0, 0, 0);
+    set('terra', 0, 0, 0);
     const m = eph.moon(ms, this.p)!;
     const mv = eclipticVector(m.lon, m.lat, m.r * AU_IN_EARTH_RADII);
     set('moon', mv[0], mv[1], mv[2]);
     for (const body of this.data.bodies) {
       const key = body.key;
-      if (key === 'sun' || key === 'earth' || key === 'moon') continue;
+      if (key === 'sun' || key === 'terra' || key === 'moon') continue;
       const h = eph.helio(key, ms, this.p);
       if (!h) { this.poses.delete(key); continue; }
       if (geo) {
@@ -460,6 +496,27 @@ export class SkyLayer {
   }
 
   /**
+   * Draw a body at full presence whatever its stage weight or the camera's distance: its disc, glow, label and
+   * `screenDisc`. It touches neither `focus`, `approach` nor the look-at; it is an extra alpha lift on that one body. The
+   * return choreography uses it to show the planet while the camera is still near Earth (where planets are otherwise not
+   * drawn). Eases on the layer's clock like `setApproach` (same durations, ×0.4 under reduced motion). `null` lets go.
+   * A different body rises from the level the last one stood at; the last one is not faded (it is dropped at once).
+   */
+  beckon(key: BodyKey | null, instant = false) {
+    const now = this.clock;
+    const scale = this.reduced ? 0.4 : 1;
+    if (key) {
+      if (key !== this.beckonKey) {
+        this.beckonE.snap(this.beckonE.value(now));
+        this.beckonKey = key;
+      }
+      if (instant) this.beckonE.snap(1);
+      else this.beckonE.goTo(1, APPROACH_EASE_MS * scale, now);
+    } else if (instant) this.beckonE.snap(0);
+    else this.beckonE.goTo(0, APPROACH_RELEASE_MS * scale, now);
+  }
+
+  /**
    * The look-at: the Sun-centred focus, eased onto the approached body's drawn place (blended from the previous body
    * during a glide). In a birth sky the Sun-centred focus has turned to the Earth (`geoShare`) and the approach leaves
    * from there. Exactly that focus when no body is approached, so every other view is unchanged.
@@ -481,7 +538,8 @@ export class SkyLayer {
 
   /** After the camera moved: place everything, set opacities and sizes, update labels' screen positions. */
   update(camera: THREE.PerspectiveCamera, dist: number, width: number, height: number) {
-    const visible = skyVisible(dist);
+    const beckonP = this.beckonE.value(this.clock);
+    const visible = skyGroupShown(dist, beckonP);
     this.group.visible = visible;
     if (!visible) {
       for (const d of this.draws.values()) d.screen.on = false;
@@ -546,7 +604,7 @@ export class SkyLayer {
         pos.set(v[0], v[1], v[2]);
         alpha = w.moon;
         d.mat.uniforms.uLight.value.copy(this.sunGeoDir).transformDirection(camInv);
-      } else if (key === 'earth') {
+      } else if (key === 'terra') {
         pos.set(0, 0, 0);
         alpha = w.earthPoint;
         d.mat.uniforms.uLight.value.copy(this.sunScene).normalize().transformDirection(camInv);
@@ -564,6 +622,8 @@ export class SkyLayer {
       if (key === 'sun') d.mat.uniforms.uCorePx.value = Math.min(core, px);
       // the approached body stays present as the camera comes to it, whatever its stage weight
       if (this.approach > 0 && key === this.approachKey) alpha = Math.max(alpha, this.approach);
+      // the beckoned body is present at its beckon presence, whatever its stage weight (the approach's rule, beside it)
+      if (beckonP > 0 && key === this.beckonKey) alpha = Math.max(alpha, beckonP);
       d.mat.uniforms.uAlpha.value = alpha;
       d.mat.uniforms.uPx.value = px;
       d.mesh.visible = alpha > 0.004;

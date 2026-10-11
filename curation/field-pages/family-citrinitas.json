@@ -1,0 +1,129 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "citrinitas",
+ "line": "The yellowing as Jung names it: one stage of the older four-colour scheme, which he says was later dropped and never described on its own.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "The yellowing as the xanthosis, otherwise called the citrinitas, one of four stages in the older scheme.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "Four stages are distinguished (fig. 114), characterized by the original colours mentioned in Heraclitus: melanosis (blackening), leukosis (whitening), xanthosis (yellowing), and iosis (reddening).",
+     "para": 333,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "Later, about the fifteenth or sixteenth century, the colours were reduced to three, and the xanthosis, otherwise called the citrinitas, gradually fell into disuse or was but seldom mentioned.",
+     "para": 333,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "why-the-scheme-was-reduced",
+   "title": "Why the scheme was reduced",
+   "line": "Jung gives a general reason for the reduction to three colours, not one that singles out yellow.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "Since the process never led to the desired goal and since the individual parts of it were never carried out in any standardized manner, the change in the classification of its stages cannot be due to extraneous reasons but has more to do with the symbolical significance of the quaternity and the trinity; in other words, it is due to inner psychological reasons.",
+     "para": 333,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "Whereas the original tetrameria corresponded exactly to the quaternity of elements, it was now frequently stressed that although there were four elements (earth, water, fire, and air) and four qualities (hot, cold, dry, and moist), there were only three colours: black, white, and red.",
+     "para": 333,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-transition",
+   "title": "The transition to the reddening",
+   "line": "Jung's placings of the yellowing: the transition to the reddening, the direct route from whitening to reddening, and a dream commentary where yellow coincides with the reddening.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The transition to the rubedo is formed by the citrinitas, though this, as we have said, was omitted later.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "The rubedo then follows direct from the albedo as the result of raising the heat of the fire to its highest intensity.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "In alchemy yellow (citrinitas) often coincides with the rubedo.",
+     "para": 271,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "in-the-texts",
+   "title": "In the texts Jung quotes",
+   "line": "Where the yellow appears in the texts Jung quotes or notes. These are the alchemists' words and his notes, not his reading.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "the ash-colour, the whitening, and the yellowing are over, you will see the Philosophical Stone",
+     "para": 355,
+     "voice": "Khunrath, quoted by Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Corresponding to the xanthesis, citrinitas, or yellowing.",
+     "page": 719,
+     "voice": "Jung's note (517)"
+    },
+    {
+     "work": "cw12",
+     "quote": "These three appear in three colours which precede the redness: the body, or earth, in Saturnine blackness; the spirit in lunar whiteness, like water; and the soul, or air, in solar yellow.",
+     "para": 165,
+     "voice": "Maier, quoted by Jung (CW12 note 41)"
+    }
+   ]
+  },
+  {
+   "id": "the-four-still-named",
+   "title": "Where the four still stand",
+   "line": "Jung still names all four colours in a few places, and the word stays in his running text.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "When the citrinitas (xanthosis, 'yellowing') appears",
+     "para": 194,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "which combines in itself the four alchemical colours, black, white, red, and yellow",
+     "para": 281,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "quaternity"
+  }
+ ]
+}

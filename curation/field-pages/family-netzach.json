@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "netzach",
+ "line": "Crowley gives Netzach the number 7 and Venus; Jung names Nezach as the right side that Yesod unites with Hod.",
+ "sections": [
+  {
+   "id": "crowley-sevens",
+   "title": "Crowley's Sevens",
+   "line": "The Seven cards are attributed to Netzach, which Crowley places low on the Tree and calls the Sephira of Venus.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Netzach.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Netzach, the Sephira of Venus, means victory.",
+     "page": 219,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Seven, Netzach, has its customary enfeebling effect,",
+     "page": 233,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "earth-venus-and-the-moon",
+   "title": "Earth, Venus and the Moon",
+   "line": "Crowley says Netzach pertains to Earth as well as to Venus, and in the Moon chapter the Moon joins Netzach to Malkuth. The field's Venus is the goddess figure, which the sky layer ties to the planet.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "to Earth; and the greatest catastrophe that can befall Venus is to lose her Heavenly origin.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "she joins the earthy sphere of Netzach with Malkuth,",
+     "page": 103,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-nezach",
+   "title": "Jung's Nezach",
+   "line": "Jung's passage on Nezach is ¶635: the right, masculine side with life-force, which Yesod joins to Hod.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty)",
+     "para": 635,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "venus"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  }
+ ]
+}

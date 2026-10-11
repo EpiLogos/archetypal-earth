@@ -23,6 +23,22 @@ const ROT = (-14 * Math.PI) / 180; // and turned a little off the horizontal
 const PERIOD_S = [64, 96]; // one turn of the inner and the outer orbit, seconds
 const TOP = 96; // the shell's header band: nothing of the overlay is placed under it
 
+/**
+ * Whether the satellites, the Earth line and the Whole-sky control stand this frame (spec §2.5, the phase contract on
+ * `document.body.dataset.skyPhase`). They stand only in `approach`: stationed at a planet, arrived. Any other phase
+ * hides them. With no phase set (a page that has not adopted the contract yet) the old rule holds: stand down while the
+ * body carries `sky-gazing`. `disc` is the held planet's drawn disc; the orbits need it on screen and large enough to ring.
+ */
+export function orbitsWanted(phase: string | undefined, gazing: boolean, approach: number, disc: { on: boolean; px: number } | null): boolean {
+  const stationed = phase === undefined ? !gazing : phase === 'approach';
+  return stationed && !!disc && disc.on && approach > 0.6 && disc.px > 40;
+}
+
+/** Phases whose orbits go at once, with no fade: the camera is leaving the station or has not reached it yet. */
+export function orbitsSnapOff(phase: string | undefined): boolean {
+  return phase === 'gaze' || phase === 'descend' || phase === 'return' || phase === 'system';
+}
+
 export class PlanetOrbits {
   readonly root: HTMLElement;
   private svg: SVGSVGElement;
@@ -34,6 +50,8 @@ export class PlanetOrbits {
   private key: BodyKey | null = null;
   private t = 0;
   private shown = 0;
+  /** whether the controls take clicks this frame (false while they fade or are hidden) */
+  private interactive = false;
 
   constructor(parent: HTMLElement, private onEarth: () => void) {
     this.svg = document.createElementNS(SVG, 'svg');
@@ -73,23 +91,30 @@ export class PlanetOrbits {
       this.svg.append(tether, dot);
       const label = el('button', { type: 'button', class: `po-sat ${s.inner ? 'po-inner' : 'po-outer'}`, title: s.inner ? 'Jung’s own link' : 'A link the atlas draws', onclick: () => s.open() }, [el('span', { text: s.name })]);
       this.root.append(label);
+      // a new control stands hidden until update() shows it: its own opacity and pointer-events say so, not the stylesheet's
+      // defaults (1 and auto), which a hidden root would otherwise leave reading as a clickable satellite
+      label.style.opacity = '0';
+      label.style.pointerEvents = 'none';
       return { s, dot, tether, label, phase };
     });
     if (!key) { this.root.hidden = true; this.shown = 0; document.body.classList.remove('po-holding'); }
   }
 
-  /** Each frame: follow the planet's drawn disc; show only once the approach has arrived. */
+  /** Each frame: follow the planet's drawn disc; show only once the approach has arrived (see `orbitsWanted`). */
   update(layer: SkyLayer | null, dt: number, reduced: boolean) {
     const key = this.key;
     const disc = key && layer ? layer.screenDisc(key) : null;
-    // sky-gazing: stationed at the planet looking at Earth — satellites stand down so the floats read
-    const gazing = document.body.classList.contains('sky-gazing');
-    const want = !gazing && disc && disc.on && layer && layer.approach > 0.6 && disc.px > 40 ? 1 : 0;
-    this.shown += (want - this.shown) * (1 - Math.exp(-dt * 4));
+    const phase = document.body.dataset.skyPhase;
+    const wanted = orbitsWanted(phase, document.body.classList.contains('sky-gazing'), layer?.approach ?? 0, disc);
+    // the orbits leave at once in the gaze, descend, return and system phases: a fade would leave the line on screen
+    if (!wanted && orbitsSnapOff(phase)) this.shown = 0;
+    else this.shown += ((wanted ? 1 : 0) - this.shown) * (1 - Math.exp(-dt * 4));
     // while a body is held, a phone gives the sky's own controls (names, the held note) back to it
     document.body.classList.toggle('po-holding', this.shown > 0.5);
-    if (this.shown < 0.02 || !disc || !layer) { this.root.hidden = true; return; }
+    if (this.shown < 0.02 || !disc || !layer) { this.root.hidden = true; this.setInteractive(false); return; }
     this.root.hidden = false;
+    // while fading out nothing takes a click: the children's own pointer-events (set in the stylesheet) are overridden here
+    this.setInteractive(wanted);
     this.root.style.opacity = this.shown.toFixed(3);
     if (!reduced) this.t += dt;
     const R = disc.px / 2;
@@ -102,7 +127,7 @@ export class PlanetOrbits {
       e.setAttribute('transform', `rotate(${(ROT * 180) / Math.PI} ${cx.toFixed(1)} ${cy.toFixed(1)})`);
     });
     // the line home: from the planet toward where the Earth stands (off screen, it runs to the edge)
-    const earth = layer.screenDisc('earth');
+    const earth = layer.screenDisc('terra');
     // the open panel is the screen's edge: a side panel on a desktop, a bottom sheet on a phone
     let W = this.root.clientWidth || window.innerWidth, H = this.root.clientHeight || window.innerHeight;
     const panel = document.querySelector<HTMLElement>('.lens-panel:not([hidden])')?.getBoundingClientRect();
@@ -146,11 +171,19 @@ export class PlanetOrbits {
       x.tether.setAttribute('x2', lx.toFixed(1)); x.tether.setAttribute('y2', ly.toFixed(1));
       x.tether.style.opacity = String(o * 0.8);
       x.label.style.opacity = String(o);
-      x.label.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
+      x.label.style.pointerEvents = this.interactive && o > 0.3 ? 'auto' : 'none';
       x.label.style.zIndex = behind ? '1' : '2';
       // the name sits beyond the tether, on the side away from the planet
       x.label.style.transform = `translate(${Math.round(lx + (ux < -0.2 ? -1 : ux > 0.2 ? 0 : -0.5) * x.label.offsetWidth)}px, ${Math.round(ly - x.label.offsetHeight / 2)}px)`;
     }
+  }
+
+  /** Clicks reach the controls only while they are wanted; the stylesheet's own `pointer-events: auto` on them is overridden inline. */
+  private setInteractive(on: boolean) {
+    if (on === this.interactive) return;
+    this.interactive = on;
+    this.earthBtn.style.pointerEvents = on ? 'auto' : 'none';
+    for (const x of this.sats) x.label.style.pointerEvents = on ? 'auto' : 'none';
   }
 
   destroy() { document.body.classList.remove('po-holding'); this.root.remove(); }

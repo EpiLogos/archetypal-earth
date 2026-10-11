@@ -1,0 +1,82 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-adjustment",
+ "line": "Crowley's Atu VIII, formerly Justice: Libra under Venus, the letter Lamed, and the balance Crowley calls the feminine complement of the Fool.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "Retitled from Justice; Libra under Venus, with Saturn exalted. The letter Lamed comes from the table; the text reaches it only through Aleph Lamed. The text gives no path ends; the Key Scale gives path 22.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card in the old pack was called Justice.",
+     "page": 76,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents the sign of Libra, ruled by Venus; in it Saturn is exalted.",
+     "page": 76,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The equilibrium of all things is hereby symbolized.",
+     "page": 76,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's account of the balance the card symbolizes and of its relation to the Fool.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the letters Aleph Lamed constitute the secret key of the Book of the Law",
+     "page": 76,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "this card is the feminine complement of the Fool",
+     "page": 76,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Nature is not just, according to any theological or ethical idea; but Nature is exact.",
+     "page": 76,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In this sense, Nature is scrupulously just.",
+     "page": 77,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "libra"
+  },
+  {
+   "type": "family",
+   "id": "venus"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  },
+  {
+   "type": "archetype",
+   "id": "self"
+  }
+ ]
+}

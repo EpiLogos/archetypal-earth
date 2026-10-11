@@ -438,6 +438,176 @@
           "basis": "jung"
         }
       ]
+    },
+    "seven": {
+      "name": "Seven",
+      "oneLine": "The company of planetary gods, carried into the seven metals and the seven archons.",
+      "position": 0.47,
+      "palette": {
+        "core": "#ddd6e8",
+        "glow": "#8a80b4",
+        "fog": "#1f1a2c",
+        "deep": "#08070d"
+      },
+      "synthesised": true,
+      "body": [
+        "Seven is the company of the planetary gods. Jung traces the company back to the Babylonian stars, which became the seven archons at the time of Enoch's revelation. Alchemy gave the same seven their metals, and its stages of the work are marked by seven colours that belong to the planets.",
+        "Jung writes no essay on seven. The number appears where he discusses planets, metals and initiation. Pauli, writing to Jung, reads the seven of his own dream as the birth of the anima; that reading is Pauli's and is placed on the page in his name."
+      ]
+    },
+    "eight": {
+      "name": "Eight",
+      "oneLine": "The ogdoad, the double quaternity: a totality, heavenly and earthly at once.",
+      "position": 0.53,
+      "palette": {
+        "core": "#efd9c4",
+        "glow": "#c9906a",
+        "fog": "#2e2019",
+        "deep": "#0e0806"
+      },
+      "synthesised": true,
+      "archetypes": [
+        {
+          "id": "four",
+          "basis": "jung"
+        }
+      ],
+      "body": [
+        "Eight is the double quaternity, the ogdoad. Jung calls it a totality, at once heavenly and earthly, and says it plays almost as great a role in mandalas as the quaternity itself. On this globe four and eight stand together as a figure and its doubling.",
+        "Jung dwells on eight within a series. The seven run without a break and the step to the eighth hesitates, as three and four do in the Axiom of Maria; he suggests the eighth is feminine because it is the mother of a new series. In a Gnostic note the demiurge is the hebdomad and Achamoth the ogdoad."
+      ]
+    },
+    "nine": {
+      "name": "Nine",
+      "oneLine": "The novenary foetus: the one as nine, the Ennead, and the line that turns.",
+      "position": 0.55,
+      "palette": {
+        "core": "#cfe6e4",
+        "glow": "#62a8a4",
+        "fog": "#142c2e",
+        "deep": "#05100f"
+      },
+      "synthesised": true,
+      "archetypes": [
+        {
+          "id": "one",
+          "basis": "jung"
+        }
+      ],
+      "body": [
+        "Nine is the one carried into a series. Jung calls the One the novenary foetus, and says that as the number nine it stands to the ogdoad as the quintessence stands to the quaternity. That gloss is the nearest he comes to an essay on nine.",
+        "Elsewhere nine is a company of gods, the Egyptian Ennead, which Jung notes is often ten; an I Ching nine is a line that changes into its opposite; and the first series runs from one to nine before the decade begins, which von Franz links to the German for new. His note on the Sefiroth places the ninth in the lowest triad."
+      ]
+    },
+    "ten": {
+      "name": "Ten",
+      "oneLine": "The completed cycle: unity unfolded, and the whole multiplicity of existence.",
+      "position": 0.5,
+      "palette": {
+        "core": "#d6dccb",
+        "glow": "#9aa98a",
+        "fog": "#1f261c",
+        "deep": "#080b07"
+      },
+      "synthesised": true,
+      "archetypes": [
+        {
+          "id": "one",
+          "basis": "jung"
+        }
+      ],
+      "body": [
+        "Ten is the completed cycle. Jung writes that the numbers one to ten form a completed cycle, and that ten is the perfect unfolding of unity; eleven, ten plus one, opens the next cycle.",
+        "Jung writes little more on ten. He names the tetraktys for the number four and does not write it as ten. Von Franz gives ten as the whole inexhaustible multiplicity of existence, with the one integrated into it; the Sefiroth are left to their own pages."
+      ]
+    },
+    "court-knight": {
+      "name": "The Knight",
+      "oneLine": "Court of the Thoth deck: Yod of the Name, the Father; the fiery part of each element.",
+      "position": 0.72,
+      "palette": {
+        "core": "#e8844a",
+        "glow": "#b8402a",
+        "fog": "#2e1210",
+        "deep": "#0c0403"
+      },
+      "synthesised": true,
+      "body": [
+        "In Crowley's Name the Knight stands for Yod, the first letter of the Tetragrammaton, which he says symbolises the Father who is Wisdom. In the pagan series the Knight is the Father, called Knight because he rides a horse. In each element the Knight is the most active part of its energy.",
+        "The tie to the Wise Old Man is a reading made here. Crowley gives the Father as Wisdom, but the Knight's qualities in his text are activity, fierceness and pride, which an amplification would also set beside the hero."
+      ],
+      "archetypes": [
+        {
+          "id": "wise-old-man",
+          "basis": "site"
+        }
+      ]
+    },
+    "court-queen": {
+      "name": "The Queen",
+      "oneLine": "Court of the Thoth deck: Hé of the Name, the Mother; the watery part of each element.",
+      "position": 0.42,
+      "palette": {
+        "core": "#5aa6a0",
+        "glow": "#2a6f8a",
+        "fog": "#0c2630",
+        "deep": "#03090c"
+      },
+      "synthesised": true,
+      "body": [
+        "The Queen stands for the letter Hé of the Name. Crowley says that letter is traditionally consecrated to the Great Mother. In the pagan series she is the Mother, and in each suit she is the watery part of the element: its power of reception and reflection.",
+        "The tie to the Great Mother is a reading made here, drawn from the letter Hé and from Crowley's own words on the Mother. The Queens' qualities in his text, adaptability and calm authority, are kept beside it."
+      ],
+      "archetypes": [
+        {
+          "id": "great-mother",
+          "basis": "site"
+        }
+      ]
+    },
+    "court-prince": {
+      "name": "The Prince",
+      "oneLine": "Court of the Thoth deck: Vau of the Name, the Son; the airy part of each element.",
+      "position": 0.56,
+      "palette": {
+        "core": "#e7dfb4",
+        "glow": "#a9c2dd",
+        "fog": "#2a2d38",
+        "deep": "#0a0b10"
+      },
+      "synthesised": true,
+      "body": [
+        "The Prince is the letter Vau of the Name, the Son of the pagan series. In each element he is the airy part, swift and strong in the Wands, subtle in the Cups and purely intellectual in the Swords. Crowley refers the Son to the number six, the centre of his system.",
+        "The tie to the child is a reading made here. Crowley writes that the child Horus is born of the union of the two parents, and that the Aeon of Horus is the Aeon of the Child; the reading takes the Son to the child on that basis, not on his own equation."
+      ],
+      "archetypes": [
+        {
+          "id": "child",
+          "basis": "site"
+        }
+      ]
+    },
+    "court-princess": {
+      "name": "The Princess",
+      "oneLine": "Court of the Thoth deck: Hé final of the Name, the Daughter; earthy part of each element.",
+      "position": 0.14,
+      "palette": {
+        "core": "#a3a77a",
+        "glow": "#5f7a4a",
+        "fog": "#1b2014",
+        "deep": "#070905"
+      },
+      "synthesised": true,
+      "body": [
+        "The Princess is the letter Hé final of the Name, the Daughter of the pagan series. Crowley says she represents the ultimate issue of the original energy, its crystallisation and materialisation. He calls her the perfect Maiden, and in the legends the forsaken Widow after the Prince's death. She has no zodiacal attribution in his text, only a quadrant of the heavens.",
+        "The tie to the kore is a reading made here, drawn from the perfect Maiden and from the Daughter that Crowley places on the earth of Malkuth."
+      ],
+      "archetypes": [
+        {
+          "id": "kore",
+          "basis": "site"
+        }
+      ]
     }
   }
 }

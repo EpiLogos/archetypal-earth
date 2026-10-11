@@ -1,0 +1,98 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-tarot",
+ "line": "Crowley's account of the Thoth Tarot: a pictorial picture of the Universe, built on the Holy Qabalah.",
+ "sections": [
+  {
+   "id": "what-crowley-says-the-tarot-is",
+   "title": "What Crowley says the Tarot is",
+   "line": "Crowley opens with the pack as a pictorial representation of the Forces of Nature, and calls it a symbolic picture of the Universe.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "THE TAROT is a Pictorial representation of the Forces of Nature",
+     "page": 29,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Tarot is that it is an admirable symbolic picture of the Universe, based on the data of the Holy",
+     "page": 13,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-map-behind-the-pack",
+   "title": "The map behind the pack",
+   "line": "The pack's arrangement is tied, in Crowley's text, to the Tree of Life as a map of the Universe.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This picture represents the Tree of Life, which is a map of the Universe.",
+     "page": 20,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "necessitated, as will appear later, by the structure of the universe, and in particular of the Solar System, as symbolized by the Holy Qabalah.",
+     "page": 13,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-pack-is-built-from",
+   "title": "What the pack is built from",
+   "line": "The three parts of the pack, the small cards, the trumps and the suits, each answer to a part of the scheme in his account.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These ten numbers are represented in the Tarot by the forty small cards.",
+     "page": 22,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "refer to the twenty‐two Paths.",
+     "page": 261,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These are divided into four suits according to the four elements.",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-is-not-claimed",
+   "title": "What is not claimed here",
+   "line": "Crowley's book is the only source for this pack on these pages. Its practical purpose is his statement, and the field does not read the pack as a Jungian object.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Tarot, while based on these theoretical attributions, was designed as a practical",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "thoth-major-arcana"
+  },
+  {
+   "type": "family",
+   "id": "thoth-minor-arcana"
+  }
+ ]
+}

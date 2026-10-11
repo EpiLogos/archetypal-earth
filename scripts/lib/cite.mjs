@@ -205,12 +205,40 @@ export function verify(load, { work, locator, quote }) {
   // length, so the page offsets are computed by folding page by page — otherwise a marker folded anywhere earlier in
   // the volume would shift every later page and hide a perfectly placed quotation.
   const folded = stripFootnoteMarkers(needle);
+  // Fast path: the cited page and the pages after it, folded page by page (the same folding foldedCorpus applies), widening
+  // only on a miss. A match that starts on the cited page and is found in a window is a match of the whole volume, so a
+  // hit is final; the whole volume is folded only when no window and no scan reading places the quotation.
+  for (const reach of [2, 8, 30]) {
+    const win = foldedWindow(corpus, idx, Math.min(idx + reach, corpus.pages.length - 1));
+    if (findMatches(win.text, folded).some((m) => m.index < win.pageLength)) return null;
+    if (idx + reach >= corpus.pages.length - 1) break;
+  }
+  // the same scan-damage reading locate() allows on a named page (cheap: one page at a time)
+  if (findOnPageThroughScan(corpus, idx, needle) >= 0) return null;
+  // the whole volume folded once, the last resort (costly on a large volume, so only a quotation that stands nowhere else gets here)
   const fc = foldedCorpus(corpus);
   const idxStart = fc.starts[idx] ?? 0;
   const idxEnd = fc.starts[idx + 1] ?? fc.text.length;
   if (findMatches(fc.text, folded).some((m) => m.index >= idxStart && m.index < idxEnd)) return null;
-  // the same scan-damage reading locate() allows on a named page
-  return findOnPageThroughScan(corpus, idx, needle) >= 0 ? null : `${work} ${locator}: quotation not verbatim on the cited page: "${quote.slice(0, 60)}…"`;
+  return `${work} ${locator}: quotation not verbatim on the cited page: "${quote.slice(0, 60)}…"`;
+}
+
+/** One page of the corpus with the scan's glued footnote markers folded away, cached per page. */
+function foldedPage(corpus, i) {
+  corpus.foldedPages ??= [];
+  if (corpus.foldedPages[i] === undefined) {
+    const from = corpus.pages[i].at;
+    const to = i + 1 < corpus.pages.length ? corpus.pages[i + 1].at : corpus.text.length;
+    corpus.foldedPages[i] = stripFootnoteMarkers(corpus.text.slice(from, to));
+  }
+  return corpus.foldedPages[i];
+}
+
+/** Pages from..to of the folded corpus joined in order, with the length of the first page (where a match must start). */
+function foldedWindow(corpus, from, to) {
+  let text = '';
+  for (let i = from; i <= to; i++) text += foldedPage(corpus, i);
+  return { text, pageLength: foldedPage(corpus, from).length };
 }
 
 /** The corpus with the scan's glued footnote markers folded away, and where each page begins in the folded text. */
@@ -219,10 +247,8 @@ function foldedCorpus(corpus) {
   const starts = [];
   let text = '';
   for (let i = 0; i < corpus.pages.length; i++) {
-    const from = corpus.pages[i].at;
-    const to = i + 1 < corpus.pages.length ? corpus.pages[i + 1].at : corpus.text.length;
     starts[i] = text.length;
-    text += stripFootnoteMarkers(corpus.text.slice(from, to));
+    text += foldedPage(corpus, i);
   }
   return (corpus.folded = { text, starts });
 }

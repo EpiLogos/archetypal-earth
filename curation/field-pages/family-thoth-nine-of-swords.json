@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-nine-of-swords",
+ "line": "Nine of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and ruler, as the chapter gives them (pdf 181, 221).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Nine of Swords is called Cruelty.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The celestial ruler is Mars in Gemini",
+     "page": 221,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The number Nine is Yesod, which brings the energy back to the central pillar (pdf 221).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Nine, Yesod, brings back the Energy to the central pillar of the Tree of Life.",
+     "page": 221,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the suit's decline in this card, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Swords no longer represent pure intellect so much as the automatic stirring of heartless passions.",
+     "page": 221,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-swords"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  },
+  {
+   "type": "archetype",
+   "id": "nine"
+  }
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "leo",
+ "line": "Burt's chapter on Leo, and Jung's lion passages.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Leo, pdf pp. 175–210. Her account of the solar principle and its ruler.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "In Leo, we arrive at the solar, or Masculine principle—the confident energy of the Sun.",
+     "page": 175,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Gone are the subtleties of Cancer; we are now directly experiencing the golden rays of the Sun.",
+     "page": 175,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "There is a constancy to the Leo archetype which seems to be derived from the orbit of Sol himself.",
+     "page": 175,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "the two levels at which the sun operates in ruling Leo—as mundane and as esoteric ruler.",
+     "page": 178,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Leo, pdf pp. 175–210. Solar myths, the inner lion and the shadow.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Myths for Leo are Solar in nature, involve the color gold, the kingship, and the conquest or re-conquest of the throne.",
+     "page": 186,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The lion ritual symbolized bringing under control the inner lion of strong emotional reactions,",
+     "page": 183,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "So often the outer world acts to confront Leo with his Shadow, forcing him or her to face the dark side and integrate its positive aspects.",
+     "page": 191,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The constancy or loyalty of the Fixed sign is also characteristic of the astrological lion, who is no philanderer.",
+     "page": 184,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the lion in his cw05 passage and in a seminar.",
+   "quotes": [
+    {
+     "work": "cw05",
+     "quote": "The sun is not only beneficial, but also destructive; hence the zodiacal sign for August heat is the ravaging lion",
+     "para": 176,
+     "voice": "Jung"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The lion does not look like a lion, but man called it that because the sun was really at its culmination",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "aquarius"
+  }
+ ]
+}

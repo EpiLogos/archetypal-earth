@@ -1,0 +1,86 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-eight-of-disks",
+ "line": "Eight of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and the Sun in Virgo, as the group text gives it (pdf 180; table pdf 275).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eight of Disks is called Prudence.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Its attribution is Sol in Virgo",
+     "page": 180,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod.",
+     "page": 179,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the card, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It signifies intelligence lovingly applied to material matters",
+     "page": 234,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "conflicts",
+   "title": "Conflicts and gaps",
+   "line": "The card's chapter (pdf 234) gives Mercury as the planet that rules and is exalted in Virgo, and says the rulership of the Sun in Virgo suggests birth. The group text and attribution table give Sol in Virgo. The record keeps Sun in Virgo; the chapter's Mercury reading is the conflict, not resolved here.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in his most spiritual aspect, and he both rules and is exalted in the sign of Virgo, which belongs to the Decan, and is governed by the Sun.",
+     "page": 234,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The rulership of the Sun in Virgo suggests also birth.",
+     "page": 234,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "family",
+   "id": "hod"
+  },
+  {
+   "type": "archetype",
+   "id": "eight"
+  }
+ ]
+}

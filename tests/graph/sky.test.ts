@@ -20,7 +20,7 @@ const MS = Date.parse('2026-10-08T12:00:00Z');
 const eph = new SkyEphemeris(sky);
 const lon: SkyAnchorSource['lon'] = {};
 for (const b of ties.bodies) {
-  if (b.key === 'earth') continue;
+  if (b.key === 'terra') continue;
   const p = eph.geo(b.key, MS);
   if (p) lon[b.key] = p.lon;
 }
@@ -49,13 +49,13 @@ describe('sky anchors in the graph', () => {
     expect(keys).toContain('pluto');
     expect(keys).toContain('sun');
     expect(keys).toContain('moon');
-    expect(keys).not.toContain('earth');
+    expect(keys).not.toContain('terra');
     expect(keys.length).toBe(ties.bodies.length - 1);
     expect(g.bodyIds.every((i) => g.nodes[i].kind === 'body' && g.nodes[i].key === `b:${g.nodes[i].ref}`)).toBe(true);
   });
 
   it('ties each body to exactly the family or archetype the ties index records, keeping the basis', () => {
-    const want = new Set(ties.ties.filter((t) => t.body !== 'earth').map((t) => `b:${t.body}|${t.type === 'family' ? 'f' : 'a'}:${t.id}|${t.basis}`));
+    const want = new Set(ties.ties.filter((t) => t.body !== 'terra').map((t) => `b:${t.body}|${t.type === 'family' ? 'f' : 'a'}:${t.id}|${t.basis}`));
     const got = new Set(g.edges.filter((e) => e.kind === 'sky').map((e) => `${g.nodes[e.s].key}|${g.nodes[e.t].key}|${e.basis}`));
     expect(got).toEqual(want);
     expect(got.size).toBeGreaterThan(0);
@@ -90,7 +90,7 @@ describe('sky anchors in the graph', () => {
 
   it('puts the Sun at its true place: opposite the Earth\u2019s heliocentric longitude', () => {
     const sun = eph.sunGeo(MS)!;
-    const earth = eph.helio('earth', MS)!;
+    const earth = eph.helio('terra', MS)!;
     const diff = Math.abs(((sun.lon - (earth.lon + 180) + 540) % 360) - 180);
     expect(diff).toBeLessThan(0.05);
     expect(lon.sun).toBeCloseTo(sun.lon, 6);

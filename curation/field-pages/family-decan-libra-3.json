@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-libra-3",
+ "line": "Crowley's Four of Swords is the card for the third decan of Libra, with Jupiter as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Libra.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Four of Swords is called Truce.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Chesed refers to Jupiter who rules in Libra in this decanate.",
+     "page": 215,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the card proclaims the idea of authority in the intellectual world",
+     "page": 215,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "libra"
+  },
+  {
+   "type": "family",
+   "id": "jupiter"
+  },
+  {
+   "type": "family",
+   "id": "thoth-four-of-swords"
+  }
+ ]
+}

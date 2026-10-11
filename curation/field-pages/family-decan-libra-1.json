@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-libra-1",
+ "line": "Crowley's Two of Swords is the card for the first decan of Libra, with the Moon as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Libra.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Swords was formerly called the Lord of Peace Restored",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the celestial attribution: the Moon in Libra",
+     "page": 212,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is ruled by Chokmah in the Element of Air.",
+     "page": 212,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "libra"
+  },
+  {
+   "type": "family",
+   "id": "moon"
+  },
+  {
+   "type": "family",
+   "id": "thoth-two-of-swords"
+  }
+ ]
+}

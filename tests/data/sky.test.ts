@@ -146,7 +146,7 @@ describe('generated sky data', () => {
     expect(angDiff(j2000.sun!.lon, 280.37)).toBeLessThan(0.02);
     expect(angDiff(j2000.moon!.lon, 223.32)).toBeLessThan(0.05);
     // The Earth's heliocentric longitude is the Sun's geocentric longitude + 180°.
-    expect(angDiff(j2000.earth!.lon, j2000.sun!.lon + 180)).toBeLessThan(0.05);
+    expect(angDiff(j2000.terra!.lon, j2000.sun!.lon + 180)).toBeLessThan(0.05);
     // Sidereal time at J2000.0 is 280.46° (the IAU definition's value at 12h TT).
     expect(angDiff(j2000.gmst!, 280.4606)).toBeLessThan(0.01);
     // The subsolar latitude is the solar declination: ≈ −23.03° in early January.

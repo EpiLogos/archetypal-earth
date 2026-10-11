@@ -1,0 +1,89 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-magus",
+ "line": "Crowley's Atu I: the letter Beth, Mercury, and the path from Kether to Binah, under a chapter heading that differs from the card's name.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The Key Scale prints The Magus and Crowley's chapter is headed The Juggler; his list of titles gives The Juggler. The attribution to Mercury is the same either way.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "I. to XXI. The Juggler; The High Priestess; The Empress",
+     "page": 45,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to the letter Beth, which means a house, and is attributed to the planet Mercury.",
+     "page": 58,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "Mercury is the path from Kether to Binah, which Crowley also states in his appendix. The Key Scale gives path 12.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "But Mercury is the Path leading from Kether to Binah",
+     "page": 58,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The path of Beth on the Tree of Life shows him descending from Kether, the Crown, upon Binah, the",
+     "page": 121,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's description of what the card stands for.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card therefore represents the Wisdom, the Will, the Word, the Logos by whom the worlds were created.",
+     "page": 58,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Mercury, however, represents action in all forms and phases.",
+     "page": 59,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card, the emphasis is upon the creative and dualistic character of the path of Beth.",
+     "page": 59,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  },
+  {
+   "type": "family",
+   "id": "binah"
+  },
+  {
+   "type": "archetype",
+   "id": "one"
+  }
+ ]
+}

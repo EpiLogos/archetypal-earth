@@ -28,8 +28,8 @@ export type View =
   | { kind: 'thread'; target: ThreadTarget; from: View };
 
 /** The lenses that mount into the shell's panel (ProjectCentral/docs/MODES-RFC.md §3). */
-export type PanelLensId = 'theory' | 'astrology' | 'dreams' | 'symbols' | 'coincidences';
-export const PANEL_LENSES: readonly PanelLensId[] = ['theory', 'astrology', 'dreams', 'symbols', 'coincidences'];
+export type PanelLensId = 'theory' | 'alchemy' | 'astrology' | 'dreams' | 'symbols' | 'coincidences';
+export const PANEL_LENSES: readonly PanelLensId[] = ['theory', 'alchemy', 'astrology', 'dreams', 'symbols', 'coincidences'];
 
 export interface AppState {
   view: View;

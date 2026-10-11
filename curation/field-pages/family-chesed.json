@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "chesed",
+ "line": "Crowley gives Chesed the number 4, Jupiter and Water; Jung names kesed as one of the two sides of the Tree.",
+ "sections": [
+  {
+   "id": "crowley-fours",
+   "title": "Crowley's Fours",
+   "line": "The Four cards are attributed to Chesed, which Crowley names the Rule of Law and the first sephira below the Abyss.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Chesed.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "is attributed to Jupiter, who is the Demiurge.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It symbolises such ideas as Law, Restraint, Power, Protection and Stability.",
+     "page": 33,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jupiter-and-water",
+   "title": "Jupiter and Water",
+   "line": "Crowley makes Jupiter the planet of Chesed, and Water its element in the Qabalah.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Jupiter is the planet of Chesed which represents Water in its highest material",
+     "page": 207,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In the place of Chesed, which is Water in our Qabalah",
+     "page": 263,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-two-sides",
+   "title": "Jung's two sides of the Tree",
+   "line": "Jung names kesed and din as the two sides of the Tree of the Sephiroth. He does not number kesed, and he does not give din the name Geburah.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice)",
+     "para": 105,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "jupiter"
+  },
+  {
+   "type": "family",
+   "id": "geburah"
+  }
+ ]
+}

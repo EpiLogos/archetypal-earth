@@ -129,7 +129,7 @@ try {
   check(await page.evaluate(() => !!document.querySelector('.sky-card .sky-reading')), 'the Moon carries it too');
 
   // ── a body with site ties only: the Earth's own card, whose two ties are the atlas's, never Jung's ──
-  await page.evaluate(() => window.__earth.ctl.openBody('earth'));
+  await page.evaluate(() => window.__earth.ctl.openBody('terra'));
   await page.waitForTimeout(1300);
   const earth = await page.evaluate(() => {
     const c = document.querySelector('.sky-card');

@@ -1,0 +1,74 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-universe",
+ "line": "Crowley's account of Atu XXI: the letter Tau, Saturn with a second attribution to Earth, and the Great Work accomplished.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter, the planet Saturn, and the second attribution to Earth, which he says was thrust upon the symbol. The table gives Earth as an unnumbered 32 bis row.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The letter Tau is attributed to Saturn, the outermost and slowest of the seven sacred planets;",
+     "page": 109,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the element of earth was thrust upon the symbol.",
+     "page": 109,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path-and-figure",
+   "title": "Its path on the Tree, and what it figures",
+   "line": "The path of Tau comes from the Moon of Yesod and descends upon Malkuth. Crowley reads the card as the Fool's manifestation, its purpose accomplished.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the letter Tau upon the Tree of Life appears as an emanation from the moon of Yesod, the foundation of the Tree and representative of the reproductive process and of the equilibrium between change and stability, or rather their identification. The influence of the path descends upon the earth, Malkuth, the daughter.",
+     "page": 110,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Universe, so states the theme, is the Celebration of the Great Work accomplished.",
+     "page": 110,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return.",
+     "page": 110,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "yesod"
+  },
+  {
+   "type": "family",
+   "id": "malkuth"
+  },
+  {
+   "type": "archetype",
+   "id": "self"
+  }
+ ]
+}

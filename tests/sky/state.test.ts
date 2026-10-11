@@ -88,6 +88,13 @@ describe('the sky state', () => {
     expect(hashToState('#/sky/mars/c/atlantis', r).state).toEqual(inSky({ body: 'mars' }));
   });
 
+  it('an old link that names the planet earth opens it as terra (the body key is now terra)', () => {
+    const withTerra: Resolver = { ...r, hasBody: (id) => ['sun', 'moon', 'terra', 'mars'].includes(id) };
+    expect(hashToState('#/astrology/jung/earth', withTerra).state).toEqual(astrologyAt(['jung', 'terra']));
+    expect(hashToState('#/astrology/jung/terra', withTerra).state).toEqual(astrologyAt(['jung', 'terra']));
+    expect(hashToState('#/sky/earth', withTerra).state).toEqual(inSky({ body: 'terra' }));
+  });
+
   it('refuses what it cannot honour: an unknown body is the plain sky, an odd chart name is Astrology’s landing', () => {
     expect(hashToState('#/sky/vulcan', r).state).toEqual(inSky());
     expect(hashToState('#/astrology/jung/vulcan', r).state).toEqual(astrologyAt(['jung']));

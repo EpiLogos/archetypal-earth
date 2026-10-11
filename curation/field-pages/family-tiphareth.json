@@ -1,0 +1,110 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "tiphareth",
+ "line": "Crowley gives Tiphareth the number 6, the Sun and the Son; Jung places Tifereth in the middle and names it the sun, but does not number it six.",
+ "sections": [
+  {
+   "id": "crowley-sixes",
+   "title": "Crowley's Sixes",
+   "line": "The Sixes are attributed to Tiphareth, and for Crowley the number Six is the centre of the system.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Tiphareth.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Number Six, Tiphareth, as before,",
+     "page": 232,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Here is the number Six, the centre of the system:",
+     "page": 21,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "sun-and-son",
+   "title": "Sun and Son",
+   "line": "Tiphareth is the Sun in the planetary system and the Son in the system of Tetragrammaton.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In the planetary system it represents the Sun;",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "in the system of Tetragrammaton it represents the Son.",
+     "page": 177,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "direct-line-and-the-airy-sephira",
+   "title": "The direct line and the airy Sephira",
+   "line": "Crowley says Tiphareth alone of the sephiroth below the Abyss communicates directly with Kether, and that the Ruach is centred in it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "which communicates directly with Kether.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ruach is centred in the airy Sephira, Tiphareth, who is the Son,",
+     "page": 211,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-order-and-the-sun",
+   "title": "Jung's order and the sun",
+   "line": "Jung's arrangement, Kether, Tifereth, Yesod, Malchuth, puts Tifereth second, not sixth, and he does not number it. The tie to the Self rests on Jung naming Tifereth the middle position and the sun; the site reads that as the centre the Self occupies, which Jung does not say.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "in the usual arrangement of the Sefiroth he occupies the second place",
+     "para": 18,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The figure of Tifereth belongs to the Sefiroth system, which is conceived to be a tree. Tifereth occupies the middle position",
+     "para": 592,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Yesod is as a part to the whole, and the whole is Tifereth, who is named the sun",
+     "para": 638,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  }
+ ]
+}

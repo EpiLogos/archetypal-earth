@@ -32,7 +32,7 @@ export function mount(ctx: LensContext): LensInstance {
   let vocab: Vocabulary | null = null;
   let framing: PracticeData | null = null;
   const voc = () => (vocab ??= vocabulary(m));
-  const ok = (i: number) => passes(m.occ[i], ctx.filter());
+  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i]);
   const ready = loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
 
   const show = (label: string, nodes: (HTMLElement | null)[]) => {

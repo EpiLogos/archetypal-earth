@@ -75,6 +75,7 @@ export interface LensModule {
 export const LENSES: readonly LensDef[] = [
   { id: 'field', label: 'Field', icon: 'field', group: 'read', blurb: 'Every archetype, symbol and instance on the globe.', key: 'F' },
   { id: 'theory', label: 'Theory', icon: 'theory', group: 'read', blurb: 'How psychic energy moves, and number as an archetype.', key: 'T' },
+  { id: 'alchemy', label: 'Alchemy', icon: 'alchemy', group: 'read', blurb: 'The opus from nigredo to rubedo, its operations and matter.', key: 'L' },
   { id: 'aion', label: 'Aion', icon: 'aion', group: 'read', blurb: 'Jung’s history of the aeons, Pisces to Aquarius.', key: 'A' },
   { id: 'redbook', label: 'Red Book', icon: 'redbook', group: 'read', blurb: 'The book the rest of the field grew from.', key: 'R' },
   { id: 'astrology', label: 'Astrology', icon: 'astrology', group: 'practice', blurb: 'Your birth sky beside Jung’s, read through the corpus.' },
@@ -84,7 +85,7 @@ export const LENSES: readonly LensDef[] = [
 ];
 
 /** The lenses the menu offers. A lens joins when it is built and verified; the registry above is the plan. */
-export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'aion', 'redbook', 'astrology', 'dreams', 'symbols', 'coincidences']);
+export const BUILT: ReadonlySet<LensId> = new Set<LensId>(['field', 'theory', 'alchemy', 'aion', 'redbook', 'astrology', 'dreams', 'symbols', 'coincidences']);
 
 export function lensDef(id: LensId): LensDef {
   return LENSES.find((l) => l.id === id) ?? LENSES[0];
@@ -102,6 +103,7 @@ export function lensOf(s: AppState): LensId {
 /** Panel lenses load on first use: their code is fetched only then (code-split per lens). */
 export const PANEL_LOADERS: Record<PanelLensId, () => Promise<LensModule>> = {
   theory: () => import('../lenses/theory'),
+  alchemy: () => import('../lenses/alchemy'),
   astrology: () => import('../lenses/astrology'),
   dreams: () => import('../lenses/dreams'),
   symbols: () => import('../lenses/symbols'),

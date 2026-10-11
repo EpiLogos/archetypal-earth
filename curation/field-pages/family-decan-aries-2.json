@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-aries-2",
+ "line": "Crowley's Three of Wands is the card for the second decan of Aries, with the Sun as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Aries.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Three of Wands is accordingly the Lord of Virtue.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It refers to the Sun in Aries, the Sign in which he is exalted.",
+     "page": 187,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card refers to Binah in the suit of Fire, and so represents the establishment of primeval Energy.",
+     "page": 187,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "aries"
+  },
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "thoth-three-of-wands"
+  }
+ ]
+}

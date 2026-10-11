@@ -1,0 +1,134 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "spiritus",
+ "line": "The alchemical and psychological spiritus: air in motion and the volatile principle, kept apart from the Spirit family.",
+ "sections": [
+  {
+   "id": "air-in-motion",
+   "title": "Air in motion",
+   "line": "The words in their original, concrete sense, before the abstract one.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "The texts often use the terms pneuma and spiritus in the original concrete sense of “air in motion.”",
+     "page": 244
+    },
+    {
+     "work": "cw18",
+     "quote": "Spirit, spiritus, or pneuma really means air, wind, breath; spiritus and pneuma in their archetypal character are dynamic and half-substantial agencies",
+     "para": 359
+    }
+   ]
+  },
+  {
+   "id": "spirit-and-soul",
+   "title": "Spirit and soul",
+   "line": "Jung separates spirit from soul in the alchemical texts, and reads both as psychic structures.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "“Soul” represents a higher concept than “spirit” in the sense of air or gas.",
+     "page": 245
+    },
+    {
+     "work": "cw13",
+     "quote": "something non-material and finer than mere air",
+     "page": 245
+    },
+    {
+     "work": "cw13",
+     "quote": "As has already been indicated, the psychic nature of the arcane substance did not escape the alchemists; indeed, they actually defined it as “spirit” and “soul.”",
+     "page": 243
+    },
+    {
+     "work": "cw13",
+     "quote": "whatever else spirit and soul may be, from the phenomenological point of view they are psychic structures.",
+     "page": 248
+    }
+   ]
+  },
+  {
+   "id": "mercurius",
+   "title": "Mercurius and the spiritus",
+   "line": "The volatile side of Mercurius: the life principle, the world-soul, and the alchemists' guide.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "The balsam is the life principle, the spiritus mercurii, and it more or less coincides with the Paracelsan concept of the Iliaster.",
+     "para": 171
+    },
+    {
+     "work": "cw12",
+     "quote": "Chemically this term denotes quicksilver, but philosophically it means the spiritus vitae, or even the world-soul",
+     "para": 172
+    },
+    {
+     "work": "cw12",
+     "quote": "The spiritus mercurialis (fig. 23) is the alchemists’ guide (Hermes Psychopompos: cf. fig. 146), and their tempter; he is their good luck and their ruin.",
+     "para": 84
+    },
+    {
+     "work": "cw12",
+     "quote": "another symbol of Mercurius, who, in his volatile form of spiritus, is a parallel of the Holy Ghost.",
+     "para": 518
+    }
+   ]
+  },
+  {
+   "id": "body-soul-spirit",
+   "title": "Body, soul and spirit",
+   "line": "Jung's lapis consists of body, soul and spirit; von Franz's reading brings the three together in the One.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "and to consist of body, soul, and spirit",
+     "para": 243
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "Pneuma, soul, and body then become “the One in which the mystery is concealed.”",
+     "page": 282,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "This One is a statue which was born of fire; it unites spirit, soul, and body and contains the four elements within itself.",
+     "page": 282,
+     "voice": "von Franz, quoting an alchemical text"
+    }
+   ]
+  },
+  {
+   "id": "spirit-in-the-mind",
+   "title": "Spirit in the mind",
+   "line": "A different usage again: in Jung's psychology spirit is often the mind's life. The word quintessence in that sentence means the essence of a life, not the quinta essentia.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "In many of the passages it remains doubtful whether spiritus means spirit in an abstract sense.",
+     "page": 247
+    },
+    {
+     "work": "cw08",
+     "quote": "One thing alone seems clear: just as the \"living being\" is the quintessence of life in the body, so \"spirit\" is the quintessence of the life of the mind",
+     "para": 621
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "spirit"
+  },
+  {
+   "type": "archetype",
+   "id": "psychopomp"
+  }
+ ]
+}

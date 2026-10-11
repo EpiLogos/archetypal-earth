@@ -1,0 +1,97 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "aquarius",
+ "line": "Burt's chapter on Aquarius, built on the Grail legend, with Jung's water-carrier.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Aquarius, pdf pp. 447–508. Her account of the fixed air, the ideal man and the rulers.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs.",
+     "page": 447,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Symbolically, Aquarius is the ideal man, often artistically depicted as an angel, an immortal messenger to mankind from the gods,",
+     "page": 447,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Aquarius is an Air sign and as such has a mental approach to life",
+     "page": 447,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "In Greek mythology Uranus is, literally, Heaven—the sky above,",
+     "page": 449,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Aquarius, pdf pp. 447–508. The Grail question, the seeker and the Perfect Knight.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "a question that, as we will see, is central to the Grail Quest.",
+     "page": 450,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Terrible consequences result in the grail story if the seeker forgets to ask the right question at the right time.",
+     "page": 450,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "How will the Perfect Knight be able to heal the King",
+     "page": 471,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung's water-carrier and precession passages. His forecasts of the coming aeon are not placed here.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "spring-point will have moved from its present position 18 degrees into Aquarius, the next aeon, that of the Water Carrier.",
+     "page": 94,
+     "voice": "Jung"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "Aquarius pours out the waters of fecundity.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "leo"
+  },
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  }
+ ]
+}

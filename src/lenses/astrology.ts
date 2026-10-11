@@ -15,6 +15,8 @@ import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
 import { findPlaces, formatCoordinates } from '../sky/gazetteer';
+import { SIGNS } from '../sky/frames';
+import { glyphSvg, SIGN_FAMILY_IDS } from '../sky/zodiac';
 import { combobox } from '../ui/combobox';
 import { PlanetOrbits } from '../sky/orbits';
 import { practice, saveFile } from '../practice/store';
@@ -60,6 +62,10 @@ export function mount(ctx: LensContext): LensInstance {
   let namesReady = false;
   /** Body whose satellites are currently drawn — synced from the sky approach, not from the walk panel. */
   let orbitsBody: BodyKey | null = null;
+  /** true between enter() and leave(): a data load that lands outside it must not render (it would reopen the sheet) */
+  let inLens = false;
+  /** the newest data load's token: a re-enter while a load is pending supersedes the older load */
+  let loadToken = 0;
   const liveLine = el('p', { class: 'mode-opt-live', role: 'status' });
   const orbits = new PlanetOrbits(ctx.engine.renderer.domElement.parentElement ?? document.body, () => {
     // Whole sky: release the held planet onto the open chart / live sky (walking is unset on a live pick)
@@ -119,6 +125,19 @@ export function mount(ctx: LensContext): LensInstance {
 
   const sunToSelf = (): LensQuote | undefined => data?.bodies.sun.ties.find((t) => t.target.type === 'archetype' && t.target.id === 'self')?.quotes[0];
 
+  // ── the twelve signs: a quiet row of their field families; no row when the field holds none of them ──
+  const signsRow = (): HTMLElement | null => {
+    const signs = SIGN_FAMILY_IDS.map((id, i) => ({ id, i, name: SIGNS[i], open: ctx.model.famById.has(id) }));
+    if (!signs.some((s) => s.open)) return null;
+    return el('section', { class: 'as-signs' }, [
+      el('h3', { class: 'as-h3', text: 'The twelve signs' }),
+      el('div', { class: 'as-sign-grid' }, signs.map((s) => el('button', {
+        type: 'button', class: 'th-link as-sign', title: s.name, disabled: !s.open,
+        onclick: s.open ? () => ctx.focus({ type: 'family', id: s.id }) : undefined,
+      }, [el('span', { class: 'as-sign-name' }, [glyphSvg(s.i), el('span', { text: s.name })])]))),
+    ]);
+  };
+
   // ── the landing: the charts, the form, the Self ────────────────────────
   const renderHome = () => {
     orbits.set(null);
@@ -153,6 +172,7 @@ export function mount(ctx: LensContext): LensInstance {
       jung ? el('p', { class: 'lp-note', text: jung.rec.line ?? '' }) : null,
       jung?.rec.timeSource ? el('p', { class: 'lp-note', text: `The time is from ${jung.rec.timeSource}` }) : null,
       jung ? quoteBlock(data.people.find((p) => p.id === 'jung')!.quote, ctx.passages, { compact: true }) : null,
+      signsRow(),
       el('hr', { class: 'lp-divider' }),
       el('h3', { class: 'as-h3', text: 'Where every chart meets the field' }),
       selfDiagram(),
@@ -268,7 +288,7 @@ export function mount(ctx: LensContext): LensInstance {
     walking = chartId;
     const who = walked.rec.id === YOU ? 'Your' : `${walked.rec.label}’s`;
     const held = ctx.skyBody();
-    const bodyName = held && held !== 'earth' ? data!.bodies[held as ChartBody]?.name : undefined;
+    const bodyName = held && held !== 'terra' ? data!.bodies[held as ChartBody]?.name : undefined;
     ctx.setContext(bodyName ? `${who} ${bodyName}` : `${who} birth sky`);
     ctx.panel.close();
   };
@@ -280,7 +300,7 @@ export function mount(ctx: LensContext): LensInstance {
     if (!walked) { ctx.navigate(astrologyAt([])); return; }
     const order = data.order.bodies;
     // no body: the wide sky, the chart drawn on it. A walk is a choice, not the way in.
-    if (!bodyKey || bodyKey === 'earth') { renderWholeSky(chartId, walked); return; }
+    if (!bodyKey || bodyKey === 'terra') { renderWholeSky(chartId, walked); return; }
     const key = bodyKey as ChartBody;
     if (!order.includes(key)) { ctx.setPath([chartId], { replace: true }); return; }
     const i = order.indexOf(key);
@@ -362,13 +382,13 @@ export function mount(ctx: LensContext): LensInstance {
     // ['sky'] = live Astrology sky (no modal, no natal). [chart] = birth sky. [chart, body] = walk. [] = Charts.
     if (path[0] === ASTROLOGY_LIVE) {
       walking = null;
-      const held = path[1] && path[1] !== 'earth' ? path[1] : ctx.skyBody();
-      const bodyName = held && held !== 'earth' ? data.bodies[held as ChartBody]?.name : undefined;
+      const held = path[1] && path[1] !== 'terra' ? path[1] : ctx.skyBody();
+      const bodyName = held && held !== 'terra' ? data.bodies[held as ChartBody]?.name : undefined;
       ctx.setContext(bodyName ?? 'The sky');
       ctx.panel.close();
       return;
     }
-    if (path[0] && path[1] && path[1] !== 'earth') renderWalk(path[0], path[1]);
+    if (path[0] && path[1] && path[1] !== 'terra') renderWalk(path[0], path[1]);
     else if (path[0]) {
       const walked = charts.get(path[0]);
       if (!walked) { ctx.navigate(astrologyAt([])); return; }
@@ -388,8 +408,8 @@ export function mount(ctx: LensContext): LensInstance {
     // approached body, sky.body from a canvas pick, or the walk step — any one is enough
     const key = ctx.engine.sky?.approached
       ?? ctx.skyBody()
-      ?? (pathNow[1] && pathNow[1] !== 'earth' ? pathNow[1] as BodyKey : null);
-    if (!key || key === 'earth' || !data.bodies[key as ChartBody]) {
+      ?? (pathNow[1] && pathNow[1] !== 'terra' ? pathNow[1] as BodyKey : null);
+    if (!key || key === 'terra' || !data.bodies[key as ChartBody]) {
       if (orbitsBody) { orbits.set(null); orbitsBody = null; }
       return;
     }
@@ -450,7 +470,7 @@ export function mount(ctx: LensContext): LensInstance {
     ];
     const walk = chart && data
       ? optionAction('Walk the planets', () => goPath([chart, data!.order.bodies[0]]), {
-        pressed: !!path[1] && path[1] !== 'earth',
+        pressed: !!path[1] && path[1] !== 'terra',
         title: 'Planet by planet through the birth sky',
       })
       : null;
@@ -465,23 +485,30 @@ export function mount(ctx: LensContext): LensInstance {
 
   return {
     enter(path) {
+      inLens = true;
       astrologyOptions(path);
       if (data) { render(path); syncOrbits(); return; }
       if (failed) return;
+      const token = ++loadToken;
       ctx.panel.open('Astrology', [el('p', { class: 'lp-sub', text: 'Loading…' })], { height: 'full' });
       loadLensData<AstrologyData>('astrology').then((d) => {
+        // the user left while the data loaded (or left and came back: the newer load renders): nothing reopens
+        if (!inLens || token !== loadToken) return;
         data = d;
         refreshCharts();
         astrologyOptions(path);
         render(path);
         syncOrbits();
       }).catch((err) => {
-        failed = true;
         console.error(err);
+        // a failure after leaving is not shown; it is not remembered either, so the next enter tries again
+        if (!inLens || token !== loadToken) return;
+        failed = true;
         ctx.panel.replace([el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })]);
       });
     },
     leave() {
+      inLens = false;
       editing = false;
       nameCulture = null;
       namesReady = false;

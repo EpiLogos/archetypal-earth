@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-pisces-3",
+ "line": "Crowley's Ten of Cups is the card for the third decan of Pisces, with Mars as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Pisces.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Cups is called Satiety.",
+     "page": 181,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This comes from the influence of Mars in Pisces.",
+     "page": 209,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Mars is the gross, violent and disruptive force which inevitably attacks every supposed perfection.",
+     "page": 209,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "group-note",
+   "title": "Crowley's group note on the Tens",
+   "line": "His note on the Tens says there is no planetary attribution to consider, yet each Ten names a planet in its sign. This page keeps the planet the chapter names.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is now no planetary attribution to consider.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "pisces"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "thoth-ten-of-cups"
+  }
+ ]
+}

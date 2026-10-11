@@ -24,8 +24,8 @@ describe('the client ephemeris is an interpolation of the sidecar grids, nothing
       expect(Math.abs(p.lat - g.lat), `${key} lat`).toBeLessThan(0.1);
       expect(Math.abs(p.r - g.r), `${key} r`).toBeLessThan(1e-4 * Math.max(1, g.r));
     }
-    const e = eph.helio('earth', ms)!;
-    expect(Math.abs(wrap180(e.lon - probe.earth!.lon))).toBeLessThan(0.05);
+    const e = eph.helio('terra', ms)!;
+    expect(Math.abs(wrap180(e.lon - probe.terra!.lon))).toBeLessThan(0.05);
   });
 
   it('the Moon agrees with the sidecar at the off-grid probe (≤ 0.1° with the hourly grid)', () => {
@@ -45,7 +45,7 @@ describe('the client ephemeris is an interpolation of the sidecar grids, nothing
     const rad = Math.PI / 180;
     const vec = (p: { lon: number; lat: number; r: number }) => [p.r * Math.cos(p.lat * rad) * Math.cos(p.lon * rad), p.r * Math.cos(p.lat * rad) * Math.sin(p.lon * rad), p.r * Math.sin(p.lat * rad)];
     const t = Date.parse(g.iso);
-    const probeEarth = vec(probe.earth!);
+    const probeEarth = vec(probe.terra!);
     for (const key of ['mars', 'jupiter', 'saturn'] as BodyKey[]) {
       const b = vec(probe.planets![key]!);
       const want = ((Math.atan2(b[1] - probeEarth[1], b[0] - probeEarth[0]) / rad) + 360) % 360;
@@ -53,7 +53,7 @@ describe('the client ephemeris is an interpolation of the sidecar grids, nothing
     }
     expect(t).toBeLessThan(eph.from); // J2000 itself is outside the generated span, and geo() says so
     expect(eph.geo('mars', t)).toBeNull();
-    expect(eph.geo('earth', ms)).toBeNull();
+    expect(eph.geo('terra', ms)).toBeNull();
   });
 
   it('reproduces grid nodes exactly', () => {

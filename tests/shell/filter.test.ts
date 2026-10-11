@@ -34,18 +34,39 @@ describe('the field filter', () => {
     expect(Array.from(maskOf([A, B], { works: ['sem-visions'] })!)).toEqual([0, 1]);
   });
 
+  it('slices the field by what governs an occurrence: its family\'s archetype and the concept it answers to', () => {
+    const tagsA = { archetypes: ['self', 'shadow'], theoretics: ['psychoid'] };
+    const tagsB = { archetypes: ['great-mother'], theoretics: ['individuation'] };
+    expect(passes(A, { archetypes: ['self'] }, tagsA)).toBe(true);
+    expect(passes(B, { archetypes: ['self'] }, tagsB)).toBe(false);
+    expect(passes(B, { archetypes: ['great-mother', 'self'] }, tagsB)).toBe(true);
+    expect(passes(A, { theoretics: ['psychoid'] }, tagsA)).toBe(true);
+    expect(passes(B, { theoretics: ['psychoid'] }, tagsB)).toBe(false);
+    // every set dimension holds together: the concept and the kind must both allow it
+    expect(passes(A, { theoretics: ['psychoid'], kinds: ['vision'] }, tagsA)).toBe(false);
+    // the question is unanswerable without the tags, so it passes nothing — never everything
+    expect(passes(A, { archetypes: ['self'] })).toBe(false);
+    expect(passes(A, { theoretics: ['psychoid'] })).toBe(false);
+    // and a mask carries the tags through
+    expect(Array.from(maskOf([A, B], { archetypes: ['self'] }, [tagsA, tagsB])!)).toEqual([1, 0]);
+  });
+
   it('round-trips through the hash query and drops what it cannot read', () => {
-    const f = { works: ['cw12', 'cw09ii'], cultures: ['gnostic'], era: [-200, 400] as [number, number], kinds: ['dream' as const] };
+    const f = { works: ['cw12', 'cw09ii'], cultures: ['gnostic'], era: [-200, 400] as [number, number], kinds: ['dream' as const], archetypes: ['self', 'great-mother'], theoretics: ['psychoid'] };
     expect(parseFilter(filterQuery(f))).toEqual(f);
     expect(parseFilter('w=cw12&k=nonsense&e=abc&x=1')).toEqual({ works: ['cw12'] });
     expect(isEmpty(parseFilter(''))).toBe(true);
   });
 
   it('offers one removable chip per active value', () => {
-    const cs = chips({ works: ['cw12'], era: [0, 499] }, { work: () => 'CW12', culture: (c) => c });
+    const cs = chips({ works: ['cw12'], era: [0, 499] }, { work: () => 'CW12', culture: (c) => c, archetype: (a) => a, theoretic: (t) => t });
     expect(cs.map((c) => c.label)).toEqual(['CW12', '0–499']);
     expect(cs[0].without).toEqual({ era: [0, 499] });
     expect(cs[1].without).toEqual({ works: ['cw12'] });
+    const subs = chips({ archetypes: ['self'], theoretics: ['psychoid'] }, { work: (w) => w, culture: (c) => c, archetype: () => 'The Self', theoretic: () => 'The Psychoid' });
+    expect(subs.map((c) => c.label)).toEqual(['The Self', 'The Psychoid']);
+    expect(subs[0].without).toEqual({ theoretics: ['psychoid'] });
+    expect(subs[1].without).toEqual({ archetypes: ['self'] });
   });
 });
 
@@ -68,7 +89,10 @@ describe('lens routes', () => {
   it('Back climbs a lens route, then closes the lens', () => {
     const s = inLens('theory', ['energy']);
     expect(stateEq(back(s), inLens('theory'))).toBe(true);
-    expect(stateEq(back(inLens('theory')), WORLD)).toBe(true);
+    // a bare Theory lens closes onto the theory's own landing (the dynamical route the Options wait on), not
+    // straight to the World — store.back() states why
+    expect(stateEq(back(inLens('theory')), { view: { kind: 'world' }, deep: false, dynamics: {} })).toBe(true);
+    expect(stateEq(back(inLens('astrology')), WORLD)).toBe(true);
   });
 
   it('the dynamical lens belongs to Theory; Aion and the Red Book are their own lenses', () => {

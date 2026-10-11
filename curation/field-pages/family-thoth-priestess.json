@@ -1,0 +1,95 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-priestess",
+ "line": "Crowley's Atu II: the letter Gimel, the Moon, and the path that Crowley's Ace of Swords chapter gives from Kether to Tiphareth.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The letter Gimel, the camel, and the Moon as the feminine symbol.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to the letter Gimel, which means a Camel.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card refers to the Moon. The Moon (being the general feminine symbol, the symbol of the second order corresponding to the Sun as the Yoni does to the Lingam) is universal, and goes from the highest to the lowest.",
+     "page": 61,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The chapter describes a path between the Father and the Son without naming its ends; the Ace of Swords chapter names Kether and Tiphareth. The Key Scale gives path 13, and Crowley numbers this path as joining I to 6 (pdf p27).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "her path, as shown in the diagram, makes a direct connection between the Father in his highest aspect, and the Son in his most perfect manifestation.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "upon him, though the Path of Gimel, the High Priestess, the triune light of Initiation.",
+     "page": 211,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This path is in exact balance in the middle pillar.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Consider again the card joining the number I to the number 6.",
+     "page": 27,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley's account of the figure and of the path viewed from the other side of the Tree.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card represents the most spiritual form of Isis the Eternal Virgin; the Artemis of the Greeks.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "this is the path which leads upwards;",
+     "page": 62,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "moon"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "anima"
+  }
+ ]
+}

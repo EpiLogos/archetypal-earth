@@ -4,10 +4,13 @@
 import { el } from '../ui/dom';
 import type { TieBasis } from '../types/field';
 import { DEFAULT_FORCES, FORCE_ROWS, forceMultiple, type Forces } from './forces';
+import { DEFAULT_KINDS, type KindFlags } from './settings';
 
 export interface ToolHandlers {
   onDepth(depth: number): void;
   onDust(on: boolean): void;
+  /** the tiers drawn: archetypes, theoretics, families (occurrences answer to onDust) */
+  onKinds(kinds: KindFlags): void;
   onTies(bases: TieBasis[]): void;
   /** all four forces, as the person set them: applied to the live layout */
   onForces(forces: Forces): void;
@@ -19,6 +22,7 @@ export interface ToolState {
   local: boolean;
   depth: number;
   dust: boolean;
+  kinds: KindFlags;
   ties: TieBasis[];
   /** the layout's four forces, as set */
   forces: Forces;
@@ -42,14 +46,25 @@ export class GraphTools {
   private skyNote: HTMLElement;
   private forceIn = new Map<keyof Forces, HTMLInputElement>();
   private forceN = new Map<keyof Forces, HTMLElement>();
-  private state: ToolState = { local: false, depth: 1, dust: true, ties: ['jung', 'inferred', 'site'], sky: 'off', forces: { ...DEFAULT_FORCES } };
+  private kindButtons = new Map<keyof KindFlags, HTMLButtonElement>();
+  private state: ToolState = { local: false, depth: 1, dust: true, kinds: { ...DEFAULT_KINDS }, ties: ['jung', 'inferred', 'site'], sky: 'off', forces: { ...DEFAULT_FORCES } };
 
   constructor(h: ToolHandlers) {
     this.minus = el('button', { class: 'gvt-step', type: 'button', 'aria-label': 'Fewer steps from the subject', text: '−', onclick: () => h.onDepth(this.state.depth - 1) }) as HTMLButtonElement;
     this.plus = el('button', { class: 'gvt-step', type: 'button', 'aria-label': 'More steps from the subject', text: '+', onclick: () => h.onDepth(this.state.depth + 1) }) as HTMLButtonElement;
     this.depthN = el('span', { class: 'gvt-n' });
     this.depthWrap = el('div', { class: 'gvt-row', role: 'group', 'aria-label': 'Depth of the local graph' }, [el('span', { text: 'Steps' }), el('span', { class: 'gvt-depth' }, [this.minus, this.depthN, this.plus])]);
-    this.dust = el('button', { class: 'gvt-option', type: 'button', 'aria-pressed': 'true', onclick: () => h.onDust(!this.state.dust) }) as HTMLButtonElement;
+    // what is drawn, one toggle per tier: occurrences (the dust, where it always was) and the field's three node
+    // tiers. A tier switched off is absent from the drawing with its ties, so nothing is left stranded.
+    const kindGroup = el('div', { class: 'gvt-kinds', role: 'group', 'aria-label': 'What is drawn' });
+    this.dust = el('button', { class: 'gvt-filter', type: 'button', text: 'Occurrences', 'aria-pressed': 'true', onclick: () => h.onDust(!this.state.dust) }) as HTMLButtonElement;
+    kindGroup.append(this.dust);
+    for (const [kind, label] of [['archetype', 'Archetypes'], ['theoretic', 'Theoretics'], ['family', 'Families']] as const) {
+      const button = el('button', { class: 'gvt-filter', type: 'button', text: label, 'aria-pressed': 'true',
+        onclick: () => h.onKinds({ ...this.state.kinds, [kind]: !this.state.kinds[kind] }) }) as HTMLButtonElement;
+      this.kindButtons.set(kind, button);
+      kindGroup.append(button);
+    }
     const tieGroup = el('div', { class: 'gvt-ties', role: 'group', 'aria-label': 'Family to archetype relations' });
     for (const [basis, label] of [['jung', 'Jung'], ['inferred', 'Inferred'], ['site', 'Read here']] as const) {
       const button = el('button', { class: 'gvt-filter', type: 'button', text: label, 'aria-pressed': 'true', onclick: () => h.onTies(this.state.ties.includes(basis) ? this.state.ties.filter((b) => b !== basis) : [...this.state.ties, basis]) }) as HTMLButtonElement;
@@ -75,7 +90,7 @@ export class GraphTools {
       onclick: () => h.onForces({ ...DEFAULT_FORCES }) }));
     const fit = el('button', { class: 'gvt-option', type: 'button', text: 'Reframe graph', onclick: () => { h.onFit(); this.close(); } });
     this.panel = el('section', { class: 'gvt-panel', id: 'graph-settings', 'aria-label': 'Graph settings' }, [
-      this.dust,
+      el('div', { class: 'gvt-rels' }, [el('span', { class: 'gvt-caption', text: 'Kinds' }), kindGroup]),
       el('div', { class: 'gvt-rels' }, [el('span', { class: 'gvt-caption', text: 'Relations' }), tieGroup]),
       this.sky, this.skyNote,
       this.depthWrap,
@@ -119,8 +134,8 @@ export class GraphTools {
     this.depthN.textContent = String(s.depth);
     this.minus.disabled = s.depth <= 1;
     this.plus.disabled = s.depth >= 3;
-    this.dust.textContent = 'Occurrences';
     this.dust.setAttribute('aria-pressed', String(s.dust));
+    for (const [kind, button] of this.kindButtons) button.setAttribute('aria-pressed', String(s.kinds[kind]));
     for (const [basis, button] of this.ties) button.setAttribute('aria-pressed', String(s.ties.includes(basis)));
     for (const row of FORCE_ROWS) {
       const v = s.forces[row.key];

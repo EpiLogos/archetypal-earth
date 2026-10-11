@@ -445,6 +445,10 @@
    {
     "archetype": "hero",
     "basis": "site"
+   },
+   {
+    "archetype": "four",
+    "basis": "inferred"
    }
   ],
   "fish": [
@@ -1447,6 +1451,10 @@
    {
     "archetype": "anima",
     "basis": "site"
+   },
+   {
+    "archetype": "four",
+    "basis": "inferred"
    }
   ],
   "well-spring": [
@@ -1581,6 +1589,936 @@
    {
     "archetype": "six",
     "basis": "inferred"
+   }
+  ],
+  "air": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "earth-element": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   },
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "ether": [
+   {
+    "archetype": "five",
+    "basis": "inferred"
+   }
+  ],
+  "feeling": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "intuition": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "quintessence": [
+   {
+    "archetype": "five",
+    "basis": "jung"
+   },
+   {
+    "archetype": "self",
+    "basis": "jung"
+   }
+  ],
+  "sensation": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "spiritus": [
+   {
+    "archetype": "psychopomp",
+    "basis": "jung"
+   }
+  ],
+  "thinking": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "kether": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "chokmah": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "binah": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "chesed": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "geburah": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "tiphareth": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   },
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "netzach": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "hod": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "yesod": [
+   {
+    "archetype": "nine",
+    "basis": "jung"
+   }
+  ],
+  "malkuth": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "citrinitas": [
+   {
+    "archetype": "self",
+    "basis": "inferred"
+   }
+  ],
+  "aries": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "taurus": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "gemini": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "cancer": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "leo": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "virgo": [
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
+  "libra": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "scorpio": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "sagittarius": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "capricorn": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "aquarius": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "pisces": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-tarot": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "thoth-major-arcana": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "thoth-minor-arcana": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "thoth-wands": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "thoth-cups": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "thoth-swords": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "thoth-disks": [
+   {
+    "archetype": "four",
+    "basis": "inferred"
+   }
+  ],
+  "thoth-knight-of-wands": [
+   {
+    "archetype": "court-knight",
+    "basis": "site"
+   }
+  ],
+  "thoth-queen-of-wands": [
+   {
+    "archetype": "court-queen",
+    "basis": "site"
+   }
+  ],
+  "thoth-prince-of-wands": [
+   {
+    "archetype": "court-prince",
+    "basis": "site"
+   }
+  ],
+  "thoth-princess-of-wands": [
+   {
+    "archetype": "court-princess",
+    "basis": "site"
+   }
+  ],
+  "thoth-knight-of-cups": [
+   {
+    "archetype": "court-knight",
+    "basis": "site"
+   }
+  ],
+  "thoth-queen-of-cups": [
+   {
+    "archetype": "court-queen",
+    "basis": "site"
+   }
+  ],
+  "thoth-prince-of-cups": [
+   {
+    "archetype": "court-prince",
+    "basis": "site"
+   }
+  ],
+  "thoth-princess-of-cups": [
+   {
+    "archetype": "court-princess",
+    "basis": "site"
+   }
+  ],
+  "thoth-knight-of-swords": [
+   {
+    "archetype": "court-knight",
+    "basis": "site"
+   }
+  ],
+  "thoth-queen-of-swords": [
+   {
+    "archetype": "court-queen",
+    "basis": "site"
+   }
+  ],
+  "thoth-prince-of-swords": [
+   {
+    "archetype": "court-prince",
+    "basis": "site"
+   }
+  ],
+  "thoth-princess-of-swords": [
+   {
+    "archetype": "court-princess",
+    "basis": "site"
+   }
+  ],
+  "thoth-knight-of-disks": [
+   {
+    "archetype": "court-knight",
+    "basis": "site"
+   }
+  ],
+  "thoth-queen-of-disks": [
+   {
+    "archetype": "court-queen",
+    "basis": "site"
+   }
+  ],
+  "thoth-prince-of-disks": [
+   {
+    "archetype": "court-prince",
+    "basis": "site"
+   }
+  ],
+  "thoth-princess-of-disks": [
+   {
+    "archetype": "court-princess",
+    "basis": "site"
+   }
+  ],
+  "thoth-fool": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-magus": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "thoth-priestess": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "thoth-empress": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "thoth-emperor": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "thoth-hierophant": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-lovers": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "thoth-chariot": [
+   {
+    "archetype": "hero",
+    "basis": "site"
+   }
+  ],
+  "thoth-adjustment": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "thoth-hermit": [
+   {
+    "archetype": "wise-old-man",
+    "basis": "site"
+   }
+  ],
+  "thoth-fortune": [
+   {
+    "archetype": "trickster",
+    "basis": "site"
+   }
+  ],
+  "thoth-lust": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "thoth-hanged-man": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-death": [
+   {
+    "archetype": "psychopomp",
+    "basis": "site"
+   }
+  ],
+  "thoth-art": [
+   {
+    "archetype": "syzygy",
+    "basis": "site"
+   }
+  ],
+  "thoth-devil": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "thoth-tower": [
+   {
+    "archetype": "shadow",
+    "basis": "site"
+   }
+  ],
+  "thoth-star": [
+   {
+    "archetype": "great-mother",
+    "basis": "site"
+   }
+  ],
+  "thoth-moon": [
+   {
+    "archetype": "anima",
+    "basis": "site"
+   }
+  ],
+  "thoth-sun": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-aeon": [
+   {
+    "archetype": "child",
+    "basis": "site"
+   }
+  ],
+  "thoth-universe": [
+   {
+    "archetype": "self",
+    "basis": "site"
+   }
+  ],
+  "thoth-ace-of-wands": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "thoth-two-of-wands": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "thoth-three-of-wands": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "thoth-four-of-wands": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "thoth-five-of-wands": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "thoth-ace-of-cups": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "thoth-two-of-cups": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "thoth-three-of-cups": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "thoth-four-of-cups": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "thoth-five-of-cups": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "thoth-ace-of-swords": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "thoth-two-of-swords": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "thoth-three-of-swords": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "thoth-four-of-swords": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "thoth-five-of-swords": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "thoth-ace-of-disks": [
+   {
+    "archetype": "one",
+    "basis": "site"
+   }
+  ],
+  "thoth-two-of-disks": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "thoth-three-of-disks": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "thoth-four-of-disks": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "thoth-five-of-disks": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "thoth-six-of-wands": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "thoth-six-of-cups": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "thoth-six-of-swords": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "thoth-six-of-disks": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "thoth-seven-of-wands": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "thoth-seven-of-cups": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "thoth-seven-of-swords": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "thoth-seven-of-disks": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "thoth-eight-of-wands": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "thoth-eight-of-cups": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "thoth-eight-of-swords": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "thoth-eight-of-disks": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "thoth-nine-of-wands": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "thoth-nine-of-cups": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "thoth-nine-of-swords": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "thoth-nine-of-disks": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "thoth-ten-of-wands": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "thoth-ten-of-cups": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "thoth-ten-of-swords": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "thoth-ten-of-disks": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "decan-aries-1": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "decan-aries-2": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "decan-aries-3": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "decan-leo-1": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "decan-leo-2": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "decan-leo-3": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "decan-sagittarius-1": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "decan-sagittarius-2": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "decan-sagittarius-3": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "decan-cancer-1": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "decan-cancer-2": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "decan-cancer-3": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "decan-scorpio-1": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "decan-scorpio-2": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "decan-scorpio-3": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "decan-pisces-1": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "decan-pisces-2": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "decan-pisces-3": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "decan-libra-1": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "decan-libra-2": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "decan-libra-3": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "decan-aquarius-1": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "decan-aquarius-2": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "decan-aquarius-3": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "decan-gemini-1": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "decan-gemini-2": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "decan-gemini-3": [
+   {
+    "archetype": "ten",
+    "basis": "site"
+   }
+  ],
+  "decan-capricorn-1": [
+   {
+    "archetype": "two",
+    "basis": "site"
+   }
+  ],
+  "decan-capricorn-2": [
+   {
+    "archetype": "three",
+    "basis": "site"
+   }
+  ],
+  "decan-capricorn-3": [
+   {
+    "archetype": "four",
+    "basis": "site"
+   }
+  ],
+  "decan-taurus-1": [
+   {
+    "archetype": "five",
+    "basis": "site"
+   }
+  ],
+  "decan-taurus-2": [
+   {
+    "archetype": "six",
+    "basis": "site"
+   }
+  ],
+  "decan-taurus-3": [
+   {
+    "archetype": "seven",
+    "basis": "site"
+   }
+  ],
+  "decan-virgo-1": [
+   {
+    "archetype": "eight",
+    "basis": "site"
+   }
+  ],
+  "decan-virgo-2": [
+   {
+    "archetype": "nine",
+    "basis": "site"
+   }
+  ],
+  "decan-virgo-3": [
+   {
+    "archetype": "ten",
+    "basis": "site"
    }
   ]
  }

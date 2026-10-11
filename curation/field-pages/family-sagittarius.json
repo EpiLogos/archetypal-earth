@@ -1,0 +1,97 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "sagittarius",
+ "line": "Burt's chapter on Sagittarius, with Jung's archer.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Sagittarius, pdf pp. 339–378. Her account of the sign, its Fire and its ruler.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or “fire up” others.",
+     "page": 339,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Now, in Sagittarius, we bask once more in the sunlight of a solar Fire sign and again experience conscious, extroverted energy.",
+     "page": 339,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "It is both mental and active, just as Sagittarius is Mutable and fiery.",
+     "page": 342,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Zeus, or Jupiter, as the Romans called him, the ruler of Sagittarius.",
+     "page": 339,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Sagittarius, pdf pp. 339–378. Chiron, the sage and the Fire temper.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The story of Hercules and his beloved friend and teacher adds another dimension to our understanding of Sagittarius—the generosity of the Sage.",
+     "page": 345,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Chiron, the Immortal, could not stop his own wound from aching",
+     "page": 346,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Though Mutable, Sagittarius is a Fire sign and does have a temper.",
+     "page": 361,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung's seminar on the archer, and his centaur passage.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The archer Sagittarius with the arrow of intuition foresees new birth out of the unconscious.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "Then comes the legend of the centaur, a good archer, who with his bow can send an arrow across.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "jupiter"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "gemini"
+  }
+ ]
+}

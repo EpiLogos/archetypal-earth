@@ -1,0 +1,1066 @@
+{
+ "version": 1,
+ "line": "Alchemy as Jung reads it: a process of colours and operations that the alchemists projected into matter, and that he reads as individuation.",
+ "opus": {
+  "line": "Four colours in order, blackening, whitening, yellowing and reddening; the yellowing was later dropped from the scheme.",
+  "stages": [
+   {
+    "id": "nigredo",
+    "family": "nigredo",
+    "name": "Nigredo",
+    "colour": "black",
+    "line": "The blackening: the first state, present in the prima materia or produced by separating the elements.",
+    "quotes": [
+     {
+      "text": "The nigredo or blackness (fig. 115) is the initial state, either present from the beginning as a quality of the prima materia, the chaos or massa confusa, or else produced by the separation (solutio, separatio, divisio, putrefactio) of the elements.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p245)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The nigredo signifies the mortificatio, putrefactio, solutio, separatio, divisio, etc., a state of dissolution and decomposition that precedes the synthesis.",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "¶721 (pdf p381)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The opus is far from having come to an end at this point, for the nigredo (terra nigra) still prevails and the substance of the stone is still black.",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "¶264 (pdf p153)"
+      },
+      "voice": "Jung"
+     }
+    ],
+    "psyche": {
+     "line": "Jung reads the blackening as the encounter with the shadow and as the darkness of the unconscious.",
+     "quotes": [
+      {
+       "text": "The author of this sentence must have been undergoing the experience of the nigredo, the first stage of the work, which was felt as “melancholia” in alchemy and corresponds to the encounter with the shadow in psychology.",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶41 (pdf p65)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "The nigredo corresponds to the darkness of the unconscious, which contains in the first place the inferior personality, the shadow.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶646 (pdf p337)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "In the nigredo, the “dark night of the soul,” the psychic contents free themselves from their attachment to the body, and the nature and meaning of this connection are recognized.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶722 (pdf p382)"
+       },
+       "voice": "Jung"
+      }
+     ]
+    },
+    "operations": [
+     "solutio",
+     "separatio",
+     "mortificatio",
+     "putrefactio"
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "prima-materia"
+     },
+     {
+      "type": "family",
+      "id": "earth-element"
+     }
+    ]
+   },
+   {
+    "id": "albedo",
+    "family": "albedo",
+    "name": "Albedo",
+    "colour": "white",
+    "line": "The whitening: the silver or moon condition, which still has to be raised to the sun.",
+    "quotes": [
+     {
+      "text": "It is the silver or moon condition, which still has to be raised to the sun condition.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p246)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The albedo is, so to speak, the daybreak, but not till the rubedo is it sunrise.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p246)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The whitening (albedo or dealbatio) is likened to the ortus solis, the sunrise; it is the light, the illumination, that follows the darkness.",
+      "cite": {
+       "work": "cw16",
+       "workTitle": "The Practice of Psychotherapy",
+       "locator": "¶484 (pdf p242)"
+      },
+      "voice": "Jung"
+     }
+    ],
+    "psyche": {
+     "line": "Jung reads the whitening as illumination out of the darkness of the unconscious, with Luna as the anima.",
+     "quotes": [
+      {
+       "text": "From the darkness of the unconscious comes the light of illumination, the albedo.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶220 (pdf p131)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "This role of Luna devolves upon the anima, as she personifies the plurality of archetypes",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶218 (pdf p130)"
+       },
+       "voice": "Jung"
+      }
+     ]
+    },
+    "operations": [
+     "calcinatio"
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "moon"
+     },
+     {
+      "type": "family",
+      "id": "water"
+     }
+    ]
+   },
+   {
+    "id": "citrinitas",
+    "family": "citrinitas",
+    "name": "Citrinitas",
+    "colour": "yellow",
+    "line": "The yellowing, which Jung says was omitted later: he names it in running text but never describes it on its own.",
+    "quotes": [
+     {
+      "text": "Later, about the fifteenth or sixteenth century, the colours were reduced to three, and the xanthosis, otherwise called the citrinitas, gradually fell into disuse or was but seldom mentioned.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶333 (pdf p243)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The transition to the rubedo is formed by the citrinitas, though this, as we have said, was omitted later.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p246)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "the ash-colour, the whitening, and the yellowing are over, you will see the Philosophical Stone",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "¶355 (pdf p197)"
+      },
+      "voice": "Khunrath, quoted by Jung"
+     },
+     {
+      "text": "Corresponding to the xanthesis, citrinitas, or yellowing.",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "pdf p719"
+      },
+      "voice": "Jung's note (517)"
+     }
+    ],
+    "psyche": {
+     "line": "In one dream commentary Jung reads the four colours as the move from trinity to quaternity.",
+     "quotes": [
+      {
+       "text": "The fact is that the four colours in the dream represent the transition from trinity to quaternity",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶220 (pdf p188)"
+       },
+       "voice": "Jung"
+      }
+     ]
+    },
+    "operations": [],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "air"
+     },
+     {
+      "type": "family",
+      "id": "sun"
+     },
+     {
+      "type": "family",
+      "id": "quaternity"
+     }
+    ]
+   },
+   {
+    "id": "rubedo",
+    "family": "rubedo",
+    "name": "Rubedo",
+    "colour": "red",
+    "line": "The reddening: the marriage of the red king and the white queen, and the last stage.",
+    "quotes": [
+     {
+      "text": "The alchemists termed this the rubedo, in which the marriage of the red man and the white woman, Sol and Luna, is consummated.",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "¶307 (pdf p172)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "Luna in herself is spirit, and she at once joins her husband Sol, thus initiating the second and usually final stage, the rubedo.",
+      "cite": {
+       "work": "cw14",
+       "workTitle": "Mysterium Coniunctionis",
+       "locator": "¶434 (pdf p231)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The red and the white are King and Queen, who may also celebrate their “chymical wedding” at this stage",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p246)"
+      },
+      "voice": "Jung"
+     },
+     {
+      "text": "The rubedo then follows direct from the albedo as the result of raising the heat of the fire to its highest intensity.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶334 (pdf p246)"
+      },
+      "voice": "Jung"
+     }
+    ],
+    "psyche": {
+     "line": "Jung reads the redness as warmth and light from the sun, which is consciousness.",
+     "quotes": [
+      {
+       "text": "The growing redness (rubedo) which now follows denotes an increase of warmth and light coming from the sun, consciousness.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶307 (pdf p172)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "after the manner of an Assumption and Coronation of Mary, in which the Mother of God represents the body.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶664 (pdf p348)"
+       },
+       "voice": "Jung"
+      }
+     ]
+    },
+    "operations": [],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "sun"
+     },
+     {
+      "type": "family",
+      "id": "moon"
+     }
+    ]
+   }
+  ],
+  "bridge": {
+   "line": "The peacock's tail between black and white: the many colours that lead to the one white.",
+   "quotes": [
+    {
+     "text": "From this the washing (ablutio, baptisma) either leads direct to the whitening (albedo), or else the soul (anima) released at the “death” is reunited with the dead body and brings about its resurrection, or again the “many colours” (omnes colores), or “peacock’s tail” (cauda pavonis), lead to the one white colour that contains all colours.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶334 (pdf p245)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "At this moment something in the nature of a miracle occurs: the material solution loses its earthy heaviness, and solvent and solute together pass into a higher state immediately following the cauda pavonis, namely the albedo.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶434 (pdf p231)"
+     },
+     "voice": "Jung"
+    }
+   ]
+  }
+ },
+ "operations": [
+  {
+   "id": "calcinatio",
+   "name": "Calcinatio",
+   "line": "Burning until the spirit is driven out; the ash that remains is named the end-product.",
+   "quotes": [
+    {
+     "text": "As the expulsion of the spirit was effected by various kinds of burning (combustio, adustio, calcinatio, assatio, sublimatio, incineratio, etc.), it was natural to call the end-product “ash”",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶247 (pdf p145)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "In other words, the ash is the spirit that dwells in the glorified body.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶247 (pdf p145)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "Salt as much as ash is a synonym for the albedo (or dealbatio), and is identical with “the white stone, the white sun, the full moon, the fruitful white earth, cleansed and calcined.”",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶320 (pdf p179)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "stage": "albedo",
+   "subjects": []
+  },
+  {
+   "id": "solutio",
+   "name": "Solutio",
+   "line": "Dissolution in the lunar or philosophical water, which is both the stone and its solvent.",
+   "quotes": [
+    {
+     "text": "During the solutio, separatio, and extractio the succus lunariae (juice of the moon-plant), blood, or aqua permanens is either applied or extracted.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶180 (pdf p113)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "For it is the picture of the first dissolution and coagulation and of the resultant second dissolution.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶400 (pdf p292)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "the material solution loses its earthy heaviness, and solvent and solute together pass into a higher state",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶434 (pdf p231)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "the philosophical water is the stone or the prima materia itself; but at the same time, it is also its solvent",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶337 (pdf p249)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "stage": "nigredo",
+   "subjects": [
+    {
+     "type": "family",
+     "id": "water"
+    }
+   ]
+  },
+  {
+   "id": "coagulatio",
+   "name": "Coagulatio",
+   "line": "The matter is made firm again; Jung reads the coagulating sulphur as turned inwards.",
+   "quotes": [
+    {
+     "text": "the coagulating sulphur, which in the corporal gold was turned outwards [extroversion], is turned inwards",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶134 (pdf p88)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "a fourth and fifth those of tincturing (tingere, colorare) and maturing (maturare).",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶138 (pdf p90)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "This leads to the true eclipse of the sun and one should put a rainbow on either side to suggest the peacock’s tail that then appears in the coagulation.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶400 (pdf p292)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "sulphur"
+    }
+   ]
+  },
+  {
+   "id": "sublimatio",
+   "name": "Sublimatio",
+   "line": "A white soul rises with the spirit, and is fixed only when the secret stone is added.",
+   "quotes": [
+    {
+     "text": "there germinates, through the mediation of the spirit, a shining white soul [anima candida] which flies up to heaven with the spirit",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶462 (pdf p365)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "But as regards the fixation and permanence of the soul and spirit at the end of the sublimation, this takes place when the secret stone is added, which cannot be grasped by the senses, but only by the intellect",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶462 (pdf p365)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "For the same reason the process of sublimation is known in Arabic alchemy as the “great south wind,” referring to the heating of the retort.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶473 (pdf p376)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": []
+  },
+  {
+   "id": "mortificatio",
+   "name": "Mortificatio",
+   "line": "The killing of the first poisonous stage: the slaying of the dragon, and the mutilation of the animal forms.",
+   "quotes": [
+    {
+     "text": "“Unless ye slay me” usually refers to the slaying of the dragon, the mortificatio of the first, dangerous, poisonous stage of the anima (= Mercurius), freed from her imprisonment in the prima materia.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶168 (pdf p106)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "The mortificatio, this time only in the form of a mutilation, is also performed on the lion, whose paws are cut off",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶169 (pdf p107)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "It signifies the overcoming of the old and obsolete as well as of the dangerous preliminary stages which are characterized by animal-symbols.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶169 (pdf p107)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "stage": "nigredo",
+   "subjects": []
+  },
+  {
+   "id": "separatio",
+   "name": "Separatio",
+   "line": "The elements are parted, the earth from the primal water, and composites return to their elements.",
+   "quotes": [
+    {
+     "text": "The painful conflict that begins with the nigredo or tenebrositas is described by the alchemists as the separatio or divisio elementorum, the solutio, calcinatio, incineratio, or as dismemberment of the body",
+     "cite": {
+      "work": "cw16",
+      "workTitle": "The Practice of Psychotherapy",
+      "locator": "¶398 (pdf p182)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "in column II, the earth is separated from the (primal) water as in the Book of Genesis, a favourite theme in alchemy",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶367 (pdf p273)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "in column I, the composite natures are decomposed or changed back into their initial elements",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶367 (pdf p273)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "stage": "nigredo",
+   "subjects": []
+  },
+  {
+   "id": "coniunctio",
+   "name": "Coniunctio",
+   "line": "The union of opposites; Jung says that when they unite all energy ceases and there is no more flow.",
+   "quotes": [
+    {
+     "text": "so, after the coniunctio oppositorum, deathlike stillness reigns.",
+     "cite": {
+      "work": "cw16",
+      "workTitle": "The Practice of Psychotherapy",
+      "locator": "¶467 (pdf p228)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "When the opposites unite, all energy ceases: there is no more flow.",
+     "cite": {
+      "work": "cw16",
+      "workTitle": "The Practice of Psychotherapy",
+      "locator": "¶467 (pdf p228)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": []
+  },
+  {
+   "id": "distillatio",
+   "name": "Distillatio",
+   "line": "One made from four, by distilling and subliming in a circle, so that the soul comes off in its purest state.",
+   "quotes": [
+    {
+     "text": "The production of one from four is the result of a process of distillation and sublimation which takes the so-called “circular” form",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶165 (pdf p148)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "so that the “soul” or “spirit” shall be extracted in its purest state.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶165 (pdf p148)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "Soul and spirit must be separated from the body, and this is equivalent to death",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶165 (pdf p149)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": []
+  },
+  {
+   "id": "circulatio",
+   "name": "Circulatio",
+   "line": "The wheel of the work: the rising and falling of vapours, and a rotation that is dynamic, not static.",
+   "quotes": [
+    {
+     "text": "It is to be noted that the wheel is a favourite symbol in alchemy for the circulating process, the circulatio.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶214 (pdf p184)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "By this is meant firstly the ascensus and descensus, for instance the ascending and descending birds symbolizing the precipitation of vapours",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶214 (pdf p184)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "The rotation motif indicates that the symbol of the circle is to be thought of not as static but as dynamic.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶283 (pdf p209)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "Michael Maier actually takes the opus circulatorium as an image of the sun’s course",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶469 (pdf p371)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": []
+  },
+  {
+   "id": "putrefactio",
+   "name": "Putrefactio",
+   "line": "The corruption of the matter, which Jung says is synonymous with the nigredo, the grave and death.",
+   "quotes": [
+    {
+     "text": "Then, it causes or signifies the putrefactio, “which in our day was never seen,” says the Rosarium",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶138 (pdf p89)"
+     },
+     "voice": "Jung quoting the Rosarium"
+    },
+    {
+     "text": "As the legend tells us, the picture represents the putrefactio, the corruption, the decay of a once living creature.",
+     "cite": {
+      "work": "cw16",
+      "workTitle": "The Practice of Psychotherapy",
+      "locator": "¶467 (pdf p228)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "The transformation is effected by putrefaction, which is synonymous with the nigredo, the grave, and death.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶714 (pdf p376)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "stage": "nigredo",
+   "subjects": []
+  }
+ ],
+ "matter": [
+  {
+   "id": "prima-materia",
+   "name": "The prima materia",
+   "line": "The starting matter, given in many forms; Jung says it sometimes coincides with the nigredo.",
+   "quotes": [
+    {
+     "text": "For one alchemist the prima materia was quicksilver, for others it was ore, iron, gold, lead, salt, sulphur, vinegar, water, air, fire, earth, blood, water of life, lapis, poison, spirit, cloud, sky, dew, shadow, sea, mother, moon",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶425 (pdf p319)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "That is why the prima materia sometimes coincides with the idea of the initial stage of the process, the nigredo.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶433 (pdf p324)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "In alchemy the egg stands for the chaos apprehended by the artifex, the prima materia containing the captive world-soul.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶306 (pdf p219)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "prima-materia"
+    }
+   ]
+  },
+  {
+   "id": "vessel",
+   "name": "The vessel",
+   "line": "The sealed vessel is the womb from which the stone is born, and Jung calls it a true symbol.",
+   "quotes": [
+    {
+     "text": "Another, no less important, idea is that of the Hermetic vessel (vas Hermetis), typified by the retorts or melting-furnaces that contained the substances to be transformed",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶338 (pdf p250)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "It is a kind of matrix or uterus from which the filius philosophorum, the miraculous stone, is to be born",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶338 (pdf p250)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "since the vessel is more a mystical idea, a true symbol",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶338 (pdf p250)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "The vas bene clausum (well-sealed vessel) is a precautionary measure very frequently mentioned in alchemy, and is the equivalent of the magic circle.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶219 (pdf p186)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "vessel"
+    }
+   ]
+  },
+  {
+   "id": "mercurius",
+   "name": "Mercurius",
+   "line": "Quicksilver and the world-creating spirit in matter: lowest as prima materia, highest as the stone.",
+   "quotes": [
+    {
+     "text": "In the alchemical hierarchy of gods Mercurius comes lowest as prima materia and highest as lapis philosophorum.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶84 (pdf p91)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "It then transpired that Hermes or Mercurius possessed a double nature, being a chthonic god of revelation and also the spirit of quicksilver, for which reason he was represented as a hermaphrodite",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶84 (pdf p91)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "When the alchemist speaks of Mercurius, on the face of it he means quicksilver, but inwardly he means the world-creating spirit concealed or imprisoned in matter.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶404 (pdf p298)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "mercurius"
+    }
+   ]
+  },
+  {
+   "id": "sulphur-and-salt",
+   "name": "Sulphur and salt",
+   "line": "Sulphur is the burning, active principle and salt the cosmic, lunar and feminine one; Mercurius partakes of both.",
+   "quotes": [
+    {
+     "text": "on the one hand it is the prima materia, and in this form it is burning and corrosive (adurens)",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶134 (pdf p88)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "In philosophical alchemy, salt is a cosmic principle. According to its position in the quaternity, it is correlated with the feminine, lunar side and with the upper, light half.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶240 (pdf p141)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "the central figure, Mercurius, is by nature androgynous and thus partakes both of the masculine red sulphur and of the lunar salt.",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶235 (pdf p138)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "sulphur"
+    },
+    {
+     "type": "family",
+     "id": "salt"
+    }
+   ]
+  },
+  {
+   "id": "metals-and-planets",
+   "name": "Metals and planets",
+   "line": "The seven metals stand for the seven planets, and gold is the sun's image in the earth.",
+   "quotes": [
+    {
+     "text": "The seven are an obvious allusion to the seven planets and hence to the metals",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶410 (pdf p305)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "You shall take seven pieces of metal, of each and every metal as they are named after the planets",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶348 (pdf p260)"
+     },
+     "voice": "Jung quoting the Ethiopian treatise"
+    },
+    {
+     "text": "just as gold is the sun’s image in the earth (also called Deus terrenus), and God is known in the gold.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶445 (pdf p340)"
+     },
+     "voice": "Jung quoting Maier"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "sun"
+    },
+    {
+     "type": "family",
+     "id": "moon"
+    },
+    {
+     "type": "family",
+     "id": "saturn"
+    },
+    {
+     "type": "family",
+     "id": "mars"
+    },
+    {
+     "type": "family",
+     "id": "jupiter"
+    }
+   ]
+  },
+  {
+   "id": "the-stone",
+   "name": "The stone",
+   "line": "The lapis is often the prima materia as well as the goal; for Jung the Self is a lapis invisibilitatis.",
+   "quotes": [
+    {
+     "text": "The lapis philosophorum, for instance, is often the prima materia, or the means of producing the gold",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶335 (pdf p247)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "sometimes the philosophers’ stone, which, as hermaphrodite, contains both",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶335 (pdf p247)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "which in their turn lead to the lapis, i.e., the diamond whose prism contains all the hues of the rainbow.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶263 (pdf p205)"
+     },
+     "voice": "Jung"
+    },
+    {
+     "text": "I may define “self” as the totality of the conscious and unconscious psyche, but this totality transcends our vision; it is a veritable lapis invisibilitatis.",
+     "cite": {
+      "work": "cw12",
+      "workTitle": "Psychology and Alchemy",
+      "locator": "¶247 (pdf p200)"
+     },
+     "voice": "Jung"
+    }
+   ],
+   "subjects": [
+    {
+     "type": "family",
+     "id": "lapis"
+    }
+   ]
+  }
+ ],
+ "elements": {
+  "line": "The four elements, with the fourth position left open, and the fifth as the unity the four come to, not an element added to them.",
+  "quotes": [
+   {
+    "text": "There are always four elements, but often three of them are grouped together, with the fourth in a special position—sometimes earth, sometimes fire.",
+    "cite": {
+     "work": "cw12",
+     "workTitle": "Psychology and Alchemy",
+     "locator": "¶31 (pdf p56)"
+    }
+   },
+   {
+    "text": "In the chaos the elements are not united, they are merely coexistent and have to be combined through the alchemical procedure. They are even hostile to one another and will not unite of their own accord.",
+    "cite": {
+     "work": "cw09ii",
+     "workTitle": "Aion: Researches into the Phenomenology of the Self",
+     "locator": "¶375 (pdf p249)"
+    }
+   },
+   {
+    "text": "As already mentioned, the constitution of the lapis rests on the union of the four elements",
+    "cite": {
+     "work": "cw09ii",
+     "workTitle": "Aion: Researches into the Phenomenology of the Self",
+     "locator": "¶376 (pdf p249)"
+    }
+   },
+   {
+    "text": "Dorn breaks with the whole alchemical tradition inasmuch as he adopts the rigidly Christian standpoint that Three is One but Four is not, because Four attains to unity in the quinta essentia.",
+    "cite": {
+     "work": "cw11",
+     "workTitle": "Psychology and Religion: West and East",
+     "locator": "¶104 (pdf p59)"
+    }
+   },
+   {
+    "text": "The latter is not merely a fifth element added on to the four known ones, but represents their realized unity of existence.",
+    "cite": {
+     "work": "vonzfranz-number-time",
+     "workTitle": "Number and Time",
+     "locator": "pdf p77",
+     "print": "65"
+    },
+    "voice": "von Franz"
+   }
+  ],
+  "subjects": [
+   {
+    "type": "family",
+    "id": "fire"
+   },
+   {
+    "type": "family",
+    "id": "air"
+   },
+   {
+    "type": "family",
+    "id": "water"
+   },
+   {
+    "type": "family",
+    "id": "earth-element"
+   },
+   {
+    "type": "family",
+    "id": "quintessence"
+   }
+  ]
+ }
+}

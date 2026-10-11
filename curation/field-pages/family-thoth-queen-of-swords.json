@@ -1,0 +1,83 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-queen-of-swords",
+ "line": "Crowley's Queen of Swords: the Hé of the Name, the watery part of Air, and a span from Virgo to Libra.",
+ "sections": [
+  {
+   "id": "the-court-and-its-element",
+   "title": "The court and its element",
+   "line": "Crowley names the Queens by the letter Hé of the Name.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queens represent the letter Hé of the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queen of Swords represents the watery part of Air, the elasticity of that element, and its power of transmission.",
+     "page": 159,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-span-in-the-zodiac",
+   "title": "Its span in the Zodiac",
+   "line": "The text gives the 21st degree of Virgo as the start and the 20th of Libra as the end. Crowley's attribution table (pdf p274) gives 20 degrees at both ends. The page follows the text, and the table's figures are not quoted.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "She rules from the 21St degree of Virgo to the 20th degree of Libra.",
+     "page": 159,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-character",
+   "title": "Its character as Crowley describes it",
+   "line": "Crowley's description of the figure and the card, in his own words.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The person symbolized by this card should be intensely perceptive, a keen observer, a subtle interpreter, an intense individualist, swift and accurate at recording ideas; in action confident, in spirit gracious and just.",
+     "page": 159,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-swords"
+  },
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "virgo"
+  },
+  {
+   "type": "family",
+   "id": "libra"
+  }
+ ]
+}

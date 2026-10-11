@@ -1,0 +1,109 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "scorpio",
+ "line": "Burt's chapter on Scorpio, with Jung's seminar on the sun's self-sacrifice.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Scorpio, pdf pp. 295–338. Her account of the descent, the transformation and the rulers.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio).",
+     "page": 295,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The mundane rulers of Scorpio are Mars and Pluto.",
+     "page": 295,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Scorpio’s work is to transform, to change and refine the form.",
+     "page": 301,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Taurus is structured Earth and Scorpio is amorphous,",
+     "page": 301,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Scorpio, pdf pp. 295–338. The inner shadow, the unconscious and the uroboros.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Is he dealing with his own inner shadow (the karmic residue at the depths of his own Eighth House)",
+     "page": 296,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Pluto rules the unconscious depths of the Scorpio or Eighth House personality, with its residue of instinctual drives, emotional attachments, and compulsive-obsessive tendencies carried forward from past lives to the present.",
+     "page": 295,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "According to Alice Bailey it is Mars, not Pluto, that functions as esoteric ruler of Scorpio.",
+     "page": 295,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The Uroboros (the snake biting its own tail), which was the alchemical symbol of the transformation,",
+     "page": 297,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung on the scorpion and the sun in his seminar.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The fatal self-sacrifice of the sun.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "There is a legend that when the scorpion is surrounded by fire it kills itself.",
+     "page": 435,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "They made the scales by cutting off the claws of the Scorpion.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "taurus"
+  }
+ ]
+}

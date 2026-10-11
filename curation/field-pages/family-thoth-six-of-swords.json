@@ -1,0 +1,73 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-six-of-swords",
+ "line": "Six of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and planet, as the chapter gives them (pdf 178, 218).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Six of Swords is called Science.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Mercury, in Aquarius, represents the celestial Energy",
+     "page": 218,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "Tiphareth is the airy sephira in the Ace of Swords chapter (pdf 211) and the Sixes' sephira (pdf 177).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ruach is centred in the airy Sephira, Tiphareth, who is the Son,",
+     "page": 211,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Tiphareth.",
+     "page": 177,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His account of the card's balance.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The perfect balance of all mental and moral faculties, hardly won",
+     "page": 218,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-swords"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "six"
+  }
+ ]
+}

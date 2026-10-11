@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "geburah",
+ "line": "Crowley gives Geburah the number 5 and Mars on its lowest plane; Jung does not take the sephira up by name in his own text.",
+ "sections": [
+  {
+   "id": "crowley-fives",
+   "title": "Crowley's Fives",
+   "line": "Crowley refers the Five cards to Geburah because they are Fives, and gives the Five of Wands to its suit of Fire.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "and to the Sephira Geburah because it is a Five.",
+     "page": 40,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Number Five, Geburah, in the suit of Earth,",
+     "page": 231,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to Geburah of the suit of Fire.",
+     "page": 189,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "mars-indirectly",
+   "title": "Mars, indirectly",
+   "line": "Crowley does not name Mars as Geburah's planet. He ties Mars to the lowest plane of Geburah in the Seven of Cups chapter. The Five of Wands is ruled by Saturn and Leo as a card, not as Geburah.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "manifestation on the lowest plane of Geburah,",
+     "page": 202,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is ruled also by Saturn and Leo.",
+     "page": 189,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-din-and-the-notes",
+   "title": "Jung's din and his notes",
+   "line": "The other side of the Tree is din in Jung's text, not Geburah. The name Geburah appears in Jung's cw14 notes, where he quotes Kabbalistic treatises.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice)",
+     "para": 105,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "family",
+   "id": "chesed"
+  }
+ ]
+}

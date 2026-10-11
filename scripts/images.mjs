@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Wikimedia Commons image fetcher: hero images for archetypes + families, selected occurrences.
 // Usage: node scripts/images.mjs [--only archetypes|families|occurrences|theoretics] [--id a,b] [--redo a,b] [--dry]
+//        node scripts/images.mjs --family-batch [--workers 6]   (parallel lanes, shared request gate)
 //        node scripts/images.mjs --remeta   (refresh baked title/credit/license from Commons; bytes untouched)
 // Re-runnable: already-downloaded ids are skipped (their ImageRef lives in public/data/images.json).
 import fs from 'node:fs';
@@ -8,15 +9,16 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { ART, BAD_TITLE, BAD_CATS, fold, acceptFallback } from './lib/image-fallback.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const API = 'https://commons.wikimedia.org/w/api.php';
 const UA = 'ArchetypalEarth/0.1 (local research build)';
 const CACHE = path.join(ROOT, '.cache', 'commons');
 const IMG_DIR = path.join(ROOT, 'public', 'img');
-const OUT = path.join(ROOT, 'public', 'data', 'images.json');
+const OUT = process.env.IMAGES_OUT ? path.resolve(process.env.IMAGES_OUT) : path.join(ROOT, 'public', 'data', 'images.json');
 const FIELD = path.join(ROOT, 'public', 'data', 'field.json');
-const QUERIES = path.join(ROOT, 'curation', 'image-queries.json');
+const QUERIES = process.env.IMAGE_QUERIES ? path.resolve(process.env.IMAGE_QUERIES) : path.join(ROOT, 'curation', 'image-queries.json');
 // raised 175 -> 200 (2026-10 audit): the shipped tree already measured 175.8MB,
 // so the old guard blocked every refetch; replaces are size-neutral swaps.
 // raised 200 -> 240 (2026-10 coverage round): the owner asked that every family
@@ -59,13 +61,22 @@ const log = [];
 const say = (m) => { console.log(m); log.push(m); };
 
 // ---------- http ----------
-let lastReq = 0;
-let interval = 5000; // adaptive: Wikimedia's edge rate limiter answers 429 + Retry-After when we are too eager
+// One shared gate for every request. Parallel workers wait their turn to *start*
+// a request, then overlap the body transfer — that is the throughput win, not
+// "wait 25s between plates". Commons throttles the IP; lanes share the channel.
+let interval = 1200; // ms between request starts; adapts on 429 / success streaks
 let okStreak = 0;
-async function throttle() {
-  const wait = lastReq + interval - Date.now();
-  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
-  lastReq = Date.now();
+let gate = Promise.resolve();
+let nextSlot = 0;
+function throttle() {
+  const run = gate.then(async () => {
+    const wait = Math.max(0, nextSlot - Date.now());
+    if (wait) await new Promise((r) => setTimeout(r, wait));
+    nextSlot = Date.now() + interval;
+  });
+  // Keep the chain alive even if a waiter throws.
+  gate = run.catch(() => {});
+  return run;
 }
 async function http(url, { binary = false, tries = 6 } = {}) {
   for (let i = 0; i < tries; i++) {
@@ -74,21 +85,19 @@ async function http(url, { binary = false, tries = 6 } = {}) {
     try {
       res = await fetch(url, { headers: { 'User-Agent': UA, Accept: binary ? 'image/*' : 'application/json' } });
     } catch (e) {
-      await new Promise((r) => setTimeout(r, 2000 * (i + 1)));
+      await new Promise((r) => setTimeout(r, 1500 * (i + 1)));
       continue;
     }
     if (res.status === 429 || res.status >= 500) {
-      // Cap Retry-After: Commons occasionally answers 600s; sitting idle that long
-      // stalls the whole field wave. Slow the interval and retry sooner.
-      const ra = Math.min(Math.max(Number(res.headers.get('retry-after')) || 0, 8), 90);
-      interval = Math.min(interval * 1.5, 8000);
+      const ra = Math.min(Math.max(Number(res.headers.get('retry-after')) || 0, 5), 45);
+      interval = Math.min(Math.round(interval * 1.35), 3500);
       okStreak = 0;
       say(`  http ${res.status}, backing off ${ra}s (interval now ${Math.round(interval)}ms)`);
       await new Promise((r) => setTimeout(r, ra * 1000));
       continue;
     }
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-    if (++okStreak >= 15) { interval = Math.max(1200, interval * 0.9); okStreak = 0; }
+    if (++okStreak >= 20) { interval = Math.max(550, Math.round(interval * 0.92)); okStreak = 0; }
     return binary ? Buffer.from(await res.arrayBuffer()) : res.json();
   }
   throw new Error(`gave up on ${url}`);
@@ -252,9 +261,6 @@ function licenseOk(l) {
   // "No restrictions" is Commons' marker for no known copyright restrictions (public domain)
   return /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution|no restrictions)/i.test(l);
 }
-const BAD_TITLE = /\b(logo|icon|flag|map|maps|diagram|chart|graph|coat of arms|stamp|banner|screenshot|template|poster|pdf|djvu|index|contents|cover|title ?page|signature|autograph|catalogue|wikimania|selfie|bookplate|invoice|passport|typeface|font|sketch of)\b|\b(IMG|DSC|DSCN|DSCF|PXL|P\d{7}|SAM)[_ -]?\d{3,}/i;
-const BAD_CATS = /(portraits of living|photographs by|wikimania|maps of|diagrams|logos|flags of|coats of arms|postage stamps|selfies|banknotes|coins of the|bookplates|signatures|text pages|book covers|title pages)/i;
-const ART = /(manuscript|codex|miniature|illuminat|engraving|woodcut|etching|lithograph|plate|fresco|relief|sculpture|statue|statuette|bronze|marble|mosaic|vase|amphora|krater|lekythos|painting|oil on|tempera|tapestry|emblem|alchem|stele|tomb|sarcophag|papyrus|cylinder seal|intaglio|gem|historical images|paintings|sculptures|woodcuts|engravings|museum|temple|cathedral|miniatures|drawings|reliefs|artwork|icon|ivory|terracotta|bas-relief)/i;
 const STOP = new Set(['the', 'a', 'an', 'of', 'in', 'on', 'and', 'or', 'with', 'for', 'to', 'by', 'from', 'at', 'as', 'is', 'file', 'jpg', 'jpeg', 'les', 'des', 'du', 'de', 'la', 'le', 'und', 'der', 'die', 'das']);
 // Words that name a class of object, not which object. An automatic search may
 // use them, but they do not by themselves prove the file is the named thing.
@@ -262,9 +268,6 @@ const GENERIC = new Set(('relief stone stones detail bronze marble gold ivory al
 // Internet Archive / Flickr book-scan filenames, and titles that are the book rather than the object.
 const BOOK_SCAN = /\(\d{4}\)\s*\(\d{5,}\)|\b(an introduction to|a guide to|acts and proceedings|outlines from the|a comparative account of|catalogue of the|catalog of the)\b/i;
 
-function fold(s) {
-  return String(s ?? '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/cauldron/g, 'caldron');
-}
 // Same object, other spelling or the name this corpus and Commons do not share.
 const ALIAS = {
   kore: ['persephone'],
@@ -329,7 +332,9 @@ function identityOk(c, q, { narrative = false } = {}) {
 function clipQuery(q) {
   return String(q).replace(/[…]+/g, ' ').replace(/↔/g, ' ').replace(/\s+/g, ' ').trim().split(/\s+/).slice(0, 12).join(' ');
 }
-function autoSpec(name, { museum = false, narrative = false, family = '' } = {}) {
+// names: the words an automatic pick must carry as whole words (acceptFallback). A node passes its
+// name and aliases; a passage (occurrence) defaults to its distinctive words.
+function autoSpec(name, { museum = false, narrative = false, family = '', names = null } = {}) {
   const cleaned = clipQuery(name);
   const toks = distinctiveTokens(cleaned);
   const short = clipQuery(toks.slice(0, 4).join(' '));
@@ -347,7 +352,8 @@ function autoSpec(name, { museum = false, narrative = false, family = '' } = {})
   if (aliased !== cleaned) queries.push(clipQuery(aliased));
   const uniq = [...new Set(queries.filter(Boolean))];
   if (!uniq.length) return null;
-  return { queries: uniq, relaxed: true, allowBad: true, auto: true, identity: cleaned, narrative };
+  const nameList = names?.length ? names : narrative ? toks : [cleaned];
+  return { queries: uniq, relaxed: true, allowBad: true, auto: true, identity: cleaned, narrative, names: nameList };
 }
 
 function evaluate(c, q, ctx) {
@@ -391,7 +397,85 @@ async function searchOne(q, width, limit = 28) {
     iiextmetadatafilter: 'Artist|LicenseShortName|ImageDescription|Categories|ObjectName|Credit',
   });
   const pages = (j.query?.pages || []).slice().sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-  return pages.map((p, i) => toCandidate(p, i, width)).filter(Boolean);
+  return pages.map((p, i) => {
+    const c = toCandidate(p, i, width);
+    if (c) c.source = 'commons';
+    return c;
+  }).filter(Boolean);
+}
+
+// Second open-licence channels — same PD/CC0 bar as licenseOk, different rate
+// limits. Used when Commons is empty or throttled for a family/occurrence.
+async function searchMet(q, limit = 12) {
+  const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1.1/search?${new URLSearchParams({ q })}`;
+  let j;
+  try { j = await http(searchUrl); } catch { return []; }
+  const ids = (j.objectIDs || []).slice(0, Math.min(limit * 3, 40));
+  const out = [];
+  for (const id of ids) {
+    if (out.length >= limit) break;
+    let o;
+    try { o = await http(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`); } catch { continue; }
+    if (!o?.isPublicDomain || !o.primaryImage) continue;
+    const title = `Met:${id}`;
+    out.push({
+      title,
+      rank: out.length,
+      mime: 'image/jpeg',
+      width: 2000,
+      height: 2000,
+      url: o.primaryImage,
+      thumburl: o.primaryImageSmall || o.primaryImage,
+      page: o.objectURL || `https://www.metmuseum.org/art/collection/search/${id}`,
+      license: 'CC0',
+      artist: o.artistDisplayName || 'Metropolitan Museum of Art',
+      credit: [o.artistDisplayName, o.creditLine, 'The Metropolitan Museum of Art'].filter(Boolean).join('; '),
+      descr: o.title || '',
+      objectName: o.title || '',
+      cats: [o.department, o.objectName, o.culture].filter(Boolean),
+      source: 'met',
+    });
+  }
+  return out;
+}
+
+async function searchCleveland(q, limit = 12) {
+  const url = `https://openaccess-api.clevelandart.org/api/artworks/?${new URLSearchParams({
+    q, has_image: '1', cc0: '1', limit: String(Math.min(limit, 20)),
+  })}`;
+  let j;
+  try { j = await http(url); } catch { return []; }
+  const out = [];
+  for (const r of j.data || []) {
+    if (out.length >= limit) break;
+    const img = r.images?.web?.url || r.images?.print?.url || r.images?.full?.url;
+    if (!img) continue;
+    const id = r.accession_number || r.id;
+    const title = `CMA:${id}`;
+    out.push({
+      title,
+      rank: out.length,
+      mime: 'image/jpeg',
+      width: r.images?.web?.width || 1200,
+      height: r.images?.web?.height || 1200,
+      url: img,
+      thumburl: r.images?.web?.url || img,
+      page: r.url || `https://www.clevelandart.org/art/${id}`,
+      license: 'CC0',
+      artist: r.creators?.[0]?.description || 'Cleveland Museum of Art',
+      credit: [r.creators?.[0]?.description, r.credit_line, 'Cleveland Museum of Art'].filter(Boolean).join('; '),
+      descr: r.title || '',
+      objectName: r.title || '',
+      cats: [r.type, r.technique].filter(Boolean),
+      source: 'cleveland',
+    });
+  }
+  return out;
+}
+
+async function searchMuseums(q, limit = 16) {
+  const [met, cma] = await Promise.all([searchMet(q, Math.ceil(limit / 2)), searchCleveland(q, Math.ceil(limit / 2))]);
+  return [...met, ...cma];
 }
 
 async function fetchPinned(title, width) {
@@ -441,10 +525,14 @@ function thumbUrl(cand, w) {
   return m ? `${m[1]}/thumb/${m[2]}/${m[3]}/${w}px-${m[3]}` : base;
 }
 function mainUrl(cand, w) {
+  // Museum / non-Commons candidates carry a direct image URL — never FilePath.
+  if (cand.source && cand.source !== 'commons') {
+    return cleanUrl(cand.thumburl || cand.url);
+  }
   // Special:FilePath serves a width-limited copy through commons.wikimedia.org
   // and is kinder under rate limits than hammering thumb.wikimedia.org / originals.
-  const title = String(cand.title || '').replace(/^File:/i, '');
-  if (title) {
+  if (/^File:/i.test(cand.title || '')) {
+    const title = String(cand.title).replace(/^File:/i, '');
     return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(title)}?width=${w}`;
   }
   const apiThumb = cleanUrl(cand.thumburl);
@@ -476,6 +564,7 @@ async function resolveFor(group, id, spec, ctx) {
       const ev = evaluate(c, q, { ...ctx, require: spec.require, exclude: spec.exclude, allowPage: spec.allowPage, allowBad: spec.allowBad, relaxed: spec.relaxed });
       if (!ev.ok) continue;
       if (spec.auto && !identityOk(c, spec.identity || q, { narrative: !!spec.narrative })) continue;
+      if (spec.auto && !acceptFallback(c, { names: spec.names, score: ev.score }).ok) continue;
       // 60 (was 72): full-field coverage accepts a close historical plate when
       // the passage itself has no Commons photograph; uniqueness is still gated
       // by usedTitles, so two occurrences never share a file.
@@ -488,7 +577,8 @@ async function resolveFor(group, id, spec, ctx) {
   // Close-match pass for occurrences: when the passage has no Commons photograph,
   // take a unique art plate that matches the family / distinctive tokens without
   // the strict identityOk gate. Still refuses usedTitles (uniqueness) and junk.
-  if (!best && spec.narrative) {
+  // A node whose curated spec has `require` never takes a close match: a miss is recorded.
+  if (!best && spec.narrative && !spec.require?.length) {
     for (const q of spec.queries) {
       let cands;
       try { cands = await searchOne(q, width); } catch { continue; }
@@ -501,12 +591,15 @@ async function resolveFor(group, id, spec, ctx) {
         // Close-match is for historical plates, not tourist photos of the word.
         if (/\b(geograph|photograph|photo by|flickr|selfie|wildlife|harbour|harbor|moored)\b/i.test(c.title)) continue;
         if (/\b(20[0-2]\d)\b/.test(c.title) && !ART.test(fold(c.title))) continue;
+        if (!acceptFallback(c, { names: spec.names || distinctiveTokens(q), score: ev.score }).ok) continue;
         const score = ev.score - 8; // prefer identity hits when both exist
         if (!best || score > best.score) best = { cand: c, score, query: `${q} [close]` };
       }
       if (best && best.score >= 78) break;
     }
   }
+  // Every automatic pick is logged on one line, so a wrong subject can be found by its title.
+  if (best && spec.auto) say(`  auto pick: "${best.cand.title}" score ${Math.round(best.score)} q="${best.query}"`);
   return best || { error: 'no acceptable candidate' };
 }
 
@@ -566,25 +659,28 @@ async function download(group, id, spec, pick) {
 
 // Ids this process pruned (skip / redo) — merge-on-save must not resurrect them.
 const deleted = new Set(); // `${group}/${id}`
+let saveChain = Promise.resolve();
 function save() {
-  // Concurrent --only runs used to clobber each other: each loaded the manifest
-  // once and wrote the whole file, dropping ids another process had just added.
-  // Merge with disk on every write; in-memory wins per id; honour our deletions.
-  let disk = {};
-  try { disk = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { /* fresh */ }
-  const out = { ...disk };
-  const groupKeys = new Set([...GROUPS, ...Object.keys(disk), ...Object.keys(images)]);
-  for (const g of groupKeys) {
-    if (g.startsWith('_')) { out[g] = disk[g] ?? images[g]; continue; }
-    out[g] = { ...(disk[g] || {}), ...(images[g] || {}) };
-    for (const id of Object.keys(out[g])) {
-      if (deleted.has(`${g}/${id}`)) delete out[g][id];
+  // Serialize writes across parallel family workers; still merge-on-save so a
+  // foreign process cannot clobber ids we have not touched.
+  saveChain = saveChain.then(() => {
+    let disk = {};
+    try { disk = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { /* fresh */ }
+    const out = { ...disk };
+    const groupKeys = new Set([...GROUPS, ...Object.keys(disk), ...Object.keys(images)]);
+    for (const g of groupKeys) {
+      if (g.startsWith('_')) { out[g] = disk[g] ?? images[g]; continue; }
+      out[g] = { ...(disk[g] || {}), ...(images[g] || {}) };
+      for (const id of Object.keys(out[g])) {
+        if (deleted.has(`${g}/${id}`)) delete out[g][id];
+      }
+      images[g] = out[g];
     }
-    images[g] = out[g];
-  }
-  const tmp = `${OUT}.tmp`;
-  fs.writeFileSync(tmp, JSON.stringify(out, null, 1) + '\n');
-  fs.renameSync(tmp, OUT);
+    const tmp = `${OUT}.tmp`;
+    fs.writeFileSync(tmp, JSON.stringify(out, null, 1) + '\n');
+    fs.renameSync(tmp, OUT);
+  }).catch((e) => say(`save failed: ${e.message}`));
+  return saveChain;
 }
 
 // ---------- --remeta: refresh baked metadata without touching bytes ----------
@@ -622,10 +718,11 @@ const groups = only ? [only] : GROUPS;
 if (remeta) { await remetaAll(); process.exit(0); }
 const usedTitles = new Set(Object.values(images).flatMap((g) => Object.values(g)).map((r) => r._file).filter(Boolean));
 
-// --family-batch: one (or few) Commons searches per family, then unique plates
-// assigned to every unplated occurrence of that family. Cuts API calls by ~10–50×
-// vs per-id search — required to finish 2.6k instances under Commons rate limits.
+// --family-batch [--workers N]: N lanes share one request gate. Each lane takes
+// a family, builds a Commons pool, assigns unique plates, downloads. Throughput
+// comes from overlapping transfers, not from waiting 25s between plates.
 const familyBatch = args.includes('--family-batch');
+const WORKERS = Math.max(1, Math.min(12, Number(opt('--workers') || 4)));
 async function runFamilyBatch() {
   const width = WIDTH.occurrences;
   const byFam = new Map();
@@ -635,103 +732,199 @@ async function runFamilyBatch() {
     if (!byFam.has(fid)) byFam.set(fid, []);
     byFam.get(fid).push(o);
   }
-  say(`family-batch: ${[...byFam.values()].reduce((n, a) => n + a.length, 0)} unplated across ${byFam.size} families`);
+  const famQueue = [...byFam.entries()].sort((a, b) => b[1].length - a[1].length);
+  const unplated = famQueue.reduce((n, [, a]) => n + a.length, 0);
+  say(`family-batch: ${unplated} unplated across ${famQueue.length} families; ${WORKERS} workers on one request gate`);
   const missing = [];
   let got = 0;
+  let stop = false;
+  const titleLock = { chain: Promise.resolve() };
+  function claimTitle(title) {
+    let ok = false;
+    titleLock.chain = titleLock.chain.then(() => {
+      if (usedTitles.has(title)) { ok = false; return; }
+      usedTitles.add(title);
+      ok = true;
+    });
+    return titleLock.chain.then(() => ok);
+  }
+  function releaseTitle(title) {
+    titleLock.chain = titleLock.chain.then(() => { usedTitles.delete(title); });
+    return titleLock.chain;
+  }
+  // Synonyms keep depleted families (serpent/tree/…) finding unused Commons files
+  // after the first wave has claimed the obvious titles.
+  const FAM_ALIAS = {
+    serpent: ['snake', 'naja', 'ouroboros', 'python', 'cobra', 'asp'],
+    tree: ['oak', 'pine', 'cedar', 'yggdrasil', 'arbor', 'world tree'],
+    'mother-goddess': ['mother goddess', 'magna mater', 'demeter', 'isis'],
+    'god-image': ['god image', 'deus', 'christ pantocrator', 'yhwh'],
+    coniunctio: ['coniunctio', 'chemical wedding', 'hieros gamos', 'rosarium'],
+    quaternity: ['quaternity', 'four evangelists', 'tetramorph', 'mandala'],
+    fish: ['fish', 'ichthys', 'vesica', 'piscis'],
+    fire: ['fire', 'flame', 'ignis', 'phoenix'],
+    water: ['water', 'fountain', 'fons', 'aqua'],
+    anthropos: ['anthropos', 'primordial man', 'adam kadmon', 'purusha'],
+  };
   const artQs = (fam) => {
     const name = String(fam).replace(/[-_↔]/g, ' ').trim();
-    // Few broad searches at gsrlimit 50 — eight narrow searches burn the rate budget.
-    return [
+    const aliases = FAM_ALIAS[fam] || FAM_ALIAS[name] || [];
+    const qs = [
       `${name} (manuscript OR engraving OR woodcut OR relief OR painting OR alchemy)`,
       `${name} art`,
       name,
-    ].filter((q) => q.replace(/\s+/g, '').length > 2);
+      ...aliases.map((a) => `${a} (engraving OR woodcut OR manuscript OR relief)`),
+      ...aliases,
+    ];
+    return [...new Set(qs.filter((q) => q.replace(/\s+/g, '').length > 2))];
   };
   async function poolFor(fam, need) {
     const pool = [];
     const seen = new Set();
+    const famToks = [
+      ...distinctiveTokens(String(fam).replace(/[-_↔]/g, ' ')),
+      ...(FAM_ALIAS[fam] || []).flatMap((a) => distinctiveTokens(a)),
+    ];
+    const accept = (c, q, bonus = 0) => {
+      if (seen.has(c.title) || usedTitles.has(c.title)) return;
+      const ev = evaluate(c, q, { used: usedTitles, allowBad: true, relaxed: true, allowPage: true });
+      if (!ev.ok || ev.score < 50) return;
+      const hay = fold(`${c.title} ${c.descr} ${c.cats.join(' ')}`);
+      if (!ART.test(hay) && c.source === 'commons') return;
+      if (famToks.length && !famToks.some((t) => t.length >= 4 && hasTok(hay, t))) return;
+      if (/\b(geograph|flickr|selfie|wildlife|harbour|harbor|moored|park|borrego|sculpture by|great-wall|van gogh|starry|dolní|vestonice|gravettian)\b/i.test(c.title)) return;
+      if (c.source === 'commons' && /\b(20[01]\d|202\d)\b/.test(c.title) && !/\b(manuscript|engraving|woodcut|fresco|painting)\b/i.test(c.title)) return;
+      if (famToks.includes('serpent') && /\b(forveille|ophicleide|bass horn|serpentone|in b-flat|church figure playing)\b/i.test(c.title)) return;
+      seen.add(c.title);
+      pool.push({ cand: c, score: ev.score + bonus, query: `${q}${c.source && c.source !== 'commons' ? ` [${c.source}]` : ''}` });
+    };
     for (const q of artQs(fam)) {
       if (pool.length >= need) break;
       let cands;
       try { cands = await searchOne(q, width, 50); } catch (e) { say(`  search failed (${q}): ${e.message}`); continue; }
-      const famToks = distinctiveTokens(String(fam).replace(/[-_↔]/g, ' '));
-      for (const c of cands) {
-        if (seen.has(c.title) || usedTitles.has(c.title)) continue;
-        const ev = evaluate(c, q, { used: usedTitles, allowBad: true, relaxed: true, allowPage: true });
-        if (!ev.ok || ev.score < 55) continue;
-        const hay = fold(`${c.title} ${c.descr} ${c.cats.join(' ')}`);
-        if (!ART.test(hay)) continue;
-        // Family name (or a distinctive stem) must appear — stops Starry Night
-        // landing in the tree pool and musical "serpent" horns in the snake pool.
-        if (famToks.length && !famToks.some((t) => t.length >= 4 && hasTok(hay, t))) continue;
-        if (/\b(geograph|flickr|selfie|wildlife|harbour|harbor|moored|park|borrego|sculpture by|great-wall|van gogh|starry)\b/i.test(c.title)) continue;
-        if (/\b(20[01]\d|202\d)\b/.test(c.title) && !/\b(manuscript|engraving|woodcut|fresco|painting)\b/i.test(c.title)) continue;
-        // Musical serpent / ophicleide is not the animal.
-        if (famToks.includes('serpent') && /\b(forveille|ophicleide|bass horn|in b-flat|in c\b|church figure playing)\b/i.test(c.title)) continue;
-        seen.add(c.title);
-        pool.push({ cand: c, score: ev.score, query: q });
-      }
+      for (const c of cands) accept(c, q);
+    }
+    // Fill short Commons pools from Met + Cleveland (separate rate limits).
+    if (pool.length < need) {
+      const q = String(fam).replace(/[-_↔]/g, ' ').trim();
+      try {
+        const museum = await searchMuseums(q, need - pool.length + 4);
+        for (const c of museum) accept(c, q, 2);
+      } catch (e) { say(`  museum search failed (${q}): ${e.message}`); }
     }
     pool.sort((a, b) => b.score - a.score);
     return pool;
   }
-  for (const [fam, occs] of [...byFam.entries()].sort((a, b) => b[1].length - a[1].length)) {
-    if (dir_over_budget()) { say('image budget reached; stopping'); break; }
-    say(`family ${fam} (${occs.length} unplated)`);
-    let pool = await poolFor(fam, Math.min(occs.length + 8, 80));
-    say(`  pool ${pool.length}`);
-    for (const o of occs) {
-      if (dir_over_budget()) break;
-      const spec = (queries.occurrences || {})[o.id];
-      if (spec?.skip) continue;
-      if (spec?.pin) {
-        let pick;
-        try { pick = await resolveFor('occurrences', o.id, spec, { used: usedTitles }); } catch (e) { missing.push(`${o.id}: ${e.message}`); continue; }
-        if (pick.error) { missing.push(`${o.id}: ${pick.error}`); continue; }
-        try {
-          const ref = await download('occurrences', o.id, spec, pick);
-          ref._file = pick.cand.title;
-          images.occurrences[o.id] = ref;
-          usedTitles.add(pick.cand.title);
-          got++;
-          say(`  ${o.id} -> ${pick.cand.title} (pin)`);
-          save();
-        } catch (e) { missing.push(`${o.id}: download ${e.message}`); }
-        continue;
-      }
-      // Prefer a pool plate whose title shares a distinctive token with the occurrence.
-      const name = o.label || o.title || o.id;
-      const toks = distinctiveTokens(name);
-      let idx = pool.findIndex((p) => toks.some((t) => t.length >= 4 && hasTok(fold(p.cand.title + ' ' + p.cand.objectName), t)));
-      if (idx < 0) idx = 0;
-      if (!pool.length) {
-        // replenish once more with broader queries
-        pool = await poolFor(fam, 40);
-        idx = 0;
-      }
-      if (!pool.length) { missing.push(`${o.id}: empty family pool`); continue; }
-      if (idx >= pool.length) idx = 0;
-      const [pick] = pool.splice(idx, 1);
+  async function plateOne(o, pool, fam) {
+    const spec = (queries.occurrences || {})[o.id];
+    if (spec?.skip) return;
+    if (spec?.pin) {
+      let pick;
+      try { pick = await resolveFor('occurrences', o.id, spec, { used: usedTitles }); } catch (e) { missing.push(`${o.id}: ${e.message}`); return; }
+      if (pick.error) { missing.push(`${o.id}: ${pick.error}`); return; }
+      if (!(await claimTitle(pick.cand.title))) { missing.push(`${o.id}: pin already used`); return; }
       try {
-        const ref = await download('occurrences', o.id, { title: name, relaxed: true }, pick);
+        const ref = await download('occurrences', o.id, spec, pick);
         ref._file = pick.cand.title;
         images.occurrences[o.id] = ref;
-        usedTitles.add(pick.cand.title);
         got++;
-        say(`  ${o.id} -> ${pick.cand.title} (score ${Math.round(pick.score)})`);
-        save();
-        // Pace downloads: after heavy throttle, 25s between plates keeps 429s rare.
-        await new Promise((r) => setTimeout(r, 25000));
+        say(`  ${o.id} -> ${pick.cand.title} (pin)`);
+        await save();
       } catch (e) {
+        await releaseTitle(pick.cand.title);
         missing.push(`${o.id}: download ${e.message}`);
-        // put candidate back if download failed for a transient reason
-        if (!/not a plausible JPEG|recompress failed/.test(e.message)) pool.push(pick);
       }
+      return;
+    }
+    // Every fallback below is an automatic pick: it must pass acceptFallback (a whole-word name,
+    // art context, no photograph or junk) and is logged with its title and score.
+    const name = o.label || o.title || o.id;
+    const toks = distinctiveTokens(name);
+    // A spec with `require` is the curated statement of what the picture must show: a miss is recorded.
+    const required = !!spec?.require?.length;
+    const commit = async (pick, dlSpec, how) => {
+      if (!(await claimTitle(pick.cand.title))) return false;
+      try {
+        const ref = await download('occurrences', o.id, dlSpec, pick);
+        ref._file = pick.cand.title;
+        images.occurrences[o.id] = ref;
+        got++;
+        say(`  ${o.id} -> ${pick.cand.title} (${how} score ${Math.round(pick.score)})`);
+        await save();
+        return true;
+      } catch (e) {
+        await releaseTitle(pick.cand.title);
+        missing.push(`${o.id}: download ${e.message}`);
+        return 'failed';
+      }
+    };
+    // 1. the curated queries, as the main pass runs them
+    if (spec?.queries?.length) {
+      let pick;
+      try { pick = await resolveFor('occurrences', o.id, spec, { used: usedTitles }); } catch (e) { pick = { error: e.message }; }
+      if (!pick.error) {
+        const done = await commit(pick, { title: name, relaxed: true }, 'curated');
+        if (done !== false) return;
+      }
+      if (required) { missing.push(`${o.id}: ${pick.error || 'curated pick already used'}`); return; }
+    } else if (required) {
+      missing.push(`${o.id}: curated spec has no queries`);
+      return;
+    }
+    // 2. the family pool, only a plate whose file carries one of the passage's words
+    if (!pool.length) pool.push(...(await poolFor(fam, 40)));
+    const i = pool.findIndex((p) => acceptFallback(p.cand, { names: toks, score: p.score }).ok);
+    if (i >= 0) {
+      const [pick] = pool.splice(i, 1);
+      if ((await commit(pick, { title: name, relaxed: true }, 'pool')) !== false) return;
+    }
+    // 3. an automatic search on the occurrence's own words
+    const auto = autoSpec(name, { narrative: true, family: fam });
+    if (auto) {
+      let pick;
+      try { pick = await resolveFor('occurrences', o.id, auto, { used: usedTitles }); } catch (e) { pick = { error: e.message }; }
+      if (!pick.error && (await commit(pick, auto, 'auto')) !== false) return;
+    }
+    // 4. Met / Cleveland, under the same acceptance rule
+    const mq = clipQuery(`${distinctiveTokens(name).slice(0, 3).join(' ')} ${String(fam).replace(/[-_]/g, ' ')}`);
+    let museum = [];
+    try { museum = await searchMuseums(mq || name, 8); } catch (e) { missing.push(`${o.id}: museum ${e.message}`); return; }
+    for (const c of museum) {
+      const ev = evaluate(c, mq || name, { used: usedTitles, allowBad: true, relaxed: true, allowPage: true });
+      if (!ev.ok || !acceptFallback(c, { names: toks, score: ev.score }).ok) continue;
+      if ((await commit({ cand: c, score: ev.score, query: c.source }, { title: name, relaxed: true }, c.source)) !== false) return;
+    }
+    missing.push(`${o.id}: no acceptable plate`);
+  }
+  async function worker(wid) {
+    while (!stop) {
+      const job = famQueue.shift();
+      if (!job) return;
+      const [fam, occs] = job;
+      if (dir_over_budget()) { stop = true; say('image budget reached; stopping'); return; }
+      say(`[w${wid}] family ${fam} (${occs.length} unplated)`);
+      const pool = await poolFor(fam, Math.min(occs.length + 8, 80));
+      say(`[w${wid}]   pool ${pool.length}${pool.length ? '' : ' — falling back to per-occurrence auto'}`);
+      // Overlap downloads inside the family too — gate serializes request starts.
+      const q = [...occs];
+      const inner = Math.min(2, Math.max(1, occs.length));
+      await Promise.all(Array.from({ length: inner }, async () => {
+        while (!stop) {
+          const o = q.shift();
+          if (!o) return;
+          if (dir_over_budget()) { stop = true; return; }
+          if (images.occurrences[o.id]?.src) continue;
+          await plateOne(o, pool, fam);
+        }
+      }));
     }
   }
-  save();
+  const t0 = Date.now();
+  await Promise.all(Array.from({ length: WORKERS }, (_, i) => worker(i + 1)));
+  await save();
   const mb = (dirSize(IMG_DIR) / 1048576).toFixed(1);
-  console.log(`\nfamily-batch: plated +${got}, occurrences now ${Object.keys(images.occurrences).length}/${field.occurrences.length}; total ${mb} MB`);
+  const mins = ((Date.now() - t0) / 60000).toFixed(1);
+  console.log(`\nfamily-batch: plated +${got} in ${mins}m (${WORKERS} workers), occurrences now ${Object.keys(images.occurrences).length}/${field.occurrences.length}; total ${mb} MB`);
   if (missing.length) {
     const show = missing.slice(0, 80);
     console.log(`missing (${missing.length}):\n  ${show.join('\n  ')}${missing.length > show.length ? `\n  … ${missing.length - show.length} more` : ''}`);
@@ -788,6 +981,8 @@ for (const group of groups) {
       museum: group === 'families',
       narrative: group === 'occurrences',
       family: row?.familyId || row?.family || '',
+      // a node is named for itself: its name and aliases must be whole words in the file
+      names: group === 'occurrences' ? null : [row?.name, ...(row?.aliases || [])].filter(Boolean),
     });
     const useSpec = spec || auto;
     if (!useSpec || (!useSpec.pin && !(useSpec.queries || []).length)) { missing.push(`${group}/${id}: no queries`); continue; }
@@ -797,9 +992,9 @@ for (const group of groups) {
     say(`${group}/${id}`);
     let pick;
     try { pick = await resolveFor(group, id, useSpec, { used: usedTitles }); } catch (e) { say(`  resolve failed: ${e.message}`); missing.push(`${group}/${id}: ${e.message}`); continue; }
-    // Curated queries that miss still get the auto family/title pass — a pin or
-    // require-list must not leave an instance silent when Commons holds a close plate.
-    if (pick.error && spec && auto && !spec.pin && !spec.skip) {
+    // Curated queries that miss still get the auto family/title pass — unless the curated
+    // spec carries `require`: that spec names what the picture must show, so a miss is recorded.
+    if (pick.error && spec && auto && !spec.pin && !spec.skip && !spec.require?.length) {
       say(`  curated miss (${pick.error}); trying auto`);
       try { pick = await resolveFor(group, id, auto, { used: usedTitles }); } catch (e) { pick = { error: e.message }; }
     }

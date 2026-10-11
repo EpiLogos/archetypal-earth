@@ -30,6 +30,7 @@ export function voiceOf(work: string): string | null {
   if (work === 'burt-zodiac') return 'Burt';
   if (work === 'a-blue-fire') return 'Hillman';
   if (work === 'van-eenwyk') return 'Van Eenwyk';
+  if (work === 'book-of-thoth') return 'Crowley';
   return null;
 }
 

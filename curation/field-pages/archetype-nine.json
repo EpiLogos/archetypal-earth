@@ -1,0 +1,138 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "nine",
+ "line": "Nine is the novenary foetus, the Egyptian company of gods, and the changing line; Jung writes no essay on it.",
+ "sections": [
+  {
+   "id": "novenary-foetus-and-changing-nine",
+   "title": "The novenary foetus, and the changing nine",
+   "line": "Jung's gloss on the One is the nearest he comes to nine: the One is the novenary foetus, and as nine it stands to the ogdoad as the quintessence to the quaternity. An I Ching nine is a line that changes into its opposite.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "and it is also the “novenary foetus” (foetus novenarius), i.e., it is as the number nine to the ogdoad, or as the quintessence to the quaternity.",
+     "para": 186,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "When any of the lines of a given hexagram have the value of six or nine, it means that they are specially emphasized",
+     "para": 979,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "Lines designated by a six or a nine have, according to the ancient conception, an inner tension so great as to cause them to change into their opposites",
+     "para": 996,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "count-and-company",
+   "title": "Count and company",
+   "line": "The Egyptian Ennead is nine gods, a company called nine is often ten, and Jung's note on the Sefiroth gives the ninth, Yesod, under the name Jezoth.",
+   "quotes": [
+    {
+     "work": "cw05",
+     "quote": "the supreme god or hegemon of the Ennead",
+     "para": 408,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "Although a company is described as “nine,” it often proves to be not nine at all but ten, and sometimes even more",
+     "para": 84,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "is the ninth and middle Sefira in the lowest triad of the Cabalistic tree",
+     "para": 634,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "nine-in-the-seminar",
+   "title": "Nine in the seminar",
+   "line": "In seminar Jung says the numbers one to nine are mana, and that they have become sacred; he places eight and nine in Egypt.",
+   "quotes": [
+    {
+     "work": "sem-visions",
+     "quote": "all numbers from one to nine are mana and certain numbers besides",
+     "page": 375,
+     "voice": "Jung (seminar record)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "In the course of civilization all numbers between 1 and 9 have become sacred",
+     "page": 177,
+     "voice": "Jung (seminar record)"
+    },
+    {
+     "work": "sem-dream-analysis",
+     "quote": "But two and one are also sacred, and in Indian religion it is four, in Egypt eight and nine",
+     "page": 177,
+     "voice": "Jung (seminar record)"
+    }
+   ]
+  },
+  {
+   "id": "von-franz-on-nine",
+   "title": "Von Franz on nine",
+   "line": "Von Franz relates the German for nine to the German for new; she places nine as the close of the first series, as the Lo-shu's nine fields, as the Holy Ghost, and as the nine provinces of a Chinese text.",
+   "quotes": [
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "German neun, “nine,” is related to “new”:",
+     "page": 127,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "where five stands in the center of the first number series",
+     "page": 135,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "we again come across the number nine, in addition to the familiar arrangement of the Lo-shu model in nine fields",
+     "page": 171,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "In number symbolism nine stands for the number of the Holy Ghost",
+     "page": 175,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "8 for the eight winds and 9 for the nine provinces",
+     "page": 210,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "one"
+  },
+  {
+   "type": "archetype",
+   "id": "five"
+  },
+  {
+   "type": "archetype",
+   "id": "eight"
+  },
+  {
+   "type": "archetype",
+   "id": "ten"
+  }
+ ]
+}

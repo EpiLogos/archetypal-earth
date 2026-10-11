@@ -1,0 +1,130 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "water",
+ "line": "In Jung's sources water is the permanent water that is also quicksilver, a living substance, and the unconscious.",
+ "sections": [
+  {
+   "id": "the-permanent-water",
+   "title": "The permanent water",
+   "line": "The water of the work is both the stone and its solvent, and the aqua permanens is the alchemical counterpart of the water of life.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "This account makes one thing very evident: the philosophical water is the stone or the prima materia itself; but at the same time, it is also its solvent",
+     "para": 337
+    },
+    {
+     "work": "cw12",
+     "quote": "Therefore in alchemy Mercurius is sometimes a “spirit” and sometimes a “water,” the so-called aqua permanens, which is none other than argentum vivum.",
+     "para": 90
+    },
+    {
+     "work": "cw09i",
+     "quote": "The water of life has its parallel in the aqua permanens of alchemy.",
+     "page": 151
+    },
+    {
+     "work": "cw14",
+     "quote": "There can be no doubt that this is the aqua permanens or aqua pontica, the primal water which contains the four elements.",
+     "para": 341
+    }
+   ]
+  },
+  {
+   "id": "living-and-dissolving",
+   "title": "Living and dissolving",
+   "line": "The alchemists call the water a living substance that kills and vivifies, and dissolves the body into spirit.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "They called it aqua nostra, mercurius vivus, argentum vivum, vinum ardens, aqua vitae, succus lunariae, and so on, by which they meant a living being not devoid of substance, as opposed to the rigid immateriality of mind in the abstract.",
+     "para": 94
+    },
+    {
+     "work": "cw14",
+     "quote": "But of the aqua permanens it was said: “It kills and vivifies.”",
+     "para": 359
+    },
+    {
+     "work": "cw14",
+     "quote": "The “Gloria mundi” says: “The mystery of every thing is life, which is water; for water dissolves the body into spirit and summons a spirit from the dead.”",
+     "para": 318,
+     "voice": "Gloria mundi, quoted by Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-unconscious",
+   "title": "The unconscious",
+   "line": "Jung reads the chaotic water as the unconscious, as a large expanse of water signifies it in dreams, and the mother as its source.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "which the old writers could grasp only in projected form, just as today most people cannot see the beam in their own eye",
+     "para": 342
+    },
+    {
+     "work": "cw05",
+     "quote": "In dreams and fantasies the sea or a large expanse of water signifies the unconscious.",
+     "para": 320
+    },
+    {
+     "work": "cw12",
+     "quote": "Just as the father represents collective consciousness, the traditional spirit, so the mother stands for the collective unconscious, the source of the water of life",
+     "para": 92
+    }
+   ]
+  },
+  {
+   "id": "water-and-spirit",
+   "title": "Water and spirit",
+   "line": "In the alchemical language water and spirit are often the same, and water comes from spirit in the numbered sequence of generation.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "Water and spirit are often identical.",
+     "page": 100
+    },
+    {
+     "work": "cw14",
+     "quote": "The water is a soul or spirit, that is, a psychic “substance,” which now in its turn is applied to the initial material.",
+     "para": 306
+    },
+    {
+     "work": "cw12",
+     "quote": "1: the spirit of the Living God; 2: spirit from spirit; 3: water from spirit; 4: fire from water;",
+     "para": 313,
+     "voice": "Numbers as quoted from a source by Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "as they are in the language of the early Christians, for whom water meant the spiritus veritatis.",
+     "para": 354
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  }
+ ]
+}

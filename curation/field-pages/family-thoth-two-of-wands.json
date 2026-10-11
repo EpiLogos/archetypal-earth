@@ -1,0 +1,89 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-two-of-wands",
+ "line": "Crowley’s Two of Wands: Dominion, Mars in its own sign Aries, placed at Chokmah.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter name for the card, from the Aces-to-Twos essay. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Wands is called the Lord of Dominion",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree and in the zodiac",
+   "line": "The Twos are Chokmah in the tree essay, which also gives the first decan of Aries ruled by Mars. The card’s own chapter names Mars in his own sign Aries.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The 2 pertains to Chokmah.",
+     "page": 35,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the first Decan of the fiery sign Aries, which is ruled by Mars; this, then, gives the idea of a violent and aggressive force.",
+     "page": 35,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The background of this card shows the power of the planet Mars in his own sign Aries,",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley’s account of the Will in its most exalted form and of the image of crossed dorjes.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card, pertaining to Chokmah in the suit of Fire, represents the Will in its most exalted form.",
+     "page": 185,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The pictorial representation is two Dorjes crossed.",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "chokmah"
+  },
+  {
+   "type": "family",
+   "id": "mars"
+  }
+ ]
+}

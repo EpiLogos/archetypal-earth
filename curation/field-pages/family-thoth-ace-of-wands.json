@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-ace-of-wands",
+ "line": "Crowley’s Ace of Wands: the root of Fire at Kether, with no planet-in-sign in its chapter.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter heading gives the root title. The in-text name at pdf 35 reads Forces where the heading reads Powers. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "THE ROOT OF THE POWERS OF FIRE",
+     "page": 183,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree",
+   "line": "Crowley places the card at Kether. He gives the Ace no planet-in-sign: the chapter names none, and the Aces essay sets the four Aces above the small cards as Kether is above the rest.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Thus the Ace of Wands is called the Root of the Forces of Fire. It pertains to Kether, and purports to represent the first positive manifestation of the idea of Fire.",
+     "page": 35,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "On the other hand, Spirit represents Kether.",
+     "page": 175,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley’s description of the card’s image and meaning, not a reading of any situation.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents the essence of the element of Fire in its inception.",
+     "page": 183,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is a solarphallic outburst of flame from which spring lightnings in every direction.",
+     "page": 183,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  }
+ ]
+}

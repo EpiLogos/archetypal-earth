@@ -11,13 +11,26 @@ import type { PassageBridge } from './passage';
 import { eraShort, jungLine, placeLine, shortWork } from './format';
 import { loadLensData, qlBlock, qlSource, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
+import { relatedRows, SYSTEM_LABEL } from './related';
 
+/** The part of a page the renderer reads: its reading line, its sections with their quotations, the subjects it reaches. */
+interface PageBody {
+  line: string;
+  sections: { title: string; line: string; quotes: LensQuote[] }[];
+  subjects: { type: Subject['type']; id: string }[];
+}
 /** One theory node's page (public/data/theory-pages.json, built by scripts/theory-pages.mjs). */
 interface TheoryPage {
   concept: string;
   line: string;
   sections: { id: string; title: string; line: string; quotes: LensQuote[] }[];
   subjects: { type: Subject['type']; id: string }[];
+}
+/** A family's or archetype's page, and the cites of each join by join id (public/data/field-pages.json, scripts/field-pages.mjs). */
+interface FieldPagesData {
+  version: 1;
+  pages: Record<string, PageBody>;
+  joins: Record<string, LensQuote[]>;
 }
 /** The number archetypes' pages and the egg block (public/data/numbers.json, built by scripts/numbers.mjs). */
 interface NumberPage {
@@ -37,8 +50,8 @@ interface NumbersData {
   egg: { stages: { labels: string[]; source: string }; dream: LensQuote; footnote: LensQuote[]; mandala: LensQuote[] };
   pages: Record<string, NumberPage>;
 }
-/** The six number archetypes: NUMBER_ARCHETYPES (src/lenses/deep-fields) — the ids their pages answer to. */
-const WORD: Record<number, string> = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' };
+/** The number archetypes one to ten: NUMBER_ARCHETYPES (src/lenses/deep-fields) — the ids their pages answer to. */
+const WORD: Record<number, string> = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten' };
 
 export interface DeepHandlers {
   onClose(): void;
@@ -110,6 +123,7 @@ export class DeepSheet {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: arch.definition.text }), el('footer', { text: arch.definition.cite })]));
       }
       arch.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
+      this.appendFieldPage(s);
       const fams = arch.familyIds.map((id) => m.famById.get(id)).filter((f) => !!f);
       if (fams.length) {
         a.append(el('h3', { class: 'dp-sub', text: 'Forms it takes' }));
@@ -133,6 +147,7 @@ export class DeepSheet {
         a.append(row);
       }
       if (NUMBER_ARCHETYPES.has(s.id)) this.appendNumberPage(s.id);
+      this.appendRelated(s);
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else if (s.type === 'family') {
       const fam = m.famById.get(s.id);
@@ -144,6 +159,7 @@ export class DeepSheet {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: fam.definition.text }), el('footer', { text: fam.definition.cite })]));
       }
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
+      this.appendFieldPage(s);
       const symbolic = symbolReading(m, fam.id, id => this.h.onSubject({ type: 'family', id }));
       if (symbolic) a.append(symbolic);
       const ties = archetypesOfFamily(m, fam);
@@ -160,6 +176,7 @@ export class DeepSheet {
         });
         a.append(row);
       }
+      this.appendRelated(s);
       this.appendOccurrenceList(subjectOccurrences(m, s));
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else if (s.type === 'theoretic') {
@@ -179,6 +196,7 @@ export class DeepSheet {
         if (!page) { host.replaceChildren(el('p', { class: 'lp-note', text: 'The field has no page for this concept yet.' })); return; }
         host.replaceChildren(...this.pageNodes(page));
       }).catch(() => host.replaceChildren(el('p', { class: 'lp-note', text: 'The pages are not available in this build.' })));
+      this.appendRelated(s);
       this.appendOccurrenceList(subjectOccurrences(m, s));
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else {
@@ -191,8 +209,63 @@ export class DeepSheet {
     this.appendFooter();
   }
 
-  /** A theory node's page body: the reading line, each section with its quotations, and the subjects it reaches. */
-  private pageNodes(page: TheoryPage): HTMLElement[] {
+  /** The field-pages data: absent in a build without it, and the rejection is caught here, never shown. */
+  private fieldPages(): Promise<FieldPagesData | null> {
+    return loadLensData<FieldPagesData>('field-pages').catch(() => null);
+  }
+
+  /** A family's or archetype's own page, after its body. A node with no page renders nothing: its host is taken out again. */
+  private appendFieldPage(s: Subject): void {
+    const host = el('div', { class: 'dp-page' });
+    this.article.append(host);
+    void this.fieldPages().then((d) => {
+      const page = d?.pages[`${s.type}:${s.id}`];
+      if (page) host.replaceChildren(...this.pageNodes(page));
+      else host.remove();
+    });
+  }
+
+  /**
+   * The node's joins, grouped by system (from the model, so at once). Each join's cites fill in under its row when the
+   * field-pages data arrives; a join with no cites has no passage to show and gets none.
+   */
+  private appendRelated(s: Subject): void {
+    const groups = relatedRows(this.model, s);
+    if (!groups.length) return;
+    const pending: { joinId: string; row: HTMLElement }[] = [];
+    const box = el('div', { class: 'dp-rel' });
+    box.append(el('h3', { class: 'dp-sub', text: 'Related' }));
+    for (const g of groups) {
+      box.append(el('p', { class: 'dp-rel-sys', text: SYSTEM_LABEL[g.system] ?? g.system }));
+      const ul = el('ul', {});
+      for (const r of g.rows) {
+        // Jung's own tie vs. one this site reads in — the same wording as the archetypal ground above
+        const row = el('li', {}, [
+          el('button', { class: 'link-quiet', type: 'button', text: r.name, onclick: () => this.h.onSubject(r.other) }),
+          el('span', { class: 'dp-basis', text: r.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }),
+          r.voice ? el('span', { class: 'dp-basis', text: ` · ${r.voice}` }) : null,
+          el('p', { class: 'lp-note', text: r.note }),
+        ]);
+        pending.push({ joinId: r.joinId, row });
+        ul.append(row);
+      }
+      box.append(ul);
+    }
+    this.article.append(box);
+    void this.fieldPages().then((d) => {
+      for (const { joinId, row } of pending) {
+        const cites = d?.joins[joinId];
+        if (!cites?.length) continue;
+        row.append(el('details', { class: 'as-more' }, [
+          el('summary', { text: 'The passage' }),
+          ...cites.map((q) => quoteBlock(q, this.h.passage, { compact: true })),
+        ]));
+      }
+    });
+  }
+
+  /** A node's page body: the reading line, each section with its quotations, and the subjects it reaches. */
+  private pageNodes(page: PageBody): HTMLElement[] {
     const out: HTMLElement[] = [];
     if (page.line) out.push(el('p', { class: 'th-line', text: page.line }));
     for (const s of page.sections) {
@@ -219,7 +292,8 @@ export class DeepSheet {
     this.article.append(host);
     loadLensData<NumbersData>('numbers').then((d) => {
       const p = d.pages[id];
-      if (!p) { host.replaceChildren(el('p', { class: 'lp-note', text: 'The field has no page for this number yet.' })); return; }
+      // seven to ten have no numbers.json page (no QL position): nothing renders, and the field page and Related still do
+      if (!p) { host.remove(); return; }
       const out: HTMLElement[] = [
         el('h3', { class: 'as-h3', text: `${p.n} ↔ ${p.position} · ${p.ql.name ?? ''}`.trim() }),
         qlBlock(p.ql),
@@ -234,7 +308,7 @@ export class DeepSheet {
         out.push(el('h3', { class: 'as-h3', text: `Von Franz on ${WORD[p.n] ?? String(p.n)}` }));
         for (const q of p.vonFranz) out.push(quoteBlock(q, this.h.passage));
       }
-      out.push(...this.pageNodes({ concept: id, line: '', sections: p.sections, subjects: p.subjects }));
+      out.push(...this.pageNodes({ line: '', sections: p.sections, subjects: p.subjects }));
       host.replaceChildren(...out, this.eggBlock(d));
       void this.appendEggFigure(host, d);
     }).catch(() => host.replaceChildren(el('p', { class: 'lp-note', text: 'The pages are not available in this build.' })));

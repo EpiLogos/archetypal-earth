@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-scorpio-3",
+ "line": "Crowley's Seven of Cups is the card for the third decan of Scorpio, with Venus as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Scorpio.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Seven of Cups is called Debauch.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the card is governed by Venus in Scorpio",
+     "page": 205,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card refers to the Seven, Netzach, in the suit of Water.",
+     "page": 205,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "scorpio"
+  },
+  {
+   "type": "family",
+   "id": "venus"
+  },
+  {
+   "type": "family",
+   "id": "thoth-seven-of-cups"
+  }
+ ]
+}

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Vault -> public/data/field.json (+ field.stats.json). Re-runnable, deterministic, tolerant.
-// Env: VAULT overrides the vault path.
+// Env: VAULT overrides the vault path; CURATION_DIR overrides the curation/ directory and IMAGES_JSON the
+// public/data/images.json read (tests run against copies); FIELD_OUT_DIR overrides the output directory;
+// FIELD_GENERATED_AT fixes meta.generatedAt.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,8 +17,9 @@ import { externalRegister } from './lib/external.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
 const OUT_DIR = process.env.FIELD_OUT_DIR ? path.resolve(process.env.FIELD_OUT_DIR) : path.join(ROOT, 'public', 'data');
-const IMAGES_JSON = path.join(ROOT, 'public', 'data', 'images.json');
-const CUR = (f) => path.join(ROOT, 'curation', f);
+const IMAGES_JSON = process.env.IMAGES_JSON ? path.resolve(process.env.IMAGES_JSON) : path.join(ROOT, 'public', 'data', 'images.json');
+const CURATION_DIR = process.env.CURATION_DIR ? path.resolve(process.env.CURATION_DIR) : path.join(ROOT, 'curation');
+const CUR = (f) => path.join(CURATION_DIR, f);
 const readJson = (f, fallback) => {
   try {
     return JSON.parse(fs.readFileSync(f, 'utf8'));
@@ -66,6 +69,16 @@ const gaz = loadGazetteer(CUR('gazetteer.json'));
 const { aliases: cultAliases, cultures: cultTable } = loadCultures(CUR('cultures.json'));
 const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
 const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, theoretics: {}, occurrences: {} });
+// An additive register beside images.json (public/data/images-ext.json, same shape): plates fetched while another run
+// owns images.json. Its entries fill ids the main register does not hold; the main register wins on a clash.
+const extFiles = fs.readdirSync(path.dirname(IMAGES_JSON)).filter((f) => /^images-ext[\w-]*\.json$/.test(f)).sort();
+for (const f of extFiles) {
+  const imagesExt = readJson(path.join(path.dirname(IMAGES_JSON), f), {});
+  for (const g of ['archetypes', 'families', 'theoretics', 'occurrences']) {
+    imagesJson[g] ||= {};
+    for (const [id, im] of Object.entries(imagesExt[g] || {})) if (!imagesJson[g][id]) imagesJson[g][id] = im;
+  }
+}
 
 // ---------- scan-error normaliser ----------
 // Vocabulary comes from the vault's own clean volumes (see scripts/lib/ocr.mjs); cached in .cache/.
@@ -427,6 +440,37 @@ for (const o of occList) {
     }
   }
 }
+// Families admitted from curation alone (the four elements, the zodiac signs, the ten sephiroth): an entry with
+// `synthesised: true` in curation/families.json and no vault note. Admitted after the occurrence pass, so a family
+// a vault note or an occurrence has already made wins, and the curation flag is ignored with one warning. Ties,
+// palette and spectrum then come from the same code as every other family.
+const curationFamilies = [];
+for (const [id, over] of Object.entries(famOver)) {
+  if (!over || over.synthesised !== true) continue;
+  if (famMerges[id]) { warn(`curation family ${id} is synthesised but is a merge key; not admitted`); skip('family', id, 'synthesised id is a merge key'); continue; }
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(id)) { warn(`curation family ${id}: id not kebab-case; not admitted`); skip('family', id, 'synthesised id not kebab-case'); continue; }
+  const have = famMap[id];
+  if (have) { warn(`curation family ${id} is marked synthesised, but ${have._vault ? 'a vault note' : 'occurrences'} already produced it; curation flag ignored`); continue; }
+  const st = String(over.subtype || '').toLowerCase();
+  famMap[id] = {
+    id,
+    name: collapse(over.name || '') || titleCase(id),
+    subtype: ['figure', 'object', 'process', 'scene'].includes(st) ? st : 'unknown',
+    aliases: [],
+    _aliases: asList(over.aliases).map((x) => collapse(plain(x).replace(/^["']|["']$/g, ''))).filter(Boolean),
+    oneLine: over.oneLine ? collapse(over.oneLine) : '',
+    _form: false,
+    _over: over,
+    archetypes: [],
+    body: (over.body || []).map(collapse),
+    occurrenceIds: [],
+    synthesised: true,
+    _vault: null,
+  };
+  foldFamilyDefinition(over, famMap[id]);
+  curationFamilies.push(id);
+}
+
 // co-manifests that are not families (archetype names, unresolvable) are dropped, and tallied
 const droppedCo = {};
 for (const o of occList) {
@@ -591,6 +635,54 @@ for (const t of theoList) {
   t.occurrenceCount = ids.size;
 }
 
+// ---------- joins ----------
+// A general relation between any two nodes (archetype, theoretic or family), from curation/joins.json and nothing else.
+// Each join is checked against the finished tiers: a bad one is dropped and said, never repaired. Symmetric duplicates
+// (same unordered pair, same system) keep the first by id. Joins carry no quotations; a later generator places any cite.
+const JOIN_TYPES = new Set(['archetype', 'theoretic', 'family']);
+const JOIN_BASIS = new Set(['jung', 'inferred', 'site']);
+const joinsFile = readJson(CUR('joins.json'), { joins: [] });
+const joinsRaw = Array.isArray(joinsFile.joins) ? joinsFile.joins : [];
+const joinEnd = (e) => {
+  if (!e || typeof e !== 'object' || !JOIN_TYPES.has(e.type) || typeof e.id !== 'string') return null;
+  if (e.type === 'archetype') return Object.hasOwn(archById, e.id) ? { type: 'archetype', id: e.id } : null;
+  if (e.type === 'theoretic') return Object.hasOwn(theoById, e.id) ? { type: 'theoretic', id: e.id } : null;
+  const s = famMerges[e.id] || e.id;
+  return Object.hasOwn(famMap, s) ? { type: 'family', id: s } : null;
+};
+let joinsDropped = 0;
+const joinsDuplicates = [];
+const dropJoin = (why, j) => { joinsDropped++; warn(`join ${j?.id ?? '(no id)'} dropped: ${why}`); };
+const accepted = [];
+const seenJoinIds = new Set();
+for (const j of joinsRaw) {
+  if (!j || typeof j !== 'object') { dropJoin('not an object', j); continue; }
+  if (typeof j.id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(j.id)) { dropJoin('id not kebab-case', j); continue; }
+  if (seenJoinIds.has(j.id)) { dropJoin('duplicate id', j); continue; }
+  seenJoinIds.add(j.id);
+  const a = joinEnd(j.a);
+  const b = joinEnd(j.b);
+  if (!a || !b) { dropJoin(`unresolved endpoint ${JSON.stringify(a ? j.b : j.a)}`, j); continue; }
+  if (a.type === b.type && a.id === b.id) { dropJoin('self-join', j); continue; }
+  if (!JOIN_BASIS.has(j.basis)) { dropJoin(`basis ${JSON.stringify(j.basis)} is not jung, inferred or site`, j); continue; }
+  const note = typeof j.note === 'string' ? collapse(j.note) : '';
+  if (!note) { dropJoin('note empty', j); continue; }
+  if (note.length > 400 || /\[\[|\]\]/.test(note)) { dropJoin('note over 400 chars or wikilink syntax', j); continue; }
+  if ((j.system !== undefined && typeof j.system !== 'string') || (j.voice !== undefined && typeof j.voice !== 'string')) { dropJoin('voice or system is not a string', j); continue; }
+  const out = { id: j.id, a, b, basis: j.basis, note };
+  if (j.system && collapse(j.system)) out.system = collapse(j.system);
+  if (j.voice && collapse(j.voice)) out.voice = collapse(j.voice);
+  accepted.push(out);
+}
+const joins = [];
+const seenPair = new Set();
+for (const j of accepted.sort((x, y) => x.id.localeCompare(y.id))) {
+  const key = [`${j.a.type}:${j.a.id}`, `${j.b.type}:${j.b.id}`].sort().join('|') + '#' + (j.system ?? '');
+  if (seenPair.has(key)) { joinsDropped++; joinsDuplicates.push(j.id); warn(`join ${j.id} dropped: symmetric duplicate of an earlier join (same pair, same system)`); continue; }
+  seenPair.add(key);
+  joins.push(j);
+}
+
 // ---------- images ----------
 let imageCount = 0;
 const attach = (obj, group) => {
@@ -622,7 +714,7 @@ const field = {
     generatedAt: process.env.FIELD_GENERATED_AT || new Date().toISOString(),
     vaultPath: VAULT,
     ...(ledgerLine ? { vaultLedgerLine: ledgerLine } : {}),
-    counts: { archetypes: archList.length, theoretics: theoList.length, families: cleanFam.length, occurrences: occList.length, cultures: cultures.length, images: imageCount },
+    counts: { archetypes: archList.length, theoretics: theoList.length, families: cleanFam.length, occurrences: occList.length, cultures: cultures.length, images: imageCount, joins: joins.length },
     yearMin: years.length ? Math.min(...years) : 0,
     yearMax: years.length ? Math.max(...years) : 0,
   },
@@ -631,11 +723,12 @@ const field = {
   families: cleanFam,
   occurrences: occList,
   cultures,
+  joins,
 };
 
 // Final pass over EVERY human-readable string that reaches field.json (the early passes above cover the
 // occurrence fields the geocoder and label derivation read; this one catches the rest and proves the lot).
-for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures], ['join', field.joins]]) {
   for (const item of list) {
     visitFieldText(item, (where, value, mode, set) => {
       const r = ocr.normalize(value, { mode });
@@ -645,7 +738,7 @@ for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretic
 }
 // residual scanner: whatever still looks like scan damage (target: none; reviewed exceptions live in curation/ocr-exceptions.json)
 const ocrResidual = [];
-for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures]]) {
+for (const [kind, list] of [['arch', field.archetypes], ['theo', field.theoretics], ['fam', field.families], ['occ', field.occurrences], ['culture', field.cultures], ['join', field.joins]]) {
   for (const item of list) {
     visitFieldText(item, (where, value, mode) => {
       if (mode === 'safe') return;
@@ -686,6 +779,10 @@ const stats = {
   labelMaxLen: Math.max(0, ...labelLens),
   yearRange: [field.meta.yearMin, field.meta.yearMax],
   familiesSynthesised: cleanFam.filter((f) => f.synthesised).map((f) => f.id),
+  curationFamilies,
+  joins: joins.length,
+  joinsDropped,
+  joinsDuplicates,
   unresolvedFamilyTargets: unresolvedFamilies,
   mergedFamilyTargets: famMerges,
   familiesWithoutOccurrences: cleanFam.filter((f) => !f.occurrenceIds.length).map((f) => f.id),
@@ -738,4 +835,5 @@ console.log(`geo: place ${hist.place} (${pct(hist.place)}%), region ${hist.regio
 console.log(`skips: ${skips.length}${skips.length ? ' -> ' + skips.map((s) => `${s.kind}:${s.id} (${s.reason})`).join('; ') : ''}`);
 console.log(`warnings: ${warnings.length} (see field.stats.json)`);
 console.log(`ocr: ${stats.ocr.changes} repairs in ${stats.ocr.stringsChanged} strings (${stats.ocr.unique} distinct), residual suspects: ${stats.ocr.residual}`);
+console.log(`curation families: ${curationFamilies.length}${curationFamilies.length ? ` (${curationFamilies.join(', ')})` : ''} | joins: ${joins.length} (dropped ${joinsDropped})`);
 if (formFallbacks.length) console.log(`families lacking a oneLine: ${formFallbacks.join(', ')}`);

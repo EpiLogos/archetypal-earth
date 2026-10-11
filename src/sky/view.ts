@@ -1,6 +1,6 @@
 // The sky's quiet DOM: body labels (real buttons, so the sky is reachable by keyboard and by touch) and the
 // caption that says the radial scale is diagrammatic. Nothing here owns state: the controller does.
-import { glyphSvg, holoCss } from './zodiac';
+import { glyphSvg, holoCss, signFamilyId } from './zodiac';
 import type { BodyKey } from '../types/sky';
 import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
@@ -11,6 +11,10 @@ export interface SkyViewHooks {
   onBody(key: BodyKey): void;
   /** the label shown for a body under the standing culture */
   nameOf(key: BodyKey): string;
+  /** a sign's glyph opened as its field family: the same route a tied family takes from a sky card */
+  onSign(id: string): void;
+  /** whether the field holds a family; a sign's glyph is a control only when its family stands */
+  hasFamily(id: string): boolean;
 }
 
 interface LabelEntry {
@@ -141,7 +145,7 @@ export class SkyView {
     const bodies = layer.screenBodies(this.scratch);
     const placed: { x: number; y: number; w: number }[] = [];
     // sun first, then Earth, then outward: the nearer wins a crowded corner
-    const order: BodyKey[] = ['sun', 'earth', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+    const order: BodyKey[] = ['sun', 'terra', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
     const byKey = new Map(bodies.map((b) => [b.key, b]));
     for (const key of order) {
       const l = this.labels.get(key);
@@ -171,8 +175,11 @@ export class SkyView {
       let n = this.marks.get(m.id);
       if (!n) {
         if (m.sign !== undefined) {
-          // a sign: its canonical glyph, in the band's own colour at that longitude
-          n = el('span', { class: 'sky-chart-mark sky-chart-glyph', 'aria-hidden': 'true' }, [glyphSvg(m.sign)]);
+          // a sign: its canonical glyph, in the band's own colour at that longitude; a real control when its family stands
+          const fam = signFamilyId(m.sign);
+          n = fam && this.hooks.hasFamily(fam)
+            ? el('button', { class: 'sky-chart-mark sky-chart-glyph sky-chart-btn', type: 'button', 'aria-label': m.text, title: m.text, onclick: () => this.hooks.onSign(fam) }, [glyphSvg(m.sign)])
+            : el('span', { class: 'sky-chart-mark sky-chart-glyph', 'aria-hidden': 'true' }, [glyphSvg(m.sign)]);
           n.style.color = holoCss(m.sign);
         } else n = el('span', { class: `sky-chart-mark sky-chart-${m.kind}`, 'aria-hidden': 'true', text: m.text });
         this.marks.set(m.id, n);
@@ -182,8 +189,8 @@ export class SkyView {
         // drawn inside the band: most of its width, never so small it blurs nor so large it crowds
         const px = Math.max(12, Math.min(46, m.size * 0.78));
         n.style.width = n.style.height = `${px.toFixed(1)}px`;
-        n.classList.toggle('on', m.on && m.size > 9);
-      } else n.classList.toggle('on', m.on);
+        setShown(n, m.on && m.size > 9);
+      } else setShown(n, m.on);
       n.style.transform = `translate(${m.x.toFixed(1)}px, ${m.y.toFixed(1)}px) translate(-50%, -50%)`;
     }
     for (const [id, n] of this.marks) if (!seen.has(id)) { n.remove(); this.marks.delete(id); }
@@ -193,6 +200,12 @@ export class SkyView {
     this.root.classList.remove('on');
     this.caption.classList.remove('on');
     for (const l of this.labels.values()) l.node.classList.remove('on');
-    for (const n of this.marks.values()) n.classList.remove('on');
+    for (const n of this.marks.values()) setShown(n, false);
   }
+}
+
+/** A mark's visibility; a sign control is in the tab order only while it shows (a hidden one is never a stop). */
+function setShown(n: HTMLElement, on: boolean) {
+  n.classList.toggle('on', on);
+  if (n instanceof HTMLButtonElement) n.tabIndex = on ? 0 : -1;
 }

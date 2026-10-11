@@ -1,0 +1,138 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "air",
+ "line": "Jung names air as a light outer element, as pneuma in the spiritual sense, and as the link between fire and water.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "The defining words first: an alchemical author's description of air, then air among the four, then air as the volatile element above earth.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "What our author has to say about the element of air is significant in this respect: The air is a pure uncorrupted element, in its kind the most worthy, being uncommonly light and invisible, but inside heavy, visible, and solid.",
+     "para": 397
+    },
+    {
+     "work": "cw12",
+     "quote": "Whereas the original tetrameria corresponded exactly to the quaternity of elements, it was now frequently stressed that although there were four elements (earth, water, fire, and air) and four qualities (hot, cold, dry, and moist), there were only three colours: black, white, and red.",
+     "para": 333
+    },
+    {
+     "work": "cw12",
+     "quote": "Second vertical series: The earth emerges from the chaotic waters of the beginning, from the massa confusa, in accordance with the ancient alchemical view; above it lies air, the volatile element rising from the earth.",
+     "para": 370
+    }
+   ]
+  },
+  {
+   "id": "pneuma",
+   "title": "Air as pneuma",
+   "line": "Jung takes air in the spiritual sense of pneuma, and notes that spirit originally meant air in motion.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Since pneuma, like spirit, originally meant air in motion, this designation sounds archaic or else deliberately physicistic.",
+     "para": 161
+    },
+    {
+     "work": "cw14",
+     "quote": "It is evident, however, that air is used here in the spiritual sense of pneuma since its progenitors bear names",
+     "para": 161
+    },
+    {
+     "work": "cw16",
+     "quote": "It is clear that wind is air, and air is life, and life is soul, that is, oil and water.",
+     "para": 454
+    }
+   ]
+  },
+  {
+   "id": "between-fire-and-water",
+   "title": "Between fire and water",
+   "line": "Air is the mean between fire and water in Plato's chain, and it sits with fire on the active side of the four.",
+   "quotes": [
+    {
+     "work": "cw11",
+     "quote": "If air is missing, then there is no connecting link with spirit (fire), and if water is missing, there is no link with concrete reality (earth).",
+     "para": 185
+    },
+    {
+     "work": "cw11",
+     "quote": "Accordingly, the god set water and air between fire and earth, and made them, so far as was possible, proportional to one another, so that as fire is to air, so is air to water, and as air is to water, so is water to earth, and thus he bound together the frame of a world visible and tangible.",
+     "para": 182,
+     "voice": "Plato, quoted by Jung"
+    },
+    {
+     "work": "cw16",
+     "quote": "these four again refer to the four elements of which two—fire and air—are active and two—water and earth—passive, the former being ascribed to the man and the latter to the woman.",
+     "para": 410
+    },
+    {
+     "work": "cw14",
+     "quote": "Thus the fire began to work upon the air and brought forth Sulphur. Then the air began to work upon the water and brought forth Mercurius.",
+     "para": 655,
+     "voice": "De sulphure, quoted by Jung"
+    }
+   ]
+  },
+  {
+   "id": "images",
+   "title": "Air in dreams and images",
+   "line": "In a patient's images Jung expects the self and the animus to appear as air, breath and wind, and reads blue as air or pneuma.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "We would expect pneumatic symbols for the idea of the self and the animus, images of air, breath, wind.",
+     "page": 347
+    },
+    {
+     "work": "cw09i",
+     "quote": "Blue means air or pneuma, and the leftward movement an intensification of the unconscious influence.",
+     "page": 357
+    }
+   ]
+  },
+  {
+   "id": "lists-and-lead",
+   "title": "Lists, and the lead of the air",
+   "line": "Jung has no essay on air as an element, and ties it to no metal beyond the lead of the air; no Evangelist is tied to air in these passages. The historical lists are where the element mostly appears.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The underlying idea goes back to the fifth century B.C., to the teachings of Hippocrates, that the human body was composed of the four elements, air, water, fire, and earth.",
+     "para": 883
+    },
+    {
+     "work": "cw06",
+     "quote": "The Greek philosopher Empedocles attempted to impose order on the chaos of natural phenomena by dividing them into the four elements: earth, water, air, and fire.",
+     "para": 960
+    },
+    {
+     "work": "cw09ii",
+     "quote": "the lead of the Philosophers, named lead of the air (Pb aeris), contains the \"shining white dove\" which is called the \"salt of the metals.\"",
+     "page": 151
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "fire"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  }
+ ]
+}

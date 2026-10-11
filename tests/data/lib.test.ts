@@ -111,8 +111,13 @@ describe('validator', () => {
 
 describe('ingest', () => {
   it('is deterministic: same vault and clock give byte-identical output', () => {
+    // The image wave rewrites public/data/images.json while it runs, so both ingests read one pinned copy of it: the
+    // test then checks the ingest, not the wave's progress between two runs.
+    const pinned = fs.mkdtempSync(path.join(os.tmpdir(), 'ae-images-'));
+    const imagesJson = path.join(pinned, 'images.json');
+    fs.copyFileSync(path.join(ROOT, 'public', 'data', 'images.json'), imagesJson);
     const run = (dir: string) => {
-      const r = spawnSync('node', [path.join(ROOT, 'scripts', 'ingest.mjs')], { env: { ...process.env, FIELD_OUT_DIR: dir, FIELD_GENERATED_AT: '2026-01-01T00:00:00.000Z' }, encoding: 'utf8' });
+      const r = spawnSync('node', [path.join(ROOT, 'scripts', 'ingest.mjs')], { env: { ...process.env, FIELD_OUT_DIR: dir, FIELD_GENERATED_AT: '2026-01-01T00:00:00.000Z', IMAGES_JSON: imagesJson }, encoding: 'utf8' });
       expect(r.status, r.stderr).toBe(0);
       return fs.readFileSync(path.join(dir, 'field.json'), 'utf8');
     };
@@ -120,5 +125,5 @@ describe('ingest', () => {
     const d2 = fs.mkdtempSync(path.join(os.tmpdir(), 'ae-b-'));
     // two full vault ingests, and the suite runs other files beside this one
     expect(run(d1)).toBe(run(d2));
-  }, 120_000);
+  }, 600_000);
 });

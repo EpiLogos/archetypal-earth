@@ -112,7 +112,7 @@ try {
         rows.push(await page.evaluate(() => {
           const { engine } = window.__earth;
           const ndc = (p) => (p ? { x: (p.x / engine.width) * 2 - 1, y: 1 - (p.y / engine.height) * 2 } : null);
-          return { dist: engine.rig.dist, earth: ndc(engine.sky.screenDisc('earth')), sun: ndc(engine.sky.screenDisc('sun')), known: engine.sky.sunKnown };
+          return { dist: engine.rig.dist, earth: ndc(engine.sky.screenDisc('terra')), sun: ndc(engine.sky.screenDisc('sun')), known: engine.sky.sunKnown };
         }));
       }
       const at = (d) => rows.find((r) => r.dist > d - 1 && r.dist < d + 1);

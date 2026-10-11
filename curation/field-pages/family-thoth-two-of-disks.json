@@ -1,0 +1,102 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-two-of-disks",
+ "line": "Crowley’s Two of Disks: Change, Chokmah in the suit of Earth, Jupiter and Capricornus.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The old name was Lord of Harmonious Change, and the card is now called Change. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Pentacles was of old time called the Lord of Harmonious Change.",
+     "page": 176,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree",
+   "line": "The number Two, Chokmah, rules in the suit pertaining to Earth, and the Twos essay refers all four Twos to Chokmah.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Two, Chokmah, here rules in the suit pertaining to Earth.",
+     "page": 227,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The 2 pertains to Chokmah.",
+     "page": 35,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley reads the card as the complete manifested Universe in its dynamics, with the interplay of the four elements in movement.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "One may in fact consider the card as the picture of the complete manifested Universe",
+     "page": 227,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "They thus represent the harmonious interplay of the Four Elements in constant movement.",
+     "page": 227,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "conflicts-and-gaps",
+   "title": "Conflicts and gaps",
+   "line": "The chapter names the pair Jupiter and Capricornus, where the attribution table (pdf 275, image only, not quoted) reads Jupiter in Capricorn. This page keeps the text reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Its celestial rulers are Jupiter and Capricornus",
+     "page": 227,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "these symbols are most inharmonious, so that in practical matters the good fortune of Jupiter is very limited.",
+     "page": 227,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "chokmah"
+  },
+  {
+   "type": "family",
+   "id": "jupiter"
+  }
+ ]
+}

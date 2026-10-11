@@ -15,9 +15,9 @@ export type SignName = (typeof SIGNS)[number];
 export const CHART_BODIES = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'] as const;
 export type ChartBody = (typeof CHART_BODIES)[number];
 
-const BODY: Record<ChartBody | 'earth', A.Body> = {
+const BODY: Record<ChartBody | 'terra', A.Body> = {
   sun: A.Body.Sun, moon: A.Body.Moon, mercury: A.Body.Mercury, venus: A.Body.Venus, mars: A.Body.Mars, jupiter: A.Body.Jupiter,
-  saturn: A.Body.Saturn, uranus: A.Body.Uranus, neptune: A.Body.Neptune, pluto: A.Body.Pluto, earth: A.Body.Earth,
+  saturn: A.Body.Saturn, uranus: A.Body.Uranus, neptune: A.Body.Neptune, pluto: A.Body.Pluto, terra: A.Body.Earth,
 };
 
 /** What a person gives: a calendar date, a wall-clock time (or none), the clock's offset from UTC, and a place. */
@@ -99,7 +99,7 @@ export function geoPosition(key: ChartBody, ms: number): { lon: number; lat: num
   return eclipticOfDate(A.GeoVector(BODY[key], date, true));
 }
 
-function helioPosition(key: ChartBody | 'earth', ms: number) {
+function helioPosition(key: ChartBody | 'terra', ms: number) {
   return eclipticOfDate(A.HelioVector(BODY[key], new Date(ms)));
 }
 
@@ -211,13 +211,13 @@ export function natalChart(b: BirthData): SidecarChart & { timeKnown: boolean } 
 const WINDOW_DAYS = 16;
 const PLANET_STEP_HOURS = 48;
 const MOON_STEP_HOURS = 6;
-const HELIO: (ChartBody | 'earth')[] = ['mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'earth'];
+const HELIO: (ChartBody | 'terra')[] = ['mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'terra'];
 
 /** Positions for ±16 days around an instant, shaped as the sidecar's window, so SkyEphemeris reads it unchanged. */
 export function natalWindow(ms: number): BirthWindow {
   const half = WINDOW_DAYS * 86_400_000;
   const start = ms - half;
-  const grid = (keys: (ChartBody | 'earth')[], stepHours: number, at: (k: ChartBody | 'earth', t: number) => { lon: number; lat: number; r: number }): SkyGrid => {
+  const grid = (keys: (ChartBody | 'terra')[], stepHours: number, at: (k: ChartBody | 'terra', t: number) => { lon: number; lat: number; r: number }): SkyGrid => {
     const count = (2 * WINDOW_DAYS * 24) / stepHours + 1;
     const bodies: Partial<Record<BodyKey, SkyColumns>> = {};
     for (const k of keys) {

@@ -261,6 +261,12 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-occ li .link-quiet { justify-self: start; text-align: left; }
 .dp-cites li { padding: 4px 0; font-family: var(--sans); font-size: 12.5px; color: var(--ink-2); letter-spacing: 0.01em; }
 .dp-cite-year { color: var(--ink-3); }
+/* Related: the joins a node takes part in, under the tradition each belongs to (the node's own page sits above it) */
+.dp-rel ul { margin: 0; padding: 0; list-style: none; }
+.dp-rel li { padding: 8px 0 10px; font-family: var(--serif); font-size: 1.04rem; line-height: 1.5; }
+.dp-rel-sys { margin: 18px 0 2px; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.dp-rel .lp-note { margin: 3px 0 0; }
+.dp-rel .as-more { margin: 6px 0 0; }
 .dp-foot { margin: 56px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); letter-spacing: 0.03em; }
 body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body.deep-open .reveal { opacity: 0 !important; pointer-events: none !important; }
 

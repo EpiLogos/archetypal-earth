@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-pisces-2",
+ "line": "Crowley's Nine of Cups is the card for the second decan of Pisces, with Jupiter as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Pisces.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Nine of Cups is called Happiness.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ruler is Jupiter in Pisces.",
+     "page": 207,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card is the pageant of the culmination and perfection of the original force of Water.",
+     "page": 207,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "pisces"
+  },
+  {
+   "type": "family",
+   "id": "jupiter"
+  },
+  {
+   "type": "family",
+   "id": "thoth-nine-of-cups"
+  }
+ ]
+}

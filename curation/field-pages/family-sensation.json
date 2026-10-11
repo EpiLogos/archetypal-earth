@@ -1,0 +1,142 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "sensation",
+ "line": "Sensation as Jung defines it: perception through the senses and the body, what it establishes, its opposite, and the attitudes that change it.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "The working definition, and the distinction Jung keeps between sensation and feeling.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "I regard sensation as one of the basic psychological functions (q.v.).",
+     "para": 792
+    },
+    {
+     "work": "cw06",
+     "quote": "Sensation is the psychological function that mediates the perception of a physical stimulus.",
+     "para": 792
+    },
+    {
+     "work": "cw06",
+     "quote": "Primarily, therefore, sensation is sense perception—perception mediated by the sense organs and “body-senses” (kinaesthetic, vasomotor sensation, etc.).",
+     "para": 793
+    },
+    {
+     "work": "cw06",
+     "quote": "Sensation must be strictly distinguished from feeling (q.v.), since the latter is an entirely different process, although it may associate itself with sensation as “feeling-tone.”",
+     "para": 792
+    }
+   ]
+  },
+  {
+   "id": "what-it-establishes",
+   "title": "What it establishes",
+   "line": "Sensation says that something is, and not what it is. Jung's French phrase for it is the function of reality.",
+   "quotes": [
+    {
+     "work": "cw18",
+     "quote": "Sensation tells me that something is: it does not tell me what it is and it does not tell me other things about that something; it only tells me that something is.",
+     "para": 21
+    },
+    {
+     "work": "cw18",
+     "quote": "what the French psychologists call “la fonction du réel,”",
+     "para": 21
+    }
+   ]
+  },
+  {
+   "id": "irrational-and-opposite",
+   "title": "Irrational, and opposed to intuition",
+   "line": "Sensation and intuition are the irrational pair: both concern what happens and what is real, one actual and one potential. Thinking and feeling are the rational pair.",
+   "quotes": [
+    {
+     "work": "cw08",
+     "quote": "The chief contrasts are those between thinking and feeling on the one hand, and sensation and intuition on the other.",
+     "para": 259
+    },
+    {
+     "work": "cw06",
+     "quote": "Like sensation (q.v.), it is an irrational (q.v.) function of perception.",
+     "para": 770
+    },
+    {
+     "work": "cw06",
+     "quote": "Sensation and intuition I call irrational functions, because they are both concerned simply with what happens and with actual or potential realities. Thinking and feeling, being discriminative functions, are rational.",
+     "para": 983
+    },
+    {
+     "work": "cw08",
+     "quote": "Obviously anyone on the look-out for new possibilities does not rest content with the actual situation of the moment, but will pass beyond it as soon as ever he can.",
+     "para": 259
+    }
+   ]
+  },
+  {
+   "id": "attitude",
+   "title": "The attitude changes it",
+   "line": "Jung's typology gives sensation two forms: conditioned by the object in the extraverted attitude, and altered by a subjective factor in the introverted attitude. Each attitude shows through one of the four functions.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "Sensation, in the extraverted attitude, is pre-eminently conditioned by the object.",
+     "para": 604
+    },
+    {
+     "work": "cw06",
+     "quote": "Sensation, which by its very nature is dependent on the object and on objective stimuli, undergoes considerable modification in the introverted attitude.",
+     "para": 647
+    },
+    {
+     "work": "cw06",
+     "quote": "each of the two general attitudes, introversion and extraversion, manifests itself in a special way in an individual through the predominance of one of the four basic functions.",
+     "para": 913
+    }
+   ]
+  },
+  {
+   "id": "diagrams-and-elements",
+   "title": "Compass, cross and colour",
+   "line": "The compass and the cross are Jung's images for the four. The colour passage gives no assignment per function. No passage gives sensation an element, and the conditional element reading does not name one either.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+     "para": 958
+    },
+    {
+     "work": "cw06",
+     "quote": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+     "para": 983
+    },
+    {
+     "work": "cw11",
+     "quote": "It happens with some regularity that these colours are correlated with the four orienting functions of consciousness.",
+     "para": 281
+    },
+    {
+     "work": "cw14",
+     "quote": "If we take the four directions and the four elements (see note 505) as a symbolical equivalent of the four basic functions of consciousness, we can say that Maier had become conscious of three of them by the time he reached Asia.",
+     "para": 276
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "intuition"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  }
+ ]
+}

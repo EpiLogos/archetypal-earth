@@ -1,0 +1,75 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-sun",
+ "line": "Crowley's account of Atu XIX: the Sun charged with a rose, Heru-ra-ha the Lord of the New Aeon, and the rose and cross.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The heraldic title and the figure he names. The planet Sun and the letter Resh come from the table only; no sentence in the chapter gives them.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents, in heraldic language, “the Sun, charged with a rose, on a mount vert",
+     "page": 105,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "it represents Heru‐ra‐ha, the Lord of the New Aeon, in his manifestation to the race of men as the Sun spiritual, moral, and physical.",
+     "page": 105,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's reading of the rose and the Rose and Cross.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The rose represents the flowering of the solar influence.",
+     "page": 105,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card itself symbolizes this broadening of the idea of the Rose and Cross.",
+     "page": 106,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The text gives no ends for this path. The table gives Key Scale path 30; the general rule is one letter to each of the twenty-two paths.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These paths are the paths which join the ten numbers on the",
+     "page": 36,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "and one letter goes to each path.",
+     "page": 36,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "archetype",
+   "id": "child"
+  }
+ ]
+}

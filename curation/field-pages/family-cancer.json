@@ -1,0 +1,109 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "cancer",
+ "line": "Burt's chapter on Cancer, and the little Jung says of the crab.",
+ "sections": [
+  {
+   "id": "burt-character",
+   "title": "Burt's characterisation",
+   "line": "Burt, chapter on Cancer, pdf pp. 135–174. Her account of the womb, the water and the cardinal mode.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Cancer, the Cosmic Womb, is also the first Water sign.",
+     "page": 135,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity.",
+     "page": 135,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Cancer is a cardinal sign and for many a Cancer, business is the strongest creative outlet in the horoscope.",
+     "page": 149,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "In the shell-home, Cancer is safe and protected and has everything comfortably arranged.",
+     "page": 144,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth-shadow",
+   "title": "Burt's myths and shadow",
+   "line": "Burt, chapter on Cancer, pdf pp. 135–174. The Mother Goddess, the Moon and the shadow of the home.",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The Magna Mater is the most ancient personal manifestation of divinity found around the world.",
+     "page": 135,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Cancer is attached to the past—tradition, home and hearth.",
+     "page": 153,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The Mother Goddess opposes Old Man Winter.",
+     "page": 136,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "the Cancer archetype or Jung’s Magna Mater, for instance",
+     "page": 15,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The Moon, Cancer’s ruler, has been called in both India and the West (in Plato’s writings, particularly) the Giver of Form.",
+     "page": 136,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "jung",
+   "title": "What Jung says",
+   "line": "Jung names Cancer only in these two passages: a seminar image, and one list of the cardinal seasons.",
+   "quotes": [
+    {
+     "work": "sem-dream-analysis",
+     "quote": "The crab walking backward when the sun descends again.",
+     "page": 434,
+     "voice": "Jung (seminar)"
+    },
+    {
+     "work": "cw14",
+     "quote": "The goddesses represent the four seasons of the sun in the circle of the Zodiac (Aries, Cancer, Libra, Capricorn)",
+     "para": 5,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "moon"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "capricorn"
+  }
+ ]
+}

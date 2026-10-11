@@ -1,0 +1,147 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "intuition",
+ "line": "Intuition as Jung defines it: perception through the unconscious, its irrational and compensating character, its image-making, and its place in the order.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "The working definition, and the three things intuition is not: sense perception, feeling, and intellectual inference.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "I regard intuition as a basic psychological function (q.v.).",
+     "para": 770
+    },
+    {
+     "work": "cw06",
+     "quote": "It is the function that mediates perceptions in an unconscious way.",
+     "para": 770
+    },
+    {
+     "work": "cw06",
+     "quote": "The peculiarity of intuition is that it is neither sense perception, nor feeling, nor intellectual inference, although it may also appear in these forms.",
+     "para": 770
+    }
+   ]
+  },
+  {
+   "id": "irrational-given-compensating",
+   "title": "Irrational, given, and compensating",
+   "line": "Intuition is irrational like sensation. Its contents are given, not derived, and it compensates sensation; with sensation it is the matrix of thinking and feeling.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "Like sensation (q.v.), it is an irrational (q.v.) function of perception.",
+     "para": 770
+    },
+    {
+     "work": "cw06",
+     "quote": "As with sensation, its contents have the character of being “given,” in contrast to the “derived” or “produced” character of thinking and feeling (qq.v.) contents.",
+     "para": 770
+    },
+    {
+     "work": "cw06",
+     "quote": "It stands in a compensatory relationship to sensation and, like it, is the matrix out of which thinking and feeling develop as rational functions.",
+     "para": 772
+    }
+   ]
+  },
+  {
+   "id": "image-and-creation",
+   "title": "Perceiving and creating",
+   "line": "For intuition unconscious images acquire the dignity of things. Jung says that intuition, in perceiving the archetypal image, also creates it. Its direction is inward or outward.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The archetype would thus be, to borrow from Kant, the noumenon of the image which intuition perceives and, in perceiving, creates.",
+     "para": 659
+    },
+    {
+     "work": "cw06",
+     "quote": "For intuition, therefore, unconscious images acquire the dignity of things.",
+     "para": 657
+    },
+    {
+     "work": "cw06",
+     "quote": "Introverted and extraverted intuitives may be distinguished according to whether intuition is directed inwards, to the inner vision, or outwards, to action and achievement.",
+     "para": 773
+    }
+   ]
+  },
+  {
+   "id": "position",
+   "title": "Its place in the order",
+   "line": "As the auxiliary, intuition comes into play when it is not the leading function. In the order of orientation it is the fourth function, the one that says where a thing came from and where it goes.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "as a subordinate function (i.e., when not in the position of priority), it is the auxiliary that automatically comes into play",
+     "para": 612
+    },
+    {
+     "work": "cw11",
+     "quote": "a rational type, for instance, whose superior function is thinking, has at his disposal one, or possibly two, auxiliary functions of an irrational nature, namely sensation (the “fonction du réel”) and intuition (perception via the unconscious).",
+     "para": 245
+    },
+    {
+     "work": "cw11",
+     "quote": "In order to orient ourselves, we must have a function which ascertains that something is there (sensation); a second function which establishes what it is (thinking); a third function which states whether it suits us or not, whether we wish to accept it or not (feeling); and a fourth function which indicates where it came from and where it is going (intuition).",
+     "para": 246
+    },
+    {
+     "work": "cw08",
+     "quote": "Obviously anyone on the look-out for new possibilities does not rest content with the actual situation of the moment, but will pass beyond it as soon as ever he can.",
+     "para": 259
+    }
+   ]
+  },
+  {
+   "id": "diagrams-and-elements",
+   "title": "Compass, cross and element",
+   "line": "The compass and the cross are Jung's images for the four. In one Visions seminar vision the air element is where the patient first experienced thought and intuitions. The colour passage gives no assignment per function, and the element reading is conditional.",
+   "quotes": [
+    {
+     "work": "cw06",
+     "quote": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+     "para": 958
+    },
+    {
+     "work": "cw06",
+     "quote": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+     "para": 983
+    },
+    {
+     "work": "sem-visions",
+     "quote": "referring to the air element into which the patient was first taken up; that is, she experienced first by thought and by intuitions, and therefore the blue mother was associated with white birds",
+     "page": 860
+    },
+    {
+     "work": "cw11",
+     "quote": "It happens with some regularity that these colours are correlated with the four orienting functions of consciousness.",
+     "para": 281
+    },
+    {
+     "work": "cw14",
+     "quote": "If we take the four directions and the four elements (see note 505) as a symbolical equivalent of the four basic functions of consciousness, we can say that Maier had become conscious of three of them by the time he reached Asia.",
+     "para": 276
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "sensation"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  }
+ ]
+}

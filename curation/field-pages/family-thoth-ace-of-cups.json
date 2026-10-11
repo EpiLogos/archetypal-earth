@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-ace-of-cups",
+ "line": "Crowley’s Ace of Cups: the Root of the Powers of Water, Kether for the Aces, no planet-in-sign.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter heading for the card. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "THE ROOT OF THE POWERS OF WATER",
+     "page": 196,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree",
+   "line": "Kether comes from the Aces essay, which places the four Aces together above the small cards. The chapter gives no planet-in-sign; the Moon appears in its derivation and as the base of the cup.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "On the other hand, Spirit represents Kether.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the feminine complement of the Ace of Wands, and is derived from the Yoni and the Moon",
+     "page": 196,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley’s description of the cup, the Holy Grail and the dove, with the lotuses on the sea of Binah.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This accordingly represents the essential form of the Holy Grail.",
+     "page": 196,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Upon the dark sea of Binah, the Great Mother, are Lotuses,",
+     "page": 196,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Above the Cup, descending upon it, is the Dove of the Holy Ghost, thus consecrating the",
+     "page": 196,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-cups"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  }
+ ]
+}

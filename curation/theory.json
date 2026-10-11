@@ -162,6 +162,89 @@
           "id": "transcendent-function"
         }
       ]
+    },
+    {
+      "id": "functions",
+      "name": "Functions",
+      "line": "Jung counts four basic functions of consciousness: thinking and feeling, the rational pair, and sensation and intuition, the irrational pair. Each answers one question about a situation, and the attitudes, introversion and extraversion, make a second axis.",
+      "quotes": [
+        {
+          "work": "cw06",
+          "quote": "I distinguish four basic functions in all, two rational and two irrational (qq.v.): thinking and feeling, sensation and intuition (qq.v.).",
+          "para": 731
+        },
+        {
+          "work": "cw06",
+          "quote": "Sensation and intuition I call irrational functions, because they are both concerned simply with what happens and with actual or potential realities. Thinking and feeling, being discriminative functions, are rational.",
+          "para": 983
+        },
+        {
+          "work": "cw06",
+          "quote": "Sensation establishes what is actually present, thinking enables us to recognize its meaning, feeling tells us its value, and intuition points to possibilities as to whence it came and whither it is going in a given situation.",
+          "para": 958
+        },
+        {
+          "work": "cw06",
+          "quote": "The four functions are somewhat like the four points of the compass; they are just as arbitrary and just as indispensable.",
+          "para": 958
+        },
+        {
+          "work": "cw06",
+          "quote": "The four functions therefore form, when arranged diagrammatically, a cross with a rational axis at right angles to an irrational axis.",
+          "para": 983
+        },
+        {
+          "work": "cw11",
+          "para": 246,
+          "quote": "So, too, there are four aspects of psychological orientation, beyond which nothing fundamental remains to be said."
+        },
+        {
+          "work": "cw06",
+          "quote": "each of the two general attitudes, introversion and extraversion, manifests itself in a special way in an individual through the predominance of one of the four basic functions.",
+          "para": 913
+        },
+        {
+          "work": "cw06",
+          "quote": "These contrary attitudes are in themselves no more than correlative mechanisms: a diastolic going out and seizing of the object, and a systolic concentration and detachment of energy from the object seized.",
+          "para": 6
+        },
+        {
+          "work": "sem-zarathustra",
+          "quote": "consciousness has four corners as it were, four different ways or aspects, which we call the four functions",
+          "page": 1475
+        },
+        {
+          "work": "cw06",
+          "quote": "Very frequently, indeed as a general rule, a man identifies more or less completely with the most favoured and hence the most developed function.",
+          "para": 763
+        }
+      ],
+      "links": [
+        {
+          "type": "family",
+          "id": "quaternity"
+        },
+        {
+          "type": "family",
+          "id": "thinking"
+        },
+        {
+          "type": "family",
+          "id": "feeling"
+        },
+        {
+          "type": "family",
+          "id": "sensation"
+        },
+        {
+          "type": "family",
+          "id": "intuition"
+        },
+        {
+          "type": "archetype",
+          "id": "four"
+        }
+      ]
     }
   ]
 }

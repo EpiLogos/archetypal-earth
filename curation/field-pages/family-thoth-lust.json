@@ -1,0 +1,89 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-lust",
+ "line": "Crowley's account of Atu XI: its letter, sign, path on the Tree and what he says the figure is.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The sign and the letter, in the chapter's own words.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This Trump is assigned to the sign of Leo in the Zodiac.",
+     "page": 84,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Teth, which means a serpent.",
+     "page": 84,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The table gives Key Scale path 19. Crowley says the path is the influence from Chesed upon Geburah, not the Strength of Geburah, and that the path of Gimel cuts it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Technical analysis shows that the Path corresponding to the card is not the Strength of Geburah, but the influence from Chesed upon Geburah",
+     "page": 83,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the influence from Chesed upon Geburah, the Path balanced both vertically and horizontally on the Tree of Life",
+     "page": 83,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "path of Gimel, the Moon, descending from the highest, cuts the path of Teth, Leo, the house of",
+     "page": 85,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's description of the figure and the act it shows. This is his account of the card, not a reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It is the Kerub of Fire, and is ruled by the Sun.",
+     "page": 84,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It represents the act of the original marriage as it occurs in nature,",
+     "page": 84,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "leo"
+  },
+  {
+   "type": "family",
+   "id": "chesed"
+  },
+  {
+   "type": "family",
+   "id": "geburah"
+  },
+  {
+   "type": "archetype",
+   "id": "syzygy"
+  }
+ ]
+}

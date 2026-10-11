@@ -1,0 +1,75 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-tower",
+ "line": "Crowley's account of Atu XVI: the letter Pe, Mars, and the picture of destruction by fire.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter and the planet, and Crowley's description of the picture.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Pé, which means a mouth; it refers to the planet Mars.",
+     "page": 98,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The picture shows the destruction of existing material by fire.",
+     "page": 98,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The text gives no ends for this path. The table gives Key Scale path 27; the general rule is one letter to each path.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These paths are the paths which join the ten numbers on the",
+     "page": 36,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "and one letter goes to each path.",
+     "page": 36,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's reading of the picture: the cosmic energy shown in its grossest form, and the Eye.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In its simplest interpretation it refers to the manifestation of cosmic energy in its grossest form.",
+     "page": 98,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The dominating feature of this card is the Eye of Horus.",
+     "page": 99,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mars"
+  },
+  {
+   "type": "archetype",
+   "id": "shadow"
+  }
+ ]
+}

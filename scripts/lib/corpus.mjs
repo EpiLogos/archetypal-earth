@@ -152,7 +152,8 @@ export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = []
     works.push({ work, title: doc.title, file: `${work}.json`, pages: parsed.pages.length, paras: parsed.paras.length, chapters: parsed.chapters.length });
     log(`corpus ${work}: ${parsed.pages.length} pages, ${parsed.paras.length} ¶ anchors, ${parsed.chapters.length} chapters`);
   }
-  const index = { generatedAt: new Date().toISOString(), vaultPath: vault, works };
+  // the same clock the field uses (FIELD_GENERATED_AT pins it for tests), so two ingests of one vault are byte-identical
+  const index = { generatedAt: process.env.FIELD_GENERATED_AT || new Date().toISOString(), vaultPath: vault, works };
   fs.writeFileSync(path.join(outDir, 'index.json'), JSON.stringify(index));
   const spine = spineLines.length ? checkAgainstSpine(built, spineLines, log) : null;
   return { works: works.length, pages: works.reduce((s, w) => s + w.pages, 0), paras: works.reduce((s, w) => s + w.paras, 0), spine };

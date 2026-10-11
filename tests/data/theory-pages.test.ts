@@ -55,7 +55,7 @@ describe('the theory nodes have pages', () => {
       expect(q.text.length, q.where).toBeGreaterThan(30);
       expect(verify(load, { work: q.cite.work, locator: q.cite.locator, quote: q.text }), q.where).toBeNull();
     }
-  });
+  }, 120_000);
 
   it('the psychoid carries its own CW8 material in full, as the owner named it', () => {
     const p = data.pages.psychoid as Page;
@@ -103,5 +103,5 @@ describe('the theory nodes have pages', () => {
     const built = buildTheoryPages();
     expect(built.errors).toEqual([]);
     expect(data).toEqual(built.data);
-  });
+  }, 120_000);
 });

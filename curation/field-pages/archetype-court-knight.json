@@ -1,0 +1,87 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "court-knight",
+ "line": "Crowley's Knight is the Yod of the Name and the Father of the pagan series. The tie to the Wise Old Man is a reading made here.",
+ "sections": [
+  {
+   "id": "the-letter-of-the-name",
+   "title": "The letter of the Name",
+   "line": "Crowley gives the four courts the four letters of the Name, and the Knights the first of them.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Knights represent the powers of the letter Yodh in the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards constitute a pictorial analysis of the powers of the four letters of the Name and the four Elements.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "father-mother-son-daughter",
+   "title": "Father, Mother, Son, Daughter",
+   "line": "Crowley sets the courts as the series Father, Mother, Son and Daughter, and contrasts it with the Hebrew scheme.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It has been thought better, for the present pack, to adopt the term “Knight”, “Queen”, “Prince” and “Princess”, to represent the series Father, Mother, Son, Daughter, because the doctrine involved, which is extraordinarily complex and difficult, demands it.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Hebrew system is straightforward and irreversible; it postulates Father and Mother from whose union issue Son and Daughter.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Court cards are referred to the numbers 2, 3, 6 and 10",
+     "page": 261,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-knight-as-father",
+   "title": "The Knight as Father",
+   "line": "Crowley says the Father is Knight because he rides, and that the Hermit's Yod is the Father who is Wisdom. The tie to the Wise Old Man rests on that Wisdom, and is a reading made here, not an equation Crowley states.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Father is “Knight” because he is represented as riding on a horse.",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The letter Yod is the first letter of the name Tetragrammaton, and this symbolizes the Father, who is Wisdom;",
+     "page": 79,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The moral qualities appropriate to this figure are activity, generosity, fierceness, impetuosity, pride",
+     "page": 141,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "wise-old-man"
+  },
+  {
+   "type": "family",
+   "id": "thoth-tarot"
+  }
+ ]
+}

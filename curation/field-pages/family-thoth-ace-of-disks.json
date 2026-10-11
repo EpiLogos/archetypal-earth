@@ -1,0 +1,79 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-ace-of-disks",
+ "line": "Crowley’s Ace of Disks: the Root of the Powers of Earth, Kether for the Aces, no planet-in-sign.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley names",
+   "line": "The chapter heading for the card. The second quotation gives the element of its suit.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "THE ROOT OF THE POWERS OF EARTH",
+     "page": 224,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
+     "page": 24,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "place-on-the-tree",
+   "title": "Its place on the Tree",
+   "line": "The Aces essay places the four Aces together at Kether. The Ace of Disks chapter gives no planet-in-sign. The quarter line places the Disks over Europe and Africa.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "On the other hand, Spirit represents Kether.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa",
+     "page": 175,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What it figures",
+   "line": "Crowley says the Ace pictures the entry of the Energy called Earth, and that the Disks are a whirling emblem rather than coins.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ace of Disks pictures the entry of that type of Energy which is called Earth.",
+     "page": 224,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Nor are the Disks any more to be considered as Coins; the Disk is a whirling emblem.",
+     "page": 225,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-disks"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "kether"
+  }
+ ]
+}

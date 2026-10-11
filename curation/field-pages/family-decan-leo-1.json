@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-leo-1",
+ "line": "Crowley's Five of Wands is the card for the first decan of Leo, with Saturn as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "The text names the pair Saturn and Leo; the attribution table reads Saturn in Leo.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the five of Wands is called Strife.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It is ruled also by Saturn and Leo.",
+     "page": 189,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "There is no limit to the scope of this volcanic energy.",
+     "page": 189,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "leo"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  },
+  {
+   "type": "family",
+   "id": "thoth-five-of-wands"
+  }
+ ]
+}

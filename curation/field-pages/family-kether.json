@@ -1,0 +1,100 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "kether",
+ "line": "Crowley gives Kether the number 1 and the Crown; Jung names it the root of the Tree and does not number it.",
+ "sections": [
+  {
+   "id": "crowley-number-one",
+   "title": "Crowley's number 1",
+   "line": "Crowley's Book of Thoth sets Kether at the number 1 and says little more about it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This gives the number 1, which is called Kether, the",
+     "page": 33,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "concealed, so that nobody knows anything about it at all.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "topmost point of the Yod of Tetragrammaton.",
+     "page": 110,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Finally, from Kether, the supreme, descends directly",
+     "page": 211,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-list-without-its-name",
+   "title": "The list that does not name it",
+   "line": "The Universe list gives its first item to the primum mobile. Crowley does not write Kether beside that item, so the number is his and the label is implied, not stated.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The primum mobile, represented by Pluto.",
+     "page": 111,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "jung-root-and-head",
+   "title": "Jung's root and head",
+   "line": "Jung's Kether is the root of the Tree and the head of the Original Man. He gives it no number.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth",
+     "para": 18,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "signifies the genital region of the Original Man, whose head is Kether",
+     "para": 18,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "above-the-abyss",
+   "title": "Above the Abyss",
+   "line": "Daath and the Abyss are not sephiroth and have no family of their own. These quotations give Crowley's account of the Supernals beyond the Abyss; they do not place Kether in a list.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "And this is the great Mystery of the Supernals that are beyond the Abyss.",
+     "page": 133,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "the High Priestess is the first card which connects the Supernal Triad with the Hexad;",
+     "page": 61,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "tree"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  }
+ ]
+}

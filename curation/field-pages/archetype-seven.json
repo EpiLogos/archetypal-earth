@@ -1,0 +1,120 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "seven",
+ "line": "Seven is the company of planetary gods, read through alchemy's metals and the Gnostic archons, with Pauli's dream-reading beside it.",
+ "sections": [
+  {
+   "id": "what-jung-names",
+   "title": "What Jung names",
+   "line": "The seven stands for the planetary gods, and in the language of initiation for the highest stage. Jung gives no essay on seven; the number is named where he discusses planets, metals and initiation.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "In the language of initiation, “seven” stands for the highest stage of illumination",
+     "para": 83,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The “seven” refer to the gods of the planets, or the seven metals",
+     "para": 563,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The seven are the planetary gods of the ancients.",
+     "para": 243,
+     "voice": "Jung (note)"
+    }
+   ]
+  },
+  {
+   "id": "gods-metals-archons",
+   "title": "Gods, metals and archons",
+   "line": "Alchemy takes the planetary company into its metals, and the same stars become archons, spheres with doors for the ascent.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The historical sousentendu of the seven is the antique company of seven gods who later took up their abode in the seven metals of alchemy",
+     "para": 468,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "Originally the seven stars were the seven great Babylonian gods, but at the time of Enoch’s revelation they had become the seven Archons",
+     "para": 298,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw13",
+     "quote": "Its connection with the seven metals implies a connection with the seven planets, so that the tree becomes the world-tree",
+     "para": 407,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The seven archons correspond to the seven planets and represent so many spheres with doors which the celebrant has to pass through on his ascent",
+     "para": 576,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-seven-stages",
+   "title": "The stages of the work, and the week",
+   "line": "The stages of the work are marked by seven colours tied to the planets, and the archetype of the seven returns in the division of the week.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "The stages of the work are marked by seven colours which are associated with the planets",
+     "para": 390,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The archetype of the seven appears again in the division of the week and the naming of its days",
+     "para": 579,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "pauli-and-von-franz",
+   "title": "Pauli and von Franz",
+   "line": "Pauli reads the seven of his own dream as the birth of the anima. Von Franz gives the Mayan seven-one gods, Bruno's seven images per planet, and the seven beside three in the Lo-shu figure.",
+   "quotes": [
+    {
+     "work": "letters-pauli",
+     "quote": "So the 7 is an indication of the birth of the anima.",
+     "page": 77,
+     "voice": "Pauli"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "In the Mayan culture, for instance, so-called seven-one-gods play an outstanding role.",
+     "page": 77,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "the forty-nine planetary images (seven per planet)",
+     "page": 199,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "the numbers three and seven to his right and left",
+     "page": 36,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "eight"
+  }
+ ]
+}

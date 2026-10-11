@@ -31,6 +31,8 @@ const PATHS = {
   coincidences: `<circle cx="6" cy="8" r="3.6" ${S}/><circle cx="10" cy="8" r="3.6" ${S}/>`,
   // number: the quaternio, four points round one
   number: `<circle cx="8" cy="8" r="1.2" ${S}/><circle cx="8" cy="3" r="1.2" ${S}/><circle cx="13" cy="8" r="1.2" ${S}/><circle cx="8" cy="13" r="1.2" ${S}/><circle cx="3" cy="8" r="1.2" ${S}/>`,
+  // alchemy: a retort, its lip and the level of the matter in it
+  alchemy: `<path d="M6.2 2.4h3.6M6.8 2.4v3.2L3.7 11.2c-.5.9.1 1.9 1.1 1.9h6.4c1 0 1.6-1 1.1-1.9L9.2 5.6V2.4" ${S}/><path d="M5.2 9.6h5.6" ${S}/>`,
   filter: `<path d="M2.5 4h11M4.5 8h7M6.5 12h3" ${S}/>`,
   download: `<path d="M8 2.5v8M4.8 7.4L8 10.6l3.2-3.2M3 13.5h10" ${S}/>`,
   issue: `<circle cx="8" cy="8" r="5.6" ${S}/><path d="M8 4.8v3.8M8 11.1v.1" ${S}/>`,

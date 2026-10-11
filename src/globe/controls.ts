@@ -61,6 +61,12 @@ export class CameraRig {
    * has always had; the sky layer moves it toward the Sun across the pull-back's handoff (src/sky/stages.ts).
    */
   readonly focus = new THREE.Vector3();
+  /**
+   * When set, the engine holds `focus` here instead of taking it from the sky layer. Scripted sky flights (the descent
+   * from a planet, the return to it) are Earth-centred polar flights: they pin the focus to the origin so the layer's own
+   * focus easing (approach / release) cannot move the camera underneath them. null: the layer owns the focus.
+   */
+  focusPin: THREE.Vector3 | null = null;
   shiftX = 0;
   shiftY = 0;
   tShiftX = 0;
@@ -104,12 +110,22 @@ export class CameraRig {
   private tmpT: Vec3 = [0, 0, 0];
   private flyEndCbs: (() => void)[] = [];
   /**
-   * Orbit-satellite gaze: freeze the camera's world position (stay at the planet) and turn only the look-at
-   * toward a point (the Earth). Null = normal orbit rig.
+   * The look-at point is `lerp(lookFrom, lookTo, ease(lookT))`, a scene point. `lookTo` is the held target, or the
+   * live `focus` while `lookTrack` (a recentre). The camera POSITION never depends on any of this: it is always
+   * focus + dir(lat, lon)·dist, so a gaze turns the camera and never translates it.
+   * The look blend (`lookOffset`) eases `lookOff0` → `lookGoal` on the same `ease(lookT)`: 1 = held on a target, 0 = centred.
+   * A retarget starts a new turn from wherever the look is now, so it never jumps.
    */
-  private gaze: { pos: THREE.Vector3; from: THREE.Vector3; to: THREE.Vector3; t: number; dur: number } | null = null;
-  private gazeLook = new THREE.Vector3();
-  private gazeDone: (() => void) | null = null;
+  private lookFrom = new THREE.Vector3();
+  private lookTo = new THREE.Vector3();
+  private lookTrack = true;
+  private lookT = 1;
+  private lookDur = 1;
+  private lookOff0 = 0;
+  private lookGoal: 0 | 1 = 0;
+  private lookDone: (() => void) | null = null;
+  private lookTmp = new THREE.Vector3();
+  private orbitTmp = new THREE.Vector3();
 
   constructor(private camera: THREE.PerspectiveCamera, private dom: HTMLElement, private opts: RigOptions) {
     dom.addEventListener('pointerdown', this.onDown);
@@ -130,9 +146,37 @@ export class CameraRig {
     return this.fly !== null;
   }
 
-  /** True while the camera is frozen in place and only turning to look at a gaze target. */
+  /** True while the look is turning toward a target, held off the focus, or easing back to it. The position is never affected. */
   get gazing(): boolean {
-    return this.gaze !== null;
+    return this.lookT < 1 || this.lookOffset > 1e-3;
+  }
+
+  /** The eased look blend: 1 held on a target, 0 centred on the focus, between while a turn runs. */
+  get lookOffset(): number {
+    return this.lookOff0 + (this.lookGoal - this.lookOff0) * easeInOutCubic(this.lookT);
+  }
+
+  /** The current look-at point (scene coordinates), written into `out`. */
+  lookPoint(out: THREE.Vector3 = new THREE.Vector3()): THREE.Vector3 {
+    const to = this.lookTrack ? this.focus : this.lookTo;
+    const e = easeInOutCubic(this.lookT);
+    if (e >= 1) out.copy(to);
+    else out.lerpVectors(this.lookFrom, to, e);
+    // degenerate: the look point is the camera itself, or lies on the up axis, where lookAt has no orientation — look at the focus
+    const p = this.orbitPos(this.orbitTmp);
+    const dx = out.x - p.x;
+    const dy = out.y - p.y;
+    const dz = out.z - p.z;
+    const len2 = dx * dx + dy * dy + dz * dz;
+    if (!(len2 > 1e-18) || dx * dx + dz * dz < 1e-10 * len2) out.copy(this.focus);
+    return out;
+  }
+
+  /** The camera position and look-at point the rig produces now, for tests and the harness. */
+  snapshot(): { pos: [number, number, number]; look: [number, number, number] } {
+    const p = this.orbitPos(new THREE.Vector3());
+    const l = this.lookPoint(new THREE.Vector3());
+    return { pos: [p.x, p.y, p.z], look: [l.x, l.y, l.z] };
   }
 
   onFlyEnd(cb: () => void) {
@@ -145,21 +189,45 @@ export class CameraRig {
   }
 
   /**
-   * Stay exactly where the camera is; turn only to look at a scene point.
-   * Orbit gaze (look at Earth) and return-to-sky (look at the planet) both use this — no translation.
+   * Turn the camera to look at a scene point, without moving it: the position stays focus + dir(lat, lon)·dist.
+   * Eases from wherever the look is now (mid-turn included), so retargeting is continuous. `onDone` fires once on arrival.
+   * Orbit gaze (look at Earth) and return-to-sky (look at the planet) both use this.
    */
   lookAtPoint(target: THREE.Vector3, opts: { duration?: number; instant?: boolean; onDone?: () => void } = {}) {
     this.cancelFly(false);
     this.settleTo = null;
     this.wheelDriven = false;
     this.vLat = this.vLon = 0;
-    this.gazeDone = opts.onDone ?? null;
-    const pos = this.camera.position.clone();
-    const from = this.focus.clone();
     const dur = opts.instant || this.opts.reduced ? 0 : (opts.duration ?? 1.5);
-    this.gaze = { pos, from, to: target.clone(), t: dur <= 0 ? 1 : 0, dur: Math.max(dur, 1e-3) };
+    this.beginLook(target, 1, dur, opts.onDone ?? null);
+  }
+
+  /**
+   * Scripted pose, for the sky camera's tracks (descent, return, swing): set the orbit state directly, about the
+   * current `focus`, and hold the look on `look` (a scene point) or centre it on the focus when `look` is null.
+   * Cancels flights, inertia and any settle, and does not ease: the caller samples its own track every frame.
+   */
+  drive(lat: number, lon: number, dist: number, look: THREE.Vector3 | null = null) {
+    this.cancelFly(false);
+    this.vLat = this.vLon = 0;
+    this.anchor = null;
+    this.settleTo = null;
+    this.wheelDriven = false;
+    this.lat = Math.max(-MAX_LAT, Math.min(MAX_LAT, lat));
+    this.lon = wrapLon(lon);
+    this.dist = this.targetDist = Math.max(MIN_DIST + 0.02, dist);
+    if (look) {
+      this.lookFrom.copy(look);
+      this.lookTo.copy(look);
+      this.lookTrack = false;
+      this.lookT = 1;
+      this.lookGoal = 1;
+      this.lookOff0 = 1;
+      this.lookDone = null;
+    } else {
+      this.snapLookCentred();
+    }
     this.apply();
-    if (this.gaze.t >= 1) this.finishGaze();
   }
 
   /** Turn in place to look at a lat/lon on the Earth (unit sphere). */
@@ -168,15 +236,65 @@ export class CameraRig {
     this.lookAtPoint(new THREE.Vector3(this.tmpC[0], this.tmpC[1], this.tmpC[2]), opts);
   }
 
-  /** End a look-at hold; the next apply() uses the normal focus/dist orbit again. */
+  /**
+   * End a gaze: the look eases back to the focus (tracking it live) over 0.6 s. The position is untouched and nothing drops.
+   */
   clearGaze() {
-    this.gaze = null;
-    this.gazeDone = null;
+    this.recentreLook({ duration: 0.6 });
   }
 
-  private finishGaze() {
-    const cb = this.gazeDone;
-    this.gazeDone = null;
+  /**
+   * Ease the look point back to the focus, tracking the focus as it moves (default 0.7 s). Position untouched.
+   * Already centred: `onDone` fires at once. Already recentring: it carries on rather than restarting, so repeated
+   * input (wheel ticks) does not stall the ease.
+   */
+  recentreLook(opts: { duration?: number; onDone?: () => void } = {}) {
+    if (this.lookTrack && this.lookGoal === 0) {
+      if (this.lookT >= 1) {
+        opts.onDone?.();
+        return;
+      }
+      if (opts.onDone) this.lookDone = opts.onDone;
+      return;
+    }
+    const dur = this.opts.reduced ? 0 : (opts.duration ?? 0.7);
+    this.beginLook(null, 0, dur, opts.onDone ?? null);
+  }
+
+  /** Start a look turn from the current look point: to `to` (held), or to the focus when `to` is null (recentre). */
+  private beginLook(to: THREE.Vector3 | null, goal: 0 | 1, dur: number, done: (() => void) | null) {
+    const off = this.lookOffset;
+    this.lookPoint(this.lookTmp);
+    this.lookFrom.copy(this.lookTmp);
+    this.lookTrack = to === null;
+    if (to) this.lookTo.copy(to);
+    this.lookOff0 = off;
+    this.lookGoal = goal;
+    this.lookDur = Math.max(dur, 1e-3);
+    this.lookT = dur <= 0 ? 1 : 0;
+    this.lookDone = done;
+    this.apply();
+    if (this.lookT >= 1) this.finishLook();
+  }
+
+  private stepLook(dt: number) {
+    if (this.lookT >= 1) return;
+    this.lookT = Math.min(1, this.lookT + dt / this.lookDur);
+    if (this.lookT >= 1) this.finishLook();
+  }
+
+  /** Centre the look on the focus at once, with no turn (instant flights). */
+  private snapLookCentred() {
+    this.lookTrack = true;
+    this.lookT = 1;
+    this.lookGoal = 0;
+    this.lookOff0 = 0;
+    this.lookDone = null;
+  }
+
+  private finishLook() {
+    const cb = this.lookDone;
+    this.lookDone = null;
     cb?.();
   }
 
@@ -185,7 +303,6 @@ export class CameraRig {
    * `lift` (Earth radii at mid-flight) defaults from the hop's angle; pass 0 for a pure drop or a turn that must not climb.
    */
   flyTo(lat: number, lon: number, dist: number, opts: { duration?: number; instant?: boolean; lift?: number } = {}) {
-    this.clearGaze();
     const clampedLat = Math.max(-MAX_LAT, Math.min(MAX_LAT, lat));
     const to = dirFromLatLon(clampedLat, lon);
     const from = dirFromLatLon(this.lat, this.lon);
@@ -202,6 +319,8 @@ export class CameraRig {
       this.lon = wrapLon(lon);
       this.dist = this.targetDist = d1;
       this.fly = null;
+      if (opts.instant) this.snapLookCentred();
+      else this.recentreLook({ duration: 0.6 });
       this.apply();
       return;
     }
@@ -211,6 +330,8 @@ export class CameraRig {
     const lift = opts.lift !== undefined ? opts.lift : Math.min(1.25, ang * 0.62) * Math.min(1, 0.55 + ang);
     this.fly = { t: 0, dur, from, to, d0: this.dist, d1, lift };
     this.targetDist = d1;
+    // a held look eases back to the focus during the flight, so the flight ends centred and is not bent by a gaze
+    this.recentreLook({ duration: Math.min(dur * 0.6, 1.0) });
   }
 
   setShift(x: number, y: number) {
@@ -492,18 +613,6 @@ export class CameraRig {
     this.shiftX += (this.tShiftX - this.shiftX) * sk;
     this.shiftY += (this.tShiftY - this.shiftY) * sk;
 
-    // gaze: position frozen; only the look-at eases — skip orbit/flight motion
-    if (this.gaze) {
-      if (this.gaze.t < 1) {
-        this.gaze.t = Math.min(1, this.gaze.t + dt / this.gaze.dur);
-        this.apply();
-        if (this.gaze.t >= 1) this.finishGaze();
-      } else {
-        this.apply();
-      }
-      return;
-    }
-
     if (this.fly) {
       const f = this.fly;
       const pLat = this.lat;
@@ -558,6 +667,7 @@ export class CameraRig {
         }
       }
     }
+    this.stepLook(dt);
     this.apply();
   }
 
@@ -589,20 +699,17 @@ export class CameraRig {
     this.lon = ll.lon;
   }
 
-  private apply() {
-    if (this.gaze) {
-      const g = this.gaze;
-      const u = easeInOutCubic(Math.min(1, g.t));
-      this.gazeLook.lerpVectors(g.from, g.to, u);
-      this.camera.position.copy(g.pos);
-      this.camera.up.set(0, 1, 0);
-      this.camera.lookAt(this.gazeLook.x, this.gazeLook.y, this.gazeLook.z);
-      return;
-    }
+  /** The orbit position, focus + dir(lat, lon)·dist, written into `out`. */
+  private orbitPos(out: THREE.Vector3): THREE.Vector3 {
     dirFromLatLon(this.lat, this.lon, this.tmpC);
-    this.camera.position.set(this.focus.x + this.tmpC[0] * this.dist, this.focus.y + this.tmpC[1] * this.dist, this.focus.z + this.tmpC[2] * this.dist);
+    const f = this.focus;
+    return out.set(f.x + this.tmpC[0] * this.dist, f.y + this.tmpC[1] * this.dist, f.z + this.tmpC[2] * this.dist);
+  }
+
+  private apply() {
+    this.orbitPos(this.camera.position);
     this.camera.up.set(0, 1, 0);
-    this.camera.lookAt(this.focus.x, this.focus.y, this.focus.z);
+    this.camera.lookAt(this.lookPoint(this.lookTmp));
   }
 }
 

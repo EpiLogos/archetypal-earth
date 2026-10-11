@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "decan-taurus-1",
+ "line": "Crowley's Five of Disks is the card for the first decan of Taurus, with Mercury as its planet in the sign.",
+ "sections": [
+  {
+   "id": "crowley-card",
+   "title": "Crowley's card for this decan",
+   "line": "Crowley's chapter gives the title and the planet in Taurus.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "the card is called Worry.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This is emphasized by the rule of Mercury in Taurus",
+     "page": 231,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-is",
+   "title": "What the card is, in his words",
+   "line": "His description of what the card figures, as the card chapter gives it.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Number Five, Geburah, in the suit of Earth, shows the disruption of the Elements,",
+     "page": 231,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "taurus"
+  },
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "thoth-five-of-disks"
+  }
+ ]
+}

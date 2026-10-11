@@ -1,0 +1,64 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-moon",
+ "line": "Crowley's account of Atu XVIII: the letter Qoph, Pisces, and the Moon as her lowest avatar joining Netzach to Malkuth.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter and the sign, and Crowley's account of the Moon among the planets.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eighteenth Trump is attributed to the letter Qoph, which represents Pisces in the Zodiac.",
+     "page": 103,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Moon, partaking as she does of the highest and the lowest, and filling all the space between, is the most universal of the Planets.",
+     "page": 103,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree, and what it figures",
+   "line": "The path joins Netzach with Malkuth in her lowest avatar. Crowley reads the card as the threshold of life and of death.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this Trump, her lowest avatar, she joins the earthy sphere of Netzach with Malkuth,",
+     "page": 103,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This is the threshold of life; this is the threshold of death.",
+     "page": 104,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "pisces"
+  },
+  {
+   "type": "family",
+   "id": "netzach"
+  },
+  {
+   "type": "family",
+   "id": "malkuth"
+  },
+  {
+   "type": "archetype",
+   "id": "anima"
+  }
+ ]
+}

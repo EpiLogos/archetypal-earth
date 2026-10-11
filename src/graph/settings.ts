@@ -4,15 +4,29 @@
 import type { TieBasis } from '../types/field';
 import { DEFAULT_FORCES, FORCE_ROWS, type Forces } from './forces';
 
+/**
+ * The tiers the graph draws. Occurrences answer to `dust` (the toggle that was always there); the three node tiers
+ * of the field answer here — a tier switched off is absent from the drawing with its ties, never left stranded.
+ */
+export interface KindFlags {
+  archetype: boolean;
+  theoretic: boolean;
+  family: boolean;
+}
+
+export const DEFAULT_KINDS: KindFlags = { archetype: true, theoretic: true, family: true };
+
 export interface GraphSettings {
   forces: Forces;
   /** occurrences (the dust) shown */
   dust: boolean;
   /** which relations are followed */
   ties: TieBasis[];
+  /** which tiers are drawn (occurrences answer to `dust`) */
+  kinds: KindFlags;
 }
 
-export const DEFAULT_SETTINGS: GraphSettings = { forces: { ...DEFAULT_FORCES }, dust: true, ties: ['jung', 'inferred', 'site'] };
+export const DEFAULT_SETTINGS: GraphSettings = { forces: { ...DEFAULT_FORCES }, dust: true, ties: ['jung', 'inferred', 'site'], kinds: { ...DEFAULT_KINDS } };
 export const SETTINGS_KEY = 'archetypal-earth.graph';
 const BASES: readonly TieBasis[] = ['jung', 'inferred', 'site'];
 
@@ -33,14 +47,14 @@ export function clampForces(raw: unknown): Forces {
  * missing or of the wrong type. An empty list of relations is a choice the person made (all off) and is kept.
  */
 export function parseSettings(text: string | null | undefined): GraphSettings {
-  if (typeof text !== 'string' || !text) return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties] };
+  if (typeof text !== 'string' || !text) return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties], kinds: { ...DEFAULT_KINDS } };
   let o: unknown;
   try {
     o = JSON.parse(text);
   } catch {
-    return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties] };
+    return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties], kinds: { ...DEFAULT_KINDS } };
   }
-  if (!o || typeof o !== 'object' || Array.isArray(o)) return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties] };
+  if (!o || typeof o !== 'object' || Array.isArray(o)) return { ...DEFAULT_SETTINGS, forces: { ...DEFAULT_FORCES }, ties: [...DEFAULT_SETTINGS.ties], kinds: { ...DEFAULT_KINDS } };
   const rec = o as Record<string, unknown>;
   let ties: TieBasis[] = [...DEFAULT_SETTINGS.ties];
   if (Array.isArray(rec.ties)) {
@@ -54,7 +68,17 @@ export function parseSettings(text: string | null | undefined): GraphSettings {
     forces: clampForces(rec.forces),
     dust: typeof rec.dust === 'boolean' ? rec.dust : DEFAULT_SETTINGS.dust,
     ties,
+    kinds: clampKinds(rec.kinds),
   };
+}
+
+/** The tier flags from whatever was stored: a missing or non-boolean key is the default (drawn). */
+export function clampKinds(raw: unknown): KindFlags {
+  const out: KindFlags = { ...DEFAULT_KINDS };
+  if (!raw || typeof raw !== 'object') return out;
+  const o = raw as Record<string, unknown>;
+  for (const k of ['archetype', 'theoretic', 'family'] as const) if (typeof o[k] === 'boolean') out[k] = o[k] as boolean;
+  return out;
 }
 
 /** The minimal store this needs: localStorage, or nothing. */
@@ -83,7 +107,7 @@ export function loadSettings(store: KeyValueStore | null = browserStore()): Grap
 /** Write the settings. A failed write (quota, private window) is dropped: the layout still follows the person. */
 export function saveSettings(s: GraphSettings, store: KeyValueStore | null = browserStore()): void {
   try {
-    store?.setItem(SETTINGS_KEY, JSON.stringify({ v: 1, forces: s.forces, dust: s.dust, ties: s.ties }));
+    store?.setItem(SETTINGS_KEY, JSON.stringify({ v: 1, forces: s.forces, dust: s.dust, ties: s.ties, kinds: s.kinds }));
   } catch {
     // no storage: nothing to keep
   }

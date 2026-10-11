@@ -1,0 +1,75 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-hanged-man",
+ "line": "Crowley's account of Atu XII: the letter Mem, the element Water, and the sacrifice he reads in the figure.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "The letter is named in the text, so it is not table-only. The element is Water in the text and the table.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card, attributed to the letter Mem, represents the element of Water.",
+     "page": 87,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Yet the card in itself is essentially a glyph of Water; Mem is one of the three great Mother Letters",
+     "page": 89,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree",
+   "line": "The text gives no ends for this path. The table gives Key Scale path 23, and the general rule is one letter to each of the twenty-two paths.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These paths are the paths which join the ten numbers on the",
+     "page": 36,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "and one letter goes to each path.",
+     "page": 36,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-it-figures",
+   "title": "What the card figures, in his words",
+   "line": "Crowley's description of the figure and the act shown on the card.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "it is a baptism which is also a death.",
+     "page": 87,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Atu represents the sacrifice of “a male child of perfect innocence and high intelligence”",
+     "page": 89,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "archetype",
+   "id": "child"
+  }
+ ]
+}

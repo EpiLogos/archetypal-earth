@@ -14,12 +14,12 @@ import type { Model } from '../data/model';
 import type { RGB } from '../data/palette';
 import { smoothstep } from '../data/palette';
 import type { TimeModel } from '../state/timeModel';
-import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, type GEdge, type GNode, type Graph, type Neighbourhood, type SkyAnchorSource } from './build';
+import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, type GEdge, type GNode, type Graph, type Neighbourhood, type NodeKind, type SkyAnchorSource } from './build';
 import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
 import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, dustLiveFactor, linkDistance, linkStrength, liveFactor, type Forces } from './forces';
 import { clampZoom, Coast, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
-import { loadSettings, saveSettings } from './settings';
+import { loadSettings, saveSettings, DEFAULT_KINDS, type KindFlags } from './settings';
 
 // outside the local lens the field recedes to a whisper that is still clickable
 const GHOST_VIS = 0.05;
@@ -164,6 +164,7 @@ export class GraphView {
   private selected = -1;
   private depth = 1;
   private dust = true;
+  private kinds: KindFlags = { ...DEFAULT_KINDS };
   private ties: TieBasis[] = ['jung', 'inferred', 'site'];
   /** the layout's four forces, as the person set them (forces.ts) */
   private forces: Forces = { ...DEFAULT_FORCES };
@@ -210,6 +211,7 @@ export class GraphView {
     this.forces = saved.forces;
     this.dust = saved.dust;
     this.ties = saved.ties;
+    this.kinds = saved.kinds;
     this.gBase = this.g = buildGraph(model);
     this.live = new Float32Array(this.g.nodes.length).fill(1);
     this.nodes = this.g.nodes.map((n) => this.makeNode(n));
@@ -227,6 +229,7 @@ export class GraphView {
     this.tools = new GraphTools({
       onDepth: (d) => this.setDepth(d),
       onDust: (on) => this.setDust(on),
+      onKinds: (k) => this.setKinds(k),
       onTies: (bases) => this.setTies(bases),
       onForces: (f) => this.setForces(f),
       onSky: (on) => this.setSkyAnchors(on),
@@ -404,8 +407,8 @@ export class GraphView {
     const subject = t.subject ? this.g.byKey.get(t.subject) ?? -1 : -1;
     const selected = t.selected ? this.g.byKey.get(t.selected) ?? -1 : -1;
     const emph = t.emphasis && t.emphasis.length ? new Set(t.emphasis.map((i) => this.g.occurrenceIds[i]).filter((x) => x !== undefined)) : null;
-    const key = `${subject}|${this.depth}|${this.dust ? 1 : 0}|${selected}|${emph ? emph.size : 0}`;
-    const layoutKey = `${subject}|${this.depth}|${this.dust ? 1 : 0}`;
+    const key = `${subject}|${this.depth}|${this.dust ? 1 : 0}|${this.kindSig()}|${selected}|${emph ? emph.size : 0}`;
+    const layoutKey = `${subject}|${this.depth}|${this.dust ? 1 : 0}|${this.kindSig()}`;
     const prevSelected = this.selected;
     this.selected = selected;
     this.emph = emph;
@@ -482,7 +485,22 @@ export class GraphView {
   }
 
   private toolState(): ToolState {
-    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, sky: this.sky.status, skyAsOf: this.sky.asOf, forces: this.forces };
+    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, kinds: { ...this.kinds }, sky: this.sky.status, skyAsOf: this.sky.asOf, forces: this.forces };
+  }
+
+  /** A signature of the tier flags, for the layout key: switching a tier off re-lays the picture. */
+  private kindSig(): string {
+    return `${this.kinds.archetype ? 1 : 0}${this.kinds.theoretic ? 1 : 0}${this.kinds.family ? 1 : 0}`;
+  }
+
+  /** The kinds drawn, as the set builders take them; undefined while every tier is on (nothing to filter). */
+  private kindSet(): ReadonlySet<NodeKind> | undefined {
+    if (this.kinds.archetype && this.kinds.theoretic && this.kinds.family) return undefined;
+    const out = new Set<NodeKind>();
+    for (const k of ['archetype', 'theoretic', 'family'] as const) if (this.kinds[k]) out.add(k);
+    // occurrences answer to the dust toggle, not to the tiers
+    if (this.dust) out.add('occurrence');
+    return out;
   }
 
   private pushTools() {
@@ -555,12 +573,22 @@ export class GraphView {
 
   /** What the person keeps between visits (depth is per subject, so it is not among them). */
   private remember() {
-    saveSettings({ forces: this.forces, dust: this.dust, ties: this.ties });
+    saveSettings({ forces: this.forces, dust: this.dust, ties: this.ties, kinds: this.kinds });
   }
 
   private setDust(on: boolean) {
     if (on === this.dust) return;
     this.dust = on;
+    this.remember();
+    this.pushTools();
+    this.lastTargetKey = '';
+    this.setTarget(this.target);
+  }
+
+  /** A tier switched on or off: its nodes and its ties leave the drawing together. */
+  private setKinds(next: KindFlags) {
+    if (next.archetype === this.kinds.archetype && next.theoretic === this.kinds.theoretic && next.family === this.kinds.family) return;
+    this.kinds = { ...next };
     this.remember();
     this.pushTools();
     this.lastTargetKey = '';
@@ -615,9 +643,9 @@ export class GraphView {
     const g = this.g;
     let nb: Neighbourhood;
     if (this.mode === 'local' && this.subject >= 0) {
-      nb = neighbourhood(g, [this.subject], { depth: this.depth, occurrences: this.dust, tieBases: this.ties, cap: this.depth >= 3 ? 520 : 380 });
+      nb = neighbourhood(g, [this.subject], { depth: this.depth, occurrences: this.dust, tieBases: this.ties, kinds: this.kindSet(), cap: this.depth >= 3 ? 520 : 380 });
     } else {
-      nb = globalSet(g, this.dust, this.ties);
+      nb = globalSet(g, this.dust, this.ties, this.kindSet());
     }
     // a selected occurrence is always part of the picture, with the form it belongs to
     if (this.selected >= 0 && !nb.dist.has(this.selected)) {

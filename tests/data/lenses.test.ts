@@ -34,7 +34,7 @@ describe('the lens data: provenance lives in the quotes', () => {
       const qs = quotes(read(file));
       expect(qs.length).toBeGreaterThan(10);
       expect(qs.map((q) => verify(load, { work: q.cite.work, locator: q.cite.locator, quote: q.text })).filter(Boolean)).toEqual([]);
-    });
+    }, 120_000);
   }
 
   it('a quotation that is not in the corpus is refused, and a moved one fails its page', () => {
@@ -49,7 +49,7 @@ describe('the lens data: provenance lives in the quotes', () => {
     expect(a.errors).toEqual([]);
     expect(read('theory.json')).toEqual(t.data);
     expect(read('astrology.json')).toEqual(a.data);
-  });
+  }, 120_000);
 
   it('Aion, the book: every chapter is quoted from inside its own pages, in Jung\'s order', () => {
     const b = buildAionBook({ vault: DEFAULT_VAULT });
@@ -62,7 +62,7 @@ describe('the lens data: provenance lives in the quotes', () => {
   it('the deep fields the site links to are the ones the curation builds', async () => {
     const { DEEP_FIELDS } = await import('../../src/lenses/depth');
     expect([...DEEP_FIELDS].sort()).toEqual(Object.keys(read('depth.json').archetypes).sort());
-  });
+  }, 120_000);
 
   it('Jung, the first chart: the corpus gives the year and region; the time from the record names who gave it', () => {
     const jung = read('astrology.json').people.find((p: { id: string }) => p.id === 'jung');

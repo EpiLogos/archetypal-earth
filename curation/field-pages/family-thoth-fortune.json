@@ -1,0 +1,56 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-fortune",
+ "line": "Crowley's Atu X: the planet Jupiter and the letter Kaph; the table's numerical value for Kaph does not match his footnote.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "Jupiter, the Greater Fortune, and the letter Kaph. The footnote gives Kaph the value 20; the table prints 20,500.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the planet Jupiter, “the Greater Fortune” in astrology.",
+     "page": 81,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It corresponds to the letter Kaph1, which means 1Kaph 20 Pé 80=100, Qoph, Pisces. The initials K Ph are those of ?τεις and Φαλλος the palm of the hand",
+     "page": 81,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Crowley reads the card as change of state and as the element of luck, not as good fortune alone. The Key Scale gives path 21, with no ends in the text.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card thus represents the Universe in its aspect as a continual change of state.",
+     "page": 81,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "It would be narrow to think of Jupiter as good fortune; he represents the element of luck.",
+     "page": 81,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "jupiter"
+  },
+  {
+   "type": "archetype",
+   "id": "trickster"
+  }
+ ]
+}

@@ -36,7 +36,7 @@ const hash = (page) => page.evaluate(() => decodeURIComponent(location.hash));
 /** where each body stands now, as ecliptic longitude seen from the Earth, from the layer's own poses */
 const longitudes = (page) => page.evaluate(() => {
   const out = {};
-  for (const [k, v] of window.__earth.engine.sky.poses) if (k !== 'earth') out[k] = (((Math.atan2(v[1], v[0]) * 180) / Math.PI) + 360) % 360;
+  for (const [k, v] of window.__earth.engine.sky.poses) if (k !== 'terra') out[k] = (((Math.atan2(v[1], v[0]) * 180) / Math.PI) + 360) % 360;
   return out;
 });
 

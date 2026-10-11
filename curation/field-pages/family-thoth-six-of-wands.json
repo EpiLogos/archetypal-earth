@@ -1,0 +1,60 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-six-of-wands",
+ "line": "Six of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title and planetary attribution, as the chapter gives them (pdf 178, 191).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Six of Wands is called Victory.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The reference is also to Jupiter and Leo",
+     "page": 191,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The Sixes belong to Tiphareth (pdf 177), and the card names it (pdf 191). No further description of the image is quoted for this card.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Tiphareth.",
+     "page": 177,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents Tiphareth of the suit of Fire.",
+     "page": 191,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "tiphareth"
+  },
+  {
+   "type": "archetype",
+   "id": "six"
+  }
+ ]
+}

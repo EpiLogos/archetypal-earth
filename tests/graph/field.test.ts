@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildModel } from '../../src/data/model';
-import { buildGraph, globalSet, neighbourhood, nodeLiveness } from '../../src/graph/build';
+import { buildGraph, globalSet, neighbourhood, nodeLiveness, type NodeKind } from '../../src/graph/build';
 import type { Field } from '../../src/types/field';
 import { DEFAULT_RAMP, DEFAULT_TRAIL } from '../../src/data/time';
 
@@ -36,6 +36,9 @@ describe('graph of the real field', () => {
       for (const tie of t.families) expected.add(`t:${t.id}|f:${tie.id}|tie|${tie.basis}`);
       for (const tie of t.theoretics) if (tie.id !== t.id) expected.add(`t:${t.id}|t:${tie.id}|tie|${tie.basis}`);
     }
+    // joins (curation's relations between any two nodes) are drawn as ties, with their own basis
+    const jk = (e: { type: string; id: string }) => `${e.type === 'archetype' ? 'a' : e.type === 'theoretic' ? 't' : 'f'}:${e.id}`;
+    for (const j of field.joins ?? []) expected.add(`${jk(j.a)}|${jk(j.b)}|tie|${j.basis}`);
     for (const o of field.occurrences) {
       expected.add(`o:${o.id}|f:${o.familyId}|instance|`);
       for (const c of new Set(o.coFamilyIds)) {
@@ -68,6 +71,25 @@ describe('graph of the real field', () => {
     expect(occurrences.length).toBeGreaterThan(0);
     expect(occurrences.every((o) => two.dist.get(graph.byKey.get(`o:${o.id}`)!) === 2)).toBe(true);
     expect(two.edges.every((k) => two.dist.has(graph.edges[k].s) && two.dist.has(graph.edges[k].t))).toBe(true);
+  });
+
+  it('a tier switched off is absent with its ties: no stranded nodes, no dangling edges', () => {
+    const kinds = new Set<NodeKind>(['archetype', 'family', 'occurrence']);
+    const shown = globalSet(graph, true, undefined, kinds);
+    const kindOf = (id: number) => graph.nodes[id].kind;
+    expect([...shown.dist.keys()].every((id) => kindOf(id) !== 'theoretic')).toBe(true);
+    expect(shown.edges.every((k) => kindOf(graph.edges[k].s) !== 'theoretic' && kindOf(graph.edges[k].t) !== 'theoretic')).toBe(true);
+    // the rest of the field stands: the archetypes, the forms and the dust are all there
+    expect([...shown.dist.keys()].some((id) => kindOf(id) === 'archetype')).toBe(true);
+    expect([...shown.dist.keys()].some((id) => kindOf(id) === 'family')).toBe(true);
+    expect([...shown.dist.keys()].some((id) => kindOf(id) === 'occurrence')).toBe(true);
+    // a local graph keeps the subject it was asked for, and takes no node of a hidden tier as a neighbour
+    const self = graph.byKey.get('a:self')!;
+    const nb = neighbourhood(graph, [self], { depth: 2, cap: graph.nodes.length, kinds });
+    expect(nb.dist.has(self)).toBe(true);
+    expect([...nb.dist.keys()].every((id) => kindOf(id) !== 'theoretic')).toBe(true);
+    // with every tier on, the set builders take everything — the filter is undefined, not a list
+    expect(globalSet(graph, true).dist.size).toBe(graph.nodes.length);
   });
 
   it('applies relation filters to the traversal as well as to the drawn links', () => {

@@ -5,7 +5,7 @@
 // A deployed copy of the site never calls: `local` is false and every ask is refused up front (the same rule the live
 // clock follows). Whatever the sidecar returns is validated before it is believed — a malformed chart is an error, not a
 // chart with holes.
-import { BODY_KEYS } from '../types/sky';
+import { BODY_KEYS, canonicalBodyKey } from '../types/sky';
 import type { BodyKey, GeocodeResult, SidecarChart, SkyColumns, SkyData, SkyGrid } from '../types/sky';
 
 export type SidecarFailure =
@@ -90,7 +90,7 @@ export function chartProblems(c: unknown): string[] {
   if (!Array.isArray(o.warnings)) out.push('warnings: expected array');
   if (o.zodiac !== 'tropical') out.push('zodiac: expected "tropical" (the page labels longitudes as such)');
   if (!o.bodies || typeof o.bodies !== 'object') out.push('bodies: missing');
-  else for (const k of BODY_KEYS) if (k !== 'earth') point((o.bodies as Record<string, unknown>)[k], `bodies.${k}`);
+  else for (const k of BODY_KEYS) if (k !== 'terra') point((o.bodies as Record<string, unknown>)[k], `bodies.${k}`);
   point(o.angles?.ascendant, 'angles.ascendant');
   point(o.angles?.midheaven, 'angles.midheaven');
   if (!o.houses || typeof o.houses.effective !== 'string' || !Array.isArray(o.houses.cusps) || o.houses.cusps.length !== 12 || !o.houses.cusps.every((x) => isNum(x) && x >= 0 && x < 360)) out.push('houses: expected effective system and 12 cusp longitudes');
@@ -113,7 +113,13 @@ export function validateChart(c: unknown): SidecarChart {
 export const WINDOW_DAYS = 16;
 const PLANET_STEP_HOURS = 48;
 const MOON_STEP_HOURS = 6;
-const HELIO: BodyKey[] = ['mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'earth'];
+/** The heliocentric bodies in the sidecar's own names (the planet Earth is `earth` there). Must equal tests/sky/golden/birth.json's requests. */
+const HELIO_SIDECAR = ['mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'earth'];
+
+/** The sidecar's columns, re-keyed to the app's body keys (`earth` answers as `terra`); every other name is unchanged. */
+export function fromSidecarBodies<C>(bodies: Partial<Record<string, C>>): Partial<Record<BodyKey, C>> {
+  return Object.fromEntries(Object.entries(bodies).map(([k, v]) => [canonicalBodyKey(k), v])) as Partial<Record<BodyKey, C>>;
+}
 
 /** A window of the sidecar's own grids around one instant, shaped as the generated sky is, so SkyEphemeris reads it as is. */
 export interface BirthWindow {
@@ -128,7 +134,7 @@ const iso = (ms: number) => new Date(ms).toISOString().replace(/\.\d+Z$/, 'Z');
 function checkGrid(g: SkyGrid, bodies: string[]) {
   if (!g || typeof g.start !== 'string' || !isNum(g.stepHours) || !isNum(g.count) || !g.bodies) throw new SidecarError('unsupported', `The ephemeris window came back malformed.`);
   for (const b of bodies) {
-    const col = g.bodies[b as BodyKey] as SkyColumns | undefined;
+    const col = (g.bodies as Record<string, SkyColumns | undefined>)[b];
     if (!col || [col.lon, col.lat, col.r].some((a) => !Array.isArray(a) || a.length !== g.count || a.some((x) => !isNum(x)))) throw new SidecarError('unsupported', `The ephemeris window came back malformed (${b} column).`);
   }
 }
@@ -195,11 +201,11 @@ export class SidecarClient {
     const half = WINDOW_DAYS * 86_400_000;
     const start = iso(centreMs - half);
     const [planets, moon] = await Promise.all([
-      this.get<SkyGrid>('/positions', { start, stepHours: PLANET_STEP_HOURS, count: (2 * WINDOW_DAYS * 24) / PLANET_STEP_HOURS + 1, bodies: HELIO.join(','), frame: 'helio' }),
+      this.get<SkyGrid>('/positions', { start, stepHours: PLANET_STEP_HOURS, count: (2 * WINDOW_DAYS * 24) / PLANET_STEP_HOURS + 1, bodies: HELIO_SIDECAR.join(','), frame: 'helio' }),
       this.get<SkyGrid>('/positions', { start, stepHours: MOON_STEP_HOURS, count: (2 * WINDOW_DAYS * 24) / MOON_STEP_HOURS + 1, bodies: 'moon', frame: 'geo' }),
     ]);
-    checkGrid(planets, HELIO);
+    checkGrid(planets, HELIO_SIDECAR);
     checkGrid(moon, ['moon']);
-    return { planets, moon, from: iso(centreMs - half), to: iso(centreMs + half) };
+    return { planets: { ...planets, bodies: fromSidecarBodies(planets.bodies) }, moon, from: iso(centreMs - half), to: iso(centreMs + half) };
   }
 }

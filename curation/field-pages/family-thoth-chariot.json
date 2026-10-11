@@ -1,0 +1,74 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-chariot",
+ "line": "Crowley's Atu VII: Cancer, the cardinal sign of Water, and the path from Binah to Geburah; its letter appears in a footnote, not an attribution sentence.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The sign Cancer, the element Water, and the letter Cheth, which the text gives only in a footnote on the number 418. The table is the source for Cheth's attribution as the letter.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Atu VII refers to the zodiacal sign of Cancer, the sign into which the Sun moves at the Summer Solstice.",
+     "page": 74,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Cancer is the cardinal sign of the element of Water,",
+     "page": 74,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Note that Cheth—Cheth 8—Yod 10—Tan 400—has the value of 418.",
+     "page": 74,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "its-path",
+   "title": "Its path on the Tree, and the card figure",
+   "line": "Cancer is the path from Binah to Geburah. The Key Scale numbers it 18. Crowley says the figure has one function, which is to bear the Holy Grail.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Cancer also represents the path which leads from the great Mother Binah to Geburah",
+     "page": 74,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "His only function is to bear the Holy Grail.",
+     "page": 75,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "cancer"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  },
+  {
+   "type": "family",
+   "id": "binah"
+  },
+  {
+   "type": "family",
+   "id": "geburah"
+  },
+  {
+   "type": "archetype",
+   "id": "hero"
+  }
+ ]
+}

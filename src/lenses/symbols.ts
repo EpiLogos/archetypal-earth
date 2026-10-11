@@ -19,7 +19,7 @@ export function mount(ctx: LensContext): LensInstance {
   let framing: PracticeData | null = null;
   void loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
   const voc = () => (vocab ??= vocabulary(m));
-  const ok = (i: number) => passes(m.occ[i], ctx.filter());
+  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i]);
 
   const act: AmplifyActions = {
     openOccurrence: (id) => ctx.openOccurrence(id),

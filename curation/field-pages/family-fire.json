@@ -1,0 +1,133 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "fire",
+ "line": "In Jung's sources the fire of the work is hidden, is Mercurius, and is also the fourth function and the dynamism of feeling.",
+ "sections": [
+  {
+   "id": "mercurius-the-only-fire",
+   "title": "Mercurius as the only fire",
+   "line": "The alchemists count Mercurius as the only fire of the procedure, and the hidden fire that dwells within it.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "Indeed, Mercurius is really the only fire in the whole procedure.",
+     "page": 241
+    },
+    {
+     "work": "cw12",
+     "quote": "the hidden fire, the spiritus igneus dwelling in Mercurius, whose opposite poles are an agens (i.e., fire) and a patiens (i.e., quicksilver).",
+     "para": 473
+    },
+    {
+     "work": "cw12",
+     "quote": "The hylical water contains a hidden elemental fire.",
+     "para": 433
+    }
+   ]
+  },
+  {
+   "id": "fire-and-water-one-substance",
+   "title": "Fire and water in one substance",
+   "line": "Water and fire are one substance in two states, and the secret fire of the work is the mystical water.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "But not only is it the water, it is also its opposite: fire.",
+     "para": 338
+    },
+    {
+     "work": "cw11",
+     "quote": "The “secret fire of our philosophy” is said to be “our mystical water,” and the “permanent water” is the “fiery form of the true water.”",
+     "para": 355
+    },
+    {
+     "work": "cw18",
+     "quote": "The aqua nostra (our water), as is evident from the text and from numerous other sources, is also fire, the baptismal water, and at the same time the Holy Spirit this contains.",
+     "para": 1786
+    }
+   ]
+  },
+  {
+   "id": "four-kinds-of-fire",
+   "title": "Four kinds of fire",
+   "line": "Jung reports the fire as fourfold, and reads a fourfold fire as the self being the source of energy.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "When the alchemists attribute a quaternary nature to the fire, this amounts to saying that the self is the source of energy.",
+     "page": 144
+    },
+    {
+     "work": "cw09ii",
+     "quote": "the fire has not two but four aspects: the intelligible, which is all light; the heavenly, partaking of heat and light; the elemental, pertaining to the lower world and compounded of light, heat, and glow (ardor); and finally the infernal, opposed to the intelligible, glowing and burning without any light.",
+     "page": 144,
+     "voice": "Vigenere, reported by Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "It is evident from Maier's commentary that he is concerned on the one hand with the four elements and on the other with the four kinds of fire which are responsible for producing different states of aggregation.",
+     "page": 261
+    }
+   ]
+  },
+  {
+   "id": "the-fourth-function",
+   "title": "The fourth function",
+   "line": "Jung names the region of fire the inferior function, and links the four elements to the four functions only conditionally.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "The experience of the fourth quarter, the region of fire (i.e., the inferior function), is described by Maier as an ascent and descent through the seven planetary spheres.",
+     "para": 288
+    },
+    {
+     "work": "cw14",
+     "quote": "In order to become the ever-living bird of the spirit it needs the transforming fire, which is found in “Africa,” that is, in the encounter with and investigation of the fourth function and the animal soul represented by the Ortus.",
+     "para": 282
+    },
+    {
+     "work": "cw14",
+     "quote": "If we take the four directions and the four elements (see note 505) as a symbolical equivalent of the four basic functions of consciousness, we can say that Maier had become conscious of three of them",
+     "para": 276
+    }
+   ]
+  },
+  {
+   "id": "dynamism-and-libido",
+   "title": "Dynamism and libido",
+   "line": "Fire is dynamism and emotion, set against the passive contemplation of water, and Jung reads the universal fire as the fire of libido.",
+   "quotes": [
+    {
+     "work": "cw10",
+     "quote": "Fire symbolizes dynamism, passion, and emotion, whereas water with its coolness and substantiality represents the passive object, detached contemplation",
+     "para": 745
+    },
+    {
+     "work": "cw06",
+     "quote": "the universal fire is identical with the fire of libido, with the subject’s burning passion, which appears to him as an object because it is not differentiated into a disposable function",
+     "para": 495,
+     "voice": "Jung, quoting the Buddha's sermon"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  },
+  {
+   "type": "family",
+   "id": "water"
+  }
+ ]
+}

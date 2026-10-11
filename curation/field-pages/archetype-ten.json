@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "ten",
+ "line": "Ten is the completed cycle and the unfolding of unity; the tetraktys and von Franz's whole multiplicity stand beside it.",
+ "sections": [
+  {
+   "id": "the-completed-cycle",
+   "title": "The completed cycle",
+   "line": "Jung writes little on ten. In his commentary on eleven, the numbers one to ten have the significance of a completed cycle, and ten is the perfect unfolding of unity.",
+   "quotes": [
+    {
+     "work": "cw10",
+     "quote": "Ten is the perfect unfolding of unity, and the numbers one to ten have the significance of a completed cycle",
+     "para": 692,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw10",
+     "quote": "10 + 1 = 11 therefore denotes the beginning of a new cycle",
+     "para": 692,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-tetraktys",
+   "title": "The tetraktys",
+   "line": "Jung names the tetraktys for the number four, and writes that it contains the roots of eternal nature and underlies all existence. The sources here do not write the tetraktys as ten.",
+   "quotes": [
+    {
+     "work": "cw11",
+     "quote": "the Pythagorean oath, for instance, says that the tetraktys “contains the roots of eternal nature.”",
+     "para": 246,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "von-franz-on-ten",
+   "title": "Von Franz on ten",
+   "line": "Von Franz gives ten as the whole inexhaustible multiplicity of existence, the one integrated into it, and in a Chinese pair the ten that holds the one. Her one statement on the ten primal numbers of the cabala is placed here; the Sefiroth are left to their own pages.",
+   "quotes": [
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "in which ten here signifies the whole inexhaustible multiplicity of existence",
+     "page": 92,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "One contains no power (wu-l) in itself and is therefore integrated into the ten",
+     "page": 93,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "Ten, however, represents the ten in one",
+     "page": 92,
+     "voice": "von Franz"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "the ten primal numbers, the sephiroth, are considered to be emanations of divine immaterial origin",
+     "page": 95,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "archetype",
+   "id": "one"
+  },
+  {
+   "type": "archetype",
+   "id": "four"
+  },
+  {
+   "type": "archetype",
+   "id": "nine"
+  }
+ ]
+}

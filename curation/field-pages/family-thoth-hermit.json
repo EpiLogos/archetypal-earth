@@ -1,0 +1,66 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-hermit",
+ "line": "Crowley's Atu IX: the letter Yod, the Hand, and Virgo, ruled by Mercury; the text gives no path ends for the card.",
+ "sections": [
+  {
+   "id": "what-crowley-names",
+   "title": "What Crowley says the card is",
+   "line": "The letter Yod, the hand, and the sign Virgo, ruled by Mercury, with Mercury exalted there.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Yod, which means the Hand.",
+     "page": 79,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "this is reflected in the attribution of the card to the sign of Virgo",
+     "page": 80,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Yet not only is Virgo ruled by Mercury, but Mercury is exalted therein.",
+     "page": 80,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "what-the-card-figures",
+   "title": "What the card figures",
+   "line": "Yod as the Father, who is Wisdom; Crowley adds that the Father is the highest form of Mercury. The Key Scale gives path 20, with no ends in the text.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The letter Yod is the first letter of the name Tetragrammaton, and this symbolizes the Father, who is Wisdom;",
+     "page": 79,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "he is the highest form of Mercury, and the Logos, the Creator of all",
+     "page": 79,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "virgo"
+  },
+  {
+   "type": "family",
+   "id": "mercurius"
+  },
+  {
+   "type": "archetype",
+   "id": "wise-old-man"
+  }
+ ]
+}

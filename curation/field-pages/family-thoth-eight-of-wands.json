@@ -1,0 +1,67 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-eight-of-wands",
+ "line": "Eight of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "sections": [
+  {
+   "id": "what-it-is",
+   "title": "What Crowley says the card is",
+   "line": "Title, Mercury and Sagittarius (pdf 179), and Mercury as ruler (pdf 193).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eight of Wands is called Swiftness, as one might expect from its attribution to Mercury and Sagittarius.",
+     "page": 179,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Mercury rules the card, thus bringing down from Chokmah",
+     "page": 193,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "tree",
+   "title": "Its place on the Tree",
+   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod.",
+     "page": 179,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "figures",
+   "title": "What the card figures",
+   "line": "His description of the card's energy, not a divinatory reading.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card, therefore, represents energy of high velocity,",
+     "page": 193,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "thoth-wands"
+  },
+  {
+   "type": "family",
+   "id": "hod"
+  },
+  {
+   "type": "archetype",
+   "id": "eight"
+  }
+ ]
+}

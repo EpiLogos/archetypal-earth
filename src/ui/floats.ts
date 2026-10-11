@@ -3,13 +3,27 @@
 // Not a grid; a handful at most. Image-less entries become compact tonal plates.
 import type { ImageRef, Palette } from '../types/field';
 import type { Vec3 } from '../data/geo';
+import type { Subject } from '../data/model';
 import type { GlobeEngine, ScreenPoint } from '../globe/engine';
+import { Vector3 } from 'three';
 import { el, plate } from './dom';
 
 export type FloatTarget =
   | { type: 'occurrence'; occIdx: number }
   | { type: 'family'; id: string }
-  | { type: 'reading' };
+  | { type: 'reading' }
+  | { type: 'subject'; subject: Subject };
+
+/**
+ * `surface`: each plate anchors to its own point on the globe and fades with that point's facing (the default).
+ * `earth-point`: while gazing at the Earth from a planet, every plate anchors to the projected Earth centre and
+ * stays visible whenever that centre is in front of the camera.
+ */
+export type FloatAnchor = 'surface' | 'earth-point';
+
+export interface FloatOptions {
+  anchor?: FloatAnchor;
+}
 
 export interface FloatItem {
   /** where on the globe this image is tied */
@@ -42,12 +56,95 @@ export interface Obstacle {
   h: number;
 }
 
+/** Plate box as laid out (`h` includes the caption strip). */
+export interface PlateBox {
+  w: number;
+  h: number;
+}
+
+export interface FanBounds {
+  width: number;
+  height: number;
+  marginX: number;
+  top: number;
+  bottom: number;
+}
+
+export interface PlateCentre {
+  cx: number;
+  cy: number;
+}
+
+/** Anchor visibility: surface anchors fade with facing; the earth-point anchor is visible while the Earth is in front. */
+export function anchorVis(anchor: FloatAnchor, facing: number, centreInFront: boolean): number {
+  if (anchor === 'earth-point') return centreInFront ? 1 : 0;
+  return Math.max(0, Math.min(1, facing / 0.1));
+}
+
+/** Opacity, eased appear and hit-testing of one plate, `sinceBorn` ms after its stagger point. */
+export function plateOpacity(vis: number, sinceBorn: number, yields = false): { op: number; e: number; pointerEvents: 'auto' | 'none' } {
+  const appear = Math.max(0, Math.min(1, sinceBorn / 1100));
+  const e = appear * appear * (3 - 2 * appear);
+  const op = yields ? 0 : vis * e;
+  return { op, e, pointerEvents: op > 0.5 ? 'auto' : 'none' };
+}
+
+/** Two plate boxes collide when they are closer than their widths/heights plus the same gaps update() keeps. */
+function boxesOverlap(a: PlateCentre & PlateBox, b: PlateCentre & PlateBox): boolean {
+  return Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 + 22 && Math.abs(a.cy - b.cy) < (a.h + b.h) / 2 + 14;
+}
+
+/**
+ * Earth-point placement: plates fan out evenly around the Earth's projected centre (ax, ay). The fan is centred on
+ * the direction opposite the obstacles' mass (the open side panel), so plates lean away from it; with fewer than
+ * three plates the spacing is that of three, so one or two plates still sit symmetrically. The ring grows until
+ * neighbours clear each other, then every centre is clamped to bounds.
+ */
+export function fanTargets(ax: number, ay: number, plates: PlateBox[], obstacles: Obstacle[], bounds: FanBounds): PlateCentre[] {
+  const n = plates.length;
+  if (!n) return [];
+  let mx = 0, my = 0, mass = 0;
+  for (const o of obstacles) {
+    const a = o.w * o.h;
+    mx += (o.x + o.w / 2 - ax) * a;
+    my += (o.y + o.h / 2 - ay) * a;
+    mass += a;
+  }
+  const away = mass > 0 && Math.hypot(mx, my) > 1 ? Math.atan2(-my, -mx) : -Math.PI / 2;
+  const spacing = (Math.PI * 2) / Math.max(n, 3);
+  const { width: W, height: H, marginX, top, bottom } = bounds;
+  const place = (grow: number): PlateCentre[] => plates.map((p, i) => {
+    const a = away + (i - (n - 1) / 2) * spacing;
+    const reach = Math.hypot(p.w, p.h) * 0.5 + 64 + grow;
+    const cx = ax + Math.cos(a) * reach;
+    const cy = ay + Math.sin(a) * reach;
+    return {
+      cx: Math.min(W - marginX - p.w / 2, Math.max(marginX + p.w / 2, cx)),
+      cy: Math.min(H - bottom - p.h / 2, Math.max(top + p.h / 2, cy)),
+    };
+  });
+  let grow = 0;
+  let t = place(grow);
+  for (let it = 0; it < 40 && t.some((c, i) => t.some((d, j) => j > i && boxesOverlap({ ...c, ...plates[i] }, { ...d, ...plates[j] }))); it++) {
+    grow += 8;
+    t = place(grow);
+  }
+  return t;
+}
+
+/** Whether the Earth's centre lies in front of the camera (origin lies ahead of the camera position). */
+function centreInFront(engine: GlobeEngine): boolean {
+  const fwd = engine.camera.getWorldDirection(new Vector3());
+  return engine.camera.position.dot(fwd) < 0;
+}
+
 export class Floats {
   readonly root: HTMLElement;
   private svg: SVGSVGElement;
   private live: Live[] = [];
   private sp: ScreenPoint = { x: 0, y: 0, facing: 0 };
   private disc = { x: 0, y: 0, r: 1 };
+  private anchor: FloatAnchor = 'surface';
   obstacles: () => Obstacle[] = () => [];
 
   constructor(parent: HTMLElement, private onSelect: (t: FloatTarget) => void) {
@@ -69,8 +166,9 @@ export class Floats {
     this.live = [];
   }
 
-  set(items: FloatItem[], narrow: boolean) {
+  set(items: FloatItem[], narrow: boolean, opts?: FloatOptions) {
     this.clear();
+    this.anchor = opts?.anchor ?? 'surface';
     // scale with the viewport so five plates still fit a small window
     const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
     const vh = typeof window !== 'undefined' ? window.innerHeight : 900;
@@ -120,19 +218,29 @@ export class Floats {
     const top = narrow ? 64 : 88;
     const bottom = narrow ? 128 : 124;
 
-    // anchors on screen
+    const earth = this.anchor === 'earth-point';
+    const inFront = earth && centreInFront(engine);
+    const obs = this.obstacles();
+
+    // anchors on screen: every plate shares the Earth's centre in earth-point mode
     const pts: { x: number; y: number; vis: number }[] = [];
     let cx = 0, cy = 0, cn = 0;
     for (const l of this.live) {
+      if (earth) {
+        pts.push({ x: this.disc.x, y: this.disc.y, vis: anchorVis('earth-point', 0, inFront) });
+        continue;
+      }
       engine.project(l.item.dir, this.sp);
-      const vis = Math.max(0, Math.min(1, this.sp.facing / 0.1));
+      const vis = anchorVis('surface', this.sp.facing, false);
       pts.push({ x: this.sp.x, y: this.sp.y, vis });
       if (vis > 0) { cx += this.sp.x; cy += this.sp.y; cn++; }
     }
     if (cn) { cx /= cn; cy /= cn; } else { cx = this.disc.x; cy = this.disc.y; }
 
-    const targets: { cx: number; cy: number }[] = [];
-    this.live.forEach((l, i) => {
+    const targets: { cx: number; cy: number }[] = earth
+      ? fanTargets(this.disc.x, this.disc.y, this.live.map((l) => ({ w: l.w, h: l.h })), obs, { width: W, height: H, marginX, top, bottom })
+      : [];
+    if (!earth) this.live.forEach((l, i) => {
       const p = pts[i];
       let vx = p.x - cx;
       let vy = p.y - cy;
@@ -153,7 +261,6 @@ export class Floats {
     };
     this.live.forEach((l, i) => clampT(l, targets[i]));
 
-    const obs = this.obstacles();
     for (let it = 0; it < 24; it++) {
       for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
@@ -197,11 +304,9 @@ export class Floats {
       const t = targets[i];
       const p = pts[i];
       if (!l.placed) { l.x = t.cx; l.y = t.cy; l.placed = true; } else { l.x += (t.cx - l.x) * k; l.y += (t.cy - l.y) * k; }
-      const appear = Math.max(0, Math.min(1, (now - l.born) / 1100));
-      const e = appear * appear * (3 - 2 * appear);
-      const op = yields[i] ? 0 : p.vis * e;
+      const { op, e, pointerEvents } = plateOpacity(p.vis, now - l.born, yields[i]);
       l.node.style.opacity = String(op);
-      l.node.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+      l.node.style.pointerEvents = pointerEvents;
       l.node.style.transform = `translate3d(${l.x - l.w / 2}px, ${l.y - l.h / 2 + (1 - e) * 10}px, 0)`;
       // hairline from the place to the nearest edge of its plate
       const dx = l.x - p.x;

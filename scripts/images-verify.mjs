@@ -17,8 +17,8 @@ const GROUPS = ['archetypes', 'families', 'theoretics', 'occurrences'];
 // the same licence law the fetcher enforces (scripts/images.mjs); "No restrictions"
 // is Commons' marker for no known copyright restrictions
 const IMPROPER_LICENSE = /\b(NC|ND|GFDL|fair use|all rights reserved|non-?commercial)\b/i;
-const licenseOk = (l) => !!l && !IMPROPER_LICENSE.test(l) &&
-  /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution|no restrictions)/i.test(l);
+const licenseOk = (l) => !!l && (/owner's ruling \(D8\)/i.test(l) || (!IMPROPER_LICENSE.test(l) &&
+  /^(public domain|pd\b|pd-|pdm\b|pdm-|cc0|cc[ -]by\b|cc[ -]by[ -]sa|attribution|no restrictions)/i.test(l)));
 
 const errors = [];
 const warnings = [];
@@ -27,6 +27,14 @@ const err = (m) => errors.push(m);
 const warn = (m) => { if (!seenWarn.has(m)) { seenWarn.add(m); warnings.push(m); } };
 
 const images = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+// additive registers beside images.json (public/data/images-ext*.json): the same merge the ingest makes, main wins
+for (const f of fs.readdirSync(path.dirname(OUT)).filter((x) => /^images-ext[\w-]*\.json$/.test(x)).sort()) {
+  const ext = JSON.parse(fs.readFileSync(path.join(path.dirname(OUT), f), 'utf8'));
+  for (const g of GROUPS) {
+    images[g] ||= {};
+    for (const [id, ref] of Object.entries(ext[g] || {})) if (!images[g][id]) images[g][id] = ref;
+  }
+}
 const field = JSON.parse(fs.readFileSync(FIELD, 'utf8'));
 
 const entries = []; // { group, id, ref }
@@ -136,7 +144,9 @@ if (field.meta?.counts?.images !== attached) {
 const mb = (n) => (n / 1048576).toFixed(1);
 const total = fs.readdirSync(IMG_DIR, { recursive: true, withFileTypes: true })
   .filter((e) => e.isFile()).reduce((s, e) => s + fs.statSync(path.join(e.parentPath ?? e.path, e.name)).size, 0);
-const BUDGET_BYTES = 320 * 1024 * 1024; // kept in step with scripts/images.mjs (2026-10 uniqueness round)
+// Mirrors BUDGET_BYTES in scripts/images.mjs (1024 MB since the 2026-10 full-field round). Keep the two equal:
+// a lower number here would report a finished full-field build as over budget.
+const BUDGET_BYTES = 1024 * 1024 * 1024;
 if (total > BUDGET_BYTES) err(`image dir ${mb(total)} MB over budget`);
 else if (total > BUDGET_BYTES * 0.9) warn(`image dir ${mb(total)} MB is above 90% of budget`);
 

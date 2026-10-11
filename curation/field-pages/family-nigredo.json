@@ -1,0 +1,118 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "nigredo",
+ "line": "The nigredo as Jung states it: the initial blackness, the psychic reading he gives it, and the operations the texts name for it.",
+ "sections": [
+  {
+   "id": "the-stage-in-his-words",
+   "title": "The stage in Jung's words",
+   "line": "Jung's definition of the blackening, and the names the texts give it.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The nigredo or blackness (fig. 115) is the initial state, either present from the beginning as a quality of the prima materia, the chaos or massa confusa, or else produced by the separation (solutio, separatio, divisio, putrefactio) of the elements.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The nigredo signifies the mortificatio, putrefactio, solutio, separatio, divisio, etc., a state of dissolution and decomposition that precedes the synthesis.",
+     "para": 721,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Everything becomes doubtful, which is why the alchemists called this stage nigredo, tenebrositas, chaos, melancholia.",
+     "para": 708,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-psychological-reading",
+   "title": "The psychological reading",
+   "line": "Where Jung reads the blackening as a psychic condition, in his own commentary.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The author of this sentence must have been undergoing the experience of the nigredo, the first stage of the work, which was felt as “melancholia” in alchemy and corresponds to the encounter with the shadow in psychology.",
+     "para": 41,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The nigredo corresponds to the darkness of the unconscious, which contains in the first place the inferior personality, the shadow.",
+     "para": 646,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "In the nigredo, the “dark night of the soul,” the psychic contents free themselves from their attachment to the body, and the nature and meaning of this connection are recognized.",
+     "para": 722,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "operations-named",
+   "title": "The operations it names",
+   "line": "Putrefaction and interment are the texts' own names for the blackening.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Interment is identical with the nigredo.",
+     "para": 65,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The transformation is effected by putrefaction, which is synonymous with the nigredo, the grave, and death.",
+     "para": 714,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-black-colour",
+   "title": "The black and its names",
+   "line": "The black takes the names of the black sun, the raven and the earth, and the texts ask the alchemist to keep to it.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Hence there is also a Sol niger, a black sun, which coincides with the nigredo and putrefactio, the state of death.",
+     "para": 113,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Corvus (crow or raven) or caput corvi (raven’s head) is the traditional name for the nigredo (nox, melancholia, etc.).",
+     "para": 727,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The opus is far from having come to an end at this point, for the nigredo (terra nigra) still prevails and the substance of the stone is still black.",
+     "para": 264,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw16",
+     "quote": "You must not despise this blackness, or black colour, but persevere in it in patience, in suffering, and in silence",
+     "para": 512,
+     "voice": "Jung quoting the Rosarium"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "prima-materia"
+  },
+  {
+   "type": "family",
+   "id": "earth-element"
+  }
+ ]
+}

@@ -93,7 +93,7 @@ const radiusOf = (key: string) => BODIES.find((b) => b.key === key)!.radiusKm;
 describe('the approach to a body', () => {
   it('the Sun and the planets approach; Earth and the Moon keep their own framing', () => {
     expect([...APPROACH_BODIES].sort()).toEqual(['jupiter', 'mars', 'mercury', 'neptune', 'pluto', 'saturn', 'sun', 'uranus', 'venus']);
-    expect(isApproachBody('earth')).toBe(false);
+    expect(isApproachBody('terra')).toBe(false);
     expect(isApproachBody('moon')).toBe(false);
   });
 

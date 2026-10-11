@@ -168,12 +168,40 @@ export function validateField(f) {
     (o.body || []).forEach((p) => noLinks(w, p));
     image(w, o.image);
   }
+  // joins: an optional top-level list (older field.json files carry none); any node to any node, each endpoint resolved
+  if (f.joins != null && !Array.isArray(f.joins)) err('joins not an array');
+  const endpointIds = new Map([['archetype', archIds], ['theoretic', theoIds], ['family', famIds]]);
+  const joinIds = new Set();
+  for (const j of Array.isArray(f.joins) ? f.joins : []) {
+    const w = `join ${j?.id}`;
+    if (!j || typeof j !== 'object') { err('join is not an object'); continue; }
+    if (!isStr(j.id) || !/^[a-z0-9][a-z0-9-]*$/.test(j.id)) err(`${w}: id not kebab-case`);
+    if (joinIds.has(j.id)) err(`${w}: duplicate id`);
+    joinIds.add(j.id);
+    for (const k of ['a', 'b']) {
+      const e = j[k];
+      if (!e || typeof e !== 'object') { err(`${w}: ${k} endpoint missing`); continue; }
+      const ids = endpointIds.get(e.type);
+      if (!ids) err(`${w}: ${k} endpoint type ${e.type}`);
+      else if (!isStr(e.id) || !ids.has(e.id)) err(`${w}: ${k} endpoint ${e.type}:${e.id} unresolved`);
+    }
+    if (j.a && j.b && j.a.type === j.b.type && j.a.id === j.b.id) err(`${w}: self-join`);
+    if (!BASIS.has(j.basis)) err(`${w}: basis ${j.basis} is not jung, inferred or site`);
+    if (!isStr(j.note) || !j.note.trim()) err(`${w}: note empty`);
+    else {
+      if (j.note.length > 400) err(`${w}: note over 400 chars (${j.note.length})`);
+      noLinks(w, j.note);
+    }
+    for (const k of ['system', 'voice']) if (j[k] != null && !isStr(j[k])) err(`${w}: ${k} not a string`);
+  }
+
   // cross-consistency
   for (const fam of f.families) for (const id of fam.occurrenceIds || []) if (!occIds.has(id)) err(`family ${fam.id}: occurrenceId ${id} unknown`);
   for (const a of f.archetypes) for (const id of a.familyIds || []) if (!famIds.has(id)) err(`archetype ${a.id}: familyId ${id} unknown`);
   if (f.meta) {
     const c = f.meta.counts || {};
     if (c.archetypes !== f.archetypes.length || c.theoretics !== f.theoretics.length || c.families !== f.families.length || c.occurrences !== f.occurrences.length || c.cultures !== f.cultures.length) err('meta.counts disagree with arrays');
+    if ('joins' in c && c.joins !== (Array.isArray(f.joins) ? f.joins.length : 0)) err('meta.counts.joins disagrees with joins');
     if (f.occurrences.length && (f.meta.yearMin !== yMin || f.meta.yearMax !== yMax)) err('meta.yearMin/Max disagree with occurrences');
   }
   return errs;

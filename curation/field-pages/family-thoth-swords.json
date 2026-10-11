@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "thoth-swords",
+ "line": "Crowley attributes Swords to Air. The Ace gives the suit the Vau of the Name, while his general account gives Air the letter Aleph.",
+ "sections": [
+  {
+   "id": "air-as-conjunction",
+   "title": "Air as conjunction",
+   "line": "Crowley says Air results from Fire and Water, and that its obvious symbol is the wind.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
+     "page": 24,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Air is the result of the conjunction of Fire and Water",
+     "page": 210,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In nature, the obvious symbol of Air is the Wind",
+     "page": 210,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-vau-of-the-ace",
+   "title": "The Vau of the Ace",
+   "line": "The letter is given in the text of the Ace of Swords, and the Princes carry the same letter in the courts.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ace of Swords is the primordial Energy of Air, the Essence of the Vau of Tetragrammaton",
+     "page": 210,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
+     "page": 139,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "the-letter-of-air",
+   "title": "The letter of Air",
+   "line": "Crowley's general account gives Air the letter Aleph, and his card for the Fool carries it. He does not state the Ace's Vau and the general Aleph as one scheme, so the page keeps them apart.",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These elements are represented in the Hebrew alphabet by the letters Shin, Mem and Aleph.",
+     "page": 23,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Aleph, which means an Ox, but by its shape the Hebrew letter (so it is said) represents a plough‐ share; thus the significance is primarily Phallic.",
+     "page": 46,
+     "voice": "Crowley"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "air"
+  },
+  {
+   "type": "family",
+   "id": "thoth-minor-arcana"
+  },
+  {
+   "type": "archetype",
+   "id": "court-prince"
+  }
+ ]
+}

@@ -1,0 +1,100 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "rubedo",
+ "line": "The rubedo as Jung states it: the marriage of Sol and Luna, the last stage, and the reading he gives of its redness. The Self reading of the stage sits elsewhere.",
+ "sections": [
+  {
+   "id": "the-marriage",
+   "title": "The marriage",
+   "line": "The red and the white are King and Queen, and the rubedo is where their marriage is consummated.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The red and the white are King and Queen, who may also celebrate their “chymical wedding” at this stage",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The alchemists termed this the rubedo, in which the marriage of the red man and the white woman, Sol and Luna, is consummated.",
+     "para": 307,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "Luna in herself is spirit, and she at once joins her husband Sol, thus initiating the second and usually final stage, the rubedo.",
+     "para": 434,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-way-to-it",
+   "title": "The way to the redness",
+   "line": "Two of Jung's routes to the rubedo: the heat of the fire on the whitening, and the solificatio from the blackest shade.",
+   "quotes": [
+    {
+     "work": "cw12",
+     "quote": "The rubedo then follows direct from the albedo as the result of raising the heat of the fire to its highest intensity.",
+     "para": 334,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "who has risen up from “blackest shade” to the pure whiteness of Luna and attained his redness (rubedo) through the solificatio.",
+     "para": 441,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "sun-and-consciousness",
+   "title": "Sun and consciousness",
+   "line": "Jung's reading of the redness as warmth and light from the sun, and of the body taken up in the work's last image.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "The growing redness (rubedo) which now follows denotes an increase of warmth and light coming from the sun, consciousness.",
+     "para": 307,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "after the manner of an Assumption and Coronation of Mary, in which the Mother of God represents the body.",
+     "para": 664,
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "where-the-self-reading-is",
+   "title": "Where the Self reading sits",
+   "line": "The passages that tie the work's end to the unus mundus are on the unus mundus, not on the reddening itself.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "is none other than the “unus mundus,” the original, nondifferentiated unity of the world or of Being",
+     "para": 660,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "But a consummation of the mysterium coniunctionis can be expected only when the unity of spirit, soul, and body is made one with the original unus mundus.",
+     "para": 664,
+     "voice": "Jung"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "sun"
+  },
+  {
+   "type": "family",
+   "id": "moon"
+  }
+ ]
+}

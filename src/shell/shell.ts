@@ -19,6 +19,9 @@ export interface ShellHooks {
   countFor(f: FieldFilter): number;
   works: { id: string; name: string }[];
   cultures: { id: string; name: string }[];
+  /** the field's archetypes and theoretics, for the filter's own dimensions */
+  archetypes: { id: string; name: string }[];
+  theoretics: { id: string; name: string }[];
 }
 
 const FILTER_KINDS: LocusType[] = ['dream', 'vision', 'artifact', 'myth-episode', 'ritual', 'text-passage'];
@@ -222,6 +225,14 @@ export class Shell {
         const on = !!f.kinds?.includes(k);
         return pill(KIND_LABELS[k], on, () => set({ ...f, kinds: on ? f.kinds!.filter((x) => x !== k) : [...(f.kinds ?? []), k] }));
       }))]),
+      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Archetype' }), el('div', { class: 'sf-pills' }, this.hooks.archetypes.map((a) => {
+        const on = !!f.archetypes?.includes(a.id);
+        return pill(a.name, on, () => set({ ...f, archetypes: on ? f.archetypes!.filter((x) => x !== a.id) : [...(f.archetypes ?? []), a.id] }));
+      }))]),
+      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Theory' }), el('div', { class: 'sf-pills' }, this.hooks.theoretics.map((t) => {
+        const on = !!f.theoretics?.includes(t.id);
+        return pill(t.name, on, () => set({ ...f, theoretics: on ? f.theoretics!.filter((x) => x !== t.id) : [...(f.theoretics ?? []), t.id] }));
+      }))]),
       el('p', { class: 'sf-count', role: 'status', text: isEmpty(f) ? 'Showing the whole field.' : `${this.hooks.countFor(f).toLocaleString()} instances pass the filter.` }),
     );
     if (!isEmpty(f)) this.filterHost.append(el('button', { type: 'button', class: 'link-quiet sf-clear', text: 'Clear the filter', onclick: () => set({}) }));
@@ -230,7 +241,7 @@ export class Shell {
   private renderChips() {
     clear(this.chipRow);
     const name = (list: { id: string; name: string }[]) => (id: string) => list.find((x) => x.id === id)?.name ?? id;
-    const cs = chips(this.filter, { work: name(this.hooks.works), culture: name(this.hooks.cultures) });
+    const cs = chips(this.filter, { work: name(this.hooks.works), culture: name(this.hooks.cultures), archetype: name(this.hooks.archetypes), theoretic: name(this.hooks.theoretics) });
     this.chipRow.hidden = !cs.length;
     for (const c of cs) {
       this.chipRow.append(el('button', { type: 'button', class: 'sh-chip', 'aria-label': `Remove the filter: ${c.label}`, onclick: () => this.hooks.onFilter(c.without) }, [el('span', { text: c.label }), icon('close', 12)]));

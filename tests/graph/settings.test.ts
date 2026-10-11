@@ -67,12 +67,19 @@ describe('the graph settings: clamp and parse', () => {
     expect(parseSettings(JSON.stringify({ dust: false })).dust).toBe(false);
   });
 
+  it('the tiers are flags, and anything else is the default (drawn)', () => {
+    expect(parseSettings(JSON.stringify({ kinds: { theoretic: false } })).kinds).toEqual({ archetype: true, theoretic: false, family: true });
+    expect(parseSettings(JSON.stringify({ kinds: { theoretic: 0, family: 'off' } })).kinds).toEqual({ archetype: true, theoretic: true, family: true });
+    expect(parseSettings(JSON.stringify({ kinds: 'none' })).kinds).toEqual({ archetype: true, theoretic: true, family: true });
+    expect(parseSettings(null).kinds).toEqual({ archetype: true, theoretic: true, family: true });
+  });
+
   it('a saved set reads back as it was written', () => {
     const store = memory();
-    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[] };
+    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[], kinds: { archetype: true, theoretic: false, family: true } };
     saveSettings(s, store);
     expect(store.data[SETTINGS_KEY]).toBeTruthy();
-    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'] });
+    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'], kinds: { archetype: true, theoretic: false, family: true } });
   });
 });
 

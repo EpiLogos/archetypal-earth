@@ -1,0 +1,150 @@
+{
+ "version": 1,
+ "type": "family",
+ "id": "earth-element",
+ "line": "Jung puts earth as the fourth element in one passage and as a fifth in another, and as the black basis of the work.",
+ "sections": [
+  {
+   "id": "fourth-or-fifth",
+   "title": "Fourth or fifth",
+   "line": "Jung states both positions without resolving them; in the Axiom of Maria fire and earth stand at the two ends, with no interaction between them.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Earth occupies the central position as the fifth element, though it is not the quintessence and goal of the work but rather its basis, corresponding to terra as the arcane substance in Western alchemy.",
+     "para": 249
+    },
+    {
+     "work": "cw14",
+     "quote": "The synthesis of the incorruptible One or quintessence follows the Axiom of Maria, the earth representing the “fourth.”",
+     "para": 656
+    },
+    {
+     "work": "cw14",
+     "quote": "Fire comes at the beginning and is acted on by nothing, and earth at the end acts on nothing.",
+     "para": 656
+    },
+    {
+     "work": "cw14",
+     "quote": "Between fire and earth there is no interaction; hence the four elements do not constitute a circle, i.e., a totality.",
+     "para": 656
+    }
+   ]
+  },
+  {
+   "id": "basis-and-seed-bed",
+   "title": "Basis and seed-bed",
+   "line": "Earth is the arcane substance, the prima materia that a spirit inhabits, and the black field in which gold or lapis is sown.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "The alchemical earth, as we saw, is the arcane substance, here equated with the body of Christ and with adamah, the red earth of paradise.",
+     "para": 632
+    },
+    {
+     "work": "cw12",
+     "quote": "According to Basilius Valentinus, the earth (as prima materia) is not a dead body, but is inhabited by a spirit that is its life and soul.",
+     "para": 444,
+     "voice": "Basilius Valentinus, reported by Jung"
+    },
+    {
+     "work": "cw12",
+     "quote": "It is then the black earth in which the gold or the lapis is sown like the grain of wheat",
+     "para": 433
+    }
+   ]
+  },
+  {
+   "id": "nigredo-as-terra",
+   "title": "Nigredo as terra nigra",
+   "line": "Jung reads the blackness of the first stage as earth, terra nigra.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "The opus is far from having come to an end at this point, for the nigredo (terra nigra) still prevails and the substance of the stone is still black.",
+     "para": 264
+    },
+    {
+     "work": "cw14",
+     "quote": "In our context the interpretation of the nigredo as terra (earth)",
+     "para": 729
+    },
+    {
+     "work": "cw14",
+     "quote": "What remains below in the retort is our salt, that is, our earth, and it is of a black colour, a dragon that eats his own tail.",
+     "para": 244,
+     "voice": "Mylius, quoted by Jung"
+    }
+   ]
+  },
+  {
+   "id": "genesis-and-body",
+   "title": "Genesis, Adam and the body",
+   "line": "Earth is the earth that rose from the waters in Genesis, the dryness in Adam's composition, and the body in Barnaud's three-part scheme. The tie to the great mother is a reading made here, not one of these passages.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "It is the earth which, in Genesis, appeared out of the waters",
+     "para": 729
+    },
+    {
+     "work": "cw14",
+     "quote": "Dryness came to him from the earth, moisture from the water, heat from the spirit, and cold from the soul.",
+     "para": 552,
+     "voice": "Text Jung cites on Adam"
+    },
+    {
+     "work": "cw14",
+     "quote": "Here Barnaud is rather more subtle, for he equates heaven with the soul, earth with the body, and water with the spirit,139 and thus arrives at the idea of the wholeness of a living organism.",
+     "para": 59
+    }
+   ]
+  },
+  {
+   "id": "passive-contrary-and-another-fifth",
+   "title": "Passive, contrary, and another fifth",
+   "line": "Earth is passive beside water, the contrary of air, and unmoving among the moving elements; von Franz's fifth is a different one, the Chinese element of the centre.",
+   "quotes": [
+    {
+     "work": "cw13",
+     "quote": "Two of his elements are passive, earth and water, and two active, air",
+     "page": 249
+    },
+    {
+     "work": "cw14",
+     "quote": "The toad “is the opposite of air, it is a contrary element, namely earth, whereon alone it moves by slow steps, and does not trust itself to another element.",
+     "para": 2
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Fire as spiritual, the other elements material; earth unmoving, the others moving.",
+     "para": 396
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "In China the number five stands for the element of the earth carrying and centering all things at the center of the foundations of existence.",
+     "page": 135,
+     "voice": "von Franz"
+    }
+   ]
+  }
+ ],
+ "subjects": [
+  {
+   "type": "family",
+   "id": "nigredo"
+  },
+  {
+   "type": "family",
+   "id": "quaternity"
+  },
+  {
+   "type": "family",
+   "id": "prima-materia"
+  },
+  {
+   "type": "family",
+   "id": "saturn"
+  }
+ ]
+}
