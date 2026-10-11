@@ -14,6 +14,7 @@ import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
 import { findPlaces, formatCoordinates } from '../sky/gazetteer';
+import { combobox } from '../ui/combobox';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { creditLine } from '../ui/credit';
@@ -150,8 +151,7 @@ export function mount(ctx: LensContext): LensInstance {
     const date = el('input', { type: 'date', value: b?.date ?? pre?.date ?? '', min: '1600-01-01', max: '2400-12-31', required: true });
     const time = el('input', { type: 'time', value: b?.time ?? pre?.time ?? '', step: 60 });
     const noTime = el('input', { type: 'checkbox', checked: !!b && !b.time });
-    const place = el('input', { type: 'text', value: b?.place ?? '', placeholder: 'Start typing a city', autocomplete: 'off', list: 'as-places' });
-    const datalist = el('datalist', { id: 'as-places' });
+    const place = el('input', { type: 'text', value: b?.place ?? '', placeholder: 'Start typing a city', autocomplete: 'off', spellcheck: 'false' });
     const lat = el('input', { type: 'number', step: '0.01', min: -89.9, max: 89.9, value: b ? String(b.lat) : pre ? String(pre.lat) : '', placeholder: 'Latitude, e.g. 47.37' });
     const lon = el('input', { type: 'number', step: '0.01', min: -180, max: 180, value: b ? String(b.lon) : pre ? String(pre.lon) : '', placeholder: 'Longitude, e.g. 8.54' });
     const offset = el('input', { type: 'number', step: '0.25', min: -14, max: 14, value: b ? String(b.offsetMinutes / 60) : '' });
@@ -159,12 +159,22 @@ export function mount(ctx: LensContext): LensInstance {
     const errors = el('div', { class: 'as-errors', role: 'alert' });
     let offsetTouched = !!b;
     const places = data!.gazetteer.places;
+    // coordinates typed by hand are the visitor's; coordinates filled from the list follow the place field
+    let coordsByHand = !!b && !places.some((p) => `${p.name}, ${p.country}` === b.place);
+    const setPlace = (p: GazetteerPlace) => { lat.value = String(p.lat); lon.value = String(p.lon); coordsByHand = false; syncOffset(); };
     const syncPlace = () => {
       const q = place.value.trim();
-      datalist.replaceChildren(...findPlaces(places, q, 8).map((p) => el('option', { value: `${p.name}, ${p.country}` })));
       const hit = places.find((p) => `${p.name}, ${p.country}`.toLowerCase() === q.toLowerCase());
-      if (hit) { lat.value = String(hit.lat); lon.value = String(hit.lon); syncOffset(); }
+      if (hit) setPlace(hit);
+      else if (!coordsByHand) { lat.value = ''; lon.value = ''; }
     };
+    const placeBox = combobox<GazetteerPlace>(place, {
+      suggest: (q) => findPlaces(places, q, 8).map((p) => ({ value: p, label: `${p.name}, ${p.country}`, detail: formatCoordinates(p.lat, p.lon) })),
+      onPick: (o) => setPlace(o.value),
+      empty: 'No city by that name in the list. Enter its latitude and longitude below.',
+    });
+    lat.addEventListener('input', () => { coordsByHand = true; });
+    lon.addEventListener('input', () => { coordsByHand = true; });
     const syncOffset = () => {
       if (offsetTouched) return;
       const y = Number(date.value.slice(0, 4));
@@ -207,7 +217,7 @@ export function mount(ctx: LensContext): LensInstance {
       field('Name (optional)', name),
       field('Date of birth', date),
       el('div', { class: 'as-two' }, [field('Time', time), el('label', { class: 'as-check' }, [noTime, el('span', { text: 'I don’t know the time' })])]),
-      field('Place', place, datalist),
+      field('Place', placeBox.root),
       el('details', { class: 'as-more', open: !!pre || (!!b && !places.some((p) => `${p.name}, ${p.country}` === b.place)) }, [
         el('summary', { text: 'Not in the list? Enter coordinates' }),
         el('div', { class: 'as-two' }, [field('Latitude', lat), field('Longitude', lon)]),
