@@ -118,6 +118,7 @@ describe('ingest', () => {
     };
     const d1 = fs.mkdtempSync(path.join(os.tmpdir(), 'ae-a-'));
     const d2 = fs.mkdtempSync(path.join(os.tmpdir(), 'ae-b-'));
+    // two full vault ingests, and the suite runs other files beside this one
     expect(run(d1)).toBe(run(d2));
-  }, 60_000);
+  }, 120_000);
 });
