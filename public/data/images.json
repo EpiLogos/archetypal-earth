@@ -4141,6 +4141,54 @@
    "license": "CC BY-SA 2.0",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sigurd_portal.jpg",
    "_file": "File:Sigurd portal.jpg"
+  },
+  "blood-sacrifice": {
+   "src": "img/families/blood-sacrifice.jpg",
+   "thumb": "img/families/blood-sacrifice.thumb.jpg",
+   "width": 1280,
+   "height": 2167,
+   "tone": "#634e37",
+   "title": "stained-glass windows of eucharist",
+   "credit": "Józef Mehoffer",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_Fribourg_vitrail_Eucharistie_01.jpg",
+   "_file": "File:Cathedral Fribourg vitrail Eucharistie 01.jpg"
+  },
+  "breast-motif": {
+   "src": "img/families/breast-motif.jpg",
+   "thumb": "img/families/breast-motif.thumb.jpg",
+   "width": 1280,
+   "height": 1585,
+   "tone": "#bbbbbb",
+   "title": "Virgin and Child",
+   "credit": "German (?) Swiss (?)",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:German_-_Virgin_and_Child_-_Walters_71109.jpg",
+   "_file": "File:German - Virgin and Child - Walters 71109.jpg"
+  },
+  "goddess-with-flower-cyprus-stone": {
+   "src": "img/families/goddess-with-flower-cyprus-stone.jpg",
+   "thumb": "img/families/goddess-with-flower-cyprus-stone.thumb.jpg",
+   "width": 1280,
+   "height": 1984,
+   "tone": "#8b8884",
+   "title": "Cylinder Seal with a Nude Goddess",
+   "credit": "Anonymous ( Cyprus ) Unknown author",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cypriote_-_Cylinder_Seal_with_a_Nude_Goddess_-_Walters_42415_-_Side_A.jpg",
+   "_file": "File:Cypriote - Cylinder Seal with a Nude Goddess - Walters 42415 - Side A.jpg"
+  },
+  "mother-goddesses-india": {
+   "src": "img/families/mother-goddesses-india.jpg",
+   "thumb": "img/families/mother-goddesses-india.thumb.jpg",
+   "width": 1280,
+   "height": 1792,
+   "tone": "#4e5d57",
+   "title": "The cow personified as world mother, a symbol of selfless giving.",
+   "credit": "https://wellcomeimages.org/indexplus/obf_images/0b/67/4624c48fb44bab50aac4a0c63b22.jpg Gallery: https://wellcomeimages.org/indexplus/image/V0045137.html Wellcome Collection gallery (2018-04-03): https://wellcomecollectio",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_holy_Cow_personified_as_World_Mother_with_many_Sanskrit_Wellcome_V0045137.jpg",
+   "_file": "File:The holy Cow personified as World Mother with many Sanskrit Wellcome V0045137.jpg"
   }
  },
  "occurrences": {
