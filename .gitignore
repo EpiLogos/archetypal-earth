@@ -13,3 +13,6 @@ dist-downloads/
 .central/
 ProjectCentral/
 .vercel
+
+# the flattened copyrighted texts the ingest bakes for citation deep links: local-only (owner's ruling), never in git
+public/data/corpus/
