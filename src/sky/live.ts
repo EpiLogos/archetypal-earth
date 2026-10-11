@@ -76,7 +76,8 @@ export class SkyLive {
 
   /** The instant to read the sky at. The grids are the ephemeris: while they cover now, the sky follows the clock. */
   moment(): number {
-    return this.following ? this.o.now() : this.state.asOf;
+    // only a moment outside the grids is held; every covered state follows the clock
+    return this.state.kind === 'beyond' ? this.state.asOf : this.o.now();
   }
 
   start() {
