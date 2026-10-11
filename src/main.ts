@@ -2,6 +2,10 @@ import './style/main.css';
 import './style/aion.css';
 import './style/sky.css';
 import './style/redbook.css';
+import './style/dynamics.css';
+import './style/graph.css';
+import './style/shell.css';
+import './style/touch.css';
 import { loadSymbols } from './data/symbols';
 import { historyExtent, loadHistory } from './aion/model';
 import { loadCorpusIndex } from './data/corpus';
@@ -51,7 +55,7 @@ async function boot() {
         onInteract: () => ctl?.onInteract(),
         onGrab: () => ctl?.onGrab(),
         onPalette: setPaletteVars,
-        onSkyPick: (key) => ctl?.onSkyPick(key),
+        onSkyPick: (key) => ctl?.onCanvasSkyPick(key),
       },
       prefersReducedMotion(),
     );

@@ -1,5 +1,5 @@
 {
-  "_note": "Astronomical fact for the sky layer, site-side and sourced. Orbital constants are display constants for the diagram, never the positions (positions come from the ephemeris sidecar, see docs/SKY-SOURCES.md). `palette_from` records how each palette was chosen from the tied families (D4); palettes and spectrum values are the atlas's visual interpretation, not measurements. `modern` marks bodies the classical seven do not include.",
+  "_note": "Astronomical fact for the sky layer, site-side and sourced. Orbital constants are display constants for the diagram, never the positions (positions come from the ephemeris sidecar, see ProjectCentral/docs/SKY-SOURCES.md). `palette_from` records how each palette was chosen from the tied families (D4); palettes and spectrum values are the atlas's visual interpretation, not measurements. `modern` marks bodies the classical seven do not include.",
   "bodies": [
     {
       "key": "sun",
@@ -59,7 +59,7 @@
       "order": 2,
       "modern": false,
       "name": "Terra",
-      "oneLine": "Terra — the atlas's home; the ground every presence in the field stands on",
+      "oneLine": "Terra — the ground every presence in the field stands on",
       "orbit": {
         "au": 1.00000261,
         "eccentricity": 0.01671123,

@@ -36,6 +36,8 @@ export interface GNode {
   yearDisplay: string;
   prime: boolean;
   hasImage: boolean;
+  /** has a place on the globe (an archetype or family: at least one placed member); unplaced nodes are drawn hollow */
+  placed: boolean;
 }
 
 export interface GEdge {
@@ -85,7 +87,7 @@ export function buildGraph(m: Model): Graph {
     const pal = m.archPalette.get(a.id);
     const members = m.archOcc.get(a.id) ?? [];
     push({
-      kind: 'archetype', key: aKey(a.id), ref: a.id, label: a.name, occIdx: -1, members, count: members.length,
+      kind: 'archetype', key: aKey(a.id), ref: a.id, label: a.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: a.prime ? 1 : 0.55 + 0.4 * (members.length / maxArch),
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: a.spectrum?.position ?? 0.5,
       u: NaN, yearDisplay: '', prime: a.prime, hasImage: !!a.image,
@@ -95,7 +97,7 @@ export function buildGraph(m: Model): Graph {
     const pal = m.famPalette.get(f.id);
     const members = m.famOcc.get(f.id) ?? [];
     push({
-      kind: 'family', key: fKey(f.id), ref: f.id, label: f.name, occIdx: -1, members, count: members.length,
+      kind: 'family', key: fKey(f.id), ref: f.id, label: f.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: Math.sqrt(members.length / maxFam),
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: f.spectrum?.position ?? 0.5,
       u: NaN, yearDisplay: '', prime: false, hasImage: !!f.image,
@@ -105,7 +107,7 @@ export function buildGraph(m: Model): Graph {
     const o = m.occ[i];
     const pal = m.famPalette.get(o.familyId);
     push({
-      kind: 'occurrence', key: oKey(o.id), ref: o.id, label: o.label, occIdx: i, members: [i], count: 1, rank: o.image ? 0.6 : 0.3,
+      kind: 'occurrence', key: oKey(o.id), ref: o.id, label: o.label, occIdx: i, members: [i], count: 1, placed: !!m.located[i], rank: o.image ? 0.6 : 0.3,
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: pal?.spectrum ?? 0.5,
       u: m.u[i], yearDisplay: o.yearDisplay, prime: false, hasImage: !!o.image,
     });
@@ -194,7 +196,7 @@ export function withSkyAnchors(base: Graph, src: SkyAnchorSource): Graph {
     const id = nodes.length;
     const pal = { core: hexToRgb(b.palette.core), glow: hexToRgb(b.palette.glow) };
     nodes.push({
-      id, kind: 'body', key: bodyKey(b.key), ref: b.key, label: b.name, occIdx: -1, members: [], count: 0,
+      id, kind: 'body', key: bodyKey(b.key), ref: b.key, label: b.name, occIdx: -1, members: [], count: 0, placed: true,
       rank: 0.55 + 0.35 * (1 - b.order / maxOrder), colour: pal.core, glow: pal.glow, spectrum: b.spectrum,
       u: NaN, yearDisplay: '', prime: false, hasImage: false,
     });

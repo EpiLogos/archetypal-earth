@@ -1,0 +1,2258 @@
+{
+ "version": 1,
+ "gazetteer": {
+  "source": {
+   "claim": "City-centre coordinates, rounded to 0.01° (about a kilometre), compiled by this site for the birth-sky place field. They place a city, not a house or a hospital; a chart for a precise place should use the sidecar's geocoder or exact coordinates.",
+   "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see ProjectCentral/docs/SKY-SOURCES.md",
+   "retrieved": "2026-10-08"
+  },
+  "places": [
+   {
+    "name": "Amsterdam",
+    "country": "Netherlands",
+    "lat": 52.37,
+    "lon": 4.9
+   },
+   {
+    "name": "Anchorage",
+    "country": "United States",
+    "lat": 61.22,
+    "lon": -149.9
+   },
+   {
+    "name": "Athens",
+    "country": "Greece",
+    "lat": 37.98,
+    "lon": 23.73
+   },
+   {
+    "name": "Auckland",
+    "country": "New Zealand",
+    "lat": -36.85,
+    "lon": 174.76
+   },
+   {
+    "name": "Baghdad",
+    "country": "Iraq",
+    "lat": 33.31,
+    "lon": 44.37
+   },
+   {
+    "name": "Bangkok",
+    "country": "Thailand",
+    "lat": 13.76,
+    "lon": 100.5
+   },
+   {
+    "name": "Basel",
+    "country": "Switzerland",
+    "lat": 47.56,
+    "lon": 7.59
+   },
+   {
+    "name": "Beijing",
+    "country": "China",
+    "lat": 39.9,
+    "lon": 116.41
+   },
+   {
+    "name": "Berlin",
+    "country": "Germany",
+    "lat": 52.52,
+    "lon": 13.4
+   },
+   {
+    "name": "Bern",
+    "country": "Switzerland",
+    "lat": 46.95,
+    "lon": 7.45
+   },
+   {
+    "name": "Bogotá",
+    "country": "Colombia",
+    "lat": 4.71,
+    "lon": -74.07
+   },
+   {
+    "name": "Bollingen",
+    "country": "Switzerland",
+    "lat": 47.22,
+    "lon": 8.94
+   },
+   {
+    "name": "Boston",
+    "country": "United States",
+    "lat": 42.36,
+    "lon": -71.06
+   },
+   {
+    "name": "Brussels",
+    "country": "Belgium",
+    "lat": 50.85,
+    "lon": 4.35
+   },
+   {
+    "name": "Budapest",
+    "country": "Hungary",
+    "lat": 47.5,
+    "lon": 19.04
+   },
+   {
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "lat": -34.6,
+    "lon": -58.38
+   },
+   {
+    "name": "Cairo",
+    "country": "Egypt",
+    "lat": 30.04,
+    "lon": 31.24
+   },
+   {
+    "name": "Cape Town",
+    "country": "South Africa",
+    "lat": -33.92,
+    "lon": 18.42
+   },
+   {
+    "name": "Chicago",
+    "country": "United States",
+    "lat": 41.88,
+    "lon": -87.63
+   },
+   {
+    "name": "Colombo",
+    "country": "Sri Lanka",
+    "lat": 6.93,
+    "lon": 79.86
+   },
+   {
+    "name": "Copenhagen",
+    "country": "Denmark",
+    "lat": 55.68,
+    "lon": 12.57
+   },
+   {
+    "name": "Delhi",
+    "country": "India",
+    "lat": 28.61,
+    "lon": 77.21
+   },
+   {
+    "name": "Denver",
+    "country": "United States",
+    "lat": 39.74,
+    "lon": -104.99
+   },
+   {
+    "name": "Dublin",
+    "country": "Ireland",
+    "lat": 53.35,
+    "lon": -6.26
+   },
+   {
+    "name": "Edinburgh",
+    "country": "United Kingdom",
+    "lat": 55.95,
+    "lon": -3.19
+   },
+   {
+    "name": "Geneva",
+    "country": "Switzerland",
+    "lat": 46.2,
+    "lon": 6.14
+   },
+   {
+    "name": "Helsinki",
+    "country": "Finland",
+    "lat": 60.17,
+    "lon": 24.94
+   },
+   {
+    "name": "Hong Kong",
+    "country": "China",
+    "lat": 22.32,
+    "lon": 114.17
+   },
+   {
+    "name": "Honolulu",
+    "country": "United States",
+    "lat": 21.31,
+    "lon": -157.86
+   },
+   {
+    "name": "Houston",
+    "country": "United States",
+    "lat": 29.76,
+    "lon": -95.37
+   },
+   {
+    "name": "Istanbul",
+    "country": "Türkiye",
+    "lat": 41.01,
+    "lon": 28.98
+   },
+   {
+    "name": "Jerusalem",
+    "country": "Israel",
+    "lat": 31.77,
+    "lon": 35.22
+   },
+   {
+    "name": "Johannesburg",
+    "country": "South Africa",
+    "lat": -26.2,
+    "lon": 28.05
+   },
+   {
+    "name": "Kathmandu",
+    "country": "Nepal",
+    "lat": 27.72,
+    "lon": 85.32
+   },
+   {
+    "name": "Kesswil",
+    "country": "Switzerland",
+    "lat": 47.55,
+    "lon": 9.32
+   },
+   {
+    "name": "Kolkata",
+    "country": "India",
+    "lat": 22.57,
+    "lon": 88.36
+   },
+   {
+    "name": "Kyoto",
+    "country": "Japan",
+    "lat": 35.01,
+    "lon": 135.77
+   },
+   {
+    "name": "Küsnacht",
+    "country": "Switzerland",
+    "lat": 47.32,
+    "lon": 8.58
+   },
+   {
+    "name": "Lagos",
+    "country": "Nigeria",
+    "lat": 6.52,
+    "lon": 3.38
+   },
+   {
+    "name": "Lima",
+    "country": "Peru",
+    "lat": -12.05,
+    "lon": -77.04
+   },
+   {
+    "name": "Lisbon",
+    "country": "Portugal",
+    "lat": 38.72,
+    "lon": -9.14
+   },
+   {
+    "name": "London",
+    "country": "United Kingdom",
+    "lat": 51.51,
+    "lon": -0.13
+   },
+   {
+    "name": "Los Angeles",
+    "country": "United States",
+    "lat": 34.05,
+    "lon": -118.24
+   },
+   {
+    "name": "Madrid",
+    "country": "Spain",
+    "lat": 40.42,
+    "lon": -3.7
+   },
+   {
+    "name": "Melbourne",
+    "country": "Australia",
+    "lat": -37.81,
+    "lon": 144.96
+   },
+   {
+    "name": "Mexico City",
+    "country": "Mexico",
+    "lat": 19.43,
+    "lon": -99.13
+   },
+   {
+    "name": "Montréal",
+    "country": "Canada",
+    "lat": 45.5,
+    "lon": -73.57
+   },
+   {
+    "name": "Moscow",
+    "country": "Russia",
+    "lat": 55.76,
+    "lon": 37.62
+   },
+   {
+    "name": "Mumbai",
+    "country": "India",
+    "lat": 19.08,
+    "lon": 72.88
+   },
+   {
+    "name": "Munich",
+    "country": "Germany",
+    "lat": 48.14,
+    "lon": 11.58
+   },
+   {
+    "name": "Nairobi",
+    "country": "Kenya",
+    "lat": -1.29,
+    "lon": 36.82
+   },
+   {
+    "name": "New York",
+    "country": "United States",
+    "lat": 40.71,
+    "lon": -74.01
+   },
+   {
+    "name": "Oslo",
+    "country": "Norway",
+    "lat": 59.91,
+    "lon": 10.75
+   },
+   {
+    "name": "Paris",
+    "country": "France",
+    "lat": 48.86,
+    "lon": 2.35
+   },
+   {
+    "name": "Prague",
+    "country": "Czechia",
+    "lat": 50.08,
+    "lon": 14.44
+   },
+   {
+    "name": "Reykjavík",
+    "country": "Iceland",
+    "lat": 64.15,
+    "lon": -21.94
+   },
+   {
+    "name": "Rio de Janeiro",
+    "country": "Brazil",
+    "lat": -22.91,
+    "lon": -43.17
+   },
+   {
+    "name": "Rome",
+    "country": "Italy",
+    "lat": 41.9,
+    "lon": 12.5
+   },
+   {
+    "name": "Saint Petersburg",
+    "country": "Russia",
+    "lat": 59.93,
+    "lon": 30.34
+   },
+   {
+    "name": "San Francisco",
+    "country": "United States",
+    "lat": 37.77,
+    "lon": -122.42
+   },
+   {
+    "name": "Santiago",
+    "country": "Chile",
+    "lat": -33.45,
+    "lon": -70.67
+   },
+   {
+    "name": "Seattle",
+    "country": "United States",
+    "lat": 47.61,
+    "lon": -122.33
+   },
+   {
+    "name": "Seoul",
+    "country": "South Korea",
+    "lat": 37.57,
+    "lon": 126.98
+   },
+   {
+    "name": "Shanghai",
+    "country": "China",
+    "lat": 31.23,
+    "lon": 121.47
+   },
+   {
+    "name": "Singapore",
+    "country": "Singapore",
+    "lat": 1.35,
+    "lon": 103.82
+   },
+   {
+    "name": "Stockholm",
+    "country": "Sweden",
+    "lat": 59.33,
+    "lon": 18.07
+   },
+   {
+    "name": "Sydney",
+    "country": "Australia",
+    "lat": -33.87,
+    "lon": 151.21
+   },
+   {
+    "name": "São Paulo",
+    "country": "Brazil",
+    "lat": -23.55,
+    "lon": -46.63
+   },
+   {
+    "name": "Tehran",
+    "country": "Iran",
+    "lat": 35.69,
+    "lon": 51.39
+   },
+   {
+    "name": "Tokyo",
+    "country": "Japan",
+    "lat": 35.68,
+    "lon": 139.69
+   },
+   {
+    "name": "Toronto",
+    "country": "Canada",
+    "lat": 43.65,
+    "lon": -79.38
+   },
+   {
+    "name": "Vancouver",
+    "country": "Canada",
+    "lat": 49.28,
+    "lon": -123.12
+   },
+   {
+    "name": "Varanasi",
+    "country": "India",
+    "lat": 25.32,
+    "lon": 83.01
+   },
+   {
+    "name": "Vienna",
+    "country": "Austria",
+    "lat": 48.21,
+    "lon": 16.37
+   },
+   {
+    "name": "Warsaw",
+    "country": "Poland",
+    "lat": 52.23,
+    "lon": 21.01
+   },
+   {
+    "name": "Washington, D.C.",
+    "country": "United States",
+    "lat": 38.91,
+    "lon": -77.04
+   },
+   {
+    "name": "Zürich",
+    "country": "Switzerland",
+    "lat": 47.37,
+    "lon": 8.54
+   }
+  ]
+ },
+ "frame": [
+  {
+   "text": "The planetary names refer ultimately not only to metals but, as every alchemist knew, to the (astrological) temperaments, that is, to psychic factors.",
+   "cite": {
+    "work": "cw13",
+    "workTitle": "Alchemical Studies",
+    "locator": "¶355 (pdf p339)"
+   }
+  },
+  {
+   "text": "the journey through the planetary houses boils down to becoming conscious of the good and the bad qualities in our character, and the apotheosis means no more than maximum consciousness",
+   "cite": {
+    "work": "cw14",
+    "workTitle": "Mysterium Coniunctionis",
+    "locator": "¶309 (pdf p173)"
+   }
+  },
+  {
+   "text": "The horoscope (fig. 100) is itself a mandala (a clock) with a dark centre",
+   "cite": {
+    "work": "cw12",
+    "workTitle": "Psychology and Alchemy",
+    "locator": "¶314 (pdf p223)"
+   }
+  }
+ ],
+ "pillars": {
+  "text": "The positions of sun, moon, and ascendant form the three main pillars of the horoscope.",
+  "cite": {
+   "work": "cw18",
+   "workTitle": "The Symbolic Life: Miscellaneous Writings",
+   "locator": "¶1180 (pdf p464)"
+  }
+ },
+ "order": {
+  "bodies": [
+   "moon",
+   "mercury",
+   "venus",
+   "mars",
+   "jupiter",
+   "saturn",
+   "uranus",
+   "neptune",
+   "pluto",
+   "sun"
+  ],
+  "line": "The walk climbs the planetary ladder, Moon to Saturn, past the three planets Jung's sources did not know, and ends at the Sun. That is where the old ascent ended too.",
+  "quote": {
+   "text": "where the initiand was crowned as Helios",
+   "cite": {
+    "work": "cw12",
+    "workTitle": "Psychology and Alchemy",
+    "locator": "¶66 (pdf p82)"
+   }
+  }
+ },
+ "bodies": {
+  "moon": {
+   "key": "moon",
+   "name": "Moon",
+   "line": "The nearest light, and silver.",
+   "quotes": [
+    {
+     "text": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus.",
+     "cite": {
+      "work": "sem-zarathustra",
+      "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+      "locator": "pdf p1441"
+     }
+    }
+   ],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "moon"
+     },
+     "basis": "jung",
+     "note": "Jung describes the moon as guardian of the seed and a source of life with a feminine significance.",
+     "quotes": [
+      {
+       "text": "a guardian of the seed, and hence a source of life with a feminine significance",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶487 (pdf p361)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "coniunctio"
+     },
+     "basis": "jung",
+     "note": "Luna, with Sol, enacts the coniunctio; Jung names the pair King and Queen.",
+     "quotes": [
+      {
+       "text": "in alchemy King and Queen, Sol and Luna",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶109 (pdf p74)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Silver is the moon's sign among the planetary metals Jung lists.",
+     "quotes": [
+      {
+       "text": "silver, the sign of the moon",
+       "cite": {
+        "work": "sem-zarathustra",
+        "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+        "locator": "pdf p1441"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "anima"
+     },
+     "basis": "inferred",
+     "note": "In this passage Jung does not name the anima.",
+     "quotes": [
+      {
+       "text": "a guardian of the seed, and hence a source of life with a feminine significance",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶487 (pdf p361)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "great-mother"
+     },
+     "basis": "inferred",
+     "note": "Jung does not name her in the passage.",
+     "quotes": [
+      {
+       "text": "a guardian of the seed, and hence a source of life with a feminine significance",
+       "cite": {
+        "work": "cw05",
+        "workTitle": "Symbols of Transformation",
+        "locator": "¶487 (pdf p361)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "syzygy"
+     },
+     "basis": "inferred",
+     "note": "Not stated so by Jung in the cited sentence.",
+     "quotes": [
+      {
+       "text": "The coniunctio oppositorum engaged the speculations of the alchemists",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "pdf p284",
+        "print": "268"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "The Moon represents feelings and emotions. She is an instinctual, intuitive, nurturing planet, but also a planet that fosters emotional attachment to the form she provides.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p137",
+      "print": "115"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Moon, Cancer's ruler, has been called in both India and the West (in Plato's writings, particularly) the Giver of Form.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p136",
+      "print": "114"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Moon was a bestower of the gifts of feeling, of intuition, and of nurturing instincts which men did not seem to possess.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p136",
+      "print": "114"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Here, the most feminine planet rules the most feminine sign. The Moon has many phases, corresponding to the many moods of Cancer.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p18"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Cancer, the Cosmic Womb, is also the first Water sign.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p135"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p135"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Within the Great Mother archetype are two distinct personalities—the Gentle Mother like Kwan Yin the Merciful and Compassionate of Chinese Mythology, and the Terrible Mother, like India's Kali Ma and the Greek Medusa.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p137",
+      "print": "115"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "mercury": {
+   "key": "mercury",
+   "name": "Mercury",
+   "line": "Quicksilver. In alchemy Mercurius is both the first matter of the work and its goal.",
+   "quotes": [],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "mercurius"
+     },
+     "basis": "jung",
+     "note": "Jung joins the planet Mercury and the alchemical spirit Mercurius in one sentence: nearest the sun, hence related to gold.",
+     "quotes": [
+      {
+       "text": "As the planet Mercury, he is nearest to the sun, hence he is pre-eminently related to gold",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶84 (pdf p91)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Hermes, who is quicksilver, belongs to the company of the seven planetary gods.",
+     "quotes": [
+      {
+       "text": "a chthonic god of revelation and also the spirit of quicksilver",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶84 (pdf p91)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "psychopomp"
+     },
+     "basis": "inferred",
+     "note": "Mercurius as the redeeming psychopomp (CW13, printed p237); the cited passage is the planetary link only.",
+     "quotes": []
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "trickster"
+     },
+     "basis": "inferred",
+     "note": "Mercurius as trickster (CW13, printed pp203, 237); the cited passage is the planetary link only.",
+     "quotes": []
+    }
+   ],
+   "burt": [
+    {
+     "text": "Jung tells us that in alchemy the \"astrological Mercury\" was the fluid, mobile, quicksilver mind. The mind by itself (apart from the rest of the psyche) is dual and amoral.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p96",
+      "print": "74"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "He is the only one of the Greek Pantheon who had no home on Olympus but was always in transit among the three worlds. He was the Guide and Messenger for Olympus, Earth and Hades.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p95"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Hermes' gifts to Gemini and Virgo include a Mutable or flexible attitude towards life's changing circumstances; the ability to analyze one's errors and adapt one's behavior; a sense of humor about oneself, and a lively mental curiosity about life.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p95"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "As ruler of the Earth sign Virgo, Hermes seems less flighty, more grounded, stable and consistent in his behavior than he was as ruler of airy Gemini.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p211"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In the process of alchemical purification Hermes' virtues are those of the Virgo archetype: patience, purification or perfectionism, meticulous attention to technique and procedure, obedience to methodology, industriousness, and most important, humility.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p212",
+      "print": "190"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In Greek mythology, particularly in Homer's epics, Mercury's thinking, counseling role as wise Messenger God was played by Hermes or Athene, two almost interchangeable Logos symbols.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p30",
+      "print": "8"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Aries at the esoteric level has begun to work consciously with Mercury (Logos), his/her spiritual ruler.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p30",
+      "print": "8"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Behind many a shy, simple Virgo personality hides magical Hermes.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p212",
+      "print": "190"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p95"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Each year as we enter Virgo, the mood of the Earth itself seems to become more withdrawn, introspective, quieter.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p211"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "venus": {
+   "key": "venus",
+   "name": "Venus",
+   "line": "Copper. Jung places the anima's image here.",
+   "quotes": [
+    {
+     "text": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus.",
+     "cite": {
+      "work": "sem-zarathustra",
+      "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+      "locator": "pdf p1441"
+     }
+    }
+   ],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "venus"
+     },
+     "basis": "jung",
+     "note": "In the anima's historic dress, Poliphilo conjures Queen Venus.",
+     "quotes": [
+      {
+       "text": "Poliphilo conjured up Queen Venus",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶60 (pdf p39)",
+        "print": "28"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "anima"
+     },
+     "basis": "jung",
+     "note": "Jung brings Queen Venus into his discussion of the classic anima stories.",
+     "quotes": [
+      {
+       "text": "Poliphilo conjured up Queen Venus",
+       "cite": {
+        "work": "cw09i",
+        "workTitle": "The Archetypes and the Collective Unconscious",
+        "locator": "¶60 (pdf p39)",
+        "print": "28"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Copper is Venus's sign among the planetary metals Jung lists.",
+     "quotes": [
+      {
+       "text": "copper, the sign of Venus",
+       "cite": {
+        "work": "sem-zarathustra",
+        "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+        "locator": "pdf p1441"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "As the mundane, instinctual ruler of Taurus, Venus, the principle of attraction, has a strong physical magnetism.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p59"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In Labours of Hercules, Alice Bailey amplifies Aphrodite's role as esoteric ruler when she reminds us that she is harmony—the Eros' power to reconcile opposites, to heal all misunderstandings and transcend duality in all its forms.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p122",
+      "print": "100"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "She is the unity principle that spans the Gates of Hercules.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p122",
+      "print": "100"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "She is Aphrodite, Goddess of Love, aesthetics and civilized good taste.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Greeks saw Ares (Aries) and Aphrodite as particularly potent deities because they were among the few divinities who could actually possess mortals. Ares could possess a man with rage, and Aphrodite with her spell of longing, yearning, and love.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "It is important for them to work consciously with the planets aspecting natal Venus to help Venus express its positive instincts—warmth, grace of self-expression, social comfort, artistic expression, and charm.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p88",
+      "print": "66"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Most important, however, in my experience with Geminis who have developed their Venus (or esoteric ruler), is the warmth they project to others. Others in their lives feel loved, as well as analyzed.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p123",
+      "print": "101"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Consciousness (Hermes) and love (Venus and Eros) combined form a very intuitive, creative partnership.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p123",
+      "print": "101"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Passive, patient, and placid, Taurus earth is fertile and fecund sexuality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p59"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p253"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "mars": {
+   "key": "mars",
+   "name": "Mars",
+   "line": "Iron. Jung says little of Mars himself.",
+   "quotes": [
+    {
+     "text": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus.",
+     "cite": {
+      "work": "sem-zarathustra",
+      "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+      "locator": "pdf p1441"
+     }
+    }
+   ],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Iron is Mars's sign among the planetary metals Jung lists.",
+     "quotes": [
+      {
+       "text": "iron is the sign of Mars",
+       "cite": {
+        "work": "sem-zarathustra",
+        "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+        "locator": "pdf p1441"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "hero"
+     },
+     "basis": "inferred",
+     "note": "Jung says the planetary names refer to the temperaments, which are psychic factors. Jung's hero analyses never name the planet.",
+     "quotes": [
+      {
+       "text": "the (astrological) temperaments, that is, to psychic factors",
+       "cite": {
+        "work": "cw13",
+        "workTitle": "Alchemical Studies",
+        "locator": "¶355 (pdf p339)"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "Mars is passionate, but not exactly tender or aware of others' feelings!",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p27",
+      "print": "5"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Mars needs to temper Logos with Eros.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p27",
+      "print": "5"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Mars rules adrenalin, and the true Mars type is an adrenalin junkie.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p28",
+      "print": "6"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Archetypally, we think of Mars as a sports car driver or even a professional racer in the Indianapolis 500.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p28",
+      "print": "6"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Thus, in Scorpio, Mars is not the outspoken, direct planetary ruler we encountered in Aries (see Chapter 1), but a much subtler energy.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "An intense, focused Scorpio-will directed by Mars' dynamic thrust is capable of achieving a major breakthrough this lifetime.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "According to Alice Bailey it is Mars, not Pluto, that functions as esoteric ruler of Scorpio.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Mars also makes sense as esoteric ruler if we consider it in its retrograde phase, as the introverted, sublimated instincts consciously focused upon a specific goal.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p296",
+      "print": "274"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Age of Aries is a solar, or masculine age. It is the Age of the Ram, of Mars and of the Hero.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p23"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aries' energy is like the Sun's rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p24",
+      "print": "2"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aries represents the \"Irresistible Force,\" as Dane Rudhyar put it. This is the power of the ram's horns.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p25",
+      "print": "3"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio).",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "jupiter": {
+   "key": "jupiter",
+   "name": "Jupiter",
+   "line": "Tin. In Jung, Jupiter matters mostly through his conjunctions with Saturn.",
+   "quotes": [
+    {
+     "text": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus.",
+     "cite": {
+      "work": "sem-zarathustra",
+      "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+      "locator": "pdf p1441"
+     }
+    }
+   ],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Tin is Jupiter's sign among the planetary metals Jung lists.",
+     "quotes": [
+      {
+       "text": "tin, the sign of Jupiter",
+       "cite": {
+        "work": "sem-zarathustra",
+        "workTitle": "Nietzsche's Zarathustra: Notes of the Seminar 1934-1939",
+        "locator": "pdf p1441"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "fish"
+     },
+     "basis": "inferred",
+     "note": "Aion's astrological argument places the great conjunction of Jupiter and Saturn in Pisces.",
+     "quotes": [
+      {
+       "text": "coniunctio maxima of Jupiter and Saturn in Pisces",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "pdf p123"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "Jupiter is not only the mundane ruler of Sagittarius and the Ninth House but, because of his grandiose nature, Zeus the All Highest exerts so strong an influence that no other planet could be exalted in his sign.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p349",
+      "print": "327"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Like the ancient Greeks we are aware that Jupiter is the great benefic. Like Venus, the lesser Benefic, it shines with a bright light.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p350",
+      "print": "328"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Therefore we can easily appreciate the positive key words the Greeks attributed to Zeus—magnanimity, majesty or power, beneficence, abundance, spirituality, gravity, joviality or optimism, justice, truth, wisdom, etc.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p350",
+      "print": "328"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In every Sagittarian client—even those who seem to burn like forest fires out of control—there is this pure spark of Zeus' enthusiasm.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p350",
+      "print": "328"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In astrology, we normally use transiting Jupiter to answer questions about moves and long-distance travel—about motion in the outer world. However, apparently the esoteric tradition experienced Jupiter through dreams and meditation as inner space, as what Jung called psychic space.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p369",
+      "print": "347"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "In India, Jupiter is known as Guru by astrologers.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p369",
+      "print": "347"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Jupiter (opportunity) is the esoteric ruler of Aquarius.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p455",
+      "print": "433"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Combining Jupiter and Uranus (the esoteric and mundane rulers of Aquarius) is the work of the New Age.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p455",
+      "print": "433"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Sagittarian, like his ruler, manifests big virtues and big vices.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p349",
+      "print": "327"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or \"fire up\" others.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p339"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "There is a sense of playfulness to Sagittarius. It's rather like the stage in alchemy where hard work is over and there is the joy of spontaneous growth.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p340",
+      "print": "318"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "saturn": {
+   "key": "saturn",
+   "name": "Saturn",
+   "line": "Lead, the old king, the dark sun: the heaviest of the seven and the one the alchemists conjured as a familiar.",
+   "quotes": [
+    {
+     "text": "is none other than the leaden spirit or planetary demon Saturn",
+     "cite": {
+      "work": "cw11",
+      "workTitle": "Psychology and Religion: West and East",
+      "locator": "¶350 (pdf p191)"
+     }
+    },
+    {
+     "text": "When, therefore, an alchemist conjured up the spirit of Saturn as his familiar, this was an attempt to bring to consciousness a standpoint outside the ego",
+     "cite": {
+      "work": "cw14",
+      "workTitle": "Mysterium Coniunctionis",
+      "locator": "¶504 (pdf p271)"
+     }
+    }
+   ],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "sol-niger"
+     },
+     "basis": "jung",
+     "note": "Jung writes that Saturn is even called the black sun.",
+     "quotes": [
+      {
+       "text": "is even called \"sol niger\"",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "¶215 (pdf p151)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "senex-figure"
+     },
+     "basis": "jung",
+     "note": "Maier's journey begins with Saturn, the sinister Senex.",
+     "quotes": [
+      {
+       "text": "the maleficus and abode of evil, the mysterious and sinister Senex",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶298 (pdf p168)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "Zosimos' leaden homunculus is the leaden spirit or planetary demon Saturn.",
+     "quotes": [
+      {
+       "text": "the leaden spirit or planetary demon Saturn",
+       "cite": {
+        "work": "cw11",
+        "workTitle": "Psychology and Religion: West and East",
+        "locator": "¶350 (pdf p191)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "shadow"
+     },
+     "basis": "inferred",
+     "note": "Sol niger is Jung's image of the shadow; he does not say so of the planet.",
+     "quotes": [
+      {
+       "text": "is even called \"sol niger\"",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "¶215 (pdf p151)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "wise-old-man"
+     },
+     "basis": "inferred",
+     "note": "The vault reads Saturn's Senex as the Wise Old Man by inference.",
+     "quotes": [
+      {
+       "text": "the maleficus and abode of evil, the mysterious and sinister Senex",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶298 (pdf p168)"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "The Greeks were aware of the Saturn principle: \"Know thyself, accept thyself, be thyself.\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p385",
+      "print": "363"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Clearly, we need both Jupiter and Saturn in our lives, that's why we came to Earth through Time (Saturn) and Space (Jupiter); but most of us have a pattern of attunement to one and underdevelopment of the other.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p385",
+      "print": "363"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Two gifts of Saturn are patience and introspection.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p398",
+      "print": "376"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn as the Cross of Matter can mean that attachment to these mundane things interferes with true happiness.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn simplifies our lives by dissolving things we hang onto that don't really make us happy, so that we can get on with life.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Saturn is the greatest of teachers for those of us who are observant. How we react to Saturn transits indicates the level of our attunement.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p399",
+      "print": "377"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle, while people make these Winter Solstice remarks.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p379"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "At the mundane level, the Capricorn archetype can be recognized every year in conversations about shoulds and oughts, conflicting family duties, traditions, growing older, and an overwhelming feeling of being under pressure because \"there's so little time.\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p379"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "uranus": {
+   "key": "uranus",
+   "name": "Uranus",
+   "line": "Found in 1781. Jung's sources never knew it; the reading here is Burt's.",
+   "quotes": [],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "star"
+     },
+     "basis": "site",
+     "note": "Named for the sky-father Ouranos. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+     "quotes": []
+    }
+   ],
+   "burt": [
+    {
+     "text": "Uranus is a planet of quick insight.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p241",
+      "print": "219"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus helps Virgo to quickly take in the entire forest, rather than keep sketching the same tree over and again, to perfection.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p241",
+      "print": "219"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus is anxious to grow, to live in the now, while Saturn seeks to protect past traditions.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p453",
+      "print": "431"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus needs to be honored through discovery of new concepts, ideas, friends, organizations.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p453",
+      "print": "431"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus, more than any other transiting planet, forces us to hear the Muezzin's call from the tower, to wake up. Sometimes it seems that must be its major cosmic purpose.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p459",
+      "print": "437"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus transits, if constructively used, may be productive time out from mundane, routinized living, to detach, gain perspective and look more objectively at the world through different and clearer lenses.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p460",
+      "print": "438"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus is the esoteric ruler of Libra. It's also the higher octave planet for Mercury, Virgo's mundane ruler. It refers to objectivity on the material, the data, the approach to the service.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p241",
+      "print": "219"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Uranus has an objectivity about life's situations and injustices that helps Libra to stand back and detach rather than yield to Aphrodite, the mundane ruler, when she tries to take things too personally.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p270",
+      "print": "248"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p447"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Aquarius is an Air sign and as such has a mental approach to life and decision making in the beginning stages of his life journey.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p447"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "neptune": {
+   "key": "neptune",
+   "name": "Neptune",
+   "line": "Found in 1846. Jung's sources never knew it; the reading here is Burt's.",
+   "quotes": [],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "water"
+     },
+     "basis": "site",
+     "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+     "quotes": []
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "night-sea-journey"
+     },
+     "basis": "site",
+     "note": "Named for the sea-god. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+     "quotes": []
+    }
+   ],
+   "burt": [
+    {
+     "text": "In Greek mythology, Poseidon (Neptune), God of the Seas, was also a great dissolver or destroyer, and he, too, used a trident to bring down attachment.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p159",
+      "print": "137"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Neptune is the planet of faith, and faith is needed to let go of the past and open up to the future, rather than attempt to hang on to outworn forms with crab-like tenacity.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p162",
+      "print": "140"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "For those who can willingly sacrifice the old way, the old role, the old career, the old attachments, to Neptune; for those who dare to create, to use their imagination, to trust their intuition, Neptune is a liberator.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p162",
+      "print": "140"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Remember—Poseidon does not dissolve anything we still need. He only prevents a Seeker from clinging to that which limits him, or stands in the way of his growth.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p162",
+      "print": "140"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Neptune is not about apathy or feeling good in meditation, but about hearing and acting upon what God tells us to do in the outer world—acting from the inside (the Spiritual Center) outward.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p543",
+      "print": "521"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Neptune's message is \"Relax. Let go and let God have some room. Resign yourself to the idea that maybe you won't get there this lifetime, quit striving so hard, and then maybe you will get there after all.\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p546",
+      "print": "524"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Also, these rulers of Pisces point toward deeper truths, eternal truths in the depths of the cosmic Ocean.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p543",
+      "print": "521"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pisces is the last of the four Mutable signs—Mutable Water. As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, \"Who shall bind the Infinite?\"",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p509"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p509"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "pluto": {
+   "key": "pluto",
+   "name": "Pluto",
+   "line": "Found in 1930. Jung's sources never knew it; the reading here is Burt's.",
+   "quotes": [],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "nigredo"
+     },
+     "basis": "site",
+     "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+     "quotes": []
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "shadow"
+     },
+     "basis": "site",
+     "note": "Named for the god of the underworld. Jung's alchemical, Gnostic and astrological sources know only the seven classical bodies.",
+     "quotes": []
+    }
+   ],
+   "burt": [
+    {
+     "text": "The mundane rulers of Scorpio are Mars and Pluto. Pluto, appropriately, is Hades, Lord of the Greek Underworld.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pluto rules the unconscious depths of the Scorpio or Eighth House personality, with its residue of instinctual drives, emotional attachments, and compulsive-obsessive tendencies carried forward from past lives to the present.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p295"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pluto, for example, is a reclusive planet which can, in the chart for a scientist, help Mars sublimate sexual energy into the work of discovery.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p40",
+      "print": "18"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "This accords, too, with the esoteric tradition in which Pluto is the higher octave planet for Mars.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p41",
+      "print": "19"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Though you may view Pluto as a malefic planet, its prime objectives are transformation and transcendence.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Pluto should put you into contact with your inner resources in time of crisis, help you face your worst fears and transcend.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "As ruler of Scorpio, Pluto brings fixity of purpose and will to power to the Mars personality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p40",
+      "print": "18"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "At the esoteric level Pluto's role is to free Pisces from attachment during the night sea journey.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p556",
+      "print": "534"
+     },
+     "voice": "burt"
+    }
+   ]
+  },
+  "sun": {
+   "key": "sun",
+   "name": "Sun",
+   "line": "Gold, the end of the ascent. Every chart has a Sun, and Jung reads the sun as a symbol of the self. That is the link every walk ends on.",
+   "quotes": [],
+   "ties": [
+    {
+     "target": {
+      "type": "family",
+      "id": "sun"
+     },
+     "basis": "jung",
+     "note": "Jung calls the sun the classical symbol for the unity and divinity of the Self.",
+     "quotes": [
+      {
+       "text": "First it produces the classical symbol for the unity and divinity of the self, the sun",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶108 (pdf p109)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "self"
+     },
+     "basis": "jung",
+     "note": "The same sentence: the sun as symbol of the Self's unity and divinity.",
+     "quotes": [
+      {
+       "text": "First it produces the classical symbol for the unity and divinity of the self, the sun",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶108 (pdf p109)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "solificatio"
+     },
+     "basis": "jung",
+     "note": "The planetary ladder ends in the solificatio, where the initiand is crowned as Helios.",
+     "quotes": [
+      {
+       "text": "where the initiand was crowned as Helios",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶66 (pdf p82)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "coniunctio"
+     },
+     "basis": "jung",
+     "note": "Sol, with Luna, enacts the coniunctio; Jung names the pair King and Queen.",
+     "quotes": [
+      {
+       "text": "in alchemy King and Queen, Sol and Luna",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶109 (pdf p74)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "family",
+      "id": "planetary-gods"
+     },
+     "basis": "jung",
+     "note": "The sun is one of the seven gods of the planets, the goal of the stairway.",
+     "quotes": [
+      {
+       "text": "they form what the Pyramid inscriptions call a paut neteru",
+       "cite": {
+        "work": "cw12",
+        "workTitle": "Psychology and Alchemy",
+        "locator": "¶84 (pdf p90)"
+       }
+      }
+     ]
+    },
+    {
+     "target": {
+      "type": "archetype",
+      "id": "syzygy"
+     },
+     "basis": "inferred",
+     "note": "Jung's own sentence names the coniunctio oppositorum; the atlas keeps that link as an inference rather than Jung's word.",
+     "quotes": [
+      {
+       "text": "The coniunctio oppositorum engaged the speculations of the alchemists",
+       "cite": {
+        "work": "cw09ii",
+        "workTitle": "Aion: Researches into the Phenomenology of the Self",
+        "locator": "pdf p284",
+        "print": "268"
+       }
+      }
+     ]
+    }
+   ],
+   "burt": [
+    {
+     "text": "In Leo, we arrive at the solar, or Masculine principle—the confident energy of the Sun.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p175"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "There is a constancy to the Leo archetype which seems to be derived from the orbit of Sol himself.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p175"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "The Sun, then, was dependable; one could count on it. It was always the same orange disc; it didn't change its shape or go through phases.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p176",
+      "print": "154"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "This hymn collection gives a good indication of the two levels at which the sun operates in ruling Leo—as mundane and as esoteric ruler.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p178",
+      "print": "156"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Esoterically, the sun represents illumination, and in India, the Sun Center or point between the eyebrows is the area where a yogi concentrates during his meditation as he seeks enlightenment.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p178",
+      "print": "156"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "Thus, astrologers say that the Sun is exalted in Aries. An exuberant planet in an exuberant sign leads to an exalted personality.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p24",
+      "print": "2"
+     },
+     "voice": "burt"
+    },
+    {
+     "text": "For Leo, who proceeds from the heart (that's Leo in medical astrology), the issue is self-control—self-mastery is the road to success and fulfillment.",
+     "cite": {
+      "work": "burt-zodiac",
+      "workTitle": "Archetypes of the Zodiac",
+      "locator": "pdf p183",
+      "print": "161"
+     },
+     "voice": "burt"
+    }
+   ]
+  }
+ },
+ "signs": {
+  "Aries": {
+   "text": "ARIES: The Search for a Separate Identity",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Taurus": {
+   "text": "TAURUS: The Search for Value and Meaning",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Gemini": {
+   "text": "GEMINI: The Search for Variety",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Cancer": {
+   "text": "CANCER: The Search for the Mother Goddess",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Leo": {
+   "text": "LEO: The Search for Being and Wholeness",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Virgo": {
+   "text": "VIRGO: The Search for Meaningful Service",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Libra": {
+   "text": "LIBRA: The Search for the Soul Mate",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Scorpio": {
+   "text": "SCORPIO: The Search for the Transformation",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Sagittarius": {
+   "text": "SAGITTARIUS: The Search for Wisdom",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Capricorn": {
+   "text": "CAPRICORN: The Search for Dharma",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p11"
+   },
+   "voice": "burt"
+  },
+  "Aquarius": {
+   "text": "AQUARIUS: The Search for the Holy Grail",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p12"
+   },
+   "voice": "burt"
+  },
+  "Pisces": {
+   "text": "PISCES: The Search for the Castle of Peace",
+   "cite": {
+    "work": "burt-zodiac",
+    "workTitle": "Archetypes of the Zodiac",
+    "locator": "pdf p12"
+   },
+   "voice": "burt"
+  }
+ },
+ "people": [
+  {
+   "id": "jung",
+   "label": "C. G. Jung",
+   "birth": {
+    "date": "1875-07-26",
+    "time": "19:32",
+    "timeSource": "Gret Baumann-Jung, his daughter, who cast his chart (published in Jung on Astrology, 2017). Other records give 19:20 to 19:41, so the rising degree is approximate.",
+    "place": "Kesswil, Thurgau",
+    "lat": 47.6,
+    "lon": 9.32,
+    "offset": "mean-time"
+   },
+   "line": "Jung is the first chart here. The corpus gives the year and the region. The day, the village and the time, 19:32 local mean time, come from the public record: the time is the one his daughter Gret Baumann-Jung used when she cast his chart.",
+   "quote": {
+    "text": "Jung was born in northeastern Switzerland in 1875, a Protestant clergyman’s son.",
+    "cite": {
+     "work": "cw01",
+     "workTitle": "Psychiatric Studies",
+     "locator": "pdf p5"
+    }
+   },
+   "portrait": {
+    "src": "/img/jung-portrait.jpg",
+    "title": "Carl Gustav Jung",
+    "credit": "Unknown author",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+    "_file": "File:Carl Gustav Jung portrait.jpg",
+    "width": 366,
+    "height": 567
+   }
+  }
+ ]
+}

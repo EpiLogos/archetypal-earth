@@ -1,15 +1,24 @@
 // The conductor: owns the state machine, the hash, and the choreography between
 // the globe (camera, atmosphere, emphasis, arcs) and the quiet DOM layers.
+import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
-import { archetypesOfFamily, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette } from '../data/model';
+import { scopeOf } from '../data/scope';
+import { archetypesOfFamily, selfSubject, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette } from '../data/model';
 import { angleBetween, dirFromLatLon, fitDistance, spreadOf, worldDistance, type Vec3 } from '../data/geo';
 import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../data/palette';
 import { buildSearchIndex, type SearchResult } from '../data/search';
 import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
-import { hashToState, stateToHash } from '../state/router';
-import { back, focusOn, inSky, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type ThreadTarget, type View } from '../state/store';
-import type { TimeModel, TimeSnapshot } from '../state/timeModel';
+import { chronologyPath } from '../globe/chronology';
+import { defaultReadingId, hashToState, hashWithFilter, type BirthPrefill } from '../state/router';
+import { astrologyAt, back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
+import { Shell } from '../shell/shell';
+import { Panel } from '../shell/panel';
+import { Landing } from '../shell/landing';
+import { DEEP_FIELDS } from '../lenses/deep-fields';
+import { lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
+import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
+import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
 import { DeepSheet, type DeepTarget } from '../ui/deep';
@@ -19,17 +28,17 @@ import { Reveal } from '../ui/reveal';
 import { SearchUI } from '../ui/search';
 import { Strip } from '../ui/strip';
 import { TimeControl } from '../ui/time-control';
-import { isNarrow } from '../ui/dom';
+import { el, isNarrow, onReadGesture } from '../ui/dom';
 import { eraShort } from '../data/text';
-import { GraphView, type Insets } from '../graph/view';
+import type { GraphView, Insets } from '../graph/view';
 import { ModeSwitch } from '../graph/switch';
-import { AionView } from '../aion/view';
+import type { AionView } from '../aion/view';
 import type { History } from '../types/history';
 import type { CorpusIndex } from '../types/corpus';
 import type { RedBook } from '../types/redbook';
-import { RedBookView } from '../redbook/view';
+import type { RedBookView } from '../redbook/view';
+import type { DynamicsView } from '../dynamics/view';
 import { PassageSheet } from '../ui/passage';
-import { el } from '../ui/dom';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
 import { SkyLive } from '../sky/live';
@@ -37,13 +46,13 @@ import type { SkyAnchorSource } from '../graph/build';
 import type { SidecarChart, SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
 import { SkyView } from '../sky/view';
-import { SkyCard, canOpenCard, formatMoment, resolveTies } from '../sky/card';
-import { BirthPanel } from '../sky/birth';
-import { chartMoment } from '../sky/chart';
-import { dataWithWindow, SidecarClient, SidecarError, type BirthInput } from '../sky/sidecar';
+import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
+import { dataWithWindow } from '../sky/sidecar';
+import type { CuratedPerson } from '../astro/charts';
+import { loadLensData } from '../lenses/ui';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { skyMaxDist, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, SYSTEM_VIEW_LONGITUDE, systemHomeDist } from '../sky/stages';
+import { approachDist, isApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -75,6 +84,8 @@ export class Controller {
   state: AppState = WORLD;
   private started = false;
   private pendingHash: string | null = null;
+  /** a birth from an old link, in memory until the Astrology form takes it */
+  private birthPrefill: BirthPrefill | null = null;
   private rel: Float32Array;
   private searchIndex;
   private floats: Floats;
@@ -90,17 +101,40 @@ export class Controller {
   private setCache: { key: string; set: Set<number> } = { key: '', set: new Set() };
   private tokCounter = 0;
   private labelRect = { x: 0, y: 0, w: 380, h: 170 };
-  private graph: GraphView;
+  /** the views a lens or the graph needs are fetched when first used (MODES-RFC §7); null until then */
+  private graph: GraphView | null = null;
+  private loading = new Map<string, Promise<void>>();
+  private navTok = 0;
+  private root: HTMLElement;
+  private passages: ReturnType<PassageSheet['bridge']>;
   private modeSwitch: ModeSwitch;
   /** true while the graph mode (not the globe) is the main view */
   private graphMode = false;
   private pauseTimer = 0;
   private aion: AionView | null = null;
-  private aionSwitch: HTMLButtonElement;
+  /** the one frame of chrome (MODES-RFC §2) and its panel for the panel lenses */
+  readonly shell: Shell;
+  private panel: Panel;
+  private chrome: LensChrome;
+  /** the field filter (MODES-RFC §4): one for every lens; the engine composes it with any emphasis */
+  private filter: FieldFilter = {};
+  private filterMask: Float32Array | null = null;
+  private lensInst = new Map<PanelLensId, LensInstance>();
+  private activeLens: PanelLensId | null = null;
+  private lensTok = 0;
+  private landing = new Landing();
   private aionTime: TimeSnapshot | null = null;
   private redbook: RedBookView | null = null;
-  private redbookSwitch: HTMLButtonElement;
   private rbTime: TimeSnapshot | null = null;
+  /** the range the control held before the Red Book (restored with rbTime), and the Book's own span on the scale */
+  private rbRange: TimeSpan | null = null;
+  private rbSpan: TimeSpan | null = null;
+  /** the dynamical lens: a third mode over the world view; its clock and range are restored on leaving (as the Red Book's are) */
+  private lens: DynamicsView | null = null;
+  private lensTime: TimeSnapshot | null = null;
+  private lensRange: TimeSpan | null = null;
+  /** the focused subject whose chronology stands on the globe (empty: none) */
+  private chronoKey = '';
   private redbookStops = new Set<string>();
   /** the corpus reading sheet: a cite opened at its source */
   private passage: PassageSheet;
@@ -108,31 +142,37 @@ export class Controller {
   private skyView: SkyView;
   private skyCard: SkyCard;
   private skyTies = new SkyTies();
-  private skySwitch: HTMLButtonElement;
   private skyLayer: SkyLayer | null = null;
-  private birthPanel: BirthPanel;
-  private sidecar: SidecarClient;
   /** the chart standing in the sky, once the sidecar has answered; null in the present sky */
-  private birthChart: SidecarChart | null = null;
-  private birthGen = 0;
+  private natalChart: SidecarChart | null = null;
+  private natalGen = 0;
   private layerWaiters: ((l: SkyLayer | null) => void)[] = [];
   private skyRequested = false;
   private skyFailed = false;
   /** the next sky transition came from the user's own zoom: the camera is theirs, do not fly it */
   private skyByGesture = false;
   private pendingSkyEntry: 'instant' | 'fly' | null = null;
+  /** the planet or Sun the camera is approaching for its open card, as the layer was last told (null: none) */
+  private approachOn: BodyKey | null = null;
+  /** bumped by each change of approach: a flight's follow-on from an earlier change does nothing */
+  private approachTok = 0;
 
-  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, history?: History, corpus?: CorpusIndex | null, redbook?: RedBook) {
+  constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, private history?: History, corpus?: CorpusIndex | null, private redbookData?: RedBook) {
+    this.root = root;
     this.rel = new Float32Array(m.occ.length);
     this.searchIndex = buildSearchIndex(m);
 
     this.passage = new PassageSheet(root, corpus ?? null);
     const passages = this.passage.bridge();
+    this.passages = passages;
     const openCite = (work: string, locator: string) => void this.passage.show(work, locator);
 
     this.floats = new Floats(root, (t) => this.onFloatSelect(t));
-    this.floats.obstacles = () => [this.labelRect];
+    // measured as the plates lay out, not once: the label's links and wrapped lines settle after it is first drawn
+    this.floats.obstacles = () => { if (this.label?.root.isConnected) this.measureLabel(); return [this.labelRect]; };
     this.label = new FocusLabel(root);
+    // the focus card: a double-click opens the subject's reading, as its 'Reading' link does
+    onReadGesture(this.label.root, () => { if (this.state.view.kind === 'focus') this.setDeep(true); });
     this.reveal = new Reveal(root, m, {
       onParallel: (id) => this.openOccurrenceId(id),
       onThread: () => this.followThread(),
@@ -143,7 +183,8 @@ export class Controller {
       onBody: (key) => this.openBody(key),
     }, this.skyTies);
     this.deep = new DeepSheet(root, m, {
-      onClose: () => this.setDeep(false),
+      // the sheet's close is the same step back as Escape: a walk's reading returns to the walk (store.back)
+      onClose: () => this.closeReading(),
       onSubject: (s) => this.navigate(focusOn(this.state, s)),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onCite: openCite,
@@ -152,6 +193,8 @@ export class Controller {
     this.strip = new Strip(root, m, {
       onSelect: (i) => this.tourJump(i),
       onOpen: (i) => this.tour && this.openOccurrence(this.tour.steps[i].occ),
+      onRead: (i) => this.tourRead(i),
+      onOpenOcc: (oi) => this.openOccurrence(oi),
     });
     this.hover = new HoverLabel(root);
     this.timeControl = new TimeControl(root, m, time, () => this.onUserTime());
@@ -161,25 +204,30 @@ export class Controller {
       if (open) this.hover.hide();
     });
 
-    // the graph: a second view of the same field, between the globe and the quiet overlay
-    this.graph = new GraphView(document.body, m, time, {
-      onSelect: (key) => this.onGraphSelect(key),
-      onEarth: (key) => this.onGraphEarth(key),
-      onWhole: () => this.navigate({ view: { kind: 'world' }, deep: false, graph: true }),
-      loadSky: () => this.skyAnchors(),
-    }, engine.reduced);
-    root.before(this.graph.root);
-    this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
-    if (history) this.aion = new AionView(root, m, engine, time, history, state => this.navigate(state), passages);
-    this.aionSwitch = el('button', { type: 'button', class: 'aion-switch', text: 'Aion', title: history ? 'Archetypal history (A)' : 'Aion history data is unavailable', 'aria-pressed': 'false', disabled: !history,
-      onclick: () => this.toggleAion() });
-    document.body.append(this.aionSwitch);
+    // the shell: one title, one menu, the filter, the corners. Every lens fills its chrome through it.
+    const workNames = new Map<string, string>();
+    for (const o of m.occ) for (const c of o.jung) if (!workNames.has(c.work)) workNames.set(c.work, c.workTitle);
+    this.shell = new Shell(document.body, {
+      onLens: (id) => this.openLens(id),
+      onSearch: (anchor) => this.search.open(anchor),
+      onFilter: (f) => this.setFilter(f),
+      countFor: (f) => m.occ.reduce((n, o) => n + (passes(o, f) ? 1 : 0), 0),
+      works: [...workNames].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)),
+      cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
+    });
+    this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
+    // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
+    this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
+    this.panel = new Panel(root, () => this.stepBack());
 
-    this.redbook = redbook ? new RedBookView(root, m, engine, redbook, state => this.navigate(state)) : null;
+    // the graph: a second view of the same field, between the globe and the quiet overlay
+    this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
+
+    const redbook = redbookData;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
-    this.redbookSwitch = el('button', { type: 'button', class: 'rb-switch', text: 'Red Book', title: redbook ? 'Liber Novus: the descent in order (R)' : 'Red Book data is unavailable', 'aria-pressed': 'false', disabled: !redbook,
-      onclick: () => this.toggleRedbook() });
-    document.body.append(this.redbookSwitch);
+    if (redbook) this.rbSpan = uSpan(redbook.stops.map((s) => m.occIndex.get(s.id)).filter((i): i is number => i !== undefined).map((i) => m.u[i]), this.fullSpan());
+
+    // the concept data is optional (absent is the normal state, shown as none); a malformed file is reported, never hidden
 
     this.skyView = new SkyView(root, {
       onBody: (key) => this.onSkyPick(key),
@@ -188,30 +236,20 @@ export class Controller {
     this.skyCard = new SkyCard(root, {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
       onOccurrence: (id) => this.openOccurrenceId(id),
+      onReading: (target) => this.openSubjectReading(target),
       onClose: () => this.stepBack(),
       passage: this.passage.bridge(),
     });
-    this.sidecar = new SidecarClient({ base: SIDECAR_BASE, local: isLocalHost() });
-    this.birthPanel = new BirthPanel(this.skyView.birthHost, {
-      onCast: (b) => this.castBirth(b),
-      onLeave: () => this.leaveBirth(),
-      onBody: (key) => this.navigate(inSky({ ...(this.state.sky ?? {}), body: key })),
-      onField: (t) => this.navigate(focusOn(WORLD, t)),
-      onDraw: (o) => this.skyLayer?.chart.setOptions(o),
-      lookup: (q) => this.sidecar.geocode(q),
-      descent: (key) => this.birthDescent(key),
-      nameOf: (key) => this.skyName(key),
-      onOpen: () => void this.probeSidecar(),
-    });
-    this.skySwitch = el('button', { type: 'button', class: 'sky-switch', text: 'Sky', title: 'The sky: pull back past the Moon to the whole system (S)', 'aria-pressed': 'false',
-      onclick: () => this.toggleSky() });
-    document.body.append(this.skySwitch);
-
-    document.getElementById('search-btn')?.addEventListener('click', (e) => this.search.open(e.currentTarget as HTMLElement));
+    // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens
+    this.shell.setAside(this.modeSwitch.root);
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('hashchange', this.onHash);
     window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); this.syncGraphInsets(); });
     engine.onFrame((dt) => this.tick(dt));
+    // the sky's data is fetched at idle, so the first pull-back never waits on it (audit S3 (d)); never on the boot path
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void, opts: { timeout: number }) => number }).requestIdleCallback;
+    if (idle) idle(() => this.requestSky(), { timeout: 4000 });
+    else window.setTimeout(() => this.requestSky(), 1500);
   }
 
   /** The distance at which the whole earth sits in view for this viewport. */
@@ -220,14 +258,23 @@ export class Controller {
   }
 
   private syncRig() {
-    // once the sky has loaded the pull-back is one continuous gesture, out to past Neptune
+    // once the sky has loaded the pull-back is one continuous gesture, out to past Neptune; until then it resists beyond the
+    // atlas's own limit, toward the sky's, so the first pull-back never stalls and then jumps (audit S3 (d))
     const aspect = this.engine.width / Math.max(1, this.engine.height);
-    this.engine.rig.maxDist = this.skyLayer ? skyMaxDist(aspect, FOV) : Math.max(5.4, this.worldDist() + 0.9);
+    const rig = this.engine.rig;
+    if (this.skyLayer) {
+      rig.maxDist = skyMaxDist(aspect, FOV);
+      rig.softMaxDist = 0;
+    } else {
+      rig.maxDist = Math.max(5.4, this.worldDist() + 0.9);
+      rig.softMaxDist = this.skyFailed ? 0 : skyMaxDist(aspect, FOV);
+    }
   }
 
   // ── engine callbacks ──────────────────────────────────────────────────
   onInteract() {
     document.body.classList.add('interacted');
+    this.landing.dismiss();
   }
 
   onGrab() {
@@ -257,6 +304,8 @@ export class Controller {
   }
 
   onPick(idx: number) {
+    // a click outside an open reading (or a passage over it) closes it to where it began; it never picks through it
+    if (!this.search.isOpen && (this.state.deep || this.passage.isOpen)) { this.closeReading(); return; }
     if (idx < 0 || this.search.isOpen) return;
     const o = this.m.occ[idx];
     const v = this.state.view;
@@ -276,13 +325,20 @@ export class Controller {
     const rig = this.engine.rig;
     rig.dist = rig.targetDist = this.worldDist();
     const parsed = hashToState(location.hash, this.resolver());
+    if (parsed.birthPrefill) this.birthPrefill = parsed.birthPrefill;
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
       this.time.pause();
     }
-    this.apply(parsed.state);
-    this.started = true;
-    this.syncHash(parsed.state, true);
+    this.applyFilter(parsed.filter);
+    const go = () => {
+      this.apply(parsed.state);
+      this.started = true;
+      this.syncHash(parsed.state, true);
+      // the globe is the landing: on a first visit to the plain world, one line and one action that flies to the Self
+      if (stateEq(parsed.state, WORLD) && isEmpty(parsed.filter)) this.landing.maybeShow(document.body, () => this.navigate(focusOn(WORLD, selfSubject(this.m))));
+    };
+    if (!this.whenReady(parsed.state, go)) go();
   }
 
   private resolver() {
@@ -297,12 +353,14 @@ export class Controller {
         return i === undefined ? undefined : m.occ[i].familyId;
       },
       hasBody: (id: string) => !!this.skyLayer?.data.bodies.some((b) => b.key === id) || ['sun', 'moon', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'].includes(id),
-      hasReading: (id: string) => !!this.aion?.history.readings.some(r => r.id === id),
+      hasReading: (id: string) => !!this.history?.readings.some(r => r.id === id),
       hasHistorySelection: (id: string, kind: string, selection: string) => {
-        const reading = this.aion?.history.readings.find(r => r.id === id);
+        const reading = this.history?.readings.find(r => r.id === id);
+        if (reading && kind === 'chapter') return !!this.history?.book?.chapters.some((c) => c.id === selection);
         return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
       },
       hasRedBookStop: (id: string) => this.redbookStops.has(id),
+      defaultReading: () => defaultReadingId(this.history?.readings ?? []),
     };
   }
 
@@ -314,14 +372,20 @@ export class Controller {
     }
     this.pendingHash = null;
     const parsed = hashToState(h, this.resolver());
+    if (parsed.birthPrefill) {
+      // the birth leaves the address bar and history at once; the form holds it until it is saved or left
+      this.birthPrefill = parsed.birthPrefill;
+      history.replaceState(history.state, '', hashWithFilter(parsed.state, this.filter));
+    }
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
     }
-    this.apply(parsed.state);
+    if (!filterEq(parsed.filter, this.filter)) this.applyFilter(parsed.filter);
+    if (!this.whenReady(parsed.state, () => this.apply(parsed.state))) this.apply(parsed.state);
   };
 
   private syncHash(s: AppState, replace = false) {
-    const h = stateToHash(s);
+    const h = hashWithFilter(s, this.filter);
     if (location.hash === h || (h === '#/' && (location.hash === '' || location.hash === '#'))) return;
     if (replace) {
       history.replaceState(null, '', h);
@@ -331,15 +395,80 @@ export class Controller {
     location.hash = h;
   }
 
+  // ── views fetched on first use (MODES-RFC §7) ──────────────────────────
+  /** The view modules a state needs that are not loaded yet; null when everything it needs is here. */
+  private needs(next: AppState): Promise<void> | null {
+    const jobs: Promise<void>[] = [];
+    if (next.graph && !this.graph) jobs.push(this.ensure('graph', () => import('../graph/view').then(({ GraphView }) => {
+      this.graph = new GraphView(document.body, this.m, this.time, {
+        onSelect: (key) => this.onGraphSelect(key),
+        onEarth: (key) => this.onGraphEarth(key),
+        loadSky: () => this.skyAnchors(),
+      }, this.engine.reduced);
+      this.root.before(this.graph.root);
+    })));
+    if (next.history && !this.aion && this.history) jobs.push(this.ensure('aion', () => import('../aion/view').then(({ AionView }) => {
+      this.aion = new AionView(this.root, this.m, this.engine, this.time, this.history!, (state) => this.navigate(state), this.passages, (occId) => this.openReading(occId), this.chrome);
+    })));
+    if (next.redbook && !this.redbook && this.redbookData) jobs.push(this.ensure('redbook', () => import('../redbook/view').then(({ RedBookView }) => {
+      this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (id) => this.tuneToFolio(id), (occId) => this.openReading(occId), this.chrome);
+    })));
+    if (next.dynamics && !this.lens) jobs.push(this.ensure('dynamics', () => Promise.all([import('../dynamics/view'), import('../dynamics/load')]).then(([{ DynamicsView }, { loadDynamics, loadRoute }]) => {
+      const lens = new DynamicsView(this.root, this.m, this.engine, this.time, (state) => this.navigate(state), this.passages, null, this.chrome);
+      this.lens = lens;
+      // the standing stop's families join the subject on the globe whenever they change
+      lens.onScope = () => { if (this.state.dynamics) this.scopeLens(); };
+      // the concept data and the route are optional (absent is the normal state); a malformed file is reported, never hidden
+      void loadDynamics().then((data) => lens.setConcepts(data)).catch((err) => console.error(err));
+      void loadRoute().then((route) => lens.setRoute(route)).catch((err) => console.error(err));
+    })));
+    return jobs.length ? Promise.all(jobs).then(() => undefined) : null;
+  }
+
+  private ensure(key: string, load: () => Promise<void>): Promise<void> {
+    let p = this.loading.get(key);
+    if (!p) {
+      p = load().catch((err) => { this.loading.delete(key); throw err; });
+      this.loading.set(key, p);
+    }
+    return p;
+  }
+
+  /**
+   * Run `go` once what `next` needs is loaded. Only the latest request runs: a navigation made while a view is still
+   * loading replaces the one that was waiting. A view that fails to load leaves the world as it is, said in the console.
+   */
+  private whenReady(next: AppState, go: () => void): boolean {
+    const tok = ++this.navTok;
+    const wait = this.needs(next);
+    if (!wait) return false;
+    document.body.classList.add('lens-loading');
+    wait.then(() => { document.body.classList.remove('lens-loading'); if (tok === this.navTok) go(); })
+      .catch((err) => { document.body.classList.remove('lens-loading'); console.error(err); });
+    return true;
+  }
+
   navigate(next: AppState, opts: { replace?: boolean } = {}) {
+    // a navigation asked for while a state is being applied (a lens redirecting to its first step) runs right after it,
+    // so the hash is written in the order the states are applied
+    if (this.applying) { queueMicrotask(() => this.navigate(next, opts)); return; }
+    this.landing.dismiss();
+    next = this.lensRoute(next);
+    if (this.whenReady(next, () => this.navigate(next, opts))) return;
     if (stateEq(next, this.state)) return;
     if (next.view.kind === 'thread') {
       const t = next.view.target;
-      if (planThread(this.m, t.type, t.id).length < 2) next = { view: next.view.from, deep: false };
+      if (this.plan(t.type, t.id).length < 2) next = { view: next.view.from, deep: false };
       if (stateEq(next, this.state)) return;
     }
     this.apply(next);
     this.syncHash(next, opts.replace);
+  }
+
+  /** Inside the lens a subject is picked, not left: a focus becomes the lens on that subject, over the same world view. */
+  private lensRoute(next: AppState): AppState {
+    if (!this.state.dynamics || next.dynamics || next.view.kind !== 'focus') return next;
+    return { view: { kind: 'world' }, deep: false, dynamics: { subject: next.view.subject } };
   }
 
   stepBack() {
@@ -354,6 +483,12 @@ export class Controller {
     this.navigate(back(this.state));
   }
 
+  /** Leave the open reading (and any passage over it) for where it began. */
+  private closeReading() {
+    if (this.passage.isOpen) this.passage.hide();
+    if (this.state.deep) this.navigate(back(this.state));
+  }
+
   private setDeep(deep: boolean) {
     if (this.state.view.kind === 'world') return;
     this.navigate({ ...this.state, deep });
@@ -366,6 +501,15 @@ export class Controller {
   private openOccurrenceId(id: string) {
     const next = this.occurrenceState(this.state, id);
     if (next) this.navigate(next);
+  }
+
+  /** A thumbnail's double-click: the step (if it is not already the current one), then its reading, in the thread. */
+  private tourRead(i: number) {
+    const t = this.tour;
+    if (!t || !t.steps[i]) return;
+    if (t.i !== i) this.tourJump(i);
+    const next = this.occurrenceState(this.state, this.m.occ[t.steps[i].occ].id);
+    if (next) this.navigate({ ...next, deep: true });
   }
 
   /** The manifestation state for an occurrence, keeping the context it was reached from when it still holds. */
@@ -383,7 +527,8 @@ export class Controller {
       if (v.target.type !== 'parallels' && this.inSubject(ts, i)) ctx = ts;
     }
     const trail = v.kind === 'thread' ? v : s.trail;
-    const inTrail = trail && planThread(this.m, trail.target.type, trail.target.id).some(step => step.occ === i);
+    // on the walk: a step, or one of a step's period-mates (every occurrence of the subject is reached from its walk)
+    const inTrail = trail && this.plan(trail.target.type, trail.target.id).some(step => step.occ === i || step.also.includes(i));
     return { view: { kind: 'manifest', occId: id, context: ctx }, deep: false, ...(inTrail ? { trail } : {}), ...(s.graph && !inTrail ? { graph: true as const } : {}) };
   }
 
@@ -416,6 +561,8 @@ export class Controller {
       const uTo = sc.toU(a.to);
       const span = Math.max(0.05, sc.toU(a.to) - sc.toU(a.from));
       this.onUserTime();
+      // the period is searched on the whole field's track, not the focus's span (a mode's own range stays as it is)
+      if (!this.state.history && !this.state.redbook && !this.state.dynamics) this.timeControl.setRange();
       this.time.setCumulative(false);
       this.time.glideTo(a.from === a.to ? uTo + DEFAULT_RAMP : uTo + DEFAULT_RAMP * 0.5, Math.min(0.5, Math.max(0.1, span * 1.15)));
       this.engine.rig.interacted = true;
@@ -438,18 +585,41 @@ export class Controller {
       return;
     }
     if (this.search.isOpen) return;
+    if (e.key.toLowerCase() === 'm' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.shell.toggleMenu(); e.preventDefault(); return;
+    }
+    if (this.shell.menuOpen) return;
+    if (e.key.toLowerCase() === 'f' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.openLens('field'); e.preventDefault(); return;
+    }
+    if (e.key.toLowerCase() === 't' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.openLens(this.state.lens?.id === 'theory' ? 'field' : 'theory'); e.preventDefault(); return;
+    }
     if (e.key.toLowerCase() === 'a' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleAion(); e.preventDefault(); return;
     }
     if (e.key.toLowerCase() === 'r' && !e.metaKey && !e.ctrlKey && !e.altKey) {
       this.toggleRedbook(); e.preventDefault(); return;
     }
+    if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      this.toggleLens(); e.preventDefault(); return;
+    }
+    if (this.state.history?.selection?.kind === 'chapter' && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+      && this.aion?.walkBook(e.key === 'ArrowRight' ? 1 : -1)) {
+      e.preventDefault();
+      return;
+    }
+    if (this.state.dynamics && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+      && this.lens?.walk(e.key === 'ArrowRight' ? 1 : -1)) {
+      e.preventDefault();
+      return;
+    }
     if (this.state.redbook && !e.metaKey && !e.ctrlKey && !e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
       this.redbook?.walk(e.key === 'ArrowRight' ? 1 : -1);
       e.preventDefault();
       return;
     }
-    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history && !this.state.redbook) {
+    if ((e.key === 's' || e.key === 'S') && !e.metaKey && !e.ctrlKey && !e.altKey && !this.graphMode && !this.state.history && !this.state.redbook && !this.state.dynamics) {
       this.toggleSky(); e.preventDefault(); return;
     }
     if ((e.key === 'g' || e.key === 'G') && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -468,12 +638,12 @@ export class Controller {
       // in the graph the same keys move the graph, not the hidden globe
       const step = 60;
       switch (e.key) {
-        case 'ArrowLeft': this.graph.panBy(step, 0); break;
-        case 'ArrowRight': this.graph.panBy(-step, 0); break;
-        case 'ArrowUp': this.graph.panBy(0, step); break;
-        case 'ArrowDown': this.graph.panBy(0, -step); break;
-        case '+': case '=': this.graph.zoomBy(1.3); break;
-        case '-': case '_': this.graph.zoomBy(1 / 1.3); break;
+        case 'ArrowLeft': this.graph?.panBy(step, 0); break;
+        case 'ArrowRight': this.graph?.panBy(-step, 0); break;
+        case 'ArrowUp': this.graph?.panBy(0, step); break;
+        case 'ArrowDown': this.graph?.panBy(0, -step); break;
+        case '+': case '=': this.graph?.zoomBy(1.3); break;
+        case '-': case '_': this.graph?.zoomBy(1 / 1.3); break;
         default: return;
       }
       e.preventDefault();
@@ -493,35 +663,356 @@ export class Controller {
     e.preventDefault();
   };
 
+  /** The whole scale, as the time control rests on it. */
+  private fullSpan(): TimeSpan {
+    return { fromU: this.m.scale.toU(this.m.field.meta.yearMin), toU: this.m.scale.toU(this.m.field.meta.yearMax) };
+  }
+
+  /** A focus (and a manifestation within one) scopes the time control to its subject's own span; any other view keeps the whole scale. */
+  private syncTimeScope(s: AppState) {
+    const v = s.view;
+    const subject = s.graph || s.trail ? null : v.kind === 'focus' ? v.subject : v.kind === 'manifest' ? v.context : null;
+    const full = this.fullSpan();
+    const span = subject ? subjectSpan(this.m, subjectOccurrences(this.m, subject), full) : null;
+    const to = span ?? full;
+    if (to.fromU !== this.time.fromU || to.toU !== this.time.toU) this.rescope(to.fromU, to.toU);
+  }
+
+  /**
+   * Move the time control to a new range. A clock in cursor mode keeps its place, and a cursor the new range excludes
+   * glides to the nearest edge: a focus never snaps the clock (SPEC §9). In all-time mode the range simply moves.
+   */
+  private rescope(fromU: number, toU: number) {
+    const t = this.time;
+    const before = t.cursorU;
+    const inCursor = t.mode === 'cursor';
+    this.timeControl.setRange(fromU, toU);
+    if (!inCursor || t.cursorU === before) return;
+    const edge = t.cursorU;
+    t.cursorU = before;
+    t.glideTo(edge);
+  }
+
+  /** The focused subject's chronology, built when it stands on the globe with no walk and no Aion or Red Book. */
+  private syncChronology(s: AppState) {
+    const v = s.view;
+    // the lens's subject travels the same arcs a focus does: its chronology runs along the cursor
+    const subject = s.dynamics && !s.graph ? this.lensSubject(s)
+      : v.kind === 'focus' && !s.graph && !s.trail && !s.history && !s.redbook && !s.sky ? v.subject : null;
+    const key = subject ? `${subject.type}:${subject.id}` : '';
+    if (key === this.chronoKey) return;
+    this.chronoKey = key;
+    if (!subject) { this.engine.arcs.clearChronology(); return; }
+    const m = this.m;
+    const idx = subjectOccurrences(m, subject);
+    const path = chronologyPath(idx.map((i) => ({ u: m.u[i], dir: m.dir[i] })));
+    const steps = path.map((k) => idx[k]);
+    this.engine.arcs.buildChronology(steps.map((i) => m.dir[i]), steps.map((i) => m.u[i]), this.subjectPal(subject).core);
+  }
+
+  /** The Red Book's standing folio: the clock glides to its year (never a scrub, never a play); the control's readout shows the year. */
+  private tuneToFolio(stopId: string) {
+    const i = this.m.occIndex.get(stopId);
+    if (i === undefined) return;
+    this.time.pause();
+    this.time.setCumulative(false);
+    this.time.glideTo(this.m.u[i]);
+  }
+
+  /** Leave Aion's mode: its view, the time range it set, and the clock it held. */
+  private leaveAion() {
+    this.aion?.hide();
+    this.timeControl.setRange();
+    if (this.aionTime) this.time.restore(this.aionTime);
+    this.aionTime = null;
+  }
+
+  /** A mode's core reading of an occurrence (a double-click on its card): Escape returns to the mode it was opened from. */
+  private openReading(occId: string) {
+    const i = this.m.occIndex.get(occId);
+    if (i === undefined) return;
+    this.navigate(openedFrom(this.state, { view: { kind: 'manifest', occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: true }));
+  }
+
+  /** A sky body's core reading (a double-click on its card): the field target it descends to, read at depth; Escape returns to the sky. */
+  private openSubjectReading(subject: Subject) {
+    this.navigate(openedFrom(this.state, { view: { kind: 'focus', subject }, deep: true }));
+  }
+
+  /** Leave the Red Book: its folio view, and the range and clock it held. */
+  private leaveRedbook(next: AppState) {
+    const v = next.view;
+    const graph = !!next.graph;
+    this.redbook?.hide();
+    if (this.rbTime) {
+      // the range first: a cursor snapshot taken in cursor mode is clamped into the range it was taken in
+      if (this.rbRange) this.timeControl.setRange(this.rbRange.fromU, this.rbRange.toU);
+      this.time.restore(this.rbTime);
+    }
+    this.rbTime = null;
+    this.rbRange = null;
+    // leaving to the plain world: the Red Book's red must give way (not when a link is carrying us straight
+    // into Aion, a focus or the lens, which set palettes)
+    if (v.kind === 'world' && !next.sky && !graph && !next.history && !next.dynamics) this.enterWorld(false);
+  }
+
+  /** The lens's subject: the one it was given, else The Self (the same landing the lens itself makes). */
+  private lensSubject(s: AppState): Subject {
+    return s.dynamics?.subject ?? selfSubject(this.m);
+  }
+
+  /** The lens: the world view with the field read as a dynamical system. Whatever it hands over is torn down first. */
+  private enterLens(prev: AppState, next: AppState, first: boolean) {
+    const m = this.m;
+    if (this.tour) this.endThread();
+    if (prev.history) this.leaveAion();
+    if (prev.redbook) this.leaveRedbook(next);
+    // a change of subject inside the lens keeps the clock the lens was entered with
+    if (!prev.dynamics) {
+      this.lensTime = this.time.snapshot();
+      this.lensRange = { fromU: this.time.fromU, toU: this.time.toU };
+    }
+    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    document.body.classList.remove('deep-open', 'thread-inspecting');
+    this.syncShift();
+    // a mode that returns early must still let the sky go (the sky's own flight, if any, then wins)
+    this.syncSky(prev, next, first, false);
+    const subject = this.lensSubject(next);
+    const idx = subjectOccurrences(m, subject);
+    // the clock is scoped to the subject's own span, as a focus scopes it; the strip reads the same range
+    const span = subjectSpan(m, idx, this.fullSpan()) ?? this.fullSpan();
+    // a subject picked inside the lens glides the clock to the new span, as a focus does (SPEC §9); entering it snaps the range
+    if (prev.dynamics) this.rescope(span.fromU, span.toU);
+    else this.timeControl.setRange(span.fromU, span.toU);
+    const pal = this.subjectPal(subject);
+    this.engine.setPalette(pal, first ? 0.01 : 1.6);
+    this.timeControl.setSubject(idx, rgbToHex(pal.core));
+    this.lens?.show(next.dynamics);
+    this.scopeLens();
+  }
+
+  /**
+   * The lens's own set on the globe: what the route speaks of — the standing stop's families, or on the overview every
+   * family the route binds — with a subject's occurrences when one was chosen. Their nearby presences dim and the rest
+   * of the field is set aside (src/data/scope.ts), named under the title. Without a route, the subject's own set.
+   */
+  private scopeLens() {
+    const m = this.m;
+    const chosen = this.state.dynamics?.subject;
+    const subject = this.lensSubject(this.state);
+    const standing = this.lens?.standing();
+    const families = standing?.familyIds ?? this.lens?.routeFamilies() ?? [];
+    const own = new Set(chosen || !families.length ? subjectOccurrences(m, subject) : []);
+    for (const f of families) for (const i of m.famOcc.get(f) ?? []) own.add(i);
+    const set = standing ? `“${standing.name}”` : families.length ? 'the route’s families' : '';
+    const label = chosen || !set ? [subjectName(m, subject), set].filter(Boolean).join(' and ') : set;
+    const sc = scopeOf(m, own, label);
+    this.engine.setEmphasis(sc.rel, this.subjectPal(subject).core, sc.info);
+  }
+
+  /** Leave the lens: its panel and strip go, the globe's emphasis goes, and the clock and range it held are given back. */
+  private leaveLens(next: AppState) {
+    this.lens?.hide();
+    this.engine.setEmphasis(null, null);
+    this.timeControl.setSubject(null, '#ffffff');
+    // the range first, as the Red Book does: a snapshot in cursor mode is clamped into the range it was taken in
+    if (this.lensRange) this.timeControl.setRange(this.lensRange.fromU, this.lensRange.toU);
+    if (this.lensTime) this.time.restore(this.lensTime);
+    this.lensTime = null;
+    this.lensRange = null;
+    // the world's palette returns unless the next state sets its own (a focus, Aion or the Red Book do; the sky holds its own)
+    if (next.view.kind === 'world' && !next.history && !next.redbook) {
+      if (next.sky) this.engine.setPalette(WORLD_PALETTE, 1.6);
+      else this.enterWorld(false);
+    }
+  }
+
+  private toggleLens() {
+    this.navigate(this.state.dynamics ? WORLD : { view: { kind: 'world' }, deep: false, dynamics: {} });
+  }
+
+  // ── the shell: lenses and the filter (MODES-RFC) ─────────────────────
+  /** Open a lens from the menu or a key: each lens's own landing state, always through navigate(). */
+  openLens(id: LensId) {
+    switch (id) {
+      case 'field': return this.navigate(this.state.graph ? { view: { kind: 'world' }, deep: false, graph: true } : WORLD);
+      case 'aion': {
+        const reading = this.history ? defaultReadingId(this.history.readings) : undefined;
+        if (reading) this.navigate({ view: { kind: 'world' }, deep: false, history: { reading } });
+        return;
+      }
+      case 'redbook': if (this.redbookData) this.navigate({ view: { kind: 'world' }, deep: false, redbook: {} }); return;
+      default: this.navigate(inLens(id));
+    }
+  }
+
+  /** The shell follows the state: the active lens, and the context line reset for the lens that is about to fill it. */
+  private syncShell(next: AppState) {
+    const lens = lensOf(next);
+    this.shell.setLens(lens);
+    const fieldLens = lens === 'field';
+    this.shell.setAside(fieldLens ? this.modeSwitch.root : null);
+    // every lens fills its own context and controls as it shows; the field's context is its focus (set below)
+    this.shell.setControls(null);
+    if (fieldLens && next.view.kind === 'world') this.shell.setContext(next.sky ? 'The sky' : '');
+  }
+
+  /** A filter chosen in the menu, a chip removed, or a link's filter: the globe's mask, the walks, the hash. */
+  private setFilter(f: FieldFilter) {
+    if (filterEq(f, this.filter)) return;
+    this.applyFilter(f);
+    // the engine re-masks by itself; what reads the field's membership (a focus's framing and images, a walk) is re-entered
+    const s = this.state;
+    const v = s.view;
+    if (!s.history && !s.redbook && !s.dynamics && !s.lens && !s.graph) {
+      if (v.kind === 'focus') this.enterFocus(v.subject, false);
+      else if (v.kind === 'thread') {
+        // a walk the filter leaves too short to walk returns to where it began
+        if (this.plan(v.target.type, v.target.id).length < 2) { this.navigate({ view: v.from, deep: false }, { replace: true }); return; }
+        this.endThread(); this.enterThread(v.target, v.from, false);
+      }
+    }
+    if (s.graph) this.syncGraph();
+    this.syncHash(s, true);
+  }
+
+  private applyFilter(f: FieldFilter) {
+    this.filter = f;
+    this.filterMask = maskOf(this.m.occ, f);
+    this.engine.setFilterMask(this.filterMask);
+    this.shell.setFilter(f);
+    this.setCache.key = '';
+    document.body.classList.toggle('filtered', !isEmpty(f));
+  }
+
+  /** Does occurrence `i` pass the field filter? */
+  private passing(i: number): boolean {
+    return !this.filterMask || this.filterMask[i] > 0;
+  }
+
+  /** A thread's walk over the filtered field. */
+  private plan(type: ThreadTarget['type'], id: string): ThreadStep[] {
+    const steps = planThread(this.m, type, id);
+    return this.filterMask ? steps.filter((st) => this.passing(st.occ)) : steps;
+  }
+
+  /** The context a panel lens is given: the shell's frame and a narrow door back into the field. */
+  private lensContext(id: PanelLensId): LensContext {
+    return {
+      model: this.m,
+      engine: this.engine,
+      time: this.time,
+      panel: this.panel,
+      setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
+      setControls: (n) => { if (this.activeLens === id) this.shell.setControls(n); },
+      navigate: (st) => this.navigate(st),
+      filter: () => this.filter,
+      passages: this.passage.bridge(),
+      focus: (subject) => this.navigate(focusOn(WORLD, subject)),
+      openOccurrence: (occId) => this.openReading(occId),
+      setPath: (path, opts) => { if (this.activeLens === id) this.navigate(inLens(id, path), opts); },
+      refreshNatal: () => this.refreshNatal(),
+      takeBirthPrefill: () => { const b = this.birthPrefill; this.birthPrefill = null; return b; },
+    };
+  }
+
+  /** Enter a panel lens: every other mode hands over, the code loads on first use, then the lens shows its route. */
+  private enterPanelLens(prev: AppState, next: AppState, first: boolean) {
+    const id = next.lens!.id;
+    if (this.tour) this.endThread();
+    if (prev.history) this.leaveAion();
+    if (prev.redbook) this.leaveRedbook(next);
+    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    document.body.classList.remove('deep-open', 'thread-inspecting');
+    this.syncSky(prev, next, first, false);
+    if (this.graphMode) this.syncMode(false, first, true);
+    if (!prev.lens || prev.lens.id !== id) {
+      this.engine.setEmphasis(null, null);
+      this.engine.setPalette(WORLD_PALETTE, first ? 0.01 : 1.6);
+      this.timeControl.setSubject(null, '#ffffff');
+    }
+    this.activeLens = id;
+    // the globe gives the panel room, as it does a card; an approached body (the Astrology walk) is centred in the space
+    // a phone's half sheet leaves above it, as a planet's card does
+    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
+    const path = next.lens!.path;
+    const have = this.lensInst.get(id);
+    if (have) { have.enter(path); return; }
+    const tok = ++this.lensTok;
+    document.body.classList.add('lens-loading');
+    PANEL_LOADERS[id]().then((mod) => {
+      document.body.classList.remove('lens-loading');
+      if (!this.lensInst.has(id)) this.lensInst.set(id, mod.mount(this.lensContext(id)));
+      if (tok !== this.lensTok || this.state.lens?.id !== id) return;
+      this.lensInst.get(id)!.enter(this.state.lens.path);
+    }).catch((err) => {
+      document.body.classList.remove('lens-loading');
+      console.error(err);
+      this.panel.open('Lens unavailable', [el('p', { class: 'lp-error', text: 'This lens could not be loaded. Check the connection and try again.' })]);
+    });
+  }
+
+  private leavePanelLens() {
+    const id = this.activeLens;
+    this.activeLens = null;
+    this.lensTok++;
+    if (id) this.lensInst.get(id)?.leave();
+    this.panel.close();
+    this.engine.rig.setShift(0, 0);
+  }
+
   // ── applying a state ──────────────────────────────────────────────────
+  private applying = false;
+
   private apply(next: AppState) {
+    this.applying = true;
+    try { this.applyState(next); } finally { this.applying = false; }
+  }
+
+  private applyState(next: AppState) {
     const prev = this.state;
     const first = !this.started;
     this.state = next;
+    this.syncChronology(next);
     const v = next.view;
     const pv = prev.view;
     document.body.dataset.state = v.kind;
     const graph = !!next.graph;
     const modeChanged = first ? graph : !!prev.graph !== graph;
     this.syncMode(graph, first, modeChanged);
-    this.aionSwitch.setAttribute('aria-pressed', String(!!next.history));
-    this.redbookSwitch.setAttribute('aria-pressed', String(!!next.redbook));
-    if (next.redbook && this.redbook) {
-      if (this.tour) this.endThread();
-      if (!prev.redbook) this.rbTime = this.time.snapshot();
-      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
-      document.body.classList.remove('deep-open', 'thread-inspecting');
-      this.redbook.show(next.redbook);
+    this.syncShell(next);
+    // a panel lens hands over before anything else takes the scene; a panel lens state is handled whole here
+    if (prev.lens && prev.lens.id !== next.lens?.id) this.leavePanelLens();
+    if (next.lens) {
+      if (prev.dynamics && !next.dynamics) this.leaveLens(next);
+      this.enterPanelLens(prev, next, first);
       return;
     }
-    if (prev.redbook) {
-      this.redbook?.hide();
-      if (this.rbTime) this.time.restore(this.rbTime);
-      this.rbTime = null;
-      // leaving to the plain world: the Red Book's red must give way (not when
-      // a link is carrying us straight into Aion or a focus, which set palettes)
-      if (v.kind === 'world' && !next.sky && !graph && !next.history) this.enterWorld(false);
+    // the lens hands its clock back before anything else takes the clock (a Red Book or Aion entry snapshots the restored one)
+    if (prev.dynamics && !next.dynamics) this.leaveLens(next);
+    if (next.dynamics) { this.enterLens(prev, next, first); return; }
+    if (next.redbook && this.redbook) {
+      if (this.tour) this.endThread();
+      if (prev.history) this.leaveAion();
+      if (!prev.redbook) {
+        this.rbTime = this.time.snapshot();
+        this.rbRange = { fromU: this.time.fromU, toU: this.time.toU };
+        // the Book's own span: the control reads as its chronology (the walk then glides the clock folio by folio)
+        const span = this.rbSpan ?? this.fullSpan();
+        this.timeControl.setRange(span.fromU, span.toU);
+      }
+      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+      document.body.classList.remove('deep-open', 'thread-inspecting');
+      // the Red Book holds no shift of its own: Aion's card offset does not carry over
+      this.syncShift();
+      // a mode that returns early must still let the sky go (before its own flight, which then wins)
+      this.syncSky(prev, next, first, false);
+      this.redbook.show(next.redbook);
+      // the genesis table stands over the whole field's time
+      if (next.redbook.genesis) this.time.setAll();
+      return;
     }
+    if (prev.redbook) this.leaveRedbook(next);
     if (next.history && this.aion) {
       if (this.tour) this.endThread();
       if (!prev.history) this.aionTime = this.time.snapshot();
@@ -536,15 +1027,12 @@ export class Controller {
       this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
       this.engine.rig.setShift(next.history.selection ? -0.18 : 0, 0);
+      this.syncSky(prev, next, first, false);
       this.aion.show(next.history);
       return;
     }
-    if (prev.history) {
-      this.aion?.hide();
-      this.timeControl.setRange();
-      if (this.aionTime) this.time.restore(this.aionTime);
-      this.aionTime = null;
-    }
+    if (prev.history) this.leaveAion();
+    this.syncTimeScope(next);
     // a change of mode re-enters the view: the globe flies to what the graph was showing, and back
     const sameView = !first && !modeChanged && !prev.history && viewEq(pv, v);
     const previousTrail = pv.kind === 'thread' ? pv : prev.trail;
@@ -577,12 +1065,14 @@ export class Controller {
     this.syncShift();
     this.measureLabel();
     this.syncGraph();
-    this.syncSky(prev, next, first);
+    // a view that framed itself (or a thread's walk) keeps its flight: the sky's descent must not overwrite it
+    // the graph starts no framing flight, so a graph arrival still needs the plain descent
+    this.syncSky(prev, next, first, (!sameView && !this.graphMode) || !!next.trail);
   }
 
   // ── the sky ───────────────────────────────────────────────────────────
   toggleSky() {
-    if (this.graphMode || this.state.history || this.state.redbook) return;
+    if (this.graphMode || this.state.history || this.state.redbook || this.state.dynamics) return;
     this.navigate(this.state.sky ? WORLD : inSky());
   }
 
@@ -621,8 +1111,8 @@ export class Controller {
   private skyLive: SkyLive | null = null;
   /** The sky's live state (diagnostics, tests): null until the sky has loaded. */
   get skyLiveState() { return this.skyLive?.state ?? null; }
-  /** The birth chart standing in the sky (diagnostics, tests): null in the present sky. */
-  get skyBirthChart() { return this.birthChart; }
+  /** The natal chart standing in the sky (diagnostics, tests): null in the present sky. */
+  get skyNatalChart() { return this.natalChart; }
 
   /** The sky's clock: follows the wall clock only while the sidecar vouches for the grids; otherwise a labelled snapshot. */
   private startSkyLive(layer: SkyLayer) {
@@ -631,15 +1121,15 @@ export class Controller {
       local: isLocalHost(),
       onChange: (s) => {
         this.skyView.setLive(s);
-        // a birth sky holds its own moment; the clock resumes when it is left
-        if (!this.state.sky?.birth) layer.setMoment(live.moment());
+        // a natal sky holds its own moment; the clock resumes when it is left
+        if (!this.state.sky?.natal) layer.setMoment(live.moment());
         if (this.state.sky) this.syncSkyCard();
       },
     });
     this.skyLive = live;
     layer.setMoment(live.moment());
     this.skyView.setLive(live.state);
-    this.engine.onFrame(() => { if (live.following && !this.state.sky?.birth) layer.setMoment(live.moment()); });
+    this.engine.onFrame(() => { if (live.following && !this.state.sky?.natal) layer.setMoment(live.moment()); });
     live.start();
   }
 
@@ -652,9 +1142,6 @@ export class Controller {
       this.startSkyLive(layer);
       this.engine.attachSky(layer);
       this.skyView.setLayer(layer);
-      this.birthPanel.setBodies(data.bodies);
-      this.birthPanel.setGazetteer(data.gazetteer);
-      void this.probeSidecar();
       for (const w of this.layerWaiters.splice(0)) w(layer);
       this.syncRig();
       const cultures = Object.keys(data.cultures).filter((id) => this.m.cultureById.has(id)).map((id) => ({ id, name: this.m.cultureById.get(id)!.name }));
@@ -662,28 +1149,109 @@ export class Controller {
       document.body.classList.add('sky-ready');
       if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
       this.pendingSkyEntry = null;
+      this.syncApproach();
       if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
+      this.syncRig(); // no sky is coming: the pull-back's resistance beyond the atlas's limit ends
       for (const w of this.layerWaiters.splice(0)) w(null);
       console.warn(err);
-      this.skySwitch.disabled = true;
-      this.skySwitch.title = 'The sky data is unavailable.';
       this.pendingSkyEntry = null;
     });
   }
 
-  /** Carry the camera out to the whole system, in the default orientation for the moment. */
+  /** Carry the camera out to the whole system, in the default orientation for the moment (a planet's card lands on it). */
   private enterSkyView(instant: boolean) {
     const layer = this.skyLayer;
     if (!layer) return;
     const e = this.engine;
     const aspect = e.width / Math.max(1, e.height);
     layer.prepare(e.rig.dist);
-    const ll = systemViewLatLon(SYSTEM_VIEW_LONGITUDE, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+    const ll = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
     e.rig.interacted = true;
     document.body.classList.add('interacted');
-    e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+    const key = this.approachFor(this.state.sky);
+    this.approachOn = key;
+    layer.setApproach(key, instant);
+    if (key) e.rig.flyTo(ll.lat, ll.lon, this.approachDistOf(key, aspect), { instant, duration: 3.2 });
+    else if (this.state.sky?.natal) {
+      // a birth sky: the zodiacal ring framed from above (as syncApproach does on the way back from a body)
+      const cl = systemViewLatLon(layer.sunLongitude() + 90, 58, layer.gmst, layer.eps);
+      e.rig.flyTo(cl.lat, cl.lon, Math.min(e.rig.maxDist, this.chartFrameDist(aspect)), { instant, duration: 4.2 });
+    } else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
+  }
+
+  /**
+   * The body the camera approaches for its open card: a planet or the Sun. In a birth sky the Astrology walk approaches
+   * each step, the Moon included (its walk begins there): the Moon's drawn place is far enough out that holding it is
+   * not a zoom to the Earth.
+   */
+  private approachFor(sky: AppState['sky']): BodyKey | null {
+    if (!sky?.body) return null;
+    return isApproachBody(sky.body) || (sky.natal && sky.body === 'moon') ? sky.body : null;
+  }
+
+  /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
+  private approachDistOf(key: BodyKey, aspect: number): number {
+    const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
+    // in the Astrology walk the body carries its satellites, whose outer orbit is 1.86 discs wide: the disc is kept to
+    // 42% of the width so the orbit and its names fit a phone
+    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect, this.state.sky?.natal ? 0.42 : 0.6);
+  }
+
+  /**
+   * The sky's approach follows the open card: a planet's card eases the look-at onto the planet and flies the camera to
+   * its disc, keeping the current orientation; any other state (no card, the Moon, Earth, a birth sky) flies the camera
+   * back to the system home. Idempotent: it acts only when the approached body changes.
+   */
+  private syncApproach() {
+    const layer = this.skyLayer;
+    if (!layer) return;
+    const key = this.approachFor(this.state.sky);
+    if (key === this.approachOn) return;
+    const from = this.approachOn;
+    this.approachOn = key;
+    const tok = ++this.approachTok;
+    layer.setApproach(key);
+    const e = this.engine;
+    const aspect = e.width / Math.max(1, e.height);
+    const c = e.rig.centre();
+    if (key && from) {
+      // planet for planet: pull back until both stand in the view, then approach the new one (no sweep through empty space)
+      const a = layer.positionOf(from);
+      const b = layer.positionOf(key);
+      const span = a && b ? a.distanceTo(b) : 0;
+      e.rig.flyTo(c.lat, c.lon, Math.min(e.rig.maxDist, Math.max(this.approachDistOf(key, aspect), span)), { duration: 1.6 });
+      e.rig.onFlyEnd(() => {
+        if (tok !== this.approachTok || this.approachOn !== key) return;
+        const now = e.rig.centre();
+        e.rig.flyTo(now.lat, now.lon, this.approachDistOf(key, aspect), { duration: 1.6 });
+      });
+      return;
+    }
+    if (!key && this.state.sky?.natal) {
+      // a birth sky with no body held: frame the zodiacal ring, seen from well above the ecliptic so the band and its
+      // glyphs read, filling most of the space the panel leaves
+      const ll = systemViewLatLon(layer.sunLongitude() + 90, 58, layer.gmst, layer.eps);
+      e.rig.flyTo(ll.lat, ll.lon, Math.min(e.rig.maxDist, this.chartFrameDist(aspect)), { duration: 3.2 });
+      return;
+    }
+    e.rig.flyTo(c.lat, c.lon, key ? this.approachDistOf(key, aspect) : systemHomeDist(aspect, FOV), { duration: 3.2 });
+  }
+
+  /** The distance at which a birth chart's ring fills about two thirds of the view's narrower side. */
+  private chartFrameDist(aspect: number): number {
+    const tanHalf = Math.tan((FOV * Math.PI) / 360);
+    // a phone gives the ring the band between the title and the half sheet: about a quarter of the height
+    const fill = isNarrow() ? 0.5 * aspect : 0.66 * Math.min(1, aspect * 0.72);
+    return (CHART_RADIUS * 1.15) / (fill * tanHalf);
+  }
+
+  /** The sky is left: the approach lets go (the look-at eases back to the Sun; the caller's flight brings the camera). */
+  private releaseApproach() {
+    this.approachOn = null;
+    this.approachTok++;
+    this.skyLayer?.setApproach(null);
   }
 
   /** The label for a body under the standing culture: its table name where there is one, else the default. */
@@ -710,18 +1278,19 @@ export class Controller {
       this.navigate(inSky(rest), { replace: true });
       return;
     }
-    const birth = !!sky.birth;
+    const birth = !!sky.natal;
+    // in Astrology the walk's own panel reads the body; the sky's card stands down so there is one reading surface
+    if (this.state.lens?.id === 'astrology') { this.skyCard.hide(); return; }
     this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: birth ? `at the birth moment, ${formatMoment(layer.moment)}` : `as of ${formatMoment(layer.moment)}`, culture: sky.culture, birth });
   }
 
-  private syncSky(prev: AppState, next: AppState, first: boolean) {
+  private syncSky(prev: AppState, next: AppState, first: boolean, reframed: boolean) {
     const on = !!next.sky;
     this.skyView.setActive(on, next.sky?.body ?? null);
     this.skyView.relabel();
     this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
     if (on) this.syncSkyCard(); else this.skyCard.hide();
-    this.skySwitch.setAttribute('aria-pressed', String(on));
-    this.syncBirth(prev.sky?.birth, next.sky?.birth, !!next.sky);
+    this.syncNatal(prev.sky?.natal, next.sky?.natal, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
       if (this.skyByGesture) this.skyByGesture = false;
@@ -729,14 +1298,17 @@ export class Controller {
       else if (!this.skyFailed) this.pendingSkyEntry = first ? 'instant' : 'fly';
     } else if (!on && prev.sky) {
       this.pendingSkyEntry = null;
+      this.releaseApproach();
       if (this.skyByGesture) this.skyByGesture = false;
-      else {
+      else if (!reframed) {
         // leave the way we came: the same orientation, down to the Earth
         const rig = this.engine.rig;
         const c = rig.centre();
         rig.flyTo(c.lat, c.lon, this.worldDist(), { duration: 3.4 });
       }
     }
+    // the open card's body is what the camera approaches (a no-op where the entry above has already framed it)
+    if (on) this.syncApproach();
   }
 
   // ── the birth sky ─────────────────────────────────────────────────────
@@ -749,94 +1321,97 @@ export class Controller {
     return new Promise((res) => this.layerWaiters.push(res));
   }
 
-  /** Is the sidecar there? Asked once the sky is built, and again whenever the disclosure is opened while it was not. */
-  private async probeSidecar() {
-    if (!isLocalHost()) { this.birthPanel.setAvailability({ kind: 'off', why: 'not-local' }); return; }
-    if (this.birthPanel.availability.kind === 'ready') return;
-    const ok = await this.sidecar.available();
-    this.birthPanel.setAvailability(ok ? { kind: 'ready' } : { kind: 'off', why: 'absent' });
+  /**
+   * The natal sky changed (Astrology opened a chart, changed it, or left): bring the sky to that chart's moment, or back
+   * to the clock. The chart is computed in this page (src/astro/natal.ts, loaded only now); its birth data is read from
+   * this browser's storage or from the curation (Jung), never from the URL, and nothing is sent anywhere.
+   */
+  private syncNatal(prev: string | undefined, next: string | undefined, inSkyNow: boolean) {
+    // a phone gives a birth sky its whole upper band: the sky's names control and caption step aside (Astrology's panel
+    // carries the chart's reading)
+    document.body.classList.toggle('natal-sky', !!next && inSkyNow);
+    if (prev === next) return;
+    void this.applyNatal(next, inSkyNow);
   }
 
-  /** The first mythic node a body descends through: Jung's own link before the atlas's, and only ones that resolve. */
-  private birthDescent(key: BodyKey): { label: string; target: { type: 'family' | 'archetype'; id: string } } | null {
-    const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
-    if (!body) return null;
-    const { resolved } = resolveTies(body, this.m);
-    const first = resolved.find((t) => t.basis !== 'site') ?? resolved[0];
-    return first ? { label: subjectName(this.m, first.target), target: first.target } : null;
+  /** Re-read the standing natal chart (the visitor saved or changed theirs). */
+  refreshNatal() {
+    const id = this.state.sky?.natal;
+    if (id) void this.applyNatal(id, true);
   }
 
-  private castBirth(b: BirthInput) {
-    this.navigate(inSky({ ...(this.state.sky ?? {}), birth: b }));
-  }
-
-  private leaveBirth() {
-    const { birth: _b, ...rest } = this.state.sky ?? {};
-    this.navigate(inSky(rest));
-  }
-
-  /** The state's birth changed (a cast, a link, a leaving): bring the sky to that moment, or back to the clock. */
-  private syncBirth(prev: BirthInput | undefined, next: BirthInput | undefined, inSkyNow: boolean) {
-    const same = prev && next ? prev.local === next.local && prev.lat === next.lat && prev.lon === next.lon : !prev && !next;
-    if (same) return;
-    void this.applyBirth(next, inSkyNow);
-  }
-
-  private async applyBirth(birth: BirthInput | undefined, visible: boolean) {
-    const gen = ++this.birthGen;
+  private async applyNatal(id: string | undefined, visible: boolean) {
+    const gen = ++this.natalGen;
     const layer = await this.whenLayer();
-    if (!layer || gen !== this.birthGen) return;
+    if (!layer || gen !== this.natalGen) return;
     const duration = this.engine.reduced || !visible ? 0 : 2600;
-    if (!birth) {
+    if (!id) {
       // back to the present: the chart is taken away and the bodies travel home to the clock
-      this.birthChart = null;
+      this.natalChart = null;
       layer.chart.set(null);
-      this.birthPanel.clearChart();
       this.skyView.setHeld(null);
       layer.travel(layer.baseEph, this.skyLive?.moment() ?? Date.now(), duration);
       if (this.state.sky) this.syncSkyCard();
       return;
     }
-    this.birthPanel.setInput(birth);
-    this.birthPanel.setStatus('working', 'Computing the sky at that moment…');
     try {
-      const chart = await this.sidecar.chart(birth);
-      if (gen !== this.birthGen) return;
-      const win = await this.sidecar.window(chartMoment(chart));
-      if (gen !== this.birthGen) return;
-      const eph = new SkyEphemeris(dataWithWindow(layer.data, win));
-      this.birthChart = chart;
+      const [{ natalChart, natalWindow, birthInstant }, { chartSources }, data] = await Promise.all([
+        import('../astro/natal'), import('../astro/charts'), loadLensData<{ people: CuratedPerson[] }>('astrology'),
+      ]);
+      if (gen !== this.natalGen) return;
+      const rec = chartSources(data.people).find((c) => c.id === id);
+      if (!rec) {
+        // a chart this browser does not hold (a link from someone else's 'you'): the lens opens on its own landing
+        this.natalChart = null;
+        layer.chart.set(null);
+        if (this.state.sky?.natal === id) this.navigate(astrologyAt([]), { replace: true });
+        return;
+      }
+      const chart = natalChart(rec.birth);
+      const ms = birthInstant(rec.birth);
+      const eph = new SkyEphemeris(dataWithWindow(layer.data, natalWindow(ms)));
+      this.natalChart = chart;
       layer.chart.set(chart);
-      layer.chart.setOptions(this.birthPanel.drawn);
-      layer.travel(eph, chartMoment(chart), duration, true);
-      this.birthPanel.showChart(chart);
-      this.skyView.setHeld(`The sky is held at ${formatMoment(chartMoment(chart))}, the moment you gave; it does not follow the clock.`);
-      this.birthPanel.setAvailability({ kind: 'ready' });
+      layer.chart.setOptions({ aspects: true, houses: false });
+      layer.travel(eph, ms, duration, true);
+      this.skyView.setHeld(`The sky is held at ${rec.label === 'You' ? 'your birth' : `${rec.label}’s birth`}, ${formatMoment(ms)}${chart.timeKnown ? '' : ' (local noon: no time was given)'}.`);
       // the ring stands around the Earth at the scale of the system: bring the camera out to see it
-      if (visible && this.engine.rig.dist < STAGE_EDGES.handoff) this.enterSkyView(this.engine.reduced);
+      if (visible && this.engine.rig.dist < STAGE_EDGES.handoff && !this.approachFor(this.state.sky)) this.enterSkyView(this.engine.reduced);
       this.syncSkyCard();
     } catch (e) {
-      if (gen !== this.birthGen) return;
-      const message = e instanceof SidecarError ? e.message : 'The birth sky could not be computed.';
-      if (!(e instanceof SidecarError)) console.warn(e);
-      if (e instanceof SidecarError && (e.kind === 'absent' || e.kind === 'not-local')) this.birthPanel.setAvailability({ kind: 'off', why: e.kind === 'absent' ? 'absent' : 'not-local' });
-      // the link must not claim a sky that is not shown: step the state back to the present sky, and keep the reason on screen
-      this.birthChart = null;
+      if (gen !== this.natalGen) return;
+      console.error(e);
+      this.natalChart = null;
       layer.chart.set(null);
-      this.birthPanel.clearChart();
       this.skyView.setHeld(null);
-      const { birth: _b, ...rest } = this.state.sky ?? {};
-      if (this.state.sky?.birth) this.navigate(inSky(rest), { replace: true });
-      this.birthPanel.setStatus('error', message);
     }
+  }
+
+  /**
+   * The arrival settle (audit S3 (b)): a wheel or pinch that has carried the camera into the system, once it rests, eases the
+   * orientation to the canonical system view, the room the S key composes, at the same distance. It acts only after a wheel
+   * or pinch with no drag since; never in an approach, a birth sky, or under reduced motion. Any input cancels it (controls.ts).
+   */
+  private settleArrival() {
+    const rig = this.engine.rig;
+    const layer = this.skyLayer;
+    const sky = this.state.sky;
+    const now = performance.now();
+    const eligible = !!layer && !!sky && !sky.natal && !this.approachFor(sky) && !layer.approach && !this.engine.reduced
+      && rig.wheelDriven && !rig.flying && !rig.dragging && rig.dist >= STAGE_EDGES.system
+      && now - rig.lastWheelAt >= SETTLE.idleMs && now - rig.lastDragAt >= SETTLE.quietDragMs;
+    if (!eligible || !layer) { rig.settleTo = null; return; }
+    rig.settleTo = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
   }
 
   /** The zoom gesture crossing the Moon's edge sets and clears the sky flag; the camera stays the user's. */
   private watchSkyGesture() {
+    this.settleArrival();
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
-    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || rig.flying) return;
-    const d = rig.dist;
+    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || this.state.dynamics || rig.flying) return;
+    // the stage's distance, not the rig's: an approach to a planet holds the camera close to it, and is not a zoom to the Earth
+    const d = this.engine.stageDist;
     if (!this.state.sky && d > SKY_ENTER) {
       this.skyByGesture = true;
       this.navigate(inSky());
@@ -852,6 +1427,12 @@ export class Controller {
     this.navigate(inSky({ ...(this.state.sky ?? {}), body: key }));
   }
 
+  /** A body clicked on the canvas: as onSkyPick, except that a click outside an open reading only closes it. */
+  onCanvasSkyPick(key: BodyKey) {
+    if (!this.search.isOpen && (this.state.deep || this.passage.isOpen)) { this.closeReading(); return; }
+    this.onSkyPick(key);
+  }
+
   onSkyPick(key: BodyKey) {
     if (this.graphMode || this.state.history) return;
     if (!this.state.sky) this.skyByGesture = true;
@@ -863,12 +1444,13 @@ export class Controller {
     this.navigate(withMode(this.state, !this.state.graph));
   }
   private toggleAion() {
-    if (!this.aion) return;
-    this.navigate(this.state.history ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading: this.aion.history.readings[0].id } });
+    if (!this.history) return;
+    const reading = defaultReadingId(this.history.readings);
+    this.navigate(this.state.history || !reading ? WORLD : { view: { kind: 'world' }, deep: false, history: { reading } });
   }
 
   private toggleRedbook() {
-    if (!this.redbook) return;
+    if (!this.redbookData) return;
     this.navigate(this.state.redbook ? WORLD : { view: { kind: 'world' }, deep: false, redbook: {} });
   }
 
@@ -878,14 +1460,14 @@ export class Controller {
     if (!changed) return;
     window.clearTimeout(this.pauseTimer);
     if (graph) {
-      this.graph.show(first);
+      this.graph?.show(first);
       this.hover.hide();
       // the globe is not seen: once the cross-fade has covered it, stop drawing it
       if (first) this.engine.setPaused(true);
       else this.pauseTimer = window.setTimeout(() => { if (this.graphMode) this.engine.setPaused(true); }, 1100);
     } else {
       this.engine.setPaused(false);
-      this.graph.hide();
+      this.graph?.hide();
     }
   }
 
@@ -910,8 +1492,8 @@ export class Controller {
         if (i !== undefined) subject = `f:${m.occ[i].familyId}`;
       }
     }
-    this.graph.setInsets(this.graphInsets());
-    this.graph.setTarget({ subject, selected, emphasis });
+    this.graph?.setInsets(this.graphInsets());
+    this.graph?.setTarget({ subject, selected, emphasis });
   }
 
   private graphInsets(): Insets {
@@ -930,7 +1512,7 @@ export class Controller {
   }
 
   private syncGraphInsets() {
-    if (this.state.graph) this.graph.setInsets(this.graphInsets());
+    if (this.state.graph) this.graph?.setInsets(this.graphInsets());
   }
 
   private splitKey(key: string): { t: string; id: string } {
@@ -999,8 +1581,9 @@ export class Controller {
     if (s.deep && s.view.kind !== 'world') {
       if (!narrow) x = -0.46;
     } else if (s.view.kind === 'manifest' || s.sky?.body) {
-      // a card stands on the right (or the bottom, on a phone): the scene gives it room
-      if (narrow) y = 0.34; else x = -0.27;
+      // a card stands on the right (or the bottom, on a phone): the scene gives it room. An approached planet's disc
+      // is centred in the space the sheet leaves above it, so the disc is not drawn under the sheet.
+      if (narrow) y = this.approachFor(s.sky) ? 0.56 : 0.34; else x = -0.27;
     } else if (s.view.kind === 'thread') {
       y = narrow ? 0.1 : 0.1;
     } else if (s.view.kind === 'focus' && narrow) {
@@ -1020,7 +1603,7 @@ export class Controller {
     e.markers.sel.hide();
     this.timeControl.setSubject(null, '#ffffff');
     this.setBody(null);
-    document.title = 'An Archetypal Earth';
+    this.shell.setContext('');
     if (!first && !this.graphMode) {
       const c = e.rig.centre();
       e.rig.flyTo(c.lat, c.lon, Math.max(e.rig.dist, this.worldDist()), { duration: 2.0 });
@@ -1066,7 +1649,7 @@ export class Controller {
   private enterFocus(subject: Subject, first: boolean) {
     const m = this.m;
     const e = this.engine;
-    const idx = subjectOccurrences(m, subject);
+    const idx = subjectOccurrences(m, subject).filter((i) => this.passing(i));
     const pal = this.subjectPal(subject);
     e.setPalette(pal, first ? 0.01 : 1.5);
     this.reveal.hide();
@@ -1077,7 +1660,7 @@ export class Controller {
       this.timeControl.setSubject(idx, rgbToHex(pal.core));
       this.setLabelFor(subject);
       this.setBody(subject.type);
-      document.title = `${subjectName(m, subject)} — An Archetypal Earth`;
+      this.shell.setContext(subjectName(m, subject));
       return;
     }
     e.setEmphasis(this.emphasise(idx), pal.core);
@@ -1087,7 +1670,7 @@ export class Controller {
     this.timeControl.setSubject(idx, rgbToHex(pal.core));
     this.setLabelFor(subject);
     this.setBody(subject.type);
-    document.title = `${subjectName(m, subject)} — An Archetypal Earth`;
+    this.shell.setContext(subjectName(m, subject));
   }
 
   private setLabelFor(subject: Subject) {
@@ -1112,7 +1695,14 @@ export class Controller {
         content.ties = fams.map((f) => ({ text: f!.name, onClick: () => this.navigate(focusOn(this.state, { type: 'family', id: f!.id })) }));
       }
     }
-    if (subject.type === 'family' || subject.type === 'archetype') content.links!.push({ text: 'Follow the thread', onClick: () => this.followThread() });
+    if (subject.type === 'family' || subject.type === 'archetype') {
+      // a thread walks placed occurrences: a subject with none has no thread, and the label says why (no dead link)
+      const all = subjectOccurrences(this.m, subject);
+      if (all.some((i) => this.m.located[i])) content.links!.push({ text: 'Follow the thread', onClick: () => this.followThread() });
+      else content.line = [content.line, all.length ? `No thread: its ${all.length === 1 ? 'one instance has' : `${all.length} instances have`} no recorded place.` : 'No thread: the field records no instance of it yet.'].filter(Boolean).join(' ');
+    }
+    // an archetype with a deep field (the Great Mother is the first) opens it from its focus
+    if (subject.type === 'archetype' && DEEP_FIELDS.has(subject.id)) content.links!.push({ text: 'The deep field', onClick: () => this.navigate(inLens('symbols', ['archetype', subject.id])) });
     content.links!.push({ text: 'Reading', onClick: () => this.setDeep(true) });
     this.label.set(content, `f:${subject.type}:${subject.id}`);
   }
@@ -1236,21 +1826,22 @@ export class Controller {
     if (!this.graphMode) {
       e.setEmphasis(this.emphasise(ctxIdx, { selected: oi, relatedLevel: 1.15, extra: { idx: par, level: 1.6 } }), famPal.core);
       const dist = o.geoPrecision === 'culture' ? 3.0 : o.geoPrecision === 'region' ? 2.6 : 2.25;
-      e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
+      // an occurrence with no recorded place has nowhere to fly to: the camera stays where it stands
+      if (m.located[oi]) e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
       if (m.located[oi]) e.markers.sel.show(m.dir[oi], famPal.core);
       else e.markers.sel.hide();
     }
     this.reveal.show(oi);
     this.timeControl.setSubject(m.famOcc.get(o.familyId) ?? null, rgbToHex(famPal.core));
     this.label.set({ name: subjectName(m, context), back: () => this.stepBack() }, `m:${context.type}:${context.id}`);
-    document.title = `${o.label} — An Archetypal Earth`;
+    this.shell.setContext(o.label);
   }
 
   // ── thread ────────────────────────────────────────────────────────────
   private enterThread(target: ThreadTarget, _from: View, first: boolean) {
     const m = this.m;
     const e = this.engine;
-    const steps = planThread(m, target.type, target.id);
+    const steps = this.plan(target.type, target.id);
     const subject: Subject = target.type === 'parallels'
       ? { type: 'family', id: m.occ[m.occIndex.get(target.id)!].familyId }
       : { type: target.type, id: target.id };
@@ -1278,7 +1869,7 @@ export class Controller {
     this.strip.set(members);
     this.strip.setPlaying(true);
     this.strip.show();
-    this.strip.setIndex(0, members[0]);
+    this.strip.setIndex(0, members[0], steps[0]?.also);
     this.frameSet(members, { duration: first ? 0.01 : undefined, min: 2.2 });
     if (first) {
       const sp = spreadOf(members.map((i) => m.dir[i]));
@@ -1294,7 +1885,7 @@ export class Controller {
       up: [{ text: 'the whole field', onClick: () => this.stepBack() }],
       links: [{ text: 'Reading', onClick: () => this.setDeep(true) }],
     }, `t:${target.type}:${target.id}`);
-    document.title = `${name}, the thread — An Archetypal Earth`;
+    this.shell.setContext(`${name}, the thread`);
 
     this.tour = { steps, i: -1, playing: true, phase: 'intro', timer: first || e.reduced ? 0.4 : 3.1, tok: ++this.tokCounter, draw: first ? 1 : 0, head: 0, subject, target };
     this.timeControl.setTour(true, () => this.tourToggle());
@@ -1361,7 +1952,7 @@ export class Controller {
     t.phase = 'fly';
     t.tok = ++this.tokCounter;
     const tok = t.tok;
-    this.strip.setIndex(i, step.occ);
+    this.strip.setIndex(i, step.occ, step.also);
     this.strip.setPlaying(t.playing);
     const dist = (o.geoPrecision === 'culture' ? 2.9 : o.geoPrecision === 'region' ? 2.5 : 2.2) + Math.min(ang, 1.4) * 0.3;
     e.rig.flyTo(o.lat, o.lon, dist, { duration: i === 0 ? 2.2 : undefined });
@@ -1399,7 +1990,14 @@ export class Controller {
     this.watchSkyGesture();
     this.skyView.tick();
     this.aion?.update(dt);
+    this.lens?.update(dt);
+    if (this.activeLens) this.lensInst.get(this.activeLens)?.update?.(dt);
     this.floats.update(this.engine, dt);
+    // the chronology travels with the cursor; a walk's arcs own the field while one stands
+    if (this.chronoKey) {
+      const tm = this.time;
+      this.engine.arcs.updateChronology(tm.cursorU, tm.trail, DEFAULT_RAMP, this.tour ? 0 : tm.on, this.engine.reduced);
+    }
     const t = this.tour;
     if (!t) return;
     const u = this.engine.arcs.uniforms;
@@ -1428,7 +2026,7 @@ export class Controller {
   private inSubject(s: Subject, idx: number): boolean {
     const key = `${s.type}:${s.id}`;
     if (this.setCache.key !== key) {
-      this.setCache = { key, set: new Set(subjectOccurrences(this.m, s)) };
+      this.setCache = { key, set: new Set(subjectOccurrences(this.m, s).filter((i) => this.passing(i))) };
     }
     return this.setCache.set.has(idx);
   }

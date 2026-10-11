@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import type { BodyKey, SidecarChart, SkyBody } from '../types/sky';
 import type { Vec3 } from '../data/geo';
 import { SIGNS } from './frames';
+import { BAND, bandMaterial } from './zodiac';
 
 /** The chart ring's radius, Earth radii: inside Mars' distance from the Earth in the diagram, outside the Sun's. */
 export const CHART_RADIUS = 1500;
@@ -23,12 +24,16 @@ export interface ChartMark {
   id: string;
   text: string;
   kind: 'sign' | 'angle';
+  /** a sign mark's index, Aries 0 … Pisces 11 (its glyph) */
+  sign?: number;
 }
 
 export interface ChartScreenMark extends ChartMark {
   x: number;
   y: number;
   on: boolean;
+  /** a sign mark: the band's width on screen there (CSS px), so its glyph is drawn inside the band */
+  size?: number;
 }
 
 export interface ChartDrawOptions {
@@ -57,8 +62,8 @@ export class ChartOverlay {
   readonly group = new THREE.Group();
   private chart: SidecarChart | null = null;
   private keys: BodyKey[] = [];
-  private ring: THREE.LineLoop;
-  private ticks: THREE.LineSegments;
+  private band: THREE.Mesh;
+  private bandMat: THREE.ShaderMaterial;
   private markers: THREE.LineSegments;
   private sight: THREE.LineSegments;
   private angles: THREE.LineSegments;
@@ -73,28 +78,17 @@ export class ChartOverlay {
     this.group.visible = false;
     this.group.name = 'chart';
     const mat = (opacity: number, vertexColors = false) => new THREE.LineBasicMaterial({ color: new THREE.Color('#aab8d4'), transparent: true, opacity, depthWrite: false, vertexColors });
-    const ringGeo = new THREE.BufferGeometry();
-    const pts = new Float32Array(180 * 3);
-    for (let i = 0; i < 180; i++) { const p = ringPoint((i / 180) * 360, CHART_RADIUS); pts.set(p, i * 3); }
-    ringGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
-    this.ring = new THREE.LineLoop(ringGeo, mat(1));
-    this.ticks = new THREE.LineSegments(this.signTicks(), mat(1));
+    // the zodiacal band: a holographic annulus in the ecliptic (zodiac.ts), a little wider than the band so its rims are smooth
+    this.bandMat = bandMaterial(CHART_RADIUS);
+    this.band = new THREE.Mesh(new THREE.RingGeometry(CHART_RADIUS * BAND.inner * 0.985, CHART_RADIUS * BAND.outer * 1.015, 720, 1), this.bandMat);
+    this.band.frustumCulled = false;
+    this.band.renderOrder = 2;
+    this.group.add(this.band);
     this.markers = new THREE.LineSegments(new THREE.BufferGeometry(), mat(1, true));
     this.sight = new THREE.LineSegments(new THREE.BufferGeometry(), mat(1, true));
     this.angles = new THREE.LineSegments(new THREE.BufferGeometry(), mat(1));
-    for (const o of [this.ring, this.ticks, this.markers, this.sight, this.angles]) { o.frustumCulled = false; o.renderOrder = 3; this.group.add(o); }
+    for (const o of [this.markers, this.sight, this.angles]) { o.frustumCulled = false; o.renderOrder = 3; this.group.add(o); }
     for (const b of bodies) this.colour.set(b.key, new THREE.Color(b.palette.core).lerp(new THREE.Color('#dfe8ff'), 0.25));
-  }
-
-  private signTicks(): THREE.BufferGeometry {
-    const pos = new Float32Array(12 * 2 * 3);
-    for (let i = 0; i < 12; i++) {
-      pos.set(ringPoint(i * 30, CHART_RADIUS * 0.96), i * 6);
-      pos.set(ringPoint(i * 30, CHART_RADIUS * 1.04), i * 6 + 3);
-    }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    return g;
   }
 
   /** Stand a chart on the ring (or take it away with null). */
@@ -128,7 +122,8 @@ export class ChartOverlay {
 
     // the angles: longer, plainer ticks
     const ap = new Float32Array(2 * 6);
-    [chart.angles.ascendant.lon, chart.angles.midheaven.lon].forEach((lon, i) => {
+    // with no birth time there are no angles to draw (a noon chart's Ascendant would be invented)
+    (chart.timeKnown === false ? [] : [chart.angles.ascendant.lon, chart.angles.midheaven.lon]).forEach((lon, i) => {
       ap.set(ringPoint(lon, CHART_RADIUS * 0.82), i * 6);
       ap.set(ringPoint(lon, CHART_RADIUS * 1.14), i * 6 + 3);
     });
@@ -174,7 +169,8 @@ export class ChartOverlay {
     this.group.add(this.houses);
 
     // labels: sign names at the middle of each sign, the two angles at their ticks
-    for (let i = 0; i < 12; i++) this.marks.push({ mark: { id: `sign-${i}`, text: SIGNS[i], kind: 'sign' }, at: ringPoint(i * 30 + 15, CHART_RADIUS * 1.13) });
+    // each sign's glyph stands in the band at the sign's middle
+    for (let i = 0; i < 12; i++) this.marks.push({ mark: { id: `sign-${i}`, text: SIGNS[i], kind: 'sign', sign: i }, at: ringPoint(i * 30 + 15, CHART_RADIUS) });
     this.marks.push({ mark: { id: 'asc', text: 'Asc', kind: 'angle' }, at: ringPoint(chart.angles.ascendant.lon, CHART_RADIUS * 1.22) });
     this.marks.push({ mark: { id: 'mc', text: 'MC', kind: 'angle' }, at: ringPoint(chart.angles.midheaven.lon, CHART_RADIUS * 1.22) });
   }
@@ -197,8 +193,8 @@ export class ChartOverlay {
     const w = weight * arrival;
     this.group.visible = w > 0.005;
     const set = (o: THREE.LineSegments | THREE.LineLoop | null, v: number) => { if (o) (o.material as THREE.LineBasicMaterial).opacity = v; };
-    set(this.ring, 0.32 * w);
-    set(this.ticks, 0.5 * w);
+    this.bandMat.uniforms.uAlpha.value = w;
+    this.bandMat.uniforms.uTime.value = performance.now() / 1000;
     set(this.markers, 0.85 * w);
     set(this.sight, 0.2 * w);
     set(this.angles, 0.6 * w);
@@ -219,10 +215,22 @@ export class ChartOverlay {
   project(camera: THREE.PerspectiveCamera, frame: THREE.Matrix4, width: number, height: number, weight: number, out: ChartScreenMark[] = []): ChartScreenMark[] {
     out.length = 0;
     if (!this.chart || weight < 0.3) return out;
+    const toScreen = (p: Vec3) => {
+      this.tmp.set(p[0], p[1], p[2]).applyMatrix4(frame).project(camera);
+      return { x: (this.tmp.x * 0.5 + 0.5) * width, y: (1 - (this.tmp.y * 0.5 + 0.5)) * height, z: this.tmp.z, nx: this.tmp.x, ny: this.tmp.y };
+    };
     for (const m of this.marks) {
-      this.tmp.set(m.at[0], m.at[1], m.at[2]).applyMatrix4(frame).project(camera);
-      const on = this.tmp.z < 1 && this.tmp.z > -1 && Math.abs(this.tmp.x) < 1.1 && Math.abs(this.tmp.y) < 1.1;
-      out.push({ ...m.mark, x: (this.tmp.x * 0.5 + 0.5) * width, y: (1 - (this.tmp.y * 0.5 + 0.5)) * height, on });
+      const s = toScreen(m.at);
+      const on = s.z < 1 && s.z > -1 && Math.abs(s.nx) < 1.1 && Math.abs(s.ny) < 1.1;
+      let size: number | undefined;
+      if (m.mark.sign !== undefined) {
+        // the band's width on screen at this sign: the glyph is drawn to fit inside it
+        const lon = m.mark.sign * 30 + 15;
+        const a = toScreen(ringPoint(lon, CHART_RADIUS * BAND.inner));
+        const b = toScreen(ringPoint(lon, CHART_RADIUS * BAND.outer));
+        size = Math.hypot(a.x - b.x, a.y - b.y);
+      }
+      out.push({ ...m.mark, x: s.x, y: s.y, on, ...(size !== undefined ? { size } : {}) });
     }
     return out;
   }

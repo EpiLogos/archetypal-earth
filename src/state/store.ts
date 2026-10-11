@@ -8,11 +8,14 @@ export interface ThreadTarget {
   id: string;
 }
 
-/** The sky layer's state: which body is open, or which birth moment is standing. Orthogonal to the field's views. */
+/** The sky layer's state: which body is open, and which natal sky is standing. Orthogonal to the field's views. */
 export interface SkyState {
   body?: BodyKey;
-  /** a birth sky: wall-clock time (YYYY-MM-DDTHH:MM) at the place; the sidecar resolves the timezone */
-  birth?: { local: string; lat: number; lon: number };
+  /**
+   * a natal sky, named by its chart's id ('you', 'jung', …): the birth data behind it never enters the state or the
+   * hash (it lives in this browser's storage, or in the curation for Jung), so no link ever carries a birth moment
+   */
+  natal?: string;
   /** the field culture the bodies' names and characters are read through (cultures.json); absent: the Greco-Roman default */
   culture?: string;
 }
@@ -23,21 +26,42 @@ export type View =
   | { kind: 'manifest'; occId: string; context: Subject }
   | { kind: 'thread'; target: ThreadTarget; from: View };
 
+/** The lenses that mount into the shell's panel (ProjectCentral/docs/MODES-RFC.md §3). */
+export type PanelLensId = 'theory' | 'astrology' | 'dreams' | 'symbols' | 'coincidences';
+export const PANEL_LENSES: readonly PanelLensId[] = ['theory', 'astrology', 'dreams', 'symbols', 'coincidences'];
+
 export interface AppState {
   view: View;
+  /** a panel lens standing over the world view, at a sub-route (never personal data: see MODES-RFC §5) */
+  lens?: { id: PanelLensId; path: string[] };
   deep: boolean;
   /** the graph mode: a second view of the same field (absent = the globe) */
   graph?: true;
   /** the sky: the same scene pulled back past the Moon to the whole system (a flag, as `graph` is, but it needs the world view) */
   sky?: SkyState;
-  history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread'; id: string } };
+  history?: { reading: string; selection?: { kind: 'epoch' | 'event' | 'thread' | 'chapter'; id: string } };
   /** the Red Book: Liber Novus as a folio walk (or the genesis table) over the world view */
   redbook?: { stop?: string; genesis?: true };
+  /** The dynamical lens: the field read as a dynamical system over the world view. Absent subject = the Self. */
+  /** the dynamical lens: its subject (the Self when none) and the standing stop of its route (the overview when none) */
+  dynamics?: { subject?: Subject; stop?: string };
   /** The live path remains standing while one of its presences is inspected. */
   trail?: Extract<View, { kind: 'thread' }>;
+  /**
+   * The mode a core reading was opened from (a double-click on an Aion event, a Red Book stop or a sky body). Escape
+   * and close return to it once; it is session-local (never in the hash) and any other navigation drops it.
+   */
+  from?: AppState;
 }
 
 export const WORLD: AppState = { view: { kind: 'world' }, deep: false };
+
+/** `next`, a reading a mode opened, remembering the mode state it was opened from so `back` can return there. */
+export function openedFrom(from: AppState, next: AppState): AppState {
+  const mode: AppState = { ...from };
+  delete mode.from;
+  return { ...next, from: mode };
+}
 
 /** Carry the mode of `from` onto a fresh state. */
 function inMode(from: AppState, next: AppState): AppState {
@@ -90,6 +114,21 @@ export function startThread(s: AppState, target: ThreadTarget): AppState {
   return { view: { kind: 'thread', target, from }, deep: false };
 }
 
+/** A panel lens at a sub-route, over the world view. Astrology stands in the sky: its route names the chart and the body. */
+export function inLens(id: PanelLensId, path: string[] = []): AppState {
+  if (id === 'astrology') return astrologyAt(path);
+  return { view: { kind: 'world' }, deep: false, lens: { id, path } };
+}
+
+/** The Astrology lens at [chart, body]: the panel, and the sky held at that chart's moment with that body approached. */
+export function astrologyAt(path: string[]): AppState {
+  const [natal, body] = path;
+  const sky: SkyState = {};
+  if (natal) sky.natal = natal;
+  if (natal && body) sky.body = body as BodyKey;
+  return { view: { kind: 'world' }, deep: false, lens: { id: 'astrology', path: path.slice(0, natal ? (body ? 2 : 1) : 0) }, sky };
+}
+
 /** Enter (or change) the sky. The sky stands over the world view: any focus is left behind, the field stays as it was. */
 export function inSky(sky: SkyState = {}): AppState {
   return { view: { kind: 'world' }, deep: false, sky };
@@ -97,7 +136,7 @@ export function inSky(sky: SkyState = {}): AppState {
 
 export function skyEq(a: SkyState | undefined, b: SkyState | undefined): boolean {
   if (!a || !b) return !a && !b;
-  return a.body === b.body && a.culture === b.culture && a.birth?.local === b.birth?.local && a.birth?.lat === b.birth?.lat && a.birth?.lon === b.birth?.lon;
+  return a.body === b.body && a.culture === b.culture && a.natal === b.natal;
 }
 
 export function setDeep(s: AppState, deep: boolean): AppState {
@@ -107,14 +146,22 @@ export function setDeep(s: AppState, deep: boolean): AppState {
 
 /** One step back: deep → manifestation → focus (up the drilled route) → world (thread → where it began). */
 export function back(s: AppState): AppState {
+  // a reading a mode opened returns to that mode, once (the memory is the mode state itself, so it is cleared with it)
+  if (s.from) return s.from;
+  // a reading opened on a walk's step returns to the walk where it began, not to the step's card
+  if (s.deep && s.trail && s.view.kind === 'manifest') return { view: s.trail, deep: false };
   if (s.deep) return { ...s, deep: false };
+  // a panel lens steps up its own route, then closes onto the Earth
+  if (s.lens) return s.lens.path.length ? (s.lens.id === 'astrology' ? astrologyAt(s.lens.path.slice(0, -1)) : { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } }) : WORLD;
   if (s.sky) {
     // a card closes onto the sky; the sky closes onto the Earth
-    if (s.sky.body) return inSky({ ...(s.sky.birth ? { birth: s.sky.birth } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
+    if (s.sky.body) return inSky({ ...(s.sky.natal ? { natal: s.sky.natal } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
     return WORLD;
   }
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;
   if (s.redbook) return s.redbook.stop || s.redbook.genesis ? { ...s, redbook: {} } : WORLD;
+  // the lens: a subject climbs to the lens itself (the Self), and the lens closes onto the Earth
+  if (s.dynamics) return s.dynamics.stop ? { ...s, dynamics: s.dynamics.subject ? { subject: s.dynamics.subject } : {} } : s.dynamics.subject ? { ...s, dynamics: {} } : WORLD;
   const v = s.view;
   switch (v.kind) {
     case 'world':
@@ -160,13 +207,22 @@ export function stateEq(a: AppState, b: AppState): boolean {
     && a.history?.reading === b.history?.reading
     && a.history?.selection?.kind === b.history?.selection?.kind
     && a.history?.selection?.id === b.history?.selection?.id
+    && !!a.redbook === !!b.redbook
     && a.redbook?.stop === b.redbook?.stop
     && !!a.redbook?.genesis === !!b.redbook?.genesis
-    && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)));
+    && !!a.dynamics === !!b.dynamics
+    && (!a.dynamics?.subject) === (!b.dynamics?.subject)
+    && (!a.dynamics?.subject || !b.dynamics?.subject || subjectEq(a.dynamics.subject, b.dynamics.subject))
+    && a.dynamics?.stop === b.dynamics?.stop
+    && ((!a.trail && !b.trail) || (!!a.trail && !!b.trail && viewEq(a.trail, b.trail)))
+    && !!a.from === !!b.from
+    && a.lens?.id === b.lens?.id
+    && (a.lens?.path ?? []).join('/') === (b.lens?.path ?? []).join('/');
 }
 
 /** Depth used to decide whether a move is an ascent (zoom out) or descent. */
 export function depthOf(s: AppState): number {
   const base = { world: 0, focus: 1, thread: 2, manifest: 2 }[s.view.kind];
-  return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0);
+  return base + (s.sky ? 1 + (s.sky.body ? 1 : 0) : 0) + (s.deep ? 1 : 0) + (s.redbook ? 1 + (s.redbook.stop || s.redbook.genesis ? 1 : 0) : 0)
+    + (s.dynamics ? 1 + (s.dynamics.subject ? 1 : 0) + (s.dynamics.stop ? 1 : 0) : 0) + (s.lens ? 1 + s.lens.path.length : 0);
 }

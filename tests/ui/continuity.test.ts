@@ -31,7 +31,9 @@ describe('inspecting an actual traced path', () => {
       const reloaded = hashToState(stateToHash(deep), resolver).state;
       expect(stateToHash(reloaded)).toBe(stateToHash(deep));
       expect(reloaded.trail).toEqual(thread.view);
-      expect(back(back(reloaded))).toEqual(thread);
+      // leaving the reading lands back in the walk where it began, not on the step's card (one step, not two)
+      expect(back(reloaded)).toEqual(thread);
+      expect(back(opened)).toEqual(thread);
     });
   }
   it('handles a malformed URL without crashing navigation', () => {

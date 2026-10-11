@@ -9,7 +9,8 @@ import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse } from 
 import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT } from './lib/geo.mjs';
 import { validateField } from './validate.mjs';
 import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
-import { buildCorpusIndex } from './lib/corpus.mjs';
+import { buildCorpusIndex, corpusTitles } from './lib/corpus.mjs';
+import { externalRegister } from './lib/external.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -95,7 +96,8 @@ const archNotes = readNotes(W('archetypes'));
 const imgNotes = readNotes(W('images'));
 const instNotes = readNotes(W('instances'));
 const manifest = readJson(path.join(VAULT, '_raw', 'manifest.json'), []);
-const workTitles = Object.fromEntries(manifest.map((m) => [m.vol, m.title]));
+const externals = externalRegister(ROOT);
+const workTitles = { ...Object.fromEntries(Object.entries(externals).map(([w, x]) => [w, x.title])), ...corpusTitles(VAULT), ...Object.fromEntries(manifest.map((m) => [m.vol, m.title])) };
 let mentions = [];
 try {
   mentions = fs.readFileSync(path.join(VAULT, 'data', 'mentions.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => {
@@ -337,10 +339,11 @@ for (const n of instNotes.filter((x) => !x.failed)) {
     if (f && f !== familyId && !coFamilyIds.includes(f)) coFamilyIds.push(f);
   }
 
-  const parsed = parseInstanceBody(n.body);
+  // the note's own first engagement hints which corpus completes a quote whose line names no volume
+  const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
+  const parsed = parseInstanceBody(n.body, { workHint: jung[0]?.work });
   parsed.body = parsed.body.map((b, k) => fixText(b, `occ:${id}.body[${k}]`));
   if (parsed.quote) parsed.quote = fixText(parsed.quote, `occ:${id}.quote`);
-  const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
   let yearRange;
   const yr = Array.isArray(d.year_range) ? d.year_range.map(Number) : null;
   if (yr && yr.length === 2 && yr.every(Number.isFinite)) yearRange = [Math.min(...yr), Math.max(...yr)];
@@ -605,6 +608,7 @@ try {
     outDir: path.join(OUT_DIR, 'corpus'),
     manifest,
     spineLines,
+    externals,
     log: (m) => console.log(m),
   });
   stats.corpus = corpus;

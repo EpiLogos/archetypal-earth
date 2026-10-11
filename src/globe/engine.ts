@@ -1,4 +1,5 @@
 // The globe: renderer, camera rig, layers, atmosphere and per-frame plumbing.
+import type { ScopeInfo } from '../data/scope';
 import * as THREE from 'three';
 import type { Model } from '../data/model';
 import { clonePalette, easeInOutCubic, mixPalette, WORLD_PALETTE, type RGBPalette } from '../data/palette';
@@ -11,7 +12,7 @@ import { Aura, AtmosphereShell, Backdrop, Earth, hiResChoice, loadBaseHi, loadBa
 import { Presences } from './presences';
 import { createShared, type Shared } from './shared';
 import { TileLayer } from './tiles';
-import { depthPlanes, sunWeight, surfaceWeight } from '../sky/stages';
+import { depthPlanes, stageDistance, sunWeight, surfaceWeight } from '../sky/stages';
 import type { SkyLayer } from '../sky/layer';
 import type { BodyKey } from '../types/sky';
 import { wrapLon } from '../data/geo';
@@ -180,9 +181,47 @@ export class GlobeEngine {
   }
 
   // ── emphasis ───────────────────────────────────────────────────────────
-  setEmphasis(targets: Float32Array | null, tint: [number, number, number] | null) {
-    this.presences.setTargets(targets);
+  /**
+   * Emphasis composes with the field filter here, in one place (MODES-RFC §4): an occurrence the filter excludes is
+   * neither drawn nor picked, whatever a lens asks for it. Lenses never see the filter.
+   */
+  setEmphasis(targets: Float32Array | null, tint: [number, number, number] | null, scope: ScopeInfo | null = null) {
+    this.emphasis = targets ? Float32Array.from(targets) : null;
+    this.scope = targets ? scope : null;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
     this.presences.setFocusTint(tint ?? [1, 1, 1], !!tint);
+    this.onScope?.(this.scope, this.wholeField);
+  }
+
+  /** The mode's scope as last set (null: the whole field, or an emphasis that is not a mode's set). */
+  scope: ScopeInfo | null = null;
+  /** told whenever the scope (or the whole-field choice) changes: the shell names what is shown */
+  onScope: ((scope: ScopeInfo | null, wholeField: boolean) => void) | null = null;
+  /** the visitor asked for the whole field back: what a scope sets aside is drawn again, receded */
+  private wholeField = false;
+  setWholeField(on: boolean) {
+    this.wholeField = on;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
+    this.onScope?.(this.scope, on);
+  }
+
+  /** The filter's mask (1 passes, 0 excluded), or null for the whole field. Re-applies the standing emphasis. */
+  setFilterMask(mask: Float32Array | null) {
+    this.filterMask = mask;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
+  }
+
+  private emphasis: Float32Array | null = null;
+  private filterMask: Float32Array | null = null;
+
+  private composeFilter(targets: Float32Array | null): Float32Array | null {
+    const mask = this.filterMask;
+    // a scope's set-aside presences return at the old receded level when the whole field is asked for
+    const lifted = targets && this.scope && this.wholeField ? targets.map((v) => Math.max(v, 0.07)) : targets;
+    if (!mask) return lifted;
+    const out = lifted ? Float32Array.from(lifted) : new Float32Array(mask.length).fill(1);
+    for (let i = 0; i < out.length; i++) if (!mask[i]) out[i] = 0;
+    return out;
   }
 
   // ── projection helpers for DOM overlays ────────────────────────────────
@@ -209,6 +248,7 @@ export class GlobeEngine {
   attachSky(layer: SkyLayer) {
     if (this.sky === layer) return;
     this.sky = layer;
+    layer.reduced = this.reduced;
     this.scene.add(layer.group);
     layer.setSize(this.width, this.height, this.pr);
     // compile the sky's programs now, while the Earth is on screen, so the first pull-back does not hitch
@@ -219,13 +259,22 @@ export class GlobeEngine {
   }
 
   /**
+   * The distance the sky's stage model reads (src/sky/stages.ts): the camera's distance from the focus, or, while a
+   * planet is approached, from the Earth's centre floored at the system edge. Exactly the rig's distance wherever no
+   * body is approached, so the atlas and every other view are unchanged.
+   */
+  get stageDist(): number {
+    return stageDistance(this.rig.dist, this.camera.position.length(), this.sky?.approach ?? 0);
+  }
+
+  /**
    * The Earth's light: the atlas's composed key light near the surface, the true Sun's from the lunar stage outward.
    * The share eases (never pops) when the sky's data arrives or the distance changes quickly; where the sky cannot
    * say where the Sun is (a moment outside the generated span) it stays the atlas's.
    */
   private sunShare = 0;
   private stepSun(dt: number) {
-    const target = this.sky?.sunKnown ? sunWeight(this.rig.dist) : 0;
+    const target = this.sky?.sunKnown ? sunWeight(this.stageDist) : 0;
     this.sunShare = this.reduced || Math.abs(target - this.sunShare) < 1e-4 ? target : this.sunShare + (target - this.sunShare) * (1 - Math.exp(-dt * 3.5));
     if (this.sky?.sunKnown) this.earth.sunDir.value.copy(this.sky.sunDir);
     this.earth.sunMix.value = this.sunShare;
@@ -291,7 +340,7 @@ export class GlobeEngine {
 
     // the sky: where the camera looks, and carrying the camera with the sky as the pull-back hands off
     if (this.sky) {
-      const { focus, dLon } = this.sky.prepare(this.rig.dist);
+      const { focus, dLon } = this.sky.prepare(this.stageDist, dt);
       this.rig.focus.copy(focus);
       if (dLon) this.rig.lon = wrapLon(this.rig.lon + dLon);
     }
@@ -299,7 +348,8 @@ export class GlobeEngine {
     this.rig.update(dt);
     // the clip planes follow the altitude so depth stays precise from orbit to the ground
     const camDist = this.camera.position.length();
-    const planes = depthPlanes(camDist, !!this.sky);
+    // the far plane follows the Earth's distance (the sky is drawn about the Sun); the near plane may follow the focus
+    const planes = depthPlanes(camDist, !!this.sky, this.rig.dist, this.sky?.approach ?? 0);
     this.camera.near = planes.near;
     this.camera.far = planes.far;
     this.camera.updateMatrixWorld();
@@ -309,7 +359,7 @@ export class GlobeEngine {
     e[9] = -this.rig.shiftY;
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
     this.camera.matrixWorldInverse.copy(this.camera.matrixWorld).invert();
-    this.sky?.update(this.camera, this.rig.dist, this.width, this.height);
+    this.sky?.update(this.camera, this.stageDist, this.width, this.height);
 
     const dist = this.camera.position.length();
     S.camDist.value = dist;
@@ -352,7 +402,7 @@ export class GlobeEngine {
     this.backdrop.radius.value = 1 / Math.sqrt(Math.max(dist * dist - 1, 0.01)) / tanH;
     this.backdrop.parallax.value.set(this.rig.lon * 0.018, this.rig.lat * 0.018);
 
-    const surface = this.sky ? surfaceWeight(dist) : 1;
+    const surface = this.sky ? surfaceWeight(this.stageDist) : 1;
     this.presences.setSizeFor(dist, surface);
     this.setSurface(surface);
     this.presences.step(dt);

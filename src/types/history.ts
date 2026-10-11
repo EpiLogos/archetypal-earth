@@ -88,4 +88,35 @@ export interface HistoryReading {
 export interface History {
   generatedAt: string;
   readings: HistoryReading[];
+  /** Aion, the book (public/data/aionbook.json), attached at load when it is published; absent is a normal state. */
+  book?: AionBook;
+}
+
+/** A quotation placed in the corpus by scripts/aionbook.mjs: the locator is written from the corpus, never typed. */
+export interface BookQuote {
+  text: string;
+  cite: { work: string; workTitle: string; locator: string; print?: string };
+}
+
+/** One chapter of CW9ii, walked in Jung's order. */
+export interface BookChapter {
+  id: string; // "ch-6"
+  n: string; // "VI" ("Foreword")
+  title: string;
+  /** my line: says only what the quotations under it show */
+  line: string;
+  subjects: { type: 'archetype' | 'family'; id: string }[];
+  quotes: BookQuote[];
+  /** the chapter's pdf pages, from its own heading in the corpus to the next chapter's (null: to the end) */
+  pages: [number, number | null];
+  /** the authored readings' events whose own passages stand in this chapter */
+  events: { reading: string; readingTitle: string; id: string; name: string; yearDisplay: string }[];
+}
+
+export interface AionBook {
+  version: number;
+  work: string;
+  title: string;
+  line: string;
+  chapters: BookChapter[];
 }

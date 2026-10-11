@@ -11,6 +11,9 @@
 // never as a source: spans come from the corpus files alone.
 import fs from 'node:fs';
 import path from 'node:path';
+import { trustedPrint } from './cite.mjs';
+import { externalMarkdown } from './external.mjs';
+import { stripFootnoteMarkers } from './display.mjs';
 
 const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>]+))?\s*-->\s*$/;
 const PARA_RE = /\*\*¶(\d+)\*\*/g;
@@ -19,6 +22,22 @@ const slug = (s) => s
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-+|-+$/g, '')
   .slice(0, 48) || 'chapter';
+
+/** Work key → the title in each corpus file's own front matter (the manifest does not list every work). */
+export function corpusTitles(vault) {
+  const dir = path.join(vault, 'corpus');
+  const out = {};
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.md'))) {
+    const fd = fs.openSync(path.join(dir, f), 'r');
+    const buf = Buffer.alloc(4096);
+    const head = buf.subarray(0, fs.readSync(fd, buf, 0, 4096, 0)).toString('utf8');
+    fs.closeSync(fd);
+    const t = /^\s*"title"\s*:\s*"((?:[^"\\]|\\.)+)"/m.exec(head);
+    if (t) out[f.replace(/\.md$/, '')] = JSON.parse(`"${t[1]}"`);
+  }
+  return out;
+}
 
 /** Parse one volume's markdown into { title, chapters, pages, paras }. */
 export function parseCorpusMarkdown(work, raw) {
@@ -40,7 +59,11 @@ export function parseCorpusMarkdown(work, raw) {
       cur = { p: Number(m[2]), print: m[3] || null, ch: chapters.length ? chapters[chapters.length - 1].id : null, lines: [] };
       continue;
     }
-    if (!cur) continue; // anything before the first page marker (front matter of the file)
+    if (!cur) { // anything before the first page marker: the file's front matter, whose title is the work's own
+      const t = !title && /^\s*"title"\s*:\s*"((?:[^"\\]|\\.)+)"/.exec(line);
+      if (t) title = JSON.parse(`"${t[1]}"`);
+      continue;
+    }
     const heading = /^(#{1,3})\s+(.+?)\s*$/.exec(line);
     if (heading) {
       const dup = chapters.filter((c) => c.id === slug(heading[2])).length;
@@ -54,7 +77,9 @@ export function parseCorpusMarkdown(work, raw) {
       continue;
     }
     if (cur.chPending) { cur.ch = cur.chPending; cur.chPending = null; }
-    cur.lines.push(line);
+    // the served passage text sheds the scan's glued footnote digits ("significance.43", "world.” 2");
+    // stripped per line so every offset (chapters, ¶ spans) is computed on the served text itself
+    cur.lines.push(stripFootnoteMarkers(line));
   }
   closePage();
   // ¶ anchors as spans into their own page text
@@ -91,7 +116,7 @@ export function checkAgainstSpine(built, spineLines, log) {
 }
 
 /** Build every volume and write public/data/corpus/. Returns the summary for stats. */
-export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], log = () => {} }) {
+export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], externals = {}, log = () => {} }) {
   const srcDir = path.join(vault, 'corpus');
   if (!fs.existsSync(srcDir)) throw new Error(`no corpus at ${srcDir}`);
   const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.md')).sort();
@@ -99,10 +124,22 @@ export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = []
   fs.mkdirSync(outDir, { recursive: true });
   const works = [];
   const built = new Map();
-  for (const f of files) {
-    const work = f.replace(/\.md$/, '');
-    const raw = fs.readFileSync(path.join(srcDir, f), 'utf8');
+  // the corpus volumes, then the works the vault keeps outside corpus/ (external.mjs), read in the same shape
+  const sources = [
+    ...files.map((f) => ({ work: f.replace(/\.md$/, ''), read: () => fs.readFileSync(path.join(srcDir, f), 'utf8') })),
+    ...Object.entries(externals).filter(([w]) => !files.includes(`${w}.md`)).map(([work, x]) => ({ work, read: () => externalMarkdown(vault, work, x.title) })),
+  ];
+  for (const { work, read } of sources) {
+    const raw = read();
+    if (raw === null) { log(`corpus ${work}: no pages in the vault (skipped)`); continue; }
     const parsed = parseCorpusMarkdown(work, raw);
+    // a printed page is kept only where the scan's label agrees with its neighbours (cite.mjs trustedPrint)
+    const probe = { pages: parsed.pages.map((pg) => ({ page: pg.p, print: pg.print ?? null })) };
+    parsed.pages = parsed.pages.map((pg, i) => {
+      const keep = trustedPrint(probe, i);
+      const { print, ...rest } = pg;
+      return keep ? { ...rest, print: keep } : rest;
+    });
     const doc = {
       work,
       title: titles[work] || parsed.title || work,

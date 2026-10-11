@@ -1,16 +1,19 @@
+import { scopeOf } from '../data/scope';
 import type { Model } from '../data/model';
 import { dirFromLatLon } from '../data/geo';
 import { toRgbPalette } from '../data/palette';
 import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
-import type { History, HistoryReading, AeonEvent, Epoch, Passage } from '../types/history';
-import { clear, el, plate } from '../ui/dom';
+import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } from '../types/history';
+import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { closeGlyph } from '../ui/reveal';
+import { passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
-import { epochAt, eventOccurrences } from './model';
+import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
+import type { LensChrome } from '../shell/lens';
 
 type Selection = NonNullable<NonNullable<AppState['history']>['selection']>;
 const yearLabel = (year: number) => year < 0 ? `${Math.abs(Math.round(year)).toLocaleString()} BCE` : `${Math.round(year).toLocaleString()} CE`;
@@ -27,6 +30,9 @@ export class AionView {
   private dots: { element: HTMLElement; event: AeonEvent; dir: ReturnType<typeof dirFromLatLon> }[] = [];
   private epochId = '';
   private currentEvent: AeonEvent | undefined;
+  /** the standing chapter of the book, when the book is open */
+  private chapter: BookChapter | undefined;
+  private bookToggle: HTMLButtonElement | null = null;
   private threadIndex = 0;
   private threadPlaying = false;
   private threadTimer = 0;
@@ -38,15 +44,31 @@ export class AionView {
   private revealYearKey = Number.NaN;
   private revealEventId = '';
 
+  /**
+   * `onRead`: the core reading of an occurrence, opened from this mode (a double-click on an event card). The
+   * controller carries the mode state with it, so Escape returns here.
+   */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
-    readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge) {
-    this.heading = el('header', { class: 'aion-heading' });
+    readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge,
+    private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome) {
+    // the lens's own controls: the shell places them under its title (MODES-RFC §2); this view draws no heading
+    this.heading = el('div', { class: 'aion-controls' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
     this.markers = el('div', { class: 'aion-markers' });
-    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.heading, this.markers, this.epochs, this.card]);
+    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.card]);
     parent.append(this.root);
     this.ring = new EquinoxRing(this.root);
+    // a double-click on an event card opens the reading of its first resolvable occurrence; an epoch's card has none
+    onReadGesture(this.card, () => this.readEvent());
+  }
+
+  /** The event's first occurrence that exists in the field, opened as its core reading. Nothing when it has none. */
+  private readEvent() {
+    const event = this.currentEvent;
+    if (!this.reading || !event || this.state?.selection?.kind === 'epoch') return;
+    const occId = event.occurrenceIds.find((id) => this.model.occIndex.has(id));
+    if (occId !== undefined) this.onRead(occId);
   }
 
   show(state: NonNullable<AppState['history']>) {
@@ -71,6 +93,8 @@ export class AionView {
     this.threadPlaying = false;
     this.threadEvents = [];
     this.currentEvent = undefined;
+    this.chapter = undefined;
+    this.bookToggle?.setAttribute('aria-pressed', String(state.selection?.kind === 'chapter'));
     this.engine.arcs.clear();
     this.engine.markers.sel.hide();
     const selection = state.selection;
@@ -96,12 +120,21 @@ export class AionView {
         this.engine.arcs.uniforms.uTour.value = 0;
         this.showThreadEvent();
       }
+    } else if (selection?.kind === 'chapter') {
+      const chapter = this.history.book?.chapters.find((c) => c.id === selection.id);
+      if (chapter) this.showChapter(chapter);
     } else {
       this.card.hidden = true;
       this.engine.setEmphasis(null, null);
     }
     this.update(0);
-    document.title = `${reading.title} · ${reading.author} — An Archetypal Earth`;
+    const sel = state.selection;
+    const named = sel?.kind === 'epoch' ? reading.epochs.find((e) => e.id === sel.id)?.name
+      : sel?.kind === 'event' ? reading.events.find((e) => e.id === sel.id)?.name
+      : sel?.kind === 'thread' ? reading.threads.find((t) => t.id === sel.id)?.name
+      : sel?.kind === 'chapter' ? (() => { const c = this.history.book?.chapters.find((x) => x.id === sel.id); return c && `Aion, ${c.n === 'Foreword' ? 'the Foreword' : `chapter ${c.n}`}`; })() : undefined;
+    this.chrome?.setContext(named ?? `${reading.title} · ${reading.author}`);
+    this.chrome?.setControls([this.heading]);
   }
 
   hide() {
@@ -125,10 +158,10 @@ export class AionView {
 
   private buildHeading(reading: HistoryReading) {
     clear(this.heading);
-    const readingSelect = el('select', { 'aria-label': 'Historical reading', onchange: e => {
-      this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: (e.target as HTMLSelectElement).value } });
-    } });
-    for (const r of this.history.readings) readingSelect.append(el('option', { value: r.id, text: `${r.title} · ${r.author}`, selected: r.id === reading.id }));
+    // the readings are tabs: the shell's title carries the standing selection, so no select repeats it
+    const readingTabs = el('nav', { class: 'rb-modes aion-readings', 'aria-label': 'Readings' }, [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
+      el('button', { type: 'button', class: 'link-quiet', text: r.title, 'aria-pressed': String(r.id === reading.id),
+        onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }) })));
     const eventSelect = el('select', { 'aria-label': 'Historical event', onchange: e => {
       const id = (e.target as HTMLSelectElement).value;
       (e.target as HTMLSelectElement).closest('details')?.removeAttribute('open');
@@ -143,8 +176,14 @@ export class AionView {
     for (const thread of reading.threads) threadSelect.append(el('option', { value: thread.id, text: thread.name }));
     // Extend the existing focus-label vocabulary; the current reading is a
     // heading, and the quieter browsing controls open only when requested.
-    this.heading.append(this.history.readings.length > 1 ? readingSelect : el('h1', { class: 'fl-name', text: reading.title }),
-      el('p', { class: 'aion-context', text: reading.author }),
+    if (this.history.readings.length > 1) this.heading.append(readingTabs);
+    // the book itself, walked chapter by chapter (the way the Red Book mode walks its folios)
+    const book = this.history.book;
+    this.bookToggle = book ? el('button', { type: 'button', class: 'link-quiet aion-book-toggle', text: 'Read the book', 'aria-pressed': 'false',
+      title: `${book.title}, chapter by chapter`,
+      onclick: () => this.select(this.state?.selection?.kind === 'chapter' ? undefined : { kind: 'chapter', id: book.chapters[0].id }) }) : null;
+    if (this.bookToggle) this.heading.append(this.bookToggle);
+    this.heading.append(
       el('details', { class: 'aion-browse' }, [el('summary', { class: 'link-quiet', text: 'Browse' }),
         el('div', { class: 'aion-choices' }, [el('label', {}, [el('span', { text: 'Events' }), eventSelect]), el('label', {}, [el('span', { text: 'Threads' }), threadSelect])])]));
   }
@@ -161,16 +200,34 @@ export class AionView {
     }
   }
 
-  private sources(passages: Passage[]): HTMLElement {
-    const cite = (p: Passage) => {
-      const text = `${p.work} · ${p.locator}`;
-      const mark = p.basis === 'S' ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' }) : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
-      if (!this.passages?.known(p.work)) return el('cite', {}, [mark, text]);
-      return el('cite', {}, [mark, el('button', { class: 'link-quiet', type: 'button', text, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })]);
-    };
-    return el('details', { class: 'aion-sources' }, [el('summary', { text: 'Read the source' }), ...passages.map(p => el('blockquote', {}, [
-      el('p', { text: p.text }), cite(p),
-    ]))]);
+  /** The passage a card leads with: the first Jung's own text grounds (basis J, the default), else the first. */
+  private keyPassage(passages: Passage[]): Passage | undefined {
+    return passages.find(p => (p.basis ?? 'J') === 'J') ?? passages[0];
+  }
+
+  /** One passage as an open quotation, its cite in the same voice as every other cite in the field. */
+  private quote(p: Passage): HTMLElement {
+    const line = passageLine(this.model, p.work, p.locator);
+    const cite = this.passages?.known(p.work)
+      ? el('button', { class: 'link-quiet', type: 'button', text: line, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })
+      : line;
+    const mark = p.basis === 'S'
+      ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' })
+      : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
+    return el('blockquote', { class: 'dp-def' }, [el('p', { text: p.text }), el('footer', {}, [cite, ' ', mark])]);
+  }
+
+  /** The key passage, open, before the body. */
+  private keyQuote(passages: Passage[]): HTMLElement[] {
+    const key = this.keyPassage(passages);
+    return key ? [this.quote(key)] : [];
+  }
+
+  /** Every other passage, quietly, after the links. */
+  private moreSources(passages: Passage[]): HTMLElement[] {
+    const key = this.keyPassage(passages);
+    const rest = passages.filter(p => p !== key);
+    return rest.length ? [el('details', { class: 'aion-sources' }, [el('summary', { text: 'More from the text' }), ...rest.map(p => this.quote(p))])] : [];
   }
 
   private closeButton() {
@@ -196,9 +253,11 @@ export class AionView {
       if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
     }
     for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
+    text.before(plate(epochHeroImage(this.model, this.reading!, epoch), { className: 'rv-hero', credit: true, palette: epoch.palette, alt: epoch.name }));
     text.append(el('p', { class: 'aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
-      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
-      links, this.sources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
+      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: epoch.oneLine }),
+      ...this.keyQuote(epoch.passages), ...epoch.body.map(text => el('p', { class: 'rv-para', text })),
+      links, ...this.moreSources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
   }
 
   private showEvent(event: AeonEvent, move: boolean) {
@@ -209,11 +268,8 @@ export class AionView {
       if (Number.isFinite(event.lat) && Number.isFinite(event.lon)) this.engine.rig.flyTo(event.lat!, event.lon!, 2.8, { duration: 1.8 });
     }
     const text = this.openCard();
-    const specific = event.occurrenceIds.map(id => this.model.occIndex.get(id)).find(i => i !== undefined);
-    const image = specific !== undefined ? this.model.occ[specific].image : undefined;
-    if (image) text.before(plate(image, { className: 'rv-hero', credit: true }));
-    text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
-      el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...event.body.map(text => el('p', { class: 'rv-para', text })), this.sources(event.passages));
+    const epoch = this.reading!.epochs.find(e => e.id === event.epochId);
+    text.before(plate(eventHeroImage(this.model, event), { className: 'rv-hero', credit: true, palette: epoch?.palette, alt: event.name }));
     const links = el('div', { class: 'aion-links' });
     for (const id of event.archetypeIds ?? []) {
       const archetype = this.model.archById.get(id);
@@ -227,7 +283,66 @@ export class AionView {
       const i = this.model.occIndex.get(id);
       if (i !== undefined) links.append(el('button', { type: 'button', class: 'link-quiet', text: this.model.occ[i].label, onclick: () => this.navigate({ view: { kind: 'manifest', occId: id, context: { type: 'family', id: this.model.occ[i].familyId } }, deep: false }) }));
     }
-    text.append(links, skyClockDisclosure(this.reading!, event));
+    text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
+      el('p', { class: 'rv-para aion-lede', text: event.oneLine }), ...this.keyQuote(event.passages), ...event.body.map(text => el('p', { class: 'rv-para', text })),
+      links, ...this.moreSources(event.passages), skyClockDisclosure(this.reading!, event));
+  }
+
+  /**
+   * One chapter of the book: Jung's own words from inside it, each opening its page in the corpus; the field it speaks
+   * of, tuned on the globe; and the events of the readings whose passages stand in its pages.
+   */
+  private showChapter(chapter: BookChapter) {
+    const book = this.history.book!;
+    this.chapter = chapter;
+    const all = book.chapters;
+    const i = all.indexOf(chapter);
+    const text = this.openCard();
+    const step = (delta: number) => this.select({ kind: 'chapter', id: all[(i + delta + all.length) % all.length].id });
+    text.append(el('div', { class: 'aion-thread aion-book' }, [
+      el('span', { text: `${book.title.split(':')[0]} · ${i + 1}/${all.length}` }),
+      el('p', { class: 'aion-thread-line', text: book.line }),
+      el('div', {}, [
+        el('button', { type: 'button', text: '←', 'aria-label': 'Previous chapter', onclick: () => step(-1) }),
+        el('span', { class: 'rb-progress', text: chapter.n }),
+        el('button', { type: 'button', text: '→', 'aria-label': 'Next chapter', onclick: () => step(1) }),
+      ]),
+    ]));
+    const [from, to] = chapter.pages;
+    text.append(
+      el('p', { class: 'aion-date rv-line', text: `${chapter.n === 'Foreword' ? 'Foreword' : `Chapter ${chapter.n}`} · pdf p${from}${to ? `–${to}` : ''}` }),
+      el('h2', { class: 'rv-name', text: chapter.title }),
+      el('p', { class: 'rv-para aion-lede', text: chapter.line }),
+      ...chapter.quotes.map((q) => this.quote({ text: q.text, work: q.cite.work, locator: q.cite.locator })),
+    );
+    const links = el('div', { class: 'aion-links' });
+    for (const s of chapter.subjects) {
+      const name = s.type === 'archetype' ? this.model.archById.get(s.id)?.name : this.model.famById.get(s.id)?.name;
+      if (name) links.append(el('button', { type: 'button', class: 'link-quiet', text: name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: s.type, id: s.id } }, deep: false }) }));
+    }
+    text.append(links);
+    if (chapter.events.length) {
+      const list = el('ul', { class: 'aion-book-events' });
+      for (const e of chapter.events) list.append(el('li', {}, [el('button', { type: 'button', class: 'link-quiet', text: `${e.yearDisplay} · ${e.name}`,
+        title: e.readingTitle, onclick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: e.reading, selection: { kind: 'event', id: e.id } } }) })]));
+      text.append(el('details', { class: 'aion-sources', open: chapter.events.length <= 4 }, [el('summary', { text: `In the readings · ${chapter.events.length} ${chapter.events.length === 1 ? 'event' : 'events'} cite this chapter` }), list]));
+    }
+    // the deep dive: the chapter's own opening page in the corpus, read in full
+    if (this.passages?.known(book.work)) text.append(el('p', { class: 'aion-book-deep' }, [el('button', { type: 'button', class: 'link-quiet', text: 'Read the chapter from its first page',
+      onclick: () => this.passages!.open(book.work, `pdf p${from}`) })]));
+    // the world looks at the first event the chapter grounds that has a place
+    const located = chapter.events.map((e) => this.history.readings.find((r) => r.id === e.reading)?.events.find((x) => x.id === e.id))
+      .find((e) => e && Number.isFinite(e.lat) && Number.isFinite(e.lon));
+    if (located) this.engine.rig.flyTo(located.lat!, located.lon!, 2.8, { duration: 1.8 });
+  }
+
+  /** Arrow-key walking through the book's chapters; wired by the controller. */
+  walkBook(delta: number): boolean {
+    const book = this.history.book;
+    if (!book || !this.chapter) return false;
+    const i = book.chapters.indexOf(this.chapter);
+    this.select({ kind: 'chapter', id: book.chapters[(i + delta + book.chapters.length) % book.chapters.length].id });
+    return true;
   }
 
   private showThreadEvent() {
@@ -259,15 +374,46 @@ export class AionView {
    */
   private updateFieldReveal(year: number, epoch: ReturnType<typeof epochAt>) {
     const m = this.model;
+    if (this.chapter) {
+      // a chapter's own set: the archetypes and families it names and the occurrences of the events it grounds; a
+      // chapter is not a moment, so the clock does not recede it
+      if (this.scopeFor !== this.chapter) {
+        this.scopeFor = this.chapter;
+        const own: number[] = [];
+        for (const s of this.chapter.subjects) own.push(...((s.type === 'archetype' ? m.archOcc.get(s.id) : m.famOcc.get(s.id)) ?? []));
+        for (const e of this.chapter.events) {
+          const ev = this.history.readings.find((r) => r.id === e.reading)?.events.find((x) => x.id === e.id);
+          if (ev) own.push(...eventOccurrences(m, ev));
+        }
+        this.readingScope = scopeOf(m, own, `Aion ${this.chapter.n === 'Foreword' ? 'Foreword' : this.chapter.n}`);
+      }
+      this.engine.setEmphasis(this.readingScope!.rel, null, this.readingScope!.info);
+      return;
+    }
+    // the reading's own set: every event's occurrences (its nearby presences dim; the rest of the field is set aside)
+    if (this.scopeFor !== this.reading) {
+      this.scopeFor = this.reading;
+      const own: number[] = [];
+      for (const ev of this.reading?.events ?? []) own.push(...eventOccurrences(m, ev));
+      this.readingScope = scopeOf(m, own, `“${this.reading?.title ?? 'this reading'}”`, { level: 1 });
+    }
+    const sc = this.readingScope!;
     const rel = (this.fieldRel ??= new Float32Array(m.occ.length));
     for (let i = 0; i < m.occ.length; i++) {
       if (!m.located[i]) { rel[i] = 1; continue; }
+      const base = sc.rel[i];
+      if (base <= 0) { rel[i] = 0; continue; }
+      // within the set, the field as of the cursor's year: what has entered stands, what came later recedes
       const y = m.occ[i].year;
-      rel[i] = y > year ? 0.05 : y >= (epoch?.from ?? y) ? 1 : 0.3;
+      const t = y > year ? 0.18 : y >= (epoch?.from ?? y) ? 1 : 0.45;
+      rel[i] = base >= 1 ? t : Math.min(base, t);
     }
     if (this.currentEvent) for (const i of eventOccurrences(m, this.currentEvent)) if (m.located[i]) rel[i] = 1.6;
-    this.engine.setEmphasis(rel, null);
+    this.engine.setEmphasis(rel, null, sc.info);
   }
+
+  private scopeFor: unknown = undefined;
+  private readingScope: ReturnType<typeof scopeOf> | null = null;
 
   update(dt: number) {
     if (this.root.hidden || !this.reading) return;
@@ -287,7 +433,7 @@ export class AionView {
     this.ring.update(year);
     // the field follows the cursor: recomputed only when the year or the standing event changes
     const yearKey = Math.floor(year);
-    const eventId = this.currentEvent?.id ?? '';
+    const eventId = this.currentEvent?.id ?? this.chapter?.id ?? '';
     if (yearKey !== this.revealYearKey || eventId !== this.revealEventId) {
       this.revealYearKey = yearKey;
       this.revealEventId = eventId;

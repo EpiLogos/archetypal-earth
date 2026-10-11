@@ -7,9 +7,16 @@ import * as THREE from 'three';
 import { dirFromLatLon, latLonFromDir, slerp, angleBetween, wrapLon, type Vec3 } from '../data/geo';
 import { easeInOutCubic } from '../data/palette';
 import { anchorView, clampDist, degPerPixel, easeDist, MAX_LAT, MIN_DIST, surfacePointAt, zoomedDist, type Lens } from './zoom';
+import { SETTLE, settleStep } from '../sky/stages';
 
 export { MIN_DIST };
 export const MAX_DIST = 5.4;
+/**
+ * Beyond `maxDist` while the sky is still loading (`softMaxDist`), each outward wheel step moves the target this fraction as
+ * far: the pull-back resists and keeps moving, so it never stalls and then jumps when the sky arrives (audit S3 (d)).
+ */
+const SOFT_RESIST = 0.3;
+const R2D = 180 / Math.PI;
 
 const DOUBLE_ZOOM = 0.4; // altitude factor for a double-click / double-tap
 const FLING_MAX = 240; // deg/s
@@ -61,9 +68,21 @@ export class CameraRig {
   autoRotate = true;
   /** how far the user may pull back (wider on portrait screens) */
   maxDist = MAX_DIST;
+  /**
+   * The further limit the pull-back is heading for while the sky loads (0: none). Beyond `maxDist` it resists (SOFT_RESIST);
+   * once the sky stands, `maxDist` is raised to it and the resistance is gone.
+   */
+  softMaxDist = 0;
   interacted = false;
   /** true while the user holds the globe or a flight is running (UI pauses hover) */
   dragging = false;
+  /** performance.now() of the last wheel or pinch step, and of the last drag step: the sky's arrival settle waits on them */
+  lastWheelAt = -Infinity;
+  lastDragAt = -Infinity;
+  /** true while the view was brought here by a wheel or pinch and no drag or key has moved it since (the arrival settle's condition) */
+  wheelDriven = false;
+  /** the orientation an arrival is settling toward (the sky's canonical system view), or null: any input cancels it */
+  settleTo: { lat: number; lon: number } | null = null;
 
   private vLat = 0;
   private vLon = 0;
@@ -81,6 +100,8 @@ export class CameraRig {
   private flyVLon = 0;
   private tmpA: Vec3 = [0, 0, 0];
   private tmpC: Vec3 = [0, 0, 0];
+  private tmpS: Vec3 = [0, 0, 0];
+  private tmpT: Vec3 = [0, 0, 0];
   private flyEndCbs: (() => void)[] = [];
 
   constructor(private camera: THREE.PerspectiveCamera, private dom: HTMLElement, private opts: RigOptions) {
@@ -116,9 +137,12 @@ export class CameraRig {
     const clampedLat = Math.max(-MAX_LAT, Math.min(MAX_LAT, lat));
     const to = dirFromLatLon(clampedLat, lon);
     const from = dirFromLatLon(this.lat, this.lon);
-    const d1 = Math.max(MIN_DIST + 0.02, Math.min(this.maxDist, dist));
+    const d1 = Math.max(MIN_DIST + 0.02, Math.min(this.softCap(), dist));
     this.vLat = this.vLon = 0;
     this.anchor = null;
+    // a flight is a journey of its own: it ends any arrival settle, and the arrival it was by wheel no longer stands
+    this.settleTo = null;
+    this.wheelDriven = false;
     const ang = angleBetween(from, to);
     if (opts.instant || (ang < 1e-4 && Math.abs(d1 - this.dist) < 1e-3)) {
       this.lat = clampedLat;
@@ -146,6 +170,9 @@ export class CameraRig {
    * moving, decaying, so taking over never feels like hitting a wall.
    */
   cancelFly(carry = true) {
+    // every input comes through here: it ends an arrival settle, and a key, drag or wheel that follows is its own gesture
+    this.settleTo = null;
+    this.wheelDriven = false;
     if (!this.fly) return;
     this.fly = null;
     this.targetDist = this.dist;
@@ -258,6 +285,8 @@ export class CameraRig {
     p.y = e.clientY;
     if (this.pointers.size === 1) {
       this.moved += Math.abs(dx) + Math.abs(dy);
+      // a drag is the user's own orbit: it ends the arrival settle for good, until the next wheel or pinch
+      if (dx || dy) { this.lastDragAt = performance.now(); this.wheelDriven = false; this.settleTo = null; }
       const pl = this.lat;
       const pn = this.lon;
       let moved = false;
@@ -287,7 +316,9 @@ export class CameraRig {
       const [a, b] = [...this.pointers.values()];
       const d = Math.max(Math.hypot(a.x - b.x, a.y - b.y), 10);
       // fingers apart → closer: altitude scales inversely with the finger span
-      this.dist = this.targetDist = clampDist(1 + (this.pinch.dist0 - 1) * (this.pinch.d0 / d), this.maxDist);
+      this.dist = this.targetDist = clampDist(1 + (this.pinch.dist0 - 1) * (this.pinch.d0 / d), this.softCap());
+      this.lastWheelAt = performance.now();
+      this.wheelDriven = true;
       if (this.anchor) {
         [this.anchor.nx, this.anchor.ny] = this.ndc((a.x + b.x) / 2, (a.y + b.y) / 2);
         this.applyAnchor();
@@ -351,8 +382,12 @@ export class CameraRig {
     else if (e.deltaMode === 2) dy *= 400;
     if (e.deltaX && !dy) return; // horizontal scroll: ignore
     const before = this.targetDist;
-    this.targetDist = zoomedDist(this.targetDist, dy, e.ctrlKey, this.maxDist); // trackpad pinch sends ctrl+wheel
+    // beyond the hard limit (the sky still loading) an outward step resists: it moves on, slowly, rather than stalling
+    const resist = dy > 0 && before >= this.maxDist && this.softCap() > this.maxDist ? SOFT_RESIST : 1;
+    this.targetDist = zoomedDist(this.targetDist, dy * resist, e.ctrlKey, this.softCap()); // trackpad pinch sends ctrl+wheel
     if (this.targetDist === before) return;
+    this.lastWheelAt = performance.now();
+    this.wheelDriven = true;
     // choose the point under the cursor when a zoom begins or the cursor has moved;
     // while the gesture continues it stays the same point
     const w = this.wheelPos;
@@ -379,7 +414,9 @@ export class CameraRig {
     e.preventDefault();
     if (!this.gesture) return;
     const g = e as unknown as { scale: number };
-    this.dist = this.targetDist = clampDist(1 + (this.gesture.dist0 - 1) / Math.max(g.scale, 0.05), this.maxDist);
+    this.dist = this.targetDist = clampDist(1 + (this.gesture.dist0 - 1) / Math.max(g.scale, 0.05), this.softCap());
+    this.lastWheelAt = performance.now();
+    this.wheelDriven = true;
     this.applyAnchor();
     this.apply();
   };
@@ -435,7 +472,10 @@ export class CameraRig {
           if (Math.abs(this.vLat) < 0.02) this.vLat = 0;
         }
       }
-      if (this.targetDist > this.maxDist) this.targetDist = this.maxDist; // the window grew narrower
+      // an arrival settle turns the view toward the system's canonical pose, distance unchanged (only while the hand is off it)
+      if (this.settleTo && !this.dragging && this.pointers.size === 0 && !this.gesture) this.stepSettle(dt);
+      const cap = this.softCap();
+      if (this.targetDist > cap) this.targetDist = cap; // the window grew narrower
       if (this.pointers.size < 2 && !this.gesture) {
         const nd = easeDist(this.dist, this.targetDist, dt);
         if (nd !== this.dist) {
@@ -448,6 +488,34 @@ export class CameraRig {
       }
     }
     this.apply();
+  }
+
+  /** The furthest the target may stand: the soft limit while the sky loads, else the hard `maxDist`. */
+  private softCap(): number {
+    return this.softMaxDist > this.maxDist ? this.softMaxDist : this.maxDist;
+  }
+
+  /**
+   * Turn the view toward `settleTo` by the eased, speed-capped step (stages.ts `settleStep`), along the great circle, at the
+   * same distance. Done when within `SETTLE.doneDeg`; a finished arrival is spent (`wheelDriven` clears), so it cannot re-fire.
+   */
+  private stepSettle(dt: number) {
+    const to = this.settleTo;
+    if (!to) return;
+    const a = dirFromLatLon(this.lat, this.lon, this.tmpS);
+    const b = dirFromLatLon(to.lat, to.lon, this.tmpT);
+    const ang = angleBetween(a, b) * R2D;
+    if (ang < SETTLE.doneDeg) {
+      this.lat = to.lat;
+      this.lon = wrapLon(to.lon);
+      this.settleTo = null;
+      this.wheelDriven = false;
+      return;
+    }
+    const p = slerp(a, b, Math.min(1, settleStep(ang, dt) / ang), this.tmpA);
+    const ll = latLonFromDir(p);
+    this.lat = ll.lat;
+    this.lon = ll.lon;
   }
 
   private apply() {

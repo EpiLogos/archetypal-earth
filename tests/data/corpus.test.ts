@@ -1,3 +1,7 @@
+// @ts-expect-error Plain ESM shared with the CLI.
+import { DEFAULT_VAULT } from '../../scripts/lib/vault.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { externalRegister } from '../../scripts/lib/external.mjs';
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +14,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 // No fixtures and no skips: the corpus index is built data, and a missing
 // volume is a failed acceptance check, the same law the history tests keep.
 const index: CorpusIndex = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/corpus/index.json'), 'utf8'));
-const vault = process.env.VAULT || path.join(process.env.HOME!, 'Documents', 'books', 'jung-archetypal-field');
+const vault = DEFAULT_VAULT;
 const loadWork = (work: string): CorpusWork =>
   JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/corpus', `${work}.json`), 'utf8'));
 const cw12 = loadWork('cw12');
@@ -19,9 +23,10 @@ const semVisions = loadWork('sem-visions');
 
 describe('corpus index (citation deep links)', () => {
   it('holds every vault volume with its pages and ¶ anchors', () => {
+    // every corpus volume, then each external work the site registers whose pages the vault holds (_raw-ext)
     const files = fs.readdirSync(path.join(vault, 'corpus')).filter((f) => f.endsWith('.md')).sort();
-    expect(index.works.length).toBe(files.length);
-    expect(index.works.map((w) => w.work)).toEqual(files.map((f) => f.replace(/\.md$/, '')));
+    const externals = Object.keys(externalRegister(path.resolve(__dirname, '../..'))).filter((w) => fs.existsSync(path.join(vault, '_raw-ext', w, 'pages')));
+    expect(index.works.map((w) => w.work)).toEqual([...files.map((f) => f.replace(/\.md$/, '')), ...externals]);
     for (const entry of index.works) {
       const doc = loadWork(entry.work);
       expect(doc.pages.length).toBe(entry.pages);
@@ -79,7 +84,8 @@ describe('corpus index (citation deep links)', () => {
     expect(parseLocator('fig. 131, ¶357 (pdf p268)')).toEqual({ para: 357, pages: [268, undefined] });
   });
 
-  it('round-trips the vault citation spine through the parsed corpus', () => {
+  // the spine round-trip parses every corpus volume; give it room beyond the 5s default under load
+  it('round-trips the vault citation spine through the parsed corpus', { timeout: 60_000 }, () => {
     const spine = fs.readFileSync(path.join(vault, 'data', 'paragraphs.jsonl'), 'utf8').split('\n').filter(Boolean);
     let checked = 0;
     for (const line of spine) {

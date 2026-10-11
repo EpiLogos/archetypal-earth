@@ -1,6 +1,7 @@
 // Tiny DOM helpers + the image plate (an image, or a tonal plate when there is none).
 import type { ImageRef, Palette } from '../types/field';
 import { imgUrl } from '../data/load';
+import { creditLine, creditLineFull, sanitiseTitle } from './credit';
 
 type Attrs = Record<string, string | number | boolean | undefined | ((e: Event) => void)>;
 
@@ -20,6 +21,33 @@ export function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Attrs =
 
 export function clear(node: Element) {
   while (node.firstChild) node.removeChild(node.firstChild);
+}
+
+/** Controls inside a read surface keep their own single-click behaviour: a double-click on them does nothing new. */
+const CONTROL = 'a, button, summary, input, select, textarea, [role="button"], [role="link"], .rv-close, .link-quiet';
+/**
+ * Running text belongs to the reader: a double-click on a word in a quotation or a paragraph selects that word (the way
+ * a quotation is copied), and opens nothing. The reading is reached from the plate, the title, the header, the
+ * surface's whitespace, or the 'Reading' link.
+ */
+const PROSE = 'blockquote, p, li, q, cite, figcaption, dd, pre, .dp-def';
+
+/**
+ * A double-click on a card surface opens its reading (SPEC §12: layer 3 is one gesture away from layer 1).
+ * The same action the surface's own 'Reading' link takes; no visible affordance is added.
+ * A double-click on an interactive control inside the surface is left to that control. A double-click on running
+ * text is left to the browser, as word selection, and the surface does nothing; on the plate, the title, the header
+ * or whitespace the word selection the gesture made is cleared before `open` runs.
+ */
+export function onReadGesture(surface: HTMLElement, open: () => void): void {
+  surface.addEventListener('dblclick', (e) => {
+    const target = e.target instanceof Element ? e.target : null;
+    const control = target?.closest(CONTROL);
+    if (control && control !== surface && surface.contains(control)) return;
+    if (target?.closest(PROSE) && surface.contains(target)) return;
+    globalThis.getSelection?.()?.removeAllRanges();
+    open();
+  });
 }
 
 export interface PlateOptions {
@@ -48,7 +76,7 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
     fig.classList.add('plate-empty');
     return fig;
   }
-  const img = el('img', { alt: opts.alt ?? ref.title ?? '', decoding: 'async', draggable: 'false' });
+  const img = el('img', { alt: opts.alt ?? sanitiseTitle(ref.title), decoding: 'async', draggable: 'false' });
   if (!opts.eager) img.loading = 'lazy';
   // decode off the main thread first, then reveal: no decode work lands inside a frame
   img.addEventListener('load', () => {
@@ -62,10 +90,8 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   });
   img.src = imgUrl(ref, opts.thumb);
   fig.append(img);
-  if (opts.credit && (ref.credit || ref.license)) {
-    const parts = [ref.credit, ref.license].filter(Boolean).join(' · ');
-    fig.append(el('figcaption', { class: 'plate-credit', text: parts }));
-  }
+  const credit = opts.credit ? creditLine(ref) : '';
+  if (credit) fig.append(el('figcaption', { class: 'plate-credit', text: credit, title: creditLineFull(ref) }));
   return fig;
 }
 

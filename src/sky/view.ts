@@ -1,5 +1,6 @@
 // The sky's quiet DOM: body labels (real buttons, so the sky is reachable by keyboard and by touch) and the
 // caption that says the radial scale is diagrammatic. Nothing here owns state: the controller does.
+import { glyphSvg, holoCss } from './zodiac';
 import type { BodyKey } from '../types/sky';
 import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
@@ -31,8 +32,6 @@ export class SkyView {
   private cultureSelect: HTMLSelectElement;
   private cultureNote: HTMLElement;
   private liveNote: HTMLElement;
-  /** where the birth-sky disclosure stands: under the culture selector and the live note */
-  readonly birthHost: HTMLElement;
   private marks = new Map<string, HTMLElement>();
   private lastLive: LiveState | null = null;
   private held: string | null = null;
@@ -44,8 +43,7 @@ export class SkyView {
     this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
     this.cultureNote = el('p', { class: 'sky-culture-note' });
     this.liveNote = el('p', { class: 'sky-live', role: 'status' });
-    this.birthHost = el('div', { class: 'sky-birth-host' });
-    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote, this.birthHost]);
+    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote]);
     this.culture.inert = true;
     parent.append(this.root, this.caption, this.culture);
   }
@@ -150,10 +148,13 @@ export class SkyView {
       const b = byKey.get(key);
       if (!b) { l.node.classList.remove('on'); continue; }
       if (!l.w) l.w = l.node.getBoundingClientRect().width || 60;
-      const x = b.x + 12;
+      // clear of the drawn disc: a grown body's name sits beyond its edge, not on its centre
+      const x = b.x + Math.max(12, b.px / 2 + 8);
       const y = b.y - 8;
       const clash = placed.some((p) => Math.abs(p.x - x) < (p.w + l.w) / 2 + 6 && Math.abs(p.y - y) < 17);
-      const on = !clash && b.alpha > 0.45;
+      // the approached body's card names it: its label stands down (hidden, so out of the tab order too)
+      const approached = layer.approach > 0.05 && key === this.selected;
+      const on = !clash && !approached && b.alpha > 0.45;
       l.node.classList.toggle('on', on);
       l.node.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
       if (on) placed.push({ x: x + l.w / 2, y, w: l.w });
@@ -168,11 +169,20 @@ export class SkyView {
       seen.add(m.id);
       let n = this.marks.get(m.id);
       if (!n) {
-        n = el('span', { class: `sky-chart-mark sky-chart-${m.kind}`, 'aria-hidden': 'true', text: m.text });
+        if (m.sign !== undefined) {
+          // a sign: its canonical glyph, in the band's own colour at that longitude
+          n = el('span', { class: 'sky-chart-mark sky-chart-glyph', 'aria-hidden': 'true' }, [glyphSvg(m.sign)]);
+          n.style.color = holoCss(m.sign);
+        } else n = el('span', { class: `sky-chart-mark sky-chart-${m.kind}`, 'aria-hidden': 'true', text: m.text });
         this.marks.set(m.id, n);
         this.root.append(n);
       }
-      n.classList.toggle('on', m.on);
+      if (m.size !== undefined) {
+        // drawn inside the band: most of its width, never so small it blurs nor so large it crowds
+        const px = Math.max(12, Math.min(46, m.size * 0.78));
+        n.style.width = n.style.height = `${px.toFixed(1)}px`;
+        n.classList.toggle('on', m.on && m.size > 9);
+      } else n.classList.toggle('on', m.on);
       n.style.transform = `translate(${m.x.toFixed(1)}px, ${m.y.toFixed(1)}px) translate(-50%, -50%)`;
     }
     for (const [id, n] of this.marks) if (!seen.has(id)) { n.remove(); this.marks.delete(id); }

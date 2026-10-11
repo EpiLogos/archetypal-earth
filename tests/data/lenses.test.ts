@@ -1,0 +1,74 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { describe, expect, it } from 'vitest';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { DEFAULT_VAULT } from '../../scripts/lib/vault.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { verify, workLoader, locate } from '../../scripts/lib/cite.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { buildTheory } from '../../scripts/theory.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { buildAstrology } from '../../scripts/astrology.mjs';
+// @ts-expect-error Plain ESM shared with the CLI.
+import { buildAionBook } from '../../scripts/aionbook.mjs';
+
+const ROOT = path.resolve(__dirname, '..', '..');
+const read = (f: string) => JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', f), 'utf8'));
+type Q = { text: string; cite: { work: string; locator: string } };
+
+/** Every quotation object anywhere in a published lens file. */
+function quotes(node: unknown, out: Q[] = []): Q[] {
+  if (Array.isArray(node)) for (const x of node) quotes(x, out);
+  else if (node && typeof node === 'object') {
+    const o = node as Record<string, unknown>;
+    if (typeof o.text === 'string' && o.cite && typeof (o.cite as Q['cite']).locator === 'string') out.push(o as unknown as Q);
+    for (const v of Object.values(o)) quotes(v, out);
+  }
+  return out;
+}
+
+describe('the lens data: provenance lives in the quotes', () => {
+  const load = workLoader(DEFAULT_VAULT);
+  for (const file of ['theory.json', 'astrology.json', 'practice.json', 'depth.json', 'aionbook.json']) {
+    it(`${file}: every quotation stands verbatim on its cited page of the read-only vault`, () => {
+      const qs = quotes(read(file));
+      expect(qs.length).toBeGreaterThan(10);
+      expect(qs.map((q) => verify(load, { work: q.cite.work, locator: q.cite.locator, quote: q.text })).filter(Boolean)).toEqual([]);
+    });
+  }
+
+  it('a quotation that is not in the corpus is refused, and a moved one fails its page', () => {
+    expect(locate(load, 'cw09ii', 'the self is a modern invention of the twentieth century')).toHaveProperty('error');
+    expect(verify(load, { work: 'cw09ii', locator: 'pdf p100', quote: 'Psychologically the self is a union of conscious (masculine) and unconscious (feminine).' })).toMatch(/not verbatim/);
+  });
+
+  it('the published files are what the vault gives now (no hand edits)', () => {
+    const t = buildTheory({ vault: DEFAULT_VAULT });
+    const a = buildAstrology({ vault: DEFAULT_VAULT });
+    expect(t.errors).toEqual([]);
+    expect(a.errors).toEqual([]);
+    expect(read('theory.json')).toEqual(t.data);
+    expect(read('astrology.json')).toEqual(a.data);
+  });
+
+  it('Aion, the book: every chapter is quoted from inside its own pages, in Jung\'s order', () => {
+    const b = buildAionBook({ vault: DEFAULT_VAULT });
+    expect(b.errors).toEqual([]);
+    expect(read('aionbook.json')).toEqual(b.data);
+    expect(b.data.chapters.map((c: { n: string }) => c.n)).toEqual(['Foreword', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV']);
+    for (const c of b.data.chapters) expect(c.quotes.length).toBeGreaterThan(0);
+  });
+
+  it('the deep fields the site links to are the ones the curation builds', async () => {
+    const { DEEP_FIELDS } = await import('../../src/lenses/depth');
+    expect([...DEEP_FIELDS].sort()).toEqual(Object.keys(read('depth.json').archetypes).sort());
+  });
+
+  it('Jung, the first chart: the corpus gives the year and region; the time from the record names who gave it', () => {
+    const jung = read('astrology.json').people.find((p: { id: string }) => p.id === 'jung');
+    expect(jung.quote.cite.work).toBe('cw01');
+    expect(jung.birth.time).toBe('19:32');
+    expect(jung.birth.timeSource).toMatch(/Gret Baumann-Jung/);
+    expect(jung.birth.timeSource).toMatch(/19:20 to 19:41/);
+  });
+});

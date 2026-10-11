@@ -4,26 +4,41 @@ import { chromium, webkit } from 'playwright';
 
 export const URL = process.env.EARTH_URL ?? 'http://localhost:5183/';
 
-export async function launch(kind = 'chromium', { headed = true } = {}) {
+// EARTH_HEADLESS=1 runs without a display (a cloud clone): software GL through the system Chromium.
+const CLOUD = process.env.EARTH_HEADLESS === '1';
+
+export async function launch(kind = 'chromium', { headed = !CLOUD } = {}) {
   if (kind === 'webkit') return webkit.launch({ headless: !headed });
+  if (CLOUD) {
+    return chromium.launch({
+      headless: true,
+      executablePath: process.env.CHROMIUM_PATH ?? '/opt/pw-browsers/chromium',
+      args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+    });
+  }
   return chromium.launch({
     headless: !headed,
     args: ['--use-angle=metal', '--ignore-gpu-blocklist', '--enable-gpu-rasterization', '--enable-zero-copy', '--disable-renderer-backgrounding', '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows'],
   });
 }
 
-export async function open(browser, { width = 1440, height = 900, dpr = 1, hash = '', mobile = false } = {}) {
+export async function open(browser, { width = 1440, height = 900, dpr = 1, hash = '', mobile = false, landing = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: dpr, hasTouch: mobile, isMobile: mobile });
   const page = await ctx.newPage();
+  // the landing shows once per browser; a walk starts past it unless it is what the walk is about
+  if (!landing) await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   const logs = [];
-  page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) logs.push(`${m.type()}: ${m.text()}`); });
+  // where a warning was raised is named with it (a bare 'Failed to fetch' says nothing of which fetch)
+  // (the dev server's own client, /@vite/client, warns when its ping to the server drops; that is not the app's)
+  page.on('console', (m) => { if (['error', 'warning'].includes(m.type()) && !/\/@vite\/client/.test(m.location()?.url ?? '')) { const at = m.location(); logs.push(`${m.type()}: ${m.text()}${at?.url ? ` @ ${at.url.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '')}:${at.lineNumber}` : ''}`); } });
   page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
+  // a failed request is named, so a 'Failed to fetch' warning says which (map tiles and web fonts the sandbox cannot
+  // reach are not counted, nor a cancelled one: a fetch the app retries, a lazy image dropped, says nothing by itself;
+  // if the app gives up it warns, and that is counted)
+  page.on('requestfailed', (r) => { if (r.failure()?.errorText !== 'net::ERR_ABORTED' && !/gibs|earthdata|tile|openstreetmap|fonts\.(gstatic|googleapis)/i.test(r.url())) logs.push(`requestfailed: ${r.failure()?.errorText} ${r.url().replace(/^https?:\/\/[^/]+/, '').slice(0, 80)}`); });
   await page.goto(URL + hash, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__earth && window.__earth.engine && window.__earth.engine.presences, null, { timeout: 30000 });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 30000 });
-  // the entry dialog shows once per fresh context: walk through it like a person
-  const intro = page.locator('#intro:not(.dismissed)');
-  if (await intro.count()) await page.getByRole('button', { name: 'Enter the globe' }).click();
   await page.waitForTimeout(600);
   return { ctx, page, logs };
 }

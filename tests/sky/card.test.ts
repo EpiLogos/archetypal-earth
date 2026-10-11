@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { buildModel, subjectExists } from '../../src/data/model';
 import type { Field } from '../../src/types/field';
 import type { BodyKey, SkyData } from '../../src/types/sky';
-import { BASIS_LABEL, canOpenCard, describePosition, formatMoment, resolveTies } from '../../src/sky/card';
+import { BASIS_LABEL, basisTitle, burtFooter, canOpenCard, describePosition, formatMoment, keyPassageOf, resolveTies, tieNote } from '../../src/sky/card';
+import { jungLine, passageCite, passageLine } from '../../src/ui/format';
 import { SkyEphemeris } from '../../src/sky/ephemeris';
 import { signOf } from '../../src/sky/frames';
 import { BODY_GLYPH, bodyTiesFor, glyphOf, type TiesIndex } from '../../src/sky/ties';
@@ -122,11 +123,116 @@ describe('the position line', () => {
     expect(r.known).toBe(false);
     expect(r.line).toMatch(/No position/);
     expect(r.line).toContain('2015–2039');
+    expect(r.line).toContain('the sky tables');
+    expect(r.line).not.toMatch(/generated|vault|sidecar|npm run/);
   });
 
   it('gives the Earth no place in its own sky', () => {
     const r = describePosition('earth', eph, ms, 'x');
     expect(r.known).toBe(false);
     expect(r.line).toMatch(/observer/);
+  });
+});
+
+describe('the key passage leads the card, in its author\'s voice', () => {
+  const sun = data.bodies.find((b) => b.key === 'sun')!;
+  const resolvedOf = (b: typeof sun) => resolveTies(b, model).resolved;
+
+  it('every body but the luminaries leads with Burt\'s own definition when the book gives one, under her name and page', () => {
+    for (const b of data.bodies.filter((x) => x.key !== 'sun' && x.key !== 'moon')) {
+      expect(b.quotes?.length, `${b.key} has Burt quotes`).toBeGreaterThan(0);
+      const k = keyPassageOf(b, resolvedOf(b), data.readings, model)!;
+      expect(k.voice, b.key).toBe('burt');
+      expect(k.quote, b.key).toBe(b.quotes![0].text);
+      expect(k.footer, b.key).toMatch(/^Kathleen Burt · Archetypes of the Zodiac · p\. \d+$/);
+      expect(k.footer).toBe(burtFooter(b.quotes![0]));
+    }
+  });
+
+  it('the Sun and the Moon lead with Jung\'s pair reading, its first cite; Burt\'s definitions wait in her disclosure', () => {
+    const pair = data.readings.find((r) => r.bodies.includes('sun') && r.bodies.includes('moon'))!;
+    for (const b of [sun, data.bodies.find((x) => x.key === 'moon')!]) {
+      const k = keyPassageOf(b, resolvedOf(b), data.readings, model)!;
+      expect(k.voice, b.key).toBe('jung');
+      expect(k.cite, b.key).toBe(pair.cites[0]);
+      expect(k.quote, b.key).toBe(pair.cites[0].quote);
+      expect(k.footer, b.key).toBe(passageLine(model, pair.cites[0].work, pair.cites[0].locator));
+      expect(b.quotes!.length, `${b.key} keeps Burt's quotes for her disclosure`).toBeGreaterThan(0);
+    }
+  });
+
+  it('falls back to the first Jung-basis passage, cited in jungLine\'s voice, never the atlas\'s own link', () => {
+    // Mercury has no pair reading and, here, no Burt quote: the first Jung tie leads
+    const mercury = { ...data.bodies.find((x) => x.key === 'mercury')!, quotes: undefined };
+    const merc = resolvedOf(mercury);
+    const k = keyPassageOf(mercury, merc, data.readings, model)!;
+    const firstJung = merc.find((t) => t.basis === 'jung')!;
+    expect(k.voice).toBe('jung');
+    expect(k.cite).toBe(firstJung.cites![0]);
+    expect(k.quote).toBe(firstJung.cites![0].quote);
+    expect(k.footer).toBe(passageLine(model, firstJung.cites![0].work, firstJung.cites![0].locator));
+    expect(k.footer.startsWith('Jung · ')).toBe(true);
+  });
+
+  it('the basis chip\'s tooltip carries a culture\'s table as its source, and says what the basis is', () => {
+    expect(basisTitle('site')).toBe(BASIS_LABEL.site.title);
+    const t = basisTitle('inferred', 'planetary-gods table, Saturn × Babylonian (J: cw09ii ¶215)');
+    expect(t.startsWith(BASIS_LABEL.inferred.title)).toBe(true);
+    expect(t).toContain('Source: planetary-gods table, Saturn × Babylonian (J: cw09ii ¶215)');
+  });
+
+  it('declines to lead with anything when neither Burt nor Jung speaks for the body', () => {
+    const site = [{ body: 'uranus' as const, target: { type: 'family' as const, id: 'star' }, basis: 'site' as const, note: 'x' }];
+    expect(keyPassageOf({ key: 'uranus', quotes: undefined }, site, [], model)).toBeNull();
+  });
+
+  it('every Jung footer is written as jungLine writes it: the title, the year where one is given, the locator; never a raw work key', () => {
+    for (const b of data.bodies) for (const t of b.ties) for (const c of t.cites ?? []) {
+      const line = passageLine(model, c.work, c.locator);
+      expect(line, `${b.key} ${c.work}`).toBe(jungLine(passageCite(model, c.work, c.locator)));
+      expect(line.startsWith('Jung · '), line).toBe(true);
+      expect(line, line).not.toMatch(/\bcw\d|\(CW/i);
+    }
+  });
+
+  it('the year is printed exactly when the field dates that work, as jungLine prints it', () => {
+    const aion = passageLine(model, 'cw09ii', 'pdf p284');
+    const dated = passageCite(model, 'cw09ii', 'pdf p284').year;
+    expect(aion.includes(` · ${dated} · `) || !dated).toBe(true);
+    expect(aion.startsWith('Jung · Aion')).toBe(true);
+  });
+});
+
+describe('tie notes: restatements of the chip are not drawn; the rest are, in plain words', () => {
+  it('a note marked as a restatement is not drawn; any other note is', () => {
+    expect(tieNote({ note: 'anything', restates: true })).toBeNull();
+    expect(tieNote({ note: 'Jung makes this link.' })).toBe('Jung makes this link.');
+    expect(tieNote({ note: '   ' })).toBeNull();
+  });
+
+  it('every Jung note is drawn (the link Jung makes is the note)', () => {
+    for (const b of data.bodies) for (const t of b.ties) if (t.basis === 'jung') expect(tieNote(t), `${b.key}→${t.target.id}`).not.toBeNull();
+  });
+
+  it('no drawn note speaks of the vault, the sidecar, the generated sky, the scripts, the atlas\'s inference or a method', () => {
+    for (const b of data.bodies) for (const t of b.ties) {
+      const drawn = tieNote(t);
+      if (drawn === null) continue;
+      expect(drawn, `${b.key}→${t.target.id}`).not.toMatch(/vault|sidecar|generated|npm run|\(S\)|by inference|the atlas's inference|editorial/i);
+    }
+  });
+
+  it('a restating note is still in the data and still says what it says, for whoever reads the curation', () => {
+    const restating = data.bodies.flatMap((b) => b.ties).filter((t) => t.restates);
+    expect(restating.length).toBeGreaterThan(0);
+    for (const t of restating) expect(t.basis).not.toBe('jung');
+  });
+});
+
+describe('the card\'s words are the reader\'s, not the agent\'s', () => {
+  it('no culture source carries the vault\'s "(S)" marker', () => {
+    for (const cells of Object.values(data.cultures)) for (const c of Object.values(cells)) {
+      expect(c!.source, c!.source).not.toMatch(/\(S\)/);
+    }
   });
 });

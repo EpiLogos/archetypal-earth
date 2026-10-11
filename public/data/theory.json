@@ -1,0 +1,656 @@
+{
+ "version": 1,
+ "sections": [
+  {
+   "id": "self",
+   "name": "The Self",
+   "line": "Everything here turns on one centre. Jung calls it the self: not the ego but the whole psyche, conscious and unconscious together, known only through its symbols.",
+   "quotes": [
+    {
+     "text": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine). It stands for the psychic totality.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶426 (pdf p284)",
+      "print": "268"
+     }
+    },
+    {
+     "text": "Empirically, however, the self appears spontaneously in the shape of specific symbols, and its totality is discernible above all in the mandala and its countless variants.",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶426 (pdf p284)",
+      "print": "268"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "archetype",
+     "id": "self"
+    },
+    {
+     "type": "family",
+     "id": "mandala"
+    }
+   ]
+  },
+  {
+   "id": "energy",
+   "name": "Energy",
+   "line": "Jung's break with Freud began over one word. Libido stops meaning sexual desire and becomes psychic energy as such: a quantity that can flow into anything.",
+   "quotes": [
+    {
+     "text": "We would be better advised, therefore, when speaking of libido, to understand it as an energy-value which is able to communicate itself to any field of activity whatsoever, be it power, hunger, hatred, sexuality, or religion, without ever being itself a specific instinct.",
+     "cite": {
+      "work": "cw05",
+      "workTitle": "Symbols of Transformation",
+      "locator": "¶197 (pdf p137)"
+     }
+    },
+    {
+     "text": "All psychological phenomena can be considered as manifestations of energy, in the same way that all physical phenomena have been understood as energic manifestations ever since Robert Mayer",
+     "cite": {
+      "work": "cw04",
+      "workTitle": "Freud and Psychoanalysis",
+      "locator": "¶567 (pdf p230)"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "family",
+     "id": "sun"
+    },
+    {
+     "type": "family",
+     "id": "fire"
+    },
+    {
+     "type": "family",
+     "id": "serpent"
+    }
+   ]
+  },
+  {
+   "id": "compensation",
+   "name": "Compensation",
+   "line": "The unconscious does not only hold what we push away. It answers the conscious attitude by supplying what that attitude leaves out, which is why Jung read most dreams as compensations.",
+   "quotes": [
+    {
+     "text": "Whereas Adler restricts his concept of compensation to the balancing of inferiority feelings, I conceive it as functional adjustment in general, an inherent self-regulation of the psychic apparatus.",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶694 (pdf p384)"
+     }
+    },
+    {
+     "text": "in my experience the vast majority of dreams are compensatory",
+     "cite": {
+      "work": "cw07",
+      "workTitle": "Two Essays on Analytical Psychology",
+      "locator": "¶170 (pdf p93)"
+     }
+    },
+    {
+     "text": "They always stress the other side in order to maintain the psychic equilibrium.",
+     "cite": {
+      "work": "cw07",
+      "workTitle": "Two Essays on Analytical Psychology",
+      "locator": "¶170 (pdf p93)"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "lens",
+     "id": "dreams"
+    }
+   ]
+  },
+  {
+   "id": "enantiodromia",
+   "name": "Enantiodromia",
+   "line": "Push a one-sided attitude far enough and its opposite rises from the unconscious. Jung took the word from Heraclitus and used it for one life and for whole ages.",
+   "quotes": [
+    {
+     "text": "I use the term enantiodromia for the emergence of the unconscious opposite in the course of time",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶709 (pdf p390)"
+     }
+    },
+    {
+     "text": "every psychic development, whether individual or collective, possesses an optimum which, when exceeded, produces an enantiodromia, that is, turns into its opposite",
+     "cite": {
+      "work": "cw13",
+      "workTitle": "Alchemical Studies",
+      "locator": "¶294 (pdf p277)"
+     }
+    },
+    {
+     "text": "the steady forward movement no longer denotes an increase, but a decrease, in strength",
+     "cite": {
+      "work": "cw07",
+      "workTitle": "Two Essays on Analytical Psychology",
+      "locator": "¶114 (pdf p68)"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "lens",
+     "id": "aion"
+    }
+   ]
+  },
+  {
+   "id": "transcendent-function",
+   "name": "The transcendent function",
+   "line": "When conscious and unconscious are held together, rather than one defeating the other, something appears that neither side contained. Jung called that process the transcendent function.",
+   "quotes": [
+    {
+     "text": "This function of mediation between the opposites I have termed the transcendent function, by which I mean nothing mysterious, but merely a combined function of conscious and unconscious elements",
+     "cite": {
+      "work": "cw06",
+      "workTitle": "Psychological Types",
+      "locator": "¶184 (pdf p116)"
+     }
+    },
+    {
+     "text": "The psychological \"transcendent function\" arises from the union of conscious and unconscious contents.",
+     "cite": {
+      "work": "cw08",
+      "workTitle": "The Structure and Dynamics of the Psyche",
+      "locator": "¶131 (pdf p81)"
+     }
+    }
+   ],
+   "links": [
+    {
+     "type": "family",
+     "id": "coniunctio"
+    },
+    {
+     "type": "lens",
+     "id": "dynamics"
+    }
+   ]
+  }
+ ],
+ "number": {
+  "line": "Jung came to think numbers are found as much as invented: archetypes of order that run through psyche and matter alike. Marie-Louise von Franz worked that out number by number. The QL framework names six positions, #0 to #5, and lays the numbers one to six beside them. Walk the six: at each, the framework's words, von Franz on the number, and Jung on what the position names.",
+  "matheme": {
+   "text": "0/1=4+2=5→0",
+   "source": "W § IV"
+  },
+  "jung": [
+   {
+    "text": "From this it follows irrefutably that the unconscious uses number as an ordering factor.",
+    "cite": {
+     "work": "cw08",
+     "workTitle": "The Structure and Dynamics of the Psyche",
+     "locator": "¶870 (pdf p469)"
+    }
+   },
+   {
+    "text": "I must confess that I incline to the view that numbers were as much found as invented, and that in consequence they possess a relative autonomy analogous to that of the archetypes.",
+    "cite": {
+     "work": "cw08",
+     "workTitle": "The Structure and Dynamics of the Psyche",
+     "locator": "¶871 (pdf p469)"
+    }
+   },
+   {
+    "text": "Accordingly it would seem that natural numbers have an archetypal character.",
+    "cite": {
+     "work": "cw08",
+     "workTitle": "The Structure and Dynamics of the Psyche",
+     "locator": "¶871 (pdf p469)"
+    }
+   }
+  ],
+  "series": {
+   "text": "One comprises wholeness, two divides, repeats, and engenders symmetries, three centers the symmetries and initiates linear succession, four acts as a stabilizer by turning back to the one as well as bringing forth observables by creating boundaries, and so on.",
+   "cite": {
+    "work": "vonzfranz-number-time",
+    "workTitle": "Number and Time",
+    "locator": "pdf p86",
+    "print": "74"
+   }
+  },
+  "pauli": {
+   "text": "Pauli concluded that natural numbers are the most primitive archetypes—inside and outside at once, devised by mind and discovered as order.",
+   "source": "W § II"
+  },
+  "numbers": [
+   {
+    "n": 1,
+    "position": "#0",
+    "ql": {
+     "name": "The Origin / 0",
+     "text": "The indeterminate ground before anything is spoken. Pure capacity.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "One (unity, the monad)",
+     "source": "W § VI"
+    },
+    "line": "The ground before anything is said. Jung says only that the structure is given, found in every case; von Franz says the one already holds every number after it.",
+    "quotes": [
+     {
+      "text": "quantitatively it forms the unit, qualitatively it contains the whole sequence of natural numbers",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p74",
+       "print": "62"
+      }
+     },
+     {
+      "text": "in this manner the one becomes the principium individuationis",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p74",
+       "print": "62"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "The structure is something given, the precondition that is found to be present in every case.",
+      "cite": {
+       "work": "cw09i",
+       "workTitle": "The Archetypes and the Collective Unconscious",
+       "locator": "pdf p112"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "monad"
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "position": "#1",
+    "ql": {
+     "name": "State 00",
+     "text": "The indeterminate relating to the indeterminate. Pure potentiality, the psychoid shadow where forms remain asleep.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "Two (polarity, reflection)",
+     "source": "W § VI"
+    },
+    "line": "Two forms in the dark. Jung puts the archetype itself at the psychoid edge of the psyche, where it never reaches consciousness; von Franz hears two as rhythm before any line of time.",
+    "quotes": [
+     {
+      "text": "In this context, twoness signifies oscillation and rhythm, but not yet linear time.",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p108",
+       "print": "96"
+      }
+     },
+     {
+      "text": "The dualism of zero and one, or one and two, furthermore, contains within itself the potential concept of fourfoldness",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p112",
+       "print": "100"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "The archetype as such is a psychoid factor that belongs, as it were, to the invisible, ultraviolet end of the psychic spectrum.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p225"
+      }
+     },
+     {
+      "text": "It does not appear, in itself, to be capable of reaching consciousness.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p225"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "archetype",
+      "id": "shadow"
+     },
+     {
+      "type": "archetype",
+      "id": "syzygy"
+     }
+    ]
+   },
+   {
+    "n": 3,
+    "position": "#2",
+    "ql": {
+     "name": "State 01",
+     "text": "The indeterminate relating to the determinate. The emergence of form, the intrusion of the archetype into lived experience.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "Three (triad, synthesis)",
+     "source": "W § VI"
+    },
+    "line": "Form breaks through. Jung says an archetype arrives numinous and is never indifferent; von Franz says three is where the two poles become conscious, and ties three to time.",
+    "quotes": [
+     {
+      "text": "According to this view the three then represents the unitary aspect of the bipolar one-continuum that has become conscious.",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p76",
+       "print": "64"
+      }
+     },
+     {
+      "text": "This is the reason why in number symbolism three is so often connected with time.",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p137",
+       "print": "125"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "the archetypes have, when they appear, a distinctly numinous character which can only be described as \"spiritual,\" if \"magical\" is too strong a word.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p217"
+      }
+     },
+     {
+      "text": "It can be healing or destructive, but never indifferent",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p217"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "trinity"
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "position": "#3",
+    "ql": {
+     "name": "State 10",
+     "text": "The determinate relating to the indeterminate. The ego reaching back toward the unconscious, the act of symbol-making.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "Four (quaternity, stability)",
+     "source": "W § VI"
+    },
+    "line": "The ego turns back to the unconscious and makes a symbol. Jung calls the joint work of the two the transcendent function; von Franz finds four in every attempt at wholeness.",
+    "quotes": [
+     {
+      "text": "The fact that mankind's repeated attempts to establish an orientation toward wholeness possess a quaternary structure appears to correspond to an archetypal psychic structural predisposition in man.",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p127",
+       "print": "115"
+      }
+     },
+     {
+      "text": "They are as a rule quaternities (or their multiples).",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "¶870 (pdf p469)"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "The tendencies of the conscious and the unconscious are the two factors that together make up the transcendent function.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p85"
+      }
+     },
+     {
+      "text": "A view which interprets the symbolic expression as the best possible formulation of a relatively unknown thing, which for that reason cannot be more clearly or characteristically represented, is symbolic.",
+      "cite": {
+       "work": "cw06",
+       "workTitle": "Psychological Types",
+       "locator": "¶815 (pdf p430)"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "quaternity"
+     },
+     {
+      "type": "family",
+      "id": "mandala"
+     }
+    ],
+    "section": "transcendent-function"
+   },
+   {
+    "n": 5,
+    "position": "#4",
+    "ql": {
+     "name": "State 11",
+     "text": "The determinate relating to the determinate. Conscious rationality, the explicit mapping of known terms.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "Five (pentad, quintessence)",
+     "source": "W § VI"
+    },
+    "line": "Consciousness maps what it knows. Jung's directed thinking follows outer things in their causal order, and the ego is what it all relates to; von Franz finds five in the philosophers' stone, the quinta essentia.",
+    "quotes": [
+     {
+      "text": "It is included in the concept of the “philosophers’ stone” as the quinta essentia.",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p77",
+       "print": "65"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "by means of which we imitate the successiveness of objectively real things, so that the images inside our mind follow one another in the same strictly causal sequence as the events taking place outside it.",
+      "cite": {
+       "work": "cw05",
+       "workTitle": "Symbols of Transformation",
+       "locator": "¶11 (pdf p41)"
+      }
+     },
+     {
+      "text": "We understand the ego as the complex factor to which all conscious contents are related.",
+      "cite": {
+       "work": "cw09ii",
+       "workTitle": "Aion: Researches into the Phenomenology of the Self",
+       "locator": "pdf p15"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "quincunx"
+     },
+     {
+      "type": "family",
+      "id": "lapis"
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "position": "#5",
+    "ql": {
+     "name": "The Synthesis / 1",
+     "text": "The final return where the structure recognises itself. The quintessence that gathers the fourfold back into unity.",
+     "source": "W § I"
+    },
+    "gloss": {
+     "text": "Six (hexad, perfect completion)",
+     "source": "W § VI"
+    },
+    "line": "The return. Jung's self is the centre and the whole circumference at once; von Franz says six is the first number equal to the sum of its divisors.",
+    "quotes": [
+     {
+      "text": "six is the first numeral of the series to represent the sum of its divisors (one, two, and three)",
+      "cite": {
+       "work": "vonzfranz-number-time",
+       "workTitle": "Number and Time",
+       "locator": "pdf p49",
+       "print": "37"
+      }
+     }
+    ],
+    "jung": [
+     {
+      "text": "The self is not only the centre, but also the whole circumference which embraces both conscious and unconscious; it is the centre of this totality, just as the ego is the centre of consciousness.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶44 (pdf p69)"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "archetype",
+      "id": "self"
+     }
+    ],
+    "section": "self"
+   }
+  ],
+  "psychoid": {
+   "line": "What holds this together is the psychoid: Jung's word for the layer where the archetype reaches past the psyche into matter. Number is the plainest case of it.",
+   "quotes": [
+    {
+     "text": "on account of its “irrepresentable” nature I have called it “psychoid.”",
+     "cite": {
+      "work": "cw08",
+      "workTitle": "The Structure and Dynamics of the Psyche",
+      "locator": "¶840 (pdf p448)"
+     }
+    },
+    {
+     "text": "Jung expressly stated that his archetypes possess a “psychoid” aspect overlapping outer material reality.",
+     "cite": {
+      "work": "vonzfranz-number-time",
+      "workTitle": "Number and Time",
+      "locator": "pdf p44",
+      "print": "32"
+     }
+    }
+   ],
+   "ql": {
+    "text": "The archetype, as Jung finally understood it, is psychoid: it is as much inside as outside, an ordering pattern that manifests simultaneously in the soul's images and the world's matter.",
+    "source": "W § I"
+   }
+  },
+  "time": {
+   "line": "And number is bound up with time. Von Franz says two gives rhythm before there is any line of time, and three starts the line; Jung's Aion is time that holds the opposites; synchronicity is a meaning that crosses causal time.",
+   "quotes": [
+    {
+     "text": "In other words, linear or cyclical time does not initially exist.",
+     "cite": {
+      "work": "vonzfranz-number-time",
+      "workTitle": "Number and Time",
+      "locator": "pdf p107",
+      "print": "95"
+     }
+    },
+    {
+     "text": "This is the deus leontocephalus, that is, Aion, meaning infinitely long time, the god of time who combines the opposites.",
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "workTitle": "Children's Dreams: Notes from the Seminar 1936-1940",
+      "locator": "pdf p85"
+     }
+    },
+    {
+     "text": "psychically relative space-time continuum that is characteristic",
+     "cite": {
+      "work": "cw09ii",
+      "workTitle": "Aion: Researches into the Phenomenology of the Self",
+      "locator": "¶45 (pdf p36)"
+     }
+    }
+   ],
+   "quaternio": {
+    "intro": {
+     "text": "We finally agreed on the following quaternio:",
+     "cite": {
+      "work": "cw08",
+      "workTitle": "The Structure and Dynamics of the Psyche",
+      "locator": "¶963 (pdf p526)"
+     }
+    },
+    "terms": [
+     "Indestructible Energy",
+     "Space-Time Continuum",
+     "Constant Connection through Effect (Causality)",
+     "Inconstant Connection through Contingence, Equivalence, or \"Meaning\" (Synchronicity)"
+    ]
+   },
+   "vaneenwyk": {
+    "line": "John Van Eenwyk reads the same split as two kinds of dynamics: what every psyche does, and what one life does with it through time.",
+    "quotes": [
+     {
+      "text": "Jung developed the idea that the diachronic dynamics of development unfold from the synchronic dynamics.",
+      "cite": {
+       "work": "van-eenwyk",
+       "workTitle": "Archetypes & Strange Attractors",
+       "locator": "pdf p19",
+       "print": "18"
+      },
+      "voice": "vaneenwyk"
+     },
+     {
+      "text": "Then, the relatively automatic processes of synchronic dynamics can generate diachronic dynamics, which are the developmental processes of the individual.",
+      "cite": {
+       "work": "van-eenwyk",
+       "workTitle": "Archetypes & Strange Attractors",
+       "locator": "pdf p35",
+       "print": "34"
+      },
+      "voice": "vaneenwyk"
+     }
+    ]
+   }
+  }
+ }
+}

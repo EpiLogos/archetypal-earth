@@ -1,0 +1,27 @@
+{
+  "_note": "Jung's own words for the three practice tools: the method (amplification, not free association), the dream as compensation, and synchronicity with the run of chance it must be told from. Quotations name only their work and words; `npm run practice` places each in the read-only corpus. `para` is the ¶ the vault's concept notes give; where the corpus marker disagrees the pdf page alone is cited.",
+  "version": 1,
+  "dreams": {
+    "method": [
+      { "work": "sem-childrens-dreams", "quote": "This method of amplification is an expansion, a conscious enrichment. I make the dreamer focus his interest on the image" },
+      { "work": "sem-childrens-dreams", "quote": "This must not be confounded with free association, in which we glide from one association to another, without regard to the initial idea" }
+    ],
+    "portrait": { "work": "cw08", "para": 505, "quote": "the dream is a spontaneous self-portrayal, in symbolic form, of the actual situation in the unconscious" },
+    "compensation": [
+      { "work": "cw18", "quote": "As a rule the meaning of a dream is compensatory to the conscious attitude, i.e., it adds to the latter what was lacking in it" },
+      { "work": "cw07", "para": 170, "quote": "in my experience the vast majority of dreams are compensatory" }
+    ]
+  },
+  "coincidences": {
+    "definition": { "work": "cw08", "para": 850, "quote": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state" },
+    "factors": [
+      { "work": "cw08", "para": 858, "quote": "An unconscious image comes into consciousness either directly (i.e., literally) or indirectly (symbolized or suggested) in the form of a dream, idea, or premonition" },
+      { "work": "cw08", "para": 858, "quote": "An objective situation coincides with this content" }
+    ],
+    "series": [
+      { "work": "cw08", "quote": "Occasionally there is a trebling or even more, so that Kammerer" },
+      { "work": "cw08", "quote": "In the majority of such cases there is not even the remotest probability of a causal connection between the coinciding events" },
+      { "work": "cw08", "quote": "Kammerer's factual material contains nothing but runs of chance whose only \"law\" is probability" }
+    ]
+  }
+}

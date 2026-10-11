@@ -1,5 +1,5 @@
 {
- "_note": "Curated Commons search queries (2-4 each). Optional per entry: pin (a File: title, forces it), require (groups of alternative tokens that must all appear in title/description/categories), exclude (substrings that ban a candidate), exhaustive (search every query before picking).",
+ "_note": "Curated Commons search queries (2-4 each). Optional per entry: pin (a File: title, forces it), require (groups of alternative tokens that must all appear in title/description/categories), exclude (substrings that ban a candidate), exhaustive (search every query before picking), relaxed (pins only: lower resolution floor and a wider aspect band, for tall figures and friezes), credit (hand-written credit baked verbatim, overriding the Commons Artist/Credit clean-up), title (hand-written title baked verbatim).",
  "archetypes": {
   "self": {
    "queries": [
@@ -323,7 +323,8 @@
     "Dioscuri Castor Pollux statue",
     "twin gods relief",
     "Gemini twins medieval manuscript"
-   ]
+   ],
+   "pin": "File:Dante Gabriel Rossetti - How They Met Themselves (1851-60).jpg"
   },
   "dove": {
    "queries": [
@@ -428,7 +429,8 @@
     "Burne-Jones Holy Grail tapestry",
     "Quest of the Holy Grail Galahad manuscript",
     "Lancelot Grail vision illumination"
-   ]
+   ],
+   "credit": "Edward Burne-Jones (design and figures); William Morris and John Henry Dearle (Morris & Co.)"
   },
   "head": {
    "queries": [
@@ -538,7 +540,8 @@
     "philosophers stone alchemy engraving",
     "Lapis philosophorum emblem",
     "alchemy stone Splendor Solis"
-   ]
+   ],
+   "pin": "File:The Twelfth Key of Basil Valentine. Wellcome M0012405.jpg"
   },
   "lingam-yoni": {
    "queries": [
@@ -619,7 +622,8 @@
     "Melusine Lusignan manuscript illumination",
     "Melusine woodcut",
     "Melusine fairy serpent medieval"
-   ]
+   ],
+   "pin": "File:Bookofmelusine.jpg"
   },
   "mercurius": {
    "queries": [
@@ -735,7 +739,7 @@
     "Orphic egg Phanes relief",
     "Splendor Solis vessel egg"
    ],
-   "pin": "File:Splendor Solis 09 hermaphrodite with egg.jpg"
+   "pin": "File:Michael Maier Atalanta Fugiens Emblem 21.jpeg"
   },
   "phoenix": {
    "queries": [
@@ -871,7 +875,8 @@
     "Mercurius serpent alchemy engraving",
     "Minoan snake goddess",
     "brazen serpent Moses painting"
-   ]
+   ],
+   "pin": "File:Double headed turquoise serpentAztecbritish museum.jpg"
   },
   "shiva": {
    "queries": [
@@ -988,7 +993,8 @@
     "hitler",
     "flag"
    ],
-   "relaxed": true
+   "relaxed": true,
+   "pin": "File:A Swastika at the temple entrance gate, India.jpg"
   },
   "tao": {
    "queries": [
@@ -1220,7 +1226,8 @@
    "queries": [
     "evangelist writing codex Lindisfarne portrait",
     "scribe manuscript illumination medieval"
-   ]
+   ],
+   "credit": "Joris Hoefnagel (illumination), Georg Bocskay (calligraphy), J. Paul Getty Museum"
   },
   "adam": {
    "queries": [
@@ -1508,7 +1515,8 @@
    "queries": [
     "gazelle hunt Assyrian relief",
     "gazelles mosaic early Christian floor"
-   ]
+   ],
+   "pin": "File:Mosaic of Leopard Chasing a Gazelle, Roman, Homs, Syria, 450-462 AD, polychrome marble tesserae - Chazen Museum of Art - DSC01919.JPG"
   },
   "ghost": {
    "queries": [
@@ -1558,13 +1566,15 @@
    "queries": [
     "harpy tomb Xanthos relief",
     "Harpies Phineus vase painting"
-   ]
+   ],
+   "pin": "File:Harpy tomb lycia I (cropped).jpg"
   },
   "herb-of-life": {
    "queries": [
     "Vienna Dioscorides plants illustration",
     "Tacuinum Sanitatis herbs miniature"
-   ]
+   ],
+   "pin": "File:Dioscorides describing the mandrake Wellcome L0068372.jpg"
   },
   "holy-man": {
    "queries": [
@@ -1645,7 +1655,8 @@
     "song",
     "album"
    ],
-   "pin": "File:Reliquary for Cintamani (Chōfukuji Temple).jpg"
+   "pin": "File:Reliquary for Cintamani (Chōfukuji Temple).jpg",
+   "credit": "Unknown photographer, 1915, via National Diet Library (angle adjusted by uploader 雪野滾滾)"
   },
   "jupiter": {
    "queries": [
@@ -1771,7 +1782,8 @@
     "sheriff",
     "hotel",
     "washington"
-   ]
+   ],
+   "pin": "File:Plate 8 from Amphitheatrum Sapientiae Aeternae, Solius, Verae (Amphitheatre of the Only True Eternal Wisdom) - DPLA - 0952df61a726436e9ae3bce827e57ec6.jpg"
   },
   "persona": {
    "queries": [
@@ -2243,7 +2255,8 @@
      "circular dance"
     ]
    ],
-   "relaxed": true
+   "relaxed": true,
+   "pin": "File:The Kaaba during Hajj - edited.jpg"
   },
   "clairvoyance": {
    "queries": [
@@ -2352,7 +2365,8 @@
      "castor",
      "pollux"
     ]
-   ]
+   ],
+   "pin": "File:Rome Capitoline Dioscuri statues.jpg"
   },
   "ecclesia-synagoga": {
    "queries": [
@@ -2926,7 +2940,7 @@
     "football",
     "as Roma"
    ],
-   "pin": "File:Central Italian 15th or 16th Century (Possibly Roman 15th or 16th Century), The Capitoline Wolf Suckling Romulus and Remus, late 15th - early 16th century, NGA 43727.jpg"
+   "pin": "File:Leonardo da Vinci - Studies of the foetus in the womb.jpg"
   },
   "playing-card": {
    "queries": [
@@ -2974,7 +2988,7 @@
     "peary",
     "flag"
    ],
-   "pin": "File:Mithras tauroctony Louvre Ma3441.jpg"
+   "pin": "File:Chart North and South Pole Star Map 02.jpg"
   },
   "premonition": {
    "queries": [
@@ -3054,7 +3068,8 @@
     "film",
     "movie",
     "basketball"
-   ]
+   ],
+   "pin": "File:Luceria Quincunx 139016.jpg"
   },
   "radioactive-nucleus": {
    "queries": [
@@ -3077,7 +3092,8 @@
     "album",
     "song",
     "film"
-   ]
+   ],
+   "pin": "File:Cloud Chamber Photo of Heavy Nucleus.jpg"
   },
   "ragnarok": {
    "queries": [
@@ -3146,7 +3162,7 @@
     "album",
     "film"
    ],
-   "pin": "File:Roman - Shepherd Carrying Lamb - Walters 2353.jpg"
+   "pin": "File:Good Shepherd (Callisto catacomb).jpg"
   },
   "river": {
    "queries": [
@@ -3185,7 +3201,8 @@
      "calligraphy"
     ]
    ],
-   "relaxed": true
+   "relaxed": true,
+   "pin": "File:Enso.jpg"
   },
   "saturn": {
    "queries": [
@@ -3318,7 +3335,7 @@
     "carisoprodol",
     "Brave New World"
    ],
-   "pin": "File:010 Churning Wall at Angkor Wat, Cambodia.jpg"
+   "pin": "File:Sagar manthan (painting) circa 1820.jpg"
   },
   "soul-image": {
    "queries": [
@@ -3539,7 +3556,7 @@
     "Teenage Mutant",
     "tortoiseshell"
    ],
-   "pin": "File:Depiction of Kurma at the Angkor Wat.JPG"
+   "pin": "File:Vishnu in his avatar as Kurma, the tortoise. Wellcome L0043633.jpg"
   },
   "totem-animal": {
    "queries": [
@@ -3658,7 +3675,8 @@
      "Vajrapani"
     ]
    ],
-   "exclude": []
+   "exclude": [],
+   "pin": "File:Vajra, Tibet, 11th-12th century, iron and brass - Berkeley Art Museum and Pacific Film Archive - DSC04056.JPG"
   },
   "viriditas": {
    "queries": [
@@ -3933,7 +3951,8 @@
    "exclude": [
     "metal",
     "album"
-   ]
+   ],
+   "pin": "File:Houghton Typ 515.38.456a - Totentanz, 30.jpg"
   },
   "greening-tree": {
    "queries": [
@@ -3947,7 +3966,8 @@
      "foliate",
      "greening"
     ]
-   ]
+   ],
+   "pin": "File:Ta Prohm Angkor ruins and trees.jpg"
   },
   "abraxas": {
    "queries": [
@@ -3972,7 +3992,8 @@
      "gilgamesh",
      "izdubar"
     ]
-   ]
+   ],
+   "pin": "File:Hero mastering a lion, AO19862 (p1020244).jpg"
   },
   "pleroma": {
    "queries": [
@@ -4011,6 +4032,37 @@
      "dragon"
     ]
    ]
+  },
+  "kabir": {
+   "pin": "File:Painting of Bhagat Kabir weaving, with his wife and a musician, Punjab Plain, circa late 19th century.jpg"
+  },
+  "desert": {
+   "pin": "File:Erg Chebbi sunset.jpg"
+  },
+  "helios": {
+   "pin": "File:Museum of Anatolian Civiliations Roman Period Helios in 2014 01.jpg"
+  },
+  "magic-mirror": {
+   "pin": "File:John Dee's mirror British Museum 26 07 2013.jpg"
+  },
+  "frog": {
+   "pin": "File:Angry frog preparing tea - woodblock print by Matsumoto Hoji.jpg"
+  },
+  "caduceus": {
+   "pin": "File:Winged goddess Cdm Paris 392.jpg"
+  },
+  "blood-sacrifice": {
+   "pin": "File:MANNapoli 9112 Sacrifice Iphigenia painting.jpg"
+  },
+  "breast-motif": {
+   "pin": "File:Maria Lactans-Hans Memling (Workshop)-WUS00997.jpg"
+  },
+  "goddess-with-flower-cyprus-stone": {
+   "pin": "File:Déesse coiffée d'une couronne tourelée (Louvre, N 3498).jpg",
+   "relaxed": true
+  },
+  "mother-goddesses-india": {
+   "pin": "File:The Seven Mother Goddesses (Matrikas) Flanked by Shiva-Virabhadra and Ganesha, Lord of Obstacles LACMA M.80.157 (4 of 4).jpg"
   }
  },
  "occurrences": {
@@ -4094,7 +4146,9 @@
     [
      "ripley"
     ]
-   ]
+   ],
+   "pin": "File:Ripley (George) (1415?-1490) Wellcome L0070069.jpg",
+   "title": "Ripley scroll, 1588 copy: column, dragon, lion and bird panel"
   },
   "melusina-anima-ripley-scrowle-bm-sloane-5025-1588": {
    "queries": [
@@ -4342,7 +4396,8 @@
      "dreifaltigkeit",
      "trinity"
     ]
-   ]
+   ],
+   "pin": "File:Das buch der heiligen Dreifaltigkeit. Wellcome L0026659.jpg"
   },
   "homunculi-souls-codex-rhenoviensis-15c": {
    "queries": [
@@ -4674,7 +4729,8 @@
     [
      "farnese"
     ]
-   ]
+   ],
+   "pin": "File:Atlante farnese, II sec., 6374, 04.JPG"
   },
   "fish-abercius-inscription-phrygia-200": {
    "queries": [
@@ -4686,7 +4742,7 @@
      "abercius"
     ]
    ],
-   "pin": "File:XV01 - Roma, Museo civiltà romana - Iscrizione di Abercio - Foto Giovanni Dall'Orto 12-Apr-2008.jpg"
+   "pin": "File:Cippo di Abercio, fine II - inizi III sec. -FG6.jpg"
   },
   "fish-abericius-inscription-phrygia-3c": {
    "queries": [
@@ -4698,7 +4754,7 @@
      "abercius"
     ]
    ],
-   "pin": "File:Cippo di Abercio, fine II - inizi III sec. -FG2.jpg"
+   "pin": "File:Ricostruzione moderna del Cippo di Abercio -FG.jpg"
   },
   "fish-pectorios-inscription-autun-4c": {
    "queries": [
@@ -4967,7 +5023,9 @@
    ],
    "exclude": [
     "night"
-   ]
+   ],
+   "pin": "File:\"Parade chariot in Djaghernaut,\" a wood engraving by E. Therond, from 'Le Tour du Monde', 1869 (though it looks more like the kind of chariot used at the *Chamundi temple in Mysore* - a larger scan from a reprint edition, 1881*.jpg",
+   "title": "Parade chariot in Djaghernaut, wood engraving, 1869"
   },
   "shri-yantra-serpent-power": {
    "queries": [
@@ -5314,7 +5372,8 @@
     [
      "gilgamesh"
     ]
-   ]
+   ],
+   "pin": "File:British Museum Flood Tablet 1.jpg"
   },
   "fish-vishnu-matsya-vedas-india": {
    "queries": [

@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "concepts": [
+    {
+      "id": "strange-attractor",
+      "name": "Attractor-generating pattern",
+      "quote": {
+        "text": "resemble the archetypes in their self-organized self-similarity across scale",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 67"
+        }
+      },
+      "familyIds": [
+        "mandala",
+        "serpent",
+        "tree",
+        "spiral",
+        "uroboros",
+        "circle"
+      ],
+      "jung": {
+        "text": "a kind of readiness to produce over and over again the same or similar mythical ideas",
+        "cite": {
+          "workTitle": "Two Essays on Analytical Psychology",
+          "year": "",
+          "locator": "¶109 (pdf p64)",
+          "work": "cw07"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "alternating-current",
+      "name": "Energy as an oscillation between poles",
+      "quote": {
+        "text": "Archetypes play a key role in the synchronic dynamics of individuation by mobilizing psychic energy into a kind of alternating current between consciousness and the unconscious.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 28"
+        }
+      },
+      "familyIds": [
+        "sun",
+        "fire",
+        "serpent",
+        "water",
+        "sun-hero",
+        "helios"
+      ],
+      "jung": {
+        "text": "a current of energy necessarily presupposes two different states, or poles, without which there can be no current",
+        "cite": {
+          "workTitle": "Psychological Types",
+          "year": "",
+          "locator": "¶337 (pdf p194)",
+          "work": "cw06"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "cascade-into-chaos",
+      "name": "Oscillation cascading into chaos",
+      "quote": {
+        "text": "The oscillatory nature of the tension of opposites leads to chaos when the oscillations themselves begin to oscillate",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 112"
+        }
+      },
+      "familyIds": [
+        "dismemberment",
+        "prima-materia",
+        "nigredo",
+        "nekyia",
+        "night-sea-journey",
+        "dragon"
+      ],
+      "jung": {
+        "text": "what looked like death and destruction will settle down into a latent state of concord",
+        "cite": {
+          "workTitle": "Mysterium Coniunctionis",
+          "year": "",
+          "locator": "¶506 (pdf p272)",
+          "work": "cw14"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "symmetry-building",
+      "name": "Symmetry-building bifurcation",
+      "quote": {
+        "text": "Thus, they make it possible for “either-or” situations to become more symmetrical",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 91"
+        }
+      },
+      "familyIds": [
+        "coniunctio",
+        "divine-pair",
+        "yin-yang",
+        "tao",
+        "quaternity",
+        "cross"
+      ],
+      "jung": {
+        "text": "The confrontation of the two positions generates a tension charged with energy and creates a living, third thing",
+        "cite": {
+          "workTitle": "The Structure and Dynamics of the Psyche",
+          "year": "",
+          "locator": "¶189 (pdf p102)",
+          "work": "cw08"
+        }
+      },
+      "render": "julia"
+    },
+    {
+      "id": "symbol-emergence",
+      "name": "Symbols: chaos first, then symmetry",
+      "quote": {
+        "text": "Thus, symbols first generate chaos, then build symmetry.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 114"
+        }
+      },
+      "familyIds": [
+        "prima-materia",
+        "vessel",
+        "coniunctio",
+        "lapis",
+        "serpent",
+        "fire"
+      ],
+      "jung": {
+        "text": "The symbols act as transformers, their function being to convert libido from a “lower” into a “higher” form.",
+        "cite": {
+          "workTitle": "Symbols of Transformation",
+          "year": "",
+          "locator": "¶344 (pdf p215)",
+          "work": "cw05"
+        }
+      },
+      "render": "mandelbrot"
+    },
+    {
+      "id": "phase-transition",
+      "name": "Enantiodromia as phase transition",
+      "quote": {
+        "text": "For order is never pure. Like the yin and the yang, it carries within it the potential to turn into its opposite. The same is true for chaos.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 171"
+        }
+      },
+      "familyIds": [
+        "yin-yang",
+        "tao",
+        "trickster-figure",
+        "mercurius",
+        "dragon",
+        "antichrist"
+      ],
+      "jung": {
+        "text": "shadow contains within it the seed of an enantiodromia, of a conversion into its opposite.",
+        "cite": {
+          "workTitle": "The Archetypes and the Collective Unconscious",
+          "year": "",
+          "locator": "¶488 (pdf p283)",
+          "work": "cw09i"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "homoclinic-point",
+      "name": "Homoclinic point",
+      "quote": {
+        "text": "a homoclinic point, which designates not only where a dynamic becomes unstable, but where it becomes stable as well.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 62"
+        }
+      },
+      "familyIds": [
+        "spiral",
+        "labyrinth",
+        "uroboros",
+        "yin-yang"
+      ],
+      "jung": {
+        "text": "every psychic development, whether individual or collective, possesses an optimum which, when exceeded, produces an enantiodromia, that is, turns into its opposite.",
+        "cite": {
+          "workTitle": "Alchemical Studies",
+          "year": "",
+          "locator": "¶294 (pdf p277)",
+          "work": "cw13"
+        }
+      },
+      "render": "julia"
+    },
+    {
+      "id": "self-organization",
+      "name": "Compensation as self-organization",
+      "quote": {
+        "text": "Because the shadow compensates consciousness, whenever we think we know what the shadow is, its opposite automatically begins to emerge from the unconscious.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 93"
+        }
+      },
+      "familyIds": [
+        "dragon",
+        "nigredo",
+        "sol-niger",
+        "antichrist",
+        "desert",
+        "sulphur",
+        "persona"
+      ],
+      "jung": {
+        "text": "Since the psyche is a self-regulating system, just as the body is",
+        "cite": {
+          "workTitle": "The Structure and Dynamics of the Psyche",
+          "year": "",
+          "locator": "pdf p91",
+          "work": "cw08"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "stuck-attractor",
+      "name": "A symptom as a stuck attractor",
+      "quote": {
+        "text": "It simply repeats itself over and over.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 129"
+        }
+      },
+      "familyIds": [
+        "mother-goddess",
+        "dual-mother",
+        "wolf",
+        "monster",
+        "dragon"
+      ],
+      "jung": {
+        "text": "A conscious capacity for one-sidedness is a sign of the highest culture, but involuntary one-sidedness, i.e., the inability to be anything but one-sided, is a sign of barbarism.",
+        "cite": {
+          "workTitle": "Psychological Types",
+          "year": "",
+          "locator": "¶346 (pdf p197)",
+          "work": "cw06"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "chaotic-edge",
+      "name": "Health at the edge of chaos",
+      "quote": {
+        "text": "chaos is not only unavoidable, but necessary.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 13"
+        }
+      },
+      "familyIds": [
+        "prima-materia",
+        "nigredo",
+        "night-sea-journey",
+        "nekyia"
+      ],
+      "jung": {
+        "text": "begins to have an accelerating and intensifying effect on the conscious process",
+        "cite": {
+          "workTitle": "The Structure and Dynamics of the Psyche",
+          "year": "",
+          "locator": "¶160 (pdf p91)",
+          "work": "cw08"
+        }
+      },
+      "render": "lorenz"
+    },
+    {
+      "id": "fractal-irreducibility",
+      "name": "Interpretation that never closes",
+      "quote": {
+        "text": "In effect, the constructive approach is asymptotic: it approaches certainty, but never achieves it.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 106"
+        }
+      },
+      "familyIds": [
+        "vessel",
+        "god-image",
+        "anthropos",
+        "lapis",
+        "tree"
+      ],
+      "jung": {
+        "text": "a vessel which we can never empty, and never fill",
+        "cite": {
+          "workTitle": "The Archetypes and the Collective Unconscious",
+          "year": "",
+          "locator": "¶301 (pdf p190)",
+          "work": "cw09i"
+        }
+      },
+      "render": "mandelbrot"
+    },
+    {
+      "id": "mandala-attractor",
+      "name": "Mandala and fractal attractor",
+      "quote": {
+        "text": "Could mandalas and fractal attractors be two versions of the same reality?",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 111"
+        }
+      },
+      "familyIds": [
+        "mandala",
+        "quaternity",
+        "circle",
+        "cross",
+        "lapis"
+      ],
+      "jung": {
+        "text": "These structures not only express order, they also create it.",
+        "cite": {
+          "workTitle": "The Structure and Dynamics of the Psyche",
+          "year": "",
+          "locator": "¶870 (pdf p469)",
+          "work": "cw08"
+        }
+      },
+      "render": "mandelbrot"
+    },
+    {
+      "id": "relationship",
+      "name": "Relationship turns chaos orderly",
+      "quote": {
+        "text": "Chaos becomes orderly when it finds its reflection.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 155"
+        }
+      },
+      "familyIds": [
+        "divine-pair",
+        "anima-figure",
+        "soul-image",
+        "maiden",
+        "coniunctio"
+      ],
+      "render": "julia"
+    },
+    {
+      "id": "manifold",
+      "name": "The symbol as a manifold",
+      "quote": {
+        "text": "We go from stability to instability and hopefully—back again.",
+        "cite": {
+          "workTitle": "Archetypes & Strange Attractors",
+          "year": "1997",
+          "locator": "p. 69"
+        }
+      },
+      "familyIds": [
+        "sun",
+        "serpent",
+        "fire",
+        "tree",
+        "water"
+      ],
+      "jung": {
+        "text": "The psychological mechanism that transforms energy is the symbol.",
+        "cite": {
+          "workTitle": "The Structure and Dynamics of the Psyche",
+          "year": "",
+          "locator": "¶88 (pdf p57)",
+          "work": "cw08"
+        }
+      },
+      "render": "julia"
+    }
+  ]
+}

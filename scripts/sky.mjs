@@ -300,7 +300,7 @@ async function get(pathname, params = {}) {
   let res;
   try { res = await fetch(url, { signal: AbortSignal.timeout(300_000) }); }
   catch (error) {
-    throw new Error(`no ephemeris sidecar at ${SIDECAR_URL} (${error.cause?.code || error.message}). Start it with ephemeris/run.sh (setup: docs/SKY-SOURCES.md). The sky layer is never fabricated without it.`);
+    throw new Error(`no ephemeris sidecar at ${SIDECAR_URL} (${error.cause?.code || error.message}). Start it with ephemeris/run.sh (setup: ProjectCentral/docs/SKY-SOURCES.md). The sky layer is never fabricated without it.`);
   }
   if (!res.ok) throw new Error(`sidecar ${url.pathname} answered ${res.status}: ${await res.text()}`);
   return res.json();

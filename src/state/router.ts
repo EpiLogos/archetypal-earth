@@ -1,6 +1,7 @@
 // URL hash <-> state, so every state is linkable and Back works.
 import type { Subject } from '../data/model';
-import { WORLD, type AppState, type ThreadTarget } from './store';
+import { astrologyAt, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
+import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 
 export interface Resolver {
   hasArchetype(id: string): boolean;
@@ -13,23 +14,52 @@ export interface Resolver {
   hasHistorySelection?(reading: string, kind: string, id: string): boolean;
   hasRedBookStop?(id: string): boolean;
   hasBody?(id: string): boolean;
+  /** the reading Aion opens on when no reading is named (the same one its switch opens) */
+  defaultReading?(): string | undefined;
 }
 
 export interface Parsed {
   state: AppState;
   /** a time cursor requested by the hash (#/y/1600) */
   year?: number;
+  /** the field filter the hash carries after `?` (empty when none) */
+  filter: FieldFilter;
+  /**
+   * An old birth-sky link (`#/sky/birth/<local>/<lat>/<lon>`) carried a birth in the URL. It opens Astrology with the form
+   * filled from it, nothing saved; the caller replaces the hash so the moment does not stay in history.
+   */
+  birthPrefill?: BirthPrefill;
+}
+
+export interface BirthPrefill { date: string; time: string | null; lat: number; lon: number }
+
+/** The birth an old link names, or null when it does not parse as a date, a time and a place on the Earth. */
+export function parseBirthLink(local: string, lat: string, lon: string): BirthPrefill | null {
+  const m = /^(\d{4}-\d{2}-\d{2})(?:T(\d{2}:\d{2}))?/.exec(local ?? '');
+  const la = Number(lat), lo = Number(lon);
+  if (!m || !Number.isFinite(la) || !Number.isFinite(lo) || Math.abs(la) > 90 || Math.abs(lo) > 180) return null;
+  return { date: m[1], time: m[2] ?? null, lat: la, lon: lo };
+}
+
+/** The hash for a state with the field filter appended (`#/a/self?w=cw12`). */
+export function hashWithFilter(s: AppState, f: FieldFilter): string {
+  const q = filterQuery(f);
+  return q ? `${stateToHash(s)}?${q}` : stateToHash(s);
 }
 
 const enc = encodeURIComponent;
 
-/** `#/sky`, `#/sky/<body>`, `#/sky/birth/<local>/<lat>/<lon>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. */
-const num = (n: number) => String(Number(n.toFixed(4)));
+/** The reading Aion opens on when no reading is named: the first of the authored readings. The switch and `#/aion` both use it. */
+export function defaultReadingId(readings: readonly { id: string }[]): string | undefined {
+  return readings[0]?.id;
+}
+
+/** `#/sky`, `#/sky/<body>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. A natal sky is linked only through Astrology (`#/astrology/<chart>/<body>`), which names a chart, never a birth. */
 
 export function stateToHash(s: AppState): string {
+  if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
   if (s.sky) {
     const tail = `${s.sky.body ? `/${enc(s.sky.body)}` : ''}${s.sky.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
-    if (s.sky.birth) return `#/sky/birth/${enc(s.sky.birth.local)}/${num(s.sky.birth.lat)}/${num(s.sky.birth.lon)}${tail}`;
     return `#/sky${tail}`;
   }
   if (s.history) {
@@ -39,6 +69,12 @@ export function stateToHash(s: AppState): string {
   if (s.redbook) {
     const rb = s.redbook;
     return `#/redbook${rb.genesis ? '/genesis' : rb.stop ? `/${enc(rb.stop)}` : ''}`;
+  }
+  if (s.dynamics) {
+    // the lens: #/dynamics (the Self), or #/dynamics/<a|f|c|p>/<id> for a subject, the focus route's own codes
+    // a stop of the route follows: #/dynamics[/<code>/<id>]/s/<stop>
+    const sub = s.dynamics.subject;
+    return `#/dynamics${sub ? `/${{ archetype: 'a', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
   }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
@@ -66,21 +102,32 @@ export function stateToHash(s: AppState): string {
 }
 
 export function hashToState(hash: string, r: Resolver): Parsed {
+  const q = hash.indexOf('?');
+  const filter = q >= 0 ? parseFilter(hash.slice(q + 1)) : {};
+  const parsed = routeToState(q >= 0 ? hash.slice(0, q) : hash, r);
+  return { ...parsed, filter };
+}
+
+function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
   let parts: string[];
   try { parts = hash.replace(/^#\/?/, '').split('/').filter(Boolean).map((p) => decodeURIComponent(p)); }
   catch { return { state: WORLD }; }
   if (!parts.length) return { state: WORLD };
+  if (parts[0] === 'astrology') {
+    const [, chart, body] = parts;
+    const okChart = chart && /^[a-z0-9-]{1,40}$/.test(chart);
+    return { state: astrologyAt(okChart ? (body && r.hasBody?.(body) ? [chart, body] : [chart]) : []) };
+  }
+  if ((PANEL_LENSES as readonly string[]).includes(parts[0])) {
+    return { state: { view: { kind: 'world' }, deep: false, lens: { id: parts[0] as PanelLensId, path: parts.slice(1, 4) } } };
+  }
   if (parts[0] === 'sky') {
     const sky: NonNullable<AppState['sky']> = {};
     let rest = parts.slice(1);
+    // the old birth-sky links carried a birth moment in the URL: they open Astrology with the form filled from it (not saved)
     if (rest[0] === 'birth') {
-      const [, local, la, lo] = rest;
-      const lat = Number(la);
-      const lon = Number(lo);
-      if (local && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(local) && la !== undefined && lo !== undefined && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
-        sky.birth = { local, lat, lon };
-        rest = rest.slice(4);
-      } else rest = [];
+      const pre = parseBirthLink(rest[1], rest[2], rest[3]);
+      return { state: astrologyAt([]), ...(pre ? { birthPrefill: pre } : {}) };
     }
     if (rest[0] && r.hasBody?.(rest[0])) { sky.body = rest[0] as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
@@ -92,10 +139,27 @@ export function hashToState(hash: string, r: Resolver): Parsed {
     else if (parts[1] && r.hasRedBookStop?.(parts[1])) rb.stop = parts[1];
     return { state: { view: { kind: 'world' }, deep: false, redbook: rb } };
   }
+  if (parts[0] === 'dynamics') {
+    // an unknown subject is the lens with the Self, never a silent world
+    const rest = parts.slice(1);
+    // the stop stands first or after the subject; the lens checks it once its route has loaded (unknown: the overview)
+    const at = rest[0] === 's' ? 0 : rest[2] === 's' ? 2 : -1;
+    const stop = at >= 0 && rest[at + 1] ? rest[at + 1] : undefined;
+    const [k, id] = at === 0 ? [] : rest;
+    const subject: Subject | undefined = !id ? undefined
+      : k === 'a' && r.hasArchetype(id) ? { type: 'archetype', id }
+      : k === 'f' && r.hasFamily(id) ? { type: 'family', id }
+      : k === 'c' && r.hasCulture(id) ? { type: 'culture', id }
+      : k === 'p' && r.hasPlace(id) ? { type: 'place', id }
+      : undefined;
+    return { state: { view: { kind: 'world' }, deep: false, dynamics: { ...(subject ? { subject } : {}), ...(stop ? { stop } : {}) } } };
+  }
   if (parts[0] === 'aion') {
-    const [, reading, kind, id] = parts;
+    // `#/aion` alone is the default reading, as the switch opens it; `#/aion/<reading>[/<kind>/<id>]` names one
+    const [, named, kind, id] = parts;
+    const reading = named ?? r.defaultReading?.();
     if (!reading || !r.hasReading?.(reading)) return { state: WORLD };
-    const selection: NonNullable<AppState['history']>['selection'] = (kind === 'epoch' || kind === 'event' || kind === 'thread') && id && r.hasHistorySelection?.(reading, kind, id) ? { kind, id } : undefined;
+    const selection: NonNullable<AppState['history']>['selection'] = (kind === 'epoch' || kind === 'event' || kind === 'thread' || kind === 'chapter') && id && r.hasHistorySelection?.(reading, kind, id) ? { kind, id } : undefined;
     return { state: { view: { kind: 'world' }, deep: false, history: { reading, ...(selection ? { selection } : {}) } } };
   }
   const graph = parts[0] === 'graph';
@@ -104,7 +168,7 @@ export function hashToState(hash: string, r: Resolver): Parsed {
   if (deep) parts.pop();
   const [kind, a, b] = parts;
   // a thread travels the globe, so `#/graph/t/...` falls back to the globe
-  const withDeep = (state: AppState): Parsed => ({ state: { view: state.view, deep, ...(graph && state.view.kind !== 'thread' ? { graph: true as const } : {}) } });
+  const withDeep = (state: AppState): Omit<Parsed, "filter"> => ({ state: { view: state.view, deep, ...(graph && state.view.kind !== 'thread' ? { graph: true as const } : {}) } });
   if (graph && !kind) return { state: { view: { kind: 'world' }, deep: false, graph: true } };
   const focusState = (subject: Subject): AppState => ({ view: { kind: 'focus', subject }, deep: false });
 

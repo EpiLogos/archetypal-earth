@@ -1,7 +1,7 @@
 {
   "source": {
     "claim": "City-centre coordinates, rounded to 0.01° (about a kilometre), compiled by this site for the birth-sky place field. They place a city, not a house or a hospital; a chart for a precise place should use the sidecar's geocoder or exact coordinates.",
-    "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see docs/SKY-SOURCES.md",
+    "ref": "Public geographic coordinates (OpenStreetMap / GeoNames city centres), spot-checked against OpenStreetMap Nominatim; see ProjectCentral/docs/SKY-SOURCES.md",
     "retrieved": "2026-10-08"
   },
   "places": [

@@ -4,6 +4,8 @@
 :root {
   --core: #c3d2f2;
   --glow: #4f78cf;
+  /* the mode switches' row: one gap between each switch, and between the row and the mode pill (the phone sets its own below) */
+  --mode-gap: 26px;
   --fog: #10193a;
   --deep: #02030a;
   --core-rgb: 195 210 242;
@@ -79,12 +81,21 @@ body.hovering .globe-canvas { cursor: pointer; }
 .sg-key { font-feature-settings: 'tnum'; }
 body.search-open .search-glyph { opacity: 0; pointer-events: none; }
 
-/* ── credit: a small ⓘ, quiet until hovered ─────────────────────────── */
-.credit { position: fixed; left: 24px; bottom: 22px; z-index: 8; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
+/* ── the mode switches: one row, even gaps (SPEC §10) ─────────────────
+   Dynamics · Red Book · Sky · Aion, in that order, beside the mode pill and the search glyph. Each switch keeps its own
+   type and underline (dynamics.css, sky.css, aion.css, redbook.css); the row alone places them, so no switch carries a
+   fixed offset of its own. The row is the one fixed element; its children are static in it. */
+
+/* ── credit: a small ⓘ, quiet until hovered or focused; its text and issue link rise above it ───── */
+.credit { position: fixed; left: 24px; bottom: 22px; z-index: 13; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
 .credit-i { width: 17px; height: 17px; display: grid; place-items: center; border: 1px solid rgb(var(--core-rgb) / 0.3); border-radius: 50%; font-size: 10px; font-weight: 500; line-height: 1; opacity: 0.45; transition: opacity 0.3s; cursor: default; }
-.credit-t { opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.4s var(--ease); pointer-events: none; white-space: nowrap; }
+/* hidden by opacity, not display, so the link stays in the Tab order; out of the flex row, stacked above the ⓘ */
+.credit-t, .credit-link { position: absolute; left: 0; padding: 4px 0; line-height: 13px; white-space: nowrap; opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.4s var(--ease); pointer-events: none; }
+.credit-t { bottom: 100%; }
+.credit-link { bottom: calc(100% + 21px); }
+.credit-sep { display: none; }
 .credit:hover .credit-i, .credit:focus-within .credit-i { opacity: 0.9; }
-.credit:hover .credit-t, .credit:focus-within .credit-t { opacity: 0.85; transform: none; pointer-events: auto; }
+.credit:hover .credit-t, .credit:focus-within .credit-t, .credit:hover .credit-link, .credit:focus-within .credit-link { opacity: 0.85; transform: none; pointer-events: auto; }
 .credit a { text-decoration: none; border-bottom: 1px solid rgb(var(--core-rgb) / 0.25); }
 body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointer-events: none; }
 
@@ -237,7 +248,9 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-source { margin: 10px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); }
 .dp-def { margin: 30px 0 4px; padding: 0 0 0 20px; border-left: 1px solid rgb(var(--core-rgb) / 0.5); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.28rem; line-height: 1.5; }
 .dp-def p { margin: 0; }
-.dp-def footer { margin-top: 10px; font-family: var(--sans); font-style: normal; font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-3); }
+.dp-def footer { margin-top: 10px; font-family: var(--sans); font-style: normal; font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-3); display: flex; align-items: baseline; gap: 8px; }
+/* the cite is a button: it shrinks and wraps left-aligned inside the row, and the basis chip stays beside it (a wrapping row would push the chip to a line of its own) */
+.dp-def footer .link-quiet { display: inline; min-width: 0; text-align: left; text-decoration: none; }
 .dp-para { margin: 22px 0 0; font-family: var(--serif); font-weight: 400; font-size: 1.16rem; line-height: 1.66; color: rgb(236 241 252 / 0.86); hyphens: auto; }
 .dp-sub { margin: 46px 0 14px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--sans); font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
 .dp-flow { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.14rem; line-height: 1.7; }
@@ -301,6 +314,7 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .t-dens { position: absolute; left: 0; right: 0; top: 8px; width: 100%; height: 14px; pointer-events: none; }
 .t-eras { position: absolute; inset: 0; pointer-events: none; }
 .t-era { position: absolute; top: 31px; transform: translateX(-50%); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); opacity: 0.85; white-space: nowrap; }
+.t-era.is-skip { display: none; }
 .t-tick { position: absolute; top: 19px; width: 1px; height: 9px; background: rgb(var(--core-rgb) / 0.32); }
 .t-band { position: absolute; top: 21px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.55)); pointer-events: none; opacity: 0; }
 .t-handle { position: absolute; top: 23px; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--core); box-shadow: 0 0 0 5px rgb(var(--core-rgb) / 0.14), 0 0 22px 3px rgb(var(--core-rgb) / 0.75); pointer-events: none; opacity: 0; transition: box-shadow 0.3s; }
@@ -379,3 +393,16 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* a step's period-mates (src/ui/strip.ts): the walk reaches every occurrence of its subject */
+.st-head { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.st-also { min-height: 32px; padding: 4px 12px; border: 1px solid rgb(var(--core-rgb) / 0.28); border-radius: 16px; background: rgb(var(--deep-rgb) / 0.6); color: var(--ink-2); font: 11.5px var(--sans); cursor: pointer; }
+.st-also[hidden] { display: none; }
+.st-also:hover, .st-also[aria-expanded="true"] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.6); }
+.st-also-list { list-style: none; margin: 4px auto 6px; padding: 4px; max-width: min(560px, 92vw); max-height: 30vh; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; border-radius: 10px; background: rgb(var(--deep-rgb) / 0.88); border: 1px solid var(--hair); }
+.st-also-list[hidden] { display: none; }
+.st-also-item { display: grid; width: 100%; min-height: 44px; padding: 6px 10px; text-align: left; border: 0; border-radius: 7px; background: none; color: var(--ink); cursor: pointer; }
+.st-also-item:hover { background: rgb(var(--core-rgb) / 0.14); }
+.st-also-name { font: 13px/1.25 var(--sans); }
+.st-also-when { font: 11px var(--sans); color: var(--ink-3); }
+@media (pointer: coarse) { .st-also { min-height: 44px; } }

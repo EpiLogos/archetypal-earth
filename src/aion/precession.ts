@@ -18,7 +18,7 @@
 // Years in this file are calendar years in astronomical numbering carried as a plain number (1 BCE = 0): the display
 // clock of the atlas numbers BCE years negatively and treats its own year 0 as the beginning of the Christian era, so
 // the two differ by at most one year, 0.014° of precession, far inside the display's own approximation. The bridge is
-// therefore the identity and is stated, not hidden (docs/PRECESSION-NOTES.md).
+// therefore the identity and is stated, not hidden (ProjectCentral/docs/PRECESSION-NOTES.md).
 
 const AS2R = Math.PI / 180 / 3600;
 const TWO_PI = Math.PI * 2;
