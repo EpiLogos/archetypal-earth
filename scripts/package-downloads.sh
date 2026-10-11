@@ -9,7 +9,7 @@ mkdir -p "$OUT"
 
 # One package: the vault as an Obsidian research vault, minus the copyrighted layers.
 ( cd "$VAULT" && zip -qr "$OLDPWD/$OUT/jung-archetypal-field-vault-obsidian.zip" . \
-    -x "corpus/*" -x "_raw/*" -x "data/paragraphs.jsonl" -x ".obsidian/workspace*" )
+    -x "corpus/*" -x "_raw/*" -x "_raw-ext/*" -x ".git/*" -x "chunks/*" -x "data/paragraphs.jsonl" -x "data/_para_cache.json" -x ".obsidian/workspace*" )
 
 ( cd "$OUT" && shasum -a 256 *.zip > SHA256SUMS )
 ls -lh "$OUT"
