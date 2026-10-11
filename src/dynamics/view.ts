@@ -14,17 +14,25 @@ import { clear, el } from '../ui/dom';
 import type { PassageBridge } from '../ui/passage';
 import { closeGlyph } from '../ui/reveal';
 import { jMark, nMark, vMark } from './marks';
-import { paintJulia, paintLorenz, paintMandelbrot } from './paint';
-import { figureOf, paletteOf as figurePalette, type Figure } from './figures';
+import { construction, figureOf, FIGURES, paintFractal, paletteOf as figurePalette, type Figure } from './figures';
 import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
 import type { LensChrome } from '../shell/lens';
 
-/** The caption under the hero names the native system drawn, never the subject. */
-const HERO_CAPTION: Record<DynamicsRender, string> = {
-  lorenz: 'Lorenz attractor · drawn here',
-  mandelbrot: 'Mandelbrot set · drawn here',
-  julia: 'Julia set · drawn here',
+type FractalKind = 'julia' | 'mandelbrot';
+interface FractalView {
+  kind: FractalKind;
+  cx: number;
+  cy: number;
+  span: number;
+  pointers: Map<number, { x: number; y: number }>;
+  drag: { x: number; y: number; cx: number; cy: number } | null;
+  pinch: number | null;
+  coarse: boolean;
+}
+const FRACTAL_HOME: Record<FractalKind, { cx: number; cy: number; span: number }> = {
+  julia: { cx: 0, cy: 0, span: 3.1 },
+  mandelbrot: { cx: -0.7453, cy: 0.1127, span: 0.02 },
 };
 
 /** Used when neither the subject nor its occupants carry a palette. The world's own resting tone. */
@@ -57,7 +65,6 @@ export class DynamicsView {
   readonly strip: PhaseStrip;
   private heading: HTMLElement;
   private card: HTMLElement;
-  private heroCanvas: HTMLCanvasElement | null = null;
   private heroKind: DynamicsRender = 'lorenz';
   /** repaints the hero when its box changes size */
   private heroRo: ResizeObserver | null = null;
@@ -76,8 +83,9 @@ export class DynamicsView {
   /** the standing stop (null: the route's overview) */
   private stop: { stop: RouteStop; movement: RouteMovement } | null = null;
   private stateStop: string | undefined;
-  /** the standing figure and its clock (seconds since it was drawn first) */
-  private figure: Figure | null = null;
+  /** the standing figures and their canvases (the torus stop draws the construction and then the winding) */
+  private shots: { canvas: HTMLCanvasElement; figure: Figure; fractal: FractalView | null }[] = [];
+  /** seconds since the standing figures were first drawn */
   private figT = 0;
   private figPainted = -1;
   /** told whenever the families the standing stop speaks of change: the controller tunes the globe to the lens's set */
@@ -198,14 +206,14 @@ export class DynamicsView {
     clear(this.card);
     this.heroRo?.disconnect();
     this.heroRo = null;
-    this.heroCanvas = null;
+    this.shots = [];
     this.cursorSent = undefined;
   }
 
   /** Moves the strip's window and cursor from the shared clock, and the standing figure (about 30 frames a second). */
   update(dt: number) {
     if (this.root.hidden || !this.traj) return;
-    if (this.figure?.animated && !this.engine.reduced && this.heroCanvas) {
+    if (this.shots.some((s) => s.figure.animated || s.fractal) && !this.engine.reduced) {
       this.figT += dt;
       if (this.figT - this.figPainted >= 1 / 30) this.paintHero();
     }
@@ -277,19 +285,11 @@ export class DynamicsView {
   private renderCard() {
     if (!this.subject) return;
     if (this.route) { this.renderRoute(); return; }
-    this.figure = null;
+    this.shots = [];
     clear(this.card);
     const concept = this.related[this.conceptAt];
     this.heroKind = concept?.render ?? 'lorenz';
-    const hero = el('figure', { class: 'dy-hero' }, [el('canvas', { class: 'dy-hero-canvas', 'aria-hidden': 'true' }), el('figcaption', { class: 'dy-caption', text: HERO_CAPTION[this.heroKind] })]);
-    this.heroCanvas = hero.querySelector('canvas');
-    this.heroRo?.disconnect();
-    this.heroRo = null;
-    if (this.heroCanvas && typeof ResizeObserver !== 'undefined') {
-      this.heroRo = new ResizeObserver(() => this.paintHero());
-      this.heroRo.observe(this.heroCanvas);
-    }
-    const text = el('div', { class: 'rv-text' }, [hero]);
+    const text = el('div', { class: 'rv-text' }, [this.heroFigure(figureOf(this.heroKind))]);
     if (concept) text.append(...this.conceptBlock(concept));
     this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
     this.paintHero();
@@ -321,22 +321,90 @@ export class DynamicsView {
     this.renderCard();
   }
 
-  /** A figure canvas with its caption (the system drawn, never the subject), repainted when its box changes. */
+  /** A figure canvas, with no subheading. A fractal can be dragged and zoomed. Repainted when its box changes. */
   private heroFigure(figure: Figure): HTMLElement {
-    this.figure = figure;
     this.figPainted = -1;
-    const hero = el('figure', { class: 'dy-hero' }, [el('canvas', { class: 'dy-hero-canvas', 'aria-hidden': 'true' }), el('figcaption', { class: 'dy-caption', text: figure.caption })]);
-    this.heroCanvas = hero.querySelector('canvas');
-    this.heroRo?.disconnect();
-    this.heroRo = null;
-    if (this.heroCanvas && typeof ResizeObserver !== 'undefined') {
+    const fractal = figure === FIGURES.julia ? this.freshFractal('julia') : figure === FIGURES.mandelbrot ? this.freshFractal('mandelbrot') : null;
+    const canvas = el('canvas', { class: fractal ? 'dy-hero-canvas dy-fractal' : 'dy-hero-canvas', 'aria-hidden': 'true' }) as HTMLCanvasElement;
+    const hero = el('figure', { class: 'dy-hero' }, [canvas]);
+    const shot = { canvas, figure, fractal };
+    this.shots.push(shot);
+    if (fractal) this.wireFractal(shot);
+    if (!this.heroRo && typeof ResizeObserver !== 'undefined') {
       this.heroRo = new ResizeObserver(() => this.paintHero());
-      this.heroRo.observe(this.heroCanvas);
     }
+    this.heroRo?.observe(canvas);
     return hero;
   }
 
-  private paintFigure(canvas: HTMLCanvasElement, figure: Figure) {
+  private freshFractal(kind: FractalKind): FractalView {
+    const home = FRACTAL_HOME[kind];
+    return { kind, cx: home.cx, cy: home.cy, span: home.span, pointers: new Map(), drag: null, pinch: null, coarse: false };
+  }
+
+  /** Drag to move through the set; wheel or pinch to go closer. A drag paints a coarser tile and finishes sharp. */
+  private wireFractal(shot: { canvas: HTMLCanvasElement; fractal: FractalView | null }) {
+    const canvas = shot.canvas;
+    const view = shot.fractal!;
+    const scale = () => view.span / Math.max(canvas.clientWidth, canvas.clientHeight);
+    const paint = (coarse: boolean) => { view.coarse = coarse; this.paintHero(); };
+    canvas.addEventListener('pointerdown', (e) => {
+      canvas.setPointerCapture(e.pointerId);
+      view.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (view.pointers.size === 1) view.drag = { x: e.clientX, y: e.clientY, cx: view.cx, cy: view.cy };
+      else view.drag = null;
+      view.pinch = view.pointers.size === 2 ? this.pinchDistance(view) : null;
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!view.pointers.has(e.pointerId)) return;
+      view.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (view.pointers.size === 2 && view.pinch) {
+        const d = this.pinchDistance(view);
+        if (d > 0) view.span = this.clampSpan(view.kind, view.span * (view.pinch / d));
+        view.pinch = d;
+        paint(true);
+        return;
+      }
+      if (!view.drag) return;
+      const s = scale();
+      view.cx = view.drag.cx - (e.clientX - view.drag.x) * s;
+      view.cy = view.drag.cy + (e.clientY - view.drag.y) * s;
+      paint(true);
+    });
+    const end = (e: PointerEvent) => {
+      view.pointers.delete(e.pointerId);
+      if (view.pointers.size < 2) view.pinch = null;
+      if (!view.pointers.size) { view.drag = null; paint(false); }
+    };
+    canvas.addEventListener('pointerup', end);
+    canvas.addEventListener('pointercancel', end);
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const factor = Math.exp(e.deltaY * 0.0014);
+      const next = this.clampSpan(view.kind, view.span * factor);
+      const s = scale();
+      const rect = canvas.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      view.cx += dx * (s - next / Math.max(canvas.clientWidth, canvas.clientHeight));
+      view.cy -= dy * (s - next / Math.max(canvas.clientWidth, canvas.clientHeight));
+      view.span = next;
+      paint(false);
+    }, { passive: false });
+  }
+
+  private pinchDistance(view: FractalView): number {
+    const pts = [...view.pointers.values()];
+    if (pts.length < 2) return 0;
+    return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+  }
+
+  private clampSpan(kind: FractalKind, span: number): number {
+    const [lo, hi] = kind === 'mandelbrot' ? [1e-5, 3.2] : [0.02, 6];
+    return Math.min(hi, Math.max(lo, span));
+  }
+
+  private paintFigure(canvas: HTMLCanvasElement, figure: Figure, fractal: FractalView | null) {
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
     if (!w || !h) return;
@@ -345,9 +413,12 @@ export class DynamicsView {
     if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    const t = this.engine.reduced || !figure.animated ? figure.still : figure.still + this.figT;
     ctx.save();
-    figure.draw(ctx, W, H, t, figurePalette(this.palette), dpr);
+    if (fractal) paintFractal(ctx, W, H, fractal.kind, [fractal.cx, fractal.cy], fractal.span, figurePalette(this.palette), fractal.coarse);
+    else {
+      const t = this.engine.reduced || !figure.animated ? figure.still : figure.still + this.figT;
+      figure.draw(ctx, W, H, t, figurePalette(this.palette), dpr);
+    }
     ctx.restore();
     this.figPainted = this.figT;
   }
@@ -372,6 +443,10 @@ export class DynamicsView {
 
   /** The route: its overview when no stop stands, else the standing stop drawn, quoted and walked on from. */
   private renderRoute() {
+    this.shots = [];
+    this.figT = 0;
+    this.heroRo?.disconnect();
+    this.heroRo = null;
     clear(this.card);
     const route = this.route!;
     const text = el('div', { class: 'rv-text' });
@@ -402,6 +477,7 @@ export class DynamicsView {
           el('button', { type: 'button', class: 'link-quiet', text: 'The route', onclick: () => this.go() }),
           ` · ${cur.movement.n} ${cur.movement.title}`,
         ]),
+        ...(s.figure === 'torus' ? [this.heroFigure(construction)] : []),
         this.heroFigure(figureOf(s.figure)),
         el('h2', { class: 'rv-name dy-name' }, [this.stopName(s), ' ', concept ? vMark() : '']),
         el('p', { class: 'rv-para aion-lede', text: s.line }),
@@ -447,23 +523,9 @@ export class DynamicsView {
     return true;
   }
 
-  /** The native hero, painted at the box's device size. Deterministic: the same subject paints the same pixels. */
+  /** Every standing figure, at the box's device size. A fractal uses the view the pointer has reached. */
   private paintHero() {
-    const canvas = this.heroCanvas;
-    if (!canvas || this.root.hidden) return;
-    if (this.figure) { this.paintFigure(canvas, this.figure); return; }
-    const w = canvas.clientWidth;
-    const h = canvas.clientHeight;
-    if (!w || !h) return;
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const p = this.palette;
-    const kind = this.heroKind;
-    if (kind === 'mandelbrot') paintMandelbrot(ctx, canvas.width, canvas.height, p);
-    else if (kind === 'julia') paintJulia(ctx, canvas.width, canvas.height, p);
-    else paintLorenz(ctx, canvas.width, canvas.height, p);
+    if (this.root.hidden) return;
+    for (const shot of this.shots) this.paintFigure(shot.canvas, shot.figure, shot.fractal);
   }
 }

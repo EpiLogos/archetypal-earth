@@ -535,12 +535,20 @@ function fractal(iter: Float32Array, maxIter: number, w: number, h: number, p: P
     c.putImageData(img, 0, 0);
   });
 }
-const juliaFig: Draw = (ctx, w, h, _t, p) => {
-  ctx.drawImage(cached(`julia${w}x${h}:${palKey(p)}`, () => fractal(juliaTile(w, h, [-0.4, 0.6], { span: 3.1, maxIter: 220 }), 220, w, h, p)) as HTMLCanvasElement, 0, 0);
-};
-const mandelFig: Draw = (ctx, w, h, _t, p) => {
-  ctx.drawImage(cached(`mand${w}x${h}:${palKey(p)}`, () => fractal(mandelbrotTile(w, h, { centre: [-0.7453, 0.1127], span: 0.02, maxIter: 300 }), 300, w, h, p, 4.2)) as HTMLCanvasElement, 0, 0);
-};
+const JULIA_C: [number, number] = [-0.4, 0.6];
+
+/** A Julia or Mandelbrot tile at a chosen centre and span, so the card can be moved through. */
+export function paintFractal(ctx: CanvasRenderingContext2D, w: number, h: number, kind: 'julia' | 'mandelbrot', centre: [number, number], span: number, p: P, coarse: boolean) {
+  const maxIter = kind === 'mandelbrot' ? (coarse ? 80 : 280) : (coarse ? 60 : 200);
+  const gamma = kind === 'mandelbrot' ? 4.2 : 2.4;
+  const iter = kind === 'julia'
+    ? juliaTile(w, h, JULIA_C, { centre, span, maxIter })
+    : mandelbrotTile(w, h, { centre, span, maxIter });
+  ctx.drawImage(fractal(iter, maxIter, w, h, p, gamma), 0, 0);
+}
+
+const juliaFig: Draw = (ctx, w, h, _t, p) => paintFractal(ctx, w, h, 'julia', [0, 0], 3.1, p, false);
+const mandelFig: Draw = (ctx, w, h, _t, p) => paintFractal(ctx, w, h, 'mandelbrot', [-0.7453, 0.1127], 0.02, p, false);
 
 /** Neumann's three named stages: one valley, two, one again on higher ground (the headings are his chapter titles). */
 const STAGES = ['The Uroboros', 'The Separation of the World Parents', 'Transformation'];
@@ -624,14 +632,131 @@ const torus: Draw = (ctx, w, h, t, p, dpr) => {
   ctx.restore();
   const head = wind(steps);
   dot(ctx, head[0], head[1], 2.6 * dpr, p.core);
-  // the 4+2 on the tube's section: #0 and #5 the vertical poles, #1–#4 the four positions held between them
-  const at: [number, number][] = [[0, Math.PI / 2], [1, Math.PI / 6], [2, -Math.PI / 6], [3, (-5 * Math.PI) / 6], [4, (5 * Math.PI) / 6], [5, -Math.PI / 2]];
-  for (const [k, v] of at) {
-    const [x, y] = proj(-0.35, v);
-    dot(ctx, x, y, 1.6 * dpr, INK);
-    label(ctx, `#${k}`, x - 13 * dpr, y, dpr, 'center', 0.75);
+};
+
+/**
+ * The square of the four positions, folded twice: opposite edges meet to make a cylinder, then the cylinder's ends
+ * meet to make the torus the winding runs on. Positions 1–4 travel with the sheet. Same night and the same light as
+ * the winding.
+ */
+const fold: Draw = (ctx, w, h, t, p, dpr) => {
+  ground(ctx, w, h, p);
+  const cyc = 18;
+  const s = (t % cyc) / cyc;
+  const ease = (x: number) => x * x * (3 - 2 * x);
+  // hold the square, curl one pair of edges into a cylinder, hold that, then bend the ends together
+  const s1 = s < 0.2 ? 0 : s < 0.42 ? ease((s - 0.2) / 0.22) : 1;
+  const s2 = s < 0.56 ? 0 : s < 0.82 ? ease((s - 0.56) / 0.26) : 1;
+  const R = 1, r = 0.42, tilt = 1.05, half = 1.15;
+  const ct = Math.cos(tilt), stn = Math.sin(tilt);
+  const S = Math.min(w, h) * 0.34;
+  const lerp = (a: number, b: number, u: number) => a + (b - a) * u;
+  // The sheet curls about its horizontal axis (arc length kept), turns enough that the tube reads as round,
+  // then that tube bends until its ends meet and the ring opens to the same torus the winding is drawn on.
+  const model = (u: number, v: number): [number, number, number] => {
+    const d = (v / Math.PI - 1) * half;
+    const axis = (u / Math.PI - 1) * half;
+    const edge = Math.PI * s1;
+    let yC: number;
+    let zC: number;
+    if (edge < 1e-3) {
+      yC = 0;
+      zC = d;
+    } else {
+      const ang = (d / half) * edge;
+      const rho = half / edge;
+      const center = rho * (1 - Math.cos(edge)) * 0.5;
+      yC = rho * (1 - Math.cos(ang)) - center;
+      zC = rho * Math.sin(ang);
+    }
+    const yaw = 0.85 * s1 * (1 - s2);
+    const xY = axis * Math.cos(yaw) - yC * Math.sin(yaw);
+    const yY = axis * Math.sin(yaw) + yC * Math.cos(yaw);
+    if (s2 <= 0) return [xY, yY, zC];
+    const rho0 = half / Math.PI;
+    const yT = rho0 * Math.cos(v);
+    const zT = -rho0 * Math.sin(v);
+    const span = Math.PI * Math.min(s2 / 0.72, 1);
+    const theta = (axis / half) * span;
+    const Rb = span < 1e-3 ? 1 : half / span;
+    const bx = span < 1e-3 ? axis : (Rb + yT) * Math.sin(theta);
+    const by = span < 1e-3 ? yT : (Rb + yT) * Math.cos(theta) - Rb;
+    const yw = 0.85 * (1 - Math.min(s2 / 0.35, 1));
+    const xW = bx * Math.cos(yw) - by * Math.sin(yw);
+    const yW = bx * Math.sin(yw) + by * Math.cos(yw);
+    const grow = s2 < 0.72 ? 0 : ease((s2 - 0.72) / 0.28);
+    const tor: [number, number, number] = [
+      (R + r * Math.cos(v)) * Math.cos(u),
+      (R + r * Math.cos(v)) * Math.sin(u),
+      r * Math.sin(v),
+    ];
+    return [lerp(xW, tor[0], grow), lerp(yW, tor[1], grow), lerp(zT, tor[2], grow)];
+  };
+  const proj = (u: number, v: number) => {
+    const [x, y, z] = model(u, v);
+    const y2 = y * ct - z * stn, z2 = y * stn + z * ct;
+    return [w / 2 + x * S, h / 2 + y2 * S * 0.9, z2] as const;
+  };
+  const stroke = (samples: Array<readonly [number, number, number]>, c: RGB, alpha: number, width: number) => {
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    for (let i = 1; i < samples.length; i++) {
+      const a = samples[i - 1], b = samples[i];
+      const front = Math.max(0, Math.min(1, ((a[2] + b[2]) / 2 + 1.6) / 3.2));
+      ctx.strokeStyle = css(c, alpha * (0.28 + 0.72 * front));
+      ctx.lineWidth = width * (0.7 + 0.45 * front);
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.stroke();
+    }
+    ctx.restore();
+  };
+  const ring = (fixed: 'u' | 'v', value: number, n: number) => {
+    const out: Array<readonly [number, number, number]> = [];
+    for (let i = 0; i <= n; i++) {
+      const q = (i / n) * Math.PI * 2;
+      out.push(fixed === 'u' ? proj(value, q) : proj(q, value));
+    }
+    return out;
+  };
+  // once a pair of edges has met, draw that loop once
+  const uN = s2 > 0.92 ? 6 : 7;
+  const vN = s1 > 0.92 ? 6 : 7;
+  for (let i = 0; i < uN; i++) stroke(ring('u', (i / 6) * Math.PI * 2, 56), p.glow, 0.42, dpr);
+  for (let j = 0; j < vN; j++) stroke(ring('v', (j / 6) * Math.PI * 2, 72), p.glow, 0.42, dpr);
+  const joiningEnds = s2 > 0.02;
+  const progress = joiningEnds ? s2 : s1;
+  if (progress < 0.98) {
+    const which = joiningEnds ? 'u' : 'v';
+    const seamA = 0.4 + 0.55 * (1 - progress);
+    stroke(ring(which, 0, 72), p.core, seamA, 1.45 * dpr);
+    stroke(ring(which, Math.PI * 2 * 0.998, 72), p.core, seamA, 1.45 * dpr);
+  }
+  // the four corners. They become one point on the torus, so the names sit in a fan and stay readable.
+  const corners: Array<[string, number, number, number, number]> = [
+    ['1', 0, 0, -12, 10],
+    ['2', Math.PI * 2 * 0.998, 0, 12, 10],
+    ['3', Math.PI * 2 * 0.998, Math.PI * 2 * 0.998, 12, -12],
+    ['4', 0, Math.PI * 2 * 0.998, -12, -12],
+  ];
+  for (const [name, u, v, ox, oy] of corners) {
+    const [x, y] = proj(u, v);
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = css(p.core, 0.95);
+    ctx.beginPath();
+    ctx.arc(x, y, 2.1 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    label(ctx, name, x + ox * dpr, y + oy * dpr, dpr, 'center', 0.92);
   }
 };
+
+/** The construction that precedes the winding: not a route stop of its own, so it is not in {@link FIGURES}. */
+export const construction: Figure = { caption: '', animated: true, still: 1.5, draw: fold };
 
 export const FIGURES: Record<FigureId, Figure> = {
   'limit-cycle': { caption: 'Van der Pol oscillator: a limit cycle · drawn here', animated: true, still: 11, draw: limitCycle },
