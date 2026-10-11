@@ -884,8 +884,9 @@ export class Controller {
       this.timeControl.setSubject(null, '#ffffff');
     }
     this.activeLens = id;
-    // the globe gives the panel room, as it does a card
-    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? 0.26 : 0);
+    // the globe gives the panel room, as it does a card; an approached body (the Astrology walk) is centred in the space
+    // a phone's half sheet leaves above it, as a planet's card does
+    this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : 0.26) : 0);
     const path = next.lens!.path;
     const have = this.lensInst.get(id);
     if (have) { have.enter(path); return; }
@@ -1128,15 +1129,22 @@ export class Controller {
     else e.rig.flyTo(ll.lat, ll.lon, systemHomeDist(aspect, FOV), { instant, duration: 4.2 });
   }
 
-  /** The body the camera approaches for its open card: a planet or the Sun (in a natal sky too: Astrology walks them). */
+  /**
+   * The body the camera approaches for its open card: a planet or the Sun. In a birth sky the Astrology walk approaches
+   * each step, the Moon included (its walk begins there): the Moon's drawn place is far enough out that holding it is
+   * not a zoom to the Earth.
+   */
   private approachFor(sky: AppState['sky']): BodyKey | null {
-    return sky?.body && isApproachBody(sky.body) ? sky.body : null;
+    if (!sky?.body) return null;
+    return isApproachBody(sky.body) || (sky.natal && sky.body === 'moon') ? sky.body : null;
   }
 
   /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
   private approachDistOf(key: BodyKey, aspect: number): number {
     const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
-    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect);
+    // in the Astrology walk the body carries its satellites, whose outer orbit is 1.86 discs wide: the disc is kept to
+    // 42% of the width so the orbit and its names fit a phone
+    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect, this.state.sky?.natal ? 0.42 : 0.6);
   }
 
   /**

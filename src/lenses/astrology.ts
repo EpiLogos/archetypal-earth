@@ -15,6 +15,7 @@ import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, 
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
 import { findPlaces, formatCoordinates } from '../sky/gazetteer';
 import { combobox } from '../ui/combobox';
+import { PlanetOrbits } from '../sky/orbits';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { creditLine } from '../ui/credit';
@@ -43,6 +44,11 @@ export function mount(ctx: LensContext): LensInstance {
   let data: AstrologyData | null = null;
   let failed = false;
   let editing = false;
+  // the chart the walk stands in: "Back to the Earth" returns to its whole birth sky
+  let walking: string | null = null;
+  const orbits = new PlanetOrbits(ctx.engine.renderer.domElement.parentElement ?? document.body, () => {
+    if (walking) ctx.navigate(astrologyAt([walking, 'earth']));
+  });
   // a birth an old link carried: fills the form until the chart is cast, then is gone (never stored from here)
   let prefill = ctx.takeBirthPrefill();
   const charts = new Map<string, { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }>();
@@ -53,9 +59,11 @@ export function mount(ctx: LensContext): LensInstance {
     for (const rec of chartSources(data.people)) charts.set(rec.id, { rec, chart: natalChart(rec.birth) });
   };
 
-  const show = (label: string, body: (HTMLElement | null)[]) => {
+  // the walk opens its sheet at half height: on a phone the body it holds stands in the space above it
+  const show = (label: string, body: (HTMLElement | null)[], height?: 'half' | 'full') => {
     const nodes = body.filter((n): n is HTMLElement => !!n);
     if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open(label, nodes);
+    if (height) ctx.panel.setHeight(height);
   };
 
   // ── the Self and the charts linked to it ───────────────────────────────
@@ -95,6 +103,7 @@ export function mount(ctx: LensContext): LensInstance {
 
   // ── the landing: the charts, the form, the Self ────────────────────────
   const renderHome = () => {
+    orbits.set(null);
     if (!data) return;
     ctx.setContext('');
     const jung = charts.get('jung');
@@ -233,11 +242,37 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   // ── the walk ───────────────────────────────────────────────────────────
+  /** The whole birth sky around the Earth (the walk's "Back to the Earth"): where each body stands, each a step in. */
+  const renderWholeSky = (chartId: string, walked: { rec: ChartRecord; chart: SidecarChart & { timeKnown: boolean } }) => {
+    orbits.set(null);
+    const order = data!.order.bodies;
+    const who = walked.rec.id === YOU ? 'Your' : `${walked.rec.label}’s`;
+    ctx.setContext(`${who} birth sky`);
+    const nodes = [
+      el('nav', { class: 'as-steps', 'aria-label': 'The walk' }, order.map((k) => el('button', {
+        type: 'button', class: 'as-step', 'aria-label': data!.bodies[k].name, title: data!.bodies[k].name, onclick: () => ctx.setPath([chartId, k]),
+      }, [el('span', { text: data!.bodies[k].name.slice(0, 2) })]))),
+      el('h2', { class: 'lp-h', text: `${who} sky, from the Earth` }),
+      el('p', { class: 'th-line', text: 'Every body stands along its true direction from the Earth at the birth. Choose one to go to it.' }),
+      el('ul', { class: 'as-whole' }, order.map((k) => el('li', {}, [
+        el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath([chartId, k]) }, [
+          el('span', {}, [el('span', { class: 'as-tie-name', text: data!.bodies[k].name }), el('span', { class: 'as-basis', text: placeIn(walked.chart, k) })]),
+          icon('next', 14),
+        ]),
+      ]))),
+      el('div', { class: 'lp-row' }, [el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.setPath([chartId, order[0]]) }, [icon('play', 13), el('span', { text: `Walk from the ${data!.bodies[order[0]].name}` })])]),
+    ];
+    if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('Astrology', nodes);
+    ctx.panel.setHeight('half');
+  };
+
   const renderWalk = (chartId: string, bodyKey?: string) => {
+    walking = chartId;
     if (!data) return;
     const walked = charts.get(chartId);
     if (!walked) { ctx.navigate(astrologyAt([])); return; }
     const order = data.order.bodies;
+    if (bodyKey === 'earth') { renderWholeSky(chartId, walked); return; }
     const key = (order.includes(bodyKey as ChartBody) ? bodyKey : order[0]) as ChartBody;
     if (key !== bodyKey) { ctx.setPath([chartId, key], { replace: true }); return; }
     const i = order.indexOf(key);
@@ -273,6 +308,14 @@ export function mount(ctx: LensContext): LensInstance {
     };
     const jungTies = r.ties.filter((t) => t.basis === 'jung');
     const otherTies = r.ties.filter((t) => t.basis !== 'jung');
+    // the planet's satellites: the same ties, circling it while the walk holds it up close (one per field node)
+    const satSeen = new Set<string>();
+    orbits.set(key as BodyKey, [...jungTies, ...otherTies].filter((t) => {
+      const k = `${t.target.type}:${t.target.id}`;
+      if (satSeen.has(k)) return false;
+      satSeen.add(k);
+      return true;
+    }).map((t) => ({ id: `${t.target.type}:${t.target.id}`, name: subjectName(ctx.model, t.target), inner: t.basis === 'jung', open: () => ctx.focus(t.target) })));
     const tieBlock = (t: Tie) => el('div', { class: 'as-tie' }, [
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(t.target) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), el('span', { class: 'as-basis', text: BASIS[t.basis] })]), icon('next', 14)]),
       ...t.quotes.slice(0, 1).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
@@ -311,7 +354,7 @@ export function mount(ctx: LensContext): LensInstance {
       ]),
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate(astrologyAt([])) }, [el('span', { text: 'Back to the charts' }), icon('next', 14)]),
     ];
-    show('Astrology walk', body);
+    show('Astrology walk', body, 'half');
   };
 
   const render = (path: string[]) => {
@@ -335,6 +378,10 @@ export function mount(ctx: LensContext): LensInstance {
     },
     leave() {
       editing = false;
+      orbits.set(null);
+    },
+    update(dt) {
+      orbits.update(ctx.engine.sky ?? null, dt, ctx.engine.reduced);
     },
   };
 }

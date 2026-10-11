@@ -265,9 +265,10 @@ export const APPROACH_FILL = 0.3;
  * tan α = fill·tan(fov/2), and the distance is radius / sin α. Clamped so the sphere sits clear of the camera for any
  * field of view (2.6 radii) and never inside the closest approach the zoom allows. Monotone in the radius.
  */
-export function approachDist(radiusKm: number, fovDeg: number, aspect: number): number {
+export function approachDist(radiusKm: number, fovDeg: number, aspect: number, widthShare = 0.6): number {
   const trueRad = radiusKm / EARTH_RADIUS_KM;
-  const fill = Math.min(APPROACH_FILL, 0.6 * Math.max(aspect, 0.05));
+  // the disc's diameter is `fill` of the viewport's height, and never more than `widthShare` of its width
+  const fill = Math.min(APPROACH_FILL, widthShare * Math.max(aspect, 0.05));
   const x = fill * tanHalf(fovDeg);
   const exact = (trueRad * Math.sqrt(1 + x * x)) / x;
   return Math.max(exact, MIN_DIST + 0.5, 2.6 * trueRad);

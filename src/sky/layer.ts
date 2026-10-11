@@ -206,8 +206,9 @@ export class SkyLayer {
   /** true under reduced motion: the approach's ease is shortened (the engine sets it when the sky attaches) */
   reduced = false;
   /**
-   * 0 → 1: how far the camera has approached the body on the open card (eased; 0 when none). Zero in a birth sky,
-   * where the planets are sight-line markers and the look-at stays on the Earth's own sky.
+   * 0 → 1: how far the camera has approached the body on the open card (eased; 0 when none). A birth sky approaches its
+   * bodies too: each is drawn at its true geocentric place, so the walk goes to the planet instead of looking at it from
+   * the Earth (which left the camera at the Earth, inside the sky's exit, and dropped the walk back to the globe).
    */
   approach = 0;
   /** the body the look-at is approached on; kept after a release so the look-at eases back from it */
@@ -443,11 +444,11 @@ export class SkyLayer {
 
   /**
    * The look-at: the Sun-centred focus, eased onto the approached body's drawn place (blended from the previous body
-   * during a glide). The approach is ignored in a birth sky (`geoShare`). Exactly the Sun-centred focus when no body
-   * is approached, so every other view is unchanged.
+   * during a glide). In a birth sky the Sun-centred focus has turned to the Earth (`geoShare`) and the approach leaves
+   * from there. Exactly that focus when no body is approached, so every other view is unchanged.
    */
   private aimFocus(now: number) {
-    this.approach = this.approachE.value(now) * (1 - this.geoShare);
+    this.approach = this.approachE.value(now);
     const pv = this.approachKey ? this.poses.get(this.approachKey) : undefined;
     if (this.approach <= 0 || !pv) {
       this.focus.copy(this.sunFocus);
