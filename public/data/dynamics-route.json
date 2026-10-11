@@ -126,6 +126,16 @@
         "print": "112"
        },
        "voice": "vaneenwyk"
+      },
+      {
+       "text": "Jung was familiar with this phenomenon and considered it to be an integral part of the individuation process.",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p113",
+        "print": "112"
+       },
+       "voice": "vaneenwyk"
       }
      ]
     },
@@ -133,7 +143,19 @@
      "id": "chaotic-edge",
      "figure": "edge",
      "line": "The same map, close up where the doubling runs out and chaos begins. Van Eenwyk says chaos is not a failure here but a necessity.",
-     "concept": "chaotic-edge"
+     "concept": "chaotic-edge",
+     "quotes": [
+      {
+       "text": "chaos is not only unavoidable, but necessary.",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p14",
+        "print": "13"
+       },
+       "voice": "vaneenwyk"
+      }
+     ]
     },
     {
      "id": "strange-attractor",
@@ -232,7 +254,29 @@
      "id": "relationship",
      "figure": "sync",
      "line": "Two oscillators running at different speeds. As the coupling between them grows they fall into step.",
-     "concept": "relationship"
+     "concept": "relationship",
+     "quotes": [
+      {
+       "text": "Or does treating chaos with chaos create the opening for an eventual emergence of order?",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p156",
+        "print": "155"
+       },
+       "voice": "vaneenwyk"
+      },
+      {
+       "text": "Are chaos and order simply two sides of the same coin? Is order simply recognizable chaos?",
+       "cite": {
+        "work": "van-eenwyk",
+        "workTitle": "Archetypes & Strange Attractors",
+        "locator": "pdf p156",
+        "print": "155"
+       },
+       "voice": "vaneenwyk"
+      }
+     ]
     },
     {
      "id": "manifold",

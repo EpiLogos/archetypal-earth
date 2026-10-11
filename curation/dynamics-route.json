@@ -36,10 +36,14 @@
             { "work": "van-eenwyk", "quote": "If the latter, one remains suspended between opposites, oscillating between the new and the old for quite some time before a new pattern is established." },
             { "work": "van-eenwyk", "quote": "The populations split, or bifurcate, and if the growth rate continues to rise, bifurcate again, among four, eight, sixteen, thirty-two and more values." },
             { "work": "van-eenwyk", "quote": "Consequently, as the growth rate of a mutual inhibition equation rises through the threes, the bifurcations themselves bifurcate, leading to an endless expansion in bifurcations called period-doubling cascades." },
-            { "work": "van-eenwyk", "quote": "Jung described this aspect of psychodynamics as a descent into the chaos of the unconscious that could lead to increased psychological functioning." }
+            { "work": "van-eenwyk", "quote": "Jung described this aspect of psychodynamics as a descent into the chaos of the unconscious that could lead to increased psychological functioning." },
+            { "work": "van-eenwyk", "quote": "Jung was familiar with this phenomenon and considered it to be an integral part of the individuation process." }
           ] },
         { "concept": "chaotic-edge", "figure": "edge",
-          "line": "The same map, close up where the doubling runs out and chaos begins. Van Eenwyk says chaos is not a failure here but a necessity." },
+          "line": "The same map, close up where the doubling runs out and chaos begins. Van Eenwyk says chaos is not a failure here but a necessity.",
+          "quotes": [
+            { "work": "van-eenwyk", "quote": "chaos is not only unavoidable, but necessary." }
+          ] },
         { "concept": "strange-attractor", "figure": "lorenz",
           "line": "The Lorenz system never repeats a path and never leaves its shape. Van Eenwyk sees the archetypes in that: the same pattern, never the same instance.",
           "quotes": [
@@ -68,7 +72,11 @@
             { "work": "neumann-origins", "quote": "Centroversion is the innate tendency of a whole to create unity within its parts and to synthesize their differences in unified systems." }
           ] },
         { "concept": "relationship", "figure": "sync",
-          "line": "Two oscillators running at different speeds. As the coupling between them grows they fall into step." },
+          "line": "Two oscillators running at different speeds. As the coupling between them grows they fall into step.",
+          "quotes": [
+            { "work": "van-eenwyk", "quote": "Or does treating chaos with chaos create the opening for an eventual emergence of order?" },
+            { "work": "van-eenwyk", "quote": "Are chaos and order simply two sides of the same coin? Is order simply recognizable chaos?" }
+          ] },
         { "concept": "manifold", "figure": "saddle",
           "line": "Near a saddle, paths come in along one line and leave along another: from stability to instability, and back only if something brings them round." },
         { "concept": "mandala-attractor", "figure": "julia",

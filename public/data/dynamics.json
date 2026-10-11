@@ -51,12 +51,12 @@
         "helios"
       ],
       "jung": {
-        "text": "a current of energy necessarily presupposes two different states, or poles, without which there can be no current",
+        "text": "The greater the tension between the pairs of opposites, the greater will be the energy that comes from them; and the greater the energy, the stronger will be its constellating, attracting power.",
         "cite": {
-          "workTitle": "Psychological Types",
+          "workTitle": "The Structure and Dynamics of the Psyche",
           "year": "",
-          "locator": "¶337 (pdf p194)",
-          "work": "cw06"
+          "locator": "¶49 (pdf p38)",
+          "work": "cw08"
         }
       },
       "render": "lorenz"
@@ -81,12 +81,12 @@
         "dragon"
       ],
       "jung": {
-        "text": "what looked like death and destruction will settle down into a latent state of concord",
+        "text": "After violent oscillations at the beginning the opposites equalize one another, and gradually a new attitude develops, the final stability of which is the greater in proportion to the magnitude of the initial differences.",
         "cite": {
-          "workTitle": "Mysterium Coniunctionis",
+          "workTitle": "The Structure and Dynamics of the Psyche",
           "year": "",
-          "locator": "¶506 (pdf p272)",
-          "work": "cw14"
+          "locator": "¶49 (pdf p38)",
+          "work": "cw08"
         }
       },
       "render": "lorenz"
@@ -171,12 +171,12 @@
         "antichrist"
       ],
       "jung": {
-        "text": "shadow contains within it the seed of an enantiodromia, of a conversion into its opposite.",
+        "text": "The higher its charge mounts, the more the repressive attitude acquires a fanatical character and the nearer it comes to conversion into its opposite, i.e., an enantiodromia. And the more highly charged the collective consciousness, the more the ego forfeits its practical importance.",
         "cite": {
-          "workTitle": "The Archetypes and the Collective Unconscious",
+          "workTitle": "The Structure and Dynamics of the Psyche",
           "year": "",
-          "locator": "¶488 (pdf p283)",
-          "work": "cw09i"
+          "locator": "¶424 (pdf p231)",
+          "work": "cw08"
         }
       },
       "render": "lorenz"
@@ -185,7 +185,7 @@
       "id": "homoclinic-point",
       "name": "Homoclinic point",
       "quote": {
-        "text": "a homoclinic point, which designates not only where a dynamic becomes unstable, but where it becomes stable as well.",
+        "text": "takes place at a homoclinic point, which designates not only where a dynamic becomes unstable, but where it becomes stable as well.",
         "cite": {
           "workTitle": "Archetypes & Strange Attractors",
           "year": "1997",
@@ -273,7 +273,7 @@
       "id": "chaotic-edge",
       "name": "Health at the edge of chaos",
       "quote": {
-        "text": "chaos is not only unavoidable, but necessary.",
+        "text": "the realization that chaos is far healthier than previously imagined. If that proves to be the case, we shall have to revise some of our basic notions about mental health.",
         "cite": {
           "workTitle": "Archetypes & Strange Attractors",
           "year": "1997",
@@ -316,7 +316,7 @@
         "tree"
       ],
       "jung": {
-        "text": "a vessel which we can never empty, and never fill",
+        "text": "No archetype can be reduced to a simple formula. It is a vessel which we can never empty, and never fill. It has a potential existence only, and when it takes shape in matter it is no longer what it was.",
         "cite": {
           "workTitle": "The Archetypes and the Collective Unconscious",
           "year": "",
