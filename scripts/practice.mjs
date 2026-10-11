@@ -1,4 +1,4 @@
-// The practice tools' framing: curation/practice.json → public/data/practice.json (docs/MODES-RFC.md §8).
+// The practice tools' framing: curation/practice.json → public/data/practice.json (ProjectCentral/docs/MODES-RFC.md §8).
 // Every quotation is placed in the read-only vault corpus by scripts/lib/cite.mjs; one that will not place fails.
 //   npm run practice | npm run practice:check
 import fs from 'node:fs';

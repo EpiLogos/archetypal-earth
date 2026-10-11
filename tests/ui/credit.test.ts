@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { cleanCredit, creditLine, creditLineFull, sanitiseCredit, sanitiseLicense, sanitiseTitle } from '../../src/ui/credit';
 
-// Input -> output pairs from the image audit (docs/IMAGE-REGISTER-2026-10-09.md). Inputs that the report abbreviates
+// Input -> output pairs from the image audit (ProjectCentral/docs/IMAGE-REGISTER-2026-10-09.md). Inputs that the report abbreviates
 // with an ellipsis use the string the data actually carries.
 const CREDITS: [string, string][] = [
   ['This file was donated to Wikimedia Commons as part of a project by the Metropolitan Museum of Art . See the Image and Data Resources Open Access Policy', 'Metropolitan Museum of Art'],

@@ -1,4 +1,4 @@
-/* The shell: the one frame of chrome (docs/MODES-RFC.md §2). One lens button and title top left; search and GitHub
+/* The shell: the one frame of chrome (ProjectCentral/docs/MODES-RFC.md §2). One lens button and title top left; search and GitHub
    top right; the menu (a popover on a desktop, a bottom sheet on a phone); filter chips; the panel for panel lenses.
    Touch targets are at least 44px wherever the pointer is coarse. */
 

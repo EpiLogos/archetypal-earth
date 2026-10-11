@@ -1,4 +1,4 @@
-// The shell: the one frame that owns all chrome (docs/MODES-RFC.md §2). One title, one menu, one slot for a lens's
+// The shell: the one frame that owns all chrome (ProjectCentral/docs/MODES-RFC.md §2). One title, one menu, one slot for a lens's
 // own controls, the filter, the corners. Lenses render content; they never draw a heading or a switch of their own.
 import { el, clear, isNarrow } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';

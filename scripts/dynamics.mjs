@@ -1,5 +1,5 @@
 // Build public/data/dynamics.json — the dynamical lens's optional concept data — from curation/dynamics.json,
-// matching every quotation verbatim against the vault corpus (docs/DYNAMICAL.md §5; the rail of scripts/aion.mjs).
+// matching every quotation verbatim against the vault corpus (ProjectCentral/docs/DYNAMICAL.md §5; the rail of scripts/aion.mjs).
 //   npm run dynamics         write public/data/dynamics.json (only when concepts are curated)
 //   npm run dynamics:check   verify the curation, every quotation and the published file; write nothing
 // With no concepts curated, nothing is written and nothing is deleted: an absent file is the normal state.

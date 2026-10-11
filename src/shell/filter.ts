@@ -1,5 +1,5 @@
 // The one filter: slices of the field (a book, a culture, an era, a kind of material) are filters, never modes
-// (docs/MODES-RFC.md §4). Pure: parse, serialise, test an occurrence, and build the engine's mask.
+// (ProjectCentral/docs/MODES-RFC.md §4). Pure: parse, serialise, test an occurrence, and build the engine's mask.
 import type { LocusType, Occurrence } from '../types/field';
 
 export interface FieldFilter {

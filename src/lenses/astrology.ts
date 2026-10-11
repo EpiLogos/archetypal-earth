@@ -20,7 +20,7 @@ import { creditLine } from '../ui/credit';
 
 interface Tie { target: Subject; basis: 'jung' | 'inferred' | 'site'; note: string; quotes: LensQuote[] }
 interface BodyReading { key: ChartBody; name: string; line: string; quotes: LensQuote[]; ties: Tie[]; burt: LensQuote[] }
-/** A curated person's portrait: Commons provenance, the same fields the image manifest records (docs/IMAGE-REGISTER-2026-10-09.md). */
+/** A curated person's portrait: Commons provenance, the same fields the image manifest records (ProjectCentral/docs/IMAGE-REGISTER-2026-10-09.md). */
 interface Portrait { src: string; title?: string; credit?: string; license?: string }
 interface AstrologyData {
   version: 1;

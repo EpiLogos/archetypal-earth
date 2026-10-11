@@ -26,7 +26,7 @@ export type View =
   | { kind: 'manifest'; occId: string; context: Subject }
   | { kind: 'thread'; target: ThreadTarget; from: View };
 
-/** The lenses that mount into the shell's panel (docs/MODES-RFC.md §3). */
+/** The lenses that mount into the shell's panel (ProjectCentral/docs/MODES-RFC.md §3). */
 export type PanelLensId = 'theory' | 'astrology' | 'dreams' | 'symbols' | 'coincidences';
 export const PANEL_LENSES: readonly PanelLensId[] = ['theory', 'astrology', 'dreams', 'symbols', 'coincidences'];
 

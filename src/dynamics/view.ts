@@ -1,4 +1,4 @@
-// THE DYNAMICAL LENS: the field read as a dynamical system (docs/DYNAMICAL.md). A third mode beside Aion and the
+// THE DYNAMICAL LENS: the field read as a dynamical system (ProjectCentral/docs/DYNAMICAL.md). A third mode beside Aion and the
 // Red Book, built to the same pattern: show(state) / hide() / update(dt), a root section, a reveal card.
 // The globe is not touched here: the engine is exposed read-only, and the controller owns every globe effect
 // (the chronology is offered by chronology() for it to light).

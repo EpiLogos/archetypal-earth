@@ -1,4 +1,4 @@
-// The Theory lens's data: curation/theory.json → public/data/theory.json (docs/MODES-RFC.md §3).
+// The Theory lens's data: curation/theory.json → public/data/theory.json (ProjectCentral/docs/MODES-RFC.md §3).
 // Every quotation is placed in the read-only vault corpus by scripts/lib/cite.mjs, which writes its locator from the
 // corpus; a quotation it cannot place exactly once fails the build. A ¶ is printed only where the corpus's nearest
 // marker agrees with the vault note's ¶; otherwise the pdf page alone (the Aion convention).
@@ -35,7 +35,7 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const many = (qs, where) => citeQuotes(load, titles, qs, where, errors, warnings);
   const one = (q, where) => many([q], where)[0];
   const QL_SOURCES = new Set(['S1', 'S2', 'S3', 'S4']);
-  const qlText = (x, where) => { if (!x || !QL_SOURCES.has(x.source) || !x.text) errors.push(`${where}: a QL formulation needs its text and one of the sources in docs/ql-reference.md`); return x; };
+  const qlText = (x, where) => { if (!x || !QL_SOURCES.has(x.source) || !x.text) errors.push(`${where}: a QL formulation needs its text and one of the sources in ProjectCentral/docs/ql-reference.md`); return x; };
   const number = {
     line: ql.line,
     matheme: qlText(ql.matheme, 'matheme'),

@@ -1,5 +1,5 @@
 import type { BirthPrefill } from '../state/router';
-// The lens contract (docs/MODES-RFC.md §2): a lens is a plugin the shell lists and loads on first use.
+// The lens contract (ProjectCentral/docs/MODES-RFC.md §2): a lens is a plugin the shell lists and loads on first use.
 // The four reading lenses over the globe (Field, Theory, Aion, Red Book) are driven by the controller's state;
 // the panel lenses (Theory's text, Astrology and the practice tools) mount into the shell's panel.
 import type { IconName } from '../ui/icons';

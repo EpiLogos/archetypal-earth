@@ -1,4 +1,4 @@
-// The dynamical lens's data rail, pure core (docs/DYNAMICAL.md §5): curated concept choices become
+// The dynamical lens's data rail, pure core (ProjectCentral/docs/DYNAMICAL.md §5): curated concept choices become
 // public/data/dynamics.json, and every quotation is matched VERBATIM against the vault corpus page it names.
 //   · a Van Eenwyk quotation (voice V) is never typed in the site: the curation names its corpus work, page and match;
 //     its cite is the printed page the corpus marker gives that pdf page (`print pNN`), and nothing else;

@@ -1,5 +1,5 @@
 // The Astrology lens's data: curation/astrology.json (+ the sky's verified ties and Burt's planet quotes) →
-// public/data/astrology.json (docs/MODES-RFC.md §3). Every quotation is placed in the read-only vault corpus by
+// public/data/astrology.json (ProjectCentral/docs/MODES-RFC.md §3). Every quotation is placed in the read-only vault corpus by
 // scripts/lib/cite.mjs, which writes its locator from the corpus. A curated quotation that will not place fails the
 // build; a Burt quotation from the sky curation that will not place exactly in the corpus text is left out and named.
 //   npm run astrology          regenerate

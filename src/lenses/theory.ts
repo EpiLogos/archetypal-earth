@@ -28,7 +28,7 @@ interface TheoryData { version: 1; sections: TheorySection[]; number?: NumberDat
 
 const NUMBER: TheorySection = { id: 'number', name: 'Number', line: '', quotes: [], links: [] };
 
-/** A QL formulation: the framework's own words, always marked as QL (docs/ql-reference.md names its sources). */
+/** A QL formulation: the framework's own words, always marked as QL (ProjectCentral/docs/ql-reference.md names its sources). */
 function qlBlock(q: QL): HTMLElement {
   return el('blockquote', { class: 'lq lq-ql' }, [
     el('p', { text: q.text }),
