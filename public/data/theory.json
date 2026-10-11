@@ -182,10 +182,10 @@
   }
  ],
  "number": {
-  "line": "Jung came to think numbers are found as much as invented: archetypes of order that run through psyche and matter alike. Marie-Louise von Franz worked that out number by number. The QL framework names six positions. Here the two stand side by side, each in its own words.",
+  "line": "Jung came to think numbers are found as much as invented: archetypes of order that run through psyche and matter alike. Marie-Louise von Franz worked that out number by number. The QL framework names six positions, #0 to #5, and lays the numbers one to six beside them. Walk the six: at each, the framework's words, von Franz on the number, and Jung on what the position names.",
   "matheme": {
-   "text": "0/1 = 4+2 = 5→0 = 0/1",
-   "source": "S4"
+   "text": "0/1=4+2=5→0",
+   "source": "W § IV"
   },
   "jung": [
    {
@@ -222,15 +222,24 @@
     "print": "74"
    }
   },
+  "pauli": {
+   "text": "Pauli concluded that natural numbers are the most primitive archetypes—inside and outside at once, devised by mind and discovered as order.",
+   "source": "W § II"
+  },
   "numbers": [
    {
     "n": 1,
     "position": "#0",
     "ql": {
-     "name": "Archetypal Foundation",
-     "text": "Pre-reflective ground, implicit assumptions, void-potential before differentiation",
-     "source": "S1"
+     "name": "The Origin / 0",
+     "text": "The indeterminate ground before anything is spoken. Pure capacity.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "One (unity, the monad)",
+     "source": "W § VI"
+    },
+    "line": "The ground before anything is said. Jung says only that the structure is given, found in every case; von Franz says the one already holds every number after it.",
     "quotes": [
      {
       "text": "quantitatively it forms the unit, qualitatively it contains the whole sequence of natural numbers",
@@ -250,16 +259,37 @@
        "print": "62"
       }
      }
+    ],
+    "jung": [
+     {
+      "text": "The structure is something given, the precondition that is found to be present in every case.",
+      "cite": {
+       "work": "cw09i",
+       "workTitle": "The Archetypes and the Collective Unconscious",
+       "locator": "pdf p112"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "monad"
+     }
     ]
    },
    {
     "n": 2,
     "position": "#1",
     "ql": {
-     "name": "Causal/Material",
-     "text": "Material substrate, what-is, components, concrete being (Aristotle's material cause)",
-     "source": "S1"
+     "name": "State 00",
+     "text": "The indeterminate relating to the indeterminate. Pure potentiality, the psychoid shadow where forms remain asleep.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "Two (polarity, reflection)",
+     "source": "W § VI"
+    },
+    "line": "Two forms in the dark. Jung puts the archetype itself at the psychoid edge of the psyche, where it never reaches consciousness; von Franz hears two as rhythm before any line of time.",
     "quotes": [
      {
       "text": "In this context, twoness signifies oscillation and rhythm, but not yet linear time.",
@@ -279,16 +309,49 @@
        "print": "100"
       }
      }
+    ],
+    "jung": [
+     {
+      "text": "The archetype as such is a psychoid factor that belongs, as it were, to the invisible, ultraviolet end of the psychic spectrum.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p225"
+      }
+     },
+     {
+      "text": "It does not appear, in itself, to be capable of reaching consciousness.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p225"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "archetype",
+      "id": "shadow"
+     },
+     {
+      "type": "archetype",
+      "id": "syzygy"
+     }
     ]
    },
    {
     "n": 3,
     "position": "#2",
     "ql": {
-     "name": "Logical/Methodological",
-     "text": "Epistemological frameworks, how-we-know, navigation tools, tetralemma (efficient cause)",
-     "source": "S1"
+     "name": "State 01",
+     "text": "The indeterminate relating to the determinate. The emergence of form, the intrusion of the archetype into lived experience.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "Three (triad, synthesis)",
+     "source": "W § VI"
+    },
+    "line": "Form breaks through. Jung says an archetype arrives numinous and is never indifferent; von Franz says three is where the two poles become conscious, and ties three to time.",
     "quotes": [
      {
       "text": "According to this view the three then represents the unitary aspect of the bipolar one-continuum that has become conscious.",
@@ -308,16 +371,45 @@
        "print": "125"
       }
      }
+    ],
+    "jung": [
+     {
+      "text": "the archetypes have, when they appear, a distinctly numinous character which can only be described as \"spiritual,\" if \"magical\" is too strong a word.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p217"
+      }
+     },
+     {
+      "text": "It can be healing or destructive, but never indifferent",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p217"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "trinity"
+     }
     ]
    },
    {
     "n": 4,
     "position": "#3",
     "ql": {
-     "name": "Processual/Ontological",
-     "text": "Becoming, organic unfolding, developmental stages, how-things-change (formal cause)",
-     "source": "S1"
+     "name": "State 10",
+     "text": "The determinate relating to the indeterminate. The ego reaching back toward the unconscious, the act of symbol-making.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "Four (quaternity, stability)",
+     "source": "W § VI"
+    },
+    "line": "The ego turns back to the unconscious and makes a symbol. Jung calls the joint work of the two the transcendent function; von Franz finds four in every attempt at wholeness.",
     "quotes": [
      {
       "text": "The fact that mankind's repeated attempts to establish an orientation toward wholeness possess a quaternary structure appears to correspond to an archetypal psychic structural predisposition in man.",
@@ -336,16 +428,50 @@
        "locator": "¶870 (pdf p469)"
       }
      }
-    ]
+    ],
+    "jung": [
+     {
+      "text": "The tendencies of the conscious and the unconscious are the two factors that together make up the transcendent function.",
+      "cite": {
+       "work": "cw08",
+       "workTitle": "The Structure and Dynamics of the Psyche",
+       "locator": "pdf p85"
+      }
+     },
+     {
+      "text": "A view which interprets the symbolic expression as the best possible formulation of a relatively unknown thing, which for that reason cannot be more clearly or characteristically represented, is symbolic.",
+      "cite": {
+       "work": "cw06",
+       "workTitle": "Psychological Types",
+       "locator": "¶815 (pdf p430)"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "quaternity"
+     },
+     {
+      "type": "family",
+      "id": "mandala"
+     }
+    ],
+    "section": "transcendent-function"
    },
    {
     "n": 5,
     "position": "#4",
     "ql": {
-     "name": "Meta-Epistemic/Contextual",
-     "text": "Purpose, telos, context, situated knowing, reflexive awareness (final cause)",
-     "source": "S1"
+     "name": "State 11",
+     "text": "The determinate relating to the determinate. Conscious rationality, the explicit mapping of known terms.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "Five (pentad, quintessence)",
+     "source": "W § VI"
+    },
+    "line": "Consciousness maps what it knows. Jung's directed thinking follows outer things in their causal order, and the ego is what it all relates to; von Franz finds five in the philosophers' stone, the quinta essentia.",
     "quotes": [
      {
       "text": "It is included in the concept of the “philosophers’ stone” as the quinta essentia.",
@@ -356,20 +482,49 @@
        "print": "65"
       }
      }
+    ],
+    "jung": [
+     {
+      "text": "by means of which we imitate the successiveness of objectively real things, so that the images inside our mind follow one another in the same strictly causal sequence as the events taking place outside it.",
+      "cite": {
+       "work": "cw05",
+       "workTitle": "Symbols of Transformation",
+       "locator": "¶11 (pdf p41)"
+      }
+     },
+     {
+      "text": "We understand the ego as the complex factor to which all conscious contents are related.",
+      "cite": {
+       "work": "cw09ii",
+       "workTitle": "Aion: Researches into the Phenomenology of the Self",
+       "locator": "pdf p15"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "family",
+      "id": "quincunx"
+     },
+     {
+      "type": "family",
+      "id": "lapis"
+     }
     ]
    },
    {
     "n": 6,
     "position": "#5",
     "ql": {
-     "name": "Divine-Scalar/Synthetic",
-     "text": "Integration, synthesis, quintessence, transcendent wholeness, completion",
-     "source": "S1",
-     "also": {
-      "text": "#5 The modular return (6 ≡ 0 mod 6)",
-      "source": "S4"
-     }
+     "name": "The Synthesis / 1",
+     "text": "The final return where the structure recognises itself. The quintessence that gathers the fourfold back into unity.",
+     "source": "W § I"
     },
+    "gloss": {
+     "text": "Six (hexad, perfect completion)",
+     "source": "W § VI"
+    },
+    "line": "The return. Jung's self is the centre and the whole circumference at once; von Franz says six is the first number equal to the sum of its divisors.",
     "quotes": [
      {
       "text": "six is the first numeral of the series to represent the sum of its divisors (one, two, and three)",
@@ -380,7 +535,24 @@
        "print": "37"
       }
      }
-    ]
+    ],
+    "jung": [
+     {
+      "text": "The self is not only the centre, but also the whole circumference which embraces both conscious and unconscious; it is the centre of this totality, just as the ego is the centre of consciousness.",
+      "cite": {
+       "work": "cw12",
+       "workTitle": "Psychology and Alchemy",
+       "locator": "¶44 (pdf p69)"
+      }
+     }
+    ],
+    "subjects": [
+     {
+      "type": "archetype",
+      "id": "self"
+     }
+    ],
+    "section": "self"
    }
   ],
   "psychoid": {
@@ -405,8 +577,8 @@
     }
    ],
    "ql": {
-    "text": "Numbers as psychoid archetypes—common denominators of matter and psyche.",
-    "source": "S3"
+    "text": "The archetype, as Jung finally understood it, is psychoid: it is as much inside as outside, an ordering pattern that manifests simultaneously in the soul's images and the world's matter.",
+    "source": "W § I"
    }
   },
   "time": {

@@ -34,14 +34,32 @@ export function buildTheory({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const ql = JSON.parse(fs.readFileSync(path.join(root, 'curation', 'ql.json'), 'utf8'));
   const many = (qs, where) => citeQuotes(load, titles, qs, where, errors, warnings);
   const one = (q, where) => many([q], where)[0];
-  const QL_SOURCES = new Set(['S1', 'S2', 'S3', 'S4']);
-  const qlText = (x, where) => { if (!x || !QL_SOURCES.has(x.source) || !x.text) errors.push(`${where}: a QL formulation needs its text and one of the sources in ProjectCentral/docs/ql-reference.md`); return x; };
+  // W is the published site, cited by its section (§ I–VI); S1–S4 are the earlier notes ql-reference.md keeps
+  const QL_SOURCE = /^(?:S[1-4]|W § (?:I|II|III|IV|V|VI))$/;
+  const qlText = (x, where) => { if (!x || !QL_SOURCE.test(x.source ?? '') || !x.text) errors.push(`${where}: a QL formulation needs its text and one of the sources in ProjectCentral/docs/ql-reference.md`); return x; };
+  const subjectsOk = (list, where) => {
+    for (const l of list ?? []) {
+      if (l.type === 'family' && !families.has(l.id)) errors.push(`${where}: no family ${l.id} in the field`);
+      if (l.type === 'archetype' && !archetypes.has(l.id)) errors.push(`${where}: no archetype ${l.id} in the field`);
+    }
+    return list ?? [];
+  };
   const number = {
     line: ql.line,
     matheme: qlText(ql.matheme, 'matheme'),
     jung: many(ql.jung, 'number.jung'),
     series: one(ql.series, 'number.series'),
-    numbers: ql.numbers.map((n) => ({ n: n.n, position: n.position, ql: { ...qlText(n.ql, `number ${n.n}`), ...(n.ql.also ? { also: qlText(n.ql.also, `number ${n.n} also`) } : {}) }, quotes: many(n.quotes, `number ${n.n}`) })),
+    pauli: qlText(ql.pauli, 'pauli'),
+    // the walk: each position with the framework's words for it, the number beside it, von Franz on the number, and
+    // Jung on what the position's own sentence names
+    numbers: ql.numbers.map((n) => {
+      if (n.section && !sections.some((s) => s.id === n.section)) errors.push(`number ${n.n}: no theory section ${n.section}`);
+      return {
+        n: n.n, position: n.position, ql: qlText(n.ql, `number ${n.n}`), gloss: qlText(n.gloss, `number ${n.n} gloss`), line: n.line,
+        quotes: many(n.quotes, `number ${n.n}`), jung: many(n.jung ?? [], `number ${n.n} jung`), subjects: subjectsOk(n.subjects, `number ${n.n}`),
+        ...(n.section ? { section: n.section } : {}),
+      };
+    }),
     psychoid: { line: ql.psychoid.line, quotes: many(ql.psychoid.quotes, 'psychoid'), ql: qlText(ql.psychoid.ql, 'psychoid ql') },
     time: { line: ql.time.line, quotes: many(ql.time.quotes, 'time'), quaternio: { intro: one(ql.time.quaternio.intro, 'quaternio'), terms: ql.time.quaternio.terms }, vaneenwyk: { line: ql.time.vaneenwyk.line, quotes: many(ql.time.vaneenwyk.quotes, 'time.vaneenwyk').map((q) => ({ ...q, voice: 'vaneenwyk' })) } },
   };

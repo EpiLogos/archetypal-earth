@@ -28,10 +28,13 @@ export async function open(browser, { width = 1440, height = 900, dpr = 1, hash 
   // the landing shows once per browser; a walk starts past it unless it is what the walk is about
   if (!landing) await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   const logs = [];
-  page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) logs.push(`${m.type()}: ${m.text()}`); });
+  // where a warning was raised is named with it (a bare 'Failed to fetch' says nothing of which fetch)
+  page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) { const at = m.location(); logs.push(`${m.type()}: ${m.text()}${at?.url ? ` @ ${at.url.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '')}:${at.lineNumber}` : ''}`); } });
   page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
-  // a failed request is named, so a 'Failed to fetch' warning says which (map tiles the sandbox cannot reach are not counted)
-  page.on('requestfailed', (r) => { if (!/gibs|earthdata|tile|openstreetmap|fonts\.(gstatic|googleapis)/i.test(r.url())) logs.push(`requestfailed: ${r.failure()?.errorText} ${r.url().replace(/^https?:\/\/[^/]+/, '').slice(0, 80)}`); });
+  // a failed request is named, so a 'Failed to fetch' warning says which (map tiles and web fonts the sandbox cannot
+  // reach are not counted, nor a cancelled one: a fetch the app retries, a lazy image dropped, says nothing by itself;
+  // if the app gives up it warns, and that is counted)
+  page.on('requestfailed', (r) => { if (r.failure()?.errorText !== 'net::ERR_ABORTED' && !/gibs|earthdata|tile|openstreetmap|fonts\.(gstatic|googleapis)/i.test(r.url())) logs.push(`requestfailed: ${r.failure()?.errorText} ${r.url().replace(/^https?:\/\/[^/]+/, '').slice(0, 80)}`); });
   await page.goto(URL + hash, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__earth && window.__earth.engine && window.__earth.engine.presences, null, { timeout: 30000 });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 30000 });

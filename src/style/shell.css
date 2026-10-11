@@ -335,6 +335,7 @@ body.landing-on .time { opacity: 0.35; }
 .lq-ql p { font-style: normal; font-family: var(--sans); font-size: 0.92rem; }
 .lq-voice.ql { color: var(--deep); background: rgb(var(--glow-rgb)); border-color: rgb(var(--glow-rgb)); }
 .ql-wheel { width: 100%; max-width: 280px; height: auto; overflow: visible; }
+.ql-wheel.small { max-width: 200px; display: block; margin: 0 auto; }
 .ql-ring { fill: none; stroke: var(--hair); }
 .ql-node { fill: var(--deep); stroke: var(--core); stroke-width: 1.2; }
 .ql-node.implicate { stroke-dasharray: 3 3; }
@@ -347,6 +348,15 @@ body.landing-on .time { opacity: 0.35; }
 .ql-big.pos { color: rgb(var(--glow-rgb)); font-family: var(--sans); font-size: 1.2rem; }
 .ql-arrow { color: var(--ink-3); }
 .ql-name { font: 12px var(--sans); color: var(--ink-3); letter-spacing: 0.04em; }
+.ql-stop { cursor: pointer; }
+.ql-stop:hover .ql-node, .ql-stop:focus-visible .ql-node { fill: rgb(var(--core-rgb) / 0.18); }
+.ql-stop:focus { outline: none; }
+.ql-stop.on .ql-node { fill: rgb(var(--core-rgb) / 0.32); stroke-width: 2; filter: drop-shadow(0 0 6px rgb(var(--core-rgb) / 0.8)); }
+.ql-stop.on .ql-pos { fill: var(--ink); }
+.ql-walk-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 4px; font: 11.5px var(--sans); }
+.ql-stop-name strong { font: 600 13px var(--sans); color: var(--ink); margin-right: 4px; }
+.th-walk { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 44px; margin: 14px 0 4px; padding: 0 14px; border: 1px solid rgb(var(--core-rgb) / 0.45); border-radius: 22px; font: 13px var(--sans); color: var(--ink); background: rgb(var(--core-rgb) / 0.07); text-align: left; }
+.th-walk:hover { background: rgb(var(--core-rgb) / 0.14); }
 .ql-quaternio { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 6px; margin: 4px 0 12px; }
 .ql-q { padding: 9px 10px; border: 1px solid var(--hair); border-radius: 8px; font: 12px/1.4 var(--sans); color: var(--ink-2); text-align: center; }
 .ql-q.q0, .ql-q.q1 { border-color: rgb(var(--core-rgb) / 0.35); }
