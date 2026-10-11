@@ -1,5 +1,8 @@
 // Text helpers: link stripping, label derivation, instance body parsing, one-liners.
-import { stripLinks, linkTargets } from './vault.mjs';
+import { stripLinks, linkTargets, DEFAULT_VAULT } from './vault.mjs';
+import { workLoader } from './cite.mjs';
+import { completeTrailingQuote } from './quotes.mjs';
+import { TRAILING_ELLIPSIS, stripFootnoteMarkers } from './display.mjs';
 
 export function collapse(s) {
   return String(s).replace(/\s+/g, ' ').trim();
@@ -106,15 +109,65 @@ function unquote(line) {
 }
 
 function capQuote(q, max = 320) {
-  if (q.length <= max) return q;
-  const slice = q.slice(0, max);
-  const end = Math.max(slice.lastIndexOf('. '), slice.lastIndexOf('; '), slice.lastIndexOf('? '));
-  if (end > max * 0.45) return slice.slice(0, end + 1);
+  if (q.length <= max) return stripFootnoteMarkers(q);
+  // sentence ends that may close a display, best last: a real stop, question or exclamation — the text's own
+  // ellipsis ("paused . . . ") counts only when nothing better exists, for a display that ends "…" after a pause is
+  // the very half-thought this exists to prevent. An abbreviation's period before a lowercase word is not an end.
+  const ends = [...q.matchAll(/[.!?;]+[”"’')\]]*(?=[\s\d]|$)/gu)].filter((m) => {
+    const next = q.slice(m.index + m[0].length).match(/^\s+(\S{0,24})/u);
+    return !next || !next[1] || /[!?;]/.test(m[0]) || /^[“"'’«(\d\p{Lu}¶*]/u.test(next[1]);
+  });
+  const realEnd = (m) => !/^\.{2,}/.test(m[0]);
+  const inWindow = ends.filter((m) => m.index + m[0].length <= max);
+  const best = [...inWindow].reverse().find(realEnd);
+  if (best && best.index + best[0].length > max * 0.45) return stripFootnoteMarkers(q.slice(0, best.index + best[0].length));
+  // no clean boundary inside the window: run on to the first sentence end the text itself has — the note's words are
+  // the corpus's words, so nothing is invented here; when no sentence end is reachable, the word-boundary cut remains
+  const past = ends.find((m) => m.index + m[0].length > max && m.index + m[0].length - max <= 480);
+  const chosen = past && (realEnd(past) || !best) ? past : best;
+  if (chosen) return stripFootnoteMarkers(q.slice(0, chosen.index + chosen[0].length));
   return `${cutAtWord(q, max - 1)}…`;
 }
 
+// The vault corpus, loaded once and only when a quote actually needs completing: the ingest's instance notes may keep
+// a reading-pass trim, and the corpus holds the sentence it cut. Absent vault, every completion declines quietly.
+let corpusLoader;
+function vaultLoader() {
+  if (corpusLoader === undefined) corpusLoader = workLoader(DEFAULT_VAULT);
+  return corpusLoader;
+}
+
+// Tokens in a quote line's cite parenthesis that could name the work — "(cw12 ¶5, pdf p9)" — with the
+// bibliographic stop words that would otherwise masquerade as one.
+const CITE_STOP = new Set(['pdf', 'p', 'pp', 'ch', 'n', 'nn', 'fig', 'pl', 'fn', 'see', 'cf', 'image', 'legend', 'print', 'main', 'text', 'part', 'fol', 'plate', 'no', '¶']);
+
+function citeWorkCandidates(rawLine) {
+  const out = [];
+  const push = (w) => {
+    if (/^[a-z][a-z0-9-]{2,}$/i.test(w) && !CITE_STOP.has(w.toLowerCase()) && !out.includes(w)) out.push(w);
+  };
+  for (const m of String(rawLine).matchAll(/\(([^()]*(?:¶|pdf|cw\d)[^()]*)\)/gi)) {
+    for (const tok of m[1].split(/[\s,;/·]+/)) push(tok.replace(/^[("'“‘]+|[)"'”’.]+$/g, ''));
+  }
+  // a nested cite hides its volume beyond the first parenthetical the eye reaches — "(cw05 ch.VII n.87, pdf p734)" —
+  // so the collected-works tokens anywhere on the line are candidates too
+  for (const m of String(rawLine).matchAll(/\b(cw\d{1,3}[a-z]{0,2})\b/gi)) push(m[1]);
+  return out.slice(0, 4);
+}
+
+/** A quote the note itself leaves trailing into an ellipsis: completed from the corpus when the cite names a work. */
+function completeFromCorpus(text, candidates) {
+  if (!text || !TRAILING_ELLIPSIS.test(text.trimEnd())) return text;
+  const load = vaultLoader();
+  if (!load) return text;
+  for (const work of candidates) {
+    const r = completeTrailingQuote(load, work, text);
+    if (r.done) return r.text;
+  }
+  return text;
+}
 /** Split an instance note body into paragraphs / first quote / parallels. */
-export function parseInstanceBody(body) {
+export function parseInstanceBody(body, { workHint } = {}) {
   const lines = String(body).split(/\r?\n/);
   const paras = [];
   const quotes = [];
@@ -161,8 +214,9 @@ export function parseInstanceBody(body) {
   const bodyParas = paras.map(plain).filter((p) => p.length > 0);
   let quote;
   if (quotes.length) {
-    const q = unquote(plain(quotes[0]));
-    if (q.length >= 12) quote = capQuote(q);
+    // the work candidates come from the RAW line: plain() strips the cite the completion needs
+    let q = unquote(plain(quotes[0]));
+    if (q.length >= 12) quote = capQuote(completeFromCorpus(q, workHint ? [...citeWorkCandidates(quotes[0]), workHint] : citeWorkCandidates(quotes[0])));
   }
   return { body: bodyParas, quote, parallels: [...new Set(parallels)] };
 }

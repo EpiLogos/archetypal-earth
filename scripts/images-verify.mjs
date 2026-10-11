@@ -34,11 +34,19 @@ for (const g of GROUPS) for (const [id, ref] of Object.entries(images[g] || {}))
 
 // ── manifest ↔ disk ↔ field ────────────────────────────────────────────────
 const referenced = new Set();
+// Defect signatures the verbatim fetcher once baked (2026-10 data round): the manifest
+// itself must stay clean, not merely be cleaned at display time.
+const QS_DUMP = /\b(?:title|label) QS:/;
+const RAW_URL_CREDIT = /^https?:\/\//i;
+const DOUBLED_AUTHOR = /\bUnknown (author|artist|source)\s+Unknown \1\b/i;
 for (const { group, id, ref } of entries) {
   const where = `${group}/${id}`;
   for (const k of ['src', 'thumb', 'title', 'credit', 'license', 'sourceUrl']) {
     if (!ref[k] || typeof ref[k] !== 'string') err(`${where}: provenance field ${k} missing`);
   }
+  if (QS_DUMP.test(ref.title)) err(`${where}: title carries a Wikidata QS dump: ${ref.title.slice(0, 70)}…`);
+  if (RAW_URL_CREDIT.test(ref.credit)) err(`${where}: credit is a raw URL: ${ref.credit.slice(0, 70)}…`);
+  if (DOUBLED_AUTHOR.test(ref.credit)) err(`${where}: credit doubles the author placeholder: ${ref.credit.slice(0, 70)}`);
   if (ref.license && !licenseOk(ref.license)) err(`${where}: licence not allowed: ${ref.license}`);
   if (!Number.isInteger(ref.width) || ref.width <= 0 || !Number.isInteger(ref.height) || ref.height <= 0) err(`${where}: dimensions invalid`);
   if (ref.tone != null && !/^#[0-9a-fA-F]{6}$/.test(ref.tone)) err(`${where}: tone not hex`);

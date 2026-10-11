@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { createNormalizer } from './ocr.mjs';
+import { stripFootnoteMarkers } from './display.mjs';
 
 // Quotations use the existing OCR module's safe mode: whitespace and ligatures only, never word repair (as aion.mjs).
 const normalizer = createNormalizer({ freq: new Map(), english: new Set(), pairs: new Map() });
@@ -225,7 +226,8 @@ function resolveQuote(curation, pages, labels, q, voice, where, errors) {
   // the cite is the matched source's own title and year: a Van Eenwyk passage from any V source is cited to that source
   const cite = { workTitle: src.title, year: String(src.year), locator: q.locator };
   if (voice === 'J') cite.work = q.work;
-  return { text: m.text, cite };
+  // the match stays verbatim for placement; the DISPLAYED string sheds the scan's glued footnote markers
+  return { text: stripFootnoteMarkers(m.text), cite };
 }
 
 /** Validate, read the declared corpus files under `vault`, and build. Nothing is written here. */
