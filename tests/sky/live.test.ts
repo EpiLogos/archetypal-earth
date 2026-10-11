@@ -36,24 +36,23 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     expect(describeLive(s).detail).toMatch(/checked at 16:40 UTC/);
   });
 
-  it('is a snapshot, frozen at the moment it was taken, when no sidecar answers', async () => {
+  it('reads the generated grids at the clock when no sidecar answers', async () => {
     const { live } = make(never);
     const s = await live.poll();
     expect(s).toEqual({ kind: 'snapshot', asOf: NOW, why: 'absent' });
-    expect(live.following).toBe(false);
-    const text = describeLive(s);
-    expect(text.label).toBe('Snapshot');
-    expect(text.detail).toMatch(/as of 2026-10-08 16:40 UTC; it does not follow the clock/);
-    expect(text.detail).toMatch(/ephemeris is not running/);
+    expect(live.following).toBe(true);
+    expect(live.moment()).toBe(NOW);
   });
 
-  it('keeps the first snapshot\u2019s moment through later failed asks (it is a moment, not a clock)', async () => {
+  it('follows the clock from the grids after a failed ask', async () => {
     let t = NOW;
     const live = new SkyLive(eph, { base: 'x', local: true, fetch: never, now: () => t, setTimer: () => 0, clearTimer: () => undefined });
     await live.poll();
     t = NOW + 3_600_000;
     const s = await live.poll();
-    expect(s.kind === 'snapshot' && s.asOf).toBe(NOW);
+    expect(s.kind).toBe('snapshot');
+    expect(live.following).toBe(true);
+    expect(live.moment()).toBe(t);
   });
 
   it('does not try at all from a page that cannot reach a local sidecar, and says why', () => {
@@ -70,7 +69,8 @@ describe('the sky\u2019s live state is a labelled state, never silence', () => {
     const { live } = make(respond(answer(LIVE_TOLERANCE.sun * 4, 0)));
     const s = await live.poll();
     expect(s.kind).toBe('diverged');
-    expect(live.following).toBe(false);
+    expect(live.following).toBe(true);
+    expect(live.moment()).toBe(NOW);
     expect(describeLive(s).detail).toMatch(/disagrees with the live check/);
     expect(describeLive(s).detail).toMatch(/disagrees with the live check/);
   });

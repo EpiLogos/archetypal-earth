@@ -6,7 +6,6 @@ import { clear, el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
 import type { ChartScreenMark } from './chart-overlay';
 import { describeLive, type LiveState } from './live';
-import { COMPRESSION_CAPTION, GEOCENTRIC_CAPTION } from './stages';
 
 export interface SkyViewHooks {
   onBody(key: BodyKey): void;
@@ -39,7 +38,7 @@ export class SkyView {
   constructor(parent: HTMLElement, private hooks: SkyViewHooks) {
     this.root = el('div', { class: 'sky-layer', 'aria-label': 'The sky: Sun, Moon and planets', role: 'group' });
     this.root.inert = true;
-    this.caption = el('p', { class: 'sky-caption', text: COMPRESSION_CAPTION, 'aria-hidden': 'true' });
+    this.caption = el('p', { class: 'sky-caption', 'aria-hidden': 'true' });
     this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
     this.cultureNote = el('p', { class: 'sky-culture-note' });
     this.liveNote = el('p', { class: 'sky-live', role: 'status' });
@@ -97,7 +96,8 @@ export class SkyView {
       this.liveNote.append(el('strong', { text: 'Birth sky' }), ` · ${this.held}`);
       return;
     }
-    if (!this.lastLive) return;
+    // a snapshot of the grids, and the diagram's radial scale, are not announced
+    if (!this.lastLive || this.lastLive.kind === 'snapshot' || this.lastLive.kind === 'diverged') return;
     const d = describeLive(this.lastLive);
     this.liveNote.dataset.state = this.lastLive.kind;
     this.liveNote.append(el('strong', { text: d.label }), ` · ${d.detail}`);
@@ -134,9 +134,8 @@ export class SkyView {
       return;
     }
     this.root.classList.add('on');
-    const text = layer.geoShare > 0.5 ? GEOCENTRIC_CAPTION : COMPRESSION_CAPTION;
-    if (this.caption.textContent !== text) this.caption.textContent = text;
-    this.caption.classList.toggle('on', layer.weights.rings > 0.55);
+    this.caption.textContent = '';
+    this.caption.classList.remove('on');
     const bodies = layer.screenBodies(this.scratch);
     const placed: { x: number; y: number; w: number }[] = [];
     // sun first, then Earth, then outward: the nearer wins a crowded corner

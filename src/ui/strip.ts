@@ -59,13 +59,10 @@ export class Strip {
     clear(this.rail);
     this.frames = [];
     const m = this.model;
-    // a borrowed family image appears once; later frames stay tonal rather than repeat it
-    const used = new Set<string>();
     occIdx.forEach((oi, i) => {
       const o = m.occ[oi];
       const fam = m.famById.get(o.familyId);
-      let img = occurrenceImage(m, o);
-      if (img && !o.image) img = used.has(img.src) ? undefined : (used.add(img.src), img);
+      const img = occurrenceImage(m, o);
       const f = el('button', { class: 'st-frame', type: 'button', 'aria-label': `${o.label}, ${eraShort(o.yearDisplay, 40)}`, onclick: (e: Event) => {
         this.tap();
         // the second tap of a double-click lands on the step the first one jumped to: no second jump

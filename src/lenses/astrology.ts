@@ -120,7 +120,7 @@ export function mount(ctx: LensContext): LensInstance {
         el('p', { class: 'as-card-p', text: `${c.rec.birth.date}${c.rec.birth.time ? `, ${c.rec.birth.time}${c.rec.clock ? ` ${c.rec.clock}` : ''}` : ''} · ${c.rec.birth.place || formatCoordinates(c.rec.birth.lat, c.rec.birth.lon)}` }),
         el('p', { class: 'as-pillars', text: `Sun ${placeIn(c.chart, 'sun')} · Moon ${placeIn(c.chart, 'moon')}${c.chart.timeKnown ? ` · Rising ${c.chart.angles.ascendant.sign} ${fmtDeg(c.chart.angles.ascendant.degree)}` : ''}` }),
         el('div', { class: 'lp-row' }, [
-          el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.navigate(astrologyAt([c.rec.id])) }, [icon('astrology', 15), el('span', { text: c.rec.id === YOU ? 'Walk your sky' : `Walk ${c.rec.label}’s sky` })]),
+          el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.navigate(astrologyAt([c.rec.id])) }, [icon('astrology', 15), el('span', { text: c.rec.id === YOU ? 'Your sky' : `${c.rec.label}’s sky` })]),
           mineToo ? el('button', { type: 'button', class: 'lp-btn quiet', text: 'Change', onclick: () => { editing = true; renderHome(); } }) : null,
         ]),
       ]);
@@ -234,7 +234,7 @@ export function mount(ctx: LensContext): LensInstance {
       field('Clock offset from UTC, in hours', offset, offsetWhy),
       errors,
       el('div', { class: 'lp-row' }, [
-        el('button', { type: 'submit', class: 'lp-btn primary' }, [icon('astrology', 15), el('span', { text: existing ? 'Save and walk' : 'Cast and walk' })]),
+        el('button', { type: 'submit', class: 'lp-btn primary' }, [icon('astrology', 15), el('span', { text: existing ? 'Save and see the sky' : 'Cast and see the sky' })]),
         existing ? el('button', { type: 'button', class: 'lp-btn quiet', text: 'Cancel', onclick: () => { editing = false; renderHome(); } }) : null,
       ]),
       el('p', { class: 'lp-note', text: `The place list is a short gazetteer of cities (${data!.gazetteer.source.claim.split('.')[0].toLowerCase()}). Nothing you type is looked up online.` }),
@@ -272,9 +272,10 @@ export function mount(ctx: LensContext): LensInstance {
     const walked = charts.get(chartId);
     if (!walked) { ctx.navigate(astrologyAt([])); return; }
     const order = data.order.bodies;
-    if (bodyKey === 'earth') { renderWholeSky(chartId, walked); return; }
-    const key = (order.includes(bodyKey as ChartBody) ? bodyKey : order[0]) as ChartBody;
-    if (key !== bodyKey) { ctx.setPath([chartId, key], { replace: true }); return; }
+    // no body: the wide sky, the chart drawn on it. A walk is a choice, not the way in.
+    if (!bodyKey || bodyKey === 'earth') { renderWholeSky(chartId, walked); return; }
+    const key = bodyKey as ChartBody;
+    if (!order.includes(key)) { ctx.setPath([chartId], { replace: true }); return; }
     const i = order.indexOf(key);
     const r = data.bodies[key];
     const others = [...charts.values()].filter((c) => c.rec.id !== chartId);
@@ -367,10 +368,26 @@ export function mount(ctx: LensContext): LensInstance {
 
   return {
     enter(path) {
-      if (data) { render(path); return; }
+      if (data) {
+        // opening the lens with no chart lands on one, zoomed out: yours if you have cast it, otherwise Jung's
+        if (!path[0]) {
+          const id = charts.has(YOU) ? YOU : (charts.has('jung') ? 'jung' : '');
+          if (id) { ctx.setPath([id], { replace: true }); return; }
+        }
+        render(path);
+        return;
+      }
       if (failed) return;
       ctx.panel.open('Astrology', [el('p', { class: 'lp-sub', text: 'Loading…' })], { height: 'full' });
-      loadLensData<AstrologyData>('astrology').then((d) => { data = d; refreshCharts(); render(path); }).catch((err) => {
+      loadLensData<AstrologyData>('astrology').then((d) => {
+        data = d;
+        refreshCharts();
+        if (!path[0]) {
+          const id = charts.has(YOU) ? YOU : (charts.has('jung') ? 'jung' : '');
+          if (id) { ctx.setPath([id], { replace: true }); return; }
+        }
+        render(path);
+      }).catch((err) => {
         failed = true;
         console.error(err);
         ctx.panel.replace([el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })]);

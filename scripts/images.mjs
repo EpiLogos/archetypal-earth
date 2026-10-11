@@ -345,7 +345,7 @@ async function resolveFor(group, id, spec, ctx) {
     let cands;
     try { cands = await searchOne(q, width); } catch (e) { say(`  search failed (${q}): ${e.message}`); continue; }
     for (const c of cands) {
-      const ev = evaluate(c, q, { ...ctx, require: spec.require, exclude: spec.exclude, allowPage: spec.allowPage, relaxed: spec.relaxed });
+      const ev = evaluate(c, q, { ...ctx, require: spec.require, exclude: spec.exclude, allowPage: spec.allowPage, allowBad: spec.allowBad, relaxed: spec.relaxed });
       if (!ev.ok) continue;
       const score = ev.score + (qi === 0 ? 6 : qi === 1 ? 3 : 0);
       if (!best || score > best.score) best = { cand: c, score, query: q };
@@ -467,7 +467,8 @@ for (const group of groups) {
     const have = images[group][id];
     if (have && fs.existsSync(path.join(ROOT, 'public', have.src)) && fs.existsSync(path.join(ROOT, 'public', have.thumb))) { summary[group][0]++; continue; }
     if (group === 'occurrences' && occDone >= OCC_CAP) { say(`occurrence cap ${OCC_CAP} reached`); break; }
-    const auto = group === 'occurrences' ? null : { queries: [`${nameOf(id)} symbol art history`, `${nameOf(id)} Jung archetype`] };
+    // an uncurated family is named for the object itself; search that name, and accept a scarce museum photograph
+    const auto = group === 'occurrences' ? null : { queries: [nameOf(id), `${nameOf(id)} museum`], relaxed: true, allowBad: true };
     const useSpec = spec || auto;
     if (!useSpec || (!useSpec.pin && !(useSpec.queries || []).length)) { missing.push(`${group}/${id}: no queries`); continue; }
     if (!spec) say(`  note: ${group}/${id} has no curated queries, using auto`);

@@ -218,7 +218,18 @@ export class Controller {
     this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
     // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
     this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
-    this.panel = new Panel(root, () => this.stepBack());
+    this.panel = new Panel(root, () => {
+      const s = this.state;
+      // the astrology sheet's close leaves the sky where it is: the chart, zoomed out, with the sheet gone
+      if (s.lens?.id === 'astrology' && s.sky) {
+        const sky: NonNullable<AppState['sky']> = {};
+        if (s.sky.natal) sky.natal = s.sky.natal;
+        if (s.sky.culture) sky.culture = s.sky.culture;
+        this.navigate(inSky(sky));
+        return;
+      }
+      this.stepBack();
+    });
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
@@ -237,7 +248,17 @@ export class Controller {
       onField: (t) => this.navigate(focusOn(WORLD, t)),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onReading: (target) => this.openSubjectReading(target),
-      onClose: () => this.stepBack(),
+      onClose: () => {
+        const s = this.state;
+        if (!s.sky?.body) { this.stepBack(); return; }
+        if (s.lens?.id === 'astrology' && s.lens.path[0]) this.navigate(astrologyAt([s.lens.path[0]]));
+        else {
+          const sky: NonNullable<AppState['sky']> = {};
+          if (s.sky.natal) sky.natal = s.sky.natal;
+          if (s.sky.culture) sky.culture = s.sky.culture;
+          this.navigate(inSky(sky));
+        }
+      },
       passage: this.passage.bridge(),
     });
     // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens

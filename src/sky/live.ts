@@ -69,15 +69,14 @@ export class SkyLive {
     return { kind: 'beyond', asOf, from: this.eph.data.meta.span.from.slice(0, 10), to: this.eph.data.meta.span.to.slice(0, 10) };
   }
 
-  /** True while the sky should follow the wall clock. */
+  /** True while the generated grids cover the clock, so the sky can be read at now without the sidecar. */
   get following(): boolean {
-    return this.state.kind === 'live';
+    return this.state.kind === 'live' || this.state.kind === 'snapshot' || this.state.kind === 'diverged';
   }
 
-  /** The instant to read the sky at: the clock when following, else the moment the snapshot was taken. */
+  /** The instant to read the sky at. The grids are the ephemeris: while they cover now, the sky follows the clock. */
   moment(): number {
-    const s = this.state;
-    return s.kind === 'live' ? this.o.now() : s.asOf;
+    return this.following ? this.o.now() : this.state.asOf;
   }
 
   start() {
