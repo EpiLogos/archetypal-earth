@@ -69,6 +69,11 @@
 .dy-chip.dy-n { color: var(--ink-2); }
 
 @media (max-width: 760px) {
+  /* on a phone the route is one row of full-size tap targets, swiped sideways; the standing stop is scrolled into view */
+  .dy-route { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 4px; margin-right: 44px; }
+  .dy-route::-webkit-scrollbar { display: none; }
+  .dy-route-mv { flex: none; gap: 0; }
+  .dy-route-dot { width: 44px; height: 44px; }
   .dynamics { --dy-strip-h: 64px; --dy-strip-bottom: 64px; --dy-track-l: 72px; --dy-track-r: 36px; }
   /* below the top line of switches (the Red Book's phone heading sits at the same height) */
   .dy-basins { font-size: 11px; gap: 6px 14px; }

@@ -420,6 +420,10 @@ export class DynamicsView {
       ]));
     }
     this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
+    // where the map scrolls sideways (a phone), the standing stop is brought into its view
+    const map = text.querySelector<HTMLElement>('.dy-route');
+    const on = map?.querySelector<HTMLElement>('[aria-current=step]');
+    if (map && on && map.scrollWidth > map.clientWidth) map.scrollLeft = on.offsetLeft - map.offsetLeft - map.clientWidth / 2 + on.offsetWidth / 2;
     this.paintHero();
   }
 
