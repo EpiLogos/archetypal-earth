@@ -174,13 +174,13 @@ presents a QL formulation as Jung's or von Franz's, nor the reverse.
 
 ## Gaps and tensions
 
-- **Two alignments of number to position.** The brief and S4 align from **one** (1 at #0, six at #5). S2's table
+- **Two alignments of number to position — ruled.** The brief and S4 align from **one** (1 at #0, six at #5). S2's table
   aligns von Franz's sequence from **zero**: "0: Void-plenitude, undifferentiated potential", "1: Unity", …, "6:
   Perfect completion via circular return". The site counts positions 0–5, has no #6, and states no mapping rule; its
   Egg Dream count puts "1 (The Seed)" after the 0/1 frame, and its L0' coincidences ("2 (Polarity)" ↔ "Two (polarity,
   reflection)", "4 (Quaternity)" ↔ "Four (quaternity, stability)", "5 (Quintessence)" ↔ "Five (pentad, quintessence)")
-  are displayed, never stated as a rule. The lens follows the brief. The owner should say which alignment is
-  canonical.
+  are displayed, never stated as a rule. Asked on 2026-10-10, the owner ruled the brief's alignment canonical: the
+  lens keeps **1–6 ↔ #0–#5**; S2's zero-based table stands as the recorded alternative.
 - **Five and six in von Franz.** Number and Time says much less about five and six than about one to four. The lens
   shows what is there and says so.
 - **Provenance mix in the lens.** The QL formulations the lens shows beside each number are still S1's; the site does

@@ -31,8 +31,29 @@ function redbookPlates(): Plugin {
   };
 }
 
+/**
+ * The flattened corpus (public/data/corpus/, 39 MB of copyrighted translations)
+ * powers the citation deep links on this machine's dev server, but the owner has
+ * ruled the texts themselves are never served (2026-10-10): a build strips them
+ * from dist, and the deep links degrade to "no link" by design
+ * (src/data/corpus.ts). The JSONs stay in public/ for local dev and tests.
+ */
+function localCorpusOnly(): Plugin {
+  return {
+    name: 'local-corpus-only',
+    apply: 'build',
+    closeBundle() {
+      const dir = path.resolve(__dirname, 'dist', 'data', 'corpus');
+      if (fs.existsSync(dir)) {
+        fs.rmSync(dir, { recursive: true, force: true });
+        console.log('\nstripped dist/data/corpus — the texts are local-only by the owner’s ruling (DEPLOY.md)');
+      }
+    },
+  };
+}
+
 export default defineConfig({
   server: { port: 5181 },
   build: { target: 'es2022', chunkSizeWarningLimit: 2000 },
-  plugins: [redbookPlates()],
+  plugins: [redbookPlates(), localCorpusOnly()],
 });
