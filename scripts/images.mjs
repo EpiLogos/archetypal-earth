@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Wikimedia Commons image fetcher: hero images for archetypes + families, selected occurrences.
 // Usage: node scripts/images.mjs [--only archetypes|families|occurrences] [--id a,b] [--redo a,b] [--dry]
+//        node scripts/images.mjs --remeta   (refresh baked title/credit/license from Commons; bytes untouched)
 // Re-runnable: already-downloaded ids are skipped (their ImageRef lives in public/data/images.json).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -93,11 +94,118 @@ async function api(params) {
 }
 
 // ---------- candidate model ----------
+// Tags are removed first; every entity form (named and numeric) is decoded here, an
+// unknown entity left as written — mirrors src/ui/credit.ts decodeEntities.
+const NAMED_ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 const strip = (h) =>
   String(h ?? '')
     .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&(#[xX][0-9a-fA-F]+|#\d+|[a-zA-Z]+);/g, (whole, body) => {
+      if (body[0] === '#') {
+        const hex = body[1] === 'x' || body[1] === 'X';
+        const code = hex ? parseInt(body.slice(2), 16) : parseInt(body.slice(1), 10);
+        return Number.isFinite(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : whole;
+      }
+      return NAMED_ENTITIES[body.toLowerCase()] ?? whole;
+    })
     .replace(/\s+/g, ' ').trim();
+
+// ── bake-time sanitisation, mirroring src/ui/credit.ts ─────────────────────
+// The display-time sanitiser cleans the credit a reader sees; the manifest should
+// simply not carry the dump in the first place (2026-10 data round). Pure string
+// law: nothing is invented, a non-empty input never yields an empty output.
+const HOSTS = [
+  [/(^|\.)wellcomeimages\.org$|(^|\.)wellcomecollection\.org$/i, 'Wellcome Collection'],
+  [/(^|\.)clevelandart\.org$/i, 'Cleveland Museum of Art'],
+  [/(^|\.)britishmuseum\.org$/i, 'British Museum'],
+  [/(^|\.)lacma\.org$/i, 'Los Angeles County Museum of Art'],
+];
+const DONOR = /^This file was donated to Wikimedia Commons as part of a project by (?:the )?(.+?)\s*\.\s*See the\b.*$/i;
+const HOST_URL = /^(?:Image:\s*)?https?:\/\/([^\s/?#:]+)/i;
+const AVAILABLE_FROM = /^This image is available from the (.+?) website\b/i;
+const NO_MACHINE_AUTHOR = /^No machine-readable author provided\.\s*(.+?) assumed\b/i;
+const SMK_PHOTO = /^Photography:\s*(.+?),\s*SMK API\b/i;
+const DOUBLED_UNKNOWN = /\bUnknown (author|artist|source)\s+Unknown \1\b/gi;
+const ANONYMOUS_PLACE = /^Anonymous \(\s*(?:Category:)?([^)]+?)\s*\)\s*Unknown author\s*(?:\(([^)]*)\))?\s*$/i;
+const FILE_NAME_TOKEN = /^\S+\.(?:jpe?g|png|tiff?|gif|svg)\s*,\s*/i;
+const USER_TALK_RESIDUE = /\s*\\+\s*talk$/i;
+const OWN_WORK = /^Own work\s*,\s*(.+)$/i;
+const USER_OWN_WORK = /^User:\s*(.+?)\s*,\s*own work\b/i;
+const PUBLIC_DOMAIN_NOTE = /\s*Public domain image \(according to [^)]*\)/i;
+const GOOGLE_ART_NOTE = /\s*Details on Google Art Project$/i;
+const C2RMF_FILE = /^original file:\s*(C2RMF)\b.*$/;
+const LANGUAGE_PREFIX = /^(?:German|French|Italian|Polish|Dutch|Spanish|Danish|Russian|Tahitian|Portuguese|Czech):\s*/;
+const QS_MARK = /\b(?:title|label) QS:/;
+
+const tidy = (s) => String(s)
+  .replace(/\s+([,.;:!?)])/g, '$1')
+  .replace(/\(\s+/g, '(')
+  .replace(/[\s,;:]+$/, '')
+  // a full stop ends the credit unless it follows an initial ("A.-K. D." keeps its period)
+  .replace(/(\p{L}{2,}|[0-9)\]])\.+$/u, '$1')
+  .replace(/^[\s,;:]+/, '')
+  .trim();
+const sentenceCase = (s) => s.replace(/([.!?]\s+)([a-z])/g, (_, stop, c) => stop + c.toUpperCase());
+
+function cleanCredit(raw) {
+  const input = String(raw ?? '').trim();
+  const done = (out) => out || input;
+  let s = input;
+  let m;
+  // Boilerplate that names the institution: the institution is the credit.
+  if ((m = s.match(DONOR))) return done(tidy(m[1]));
+  if ((m = s.match(HOST_URL))) {
+    const host = m[1].toLowerCase();
+    const known = HOSTS.find(([re]) => re.test(host));
+    return done(known ? known[1] : host.replace(/^www\./, ''));
+  }
+  if ((m = s.match(AVAILABLE_FROM))) return done(tidy(m[1]));
+  if ((m = s.match(NO_MACHINE_AUTHOR))) return done(tidy(m[1]));
+  if ((m = s.match(SMK_PHOTO))) return done(tidy(m[1]));
+  // Commons placeholders rendered twice, and the bare "Unknown Unknown".
+  s = s.replace(DOUBLED_UNKNOWN, 'Unknown $1').replace(/^Unknown Unknown\b/, 'Unknown');
+  if ((m = s.match(ANONYMOUS_PLACE))) {
+    const note = m[2]?.trim();
+    return done(tidy(`Anonymous (${m[1].trim()})${note ? `, ${note}` : ''}`));
+  }
+  // File-name token and user-page residue left by the upload template.
+  if (FILE_NAME_TOKEN.test(s)) s = s.replace(FILE_NAME_TOKEN, '').replace(/^./, (c) => c.toUpperCase());
+  s = s.replace(USER_TALK_RESIDUE, '').replace(/^w:\s*/, '');
+  // "Own work , X" and "User:X , own work, date" say the same thing: X made it.
+  s = s.replace(OWN_WORK, '$1 (own work)').replace(USER_OWN_WORK, '$1 (own work)');
+  // Licence chatter and museum-site residue that belong to the licence line or nowhere.
+  s = s.replace(PUBLIC_DOMAIN_NOTE, '').replace(GOOGLE_ART_NOTE, '');
+  s = s.replace(C2RMF_FILE, '$1');
+  return done(sentenceCase(tidy(s)));
+}
+
+/** An image title without the Wikidata dump: the English label when one is quoted, otherwise
+ *  the text before the first "title QS:" / "label QS:" marker. Titles without a dump pass through. */
+function sanitiseTitle(raw) {
+  const s = String(raw ?? '').trim();
+  if (!QS_MARK.test(s)) return s;
+  let m;
+  if ((m = s.match(/\blabel QS:Len,\s*"\s*([^"]+?)\s*"/))) return m[1];
+  if ((m = s.match(/\btitle QS:P1476,en:\s*"\s*([^"]+?)\s*"/))) return m[1];
+  const marker = s.search(/(^|\s)(title|label) QS:/);
+  const head = s.slice(0, Math.max(0, marker)).trim().replace(LANGUAGE_PREFIX, '').trim();
+  return head || s;
+}
+
+/** The baked title: curation override, else the ObjectName, else the Commons file title — QS dumps out. */
+function bakeTitle(spec, c) {
+  if (spec?.title) return spec.title;
+  const file = c.title.replace(/^File:/, '').replace(/\.[a-z]+$/i, '').replace(/_/g, ' ');
+  return sanitiseTitle(c.objectName) || sanitiseTitle(file) || file;
+}
+/** The baked credit: curation override, else the plain-text Artist, else the Credit field — boilerplate out. */
+function bakeCredit(spec, c) {
+  if (spec?.credit) return spec.credit;
+  return cleanCredit(c.artist) || cleanCredit(c.credit) || 'Wikimedia Commons';
+}
+const bakeLicense = (l) =>
+  // Commons' "No restrictions" is its marker for no known copyright restrictions — public domain, said in full
+  String(l || '').replace(/^No restrictions$/i, 'Public domain (no known restrictions)').replace(/^(PD|PDM)\b[-\w]*/i, 'Public domain');
 
 function toCandidate(p, rank, widthReq) {
   const ii = p.imageinfo?.[0];
@@ -143,8 +251,10 @@ function evaluate(c, q, ctx) {
   const minShort = ctx.relaxed ? 320 : (ctx.minShort || 450);
   const longest = Math.max(c.width, c.height);
   if (longest < minLongest || Math.min(c.width, c.height) < minShort) return { ok: false, why: 'low-res' };
+  // and a tall or wide plate: relaxed widens the aspect band (a standing figure, a frieze)
+  const [arMax, arMin] = ctx.relaxed ? [3.4, 0.29] : [2.6, 0.36];
   const ar = c.width / c.height;
-  if (ar > 2.6 || ar < 0.36) return { ok: false, why: 'aspect' };
+  if (ar > arMax || ar < arMin) return { ok: false, why: 'aspect' };
   if (BAD_TITLE.test(c.title.replace(/^File:/, '')) && !ctx.allowBad) return { ok: false, why: 'bad title' };
   if (BAD_CATS.test(c.cats.join('|')) && !ctx.allowBad) return { ok: false, why: 'bad category' };
   if ((ctx.exclude || []).some((x) => hay.includes(x.toLowerCase()))) return { ok: false, why: 'excluded' };
@@ -225,7 +335,7 @@ async function resolveFor(group, id, spec, ctx) {
   if (spec.pin) {
     const c = await fetchPinned(spec.pin, width);
     if (!c) return { error: `pin not found: ${spec.pin}` };
-    const ev = evaluate(c, spec.pin, { ...ctx, allowBad: true, reuseOk: true, require: [], exclude: [], minLongest: 450, minShort: 300 });
+    const ev = evaluate(c, spec.pin, { ...ctx, allowBad: true, reuseOk: true, require: [], exclude: [], minLongest: 450, minShort: 300, relaxed: spec.relaxed });
     if (!ev.ok) return { error: `pin rejected (${ev.why}): ${spec.pin}`, cand: c };
     return { cand: c, score: 999, query: 'pin' };
   }
@@ -245,7 +355,7 @@ async function resolveFor(group, id, spec, ctx) {
   return best || { error: 'no acceptable candidate' };
 }
 
-async function download(group, id, pick) {
+async function download(group, id, spec, pick) {
   const c = pick.cand;
   const dir = path.join(IMG_DIR, group);
   const mainPath = path.join(dir, `${id}.jpg`);
@@ -284,10 +394,9 @@ async function download(group, id, pick) {
     thumb: `img/${group}/${id}.thumb.jpg`,
     width, height,
     ...(pr.tone ? { tone: pr.tone } : {}),
-    title: (c.objectName || c.title.replace(/^File:/, '').replace(/\.[a-z]+$/i, '').replace(/_/g, ' ')).slice(0, 160),
-    credit: (c.artist || c.credit || 'Wikimedia Commons').slice(0, 220),
-    // Commons' "No restrictions" is its marker for no known copyright restrictions — public domain, said in full
-    license: c.license.replace(/^No restrictions$/i, 'Public domain (no known restrictions)').replace(/^(PD|PDM)\b[-\w]*/i, 'Public domain'),
+    title: bakeTitle(spec, c).slice(0, 160),
+    credit: bakeCredit(spec, c).slice(0, 220),
+    license: bakeLicense(c.license),
     sourceUrl: c.page,
   };
   return ref;
@@ -297,7 +406,39 @@ function save() {
   fs.writeFileSync(OUT, JSON.stringify(images, null, 1) + '\n');
 }
 
-const groups = only ? [only] : ['archetypes', 'families', 'occurrences'];
+// ---------- --remeta: refresh baked metadata without touching bytes ----------
+// Re-fetches the Commons extmetadata of every entry's recorded _file and rewrites
+// title/credit/license clean (bakeTitle/bakeCredit/bakeLicense, curation overrides
+// honoured). The pictures on disk and their src/thumb/width/height/tone stay as
+// shipped — this is the data-fix lane for manifests baked by the old, verbatim fetcher.
+const remeta = args.includes('--remeta');
+async function remetaAll() {
+  let touched = 0, same = 0, stale = 0;
+  for (const group of GROUPS) {
+    for (const [id, ref] of Object.entries(images[group])) {
+      if (!ref._file) { say(`remeta ${group}/${id}: no _file recorded, skipped`); continue; }
+      const c = await fetchPinned(ref._file, WIDTH[group]);
+      if (!c) { say(`remeta ${group}/${id}: Commons source gone (${ref._file}) — kept as baked`); stale++; continue; }
+      const spec = (queries[group] || {})[id];
+      const next = {
+        title: bakeTitle(spec, c).slice(0, 160),
+        credit: bakeCredit(spec, c).slice(0, 220),
+        license: bakeLicense(c.license),
+      };
+      const before = JSON.stringify([ref.title, ref.credit, ref.license]);
+      const after = JSON.stringify([next.title, next.credit, next.license]);
+      if (before === after) { same++; continue; }
+      Object.assign(ref, next);
+      touched++;
+      say(`remeta ${group}/${id}: ${ref.title} / ${ref.credit}`);
+    }
+  }
+  save();
+  say(`remeta: ${touched} rewritten, ${same} already clean, ${stale} stale sources kept`);
+}
+
+const groups = only ? [only] : GROUPS;
+if (remeta) { await remetaAll(); process.exit(0); }
 const usedTitles = new Set(Object.values(images).flatMap((g) => Object.values(g)).map((r) => r._file).filter(Boolean));
 
 const usedOcc = new Set(Object.values(images.occurrences).map((r) => r._file).filter(Boolean));
@@ -337,7 +478,7 @@ for (const group of groups) {
     try { pick = await resolveFor(group, id, useSpec, { used: group === 'occurrences' ? usedOcc : usedTitles }); } catch (e) { say(`  resolve failed: ${e.message}`); missing.push(`${group}/${id}: ${e.message}`); continue; }
     if (pick.error) { say(`  -> ${pick.error}`); missing.push(`${group}/${id}: ${pick.error}`); continue; }
     try {
-      const ref = await download(group, id, pick);
+      const ref = await download(group, id, useSpec, pick);
       ref._file = pick.cand.title;
       images[group][id] = ref;
       usedTitles.add(pick.cand.title);
