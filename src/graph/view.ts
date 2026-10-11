@@ -1302,7 +1302,17 @@ export class GraphView {
         if (v.g.kind !== pass) continue;
         const a = v.vis * (0.28 + 0.72 * v.hl) * (pass === 'occurrence' ? v.live * dustK : 0.35 + 0.65 * v.live);
         if (a < 0.015) continue;
-        if (pass === 'occurrence') {
+        if (!v.g.placed && pass !== 'body') {
+          // no place on the globe (an occurrence with no recorded place; a symbol with no placed instance): a hollow,
+          // dashed ring, so its absence from the globe and from every walk is visible, not silent
+          ctx.lineWidth = 1;
+          ctx.setLineDash([2, 2.5]);
+          ctx.strokeStyle = rgba(v.rgb, 0.85 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, Math.max(2.5, v.sr), 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        } else if (pass === 'occurrence') {
           const sel = v.id === this.selected;
           ctx.fillStyle = rgba(v.rgb, (sel ? 1 : 0.62 + 0.3 * (v.hl > 0.9 ? 1 : 0)) * a);
           ctx.beginPath();

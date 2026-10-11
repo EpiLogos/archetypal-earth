@@ -110,3 +110,5 @@ body.deep-open .mode-switch { opacity: 0; pointer-events: none; }
   .ms-thumb { transition-duration: 0.01s; }
 }
 .gvt-sky-note { margin: 0 0 9px; line-height: 1.4; max-width: 26ch; }
+.gvt-key { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.gvt-hollow { flex: none; width: 10px; height: 10px; border-radius: 50%; border: 1px dashed rgb(205 218 245 / 0.8); }

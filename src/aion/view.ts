@@ -1,3 +1,4 @@
+import { scopeOf } from '../data/scope';
 import type { Model } from '../data/model';
 import { dirFromLatLon } from '../data/geo';
 import { toRgbPalette } from '../data/palette';
@@ -301,15 +302,30 @@ export class AionView {
    */
   private updateFieldReveal(year: number, epoch: ReturnType<typeof epochAt>) {
     const m = this.model;
+    // the reading's own set: every event's occurrences (its nearby presences dim; the rest of the field is set aside)
+    if (this.scopeFor !== this.reading) {
+      this.scopeFor = this.reading;
+      const own: number[] = [];
+      for (const ev of this.reading?.events ?? []) own.push(...eventOccurrences(m, ev));
+      this.readingScope = scopeOf(m, own, `“${this.reading?.title ?? 'this reading'}”`, { level: 1 });
+    }
+    const sc = this.readingScope!;
     const rel = (this.fieldRel ??= new Float32Array(m.occ.length));
     for (let i = 0; i < m.occ.length; i++) {
       if (!m.located[i]) { rel[i] = 1; continue; }
+      const base = sc.rel[i];
+      if (base <= 0) { rel[i] = 0; continue; }
+      // within the set, the field as of the cursor's year: what has entered stands, what came later recedes
       const y = m.occ[i].year;
-      rel[i] = y > year ? 0.05 : y >= (epoch?.from ?? y) ? 1 : 0.3;
+      const t = y > year ? 0.18 : y >= (epoch?.from ?? y) ? 1 : 0.45;
+      rel[i] = base >= 1 ? t : Math.min(base, t);
     }
     if (this.currentEvent) for (const i of eventOccurrences(m, this.currentEvent)) if (m.located[i]) rel[i] = 1.6;
-    this.engine.setEmphasis(rel, null);
+    this.engine.setEmphasis(rel, null, sc.info);
   }
+
+  private scopeFor: unknown = undefined;
+  private readingScope: ReturnType<typeof scopeOf> | null = null;
 
   update(dt: number) {
     if (this.root.hidden || !this.reading) return;

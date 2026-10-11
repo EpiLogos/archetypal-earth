@@ -3,6 +3,7 @@
 // the image that connects them. The chart sets them in time, one row per image: a row with more than one mark is a series.
 // Jung's framing stands beside it, including his caution that most runs are chance (cw08, on Kammerer).
 // Everything stays in this browser. Routes: #/coincidences, #/coincidences/new, #/coincidences/<id>[/edit].
+import { scopeOf } from '../data/scope';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import type { LensContext, LensInstance } from '../shell/lens';
@@ -162,10 +163,8 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.setContext(symbolName(c));
     const same = entries().filter((x) => x.id !== c.id && symbolKey(x) === symbolKey(c));
     if (c.familyId) {
-      const idx = (m.famOcc.get(c.familyId) ?? []);
-      const rel = new Float32Array(m.occ.length).fill(0.07);
-      for (const i of idx) rel[i] = 1.5;
-      ctx.engine.setEmphasis(rel, m.famPalette.get(c.familyId)?.core ?? null);
+      const sc = scopeOf(m, m.famOcc.get(c.familyId) ?? [], 'this symbol');
+      ctx.engine.setEmphasis(sc.rel, m.famPalette.get(c.familyId)?.core ?? null, sc.info);
     } else ctx.engine.setEmphasis(null, null);
     show([
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Your log' })]),

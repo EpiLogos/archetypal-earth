@@ -10,6 +10,8 @@ export interface StripHandlers {
   onOpen(i: number): void;
   /** a double-click on a step (or the caption): the step, then its reading */
   onRead(i: number): void;
+  /** one of the step's period-mates the walk does not stop at, opened from its list (on the walk) */
+  onOpenOcc?(occIdx: number): void;
 }
 
 /** A thumbnail tap holds the rail still for the platform double-click interval, so the second tap lands where the first was aimed. */
@@ -32,6 +34,8 @@ export class Strip {
   private caption: HTMLElement;
   private captionName: HTMLElement;
   private captionLine: HTMLElement;
+  private alsoBtn: HTMLButtonElement;
+  private alsoList: HTMLElement;
   private index = -1;
   private tapAt: number | null = null;
   private holdTimer = 0;
@@ -42,8 +46,11 @@ export class Strip {
     this.captionLine = el('span', { class: 'st-line' });
     this.caption = el('button', { class: 'st-caption', type: 'button', 'aria-label': 'Open this presence', onclick: () => this.index >= 0 && this.h.onOpen(this.index) }, [this.captionName, this.captionLine]);
     onReadGesture(this.caption, () => this.index >= 0 && this.h.onRead(this.index));
+    // the step's period-mates: a thinned walk still reaches every occurrence of its subject
+    this.alsoList = el('ul', { class: 'st-also-list', hidden: true });
+    this.alsoBtn = el('button', { class: 'st-also', type: 'button', hidden: true, 'aria-expanded': 'false', onclick: () => this.toggleAlso() });
     const viewport = el('div', { class: 'st-viewport' }, [this.rail]);
-    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest', 'aria-hidden': 'true' }, [this.caption, el('div', { class: 'st-row' }, [viewport])]);
+    this.root = el('div', { class: 'strip', 'aria-label': 'The thread, oldest to newest', 'aria-hidden': 'true' }, [el('div', { class: 'st-head' }, [this.caption, this.alsoBtn]), this.alsoList, el('div', { class: 'st-row' }, [viewport])]);
     this.root.inert = true;
     parent.append(this.root);
   }
@@ -90,8 +97,14 @@ export class Strip {
     this.root.classList.toggle('paused', !playing);
   }
 
-  /** Mark step `i` current; centre it in the viewport. */
-  setIndex(i: number, occIdx: number) {
+  private toggleAlso(open = this.alsoList.hidden) {
+    this.alsoList.hidden = !open;
+    this.alsoBtn.setAttribute('aria-expanded', String(open));
+    this.root.classList.toggle('also-open', open);
+  }
+
+  /** Mark step `i` current; centre it in the viewport. `also`: its period-mates (and unplaced), listed beside it. */
+  setIndex(i: number, occIdx: number, also: number[] = []) {
     this.index = i;
     this.frames.forEach((f, k) => {
       f.classList.toggle('current', k === i);
@@ -100,6 +113,17 @@ export class Strip {
     const o = this.model.occ[occIdx];
     this.captionName.textContent = o.label;
     this.captionLine.textContent = placeLine(this.model, o);
+    const m = this.model;
+    this.alsoBtn.hidden = !also.length;
+    this.alsoBtn.textContent = `+${also.length} from this period`;
+    this.alsoList.replaceChildren(...also.map((oi) => {
+      const x = m.occ[oi];
+      return el('li', {}, [el('button', { type: 'button', class: 'st-also-item', onclick: () => this.h.onOpenOcc?.(oi) }, [
+        el('span', { class: 'st-also-name', text: x.label }),
+        el('span', { class: 'st-also-when', text: m.located[oi] ? eraShort(x.yearDisplay, 18) : `${eraShort(x.yearDisplay, 14)} · no place recorded` }),
+      ])]);
+    }));
+    this.toggleAlso(false);
     this.centreWhenFree();
   }
 

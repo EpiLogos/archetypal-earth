@@ -81,6 +81,8 @@ export class GraphTools {
       this.depthWrap,
       forces,
       fit,
+      // the one mark that is not a relation: what has no place on the globe, and so no walk
+      el('p', { class: 'gvt-caption gvt-key' }, [el('span', { class: 'gvt-hollow', 'aria-hidden': 'true' }), el('span', { text: 'Hollow: no recorded place, so not on the globe or in any walk' })]),
     ]);
     this.panel.hidden = true;
     this.toggle = el('button', { class: 'gvt-link gvt-settings', type: 'button', text: 'Settings', 'aria-expanded': 'false', 'aria-controls': 'graph-settings', onclick: () => this.setOpen(this.panel.hidden) }) as HTMLButtonElement;

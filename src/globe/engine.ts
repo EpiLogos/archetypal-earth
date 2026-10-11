@@ -1,4 +1,5 @@
 // The globe: renderer, camera rig, layers, atmosphere and per-frame plumbing.
+import type { ScopeInfo } from '../data/scope';
 import * as THREE from 'three';
 import type { Model } from '../data/model';
 import { clonePalette, easeInOutCubic, mixPalette, WORLD_PALETTE, type RGBPalette } from '../data/palette';
@@ -184,10 +185,24 @@ export class GlobeEngine {
    * Emphasis composes with the field filter here, in one place (MODES-RFC §4): an occurrence the filter excludes is
    * neither drawn nor picked, whatever a lens asks for it. Lenses never see the filter.
    */
-  setEmphasis(targets: Float32Array | null, tint: [number, number, number] | null) {
+  setEmphasis(targets: Float32Array | null, tint: [number, number, number] | null, scope: ScopeInfo | null = null) {
     this.emphasis = targets ? Float32Array.from(targets) : null;
+    this.scope = targets ? scope : null;
     this.presences.setTargets(this.composeFilter(this.emphasis));
     this.presences.setFocusTint(tint ?? [1, 1, 1], !!tint);
+    this.onScope?.(this.scope, this.wholeField);
+  }
+
+  /** The mode's scope as last set (null: the whole field, or an emphasis that is not a mode's set). */
+  scope: ScopeInfo | null = null;
+  /** told whenever the scope (or the whole-field choice) changes: the shell names what is shown */
+  onScope: ((scope: ScopeInfo | null, wholeField: boolean) => void) | null = null;
+  /** the visitor asked for the whole field back: what a scope sets aside is drawn again, receded */
+  private wholeField = false;
+  setWholeField(on: boolean) {
+    this.wholeField = on;
+    this.presences.setTargets(this.composeFilter(this.emphasis));
+    this.onScope?.(this.scope, on);
   }
 
   /** The filter's mask (1 passes, 0 excluded), or null for the whole field. Re-applies the standing emphasis. */
@@ -201,8 +216,10 @@ export class GlobeEngine {
 
   private composeFilter(targets: Float32Array | null): Float32Array | null {
     const mask = this.filterMask;
-    if (!mask) return targets;
-    const out = targets ? Float32Array.from(targets) : new Float32Array(mask.length).fill(1);
+    // a scope's set-aside presences return at the old receded level when the whole field is asked for
+    const lifted = targets && this.scope && this.wholeField ? targets.map((v) => Math.max(v, 0.07)) : targets;
+    if (!mask) return lifted;
+    const out = lifted ? Float32Array.from(lifted) : new Float32Array(mask.length).fill(1);
     for (let i = 0; i < out.length; i++) if (!mask[i]) out[i] = 0;
     return out;
   }

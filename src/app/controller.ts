@@ -193,6 +193,7 @@ export class Controller {
       onSelect: (i) => this.tourJump(i),
       onOpen: (i) => this.tour && this.openOccurrence(this.tour.steps[i].occ),
       onRead: (i) => this.tourRead(i),
+      onOpenOcc: (oi) => this.openOccurrence(oi),
     });
     this.hover = new HoverLabel(root);
     this.timeControl = new TimeControl(root, m, time, () => this.onUserTime());
@@ -214,6 +215,8 @@ export class Controller {
       cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
     });
     this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
+    // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
+    this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
     this.panel = new Panel(root, () => this.stepBack());
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
@@ -519,7 +522,8 @@ export class Controller {
       if (v.target.type !== 'parallels' && this.inSubject(ts, i)) ctx = ts;
     }
     const trail = v.kind === 'thread' ? v : s.trail;
-    const inTrail = trail && this.plan(trail.target.type, trail.target.id).some(step => step.occ === i);
+    // on the walk: a step, or one of a step's period-mates (every occurrence of the subject is reached from its walk)
+    const inTrail = trail && this.plan(trail.target.type, trail.target.id).some(step => step.occ === i || step.also.includes(i));
     return { view: { kind: 'manifest', occId: id, context: ctx }, deep: false, ...(inTrail ? { trail } : {}), ...(s.graph && !inTrail ? { graph: true as const } : {}) };
   }
 
@@ -1657,7 +1661,12 @@ export class Controller {
         content.ties = fams.map((f) => ({ text: f!.name, onClick: () => this.navigate(focusOn(this.state, { type: 'family', id: f!.id })) }));
       }
     }
-    if (subject.type === 'family' || subject.type === 'archetype') content.links!.push({ text: 'Follow the thread', onClick: () => this.followThread() });
+    if (subject.type === 'family' || subject.type === 'archetype') {
+      // a thread walks placed occurrences: a subject with none has no thread, and the label says why (no dead link)
+      const all = subjectOccurrences(this.m, subject);
+      if (all.some((i) => this.m.located[i])) content.links!.push({ text: 'Follow the thread', onClick: () => this.followThread() });
+      else content.line = [content.line, all.length ? `No thread: its ${all.length === 1 ? 'one instance has' : `${all.length} instances have`} no recorded place.` : 'No thread: the field records no instance of it yet.'].filter(Boolean).join(' ');
+    }
     // an archetype with a deep field (the Great Mother is the first) opens it from its focus
     if (subject.type === 'archetype' && DEEP_FIELDS.has(subject.id)) content.links!.push({ text: 'The deep field', onClick: () => this.navigate(inLens('symbols', ['archetype', subject.id])) });
     content.links!.push({ text: 'Reading', onClick: () => this.setDeep(true) });
@@ -1783,7 +1792,8 @@ export class Controller {
     if (!this.graphMode) {
       e.setEmphasis(this.emphasise(ctxIdx, { selected: oi, relatedLevel: 1.15, extra: { idx: par, level: 1.6 } }), famPal.core);
       const dist = o.geoPrecision === 'culture' ? 3.0 : o.geoPrecision === 'region' ? 2.6 : 2.25;
-      e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
+      // an occurrence with no recorded place has nowhere to fly to: the camera stays where it stands
+      if (m.located[oi]) e.rig.flyTo(o.lat, o.lon, dist, { instant: first });
       if (m.located[oi]) e.markers.sel.show(m.dir[oi], famPal.core);
       else e.markers.sel.hide();
     }
@@ -1825,7 +1835,7 @@ export class Controller {
     this.strip.set(members);
     this.strip.setPlaying(true);
     this.strip.show();
-    this.strip.setIndex(0, members[0]);
+    this.strip.setIndex(0, members[0], steps[0]?.also);
     this.frameSet(members, { duration: first ? 0.01 : undefined, min: 2.2 });
     if (first) {
       const sp = spreadOf(members.map((i) => m.dir[i]));
@@ -1908,7 +1918,7 @@ export class Controller {
     t.phase = 'fly';
     t.tok = ++this.tokCounter;
     const tok = t.tok;
-    this.strip.setIndex(i, step.occ);
+    this.strip.setIndex(i, step.occ, step.also);
     this.strip.setPlaying(t.playing);
     const dist = (o.geoPrecision === 'culture' ? 2.9 : o.geoPrecision === 'region' ? 2.5 : 2.2) + Math.min(ang, 1.4) * 0.3;
     e.rig.flyTo(o.lat, o.lon, dist, { duration: i === 0 ? 2.2 : undefined });

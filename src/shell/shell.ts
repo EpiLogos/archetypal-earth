@@ -31,6 +31,7 @@ export class Shell {
   private aside: HTMLElement;
   private title: HTMLElement;
   private controls: HTMLElement;
+  private scopeLine: HTMLElement;
   private menu: HTMLElement;
   private menuScrim: HTMLElement;
   private filterHost: HTMLElement;
@@ -49,7 +50,8 @@ export class Shell {
     this.aside = el('div', { class: 'sh-aside' });
     this.title = el('h1', { class: 'sh-title' });
     this.controls = el('div', { class: 'sh-controls' });
-    this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.controls]);
+    this.scopeLine = el('p', { class: 'sh-scope', hidden: true, role: 'status' });
+    this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.scopeLine, this.controls]);
 
     const github = el('a', { class: 'sh-corner-btn icon-btn', href: REPO_URL, target: '_blank', rel: 'noopener', 'aria-label': 'The project on GitHub', title: 'GitHub' }, [icon('github', 17)]);
     const search = document.getElementById('search-btn');
@@ -101,6 +103,22 @@ export class Shell {
     this.title.textContent = text;
     this.title.hidden = !text;
     this.syncDocTitle();
+  }
+
+  /**
+   * What the globe shows in this mode: its own presences, the nearby ones dimmed, the rest set aside — and the whole
+   * field back on request. Null hides the line (the whole field is showing).
+   */
+  setScope(scope: { label: string; own: number; nearby: number } | null, wholeField: boolean, onWhole: (on: boolean) => void) {
+    clear(this.scopeLine);
+    this.scopeLine.hidden = !scope;
+    if (!scope) return;
+    const n = (x: number) => x.toLocaleString();
+    this.scopeLine.append(
+      el('span', { text: `${n(scope.own)} in ${scope.label}${scope.nearby ? ` · ${n(scope.nearby)} nearby, dimmed` : ''}${wholeField ? ' · the rest of the field receded' : ''}` }),
+      ' · ',
+      el('button', { type: 'button', class: 'link-quiet sh-scope-toggle', text: wholeField ? 'Only this set' : 'Show the whole field', onclick: () => onWhole(!wholeField) }),
+    );
   }
 
   /** The lens's own few controls; the shell places them. Null clears. */

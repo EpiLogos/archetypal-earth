@@ -2,6 +2,7 @@
 // enantiodromia, the transcendent function, and number. Every claim is a verbatim quotation placed by the corpus
 // (public/data/theory.json, built by scripts/theory.mjs). The globe tunes to what a section names; the dynamical lens is
 // this lens's picture of a subject in motion.
+import { scopeOf } from '../data/scope';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { averagePalettes } from '../data/palette';
@@ -76,11 +77,9 @@ export function mount(ctx: LensContext): LensInstance {
     if (!target) { ctx.engine.setEmphasis(null, null); return; }
     const idx = subjectOccurrences(ctx.model, target);
     const pal = subjectPalette(ctx.model, target, averagePalettes);
-    const rel = new Float32Array(ctx.model.occ.length).fill(0.07);
-    for (const i of idx) rel[i] = 1.5;
-    for (let i = 0; i < rel.length; i++) if (!ctx.model.located[i]) rel[i] = 1;
+    const sc = scopeOf(ctx.model, idx, `“${s.name}”`);
     if (pal) ctx.engine.setPalette(pal, 1.4);
-    ctx.engine.setEmphasis(rel, pal?.core ?? null);
+    ctx.engine.setEmphasis(sc.rel, pal?.core ?? null, sc.info);
   };
 
   const renderNumber = (sections: TheorySection[]) => {

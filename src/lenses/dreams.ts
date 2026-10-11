@@ -127,7 +127,7 @@ export function mount(ctx: LensContext): LensInstance {
     const families = [...new Set(hits.filter((h) => h.target.type === 'family').map((h) => h.target.id))];
     // the globe: the corpus's dreams and visions of every image this dream names
     const idx = families.flatMap((f) => (amplify(m, f, ok)?.dreams ?? []));
-    tuneGlobe(ctx, idx, families[0]);
+    tuneGlobe(ctx, idx, families[0], 'this dream');
     const openImage = (h: ImageMatch) => (h.target.type === 'family' ? ctx.setPath([d.id, h.target.id]) : ctx.focus({ type: 'archetype', id: h.target.id }));
     const answer = el('textarea', { rows: 4, placeholder: 'What attitude in your waking life might this dream be answering? What does it add that you leave out?' });
     answer.value = d.answer;
@@ -158,7 +158,7 @@ export function mount(ctx: LensContext): LensInstance {
     const a = amplify(m, familyId, ok);
     if (!a) { dream(d); return; }
     ctx.setContext(`${a.family.name}, in ${d.title || 'the dream'}`);
-    tuneGlobe(ctx, a.dreams.length ? a.dreams : a.instances, familyId);
+    tuneGlobe(ctx, a.dreams.length ? a.dreams : a.instances, familyId, 'this image');
     const act: AmplifyActions = {
       openOccurrence: (id) => ctx.openOccurrence(id),
       focusFamily: (id) => ctx.focus({ type: 'family', id }),

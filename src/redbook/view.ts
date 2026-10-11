@@ -3,6 +3,7 @@
 // the world to its family), the walk and the genesis table stand over it.
 // Everything here is subject: Jung — the book is the one corpus-document
 // where analyst, patient and commentator are the same body.
+import { scopeOf } from '../data/scope';
 import type { Model } from '../data/model';
 import { occurrenceImage } from '../data/model';
 import { toRgbPalette } from '../data/palette';
@@ -228,14 +229,17 @@ export class RedBookView {
     return row2;
   }
 
-  /** The world tuned to the standing stop: its family stands, the rest recedes. */
+  /**
+   * The world tuned to the walk: the book's own stops and the standing stop's family are the mode's set; their nearby
+   * presences dim; the rest of the field is set aside (src/data/scope.ts), and the shell says so.
+   */
   private emphasise(familyId: string, selected: number) {
     const m = this.model;
-    const rel = new Float32Array(m.occ.length);
-    for (let i = 0; i < rel.length; i++) rel[i] = m.located[i] ? 0.07 : 1;
-    for (const i of m.famOcc.get(familyId) ?? []) rel[i] = 1.5;
-    if (m.located[selected]) rel[selected] = 2.4;
-    this.engine.setEmphasis(rel, null);
+    const own: number[] = [];
+    for (const s of this.stops) { const i = m.occIndex.get(s.id); if (i !== undefined) own.push(i); }
+    for (const i of m.famOcc.get(familyId) ?? []) own.push(i);
+    const sc = scopeOf(m, own, 'the Red Book’s walk', { selected: m.located[selected] ? selected : undefined });
+    this.engine.setEmphasis(sc.rel, null, sc.info);
   }
 
   /** Arrow-key walking; wired by the controller. */

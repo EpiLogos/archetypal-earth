@@ -67,7 +67,7 @@ export function mount(ctx: LensContext): LensInstance {
     const a = amplify(m, id, ok);
     if (!a) { home(); return; }
     ctx.setContext(a.family.name);
-    tuneGlobe(ctx, a.instances, id);
+    tuneGlobe(ctx, a.instances, id, 'this symbol');
     show([
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another symbol' })]),
       ...amplificationView(m, a, act, ctx.passages),
@@ -76,7 +76,7 @@ export function mount(ctx: LensContext): LensInstance {
 
   const deep = (id: string) => {
     ctx.setContext(m.archById.get(id)!.name);
-    tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok));
+    tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok), undefined, 'this archetype');
     loadLensData<DepthData>('depth').then((d) => {
       const entry = d.archetypes[id];
       if (!entry) { plainArchetype(id); return; }
@@ -102,7 +102,7 @@ export function mount(ctx: LensContext): LensInstance {
     const arch = m.archById.get(id);
     if (!arch) { home(); return; }
     ctx.setContext(arch.name);
-    tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok));
+    tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok), undefined, 'this archetype');
     const nodes: (HTMLElement | null)[] = [
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another symbol' })]),
       el('p', { class: 'am-kicker', text: 'archetype · known only through its images' }),

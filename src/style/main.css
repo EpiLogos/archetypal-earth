@@ -393,3 +393,16 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* a step's period-mates (src/ui/strip.ts): the walk reaches every occurrence of its subject */
+.st-head { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.st-also { min-height: 32px; padding: 4px 12px; border: 1px solid rgb(var(--core-rgb) / 0.28); border-radius: 16px; background: rgb(var(--deep-rgb) / 0.6); color: var(--ink-2); font: 11.5px var(--sans); cursor: pointer; }
+.st-also[hidden] { display: none; }
+.st-also:hover, .st-also[aria-expanded="true"] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.6); }
+.st-also-list { list-style: none; margin: 4px auto 6px; padding: 4px; max-width: min(560px, 92vw); max-height: 30vh; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; border-radius: 10px; background: rgb(var(--deep-rgb) / 0.88); border: 1px solid var(--hair); }
+.st-also-list[hidden] { display: none; }
+.st-also-item { display: grid; width: 100%; min-height: 44px; padding: 6px 10px; text-align: left; border: 0; border-radius: 7px; background: none; color: var(--ink); cursor: pointer; }
+.st-also-item:hover { background: rgb(var(--core-rgb) / 0.14); }
+.st-also-name { font: 13px/1.25 var(--sans); }
+.st-also-when { font: 11px var(--sans); color: var(--ink-3); }
+@media (pointer: coarse) { .st-also { min-height: 44px; } }
