@@ -82,7 +82,7 @@ try {
     const folio = await page.evaluate(() => document.querySelector('.redbook .rv-name')?.textContent);
     const rb1 = await state(page);
     check(rb1.title === `${folio} — ${plainTitle}`, 'the Red Book names its folio in the tab title', `"${rb1.title}"`);
-    await page.locator('.rb-rail button', { hasText: '→' }).click();
+    await page.locator('.rb-rail button[aria-label="Next folio"]').click();
     await until(page, () => document.querySelector('.redbook .rv-name')?.textContent !== folio);
     await page.waitForTimeout(400);
     const folio2 = await page.evaluate(() => document.querySelector('.redbook .rv-name')?.textContent);

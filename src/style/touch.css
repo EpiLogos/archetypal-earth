@@ -23,8 +23,8 @@
 
   .sh-controls select, .aion-choices select, .gv-tools select { min-height: 44px; }
   /* rail circles stay small visually; the hit box grows around them so they don't overhang the card */
-  .rb-rail button, .dy-rail button { position: relative; }
-  .rb-rail button::after, .dy-rail button::after { content: ''; position: absolute; inset: -11px; }
+  .rb-rail button:not(.ws-frame), .dy-rail button { position: relative; }
+  .rb-rail button:not(.ws-frame)::after, .dy-rail button::after { content: ''; position: absolute; inset: -11px; }
   .rv-close, .dp-close { width: 44px; height: 44px; }
   .st-frame { min-width: 50px; }  /* drawn at scale(0.9): 50 px is 45 on screen */
   .gvt-link { min-height: 44px; min-width: 44px; justify-content: center; }

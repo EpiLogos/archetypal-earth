@@ -82,6 +82,9 @@ const browser = await launch(kind, { headed: false });
 try {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/redbook' });
   await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); });
+  // the bare landing shows no folio: the walk is entered from the Options row 'The walk', which opens folio 1
+  await page.locator('.sh-controls details.mode-options > summary').click();
+  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'The walk' }).click();
   await page.waitForSelector('.redbook .rb-card .rv-name', { timeout: 20000 });
   await page.waitForTimeout(800);
 
@@ -89,6 +92,7 @@ try {
   const total = Number(start.split('/')[1]?.trim());
   check(total === 37, 'the walk has 37 stops', `progress "${start}"`);
   const first = Number(start.split('/')[0]);
+  check(first === 1, 'the walk opens on folio 1', `progress "${start}"`);
   const seen = new Set();
   const tonal = [];
   const images = [];
@@ -134,8 +138,11 @@ try {
   check(tonal.length === 0, 'no stop is a tonal plate without an image', tonal.length ? tonal.join(', ') : 'all stops carry an image');
   console.log(`INFO ${kind} hero images loaded on ${images.length}/${total} stops; tonal ${tonal.length}`);
 
-  // the genesis table, by its own button
-  await page.click('.rb-modes button:nth-child(2)');
+  // the genesis table, from the Options row 'Genesis': closing the folio's card returns to the landing, where Options stand
+  await page.click('.redbook .rb-card .rv-close');
+  await page.waitForTimeout(400);
+  await page.locator('.sh-controls details.mode-options > summary').click();
+  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Genesis' }).click();
   await page.waitForSelector('.rb-genesis', { timeout: 5000 });
   await page.waitForTimeout(400);
   const genesis = await page.evaluate(() => {

@@ -9,8 +9,9 @@ import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } 
 import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
-import { passageLine } from '../ui/format';
+import { eraShort, passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
+import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
 import { findWalk, wholeReadingWalk } from './walk';
 import { yearText } from './skyclock';
@@ -25,8 +26,10 @@ export class AionView {
   readonly root: HTMLElement;
   private heading: HTMLElement;
   private epochs: HTMLElement;
-  /** Shared next/prev rail over the timeline (same look as the Red Book's). */
+  /** Shared next/prev rail over the timeline (same look as the Red Book's): the walk strip of the open walk. */
   private rail: HTMLElement;
+  private strip: WalkStrip | null = null;
+  private stripKind: 'chapter' | 'thread' | null = null;
   private card: HTMLElement;
   private markers: HTMLElement;
   private reading: HistoryReading | null = null;
@@ -131,6 +134,8 @@ export class AionView {
     const walking = selection?.kind === 'chapter' || selection?.kind === 'thread';
     this.epochs.hidden = walking;
     this.rail.hidden = !walking;
+    // the strip was built while the rail was hidden: centre it now that it shows
+    this.strip?.recenter();
     document.body.classList.toggle('aion-card-open', !!selection);
     // a card owns the left: no title, no reading tabs under the close
     this.chrome?.setContext(selection ? '' : `${reading.title} · ${reading.author}`);
@@ -318,13 +323,7 @@ export class AionView {
     this.chapter = chapter;
     const all = book.chapters;
     const i = all.indexOf(chapter);
-    const step = (delta: number) => this.select({ kind: 'chapter', id: all[(i + delta + all.length) % all.length].id });
-    clear(this.rail);
-    this.rail.append(
-      el('button', { type: 'button', text: '←', 'aria-label': 'Previous chapter', onclick: () => step(-1) }),
-      el('span', { class: 'rb-progress', text: `${i + 1} / ${all.length}` }),
-      el('button', { type: 'button', text: '→', 'aria-label': 'Next chapter', onclick: () => step(1) }),
-    );
+    this.walkStrip('chapter').update(all.map((c) => ({ id: c.id, image: this.chapterImage(c), label: c.title })), i);
     const text = this.openCard();
     const image = this.chapterImage(chapter);
     if (image) text.before(plate(image, { className: 'rv-hero', credit: true, alt: chapter.title }));
@@ -365,13 +364,47 @@ export class AionView {
     const event = this.threadEvents[this.threadIndex];
     if (!event) return;
     this.showEvent(event, true);
-    const step = (delta: number) => { this.threadIndex = (this.threadIndex + delta + this.threadEvents.length) % this.threadEvents.length; this.threadTimer = 0; this.showThreadEvent(); };
-    clear(this.rail);
-    this.rail.append(
-      el('button', { type: 'button', text: '←', 'aria-label': 'Previous historical event', onclick: () => step(-1) }),
-      el('span', { class: 'rb-progress', text: `${this.threadIndex + 1} / ${this.threadEvents.length}` }),
-      el('button', { type: 'button', text: '→', 'aria-label': 'Next historical event', onclick: () => step(1) }),
-    );
+    const items: WalkItem[] = this.threadEvents.map((e) => ({
+      id: e.id,
+      image: eventHeroImage(this.model, e),
+      label: e.name,
+      sub: eraShort(e.yearDisplay, 13),
+      palette: this.reading?.epochs.find((x) => x.id === e.epochId)?.palette,
+    }));
+    this.walkStrip('thread').update(items, this.threadIndex);
+  }
+
+  /** The walk strip on the rail: one per walk kind, with that walk's labels; its frames rebuild when the walk changes. */
+  private walkStrip(kind: 'chapter' | 'thread'): WalkStrip {
+    if (!this.strip || this.stripKind !== kind) {
+      clear(this.rail);
+      this.stripKind = kind;
+      const labels = kind === 'chapter'
+        ? { prev: 'Previous chapter', next: 'Next chapter', list: 'Chapter walk' }
+        : { prev: 'Previous historical event', next: 'Next historical event', list: 'Thread walk' };
+      this.strip = new WalkStrip(this.rail, labels, (i) => this.walkTo(kind, i), (delta) => this.walkStep(kind, delta));
+    }
+    return this.strip;
+  }
+
+  /** Jump the open walk to step `i` (a chapter's or an event's index). */
+  private walkTo(kind: 'chapter' | 'thread', i: number) {
+    if (kind === 'chapter') {
+      const all = this.history.book?.chapters ?? [];
+      if (i >= 0 && i < all.length) this.select({ kind: 'chapter', id: all[i].id });
+      return;
+    }
+    const n = this.threadEvents.length;
+    if (!n) return;
+    this.threadIndex = (i + n) % n;
+    this.threadTimer = 0;
+    this.showThreadEvent();
+  }
+
+  /** One step along the open walk, wrapping at either end. */
+  private walkStep(kind: 'chapter' | 'thread', delta: number) {
+    if (kind === 'chapter') this.walkBook(delta);
+    else this.walkTo('thread', this.threadIndex + delta);
   }
 
   /** The timeline's Play walks the thread; there is no second Play on the rail. */

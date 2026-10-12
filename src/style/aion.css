@@ -76,6 +76,8 @@
 .aion-epochs button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding: 6px 0; border-bottom: 1px solid transparent; white-space: nowrap; transition: color .4s, border-color .4s; }
 .aion-epochs button[aria-pressed=true] { color: var(--core); border-color: var(--core); }
 .aion-card { bottom: 126px; max-height: calc(100vh - 210px); }
+/* the walk strip (chapter or thread) is taller than the old arrows: the card stands above it */
+.aion:has(.rb-rail:not([hidden])) .aion-card { bottom: 190px; max-height: calc(100vh - 270px); }
 .aion-card .aion-date { margin: 0 22px 9px 0; }
 .aion-card .aion-lede { color: var(--ink); }
 .aion-card .dp-def { margin: 22px 0 0; }
@@ -107,8 +109,8 @@ body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
   .aion-card { bottom: 100px; max-height: 48vh; }
   .aion-epochs { bottom: 56px; gap: 16px 20px; }
   .aion-epochs button { font-size: 11px; }
-  /* book/thread rail sits under the card; keep a clear gap */
-  .aion:has(.rb-rail:not([hidden])) .aion-card { bottom: 100px; }
+  /* the walk strip sits under the card; keep a clear gap */
+  .aion:has(.rb-rail:not([hidden])) .aion-card { bottom: 150px; max-height: 42vh; }
 }
 .symbol-reading { margin-top: 22px; }
 .symbol-compact { border-top: 1px solid var(--hair); padding-top: 14px; }

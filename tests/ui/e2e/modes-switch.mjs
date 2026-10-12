@@ -37,17 +37,18 @@ try {
     let s = await state(page);
     check(s.hash === '#/redbook' && s.redbook, 'the Red Book switch opens the Red Book from the plain world', `hash "${s.hash}", redbook visible ${s.redbook}`);
     check(!s.aion, 'and the Aion panel stays down');
-    // the null landing centres The Self: the folio its genesis row names (the mandala), not the first folio
-    // the expected folio is read from the data, not written in: the stop of the genesis row that targets archetype 'self'
+    // the bare landing shows no folio; the walk opens on folio 1, entered from the Options row 'The walk'
+    // the expected folio is read from the data: the first stop of the book
     const expected = await page.evaluate(async () => {
       const [rb, field] = await Promise.all([fetch('/data/redbook.json').then((r) => r.json()), fetch('/data/field.json').then((r) => r.json())]);
-      const row = rb.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
-      const i = rb.stops.findIndex((s) => s.id === row?.stopId);
-      const occ = field.occurrences.find((o) => o.id === row?.stopId);
-      return { progress: i < 0 ? null : `${i + 1} / ${rb.stops.length}`, title: occ?.title ?? null };
+      const occ = field.occurrences.find((o) => o.id === rb.stops[0]?.id);
+      return { progress: `1 / ${rb.stops.length}`, title: occ?.title ?? null };
     });
+    await page.locator('.sh-controls details.mode-options > summary').click();
+    await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'The walk' }).click();
+    await page.waitForTimeout(1200);
     const landing = await page.evaluate(() => ({ name: document.querySelector('.redbook .rv-name')?.textContent, progress: document.querySelector('.rb-progress')?.textContent }));
-    check(!!expected.progress && landing.progress === expected.progress && landing.name === expected.title, 'the null landing centres The Self (its genesis-row folio)', `"${landing.name}", ${landing.progress}; expected "${expected.title}", ${expected.progress}`);
+    check(!!expected.title && landing.progress === expected.progress && landing.name === expected.title, 'the walk opens on folio 1', `"${landing.name}", ${landing.progress}; expected "${expected.title}", ${expected.progress}`);
     await page.keyboard.press('Escape');
     await wait(page, () => !location.hash.startsWith('#/redbook'));
     await page.waitForTimeout(600);

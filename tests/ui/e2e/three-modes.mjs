@@ -83,6 +83,10 @@ if ((report.citeButtons ?? []).length) {
 // ── Red Book: walk + plate + genesis ──
 await page.goto(URL + '#/redbook', { waitUntil: 'load' });
 await page.waitForTimeout(2000);
+// the bare landing shows no folio: the walk is entered from the Options row 'The walk' (folio 1)
+await page.locator('.sh-controls details.mode-options > summary').click();
+await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'The walk' }).click();
+await page.waitForTimeout(1500);
 report.redbook = await page.evaluate(() => ({
   heading: document.querySelector('.rb-heading h1')?.textContent,
   subject: document.querySelector('.rb-subject')?.textContent,
@@ -115,8 +119,11 @@ must('.redbook .rb-quote footer (walk)', report.redbookWalk.folio);
 must('.redbook .rv-hero img (walk)', report.redbookWalk.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-elijah.png` });
 
-// genesis view
-await page.click('.rb-modes button:nth-child(2)');
+// genesis view: closing the folio's card returns to the landing, where Options stand
+await page.click('.redbook .rb-card .rv-close');
+await page.waitForTimeout(400);
+await page.locator('.sh-controls details.mode-options > summary').click();
+await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Genesis' }).click();
 await page.waitForTimeout(1200);
 report.genesis = await page.evaluate(() => ({
   rows: document.querySelectorAll('.rb-genesis').length,

@@ -14,6 +14,7 @@ import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
+import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
 import type { LensChrome } from '../shell/lens';
 
@@ -24,6 +25,7 @@ export class RedBookView {
   readonly root: HTMLElement;
   private heading: HTMLElement;
   private rail: HTMLElement;
+  private strip: WalkStrip;
   private card: HTMLElement;
   private mode: RedBook;
   private state: AppState['redbook'];
@@ -45,6 +47,8 @@ export class RedBookView {
     // the walk/genesis toggle is this lens's one control; the shell places it (MODES-RFC §2)
     this.heading = el('div', { class: 'rb-controls' });
     this.rail = el('nav', { class: 'rb-rail', 'aria-label': 'Folio walk' });
+    this.strip = new WalkStrip(this.rail, { prev: 'Previous folio', next: 'Next folio', list: 'Folio walk' },
+      (i) => this.select({ stop: this.stops[i].id }), (delta) => this.walk(delta));
     this.card = el('aside', { class: 'rb-card reveal on', 'aria-label': 'Red Book reading', hidden: true });
     this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.rail, this.card]);
     this.setCardActive(false);
@@ -106,9 +110,8 @@ export class RedBookView {
     clear(this.heading);
     const genesis = !!this.state?.genesis;
     const walking = !!this.state?.stop && !genesis;
-    // first folio whose genesis row names the Self, else the first stop
-    const selfRow = this.mode.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
-    const firstId = (selfRow && this.stops.find((s) => s.id === selfRow.stopId)?.id) || this.stops[0]?.id;
+    // the walk opens on folio 1
+    const firstId = this.stops[0]?.id;
     // two rows: the folio walk (the rail moves folio by folio) and the genesis table; the folios are not listed
     this.heading.append(modeOptions([
       optionGroup('Walk', [
@@ -123,18 +126,26 @@ export class RedBookView {
   }
 
   private buildRail() {
-    clear(this.rail);
-    if (this.state?.genesis || !this.current) { this.rail.hidden = true; return; }
+    const current = this.current;
+    if (this.state?.genesis || !current) { this.rail.hidden = true; return; }
     this.rail.hidden = false;
-    const i = Math.max(0, this.stops.findIndex((s) => s.id === this.current?.id));
-    const prev = () => this.select({ stop: this.stops[(i - 1 + this.stops.length) % this.stops.length].id });
-    const next = () => this.select({ stop: this.stops[(i + 1) % this.stops.length].id });
-    this.rail.append(
-      el('button', { type: 'button', text: '←', 'aria-label': 'Previous folio', onclick: prev }),
-      el('span', { class: 'rb-progress', text: `${i + 1} / ${this.stops.length}` }),
-      el('button', { type: 'button', text: '→', 'aria-label': 'Next folio', onclick: next }),
-      el('span', { class: 'rb-section', text: this.sectionName.get(this.current?.sectionId ?? '') ?? '' }),
-    );
+    const i = Math.max(0, this.stops.findIndex((s) => s.id === current.id));
+    this.strip.update(this.walkItems(), i, this.sectionName.get(current.sectionId) ?? '');
+  }
+
+  /** The folios as the walk strip shows them: one per stop, in order; a stop with no occurrence keeps its place, unlabelled. */
+  private walkItems(): WalkItem[] {
+    const m = this.model;
+    return this.stops.map((stop) => {
+      const i = m.occIndex.get(stop.id);
+      const o = i !== undefined ? m.occ[i] : undefined;
+      return {
+        id: stop.id,
+        image: o ? occurrenceImage(m, o) : undefined,
+        label: o?.title ?? stop.id,
+        palette: o ? m.famById.get(o.familyId)?.palette : undefined,
+      };
+    });
   }
 
   private closeButton() {
