@@ -3,7 +3,9 @@ import { composeLook, composeStation, projectNdc, type Frame } from '../../src/s
 import { ndcOf } from '../../src/sky/stages';
 import type { Vec3 } from '../../src/data/geo';
 
-const DESK: Frame = { fovDeg: 45, aspect: 1.6, shiftX: 0, shiftY: 0, margin: 0.78 };
+// the point-framing cases below test the centres and the occlusion: their stand-in planet is a 16° disc, which no frame
+// holds, so the whole-disc rule (`edge`) is set aside here and tested on its own at a real approach station further down
+const DESK: Frame = { fovDeg: 45, aspect: 1.6, shiftX: 0, shiftY: 0, margin: 0.78, edge: 10 };
 const PHONE: Frame = { ...DESK, aspect: 0.5 };
 const rad = (d: number) => (d * Math.PI) / 180;
 const dist3 = (p: Vec3, q: Vec3) => Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
@@ -163,5 +165,55 @@ describe('projectNdc', () => {
     expect(mine.x).toBeCloseTo(theirs.x, 9);
     expect(mine.y).toBeCloseTo(theirs.y, 9);
     expect(mine.depth).toBeCloseTo(theirs.depth, 9);
+  });
+});
+
+describe('the whole disc, not only its centre, stays in frame', () => {
+  const tanHalf = Math.tan((45 * Math.PI) / 360);
+  // the approach station: the planet's disc fills 30 % of the view's height
+  const STATION = PLANET_R / Math.sin(Math.atan(0.3 * tanHalf));
+  const GAZE_DESK: Frame = { fovDeg: 45, aspect: 1.6, shiftX: 0, shiftY: 0, margin: 0.6 };
+  const GAZE_PHONE: Frame = { ...GAZE_DESK, aspect: 0.46 };
+  const spanY = (cam: Vec3) => Math.tan(Math.asin(PLANET_R / dist3(cam, PLANET))) / tanHalf;
+
+  it('a centre inside the margin does not pass when the disc hangs off the edge (a phone)', () => {
+    let looseOnly = 0;
+    for (let deg = 1; deg <= 80; deg += 1) {
+      // offset in z: the pair then separates along the screen's x, where a phone has no room for a planet's whole disc
+      const cam: Vec3 = [PLANET[0] + STATION * Math.cos(rad(deg)), 0, STATION * Math.sin(rad(deg))];
+      const loose = composeLook(pair(cam, { ...GAZE_PHONE, edge: 10 }));
+      const strict = composeLook(pair(cam, GAZE_PHONE));
+      // the whole-disc rule only ever narrows what the centre rule allows
+      if (strict.ok) expect(loose.ok).toBe(true);
+      if (loose.ok && !strict.ok) looseOnly++;
+      if (strict.ok) {
+        const sy = spanY(cam);
+        expect(Math.abs(strict.ndcA.y) + sy).toBeLessThanOrEqual(0.8 + 1e-9);
+        expect(Math.abs(strict.ndcA.x) + sy / GAZE_PHONE.aspect).toBeLessThanOrEqual(0.8 + 1e-9);
+      }
+    }
+    // there are stations whose planet centre is inside the margin while its disc is cut by the edge
+    expect(looseOnly).toBeGreaterThan(0);
+  });
+
+  it.each([['desktop', GAZE_DESK], ['phone', GAZE_PHONE]] as const)('the %s station keeps both whole discs inside the edge', (_n, frame) => {
+    const cur: Vec3 = unitOf([0.2, 0.9, 0.1]);
+    const st = composeStation(station(PLANET, STATION, cur, frame));
+    expect(st.ok).toBe(true);
+    const cam: Vec3 = [PLANET[0] + st.dir[0] * STATION, PLANET[1] + st.dir[1] * STATION, PLANET[2] + st.dir[2] * STATION];
+    const r = composeLook(pair(cam, frame));
+    const sy = spanY(cam);
+    expect(Math.abs(r.ndcA.y) + sy).toBeLessThanOrEqual(0.8 + 1e-9);
+    expect(Math.abs(r.ndcA.x) + sy / frame.aspect).toBeLessThanOrEqual(0.8 + 1e-9);
+    expect(Math.abs(r.ndcB.x)).toBeLessThanOrEqual(0.6);
+    expect(Math.abs(r.ndcB.y)).toBeLessThanOrEqual(0.6);
+  });
+
+  it('a phone needs at least the desktop swing to hold the planet in whole', () => {
+    const cur: Vec3 = unitOf([0.2, 0.9, 0.1]);
+    const desk = composeStation(station(PLANET, STATION, cur, GAZE_DESK));
+    const phone = composeStation(station(PLANET, STATION, cur, GAZE_PHONE));
+    expect(desk.ok && phone.ok).toBe(true);
+    expect(phone.swingDeg).toBeGreaterThanOrEqual(desk.swingDeg);
   });
 });

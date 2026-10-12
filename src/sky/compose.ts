@@ -10,7 +10,19 @@
 // among the candidates at the smallest swing prefers the azimuth that spreads the pair furthest along screen-x (a wide frame).
 import type { Vec3 } from '../data/geo';
 
-export interface Frame { fovDeg: number; aspect: number; shiftX: number; shiftY: number; margin: number }
+export interface Frame {
+  fovDeg: number;
+  aspect: number;
+  shiftX: number;
+  shiftY: number;
+  /** each body's centre must lie inside |NDC| ≤ margin */
+  margin: number;
+  /**
+   * each body's whole disc (centre plus its angular radius, in NDC) must lie inside |NDC| ≤ edge; default 0.8, which keeps it clear of the header band and the bottom controls. A planet at its
+   * approach station fills a third of the view, so a centre inside the margin can still hang off the screen (a phone's width).
+   */
+  edge?: number;
+}
 export interface ComposeInput { cam: Vec3; a: Vec3; aRadius: number; b: Vec3; bRadius: number; frame: Frame; up?: Vec3 }
 export interface ComposeResult { look: Vec3; ok: boolean; sepDeg: number; ndcA: Ndc; ndcB: Ndc; occluded: boolean; behind: boolean }
 /** The camera is derived from the station (`center + dir·dist`), so no `cam` is taken. */
@@ -18,6 +30,8 @@ export type StationInput = Omit<ComposeInput, 'cam'> & { center: Vec3; dist: num
 
 export interface Ndc { x: number; y: number }
 
+/** The share of the half-view (NDC) a body's whole disc may reach; `Frame.edge` overrides it. */
+const DEFAULT_EDGE = 0.8;
 /** The discs must clear each other by this factor of their combined angular radii, so the near one never grazes the far one. */
 const CLEAR = 1.15;
 /** The station search grid: 1° of swing, 2° of azimuth. */
@@ -83,8 +97,15 @@ export function composeLook(i: ComposeInput): ComposeResult {
   // a body behind the lens has no meaningful NDC, so it can never count as framed (a camera between the two bodies)
   const behind = !(ndcA.depth > 0 && ndcB.depth > 0);
   const m = i.frame.margin;
-  const inside = (n: Ndc) => Math.abs(n.x) <= m && Math.abs(n.y) <= m;
-  return { look, ok: !behind && !occluded && inside(ndcA) && inside(ndcB), sepDeg, ndcA, ndcB, occluded, behind };
+  const edge = i.frame.edge ?? DEFAULT_EDGE;
+  const t = tanHalf(i.frame.fovDeg);
+  // a disc of angular radius r spans tan(r)/tanHalf in NDC y and tan(r)/(tanHalf·aspect) in x
+  const spanY = (r: number, d: number) => Math.tan(angRadius(r, d)) / t;
+  const spanX = (r: number, d: number) => spanY(r, d) / i.frame.aspect;
+  const inside = (n: Ndc, r: number, d: number) =>
+    Math.abs(n.x) <= m && Math.abs(n.y) <= m && Math.abs(n.x) + spanX(r, d) <= edge && Math.abs(n.y) + spanY(r, d) <= edge;
+  const ok = !behind && !occluded && inside(ndcA, i.aRadius, dA) && inside(ndcB, i.bRadius, dB);
+  return { look, ok, sepDeg, ndcA, ndcB, occluded, behind };
 }
 
 /**

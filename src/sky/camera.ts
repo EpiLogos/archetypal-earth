@@ -96,8 +96,12 @@ const norm = (p: Vec3): number => Math.hypot(p[0], p[1], p[2]);
 const unit = (p: Vec3): Vec3 => mul(p, 1 / (norm(p) || 1));
 const toVec = (p: Vector3): Vec3 => [p.x, p.y, p.z];
 const toV = (p: Vec3): Vector3 => new Vector3(p[0], p[1], p[2]);
-/** Smoothstep-like cubic ease in and out, 0…1. */
-const ease = (t: number): number => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+/**
+ * Smoothstep, 0…1: gentle at both ends, and its steepest slope is 1.5. The cubic in-out it replaces peaks at 3, which on a
+ * log-radius track that spans a thousandfold (a planet's station to the Earth) lurches at the middle and, on a slow frame,
+ * moves the camera by more than a tenth of its distance in one step.
+ */
+const ease = (t: number): number => t * t * (3 - 2 * t);
 
 /** A direction perpendicular to `a`, for when the arc has no plane of its own. */
 const perpendicular = (a: Vec3): Vec3 => unit(cross(a, Math.abs(a[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]));

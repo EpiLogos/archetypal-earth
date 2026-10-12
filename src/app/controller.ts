@@ -1319,9 +1319,9 @@ export class Controller {
   /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
   private approachDistOf(key: BodyKey, aspect: number): number {
     const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
-    // in the Astrology walk the body carries its satellites, whose outer orbit is 1.86 discs wide: the disc is kept to
-    // 42% of the width so the orbit and its names fit a phone
-    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect, this.state.sky?.natal ? 0.42 : 0.6);
+    // every held body carries its satellites, whose outer orbit is 1.86 discs wide: the disc is kept to 42% of the width so
+    // the orbit and its names fit a phone, live sky and birth sky alike (a desktop's 30% of the height is the tighter bound)
+    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect, 0.42);
   }
 
   /**

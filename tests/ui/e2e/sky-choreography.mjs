@@ -14,7 +14,9 @@
 // 'gaze' during a gaze, 'descend' during the drop, 'settled' after the landing.
 // Exits non-zero on any FAIL. Thresholds are the spec's table; nothing is relaxed to pass.
 //   npx vite --port 5186 --strictPort &   then   EARTH_URL=http://localhost:5186/ node tests/ui/e2e/sky-choreography.mjs [chromium|webkit] [desk|phone]
-//   SKY_ONLY=A,E limits the scenarios; SKY_TIES=0 skips I9/I10; SKY_SHOTS=<dir> sets where the desktop screenshots go.
+//   SKY_ONLY=A,E limits the scenarios; SKY_TIES=0 skips I9/I10; SKY_SHOTS=<dir> sets where the screenshots go.
+//   The phone run (390×844, mobile emulation) runs A, B, D, E; it holds the body by the app's route (holdBody), and every
+//   other step is a real pointer or DOM click. Its screenshots carry a `phone-` prefix.
 import { mkdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { launch } from './lib.mjs';
@@ -93,14 +95,28 @@ async function openSky(hash, { reduced = false } = {}) {
 
 const phaseNow = (page) => page.evaluate(() => document.body.dataset.skyPhase ?? null);
 
-/** A desktop screenshot at a named moment; the file and the phase, distance and lens at the capture are reported. */
+/** A screenshot at a named moment (phone shots carry a `phone-` prefix); the file and the phase, distance and lens at the capture are reported. */
 async function shot(page, tag, moment, R) {
-  if (!DESK) return;
   mkdirSync(SHOTS, { recursive: true });
-  const file = `${SHOTS}/${tag}-${moment}.png`;
+  const file = `${SHOTS}/${DESK ? '' : 'phone-'}${tag}-${moment}.png`;
   await page.screenshot({ path: file });
   const p = await poseNow(page);
   R.shots.push(`${file} [phase ${p.phase}, camDist ${f(p.camDist, 2)}, lens ${p.lens}, sky ${p.sky}]`);
+}
+
+/**
+ * Holds a body from the sky. Desktop: a click on its drawn disc, which must be held by the sky's own pick (the way a user
+ * picks it). Phone (390×844): the sheet's text covers the disc, so the app's own route for a body in the live sky,
+ * `#/astrology/sky/<key>` (the state astrologyLive({ body }) gives, as onSkyPick and openBody navigate to), holds it; every
+ * step after that is a real pointer or DOM click.
+ */
+async function holdBody(page, key) {
+  if (DESK) return pickBody(page, key);
+  const t = await markEvent(page);
+  await page.evaluate((k) => { location.hash = `#/astrology/sky/${k}`; }, key);
+  const held = await waitFor(page, (k) => window.__earth.ctl.state.sky?.body === k, key, 15000);
+  if (!held) throw new Bail('I8', `the route #/astrology/sky/${key} does not hold ${key}`);
+  return t;
 }
 
 /** A click on a body's drawn disc, which must be held by the sky's own pick (the way a user picks it). */
@@ -191,7 +207,7 @@ async function clickFirstPlate(page, R) {
 // ── Scenario A (and D on the natal chart) ─────────────────────────────────────
 async function flowA(page, M, R, cfg) {
   M.start = await markEvent(page);
-  M.pick = cfg.natal ? M.start : await pickBody(page, 'venus');
+  M.pick = cfg.natal ? M.start : await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('I8', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 600, timeout: 20000 });
   M.held = await markEvent(page);
@@ -414,13 +430,21 @@ function analyseA(S, M, R, cfg) {
       const stillWin = win.length > 1 && win.every((s) => !s.flying) && swing <= 0.05 && dz <= 1e-4;
       check('I5', !lab.flying && stillWin, `label first shown at +${f(lab.t - M.plate, 0)} ms: flying ${lab.flying}, over the 300 ms before it the look moves ${f(swing, 3)}° and dist ${f(100 * dz, 4)} % (limit 0.05° and 0.01 %), flying in ${win.filter((s) => s.flying).length} of ${win.length} frames`);
     }
-    let maxJ = 0, worst = null;
+    // The descent is time-based, so how far it moves in one frame is the speed times the frame's length: a slow frame (software
+    // GL, a loaded machine) is a bigger step on a perfectly smooth track. Two statistics, so neither can hide the other:
+    //  - the speed: the step scaled to a 60 fps frame (≤ 12 % of the distance), and
+    //  - no relocation: the raw step of any one frame, however long that frame (≤ 30 %; the bug this guards was 140 %).
+    let maxJ = 0, maxRaw = 0, worst = null, worstRaw = null;
     for (let i = 1; i < flight.length; i++) {
       const a = flight[i - 1], b = flight[i];
-      const j = Math.hypot(b.cam[0] - a.cam[0], b.cam[1] - a.cam[1], b.cam[2] - a.cam[2]) / b.camDist;
-      if (j > maxJ) { maxJ = j; worst = { a, b }; }
+      const raw = Math.hypot(b.cam[0] - a.cam[0], b.cam[1] - a.cam[1], b.cam[2] - a.cam[2]) / b.camDist;
+      const dtMs = Math.max(b.t - a.t, 1);
+      const j = raw * Math.min(1, 16.7 / dtMs);
+      if (j > maxJ) { maxJ = j; worst = { a, b, dtMs }; }
+      if (raw > maxRaw) { maxRaw = raw; worstRaw = { a, b, dtMs }; }
     }
-    check('I5', maxJ <= 0.12 && flight.length > 1, `camera position continuous through the descend: largest per-frame step ${f(100 * maxJ, 1)} % of dist (limit 12 %)${worst ? ` at +${f(worst.b.t - M.plate, 0)} ms, dist ${f(worst.a.camDist, 1)} → ${f(worst.b.camDist, 1)}, rig.flying ${worst.b.flying}` : ''}`);
+    check('I5', maxJ <= 0.12 && flight.length > 1, `camera speed smooth through the descend: largest step per 60 fps frame ${f(100 * maxJ, 1)} % of dist (limit 12 %)${worst ? ` at +${f(worst.b.t - M.plate, 0)} ms (frame ${f(worst.dtMs, 0)} ms), dist ${f(worst.a.camDist, 1)} → ${f(worst.b.camDist, 1)}, rig.flying ${worst.b.flying}` : ''}`);
+    check('I5', maxRaw <= 0.30 && flight.length > 1, `camera does not relocate through the descend: largest single-frame step ${f(100 * maxRaw, 1)} % of dist (limit 30 %)${worstRaw ? ` at +${f(worstRaw.b.t - M.plate, 0)} ms (frame ${f(worstRaw.dtMs, 0)} ms)` : ''}`);
     check('I5', !!R.landed, `the descend lands on the field node (${R.landed ? 'landed' : 'never left the sky'})`);
     // the descend's phase: 'descend' from the commit until 'settled'
     if (commit) {
@@ -455,7 +479,7 @@ function analyseA(S, M, R, cfg) {
 // ── Scenario B ───────────────────────────────────────────────────────────────
 async function flowB(page, M, R) {
   M.start = await markEvent(page);
-  M.pick = await pickBody(page, 'venus');
+  M.pick = await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('I4', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 600, timeout: 20000 });
   M.held = await markEvent(page);
@@ -514,7 +538,7 @@ async function flowC(page, M, R) {
   await waitStill(page, { ms: 800, timeout: 30000 });
   R.refC = await poseNow(page);
   M.start = await markEvent(page);
-  M.pick = await pickBody(page, 'venus');
+  M.pick = await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('I7', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 600, timeout: 20000 });
   M.held = await markEvent(page);
@@ -565,7 +589,7 @@ function analyseC(S, M, R) {
 // ── Scenario E: Escape during a gaze ──────────────────────────────────────────
 async function flowE(page, M, R) {
   M.start = await markEvent(page);
-  M.pick = await pickBody(page, 'venus');
+  M.pick = await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('E', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 600, timeout: 20000 });
   M.held = await markEvent(page);
@@ -619,7 +643,7 @@ function analyseE(S, M, R) {
 // ── Scenario F: planet to planet in the sky ──────────────────────────────────
 async function flowF(page, M, R) {
   M.start = await markEvent(page);
-  M.pick = await pickBody(page, 'venus');
+  M.pick = await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('I8', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 600, timeout: 20000 });
   M.held = await markEvent(page);
@@ -667,7 +691,7 @@ function analyseF(S, M, R) {
 // ── Scenario G: wheel out from a held planet, then 3 s still ─────────────────
 async function flowG(page, M, R) {
   M.start = await markEvent(page);
-  M.pick = await pickBody(page, 'venus');
+  M.pick = await holdBody(page, 'venus');
   if (!(await waitApproach(page))) throw new Bail('FLOW', 'the approach to Venus never reached 0.95');
   await waitStill(page, { ms: 800, timeout: 20000 });
   M.held = await markEvent(page);
@@ -891,7 +915,7 @@ const SCENARIOS = [
   { id: 'F', tag: 'F', name: 'scenario F (planet to planet)', hash: '#/astrology', flow: flowF, analyse: analyseF },
   { id: 'G', tag: 'G', name: 'scenario G (wheel out, then still)', hash: '#/astrology', flow: flowG, analyse: analyseG },
 ];
-const PLAN = view === 'phone' ? ['A', 'B', 'E'] : ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const PLAN = view === 'phone' ? ['A', 'B', 'D', 'E'] : ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 browser = await launch(kind, { headed: false });
 console.log(`sky-choreography (${kind}, ${view} ${VP.width}x${VP.height}${VP.mobile ? ', mobile emulation' : ''}) against ${process.env.EARTH_URL ?? 'http://localhost:5183/'}`);

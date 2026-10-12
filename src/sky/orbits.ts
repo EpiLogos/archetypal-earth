@@ -146,7 +146,8 @@ export class PlanetOrbits {
     // the line ends in a mark naming the Earth; the control that goes back always stands under the planet's outer orbit,
     // one predictable place clear of the satellites, the header and the sky's own controls
     this.earthMark.setAttribute('x', ex.toFixed(1));
-    this.earthMark.setAttribute('y', (ey - 8).toFixed(1));
+    // the line is held below the header band: its name goes under the end point there, never over the page title
+    this.earthMark.setAttribute('y', (ey < TOP + 48 ? ey + 18 : ey - 8).toFixed(1));
     this.earthMark.setAttribute('text-anchor', ex < cx ? 'start' : 'end');
     const bw = this.earthBtn.offsetWidth || 140;
     const by = cy + Math.max(R, radii[1] * TILT) + 36;
@@ -174,7 +175,11 @@ export class PlanetOrbits {
       x.label.style.pointerEvents = this.interactive && o > 0.3 ? 'auto' : 'none';
       x.label.style.zIndex = behind ? '1' : '2';
       // the name sits beyond the tether, on the side away from the planet
-      x.label.style.transform = `translate(${Math.round(lx + (ux < -0.2 ? -1 : ux > 0.2 ? 0 : -0.5) * x.label.offsetWidth)}px, ${Math.round(ly - x.label.offsetHeight / 2)}px)`;
+      // …and never off the screen: on a phone the outer orbit spans the width, so a name set outward is pulled back inside
+      const lw = x.label.offsetWidth;
+      const lxPlaced = lx + (ux < -0.2 ? -1 : ux > 0.2 ? 0 : -0.5) * lw;
+      const lxClamped = Math.min(W - lw - 8, Math.max(8, lxPlaced));
+      x.label.style.transform = `translate(${Math.round(lxClamped)}px, ${Math.round(ly - x.label.offsetHeight / 2)}px)`;
     }
   }
 
