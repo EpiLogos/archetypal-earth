@@ -1,8 +1,9 @@
 // The sky's quiet DOM: body labels (real buttons, so the sky is reachable by keyboard and by touch) and the
-// caption that says the radial scale is diagrammatic. Nothing here owns state: the controller does.
+// caption that says the radial scale is diagrammatic. Nothing here owns state: the controller does. The names' culture
+// and the live line are Astrology's Options (src/lenses/astrology.ts); this view only reports them (statusLine).
 import { glyphSvg, holoCss, signFamilyId } from './zodiac';
 import type { BodyKey } from '../types/sky';
-import { clear, el } from '../ui/dom';
+import { el } from '../ui/dom';
 import type { ScreenBody, SkyLayer } from './layer';
 import type { ChartScreenMark } from './chart-overlay';
 import { describeLive, type LiveState } from './live';
@@ -31,10 +32,6 @@ export class SkyView {
   private active = false;
   private selected: BodyKey | null = null;
   private scratch: ScreenBody[] = [];
-  private culture: HTMLElement;
-  private cultureSelect: HTMLSelectElement;
-  private cultureNote: HTMLElement;
-  private liveNote: HTMLElement;
   private marks = new Map<string, HTMLElement>();
   private lastLive: LiveState | null = null;
   private held: string | null = null;
@@ -43,12 +40,7 @@ export class SkyView {
     this.root = el('div', { class: 'sky-layer', 'aria-label': 'The sky: Sun, Moon and planets', role: 'group' });
     this.root.inert = true;
     this.caption = el('p', { class: 'sky-caption', 'aria-hidden': 'true' });
-    this.cultureSelect = el('select', { 'aria-label': 'Read the names through a culture' });
-    this.cultureNote = el('p', { class: 'sky-culture-note' });
-    this.liveNote = el('p', { class: 'sky-live', role: 'status' });
-    this.culture = el('div', { class: 'sky-culture' }, [el('label', {}, [el('span', { text: 'Names read through' }), this.cultureSelect]), this.cultureNote, this.liveNote]);
-    this.culture.inert = true;
-    parent.append(this.root, this.caption, this.culture);
+    parent.append(this.root, this.caption);
   }
 
   setLayer(layer: SkyLayer) {
@@ -67,46 +59,22 @@ export class SkyView {
     this.setActive(this.active, this.selected);
   }
 
-  /** The cultures the names can be read through (the field's own, those with a table in cultures.json). */
-  setCultures(options: { id: string; name: string }[], onChange: (id: string | null) => void) {
-    clear(this.cultureSelect);
-    this.cultureSelect.append(el('option', { value: '', text: 'Greco-Roman (default)' }));
-    for (const o of options) this.cultureSelect.append(el('option', { value: o.id, text: o.name }));
-    this.cultureSelect.onchange = () => onChange(this.cultureSelect.value || null);
-  }
-
-  /** Reflect the standing culture in the selector and its note. */
-  setCulture(id: string | null, name?: string) {
-    this.cultureSelect.value = id ?? '';
-    this.cultureNote.textContent = id ? `Names read through ${name ?? id}.` : '';
-  }
-
   /** The sky's live state, in words: live and checked, a snapshot and why, or beyond the generated span. */
   setLive(state: LiveState) {
     this.lastLive = state;
-    this.paintLive();
   }
 
   /** While a birth sky stands, the clock is not followed: say what the sky is held at instead of "live". Null returns to the live state. */
   setHeld(detail: string | null) {
     this.held = detail;
-    this.paintLive();
   }
 
-  /** One line for Options (Astrology) or the floating culture strip: held birth sky, or live status. */
+  /** One line for Astrology's Options: held birth sky, or live status. */
   statusLine(): { label: string; detail: string; state: string } | null {
     if (this.held) return { label: 'Birth sky', detail: this.held, state: 'held' };
     if (!this.lastLive || this.lastLive.kind === 'snapshot' || this.lastLive.kind === 'diverged') return null;
     const d = describeLive(this.lastLive);
     return { label: d.label, detail: d.detail, state: this.lastLive.kind };
-  }
-
-  private paintLive() {
-    clear(this.liveNote);
-    const s = this.statusLine();
-    if (!s) return;
-    this.liveNote.dataset.state = s.state;
-    this.liveNote.append(el('strong', { text: s.label }), ` · ${s.detail}`);
   }
 
   /** Re-label after the standing culture changed. */
@@ -121,8 +89,6 @@ export class SkyView {
     this.active = on;
     this.selected = body ?? null;
     this.root.inert = !on;
-    this.culture.inert = !on;
-    this.culture.classList.toggle('on', on);
     document.body.classList.toggle('sky-on', on);
     for (const l of this.labels.values()) {
       l.node.tabIndex = on ? 0 : -1;

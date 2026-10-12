@@ -2,23 +2,24 @@
   "_note": "The transcendent function: the name and the mathematical analogy (CW6 ¶184, ¶828, CW8 ¶131, CW7 ¶121), the transition it makes possible (CW8 ¶145, CW11 ¶780), the living third (CW8 ¶189, CW7 ¶360, the tortoise seminar) and the method (CW14 ¶257, CW18 ¶1554). Van Eenwyk carries the section where the concept names a dynamical system. Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "transcendent-function",
-  "line": "The function that arises between the opposites: not a compromise but a living third, produced from the tension and making the transition to a new attitude organically possible.",
+  "line": "Jung's definitions and statements on the transcendent function (CW6, CW7, CW8, CW11, CW14, CW18) and the Dream Analysis seminar, with one sentence of Van Eenwyk's.",
   "sections": [
     {
       "id": "the-name",
       "title": "The name",
-      "line": "The word is borrowed from mathematics — a function of real and imaginary quantities — and used with the analogy held openly.",
+      "line": "CW6 ¶184 (1921), CW8 ¶131, CW6 ¶828 and CW7 ¶121: Jung's definitions of the name and his comparison with a mathematical function; in the Dream Analysis seminar of 4 June 1930 (pdf p674) he says he did not take the term from higher mathematics.",
       "quotes": [
         { "work": "cw06", "para": 184, "quote": "This function of mediation between the opposites I have termed the transcendent function, by which I mean nothing mysterious, but merely a combined function of conscious and unconscious elements, or, as in mathematics, a common function of real and imaginary quantities." },
         { "work": "cw08", "para": 131, "quote": "There is nothing mysterious or metaphysical about the term \"transcendent function.\" It means a psychological function comparable in its way to a mathematical function of the same name, which is a function of real and imaginary numbers." },
         { "work": "cw06", "para": 828, "quote": "“function” being here understood not as a basic function but as a complex function made up of other functions, and “transcendent” not as denoting a metaphysical quality but merely the fact that this function facilitates a transition from one attitude to another." },
-        { "work": "cw07", "para": 121, "quote": "It has been named the “transcendent function”1 because it represents a function based on real and “imaginary,” or rational and irrational, data, thus bridging the yawning gulf between conscious and unconscious." }
+        { "work": "cw07", "para": 121, "quote": "It has been named the “transcendent function”1 because it represents a function based on real and “imaginary,” or rational and irrational, data, thus bridging the yawning gulf between conscious and unconscious." },
+        { "work": "sem-dream-analysis", "page": 674, "quote": "I did not take that term from higher mathematics, I learned only later that the same term was used there, meaning the same thing" }
       ]
     },
     {
       "id": "the-transition",
       "title": "The transition",
-      "line": "It is called transcendent because it carries a person from one attitude to another without discarding the unconscious — a process and a method at once.",
+      "line": "CW8 ¶145 and CW11 ¶780: why Jung says it is called transcendent, and that it is a process and a method at the same time.",
       "quotes": [
         { "work": "cw08", "para": 145, "quote": "It is called \"transcendent\" because it makes the transition from one attitude to another organically possible, without loss of the unconscious." },
         { "work": "cw11", "para": 780, "quote": "The whole process is called the “transcendent function.” It is a process and a method at the same time." }
@@ -27,7 +28,7 @@
     {
       "id": "the-living-third",
       "title": "The living third",
-      "line": "The function is what happens when the confrontation is held: the tension produces a third thing that neither side contained.",
+      "line": "CW8 ¶189 (a living, third thing), CW7 ¶360 (the secret of alchemy) and the Dream Analysis seminar (pdf p674) on the tortoise.",
       "quotes": [
         { "work": "cw08", "para": 189, "quote": "The confrontation of the two positions generates a tension charged with energy and creates a living, third thing" },
         { "work": "cw07", "para": 360, "quote": "The secret of alchemy was in fact the transcendent function, the transformation of personality through the blending and fusion of the noble with the base components, of the differentiated with the inferior functions, of the conscious with the unconscious." },
@@ -37,7 +38,7 @@
     {
       "id": "the-method",
       "title": "The method",
-      "line": "In practice the function is a method as much as an event: the conscious realisation of what the unconscious has produced.",
+      "line": "CW14 ¶257 (Mysterium Coniunctionis) and CW18 ¶1554 (1954, in the vault note's dating): Jung on getting to know the counterposition in the unconscious and on the cooperation of conscious reasoning with the data of the unconscious.",
       "quotes": [
         { "work": "cw14", "para": 257, "quote": "This continual process of getting to know the counterposition in the unconscious I have called the “transcendent function,”472 because the confrontation of conscious (rational) data with those that are unconscious (irrational) necessarily results in a modification of standpoint." },
         { "work": "cw18", "para": 1554, "quote": "The cooperation of conscious reasoning with the data of the unconscious is called the “transcendent function”" }
@@ -46,7 +47,7 @@
     {
       "id": "as-a-system",
       "title": "The third as a system",
-      "line": "Read as a dynamical system, the function describes order emerging from tension — a result no side of the opposition could have produced alone.",
+      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): one sentence on chaotic dynamics and a higher order; the words are his, not Jung's.",
       "quotes": [
         { "work": "van-eenwyk", "page": 40, "quote": "whereby chaotic dynamics actually generate a higher order result coming out than existed going in" }
       ]

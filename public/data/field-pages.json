@@ -426,12 +426,12 @@
   "archetype:eight": {
    "type": "archetype",
    "id": "eight",
-   "line": "Eight is the double quaternity, a totality in Jung's words, and the step that breaks a run of seven.",
+   "line": "Jung's passages on eight: the double quaternity and totality symbol, the Gnostic ogdoad, the eighth after seven, and Adam's ogdoadic nature; von Franz on eight.",
    "sections": [
     {
      "id": "what-jung-names",
      "title": "What Jung names",
-     "line": "Jung gives no single essay on eight. He calls the ogdoad a double quaternity and a totality, and gives it a place in the mandala beside the quaternity.",
+     "line": "CW10 ¶692–693 (Flying Saucers, 1958) and CW11 ¶424: eight as a double quaternity and its place in mandala symbolism; CW14 ¶8: the double quaternio or ogdoad as a totality. Jung writes no essay on eight; these are places where he names it.",
      "quotes": [
       {
        "text": "eight is a double quaternity and, as an individuation symbol in mandalas, plays almost as great a role as the quaternity itself",
@@ -459,20 +459,29 @@
         "locator": "¶693 (pdf p333)"
        },
        "voice": "Jung"
+      },
+      {
+       "text": "The double quaternio or ogdoad stands for a totality, for something that is at once heavenly and earthly, spiritual or corporeal, and is found in the “Indian Ocean,” that is to say in the unconscious.",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶8 (pdf p24)"
+       },
+       "voice": "Jung"
       }
      ]
     },
     {
      "id": "gnosis-and-egypt",
      "title": "Gnosis and Egypt",
-     "line": "In Gnosis the ogdoad is Sophia's world and Achamoth, set against the demiurge's seven; in a seminar Jung gives the Egyptian ogdoad as the most sacred company of the gods.",
+     "line": "CW9ii ¶307: the Gnostics held, according to Irenaeus, that Sophia represents the world of the Ogdoad; a note to CW14 ¶576: the demiurge the hebdomad, Achamoth the ogdoad (Leisegang); and the Egyptian ogdoad in the Dream Analysis seminar.",
      "quotes": [
       {
        "text": "the Gnostics held that Sophia represents the world of the Ogdoad",
        "cite": {
         "work": "cw09ii",
         "workTitle": "Aion: Researches into the Phenomenology of the Self",
-        "locator": "¶306 (pdf p208)"
+        "locator": "¶307 (pdf p208)"
        },
        "voice": "Jung"
       },
@@ -500,10 +509,19 @@
     {
      "id": "the-eighth-in-a-series",
      "title": "The eighth in a series",
-     "line": "The eighth is the one that breaks the run of seven. Jung finds it feminine, the mother of a new series, and names Christ as the eighth of a line of prophets; the Seven Sleepers legend wavers between seven and eight.",
+     "line": "CW14 ¶574 and ¶579: the series of eight incarnations of the true prophet, whose eighth is Christ, and the eighth as feminine, the mother of a new series; a note to CW9i ¶242: the legend of the sleepers wavers between seven and eight.",
      "quotes": [
       {
        "text": "The series of eight incarnations of the “true prophet” is distinguished by the special position of the eighth, namely Christ",
+       "cite": {
+        "work": "cw14",
+        "workTitle": "Mysterium Coniunctionis",
+        "locator": "¶574 (pdf p303)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "whereas the seven form an uninterrupted series, the step to the eighth involves hesitation or uncertainty and is a repetition of the same phenomenon that occurs with three and four (the Axiom of Maria)",
        "cite": {
         "work": "cw14",
         "workTitle": "Mysterium Coniunctionis",
@@ -525,7 +543,7 @@
        "cite": {
         "work": "cw09i",
         "workTitle": "The Archetypes and the Collective Unconscious",
-        "locator": "¶243 (pdf p147)",
+        "locator": "pdf p147",
         "print": "136"
        },
        "voice": "Jung (note)"
@@ -535,7 +553,7 @@
     {
      "id": "adam-and-the-inner-circles",
      "title": "Adam and the inner circles",
-     "line": "Jung reads the Adam material as tetradic and ogdoadic, and the Ophite diagram's names fall among eight inner circles.",
+     "line": "CW14 ¶553: the tetradic and ogdoadic nature of Adam; CW14 ¶576: the names of the Ophite diagram distributed among eight inner circles.",
      "quotes": [
       {
        "text": "This material clearly shows the tetradic and ogdoadic nature of Adam",
@@ -560,7 +578,7 @@
     {
      "id": "von-franz-on-eight",
      "title": "Von Franz on eight",
-     "line": "Von Franz gives eight as the dual case of four, and as the eight trigrams of the pa-kua.",
+     "line": "Number and Time: von Franz on the Latin octo as referring to the dual case of four, and on the eight arrangements of triple lines known as the pa-kua.",
      "quotes": [
       {
        "text": "Eight possible arrangements result from combinations of these triple lines, known as the pa-kua",
@@ -603,21 +621,21 @@
   "archetype:nine": {
    "type": "archetype",
    "id": "nine",
-   "line": "Nine is the novenary foetus, the Egyptian company of gods, and the changing line; Jung writes no essay on it.",
+   "line": "Jung's passages naming nine (Dorn's novenary foetus, a company of gods called nine, the changing line of the I Ching, the ninth Sefira), his seminar remarks on the numbers one to nine, and von Franz on nine.",
    "sections": [
     {
      "id": "novenary-foetus-and-changing-nine",
      "title": "The novenary foetus, and the changing nine",
-     "line": "Jung's gloss on the One is the nearest he comes to nine: the One is the novenary foetus, and as nine it stands to the ogdoad as the quintessence to the quaternity. An I Ching nine is a line that changes into its opposite.",
+     "line": "CW13 (pdf p175, in Paracelsus as a Spiritual Phenomenon, 1942): Jung's account of Dorn on the One as the novenary foetus; CW11 ¶979 and ¶996: lines of six or nine in the I Ching and their change into the opposite.",
      "quotes": [
       {
        "text": "and it is also the “novenary foetus” (foetus novenarius), i.e., it is as the number nine to the ogdoad, or as the quintessence to the quaternity.",
        "cite": {
         "work": "cw13",
         "workTitle": "Alchemical Studies",
-        "locator": "¶186 (pdf p175)"
+        "locator": "pdf p175"
        },
-       "voice": "Jung"
+       "voice": "Dorn, reported by Jung"
       },
       {
        "text": "When any of the lines of a given hexagram have the value of six or nine, it means that they are specially emphasized",
@@ -642,7 +660,7 @@
     {
      "id": "count-and-company",
      "title": "Count and company",
-     "line": "The Egyptian Ennead is nine gods, a company called nine is often ten, and Jung's note on the Sefiroth gives the ninth, Yesod, under the name Jezoth.",
+     "line": "CW5 ¶408: the Ennead of the Egyptian Tum; CW12 ¶84: a company described as nine often proves to be ten or more; CW14 ¶634: Jezoth, that is Yesod, the ninth and middle Sefira in the lowest triad.",
      "quotes": [
       {
        "text": "the supreme god or hegemon of the Ennead",
@@ -676,7 +694,7 @@
     {
      "id": "nine-in-the-seminar",
      "title": "Nine in the seminar",
-     "line": "In seminar Jung says the numbers one to nine are mana, and that they have become sacred; he places eight and nine in Egypt.",
+     "line": "Visions seminar (25 March 1931): all numbers from one to nine are mana; Dream Analysis seminar: the numbers between 1 and 9 have become sacred, and in Egypt eight and nine.",
      "quotes": [
       {
        "text": "all numbers from one to nine are mana and certain numbers besides",
@@ -711,7 +729,7 @@
     {
      "id": "von-franz-on-nine",
      "title": "Von Franz on nine",
-     "line": "Von Franz relates the German for nine to the German for new; she places nine as the close of the first series, as the Lo-shu's nine fields, as the Holy Ghost, and as the nine provinces of a Chinese text.",
+     "line": "Number and Time: von Franz on German neun as related to new, on five at the centre of the first number series 1 to 9, on the Lo-shu model in nine fields, on nine in number symbolism as the number of the Holy Ghost, and on nine provinces.",
      "quotes": [
       {
        "text": "German neun, “nine,” is related to “new”:",
@@ -788,12 +806,12 @@
   "archetype:seven": {
    "type": "archetype",
    "id": "seven",
-   "line": "Seven is the company of planetary gods, read through alchemy's metals and the Gnostic archons, with Pauli's dream-reading beside it.",
+   "line": "Jung's passages naming the seven: the planetary gods, the seven metals, the archons and the colours of the work; Pauli's reading of the seven in his dream, and von Franz on seven.",
    "sections": [
     {
      "id": "what-jung-names",
      "title": "What Jung names",
-     "line": "The seven stands for the planetary gods, and in the language of initiation for the highest stage. Jung gives no essay on seven; the number is named where he discusses planets, metals and initiation.",
+     "line": "CW12 ¶83 (in the language of initiation), CW14 ¶563 (the gods of the planets, or the seven metals) and a note to CW9i ¶242 (the seven as the planetary gods of the ancients). Jung writes no essay on seven; these are places where he names it.",
      "quotes": [
       {
        "text": "In the language of initiation, “seven” stands for the highest stage of illumination",
@@ -818,7 +836,7 @@
        "cite": {
         "work": "cw09i",
         "workTitle": "The Archetypes and the Collective Unconscious",
-        "locator": "¶243 (pdf p147)",
+        "locator": "pdf p147",
         "print": "136"
        },
        "voice": "Jung (note)"
@@ -828,7 +846,7 @@
     {
      "id": "gods-metals-archons",
      "title": "Gods, metals and archons",
-     "line": "Alchemy takes the planetary company into its metals, and the same stars become archons, spheres with doors for the ascent.",
+     "line": "CW12 ¶468 (the seven gods in the metals of alchemy), CW12 ¶298 (the seven Babylonian gods and the seven Archons, in the Book of Enoch), CW13 ¶409 (the seven metals and the seven planets, in the tree) and CW14 ¶576 (the seven archons of the Ophite diagram as the seven planets).",
      "quotes": [
       {
        "text": "The historical sousentendu of the seven is the antique company of seven gods who later took up their abode in the seven metals of alchemy",
@@ -853,7 +871,7 @@
        "cite": {
         "work": "cw13",
         "workTitle": "Alchemical Studies",
-        "locator": "¶407 (pdf p374)"
+        "locator": "¶409 (pdf p374)"
        },
        "voice": "Jung"
       },
@@ -871,7 +889,7 @@
     {
      "id": "the-seven-stages",
      "title": "The stages of the work, and the week",
-     "line": "The stages of the work are marked by seven colours tied to the planets, and the archetype of the seven returns in the division of the week.",
+     "line": "CW14 ¶390 (the seven colours of the work, associated with the planets) and ¶579 (the archetype of the seven in the division of the week).",
      "quotes": [
       {
        "text": "The stages of the work are marked by seven colours which are associated with the planets",
@@ -896,7 +914,7 @@
     {
      "id": "pauli-and-von-franz",
      "title": "Pauli and von Franz",
-     "line": "Pauli reads the seven of his own dream as the birth of the anima. Von Franz gives the Mayan seven-one gods, Bruno's seven images per planet, and the seven beside three in the Lo-shu figure.",
+     "line": "Pauli's letter 16P (1936) on the seven in his early dreams; von Franz on the Mayan seven-one gods, Bruno's forty-nine planetary images (seven per planet) and the numbers three and seven in the Lo-shu figure.",
      "quotes": [
       {
        "text": "So the 7 is an indication of the birth of the anima.",
@@ -951,12 +969,12 @@
   "archetype:ten": {
    "type": "archetype",
    "id": "ten",
-   "line": "Ten is the completed cycle and the unfolding of unity; the tetraktys and von Franz's whole multiplicity stand beside it.",
+   "line": "Jung on ten in the traditional symbolism (CW10 ¶692) and on the tetraktys, and von Franz on ten in Number and Time.",
    "sections": [
     {
      "id": "the-completed-cycle",
      "title": "The completed cycle",
-     "line": "Jung writes little on ten. In his commentary on eleven, the numbers one to ten have the significance of a completed cycle, and ten is the perfect unfolding of unity.",
+     "line": "CW10 ¶692 (Flying Saucers, 1958): in the interpretation of a dream of the numbers eight and eleven, ten as the perfect unfolding of unity and the numbers one to ten as a completed cycle.",
      "quotes": [
       {
        "text": "Ten is the perfect unfolding of unity, and the numbers one to ten have the significance of a completed cycle",
@@ -981,7 +999,7 @@
     {
      "id": "the-tetraktys",
      "title": "The tetraktys",
-     "line": "Jung names the tetraktys for the number four, and writes that it contains the roots of eternal nature and underlies all existence. The sources here do not write the tetraktys as ten.",
+     "line": "CW11 ¶246 (the Trinity essay): the Pythagorean oath and the tetraktys; CW10 ¶805: the number 4, the Pythagorean tetraktys; Number and Time: von Franz on the tetractys as the sum of 1, 2, 3 and 4.",
      "quotes": [
       {
        "text": "the Pythagorean oath, for instance, says that the tetraktys “contains the roots of eternal nature.”",
@@ -991,13 +1009,32 @@
         "locator": "¶246 (pdf p140)"
        },
        "voice": "Jung"
+      },
+      {
+       "text": "This is true particularly of the number 4, the Pythagorean tetraktys.",
+       "cite": {
+        "work": "cw10",
+        "workTitle": "Civilization in Transition",
+        "locator": "¶805 (pdf p390)"
+       },
+       "voice": "Jung"
+      },
+      {
+       "text": "The famous Pythagorean tetractys consists of the sum of 1, 2, 3, and 4 (= 10).",
+       "cite": {
+        "work": "vonzfranz-number-time",
+        "workTitle": "Number and Time",
+        "locator": "pdf p126",
+        "print": "114"
+       },
+       "voice": "von Franz"
       }
      ]
     },
     {
      "id": "von-franz-on-ten",
      "title": "Von Franz on ten",
-     "line": "Von Franz gives ten as the whole inexhaustible multiplicity of existence, the one integrated into it, and in a Chinese pair the ten that holds the one. Her one statement on the ten primal numbers of the cabala is placed here; the Sefiroth are left to their own pages.",
+     "line": "Number and Time: von Franz on Fa-tsang's simile of ten copper coins, in which ten signifies the whole inexhaustible multiplicity of existence and the one is integrated into the ten; and on the sephiroth as the ten primal numbers.",
      "quotes": [
       {
        "text": "in which ten here signifies the whole inexhaustible multiplicity of existence",
@@ -16722,7 +16759,7 @@
   "family:tree": {
    "type": "family",
    "id": "tree",
-   "line": "The Tree of the ten sephiroth as Crowley draws it, as Jung names it, and as von Franz reads the ten numbers.",
+   "line": "Crowley on the Tree of Life in The Book of Thoth, Jung's passages naming the Tree of the Sefiroth in CW14, and von Franz on the sephiroth as the ten primal numbers.",
    "sections": [
     {
      "id": "the-qabalistic-tree-crowley",
@@ -16770,7 +16807,7 @@
     {
      "id": "in-jung",
      "title": "In Jung",
-     "line": "Jung names the Tree in the Adam Kadmon passages and in his notes on the ten. Beyond Yesod's ninth place he does not number the sephiroth.",
+     "line": "CW14 ¶18 (the list Kether, Tifereth, Yesod, Malchuth), ¶158 (the arbor philosophica and the tree of the Sefiroth), ¶592 and ¶652 (Adam Kadmon and the system of the Sefiroth in three columns).",
      "quotes": [
       {
        "text": "Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth",
@@ -16822,7 +16859,7 @@
     {
      "id": "the-ten-as-the-numbers",
      "title": "The ten as the numbers",
-     "line": "Jung calls the numbers one to ten a completed cycle; von Franz calls the ten primal numbers the sephiroth, spheres of the unknowable primal one. Each quotation keeps its own voice.",
+     "line": "Jung, CW10 ¶692: the numbers one to ten in the traditional symbolism. Von Franz, Number and Time: ten as the whole multiplicity of existence, and the sephiroth as the ten primal numbers, spheres of the unknowable primal one.",
      "quotes": [
       {
        "text": "Ten is the perfect unfolding of unity, and the numbers one to ten have the significance of a completed cycle",
@@ -16868,7 +16905,7 @@
     {
      "id": "the-abyss-and-daath",
      "title": "The Abyss and Daath (Crowley)",
-     "line": "Daath and the Abyss are not sephiroth and have no family of their own. Crowley places the Abyss between the Ideal and the Actual, and Daath as the false sephira.",
+     "line": "Crowley, in The Book of Thoth, places the Abyss between the Ideal and the Actual and calls Daath a non-existent and a false Sephira; neither has a family of its own on this site.",
      "quotes": [
       {
        "text": "The Abyss—between Ideal and Actual.",

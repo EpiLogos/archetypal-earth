@@ -2,24 +2,24 @@
   "_note": "The Self at full depth: the field's centre, eight sections in the order ProjectCentral/docs/NUMBER-PLAN.md §1.4 sets. The centre and the circumference (CW12 ¶310, ¶307 and the world clock's 4 × 8 = 32; CW9ii ¶343 and the soul's circumambulation), the archetype of order par excellence (CW10 ¶803-805 — the hinge), the monad (CW9ii ¶340-341), the dyad (CW9ii ¶426, CW10 ¶806), the quaternity (CW9ii ¶426, ¶381, the circle and the crystal of pdf p236, CW9i pdf p424), the fifth (CW9ii ¶345, CW10 ¶738, CW9i pdf p382) and the return (the six in von Franz), then the numbers themselves, each linked. What cannot be sourced is left out and said here: no Neumann run carries instance records of the self, so this page has no instances block — the field's own occurrences, dreams and images stand for it. Quotations are placed by the corpus (scripts/depth.mjs); nothing is typed.",
   "version": 1,
   "archetype": "self",
-  "line": "The centre and the whole circumference at once: the archetype of order the numbers themselves are, met only through its images — the circle, the quaternity, the stone.",
+  "line": "The self in Jung's texts: centre and circumference (CW12 ¶310), the archetype of order par excellence (CW10 ¶805), and the self's symbols in the monad, the dyad, the quaternity and the quinta essentia.",
   "sections": [
     {
       "id": "centre-and-circumference",
       "title": "The centre and the circumference",
-      "line": "The self is not one thing among things: it is both the middle a life turns on and the whole field it turns in.",
+      "line": "CW12 ¶310 (Psychology and Alchemy, 1944) with the dreamer's world-clock vision of ¶307; CW9ii ¶343 and Plotinus on the soul's circumambulation of a centre.",
       "quotes": [
         { "work": "cw12", "para": 310, "quote": "The self is by definition the centre and the circumference of the conscious and unconscious systems." },
         { "work": "cw09ii", "para": 343, "quote": "Here the point is the centre of a circle that is created, so to speak, by the circumambulation of the soul. But this point is the \"centre of all things,\" a God-image." },
-        { "work": "cw09ii", "page": 231, "quote": "The soul will therefore move around the centre, that is, around the principle from which she proceeds; and, trending towards it, she will attach herself to it, as indeed all souls should do." },
-        { "work": "cw12", "para": 307, "quote": "There is a vertical and a horizontal circle, having a common centre. This is the world clock. It is supported by the black bird." },
-        { "work": "cw12", "para": 307, "quote": "The vertical circle is a blue disc with a white border divided into 4 × 8 = 32 partitions." }
+        { "work": "cw09ii", "page": 231, "quote": "The soul will therefore move around the centre, that is, around the principle from which she proceeds; and, trending towards it, she will attach herself to it, as indeed all souls should do.", "voice": "Plotinus, quoted by Jung" },
+        { "work": "cw12", "para": 307, "quote": "There is a vertical and a horizontal circle, having a common centre. This is the world clock. It is supported by the black bird.", "voice": "the dreamer's vision, as Jung records it" },
+        { "work": "cw12", "para": 307, "quote": "The vertical circle is a blue disc with a white border divided into 4 × 8 = 32 partitions.", "voice": "the dreamer's vision, as Jung records it" }
       ]
     },
     {
       "id": "archetype-of-order",
       "title": "The self is the archetype of order par excellence",
-      "line": "This is the hinge: the pattern of order superimposed on the psychic chaos, gaining in importance as the ego loses it — and, arithmetically, the number 4.",
+      "line": "Flying Saucers (CW10 ¶803–805, 1958): the pattern of order compared to a viewfinder, the rotundum or mandala as a symbol of the self, and whole numbers as archetypes of order.",
       "quotes": [
         { "work": "cw10", "para": 803, "quote": "The archetype thereby constellated represents a pattern of order which, like a psychological “viewfinder” marked with a cross or a circle divided into four, is superimposed on the psychic chaos so that each content falls into place and the weltering confusion is held together by the protective circle." },
         { "work": "cw10", "para": 804, "quote": "I have observed these phenomena in my patients for forty years and have come to the conclusion that this archetype is of central importance, or rather, that it gains in importance to the degree that the importance of the ego is lost." },
@@ -29,17 +29,17 @@
     },
     {
       "id": "the-monad",
-      "title": "The self as the monad",
-      "line": "Monoïmos's single Monad — compounded and uncompounded, at peace and at war — is read as a description of the self's own nature.",
+      "title": "The Monad of Monoïmos",
+      "line": "Aion (CW9ii ¶340–341, 1951): Hippolytus's report of the single Monad of Monoïmos, and Jung's comment that it describes the psychological nature of the self.",
       "quotes": [
-        { "work": "cw09ii", "page": 230, "quote": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things" },
+        { "work": "cw09ii", "page": 230, "quote": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things", "voice": "Monoïmos, in Hippolytus, quoted by Jung" },
         { "work": "cw09ii", "para": 341, "quote": "This paradoxical idea of the Monad in Mono'imos describes the psychological nature of the self as conceived by a thinker of the second century under the influence of the Christian message." }
       ]
     },
     {
       "id": "the-dyad",
-      "title": "The self as the dyad",
-      "line": "The union of the opposites is not a flaw in the self but its definition: masculine and feminine, conscious and unconscious, the complexio oppositorum.",
+      "title": "The dyad",
+      "line": "Aion (CW9ii ¶426, 1951): the self as a union of conscious and unconscious; Flying Saucers (CW10 ¶806, 1958): the complexio oppositorum of Cusanus beside the dyad.",
       "quotes": [
         { "work": "cw09ii", "para": 426, "quote": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine). It stands for the psychic totality." },
         { "work": "cw10", "para": 806, "quote": "The symbols of the self coincide with the God-images, as, for instance, the complexio oppositorum of Cusanus with the dyad, or the definition of God as a \"circle whose centre is everywhere and the circumference nowhere\" with Angelucci’s sign of the hydrogen atom." }
@@ -47,8 +47,8 @@
     },
     {
       "id": "the-quaternity",
-      "title": "The self as the quaternity",
-      "line": "The most frequent image: circle and four together — above all in the mandala and its variants, out of which the crystal and the stone are derived.",
+      "title": "The quaternity",
+      "line": "Aion (CW9ii ¶426, ¶381, pdf p236) on the mandala, the quaternity and the stone derived from the circle and quaternity motif; CW9i pdf p424 (1955) on the archetype of wholeness and the quaternity of the One.",
       "quotes": [
         { "work": "cw09ii", "para": 426, "quote": "Empirically, however, the self appears spontaneously in the shape of specific symbols, and its totality is discernible above all in the mandala and its countless variants." },
         { "work": "cw09ii", "para": 381, "page": 254, "quote": "The quaternity is an organizing schema par excellence, something like the crossed threads in a telescope." },
@@ -60,10 +60,10 @@
     },
     {
       "id": "the-fifth",
-      "title": "The self and the fifth",
-      "line": "The four with the centre: in the egg footnote the four things stand with the punctum solis apart from them, and the square rotates into a circle — the quinta essentia and the pentadic mandala are the same statement.",
+      "title": "The fifth",
+      "line": "Aion (CW9ii ¶345, the egg footnote), Flying Saucers (CW10 ¶738) and CW9i (pdf p382): the punctum solis apart from the four, the quinta essentia as the circle divided into four with the centre, and a patient's pentadic mandala.",
       "quotes": [
-        { "work": "cw09ii", "para": 345, "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick." },
+        { "work": "cw09ii", "para": 345, "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick.", "voice": "Turba philosophorum, quoted by Jung (note)" },
         { "work": "cw09ii", "para": 345, "quote": "To the scholiast of the \"Tractatus aureus\" it is the midpoint, the \"circulus exiguus\" and \"mediator\" which reconciles the hostile elements and \"by persistent rotation changes the angular form of the square into a circular one like itself.\"" },
         { "work": "cw10", "para": 738, "quote": "This is a symbol of the quinta essentia, which is identical with the Philosophers’ Stone. It is the circle divided into four with the centre, or the divinity extended in four directions, or the four functions of consciousness with their unitary substrate, the self." },
         { "work": "cw09i", "page": 382, "pageOnly": true, "quote": "In the centre is the egg encircled by the snake; outside, apotropaic wings and eyes." },
@@ -73,8 +73,8 @@
     },
     {
       "id": "the-return",
-      "title": "The return",
-      "line": "Six closes the series: the first number equal to the sum of its divisors, and the return of the whole to the ground it started from.",
+      "title": "Six, in von Franz",
+      "line": "Number and Time (pdf p49): von Franz on six as the first numeral of the series to represent the sum of its divisors; Jung on the hexad is on the page for the number six.",
       "quotes": [
         { "work": "vonzfranz-number-time", "page": 49, "quote": "six is the first numeral of the series to represent the sum of its divisors (one, two, and three)." }
       ]
@@ -82,7 +82,7 @@
     {
       "id": "the-numbers",
       "title": "The numbers themselves",
-      "line": "The arithmetic and the archetypes are one thing here: the six number archetypes are the self's own order, each an archetype with its page.",
+      "line": "CW8 ¶870 (the synchronicity essay, 1952): Jung defines number psychologically as an archetype of order which has become conscious; the six number archetypes of this site are linked below.",
       "quotes": [
         { "work": "cw08", "para": 870, "quote": "we define number psychologically as an archetype of order which has become conscious" }
       ],

@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { revealSheet } from './lib.mjs';
 
 const URL = process.env.EARTH_URL ?? 'http://localhost:5183/';
 const out = process.argv[2];
@@ -26,6 +27,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   const go = async (hash) => { await page.evaluate((h) => { location.hash = h; }, hash); await page.waitForTimeout(1200); };
   await page.goto(URL + '#/dreams', { waitUntil: 'load' });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 60000 });
+  await revealSheet(page, 'Dreams');
   await page.waitForSelector('.lens-panel .lp-privacy', { timeout: 30000 });
   const before = requests.length;
 
@@ -54,6 +56,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
 
   // Symbols
   await go('#/symbols');
+  await revealSheet(page, 'Symbols');
   await page.fill('.sy-search input', 'tow');
   await page.waitForTimeout(300);
   await page.click('.sy-results button >> nth=0');
@@ -64,6 +67,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   // Coincidences
   for (const [inner, outer] of [['I dreamed of a golden beetle', 'A beetle flew against the window'], ['A scarab in a book I was reading', 'My sister phoned about a scarab brooch']]) {
     await go('#/coincidences/new');
+    await revealSheet(page, 'Coincidences');
     await page.waitForSelector('.dr-form');
     await page.fill('.dr-form textarea >> nth=0', inner);
     await page.fill('.dr-form textarea >> nth=1', outer);

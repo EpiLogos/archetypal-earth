@@ -21,7 +21,7 @@
   .aion-dot span { left: 36px; top: 14px; }
   .aion-epochs button { min-height: 44px; min-width: 44px; }
 
-  .sh-controls select, .aion-choices select, .sky-culture select, .gv-tools select { min-height: 44px; }
+  .sh-controls select, .aion-choices select, .gv-tools select { min-height: 44px; }
   /* rail circles stay small visually; the hit box grows around them so they don't overhang the card */
   .rb-rail button, .dy-rail button { position: relative; }
   .rb-rail button::after, .dy-rail button::after { content: ''; position: absolute; inset: -11px; }
@@ -31,11 +31,8 @@
   .sky-label { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; margin: -12px -8px; }
 }
 
-/* phone: Options sheet still timeline-width, tucked above the clock; graph tools stay a full sheet */
+/* phone: the Options sheet is set in aion.css (a bottom sheet at 720px); graph tools stay a full sheet */
 @media (max-width: 760px) {
-  .mode-options-body, .aion-choices {
-    bottom: 64px; width: min(100vw - 16px, 780px); max-height: 56vh; padding: 16px 16px calc(14px + env(safe-area-inset-bottom));
-  }
   .gvt-panel {
     position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: auto; max-width: none; max-height: 70vh; z-index: 45;
     padding: 20px 18px calc(22px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; border-bottom: 0;

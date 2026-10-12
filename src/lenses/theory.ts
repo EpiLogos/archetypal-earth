@@ -10,7 +10,7 @@ import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '.
 import { BUILT, type LensContext, type LensInstance } from '../shell/lens';
 import type { PanelLensId } from '../state/store';
 import { inLens } from '../state/store';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
 import { treeFigure } from './tree';
 
@@ -263,8 +263,10 @@ export function mount(ctx: LensContext): LensInstance {
 
   const theoryOptions = () => {
     ctx.setControls([modeOptions([
-      optionAction("Jung's theory", () => {}, { pressed: true }),
-      optionAction('Dynamics', () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }), { title: 'Archetypes & Strange Attractors' }),
+      optionGroup('Read the theory', [
+        optionAction("Jung's theory", () => {}, { pressed: true, description: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
+        optionAction('Dynamics', () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }), { description: 'Archetypes & Strange Attractors' }),
+      ]),
     ], 'Options')]);
   };
 

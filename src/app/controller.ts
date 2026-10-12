@@ -11,12 +11,13 @@ import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
 import { defaultReadingId, hashToState, hashWithFilter, type BirthPrefill } from '../state/router';
-import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSky, openedFrom, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
+import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSky, openedFrom, skyGestureState, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
-import { lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
+import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
+import { modeOptions, optionAction } from '../ui/mode-options';
 import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
@@ -33,6 +34,7 @@ import { eraShort } from '../data/text';
 import type { GraphView, Insets } from '../graph/view';
 import { ModeSwitch } from '../graph/switch';
 import type { AionView } from '../aion/view';
+import { walksOf } from '../aion/walk';
 import type { History } from '../types/history';
 import type { CorpusIndex } from '../types/corpus';
 import type { RedBook } from '../types/redbook';
@@ -122,6 +124,9 @@ export class Controller {
   private filterMask: Float32Array | null = null;
   private lensInst = new Map<PanelLensId, LensInstance>();
   private activeLens: PanelLensId | null = null;
+  /** the standard first Options action of the active panel lens (Open / Close its sheet), and whether the lens set its Options this entry */
+  private sheetAction: HTMLButtonElement | null = null;
+  private lensOptionsSet = false;
   private lensTok = 0;
   private landing = new Landing();
   private aionTime: TimeSnapshot | null = null;
@@ -226,30 +231,9 @@ export class Controller {
     this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
     // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
     this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
-    this.panel = new Panel(root, () => {
-      const s = this.state;
-      // Astrology X: dismiss the sheet onto the sky still in Astrology — never Field, never bare inSky().
-      // A natal chart stays on that birth sky; Charts / live sky close onto the live Astrology sky (not Jung).
-      if (s.lens?.id === 'astrology') {
-        const chart = s.lens.path[0] || s.sky?.natal;
-        const next = chart && chart !== ASTROLOGY_LIVE
-          ? (() => {
-            const n = astrologyAt([chart]);
-            if (s.sky?.culture) n.sky = { ...n.sky, culture: s.sky.culture };
-            return n;
-          })()
-          : astrologyLive({ culture: s.sky?.culture });
-        if (stateEq(next, s)) this.panel.close();
-        else this.navigate(next);
-        return;
-      }
-      // Jung's theory sheet closes back into Theory with Options waiting, not out of the mode
-      if (s.lens?.id === 'theory') {
-        this.navigate({ view: { kind: 'world' }, deep: false, dynamics: {} });
-        return;
-      }
-      this.stepBack();
-    });
+    this.panel = new Panel(root, () => this.closeSheet());
+    // the sheet's visibility is the Options' first action and the globe's shift: both follow it (panel.ts)
+    this.panel.onChange(() => this.syncSheet());
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
     this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
@@ -430,7 +414,7 @@ export class Controller {
       hasHistorySelection: (id: string, kind: string, selection: string) => {
         const reading = this.history?.readings.find(r => r.id === id);
         if (reading && kind === 'chapter') return !!this.history?.book?.chapters.some((c) => c.id === selection);
-        return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : reading.threads).some(x => x.id === selection);
+        return !!reading && (kind === 'epoch' ? reading.epochs : kind === 'event' ? reading.events : walksOf(reading)).some(x => x.id === selection);
       },
       hasRedBookStop: (id: string) => this.redbookStops.has(id),
       defaultReading: () => defaultReadingId(this.history?.readings ?? []),
@@ -711,6 +695,16 @@ export class Controller {
       return;
     }
     if (e.key === 'Escape') {
+      // an open Options disclosure closes first (a <details> does not close on Escape by itself)
+      const options = document.querySelector<HTMLDetailsElement>('details.mode-options[open]');
+      if (options) { options.open = false; e.preventDefault(); return; }
+      // a panel lens with its sheet on screen: Escape dismisses the sheet as X does (Astrology's X steps onto its sky).
+      // With the sheet hidden it falls through to stepBack, as it always did (one level out, then the Field)
+      if (this.activeLens && this.panel.isVisible && !this.passage.isOpen && !this.search.isOpen && this.skyCam.phase !== 'gaze') {
+        this.closeSheet();
+        e.preventDefault();
+        return;
+      }
       this.stepBack();
       e.preventDefault();
       return;
@@ -1003,7 +997,7 @@ export class Controller {
       time: this.time,
       panel: this.panel,
       setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
-      setControls: (n) => { if (this.activeLens === id) this.shell.setControls(n); },
+      setControls: (n) => { if (this.activeLens === id) this.setLensOptions(n); },
       navigate: (st) => this.navigate(st),
       filter: () => this.filter,
       passages: this.passage.bridge(),
@@ -1043,26 +1037,113 @@ export class Controller {
     }
     this.activeLens = id;
     const path = next.lens!.path;
-    // Astrology live sky / [chart] alone: sky-only (no sheet). Walk / Charts home still give the sheet room.
-    const asSkyOnly = id === 'astrology' && (path[0] === ASTROLOGY_LIVE || path.length === 1);
-    if (asSkyOnly) this.engine.rig.setShift(0, 0);
-    else {
-      this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
-    }
+    // a lens entered from elsewhere starts with its sheet hidden; its content is built below, its Options are set by enterLensInstance
+    if (!prev.lens || prev.lens.id !== id) this.panel.enterLens();
+    this.lensShift(next);
     const have = this.lensInst.get(id);
-    if (have) { have.enter(path); return; }
+    if (have) { this.enterLensInstance(have, path); return; }
     const tok = ++this.lensTok;
     document.body.classList.add('lens-loading');
     PANEL_LOADERS[id]().then((mod) => {
       document.body.classList.remove('lens-loading');
       if (!this.lensInst.has(id)) this.lensInst.set(id, mod.mount(this.lensContext(id)));
       if (tok !== this.lensTok || this.state.lens?.id !== id) return;
-      this.lensInst.get(id)!.enter(this.state.lens.path);
+      this.enterLensInstance(this.lensInst.get(id)!, this.state.lens.path);
     }).catch((err) => {
       document.body.classList.remove('lens-loading');
       console.error(err);
       this.panel.open('Lens unavailable', [el('p', { class: 'lp-error', text: 'This lens could not be loaded. Check the connection and try again.' })]);
+      this.panel.reveal();
     });
+  }
+
+  /** Hand a lens its route. A lens that sets no Options of its own still gets the standard one, so the mode is never empty. */
+  private enterLensInstance(inst: LensInstance, path: string[]) {
+    this.lensOptionsSet = false;
+    inst.enter(path);
+    if (!this.lensOptionsSet) this.setLensOptions([]);
+  }
+
+  /** The globe makes room for the sheet only while the sheet is on screen. Astrology's sky-only states never do. */
+  private lensShift(next: AppState) {
+    const id = next.lens!.id;
+    const path = next.lens!.path;
+    // Astrology live sky / [chart] alone: sky-only (no sheet). Walk / Charts home still give the sheet room.
+    const asSkyOnly = id === 'astrology' && (path[0] === ASTROLOGY_LIVE || path.length === 1);
+    if (asSkyOnly || !this.panel.isVisible) this.engine.rig.setShift(0, 0);
+    else this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
+  }
+
+  /**
+   * A panel lens's Options. The lens's own disclosure gets the standard first action (Open, or Close, its sheet), placed
+   * by the shell here and nowhere in the lenses. Null (the lens leaving) clears the shell's controls.
+   */
+  private setLensOptions(nodes: Node[] | null) {
+    if (!nodes) { this.sheetAction = null; this.shell.setControls(null); return; }
+    this.lensOptionsSet = true;
+    const act = optionAction('', () => this.toggleSheet(), { pressed: false });
+    this.sheetAction = act;
+    const disclosure = nodes.find((n): n is HTMLElement => n instanceof HTMLElement && n.classList.contains('mode-options')) ?? modeOptions([]);
+    const body = disclosure.querySelector<HTMLElement>('.mode-options-body');
+    body?.prepend(act);
+    // a content choice in the Options is a request to read: it reveals the sheet. Capture phase, so the sheet is revealed
+    // before the choice navigates. The standard toggle and any row marked data-no-reveal (Astrology's names) do not.
+    body?.addEventListener('click', (e) => {
+      const row = (e.target as HTMLElement).closest('button');
+      if (!row || row === act || !body.contains(row) || row.hasAttribute('data-no-reveal') || row.disabled) return;
+      this.panel.reveal();
+    }, true);
+    this.shell.setControls([disclosure, ...nodes.filter((n) => n !== disclosure)]);
+    this.syncSheetAction();
+  }
+
+  /** The standard action names what it does: Open the sheet, or Close it while it is revealed. No content yet: disabled. */
+  private syncSheetAction() {
+    const act = this.sheetAction;
+    if (!act || !this.activeLens) return;
+    const shown = this.panel.isRevealed;
+    // the row's title sits in its own span (optionRow); the label goes there, never over the row's structure
+    const title = `${shown ? 'Close' : 'Open'} ${lensDef(this.activeLens).label}`;
+    const span = act.querySelector<HTMLElement>('.mode-opt-title');
+    if (span) span.textContent = title; else act.textContent = title;
+    act.setAttribute('aria-pressed', String(shown));
+    act.disabled = !this.panel.isOpen;
+  }
+
+  /** The sheet changed: its Options action follows, and the globe follows the sheet's visibility. */
+  private syncSheet() {
+    this.syncSheetAction();
+    if (this.activeLens && this.state.lens?.id === this.activeLens) this.lensShift(this.state);
+  }
+
+  /** The standard action: reveal the sheet, or hide it (the person's dismiss: the content stays, the mode stays). */
+  private toggleSheet() {
+    if (this.panel.isRevealed) this.panel.hide();
+    else this.panel.reveal();
+  }
+
+  /**
+   * X, Escape and the drag-down on the sheet. Astrology's X steps onto its sky, as it always has. Every other lens only
+   * hides its sheet: the Options stay and the lens never leaves the mode (the Theory and Alchemy X used to leave it).
+   */
+  private closeSheet() {
+    const s = this.state;
+    // Astrology X: dismiss the sheet onto the sky still in Astrology — never Field, never bare inSky().
+    // A natal chart stays on that birth sky; Charts / live sky close onto the live Astrology sky (not Jung).
+    if (s.lens?.id === 'astrology') {
+      const chart = s.lens.path[0] || s.sky?.natal;
+      const next = chart && chart !== ASTROLOGY_LIVE
+        ? (() => {
+          const n = astrologyAt([chart]);
+          if (s.sky?.culture) n.sky = { ...n.sky, culture: s.sky.culture };
+          return n;
+        })()
+        : astrologyLive({ culture: s.sky?.culture });
+      if (stateEq(next, s)) this.panel.close();
+      else this.navigate(next);
+      return;
+    }
+    this.panel.hide();
   }
 
   private leavePanelLens() {
@@ -1070,6 +1151,7 @@ export class Controller {
     // the lens cleans up while it is still the active one, so its own chrome clear (Options) is not dropped (R1 F4)
     if (id) this.lensInst.get(id)?.leave();
     this.activeLens = null;
+    this.sheetAction = null;
     this.lensTok++;
     this.panel.close();
     this.engine.rig.setShift(0, 0);
@@ -1172,7 +1254,7 @@ export class Controller {
             const subject = this.tour.subject;
             this.engine.setPalette(this.subjectPal(subject), 1.2);
             this.engine.setEmphasis(this.emphasise(this.tour.steps.map(s => s.occ), { relatedLevel: 1.8 }), this.subjectPal(subject).core);
-            this.label.set({ name: subjectName(this.m, subject), line: 'Following the thread', links: [{ text: 'Reading', onClick: () => this.setDeep(true) }] }, `t:${v.target.type}:${v.target.id}`);
+            this.label.set({ name: subjectName(this.m, subject), line: 'Following the thread', up: [{ text: 'the whole field', onClick: () => this.wholeField() }], links: [{ text: 'Reading', onClick: () => this.setDeep(true) }] }, `t:${v.target.type}:${v.target.id}`);
             this.tourJump(Math.max(0, this.tour.i));
           } else this.enterThread(v.target, v.from, first);
           break;
@@ -1263,8 +1345,6 @@ export class Controller {
       this.skyView.setLayer(layer);
       for (const w of this.layerWaiters.splice(0)) w(layer);
       this.syncRig();
-      const cultures = Object.keys(data.cultures).filter((id) => this.m.cultureById.has(id)).map((id) => ({ id, name: this.m.cultureById.get(id)!.name }));
-      this.skyView.setCultures(cultures, (id) => this.setSkyCulture(id));
       document.body.classList.add('sky-ready');
       if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
       this.pendingSkyEntry = null;
@@ -1564,11 +1644,6 @@ export class Controller {
     return (culture && data?.cultures[culture]?.[key]?.name) || data?.bodies.find((b) => b.key === key)?.name || key;
   }
 
-  private setSkyCulture(id: string | null) {
-    const { culture: _drop, ...rest } = this.state.sky ?? {};
-    this.navigate(inSky(id ? { ...rest, culture: id } : rest), { replace: true });
-  }
-
   /** The body card follows the state; a body without a resolved field link opens no card. */
   private syncSkyCard() {
     const layer = this.skyLayer;
@@ -1591,7 +1666,6 @@ export class Controller {
     const on = !!next.sky;
     this.skyView.setActive(on, next.sky?.body ?? null);
     this.skyView.relabel();
-    this.skyView.setCulture(next.sky?.culture ?? null, next.sky?.culture ? this.m.cultureById.get(next.sky.culture)?.name : undefined);
     if (on) this.syncSkyCard(); else this.skyCard.hide();
     this.syncNatal(prev.sky?.natal, next.sky?.natal, !!next.sky);
     if (on && !prev.sky) {
@@ -1711,29 +1785,24 @@ export class Controller {
     rig.settleTo = systemViewLatLon(systemViewLongitude(layer.sunLongitude()), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
   }
 
-  /** The zoom gesture crossing the Moon's edge enters Astrology (birth sky) or returns to the Field. */
+  /**
+   * The zoom gesture crossing the sky's edges: zooming out from the Field (the globe, a focus, a walk) enters Astrology on the
+   * live sky, and zooming back in by the wheel or pinch returns to the Field. The transition is store.skyGestureState.
+   */
   private watchSkyGesture() {
     // the sky camera owns the camera while a move runs: no scripted move is read as the user's zoom (C10)
     if (this.skyCam.busy) return;
     this.settleArrival();
     const rig = this.engine.rig;
     if (!this.skyRequested && rig.dist > 4.4) this.requestSky();
-    // other modes own the camera; Astrology may both enter (from Field) and leave (zoom back to Earth)
-    if (!this.skyLayer || this.graphMode || this.state.history || this.state.redbook || this.state.dynamics || rig.flying) return;
-    if (this.state.lens && this.state.lens.id !== 'astrology') return;
-    if (this.state.view.kind !== 'world') return;
+    // other modes own the camera; a scripted flight is never read as a zoom
+    if (!this.skyLayer || rig.flying) return;
     // orbit-gaze: stationed at a planet looking at Earth — never treat the look-at release as a zoom-out of the sky
     if (this.skyCam.phase === 'gaze') return;
-    const d = this.engine.stageDist;
-    if (!this.state.sky && d > SKY_ENTER) {
-      // zooming out into the sky is entering Astrology on the live sky — not Jung’s chart, not Field+sky
-      this.skyByGesture = true;
-      this.navigate(astrologyLive());
-    } else if (this.state.sky && d < SKY_EXIT && rig.wheelDriven) {
-      // leaving by distance is the user's own zoom only: a wheel or pinch that carried the camera in (never a scripted move)
-      this.skyByGesture = true;
-      this.navigate(WORLD, { replace: true });
-    }
+    const next = skyGestureState(this.state, this.engine.stageDist, { enter: SKY_ENTER, exit: SKY_EXIT }, rig.wheelDriven);
+    if (!next) return;
+    this.skyByGesture = true;
+    this.navigate(next, { replace: !next.sky });
   }
 
   /** Open a body from outside the sky (See in sky, a family's reveal): enter Astrology on that body. */
@@ -1865,7 +1934,7 @@ export class Controller {
     else this.openOccurrenceId(id);
   }
 
-  /** A body in the graph opens in the sky, on its card, as the S key's flight would. */
+  /** A body in the graph opens Astrology on that body, as the S key's flight would enter the sky. */
   private onGraphBody(key: BodyKey) {
     this.navigate(inSky({ body: key }));
   }
@@ -2236,7 +2305,7 @@ export class Controller {
     this.shell.setContext(o.label);
     const showChrome = () => {
       this.reveal.show(oi);
-      this.label.set({ name: subjectName(m, context), back: () => this.stepBack() }, `m:${context.type}:${context.id}`);
+      this.label.set({ name: subjectName(m, context), back: () => this.stepBack(), up: [{ text: 'the whole field', onClick: () => this.wholeField() }] }, `m:${context.type}:${context.id}`);
       this.syncDeep(this.state);
     };
     if (fromSky) {
@@ -2293,7 +2362,7 @@ export class Controller {
     this.label.set({
       name,
       line: target.type === 'parallels' ? `${m.occ[m.occIndex.get(target.id)!].label} and its parallels` : `${eraShort(first0.yearDisplay, 22)} → ${eraShort(last.yearDisplay, 22)}`,
-      up: [{ text: 'the whole field', onClick: () => this.stepBack() }],
+      up: [{ text: 'the whole field', onClick: () => this.wholeField() }],
       links: [{ text: 'Reading', onClick: () => this.setDeep(true) }],
     }, `t:${target.type}:${target.id}`);
     this.shell.setContext(`${name}, the thread`);

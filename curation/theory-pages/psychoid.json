@@ -2,12 +2,12 @@
   "_note": "The psychoid at full page: Jung's own CW8 material (the naming ¶840, the three reservations ¶368, the ultra-violet end ¶417, the physics parallel ¶419-420, the specific charge ¶841), the non-locality of CW10 ¶851, the psychoid form under the image (CW13 ¶350), the last-word form (CW18 ¶1208) and the correspondence with Pauli (letters 59, 63 and 47P -- Pauli's own voice there, never Jung's). Quotations name only their work and their words: scripts/theory-pages.mjs places them in the read-only corpus and writes the locator from the corpus's own markers; one it cannot place exactly once fails the build. Where the scan itself is damaged inside the sentence (letters-pauli p160), the quotation is kept as the scan reads it and says so (`scan`), never repaired by hand.",
   "version": 1,
   "concept": "psychoid",
-  "line": "Jung borrows a word he half distrusts and ends up with the hinge of the whole field: the archetype's irrepresentable side, where psyche and matter are not yet two things.",
+  "line": "Where Jung uses the word and what he says it names: in the essays of 1946–1954, in the synchronicity essay, and in his letters with the physicist Wolfgang Pauli.",
   "sections": [
     {
       "id": "naming",
       "title": "The naming",
-      "line": "In the synchronicity essay Jung names the irrepresentable side of the archetype, and says the naming is a confession of not-knowing.",
+      "line": "The synchronicity essay (CW8 ¶840, 1952) says what Jung has named psychoid and why.",
       "quotes": [
         {
           "work": "cw08",
@@ -24,7 +24,7 @@
     {
       "id": "reservations",
       "title": "The three reservations",
-      "line": "The word is borrowed from Bleuler, knowingly, and Jung states at the outset exactly what it may not be taken to mean.",
+      "line": "On the Nature of the Psyche (CW8 ¶368): the three reservations on his use of the word, and Bleuler as its source.",
       "quotes": [
         {
           "work": "cw08",
@@ -46,7 +46,7 @@
     {
       "id": "under-the-image",
       "title": "The form under the image",
-      "line": "He sets the term to work on the image: whatever the archetypal image becomes, the psychoid form beneath it stays itself.",
+      "line": "The Spirit Mercurius (CW13 ¶350): the psychoid form underlying an archetypal image.",
       "quotes": [
         {
           "work": "cw13",
@@ -59,7 +59,7 @@
     {
       "id": "ultra-violet",
       "title": "The ultra-violet end",
-      "line": "The 1954 essay places the archetype as such at the far end of the psychic spectrum — a factor that cannot be made conscious and is called psychoid for that reason.",
+      "line": "On the Nature of the Psyche (CW8 ¶417): the archetype as such is placed at the ultra-violet end of the psychic spectrum.",
       "quotes": [
         {
           "work": "cw08",
@@ -86,7 +86,7 @@
     {
       "id": "physics",
       "title": "The physics parallel",
-      "line": "Psychology and physics both work with quantities they cannot represent directly, and Jung follows the parallel to its end: psyche and matter as two aspects of one thing.",
+      "line": "CW8 ¶419–420: the psychic spectrum set beside the physicist's irrepresentable models, and what Jung says follows for psyche and matter.",
       "quotes": [
         {
           "work": "cw08",
@@ -124,7 +124,7 @@
     {
       "id": "specific-charge",
       "title": "The specific charge",
-      "line": "A page on from the naming, the archetypes are given their working definition — formal factors, patterns of behaviour, with a charge that turns up as affect.",
+      "line": "CW8 ¶841, the paragraph after the naming: what the archetypes are said to be and to do.",
       "quotes": [
         {
           "work": "cw08",
@@ -141,7 +141,7 @@
     {
       "id": "not-localized",
       "title": "Not localized in one person",
-      "line": "In Flying Saucers the psychoid archetype behaves as though it were not confined to a single person.",
+      "line": "Flying Saucers: A Modern Myth (CW10 ¶851): how the psychoid archetype is said to behave.",
       "quotes": [
         {
           "work": "cw10",
@@ -151,10 +151,15 @@
       ]
     },
     {
-      "id": "correspondence",
-      "title": "The correspondence",
-      "line": "With Pauli, Jung states the double character flatly; Pauli answers, in his own voice, that the concept cannot be used so lightly in the acausalities of microphysics.",
+      "id": "letters-jung",
+      "title": "In Jung's letters to Pauli",
+      "line": "Atom and Archetype, the Pauli–Jung letters: Jung's statements of 1951 and 1953 on the archetype's physical and psychic occurrence.",
       "quotes": [
+        {
+          "work": "letters-pauli",
+          "page": 131,
+          "quote": "With the merely psychoid (transcendental) nature of the archetype, its purely physical occurrence is by no means precluded."
+        },
         {
           "work": "letters-pauli",
           "page": 160,
@@ -165,19 +170,44 @@
           "work": "letters-pauli",
           "page": 188,
           "quote": "The characteristic that is peculiar to the archetype is that it manifests itself not only psychically-subjectively but also physically-objectively"
-        },
+        }
+      ]
+    },
+    {
+      "id": "number",
+      "title": "Whole numbers",
+      "line": "Letter 63 (October 1953): Jung on whole numbers and the psychoid archetype.",
+      "quotes": [
+        {
+          "work": "letters-pauli",
+          "page": 189,
+          "quote": "that they are as much inside as outside. Thus, one can never make out whether they have been devised or discovered; as numbers they are inside and as a quantity they are outside."
+        }
+      ]
+    },
+    {
+      "id": "letters-pauli",
+      "title": "Pauli's side",
+      "line": "Pauli's own words: the objection of December 1950, and a letter of December 1953 (66P).",
+      "quotes": [
         {
           "work": "letters-pauli",
           "page": 125,
-          "voice": "Pauli",
+          "voice": "pauli",
           "quote": "but also the concept of the (psychic or psychoid) archetype cannot be used so lightly in the acausalities of microphysics."
+        },
+        {
+          "work": "letters-pauli",
+          "page": 192,
+          "quote": "what is happening is ultimately an assimilation of the psychoid archetypes into an extended form of physics.",
+          "voice": "pauli"
         }
       ]
     },
     {
       "id": "late-admission",
       "title": "The late admission",
-      "line": "In the 1948 footnote Jung dates his own doubt: fifty years of collecting moved him further, not closer, to certainty.",
+      "line": "CW8 ¶599, a note added in 1948 to 'The Psychological Foundations of Belief in Spirits'.",
       "quotes": [
         {
           "work": "cw08",
@@ -189,7 +219,7 @@
     {
       "id": "last-word",
       "title": "The last word",
-      "line": "Writing to Fordham five years before his death, the term has become shorthand: the psychoid factor is the unconscious archetype, and never its conscious representation.",
+      "line": "CW18 ¶1208, a letter to Michael Fordham (1955): the term in its late form.",
       "quotes": [
         {
           "work": "cw18",

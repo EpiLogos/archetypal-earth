@@ -11,7 +11,7 @@ import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
 import { clear, el, onReadGesture, plate } from '../ui/dom';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
@@ -109,9 +109,16 @@ export class RedBookView {
     // first folio whose genesis row names the Self, else the first stop
     const selfRow = this.mode.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self');
     const firstId = (selfRow && this.stops.find((s) => s.id === selfRow.stopId)?.id) || this.stops[0]?.id;
+    // two rows: the folio walk (the rail moves folio by folio) and the genesis table; the folios are not listed
     this.heading.append(modeOptions([
-      optionAction('The walk', () => this.select(firstId ? { stop: firstId } : {}), { pressed: walking }),
-      optionAction('Genesis', () => this.select({ genesis: true }), { pressed: genesis }),
+      optionGroup('Walk', [
+        optionAction('The walk', () => this.select(firstId ? { stop: firstId } : {}), {
+          pressed: walking, description: 'Each folio of the book, in sequence, one at a time',
+        }),
+        optionAction('Genesis', () => this.select({ genesis: true }), {
+          pressed: genesis, description: 'Where each root became: an archetype, a family or an Aion reading',
+        }),
+      ]),
     ]));
   }
 

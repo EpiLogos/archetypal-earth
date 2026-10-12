@@ -2,7 +2,7 @@
 .aion[hidden], .aion-card[hidden], .aion-dot[hidden] { display: none; }
 .aion select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; }
 .aion option { background: #0a1020; color: #e5eafa; }
-/* Options: icon under the title; sheet matches the timeline width, above the clock */
+/* Options: the icon under the title opens a popover anchored under it, in the shell menu's family (a bottom sheet on a phone) */
 .mode-options, .aion-browse { position: relative; margin-top: 8px; font: 11.5px var(--sans); letter-spacing: .05em; }
 .mode-options > summary, .aion-browse > summary { display: inline-grid; place-items: center; list-style: none; cursor: pointer; }
 .mode-options > summary::-webkit-details-marker, .aion-browse > summary::-webkit-details-marker { display: none; }
@@ -10,27 +10,49 @@
 .mode-opt-btn:hover { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); }
 .mode-opt-ico { display: block; transition: transform .28s var(--ease, ease); }
 .mode-options[open] .mode-opt-ico { transform: rotate(90deg); color: var(--core); }
+/* the popover: the shell menu's surface, radius, border and shadow; anchored under the Options icon, left-aligned with the title */
 .mode-options-body, .aion-choices {
-  position: fixed; left: 50%; bottom: 76px; transform: translateX(-50%);
-  width: min(780px, 90vw); max-width: calc(100vw - 24px); max-height: min(52vh, 420px); overflow-y: auto;
-  display: grid; gap: 2px; padding: 14px 22px; z-index: 30;
-  border: 1px solid var(--hair); border-radius: 14px; background: var(--glass);
-  backdrop-filter: blur(20px) saturate(1.15); box-shadow: 0 20px 60px rgb(0 0 0 / .45);
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 30;
+  width: min(320px, calc(100vw - 2 * var(--shell-x, 22px))); max-height: min(70vh, 520px); overflow-y: auto; overscroll-behavior: contain;
+  display: grid; align-content: start; gap: 2px; padding: 8px 8px 12px;
+  font: 13px var(--sans); letter-spacing: .01em; color: var(--ink-2);
+  border: 1px solid var(--hair); border-radius: 16px; background: var(--glass); background-color: rgb(var(--deep-rgb) / 0.86);
+  backdrop-filter: blur(22px) saturate(1.15); box-shadow: 0 30px 90px rgb(0 0 0 / .55);
+  scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / .25) transparent;
+  animation: sm-in .28s var(--ease);
 }
+.mode-options-body::-webkit-scrollbar, .aion-choices::-webkit-scrollbar { width: 6px; }
+.mode-options-body::-webkit-scrollbar-track, .aion-choices::-webkit-scrollbar-track { background: transparent; }
+.mode-options-body::-webkit-scrollbar-thumb, .aion-choices::-webkit-scrollbar-thumb { background: rgb(var(--core-rgb) / .25); border-radius: 3px; }
+.mode-opt-grab { display: none; }
+.mode-opt-group { display: grid; gap: 2px; padding: 6px 0 4px; }
+.mode-opt-group + .mode-opt-group { border-top: 1px solid var(--hair); margin-top: 6px; padding-top: 10px; }
 .mode-opt-field, .aion-choices label { display: grid; gap: 4px; min-width: 0; }
 .mode-opt-field > span, .aion-choices label > span { color: var(--ink-3); font-size: 10.5px; letter-spacing: .08em; }
 .mode-opt-field select, .aion-choices select, .mode-options-body select { width: 100%; font: 11.5px var(--sans); letter-spacing: .01em; border: 0; border-bottom: 0; padding: 0; }
-.mode-opt-action { display: block; width: 100%; text-align: left; padding: 8px 0; font: 13px var(--sans); color: var(--ink-2); border: 0; border-bottom: 0; background: none; text-decoration: none; }
-.mode-opt-action:hover { color: var(--ink); }
-.mode-opt-action[aria-pressed=true] { color: var(--core); }
-.mode-opt-blurb { margin: 0 0 10px; padding: 0; font: 12.5px/1.45 var(--serif); color: var(--ink-2); max-width: 48ch; }
-.mode-opt-label {
-  display: block; margin: 12px 0 2px; padding: 0;
-  font: 10.5px var(--sans); letter-spacing: .08em; color: var(--ink-3); text-transform: none;
-  border: 0;
+/* a row: the shell menu's row (title in the serif, one line under it); the current choice has an accent dot and a tint */
+.mode-opt-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; padding: 7px 12px; margin: 0;
+  border: 0; border-radius: 11px; background: none; text-align: left; font: inherit; letter-spacing: inherit; color: var(--ink-2);
+  cursor: pointer; transition: background .2s, color .2s;
 }
-.mode-opt-label:first-child { margin-top: 0; }
-.mode-opt-live { margin: 12px 0 4px; padding: 0; font: 11px/1.45 var(--sans); color: var(--ink-3); max-width: 42ch; }
+.mode-opt-row::before {
+  content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; background: transparent; transition: background .2s, box-shadow .2s;
+}
+.mode-opt-row:hover { color: var(--ink); background: rgb(var(--core-rgb) / .08); }
+.mode-opt-row:focus-visible { outline: 2px solid rgb(var(--core-rgb) / .6); outline-offset: -2px; }
+.mode-opt-row[aria-pressed=true], .mode-opt-row[aria-selected=true] { color: var(--ink); background: rgb(var(--core-rgb) / .12); }
+.mode-opt-row[aria-pressed=true]::before, .mode-opt-row[aria-selected=true]::before { background: var(--core); box-shadow: 0 0 8px rgb(var(--core-rgb) / .7); }
+.mode-opt-row[aria-pressed=true] .mode-opt-title { color: var(--core); }
+.mode-opt-text { display: grid; gap: 1px; min-width: 0; flex: 1; }
+.mode-opt-title { font: 600 .92rem/1.25 var(--serif); color: var(--ink); }
+.mode-opt-desc { font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: .01em; }
+.mode-opt-blurb { margin: 2px 12px 8px; padding: 0; font: 12.5px/1.45 var(--serif); color: var(--ink-2); max-width: 46ch; }
+.mode-opt-label {
+  display: block; margin: 0 12px 4px; padding: 0;
+  font: 500 10px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+}
+.mode-opt-live { margin: 8px 12px 4px; padding: 0; font: 11px/1.45 var(--sans); color: var(--ink-3); max-width: 42ch; }
 .mode-opt-live strong { font-weight: 600; color: var(--ink-2); letter-spacing: .04em; }
 .mode-opt-live[data-state=live] strong::before, .mode-opt-live[data-state=held] strong::before {
   content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: rgb(var(--core-rgb) / .85);
@@ -38,6 +60,17 @@
 .mode-opt-live:empty { display: none; }
 .mode-options-body .rb-modes { display: contents; }
 .mode-options-body .rb-modes button { display: block; width: 100%; text-align: left; padding: 8px 0; }
+/* a phone: the same popover as a bottom sheet (the shell menu's sheet), rows at 48px */
+@media (max-width: 720px) {
+  .mode-options-body, .aion-choices {
+    position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: auto; max-width: none; max-height: 70vh;
+    border-radius: 20px 20px 0 0; border-bottom: 0; padding: 8px 10px calc(16px + env(safe-area-inset-bottom));
+    z-index: 45; background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);
+    animation: sm-up .32s var(--ease);
+  }
+  .mode-opt-grab { display: block; width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / .3); margin: 4px auto 8px; }
+  .mode-opt-row { min-height: 48px; }
+}
 .aion-epochs { position: absolute; bottom: 89px; left: 50%; transform: translateX(-50%); z-index: 12; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 32px; max-width: min(920px, 94vw); pointer-events: auto; }
 .aion-epochs[hidden] { display: none; }
 .aion-epochs button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding: 6px 0; border-bottom: 1px solid transparent; white-space: nowrap; transition: color .4s, border-color .4s; }

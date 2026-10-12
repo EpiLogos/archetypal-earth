@@ -2,12 +2,12 @@
   "_note": "The complex: the founding definition of the emotional complex (CW2 ¶166, the 1904 footnote), the memoir's account of the word-finding (CW18 ¶832), how complexes behave (CW2 ¶902, ¶861, ¶610, ¶664, CW11 ¶21, CW2 ¶1353), what one is (CW8 ¶201, ¶200), and the seminar dictum on energy. Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "complex",
-  "line": "The psyche's autonomous parts: feeling-toned knots that behave like secondary personalities — the instrument Jung found the unconscious with.",
+  "line": "Jung's statements on the complex from the association experiments (CW2) to the restatement of 1934 (CW8), with the passages on its autonomy and on energy.",
   "sections": [
     {
       "id": "the-founding",
       "title": "The founding definition",
-      "line": "The word starts as a technical term of the association experiments: an emotionally charged group of ideas, measurable by its disturbance of reaction.",
+      "line": "CW2 ¶166 (1904–05): the definition of the emotionally charged complex; CW18 ¶832: Jung on how the experiments led him to the word.",
       "quotes": [
         {
           "work": "cw02",
@@ -25,7 +25,7 @@
     {
       "id": "how-they-behave",
       "title": "How a complex behaves",
-      "line": "Not a content among contents: the complex acts as a personality, with intentions of its own, and the ego can be subjected to it.",
+      "line": "CW2 ¶902, ¶861 and ¶1353, and CW11 ¶21: the complex as a second personality to which ego-consciousness is subjected, and as secondary or partial personalities.",
       "quotes": [
         {
           "work": "cw02",
@@ -52,7 +52,7 @@
     {
       "id": "what-one-is",
       "title": "What one is",
-      "line": "The 1934 reformulation: a complex is the image of a situation, emotionally accentuated and incompatible with the habitual attitude — which is why it has us.",
+      "line": "CW8 ¶200–201 and ¶204 (1934, A Review of the Complex Theory): Jung's definition of the feeling-toned complex, his statement that complexes can have us, and his naming them splinter psyches.",
       "quotes": [
         {
           "work": "cw08",
@@ -63,13 +63,18 @@
           "work": "cw08",
           "para": 200,
           "quote": "Everyone knows nowadays that people \"have complexes.\" What is not so well known, though far more important theoretically, is that complexes can have us."
+        },
+        {
+          "work": "cw08",
+          "para": 204,
+          "quote": "Today we can take it as moderately certain that complexes are in fact \"splinter psyches.\""
         }
       ]
     },
     {
       "id": "the-ground",
       "title": "The ground of psychic life",
-      "line": "Beyond pathology: the complex is the normal structure of the unconscious life, and the place where psychic energy collects.",
+      "line": "CW2 ¶664 and ¶610 on complexes and the background of consciousness, and the Dream Analysis seminar (pdf p442) on complexes and energy.",
       "quotes": [
         {
           "work": "cw02",

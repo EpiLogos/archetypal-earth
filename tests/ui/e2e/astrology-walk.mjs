@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { revealSheet } from './lib.mjs';
 
 const URL = process.env.EARTH_URL ?? 'http://localhost:5183/';
 const out = process.argv[2];
@@ -24,6 +25,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.addInitScript(() => { try { localStorage.setItem('aae.landing.seen', '1'); } catch {} });
   await page.goto(URL + '#/astrology', { waitUntil: 'load' });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 60000 });
+  await revealSheet(page, 'Astrology');
   await page.waitForSelector('.as-form', { timeout: 30000 });
   check(await page.locator('.lp-privacy').count() > 0, `${s.name}: the lens says the data stays in this browser`);
   check(await page.locator('.as-card-h', { hasText: 'C. G. Jung' }).count() === 1, `${s.name}: Jung's chart is there before any input`);

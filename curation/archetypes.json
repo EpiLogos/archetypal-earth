@@ -287,7 +287,7 @@
     },
     "one": {
       "name": "One",
-      "oneLine": "The monad: unity before division, the point that already holds the series.",
+      "oneLine": "The One: Monoïmos's single Monad, which Jung reads as the nature of the self.",
       "position": 0.5,
       "palette": {
         "core": "#f4f0e6",
@@ -304,13 +304,13 @@
         }
       ],
       "body": [
-        "One is the unit before there is a pair: the monad, the point, the circle that has not yet been divided. Jung reads Monoïmos's single Monad as a description of the self's nature — compounded and uncompounded at once.",
-        "On this globe One sits with the monad family and with the Self's own centre."
+        "In Aion (CW9ii ¶340–341, 1951) Jung gives Hippolytus's report of the single Monad of Monoïmos and says that this paradoxical idea describes the psychological nature of the self as conceived by a thinker of the second century.",
+        "In his letter 63 to Pauli (October 1953) Jung writes that 1 is the One, absolute, nondivisible, and thus the unconscious, the beginning."
       ]
     },
     "two": {
       "name": "Two",
-      "oneLine": "The dyad: polarity, reflection, the complexio oppositorum before a third.",
+      "oneLine": "The dyad: the division of the One, the pair; and the conjoined two of the mandala.",
       "position": 0.48,
       "palette": {
         "core": "#e8d4c8",
@@ -327,8 +327,8 @@
         }
       ],
       "body": [
-        "Two is polarity: conscious and unconscious, masculine and feminine, the pair that makes a tension possible. Jung names the self a complexio oppositorum precisely because reality needs that polarity.",
-        "Its images are the syzygy and the shadow's double — two before three arrives."
+        "In letter 63 to Pauli (October 1953) Jung lists 2 as the division of the One, the pair, the connection, the difference. In Flying Saucers (CW10 ¶805–806, 1958) he writes that since a state of confusion is generally the result of a psychic conflict, the dyad, the conjoined two, is also associated with the mandala in practice, and that the complexio oppositorum of Cusanus coincides with the dyad among the symbols of the self.",
+        "In Aion (CW9ii ¶426, 1951) he writes that psychologically the self is a union of conscious (masculine) and unconscious (feminine)."
       ],
       "archetypes": [
         {
@@ -343,7 +343,7 @@
     },
     "three": {
       "name": "Three",
-      "oneLine": "The triad: synthesis in time, the Trinity's three before the withheld fourth.",
+      "oneLine": "The triad: the Trinity's number, usually a masculine number, a relative totality.",
       "position": 0.55,
       "palette": {
         "core": "#d8e4f0",
@@ -360,13 +360,13 @@
         }
       ],
       "body": [
-        "Three is movement and dogma's God-image: the Trinity that insists three are one while denying that four are. Jung treats three as an artificial coefficient of order against four's natural minimum.",
-        "Its field partner is the trinity family — the three that the quaternity completes."
+        "Jung writes that dogma insists three are one while denying that four are one, and that since olden times uneven numbers have been regarded as masculine and even numbers as feminine (CW12 ¶25, Psychology and Alchemy, 1944). In Aion (CW9ii ¶351, 1951) he writes that three can be regarded as a relative totality and, where it refers to the self, should be understood as a defective quaternity or a stepping-stone towards it.",
+        "In the Trinity essay (CW11 ¶246) he writes that three is not a natural coefficient of order but an artificial one, and, in letter 63 to Pauli (October 1953), where the scan is damaged at the start of the line, that 3 is the son, the first masculine number."
       ]
     },
     "four": {
       "name": "Four",
-      "oneLine": "The quaternity: the whole judgment, four functions, the Pythagorean tetraktys.",
+      "oneLine": "The quaternity: the minimum of a whole judgment; the number 4, the Pythagorean tetraktys.",
       "position": 0.5,
       "palette": {
         "core": "#e8e0d0",
@@ -383,13 +383,13 @@
         }
       ],
       "body": [
-        "Four is the minimum for a whole judgment and the Self's arithmetical structure. Jung names the number 4, the Pythagorean tetraktys, as the especial case where whole numbers show themselves as archetypes of order.",
-        "Quaternity and mandala are its dense field — forty-eight and a hundred-and-twenty-four instances already gathered."
+        "Jung writes that the quaternity forms the logical basis for any whole judgment and that the natural minimal division of the circle is a quaternity (CW11 ¶246). In Flying Saucers (CW10 ¶805, 1958) he writes that the structure of the mandala is arithmetical, because whole numbers are likewise archetypes of order, and that this is true particularly of the number 4, the Pythagorean tetraktys.",
+        "In Aion (CW9ii ¶381, 1951) he calls the quaternity an organizing schema par excellence."
       ]
     },
     "five": {
       "name": "Five",
-      "oneLine": "The quintessence: the quincunx, the four with the centre, the pentadic mandala.",
+      "oneLine": "The quinta essentia: the circle divided into four with the centre, the quincunx.",
       "position": 0.52,
       "palette": {
         "core": "#f0e0c8",
@@ -406,13 +406,13 @@
         }
       ],
       "body": [
-        "Five is the four with a centre — the quinta essentia, the quincunx, the rare pentadic mandala. Jung finds it in the egg footnote and in the patient's five-fold picture with the snake around the egg.",
-        "It is among the numbers he speaks to most; the hidden one of the arithmetic."
+        "In Flying Saucers (CW10 ¶737–738, 1958) the ground structure of a painting by Birkhäuser is a quincunx, which Jung calls a symbol of the quinta essentia, identical with the Philosophers' Stone: the circle divided into four with the centre, or the four functions of consciousness with their unitary substrate, the self. He writes that in his work with patients the quaternity symbol crops up very frequently and the pentad very rarely (CW10 ¶775).",
+        "The caption of a mandala by a woman patient, with an egg encircled by the snake at its centre, calls it exceptional in having a pentadic structure (CW9i, pdf p382)."
       ]
     },
     "six": {
       "name": "Six",
-      "oneLine": "The hexad: completion and return, the first number equal to the sum of its divisors.",
+      "oneLine": "The hexad: a totality symbol in Jung, and the number of creation and generation.",
       "position": 0.5,
       "palette": {
         "core": "#e8ece8",
@@ -429,8 +429,8 @@
         }
       ],
       "body": [
-        "Six closes the walk: return to the ground, the Self as centre and circumference at once. Von Franz notes it is the first perfect number; the field reads it as the 5→0 return.",
-        "Its tie is to the Self — the archetype of order that the numbers themselves are."
+        "Jung writes that the hexad is a totality symbol, four as the natural division of the circle and two as the vertical axis (CW10 ¶771, 1958), and that according to old tradition the number 6 means creation and evolution, being a coniunctio of 2 and 3 (CW9i ¶679).",
+        "Von Franz writes in Number and Time that six is the first numeral of the series to represent the sum of its divisors, one, two and three."
       ],
       "archetypes": [
         {
@@ -441,7 +441,7 @@
     },
     "seven": {
       "name": "Seven",
-      "oneLine": "The company of planetary gods, carried into the seven metals and the seven archons.",
+      "oneLine": "The seven planetary gods, who took up their abode in the seven metals of alchemy.",
       "position": 0.47,
       "palette": {
         "core": "#ddd6e8",
@@ -451,13 +451,13 @@
       },
       "synthesised": true,
       "body": [
-        "Seven is the company of the planetary gods. Jung traces the company back to the Babylonian stars, which became the seven archons at the time of Enoch's revelation. Alchemy gave the same seven their metals, and its stages of the work are marked by seven colours that belong to the planets.",
-        "Jung writes no essay on seven. The number appears where he discusses planets, metals and initiation. Pauli, writing to Jung, reads the seven of his own dream as the birth of the anima; that reading is Pauli's and is placed on the page in his name."
+        "Jung writes that the seven refer to the gods of the planets, or the seven metals (CW14 ¶563), and that the antique company of seven gods later took up their abode in the seven metals of alchemy (CW12 ¶468). Of the Book of Enoch he writes that the seven stars were originally the seven great Babylonian gods and had by the time of Enoch's revelation become the seven Archons (CW12 ¶298). The stages of the alchemical work are marked by seven colours associated with the planets (CW14 ¶390).",
+        "Jung writes no essay on seven; the passages show where he names it. Pauli, in a letter of 1936, says of the seven in his own early dreams that it is an indication of the birth of the anima; that is Pauli's reading, and the page gives it in his name."
       ]
     },
     "eight": {
       "name": "Eight",
-      "oneLine": "The ogdoad, the double quaternity: a totality, heavenly and earthly at once.",
+      "oneLine": "The ogdoad: a double quaternity, a totality at once heavenly and earthly.",
       "position": 0.53,
       "palette": {
         "core": "#efd9c4",
@@ -473,13 +473,13 @@
         }
       ],
       "body": [
-        "Eight is the double quaternity, the ogdoad. Jung calls it a totality, at once heavenly and earthly, and says it plays almost as great a role in mandalas as the quaternity itself. On this globe four and eight stand together as a figure and its doubling.",
-        "Jung dwells on eight within a series. The seven run without a break and the step to the eighth hesitates, as three and four do in the Axiom of Maria; he suggests the eighth is feminine because it is the mother of a new series. In a Gnostic note the demiurge is the hebdomad and Achamoth the ogdoad."
+        "In Flying Saucers (CW10 ¶692–693, 1958) Jung writes that eight is a double quaternity and, as an individuation symbol in mandalas, plays almost as great a role as the quaternity itself, and that the ogdoad is a totality symbol. In Mysterium Coniunctionis (CW14 ¶8) he writes that the double quaternio or ogdoad stands for a totality, for something that is at once heavenly and earthly, spiritual or corporeal.",
+        "Of the series of seven and eight he writes that the seven form an uninterrupted series while the step to the eighth involves hesitation or uncertainty, as with three and four in the Axiom of Maria (CW14 ¶574), and that this may be a reason why the eighth is feminine, the mother of a new series (CW14 ¶579)."
       ]
     },
     "nine": {
       "name": "Nine",
-      "oneLine": "The novenary foetus: the one as nine, the Ennead, and the line that turns.",
+      "oneLine": "Nine: in Dorn, the One as the novenary foetus; the Ennead; a line that changes.",
       "position": 0.55,
       "palette": {
         "core": "#cfe6e4",
@@ -495,13 +495,13 @@
         }
       ],
       "body": [
-        "Nine is the one carried into a series. Jung calls the One the novenary foetus, and says that as the number nine it stands to the ogdoad as the quintessence stands to the quaternity. That gloss is the nearest he comes to an essay on nine.",
-        "Elsewhere nine is a company of gods, the Egyptian Ennead, which Jung notes is often ten; an I Ching nine is a line that changes into its opposite; and the first series runs from one to nine before the decade begins, which von Franz links to the German for new. His note on the Sefiroth places the ninth in the lowest triad."
+        "In his account of Gerhard Dorn in Paracelsus as a Spiritual Phenomenon (CW13, 1942), Jung writes that the One is the midpoint of the circle, the centre of the triad, and also the novenary foetus, that is, as the number nine to the ogdoad or as the quintessence to the quaternity; the note to the sentence cites Dorn's Duellum animi cum corpore.",
+        "Elsewhere Jung writes that a company of gods described as nine often proves to be ten or more (CW12 ¶84); that a line of six or nine in the I Ching has an inner tension so great that it changes into its opposite (CW11 ¶996); and, in a note, that Jezoth, that is Yesod, is the ninth and middle Sefira in the lowest triad (CW14 ¶634)."
       ]
     },
     "ten": {
       "name": "Ten",
-      "oneLine": "The completed cycle: unity unfolded, and the whole multiplicity of existence.",
+      "oneLine": "Ten: unity perfectly unfolded in Jung; the whole multiplicity of existence in von Franz.",
       "position": 0.5,
       "palette": {
         "core": "#d6dccb",
@@ -517,8 +517,8 @@
         }
       ],
       "body": [
-        "Ten is the completed cycle. Jung writes that the numbers one to ten form a completed cycle, and that ten is the perfect unfolding of unity; eleven, ten plus one, opens the next cycle.",
-        "Jung writes little more on ten. He names the tetraktys for the number four and does not write it as ten. Von Franz gives ten as the whole inexhaustible multiplicity of existence, with the one integrated into it; the Sefiroth are left to their own pages."
+        "In his interpretation of a dream of the numbers eight and eleven (CW10 ¶692, 1958) Jung gives, from the traditional symbolism, ten as the perfect unfolding of unity and the numbers one to ten as the significance of a completed cycle, so that 10 + 1 = 11 denotes the beginning of a new cycle.",
+        "Jung names the tetraktys for the number four (CW10 ¶805); von Franz writes that the Pythagorean tetractys is the sum of 1, 2, 3 and 4, which is 10. In Number and Time she also reports Fa-tsang's simile of ten copper coins, in which ten signifies the whole inexhaustible multiplicity of existence."
       ]
     },
     "court-knight": {

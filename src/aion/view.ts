@@ -7,11 +7,12 @@ import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } from '../types/history';
 import { clear, el, onReadGesture, plate } from '../ui/dom';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { passageLine } from '../ui/format';
 import type { PassageBridge } from '../ui/passage';
 import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
+import { findWalk, wholeReadingWalk } from './walk';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 import type { LensChrome } from '../shell/lens';
@@ -108,7 +109,8 @@ export class AionView {
       const event = reading.events.find(e => e.id === selection.id);
       if (event) this.showEvent(event, true);
     } else if (selection?.kind === 'thread') {
-      const thread = reading.threads.find(t => t.id === selection.id);
+      // a walk: the derived whole-reading walk, or a curated thread (the walks Options offers)
+      const thread = findWalk(reading, selection.id);
       if (thread) {
         this.threadEvents = thread.eventIds.map(id => reading.events.find(e => e.id === id)).filter((e): e is AeonEvent => !!e);
         this.threadIndex = 0;
@@ -162,24 +164,25 @@ export class AionView {
     const book = this.history.book;
     const sel = this.state?.selection;
     this.bookToggle = book ? optionAction('Read the book', () => this.select(sel?.kind === 'chapter' ? undefined : { kind: 'chapter', id: book.chapters[0].id }),
-      { pressed: sel?.kind === 'chapter', title: `${book.title}, chapter by chapter` }) : null;
+      { pressed: sel?.kind === 'chapter', description: `${book.title}, chapter by chapter` }) : null;
     const readings = [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
       optionAction(r.title, () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }), { pressed: r.id === reading.id }));
-    const threads = reading.threads.map((thread) =>
-      optionAction(thread.name, () => this.select({ kind: 'thread', id: thread.id }), { pressed: sel?.kind === 'thread' && sel.id === thread.id }));
-    const events = [...reading.events].sort((a, b) => a.year - b.year).map((event) =>
-      optionAction(`${event.yearDisplay} · ${event.name}`, () => this.select({ kind: 'event', id: event.id }),
-        { pressed: sel?.kind === 'event' && sel.id === event.id }));
-    // labelled groups so the mode reads: what Aion is, which reading, the book, threads, then events
+    // the walks: the whole reading in time order (derived), the curated threads, then the book's chapter walk when it is published
+    const whole = wholeReadingWalk(reading);
+    const walks = [
+      optionAction(whole.name, () => this.select({ kind: 'thread', id: whole.id }), {
+        pressed: sel?.kind === 'thread' && sel.id === whole.id, description: `${whole.eventIds.length} events, earliest to latest`,
+      }),
+      ...reading.threads.map((thread) => optionAction(thread.name, () => this.select({ kind: 'thread', id: thread.id }), {
+        pressed: sel?.kind === 'thread' && sel.id === thread.id, description: thread.oneLine,
+      })),
+      this.bookToggle,
+    ];
+    // the events are not listed: each one is a dot on the globe, and the walks above carry them in order
     this.heading.append(modeOptions([
       el('p', { class: 'mode-opt-blurb', text: 'Jung’s history of the aeons — the precession of the equinoxes through Pisces into Aquarius, read on the Earth.' }),
-      el('span', { class: 'mode-opt-label', text: 'Reading' }),
-      ...readings,
-      this.bookToggle,
-      threads.length ? el('span', { class: 'mode-opt-label', text: 'Threads' }) : null,
-      ...threads,
-      el('span', { class: 'mode-opt-label', text: 'Events' }),
-      ...events,
+      optionGroup('Reading', readings),
+      optionGroup('Walk', walks),
     ]));
   }
 

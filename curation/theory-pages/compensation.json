@@ -2,12 +2,12 @@
   "_note": "Compensation: the definition (CW6 ¶694), the self-regulating psyche (CW8 ¶159, ¶132, CW7 ¶274), the dream's corrective work (CW7 ¶170, CW18 ¶1391), the refusal to call it opposition (CW5 ¶98, CW16 ¶12), the ordering factor (CW11 ¶447, CW3 ¶582), and Van Eenwyk where the concept names a dynamical system. Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "compensation",
-  "line": "The psyche's self-regulation: what consciousness leaves out returns from the unconscious, not as an enemy but as an adjustment — and the dream is where this work is done.",
+  "line": "Jung's statements on compensation: the definition against Adler's use (CW6), the self-regulating psyche (CW8, CW7), dreams, neurosis, ordering factors, and one sentence of Van Eenwyk's.",
   "sections": [
     {
       "id": "the-definition",
       "title": "The definition",
-      "line": "Jung widens the word past Adler: compensation is not the patching of inferiority feelings but the psyche's inherent self-regulation.",
+      "line": "CW6 ¶694 (Psychological Types, 1921): Jung's definition, set against Adler's restriction of the word to the balancing of inferiority feelings.",
       "quotes": [
         { "work": "cw06", "para": 694, "quote": "Whereas Adler restricts his concept of compensation to the balancing of inferiority feelings, I conceive it as functional adjustment in general, an inherent self-regulation of the psychic apparatus." }
       ]
@@ -15,7 +15,7 @@
     {
       "id": "self-regulation",
       "title": "The self-regulating psyche",
-      "line": "The model is the body's: a system that answers imbalance with counteraction, and whose equilibrium depends on the other side being spoken.",
+      "line": "CW8 ¶159 and ¶132 and CW7 ¶274: the psyche called a self-regulating system like the body, and the unconscious as compensatory or complementary to the conscious.",
       "quotes": [
         { "work": "cw08", "para": 159, "quote": "Since the psyche is a self-regulating system, just as the body is, the regulating counteraction will always develop in the unconscious" },
         { "work": "cw08", "para": 132, "quote": "the unconscious behaves in a compensatory or complementary manner towards the conscious" },
@@ -25,7 +25,7 @@
     {
       "id": "the-dream",
       "title": "The dream's other side",
-      "line": "In practice, most dreams do this work: they stress what the waking attitude left out.",
+      "line": "CW7 ¶170 and CW18 ¶1391: Jung on dreams as compensatory to the conscious attitude.",
       "quotes": [
         { "work": "cw07", "para": 170, "quote": "in my experience the vast majority of dreams are compensatory.11 They always stress the other side in order to maintain the psychic equilibrium." },
         { "work": "cw18", "para": 1391, "quote": "As a rule the meaning of a dream is compensatory to the conscious attitude, i.e., it adds to the latter what was lacking in it." }
@@ -34,7 +34,7 @@
     {
       "id": "not-opposition",
       "title": "Not opposition",
-      "line": "The word is chosen against 'contrary': the complement acts purposively, and cannot be predicted mechanically.",
+      "line": "CW5 ¶98 (Symbols of Transformation) and CW16 ¶12: compensatory set beside mechanical and complementary.",
       "quotes": [
         { "work": "cw05", "para": 98, "quote": "not merely mechanical or complementary, but rather compensatory" },
         { "work": "cw16", "para": 12, "quote": "the conscious attitude of the neurotic is unnaturally onesided and must be balanced by complementary or compensatory contents deriving from the unconscious" }
@@ -43,7 +43,7 @@
     {
       "id": "the-ordering-factor",
       "title": "The ordering factor",
-      "line": "What arrives as compensation is often a whole figure, not a patch: the ordering symbols — mandala, quaternity — surface exactly when orientation is lost.",
+      "line": "CW11 ¶447 and CW3 ¶582: the phrase compensatory ordering factor, said of a factor independent of the ego and of mandala symbols in moments of psychic disorientation.",
       "quotes": [
         { "work": "cw11", "para": 447, "quote": "a compensatory ordering factor which is independent of the ego and whose nature transcends consciousness" },
         { "work": "cw03", "para": 582, "quote": "Mandala symbols appear very frequently in moments of psychic disorientation as compensatory ordering factors" }
@@ -52,7 +52,7 @@
     {
       "id": "as-a-system",
       "title": "The counteraction as a system",
-      "line": "Read as a dynamical system, compensation is why a stuck state cannot simply be fixed from the side that is stuck.",
+      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): one sentence on the shadow and compensation; the words are his, not Jung's.",
       "quotes": [
         { "work": "van-eenwyk", "page": 94, "quote": "Because the shadow compensates consciousness, whenever we think we know what the shadow is, its opposite automatically begins to emerge from the unconscious" }
       ]

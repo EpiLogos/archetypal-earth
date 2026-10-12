@@ -2,7 +2,7 @@
 // and a subject followed into the field. Needs public/data/alchemy.json (npm run alchemy, after the curation is in place).
 // Run: npx vite --port 5183 --strictPort & then node tests/ui/e2e/alchemy-walk.mjs
 import fs from 'node:fs';
-import { launch, open } from './lib.mjs';
+import { launch, open, revealSheet } from './lib.mjs';
 
 const fails = [];
 const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`); if (!cond) fails.push(msg); };
@@ -15,6 +15,7 @@ fs.mkdirSync(shots, { recursive: true });
 // 1. the overview: the four stages on their circle, and the stage list beneath
 {
   const { ctx, page, logs } = await open(b, { hash: '#/alchemy' });
+  await revealSheet(page, 'Alchemy');
   await page.waitForSelector('.ql-wheel .ql-stop', { timeout: 15000 }).catch(() => {});
   const stops = await page.$$eval('.ql-wheel .ql-stop', (els) => els.map((e) => e.getAttribute('aria-label')));
   ok(stops.length === 4, `the opus shows four stage stops on its circle (got ${stops.length})`);
@@ -29,6 +30,7 @@ fs.mkdirSync(shots, { recursive: true });
 // 2. the walk: the first stage by its stop, then the rail to the last, each stage named in the panel
 {
   const { ctx, page, logs } = await open(b, { hash: '#/alchemy' });
+  await revealSheet(page, 'Alchemy');
   await page.waitForSelector('.ql-wheel .ql-stop', { timeout: 15000 });
   await page.click('.ql-wheel .ql-stop >> nth=0');
   await page.waitForTimeout(400);
@@ -50,6 +52,7 @@ fs.mkdirSync(shots, { recursive: true });
 // 3. an operation opened from the Operations section, and its stage link
 {
   const { ctx, page, logs } = await open(b, { hash: '#/alchemy/operations' });
+  await revealSheet(page, 'Alchemy');
   await page.waitForSelector('.th-link', { timeout: 15000 });
   await page.click('.th-link >> nth=0');
   await page.waitForTimeout(300);
@@ -64,6 +67,7 @@ fs.mkdirSync(shots, { recursive: true });
 // 4. a subject followed from the panel into the field: the hash leaves the lens for the node
 {
   const { ctx, page, logs } = await open(b, { hash: '#/alchemy/operations/calcinatio' });
+  await revealSheet(page, 'Alchemy');
   await page.waitForSelector('.th-link', { timeout: 15000 });
   // the subject links are the buttons after the stage link; the last one is a subject of the operation
   const subjects = await page.$$('.th-link');

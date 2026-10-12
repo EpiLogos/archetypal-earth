@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   anchorVis,
   fanTargets,
+  leaderOpacity,
   plateOpacity,
   type FanBounds,
   type FloatTarget,
@@ -72,6 +73,22 @@ describe('earth-point anchoring', () => {
     const t = fanTargets(ax, ay, [PLATES.desktopTonal, PLATES.desktopTonal, PLATES.desktopTonal], panel, boundsFor(DESKTOP));
     const meanX = t.reduce((s, c) => s + c.cx, 0) / t.length;
     expect(meanX).toBeLessThan(ax);
+  });
+});
+
+describe('leader lines follow their plate', () => {
+  it('scales the hairline and dot with the plate opacity, and both are zero when the plate is', () => {
+    expect(leaderOpacity(0)).toEqual({ line: 0, dot: 0 });
+    expect(leaderOpacity(1)).toEqual({ line: 0.5, dot: 0.9 });
+    const half = leaderOpacity(0.4);
+    expect(half.line).toBeCloseTo(0.2);
+    expect(half.dot).toBeCloseTo(0.36);
+  });
+
+  it('is zero for every plate state the plate itself hides (a yielded or not-yet-born plate)', () => {
+    // the plate's op is 0 before its stagger point and while it yields: its leader must be 0 too
+    expect(leaderOpacity(plateOpacity(1, 0).op)).toEqual({ line: 0, dot: 0 });
+    expect(leaderOpacity(plateOpacity(1, 5000, true).op)).toEqual({ line: 0, dot: 0 });
   });
 });
 

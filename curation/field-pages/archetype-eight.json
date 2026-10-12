@@ -2,12 +2,12 @@
  "version": 1,
  "type": "archetype",
  "id": "eight",
- "line": "Eight is the double quaternity, a totality in Jung's words, and the step that breaks a run of seven.",
+ "line": "Jung's passages on eight: the double quaternity and totality symbol, the Gnostic ogdoad, the eighth after seven, and Adam's ogdoadic nature; von Franz on eight.",
  "sections": [
   {
    "id": "what-jung-names",
    "title": "What Jung names",
-   "line": "Jung gives no single essay on eight. He calls the ogdoad a double quaternity and a totality, and gives it a place in the mandala beside the quaternity.",
+   "line": "CW10 ¶692–693 (Flying Saucers, 1958) and CW11 ¶424: eight as a double quaternity and its place in mandala symbolism; CW14 ¶8: the double quaternio or ogdoad as a totality. Jung writes no essay on eight; these are places where he names it.",
    "quotes": [
     {
      "work": "cw10",
@@ -26,18 +26,24 @@
      "quote": "by mentioning the number eight points to the totality, the self, which is present in the Ufo projection",
      "para": 693,
      "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The double quaternio or ogdoad stands for a totality, for something that is at once heavenly and earthly, spiritual or corporeal, and is found in the “Indian Ocean,” that is to say in the unconscious.",
+     "para": 8,
+     "voice": "Jung"
     }
    ]
   },
   {
    "id": "gnosis-and-egypt",
    "title": "Gnosis and Egypt",
-   "line": "In Gnosis the ogdoad is Sophia's world and Achamoth, set against the demiurge's seven; in a seminar Jung gives the Egyptian ogdoad as the most sacred company of the gods.",
+   "line": "CW9ii ¶307: the Gnostics held, according to Irenaeus, that Sophia represents the world of the Ogdoad; a note to CW14 ¶576: the demiurge the hebdomad, Achamoth the ogdoad (Leisegang); and the Egyptian ogdoad in the Dream Analysis seminar.",
    "quotes": [
     {
      "work": "cw09ii",
      "quote": "the Gnostics held that Sophia represents the world of the Ogdoad",
-     "para": 306,
+     "para": 307,
      "voice": "Jung"
     },
     {
@@ -57,11 +63,17 @@
   {
    "id": "the-eighth-in-a-series",
    "title": "The eighth in a series",
-   "line": "The eighth is the one that breaks the run of seven. Jung finds it feminine, the mother of a new series, and names Christ as the eighth of a line of prophets; the Seven Sleepers legend wavers between seven and eight.",
+   "line": "CW14 ¶574 and ¶579: the series of eight incarnations of the true prophet, whose eighth is Christ, and the eighth as feminine, the mother of a new series; a note to CW9i ¶242: the legend of the sleepers wavers between seven and eight.",
    "quotes": [
     {
      "work": "cw14",
      "quote": "The series of eight incarnations of the “true prophet” is distinguished by the special position of the eighth, namely Christ",
+     "para": 574,
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "whereas the seven form an uninterrupted series, the step to the eighth involves hesitation or uncertainty and is a repetition of the same phenomenon that occurs with three and four (the Axiom of Maria)",
      "para": 574,
      "voice": "Jung"
     },
@@ -74,7 +86,8 @@
     {
      "work": "cw09i",
      "quote": "The different versions of the legend speak sometimes of seven and sometimes of eight disciples",
-     "para": 243,
+     "page": 147,
+     "pageOnly": true,
      "voice": "Jung (note)"
     }
    ]
@@ -82,7 +95,7 @@
   {
    "id": "adam-and-the-inner-circles",
    "title": "Adam and the inner circles",
-   "line": "Jung reads the Adam material as tetradic and ogdoadic, and the Ophite diagram's names fall among eight inner circles.",
+   "line": "CW14 ¶553: the tetradic and ogdoadic nature of Adam; CW14 ¶576: the names of the Ophite diagram distributed among eight inner circles.",
    "quotes": [
     {
      "work": "cw14",
@@ -101,7 +114,7 @@
   {
    "id": "von-franz-on-eight",
    "title": "Von Franz on eight",
-   "line": "Von Franz gives eight as the dual case of four, and as the eight trigrams of the pa-kua.",
+   "line": "Number and Time: von Franz on the Latin octo as referring to the dual case of four, and on the eight arrangements of triple lines known as the pa-kua.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",

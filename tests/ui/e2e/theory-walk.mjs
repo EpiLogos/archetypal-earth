@@ -2,7 +2,7 @@
 // the position and its number (marked QL), von Franz on the number and Jung on what the position names (each cite
 // opening its page), the globe tuned to what the stop speaks of, and the way on.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/theory-walk.mjs
-import { launch, open } from './lib.mjs';
+import { launch, open, revealSheet } from './lib.mjs';
 
 let failed = 0;
 const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}${detail ? ` — ${detail}` : ''}`); if (!ok) failed++; };
@@ -11,6 +11,7 @@ const shots = process.env.SHOTS;
 
 for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   const { ctx, page, logs } = await open(browser, { width: w, height: h, hash: '#/theory/number', mobile: w < 500 });
+  await revealSheet(page, 'Theory');
   await page.waitForTimeout(6000);
   check(await page.getByText('One to six, beside #0 to #5').isVisible(), `${tag}: Number opens on the six positions`);
   const ql = await page.locator('.lq-ql .lq-cite').allTextContents();

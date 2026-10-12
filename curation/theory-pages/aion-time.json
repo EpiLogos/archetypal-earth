@@ -2,12 +2,12 @@
   "_note": "Aion-time: the aeon doctrine (CW9ii's foreword and the Aquarius passage, CW10 ¶589), enantiodromia as the law that everything that runs high turns (CW6 ¶708-709, CW11 ¶526, CW13 ¶294, CW7 ¶111), the quality of the moment (CW15 ¶82, the 1932 seminar on fate and time), the world clock (CW12 ¶307) and the eternal return (Nietzsche seminar). Van Eenwyk carries the section where the concept names a dynamical system. Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "aion-time",
-  "line": "The time the field stands in: aeons that turn at the spring-point, a moment that carries its own quality, and the law that whatever runs high turns into its opposite.",
+  "line": "Passages on the aeon, enantiodromia, the quality of the moment, kairos and chronos, the world clock and the eternal return, with two statements of Van Eenwyk's.",
   "sections": [
     {
       "id": "the-aeon",
       "title": "The aeon",
-      "line": "Jung dates the Christian aeon to the start of Pisces and reads the coming turn as a psychological event, not merely an astronomical one.",
+      "line": "Aion (CW9ii, 1951), its foreword and ¶136, and Flying Saucers (CW10 ¶589, 1958): the Pisces aeon, and the spring-point's entry into Aquarius.",
       "quotes": [
         { "work": "cw09ii", "page": 9, "quote": "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development." },
         { "work": "cw09ii", "page": 9, "quote": "filled with intimations of a kind of enantiodromian reversal of dominants. I mean by this the dilemma of Christ and Antichrist" },
@@ -18,7 +18,7 @@
     {
       "id": "enantiodromia",
       "title": "Enantiodromia",
-      "line": "Heraclitus' law, kept as Jung's: every development that reaches its optimum turns into its opposite — a fact of the individual as much as of an age.",
+      "line": "CW6 ¶708–709, where Jung defines the term (Psychological Types, Definitions); CW13 ¶294, CW7 ¶111 and CW11 ¶526, where he uses it.",
       "quotes": [
         { "work": "cw06", "para": 708, "quote": "it is used to designate the play of opposites in the course of events—the view that everything that exists turns into its opposite." },
         { "work": "cw06", "para": 709, "quote": "I use the term enantiodromia for the emergence of the unconscious opposite in the course of time" },
@@ -30,9 +30,11 @@
     {
       "id": "the-moment",
       "title": "The quality of the moment",
-      "line": "Time is not a neutral container: whatever is born or done at a moment carries that moment's stamp, which is what makes astrology and the mantic methods possible at all.",
+      "line": "Jung on time: the quality of a moment (CW15 ¶82, Richard Wilhelm: In Memoriam, 1930), kairos (CW10 ¶398), time and energy (the seminars of 4 December 1929 and 8 June 1932) and the unconscious's space-time continuum (CW9ii ¶45).",
       "quotes": [
         { "work": "cw15", "para": 82, "quote": "whatever is born or done at this particular moment of time has the quality of this moment of time" },
+        { "work": "cw10", "para": 398, "quote": "it is rather the fault of kairos— the present moment in time—whose name on closer investigation turns out to be Wotan." },
+        { "work": "sem-dream-analysis", "page": 446, "quote": "Time is the essential identity with creative energy. There is a Greek aphorism, \"Wherever there is creation, there is time.\" Chronos was the god of light, creation, and time." },
         { "work": "sem-visions", "page": 804, "quote": "Fate evolves with time, and it is identical with time." },
         { "work": "sem-visions", "page": 804, "quote": "Fate and time are absolutely identical, fate being the more human aspect and time the more energic aspect. And time is another aspect of energy, for without time there is no energy, and without energy there is no time. Time is measured energy" },
         { "work": "cw09ii", "para": 45, "quote": "finds itself in the psychically relative space-time continuum that is characteristic of the unconscious as such" }
@@ -41,7 +43,7 @@
     {
       "id": "the-world-clock",
       "title": "The world clock",
-      "line": "The most exact image Jung was given of it: a clock whose two circles have one centre, seen in a dream of 1913.",
+      "line": "CW12 ¶307 (Psychology and Alchemy, Part II, the Vision of the World Clock) and the Zarathustra seminar's statement on the eternal return (pdf p1375).",
       "quotes": [
         { "work": "cw12", "para": 307, "quote": "There is a vertical and a horizontal circle, having a common centre. This is the world clock" },
         { "work": "sem-zarathustra", "page": 1375, "quote": "It is a circle, the eternal return. That is probably the historical origin of the idea of the apokatastasis, but that life is a circle is psychologically an archetypal idea" }
@@ -50,7 +52,7 @@
     {
       "id": "as-a-system",
       "title": "The turn as a system",
-      "line": "Read as a dynamical structure, the turn has a shape: stability that carries its own instability.",
+      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): two sentences from his account of chaos and order; the words are his, not Jung's.",
       "quotes": [
         { "work": "van-eenwyk", "page": 63, "quote": "designates not only where a dynamic becomes unstable, but where it becomes stable as well" },
         { "work": "van-eenwyk", "page": 172, "quote": "order is never pure. Like the yin and the yang, it carries within it the potential to turn into its opposite. The same is true for chaos" }

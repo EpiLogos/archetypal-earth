@@ -2,12 +2,12 @@
  "version": 1,
  "type": "archetype",
  "id": "seven",
- "line": "Seven is the company of planetary gods, read through alchemy's metals and the Gnostic archons, with Pauli's dream-reading beside it.",
+ "line": "Jung's passages naming the seven: the planetary gods, the seven metals, the archons and the colours of the work; Pauli's reading of the seven in his dream, and von Franz on seven.",
  "sections": [
   {
    "id": "what-jung-names",
    "title": "What Jung names",
-   "line": "The seven stands for the planetary gods, and in the language of initiation for the highest stage. Jung gives no essay on seven; the number is named where he discusses planets, metals and initiation.",
+   "line": "CW12 ¶83 (in the language of initiation), CW14 ¶563 (the gods of the planets, or the seven metals) and a note to CW9i ¶242 (the seven as the planetary gods of the ancients). Jung writes no essay on seven; these are places where he names it.",
    "quotes": [
     {
      "work": "cw12",
@@ -24,7 +24,8 @@
     {
      "work": "cw09i",
      "quote": "The seven are the planetary gods of the ancients.",
-     "para": 243,
+     "page": 147,
+     "pageOnly": true,
      "voice": "Jung (note)"
     }
    ]
@@ -32,7 +33,7 @@
   {
    "id": "gods-metals-archons",
    "title": "Gods, metals and archons",
-   "line": "Alchemy takes the planetary company into its metals, and the same stars become archons, spheres with doors for the ascent.",
+   "line": "CW12 ¶468 (the seven gods in the metals of alchemy), CW12 ¶298 (the seven Babylonian gods and the seven Archons, in the Book of Enoch), CW13 ¶409 (the seven metals and the seven planets, in the tree) and CW14 ¶576 (the seven archons of the Ophite diagram as the seven planets).",
    "quotes": [
     {
      "work": "cw12",
@@ -49,7 +50,7 @@
     {
      "work": "cw13",
      "quote": "Its connection with the seven metals implies a connection with the seven planets, so that the tree becomes the world-tree",
-     "para": 407,
+     "para": 409,
      "voice": "Jung"
     },
     {
@@ -63,7 +64,7 @@
   {
    "id": "the-seven-stages",
    "title": "The stages of the work, and the week",
-   "line": "The stages of the work are marked by seven colours tied to the planets, and the archetype of the seven returns in the division of the week.",
+   "line": "CW14 ¶390 (the seven colours of the work, associated with the planets) and ¶579 (the archetype of the seven in the division of the week).",
    "quotes": [
     {
      "work": "cw14",
@@ -82,7 +83,7 @@
   {
    "id": "pauli-and-von-franz",
    "title": "Pauli and von Franz",
-   "line": "Pauli reads the seven of his own dream as the birth of the anima. Von Franz gives the Mayan seven-one gods, Bruno's seven images per planet, and the seven beside three in the Lo-shu figure.",
+   "line": "Pauli's letter 16P (1936) on the seven in his early dreams; von Franz on the Mayan seven-one gods, Bruno's forty-nine planetary images (seven per planet) and the numbers three and seven in the Lo-shu figure.",
    "quotes": [
     {
      "work": "letters-pauli",

@@ -81,6 +81,11 @@ export function anchorVis(anchor: FloatAnchor, facing: number, centreInFront: bo
   return Math.max(0, Math.min(1, facing / 0.1));
 }
 
+/** A leader's opacities follow its plate's: the hairline at half, the end dot at nine tenths. Zero when the plate is zero. */
+export function leaderOpacity(op: number): { line: number; dot: number } {
+  return { line: op * 0.5, dot: op * 0.9 };
+}
+
 /** Opacity, eased appear and hit-testing of one plate, `sinceBorn` ms after its stagger point. */
 export function plateOpacity(vis: number, sinceBorn: number, yields = false): { op: number; e: number; pointerEvents: 'auto' | 'none' } {
   const appear = Math.max(0, Math.min(1, sinceBorn / 1100));
@@ -161,6 +166,10 @@ export class Floats {
       const n = l.node, ln = l.line, d = l.dot;
       n.style.opacity = '0';
       n.style.pointerEvents = 'none';
+      // the leader goes with its plate on this same frame: left at its last drawn opacity it outlives the image
+      const off = leaderOpacity(0);
+      ln.style.opacity = String(off.line);
+      d.style.opacity = String(off.dot);
       window.setTimeout(() => { n.remove(); ln.remove(); d.remove(); }, 600);
     }
     this.live = [];
@@ -196,6 +205,9 @@ export class Floats {
       const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       dot.setAttribute('class', 'float-dot');
       dot.setAttribute('r', '3.2');
+      // a leader is hidden until update() places it with its plate
+      line.style.opacity = '0';
+      dot.style.opacity = '0';
       this.svg.append(line, dot);
       this.root.append(node);
       this.live.push({ item, node, line, dot, w, h: h + (hasImg ? 36 : 0), x: 0, y: 0, placed: false, born: now + idx * 190 + 500, idx });
@@ -321,10 +333,11 @@ export class Floats {
       l.line.setAttribute('y1', String(p.y));
       l.line.setAttribute('x2', String(l.x - dx * s));
       l.line.setAttribute('y2', String(ey));
-      l.line.style.opacity = String(op * 0.5);
+      const lead = leaderOpacity(op);
+      l.line.style.opacity = String(lead.line);
       l.dot.setAttribute('cx', String(p.x));
       l.dot.setAttribute('cy', String(p.y));
-      l.dot.style.opacity = String(op * 0.9);
+      l.dot.style.opacity = String(lead.dot);
     });
   }
 }

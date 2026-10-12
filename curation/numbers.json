@@ -1,7 +1,7 @@
 {
   "_note": "The number archetypes' pages, one to six, as archetypes of order tied to the Self. The walk material (the position, its QL formulation and gloss, the number in von Franz) comes from curation/ql.json — one address for the QL, composed here, never copied. These sections carry Jung's own number material: the monad (CW9ii ¶340-341), the dyad (CW9ii ¶426, CW10 ¶806), the triad and its dilemma (CW12 ¶25, CW11 ¶183, CW9ii ¶234), the quaternity and the archetype of order (CW10 ¶803-805, CW9ii ¶381), the quintessence (CW10 ¶738, CW11 ¶160, CW8 ¶931), and the return with the Self (CW10 ¶805, CW9i pdf p424, CW12 ¶310). The egg block carries the three witnesses to one image: Pauli's dream with the site's count as six stages (QL, W § II — the 0/1 frame's start forgone, so the shape is visible and never named), Jung's CW9ii ¶345 footnote, and the pentadic mandala of CW9i ¶615. Quotations are placed by the corpus (scripts/numbers.mjs); nothing is typed. `stages` are the site's own count for the dream and are marked QL wherever they are shown.",
   "version": 1,
-  "line": "One to six as archetypes of order: each number a position of the same shape, from the monad's ground to the six that returns — with the Self as the number archetypes' own centre.",
+  "line": "Jung's statements on the numbers one to six (Aion, Psychology and Alchemy, Flying Saucers, the letters to Pauli), beside von Franz's Number and Time and the QL framework's six positions.",
   "stages": {
     "labels": [
       "1 · The Seed",
@@ -24,7 +24,8 @@
       {
         "work": "cw09ii",
         "para": 345,
-        "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick."
+        "quote": "but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick.",
+        "voice": "Turba philosophorum, quoted by Jung (note)"
       },
       {
         "work": "cw09ii",
@@ -54,17 +55,18 @@
   },
   "numbers": {
     "one": {
-      "line": "The ground before anything is divided: the monad, one without a second, and with it the whole series held in advance.",
+      "line": "Jung on the One: the Monad of Monoïmos in Aion (CW9ii ¶340–341) and the number 1 in letter 63 to Pauli.",
       "sections": [
         {
           "id": "the-monad",
           "title": "The monad",
-          "line": "The one is not a number beside the others: it is the unit that the self, in Monoïmos, is described by.",
+          "line": "Aion (CW9ii ¶340–341, 1951): Hippolytus's report of the single Monad of Monoïmos, and Jung's comment on it.",
           "quotes": [
             {
               "work": "cw09ii",
               "page": 230,
-              "quote": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things"
+              "quote": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things",
+              "voice": "Monoïmos, in Hippolytus, quoted by Jung"
             },
             {
               "work": "cw09ii",
@@ -72,16 +74,30 @@
               "quote": "This paradoxical idea of the Monad in Mono'imos describes the psychological nature of the self as conceived by a thinker of the second century under the influence of the Christian message."
             }
           ]
+        },
+        {
+          "id": "letter-63",
+          "title": "In the letter to Pauli",
+          "line": "Letter 63 (October 1953): the number 1; the scan of the letter is damaged in this sentence and the quotation is kept as the scan reads it.",
+          "quotes": [
+            {
+              "work": "letters-pauli",
+              "page": 189,
+              "quote": "the One, absolute, nondivisible (advaita A two-less [Zweitlose]) and thus the unconscious, the beginning.",
+              "scan": true,
+              "voice": "Jung, letter 63 to Pauli"
+            }
+          ]
         }
       ]
     },
     "two": {
-      "line": "Polarity: the pair without which no tension, no reflection and no relation can exist.",
+      "line": "Jung on the two: the division of the One in letter 63 to Pauli, and the dyad and the self in Aion and Flying Saucers.",
       "sections": [
         {
           "id": "the-dyad",
           "title": "The dyad",
-          "line": "The two is what makes knowing possible — an other to stand over against — and Jung reads the self itself as a union of the pair.",
+          "line": "Aion (CW9ii ¶426, 1951): the self as a union of conscious and unconscious; Flying Saucers (CW10 ¶806, 1958): the complexio oppositorum of Cusanus beside the dyad.",
           "quotes": [
             {
               "work": "cw09ii",
@@ -94,16 +110,29 @@
               "quote": "The symbols of the self coincide with the God-images, as, for instance, the complexio oppositorum of Cusanus with the dyad, or the definition of God as a \"circle whose centre is everywhere and the circumference nowhere\" with Angelucci’s sign of the hydrogen atom."
             }
           ]
+        },
+        {
+          "id": "letter-63",
+          "title": "In the letter to Pauli",
+          "line": "Letter 63 (October 1953): the number 2.",
+          "quotes": [
+            {
+              "work": "letters-pauli",
+              "page": 189,
+              "quote": "2 = the division of the One, the pair, the connection, the difference",
+              "voice": "Jung, letter 63 to Pauli"
+            }
+          ]
         }
       ]
     },
     "three": {
-      "line": "The third that resolves a tension — and the Trinity's dilemma: three that insists it is one while four is denied.",
+      "line": "Jung on the three: the Trinity and the missing fourth (CW12 ¶25, CW11 ¶183, CW9ii ¶237), three as a relative totality (CW9ii ¶351), and the number 3 in letter 63 to Pauli.",
       "sections": [
         {
           "id": "the-triad",
           "title": "The triad, and the dilemma",
-          "line": "Jung keeps the difficulty visible: the triad is dynamic and spiritual, and it is exactly three that leaves the fourth out.",
+          "line": "CW12 ¶25: dogma and the uneven numbers; CW11 ¶183: the dilemma of three and four, from the opening of the Timaeus; CW9ii ¶237: the first coinciding with the fourth, in the axiom of Maria.",
           "quotes": [
             {
               "work": "cw12",
@@ -117,20 +146,45 @@
             },
             {
               "work": "cw09ii",
-              "para": 234,
+              "para": 237,
               "quote": "the first coinciding with the fourth"
+            }
+          ]
+        },
+        {
+          "id": "the-relative-totality",
+          "title": "Three as a relative totality",
+          "line": "Aion (CW9ii ¶351, 1951): three as a relative totality, and three where the context indicates that it refers to the self.",
+          "quotes": [
+            {
+              "work": "cw09ii",
+              "para": 351,
+              "quote": "Three can be regarded as a relative totality, since it usually represents either a spiritual totality that is a product of thought, like the Trinity,8 or else an instinctual, chthonic one, like the triadic nature of the gods of the underworld—the \"lower triad.\" Psychologically, however, three—if the context indicates that it refers to the self—should be understood as a defective quaternity or as a stepping-stone towards it."
+            }
+          ]
+        },
+        {
+          "id": "letter-63",
+          "title": "In the letter to Pauli",
+          "line": "Letter 63 (October 1953): the number 3; the scan is damaged where the line begins, and the quotation starts after the damage.",
+          "quotes": [
+            {
+              "work": "letters-pauli",
+              "page": 189,
+              "quote": "the son, the first masculine number, etc.",
+              "voice": "Jung, letter 63 to Pauli"
             }
           ]
         }
       ]
     },
     "four": {
-      "line": "The quaternity: four as the minimum of a whole judgment, the Pythagorean tetraktys, the pattern of order itself.",
+      "line": "Jung on four: the mandala's arithmetical structure and the number 4 (CW10 ¶803–805), the quaternity as an organizing schema (CW9ii ¶381), and the whole judgment (CW11 ¶246).",
       "sections": [
         {
           "id": "the-archetype-of-order",
           "title": "The archetype of order",
-          "line": "Four is where Jung's arithmetic and his psychology meet: the mandala's structure is arithmetical, and the number 4 is its especial case.",
+          "line": "Flying Saucers (CW10 ¶805, 1958): the mandala as a symbol of the self, whole numbers as archetypes of order, and the number 4, the Pythagorean tetraktys, named in particular.",
           "quotes": [
             {
               "work": "cw10",
@@ -147,7 +201,7 @@
         {
           "id": "the-viewfinder",
           "title": "The viewfinder",
-          "line": "The same pattern in its working form: a mark superimposed on the psychic chaos, gaining in importance as the ego loses it.",
+          "line": "CW10 ¶803–804: the pattern of order compared to a viewfinder marked with a cross or a circle divided into four, and Jung's forty years of observing it in patients.",
           "quotes": [
             {
               "work": "cw10",
@@ -164,7 +218,7 @@
         {
           "id": "the-organizing-schema",
           "title": "The organizing schema",
-          "line": "The quaternity is not one image among others but the schema by which images are ordered at all.",
+          "line": "Aion (CW9ii ¶381): the quaternity called an organizing schema par excellence, compared to the crossed threads in a telescope.",
           "quotes": [
             {
               "work": "cw09ii",
@@ -172,16 +226,33 @@
               "quote": "The quaternity is an organizing schema par excellence, something like the crossed threads in a telescope."
             }
           ]
+        },
+        {
+          "id": "the-whole-judgment",
+          "title": "The whole judgment",
+          "line": "A Psychological Approach to the Dogma of the Trinity (CW11 ¶246): the quaternity and the whole judgment, and the natural minimal division of the circle.",
+          "quotes": [
+            {
+              "work": "cw11",
+              "para": 246,
+              "quote": "The quaternity is an archetype of almost universal occurrence. It forms the logical basis for any whole judgment."
+            },
+            {
+              "work": "cw11",
+              "para": 246,
+              "quote": "The ideal of completeness is the circle or sphere, but its natural minimal division is a quaternity."
+            }
+          ]
         }
       ]
     },
     "five": {
-      "line": "The four with the centre: the quincunx, the quinta essentia, the rare pentadic mandala — the hidden one of the arithmetic.",
+      "line": "Jung on five: the quinta essentia and the quincunx (CW10 ¶738, ¶774), and how rarely the pentad occurs in his work with patients (CW10 ¶775).",
       "sections": [
         {
           "id": "the-quintessence",
           "title": "The quinta essentia",
-          "line": "Five is not appended to the four: it is the centre they are gathered around, the stone's own name for the unity of the elements.",
+          "line": "The quinta essentia in three passages: CW10 ¶738 (the circle divided into four with the centre), CW11 ¶160 (Johannes de Rupescissa's name for it) and CW8 ¶931 (Agrippa's spiritus mundi).",
           "quotes": [
             {
               "work": "cw10",
@@ -199,16 +270,50 @@
               "quote": "By the spiritus mundi, the ligamentum animae et corporis, the quinta essentia,30 which he shares with the alchemists, Agrippa probably means what we would call the unconscious."
             }
           ]
+        },
+        {
+          "id": "the-quincunx",
+          "title": "The quincunx",
+          "line": "Flying Saucers (CW10 ¶774–775, 1958): the four forming a frame for the one, and how often the quaternity and the pentad turn up in Jung's practice.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 774,
+              "quote": "The fourth antithesis, unity and quaternity, appears united in the quincunx (Pls. III, IV), the four forming, as it were, a frame for the one, accentuated as the centre."
+            },
+            {
+              "work": "cw10",
+              "para": 775,
+              "quote": "In my work with patients the quaternity symbol crops up very frequently, the pentad very rarely, and rather less rarely the triad."
+            }
+          ]
         }
       ]
     },
     "six": {
-      "line": "The return: the first number equal to the sum of its divisors, and the Self as centre and circumference at once — the six that is the field's own closing edge.",
+      "line": "Jung on the hexad and the number 6 (CW10 ¶771, CW9i ¶679) and on the self (CW10 ¶805, CW12 ¶310); von Franz on six in Number and Time.",
       "sections": [
+        {
+          "id": "the-hexad",
+          "title": "The hexad",
+          "line": "CW10 ¶771 (Flying Saucers, 1958) and CW9i ¶679 (Concerning Mandala Symbolism): the hexad as a totality symbol, and the number 6 in old tradition.",
+          "quotes": [
+            {
+              "work": "cw10",
+              "para": 771,
+              "quote": "The hexad is a totality symbol: 4 as the natural division of the circle, 2 as the vertical axis (zenith and nadir)—a spatial conception of totality."
+            },
+            {
+              "work": "cw09i",
+              "para": 679,
+              "quote": "According to old tradition the number 6 means creation and evolution, since it is a coniunctio of 2 and 3 (even and odd = female and male)."
+            }
+          ]
+        },
         {
           "id": "the-self",
           "title": "The Self",
-          "line": "The number archetypes do not merely point at the Self: Jung names the self the archetype of order par excellence, and the quaternity of the One the schema for all images of God.",
+          "line": "Jung on the self as the archetype of order par excellence (CW10 ¶805), the archetype of wholeness (CW9i, 1955) and the centre and the circumference (CW12 ¶310); none of the three passages names six.",
           "quotes": [
             {
               "work": "cw10",

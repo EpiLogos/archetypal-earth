@@ -2,12 +2,12 @@
   "_note": "The collective unconscious: the definitional passage of CW9i ¶2, the concept's birth (CW3 ¶550, CW6 ¶842), the formula's evolution from inherited ideas to inherited possibilities of ideas (CW10 ¶14, CW8 ¶99), the relation to instinct (CW8 ¶271, ¶280), and its late formulation as something inferred only from individual phenomenology (CW9ii ¶278). Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "collective-unconscious",
-  "line": "The impersonal stratum beneath the personal one: not inherited ideas but the inherited possibility of forming them — identical in all individuals, and inferred only from what individuals live.",
+  "line": "Jung's statements defining the collective unconscious (CW3, CW6, CW9i), on what is inherited (CW8, CW10), on its relation to the instincts (CW8, CW9i) and on its inference from individual phenomenology (CW9ii, CW8).",
   "sections": [
     {
       "id": "the-deeper-layer",
       "title": "The deeper layer",
-      "line": "The 1934 Eranos definition: a personal unconscious resting on a deeper, inborn, universal one.",
+      "line": "CW9i ¶2 (1934, Eranos; rev. 1954): the definition; ¶88: the collective unconscious distinguished negatively from the personal unconscious.",
       "quotes": [
         {
           "work": "cw09i",
@@ -26,7 +26,7 @@
     {
       "id": "birth",
       "title": "The concept's birth",
-      "line": "Before the name, the observation: a stratum of the unconscious that no personal history accounts for.",
+      "line": "CW3 ¶550 and CW6 ¶842 (Psychological Types, 1921): two earlier statements of a deeper stratum of a collective nature.",
       "quotes": [
         {
           "work": "cw03",
@@ -43,7 +43,7 @@
     {
       "id": "the-formula",
       "title": "Inherited possibilities of ideas",
-      "line": "The formula settles: what is inherited is not ideas but the possibility of ideas — conditions for representation, not representations.",
+      "line": "CW10 ¶14 (the 1918 form, in the vault note's dating) and CW8 ¶99: innate and inherited possibilities of ideas.",
       "quotes": [
         {
           "work": "cw10",
@@ -60,7 +60,7 @@
     {
       "id": "instinct",
       "title": "Instinct and its correlates",
-      "line": "The collective unconscious is not only images: it is the instincts and their correlates together.",
+      "line": "CW9i pdf p54 (the section The Concept of the Collective Unconscious) and CW8 ¶280, which names the instincts and their correlates, the archetypes.",
       "quotes": [
         {
           "work": "cw09i",
@@ -77,7 +77,7 @@
     {
       "id": "phenomenology",
       "title": "Inferred from phenomenology",
-      "line": "Its existence is never observed directly — only inferred from the forms individual experience takes.",
+      "line": "CW9ii ¶278: the existence of the collective unconscious inferred only from individual phenomenology; CW8 ¶729: a world-image that counterbalances the conscious picture of the world.",
       "quotes": [
         {
           "work": "cw09ii",

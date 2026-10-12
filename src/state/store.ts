@@ -153,9 +153,29 @@ export function astrologyAt(path: string[]): AppState {
   return { view: { kind: 'world' }, deep: false, lens: { id: 'astrology', path: path.slice(0, a ? (b ? 2 : 1) : 0) }, sky };
 }
 
-/** Enter (or change) the sky. The sky stands over the world view: any focus is left behind, the field stays as it was. */
+/**
+ * Enter (or change) the sky. The sky is never bare: it is always the Astrology lens standing over the world view, on the
+ * live sky (no chart) or on a natal chart, so its Options, its orbits and its body are the lens's own. Any focus is left
+ * behind; the field stays as it was.
+ */
 export function inSky(sky: SkyState = {}): AppState {
-  return { view: { kind: 'world' }, deep: false, sky };
+  const body = sky.body ? [sky.body] : [];
+  const s = astrologyAt(sky.natal ? [sky.natal, ...body] : [ASTROLOGY_LIVE, ...body]);
+  return sky.culture ? { ...s, sky: { ...s.sky, culture: sky.culture } } : s;
+}
+
+/**
+ * What a zoom gesture asks of the sky at the sky's two distances, or null when the state stands. Zooming out past `edges.enter`
+ * from the Field's own views (the globe, a focus, a manifestation, a walk) enters Astrology on the live sky; zooming in past
+ * `edges.exit` by the wheel or pinch leaves it for the Field. The graph, Aion, the Red Book, the dynamical lens and any
+ * other panel lens keep their own camera and never take the sky by zoom.
+ */
+export function skyGestureState(s: AppState, d: number, edges: { enter: number; exit: number }, wheel: boolean): AppState | null {
+  if (s.graph || s.history || s.redbook || s.dynamics) return null;
+  if (s.lens && s.lens.id !== 'astrology') return null;
+  if (!s.sky && d > edges.enter) return astrologyLive();
+  if (s.sky && d < edges.exit && wheel) return WORLD;
+  return null;
 }
 
 export function skyEq(a: SkyState | undefined, b: SkyState | undefined): boolean {
@@ -190,11 +210,6 @@ export function back(s: AppState): AppState {
     }
     if (s.lens.path.length) return { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } };
     if (s.lens.id === 'theory') return { view: { kind: 'world' }, deep: false, dynamics: {} };
-    return WORLD;
-  }
-  if (s.sky) {
-    // a card closes onto the sky; the sky closes onto the Earth
-    if (s.sky.body) return inSky({ ...(s.sky.natal ? { natal: s.sky.natal } : {}), ...(s.sky.culture ? { culture: s.sky.culture } : {}) });
     return WORLD;
   }
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;

@@ -17,6 +17,7 @@ const sky = (page) => page.evaluate(() => {
   return {
     hash: location.hash,
     skyState: !!ctl.state.sky,
+    lens: ctl.state.lens?.id ?? null,
     graph: !!ctl.state.graph,
     cardShown: !!card && card.getAttribute('aria-hidden') === 'false',
     skyOn: document.body.classList.contains('sky-on'),
@@ -44,25 +45,25 @@ const wait = (page, pred) => page.waitForFunction(pred, null, { timeout: 30000 }
 
 const browser = await launch(kind, { headed: false });
 try {
-  // ── (a) the Red Book and Aion switches leave the sky with the sky's card and body ──
+  // ── (a) the Red Book and Aion leave the sky (Astrology) and its body ──
   const exits = [
-    ['Red Book', '.rb-switch', () => { const s = window.__earth.ctl.state; return !s.sky && !!s.redbook; }],
-    ['Aion', '.aion-switch', () => { const s = window.__earth.ctl.state; return !s.sky && !!s.history; }],
+    ['Red Book', 'redbook', () => { const s = window.__earth.ctl.state; return !s.sky && !!s.redbook; }],
+    ['Aion', 'aion', () => { const s = window.__earth.ctl.state; return !s.sky && !!s.history; }],
   ];
-  for (const [name, sel, arrived] of exits) {
+  // the Red Book and Aion are opened from the lens menu: its row names the lens
+  for (const [name, lens, arrived] of exits) {
     const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: '#/sky/saturn' });
     await wait(page, () => window.__earth.ctl.state.sky?.body === 'saturn');
-    await page.waitForSelector('.sky-card[aria-hidden="false"]', { timeout: 30000 }).catch(() => {});
     const before = await sky(page);
-    check(before.skyState && before.cardShown && before.skyOn, `from #/sky/saturn the sky and Saturn's card stand`, `card shown ${before.cardShown}`);
-    await page.click(sel);
+    check(before.skyState && before.skyOn && before.lens === 'astrology', `from #/sky/saturn the sky stands in Astrology`, `lens ${before.lens}`);
+    await page.click('.sh-lens');
+    await page.click(`.shell-menu .sm-row[data-lens="${lens}"]`);
     await wait(page, arrived);
     await page.waitForTimeout(1000);
     const s = await sky(page);
-    check(!s.skyState && (name === 'Red Book' ? s.hash === '#/redbook' : s.hash.startsWith('#/aion')), `the ${name} switch leaves the sky`, `hash "${s.hash}", sky ${s.skyState}`);
-    check(!s.cardShown, `and the body card closes`, `card shown ${s.cardShown}`);
+    check(!s.skyState && (name === 'Red Book' ? s.hash === '#/redbook' : s.hash.startsWith('#/aion')), `opening the ${name} leaves the sky`, `hash "${s.hash}", sky ${s.skyState}`);
+    check(s.lens !== 'astrology', `and Astrology is left with it`, `lens ${s.lens}`);
     check(!s.skyOn, `and the body loses sky-on`);
-    check(s.skyPressed === 'false', `and the Sky switch is released`, `aria-pressed ${s.skyPressed}`);
     await ctx.close();
   }
 

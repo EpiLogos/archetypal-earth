@@ -70,10 +70,11 @@ describe('the theory nodes have pages', () => {
     start('cw10 ¶851'); // non-locality
     start('cw13 ¶350'); // the psychoid form under the image
     start('cw18 ¶1208'); // the psychoid factor, i.e. the unconscious archetype
-    // the correspondence: the Pauli letters 59 and 63 in Jung's voice, 47P in Pauli's
+    // the correspondence: Jung's letters 49J, 59 and 63 (the last also on whole numbers), and Pauli's own words
+    // (47P, 66P) under his voice
     const letters = all.filter((q) => q.cite.work === 'letters-pauli');
-    expect(letters.length).toBe(3);
-    expect(letters.filter((q) => q.voice === 'Pauli').length).toBe(1);
+    expect(letters.length).toBe(6);
+    expect(letters.filter((q) => String(q.voice).toLowerCase() === 'pauli').length).toBe(2);
     // a quotation kept as a damaged scan reads it says so; the generated display of a clean span says nothing
     expect(letters.some((q) => q.scan === true)).toBe(true);
   });
@@ -85,7 +86,7 @@ describe('the theory nodes have pages', () => {
       // claims Jung's name for another's words
       if (q.cite.work.startsWith('vonzfranz')) expect(voiceOf(q.cite.work), q.where).toBe('von Franz');
       if (q.cite.work === 'van-eenwyk') expect(voiceOf(q.cite.work), q.where).toBe('Van Eenwyk');
-      if (q.voice) expect(['Pauli', 'von Franz', 'Neumann', 'Van Eenwyk'], q.where).toContain(q.voice);
+      if (q.voice) expect(['Pauli', 'pauli', 'von Franz', 'Neumann', 'Van Eenwyk'], q.where).toContain(q.voice);
     }
     // the concepts that name a dynamical system carry Van Eenwyk's own reading
     for (const id of ['aion-time', 'compensation', 'libido', 'transcendent-function']) {

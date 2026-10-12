@@ -10,7 +10,7 @@ import { subjectName, type Subject } from '../data/model';
 import { ASTROLOGY_LIVE, astrologyAt, astrologyLive } from '../state/store';
 import type { BirthPrefill } from '../state/router';
 import type { LensContext, LensInstance } from '../shell/lens';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData, type ChartBody } from '../astro/natal';
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
@@ -468,17 +468,21 @@ export function mount(ctx: LensContext): LensInstance {
         ))
         : []),
     ];
+    // the names are a reading choice, not a request to read: they never open the sheet (the shell reads data-no-reveal)
+    for (const n of names) n.setAttribute('data-no-reveal', '');
     const walk = chart && data
       ? optionAction('Walk the planets', () => goPath([chart, data!.order.bodies[0]]), {
         pressed: !!path[1] && path[1] !== 'terra',
-        title: 'Planet by planet through the birth sky',
+        description: 'Planet by planet through the birth sky',
       })
       : null;
     ctx.setControls([modeOptions([
-      optionAction('Charts', () => goPath([]), { pressed: !path[0], title: 'Jung’s chart and your birth form' }),
-      walk,
-      el('span', { class: 'mode-opt-label', text: 'Names' }),
-      ...names,
+      optionGroup('Read the chart', [
+        optionAction('Charts', () => goPath([]), { pressed: !path[0], description: 'Jung’s chart and your birth form' }),
+        walk,
+      ]),
+      optionGroup('Names', names),
+      liveLine,
       liveLine,
     ])]);
   };

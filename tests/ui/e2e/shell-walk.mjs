@@ -35,11 +35,15 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
     check(st.h1 === 1, `${s.name}: ${id} keeps one h1`, String(st.h1));
     if (out) await page.screenshot({ path: path.join(out, `${s.name}-${id}.png`) });
   }
+  // the last lens is a panel lens: Escape hides its sheet and never leaves the mode (its Options stay)
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1500);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1500);
-  check(await page.evaluate(() => document.body.dataset.lens) === 'field', `${s.name}: Escape steps back to the Field`);
+  const last = lenses.at(-1);
+  check(await page.evaluate(() => document.body.dataset.lens) === last, `${s.name}: Escape keeps the mode (${last})`);
+  check(await page.evaluate(() => !document.querySelector('.lens-panel:not([hidden])')), `${s.name}: Escape hid the sheet`);
+  check(await page.evaluate(() => !!document.querySelector('.sh-controls .mode-options')), `${s.name}: the Options remain after Escape`);
   // links straight into a lazily loaded view: the view arrives, and the lens is the right one
   for (const [hash, lens, sel] of [['#/graph', 'field', '.gv-canvas'], ['#/aion/jung-turn', 'aion', '.aion:not([hidden])'], ['#/redbook/genesis', 'redbook', '.redbook:not([hidden])'], ['#/dynamics', 'theory', '.dynamics:not([hidden])']]) {
     await page.goto(URL + hash, { waitUntil: 'load' });

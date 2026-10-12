@@ -66,3 +66,15 @@ export async function waitTiles(page, timeout = 8000) {
     await page.waitForTimeout(150);
   }
 }
+
+/**
+ * A panel lens's sheet is hidden until the person asks for it: its Options' first action (Open <label>) reveals it.
+ * Does nothing when the sheet is already on screen.
+ */
+export async function revealSheet(page, label) {
+  if (await page.$('.lens-panel:not([hidden])')) return;
+  await page.click('.sh-controls details.mode-options > summary');
+  // the row's title is its own span (optionRow); the row is matched by its whole title
+  await page.locator('.sh-controls .mode-options-body button').filter({ hasText: new RegExp(`^Open ${label}$`) }).first().click();
+  await page.waitForTimeout(600);
+}

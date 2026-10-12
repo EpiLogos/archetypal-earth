@@ -52,9 +52,6 @@ body.search-open .shell > *, body.deep-open .shell > * { pointer-events: none; }
 
 /* what used to sit in the top-left corner now starts under the lens button */
 .focus-label { top: var(--shell-below); left: calc(var(--shell-x) + 2px); }
-.sky-culture { top: calc(var(--shell-below) + 34px); left: calc(var(--shell-x) + 2px); }
-/* Astrology: Names + live live inside Options — the floating strip would sit under the Options icon */
-body[data-lens=astrology] .sky-culture { display: none !important; }
 
 /* ── the corners ───────────────────────────────────────────────────── */
 .sh-corner { position: fixed; top: calc(var(--shell-y) + 2px); right: calc(var(--shell-x) - 4px); z-index: 22; display: flex; align-items: center; gap: 4px; }
@@ -171,7 +168,8 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
     left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 52vh; border-radius: 20px 20px 0 0; border-bottom: 0;
     animation: lp-up 0.4s var(--ease); transition: height 0.4s var(--ease);
   }
-  .lens-panel[data-height="full"] { height: 88vh; }
+  /* a full sheet starts below the header's Options control (it sits under the title on a phone), so it never covers it */
+  .lens-panel[data-height="full"] { height: calc(100vh - 150px); height: calc(100dvh - 150px); }
   @keyframes lp-up { from { transform: translateY(60px); } to { transform: none; } }
   .lp-handle { display: grid; place-items: center; flex: none; height: var(--tap); margin-bottom: -12px; width: 100%; cursor: grab; touch-action: none; }
   .lp-grip { width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.35); }
@@ -440,8 +438,8 @@ body.landing-on .time { opacity: 0.35; }
 .po-earth:hover { border-color: rgb(140 190 255 / 0.85); }
 .po-earth-mark { fill: rgb(140 190 255 / 0.8); font: 500 11px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
 .as-whole { list-style: none; margin: 8px 0 14px; padding: 0; }
-@media (max-width: 720px) { body.po-holding .sky-culture, body.po-holding .sky-caption { display: none; } }
-@media (max-width: 720px) { body.natal-sky .sky-culture, body.natal-sky .sky-caption { display: none; } }
+@media (max-width: 720px) { body.po-holding .sky-caption { display: none; } }
+@media (max-width: 720px) { body.natal-sky .sky-caption { display: none; } }
 
 /* what the globe shows in a mode (src/data/scope.ts): under the title, quiet, with the whole field one click away */
 .sh-scope { margin: 2px 0 0; font: 11.5px/1.4 var(--sans); color: var(--ink-3); max-width: 44ch; }

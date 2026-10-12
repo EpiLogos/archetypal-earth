@@ -4,26 +4,59 @@
   "theoretics": {
     "archetype-as-such": {
       "name": "The Archetype as Such",
-      "oneLine": "The irrepresentable structural pole of the psyche, known only through its images.",
+      "oneLine": "A hypothetical and irrepresentable model, distinguished from archetypal ideas.",
       "ground": "epistemological",
       "position": 1,
-      "palette": { "core": "#eef0fb", "glow": "#b9b4e8", "fog": "#22203a", "deep": "#08070e" },
+      "palette": {
+        "core": "#eef0fb",
+        "glow": "#b9b4e8",
+        "fog": "#22203a",
+        "deep": "#08070e"
+      },
       "definitionPick": [
-        { "vol": "cw09i", "para": 6, "starts": "One must, for the sake of accuracy," },
-        { "vol": "cw09i", "para": 155, "starts": "The archetype in itself is empty and purely formal," }
+        {
+          "vol": "cw09i",
+          "para": 6,
+          "starts": "One must, for the sake of accuracy,"
+        },
+        {
+          "vol": "cw09i",
+          "para": 155,
+          "starts": "The archetype in itself is empty and purely formal,"
+        }
       ],
-      "archetypes": [{ "id": "self", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
+      ],
       "families": [],
       "theoretics": [
-        { "id": "psychoid", "basis": "jung" },
-        { "id": "collective-unconscious", "basis": "inferred" },
-        { "id": "complex", "basis": "inferred" },
-        { "id": "numinosum", "basis": "inferred" },
-        { "id": "transcendent-function", "basis": "inferred" }
+        {
+          "id": "psychoid",
+          "basis": "jung"
+        },
+        {
+          "id": "collective-unconscious",
+          "basis": "inferred"
+        },
+        {
+          "id": "complex",
+          "basis": "inferred"
+        },
+        {
+          "id": "numinosum",
+          "basis": "inferred"
+        },
+        {
+          "id": "transcendent-function",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "The archetype as such is a hypothetical and irrepresentable model: not a picture but the structural pole a picture forms around. It has no instances and no history of its own. Only the images it pre-forms can be dated, placed and compared.",
-        "This is why the field has three tiers and not one. A note may instance an image and never the archetype as such, and every image family here stands on that distinction."
+        "In a footnote to Archetypes of the Collective Unconscious (CW9i ¶6), Jung asks that archetype be distinguished from archetypal ideas, and calls the archetype as such a hypothetical and irrepresentable model, something like the pattern of behaviour in biology. In CW9i ¶155 he writes that the archetype in itself is empty and purely formal.",
+        "For the name, CW8 ¶275 gives Augustine as the source from whom Jung borrowed the idea of the archetype, and an editors' note at CW8 ¶270 gives the 1919 essay Instinct and the Unconscious as his first use of the word, earlier publications having said primordial image."
       ]
     },
     "psychoid": {
@@ -31,23 +64,58 @@
       "oneLine": "Jung's name for the irrepresentable nature of the archetype as such.",
       "ground": "ontological",
       "position": 0.97,
-      "palette": { "core": "#b9a7ee", "glow": "#6f5bd0", "fog": "#1d1836", "deep": "#07050f" },
+      "palette": {
+        "core": "#b9a7ee",
+        "glow": "#6f5bd0",
+        "fog": "#1d1836",
+        "deep": "#07050f"
+      },
       "definitionPick": [
-        { "vol": "cw08", "para": 840, "starts": "It cannot be directly perceived or \"represented,\"" },
-        { "vol": "cw10", "para": 851, "starts": "The psychoid archetype has a tendency to behave as though it were not localized" }
+        {
+          "vol": "cw08",
+          "para": 840,
+          "starts": "It cannot be directly perceived or \"represented,\""
+        },
+        {
+          "vol": "cw10",
+          "para": 851,
+          "starts": "The psychoid archetype has a tendency to behave as though it were not localized"
+        }
       ],
-      "archetypes": [{ "id": "self", "basis": "inferred" }],
-      "families": [{ "id": "mana", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
+      ],
+      "families": [
+        {
+          "id": "mana",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "archetype-as-such", "basis": "jung" },
-        { "id": "synchronicity", "basis": "jung" },
-        { "id": "numinosum", "basis": "inferred" },
-        { "id": "mana", "basis": "inferred" }
+        {
+          "id": "archetype-as-such",
+          "basis": "jung"
+        },
+        {
+          "id": "synchronicity",
+          "basis": "jung"
+        },
+        {
+          "id": "numinosum",
+          "basis": "inferred"
+        },
+        {
+          "id": "mana",
+          "basis": "inferred"
+        }
       ],
       "section": "number",
       "body": [
-        "The psychoid is where the archetype stops being psyche. Jung borrowed the word to name a quasi-psychic category — not psychic in the proper sense, not merely physiological — and used it as the adjective for the archetype as such, which cannot be made conscious and so belongs to the invisible, ultra-violet end of the psychic spectrum.",
-        "From 1952 it carries more: psyche and matter as two aspects of one thing, and the archetype as the bridge between them. Number is the plainest case, which is why the number walk and this node address the same thing."
+        "Jung takes the word from Bleuler and uses it with three stated reservations: as an adjective and not a noun; for a quasi-psychic quality of the kind the reflex-processes have, not a psychic one in the proper sense; and to mark a class of events distinct both from vitalistic phenomena and from specifically psychic processes. He applies it to the archetype as such, which he places at the ultra-violet end of the psychic spectrum, and in the synchronicity essay of 1952 he names the irrepresentable nature of the collective unconscious with it.",
+        "Most of what is said about it beyond that stands in Atom and Archetype, the Pauli–Jung correspondence. There Jung writes that the archetype manifests itself both psychically and physically, and in a letter of October 1953 that whole numbers share this characteristic, being as much inside as outside; Pauli objects that the concept cannot be used so lightly in the acausalities of microphysics."
       ]
     },
     "collective-unconscious": {
@@ -55,208 +123,455 @@
       "oneLine": "The inborn, impersonal layer of the psyche, identical in all individuals.",
       "ground": null,
       "position": 0.38,
-      "palette": { "core": "#9fb4d8", "glow": "#5d7bb8", "fog": "#141c2e", "deep": "#05070d" },
+      "palette": {
+        "core": "#9fb4d8",
+        "glow": "#5d7bb8",
+        "fog": "#141c2e",
+        "deep": "#05070d"
+      },
       "definitionPick": [
-        { "vol": "cw09i", "para": 2, "starts": "this personal unconscious r ests upon a deeper layer," }
+        {
+          "vol": "cw09i",
+          "para": 2,
+          "starts": "this personal unconscious r ests upon a deeper layer,"
+        }
       ],
-      "archetypes": [{ "id": "self", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
+      ],
       "families": [],
       "theoretics": [
-        { "id": "archetype-as-such", "basis": "inferred" },
-        { "id": "complex", "basis": "inferred" },
-        { "id": "participation-mystique", "basis": "inferred" }
+        {
+          "id": "archetype-as-such",
+          "basis": "inferred"
+        },
+        {
+          "id": "complex",
+          "basis": "inferred"
+        },
+        {
+          "id": "participation-mystique",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "The substrate the whole field stands on: an inborn, impersonal layer beneath the personal unconscious, the same in everyone, and knowable only through its manifestations. Jung fought for forty years against the reading that it posits inherited ideas.",
-        "Every archetype note and most image notes here stand on it, which is why nothing in the field is explained by a single person's biography."
+        "Jung's definition (CW9i ¶2, 1934, rev. 1954): beneath the personal unconscious there is a deeper layer which is inborn, and he calls it collective because that part of the unconscious is not individual but universal. In CW9ii ¶278 he writes that its existence can be inferred only from individual phenomenology.",
+        "On what is inherited, CW3 ¶550 says it would be a mistake to regard the archetypal patterns as inherited ideas, since they are conditions for the forming of representations; CW8 ¶99 and CW10 ¶14 speak of inherited or innate possibilities of ideas. CW8 ¶280 gives the collective unconscious as the sum of the instincts and their correlates, the archetypes."
       ]
     },
     "compensation": {
       "name": "Compensation",
-      "oneLine": "The unconscious does not only repress — it balances the conscious attitude.",
+      "oneLine": "Functional adjustment in general: an inherent self-regulation of the psychic apparatus.",
       "ground": null,
       "position": 0.48,
-      "palette": { "core": "#d8cba6", "glow": "#a8916a", "fog": "#282316", "deep": "#0b0906" },
+      "palette": {
+        "core": "#d8cba6",
+        "glow": "#a8916a",
+        "fog": "#282316",
+        "deep": "#0b0906"
+      },
       "definitionPick": [
-        { "vol": "cw06", "para": 694, "starts": "Whereas Adler restricts his concept of compensation" }
+        {
+          "vol": "cw06",
+          "para": 694,
+          "starts": "Whereas Adler restricts his concept of compensation"
+        }
       ],
-      "archetypes": [{ "id": "anima", "basis": "inferred" }],
-      "families": [{ "id": "persona", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "anima",
+          "basis": "inferred"
+        }
+      ],
+      "families": [
+        {
+          "id": "persona",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "transcendent-function", "basis": "inferred" },
-        { "id": "complex", "basis": "inferred" },
-        { "id": "individuation", "basis": "inferred" }
+        {
+          "id": "transcendent-function",
+          "basis": "inferred"
+        },
+        {
+          "id": "complex",
+          "basis": "inferred"
+        },
+        {
+          "id": "individuation",
+          "basis": "inferred"
+        }
       ],
       "section": "compensation",
       "body": [
-        "The regulative heart of the psychology: the unconscious answers the conscious attitude by supplying what that attitude leaves out, which is why most dreams read as compensations rather than as wishes or mirrors.",
-        "It is explicitly not Adler's term. Compensation here works at the scale of a dream, a neurosis and a life."
+        "In Psychological Types (CW6 ¶694, 1921) Jung writes that Adler restricts compensation to the balancing of inferiority feelings, whereas he conceives it as functional adjustment in general, an inherent self-regulation of the psychic apparatus. In CW8 ¶132 he writes that the unconscious behaves in a compensatory or complementary manner towards the conscious.",
+        "On dreams, CW7 ¶170 says the vast majority are compensatory and CW18 ¶1391 that a dream's meaning is as a rule compensatory to the conscious attitude. On neurosis, CW16 ¶12 says the neurotic's conscious attitude is onesided and must be balanced by contents from the unconscious. In CW7 ¶274 Jung writes that he uses the word compensatory and not contrary."
       ]
     },
     "complex": {
       "name": "The Complex",
-      "oneLine": "A feeling-toned splinter psyche that behaves like a second, stronger personality.",
+      "oneLine": "A feeling-toned splinter psyche that plays the part of a second and stronger personality.",
       "ground": null,
       "position": 0.44,
-      "palette": { "core": "#c9a9b4", "glow": "#8f6a80", "fog": "#241a22", "deep": "#0a0709" },
+      "palette": {
+        "core": "#c9a9b4",
+        "glow": "#8f6a80",
+        "fog": "#241a22",
+        "deep": "#0a0709"
+      },
       "definitionPick": [
-        { "vol": "cw02", "starts": "By \"emotionally charged complex\" we mean" }
+        {
+          "vol": "cw02",
+          "starts": "By \"emotionally charged complex\" we mean"
+        }
       ],
-      "archetypes": [{ "id": "mana-personality", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "mana-personality",
+          "basis": "inferred"
+        }
+      ],
       "families": [
-        { "id": "persona", "basis": "inferred" },
-        { "id": "possession", "basis": "inferred" }
+        {
+          "id": "persona",
+          "basis": "inferred"
+        },
+        {
+          "id": "possession",
+          "basis": "inferred"
+        }
       ],
       "theoretics": [
-        { "id": "archetype-as-such", "basis": "inferred" },
-        { "id": "compensation", "basis": "inferred" },
-        { "id": "collective-unconscious", "basis": "inferred" }
+        {
+          "id": "archetype-as-such",
+          "basis": "inferred"
+        },
+        {
+          "id": "compensation",
+          "basis": "inferred"
+        },
+        {
+          "id": "collective-unconscious",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "The founding instrument of analytical psychology: a feeling-toned splinter psyche with enough autonomy to behave like a second personality. The word-association experiments gave it its experimental pedigree.",
-        "Everything autonomous in the field inherits that pedigree — the archetypes included, whose nuclear core is where the complex's dispositional side becomes archetypal."
+        "Jung's definition from the association experiments (CW2 ¶166, 1904–05) is the sum of ideas referring to a particular feeling-toned event, and in CW18 ¶832 he says he called the psychic factors that disturbed the experiments complexes. In 1934 he writes that complexes are in fact splinter psyches (CW8 ¶204) and that a feeling-toned complex is the image of a psychic situation strongly accentuated emotionally and incompatible with the habitual attitude of consciousness (CW8 ¶201).",
+        "On autonomy, CW2 ¶902 says the complex plays the part of a second and stronger personality to which ego-consciousness is subjected, and CW8 ¶200 that complexes can have us. In CW11 ¶21 Jung writes that complexes behave like secondary or partial personalities possessing a mental life of their own."
       ]
     },
     "individuation": {
       "name": "Individuation",
-      "oneLine": "Becoming the self one potentially is: natural necessity and opus contra naturam.",
+      "oneLine": "The process by which a person becomes a psychological in-dividual, a separate whole.",
       "ground": null,
       "position": 0.76,
-      "palette": { "core": "#e2d9c4", "glow": "#b09a72", "fog": "#241f14", "deep": "#0a0805" },
+      "palette": {
+        "core": "#e2d9c4",
+        "glow": "#b09a72",
+        "fog": "#241f14",
+        "deep": "#0a0805"
+      },
       "definitionPick": [
-        { "vol": "cw06", "para": 757, "starts": "in general, it is the process by which individual beings are formed and differentiated;" }
+        {
+          "vol": "cw06",
+          "para": 757,
+          "starts": "in general, it is the process by which individual beings are formed and differentiated;"
+        }
       ],
       "archetypes": [
-        { "id": "self", "basis": "inferred" },
-        { "id": "anima", "basis": "inferred" },
-        { "id": "animus", "basis": "inferred" },
-        { "id": "child", "basis": "inferred" },
-        { "id": "wise-old-man", "basis": "inferred" }
+        {
+          "id": "self",
+          "basis": "inferred"
+        },
+        {
+          "id": "anima",
+          "basis": "inferred"
+        },
+        {
+          "id": "animus",
+          "basis": "inferred"
+        },
+        {
+          "id": "child",
+          "basis": "inferred"
+        },
+        {
+          "id": "wise-old-man",
+          "basis": "inferred"
+        }
       ],
       "families": [
-        { "id": "mandala", "basis": "inferred" },
-        { "id": "persona", "basis": "inferred" }
+        {
+          "id": "mandala",
+          "basis": "inferred"
+        },
+        {
+          "id": "persona",
+          "basis": "inferred"
+        }
       ],
       "theoretics": [
-        { "id": "compensation", "basis": "inferred" },
-        { "id": "transcendent-function", "basis": "inferred" }
+        {
+          "id": "compensation",
+          "basis": "inferred"
+        },
+        {
+          "id": "transcendent-function",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "The process by which a person becomes the self he potentially is, defined and redefined across four decades. Two tensions are kept rather than resolved: it is a natural necessity and an opus contra naturam at once.",
-        "The experience of the self that crowns it is always a defeat for the ego. The whole field is the record of what one meets on the way."
+        "Jung defines individuation in Psychological Types (CW6 ¶757, 1921) as the process by which individual beings are formed and differentiated, and in particular the development of the psychological individual as a being distinct from collective psychology. In CW7 ¶266 (1928) he writes that it means becoming an in-dividual and so becoming one's own self, and CW16 ¶448 names two principal aspects: an internal process of integration and a process of objective relationship.",
+        "The vault note names two tensions: CW6 ¶758 calls individuation a natural necessity, and CW9i ¶256 calls it an opus contra naturam. CW14 ¶778 writes that the experience of the self is always a defeat for the ego."
       ]
     },
     "libido": {
       "name": "Libido",
-      "oneLine": "Psychic energy as such: an energy-value never identical with one instinct.",
+      "oneLine": "Jung's term for an energy-value that is never itself a specific instinct.",
       "ground": null,
       "position": 0.62,
-      "palette": { "core": "#e8b98a", "glow": "#b06f3c", "fog": "#2b1d12", "deep": "#0c0704" },
+      "palette": {
+        "core": "#e8b98a",
+        "glow": "#b06f3c",
+        "fog": "#2b1d12",
+        "deep": "#0c0704"
+      },
       "definitionPick": [
-        { "vol": "cw05", "para": 197, "starts": "We would be better advised, therefore, when speaking of libido," }
+        {
+          "vol": "cw05",
+          "para": 197,
+          "starts": "We would be better advised, therefore, when speaking of libido,"
+        }
       ],
-      "archetypes": [{ "id": "self", "basis": "inferred" }],
-      "families": [{ "id": "god-image", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
+      ],
+      "families": [
+        {
+          "id": "god-image",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "mana", "basis": "inferred" },
-        { "id": "compensation", "basis": "inferred" }
+        {
+          "id": "mana",
+          "basis": "inferred"
+        },
+        {
+          "id": "compensation",
+          "basis": "inferred"
+        }
       ],
       "section": "energy",
       "body": [
-        "The concept the break with Freud was made of. Libido stops meaning sexual desire and becomes psychic energy as such: a quantity able to flow into power, hunger, hatred or religion without ever being one of them.",
-        "Its symbolic channels are among the largest harvests in the field — sun, fire, serpent, horse, arrow."
+        "In CW5 ¶197 (the 1928 revision of Wandlungen, in the vault note's dating) Jung writes that libido is best understood as an energy-value able to communicate itself to any field of activity, be it power, hunger, hatred, sexuality or religion, without ever being itself a specific instinct. CW5 ¶185 gives as the reason that the whole mass of psychic phenomena cannot be derived from a single instinct.",
+        "On the energic viewpoint, CW4 ¶567 says all psychological phenomena can be considered manifestations of energy, as physical phenomena have been since Robert Mayer. CW5 ¶337 calls the archetypes the river-beds along which the current of psychic life has flowed, and CW5 ¶344 says symbols act as transformers that convert libido from a lower into a higher form."
       ]
     },
     "mana": {
       "name": "Mana",
-      "oneLine": "The sensed dynamism of psychic events, before psychology had a word for energy.",
+      "oneLine": "A magical potency regarded as an objective force and as a subjective state of intensity.",
       "ground": null,
       "position": 0.3,
-      "palette": { "core": "#d9a06a", "glow": "#a05f2c", "fog": "#2a1b10", "deep": "#0b0603" },
+      "palette": {
+        "core": "#d9a06a",
+        "glow": "#a05f2c",
+        "fog": "#2a1b10",
+        "deep": "#0b0603"
+      },
       "definitionPick": [
-        { "vol": "cw08", "para": 128, "starts": "We cannot escape the impression that the primitive view of mana" }
+        {
+          "vol": "cw08",
+          "para": 128,
+          "starts": "We cannot escape the impression that the primitive view of mana"
+        }
       ],
-      "archetypes": [{ "id": "mana-personality", "basis": "inferred" }],
-      "families": [{ "id": "mana", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "mana-personality",
+          "basis": "inferred"
+        }
+      ],
+      "families": [
+        {
+          "id": "mana",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "participation-mystique", "basis": "inferred" },
-        { "id": "libido", "basis": "inferred" },
-        { "id": "numinosum", "basis": "inferred" },
-        { "id": "psychoid", "basis": "inferred" }
+        {
+          "id": "participation-mystique",
+          "basis": "inferred"
+        },
+        {
+          "id": "libido",
+          "basis": "inferred"
+        },
+        {
+          "id": "numinosum",
+          "basis": "inferred"
+        },
+        {
+          "id": "psychoid",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "Jung's ethnographic name for the sensed dynamism of psychic events: the magical potency that is at once an objective force and an intensity of feeling, before psychology existed to name it.",
-        "It is the pre-history of the energy concept — what libido secularizes and the numinosum sacralizes — and its personified form is the mana-personality."
+        "Mana is a Polynesian and Melanesian word; the vault note records that it reaches Jung through Lehmann's study, which defines it as something extraordinarily effective (CW8 ¶128, in On Psychic Energy, 1928). Jung writes that the most primitive ideas of a magical potency regard it both as an objective force and as a subjective state of intensity (CW8 ¶114).",
+        "In CW8 ¶127 he writes that mana is not a concept but a representation based on the perception of a phenomenal relationship, and in ¶128 that the primitive view of mana is a forerunner of our concept of psychic energy. In CW7 ¶388 he calls a personality consistent with the idea of the extraordinarily potent the mana-personality."
       ]
     },
     "numinosum": {
       "name": "Numinosum",
-      "oneLine": "The seizing quality of the archetypes: a dynamic agency that happens to the subject.",
+      "oneLine": "A dynamic agency or effect not caused by an arbitrary act of will (Rudolf Otto's word).",
       "ground": null,
       "position": 0.92,
-      "palette": { "core": "#f0e6c8", "glow": "#c9a44f", "fog": "#2a2412", "deep": "#0b0904" },
+      "palette": {
+        "core": "#f0e6c8",
+        "glow": "#c9a44f",
+        "fog": "#2a2412",
+        "deep": "#0b0904"
+      },
       "definitionPick": [
-        { "vol": "cw11", "para": 6, "starts": "a dynamic agency or effect not caused by an arbitrary act of will." }
+        {
+          "vol": "cw11",
+          "para": 6,
+          "starts": "a dynamic agency or effect not caused by an arbitrary act of will."
+        }
       ],
-      "archetypes": [{ "id": "self", "basis": "inferred" }],
+      "archetypes": [
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
+      ],
       "families": [
-        { "id": "god-image", "basis": "inferred" },
-        { "id": "mana", "basis": "inferred" }
+        {
+          "id": "god-image",
+          "basis": "inferred"
+        },
+        {
+          "id": "mana",
+          "basis": "inferred"
+        }
       ],
       "theoretics": [
-        { "id": "archetype-as-such", "basis": "inferred" },
-        { "id": "mana", "basis": "inferred" },
-        { "id": "psychoid", "basis": "inferred" }
+        {
+          "id": "archetype-as-such",
+          "basis": "inferred"
+        },
+        {
+          "id": "mana",
+          "basis": "inferred"
+        },
+        {
+          "id": "psychoid",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "Jung took Rudolf Otto's word for the seizing quality of the archetypes: a dynamic agency that happens to the subject rather than through it, which no arbitrary act of will produces.",
-        "It is the affect-side of the archetype as such — the felt charge that marks a presence behind an image — and the god-image family is its dogmatic sediment."
+        "In Psychology and Religion (CW11 ¶6) Jung writes that religion is a careful and scrupulous observation of what Rudolf Otto aptly termed the numinosum, a dynamic agency or effect not caused by an arbitrary act of will, which seizes and controls the human subject, who is always rather its victim than its creator.",
+        "In CW8 ¶405 he writes that the archetypes, when they appear, have a distinctly numinous character, and in CW18 ¶1160 that the archetypes have a numinous quality and underlie all religious and dogmatic ideas. CW10 ¶871 and ¶874 apply the word to whatever comes upon a person with intensity and to the supraordinate totality that consciousness experiences."
       ]
     },
     "participation-mystique": {
       "name": "Participation Mystique",
-      "oneLine": "Identity by unconsciousness: the state the psyche keeps falling back into.",
+      "oneLine": "Lévy-Bruhl's term, which Jung explains as a state of identity in mutual unconsciousness.",
       "ground": null,
       "position": 0.22,
-      "palette": { "core": "#b9a887", "glow": "#7d6a4c", "fog": "#211b12", "deep": "#080604" },
+      "palette": {
+        "core": "#b9a887",
+        "glow": "#7d6a4c",
+        "fog": "#211b12",
+        "deep": "#080604"
+      },
       "definitionPick": [
-        { "vol": "cw06", "para": 781, "starts": "It denotes a peculiar kind of psychological connection with objects," }
+        {
+          "vol": "cw06",
+          "para": 781,
+          "starts": "It denotes a peculiar kind of psychological connection with objects,"
+        }
       ],
       "archetypes": [
-        { "id": "mana-personality", "basis": "inferred" },
-        { "id": "self", "basis": "inferred" }
+        {
+          "id": "mana-personality",
+          "basis": "inferred"
+        },
+        {
+          "id": "self",
+          "basis": "inferred"
+        }
       ],
-      "families": [{ "id": "mana", "basis": "inferred" }],
+      "families": [
+        {
+          "id": "mana",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "mana", "basis": "inferred" },
-        { "id": "collective-unconscious", "basis": "inferred" }
+        {
+          "id": "mana",
+          "basis": "inferred"
+        },
+        {
+          "id": "collective-unconscious",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "Lévy-Bruhl's term, kept by Jung against Lévy-Bruhl's own retraction: identity by unconsciousness, where subject and object cannot be clearly distinguished.",
-        "It is the primitive stratum of the collective unconscious, the opposite number of differentiation, and the clinical name for what the transference re-enacts."
+        "In Psychological Types (CW6 ¶781, 1921) Jung defines participation mystique, a term he takes from Lévy-Bruhl, as a peculiar kind of psychological connection with objects in which the subject cannot clearly distinguish himself from the object but is bound to it by a relationship that amounts to partial identity. In CW10 ¶69 he writes that it means a state of identity in mutual unconsciousness.",
+        "In CW10 ¶852 he says that when a dialogue between two people touches something fundamental, essential and numinous, it gives rise to what Lévy-Bruhl fittingly called participation mystique, an unconscious identity in which two psychic spheres interpenetrate. A footnote in CW18 (pdf p933) says that Lévy-Bruhl later retracted the term and that his critics were wrong inasmuch as unconscious identity is a well-known psychological fact."
       ]
     },
     "persona": {
       "name": "Persona",
-      "oneLine": "The mask as a function of relationship, fatal only when mistaken for the self.",
+      "oneLine": "Jung's name for the mask: the ad hoc adopted attitude, a functional complex of adaptation.",
       "ground": null,
       "position": 0.52,
-      "palette": { "core": "#cbd3de", "glow": "#8b97ab", "fog": "#1e232c", "deep": "#070a0e" },
+      "palette": {
+        "core": "#cbd3de",
+        "glow": "#8b97ab",
+        "fog": "#1e232c",
+        "deep": "#070a0e"
+      },
       "definitionPick": [
-        { "vol": "cw06", "para": 800, "starts": "This mask, i.e., the ad hoc adopted attitude, I have called the persona," }
+        {
+          "vol": "cw06",
+          "para": 800,
+          "starts": "This mask, i.e., the ad hoc adopted attitude, I have called the persona,"
+        }
       ],
       "archetypes": [],
       "families": [
-        { "id": "persona", "basis": "inferred" },
-        { "id": "wounded-physician", "basis": "inferred" }
+        {
+          "id": "persona",
+          "basis": "inferred"
+        },
+        {
+          "id": "wounded-physician",
+          "basis": "inferred"
+        }
       ],
       "theoretics": [
-        { "id": "complex", "basis": "inferred" },
-        { "id": "compensation", "basis": "inferred" }
+        {
+          "id": "complex",
+          "basis": "inferred"
+        },
+        {
+          "id": "compensation",
+          "basis": "inferred"
+        }
       ],
       "body": [
-        "The concept Jung carved out of the old theatrical metaphor: the mask is not a lie to be torn off but a function of relationship to society — necessary, collective, and fatal only when it is mistaken for the self.",
-        "This node is the scientific notion. The mask as recurring image-family is the separate family of the same name, and the two cross-reference each other rather than competing."
+        "In Psychological Types (CW6 ¶800, 1921) Jung calls the mask, the ad hoc adopted attitude, the persona, the name for the masks worn by actors in antiquity; CW6 ¶801 calls it a functional complex that comes into existence for reasons of adaptation or personal convenience and is by no means identical with the individuality. In CW7 ¶246 he writes that fundamentally the persona is nothing real, a compromise between individual and society as to what a man should appear to be.",
+        "This entry is the concept; the image family of the same name is a separate entry."
       ]
     },
     "synchronicity": {
@@ -264,63 +579,128 @@
       "oneLine": "A hypothetical factor equal in rank to causality as a principle of explanation.",
       "ground": null,
       "position": 0.9,
-      "palette": { "core": "#cfe3e0", "glow": "#6fae9f", "fog": "#16241f", "deep": "#050b09" },
+      "palette": {
+        "core": "#cfe3e0",
+        "glow": "#6fae9f",
+        "fog": "#16241f",
+        "deep": "#050b09"
+      },
       "definitionPick": [
-        { "vol": "cw08", "para": 850, "starts": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state" }
+        {
+          "vol": "cw08",
+          "para": 850,
+          "starts": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state"
+        }
       ],
       "archetypes": [],
-      "families": [{ "id": "scarab", "basis": "inferred" }],
+      "families": [
+        {
+          "id": "scarab",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "psychoid", "basis": "jung" },
-        { "id": "archetype-as-such", "basis": "inferred" },
-        { "id": "aion-time", "basis": "inferred" }
+        {
+          "id": "psychoid",
+          "basis": "jung"
+        },
+        {
+          "id": "archetype-as-such",
+          "basis": "inferred"
+        },
+        {
+          "id": "aion-time",
+          "basis": "inferred"
+        }
       ],
       "lens": "coincidences",
       "body": [
-        "The last of the major concepts and the only one Jung called a hypothetical factor equal in rank to causality. It joins a psychic state to an external event by meaning, not by cause.",
-        "Its ground is the psychoid archetype, which can express itself psychically and physically alike. Every scarab, fire-vision and hexagram in the field is one of its dated loci."
+        "In the synchronicity essay (CW8 ¶840, 1952) Jung writes that he has picked the term synchronicity to designate a hypothetical factor equal in rank to causality as a principle of explanation. CW8 ¶850 defines it as the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state.",
+        "In CW8 ¶947 he writes that synchronicity is a highly abstract and irrepresentable quantity that ascribes to the moving body a certain psychoid property, and in ¶965 he calls the meaningful coincidence of a psychic and a physical state with no causal relationship an acausal orderedness. The vault note records two unreconciled sets of probabilities for the astrological marriage experiment, in the main text (CW8 ¶901) and in the appendix (CW8 ¶989–992)."
       ]
     },
     "transcendent-function": {
       "name": "The Transcendent Function",
-      "oneLine": "The union of conscious and unconscious that produces a third thing neither held.",
+      "oneLine": "A combined function of conscious and unconscious elements, nothing mysterious.",
       "ground": null,
       "position": 0.84,
-      "palette": { "core": "#dcd2f0", "glow": "#9584c9", "fog": "#201b30", "deep": "#08060f" },
+      "palette": {
+        "core": "#dcd2f0",
+        "glow": "#9584c9",
+        "fog": "#201b30",
+        "deep": "#08060f"
+      },
       "definitionPick": [
-        { "vol": "cw06", "para": 184, "starts": "This function of mediation between the opposites I have termed the transcendent function," }
+        {
+          "vol": "cw06",
+          "para": 184,
+          "starts": "This function of mediation between the opposites I have termed the transcendent function,"
+        }
       ],
       "archetypes": [],
-      "families": [{ "id": "coniunctio", "basis": "inferred" }],
+      "families": [
+        {
+          "id": "coniunctio",
+          "basis": "inferred"
+        }
+      ],
       "theoretics": [
-        { "id": "compensation", "basis": "inferred" },
-        { "id": "archetype-as-such", "basis": "inferred" }
+        {
+          "id": "compensation",
+          "basis": "inferred"
+        },
+        {
+          "id": "archetype-as-such",
+          "basis": "inferred"
+        }
       ],
       "section": "transcendent-function",
       "body": [
-        "The engine of change: the union of conscious and unconscious that produces a third thing neither side contained, which is why the field tracks process images and not only objects.",
-        "It is the process-side of compensation and the operator behind every symbol-mediated transition, realized clinically as active imagination."
+        "In Psychological Types (CW6 ¶184, 1921) Jung writes that he has termed the function of mediation between the opposites the transcendent function, by which he means nothing mysterious but a combined function of conscious and unconscious elements, or, as in mathematics, a common function of real and imaginary quantities. The essay The Transcendent Function (CW8) was written in 1916; its prefatory note records that it was brought out in a private edition before Jung worked it over for publication.",
+        "In CW8 ¶145 he writes that it is called transcendent because it makes the transition from one attitude to another organically possible, without loss of the unconscious, and in CW11 ¶780 that it is a process and a method at the same time. CW7 ¶360 says the secret of alchemy was in fact the transcendent function."
       ]
     },
     "aion-time": {
       "name": "Aion-Time",
-      "oneLine": "Jung's late doctrine of time: the aion, chronos and kairos, and the platonic year.",
+      "oneLine": "The aion, chronos, kairos and the platonic year as they stand in Jung's texts.",
       "ground": null,
       "position": 0.8,
-      "palette": { "core": "#e6ddb6", "glow": "#ab9450", "fog": "#251f11", "deep": "#090703" },
+      "palette": {
+        "core": "#e6ddb6",
+        "glow": "#ab9450",
+        "fog": "#251f11",
+        "deep": "#090703"
+      },
       "definitionPick": [],
       "archetypes": [],
       "families": [
-        { "id": "aion", "basis": "inferred" },
-        { "id": "chronos", "basis": "inferred" },
-        { "id": "world-clock", "basis": "inferred" },
-        { "id": "ragnarok", "basis": "inferred" }
+        {
+          "id": "aion",
+          "basis": "inferred"
+        },
+        {
+          "id": "chronos",
+          "basis": "inferred"
+        },
+        {
+          "id": "world-clock",
+          "basis": "inferred"
+        },
+        {
+          "id": "ragnarok",
+          "basis": "inferred"
+        }
       ],
-      "theoretics": [{ "id": "synchronicity", "basis": "inferred" }],
+      "theoretics": [
+        {
+          "id": "synchronicity",
+          "basis": "inferred"
+        }
+      ],
       "lens": "aion",
       "body": [
-        "Jung's late doctrine of time, kept together as one cluster: the aion as an age ruled by a psychic dominant, chronos as time-figure and time-energy, kairos as the fulfilled moment, and the platonic year as the astronomical clock underneath history.",
-        "Enantiodromia is the reversal-mechanism that works at the scale of a person and of an epoch alike, and synchronicity's own time-quality belongs to it."
+        "The vault note gathers under this name Jung's passages on the aion as an age of the world, chronos, kairos, the platonic year and enantiodromia. Aion (CW9ii, 1951) names its theme the idea of the Aeon in its foreword, and the vault note records that Jung does not define the word abstractly in the corpus.",
+        "Enantiodromia is Jung's term for the emergence of the unconscious opposite in the course of time (CW6 ¶709). In CW13 ¶294 he writes that every psychic development, individual or collective, produces one when it exceeds its optimum."
       ]
     }
   }

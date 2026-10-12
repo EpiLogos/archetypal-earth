@@ -2,7 +2,7 @@
  "version": 1,
  "type": "family",
  "id": "tree",
- "line": "The Tree of the ten sephiroth as Crowley draws it, as Jung names it, and as von Franz reads the ten numbers.",
+ "line": "Crowley on the Tree of Life in The Book of Thoth, Jung's passages naming the Tree of the Sefiroth in CW14, and von Franz on the sephiroth as the ten primal numbers.",
  "sections": [
   {
    "id": "the-qabalistic-tree-crowley",
@@ -38,7 +38,7 @@
   {
    "id": "in-jung",
    "title": "In Jung",
-   "line": "Jung names the Tree in the Adam Kadmon passages and in his notes on the ten. Beyond Yesod's ninth place he does not number the sephiroth.",
+   "line": "CW14 ¶18 (the list Kether, Tifereth, Yesod, Malchuth), ¶158 (the arbor philosophica and the tree of the Sefiroth), ¶592 and ¶652 (Adam Kadmon and the system of the Sefiroth in three columns).",
    "quotes": [
     {
      "work": "cw14",
@@ -75,7 +75,7 @@
   {
    "id": "the-ten-as-the-numbers",
    "title": "The ten as the numbers",
-   "line": "Jung calls the numbers one to ten a completed cycle; von Franz calls the ten primal numbers the sephiroth, spheres of the unknowable primal one. Each quotation keeps its own voice.",
+   "line": "Jung, CW10 ¶692: the numbers one to ten in the traditional symbolism. Von Franz, Number and Time: ten as the whole multiplicity of existence, and the sephiroth as the ten primal numbers, spheres of the unknowable primal one.",
    "quotes": [
     {
      "work": "cw10",
@@ -106,7 +106,7 @@
   {
    "id": "the-abyss-and-daath",
    "title": "The Abyss and Daath (Crowley)",
-   "line": "Daath and the Abyss are not sephiroth and have no family of their own. Crowley places the Abyss between the Ideal and the Actual, and Daath as the false sephira.",
+   "line": "Crowley, in The Book of Thoth, places the Abyss between the Ideal and the Actual and calls Daath a non-existent and a false Sephira; neither has a family of its own on this site.",
    "quotes": [
     {
      "work": "book-of-thoth",

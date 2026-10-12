@@ -1,6 +1,6 @@
 // URL hash <-> state, so every state is linkable and Back works.
 import type { Subject } from '../data/model';
-import { astrologyAt, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
+import { ASTROLOGY_LIVE, astrologyAt, inSky, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { canonicalBodyKey } from '../types/sky';
@@ -57,14 +57,13 @@ export function defaultReadingId(readings: readonly { id: string }[]): string | 
   return readings[0]?.id;
 }
 
-/** `#/sky`, `#/sky/<body>`, each optionally ending `/c/<culture>`: the sky is linkable at every depth. A natal sky is linked only through Astrology (`#/astrology/<chart>/<body>`), which names a chart, never a birth. */
+/** `#/sky`, `#/sky/<body>`, each optionally ending `/c/<culture>`: the live sky is linkable at every depth (it opens Astrology). A natal sky is linked only through Astrology (`#/astrology/<chart>/<body>`), which names a chart, never a birth. */
 
 export function stateToHash(s: AppState): string {
-  if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
-  if (s.sky) {
-    const tail = `${s.sky.body ? `/${enc(s.sky.body)}` : ''}${s.sky.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
-    return `#/sky${tail}`;
+  if (s.lens?.id === 'astrology' && s.lens.path[0] === ASTROLOGY_LIVE) {
+    return `#/sky${s.sky?.body ? `/${enc(s.sky.body)}` : ''}${s.sky?.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
   }
+  if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
   if (s.history) {
     const h = s.history;
     return `#/aion/${enc(h.reading)}${h.selection ? `/${h.selection.kind}/${enc(h.selection.id)}` : ''}`;
@@ -137,7 +136,8 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
     const skyBody = rest[0] ? canonicalBodyKey(rest[0]) : undefined;
     if (skyBody && r.hasBody?.(skyBody)) { sky.body = skyBody as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
-    return { state: { view: { kind: 'world' }, deep: false, sky } };
+    // a sky link is the live sky in Astrology, never a bare sky
+    return { state: inSky(sky) };
   }
   if (parts[0] === 'redbook') {
     const rb: NonNullable<AppState['redbook']> = {};

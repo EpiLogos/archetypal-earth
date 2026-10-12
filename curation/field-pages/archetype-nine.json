@@ -2,18 +2,19 @@
  "version": 1,
  "type": "archetype",
  "id": "nine",
- "line": "Nine is the novenary foetus, the Egyptian company of gods, and the changing line; Jung writes no essay on it.",
+ "line": "Jung's passages naming nine (Dorn's novenary foetus, a company of gods called nine, the changing line of the I Ching, the ninth Sefira), his seminar remarks on the numbers one to nine, and von Franz on nine.",
  "sections": [
   {
    "id": "novenary-foetus-and-changing-nine",
    "title": "The novenary foetus, and the changing nine",
-   "line": "Jung's gloss on the One is the nearest he comes to nine: the One is the novenary foetus, and as nine it stands to the ogdoad as the quintessence to the quaternity. An I Ching nine is a line that changes into its opposite.",
+   "line": "CW13 (pdf p175, in Paracelsus as a Spiritual Phenomenon, 1942): Jung's account of Dorn on the One as the novenary foetus; CW11 ¶979 and ¶996: lines of six or nine in the I Ching and their change into the opposite.",
    "quotes": [
     {
      "work": "cw13",
      "quote": "and it is also the “novenary foetus” (foetus novenarius), i.e., it is as the number nine to the ogdoad, or as the quintessence to the quaternity.",
-     "para": 186,
-     "voice": "Jung"
+     "page": 175,
+     "pageOnly": true,
+     "voice": "Dorn, reported by Jung"
     },
     {
      "work": "cw11",
@@ -32,7 +33,7 @@
   {
    "id": "count-and-company",
    "title": "Count and company",
-   "line": "The Egyptian Ennead is nine gods, a company called nine is often ten, and Jung's note on the Sefiroth gives the ninth, Yesod, under the name Jezoth.",
+   "line": "CW5 ¶408: the Ennead of the Egyptian Tum; CW12 ¶84: a company described as nine often proves to be ten or more; CW14 ¶634: Jezoth, that is Yesod, the ninth and middle Sefira in the lowest triad.",
    "quotes": [
     {
      "work": "cw05",
@@ -57,7 +58,7 @@
   {
    "id": "nine-in-the-seminar",
    "title": "Nine in the seminar",
-   "line": "In seminar Jung says the numbers one to nine are mana, and that they have become sacred; he places eight and nine in Egypt.",
+   "line": "Visions seminar (25 March 1931): all numbers from one to nine are mana; Dream Analysis seminar: the numbers between 1 and 9 have become sacred, and in Egypt eight and nine.",
    "quotes": [
     {
      "work": "sem-visions",
@@ -82,7 +83,7 @@
   {
    "id": "von-franz-on-nine",
    "title": "Von Franz on nine",
-   "line": "Von Franz relates the German for nine to the German for new; she places nine as the close of the first series, as the Lo-shu's nine fields, as the Holy Ghost, and as the nine provinces of a Chinese text.",
+   "line": "Number and Time: von Franz on German neun as related to new, on five at the centre of the first number series 1 to 9, on the Lo-shu model in nine fields, on nine in number symbolism as the number of the Holy Ghost, and on nine provinces.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",

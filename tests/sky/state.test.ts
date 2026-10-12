@@ -56,7 +56,13 @@ describe('the sky state', () => {
       expect(h.startsWith('#/sky')).toBe(true);
       expect(hashToState(h, r).state, h).toEqual(s);
     }
-    for (const s of [astrologyAt([]), astrologyLive(), astrologyLive({ body: 'mars' }), astrologyAt(['you']), astrologyAt(['jung', 'mars'])]) {
+    // the live sky is the sky link (#/sky…), a natal chart is named through Astrology (#/astrology/<chart>…)
+    for (const s of [astrologyLive(), astrologyLive({ body: 'mars' }), astrologyLive({ body: 'mars', culture: 'norse' })]) {
+      const h = stateToHash(s);
+      expect(h.startsWith('#/sky')).toBe(true);
+      expect(hashToState(h, r).state, h).toEqual(s);
+    }
+    for (const s of [astrologyAt([]), astrologyAt(['you']), astrologyAt(['jung', 'mars'])]) {
       const h = stateToHash(s);
       expect(h.startsWith('#/astrology')).toBe(true);
       expect(hashToState(h, r).state, h).toEqual(s);

@@ -2,13 +2,14 @@
   "_note": "Mana: the definition from Lehmann (CW8 ¶128) and the primitive energetics around it (¶130, ¶127, ¶129), its presence in Jung's own field observations (CW10 ¶128, CW16 ¶4), the mana-personality (CW7 ¶388), and its late appearances as conscience and as the effect of depth (CW10 ¶845, ¶583). Quotations are placed by the corpus; nothing is typed.",
   "version": 1,
   "concept": "mana",
-  "line": "The sensed dynamism older than any theory of it: an extraordinary effectiveness that can attach to persons and things — Jung's bridge from primitive energetics to psychic energy.",
+  "line": "Jung's statements on mana: Lehmann's definition and the primitive energetics around it (CW8), its occurrence in CW10 and CW16, the mana-personality (CW7) and later uses.",
   "sections": [
     {
       "id": "the-definition",
       "title": "The definition",
-      "line": "The word arrives from ethnology with a deliberately vague sense — 'extraordinarily effective' — and Jung keeps the vagueness.",
+      "line": "CW8 ¶114 and ¶128 (On Psychic Energy, 1928): the thesis on a magical potency, Lehmann's definition of mana, and Jung's remark that the primitive view of mana is a forerunner of the concept of psychic energy.",
       "quotes": [
+        { "work": "cw08", "para": 114, "quote": "the most primitive ideas concerning a magical potency, which is regarded both as an objective force and as a subjective state of intensity." },
         { "work": "cw08", "para": 128, "quote": "In his classic study of mana Lehmann defines it as something \"extraordinarily effective.\"" },
         { "work": "cw08", "para": 128, "quote": "We cannot escape the impression that the primitive view of mana is a forerunner of our concept of psychic energy and, most probably, of energy in general." }
       ]
@@ -16,7 +17,7 @@
     {
       "id": "experience-not-concept",
       "title": "An experience, not a concept",
-      "line": "Mana is not a primitive theory of energy but the perception of a relation — it is present in the moment something shows itself as more than itself.",
+      "line": "CW10 ¶128 (the thing which is astonishing), CW16 ¶4 (mana as a universal medicinal or healing power) and CW8 ¶130 (the need to represent the sensed dynamism of psychic events in a concrete way).",
       "quotes": [
         { "work": "cw10", "para": 128, "quote": "In the face of something extraordinary it is not he who is astonished, but rather the thing which is astonishing." },
         { "work": "cw16", "para": 4, "quote": "Mana is a universal medicinal or healing power which renders men, animals, and plants fruitful and endows chieftain and medicine-man with magical strength." },
@@ -26,7 +27,7 @@
     {
       "id": "not-a-concept",
       "title": "The reservations",
-      "line": "Jung keeps the term honest: it is a representation, not a concept, and nothing divine attaches to it.",
+      "line": "CW8 ¶127: mana called a representation and not a concept; CW8 ¶129: Jung, following Lehmann, writes that nothing divine attaches to mana.",
       "quotes": [
         { "work": "cw08", "para": 127, "quote": "Thus mana is not a concept but a representation based on the perception of a \"phenomenal\" relationship." },
         { "work": "cw08", "para": 129, "quote": "nothing \"divine\" attaches to mana, so that one cannot see in mana the original form of an idea of God." }
@@ -35,7 +36,7 @@
     {
       "id": "the-mana-personality",
       "title": "The mana-personality",
-      "line": "When the ego takes the charge for itself, the archetype is worn as a person: the magician, the great man, the woman who knows.",
+      "line": "CW7 ¶388: Jung's name for a personality consistent with the extraordinarily potent (Napoleon and Lao-tzu are the two figures in the passage), and what he says it corresponds to.",
       "quotes": [
         { "work": "cw07", "para": 388, "quote": "It corresponds to a dominant of the collective unconscious, to an archetype which has taken shape in the human psyche through untold ages of just that kind of experience." }
       ]
@@ -43,7 +44,7 @@
     {
       "id": "mana-now",
       "title": "Mana now",
-      "line": "The word never leaves Jung's late vocabulary: conscience itself is a manifestation of it.",
+      "line": "CW10 ¶845 and ¶583 (Civilization in Transition): two later uses of the word, for conscience and for the effect of deepened consciousness.",
       "quotes": [
         { "work": "cw10", "para": 845, "quote": "Conscience is a manifestation of mana, of the “extraordinarily powerful,” a quality which is the especial peculiarity of archetypal ideas." },
         { "work": "cw10", "para": 583, "quote": "The deepening and broadening of his consciousness produce the kind of effect which the primitives call “mana.”" }

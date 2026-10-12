@@ -8,7 +8,7 @@ import { icon } from '../ui/icons';
 import { averagePalettes } from '../data/palette';
 import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '../data/model';
 import type { LensContext, LensInstance } from '../shell/lens';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { loadLensData, quoteBlock, type LensQuote } from './ui';
 import { alchemyPath, parseAlchemyRoute, type AlchemyIds, type AlchemyRoute } from './alchemy-route';
 
@@ -125,10 +125,12 @@ export function mount(ctx: LensContext): LensInstance {
 
   const alchemyOptions = (section: Section) => {
     ctx.setControls([modeOptions([
-      optionAction('Opus', () => ctx.setPath([]), { pressed: section === 'opus', title: 'The opus, nigredo to rubedo' }),
-      optionAction('Operations', () => ctx.setPath(['operations']), { pressed: section === 'operations', title: 'The workings of the opus' }),
-      optionAction('Matter', () => ctx.setPath(['matter']), { pressed: section === 'matter', title: 'What the work is done on' }),
-      optionAction('Elements', () => ctx.setPath(['elements']), { pressed: section === 'elements', title: 'Fire, water, earth, air and the fifths' }),
+      optionGroup('Walk the work', [
+        optionAction('Opus', () => ctx.setPath([]), { pressed: section === 'opus', description: 'The opus, nigredo to rubedo' }),
+        optionAction('Operations', () => ctx.setPath(['operations']), { pressed: section === 'operations', description: 'The workings of the opus' }),
+        optionAction('Matter', () => ctx.setPath(['matter']), { pressed: section === 'matter', description: 'What the work is done on' }),
+        optionAction('Elements', () => ctx.setPath(['elements']), { pressed: section === 'elements', description: 'Fire, water, earth, air and the fifths' }),
+      ]),
     ], 'Options')]);
   };
 

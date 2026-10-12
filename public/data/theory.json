@@ -203,7 +203,7 @@
   {
    "id": "functions",
    "name": "Functions",
-   "line": "Jung counts four basic functions of consciousness: thinking and feeling, the rational pair, and sensation and intuition, the irrational pair. Each answers one question about a situation, and the attitudes, introversion and extraversion, make a second axis.",
+   "line": "Jung on the four functions and the two attitudes in Psychological Types (CW6, 1921: the introduction and the definitions) and in the papers of 1923, 1931 and 1936 appended to it; with CW11 ¶246 and the Zarathustra seminar on four aspects of orientation.",
    "quotes": [
     {
      "text": "I distinguish four basic functions in all, two rational and two irrational (qq.v.): thinking and feeling, sensation and intuition (qq.v.).",
@@ -315,7 +315,7 @@
   }
  ],
  "number": {
-  "line": "Jung came to think numbers are found as much as invented: archetypes of order that run through psyche and matter alike. Marie-Louise von Franz worked that out number by number. The QL framework names six positions, #0 to #5, and lays the numbers one to six beside them. Walk the six: at each, the framework's words, von Franz on the number, and Jung on what the position names.",
+  "line": "Jung writes that numbers were as much found as invented and have a relative autonomy like that of the archetypes (CW8 ¶871). The QL framework names six positions, #0 to #5, and the site sets the numbers one to six beside them, as the owner has ruled. Each position shows the framework's words, von Franz on the number, and passages of Jung chosen for it.",
   "matheme": {
    "text": "0/1=4+2=5→0",
    "source": "W § IV"
@@ -372,7 +372,7 @@
      "text": "One (unity, the monad)",
      "source": "W § VI"
     },
-    "line": "The ground before anything is said. Jung says only that the structure is given, found in every case; von Franz says the one already holds every number after it.",
+    "line": "The framework's #0 beside the number one. Von Franz writes that quantitatively the one forms the unit and qualitatively contains the whole sequence of natural numbers; the Jung passage says the psychic structure is something given, the precondition found to be present in every case.",
     "quotes": [
      {
       "text": "quantitatively it forms the unit, qualitatively it contains the whole sequence of natural numbers",
@@ -422,7 +422,7 @@
      "text": "Two (polarity, reflection)",
      "source": "W § VI"
     },
-    "line": "Two forms in the dark. Jung puts the archetype itself at the psychoid edge of the psyche, where it never reaches consciousness; von Franz hears two as rhythm before any line of time.",
+    "line": "The framework's #1 beside the number two. Von Franz writes that twoness signifies oscillation and rhythm but not yet linear time; Jung places the archetype as such at the invisible, ultraviolet end of the psychic spectrum and says it does not appear, in itself, to be capable of reaching consciousness.",
     "quotes": [
      {
       "text": "In this context, twoness signifies oscillation and rhythm, but not yet linear time.",
@@ -484,7 +484,7 @@
      "text": "Three (triad, synthesis)",
      "source": "W § VI"
     },
-    "line": "Form breaks through. Jung says an archetype arrives numinous and is never indifferent; von Franz says three is where the two poles become conscious, and ties three to time.",
+    "line": "The framework's #2 beside the number three. Von Franz writes that three represents the unitary aspect of the bipolar one-continuum that has become conscious, and that three is often connected with time; Jung writes that archetypes have a numinous character, which can be healing or destructive but never indifferent.",
     "quotes": [
      {
       "text": "According to this view the three then represents the unitary aspect of the bipolar one-continuum that has become conscious.",
@@ -542,7 +542,7 @@
      "text": "Four (quaternity, stability)",
      "source": "W § VI"
     },
-    "line": "The ego turns back to the unconscious and makes a symbol. Jung calls the joint work of the two the transcendent function; von Franz finds four in every attempt at wholeness.",
+    "line": "The framework's #3 beside the number four. Von Franz writes that attempts to establish an orientation toward wholeness possess a quaternary structure; Jung writes that images of wholeness are as a rule quaternities (CW8 ¶870), that the tendencies of conscious and unconscious together make up the transcendent function, and what he means by a symbolic expression.",
     "quotes": [
      {
       "text": "The fact that mankind's repeated attempts to establish an orientation toward wholeness possess a quaternary structure appears to correspond to an archetypal psychic structural predisposition in man.",
@@ -604,7 +604,7 @@
      "text": "Five (pentad, quintessence)",
      "source": "W § VI"
     },
-    "line": "Consciousness maps what it knows. Jung's directed thinking follows outer things in their causal order, and the ego is what it all relates to; von Franz finds five in the philosophers' stone, the quinta essentia.",
+    "line": "The framework's #4 beside the number five. Von Franz writes that the step to five is described in medieval natural philosophy as the quinta essentia included in the concept of the philosophers' stone; Jung writes that directed thinking imitates the succession of objectively real things in the same causal sequence, and that the ego is the complex factor to which all conscious contents are related.",
     "quotes": [
      {
       "text": "It is included in the concept of the “philosophers’ stone” as the quinta essentia.",
@@ -657,7 +657,7 @@
      "text": "Six (hexad, perfect completion)",
      "source": "W § VI"
     },
-    "line": "The return. Jung's self is the centre and the whole circumference at once; von Franz says six is the first number equal to the sum of its divisors.",
+    "line": "The framework's #5 beside the number six. Von Franz writes that six is the first numeral of the series to represent the sum of its divisors; Jung writes that the self is not only the centre but also the whole circumference which embraces conscious and unconscious.",
     "quotes": [
      {
       "text": "six is the first numeral of the series to represent the sum of its divisors (one, two, and three)",
@@ -689,7 +689,7 @@
    }
   ],
   "psychoid": {
-   "line": "What holds this together is the psychoid: Jung's word for the layer where the archetype reaches past the psyche into matter. Number is the plainest case of it.",
+   "line": "Jung writes that on account of its irrepresentable nature he has called the archetype psychoid (CW8 ¶840); von Franz writes that Jung expressly stated that his archetypes possess a psychoid aspect overlapping outer material reality.",
    "quotes": [
     {
      "text": "on account of its “irrepresentable” nature I have called it “psychoid.”",
@@ -725,7 +725,7 @@
    ]
   },
   "time": {
-   "line": "And number is bound up with time. Von Franz says two gives rhythm before there is any line of time, and three starts the line; Jung's Aion is time that holds the opposites; synchronicity is a meaning that crosses causal time.",
+   "line": "Von Franz writes that linear or cyclical time does not initially exist; in the seminar on children's dreams Jung names the lion-headed Aion as the god of time who combines the opposites; and in CW8 ¶963 Jung and Pauli set synchronicity, an inconstant connection through meaning, beside causality in a quaternio with indestructible energy and the space-time continuum.",
    "quotes": [
     {
      "text": "In other words, linear or cyclical time does not initially exist.",
@@ -770,7 +770,7 @@
     ]
    },
    "vaneenwyk": {
-    "line": "John Van Eenwyk reads the same split as two kinds of dynamics: what every psyche does, and what one life does with it through time.",
+    "line": "Van Eenwyk on the synchronic and the diachronic dynamics of the psyche; both quotations are his own words.",
     "quotes": [
      {
       "text": "Jung developed the idea that the diachronic dynamics of development unfold from the synchronic dynamics.",

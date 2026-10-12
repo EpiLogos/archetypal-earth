@@ -66,26 +66,12 @@ body.sky-gazing .sky-label { pointer-events: none; }
 .sky-burt blockquote p { margin: 0; font-style: italic; }
 .sky-burt blockquote cite { font-style: normal; color: var(--ink-3); }
 
-/* ── culture selector ──────────────────────────────────────────────── */
-.sky-culture { position: fixed; left: 24px; top: 24px; z-index: 12; font: 11.5px/1.5 var(--sans); letter-spacing: .03em; color: var(--ink-3); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease); }
-.sky-culture.on { opacity: 1; pointer-events: auto; }
-.sky-culture label { display: grid; gap: 3px; }
-.sky-culture select { font: 12px var(--sans); color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 4px 16px 4px 0; max-width: 220px; }
-.sky-culture option { background: #0a1020; color: #e5eafa; }
-.sky-culture .sky-culture-note { margin: 6px 0 0; max-width: 30ch; color: var(--ink-3); font-size: 10.5px; line-height: 1.5; }
-@media (max-width: 760px) { .sky-culture { left: 18px; top: 16px; } }
-
 /* the quiet glyph on a family's reveal */
 .rv-sky { margin: 14px 0 0; font: 11.5px/1.6 var(--sans); letter-spacing: .02em; color: var(--ink-3); }
 .rv-sky[hidden] { display: none; }
 .rv-sky-mark { color: rgb(var(--core-rgb) / .6); margin-right: 8px; }
 .rv-sky-glyph { font-family: var(--sans); opacity: .85; }
 
-/* the live state: one quiet, honest line under the culture selector */
-.sky-culture .sky-live { margin: 8px 0 0; max-width: 34ch; font-size: 10.5px; line-height: 1.5; color: var(--ink-3); }
-.sky-culture .sky-live strong { font-weight: 600; color: var(--ink-2); letter-spacing: .04em; }
-.sky-culture .sky-live[data-state=live] strong::before, .sky-culture .sky-live[data-state=held] strong::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: rgb(var(--core-rgb) / .85); }
-.sky-culture .sky-live:empty { display: none; }
 /* Sun and Moon now */
 .sky-syzygy { margin: 18px 0 0; }
 .sky-fact { margin: 8px 0 0; font: 13px/1.55 var(--serif); color: var(--ink-2); }

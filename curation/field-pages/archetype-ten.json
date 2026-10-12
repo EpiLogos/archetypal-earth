@@ -2,12 +2,12 @@
  "version": 1,
  "type": "archetype",
  "id": "ten",
- "line": "Ten is the completed cycle and the unfolding of unity; the tetraktys and von Franz's whole multiplicity stand beside it.",
+ "line": "Jung on ten in the traditional symbolism (CW10 ¶692) and on the tetraktys, and von Franz on ten in Number and Time.",
  "sections": [
   {
    "id": "the-completed-cycle",
    "title": "The completed cycle",
-   "line": "Jung writes little on ten. In his commentary on eleven, the numbers one to ten have the significance of a completed cycle, and ten is the perfect unfolding of unity.",
+   "line": "CW10 ¶692 (Flying Saucers, 1958): in the interpretation of a dream of the numbers eight and eleven, ten as the perfect unfolding of unity and the numbers one to ten as a completed cycle.",
    "quotes": [
     {
      "work": "cw10",
@@ -26,20 +26,32 @@
   {
    "id": "the-tetraktys",
    "title": "The tetraktys",
-   "line": "Jung names the tetraktys for the number four, and writes that it contains the roots of eternal nature and underlies all existence. The sources here do not write the tetraktys as ten.",
+   "line": "CW11 ¶246 (the Trinity essay): the Pythagorean oath and the tetraktys; CW10 ¶805: the number 4, the Pythagorean tetraktys; Number and Time: von Franz on the tetractys as the sum of 1, 2, 3 and 4.",
    "quotes": [
     {
      "work": "cw11",
      "quote": "the Pythagorean oath, for instance, says that the tetraktys “contains the roots of eternal nature.”",
      "para": 246,
      "voice": "Jung"
+    },
+    {
+     "work": "cw10",
+     "quote": "This is true particularly of the number 4, the Pythagorean tetraktys.",
+     "para": 805,
+     "voice": "Jung"
+    },
+    {
+     "work": "vonzfranz-number-time",
+     "quote": "The famous Pythagorean tetractys consists of the sum of 1, 2, 3, and 4 (= 10).",
+     "page": 126,
+     "voice": "von Franz"
     }
    ]
   },
   {
    "id": "von-franz-on-ten",
    "title": "Von Franz on ten",
-   "line": "Von Franz gives ten as the whole inexhaustible multiplicity of existence, the one integrated into it, and in a Chinese pair the ten that holds the one. Her one statement on the ten primal numbers of the cabala is placed here; the Sefiroth are left to their own pages.",
+   "line": "Number and Time: von Franz on Fa-tsang's simile of ten copper coins, in which ten signifies the whole inexhaustible multiplicity of existence and the one is integrated into the ten; and on the sephiroth as the ten primal numbers.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",
