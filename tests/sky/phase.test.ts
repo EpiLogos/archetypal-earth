@@ -26,8 +26,8 @@ describe('the orbits follow the sky phase (spec §2.5: orbits show only in appro
     expect(orbitsWanted('approach', false, 0.6, LIVE)).toBe(false);
     expect(orbitsWanted('approach', false, 0.61, LIVE)).toBe(true);
     expect(orbitsWanted('approach', false, 1, { on: false, px: 120 })).toBe(false);
-    expect(orbitsWanted('approach', false, 1, { on: true, px: 40 })).toBe(false);
-    expect(orbitsWanted('approach', false, 1, { on: true, px: 40.5 })).toBe(true);
+    expect(orbitsWanted('approach', false, 1, { on: true, px: 28 })).toBe(false);
+    expect(orbitsWanted('approach', false, 1, { on: true, px: 28.5 })).toBe(true);
     expect(orbitsWanted('approach', false, 1, null)).toBe(false);
   });
 
@@ -145,12 +145,9 @@ describe('SkyLayer.beckon (drawn through the layer, no GL context)', () => {
 });
 
 describe('the Earth’s rings', () => {
-  it('stand at the system view with the Earth’s point on screen, and nowhere else', async () => {
-    const { earthRingsWanted } = await import('../../src/sky/orbits');
-    expect(earthRingsWanted('system', { on: true })).toBe(true);
-    expect(earthRingsWanted(undefined, { on: true })).toBe(true);
-    expect(earthRingsWanted('system', { on: false })).toBe(false);
-    expect(earthRingsWanted('system', null)).toBe(false);
-    for (const p of ['approach', 'gaze', 'descend', 'return', 'settled']) expect(earthRingsWanted(p, { on: true }), p).toBe(false);
+  it('are a held body’s own: they stand in the approach like a planet’s and nowhere else', () => {
+    const disc = { on: true, px: 260 };
+    expect(orbitsWanted('approach', false, 1, disc)).toBe(true);
+    for (const p of ['system', 'gaze', 'descend', 'return', 'settled']) expect(orbitsWanted(p, false, 1, disc), p).toBe(false);
   });
 });

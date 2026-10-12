@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardSize, fitShare, readable, semiAxes, wheelPoint, type Wheel } from '../../src/sky/wheel';
+import { cardSize, fitShare, readable, ringPresence, semiAxes, wheelPoint, type Wheel } from '../../src/sky/wheel';
 
 /** a plane seen from `elev` degrees above it, 0° Aries to the right: the x axis along the screen's x, the y axis foreshortened */
 const seen = (r: number, elev: number): Wheel => ({ ux: r, uy: 0, vx: 0, vy: -r * Math.sin((elev * Math.PI) / 180), zu: 0, zv: Math.cos((elev * Math.PI) / 180) });
@@ -57,10 +57,38 @@ describe('the wheel', () => {
     expect(200 - 6 * tight * 100 - 15).toBeGreaterThanOrEqual(-1e-6);
   });
 
-  it('sizes a card in the plates’ own ratio and never below a touchable height', () => {
-    const s = cardSize(10);
-    expect(s.h).toBe(40);
+  it('sizes a card in the plates’ own ratio, readable while the body is held, and capped', () => {
+    const s = cardSize(90);
+    expect(s.h).toBe(41);
     expect(s.w / s.h).toBeCloseTo(0.637, 1);
+    // a held disc is never read smaller than a finger can: a phone's (R about 80) keeps the 40 px floor
+    expect(cardSize(80).h).toBe(40);
     expect(cardSize(500).h).toBe(70);
+  });
+
+  it('shrinks the card with the body on a zoom out, continuously, and never holds a fixed size over a point', () => {
+    let last = Infinity;
+    for (let R = 140; R >= 6; R -= 2) {
+      const h = cardSize(R).h;
+      expect(h).toBeLessThanOrEqual(last);
+      last = h;
+    }
+    expect(cardSize(40).h).toBeLessThan(25);
+    expect(cardSize(16).h).toBeLessThan(12);
+  });
+
+  it('gives the rings up with the body: whole while it reads as a body, nothing once it is a point', () => {
+    expect(ringPresence(130)).toBe(1);
+    expect(ringPresence(36)).toBe(1);
+    expect(ringPresence(14)).toBe(0);
+    expect(ringPresence(4)).toBe(0);
+    let last = 1;
+    for (let R = 40; R >= 10; R -= 1) {
+      const p = ringPresence(R);
+      expect(p).toBeLessThanOrEqual(last);
+      last = p;
+    }
+    expect(ringPresence(25)).toBeGreaterThan(0.3);
+    expect(ringPresence(25)).toBeLessThan(0.7);
   });
 });

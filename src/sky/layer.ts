@@ -9,7 +9,7 @@ import { eclipticVector, gmstDeg, obliquityDeg, sceneBasis, sceneFromEcliptic, w
 import type { Vec3 } from '../data/geo';
 import { blendPose, easeInOut, lerpAngle } from './flight';
 import { ChartOverlay, type ChartScreenMark } from './chart-overlay';
-import { AU_IN_EARTH_RADII, compressAu, EARTH_RADIUS_KM, skyVisible, stageWeights, SKY_EXTENT, type StageWeights } from './stages';
+import { AU_IN_EARTH_RADII, compressAu, EARTH_RADIUS_KM, logStep, skyVisible, stageWeights, SKY_EXTENT, type StageWeights } from './stages';
 
 /**
  * The approach's eases, milliseconds, on the frame's clock: each frame advances them by its dt, clamped as the camera's
@@ -149,7 +149,11 @@ interface BodyDraw {
   body: SkyBody;
   /** the base alpha this frame, before stage weighting */
   weight: number;
-  screen: { x: number; y: number; px: number; on: boolean };
+  /**
+   * `px` is the drawn disc (the Sun's is its glow, which never falls below a few dozen px); `held` is the body's own disc,
+   * the size the card rings and satellites are scaled by, so they stand down with the body and not with the glow.
+   */
+  screen: { x: number; y: number; px: number; held: number; on: boolean };
 }
 
 export interface ScreenBody {
@@ -360,7 +364,7 @@ export class SkyLayer {
       mesh.renderOrder = isSun ? 4 : 5;
       mesh.visible = false;
       this.group.add(mesh);
-      this.draws.set(body.key, { key: body.key, mesh, mat, body, weight: 0, screen: { x: 0, y: 0, px: 0, on: false } });
+      this.draws.set(body.key, { key: body.key, mesh, mat, body, weight: 0, screen: { x: 0, y: 0, px: 0, held: 0, on: false } });
     }
   }
 
@@ -616,6 +620,12 @@ export class SkyLayer {
       } else if (key === 'terra') {
         pos.set(0, 0, 0);
         alpha = w.earthPoint;
+        // held, the Earth is the camera's own subject, and the stage is pinned to the system by it (`stageDistance`): the
+        // labelled point gives way to the real globe by the camera's own distance from it, as it always did on a pull-back
+        if (this.approachKey === 'terra' && this.approach > 0) {
+          const near = logStep(camera.position.length(), 300, 1500);
+          alpha = alpha + (near - alpha) * this.approach;
+        }
         d.mat.uniforms.uLight.value.copy(this.sunScene).normalize().transformDirection(camInv);
       } else {
         const pv = this.poses.get(key);
@@ -629,10 +639,15 @@ export class SkyLayer {
       if (key !== 'sun') px = Math.max(px, this.trueDiskPx(d.body.radiusKm, pos, camera.position, pxPerRad));
       px = Math.min(px, maxPx);
       if (key === 'sun') d.mat.uniforms.uCorePx.value = Math.min(core, px);
-      // the approached body stays present as the camera comes to it, whatever its stage weight
-      if (this.approach > 0 && key === this.approachKey) alpha = Math.max(alpha, this.approach);
+      // the approached body stays present as the camera comes to it, whatever its stage weight (the Earth's own mesh stays
+      // as the distance leaves it: the globe is drawn by the engine, and only its place on screen is held)
+      let onAlpha = alpha;
+      if (this.approach > 0 && key === this.approachKey) {
+        if (key === 'terra') onAlpha = Math.max(alpha, this.approach);
+        else alpha = onAlpha = Math.max(alpha, this.approach);
+      }
       // the beckoned body is present at its beckon presence, whatever its stage weight (the approach's rule, beside it)
-      if (beckonP > 0 && key === this.beckonKey) alpha = Math.max(alpha, beckonP);
+      if (beckonP > 0 && key === this.beckonKey) alpha = onAlpha = Math.max(alpha, beckonP);
       d.mat.uniforms.uAlpha.value = alpha;
       d.mat.uniforms.uPx.value = px;
       d.mesh.visible = alpha > 0.004;
@@ -642,7 +657,9 @@ export class SkyLayer {
       d.screen.x = (proj.x * 0.5 + 0.5) * width;
       d.screen.y = (1 - (proj.y * 0.5 + 0.5)) * height;
       d.screen.px = px / this.dpr;
-      d.screen.on = alpha > 0.04 && proj.z < 1 && proj.z > -1 && Math.abs(proj.x) < 1.2 && Math.abs(proj.y) < 1.2;
+      // the body's own disc: the Sun's is its true size, with the glow's floor taken off
+      d.screen.held = key === 'sun' ? Math.min(this.trueDiskPx(d.body.radiusKm, pos, camera.position, pxPerRad), maxPx) / this.dpr : d.screen.px;
+      d.screen.on = onAlpha > 0.04 && proj.z < 1 && proj.z > -1 && Math.abs(proj.x) < 1.2 && Math.abs(proj.y) < 1.2;
     }
   }
 
@@ -695,7 +712,7 @@ export class SkyLayer {
   }
 
   /** A body's drawn disc this frame: its centre and diameter in CSS px, and whether it is on screen. */
-  screenDisc(key: BodyKey): { x: number; y: number; px: number; on: boolean } | null {
+  screenDisc(key: BodyKey): { x: number; y: number; px: number; held: number; on: boolean } | null {
     const d = this.draws.get(key);
     return d ? { ...d.screen } : null;
   }
@@ -710,7 +727,7 @@ export class SkyLayer {
   eclipticWheel(key: BodyKey, rPx: number): { x: number; y: number; ux: number; uy: number; vx: number; vy: number; zu: number; zv: number } | null {
     const cam = this.lastCam;
     const d = this.draws.get(key);
-    if (!cam || !d || !d.mesh.visible) return null;
+    if (!cam || !d || !(d.mesh.visible || d.screen.on)) return null;
     const P = d.mesh.position;
     const dist = Math.max(cam.position.distanceTo(P), 1e-6);
     const worldPerPx = (2 * dist * Math.tan((cam.fov * Math.PI) / 360)) / Math.max(this.lastHeight, 1);

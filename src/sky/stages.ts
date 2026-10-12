@@ -256,11 +256,21 @@ export const EARTH_RADIUS_KM = 6371.0084;
 export const APPROACH_BODIES: readonly BodyKey[] = ['sun', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
 export const isApproachBody = (key: BodyKey): boolean => APPROACH_BODIES.includes(key);
 /**
- * The bodies the sky camera can hold: the approach bodies and the Moon. The Moon is a ruler of the sky like the planets, so its
- * ties open in the live sky as theirs do; Earth keeps its own framing. Kept apart from `isApproachBody`, which stays the
- * planets and the Sun (the set the approach distances are fitted over).
+ * The bodies the sky camera can hold: the approach bodies, the Moon and the Earth. The Moon is a ruler of the sky like the
+ * planets, so its ties open in the live sky as theirs do. The Earth is held like any other body: clicked in the sky, the
+ * camera goes in to it (an approach, with its cards round it) and does not read it as the whole sky. Kept apart from
+ * `isApproachBody`, which stays the planets and the Sun (the set the approach distances are fitted over).
  */
-export const isSkyApproachBody = (key: BodyKey): boolean => isApproachBody(key) || key === 'moon';
+export const isSkyApproachBody = (key: BodyKey): boolean => isApproachBody(key) || key === 'moon' || key === 'terra';
+
+/**
+ * Where a held Earth hands the camera back to the Field, by zooming in (Earth radii from its centre). The approach station
+ * stands at about 9.7 (the disc fills 30% of the view, as a planet's does); the Field's globe stands from about 4.4 (the
+ * whole globe in view). Between the two the Earth is still the Astrology body with its cards round it, and the edge sits
+ * nearer the globe than the station by a clear margin, so the one gesture that reads as "zoom in on the Earth" does not
+ * cross a mode by accident. The sky's own `SKY_EXIT` is not this edge: the held Earth pins the stage to the system.
+ */
+export const EARTH_FIELD_EXIT = 5.6;
 
 /** The share of the viewport's height an approached body's disc fills. */
 export const APPROACH_FILL = 0.3;

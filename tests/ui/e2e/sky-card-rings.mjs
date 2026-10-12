@@ -19,7 +19,8 @@ async function hold(page, key, { cards = true } = {}) {
   await page.waitForFunction((k) => {
     const { engine } = window.__earth;
     const po = document.querySelector('.po');
-    return engine.sky && engine.sky.approached === k && engine.sky.approach > 0.99 && po && !po.hidden && document.querySelectorAll('.po-sat').length > 0;
+    // (arrived: the camera at rest at the station — the approach's own ease finishes before a planet-to-planet move does)
+    return engine.sky && engine.sky.approached === k && engine.sky.approach > 0.99 && document.body.dataset.skyPhase === 'approach' && po && !po.hidden && document.querySelectorAll('.po-sat').length > 0;
   }, key, { timeout: 60000 });
   if (cards) await page.waitForFunction(() => document.querySelectorAll('.po-card').length > 0, null, { timeout: 15000 });
   await page.waitForTimeout(1200);
@@ -86,13 +87,13 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   check(/Abyss/.test(abyss) && /Herschel/.test(abyss) && /pdf p111/.test(abyss), `${s.name}: the Abyss reads from Crowley's words, placed`, abyss.slice(0, 60).replace(/\n/g, ' '));
   await page.click('.lens-panel .lp-close');
 
-  // the Earth, held where it stands on the system view: the four elements beside it, the Tens and its elemental Atu round it
+  // the Earth, held like any body (the camera goes in to it): the four elements beside it, the Tens and its elemental Atu round it
   await page.evaluate(() => window.__earth.ctl.openBody('terra'));
-  await page.waitForFunction(() => document.querySelectorAll('.po-card').length >= 8 && !document.querySelector('.po')?.hidden, null, { timeout: 60000 });
+  await page.waitForFunction(() => window.__earth.engine.sky?.approached === 'terra' && document.body.dataset.skyPhase === 'approach' && document.querySelectorAll('.po-card').length >= 8 && !document.querySelector('.po')?.hidden, null, { timeout: 60000 });
   await page.waitForTimeout(1200);
   st = await state(page);
   const earthSats = await page.evaluate(() => [...document.querySelectorAll('.po-sat')].map((x) => x.textContent));
-  check(st.cards.length === 8 && st.phase === 'system', `${s.name}: the Earth floats the four Tens and its four elemental Atu`, `${st.cards.length} cards, ${st.phase}`);
+  check(st.cards.length === 8 && st.phase === 'approach', `${s.name}: the Earth floats the four Tens and its four elemental Atu`, `${st.cards.length} cards, ${st.phase}`);
   check(['Fire', 'Water', 'Air', 'Earth'].every((e) => earthSats.includes(e)), `${s.name}: the four elements stand at the Earth`, earthSats.join(', '));
   check(st.cards.every((c) => c.cx > 0 && c.cx < st.vw && c.cy > 0 && c.cy < st.vh), `${s.name}: the Earth's cards stand on screen`);
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-earth-rings.png`) });

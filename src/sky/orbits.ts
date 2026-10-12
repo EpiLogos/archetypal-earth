@@ -14,7 +14,7 @@ import { el } from '../ui/dom';
 import type { SkyLayer } from './layer';
 import type { BodyKey } from '../types/sky';
 import { decanOf, imageUrl, type CardPlate, type RingCard } from './cards';
-import { cardSize, fitShare, readable, wheelPoint, type Room } from './wheel';
+import { cardSize, fitShare, readable, ringPresence, wheelPoint, type Room } from './wheel';
 import { holoCssAt } from './zodiac';
 
 /** One card on a ring: its place on the ring, its plate, and what opens it. */
@@ -54,23 +54,14 @@ const SWAY_DEG = 5; // a decan card's sway about its longitude
  * Whether the satellites, the Earth line and the Whole-sky control stand this frame (spec §2.5, the phase contract on
  * `document.body.dataset.skyPhase`). They stand only in `approach`: stationed at a planet, arrived. Any other phase
  * hides them. With no phase set (a page that has not adopted the contract yet) the old rule holds: stand down while the
- * body carries `sky-gazing`. `disc` is the held planet's drawn disc; the orbits need it on screen and large enough to ring.
+ * body carries `sky-gazing`. `disc` is the held body's own disc (never the Sun's glow: the body's true size); the orbits need
+ * it on screen and large enough to ring. The rings then go with the body as it dwindles (`ringPresence`), so this floor is
+ * only the point below which there is nothing left to hang them on.
  */
 export function orbitsWanted(phase: string | undefined, gazing: boolean, approach: number, disc: { on: boolean; px: number } | null): boolean {
   const stationed = phase === undefined ? !gazing : phase === 'approach';
-  return stationed && !!disc && disc.on && approach > 0.6 && disc.px > 40;
+  return stationed && !!disc && disc.on && approach > 0.6 && disc.px > 28;
 }
-
-/**
- * The Earth is held where it stands, not approached (its own framing is the globe's): at the system view, with the
- * Earth's point on screen, its rings stand round that point at a fixed size rather than a disc's. Any other phase hides them.
- */
-export function earthRingsWanted(phase: string | undefined, disc: { on: boolean } | null): boolean {
-  return (phase === undefined || phase === 'system') && !!disc && disc.on;
-}
-
-/** The radius (px) the Earth's rings are drawn about: its point on the system view is a few pixels, so they stand on a fixed one. */
-export const EARTH_RING_R = 46;
 
 /** Phases whose orbits go at once, with no fade: the camera is leaving the station or has not reached it yet. */
 export function orbitsSnapOff(phase: string | undefined): boolean {
@@ -190,19 +181,24 @@ export class PlanetOrbits {
     const disc = key && layer ? layer.screenDisc(key) : null;
     const phase = document.body.dataset.skyPhase;
     const isEarth = key === 'terra';
-    const wanted = isEarth ? earthRingsWanted(phase, disc) : orbitsWanted(phase, document.body.classList.contains('sky-gazing'), layer?.approach ?? 0, disc);
+    // the held body's own disc: for the Sun, its true size and not the glow (whose floor kept its rings up at any distance)
+    const heldPx = disc ? disc.held : 0;
+    const wanted = orbitsWanted(phase, document.body.classList.contains('sky-gazing'), layer?.approach ?? 0, disc && { on: disc.on, px: heldPx });
     // the orbits leave at once in the gaze, descend, return and system phases: a fade would leave the line on screen
     if (!wanted && orbitsSnapOff(phase)) this.shown = 0;
     else this.shown += ((wanted ? 1 : 0) - this.shown) * (1 - Math.exp(-dt * 4));
     // while a body is held, a phone gives the sky's own controls (names, the held note) back to it
     document.body.classList.toggle('po-holding', this.shown > 0.5);
-    if (this.shown < 0.02 || !disc || !layer) { this.root.hidden = true; this.setInteractive(false); return; }
+    const R = heldPx / 2;
+    // the rings go with the body on a zoom out: its disc is the one measure of how much of them stands
+    const presence = ringPresence(R);
+    if (this.shown * presence < 0.02 || !disc || !layer) { this.root.hidden = true; this.setInteractive(false); return; }
     this.root.hidden = false;
-    // while fading out nothing takes a click: the children's own pointer-events (set in the stylesheet) are overridden here
-    this.setInteractive(wanted);
-    this.root.style.opacity = this.shown.toFixed(3);
+    // while fading out nothing takes a click (nor while the body is too small to hang anything on): the children's own
+    // pointer-events (set in the stylesheet) are overridden here
+    this.setInteractive(wanted && presence > 0.6);
+    this.root.style.opacity = (this.shown * presence).toFixed(3);
     if (!reduced) this.t += dt;
-    const R = isEarth ? Math.max(disc.px / 2, EARTH_RING_R) : disc.px / 2;
     const cx = disc.x, cy = disc.y;
     const radii = [R * 1.42, R * 1.86];
     const cos = Math.cos(ROT), sin = Math.sin(ROT);

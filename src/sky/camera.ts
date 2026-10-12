@@ -221,8 +221,9 @@ export class SkyCamera {
     const tok = ++this.tok;
     // near the Earth is the camera's own distance from it: `rig.dist` is about the rig's focus, which is the held planet while
     // one is held (a station 5 R⊕ from Mars reads "near the Earth" there), and that sent every planet-to-planet pick down the
-    // return from the Earth: a lift, a swing about the Earth and a climb, with no turn to the planet
-    if (key && norm(rig.snapshot().pos) < STAGE_EDGES.lunar) {
+    // return from the Earth: a lift, a swing about the Earth and a climb, with no turn to the planet. The same holds with the
+    // Earth itself held: its station is inside that edge, and a pick from there is a move in the sky, not a return
+    if (key && this._key !== 'terra' && norm(rig.snapshot().pos) < STAGE_EDGES.lunar) {
       this.ascend(key, layer, fast);
       return;
     }
@@ -252,7 +253,8 @@ export class SkyCamera {
       return;
     }
     const planet = layer.scenePosition(key);
-    const stages: Stage[] = from
+    // the Earth is the sky's own origin: one move in to it from wherever the camera stands, never a turn to a point and a flight
+    const stages: Stage[] = from || key === 'terra'
       ? this.dollyStages(key, layer, ll, dest, planet)
       : [
         once(() => { this.pin(null); layer.setApproach(key); }),
@@ -287,7 +289,9 @@ export class SkyCamera {
       once(() => {
         const s0 = rig.snapshot();
         const off = sub([s0.pos[0], s0.pos[1], s0.pos[2]], readTarget());
-        start.r = Math.max(dest, norm(off));
+        // (the Earth is closed on from either side: the camera may stand nearer it than its station, and a floor at the station
+        // would throw it out to the station in the first frame)
+        start.r = key === 'terra' ? Math.max(1.2, norm(off)) : Math.max(dest, norm(off));
         start.dir = norm(off) > 1e-9 ? unit(off) : va;
         // the look is turned as a direction from the camera, not as a point: the old look point is a few radii away (the held
         // planet's station), so a blend of the two points would swing the view through most of a turn in its first frames
@@ -469,6 +473,10 @@ export class SkyCamera {
 
   /** The ascent into a body, shared by the return and the approach from near the Earth. */
   private ascend(key: BodyKey, layer: LayerLike, fast: boolean, onDone?: () => void): void {
+    if (key === 'terra') {
+      this.earthStation(layer, fast, onDone);
+      return;
+    }
     const rig = this.deps.rig;
     const v = this.deps.viewLatLon(key);
     const dAp = this.deps.approachDist(key);
@@ -522,6 +530,29 @@ export class SkyCamera {
         this.setPhase('approach');
       }),
     ], onDone);
+  }
+
+  /**
+   * Hold the Earth. It is the sky's own origin, so there is nothing to lift to or to compose it with: the camera closes on it
+   * from where it stands (the Field's globe, a planet's station, the whole sky) in one polar track about its centre, to the
+   * station where its disc fills the view as a planet's does. Phase 'return' while it travels, 'approach' on arrival.
+   */
+  private earthStation(layer: LayerLike, fast: boolean, onDone?: () => void): void {
+    const rig = this.deps.rig;
+    const ll = this.deps.viewLatLon('terra');
+    const dest = this.deps.approachDist('terra');
+    this._key = 'terra';
+    this.setPhase('return');
+    const stages: Stage[] = fast
+      ? [once(() => {
+        this.pin(null);
+        layer.setApproach('terra', true);
+        layer.beckon(null, true);
+        rig.flyTo(ll.lat, ll.lon, dest, { instant: true });
+      })]
+      : this.dollyStages('terra', layer, ll, dest, null);
+    stages.push(once(() => { layer.beckon(null, true); this.setPhase('approach'); }));
+    this.begin(stages, onDone);
   }
 
   /** The lift from the present pose to a little above the Earth, pinned about the Earth's centre. It is the first step of every ascent. */

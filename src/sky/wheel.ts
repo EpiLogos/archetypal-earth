@@ -74,8 +74,32 @@ export function fitShare(w: Wheel, k: number, cx: number, cy: number, room: Room
   return Math.max(0, Math.min(1, sx, sy));
 }
 
-/** A card's size (px) for a disc of radius `R`: portrait, in the plates' own ratio (800 × 1255), never too small to read nor to touch. */
+/** The disc radius (px) from which a held body's rings stand whole: at and above it a card is never smaller than a finger can read. */
+const RING_FULL_R = 80;
+/** … and the radii over which the rings give way as the body dwindles: gone at the first, whole at the second. */
+const RING_GONE_R = 14;
+const RING_WHOLE_R = 36;
+
+const unit = (x: number): number => Math.max(0, Math.min(1, x));
+
+/**
+ * A card's size (px) for a disc of radius `R`: portrait, in the plates' own ratio (800 × 1255). A held body's disc fills a
+ * third of the view or so (R about 130 px on a desktop, 80 on a phone) and the card keeps a readable floor of 40 px there;
+ * as the body dwindles under a zoom out the floor lets go, so the card shrinks with the body it hangs about (it is
+ * `0.46 R`), and never stays a fixed size over a planet that is a point.
+ */
 export function cardSize(R: number): { w: number; h: number } {
-  const h = Math.max(40, Math.min(70, R * 0.46));
+  const floor = 40 * unit((R - RING_GONE_R) / (RING_FULL_R - RING_GONE_R));
+  const h = Math.min(70, Math.max(R * 0.46, floor));
   return { w: Math.round(h * 0.637), h: Math.round(h) };
+}
+
+/**
+ * How present a held body's rings are (0 … 1) for a disc of radius `R`: whole while the body reads as a body, then fading
+ * out with it as it dwindles. A continuous function of the disc, so the rings go as gracefully as the planet does on a zoom
+ * out, whichever body it is.
+ */
+export function ringPresence(R: number): number {
+  const t = unit((R - RING_GONE_R) / (RING_WHOLE_R - RING_GONE_R));
+  return t * t * (3 - 2 * t);
 }

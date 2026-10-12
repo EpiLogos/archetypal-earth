@@ -388,8 +388,9 @@ export function mount(ctx: LensContext): LensInstance {
     // ['sky'] = live Astrology sky (no modal, no natal). [chart] = birth sky. [chart, body] = walk. [] = Charts.
     if (path[0] === ASTROLOGY_LIVE) {
       walking = null;
-      const held = path[1] && path[1] !== 'terra' ? path[1] : ctx.skyBody();
-      const bodyName = held && held !== 'terra' ? data.bodies[held as ChartBody]?.name : undefined;
+      const held = path[1] ?? ctx.skyBody();
+      // the Earth is held like a planet (the camera goes in to it): it is the sky's subject, so it titles the sky
+      const bodyName = held === 'terra' ? 'Earth' : held ? data.bodies[held as ChartBody]?.name : undefined;
       ctx.setContext(bodyName ?? 'The sky');
       ctx.panel.close();
       return;

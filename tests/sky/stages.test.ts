@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
-  AU_IN_EARTH_RADII, APPROACH_BODIES, APPROACH_FILL, COMPRESSION, EARTH_RADIUS_KM, SKY_ENTER, SKY_EXIT, SKY_EXTENT, SKY_OVERSHOOT, STAGE_EDGES, approachDist,
+  AU_IN_EARTH_RADII, APPROACH_BODIES, APPROACH_FILL, COMPRESSION, EARTH_RADIUS_KM, SKY_ENTER, SKY_EXIT, SKY_EXTENT, SKY_OVERSHOOT, STAGE_EDGES, approachDist, EARTH_FIELD_EXIT, isSkyApproachBody,
   compressAu, depthPlanes, handoffFocusWeight, isApproachBody, skyMaxDist, stageDistance, stageOf, stageWeights, surfaceWeight, systemHomeDist, LEGACY_DEPTH_MAX,
 } from '../../src/sky/stages';
 
@@ -91,10 +91,27 @@ const FOV = 38;
 const radiusOf = (key: string) => BODIES.find((b) => b.key === key)!.radiusKm;
 
 describe('the approach to a body', () => {
-  it('the Sun and the planets approach; Earth and the Moon keep their own framing', () => {
+  it('the Sun and the planets are the fitted approach set; the Earth and the Moon are held on their own terms', () => {
     expect([...APPROACH_BODIES].sort()).toEqual(['jupiter', 'mars', 'mercury', 'neptune', 'pluto', 'saturn', 'sun', 'uranus', 'venus']);
     expect(isApproachBody('terra')).toBe(false);
     expect(isApproachBody('moon')).toBe(false);
+  });
+
+  it('the sky camera can hold the Earth and the Moon as well; the fitted set stays the planets and the Sun', () => {
+    for (const k of ['terra', 'moon', 'sun', 'mars', 'pluto'] as const) expect(isSkyApproachBody(k), k).toBe(true);
+    expect(isSkyApproachBody('sun')).toBe(isApproachBody('sun'));
+  });
+
+  it('the held Earth’s Field edge stands clear below its station, on any viewport, and above the globe’s closest', () => {
+    for (const aspect of [0.46, 1, 1.6, 2.4]) {
+      const station = approachDist(radiusOf('terra'), FOV, aspect, 0.42);
+      // a clear margin below the station (one zoom gesture is a few percent): the Earth's Astrology is not an edge-case
+      expect(EARTH_FIELD_EXIT, `aspect ${aspect}`).toBeLessThan(station * 0.75);
+      expect(EARTH_FIELD_EXIT).toBeGreaterThan(1.5);
+    }
+    // and it is not the sky's own exit: the held Earth pins the stage to the system, so that edge never reads it
+    expect(stageDistance(EARTH_FIELD_EXIT, EARTH_FIELD_EXIT, 1)).toBeGreaterThanOrEqual(STAGE_EDGES.system);
+    expect(EARTH_FIELD_EXIT).toBeLessThan(SKY_EXIT);
   });
 
   it('is finite and monotone in the radius for every body in the data, on any viewport', () => {

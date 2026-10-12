@@ -54,7 +54,7 @@ import type { CuratedPerson } from '../astro/charts';
 import { loadLensData } from '../lenses/ui';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
-import { approachDist, isSkyApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
+import { approachDist, EARTH_FIELD_EXIT, isSkyApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -1371,6 +1371,11 @@ export class Controller {
   /** Camera lat/lon that faces a body (or the default system / birth-chart view). */
   private skyViewLatLon(key: BodyKey | null): { lat: number; lon: number } {
     const layer = this.skyLayer!;
+    // the Earth has no longitude of its own in the diagram (it is the origin): it is seen from a little east of the Sun's
+    // side, so its day side faces the camera and the terminator shows
+    if (key === 'terra') {
+      return systemViewLatLon(layer.sunLongitude() + 35, SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
+    }
     if (key) {
       return systemViewLatLon(systemViewLongitude(layer.bodyLongitude(key)), SYSTEM_VIEW_ELEVATION, layer.gmst, layer.eps);
     }
@@ -1523,7 +1528,8 @@ export class Controller {
     const showPlates = () => this.floats.set(this.gazePlates(subject, idx, centre), isNarrow(), { anchor: 'earth-point' });
     const gazing = (): boolean => this.skyCam.phase === 'gaze';
     this.floats.clear();
-    if (gazing()) showPlates();
+    // the Earth held is already looked at: its plates stand on it where the camera is, with no turn to make
+    if (held === 'terra' || gazing()) showPlates();
     else {
       this.skyCam.gaze(showPlates);
       // a gaze that did not start (no placed planet, not stationed) still offers its plates, rather than none
@@ -1781,9 +1787,17 @@ export class Controller {
     if (!this.skyLayer || rig.flying) return;
     // orbit-gaze: stationed at a planet looking at Earth — never treat the look-at release as a zoom-out of the sky
     if (this.skyCam.phase === 'gaze') return;
-    const next = skyGestureState(this.state, this.engine.stageDist, { enter: SKY_ENTER, exit: SKY_EXIT }, rig.wheelDriven);
+    // a held Earth pins the stage to the system (the whole sky stands about it), so the sky's own exit, measured on the stage,
+    // never fires there; the Field is taken from the Earth by zooming in past its own edge, on the camera's distance
+    const earthHeld = this.skyCam.key === 'terra' && this.skyCam.phase === 'approach' && this.state.sky?.body === 'terra';
+    const next = earthHeld
+      ? skyGestureState(this.state, rig.dist, { enter: SKY_ENTER, exit: EARTH_FIELD_EXIT }, rig.wheelDriven)
+      : skyGestureState(this.state, this.engine.stageDist, { enter: SKY_ENTER, exit: SKY_EXIT }, rig.wheelDriven);
     if (!next) return;
-    this.skyByGesture = true;
+    // leaving a held Earth is a descent (the camera drops onto the globe under the pin, the approach easing off about the
+    // Earth's own centre); releasing its approach at once would hand the sky's far stage back to the Field's camera and the
+    // gesture would read it as a pull-back, entering the sky again
+    this.skyByGesture = !(earthHeld && !next.sky);
     this.navigate(next, { replace: !next.sky });
   }
 
