@@ -43,13 +43,12 @@ import type { DynamicsView } from '../dynamics/view';
 import { PassageSheet } from '../ui/passage';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
-import { SkyLive } from '../sky/live';
+import { SkyLive, formatMoment } from '../sky/live';
 import type { SkyAnchorSource } from '../graph/build';
 import type { SidecarChart, SkyData } from '../types/sky';
 import { SkyLayer } from '../sky/layer';
 import { SkyCamera } from '../sky/camera';
 import { SkyView } from '../sky/view';
-import { SkyCard, canOpenCard, formatMoment } from '../sky/card';
 import { dataWithWindow } from '../sky/sidecar';
 import type { CuratedPerson } from '../astro/charts';
 import { loadLensData } from '../lenses/ui';
@@ -146,7 +145,6 @@ export class Controller {
   private passage: PassageSheet;
   // the sky: a scale of the same globe, reached by the zoom gesture, by S, or by link
   private skyView: SkyView;
-  private skyCard: SkyCard;
   private skyTies = new SkyTies();
   private skyLayer: SkyLayer | null = null;
   /** the chart standing in the sky, once the sidecar has answered; null in the present sky */
@@ -251,23 +249,6 @@ export class Controller {
       nameOf: (key) => this.skyName(key),
       onSign: (id) => this.openFromSky({ type: 'family', id }),
       hasFamily: (id) => this.m.famById.has(id),
-    });
-    this.skyCard = new SkyCard(root, {
-      onField: (t) => this.openFromSky(t),
-      onOccurrence: (id) => this.openOccurrenceId(id),
-      onReading: (target) => this.openSubjectReading(target),
-      onClose: () => {
-        const s = this.state;
-        if (!s.sky?.body) { this.stepBack(); return; }
-        if (s.lens?.id === 'astrology' && s.lens.path[0]) this.navigate(astrologyAt([s.lens.path[0]]));
-        else {
-          const sky: NonNullable<AppState['sky']> = {};
-          if (s.sky.natal) sky.natal = s.sky.natal;
-          if (s.sky.culture) sky.culture = s.sky.culture;
-          this.navigate(inSky(sky));
-        }
-      },
-      passage: this.passage.bridge(),
     });
     // the sky camera: the one owner of the scripted sky moves. The layer is read when a move needs it (it loads at idle).
     const aspect = () => this.engine.width / Math.max(1, this.engine.height);
@@ -818,11 +799,6 @@ export class Controller {
     this.navigate(openedFrom(this.state, { view: { kind: 'manifest', occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: true }));
   }
 
-  /** A sky body's core reading (a double-click on its card): the field target it descends to, read at depth; Escape returns to the sky. */
-  private openSubjectReading(subject: Subject) {
-    this.navigate(openedFrom(this.state, { view: { kind: 'focus', subject }, deep: true }));
-  }
-
   /** Leave the Red Book: its folio view, and the range and clock it held. */
   private leaveRedbook(next: AppState) {
     const v = next.view;
@@ -1344,7 +1320,6 @@ export class Controller {
         this.skyView.setLive(s);
         // a natal sky holds its own moment; the clock resumes when it is left
         if (!this.state.sky?.natal) layer.setMoment(live.moment());
-        if (this.state.sky) this.syncSkyCard();
       },
     });
     this.skyLive = live;
@@ -1369,7 +1344,6 @@ export class Controller {
       if (this.pendingSkyEntry && this.state.sky) this.enterSkyView(this.pendingSkyEntry === 'instant');
       this.pendingSkyEntry = null;
       this.syncApproach();
-      if (this.state.sky) this.syncSkyCard();
     }).catch((err) => {
       this.skyFailed = true;
       this.syncRig(); // no sky is coming: the pull-back's resistance beyond the atlas's limit ends
@@ -1673,29 +1647,10 @@ export class Controller {
     return (culture && data?.cultures[culture]?.[key]?.name) || data?.bodies.find((b) => b.key === key)?.name || key;
   }
 
-  /** The body card follows the state; a body without a resolved field link opens no card. */
-  private syncSkyCard() {
-    const layer = this.skyLayer;
-    const sky = this.state.sky;
-    if (!layer || !sky?.body) { this.skyCard.hide(); return; }
-    // Astrology owns the reading surface (walk sheet / Options); never strip the lens via a Field sky card
-    if (this.state.lens?.id === 'astrology') { this.skyCard.hide(); return; }
-    const body = layer.data.bodies.find((b) => b.key === sky.body);
-    if (!body || !canOpenCard(body, this.m)) {
-      this.skyCard.hide();
-      const { body: _b, ...rest } = sky;
-      this.navigate(inSky(rest), { replace: true });
-      return;
-    }
-    const birth = !!sky.natal;
-    this.skyCard.show(sky.body, { data: layer.data, eph: layer.eph, model: this.m, ms: layer.moment, asOf: birth ? `at the birth moment, ${formatMoment(layer.moment)}` : `as of ${formatMoment(layer.moment)}`, culture: sky.culture, birth });
-  }
-
   private syncSky(prev: AppState, next: AppState, first: boolean, reframed: boolean) {
     const on = !!next.sky;
     this.skyView.setActive(on, next.sky?.body ?? null);
     this.skyView.relabel();
-    if (on) this.syncSkyCard(); else this.skyCard.hide();
     this.syncNatal(prev.sky?.natal, next.sky?.natal, !!next.sky);
     if (on && !prev.sky) {
       this.requestSky();
@@ -1760,7 +1715,6 @@ export class Controller {
       layer.chart.set(null);
       this.skyView.setHeld(null);
       layer.travel(layer.baseEph, this.skyLive?.moment() ?? Date.now(), duration);
-      if (this.state.sky) this.syncSkyCard();
       return;
     }
     try {
@@ -1786,7 +1740,6 @@ export class Controller {
       this.skyView.setHeld(`The sky is held at ${rec.label === 'You' ? 'your birth' : `${rec.label}’s birth`}, ${formatMoment(ms)}${chart.timeKnown ? '' : ' (local noon: no time was given)'}.`);
       // the ring stands around the Earth at the scale of the system: bring the camera out to see it
       if (visible && this.engine.rig.dist < STAGE_EDGES.handoff && !this.approachFor(this.state.sky)) this.enterSkyView(this.engine.reduced);
-      this.syncSkyCard();
     } catch (e) {
       if (gen !== this.natalGen) return;
       console.error(e);

@@ -3,7 +3,12 @@
 // against the sidecar's own "now" on a slow poll. Without the sidecar the moment is a snapshot, and says so. The
 // degradation is always a labelled state — never silence, never a stale moment dressed as the present.
 import type { SkyEphemeris } from './ephemeris';
-import { formatMoment } from './card';
+
+export const formatMoment = (ms: number): string => {
+  const d = new Date(ms);
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${d.getUTCFullYear()}-${p(d.getUTCMonth() + 1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+};
 
 export type LiveState =
   /** the sidecar agrees with the grids: the sky follows the clock */

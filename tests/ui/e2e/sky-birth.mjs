@@ -111,16 +111,6 @@ try {
     await page.waitForTimeout(300);
     check(!(await op()).aspects, 'and goes again when unasked');
 
-    // a body's card inside the birth sky
-    await page.locator('.sky-birth-rows li[data-body=sun] .sky-birth-name').click();
-    await page.waitForSelector('.sky-card.on .rv-name', { timeout: 8000 });
-    const card = await page.locator('.sky-card').innerText();
-    check(/at the birth moment, 1985-07-15 08:20 UTC/.test(card), 'the Sun\u2019s card reads for the birth moment', card.match(/Leo[^\n]*/)?.[0]);
-    check(/Sun and Moon at that moment/i.test(card) && !/Next conjunction/.test(card), 'its pair block speaks of that moment and asks for no "next" event');
-    check((await hash(page)).startsWith('#/sky/birth/1985-07-15T10:20/47.37/8.54/sun'), 'the link keeps the birth and adds the body', await hash(page));
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(500);
-
     // the way down: through Mercury's node into the field
     const mercury = await page.evaluate(() => document.querySelector('.sky-birth-rows li[data-body=mercury] .sky-birth-descend')?.textContent);
     await page.locator('.sky-birth-rows li[data-body=mercury] .sky-birth-descend').click();

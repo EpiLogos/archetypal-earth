@@ -8,7 +8,6 @@
 //   · Red Book stop card: dblclick → the stop's core reading; Escape returns to the same Red Book stop (W1c)
 //   · Aion event card: dblclick → the event's first occurrence as its core reading; Escape returns to the same event;
 //     an epoch card and an event with no occurrence do nothing
-//   · sky body card: dblclick → the body's descent target as its core reading; Escape returns to the same body
 //   · no page errors
 //   npx vite --port 5183 --strictPort &
 //   EARTH_HEADLESS=1 node tests/ui/e2e/card-dblclick.mjs [chromium|webkit]
@@ -23,7 +22,6 @@ const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json
 const serpentOcc = field.occurrences.find((o) => o.familyId === 'serpent' && o.geoPrecision !== 'none').id;
 const history = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/history.json'), 'utf8'));
 const redbook = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/redbook.json'), 'utf8'));
-const sky = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/sky.json'), 'utf8'));
 const occIds = new Set(field.occurrences.map((o) => o.id));
 const aionReading = history.readings[0];
 const aionEvent = aionReading.events.find((e) => (e.occurrenceIds ?? []).some((id) => occIds.has(id)));
@@ -32,8 +30,6 @@ const aionBare = aionReading.events.find((e) => !(e.occurrenceIds ?? []).some((i
 const aionEpoch = aionReading.epochs.find((e) => !e.parentId);
 // the null landing centres The Self: the folio its genesis row names (as modes-switch.mjs reads it)
 const rbSelfStop = redbook.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self').stopId;
-const skyBody = 'venus';
-const skyTarget = sky.bodies.find((b) => b.key === skyBody).ties.find((t) => t.basis !== 'site' && t.target)?.target;
 
 let failed = 0;
 const check = (ok, label, detail = '') => {
@@ -338,27 +334,6 @@ try {
     await page.waitForTimeout(500);
     const ep = await state(page);
     check(!ep.deep && ep.kind === 'world' && ep.aion?.selection?.id === aionEpoch.id, 'an epoch card\'s double-click opens nothing', ep.hash);
-    await ctx.close();
-  }
-
-  // ── (v) the sky body card: dblclick → its descent target as the core reading; Escape → the same body ─────
-  {
-    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: `#/sky/${skyBody}` });
-    track(page);
-    await until(page, () => document.querySelector('.sky-card.on .rv-name')?.textContent);
-    await page.waitForTimeout(600);
-    const k0 = await state(page);
-    check(k0.sky === skyBody, 'the sky body card stands for the body', k0.hash);
-    await page.locator('.sky-card .rv-name').dblclick();
-    await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'focus');
-    await page.waitForTimeout(500);
-    const k1 = await state(page);
-    check(k1.subject === `${skyTarget.type}/${skyTarget.id}` && k1.deep && k1.deepOpen && !k1.sky, 'a double-click on the body card opens its descent target as the core reading', `${k1.subject}, ${k1.hash}`);
-    await page.keyboard.press('Escape');
-    await until(page, () => window.__earth.ctl.state.sky && !window.__earth.ctl.state.deep);
-    await page.waitForTimeout(500);
-    const k2 = await state(page);
-    check(k2.sky === skyBody && !k2.from, 'Escape returns to the same sky body', k2.hash);
     await ctx.close();
   }
 } finally {
