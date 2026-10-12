@@ -1,0 +1,68 @@
+{
+ "archetypes": {
+  "eight": {
+   "src": "img/archetypes/eight.jpg",
+   "thumb": "img/archetypes/eight.thumb.jpg",
+   "width": 1584,
+   "height": 1920,
+   "tone": "#6e6756",
+   "title": "The Ogdoad: the eight primordial gods in relief",
+   "credit": "G. Maspero, The Dawn of Civilization (1897); Internet Archive Book Images",
+   "license": "Public domain (no known restrictions)",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_dawn_of_civilization-_Egypt_and_Chaldaea_(1897)_(14763536725).jpg",
+   "_file": "File:The dawn of civilization- Egypt and Chaldaea (1897) (14763536725).jpg"
+  },
+  "seven": {
+   "src": "img/archetypes/seven.jpg",
+   "thumb": "img/archetypes/seven.thumb.jpg",
+   "width": 1644,
+   "height": 1920,
+   "tone": "#afa18e",
+   "title": "The seven planets personified, from a collection of alchemical tracts",
+   "credit": "Wellcome Collection",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seven_planets_personified._Wellcome_L0047982.jpg",
+   "_file": "File:Seven planets personified. Wellcome L0047982.jpg"
+  },
+  "ten": {
+   "src": "img/archetypes/ten.jpg",
+   "thumb": "img/archetypes/ten.thumb.jpg",
+   "width": 1336,
+   "height": 1920,
+   "tone": "#c4b69e",
+   "title": "The ten Sephiroth: title page of Gikatilla's Portae lucis (Augsburg, 1516)",
+   "credit": "Joseph ben Abraham Gikatilla, Portae lucis, trans. Paulus Ricius (Augsburg, 1516); woodcut by Leonhard Beck",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:UBN11497_Gikatilla_Portaelucis_e_tp_ill_Ten-Sephiroth_c_124mb-kopie.jpg",
+   "_file": "File:UBN11497 Gikatilla Portaelucis e tp ill Ten-Sephiroth c 124mb-kopie.jpg"
+  }
+ },
+ "families": {
+  "ether": {
+   "src": "img/families/ether.jpg",
+   "thumb": "img/families/ether.thumb.jpg",
+   "width": 993,
+   "height": 1280,
+   "tone": "#c8c8c8",
+   "title": "Quinta essentia at the centre of the four elements (Sylva philosophorum)",
+   "credit": "Cornelius Petraeus, Sylva Philosophorum (mid-17th century)",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sylva_Philosophorum_04_Quinta_Essentia.png",
+   "_file": "File:Sylva Philosophorum 04 Quinta Essentia.png"
+  },
+  "kether": {
+   "src": "img/families/kether.jpg",
+   "thumb": "img/families/kether.thumb.jpg",
+   "width": 1280,
+   "height": 956,
+   "tone": "#f3eee0",
+   "title": "The cloud-veils of the Ain concentrating in Kether, the first Sephira",
+   "credit": "Wellcome Collection",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Hidden_Sephiroth_Wellcome_L0038196.jpg",
+   "_file": "File:The Hidden Sephiroth Wellcome L0038196.jpg"
+  }
+ },
+ "theoretics": {},
+ "occurrences": {}
+}
