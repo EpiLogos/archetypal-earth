@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-three-of-cups",
- "line": "Crowley’s Three of Cups: Abundance, Binah in the suit of Water, Mercury in Cancer.",
+ "line": "Crowley’s Three of Cups: Lord of Abundance (pdf p176); Binah and Mercury in Cancer (pdf p199).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card refers to Binah in the suit of Water and to the influence of Mercury in Cancer.",
+   "line": "Crowley on Binah in the suit of Water and on Mercury in Cancer (pdf p199).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the card through Binah as the Great Sea, the Moon in one aspect and Saturn in another, and as the spiritual basis of fertility.",
+   "line": "Crowley on the card as the spiritual basis of fertility, and on Binah, the Great Sea (pdf p199).",
    "quotes": [
     {
      "work": "book-of-thoth",

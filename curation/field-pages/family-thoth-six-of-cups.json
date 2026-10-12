@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-cups",
- "line": "Six of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Six of Cups: Pleasure (pdf p178); Scorpio and the Sun (pdf p178, p203); Tiphareth (pdf p177).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title, sign and the Sun's influence, as the chapter gives them (pdf 178, 203).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title and the sign Scorpio (pdf p178); on the Sun (pdf p203).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Sixes belong to Tiphareth (pdf 177), and Tiphareth is the Sun in the planetary system (pdf 177).",
+   "line": "Crowley on the Sixes and Tiphareth, and on Tiphareth and the Sun (pdf p177).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "Crowley's own gloss on the title, not a divinatory reading.",
+   "line": "Crowley on Pleasure in its highest sense (pdf p203).",
    "quotes": [
     {
      "work": "book-of-thoth",

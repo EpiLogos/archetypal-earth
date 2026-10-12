@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-cups",
- "line": "Crowley attributes Cups to Water. The Ace names no letter for the suit; the letter Mem for Water comes from the general account and from the Hanged Man.",
+ "line": "Crowley on Cups: Water, the Ace of Cups as the Holy Grail on the sea of Binah, and the letter of Water (pdf p23, p24, p87, p196).",
  "sections": [
   {
    "id": "water-and-the-feminine",
-   "title": "Water and the feminine",
-   "line": "Crowley calls the Ace of Cups the complement of the Ace of Wands, and gives Water to the suit.",
+   "title": "Water and the Ace of Cups",
+   "line": "Crowley's attribution of Cups to Water (pdf p24) and his description of the Ace as the feminine complement of the Ace of Wands (pdf p196).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "the-holy-grail-and-binah",
    "title": "The Holy Grail and Binah",
-   "line": "The Ace is, in Crowley's words, the essential form of the Holy Grail, with lotuses on the sea of Binah.",
+   "line": "Crowley's description of the Ace of Cups: the Holy Grail, the Lotuses on the sea of Binah, and the Dove (pdf p196).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "the-letter-of-water",
    "title": "The letter of Water",
-   "line": "No letter is given for the suit. Crowley's general account names Shin, Mem and Aleph for the Fire, Water and Air series, and the Hanged Man states Mem for Water.",
+   "line": "Crowley on the letters Shin, Mem and Aleph for the elements (pdf p23) and on Mem and the element of Water (pdf p87).",
    "quotes": [
     {
      "work": "book-of-thoth",

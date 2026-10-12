@@ -143,3 +143,14 @@ describe('SkyLayer.beckon (drawn through the layer, no GL context)', () => {
     expect(layer.screenBodies().find((b) => b.key === 'mars')!.alpha).toBe(1);
   });
 });
+
+describe('the Earth’s rings', () => {
+  it('stand at the system view with the Earth’s point on screen, and nowhere else', async () => {
+    const { earthRingsWanted } = await import('../../src/sky/orbits');
+    expect(earthRingsWanted('system', { on: true })).toBe(true);
+    expect(earthRingsWanted(undefined, { on: true })).toBe(true);
+    expect(earthRingsWanted('system', { on: false })).toBe(false);
+    expect(earthRingsWanted('system', null)).toBe(false);
+    for (const p of ['approach', 'gaze', 'descend', 'return', 'settled']) expect(earthRingsWanted(p, { on: true }), p).toBe(false);
+  });
+});

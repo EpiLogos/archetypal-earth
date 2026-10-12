@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-four-of-wands",
- "line": "Crowley’s Four of Wands: Completion, Chesed in the suit of Fire, with Venus in Aries.",
+ "line": "Crowley’s Four of Wands: Completion (pdf p176); Chesed and Venus in Aries (pdf p188).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card refers to Chesed in the suit of Fire and is also referred to Venus in Aries.",
+   "line": "Crowley on Chesed in the suit of Fire and on Venus in Aries (pdf p188).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the card as the Will built into a solid system, and places it below the Abyss.",
+   "line": "Crowley on the card below the Abyss (pdf p188); on the Fours and the Abyss (pdf p176).",
    "quotes": [
     {
      "work": "book-of-thoth",

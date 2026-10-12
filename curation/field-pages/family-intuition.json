@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "intuition",
- "line": "Intuition as Jung defines it: perception through the unconscious, its irrational and compensating character, its image-making, and its place in the order.",
+ "line": "Jung on intuition: the definition, its irrational and given character, its relation to the image, its place among the functions, and air.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "The working definition, and the three things intuition is not: sense perception, feeling, and intellectual inference.",
+   "title": "Intuition as a function",
+   "line": "Jung's definition of intuition: CW6 ¶770.",
    "quotes": [
     {
      "work": "cw06",
@@ -29,7 +29,7 @@
   {
    "id": "irrational-given-compensating",
    "title": "Irrational, given, and compensating",
-   "line": "Intuition is irrational like sensation. Its contents are given, not derived, and it compensates sensation; with sensation it is the matrix of thinking and feeling.",
+   "line": "Intuition as irrational, given, and compensatory to sensation: CW6 ¶770 and ¶772.",
    "quotes": [
     {
      "work": "cw06",
@@ -51,7 +51,7 @@
   {
    "id": "image-and-creation",
    "title": "Perceiving and creating",
-   "line": "For intuition unconscious images acquire the dignity of things. Jung says that intuition, in perceiving the archetypal image, also creates it. Its direction is inward or outward.",
+   "line": "Intuition and the archetypal image, and its inward and outward direction: CW6 ¶659, ¶657 and ¶773.",
    "quotes": [
     {
      "work": "cw06",
@@ -72,8 +72,8 @@
   },
   {
    "id": "position",
-   "title": "Its place in the order",
-   "line": "As the auxiliary, intuition comes into play when it is not the leading function. In the order of orientation it is the fourth function, the one that says where a thing came from and where it goes.",
+   "title": "The auxiliary function; the order of orientation",
+   "line": "Intuition as the auxiliary function and as the fourth function of orientation: CW6 ¶612; CW11 ¶245 and ¶246; CW8 ¶259.",
    "quotes": [
     {
      "work": "cw06",
@@ -99,8 +99,8 @@
   },
   {
    "id": "diagrams-and-elements",
-   "title": "Compass, cross and element",
-   "line": "The compass and the cross are Jung's images for the four. In one Visions seminar vision the air element is where the patient first experienced thought and intuitions. The colour passage gives no assignment per function, and the element reading is conditional.",
+   "title": "The compass, the cross and air",
+   "line": "The compass and the cross, the air element in a vision, and colours and the four elements in relation to the functions: CW6 ¶958 and ¶983; Visions seminar, pdf p860; CW11 ¶281; CW14 ¶276.",
    "quotes": [
     {
      "work": "cw06",

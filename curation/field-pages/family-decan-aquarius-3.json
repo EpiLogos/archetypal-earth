@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-aquarius-3",
- "line": "Crowley's Seven of Swords is the card for the third decan of Aquarius, with the Moon as its planet in the sign.",
+ "line": "Crowley on the Seven of Swords, the card for the third decan of Aquarius (pdf p178, p219).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Aquarius.",
+   "title": "The Seven of Swords: title and attribution",
+   "line": "The title and the attribution of the Seven of Swords, pdf p178, p219.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Seven of Swords, pdf p219.",
    "quotes": [
     {
      "work": "book-of-thoth",

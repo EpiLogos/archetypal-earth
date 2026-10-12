@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "virgo",
- "line": "Burt's chapter on Virgo, with Jung's seminar on the virgin.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Virgo (pdf pp. 211–252); Jung on the virgin (Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Virgo, pdf pp. 211–252. Her account of the earth, the purity and the ruler.",
+   "line": "Burt, chapter on Virgo (pdf pp. 211–252): pdf p216, p211 and p221.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Virgo, pdf pp. 211–252. Hermes as healer and the esoteric Moon.",
+   "line": "Burt, chapter on Virgo (pdf pp. 211–252): pdf p211, p236 and p221.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the virgin in his seminar.",
+   "line": "Jung on the virgin: Dream Analysis seminar, pdf p434 and p449.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

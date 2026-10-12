@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-eight-of-wands",
- "line": "Eight of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Eight of Wands: Swiftness (pdf p179); Mercury and Sagittarius (pdf p179, p193); Hod (pdf p179).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title, Mercury and Sagittarius (pdf 179), and Mercury as ruler (pdf 193).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title, Mercury and Sagittarius (pdf p179); on Mercury ruling the card (pdf p193).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "line": "Crowley on the Eights and Hod (pdf p179).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card's energy, not a divinatory reading.",
+   "line": "Crowley on the card as energy of high velocity (pdf p193).",
    "quotes": [
     {
      "work": "book-of-thoth",

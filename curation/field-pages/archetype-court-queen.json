@@ -2,12 +2,12 @@
  "version": 1,
  "type": "archetype",
  "id": "court-queen",
- "line": "Crowley's Queen is the Hé of the Name and the Mother of the pagan series. The tie to the Great Mother is a reading made here.",
+ "line": "Crowley on the Queens: the letter Hé of the Name, the Mother of the series, and the Queen of Cups (pdf p21, p24, p139, p151, p261).",
  "sections": [
   {
    "id": "the-letter-of-the-name",
    "title": "The letter of the Name",
-   "line": "Crowley gives the Queens the letter Hé of the Name.",
+   "line": "Crowley on the Queens as the letter Hé of the Name, and on the Court cards as a pictorial analysis of the four letters and the four Elements (pdf p139).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "mother-in-the-series",
    "title": "Mother in the series",
-   "line": "Crowley names the Queen the Mother of the pagan series, against the Hebrew scheme in which Father and Mother issue Son and Daughter.",
+   "line": "Crowley on the terms Knight, Queen, Prince and Princess for the series Father, Mother, Son, Daughter (pdf p24), on the Court cards referred to the numbers 2, 3, 6 and 10 (pdf p261), and on the Hebrew system (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "the-mothers-letter",
-   "title": "The Mother's letter",
-   "line": "Crowley ties Hé to the Great Mother, and gives the Queen of Cups the power of reception and reflection. The tie to the Great Mother is this site's reading from those two statements.",
+   "title": "Hé and the Queen of Cups",
+   "line": "Crowley on the letter traditionally consecrated to the Great Mother (pdf p21) and on the Queen of Cups as the watery part of Water (pdf p151).",
    "quotes": [
     {
      "work": "book-of-thoth",

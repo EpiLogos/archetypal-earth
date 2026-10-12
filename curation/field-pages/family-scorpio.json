@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "scorpio",
- "line": "Burt's chapter on Scorpio, with Jung's seminar on the sun's self-sacrifice.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Scorpio (pdf pp. 295–338); Jung on the scorpion (Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Scorpio, pdf pp. 295–338. Her account of the descent, the transformation and the rulers.",
+   "line": "Burt, chapter on Scorpio (pdf pp. 295–338): pdf p295 and p301.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Scorpio, pdf pp. 295–338. The inner shadow, the unconscious and the uroboros.",
+   "line": "Burt, chapter on Scorpio (pdf pp. 295–338): pdf p296, p295 and p297.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the scorpion and the sun in his seminar.",
+   "line": "Jung on the scorpion and the sun: Dream Analysis seminar, pdf p435 and p434.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

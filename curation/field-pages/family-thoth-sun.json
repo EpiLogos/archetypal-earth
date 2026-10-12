@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-sun",
- "line": "Crowley's account of Atu XIX: the Sun charged with a rose, Heru-ra-ha the Lord of the New Aeon, and the rose and cross.",
+ "line": "Crowley on Atu XIX: the Sun charged with a rose, Heru-ra-ha the Lord of the New Aeon, and the Rose and Cross (pdf p105, p106).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The heraldic title and the figure he names. The planet Sun and the letter Resh come from the table only; no sentence in the chapter gives them.",
+   "title": "The Sun charged with a rose",
+   "line": "Crowley's heraldic description of the card and his naming of Heru-ra-ha, the Lord of the New Aeon (pdf p105).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's reading of the rose and the Rose and Cross.",
+   "title": "The rose and the Rose and Cross",
+   "line": "Crowley on the rose as the flowering of the solar influence (pdf p105) and on the broadening of the idea of the Rose and Cross (pdf p106).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The text gives no ends for this path. The table gives Key Scale path 30; the general rule is one letter to each of the twenty-two paths.",
+   "title": "The Paths and the letters",
+   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",

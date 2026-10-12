@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-three-of-disks",
- "line": "Crowley’s Three of Disks: Work, Binah in the sphere of Earth, Mars exalted in Capricorn.",
+ "line": "Crowley’s Three of Disks: Lord of Work (pdf p176); Binah and Mars in Capricornus (pdf p228).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card shows the influence of Binah in the sphere of Earth, and is ruled by Mars in Capricorn, where he is exalted.",
+   "line": "Crowley on Binah in the sphere of Earth (pdf p228); on the Threes and Binah (pdf p176); on Mars in Capricornus (pdf p228).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads Mars’s energy as constructive, and the card as a pyramid viewed from above its apex.",
+   "line": "Crowley on the energy of Mars as constructive and on the pyramid viewed from above the apex (pdf p228).",
    "quotes": [
     {
      "work": "book-of-thoth",

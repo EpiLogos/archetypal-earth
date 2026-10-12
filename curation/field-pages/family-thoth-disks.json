@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-disks",
- "line": "Crowley attributes Disks to Earth. The Ace gives the suit Hé final, the Daughter, while his general account gives Earth the letter Tau.",
+ "line": "Crowley on Disks: Earth, the whirling Disk, Hé final on the Throne of the Mother, and the letter Tau (pdf p23, p24, p109, p225, p267).",
  "sections": [
   {
    "id": "earth-as-a-whirling-disk",
-   "title": "Earth as a whirling disk",
-   "line": "Crowley sets the suit's Earth against the old view of Earth as a passive element, and says the Disks are not coins.",
+   "title": "Earth and the Disk",
+   "line": "Crowley's attribution of Disks to Earth (pdf p24) and his statements on the Disk and the old conception of Earth (pdf p225).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "the-daughter-on-the-throne",
-   "title": "The Daughter on the Mother's throne",
-   "line": "The letter is given in the text of the Ace of Disks, and the suits are tied to the four elements in his diagram.",
+   "title": "Hé final on the Throne of the Mother",
+   "line": "Crowley on the Earthy component, Hé final, the Daughter (pdf p225) and his diagram of the four suits and the four Elements (pdf p267).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "the-letter-of-earth",
    "title": "The letter of Earth",
-   "line": "Crowley's general account gives Earth the letter Tau, which he also gives the Universe card. The Ace of Disks gives Hé final. The page states both, and does not reconcile them.",
+   "line": "Crowley on Tau as the last letter of the alphabet (pdf p23) and on earth thrust upon the symbol (pdf p109).",
    "quotes": [
     {
      "work": "book-of-thoth",

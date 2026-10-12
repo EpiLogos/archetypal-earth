@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "feeling",
- "line": "Feeling as Jung defines it: a function in its own right, the judgment it makes, its place opposite thinking, and the diagrams.",
+ "line": "Jung on feeling: the definition, judgment and its rational and irrational forms, the inferior function, the compass and the cross, and the heart.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "Feeling is one of the four basic functions, not a secondary sensation or a thought left unfinished.",
+   "title": "Feeling as a function",
+   "line": "Jung's definition of feeling: CW6 ¶723 and ¶724.",
    "quotes": [
     {
      "work": "cw06",
@@ -28,8 +28,8 @@
   },
   {
    "id": "rational-and-opposite",
-   "title": "Judgment, rational, and opposed to thinking",
-   "line": "Feeling judges by acceptance and rejection. Directed feeling is rational; undirected feeling is what Jung calls feeling-intuition. Thinking is its opposite in the rational pair.",
+   "title": "Judgment; rational and irrational feeling",
+   "line": "Feeling as judgment, directed and undirected feeling, and the thinking type: CW6 ¶725, ¶729 and ¶905.",
    "quotes": [
     {
      "work": "cw06",
@@ -55,8 +55,8 @@
   },
   {
    "id": "position",
-   "title": "Its place in the order",
-   "line": "In the diagram for a thinking type, feeling is the inferior function, put below the cross, where its energy passes into the unconscious. The passage on the fourth quarter gives fire as the inferior function, whichever function that is for a given person.",
+   "title": "The inferior function",
+   "line": "Feeling as the inferior function, and the fourth quarter: CW18 ¶29; CW11 ¶245; CW6 ¶764; CW14 ¶288.",
    "quotes": [
     {
      "work": "cw18",
@@ -82,8 +82,8 @@
   },
   {
    "id": "compass-and-cross",
-   "title": "Compass and cross",
-   "line": "The compass is Jung's image of the four, and the cross gives the rational axis that feeling shares with thinking. The ego sits at the centre of the Tavistock figure.",
+   "title": "The compass and the cross",
+   "line": "The four functions as a compass and as a cross, and the ego at the centre: CW6 ¶958 and ¶983; CW18 ¶29.",
    "quotes": [
     {
      "work": "cw06",
@@ -104,8 +104,8 @@
   },
   {
    "id": "elements-and-colours",
-   "title": "Heart, element and colour",
-   "line": "The seminar gives feeling the heart, which is an organ and not an element. One vision's red jewel stands for positive feeling, and that is one reading, not a rule. The element reading of the four is conditional, offered only if we take it so.",
+   "title": "The heart, colours and elements",
+   "line": "The heart and feeling, the red jewel, and colours and the four elements in relation to the functions: Kundalini seminar, pdf p95; Visions seminar, pdf p691; CW11 ¶281; CW14 ¶276.",
    "quotes": [
     {
      "work": "sem-kundalini",

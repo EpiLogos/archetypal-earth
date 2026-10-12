@@ -73,7 +73,7 @@ export interface Landing { lat: number; lon: number; dist: number; high: number 
  * test or a reduced-motion user gets the finished pose on the same call.
  */
 const T = {
-  turn: 1.2, rise: 1.1, travelFromPlanet: 1.6, travelFromSystem: 2.2, travelHome: 3.2,
+  turn: 1.2, travelPlanet: 2.4, travelFromSystem: 2.2, travelHome: 3.2,
   gazeSwing: 1.2, gazeLook: 1.4, cancel: 0.8,
   drop: 3.2, dropLook: 1.0, land: 1.9,
   lift: 1.0, compose: 1.4, hold: 0.25, climb: 2.8, climbLook: 1.4,
@@ -210,7 +210,7 @@ export class SkyCamera {
 
   /**
    * Hold the sky on a body, or on the whole system (null). In the sky a planet is turned to, then travelled to; a planet from
-   * another planet rises first only when the stations would meet; the whole system is one travel home. Near the Earth a body
+   * another planet is one dolly there (no turn first, no rise); the whole system is one travel home. Near the Earth a body
    * is entered through the ascent, which is the return.
    */
   approach(key: BodyKey | null, opts: SkyOpts = {}): void {
@@ -219,7 +219,10 @@ export class SkyCamera {
     const rig = this.deps.rig;
     const fast = this.fastOf(opts);
     const tok = ++this.tok;
-    if (key && rig.dist < STAGE_EDGES.lunar) {
+    // near the Earth is the camera's own distance from it: `rig.dist` is about the rig's focus, which is the held planet while
+    // one is held (a station 5 R⊕ from Mars reads "near the Earth" there), and that sent every planet-to-planet pick down the
+    // return from the Earth: a lift, a swing about the Earth and a climb, with no turn to the planet
+    if (key && norm(rig.snapshot().pos) < STAGE_EDGES.lunar) {
       this.ascend(key, layer, fast);
       return;
     }
@@ -249,15 +252,65 @@ export class SkyCamera {
       return;
     }
     const planet = layer.scenePosition(key);
-    const stages: Stage[] = [once(() => { this.pin(null); layer.setApproach(key); })];
-    if (planet) stages.push(this.waitFor(tok, (done) => rig.lookAtPoint(planet, { duration: T.turn, onDone: done })));
-    if (from && rig.dist < dest * 0.92) {
-      const mid = Math.min(home, Math.max(dest * 1.35, rig.dist * 1.25));
-      stages.push(flight(rig, () => rig.flyTo(ll.lat, ll.lon, mid, { duration: T.rise, lift: 0 })));
-    }
-    stages.push(flight(rig, () => rig.flyTo(ll.lat, ll.lon, dest, { duration: from ? T.travelFromPlanet : T.travelFromSystem, lift: 0 })));
+    const stages: Stage[] = from
+      ? this.dollyStages(key, layer, ll, dest, planet)
+      : [
+        once(() => { this.pin(null); layer.setApproach(key); }),
+        ...(planet ? [this.waitFor(tok, (done) => rig.lookAtPoint(planet, { duration: T.turn, onDone: done }))] : []),
+        flight(rig, () => rig.flyTo(ll.lat, ll.lon, dest, { duration: T.travelFromSystem, lift: 0 })),
+      ];
     stages.push(once(() => this.setPhase('approach')));
     this.begin(stages);
+  }
+
+  /**
+   * Planet to planet: one move in the sky's own space, a polar track about the new planet — the camera's direction from it
+   * swings from where it stands to the station's while its distance closes in log space, so the distance to the planet only
+   * ever falls and the camera never rises or passes it. The look turns onto the planet in the first moments and holds it. The
+   * pin stands the rig about the origin for the track, so the layer's look-at glide (`setApproach` moves it from one body to
+   * the other) is not what carries the camera: the glide, which was, outran the camera's own offset and left the camera past
+   * the planet and rising back out to its station. The station is read each frame (the planet moves), and the handoff to the
+   * layer is the ascent's (the focus snapped onto the body, the camera driven to the station about it). The camera is already
+   * out in the sky and never leaves it: nothing lifts or swings about the Earth.
+   */
+  private dollyStages(key: BodyKey, layer: LayerLike, ll: { lat: number; lon: number }, dest: number, planet: Vector3 | null): Stage[] {
+    const rig = this.deps.rig;
+    const va = dirFromLatLon(ll.lat, ll.lon);
+    const start = { dir: va, r: dest, lookDir: va };
+    let target: Vec3 = planet ? toVec(planet) : ORIGIN;
+    const readTarget = (): Vec3 => {
+      const p = layer.scenePosition(key);
+      if (p) target = toVec(p);
+      return target;
+    };
+    return [
+      once(() => {
+        const s0 = rig.snapshot();
+        const off = sub([s0.pos[0], s0.pos[1], s0.pos[2]], readTarget());
+        start.r = Math.max(dest, norm(off));
+        start.dir = norm(off) > 1e-9 ? unit(off) : va;
+        // the look is turned as a direction from the camera, not as a point: the old look point is a few radii away (the held
+        // planet's station), so a blend of the two points would swing the view through most of a turn in its first frames
+        const ld = sub([s0.look[0], s0.look[1], s0.look[2]], [s0.pos[0], s0.pos[1], s0.pos[2]]);
+        start.lookDir = norm(ld) > 1e-9 ? unit(ld) : mul(start.dir, -1);
+        this.pin(ORIGIN);
+        layer.setApproach(key);
+      }),
+      timed(T.travelPlanet, (t) => {
+        const P = readTarget();
+        const p = polarPose(start.dir, start.r, va, dest, ease(t));
+        const pos = add(P, mul(p.dir, p.r));
+        const to = sub(P, pos);
+        const turned = unit(arc(start.lookDir, norm(to) > 1e-9 ? unit(to) : start.lookDir, ease(Math.min(1, (t * T.travelPlanet) / T.turn))));
+        aim(rig, unit(pos), norm(pos), toV(add(pos, mul(turned, Math.max(1, norm(to))))));
+      }),
+      once(() => {
+        this.pin(readTarget());
+        rig.drive(ll.lat, ll.lon, dest, null);
+        this.pin(null);
+        layer.setApproach(key, true);
+      }),
+    ];
   }
 
   /**

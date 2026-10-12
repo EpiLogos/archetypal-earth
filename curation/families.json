@@ -155,7 +155,7 @@
     },
     "fire": {
       "name": "Fire",
-      "oneLine": "The transforming flame of the work, at once purifying and consuming."
+      "oneLine": "The fire of the work: Mercurius as the only fire; fire as dynamism, passion and emotion."
     },
     "fish": {
       "name": "Fish",
@@ -327,7 +327,10 @@
     },
     "nigredo": {
       "name": "Nigredo",
-      "oneLine": "The blackening: first stage of the work, putrefaction and melancholy."
+      "oneLine": "The blackening: the initial state of the work (CW12 ¶334).",
+      "body": [
+        "Jung writes that the nigredo is present from the beginning as a quality of the prima materia or produced by the separation of the elements (CW12 ¶334). He writes that the nigredo corresponds to the encounter with the shadow (CW12 ¶41)."
+      ]
     },
     "nixie": {
       "name": "Nixie",
@@ -399,7 +402,10 @@
     },
     "rubedo": {
       "name": "Rubedo",
-      "oneLine": "The reddening: last stage of the work, the dawn after the whitening."
+      "oneLine": "The reddening: the marriage of Sol and Luna (CW14 ¶307).",
+      "body": [
+        "Jung writes that the alchemists termed the stage in which the marriage of the red man and the white woman is consummated the rubedo (CW14 ¶307). He writes that the rubedo is the second and usually final stage (CW14 ¶434)."
+      ]
     },
     "sacrifice": {
       "name": "Sacrifice",
@@ -507,7 +513,7 @@
     },
     "tree": {
       "name": "Tree",
-      "oneLine": "The cosmic and philosophical tree: axis, shelter and body of the work."
+      "oneLine": "The Tree of Life and the Tree of the Sefiroth, in Crowley, Jung and von Franz."
     },
     "trickster-figure": {
       "name": "Trickster figure",
@@ -539,7 +545,7 @@
     },
     "water": {
       "name": "Water",
-      "oneLine": "Descent-water: the dark lake, the deep well, the underworldly stream."
+      "oneLine": "Water in the work: the aqua permanens, the living water, and the unconscious."
     },
     "well-spring": {
       "name": "Well and spring",
@@ -1480,15 +1486,15 @@
     },
     "air": {
       "name": "Air",
-      "oneLine": "One of the four elements: light and invisible outside, the link between fire and water.",
+      "oneLine": "One of the four elements: the volatile element rising from earth; also pneuma.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "aer"
       ],
       "body": [
-        "Air is one of the four elements the alchemists set beside earth, water and fire. Jung quotes an alchemical author who describes it as light and invisible on the outside and heavy, visible and solid within. In the figure of the four, air lies above earth as the volatile element that rises from it.",
-        "Jung uses air in three ways: as one of the four in the historical lists of the elements, as pneuma (air taken in the spiritual sense, since spirit once meant air in motion), and as the link between fire and water, which he takes from Plato's Timaeus. He writes no essay on air as an element of its own, so the passages on the page show where the word appears rather than a doctrine."
+        "An alchemical author, quoted in CW12 ¶397, calls air uncommonly light and invisible, but inside heavy, visible and solid.",
+        "Jung writes that pneuma, like spirit, originally meant air in motion (CW14 ¶161)."
       ]
     },
     "earth-element": {
@@ -1500,9 +1506,8 @@
         "terra"
       ],
       "body": [
-        "In the alchemical sources earth is sometimes the element set apart from the other three. Jung gives it two positions. In one, earth is a fifth element at the centre, but not the quintessence and goal of the work; it is the basis, corresponding to terra, the arcane substance. In the other, from the Axiom of Maria, earth is the fourth, closing the sequence that leads to the quintessence. He states both and does not resolve the tension.",
-        "The black side of earth belongs to the first stage. Jung reads the nigredo as terra nigra, the black earth of the opening, and describes the earth as the field in which gold or lapis is sown like grain. Earth is also the earth that rose out of the waters in Genesis, and the terra damnata, the dross left over from the body.",
-        "The tie between earth and the great mother is a reading made on this site, not one of the passages quoted on the page. Earth also appears as the body in Barnaud's scheme, where heaven is the soul, earth the body and water the spirit."
+        "Jung writes that earth occupies the central position as the fifth element, though it is not the quintessence and goal of the work but its basis (CW14 ¶249), and that in the Axiom of Maria earth represents the fourth (CW14 ¶656).",
+        "Jung writes of the nigredo as terra nigra (CW14 ¶264)."
       ]
     },
     "ether": {
@@ -1512,10 +1517,10 @@
       "aliases": [
         "aether"
       ],
-      "oneLine": "Aether: the alchemists' quinta essentia, the primordial breath, a dropped physics concept.",
+      "oneLine": "Aether: the quintessence in alchemy, the primordial breath, and the physicist's ether.",
       "body": [
-        "Jung has no essay on ether. The word appears in his work in three settings: as the alchemists' aether, which is the quintessence containing the four elements; as the primordial breath or soul-substance found in many traditions; and as the physicist's ether, an auxiliary concept that physics has since set aside.",
-        "Jung uses the word mainly in the alchemical sense. Dorn's aetheric moisture and the aethereal substance in the body appear in his pages as quotations, not as his own theory. Pauli notes that relativity removed ether as a substance from physical theory. The seminar remarks on ether are recorded speech, not Jung's own text, and there they compare ether with the Self."
+        "CW12 ¶371 states that ether is the quintessence; Jung writes that aether, the primordial breath or soul-substance, is a concept found all over the world (CW7 ¶151).",
+        "Pauli writes that through the postulate of relativity ether as a substance has been removed from physical theories (pdf p18)."
       ]
     },
     "feeling": {
@@ -1524,20 +1529,18 @@
       "synthesised": true,
       "oneLine": "The function of valuation: a content is accepted or rejected, liked or disliked.",
       "body": [
-        "Jung counts feeling among the four basic functions and calls it an independent function, not a sensation or a thought left unfinished. Feeling is a process between the ego and a given content that gives the content a value of acceptance or rejection. It is a kind of judgment, but its aim is a subjective criterion rather than a conceptual link.",
-        "Feeling stands opposite thinking in the rational pair. Directed, active feeling is rational. Passive feeling confers values without the subject's intention, and Jung calls that undirected feeling feeling-intuition. A feeling, in his sense, is the specific content the function discriminates, and is separate from the function itself.",
-        "The Kundalini seminar gives the heart to feeling, and the heart is an organ, not an element. The element it gives thought is air. No planet or metal is given for feeling in the sources."
+        "Jung writes that feeling is primarily a process between the ego and a given content that imparts to the content a value of acceptance or rejection (CW6 ¶724).",
+        "He calls feeling a kind of judgment whose aim is a subjective criterion of acceptance or rejection (CW6 ¶725), and undirected feeling feeling-intuition (CW6 ¶729)."
       ]
     },
     "intuition": {
       "name": "Intuition",
       "subtype": "process",
       "synthesised": true,
-      "oneLine": "The function that perceives through the unconscious: a whole content, source untraceable.",
+      "oneLine": "The function that mediates perceptions in an unconscious way.",
       "body": [
-        "Jung calls intuition a basic psychological function that mediates perceptions in an unconscious way. It is neither sense perception, nor feeling, nor intellectual inference, although it can appear in each of them. Its content presents itself whole and complete, and the way it came into being cannot be explained.",
-        "Intuition is irrational, like sensation, and its contents have the character of being given, not derived. It stands in a compensatory relation to sensation, and with sensation it is the matrix from which thinking and feeling develop as rational functions. It is directed inward, to inner vision, or outward, to action and achievement. When it is not the leading function it comes into play as the auxiliary.",
-        "Jung says that for intuition unconscious images acquire the dignity of things, and that the intuition which perceives an archetypal image also creates it. The Visions seminar places thought and intuitions together in the element of air. No planet or metal is given."
+        "Jung calls intuition an irrational function of perception whose contents have the character of being given (CW6 ¶770).",
+        "It stands in a compensatory relationship to sensation, and is with it the matrix out of which thinking and feeling develop as rational functions (CW6 ¶772)."
       ]
     },
     "quintessence": {
@@ -1548,11 +1551,10 @@
         "quinta essentia",
         "the fifth essence"
       ],
-      "oneLine": "The fifth essence: the unity the four elements come to, not a fifth added to them.",
+      "oneLine": "The quinta essentia: the Philosophers' Stone, and the unity of the four elements.",
       "body": [
-        "The quinta essentia is the alchemists' fifth essence: what the four elements yield once they are united in the work. Jung identifies it with the Philosophers' Stone, and calls a circle divided into four with a centre its symbol.",
-        "The field keeps one question open: is the fifth one more element, or the unity of the four? Jung answers in more than one way. The quintessence closes the four as their unity. Yet he also calls earth, at the centre, the fifth element, and denies that earth is the quintessence. Von Franz gives the plainest form of the first reading.",
-        "Jung also writes the quintessence as aether. The field keeps the two as separate nodes, because they are not the same concept in every text."
+        "Jung writes that the quinta essentia is identical with the Philosophers' Stone (CW10 ¶738), and speaks of the quintessential star, symbol of the unity of the four hostile elements (CW16 ¶403).",
+        "Von Franz writes that it is not merely a fifth element added on to the four, but represents their realized unity of existence (pdf p77)."
       ]
     },
     "sensation": {
@@ -1561,9 +1563,8 @@
       "synthesised": true,
       "oneLine": "The function that establishes that something is, through the senses and the body.",
       "body": [
-        "Jung counts sensation among the four basic functions and defines it as the function that mediates the perception of a physical stimulus. It is primarily sense perception, and it includes the body-senses, kinaesthetic and vasomotor. It is a perceptive function, not the physiological impulse itself, and Jung keeps it strictly apart from feeling, even where the two combine as feeling-tone.",
-        "Sensation tells that something is, and does not tell what it is or what it means. Jung glosses it as the function of reality, la fonction du réel. It is irrational, like intuition, its opposite in the irrational pair: sensation holds to what is actually present, and intuition turns to what is possible.",
-        "The attitude changes how sensation works. In the extraverted attitude it is conditioned by the object. In the introverted attitude it keeps the object but takes on a subjective factor. The sources name no element and no planet for sensation, and the page records that gap."
+        "Jung writes that sensation is the psychological function that mediates the perception of a physical stimulus, primarily sense perception (CW6 ¶792, ¶793).",
+        "Sensation tells that something is, and does not tell what it is (CW18 ¶21)."
       ]
     },
     "spiritus": {
@@ -1574,22 +1575,20 @@
         "pneuma",
         "spirit (alchemical)"
       ],
-      "oneLine": "Air in motion and the volatile principle of the work; a different thing from Spirit.",
+      "oneLine": "Air in motion: spiritus and pneuma, and the volatile side of Mercurius.",
       "body": [
-        "Spiritus and pneuma first meant air in motion, wind and breath. The texts often use the words in that concrete sense, and in many passages it stays doubtful whether spiritus means spirit in an abstract sense. The alchemical principle is this volatile breath, which Mercurius takes on in his aerial form.",
-        "Spiritus is the volatile side of Mercurius. The spiritus mercurii is the life principle, and the spiritus mercurialis is the alchemists' guide, Hermes Psychopompos. Jung separates spirit from soul: in the sense of air or gas, soul is the higher concept, and from the phenomenological point of view both are psychic structures.",
-        "This is a different thing from the Spirit family, a separate node that shares the word. Nothing in this entry carries over to it."
+        "Jung writes that the texts often use pneuma and spiritus in the original concrete sense of air in motion (CW13 pdf p244).",
+        "The spiritus mercurialis is the alchemists' guide (CW12 ¶84); Mercurius in his volatile form of spiritus is a parallel of the Holy Ghost (CW12 ¶518)."
       ]
     },
     "thinking": {
       "name": "Thinking",
       "subtype": "process",
       "synthesised": true,
-      "oneLine": "The function that links ideas by concept and judgment, and says what a thing is.",
+      "oneLine": "The function that links ideas by means of a concept: an act of judgment.",
       "body": [
-        "Jung counts thinking among the four basic functions of consciousness. He confines the word to the linking of ideas by a concept, an act of judgment, and gives the stringing together of associations another name. Directed thinking is rational, because it works under a norm the thinker knows. Undirected thinking is irrational, because its norm is not known to the one who thinks.",
-        "In the four, thinking stands opposite feeling. Sensation says that a thing is present, thinking says what it is, and feeling says what it is worth. Thinking that answers to feeling is, for Jung, a thinking dependent on feeling and not intuitive thinking, since it has lost its own logical principle.",
-        "The one elemental link the sources give thinking is air: a seminar remark that air is characteristic of thought. They give it no planet and no metal."
+        "Jung writes that the term thinking should be confined to the linking up of ideas by means of a concept, in other words to an act of judgment (CW6 ¶831).",
+        "Directed thinking is a rational function, and undirected thinking an irrational one (CW6 ¶832)."
       ]
     },
     "kether": {
@@ -1601,8 +1600,8 @@
         "the Crown"
       ],
       "body": [
-        "Kether is the first sephira and the Crown of the Tree. In Crowley's Book of Thoth a positive point taken in the Light is the number 1, which he calls Kether, the Crown. He describes Kether as so concealed that nobody knows anything about it, and makes Chokmah the first manifestation. In the Aces chapter Spirit represents Kether.",
-        "Jung names Kether as the upward-growing root of the Tree of the Sefiroth, in the passage where he gives the usual arrangement Kether, Tifereth, Yesod, Malchuth. He does not number it. Crowley's Universe list gives its first item to the primum mobile, but does not name Kether there, so the place is his and the label is not stated."
+        "Crowley gives Kether the number 1 (pdf p33) and writes that from Kether, the supreme, influence descends directly (pdf p211).",
+        "Jung writes that Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth (CW14 ¶18)."
       ]
     },
     "chokmah": {
@@ -1614,47 +1613,47 @@
         "Hokhmah"
       ],
       "body": [
-        "Chokmah is the second sephira. Crowley numbers it 2, and then says that from the ordinary view it is really No. 1, being the first manifestation. He calls it Wisdom, the Logos, and in the Hermit chapter names the Father who is Wisdom as the highest form of Mercury. In the Magus appendix Mercury as Chokmah is the one through whom alone one approaches Kether.",
-        "Jung spells the name Hokhmah, and names it in a passage where he reports Franck's link between the number thirty-two and the trinity Kether, Binah and Hokhmah. He gives it no number and no planet in his own text. Crowley's Universe list gives its second item to the sphere of the fixed stars and Neptune, but does not name Chokmah there, so this site does not join Chokmah to a planet."
+        "Crowley writes that the 2 pertains to Chokmah (pdf p35), and that the magical manifestation of Chokmah is Wisdom, the Logos (pdf p211).",
+        "He names the Father, who is Wisdom, as the highest form of Mercury (pdf p79), and writes Mercury as Chokmah, through whom alone we can approach Kether (pdf p121)."
       ]
     },
     "binah": {
       "name": "Binah",
-      "oneLine": "Understanding, the Great Mother: Crowley's number 3, where Saturn appears in one aspect.",
+      "oneLine": "Understanding, the Great Mother: Crowley's number 3, with Saturn and the Moon.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "Understanding"
       ],
       "body": [
-        "Binah is the third sephira. Crowley names it Understanding and the Great Mother, and in the Juggler appendix shows it as not yet formulated on the Tree. He gives it Saturn, and says that Binah, the Great Sea, is the Moon in one aspect and Saturn in another, and that Saturn appears in Binah in respect of its blackness.",
-        "Crowley's own statements disagree. His Universe list gives its third item as Saturn with the Abyss, and Diagram 5 places Saturn in the position of the non-existent Daath. The join to Saturn here rests on his Binah statements, and the conflict is shown on the page. Jung calls Binah the upper Sefira, the root in which the tree of life is rooted, and the source of the middle line that brings life down from it. He does not give Binah a number."
+        "Crowley writes that Binah, the Great Sea, is the Moon in one aspect, but Saturn in another (pdf p199), and that Saturn appears in Binah in respect of its blackness (pdf p110).",
+        "Jung writes that in Binah is rooted the tree of life (CW13 ¶411)."
       ]
     },
     "chesed": {
       "name": "Chesed",
-      "oneLine": "Love, and the Rule of Law: Crowley's number 4, the first sephira below the Abyss.",
+      "oneLine": "Crowley's number 4, with Jupiter and Water; Jung's kesed, love, a side of the Tree.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "kesed"
       ],
       "body": [
-        "Chesed is the fourth sephira. Crowley's Fours chapter attributes the Four cards to it, names it the Rule of Law and the first sephira below the Abyss. He attributes it to Jupiter, whom he calls the Demiurge, and gives Water as its element in the Qabalah.",
-        "Jung spells the name kesed, and names it with din as the two sides of the Tree of the Sephiroth: love on one side, justice on the other. He does not number it. The number four is Crowley's: in his scheme the number 4 symbolises Law, Restraint, Power, Protection and Stability."
+        "Crowley attributes the Four cards to Chesed (pdf p176) and writes that Chesed is attributed to Jupiter, who is the Demiurge (pdf p176).",
+        "Jung writes that kesed (love) and din (justice) are the two sides of the cabalistic Tree of the Sephiroth (CW9ii ¶105)."
       ]
     },
     "geburah": {
       "name": "Geburah",
-      "oneLine": "Crowley's number 5, the Sephira of the suit of Fire, linked to Mars on its lowest plane.",
+      "oneLine": "Crowley's number 5: the Five cards are referred to Geburah.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "Gebhurah"
       ],
       "body": [
-        "Geburah is the fifth sephira. Crowley refers the Five cards to it because they are Fives. He refers the Five of Wands, of the suit of Fire, to Geburah, and the Five of Disks, of the suit of Earth, as well. The planet he ties to its lowest plane is Mars, in the Seven of Cups chapter; he does not give Mars as Geburah's own planet in so many words.",
-        "Jung does not take up Geburah in his own text. He names the two sides of the Tree as kesed and din, and does not call din by the name Geburah. The name Geburah appears in his cw14 notes, where he quotes Kabbalistic treatises. Its number, five, and its place in the number scheme are Crowley's statements, not Jung's."
+        "Crowley refers the Fives to the Sephira Geburah because it is a Five (pdf p40), and writes of Geburah of the suit of Fire (pdf p189) and of the suit of Earth (pdf p231).",
+        "Of the Five of Cups he writes that Mars is the manifestation on the lowest plane of Geburah (pdf p202)."
       ]
     },
     "tiphareth": {
@@ -1666,8 +1665,8 @@
         "Tifereth"
       ],
       "body": [
-        "Tiphareth is the sixth sephira in Crowley's numbering. The Sixes are attributed to it, and he calls the number Six the centre of the system. In the planetary system Tiphareth represents the Sun; in the system of Tetragrammaton it represents the Son. Crowley says it is the only sephira below the Abyss that communicates directly with Kether, and that the Ruach is centred in it, the airy Sephira.",
-        "Jung spells the name Tifereth. He places it in the middle of the Sefiroth tree, calls it the King, and names it the sun. His usual arrangement in cw14 paragraph 18 is Kether, Tifereth, Yesod, Malchuth, which puts Tifereth second and does not number it six. The number six therefore comes from Crowley's Sixes, not from Jung's order."
+        "Crowley attributes the Sixes to Tiphareth (pdf p177) and calls the number Six the centre of the system (pdf p21); in the planetary system it represents the Sun, and in the system of Tetragrammaton the Son (pdf p177).",
+        "Jung writes that Tifereth occupies the middle position of the Sefiroth system (CW14 ¶592) and is named the sun (CW14 ¶638)."
       ]
     },
     "netzach": {
@@ -1679,18 +1678,18 @@
         "Nezach"
       ],
       "body": [
-        "Netzach is the seventh sephira. Crowley attributes the Seven cards to it, places it low on the Tree, and names it the Sephira of Venus, which means victory. He says Netzach pertains to Earth as well as to Venus, and that in her lowest avatar the Moon joins the earthy sphere of Netzach with Malkuth.",
-        "Jung spells the name Nezach. In his account of the two sides of the Tree, Nezach is the right, masculine emanation, life-force, which Yesod unites with Hod on the left. Jung names no planet for it in the passages here. The field's Venus node is the goddess figure, and the sky layer ties the planet Venus to that node. The join follows Crowley's statement that Netzach is the sephira of Venus."
+        "Crowley attributes the Sevens to Netzach (pdf p178) and calls Netzach the Sephira of Venus, which means victory (pdf p219).",
+        "Jung writes that Yesod unites the emanation of the right, masculine side, Nezach, life-force, with the left, feminine side, Hod (CW14 ¶635)."
       ]
     },
     "hod": {
       "name": "Hod",
-      "oneLine": "Crowley's number 8, the airy and mercurial Sephira on the left of the Tree.",
+      "oneLine": "Crowley's number 8, airy and mercurial; Jung's Hod, beauty, on the left of the Tree.",
       "subtype": "object",
       "synthesised": true,
       "body": [
-        "Hod is the eighth sephira. Crowley attributes the four Eights to it, and says the number Eight, Hod, represents Mercury. In the Chinese-cosmos note he calls Hod airy and mercurial, and in the Ten of Disks he names Hod as Mercury on the Tree. He gives the Eight of Wands to Mercury and Sagittarius.",
-        "Jung names Hod as the left, feminine side of the Sefiroth, beauty, which Yesod unites with Nezach on the right. He gives it no planet. The field's Mercury node is Mercurius, the alchemical quicksilver spirit, and the sky layer ties the planet Mercury to that node. The join follows Crowley's statement that Hod represents Mercury."
+        "Crowley attributes the four Eights to Hod (pdf p179), writes that the number Eight, Hod, represents Mercury (pdf p234), and calls Hod, in his system, Airy and Mercurial (pdf p263).",
+        "Jung writes that Yesod unites Nezach on the right with Hod, beauty, on the left (CW14 ¶635)."
       ]
     },
     "yesod": {
@@ -1702,8 +1701,8 @@
         "Jezoth"
       ],
       "body": [
-        "Yesod is the ninth sephira and the Moon's place on the Tree. Crowley attributes the Nines to it, calls it the seat of the great crystallization of energy, and gives it the Moon. He calls the Moon of Yesod the foundation of the Tree, and says the number Nine brings the energy back to the central pillar.",
-        "Jung spells the name Jezoth. He numbers it the ninth and middle Sefira in the lowest triad of the Cabalistic tree, and places it in the genital region of the Original Man, whose head is Kether. He names it the side that unites Nezach on the right with Hod on the left, and the place where, in his account, the unitio of Tifereth and Malchuth is accomplished. The number nine in Jung is his own statement, not Crowley's."
+        "Crowley attributes the Nines to Yesod (pdf p180) and writes of the moon of Yesod, the foundation of the Tree (pdf p110).",
+        "Jung writes that Jezoth, Yesod, is the ninth and middle Sefira in the lowest triad of the Cabalistic tree (CW14 ¶634), and that it unites Nezach on the right with Hod on the left (CW14 ¶635)."
       ]
     },
     "malkuth": {
@@ -1715,13 +1714,13 @@
         "Malchuth"
       ],
       "body": [
-        "Malkuth is the tenth sephira and the last of the ten. Crowley attributes the Ten cards to it, calls it the end of all energy, and says it is right down in the world of Assiah, the material world. It depends from the other nine. He gives it Earth as its element and no planetary attribution: there is now no planetary attribution to consider.",
-        "Jung calls Malchuth the underlying feminine principle beneath the archetypal pattern, and quotes Knorr von Rosenroth for the name of the last Sefira. In Crowley's Magus appendix Malkuth is to be uplifted and set upon the throne of Binah. Von Franz calls the ten primal numbers the sephiroth. The site ties Malkuth to the number ten, which her statement supports, but her words concern the ten as a whole."
+        "Crowley attributes the Tens to Malkuth (pdf p181) and writes that the number Ten refers to Malkuth, which depends from the other nine Sephiroth (pdf p195); the tenth Sephira refers to Earth (pdf p266).",
+        "Jung writes that Malchuth is the underlying feminine principle (CW14 ¶18)."
       ]
     },
     "citrinitas": {
       "name": "Citrinitas",
-      "oneLine": "The yellowing: the stage before the reddening, which Jung says later dropped out.",
+      "oneLine": "Jung lists xanthosis, the yellowing, third of the four stages (CW12 ¶333).",
       "subtype": "process",
       "synthesised": true,
       "aliases": [
@@ -1729,8 +1728,7 @@
         "the yellowing"
       ],
       "body": [
-        "Citrinitas, also called xanthosis or the yellowing, is the yellow stage of the alchemical work. In the older four-stage scheme, which Jung traces to the colours named by Heraclitus, it stands between the whitening and the reddening: blackening, whitening, yellowing, reddening. Jung uses the word in five places in his running text, across three volumes, and in none of them gives it a passage of its own.",
-        "Jung says the scheme was later reduced to three colours, black, white and red, and that the yellowing then fell out of use. He gives a general reason for the reduction, the symbolism of the quaternity and the trinity, and no reason that singles out yellow. He also gives two accounts of the way to the reddening: one through the yellowing, and one in which the reddening follows directly from the whitening. The text does not reconcile them. In the field the yellow appears in a Maier passage that places the air-soul in solar yellow, and in a dream commentary where it coincides with the reddening."
+        "Jung gives the four stages as melanosis, leukosis, xanthosis and iosis, after the colours mentioned in Heraclitus (CW12 ¶333). He writes that the transition to the rubedo is formed by the citrinitas (CW12 ¶334)."
       ]
     },
     "aries": {
@@ -1740,10 +1738,10 @@
       "aliases": [
         "the Ram"
       ],
-      "oneLine": "Burt's Aries: the solar hero of outward drive, seeking a separate identity.",
+      "oneLine": "Burt's Aries: the Age of the Ram, Mars and the Hero; the search for a separate identity.",
       "body": [
-        "In Kathleen Burt's Archetypes of the Zodiac (1988), Aries is the first sign and the Age of the Ram, a solar, masculine age of Mars and the hero. Burt places it as Cardinal Fire, the sign of outward drive and Logos, with Mars as its mundane ruler and Mercury as its esoteric one. Its polarity is Libra.",
-        "Burt's chapter treats the sign as the search for a separate identity, the energy that wants to go and do. She also describes its unbalanced form, the battering ram who is not aware of others' feelings, and the task of tempering Logos with Eros. Jung's ram passages sit on the page, not in this summary."
+        "Burt's chapter on Aries is titled The Search for a Separate Identity (pdf p23).",
+        "Burt writes that the Age of Aries is the Age of the Ram, of Mars and of the Hero (pdf p23), and that Aries is outward drive and Logos (pdf p25)."
       ]
     },
     "taurus": {
@@ -1753,10 +1751,10 @@
       "aliases": [
         "the Bull"
       ],
-      "oneLine": "Burt's Taurus: fixed earth, the bull and the goddess, the search for value and meaning.",
+      "oneLine": "Burt's Taurus: Fixed Earth, the bull and the goddess; the search for value and meaning.",
       "body": [
-        "Burt's account (1988) places Taurus as the first of the Fixed signs, Fixed Earth, and gives its symbols as the bull, the goddess and the Buddha. Its mundane ruler is Venus and its esoteric ruler Vulcan, and the Moon is exalted in the sign. Its polarity is Scorpio.",
-        "Burt describes the Taurean as passive, patient and placid, with a fertile, sensual nature. She places the sign's shadow in inertia that Vulcan breaks from within. Jung's seminar reads the bull as the great push of nature, and his writing on the Mithraic bull-sacrifice is placed on the page."
+        "Burt's chapter on Taurus is titled The Search for Value and Meaning (pdf p59).",
+        "Burt gives the bull, the goddess and the Buddha as symbols for the Age of Taurus, and Venus/Aphrodite as mundane ruler and Vulcan/Hephaestus as esoteric ruler (pdf p59)."
       ]
     },
     "gemini": {
@@ -1766,10 +1764,10 @@
       "aliases": [
         "the Twins"
       ],
-      "oneLine": "Burt's Gemini: mutable air, Hermes the messenger, the search for variety.",
+      "oneLine": "Burt's Gemini: Mutable Air, ruled by Mercury/Hermes; the search for variety.",
       "body": [
-        "Burt's account places Gemini as Mutable Air, the sign of observation, analysis and classification, ruled by Mercury, whom she calls Hermes. Hermes is the guide between three worlds and the messenger who brings people together, and in her words forever young. Its polarity is Sagittarius.",
-        "Burt calls Gemini the most versatile of the archetypes and a sign that stands at a crossroads looking for a guide. She sets its Hermes beside the puer, the eternal youth. Jung's seminar gives the twins as the fertility of man, and he compares the sign's pair to the Dioscuri, one sun mortal and one immortal."
+        "Burt's chapter on Gemini is titled The Search for Variety (pdf p95).",
+        "Burt calls Gemini Mutable Air, which represents observation, analysis, rational classification of data and objectivity (pdf p98), and the most versatile archetype (pdf p115)."
       ]
     },
     "cancer": {
@@ -1779,10 +1777,10 @@
       "aliases": [
         "the Crab"
       ],
-      "oneLine": "Burt's Cancer: the Cosmic Womb, the first Water sign, the search for the Mother Goddess.",
+      "oneLine": "Burt's Cancer: the Cosmic Womb, the first Water sign; the search for the Mother Goddess.",
       "body": [
-        "Burt's account (1988) places Cancer as the first Water sign and the Cosmic Womb, where creativity grows before it is born. She calls it a cardinal sign, ruled by the Moon, which she describes as the giver of form. Its polarity is Capricorn.",
-        "Burt identifies the archetype of Cancer with Jung's Magna Mater, the most ancient personal form of the divine, and places the sign's shadow in attachment to the past, to home and hearth. Jung names Cancer only in passing: a seminar image of the crab walking backward as the sun descends, and one list of the cardinal signs as the four seasons of the sun."
+        "Burt's chapter on Cancer is titled The Search for the Mother Goddess (pdf p135).",
+        "Burt calls Cancer the Cosmic Womb and the first Water sign (pdf p135), and names the Moon as Cancer's ruler, the Giver of Form (pdf p136)."
       ]
     },
     "leo": {
@@ -1792,10 +1790,10 @@
       "aliases": [
         "the Lion"
       ],
-      "oneLine": "Burt's Leo: fixed fire and the solar principle, the search for being and wholeness.",
+      "oneLine": "Burt's Leo: the solar, Masculine principle; the search for being and wholeness.",
       "body": [
-        "Burt's account places Leo as the solar, masculine principle after the lunar Cancer: Fixed Fire, in which the Sun rules both mundanely and esoterically. She describes a constancy that seems to come from the Sun's orbit, and the loyalty of the Fixed sign. Its polarity is Aquarius.",
-        "Burt's Leo myths are solar, about kingship and the reconquest of the throne. The sign's shadow appears when the outer world confronts Leo with a dark side it has not owned. Jung's seminar says the lion is named for the sun at its height, not for the animal's look."
+        "Burt's chapter on Leo is titled The Search for Being and Wholeness (pdf p175).",
+        "Burt writes that in Leo we arrive at the solar, or Masculine principle (pdf p175), with the sun as mundane and esoteric ruler (pdf p178)."
       ]
     },
     "virgo": {
@@ -1805,10 +1803,10 @@
       "aliases": [
         "the Virgin"
       ],
-      "oneLine": "Burt's Virgo: mutable earth, Hermes the healer, the search for meaningful service.",
+      "oneLine": "Burt's Virgo: an Earth sign ruled by Hermes; the search for meaningful service.",
       "body": [
-        "Burt's account places Virgo as Mutable Earth, ruled at the mundane level by Mercury, Hermes, and at the esoteric level by the Moon. In this sign Hermes appears as healer and alchemist, grounded, patient and steadier than in Gemini. Its polarity is Pisces.",
-        "Burt describes the sign's purity as openness and receptivity to life, not as bodily intactness, and places its work in the sixth house. Jung's seminar takes the virgin as the figure who tames the roaring Leo lion, and places Virgo as the autumnal sign in the age of Pisces."
+        "Burt's chapter on Virgo is titled The Search for Meaningful Service (pdf p211).",
+        "Burt writes that Hermes rules the Earth sign Virgo (pdf p211) and that its esoteric ruler is the Moon (pdf p236)."
       ]
     },
     "libra": {
@@ -1818,10 +1816,10 @@
       "aliases": [
         "the Scales"
       ],
-      "oneLine": "Burt's Libra: cardinal air, ruled by Venus, the search for the soul mate.",
+      "oneLine": "Burt's Libra: the seventh sign, the second Air sign; the search for the soul mate.",
       "body": [
-        "Burt places Libra as the seventh sign, the second Air sign and the third Cardinal sign. Its mundane ruler is Venus as Aphrodite, goddess of love, aesthetics and good taste, who lives in air but is in her nature a feeling goddess. Its polarity is Aries.",
-        "Burt follows the sign into partnership and projection: the anima as the man's inner feminine, projected onto women, and the animus as the woman's inner masculine. Jung's seminar calls Libra the balance that follows the virgin, and the only sign that is an instrument, the scales."
+        "Burt's chapter on Libra is titled The Search for the Soul Mate (pdf p253).",
+        "Burt calls Libra the seventh sign, the second Air sign and the third Cardinal sign (pdf p253), and writes of Aphrodite, Goddess of Love, aesthetics and civilized good taste (pdf p253)."
       ]
     },
     "scorpio": {
@@ -1831,10 +1829,10 @@
       "aliases": [
         "the Scorpion"
       ],
-      "oneLine": "Burt's Scorpio: fixed water, the descent to the underworld, the search for transformation.",
+      "oneLine": "Burt's Scorpio: mundane rulers Mars and Pluto; the search for the transformation.",
       "body": [
-        "Burt places Scorpio after Libra's balanced air as the descent into the underworld and the Eighth House of death and rebirth. Its mundane rulers are Mars and Pluto, and she reports Alice Bailey's view that Mars is the esoteric ruler. The sign's work is to transform and refine form, and its emblem is the uroboros. Its polarity is Taurus.",
-        "Burt sets Taurus's structured earth against Scorpio's amorphous energy, and describes the depths of the sign as an unconscious carrying instinctual drives and attachments from past lives. Jung's seminar reads the sign as the sun's fatal self-sacrifice, and the scorpion that kills itself when fire surrounds it."
+        "Burt's chapter on Scorpio is titled The Search for the Transformation (pdf p295).",
+        "Burt names Mars and Pluto as the mundane rulers of Scorpio (pdf p295), and writes that Scorpio's work is to transform, to change and refine the form (pdf p301)."
       ]
     },
     "sagittarius": {
@@ -1845,10 +1843,10 @@
         "the Archer",
         "the Centaur"
       ],
-      "oneLine": "Burt's Sagittarius: mutable fire, Zeus's sign, the search for wisdom and the Sage.",
+      "oneLine": "Burt's Sagittarius: a solar Fire sign, ruled by Zeus or Jupiter; the search for wisdom.",
       "body": [
-        "Burt places Sagittarius as a solar, Mutable Fire sign after the depths of Scorpio. Its ruler is Jupiter, Zeus to the Greeks, and its traditional character is Spirit, expansion of awareness and the power to fire others up. Its polarity is Gemini.",
-        "Burt's myth for the sign is Chiron the centaur, the sage who gives generously and cannot heal his own wound, and she names the shadow as the Fire temper inside a Mutable nature. Jung's seminar gives the archer whose arrow of intuition foresees a new birth out of the unconscious."
+        "Burt's chapter on Sagittarius is titled The Search for Wisdom (pdf p339).",
+        "Burt writes that Zeus, or Jupiter, is the ruler of Sagittarius (pdf p339), and that astrologers have associated the sign with Spirit and expansion of awareness (pdf p339)."
       ]
     },
     "capricorn": {
@@ -1858,10 +1856,10 @@
       "aliases": [
         "the Goat"
       ],
-      "oneLine": "Burt's Capricorn: earth and time, Saturn's sign, the search for dharma.",
+      "oneLine": "Burt's Capricorn: time, Chronus or Saturn; the search for dharma.",
       "body": [
-        "Burt places Capricorn as Earth at the winter solstice, the Death Gate of the wheel, opposite the Cancer womb. She treats the archetype as the whole of time, from the aeons down to a single lifespan, with Chronus, Saturn, as Father Time. Its polarity is Cancer, and Saturn with Jupiter are the rulers of Capricorn and Sagittarius in her account.",
-        "Burt separates the senex, the rigid Saturnian form, from the Wise Old Man that Saturn can be, and names the sign's aim as the soul's journey toward freedom, which she calls dharma. Jung's writing on the sun as a goat-fish, climbing the mountains and diving into the sea, is placed on the page."
+        "Burt's chapter on Capricorn is titled The Search for Dharma (pdf p379).",
+        "Burt writes that the Capricorn archetype includes every concept, sense and meaning of time (pdf p381), and describes Chronus, or Saturn, as Father Time (pdf p379)."
       ]
     },
     "aquarius": {
@@ -1871,10 +1869,10 @@
       "aliases": [
         "the Water Carrier"
       ],
-      "oneLine": "Burt's Aquarius: fixed air, the Grail seeker and the question that must be asked.",
+      "oneLine": "Burt's Aquarius: the last Fixed sign, an Air sign; the search for the Holy Grail.",
       "body": [
-        "Burt places Aquarius as the last of the four Fixed signs and an Air sign with a mental approach. Its mundane rulers are Saturn and Uranus, and symbolically it is the ideal man, an angel and messenger who has freed himself from the orbits of Saturn and Jupiter. Its polarity is Leo.",
-        "Burt builds the sign on the Grail legend: the question the seeker must ask at the right time, and the harm that follows when he forgets to ask it. The Perfect Knight of the story is the figure who must heal the King. The page gives Jung's water-carrier image and his precession passage, and leaves his forecasts of the coming aeon unquoted."
+        "Burt's chapter on Aquarius is titled The Search for the Holy Grail (pdf p447).",
+        "Burt calls Aquarius the last of the four Fixed signs and an Air sign with a mental approach to life (pdf p447), and links it to the question central to the Grail Quest (pdf p450)."
       ]
     },
     "pisces": {
@@ -1884,15 +1882,15 @@
       "aliases": [
         "the Fishes"
       ],
-      "oneLine": "Burt's Pisces: mutable water, the last sign, the search for the castle of peace.",
+      "oneLine": "Burt's Pisces: Mutable Water, the cosmic ocean; the search for the castle of peace.",
       "body": [
-        "Burt places Pisces as the last of the four Mutable signs, Mutable Water, and as the cosmic ocean of infinity. Its spiritual task is to dissolve attachment without losing compassion. Its polarity is Virgo. She notes that the modern glyph shows two fish, though many cultures used the dolphin, sacred to Apollo, Poseidon and Dionysius.",
-        "Burt's shadow for the sign is what she calls Piscean absolutism, and her myth is Dionysius as the Divine Child, whom Hera resolved to destroy. Jung's Aion passages place the aeon of the Fishes as the synchronistic counterpart of two thousand years of Christian development, and read Christ as the first fish of that aeon."
+        "Burt's chapter on Pisces is titled The Search for the Castle of Peace (pdf p509).",
+        "Burt calls Pisces the last of the four Mutable signs, Mutable Water (pdf p509), and the cosmic ocean of infinity (pdf p509)."
       ]
     },
     "thoth-tarot": {
       "name": "The Thoth Tarot",
-      "oneLine": "Crowley's Tarot: a pictorial map of the Universe, drawn from the Holy Qabalah.",
+      "oneLine": "Crowley's Tarot: a pictorial representation of the Forces of Nature (pdf p29).",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
@@ -1900,13 +1898,12 @@
         "Egyptian Tarot"
       ],
       "body": [
-        "The Thoth Tarot is the pack described in Aleister Crowley's book The Book of Thoth. Crowley calls the Tarot a pictorial representation of the Forces of Nature, and an admirable symbolic picture of the Universe built on the data of the Holy Qabalah. He says the pack's arrangement follows from the structure of the Universe and of the Solar System, as the Holy Qabalah symbolises them.",
-        "Everything in this family and its children is Crowley's account. Jung does not write about the pack, and no claim on these pages is presented as Jung's word."
+        "Crowley calls the Tarot a pictorial representation of the Forces of Nature (pdf p29) and an admirable symbolic picture of the Universe, based on the data of the Holy Qabalah (pdf p13)."
       ]
     },
     "thoth-major-arcana": {
       "name": "The Major Arcana",
-      "oneLine": "The twenty-two trumps: the Hebrew letters set on the Paths of the Tree of Life.",
+      "oneLine": "Crowley's twenty-two Trumps, referred to the twenty-two Paths of the Tree of Life.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
@@ -1914,66 +1911,59 @@
         "Atu"
       ],
       "body": [
-        "The major arcana, which Crowley calls the trumps, are twenty-two cards. He refers them to the twenty-two letters of the Hebrew alphabet and to the twenty-two Paths that join the ten numbers of the Tree of Life. The trumps represent the elements between the Sephiroth, so their place on the Tree is significant.",
-        "Read in order, from the Fool to the Universe, the series runs from the negative issuing into manifestation to the manifestation ready to return. The individual trumps are described separately, each with its own letter and attribution."
+        "Crowley says the twenty-two Trumps refer to the twenty-two Paths (pdf p261), and that one letter of the Hebrew alphabet goes to each path (pdf p36)."
       ]
     },
     "thoth-minor-arcana": {
       "name": "The Minor Arcana",
-      "oneLine": "Fifty-six cards in four suits: forty small cards from Ace to Ten, and sixteen courts.",
+      "oneLine": "Crowley's small cards: forty, numbered one to ten, in four suits by the four elements.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "the small cards",
         "the suits"
       ],
-      "body": [
-        "Crowley says the ten numbers are represented in the Tarot by the forty small cards, and that the small cards numbered one to ten are divided into four suits by the four elements. Each suit holds ten small cards and four courts, a Knight, Queen, Prince and Princess.",
-        "Each number carries a significance of its own, and Crowley says each corresponds with all phenomena. The planetary attributions of the small cards differ card by card. For the Tens, Crowley's text says there is now no planetary attribution to consider, yet single Tens are still given a planet in sign: the field keeps that conflict on the page rather than resolving it."
-      ]
+      "body": []
     },
     "thoth-wands": {
       "name": "Wands",
-      "oneLine": "The suit of Fire in the Thoth Tarot: attributed to Aries, with the Yod of the Name.",
+      "oneLine": "Crowley's Wands: Fire (pdf p24) and Aries (pdf p35); the flames of the Ace are Yods.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "the suit of Fire"
       ],
       "body": [
-        "Wands is the suit Crowley attributes to Fire. He gives it the sign Aries and describes its energy as swift violence of onset, the lightning flash. The Ace of Wands shows flames that are Yods, arranged in the form of the Tree of Life, and Crowley calls it the root of the powers of Fire.",
-        "The suit's letter is given in the Ace's text, not as a statement about the suit. It does not match the general account, which gives Fire the letter Shin. The page keeps both, because Crowley does not reconcile them."
+        "Crowley says Wands has the attribution of Aries, and represents swift violence of onset, the lightning flash (pdf p35). He says the flames of the Ace of Wands are Yods, arranged in the form of the Tree of Life (pdf p183)."
       ]
     },
     "thoth-cups": {
       "name": "Cups",
-      "oneLine": "The suit of Water in the Thoth Tarot: the feminine complement of Wands, the Holy Grail.",
+      "oneLine": "Crowley's Cups: Water (pdf p24); the Ace is the essential form of the Holy Grail.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "the suit of Water"
       ],
       "body": [
-        "Cups is the suit Crowley attributes to Water. He calls its Ace the feminine complement of the Ace of Wands, derived from the Yoni and the Moon, and the essential form of the Holy Grail. The Ace shows lotuses on the dark sea of Binah, the Great Mother.",
-        "The Ace of Cups names no Hebrew letter for the suit. Crowley's general account gives Mem among the three Mother letters, Shin, Mem and Aleph, for the Fire, Water and Air series, and his Hanged Man card states Mem for Water in its own text. The suit itself carries no letter."
+        "Crowley calls the Ace of Cups the feminine complement of the Ace of Wands, derived from the Yoni and the Moon (pdf p196). He says that upon the dark sea of Binah, the Great Mother, are Lotuses (pdf p196)."
       ]
     },
     "thoth-swords": {
       "name": "Swords",
-      "oneLine": "The suit of Air in the Thoth Tarot: the wind, and the Vau of the Name in its Ace.",
+      "oneLine": "Crowley's Swords: Air (pdf p24); the Ace is the Essence of the Vau of Tetragrammaton.",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
         "the suit of Air"
       ],
       "body": [
-        "Swords is the suit Crowley attributes to Air. He says Air is the result of the conjunction of Fire and Water, and that the obvious symbol of Air is the wind. The Ace of Swords is, in his words, the primordial energy of Air, the essence of the Vau of Tetragrammaton.",
-        "The letter Vau is given in the Ace's text. The general account gives Air the letter Aleph, and the courts give the Princes Vau. The field keeps the three statements apart, since Crowley does not set them against one another in the suit."
+        "Crowley says Air is the result of the conjunction of Fire and Water, and that in nature the obvious symbol of Air is the Wind (pdf p210). He says the Princes represent the Forces of the letter Vau in the Name (pdf p139)."
       ]
     },
     "thoth-disks": {
       "name": "Disks",
-      "oneLine": "The suit of Earth in the Thoth Tarot: a whirling disk, and Hé final, the Daughter.",
+      "oneLine": "Crowley's Disks: Earth (pdf p24); the Disk is a whirling emblem, not a Coin (pdf p225).",
       "subtype": "object",
       "synthesised": true,
       "aliases": [
@@ -1982,8 +1972,7 @@
         "the suit of Earth"
       ],
       "body": [
-        "Disks is the suit Crowley attributes to Earth. He says the Disks are no longer to be taken as coins: the Disk is a whirling emblem, and the old conception of Earth as a passive, immobile, even dead element had to go. The Ace gives Earth the letter Hé final, the Daughter, set upon the throne of the Mother.",
-        "Crowley's general account gives Earth the letter Tau, the fourth element that crystallises out of the three. The Universe card, which he gives Tau, is the card on which earth is thrust upon the symbol. The Ace of Disks gives Hé final, so the page keeps the two letters as Crowley's separate statements."
+        "Crowley says the Disks are no longer to be considered as Coins, and that the Disk is a whirling emblem (pdf p225). He writes that the Earthy component, Hé final, the Daughter, is set upon the Throne of the Mother (pdf p225)."
       ]
     },
     "thoth-knight-of-wands": {
@@ -1991,160 +1980,112 @@
       "oneLine": "The fiery part of Fire, Yodh of the Name; span Scorpio to Sagittarius (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Knight of Wands is the court of the Wands suit and the powers of the letter Yodh in the Name. He gives the Knight the fiery part of Fire. The four courts of the Wands are each a part of Fire: fiery, watery, airy and earthy.",
-        "Crowley gives the Knight his span from the 21st degree of Scorpio to the 20th of Sagittarius. The attribution table gives 20 degrees at both ends, and the page follows the text. His moral qualities, in Crowley's list, are activity, generosity, fierceness, impetuosity and pride."
-      ]
+      "body": []
     },
     "thoth-queen-of-wands": {
       "name": "Queen of Wands",
       "oneLine": "The watery part of Fire, Hé of the Name; span Pisces to Aries (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Queen of Wands is the Hé of the Name and the watery part of Fire, its fluidity and colour. She is one of the four Wands courts, each a part of Fire.",
-        "Crowley gives her span as the 21st degree of Pisces to the 20th of Aries; the table gives 20 degrees at both ends. Her characteristics, in his account, are adaptability, persistent energy and calm authority."
-      ]
+      "body": []
     },
     "thoth-prince-of-wands": {
       "name": "Prince of Wands",
       "oneLine": "The airy part of Fire, Vau of the Name; span Cancer to Leo (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Prince of Wands is the Vau of the Name, the Forces of that letter, and the airy part of Fire, with its faculty of expanding and volatilising.",
-        "He rules from the 21st degree of Cancer to the 20th of Leo in the text; the table gives 20 degrees at both ends. Crowley names his moral qualities as swiftness and strength."
-      ]
+      "body": []
     },
     "thoth-princess-of-wands": {
       "name": "Princess of Wands",
-      "oneLine": "The earthy part of Fire, final Hé of the Name; one quadrant about the North Pole, no sign.",
+      "oneLine": "The earthy part of Fire, final Hé of the Name; a quadrant about the North Pole (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Princess of Wands is the final Hé of the Name and the earthy part of Fire, which he calls the fuel of Fire.",
-        "Princesses have no zodiacal attribution in Crowley's account. He gives this princess one quadrant of the heavens around the North Pole, and the attribution table gives the same. Crowley describes her character as extremely individual."
-      ]
+      "body": []
     },
     "thoth-knight-of-cups": {
       "name": "Knight of Cups",
       "oneLine": "The fiery part of Water, Yodh of the Name; span Aquarius to Pisces (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Knight of Cups is the Yodh of the Name in the Cups, the fiery part of Water: the swift passionate attack of rain and springs, and Water's power of solution.",
-        "The text gives his span as the 21st degree of Aquarius to the 20th of Pisces; the table gives 20 degrees at both ends. Crowley says his character is mostly passive, in accordance with the zodiacal attribution: graceful, a dilettante, with the qualities of Venus or a weak Jupiter."
-      ]
+      "body": []
     },
     "thoth-queen-of-cups": {
       "name": "Queen of Cups",
       "oneLine": "The watery part of Water, Hé of the Name; span Gemini to Cancer (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Queen of Cups is the Hé of the Name and the watery part of Water, its power of reception and reflection.",
-        "The text gives her span as the 21st degree of Gemini to the 20th of Cancer; the table gives 20 degrees at both ends. Crowley says she is the perfect agent and patient, able to receive and transmit everything without being affected thereby."
-      ]
+      "body": []
     },
     "thoth-prince-of-cups": {
       "name": "Prince of Cups",
       "oneLine": "The airy part of Water, Vau of the Name; span Libra to Scorpio (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Prince of Cups is the Vau of the Name and the airy part of Water.",
-        "He rules from the 21st degree of Libra to the 20th of Scorpio in the text; the table gives 20 degrees at both ends. Crowley gives his moral characteristics as subtlety, secret violence and craft."
-      ]
+      "body": []
     },
     "thoth-princess-of-cups": {
       "name": "Princess of Cups",
-      "oneLine": "The earthy part of Water, final Hé of the Name; no zodiacal attribution in Crowley's text.",
+      "oneLine": "The earthy part of Water, final Hé of the Name; no zodiacal attribution (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Princess of Cups is the final Hé of the Name and the earthy part of Water, in particular its faculty of crystallization.",
-        "Crowley says the Princesses have no zodiacal attribution. The attribution table gives this princess a quadrant of the heavens, which the text does not name. He calls her character infinitely gracious."
-      ]
+      "body": []
     },
     "thoth-knight-of-swords": {
       "name": "Knight of Swords",
       "oneLine": "The fiery part of Air, Yodh of the Name; span Taurus to Gemini (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Knight of Swords is the Yodh of the Name and the fiery part of Air. He is the wind and the storm.",
-        "The text gives his span as the 21st degree of Taurus to the 20th of Gemini; the table gives 20 degrees at both ends. Crowley names his moral qualities as activity and skill, subtlety and cleverness."
-      ]
+      "body": []
     },
     "thoth-queen-of-swords": {
       "name": "Queen of Swords",
       "oneLine": "The watery part of Air, Hé of the Name; span Virgo to Libra (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Queen of Swords is the Hé of the Name and the watery part of Air: the elasticity of that element and its power of transmission.",
-        "She rules from the 21st degree of Virgo to the 20th of Libra in the text; the table gives 20 degrees at both ends. Crowley describes the figure as intensely perceptive, a keen observer and a subtle interpreter."
-      ]
+      "body": []
     },
     "thoth-prince-of-swords": {
       "name": "Prince of Swords",
       "oneLine": "The airy part of Air, Vau of the Name; span Capricorn to Aquarius (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Prince of Swords is the Vau of the Name and the airy part of Air.",
-        "The text gives his span as the 21st degree of Capricornus to the 20th of Aquarius; the table gives 20 degrees at both ends. Crowley says the person thus symbolized is purely intellectual."
-      ]
+      "body": []
     },
     "thoth-princess-of-swords": {
       "name": "Princess of Swords",
-      "oneLine": "The earthy part of Air, final Hé of the Name; no zodiacal attribution in Crowley's text.",
+      "oneLine": "The earthy part of Air, final Hé of the Name; no zodiacal attribution (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Princess of Swords is the final Hé of the Name and the earthy part of Air: the fixation of the volatile.",
-        "Crowley says the Princesses have no zodiacal attribution. The attribution table names a further quadrant of the heavens for her, which the text does not. Her character, he writes, is stern and revengeful, and she brings about the materialization of Idea."
-      ]
+      "body": []
     },
     "thoth-knight-of-disks": {
       "name": "Knight of Disks",
       "oneLine": "The fiery part of Earth, Yodh of the Name; span Leo to Virgo (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Knight of Disks is the Yodh of the Name and the fiery part of Earth, which he says refers in particular to mountains, earthquakes and gravitation.",
-        "The text gives his span as the 21st degree of Leo to the 20th of Virgo; the table gives 20 degrees at both ends. Crowley describes the type he symbolizes as dull, heavy and preoccupied with material things."
-      ]
+      "body": []
     },
     "thoth-queen-of-disks": {
       "name": "Queen of Disks",
       "oneLine": "The watery part of Earth, Hé of the Name; span Sagittarius to Capricorn (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Queen of Disks is the Hé of the Name and the watery part of Earth, the function of that element as Mother.",
-        "She rules from the 21st degree of Sagittarius to the 20th of Capricornus in the text; the table gives 20 degrees at both ends. Crowley says she represents passivity, usually in its highest aspect."
-      ]
+      "body": []
     },
     "thoth-prince-of-disks": {
       "name": "Prince of Disks",
       "oneLine": "The airy part of Earth, Vau of the Name; span Aries to Taurus (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Prince of Disks is the Vau of the Name and the airy part of Earth, indicating the florescence and fructification of that element.",
-        "The text gives his span as the 21st degree of Aries to the 20th of Taurus; the table gives 20 degrees at both ends. His character, in Crowley's account, is great energy brought to bear upon the most solid of practical matters."
-      ]
+      "body": []
     },
     "thoth-princess-of-disks": {
       "name": "Princess of Disks",
-      "oneLine": "The earthy part of Earth, final Hé of the Name; no zodiacal attribution in Crowley's text.",
+      "oneLine": "The earthy part of Earth, final Hé of the Name; no zodiacal attribution (Crowley).",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Princess of Disks, the last of the court cards, is the final Hé of the Name and the earthy part of Earth.",
-        "Crowley says the Princesses have no zodiacal attribution. The attribution table gives her a fourth quadrant of the heavens about Kether, which the text does not name. He calls her Womanhood in its ultimate projection."
-      ]
+      "body": []
     },
     "thoth-fool": {
       "name": "Atu 0 · The Fool",
@@ -2152,8 +2093,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley numbers the Fool zero and places it above the Tree of Life as the negative, the source of all things. He attributes it to the letter Aleph, which he gives as an ox and, by its shape, a plough-share, and to Air, which in this card he says means a vacuum. He calls the card the equation of the Universe, the first and last balance of the opposites.",
-        "On Crowley's account the card's path runs from the Crown (Kether) to Wisdom (Chokmah). His appendix calls that route the Path of the Pure Fool. The Key Scale numbers the path 11. Crowley also calls the Universe, Atu XXI, the Fool's manifestation brought to its purpose."
+        "Crowley says the number of the card should be 0, and that it represents the Negative above the Tree of Life, the source of all things (pdf p46). He attributes it to the letter Aleph, which means an Ox (pdf p46), and calls the path of Aleph the Path of the Pure Fool (pdf p116)."
       ]
     },
     "thoth-magus": {
@@ -2162,18 +2102,16 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes the card to the letter Beth, which means a house, and to the planet Mercury. He takes it to represent the Wisdom, the Will, the Word and the Logos by whom the worlds were created, and he says Mercury stands for action in all its forms and phases. His chapter is headed The Juggler; the Key Scale prints The Magus. The attribution is the same under either name.",
-        "Its path runs from Kether to Binah, and Crowley names Mercury as that path. He stresses the creative and dualistic character of the path of Beth. The Key Scale numbers the path 12."
+        "Crowley says the card is referred to the letter Beth, which means a house, and is attributed to the planet Mercury (pdf p58). He says it represents the Wisdom, the Will, the Word, the Logos by whom the worlds were created (pdf p58)."
       ]
     },
     "thoth-priestess": {
       "name": "Atu II · The Priestess",
-      "oneLine": "Crowley's Atu II: the Moon and the letter Gimel, the path that joins Kether to Tiphareth.",
+      "oneLine": "Crowley's Atu II: the Moon, the letter Gimel, the card joining number 1 to number 6.",
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to the letter Gimel, which means a camel, and to the Moon. He calls the Moon the general feminine symbol, the second-order counterpart of the Sun, universal and reaching from the highest to the lowest. He identifies the figure with the most spiritual form of Isis the Eternal Virgin, and with Artemis of the Greeks.",
-        "Her path, in his diagram, connects the Father in his highest aspect with the Son in his most perfect manifestation. The Ace of Swords chapter names that path, the Path of Gimel, as the way influence descends from Kether to Tiphareth. The Key Scale numbers it 13."
+        "Crowley says the card is referred to the letter Gimel, which means a Camel, and to the Moon (pdf p61). He describes it as the card joining the number 1 to the number 6 (pdf p27)."
       ]
     },
     "thoth-empress": {
@@ -2182,8 +2120,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes the card to the letter Daleth, which means a door, and to the planet Venus. He states the doctrine the card implies: the fundamental formula of the Universe is Love. He says the Empress combines the highest spiritual with the lowest material qualities.",
-        "Daleth is, in his account, the path from Chokmah to Binah, uniting the Father with the Mother. The Key Scale numbers the path 14."
+        "Crowley says the card is attributed to the letter Daleth, which means a door, and refers to the planet Venus (pdf p64). He says the doctrine implied is that the fundamental formula of the Universe is Love (pdf p64)."
       ]
     },
     "thoth-emperor": {
@@ -2192,8 +2129,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to the letter Tzaddi and to the sign Aries, which he says is ruled by Mars and in which the Sun is exalted. He describes a crowned male figure whose power is sudden, violent and impermanent activity. He reads the card's authority as derived from Chokmah, the creative Wisdom, and exerted upon Tiphareth, the organized man.",
-        "The card's place on the Tree is contested within Crowley's own text. The Emperor chapter gives the path from Chokmah to Tiphareth. The Ace of Swords chapter gives those same two ends to the Path of Hé, the Star. The Key Scale numbers the Emperor's path 28. This site leaves the conflict open."
+        "Crowley says the card is attributed to the letter Tzaddi and refers to the sign of Aries, ruled by Mars, in which the Sun is exalted (pdf p66). He says its authority is derived from Chokmah, the creative Wisdom, and is exerted upon Tiphareth, the organized man (pdf p67)."
       ]
     },
     "thoth-hierophant": {
@@ -2202,18 +2138,16 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to the letter Vau, which means a nail, and to the sign Taurus. He calls its main reference the arcanum at the centre of all magical work, the uniting of the microcosm with the macrocosm. He also calls it the aeon of Horus, of the Child.",
-        "The text names no ends for this card's path. The Key Scale numbers the path 16. The Chariot chapter says the Hierophant, on the other side of the Tree, brings down the fire of Chokmah. That is a statement about the Tree, not a path between two sephiroth, and this site does not draw it as one."
+        "Crowley says the card is referred to the letter Vau, which means a Nail, and to Taurus (pdf p68). He gives its main reference as the uniting of the microcosm with the macrocosm (pdf p68), and calls it the aeon of Horus, of the Child (pdf p69)."
       ]
     },
     "thoth-lovers": {
       "name": "Atu VI · The Lovers",
-      "oneLine": "Crowley's Atu VI: Gemini under Mercury, the letter Zain (sword), the path from Binah.",
+      "oneLine": "Crowley's Atu VI: Gemini under Mercury, the letter Zain (sword), from Binah to Tiphareth.",
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to Gemini, ruled by Mercury, and to the letter Zain, which means a sword. He calls it the first card in which more than one figure appears, and gives its subject as analysis followed by synthesis. His list of titles gives The Lovers, or The Brothers; the chapter also gives The Twins as the meaning of Gemini.",
-        "Gemini leads from Binah to Tiphareth, and the Ace of Swords chapter names the same path of Zain as the way Tiphareth derives from Binah. The Key Scale numbers the path 17. Crowley says the Art card, Atu XIV, represents the consummation of the royal marriage that took place in this card."
+        "Crowley says Atu VI refers to Gemini, ruled by Mercury, and that the corresponding Hebrew letter is Zain, which means a Sword (pdf p70). He writes that Gemini leads from Binah to Tiphareth (pdf p72) and that the subject of the card is Analysis, followed by Synthesis (pdf p71)."
       ]
     },
     "thoth-chariot": {
@@ -2222,8 +2156,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to the sign Cancer, the sign the Sun enters at the summer solstice, and calls Cancer the cardinal sign of the element of Water. He names the letter Cheth only in a footnote on the number 418; the table gives Cheth as the letter. He says the figure's only function is to bear the Holy Grail.",
-        "Cancer is, for Crowley, the path leading from the great Mother Binah to Geburah. The Key Scale numbers the path 18. The text gives no other end for it."
+        "Crowley says Atu VII refers to the zodiacal sign of Cancer, the cardinal sign of the element of Water (pdf p74). He says Cancer represents the path which leads from the great Mother Binah to Geburah (pdf p74), and that the figure's only function is to bear the Holy Grail (pdf p75)."
       ]
     },
     "thoth-adjustment": {
@@ -2232,8 +2165,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "In the old pack the card was called Justice; Crowley retitles it Adjustment. He attributes it to Libra, ruled by Venus, in which Saturn is exalted, and says it symbolizes the equilibrium of all things. Nature, he holds, is not just by any theological or ethical standard but exact, and so scrupulously just.",
-        "He calls the card the feminine complement of the Fool, and says the letters Aleph and Lamed are the secret key of the Book of the Law. The letter Lamed comes from the table; the chapter reaches it only through the pair Aleph Lamed. The Key Scale numbers the path 22, and the text gives no path ends."
+        "Crowley says this card in the old pack was called Justice, and that it represents the sign of Libra, ruled by Venus, in which Saturn is exalted (pdf p76). He says the card is the feminine complement of the Fool, and that Nature is exact (pdf p76)."
       ]
     },
     "thoth-hermit": {
@@ -2242,8 +2174,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley refers the card to the letter Yod, which means the hand, and to the sign Virgo. Yod is the first letter of the Tetragrammaton and, for him, symbolizes the Father, who is Wisdom. He notes that Virgo is ruled by Mercury and that Mercury is exalted there.",
-        "He also calls the Father the highest form of Mercury and the Logos, the Creator of all. The Key Scale numbers the path 20. The text gives no path ends, so this site states no join on the Tree for the card."
+        "Crowley says the card is attributed to the letter Yod, which means the Hand (pdf p79), and to the sign of Virgo, ruled by Mercury, with Mercury exalted there (pdf p80). He says Yod symbolizes the Father, who is Wisdom (pdf p79)."
       ]
     },
     "thoth-fortune": {
@@ -2252,18 +2183,16 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes the card to the planet Jupiter, which he calls the Greater Fortune in astrology, and to the letter Kaph, which he reads as the palm of the hand. His footnote gives Kaph the value 20; the table prints the value as 20,500.",
-        "He says the card represents the Universe as a continual change of state, and that it would be narrow to read Jupiter as good fortune alone; Jupiter stands for the element of luck. The Key Scale numbers the path 21, and the text gives no path ends."
+        "Crowley says the card is attributed to the planet Jupiter, the Greater Fortune in astrology (pdf p81). He says the card represents the Universe in its aspect as a continual change of state, and that Jupiter represents the element of luck (pdf p81)."
       ]
     },
     "thoth-lust": {
       "name": "Atu XI · Lust",
-      "oneLine": "Crowley's Lust, the old Strength: the serpent Teth, the sign Leo, the Kerub of Fire.",
+      "oneLine": "Crowley's Atu XI, Lust: the letter Teth (a serpent), the sign Leo, the Kerub of Fire.",
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley titles Atu XI Lust. He gives the card the Hebrew letter Teth, which means a serpent, and the sign of Leo, which he says is ruled by the Sun; he calls the figure the Kerub of Fire. The table gives the card's Key Scale path as 19.",
-        "On the Tree, Crowley says the path is the influence from Chesed upon Geburah, not the Strength of Geburah. He describes the card as the act of the original marriage as it occurs in nature."
+        "Crowley says the Trump is assigned to the sign of Leo, and that the card is attributed to the letter Teth, which means a serpent (pdf p84). He writes that it is the Kerub of Fire, ruled by the Sun, and that it represents the act of the original marriage as it occurs in nature (pdf p84)."
       ]
     },
     "thoth-hanged-man": {
@@ -2272,8 +2201,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XII to the letter Mem and calls the card essentially a glyph of Water, since Mem is one of the three great Mother Letters. The table gives the element as Water and the Key Scale path as 23.",
-        "He says the Atu represents the sacrifice of a male child of perfect innocence and high intelligence, and calls the act a baptism which is also a death. His text names no ends for its path."
+        "Crowley says the card is attributed to the letter Mem and represents the element of Water (pdf p87), and that Mem is one of the three great Mother Letters (pdf p89). He says it is a baptism and a death (pdf p87)."
       ]
     },
     "thoth-death": {
@@ -2282,18 +2210,16 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XIII to the letter Nun, which means a fish, and to the zodiacal sign of Scorpio, which he says is ruled by Mars. He calls the card the dance of death, its figure a skeleton bearing a scythe.",
-        "On the Tree, Crowley says Atu XIII and Atu XV lead from Tiphareth to the spheres where Thought and Bliss are developed. His text does not name the far end of the path. He also reads the card as the symbol of life travelling through the waters."
+        "Crowley says the card is attributed to the letter Nun, which means a fish, and refers to the Zodiacal sign of Scorpio, which is ruled by Mars (pdf p90). He says the card represents the dance of death, the figure a skeleton bearing a scythe (pdf p91)."
       ]
     },
     "thoth-art": {
       "name": "Atu XIV · Art",
-      "oneLine": "Crowley's Art: the Arrow of directed Will, Sagittarius, the royal marriage consummated.",
+      "oneLine": "Crowley's Art: the Arrow of directed Will, Sagittarius, the path from Yesod to Tiphareth.",
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XIV to the sign of Sagittarius and calls the Arrow the simplest and purest glyph of Mercury, the symbol of directed Will. The letter Samekh comes from his attribution table alone; the chapter does not name it.",
-        "He gives the path as leading from the Moon of Yesod to the Sun of Tiphareth, and describes the card as the consummation of the royal marriage that took place in Atu VI."
+        "Crowley says the card pertains to Sagittarius, the opposite to Gemini in the Zodiac, and that its path leads from the Moon of Yesod to the Sun of Tiphareth (pdf p92). He calls the Arrow the simplest and purest glyph of Mercury, being the symbol of directed Will (pdf p94)."
       ]
     },
     "thoth-devil": {
@@ -2302,18 +2228,16 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XV to the letter Ayin, which means an eye, and to Capricornus, a sign he says is ruled by Saturn, who makes for selfhood and perpetuity. He names the figure Pan Pangenetor, the All-Begetter.",
-        "On the Tree, Atu XIII and XV are symmetrically placed and lead from Tiphareth. Crowley's text does not name the far end of the path. The table spells the letter A'ain."
+        "Crowley says the card is attributed to the letter Ayin, which means an Eye, and refers to Capricornus in the Zodiac (pdf p95). He says the sign is ruled by Saturn, who makes for selfhood and perpetuity, and that the card represents Pan Pangenetor, the All-Begetter (pdf p95)."
       ]
     },
     "thoth-tower": {
       "name": "Atu XVI · The Tower",
-      "oneLine": "Crowley's Tower: the letter Pe (a mouth), Mars, the destruction of matter by fire.",
+      "oneLine": "Crowley's Tower: the letter Pé (a mouth), Mars, destruction of existing material by fire.",
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XVI to the letter Pe, which means a mouth, and to the planet Mars. He describes the picture as the destruction of existing material by fire, and its dominating feature as the Eye of Horus.",
-        "In its simplest interpretation, he says, the card refers to the manifestation of cosmic energy in its grossest form. The text gives no ends for its path; the table gives Key Scale path 27."
+        "Crowley says the card is attributed to the letter Pé, which means a mouth, and refers to the planet Mars (pdf p98). He says the picture shows the destruction of existing material by fire, and that its dominating feature is the Eye of Horus (pdf p98, p99)."
       ]
     },
     "thoth-star": {
@@ -2322,8 +2246,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XVII to the letter He and to the zodiacal sign of Aquarius, the water-bearer. The picture represents Nuith, our Lady of the Stars, personified as a human-seeming figure; heaven, he says, is no more than a veil before the face of the immortal goddess.",
-        "Crowley also calls the Path of He the Great Mother, the Star, our Lady Nuit. The Key Scale numbers He path 15, which runs between Chokmah and Tiphareth on the Tree; the Emperor's chapter gives those same two ends in its own text, while the table gives the Emperor Tzaddi, path 28. The two statements are not reconciled here."
+        "Crowley says the card is attributed to the letter Hé and refers to the Zodiacal sign of Aquarius, the water-bearer (pdf p100). He says the picture represents Nuith, our Lady of the Stars (pdf p100), and that heaven itself is no more than a veil before the face of the immortal goddess (pdf p101)."
       ]
     },
     "thoth-moon": {
@@ -2332,8 +2255,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XVIII to the letter Qoph, which represents Pisces in the zodiac. He calls the Moon the most universal of the planets, partaking of the highest and the lowest and filling all the space between.",
-        "In this trump, which he calls her lowest avatar, the Moon joins the earthy sphere of Netzach with Malkuth. He reads the card as the threshold of life and the threshold of death."
+        "Crowley says the Eighteenth Trump is attributed to the letter Qoph, which represents Pisces in the Zodiac (pdf p103). He says that in this Trump, her lowest avatar, the Moon joins the earthy sphere of Netzach with Malkuth (pdf p103)."
       ]
     },
     "thoth-sun": {
@@ -2342,8 +2264,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley gives the card in heraldic language, the Sun charged with a rose, the mount vert beneath, and names its figure Heru-ra-ha, the Lord of the New Aeon, in his manifestation to men as the Sun spiritual, moral and physical.",
-        "He reads the rose as the flowering of the solar influence, and the card as a broadening of the idea of the Rose and Cross. His chapter does not attribute the card to the Sun in a sentence: the planet and the letter Resh come from the table alone."
+        "Crowley says the card represents, in heraldic language, the Sun, charged with a rose, and that it represents Heru-ra-ha, the Lord of the New Aeon (pdf p105). He says the rose represents the flowering of the solar influence (pdf p105)."
       ]
     },
     "thoth-aeon": {
@@ -2352,8 +2273,7 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley says the old card was called The Angel, or The Last Judgment, and that it showed the destruction of the world by Fire. The letter Shin, he writes, refers to Fire. The table's triangle glyph does not by itself separate Fire from Air, so the element rests on the text.",
-        "In the card, the child Horus is born as a result of the marriage of two figures, and the letter Shin appears at the bottom in a form suggestive of a flower. The text names no ends for its path; the table gives path 31 and has a second, unidentified Shin row."
+        "Crowley says the old card was called The Angel, or The Last Judgment, and that the letter Shin refers to Fire (pdf p107). He says the child Horus is born as a result of the marriage of two figures (pdf p107), and that the letter Shin appears at the bottom of the card in a form suggestive of a flower (pdf p108)."
       ]
     },
     "thoth-universe": {
@@ -2362,23 +2282,19 @@
       "subtype": "figure",
       "synthesised": true,
       "body": [
-        "Crowley attributes Atu XXI to the letter Tau and to Saturn, the outermost and slowest of the seven sacred planets. He calls the card the celebration of the Great Work accomplished. He also says the element of earth was thrust upon the symbol, and the table gives Earth as a second, unnumbered attribution.",
-        "On the Tree, the path of Tau appears as an emanation from the Moon of Yesod, and its influence descends upon the earth, Malkuth, the daughter. He reads the Universe as the manifestation of the Fool, its purpose accomplished and ready to return."
+        "Crowley says the letter Tau is attributed to Saturn, the outermost and slowest of the seven sacred planets, and that the element of earth was thrust upon the symbol (pdf p109). He says the Universe is the Celebration of the Great Work accomplished (pdf p110), and that the Universe is the manifestation of the Fool, its purpose accomplished, ready to return (pdf p110)."
       ]
     },
     "thoth-ace-of-wands": {
       "name": "Ace of Wands",
-      "oneLine": "The Root of the Powers of Fire: the suit’s root at Kether, with no planet-in-sign.",
+      "oneLine": "The Root of the Powers of Fire; it pertains to Kether (Crowley).",
       "subtype": "figure",
       "synthesised": true,
       "aliases": [
         "Root of the Powers of Fire",
         "Root of the Forces of Fire"
       ],
-      "body": [
-        "Crowley’s Ace of Wands opens the suit of Fire. He calls it the Root of the Powers of Fire and says it represents the element of Fire in its inception, a flame not yet formulated as Will. He places the card at Kether, the first sephira on the Tree.",
-        "The Aces stand apart from the small cards. Crowley treats them as the roots or seeds of the four elements rather than the elements in material form, and the Ace of Wands chapter gives no planet-in-sign."
-      ]
+      "body": []
     },
     "thoth-two-of-wands": {
       "name": "Two of Wands",
@@ -2388,10 +2304,7 @@
       "aliases": [
         "Lord of Dominion"
       ],
-      "body": [
-        "Crowley calls the Two of Wands the Lord of Dominion. He places it at Chokmah in the suit of Fire, the Will in its most exalted form, and gives its planet as Mars in its own sign Aries. The tree essay places the card in the first decan of Aries, ruled by Mars.",
-        "Its picture is two crossed dorjes, the Tibetan thunderbolt, which Crowley reads in its destructive more than its creative form. Because it is a Two, the idea is already in action rather than pure."
-      ]
+      "body": []
     },
     "thoth-three-of-wands": {
       "name": "Three of Wands",
@@ -2401,43 +2314,31 @@
       "aliases": [
         "Lord of Virtue"
       ],
-      "body": [
-        "Crowley calls the Three of Wands the Lord of Virtue. He refers it to Binah in the suit of Fire, where the Will has been handed to the Mother to be conceived and brought to birth, and to the Sun in Aries, the sign in which the Sun is exalted.",
-        "The image is a wand taking the form of a lotus in blossom. Crowley ties the card to the beginning of spring, when the Sun has enkindled the Great Mother."
-      ]
+      "body": []
     },
     "thoth-four-of-wands": {
       "name": "Four of Wands",
       "oneLine": "Completion: Venus in Aries, the Four at Chesed",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Four of Wands Completion. He refers it to Chesed in the suit of Fire, a sephira below the Abyss, and to Venus in Aries, which he takes to mean that work cannot be established without tact and gentleness.",
-        "The card shows the energy of the wands held within a circle, which Crowley reads as the completion and limitation of the original work. He says the limitation bears in itself the seeds of disorder."
-      ]
+      "body": []
     },
     "thoth-five-of-wands": {
       "name": "Five of Wands",
       "oneLine": "Strife: Saturn and Leo, the Five at Geburah",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Five of Wands Strife. He refers it to Geburah of the suit of Fire. Geburah, he says, is itself fiery and a purely active force, and the card is ruled also by Saturn and Leo.",
-        "Leo shows Fire at its strongest and most balanced, and Saturn weighs it down and embitters it. He calls the energy volcanic, with no limit to its scope. The chapter text names Saturn and Leo; the attribution table reads Saturn in Leo."
-      ]
+      "body": []
     },
     "thoth-ace-of-cups": {
       "name": "Ace of Cups",
-      "oneLine": "The Root of the Powers of Water: the suit’s root at Kether, with no planet-in-sign.",
+      "oneLine": "The Root of the Powers of Water; feminine complement of the Ace of Wands (Crowley).",
       "subtype": "figure",
       "synthesised": true,
       "aliases": [
         "Root of the Powers of Water"
       ],
-      "body": [
-        "Crowley calls the Ace of Cups the Root of the Powers of Water and the feminine complement of the Ace of Wands. He calls the card the essential form of the Holy Grail, with lotuses on the dark sea of Binah filling the cup. The Ace is placed at Kether with the other Aces.",
-        "The chapter gives no planet-in-sign. The Moon appears in the card as the base of the cup, and Crowley derives the Ace from the Yoni and the Moon, as the Ace of Wands is derived from the Lingam and the Sun."
-      ]
+      "body": []
     },
     "thoth-two-of-cups": {
       "name": "Two of Cups",
@@ -2447,10 +2348,7 @@
       "aliases": [
         "Lord of Love"
       ],
-      "body": [
-        "Crowley calls the Two of Cups the Lord of Love. The four Twos refer to Chokmah, and this card refers also to Venus in Cancer. Crowley says the Two always represents the Word and the Will, the first manifestation.",
-        "Its picture is two cups overflowing onto a calm sea, fed from a lotus, with twin dolphins that Crowley links to the Royal Art of alchemy. He reads the card as the perfect and placid harmony of the male and the female."
-      ]
+      "body": []
     },
     "thoth-three-of-cups": {
       "name": "Three of Cups",
@@ -2460,43 +2358,31 @@
       "aliases": [
         "Lord of Abundance"
       ],
-      "body": [
-        "Crowley calls the Three of Cups the Lord of Abundance. He refers it to Binah in the suit of Water and to the influence of Mercury in Cancer. The cups are pomegranates filled from a single lotus over the dark calm sea of Binah.",
-        "He also says Binah, the Great Sea, is the Moon in one aspect and Saturn in another, and that Mercury guides the souls of the dead. He reads the card as the spiritual basis of fertility."
-      ]
+      "body": []
     },
     "thoth-four-of-cups": {
       "name": "Four of Cups",
       "oneLine": "Luxury: the Moon in Cancer, the Four at Chesed",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Four of Cups Luxury. He refers it to Chesed in the sphere of Water and to the Moon in Cancer, which is the Moon’s own house.",
-        "He reads the placing as a weakness, an abandonment to desire, that brings the seeds of decay into the fruit of pleasure. Below the Abyss the element is ordered and stable, but has lost its original purity."
-      ]
+      "body": []
     },
     "thoth-five-of-cups": {
       "name": "Five of Cups",
       "oneLine": "Disappointment: Mars in Scorpio, the Five at Geburah",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Five of Cups Disappointment. The card is ruled by Geburah in the suit of Water, which he calls fiery and therefore in natural antipathy with water. He also gives Mars in Scorpio, Mars’s own house.",
-        "He reads Mars as the manifestation of Geburah on its lowest plane, and describes the cups set in an inverted pentagram, which he reads as the triumph of matter over spirit."
-      ]
+      "body": []
     },
     "thoth-ace-of-swords": {
       "name": "Ace of Swords",
-      "oneLine": "The Root of the Powers of Air: the suit’s root at Kether, with no planet-in-sign.",
+      "oneLine": "The Root of the Powers of Air; the primordial Energy of Air (Crowley).",
       "subtype": "figure",
       "synthesised": true,
       "aliases": [
         "Root of the Powers of Air"
       ],
-      "body": [
-        "Crowley calls the Ace of Swords the primordial Energy of Air and the Essence of the Vau of Tetragrammaton. He places it at Kether, and the Ace chapter says the influence of Kether descends directly to Tiphareth, in whom the Ruach is centred.",
-        "For Crowley, Air is the result of the conjunction of Fire and Water, and the wind is its obvious natural symbol. The chapter gives no planet-in-sign."
-      ]
+      "body": []
     },
     "thoth-two-of-swords": {
       "name": "Two of Swords",
@@ -2507,10 +2393,7 @@
         "Lord of Peace",
         "Lord of Peace Restored"
       ],
-      "body": [
-        "Crowley calls the Two of Swords the Lord of Peace. He says the older title, Lord of Peace Restored, is incorrect, since there has been no disturbance. The card is ruled by Chokmah in the Element of Air, with the celestial attribution the Moon in Libra.",
-        "He reads the Moon as change and Libra as balance, which together regulate the energy of the Swords. The energy of the card abides above the onslaught of disruption that is characteristic of the suit."
-      ]
+      "body": []
     },
     "thoth-three-of-swords": {
       "name": "Three of Swords",
@@ -2520,43 +2403,31 @@
       "aliases": [
         "Lord of Sorrow"
       ],
-      "body": [
-        "Crowley calls the Three of Swords the Lord of Sorrow. He places it under Binah, the Great Mother, who here rules the realm of Air and is not the beneficent Mother of the Trinity but the darkness of the Great Sea. Saturn in Libra accentuates it.",
-        "He reads the card as dark and heavy, the womb of Chaos, and says its sorrow is Weltschmerz, the universal sorrow, rather than an individual disappointment."
-      ]
+      "body": []
     },
     "thoth-four-of-swords": {
       "name": "Four of Swords",
       "oneLine": "Truce: Jupiter in Libra, the Four at Chesed",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Four of Swords Truce. Chesed, the number Four, is manifested here in the realm of the Intellect, and Chesed refers to Jupiter, who rules Libra in this decanate.",
-        "He reads the card as the proclamation of authority in the intellectual world: the establishment of dogma and law, a refuge from mental chaos chosen in an arbitrary manner."
-      ]
+      "body": []
     },
     "thoth-five-of-swords": {
       "name": "Five of Swords",
       "oneLine": "Defeat: Venus in Aquarius, the Five at Geburah",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Five of Swords Defeat. Geburah, he writes, produces disruption as always, but with Venus ruling Aquarius the cause of disaster is weakness rather than excess of strength.",
-        "He reads the intellect as enfeebled by sentiment and the defeat as due to pacifism. The hilts of the swords form an inverted pentagram, and their blades are crooked or broken."
-      ]
+      "body": []
     },
     "thoth-ace-of-disks": {
       "name": "Ace of Disks",
-      "oneLine": "The Root of the Powers of Earth: the suit’s root at Kether, with no planet-in-sign.",
+      "oneLine": "The Root of the Powers of Earth; the entry of the Energy called Earth (Crowley).",
       "subtype": "figure",
       "synthesised": true,
       "aliases": [
         "Root of the Powers of Earth"
       ],
-      "body": [
-        "Crowley calls the Ace of Disks the Root of the Powers of Earth and says it pictures the entry of the Energy called Earth. The Disks are for him a whirling emblem and not coins, since every true planet is a whirling sphere. The Ace sits at Kether with the other Aces.",
-        "The Ace of Disks chapter gives no planet-in-sign. In his scheme Earth is the Throne of the Mother, on which the final Hé of Tetragrammaton is set."
-      ]
+      "body": []
     },
     "thoth-two-of-disks": {
       "name": "Two of Disks",
@@ -2566,10 +2437,7 @@
       "aliases": [
         "Lord of Harmonious Change"
       ],
-      "body": [
-        "Crowley calls the Two of Disks Change, which was once the Lord of Harmonious Change. The number Two, Chokmah, rules in the suit pertaining to Earth, showing the Energy of Two in its most fixed form. Its celestial rulers are Jupiter and Capricornus.",
-        "He reads the card as the picture of the complete manifested Universe in its dynamics: two disks, one above the other, with a green serpent whose tail is in its mouth, forming the figure Eight."
-      ]
+      "body": []
     },
     "thoth-three-of-disks": {
       "name": "Three of Disks",
@@ -2579,553 +2447,490 @@
       "aliases": [
         "Lord of Work"
       ],
-      "body": [
-        "Crowley calls the Three of Disks the Lord of Work. He places it under Binah in the sphere of Earth, showing the material establishment of the basic form of the Universe, and gives its ruler as Mars in Capricornus, where Mars is exalted.",
-        "Crowley reads Mars’s energy as constructive, like that of the builder or the engineer. The card shows a pyramid seen from above its apex, set in the solidified sea of Binah."
-      ]
+      "body": []
     },
     "thoth-four-of-disks": {
       "name": "Four of Disks",
       "oneLine": "Power: the Sun in Capricornus, the Four at Chesed",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Four of Disks Power. He places it at Chesed, which shows the Universe established in three dimensions below the Abyss, and gives its ruler as the Sun in Capricornus, the sign in which the Sun is reborn.",
-        "He reads the card as Law and Order, maintained by constant authority and vigilance. The disks are large and square, like a fortress, and their defence is valid only when it is violently active."
-      ]
+      "body": []
     },
     "thoth-five-of-disks": {
       "name": "Five of Disks",
       "oneLine": "Worry: Mercury in Taurus, the Five at Geburah",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley calls the Five of Disks Worry. The Number Five, Geburah, in the suit of Earth, shows the disruption of the Elements, as in the other suits, and the card is governed by Mercury in Taurus.",
-        "He describes five disks in an inverted pentagram, instability in the foundations of Matter, with the effect of an earthquake. He reads the natural meaning as intelligence applied to labour."
-      ]
+      "body": []
     },
     "thoth-six-of-wands": {
       "name": "Six of Wands",
       "oneLine": "Victory: Jupiter in Leo, the Six at Tiphareth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Six of Wands is called Victory. He gives it Jupiter and Leo as its planet and sign, and places it at Tiphareth, the sephira he assigns to the Sixes and, for this card, to the suit of Fire.",
-        "The record holds no further account of the image. What Crowley says of the card itself is that it represents Tiphareth of the suit of Fire, so its meaning here is its place on the Tree."
-      ]
+      "body": []
     },
     "thoth-six-of-cups": {
       "name": "Six of Cups",
       "oneLine": "Pleasure: Scorpio and the Sun, the Six at Tiphareth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Six of Cups is called Pleasure. He gives the sign Scorpio as governing the card and says its influence is fortified by the Sun, who also represents the Six. In his planetary system the Sun is the planet of Tiphareth.",
-        "He asks that the title be read in its highest sense, as well-being and the harmony of natural forces, and not as gratification."
-      ]
+      "body": []
     },
     "thoth-six-of-swords": {
       "name": "Six of Swords",
       "oneLine": "Science: Mercury in Aquarius, the Six at Tiphareth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Six of Swords is called Science. He gives Mercury in Aquarius as its planetary attribution, and the Sixes belong to Tiphareth. In the Ace of Swords chapter he calls Tiphareth the airy sephira.",
-        "He describes the card as the perfect balance of all mental and moral faculties, hardly won."
-      ]
+      "body": []
     },
     "thoth-six-of-disks": {
       "name": "Six of Disks",
       "oneLine": "Success: the Moon in Taurus, the Six at Tiphareth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Six of Disks is called Success. The Moon in Taurus rules the card. He notes that the Moon is exalted in Taurus, which raises the card toward perfection, and that the condition it shows is transient.",
-        "He says the Number Six, Tiphareth, represents the full harmonious establishment of the Energy of the Element, so the card is the Six at Tiphareth in the suit of Earth."
-      ]
+      "body": []
     },
     "thoth-seven-of-wands": {
       "name": "Seven of Wands",
       "oneLine": "Valour: Mars in Leo, the Seven at Netzach",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Seven of Wands is called Valour and is attributed to Mars in Leo. The Sevens as a group belong to Netzach, the sephira of Venus.",
-        "He describes the army thrown into disorder: if victory is to be won, it will be by individual valour."
-      ]
+      "body": []
     },
     "thoth-seven-of-cups": {
       "name": "Seven of Cups",
       "oneLine": "Debauch: Venus in Scorpio, the Seven at Netzach",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Seven of Cups is called Debauch and is governed by Venus in Scorpio. He names the card for the Seven, Netzach, in the suit of Water.",
-        "The quoted record for this card gives no further account of its image."
-      ]
+      "body": []
     },
     "thoth-seven-of-swords": {
       "name": "Seven of Swords",
       "oneLine": "Futility: the Moon in Aquarius, the Seven at Netzach",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Seven of Swords is called Futility and is ruled by the Moon in Aquarius. The Sevens belong to Netzach, and he notes that Netzach, the Sephira of Venus, means victory.",
-        "He says the intellectual wreckage of the card is less vehement than that of the Five of Swords."
-      ]
+      "body": []
     },
     "thoth-seven-of-disks": {
       "name": "Seven of Disks",
       "oneLine": "Failure: Saturn in Taurus, the Seven at Netzach",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Seven of Disks is called Failure. Saturn in Taurus makes the card worse, and he describes the disks as the leaden disks of Saturn.",
-        "The number Seven is Netzach in this card, with its customary enfeebling effect."
-      ]
+      "body": []
     },
     "thoth-eight-of-wands": {
       "name": "Eight of Wands",
       "oneLine": "Swiftness: Mercury in Sagittarius, the Eight at Hod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Eight of Wands is called Swiftness, as one might expect from its attribution to Mercury and Sagittarius. Mercury rules the card, and he says it brings the energy down from Chokmah.",
-        "The four Eights belong to Hod, and he describes the card as energy of high velocity."
-      ]
+      "body": []
     },
     "thoth-eight-of-cups": {
       "name": "Eight of Cups",
       "oneLine": "Indolence: Saturn in Pisces, the Eight at Hod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Eight of Cups is called Indolence and is referred to Saturn in Pisces. The four Eights belong to Hod.",
-        "He describes the cups as shallow, old and broken."
-      ]
+      "body": []
     },
     "thoth-eight-of-swords": {
       "name": "Eight of Swords",
       "oneLine": "Interference: Jupiter in Gemini, the Eight at Hod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Eight of Swords is called Interference, under the influence of Jupiter in Gemini, which he says rules the decan. The four Eights belong to Hod.",
-        "He says good fortune attends these weakened efforts, but the Will is constantly thwarted by accidental interference."
-      ]
+      "body": []
     },
     "thoth-eight-of-disks": {
       "name": "Eight of Disks",
       "oneLine": "Prudence: Sol in Virgo, the Eight at Hod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Eight of Disks is called Prudence. The group text and his attribution table give Sol in Virgo, while the card's own chapter names Mercury as the planet that rules and is exalted in Virgo. Both readings put the card at Hod, the sephira of the Eights.",
-        "He describes the card as intelligence lovingly applied to material matters. The planet conflict is set out below."
-      ]
+      "body": []
     },
     "thoth-nine-of-wands": {
       "name": "Nine of Wands",
       "oneLine": "Strength: the Moon in Sagittarius, the Nine at Yesod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Nine of Wands is called Strength and is governed by the Moon in Sagittarius. The card is ruled by the Moon and Yesod, and he says Yesod is saved by the direct ray from Tiphareth.",
-        "He describes the Nine as the fullest development of the Force."
-      ]
+      "body": []
     },
     "thoth-nine-of-cups": {
       "name": "Nine of Cups",
       "oneLine": "Happiness: Jupiter in Pisces, the Nine at Yesod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Nine of Cups is called Happiness, with Jupiter in Pisces as its ruler. The Nines belong to Yesod.",
-        "He describes the card as the culmination and perfection of the original force of Water."
-      ]
+      "body": []
     },
     "thoth-nine-of-swords": {
       "name": "Nine of Swords",
       "oneLine": "Cruelty: Mars in Gemini, the Nine at Yesod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Nine of Swords is called Cruelty, ruled by Mars in Gemini. The number Nine, Yesod, brings the energy back to the central pillar of the Tree.",
-        "He says the Swords here no longer represent pure intellect, but the automatic stirring of heartless passions."
-      ]
+      "body": []
     },
     "thoth-nine-of-disks": {
       "name": "Nine of Disks",
       "oneLine": "Gain: Venus in Virgo, the Nine at Yesod",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Nine of Disks is called Gain and is ruled by Venus in Virgo. The Nines belong to Yesod.",
-        "He reads the card as good luck attending material affairs, with favour and popularity."
-      ]
+      "body": []
     },
     "thoth-ten-of-wands": {
       "name": "Ten of Wands",
       "oneLine": "Oppression: Saturn in Sagittarius, the Ten at Malkuth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Ten of Wands is called Oppression and refers to Saturn in Sagittarius. The number Ten, he says, refers to Malkuth, which depends from the other nine sephiroth.",
-        "He reads the whole picture as oppression and repression. The Tens group text says there is now no planetary attribution to consider, which this card's chapter does not follow; see below."
-      ]
+      "body": []
     },
     "thoth-ten-of-cups": {
       "name": "Ten of Cups",
       "oneLine": "Satiety: Mars in Pisces, the Ten at Malkuth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Ten of Cups is called Satiety and comes from the influence of Mars in Pisces. The Tens belong to Malkuth, which he places right down in Assiah, the material world.",
-        "He calls Mars the gross, violent and disruptive force that attacks every supposed perfection. The Tens group intro says there is now no planetary attribution to consider; the chapter gives one anyway, as the conflict below sets out."
-      ]
+      "body": []
     },
     "thoth-ten-of-swords": {
       "name": "Ten of Swords",
       "oneLine": "Ruin: the Sun in Gemini, the Ten at Malkuth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Ten of Swords is called Ruin and is ruled by the Sun in Gemini. The Tens belong to Malkuth, which he places right down in Assiah, the material world.",
-        "He describes the card as reason run mad, a ramshackle riot of soulless mechanism. The Tens group intro says there is now no planetary attribution to consider, which the card's chapter does not follow."
-      ]
+      "body": []
     },
     "thoth-ten-of-disks": {
       "name": "Ten of Disks",
       "oneLine": "Wealth: Mercury in Virgo, the Ten at Malkuth",
       "subtype": "figure",
       "synthesised": true,
-      "body": [
-        "Crowley's Ten of Disks is called Wealth and is ruled by Mercury in Virgo. The Tens belong to Malkuth, and he calls the card a hieroglyph of the cycle of regeneration.",
-        "The Tens group intro says there is now no planetary attribution to consider, which the card's chapter does not follow. The chapter also places a coin where Hod stands on the Tree, which the record does not reconcile with Malkuth."
-      ]
+      "body": []
     },
     "decan-aries-1": {
       "name": "Aries · first decan",
-      "oneLine": "First decan of Aries: Mars, as the Two of Wands (Dominion) in Crowley's cards.",
+      "oneLine": "Aries, first decan: Mars; Crowley's Two of Wands (Dominion).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Aries is Mars, carried by the Two of Wands, titled Dominion. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Two of Wands names Mars in Aries (pdf p185); his text on the Wands attributes the card to the first decan of Aries (pdf p35)."
       ]
     },
     "decan-aries-2": {
       "name": "Aries · second decan",
-      "oneLine": "Second decan of Aries: the Sun, as the Three of Wands (Virtue) in Crowley's cards.",
+      "oneLine": "Aries, second decan: the Sun; Crowley's Three of Wands (Virtue).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Aries is the Sun, carried by the Three of Wands, titled Virtue. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Three of Wands names the Sun in Aries (pdf p187)."
       ]
     },
     "decan-aries-3": {
       "name": "Aries · third decan",
-      "oneLine": "Third decan of Aries: Venus, as the Four of Wands (Completion) in Crowley's cards.",
+      "oneLine": "Aries, third decan: Venus; Crowley's Four of Wands (Completion).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Aries is Venus, carried by the Four of Wands, titled Completion. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Four of Wands names Venus in Aries (pdf p188)."
       ]
     },
     "decan-leo-1": {
       "name": "Leo · first decan",
-      "oneLine": "First decan of Leo: Saturn, as the Five of Wands (Strife) in Crowley's cards.",
+      "oneLine": "Leo, first decan: Saturn; Crowley's Five of Wands (Strife).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Leo is Saturn, carried by the Five of Wands, titled Strife. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Five of Wands says it is ruled by Saturn and Leo (pdf p189)."
       ]
     },
     "decan-leo-2": {
       "name": "Leo · second decan",
-      "oneLine": "Second decan of Leo: Jupiter, as the Six of Wands (Victory) in Crowley's cards.",
+      "oneLine": "Leo, second decan: Jupiter; Crowley's Six of Wands (Victory).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Leo is Jupiter, carried by the Six of Wands, titled Victory. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Six of Wands refers it to Jupiter and Leo (pdf p191)."
       ]
     },
     "decan-leo-3": {
       "name": "Leo · third decan",
-      "oneLine": "Third decan of Leo: Mars, as the Seven of Wands (Valour) in Crowley's cards.",
+      "oneLine": "Leo, third decan: Mars; Crowley's Seven of Wands (Valour).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Leo is Mars, carried by the Seven of Wands, titled Valour. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Seven of Wands names Mars in Leo (pdf p192)."
       ]
     },
     "decan-sagittarius-1": {
       "name": "Sagittarius · first decan",
-      "oneLine": "First decan of Sagittarius: Mercury, as the Eight of Wands (Swiftness) in Crowley's cards.",
+      "oneLine": "Sagittarius, first decan: Mercury; Crowley's Eight of Wands (Swiftness).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Sagittarius is Mercury, carried by the Eight of Wands, titled Swiftness. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Eight of Wands names Mercury as ruling the card (pdf p193); his attribution table lists it under Sagittarius (pdf p275)."
       ]
     },
     "decan-sagittarius-2": {
       "name": "Sagittarius · second decan",
-      "oneLine": "Second decan of Sagittarius: the Moon, as the Nine of Wands (Strength) in Crowley's cards.",
+      "oneLine": "Sagittarius, second decan: the Moon; Crowley's Nine of Wands (Strength).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Sagittarius is the Moon, carried by the Nine of Wands, titled Strength. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Nine of Wands names the Moon in Sagittarius (pdf p194)."
       ]
     },
     "decan-sagittarius-3": {
       "name": "Sagittarius · third decan",
-      "oneLine": "Third decan of Sagittarius: Saturn, as the Ten of Wands (Oppression) in Crowley's cards.",
+      "oneLine": "Sagittarius, third decan: Saturn; Crowley's Ten of Wands (Oppression).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Sagittarius is Saturn, carried by the Ten of Wands, titled Oppression. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Ten of Wands names Saturn in Sagittarius (pdf p195)."
       ]
     },
     "decan-cancer-1": {
       "name": "Cancer · first decan",
-      "oneLine": "First decan of Cancer: Venus, as the Two of Cups (Love) in Crowley's cards.",
+      "oneLine": "Cancer, first decan: Venus; Crowley's Two of Cups (Love).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Cancer is Venus, carried by the Two of Cups, titled Love. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Two of Cups names Venus in Cancer (pdf p197)."
       ]
     },
     "decan-cancer-2": {
       "name": "Cancer · second decan",
-      "oneLine": "Second decan of Cancer: Mercury, as the Three of Cups (Abundance) in Crowley's cards.",
+      "oneLine": "Cancer, second decan: Mercury; Crowley's Three of Cups (Abundance).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Cancer is Mercury, carried by the Three of Cups, titled Abundance. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Three of Cups names Mercury in Cancer (pdf p199)."
       ]
     },
     "decan-cancer-3": {
       "name": "Cancer · third decan",
-      "oneLine": "Third decan of Cancer: the Moon, as the Four of Cups (Luxury) in Crowley's cards.",
+      "oneLine": "Cancer, third decan: the Moon; Crowley's Four of Cups (Luxury).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Cancer is the Moon, carried by the Four of Cups, titled Luxury. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Four of Cups names the Moon in Cancer (pdf p200)."
       ]
     },
     "decan-scorpio-1": {
       "name": "Scorpio · first decan",
-      "oneLine": "First decan of Scorpio: Mars, as the Five of Cups (Disappointment) in Crowley's cards.",
+      "oneLine": "Scorpio, first decan: Mars; Crowley's Five of Cups (Disappointment).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Scorpio is Mars, carried by the Five of Cups, titled Disappointment. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Five of Cups names Mars in Scorpio (pdf p202)."
       ]
     },
     "decan-scorpio-2": {
       "name": "Scorpio · second decan",
-      "oneLine": "Second decan of Scorpio: the Sun, as the Six of Cups (Pleasure) in Crowley's cards.",
+      "oneLine": "Scorpio, second decan: the Sun; Crowley's Six of Cups (Pleasure).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Scorpio is the Sun, carried by the Six of Cups, titled Pleasure. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's text on the Sixes names Scorpio as the governing sign (pdf p178); his card chapter for the Six of Cups names the Sun (pdf p203)."
       ]
     },
     "decan-scorpio-3": {
       "name": "Scorpio · third decan",
-      "oneLine": "Third decan of Scorpio: Venus, as the Seven of Cups (Debauch) in Crowley's cards.",
+      "oneLine": "Scorpio, third decan: Venus; Crowley's Seven of Cups (Debauch).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Scorpio is Venus, carried by the Seven of Cups, titled Debauch. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Seven of Cups names Venus in Scorpio (pdf p205)."
       ]
     },
     "decan-pisces-1": {
       "name": "Pisces · first decan",
-      "oneLine": "First decan of Pisces: Saturn, as the Eight of Cups (Indolence) in Crowley's cards.",
+      "oneLine": "Pisces, first decan: Saturn; Crowley's Eight of Cups (Indolence).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Pisces is Saturn, carried by the Eight of Cups, titled Indolence. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Eight of Cups names Saturn in Pisces (pdf p206)."
       ]
     },
     "decan-pisces-2": {
       "name": "Pisces · second decan",
-      "oneLine": "Second decan of Pisces: Jupiter, as the Nine of Cups (Happiness) in Crowley's cards.",
+      "oneLine": "Pisces, second decan: Jupiter; Crowley's Nine of Cups (Happiness).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Pisces is Jupiter, carried by the Nine of Cups, titled Happiness. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Nine of Cups names Jupiter in Pisces (pdf p207)."
       ]
     },
     "decan-pisces-3": {
       "name": "Pisces · third decan",
-      "oneLine": "Third decan of Pisces: Mars, as the Ten of Cups (Satiety) in Crowley's cards.",
+      "oneLine": "Pisces, third decan: Mars; Crowley's Ten of Cups (Satiety).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Pisces is Mars, carried by the Ten of Cups, titled Satiety. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Ten of Cups names Mars in Pisces (pdf p209)."
       ]
     },
     "decan-libra-1": {
       "name": "Libra · first decan",
-      "oneLine": "First decan of Libra: the Moon, as the Two of Swords (Peace Restored) in Crowley's cards.",
+      "oneLine": "Libra, first decan: the Moon; Crowley's Two of Swords (Peace Restored).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Libra is the Moon, carried by the Two of Swords, titled Peace Restored. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Two of Swords names the Moon in Libra (pdf p212)."
       ]
     },
     "decan-libra-2": {
       "name": "Libra · second decan",
-      "oneLine": "Second decan of Libra: Saturn, as the Three of Swords (Sorrow) in Crowley's cards.",
+      "oneLine": "Libra, second decan: Saturn; Crowley's Three of Swords (Sorrow).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Libra is Saturn, carried by the Three of Swords, titled Sorrow. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Three of Swords names Saturn in Libra (pdf p214)."
       ]
     },
     "decan-libra-3": {
       "name": "Libra · third decan",
-      "oneLine": "Third decan of Libra: Jupiter, as the Four of Swords (Truce) in Crowley's cards.",
+      "oneLine": "Libra, third decan: Jupiter; Crowley's Four of Swords (Truce).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Libra is Jupiter, carried by the Four of Swords, titled Truce. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Four of Swords says Jupiter rules in Libra in this decanate (pdf p215)."
       ]
     },
     "decan-aquarius-1": {
       "name": "Aquarius · first decan",
-      "oneLine": "First decan of Aquarius: Venus, as the Five of Swords (Defeat) in Crowley's cards.",
+      "oneLine": "Aquarius, first decan: Venus; Crowley's Five of Swords (Defeat).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Aquarius is Venus, carried by the Five of Swords, titled Defeat. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Five of Swords says Venus rules Aquarius there (pdf p216)."
       ]
     },
     "decan-aquarius-2": {
       "name": "Aquarius · second decan",
-      "oneLine": "Second decan of Aquarius: Mercury, as the Six of Swords (Science) in Crowley's cards.",
+      "oneLine": "Aquarius, second decan: Mercury; Crowley's Six of Swords (Science).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Aquarius is Mercury, carried by the Six of Swords, titled Science. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Six of Swords names Mercury in Aquarius (pdf p218)."
       ]
     },
     "decan-aquarius-3": {
       "name": "Aquarius · third decan",
-      "oneLine": "Third decan of Aquarius: the Moon, as the Seven of Swords (Futility) in Crowley's cards.",
+      "oneLine": "Aquarius, third decan: the Moon; Crowley's Seven of Swords (Futility).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Aquarius is the Moon, carried by the Seven of Swords, titled Futility. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Seven of Swords names the Moon in Aquarius (pdf p219)."
       ]
     },
     "decan-gemini-1": {
       "name": "Gemini · first decan",
-      "oneLine": "First decan of Gemini: Jupiter, as the Eight of Swords (Interference) in Crowley's cards.",
+      "oneLine": "Gemini, first decan: Jupiter; Crowley's Eight of Swords (Interference).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Gemini is Jupiter, carried by the Eight of Swords, titled Interference. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Eight of Swords names Jupiter in Gemini (pdf p220)."
       ]
     },
     "decan-gemini-2": {
       "name": "Gemini · second decan",
-      "oneLine": "Second decan of Gemini: Mars, as the Nine of Swords (Cruelty) in Crowley's cards.",
+      "oneLine": "Gemini, second decan: Mars; Crowley's Nine of Swords (Cruelty).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Gemini is Mars, carried by the Nine of Swords, titled Cruelty. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Nine of Swords names Mars in Gemini (pdf p221)."
       ]
     },
     "decan-gemini-3": {
       "name": "Gemini · third decan",
-      "oneLine": "Third decan of Gemini: the Sun, as the Ten of Swords (Ruin) in Crowley's cards.",
+      "oneLine": "Gemini, third decan: the Sun; Crowley's Ten of Swords (Ruin).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Gemini is the Sun, carried by the Ten of Swords, titled Ruin. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Ten of Swords names the Sun in Gemini (pdf p222)."
       ]
     },
     "decan-capricorn-1": {
       "name": "Capricorn · first decan",
-      "oneLine": "First decan of Capricorn: Jupiter, as the Two of Disks (Harmonious Change) in Crowley.",
+      "oneLine": "Capricorn, first decan: Jupiter; Crowley's Two of Disks (Harmonious Change).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Capricorn is Jupiter, carried by the Two of Disks, titled Harmonious Change. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Two of Disks names Jupiter and Capricornus as its celestial rulers (pdf p227)."
       ]
     },
     "decan-capricorn-2": {
       "name": "Capricorn · second decan",
-      "oneLine": "Second decan of Capricorn: Mars, as the Three of Disks (Work) in Crowley's cards.",
+      "oneLine": "Capricorn, second decan: Mars; Crowley's Three of Disks (Work).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Capricorn is Mars, carried by the Three of Disks, titled Work. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Three of Disks names Mars in Capricornus (pdf p228)."
       ]
     },
     "decan-capricorn-3": {
       "name": "Capricorn · third decan",
-      "oneLine": "Third decan of Capricorn: the Sun, as the Four of Disks (Power) in Crowley's cards.",
+      "oneLine": "Capricorn, third decan: the Sun; Crowley's Four of Disks (Power).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Capricorn is the Sun, carried by the Four of Disks, titled Power. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Four of Disks names the Sun in Capricornus (pdf p229)."
       ]
     },
     "decan-taurus-1": {
       "name": "Taurus · first decan",
-      "oneLine": "First decan of Taurus: Mercury, as the Five of Disks (Worry) in Crowley's cards.",
+      "oneLine": "Taurus, first decan: Mercury; Crowley's Five of Disks (Worry).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Taurus is Mercury, carried by the Five of Disks, titled Worry. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Five of Disks names Mercury in Taurus (pdf p231)."
       ]
     },
     "decan-taurus-2": {
       "name": "Taurus · second decan",
-      "oneLine": "Second decan of Taurus: the Moon, as the Six of Disks (Success) in Crowley's cards.",
+      "oneLine": "Taurus, second decan: the Moon; Crowley's Six of Disks (Success).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Taurus is the Moon, carried by the Six of Disks, titled Success. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Six of Disks names the Moon in Taurus (pdf p232)."
       ]
     },
     "decan-taurus-3": {
       "name": "Taurus · third decan",
-      "oneLine": "Third decan of Taurus: Saturn, as the Seven of Disks (Failure) in Crowley's cards.",
+      "oneLine": "Taurus, third decan: Saturn; Crowley's Seven of Disks (Failure).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Taurus is Saturn, carried by the Seven of Disks, titled Failure. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Seven of Disks names Saturn in Taurus (pdf p233)."
       ]
     },
     "decan-virgo-1": {
       "name": "Virgo · first decan",
-      "oneLine": "First decan of Virgo: the Sun, as the Eight of Disks (Prudence) in Crowley's cards.",
+      "oneLine": "Virgo, first decan: the Sun; Crowley's Eight of Disks (Prudence).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the first third of Virgo is the Sun, carried by the Eight of Disks, titled Prudence. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley on the Eight of Disks: his text on the Eights, pdf p180; his card chapter, pdf p234."
       ]
     },
     "decan-virgo-2": {
       "name": "Virgo · second decan",
-      "oneLine": "Second decan of Virgo: Venus, as the Nine of Disks (Gain) in Crowley's cards.",
+      "oneLine": "Virgo, second decan: Venus; Crowley's Nine of Disks (Gain).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the middle third of Virgo is Venus, carried by the Nine of Disks, titled Gain. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Nine of Disks names Venus in Virgo (pdf p236)."
       ]
     },
     "decan-virgo-3": {
       "name": "Virgo · third decan",
-      "oneLine": "Third decan of Virgo: Mercury, as the Ten of Disks (Wealth) in Crowley's cards.",
+      "oneLine": "Virgo, third decan: Mercury; Crowley's Ten of Disks (Wealth).",
       "subtype": "scene",
       "synthesised": true,
       "body": [
-        "In Crowley's cards the last third of Virgo is Mercury, carried by the Ten of Disks, titled Wealth. The book gives no degree span for the small cards, so the place within the sign is the site's reading of the planet sequence, not Crowley's wording."
+        "Crowley's card chapter for the Ten of Disks names Mercury in Virgo (pdf p237)."
+      ]
+    },
+    "albedo": {
+      "oneLine": "The whitening: the silver or moon condition (CW12 ¶334).",
+      "body": [
+        "Jung writes that the albedo is the daybreak, and that not until the rubedo is it sunrise (CW12 ¶334). He writes that from the darkness of the unconscious comes the light of illumination, the albedo (CW14 ¶220)."
       ]
     }
   }

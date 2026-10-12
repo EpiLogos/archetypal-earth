@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-swords",
- "line": "Crowley’s Ace of Swords: the Root of the Powers of Air, Kether, with Tiphareth as the Ruach’s centre.",
+ "line": "Crowley’s Ace of Swords: the Root of the Powers of Air (pdf p210); Kether (pdf p175, p211).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter heading for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the chapter heading (pdf p210); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree",
-   "line": "The Ace chapter names Kether as the source that descends on Tiphareth, centre of the Ruach. The Aces essay gives Spirit as Kether. No planet-in-sign appears in the chapter.",
+   "line": "Crowley on Kether (pdf p211); on Spirit and Kether (pdf p175).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley calls the card the primordial Energy of Air, the Essence of the Vau, and says Air is the conjunction of Fire and Water.",
+   "line": "Crowley on the Ace of Swords as the primordial Energy of Air, and on Air and the Wind (pdf p210).",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-pisces-1",
- "line": "Crowley's Eight of Cups is the card for the first decan of Pisces, with Saturn as its planet in the sign.",
+ "line": "Crowley on the Eight of Cups, the card for the first decan of Pisces (pdf p179, p206).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Pisces.",
+   "title": "The Eight of Cups: title and attribution",
+   "line": "The title and the attribution of the Eight of Cups, pdf p179, p206.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Eight of Cups, pdf p206.",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hierophant",
- "line": "Crowley's Atu V: the letter Vau, Taurus, and the uniting of microcosm and macrocosm; the text gives no path for the card.",
+ "line": "Crowley on Atu V: the letter Vau, Taurus, the uniting of microcosm and macrocosm, and the aeon of Horus (pdf p68, p69, p74).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The letter Vau, a nail, and the sign Taurus.",
+   "title": "Letter and sign",
+   "line": "Crowley refers the card to the letter Vau, a Nail, and to Taurus (pdf p68).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures, and where it sits on the Tree",
-   "line": "The text names the card with the Child, and with the uniting of microcosm and macrocosm. It names no ends for its path; the Key Scale gives path 16. The Chariot chapter places the Hierophant on the other side of the Tree, which is not a path.",
+   "title": "The arcanum, the Child and the Tree",
+   "line": "Crowley on the uniting of the microcosm with the macrocosm (pdf p68), the aeon of Horus, of the Child (pdf p69), and the Hierophant on the other side of the Tree of Life (pdf p74).",
    "quotes": [
     {
      "work": "book-of-thoth",

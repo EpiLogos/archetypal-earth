@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-tower",
- "line": "Crowley's account of Atu XVI: the letter Pe, Mars, and the picture of destruction by fire.",
+ "line": "Crowley on Atu XVI: the letter Pé, Mars, the destruction of existing material by fire, and the Eye of Horus (pdf p98, p99).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter and the planet, and Crowley's description of the picture.",
+   "title": "Letter, planet and picture",
+   "line": "Crowley on the letter Pé, the planet Mars and the picture of destruction by fire (pdf p98).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The text gives no ends for this path. The table gives Key Scale path 27; the general rule is one letter to each path.",
+   "title": "The Paths and the letters",
+   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's reading of the picture: the cosmic energy shown in its grossest form, and the Eye.",
+   "title": "Cosmic energy and the Eye of Horus",
+   "line": "Crowley on the manifestation of cosmic energy in its grossest form (pdf p98) and on the Eye of Horus (pdf p99).",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-seven-of-cups",
- "line": "Seven of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Seven of Cups: Debauch (pdf p178); Venus in Scorpio (pdf p205); Netzach (pdf p178, p205).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 178, 205).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p178); on Venus in Scorpio (pdf p205).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The card names Netzach (pdf 205), and the Sevens group text does the same (pdf 178). No description of the image is quoted beyond the title and attributions.",
+   "line": "Crowley on the Seven, Netzach, in the suit of Water (pdf p205); on the Sevens and Netzach (pdf p178).",
    "quotes": [
     {
      "work": "book-of-thoth",

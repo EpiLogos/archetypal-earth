@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-lust",
- "line": "Crowley's account of Atu XI: its letter, sign, path on the Tree and what he says the figure is.",
+ "line": "Crowley on Atu XI: the letter Teth, the sign Leo, the influence from Chesed upon Geburah, and the act of the original marriage (pdf p83, p84, p85).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The sign and the letter, in the chapter's own words.",
+   "title": "Sign and letter",
+   "line": "Crowley assigns the Trump to the sign of Leo and attributes the card to the letter Teth, a serpent (pdf p84).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The table gives Key Scale path 19. Crowley says the path is the influence from Chesed upon Geburah, not the Strength of Geburah, and that the path of Gimel cuts it.",
+   "title": "From Chesed upon Geburah",
+   "line": "Crowley on the path corresponding to the card as the influence from Chesed upon Geburah (pdf p83) and on the paths of Gimel and Teth (pdf p85).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's description of the figure and the act it shows. This is his account of the card, not a reading.",
+   "title": "The Kerub of Fire",
+   "line": "Crowley on the figure as the Kerub of Fire, ruled by the Sun, and on the act of the original marriage (pdf p84).",
    "quotes": [
     {
      "work": "book-of-thoth",

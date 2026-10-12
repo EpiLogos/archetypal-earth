@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-emperor",
- "line": "Crowley's Atu IV: the letter Tzaddi, Aries under Mars, and a path whose ends his own text gives in two conflicting ways.",
+ "line": "Crowley on Atu IV: the letter Tzaddi, Aries under Mars, Chokmah and Tiphareth, and the Path of Hé (pdf p66, p67, p211).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The letter Tzaddi and the sign Aries, ruled by Mars.",
+   "title": "Letter and sign",
+   "line": "Crowley refers the card to the letter Tzaddi and to the sign Aries, ruled by Mars (pdf p66).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree, and a conflict in the text",
-   "line": "The Emperor chapter places the card on the path from Chokmah to Tiphareth. The Ace of Swords chapter gives the same two ends to the Path of He (the Star). The Key Scale numbers the Emperor's path 28 and the Star's path 15. This page leaves the conflict open.",
+   "title": "Chokmah, Tiphareth and the Path of Hé",
+   "line": "Crowley on authority derived from Chokmah and exerted upon Tiphareth (pdf p67), on the white light that indicates the card's position in the Tree of Life (pdf p67), and on the Path of Hé (pdf p211).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's description of the figure and of the activity the card represents.",
+   "title": "The figure and its power",
+   "line": "Crowley's description of the crowned male figure (pdf p66) and of the sudden, violent, impermanent activity it represents (pdf p67).",
    "quotes": [
     {
      "work": "book-of-thoth",

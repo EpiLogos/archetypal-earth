@@ -11,7 +11,7 @@ import { planThread, type ThreadStep } from '../data/thread';
 import { FOV, type GlobeEngine } from '../globe/engine';
 import { chronologyPath } from '../globe/chronology';
 import { defaultReadingId, hashToState, hashWithFilter, type BirthPrefill } from '../state/router';
-import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSky, openedFrom, skyGestureState, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
+import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSky, openedFrom, skyArrival, skyGestureState, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
@@ -167,6 +167,8 @@ export class Controller {
   private heldInSky = false;
   /** Field chrome (reveal / label / deep) deferred until descendFromSky finishes landing. */
   private pendingLanding: (() => void) | null = null;
+  /** The reading a descent from the sky carries is open in the state but waits for the landing: the scene is not shifted for it yet. */
+  private readingAwaitsLanding = false;
 
   constructor(private m: Model, private engine: GlobeEngine, private time: TimeModel, root: HTMLElement, private history?: History, corpus?: CorpusIndex | null, private redbookData?: RedBook) {
     this.root = root;
@@ -510,7 +512,7 @@ export class Controller {
     // so the hash is written in the order the states are applied
     if (this.applying) { queueMicrotask(() => this.navigate(next, opts)); return; }
     this.landing.dismiss();
-    next = this.lensRoute(next);
+    next = skyArrival(this.state, this.lensRoute(next));
     if (this.whenReady(next, () => this.navigate(next, opts))) return;
     if (stateEq(next, this.state)) return;
     if (next.view.kind === 'thread') {
@@ -615,10 +617,15 @@ export class Controller {
 
   private chooseResult(r: SearchResult) {
     const a = r.action;
-    if (a.type === 'subject') this.navigate(focusOn(this.state, a.subject));
-    else if (a.type === 'occurrence') {
+    // from the sky a pick is a descent like any other: the sky stays behind (See in sky), the reading opens on the landing
+    if (a.type === 'subject') {
+      if (this.state.sky) this.openFromSky(a.subject);
+      else this.navigate(focusOn(this.state, a.subject));
+    } else if (a.type === 'occurrence') {
       const i = this.m.occIndex.get(a.occId);
-      if (i !== undefined) this.navigate({ view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false, ...(this.state.graph ? { graph: true as const } : {}) });
+      const manifest: AppState | null = i === undefined ? null : { view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false };
+      if (manifest && this.state.sky) this.navigate(openedFrom(this.state, manifest));
+      else if (i !== undefined) this.navigate({ view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false, ...(this.state.graph ? { graph: true as const } : {}) });
     } else {
       // a period: set the time window; leave the current state where it is
       const sc = this.m.scale;
@@ -1002,6 +1009,8 @@ export class Controller {
       filter: () => this.filter,
       passages: this.passage.bridge(),
       focus: (subject) => this.focusFromLens(subject),
+      descend: (subject) => this.descendFromReading(subject),
+      openBody: (key) => this.openBody(key),
       openOccurrence: (occId) => this.openReading(occId),
       setPath: (path, opts) => {
         if (this.activeLens !== id) return;
@@ -1014,6 +1023,7 @@ export class Controller {
       takeBirthPrefill: () => { const b = this.birthPrefill; this.birthPrefill = null; return b; },
       skyStatus: () => this.skyView.statusLine(),
       skyBody: () => this.state.sky?.body ?? null,
+      localSheet: (on) => { if (this.activeLens === id) this.localSheetOpen = on; },
     };
   }
 
@@ -1126,8 +1136,16 @@ export class Controller {
    * X, Escape and the drag-down on the sheet. Astrology's X steps onto its sky, as it always has. Every other lens only
    * hides its sheet: the Options stay and the lens never leaves the mode (the Theory and Alchemy X used to leave it).
    */
+  /** A local reading stands in the sheet (a card at its planet): its dismissal hides the sheet and holds the planet. */
+  private localSheetOpen = false;
+
   private closeSheet() {
     const s = this.state;
+    if (this.localSheetOpen && s.lens?.id === 'astrology' && s.sky?.body) {
+      this.localSheetOpen = false;
+      this.panel.hide();
+      return;
+    }
     // Astrology X: dismiss the sheet onto the sky still in Astrology — never Field, never bare inSky().
     // A natal chart stays on that birth sky; Charts / live sky close onto the live Astrology sky (not Jung).
     if (s.lens?.id === 'astrology') {
@@ -1151,6 +1169,7 @@ export class Controller {
     // the lens cleans up while it is still the active one, so its own chrome clear (Options) is not dropped (R1 F4)
     if (id) this.lensInst.get(id)?.leave();
     this.activeLens = null;
+    this.localSheetOpen = false;
     this.sheetAction = null;
     this.lensTok++;
     this.panel.close();
@@ -1170,6 +1189,7 @@ export class Controller {
     const first = !this.started;
     // a new state replaces any deferred landing chrome unless enter* re-queues it for a sky descent
     this.pendingLanding = null;
+    this.readingAwaitsLanding = false;
     this.state = next;
     this.syncChronology(next);
     const v = next.view;
@@ -1637,6 +1657,15 @@ export class Controller {
     this.navigate(openedFrom(this.state, focusOn(WORLD, subject)));
   }
 
+  /**
+   * An action inside an open reading in the sky (a tie, "Read it in the field"): the reading closes with the click and the
+   * camera descends to the node at once — no gaze, no second click. The same descent as a plate's click, from where the
+   * camera stands: it looks at the Earth, drops, settles, and the node's reading opens on the landing.
+   */
+  private descendFromReading(subject: Subject) {
+    this.openFromSky(subject);
+  }
+
   /** The label for a body under the standing culture: its table name where there is one, else the default. */
   private skyName(key: BodyKey): string {
     const data = this.skyLayer?.data;
@@ -1966,9 +1995,15 @@ export class Controller {
     const open = s.deep && s.view.kind !== 'world';
     if (defer && open) {
       // descend still in flight — pendingLanding will syncDeep when the camera settles
+      this.readingAwaitsLanding = true;
       this.deep.hide();
       document.body.classList.remove('deep-open');
       return;
+    }
+    if (this.readingAwaitsLanding) {
+      // the landing: the scene gives the reading its room only now, not for the whole drop
+      this.readingAwaitsLanding = false;
+      this.syncShift();
     }
     document.body.classList.toggle('deep-open', open);
     if (open) this.deep.show(this.deepTarget(s.view));
@@ -1990,7 +2025,7 @@ export class Controller {
     const narrow = isNarrow();
     const s = this.state;
     let x = 0, y = 0;
-    if (s.deep && s.view.kind !== 'world') {
+    if (s.deep && s.view.kind !== 'world' && !this.readingAwaitsLanding) {
       if (!narrow) x = -0.46;
     } else if (s.view.kind === 'manifest' || s.sky?.body) {
       // a card stands on the right (or the bottom, on a phone): the scene gives it room. An approached planet's disc
@@ -2130,13 +2165,22 @@ export class Controller {
     this.label.set(content, `f:${subject.type}:${subject.id}`);
   }
 
+  /** Back to the sky a reading was opened from, in one step (the reading the descent carried closes with it). */
+  private returnToSkyFrom() {
+    if (this.passage.isOpen) this.passage.hide();
+    const from = this.state.from;
+    if (from?.sky) this.navigate(from);
+    else this.stepBack();
+  }
+
   /** "See in sky" whenever there is a way back (opened from the sky) or a standing body↔field tie. */
   private addSeeInSky(content: LabelContent, subject: Subject) {
     const fromSky = this.state.from?.sky;
     if (fromSky) {
       const body = fromSky.body;
       const label = body ? `See in sky (${this.skyName(body)})` : 'See in sky';
-      content.links!.unshift({ text: label, onClick: () => this.stepBack() });
+      // the door back is one click whatever is open over the node: the arrival's reading does not stand in its way
+      content.links!.unshift({ text: label, onClick: () => this.returnToSkyFrom() });
       return;
     }
     if (subject.type !== 'family' && subject.type !== 'archetype') return;

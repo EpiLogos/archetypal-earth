@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-eight-of-swords",
- "line": "Eight of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Eight of Swords: Interference (pdf p179); Jupiter in Gemini (pdf p220); Hod (pdf p179).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 179, 220).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p179); on Jupiter in Gemini (pdf p220).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "line": "Crowley on the Eights and Hod (pdf p179).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His reading of the card, quoted in full at the sentence.",
+   "line": "Crowley on the Will and accidental interference (pdf p220).",
    "quotes": [
     {
      "work": "book-of-thoth",

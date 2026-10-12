@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "chesed",
- "line": "Crowley gives Chesed the number 4, Jupiter and Water; Jung names kesed as one of the two sides of the Tree.",
+ "line": "Crowley on Chesed (The Book of Thoth); Jung on kesed in CW9ii ¶105.",
  "sections": [
   {
    "id": "crowley-fours",
    "title": "Crowley's Fours",
-   "line": "The Four cards are attributed to Chesed, which Crowley names the Rule of Law and the first sephira below the Abyss.",
+   "line": "Crowley on the Fours and Chesed, Jupiter and the number 4: The Book of Thoth, pdf p176 and p33.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "jupiter-and-water",
    "title": "Jupiter and Water",
-   "line": "Crowley makes Jupiter the planet of Chesed, and Water its element in the Qabalah.",
+   "line": "Crowley's attributions for Chesed: The Book of Thoth, pdf p207 and p263.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "jung-two-sides",
    "title": "Jung's two sides of the Tree",
-   "line": "Jung names kesed and din as the two sides of the Tree of the Sephiroth. He does not number kesed, and he does not give din the name Geburah.",
+   "line": "Jung on kesed and din as the two sides of the Tree: CW9ii ¶105.",
    "quotes": [
     {
      "work": "cw09ii",

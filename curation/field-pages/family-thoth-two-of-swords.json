@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-swords",
- "line": "Crowley’s Two of Swords: Peace, ruled by Chokmah in the Element of Air, the Moon in Libra.",
+ "line": "Crowley’s Two of Swords: Peace (pdf p212); formerly the Lord of Peace Restored (pdf p175); Chokmah in the Element of Air and the Moon in Libra (pdf p212).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The old title, Lord of Peace Restored, Crowley calls incorrect; Lord of Peace is the better name. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p175); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card is ruled by Chokmah in the Element of Air, with the celestial attribution the Moon in Libra.",
+   "line": "Crowley on Chokmah in the Element of Air and on the Moon in Libra (pdf p212).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the Moon as change and Libra as balance, regulating the energy of the Swords.",
+   "line": "Crowley on the Moon, Libra and the energy of the Swords (pdf p212).",
    "quotes": [
     {
      "work": "book-of-thoth",

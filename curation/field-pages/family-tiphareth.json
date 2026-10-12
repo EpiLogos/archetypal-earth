@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "tiphareth",
- "line": "Crowley gives Tiphareth the number 6, the Sun and the Son; Jung places Tifereth in the middle and names it the sun, but does not number it six.",
+ "line": "Crowley on Tiphareth (The Book of Thoth); Jung on Tifereth in CW14 ¶18, ¶592 and ¶638.",
  "sections": [
   {
    "id": "crowley-sixes",
    "title": "Crowley's Sixes",
-   "line": "The Sixes are attributed to Tiphareth, and for Crowley the number Six is the centre of the system.",
+   "line": "Crowley on the Sixes and Tiphareth, and the number Six as the centre of the system: The Book of Thoth, pdf p177, p232 and p21.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "sun-and-son",
    "title": "Sun and Son",
-   "line": "Tiphareth is the Sun in the planetary system and the Son in the system of Tetragrammaton.",
+   "line": "Crowley on Tiphareth in the planetary system and in the system of Tetragrammaton: The Book of Thoth, pdf p177.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "direct-line-and-the-airy-sephira",
-   "title": "The direct line and the airy Sephira",
-   "line": "Crowley says Tiphareth alone of the sephiroth below the Abyss communicates directly with Kether, and that the Ruach is centred in it.",
+   "title": "Kether and the airy Sephira",
+   "line": "Crowley on Tiphareth and Kether, and on the Ruach centred in the airy Sephira: The Book of Thoth, pdf p177 and p211.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -69,8 +69,8 @@
   },
   {
    "id": "jung-order-and-the-sun",
-   "title": "Jung's order and the sun",
-   "line": "Jung's arrangement, Kether, Tifereth, Yesod, Malchuth, puts Tifereth second, not sixth, and he does not number it. The tie to the Self rests on Jung naming Tifereth the middle position and the sun; the site reads that as the centre the Self occupies, which Jung does not say.",
+   "title": "Jung's Tifereth",
+   "line": "Jung on the usual arrangement of the Sefiroth, the middle position, and the sun: CW14 ¶18, ¶592 and ¶638.",
    "quotes": [
     {
      "work": "cw14",

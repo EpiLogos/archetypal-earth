@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "chokmah",
- "line": "Crowley numbers Chokmah 2 and calls it the first manifestation; Jung names it in a passage reporting Franck's trinity, and gives it no number.",
+ "line": "Crowley on Chokmah (The Book of Thoth); Jung on Hokhmah in CW12 ¶313.",
  "sections": [
   {
    "id": "crowley-number-two",
    "title": "Crowley's number 2",
-   "line": "Crowley gives Chokmah the Two, then reads the number back to the first manifestation.",
+   "line": "Crowley on Chokmah as the number 2 and the first manifestation: The Book of Thoth, pdf p35, p175 and p211.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "wisdom-the-father-mercury",
    "title": "Wisdom, the Father and Mercury",
-   "line": "Crowley's Hermit and Magus chapters name Chokmah as Wisdom, the Father, and Mercury, the way to Kether.",
+   "line": "Crowley on Chokmah as Wisdom, the Father and Mercury: The Book of Thoth, pdf p79 and p121.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "the-path-to-binah",
    "title": "The path to Binah",
-   "line": "The Daleth path joins Chokmah to Binah, uniting Father and Mother in Crowley's Empress chapter.",
+   "line": "Crowley on Daleth as the path from Chokmah to Binah: The Book of Thoth, pdf p64.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -63,8 +63,8 @@
   },
   {
    "id": "the-universe-list",
-   "title": "Neptune in the Universe list",
-   "line": "Item 2 of Crowley's ten-item list is the sphere of the fixed stars, under Neptune. The list does not name Chokmah, so the number is the only link to it there.",
+   "title": "The sphere of the fixed stars",
+   "line": "Crowley's list of the Universe, its second item: The Book of Thoth, pdf p111.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -76,8 +76,8 @@
   },
   {
    "id": "jung-trinity",
-   "title": "Jung's trinity",
-   "line": "Jung names Hokhmah with Kether and Binah in Franck's trinity. He gives it no number and no planet.",
+   "title": "Hokhmah in Franck's trinity",
+   "line": "Jung on Franck's connection between 32 and the cabalistic trinity Kether, Binah and Hokhmah: CW12 ¶313.",
    "quotes": [
     {
      "work": "cw12",

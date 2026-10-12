@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-libra-3",
- "line": "Crowley's Four of Swords is the card for the third decan of Libra, with Jupiter as its planet in the sign.",
+ "line": "Crowley on the Four of Swords, the card for the third decan of Libra (pdf p177, p215).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Libra.",
+   "title": "The Four of Swords: title and attribution",
+   "line": "The title and the attribution of the Four of Swords, pdf p177, p215.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Four of Swords, pdf p215.",
    "quotes": [
     {
      "work": "book-of-thoth",

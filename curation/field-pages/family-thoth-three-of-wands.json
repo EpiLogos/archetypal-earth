@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-three-of-wands",
- "line": "Crowley’s Three of Wands: Virtue, the Sun exalted in Aries, placed at Binah.",
+ "line": "Crowley’s Three of Wands: Lord of Virtue (pdf p176); Binah and the Sun in Aries (pdf p187).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card refers to Binah in the suit of Fire, and to the Sun in Aries, the sign of his exaltation.",
+   "line": "Crowley on Binah in the suit of Fire and on the Sun in Aries (pdf p187).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "The Threes as a group express Understanding, and the card’s image is a lotus wand at the beginning of spring.",
+   "line": "Crowley on the Threes and Understanding (pdf p176); on the wand as a Lotus in blossom (pdf p187).",
    "quotes": [
     {
      "work": "book-of-thoth",

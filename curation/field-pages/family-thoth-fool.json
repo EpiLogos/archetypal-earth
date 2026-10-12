@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-fool",
- "line": "Crowley's Atu 0 in his own sentences: its number, letter and element, and the path that joins the Crown to Wisdom.",
+ "line": "Crowley on Atu 0: its number, letter and element, the Path of Aleph, and the Fool and the Universe (pdf p46, p56, p67, p110, p116).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The number zero, the letter Aleph, and the element Air.",
+   "title": "Number, letter and element",
+   "line": "Crowley on the number 0, the letter Aleph and Air in the card of the Fool (pdf p46).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The chapter names only Kether; the appendix names Wisdom and the Crown as the two ends. The Key Scale gives path 11, and Crowley identifies Wisdom with Chokmah in the Emperor chapter.",
+   "title": "The path of Aleph",
+   "line": "Crowley on the Path of Aleph and Kether (pdf p56), on Wisdom, the Crown and the Path of the Pure Fool (pdf p116), and on Chokmah (pdf p67).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -74,8 +74,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's own description of the Fool as the negative, and of the Universe as its manifestation.",
+   "title": "The Fool and the Universe",
+   "line": "Crowley on the gold of air (pdf p56), on the Fool and the Universe (pdf p110), and on the phrase in whom all complex is resolved (pdf p116).",
    "quotes": [
     {
      "work": "book-of-thoth",

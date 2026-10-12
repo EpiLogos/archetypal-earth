@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "kether",
- "line": "Crowley gives Kether the number 1 and the Crown; Jung names it the root of the Tree and does not number it.",
+ "line": "Crowley on Kether (The Book of Thoth); Jung on Kether in CW14 ¶18.",
  "sections": [
   {
    "id": "crowley-number-one",
    "title": "Crowley's number 1",
-   "line": "Crowley's Book of Thoth sets Kether at the number 1 and says little more about it.",
+   "line": "Crowley on Kether: The Book of Thoth, pdf p33, p175, p110 and p211.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -37,8 +37,8 @@
   },
   {
    "id": "the-list-without-its-name",
-   "title": "The list that does not name it",
-   "line": "The Universe list gives its first item to the primum mobile. Crowley does not write Kether beside that item, so the number is his and the label is implied, not stated.",
+   "title": "The primum mobile in Crowley's list",
+   "line": "Crowley's list of the Universe, its first item: The Book of Thoth, pdf p111.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "jung-root-and-head",
    "title": "Jung's root and head",
-   "line": "Jung's Kether is the root of the Tree and the head of the Original Man. He gives it no number.",
+   "line": "Jung on Kether as the root of the Tree of the Sefiroth and the head of the Original Man: CW14 ¶18.",
    "quotes": [
     {
      "work": "cw14",
@@ -69,8 +69,8 @@
   },
   {
    "id": "above-the-abyss",
-   "title": "Above the Abyss",
-   "line": "Daath and the Abyss are not sephiroth and have no family of their own. These quotations give Crowley's account of the Supernals beyond the Abyss; they do not place Kether in a list.",
+   "title": "The Supernals",
+   "line": "Crowley on the Supernals beyond the Abyss, and the Supernal Triad: The Book of Thoth, pdf p133 and p61.",
    "quotes": [
     {
      "work": "book-of-thoth",

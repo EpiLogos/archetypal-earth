@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-prince-of-wands",
- "line": "Crowley's Prince of Wands: the Vau of the Name, the airy part of Fire, and a span from Cancer to Leo.",
+ "line": "Crowley's Prince of Wands: Vau of the Name (pdf p139); the airy part of Fire and the span from Cancer to Leo (pdf p145).",
  "sections": [
   {
    "id": "the-court-and-its-element",
    "title": "The court and its element",
-   "line": "Crowley names the Princes by the Forces of the letter Vau in the Name.",
+   "line": "Crowley on the Princes (pdf p139) and on the Prince of Wands (pdf p145).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "its-span-in-the-zodiac",
    "title": "Its span in the Zodiac",
-   "line": "The text gives the 21st degree of Cancer as the start and the 20th of Leo as the end. Crowley's attribution table (pdf p274) gives 20 degrees at both ends. The page follows the text, and the table's figures are not quoted.",
+   "line": "Crowley on the span from the 21st degree of Cancer to the 20th degree of Leo (pdf p145); on the decans and the elemental attribution (pdf p139).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "its-character",
-   "title": "Its character as Crowley describes it",
-   "line": "Crowley's description of the figure and the card, in his own words.",
+   "title": "Character",
+   "line": "Crowley on the character of the Prince of Wands (pdf p145).",
    "quotes": [
     {
      "work": "book-of-thoth",

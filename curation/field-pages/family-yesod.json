@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "yesod",
- "line": "Crowley gives Yesod the number 9 and the Moon; Jung numbers it the ninth and middle Sefira of the lowest triad.",
+ "line": "Crowley on Yesod (The Book of Thoth); Jung on Jezoth and Yesod in CW14 ¶18, ¶634 and ¶635.",
  "sections": [
   {
    "id": "jung-ninth",
    "title": "Jung's ninth Sefira",
-   "line": "Jung numbers Yesod, which he spells Jezoth, the ninth and middle Sefira, and places it in the genital region of the Original Man, whose head is Kether.",
+   "line": "Jung on Jezoth as the ninth and middle Sefira, and the genital region of the Original Man: CW14 ¶634 and ¶18.",
    "quotes": [
     {
      "work": "cw14",
@@ -26,7 +26,7 @@
   {
    "id": "the-moon-of-yesod",
    "title": "The Moon of Yesod",
-   "line": "Crowley gives Yesod the Moon and calls the Moon of Yesod the foundation of the Tree.",
+   "line": "Crowley on the Moon of Yesod and Yesod as the foundation of the Tree: The Book of Thoth, pdf p110, p207 and p180.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "the-nines",
    "title": "The Nines",
-   "line": "The Nine cards are attributed to Yesod, which Crowley calls the seat of the great crystallization of energy, and the direct ray from Tiphareth saves it.",
+   "line": "Crowley on the Nines and Yesod: The Book of Thoth, pdf p180 and p221.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -76,7 +76,7 @@
   {
    "id": "the-two-sides",
    "title": "The two sides Yesod unites",
-   "line": "Jung says Yesod unites Nezach on the right with Hod on the left.",
+   "line": "Jung on Yesod uniting Nezach on the right with Hod on the left: CW14 ¶635.",
    "quotes": [
     {
      "work": "cw14",

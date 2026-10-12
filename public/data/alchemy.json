@@ -1,15 +1,15 @@
 {
  "version": 1,
- "line": "Alchemy as Jung reads it: a process of colours and operations that the alchemists projected into matter, and that he reads as individuation.",
+ "line": "The alchemical opus in Jung's texts (CW9ii, CW11, CW12, CW14, CW16): the four colours, the operations, the matter and the elements.",
  "opus": {
-  "line": "Four colours in order, blackening, whitening, yellowing and reddening; the yellowing was later dropped from the scheme.",
+  "line": "The four stages by their colours: blackening, whitening, yellowing, reddening (CW12 ¶333).",
   "stages": [
    {
     "id": "nigredo",
     "family": "nigredo",
     "name": "Nigredo",
     "colour": "black",
-    "line": "The blackening: the first state, present in the prima materia or produced by separating the elements.",
+    "line": "The blackening: the initial state, present in the prima materia from the beginning or produced by the separation of the elements (CW12 ¶334).",
     "quotes": [
      {
       "text": "The nigredo or blackness (fig. 115) is the initial state, either present from the beginning as a quality of the prima materia, the chaos or massa confusa, or else produced by the separation (solutio, separatio, divisio, putrefactio) of the elements.",
@@ -40,7 +40,7 @@
      }
     ],
     "psyche": {
-     "line": "Jung reads the blackening as the encounter with the shadow and as the darkness of the unconscious.",
+     "line": "Jung writes that the nigredo corresponds to the encounter with the shadow (CW12 ¶41) and to the darkness of the unconscious (CW14 ¶646).",
      "quotes": [
       {
        "text": "The author of this sentence must have been undergoing the experience of the nigredo, the first stage of the work, which was felt as “melancholia” in alchemy and corresponds to the encounter with the shadow in psychology.",
@@ -93,7 +93,7 @@
     "family": "albedo",
     "name": "Albedo",
     "colour": "white",
-    "line": "The whitening: the silver or moon condition, which still has to be raised to the sun.",
+    "line": "The whitening: the silver or moon condition, which still has to be raised to the sun condition (CW12 ¶334).",
     "quotes": [
      {
       "text": "It is the silver or moon condition, which still has to be raised to the sun condition.",
@@ -124,7 +124,7 @@
      }
     ],
     "psyche": {
-     "line": "Jung reads the whitening as illumination out of the darkness of the unconscious, with Luna as the anima.",
+     "line": "Jung writes that from the darkness of the unconscious comes the light of illumination, the albedo (CW14 ¶220), and that the role of Luna devolves upon the anima (CW14 ¶218).",
      "quotes": [
       {
        "text": "From the darkness of the unconscious comes the light of illumination, the albedo.",
@@ -165,7 +165,7 @@
     "family": "citrinitas",
     "name": "Citrinitas",
     "colour": "yellow",
-    "line": "The yellowing, which Jung says was omitted later: he names it in running text but never describes it on its own.",
+    "line": "The yellowing, xanthosis or citrinitas: the third of the four stages (CW12 ¶333); the transition to the rubedo (CW12 ¶334).",
     "quotes": [
      {
       "text": "Later, about the fifteenth or sixteenth century, the colours were reduced to three, and the xanthosis, otherwise called the citrinitas, gradually fell into disuse or was but seldom mentioned.",
@@ -205,7 +205,7 @@
      }
     ],
     "psyche": {
-     "line": "In one dream commentary Jung reads the four colours as the move from trinity to quaternity.",
+     "line": "Jung writes that the four colours in the dream represent the transition from trinity to quaternity (CW12 ¶220).",
      "quotes": [
       {
        "text": "The fact is that the four colours in the dream represent the transition from trinity to quaternity",
@@ -239,7 +239,7 @@
     "family": "rubedo",
     "name": "Rubedo",
     "colour": "red",
-    "line": "The reddening: the marriage of the red king and the white queen, and the last stage.",
+    "line": "The reddening: the marriage of the red man and the white woman, Sol and Luna (CW14 ¶307); the second and usually final stage (CW14 ¶434).",
     "quotes": [
      {
       "text": "The alchemists termed this the rubedo, in which the marriage of the red man and the white woman, Sol and Luna, is consummated.",
@@ -279,7 +279,7 @@
      }
     ],
     "psyche": {
-     "line": "Jung reads the redness as warmth and light from the sun, which is consciousness.",
+     "line": "Jung writes that the growing redness denotes an increase of warmth and light coming from the sun, consciousness (CW14 ¶307).",
      "quotes": [
       {
        "text": "The growing redness (rubedo) which now follows denotes an increase of warmth and light coming from the sun, consciousness.",
@@ -315,7 +315,7 @@
    }
   ],
   "bridge": {
-   "line": "The peacock's tail between black and white: the many colours that lead to the one white.",
+   "line": "The peacock's tail (cauda pavonis): the many colours lead to the one white colour that contains all colours (CW12 ¶334); the albedo follows it immediately (CW14 ¶434).",
    "quotes": [
     {
      "text": "From this the washing (ablutio, baptisma) either leads direct to the whitening (albedo), or else the soul (anima) released at the “death” is reunited with the dead body and brings about its resurrection, or again the “many colours” (omnes colores), or “peacock’s tail” (cauda pavonis), lead to the one white colour that contains all colours.",
@@ -342,7 +342,7 @@
   {
    "id": "calcinatio",
    "name": "Calcinatio",
-   "line": "Burning until the spirit is driven out; the ash that remains is named the end-product.",
+   "line": "Calcinatio is named among the kinds of burning by which the spirit is expelled; the end-product is called ash (CW14 ¶247).",
    "quotes": [
     {
      "text": "As the expulsion of the spirit was effected by various kinds of burning (combustio, adustio, calcinatio, assatio, sublimatio, incineratio, etc.), it was natural to call the end-product “ash”",
@@ -378,7 +378,7 @@
   {
    "id": "solutio",
    "name": "Solutio",
-   "line": "Dissolution in the lunar or philosophical water, which is both the stone and its solvent.",
+   "line": "The philosophical water is the stone or the prima materia itself and also its solvent (CW12 ¶337); solvent and solute pass into a higher state (CW14 ¶434).",
    "quotes": [
     {
      "text": "During the solutio, separatio, and extractio the succus lunariae (juice of the moon-plant), blood, or aqua permanens is either applied or extracted.",
@@ -428,7 +428,7 @@
   {
    "id": "coagulatio",
    "name": "Coagulatio",
-   "line": "The matter is made firm again; Jung reads the coagulating sulphur as turned inwards.",
+   "line": "The coagulating sulphur, turned outwards in the corporal gold, is turned inwards (CW14 ¶134); the peacock's tail appears in the coagulation (CW12 ¶400).",
    "quotes": [
     {
      "text": "the coagulating sulphur, which in the corporal gold was turned outwards [extroversion], is turned inwards",
@@ -468,7 +468,7 @@
   {
    "id": "sublimatio",
    "name": "Sublimatio",
-   "line": "A white soul rises with the spirit, and is fixed only when the secret stone is added.",
+   "line": "A shining white soul flies up to heaven with the spirit; its fixation takes place when the secret stone is added (CW12 ¶462).",
    "quotes": [
     {
      "text": "there germinates, through the mediation of the spirit, a shining white soul [anima candida] which flies up to heaven with the spirit",
@@ -503,7 +503,7 @@
   {
    "id": "mortificatio",
    "name": "Mortificatio",
-   "line": "The killing of the first poisonous stage: the slaying of the dragon, and the mutilation of the animal forms.",
+   "line": "The slaying of the dragon, the mortificatio of the first, dangerous, poisonous stage of the anima (CW14 ¶168); a mutilation performed on the lion (CW14 ¶169).",
    "quotes": [
     {
      "text": "“Unless ye slay me” usually refers to the slaying of the dragon, the mortificatio of the first, dangerous, poisonous stage of the anima (= Mercurius), freed from her imprisonment in the prima materia.",
@@ -539,7 +539,7 @@
   {
    "id": "separatio",
    "name": "Separatio",
-   "line": "The elements are parted, the earth from the primal water, and composites return to their elements.",
+   "line": "The earth is separated from the primal water, and the composite natures are changed back into their initial elements (CW12 ¶367).",
    "quotes": [
     {
      "text": "The painful conflict that begins with the nigredo or tenebrositas is described by the alchemists as the separatio or divisio elementorum, the solutio, calcinatio, incineratio, or as dismemberment of the body",
@@ -575,7 +575,7 @@
   {
    "id": "coniunctio",
    "name": "Coniunctio",
-   "line": "The union of opposites; Jung says that when they unite all energy ceases and there is no more flow.",
+   "line": "Jung writes that when the opposites unite, all energy ceases: there is no more flow (CW16 ¶467).",
    "quotes": [
     {
      "text": "so, after the coniunctio oppositorum, deathlike stillness reigns.",
@@ -601,7 +601,7 @@
   {
    "id": "distillatio",
    "name": "Distillatio",
-   "line": "One made from four, by distilling and subliming in a circle, so that the soul comes off in its purest state.",
+   "line": "The production of one from four by distillation and sublimation in circular form, so that the soul or spirit is extracted in its purest state (CW12 ¶165).",
    "quotes": [
     {
      "text": "The production of one from four is the result of a process of distillation and sublimation which takes the so-called “circular” form",
@@ -636,7 +636,7 @@
   {
    "id": "circulatio",
    "name": "Circulatio",
-   "line": "The wheel of the work: the rising and falling of vapours, and a rotation that is dynamic, not static.",
+   "line": "The wheel is a favourite symbol for the circulatio, meaning the ascensus and descensus (CW12 ¶214); the rotation motif is dynamic, not static (CW12 ¶283).",
    "quotes": [
     {
      "text": "It is to be noted that the wheel is a favourite symbol in alchemy for the circulating process, the circulatio.",
@@ -680,7 +680,7 @@
   {
    "id": "putrefactio",
    "name": "Putrefactio",
-   "line": "The corruption of the matter, which Jung says is synonymous with the nigredo, the grave and death.",
+   "line": "Jung writes that the transformation is effected by putrefaction, which is synonymous with the nigredo, the grave, and death (CW14 ¶714).",
    "quotes": [
     {
      "text": "Then, it causes or signifies the putrefactio, “which in our day was never seen,” says the Rosarium",
@@ -718,7 +718,7 @@
   {
    "id": "prima-materia",
    "name": "The prima materia",
-   "line": "The starting matter, given in many forms; Jung says it sometimes coincides with the nigredo.",
+   "line": "Jung lists many names the alchemists gave the prima materia (CW12 ¶425); it sometimes coincides with the nigredo (CW12 ¶433).",
    "quotes": [
     {
      "text": "For one alchemist the prima materia was quicksilver, for others it was ore, iron, gold, lead, salt, sulphur, vinegar, water, air, fire, earth, blood, water of life, lapis, poison, spirit, cloud, sky, dew, shadow, sea, mother, moon",
@@ -758,7 +758,7 @@
   {
    "id": "vessel",
    "name": "The vessel",
-   "line": "The sealed vessel is the womb from which the stone is born, and Jung calls it a true symbol.",
+   "line": "The Hermetic vessel is a matrix or uterus from which the filius philosophorum, the stone, is born; Jung calls it a true symbol (CW12 ¶338).",
    "quotes": [
     {
      "text": "Another, no less important, idea is that of the Hermetic vessel (vas Hermetis), typified by the retorts or melting-furnaces that contained the substances to be transformed",
@@ -807,7 +807,7 @@
   {
    "id": "mercurius",
    "name": "Mercurius",
-   "line": "Quicksilver and the world-creating spirit in matter: lowest as prima materia, highest as the stone.",
+   "line": "Mercurius comes lowest as prima materia and highest as lapis philosophorum (CW12 ¶84); the alchemist means quicksilver and inwardly the world-creating spirit concealed in matter (CW12 ¶404).",
    "quotes": [
     {
      "text": "In the alchemical hierarchy of gods Mercurius comes lowest as prima materia and highest as lapis philosophorum.",
@@ -847,7 +847,7 @@
   {
    "id": "sulphur-and-salt",
    "name": "Sulphur and salt",
-   "line": "Sulphur is the burning, active principle and salt the cosmic, lunar and feminine one; Mercurius partakes of both.",
+   "line": "Sulphur as prima materia is burning and corrosive (CW14 ¶134); salt is a cosmic principle correlated with the feminine, lunar side (CW14 ¶240); Mercurius partakes of the red sulphur and the lunar salt (CW14 ¶235).",
    "quotes": [
     {
      "text": "on the one hand it is the prima materia, and in this form it is burning and corrosive (adurens)",
@@ -891,7 +891,7 @@
   {
    "id": "metals-and-planets",
    "name": "Metals and planets",
-   "line": "The seven metals stand for the seven planets, and gold is the sun's image in the earth.",
+   "line": "Jung writes that the seven allude to the seven planets and hence to the metals (CW12 ¶410); Maier writes that gold is the sun's image in the earth (CW12 ¶445).",
    "quotes": [
     {
      "text": "The seven are an obvious allusion to the seven planets and hence to the metals",
@@ -947,7 +947,7 @@
   {
    "id": "the-stone",
    "name": "The stone",
-   "line": "The lapis is often the prima materia as well as the goal; for Jung the Self is a lapis invisibilitatis.",
+   "line": "The lapis philosophorum is often the prima materia, or the means of producing the gold (CW12 ¶335); Jung writes that the self, as totality, is a veritable lapis invisibilitatis (CW12 ¶247).",
    "quotes": [
     {
      "text": "The lapis philosophorum, for instance, is often the prima materia, or the means of producing the gold",
@@ -995,7 +995,7 @@
   }
  ],
  "elements": {
-  "line": "The four elements, with the fourth position left open, and the fifth as the unity the four come to, not an element added to them.",
+  "line": "The four elements and the quinta essentia: CW12 ¶31, CW9ii ¶375 and ¶376, CW11 ¶104, and von Franz, Number and Time, p77.",
   "quotes": [
    {
     "text": "There are always four elements, but often three of them are grouped together, with the fourth in a special position—sometimes earth, sometimes fire.",

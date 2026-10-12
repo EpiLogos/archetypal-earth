@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-seven-of-disks",
- "line": "Seven of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Seven of Disks: Failure (pdf p179); Saturn in Taurus (pdf p233); Netzach (pdf p178, p233).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 179, 233).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p179); on Saturn in Taurus (pdf p233).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The chapter names the number Seven as Netzach (pdf 233); the Sevens group text does the same (pdf 178).",
+   "line": "Crowley on the number Seven, Netzach (pdf p233); on the Sevens and Netzach (pdf p178).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the disks, not a divinatory reading.",
+   "line": "Crowley on the disks as the leaden disks of Saturn (pdf p233).",
    "quotes": [
     {
      "work": "book-of-thoth",

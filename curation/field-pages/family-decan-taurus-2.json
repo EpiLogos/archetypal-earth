@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-taurus-2",
- "line": "Crowley's Six of Disks is the card for the second decan of Taurus, with the Moon as its planet in the sign.",
+ "line": "Crowley on the Six of Disks, the card for the second decan of Taurus (pdf p178, p232).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Taurus.",
+   "title": "The Six of Disks: title and attribution",
+   "line": "The title and the attribution of the Six of Disks, pdf p178, p232.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Six of Disks, pdf p232.",
    "quotes": [
     {
      "work": "book-of-thoth",

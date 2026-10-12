@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-star",
- "line": "Crowley's account of Atu XVII: the letter He, Aquarius, Nuith, and the path of He that the Emperor's chapter also claims.",
+ "line": "Crowley on Atu XVII: the letter Hé, Aquarius, Nuith our Lady of the Stars, and the Path of Hé (pdf p100, p101, p211).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter He and the sign Aquarius, and the picture of Nuith, Lady of the Stars.",
+   "title": "Letter, sign and picture",
+   "line": "Crowley on the letter Hé, Aquarius, and Nuith, our Lady of the Stars (pdf p100).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's description of the figure as personified in human form, with heaven a veil before the face of the goddess.",
+   "title": "The figure of Nuith",
+   "line": "Crowley on the figure personified as human-seeming (pdf p100) and on heaven as a veil before the face of the goddess (pdf p101).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "tree-and-conflict",
-   "title": "The Tree, and a conflict that is not resolved",
-   "line": "Crowley calls the Path of He the Great Mother, the Star and Nuit. The Key Scale numbers He path 15, which runs between Chokmah and Tiphareth on the Tree. The Emperor's chapter gives those same two ends in its own text, while the table gives the Emperor Tzaddi, path 28. The two statements are not reconciled here.",
+   "title": "The Path of Hé",
+   "line": "Crowley on the Path of Hé, the Great Mother, the Star, our Lady Nuit (pdf p211), and on Chokmah and Tiphareth (pdf p67).",
    "quotes": [
     {
      "work": "book-of-thoth",

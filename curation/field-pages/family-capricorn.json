@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "capricorn",
- "line": "Burt's chapter on Capricorn, with Jung's goat-fish.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Capricorn (pdf pp. 379–446); Jung on the goat-fish (CW5; Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Capricorn, pdf pp. 379–446. Her account of time, the Death Gate and the rulers.",
+   "line": "Burt, chapter on Capricorn (pdf pp. 379–446): pdf p381, p379 and p384.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Capricorn, pdf pp. 379–446. The senex, the Wise Old Man and dharma.",
+   "line": "Burt, chapter on Capricorn (pdf pp. 379–446): pdf p382, p398 and p389.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the goat-fish, in cw05 and in his seminar.",
+   "line": "Jung on the goat-fish: CW5 ¶290; Dream Analysis seminar, pdf p435.",
    "quotes": [
     {
      "work": "cw05",

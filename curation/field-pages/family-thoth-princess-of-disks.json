@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-disks",
- "line": "Crowley's Princess of Disks: the Hé final of the Name, the earthy part of Earth, and a quadrant of the heavens that the table alone names.",
+ "line": "Crowley's Princess of Disks: Hé final of the Name (pdf p140); the earthy part of Earth (pdf p171); no zodiacal attribution (pdf p140).",
  "sections": [
   {
    "id": "the-court-and-its-element",
    "title": "The court and its element",
-   "line": "Crowley names the Princesses by the Hé final of the Name.",
+   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Disks (pdf p171).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-place-in-the-heavens",
-   "title": "Its place in the heavens",
-   "line": "Princesses have no zodiacal attribution. The attribution table names a quadrant of the heavens about Kether (pdf p274); the text names none, so no quotation stands for it.",
+   "title": "Zodiacal attribution",
+   "line": "Crowley on the Princesses and the Zodiac (pdf p140).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -38,8 +38,8 @@
   },
   {
    "id": "its-character",
-   "title": "Its character as Crowley describes it",
-   "line": "Crowley's description of the figure and the card, in his own words.",
+   "title": "The figure",
+   "line": "Crowley on the crest and sceptre of the Princess of Disks, and on Womanhood (pdf p171).",
    "quotes": [
     {
      "work": "book-of-thoth",

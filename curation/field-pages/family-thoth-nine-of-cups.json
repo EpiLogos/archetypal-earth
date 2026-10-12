@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-cups",
- "line": "Nine of Cups: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Nine of Cups: Happiness (pdf p180); Jupiter in Pisces (pdf p207); Yesod (pdf p180).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and ruler, as the chapter gives them (pdf 180, 207).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p180); on Jupiter in Pisces (pdf p207).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Nines belong to Yesod (pdf 180). The quoted record for this card does not name Yesod again.",
+   "line": "Crowley on the Nines and Yesod (pdf p180).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the culmination, not a divinatory reading.",
+   "line": "Crowley on the culmination and perfection of the original force of Water (pdf p207).",
    "quotes": [
     {
      "work": "book-of-thoth",

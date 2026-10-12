@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-disks",
- "line": "Crowley’s Two of Disks: Change, Chokmah in the suit of Earth, Jupiter and Capricornus.",
+ "line": "Crowley’s Two of Disks: Chokmah in the suit of Earth (pdf p227); Jupiter and Capricornus (pdf p227); formerly the Lord of Harmonious Change (pdf p176).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The old name was Lord of Harmonious Change, and the card is now called Change. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree",
-   "line": "The number Two, Chokmah, rules in the suit pertaining to Earth, and the Twos essay refers all four Twos to Chokmah.",
+   "line": "Crowley on the Two and Chokmah in the suit of Earth (pdf p227); on the Twos and Chokmah (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the card as the complete manifested Universe in its dynamics, with the interplay of the four elements in movement.",
+   "line": "Crowley on the card as the picture of the manifested Universe and on the interplay of the Four Elements (pdf p227).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -63,8 +63,8 @@
   },
   {
    "id": "conflicts-and-gaps",
-   "title": "Conflicts and gaps",
-   "line": "The chapter names the pair Jupiter and Capricornus, where the attribution table (pdf 275, image only, not quoted) reads Jupiter in Capricorn. This page keeps the text reading.",
+   "title": "Jupiter and Capricornus",
+   "line": "Crowley on the card’s celestial rulers (pdf p227).",
    "quotes": [
     {
      "work": "book-of-thoth",

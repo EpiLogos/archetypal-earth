@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-wands",
- "line": "Crowley’s Two of Wands: Dominion, Mars in its own sign Aries, placed at Chokmah.",
+ "line": "Crowley’s Two of Wands: Lord of Dominion (pdf p175); Chokmah (pdf p35); Mars in Aries (pdf p185).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card, from the Aces-to-Twos essay. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p175); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The Twos are Chokmah in the tree essay, which also gives the first decan of Aries ruled by Mars. The card’s own chapter names Mars in his own sign Aries.",
+   "line": "Crowley on Chokmah and the first decan of Aries (pdf p35); on Mars in Aries (pdf p185).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley’s account of the Will in its most exalted form and of the image of crossed dorjes.",
+   "line": "Crowley on the card as the Will in its most exalted form, and on the crossed Dorjes (pdf p185).",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-priestess",
- "line": "Crowley's Atu II: the letter Gimel, the Moon, and the path that Crowley's Ace of Swords chapter gives from Kether to Tiphareth.",
+ "line": "Crowley on Atu II: the letter Gimel, the Moon, the path of Gimel, and Isis the Eternal Virgin (pdf p27, p61, p62, p211).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The letter Gimel, the camel, and the Moon as the feminine symbol.",
+   "title": "Letter and planet",
+   "line": "Crowley refers the card to the letter Gimel and to the Moon (pdf p61).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The chapter describes a path between the Father and the Son without naming its ends; the Ace of Swords chapter names Kether and Tiphareth. The Key Scale gives path 13, and Crowley numbers this path as joining I to 6 (pdf p27).",
+   "title": "The path of Gimel",
+   "line": "Crowley on the path of Gimel (pdf p61, p211) and on the card joining the number 1 to the number 6 (pdf p27).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -56,8 +56,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's account of the figure and of the path viewed from the other side of the Tree.",
+   "title": "Isis and the path upwards",
+   "line": "Crowley on the card as Isis the Eternal Virgin and the Artemis of the Greeks (pdf p61) and on the path which leads upwards (pdf p62).",
    "quotes": [
     {
      "work": "book-of-thoth",

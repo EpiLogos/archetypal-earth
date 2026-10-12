@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "gemini",
- "line": "Burt's chapter on Gemini, and Jung's few passages on the twins.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Gemini (pdf pp. 95–134); Jung on the twins (Dream Analysis seminar; CW5).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Gemini, pdf pp. 95–134. Her account of the sign and its ruler.",
+   "line": "Burt, chapter on Gemini (pdf pp. 95–134): pdf p95, p98, p102 and p115.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Gemini, pdf pp. 95–134. Hermes, the puer and the messenger.",
+   "line": "Burt, chapter on Gemini (pdf pp. 95–134): pdf p95, p113 and p98.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung gives the twins twice in these sources: the seminar, and a comparison with the Dioscuri.",
+   "line": "Jung on the twins and the Dioscuri: Dream Analysis seminar, pdf p434; CW5 ¶296.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

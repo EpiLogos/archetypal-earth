@@ -1,6 +1,6 @@
 // Gate: zooming out from the Field enters Astrology on the live sky, never a bare sky. From the Field's own views (the default
 // landing, The Self, and the globe) the wheel out lands in Astrology with its Options and its orbits; zooming back in by the
-// wheel returns to the Field cleanly; S toggles both ways; Escape leaves the sky. The old Names strip is gone.
+// wheel returns to the Field cleanly; S toggles both ways; Escape closes the sheet (if one is shown), then leaves the sky. The old Names strip is gone.
 //   npx vite --port 5197 --strictPort &
 //   node tests/ui/e2e/zoom-out-sky.mjs [chromium|webkit]
 import { launch, open } from './lib.mjs';
@@ -102,17 +102,25 @@ try {
     await settle(page);
     const out = await snap(page);
     check(out.lens?.id === 'astrology' && !out.bareSky, 'zooming out from the globe enters Astrology, not a bare sky', `lens ${JSON.stringify(out.lens)}`);
-    // Escape in Astrology closes its sheet only; the mode stays (the Options stand), as the mode-chrome rule says
+    // the live sky is sky-only: it opens with no sheet (its standard Open action is disabled), so Escape steps out of the mode
+    // onto the Field (the controller's stepBack). The sheet-closing Escape is checked below, on Charts
+    check(!(await page.$('.lens-panel:not([hidden])')), 'zooming out opens Astrology with no sheet');
     await page.keyboard.press('Escape');
-    await page.waitForTimeout(600);
-    const esc = await snap(page);
-    check(esc.lens?.id === 'astrology' && esc.options, 'Escape keeps the mode: Astrology and its Options stand', `hash "${esc.hash}"`);
-    // the browser's Back returns to where the zoom began (the Self's focus), out of the sky
+    await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
+    await settle(page);
+    const left = await snap(page);
+    check(!left.sky && !left.lens && left.view === 'world', 'Escape on the sheetless live sky leaves it for the Field', `hash "${left.hash}"`);
+    // the browser's Back retraces: first onto the sky Escape left, then to where the zoom began (the globe)
+    await page.goBack();
+    await page.waitForFunction(() => !!window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
+    await settle(page);
+    const back1 = await snap(page);
+    check(back1.lens?.id === 'astrology' && back1.hash.startsWith('#/sky'), 'Back returns to the sky Escape left', `hash "${back1.hash}"`);
     await page.goBack();
     await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
     await settle(page);
     const back = await snap(page);
-    check(!back.sky && !back.lens && back.view === 'world', 'Back leaves the sky for the Field where the zoom began (the globe)', `hash "${back.hash}"`);
+    check(!back.sky && !back.lens && back.view === 'world', 'Back again leaves the sky for the Field where the zoom began (the globe)', `hash "${back.hash}"`);
     await ctx.close();
   }
 
@@ -159,6 +167,22 @@ try {
     const link = await snap(page);
     check(link.lens?.id === 'astrology' && !link.bareSky && link.lensName === 'Astrology' && link.options, 'the link #/sky opens Astrology with its Options', `lens ${JSON.stringify(link.lens)}`);
     check(link.oldNamesStrip === 0, 'and no old Names strip');
+    // Charts is a sheet: its Options row reveals it, Escape closes that sheet only (Astrology and its Options stand), the next leaves
+    await page.click('.sh-controls details.mode-options > summary');
+    await page.locator('.sh-controls .mode-options-body button').filter({ hasText: /^Charts/ }).first().click();
+    await page.waitForFunction(() => !!document.querySelector('.lens-panel:not([hidden])'), null, { timeout: 15000 }).catch(() => {});
+    check(!!(await page.$('.lens-panel:not([hidden])')), 'the Charts row of the Options reveals the sheet');
+    // an open Options disclosure takes the first Escape; the sheet is then closed by the next
+    if (await page.$eval('.sh-controls details.mode-options', (d) => d.open)) { await page.keyboard.press('Escape'); await page.waitForTimeout(300); }
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(800);
+    const closed = await snap(page);
+    check(closed.lens?.id === 'astrology' && closed.options && !(await page.$('.lens-panel:not([hidden])')), 'Escape closes the Charts sheet and keeps Astrology with its Options', `hash "${closed.hash}"`);
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
+    await settle(page);
+    const out = await snap(page);
+    check(!out.sky && !out.lens && out.view === 'world', 'and the next Escape leaves for the Field', `hash "${out.hash}"`);
     await ctx.close();
   }
 } finally {

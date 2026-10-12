@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-universe",
- "line": "Crowley's account of Atu XXI: the letter Tau, Saturn with a second attribution to Earth, and the Great Work accomplished.",
+ "line": "Crowley on Atu XXI: the letter Tau, Saturn, earth thrust upon the symbol, the path of Tau, and the Great Work accomplished (pdf p109, p110).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter, the planet Saturn, and the second attribution to Earth, which he says was thrust upon the symbol. The table gives Earth as an unnumbered 32 bis row.",
+   "title": "Letter, planet and element",
+   "line": "Crowley on the letter Tau attributed to Saturn, and on the element of earth thrust upon the symbol (pdf p109).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path-and-figure",
-   "title": "Its path on the Tree, and what it figures",
-   "line": "The path of Tau comes from the Moon of Yesod and descends upon Malkuth. Crowley reads the card as the Fool's manifestation, its purpose accomplished.",
+   "title": "The path of Tau and the Great Work",
+   "line": "Crowley on the path of Tau as an emanation from the Moon of Yesod descending upon Malkuth, on the Great Work accomplished, and on the Fool and the Universe (pdf p110).",
    "quotes": [
     {
      "work": "book-of-thoth",

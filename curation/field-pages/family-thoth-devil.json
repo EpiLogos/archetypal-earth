@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-devil",
- "line": "Crowley's account of Atu XV: the letter Ayin, Capricorn ruled by Saturn, and the figure of Pan.",
+ "line": "Crowley on Atu XV: the letter Ayin, Capricornus ruled by Saturn, Pan Pangenetor, and Atu XIII and XV from Tiphareth (pdf p95).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter, the sign, its ruler and the name Crowley gives the figure. The table spells the letter A'ain, against the text's Ayin.",
+   "title": "Letter, sign and figure",
+   "line": "Crowley on the letter Ayin, Capricornus, Saturn as its ruler, and Pan Pangenetor (pdf p95).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "Crowley says this path leads from Tiphareth, with the far end not named in the text. The table gives Key Scale path 26.",
+   "title": "Atu XIII and XV on the Tree",
+   "line": "Crowley on Atu XIII and XV, symmetrically placed on the Tree of Life and leading from Tiphareth (pdf p95), and on the Paths that join the ten numbers (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",

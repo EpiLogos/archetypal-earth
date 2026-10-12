@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-death",
- "line": "Crowley's account of Atu XIII: the letter Nun, Scorpio ruled by Mars, and the figure of the dance of death.",
+ "line": "Crowley on Atu XIII: the letter Nun, Scorpio ruled by Mars, the dance of death, and Atu XIII and XV from Tiphareth (pdf p90, p91, p95).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter and the sign, with the ruler he names for the sign.",
+   "title": "Letter and sign",
+   "line": "Crowley refers the card to the letter Nun, a fish, and to the sign of Scorpio, ruled by Mars (pdf p90).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "Crowley says this path leads from Tiphareth, with the far end not named. The table gives Key Scale path 24, with no sephira pair in the text.",
+   "title": "Atu XIII and XV on the Tree",
+   "line": "Crowley on Atu XIII and XV, symmetrically placed on the Tree of Life and leading from Tiphareth (pdf p95), and on the Paths that join the ten numbers (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's description of the figure and the water imagery of the card.",
+   "title": "The dance of death",
+   "line": "Crowley on the card as the dance of death, the figure a skeleton bearing a scythe (pdf p91), and as the symbol of life beneath the waters (pdf p90).",
    "quotes": [
     {
      "work": "book-of-thoth",

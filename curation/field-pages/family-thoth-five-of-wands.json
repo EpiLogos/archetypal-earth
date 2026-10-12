@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-five-of-wands",
- "line": "Crowley’s Five of Wands: Strife, referred to Geburah, ruled also by Saturn and Leo.",
+ "line": "Crowley’s Five of Wands: Strife (pdf p177); Geburah (pdf p40, p189); Saturn and Leo (pdf p40, p189).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree",
-   "line": "The card is referred to Geburah of the suit of Fire, and the tree essay gives Geburah as the sephira of a Five.",
+   "line": "Crowley on Geburah of the suit of Fire (pdf p189); on the Fives and Geburah (pdf p40).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley’s account of the card’s fiery energy, the wand of the Chief Adept, and its volcanic scope.",
+   "line": "Crowley on the volcanic energy of the card and on the wand of the Chief Adept (pdf p189).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -63,8 +63,8 @@
   },
   {
    "id": "conflicts-and-gaps",
-   "title": "Conflicts and gaps",
-   "line": "The chapter text rules the card by Saturn and Leo. The attribution table (pdf 275, image only, not quoted) reads Saturn in Leo, and this page keeps the text reading.",
+   "title": "Saturn and Leo",
+   "line": "Crowley on the card’s rulers (pdf p40, p189).",
    "quotes": [
     {
      "work": "book-of-thoth",

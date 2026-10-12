@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-swords",
- "line": "Six of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Six of Swords: Science (pdf p178); Mercury in Aquarius (pdf p218); Tiphareth (pdf p177, p211).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 178, 218).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p178); on Mercury in Aquarius (pdf p218).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "Tiphareth is the airy sephira in the Ace of Swords chapter (pdf 211) and the Sixes' sephira (pdf 177).",
+   "line": "Crowley on Tiphareth as the airy Sephira (pdf p211); on the Sixes and Tiphareth (pdf p177).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His account of the card's balance.",
+   "line": "Crowley on the balance of the mental and moral faculties (pdf p218).",
    "quotes": [
     {
      "work": "book-of-thoth",

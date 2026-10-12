@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-disks",
- "line": "Nine of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Nine of Disks: Gain (pdf p181); Venus in Virgo (pdf p236); Yesod (pdf p180).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and ruler, as the chapter gives them (pdf 181, 236).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p181); on Venus in Virgo (pdf p236).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Nines belong to Yesod (pdf 180).",
+   "line": "Crowley on the Nines and Yesod (pdf p180).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card, not a divinatory reading.",
+   "line": "Crowley on good luck in material affairs, favour and popularity (pdf p236).",
    "quotes": [
     {
      "work": "book-of-thoth",

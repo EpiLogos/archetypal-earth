@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-swords",
- "line": "Ten of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Ten of Swords: Ruin (pdf p181); the Sun in Gemini (pdf p222); Malkuth (pdf p181).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and ruler, as the chapter gives them (pdf 181, 222).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p181); on the Sun in Gemini (pdf p222).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Tens belong to Malkuth (pdf 181), which is in Assiah (pdf 181).",
+   "line": "Crowley on the Tens and Malkuth, and on Malkuth in the world of Assiah (pdf p181).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card, not a divinatory reading.",
+   "line": "Crowley on reason run mad (pdf p222).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -57,8 +57,8 @@
   },
   {
    "id": "conflicts",
-   "title": "Conflicts and gaps",
-   "line": "The Tens group intro says there is now no planetary attribution to consider (pdf 181). The card's chapter names the Sun in Gemini, and the table agrees with the chapter. The record keeps the chapter's planet; the group intro is the conflict.",
+   "title": "Crowley’s group note on the Tens",
+   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
    "quotes": [
     {
      "work": "book-of-thoth",

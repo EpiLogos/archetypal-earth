@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "fire",
- "line": "In Jung's sources the fire of the work is hidden, is Mercurius, and is also the fourth function and the dynamism of feeling.",
+ "line": "Fire in Jung's sources: Mercurius as the only fire, fire and water, the four kinds of fire, the region of fire, and fire as dynamism and libido.",
  "sections": [
   {
    "id": "mercurius-the-only-fire",
    "title": "Mercurius as the only fire",
-   "line": "The alchemists count Mercurius as the only fire of the procedure, and the hidden fire that dwells within it.",
+   "line": "The fire in Mercurius and in the water: CW13 pdf p241; CW12 ¶473 and ¶433.",
    "quotes": [
     {
      "work": "cw13",
@@ -28,8 +28,8 @@
   },
   {
    "id": "fire-and-water-one-substance",
-   "title": "Fire and water in one substance",
-   "line": "Water and fire are one substance in two states, and the secret fire of the work is the mystical water.",
+   "title": "Fire and water",
+   "line": "Water as fire, and the secret fire as the mystical water: CW12 ¶338; CW11 ¶355; CW18 ¶1786.",
    "quotes": [
     {
      "work": "cw12",
@@ -51,7 +51,7 @@
   {
    "id": "four-kinds-of-fire",
    "title": "Four kinds of fire",
-   "line": "Jung reports the fire as fourfold, and reads a fourfold fire as the self being the source of energy.",
+   "line": "The fourfold fire, in Vigenere and in Maier: CW9ii pdf p144 and p261.",
    "quotes": [
     {
      "work": "cw09ii",
@@ -73,8 +73,8 @@
   },
   {
    "id": "the-fourth-function",
-   "title": "The fourth function",
-   "line": "Jung names the region of fire the inferior function, and links the four elements to the four functions only conditionally.",
+   "title": "The region of fire and the fourth function",
+   "line": "The fourth quarter, the transforming fire, and the four functions: CW14 ¶288, ¶282 and ¶276.",
    "quotes": [
     {
      "work": "cw14",
@@ -96,7 +96,7 @@
   {
    "id": "dynamism-and-libido",
    "title": "Dynamism and libido",
-   "line": "Fire is dynamism and emotion, set against the passive contemplation of water, and Jung reads the universal fire as the fire of libido.",
+   "line": "Fire as dynamism, passion and emotion, and as the fire of libido: CW10 ¶745; CW6 ¶495.",
    "quotes": [
     {
      "work": "cw10",

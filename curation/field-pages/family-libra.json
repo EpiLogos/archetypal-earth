@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "libra",
- "line": "Burt's chapter on Libra, with the anima and animus in partnership.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Libra (pdf pp. 253–294); Jung on Libra (Dream Analysis seminar; Aion).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Libra, pdf pp. 253–294. Her account of the seventh sign, Venus and the polarity.",
+   "line": "Burt, chapter on Libra (pdf pp. 253–294): pdf p253.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Libra, pdf pp. 253–294. Anima, animus and the seventh house.",
+   "line": "Burt, chapter on Libra (pdf pp. 253–294): pdf p258, p256 and p260.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the balance after the virgin, and on Libra as an air sign.",
+   "line": "Jung on the balance, and Libra as an air sign: Dream Analysis seminar, pdf p435 and p434; CW9ii pdf p95.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

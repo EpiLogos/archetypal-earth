@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-magus",
- "line": "Crowley's Atu I: the letter Beth, Mercury, and the path from Kether to Binah, under a chapter heading that differs from the card's name.",
+ "line": "Crowley on Atu I: the letter Beth, Mercury, and the path of Beth from Kether to Binah (pdf p45, p58, p59, p121).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The Key Scale prints The Magus and Crowley's chapter is headed The Juggler; his list of titles gives The Juggler. The attribution to Mercury is the same either way.",
+   "title": "Title, letter and planet",
+   "line": "Crowley's list of titles for Atu I to XXI (pdf p45) and his attribution of the card to the letter Beth and to Mercury (pdf p58).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "Mercury is the path from Kether to Binah, which Crowley also states in his appendix. The Key Scale gives path 12.",
+   "title": "The path of Beth",
+   "line": "Crowley on Mercury as the path leading from Kether to Binah (pdf p58) and on the path of Beth descending from Kether upon Binah (pdf p121).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's description of what the card stands for.",
+   "title": "The Wisdom, the Will, the Word",
+   "line": "Crowley on the Logos by whom the worlds were created (pdf p58) and on Mercury and the path of Beth (pdf p59).",
    "quotes": [
     {
      "work": "book-of-thoth",

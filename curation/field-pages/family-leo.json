@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "leo",
- "line": "Burt's chapter on Leo, and Jung's lion passages.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Leo (pdf pp. 175–210); Jung on the lion (CW5; Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Leo, pdf pp. 175–210. Her account of the solar principle and its ruler.",
+   "line": "Burt, chapter on Leo (pdf pp. 175–210): pdf p175 and p178.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Leo, pdf pp. 175–210. Solar myths, the inner lion and the shadow.",
+   "line": "Burt, chapter on Leo (pdf pp. 175–210): pdf p186, p183, p191 and p184.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the lion in his cw05 passage and in a seminar.",
+   "line": "Jung on the lion: CW5 ¶176; Dream Analysis seminar, pdf p434.",
    "quotes": [
     {
      "work": "cw05",

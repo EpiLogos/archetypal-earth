@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-fortune",
- "line": "Crowley's Atu X: the planet Jupiter and the letter Kaph; the table's numerical value for Kaph does not match his footnote.",
+ "line": "Crowley on Atu X: the planet Jupiter, the letter Kaph, a continual change of state, and the element of luck (pdf p81).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "Jupiter, the Greater Fortune, and the letter Kaph. The footnote gives Kaph the value 20; the table prints 20,500.",
+   "title": "Planet and letter",
+   "line": "Crowley on Jupiter, the Greater Fortune, and on the letter Kaph (pdf p81).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley reads the card as change of state and as the element of luck, not as good fortune alone. The Key Scale gives path 21, with no ends in the text.",
+   "title": "Change of state and luck",
+   "line": "Crowley on the card as the Universe in its aspect as a continual change of state, and on Jupiter as the element of luck (pdf p81).",
    "quotes": [
     {
      "work": "book-of-thoth",

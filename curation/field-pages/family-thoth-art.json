@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-art",
- "line": "Crowley's account of Atu XIV: Sagittarius, the arrow of directed Will, and the path from Yesod to Tiphareth.",
+ "line": "Crowley on Atu XIV: Sagittarius, the path from Yesod to Tiphareth, and the Arrow of directed Will (pdf p92, p94, p95).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The sign and the arrow. The letter Samekh is not named anywhere in the chapter; it comes from the table alone and is not quoted here.",
+   "title": "Sagittarius and the Arrow",
+   "line": "Crowley on Sagittarius, the opposite to Gemini (pdf p92), and on the Arrow as the glyph of Mercury and the symbol of directed Will (pdf p94).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The text gives the path from the Moon of Yesod to the Sun of Tiphareth. The Devil chapter places Atu XIV between the paths of XIII and XV, leading to the sphere which formulates Existence; that sentence does not name the sephira.",
+   "title": "The path of the card",
+   "line": "Crowley on the path from the Moon of Yesod to the Sun of Tiphareth (pdf p92) and on Atu XIV between Atu XIII and XV (pdf p95).",
    "quotes": [
     {
      "work": "book-of-thoth",

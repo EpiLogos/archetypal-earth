@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-virgo-1",
- "line": "Crowley's Eight of Disks is the card for the first decan of Virgo, with the Sun as its planet in the sign.",
+ "line": "Crowley on the Eight of Disks, the card for the first decan of Virgo (pdf p180, p234).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "The group text (pdf 180) gives the Sun in Virgo, and the attribution table agrees; the card chapter's own planet is set out in the section below.",
+   "title": "The Eight of Disks: title and attribution",
+   "line": "The title and the attribution of the Eight of Disks, pdf p180.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Eight of Disks, pdf p234.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -38,8 +38,8 @@
   },
   {
    "id": "text-conflict",
-   "title": "A conflict in the text",
-   "line": "The chapter at pdf 234 gives Mercury for this card in Virgo, where the group text and the attribution table give the Sun. This page records the Sun, the reading the group text and the table agree on.",
+   "title": "Eight of Disks: Crowley's attributions, pdf p180, p234, p275",
+   "line": "Crowley's card chapter for the Eight of Disks, pdf p234.",
    "quotes": [
     {
      "work": "book-of-thoth",

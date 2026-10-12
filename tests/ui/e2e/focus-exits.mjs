@@ -10,6 +10,10 @@ const NAME = Object.fromEntries([...field.archetypes, ...field.families, ...fiel
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const exact = (t) => new RegExp(`^${esc(t)}$`);
 const ONLY = process.env.FOCUS_EXITS_ONLY ?? '';
+// a click waits for its target to be visible, stable and unobstructed; under a loaded machine (software GL, other
+// processes) the label's own fade can take longer than a few seconds to settle. That wait is not an assertion: the
+// verdict is still the state each click leads to. FOCUS_EXITS_CLICK_MS overrides.
+const CLICK_MS = Number(process.env.FOCUS_EXITS_CLICK_MS ?? 12000);
 
 /** the state the app holds, the label and its whole-field crumb (visible, covered or absent), and the reading sheet's X */
 const measure = (page) => page.evaluate(() => {
@@ -63,7 +67,7 @@ async function toWorld(page) {
 async function clickNamed(page, scope, text) {
   const loc = page.locator(scope).filter({ hasText: exact(text) }).first();
   if (!(await loc.count())) throw new Error(`no ${scope} reads "${text}"`);
-  await loc.click({ timeout: 4000 });
+  await loc.click({ timeout: CLICK_MS });
 }
 
 /** the arrivals: each names the route or the click that reaches a focus, and whether Back is checked from it */
@@ -93,7 +97,7 @@ ARRIVALS.push({ id: 'url #/th/psychoid/deep', what: 'theoretic psychoid, /deep, 
 ARRIVALS.push(
   { id: 'click search: Anima', what: 'search', base: 'world', back: true, act: async (page) => { await press(page, '/'); await page.keyboard.type('Anima'); await settle(page, 500); await clickNamed(page, '.s-row .s-label', NAME.anima); await settle(page, 2000); } },
   { id: 'click search: Five', what: 'search, number', base: 'world', back: true, act: async (page) => { await press(page, '/'); await page.keyboard.type('Five'); await settle(page, 500); await clickNamed(page, '.s-row .s-label', NAME.five); await settle(page, 2000); } },
-  { id: 'click search: Court Knight', what: 'search, court', base: 'world', back: true, act: async (page) => { await press(page, '/'); await page.keyboard.type(NAME['court-knight']); await settle(page, 500); await page.locator('.s-row .s-label').filter({ hasText: /Knight/ }).first().click({ timeout: 4000 }); await settle(page, 2000); } },
+  { id: 'click search: Court Knight', what: 'search, court', base: 'world', back: true, act: async (page) => { await press(page, '/'); await page.keyboard.type(NAME['court-knight']); await settle(page, 500); await page.locator('.s-row .s-label').filter({ hasText: /Knight/ }).first().click({ timeout: CLICK_MS }); await settle(page, 2000); } },
   { id: 'click family ground: Abraxas > The Self', what: 'Archetypal ground link in a family reading', base: 'load', hash: '#/f/abraxas', back: true, act: async (page) => { await clickNamed(page, '.fl-links button', 'Reading'); await settle(page, 1200); await clickNamed(page, '.dp-flow button', NAME.self); await settle(page, 2000); } },
   { id: 'click theory page: The Self', what: 'a theoretic page links to an archetype (the theory page)', base: 'load', hash: '#/th/psychoid/deep', back: true, act: async (page) => { await page.waitForSelector('.th-link', { timeout: 8000 }); await clickNamed(page, '.th-link', NAME.self); await settle(page, 2200); } },
   { id: 'click theory page: Mana', what: 'a theoretic page links to a theoretic', base: 'load', hash: '#/th/psychoid/deep', back: true, act: async (page) => { await page.waitForSelector('.th-link', { timeout: 8000 }); await clickNamed(page, '.th-link', NAME.mana); await settle(page, 2200); } },
@@ -120,7 +124,18 @@ ARRIVALS.push(
     }
     throw new Error('no Aion card with an archetype link');
   } },
-  { id: 'click sky tie: The Self (sun)', what: 'sky card tie (landing after the sky)', base: 'load', hash: '#/sky/sun', back: true, act: async (page) => { await page.waitForSelector('.sky-tie-head button', { timeout: 12000 }); await clickNamed(page, '.sky-tie-head button', NAME.self); await settle(page, 7000); } },
+  // the sky is always Astrology now: a body held on the live sky carries its ties as orbiting satellites (Jung's own link
+  // first), not a card. A satellite's click is a gaze from the planet at the tie on the Earth, its plates stand, and the
+  // first plate is the tie itself: its click descends, the landing after the sky. (A satellite is always in orbit, so it is
+  // never 'stable' to the click's own check: the walks that click one force it.)
+  { id: 'click sky tie: The Self (sun)', what: 'sky satellite tie, gaze, its first plate (landing after the sky)', base: 'load', hash: '#/sky/sun', back: true, act: async (page) => {
+    await page.waitForSelector('.po-sat', { state: 'visible', timeout: 2 * CLICK_MS });
+    await page.locator('.po-sat').filter({ hasText: exact(NAME.self) }).first().click({ force: true, timeout: CLICK_MS });
+    await page.waitForSelector('.float', { state: 'visible', timeout: 2 * CLICK_MS });
+    await settle(page, 1200);
+    await page.locator('.float').first().click({ force: true, timeout: CLICK_MS });
+    await settle(page, 7000);
+  } },
   { id: 'click graph node: The Self', what: 'graph mode node', base: 'load', hash: '#/graph', back: true, act: async (page) => {
     await settle(page, 1500);
     const at = await page.evaluate(() => { const c = document.querySelector('.gv-canvas'); const r = c?.getBoundingClientRect(); const p = window.__earth.ctl.graph?.screenOf('a:self'); return r && p ? { x: r.left + p.x, y: r.top + p.y } : null; });
@@ -149,7 +164,7 @@ ARRIVALS.push(
   } },
   { id: 'click thread instance: Anima', what: 'an instance opened from a thread (a manifestation on the trail)', base: 'load', hash: '#/a/anima', back: true, act: async (page) => {
     await clickNamed(page, '.fl-links button', 'Follow the thread'); await settle(page, 2500);
-    await page.locator('.st-caption').click({ timeout: 6000 }); await settle(page, 2200);
+    await page.locator('.st-caption').click({ timeout: CLICK_MS }); await settle(page, 2200);
   } },
   { id: 'click label tie: Abraxas > The Self', what: 'a family label names its archetypes', base: 'load', hash: '#/f/abraxas', back: true, act: async (page) => { await clickNamed(page, '.fl-ties button', NAME.self); await settle(page, 2000); } },
   { id: 'click follow thread: Anima', what: 'Follow the thread (a thread, not a focus)', base: 'load', hash: '#/a/anima', back: true, act: async (page) => { await clickNamed(page, '.fl-links button', 'Follow the thread'); await settle(page, 2500); } },
@@ -194,7 +209,7 @@ async function run(b, arr, plan) {
       const m3 = await measure(page); note('again', m3);
       if (m3.crumb === 'visible') {
         const crumb = page.locator('.focus-label .fl-up button', { hasText: 'whole field' }).first();
-        try { await crumb.click({ timeout: 3000 }); await settle(page, 1800); }
+        try { await crumb.click({ timeout: CLICK_MS }); await settle(page, 1800); }
         catch (e) { out.errors.push(`crumb click: ${e.message.split('\n')[0].slice(0, 140)}`); }
       }
       const m4 = await measure(page); note('crumb', m4);

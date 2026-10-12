@@ -267,6 +267,20 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-rel-sys { margin: 18px 0 2px; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 .dp-rel .lp-note { margin: 3px 0 0; }
 .dp-rel .as-more { margin: 6px 0 0; }
+/* a Related row whose far node has a plate: the plate to the left of the name, the row otherwise as it was */
+.dp-rel li.dp-rel-has-plate { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 14px; align-items: start; padding: 7px 0 9px; }
+.dp-rel-plate { display: block; padding: 0; border: 0; background: none; line-height: 0; cursor: pointer; border-radius: 3px; }
+.dp-rel-img { width: 46px; height: 56px; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.2); outline-offset: 0; transition: outline-color 0.3s; }
+.dp-rel-plate:hover .dp-rel-img, .dp-rel-has-plate:hover .dp-rel-img { outline-color: rgb(var(--core-rgb) / 0.7); }
+.dp-rel-body { min-width: 0; }
+/* the node's imagery when it has none of its own: the plates of what it joins, under the title block */
+.dp-strip { display: flex; gap: 12px; margin: 22px 0 4px; padding: 6px 4px 8px; list-style: none; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent; scroll-snap-type: x proximity; }
+.dp-strip li { flex: none; scroll-snap-align: start; }
+.dp-strip-item { display: block; width: 72px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 3px; }
+.dp-strip-plate { width: 72px; height: 108px; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.2); outline-offset: 0; transition: outline-color 0.3s, box-shadow 0.3s; }
+.dp-strip-item:hover .dp-strip-plate, .dp-strip-item:focus-visible .dp-strip-plate { outline-color: rgb(var(--core-rgb) / 0.8); box-shadow: 0 6px 22px rgb(0 0 0 / 0.45); }
+.dp-strip-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 6px; font: 400 10.5px/1.3 var(--sans); letter-spacing: 0.01em; color: var(--ink-3); }
+.dp-strip-item:hover .dp-strip-name, .dp-strip-item:focus-visible .dp-strip-name { color: var(--ink-2); }
 .dp-foot { margin: 56px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); letter-spacing: 0.03em; }
 body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body.deep-open .reveal { opacity: 0 !important; pointer-events: none !important; }
 
@@ -412,3 +426,12 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 .st-also-name { font: 13px/1.25 var(--sans); }
 .st-also-when { font: 11px var(--sans); color: var(--ink-3); }
 @media (pointer: coarse) { .st-also { min-height: 44px; } }
+
+/* ── alchemy: a stage's plate (its family's own image), on the stage page and as a thumb on the opus list ── */
+.al-figure { margin: 10px 0 12px; }
+.al-plate { height: 220px; max-width: 100%; aspect-ratio: var(--ar, 1.2); border-radius: 4px; outline: 1px solid rgb(var(--core-rgb) / 0.2); outline-offset: 4px; }
+.al-credit { margin: 8px 0 0; max-width: 100%; text-align: center; font: 400 10.5px/1.4 var(--sans); color: var(--ink-3); }
+.al-stop { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.al-thumb { flex: none; width: 38px; height: 46px; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.2); }
+.th-link:hover .al-thumb, .th-link:focus-visible .al-thumb { outline-color: rgb(var(--core-rgb) / 0.7); }
+.th-link:has(.al-thumb) { padding-block: 4px; }

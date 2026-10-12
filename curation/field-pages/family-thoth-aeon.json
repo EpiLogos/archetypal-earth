@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-aeon",
- "line": "Crowley's account of Atu XX: the old Angel renamed, the letter Shin for Fire, and the child Horus born of the marriage.",
+ "line": "Crowley on Atu XX: the old Angel renamed, the letter Shin for Fire, and the child Horus born of the marriage (pdf p107, p108).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The old title and the letter with its element. The table's triangle glyph cannot by itself separate Fire from Air; the element rests on the text. The table also has a second, unidentified Shin row (31 bis), not quoted here.",
+   "title": "The old title and the letter Shin",
+   "line": "Crowley on the old card called The Angel, or The Last Judgment, and on the letter Shin, which refers to Fire (pdf p107).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The text gives no ends for this path. The table gives Key Scale path 31; the general rule is one letter to each of the twenty-two paths.",
+   "title": "The Paths and the letters",
+   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's account of the destruction by Fire, the child born of the marriage, and the flower-shaped Shin.",
+   "title": "Fire, the child and the flower",
+   "line": "Crowley on the destruction of the world by Fire, the child Horus born of the marriage, and the letter Shin in a form suggestive of a flower (pdf p107, p108).",
    "quotes": [
     {
      "work": "book-of-thoth",

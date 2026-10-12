@@ -3,7 +3,8 @@
 // quotation placed by the corpus (public/data/alchemy.json, built by scripts/alchemy.mjs). The globe tunes to the family a
 // stage names; the subjects a page links are the field's own nodes, and the routes are pure (alchemy-route.ts).
 import { scopeOf } from '../data/scope';
-import { el } from '../ui/dom';
+import { el, plate } from '../ui/dom';
+import { creditLine, creditLineFull } from '../ui/credit';
 import { icon } from '../ui/icons';
 import { averagePalettes } from '../data/palette';
 import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '../data/model';
@@ -93,6 +94,18 @@ export function mount(ctx: LensContext): LensInstance {
   const idsOf = (d: AlchemyData): AlchemyIds => ({ stages: d.opus.stages.map((s) => s.id), operations: d.operations.map((o) => o.id), matter: d.matter.map((m) => m.id) });
   const canon = (d: AlchemyData, path: string[]) => alchemyPath(parseAlchemyRoute(path, idsOf(d))).join('/');
   const famCore = (id: string): string | undefined => ctx.model.famById.get(id)?.palette?.core;
+  /** The stage family's own plate, when the register has one (citrinitas has none: nothing stands in its place). */
+  const stagePlate = (st: AlchemyStage, kind: 'thumb' | 'figure'): HTMLElement | null => {
+    const fam = ctx.model.famById.get(st.family);
+    if (!fam?.image) return null;
+    if (kind === 'thumb') return plate(fam.image, { thumb: true, className: 'al-thumb', palette: fam.palette, alt: '' });
+    // the credit and licence stand under the plate, as the Astrology portraits carry theirs: a tall plate is narrow, and
+    // an overlaid line would be cut short of its licence
+    return el('div', { class: 'as-figure al-figure' }, [
+      plate(fam.image, { className: 'al-plate', palette: fam.palette, alt: `${st.name}, ${st.colour}` }),
+      el('p', { class: 'al-credit', text: creditLine(fam.image), title: creditLineFull(fam.image) }),
+    ]);
+  };
 
   /** The globe tuned to the subjects: their presences stand, the nearby dim, the rest is set aside. Nothing placed: the field stands as it was. */
   const tuneSubjects = (subjects: Subject[], label: string) => {
@@ -141,7 +154,10 @@ export function mount(ctx: LensContext): LensInstance {
     const go = (i: number) => ctx.setPath(['opus', d.opus.stages[i].id]);
     const list = el('div', { class: 'th-links ql-stops' }, d.opus.stages.map((s, i) =>
       el('button', { type: 'button', class: 'th-link', onclick: () => go(i) }, [
-        el('span', { class: 'ql-stop-name' }, [el('strong', { text: s.name }), el('span', { text: ` ${s.colour}` })]), icon('next', 14)])));
+        el('span', { class: 'al-stop' }, [
+          stagePlate(s, 'thumb'),
+          el('span', { class: 'ql-stop-name' }, [el('strong', { text: s.name }), el('span', { text: ` ${s.colour}` })]),
+        ]), icon('next', 14)])));
     show([
       sectionNav('opus'),
       el('p', { class: 'th-line', text: d.line }),
@@ -170,6 +186,7 @@ export function mount(ctx: LensContext): LensInstance {
       ]),
       opusWheel(d.opus.stages, d.opus.stages.map((s) => famCore(s.family)), go, i, true),
       el('div', { class: 'ql-head' }, [el('span', { class: 'ql-big pos', text: st.name }), el('span', { class: 'ql-name', text: st.colour })]),
+      stagePlate(st, 'figure'),
       el('p', { class: 'th-line', text: st.line }),
       ...st.quotes.map((q) => quoteBlock(q, ctx.passages)),
       el('h3', { class: 'as-h3', text: 'The psychological reading' }),

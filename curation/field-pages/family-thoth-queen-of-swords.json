@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-queen-of-swords",
- "line": "Crowley's Queen of Swords: the Hé of the Name, the watery part of Air, and a span from Virgo to Libra.",
+ "line": "Crowley's Queen of Swords: Hé of the Name (pdf p139); the watery part of Air and the span from Virgo to Libra (pdf p159).",
  "sections": [
   {
    "id": "the-court-and-its-element",
    "title": "The court and its element",
-   "line": "Crowley names the Queens by the letter Hé of the Name.",
+   "line": "Crowley on the Queens (pdf p139) and on the Queen of Swords (pdf p159).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "its-span-in-the-zodiac",
    "title": "Its span in the Zodiac",
-   "line": "The text gives the 21st degree of Virgo as the start and the 20th of Libra as the end. Crowley's attribution table (pdf p274) gives 20 degrees at both ends. The page follows the text, and the table's figures are not quoted.",
+   "line": "Crowley on the span from the 21st degree of Virgo to the 20th degree of Libra (pdf p159); on the decans and the elemental attribution (pdf p139).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "its-character",
-   "title": "Its character as Crowley describes it",
-   "line": "Crowley's description of the figure and the card, in his own words.",
+   "title": "Character",
+   "line": "Crowley on the character of the Queen of Swords (pdf p159).",
    "quotes": [
     {
      "work": "book-of-thoth",

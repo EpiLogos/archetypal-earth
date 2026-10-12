@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-wands",
- "line": "Crowley’s Ace of Wands: the root of Fire at Kether, with no planet-in-sign in its chapter.",
+ "line": "Crowley’s Ace of Wands: the Root of the Powers of Fire (pdf p183); Kether (pdf p35, p175).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter heading gives the root title. The in-text name at pdf 35 reads Forces where the heading reads Powers. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the chapter heading (pdf p183); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree",
-   "line": "Crowley places the card at Kether. He gives the Ace no planet-in-sign: the chapter names none, and the Aces essay sets the four Aces above the small cards as Kether is above the rest.",
+   "line": "Crowley on the Ace of Wands and Kether (pdf p35); on Spirit and Kether (pdf p175).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley’s description of the card’s image and meaning, not a reading of any situation.",
+   "line": "Crowley on the card as the essence of Fire and as an outburst of flame (pdf p183).",
    "quotes": [
     {
      "work": "book-of-thoth",

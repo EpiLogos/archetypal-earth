@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "geburah",
- "line": "Crowley gives Geburah the number 5 and Mars on its lowest plane; Jung does not take the sephira up by name in his own text.",
+ "line": "Crowley on Geburah (The Book of Thoth); Jung on din in CW9ii ¶105.",
  "sections": [
   {
    "id": "crowley-fives",
    "title": "Crowley's Fives",
-   "line": "Crowley refers the Five cards to Geburah because they are Fives, and gives the Five of Wands to its suit of Fire.",
+   "line": "Crowley on the Fives and Geburah: The Book of Thoth, pdf p40, p231 and p189.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "mars-indirectly",
-   "title": "Mars, indirectly",
-   "line": "Crowley does not name Mars as Geburah's planet. He ties Mars to the lowest plane of Geburah in the Seven of Cups chapter. The Five of Wands is ruled by Saturn and Leo as a card, not as Geburah.",
+   "title": "The lowest plane of Geburah",
+   "line": "Crowley on the lowest plane of Geburah, and on the Five of Wands: The Book of Thoth, pdf p202 and p189.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "jung-din-and-the-notes",
-   "title": "Jung's din and his notes",
-   "line": "The other side of the Tree is din in Jung's text, not Geburah. The name Geburah appears in Jung's cw14 notes, where he quotes Kabbalistic treatises.",
+   "title": "Jung's din",
+   "line": "Jung on kesed and din as the two sides of the Tree: CW9ii ¶105.",
    "quotes": [
     {
      "work": "cw09ii",

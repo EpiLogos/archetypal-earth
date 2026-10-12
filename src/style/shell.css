@@ -434,9 +434,38 @@ body.landing-on .time { opacity: 0.35; }
 .po-sat.po-outer { color: var(--ink-2); font-weight: 400; }
 .po-sat span { border-bottom: 1px solid rgb(var(--core-rgb) / 0.35); }
 .po-sat:hover span, .po-sat:focus-visible span { border-bottom-color: rgb(var(--core-rgb)); color: var(--ink); }
-.po-earth { position: absolute; left: 0; top: 0; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid rgb(140 190 255 / 0.45); background: rgb(var(--deep-rgb) / 0.82); color: var(--ink); font: 500 12.5px var(--sans); cursor: pointer; pointer-events: auto; }
+.po-earth { position: absolute; z-index: 4; left: 0; top: 0; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid rgb(140 190 255 / 0.45); background: rgb(var(--deep-rgb) / 0.82); color: var(--ink); font: 500 12.5px var(--sans); cursor: pointer; pointer-events: auto; }
 .po-earth:hover { border-color: rgb(140 190 255 / 0.85); }
 .po-earth-mark { fill: rgb(140 190 255 / 0.8); font: 500 11px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+/* a planet's tarot cards: small plates floating on two outer rings (src/sky/orbits.ts, data from src/sky/cards.ts) */
+.po-wheel { fill: none; stroke-width: 1; }
+.po-wheel-decan { stroke: rgb(var(--core-rgb) / 0.3); }
+.po-wheel-rank { stroke: rgb(var(--core-rgb) / 0.2); stroke-dasharray: 2 7; }
+.po-tick { stroke: rgb(var(--core-rgb) / 0.32); stroke-width: 1; }
+.po-tick-sign { stroke: rgb(var(--core-rgb) / 0.62); stroke-width: 1.3; }
+.po-card { position: absolute; left: 0; top: 0; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; will-change: transform; --ct: rgb(214 214 232); --ct-soft: rgb(214 214 232 / 0.45); filter: drop-shadow(0 3px 8px rgb(0 0 0 / 0.55)); }
+.po-card { display: flex; align-items: center; justify-content: center; --cw: 28px; --ch: 44px; }
+.po-card img { display: block; flex: none; width: var(--cw); height: var(--ch); object-fit: cover; border-radius: 4px; background: rgb(var(--deep-rgb) / 0.8); box-shadow: 0 0 0 1px rgb(255 255 255 / 0.2), 0 0 14px var(--ct-soft); }
+.po-card::after { content: ''; position: absolute; left: 50%; bottom: calc(50% - var(--ch) / 2 - 6px); width: calc(var(--cw) * 0.76); height: 3px; margin-left: calc(var(--cw) * -0.38); border-radius: 2px; background: var(--ct); box-shadow: 0 0 8px var(--ct); }
+.po-card.is-here img { box-shadow: 0 0 0 2px var(--ct), 0 0 24px var(--ct); }
+.po-card-name { position: absolute; top: calc(50% + var(--ch) / 2 + 12px); left: 50%; transform: translateX(-50%); white-space: nowrap; font: 500 12px/1.2 var(--sans); color: var(--ink); text-shadow: 0 0 6px rgb(0 0 0 / 0.95), 0 0 2px rgb(0 0 0); opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+.po-card:hover .po-card-name, .po-card:focus-visible .po-card-name { opacity: 1; }
+.po-card:focus-visible { outline: 2px solid var(--ct); outline-offset: 4px; }
+
+/* a card read at its planet (src/lenses/card-reading.ts): the sheet takes the hue the zodiac band has at the card's place */
+.cr { --cr-tint: rgb(214 214 232); position: relative; }
+.cr::before { content: ''; position: absolute; inset: -22px -24px auto -24px; height: 150px; background: linear-gradient(to bottom, color-mix(in srgb, var(--cr-tint) 24%, transparent), transparent); pointer-events: none; }
+.cr > * { position: relative; }
+.cr-head { display: flex; align-items: center; gap: 12px; }
+.cr-sign { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--cr-tint); color: var(--cr-tint); background: color-mix(in srgb, var(--cr-tint) 14%, transparent); }
+.cr-sign .zg { width: 26px; height: 26px; overflow: visible; }
+.cr-sign .zg path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.cr-title { margin: 0; }
+.cr-place { margin: 2px 0 0; font: 12px var(--sans); color: var(--ink-3); }
+.cr-fig { margin: 14px 0; display: flex; justify-content: center; }
+.cr-plate { width: min(210px, 62%); aspect-ratio: var(--ar, 0.637); border-radius: 6px; box-shadow: 0 0 0 1px var(--cr-tint), 0 0 30px color-mix(in srgb, var(--cr-tint) 38%, transparent); }
+.cr .lq { border-left-color: var(--cr-tint); }
+.cr-chain .cr-chip { border-left: 2px solid var(--cr-tint); border-radius: 0 8px 8px 0; margin: 4px 0; }
 .as-whole { list-style: none; margin: 8px 0 14px; padding: 0; }
 @media (max-width: 720px) { body.po-holding .sky-caption { display: none; } }
 @media (max-width: 720px) { body.natal-sky .sky-caption { display: none; } }

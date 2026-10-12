@@ -276,6 +276,12 @@ export class SkyLayer {
   private anchorPt = new THREE.Vector3();
   private sunFocus = new THREE.Vector3();
   private bodyScene = new THREE.Vector3();
+  /** the camera and viewport of the last `update`: the wheels below are projected through them */
+  private lastCam: THREE.PerspectiveCamera | null = null;
+  private lastWidth = 1;
+  private lastHeight = 1;
+  private wheelTmp = new THREE.Vector3();
+  private wheelAxis = new THREE.Vector3();
 
   constructor(readonly data: SkyData) {
     this.eph = this.baseEph = new SkyEphemeris(data);
@@ -546,6 +552,9 @@ export class SkyLayer {
       this.chartMarks.length = 0;
       return;
     }
+    this.lastCam = camera;
+    this.lastWidth = width;
+    this.lastHeight = height;
     const w = this.weights;
     const clamped = this.eph.clamp(this.moment);
     const ms = clamped.ms;
@@ -689,6 +698,39 @@ export class SkyLayer {
   screenDisc(key: BodyKey): { x: number; y: number; px: number; on: boolean } | null {
     const d = this.draws.get(key);
     return d ? { ...d.screen } : null;
+  }
+
+  /**
+   * The ecliptic plane's own circle round a body, as the camera sees it this frame: a point of ecliptic longitude λ at
+   * `rPx` CSS px from the body's centre (measured across the plane, face-on) stands at (x + cos λ·ux + sin λ·vx,
+   * y + cos λ·uy + sin λ·vy). So a thing hung at a zodiacal longitude round a planet is drawn where that longitude truly
+   * lies — 0° Aries toward the vernal point, whichever way the camera looks at it. `zu`/`zv` are how far each axis points
+   * away from the camera (−1 … 1), so the far half of the wheel reads as far. Null while the body is not drawn.
+   */
+  eclipticWheel(key: BodyKey, rPx: number): { x: number; y: number; ux: number; uy: number; vx: number; vy: number; zu: number; zv: number } | null {
+    const cam = this.lastCam;
+    const d = this.draws.get(key);
+    if (!cam || !d || !d.mesh.visible) return null;
+    const P = d.mesh.position;
+    const dist = Math.max(cam.position.distanceTo(P), 1e-6);
+    const worldPerPx = (2 * dist * Math.tan((cam.fov * Math.PI) / 360)) / Math.max(this.lastHeight, 1);
+    const rho = worldPerPx * rPx;
+    const basis = sceneBasis(this.gmst, this.eps);
+    const w = this.lastWidth;
+    const screen = (v: THREE.Vector3) => {
+      this.wheelTmp.copy(v).project(cam);
+      return [(this.wheelTmp.x * 0.5 + 0.5) * w, (1 - (this.wheelTmp.y * 0.5 + 0.5)) * this.lastHeight] as const;
+    };
+    const [x0, y0] = screen(P);
+    const out = { x: x0, y: y0, ux: 0, uy: 0, vx: 0, vy: 0, zu: 0, zv: 0 };
+    basis.slice(0, 2).forEach((b, i) => {
+      this.wheelAxis.set(b[0], b[1], b[2]);
+      const [x1, y1] = screen(this.wheelTmp.copy(P).addScaledVector(this.wheelAxis, rho));
+      // how far this axis points from the camera: the camera looks down its own −z
+      const away = -this.wheelAxis.transformDirection(cam.matrixWorldInverse).z;
+      if (i === 0) { out.ux = x1 - x0; out.uy = y1 - y0; out.zu = away; } else { out.vx = x1 - x0; out.vy = y1 - y0; out.zv = away; }
+    });
+    return out;
   }
 
   /** The diameter, device px, a body of this radius subtends at the camera: its true disc. */

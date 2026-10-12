@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "sagittarius",
- "line": "Burt's chapter on Sagittarius, with Jung's archer.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Sagittarius (pdf pp. 339–378); Jung on the archer (Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Sagittarius, pdf pp. 339–378. Her account of the sign, its Fire and its ruler.",
+   "line": "Burt, chapter on Sagittarius (pdf pp. 339–378): pdf p339 and p342.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Sagittarius, pdf pp. 339–378. Chiron, the sage and the Fire temper.",
+   "line": "Burt, chapter on Sagittarius (pdf pp. 339–378): pdf p345, p346 and p361.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung's seminar on the archer, and his centaur passage.",
+   "line": "Jung on the archer and the centaur: Dream Analysis seminar, pdf p435.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

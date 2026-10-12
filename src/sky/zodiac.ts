@@ -56,6 +56,12 @@ export function holoCss(signIndex: number, alpha = 1): string {
   return `rgb(${Math.round(r * 255)} ${Math.round(g * 255)} ${Math.round(b * 255)} / ${alpha})`;
 }
 
+/** A CSS colour for the band's hue at an ecliptic longitude (degrees): where a card hangs on a wheel, in the ring's own colour. */
+export function holoCssAt(lonDeg: number, alpha = 1): string {
+  const [r, g, b] = holo((((lonDeg % 360) + 360) % 360) / 360);
+  return `rgb(${Math.round(r * 255)} ${Math.round(g * 255)} ${Math.round(b * 255)} / ${alpha})`;
+}
+
 /** An inline SVG for a glyph; its stroke comes from CSS (`currentColor`). */
 export function glyphSvg(signIndex: number, title?: string): SVGSVGElement {
   const NS = 'http://www.w3.org/2000/svg';

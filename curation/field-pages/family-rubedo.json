@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "rubedo",
- "line": "The rubedo as Jung states it: the marriage of Sol and Luna, the last stage, and the reading he gives of its redness. The Self reading of the stage sits elsewhere.",
+ "line": "Jung on the rubedo: CW12 ¶334; CW14 ¶307, ¶434, ¶441, ¶660 and ¶664.",
  "sections": [
   {
    "id": "the-marriage",
    "title": "The marriage",
-   "line": "The red and the white are King and Queen, and the rubedo is where their marriage is consummated.",
+   "line": "The red and the white as King and Queen (CW12 ¶334); Sol and Luna in the rubedo (CW14 ¶307, ¶434).",
    "quotes": [
     {
      "work": "cw12",
@@ -31,8 +31,8 @@
   },
   {
    "id": "the-way-to-it",
-   "title": "The way to the redness",
-   "line": "Two of Jung's routes to the rubedo: the heat of the fire on the whitening, and the solificatio from the blackest shade.",
+   "title": "The whitening and the redness",
+   "line": "The heat of the fire (CW12 ¶334) and the solificatio (CW14 ¶441).",
    "quotes": [
     {
      "work": "cw12",
@@ -51,7 +51,7 @@
   {
    "id": "sun-and-consciousness",
    "title": "Sun and consciousness",
-   "line": "Jung's reading of the redness as warmth and light from the sun, and of the body taken up in the work's last image.",
+   "line": "The redness as warmth and light from the sun (CW14 ¶307); the Assumption and Coronation of Mary (CW14 ¶664).",
    "quotes": [
     {
      "work": "cw14",
@@ -69,8 +69,8 @@
   },
   {
    "id": "where-the-self-reading-is",
-   "title": "Where the Self reading sits",
-   "line": "The passages that tie the work's end to the unus mundus are on the unus mundus, not on the reddening itself.",
+   "title": "The unus mundus",
+   "line": "The unus mundus and the mysterium coniunctionis: CW14 ¶660 and ¶664.",
    "quotes": [
     {
      "work": "cw14",

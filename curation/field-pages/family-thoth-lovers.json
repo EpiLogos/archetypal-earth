@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-lovers",
- "line": "Crowley's Atu VI: Gemini under Mercury, the letter Zain, and the path from Binah to Tiphareth, with the figure's analysis and synthesis.",
+ "line": "Crowley on Atu VI: Gemini under Mercury, the letter Zain, the path from Binah to Tiphareth, and the Royal Marriage (pdf p27, p70, p71, p72, p92, p211).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "Gemini, ruled by Mercury; the letter Zain, a sword; more than one figure in the card.",
+   "title": "Sign and letter",
+   "line": "Crowley on Gemini, ruled by Mercury, and the letter Zain, and on the first card in which more than one figure appears (pdf p70).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "Gemini leads from Binah to Tiphareth, in the Lovers chapter and again in the Ace of Swords chapter. Crowley numbers the ends 3 and 6. The Key Scale gives path 17.",
+   "title": "From Binah to Tiphareth",
+   "line": "Crowley on Gemini leading from Binah to Tiphareth (pdf p72), on the card leading from the number 3 to the number 6 (pdf p27), and on the Path of Zain (pdf p211).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's account of the card's subject, and of the Art card that completes the marriage it begins.",
+   "title": "Analysis and Synthesis",
+   "line": "Crowley on the subject of the card, Analysis followed by Synthesis (pdf p71), and on the Royal Marriage that took place in Atu VI (pdf p92).",
    "quotes": [
     {
      "work": "book-of-thoth",

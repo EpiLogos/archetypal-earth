@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-eight-of-disks",
- "line": "Eight of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Eight of Disks: Prudence (pdf p180); Sol in Virgo (pdf p180); Mercury in Virgo (pdf p234); Hod (pdf p179).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and the Sun in Virgo, as the group text gives it (pdf 180; table pdf 275).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title and Sol in Virgo (pdf p180).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The four Eights are attributed to Hod (pdf 179).",
+   "line": "Crowley on the Eights and Hod (pdf p179).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card, not a divinatory reading.",
+   "line": "Crowley on intelligence applied to material matters (pdf p234).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,8 +51,8 @@
   },
   {
    "id": "conflicts",
-   "title": "Conflicts and gaps",
-   "line": "The card's chapter (pdf 234) gives Mercury as the planet that rules and is exalted in Virgo, and says the rulership of the Sun in Virgo suggests birth. The group text and attribution table give Sol in Virgo. The record keeps Sun in Virgo; the chapter's Mercury reading is the conflict, not resolved here.",
+   "title": "Mercury and the Sun in Virgo",
+   "line": "Crowley on Mercury and the Sun in Virgo (pdf p234).",
    "quotes": [
     {
      "work": "book-of-thoth",

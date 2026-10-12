@@ -14,7 +14,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Maier, quoted by Jung (CW12 note 41)",
-   "note": "Maier's sentence, quoted in Jung's note 41, puts the soul, or air, in solar yellow (solari citrinitate). The join reads that sentence; it is not a claim of Jung's.",
+   "note": "Maier, quoted by Jung, puts the soul, or air, in solar yellow (CW12 ¶165, note 41).",
    "cites": [
     {
      "work": "cw12",
@@ -37,7 +37,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the four elements, air among them, form a quaternity. Air's place in it is read from that sentence; the fourth position falls to earth or fire (para 31).",
+   "note": "Jung writes that the original tetrameria corresponded to the quaternity of elements (CW12 ¶333); the fourth is sometimes earth, sometimes fire (CW12 ¶31).",
    "cites": [
     {
      "work": "cw12",
@@ -64,7 +64,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung (seminar)",
-   "note": "In the Kundalini seminar of 1932 Jung states that air is characteristic of thought. It is one remark about the centres and their elements, not a table of the four functions.",
+   "note": "Jung says in the 1932 Kundalini seminar that air is characteristic of thought (pdf p94).",
    "cites": [
     {
      "work": "sem-kundalini",
@@ -86,7 +86,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung lists the four colours in order, whitening before yellowing (cw12 ¶333). He says the yellowing was later omitted from the scheme.",
+   "note": "Jung lists the four stages in order, the whitening before the yellowing (CW12 ¶333).",
    "cites": [
     {
      "work": "cw12",
@@ -109,7 +109,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung calls the albedo the silver or moon condition, which still has to be raised to the sun condition (cw12 ¶334).",
+   "note": "Jung writes that the albedo is the silver or moon condition, which still has to be raised to the sun condition (CW12 ¶334).",
    "cites": [
     {
      "work": "cw12",
@@ -132,7 +132,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung reports the ancient air trigon, Aquarius, Gemini and Libra; Burt calls Aquarius an Air sign.",
+   "note": "Jung reports the air trigon of Aquarius, Gemini and Libra (CW6 ¶933); Burt calls Aquarius an Air sign (pdf p447).",
    "cites": [
     {
      "work": "cw06",
@@ -161,7 +161,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung reports the ancient trigon scheme, in which Aries belongs to the fire trigon with Leo and Sagittarius.",
+   "note": "Jung reports the fire trigon of Aries, Leo and Sagittarius (CW6 ¶933).",
    "cites": [
     {
      "work": "cw06",
@@ -184,7 +184,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Aries and Libra as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Aries-Libra among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -219,7 +219,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt gives Mars as the mundane ruler of Aries and calls him the god of war.",
+   "note": "Burt gives Mars as the mundane ruler of Aries and god of war (pdf p17).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -242,7 +242,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says the gods wore ram's horns in the Aries period, and in his seminar calls the ram the little ram of the time of shoots and buds.",
+   "note": "Jung says the gods had ram's horns in the Aries period (Dream Analysis seminar pdf p448) and calls the ram the time of little shoots and buds (pdf p434).",
    "cites": [
     {
      "work": "sem-dream-analysis",
@@ -271,7 +271,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley says Binah is the Moon in one aspect and Saturn in another, and that Saturn appears in Binah in respect of its blackness. His Universe list gives Saturn with the Abyss, and Diagram 5 places Saturn where Daath would be, so the join rests on the Binah statements alone.",
+   "note": "Crowley writes that Binah is the Moon in one aspect, Saturn in another (pdf p199), and that Saturn appears in Binah in respect of its blackness (pdf p110).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -300,7 +300,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung calls Binah the upper Sefira in which the tree of life is rooted, and the source of the middle line that brings life down from it (cw13 ¶411).",
+   "note": "Jung writes that in Binah is rooted the tree of life, and that the trunk of the Sefiroth system brought life down to earth from Binah (CW13 ¶411).",
    "cites": [
     {
      "work": "cw13",
@@ -329,7 +329,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Cancer and Capricorn as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Cancer-Capricorn among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -358,7 +358,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names the Moon as the ruler of Cancer, the giver of form.",
+   "note": "Burt names the Moon as the ruler of Cancer, the Giver of Form (pdf p136).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -381,7 +381,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt calls Cancer the first Water sign.",
+   "note": "Burt calls Cancer the Cosmic Womb and the first Water sign (pdf p135).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -404,7 +404,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt places Capricorn as Earth, against Scorpio as Water.",
+   "note": "Burt writes of Capricorn (Earth) and of Scorpio (Water) as feminine (pdf p19).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -427,7 +427,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung describes the sun at the winter solstice as a goat that climbs the mountains and plunges into the sea like a fish, and says the sign is half fish and half goat.",
+   "note": "Jung writes that the sun mounts like a goat and plunges into the sea like a fish (CW5 ¶290); the Dream Analysis seminar has him half fish, half goat (pdf p435).",
    "cites": [
     {
      "work": "cw05",
@@ -456,7 +456,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Saturn, with Jupiter, as the ruler of Capricorn, in the same sentence as Sagittarius.",
+   "note": "Burt names Jupiter and Saturn as the rulers of Sagittarius and Capricorn (pdf p384).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -479,7 +479,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley states that Chesed is attributed to Jupiter, who is the Demiurge, and that Jupiter is the planet of Chesed.",
+   "note": "Crowley writes that Chesed is attributed to Jupiter, who is the Demiurge (pdf p176), and calls Jupiter the planet of Chesed (pdf p207).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -508,7 +508,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung names kesed and din as the two sides of the cabalistic Tree of the Sephiroth (cw09ii ¶105). He does not number kesed.",
+   "note": "Jung names kesed (love) and din (justice) as the two sides of the cabalistic Tree of the Sephiroth (CW9ii ¶105).",
    "cites": [
     {
      "work": "cw09ii",
@@ -531,7 +531,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley places Chokmah on the Tree: Mercury as Chokmah is the one through whom alone one approaches Kether. Jung names Hokhmah in Franck's trinity, which does not say it stands on the Tree.",
+   "note": "Crowley writes Mercury as Chokmah, through whom alone we can approach Kether (pdf p121).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -554,7 +554,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the original four colours corresponded to the quaternity of elements, and that the reduction to three colours was made in the same passage (cw12 ¶333). Yellow is in the four by that scheme; Jung does not pair the yellow with the quaternity in a sentence of its own.",
+   "note": "Jung writes that the original tetrameria corresponded exactly to the quaternity of elements (CW12 ¶333).",
    "cites": [
     {
      "work": "cw12",
@@ -583,7 +583,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the transition to the rubedo is formed by the citrinitas, though this was omitted later (cw12 ¶334). In the same paragraph he has the rubedo follow directly from the albedo, so the text does not settle the sequence.",
+   "note": "Jung writes that the transition to the rubedo is formed by the citrinitas (CW12 ¶334).",
    "cites": [
     {
      "work": "cw12",
@@ -612,7 +612,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Maier, quoted by Jung (CW12 note 41)",
-   "note": "Maier's sentence, quoted in Jung's note 41, names the yellow as solar. The join reads that sentence; it is not a claim of Jung's.",
+   "note": "Maier, quoted by Jung, places the soul, or air, in solar yellow (CW12 ¶165, note 41).",
    "cites": [
     {
      "work": "cw12",
@@ -635,7 +635,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Five of Swords (Defeat) is the pip card for this decan: Venus in Aquarius.",
+   "note": "Crowley's chapter for the Five of Swords (Defeat) has Venus ruling Aquarius (pdf p216).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -658,7 +658,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Venus joins the family venus, which the sky layer ties to the planet Venus. Crowley's chapter names Venus for Five of Swords.",
+   "note": "Crowley attributes Venus to the Five of Swords: Venus rules Aquarius there (pdf p216).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -681,7 +681,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Five of Swords places Venus in Aquarius. The site places the decan as the first third of Aquarius; the book gives no degree span.",
+   "note": "Crowley names Aquarius for the Five of Swords: Venus rules it there (pdf p216).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -704,7 +704,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Swords (Science) is the pip card for this decan: Mercury in Aquarius.",
+   "note": "Crowley's chapter for the Six of Swords (Science) refers it to Mercury in Aquarius (pdf p218).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -727,7 +727,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mercury joins the family mercurius, which the sky layer ties to the planet Mercury. Crowley's chapter names Mercury for Six of Swords.",
+   "note": "Crowley attributes Mercury to the Six of Swords in Aquarius (pdf p218).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -750,7 +750,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Six of Swords places Mercury in Aquarius. The site places the decan as the middle third of Aquarius; the book gives no degree span.",
+   "note": "Crowley names Aquarius for the Six of Swords, with Mercury (pdf p218).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -773,7 +773,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Swords (Futility) is the pip card for this decan: the Moon in Aquarius.",
+   "note": "Crowley's chapter for the Seven of Swords (Futility) refers it to the Moon in Aquarius (pdf p219).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -796,7 +796,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Moon joins the family moon, the field's node for that planet. Crowley's chapter names the Moon for Seven of Swords.",
+   "note": "Crowley attributes the Moon to the Seven of Swords in Aquarius (pdf p219).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -819,7 +819,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Seven of Swords places the Moon in Aquarius. The site places the decan as the last third of Aquarius; the book gives no degree span.",
+   "note": "Crowley names Aquarius for the Seven of Swords, with the Moon (pdf p219).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -842,7 +842,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Two of Wands (Dominion) is the pip card for this decan: Mars in Aries.",
+   "note": "Crowley's chapter for the Two of Wands (Dominion) refers it to Mars in Aries (pdf p185).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -865,7 +865,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Two of Wands.",
+   "note": "Crowley attributes Mars to the Two of Wands in Aries (pdf p185).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -888,7 +888,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Two of Wands places Mars in Aries. The site places the decan as the first third of Aries; the book gives no degree span.",
+   "note": "Crowley names Aries for the Two of Wands, with Mars (pdf p185).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -911,7 +911,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Three of Wands (Virtue) is the pip card for this decan: the Sun in Aries.",
+   "note": "Crowley's chapter for the Three of Wands (Virtue) refers it to the Sun in Aries (pdf p187).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -934,7 +934,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sun joins the family sun, the field's node for that planet. Crowley's chapter names the Sun for Three of Wands.",
+   "note": "Crowley attributes the Sun to the Three of Wands in Aries (pdf p187).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -957,7 +957,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Three of Wands places the Sun in Aries. The site places the decan as the middle third of Aries; the book gives no degree span.",
+   "note": "Crowley names Aries for the Three of Wands, with the Sun (pdf p187).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -980,7 +980,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Four of Wands (Completion) is the pip card for this decan: Venus in Aries.",
+   "note": "Crowley's chapter for the Four of Wands (Completion) refers it to Venus in Aries (pdf p188).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1003,7 +1003,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Venus joins the family venus, which the sky layer ties to the planet Venus. Crowley's chapter names Venus for Four of Wands.",
+   "note": "Crowley attributes Venus to the Four of Wands in Aries (pdf p188).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1026,7 +1026,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Four of Wands places Venus in Aries. The site places the decan as the last third of Aries; the book gives no degree span.",
+   "note": "Crowley names Aries for the Four of Wands, with Venus (pdf p188).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1049,7 +1049,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Two of Cups (Love) is the pip card for this decan: Venus in Cancer.",
+   "note": "Crowley's chapter for the Two of Cups (Love) refers it to Venus in Cancer (pdf p197).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1072,7 +1072,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Venus joins the family venus, which the sky layer ties to the planet Venus. Crowley's chapter names Venus for Two of Cups.",
+   "note": "Crowley attributes Venus to the Two of Cups in Cancer (pdf p197).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1095,7 +1095,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Two of Cups places Venus in Cancer. The site places the decan as the first third of Cancer; the book gives no degree span.",
+   "note": "Crowley names Cancer for the Two of Cups, with Venus (pdf p197).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1118,7 +1118,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Three of Cups (Abundance) is the pip card for this decan: Mercury in Cancer.",
+   "note": "Crowley's chapter for the Three of Cups (Abundance) refers it to Mercury in Cancer (pdf p199).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1141,7 +1141,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mercury joins the family mercurius, which the sky layer ties to the planet Mercury. Crowley's chapter names Mercury for Three of Cups.",
+   "note": "Crowley attributes Mercury to the Three of Cups in Cancer (pdf p199).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1164,7 +1164,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Three of Cups places Mercury in Cancer. The site places the decan as the middle third of Cancer; the book gives no degree span.",
+   "note": "Crowley names Cancer for the Three of Cups, with Mercury (pdf p199).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1187,7 +1187,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Four of Cups (Luxury) is the pip card for this decan: the Moon in Cancer.",
+   "note": "Crowley's chapter for the Four of Cups (Luxury) refers it to the Moon in Cancer (pdf p200).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1210,7 +1210,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Moon joins the family moon, the field's node for that planet. Crowley's chapter names the Moon for Four of Cups.",
+   "note": "Crowley attributes the Moon to the Four of Cups in Cancer (pdf p200).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1233,7 +1233,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Four of Cups places the Moon in Cancer. The site places the decan as the last third of Cancer; the book gives no degree span.",
+   "note": "Crowley names Cancer for the Four of Cups, with the Moon (pdf p200).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1256,7 +1256,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Two of Disks (Harmonious Change) is the pip card for this decan: Jupiter in Capricorn.",
+   "note": "Crowley's chapter for the Two of Disks (Harmonious Change) gives Jupiter and Capricornus as its celestial rulers (pdf p227).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1279,7 +1279,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Jupiter joins the family jupiter, the field's node for that planet. Crowley's chapter names Jupiter for Two of Disks.",
+   "note": "Crowley names Jupiter among the celestial rulers of the Two of Disks (pdf p227).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1302,7 +1302,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's text names Jupiter and Capricorn as a pair for Two of Disks; the attribution table reads Jupiter in Capricorn. The site places the decan as the first third of Capricorn; the book gives no degree span.",
+   "note": "Crowley names Capricornus among the celestial rulers of the Two of Disks (pdf p227).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1325,7 +1325,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Three of Disks (Work) is the pip card for this decan: Mars in Capricorn.",
+   "note": "Crowley's chapter for the Three of Disks (Work) refers it to Mars in Capricornus (pdf p228).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1348,7 +1348,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Three of Disks.",
+   "note": "Crowley attributes Mars to the Three of Disks in Capricornus (pdf p228).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1371,7 +1371,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Three of Disks places Mars in Capricorn. The site places the decan as the middle third of Capricorn; the book gives no degree span.",
+   "note": "Crowley names Capricornus for the Three of Disks, with Mars (pdf p228).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1394,7 +1394,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Four of Disks (Power) is the pip card for this decan: the Sun in Capricorn.",
+   "note": "Crowley's chapter for the Four of Disks (Power) refers it to the Sun in Capricornus (pdf p229).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1417,7 +1417,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sun joins the family sun, the field's node for that planet. Crowley's chapter names the Sun for Four of Disks.",
+   "note": "Crowley attributes the Sun to the Four of Disks in Capricornus (pdf p229).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1440,7 +1440,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Four of Disks places the Sun in Capricorn. The site places the decan as the last third of Capricorn; the book gives no degree span.",
+   "note": "Crowley names Capricornus for the Four of Disks, with the Sun (pdf p229).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1463,7 +1463,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Swords (Interference) is the pip card for this decan: Jupiter in Gemini.",
+   "note": "Crowley's chapter for the Eight of Swords (Interference) refers it to Jupiter in Gemini (pdf p220).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1486,7 +1486,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Jupiter joins the family jupiter, the field's node for that planet. Crowley's chapter names Jupiter for Eight of Swords.",
+   "note": "Crowley attributes Jupiter to the Eight of Swords in Gemini (pdf p220).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1509,7 +1509,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Eight of Swords places Jupiter in Gemini. The site places the decan as the first third of Gemini; the book gives no degree span.",
+   "note": "Crowley names Gemini for the Eight of Swords, with Jupiter (pdf p220).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1532,7 +1532,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Swords (Cruelty) is the pip card for this decan: Mars in Gemini.",
+   "note": "Crowley's chapter for the Nine of Swords (Cruelty) refers it to Mars in Gemini (pdf p221).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1555,7 +1555,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Nine of Swords.",
+   "note": "Crowley attributes Mars to the Nine of Swords in Gemini (pdf p221).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1578,7 +1578,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Nine of Swords places Mars in Gemini. The site places the decan as the middle third of Gemini; the book gives no degree span.",
+   "note": "Crowley names Gemini for the Nine of Swords, with Mars (pdf p221).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1601,7 +1601,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Swords (Ruin) is the pip card for this decan: the Sun in Gemini.",
+   "note": "Crowley's chapter for the Ten of Swords (Ruin) refers it to the Sun in Gemini (pdf p222).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1624,7 +1624,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sun joins the family sun, the field's node for that planet. Crowley's chapter names the Sun for Ten of Swords.",
+   "note": "Crowley attributes the Sun to the Ten of Swords in Gemini (pdf p222).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1647,7 +1647,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Ten of Swords places the Sun in Gemini. The site places the decan as the last third of Gemini; the book gives no degree span.",
+   "note": "Crowley names Gemini for the Ten of Swords, with the Sun (pdf p222).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1670,7 +1670,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Five of Wands (Strife) is the pip card for this decan: Saturn in Leo.",
+   "note": "Crowley's chapter for the Five of Wands (Strife) refers it to Saturn and Leo (pdf p189).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1693,7 +1693,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Saturn joins the family saturn, the field's node for that planet. Crowley's chapter names Saturn for Five of Wands.",
+   "note": "Crowley says the Five of Wands is ruled by Saturn and Leo (pdf p189).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1716,7 +1716,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's text names Saturn and Leo as a pair for Five of Wands; the attribution table reads Saturn in Leo. The site places the decan as the first third of Leo; the book gives no degree span.",
+   "note": "Crowley names Leo among the rulers of the Five of Wands (pdf p189).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1739,7 +1739,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Wands (Victory) is the pip card for this decan: Jupiter in Leo.",
+   "note": "Crowley's chapter for the Six of Wands (Victory) refers it to Jupiter and Leo (pdf p191).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1762,7 +1762,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Jupiter joins the family jupiter, the field's node for that planet. Crowley's chapter names Jupiter for Six of Wands.",
+   "note": "Crowley refers the Six of Wands to Jupiter and Leo (pdf p191).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1785,7 +1785,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Six of Wands places Jupiter in Leo. The site places the decan as the middle third of Leo; the book gives no degree span.",
+   "note": "Crowley refers the Six of Wands to Leo, with Jupiter (pdf p191).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1808,7 +1808,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Wands (Valour) is the pip card for this decan: Mars in Leo.",
+   "note": "Crowley's chapter for the Seven of Wands (Valour) refers it to Mars in Leo (pdf p192).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1831,7 +1831,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Seven of Wands.",
+   "note": "Crowley attributes Mars to the Seven of Wands in Leo (pdf p192).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1854,7 +1854,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Seven of Wands places Mars in Leo. The site places the decan as the last third of Leo; the book gives no degree span.",
+   "note": "Crowley names Leo for the Seven of Wands, with Mars (pdf p192).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1877,7 +1877,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Two of Swords (Peace Restored) is the pip card for this decan: the Moon in Libra.",
+   "note": "Crowley's chapter for the Two of Swords (Peace Restored) refers it to the Moon in Libra (pdf p212).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1900,7 +1900,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Moon joins the family moon, the field's node for that planet. Crowley's chapter names the Moon for Two of Swords.",
+   "note": "Crowley attributes the Moon to the Two of Swords in Libra (pdf p212).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1923,7 +1923,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Two of Swords places the Moon in Libra. The site places the decan as the first third of Libra; the book gives no degree span.",
+   "note": "Crowley names Libra for the Two of Swords, with the Moon (pdf p212).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1946,7 +1946,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Three of Swords (Sorrow) is the pip card for this decan: Saturn in Libra.",
+   "note": "Crowley's chapter for the Three of Swords (Sorrow) refers it to Saturn in Libra (pdf p214).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1969,7 +1969,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Saturn joins the family saturn, the field's node for that planet. Crowley's chapter names Saturn for Three of Swords.",
+   "note": "Crowley attributes Saturn to the Three of Swords in Libra (pdf p214).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -1992,7 +1992,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Three of Swords places Saturn in Libra. The site places the decan as the middle third of Libra; the book gives no degree span.",
+   "note": "Crowley names Libra for the Three of Swords, with Saturn (pdf p214).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2015,7 +2015,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Four of Swords (Truce) is the pip card for this decan: Jupiter in Libra.",
+   "note": "Crowley's chapter for the Four of Swords (Truce) has Jupiter ruling in Libra in this decanate (pdf p215).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2038,7 +2038,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Jupiter joins the family jupiter, the field's node for that planet. Crowley's chapter names Jupiter for Four of Swords.",
+   "note": "Crowley attributes Jupiter to the Four of Swords: Jupiter rules in Libra in this decanate (pdf p215).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2061,7 +2061,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Four of Swords places Jupiter in Libra. The site places the decan as the last third of Libra; the book gives no degree span.",
+   "note": "Crowley names Libra for the Four of Swords: Jupiter rules in Libra in this decanate (pdf p215).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2084,7 +2084,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Cups (Indolence) is the pip card for this decan: Saturn in Pisces.",
+   "note": "Crowley's chapter for the Eight of Cups (Indolence) refers it to Saturn in Pisces (pdf p206).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2107,7 +2107,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Saturn joins the family saturn, the field's node for that planet. Crowley's chapter names Saturn for Eight of Cups.",
+   "note": "Crowley attributes Saturn to the Eight of Cups in Pisces (pdf p206).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2130,7 +2130,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Eight of Cups places Saturn in Pisces. The site places the decan as the first third of Pisces; the book gives no degree span.",
+   "note": "Crowley names Pisces for the Eight of Cups, with Saturn (pdf p206).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2153,7 +2153,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Cups (Happiness) is the pip card for this decan: Jupiter in Pisces.",
+   "note": "Crowley's chapter for the Nine of Cups (Happiness) refers it to Jupiter in Pisces (pdf p207).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2176,7 +2176,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Jupiter joins the family jupiter, the field's node for that planet. Crowley's chapter names Jupiter for Nine of Cups.",
+   "note": "Crowley attributes Jupiter to the Nine of Cups in Pisces (pdf p207).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2199,7 +2199,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Nine of Cups places Jupiter in Pisces. The site places the decan as the middle third of Pisces; the book gives no degree span.",
+   "note": "Crowley names Pisces for the Nine of Cups, with Jupiter (pdf p207).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2222,7 +2222,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Cups (Satiety) is the pip card for this decan: Mars in Pisces.",
+   "note": "Crowley's chapter for the Ten of Cups (Satiety) refers it to Mars in Pisces (pdf p209).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2245,7 +2245,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Ten of Cups.",
+   "note": "Crowley attributes Mars to the Ten of Cups in Pisces (pdf p209).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2268,7 +2268,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Ten of Cups places Mars in Pisces. The site places the decan as the last third of Pisces; the book gives no degree span.",
+   "note": "Crowley names Pisces for the Ten of Cups, with Mars (pdf p209).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2291,7 +2291,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Wands (Swiftness) is the pip card for this decan: Mercury in Sagittarius.",
+   "note": "Crowley's chapter for the Eight of Wands (Swiftness) names Mercury as ruling the card (pdf p193).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2314,7 +2314,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mercury joins the family mercurius, which the sky layer ties to the planet Mercury. Crowley's chapter names Mercury for Eight of Wands.",
+   "note": "Crowley's chapter for the Eight of Wands names Mercury as ruling the card (pdf p193).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2337,7 +2337,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's attribution table (pdf 275) gives Mercury in Sagittarius for Eight of Wands. The chapter quotation names only the planet, so this join carries no pick. The site places the decan as the first third of Sagittarius; the book gives no degree span."
+   "note": "Crowley's attribution table lists the Eight of Wands under Mercury in Sagittarius (pdf p275)."
   },
   {
    "id": "decan-sagittarius-2-card-thoth",
@@ -2352,7 +2352,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Wands (Strength) is the pip card for this decan: the Moon in Sagittarius.",
+   "note": "Crowley's chapter for the Nine of Wands (Strength) refers it to the Moon in Sagittarius (pdf p194).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2375,7 +2375,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Moon joins the family moon, the field's node for that planet. Crowley's chapter names the Moon for Nine of Wands.",
+   "note": "Crowley attributes the Moon to the Nine of Wands in Sagittarius (pdf p194).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2398,7 +2398,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Nine of Wands places the Moon in Sagittarius. The site places the decan as the middle third of Sagittarius; the book gives no degree span.",
+   "note": "Crowley names Sagittarius for the Nine of Wands, with the Moon (pdf p194).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2421,7 +2421,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Wands (Oppression) is the pip card for this decan: Saturn in Sagittarius.",
+   "note": "Crowley's chapter for the Ten of Wands (Oppression) refers it to Saturn in Sagittarius (pdf p195).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2444,7 +2444,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Saturn joins the family saturn, the field's node for that planet. Crowley's chapter names Saturn for Ten of Wands.",
+   "note": "Crowley attributes Saturn to the Ten of Wands in Sagittarius (pdf p195).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2467,7 +2467,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Ten of Wands places Saturn in Sagittarius. The site places the decan as the last third of Sagittarius; the book gives no degree span.",
+   "note": "Crowley names Sagittarius for the Ten of Wands, with Saturn (pdf p195).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2490,7 +2490,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Five of Cups (Disappointment) is the pip card for this decan: Mars in Scorpio.",
+   "note": "Crowley's chapter for the Five of Cups (Disappointment) refers it to Mars in Scorpio (pdf p202).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2513,7 +2513,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mars joins the family mars, the field's node for that planet. Crowley's chapter names Mars for Five of Cups.",
+   "note": "Crowley attributes Mars to the Five of Cups in Scorpio (pdf p202).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2536,7 +2536,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Five of Cups places Mars in Scorpio. The site places the decan as the first third of Scorpio; the book gives no degree span.",
+   "note": "Crowley names Scorpio for the Five of Cups, with Mars (pdf p202).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2559,7 +2559,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Cups (Pleasure) is the pip card for this decan: the Sun in Scorpio.",
+   "note": "Crowley's chapter for the Six of Cups (Pleasure) names the Sun, with Scorpio as governing sign (pdf p203, p178).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2582,7 +2582,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sun joins the family sun, the field's node for that planet. Crowley's chapter names the Sun for Six of Cups.",
+   "note": "Crowley attributes the Sun to the Six of Cups (pdf p203).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2605,7 +2605,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Six of Cups places the Sun in Scorpio. The site places the decan as the middle third of Scorpio; the book gives no degree span.",
+   "note": "Crowley names Scorpio as the sign governing the Six of Cups (pdf p178).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2628,7 +2628,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Cups (Debauch) is the pip card for this decan: Venus in Scorpio.",
+   "note": "Crowley's chapter for the Seven of Cups (Debauch) refers it to Venus in Scorpio (pdf p205).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2651,7 +2651,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Venus joins the family venus, which the sky layer ties to the planet Venus. Crowley's chapter names Venus for Seven of Cups.",
+   "note": "Crowley attributes Venus to the Seven of Cups in Scorpio (pdf p205).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2674,7 +2674,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Seven of Cups places Venus in Scorpio. The site places the decan as the last third of Scorpio; the book gives no degree span.",
+   "note": "Crowley names Scorpio for the Seven of Cups, with Venus (pdf p205).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2697,7 +2697,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Five of Disks (Worry) is the pip card for this decan: Mercury in Taurus.",
+   "note": "Crowley's chapter for the Five of Disks (Worry) refers it to Mercury in Taurus (pdf p231).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2720,7 +2720,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mercury joins the family mercurius, which the sky layer ties to the planet Mercury. Crowley's chapter names Mercury for Five of Disks.",
+   "note": "Crowley attributes Mercury to the Five of Disks in Taurus (pdf p231).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2743,7 +2743,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Five of Disks places Mercury in Taurus. The site places the decan as the first third of Taurus; the book gives no degree span.",
+   "note": "Crowley names Taurus for the Five of Disks, with Mercury (pdf p231).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2766,7 +2766,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Disks (Success) is the pip card for this decan: the Moon in Taurus.",
+   "note": "Crowley's chapter for the Six of Disks (Success) refers it to the Moon in Taurus (pdf p232).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2789,7 +2789,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Moon joins the family moon, the field's node for that planet. Crowley's chapter names the Moon for Six of Disks.",
+   "note": "Crowley attributes the Moon to the Six of Disks in Taurus (pdf p232).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2812,7 +2812,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Six of Disks places the Moon in Taurus. The site places the decan as the middle third of Taurus; the book gives no degree span.",
+   "note": "Crowley names Taurus for the Six of Disks, with the Moon (pdf p232).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2835,7 +2835,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Disks (Failure) is the pip card for this decan: Saturn in Taurus.",
+   "note": "Crowley's chapter for the Seven of Disks (Failure) refers it to Saturn in Taurus (pdf p233).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2858,7 +2858,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Saturn joins the family saturn, the field's node for that planet. Crowley's chapter names Saturn for Seven of Disks.",
+   "note": "Crowley attributes Saturn to the Seven of Disks in Taurus (pdf p233).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2881,7 +2881,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Seven of Disks places Saturn in Taurus. The site places the decan as the last third of Taurus; the book gives no degree span.",
+   "note": "Crowley names Taurus for the Seven of Disks, with Saturn (pdf p233).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2904,7 +2904,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Disks (Prudence) is the pip card for this decan: the Sun in Virgo.",
+   "note": "Crowley's Eight of Disks (Prudence): its attribution is Sol in Virgo (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2927,7 +2927,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sun joins the family sun, the field's node for that planet. Crowley's group text names the Sun for Eight of Disks; the card chapter's conflicting reading is on the decan page.",
+   "note": "Crowley gives Sol as the attribution of the Eight of Disks, in Virgo (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2950,7 +2950,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's group text (pdf 180) and attribution table (pdf 275) give the Sun in Virgo for Eight of Disks; the card chapter's conflicting reading of Mercury is set out on the decan page. The site places the decan as the first third of Virgo; the book gives no degree span.",
+   "note": "Crowley gives Virgo, with Sol, as the attribution of the Eight of Disks (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2973,7 +2973,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Disks (Gain) is the pip card for this decan: Venus in Virgo.",
+   "note": "Crowley's chapter for the Nine of Disks (Gain) refers it to Venus in Virgo (pdf p236).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -2996,7 +2996,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Venus joins the family venus, which the sky layer ties to the planet Venus. Crowley's chapter names Venus for Nine of Disks.",
+   "note": "Crowley attributes Venus to the Nine of Disks in Virgo (pdf p236).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3019,7 +3019,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Nine of Disks places Venus in Virgo. The site places the decan as the middle third of Virgo; the book gives no degree span.",
+   "note": "Crowley names Virgo for the Nine of Disks, with Venus (pdf p236).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3042,7 +3042,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Disks (Wealth) is the pip card for this decan: Mercury in Virgo.",
+   "note": "Crowley's chapter for the Ten of Disks (Wealth) refers it to Mercury in Virgo (pdf p237).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3065,7 +3065,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Mercury joins the family mercurius, which the sky layer ties to the planet Mercury. Crowley's chapter names Mercury for Ten of Disks.",
+   "note": "Crowley attributes Mercury to the Ten of Disks in Virgo (pdf p237).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3088,7 +3088,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter for Ten of Disks places Mercury in Virgo. The site places the decan as the last third of Virgo; the book gives no degree span.",
+   "note": "Crowley names Virgo for the Ten of Disks, with Mercury (pdf p237).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3111,7 +3111,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung identifies the nigredo with terra nigra, and says the reading of the nigredo as earth matters for his argument.",
+   "note": "Jung identifies the nigredo with terra nigra (CW14 ¶264) and writes of the interpretation of the nigredo as terra, earth (CW14 ¶729).",
    "cites": [
     {
      "work": "cw14",
@@ -3138,7 +3138,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the four elements form a quaternity; earth's place in it is read from that sentence. Jung also gives earth as a fifth element (para 249), which the earth page leaves open.",
+   "note": "Jung writes of four elements, earth among them (CW12 ¶333); the fourth is sometimes earth, sometimes fire (CW12 ¶31).",
    "cites": [
     {
      "work": "cw12",
@@ -3165,7 +3165,7 @@
    "basis": "site",
    "system": "alchemy",
    "voice": "Latin alchemical text quoted in Jung, CW14",
-   "note": "The Latin text pairs earth with Saturn, aqua with Mercury, air with Venus and fire with Mars. This is the text's pairing, quoted by Jung, not a claim of Jung's.",
+   "note": "A Latin alchemical text quoted in CW14 gives Saturn for earth, Mercury for water, Venus for air and Mars for fire (pdf p424).",
    "cites": [
     {
      "work": "cw14",
@@ -3188,7 +3188,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung's gloss on the One, which he calls the novenary foetus: it is as the number nine to the ogdoad, or as the quintessence to the quaternity.",
+   "note": "Jung writes that the One is as the number nine to the ogdoad, or as the quintessence to the quaternity (CW13 ¶186).",
    "cites": [
     {
      "work": "cw13",
@@ -3211,7 +3211,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Feeling is one of the four aspects of psychological orientation that CW11 ¶246 sets within the quaternity, in the order sensation, thinking, feeling, intuition.",
+   "note": "Jung names feeling the third of four functions of orientation, which states whether a thing suits us or not (CW11 ¶246).",
    "cites": [
     {
      "work": "cw11",
@@ -3238,7 +3238,7 @@
    "basis": "site",
    "system": "alchemy",
    "voice": "Latin alchemical text quoted in Jung, CW14",
-   "note": "The Latin text pairs fire with Mars, in the same list that pairs earth with Saturn. This is the text's pairing, quoted by Jung, not a claim of Jung's.",
+   "note": "A Latin alchemical text quoted in CW14 gives Mars for fire, Saturn for earth, Mercury for water and Venus for air (pdf p424).",
    "cites": [
     {
      "work": "cw14",
@@ -3261,7 +3261,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the four elements form a quaternity; fire's place in it is read from that sentence. Jung also says the fourth position falls to fire or to earth (para 31).",
+   "note": "Jung writes of four elements, fire among them (CW12 ¶333); the fourth is sometimes earth, sometimes fire (CW12 ¶31).",
    "cites": [
     {
      "work": "cw12",
@@ -3288,7 +3288,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung calls the ogdoad a double quaternity: the quaternity doubled, a totality at once heavenly and earthly, and in mandalas almost as great a role as the quaternity itself.",
+   "note": "Jung writes that the double quaternio or ogdoad stands for a totality at once heavenly and earthly (CW14 ¶8).",
    "cites": [
     {
      "work": "cw14",
@@ -3311,7 +3311,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Indirect. Crowley's Seven of Cups chapter ties Mars to the lowest plane of Geburah. He does not give Mars as Geburah's own planet in so many words.",
+   "note": "Crowley writes that Mars is the manifestation on the lowest plane of Geburah (pdf p202).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3334,7 +3334,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley refers the Five cards to Geburah because they are Fives, so the number gives the sephira. Jung's own text does not name Geburah, and his notes name it only when quoting Kabbalistic treatises.",
+   "note": "Crowley refers the Fives to the Sephira Geburah because it is a Five (pdf p40).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3357,7 +3357,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung reports the ancient air trigon, Aquarius, Gemini and Libra; Burt calls Gemini Mutable Air.",
+   "note": "Jung reports the air trigon of Aquarius, Gemini and Libra (CW6 ¶933); Burt calls Gemini Mutable Air (pdf p98).",
    "cites": [
     {
      "work": "cw06",
@@ -3386,7 +3386,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Mercury as the ruling planet of Gemini, which she calls Hermes. The node is the figure the sky layer ties to the planet Mercury, and Burt speaks of the god.",
+   "note": "Burt names Mercury/Hermes as the ruling planet of Gemini (pdf p95).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3409,7 +3409,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Gemini and Sagittarius as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Gemini-Sagittarius among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3438,7 +3438,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley: the number Eight, Hod, represents Mercury, and Hod is airy and mercurial. The field's Mercurius is the alchemical quicksilver spirit, which the sky layer ties to the planet Mercury; the join is Crowley's statement.",
+   "note": "Crowley writes that the number Eight, Hod, represents Mercury (pdf p234), and calls Hod airy and mercurial (pdf p263).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3467,7 +3467,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung names Hod as the left, feminine side of the Sefiroth system, beauty, which Yesod unites with Nezach on the right (cw14 ¶635).",
+   "note": "Jung names Hod, beauty, as the left, feminine side of the Sefiroth, which Yesod unites with Nezach on the right (CW14 ¶635).",
    "cites": [
     {
      "work": "cw14",
@@ -3490,7 +3490,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says Yesod unites Nezach on the right with Hod on the left, beauty (cw14 ¶635).",
+   "note": "Jung writes that Yesod unites the emanation of the right, Nezach, with the left, Hod, beauty (CW14 ¶635).",
    "cites": [
     {
      "work": "cw14",
@@ -3513,7 +3513,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Intuition is the fourth of the four aspects of psychological orientation that CW11 ¶246 sets within the quaternity: the function that indicates where a thing came from.",
+   "note": "Jung names intuition the fourth of four functions of orientation, which indicates where a thing came from and where it is going (CW11 ¶246).",
    "cites": [
     {
      "work": "cw11",
@@ -3540,7 +3540,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung names Kether, the Crown, as the upward-growing root of the Tree of the Sefiroth, in the passage giving the usual arrangement (cw14 ¶18).",
+   "note": "Jung writes that Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth (CW14 ¶18).",
    "cites": [
     {
      "work": "cw14",
@@ -3563,7 +3563,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Leo and Aquarius as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Leo-Aquarius among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3592,7 +3592,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung reports the ancient fire trigon, Aries, Leo and Sagittarius; Burt calls Leo a Fire sign.",
+   "note": "Jung reports the fire trigon of Aries, Leo and Sagittarius (CW6 ¶933); Burt calls Leo a Fire sign (pdf p179).",
    "cites": [
     {
      "work": "cw06",
@@ -3621,7 +3621,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt says the Sun operates in ruling Leo as both mundane and esoteric ruler.",
+   "note": "Burt writes of the sun as mundane and esoteric ruler of Leo (pdf p178).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3644,7 +3644,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung calls Libra a double sign with a pneumatic nature, in the air trigon with Gemini.",
+   "note": "Jung reports the air trigon of Aquarius, Gemini and Libra (CW6 ¶933) and calls Libra a double sign of pneumatic nature (CW9ii pdf p95).",
    "cites": [
     {
      "work": "cw06",
@@ -3673,7 +3673,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Venus, as Aphrodite, the mundane ruler of Libra. The node is the figure the sky layer ties to the planet Venus, and Burt speaks of the goddess.",
+   "note": "Burt names Aphrodite, Goddess of Love, as the mundane ruler of Libra (pdf p253).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3696,7 +3696,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung places Malchuth in the usual arrangement of the Sefiroth, Kether Tifereth Yesod Malchuth, and calls her the underlying feminine principle (cw14 ¶18).",
+   "note": "Jung writes that Malchuth is the underlying feminine principle (CW14 ¶18).",
    "cites": [
     {
      "work": "cw14",
@@ -3719,7 +3719,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung names Nezach as the right, masculine side of the Sefiroth system, which Yesod unites with Hod on the left (cw14 ¶635).",
+   "note": "Jung names Nezach, life-force, as the right, masculine side, which Yesod unites with Hod on the left (CW14 ¶635).",
    "cites": [
     {
      "work": "cw14",
@@ -3742,7 +3742,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley: Netzach, the Sephira of Venus, means victory, and Netzach also pertains to Earth. The field's Venus is the goddess figure, which the sky layer ties to the planet Venus; the join is Crowley's statement.",
+   "note": "Crowley calls Netzach the Sephira of Venus, which means victory (pdf p219).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -3771,7 +3771,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says Yesod unites the emanation of the right, masculine side, Nezach, with the left, feminine side, Hod (cw14 ¶635).",
+   "note": "Jung writes that Yesod unites the emanation of the right, Nezach, with the left, Hod (CW14 ¶635).",
    "cites": [
     {
      "work": "cw14",
@@ -3794,7 +3794,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says that after the ascent of the soul the nigredo gives way to the albedo (cw16 ¶493). His cw12 account gives the whitening as one of several routes out of the blackening.",
+   "note": "Jung writes that after the ascent of the soul the nigredo gives way to the albedo (CW16 ¶493).",
    "cites": [
     {
      "work": "cw16",
@@ -3823,7 +3823,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Maier, quoted by Jung (CW12 note 41)",
-   "note": "Maier's sentence, quoted in Jung's note 41, names the first colour as Saturnine blackness. The join reads that sentence; it is not a claim of Jung's.",
+   "note": "Maier, quoted by Jung, places the body, or earth, in Saturnine blackness (CW12 ¶165, note 41).",
    "cites": [
     {
      "work": "cw12",
@@ -3846,7 +3846,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung writes that a black sun, Sol niger, coincides with the nigredo and putrefactio (cw14 ¶113).",
+   "note": "Jung writes that a black sun, Sol niger, coincides with the nigredo and putrefactio (CW14 ¶113).",
    "cites": [
     {
      "work": "cw14",
@@ -3869,7 +3869,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung on the paut neteru: a company described as nine often proves to be not nine at all but ten, and sometimes even more.",
+   "note": "Jung writes that a company described as nine often proves to be ten, and sometimes even more (CW12 ¶84).",
    "cites": [
     {
      "work": "cw12",
@@ -3892,7 +3892,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung: ten is the perfect unfolding of unity, and the numbers one to ten have the significance of a completed cycle.",
+   "note": "Jung writes that ten is the perfect unfolding of unity, and that the numbers one to ten signify a completed cycle (CW10 ¶692).",
    "cites": [
     {
      "work": "cw10",
@@ -3915,7 +3915,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says the fish became the symbol after the ram and bull, and in his seminar describes the two fishes of the sign lying tail to tail.",
+   "note": "Jung says in the Dream Analysis seminar that the Fish became the symbol after the Aries period, and that the fishes lie almost tail to tail (pdf p448).",
    "cites": [
     {
      "work": "sem-dream-analysis",
@@ -3944,7 +3944,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt calls Pisces the last of the Mutable signs, Mutable Water.",
+   "note": "Burt calls Pisces the last of the Mutable signs, Mutable Water (pdf p509).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -3967,7 +3967,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the prima materia sometimes coincides with the idea of the initial stage, the nigredo (cw12 ¶433).",
+   "note": "Jung writes that the prima materia sometimes coincides with the idea of the initial stage, the nigredo (CW12 ¶433).",
    "cites": [
     {
      "work": "cw12",
@@ -3990,7 +3990,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung writes the quinta essentia as aether, the substance containing all four elements (cw14 ¶452, ¶270). The field keeps them as separate nodes because they are not the same concept in every text.",
+   "note": "Jung writes that the quintessence is equivalent to aether (CW14 ¶452) and a symbol of the aether that contains all four elements (CW14 ¶270).",
    "cites": [
     {
      "work": "cw14",
@@ -4017,7 +4017,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung identifies the quinta essentia with the Philosophers' Stone in his figure of the quaternity (cw10 ¶738).",
+   "note": "Jung writes that the quinta essentia is identical with the Philosophers' Stone (CW10 ¶738).",
    "cites": [
     {
      "work": "cw10",
@@ -4039,7 +4039,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung calls the circle divided into four with a centre a symbol of the quinta essentia (cw10 ¶738): the figure the quincunx names.",
+   "note": "Jung writes that the quinta essentia is identical with the Philosophers' Stone (CW10 ¶738).",
    "cites": [
     {
      "work": "cw10",
@@ -4061,7 +4061,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung writes that the marriage of the red man and the white woman, Sol and Luna, is consummated in the rubedo (cw14 ¶307), and that Luna joins her husband Sol to initiate it (cw14 ¶434).",
+   "note": "Jung writes that the marriage of the red man and the white woman, Sol and Luna, is consummated in the rubedo (CW14 ¶307).",
    "cites": [
     {
      "work": "cw14",
@@ -4090,7 +4090,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung reads the growing redness as an increase of warmth and light from the sun, which is consciousness (cw14 ¶307).",
+   "note": "Jung writes that the growing redness denotes an increase of warmth and light coming from the sun, consciousness (CW14 ¶307).",
    "cites": [
     {
      "work": "cw14",
@@ -4113,7 +4113,7 @@
    "basis": "jung",
    "system": "astrology",
    "voice": "Jung",
-   "note": "Jung reports the ancient fire trigon in which Sagittarius stands with Aries and Leo.",
+   "note": "Jung reports the fire trigon of Aries, Leo and Sagittarius (CW6 ¶933); Burt calls Sagittarius a solar Fire sign (pdf p339).",
    "cites": [
     {
      "work": "cw06",
@@ -4142,7 +4142,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Zeus, or Jupiter, as the ruler of Sagittarius.",
+   "note": "Burt names Zeus, or Jupiter, as the ruler of Sagittarius (pdf p339).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -4165,7 +4165,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt places Scorpio as Water, in the same passage that places Capricorn as Earth.",
+   "note": "Burt writes of Scorpio (Water) as feminine, beside Capricorn (Earth) (pdf p19).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -4188,7 +4188,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung's opposed pair of irrational functions: sensation and intuition are the two perceptive functions, set against each other on the irrational axis of the cross.",
+   "note": "Jung writes that the chief contrasts are between thinking and feeling and between sensation and intuition (CW8 ¶259); both are irrational (CW6 ¶770).",
    "cites": [
     {
      "work": "cw08",
@@ -4215,7 +4215,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Sensation is the first of the four aspects of psychological orientation that CW11 ¶246 sets within the quaternity: the function that ascertains that something is there.",
+   "note": "Jung names sensation the first of four functions of orientation, which ascertains that something is there (CW11 ¶246).",
    "cites": [
     {
      "work": "cw11",
@@ -4242,7 +4242,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says the seven form an unbroken series and the step to the eighth hesitates, as three and four do in the Axiom of Maria. He says that in the case of seven and eight we seem to be dealing with much the same thing, though the motif is rarer.",
+   "note": "Jung writes that the seven form an uninterrupted series and the step to the eighth involves hesitation (CW14 ¶574); seven and eight puzzled alchemy (CW12 ¶209).",
    "cites": [
     {
      "work": "cw14",
@@ -4277,7 +4277,7 @@
    "basis": "jung",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung writes that Mercurius, in his volatile form, is spiritus, and that the spiritus mercurialis is the alchemists' guide (cw12 ¶84, cw12 ¶518).",
+   "note": "Jung writes that Mercurius in his volatile form is spiritus (CW12 ¶518), and that the spiritus mercurialis is the alchemists' guide (CW12 ¶84).",
    "cites": [
     {
      "work": "cw12",
@@ -4292,21 +4292,6 @@
    ]
   },
   {
-   "id": "spiritus-spirit-site",
-   "a": {
-    "type": "family",
-    "id": "spiritus"
-   },
-   "b": {
-    "type": "family",
-    "id": "spirit"
-   },
-   "basis": "site",
-   "system": "site",
-   "voice": "this site",
-   "note": "Different things that share a word: spiritus is the alchemical principle of air in motion, and Spirit is a separate family. No passage joins them; the only link is the shared name."
-  },
-  {
    "id": "taurus-bull-jung",
    "a": {
     "type": "family",
@@ -4319,7 +4304,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung says the gods wore bull's horns in the Taurus period, and in his seminar calls the Bull the great push of nature.",
+   "note": "Jung says the gods had bull's horns when the sun was in Taurus (Dream Analysis seminar pdf p448) and calls the Bull the great push of nature (pdf p434).",
    "cites": [
     {
      "work": "sem-dream-analysis",
@@ -4348,7 +4333,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt calls Taurus Earth and the first of the Fixed signs, Fixed Earth.",
+   "note": "Burt calls Taurus earth (pdf p59) and the first of the Fixed signs, Fixed Earth (pdf p72).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -4377,7 +4362,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Taurus and Scorpio as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Taurus-Scorpio among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -4406,7 +4391,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Venus, as Aphrodite, the mundane ruler of Taurus. The node is the figure the sky layer ties to the planet Venus, and Burt speaks of the goddess.",
+   "note": "Burt names Venus/Aphrodite as the mundane ruler of Taurus (pdf p59).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -4429,7 +4414,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Jung's opposed pair of rational functions: thinking and feeling are the two discriminative functions, set against each other on the rational axis of the cross.",
+   "note": "Jung writes that the chief contrasts are thinking against feeling and sensation against intuition (CW8 ¶259); thinking and feeling are rational (CW6 ¶983).",
    "cites": [
     {
      "work": "cw08",
@@ -4456,7 +4441,7 @@
    "basis": "jung",
    "system": "jung",
    "voice": "Jung",
-   "note": "Thinking is one of the four aspects of psychological orientation that CW11 ¶246 sets within the quaternity, in the order sensation, thinking, feeling, intuition.",
+   "note": "Jung names thinking the second of four functions of orientation, which establishes what a thing is (CW11 ¶246).",
    "cites": [
     {
      "work": "cw11",
@@ -4483,7 +4468,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Aces essay (pdf 175) places the four Aces together at Kether. The Ace of Cups chapter (pdf 196) names no sephira of its own, so this join reads the group placement onto the card.",
+   "note": "Crowley says in the essay on the Aces that Spirit represents Kether (pdf p175).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4506,7 +4491,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Ace of Cups is one of the small cards of the suit of Cups. Crowley attributes the suit of Cups to Water (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Ace of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4529,7 +4514,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Aces essay (pdf 175) places the four Aces together at Kether. The Ace of Disks chapter (pdf 224-225) names no sephira, so this join reads the group placement onto the card.",
+   "note": "Crowley says in the essay on the Aces that Spirit represents Kether (pdf p175).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4552,7 +4537,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Ace of Disks is one of the small cards of the suit of Disks. Crowley attributes the suit of Disks to Earth (pdf 24) and calls the Disks a whirling emblem rather than coins (pdf 225). A site join from his suit attribution.",
+   "note": "Crowley's Ace of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4575,7 +4560,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Ace of Swords chapter (pdf 211) names Kether as the source of influence that descends on Tiphareth, and the Aces essay (pdf 175) places the Aces at Kether. A site join for the card’s place.",
+   "note": "Crowley says that from Kether, the supreme, influence descends directly on Tiphareth (pdf p211); Spirit represents Kether (pdf p175).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4604,7 +4589,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Ace of Swords is one of the small cards of the suit of Swords. Crowley attributes the suit of Swords to Air (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Ace of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4627,7 +4612,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley places the Ace of Wands at Kether (pdf 35), and the Aces essay gives Spirit as Kether (pdf 175). A site join read from his tree attribution.",
+   "note": "Crowley says the Ace of Wands, the Root of the Forces of Fire, pertains to Kether (pdf p35).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4656,7 +4641,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Ace of Wands is one of the small cards of the suit of Wands. Crowley attributes the suit of Wands to Fire (pdf 24) and names it the suit of Fire in the card chapters. A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Ace of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4679,7 +4664,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 22; on the Tree path 22 runs between Geburah and Tiphareth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Adjustment as path 22 (pdf p270), the path between Geburah and Tiphareth."
   },
   {
    "id": "thoth-adjustment-libra-thoth",
@@ -4694,7 +4679,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the card to Libra (pdf p76). The letter Lamed is in the table only (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley says Adjustment represents the sign of Libra (pdf p76).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4717,7 +4702,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 22; on the Tree path 22 runs between Geburah and Tiphareth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Adjustment as path 22 (pdf p270), the path between Geburah and Tiphareth."
   },
   {
    "id": "thoth-adjustment-venus-thoth",
@@ -4732,7 +4717,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Libra is ruled by Venus (pdf p76). This is the sign's ruler, not the card's own attribution.",
+   "note": "Crowley says Libra, the sign of Atu VIII, is ruled by Venus (pdf p76).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4755,7 +4740,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's text ties the letter Shin, the letter of Atu XX, to Fire. The table's glyph alone does not separate Fire from Air; the text is the warrant.",
+   "note": "Crowley ties the letter Shin, the letter of Atu XX, to Fire (pdf p107).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4778,7 +4763,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 31; on the Tree path 31 runs between Hod and Malkuth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Aeon as path 31 (pdf p270), the path between Hod and Malkuth."
   },
   {
    "id": "thoth-aeon-malkuth-thoth",
@@ -4793,7 +4778,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 31; on the Tree path 31 runs between Hod and Malkuth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Aeon as path 31 (pdf p270), the path between Hod and Malkuth."
   },
   {
    "id": "thoth-art-sagittarius-thoth",
@@ -4808,7 +4793,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Atu XIV pertains to Sagittarius. The chapter does not name the letter; the table gives Samekh for it, which is not quoted here.",
+   "note": "Crowley says Atu XIV pertains to Sagittarius (pdf p92).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4831,7 +4816,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Art chapter says the path leads from the Moon of Yesod to the Sun of Tiphareth; this join is the Tiphareth end.",
+   "note": "Crowley says the path of Art leads from the Moon of Yesod to the Sun of Tiphareth (pdf p92).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4854,7 +4839,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Art chapter says the path leads from the Moon of Yesod to the Sun of Tiphareth; this join is the Yesod end.",
+   "note": "Crowley says the path of Art leads from the Moon of Yesod to the Sun of Tiphareth (pdf p92).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4877,7 +4862,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Cancer represents the path leading from the great Mother Binah to Geburah (pdf p74). The Key Scale gives path 18 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley says Cancer represents the path leading from the great Mother Binah to Geburah (pdf p74).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4900,7 +4885,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the Chariot to the sign Cancer (pdf p74).",
+   "note": "Crowley refers Atu VII to the zodiacal sign of Cancer (pdf p74).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4923,7 +4908,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The other end of the path from Binah, as Crowley states it for the Chariot (pdf p74).",
+   "note": "Crowley says Cancer represents the path leading from the great Mother Binah to Geburah (pdf p74).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4946,7 +4931,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley calls Cancer the cardinal sign of the element of Water (pdf p74). The element is a secondary attribute of the card, not its main attribution.",
+   "note": "Crowley calls Cancer the cardinal sign of the element of Water (pdf p74).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4969,7 +4954,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley divides the small cards numbered one to ten into four suits by the four elements. Cups is one of the four suits.",
+   "note": "Crowley divides the small cards into four suits according to the four elements (pdf p35); Cups is one of the four suits.",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -4992,7 +4977,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the suit of Cups to Water, in the sentence that also gives Wands to Fire and Swords to Air.",
+   "note": "Crowley attributes Wands to Fire, Cups to Water and Swords to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5015,7 +5000,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers Atu XIII to the zodiacal sign of Scorpio, which he says is ruled by Mars. Mars is not joined here.",
+   "note": "Crowley refers Atu XIII to the zodiacal sign of Scorpio, which is ruled by Mars (pdf p90).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5038,7 +5023,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Atu XIII and Atu XV lead from Tiphareth. The far end of this path is not named in his text, so only the Tiphareth end is joined.",
+   "note": "Crowley says Atu XIII and Atu XV lead from Tiphareth (pdf p95).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5061,7 +5046,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers Atu XV to Capricornus in the Zodiac. The sign's ruler, Saturn, is named in his text but not joined here.",
+   "note": "Crowley refers Atu XV to Capricornus in the Zodiac (pdf p95).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5084,7 +5069,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Atu XIII and Atu XV lead from Tiphareth. The far end of this path is not named in his text, so only the Tiphareth end is joined.",
+   "note": "Crowley says Atu XIII and Atu XV lead from Tiphareth (pdf p95).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5107,7 +5092,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the suit of Disks to Earth. His general account gives Earth the letter Tau, which the suit's Ace does not repeat.",
+   "note": "Crowley attributes Disks, or Coins, or Pantacles, to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5130,7 +5115,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley divides the small cards numbered one to ten into four suits by the four elements. Disks is one of the four suits.",
+   "note": "Crowley divides the small cards into four suits according to the four elements (pdf p35); Disks is one of the four suits.",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5153,7 +5138,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The four Eights group text attributes the Eights to Hod (pdf 179).",
+   "note": "Crowley attributes the four Eights to Hod (pdf p179).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5176,7 +5161,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Cups is one of the small cards of the Cups suit, which he attributes to Water.",
+   "note": "Crowley's Eight of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5199,7 +5184,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the number Eight is Hod, and that Hod represents Mercury in the card (pdf 234).",
+   "note": "Crowley writes that the number Eight, Hod, represents Mercury in the Eight of Disks (pdf p234).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5222,7 +5207,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Disks is one of the small cards of the Disks suit, which he attributes to Earth.",
+   "note": "Crowley's Eight of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5245,7 +5230,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The four Eights group text attributes the Eights to Hod (pdf 179).",
+   "note": "Crowley attributes the four Eights to Hod (pdf p179).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5268,7 +5253,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Swords is one of the small cards of the Swords suit, which he attributes to Air.",
+   "note": "Crowley's Eight of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5291,7 +5276,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The four Eights group text attributes the Eights to Hod (pdf 179); this card's chapter gives Mercury and Sagittarius.",
+   "note": "Crowley attributes the four Eights to Hod (pdf p179).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5314,7 +5299,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Eight of Wands is one of the small cards of the Wands suit, which he attributes to Fire.",
+   "note": "Crowley's Eight of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5337,7 +5322,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the Emperor to the sign Aries (pdf p66).",
+   "note": "Crowley refers the Emperor to the sign of Aries (pdf p66).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5360,7 +5345,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Emperor chapter gives the path from Chokmah to Tiphareth (pdf p67). The Ace of Swords chapter gives the same two ends through the Path of He, the Star (pdf p211). The Key Scale gives the Emperor's path 28. Unresolved.",
+   "note": "Crowley writes that the Emperor's authority is derived from Chokmah and exerted upon Tiphareth (pdf p67).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5395,7 +5380,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Aries is ruled by Mars (pdf p66). This is the sign's ruler, not the card's own attribution.",
+   "note": "Crowley says Aries, the sign of Atu IV, is ruled by Mars (pdf p66).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5418,7 +5403,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Emperor's authority is exerted upon Tiphareth, the organized man, by the path from Chokmah (pdf p67). The Ace of Swords chapter gives the Path of He for the same two ends (pdf p211). Unresolved.",
+   "note": "Crowley writes that the Emperor's authority is derived from Chokmah and exerted upon Tiphareth (pdf p67).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5447,7 +5432,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The same path, Chokmah to Binah, as Crowley states it for the Empress (pdf p64).",
+   "note": "Crowley writes that Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother (pdf p64).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5470,7 +5455,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Daleth is the path from Chokmah to Binah, uniting the Father with the Mother (pdf p64). The Key Scale gives path 14 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley writes that Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother (pdf p64).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5493,7 +5478,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the Empress to the planet Venus (pdf p64). The sky layer ties the planet Venus to the family Venus.",
+   "note": "Crowley says Atu III refers to the planet Venus (pdf p64).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5516,7 +5501,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Five of Cups chapter says the card is ruled by Geburah in the suit of Water (pdf 202).",
+   "note": "Crowley says the Five of Cups is ruled by Geburah in the suit of Water (pdf p202).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5539,7 +5524,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Five of Cups is one of the small cards of the suit of Cups. Crowley attributes the suit of Cups to Water (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Five of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5562,7 +5547,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Five of Disks chapter names the Number Five, Geburah, in the suit of Earth (pdf 231).",
+   "note": "Crowley names the Number Five, Geburah, in the suit of Earth for the Five of Disks (pdf p231).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5585,7 +5570,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Five of Disks is one of the small cards of the suit of Disks. Crowley attributes the suit of Disks to Earth (pdf 24) and calls the Disks a whirling emblem rather than coins (pdf 225). A site join from his suit attribution.",
+   "note": "Crowley's Five of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5608,7 +5593,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Five of Swords chapter opens with Geburah, which produces disruption as always (pdf 216).",
+   "note": "Crowley says that in the Five of Swords Geburah, as always, produces disruption (pdf p216).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5631,7 +5616,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Five of Swords is one of the small cards of the suit of Swords. Crowley attributes the suit of Swords to Air (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Five of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5654,7 +5639,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Five of Wands chapter refers the card to Geburah of the suit of Fire (pdf 189), and the tree essay gives Geburah as the sephira of a Five (pdf 40).",
+   "note": "Crowley refers the Five of Wands to Geburah of the suit of Fire (pdf p189).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5683,7 +5668,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Five of Wands is one of the small cards of the suit of Wands. Crowley attributes the suit of Wands to Fire (pdf 24) and names it the suit of Fire in the card chapters. A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Five of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5706,7 +5691,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the Fool to Air, and says that in this card Air means a vacuum (pdf p46). The Fool is of the gold of air (pdf p56).",
+   "note": "Crowley writes that Air, in the Fool, quintessentially means a vacuum (pdf p46), and that the Fool is of the gold of air (pdf p56).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5735,7 +5720,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's appendix (pdf p116) places a path between Wisdom, the second emanation, and the Crown. The Emperor chapter identifies Chokmah as the creative Wisdom (pdf p67).",
+   "note": "Crowley speaks of a path to separate and to join Wisdom, the Second Emanation, and the Crown (pdf p116).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5764,7 +5749,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's appendix (pdf p116) gives the Fool's path as the way from Wisdom to the Crown, the Path of the Pure Fool. The chapter names only Kether (pdf p56). The Key Scale gives path 11 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley calls the way that leadeth unto the Crown the Path of the Pure Fool (pdf p116).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5799,7 +5784,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 21; on the Tree path 21 runs between Chesed and Netzach. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Fortune as path 21 (pdf p270), the path between Chesed and Netzach."
   },
   {
    "id": "thoth-fortune-jupiter-thoth",
@@ -5814,7 +5799,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes Fortune to Jupiter, which he calls the Greater Fortune in astrology (pdf p81).",
+   "note": "Crowley attributes the planet Jupiter, the Greater Fortune, to the card Fortune (pdf p81).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5837,7 +5822,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 21; on the Tree path 21 runs between Chesed and Netzach. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers Fortune as path 21 (pdf p270), the path between Chesed and Netzach."
   },
   {
    "id": "thoth-four-of-cups-chesed-thoth",
@@ -5852,7 +5837,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Four of Cups chapter refers the card to Chesed in the sphere of Water (pdf 200).",
+   "note": "Crowley refers the Four of Cups to Chesed in the sphere of Water (pdf p200).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5875,7 +5860,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Four of Cups is one of the small cards of the suit of Cups. Crowley attributes the suit of Cups to Water (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Four of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5898,7 +5883,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Four of Disks chapter says the Four, Chesed, shows the establishment of the Universe in three dimensions (pdf 229).",
+   "note": "Crowley says the Four, Chesed, shows the establishment of the Universe in three dimensions (pdf p229).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5921,7 +5906,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Four of Disks is one of the small cards of the suit of Disks. Crowley attributes the suit of Disks to Earth (pdf 24) and calls the Disks a whirling emblem rather than coins (pdf 225). A site join from his suit attribution.",
+   "note": "Crowley's Four of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5944,7 +5929,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Four of Swords chapter says Chesed, the number Four, is manifested in the realm of the Intellect (pdf 215).",
+   "note": "Crowley writes that Chesed refers to Jupiter, who rules in Libra in the Four of Swords (pdf p215).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5967,7 +5952,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Four of Swords is one of the small cards of the suit of Swords. Crowley attributes the suit of Swords to Air (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Four of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -5990,7 +5975,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Four of Wands chapter refers the card to Chesed in the suit of Fire (pdf 188).",
+   "note": "Crowley refers the Four of Wands to Chesed in the suit of Fire (pdf p188).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6013,7 +5998,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Four of Wands is one of the small cards of the suit of Wands. Crowley attributes the suit of Wands to Fire (pdf 24) and names it the suit of Fire in the card chapters. A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Four of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6036,7 +6021,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 23; on the Tree path 23 runs between Geburah and Hod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hanged Man as path 23 (pdf p270), the path between Geburah and Hod."
   },
   {
    "id": "thoth-hanged-man-hod-thoth",
@@ -6051,7 +6036,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 23; on the Tree path 23 runs between Geburah and Hod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hanged Man as path 23 (pdf p270), the path between Geburah and Hod."
   },
   {
    "id": "thoth-hanged-man-water-thoth",
@@ -6066,7 +6051,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the card, attributed to the letter Mem, represents the element of Water; the table gives Water as its attribution.",
+   "note": "Crowley says the Hanged Man, attributed to the letter Mem, represents the element of Water (pdf p87).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6089,7 +6074,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 20; on the Tree path 20 runs between Chesed and Tiphareth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hermit as path 20 (pdf p270), the path between Chesed and Tiphareth."
   },
   {
    "id": "thoth-hermit-mercurius-thoth",
@@ -6104,7 +6089,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Virgo is ruled by Mercury, and that Mercury is exalted there (pdf p80). The sky layer ties the planet Mercury to the family Mercurius.",
+   "note": "Crowley says Virgo, the sign of Atu IX, is ruled by Mercury, who is exalted there (pdf p80).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6127,7 +6112,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 20; on the Tree path 20 runs between Chesed and Tiphareth. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hermit as path 20 (pdf p270), the path between Chesed and Tiphareth."
   },
   {
    "id": "thoth-hermit-virgo-thoth",
@@ -6142,7 +6127,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the Hermit to Virgo (pdf p80). The text gives no path ends for the card (Crowley's Key Scale, pdf p270, gives path 20).",
+   "note": "Crowley attributes the Hermit to the sign of Virgo (pdf p80).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6165,7 +6150,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 16; on the Tree path 16 runs between Chokmah and Chesed. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hierophant as path 16 (pdf p270), the path between Chokmah and Chesed."
   },
   {
    "id": "thoth-hierophant-chokmah-thoth",
@@ -6180,7 +6165,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 16; on the Tree path 16 runs between Chokmah and Chesed. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Hierophant as path 16 (pdf p270), the path between Chokmah and Chesed."
   },
   {
    "id": "thoth-hierophant-taurus-thoth",
@@ -6195,7 +6180,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the Hierophant to Taurus (pdf p68). The text names no path ends for this card (Crowley's Key Scale, pdf p270, gives path 16).",
+   "note": "Crowley refers the Hierophant to Taurus (pdf p68).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6218,7 +6203,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Cups a span in the Zodiac from the 21st degree of Aquarius to the 20th of Pisces (text, pdf p149); the table gives 20 degrees (pdf p274). This join names Aquarius only.",
+   "note": "Crowley says the Knight of Cups rules from the 21st degree of Aquarius to the 20th degree of Pisces (pdf p149).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6241,7 +6226,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Cups a span in the Zodiac from the 21st degree of Aquarius to the 20th of Pisces (text, pdf p149); the table gives 20 degrees (pdf p274). This join names Pisces only.",
+   "note": "Crowley says the Knight of Cups rules from the 21st degree of Aquarius to the 20th degree of Pisces (pdf p149).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6264,7 +6249,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Knight of Cups is a court of the Cups suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Knight of Cups represents the fiery part of Water (pdf p149); he attributes Cups to Water (pdf p24)."
   },
   {
    "id": "thoth-knight-of-cups-water-thoth",
@@ -6279,7 +6264,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the fiery part of Water. The join is to Water as the element.",
+   "note": "Crowley says the Knight of Cups represents the fiery part of Water (pdf p149).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6302,7 +6287,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the fiery part of Earth. The join is to Earth as the element.",
+   "note": "Crowley says the Knight of Disks represents the fiery part of Earth (pdf p165).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6325,7 +6310,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Disks a span in the Zodiac from the 21st degree of Leo to the 20th of Virgo (text, pdf p165); the table gives 20 degrees (pdf p274). This join names Leo only.",
+   "note": "Crowley says the Knight of Disks rules from the 21st degree of Leo to the 20th degree of Virgo (pdf p165).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6348,7 +6333,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Knight of Disks is a court of the Disks suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Knight of Disks represents the fiery part of Earth (pdf p165); he attributes Disks to Earth (pdf p24)."
   },
   {
    "id": "thoth-knight-of-disks-virgo-thoth",
@@ -6363,7 +6348,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Disks a span in the Zodiac from the 21st degree of Leo to the 20th of Virgo (text, pdf p165); the table gives 20 degrees (pdf p274). This join names Virgo only.",
+   "note": "Crowley says the Knight of Disks rules from the 21st degree of Leo to the 20th degree of Virgo (pdf p165).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6386,7 +6371,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the fiery part of Air. The join is to Air as the element.",
+   "note": "Crowley says the Knight of Swords represents the fiery part of Air (pdf p157).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6409,7 +6394,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Swords a span in the Zodiac from the 21st degree of Taurus to the 20th of Gemini (text, pdf p157); the table gives 20 degrees (pdf p274). This join names Gemini only.",
+   "note": "Crowley says the Knight of Swords rules from the 21st degree of Taurus to the 20th degree of Gemini (pdf p157).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6432,7 +6417,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Swords a span in the Zodiac from the 21st degree of Taurus to the 20th of Gemini (text, pdf p157); the table gives 20 degrees (pdf p274). This join names Taurus only.",
+   "note": "Crowley says the Knight of Swords rules from the 21st degree of Taurus to the 20th degree of Gemini (pdf p157).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6455,7 +6440,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Knight of Swords is a court of the Swords suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Knight of Swords represents the fiery part of Air (pdf p157); he attributes Swords to Air (pdf p24)."
   },
   {
    "id": "thoth-knight-of-wands-fire-thoth",
@@ -6470,7 +6455,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the fiery part of Fire. The join is to Fire as the element.",
+   "note": "Crowley says the Knight of Wands represents the fiery part of Fire (pdf p141).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6493,7 +6478,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Wands a span in the Zodiac from the 21st degree of Scorpio to the 20th of Sagittarius (text, pdf p141); the table gives 20 degrees (pdf p274). This join names Sagittarius only.",
+   "note": "Crowley says the Knight of Wands rules from the 21st degree of Scorpio to the 20th degree of Sagittarius (pdf p141).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6516,7 +6501,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Knight of Wands a span in the Zodiac from the 21st degree of Scorpio to the 20th of Sagittarius (text, pdf p141); the table gives 20 degrees (pdf p274). This join names Scorpio only.",
+   "note": "Crowley says the Knight of Wands rules from the 21st degree of Scorpio to the 20th degree of Sagittarius (pdf p141).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6539,7 +6524,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Knight of Wands is a court of the Wands suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Knight of Wands represents the fiery part of Fire (pdf p141); he attributes Wands to Fire (pdf p24)."
   },
   {
    "id": "thoth-lovers-binah-thoth",
@@ -6554,7 +6539,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Gemini leads from Binah to Tiphareth (pdf p72). The Key Scale gives path 17 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley says Gemini leads from Binah to Tiphareth (pdf p72).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6577,7 +6562,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the card to Gemini (pdf p70).",
+   "note": "Crowley refers Atu VI to Gemini, ruled by Mercury (pdf p70).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6600,7 +6585,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Gemini is ruled by Mercury (pdf p70). This is the sign's ruler, not the card's own attribution. The sky layer ties the planet Mercury to the family Mercurius.",
+   "note": "Crowley says Atu VI refers to Gemini, ruled by Mercury (pdf p70).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6623,7 +6608,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Gemini leads from Binah to Tiphareth (pdf p72). The Ace of Swords chapter gives Tiphareth's derivation from Binah through the Path of Zain (pdf p211).",
+   "note": "Crowley says Gemini leads from Binah to Tiphareth (pdf p72).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6652,7 +6637,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Lust chapter names the path of the card as the influence from Chesed upon Geburah; this join is the Chesed end of that path.",
+   "note": "Crowley writes that the path corresponding to Lust is the influence from Chesed upon Geburah (pdf p83).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6675,7 +6660,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Lust chapter names the path of the card as the influence from Chesed upon Geburah; this join is the Geburah end of that path.",
+   "note": "Crowley writes that the path corresponding to Lust is the influence from Chesed upon Geburah (pdf p83).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6698,7 +6683,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley assigns Atu XI to the sign of Leo; the table gives Leo as well. The card's secondary ruler, the Sun, is not joined here.",
+   "note": "Crowley assigns Atu XI to the sign of Leo (pdf p84).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6721,7 +6706,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The same path, from Kether to Binah, as Crowley states it for the Magus (pdf p58).",
+   "note": "Crowley writes that Mercury is the path leading from Kether to Binah (pdf p58).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6744,7 +6729,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Mercury is the path leading from Kether to Binah (pdf p58). The Key Scale gives path 12 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley writes that Mercury is the path leading from Kether to Binah (pdf p58).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6767,7 +6752,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the Magus to the planet Mercury (pdf p58). The sky layer ties the planet Mercury to the family Mercurius.",
+   "note": "Crowley attributes Atu I to the planet Mercury (pdf p58).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6790,7 +6775,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the Moon, in this trump, joins the earthy sphere of Netzach with Malkuth; this join is the Malkuth end.",
+   "note": "Crowley says that in Atu XVIII the Moon joins the earthy sphere of Netzach with Malkuth (pdf p103).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6813,7 +6798,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the Moon, in this trump, joins the earthy sphere of Netzach with Malkuth; this join is the Netzach end.",
+   "note": "Crowley says that in Atu XVIII the Moon joins the earthy sphere of Netzach with Malkuth (pdf p103).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6836,7 +6821,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the letter Qoph to Atu XVIII, which represents Pisces in the Zodiac.",
+   "note": "Crowley attributes Atu XVIII to the letter Qoph, which represents Pisces in the Zodiac (pdf p103).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6859,7 +6844,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Cups is one of the small cards of the Cups suit, which he attributes to Water.",
+   "note": "Crowley's Nine of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6882,7 +6867,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Nines group text attributes the Nines to Yesod (pdf 180).",
+   "note": "Crowley attributes the Nines to Yesod (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6905,7 +6890,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Disks is one of the small cards of the Disks suit, which he attributes to Earth.",
+   "note": "Crowley's Nine of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6928,7 +6913,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Nines group text attributes the Nines to Yesod (pdf 180).",
+   "note": "Crowley attributes the Nines to Yesod (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6951,7 +6936,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Swords is one of the small cards of the Swords suit, which he attributes to Air.",
+   "note": "Crowley's Nine of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6974,7 +6959,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the number Nine is Yesod (pdf 221).",
+   "note": "Crowley says the number Nine is Yesod (pdf p221).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -6997,7 +6982,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Nine of Wands is one of the small cards of the Wands suit, which he attributes to Fire.",
+   "note": "Crowley's Nine of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7020,7 +7005,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the card is ruled by the Moon and Yesod (pdf 180).",
+   "note": "Crowley says the Nine of Wands is ruled by the Moon and Yesod (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7043,7 +7028,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Ace of Swords chapter (pdf p211) names the Path of Gimel as the way influence descends from Kether. The Key Scale gives path 13 (Crowley's Key Scale, pdf p270).",
+   "note": "Crowley says influence descends from Kether upon Tiphareth through the Path of Gimel, the High Priestess (pdf p211).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7066,7 +7051,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the card refers to the Moon (pdf p61). The Moon is the general feminine symbol in his account.",
+   "note": "Crowley says Atu II refers to the Moon (pdf p61).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7089,7 +7074,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Her path makes a direct connection between the Father in his highest aspect and the Son in his most perfect manifestation (pdf p61). The Ace of Swords chapter gives Tiphareth as the receiving end (pdf p211).",
+   "note": "Crowley writes that her path makes a direct connection between the Father in his highest aspect and the Son in his most perfect manifestation (pdf p61).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7118,7 +7103,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Cups a span in the Zodiac from the 21st degree of Libra to the 20th of Scorpio (text, pdf p153); the table gives 20 degrees (pdf p274). This join names Libra only.",
+   "note": "Crowley says the Prince of Cups rules from the 21st degree of Libra to the 20th degree of Scorpio (pdf p153).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7141,7 +7126,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Cups a span in the Zodiac from the 21st degree of Libra to the 20th of Scorpio (text, pdf p153); the table gives 20 degrees (pdf p274). This join names Scorpio only.",
+   "note": "Crowley says the Prince of Cups rules from the 21st degree of Libra to the 20th degree of Scorpio (pdf p153).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7164,7 +7149,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Prince of Cups is a court of the Cups suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Prince of Cups represents the airy part of Water (pdf p153); he attributes Cups to Water (pdf p24)."
   },
   {
    "id": "thoth-prince-of-cups-water-thoth",
@@ -7179,7 +7164,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the airy part of Water. The join is to Water as the element.",
+   "note": "Crowley says the Prince of Cups represents the airy part of Water (pdf p153).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7202,7 +7187,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Disks a span in the Zodiac from the 21st degree of Aries to the 20th of Taurus (text, pdf p169); the table gives 20 degrees (pdf p274). This join names Aries only.",
+   "note": "Crowley says the Prince of Disks rules from the 21st degree of Aries to the 20th degree of Taurus (pdf p169).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7225,7 +7210,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the airy part of Earth. The join is to Earth as the element.",
+   "note": "Crowley says the Prince of Disks represents the airy part of Earth (pdf p169).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7248,7 +7233,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Disks a span in the Zodiac from the 21st degree of Aries to the 20th of Taurus (text, pdf p169); the table gives 20 degrees (pdf p274). This join names Taurus only.",
+   "note": "Crowley says the Prince of Disks rules from the 21st degree of Aries to the 20th degree of Taurus (pdf p169).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7271,7 +7256,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Prince of Disks is a court of the Disks suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Prince of Disks represents the airy part of Earth (pdf p169); he attributes Disks to Earth (pdf p24)."
   },
   {
    "id": "thoth-prince-of-swords-air-thoth",
@@ -7286,7 +7271,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the airy part of Air. The join is to Air as the element.",
+   "note": "Crowley says the Prince of Swords represents the airy part of Air (pdf p161).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7309,7 +7294,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Swords a span in the Zodiac from the 21st degree of Capricornus to the 20th of Aquarius (text, pdf p161); the table gives 20 degrees (pdf p274). This join names Aquarius only.",
+   "note": "Crowley says the Prince of Swords rules from the 21st degree of Capricornus to the 20th degree of Aquarius (pdf p161).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7332,7 +7317,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Swords a span in the Zodiac from the 21st degree of Capricornus to the 20th of Aquarius (text, pdf p161); the table gives 20 degrees (pdf p274). This join names Capricornus only.",
+   "note": "Crowley says the Prince of Swords rules from the 21st degree of Capricornus to the 20th degree of Aquarius (pdf p161).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7355,7 +7340,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Prince of Swords is a court of the Swords suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Prince of Swords represents the airy part of Air (pdf p161); he attributes Swords to Air (pdf p24)."
   },
   {
    "id": "thoth-prince-of-wands-cancer-thoth",
@@ -7370,7 +7355,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Wands a span in the Zodiac from the 21st degree of Cancer to the 20th of Leo (text, pdf p145); the table gives 20 degrees (pdf p274). This join names Cancer only.",
+   "note": "Crowley says the Prince of Wands rules from the 21st degree of Cancer to the 20th degree of Leo (pdf p145).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7393,7 +7378,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the airy part of Fire. The join is to Fire as the element.",
+   "note": "Crowley says the Prince of Wands represents the airy part of Fire (pdf p145).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7416,7 +7401,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Prince of Wands a span in the Zodiac from the 21st degree of Cancer to the 20th of Leo (text, pdf p145); the table gives 20 degrees (pdf p274). This join names Leo only.",
+   "note": "Crowley says the Prince of Wands rules from the 21st degree of Cancer to the 20th degree of Leo (pdf p145).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7439,7 +7424,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Prince of Wands is a court of the Wands suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Prince of Wands represents the airy part of Fire (pdf p145); he attributes Wands to Fire (pdf p24)."
   },
   {
    "id": "thoth-princess-of-cups-thoth-cups-thoth",
@@ -7454,7 +7439,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Princess of Cups is a court of the Cups suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Princess of Cups represents the earthy part of Water (pdf p155); he attributes Cups to Water (pdf p24)."
   },
   {
    "id": "thoth-princess-of-cups-water-thoth",
@@ -7469,7 +7454,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the earthy part of Water. The join is to Water as the element.",
+   "note": "Crowley says the Princess of Cups represents the earthy part of Water (pdf p155).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7492,7 +7477,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the earthy part of Earth. The join is to Earth as the element.",
+   "note": "Crowley says the Princess of Disks represents the earthy part of Earth (pdf p171).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7515,7 +7500,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Princess of Disks is a court of the Disks suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Princess of Disks represents the earthy part of Earth (pdf p171); he attributes Disks to Earth (pdf p24)."
   },
   {
    "id": "thoth-princess-of-swords-air-thoth",
@@ -7530,7 +7515,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the earthy part of Air. The join is to Air as the element.",
+   "note": "Crowley says the Princess of Swords represents the earthy part of Air (pdf p163).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7553,7 +7538,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Princess of Swords is a court of the Swords suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Princess of Swords represents the earthy part of Air (pdf p163); he attributes Swords to Air (pdf p24)."
   },
   {
    "id": "thoth-princess-of-wands-fire-thoth",
@@ -7568,7 +7553,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the earthy part of Fire. The join is to Fire as the element.",
+   "note": "Crowley says the Princess of Wands represents the earthy part of Fire (pdf p147).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7591,7 +7576,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Princess of Wands is a court of the Wands suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Princess of Wands represents the earthy part of Fire (pdf p147); he attributes Wands to Fire (pdf p24)."
   },
   {
    "id": "thoth-queen-of-cups-cancer-thoth",
@@ -7606,7 +7591,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Cups a span in the Zodiac from the 21st degree of Gemini to the 20th of Cancer (text, pdf p151); the table gives 20 degrees (pdf p274). This join names Cancer only.",
+   "note": "Crowley says the Queen of Cups rules from the 21st degree of Gemini to the 20th degree of Cancer (pdf p151).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7629,7 +7614,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Cups a span in the Zodiac from the 21st degree of Gemini to the 20th of Cancer (text, pdf p151); the table gives 20 degrees (pdf p274). This join names Gemini only.",
+   "note": "Crowley says the Queen of Cups rules from the 21st degree of Gemini to the 20th degree of Cancer (pdf p151).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7652,7 +7637,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Queen of Cups is a court of the Cups suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Queen of Cups represents the watery part of Water (pdf p151); he attributes Cups to Water (pdf p24)."
   },
   {
    "id": "thoth-queen-of-cups-water-thoth",
@@ -7667,7 +7652,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the watery part of Water. The join is to Water as the element.",
+   "note": "Crowley says the Queen of Cups represents the watery part of Water (pdf p151).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7690,7 +7675,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Disks a span in the Zodiac from the 21st degree of Sagittarius to the 20th of Capricornus (text, pdf p167); the table gives 20 degrees (pdf p274). This join names Capricornus only.",
+   "note": "Crowley says the Queen of Disks rules from the 21st degree of Sagittarius to the 20th degree of Capricornus (pdf p167).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7713,7 +7698,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the watery part of Earth. The join is to Earth as the element.",
+   "note": "Crowley says the Queen of Disks represents the watery part of Earth (pdf p167).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7736,7 +7721,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Disks a span in the Zodiac from the 21st degree of Sagittarius to the 20th of Capricornus (text, pdf p167); the table gives 20 degrees (pdf p274). This join names Sagittarius only.",
+   "note": "Crowley says the Queen of Disks rules from the 21st degree of Sagittarius to the 20th degree of Capricornus (pdf p167).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7759,7 +7744,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Queen of Disks is a court of the Disks suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Queen of Disks represents the watery part of Earth (pdf p167); he attributes Disks to Earth (pdf p24)."
   },
   {
    "id": "thoth-queen-of-swords-air-thoth",
@@ -7774,7 +7759,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the watery part of Air. The join is to Air as the element.",
+   "note": "Crowley says the Queen of Swords represents the watery part of Air (pdf p159).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7797,7 +7782,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Swords a span in the Zodiac from the 21st degree of Virgo to the 20th of Libra (text, pdf p159); the table gives 20 degrees (pdf p274). This join names Libra only.",
+   "note": "Crowley says the Queen of Swords rules from the 21st degree of Virgo to the 20th degree of Libra (pdf p159).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7820,7 +7805,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Queen of Swords is a court of the Swords suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Queen of Swords represents the watery part of Air (pdf p159); he attributes Swords to Air (pdf p24)."
   },
   {
    "id": "thoth-queen-of-swords-virgo-thoth",
@@ -7835,7 +7820,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Swords a span in the Zodiac from the 21st degree of Virgo to the 20th of Libra (text, pdf p159); the table gives 20 degrees (pdf p274). This join names Virgo only.",
+   "note": "Crowley says the Queen of Swords rules from the 21st degree of Virgo to the 20th degree of Libra (pdf p159).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7858,7 +7843,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Wands a span in the Zodiac from the 21st degree of Pisces to the 20th of Aries (text, pdf p143); the table gives 20 degrees (pdf p274). This join names Aries only.",
+   "note": "Crowley says the Queen of Wands rules from the 21st degree of Pisces to the 20th degree of Aries (pdf p143).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7881,7 +7866,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley states this court's element: the watery part of Fire. The join is to Fire as the element.",
+   "note": "Crowley says the Queen of Wands represents the watery part of Fire (pdf p143).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7904,7 +7889,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley gives Queen of Wands a span in the Zodiac from the 21st degree of Pisces to the 20th of Aries (text, pdf p143); the table gives 20 degrees (pdf p274). This join names Pisces only.",
+   "note": "Crowley says the Queen of Wands rules from the 21st degree of Pisces to the 20th degree of Aries (pdf p143).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7927,7 +7912,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Queen of Wands is a court of the Wands suit. The four courts of each suit are its Knight, Queen, Prince and Princess."
+   "note": "Crowley says the Queen of Wands represents the watery part of Fire (pdf p143); he attributes Wands to Fire (pdf p24)."
   },
   {
    "id": "thoth-seven-of-cups-netzach-thoth",
@@ -7942,7 +7927,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter names the Seven, Netzach, for this card (pdf 205).",
+   "note": "Crowley refers the Seven of Cups to the Seven, Netzach, in the suit of Water (pdf p205).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7965,7 +7950,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Cups is one of the small cards of the Cups suit, which he attributes to Water.",
+   "note": "Crowley's Seven of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -7988,7 +7973,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the number Seven is Netzach (pdf 233).",
+   "note": "Crowley says the number Seven is Netzach (pdf p233).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8011,7 +7996,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Disks is one of the small cards of the Disks suit, which he attributes to Earth.",
+   "note": "Crowley's Seven of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8034,7 +8019,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sevens group text attributes the Sevens to Netzach (pdf 178); the chapter gives Netzach as the sephira of Venus (pdf 219).",
+   "note": "Crowley attributes the Sevens to Netzach (pdf p178) and calls Netzach the Sephira of Venus (pdf p219).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8063,7 +8048,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Swords is one of the small cards of the Swords suit, which he attributes to Air.",
+   "note": "Crowley's Seven of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8086,7 +8071,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sevens group text attributes the Sevens to Netzach (pdf 178).",
+   "note": "Crowley attributes the Sevens to Netzach (pdf p178).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8109,7 +8094,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Seven of Wands is one of the small cards of the Wands suit, which he attributes to Fire.",
+   "note": "Crowley's Seven of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8132,7 +8117,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Cups is one of the small cards of the Cups suit, which he attributes to Water.",
+   "note": "Crowley's Six of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8155,7 +8140,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Sixes group text attributes the Sixes to Tiphareth (pdf 177); the card's chapter does not restate the sephira in the quoted record.",
+   "note": "Crowley attributes the Sixes to Tiphareth (pdf p177).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8178,7 +8163,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Disks is one of the small cards of the Disks suit, which he attributes to Earth.",
+   "note": "Crowley's Six of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8201,7 +8186,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter names the Number Six as Tiphareth (pdf 232).",
+   "note": "Crowley names the Number Six as Tiphareth for the Six of Disks (pdf p232).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8224,7 +8209,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Swords is one of the small cards of the Swords suit, which he attributes to Air.",
+   "note": "Crowley's Six of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8247,7 +8232,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Sixes group text attributes the Sixes to Tiphareth (pdf 177); the Ace of Swords chapter calls Tiphareth the airy sephira (pdf 211).",
+   "note": "Crowley attributes the Sixes to Tiphareth (pdf p177), and calls Tiphareth the airy Sephira (pdf p211).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8276,7 +8261,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Six of Wands is one of the small cards of the Wands suit, which he attributes to Fire.",
+   "note": "Crowley's Six of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8299,7 +8284,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the card represents Tiphareth of the suit of Fire (pdf 191).",
+   "note": "Crowley says the Six of Wands represents Tiphareth of the suit of Fire (pdf p191).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8322,7 +8307,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says Atu XVII refers to the zodiacal sign of Aquarius, the water-bearer. The ends of He's path are given by the Key Scale's numbering (see the joins to Chokmah and Tiphareth), and the Emperor's chapter gives the same ends.",
+   "note": "Crowley refers Atu XVII, attributed to the letter Hé, to the zodiacal sign of Aquarius (pdf p100).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8345,7 +8330,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 15; on the Tree path 15 runs between Chokmah and Tiphareth. The text of its chapter does not name the ends. The Emperor's chapter gives the same two ends in its own text; the two are not reconciled here."
+   "note": "Crowley's Key Scale numbers the Star as path 15 (pdf p270), the path between Chokmah and Tiphareth."
   },
   {
    "id": "thoth-star-tiphareth-thoth",
@@ -8360,7 +8345,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 15; on the Tree path 15 runs between Chokmah and Tiphareth. The text of its chapter does not name the ends. The Emperor's chapter gives the same two ends in its own text; the two are not reconciled here."
+   "note": "Crowley's Key Scale numbers the Star as path 15 (pdf p270), the path between Chokmah and Tiphareth."
   },
   {
    "id": "thoth-sun-hod-thoth",
@@ -8375,7 +8360,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 30; on the Tree path 30 runs between Hod and Yesod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Sun as path 30 (pdf p270), the path between Hod and Yesod."
   },
   {
    "id": "thoth-sun-sun-thoth",
@@ -8390,7 +8375,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's attribution table (pdf p270) gives the planet Sun for Atu XIX. No sentence in the chapter attributes the card to the Sun, so this join carries no quotation."
+   "note": "Crowley's Key Scale (pdf p270) gives the planet Sun for Atu XIX."
   },
   {
    "id": "thoth-sun-yesod-thoth",
@@ -8405,7 +8390,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 30; on the Tree path 30 runs between Hod and Yesod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Sun as path 30 (pdf p270), the path between Hod and Yesod."
   },
   {
    "id": "thoth-swords-air-thoth",
@@ -8420,7 +8405,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the suit of Swords to Air, in the sentence that also gives Wands to Fire and Cups to Water.",
+   "note": "Crowley attributes Wands to Fire, Cups to Water and Swords to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8443,7 +8428,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley divides the small cards numbered one to ten into four suits by the four elements. Swords is one of the four suits.",
+   "note": "Crowley divides the small cards into four suits according to the four elements (pdf p35); Swords is one of the four suits.",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8466,7 +8451,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's trumps are the part of the pack he refers to the twenty-two Paths of the Tree of Life. The pick states that reference.",
+   "note": "Crowley says the twenty-two Trumps refer to the twenty-two Paths (pdf p261).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8489,7 +8474,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the ten numbers are represented in the Tarot by the forty small cards. The minor arcana is the part of the pack that carries them.",
+   "note": "Crowley says the ten numbers are represented in the Tarot by the forty small cards (pdf p22).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8512,7 +8497,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Tens group text attributes the Tens to Malkuth (pdf 181).",
+   "note": "Crowley attributes the Tens to Malkuth (pdf p181).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8535,7 +8520,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Cups is one of the small cards of the Cups suit, which he attributes to Water.",
+   "note": "Crowley's Ten of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8558,7 +8543,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Tens group text attributes the Tens to Malkuth (pdf 181).",
+   "note": "Crowley attributes the Tens to Malkuth (pdf p181).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8581,7 +8566,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Disks is one of the small cards of the Disks suit, which he attributes to Earth.",
+   "note": "Crowley's Ten of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8604,7 +8589,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Tens group text attributes the Tens to Malkuth (pdf 181).",
+   "note": "Crowley attributes the Tens to Malkuth (pdf p181).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8627,7 +8612,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Swords is one of the small cards of the Swords suit, which he attributes to Air.",
+   "note": "Crowley's Ten of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8650,7 +8635,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's chapter says the number Ten refers to Malkuth (pdf 195).",
+   "note": "Crowley says the number Ten refers to Malkuth (pdf p195).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8673,7 +8658,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley's Ten of Wands is one of the small cards of the Wands suit, which he attributes to Fire.",
+   "note": "Crowley's Ten of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8696,7 +8681,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Three of Cups chapter refers the card to Binah in the suit of Water (pdf 199).",
+   "note": "Crowley refers the Three of Cups to Binah in the suit of Water (pdf p199).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8719,7 +8704,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Three of Cups is one of the small cards of the suit of Cups. Crowley attributes the suit of Cups to Water (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Three of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8742,7 +8727,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Three of Disks chapter speaks of the influence of Binah in the sphere of Earth (pdf 228), and the Threes essay refers all four Threes to Binah (pdf 176).",
+   "note": "Crowley speaks of the influence of Binah in the sphere of Earth for the Three of Disks (pdf p228).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8765,7 +8750,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Three of Disks is one of the small cards of the suit of Disks. Crowley attributes the suit of Disks to Earth (pdf 24) and calls the Disks a whirling emblem rather than coins (pdf 225). A site join from his suit attribution.",
+   "note": "Crowley's Three of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8788,7 +8773,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Three of Swords chapter says Binah, the Great Mother, rules the realm of Air (pdf 214).",
+   "note": "Crowley says that in the Three of Swords Binah, the Great Mother, rules the realm of Air (pdf p214).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8811,7 +8796,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Three of Swords is one of the small cards of the suit of Swords. Crowley attributes the suit of Swords to Air (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Three of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8834,7 +8819,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Three of Wands chapter refers the card to Binah in the suit of Fire (pdf 187), and the Threes essay says the Threes are referred to Binah (pdf 176).",
+   "note": "Crowley refers the Three of Wands to Binah in the suit of Fire (pdf p187).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8857,7 +8842,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Three of Wands is one of the small cards of the suit of Wands. Crowley attributes the suit of Wands to Fire (pdf 24) and names it the suit of Fire in the card chapters. A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Three of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8880,7 +8865,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 27; on the Tree path 27 runs between Netzach and Hod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Tower as path 27 (pdf p270), the path between Netzach and Hod."
   },
   {
    "id": "thoth-tower-mars-thoth",
@@ -8895,7 +8880,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the letter Pe refers to the planet Mars for Atu XVI. The text gives no path ends for this card.",
+   "note": "Crowley says Atu XVI refers to the planet Mars (pdf p98).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8918,7 +8903,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley (Key Scale, pdf p270)",
-   "note": "Crowley's Key Scale (pdf p270) numbers this Atu's path 27; on the Tree path 27 runs between Netzach and Hod. The text of its chapter does not name the ends."
+   "note": "Crowley's Key Scale numbers the Tower as path 27 (pdf p270), the path between Netzach and Hod."
   },
   {
    "id": "thoth-two-of-cups-chokmah-thoth",
@@ -8933,7 +8918,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Twos essay says these cards refer to Chokmah (pdf 175). The Two of Cups chapter (pdf 197) does not repeat the sephira, so the join rests on the group statement.",
+   "note": "Crowley says the Twos refer to Chokmah (pdf p175).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8956,7 +8941,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Two of Cups is one of the small cards of the suit of Cups. Crowley attributes the suit of Cups to Water (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Two of Cups is a card of the suit of Cups, which he attributes to Water (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -8979,7 +8964,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Two of Disks chapter says the number Two, Chokmah, rules in the suit pertaining to Earth (pdf 227). The Twos essay gives the same sephira for all four Twos (pdf 35).",
+   "note": "Crowley says the number Two, Chokmah, rules in the suit pertaining to Earth (pdf p227).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9002,7 +8987,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Two of Disks is one of the small cards of the suit of Disks. Crowley attributes the suit of Disks to Earth (pdf 24) and calls the Disks a whirling emblem rather than coins (pdf 225). A site join from his suit attribution.",
+   "note": "Crowley's Two of Disks is a card of the suit of Disks, which he attributes to Earth (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9025,7 +9010,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "The Two of Swords chapter says the card is ruled by Chokmah in the Element of Air (pdf 212). A site join from his text.",
+   "note": "Crowley says the Two of Swords is ruled by Chokmah in the Element of Air (pdf p212).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9048,7 +9033,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Two of Swords is one of the small cards of the suit of Swords. Crowley attributes the suit of Swords to Air (pdf 24). A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Two of Swords is a card of the suit of Swords, which he attributes to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9071,7 +9056,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley refers the Two of Wands to Chokmah in the suit of Fire (pdf 185), and the Twos essay says the Two pertains to Chokmah (pdf 35).",
+   "note": "Crowley refers the Two of Wands to Chokmah in the suit of Fire (pdf p185).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9100,7 +9085,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Two of Wands is one of the small cards of the suit of Wands. Crowley attributes the suit of Wands to Fire (pdf 24) and names it the suit of Fire in the card chapters. A site join from his suit attribution; it is not a Jung reading.",
+   "note": "Crowley's Two of Wands is a card of the suit of Wands, which he attributes to Fire (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9123,7 +9108,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the element of earth was thrust upon the symbol of Atu XXI, a second attribution beside Saturn. The table gives it as an unnumbered 32 bis row.",
+   "note": "Crowley says the element of earth was thrust upon the symbol of Atu XXI (pdf p109).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9146,7 +9131,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley says the influence of the path descends upon the earth, Malkuth, the daughter; this join is the Malkuth end.",
+   "note": "Crowley says the influence of the path of Tau descends upon the earth, Malkuth, the daughter (pdf p110).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9169,7 +9154,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the letter Tau, the letter of Atu XXI, to Saturn, the outermost and slowest of the seven sacred planets.",
+   "note": "Crowley attributes the letter Tau, the letter of Atu XXI, to Saturn (pdf p109).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9192,7 +9177,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley places the letter Tau on the Tree as an emanation from the Moon of Yesod; this join is the Yesod end.",
+   "note": "Crowley says the letter Tau upon the Tree of Life appears as an emanation from the moon of Yesod (pdf p110).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9215,7 +9200,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley attributes the suit of Wands to Fire. The same sentence gives Cups to Water and Swords to Air.",
+   "note": "Crowley attributes Wands to Fire, Cups to Water and Swords to Air (pdf p24).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9238,7 +9223,7 @@
    "basis": "site",
    "system": "thoth",
    "voice": "Crowley",
-   "note": "Crowley divides the small cards numbered one to ten into four suits by the four elements. Wands is one of the four suits.",
+   "note": "Crowley divides the small cards into four suits according to the four elements (pdf p35); Wands is one of the four suits.",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9261,7 +9246,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley: in the planetary system Tiphareth represents the Sun, and in the system of Tetragrammaton it represents the Son.",
+   "note": "Crowley writes that in the planetary system Tiphareth represents the Sun, and in the system of Tetragrammaton the Son (pdf p177).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9284,7 +9269,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung states that the figure of Tifereth belongs to the Sefiroth system, which is conceived to be a tree, and that Tifereth occupies the middle position (cw14 ¶592).",
+   "note": "Jung writes that Tifereth belongs to the Sefiroth system, conceived as a tree, and occupies the middle position (CW14 ¶592).",
    "cites": [
     {
      "work": "cw14",
@@ -9307,7 +9292,7 @@
    "basis": "site",
    "system": "astrology",
    "voice": "Burt",
-   "note": "Burt calls Virgo the Earth sign, ruled by Hermes, and describes its earthy nature.",
+   "note": "Burt calls Virgo the Earth sign, ruled by Hermes (pdf p211).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -9336,7 +9321,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt names Mercury, as Hermes, the ruler of Virgo. The node is the figure the sky layer ties to the planet Mercury, and Burt speaks of the god.",
+   "note": "Burt names Hermes as the ruler of the Earth sign Virgo (pdf p211).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -9359,7 +9344,7 @@
    "basis": "site",
    "system": "burt",
    "voice": "Burt",
-   "note": "Burt's Preface names Virgo and Pisces as the two poles of one axis of the wheel, where the tension between opposites brings perspective and growth.",
+   "note": "Burt names Virgo-Pisces among the opposites whose tension brings perspective, growth and wisdom (pdf p13).",
    "cites": [
     {
      "work": "burt-zodiac",
@@ -9388,7 +9373,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Maier, quoted by Jung (CW12 note 41)",
-   "note": "Maier's sentence, quoted in Jung's note, puts the spirit in lunar whiteness, like water. The join reads that sentence; it is not a claim of Jung's.",
+   "note": "Maier, quoted by Jung, puts the spirit in lunar whiteness, like water (CW12 note 41, pdf p648).",
    "cites": [
     {
      "work": "cw12",
@@ -9411,7 +9396,7 @@
    "basis": "inferred",
    "system": "alchemy",
    "voice": "Jung",
-   "note": "Jung says the four elements form a quaternity; water's place in it is read from that sentence. Water is not named as the fourth position, which para 31 gives to earth or fire.",
+   "note": "Jung writes of four elements, water among them (CW12 ¶333); the fourth is sometimes earth, sometimes fire (CW12 ¶31).",
    "cites": [
     {
      "work": "cw12",
@@ -9438,7 +9423,7 @@
    "basis": "site",
    "system": "qabalah",
    "voice": "Crowley",
-   "note": "Crowley calls the Moon of Yesod the foundation of the Tree. His Nine of Wands, a card-level statement, is ruled by the Moon and Yesod.",
+   "note": "Crowley calls the moon of Yesod the foundation of the Tree (pdf p110), and says the Nine of Wands is ruled by the Moon and Yesod (pdf p180).",
    "cites": [
     {
      "work": "book-of-thoth",
@@ -9467,7 +9452,7 @@
    "basis": "jung",
    "system": "qabalah",
    "voice": "Jung",
-   "note": "Jung numbers Jezoth, Yesod, the ninth and middle Sefira in the lowest triad of the Cabalistic tree (cw14 ¶634).",
+   "note": "Jung writes that Jezoth, Yesod, is the ninth and middle Sefira in the lowest triad of the Cabalistic tree (CW14 ¶634).",
    "cites": [
     {
      "work": "cw14",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "taurus",
- "line": "Burt's chapter on Taurus, with Jung's bull passages.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Taurus (pdf pp. 59–94); Jung on the bull (Dream Analysis seminar; CW5).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Taurus, pdf pp. 59–94. Her account of the sign and its rulers.",
+   "line": "Burt, chapter on Taurus (pdf pp. 59–94): pdf p59 and p72.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Taurus, pdf pp. 59–94. The bull, Vulcan and the goddess.",
+   "line": "Burt, chapter on Taurus (pdf pp. 59–94): pdf p72, p65, p66 and p70.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the bull in his seminar and in Symbols of Transformation.",
+   "line": "Jung on the bull: Dream Analysis seminar, pdf p434, p287 and p448; CW5 ¶294.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

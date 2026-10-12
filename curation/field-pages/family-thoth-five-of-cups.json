@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-five-of-cups",
- "line": "Crowley’s Five of Cups: Disappointment, Geburah in the suit of Water, Mars in Scorpio.",
+ "line": "Crowley’s Five of Cups: Disappointment (pdf p177); Geburah and Mars in Scorpio (pdf p202).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The card is ruled by Geburah in the suit of Water. The attribution is also to Mars in Scorpio, Mars’s own house.",
+   "line": "Crowley on Geburah in the suit of Water and on Mars in Scorpio (pdf p202).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads Mars as Geburah on its lowest plane, and the inverted pentagram of cups as the triumph of matter over spirit.",
+   "line": "Crowley on the lowest plane of Geburah and on the inverted pentagram of the cups (pdf p202).",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hermit",
- "line": "Crowley's Atu IX: the letter Yod, the Hand, and Virgo, ruled by Mercury; the text gives no path ends for the card.",
+ "line": "Crowley on Atu IX: the letter Yod, the Hand, Virgo ruled by Mercury, and the Father who is Wisdom (pdf p79, p80).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley says the card is",
-   "line": "The letter Yod, the hand, and the sign Virgo, ruled by Mercury, with Mercury exalted there.",
+   "title": "Letter and sign",
+   "line": "Crowley on the letter Yod, the Hand (pdf p79), and on Virgo, ruled by Mercury, with Mercury exalted there (pdf p80).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Yod as the Father, who is Wisdom; Crowley adds that the Father is the highest form of Mercury. The Key Scale gives path 20, with no ends in the text.",
+   "title": "Yod as the Father",
+   "line": "Crowley on Yod as the symbol of the Father, who is Wisdom, and on the Father as the highest form of Mercury and the Logos (pdf p79).",
    "quotes": [
     {
      "work": "book-of-thoth",

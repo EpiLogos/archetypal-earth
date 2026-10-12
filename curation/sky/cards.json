@@ -1,0 +1,89 @@
+{
+  "_note": "The card rings: what a planet carries in the sky besides its archetypes. The tarot cards that float round a held planet are not authored here; they are read from field.joins (the decans' planets and cards, the sephiroth's rank cards, the Atu's planets). This file holds only what those joins cannot say, and every line of it is a quotation placed in the corpus by scripts/lib/cite.mjs: (1) `list` — Crowley's own list of the ten principal bodies of the solar system on the Tree, in the Universe chapter (pdf p111), which gives each body its number and so its sephira, the outer planets and the Earth included; (2) `gods` — the field family a planet's god stands as, for the planets whose family the sky ties do not yet name (Jung's own words); the four that the sky ties already name are read from curation/sky/ties.json. Nothing here is a claim of the atlas's own: a body with no quotation here has no card ring.",
+  "version": 1,
+  "list": {
+    "work": "book-of-thoth",
+    "page": 111,
+    "voice": "Crowley",
+    "quote": "shewing the ten principal bodies of the solar system."
+  },
+  "bodies": {
+    "pluto": {
+      "position": 1,
+      "quote": "The primum mobile, represented by Pluto.",
+      "note": "Crowley's number 1 is Kether; the list writes the number and the planet, not the sephira's name."
+    },
+    "neptune": {
+      "position": 2,
+      "quote": "The sphere of the Zodiac or fixed stars, represented by Neptune.",
+      "note": "Crowley's number 2 is Chokmah; the list gives the sphere of the fixed stars to Neptune."
+    },
+    "uranus": {
+      "abyss": true,
+      "quote": "This is represented by Herschel, the planet of disintegration and explosion.",
+      "note": "The list sets the Abyss under the number 3 and gives it to Herschel (Uranus). The Abyss is not a sephira and carries no rank, so Uranus has no rank ring."
+    },
+    "saturn": {
+      "position": 3,
+      "quote": "represented by Neptune. 3. Saturn. The Abyss.",
+      "god": {
+        "family": "saturn",
+        "basis": "jung",
+        "voice": "Jung",
+        "quotes": [
+          { "work": "cw11", "quote": "is none other than the leaden spirit or planetary demon Saturn", "para": 350 }
+        ]
+      }
+    },
+    "jupiter": {
+      "position": 4,
+      "quote": "explosion. 4. Jupiter 5. Mars. 6. The Sun.",
+      "god": {
+        "family": "jupiter",
+        "basis": "jung",
+        "voice": "Jung",
+        "quotes": [
+          { "work": "sem-zarathustra", "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus." }
+        ]
+      }
+    },
+    "mars": {
+      "position": 5,
+      "quote": "4. Jupiter 5. Mars. 6. The Sun. 7. Venus.",
+      "god": {
+        "family": "mars",
+        "basis": "jung",
+        "voice": "Jung",
+        "quotes": [
+          { "work": "sem-zarathustra", "quote": "iron is the sign of Mars, tin, the sign of Jupiter, silver, the sign of the moon, and copper, the sign of Venus." }
+        ]
+      }
+    },
+    "sun": {
+      "position": 6,
+      "quote": "5. Mars. 6. The Sun. 7. Venus. 8. Mercury.",
+      "god": { "family": "sun", "fromSkyTie": true }
+    },
+    "venus": {
+      "position": 7,
+      "quote": "6. The Sun. 7. Venus. 8. Mercury. 9. The Moon.",
+      "god": { "family": "venus", "fromSkyTie": true }
+    },
+    "mercury": {
+      "position": 8,
+      "quote": "7. Venus. 8. Mercury. 9. The Moon. 10. The Earth.",
+      "god": { "family": "mercurius", "fromSkyTie": true }
+    },
+    "moon": {
+      "position": 9,
+      "quote": "8. Mercury. 9. The Moon. 10. The Earth. (The Four Elements).",
+      "god": { "family": "moon", "fromSkyTie": true }
+    },
+    "terra": {
+      "position": 10,
+      "quote": "9. The Moon. 10. The Earth. (The Four Elements).",
+      "elements": ["fire", "water", "air", "earth-element"],
+      "note": "Crowley writes the four elements beside the Earth, number 10. The elements' own ties (to the quaternity, to the number four) are the field's; here they only stand at the Earth."
+    }
+  }
+}

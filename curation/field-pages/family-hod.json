@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "hod",
- "line": "Crowley gives Hod the number 8 and Mercury, airy and mercurial; Jung names Hod as the left, feminine side that Yesod unites with Nezach.",
+ "line": "Crowley on Hod (The Book of Thoth); Jung on Hod in CW14 ¶635.",
  "sections": [
   {
    "id": "crowley-eights",
    "title": "Crowley's Eights",
-   "line": "The four Eights are attributed to Hod, and the number Eight, Hod, represents Mercury.",
+   "line": "Crowley on the Eights and Hod, and the number Eight and Mercury: The Book of Thoth, pdf p179 and p234.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "mercury-on-the-tree",
-   "title": "Mercury on the Tree",
-   "line": "Crowley names Hod as Mercury on the Tree and calls it airy and mercurial. The field's Mercurius is the quicksilver spirit; the sky layer ties the planet Mercury to that node.",
+   "title": "Hod and Mercury",
+   "line": "Crowley on Hod as Mercury on the Tree, airy and mercurial: The Book of Thoth, pdf p237 and p263.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "jung-hod",
    "title": "Jung's Hod",
-   "line": "Jung's passage on Hod is ¶635, the same passage as Nezach: the left, feminine side of beauty.",
+   "line": "Jung on Hod, beauty, and the left, feminine side: CW14 ¶635.",
    "quotes": [
     {
      "work": "cw14",

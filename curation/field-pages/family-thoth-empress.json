@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-empress",
- "line": "Crowley's Atu III: the letter Daleth, Venus, and the path that unites Chokmah with Binah.",
+ "line": "Crowley on Atu III: the letter Daleth, Venus, and the path from Chokmah to Binah (pdf p64).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What the card is, and its path",
-   "line": "The letter Daleth and the planet Venus; Daleth is the path from Chokmah to Binah, which the Key Scale gives as path 14.",
+   "title": "Letter, planet and path",
+   "line": "Crowley on the letter Daleth and the planet Venus, and on Daleth as the path leading from Chokmah to Binah (pdf p64).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-figures",
-   "title": "What the card figures",
-   "line": "Crowley's account of the card's doctrine and of the figure's combination of qualities.",
+   "title": "The doctrine of the card",
+   "line": "Crowley on the formula of the Universe as Love and on the qualities the Empress combines (pdf p64).",
    "quotes": [
     {
      "work": "book-of-thoth",

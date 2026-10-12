@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thinking",
- "line": "Thinking as Jung defines it: the function's definition, its place opposite feeling, its position in the order, and the diagrams.",
+ "line": "Jung on thinking: the definition, rational and irrational thinking, its place among the functions, the compass and the cross, and air.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "Jung's definition of the function, and the boundary he draws around the word.",
+   "title": "Thinking as a function",
+   "line": "Jung's definition of thinking: CW6 ¶830, ¶831 and ¶899.",
    "quotes": [
     {
      "work": "cw06",
@@ -28,8 +28,8 @@
   },
   {
    "id": "rational-and-opposite",
-   "title": "Rational, and opposed to feeling",
-   "line": "Directed thinking is rational because its norm is known to the thinker. Thinking and feeling are the rational pair, and each excludes the other as far as it can.",
+   "title": "Rational and irrational; thinking and feeling",
+   "line": "Directed and undirected thinking, the rational and irrational functions, and the thinking type: CW6 ¶832, ¶983 and ¶905.",
    "quotes": [
     {
      "work": "cw06",
@@ -55,8 +55,8 @@
   },
   {
    "id": "position",
-   "title": "Its place in the order",
-   "line": "Jung's worked case is a rational type whose superior function is thinking, with sensation and intuition as auxiliaries and feeling inferior. The passage on the fourth quarter gives fire as the inferior function, whichever function that is for a given person.",
+   "title": "Superior and inferior functions",
+   "line": "The superior function, the auxiliary functions and the inferior function: CW11 ¶245; CW6 ¶763; CW18 ¶36; CW14 ¶288.",
    "quotes": [
     {
      "work": "cw11",
@@ -87,8 +87,8 @@
   },
   {
    "id": "compass-and-cross",
-   "title": "Compass and cross",
-   "line": "The compass is Jung's image of the four: arbitrary and indispensable. The cross puts the rational pair on one axis and the irrational on the other, with the ego at the centre.",
+   "title": "The compass and the cross",
+   "line": "The four functions as a compass and as a cross, and the ego at the centre: CW6 ¶958 and ¶983; CW18 ¶29.",
    "quotes": [
     {
      "work": "cw06",
@@ -109,8 +109,8 @@
   },
   {
    "id": "elements-and-colours",
-   "title": "Element and colour",
-   "line": "The one element the sources give thinking is the seminar's air. The colour passage gives no assignment per function. The element reading of the four is conditional: it holds if we take it so, and Jung does not name which element goes with which function.",
+   "title": "Air, colours and elements",
+   "line": "Air and thought, and colours and the four elements in relation to the functions: Kundalini seminar, pdf p94; CW11 ¶281; CW14 ¶276.",
    "quotes": [
     {
      "work": "sem-kundalini",

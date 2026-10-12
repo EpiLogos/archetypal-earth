@@ -4,9 +4,28 @@
 // back toward the Earth, ending in a control that returns to the whole birth sky. Screen-space, over the canvas; it reads
 // the sky layer's own drawn disc each frame, so it follows the planet exactly. Nothing here is a claim: the satellites
 // are the same ties the walk's panel lists, with the same basis.
+//
+// Beyond those two orbits stand the planet's tarot cards, as small plates that float on two wider rings (spec: the
+// field's own joins, public/data/sky-cards.json): the decan wheel, each card hung at its decan's true ecliptic longitude
+// (the plane is projected through the camera, so 0° Aries points toward the vernal point), and the rank ring, the four
+// cards of its sephira's number with the Atu the field gives it. A card sways a little about its place and breathes in
+// its radius; the rank ring turns slowly, since nothing on it is a longitude.
 import { el } from '../ui/dom';
 import type { SkyLayer } from './layer';
 import type { BodyKey } from '../types/sky';
+import { decanOf, imageUrl, type CardPlate, type RingCard } from './cards';
+import { cardSize, fitShare, readable, wheelPoint, type Room } from './wheel';
+import { holoCssAt } from './zodiac';
+
+/** One card on a ring: its place on the ring, its plate, and what opens it. */
+export interface CardNode {
+  ring: RingCard;
+  name: string;
+  /** what the card is to this planet, said once (the control's title) */
+  hint: string;
+  plate: CardPlate;
+  open(): void;
+}
 
 export interface Satellite {
   /** stable key (the tie's target) */
@@ -22,6 +41,14 @@ const TILT = 0.34; // the orbits' apparent flattening: a ring seen from a little
 const ROT = (-14 * Math.PI) / 180; // and turned a little off the horizontal
 const PERIOD_S = [64, 96]; // one turn of the inner and the outer orbit, seconds
 const TOP = 96; // the shell's header band: nothing of the overlay is placed under it
+/** The card rings' radii, in discs: well beyond the archetypes' two orbits (1.42 and 1.86), the rank ring outside the decan wheel. */
+const K_DECAN = 2.6;
+const K_RANK = 3.75;
+/** The least a ring is drawn at when the room is short (a phone): outside the archetypes' outer orbit, the two a ring apart. Their names stand above the cards. */
+const K_DECAN_MIN = 2.05;
+const K_RANK_MIN = 2.6;
+const RANK_PERIOD_S = 420; // one turn of the rank ring
+const SWAY_DEG = 5; // a decan card's sway about its longitude
 
 /**
  * Whether the satellites, the Earth line and the Whole-sky control stand this frame (spec §2.5, the phase contract on
@@ -33,6 +60,17 @@ export function orbitsWanted(phase: string | undefined, gazing: boolean, approac
   const stationed = phase === undefined ? !gazing : phase === 'approach';
   return stationed && !!disc && disc.on && approach > 0.6 && disc.px > 40;
 }
+
+/**
+ * The Earth is held where it stands, not approached (its own framing is the globe's): at the system view, with the
+ * Earth's point on screen, its rings stand round that point at a fixed size rather than a disc's. Any other phase hides them.
+ */
+export function earthRingsWanted(phase: string | undefined, disc: { on: boolean } | null): boolean {
+  return (phase === undefined || phase === 'system') && !!disc && disc.on;
+}
+
+/** The radius (px) the Earth's rings are drawn about: its point on the system view is a few pixels, so they stand on a fixed one. */
+export const EARTH_RING_R = 46;
 
 /** Phases whose orbits go at once, with no fade: the camera is leaving the station or has not reached it yet. */
 export function orbitsSnapOff(phase: string | undefined): boolean {
@@ -47,6 +85,11 @@ export class PlanetOrbits {
   private earthMark: SVGTextElement;
   private earthBtn: HTMLButtonElement;
   private sats: { s: Satellite; dot: SVGCircleElement; tether: SVGLineElement; label: HTMLButtonElement; phase: number }[] = [];
+  private wheelDecan: SVGPolylineElement;
+  private wheelRank: SVGPolylineElement;
+  private ticks: SVGLineElement[] = [];
+  private cards: { n: CardNode; btn: HTMLButtonElement; p1: number; p2: number }[] = [];
+  private cardsKey: BodyKey | null = null;
   private key: BodyKey | null = null;
   private t = 0;
   private shown = 0;
@@ -69,6 +112,18 @@ export class PlanetOrbits {
     this.earthMark.setAttribute('class', 'po-earth-mark');
     this.earthMark.textContent = 'Earth';
     this.svg.append(this.earthLine, this.earthMark);
+    // the card rings' own lines: the decan wheel with a tick at each decan (the sign's boundary longer), the rank ring dashed
+    this.wheelDecan = document.createElementNS(SVG, 'polyline');
+    this.wheelDecan.setAttribute('class', 'po-wheel po-wheel-decan');
+    this.wheelRank = document.createElementNS(SVG, 'polyline');
+    this.wheelRank.setAttribute('class', 'po-wheel po-wheel-rank');
+    this.svg.append(this.wheelDecan, this.wheelRank);
+    for (let i = 0; i < 36; i++) {
+      const t = document.createElementNS(SVG, 'line');
+      t.setAttribute('class', `po-tick${i % 3 === 0 ? ' po-tick-sign' : ''}`);
+      this.ticks.push(t);
+      this.svg.append(t);
+    }
     this.earthBtn = el('button', { type: 'button', class: 'po-earth', text: 'Whole sky', 'aria-label': 'Back to the whole sky around the Earth', onclick: () => this.onEarth() });
     this.root = el('div', { class: 'po', hidden: true }, [this.earthBtn]);
     this.root.prepend(this.svg);
@@ -78,6 +133,7 @@ export class PlanetOrbits {
   /** The planet the walk holds and its satellites; null clears. */
   set(key: BodyKey | null, sats: Satellite[] = []) {
     this.key = key;
+    this.setCards(null, []);
     for (const x of this.sats) { x.dot.remove(); x.tether.remove(); x.label.remove(); }
     // spread each orbit's satellites evenly, the inner and outer offset so no two names start together
     const inner = sats.filter((s) => s.inner);
@@ -100,12 +156,41 @@ export class PlanetOrbits {
     if (!key) { this.root.hidden = true; this.shown = 0; document.body.classList.remove('po-holding'); }
   }
 
+  /**
+   * The planet's tarot cards, floated on the two outer rings. A call for a body the orbits no longer hold (the data
+   * arrived after the planet was let go) is ignored; an empty list takes the cards away.
+   */
+  setCards(key: BodyKey | null, nodes: CardNode[]) {
+    if (key !== null && key !== this.key) return;
+    for (const c of this.cards) c.btn.remove();
+    this.cards = [];
+    this.cardsKey = nodes.length ? key : null;
+    nodes.forEach((n, i) => {
+      const img = el('img', { src: imageUrl(n.plate), alt: '', decoding: 'async', draggable: 'false', loading: 'lazy' });
+      const btn = el('button', {
+        type: 'button', class: `po-card po-card-${n.ring.ring} po-card-${n.ring.role}`, title: `${n.name} — ${n.hint}`, 'aria-label': `${n.name}: ${n.hint}`, onclick: () => n.open(),
+      }, [img, el('span', { class: 'po-card-name', text: n.name })]) as HTMLButtonElement;
+      btn.style.setProperty('--ct', holoCssAt(n.ring.tintLon));
+      btn.style.setProperty('--ct-soft', holoCssAt(n.ring.tintLon, 0.5));
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+      this.root.append(btn);
+      // each card its own slow rhythm, so no two sway together
+      this.cards.push({ n, btn, p1: i * 2.399963, p2: i * 1.618034 + 0.7 });
+    });
+    if (!nodes.length) {
+      this.wheelDecan.removeAttribute('points');
+      this.wheelRank.removeAttribute('points');
+    }
+  }
+
   /** Each frame: follow the planet's drawn disc; show only once the approach has arrived (see `orbitsWanted`). */
   update(layer: SkyLayer | null, dt: number, reduced: boolean) {
     const key = this.key;
     const disc = key && layer ? layer.screenDisc(key) : null;
     const phase = document.body.dataset.skyPhase;
-    const wanted = orbitsWanted(phase, document.body.classList.contains('sky-gazing'), layer?.approach ?? 0, disc);
+    const isEarth = key === 'terra';
+    const wanted = isEarth ? earthRingsWanted(phase, disc) : orbitsWanted(phase, document.body.classList.contains('sky-gazing'), layer?.approach ?? 0, disc);
     // the orbits leave at once in the gaze, descend, return and system phases: a fade would leave the line on screen
     if (!wanted && orbitsSnapOff(phase)) this.shown = 0;
     else this.shown += ((wanted ? 1 : 0) - this.shown) * (1 - Math.exp(-dt * 4));
@@ -117,7 +202,7 @@ export class PlanetOrbits {
     this.setInteractive(wanted);
     this.root.style.opacity = this.shown.toFixed(3);
     if (!reduced) this.t += dt;
-    const R = disc.px / 2;
+    const R = isEarth ? Math.max(disc.px / 2, EARTH_RING_R) : disc.px / 2;
     const cx = disc.x, cy = disc.y;
     const radii = [R * 1.42, R * 1.86];
     const cos = Math.cos(ROT), sin = Math.sin(ROT);
@@ -141,6 +226,10 @@ export class PlanetOrbits {
     const tEdge = Math.min(1, ...[dx < 0 ? (cx - 24) / -dx : (W - 24 - cx) / Math.max(dx, 1e-6), dy < 0 ? (cy - TOP - 22) / -dy : (H - 120 - cy) / Math.max(dy, 1e-6)].map((v) => (Number.isFinite(v) && v > 0 ? v : 1)));
     ex = cx + dx * tEdge; ey = cy + dy * tEdge;
     const sx = cx + (dx / len) * R * 1.02, sy = cy + (dy / len) * R * 1.02;
+    // the Earth held has no line home: it is home
+    const homeVis = isEarth ? 'hidden' : 'visible';
+    this.earthLine.setAttribute('visibility', homeVis);
+    this.earthMark.setAttribute('visibility', homeVis);
     this.earthLine.setAttribute('x1', sx.toFixed(1)); this.earthLine.setAttribute('y1', sy.toFixed(1));
     this.earthLine.setAttribute('x2', ex.toFixed(1)); this.earthLine.setAttribute('y2', ey.toFixed(1));
     // the line ends in a mark naming the Earth; the control that goes back always stands under the planet's outer orbit,
@@ -173,13 +262,89 @@ export class PlanetOrbits {
       x.tether.style.opacity = String(o * 0.8);
       x.label.style.opacity = String(o);
       x.label.style.pointerEvents = this.interactive && o > 0.3 ? 'auto' : 'none';
-      x.label.style.zIndex = behind ? '1' : '2';
+      x.label.style.zIndex = behind ? '2' : '3';
       // the name sits beyond the tether, on the side away from the planet
       // …and never off the screen: on a phone the outer orbit spans the width, so a name set outward is pulled back inside
       const lw = x.label.offsetWidth;
       const lxPlaced = lx + (ux < -0.2 ? -1 : ux > 0.2 ? 0 : -0.5) * lw;
       const lxClamped = Math.min(W - lw - 8, Math.max(8, lxPlaced));
       x.label.style.transform = `translate(${Math.round(lxClamped)}px, ${Math.round(ly - x.label.offsetHeight / 2)}px)`;
+    }
+    this.placeCards(layer, key!, cx, cy, R, { left: 8, right: W - 8, top: TOP, bottom: H - 120 }, reduced);
+  }
+
+  /** The card rings: the wheel through the camera, each card at its longitude (or its spread place), floating. */
+  private placeCards(layer: SkyLayer, key: BodyKey, cx: number, cy: number, R: number, room: Room, reduced: boolean) {
+    const live = this.cards.length > 0 && this.cardsKey === key;
+    const raw = live ? layer.eclipticWheel(key, R) : null;
+    if (!live || !raw) {
+      this.wheelDecan.setAttribute('visibility', 'hidden');
+      this.wheelRank.setAttribute('visibility', 'hidden');
+      this.ticks.forEach((t) => t.setAttribute('visibility', 'hidden'));
+      for (const c of this.cards) { c.btn.style.opacity = '0'; c.btn.style.pointerEvents = 'none'; }
+      return;
+    }
+    const w = readable(raw);
+    const size = cardSize(R);
+    const hasDecan = this.cards.some((c) => c.n.ring.ring === 'decan');
+    // each ring as large as the room allows, never nearer than its floor: a phone's rings crowd in toward the planet
+    const kDecan = Math.max(K_DECAN_MIN, K_DECAN * fitShare(w, K_DECAN, cx, cy, room, size.w * 1.2, size.h * 1.2));
+    const kRank = Math.max(hasDecan ? Math.max(K_RANK_MIN, kDecan + 0.5) : K_DECAN_MIN, K_RANK * fitShare(w, K_RANK, cx, cy, room, size.w * 1.2, size.h * 1.2));
+    const place = (k: number) => (lon: number) => { const p = wheelPoint(w, k, lon); return { x: cx + p.x, y: cy + p.y, depth: p.depth }; };
+    const drawLoop = (poly: SVGPolylineElement, k: number) => {
+      const at = place(k);
+      const pts: string[] = [];
+      for (let i = 0; i <= 72; i++) { const p = at(i * 5); pts.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`); }
+      poly.setAttribute('points', pts.join(' '));
+      poly.setAttribute('visibility', 'visible');
+    };
+    const hasRank = this.cards.some((c) => c.n.ring.ring === 'rank');
+    if (hasDecan) {
+      drawLoop(this.wheelDecan, kDecan);
+      // the sign boundaries (longer) and the decans' own edges, as ticks across the wheel
+      this.ticks.forEach((tk, i) => {
+        const a = place(kDecan * 0.985)(i * 10);
+        const b = place(kDecan * (i % 3 === 0 ? 1.045 : 1.015))(i * 10);
+        tk.setAttribute('x1', a.x.toFixed(1)); tk.setAttribute('y1', a.y.toFixed(1));
+        tk.setAttribute('x2', b.x.toFixed(1)); tk.setAttribute('y2', b.y.toFixed(1));
+        tk.setAttribute('visibility', 'visible');
+      });
+    } else {
+      this.wheelDecan.setAttribute('visibility', 'hidden');
+      this.ticks.forEach((t) => t.setAttribute('visibility', 'hidden'));
+    }
+    if (hasRank) drawLoop(this.wheelRank, kRank); else this.wheelRank.setAttribute('visibility', 'hidden');
+
+    // where the planet stands now: its decan's card is lit
+    const here = decanOf(layer.bodyLongitude(key));
+    for (const c of this.cards) {
+      const r = c.n.ring;
+      const sway = reduced ? 0 : Math.sin(this.t * 0.31 + c.p1) * SWAY_DEG;
+      const bob = reduced ? 0 : Math.sin(this.t * 0.42 + c.p2);
+      // the decan wheel keeps each card at its longitude (it only sways); the rank ring, no longitude at all, turns
+      const onDecan = r.ring === 'decan';
+      const lon = onDecan ? r.lon + sway : r.lon + (reduced ? 0 : (this.t * 360) / RANK_PERIOD_S) + sway * 0.5;
+      const q = wheelPoint(w, (onDecan ? kDecan : kRank) * (1 + 0.025 * bob), lon);
+      const p = { x: cx + q.x, y: cy + q.y, depth: q.depth };
+      const grand = r.role === 'planet' || r.role === 'element' ? 1.16 : 1;
+      const far = Math.max(0, p.depth);
+      const scale = (1 - 0.16 * Math.max(-1, Math.min(1, p.depth))) * grand;
+      // (the whole overlay's own fade is on its root: only the far half's dimming is here)
+      const o = 1 - 0.3 * far;
+      const bw = size.w, bh = size.h;
+      // a card never leaves the screen: held a half-card inside the room
+      const x = Math.min(room.right - bw / 2, Math.max(room.left + bw / 2, p.x));
+      const y = Math.min(room.bottom - bh / 2, Math.max(room.top + bh / 2, p.y + (reduced ? 0 : bob * 3)));
+      // the plate is its own size; the control is never smaller than a finger (44 px), the plate centred in it
+      c.btn.style.setProperty('--cw', `${bw}px`);
+      c.btn.style.setProperty('--ch', `${bh}px`);
+      c.btn.style.width = `${Math.max(bw, 44)}px`;
+      c.btn.style.height = `${Math.max(bh, 44)}px`;
+      c.btn.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+      c.btn.style.opacity = o.toFixed(3);
+      c.btn.style.zIndex = p.depth > 0 ? '0' : '1';
+      c.btn.style.pointerEvents = this.interactive && o > 0.3 ? 'auto' : 'none';
+      c.btn.classList.toggle('is-here', onDecan && r.decan !== undefined && decanOf(r.decan) === here);
     }
   }
 
@@ -189,6 +354,7 @@ export class PlanetOrbits {
     this.interactive = on;
     this.earthBtn.style.pointerEvents = on ? 'auto' : 'none';
     for (const x of this.sats) x.label.style.pointerEvents = on ? 'auto' : 'none';
+    for (const c of this.cards) c.btn.style.pointerEvents = on ? 'auto' : 'none';
   }
 
   destroy() { document.body.classList.remove('po-holding'); this.root.remove(); }

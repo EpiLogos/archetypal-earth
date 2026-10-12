@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-swords",
- "line": "Nine of Swords: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Nine of Swords: Cruelty (pdf p181); Mars in Gemini (pdf p221); Yesod (pdf p221).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and ruler, as the chapter gives them (pdf 181, 221).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p181); on Mars in Gemini (pdf p221).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The number Nine is Yesod, which brings the energy back to the central pillar (pdf 221).",
+   "line": "Crowley on the number Nine, Yesod, and the central pillar of the Tree of Life (pdf p221).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the suit's decline in this card, not a divinatory reading.",
+   "line": "Crowley on the Swords and the stirring of heartless passions (pdf p221).",
    "quotes": [
     {
      "work": "book-of-thoth",

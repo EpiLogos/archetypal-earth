@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-moon",
- "line": "Crowley's account of Atu XVIII: the letter Qoph, Pisces, and the Moon as her lowest avatar joining Netzach to Malkuth.",
+ "line": "Crowley on Atu XVIII: the letter Qoph, Pisces, the Moon as the most universal of the Planets, and Netzach and Malkuth (pdf p103, p104).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter and the sign, and Crowley's account of the Moon among the planets.",
+   "title": "Letter, sign and planet",
+   "line": "Crowley on the letter Qoph and Pisces, and on the Moon as the most universal of the Planets (pdf p103).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree, and what it figures",
-   "line": "The path joins Netzach with Malkuth in her lowest avatar. Crowley reads the card as the threshold of life and of death.",
+   "title": "Netzach and Malkuth",
+   "line": "Crowley on the Moon in her lowest avatar joining Netzach with Malkuth (pdf p103) and on the threshold of life and the threshold of death (pdf p104).",
    "quotes": [
     {
      "work": "book-of-thoth",

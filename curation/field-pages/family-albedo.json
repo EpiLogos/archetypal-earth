@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "albedo",
- "line": "The albedo as Jung states it: the moon condition, the illumination that comes out of the dark, and the routes the texts give. He describes its goal more often than its process.",
+ "line": "Jung on the albedo: CW12 ¶334; CW14 ¶217, ¶218, ¶220, ¶320 and ¶388; CW16 ¶484 and ¶514.",
  "sections": [
   {
    "id": "the-moon-condition",
    "title": "The moon condition",
-   "line": "Jung's own sentences on what the whitening is and where it stands in the sequence.",
+   "line": "The albedo as the silver or moon condition, the daybreak and the ortus solis: CW12 ¶334, CW16 ¶484.",
    "quotes": [
     {
      "work": "cw12",
@@ -32,7 +32,7 @@
   {
    "id": "illumination-and-luna",
    "title": "Illumination and Luna",
-   "line": "Jung's reading of the whitening as the light that comes out of the unconscious, with Luna as the anima.",
+   "line": "Illumination, Luna and the anima, and the moon as prefiguration of the self: CW14 ¶220, ¶218 and ¶217.",
    "quotes": [
     {
      "work": "cw14",
@@ -56,8 +56,8 @@
   },
   {
    "id": "the-route-in",
-   "title": "The route in",
-   "line": "The washing leads into the whitening, and the calcined salt is named as a synonym for it.",
+   "title": "Washing, peacock's tail, salt",
+   "line": "The ablutio and the cauda pavonis leading to the whitening (CW12 ¶334); salt and ash as synonyms for the albedo (CW14 ¶320).",
    "quotes": [
     {
      "work": "cw12",
@@ -76,7 +76,7 @@
   {
    "id": "the-whitest-white",
    "title": "The whitest white",
-   "line": "The Rosarium's instruction to wait for the whitest white, and the place of the albedo as the climax of the work for many alchemists.",
+   "line": "The Rosarium on the whitest white (CW16 ¶514); the albedo as the climax of the work for many alchemists (CW14 ¶388).",
    "quotes": [
     {
      "work": "cw16",

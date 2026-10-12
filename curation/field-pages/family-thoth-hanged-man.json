@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hanged-man",
- "line": "Crowley's account of Atu XII: the letter Mem, the element Water, and the sacrifice he reads in the figure.",
+ "line": "Crowley on Atu XII: the letter Mem, the element Water, and the sacrifice of the male child (pdf p87, p89).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "The letter is named in the text, so it is not table-only. The element is Water in the text and the table.",
+   "title": "Letter and element",
+   "line": "Crowley on the card attributed to the letter Mem and representing Water (pdf p87), and on Mem as one of the three great Mother Letters (pdf p89).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "its-path",
-   "title": "Its path on the Tree",
-   "line": "The text gives no ends for this path. The table gives Key Scale path 23, and the general rule is one letter to each of the twenty-two paths.",
+   "title": "The Paths and the letters",
+   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-it-figures",
-   "title": "What the card figures, in his words",
-   "line": "Crowley's description of the figure and the act shown on the card.",
+   "title": "Baptism and sacrifice",
+   "line": "Crowley on baptism and death (pdf p87) and on the sacrifice of a male child of perfect innocence and high intelligence (pdf p89).",
    "quotes": [
     {
      "work": "book-of-thoth",

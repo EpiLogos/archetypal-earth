@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-tarot",
- "line": "Crowley's account of the Thoth Tarot: a pictorial picture of the Universe, built on the Holy Qabalah.",
+ "line": "Crowley on the Thoth Tarot: the pack as a picture of the Universe, its basis in the Holy Qabalah, and its parts (pdf p13, p20, p22, p29, p35, p261).",
  "sections": [
   {
    "id": "what-crowley-says-the-tarot-is",
-   "title": "What Crowley says the Tarot is",
-   "line": "Crowley opens with the pack as a pictorial representation of the Forces of Nature, and calls it a symbolic picture of the Universe.",
+   "title": "The Tarot as a picture",
+   "line": "Crowley's statements of what the Tarot is (pdf p29, p13).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "the-map-behind-the-pack",
-   "title": "The map behind the pack",
-   "line": "The pack's arrangement is tied, in Crowley's text, to the Tree of Life as a map of the Universe.",
+   "title": "The Tree of Life and the Solar System",
+   "line": "Crowley on the Tree of Life as a map of the Universe (pdf p20) and on the structure of the universe and of the Solar System as symbolized by the Holy Qabalah (pdf p13).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "what-the-pack-is-built-from",
-   "title": "What the pack is built from",
-   "line": "The three parts of the pack, the small cards, the trumps and the suits, each answer to a part of the scheme in his account.",
+   "title": "The small cards, the Trumps and the suits",
+   "line": "Crowley on the forty small cards (pdf p22), the twenty-two Trumps and the Paths (pdf p261), and the four suits (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -69,8 +69,8 @@
   },
   {
    "id": "what-is-not-claimed",
-   "title": "What is not claimed here",
-   "line": "Crowley's book is the only source for this pack on these pages. Its practical purpose is his statement, and the field does not read the pack as a Jungian object.",
+   "title": "The Tarot as a practical instrument",
+   "line": "Crowley on the Tarot as a practical instrument for Qabalistic calculations and for divination (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",

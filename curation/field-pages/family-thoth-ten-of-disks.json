@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-disks",
- "line": "Ten of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Ten of Disks: Wealth (pdf p181); Mercury in Virgo (pdf p237); Malkuth (pdf p181).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and ruler, as the chapter gives them (pdf 181, 237).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p181); on Mercury in Virgo (pdf p237).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Tens belong to Malkuth (pdf 181), which is in Assiah (pdf 181).",
+   "line": "Crowley on the Tens and Malkuth, and on Malkuth in the world of Assiah (pdf p181).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card, not a divinatory reading.",
+   "line": "Crowley on the card as a hieroglyph of the cycle of regeneration (pdf p237).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -57,8 +57,8 @@
   },
   {
    "id": "conflicts",
-   "title": "Conflicts and gaps",
-   "line": "The Tens group intro says there is now no planetary attribution to consider (pdf 181); this card's chapter names Mercury in Virgo. The chapter also places a coin where Hod, Mercury, stands on the Tree, marked with the Sun's cipher (pdf 237). The harvest does not say what that coin is, so no reading is drawn from it here.",
+   "title": "Group note on the Tens, and the coin in the place of Hod",
+   "line": "Crowley on the planetary attribution of the Tens (pdf p181); on the coin in the place of Hod (pdf p237).",
    "quotes": [
     {
      "work": "book-of-thoth",

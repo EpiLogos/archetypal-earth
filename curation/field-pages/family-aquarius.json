@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "aquarius",
- "line": "Burt's chapter on Aquarius, built on the Grail legend, with Jung's water-carrier.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Aquarius (pdf pp. 447–508); Jung on the Water Carrier (Aion; Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Aquarius, pdf pp. 447–508. Her account of the fixed air, the ideal man and the rulers.",
+   "line": "Burt, chapter on Aquarius (pdf pp. 447–508): pdf p447 and p449.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Aquarius, pdf pp. 447–508. The Grail question, the seeker and the Perfect Knight.",
+   "line": "Burt, chapter on Aquarius (pdf pp. 447–508): pdf p450 and p471.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung's water-carrier and precession passages. His forecasts of the coming aeon are not placed here.",
+   "line": "Jung on the water-carrier and the precession: CW9ii pdf p94; Dream Analysis seminar, pdf p435.",
    "quotes": [
     {
      "work": "cw09ii",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-minor-arcana",
- "line": "The forty small cards and the sixteen courts, in four suits, through which Crowley carries the ten numbers.",
+ "line": "Crowley on the small cards: the ten numbers, the four suits and their elements, and the Tens (pdf p22, p24, p33, p35, p181, p267).",
  "sections": [
   {
    "id": "forty-small-cards-four-suits",
-   "title": "Forty small cards in four suits",
-   "line": "Crowley ties the ten numbers to the small cards and divides those cards into suits by the elements.",
+   "title": "Forty small cards, four suits",
+   "line": "Crowley on the forty small cards (pdf p22) and their division into four suits by the four elements (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "each-number",
    "title": "Each number",
-   "line": "Each number has a significance of its own, in Crowley's account. He gives the number four as an example: it symbolises Law, Restraint, Power, Protection and Stability.",
+   "line": "Crowley on the significance of each number (pdf p22) and on the number four (pdf p33).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "suits-and-elements",
    "title": "Suits and elements",
-   "line": "Crowley gives the four suits their elements in one sentence, and his diagram ties the suits to the four elements.",
+   "line": "Crowley's attribution of the four suits to the four elements (pdf p24, p267).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -63,8 +63,8 @@
   },
   {
    "id": "the-tens",
-   "title": "The Tens and their planets",
-   "line": "Crowley's text says there is now no planetary attribution for the Tens, but single Tens carry a planet and sign on their own pages. The page keeps both as his statements.",
+   "title": "The Tens",
+   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
    "quotes": [
     {
      "work": "book-of-thoth",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-disks",
- "line": "Six of Disks: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Six of Disks: Success (pdf p178); the Moon in Taurus (pdf p232); Tiphareth (pdf p177, p232).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 178, 232).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p178); on the Moon in Taurus (pdf p232).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Sixes belong to Tiphareth (pdf 177), and the card's chapter names the Number Six as Tiphareth (pdf 232).",
+   "line": "Crowley on the Sixes and Tiphareth (pdf p177); on the Number Six, Tiphareth (pdf p232).",
    "quotes": [
     {
      "work": "book-of-thoth",

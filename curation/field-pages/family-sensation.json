@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "sensation",
- "line": "Sensation as Jung defines it: perception through the senses and the body, what it establishes, its opposite, and the attitudes that change it.",
+ "line": "Jung on sensation: the definition, what it establishes, the irrational functions, the attitudes, and the compass and the cross.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "The working definition, and the distinction Jung keeps between sensation and feeling.",
+   "title": "Sensation as a function",
+   "line": "Jung's definition of sensation, and sensation and feeling: CW6 ¶792 and ¶793.",
    "quotes": [
     {
      "work": "cw06",
@@ -33,8 +33,8 @@
   },
   {
    "id": "what-it-establishes",
-   "title": "What it establishes",
-   "line": "Sensation says that something is, and not what it is. Jung's French phrase for it is the function of reality.",
+   "title": "What sensation establishes",
+   "line": "Sensation tells that something is, and la fonction du réel: CW18 ¶21.",
    "quotes": [
     {
      "work": "cw18",
@@ -50,8 +50,8 @@
   },
   {
    "id": "irrational-and-opposite",
-   "title": "Irrational, and opposed to intuition",
-   "line": "Sensation and intuition are the irrational pair: both concern what happens and what is real, one actual and one potential. Thinking and feeling are the rational pair.",
+   "title": "Irrational functions; sensation and intuition",
+   "line": "Sensation and intuition as the irrational functions: CW8 ¶259; CW6 ¶770 and ¶983.",
    "quotes": [
     {
      "work": "cw08",
@@ -77,8 +77,8 @@
   },
   {
    "id": "attitude",
-   "title": "The attitude changes it",
-   "line": "Jung's typology gives sensation two forms: conditioned by the object in the extraverted attitude, and altered by a subjective factor in the introverted attitude. Each attitude shows through one of the four functions.",
+   "title": "Sensation in the attitudes",
+   "line": "Sensation in the extraverted and introverted attitudes: CW6 ¶604, ¶647 and ¶913.",
    "quotes": [
     {
      "work": "cw06",
@@ -99,8 +99,8 @@
   },
   {
    "id": "diagrams-and-elements",
-   "title": "Compass, cross and colour",
-   "line": "The compass and the cross are Jung's images for the four. The colour passage gives no assignment per function. No passage gives sensation an element, and the conditional element reading does not name one either.",
+   "title": "The compass, the cross, colours and elements",
+   "line": "The compass and the cross, and colours and the four elements in relation to the functions: CW6 ¶958 and ¶983; CW11 ¶281; CW14 ¶276.",
    "quotes": [
     {
      "work": "cw06",

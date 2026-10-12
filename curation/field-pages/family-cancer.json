@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "cancer",
- "line": "Burt's chapter on Cancer, and the little Jung says of the crab.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Cancer (pdf pp. 135–174); Jung on the crab (Dream Analysis seminar; CW14).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Cancer, pdf pp. 135–174. Her account of the womb, the water and the cardinal mode.",
+   "line": "Burt, chapter on Cancer (pdf pp. 135–174): pdf p135, p149 and p144.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Cancer, pdf pp. 135–174. The Mother Goddess, the Moon and the shadow of the home.",
+   "line": "Burt, chapter on Cancer (pdf pp. 135–174): pdf p135, p153, p136 and p15.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -75,7 +75,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung names Cancer only in these two passages: a seminar image, and one list of the cardinal seasons.",
+   "line": "Jung on the crab, and on the four seasons of the sun in the Zodiac: Dream Analysis seminar, pdf p434; CW14 ¶5.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "nigredo",
- "line": "The nigredo as Jung states it: the initial blackness, the psychic reading he gives it, and the operations the texts name for it.",
+ "line": "Jung on the nigredo: CW12 ¶41 and ¶334; CW14 ¶65, ¶113, ¶264, ¶646, ¶708, ¶714, ¶721, ¶722 and ¶727; CW16 ¶512.",
  "sections": [
   {
    "id": "the-stage-in-his-words",
    "title": "The stage in Jung's words",
-   "line": "Jung's definition of the blackening, and the names the texts give it.",
+   "line": "The nigredo defined and named: CW12 ¶334, CW14 ¶721 and ¶708.",
    "quotes": [
     {
      "work": "cw12",
@@ -31,8 +31,8 @@
   },
   {
    "id": "the-psychological-reading",
-   "title": "The psychological reading",
-   "line": "Where Jung reads the blackening as a psychic condition, in his own commentary.",
+   "title": "Shadow and the unconscious",
+   "line": "The nigredo and the shadow, the darkness of the unconscious and the dark night of the soul: CW12 ¶41, CW14 ¶646 and ¶722.",
    "quotes": [
     {
      "work": "cw12",
@@ -56,8 +56,8 @@
   },
   {
    "id": "operations-named",
-   "title": "The operations it names",
-   "line": "Putrefaction and interment are the texts' own names for the blackening.",
+   "title": "Interment and putrefaction",
+   "line": "Interment (CW14 ¶65) and putrefaction (CW14 ¶714).",
    "quotes": [
     {
      "work": "cw14",
@@ -76,7 +76,7 @@
   {
    "id": "the-black-colour",
    "title": "The black and its names",
-   "line": "The black takes the names of the black sun, the raven and the earth, and the texts ask the alchemist to keep to it.",
+   "line": "Sol niger (CW14 ¶113), corvus (CW14 ¶727), terra nigra (CW14 ¶264) and the Rosarium on persevering in the black (CW16 ¶512).",
    "quotes": [
     {
      "work": "cw14",

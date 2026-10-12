@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-four-of-disks",
- "line": "Crowley’s Four of Disks: Power, Chesed establishing the Universe in three dimensions, the Sun in Capricorn.",
+ "line": "Crowley’s Four of Disks: Power (pdf p177); Chesed and the Sun in Capricornus (pdf p229).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The Four, Chesed, shows the Universe established in three dimensions below the Abyss. The card is ruled by the Sun in Capricorn.",
+   "line": "Crowley on the Four, Chesed (pdf p229); on the Fours and Chesed (pdf p176); on the Sun in Capricornus (pdf p229).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the card as Law and Order, and the disks as a fortress whose defence is valid only when violently active.",
+   "line": "Crowley on the card as Law and Order and on the square disks (pdf p229).",
    "quotes": [
     {
      "work": "book-of-thoth",

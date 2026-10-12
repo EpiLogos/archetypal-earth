@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-gemini-2",
- "line": "Crowley's Nine of Swords is the card for the second decan of Gemini, with Mars as its planet in the sign.",
+ "line": "Crowley on the Nine of Swords, the card for the second decan of Gemini (pdf p181, p221).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Gemini.",
+   "title": "The Nine of Swords: title and attribution",
+   "line": "The title and the attribution of the Nine of Swords, pdf p181, p221.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Nine of Swords, pdf p221.",
    "quotes": [
     {
      "work": "book-of-thoth",

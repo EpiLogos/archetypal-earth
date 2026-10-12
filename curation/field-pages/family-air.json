@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "air",
- "line": "Jung names air as a light outer element, as pneuma in the spiritual sense, and as the link between fire and water.",
+ "line": "Jung on air: among the four elements, as pneuma, with fire and water, in images, and in the lists of the elements.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "The defining words first: an alchemical author's description of air, then air among the four, then air as the volatile element above earth.",
+   "title": "Air among the four elements",
+   "line": "An alchemical author on air, and air among the four elements: CW12 ¶397, ¶333 and ¶370.",
    "quotes": [
     {
      "work": "cw12",
@@ -29,7 +29,7 @@
   {
    "id": "pneuma",
    "title": "Air as pneuma",
-   "line": "Jung takes air in the spiritual sense of pneuma, and notes that spirit originally meant air in motion.",
+   "line": "Air as pneuma and as air in motion: CW14 ¶161; CW16 ¶454.",
    "quotes": [
     {
      "work": "cw14",
@@ -50,8 +50,8 @@
   },
   {
    "id": "between-fire-and-water",
-   "title": "Between fire and water",
-   "line": "Air is the mean between fire and water in Plato's chain, and it sits with fire on the active side of the four.",
+   "title": "Air, fire and water",
+   "line": "Air with fire and water, in Plato, in the De sulphure and in Jung: CW11 ¶185 and ¶182; CW16 ¶410; CW14 ¶655.",
    "quotes": [
     {
      "work": "cw11",
@@ -80,7 +80,7 @@
   {
    "id": "images",
    "title": "Air in dreams and images",
-   "line": "In a patient's images Jung expects the self and the animus to appear as air, breath and wind, and reads blue as air or pneuma.",
+   "line": "Images of air, breath and wind, and blue as air or pneuma: CW9i pdf p347 and p357.",
    "quotes": [
     {
      "work": "cw09i",
@@ -96,8 +96,8 @@
   },
   {
    "id": "lists-and-lead",
-   "title": "Lists, and the lead of the air",
-   "line": "Jung has no essay on air as an element, and ties it to no metal beyond the lead of the air; no Evangelist is tied to air in these passages. The historical lists are where the element mostly appears.",
+   "title": "The lists of the elements; the lead of the air",
+   "line": "Hippocrates and Empedocles on the four elements, and the lead of the air: CW6 ¶883 and ¶960; CW9ii pdf p151.",
    "quotes": [
     {
      "work": "cw06",

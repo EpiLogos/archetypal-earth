@@ -11,7 +11,7 @@ import type { PassageBridge } from './passage';
 import { eraShort, jungLine, placeLine, shortWork } from './format';
 import { loadLensData, qlBlock, qlSource, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
-import { relatedRows, SYSTEM_LABEL } from './related';
+import { relatedPlates, relatedRows, SYSTEM_LABEL } from './related';
 
 /** The part of a page the renderer reads: its reading line, its sections with their quotations, the subjects it reaches. */
 interface PageBody {
@@ -118,6 +118,7 @@ export class DeepSheet {
       if (!arch) return;
       a.append(el('h2', { class: 'dp-title', text: arch.name }));
       if (arch.oneLine) a.append(el('p', { class: 'dp-lede', text: arch.oneLine }));
+      this.appendPlateStrip(s);
       if (arch.image) a.append(plate(arch.image, { credit: true, className: 'dp-figure', palette: arch.palette, eager: true }));
       if (arch.definition) {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: arch.definition.text }), el('footer', { text: arch.definition.cite })]));
@@ -154,6 +155,7 @@ export class DeepSheet {
       if (!fam) return;
       a.append(el('h2', { class: 'dp-title', text: fam.name }));
       if (fam.oneLine) a.append(el('p', { class: 'dp-lede', text: fam.oneLine }));
+      this.appendPlateStrip(s);
       if (fam.image) a.append(plate(fam.image, { credit: true, className: 'dp-figure', palette: fam.palette, eager: true }));
       if (fam.definition) {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: fam.definition.text }), el('footer', { text: fam.definition.cite })]));
@@ -186,6 +188,7 @@ export class DeepSheet {
       if (!t) return;
       a.append(el('h2', { class: 'dp-title', text: t.name }));
       if (t.oneLine) a.append(el('p', { class: 'dp-lede', text: t.oneLine }));
+      this.appendPlateStrip(s);
       if (t.image) a.append(plate(t.image, { credit: true, className: 'dp-figure', palette: t.palette, eager: true }));
       if (t.definition) a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: t.definition.text }), el('footer', { text: t.definition.cite })]));
       t.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
@@ -226,6 +229,25 @@ export class DeepSheet {
   }
 
   /**
+   * A node with no image of its own is shown by the plates of the nodes it joins: a strip under its title block, each
+   * plate opening that node. Nothing when the node has an image, or fewer than two of its joins have one.
+   */
+  private appendPlateStrip(s: Subject): void {
+    const plates = relatedPlates(this.model, s, 8);
+    if (!plates.length) return;
+    const strip = el('ul', { class: 'dp-strip', role: 'list' });
+    for (const p of plates) {
+      strip.append(el('li', {}, [
+        el('button', { class: 'dp-strip-item', type: 'button', title: p.name, 'aria-label': p.name, onclick: () => this.h.onSubject(p.other) }, [
+          plate(p.image, { thumb: true, className: 'dp-strip-plate', palette: p.palette, alt: p.name }),
+          el('span', { class: 'dp-strip-name', text: p.name, 'aria-hidden': 'true' }),
+        ]),
+      ]));
+    }
+    this.article.append(strip);
+  }
+
+  /**
    * The node's joins, grouped by system (from the model, so at once). Each join's cites fill in under its row when the
    * field-pages data arrives; a join with no cites has no passage to show and gets none.
    */
@@ -240,14 +262,28 @@ export class DeepSheet {
       const ul = el('ul', {});
       for (const r of g.rows) {
         // Jung's own tie vs. one this site reads in — the same wording as the archetypal ground above
-        const row = el('li', {}, [
+        const text: (Node | null)[] = [
           el('button', { class: 'link-quiet', type: 'button', text: r.name, onclick: () => this.h.onSubject(r.other) }),
           el('span', { class: 'dp-basis', text: r.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }),
           r.voice ? el('span', { class: 'dp-basis', text: ` · ${r.voice}` }) : null,
           el('p', { class: 'lp-note', text: r.note }),
-        ]);
+        ];
+        // a far node with a plate of its own shows it, small, to the left of the name; one without keeps the plain row.
+        // The name beside it is the keyboard control, so the plate is not a second tab stop and is hidden from readers.
+        let row: HTMLElement;
+        if (r.image) {
+          row = el('div', { class: 'dp-rel-body' }, text);
+          ul.append(el('li', { class: 'dp-rel-has-plate' }, [
+            el('button', { class: 'dp-rel-plate', type: 'button', tabindex: -1, 'aria-hidden': 'true', onclick: () => this.h.onSubject(r.other) }, [
+              plate(r.image, { thumb: true, className: 'dp-rel-img', palette: r.palette, alt: r.name }),
+            ]),
+            row,
+          ]));
+        } else {
+          row = el('li', {}, text);
+          ul.append(row);
+        }
         pending.push({ joinId: r.joinId, row });
-        ul.append(row);
       }
       box.append(ul);
     }

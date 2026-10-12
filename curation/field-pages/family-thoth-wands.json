@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-wands",
- "line": "Crowley attributes Wands to Fire and Aries, and the Ace gives the suit the letter Yod, while his general account gives Fire the letter Shin.",
+ "line": "Crowley on Wands: Fire and Aries, the flames of the Ace of Wands as Yods, and the letter of Fire (pdf p23, p24, p35, p175, p183).",
  "sections": [
   {
    "id": "fire-and-aries",
    "title": "Fire and Aries",
-   "line": "The suit's element and sign are stated in Crowley's own sentences on the suits and on the Wands.",
+   "line": "Crowley's attribution of Wands to Fire (pdf p24) and to Aries (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "the-flames-are-yods",
-   "title": "The flames are Yods",
-   "line": "The letter is given in the text of the Ace of Wands, where the flames are drawn as Yods.",
+   "title": "The flames of the Ace",
+   "line": "Crowley's description of the Ace of Wands: the flames as Yods and the solarphallic outburst of flame (pdf p183).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "the-letter-of-fire",
    "title": "The letter of Fire",
-   "line": "Crowley's general account gives Fire the letter Shin, and the Ace of Wands gives the suit Yod, which is the letter of the Knights in the Name. The page keeps both as his statements.",
+   "line": "Crowley on the letters Shin, Mem and Aleph for the elements (pdf p23) and on Shin as the letter of Fire (pdf p175).",
    "quotes": [
     {
      "work": "book-of-thoth",

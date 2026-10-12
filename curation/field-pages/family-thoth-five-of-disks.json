@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-five-of-disks",
- "line": "Crowley’s Five of Disks: Worry, Geburah in the suit of Earth, Mercury ruling in Taurus.",
+ "line": "Crowley’s Five of Disks: Worry (pdf p177); Geburah and Mercury in Taurus (pdf p231).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter name for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "place-on-the-tree",
    "title": "Its place on the Tree and in the zodiac",
-   "line": "The Number Five, Geburah, in the suit of Earth, and the rule of Mercury in Taurus.",
+   "line": "Crowley on the Number Five, Geburah, and on Mercury in Taurus (pdf p231).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley reads the five disks in an inverted pentagram as instability in the foundations of Matter, with the effect of an earthquake.",
+   "line": "Crowley on five disks in an inverted pentagram and on the effect of an earthquake (pdf p231).",
    "quotes": [
     {
      "work": "book-of-thoth",

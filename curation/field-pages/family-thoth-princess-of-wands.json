@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-wands",
- "line": "Crowley's Princess of Wands: the Hé final of the Name, the earthy part of Fire, and one quadrant of the heavens about the North Pole.",
+ "line": "Crowley's Princess of Wands: Hé final of the Name (pdf p140); the earthy part of Fire and one quadrant of the heavens about the North Pole (pdf p147).",
  "sections": [
   {
    "id": "the-court-and-its-element",
    "title": "The court and its element",
-   "line": "Crowley names the Princesses by the Hé final of the Name.",
+   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Wands (pdf p147).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "its-place-in-the-heavens",
    "title": "Its place in the heavens",
-   "line": "Princesses have no zodiacal attribution. The text gives her one quadrant of the heavens around the North Pole, and the attribution table gives the same (pdf p274).",
+   "line": "Crowley on the Princesses and the Zodiac (pdf p140); on the Princess of Wands and the heavens (pdf p147).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -44,8 +44,8 @@
   },
   {
    "id": "its-character",
-   "title": "Its character as Crowley describes it",
-   "line": "Crowley's description of the figure and the card, in his own words.",
+   "title": "Character",
+   "line": "Crowley on the character of the Princess of Wands (pdf p147).",
    "quotes": [
     {
      "work": "book-of-thoth",

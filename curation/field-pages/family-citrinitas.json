@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "citrinitas",
- "line": "The yellowing as Jung names it: one stage of the older four-colour scheme, which he says was later dropped and never described on its own.",
+ "line": "Jung's running text names citrinitas in CW12 ¶271, ¶333, ¶334, CW11 ¶98 and CW9ii ¶194.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "The yellowing as the xanthosis, otherwise called the citrinitas, one of four stages in the older scheme.",
+   "title": "The four stages",
+   "line": "The four stages by their Greek names, with the xanthosis or citrinitas (CW12 ¶333).",
    "quotes": [
     {
      "work": "cw12",
@@ -25,8 +25,8 @@
   },
   {
    "id": "why-the-scheme-was-reduced",
-   "title": "Why the scheme was reduced",
-   "line": "Jung gives a general reason for the reduction to three colours, not one that singles out yellow.",
+   "title": "Quaternity and trinity",
+   "line": "The four stages, the quaternity of elements and the three colours (CW12 ¶333).",
    "quotes": [
     {
      "work": "cw12",
@@ -45,7 +45,7 @@
   {
    "id": "the-transition",
    "title": "The transition to the reddening",
-   "line": "Jung's placings of the yellowing: the transition to the reddening, the direct route from whitening to reddening, and a dream commentary where yellow coincides with the reddening.",
+   "line": "The citrinitas and the rubedo (CW12 ¶334); yellow and the rubedo (CW12 ¶271).",
    "quotes": [
     {
      "work": "cw12",
@@ -69,8 +69,8 @@
   },
   {
    "id": "in-the-texts",
-   "title": "In the texts Jung quotes",
-   "line": "Where the yellow appears in the texts Jung quotes or notes. These are the alchemists' words and his notes, not his reading.",
+   "title": "Khunrath, Jung's note 517 and Maier",
+   "line": "Khunrath (CW14 ¶355), Jung's note 517 (CW14 p719) and Maier (CW12 ¶165, note 41).",
    "quotes": [
     {
      "work": "cw14",
@@ -94,8 +94,8 @@
   },
   {
    "id": "the-four-still-named",
-   "title": "Where the four still stand",
-   "line": "Jung still names all four colours in a few places, and the word stays in his running text.",
+   "title": "Citrinitas in CW9ii and CW14",
+   "line": "CW9ii ¶194 and CW14 ¶281.",
    "quotes": [
     {
      "work": "cw09ii",

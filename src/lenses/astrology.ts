@@ -18,7 +18,9 @@ import { findPlaces, formatCoordinates } from '../sky/gazetteer';
 import { SIGNS } from '../sky/frames';
 import { glyphSvg, SIGN_FAMILY_IDS } from '../sky/zodiac';
 import { combobox } from '../ui/combobox';
-import { PlanetOrbits } from '../sky/orbits';
+import { PlanetOrbits, type CardNode, type Satellite } from '../sky/orbits';
+import { loadSkyCards, ringsFor, type PlacedQuote, type SkyCardsData } from '../sky/cards';
+import { cardReading, type FieldPages } from './card-reading';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { creditLine } from '../ui/credit';
@@ -62,6 +64,8 @@ export function mount(ctx: LensContext): LensInstance {
   let namesReady = false;
   /** Body whose satellites are currently drawn — synced from the sky approach, not from the walk panel. */
   let orbitsBody: BodyKey | null = null;
+  /** the satellites those are (kept, so a thing that arrives with the card data can join them) */
+  let heldSats: Satellite[] = [];
   /** true between enter() and leave(): a data load that lands outside it must not render (it would reopen the sheet) */
   let inLens = false;
   /** the newest data load's token: a re-enter while a load is pending supersedes the older load */
@@ -88,6 +92,8 @@ export function mount(ctx: LensContext): LensInstance {
     const nodes = body.filter((n): n is HTMLElement => !!n);
     if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open(label, nodes);
     if (height) ctx.panel.setHeight(height);
+    // a walk step's sheet is not a local reading: its dismissal steps onto the whole sky, as it always did
+    ctx.localSheet(false);
   };
 
   // ── the Self and the charts linked to it ───────────────────────────────
@@ -133,7 +139,7 @@ export function mount(ctx: LensContext): LensInstance {
       el('h3', { class: 'as-h3', text: 'The twelve signs' }),
       el('div', { class: 'as-sign-grid' }, signs.map((s) => el('button', {
         type: 'button', class: 'th-link as-sign', title: s.name, disabled: !s.open,
-        onclick: s.open ? () => ctx.focus({ type: 'family', id: s.id }) : undefined,
+        onclick: s.open ? () => ctx.descend({ type: 'family', id: s.id }) : undefined,
       }, [el('span', { class: 'as-sign-name' }, [glyphSvg(s.i), el('span', { text: s.name })])]))),
     ]);
   };
@@ -178,7 +184,7 @@ export function mount(ctx: LensContext): LensInstance {
       selfDiagram(),
       el('p', { class: 'th-line', text: 'Every walk here ends at the Sun, and Jung reads the sun as a symbol of the self. So whoever’s chart it is, the line runs to the same centre.' }),
       sunToSelf() ? quoteBlock(sunToSelf()!, ctx.passages, { compact: true }) : null,
-      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus({ type: 'archetype', id: 'self' }) }, [el('span', { text: 'The Self on the globe' }), icon('next', 14)]),
+      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.descend({ type: 'archetype', id: 'self' }) }, [el('span', { text: 'The Self on the globe' }), icon('next', 14)]),
       el('details', { class: 'as-more' }, [
         el('summary', { text: 'Why planets, in a book about the psyche' }),
         ...data.frame.slice(1).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
@@ -337,7 +343,7 @@ export function mount(ctx: LensContext): LensInstance {
     const jungTies = r.ties.filter((t) => t.basis === 'jung');
     const otherTies = r.ties.filter((t) => t.basis !== 'jung');
     const tieBlock = (t: Tie) => el('div', { class: 'as-tie' }, [
-      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(t.target) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), el('span', { class: 'as-basis', text: BASIS[t.basis] })]), icon('next', 14)]),
+      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.descend(t.target) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), el('span', { class: 'as-basis', text: BASIS[t.basis] })]), icon('next', 14)]),
       ...t.quotes.slice(0, 1).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
       t.basis !== 'jung' && t.note ? el('p', { class: 'lp-note', text: t.note }) : null,
     ]);
@@ -366,7 +372,7 @@ export function mount(ctx: LensContext): LensInstance {
       last ? el('h3', { class: 'as-h3', text: 'Where the walk ends' }) : null,
       last ? selfDiagram() : null,
       last ? quoteBlock(data.order.quote, ctx.passages, { compact: true }) : null,
-      last ? el('button', { type: 'button', class: 'lp-btn primary as-to-self', onclick: () => ctx.focus({ type: 'archetype', id: 'self' }) }, [icon('self', 15), el('span', { text: 'Go to the Self' })]) : null,
+      last ? el('button', { type: 'button', class: 'lp-btn primary as-to-self', onclick: () => ctx.descend({ type: 'archetype', id: 'self' }) }, [icon('self', 15), el('span', { text: 'Go to the Self' })]) : null,
       el('div', { class: 'th-step' }, [
         el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Previous planet', disabled: i === 0, onclick: () => ctx.setPath([chartId, order[i - 1]]) }, [icon('back')]),
         el('span', { class: 'th-count', text: `${i + 1} of ${order.length}` }),
@@ -409,7 +415,22 @@ export function mount(ctx: LensContext): LensInstance {
     const key = ctx.engine.sky?.approached
       ?? ctx.skyBody()
       ?? (pathNow[1] && pathNow[1] !== 'terra' ? pathNow[1] as BodyKey : null);
-    if (!key || key === 'terra' || !data.bodies[key as ChartBody]) {
+    // the Earth is held where it stands (the system view): the elements Crowley writes beside it, and its cards
+    if (key === 'terra') {
+      if (key === orbitsBody) return;
+      orbitsBody = key;
+      orbits.set(key, []);
+      void loadSkyCards().then((cards) => {
+        if (!cards || orbitsBody !== key) return;
+        const elements = (cards.bodies.terra?.elements ?? []).filter((id) => ctx.model.famById.has(id));
+        orbits.set(key, elements.map((id) => ({
+          id: `family:${id}`, name: subjectName(ctx.model, { type: 'family', id }), inner: false, open: () => ctx.focus({ type: 'family', id }),
+        })));
+        loadCards(key);
+      });
+      return;
+    }
+    if (!key || !data.bodies[key as ChartBody]) {
       if (orbitsBody) { orbits.set(null); orbitsBody = null; }
       return;
     }
@@ -417,7 +438,7 @@ export function mount(ctx: LensContext): LensInstance {
     orbitsBody = key;
     const r = data.bodies[key as ChartBody];
     const satSeen = new Set<string>();
-    orbits.set(key, r.ties.filter((t) => {
+    heldSats = r.ties.filter((t) => {
       const k = `${t.target.type}:${t.target.id}`;
       if (satSeen.has(k)) return false;
       satSeen.add(k);
@@ -427,7 +448,73 @@ export function mount(ctx: LensContext): LensInstance {
       name: subjectName(ctx.model, t.target),
       inner: t.basis === 'jung',
       open: () => ctx.focus(t.target),
-    })));
+    }));
+    orbits.set(key, heldSats);
+    loadCards(key);
+  };
+
+  /**
+   * A thing Crowley's list gives a body that the field holds no family for (Uranus is "the Abyss"): read from its placed
+   * quotations alone, in the sheet at the planet — recorded, with nothing made up around it.
+   */
+  const openAnchor = (title: string, line: string, quotes: PlacedQuote[]) => {
+    const nodes: HTMLElement[] = [
+      el('h2', { class: 'lp-h', text: title }),
+      el('p', { class: 'th-line', text: line }),
+      ...quotes.map((q) => quoteBlock(q as LensQuote, ctx.passages, { compact: true })),
+      el('p', { class: 'lp-note', text: 'The field holds no family for this, so there is no page to read it in; these are the words it rests on.' }),
+    ];
+    show(title, nodes, 'half');
+    ctx.localSheet(true);
+    ctx.panel.reveal();
+  };
+
+  /**
+   * A card on a planet's ring, opened: its reading in the lens's sheet, here at the planet. Nothing gazes at the Earth
+   * or leaves the sky — a card has no place on the Earth to point back to — and closing the sheet returns to the planet
+   * with its rings still standing.
+   */
+  const openCard = (cards: SkyCardsData, id: string, key: BodyKey) => {
+    void loadLensData<FieldPages>('field-pages').catch(() => null).then((pages) => {
+      if (!inLens) return;
+      const nodes = cardReading({
+        model: ctx.model, passages: ctx.passages, data: cards, pages, id, body: key,
+        bodyName: (k) => (k === 'terra' ? 'Earth' : data?.bodies[k as ChartBody]?.name ?? k),
+        open: (s) => ctx.descend(s),
+        openBody: (k) => ctx.openBody(k),
+      });
+      show('A card at the planet', nodes, 'half');
+      ctx.localSheet(true);
+      ctx.panel.reveal();
+    });
+  };
+
+  /** The planet's tarot cards, floated on the two outer rings once their data is in (a body with none gets none). */
+  const loadCards = (key: BodyKey) => {
+    void loadSkyCards().then((cards) => {
+      if (!cards || orbitsBody !== key) return;
+      // the Abyss: Crowley's list gives it to Uranus; the field has no family for it, so it stands as a quotation only
+      const b = cards.bodies[key];
+      if (b?.abyss && b.positionQuotes.length && !heldSats.some((x) => x.id === 'anchor:abyss')) {
+        heldSats = [...heldSats, { id: 'anchor:abyss', name: 'The Abyss', inner: false, open: () => openAnchor('The Abyss', 'Crowley’s list of the ten bodies of the solar system sets the Abyss under the number 3 and gives it to Herschel, which is Uranus. It is not a sephira, so it has no number of its own and no cards.', [...(cards.list ? [cards.list] : []), ...b.positionQuotes]) } satisfies Satellite];
+        orbits.set(key, heldSats);
+      }
+      const rings = ringsFor(cards, key);
+      if (!rings) { orbits.setCards(key, []); return; }
+      const bodyName = key === 'terra' ? 'Earth' : data?.bodies[key as ChartBody]?.name ?? key;
+      const hint = (rc: { role: string; id: string; decan?: number }): string => {
+        const c = cards.cards[rc.id];
+        if (rc.role === 'decan') return `${SIGNS[c.sign ?? 0]} ${c.n ?? ''}: a decan ${bodyName} rules`.replace(' :', ':');
+        if (rc.role === 'rank') return `the ${c.number === 1 ? 'Aces' : `${['', '', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes', 'Sevens', 'Eights', 'Nines', 'Tens'][c.number ?? 0]}`}: ${bodyName}’s number in Crowley’s list`;
+        if (rc.role === 'ruler') return `an Atu of ${SIGNS[c.sign ?? 0]}, which ${bodyName} rules`;
+        if (rc.role === 'element') return 'an Atu Crowley gives to an element';
+        return `an Atu attributed to ${bodyName}`;
+      };
+      const nodes: CardNode[] = [...rings.decan, ...rings.rank].map((rc) => ({
+        ring: rc, name: cards.cards[rc.id].name, hint: hint(rc), plate: cards.cards[rc.id].image, open: () => openCard(cards, rc.id, key),
+      }));
+      orbits.setCards(key, nodes);
+    });
   };
 
   const paintLive = () => {

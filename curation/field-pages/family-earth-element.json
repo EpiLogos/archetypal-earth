@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "earth-element",
- "line": "Jung puts earth as the fourth element in one passage and as a fifth in another, and as the black basis of the work.",
+ "line": "Jung on earth: as fourth and as fifth element, as arcane substance and seed-bed, as nigredo, in Genesis and the body, and beside the other elements.",
  "sections": [
   {
    "id": "fourth-or-fifth",
    "title": "Fourth or fifth",
-   "line": "Jung states both positions without resolving them; in the Axiom of Maria fire and earth stand at the two ends, with no interaction between them.",
+   "line": "Earth as the fifth element and as the fourth in the Axiom of Maria: CW14 ¶249 and ¶656.",
    "quotes": [
     {
      "work": "cw14",
@@ -33,8 +33,8 @@
   },
   {
    "id": "basis-and-seed-bed",
-   "title": "Basis and seed-bed",
-   "line": "Earth is the arcane substance, the prima materia that a spirit inhabits, and the black field in which gold or lapis is sown.",
+   "title": "Arcane substance and seed-bed",
+   "line": "Earth as arcane substance, prima materia and black earth: CW14 ¶632; CW12 ¶444 and ¶433.",
    "quotes": [
     {
      "work": "cw14",
@@ -57,7 +57,7 @@
   {
    "id": "nigredo-as-terra",
    "title": "Nigredo as terra nigra",
-   "line": "Jung reads the blackness of the first stage as earth, terra nigra.",
+   "line": "The nigredo as terra nigra: CW14 ¶264, ¶729 and ¶244.",
    "quotes": [
     {
      "work": "cw14",
@@ -80,7 +80,7 @@
   {
    "id": "genesis-and-body",
    "title": "Genesis, Adam and the body",
-   "line": "Earth is the earth that rose from the waters in Genesis, the dryness in Adam's composition, and the body in Barnaud's three-part scheme. The tie to the great mother is a reading made here, not one of these passages.",
+   "line": "Earth in Genesis, in Adam and in Barnaud's scheme: CW14 ¶729, ¶552 and ¶59.",
    "quotes": [
     {
      "work": "cw14",
@@ -102,8 +102,8 @@
   },
   {
    "id": "passive-contrary-and-another-fifth",
-   "title": "Passive, contrary, and another fifth",
-   "line": "Earth is passive beside water, the contrary of air, and unmoving among the moving elements; von Franz's fifth is a different one, the Chinese element of the centre.",
+   "title": "Beside the other elements; the Chinese fifth",
+   "line": "Earth beside the other elements, and the number five in China: CW13 pdf p249; CW14 ¶2; CW9ii ¶396; von Franz, Number and Time, pdf p135.",
    "quotes": [
     {
      "work": "cw13",

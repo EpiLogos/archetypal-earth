@@ -46,6 +46,14 @@ export interface LensContext {
   passages: PassageBridge;
   /** open the field on a subject (leaving this lens), or keep the lens and just tune the globe to it */
   focus(subject: Subject): void;
+  /**
+   * An action inside an open reading (a tie, a link, "Read it in the field"): leave the sky for the subject's node on the
+   * Earth in one move — the reading closes, the camera descends, and the node's reading opens on the landing. `focus` is
+   * the orbit node's: it gazes from the planet and waits for a click on the plate.
+   */
+  descend(subject: Subject): void;
+  /** Go to a planetary body in the sky from a reading (a card's planet): the camera flies there, the sky stays the mode. */
+  openBody(key: import('../types/sky').BodyKey): void;
   openOccurrence(occId: string): void;
   /** the visitor's own chart changed (saved, edited, deleted): the sky re-reads the standing natal chart */
   refreshNatal(): void;
@@ -57,6 +65,11 @@ export interface LensContext {
   skyStatus(): { label: string; detail: string; state: string } | null;
   /** Body the sky is holding (Astrology / sky card), if any. */
   skyBody(): import('../types/sky').BodyKey | null;
+  /**
+   * The sheet now open is a local reading (a card at its planet): dismissing it only hides it and leaves the planet held
+   * with its rings, where a walk step's dismissal steps onto the whole sky. Off again with the next walk step.
+   */
+  localSheet(on: boolean): void;
 }
 
 export interface LensInstance {

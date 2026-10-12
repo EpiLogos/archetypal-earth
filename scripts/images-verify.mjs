@@ -110,10 +110,12 @@ for (const [h, list] of byHash) {
   // byte-identity under one recorded source is intended curation (two records of one plate);
   // identical bytes with no source, or under different sources, means one claim is not honest
   const sharing = entries.filter((e) => wheres.includes(`${e.group}/${e.id}`));
-  const withSource = sharing.filter((e) => e.ref._file);
+  // a plate from outside Commons (the Thoth pack) names its source by its sourceUrl: a decan keeps its card's plate
+  const srcOf = (e) => e.ref._file || e.ref.sourceUrl;
+  const withSource = sharing.filter((e) => srcOf(e));
   if (withSource.length < sharing.length) err(`byte-identical ${list[0].kind} with a record missing its source: ${wheres.join(' ≡ ')}`);
   else {
-    const sources = new Set(withSource.map((e) => e.ref._file));
+    const sources = new Set(withSource.map((e) => srcOf(e)));
     if (sources.size > 1) err(`byte-identical ${list[0].kind} across different sources: ${wheres.join(' ≡ ')}`);
     else warn(`one Commons plate serves several entries (${wheres.join(', ')}): ${[...sources][0]}`);
   }

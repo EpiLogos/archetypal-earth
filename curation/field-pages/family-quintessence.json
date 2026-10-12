@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "quintessence",
- "line": "Jung's fifth as the unity of the four and the stone, set beside his other use of the word fifth for earth.",
+ "line": "Jung on the quinta essentia (CW10, CW16, CW11, CW14, CW12, CW9ii); von Franz on the fifth in Number and Time.",
  "sections": [
   {
    "id": "what-jung-names",
-   "title": "What Jung names",
-   "line": "Jung's own statements that the quinta essentia is the stone, and that it is the unity the four come to.",
+   "title": "The quinta essentia",
+   "line": "The quinta essentia as the Philosophers' Stone and as the unity of the four: CW10 ¶738; CW16 ¶403; CW11 ¶104; CW14 ¶656.",
    "quotes": [
     {
      "work": "cw10",
@@ -33,8 +33,8 @@
   },
   {
    "id": "apart-from-the-four",
-   "title": "Apart from the four",
-   "line": "Jung reads a fifth star and a fifth flower in pictures as the quintessence, and the alchemical egg puts a point apart from the four. Earth, which he calls the fifth element, is not the quintessence.",
+   "title": "The fifth apart from the four",
+   "line": "The fifth star, the fifth flower and the punctum solis, and earth as the fifth element: CW16 ¶402 and ¶410; CW9ii pdf p232; CW14 ¶249.",
    "quotes": [
     {
      "work": "cw16",
@@ -62,7 +62,7 @@
   {
    "id": "other-names",
    "title": "Its other names",
-   "line": "The quintessence under other names: as aether, and as one of the names given to the One.",
+   "line": "The quintessence as aether, and the names of the product: CW14 ¶270 and ¶452; CW12 ¶165.",
    "quotes": [
     {
      "work": "cw14",
@@ -84,7 +84,7 @@
   {
    "id": "read-psychologically",
    "title": "Read psychologically",
-   "line": "Jung's reading of the alchemical production as a psychic process, not a chemical one.",
+   "line": "The production of the quintessence as a psychic process: CW14 ¶749, ¶680 and ¶698.",
    "quotes": [
     {
      "work": "cw14",
@@ -106,7 +106,7 @@
   {
    "id": "von-franz",
    "title": "Von Franz",
-   "line": "Von Franz, in her own voice, on the same question: a unity of the four, not an added fifth.",
+   "line": "Von Franz on the quinta essentia: von Franz, Number and Time, pdf p77 and p132.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",

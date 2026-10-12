@@ -53,6 +53,12 @@ export interface AppState {
    * and close return to it once; it is session-local (never in the hash) and any other navigation drops it.
    */
   from?: AppState;
+  /**
+   * The reading was opened by the arrival of a descent from the sky (`skyArrival`), not asked for. Closing it leaves the
+   * reading and stays on the node the camera landed on (its label, its "See in sky"); Escape then returns to the sky. A
+   * reading asked for from a sky card returns to the sky at once, as it always did. Session-local, never in the hash.
+   */
+  arrived?: true;
 }
 
 export const WORLD: AppState = { view: { kind: 'world' }, deep: false };
@@ -62,6 +68,20 @@ export function openedFrom(from: AppState, next: AppState): AppState {
   const mode: AppState = { ...from };
   delete mode.from;
   return { ...next, from: mode };
+}
+
+/**
+ * A descent from the sky is a reading: when the standing state is in the sky and `next` leaves it for a field node (a
+ * focus or a manifestation) that the sky stays behind as `from`, the node's reading opens with the arrival, whether the
+ * node has places on the globe or none (a card, a sign, a sephira with no located instance). The reading itself waits for
+ * the camera to land (the controller's landing step); this only says that the arrival carries it. Any other transition,
+ * and a state that already says what its reading is doing, comes back as it was.
+ */
+export function skyArrival(prev: AppState, next: AppState): AppState {
+  if (!prev.sky || next.sky || !next.from?.sky) return next;
+  if (next.deep || next.graph || next.lens || next.trail) return next;
+  if (next.view.kind !== 'focus' && next.view.kind !== 'manifest') return next;
+  return { ...next, deep: true, arrived: true };
 }
 
 /** Carry the mode of `from` onto a fresh state. */
@@ -190,6 +210,11 @@ export function setDeep(s: AppState, deep: boolean): AppState {
 
 /** One step back: deep → manifestation → focus (up the drilled route) → world (thread → where it began). */
 export function back(s: AppState): AppState {
+  // the reading a descent from the sky carried closes onto the node it landed on; the sky is one step further (`from` stays)
+  if (s.arrived && s.deep && s.from?.sky) {
+    const { arrived: _arrived, ...rest } = s;
+    return { ...rest, deep: false };
+  }
   // a reading a mode opened returns to that mode, once (the memory is the mode state itself, so it is cleared with it)
   if (s.from) return s.from;
   // a reading opened on a walk's step returns to the walk where it began, not to the step's card

@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "water",
- "line": "In Jung's sources water is the permanent water that is also quicksilver, a living substance, and the unconscious.",
+ "line": "Water in Jung's sources: the aqua permanens, the living and dissolving water, the unconscious, and water and spirit.",
  "sections": [
   {
    "id": "the-permanent-water",
    "title": "The permanent water",
-   "line": "The water of the work is both the stone and its solvent, and the aqua permanens is the alchemical counterpart of the water of life.",
+   "line": "The aqua permanens, the stone, and the water of life: CW12 ¶337 and ¶90; CW9i pdf p151; CW14 ¶341.",
    "quotes": [
     {
      "work": "cw12",
@@ -34,7 +34,7 @@
   {
    "id": "living-and-dissolving",
    "title": "Living and dissolving",
-   "line": "The alchemists call the water a living substance that kills and vivifies, and dissolves the body into spirit.",
+   "line": "The water as a living being that kills and vivifies, and that dissolves the body into spirit: CW12 ¶94; CW14 ¶359 and ¶318.",
    "quotes": [
     {
      "work": "cw12",
@@ -56,8 +56,8 @@
   },
   {
    "id": "the-unconscious",
-   "title": "The unconscious",
-   "line": "Jung reads the chaotic water as the unconscious, as a large expanse of water signifies it in dreams, and the mother as its source.",
+   "title": "Water and the unconscious",
+   "line": "The sea or a large expanse of water as the unconscious, and the mother and the water of life: CW14 ¶342; CW5 ¶320; CW12 ¶92.",
    "quotes": [
     {
      "work": "cw14",
@@ -79,7 +79,7 @@
   {
    "id": "water-and-spirit",
    "title": "Water and spirit",
-   "line": "In the alchemical language water and spirit are often the same, and water comes from spirit in the numbered sequence of generation.",
+   "line": "Water and spirit: CW13 pdf p100; CW14 ¶306; CW12 ¶313; CW11 ¶354.",
    "quotes": [
     {
      "work": "cw13",

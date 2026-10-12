@@ -5,8 +5,8 @@
     "families": 561,
     "occurrences": 2854,
     "cultures": 64,
-    "images": 2810,
-    "joins": 411
+    "images": 2851,
+    "joins": 410
   },
   "vaultLedgerLine": "2026-10-10 — THREE NEW TEXTS INGESTED + CLOUD HANDOFF ✅",
   "geoPrecision": {
@@ -29,7 +29,7 @@
     "culture": 209,
     "none": 39
   },
-  "imagesAttached": 2810,
+  "imagesAttached": 2851,
   "locusTypes": {
     "ritual": 166,
     "myth-episode": 310,
@@ -364,7 +364,7 @@
     "decan-virgo-2",
     "decan-virgo-3"
   ],
-  "joins": 411,
+  "joins": 410,
   "joinsDropped": 0,
   "joinsDuplicates": [],
   "unresolvedFamilyTargets": {
@@ -716,7 +716,7 @@
     "ecclesia-synagoga",
     "ascension"
   ],
-  "familiesOneLineFromVault": 128,
+  "familiesOneLineFromVault": 127,
   "unknownCultures": {
     "ethnographic-primitive": 11,
     "ancient-near-east": 1,

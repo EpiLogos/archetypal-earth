@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "malkuth",
- "line": "Crowley gives Malkuth the number 10 and Earth, with no planet; von Franz calls the ten primal numbers the sephiroth.",
+ "line": "Crowley on Malkuth (The Book of Thoth); Jung on Malchuth in CW14; von Franz on the sephiroth in Number and Time.",
  "sections": [
   {
    "id": "crowley-tens",
    "title": "Crowley's Tens",
-   "line": "The Ten cards are attributed to Malkuth, which depends from the other nine and is right down in Assiah.",
+   "line": "Crowley on the Tens and Malkuth, and Assiah: The Book of Thoth, pdf p181 and p195.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -31,8 +31,8 @@
   },
   {
    "id": "earth-and-no-planet",
-   "title": "Earth and no planet",
-   "line": "Crowley gives Malkuth Earth as its element and no planetary attribution, and places Earth as the number Ten hanging from the triad 7, 8, 9.",
+   "title": "Earth and the planetary attribution",
+   "line": "Crowley on Malkuth, Earth, the planetary attribution and the number Ten in the diagram: The Book of Thoth, pdf p181, p266 and p23.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -57,7 +57,7 @@
   {
    "id": "the-throne-of-binah",
    "title": "Malkuth on the throne of Binah",
-   "line": "In the Magus appendix Malkuth is to be uplifted and set upon the throne of Binah.",
+   "line": "Crowley on Malkuth and the throne of Binah: The Book of Thoth, pdf p123.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -70,7 +70,7 @@
   {
    "id": "jung-malchuth",
    "title": "Jung's Malchuth",
-   "line": "Jung names Malchuth the underlying feminine principle, and quotes Knorr von Rosenroth for the name of the last Sefira.",
+   "line": "Jung on Malchuth as the underlying feminine principle, and Knorr von Rosenroth on the name: CW14 ¶18 and ¶640.",
    "quotes": [
     {
      "work": "cw14",
@@ -89,7 +89,7 @@
   {
    "id": "von-franz-on-the-ten",
    "title": "Von Franz on the ten",
-   "line": "Von Franz calls the ten primal numbers the sephiroth, spheres of the unknowable primal one. Her words concern the ten as a whole, not Malkuth alone.",
+   "line": "Von Franz on the ten primal numbers, the sephiroth: von Franz, Number and Time, pdf p95.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",

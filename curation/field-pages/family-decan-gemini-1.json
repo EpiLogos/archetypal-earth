@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-gemini-1",
- "line": "Crowley's Eight of Swords is the card for the first decan of Gemini, with Jupiter as its planet in the sign.",
+ "line": "Crowley on the Eight of Swords, the card for the first decan of Gemini (pdf p179, p220).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Gemini.",
+   "title": "The Eight of Swords: title and attribution",
+   "line": "The title and the attribution of the Eight of Swords, pdf p179, p220.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Eight of Swords, pdf p220.",
    "quotes": [
     {
      "work": "book-of-thoth",

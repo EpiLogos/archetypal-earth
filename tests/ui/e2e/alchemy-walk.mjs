@@ -8,6 +8,12 @@ const fails = [];
 const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`); if (!cond) fails.push(msg); };
 const hash = (page) => page.evaluate(() => location.hash);
 
+// the operation followed into the field is one the curation ties to both a stage and a field node (Calcinatio has a stage
+// and, honestly, no node of its own; the page then offers the stage link alone)
+const alchemy = JSON.parse(fs.readFileSync(new URL('../../../public/data/alchemy.json', import.meta.url), 'utf8'));
+const withSubject = alchemy.operations.find((o) => o.stage && o.subjects.length);
+if (!withSubject) { console.log(' FAIL  no operation in public/data/alchemy.json has both a stage and a field subject'); process.exit(1); }
+
 const b = await launch('chromium');
 const shots = '.cache/screens/alchemy';
 fs.mkdirSync(shots, { recursive: true });
@@ -66,12 +72,12 @@ fs.mkdirSync(shots, { recursive: true });
 
 // 4. a subject followed from the panel into the field: the hash leaves the lens for the node
 {
-  const { ctx, page, logs } = await open(b, { hash: '#/alchemy/operations/calcinatio' });
+  const { ctx, page, logs } = await open(b, { hash: `#/alchemy/operations/${withSubject.id}` });
   await revealSheet(page, 'Alchemy');
   await page.waitForSelector('.th-link', { timeout: 15000 });
   // the subject links are the buttons after the stage link; the last one is a subject of the operation
   const subjects = await page.$$('.th-link');
-  ok(subjects.length >= 2, `the operation links to its stage and a subject (got ${subjects.length} links)`);
+  ok(subjects.length >= 2, `${withSubject.name} links to its stage and a subject (got ${subjects.length} links)`);
   await subjects[subjects.length - 1].click();
   await page.waitForTimeout(1200);
   const h = await hash(page);

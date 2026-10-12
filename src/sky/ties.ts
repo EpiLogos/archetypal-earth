@@ -2,6 +2,7 @@
 // mode can show a quiet glyph on a family's reveal without fetching the sky's 2 MB of grids.
 import type { TieBasis } from '../types/field';
 import type { BodyKey } from '../types/sky';
+import { cardTies, loadSkyCards } from './cards';
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
 
@@ -41,7 +42,14 @@ export class SkyTies {
         const type = res.headers.get('content-type') ?? '';
         if (!res.ok || type.includes('text/html')) return null;
         const j = (await res.json()) as TiesIndex;
-        return Array.isArray(j?.ties) && Array.isArray(j?.bodies) ? (this.index = j) : null;
+        if (!Array.isArray(j?.ties) || !Array.isArray(j?.bodies)) return null;
+        // the cards the planets carry (public/data/sky-cards.json) are ties too: a card's page can say where it hangs
+        const cards = await loadSkyCards();
+        if (cards) {
+          const have = new Set(j.ties.map((t) => `${t.body}|${t.type}|${t.id}`));
+          for (const t of cardTies(cards)) if (!have.has(`${t.body}|${t.type}|${t.id}`)) j.ties.push(t);
+        }
+        return (this.index = j);
       })
       .catch(() => null);
     return this.pending;

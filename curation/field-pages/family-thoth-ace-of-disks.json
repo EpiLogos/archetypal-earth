@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-disks",
- "line": "Crowley’s Ace of Disks: the Root of the Powers of Earth, Kether for the Aces, no planet-in-sign.",
+ "line": "Crowley’s Ace of Disks: the Root of the Powers of Earth (pdf p224); the Disk as a whirling emblem (pdf p225).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter heading for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the chapter heading (pdf p224); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "place-on-the-tree",
-   "title": "Its place on the Tree",
-   "line": "The Aces essay places the four Aces together at Kether. The Ace of Disks chapter gives no planet-in-sign. The quarter line places the Disks over Europe and Africa.",
+   "title": "Kether and the quarters of the world",
+   "line": "Crowley on Spirit and Kether, and on the quarters of the world and the suits (pdf p175).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley says the Ace pictures the entry of the Energy called Earth, and that the Disks are a whirling emblem rather than coins.",
+   "line": "Crowley on the Ace of Disks and the Energy called Earth (pdf p224); on the Disk as a whirling emblem (pdf p225).",
    "quotes": [
     {
      "work": "book-of-thoth",

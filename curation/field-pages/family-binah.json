@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "binah",
- "line": "Crowley gives Binah the number 3 and Saturn, and his own lists disagree about Saturn; Jung calls Binah the root in which the tree of life is rooted.",
+ "line": "Crowley on Binah (The Book of Thoth); Jung on Binah in CW13 ¶411.",
  "sections": [
   {
    "id": "crowley-number-three",
    "title": "Crowley's number 3",
-   "line": "The third sephira is Binah, Understanding, and the Threes are referred to it.",
+   "line": "Crowley on Binah, Understanding, and the Threes: The Book of Thoth, pdf p59, p176 and p214.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "saturn-and-the-moon",
    "title": "Saturn and the Moon",
-   "line": "Crowley gives Binah Saturn, and in another aspect the Moon.",
+   "line": "Crowley's attributions for Binah: The Book of Thoth, pdf p199 and p110.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "where-the-lists-disagree",
-   "title": "Where Crowley's lists disagree",
-   "line": "The Universe list gives its third item as Saturn with the Abyss, and Diagram 5 puts Saturn in the place of the non-existent Daath. Both are Crowley's statements; the site keeps the conflict visible.",
+   "title": "Saturn, the Abyss and Daath",
+   "line": "Crowley on Saturn and the Abyss, and Saturn at the position of Daath: The Book of Thoth, pdf p111 and p265.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -70,7 +70,7 @@
   {
    "id": "jung-root-of-the-tree",
    "title": "Jung's root of the tree",
-   "line": "Jung calls Binah the upper Sefira, in which the tree of life is rooted, and the source of the middle line that brings life down. He does not number it.",
+   "line": "Jung on Binah and the tree of life: CW13 ¶411.",
    "quotes": [
     {
      "work": "cw13",

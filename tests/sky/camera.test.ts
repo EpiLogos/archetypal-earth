@@ -167,13 +167,15 @@ class FakeLayer implements LayerLike {
   hook: ((key: BodyKey | null, instant: boolean) => void) | null = null;
   private target = new Vector3();
   private readonly planet = new Vector3(PLANET[0], PLANET[1], PLANET[2]);
+  /** other bodies' places, for a planet-to-planet move; a body not listed stands at PLANET */
+  readonly places: Partial<Record<BodyKey, Vector3>> = {};
 
   constructor(private readonly log: string[]) {}
 
   setApproach(key: BodyKey | null, instant = false): void {
     this.log.push(`approach:${key}:${instant}`);
     this.approached = key;
-    this.target = key ? this.planet.clone() : new Vector3();
+    this.target = key ? this.at(key).clone() : new Vector3();
     if (instant) this.focus.copy(this.target);
     this.hook?.(key, instant);
   }
@@ -183,8 +185,12 @@ class FakeLayer implements LayerLike {
     this.beckoned = key;
   }
 
-  scenePosition(_key: BodyKey): Vector3 | null {
-    return this.planet.clone();
+  private at(key: BodyKey): Vector3 {
+    return this.places[key] ?? this.planet;
+  }
+
+  scenePosition(key: BodyKey): Vector3 | null {
+    return this.at(key).clone();
   }
 
   bodyRadiusR(): number {
@@ -209,7 +215,7 @@ interface Scene {
 }
 
 /** One display frame in the engine's order: the focus copy, the layer, the sky camera, then the rig. */
-function scene(reduced = false): Scene {
+function scene(reduced = false, station = DIST_AP): Scene {
   const log: string[] = [];
   const phases: SkyPhase[] = [];
   const rig = new FakeRig(log);
@@ -219,7 +225,7 @@ function scene(reduced = false): Scene {
     layer: () => layer,
     frame: () => DESK,
     reduced,
-    approachDist: () => DIST_AP,
+    approachDist: () => station,
     homeDist: () => 9000,
     viewLatLon: () => VIEW,
     setPhase: (p) => phases.push(p),
@@ -532,5 +538,84 @@ describe('SkyCamera reduced motion and instant requests', () => {
     expect(s.cam.busy).toBe(false);
     expect(s.cam.phase).toBe('approach');
     expect(s.cam.key).toBe(KEY);
+  });
+});
+
+describe('SkyCamera planet to planet', () => {
+  const MARS = 'mars' as BodyKey;
+  const MARS_AT = new Vector3(-700, 220, 520);
+  const STATION = 6; // a held planet's station is a few radii: the rig's own distance about the planet reads "near the Earth"
+  const angle = (a: Vec3, b: Vec3) => (Math.acos(Math.min(1, Math.max(-1, (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) / (norm(a) * norm(b))))) * 180) / Math.PI;
+
+  /** Held at KEY's station, then a pick of Mars: every frame of the move, until the camera stands. */
+  function move() {
+    const s = scene(false, STATION);
+    s.layer.places[MARS] = MARS_AT;
+    earthPose(s);
+    s.cam.approach(KEY);
+    s.settle();
+    for (let i = 0; i < 180; i++) s.frame();
+    expect(s.cam.phase).toBe('approach');
+    const phaseMark = s.phases.length;
+    const logMark = s.log.length;
+    const mars: Vec3 = [MARS_AT.x, MARS_AT.y, MARS_AT.z];
+    const frames: { pos: Vec3; look: Vec3; toMars: number; fromEarth: number }[] = [];
+    s.cam.approach(MARS);
+    let n = 0;
+    while (s.cam.busy && n++ < 3000) {
+      s.frame();
+      const snap = s.rig.snapshot();
+      const look: Vec3 = [snap.look[0] - snap.pos[0], snap.look[1] - snap.pos[1], snap.look[2] - snap.pos[2]];
+      frames.push({ pos: snap.pos, look, toMars: dist3(snap.pos, mars), fromEarth: norm(snap.pos) });
+    }
+    for (let i = 0; i < 60; i++) s.frame();
+    return { s, frames, phases: s.phases.slice(phaseMark), log: s.log.slice(logMark), mars };
+  }
+
+  it('is a dolly in the sky: no return from the Earth, no lift, no beckon', () => {
+    const { phases, log } = move();
+    expect(phases).not.toContain('return');
+    expect(phases[0]).toBe('system');
+    expect(phases[phases.length - 1]).toBe('approach');
+    expect(log.some((e) => e.startsWith('beckon:'))).toBe(false);
+  });
+
+  it('closes on the planet and never opens again: its distance only falls, and it never rises above where it started', () => {
+    const { frames } = move();
+    expect(frames.length).toBeGreaterThan(60);
+    for (let i = 1; i < frames.length; i++) {
+      expect(frames[i].toMars).toBeLessThanOrEqual(frames[i - 1].toMars + 1e-6);
+    }
+    // the camera is never driven farther from the planet than it began (no pop outward, no pass-and-return)
+    expect(Math.max(...frames.map((f) => f.toMars))).toBeLessThanOrEqual(frames[0].toMars + 1e-6);
+    // …and it stays within the sky it started in: no frame is farther from the Earth than the sky's own extent
+    const extent = Math.max(norm([PLANET[0], PLANET[1], PLANET[2]]), MARS_AT.length(), frames[0].fromEarth);
+    expect(Math.max(...frames.map((f) => f.fromEarth))).toBeLessThanOrEqual(extent * 1.5);
+  });
+
+  it('turns smoothly onto the planet: no frame swings the view by more than a few degrees', () => {
+    const { frames } = move();
+    let worst = 0;
+    for (let i = 1; i < frames.length; i++) worst = Math.max(worst, angle(frames[i].look, frames[i - 1].look));
+    expect(worst).toBeLessThan(4);
+    // the planet is the look at the end
+    const last = frames[frames.length - 1];
+    expect(angle(last.look, [MARS_AT.x - last.pos[0], MARS_AT.y - last.pos[1], MARS_AT.z - last.pos[2]])).toBeLessThan(0.5);
+  });
+
+  it('ends on the new planet\'s approach station, at the station distance', () => {
+    const { s, mars } = move();
+    expect(s.cam.key).toBe(MARS);
+    expect(s.layer.approached).toBe(MARS);
+    expect(dist3(s.rig.snapshot().pos, mars)).toBeCloseTo(STATION, 3);
+    expect(s.cam.busy).toBe(false);
+  });
+
+  it('a pick made while the camera is still close to the Earth still returns through the ascent', () => {
+    const s = scene(false, STATION);
+    s.layer.places[MARS] = MARS_AT;
+    earthPose(s);
+    s.cam.approach(MARS);
+    expect(s.cam.phase).toBe('return');
   });
 });

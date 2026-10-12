@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "pisces",
- "line": "Burt's chapter on Pisces, with Jung's Aion passages on the fishes.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Pisces (pdf pp. 509–558); Jung on the fishes (Aion; Dream Analysis seminar).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Pisces, pdf pp. 509–558. Her account of the sign, the ocean and its task.",
+   "line": "Burt, chapter on Pisces (pdf pp. 509–558): pdf p509 and p514.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Pisces, pdf pp. 509–558. The dolphin, the Divine Child and Piscean absolutism.",
+   "line": "Burt, chapter on Pisces (pdf pp. 509–558): pdf p509, p515, p513 and p517.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -69,7 +69,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the fishes in Aion and in his seminar.",
+   "line": "Jung on the fishes: CW9ii pdf p9, p102 and p104; Dream Analysis seminar, pdf p448.",
    "quotes": [
     {
      "work": "cw09ii",

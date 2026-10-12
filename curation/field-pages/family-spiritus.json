@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "spiritus",
- "line": "The alchemical and psychological spiritus: air in motion and the volatile principle, kept apart from the Spirit family.",
+ "line": "Jung on spiritus and pneuma: air in motion, spirit and soul, Mercurius, and body, soul and spirit.",
  "sections": [
   {
    "id": "air-in-motion",
    "title": "Air in motion",
-   "line": "The words in their original, concrete sense, before the abstract one.",
+   "line": "Pneuma and spiritus as air, wind and breath: CW13 pdf p244; CW18 ¶359.",
    "quotes": [
     {
      "work": "cw13",
@@ -24,7 +24,7 @@
   {
    "id": "spirit-and-soul",
    "title": "Spirit and soul",
-   "line": "Jung separates spirit from soul in the alchemical texts, and reads both as psychic structures.",
+   "line": "Spirit and soul in the alchemical texts: CW13 pdf p245, p243 and p248.",
    "quotes": [
     {
      "work": "cw13",
@@ -51,7 +51,7 @@
   {
    "id": "mercurius",
    "title": "Mercurius and the spiritus",
-   "line": "The volatile side of Mercurius: the life principle, the world-soul, and the alchemists' guide.",
+   "line": "The spiritus mercurii and the spiritus mercurialis: CW13 ¶171; CW12 ¶172, ¶84 and ¶518.",
    "quotes": [
     {
      "work": "cw13",
@@ -78,7 +78,7 @@
   {
    "id": "body-soul-spirit",
    "title": "Body, soul and spirit",
-   "line": "Jung's lapis consists of body, soul and spirit; von Franz's reading brings the three together in the One.",
+   "line": "Body, soul and spirit, and von Franz on pneuma, soul and body as the One: CW12 ¶243; von Franz, Number and Time, pdf p282.",
    "quotes": [
     {
      "work": "cw12",
@@ -101,8 +101,8 @@
   },
   {
    "id": "spirit-in-the-mind",
-   "title": "Spirit in the mind",
-   "line": "A different usage again: in Jung's psychology spirit is often the mind's life. The word quintessence in that sentence means the essence of a life, not the quinta essentia.",
+   "title": "Spirit and the life of the mind",
+   "line": "Spirit in the mind: CW13 pdf p247; CW8 ¶621.",
    "quotes": [
     {
      "work": "cw13",

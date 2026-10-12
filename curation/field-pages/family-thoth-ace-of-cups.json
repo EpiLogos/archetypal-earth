@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-cups",
- "line": "Crowley’s Ace of Cups: the Root of the Powers of Water, Kether for the Aces, no planet-in-sign.",
+ "line": "Crowley’s Ace of Cups: the Root of the Powers of Water, the Holy Grail, the Yoni and the Moon (pdf p196).",
  "sections": [
   {
    "id": "what-crowley-names",
-   "title": "What Crowley names",
-   "line": "The chapter heading for the card. The second quotation gives the element of its suit.",
+   "title": "Title and suit",
+   "line": "Crowley on the chapter heading (pdf p196); on the suit and its element (pdf p24).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "place-on-the-tree",
-   "title": "Its place on the Tree",
-   "line": "Kether comes from the Aces essay, which places the four Aces together above the small cards. The chapter gives no planet-in-sign; the Moon appears in its derivation and as the base of the cup.",
+   "title": "Kether, the Yoni and the Moon",
+   "line": "Crowley on Spirit and Kether (pdf p175); on the card’s derivation from the Yoni and the Moon (pdf p196).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "what-it-figures",
    "title": "What it figures",
-   "line": "Crowley’s description of the cup, the Holy Grail and the dove, with the lotuses on the sea of Binah.",
+   "line": "Crowley on the Holy Grail, the lotuses on the sea of Binah and the dove (pdf p196).",
    "quotes": [
     {
      "work": "book-of-thoth",

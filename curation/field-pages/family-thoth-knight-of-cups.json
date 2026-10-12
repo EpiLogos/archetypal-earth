@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-knight-of-cups",
- "line": "Crowley's Knight of Cups: the Yodh of the Name, the fiery part of Water, and a span from Aquarius to Pisces.",
+ "line": "Crowley's Knight of Cups: Yodh of the Name (pdf p139); the fiery part of Water and the span from Aquarius to Pisces (pdf p149).",
  "sections": [
   {
    "id": "the-court-and-its-element",
    "title": "The court and its element",
-   "line": "Crowley names the Knights by the powers of the letter Yodh in the Name.",
+   "line": "Crowley on the Knights (pdf p139) and on the Knight of Cups (pdf p149).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "its-span-in-the-zodiac",
    "title": "Its span in the Zodiac",
-   "line": "The text gives the 21st degree of Aquarius as the start and the 20th of Pisces as the end. Crowley's attribution table (pdf p274) gives 20 degrees at both ends. The page follows the text, and the table's figures are not quoted.",
+   "line": "Crowley on the span from the 21st degree of Aquarius to the 20th degree of Pisces (pdf p149); on the decans and the elemental attribution (pdf p139).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "its-character",
-   "title": "Its character as Crowley describes it",
-   "line": "Crowley's description of the figure and the card, in his own words.",
+   "title": "Character",
+   "line": "Crowley on the character of the Knight of Cups (pdf p149).",
    "quotes": [
     {
      "work": "book-of-thoth",

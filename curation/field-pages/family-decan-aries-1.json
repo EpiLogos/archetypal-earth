@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-aries-1",
- "line": "Crowley's Two of Wands is the card for the first decan of Aries, with Mars as its planet in the sign.",
+ "line": "Crowley on the Two of Wands, the card for the first decan of Aries (pdf p175, p185); von Franz on the decanate images (pdf p199, p302).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Aries.",
+   "title": "The Two of Wands: title and attribution",
+   "line": "The title and the attribution of the Two of Wands, pdf p175, p185.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Two of Wands, pdf p185.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -38,8 +38,8 @@
   },
   {
    "id": "the-decans-before-the-cards",
-   "title": "The decans before the cards",
-   "line": "Neither Jung nor Burt gives a decan system in the sources held here. The passages below are von Franz on the older decanate images. They are not a basis for the Crowley card.",
+   "title": "Von Franz on Bruno's 36 decanate images and decanate images in Egyptian tombs, pdf p199, p302",
+   "line": "Von Franz, Number and Time, pdf p199, p302.",
    "quotes": [
     {
      "work": "vonzfranz-number-time",

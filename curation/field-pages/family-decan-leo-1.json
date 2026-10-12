@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-leo-1",
- "line": "Crowley's Five of Wands is the card for the first decan of Leo, with Saturn as its planet in the sign.",
+ "line": "Crowley on the Five of Wands, the card for the first decan of Leo (pdf p177, p189).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "The text names the pair Saturn and Leo; the attribution table reads Saturn in Leo.",
+   "title": "The Five of Wands: title and attribution",
+   "line": "The title and the attribution of the Five of Wands, pdf p177, p189.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Five of Wands, pdf p189.",
    "quotes": [
     {
      "work": "book-of-thoth",

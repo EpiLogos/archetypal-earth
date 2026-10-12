@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-swords",
- "line": "Crowley attributes Swords to Air. The Ace gives the suit the Vau of the Name, while his general account gives Air the letter Aleph.",
+ "line": "Crowley on Swords: Air, the Ace of Swords as the Essence of the Vau, the Princes, and the letter of Air (pdf p23, p24, p46, p139, p210).",
  "sections": [
   {
    "id": "air-as-conjunction",
-   "title": "Air as conjunction",
-   "line": "Crowley says Air results from Fire and Water, and that its obvious symbol is the wind.",
+   "title": "Air",
+   "line": "Crowley's attribution of Swords to Air (pdf p24) and his statements on Air and the Wind (pdf p210).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -32,7 +32,7 @@
   {
    "id": "the-vau-of-the-ace",
    "title": "The Vau of the Ace",
-   "line": "The letter is given in the text of the Ace of Swords, and the Princes carry the same letter in the courts.",
+   "line": "Crowley on the Ace of Swords as the Essence of the Vau of Tetragrammaton (pdf p210) and on the Princes as the Forces of the letter Vau (pdf p139).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -51,7 +51,7 @@
   {
    "id": "the-letter-of-air",
    "title": "The letter of Air",
-   "line": "Crowley's general account gives Air the letter Aleph, and his card for the Fool carries it. He does not state the Ace's Vau and the general Aleph as one scheme, so the page keeps them apart.",
+   "line": "Crowley on the letters Shin, Mem and Aleph for the elements (pdf p23) and on the letter Aleph in the card of the Fool (pdf p46).",
    "quotes": [
     {
      "work": "book-of-thoth",

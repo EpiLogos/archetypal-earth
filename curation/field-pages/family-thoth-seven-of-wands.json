@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-seven-of-wands",
- "line": "Seven of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Seven of Wands: Valour (pdf p178); Mars in Leo (pdf p192); Netzach (pdf p178).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 178, 192).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p178); on Mars in Leo (pdf p192).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The chapter does not name Netzach in the quoted record; the Sevens group text does (pdf 178).",
+   "line": "Crowley on the Sevens and Netzach (pdf p178).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -39,7 +39,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the card, not a divinatory reading.",
+   "line": "Crowley on the army thrown into disorder and on individual valour (pdf p192).",
    "quotes": [
     {
      "work": "book-of-thoth",

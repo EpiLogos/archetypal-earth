@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "decan-capricorn-3",
- "line": "Crowley's Four of Disks is the card for the third decan of Capricorn, with the Sun as its planet in the sign.",
+ "line": "Crowley on the Four of Disks, the card for the third decan of Capricorn (pdf p177, p229).",
  "sections": [
   {
    "id": "crowley-card",
-   "title": "Crowley's card for this decan",
-   "line": "Crowley's chapter gives the title and the planet in Capricorn.",
+   "title": "The Four of Disks: title and attribution",
+   "line": "The title and the attribution of the Four of Disks, pdf p177, p229.",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -25,8 +25,8 @@
   },
   {
    "id": "what-the-card-is",
-   "title": "What the card is, in his words",
-   "line": "His description of what the card figures, as the card chapter gives it.",
+   "title": "Crowley's description of the card",
+   "line": "Crowley's description of the Four of Disks, pdf p229.",
    "quotes": [
     {
      "work": "book-of-thoth",

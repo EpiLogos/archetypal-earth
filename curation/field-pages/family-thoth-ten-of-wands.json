@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-wands",
- "line": "Ten of Wands: Crowley's title, planetary attribution and place on the Tree, with his account of the card.",
+ "line": "Crowley’s Ten of Wands: Oppression (pdf p181); Saturn in Sagittarius (pdf p195); Malkuth (pdf p181, p195).",
  "sections": [
   {
    "id": "what-it-is",
-   "title": "What Crowley says the card is",
-   "line": "Title and planet, as the chapter gives them (pdf 181, 195).",
+   "title": "Title and attribution",
+   "line": "Crowley on the title (pdf p181); on Saturn in Sagittarius (pdf p195).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "tree",
    "title": "Its place on the Tree",
-   "line": "The Tens belong to Malkuth (pdf 181), and this card's chapter gives the number Ten as Malkuth (pdf 195).",
+   "line": "Crowley on the Tens and Malkuth (pdf p181); on the number Ten and Malkuth (pdf p195).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -45,7 +45,7 @@
   {
    "id": "figures",
    "title": "What the card figures",
-   "line": "His description of the picture, not a divinatory reading.",
+   "line": "Crowley on the picture as Oppression and repression (pdf p195).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -57,8 +57,8 @@
   },
   {
    "id": "conflicts",
-   "title": "Conflicts and gaps",
-   "line": "The Tens group intro says there is now no planetary attribution to consider (pdf 181). This card's chapter names Saturn in Sagittarius, and the attribution table agrees with the chapter. The record keeps the chapter's planet; the group intro is the conflict.",
+   "title": "Crowley’s group note on the Tens",
+   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
    "quotes": [
     {
      "work": "book-of-thoth",

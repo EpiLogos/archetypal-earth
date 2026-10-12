@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "aries",
- "line": "Burt's chapter on Aries, and the places where Jung speaks of the ram.",
+ "line": "Burt, Archetypes of the Zodiac, chapter on Aries (pdf pp. 23–58); Jung on the ram (Dream Analysis seminar; Aion).",
  "sections": [
   {
    "id": "burt-character",
    "title": "Burt's characterisation",
-   "line": "Burt, chapter on Aries, pdf pp. 23–58. Her defining sentences.",
+   "line": "Burt, chapter on Aries (pdf pp. 23–58): pdf p23, p24, p25 and p37.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -38,7 +38,7 @@
   {
    "id": "burt-myth-shadow",
    "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Aries, pdf pp. 23–58. The heroic form, its shadow and its integration.",
+   "line": "Burt, chapter on Aries (pdf pp. 23–58): pdf p41, p27, p30 and p32.",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -75,7 +75,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung names the ram as the sign of the expiring aeon, in his seminar and in Aion.",
+   "line": "Jung on the ram: Dream Analysis seminar, pdf p448 and p434; CW9ii pdf p101.",
    "quotes": [
     {
      "work": "sem-dream-analysis",

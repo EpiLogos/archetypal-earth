@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-major-arcana",
- "line": "The twenty-two trumps, which Crowley places on the Paths of the Tree of Life and reads in sequence from the Fool to the Universe.",
+ "line": "Crowley on the twenty-two Trumps: the Hebrew letters, the Paths of the Tree of Life, and the Fool and the Universe (pdf p25, p27, p32, p35, p36, p110, p261).",
  "sections": [
   {
    "id": "twenty-two",
-   "title": "Twenty-two",
-   "line": "The count comes from the Hebrew alphabet, and the trumps are set between the Sephiroth.",
+   "title": "Twenty-two letters",
+   "line": "Crowley on the twenty-two letters of the Hebrew alphabet (pdf p36) and on the position of the Trumps on the Tree of Life (pdf p27).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -26,7 +26,7 @@
   {
    "id": "the-paths",
    "title": "The Paths",
-   "line": "Crowley relates the trumps to the twenty-two Paths. He calls the lines between the Sephiroth Forces of Nature.",
+   "line": "Crowley on the twenty-two Paths that join the ten numbers (pdf p32, p261) and on the lines joining the Sephiroth (pdf p25).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -50,8 +50,8 @@
   },
   {
    "id": "the-series",
-   "title": "From the Fool to the Universe",
-   "line": "Crowley's own reading of the first and last trumps frames the series as one process.",
+   "title": "The Fool and the Universe",
+   "line": "Crowley on the Fool and the Universe (pdf p110).",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -69,8 +69,8 @@
   },
   {
    "id": "what-is-not-claimed",
-   "title": "What is not claimed here",
-   "line": "Crowley does not give the trumps an archetype reading. The field's tie to the Self is a site reading, and this page states no more than the sequence above.",
+   "title": "The Tarot as a practical instrument",
+   "line": "Crowley on the Tarot as a practical instrument for Qabalistic calculations and for divination (pdf p35).",
    "quotes": [
     {
      "work": "book-of-thoth",

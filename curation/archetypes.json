@@ -523,7 +523,7 @@
     },
     "court-knight": {
       "name": "The Knight",
-      "oneLine": "Court of the Thoth deck: Yod of the Name, the Father; the fiery part of each element.",
+      "oneLine": "Crowley's Knight: the Father of the series; the powers of the letter Yodh of the Name.",
       "position": 0.72,
       "palette": {
         "core": "#e8844a",
@@ -533,8 +533,7 @@
       },
       "synthesised": true,
       "body": [
-        "In Crowley's Name the Knight stands for Yod, the first letter of the Tetragrammaton, which he says symbolises the Father who is Wisdom. In the pagan series the Knight is the Father, called Knight because he rides a horse. In each element the Knight is the most active part of its energy.",
-        "The tie to the Wise Old Man is a reading made here. Crowley gives the Father as Wisdom, but the Knight's qualities in his text are activity, fierceness and pride, which an amplification would also set beside the hero."
+        "Crowley says the Knights represent the powers of the letter Yodh in the Name (pdf p139), and that the Father is Knight because he is represented as riding on a horse (pdf p24). He says Yod symbolizes the Father, who is Wisdom (pdf p79)."
       ],
       "archetypes": [
         {
@@ -545,7 +544,7 @@
     },
     "court-queen": {
       "name": "The Queen",
-      "oneLine": "Court of the Thoth deck: Hé of the Name, the Mother; the watery part of each element.",
+      "oneLine": "Crowley's Queen: the Mother of the series; the letter Hé of the Name.",
       "position": 0.42,
       "palette": {
         "core": "#5aa6a0",
@@ -555,8 +554,7 @@
       },
       "synthesised": true,
       "body": [
-        "The Queen stands for the letter Hé of the Name. Crowley says that letter is traditionally consecrated to the Great Mother. In the pagan series she is the Mother, and in each suit she is the watery part of the element: its power of reception and reflection.",
-        "The tie to the Great Mother is a reading made here, drawn from the letter Hé and from Crowley's own words on the Mother. The Queens' qualities in his text, adaptability and calm authority, are kept beside it."
+        "Crowley says the Queens represent the letter Hé of the Name (pdf p139), and that Hé is the letter traditionally consecrated to the Great Mother (pdf p21). He says the Queen of Cups represents the watery part of Water, its power of reception and reflection (pdf p151)."
       ],
       "archetypes": [
         {
@@ -567,7 +565,7 @@
     },
     "court-prince": {
       "name": "The Prince",
-      "oneLine": "Court of the Thoth deck: Vau of the Name, the Son; the airy part of each element.",
+      "oneLine": "Crowley's Prince: the Son of the series; the Forces of the letter Vau of the Name.",
       "position": 0.56,
       "palette": {
         "core": "#e7dfb4",
@@ -577,8 +575,7 @@
       },
       "synthesised": true,
       "body": [
-        "The Prince is the letter Vau of the Name, the Son of the pagan series. In each element he is the airy part, swift and strong in the Wands, subtle in the Cups and purely intellectual in the Swords. Crowley refers the Son to the number six, the centre of his system.",
-        "The tie to the child is a reading made here. Crowley writes that the child Horus is born of the union of the two parents, and that the Aeon of Horus is the Aeon of the Child; the reading takes the Son to the child on that basis, not on his own equation."
+        "Crowley says the Princes represent the Forces of the letter Vau in the Name (pdf p139). He refers the Court cards to the numbers 2, 3, 6 and 10 (pdf p261), and calls the number Six the centre of the system (pdf p21)."
       ],
       "archetypes": [
         {
@@ -589,7 +586,7 @@
     },
     "court-princess": {
       "name": "The Princess",
-      "oneLine": "Court of the Thoth deck: Hé final of the Name, the Daughter; earthy part of each element.",
+      "oneLine": "Crowley's Princess: the Daughter of the series; the Hé final of the Name.",
       "position": 0.14,
       "palette": {
         "core": "#a3a77a",
@@ -599,8 +596,7 @@
       },
       "synthesised": true,
       "body": [
-        "The Princess is the letter Hé final of the Name, the Daughter of the pagan series. Crowley says she represents the ultimate issue of the original energy, its crystallisation and materialisation. He calls her the perfect Maiden, and in the legends the forsaken Widow after the Prince's death. She has no zodiacal attribution in his text, only a quadrant of the heavens.",
-        "The tie to the kore is a reading made here, drawn from the perfect Maiden and from the Daughter that Crowley places on the earth of Malkuth."
+        "Crowley says the Princesses represent the Hé final of the Name, the ultimate issue of the original Energy in its completion, its crystallization, its materialization (pdf p140). He says the Princesses have no Zodiacal attribution (pdf p140)."
       ],
       "archetypes": [
         {
