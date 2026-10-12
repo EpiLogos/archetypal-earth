@@ -28,7 +28,8 @@ describe('Aion hero images', () => {
     const horizon = history.readings.find((r) => r.id === 'jung-aquarius-horizon')!;
     const covered = (r: History['readings'][number]) => r.events.filter((e) => eventHeroImage(model, e)).length;
     const baseline = (r: History['readings'][number]) => r.events.reduce((n, e) => n + ownImage(e), 0);
-    expect(baseline(jung)).toBe(4);
+    // the image wave has since plated occurrences, so more events carry their own picture than the 4 first measured
+    expect(baseline(jung)).toBeGreaterThanOrEqual(4);
     // measured after the archetype fallback was removed: 44 of 45, 20 of 22, 5 of 19 (69 of 86 in all)
     expect(covered(jung)).toBeGreaterThanOrEqual(44);
     expect(covered(turn)).toBeGreaterThanOrEqual(20);

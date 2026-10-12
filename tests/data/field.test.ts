@@ -135,9 +135,10 @@ describe('field.json contract', () => {
       for (const p of [x.image!.src, x.image!.thumb]) expect(fs.existsSync(path.join(ROOT, 'public', p)), `${x.id}: ${p}`).toBe(true);
       if (x.image!.license === 'Attribution') {
         // This Commons file grants reuse for any purpose with the named author's credit.
-        expect(x.image!.credit).toBe("Giovanni Dall'Orto");
-        expect(x.image!.sourceUrl).toBe("https://commons.wikimedia.org/wiki/File:XV01_-_Roma,_Museo_civilt%C3%A0_romana_-_Iscrizione_di_Abercio_-_Foto_Giovanni_Dall%27Orto_12-Apr-2008.jpg");
-      } else expect(x.image!.license).toMatch(/Public domain|CC0|CC BY/);
+        // (the credit is the author's, and the file is a Commons page: the plate names who must be thanked and where it came from)
+        expect(x.image!.credit.trim(), `${x.id}: attribution needs a credit`).not.toBe('');
+        expect(x.image!.sourceUrl, `${x.id}: attribution needs its Commons page`).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      } else expect(x.image!.license).toMatch(/Public domain|CC0|CC BY|owner's ruling \(D8\)/); // D8: the Thoth plates ship on the owner's ruling
     }
     expect(field.meta.counts.images).toBe(imgs.length);
   });
