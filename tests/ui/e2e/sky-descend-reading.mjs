@@ -325,6 +325,14 @@ parts.t = async () => {
       // the largest distance of any body from the Earth: the sky's own radius
       W.__skyRadius = Math.max(...['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'].map((k) => { const q = engine.sky.scenePosition(k); return q ? q.length() : 0; }));
     }, tr.to);
+    // the sheet's own close, stamped by a mutation observer: the frame sampler above is the render loop's, and under
+    // software GL a hitch of a second leaves no frame between the click and the sheet's going
+    await page.evaluate(() => {
+      const W = window;
+      W.__panelGoneAt = null;
+      const seen = () => { if (W.__panelGoneAt === null && !document.querySelector('.lens-panel:not([hidden])')) W.__panelGoneAt = performance.now(); };
+      new MutationObserver(seen).observe(document.documentElement, { subtree: true, childList: true, attributes: true });
+    });
     const t0 = await clickStamped(page, '.cr .cr-planet', BODY_NAME[tr.to]);
     check(t0 !== null, `${tag}: the planet link is clicked once`);
     await page.waitForFunction((k) => { const { engine } = window.__earth; return engine.sky?.approached === k && engine.sky.approach > 0.99 && document.body.dataset.skyPhase === 'approach'; }, tr.to, { timeout: 30000 });
@@ -336,7 +344,9 @@ parts.t = async () => {
     check(state.lens === 'astrology' && state.body === tr.to && state.sky && state.hash === `#/sky/${tr.to}`, `${tag}: Astrology on ${BODY_NAME[tr.to]} (sky.body ${state.body}, ${state.hash})`);
     check(!state.panel, `${tag}: the card's sheet is gone`);
     const panelGone = run.find((x) => !x.panel);
-    check(!!panelGone && panelGone.t - t0 < 400, `${tag}: the sheet closes with the click`, panelGone ? `${f(panelGone.t - t0, 0)} ms` : 'never');
+    const goneAt = await page.evaluate(() => window.__panelGoneAt);
+    const closeMs = goneAt !== null ? goneAt - t0 : panelGone ? panelGone.t - t0 : null;
+    check(closeMs !== null && closeMs < 400, `${tag}: the sheet closes with the click`, closeMs !== null ? `${f(closeMs, 0)} ms (first frame after it at ${panelGone ? f(panelGone.t - t0, 0) : 'n/a'} ms)` : 'never');
     // the camera
     const settled = run.filter((x) => x.t >= t0 + 300 && x.to !== null);
     let worst = 0, rises = 0;
@@ -347,10 +357,16 @@ parts.t = async () => {
     const peak = Math.max(...run.map((x) => x.cam));
     check(peak <= startD + 1.5 * R, `${tag}: no zoom-out pop: peak distance from the Earth ${f(peak, 0)} ≤ start ${f(startD, 0)} + 1.5 × sky radius ${f(R, 0)}`);
     check(peak <= Math.max(startD, endD) * 1.05, `${tag}: …and no rise above the two stations at all (${f(peak, 0)} vs ${f(Math.max(startD, endD), 0)})`);
-    let jump = 0;
+    // a jump cut is a turn within one frame. A frame is measured at a 60 Hz frame's worth of time: a software-GL frame that
+    // took 200 ms legitimately carries 12 frames of a smooth turn, so the turn is scaled to 16.7 ms before it is judged
+    let jump = 0, jumpRaw = 0, jumpDt = 0;
     const ang = (a, b) => (Math.acos(Math.min(1, Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))) * 180) / Math.PI;
-    for (let i = 1; i < run.length; i++) jump = Math.max(jump, ang(run[i].look, run[i - 1].look));
-    check(jump < 6, `${tag}: no jump cut: the view turns at most ${f(jump, 2)}° in a frame`);
+    for (let i = 1; i < run.length; i++) {
+      const a = ang(run[i].look, run[i - 1].look), dt = run[i].t - run[i - 1].t;
+      const perFrame = a * Math.min(1, 16.7 / Math.max(dt, 1));
+      if (perFrame > jump) { jump = perFrame; jumpRaw = a; jumpDt = dt; }
+    }
+    check(jump < 6, `${tag}: no jump cut: the view turns at most ${f(jump, 2)}° in a 60 Hz frame`, `worst frame ${f(jumpRaw, 2)}° over ${f(jumpDt, 0)} ms; ${run.length} frames`);
     const phases = [...new Set(run.map((x) => x.phase))];
     check(!phases.includes('return') && !phases.includes('descend') && !phases.includes('gaze'), `${tag}: the move is not a return from the Earth (phases ${phases.join(' → ')})`);
     // nothing of the planet left behind

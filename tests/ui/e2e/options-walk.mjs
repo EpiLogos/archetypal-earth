@@ -96,7 +96,9 @@ try {
     const { ctx, page, logs } = await open(browser, { width: 390, height: 844, dpr: 1, mobile: true, hash: '#/aion' });
     try {
       await openOptions(page);
-      await page.waitForTimeout(450); // the sheet slides up over 0.32s
+      // the sheet slides up over 0.32s: wait for its animation to finish (a fixed wait starves under software GL)
+      await page.waitForFunction(() => document.querySelector('.mode-options[open] .mode-options-body')?.getAnimations().every((a) => a.playState === 'finished'), null, { timeout: 8000 });
+      await page.waitForTimeout(100);
       const sheet = await page.locator(`${popover}[open] .mode-options-body`).boundingBox();
       const viewport = page.viewportSize();
       check(!!sheet && Math.abs(sheet.y + sheet.height - viewport.height) <= 2, `390px: the Options popover touches the bottom`,
