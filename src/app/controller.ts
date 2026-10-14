@@ -1597,7 +1597,7 @@ export class Controller {
     if (chosen.length < k) chosen.push(...spread(placed.filter((i) => !m.occ[i].image), k - chosen.length));
     for (const i of chosen) {
       const o = m.occ[i];
-      items.push({ dir: m.dir[i], img: o.image, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } });
+      items.push({ dir: m.dir[i], img: o.image ?? undefined, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } });
     }
     return items;
   }

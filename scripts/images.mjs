@@ -836,6 +836,11 @@ async function runFamilyBatch() {
       }
       return;
     }
+    // Root rule (2026-10 image audit): a passage is plated only from a curated statement of what the
+    // picture must show. A pin names the file; a require-spec names the subject. The family pool, the
+    // automatic search, the close-match pass and the museum search picked by word overlap and put
+    // unrelated art under captions, so an occurrence without such a spec is recorded and left unplated.
+    if (!(spec?.pin || spec?.require?.length)) { missing.push(`${o.id}: no pin or require spec (uncurated passage left unplated)`); return; }
     // Every fallback below is an automatic pick: it must pass acceptFallback (a whole-word name,
     // art context, no photograph or junk) and is logged with its title and score.
     const name = o.label || o.title || o.id;
@@ -977,6 +982,8 @@ for (const group of groups) {
     // allowBad lets a scarce museum photograph through; identityOk refuses a file
     // whose title is not the named thing.
     const row = byId.get(id);
+    // Root rule: an occurrence without a pin or require-spec is never searched automatically.
+    if (group === 'occurrences' && !(spec?.pin || spec?.require?.length)) { missing.push(`${group}/${id}: no pin or require spec (uncurated passage left unplated)`); continue; }
     const auto = autoSpec(nameOf(id), {
       museum: group === 'families',
       narrative: group === 'occurrences',

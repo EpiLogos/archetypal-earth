@@ -18,6 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
 const OUT_DIR = process.env.FIELD_OUT_DIR ? path.resolve(process.env.FIELD_OUT_DIR) : path.join(ROOT, 'public', 'data');
 const IMAGES_JSON = process.env.IMAGES_JSON ? path.resolve(process.env.IMAGES_JSON) : path.join(ROOT, 'public', 'data', 'images.json');
+const IMAGE_QUERIES_JSON = path.join(ROOT, 'curation', 'image-queries.json');
 const CURATION_DIR = process.env.CURATION_DIR ? path.resolve(process.env.CURATION_DIR) : path.join(ROOT, 'curation');
 const CUR = (f) => path.join(CURATION_DIR, f);
 const readJson = (f, fallback) => {
@@ -69,6 +70,7 @@ const gaz = loadGazetteer(CUR('gazetteer.json'));
 const { aliases: cultAliases, cultures: cultTable } = loadCultures(CUR('cultures.json'));
 const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
 const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, theoretics: {}, occurrences: {} });
+const imageQueries = readJson(IMAGE_QUERIES_JSON, { occurrences: {} });
 // An additive register beside images.json (public/data/images-ext.json, same shape): plates fetched while another run
 // owns images.json. Its entries fill ids the main register does not hold; the main register wins on a clash.
 const extFiles = fs.readdirSync(path.dirname(IMAGES_JSON)).filter((f) => /^images-ext[\w-]*\.json$/.test(f)).sort();
@@ -686,6 +688,12 @@ for (const j of accepted.sort((x, y) => x.id.localeCompare(y.id))) {
 // ---------- images ----------
 let imageCount = 0;
 const attach = (obj, group) => {
+  // A reviewed contradiction explicitly suppresses the family fallback; ordinary
+  // skipped searches retain the existing fallback behavior.
+  if (group === 'occurrences' && imageQueries.occurrences?.[obj.id]?.suppressFallback) {
+    obj.image = null;
+    return;
+  }
   const im = imagesJson[group]?.[obj.id];
   if (im) {
     const { src, thumb, width, height, tone, title, credit, license, sourceUrl } = im;

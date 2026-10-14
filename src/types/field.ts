@@ -181,7 +181,7 @@ export interface Occurrence {
   /** Plain-text paragraphs of the vault body (wikilinks resolved to names). */
   body: string[];
   parallelIds: OccurrenceId[]; // resolvable vault parallels only
-  image?: ImageRef; // occurrence-specific image when one was found
+  image?: ImageRef | null; // null explicitly suppresses the family-image fallback after a reviewed rejection
 }
 
 export interface FieldMeta {
