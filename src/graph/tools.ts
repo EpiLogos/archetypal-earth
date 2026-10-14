@@ -1,10 +1,10 @@
-// A compact graph settings space, away from the history scrubber. Filters first, then the layout's four forces in one
-// quiet disclosure (closed by default). The crumb, the mode pill and G already take the person out of the graph, so
+// A compact graph settings space, away from the history scrubber. Filters first, then two quiet disclosures (closed
+// by default): Display (how it is drawn) and the layout's four forces. The crumb, the mode pill and G already take the person out of the graph, so
 // the sheet does not repeat them.
 import { el } from '../ui/dom';
 import type { TieBasis } from '../types/field';
 import { DEFAULT_FORCES, FORCE_ROWS, forceMultiple, type Forces } from './forces';
-import { DEFAULT_KINDS, type KindFlags } from './settings';
+import { DEFAULT_DISPLAY, DEFAULT_KINDS, DISPLAY_ROWS, type Display, type KindFlags } from './settings';
 
 export interface ToolHandlers {
   onDepth(depth: number): void;
@@ -14,6 +14,8 @@ export interface ToolHandlers {
   onTies(bases: TieBasis[]): void;
   /** all four forces, as the person set them: applied to the live layout */
   onForces(forces: Forces): void;
+  /** how it is drawn: node size, link thickness, text fade (the layout is not touched) */
+  onDisplay(display: Display): void;
   onSky(on: boolean): void;
   onFit(): void;
 }
@@ -26,6 +28,8 @@ export interface ToolState {
   ties: TieBasis[];
   /** the layout's four forces, as set */
   forces: Forces;
+  /** how it is drawn */
+  display: Display;
   /** the sky's bodies hung from the graph: off by default */
   sky: 'off' | 'loading' | 'on' | 'unavailable';
   /** when the standing sky is, in words — shown while the anchors are on */
@@ -46,8 +50,10 @@ export class GraphTools {
   private skyNote: HTMLElement;
   private forceIn = new Map<keyof Forces, HTMLInputElement>();
   private forceN = new Map<keyof Forces, HTMLElement>();
+  private displayIn = new Map<keyof Display, HTMLInputElement>();
+  private displayN = new Map<keyof Display, HTMLElement>();
   private kindButtons = new Map<keyof KindFlags, HTMLButtonElement>();
-  private state: ToolState = { local: false, depth: 1, dust: true, kinds: { ...DEFAULT_KINDS }, ties: ['jung', 'inferred', 'site'], sky: 'off', forces: { ...DEFAULT_FORCES } };
+  private state: ToolState = { local: false, depth: 1, dust: true, kinds: { ...DEFAULT_KINDS }, ties: ['jung', 'inferred', 'site'], sky: 'off', forces: { ...DEFAULT_FORCES }, display: { ...DEFAULT_DISPLAY } };
 
   constructor(h: ToolHandlers) {
     this.minus = el('button', { class: 'gvt-step', type: 'button', 'aria-label': 'Fewer steps from the subject', text: '−', onclick: () => h.onDepth(this.state.depth - 1) }) as HTMLButtonElement;
@@ -75,6 +81,22 @@ export class GraphTools {
       onclick: () => h.onSky(this.state.sky === 'off' || this.state.sky === 'unavailable') }) as HTMLButtonElement;
     this.skyNote = el('p', { class: 'gvt-caption gvt-sky-note', role: 'status', 'aria-live': 'polite' });
     this.skyNote.hidden = true;
+    // how it is drawn: one quiet disclosure, closed. The drawing only; the layout stays where it is.
+    const display = el('details', { class: 'gvt-display' }, [el('summary', { class: 'gvt-caption', text: 'Display' })]);
+    for (const row of DISPLAY_ROWS) {
+      const input = el('input', { type: 'range', class: 'gvt-range', min: String(row.min), max: String(row.max), step: String(row.step), 'aria-label': `${row.label}: ${row.tip}`, title: row.tip }) as HTMLInputElement;
+      const out = el('span', { class: 'gvt-n' });
+      input.addEventListener('input', () => h.onDisplay({ ...this.state.display, [row.key]: Number(input.value) }));
+      this.displayIn.set(row.key, input);
+      this.displayN.set(row.key, out);
+      display.append(el('div', { class: 'gvt-row', title: row.tip }, [el('span', { text: row.label }), out, input]));
+    }
+    // the one mark that is not a relation, beside the drawing it explains: what has no place on the globe, and so no walk
+    display.append(
+      el('p', { class: 'gvt-caption gvt-key' }, [el('span', { class: 'gvt-hollow', 'aria-hidden': 'true' }), el('span', { text: 'Hollow: no recorded place, so not on the globe or in any walk' })]),
+      el('button', { class: 'gvt-caption gvt-reset', type: 'button', text: 'Reset', title: 'Restore the drawing as it was',
+        onclick: () => h.onDisplay({ ...DEFAULT_DISPLAY }) }),
+    );
     // the four forces: one quiet disclosure, closed. Each slider re-sets the live layout in place; the tooltip says what it does.
     const forces = el('details', { class: 'gvt-forces' }, [el('summary', { class: 'gvt-caption', text: 'Forces' })]);
     for (const row of FORCE_ROWS) {
@@ -94,10 +116,9 @@ export class GraphTools {
       el('div', { class: 'gvt-rels' }, [el('span', { class: 'gvt-caption', text: 'Relations' }), tieGroup]),
       this.sky, this.skyNote,
       this.depthWrap,
+      display,
       forces,
       fit,
-      // the one mark that is not a relation: what has no place on the globe, and so no walk
-      el('p', { class: 'gvt-caption gvt-key' }, [el('span', { class: 'gvt-hollow', 'aria-hidden': 'true' }), el('span', { text: 'Hollow: no recorded place, so not on the globe or in any walk' })]),
     ]);
     this.panel.hidden = true;
     this.toggle = el('button', { class: 'gvt-link gvt-settings', type: 'button', text: 'Settings', 'aria-expanded': 'false', 'aria-controls': 'graph-settings', onclick: () => this.setOpen(this.panel.hidden) }) as HTMLButtonElement;
@@ -144,6 +165,13 @@ export class GraphTools {
       const out = this.forceN.get(row.key);
       // a readout is a multiple of the arrangement as drawn: 1.00× at rest, whatever the stored number
       if (out) out.textContent = `${forceMultiple(row.key, v).toFixed(2)}×`;
+    }
+    for (const row of DISPLAY_ROWS) {
+      const v = s.display[row.key];
+      const input = this.displayIn.get(row.key);
+      if (input && document.activeElement !== input) input.value = String(v);
+      const out = this.displayN.get(row.key);
+      if (out) out.textContent = `${v.toFixed(2)}×`;
     }
     this.sky.setAttribute('aria-pressed', String(s.sky === 'on' || s.sky === 'loading'));
     this.sky.disabled = s.sky === 'loading';

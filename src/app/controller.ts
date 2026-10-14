@@ -1883,7 +1883,8 @@ export class Controller {
     let subject: string | null = null;
     let selected: string | null = null;
     let emphasis: number[] | null = null;
-    const keyOf = (sub: Subject): string | null => (sub.type === 'archetype' ? `a:${sub.id}` : sub.type === 'family' ? `f:${sub.id}` : null);
+    // every node of the graph is a subject it can hold: a theoretic is focused as an archetype or a form is
+    const keyOf = (sub: Subject): string | null => (sub.type === 'archetype' ? `a:${sub.id}` : sub.type === 'family' ? `f:${sub.id}` : sub.type === 'theoretic' ? `t:${sub.id}` : null);
     if (v.kind === 'focus') {
       subject = keyOf(v.subject);
       if (!subject) emphasis = subjectOccurrences(m, v.subject);
@@ -1944,6 +1945,7 @@ export class Controller {
       const { t, id } = this.splitKey(key);
       if (t === 'b') return this.onGraphBody(id as BodyKey);
       if (t === 'a') return this.navigate(focusOn(earth, { type: 'archetype', id }));
+      if (t === 't') return this.navigate(focusOn(earth, { type: 'theoretic', id }));
       if (t === 'f') return this.navigate(focusOn(earth, { type: 'family', id }));
       const occ = this.occurrenceState(earth, id);
       if (occ) return this.navigate(occ);

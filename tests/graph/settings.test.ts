@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_FORCES, FORCE_ROWS } from '../../src/graph/forces';
-import { clampForces, DEFAULT_SETTINGS, loadSettings, parseSettings, saveSettings, SETTINGS_KEY, type KeyValueStore } from '../../src/graph/settings';
+import { clampDisplay, clampForces, DEFAULT_DISPLAY, DEFAULT_SETTINGS, DISPLAY_ROWS, loadLayout, loadSettings, parseLayout, parseSettings, saveLayout, saveSettings, SETTINGS_KEY, type KeyValueStore } from '../../src/graph/settings';
 
 // A store that keeps what it is given, as localStorage does.
 const memory = (initial: Record<string, string> = {}): KeyValueStore & { data: Record<string, string> } => {
@@ -76,10 +76,44 @@ describe('the graph settings: clamp and parse', () => {
 
   it('a saved set reads back as it was written', () => {
     const store = memory();
-    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[], kinds: { archetype: true, theoretic: false, family: true } };
+    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[], kinds: { archetype: true, theoretic: false, family: true }, display: { size: 1.4, links: 0.6, text: 1.5 } };
     saveSettings(s, store);
     expect(store.data[SETTINGS_KEY]).toBeTruthy();
-    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'], kinds: { archetype: true, theoretic: false, family: true } });
+    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'], kinds: { archetype: true, theoretic: false, family: true }, display: { size: 1.4, links: 0.6, text: 1.5 } });
+  });
+});
+
+describe('the graph display', () => {
+  it('is drawn as it always was by default, and every slider starts inside its range on its own grid', () => {
+    expect(DEFAULT_DISPLAY).toEqual({ size: 1, links: 1, text: 1 });
+    expect(DISPLAY_ROWS.map((r) => r.key)).toEqual(['size', 'links', 'text']);
+    for (const r of DISPLAY_ROWS) {
+      const v = DEFAULT_DISPLAY[r.key];
+      expect(v).toBeGreaterThanOrEqual(r.min);
+      expect(v).toBeLessThanOrEqual(r.max);
+      expect(Math.abs((v - r.min) / r.step - Math.round((v - r.min) / r.step))).toBeLessThan(1e-9);
+      expect(r.tip.length).toBeGreaterThan(20);
+    }
+  });
+
+  it('a stored display is held to its ranges; a missing or wrong key is the default; settings saved before it read as drawn', () => {
+    expect(clampDisplay({ size: 9, links: -3, text: 'x' })).toEqual({ size: 2, links: 0.4, text: 1 });
+    expect(clampDisplay(null)).toEqual(DEFAULT_DISPLAY);
+    expect(parseSettings(JSON.stringify({ v: 1, dust: false })).display).toEqual(DEFAULT_DISPLAY);
+  });
+});
+
+describe('the settled whole field, kept between visits', () => {
+  it('reads back only under the same signature and node count, with every number finite', () => {
+    const store = memory();
+    saveLayout('sig-a', [1.04, 2, -3.26, 4], store);
+    expect(Array.from(loadLayout('sig-a', 2, store)!)).toEqual([1, 2, -3.3, 4].map((x) => Math.fround(x)));
+    expect(loadLayout('sig-b', 2, store)).toBeNull();
+    expect(loadLayout('sig-a', 3, store)).toBeNull();
+    expect(parseLayout(JSON.stringify({ v: 1, sig: 's', xy: [0, null] }), 's', 1)).toBeNull();
+    expect(parseLayout('{not json', 's', 1)).toBeNull();
+    expect(loadLayout('sig-a', 2, blocked)).toBeNull();
+    expect(loadLayout('sig-a', 2, null)).toBeNull();
   });
 });
 

@@ -57,11 +57,16 @@ export function dustLiveFactor(kind: string, live: number, on: number): number {
   return 1 + (raw - 1) * clamp01(on);
 }
 
-/** The push between nodes: negative (repulsive). The ground and the archetypes push hardest; the dust hardly at all. */
+/**
+ * The push between nodes: negative (repulsive). The Self and the archetypes push hardest; the dust hardly at all.
+ * `prime` is the keystone of its kind: the Self among the archetypes, the ground among the theoretics. A theoretic
+ * pushes as a node of its size, between a form and an archetype, so it moves and is moved like the rest; only the
+ * ground holds the wide field it stands for.
+ */
 export function chargeStrength(kind: string, prime: boolean, rank: number, local: boolean, f: Forces): number {
   const gr = (local ? 1.2 : 1) * f.repel;
   if (kind === 'archetype') return -(prime ? 1500 : 880) * gr;
-  if (kind === 'theoretic') return -(500 + 760 * rank) * gr; // the keystones carry rank 1: the ground holds the widest field
+  if (kind === 'theoretic') return -(prime ? 1100 : 260 + 320 * rank) * gr;
   if (kind === 'family') return -(90 + 170 * rank) * gr;
   if (kind === 'body') return -60 * f.repel;
   return -13 * gr;

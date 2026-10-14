@@ -359,7 +359,8 @@ async function resetPersist(browser) {
   check(readout === '1.25×', 'the readout reads the force as a multiple of the default (1.00 / 0.80)', readout);
   await page.screenshot({ path: `${SHOTS}/settings-forces-reset-desktop.png` });
 
-  await page.locator('.gvt-reset').click();
+  // the Forces' own Reset (Display has its own, for the drawing)
+  await page.locator('.gvt-forces .gvt-reset').click();
   const back = Number(await page.locator('input[aria-label^="Repel:"]').inputValue());
   const rest = (await page.locator('.gvt-forces .gvt-row').nth(1).locator('.gvt-n').textContent()) ?? '';
   check(Math.abs(back - 0.8) < 1e-6 && rest === '1.00×', 'Reset restores the arrangement as drawn: Repel 0.80, readout 1.00×', `repel ${back}, readout ${rest}`);

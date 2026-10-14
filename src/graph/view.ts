@@ -4,9 +4,14 @@
 // It renders only when something changes (a settling simulation, a tween, the pointer, the time window) and
 // goes fully idle otherwise. Nothing here knows about the controller: it is told what to show (setTarget)
 // and reports what the person chose (GraphHandlers).
+//
+// The whole field is ~3,500 nodes and ~14,000 relations. It stays light by three rules: the repulsion is the forms'
+// alone (field-force.ts: the dust is pushed by them and carries its own push through its form); the whole field's
+// arrangement is kept when a local graph is opened, and the nodes the local layout moved glide home when it closes,
+// instead of the whole field being laid out again; and a settled field is kept between visits (settings.ts).
 // graph.css is loaded by main.ts: the Earth ⇄ Graph pill it styles stands before the graph is ever opened
 
-import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type ForceLink, type ForceManyBody, type ForceX, type ForceY, type Simulation, type SimulationLinkDatum } from 'd3-force';
+import { forceCollide, forceLink, forceSimulation, forceX, forceY, type ForceLink, type ForceX, type ForceY, type Simulation, type SimulationLinkDatum } from 'd3-force';
 import { quadtree, type Quadtree } from 'd3-quadtree';
 import { select } from 'd3-selection';
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from 'd3-zoom';
@@ -19,7 +24,8 @@ import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
 import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, dustLiveFactor, linkDistance, linkStrength, liveFactor, type Forces } from './forces';
 import { clampZoom, Coast, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
-import { loadSettings, saveSettings, DEFAULT_KINDS, type KindFlags } from './settings';
+import { loadLayout, loadSettings, saveLayout, saveSettings, DEFAULT_DISPLAY, DEFAULT_KINDS, type Display, type KindFlags } from './settings';
+import { forceCluster, forceField, type FieldForce } from './field-force';
 
 // outside the local lens the field recedes to a whisper that is still clickable
 const GHOST_VIS = 0.05;
@@ -27,6 +33,18 @@ const GHOST_VIS = 0.05;
 const LIVE_SETTLE = 0.2;
 // and the heat it is given then: enough to re-arrange the links, not to explode the field
 const LIVE_REHEAT = 0.15;
+// what a hover leaves lit outside the hovered node and its neighbours: dimmed, never gone
+const HOVER_DIM = 0.2;
+// a pointer that slips off a node for this long (seconds) between two nodes does not flash the whole field back
+const HOVER_LINGER = 0.11;
+// the nodes a local layout moved glide back to their place in the whole field over this long (seconds)
+const HOME_SECONDS = 0.85;
+// the camera's spring (rad/s): critically damped, so a new frame is reached without overshoot or a jolt at the start
+const CAM_SPRING = 4.4;
+// the most a frame may spend on the layout (ms), and at most two ticks: cheap ticks would otherwise settle the field
+// in a fraction of a second, which reads as a jolt rather than a settle
+const TICK_BUDGET = 6;
+const TICKS_PER_FRAME = 2;
 
 export interface GraphHandlers {
   /** a node was clicked */
@@ -71,6 +89,8 @@ interface VNode {
   /** lit (1) or dimmed (0): tweens toward hlT */
   hl: number;
   hlT: number;
+  /** hovered (1) or not (0): the hovered node grows a little */
+  hv: number;
   /** time liveness 0..1 */
   live: number;
   /** pinned as the local subject */
@@ -96,12 +116,23 @@ const SANS = '"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif'
 const rgbTriplet = (c: RGB) => `${Math.round(c[0] * 255)} ${Math.round(c[1] * 255)} ${Math.round(c[2] * 255)}`;
 const rgba = (trip: string, a: number) => `rgb(${trip} / ${Math.max(0, Math.min(1, a)).toFixed(3)})`;
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+/** A short, stable signature of a string (FNV-1a, two lanes): enough to tell one field's node list from another's. */
+function sigOf(text: string): string {
+  let a = 2166136261;
+  let b = 5381;
+  for (let i = 0; i < text.length; i++) {
+    const c = text.charCodeAt(i);
+    a = Math.imul(a ^ c, 16777619);
+    b = (Math.imul(b, 33) + c) | 0;
+  }
+  return `${(a >>> 0).toString(36)}${(b >>> 0).toString(36)}`;
+}
 
 function nodeRadius(n: GNode): number {
   if (n.kind === 'body') return 6.5 + 2.5 * n.rank;
   if (n.kind === 'archetype') return n.prime ? 23 : 12.5 + 7 * (n.rank - 0.55) / 0.4;
-  // the ground is drawn as what it is: the base the archetypes stand on, not an entry beside them
-  if (n.kind === 'theoretic') return n.ground ? 15.5 : 5 + 5.5 * n.rank;
+  // a theoretic is a small body of its own, a seed rather than a form; the ground is the larger base the others stand on
+  if (n.kind === 'theoretic') return n.ground ? 7 : 3 + 1.8 * n.rank;
   if (n.kind === 'family') return 3.4 + 6 * n.rank;
   return n.hasImage ? 2.3 : 1.8;
 }
@@ -149,7 +180,12 @@ export class GraphView {
   private w = 1;
   private h = 1;
   private dpr = 1;
-  private stars: HTMLCanvasElement | null = null;
+  /** the distant stars: their own canvas behind the field, drawn once per size and slid by the compositor */
+  private starsEl: HTMLCanvasElement;
+  private starsDrawn = '';
+  private starsAt = '';
+  /** the soft light of each presence, drawn once per colour (radial gradients are the costliest thing a frame makes) */
+  private halos = new Map<string, HTMLCanvasElement>();
 
   private visible = false;
   private raf = 0;
@@ -168,11 +204,20 @@ export class GraphView {
   private ties: TieBasis[] = ['jung', 'inferred', 'site'];
   /** the layout's four forces, as the person set them (forces.ts) */
   private forces: Forces = { ...DEFAULT_FORCES };
+  /** how it is drawn: node size, link thickness, text fade (settings.ts) */
+  private display: Display = { ...DEFAULT_DISPLAY };
+  /** the whole field's arrangement, kept when a local graph opens: what it moved glides back when it closes */
+  private home: { sig: string; xy: Float32Array; alpha: number } | null = null;
+  private homing: { ids: number[]; from: Float32Array; to: Float32Array; t: number; dur: number; alpha: number } | null = null;
+  /** the signature of the field's own nodes: a kept layout belongs to exactly this field */
+  private fieldSig: string;
   private emph: Set<number> | null = null;
   private active = new Map<number, number>();
   private activeEdges: number[] = [];
   private simNodes: VNode[] = [];
   private lastTargetKey = '';
+  /** the layout the shown set was last built for (subject, depth, occurrences, tiers): a target asking for it again is no new layout */
+  private builtKey = '';
   private target: GraphTarget = { subject: null, selected: null, emphasis: null };
 
   // interaction
@@ -183,12 +228,21 @@ export class GraphView {
   /** the touches down on the canvas: a second one makes the gesture a pinch */
   private touches = new Set<number>();
   private pulse = 0;
+  /** seconds since the view woke, for the hovered relations' slow breath and the light that travels along them */
+  private clock = 0;
+  private hoverAt = 0;
+  /** the node a slipping pointer last left, still lit for HOVER_LINGER */
+  private lingerId = -1;
+  private linger = 0;
 
   // camera
   private insets: Insets = { l: 0, t: 0, r: 0, b: 0 };
   private follow = 0; // seconds of "keep framing the subject" left
   private camAnim: { from: ZoomTransform; to: ZoomTransform; t: number; dur: number } | null = null;
   private autoFit = true;
+  /** the framing spring: the world point it holds at the centre of the free space, its log zoom, and their velocities */
+  private camGoal: { x: number; y: number; lk: number } | null = null;
+  private camVel = { x: 0, y: 0, lk: 0 };
   /** the pan's inertia: it coasts on after the pointer lets go */
   private coast: Coast;
   /** a pan (not a pinch, not a node drag) is in progress */
@@ -212,11 +266,22 @@ export class GraphView {
     this.dust = saved.dust;
     this.ties = saved.ties;
     this.kinds = saved.kinds;
+    this.display = saved.display;
     this.gBase = this.g = buildGraph(model);
+    this.fieldSig = sigOf(this.g.nodes.map((n) => n.key).join('|'));
     this.live = new Float32Array(this.g.nodes.length).fill(1);
     this.nodes = this.g.nodes.map((n) => this.makeNode(n));
     this.spawnAll();
+    // the whole field as it was last at rest on this browser: the first view opens on it, settled
+    const kept = loadLayout(this.layoutSig(), this.nodes.length);
+    if (kept) {
+      for (const v of this.nodes) { v.x = kept[v.id * 2]; v.y = kept[v.id * 2 + 1]; }
+      this.home = { sig: this.layoutSig(), xy: kept, alpha: 0 };
+    }
 
+    this.starsEl = document.createElement('canvas');
+    this.starsEl.className = 'gv-stars';
+    this.starsEl.setAttribute('aria-hidden', 'true');
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'gv-canvas';
     this.canvas.setAttribute('role', 'img');
@@ -232,6 +297,7 @@ export class GraphView {
       onKinds: (k) => this.setKinds(k),
       onTies: (bases) => this.setTies(bases),
       onForces: (f) => this.setForces(f),
+      onDisplay: (d) => this.setDisplay(d),
       onSky: (on) => this.setSkyAnchors(on),
       onFit: () => this.reframe(),
     });
@@ -239,7 +305,7 @@ export class GraphView {
     this.root.className = 'gv';
     this.root.inert = true;
     this.root.setAttribute('aria-hidden', 'true');
-    this.root.append(this.canvas, this.tools.root);
+    this.root.append(this.starsEl, this.canvas, this.tools.root);
     parent.append(this.root);
 
     this.sim = forceSimulation<VNode, SimLink>([]).stop().alphaMin(0.012).velocityDecay(0.36);
@@ -255,6 +321,7 @@ export class GraphView {
           // the person took the camera: stop framing for them
           this.follow = 0;
           this.camAnim = null;
+          this.camGoal = null;
           this.autoFit = false;
           if (src.type === 'wheel') {
             this.coast.stop();
@@ -279,6 +346,7 @@ export class GraphView {
         if (this.coast.release(performance.now())) {
           this.follow = 0;
           this.camAnim = null;
+          this.camGoal = null;
           this.autoFit = false;
           this.wake();
         }
@@ -313,7 +381,7 @@ export class GraphView {
   private makeNode(g: GNode): VNode {
     return {
       g, id: g.id, x: 0, y: 0, vx: 0, vy: 0, fx: null, fy: null, r: nodeRadius(g),
-      vis: 0, visT: 0, hl: 1, hlT: 1, live: 1, pinned: false,
+      vis: 0, visT: 0, hl: 1, hlT: 1, hv: 0, live: 1, pinned: false,
       rgb: rgbTriplet(g.colour), glow: rgbTriplet(g.glow), sx: 0, sy: 0, sr: 0, on: false,
     };
   }
@@ -388,6 +456,7 @@ export class GraphView {
     this.root.classList.remove('on');
     this.tools.close();
     this.hover = -1;
+    this.linger = 0;
     this.press = null;
     this.touches.clear();
     this.coast.stop();
@@ -407,21 +476,27 @@ export class GraphView {
     const subject = t.subject ? this.g.byKey.get(t.subject) ?? -1 : -1;
     const selected = t.selected ? this.g.byKey.get(t.selected) ?? -1 : -1;
     const emph = t.emphasis && t.emphasis.length ? new Set(t.emphasis.map((i) => this.g.occurrenceIds[i]).filter((x) => x !== undefined)) : null;
-    const key = `${subject}|${this.depth}|${this.dust ? 1 : 0}|${this.kindSig()}|${selected}|${emph ? emph.size : 0}`;
-    const layoutKey = `${subject}|${this.depth}|${this.dust ? 1 : 0}|${this.kindSig()}`;
+    const layoutKey = this.layoutKey(subject);
+    const key = `${layoutKey}|${selected}|${emph ? emph.size : 0}`;
     const prevSelected = this.selected;
     this.selected = selected;
     this.emph = emph;
     this.tools.setState({ ...this.toolState(), local: subject >= 0 });
     if (key === this.lastTargetKey) return;
-    // a selected occurrence the shown set lacks brings its form in: that is a change of layout too
-    const layoutChanged = layoutKey !== this.lastTargetKey.split('|').slice(0, 3).join('|') || this.active.size === 0 || (selected >= 0 && !this.active.has(selected));
+    // a selected occurrence the shown set lacks brings its form in: that is a change of layout too; a new selection
+    // or emphasis inside the same picture is not (it only lights, and the layout is left at rest). Nor is the first
+    // target after a first show: that show has just built exactly this picture.
+    const layoutChanged = layoutKey !== this.builtKey || this.active.size === 0 || (selected >= 0 && !this.active.has(selected));
     // a new subject, or a selection that is new, is a new frame; filters and forces keep the person's camera
     const reframe = subject !== this.subject || (selected >= 0 && selected !== prevSelected);
     this.lastTargetKey = key;
+    // the whole field is about to give way to a local graph: keep its arrangement, so that closing the local graph
+    // brings the moved nodes home instead of laying the whole field out again
+    if (this.mode === 'global' && subject >= 0 && this.active.size) this.keepHome();
+    // whatever was chosen answers the click the same way: its ring of attention closes in on it and settles
+    if ((selected >= 0 && selected !== prevSelected) || (subject >= 0 && subject !== this.subject)) this.pulse = 1;
     this.subject = subject;
     this.mode = subject >= 0 ? 'local' : 'global';
-    if (selected >= 0 && selected !== prevSelected) this.pulse = 1;
     if (this.visible) {
       if (layoutChanged) this.rebuild(false, reframe);
       else this.refreshLit();
@@ -431,15 +506,26 @@ export class GraphView {
     }
   }
 
+  /**
+   * The free space changed (a reading or a card opened or closed beside the graph). While the graph is framing for
+   * the person, its spring carries the frame into the new space. Once they have taken the camera, their zoom is
+   * theirs: the view slides by the same amount the free space's centre moved, so what they were looking at stays in
+   * the middle of what they can still see, at the scale they chose.
+   */
   setInsets(i: Insets) {
     const same = i.l === this.insets.l && i.t === this.insets.t && i.r === this.insets.r && i.b === this.insets.b;
+    const before = this.usable();
     this.insets = i;
     if (same || !this.visible) return;
     if (this.autoFit || this.follow > 0) {
       this.follow = Math.max(this.follow, 1.2);
       this.wake();
     } else {
-      this.refit(0.9);
+      const after = this.usable();
+      this.coast.stop();
+      const to = zoomIdentity.translate(this.t.x + after.cx - before.cx, this.t.y + after.cy - before.cy).scale(this.t.k);
+      if (this.reduced) this.setCamera(to.x, to.y, to.k);
+      else { this.camAnim = { from: this.t, to, t: 0, dur: 0.9 }; this.wake(); }
     }
   }
 
@@ -463,6 +549,7 @@ export class GraphView {
 
   /** Settle the simulation synchronously (tests, screenshots). */
   settle(ticks = 220) {
+    this.finishHoming();
     for (let i = 0; i < ticks; i++) this.sim.tick();
     this.qtStale = true;
     this.dirty = true;
@@ -485,7 +572,12 @@ export class GraphView {
   }
 
   private toolState(): ToolState {
-    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, kinds: { ...this.kinds }, sky: this.sky.status, skyAsOf: this.sky.asOf, forces: this.forces };
+    return { local: this.mode === 'local', depth: this.depth, dust: this.dust, ties: this.ties, kinds: { ...this.kinds }, sky: this.sky.status, skyAsOf: this.sky.asOf, forces: this.forces, display: this.display };
+  }
+
+  /** What a shown set is built from: the subject, the depth, the occurrences and the tiers. */
+  private layoutKey(subject: number): string {
+    return `${subject}|${this.depth}|${this.dust ? 1 : 0}|${this.kindSig()}`;
   }
 
   /** A signature of the tier flags, for the layout key: switching a tier off re-lays the picture. */
@@ -571,9 +663,51 @@ export class GraphView {
     this.setTarget(this.target);
   }
 
-  /** What the person keeps between visits (depth is per subject, so it is not among them). */
+  /** What the person keeps between visits (depth is per subject, so it is not among them). A few hundred bytes: written at once. */
   private remember() {
-    saveSettings({ forces: this.forces, dust: this.dust, ties: this.ties, kinds: this.kinds });
+    saveSettings({ forces: this.forces, dust: this.dust, ties: this.ties, kinds: this.kinds, display: this.display });
+  }
+
+  /**
+   * Everything that shapes the whole field's arrangement: its nodes, what is drawn, the relations followed, the
+   * forces, the sky. A kept arrangement (between visits, or while a local graph is open) belongs to one signature.
+   */
+  private layoutSig(): string {
+    const f = this.forces;
+    return `${this.fieldSig}|${this.g.nodes.length}|${this.dust ? 1 : 0}|${this.kindSig()}|${this.ties.join(',')}|${f.centre},${f.repel},${f.link},${f.distance}|${this.sky.on ? 1 : 0}`;
+  }
+
+  /** Keep the whole field's arrangement as it stands (a local graph is about to open over it). */
+  private keepHome() {
+    // mid-glide, home is where the glide is going, not where the nodes are on the way
+    if (this.homing && this.homing.to.length === this.nodes.length * 2) {
+      this.home = { sig: this.layoutSig(), xy: this.homing.to.slice(), alpha: this.homing.alpha };
+      return;
+    }
+    const xy = new Float32Array(this.nodes.length * 2);
+    for (const v of this.nodes) { xy[v.id * 2] = v.x; xy[v.id * 2 + 1] = v.y; }
+    this.home = { sig: this.layoutSig(), xy, alpha: this.sim.alpha() };
+  }
+
+  /** The whole field has come to rest: keep it on this browser for the next visit (written when the page is idle). */
+  private keepLayout() {
+    if (this.mode !== 'global' || this.g !== this.gBase || this.homing || !this.active.size) return;
+    const xy = new Float32Array(this.nodes.length * 2);
+    for (const v of this.nodes) { xy[v.id * 2] = v.x; xy[v.id * 2 + 1] = v.y; }
+    const sig = this.layoutSig();
+    const write = () => saveLayout(sig, xy);
+    const idle = (window as unknown as { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    if (idle) idle(write, { timeout: 2000 });
+    else window.setTimeout(write, 200);
+  }
+
+  /** The drawing only: node size, link thickness, how soon names appear. The layout is not touched. */
+  private setDisplay(d: Display) {
+    this.display = { ...d };
+    this.remember();
+    this.pushTools();
+    this.dirty = true;
+    this.wake();
   }
 
   private setDust(on: boolean) {
@@ -609,6 +743,7 @@ export class GraphView {
     this.remember();
     this.pushTools();
     if (this.visible) {
+      this.finishHoming();
       this.applyForces();
       this.sim.alpha(Math.max(this.sim.alpha(), 0.5));
       this.wake();
@@ -625,16 +760,24 @@ export class GraphView {
       // time-aware (audit T1): the ties and instances of the live hold harder than those of the ghosts; exactly as drawn in 'all time'
       str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f)
         * (l.e.kind === 'tie' || l.e.kind === 'instance' ? liveFactor(this.nodes[l.e.s].live, this.nodes[l.e.t].live, on) : 1),
-      charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime, v.g.rank, local, f) * dustLiveFactor(v.g.kind, v.live, on),
+      charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime || v.g.ground, v.g.rank, local, f) * dustLiveFactor(v.g.kind, v.live, on),
       centre: centreStrength(local, f),
       reach: chargeReach(f),
     };
   }
 
+  /** The form an occurrence belongs to, when it is on stage: it carries the occurrence's push in the far field. */
+  private parentOf = (v: VNode): VNode | null => {
+    if (v.g.kind !== 'occurrence') return null;
+    const fi = this.g.byKey.get(`f:${this.model.occ[v.g.occIdx].familyId}`);
+    return fi !== undefined && this.active.has(fi) ? this.nodes[fi] : null;
+  };
+
   private applyForces() {
     const fns = this.forceFns();
     (this.sim.force('link') as ForceLink<VNode, SimLink> | undefined)?.distance(fns.dist).strength(fns.str);
-    (this.sim.force('charge') as ForceManyBody<VNode> | undefined)?.strength(fns.charge).distanceMax(fns.reach);
+    (this.sim.force('charge') as FieldForce<VNode> | undefined)?.strength(fns.charge).distanceMax(fns.reach);
+    (this.sim.force('cluster') as ReturnType<typeof forceCluster<VNode>> | undefined)?.strength(fns.charge);
     (this.sim.force('x') as ForceX<VNode> | undefined)?.strength(fns.centre);
     (this.sim.force('y') as ForceY<VNode> | undefined)?.strength(fns.centre);
   }
@@ -666,8 +809,14 @@ export class GraphView {
     const nb = this.computeActive();
     const wasOn = new Set<number>();
     for (const v of this.nodes) if (v.vis >= GHOST_VIS || v.visT > 0.5) wasOn.add(v.id);
+    this.finishHoming();
     this.active = nb.dist;
     this.activeEdges = nb.edges;
+    this.builtKey = this.layoutKey(this.subject);
+    // back to the whole field as it was left: the nodes the local layout moved glide home, and nothing is laid out again
+    // (a local graph after a local graph keeps the whole field's arrangement waiting; the whole field takes it up)
+    const home = this.mode === 'global' && this.home && this.home.sig === this.layoutSig() && this.home.xy.length === this.nodes.length * 2 ? this.home : null;
+    if (this.mode === 'global') this.home = null;
 
     // enter / leave
     const entering: number[] = [];
@@ -678,8 +827,8 @@ export class GraphView {
       if (first && isOn) v.vis = 1;
       if (first && !isOn) v.vis = 0;
     }
-    // newcomers burst out of the nearest thing already there
-    if (!first) {
+    // newcomers burst out of the nearest thing already there (a node going home needs no burst: its place is known)
+    if (!first && !home) {
       const order = entering.slice().sort((a, b) => (this.active.get(a) ?? 0) - (this.active.get(b) ?? 0));
       const placed = new Set<number>(wasOn);
       for (const id of order) {
@@ -731,11 +880,16 @@ export class GraphView {
     const fns = this.forceFns();
     const n = this.simNodes.length;
     const decay = n > 1500 ? 0.032 : n > 700 ? 0.026 : 0.0228;
+    // collisions are the forms' (the dust keeps its distance by the cluster force): the dust is most of the nodes
+    const heavy = (v: VNode) => v.g.kind !== 'occurrence' || this.parentOf(v) === null;
+    const collide = forceCollide<VNode>((v) => v.r * 1.12 + 2.2).strength(0.7);
+    const collideHeavy = Object.assign((a: number) => collide(a), { initialize: (ns: VNode[], random: () => number) => collide.initialize(ns.filter(heavy), random) });
     this.sim
       .nodes(this.simNodes)
       .force('link', forceLink<VNode, SimLink>(links).distance(fns.dist).strength(fns.str).iterations(1))
-      .force('charge', forceManyBody<VNode>().strength(fns.charge).theta(0.95).distanceMax(fns.reach))
-      .force('collide', forceCollide<VNode>((v) => v.r * 1.12 + 2.2).strength(0.7))
+      .force('charge', forceField<VNode>().parent(this.parentOf).strength(fns.charge).theta(0.95).distanceMax(fns.reach))
+      .force('cluster', forceCluster<VNode>().group(this.parentOf).strength(fns.charge).distanceMax(fns.reach))
+      .force('collide', collideHeavy)
       .force('x', forceX<VNode>(0).strength(fns.centre))
       .force('y', forceY<VNode>(0).strength(fns.centre))
       .force('heart', local ? null : (() => {
@@ -750,9 +904,22 @@ export class GraphView {
       .alpha(first ? 0.9 : Math.max(this.sim.alpha(), 0.62))
       .alphaTarget(0);
 
-    if (first) {
-      // arrive already composed: the first screenful of motion is a settle, not an explosion
-      const warm = Math.min(120, Math.round(36000 / Math.max(60, n)));
+    if (home) {
+      const ids: number[] = [];
+      for (const v of this.nodes) {
+        v.vx = v.vy = 0;
+        if (Math.abs(v.x - home.xy[v.id * 2]) > 0.05 || Math.abs(v.y - home.xy[v.id * 2 + 1]) > 0.05) ids.push(v.id);
+      }
+      const from = new Float32Array(ids.length * 2);
+      ids.forEach((id, i) => { from[i * 2] = this.nodes[id].x; from[i * 2 + 1] = this.nodes[id].y; });
+      this.homing = { ids, from, to: home.xy, t: 0, dur: this.reduced ? 0.01 : HOME_SECONDS, alpha: home.alpha };
+      // the field is at rest where it was: the layout waits for the glide, then carries on only if it was still settling
+      this.sim.alpha(0);
+    } else if (first) {
+      // arrive already composed: the first screenful of motion is a settle, not an explosion (a whole field kept
+      // between visits arrives through `home` above, already at rest). A fixed count, never a time budget: the same
+      // field must settle into the same arrangement on every machine.
+      const warm = Math.min(120, Math.round(90000 / Math.max(60, n)));
       for (let i = 0; i < warm; i++) this.sim.tick();
       this.sim.alpha(0.35);
     }
@@ -771,14 +938,26 @@ export class GraphView {
     this.dirty = true;
   }
 
-  /** Which nodes are lit given hover and emphasis. */
+  /** The glide home ends where it is going: the nodes stand in their places and the layout carries on as it was. */
+  private finishHoming() {
+    const h = this.homing;
+    if (!h) return;
+    this.homing = null;
+    h.ids.forEach((id) => { const v = this.nodes[id]; if (v) { v.x = h.to[id * 2]; v.y = h.to[id * 2 + 1]; v.vx = v.vy = 0; } });
+    if (h.alpha > this.sim.alphaMin()) this.sim.alpha(Math.max(this.sim.alpha(), h.alpha));
+    this.qtStale = true;
+    this.dirty = true;
+  }
+
+  /** Which nodes are lit given hover (or a hover that has only just slipped off) and emphasis. */
   private refreshLit() {
     const g = this.g;
     const emph = this.emph;
-    if (this.hover >= 0 && this.active.has(this.hover)) {
-      const lit = new Set<number>([this.hover]);
-      for (const nb of g.adj[this.hover]) if (this.active.has(nb)) lit.add(nb);
-      for (const v of this.nodes) v.hlT = lit.has(v.id) ? 1 : 0.13;
+    const lit0 = this.hover >= 0 ? this.hover : this.linger > 0 ? this.lingerId : -1;
+    if (lit0 >= 0 && this.active.has(lit0)) {
+      const lit = new Set<number>([lit0]);
+      for (const nb of g.adj[lit0]) if (this.active.has(nb)) lit.add(nb);
+      for (const v of this.nodes) v.hlT = lit.has(v.id) ? 1 : HOVER_DIM;
     } else if (emph) {
       const fams = new Set<number>();
       for (const id of emph) {
@@ -815,23 +994,45 @@ export class GraphView {
   /** Advance everything that moves. Returns whether another frame is wanted. */
   private step(dt: number): boolean {
     let busy = false;
+    this.clock += dt;
 
-    // simulation: a tick or two per frame, as the frame budget allows
-    if (this.sim.alpha() > this.sim.alphaMin() || this.dragging >= 0) {
+    // the nodes a local graph moved glide back to their place in the whole field
+    if (this.homing) {
+      const h = this.homing;
+      h.t = Math.min(1, h.t + dt / h.dur);
+      const e = ease(h.t);
+      h.ids.forEach((id, i) => {
+        const v = this.nodes[id];
+        v.x = h.from[i * 2] + (h.to[id * 2] - h.from[i * 2]) * e;
+        v.y = h.from[i * 2 + 1] + (h.to[id * 2 + 1] - h.from[i * 2 + 1]) * e;
+      });
+      if (h.t >= 1) this.finishHoming();
+      this.qtStale = true;
+      this.dirty = true;
+      busy = true;
+    }
+
+    // simulation: up to two ticks a frame, as the frame budget allows
+    const wasRunning = this.sim.alpha() > this.sim.alphaMin();
+    if (wasRunning || this.dragging >= 0) {
       const t0 = performance.now();
       let n = 0;
       do {
         this.sim.tick();
         n++;
-      } while (n < 3 && performance.now() - t0 < 5);
+      } while (n < TICKS_PER_FRAME && performance.now() - t0 < TICK_BUDGET);
       this.qtStale = true;
       busy = true;
       this.dirty = true;
+      // the whole field has come to rest: keep it for the next visit
+      if (this.sim.alpha() <= this.sim.alphaMin() && this.dragging < 0) this.keepLayout();
     }
 
-    // presence / lit tweens
+    // presence / lit / hover tweens: dimming is quick, coming back is a little slower, so a passing pointer is calm
     const kv = 1 - Math.exp(-dt * (this.reduced ? 30 : 4.2));
-    const kh = 1 - Math.exp(-dt * (this.reduced ? 30 : 11));
+    const kDim = 1 - Math.exp(-dt * (this.reduced ? 30 : 13));
+    const kLift = 1 - Math.exp(-dt * (this.reduced ? 30 : 7.5));
+    const kHov = 1 - Math.exp(-dt * (this.reduced ? 30 : 14));
     for (const v of this.nodes) {
       if (v.vis !== v.visT) {
         v.vis += (v.visT - v.vis) * kv;
@@ -840,11 +1041,29 @@ export class GraphView {
         this.dirty = true;
       }
       if (v.hl !== v.hlT) {
-        v.hl += (v.hlT - v.hl) * kh;
+        v.hl += (v.hlT - v.hl) * (v.hlT < v.hl ? kDim : kLift);
         if (Math.abs(v.hlT - v.hl) < 0.006) v.hl = v.hlT;
         busy = true;
         this.dirty = true;
       }
+      const hvT = v.id === this.hover ? 1 : 0;
+      if (v.hv !== hvT) {
+        v.hv += (hvT - v.hv) * kHov;
+        if (Math.abs(hvT - v.hv) < 0.01) v.hv = hvT;
+        busy = true;
+        this.dirty = true;
+      }
+    }
+    // a pointer that slipped off a node: its neighbourhood stays lit for a breath, then the field comes back
+    if (this.linger > 0) {
+      this.linger -= dt;
+      busy = true;
+      if (this.linger <= 0) { this.linger = 0; this.lingerId = -1; this.refreshLit(); }
+    }
+    // the hovered node's relations breathe, and a light travels out along them: drawn while the pointer rests there
+    if (this.hover >= 0 && !this.reduced) {
+      busy = true;
+      this.dirty = true;
     }
     if (this.pulse > 0) {
       this.pulse = Math.max(0, this.pulse - dt / 1.6);
@@ -901,14 +1120,21 @@ export class GraphView {
       const a = this.camAnim;
       a.t = Math.min(1, a.t + dt / a.dur);
       const e = ease(a.t);
+      // the world point at the centre of the view travels in a straight line while the zoom eases geometrically,
+      // so what is in the middle stays in the middle as the scale changes (no swoop)
+      const cx = this.w / 2;
+      const cy = this.h / 2;
       const k = a.from.k * Math.pow(a.to.k / a.from.k, e);
-      this.setCamera(a.from.x + (a.to.x - a.from.x) * e, a.from.y + (a.to.y - a.from.y) * e, k);
+      const fx = (cx - a.from.x) / a.from.k;
+      const fy = (cy - a.from.y) / a.from.k;
+      const tx = (cx - a.to.x) / a.to.k;
+      const ty = (cy - a.to.y) / a.to.k;
+      this.setCamera(cx - (fx + (tx - fx) * e) * k, cy - (fy + (ty - fy) * e) * k, k);
       if (a.t >= 1) this.camAnim = null;
       busy = true;
-    } else if (this.follow > 0 && this.autoFit) {
-      this.follow -= dt;
-      this.followCamera(dt);
-      busy = true;
+    } else if (this.autoFit && (this.follow > 0 || this.camGoal)) {
+      if (this.follow > 0) this.follow -= dt;
+      if (this.followCamera(dt)) busy = true;
     }
     // the pan's inertia: the release's velocity, decayed; every step goes through setCamera (NaN-guarded)
     if (this.coast.moving) {
@@ -959,15 +1185,55 @@ export class GraphView {
     return { x: u.cx - c.x * k, y: u.cy - c.y * k, k };
   }
 
-  private followCamera(dt: number) {
-    const tgt = this.fitCamera();
-    const s = 1 - Math.exp(-dt * (this.reduced ? 20 : 3.2));
-    const k = this.t.k * Math.pow(tgt.k / this.t.k, s);
-    this.setCamera(this.t.x + (tgt.x - this.t.x) * s, this.t.y + (tgt.y - this.t.y) * s, k);
+  /**
+   * Keep framing what is shown, on a critically damped spring: the camera starts gently, arrives without overshoot,
+   * and a frame that moves (a layout still settling, a reading opening beside it) is followed without a jolt. The
+   * spring holds the world point at the centre of the free space and the log of the zoom, so the subject stays put
+   * on screen while the scale changes. Once the follow time is up it finishes reaching its last goal and rests.
+   * Returns whether it is still moving.
+   */
+  private followCamera(dt: number): boolean {
+    const u = this.usable();
+    const k0 = this.t.k;
+    const pos = { x: (u.cx - this.t.x) / k0, y: (u.cy - this.t.y) / k0, lk: Math.log(k0) };
+    if (this.follow > 0 || !this.camGoal) {
+      const fit = this.fitCamera();
+      this.camGoal = { x: (u.cx - fit.x) / fit.k, y: (u.cy - fit.y) / fit.k, lk: Math.log(fit.k) };
+    }
+    const goal = this.camGoal;
+    if (this.reduced) {
+      this.camVel = { x: 0, y: 0, lk: 0 };
+      const k = Math.exp(goal.lk);
+      this.setCamera(u.cx - goal.x * k, u.cy - goal.y * k, k);
+      if (this.follow <= 0) this.camGoal = null;
+      return this.follow > 0;
+    }
+    const w = CAM_SPRING;
+    const v = this.camVel;
+    // semi-implicit Euler on x'' = w²(goal - x) - 2w x' (stable at the clock's longest frame)
+    v.x += (w * w * (goal.x - pos.x) - 2 * w * v.x) * dt;
+    v.y += (w * w * (goal.y - pos.y) - 2 * w * v.y) * dt;
+    v.lk += (w * w * (goal.lk - pos.lk) - 2 * w * v.lk) * dt;
+    const x = pos.x + v.x * dt;
+    const y = pos.y + v.y * dt;
+    const lk = pos.lk + v.lk * dt;
+    const k = clampZoom(Math.exp(lk));
+    this.setCamera(u.cx - x * k, u.cy - y * k, k);
+    // at rest: within a fraction of a pixel and barely moving, once nothing more is being followed
+    const px = Math.hypot(goal.x - x, goal.y - y) * k + Math.abs(goal.lk - lk) * 400;
+    const speed = Math.hypot(v.x, v.y) * k + Math.abs(v.lk) * 400;
+    if (this.follow <= 0 && px < 0.3 && speed < 2) {
+      this.camGoal = null;
+      this.camVel = { x: 0, y: 0, lk: 0 };
+      return false;
+    }
+    return true;
   }
 
   private refit(seconds: number) {
     this.coast.stop();
+    this.camGoal = null;
+    this.camVel = { x: 0, y: 0, lk: 0 };
     const to = this.fitCamera();
     if (seconds <= 0 || this.reduced) {
       this.camAnim = null;
@@ -1003,6 +1269,7 @@ export class GraphView {
     this.coast.stop();
     this.follow = 0;
     this.camAnim = null;
+    this.camGoal = null;
     this.autoFit = false;
     const k = Math.max(MIN_K, Math.min(MAX_K, this.t.k * f));
     const cx = this.w / 2;
@@ -1026,7 +1293,7 @@ export class GraphView {
     this.dpr = dpr;
     this.canvas.width = Math.round(w * dpr);
     this.canvas.height = Math.round(h * dpr);
-    this.stars = null;
+    this.drawStars();
     this.qtStale = true;
     if (this.active.size && (this.autoFit || first)) this.refit(0);
     this.dirty = true;
@@ -1051,17 +1318,17 @@ export class GraphView {
     const slop = (coarse ? 15 : 7) / k;
     let best: VNode | null = null;
     let bestScore = Infinity;
-    const search = (this.maxRadius() * Math.pow(k, 0.5) + slop * k) / k + 2;
+    const search = (this.maxRadius() * Math.pow(k, 0.55) * this.display.size + slop * k) / k + 2;
     this.tree().visit((node, x0, y0, x1, y1) => {
       if (!node.length) {
         let n: typeof node | undefined = node;
         do {
           const v = (n as unknown as { data: VNode }).data;
           const d = Math.hypot(v.x - wx, v.y - wy);
-          const reach = (v.r * Math.pow(k, 0.5)) / k + slop;
+          const reach = (v.r * Math.pow(k, 0.55) * this.display.size) / k + slop;
           if (d <= reach) {
-            // nearest edge wins; bigger things win ties so a form is never hidden under its own dust
-            const score = d / reach - (v.g.kind === 'archetype' ? 0.6 : v.g.kind === 'body' ? 0.5 : v.g.kind === 'family' ? 0.3 : 0);
+            // nearest edge wins; bigger things win ties so a form (or a small theoretic) is never hidden under the dust
+            const score = d / reach - (v.g.kind === 'archetype' ? 0.6 : v.g.kind === 'body' ? 0.5 : v.g.kind === 'theoretic' ? 0.4 : v.g.kind === 'family' ? 0.3 : 0);
             if (score < bestScore) { bestScore = score; best = v; }
           }
           n = (n as unknown as { next?: typeof node }).next;
@@ -1133,6 +1400,7 @@ export class GraphView {
       const press = this.press;
       if (!press.moved && Math.hypot(p.x - press.x, p.y - press.y) > 4) {
         press.moved = true;
+        this.finishHoming();
         this.dragging = press.id;
         const v = this.nodes[press.id];
         v.fx = v.x;
@@ -1153,14 +1421,24 @@ export class GraphView {
     }
     if (ev.pointerType !== 'mouse') return;
     const hit = this.pick(p.x, p.y);
-    const id = hit ? hit.id : -1;
-    if (id !== this.hover) {
-      this.hover = id;
-      this.canvas.style.cursor = id >= 0 ? 'pointer' : '';
-      this.refreshLit();
-      this.wake();
-    }
+    this.setHover(hit ? hit.id : -1);
   };
+
+  /**
+   * The pointer is over this node now (or none). Slipping off a node does not flash the whole field back at once:
+   * for a breath (HOVER_LINGER) its neighbourhood stays lit, so moving from one node to the next stays calm.
+   */
+  private setHover(id: number) {
+    if (id === this.hover) return;
+    if (id < 0 && this.hover >= 0 && !this.reduced) { this.lingerId = this.hover; this.linger = HOVER_LINGER; }
+    else this.linger = 0;
+    // a new node: its relations' light starts from it afresh
+    if (id >= 0) this.hoverAt = this.clock;
+    this.hover = id;
+    this.canvas.style.cursor = id >= 0 ? 'pointer' : '';
+    this.refreshLit();
+    this.wake();
+  }
 
   /** Let go of the node the pointer holds: a second finger has made the gesture a pinch. */
   private releasePress() {
@@ -1204,12 +1482,7 @@ export class GraphView {
   };
 
   private onLeave = () => {
-    if (this.hover >= 0 && !this.press) {
-      this.hover = -1;
-      this.canvas.style.cursor = '';
-      this.refreshLit();
-      this.wake();
-    }
+    if (this.hover >= 0 && !this.press) this.setHover(-1);
   };
 
   private onKey = (ev: KeyboardEvent) => {
@@ -1229,14 +1502,21 @@ export class GraphView {
   };
 
   // ── drawing ──────────────────────────────────────────────────────────────
-  private starLayer(): HTMLCanvasElement {
-    if (this.stars) return this.stars;
-    const c = document.createElement('canvas');
+  /** The distant stars, drawn once for this size onto their own canvas behind the field. */
+  private drawStars() {
     const pad = 80;
+    const sig = `${this.w}x${this.h}@${this.dpr}`;
+    if (sig === this.starsDrawn) return;
+    this.starsDrawn = sig;
+    const c = this.starsEl;
     c.width = Math.round((this.w + pad * 2) * this.dpr);
     c.height = Math.round((this.h + pad * 2) * this.dpr);
-    const x = c.getContext('2d')!;
-    x.scale(this.dpr, this.dpr);
+    c.style.width = `${this.w + pad * 2}px`;
+    c.style.height = `${this.h + pad * 2}px`;
+    const x = c.getContext('2d');
+    if (!x) return;
+    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    x.clearRect(0, 0, this.w + pad * 2, this.h + pad * 2);
     const n = Math.round(((this.w + pad * 2) * (this.h + pad * 2)) / 5200);
     for (let i = 0; i < n; i++) {
       const px = hash01('sx', i) * (this.w + pad * 2);
@@ -1248,7 +1528,23 @@ export class GraphView {
       x.arc(px, py, rr, 0, Math.PI * 2);
       x.fill();
     }
-    this.stars = c;
+  }
+
+  /** The soft light of a presence in one colour: a radial gradient drawn once and stamped from then on. */
+  private halo(trip: string): HTMLCanvasElement {
+    let c = this.halos.get(trip);
+    if (c) return c;
+    const S = 64;
+    c = document.createElement('canvas');
+    c.width = c.height = S;
+    const x = c.getContext('2d')!;
+    const gr = x.createRadialGradient(S / 2, S / 2, S * 0.065, S / 2, S / 2, S / 2);
+    gr.addColorStop(0, rgba(trip, 1));
+    gr.addColorStop(1, rgba(trip, 0));
+    x.fillStyle = gr;
+    x.fillRect(0, 0, S, S);
+    if (this.halos.size > 900) this.halos.clear();
+    this.halos.set(trip, c);
     return c;
   }
 
@@ -1260,16 +1556,20 @@ export class GraphView {
     return 11.5 * Math.min(1.15, 0.92 + 0.08 * k);
   }
 
-  private measure(text: string, font: string): number {
-    const key = `${font}|${text}`;
+  /**
+   * A label's width. Text scales with its size, so each name is measured once per weight at a reference size and
+   * scaled: a zoom, which changes every label's size every frame, never measures again.
+   */
+  private measure(text: string, weight: number, size: number): number {
+    const key = `${weight}|${text}`;
     let w = this.labelW.get(key);
     if (w === undefined) {
-      this.ctx.font = font;
+      this.ctx.font = `${weight} 100px ${SERIF}`;
       w = this.ctx.measureText(text).width;
       this.labelW.set(key, w);
-      if (this.labelW.size > 4000) this.labelW.clear();
+      if (this.labelW.size > 6000) this.labelW.clear();
     }
-    return w;
+    return (w * size) / 100;
   }
 
   private draw() {
@@ -1280,26 +1580,26 @@ export class GraphView {
     const ty = this.t.y;
     const local = this.mode === 'local';
     const kEff = local ? k * 1.4 : k;
+    const size = this.display.size;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    // distant stars drift a little against the camera: depth without noise
-    const st = this.starLayer();
-    ctx.globalAlpha = 0.9;
-    ctx.drawImage(st, -80 + (tx * 0.035) % 80, -80 + (ty * 0.035) % 80, st.width / this.dpr, st.height / this.dpr);
-    ctx.globalAlpha = 1;
+    // distant stars drift a little against the camera: depth without noise (their own layer; only its offset moves)
+    const at = `translate3d(${(-80 + ((tx * 0.035) % 80)).toFixed(1)}px, ${(-80 + ((ty * 0.035) % 80)).toFixed(1)}px, 0)`;
+    if (at !== this.starsAt) { this.starsAt = at; this.starsEl.style.transform = at; }
 
     // screen positions of what is on stage
     const margin = 90;
     const stage: VNode[] = [];
-    const grow = Math.pow(k, 0.55);
+    const grow = Math.pow(k, 0.55) * size;
     // level of detail: the dust and the strands recede as the whole field comes into view
     const dustK = local ? 1 : 0.5 + 0.5 * smoothstep(0.55, 1.5, k);
     for (const v of this.nodes) {
       if (v.vis < 0.012) { v.on = false; continue; }
       v.sx = tx + v.x * k;
       v.sy = ty + v.y * k;
-      v.sr = Math.max(v.g.kind === 'occurrence' ? 1.15 : 2.4, v.r * grow);
+      // the hovered node swells a little, as a thing under the hand does
+      v.sr = Math.max(v.g.kind === 'occurrence' ? 1.15 : v.g.kind === 'theoretic' ? 2.1 : 2.4, v.r * grow) * (1 + 0.18 * v.hv);
       v.on = v.sx > -margin && v.sx < w + margin && v.sy > -margin && v.sy < h + margin;
       if (v.on) stage.push(v);
     }
@@ -1308,48 +1608,79 @@ export class GraphView {
     if (!local && this.g.bodyIds.length && this.sky.source) this.drawSkyRing(ctx, k);
     this.drawEdges(ctx, k, kEff, local, hov);
 
-    // halos, additive: the soft light of each presence
+    // halos, additive: the soft light of each presence, stamped from one sprite per colour
     ctx.globalCompositeOperation = 'lighter';
     for (const v of stage) {
       const kind = v.g.kind;
       if (kind === 'occurrence') continue;
       const a = v.vis * v.hl * v.live;
       if (a < 0.02) continue;
-      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'theoretic' ? (v.g.ground ? 4.1 : 3.1) : kind === 'body' ? 3.2 : 2.7);
-      const strength = kind === 'archetype' ? 0.36 : kind === 'theoretic' ? (v.g.ground ? 0.42 : 0.16 + 0.1 * v.g.rank) : kind === 'body' ? 0.3 : 0.15 + 0.09 * v.g.rank;
-      const gr = ctx.createRadialGradient(v.sx, v.sy, v.sr * 0.4, v.sx, v.sy, rad);
-      gr.addColorStop(0, rgba(v.glow, strength * a));
-      gr.addColorStop(1, rgba(v.glow, 0));
-      ctx.fillStyle = gr;
-      ctx.beginPath();
-      ctx.arc(v.sx, v.sy, rad, 0, Math.PI * 2);
-      ctx.fill();
+      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'theoretic' ? (v.g.ground ? 5.2 : 3.6) : kind === 'body' ? 3.2 : 2.7);
+      const strength = kind === 'archetype' ? 0.36 : kind === 'theoretic' ? (v.g.ground ? 0.4 : 0.2 + 0.1 * v.g.rank) : kind === 'body' ? 0.3 : 0.15 + 0.09 * v.g.rank;
+      ctx.globalAlpha = Math.min(1, strength * a * (1 + 0.5 * v.hv));
+      ctx.drawImage(this.halo(v.glow), v.sx - rad, v.sy - rad, rad * 2, rad * 2);
     }
+    ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
 
-    // dust first (under), then forms, then archetypes
-    for (const pass of ['occurrence', 'family', 'archetype', 'body'] as const) {
+    // the dust: one path per colour and strength, so three thousand points cost a few hundred fills
+    const dust = new Map<string, { trip: string; a: number; pts: number[] }>();
+    const hollow: VNode[] = [];
+    let sel: VNode | null = null;
+    for (const v of stage) {
+      if (v.g.kind !== 'occurrence') continue;
+      const a = v.vis * (0.28 + 0.72 * v.hl) * v.live * dustK;
+      if (a < 0.015) continue;
+      if (!v.g.placed) { hollow.push(v); continue; }
+      if (v.id === this.selected) { sel = v; continue; }
+      const fa = Math.round((0.62 + 0.3 * (v.hl > 0.9 ? 1 : 0)) * a * 24) / 24;
+      if (fa < 0.015) continue;
+      const bk = `${v.rgb}|${fa}`;
+      let b = dust.get(bk);
+      if (!b) dust.set(bk, (b = { trip: v.rgb, a: fa, pts: [] }));
+      b.pts.push(v.sx, v.sy, v.sr);
+    }
+    for (const b of dust.values()) {
+      ctx.fillStyle = rgba(b.trip, b.a);
+      ctx.beginPath();
+      const p = b.pts;
+      for (let i = 0; i < p.length; i += 3) {
+        const r = p[i + 2];
+        // a point this small is drawn as a square of the same area: the eye cannot tell, the rasteriser can
+        if (r < 1.5) ctx.rect(p[i] - r * 0.886, p[i + 1] - r * 0.886, r * 1.772, r * 1.772);
+        else { ctx.moveTo(p[i] + r, p[i + 1]); ctx.arc(p[i], p[i + 1], r, 0, Math.PI * 2); }
+      }
+      ctx.fill();
+    }
+    if (sel) {
+      const a = sel.vis * (0.28 + 0.72 * sel.hl) * sel.live * dustK;
+      ctx.fillStyle = rgba(sel.rgb, a);
+      ctx.beginPath();
+      ctx.arc(sel.sx, sel.sy, sel.sr * 1.9, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // no place on the globe (an occurrence with no recorded place; a symbol with no placed instance): a hollow,
+    // dashed ring, so its absence from the globe and from every walk is visible, not silent
+    const hollowRing = (v: VNode, a: number) => {
+      ctx.lineWidth = 1;
+      ctx.setLineDash([2, 2.5]);
+      ctx.strokeStyle = rgba(v.rgb, 0.85 * a);
+      ctx.beginPath();
+      ctx.arc(v.sx, v.sy, Math.max(2.5, v.sr), 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    };
+    for (const v of hollow) hollowRing(v, v.vis * (0.28 + 0.72 * v.hl) * v.live * dustK);
+
+    // then forms, theoretics, archetypes and bodies
+    for (const pass of ['family', 'theoretic', 'archetype', 'body'] as const) {
       for (const v of stage) {
         if (v.g.kind !== pass) continue;
-        const a = v.vis * (0.28 + 0.72 * v.hl) * (pass === 'occurrence' ? v.live * dustK : 0.35 + 0.65 * v.live);
+        const a = v.vis * (0.28 + 0.72 * v.hl) * (0.35 + 0.65 * v.live);
         if (a < 0.015) continue;
-        if (!v.g.placed && pass !== 'body') {
-          // no place on the globe (an occurrence with no recorded place; a symbol with no placed instance): a hollow,
-          // dashed ring, so its absence from the globe and from every walk is visible, not silent
-          ctx.lineWidth = 1;
-          ctx.setLineDash([2, 2.5]);
-          ctx.strokeStyle = rgba(v.rgb, 0.85 * a);
-          ctx.beginPath();
-          ctx.arc(v.sx, v.sy, Math.max(2.5, v.sr), 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        } else if (pass === 'occurrence') {
-          const sel = v.id === this.selected;
-          ctx.fillStyle = rgba(v.rgb, (sel ? 1 : 0.62 + 0.3 * (v.hl > 0.9 ? 1 : 0)) * a);
-          ctx.beginPath();
-          ctx.arc(v.sx, v.sy, v.sr * (sel ? 1.9 : 1), 0, Math.PI * 2);
-          ctx.fill();
-        } else if (pass === 'body') {
+        // (a theoretic is a concept: its place is its ties', so it is always drawn as the seed it is)
+        if (!v.g.placed && pass !== 'body' && pass !== 'theoretic') { hollowRing(v, a); continue; }
+        if (pass === 'body') {
           // a body is a point of light on a thin ring: a star, not a dot of the field
           const gr = ctx.createRadialGradient(v.sx, v.sy, 0, v.sx, v.sy, v.sr);
           gr.addColorStop(0, rgba('255 255 255', 0.98 * a));
@@ -1374,6 +1705,28 @@ export class GraphView {
           ctx.beginPath();
           ctx.arc(v.sx, v.sy, v.sr + 0.5, 0, Math.PI * 2);
           ctx.stroke();
+        } else if (pass === 'theoretic') {
+          // a theoretic is a seed: a small bright body in its own colour inside a thin ring of the same light,
+          // the ring set off by a hair of dark so it reads as a concept, not a form; the ground carries a second ring
+          ctx.fillStyle = rgba(v.rgb, 0.95 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, v.sr, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = rgba('255 255 255', 0.55 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, Math.max(0.7, v.sr * 0.38), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = rgba(v.rgb, 0.62 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, v.sr + 2.4, 0, Math.PI * 2);
+          ctx.stroke();
+          if (v.g.ground) {
+            ctx.strokeStyle = rgba(v.rgb, 0.3 * a);
+            ctx.beginPath();
+            ctx.arc(v.sx, v.sy, v.sr + 5.6, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         } else {
           const gr = ctx.createRadialGradient(v.sx - v.sr * 0.3, v.sy - v.sr * 0.34, v.sr * 0.08, v.sx, v.sy, v.sr);
           gr.addColorStop(0, rgba('255 255 255', 0.95 * a));
@@ -1401,7 +1754,10 @@ export class GraphView {
       ctx.arc(v.sx, v.sy, v.sr + extra, 0, Math.PI * 2);
       ctx.stroke();
     };
-    if (this.subject >= 0) ring(this.nodes[this.subject], 7, 0.85);
+    if (this.subject >= 0) {
+      const p = this.selected >= 0 ? 0 : this.pulse;
+      ring(this.nodes[this.subject], 7 + p * 12, 0.85 - p * 0.4);
+    }
     if (this.selected >= 0) {
       const v = this.nodes[this.selected];
       ring(v, 5 + this.pulse * 14, 0.9 - this.pulse * 0.4);
@@ -1467,9 +1823,10 @@ export class GraphView {
       bucket.segs.push(a.sx, a.sy, b.sx, b.sy);
     }
     ctx.lineCap = 'round';
+    const lw = this.display.links;
     for (const bkt of buckets.values()) {
       ctx.strokeStyle = rgba(bkt.trip, bkt.a);
-      ctx.lineWidth = bkt.st.width;
+      ctx.lineWidth = bkt.st.width * lw;
       ctx.setLineDash(bkt.st.dash);
       ctx.beginPath();
       const s = bkt.segs;
@@ -1479,33 +1836,78 @@ export class GraphView {
       }
       ctx.stroke();
     }
-    // strands of the hovered node, lit in the colour of the node they lead to
-    for (const e of hot) {
-      const a = this.nodes[e.s];
-      const b = this.nodes[e.t];
-      const style = STYLE[styleOf(e)];
-      const gr = ctx.createLinearGradient(a.sx, a.sy, b.sx, b.sy);
-      gr.addColorStop(0, rgba(a.rgb, 0.85));
-      gr.addColorStop(1, rgba(b.rgb, 0.85));
-      ctx.strokeStyle = gr;
-      ctx.lineWidth = style.width + 0.5;
-      ctx.setLineDash(style.dash);
-      ctx.beginPath();
-      ctx.moveTo(a.sx, a.sy);
-      ctx.lineTo(b.sx, b.sy);
-      ctx.stroke();
+    // the hovered node's strands: not a glare but a quiet rise in their own colours (from the node's to the
+    // neighbour's), breathing slowly, with a soft light that travels out from the node along each of them
+    if (hot.length && hov) {
+      const breath = this.reduced ? 1 : 0.84 + 0.16 * Math.sin((this.clock - this.hoverAt) * 2.3);
+      // the light leaves the node every PERIOD seconds and travels SPEED px a second: a ripple outwards
+      const PERIOD = 2.2;
+      const SPEED = 240;
+      const since = this.clock - this.hoverAt;
+      const travelled = ((since % PERIOD) + PERIOD) % PERIOD * SPEED;
+      for (const e of hot) {
+        const p = this.nodes[e.s] === hov ? this.nodes[e.s] : this.nodes[e.t];
+        const q = p === this.nodes[e.s] ? this.nodes[e.t] : this.nodes[e.s];
+        const style = STYLE[styleOf(e)];
+        const vis = Math.min(p.vis, q.vis);
+        const live = 0.3 + 0.7 * Math.min(p.live, q.live);
+        const base = Math.min(0.56, style.alpha * 1.3 + 0.12) * vis * live * breath;
+        if (base < 0.012) continue;
+        const gr = ctx.createLinearGradient(p.sx, p.sy, q.sx, q.sy);
+        gr.addColorStop(0, rgba(p.rgb, base));
+        gr.addColorStop(1, rgba(q.rgb, base * 0.85));
+        ctx.strokeStyle = gr;
+        ctx.lineWidth = (style.width + 0.3) * lw;
+        ctx.setLineDash(style.dash);
+        ctx.beginPath();
+        ctx.moveTo(p.sx, p.sy);
+        ctx.lineTo(q.sx, q.sy);
+        ctx.stroke();
+        if (this.reduced || since < 0.12) continue;
+        const len = Math.hypot(q.sx - p.sx, q.sy - p.sy);
+        const from = p.sr + 2;
+        const d = from + travelled;
+        if (len < 24 || d > len - q.sr) continue;
+        const ux = (q.sx - p.sx) / len;
+        const uy = (q.sy - p.sy) / len;
+        const half = Math.min(22, len * 0.18);
+        // fades in leaving the node and out arriving at the neighbour
+        const f = Math.sin(Math.PI * Math.min(1, Math.max(0, (d - from) / Math.max(1, len - q.sr - from))));
+        const ga = 0.34 * f * vis * live;
+        if (ga < 0.02) continue;
+        const x0 = p.sx + ux * (d - half);
+        const y0 = p.sy + uy * (d - half);
+        const x1 = p.sx + ux * (d + half);
+        const y1 = p.sy + uy * (d + half);
+        const gl = ctx.createLinearGradient(x0, y0, x1, y1);
+        gl.addColorStop(0, rgba(q.rgb, 0));
+        gl.addColorStop(0.5, rgba(q.rgb, ga));
+        gl.addColorStop(1, rgba(q.rgb, 0));
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.setLineDash([]);
+        ctx.strokeStyle = gl;
+        ctx.lineWidth = (style.width + 1.3) * lw;
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.stroke();
+        ctx.globalCompositeOperation = 'source-over';
+      }
     }
     ctx.setLineDash([]);
     void kEff;
   }
 
   private drawLabels(ctx: CanvasRenderingContext2D, stage: VNode[], k: number, kEff: number, local: boolean, hov: VNode | null) {
-    interface Cand { v: VNode; a: number; pri: number; text: string; font: string; size: number; kind: 'serif' | 'sans'; sub?: string }
+    interface Cand { v: VNode; a: number; pri: number; text: string; font: string; size: number; weight: number; sub?: string }
     const cands: Cand[] = [];
+    const kText = kEff * this.display.text;
     const hovNb = new Set<number>();
     if (hov) for (const nb of this.g.adj[hov.id]) hovNb.add(nb);
     for (const v of stage) {
       const kind = v.g.kind;
+      // what has receded to a whisper outside the local graph is not named (only a hovered one is)
+      if (v !== hov && v.visT <= GHOST_VIS && v.vis < 0.3) continue;
       let a = 0;
       let pri = 0;
       if (v === hov) { a = 1; pri = 100; }
@@ -1515,21 +1917,21 @@ export class GraphView {
       else if (kind === 'body') { a = 1; pri = 66; }
       else if (kind === 'theoretic') { a = 1; pri = v.g.ground ? 88 : 58 + 10 * v.g.rank; }
       else if (kind === 'family') {
-        // larger forms are named sooner; the rest as you come near
+        // larger forms are named sooner; the rest as you come near (Text fade brings every name sooner or later)
         const need = 1.7 - 1.15 * v.g.rank;
-        a = smoothstep(need - 0.22, need + 0.12, kEff);
+        a = smoothstep(need - 0.22, need + 0.12, kText);
         pri = 40 + 20 * v.g.rank;
       } else {
-        a = smoothstep(local ? 1.6 : 2.5, local ? 2.1 : 3.1, kEff) * (v.g.hasImage ? 1 : 0.8);
+        a = smoothstep(local ? 1.6 : 2.5, local ? 2.1 : 3.1, kText) * (v.g.hasImage ? 1 : 0.8);
         pri = 10 + (v.g.hasImage ? 4 : 0);
       }
       if (hov && v !== hov && hovNb.has(v.id)) { a = Math.max(a, kind === 'occurrence' ? 0.8 : 1); pri = Math.max(pri, 60); }
-      if (this.emph && this.emph.has(v.id)) { a = Math.max(a, 0.9 * smoothstep(1.0, 1.6, kEff)); pri = Math.max(pri, 50); }
+      if (this.emph && this.emph.has(v.id)) { a = Math.max(a, 0.9 * smoothstep(1.0, 1.6, kText)); pri = Math.max(pri, 50); }
       a *= v.vis * (0.12 + 0.88 * v.hl) * (kind === 'occurrence' ? 0.25 + 0.75 * v.live : 0.5 + 0.5 * v.live);
       if (a < 0.04) continue;
       const size = this.fontSize(v, k);
       const weight = kind === 'archetype' || (kind === 'theoretic' && v.g.ground) ? 600 : kind === 'family' || kind === 'body' || kind === 'theoretic' ? 500 : 400;
-      cands.push({ v, a, pri, text: v.g.label, font: `${weight} ${size.toFixed(1)}px ${SERIF}`, size, kind: 'serif', sub: kind === 'occurrence' && (v === hov || v.id === this.selected) ? v.g.yearDisplay : undefined });
+      cands.push({ v, a, pri, text: v.g.label, font: `${weight} ${size.toFixed(1)}px ${SERIF}`, size, weight, sub: kind === 'occurrence' && (v === hov || v.id === this.selected) ? v.g.yearDisplay : undefined });
     }
     cands.sort((x, y) => y.pri - x.pri || y.v.g.rank - x.v.g.rank);
     const boxes: number[] = [];
@@ -1541,7 +1943,7 @@ export class GraphView {
     for (const c of cands) {
       if (drawn > 110 && c.pri < 60) break;
       const text = c.text.length > 44 ? c.text.slice(0, 42).trimEnd() + '…' : c.text;
-      const tw = this.measure(text, c.font);
+      const tw = this.measure(text, c.weight, c.size);
       const x = c.v.sx;
       const ys = c.v.sr + c.size * 0.95 + 3;
       const y = c.v.sy + ys;
