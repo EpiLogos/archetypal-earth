@@ -10,6 +10,7 @@ import type { Vec3 } from '../data/geo';
 import { blendPose, easeInOut, lerpAngle } from './flight';
 import { ChartOverlay, type ChartScreenMark } from './chart-overlay';
 import { AU_IN_EARTH_RADII, compressAu, EARTH_RADIUS_KM, logStep, skyVisible, stageWeights, SKY_EXTENT, type StageWeights } from './stages';
+import { billboardSpan, frameExtent, ringSystemOf } from './rings';
 
 /**
  * The approach's eases, milliseconds, on the frame's clock: each frame advances them by its dt, clamped as the camera's
@@ -46,14 +47,20 @@ export function skyGroupShown(dist: number, beckonPresence: number): boolean {
 const BODY_VERT = /* glsl */ `
 uniform vec2 uRes;
 uniform float uPx;
+uniform float uSpan;
 varying vec2 vP;
 void main() {
   vec4 c = projectionMatrix * modelViewMatrix * vec4(0.0, 0.0, 0.0, 1.0);
-  vP = position.xy;
-  gl_Position = vec4(c.xy + position.xy * (uPx / uRes) * c.w, c.z, c.w);
+  // vP is in the globe's own radii: the globe fills |vP| <= 1, and a ringed body's quad reaches uSpan of them
+  vP = position.xy * uSpan;
+  gl_Position = vec4(c.xy + position.xy * (uPx * uSpan / uRes) * c.w, c.z, c.w);
 }`;
 
 // A lit sphere seen as a disc: the light is the direction to the Sun in view space, so phase is true at any scale.
+// A body with rings is a spheroid (flattened toward its pole, `uPole` in view space) with its ring plane through the
+// centre: the rings are found where the view ray meets that plane, hidden where the globe is in front of them, shadowed
+// where the globe is between them and the Sun, and cast their own shadow on the globe the same way. A bare body
+// (uOblate 1, uRing 0) takes exactly the path it always did.
 const BODY_FRAG = /* glsl */ `
 uniform vec3 uCore;
 uniform vec3 uGlow;
@@ -62,20 +69,94 @@ uniform vec3 uDeep;
 uniform vec3 uLight;
 uniform float uAlpha;
 uniform float uPx;
+uniform vec3 uPole;
+uniform float uOblate;
+uniform float uRing;
 varying vec2 vP;
+
+float band(float x, float a, float b, float soft) {
+  return smoothstep(a, a + soft, x) * (1.0 - smoothstep(b - soft, b, x));
+}
+
+// The ring system's opacity at a radius of the globe's equatorial radii: the D ring a trace, the C ring thin, the B ring
+// dense, the Cassini division nearly clear, the A ring with the Encke gap in it, the F ring a thread beyond.
+float ringOpacity(float rho) {
+  float o = band(rho, 1.11, 1.235, 0.01) * 0.05;
+  o += band(rho, 1.24, 1.525, 0.015) * (0.22 + 0.06 * sin(rho * 90.0));
+  o += band(rho, 1.525, 1.95, 0.012) * (0.86 + 0.09 * sin(rho * 46.0) + 0.05 * sin(rho * 131.0));
+  o += band(rho, 1.95, 2.03, 0.008) * 0.07;
+  float a = band(rho, 2.03, 2.27, 0.01) * (0.6 + 0.07 * sin(rho * 71.0));
+  a *= 1.0 - 0.9 * band(rho, 2.208, 2.222, 0.003);
+  o += a;
+  o += band(rho, 2.318, 2.332, 0.004) * 0.25;
+  return clamp(o, 0.0, 1.0);
+}
+
 void main() {
+  vec3 pole = normalize(uPole);
+  float k = 1.0 / (uOblate * uOblate) - 1.0;
   float r2 = dot(vP, vP);
+  // the silhouette of a flattened globe is an ellipse: its minor axis lies along the pole's own direction on the screen
+  float l = length(pole.xy);
+  float bp = sqrt(max(1.0 - (1.0 - uOblate * uOblate) * l * l, 1e-4));
+  vec2 u = l > 1e-4 ? pole.xy / l : vec2(1.0, 0.0);
+  float e = length(vec2(dot(vP, u) / bp, dot(vP, vec2(-u.y, u.x))));
   float edge = 1.5 / max(uPx * 0.5, 1.0);
-  float a = 1.0 - smoothstep(1.0 - edge * 2.0, 1.0, sqrt(r2));
-  if (a <= 0.0) discard;
-  vec3 n = vec3(vP, sqrt(max(1.0 - r2, 0.0)));
-  float lit = dot(n, normalize(uLight));
+  float a = 1.0 - smoothstep(1.0 - edge * 2.0, 1.0, e);
+  // where the view ray meets the spheroid's near side (a sphere when k is 0: z = sqrt(1 - r2))
+  float s0 = dot(vP, pole.xy);
+  float qa = 1.0 + k * pole.z * pole.z;
+  float qb = k * s0 * pole.z;
+  float qc = r2 + k * s0 * s0 - 1.0;
+  float zf = (-qb + sqrt(max(qb * qb - qa * qc, 0.0))) / qa;
+  vec3 P = vec3(vP, zf);
+  vec3 n = normalize(P + k * dot(P, pole) * pole);
+  vec3 L = normalize(uLight);
+  float lit = dot(n, L);
   // centred on zero: the terminator is where the light grazes, so the lit share of the disc is the true phase
   float day = smoothstep(-0.16, 0.16, lit);
   vec3 shade = mix(uFog * 0.9 + uDeep * 0.2, uCore, day);
   float rim = pow(1.0 - n.z, 2.2);
   shade += uGlow * rim * (0.16 + 0.34 * day);
-  gl_FragColor = vec4(shade, a * uAlpha);
+
+  if (uRing < 0.5) {
+    if (a <= 0.0) discard;
+    gl_FragColor = vec4(shade, a * uAlpha);
+    return;
+  }
+
+  // the rings' shadow on the globe: from this point toward the Sun to the ring plane
+  float ld = dot(L, pole);
+  if (abs(ld) > 0.02) {
+    float t = -dot(P, pole) / ld;
+    if (t > 0.0) shade *= 1.0 - 0.72 * ringOpacity(length(P + L * t)) * day;
+  }
+  // the rings seen along the view ray: the plane through the centre meets it at z = -(vP . pole.xy) / pole.z
+  float pz = abs(pole.z) < 0.02 ? (pole.z < 0.0 ? -0.02 : 0.02) : pole.z;
+  float zr = -s0 / pz;
+  vec3 H = vec3(vP, zr);
+  float ro = ringOpacity(length(H));
+  // the face the camera sees is the face the Sun lights, or the dark one (lit only through the rings themselves)
+  float seen = dot(pole, L) * pole.z > 0.0 ? 1.0 : 0.55;
+  // the globe's shadow on the rings: the ray toward the Sun from this ring point passes the globe's centre this close
+  float tc = -dot(H, L);
+  float miss = tc > 0.0 ? length(H + L * tc) : 2.0;
+  float sunlit = mix(0.1, 1.0, smoothstep(0.9, 1.02, miss));
+  vec3 ringCol = mix(uGlow, uCore, 0.8) * 1.3 * seen * sunlit;
+  // a ring point nearer than the globe's near side is over it; farther, the globe covers the ring
+  float inFront = zr >= zf ? 1.0 : 0.0;
+  float ra = ro * 0.94;
+  vec3 pre;
+  float alpha;
+  if (inFront > 0.5) {
+    pre = ringCol * ra + shade * a * (1.0 - ra);
+    alpha = ra + a * (1.0 - ra);
+  } else {
+    pre = shade * a + ringCol * ra * (1.0 - a);
+    alpha = a + ra * (1.0 - a);
+  }
+  if (alpha <= 0.002) discard;
+  gl_FragColor = vec4(pre / alpha, alpha * uAlpha);
 }`;
 
 const SUN_FRAG = /* glsl */ `
@@ -202,10 +283,30 @@ export class SkyLayer {
     return v ? (((Math.atan2(v[1], v[0]) * 180) / Math.PI) % 360 + 360) % 360 : 0;
   }
 
-  /** A body's true radius in Earth radii (the sky camera's framer needs it); 1 for a body the data does not know. */
+  /**
+   * The held object's radius in Earth radii (the sky camera's framer needs it); 1 for a body the data does not know. A
+   * body with rings is held as the planet and its rings together (`frameExtent`), so the framing clears the whole of it.
+   */
   bodyRadiusR(key: BodyKey): number {
     const km = this.data.bodies.find((b) => b.key === key)?.radiusKm;
-    return km && km > 0 ? km / 6371.0084 : 1;
+    return (km && km > 0 ? km / 6371.0084 : 1) * frameExtent(key);
+  }
+
+  /**
+   * The camera's distance from the body held up, the approached one or the beckoned one, Earth radii (Infinity when none
+   * is). The near plane reads it: a flight to a station keeps the look-at pinned off the planet until it arrives, so the
+   * look-at's own distance leaves the planet inside the near plane for the last stretch of the way, and it is clipped.
+   */
+  heldDistance(cam: THREE.Vector3): number {
+    let best = Infinity;
+    const held: (BodyKey | null)[] = [this.approach > 0 ? this.approachKey : null, this.beckonE.value(this.clock) > 0 ? this.beckonKey : null];
+    for (const key of held) {
+      const pv = key ? this.poses.get(key) : undefined;
+      if (!pv) continue;
+      const s = sceneFromEcliptic(pv, this.gmst, this.eps);
+      best = Math.min(best, Math.hypot(s[0] - cam.x, s[1] - cam.y, s[2] - cam.z));
+    }
+    return best;
   }
 
   /** A body's current place in scene coordinates (Earth-fixed), or null when unknown. */
@@ -286,6 +387,7 @@ export class SkyLayer {
   private lastHeight = 1;
   private wheelTmp = new THREE.Vector3();
   private wheelAxis = new THREE.Vector3();
+  private poleEcl: Vec3 = [0, 0, 1];
 
   constructor(readonly data: SkyData) {
     this.eph = this.baseEph = new SkyEphemeris(data);
@@ -354,6 +456,11 @@ export class SkyLayer {
           uDeep: { value: new THREE.Color(body.palette.deep) },
           uLight: { value: new THREE.Vector3(0, 0, 1) },
           uAlpha: { value: 0 },
+          // the quad's reach in globe radii, and the globe's spin axis (view space), its flattening and whether it has rings
+          uSpan: { value: billboardSpan(body.key) },
+          uPole: { value: new THREE.Vector3(0, 0, 1) },
+          uOblate: { value: ringSystemOf(body.key)?.oblate ?? 1 },
+          uRing: { value: ringSystemOf(body.key) ? 1 : 0 },
         },
         transparent: true,
         depthWrite: false,
@@ -634,6 +741,13 @@ export class SkyLayer {
         pos.set(v[0], v[1], v[2]);
         alpha = w.planets;
         d.mat.uniforms.uLight.value.copy(this.sunScene).sub(pos).normalize().transformDirection(camInv);
+      }
+      // a ringed body's spin axis, in the view's own space: the rings' plane and the globe's flattening are drawn about it
+      const ringSys = ringSystemOf(key);
+      if (ringSys) {
+        eclipticVector(ringSys.pole.lon, ringSys.pole.lat, 1, this.poleEcl);
+        const ps = sceneFromEcliptic(this.poleEcl, this.gmst, this.eps);
+        (d.mat.uniforms.uPole.value as THREE.Vector3).set(ps[0], ps[1], ps[2]).transformDirection(camInv);
       }
       // every body but the Sun (whose glow is above) grows to its true disc as the camera nears it, the Moon's rule
       if (key !== 'sun') px = Math.max(px, this.trueDiskPx(d.body.radiusKm, pos, camera.position, pxPerRad));

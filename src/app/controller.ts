@@ -55,6 +55,7 @@ import { loadLensData } from '../lenses/ui';
 import { SkyTies } from '../sky/ties';
 import { systemViewLatLon } from '../sky/frames';
 import { approachDist, EARTH_FIELD_EXIT, isSkyApproachBody, skyMaxDist, SETTLE, STAGE_EDGES, SKY_ENTER, SKY_EXIT, SYSTEM_VIEW_ELEVATION, systemHomeDist, systemViewLongitude } from '../sky/stages';
+import { frameExtent } from '../sky/rings';
 import type { BodyKey } from '../types/sky';
 
 // outside a focus the field recedes to a presence, never to a wall: everything stays pickable
@@ -1398,9 +1399,10 @@ export class Controller {
   /** How far the camera stands from `key` for its disc to fill the view (Earth radii). */
   private approachDistOf(key: BodyKey, aspect: number): number {
     const body = this.skyLayer?.data.bodies.find((b) => b.key === key);
-    // every held body carries its satellites, whose outer orbit is 1.86 discs wide: the disc is kept to 42% of the width so
-    // the orbit and its names fit a phone, live sky and birth sky alike (a desktop's 30% of the height is the tighter bound)
-    return approachDist(body?.radiusKm ?? 6371.0084, FOV, aspect, 0.42);
+    // every held body carries its satellites, whose outer orbit stands 2.55 held radii off it: the held object is kept to
+    // 34% of the width, so the orbit (87% of it) and its names fit a phone, live sky and birth sky alike (a desktop's 30% of
+    // the height is the tighter bound). A ringed body is held as the planet and its rings together (`frameExtent`).
+    return approachDist((body?.radiusKm ?? 6371.0084) * frameExtent(key), FOV, aspect, 0.34);
   }
 
   /**

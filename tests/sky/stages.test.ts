@@ -208,4 +208,27 @@ describe('the near plane while a body is approached', () => {
       expect(near).toBeLessThan(d * 0.5);
     }
   });
+
+  // A planet-to-planet move flies the camera to the station with the look-at pinned off the planet (the rig's own distance
+  // stays ~1 900 R⊕), so the focus alone left the planet inside the near plane for the last second of the flight: the planet
+  // vanished, and came back when the station was reached.
+  it('clears the held body while the focus is still pinned far off it (the flight to a station)', () => {
+    const camDist = 1956; // the camera's distance from the Earth, as in a planet-to-planet flight
+    const pinned = 1938; // the look-at's own distance: nowhere near the planet
+    for (const toBody of [483, 315, 205, 89, 12]) {
+      const focusOnly = depthPlanes(camDist, true, pinned, 1);
+      const held = depthPlanes(camDist, true, pinned, 1, toBody);
+      // the focus alone stands the near plane past the planet: that is the clip
+      if (toBody < 540) expect(focusOnly.near).toBeGreaterThan(toBody);
+      expect(held.near).toBeLessThan(toBody * 0.5);
+      expect(held.far).toBe(focusOnly.far);
+    }
+  });
+
+  it('is the focus\'s own near plane when no body is held (bodyDist Infinity), and never farther than it', () => {
+    for (const d of [1500, 3000]) {
+      expect(depthPlanes(d, true, 40, 1, Infinity)).toEqual(depthPlanes(d, true, 40, 1));
+      expect(depthPlanes(d, true, 40, 1, 5000).near).toBe(depthPlanes(d, true, 40, 1).near);
+    }
+  });
 });

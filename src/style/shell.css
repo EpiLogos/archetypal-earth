@@ -434,8 +434,10 @@ body.landing-on .time { opacity: 0.35; }
 .po-sat.po-outer { color: var(--ink-2); font-weight: 400; }
 .po-sat span { border-bottom: 1px solid rgb(var(--core-rgb) / 0.35); }
 .po-sat:hover span, .po-sat:focus-visible span { border-bottom-color: rgb(var(--core-rgb)); color: var(--ink); }
-.po-earth { position: absolute; z-index: 4; left: 0; top: 0; min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid rgb(140 190 255 / 0.45); background: rgb(var(--deep-rgb) / 0.82); color: var(--ink); font: 500 12.5px var(--sans); cursor: pointer; pointer-events: auto; }
-.po-earth:hover { border-color: rgb(140 190 255 / 0.85); }
+/* the way back to the whole sky: a small chip at the lower left, its finger-sized target a margin round it */
+.po-earth { position: absolute; z-index: 4; left: 0; top: 0; min-height: 30px; padding: 0 12px; border-radius: 15px; border: 1px solid rgb(140 190 255 / 0.4); background: rgb(var(--deep-rgb) / 0.62); color: var(--ink-2); font: 500 12px var(--sans); cursor: pointer; pointer-events: auto; }
+.po-earth::after { content: ''; position: absolute; inset: -7px -6px; }
+.po-earth:hover, .po-earth:focus-visible { border-color: rgb(140 190 255 / 0.85); color: var(--ink); }
 .po-earth-mark { fill: rgb(140 190 255 / 0.8); font: 500 11px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
 /* a planet's tarot cards: small plates floating on two outer rings (src/sky/orbits.ts, data from src/sky/cards.ts) */
 .po-wheel { fill: none; stroke-width: 1; }

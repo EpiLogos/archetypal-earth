@@ -348,8 +348,8 @@ export class GlobeEngine {
     this.rig.update(dt);
     // the clip planes follow the altitude so depth stays precise from orbit to the ground
     const camDist = this.camera.position.length();
-    // the far plane follows the Earth's distance (the sky is drawn about the Sun); the near plane may follow the focus
-    const planes = depthPlanes(camDist, !!this.sky, this.rig.dist, this.sky?.approach ?? 0);
+    // the far plane follows the Earth's distance (the sky is drawn about the Sun); the near plane may follow the focus and the held body
+    const planes = depthPlanes(camDist, !!this.sky, this.rig.dist, this.sky?.approach ?? 0, this.sky?.heldDistance(this.camera.position) ?? Infinity);
     this.camera.near = planes.near;
     this.camera.far = planes.far;
     this.camera.updateMatrixWorld();

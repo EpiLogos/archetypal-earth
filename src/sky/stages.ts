@@ -127,11 +127,15 @@ export const SKY_EXTENT = 7200;
  *
  * `dist` is the camera's distance from the Earth's centre and bounds the far plane (the sky is drawn about the Sun).
  * While a body is approached (`approach` > 0) the near plane may come down to the camera's distance from the focus,
- * `focusDist`, so a small planet's disc, drawn at that distance, is not cut by the near plane.
+ * `focusDist`, so a small planet's disc, drawn at that distance, is not cut by the near plane. `bodyDist` is the camera's
+ * own distance from the body held up (the approached or the beckoned one): the focus is pinned elsewhere while the camera
+ * flies to a station (a planet-to-planet move rises, turns, then comes in), and the planet it is flying to would stand
+ * inside the near plane for the last stretch of the way. It is clipped and gone until the station is reached.
  */
-export function depthPlanes(dist: number, withSky: boolean, focusDist = dist, approach = 0): { near: number; far: number } {
+export function depthPlanes(dist: number, withSky: boolean, focusDist = dist, approach = 0, bodyDist = Infinity): { near: number; far: number } {
   let near = Math.max(0.003, (dist - 1) * 0.28);
   if (approach > 0) near = Math.min(near, Math.max(0.003, (focusDist - 1) * 0.28));
+  if (bodyDist < Infinity) near = Math.min(near, Math.max(0.003, (bodyDist - 1) * 0.28));
   let far = dist + 3.2;
   if (withSky && dist > LEGACY_DEPTH_MAX) far += SKY_EXTENT * smoothstep((dist - LEGACY_DEPTH_MAX) / (40 - LEGACY_DEPTH_MAX));
   return { near, far };

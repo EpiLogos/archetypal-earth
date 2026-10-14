@@ -1,9 +1,9 @@
 // The archetypes a planet carries, drawn as its satellites (the owner's design): when the walk holds a planet up close,
 // its field ties circle it on two tilted orbits — Jung's own links on the inner orbit, the atlas's links on the outer —
 // each a small light with its name, which opens that archetype or symbol in the field. A line runs from the planet
-// back toward the Earth, ending in a control that returns to the whole birth sky. Screen-space, over the canvas; it reads
-// the sky layer's own drawn disc each frame, so it follows the planet exactly. Nothing here is a claim: the satellites
-// are the same ties the walk's panel lists, with the same basis.
+// back toward the Earth, ending in its name; a small control at the screen's lower left returns to the whole birth sky.
+// Screen-space, over the canvas; it reads the sky layer's own drawn disc each frame, so it follows the planet exactly.
+// Nothing here is a claim: the satellites are the same ties the walk's panel lists, with the same basis.
 //
 // Beyond those two orbits stand the planet's tarot cards, as small plates that float on two wider rings (spec: the
 // field's own joins, public/data/sky-cards.json): the decan wheel, each card hung at its decan's true ecliptic longitude
@@ -15,6 +15,7 @@ import type { SkyLayer } from './layer';
 import type { BodyKey } from '../types/sky';
 import { decanOf, imageUrl, type CardPlate, type RingCard } from './cards';
 import { cardSize, fitShare, readable, ringPresence, wheelPoint, type Room } from './wheel';
+import { frameExtent } from './rings';
 import { holoCssAt } from './zodiac';
 
 /** One card on a ring: its place on the ring, its plate, and what opens it. */
@@ -41,12 +42,17 @@ const TILT = 0.34; // the orbits' apparent flattening: a ring seen from a little
 const ROT = (-14 * Math.PI) / 180; // and turned a little off the horizontal
 const PERIOD_S = [64, 96]; // one turn of the inner and the outer orbit, seconds
 const TOP = 96; // the shell's header band: nothing of the overlay is placed under it
-/** The card rings' radii, in discs: well beyond the archetypes' two orbits (1.42 and 1.86), the rank ring outside the decan wheel. */
-const K_DECAN = 2.6;
-const K_RANK = 3.75;
+/**
+ * The archetypes' two orbits, in radii of the held object (a ringed body is held as the planet and its rings, see
+ * `frameExtent`, so they clear the rings too): well off the body, with room between them for the names.
+ */
+const K_ORBIT = [1.95, 2.55] as const;
+/** The card rings' radii, in the same radii: well beyond the archetypes' two orbits, the rank ring outside the decan wheel. */
+const K_DECAN = 3.4;
+const K_RANK = 4.7;
 /** The least a ring is drawn at when the room is short (a phone): outside the archetypes' outer orbit, the two a ring apart. Their names stand above the cards. */
-const K_DECAN_MIN = 2.05;
-const K_RANK_MIN = 2.6;
+const K_DECAN_MIN = 2.85;
+const K_RANK_MIN = 3.45;
 const RANK_PERIOD_S = 420; // one turn of the rank ring
 const SWAY_DEG = 5; // a decan card's sway about its longitude
 
@@ -189,7 +195,8 @@ export class PlanetOrbits {
     else this.shown += ((wanted ? 1 : 0) - this.shown) * (1 - Math.exp(-dt * 4));
     // while a body is held, a phone gives the sky's own controls (names, the held note) back to it
     document.body.classList.toggle('po-holding', this.shown > 0.5);
-    const R = heldPx / 2;
+    // the held object's radius: the planet's disc, or the planet and its rings together
+    const R = (heldPx / 2) * (key ? frameExtent(key) : 1);
     // the rings go with the body on a zoom out: its disc is the one measure of how much of them stands
     const presence = ringPresence(R);
     if (this.shown * presence < 0.02 || !disc || !layer) { this.root.hidden = true; this.setInteractive(false); return; }
@@ -200,7 +207,7 @@ export class PlanetOrbits {
     this.root.style.opacity = (this.shown * presence).toFixed(3);
     if (!reduced) this.t += dt;
     const cx = disc.x, cy = disc.y;
-    const radii = [R * 1.42, R * 1.86];
+    const radii = [R * K_ORBIT[0], R * K_ORBIT[1]];
     const cos = Math.cos(ROT), sin = Math.sin(ROT);
     this.rings.forEach((e, i) => {
       e.setAttribute('cx', cx.toFixed(1)); e.setAttribute('cy', cy.toFixed(1));
@@ -228,15 +235,16 @@ export class PlanetOrbits {
     this.earthMark.setAttribute('visibility', homeVis);
     this.earthLine.setAttribute('x1', sx.toFixed(1)); this.earthLine.setAttribute('y1', sy.toFixed(1));
     this.earthLine.setAttribute('x2', ex.toFixed(1)); this.earthLine.setAttribute('y2', ey.toFixed(1));
-    // the line ends in a mark naming the Earth; the control that goes back always stands under the planet's outer orbit,
-    // one predictable place clear of the satellites, the header and the sky's own controls
-    this.earthMark.setAttribute('x', ex.toFixed(1));
+    // the line ends in a mark naming the Earth (its name starts clear of the menu control under the page title, at the top left)
+    this.earthMark.setAttribute('x', (ey < 160 ? Math.max(ex, 76) : ex).toFixed(1));
     // the line is held below the header band: its name goes under the end point there, never over the page title
     this.earthMark.setAttribute('y', (ey < TOP + 48 ? ey + 18 : ey - 8).toFixed(1));
     this.earthMark.setAttribute('text-anchor', ex < cx ? 'start' : 'end');
-    const bw = this.earthBtn.offsetWidth || 140;
-    const by = cy + Math.max(R, radii[1] * TILT) + 36;
-    this.earthBtn.style.transform = `translate(${Math.round(Math.min(W - bw - 8, Math.max(8, cx - bw / 2)))}px, ${Math.round(Math.min(H - 150, Math.max(TOP, by)))}px)`;
+    // the control that goes back stands at the screen's lower left: small, and clear of the planet's orbits and cards (it
+    // was a wide pill under the planet, over the outer orbit's lower arc), one predictable place off the header and the
+    // sky's own controls; the sheet's edge on a phone raises it with `H`
+    const bw = this.earthBtn.offsetWidth || 90;
+    this.earthBtn.style.transform = `translate(${Math.round(Math.min(W - bw - 8, 12))}px, ${Math.round(Math.max(TOP, H - 140))}px)`;
 
     for (const x of this.sats) {
       const r = radii[x.s.inner ? 0 : 1];
