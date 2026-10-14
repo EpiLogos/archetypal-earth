@@ -88,15 +88,21 @@ export class DeepSheet {
 
   show(t: DeepTarget) {
     const key = t.kind === 'subject' ? `s:${t.subject.type}:${t.subject.id}` : `o:${t.occId}`;
-    if (!(this.open && key === this.key)) {
+    const fresh = !(this.open && key === this.key);
+    // unhidden first: a display:none scroller ignores scrollTop, and the browser gives back the offset it had when it
+    // was hidden, so a reading that opened after a scrolled one opened part-way down
+    this.root.hidden = false;
+    if (fresh) {
       this.key = key;
       clear(this.article);
       if (t.kind === 'subject') this.renderSubject(t.subject);
       else this.renderOccurrence(t.occId);
       this.scroller.scrollTop = 0;
     }
-    this.root.hidden = false;
-    requestAnimationFrame(() => this.root.classList.add('on'));
+    requestAnimationFrame(() => {
+      this.root.classList.add('on');
+      if (fresh) this.scroller.scrollTop = 0;
+    });
     this.open = true;
     this.scroller.focus({ preventScroll: true });
   }

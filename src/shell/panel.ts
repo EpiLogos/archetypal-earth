@@ -91,6 +91,9 @@ export class Panel {
     this.height = opts.height ?? 'half';
     this.body.scrollTop = 0;
     this.apply(onContent(this.state));
+    // the sheet may only now be unhidden, and a hidden body ignores scrollTop: a sheet opened after a scrolled one
+    // would come back part-way down
+    this.body.scrollTop = 0;
   }
 
   /** Replace the body, keeping the frame (and its height) as it stands. */

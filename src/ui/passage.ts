@@ -47,9 +47,10 @@ export class PassageSheet {
     const ref = await resolvePassage(this.index, work, locator);
     if (!ref) return;
     this.ref = ref;
-    this.render();
     window.clearTimeout(this.hideTimer);
+    // unhidden before it is rendered: a hidden scroller ignores scrollTop (see DeepSheet.show)
     this.root.hidden = false;
+    this.render();
     requestAnimationFrame(() => this.root.classList.add('on'));
     this.openState = true;
   }
