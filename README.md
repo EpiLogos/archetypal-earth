@@ -4,6 +4,8 @@
 
 [![The Self, where the site opens: the globe tuned to one archetype, its images set where and when they appeared](docs/img/self.jpg)](https://jung.epi-logos.org)
 
+[Watch the 70-second tour](docs/video/archetypal-earth-tour.mp4): the Anima, its reading, across to the Moon's sky and back down to Earth by way of the Great Mother.
+
 I built this to see Jung's whole field in one place: every archetype, symbol and instance he wrote about, set where and when it appeared and cited to the page. Everything in it connects back to one centre, which Jung called the Self. That's where it starts.
 
 Nobody can hold that field in their head. The *Collected Works* scatter it across twenty volumes and forty years of revision, and Jung's own method, amplification, needs the parallels lined up side by side before the pattern shows itself. This site lines them up. Pick a symbol (the serpent, the mandala, the philosopher's stone) and read its path through time and cultures, each stop cited to the volume, paragraph and page where he wrote it.
