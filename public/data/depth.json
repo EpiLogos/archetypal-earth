@@ -881,9 +881,7 @@
        "locator": "pdf p87"
       },
       "scan": true,
-      "families": [
-       "great-mother ↔ cow"
-      ]
+      "families": []
      },
      {
       "year": -650,
@@ -5319,9 +5317,7 @@
        "workTitle": "The Great Mother",
        "locator": "pdf p87"
       },
-      "families": [
-       "great-mother ↔ cow"
-      ]
+      "families": []
      },
      {
       "yearDisplay": "undated in text",
