@@ -328,7 +328,6 @@ export function subjectPalette(m: Model, s: Subject, avg: (ps: { p: RGBPalette; 
 
 /** Best image for an entity: its own, or its family's, or its first archetype's. */
 export function occurrenceImage(m: Model, o: Occurrence): ImageRef | undefined {
-  if (o.image === null) return undefined;
   return o.image ?? m.famById.get(o.familyId)?.image;
 }
 

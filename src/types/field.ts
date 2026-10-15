@@ -214,7 +214,7 @@ export interface Occurrence {
    * zodiac). Independent of the Earth place: `lat/lon` stay 0,0 and `geoPrecision` 'none' when this is its only place.
    */
   sky?: SkyLocus[];
-  image?: ImageRef | null; // null explicitly suppresses the family-image fallback after a reviewed rejection
+  image?: ImageRef; // occurrence-specific image when one was found
 }
 
 export interface FieldMeta {
