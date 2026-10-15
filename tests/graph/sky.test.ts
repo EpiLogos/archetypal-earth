@@ -62,11 +62,13 @@ describe('sky anchors in the graph', () => {
   });
 
   it('keeps adjacency symmetric for the new edges', () => {
-    g.edges.forEach((e, k) => {
-      expect(g.adj[e.s]).toContain(e.t);
-      expect(g.adj[e.t]).toContain(e.s);
-      expect(g.incident[e.s]).toContain(k);
-    });
+    // one assertion over the broken edges: a per-edge expect across the whole graph is slow under the suite's load
+    const broken = g.edges.flatMap((e, k) => [
+      ...(g.adj[e.s].includes(e.t) ? [] : [`adj ${k}: ${e.s}→${e.t}`]),
+      ...(g.adj[e.t].includes(e.s) ? [] : [`adj ${k}: ${e.t}→${e.s}`]),
+      ...(g.incident[e.s].includes(k) ? [] : [`incident ${k}: ${e.s}`]),
+    ]);
+    expect(broken).toEqual([]);
   });
 
   it('is deterministic: the same sky gives the same graph', () => {

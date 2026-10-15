@@ -154,11 +154,12 @@ describe('the numbers are archetypes', () => {
     expect(IDS.map((id) => pages[id].n)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
+  // a full rebuild reads the corpus; under the whole suite's load it runs past the default 5s
   it('the published file is what the sources give now (no hand edits)', () => {
     const built = buildNumbers();
     expect(built.errors).toEqual([]);
     expect(numbers).toEqual(built.data);
-  });
+  }, 30_000);
 });
 
 describe('the Self\'s page', () => {

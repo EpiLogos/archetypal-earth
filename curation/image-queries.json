@@ -1445,7 +1445,8 @@
         "Psyche butterfly Cupid fresco Pompeii",
         "Merian metamorphosis butterfly plate Surinam"
       ],
-      "skip": "family visual screen rejected the plate (File:Drawing, album): Botanical drawing; butterfly not clearly the subject"
+      "pin": "File:Yellow Butterfly by Albert Bierstadt.jpeg",
+      "credit": "Representative picture: a painted butterfly, signed by Albert Bierstadt"
     },
     "cap": {
       "queries": [
@@ -1756,7 +1757,8 @@
         "Bruegel Dulle Griet demons",
         "devil demons marginalia medieval manuscript"
       ],
-      "skip": "family visual screen rejected the plate (File:Antwerpen Museum Mayer van den Bergh Pieter B): Dulle Griet painting; no imp subject"
+      "pin": "File:Sorceries from Astra Castra.jpg",
+      "credit": "Representative picture: a sorcery scene from Astra Castra, a demonic figure among the magicians"
     },
     "jewel": {
       "queries": [
@@ -2147,7 +2149,8 @@
         "vol.",
         "frontispiece"
       ],
-      "skip": "family visual screen rejected the plate (File:Mercury): Hermes engraving; wand not clearly the subject"
+      "pin": "File:Circe - Grechetto.jpg",
+      "credit": "Representative picture: Circe, the enchantress, with her magic wand"
     },
     "sword": {
       "queries": [
@@ -2519,8 +2522,8 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:NeijingTu1.jpg",
-      "skip": "family visual screen rejected the plate (File:NeijingTu1.jpg): Neijing Tu diagram; not diamond body"
+      "pin": "File:Alchemy, ancient and modern (1922) (14595322920).jpg",
+      "credit": "Representative picture: an engraved portrait of the Comte de Saint-Germain, from Alchemy, Ancient and Modern (1922)"
     },
     "dioscuri": {
       "queries": [
@@ -3554,7 +3557,8 @@
         "spearmint",
         "harpoon"
       ],
-      "skip": "family visual screen rejected the plate (File:Gerard de la Vallee - Longinus piercing Chris): Crucifixion scene; spear incidental to the scene"
+      "pin": "File:Boetius adamsz. bolswert, crocifissione (coup de lance), da rubens, 1631.jpg",
+      "credit": "Representative picture: the lance thrust (coup de lance) in the crucifixion, after Rubens (1631)"
     },
     "spindle": {
       "queries": [
@@ -4212,7 +4216,9 @@
           "gnostic"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Ophitendiagramm2.jpg",
+      "credit": "Representative picture: an Ophite Gnostic diagram of the aeons and their emanation from the fullness"
     },
     "salome": {
       "queries": [
