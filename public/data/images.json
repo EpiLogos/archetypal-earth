@@ -759,16 +759,16 @@
    "_file": "File:Lucas Cranach the Elder - The Garden of Eden - Google Art Project.jpg"
   },
   "peacock": {
-   "src": "img/families/peacock.jpg",
-   "thumb": "img/families/peacock.thumb.jpg",
+   "src": "img/families/cauda-pavonis.jpg",
+   "thumb": "img/families/cauda-pavonis.thumb.jpg",
    "width": 1280,
-   "height": 1099,
-   "tone": "#716656",
-   "title": "Mosaic with a Peacock and Flowers",
-   "credit": "Metropolitan Museum of Art",
-   "license": "CC0",
-   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mosaic_with_a_Peacock_and_Flowers_MET_DP100667.jpg",
-   "_file": "File:Mosaic with a Peacock and Flowers MET DP100667.jpg"
+   "height": 2669,
+   "tone": "#adaba4",
+   "title": "A peacock in a crowned alchemical flask; representing the st",
+   "credit": "Wellcome Collection",
+   "license": "CC BY 4.0",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_peacock_in_a_crowned_alchemical_flask;_representing_the_st_Wellcome_V0025638.jpg",
+   "_file": "File:A peacock in a crowned alchemical flask; representing the st Wellcome V0025638.jpg"
   },
   "phoenix": {
    "src": "img/families/phoenix.jpg",
@@ -2449,18 +2449,6 @@
    "license": "Public domain",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raphael_and_Workshop_-_Portrait_of_Pope_Julius_II_-_Google_Art_Project.jpg",
    "_file": "File:Raphael and Workshop - Portrait of Pope Julius II - Google Art Project.jpg"
-  },
-  "cauda-pavonis": {
-   "src": "img/families/cauda-pavonis.jpg",
-   "thumb": "img/families/cauda-pavonis.thumb.jpg",
-   "width": 1280,
-   "height": 2669,
-   "tone": "#adaba4",
-   "title": "A peacock in a crowned alchemical flask; representing the st",
-   "credit": "Wellcome Collection",
-   "license": "CC BY 4.0",
-   "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_peacock_in_a_crowned_alchemical_flask;_representing_the_st_Wellcome_V0025638.jpg",
-   "_file": "File:A peacock in a crowned alchemical flask; representing the st Wellcome V0025638.jpg"
   },
   "hierosgamos": {
    "src": "img/families/hierosgamos.jpg",
@@ -4705,18 +4693,6 @@
    "license": "CC0",
    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stone_Statue_from_Palace_of_Tell_Halaf_in_Mesopotamia_(28671853736).jpg",
    "_file": "File:Stone Statue from Palace of Tell Halaf in Mesopotamia (28671853736).jpg"
-  },
-  "great-mother ↔ cow": {
-   "src": "img/families/great-mother ↔ cow.jpg",
-   "thumb": "img/families/great-mother ↔ cow.thumb.jpg",
-   "width": 501,
-   "height": 1280,
-   "tone": "#d9c3b7",
-   "title": "Hathor (Goddess)",
-   "credit": "Eternal Space",
-   "license": "CC BY-SA 4.0",
-   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hathor_(Goddess).png",
-   "_file": "File:Hathor (Goddess).png"
   },
   "great-mother-signet-rings": {
    "src": "img/families/great-mother-signet-rings.jpg",
