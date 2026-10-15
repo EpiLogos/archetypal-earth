@@ -69,6 +69,12 @@ export function stripFootnoteMarkers(s) {
 }
 
 /** A trailing ellipsis and any closing quote it sits inside of, captured off the end of a string. */
+/** Whether the period at `dot` closes an abbreviation or a single initial ("cf.", "p.", "J."), so it ends no sentence. */
+export function abbreviatedBefore(text, dot) {
+  const word = /([\p{L}.]+)$/u.exec(text.slice(0, dot))?.[1] ?? '';
+  return ABBREV_WORDS.has(word.toLowerCase()) || /^\p{L}$/u.test(word);
+}
+
 export const TRAILING_ELLIPSIS = /(?:\s*[…]+|\s*\.{3,}|\s*\.\s\.\s\.)\s*[”"’']?\s*$/u;
 
 /** True when a string ends in an ellipsis that follows a complete sentence (an intentional trailing omission — keep). */

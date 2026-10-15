@@ -12,6 +12,7 @@ import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT }
 import { validateField } from './validate.mjs';
 import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
 import { buildCorpusIndex, corpusTitles } from './lib/corpus.mjs';
+import { isPlateCaption } from './lib/quotes.mjs';
 import { externalRegister } from './lib/external.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -408,6 +409,7 @@ for (const n of instNotes.filter((x) => !x.failed)) {
     ...(yearRange ? { yearRange } : {}),
     jung,
     ...(parsed.quote ? { quote: parsed.quote } : {}),
+    ...(parsed.quote && isPlateCaption(parsed.quote) ? { caption: true } : {}),
     body: parsed.body,
     parallelIds: parsed.parallels.filter((p) => p !== id && occIds.has(p)),
     _parallelsRaw: parsed.parallels,

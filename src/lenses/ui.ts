@@ -21,6 +21,8 @@ export interface LensQuote {
   voice?: string;
   /** the words are as a damaged scan reads them (kept verbatim, marked, never repaired by hand) */
   scan?: true;
+  /** a plate caption as printed: an object label, shown as one and never in quotation marks */
+  caption?: true;
 }
 
 /** Whose words a work holds, when they are not Jung's: said beside the cite, so no one else reads as Jung. */
@@ -41,18 +43,34 @@ const VOICE_LABEL: Record<string, string> = { pauli: 'Pauli', 'von-franz': 'von 
 /** A quote taken up mid-sentence is shown as such: the words stay verbatim, the ellipsis marks where they begin. */
 export const entered = (t: string) => (/^\p{Ll}/u.test(t) ? `…${t}` : t);
 
-export function quoteBlock(q: LensQuote, passages: PassageBridge | undefined, opts: { compact?: boolean } = {}): HTMLElement {
+/** The cite line under a quotation or a caption: the work and its locator; a button when the corpus holds the passage. */
+function citeFooter(q: LensQuote, passages: PassageBridge | undefined): HTMLElement {
   const c = q.cite;
   const label = `${c.workTitle}, ${c.locator}${c.print ? ` · p. ${c.print}` : ''}`;
   const voice = q.voice ? (VOICE_LABEL[q.voice] ?? q.voice) : voiceOf(c.work);
   const cite = passages?.known(c.work)
     ? el('button', { type: 'button', class: 'link-quiet lq-cite', text: label, title: 'Open the passage in the corpus', onclick: () => passages.open(c.work, c.locator) })
     : el('span', { class: 'lq-cite', text: label });
+  return el('footer', {}, [voice ? el('span', { class: 'lq-voice', text: voice }) : null, cite]);
+}
+
+export function quoteBlock(q: LensQuote, passages: PassageBridge | undefined, opts: { compact?: boolean } = {}): HTMLElement {
+  // a plate caption is an object's label as printed: it is shown as one, never set between quotation marks
+  if (q.caption) return captionBlock(q, passages, opts);
   return el('blockquote', { class: `lq ${opts.compact ? 'lq-compact' : ''}` }, [
     el('p', { text: entered(q.text) }),
     // a quotation kept as a damaged scan reads it says so — the words are not repaired, they are marked
     q.scan ? el('span', { class: 'dp-scan', text: 'Damaged scan: the words are as the scan reads them' }) : null,
-    el('footer', {}, [voice ? el('span', { class: 'lq-voice', text: voice }) : null, cite]),
+    citeFooter(q, passages),
+  ]);
+}
+
+/** A plate caption as printed, with its cite: the words stand as the plate gives them, unquoted. */
+export function captionBlock(q: LensQuote, passages: PassageBridge | undefined, opts: { compact?: boolean } = {}): HTMLElement {
+  return el('figure', { class: `lq-caption ${opts.compact ? 'lq-compact' : ''}` }, [
+    el('p', { class: 'lq-caption-text', text: q.text }),
+    q.scan ? el('span', { class: 'dp-scan', text: 'Damaged scan: the words are as the scan reads them' }) : null,
+    citeFooter(q, passages),
   ]);
 }
 

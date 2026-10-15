@@ -197,6 +197,11 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
 .lq-cite.link-quiet { color: var(--ink-3); border-bottom-color: rgb(var(--core-rgb) / 0.18); }
 .lq-cite.link-quiet:hover { color: var(--ink); }
 .lq-compact p { font-size: 0.95rem; }
+/* a plate caption: an object's label as printed, not a quotation: upright sans, dotted rule, no quotation mark */
+.lq-caption { margin: 16px 0; padding: 2px 0 2px 16px; border-left: 1px dotted rgb(var(--core-rgb) / 0.5); }
+.lq-caption-text { margin: 0; font: 400 0.95rem/1.45 var(--sans); color: var(--ink); letter-spacing: 0.01em; }
+.lq-caption footer { margin-top: 7px; font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: 0.01em; }
+.rv-caption, .dp-caption { margin: 14px 0 0; font: 400 0.95rem/1.45 var(--sans); color: var(--ink); }
 .lq-voice { display: inline-block; margin-right: 6px; padding: 0 5px; border: 1px solid var(--hair); border-radius: 4px; font: 500 10px var(--sans); letter-spacing: 0.06em; color: var(--ink-2); }
 .lp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 20px; border: 1px solid rgb(var(--core-rgb) / 0.4); font: 500 12.5px var(--sans); color: var(--ink); background: rgb(var(--core-rgb) / 0.08); transition: background 0.2s, border-color 0.2s; }
 .lp-btn:hover { background: rgb(var(--core-rgb) / 0.16); border-color: var(--core); }

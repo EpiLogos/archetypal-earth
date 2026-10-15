@@ -1,8 +1,8 @@
 // Text helpers: link stripping, label derivation, instance body parsing, one-liners.
 import { stripLinks, linkTargets, DEFAULT_VAULT } from './vault.mjs';
 import { workLoader } from './cite.mjs';
-import { completeTrailingQuote } from './quotes.mjs';
-import { TRAILING_ELLIPSIS, stripFootnoteMarkers } from './display.mjs';
+import { completeQuote } from './quotes.mjs';
+import { stripFootnoteMarkers } from './display.mjs';
 
 export function collapse(s) {
   return String(s).replace(/\s+/g, ' ').trim();
@@ -10,11 +10,14 @@ export function collapse(s) {
 
 /** Plain prose from vault markdown: no wikilinks, emphasis markers, pdf-page noise. */
 export function plain(s) {
-  let t = stripLinks(String(s));
+  // the note's export escapes its quotation marks (\") and writes some letters as \uXXXX: both are the characters themselves
+  let t = stripLinks(String(s)).replace(/\\(["'])/g, '$1').replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
   t = t.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/(^|[\s(])\*([^*\s][^*]*?)\*(?=[\s).,;:]|$)/g, '$1$2');
   t = t.replace(/`([^`]+)`/g, '$1');
   // pdf page locators are bookkeeping, not prose
   t = t.replace(/\s*\(\s*(?:[\w .]*,\s*)?pdf pp?\.?\s*[\d\-–—, pf.]+\)/gi, '');
+  // a reading-pass chunk file ("(neumann-great-mother-c03.jsonl)") is the harvest's bookkeeping, never reader text
+  t = t.replace(/\s*\(\s*[\w.\-]+\.jsonl\s*\)/gi, '');
   t = t.replace(/\s*[,;]\s*pdf pp?\.?\s*[\d\-–—, pf.]+/gi, '');
   t = t.replace(/\(\s*\)/g, '').replace(/\(\s*[,;]\s*/g, '(').replace(/\s+([,.;:)])/g, '$1').replace(/\(\s+/g, '(');
   return collapse(t);
@@ -108,27 +111,6 @@ function unquote(line) {
   return collapse(t.replace(/^[“"']|[”"']$/g, ''));
 }
 
-function capQuote(q, max = 320) {
-  if (q.length <= max) return stripFootnoteMarkers(q);
-  // sentence ends that may close a display, best last: a real stop, question or exclamation — the text's own
-  // ellipsis ("paused . . . ") counts only when nothing better exists, for a display that ends "…" after a pause is
-  // the very half-thought this exists to prevent. An abbreviation's period before a lowercase word is not an end.
-  const ends = [...q.matchAll(/[.!?;]+[”"’')\]]*(?=[\s\d]|$)/gu)].filter((m) => {
-    const next = q.slice(m.index + m[0].length).match(/^\s+(\S{0,24})/u);
-    return !next || !next[1] || /[!?;]/.test(m[0]) || /^[“"'’«(\d\p{Lu}¶*]/u.test(next[1]);
-  });
-  const realEnd = (m) => !/^\.{2,}/.test(m[0]);
-  const inWindow = ends.filter((m) => m.index + m[0].length <= max);
-  const best = [...inWindow].reverse().find(realEnd);
-  if (best && best.index + best[0].length > max * 0.45) return stripFootnoteMarkers(q.slice(0, best.index + best[0].length));
-  // no clean boundary inside the window: run on to the first sentence end the text itself has — the note's words are
-  // the corpus's words, so nothing is invented here; when no sentence end is reachable, the word-boundary cut remains
-  const past = ends.find((m) => m.index + m[0].length > max && m.index + m[0].length - max <= 480);
-  const chosen = past && (realEnd(past) || !best) ? past : best;
-  if (chosen) return stripFootnoteMarkers(q.slice(0, chosen.index + chosen[0].length));
-  return `${cutAtWord(q, max - 1)}…`;
-}
-
 // The vault corpus, loaded once and only when a quote actually needs completing: the ingest's instance notes may keep
 // a reading-pass trim, and the corpus holds the sentence it cut. Absent vault, every completion declines quietly.
 let corpusLoader;
@@ -155,16 +137,18 @@ function citeWorkCandidates(rawLine) {
   return out.slice(0, 4);
 }
 
-/** A quote the note itself leaves trailing into an ellipsis: completed from the corpus when the cite names a work. */
+/**
+ * A quote the note carries as a fragment, completed to its corpus sentence when the cite names a work. Returns the
+ * completion's result; an uncompleted quote comes back as the note wrote it, whole and never capped.
+ */
 function completeFromCorpus(text, candidates) {
-  if (!text || !TRAILING_ELLIPSIS.test(text.trimEnd())) return text;
   const load = vaultLoader();
-  if (!load) return text;
+  if (!text || !load) return { text, done: false };
   for (const work of candidates) {
-    const r = completeTrailingQuote(load, work, text);
-    if (r.done) return r.text;
+    const r = completeQuote(load, work, text);
+    if (r.done) return r;
   }
-  return text;
+  return { text, done: false };
 }
 /** Split an instance note body into paragraphs / first quote / parallels. */
 export function parseInstanceBody(body, { workHint } = {}) {
@@ -216,7 +200,7 @@ export function parseInstanceBody(body, { workHint } = {}) {
   if (quotes.length) {
     // the work candidates come from the RAW line: plain() strips the cite the completion needs
     let q = unquote(plain(quotes[0]));
-    if (q.length >= 12) quote = capQuote(completeFromCorpus(q, workHint ? [...citeWorkCandidates(quotes[0]), workHint] : citeWorkCandidates(quotes[0])));
+    if (q.length >= 12) quote = stripFootnoteMarkers(completeFromCorpus(q, workHint ? [...citeWorkCandidates(quotes[0]), workHint] : citeWorkCandidates(quotes[0])).text);
   }
   return { body: bodyParas, quote, parallels: [...new Set(parallels)] };
 }

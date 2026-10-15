@@ -6,7 +6,7 @@ import fs from 'node:fs';
 // @ts-expect-error Plain ESM shared with the generators.
 import { stripFootnoteMarkers, sentenceEndsBeforeTrailingEllipsis, TRAILING_ELLIPSIS } from '../../scripts/lib/display.mjs';
 // @ts-expect-error Plain ESM shared with the generators.
-import { citeQuotes, completeTrailingQuote } from '../../scripts/lib/quotes.mjs';
+import { citeQuotes, completeQuote } from '../../scripts/lib/quotes.mjs';
 // @ts-expect-error Plain ESM shared with the generators.
 import { verify, workLoader } from '../../scripts/lib/cite.mjs';
 // @ts-expect-error Plain ESM shared with the generators.
@@ -76,49 +76,52 @@ describe('glued footnote markers leave the displayed string', () => {
   });
 });
 
-describe('a trailing trim is completed from the corpus sentence it cut', () => {
+describe('a fragment is completed from the corpus sentence it cut', () => {
   const load = fakeLoader('wx', [
     { page: 10, text: '[¶17] The theme is the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus, Krishna and Arjuna in the Bhagavad Gita.27 The treasure is the self.' },
     { page: 11, text: '[¶18] A second page repeats nothing of the first and speaks instead of the moon, which was believed to make rain.' },
   ]);
 
   it('extends the display to the corpus sentence end, its footnote digits stripped', () => {
-    const r = completeTrailingQuote(load, 'wx', 'The theme is the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus…');
+    const r = completeQuote(load, 'wx', 'The theme is the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus…');
     expect(r.done).toBe(true);
     expect(r.text).toBe('The theme is the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus, Krishna and Arjuna in the Bhagavad Gita.');
   });
 
   it('joins a trim that cut right before a comma without a stray space', () => {
-    const r = completeTrailingQuote(load, 'wx', 'of whom I will give three famous examples: the disciples on the road to Emmaus…');
+    const r = completeQuote(load, 'wx', 'of whom I will give three famous examples: the disciples on the road to Emmaus…');
     expect(r.done).toBe(true);
     expect(r.text).toContain('Emmaus, Krishna');
   });
 
   it('keeps a quote the corpus itself pauses for (its own ellipsis)', () => {
     const pauses = fakeLoader('pause', [{ page: 10, text: 'The theme is the magical travelling companion, of whom the disciples on the road … and the companion appears to him in person.' }]);
-    const r = completeTrailingQuote(pauses, 'pause', 'The theme is the magical travelling companion, of whom the disciples on the road…');
+    const r = completeQuote(pauses, 'pause', 'The theme is the magical travelling companion, of whom the disciples on the road…');
     expect(r.done).toBe(false);
     expect(r.text).toBe('The theme is the magical travelling companion, of whom the disciples on the road…');
   });
 
   it('keeps a trailing ellipsis that follows a complete sentence (an intentional omission)', () => {
     expect(sentenceEndsBeforeTrailingEllipsis('It rises and sets there. …')).toBe(true);
-    const r = completeTrailingQuote(load, 'wx', 'The treasure is the self. …');
+    const r = completeQuote(load, 'wx', 'The treasure is the self. …');
     expect(r.done).toBe(false);
   });
 
   it('declines when the stem names no place, two places, or no corpus stands behind the work', () => {
     const short = fakeLoader('wx', [{ page: 1, text: 'Nothing here matches the words at all.' }]);
-    expect(completeTrailingQuote(short, 'wx', 'words wholly missing from every page of the book…').done).toBe(false);
+    expect(completeQuote(short, 'wx', 'words wholly missing from every page of the book…').done).toBe(false);
     const twice = fakeLoader('dup', [{ page: 1, text: 'the same sentence twice over and once more, for the same sentence twice over is what the page holds, and then it stops here.' }]);
-    expect(completeTrailingQuote(twice, 'dup', 'the same sentence twice over…').reason).toMatch(/more than one place/);
-    expect(completeTrailingQuote(load, 'nowhere', 'words wholly missing from every page of the book…').reason).toMatch(/no corpus/);
+    expect(completeQuote(twice, 'dup', 'the same sentence twice over…').reason).toMatch(/more than one place/);
+    expect(completeQuote(load, 'nowhere', 'words wholly missing from every page of the book…').reason).toMatch(/no corpus/);
   });
 
-  it('never fires without a trailing ellipsis', () => {
-    const r = completeTrailingQuote(load, 'wx', 'The treasure is the self, wholly and completely.');
-    expect(r.done).toBe(false);
-    expect(r.text).toBe('The treasure is the self, wholly and completely.');
+  it('leaves a whole sentence alone, and invents no words the corpus does not hold', () => {
+    const whole = completeQuote(load, 'wx', 'The treasure is the self.');
+    expect(whole.done).toBe(false);
+    expect(whole.reason).toMatch(/already a whole sentence/);
+    const absent = completeQuote(load, 'wx', 'The treasure is the self, wholly and completely.');
+    expect(absent.done).toBe(false);
+    expect(absent.text).toBe('The treasure is the self, wholly and completely.');
   });
 });
 
@@ -192,7 +195,7 @@ describe('the vault corpus itself: a real trim completes against real pages', ()
   // No fixtures: the corpus is the court of appeal, so the completion engine is heard against it when it stands.
   it.runIf(fs.existsSync(`${DEFAULT_VAULT}/corpus`))('the Emmaus trim completes to its sentence end in Aion', () => {
     const load = workLoader(DEFAULT_VAULT);
-    const r = completeTrailingQuote(load, 'cw12', 'This is the theme of the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus…');
+    const r = completeQuote(load, 'cw12', 'This is the theme of the magical travelling companion, of whom I will give three famous examples: the disciples on the road to Emmaus…');
     expect(r.done).toBe(true);
     expect(r.text).toMatch(/Emmaus, Krishna and Arjuna in the Bhagavad Gita, Moses and El-Khidr in Sura 18 of the Koran\.$/);
   });

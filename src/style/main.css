@@ -134,6 +134,12 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
     repeating-radial-gradient(circle at 30% 28%, transparent 0 22px, rgb(255 255 255 / 0.05) 22px 23px),
     radial-gradient(60% 50% at 70% 80%, rgb(var(--core-rgb) / 0.08), transparent);
 }
+/* a page-sized plate with no image yet says so: an honest gap, told apart from a plate that failed to load */
+.plate-empty[data-none]::before {
+  content: attr(data-none); position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 16px 10px 7px;
+  font: 500 9.5px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: rgb(255 255 255 / 0.62);
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.42), transparent); pointer-events: none;
+}
 .plate-credit {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 10px 6px;
   font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.02em; color: rgb(255 255 255 / 0.78);

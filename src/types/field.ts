@@ -178,6 +178,8 @@ export interface Occurrence {
   jung: Cite[];
   /** Short verbatim quote from the vault body, when present. */
   quote?: string;
+  /** the quote is a plate caption as printed (an object label), shown as one, never as a quotation */
+  caption?: true;
   /** Plain-text paragraphs of the vault body (wikilinks resolved to names). */
   body: string[];
   parallelIds: OccurrenceId[]; // resolvable vault parallels only

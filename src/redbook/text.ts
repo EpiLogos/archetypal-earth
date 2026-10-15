@@ -77,7 +77,8 @@ export interface KeyPassage {
  */
 export function keyPassage(o: Occurrence, genesis?: GenesisRow): KeyPassage | null {
   const cite = o.jung[0];
-  if (o.quote) return { words: o.quote, footer: cite ? citeLine(cite) : '' };
+  // a plate caption is an object's label, not a passage: it is never the key words of a stop
+  if (o.quote && !o.caption) return { words: o.quote, footer: cite ? citeLine(cite) : '' };
   if (genesis) return { words: genesis.words, footer: genesisCite(genesis.cite) };
   const words = VETTED_BODY_QUOTES[o.id];
   return words && cite ? { words, footer: citeLine(cite) } : null;

@@ -74,6 +74,7 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   if (ref && ref.width && ref.height) fig.style.setProperty('--ar', String(ref.width / ref.height));
   if (!ref) {
     fig.classList.add('plate-empty');
+    if (!opts.thumb) fig.dataset.none = 'No plate yet';
     return fig;
   }
   const img = el('img', { alt: opts.alt ?? sanitiseTitle(ref.title), decoding: 'async', draggable: 'false' });
@@ -87,6 +88,7 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   img.addEventListener('error', () => {
     img.remove();
     fig.classList.add('plate-empty', 'plate-failed');
+    if (!opts.thumb) fig.dataset.none = 'Plate could not load';
   });
   img.src = imgUrl(ref, opts.thumb);
   fig.append(img);

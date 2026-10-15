@@ -8,7 +8,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT } from './lib/vault.mjs';
 import { workLoader, locate, verify } from './lib/cite.mjs';
-import { citeQuotes, workTitles } from './lib/quotes.mjs';
+import { citeQuotes, completeQuote, isPlateCaption, workTitles } from './lib/quotes.mjs';
+import { stripFootnoteMarkers } from './lib/display.mjs';
 import { readRecords } from './harvest-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -51,13 +52,16 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
         const key = `${src.vol}|${loc.page}|${r.quote}`;
         const prev = seen.get(key);
         if (prev) { if (!prev.terms.includes(r.term)) prev.terms.push(r.term); continue; }
+        const instanceText = stripFootnoteMarkers(completeQuote(load, src.vol, r.quote).text);
         seen.set(key, {
           ...(Number.isInteger(r.year_int) ? { year: r.year_int } : {}),
           yearDisplay: r.year_display ?? (Number.isInteger(r.year_int) ? String(r.year_int) : ''),
           place: r.place ?? '',
           locus: r.locus_type ?? '',
           terms: [r.term],
-          text: r.quote,
+          // the harvest's trimmed window is completed to its corpus sentence where the corpus holds one; a caption stands as written
+          text: instanceText,
+          ...(isPlateCaption(instanceText) ? { caption: true } : {}),
           cite: { work: src.vol, workTitle: titles.get(src.vol) ?? src.vol, locator: loc.locator, ...(loc.print ? { print: loc.print } : {}) },
           ...(r.ocr || loc.scan ? { scan: true } : {}),
         });

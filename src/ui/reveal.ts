@@ -54,7 +54,7 @@ export class Reveal {
       const text = el('div', { class: 'rv-text' });
       text.append(el('h2', { class: 'rv-name', text: o.label }));
       text.append(el('p', { class: 'rv-line', text: placeLine(m, o) }));
-      if (o.quote) text.append(el('blockquote', { class: 'rv-quote', text: o.quote }));
+      if (o.quote) text.append(o.caption ? el('p', { class: 'rv-caption', text: o.quote }) : el('blockquote', { class: 'rv-quote', text: o.quote }));
       // a quote takes the place of a second paragraph: the reveal stays short
       const paras = o.body.filter(Boolean).slice(0, o.quote ? 1 : 2);
       paras.forEach((p) => text.append(el('p', { class: 'rv-para', text: clipText(p, o.quote ? 260 : 220) })));

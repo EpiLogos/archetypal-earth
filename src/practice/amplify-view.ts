@@ -56,7 +56,7 @@ export function amplificationView(m: Model, a: Amplification, act: AmplifyAction
     el('p', { class: 'lp-note', text: 'The dreams and visions in the corpus where this image appears: the parallels Jung lined up beside a dream image.' }),
     ...dreams.slice(0, opts.dreamFirst ? 6 : 3).map((o) => el('div', { class: 'am-dream' }, [
       el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? 'Jung’s own' : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })]),
-      o.quote ? el('blockquote', { class: 'lq lq-compact' }, [el('p', { text: o.quote }), el('footer', {}, [citeLink(o, passages)])]) : null,
+      o.quote ? (o.caption ? el('figure', { class: 'lq-caption lq-compact' }, [el('p', { class: 'lq-caption-text', text: o.quote }), el('footer', {}, [citeLink(o, passages)])]) : el('blockquote', { class: 'lq lq-compact' }, [el('p', { text: o.quote }), el('footer', {}, [citeLink(o, passages)])])) : null,
     ])),
   ]) : el('p', { class: 'lp-note', text: 'No dream or vision in the corpus carries this image, so there is no dream parallel to set beside yours.' });
 

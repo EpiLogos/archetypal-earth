@@ -192,7 +192,8 @@
         "Saint Sebastian arrows painting",
         "Death the archer engraving Danse macabre"
       ],
-      "skip": "family visual screen rejected the plate (File:A Girl Defending Herself against Eros, by Wil): Eros and girl painting; arrow not the subject"
+      "pin": "File:Philoctetes on Lemnos by Gerard Francksz. van der Kuijl, 1647.jpg",
+      "credit": "Representative picture: Philoctetes sits in a cave on Lemnos tending his wounded foot, his bow and arrows set against the rock beside him."
     },
     "ascent-descent": {
       "queries": [
@@ -215,8 +216,10 @@
         "Hiranyagarbha golden germ painting",
         "Hindu painting Brahman light"
       ],
-      "pin": "File:Golden cosmic egg Hiranyagarbha by Manaku.jpg",
-      "skip": "family visual screen rejected the plate (File:Golden cosmic egg Hiranyagarbha by Manaku.jpg): Golden egg; Hiranyagarbha is not atman-brahman image"
+      "pin": "File:Om devanagari.PNG",
+      "credit": "Representative picture: The Devanagari syllable Om (AUM) in red, the sacred sound that Upanishadic texts identify with Brahman and the self.",
+      "minLongest": 120,
+      "minShort": 100
     },
     "bird": {
       "queries": [
@@ -224,7 +227,8 @@
         "Birds of Hermes alchemical emblem engraving",
         "medieval manuscript bird soul"
       ],
-      "skip": "family visual screen rejected the plate (File:Master of the First Prayerbook of Maximillian): Illuminated border; birds not clearly the subject"
+      "pin": "File:Ibis MET DP245159.jpg",
+      "credit": "Representative picture: A carved and painted figure of a sacred ibis, the bird of Thoth, the Egyptian counterpart of Hermes."
     },
     "cave": {
       "queries": [
@@ -309,7 +313,8 @@
         "Osiris grain corn germinating",
         "Demeter Triptolemos relief"
       ],
-      "skip": "family visual screen rejected the plate (File:Mayan - Lidded Vessel - Walters 20092039 - Si): Maya lidded vessel; corn god not shown"
+      "pin": "File:Relief with Maize Goddess (Chicomecóatl).jpg",
+      "credit": "Representative picture: An Aztec basalt relief of the maize goddess Chicomecoatl, standing in a headdress; a goddess, not the male corn god."
     },
     "cross": {
       "queries": [
@@ -475,8 +480,8 @@
         "Red and white rose alchemy emblem",
         "Taoist alchemy flower painting"
       ],
-      "pin": "File:元 佚名 蓮花圖 軸-Lotus and waterbirds MET DT242921.jpg",
-      "skip": "family visual screen rejected the plate (File:元 佚名 蓮花圖 軸-Lotus and waterbirds MET DT242921.): Lotus painting; not golden flower"
+      "pin": "File:Chinese woodcut; Daoist internal alchemy (2) Wellcome L0038972.jpg",
+      "credit": "Representative picture: A Daoist internal-alchemy woodcut titled Reflected Illumination (fanzhao tu): a seated body with its channels, from the Xingming guizhi; no flower app"
     },
     "grail": {
       "queries": [
@@ -551,8 +556,7 @@
         "Fu Xi bagua trigrams painting",
         "dragon horse river map Chinese"
       ],
-      "pin": "File:Ma-Lin-Fuxi-and-turtle.jpg",
-      "skip": "family visual screen rejected the plate (File:Ma-Lin-Fuxi-and-turtle.jpg): Chinese scroll figure with turtle; no hexagram"
+      "pin": "File:Diagram of I Ching hexagrams owned by Gottfried Wilhelm Leibniz, 1701.jpg"
     },
     "island": {
       "queries": [
@@ -596,8 +600,8 @@
         "Lapis philosophorum emblem",
         "alchemy stone Splendor Solis"
       ],
-      "pin": "File:The Twelfth Key of Basil Valentine. Wellcome M0012405.jpg",
-      "skip": "family visual screen rejected the plate (File:The Twelfth Key of Basil Valentine. Wellcome ): Alchemical workshop plate; no lapis stone shown"
+      "pin": "File:M. Maier; \"Secretioris naturae...\"; alchemical spell. Wellcome L0000864.jpg",
+      "credit": "Representative picture: A Michael Maier emblem (XXI): a robed man draws a circle, square and triangle around a naked man and woman, and the Latin caption ends 'habebis lap. P"
     },
     "lingam-yoni": {
       "queries": [
@@ -650,7 +654,8 @@
         "Merlin Arthurian manuscript",
         "Hermes Trismegistus woodcut"
       ],
-      "skip": "family visual screen rejected the plate (File:Hermes and his pictoral Tabula.jpg): Hermes with tabula; not a magician subject"
+      "pin": "File:Prospero, Miranda and Ariel, from \"The Tempest\" - Google Art Project.jpg",
+      "credit": "Representative picture: Prospero, the old robed magician, commanding the spirit Ariel, who glows in a halo, while Miranda kneels beside him."
     },
     "magnet": {
       "queries": [
@@ -681,8 +686,7 @@
         "Melusine woodcut",
         "Melusine fairy serpent medieval"
       ],
-      "pin": "File:Bookofmelusine.jpg",
-      "skip": "family visual screen rejected the plate (File:Bookofmelusine.jpg): Castle scene; Melusine not clearly depicted"
+      "pin": "File:Melusinediscovered.jpg"
     },
     "mercurius": {
       "queries": [
@@ -730,7 +734,6 @@
       ]
     },
     "mothers-of-faust": {
-      "skip": "the Mothers realm of Faust II: no passing scan; the only matches are opera-book pages, not the motif",
       "queries": [
         "Faust Mothers Goethe illustration",
         "Faust Die Mutter Goethe"
@@ -745,7 +748,9 @@
           "mutter"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Deesses de Vertault (musée de Bibracte).jpg",
+      "credit": "Representative picture: Three seated stone Mother goddesses (Matres) from Vertault in Burgundy, each with a fruit or basket on her lap."
     },
     "mountain": {
       "queries": [
@@ -760,7 +765,10 @@
         "Ra solar barque night journey papyrus",
         "Heracles sun cup Helios vase"
       ],
-      "skip": "family visual screen rejected the plate (File:Pieter Lastman - Jonah and the Whale - Google): Jonah and whale; sea-journey link uncertain"
+      "pin": "File:Ra Barque.jpg",
+      "credit": "Representative picture: A small painted solar barque carrying the falcon-headed sun god Ra under the sun disc, with a hieroglyph panel behind.",
+      "minLongest": 200,
+      "minShort": 150
     },
     "nigredo": {
       "queries": [
@@ -814,8 +822,8 @@
         "Orphic egg Phanes relief",
         "Splendor Solis vessel egg"
       ],
-      "pin": "File:Michael Maier Atalanta Fugiens Emblem 21.jpeg",
-      "skip": "family visual screen rejected the plate (File:Michael Maier Atalanta Fugiens Emblem 21.jpeg): Emblem scene; philosophers' egg not clear"
+      "pin": "File:Golden cosmic egg Hiranyagarbha by Manaku.jpg",
+      "credit": "Representative picture: A golden oval egg, the cosmic world-egg (Hiranyagarbha), set on a blue ground in a painted folio of the Bhagavata Purana."
     },
     "phoenix": {
       "queries": [
@@ -853,7 +861,8 @@
         "prima materia alchemy engraving",
         "Saturn devouring son Goya"
       ],
-      "skip": "family visual screen rejected the plate (File:Francisco de Goya, Saturno devorando a su hij): Goya Saturn devouring son; not prima materia"
+      "pin": "File:Parisinus gr 2327ourouboros.jpg",
+      "credit": "Representative picture: A Greek alchemical manuscript figure of the serpent biting its own tail (ouroboros), from Zosimos of Panopolis, with Greek text around it."
     },
     "quaternity": {
       "queries": [
@@ -861,7 +870,8 @@
         "Christ in majesty tetramorph",
         "four rivers of Paradise"
       ],
-      "skip": "family visual screen rejected the plate (File:31 - Toulouse - Basilique Saint-Sernin - Chri): Christ in majesty relief; no quaternity"
+      "pin": "File:The Four Sons of Horus (deity).png",
+      "credit": "Representative picture: Four standing Egyptian figures with the human, baboon, falcon and jackal heads of the four sons of Horus, the protectors of the dead."
     },
     "raven": {
       "queries": [
@@ -876,8 +886,7 @@
         "Buch der heiligen Dreifaltigkeit Rebis",
         "Rosarium philosophorum hermaphrodite"
       ],
-      "pin": "File:Atalanta Fugiens 38 Rebis.jpg",
-      "skip": "family visual screen rejected the plate (File:Atalanta Fugiens 38 Rebis.jpg): Atalanta emblem page; rebis not clear"
+      "pin": "File:Rebis from the Viatorium spagyricum (1625).png"
     },
     "resurrection": {
       "queries": [
@@ -930,8 +939,8 @@
         "alchemical salt symbol engraving",
         "tria prima mercury sulphur salt"
       ],
-      "pin": "File:William de Brailes - Lot and his Family Flee Sodom (Genesis 19 -15-26) - Walters W1064R - Full Page.jpg",
-      "skip": "family visual screen rejected the plate (File:William de Brailes - Lot and his Family Flee ): Lot's flight from Sodom; no salt pillar"
+      "pin": "File:Explication des caractères alchimiques.jpg",
+      "credit": "Representative picture: A 17th-century table of chemical signs by Moyse Charas, listing the salts sel commun, sel gemme and sel ammoniac with their symbols."
     },
     "scarab": {
       "queries": [
@@ -978,8 +987,8 @@
         "Christ Helios Vatican necropolis mosaic",
         "Apollo Helios relief"
       ],
-      "pin": "File:Helios metope from Temple of Athena at Troy (Berlin Altes Museum LV 21.1).jpg",
-      "skip": "family visual screen rejected the plate (File:Helios metope from Temple of Athena at Troy): Helios metope; not solification"
+      "pin": "File:Winged Sun alchemical.jpg",
+      "credit": "Representative picture: A coloured 1550 woodcut of a winged golden sun with a human face rising above a stone sepulchre of water."
     },
     "sophia": {
       "queries": [
@@ -1003,7 +1012,8 @@
         "alchemy scintilla flame engraving",
         "fire spark darkness painting"
       ],
-      "skip": "family visual screen rejected the plate (File:Peter Paul Rubens - Prometheus, 1636.jpg): Prometheus with torch; spark is not the subject"
+      "pin": "File:Joseph Wright of Derby The Alchemist.jpg",
+      "credit": "Representative picture: Joseph Wright's 'The Alchymist, in Search of the Philosopher's Stone, Discovers Phosphorus' (1771): an alchemist kneels in a dark vaulted room before "
     },
     "stag": {
       "queries": [
@@ -1019,7 +1029,8 @@
         "pentagram Agrippa occult philosophy",
         "star of Venus morning star painting"
       ],
-      "skip": "family visual screen rejected the plate (File:The Adoration of the Magi with Saint Anthony ): Adoration of the Magi; star is incidental"
+      "pin": "File:Star of Ishtar.jpg",
+      "credit": "Representative picture: An eight-pointed star with a central ring, the Mesopotamian symbol of Ishtar (Venus), with rays from the centre."
     },
     "stone": {
       "queries": [
@@ -1033,7 +1044,8 @@
         "Emblem representing the path to the philosopher's stone Wellcome",
         "Basil Valentine Keys alchemy Wellcome"
       ],
-      "skip": "family visual screen rejected the plate (File:Emblem representing the path to the philosoph): Alchemical emblem; sulphur not identifiable in picture"
+      "pin": "File:Alchemy - Mercury and sulfur personified - Wellcome Collection.jpg",
+      "credit": "Representative picture: A 16th-century alchemical painting of Sulphur as a red-robed crowned king beneath a sun, facing Mercury as a blue-robed crowned queen beneath a moon."
     },
     "sun": {
       "queries": [
@@ -1049,7 +1061,8 @@
         "Gilgamesh relief Khorsabad",
         "Horus Ra Egypt relief"
       ],
-      "skip": "family visual screen rejected the plate (File:Osiris, Horus, and Isis. Funerary stele of Tj): Osiris, Horus and Isis stele; not a sun-hero scene"
+      "pin": "File:Nut at Dendera Nut Chapel ceiling.jpg",
+      "credit": "Representative picture: A Ptolemaic relief at Dendera of the sky goddess Nut arched over the sun disk; the file caption says she swallows Re each evening and bears him each m"
     },
     "swan": {
       "queries": [
@@ -1087,7 +1100,10 @@
         "Chinese taiji yin yang painting",
         "Taoist immortal painting"
       ],
-      "skip": "family visual screen rejected the plate (File:Zhang Lu-Laozi Riding an Ox.jpg): Laozi riding an ox; Tao itself not depicted"
+      "pin": "File:Character dao.png",
+      "credit": "Representative picture: The Chinese character 道 (dao, the Way) in a plain black glyph.",
+      "minLongest": 200,
+      "minShort": 150
     },
     "tauroctony": {
       "queries": [
@@ -1129,8 +1145,7 @@
         "Sigurd Fafnir carving",
         "Nibelung hoard illustration"
       ],
-      "pin": "File:Sigurd pierced him with his sword (1901) by Arthur Rackham.jpg",
-      "skip": "family visual screen rejected the plate (File:Sigurd pierced him with his sword): Sigurd and Fafnir dragon; treasure not the subject"
+      "pin": "File:Detail of the Mosaic with the Labors of Hercules (Eleventh Labour- Apples of the Hesperides), 3rd century AD, found in Llíria (Valencia), National Archaeological Museum of Spain, Madrid (15457081602).jpg"
     },
     "tree": {
       "queries": [
@@ -1147,8 +1162,8 @@
         "Coyote trickster Native American",
         "Till Eulenspiegel woodcut"
       ],
-      "pin": "File:Reynard the Fox, early 15th century - Stained Glass Museum.jpg",
-      "skip": "family visual screen rejected the plate (File:Reynard the Fox, early 15th century - Stained): Roundel with foliage; trickster fox not clearly shown"
+      "pin": "File:Xyj-sunwukong.jpg",
+      "credit": "Sun Wukong woodcut, Journey to the West (Ming edition), public domain"
     },
     "trinity": {
       "queries": [
@@ -1170,8 +1185,8 @@
         "Codex Marcianus ouroboros",
         "ouroboros Egyptian Tutankhamun shrine"
       ],
-      "pin": "File:Chrysopoea of Cleopatra 1.png",
-      "skip": "family visual screen rejected the plate (File:Chrysopoea of Cleopatra 1.png): Chrysopoeia egg-form drawing; no uroboros serpent"
+      "pin": "File:Ouroboros 1.jpg",
+      "_note": "Lucas Jennis, De Lapide Philosophico (1625): the uroboros as the family hero, public domain. Replaces the rejected Chrysopoeia pin."
     },
     "venus": {
       "queries": [
@@ -1236,8 +1251,8 @@
         "alchemical dragon worm engraving",
         "caterpillar chrysalis butterfly engraving"
       ],
-      "pin": "File:Metamorphosis of the Lappet (SM 1495z).png",
-      "skip": "family visual screen rejected the plate (File:Metamorphosis of the Lappet): Lappet caterpillar metamorphosis plate; worm not clear"
+      "pin": "File:Scheuchzer 1723 Lindworm.png",
+      "credit": "Representative picture: A 1723 engraving of a lindworm, a two-legged worm-dragon, facing a woodcutter with an axe."
     },
     "yantra": {
       "queries": [
@@ -1261,8 +1276,8 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Thangka of Amitābha Buddha from Tibet, American Museum of Natural History.jpg",
-      "skip": "family visual screen rejected the plate (File:Thangka of Amitābha Buddha from Tibet, Americ): Amitabha thangka; not the clear light"
+      "pin": "File:Bardo. Vision des divinités sereines.jpg",
+      "credit": "Representative picture: A Tibetan thangka of the bardo vision of peaceful deities: a central Buddha surrounded by a mandala of deities, from the Musée Guimet."
     },
     "apple": {
       "queries": [
@@ -1332,7 +1347,7 @@
         "Mithraic Aion leontocephaline relief",
         "Phanes Orphic egg Modena relief"
       ],
-      "skip": "family visual screen rejected the plate (File:Mithraic relief of Chronos-Aion): Mithraic relief; Aion figure not clearly identifiable"
+      "pin": "File:Aion mosaic Glyptothek Munich W504.jpg"
     },
     "apocalypse": {
       "queries": [
@@ -1384,15 +1399,16 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Henry Fuseli (1741–1825), The Nightmare, 1781.jpg",
-      "skip": "family visual screen rejected the plate (File:Henry Fuseli): Fuseli Nightmare; no black man figure"
+      "pin": "File:Krampus 02.jpg",
+      "credit": "Representative picture: A masked Krampus figure in a red devil face with horns and black shaggy fur, at a Salzburg Krampus run."
     },
     "blood": {
       "queries": [
         "Grunewald Isenheim Crucifixion",
         "Cranach Weimar altarpiece blood Christ"
       ],
-      "skip": "family visual screen rejected the plate (File:Isenheimer Altar): Isenheim crucifixion; blood not the subject"
+      "pin": "File:Vigor Boucquet - They cleaned their souls in the blood of Christ.jpg",
+      "credit": "Representative picture: Christ stands in a fountain of blood streaming from his wounds, with souls rising through flames around him."
     },
     "bread": {
       "queries": [
@@ -1414,8 +1430,8 @@
         "bakery",
         "recipe"
       ],
-      "pin": "File:Carrying off the Menorah from the Temple in Jerusalem depicted on a frieze on the Arch of Titus in the Forum Romanum.JPG",
-      "skip": "family visual screen rejected the plate (File:Carrying off the Menorah from the Temple in J): Menorah relief; not bread"
+      "pin": "File:Chinese Orthodox communion bread seal.jpg",
+      "credit": "Representative picture: A red stamp bearing a cross and Chinese text, used to mark communion bread."
     },
     "bridge": {
       "queries": [
@@ -1441,7 +1457,8 @@
         "Petrarch Trionfi triumph chariot engraving",
         "Elijah fiery chariot painting"
       ],
-      "skip": "family visual screen rejected the plate (File:Trionfi by Christoph Jamnitzer.JPG): Gilt plate; not a triumphal carriage"
+      "pin": "File:Trundholm Sun Chariot.jpg",
+      "credit": "Trundholm sun chariot, Nationalmuseet Denmark, CC BY-SA 3.0"
     },
     "cat": {
       "queries": [
@@ -1559,7 +1576,7 @@
         "Eos dawn goddess vase painting",
         "manna desert gathering painting"
       ],
-      "skip": "family visual screen rejected the plate (File:The Israelites Gathering Manna in the Desert ): Manna gathering scene, not dew"
+      "pin": "File:Gideon, the Biblical judge, wrings the dewy fleece. Autotype Wellcome V0034411.jpg"
     },
     "divination": {
       "queries": [
@@ -1572,7 +1589,8 @@
         "Exekias Dionysus cup pirates Munich",
         "Dionysus mosaic Sousse"
       ],
-      "skip": "family visual screen rejected the plate (File:Sousse Museum in the Medina Part1 034.jpg): Geometric mosaic; no Dionysus figure"
+      "pin": "File:Dionysos Ariadne MAN Napoli Inv9271.jpg",
+      "credit": "Representative picture: A Roman wall painting in which Dionysus finds the sleeping Ariadne, helped by two Cupids."
     },
     "dwarf": {
       "queries": [
@@ -1610,7 +1628,7 @@
         "Israelites crossing Red Sea painting",
         "Turner Hannibal crossing the Alps"
       ],
-      "skip": "family visual screen rejected the plate (File:Cornelis Cornelisz. van Haarlem - Israelites ): Red Sea crossing; not a frontier motif"
+      "pin": "File:Joachim Patinir (c. 1480–1524), Landscape with Charon Crossing the Styx, 1520–1524.jpg"
     },
     "gazelle": {
       "queries": [
@@ -1676,15 +1694,15 @@
         "Vienna Dioscorides plants illustration",
         "Tacuinum Sanitatis herbs miniature"
       ],
-      "pin": "File:Dioscorides describing the mandrake Wellcome L0068372.jpg",
-      "skip": "family visual screen rejected the plate (File:Dioscorides describing the mandrake Wellcome ): Painted interior scene; no mandrake plant shown"
+      "pin": "File:Herbal with 204 illustrations in colour of medicinal plants Wellcome L0041988.jpg",
+      "credit": "Representative picture: A green medicinal plant with a long root, drawn in an Italian manuscript herbal beside text on its healing virtues."
     },
     "holy-man": {
       "queries": [
         "Desert Fathers monks miniature manuscript",
         "dervish Sufi Persian miniature"
       ],
-      "skip": "family visual screen rejected the plate (File:Desert Fathers. Tadeos, 1430.jpg): Generic desert saint painting; holy man not clear"
+      "pin": "File:Sadhu with long hair, India, ca. 1920 (IMP-CSCNWW33-OS16-28).jpg"
     },
     "hostile-brothers": {
       "queries": [
@@ -1723,8 +1741,7 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Piranesi-Carceri-07Zugbrücke.jpg",
-      "skip": "family visual screen rejected the plate (File:Piranesi-Carceri-07Zugbrücke.jpg): Piranesi prison interior, not a house"
+      "pin": "File:Casa de Jung en Küsnacht 03.JPG"
     },
     "idol": {
       "queries": [
@@ -1761,9 +1778,7 @@
         "song",
         "album"
       ],
-      "pin": "File:Reliquary for Cintamani (Chōfukuji Temple).jpg",
-      "credit": "Unknown photographer, 1915, via National Diet Library (angle adjusted by uploader 雪野滾滾)",
-      "skip": "family visual screen rejected the plate (File:Reliquary for Cintamani): Reliquary urn; not a jewel subject"
+      "pin": "File:Ruby - Cleveland Museum of Natural History (33634335664).jpg"
     },
     "jupiter": {
       "queries": [
@@ -1778,7 +1793,6 @@
       ]
     },
     "last-man": {
-      "skip": "a seminar concept of decline; no depictable tradition beyond Zarathustra editions, which the zarathustra-figure plate carries",
       "queries": [
         "Nietzsche last man illustration",
         "Zarathustra last man"
@@ -1790,7 +1804,9 @@
           "last"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Martin, John - The Last Man - 1849.jpg",
+      "credit": "Representative picture: John Martin's painting of a lone man on a cliff above a ruined city under a red sun."
     },
     "leopard": {
       "queries": [
@@ -1822,7 +1838,8 @@
         "Raphael Transfiguration painting",
         "Gerard Dou candlelight hermit painting"
       ],
-      "skip": "family visual screen rejected the plate (File:Dadianebis sasaxlis naxatebi.jpg): Transfiguration fresco; family name generic"
+      "pin": "File:De Tafelen der Wet met de tien geboden in schoonschrift getoond door Mozes, SK-A-4487.jpg",
+      "credit": "Representative picture: Moses holding the tablets of the Law, with a golden glow behind his head; the Rijksmuseum caption says his face is shining."
     },
     "machine": {
       "queries": [
@@ -1859,7 +1876,10 @@
         "School of Athens Pythagoras Raphael",
         "Boethius arithmetic manuscript miniature"
       ],
-      "skip": "family visual screen rejected the plate (File:\"The School of Athens\" by Raffaello Sanzio da): School of Athens; no number subject"
+      "pin": "File:Lo Shu square.jpg",
+      "credit": "Representative picture: The 3x3 Lo Shu magic square of the numbers 1 to 9, drawn beside a tortoise.",
+      "minLongest": 200,
+      "minShort": 150
     },
     "orb": {
       "queries": [
@@ -1918,7 +1938,8 @@
         "Circe swine Odysseus painting",
         "Calydonian boar hunt vase"
       ],
-      "skip": "family visual screen rejected the plate (File:Jan Tengnagel - Circe with Odysseus, l19038-b): Circe scene; pig not plainly depicted"
+      "pin": "File:Piglet carrier Louvre MNB1714.jpg",
+      "credit": "Representative picture: An Attic terracotta figurine, from Eleusis and dated c. 140-130 BCE, of a woman carrying a piglet and a torch in the worship of Demeter and Persephone"
     },
     "pope-figure": {
       "queries": [
@@ -2013,7 +2034,7 @@
           "arnolfini"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:Van Eyck - Arnolfini PortraitFXD.jpg): Arnolfini portrait; ring not the subject"
+      "pin": "File:Gold wedding ring.jpg"
     },
     "spiral": {
       "queries": [
@@ -2055,7 +2076,8 @@
         "spider engraving scientific illustration antique",
         "spider web painting dew"
       ],
-      "skip": "family visual screen rejected the plate (File:Tintoretto - Aracne sfida Minerva in una gara): Arachne and Minerva contest; no spider shown"
+      "pin": "File:Antidotum tarantulae.jpg",
+      "credit": "Representative picture: Kircher's engraving of two tarantulas, the spider of tarantism, with a musical score for its cure and a map of Apulia."
     },
     "skull": {
       "queries": [
@@ -2193,8 +2215,7 @@
         "propaganda",
         "Shankbone"
       ],
-      "pin": "File:The Legend of the Wandering Jew, 11 - Trees intertwined with snakes.jpg",
-      "skip": "family visual screen rejected the plate (File:The Legend of the Wandering Jew, 11 - Trees i): Wandering Jew legend; no clear Ahasuerus figure"
+      "pin": "File:Wandering jew - Gustave Doré.jpg"
     },
     "animus-figure": {
       "queries": [
@@ -2223,7 +2244,8 @@
         "fashion",
         "airline"
       ],
-      "skip": "family visual screen rejected the plate (File:Phiale Painter ARV 1022 138 Hermes psychopomp): Hermes and woman at tomb vase; no animus figure"
+      "pin": "File:Gerard FrancoisPascalSimon-Cupid Psyche end.jpg",
+      "credit": "Representative picture: Cupid, a winged young man, kissing Psyche, with a butterfly (the soul) above her head."
     },
     "bardo": {
       "queries": [
@@ -2263,11 +2285,10 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Blake jacobsladder.jpg",
-      "skip": "family visual screen rejected the plate (File:Blake jacobsladder.jpg): Blake Jacob's ladder; not a big dream"
+      "pin": "File:Scipio Lying in Bed Dreaming; Guillaume de Lorris Lying in Bed Dreaming - Google Art Project.jpg",
+      "credit": "Representative picture: A manuscript page of the Roman de la Rose with two miniatures of a sleeper in bed, one in a chamber and one beneath trees in a garden."
     },
     "carcinoma": {
-      "skip": "no depictable tradition: an autonomous interior growth; Commons holds only clinical photography",
       "queries": [
         "cancer crab constellation manuscript",
         "Cancer zodiac medieval"
@@ -2279,7 +2300,9 @@
           "crab"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Carcinoma Ambrosius Pare.png",
+      "credit": "Representative picture: A crab engraving captioned 'The figure of the Crab, called Cancer in Latine', from Ambroise Pare's On Monsters and Marvels."
     },
     "castration": {
       "queries": [
@@ -2353,8 +2376,8 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Bayeux Tapestry 32-33 comet Halley Harold.jpg",
-      "skip": "family visual screen rejected the plate (File:Bayeux Tapestry 32-33 comet Halley Harold.jpg): Bayeux comet scene; not a chance series"
+      "pin": "File:Wheel of Fortune - Troy Book (c.1455-1462), f.30v - BL Royal MS 18 D II.jpg",
+      "credit": "Representative picture: A medieval Wheel of Fortune miniature from the Troy Book: a crowned figure enthroned at the top, figures tumbling and climbing around the rim, and a w"
     },
     "chronos": {
       "queries": [
@@ -2595,7 +2618,8 @@
           "asmodeus"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:Madonna and Child with Tobias and the Angel R): Tobias and angel; no father figure"
+      "pin": "File:Rembrandt Harmensz van Rijn - Return of the Prodigal Son - Google Art Project.jpg",
+      "credit": "Representative picture: An old father in a red cloak bends over his kneeling son, with both hands on the son's shoulders."
     },
     "faust-figure": {
       "queries": [
@@ -2700,8 +2724,8 @@
         ]
       ],
       "exclude": [],
-      "pin": "File:Musée Ingres-Bourdelle - Le songe d'Ossian, 1813 - Ingres - Joconde06070001439.jpg",
-      "skip": "family visual screen rejected the plate (File:Musée Ingres-Bourdelle - Le songe d'Ossian, 1): Ingres Ossian dream scene; not hypnagogic imagery"
+      "pin": "File:Goya-Capricho-43.jpg",
+      "credit": "Representative picture: Goya's etching The Sleep of Reason Produces Monsters: a sleeper at a desk with owls, bats and a cat rising around him."
     },
     "incubus": {
       "queries": [
@@ -2739,8 +2763,10 @@
         "doll",
         "daruma doll costume"
       ],
-      "pin": "File:Hakuin Ekaku - Bodhidharma (Daruma).jpg",
-      "skip": "family visual screen rejected the plate (File:Hakuin Ekaku - Bodhidharma): Daruma portrait; not a koan scene"
+      "pin": "File:Kaligraphie von Brigitte D'Ortschy- Koan Mu.jpg",
+      "credit": "Representative picture: Pending: the thumbnail could not be downloaded (rate limited); the title is the calligraphy of the koan 'Mu'.",
+      "minLongest": 200,
+      "minShort": 150
     },
     "labrys": {
       "queries": [
@@ -2854,8 +2880,8 @@
         "album",
         "martial arts"
       ],
-      "pin": "File:Heures d'Henri II 107V Le toucher des écrouelles par le roi Henri II (BnF lat 1429). jpg.jpg",
-      "skip": "family visual screen rejected the plate (File:Heures d'Henri II 107V Le toucher des écrouel): Royal touch scene; not mana"
+      "pin": "File:A TIKI AT RAROERA PAH, The New Zealanders Illustrated, 1847.jpg",
+      "credit": "Representative picture: A carved Maori tiki, a tall ancestral figure at Raroera Pah, in George French Angas's 1847 colour plate."
     },
     "marriage-quaternio": {
       "queries": [
@@ -2947,8 +2973,7 @@
         "film",
         "album"
       ],
-      "pin": "File:VM 15772-002 – Tabula Smaragdina (Hermes Trismegistus) – 1618 – Matthäus Merian.jpg",
-      "skip": "family visual screen rejected the plate (File:VM 15772-002 – Tabula Smaragdina): Cosmic diagram; microcosm figure not clear"
+      "pin": "File:Woodcut; microcosm and macrocosm, from Kircher. Wellcome L0015995.jpg"
     },
     "monocolus": {
       "queries": [
@@ -3199,8 +3224,7 @@
         "movie",
         "album"
       ],
-      "pin": "File:The Night-Hag Visiting Lapland Witches 1796 Henry Fuseli.jpg",
-      "skip": "family visual screen rejected the plate (File:The Night-Hag Visiting Lapland Witches 1796 H): Night-hag over sleepers; no pursuer figure"
+      "pin": "File:Orestes Pursued by the Furies by William-Adolphe Bouguereau (1862) - Google Art Project.jpg"
     },
     "quincunx": {
       "queries": [
@@ -3219,8 +3243,9 @@
         "movie",
         "basketball"
       ],
-      "pin": "File:Luceria Quincunx 139016.jpg",
-      "skip": "family visual screen rejected the plate (File:Luceria Quincunx 139016.jpg): Coin with star; not quincunx pattern"
+      "pin": "File:Chambers 1908 Quincunx.png",
+      "minLongest": 200,
+      "minShort": 150
     },
     "radioactive-nucleus": {
       "queries": [
@@ -3288,7 +3313,10 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:The Sacrifice of Abraham): Abraham sacrifice; ram not plainly shown"
+      "pin": "File:Manipura.png",
+      "credit": "Representative picture: The Manipura (navel) chakra as a red lotus with a yellow centre and its seed syllable 'ram'; the ram animal itself is not drawn.",
+      "minLongest": 200,
+      "minShort": 150
     },
     "redeemer-figure": {
       "queries": [
@@ -3338,8 +3366,7 @@
         "film",
         "club"
       ],
-      "pin": "File:Eugène Delacroix - The Barque of Dante.jpg",
-      "skip": "family visual screen rejected the plate (File:Eugène Delacroix - The Barque of Dante.jpg): Barque of Dante; river not the subject"
+      "pin": "File:Desna river Vinn meadow 2019 G01.jpg"
     },
     "satori": {
       "queries": [
@@ -3355,8 +3382,8 @@
         ]
       ],
       "relaxed": true,
-      "pin": "File:Enso.jpg",
-      "skip": "family visual screen rejected the plate (File:Enso.jpg): Enso circle; not a satori subject"
+      "pin": "File:China, Ming dynasty - Shakyamuni under the Bodhi Tree - 1971.68 - Cleveland Museum of Art.tif",
+      "credit": "Representative picture: A Ming painting of a seated figure in red robes beneath great trees, catalogued as Shakyamuni under the bodhi tree."
     },
     "saturn": {
       "queries": [
@@ -3449,7 +3476,7 @@
         "German Shepherd",
         "shepherd dog"
       ],
-      "skip": "family visual screen rejected the plate (File:History of mediæval art): Saint Peter statue; no shepherd"
+      "pin": "File:\"The good Shepherd\" mosaic - Mausoleum of Galla Placidia.jpg"
     },
     "sibyl": {
       "queries": [
@@ -3490,8 +3517,8 @@
         "carisoprodol",
         "Brave New World"
       ],
-      "pin": "File:Sagar manthan (painting) circa 1820.jpg",
-      "skip": "family visual screen rejected the plate (File:Sagar manthan): Churning ocean painting; soma not clear"
+      "pin": "File:सोम अभिषवणम् Soma Extraction.jpg",
+      "credit": "Representative picture: Priests in saffron robes pound soma stalks with stones in a mortar during a modern Vedic Somayaga ritual."
     },
     "soul-image": {
       "queries": [
@@ -3504,7 +3531,8 @@
           "beatrice"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:Dante Gabriel Rossetti - The Day Dream - Goog): Rossetti woman with flowers; no soul-image motif"
+      "pin": "File:Gerard FrancoisPascalSimon-Cupid Psyche end.jpg",
+      "credit": "Representative picture: François Gérard's Cupid and Psyche, with a butterfly above Psyche's head, which the caption identifies as the soul."
     },
     "spear": {
       "queries": [
@@ -3671,8 +3699,7 @@
       "exclude": [
         "Tasmanian"
       ],
-      "pin": "File:Henri Rousseau - Surprise!.jpg",
-      "skip": "family visual screen rejected the plate (File:Henri Rousseau - Surprise!.jpg): Rousseau jungle scene; no tiger clearly visible"
+      "pin": "File:Tiger Drinking Pond Mudumalai Mar21 DSC01310.jpg"
     },
     "tightrope-walker": {
       "queries": [
@@ -3746,7 +3773,7 @@
           "golgotha"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:Hieronymus Bosch 054.jpg): Bosch Christ carrying cross; not the Transitus"
+      "pin": "File:Vetal.jpg"
     },
     "triangle": {
       "queries": [
@@ -3762,7 +3789,8 @@
           "tetragrammaton"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:Amphitheatrum sapientiae aeternae - The cosmi): Cosmic rose medallion; triangle not clearly the subject"
+      "pin": "File:Geheime Figuren der Rosenkreuzer 1785-p16.jpg",
+      "credit": "Representative picture: A 1785 reprint of a Rosicrucian alchemical plate built on a red fire triangle marked Ignis and a green water triangle marked Aqua, around a central sp"
     },
     "uebermensch": {
       "queries": [
@@ -3774,8 +3802,11 @@
           "nietzsche"
         ]
       ],
-      "pin": "File:Nietzsche187a.jpg",
-      "skip": "family visual screen rejected the plate (File:Nietzsche187a.jpg): Portrait photo of Nietzsche, not the Ubermensch concept"
+      "pin": "File:Also sprach Zarathustra (1883).png",
+      "credit": "Representative picture: The title page of Nietzsche's Also sprach Zarathustra, first part (Chemnitz, 1883).",
+      "relaxed": true,
+      "minLongest": 300,
+      "minShort": 200
     },
     "ufo": {
       "queries": [
@@ -3860,8 +3891,8 @@
         "Green Day",
         "Green Lantern"
       ],
-      "pin": "File:Rosarium Philosophorum Wellcome L0026378.jpg",
-      "skip": "family visual screen rejected the plate (File:Rosarium Philosophorum Wellcome L0026378.jpg): Rosarium woodcut of coniunctio; viriditas not depicted"
+      "pin": "File:Green Man carving.jpg",
+      "credit": "Representative picture: A medieval stone carving of a face framed by foliage, a green-man head in a church."
     },
     "voice": {
       "queries": [
@@ -3884,8 +3915,8 @@
         "voice actor",
         "The Voice (TV)"
       ],
-      "pin": "File:John William Waterhouse - Echo and Narcissus - Google Art Project.jpg",
-      "skip": "family visual screen rejected the plate (File:John William Waterhouse - Echo and Narcissus ): Echo and Narcissus; voice not depicted directly"
+      "pin": "File:John Collier - Priestess of Delphi.jpg",
+      "credit": "Representative picture: The Pythia, the priestess of Delphi, seated on a tripod in rising smoke with a laurel branch, giving the oracle's voice."
     },
     "volcano": {
       "queries": [
@@ -3952,7 +3983,11 @@
         "sleeping beauty",
         "märchen"
       ],
-      "skip": "family visual screen rejected the plate (File:Die Hängematte.jpg): Woman in hammock; wish-dream not plainly depicted"
+      "pin": "File:Die Traumdeutung.jpg",
+      "credit": "Representative picture: The title page of Freud's Die Traumdeutung (Leipzig and Vienna, 1900), with its Virgil motto.",
+      "relaxed": true,
+      "minLongest": 300,
+      "minShort": 200
     },
     "witch": {
       "queries": [
@@ -3974,8 +4009,7 @@
         "Blair Witch",
         "Eastwick"
       ],
-      "pin": "File:Louvre rosa apparition.jpg",
-      "skip": "family visual screen rejected the plate (File:Louvre rosa apparition.jpg): Apparition scene; witch not clearly depicted"
+      "pin": "File:Hans Baldung Grien-De Heksen-1510.jpg"
     },
     "world-fire": {
       "queries": [
@@ -3994,7 +4028,8 @@
           "conflagration"
         ]
       ],
-      "skip": "family visual screen rejected the plate (File:John Martin - Sodom and Gomorrah.jpg): Sodom and Gomorrah fire; not a world-fire motif"
+      "pin": "File:Ragnarök by Doepler.jpg",
+      "credit": "Representative picture: Emil Doepler's Ragnarök illustration of Asgard burning after Surtr has engulfed the world in fire."
     },
     "wounded-physician": {
       "queries": [
@@ -4055,8 +4090,8 @@
         "comic",
         "Superman"
       ],
-      "pin": "File:Nietzsche1882.jpg",
-      "skip": "family visual screen rejected the plate (File:Nietzsche1882.jpg): Portrait of Nietzsche; zarathustra-figure not depicted"
+      "pin": "File:Sanzio 01 Zoroaster Ptolmey.jpg",
+      "credit": "Representative picture: A detail of Raphael's School of Athens showing the bearded Zoroaster, holding a celestial globe, beside a figure with a terrestrial globe."
     },
     "labyrinth": {
       "queries": [
@@ -4273,7 +4308,9 @@
           "terracotta"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Arheologicheski-Incense burner.jpg",
+      "credit": "Representative picture: A Cypro-Archaic II limestone incense stand from Idalion (600-475 BC), carried by female statuettes of the Astarte-Aphrodite type; two of the three fig"
     },
     "astarte-gold-plaque-syria": {
       "queries": [
@@ -4292,8 +4329,9 @@
         ]
       ],
       "relaxed": true,
-      "pin": "File:Penn Museum Beth Shemesh 1.jpg",
-      "title": "Astarte plaque — Beth Shemesh"
+      "pin": "File:Estatuilla de Astarté, British Museum.jpg",
+      "title": "Astarte plaque — Beth Shemesh",
+      "credit": "Representative picture: A bronze figure of the goddess Astarte standing on a pedestal, with a dove on her headdress, captioned as from Byblos."
     },
     "baubo-figure-priene": {
       "queries": [
@@ -4309,10 +4347,11 @@
         ]
       ],
       "relaxed": true,
-      "pin": "File:Terracotta Baubo figurine.jpg",
+      "pin": "File:Small terracotta Baubo, AM Paros, 247453.jpg",
       "title": "Baubo — terracotta figurine",
       "minLongest": 300,
-      "minShort": 180
+      "minShort": 180,
+      "credit": "Representative picture: A small terracotta figure of a standing, heavy-bellied woman with hands at the belly, catalogued on Commons as Baubo from Delion on Paros; not the Pri"
     },
     "belon-turkish-opium": {
       "queries": [
@@ -4326,7 +4365,9 @@
           "papaver"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Papaver somniferum - Köhler–s Medizinal-Pflanzen-102.jpg",
+      "credit": "Representative picture: Köhler's 19th-century botanical plate of the opium poppy, with white and red flowers, capsules and seeds."
     },
     "birth-of-the-goddess-rome-relief": {
       "queries": [
@@ -4364,7 +4405,8 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Etruscan Mirror - Judgement of Paris - Detail): Etruscan mirror shows Judgement of Paris; not hormone goddess"
+      "pin": "File:Greek mirror with Aphrodite and Eros (Louvre).jpg",
+      "credit": "Representative picture: The engraved inner face of a gilt bronze Greek folding mirror, with Aphrodite and Eros."
     },
     "burial-jar-asia-minor": {
       "queries": [
@@ -4383,7 +4425,9 @@
           "asia"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:MNAO-OllaHacilar.jpg",
+      "credit": "Representative picture: A painted globular red-and-cream pot from Hacilar in Anatolia, late Neolithic to early Chalcolithic."
     },
     "cabirian-group-thebes-vessel": {
       "queries": [
@@ -4397,7 +4441,9 @@
           "kabir"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Kabiroi.jpg",
+      "credit": "Representative picture: A Theban Kabeiric skyphos by the Mystai Painter from the Kabeiroi sanctuary, showing the Kabeiroi on a donkey cart."
     },
     "christ-asleep-on-a-sheep": {
       "queries": [
@@ -4434,7 +4480,9 @@
           "babylon"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Foundation cone with cuneiform inscription of Enmetena of Lagash MET vs1999 190 1.jpg",
+      "credit": "Representative picture: A tapering clay foundation cone with cuneiform inscription of Enmetena of Lagash, a cone-shaped Mesopotamian object of about the 24th century BC."
     },
     "cow-with-emerging-calves-cylinder-seal": {
       "queries": [
@@ -4452,7 +4500,9 @@
           "calves"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Cylinder seal cattle Louvre MNB1906.jpg",
+      "credit": "Representative picture: A Mesopotamian cylinder seal (left) and its clay impression (right) with three cattle walking in a row; no calves are shown."
     },
     "demeter-and-kore-pharsalus-stele": {
       "queries": [
@@ -4562,7 +4612,9 @@
           "attic"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:AM Lemnos 236 - Marble attic votice relief, Demeter and Kore, 4th c. BC.jpg",
+      "credit": "Representative picture: A marble Attic votive relief of a seated Demeter with a torch, from the Lemnos museum, 4th century BC."
     },
     "fragments-goddess-beltis-susa": {
       "queries": [
@@ -4579,7 +4631,9 @@
           "goddess"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Naked woman holding her breasts-Sb 7742-IMG 0880-black (cropped).jpg",
+      "credit": "Representative picture: A small Louvre figurine from Susa of a naked woman holding her breasts, catalogued as possibly the goddess Ishtar."
     },
     "funerary-figure-tell-halaf": {
       "queries": [
@@ -4632,7 +4686,9 @@
           "clay"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Figure of a fertility goddess - Getty Museum (83.AA.38).jpg",
+      "credit": "Representative picture: A Cypriot Early Bronze Age seated female figure, catalogued by the Getty as a fertility goddess."
     },
     "gorgon-flanked-by-lions-perugia": {
       "queries": [
@@ -4650,7 +4706,9 @@
           "corfu"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Gorgon at the Corfu Archaelogical Museum.jpg",
+      "credit": "Representative picture: A Gorgon in the centre of an Archaic temple pediment at Corfu, flanked by two crouching lions."
     },
     "great-mother ↔ cow": {
       "queries": [
@@ -4759,7 +4817,9 @@
           "bronze"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Potnia Theron - Musée du Louvre AGER CA 1810.jpg",
+      "credit": "Representative picture: A relief of a winged female figure between two beasts, the Potnia Theron, Mistress of Animals, at the Louvre."
     },
     "lamp-with-gorgon-head-etruscan": {
       "queries": [
@@ -4813,7 +4873,11 @@
           "corn"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Maria im Ährenkleid Tirol um 1450.jpg",
+      "credit": "Representative picture: Mary standing in prayer in a dark robe covered with ears of wheat, a Tyrolean panel of about 1450 in the Maria im Ährenkleid type.",
+      "minLongest": 300,
+      "minShort": 200
     },
     "nut-tree-goddess-sun-disk-bronze": {
       "queries": [
@@ -4917,7 +4981,8 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Grecian and Roman mythology): Crowned woman engraving; the Pessinus stone not shown"
+      "pin": "File:Statuette of Cybele (Brindisi, MAPRI).jpg",
+      "credit": "Representative picture: A small marble statuette of Cybele, the Magna Mater, seated between two lions, with a relief below, in the Brindisi museum."
     },
     "sun-phallus": {
       "queries": [
@@ -4931,7 +4996,9 @@
           "herm"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Sol und Mithras.jpg",
+      "credit": "Representative picture: A Roman relief from Ladenburg, catalogued as Sol und Mithras, showing a reclining male figure, a standing companion and a table."
     },
     "symbol-of-great-mother-with-animals-sumer": {
       "queries": [
@@ -4950,7 +5017,8 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Uruk period cylinder seal BM 116722.jpg): Uruk cylinder seal; mother-goddess symbol not evident"
+      "pin": "File:Ankara Anatolian Civilizations Leopard goddess june 2019 3164.jpg",
+      "credit": "Representative picture: A naked seated goddess on a leopard, a Neolithic Çatalhöyük domestic-shrine figure (c. 6000-5500 BC) in the Ankara museum."
     },
     "theseus-athene-amphitrite-bowl": {
       "queries": [
@@ -4968,43 +5036,121 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Theseus Athena Louvre G104.jpg): Helmeted figures; Theseus-Athena-Amphitrite scene not evident"
+      "pin": "File:Oud-Grieks aardewerk. Euphronios en Onesimos. Schaal. Binnenkant Theseus en Amphitrite, met Athena, GD000038.jpg"
     },
     "ancestor": {
       "skip": "family visual screen rejected the plate (File:The Conspiracy of the Batavians under Claudiu): Batavian conspiracy painting; no ancestor subject"
     },
     "armor": {
-      "skip": "family visual screen rejected the plate (File:Sculptured head of a warrior, Old Nisa, 2nd C): Warrior head sculpture; no armor subject"
+      "pin": "File:Ancient Greek armour.jpg"
     },
     "feeling": {
-      "skip": "visual screen rejected the plate: Caravaggio love painting, not the feeling function"
+      "pin": "File:Plutchik emotion wheel.png",
+      "credit": "Representative picture: Plutchik's wheel of emotions: eight primary feelings in coloured petals, with their opposites and combinations."
     },
     "goat": {
-      "skip": "family visual screen rejected the plate (File:God of Fire, Agni, of the Medicine Buddha Man): Agni fire deity; no goat"
+      "pin": "File:Hausziege, Capra aegagrus hircus 02.JPG"
     },
     "gorgon-corfu-marble-relief": {
       "skip": "family visual screen rejected the plate (File:Titanomachy at the Gorgon pediment at Artemis): Titanomachy relief; no Gorgon visible"
     },
     "intuition": {
-      "skip": "visual screen rejected the plate: Raphael knight dream, not intuition"
+      "pin": "File:John Collier - Priestess of Delphi.jpg",
+      "credit": "Representative picture: A seated priestess of Delphi in a red veil, holding a laurel branch with smoke rising around her: the oracle who knows without reasoning."
     },
     "lily": {
       "skip": "family visual screen rejected the plate (File:Bergognone 007.jpg): Madonna with saints; no lily motif"
     },
     "red-figured-vase-attic-detail": {
-      "skip": "family visual screen rejected the plate (File:Theseus Minotaur BM Vase E84 n3.jpg): Theseus vase; generic red-figure family"
+      "pin": "File:Attic Red-figure Ceramic Kylix Picture of the Women's Room, painted by Douris, c. 480 BC; found in Vulci, Etruria (28706528436).jpg",
+      "credit": "Representative picture: An Attic red-figure kylix (drinking cup) in a Berlin museum case, with two draped figures in its inner tondo; Commons dates the piece to c. 480 BC and"
     },
     "sensation": {
-      "skip": "visual screen rejected the plate: Flora garland painting, not sensation"
+      "pin": "File:Theodoor Rombouts - Allegory of the Five Senses - S-76 - Museum of Fine Arts Ghent (MSK).jpg",
+      "credit": "Representative picture: A 1632 allegory of the five senses: a company of people with a lute, a wine glass, a pipe and a basin, each figure engaging a different sense."
     },
     "spiritus": {
-      "skip": "visual screen rejected the plate: alchemical Mercury and sulphur, no depictable spiritus"
+      "pin": "File:Heinrich Ulrich, Aiolos, Personification of Wind, NGA 154040.jpg",
+      "credit": "Representative picture: An engraving of the wind god Aiolos standing on waves, his cloak swelling out behind him in the wind."
     },
     "the-red-one": {
-      "skip": "family visual screen rejected the plate (File:Sotades Painter - Red-Figure Rhyton - Walters): Unidentified red-figure vase scene; the-red-one unclear"
+      "pin": "File:Rider on the Red Horse - George Frederic Watts.jpg",
+      "credit": "Representative picture: George Frederic Watts's The Rider on the Red Horse: a rider in red with a sword on a red horse."
     },
     "thinking": {
-      "skip": "visual screen rejected the plate: Minerva allegory of wisdom, not thinking"
+      "pin": "File:The Thinker, Rodin.jpg",
+      "credit": "Representative picture: Rodin's bronze The Thinker: a seated man with his chin on his hand, absorbed in thought."
+    },
+    "thoth-cups": {
+      "pin": "File:Parcival shows the Holy Grail.jpg",
+      "credit": "Representative picture: An engraved illustration by Theodor Pixis, captioned Parcival shows the Holy Grail: a robed man raises a glowing chalice in a Gothic hall, with a dove"
+    },
+    "thoth-disks": {
+      "pin": "File:Earth alchemy symbol.png",
+      "credit": "Representative picture: The alchemical sign for Earth: a downward triangle crossed by a horizontal bar.",
+      "minLongest": 120,
+      "minShort": 100
+    },
+    "thoth-major-arcana": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with ten Sefirot and 22 connecting paths labelled with Hebrew letters, redrawn after Athanasius Kircher's 1652 diagram."
+    },
+    "thoth-minor-arcana": {
+      "pin": "File:Jeu de tarot miniature, dit \"tarot Arnoult\" - jeu de cartes, dessin - btv1b10510965g (127 of 156).jpg",
+      "credit": "Representative picture: A single card from a historical tarot deck (the BnF's Tarot Arnoult): a large disc with foliage, a suit-type card rather than a Trump."
+    },
+    "thoth-swords": {
+      "pin": "File:Alchemy air symbol.png",
+      "credit": "Representative picture: The alchemical sign for Air: an upward triangle crossed by a horizontal bar.",
+      "minLongest": 120,
+      "minShort": 100
+    },
+    "thoth-tarot": {
+      "pin": "File:The Magician (Rider-Waite Smith tarot deck).png",
+      "credit": "Representative picture: The Magician from the 1909 Rider-Waite-Smith deck, with the four suit tools (wand raised, cup, sword and pentacle) on the table."
+    },
+    "thoth-wands": {
+      "pin": "File:Four Elements.jpg"
+    },
+    "malkuth": {
+      "pin": "File:Ktreewnames.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sefirot labelled, Malkhut at the bottom."
+    },
+    "binah": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "chesed": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "chokmah": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "geburah": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "hod": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "netzach": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "tiphareth": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "yesod": {
+      "pin": "File:Tree of life kircher hebrew.png",
+      "credit": "Representative picture: The Kabbalistic Tree of Life with its ten sephiroth named in Hebrew, after Kircher's 1652 diagram."
+    },
+    "citrinitas": {
+      "pin": "File:Winged Sun alchemical.jpg",
+      "credit": "Representative picture: A hand-coloured 16th-century Rosarium philosophorum woodcut: a yellow sun with a face and wings rises out of water in a stone sepulchre."
     }
   },
   "occurrences": {
@@ -5021,8 +5167,8 @@
           "marcian"
         ]
       ],
-      "skip": "Removed after visual review: the file is Cleopatra’s Chrysopoeia, not the cited Codex Marcianus uroboros.",
-      "suppressFallback": true
+      "pin": "File:Serpiente alquimica.jpg",
+      "_note": "Greek \"hen to pan\" uroboros legend, the Codex Marcianus page (public domain). Accepted on visual review of the thumbnail."
     },
     "anthropos-man-rising-from-river-splendor-solis-germany-1532": {
       "queries": [
@@ -5369,8 +5515,7 @@
         ]
       ],
       "relaxed": true,
-      "skip": "Removed after visual review: the file is a modern devil sculpture, not the Codex Rhenoviensis homunculi plate.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a modern devil sculpture, not the Codex Rhenoviensis homunculi plate."
     },
     "peacock-phoenix-codex-rhenoviensis-zurich-15c": {
       "queries": [
@@ -6723,8 +6868,7 @@
       ],
       "pin": "File:Geberis Philosophi Perspicacissimi Summa Perfectionis Magisterii in sua Natura ex Bibliothecae Vaticanae Exemplari Undecunque - DPLA - f2c9fe156507ddee46507bec3786f928 (page 203).jpg",
       "title": "Maria Prophetissa — unum vas (alchemical apparatus)",
-      "skip": "Removed after visual review: the file is a page from Geber’s Summa Perfectionis, not Maria Prophetissa’s cited figure.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a page from Geber’s Summa Perfectionis, not Maria Prophetissa’s cited figure."
     },
     "goddess-alabaster-mari-syria-plate-goddess-alabaster-mari-syria-c-2500-b-c-date-mari-syria-c-250": {
       "queries": [
@@ -6803,7 +6947,6 @@
           "priest"
         ]
       ],
-      "suppressFallback": true,
       "pin": "File:Relief of Archigallus.jpg",
       "relaxed": true,
       "visual": "direct match, Haiku visual review (2026-10)"
@@ -6861,8 +7004,7 @@
       "queries": [
         "Ashburnham 1166 folio 16r Adam prima materia Mercurius arrow"
       ],
-      "skip": "Removed after visual review: this is a 2010 industrial glass-recycling photograph, not the cited Ashburnham 1166, fol. 16r / Psychology and Alchemy fig. 131. No rights-eligible Commons scan of that exact folio was found in this pass.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: this is a 2010 industrial glass-recycling photograph, not the cited Ashburnham 1166, fol. 16r / Psychology and Alchemy fig. 131. No rights-eligible Commons scan of that exact folio was found in this pass."
     },
     "great-mother-fig-14-cretan-goddess-with-upraised-hands-holding-double-palace-of-knossos-crete-2n": {
       "queries": [
@@ -6876,223 +7018,178 @@
       "queries": [
         "Theatrum chemicum Britannicum plate 118 brother sister bath dragons"
       ],
-      "skip": "Removed after visual review: the current file depicts Dürer’s Adam and Eve, not the brother-sister bath and dragon-bite plate cited from Theatrum chemicum Britannicum (1652).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file depicts Dürer’s Adam and Eve, not the brother-sister bath and dragon-bite plate cited from Theatrum chemicum Britannicum (1652)."
     },
     "mandala-navaho-male-shooting-chant": {
       "queries": [
         "Navaho Male Shooting Chant sand painting four horned heads"
       ],
-      "skip": "Removed after visual review: the current file is an unrelated alchemical cosmography, not the Navaho Male Shooting Chant sand-painting. No exact Commons image of the cited sand-painting was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is an unrelated alchemical cosmography, not the Navaho Male Shooting Chant sand-painting. No exact Commons image of the cited sand-painting was verified."
     },
     "mosaic-evil-eye-moknine-tunis-roman": {
       "queries": [
         "Moknine Tunisia Roman evil eye mosaic Jung figure 44"
       ],
-      "skip": "Removed after visual review: the current file is a modern portrait in Delhi, not Jung’s Roman evil-eye mosaic at Moknine. No exact Commons image of Jung’s plate was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is a modern portrait in Delhi, not Jung’s Roman evil-eye mosaic at Moknine. No exact Commons image of Jung’s plate was verified."
     },
     "osiris-cedar-coffin-byblos-egypt": {
       "queries": [
         "Dendera relief Osiris cedar coffin Byblos"
       ],
-      "skip": "Removed after visual review: the current file is Hasegawa Tōhaku’s Japanese Pine Trees screen, not the Dendera relief of Osiris in the cedar coffin.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is Hasegawa Tōhaku’s Japanese Pine Trees screen, not the Dendera relief of Osiris in the cedar coffin."
     },
     "serpent-gods-animal-spielrein-patient-zurich": {
       "queries": [
         "Spielrein patient green blue white rattlesnake Zurich"
       ],
-      "skip": "Removed after visual review: the current file is a Bell AH-1F Cobra helicopter, not the snake described in Spielrein’s patient material. No image of the patient’s cited image was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is a Bell AH-1F Cobra helicopter, not the snake described in Spielrein’s patient material. No image of the patient’s cited image was verified."
     },
     "world-giant-boiling-blood-egg-vision-zurich-1931": {
       "queries": [
         "Jung patient vision giant river boiling blood blinding egg"
       ],
-      "skip": "Removed after visual review: the current file is a 19th-century letter, not the patient’s giant, boiling-blood river, and blinding egg vision. No exact Commons image of that vision was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is a 19th-century letter, not the patient’s giant, boiling-blood river, and blinding egg vision. No exact Commons image of that vision was verified."
     },
     "yesod-son-of-man-bn-fr-14765-15c": {
       "queries": [
         "BN MS Français 14765 folio 8 Son of Man seven stars"
       ],
-      "skip": "Removed after visual review: the current file depicts Brahma emerging from Vishnu’s lotus, not the cited Son of Man in BN MS Français 14765, pl. 8. No exact Commons scan of that folio was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file depicts Brahma emerging from Vishnu’s lotus, not the cited Son of Man in BN MS Français 14765, pl. 8. No exact Commons scan of that folio was verified."
     },
     "sol-luna-naked-truth-rosarium-1550": {
       "queries": [
         "Rosarium Philosophorum 1550 figure 3 Naked Truth woodcut"
       ],
-      "skip": "Removed after visual review: the current file is a photograph of ancient funerary steles, not Rosarium Philosophorum figure 3, The Naked Truth. No exact Commons copy of the woodcut was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is a photograph of ancient funerary steles, not Rosarium Philosophorum figure 3, The Naked Truth. No exact Commons copy of the woodcut was verified."
     },
     "egg-rigveda-nasadiya-hidden-one": {
       "queries": [
         "Rig Veda Nasadiya hymn cosmic egg hidden shell"
       ],
-      "skip": "Removed after visual review: the current file is an Agni painting, not the cited Nasadiya hymn / hidden world-egg material. No exact plate image was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is an Agni painting, not the cited Nasadiya hymn / hidden world-egg material. No exact plate image was verified."
     },
     "mutus-liber-cosmic-sphere-fishing-fig13-1702": {
       "queries": [
         "Mutus Liber figure 13 cosmic sphere fishing couple"
       ],
-      "skip": "Removed after visual review: the current file depicts a Rahula painting, not Mutus Liber figure 13’s cosmic sphere and fishing couple. The Commons scan located in this pass is a PDF, not a verified matching plate image.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file depicts a Rahula painting, not Mutus Liber figure 13’s cosmic sphere and fishing couple. The Commons scan located in this pass is a PDF, not a verified matching plate image."
     },
     "coniunctio-faust-paris-helen-weimar-1832": {
       "queries": [
         "Goethe Faust II Paris Helen scene illustration"
       ],
-      "skip": "Removed after visual review: the current file is a Pompeian hieros-gamos image, not Goethe’s Faust and Helen / Paris scene discussed in the text.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is a Pompeian hieros-gamos image, not Goethe’s Faust and Helen / Paris scene discussed in the text."
     },
     "coniunctio-god-devil-man-woman-vision-zurich-1930": {
       "queries": [
         "Jung Visions seminar plate 27 God Devil man woman"
       ],
-      "skip": "Removed after visual review: the current file is unrelated Khajuraho sculpture, not the cited Visions seminar plate 27. No rights-eligible image of that patient plate was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is unrelated Khajuraho sculpture, not the cited Visions seminar plate 27. No rights-eligible image of that patient plate was verified."
     },
     "sun-phallus-inscription-verona-rome": {
       "queries": [
         "Roman phallic inscription Verona ancient relief"
       ],
-      "skip": "Removed after visual review: the current file is an Egyptian plaque with a dwarf, not the cited Roman phallic inscription from Verona.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the current file is an Egyptian plaque with a dwarf, not the cited Roman phallic inscription from Verona."
     },
     "anthropos-purusha-shvetashvatara-upanishad-india": {
-      "skip": "Removed after visual review: the file is a Gravettian Venus figurine, not the Upanishadic Purusha cited in this entry.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Gravettian Venus figurine, not the Upanishadic Purusha cited in this entry."
     },
     "mandala-girl-11-devil-uroboros-1930c": {
-      "skip": "Removed after visual review: the file is an unrelated Indic manuscript folio, not the patient drawings in Figs. 34–35.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an unrelated Indic manuscript folio, not the patient drawings in Figs. 34–35."
     },
     "mandala-liverpool-dream-ruby-rose-1927": {
-      "skip": "Removed after visual review: the file is a Rigveda manuscript page, not Jung’s Liverpool dream mandala (Fig. 6).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Rigveda manuscript page, not Jung’s Liverpool dream mandala (Fig. 6)."
     },
     "mother-goddess-hecate-samothrace-gem": {
-      "skip": "Removed after visual review: the file is a statue of Demeter, not the Hecate Gnostic gem cited as Fig. 34.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a statue of Demeter, not the Hecate Gnostic gem cited as Fig. 34."
     },
     "quaternity-triad-binarius-valentinus-1678": {
-      "skip": "Removed after visual review: the file is a modern church tetramorph capital, not Valentinus’s Duodecim claves diagram.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a modern church tetramorph capital, not Valentinus’s Duodecim claves diagram."
     },
     "serpent-chnuphis-gnostic-gems-2c": {},
     "simia-dei-monkey-demon-14c": {
-      "skip": "Removed after visual review: the file depicts zoological apes, not the demon-shaped-as-monkey manuscript plate.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file depicts zoological apes, not the demon-shaped-as-monkey manuscript plate."
     },
     "tetramorph-vatopedi-athos-1213": {
-      "skip": "Removed after visual review: the file depicts attendants of Vishnu, not the Vatopedi Christian tetramorph mosaic.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file depicts attendants of Vishnu, not the Vatopedi Christian tetramorph mosaic."
     },
     "thoth-cynocephalus-amenherkhopshef-1200bc": {
-      "skip": "Removed after visual review: the file is a Renaissance illustration of Mercurius, not Thoth as cynocephalus in the cited tomb plate.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Renaissance illustration of Mercurius, not Thoth as cynocephalus in the cited tomb plate."
     },
     "tree-alexander-hermes-tomb-stork-14c": {
-      "skip": "Removed after visual review: the file depicts Yggdrasil, not Alexander at Hermes’s tomb with the lunar stork.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file depicts Yggdrasil, not Alexander at Hermes’s tomb with the lunar stork."
     },
     "tree-picture-animus-gambler-patient-1935": {
-      "skip": "Removed after visual review: the file is a medieval florilegium page, not the patient’s animus-and-gambler pictures.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a medieval florilegium page, not the patient’s animus-and-gambler pictures."
     },
     "trimurti-tortoise-skull-lotus": {
-      "skip": "Removed after visual review: the file depicts Bhadrakali worship, not the cited Indian Trimurti painting with tortoise, skull, and lotus.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file depicts Bhadrakali worship, not the cited Indian Trimurti painting with tortoise, skull, and lotus."
     },
     "uroboros-harpokrates-gnostic-gem-2c": {
-      "skip": "Removed after visual review: the file is a generic alchemical serpent, not Harpokrates encircled by the uroboros on the cited Gnostic gem.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a generic alchemical serpent, not Harpokrates encircled by the uroboros on the cited Gnostic gem."
     },
     "uroboros-plate-page-53-plate-2-caption-mandaean-bowl-mesopotamia-c-500-a-d": {
-      "skip": "Removed after visual review: the file is an Egyptian tomb treasure, not the Mandaean bowl cited in the plate caption.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an Egyptian tomb treasure, not the Mandaean bowl cited in the plate caption."
     },
     "virgin-assumption-glorification-reusner-pandora-1588": {},
     "goddesses-of-fate-coin-fig-50-goddesses-of-fate-on-a-coin-of-diocletian-c-a-d-roman-c-a-d-300-ca": {
-      "skip": "Removed after visual review: the file is a printed Pantheon illustration, not the cited coin of Diocletian.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a printed Pantheon illustration, not the cited coin of Diocletian."
     },
     "water-fire-union-indian-painting": {
-      "skip": "Removed after visual review: the file is an American colonial trial scene, not the Indian water-and-fire union painting.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an American colonial trial scene, not the Indian water-and-fire union painting."
     },
     "ascent-descent-elijah-ascent-mss-mithraic-model": {},
     "tree-picture-sun-quaternity-rivers-patient-1935": {
-      "skip": "Removed after visual review: the file is a Four Evangelists painting, not the patient’s sun-quaternity and four-rivers picture (Fig. 24).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Four Evangelists painting, not the patient’s sun-quaternity and four-rivers picture (Fig. 24)."
     },
     "mandala-four-medallions-st-urban-lucerne-17c": {
-      "skip": "Removed after visual review: the file is a Hindu temple ruin, not St. Urban’s pavement mandala of four animal medallions.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Hindu temple ruin, not St. Urban’s pavement mandala of four animal medallions."
     },
     "mandala-rug-woman-doctor-1930c": {
-      "skip": "Removed after visual review: the file is a Vishnu statue, not the woman doctor’s woven mandala rug (Fig. 13).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Vishnu statue, not the woman doctor’s woven mandala rug (Fig. 13)."
     },
     "mother-goddess-ancient-mother-grain-wheat-vision-zurich-1930": {
-      "skip": "Removed after visual review: the file is an archaeological mother-goddess figurine, not the patient’s Ancient Mother painting (Visions plate 2).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an archaeological mother-goddess figurine, not the patient’s Ancient Mother painting (Visions plate 2)."
     },
     "soul-return-rosarium-1550": {
-      "skip": "Removed after visual review: the file is a Baroque Resurrection painting, not the ninth Rosarium woodcut of the soul returning to the purified corpse.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Baroque Resurrection painting, not the ninth Rosarium woodcut of the soul returning to the purified corpse."
     },
     "tree-become-tree-face-sun-vision-zurich-1930": {
-      "skip": "Removed after visual review: the file is a US Marine training photograph, not the patient’s tree-transformation vision (plate 12).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a US Marine training photograph, not the patient’s tree-transformation vision (plate 12)."
     },
     "breast-motif-fig-18-clay-female-figure-late-minoan-iii-mortuary-hagia-triada-crete-late-minoan-i": {
-      "skip": "Removed after visual review: the file is an Akrotiri pottery vessel, not the Late Minoan female figure / mortuary stele cited as Fig. 18.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an Akrotiri pottery vessel, not the Late Minoan female figure / mortuary stele cited as Fig. 18."
     },
     "head-black-marble-head-in-egg-vision-zurich-1931": {
-      "skip": "Removed after visual review: the file is a painting of Peace and Justice, not the patient’s black marble head in the egg (plate 16).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a painting of Peace and Justice, not the patient’s black marble head in the egg (plate 16)."
     },
     "moon-disc-filled-with-souls-late-antiquity-4c": {
-      "skip": "Removed after visual review: the file is a Japanese autumn-moon landscape, not the late-antique moon disc filled with souls (Fig. 31).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Japanese autumn-moon landscape, not the late-antique moon disc filled with souls (Fig. 31)."
     },
     "tree-picture-fire-water-fountain-patient-1935": {
-      "skip": "Removed after visual review: the file is a fire-memorial ceremony, not the patient’s fire-tree growing from water (Fig. 5).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a fire-memorial ceremony, not the patient’s fire-tree growing from water (Fig. 5)."
     },
     "mandala-embroidery-dream-stone-spiral-1930c": {
-      "skip": "Removed after visual review: the file is a Buddhist Diamond World mandala, not the patient’s embroidery-pattern dream (Fig. 4).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Buddhist Diamond World mandala, not the patient’s embroidery-pattern dream (Fig. 4)."
     },
     "tractatus-aristotelis-serpent-hypostatica-16c": {
-      "skip": "Removed after visual review: the file is a scan of Averroes text pages, not the drunken serpent passage / plate in Tractatus Aristotelis.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a scan of Averroes text pages, not the drunken serpent passage / plate in Tractatus Aristotelis."
     },
     "maya-uroboros-brahminic-vignette": {
-      "skip": "Removed after visual review: the file is a German protective amulet, not the damaged Brahminic vignette of Maya and the uroboros.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a German protective amulet, not the damaged Brahminic vignette of Maya and the uroboros."
     },
     "moon-nokomis-moon-fall-longfellow": {
-      "skip": "Removed after visual review: the file depicts Hecate, not Nokomis falling from the moon in Longfellow’s poem.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file depicts Hecate, not Nokomis falling from the moon in Longfellow’s poem."
     },
     "vessel-fig-27-sprouting-pithos-coin-of-phoenicia-gordian-iii-phoenicia-gordian-iii-epoch-caption": {
-      "skip": "Removed after visual review: the file is a Mayan lidded vessel, not the Phoenician coin and sprouting pithos cited as Fig. 27.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Mayan lidded vessel, not the Phoenician coin and sprouting pithos cited as Fig. 27."
     },
     "mandala-depression-black-homunculus-1920c": {
-      "skip": "Removed after visual review: the file is a 12th-century Belur sculpture, not the patient’s black homunculus mandala (Fig. 3).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a 12th-century Belur sculpture, not the patient’s black homunculus mandala (Fig. 3)."
     },
     "tree-picture-tree-born-eve-patient-1935": {
-      "skip": "Removed after visual review: the file is an 18th-century women’s footrace print, not the patient’s tree-born woman picture (Fig. 22).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an 18th-century women’s footrace print, not the patient’s tree-born woman picture (Fig. 22)."
     },
     "king-queen-bath-rosarium-1550": {
       "queries": [
@@ -7131,25 +7228,20 @@
       "title": "Hermaphrodite (Rebis) — Rosarium philosophorum"
     },
     "artemis-orthia-ivory-fig-63-artemis-orthia-on-an-ivory-plaque-from-sparta-sparta-c-740-as-printe": {
-      "skip": "Removed after visual review: the file is a lead figure, not the cited ivory plaque of Artemis Orthia; no exact Commons plate was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a lead figure, not the cited ivory plaque of Artemis Orthia; no exact Commons plate was verified."
     },
     "dew-gedeonis-purification-rosarium-1550": {
-      "skip": "Removed after visual review: the file is a Krishna chariot scene, not Rosarium Figure 8 with heavenly dew on the black corpse.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Krishna chariot scene, not Rosarium Figure 8 with heavenly dew on the black corpse."
     },
     "great-mother-fig-26-marble-statuette-of-a-daughter-standing-on-her-aegean-islands-c-16th-century": {
-      "skip": "Removed after visual review: the file is a 20th-century painting, not the cited Aegean marble statuette of a daughter on her mother’s head.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a 20th-century painting, not the cited Aegean marble statuette of a daughter on her mother’s head."
     },
     "great-mother-fig-7-island-figure-limestone-combines-exaggerated-near-sparta-c-15th-century-b-c-o": {},
     "great-mother-plate-14-bronze-relief-from-paramythia-greece-4th-paramythia-greece-4th-century-b-c": {
-      "skip": "Removed after visual review: the file is a cuneiform tablet, not the Paramythia bronze relief of Aphrodite and Anchises; no exact Commons photograph was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a cuneiform tablet, not the Paramythia bronze relief of Aphrodite and Anchises; no exact Commons photograph was verified."
     },
     "great-mother-plate-page-71-plate-14-caption-bronze-relief-from-paramythia-greece-4th-century-b-c": {
-      "skip": "Removed after visual review: the file is an Indian terracotta plaque, not the Paramythia bronze relief of Aphrodite and Anchises; no exact Commons photograph was verified.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an Indian terracotta plaque, not the Paramythia bronze relief of Aphrodite and Anchises; no exact Commons photograph was verified."
     },
     "great-mother-plate-page-72-plate-15-caption-relief-of-a-sacrificing-rome-1st-century-b-c": {
       "pin": "File:Relief of Archigallus.jpg",
@@ -7169,20 +7261,16 @@
       "visual": "likely match, full-size visual check (2026-10)"
     },
     "king-queen-death-putrefactio-rosarium-1550": {
-      "skip": "Removed after visual review: the file is Jacques-Louis David’s Death of Marat, not Rosarium Figure 6.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is Jacques-Louis David’s Death of Marat, not Rosarium Figure 6."
     },
     "mandala-1916-world-creation-four-lines-1916": {
-      "skip": "Removed after visual review: the file is a different Diamond World mandala, not the patient’s 1916 sun-and-four-lines drawing.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a different Diamond World mandala, not the patient’s 1916 sun-and-four-lines drawing."
     },
     "mandala-three-snakes-child-drawing-zurich-1925": {
-      "skip": "Removed after visual review: the file is a modern abstract metal sculpture without snakes, not the child’s mandala drawing.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a modern abstract metal sculpture without snakes, not the child’s mandala drawing."
     },
     "mutus-liber-angels-vessel-king-fig12-1702": {
-      "skip": "Removed after visual review: the file is a Nazca effigy vessel, not Mutus Liber Figure 12 with angels, vessel, and king.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Nazca effigy vessel, not Mutus Liber Figure 12 with angels, vessel, and king."
     },
     "mutus-liber-frontispiece-ladder-fig11-1702": {
       "pin": "File:Mutus liber, in quo tamen ... LCCN92517553.jpg",
@@ -7190,12 +7278,10 @@
       "visual": "direct match, round-3 visual review (2026-10)"
     },
     "tree-picture-lotus-gnome-corona-patient-1935": {
-      "skip": "Removed after visual review: the file is a banana flower close-up, not the patient’s lotus, gnome, and corona drawing.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a banana flower close-up, not the patient’s lotus, gnome, and corona drawing."
     },
     "tree-picture-sapphire-uroboros-patient-1935": {
-      "skip": "Removed after visual review: the file is a museum sapphire photograph, not the patient’s sapphire-and-uroboros figures.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a museum sapphire photograph, not the patient’s sapphire-and-uroboros figures."
     },
     "unicorn-kilin-confucius-china-500bce": {
       "pin": "File:Qilin in sancai tuhui.jpg",
@@ -7203,56 +7289,44 @@
       "visual": "direct match, round-3 visual review (2026-10)"
     },
     "uroboros-plate-11-miniature-of-the-nine-choirs-of-angels-from-wiesbaden-formerly-12th-century-ma": {
-      "skip": "Removed after visual review: the file is an outdoor serpent monument, not the cited Scivias miniature of the nine choirs of angels.",
-      "suppressFallback": true
+      "pin": "File:07angels-hildegard von bingen.jpg",
+      "_note": "Hildegard, Scivias: the vision of the angelic hierarchy (the nine choirs), public domain. Accepted on visual review of the thumbnail."
     },
     "uroboros-plate-8-maya-the-eternal-spinner-encircled-by-a-serpent-india-vignette-from-brahmanic-b": {
-      "skip": "Removed after visual review: the file is a modern Jörmungandr monument, not the Brahmanic Maya vignette cited as Plate 8.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a modern Jörmungandr monument, not the Brahmanic Maya vignette cited as Plate 8."
     },
     "vessel-tavistock-patient-bowl-breaking-lines-london-1935": {
-      "skip": "Removed after visual review: the file is a Met museum vessel, not the patient’s toppling-vase drawing (Fig. 14).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Met museum vessel, not the patient’s toppling-vase drawing (Fig. 14)."
     },
     "vessel-tavistock-patient-vase-souls-anima-london-1935": {
-      "skip": "Removed after visual review: the file is an Egyptian vase stand, not the patient’s vase drawing with souls and stars (Fig. 15).",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an Egyptian vase stand, not the patient’s vase drawing with souls and stars (Fig. 15)."
     },
     "mothers-of-faust-realm-of-the-mothers-faust-1830": {
-      "skip": "Removed after visual review: the file is a Chinese Queen Mother of the West lamp, not the Realm of the Mothers in Faust II.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Chinese Queen Mother of the West lamp, not the Realm of the Mothers in Faust II."
     },
     "uroboros-frontispiece-plate-1-the-birth-of-vishnu-uroboros-chapter-india-18th-century-manuscript": {
-      "skip": "Removed after visual review: the file is a generic ouroboros, not the cited Birth of Vishnu manuscript plate.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a generic ouroboros, not the cited Birth of Vishnu manuscript plate."
     },
     "vision-snake-circle-temenos-cw12": {
-      "skip": "Removed after visual review: the file is a Yaxchilan lintel, not the patient’s vision of a snake circling the dreamer.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Yaxchilan lintel, not the patient’s vision of a snake circling the dreamer."
     },
     "liber-platonis-occiput-vessel-10c": {
-      "skip": "Removed after visual review: the file is an unrelated Egyptian stone vessel, not the cited occiput-as-vessel image.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an unrelated Egyptian stone vessel, not the cited occiput-as-vessel image."
     },
     "tree-picture-boy-dragons-patient-1935": {
-      "skip": "Removed after visual review: the file shows a woman watching a couple, not the patient’s boy in a tree watching two dragons.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file shows a woman watching a couple, not the patient’s boy in a tree watching two dragons."
     },
     "tree-picture-corn-goddess-crucified-patient-1935": {
-      "skip": "Removed after visual review: the file is a Pueblo corn dance, not the patient’s corn-goddess figure fastened to a tree.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a Pueblo corn dance, not the patient’s corn-goddess figure fastened to a tree."
     },
     "tree-picture-light-candelabrum-patient-1935": {
-      "skip": "Removed after visual review: the file is a traffic-signal sculpture, not the patient’s tree-of-light candelabrum drawing.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a traffic-signal sculpture, not the patient’s tree-of-light candelabrum drawing."
     },
     "tree-picture-locked-door-bird-patient-1935": {
-      "skip": "Removed after visual review: the file is a generic hollow-tree photograph without the locked door or bird in the patient’s figure.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is a generic hollow-tree photograph without the locked door or bird in the patient’s figure."
     },
     "tree-picture-lotus-birth-black-sun-patient-1935": {
-      "skip": "Removed after visual review: the file is an unrelated Greek red-figure scene, not the patient’s archaic-plant birth drawing.",
-      "suppressFallback": true
+      "skip": "Removed after visual review: the file is an unrelated Greek red-figure scene, not the patient’s archaic-plant birth drawing."
     },
     "great-mother-plate-16-ishtar-as-goddess-of-war-seal-relief-of-king-hazar-geri-babylonia-2500-200": {
       "pin": "File:Anubanini rock relief woodprint.jpg",

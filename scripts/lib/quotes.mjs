@@ -1,56 +1,143 @@
 // Shared by the lens generators: turn curated { work, quote, para? } into published cites, placed by the corpus itself.
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { findMatches, locate } from './cite.mjs';
-import { TRAILING_ELLIPSIS, sentenceEndsBeforeTrailingEllipsis, stripFootnoteMarkers } from './display.mjs';
+import { DEFAULT_VAULT } from './vault.mjs';
+import { buildVocab, createNormalizer } from './ocr.mjs';
+import { TRAILING_ELLIPSIS, abbreviatedBefore, sentenceEndsBeforeTrailingEllipsis, stripFootnoteMarkers } from './display.mjs';
 
 export { stripFootnoteMarkers, sentenceEndsBeforeTrailingEllipsis } from './display.mjs';
 
-/** A completed or cleaned display string may never run this far past the words the curator kept. */
-const MAX_COMPLETION = 600;
+/** A completed quotation may never run this far past the words the curator kept, on either side. */
+const MAX_COMPLETION = 700;
+const LEADING_ELLIPSIS = /^\s*(?:…+|\.{3,})\s*/u;
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+let damageScanCache;
+/**
+ * The scan-damage check ingest's residual gate runs (scripts/lib/ocr.mjs, the same vocabulary and the reviewed
+ * exceptions), built once per process. A completion may never add damage its fragment did not already carry: a plate
+ * caption or a page of list-type scan has no sentence boundary, so a sentence run can reach across it.
+ */
+function damageScan() {
+  if (damageScanCache === undefined) {
+    const exceptionsFile = path.join(ROOT, 'curation', 'ocr-exceptions.json');
+    const exceptions = fs.existsSync(exceptionsFile) ? JSON.parse(fs.readFileSync(exceptionsFile, 'utf8')) : {};
+    const normalizer = createNormalizer(buildVocab({ vault: DEFAULT_VAULT, cacheDir: path.join(ROOT, '.cache'), log: () => {} }), exceptions);
+    damageScanCache = (t) => normalizer.scan(normalizer.normalize(t).text);
+  }
+  return damageScanCache;
+}
 
 /**
- * Complete a DISPLAYED quotation whose text tails off into an ellipsis mid-thought (the reading-pass harvest's
- * ≤280-character trims). The corpus holds the full sentence: the stem's words name one place in it, and the display
- * is extended forward — with the corpus's own words, never a paraphrase — to that sentence's end. A quote that cannot
- * be found, is found more than once, runs past the budget, or reaches a corpus-native ellipsis (Jung's own, or an
- * editorial omission) is left exactly as it stood, with the reason said.
+ * Words a sentence-completion may never add: note numbering run into the text ("…1929. 13 The Dream", "* 609 Catecheses"),
+ * the editors' brackets and rubrics, and an all-caps plate caption ("FEMALE (por Clay…"). A sentence that reaches one
+ * is not completed, and the fragment stands as the curator wrote it.
  */
-export function completeTrailingQuote(load, work, quote) {
+const APPARATUS = /[.!?”"’)\]]\s*\d{1,3}\s+[A-Z“"(]|\*\s*\d|\[\s*(?:Cf|Ed|Trans|Ibid|See)\b|EDITORS|\b[A-Z]{4,}\b|\b[Ii]bid\b/;
+
+const CAPTION_DATE = /\b(centur(?:y|ies)|cent\.|c\.|ca\.|circa|B\.C\.|A\.D\.|wc\.|ws\.|\d{3,4})\b/i;
+
+/**
+ * Whether a cited text is a plate caption (an object label as printed), not a sentence of the author's. Two signs: most
+ * of its words are capitals (a printed heading or label), or it is a short comma-list label, dated or unterminated
+ * ("Clay, Ur, c. 3000 B.C.", "Terra cotta, Peru, pre-Columbian"). A caption is shown as one, never in quotation marks.
+ */
+export function isPlateCaption(text) {
+  const t = String(text ?? '').trim();
+  const words = t.match(/[A-Za-z][A-Za-z'’-]*/g)?.filter((w) => w.length >= 2) ?? [];
+  if (!words.length) return false;
+  const capitals = words.filter((w) => w === w.toUpperCase() && w.length >= 2).length;
+  if (capitals / words.length >= 0.5) return true;
+  if (t.split(/\s+/).length > 10) return false;
+  return CAPTION_DATE.test(t) || (t.includes(',') && !/[.!?…]["”’')\]]*$/.test(t));
+}
+
+/** The index of the pdf page a flat-text offset falls on (-1 before the first page marker). */
+function pageIndexAt(pages, offset) {
+  let idx = -1;
+  for (let i = 0; i < pages.length && pages[i].at <= offset; i++) idx = i;
+  return idx;
+}
+
+/** The words a quotation keeps: no trailing or leading ellipsis (the harvest's own trims), trimmed at the edges. */
+function stemOf(quote) {
+  let t = quote.trim().replace(LEADING_ELLIPSIS, '');
+  const tail = TRAILING_ELLIPSIS.exec(t);
+  if (tail) t = t.slice(0, t.length - tail[0].length);
+  return t.trimEnd();
+}
+
+/** Where the sentence that `start` falls in begins (an offset in `text`), or null when no sentence start is in reach. */
+function sentenceStartBefore(text, start) {
+  const from = Math.max(0, start - MAX_COMPLETION);
+  // the probe runs one character past the stem so a boundary right before it can see the stem's first letter
+  const probe = text.slice(from, start + 1);
+  let begin = null;
+  // a footnote digit glued to the stop ("…Mother.”43") belongs to the stop, not to the next sentence
+  for (const m of probe.matchAll(/([.!?]+[”"’')\]]*(?:\d{1,3}(?: \d{1,3})*)?)(\s+)(?=[“"‘'(\p{Lu}¶*])/gu)) {
+    if (m[1][0] === '.' && abbreviatedBefore(probe, m.index)) continue;
+    begin = from + m.index + m[1].length + m[2].length;
+  }
+  if (begin === null && from === 0) return 0;
+  return begin;
+}
+
+/** Where the sentence the corpus runs into ends (an offset in `room`), or null where the corpus itself pauses first. */
+function sentenceEndIn(room) {
+  // the stop may carry the scan's glued footnote digits ("…Mother.”43"): they are part of the stop, never the next words
+  for (const m of room.matchAll(/([.!?…]+[”"’')\]]*)(\d{1,3}(?: \d{1,3})*)?(?=[\s“"‘'“(¶*]|$)/gu)) {
+    const stop = m[1];
+    if (/\.\s?\.\s?\./.test(room.slice(0, m.index + 1)) || room.slice(0, m.index).includes('…')) return null;
+    const stopEnd = m.index + m[0].length;
+    const after = room.slice(stopEnd);
+    const next = after.match(/^(\s*)(\S{0,24})/u);
+    if (/[”"’']$/.test(stop) && next && !next[1] && !/[\s.,;:!?)]/u.test(next[2][0] ?? '')) continue;
+    if (stop[0] === '.' && abbreviatedBefore(room, m.index)) continue;
+    // the corpus's own pause (an ellipsis) is no sentence end: the completion stops short of it, as the curation did
+    if (!/[.!?][”"’')\]]*$/.test(stop)) return null;
+    if (!next || !next[2] || /[?!…]/.test(stop) || /^[“"'’«(\d\p{Lu}¶*]/u.test(next[2])) return stopEnd;
+  }
+  return null;
+}
+
+/**
+ * Complete a DISPLAYED quotation that is a fragment, at either end. The reading-pass harvest trims a quotation to a
+ * window (≤280 characters) and the curation keeps the trim, so the words stand mid-sentence, or stop before the
+ * sentence does. The stem's words name one place in the corpus; the display is extended, with the corpus's own words
+ * and never a paraphrase, back to the sentence's start and forward to its end. The result is always a contiguous run
+ * of the corpus text. A quotation that cannot be found, is found more than once, starts inside a word, runs past the
+ * budget, or meets a corpus-native pause is left exactly as it stood, with the reason said.
+ */
+export function completeQuote(load, work, quote) {
   if (typeof quote !== 'string') return { text: quote, done: false, reason: 'not a string' };
-  const trimmed = quote.trimEnd();
-  const tail = TRAILING_ELLIPSIS.exec(trimmed);
-  if (!tail) return { text: quote, done: false, reason: 'no trailing ellipsis' };
-  if (sentenceEndsBeforeTrailingEllipsis(trimmed)) return { text: quote, done: false, reason: 'a sentence ends before the ellipsis' };
-  const stem = trimmed.slice(0, trimmed.length - tail[0].length).trimEnd();
-  if (stem.split(/\s+/).length < 5) return { text: quote, done: false, reason: 'the stem is too short to name one place' };
   const corpus = load(work);
-  if (!corpus) return { text: quote, done: false, stem, reason: 'no corpus for the work' };
+  if (!corpus) return { text: quote, done: false, reason: 'no corpus for the work' };
+  const stem = stemOf(quote);
+  if (stem.split(/\s+/).length < 5) return { text: quote, done: false, stem, reason: 'the stem is too short to name one place' };
+  if (/\b[A-Z]{4,}\b/.test(stem)) return { text: quote, done: false, stem, reason: 'the fragment is an all-caps caption, not a sentence' };
   const matches = findMatches(corpus.text, stem);
   if (matches.length === 0) return { text: quote, done: false, stem, reason: 'the stem is not in the corpus' };
   if (matches.length > 1) return { text: quote, done: false, stem, reason: 'the stem names more than one place' };
-  const room = corpus.text.slice(matches[0].index + matches[0][0].length, matches[0].index + matches[0][0].length + MAX_COMPLETION);
-  // the corpus itself pauses where the trim began (Jung's own ellipsis, or an editorial omission): nothing to complete
-  // to. A terminator ends the sentence only when the text stops there or the next word can start one: footnote digits
-  // glued after the period do not hide the end ("...teres.30 **¶553**"), an abbreviation's period before a lowercase
-  // word is not an end, and a closing quote run straight into a dash opens someone else's sentence — all declined.
-  let end = null;
-  for (const m of room.matchAll(/[.!?…]+[”"’')\]]*(?=[\s\d“"‘'“(¶*]|$)/gu)) {
-    if (/\.\s?\.\s?\./.test(room.slice(0, m.index + 1)) || room.slice(0, m.index).includes('…')) break; // the corpus pauses first
-    const after = room.slice(m.index + m[0].length);
-    const next = after.match(/^(\s*)(\S{0,24})/u);
-    if (/[”"’']$/.test(m[0]) && next && !next[1] && !/[\s.,;:!?)]/u.test(next[2][0] ?? '')) continue; // quote closed, narration dashes on
-    if (!next || !next[2] || m[0].match(/[?!…]/) || /^[“"'’«(\d\p{Lu}¶*]/u.test(next[2])) { end = m; break; }
-  }
-  if (!end || !/[.!?][”"’')\]]*$/.test(end[0])) return { text: quote, done: false, stem, reason: 'the corpus itself pauses here (its own ellipsis or no sentence end in reach)' };
-  const addition = room.slice(0, end.index + end[0].length).trim();
-  if (!/\p{L}/u.test(addition)) return { text: quote, done: false, stem, reason: 'nothing but punctuation would be added' };
-  // the completion is corpus text: it may carry the scan's glued footnote digits and the flat text's ¶ anchors —
-  // both are bookkeeping, so the displayed words are cleaned the same way the stem was. The trim may have cut right
-  // before a comma, so the join only takes a space when the corpus's own words do not carry their punctuation.
-  const joined = /^[,.!?;:’”]/.test(addition) ? `${stem}${addition}` : `${stem} ${addition}`;
-  const cleaned = stripFootnoteMarkers(joined.replace(/\s+/g, ' ').replace(/\*\*¶\d+\*\*\s*/g, '')).trim();
-  return { text: cleaned, done: true, stem, reason: 'completed to the corpus sentence end' };
+  const at = matches[0].index;
+  const to = at + matches[0][0].length;
+  if (at > 0 && /\p{L}/u.test(corpus.text[at - 1]) && /\p{L}/u.test(stem[0])) return { text: quote, done: false, stem, reason: 'the stem begins inside a word' };
+  const begin = sentenceStartBefore(corpus.text, at);
+  if (begin === null) return { text: quote, done: false, stem, reason: 'no sentence start in reach' };
+  // a stem that already ends its sentence keeps the words as they stand: what follows is the scan's footnote, not more text
+  const stemEndsSentence = /[.!?…][”"’')\]]*$/.test(stem) && !(stem.endsWith('.') && abbreviatedBefore(stem, stem.length - 1));
+  const end = stemEndsSentence ? 0 : sentenceEndIn(corpus.text.slice(to, to + MAX_COMPLETION));
+  if (end === null) return { text: quote, done: false, stem, reason: 'the corpus itself pauses before the sentence ends' };
+  // a completed quotation stands on the page it cites: a sentence that runs over a page break is not completed
+  if (pageIndexAt(corpus.pages, begin) !== pageIndexAt(corpus.pages, to + end - 1)) return { text: quote, done: false, stem, reason: 'the sentence runs over a page break' };
+  if (APPARATUS.test(corpus.text.slice(begin, at)) || APPARATUS.test(corpus.text.slice(to, to + end))) return { text: quote, done: false, stem, reason: 'the sentence runs into a note, editorial bracket or caption' };
+  // footnote digits glued to the corpus's sentences and the flat text's ¶ anchors are bookkeeping, cleaned as the stem is
+  const cleaned = stripFootnoteMarkers(corpus.text.slice(begin, to + end).replace(/\s+/g, ' ').replace(/\*\*¶\d+\*\*\s*/g, '')).trim();
+  if (cleaned.length > MAX_COMPLETION * 2) return { text: quote, done: false, stem, reason: 'the sentence runs past the budget' };
+  if (begin === at && end === 0) return { text: quote, done: false, stem, reason: 'already a whole sentence' };
+  if (damageScan()(cleaned).length > damageScan()(stem).length) return { text: quote, done: false, stem, reason: 'the sentence carries scan damage its fragment does not' };
+  return { text: cleaned, done: true, stem, reason: 'completed to the corpus sentence' };
 }
 
 /**
@@ -84,8 +171,8 @@ export function workTitles(root) {
 export function citeQuotes(load, titles, quotes, where, errors, warnings) {
   const out = [];
   for (const q of quotes) {
-    const completed = completeTrailingQuote(load, q.work, q.quote);
-    if (completed.done) warnings.push(`${where}: completed a trailing trim from the corpus: "${q.quote.slice(-40)}" -> "${completed.text.slice(-40)}"`);
+    const completed = completeQuote(load, q.work, q.quote);
+    if (completed.done) warnings.push(`${where}: completed a fragment to its corpus sentence: "${q.quote.slice(0, 40)}" -> "${completed.text.slice(0, 40)}"`);
     const display = stripFootnoteMarkers(completed.text);
     if (display !== q.quote) warnings.push(`${where}: display text cleaned (footnote markers or trailing trim): "${q.quote.slice(0, 40)}"`);
     // placement always names the curator's own words: the stem (the quote without a trailing trim's ellipsis) stands
@@ -101,7 +188,7 @@ export function citeQuotes(load, titles, quotes, where, errors, warnings) {
     // the printed page is shown only where the scan's label agrees with its neighbours (trustedPrint)
     // `voice` names whose words these are when not the volume author's; `scan` says a curated quotation is kept as a
     // damaged scan reads it (attested by the curator, never a hand repair)
-    out.push({ text: display, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}), ...(q.scan ? { scan: true } : {}) });
+    out.push({ text: display, cite: { work: q.work, workTitle: titles.get(q.work) ?? q.work, locator, ...(r.print ? { print: r.print } : {}) }, ...(q.voice ? { voice: q.voice } : {}), ...(q.scan ? { scan: true } : {}), ...(isPlateCaption(display) ? { caption: true } : {}) });
   }
   return out;
 }

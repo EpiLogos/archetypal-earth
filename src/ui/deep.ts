@@ -436,7 +436,7 @@ export class DeepSheet {
       a.append(plate(img, { credit: true, className: 'dp-figure', palette: fam?.palette, eager: true, alt: o.title }));
       if (img.sourceUrl) a.append(el('p', { class: 'dp-source' }, [sanitiseTitle(img.title) ? `${sanitiseTitle(img.title)} — ` : '', el('a', { href: img.sourceUrl, target: '_blank', rel: 'noopener noreferrer', text: 'source' })]));
     }
-    if (o.quote) a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: o.quote })]));
+    if (o.quote) a.append(o.caption ? el('p', { class: 'dp-caption', text: o.quote }) : el('blockquote', { class: 'dp-def' }, [el('p', { text: o.quote })]));
     o.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
     if (o.jung.length) {
       a.append(el('h3', { class: 'dp-sub', text: 'Where Jung meets it' }));

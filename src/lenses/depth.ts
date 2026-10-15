@@ -26,6 +26,8 @@ export interface DepthInstance {
   /** those names that are also families of the field */
   families: string[];
   text: string;
+  /** the text is a plate caption as printed, shown as one (see lenses/ui.ts captionBlock) */
+  caption?: true;
   cite: LensQuote['cite'];
   /** the reader marked the scan damaged here: the words are as the scan reads them */
   scan?: true;
@@ -73,7 +75,7 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
     el('div', {}, [
       el('span', { class: 'dp-term', text: x.terms.map(nameOf).join(' · ') }),
       el('span', { class: 'dp-place', text: [x.place, x.year === undefined ? x.yearDisplay : ''].filter(Boolean).join(' · ') }),
-      quoteBlock({ text: x.text, cite: x.cite }, passages, { compact: true }),
+      quoteBlock({ text: x.text, cite: x.cite, ...(x.caption ? { caption: true } : {}) }, passages, { compact: true }),
       x.scan ? el('span', { class: 'dp-scan', text: 'Damaged scan: the words are as the scan reads them' }) : null,
       x.families.length ? el('div', { class: 'am-chips' }, x.families.map(chip)) : null,
     ]),
