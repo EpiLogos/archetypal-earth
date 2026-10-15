@@ -51,7 +51,7 @@ export function mount(ctx: LensContext): LensInstance {
   const home = () => {
     ctx.setContext('');
     ctx.engine.setEmphasis(null, null);
-    const top = [...m.famOcc].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)!).filter(Boolean);
+    const top = [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)!).filter(Boolean);
     const box = searchBox();
     show([
       el('p', { class: 'th-line', text: 'Name a symbol and see how it runs through the field: what Jung said it is, every dated instance of it, the dreams and visions it turns up in, and what it expresses.' }),

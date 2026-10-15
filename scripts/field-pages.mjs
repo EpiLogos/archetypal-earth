@@ -26,8 +26,8 @@ function wellFormed(quotes, where, errors) {
 }
 
 /** joins.json: an array of joins, or { "joins": [...] }. Anything else is an error, never a silent empty file. */
-function readJoins(root) {
-  const file = path.join(root, 'curation', 'joins.json');
+function readJoins(curation) {
+  const file = path.join(curation, 'joins.json');
   if (!fs.existsSync(file)) return null;
   const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
   if (Array.isArray(raw)) return raw;
@@ -35,9 +35,13 @@ function readJoins(root) {
   return undefined;
 }
 
-export function buildFieldPages({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
-  const dir = path.join(root, 'curation', 'field-pages');
-  const field = JSON.parse(fs.readFileSync(path.join(root, 'public', 'data', 'field.json'), 'utf8'));
+/**
+ * `field` may be handed in (the ingest builds the pages for its attestations before field.json exists, from the nodes it
+ * holds in memory); `curation` is the curation directory (the ingest's own, which a test may point at a copy).
+ */
+export function buildFieldPages({ root = ROOT, vault = DEFAULT_VAULT, curation = path.join(root, 'curation'), field: given = null } = {}) {
+  const dir = path.join(curation, 'field-pages');
+  const field = given ?? JSON.parse(fs.readFileSync(path.join(root, 'public', 'data', 'field.json'), 'utf8'));
   const load = workLoader(vault);
   const titles = workTitles(root);
   const errors = [];
@@ -78,7 +82,7 @@ export function buildFieldPages({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   // the join cites: placed and published by join id. A join id the field does not carry is named as a warning (the ingest
   // may have dropped it) and still published; a cite that will not place is an error.
   const joins = {};
-  const list = readJoins(root);
+  const list = readJoins(curation);
   if (list === undefined) errors.push('joins.json: expected an array of joins, or { "joins": [...] }');
   const fieldJoins = new Set((field.joins ?? []).map((j) => j.id));
   const joinSeen = new Set();

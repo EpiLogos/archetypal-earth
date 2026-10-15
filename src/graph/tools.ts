@@ -93,7 +93,7 @@ export class GraphTools {
     }
     // the one mark that is not a relation, beside the drawing it explains: what has no place on the globe, and so no walk
     display.append(
-      el('p', { class: 'gvt-caption gvt-key' }, [el('span', { class: 'gvt-hollow', 'aria-hidden': 'true' }), el('span', { text: 'Hollow: no recorded place, so not on the globe or in any walk' })]),
+      el('p', { class: 'gvt-caption gvt-key' }, [el('span', { class: 'gvt-hollow', 'aria-hidden': 'true' }), el('span', { text: 'Hollow: no place on the Earth (in the sky, or none recorded), so not on the globe or in any walk' })]),
       el('button', { class: 'gvt-caption gvt-reset', type: 'button', text: 'Reset', title: 'Restore the drawing as it was',
         onclick: () => h.onDisplay({ ...DEFAULT_DISPLAY }) }),
     );

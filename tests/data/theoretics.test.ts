@@ -109,7 +109,10 @@ describe('theoretics tier', () => {
     expect(subjectName(model, { type: 'theoretic', id: 'psychoid' })).toBe('The Psychoid');
     const occ = subjectOccurrences(model, { type: 'theoretic', id: 'psychoid' });
     expect(occ.length).toBeGreaterThan(500); // via the Self and the mana family
-    expect(model.theoOcc.get('psychoid')!.length).toBe(psychoid.occurrenceCount);
+    // the published count is by membership (own, co-manifests, listed): what the focus and the thread read; the home list
+    // the modes read is the part of it that is each family's own
+    expect(model.theoMem.get('psychoid')!.length).toBe(psychoid.occurrenceCount);
+    expect(model.theoOcc.get('psychoid')!.length).toBeLessThanOrEqual(psychoid.occurrenceCount);
     // every occurrence it stands for is located, so the globe can actually tune to it
     expect(occ.every((i) => model.located[i])).toBe(true);
   });

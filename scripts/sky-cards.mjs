@@ -15,16 +15,10 @@ import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT } from './lib/vault.mjs';
 import { workLoader } from './lib/cite.mjs';
 import { citeQuotes, workTitles } from './lib/quotes.mjs';
+import { BODY_KEYS, TREE, SIGNS, SUITS, ELEMENT_OF_SUIT, parseDecan, parseRank, joinIndex, deriveCardGeometry } from './lib/sky-address.mjs';
+export { TREE, SIGNS, SUITS };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BODY_KEYS = ['sun', 'moon', 'terra', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
-/** The Tree as Crowley numbers it: the sephira of each number, one to ten. */
-export const TREE = ['kether', 'chokmah', 'binah', 'chesed', 'geburah', 'tiphareth', 'netzach', 'hod', 'yesod', 'malkuth'];
-export const SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
-/** The suits in Crowley's order (the Aces' order too): Wands, Cups, Swords, Disks. */
-export const SUITS = ['wands', 'cups', 'swords', 'disks'];
-const WORD = { ace: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
-const ELEMENT_OF_SUIT = { wands: 'fire', cups: 'water', swords: 'air', disks: 'earth-element' };
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 
 export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
@@ -41,32 +35,10 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const cited = (id) => (pages.joins?.[id]?.length ?? 0) > 0;
 
   // ── the joins the rings read ──────────────────────────────────────────────
-  const joinsOf = new Map(); // family id -> [{ other, id }]
-  for (const j of field.joins) {
-    if (j.a.type !== 'family' || j.b.type !== 'family') continue;
-    for (const [x, y] of [[j.a.id, j.b.id], [j.b.id, j.a.id]]) {
-      if (!joinsOf.has(x)) joinsOf.set(x, []);
-      joinsOf.get(x).push({ other: y, id: j.id, system: j.system });
-    }
-  }
-  const joined = (id) => joinsOf.get(id) ?? [];
-
-  const parseDecan = (id) => {
-    const m = /^decan-([a-z]+)-([123])$/.exec(id);
-    if (!m || !SIGNS.includes(m[1])) return null;
-    const sign = SIGNS.indexOf(m[1]);
-    const n = Number(m[2]);
-    return { sign, n, lon: sign * 30 + (n - 1) * 10 };
-  };
-  const parseRank = (id) => {
-    const m = /^thoth-([a-z]+)-of-(wands|cups|swords|disks)$/.exec(id);
-    if (!m || !(m[1] in WORD)) return null;
-    return { number: WORD[m[1]], suit: m[2] };
-  };
+  const jidx = joinIndex(field.joins);
+  const joined = (id) => jidx.get(id) ?? [];
   const isMajor = (id) => /^Atu /.test(fam.get(id)?.name ?? '') && id.startsWith('thoth-');
 
-  const used = new Set(); // card ids drawn anywhere
-  const bodies = {};
   const uncited = new Set();
   const use = (joinIds) => { for (const id of joinIds) if (!cited(id)) uncited.add(id); };
 
@@ -80,19 +52,20 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
 
   const listQuote = placed([cur.list], 'list')[0] ?? null;
 
+  // the geometry (which cards hang where) is the one derivation the occurrences' sky placement shares: lib/sky-address.mjs
+  const geometry = deriveCardGeometry({ cur, famIds: new Set(fam.keys()), famName: (id) => fam.get(id)?.name, joined, errors });
+  const used = geometry.used; // card ids drawn anywhere
+  const bodies = {};
+
   for (const key of BODY_KEYS) {
     const c = cur.bodies[key];
     if (!c) continue;
-    const out = { gods: [], position: c.position ?? null, sephira: null, positionQuotes: placed([{ work: cur.list.work, page: cur.list.page, voice: cur.list.voice, quote: c.quote }], `body ${key}`), decans: [], ranks: [], majors: [], elements: [], abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
-    if (c.position) {
-      out.sephira = TREE[c.position - 1];
-      if (!fam.has(out.sephira)) errors.push(`body ${key}: the field has no family ${out.sephira}`);
-    }
+    const g0 = geometry.bodies[key];
+    const out = { gods: [], position: c.position ?? null, sephira: g0.sephira, positionQuotes: placed([{ work: cur.list.work, page: cur.list.page, voice: cur.list.voice, quote: c.quote }], `body ${key}`), decans: g0.decans, ranks: g0.ranks, majors: g0.majors, elements: g0.elements, abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
 
     // the planet's god: a family the sky ties already name, or the one curated here with Jung's words
     if (c.god) {
       const g = { family: c.god.family, basis: c.god.basis ?? null, voice: c.god.voice ?? null, quotes: [] };
-      if (!fam.has(g.family)) errors.push(`body ${key}: the field has no family ${g.family}`);
       if (c.god.fromSkyTie) {
         const t = skyTies.ties.find((x) => x.body === key && x.target?.type === 'family' && x.target.id === g.family);
         if (!t) errors.push(`body ${key}: curation/sky/ties.json does not tie it to ${g.family}`);
@@ -104,57 +77,8 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
       } else g.quotes = placed(c.god.quotes ?? [], `body ${key} god`);
       if (g.basis === 'jung' && !g.quotes.length) errors.push(`body ${key}: a jung tie to ${g.family} needs a placed quotation`);
       out.gods.push(g);
-
-      // decans: the planet's family ↔ decan family ↔ pip card
-      for (const j of joined(g.family)) {
-        const d = parseDecan(j.other);
-        if (!d) continue;
-        const cardJoin = joined(j.other).find((x) => x.system === 'thoth' && x.other.startsWith('thoth-') && parseRank(x.other));
-        if (!cardJoin) { errors.push(`${j.other}: no pip card joined`); continue; }
-        use([j.id, cardJoin.id]);
-        used.add(cardJoin.other);
-        out.decans.push({ card: cardJoin.other, decan: j.other, sign: d.sign, n: d.n, lon: d.lon, joins: [j.id, cardJoin.id] });
-      }
-      out.decans.sort((a, b) => a.lon - b.lon);
-
-      // majors: the Atu joined to the god's family — attributed to the planet itself, or to a sign it rules
-      for (const j of joined(g.family)) {
-        if (!isMajor(j.other)) continue;
-        const sign = joined(j.other).map((x) => SIGNS.indexOf(x.other)).find((i) => i >= 0);
-        use([j.id]);
-        used.add(j.other);
-        out.majors.push({ card: j.other, via: sign === undefined ? 'planet' : 'ruler', ...(sign === undefined ? {} : { sign }), joins: [j.id] });
-      }
-      out.majors.sort((a, b) => (a.via === b.via ? a.card.localeCompare(b.card) : a.via === 'planet' ? -1 : 1));
     }
-
-    // rank: the cards joined to the body's sephira, one per suit, in Crowley's suit order
-    if (out.sephira) {
-      for (const j of joined(out.sephira)) {
-        const r = parseRank(j.other);
-        if (!r || r.number !== c.position) continue;
-        use([j.id]);
-        used.add(j.other);
-        out.ranks.push({ card: j.other, suit: r.suit, number: r.number, joins: [j.id] });
-      }
-      out.ranks.sort((a, b) => SUITS.indexOf(a.suit) - SUITS.indexOf(b.suit));
-      if (out.ranks.length !== 4) errors.push(`body ${key}: ${out.sephira} carries ${out.ranks.length} cards of its number, not four`);
-    }
-
-    if (c.elements) {
-      for (const e of c.elements) if (!fam.has(e)) errors.push(`body ${key}: the field has no family ${e}`);
-      out.elements = [...c.elements];
-      // the Atu the field gives an element and no sign (the Fool to Air, the Hanged Man to Water, the Aeon to Fire, the
-      // Universe to Earth): a sign's Atu that only stands in an element by its sign (the Chariot) is not the element's own
-      for (const e of c.elements) {
-        for (const j of joined(e)) {
-          if (!isMajor(j.other) || joined(j.other).some((x) => SIGNS.includes(x.other))) continue;
-          use([j.id]);
-          used.add(j.other);
-          out.majors.push({ card: j.other, via: 'element', element: e, joins: [j.id] });
-        }
-      }
-    }
+    for (const x of [...out.decans, ...out.majors, ...out.ranks]) use(x.joins);
     bodies[key] = out;
   }
 

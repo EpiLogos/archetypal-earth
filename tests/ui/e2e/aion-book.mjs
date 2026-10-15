@@ -29,8 +29,10 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(2000);
   const title = (await page.locator('.aion-card .rv-name').textContent()) ?? '';
   check(/Sign of the Fishes/.test(title), `${tag}: the arrows walk the chapters in Jung's order`, title);
-  const drawn = await page.evaluate(() => { const t = window.__earth.engine.presences.relTarget ?? null; return t ? Array.from(t).filter((v) => v >= 0.035).length : null; });
-  check(drawn !== null && drawn < 2815 * 0.6, `${tag}: the globe shows the chapter's own set`, `${drawn} drawn`);
+  // presences the globe can show: an occurrence with no Earth place sits at relevance 1 in every scope (not drawn), so it is
+  // not counted — and the whole field is what the model places, not a number written here
+  const { drawn, placed } = await page.evaluate(() => { const t = window.__earth.engine.presences.relTarget ?? null; const loc = window.__earth.ctl.m.located; return { drawn: t ? Array.from(t).filter((v, i) => v >= 0.035 && loc[i]).length : null, placed: Array.from(loc).filter(Boolean).length }; });
+  check(drawn !== null && drawn < placed * 0.6, `${tag}: the globe shows the chapter's own set`, `${drawn} drawn of ${placed}`);
   const events = page.locator('.aion-book-events button');
   check(await events.count() > 5, `${tag}: the readings' events that cite the chapter are linked`, `${await events.count()} events`);
   if (shots) await page.screenshot({ path: `${shots}/aion-book-${tag}.png` });

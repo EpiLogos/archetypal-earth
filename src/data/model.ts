@@ -1,5 +1,6 @@
 // Indexes over the Field: everything the experience layer looks up by id.
-import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Join, Occurrence, Field, Theoretic, TheoreticId } from '../types/field';
+import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Join, Occurrence, Field, SkyLocus, Theoretic, TheoreticId } from '../types/field';
+import type { BodyKey } from '../types/sky';
 import type { Symbols, SymbolEntry } from '../types/symbols';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
@@ -44,12 +45,28 @@ export interface Model {
   u: Float32Array;
   /** whether the occurrence can be shown on the globe */
   located: Uint8Array;
+  /** whether the occurrence hangs somewhere in the sky (a body, a ring of it, the zodiac): its extraterrestrial place */
+  skyAt: Uint8Array;
+  /**
+   * The occurrences that hang at each place of the sky, by body key (the planet itself and every ring of it) or, for
+   * the places no body holds, 'zodiac' and 'pole'. Index lists, year ascending.
+   */
+  skyOcc: Map<string, number[]>;
   famPalette: Map<FamilyId, RGBPalette>;
   archPalette: Map<ArchetypeId, RGBPalette>;
   theoPalette: Map<TheoreticId, RGBPalette>;
+  /** each family's HOME occurrences (its primary family): what a mode's scope and the Aion and Red Book walks read */
   famOcc: Map<FamilyId, number[]>; // indices, year ascending
   archOcc: Map<ArchetypeId, number[]>;
   theoOcc: Map<TheoreticId, number[]>;
+  /**
+   * The same by MEMBERSHIP: the occurrences that are a family's own, those that co-manifest it beside another, and those its
+   * vault note lists (Occurrence.coFamilyIds is the rule). What a thread, a label, a count and a focus read; the modes keep
+   * the home lists, so a mode's own set is not widened by a co-manifest.
+   */
+  famMem: Map<FamilyId, number[]>;
+  archMem: Map<ArchetypeId, number[]>;
+  theoMem: Map<TheoreticId, number[]>;
   cultureOcc: Map<string, number[]>;
   places: Map<string, Place>;
   occPlace: (string | undefined)[];
@@ -106,8 +123,11 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   const dir: Vec3[] = new Array(n);
   const u = new Float32Array(n);
   const located = new Uint8Array(n);
+  const skyAt = new Uint8Array(n);
+  const skyOcc = new Map<string, number[]>();
   const colour: RGB[] = new Array(n);
   const famOcc = new Map<FamilyId, number[]>();
+  const famMem = new Map<FamilyId, number[]>();
   const cultureOcc = new Map<string, number[]>();
   const places = new Map<string, Place>();
   const occPlace: (string | undefined)[] = new Array(n);
@@ -118,8 +138,21 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     u[i] = scale.toU(o.year);
     located[i] = o.geoPrecision !== 'none' && Number.isFinite(o.lat) && Number.isFinite(o.lon) ? 1 : 0;
     colour[i] = famPalette.get(o.familyId)?.core ?? hexToRgb(FALLBACK_PALETTE.core);
-    const fam = famOcc.get(o.familyId);
-    if (fam) fam.push(i); else famOcc.set(o.familyId, [i]);
+    const home = famOcc.get(o.familyId);
+    if (home) home.push(i); else famOcc.set(o.familyId, [i]);
+    // a family's members: its own, and those that manifest it beside another (co-manifests, and the instances its own vault
+    // note lists) — the membership the thread, the label and every count read
+    for (const fid of new Set([o.familyId, ...(o.coFamilyIds ?? [])])) {
+      const mem = famMem.get(fid);
+      if (mem) mem.push(i); else famMem.set(fid, [i]);
+    }
+    if (o.sky?.length) {
+      skyAt[i] = 1;
+      for (const k of new Set(o.sky.map((l) => l.body ?? l.ring))) {
+        const l = skyOcc.get(k);
+        if (l) l.push(i); else skyOcc.set(k, [i]);
+      }
+    }
     for (const c of o.cultureIds) {
       const l = cultureOcc.get(c);
       if (l) l.push(i); else cultureOcc.set(c, [i]);
@@ -134,30 +167,40 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     }
   }
   for (const list of famOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year);
+  for (const list of famMem.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of cultureOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year);
+  for (const list of skyOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year || a - b);
   for (const p of places.values()) p.occ.sort((a, b) => occ[a].year - occ[b].year);
   // a single-occurrence "place" is just that occurrence; keep only real regions of recurrence
   for (const [id, p] of places) if (p.occ.length < 2) { for (const i of p.occ) occPlace[i] = undefined; places.delete(id); }
 
-  const archOcc = new Map<ArchetypeId, number[]>();
-  for (const a of field.archetypes) {
-    const set = new Set<number>();
-    const fams = new Set<FamilyId>(a.familyIds);
-    for (const f of field.families) if (f.archetypes.some((t) => t.id === a.id)) fams.add(f.id);
-    for (const fid of fams) for (const i of famOcc.get(fid) ?? []) set.add(i);
-    archOcc.set(a.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
-  }
-
-  // A theoretic stands for everything its tied archetypes and families carry — so focusing one tunes
-  // the world to it rather than opening a page beside it. The theory rests on the field; it is not a
-  // parallel world.
-  const theoOcc = new Map<TheoreticId, number[]>();
-  for (const t of field.theoretics ?? []) {
-    const set = new Set<number>();
-    for (const tie of t.archetypes) for (const i of archOcc.get(tie.id) ?? []) set.add(i);
-    for (const tie of t.families) for (const i of famOcc.get(tie.id) ?? []) set.add(i);
-    theoOcc.set(t.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
-  }
+  // an archetype stands for what its families carry; a theoretic for what its tied archetypes and families carry — so
+  // focusing one tunes the world to it rather than opening a page beside it. Built twice, from the home lists and from
+  // the member lists (see famMem).
+  const sets = (byFam: Map<FamilyId, number[]>) => {
+    const arch = new Map<ArchetypeId, number[]>();
+    for (const a of field.archetypes) {
+      const set = new Set<number>();
+      const fams = new Set<FamilyId>(a.familyIds);
+      for (const f of field.families) if (f.archetypes.some((t) => t.id === a.id)) fams.add(f.id);
+      for (const fid of fams) for (const i of byFam.get(fid) ?? []) set.add(i);
+      arch.set(a.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
+    }
+    const theo = new Map<TheoreticId, number[]>();
+    for (const t of field.theoretics ?? []) {
+      const set = new Set<number>();
+      for (const tie of t.archetypes) for (const i of arch.get(tie.id) ?? []) set.add(i);
+      for (const tie of t.families) for (const i of byFam.get(tie.id) ?? []) set.add(i);
+      theo.set(t.id, [...set].sort((x, y) => occ[x].year - occ[y].year));
+    }
+    return { arch, theo };
+  };
+  const home = sets(famOcc);
+  const mem = sets(famMem);
+  const archOcc = home.arch;
+  const theoOcc = home.theo;
+  const archMem = mem.arch;
+  const theoMem = mem.theo;
 
   // What governs each occurrence, by its own family: the archetypes the family is tied to, and the theoretics whose
   // material that family is — the same sets the focus tunes to, so a filter on them slices exactly what a focus shows.
@@ -179,7 +222,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     }
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, cultureOcc, places, occPlace, colour, tags, joins, joinsBy };
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, joins, joinsBy };
 }
 
 const BASIS_ORDER: Record<string, number> = { jung: 0, inferred: 1, site: 2 };
@@ -198,8 +241,28 @@ export function joinsOf(m: Model, s: Subject): { join: Join; other: Subject }[] 
     .sort((x, y) => BASIS_ORDER[x.join.basis] - BASIS_ORDER[y.join.basis] || subjectName(m, x.other).localeCompare(subjectName(m, y.other)));
 }
 
-/** Occurrence indices (located only) that belong to a subject. */
+/** Every occurrence index that belongs to a subject, placed or not (year ascending). */
+export function subjectMembers(m: Model, s: Subject): number[] {
+  let list: number[] | undefined;
+  if (s.type === 'archetype') list = m.archMem.get(s.id);
+  else if (s.type === 'theoretic') list = m.theoMem.get(s.id);
+  else if (s.type === 'family') list = m.famMem.get(s.id);
+  else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
+  else list = m.places.get(s.id)?.occ;
+  return list ?? [];
+}
+
+/** Occurrence indices (placed on the Earth only) that belong to a subject: what the globe shows and a thread walks. */
 export function subjectOccurrences(m: Model, s: Subject): number[] {
+  return subjectMembers(m, s).filter((i) => m.located[i]);
+}
+
+/**
+ * The occurrences placed on the Earth that are HOME to a subject: its own family's (and, for an archetype or a theoretic,
+ * its families' own). What the dynamical reading draws — each occurrence belongs to one basin, its primary family — as
+ * against subjectOccurrences, which also counts the co-manifests a family is a member of.
+ */
+export function subjectHome(m: Model, s: Subject): number[] {
   let list: number[] | undefined;
   if (s.type === 'archetype') list = m.archOcc.get(s.id);
   else if (s.type === 'theoretic') list = m.theoOcc.get(s.id);
@@ -207,6 +270,28 @@ export function subjectOccurrences(m: Model, s: Subject): number[] {
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
   else list = m.places.get(s.id)?.occ;
   return (list ?? []).filter((i) => m.located[i]);
+}
+
+/** A place in the sky a subject's occurrences hang at: a body (any ring of it), the zodiac, or the heavens round the pole. */
+export interface SkyHang {
+  /** the body key, or 'zodiac' / 'pole' for the places no body holds */
+  at: BodyKey | 'zodiac' | 'pole';
+  /** the loci of the subject's occurrences that stand here, each with the occurrence that holds it */
+  loci: { locus: SkyLocus; occ: number }[];
+}
+
+/** Where a subject's occurrences hang in the sky: one entry per place, the bodies in the order the sky lists them. */
+export function subjectSky(m: Model, s: Subject): SkyHang[] {
+  const by = new Map<string, SkyHang>();
+  for (const i of subjectMembers(m, s)) {
+    for (const locus of m.occ[i].sky ?? []) {
+      const at = (locus.body ?? locus.ring) as SkyHang['at'];
+      let h = by.get(at);
+      if (!h) by.set(at, (h = { at, loci: [] }));
+      h.loci.push({ locus, occ: i });
+    }
+  }
+  return [...by.values()];
 }
 
 export function subjectName(m: Model, s: Subject): string {

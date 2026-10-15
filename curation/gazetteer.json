@@ -18,6 +18,12 @@
    "precision": "place",
    "jit": 0.06
   },
+  "aegean islands": {
+   "lat": 38.0,
+   "lon": 25.0,
+   "precision": "region",
+   "jit": 1.5
+  },
   "africa": {
    "lat": 3,
    "lon": 22,
@@ -102,6 +108,12 @@
    "precision": "region",
    "jit": 0.3
   },
+  "americas": {
+   "lat": 10.0,
+   "lon": -80.0,
+   "precision": "region",
+   "jit": 15
+  },
   "angkor wat": {
    "lat": 13.4125,
    "lon": 103.867,
@@ -168,6 +180,12 @@
    "lon": 7.5886,
    "precision": "region",
    "jit": 0.4
+  },
+  "asia": {
+   "lat": 35.0,
+   "lon": 95.0,
+   "precision": "region",
+   "jit": 12
   },
   "asia minor": {
    "lat": 39,
@@ -508,6 +526,12 @@
    "precision": "region",
    "jit": 0.6
   },
+  "caucasus": {
+   "lat": 42.5,
+   "lon": 44.0,
+   "precision": "region",
+   "jit": 3
+  },
   "central australia": {
    "lat": -23.7,
    "lon": 133.9,
@@ -590,6 +614,12 @@
    "lon": -3.1,
    "precision": "region",
    "jit": 0.5
+  },
+  "cyclades": {
+   "lat": 37.0,
+   "lon": 25.2,
+   "precision": "region",
+   "jit": 0.8
   },
   "cyprus": {
    "lat": 35,
@@ -770,6 +800,12 @@
    "precision": "region",
    "jit": 3
   },
+  "europe and africa": {
+   "lat": 25.0,
+   "lon": 15.0,
+   "precision": "region",
+   "jit": 10
+  },
   "europe frankfurt printing": {
    "lat": 50,
    "lon": 10,
@@ -786,6 +822,12 @@
    "lat": 44.8381,
    "lon": 11.6198,
    "precision": "place"
+  },
+  "flanders": {
+   "lat": 51.0,
+   "lon": 3.8,
+   "precision": "region",
+   "jit": 0.7
   },
   "florence": {
    "lat": 43.7696,
@@ -984,6 +1026,12 @@
    "precision": "region",
    "jit": 0.6
   },
+  "hittite": {
+   "lat": 40.0,
+   "lon": 34.0,
+   "precision": "region",
+   "jit": 2
+  },
   "hormanuthi": {
    "lat": 25.62,
    "lon": 32.54,
@@ -1136,6 +1184,12 @@
    "lon": 8.5417,
    "precision": "place",
    "jit": 0.15
+  },
+  "jutland": {
+   "lat": 56.0,
+   "lon": 9.3,
+   "precision": "region",
+   "jit": 1
   },
   "kalhu": {
    "lat": 36.0983,
@@ -1387,6 +1441,12 @@
    "lon": 32.6396,
    "precision": "place"
   },
+  "lycia": {
+   "lat": 36.5,
+   "lon": 29.5,
+   "precision": "region",
+   "jit": 0.8
+  },
   "lyon": {
    "lat": 45.764,
    "lon": 4.8357,
@@ -1509,6 +1569,11 @@
   "moknine": {
    "lat": 35.6333,
    "lon": 10.9,
+   "precision": "place"
+  },
+  "monte cassino": {
+   "lat": 41.4903,
+   "lon": 13.814,
    "precision": "place"
   },
   "mosque of omar": {
@@ -1722,6 +1787,12 @@
    "lon": 30.6667,
    "precision": "place"
   },
+  "pacific ocean": {
+   "lat": 5.0,
+   "lon": -160.0,
+   "precision": "region",
+   "jit": 15
+  },
   "paderborn": {
    "lat": 51.7189,
    "lon": 8.7575,
@@ -1842,6 +1913,12 @@
    "lat": 24.0252,
    "lon": 32.8841,
    "precision": "place"
+  },
+  "phoenicia": {
+   "lat": 34.0,
+   "lon": 35.8,
+   "precision": "region",
+   "jit": 1
   },
   "phrygia": {
    "lat": 39,
@@ -2138,6 +2215,12 @@
    "precision": "region",
    "jit": 2
   },
+  "sparta": {
+   "lat": 37.0733,
+   "lon": 22.4297,
+   "precision": "place",
+   "jit": 0.1
+  },
   "st urbans monastery": {
    "lat": 47.18,
    "lon": 7.9,
@@ -2174,6 +2257,12 @@
    "lon": 11.75,
    "precision": "place"
   },
+  "sumer": {
+   "lat": 31.5,
+   "lon": 46.0,
+   "precision": "region",
+   "jit": 1.5
+  },
   "surlei": {
    "lat": 46.45,
    "lon": 9.8,
@@ -2182,6 +2271,11 @@
   "surlej": {
    "lat": 46.45,
    "lon": 9.8,
+   "precision": "place"
+  },
+  "susa": {
+   "lat": 32.19,
+   "lon": 48.26,
    "precision": "place"
   },
   "swabia": {
@@ -2351,6 +2445,12 @@
    "lon": 10.1815,
    "precision": "place"
   },
+  "turkey": {
+   "lat": 39.0,
+   "lon": 35.0,
+   "precision": "region",
+   "jit": 3
+  },
   "turukalukundram": {
    "lat": 12.5,
    "lon": 80,
@@ -2386,6 +2486,11 @@
   "uppsala": {
    "lat": 59.8586,
    "lon": 17.6389,
+   "precision": "place"
+  },
+  "ur": {
+   "lat": 30.9626,
+   "lon": 46.1031,
    "precision": "place"
   },
   "uruk": {
@@ -2478,6 +2583,11 @@
    "lon": 8.5417,
    "precision": "place",
    "jit": 0.15
+  },
+  "xanthos": {
+   "lat": 36.3547,
+   "lon": 29.3181,
+   "precision": "place"
   },
   "yakut": {
    "lat": 62,

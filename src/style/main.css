@@ -441,3 +441,7 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 .al-thumb { flex: none; width: 38px; height: 46px; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.2); }
 .th-link:hover .al-thumb, .th-link:focus-visible .al-thumb { outline-color: rgb(var(--core-rgb) / 0.7); }
 .th-link:has(.al-thumb) { padding-block: 4px; }
+
+/* where a subject hangs in the sky: a quiet line under the body, each place a door to that body */
+.dp-sky { margin: 0.9rem 0 0; font-family: var(--sans); font-size: 0.82rem; line-height: 1.6; color: var(--ink-3); letter-spacing: 0.02em; }
+.dp-sky-lead { margin-right: 0.15rem; }

@@ -705,7 +705,8 @@
           "para": null,
           "starts": "the circumambulatio, which is one of the origins of the mand"
         }
-      ]
+      ],
+      "oneLine": "Walking or dancing round a centre to ward off danger: one origin of the mandala."
     },
     "clairvoyance": {
       "definitionPick": [
@@ -714,7 +715,8 @@
           "para": 129,
           "starts": "In this letter Kant describes how Swedenborg, while he was i"
         }
-      ]
+      ],
+      "oneLine": "Perceiving distant events without the senses: the soul free of space and time."
     },
     "clear-light": {
       "definitionPick": [
@@ -728,7 +730,8 @@
           "para": 838,
           "starts": "This realization is the Dharmakāya state of perfect enlighte"
         }
-      ]
+      ],
+      "oneLine": "The primordial radiance beheld at death, and dimmed through the visions that follow."
     },
     "cloud": {
       "definitionPick": [
@@ -1146,7 +1149,8 @@
           "para": null,
           "starts": "The radioactive nucleus is an excellent symbol for the IIOII"
         }
-      ]
+      ],
+      "oneLine": "Pauli’s symbol of the Self: the nucleus as source of energy of the unconscious."
     },
     "ragnarok": {
       "definitionPick": [
@@ -1173,7 +1177,8 @@
           "para": 1744,
           "starts": "the figure of the redeemer is universal because it partakes "
         }
-      ]
+      ],
+      "oneLine": "The one saviour in many disguises: a fish, a hare, a lamb, a snake, a man."
     },
     "river": {
       "definitionPick": [
@@ -1218,7 +1223,8 @@
           "para": null,
           "starts": "One of its symbols is the scorpion, which stings itself to d"
         }
-      ]
+      ],
+      "oneLine": "The scorpion that turns its sting on itself: death by its own weapon."
     },
     "shepherd": {
       "definitionPick": [
@@ -1388,7 +1394,8 @@
           "para": 622,
           "starts": "They are impressive manifestations of totality whose simple,"
         }
-      ]
+      ],
+      "oneLine": "Round or cigar-shaped lights in the sky: the technological disguise of the mandala."
     },
     "underworld": {
       "definitionPick": [
@@ -3020,6 +3027,9 @@
     "burial-jar-asia-minor": {
       "oneLine": "A burial jar from Asia Minor, 3500–1750 B.C. (as printed)."
     },
+    "butterfly": {
+      "oneLine": "The soul as a winged insect: psyche is the Greek word for both soul and butterfly."
+    },
     "cabirian-group-thebes-vessel": {
       "oneLine": "A Cabirian group on a vessel from Thebes, V century B.C. (as printed)."
     },
@@ -3104,6 +3114,9 @@
     "fragments-goddess-beltis-susa": {
       "oneLine": "Fragments of a goddess, Beltis, from Susa, VII century B.C. (as given)."
     },
+    "frog": {
+      "oneLine": "The frog as nature’s first attempt at man: the being that comes up from the swamp."
+    },
     "funerary-figure-tell-halaf": {
       "oneLine": "A funerary figure from Tell Halaf, Mesopotamia, IX century B.C. (as printed)."
     },
@@ -3152,6 +3165,9 @@
     "harpy-tomb-xanthos": {
       "oneLine": "The Harpy Tomb, a marble relief from Xanthos, Lycia, c. 600 B.C. (as printed)."
     },
+    "helios": {
+      "oneLine": "The sun-god in his chariot of four winged white horses, rising over the desert at dawn."
+    },
     "hercules-night-sea-journey": {
       "oneLine": "Hercules' night sea journey, a plate from Attica, c. 480 B.C. (as printed)."
     },
@@ -3188,6 +3204,9 @@
     "madonna-of-the-sheaves": {
       "oneLine": "The Madonna of the Sheaves, Bavaria (perhaps), c. 1450 (as printed)."
     },
+    "mars": {
+      "oneLine": "The iron planet: martial heat inside the opus, a trunk of the philosophical tree."
+    },
     "mother-goddesses-india": {
       "oneLine": "Mother goddesses of India, 1000–300 B.C. (as given)."
     },
@@ -3212,6 +3231,12 @@
     "pig": {
       "oneLine": "The sacrificed pig of an Eleusis votive relief, about the fifth to fourth century BCE."
     },
+    "playing-card": {
+      "oneLine": "The card imagery of the Pauli dreams: the ace of clubs read through the cross."
+    },
+    "pleroma": {
+      "oneLine": "The Gnostic fullness that is also nothingness: creation lies outside it."
+    },
     "prometheus": {
       "oneLine": "Prometheus: 'Here I sit creating human beings', Goethe's poem, c. 1773 (printed 1789)."
     },
@@ -3232,6 +3257,12 @@
     },
     "ship": {
       "oneLine": "Schopenhauer's mariner in his frail barque, from The Birth of Tragedy (1872)."
+    },
+    "siegfried": {
+      "oneLine": "The hero of the Nordic epic, shot at a mountain pass in a dream of Jung’s."
+    },
+    "spindle": {
+      "oneLine": "Pauli’s three spindles of the Table Ronde: the Fates, a lower chthonic Trinity."
     },
     "stone-of-pessinus": {
       "oneLine": "The stone of Pessinus, brought to Rome in 204 BCE (Livy's account)."
@@ -3259,6 +3290,15 @@
     },
     "wolf": {
       "oneLine": "The she-wolf suckling Romulus and Remus: the legend of Rome's founding, 753 BCE."
+    },
+    "jupiter": {
+      "oneLine": "The tin planet of the alchemists and, with Saturn, maker of the world-conjunctions."
+    },
+    "necklace": {
+      "oneLine": "A necklace worn at the throat that began as primitive teeth and became a jewel."
+    },
+    "mandrake": {
+      "oneLine": "The forked man-shaped root that grows under the gallows and shrieks when pulled."
     }
   }
 }

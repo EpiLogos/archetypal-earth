@@ -12,8 +12,8 @@ describe('thread reach', () => {
   it('every occurrence of every family is a step of its thread or listed with one', () => {
     const missed: string[] = [];
     for (const f of m.field.families) {
-      const all = m.famOcc.get(f.id) ?? [];
-      if (!all.some((i) => m.located[i])) continue; // no placed instance: no thread (the label says so)
+      const all = m.famMem.get(f.id) ?? []; // a thread walks a family's members: its own and its co-manifests
+      if (!all.some((i) => m.located[i])) continue; // no placed member: no thread
       const reached = new Set<number>();
       for (const s of planThread(m, 'family', f.id)) { reached.add(s.occ); for (const i of s.also) reached.add(i); }
       for (const i of all) if (!reached.has(i)) missed.push(`${f.id}: ${m.occ[i].id}`);

@@ -1,5 +1,6 @@
 // The walk fabric and a mode's own set. A thread lists each step's period-mates (every occurrence of its subject is
-// reachable from its walk); a symbol with no placed instance says it has no thread instead of offering a dead link;
+// reachable from its walk); a symbol with no place on the Earth offers no thread and says nothing of an absence — it says
+// where it hangs in the sky, or has nothing to say of place at all;
 // the Red Book and Aion show their own set under the title, with the whole field one click away.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/mode-scope.mjs
 import { launch, open } from './lib.mjs';
@@ -7,7 +8,10 @@ import { launch, open } from './lib.mjs';
 let failed = 0;
 const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}${detail ? ` — ${detail}` : ''}`); if (!ok) failed++; };
 const browser = await launch('chromium');
-const drawn = (page) => page.evaluate(() => { const t = window.__earth.engine.presences.relTarget ?? null; return t ? Array.from(t).filter((v) => v >= 0.035).length : null; });
+// presences the globe can show: an occurrence with no Earth place sits at relevance 1 in every scope (it is not drawn),
+// so it is not counted — and the whole field is what the model places, not a number written here
+const drawn = (page) => page.evaluate(() => { const t = window.__earth.engine.presences.relTarget ?? null; const loc = window.__earth.ctl.m.located; return t ? Array.from(t).filter((v, i) => v >= 0.035 && loc[i]).length : null; });
+const placedTotal = (page) => page.evaluate(() => Array.from(window.__earth.ctl.m.located).filter(Boolean).length);
 
 {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/t/f/serpent' });
@@ -29,11 +33,26 @@ const drawn = (page) => page.evaluate(() => { const t = window.__earth.engine.pr
   await ctx.close();
 }
 {
-  const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/f/battle-with-dragon' });
+  // a card hangs in the sky and has no place on the Earth: it offers no thread, says nothing of an absence, and says where it hangs
+  const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/f/thoth-two-of-wands' });
   await page.waitForTimeout(5000);
-  const label = await page.locator('.focus-label').textContent();
-  check(/No thread/.test(label ?? '') && !/Follow the thread/.test(label ?? ''), 'a symbol with no placed instance says it has no thread', (label ?? '').replace(/\s+/g, ' ').slice(0, 140));
-  check(!logs.length, 'placeless: no page errors', logs.slice(0, 2).join(' | '));
+  const label = ((await page.locator('.focus-label').textContent()) ?? '').replace(/\s+/g, ' ');
+  check(!/Follow the thread/.test(label), 'a symbol with no place on the Earth offers no thread', label.slice(0, 160));
+  check(!/No thread|records no instance|no recorded place/i.test(label), 'and says nothing of an absence', label.slice(0, 160));
+  check(/in the sky/i.test(label) && /Mars/.test(label) && /decan wheel/.test(label), 'it says where it hangs: Mars’s decan wheel', label.slice(0, 200));
+  const door = page.locator('.fl-hangs button').first();
+  check(await door.count() > 0, 'each place it hangs is a door to that body', `${await door.count()} doors`);
+  check(!logs.length, 'sky-hung: no page errors', logs.slice(0, 2).join(' | '));
+  await ctx.close();
+}
+{
+  // a function that no source places anywhere: no thread, no negation, no sky — it still has its reading
+  const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/f/thinking' });
+  await page.waitForTimeout(5000);
+  const label = ((await page.locator('.focus-label').textContent()) ?? '').replace(/\s+/g, ' ');
+  check(!/Follow the thread|No thread|records no instance/i.test(label), 'a symbol no source places has neither a thread nor a negation', label.slice(0, 160));
+  check(/Reading/.test(label), 'it keeps its reading', label.slice(0, 160));
+  check(!logs.length, 'unplaced: no page errors', logs.slice(0, 2).join(' | '));
   await ctx.close();
 }
 for (const [hash, name] of [['#/redbook', 'the Red Book'], ['#/aion/jung-aion', 'Aion']]) {
@@ -51,7 +70,8 @@ for (const [hash, name] of [['#/redbook', 'the Red Book'], ['#/aion/jung-aion', 
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   check(/ in .* · Show the whole field/.test(line) && !/nearby, dimmed/.test(line), `${name} names its own set`, line);
   const before = await drawn(page);
-  check(before !== null && before < 2815 * 0.6, `${name} draws its set, not the whole field`, `${before} presences drawn of 2,815`);
+  const total = await placedTotal(page);
+  check(before !== null && before < total * 0.6, `${name} draws its set, not the whole field`, `${before} presences drawn of ${total.toLocaleString('en-US')}`);
   await page.locator('.sh-scope-toggle').click();
   await page.waitForTimeout(1500);
   const after = await drawn(page);

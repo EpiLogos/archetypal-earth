@@ -19,7 +19,7 @@ describe('Book of Symbols source layer', () => {
   }, 180_000);
 
   it('ships the reviewed paraphrases reproducibly with only existing field families', () => {
-    expect(generateSymbols({ root: ROOT, check: true })).toMatchObject({ entries: 29, source: 'book-of-symbols' });
+    expect(generateSymbols({ root: ROOT, check: true })).toMatchObject({ entries: 43, source: 'book-of-symbols' });
     expect(validateSymbols(symbols(), { field })).toEqual([]);
     expect(symbols().entries).toEqual(curated.entries.map(({ evidence: _evidence, ...entry }: { evidence: unknown }) => entry));
   });
@@ -79,6 +79,8 @@ describe('Book of Symbols source layer', () => {
     expect(find('mandala').body.join(' ')).toContain('editorial comparison');
     expect(find('fire').pages).toEqual([84]);
     expect(find('fire').body.join(' ')).toContain('missing opening');
+    // a family compared with an entry about something wider is said to be: never a claim that the book treats it by name
+    for (const id of ['spindle', 'lion', 'thoth-fortune', 'thoth-hanged-man']) expect(find(id).body.join(' '), id).toContain('editorial comparison');
     expect(JSON.stringify(data)).not.toContain('textSha256');
     expect(JSON.stringify(data)).not.toContain('data:image');
     expect(JSON.stringify(data)).not.toContain('evidence');

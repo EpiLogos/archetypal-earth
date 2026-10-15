@@ -1,7 +1,9 @@
 // DEEP: the optional reading layer — longer body text, the definition, all cites,
 // related forms. A wide translucent sheet; the globe stays visible behind it.
 import type { Model, Subject } from '../data/model';
-import { archetypesOfFamily, occurrenceImage, subjectName, subjectOccurrences } from '../data/model';
+import { archetypesOfFamily, occurrenceImage, subjectName, subjectOccurrences, subjectSky } from '../data/model';
+import { bodyOfLocus, locusPhrase } from '../data/skyplace';
+import type { BodyKey } from '../types/sky';
 import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
 import { sanitiseTitle } from './credit';
@@ -57,6 +59,8 @@ export interface DeepHandlers {
   onClose(): void;
   onSubject(s: Subject): void;
   onOccurrence(id: string): void;
+  /** open a body of the sky (the places a subject hangs at are doors to it) */
+  onBody?(key: BodyKey): void;
   /** present when the corpus index is available: cites become deep links */
   onCite?(work: string, locator: string): void;
   passage?: PassageBridge;
@@ -154,6 +158,7 @@ export class DeepSheet {
         a.append(row);
       }
       if (NUMBER_ARCHETYPES.has(s.id)) this.appendNumberPage(s.id);
+      this.appendSkyHangs(s);
       this.appendRelated(s);
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else if (s.type === 'family') {
@@ -167,6 +172,7 @@ export class DeepSheet {
         a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: fam.definition.text }), el('footer', { text: fam.definition.cite })]));
       }
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
+      this.appendSkyHangs(s);
       this.appendFieldPage(s);
       const symbolic = symbolReading(m, fam.id, id => this.h.onSubject({ type: 'family', id }));
       if (symbolic) a.append(symbolic);
@@ -216,6 +222,33 @@ export class DeepSheet {
       this.appendCites(idx.map((i) => m.occ[i]));
     }
     this.appendFooter();
+  }
+
+  /**
+   * Where the subject hangs in the sky: the places its occurrences hold (a card on its ruler's decan wheel, a sign on the
+   * zodiac), each a door to that body. Nothing when it hangs nowhere — and nothing said of that.
+   */
+  private appendSkyHangs(s: Subject): void {
+    if (!this.h.onBody) return;
+    const seen = new Set<string>();
+    const doors: { text: string; body: BodyKey }[] = [];
+    for (const h of subjectSky(this.model, s)) {
+      for (const { locus } of h.loci) {
+        const text = locusPhrase(locus);
+        if (seen.has(text)) continue;
+        seen.add(text);
+        doors.push({ text, body: bodyOfLocus(locus) });
+      }
+    }
+    // an archetype that spans many forms hangs everywhere: a handful of arbitrary places would mislead, so it names none
+    if (!doors.length || (s.type === 'archetype' ? doors.length > 6 : false)) return;
+    doors.length = Math.min(doors.length, 8);
+    const p = el('p', { class: 'dp-sky' }, [el('span', { class: 'dp-sky-lead', text: 'In the sky: ' })]);
+    doors.forEach((d, i) => {
+      if (i) p.append(' · ');
+      p.append(el('button', { class: 'link-quiet', type: 'button', text: d.text, onclick: () => this.h.onBody?.(d.body) }));
+    });
+    this.article.append(p);
   }
 
   /** The field-pages data: absent in a build without it, and the rejection is caught here, never shown. */

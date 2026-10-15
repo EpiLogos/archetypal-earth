@@ -1,0 +1,35 @@
+{
+ "_note": "Voices and dates for works that are not Jung's. `voice` says whose words a cite is (the interface names it: Crowley, Burt, Neumann …; absent means Jung). `year`/`display` date an attestation by a work the field holds no engagement years of: Jung's own volumes carry theirs in the vault's cites and need no entry. The year is the work's first publication, read off its copyright page in the corpus (the English edition's year is kept in the display where it differs).",
+ "version": 1,
+ "works": {
+  "book-of-thoth": {
+   "year": 1944,
+   "display": "1944",
+   "voice": "Crowley"
+  },
+  "burt-zodiac": {
+   "year": 1988,
+   "display": "1988",
+   "voice": "Burt"
+  },
+  "vonzfranz-number-time": {
+   "year": 1970,
+   "display": "1970 (English 1974)",
+   "voice": "von Franz"
+  },
+  "van-eenwyk": {
+   "year": 1997,
+   "display": "1997",
+   "voice": "Van Eenwyk"
+  },
+  "neumann-great-mother": {
+   "voice": "Neumann"
+  },
+  "neumann-origins": {
+   "voice": "Neumann"
+  },
+  "a-blue-fire": {
+   "voice": "Hillman"
+  }
+ }
+}

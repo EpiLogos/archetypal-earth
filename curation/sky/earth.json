@@ -1,0 +1,26 @@
+{
+ "_note": "The only geography the Thoth deck itself gives. Crowley, Book of Thoth pdf p175: the Princesses rule the heavens round the North Pole, the Meridian is the Great Pyramid, and the elements rule going eastward in the order of Tetragrammaton, so that, roughly, the Aces and Princesses of each suit cover a region of the Earth. Both lines are quotations placed in the corpus by scripts/lib/cite.mjs. `suits` gives the region's name as Crowley writes it (the gazetteer places it, region precision, and the build says it is rough); `pole` is the Princesses' own place in the sky, the circumpolar heavens, one quadrant to a suit in the order Crowley gives (slot = suit order). Nothing here places a pip card or an Atu: they hang where the joins put them (lib/sky-address.mjs).",
+ "version": 1,
+ "regions": {
+  "work": "book-of-thoth",
+  "page": 175,
+  "voice": "Crowley",
+  "quote": "Thus, roughly, Aces‐Princesses Wands cover Asia, Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa."
+ },
+ "pole": {
+  "work": "book-of-thoth",
+  "page": 175,
+  "voice": "Crowley",
+  "quote": "who rule the Heavens around the North Pole."
+ },
+ "suits": {
+  "wands": "Asia",
+  "cups": "the Pacific Ocean",
+  "swords": "the Americas",
+  "disks": "Europe and Africa"
+ },
+ "applies": [
+  "ace",
+  "princess"
+ ]
+}

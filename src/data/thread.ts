@@ -47,8 +47,8 @@ export function thinBuckets<T>(sorted: T[], max: number, prefer: (x: T) => boole
 
 function subjectList(m: Model, type: 'family' | 'archetype' | 'parallels', id: string): number[] {
   let list: number[] = [];
-  if (type === 'family') list = m.famOcc.get(id) ?? [];
-  else if (type === 'archetype') list = m.archOcc.get(id) ?? [];
+  if (type === 'family') list = m.famMem.get(id) ?? [];
+  else if (type === 'archetype') list = m.archMem.get(id) ?? [];
   else {
     const i = m.occIndex.get(id);
     if (i !== undefined) {

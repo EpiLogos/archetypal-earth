@@ -14,7 +14,7 @@ Nobody can hold that field in their head. The *Collected Works* scatter it acros
 
 The field is built from the Collected Works (vols. 1–18, both halves of 9), the six seminars, the Pauli letters, the Zofingia lectures and *Synchronicity*, with the Red Book beside them. Neumann, von Franz, Van Eenwyk, Burt's zodiac and Crowley's *Book of Thoth* are read in beside Jung as commentary and as the sources for the number, sky and card work, always marked as theirs.
 
-- **27 archetypes**, **561 image families** beneath them (mandala, serpent, ouroboros, conjunctio, the signs, the elements, the Thoth cards), and **2,854 dated, placed instances**: a pyramid text, a gnostic diagram, an alchemical woodcut, a dream told at the Zürich seminar table.
+- **27 archetypes**, **559 image families** beneath them (mandala, serpent, ouroboros, conjunctio, the signs, the elements, the Thoth cards), and **3,085 dated occurrences**, on the Earth and in the sky: a pyramid text, a gnostic diagram, an alchemical woodcut, a dream told at the Zürich seminar table, a card on Mars’s decan wheel.
 - **14 theoretics**, Jung's instruments (the psychoid, the collective unconscious, synchronicity, the transcendent function) carried as part of the field rather than left in a glossary.
 - Plates for the images, each credited on the site to its museum, photographer or publisher.
 

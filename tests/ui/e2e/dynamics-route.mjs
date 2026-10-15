@@ -35,7 +35,7 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   check(await page.locator('.dy-route-dot').count() === 16, `${tag}: the overview maps the route, sixteen stops in four movements`);
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   const own = Number((/^([\d,]+) in/.exec(line)?.[1] ?? '0').replace(/,/g, ''));
-  check(/in the route’s families/.test(line) && own > 0 && own < 2815 * 0.5, `${tag}: the globe shows the lens's own set and names it`, `${line} · ${await drawn(page)} drawn`);
+  check(/in the route’s families/.test(line) && own > 0 && own < (await page.evaluate(() => Array.from(window.__earth.ctl.m.located).filter(Boolean).length)) * 0.5, `${tag}: the globe shows the lens's own set and names it`, `${line} · ${await drawn(page)} drawn`);
   await page.locator('.th-walk').click();
   await page.waitForTimeout(2500);
   check(/#\/dynamics\/s\/alternating-current$/.test(page.url()), `${tag}: the walk begins with energy between poles`, page.url());

@@ -14,6 +14,11 @@ import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
 import { buildCorpusIndex, corpusTitles } from './lib/corpus.mjs';
 import { isPlateCaption } from './lib/quotes.mjs';
 import { externalRegister } from './lib/external.mjs';
+import { buildFieldPages } from './field-pages.mjs';
+import { workLoader } from './lib/cite.mjs';
+import { citeQuotes, workTitles as corpusWorkTitles } from './lib/quotes.mjs';
+import { skyAddresses, parseRank, parseCourt } from './lib/sky-address.mjs';
+import { workDates, buildAttestations } from './lib/attest.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -70,6 +75,9 @@ const curTies = readJson(CUR('family-ties.json')).ties;
 const gaz = loadGazetteer(CUR('gazetteer.json'));
 const { aliases: cultAliases, cultures: cultTable } = loadCultures(CUR('cultures.json'));
 const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
+// the works whose words are not Jung's (curation/works.json): their cites say whose voice they are, and the attestations
+// are dated by them. Jung's own volumes need no entry: their cites carry their years already.
+const worksCur = readJson(CUR('works.json'), { works: {} });
 const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, theoretics: {}, occurrences: {} });
 const imageQueries = readJson(IMAGE_QUERIES_JSON, { occurrences: {} });
 // An additive register beside images.json (public/data/images-ext.json, same shape): plates fetched while another run
@@ -158,7 +166,8 @@ function parseCite(s) {
     if (m) { work = m[1]; locator = m[2]; }
   }
   const wl = workLabel(work.replace(/[^\w-]/g, ''));
-  return { work: wl.key, workTitle: wl.title, year: collapse(year), locator: collapse(locator) };
+  const voice = worksCur.works?.[wl.key]?.voice;
+  return { work: wl.key, workTitle: wl.title, year: collapse(year), locator: collapse(locator), ...(voice ? { voice } : {}) };
 }
 
 // ---------- archetypes ----------
@@ -251,8 +260,22 @@ for (const e of lexicon) {
   const slug = slugify(e.canonical || '');
   lexAliases[slug] = (lexAliases[slug] || []).concat(asList(e.aliases));
 }
+const mergedIn = {}; // merge target -> the names and aliases of the notes merged into it
 for (const n of imgNotes.filter((x) => !x.failed)) {
   if (String(n.data.status || '').toLowerCase() === 'redirect') continue; // canonical family is the merge target
+  if (famMerges[n.slug] && famMerges[n.slug] !== n.slug) {
+    // a merge key is an alias, not a node: its instances already resolve to the target (resolveFam), and a node of its own
+    // would carry nothing — the empty family the interface used to describe as "no instance yet"
+    const als = [...asList(n.data.aliases), ...(lexAliases[n.slug] || [])].map((x) => collapse(plain(x).replace(/^["']|["']$/g, ''))).filter(Boolean);
+    (mergedIn[famMerges[n.slug]] ||= []).push(titleCase(n.slug), ...als);
+    skip('family', n.slug, `merged into ${famMerges[n.slug]} (curation/families.json merges): kept as an alias`);
+    continue;
+  }
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(n.slug)) {
+    // a vault stub whose id is not a slug (an arrow in a filename) and which no instance names: nothing to carry
+    skip('family', n.slug, 'id is not a slug and no instance names it (vault stub)');
+    continue;
+  }
   const over = famOver[n.slug] || {};
   const st = String(n.data.subtype || '').toLowerCase();
   const als = [...asList(n.data.aliases), ...(lexAliases[n.slug] || [])].map((x) => collapse(plain(x).replace(/^["']|["']$/g, ''))).filter(Boolean);
@@ -272,6 +295,10 @@ for (const n of imgNotes.filter((x) => !x.failed)) {
     _vault: n,
   };
   foldFamilyDefinition(over, famMap[n.slug]);
+}
+for (const [target, names] of Object.entries(mergedIn)) {
+  if (famMap[target]) famMap[target]._aliases.push(...names);
+  else warn(`merge target ${target} is not a family: the names merged into it are dropped`);
 }
 // alias -> family (only unambiguous aliases), so [[snake]] resolves to serpent
 const aliasIndex = {};
@@ -486,6 +513,159 @@ for (const o of occList) {
 }
 if (Object.keys(droppedCo).length) warn(`co_manifests dropped (not a family): ${Object.entries(droppedCo).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}x${v}`).join(', ')}`);
 
+// ---------- membership ----------
+// An occurrence belongs to its primary family and to every family that co-manifests in it (coFamilyIds). A family's own
+// vault note also lists instances (its "Instances:" section): when one is filed under another family the note still says
+// it is an instance of this one, and the note is the family's own statement of what it holds. Both count, so a thread,
+// a label and a count see what the family holds (owner's ruling, 2026-10-14). Provenance is kept in the stats.
+const listedMembership = {};
+for (const fam of Object.values(famMap)) {
+  if (!fam._vault) continue;
+  const lines = String(fam._vault.body || '').split('\n');
+  // the note's own list of instances, and only that: what stands under an "Instances" label up to the next heading, plus
+  // the bulleted links of a note that lists its instances before any section (some do, with no heading). A link in a
+  // "Parallels / adjacent" section or in a later additive subsection only mentions; it is never a membership.
+  const listed = new Set();
+  const isHeading = (l) => /^#{1,6}\s/.test(l);
+  lines.forEach((l, i) => {
+    if (!/^\W*(?:#{1,6}\s*)?(?:\*\*)?instances\b/i.test(l)) return;
+    for (let j = i + 1; j < lines.length && !isHeading(lines[j]); j++) {
+      for (const m of lines[j].matchAll(/\[\[([^\]|#]+)/g)) listed.add(slugify(m[1]));
+    }
+  });
+  const firstSection = lines.findIndex((l) => /^#{2,6}\s/.test(l));
+  for (const l of lines.slice(0, firstSection < 0 ? lines.length : firstSection)) {
+    const m = /^\s*[*\-]\s+(?:\*\*)?\[\[([^\]|#]+)/.exec(l);
+    if (m) listed.add(slugify(m[1]));
+  }
+  for (const slug of listed) {
+    const o = occById[slug];
+    if (!o || o.familyId === fam.id || o.coFamilyIds.includes(fam.id)) continue;
+    o.coFamilyIds.push(fam.id);
+    listedMembership[fam.id] = (listedMembership[fam.id] || 0) + 1;
+  }
+}
+
+// ---------- attestations ----------
+// The families curation admits on its own (synthesised, no vault note) are attested by the page they carry: one
+// occurrence per family per work, from placed quotations only (scripts/lib/attest.mjs). Where a source attributes a place
+// it is carried: in the sky (scripts/lib/sky-address.mjs, the same derivation the card rings read) and, for the Aces and
+// Princesses, the region of the Earth Crowley names (curation/sky/earth.json).
+const attestStats = { occurrences: 0, sky: 0, earth: 0, unplaced: 0, byWork: {}, missing: [], pageErrors: [] };
+{
+  const cardsCur = readJson(CUR('sky/cards.json'), null);
+  const earthCur = readJson(CUR('sky/earth.json'), null);
+  const famIds = new Set(Object.keys(famMap));
+  const key = (e) => (e && typeof e === 'object' && e.type === 'family' ? { type: 'family', id: famMerges[e.id] || e.id } : null);
+  const rawJoins = (readJson(CUR('joins.json'), { joins: [] }).joins ?? [])
+    .map((j) => ({ id: j.id, system: j.system, basis: j.basis, a: key(j.a), b: key(j.b) }))
+    .filter((j) => j.a && j.b && famIds.has(j.a.id) && famIds.has(j.b.id));
+  const addrErrors = [];
+  const { addresses } = cardsCur
+    ? skyAddresses({ cur: cardsCur, famIds, famName: (id) => famMap[id]?.name, joins: rawJoins, errors: addrErrors })
+    : { addresses: new Map() };
+  addrErrors.forEach((e) => warn(`sky address: ${e}`));
+
+  // the pages, with every quotation placed exactly as scripts/field-pages.mjs publishes them
+  const nodes = {
+    family: famIds,
+    archetype: new Set([...archSlugs, ...Object.keys(curArch)]),
+    theoretic: new Set([...theoNotes.filter((n) => !n.failed).map((n) => n.slug), ...Object.keys(curTheo)]),
+  };
+  const built = buildFieldPages({
+    root: ROOT, vault: VAULT, curation: CURATION_DIR,
+    field: { families: [...famIds].map((id) => ({ id })), archetypes: [...nodes.archetype].map((id) => ({ id })), theoretics: [...nodes.theoretic].map((id) => ({ id })), joins: [] },
+  });
+  built.errors.forEach((e) => { attestStats.pageErrors.push(e); warn(`field page: ${e}`); });
+
+  // Crowley's region lines, placed (a line the corpus will not place is dropped and said)
+  let earth = null;
+  if (earthCur) {
+    const errs = [];
+    const placed = citeQuotes(workLoader(VAULT), corpusWorkTitles(ROOT), [earthCur.regions, earthCur.pole], 'earth.json', errs, []);
+    errs.forEach((e) => warn(`earth.json: ${e}`));
+    if (placed.length === 2) earth = { regions: placed[0], pole: placed[1], suits: earthCur.suits, applies: earthCur.applies };
+  }
+  const earthOf = (id) => {
+    if (!earth) return null;
+    const r = parseRank(id);
+    const c = parseCourt(id);
+    const suit = r && r.number === 1 && earth.applies.includes('ace') ? r.suit : c && c.court === 'princess' && earth.applies.includes('princess') ? c.suit : null;
+    if (!suit || !earth.suits[suit]) return null;
+    return { place: earth.suits[suit], page: earth.regions.cite.locator.replace(/^pdf p/, ''), quote: earth.regions.text, pole: c ? earth.pole.text : null };
+  };
+
+  const dates = workDates(occList, worksCur);
+  const attested = new Set(curationFamilies);
+  // a Jung volume is cited as the field's other cites name it ("Psychology and Alchemy (CW12)"); any other work by the
+  // corpus's own short title, as the field pages print it
+  const corpusT = corpusWorkTitles(ROOT);
+  const titleOf = (w) => { const l = workLabel(w); return l.short ? l.title : corpusT.get(w) || l.title; };
+  const { attestations, missing } = buildAttestations({
+    pages: built.data.pages,
+    include: (id) => attested.has(id),
+    loci: (id) => addresses.get(id) ?? [],
+    earthOf,
+    dates,
+    titleOf,
+    familyName: (id) => famMap[id].name,
+  });
+  attestStats.missing = missing;
+  for (const m of missing) warn(`attestation: ${m}`);
+
+  const taken = new Set(occList.map((o) => o.id));
+  for (const a of attestations) {
+    let id = a.id;
+    if (taken.has(id)) { warn(`attestation ${id} collides with an existing occurrence id; skipped`); continue; }
+    taken.add(id);
+    const title = fixText(collapse(plain(a.title)), `occ:${id}.title`);
+    let lat = 0, lon = 0, precision = 'none';
+    if (a.place) {
+      const hit = matchPlace(a.place, gaz);
+      if (hit) {
+        [lat, lon] = jitter(id, hit.lat, hit.lon, hit.jit ?? JIT[hit.precision]);
+        precision = hit.precision;
+        geoSource.place++;
+      } else { geoSource.none++; warn(`attestation ${id}: place "${a.place}" is not in the gazetteer`); }
+    } else geoSource.none++;
+    const o = {
+      id,
+      title,
+      label: shortLabel(title),
+      familyId: a.familyId,
+      coFamilyIds: [],
+      locusType: 'text-passage',
+      subject: 'n/a',
+      cultureIds: [],
+      place: a.place || '',
+      lat,
+      lon,
+      geoPrecision: precision,
+      year: a.year,
+      yearDisplay: a.yearDisplay,
+      ...(a.yearRange ? { yearRange: a.yearRange } : {}),
+      jung: a.jung,
+      ...(a.quote ? { quote: fixText(a.quote, `occ:${id}.quote`) } : {}),
+      ...(a.caption ? { caption: true } : {}),
+      body: a.body.map((b, k) => fixText(b, `occ:${id}.body[${k}]`)),
+      parallelIds: [],
+      ...(a.sky.length ? { sky: a.sky } : {}),
+    };
+    occList.push(o);
+    occById[id] = o;
+    attestStats.occurrences++;
+    if (a.sky.length) attestStats.sky++;
+    if (precision !== 'none') attestStats.earth++;
+    if (!a.sky.length && precision === 'none') attestStats.unplaced++;
+    attestStats.byWork[a.work] = (attestStats.byWork[a.work] || 0) + 1;
+  }
+  occList.sort((a, b) => a.id.localeCompare(b.id));
+}
+
+// who holds what: primary, co-manifest and listed instances together
+const memberIds = {};
+for (const o of occList) for (const f of [o.familyId, ...o.coFamilyIds]) (memberIds[f] ||= new Set()).add(o.id);
+
 // ---------- ties, palettes, spectrum ----------
 /** Vault `expresses_*` may name an archetype or another family; families inherit that family's curation ties (one hop). */
 const absorbExpressLink = (ties, put, slug, basis, depth = 0) => {
@@ -548,8 +728,9 @@ for (const fam of Object.values(famMap)) {
 const famList = Object.values(famMap).sort((a, b) => a.id.localeCompare(b.id));
 for (const a of archList) {
   const fams = famList.filter((f) => f.archetypes.some((t) => t.id === a.id));
-  a.familyIds = fams.sort((x, y) => y.occurrenceIds.length - x.occurrenceIds.length || x.id.localeCompare(y.id)).map((f) => f.id);
-  a.occurrenceCount = new Set(fams.flatMap((f) => f.occurrenceIds)).size;
+  const held = (f) => memberIds[f.id]?.size ?? 0;
+  a.familyIds = fams.sort((x, y) => held(y) - held(x) || x.id.localeCompare(y.id)).map((f) => f.id);
+  a.occurrenceCount = new Set(fams.flatMap((f) => [...(memberIds[f.id] ?? [])])).size;
 }
 // Ties between archetypes, from curation alone (the number archetypes to the Self, the dyad to syzygy and shadow).
 // Each is checked to resolve, so an archetype never names a node the field does not have; the basis is carried.
@@ -635,7 +816,7 @@ for (const t of theoList) {
   const fams = new Set(t.families.map((x) => x.id));
   for (const x of t.archetypes) for (const fid of archById[x.id]?.familyIds ?? []) fams.add(fid);
   const ids = new Set();
-  for (const fid of fams) for (const oid of famMap[fid]?.occurrenceIds ?? []) ids.add(oid);
+  for (const fid of fams) for (const oid of memberIds[fid] ?? []) ids.add(oid);
   t.occurrenceCount = ids.size;
 }
 
@@ -718,7 +899,11 @@ const cleanFam = famList.map((f) => {
   const { _aliases, _form, _over, _vault, ...rest } = f;
   return { id: rest.id, name: rest.name, subtype: rest.subtype, aliases: rest.aliases, oneLine: rest.oneLine, archetypes: rest.archetypes, spectrum: rest.spectrum, palette: rest.palette, body: rest.body, ...(rest.definition ? { definition: rest.definition } : {}), ...(rest.image ? { image: rest.image } : {}), occurrenceIds: rest.occurrenceIds, synthesised: rest.synthesised };
 });
-const years = occList.map((o) => o.year);
+// the time axis is the globe's: it is set by what the globe can show. An occurrence with no place on the Earth (one that
+// hangs in the sky, or names no place) keeps its own year — an attestation is dated by its source, 1970, 1988 — and the
+// scale clamps it (src/data/time.ts); it does not bend the track the globe's time control runs along
+const onTrack = (o) => o.geoPrecision !== 'none';
+const years = occList.filter(onTrack).map((o) => o.year);
 const field = {
   meta: {
     generatedAt: process.env.FIELD_GENERATED_AT || new Date().toISOString(),
@@ -795,7 +980,9 @@ const stats = {
   joinsDuplicates,
   unresolvedFamilyTargets: unresolvedFamilies,
   mergedFamilyTargets: famMerges,
-  familiesWithoutOccurrences: cleanFam.filter((f) => !f.occurrenceIds.length).map((f) => f.id),
+  familiesWithoutOccurrences: cleanFam.filter((f) => !(memberIds[f.id]?.size)).map((f) => f.id),
+  listedMembership,
+  attestations: attestStats,
   familiesOneLineFallback: formFallbacks,
   familiesOneLineFromVault: famList.filter((f) => f._form && f.oneLine && !formFallbacks.includes(f.id)).length,
   unknownCultures,

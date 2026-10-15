@@ -1,4 +1,5 @@
 // Runtime validator for public/data/field.json against src/types/field.ts.
+import { BODY_KEYS, RINGS } from './lib/sky-address.mjs';
 const HEX = /^#[0-9a-fA-F]{6}$/;
 const LOCUS = new Set(['artifact', 'text-passage', 'myth-episode', 'ritual', 'dream', 'vision', 'active-imagination', 'clinical-case', 'historical-event']);
 const SUBJECT = new Set(['jung', 'patient-anon', 'n/a']);
@@ -135,6 +136,23 @@ export function validateField(f) {
     if (!isNum(c.lon) || c.lon < -180 || c.lon > 180) err(`${w}: lon`);
   }
 
+  /** A sky locus is the card rings' own geometry: a body, a ring, an ecliptic span, a slot (src/sky/cards.ts). */
+  const skyLocus = (w, l) => {
+    if (!l || typeof l !== 'object') { err(`${w}: sky locus is not an object`); return; }
+    if (!RINGS.includes(l.ring)) { err(`${w}: sky ring ${l.ring}`); return; }
+    const needsBody = l.ring !== 'zodiac' && l.ring !== 'pole';
+    if (needsBody && !BODY_KEYS.includes(l.body)) err(`${w}: sky ${l.ring} needs a body the sky holds, not ${l.body}`);
+    if (!needsBody && l.body != null) err(`${w}: sky ${l.ring} stands on no body`);
+    const spanned = l.ring === 'zodiac' || l.ring === 'wheel';
+    if (spanned) {
+      if (!isNum(l.lon) || l.lon < 0 || l.lon >= 360) err(`${w}: sky ${l.ring} lon ${l.lon}`);
+      if (!isNum(l.span) || l.span <= 0 || l.span > 360) err(`${w}: sky ${l.ring} span ${l.span}`);
+    }
+    if (l.slot != null && !(Number.isInteger(l.slot) && l.slot >= 0 && l.slot < 4)) err(`${w}: sky slot ${l.slot}`);
+    if (!BASIS.has(l.basis)) err(`${w}: sky basis ${l.basis}`);
+    if (!Array.isArray(l.via) || !l.via.every(isStr)) err(`${w}: sky via`);
+  };
+
   const occIds = new Set(f.occurrences.map((o) => o.id));
   if (occIds.size !== f.occurrences.length) err('duplicate occurrence ids');
   let yMin = Infinity;
@@ -154,7 +172,8 @@ export function validateField(f) {
     if (!PREC.has(o.geoPrecision)) err(`${w}: geoPrecision ${o.geoPrecision}`);
     if (o.geoPrecision === 'none' && (o.lat !== 0 || o.lon !== 0)) err(`${w}: precision none must be 0,0`);
     if (!isNum(o.year) || o.year < -10000 || o.year > 2030) err(`${w}: year ${o.year} out of range`);
-    else {
+    else if (o.geoPrecision !== 'none') {
+      // the globe's track: an occurrence with no place on the Earth (dated by its source) does not set its ends
       yMin = Math.min(yMin, o.year);
       yMax = Math.max(yMax, o.year);
     }
@@ -163,6 +182,11 @@ export function validateField(f) {
     if (!Array.isArray(o.jung)) err(`${w}: jung`);
     else for (const c of o.jung) for (const k of ['work', 'workTitle', 'year', 'locator']) if (!isStr(c[k])) err(`${w}: cite.${k}`);
     if (!Array.isArray(o.body)) err(`${w}: body`);
+    // the extraterrestrial placement: where an occurrence hangs in the sky, independent of its place on the Earth
+    if (o.sky != null) {
+      if (!Array.isArray(o.sky) || !o.sky.length) err(`${w}: sky must be a non-empty list`);
+      else for (const l of o.sky) skyLocus(w, l);
+    }
     for (const p of o.parallelIds || []) if (!occIds.has(p)) err(`${w}: parallelId ${p} unresolved`);
     for (const k of ['title', 'label', 'place', 'quote']) noLinks(w, o[k]);
     (o.body || []).forEach((p) => noLinks(w, p));

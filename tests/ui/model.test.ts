@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildFixture } from '../../src/dev/fixture';
-import { buildModel, shortPlace, slug, subjectOccurrences } from '../../src/data/model';
+import { buildModel, shortPlace, slug, subjectMembers, subjectOccurrences, subjectSky } from '../../src/data/model';
 import { planThread, thin, THREAD_MAX } from '../../src/data/thread';
 import { clipText, shortLocator, shortWork } from '../../src/ui/format';
 import { buildSearchIndex, search } from '../../src/data/search';
@@ -113,5 +113,55 @@ describe('text formatting', () => {
     expect(clipText(t, 40)).toBe('One short sentence here.');
     expect(clipText('short', 60)).toBe('short');
     expect(clipText('word '.repeat(40), 30).endsWith('…')).toBe(true);
+  });
+});
+
+describe('membership and the sky', () => {
+  // a field in which one occurrence co-manifests a second family and another hangs only in the sky
+  const base = buildFixture();
+  const [a, b] = [base.families[0], base.families[1]];
+  const own = base.occurrences.find((o) => o.familyId === a.id && o.geoPrecision !== 'none')!;
+  const skyOnly = { ...base.occurrences.find((o) => o.familyId === b.id)!, id: 'sky-only', geoPrecision: 'none' as const, lat: 0, lon: 0, coFamilyIds: [] as string[], sky: [{ body: 'mars' as const, ring: 'wheel' as const, lon: 0, span: 10, basis: 'site' as const, via: [] }, { ring: 'zodiac' as const, lon: 0, span: 10, basis: 'site' as const, via: [] }] };
+  const field = { ...base, occurrences: base.occurrences.map((o) => (o.id === own.id ? { ...o, coFamilyIds: [b.id] } : o)).concat(skyOnly) };
+  const m = buildModel(field);
+
+  it('counts a co-manifest as a member of the family it also manifests, and keeps the home lists as they were', () => {
+    const i = m.occIndex.get(own.id)!;
+    expect(m.famMem.get(a.id)).toContain(i);
+    expect(m.famMem.get(b.id)).toContain(i);
+    expect(subjectOccurrences(m, { type: 'family', id: b.id })).toContain(i);
+    // a mode’s scope and the Aion and Red Book walks read the home list: a co-manifest does not widen them
+    expect(m.famOcc.get(a.id)).toContain(i);
+    expect(m.famOcc.get(b.id) ?? []).not.toContain(i);
+  });
+
+  it('lists a member once even when it is named twice', () => {
+    const f2 = { ...field, occurrences: field.occurrences.map((o) => (o.id === own.id ? { ...o, coFamilyIds: [b.id, b.id, a.id] } : o)) };
+    const m2 = buildModel(f2);
+    const i = m2.occIndex.get(own.id)!;
+    expect(m2.famMem.get(a.id)!.filter((x) => x === i)).toHaveLength(1);
+    expect(m2.famMem.get(b.id)!.filter((x) => x === i)).toHaveLength(1);
+  });
+
+  it('keeps the globe’s “located” to the Earth: a sky place is not a place on the globe', () => {
+    const i = m.occIndex.get('sky-only')!;
+    expect(m.located[i]).toBe(0);
+    expect(m.skyAt[i]).toBe(1);
+    expect(subjectOccurrences(m, { type: 'family', id: b.id })).not.toContain(i);
+    expect(subjectMembers(m, { type: 'family', id: b.id })).toContain(i);
+  });
+
+  it('indexes the sky by body, and by the zodiac for the places no body holds', () => {
+    const i = m.occIndex.get('sky-only')!;
+    expect(m.skyOcc.get('mars')).toEqual([i]);
+    expect(m.skyOcc.get('zodiac')).toEqual([i]);
+    expect(m.skyOcc.has('pole')).toBe(false);
+  });
+
+  it('tells where a subject’s occurrences hang, one entry per place', () => {
+    const hang = subjectSky(m, { type: 'family', id: b.id });
+    expect(hang.map((h) => h.at).sort()).toEqual(['mars', 'zodiac']);
+    expect(hang.find((h) => h.at === 'mars')!.loci[0].locus.ring).toBe('wheel');
+    expect(subjectSky(m, { type: 'family', id: a.id })).toEqual([]);
   });
 });

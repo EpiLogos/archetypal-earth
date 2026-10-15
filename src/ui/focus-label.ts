@@ -9,6 +9,8 @@ export interface LabelContent {
   /** small serif-italic row of related names that can be followed (e.g. a form's archetypes) */
   ties?: { text: string; onClick: () => void }[];
   tiesPrefix?: string;
+  /** where the subject hangs in the sky (its occurrences' extraterrestrial places): each a door to that body */
+  hangs?: { text: string; onClick: () => void }[];
   links?: { text: string; onClick: () => void }[];
   /** when set the label is a breadcrumb: click returns up one level */
   back?: () => void;
@@ -58,6 +60,15 @@ export class FocusLabel {
         const row = el('p', { class: 'fl-ties' });
         if (content.tiesPrefix) row.append(el('span', { text: content.tiesPrefix + ' ' }));
         content.ties.forEach((t, i) => {
+          if (i) row.append(' · ');
+          row.append(el('button', { class: 'link-quiet', type: 'button', text: t.text, onclick: t.onClick }));
+        });
+        this.root.append(row);
+      }
+      if (content.hangs?.length) {
+        const row = el('p', { class: 'fl-ties fl-hangs' });
+        row.append(el('span', { text: 'in the sky: ' }));
+        content.hangs.forEach((t, i) => {
           if (i) row.append(' · ');
           row.append(el('button', { class: 'link-quiet', type: 'button', text: t.text, onclick: t.onClick }));
         });

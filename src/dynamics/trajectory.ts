@@ -7,7 +7,7 @@
 // s, lightly smoothed. Bins with no occurrence are gaps, never interpolated across. A midpoint crossing is marked only
 // where the smoothed series crosses 0.5 with hysteresis and at least MIN_SIDE occurrences on each side.
 // A subject whose era series does not vary is a single level: drawn as a band, not a trace.
-import { subjectOccurrences, type Model, type Subject } from '../data/model';
+import { subjectHome, type Model, type Subject } from '../data/model';
 
 export interface TrajPoint {
   /** index into model.occ */
@@ -69,7 +69,9 @@ export const VARIES = 0.03;
 
 /** The subject's located occurrences in order of year, with the order parameter of each. */
 export function trajectoryOf(m: Model, subject: Subject): Trajectory {
-  const idx = subjectOccurrences(m, subject).slice().sort((a, b) => m.occ[a].year - m.occ[b].year || a - b);
+  // home occurrences: in the dynamical reading an occurrence belongs to one basin, its primary family (a co-manifest keeps
+  // its own family's basin), so a family is a single level and an archetype the levels of its families
+  const idx = subjectHome(m, subject).slice().sort((a, b) => m.occ[a].year - m.occ[b].year || a - b);
   const points: TrajPoint[] = idx.map((i) => {
     const o = m.occ[i];
     const s = m.famById.get(o.familyId)?.spectrum.position ?? 0.5;

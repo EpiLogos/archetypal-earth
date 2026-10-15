@@ -117,7 +117,7 @@ export class Strip {
       const x = m.occ[oi];
       return el('li', {}, [el('button', { type: 'button', class: 'st-also-item', onclick: () => this.h.onOpenOcc?.(oi) }, [
         el('span', { class: 'st-also-name', text: x.label }),
-        el('span', { class: 'st-also-when', text: m.located[oi] ? eraShort(x.yearDisplay, 18) : `${eraShort(x.yearDisplay, 14)} · no place recorded` }),
+        el('span', { class: 'st-also-when', text: m.located[oi] ? eraShort(x.yearDisplay, 18) : `${eraShort(x.yearDisplay, 14)} · ${m.skyAt[oi] ? 'in the sky' : 'no place recorded'}` }),
       ])]);
     }));
     this.toggleAlso(false);

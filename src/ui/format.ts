@@ -26,7 +26,8 @@ export function shortLocator(loc: string): string {
 }
 
 export function jungLine(c: Cite): string {
-  return ['Jung', shortWork(c.workTitle), c.year, shortLocator(c.locator)].filter(Boolean).join(' · ');
+  // the voice is whose words the passage is: Jung's unless the cite names another (Crowley, Burt, Neumann …)
+  return [c.voice ?? 'Jung', shortWork(c.workTitle), c.year, shortLocator(c.locator)].filter(Boolean).join(' · ');
 }
 
 /** work key → the title (and the year, when every cite of that work agrees on one) the field's own cites give it. */

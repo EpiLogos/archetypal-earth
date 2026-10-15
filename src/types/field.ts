@@ -9,6 +9,8 @@
 //                                    instance_of targets that have no note yet)
 //   wiki/instances   → Occurrence  (place-time manifestation — what the globe shows)
 
+import type { BodyKey } from './sky';
+
 export type ArchetypeId = string; // slug, e.g. "great-mother"
 export type TheoreticId = string; // slug, e.g. "psychoid"
 export type FamilyId = string; // slug, e.g. "serpent"
@@ -31,6 +33,28 @@ export type LocusType =
 
 /** How trustworthy lat/lon is. "culture" = placed at the tradition's centroid. */
 export type GeoPrecision = 'place' | 'region' | 'culture' | 'none';
+
+/**
+ * Where in the sky an occurrence hangs — its extraterrestrial place, independent of its Earth place (`lat/lon/geoPrecision`):
+ * it may have either, both, or neither. The card rings' own geometry (src/sky/cards.ts), so a ring and a place cannot
+ * disagree. A body (the planet itself, the Moon, the Earth as a body of the sky), a ring of it, an ecliptic span.
+ *   body    at the body itself (a sephira, an element on the Earth)
+ *   wheel   on the body's decan wheel, at an ecliptic span (a pip card, at its decan, on its ruler's wheel)
+ *   rank    on the body's rank ring (the cards of its number, the Atu attributed to it)
+ *   zodiac  the zodiac itself, no body: a sign, a decan, a court card's thirty degrees, a sign's Atu
+ *   pole    the heavens round the celestial pole (the Princesses); `slot` is the quadrant
+ * `lon`/`span` are ecliptic degrees (start and width; may wrap past 360). `slot` is the suit order (wands, cups, swords,
+ * disks) on a rank ring or a pole quadrant. `basis` says where the attribution comes from; `via` the join ids it rests on.
+ */
+export interface SkyLocus {
+  body?: BodyKey;
+  ring: 'body' | 'wheel' | 'rank' | 'zodiac' | 'pole';
+  lon?: number;
+  span?: number;
+  slot?: number;
+  basis: TieBasis;
+  via: string[];
+}
 
 export interface ImageRef {
   /** Site-relative path, e.g. "img/families/serpent.jpg" (served from public/). */
@@ -56,6 +80,8 @@ export interface Cite {
   year: string;
   /** Locator as written, e.g. "fig. 131, ¶357 (pdf p268)". */
   locator: string;
+  /** Whose words the passage is, when not Jung's ("Crowley", "Burt", "von Franz"); absent means Jung. */
+  voice?: string;
 }
 
 /**
@@ -183,6 +209,11 @@ export interface Occurrence {
   /** Plain-text paragraphs of the vault body (wikilinks resolved to names). */
   body: string[];
   parallelIds: OccurrenceId[]; // resolvable vault parallels only
+  /**
+   * Where it hangs in the sky, when a source puts it there (the Thoth card on its ruler's decan wheel, a sign on the
+   * zodiac). Independent of the Earth place: `lat/lon` stay 0,0 and `geoPrecision` 'none' when this is its only place.
+   */
+  sky?: SkyLocus[];
   image?: ImageRef | null; // null explicitly suppresses the family-image fallback after a reviewed rejection
 }
 

@@ -53,8 +53,10 @@ describe('field.json contract', () => {
       expect(o.lon).toBeLessThanOrEqual(180);
       if (o.geoPrecision === 'none') expect([o.lat, o.lon]).toEqual([0, 0]);
     }
-    expect(field.meta.yearMin).toBe(Math.min(...field.occurrences.map((o) => o.year)));
-    expect(field.meta.yearMax).toBe(Math.max(...field.occurrences.map((o) => o.year)));
+    // the globe's track is set by what the globe can show: an occurrence with no Earth place keeps its year and does not set the ends
+    const onTrack = field.occurrences.filter((o) => o.geoPrecision !== 'none');
+    expect(field.meta.yearMin).toBe(Math.min(...onTrack.map((o) => o.year)));
+    expect(field.meta.yearMax).toBe(Math.max(...onTrack.map((o) => o.year)));
   });
 
   it('leaves no wikilink syntax in any string', () => {
@@ -114,6 +116,81 @@ describe('field.json contract', () => {
   it('geographic precision target: >= 85% of occurrences at place or region', () => {
     const good = field.occurrences.filter((o) => o.geoPrecision === 'place' || o.geoPrecision === 'region').length;
     expect(good / field.occurrences.length).toBeGreaterThanOrEqual(0.85);
+  });
+
+  it('every family holds at least one occurrence: its own, a co-manifest, or one its vault note lists', () => {
+    const held = new Set<string>();
+    for (const o of field.occurrences) for (const f of [o.familyId, ...o.coFamilyIds]) held.add(f);
+    // the entry class the build once let through: a node that carried nothing and described its own absence
+    expect(field.families.filter((f) => !held.has(f.id)).map((f) => f.id)).toEqual([]);
+  });
+
+  it('no family says of itself that it is named in the field with nothing recorded', () => {
+    const boiler = /named in the field|no recorded instance|no instance yet|records no instance/i;
+    expect(field.families.filter((f) => boiler.test(f.oneLine)).map((f) => `${f.id}: ${f.oneLine}`)).toEqual([]);
+    // nor a line the automatic derivation cut off mid-thought
+    const cut = /\b(and|or|of|the|with|a|an|in|to|by|for|from|at|originating)\.$/i;
+    const stranded = /\b(and|or),\s+\w+\.$/i; // "…and, dimmed." — a clause left standing after the thought was cut
+    expect(field.families.filter((f) => cut.test(f.oneLine) || stranded.test(f.oneLine)).map((f) => `${f.id}: ${f.oneLine}`)).toEqual([]);
+  });
+
+  it('a merge key is an alias of its target, never a node that carries nothing', () => {
+    const merges: Record<string, string> = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'families.json'), 'utf8')).merges ?? {};
+    const ids = new Set(field.families.map((f) => f.id));
+    for (const key of Object.keys(merges)) expect(ids.has(key), `${key} is a merge key and still a family`).toBe(false);
+  });
+
+  it('what hangs in the sky is stored apart from the Earth: no coordinates are invented for it', () => {
+    const sky = field.occurrences.filter((o) => o.sky?.length);
+    expect(sky.length).toBeGreaterThan(100);
+    for (const o of sky) {
+      // either it has an Earth place of its own (Crowley’s region for an Ace or a Princess) or it stands at 0,0 / none
+      if (o.geoPrecision === 'none') expect([o.lat, o.lon], o.id).toEqual([0, 0]);
+      for (const l of o.sky!) expect(l.via.every((x) => typeof x === 'string'), o.id).toBe(true);
+    }
+  });
+
+  it('an attestation’s quotation stands on the first page its cite names (verbatim, up to the field’s own OCR repair)', () => {
+    const norm = (t: string) => t.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '');
+    const shingles = (t: string, n = 14) => { const out: string[] = []; for (let i = 0; i + n <= t.length; i += 7) out.push(t.slice(i, i + n)); return out; };
+    const corpus = new Map<string, Map<number, string>>();
+    const pageOf = (work: string, n: number) => {
+      if (!corpus.has(work)) {
+        const j = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', 'corpus', `${work}.json`), 'utf8')) as { pages: { p: number; text: string }[] };
+        corpus.set(work, new Map(j.pages.map((x) => [x.p, norm(x.text)])));
+      }
+      return corpus.get(work)!.get(n) ?? '';
+    };
+    const off: string[] = [];
+    let checked = 0;
+    for (const o of field.occurrences) {
+      const c = o.jung[0];
+      if (!c || o.id !== `${o.familyId}-in-${c.work}` || !o.quote) continue;
+      const first = c.locator.split('; ')[0];
+      const pg = /pdf p(\d+)/.exec(first)?.[1];
+      if (!pg) { off.push(`${o.id}: locator ${first}`); continue; }
+      checked++;
+      const page = pageOf(c.work, Number(pg));
+      const q = norm(o.quote);
+      if (page.includes(q)) continue;
+      // the field repairs scan damage in every string it carries: a handful of characters, never a different passage
+      const sh = shingles(q);
+      const found = sh.filter((x) => page.includes(x)).length;
+      if (!sh.length || found / sh.length < 0.75) off.push(`${o.id}: not on pdf p${pg}`);
+    }
+    expect(checked).toBeGreaterThan(200);
+    expect(off).toEqual([]);
+  });
+
+  it('an attestation is dated by its work and cites its words, never Jung’s unless they are', () => {
+    const attested = field.occurrences.filter((o) => o.id === `${o.familyId}-in-${o.jung[0]?.work}`);
+    expect(attested.length).toBeGreaterThan(150);
+    for (const o of attested) {
+      expect(o.jung, o.id).toHaveLength(1);
+      expect(o.quote, `${o.id} carries a placed quotation`).toBeTruthy();
+      expect(o.locusType).toBe('text-passage');
+      if (o.jung[0].work === 'book-of-thoth') expect(o.jung[0].voice, o.id).toBe('Crowley');
+    }
   });
 
   it('family occurrence lists are sorted by year and point back at the family', () => {

@@ -84,12 +84,12 @@ export function buildGraph(m: Model): Graph {
     return id;
   };
 
-  const maxArch = Math.max(1, ...m.field.archetypes.map((a) => m.archOcc.get(a.id)?.length ?? 0));
-  const maxFam = Math.max(1, ...m.field.families.map((f) => m.famOcc.get(f.id)?.length ?? 0));
+  const maxArch = Math.max(1, ...m.field.archetypes.map((a) => m.archMem.get(a.id)?.length ?? 0));
+  const maxFam = Math.max(1, ...m.field.families.map((f) => m.famMem.get(f.id)?.length ?? 0));
 
   for (const a of m.field.archetypes) {
     const pal = m.archPalette.get(a.id);
-    const members = m.archOcc.get(a.id) ?? [];
+    const members = m.archMem.get(a.id) ?? [];
     push({
       kind: 'archetype', key: aKey(a.id), ref: a.id, label: a.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: a.prime ? 1 : 0.55 + 0.4 * (members.length / maxArch),
@@ -99,7 +99,7 @@ export function buildGraph(m: Model): Graph {
   }
   for (const f of m.field.families) {
     const pal = m.famPalette.get(f.id);
-    const members = m.famOcc.get(f.id) ?? [];
+    const members = m.famMem.get(f.id) ?? [];
     push({
       kind: 'family', key: fKey(f.id), ref: f.id, label: f.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
       rank: Math.sqrt(members.length / maxFam),
@@ -119,10 +119,10 @@ export function buildGraph(m: Model): Graph {
 
   // Theoretics are pushed after occurrences so every node the graph already had keeps its id.
   // They carry no place of their own — they stand for the traffic of what they are tied to.
-  const maxTheo = Math.max(1, ...(m.field.theoretics ?? []).map((t) => m.theoOcc.get(t.id)?.length ?? 0));
+  const maxTheo = Math.max(1, ...(m.field.theoretics ?? []).map((t) => m.theoMem.get(t.id)?.length ?? 0));
   for (const t of m.field.theoretics ?? []) {
     const pal = m.theoPalette.get(t.id);
-    const members = m.theoOcc.get(t.id) ?? [];
+    const members = m.theoMem.get(t.id) ?? [];
     push({
       kind: 'theoretic', key: tKey(t.id), ref: t.id, label: t.name, occIdx: -1, members, count: members.length,
       placed: members.some((i) => !!m.located[i]),
@@ -225,6 +225,11 @@ export interface SkyAnchorSource {
   ties: { body: BodyKey; type: 'family' | 'archetype'; id: string; basis: TieBasis }[];
   /** geocentric ecliptic longitude (degrees) of each body at the standing moment. The Earth has none: it is where we stand. */
   lon: Partial<Record<BodyKey, number>>;
+  /**
+   * The occurrences that hang at a body (their extraterrestrial places): a body is a place, so what hangs at it is linked
+   * to it. Optional: a source without it is the sky as it was, ties only.
+   */
+  hangs?: { body: BodyKey; occ: string }[];
 }
 
 export const bodyKey = (key: string) => `b:${key}`;
@@ -266,6 +271,17 @@ export function withSkyAnchors(base: Graph, src: SkyAnchorSource): Graph {
     const to = byKey.get(t.type === 'family' ? fKey(t.id) : aKey(t.id));
     if (s === undefined || to === undefined) continue;
     edges.push({ s, t: to, kind: 'sky', basis: t.basis });
+  }
+  // what hangs at a body: the occurrence is linked to the place it is attested at (once per body, whatever its rings)
+  const hung = new Set<string>();
+  for (const h of src.hangs ?? []) {
+    const k = `${h.body}|${h.occ}`;
+    if (hung.has(k)) continue;
+    hung.add(k);
+    const s = byKey.get(bodyKey(h.body));
+    const to = byKey.get(oKey(h.occ));
+    if (s === undefined || to === undefined) continue;
+    edges.push({ s, t: to, kind: 'sky', basis: 'site' });
   }
   const adj: number[][] = nodes.map((_, i) => (base.adj[i] ? base.adj[i].slice() : []));
   const incident: number[][] = nodes.map((_, i) => (base.incident[i] ? base.incident[i].slice() : []));
