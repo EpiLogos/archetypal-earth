@@ -1,0 +1,44 @@
+{
+ "archetypes": {},
+ "families": {
+  "uroboros": {
+   "src": "img/families/uroboros.jpg",
+   "thumb": "img/families/uroboros.thumb.jpg",
+   "width": 1254,
+   "height": 1280,
+   "tone": "#8b8c8c",
+   "title": "Ouroboros 1",
+   "credit": "Lucas Jennis",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ouroboros_1.jpg",
+   "_file": "File:Ouroboros 1.jpg"
+  }
+ },
+ "theoretics": {},
+ "occurrences": {
+  "uroboros-codex-marcianus-venice-11c": {
+   "src": "img/occurrences/uroboros-codex-marcianus-venice-11c.jpg",
+   "thumb": "img/occurrences/uroboros-codex-marcianus-venice-11c.thumb.jpg",
+   "width": 640,
+   "height": 636,
+   "tone": "#ac9374",
+   "title": "Serpiente alquimica",
+   "credit": "anonymous medieval illuminator; uploader Carlos adanero",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Serpiente_alquimica.jpg",
+   "_file": "File:Serpiente alquimica.jpg"
+  },
+  "uroboros-plate-11-miniature-of-the-nine-choirs-of-angels-from-wiesbaden-formerly-12th-century-ma": {
+   "src": "img/occurrences/uroboros-plate-11-miniature-of-the-nine-choirs-of-angels-from-wiesbaden-formerly-12th-century-ma.jpg",
+   "thumb": "img/occurrences/uroboros-plate-11-miniature-of-the-nine-choirs-of-angels-from-wiesbaden-formerly-12th-century-ma.thumb.jpg",
+   "width": 546,
+   "height": 640,
+   "tone": "#a89880",
+   "title": "07angels-hildegard von bingen",
+   "credit": "Unknown author",
+   "license": "Public domain",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:07angels-hildegard_von_bingen.jpg",
+   "_file": "File:07angels-hildegard von bingen.jpg"
+  }
+ }
+}
