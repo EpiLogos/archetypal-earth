@@ -639,7 +639,8 @@
         "Fludd Utriusque cosmi sun nature light",
         "light of nature alchemy engraving"
       ],
-      "skip": "family visual screen rejected the plate (File:Line engraving; portrait of Paracelsus, Wellc): Paracelsus portrait; not lumen naturae"
+      "pin": "File:Splendor Solis - Portion of Plate 3.jpg",
+      "credit": "Representative picture: a knight in an alchemical plate from the Splendor Solis (plate 3); no light is shown"
     },
     "magical-companion": {
       "queries": [
@@ -1680,7 +1681,8 @@
         "Rublev Old Testament Trinity hospitality Abraham",
         "Aeneas carrying Anchises painting"
       ],
-      "skip": "family visual screen rejected the plate (File:Louis de Caullery and Frans Francken): Aeneas and Anchises; father, not grandfather"
+      "pin": "File:The old man and his grandson.jpg",
+      "credit": "Representative picture: an old man with his grandson, a folk-tale grandfather"
     },
     "harpy": {
       "queries": [
@@ -2904,8 +2906,8 @@
         "tarot",
         "chess"
       ],
-      "pin": "File:Woodcut depicting the king & queen standing atop a sun & moon Wellcome L0073562.jpg",
-      "skip": "family visual screen rejected the plate (File:Woodcut depicting the king & queen standing a): Philosophorum woodcut; marriage not clearly shown"
+      "pin": "File:Image depicting the holy wedding or conjunction Wellcome L0073564.jpg",
+      "credit": "Representative picture: the alchemical conjunction (coniunctio), a woodcut from the Rosarium philosophorum"
     },
     "materialization": {
       "queries": [
@@ -3243,9 +3245,8 @@
         "movie",
         "basketball"
       ],
-      "pin": "File:Chambers 1908 Quincunx.png",
-      "minLongest": 200,
-      "minShort": 150
+      "pin": "File:Quincunx.svg",
+      "credit": "Quincunx diagram (vector drawing), CC BY-SA 3.0"
     },
     "radioactive-nucleus": {
       "queries": [
@@ -4462,7 +4463,8 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Acts and proceedings, 1863-1932): Portrait of a man; no sheep or Christ"
+      "pin": "File:Christ Sleeping with the Attributes of the Passion.jpg",
+      "credit": "Representative picture: Christ asleep, with the instruments of the Passion beside him"
     },
     "cone-mesopotamia-goddesses": {
       "queries": [
@@ -4594,7 +4596,9 @@
           "goddess"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:Lenticular make-up box-AO 14780-IMG 6919.JPG",
+      "credit": "Representative picture: an ivory make-up box from Ras Shamra (Louvre AO 14780), decorated with a rosette: the box type, not a goddess"
     },
     "fig-66-resurrection-of-kore-attic": {
       "queries": [
@@ -4708,7 +4712,8 @@
       ],
       "relaxed": true,
       "pin": "File:Gorgon at the Corfu Archaelogical Museum.jpg",
-      "credit": "Representative picture: A Gorgon in the centre of an Archaic temple pediment at Corfu, flanked by two crouching lions."
+      "credit": "Representative picture: A Gorgon in the centre of an Archaic temple pediment at Corfu, flanked by two crouching lions.",
+      "arMax": 3.6
     },
     "great-mother ↔ cow": {
       "queries": [
@@ -4947,7 +4952,8 @@
         ]
       ],
       "relaxed": true,
-      "skip": "family visual screen rejected the plate (File:Print, title-page): Title page; not a world disk"
+      "pin": "File:De consolatione philosophiae-UBU Hs. 1335-f.178bis v-Philosophia in discussie met Boethius die weer gezond is.jpg",
+      "credit": "Representative picture: Philosophia in discussion with Boethius, a manuscript miniature (no world disk is shown)"
     },
     "reclining-nude-goddess-megara": {
       "queries": [
@@ -4963,7 +4969,9 @@
           "goddess"
         ]
       ],
-      "relaxed": true
+      "relaxed": true,
+      "pin": "File:WLA vanda Venus and Cupid ca 1600-1625.jpg",
+      "credit": "Representative picture: a bronze of Venus and a child, the nude goddess half-reclining on a rock"
     },
     "stone-of-pessinus": {
       "queries": [
@@ -5039,7 +5047,8 @@
       "pin": "File:Oud-Grieks aardewerk. Euphronios en Onesimos. Schaal. Binnenkant Theseus en Amphitrite, met Athena, GD000038.jpg"
     },
     "ancestor": {
-      "skip": "family visual screen rejected the plate (File:The Conspiracy of the Batavians under Claudiu): Batavian conspiracy painting; no ancestor subject"
+      "pin": "File:A-ndëf (late 19th century) Baga people 2012.358 DP-41022-003 Front.jpg",
+      "credit": "Representative picture: a Baga a-ndëf figure, a carved ancestor figure from Guinea"
     },
     "armor": {
       "pin": "File:Ancient Greek armour.jpg"
@@ -5086,10 +5095,8 @@
       "credit": "Representative picture: An engraved illustration by Theodor Pixis, captioned Parcival shows the Holy Grail: a robed man raises a glowing chalice in a Gothic hall, with a dove"
     },
     "thoth-disks": {
-      "pin": "File:Earth alchemy symbol.png",
-      "credit": "Representative picture: The alchemical sign for Earth: a downward triangle crossed by a horizontal bar.",
-      "minLongest": 120,
-      "minShort": 100
+      "pin": "File:Alchemical earth symbol.svg",
+      "credit": "Representative picture: The alchemical sign for Earth: a downward triangle crossed by a horizontal bar."
     },
     "thoth-major-arcana": {
       "pin": "File:Tree of life kircher hebrew.png",
@@ -5100,17 +5107,15 @@
       "credit": "Representative picture: A single card from a historical tarot deck (the BnF's Tarot Arnoult): a large disc with foliage, a suit-type card rather than a Trump."
     },
     "thoth-swords": {
-      "pin": "File:Alchemy air symbol.png",
-      "credit": "Representative picture: The alchemical sign for Air: an upward triangle crossed by a horizontal bar.",
-      "minLongest": 120,
-      "minShort": 100
+      "pin": "File:Alchemical air symbol.svg",
+      "credit": "Representative picture: The alchemical sign for Air: an upward triangle crossed by a horizontal bar."
     },
     "thoth-tarot": {
       "pin": "File:The Magician (Rider-Waite Smith tarot deck).png",
       "credit": "Representative picture: The Magician from the 1909 Rider-Waite-Smith deck, with the four suit tools (wand raised, cup, sword and pentacle) on the table."
     },
     "thoth-wands": {
-      "pin": "File:Four Elements.jpg"
+      "pin": "File:Alchemical fire symbol.svg"
     },
     "malkuth": {
       "pin": "File:Ktreewnames.png",

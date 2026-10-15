@@ -56,6 +56,14 @@ const field = JSON.parse(fs.readFileSync(FIELD, 'utf8'));
 const OCC_CAP = field.occurrences.length;
 const queries = JSON.parse(fs.readFileSync(QUERIES, 'utf8'));
 const images = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : {};
+// Every register already holding a plate (the main images.json and each images-ext*.json), read-only: a plate that exists
+// anywhere is never fetched again, whichever file this run writes to.
+const known = { archetypes: {}, families: {}, occurrences: {}, theoretics: {} };
+for (const f of fs.readdirSync(path.join(ROOT, 'public', 'data')).filter((x) => /^images(-ext[\w-]*)?\.json$/.test(x))) {
+  let j = {};
+  try { j = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', f), 'utf8')); } catch { continue; }
+  for (const g of Object.keys(known)) Object.assign(known[g], j[g] || {});
+}
 for (const g of GROUPS) images[g] ||= {};
 const log = [];
 const say = (m) => { console.log(m); log.push(m); };
@@ -231,6 +239,13 @@ const bakeLicense = (l) =>
   // Commons' "No restrictions" is its marker for no known copyright restrictions — public domain, said in full
   String(l || '').replace(/^No restrictions$/i, 'Public domain (no known restrictions)').replace(/^(PD|PDM)\b[-\w]*/i, 'Public domain');
 
+// The type of the file we actually store: Commons serves SVG and TIFF originals as PNG or JPEG thumbnails.
+function servedMime(thumb, original) {
+  const m = /\.(png|jpe?g)(?:\?|$)/i.exec(cleanUrl(thumb));
+  if (!m) return original;
+  return m[1].toLowerCase() === 'png' ? 'image/png' : 'image/jpeg';
+}
+
 function toCandidate(p, rank, widthReq) {
   const ii = p.imageinfo?.[0];
   if (!ii) return null;
@@ -240,8 +255,10 @@ function toCandidate(p, rank, widthReq) {
     title: p.title,
     rank,
     mime: ii.mime,
-    width: ii.width,
-    height: ii.height,
+    servedMime: servedMime(ii.thumburl || ii.url, ii.mime),
+    // a vector original is rendered by Commons at the requested width, so its native pixel size says nothing about it
+    width: ii.mime === 'image/svg+xml' ? widthReq : ii.width,
+    height: ii.mime === 'image/svg+xml' ? Math.round(widthReq * (ii.height / (ii.width || 1))) : ii.height,
     url: ii.url,
     thumburl: ii.thumburl,
     page: ii.descriptionurl,
@@ -358,7 +375,8 @@ function autoSpec(name, { museum = false, narrative = false, family = '', names 
 
 function evaluate(c, q, ctx) {
   const hay = `${c.title} ${c.descr} ${c.cats.join(' ')} ${c.objectName}`.toLowerCase();
-  if (c.mime !== 'image/jpeg' && !(c.mime === 'image/png' && hasSips)) return { ok: false, why: 'mime' };
+  const mime = c.servedMime || c.mime;
+  if (mime !== 'image/jpeg' && !(mime === 'image/png' && hasSips)) return { ok: false, why: 'mime' };
   if (/\b(airbus|boeing|a320|a330|a340|a350|a380|airliner|aircraft|locomotive|squadron)\b/i.test(c.title)) return { ok: false, why: 'not the object' };
   if (!licenseOk(c.license)) return { ok: false, why: `license ${c.license}` };
   // a spec may ask for close-match plates: scarce scans pass a lower resolution floor
@@ -368,7 +386,7 @@ function evaluate(c, q, ctx) {
   const longest = Math.max(c.width, c.height);
   if (longest < minLongest || Math.min(c.width, c.height) < minShort) return { ok: false, why: 'low-res' };
   // and a tall or wide plate: relaxed widens the aspect band (a standing figure, a frieze)
-  const [arMax, arMin] = ctx.relaxed ? [3.4, 0.29] : [2.6, 0.36];
+  const [arMax, arMin] = ctx.relaxed ? [ctx.arMax ?? 3.4, 0.29] : [2.6, 0.36];
   const ar = c.width / c.height;
   if (ar > arMax || ar < arMin) return { ok: false, why: 'aspect' };
   if (BAD_TITLE.test(c.title.replace(/^File:/, '')) && !ctx.allowBad) return { ok: false, why: 'bad title' };
@@ -550,6 +568,7 @@ async function resolveFor(group, id, spec, ctx) {
       minLongest: spec.minLongest ?? 450,
       minShort: spec.minShort ?? 300,
       relaxed: spec.relaxed,
+      arMax: spec.arMax,
     };
     const ev = evaluate(c, spec.pin, { ...ctx, allowBad: true, reuseOk: true, require: [], exclude: [], ...floors });
     if (!ev.ok) return { error: `pin rejected (${ev.why}): ${spec.pin}`, cand: c };
@@ -659,6 +678,9 @@ async function download(group, id, spec, pick) {
 
 // Ids this process pruned (skip / redo) — merge-on-save must not resurrect them.
 const deleted = new Set(); // `${group}/${id}`
+// Ids this process fetched in this run. Only these are written over the disk copy: any other entry on disk is newer than
+// what this run loaded at its start, so a concurrent run's edit (a credit, a pin's plate) is never reverted.
+const written = new Set(); // `${group}/${id}`
 let saveChain = Promise.resolve();
 function save() {
   // Serialize writes across parallel family workers; still merge-on-save so a
@@ -670,7 +692,10 @@ function save() {
     const groupKeys = new Set([...GROUPS, ...Object.keys(disk), ...Object.keys(images)]);
     for (const g of groupKeys) {
       if (g.startsWith('_')) { out[g] = disk[g] ?? images[g]; continue; }
-      out[g] = { ...(disk[g] || {}), ...(images[g] || {}) };
+      out[g] = { ...(disk[g] || {}) };
+      for (const [id, ref] of Object.entries(images[g] || {})) {
+        if (written.has(`${g}/${id}`) || !(id in out[g])) out[g][id] = ref;
+      }
       for (const id of Object.keys(out[g])) {
         if (deleted.has(`${g}/${id}`)) delete out[g][id];
       }
@@ -826,7 +851,7 @@ async function runFamilyBatch() {
       try {
         const ref = await download('occurrences', o.id, spec, pick);
         ref._file = pick.cand.title;
-        images.occurrences[o.id] = ref;
+        images.occurrences[o.id] = ref; written.add(`occurrences/${o.id}`);
         got++;
         say(`  ${o.id} -> ${pick.cand.title} (pin)`);
         await save();
@@ -852,7 +877,7 @@ async function runFamilyBatch() {
       try {
         const ref = await download('occurrences', o.id, dlSpec, pick);
         ref._file = pick.cand.title;
-        images.occurrences[o.id] = ref;
+        images.occurrences[o.id] = ref; written.add(`occurrences/${o.id}`);
         got++;
         say(`  ${o.id} -> ${pick.cand.title} (${how} score ${Math.round(pick.score)})`);
         await save();
@@ -974,7 +999,7 @@ for (const group of groups) {
       for (const f of [`${id}.jpg`, `${id}.thumb.jpg`]) fs.rmSync(path.join(IMG_DIR, group, f), { force: true });
       delete images[group][id];
     }
-    const have = images[group][id];
+    const have = images[group][id] || known[group][id];
     if (have && fs.existsSync(path.join(ROOT, 'public', have.src)) && fs.existsSync(path.join(ROOT, 'public', have.thumb))) { summary[group][0]++; continue; }
     if (group === 'occurrences' && occDone >= OCC_CAP) { say(`occurrence cap ${OCC_CAP} reached`); break; }
     // An uncurated entry is searched by its own name. Families are objects, so a
@@ -1009,7 +1034,7 @@ for (const group of groups) {
     try {
       const ref = await download(group, id, useSpec, pick);
       ref._file = pick.cand.title;
-      images[group][id] = ref;
+      images[group][id] = ref; written.add(`${group}/${id}`);
       usedTitles.add(pick.cand.title);
       summary[group][0]++;
       if (group === 'occurrences') occDone++;
