@@ -1,15 +1,22 @@
 // The voice marks: a V for Van Eenwyk's reading, a J for Jung's own text. Same visual family as the Aion basis chips.
 import { el } from '../ui/dom';
+import { providerLabels } from '../data/labels';
 
-export const V_TITLE = "Van Eenwyk's reading — not Jung's";
-export const J_TITLE = "Asserted in Jung's own text";
+/** The V chip's title: whose reading it is, and that it is not the author's (the provider's words). */
+export function vTitle(): string {
+  return providerLabels().dynamicsOtherText;
+}
+/** The J chip's title: asserted in the author's own text (the provider's words). */
+export function jTitle(): string {
+  return providerLabels().dynamicsOwnText;
+}
 
 export function vMark(extraClass = ''): HTMLElement {
-  return el('span', { class: `dy-chip dy-v ${extraClass}`.trim(), title: V_TITLE, text: 'V' });
+  return el('span', { class: `dy-chip dy-v ${extraClass}`.trim(), title: vTitle(), text: 'V' });
 }
 
 export function jMark(): HTMLElement {
-  return el('span', { class: 'dy-chip dy-j', title: J_TITLE, text: 'J' });
+  return el('span', { class: 'dy-chip dy-j', title: jTitle(), text: 'J' });
 }
 
 export const N_TITLE = "Neumann's own text";

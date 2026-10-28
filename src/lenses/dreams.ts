@@ -12,6 +12,7 @@ import { practice, saveFile, type PracticeRecord } from '../practice/store';
 import { amplify, matchImages, vocabulary, type ImageMatch, type Vocabulary } from '../practice/amplify';
 import { amplificationView, type AmplifyActions } from '../practice/amplify-view';
 import { loadLensData, privacyLine, quoteBlock, tuneGlobe, type LensQuote } from './ui';
+import { providerLabels } from '../data/labels';
 
 export interface DreamEntry extends PracticeRecord {
   date: string;
@@ -54,14 +55,14 @@ export function mount(ctx: LensContext): LensInstance {
     } });
     show('Dreams', [
       privacyLine(practice.persistent ? 'Your dreams are kept only in this browser’s storage.' : 'This browser is not letting the page store anything, so entries last only until you close the tab.'),
-      el('p', { class: 'th-line', text: 'Write a dream down. The images in it that the field knows are picked out; each one opens onto the dreams and visions in the corpus that carry the same image. That is how Jung read a dream: by lining it up with its parallels.' }),
+      el('p', { class: 'th-line', text: providerLabels().dreamsIntro }),
       el('div', { class: 'lp-row' }, [el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.setPath(['new']) }, [icon('plus', 14), el('span', { text: 'Record a dream' })])]),
       list.length ? el('ol', { class: 'dr-list' }, list.map((d) => el('li', {}, [el('button', { type: 'button', class: 'dr-row', onclick: () => ctx.setPath([d.id]) }, [
         el('span', { class: 'am-year', text: d.date }),
         el('span', { class: 'dr-title', text: d.title || d.text.slice(0, 60) || 'Untitled' }),
         el('span', { class: 'dr-n', text: `${matchImages(voc(), d.text).length} images` }),
       ])]))) : el('p', { class: 'lp-note', text: 'No dreams recorded yet.' }),
-      framing ? el('details', { class: 'as-more' }, [el('summary', { text: 'How Jung read a dream' }), quoteBlock(framing.dreams.portrait, ctx.passages, { compact: true }), ...framing.dreams.method.map((q) => quoteBlock(q, ctx.passages, { compact: true }))]) : null,
+      framing ? el('details', { class: 'as-more' }, [el('summary', { text: providerLabels().dreamsMethod }), quoteBlock(framing.dreams.portrait, ctx.passages, { compact: true }), ...framing.dreams.method.map((q) => quoteBlock(q, ctx.passages, { compact: true }))]) : null,
       el('div', { class: 'lp-row as-own' }, [
         list.length ? el('button', { type: 'button', class: 'lp-btn quiet', onclick: () => saveFile('my-journal.json', practice.exportAll()) }, [icon('export', 14), el('span', { text: 'Save a copy' })]) : null,
         el('button', { type: 'button', class: 'lp-btn quiet', onclick: () => fileInput.click() }, [icon('download', 14), el('span', { text: 'Read a copy back' })]),

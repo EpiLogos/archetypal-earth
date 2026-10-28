@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { abbreviate, aquarianRows, crossCheck, placesAt, sectorOf, signOf, signSpans, SKY_CLOCK_LEDE, SKY_CLOCK_TWO_CLOCKS, spanText, yearText } from '../../src/aion/skyclock';
+import { abbreviate, aquarianRows, crossCheck, placesAt, sectorOf, signOf, signSpans, skyClockLede, SKY_CLOCK_TWO_CLOCKS, spanText, yearText } from '../../src/aion/skyclock';
 import { CONVENTIONS } from '../../src/aion/precession';
 import type { History } from '../../src/types/history';
 
@@ -79,8 +79,8 @@ describe('the cross-check and the fixed words', () => {
     expect(crossCheck(-9000).text).toMatch(/differs from the long-term model/);
   });
   it('carries no prediction language', () => {
-    for (const t of [SKY_CLOCK_LEDE, SKY_CLOCK_TWO_CLOCKS]) expect(t).not.toMatch(/will |predict|destiny|foretell/i);
-    expect(SKY_CLOCK_LEDE).toMatch(/Nothing here is a forecast/);
+    for (const t of [skyClockLede(), SKY_CLOCK_TWO_CLOCKS]) expect(t).not.toMatch(/will |predict|destiny|foretell/i);
+    expect(skyClockLede()).toMatch(/Nothing here is a forecast/);
     expect(SKY_CLOCK_TWO_CLOCKS).toMatch(/Two clocks/);
   });
 });

@@ -8,6 +8,7 @@ import type { Model } from '../data/model';
 import type { PassageBridge } from '../ui/passage';
 import type { Occurrence } from '../types/field';
 import type { Amplification } from './amplify';
+import { providerLabels } from '../data/labels';
 
 export interface AmplifyActions {
   openOccurrence(occId: string): void;
@@ -19,7 +20,7 @@ export interface AmplifyActions {
 }
 
 const yearOf = (y: number) => (y < 0 ? `${Math.abs(Math.round(y))} BCE` : `${Math.round(y)}`);
-const BASIS = { jung: 'Jung ties it', inferred: 'inferred by the vault', site: 'linked by this site' } as const;
+const BASIS = { get jung() { return providerLabels().amplifyTieOwn; }, inferred: 'inferred by the vault', site: 'linked by this site' };
 const SHOW = 12;
 
 function citeLink(o: Occurrence, passages?: PassageBridge): HTMLElement | null {
@@ -53,9 +54,9 @@ export function amplificationView(m: Model, a: Amplification, act: AmplifyAction
 
   const dreamBlock = dreams.length ? el('section', { class: 'am-sec' }, [
     el('h3', { class: 'as-h3', text: `In dreams and visions (${dreams.length})` }),
-    el('p', { class: 'lp-note', text: 'The dreams and visions in the corpus where this image appears: the parallels Jung lined up beside a dream image.' }),
+    el('p', { class: 'lp-note', text: providerLabels().amplifyDreams }),
     ...dreams.slice(0, opts.dreamFirst ? 6 : 3).map((o) => el('div', { class: 'am-dream' }, [
-      el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? 'Jung’s own' : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })]),
+      el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? providerLabels().subjectOwn : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })]),
       o.quote ? (o.caption ? el('figure', { class: 'lq-caption lq-compact' }, [el('p', { class: 'lq-caption-text', text: o.quote }), el('footer', {}, [citeLink(o, passages)])]) : el('blockquote', { class: 'lq lq-compact' }, [el('p', { text: o.quote }), el('footer', {}, [citeLink(o, passages)])])) : null,
     ])),
   ]) : el('p', { class: 'lp-note', text: 'No dream or vision in the corpus carries this image, so there is no dream parallel to set beside yours.' });
@@ -64,7 +65,7 @@ export function amplificationView(m: Model, a: Amplification, act: AmplifyAction
     el('p', { class: 'am-kicker', text: [f.subtype !== 'unknown' ? f.subtype : '', a.span ? `${yearOf(a.span.from.year)} to ${yearOf(a.span.to.year)}` : ''].filter(Boolean).join(' · ') }),
     el('h2', { class: 'lp-h', text: f.name }),
     f.oneLine ? el('p', { class: 'th-line', text: f.oneLine }) : null,
-    f.definition ? el('blockquote', { class: 'lq' }, [el('p', { text: f.definition.text }), el('footer', {}, [el('span', { class: 'lq-cite', text: f.definition.cite })])]) : el('p', { class: 'lp-note', text: 'Jung gives no definition of this image in the vault’s records.' }),
+    f.definition ? el('blockquote', { class: 'lq' }, [el('p', { text: f.definition.text }), el('footer', {}, [el('span', { class: 'lq-cite', text: f.definition.cite })])]) : el('p', { class: 'lp-note', text: providerLabels().amplifyNoDefinition }),
     el('div', { class: 'lp-row' }, [
       a.instances.length > 1 ? el('button', { type: 'button', class: 'lp-btn', onclick: () => act.walkFamily(f.id) }, [icon('play', 13), el('span', { text: 'Walk it through time' })]) : null,
       el('button', { type: 'button', class: 'lp-btn quiet', onclick: () => act.focusFamily(f.id) }, [icon('field', 14), el('span', { text: 'On the globe' })]),

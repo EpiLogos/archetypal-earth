@@ -6,10 +6,13 @@ import {
   CONVENTION_INFO, CONVENTIONS, conventionTicks, entersAfter, equinoxPlace, generalPrecessionIau2006, accumulatedPrecession, J2000_JD, jdOfYear,
   stayNear, type Convention,
 } from './precession';
+import { providerLabels } from '../data/labels';
 
-/** Two sentences the disclosure opens with. Fixed text: the framing law (SKY-SPEC D6) and the two-clocks law (D5). */
-export const SKY_CLOCK_LEDE =
-  'Where the spring equinox lies among the stars is a calculation, and it depends on how the zodiac is drawn. These are the sky’s own boundaries under stated conventions, set beside Jung’s months, which stay as the reading gives them. Nothing here is a forecast.';
+/** Two sentences the disclosure opens with: the framing law (SKY-SPEC D6) and the two-clocks law (D5). The first names
+ * whose months the reading's are, so it is the provider's words (FieldMeta.provider.labels.skyClockLede). */
+export function skyClockLede(): string {
+  return providerLabels().skyClockLede;
+}
 export const SKY_CLOCK_TWO_CLOCKS =
   'Two clocks: the historical clock is untouched. This one reads the year the cursor stands on as a calendar year, and is the only place the two meet.';
 
@@ -50,7 +53,7 @@ function signEpoch(reading: HistoryReading, sign: string): Epoch | undefined {
 export function signSpans(reading: HistoryReading, sign: string): SpanRow[] {
   const rows: SpanRow[] = [];
   const own = signEpoch(reading, sign);
-  if (own) rows.push({ key: 'jung-display', label: 'Jung’s display boundaries', from: own.from, to: own.to, primary: true, approximate: false, note: 'the reading’s own span, unchanged' });
+  if (own) rows.push({ key: 'jung-display', label: providerLabels().skyClockOwnSpan, from: own.from, to: own.to, primary: true, approximate: false, note: 'the reading’s own span, unchanged' });
   const mid = own ? (own.from + own.to) / 2 : 0;
   for (const c of CONVENTIONS) {
     const s = stayNear(c, sign, mid);

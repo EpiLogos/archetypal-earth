@@ -17,6 +17,7 @@ import { findWalk, wholeReadingWalk } from './walk';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 import type { LensChrome } from '../shell/lens';
+import { providerLabels } from '../data/labels';
 
 type Selection = NonNullable<NonNullable<AppState['history']>['selection']>;
 const yearLabel = (year: number) => year < 0 ? `${Math.abs(Math.round(year)).toLocaleString()} BCE` : `${Math.round(year).toLocaleString()} CE`;
@@ -185,7 +186,7 @@ export class AionView {
     ];
     // the events are not listed: each one is a dot on the globe, and the walks above carry them in order
     this.heading.append(modeOptions([
-      el('p', { class: 'mode-opt-blurb', text: 'Jung’s history of the aeons — the precession of the equinoxes through Pisces into Aquarius, read on the Earth.' }),
+      el('p', { class: 'mode-opt-blurb', text: providerLabels().readingTagline }),
       optionGroup('Reading', readings),
       optionGroup('Walk', walks),
     ]));
@@ -225,7 +226,7 @@ export class AionView {
       : line;
     const mark = p.basis === 'S'
       ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' })
-      : el('span', { class: 'aion-basis', title: 'Asserted in Jung\u2019s own text', text: 'J' });
+      : el('span', { class: 'aion-basis', title: providerLabels().readingOwnText, text: 'J' });
     return el('blockquote', { class: 'dp-def' }, [el('p', { text: this.shown(p.text) }), el('footer', {}, [cite, ' ', mark])]);
   }
 

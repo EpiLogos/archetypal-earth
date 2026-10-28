@@ -17,6 +17,7 @@ import { decanOf, imageUrl, type CardPlate, type RingCard } from './cards';
 import { cardSize, fitShare, readable, ringPresence, wheelPoint, type Room } from './wheel';
 import { frameExtent } from './rings';
 import { holoCssAt } from './zodiac';
+import { providerLabels } from '../data/labels';
 
 /** One card on a ring: its place on the ring, its plate, and what opens it. */
 export interface CardNode {
@@ -142,7 +143,7 @@ export class PlanetOrbits {
       const dot = document.createElementNS(SVG, 'circle');
       dot.setAttribute('class', `po-dot ${s.inner ? 'po-inner' : 'po-outer'}`);
       this.svg.append(tether, dot);
-      const label = el('button', { type: 'button', class: `po-sat ${s.inner ? 'po-inner' : 'po-outer'}`, title: s.inner ? 'Jung’s own link' : 'A link the atlas draws', onclick: () => s.open() }, [el('span', { text: s.name })]);
+      const label = el('button', { type: 'button', class: `po-sat ${s.inner ? 'po-inner' : 'po-outer'}`, title: s.inner ? providerLabels().tieOwnLink : 'A link the atlas draws', onclick: () => s.open() }, [el('span', { text: s.name })]);
       this.root.append(label);
       // a new control stands hidden until update() shows it: its own opacity and pointer-events say so, not the stylesheet's
       // defaults (1 and auto), which a hidden root would otherwise leave reading as a clickable satellite

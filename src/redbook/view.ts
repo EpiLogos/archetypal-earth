@@ -17,6 +17,7 @@ import { eraShort } from '../ui/format';
 import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
 import type { LensChrome } from '../shell/lens';
+import { providerLabels } from '../data/labels';
 
 /** The mode's own atmosphere: the book's red, deep and bounded. */
 const REDBOOK_PALETTE = { core: '#c0554a', glow: '#8a342e', fog: '#2a1110', deep: '#120606' };
@@ -221,7 +222,7 @@ export class RedBookView {
     const text = el('div', { class: 'rv-text' });
     text.append(
       el('h2', { class: 'rv-name', text: 'Genesis' }),
-      el('p', { class: 'rv-para aion-lede', text: 'Each vision of the book, and what it became in Jung’s later work.' }),
+      el('p', { class: 'rv-para aion-lede', text: providerLabels().redbookLede }),
     );
     for (const row of this.mode.genesis) text.append(this.genesisRow(row, m));
     body.append(text);

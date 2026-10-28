@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import sky from '../../public/data/sky.json';
 import golden from './golden/birth.json';
 import { SkyEphemeris } from '../../src/sky/ephemeris';
-import { chartAgreement, chartMoment, chartRows, describeAspect, describeInstant, approximationNote, placeInSign, BIRTH_FRAMING, BIRTH_LIMITS } from '../../src/sky/chart';
+import { chartAgreement, chartMoment, chartRows, describeAspect, describeInstant, approximationNote, placeInSign, birthFraming, birthLimits } from '../../src/sky/chart';
 import { dataWithWindow, chartProblems, fromSidecarBodies, parseBirthInput, SidecarClient, SidecarError, validateChart, WINDOW_DAYS } from '../../src/sky/sidecar';
 import { findPlaces, fold, formatCoordinates, fromGazetteer, fromGeocode } from '../../src/sky/gazetteer';
 import { blendPose, easeInOut, lerpAngle } from '../../src/sky/flight';
@@ -211,9 +211,9 @@ describe('the reading is only what was given', () => {
     expect(rows.some((r) => r.retrograde)).toBe(true);
   });
   it('fixes its framing and its limits, and says neither predicts nor judges', () => {
-    expect(BIRTH_FRAMING).toBe('the sky at that moment, read in Jung\u2019s keys');
-    expect(BIRTH_LIMITS).toMatch(/no forecast/);
-    expect(BIRTH_LIMITS).toMatch(/no verdict/);
+    expect(birthFraming()).toBe('the sky at that moment, read in Jung\u2019s keys');
+    expect(birthLimits()).toMatch(/no forecast/);
+    expect(birthLimits()).toMatch(/no verdict/);
   });
   it('words an aspect as geometry', () => {
     const a = chartOf(jung).aspects[0];

@@ -10,6 +10,7 @@ import type { AppState, PanelLensId } from '../state/store';
 import type { PassageBridge } from '../ui/passage';
 import type { FieldFilter } from './filter';
 import type { Panel } from './panel';
+import { providerLabels } from '../data/labels';
 
 export type LensId = 'field' | 'theory' | 'aion' | 'redbook' | PanelLensId;
 
@@ -89,9 +90,9 @@ export const LENSES: readonly LensDef[] = [
   { id: 'field', label: 'Field', icon: 'field', group: 'read', blurb: 'Every archetype, symbol and instance on the globe.', key: 'F' },
   { id: 'theory', label: 'Theory', icon: 'theory', group: 'read', blurb: 'How psychic energy moves, and number as an archetype.', key: 'T' },
   { id: 'alchemy', label: 'Alchemy', icon: 'alchemy', group: 'read', blurb: 'The opus from nigredo to rubedo, its operations and matter.', key: 'L' },
-  { id: 'aion', label: 'Aion', icon: 'aion', group: 'read', blurb: 'Jung’s history of the aeons, Pisces to Aquarius.', key: 'A' },
+  { id: 'aion', label: 'Aion', icon: 'aion', group: 'read', get blurb() { return providerLabels().lensAion; }, key: 'A' },
   { id: 'redbook', label: 'Red Book', icon: 'redbook', group: 'read', blurb: 'The book the rest of the field grew from.', key: 'R' },
-  { id: 'astrology', label: 'Astrology', icon: 'astrology', group: 'practice', blurb: 'Your birth sky beside Jung’s, read through the corpus.' },
+  { id: 'astrology', label: 'Astrology', icon: 'astrology', group: 'practice', get blurb() { return providerLabels().lensAstrology; } },
   { id: 'dreams', label: 'Dreams', icon: 'dreams', group: 'practice', blurb: 'Keep your dreams and amplify their images.' },
   { id: 'symbols', label: 'Symbols', icon: 'symbols', group: 'practice', blurb: 'Take one symbol through its history and doctrine.' },
   { id: 'coincidences', label: 'Coincidences', icon: 'coincidences', group: 'practice', blurb: 'Log meaningful coincidences and see your series.' },

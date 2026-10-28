@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+/// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from 'vite';
 
 /**
@@ -56,4 +57,6 @@ export default defineConfig({
   server: { port: 5181 },
   build: { target: 'es2022', chunkSizeWarningLimit: 2000 },
   plugins: [redbookPlates(), localCorpusOnly()],
+  // every suite runs over the field's own provider words, as the app does once the field has loaded (src/data/labels.ts)
+  test: { setupFiles: ['tests/setup/provider-labels.ts'] },
 });
