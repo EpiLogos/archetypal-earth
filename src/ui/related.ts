@@ -2,13 +2,14 @@
 // so the deep sheet can show it without waiting on the network. The join's own cites live in field-pages.json, elsewhere.
 import { joinsOf, subjectName, type Model, type Subject } from '../data/model';
 import type { ImageRef, Palette, TieBasis } from '../types/field';
+import { providerLabels } from '../data/labels';
 
 /** The order the systems stand in on the sheet; a system the list does not name goes after them all. */
 const SYSTEM_ORDER = ['jung', 'alchemy', 'thoth', 'qabalah', 'astrology', 'burt', 'site', 'other'];
 
 /** The label each system carries on the sheet. */
 export const SYSTEM_LABEL: Record<string, string> = {
-  jung: 'Jung',
+  get jung() { return providerLabels().basisOwn; },
   alchemy: 'Alchemy',
   thoth: 'Thoth tarot',
   qabalah: 'Qabalah',

@@ -16,6 +16,7 @@ import { quoteBlock, type LensQuote } from './ui';
 import { glyphSvg, holoCssAt } from '../sky/zodiac';
 import { SIGNS } from '../sky/frames';
 import { bodyOfGod, type BodyCards, type SkyCardsData } from '../sky/cards';
+import { providerLabels } from '../data/labels';
 
 /** The published field pages: the quotations the page of a card and the join under it rest on. */
 export interface FieldPages {
@@ -137,7 +138,7 @@ export function cardReading(r: CardReadingInput): HTMLElement[] {
     chain.push(link(model.archById.get(word)?.name ?? cap(word), 'the number, an archetype of the psyche', model.archById.has(word) ? { type: 'archetype', id: word } : null));
     chain.push(link(model.famById.get(sephira)?.name ?? cap(sephira), 'its sephira on the Tree', model.famById.has(sephira) ? { type: 'family', id: sephira } : null));
     // four is the one number whose own page Jung ties to the quaternity of the elements: say so where it is four
-    if (card.number === 4 && model.famById.has('quaternity')) chain.push(link(subjectName(model, { type: 'family', id: 'quaternity' }), 'Jung’s four: the elements, the functions', { type: 'family', id: 'quaternity' }));
+    if (card.number === 4 && model.famById.has('quaternity')) chain.push(link(subjectName(model, { type: 'family', id: 'quaternity' }), providerLabels().quaternityLink, { type: 'family', id: 'quaternity' }));
     if (god && !godIsBody && model.famById.has(god)) chain.push(link(subjectName(model, { type: 'family', id: god }), 'the planet’s god', { type: 'family', id: god }));
   }
 

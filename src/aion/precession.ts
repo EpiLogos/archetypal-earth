@@ -19,6 +19,7 @@
 // clock of the atlas numbers BCE years negatively and treats its own year 0 as the beginning of the Christian era, so
 // the two differ by at most one year, 0.014° of precession, far inside the display's own approximation. The bridge is
 // therefore the identity and is stated, not hidden (ProjectCentral/docs/PRECESSION-NOTES.md).
+import { providerLabels } from '../data/labels';
 
 const AS2R = Math.PI / 180 / 3600;
 const TWO_PI = Math.PI * 2;
@@ -236,7 +237,7 @@ export interface ConventionInfo {
 }
 
 export const CONVENTION_INFO: Readonly<Record<Convention, ConventionInfo>> = {
-  'jung-equal': { label: 'Jung’s equal months', equal: true,
+  'jung-equal': { get label() { return providerLabels().conventionOwn; }, equal: true,
     frame: `Twelve equal months of ${JUNG_MONTH_YEARS.toLocaleString('en')} years, counted back from the beginning of the Christian era: the arithmetic of Aion ¶149 n.84, and the display clock’s own boundaries for Taurus and Aries. No measurement of the sky enters.` },
   'fagan-bradley': { label: 'Fagan–Bradley sidereal', equal: true,
     frame: `Twelve equal 30° signs from a sidereal zero point fixed by the Fagan–Bradley convention (${AYANAMSA['fagan-bradley'].valueDeg.toFixed(4)}° at 1950.0). An astrologers’ convention, chosen rather than observed.` },

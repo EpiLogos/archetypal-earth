@@ -1,9 +1,9 @@
 // Reader-facing text for the Red Book card: pure and DOM-free, so the rules are unit-tested
 // against the real field. Nothing here writes prose: it chooses among verbatim passages and
-// renders cites in the core's voice (jungLine), with the Red Book's own works named in full.
+// renders cites in the core's voice (ui/format.ts citeLine), with the Red Book's own works named in full.
 import type { Cite, Occurrence } from '../types/field';
 import type { GenesisRow } from '../types/redbook';
-import { jungLine } from '../ui/format';
+import { citeLine as coreLine } from '../ui/format';
 
 /** The Red Book's own works. The field and the curation name them by slug; the reader sees these titles. */
 export const RED_BOOK_WORKS: Record<string, string> = {
@@ -41,14 +41,14 @@ export function readerCite(c: Cite): Cite {
 }
 
 export function citeLine(c: Cite): string {
-  return jungLine(readerCite(c));
+  return coreLine(readerCite(c));
 }
 
 /** A genesis row's cite, written as the curation holds it ("redbook pdf p232") → "Jung · The Red Book · pdf p232". */
 export function genesisCite(cite: string): string {
   const m = /^(\S+)\s+(.+)$/.exec(cite.trim());
   const title = m ? RED_BOOK_WORKS[m[1]] : undefined;
-  return m && title ? jungLine({ work: m[1], workTitle: title, year: '', locator: m[2] }) : cite;
+  return m && title ? coreLine({ work: m[1], workTitle: title, year: '', locator: m[2] }) : cite;
 }
 
 /**

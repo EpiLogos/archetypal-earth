@@ -11,6 +11,7 @@ import { practice, saveFile, type PracticeRecord } from '../practice/store';
 import { findImages, vocabulary, type Vocabulary } from '../practice/amplify';
 import { inLens } from '../state/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
+import { providerLabels } from '../data/labels';
 
 export interface Coincidence extends PracticeRecord {
   date: string;
@@ -107,7 +108,7 @@ export function mount(ctx: LensContext): LensInstance {
         el('span', { class: 'dr-n', text: symbolName(c) }),
       ])]))) : null,
       framing ? el('details', { class: 'as-more' }, [
-        el('summary', { text: 'Jung on what counts, and on runs of chance' }),
+        el('summary', { text: providerLabels().coincidencesFraming }),
         ...framing.coincidences.factors.map((q) => quoteBlock(q, ctx.passages, { compact: true })),
         ...framing.coincidences.series.map((q) => quoteBlock(q, ctx.passages, { compact: true })),
         el('p', { class: 'lp-note', text: 'He argued with Kammerer’s “law of series”: a run of the same number is, in his reading, only probability. What he called synchronicity is a coincidence that carries meaning for the person it happens to.' }),

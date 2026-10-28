@@ -19,6 +19,7 @@ import { construction, figureOf, FIGURES, paintFractal, paletteOf as figurePalet
 import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
 import type { LensChrome } from '../shell/lens';
+import { providerLabels } from '../data/labels';
 
 type FractalKind = 'julia' | 'mandelbrot';
 interface FractalView {
@@ -175,7 +176,7 @@ export class DynamicsView {
       this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: familyId } }, deep: false })));
     if (this.routeOpen) { this.chrome?.setControls(null); return; }
     this.heading.append(modeOptions([
-      optionAction("Jung's theory", () => this.navigate(inLens('theory')), { title: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
+      optionAction(providerLabels().theoryRoute, () => this.navigate(inLens('theory')), { title: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
       optionAction('Dynamics', () => this.openRoute(), { title: this.route?.title ?? 'Archetypes & Strange Attractors' }),
       ...famActions,
     ]));

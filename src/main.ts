@@ -17,6 +17,7 @@ import { rgbToHex, type RGBPalette } from './data/palette';
 import { GlobeEngine } from './globe/engine';
 import { prefersReducedMotion } from './ui/dom';
 import { TimeModel } from './state/timeModel';
+import { setProviderLabels } from './data/labels';
 
 function setPaletteVars(p: RGBPalette) {
   const s = document.documentElement.style;
@@ -36,6 +37,8 @@ async function boot() {
   const loading = document.getElementById('loading')!;
   try {
     const { field } = await loadField();
+    // the provider names its corpus in its own words (C2-b8): bound before anything is drawn
+    setProviderLabels(field.meta.provider?.labels);
     const [history, symbols, corpus, redbook] = await Promise.all([
       loadHistory().catch(error => { console.warn(error); return undefined; }),
       loadSymbols().catch(error => { console.warn(error); return undefined; }),

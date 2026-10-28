@@ -13,6 +13,7 @@ import { inLens } from '../state/store';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
 import { treeFigure } from './tree';
+import { providerLabels } from '../data/labels';
 
 /** The number archetypes past six, and the family the Tree of Life is filed under (both added by the data lanes). */
 const NUMBER_PAST_SIX = ['seven', 'eight', 'nine', 'ten'];
@@ -211,7 +212,7 @@ export function mount(ctx: LensContext): LensInstance {
       el('h3', { class: 'as-h3', text: `Von Franz on ${['', 'one', 'two', 'three', 'four', 'five', 'six'][r.n]}` }),
       ...r.quotes.map((q) => quoteBlock(q, ctx.passages, { compact: true })),
       r.quotes.length < 2 ? el('p', { class: 'lp-note', text: `Number and Time says less about ${['', 'one', 'two', 'three', 'four', 'five', 'six'][r.n]} than about the first four numbers.` }) : null,
-      r.jung.length ? el('h3', { class: 'as-h3', text: 'Jung' }) : null,
+      r.jung.length ? el('h3', { class: 'as-h3', text: providerLabels().voiceHeading }) : null,
       ...r.jung.map((q) => quoteBlock(q, ctx.passages)),
       // the deep dive: the passage itself, read in full in the corpus
       first && ctx.passages?.known(first.cite.work)
@@ -264,7 +265,7 @@ export function mount(ctx: LensContext): LensInstance {
   const theoryOptions = () => {
     ctx.setControls([modeOptions([
       optionGroup('Read the theory', [
-        optionAction("Jung's theory", () => {}, { pressed: true, description: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
+        optionAction(providerLabels().theoryRoute, () => {}, { pressed: true, description: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
         optionAction('Dynamics', () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }), { description: 'Archetypes & Strange Attractors' }),
       ]),
     ], 'Options')]);

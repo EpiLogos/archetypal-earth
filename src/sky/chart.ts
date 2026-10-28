@@ -4,12 +4,17 @@
 import type { BodyKey, ChartPoint, SidecarChart, SkyBody } from '../types/sky';
 import type { SkyEphemeris } from './ephemeris';
 import { signOf } from './frames';
+import { providerLabels } from '../data/labels';
 
 /** The one sentence this feature says about itself. Fixed text, not a setting. */
-export const BIRTH_FRAMING = 'the sky at that moment, read in Jung\u2019s keys';
+export function birthFraming(): string {
+  return providerLabels().birthFraming;
+}
 
 /** What the birth sky is not: stated beside the framing, never softened. */
-export const BIRTH_LIMITS = 'It states where the Sun, Moon and planets stood and links each to what Jung wrote of it. It makes no forecast and passes no verdict on a person.';
+export function birthLimits(): string {
+  return providerLabels().birthLimits;
+}
 
 /** "Leo 2°57′" from a longitude. */
 export function placeInSign(lon: number): string {

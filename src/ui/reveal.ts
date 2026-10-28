@@ -3,7 +3,7 @@ import type { Model } from '../data/model';
 import { occurrenceImage } from '../data/model';
 import { symbolReading } from './symbol-reading';
 import { clear, el, onReadGesture, plate } from './dom';
-import { clipText, jungLine, placeLine } from './format';
+import { citeLine, clipText, placeLine } from './format';
 import { glyphOf, type SkyTies } from '../sky/ties';
 import { bodyOfLocus, locusPhrase } from '../data/skyplace';
 import type { Occurrence } from '../types/field';
@@ -64,7 +64,7 @@ export class Reveal {
       paras.forEach((p) => text.append(el('p', { class: 'rv-para', text: clipText(p, o.quote ? 260 : 220) })));
       if (o.jung.length) {
         const j = o.jung[0];
-        text.append(el('p', { class: 'rv-jung' }, [el('span', { class: 'rv-jung-mark', 'aria-hidden': 'true', text: '◦' }), jungLine(j)]));
+        text.append(el('p', { class: 'rv-jung' }, [el('span', { class: 'rv-jung-mark', 'aria-hidden': 'true', text: '◦' }), citeLine(j)]));
       }
       const symbolic = symbolReading(m, o.familyId, id => this.h.onFamily(id), true);
       if (symbolic) text.append(symbolic);

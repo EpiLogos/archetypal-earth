@@ -7,6 +7,7 @@ import { eraShort } from '../data/text';
 import type { Model } from '../data/model';
 import type { PassageBridge } from '../ui/passage';
 import { quoteBlock, type LensQuote } from './ui';
+import { providerLabels } from '../data/labels';
 
 /** The archetypes that have a deep field (kept in step with curation/depth/ by tests/data/lenses.test.ts). */
 const DREAMS = 5;
@@ -65,7 +66,7 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
   };
   const dreamRow = (i: number) => {
     const o = m.occ[i];
-    return el('li', {}, [el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? 'Jung’s own' : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })])]);
+    return el('li', {}, [el('button', { type: 'button', class: 'am-dream-h', onclick: () => act.openOccurrence(o.id) }, [el('span', { text: o.label }), el('span', { class: 'am-year', text: `${o.subject === 'jung' ? providerLabels().subjectOwn : o.subject === 'patient-anon' ? 'a patient’s' : ''} ${o.locusType}, ${eraShort(o.yearDisplay, 18)}`.trim() })])]);
   };
   const dreamList = el('ul', { class: 'dp-dreams' }, dreams.slice(0, DREAMS).map(dreamRow));
   const yearText = (y: number) => (y < 0 ? `${Math.abs(y)} BCE` : y < 1000 ? `${y} CE` : String(y));

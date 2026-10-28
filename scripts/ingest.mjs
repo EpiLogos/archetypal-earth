@@ -77,6 +77,9 @@ const yearOver = readJson(CUR('year-overrides.json'), { years: {} }).years;
 // the works whose words are not Jung's (curation/works.json): their cites say whose voice they are, and the attestations
 // are dated by them. Jung's own volumes need no entry: their cites carry their years already.
 const worksCur = readJson(CUR('works.json'), { works: {} });
+// the field's provider (curation/provider.json): its id, its name and its own words for every line that names it. The
+// app's code names no corpus (C2-b8): field.json's meta.provider carries these, and the boot binds them (src/data/labels.ts).
+const provider = readJson(CUR('provider.json'), null);
 const imagesJson = readJson(IMAGES_JSON, { archetypes: {}, families: {}, theoretics: {}, occurrences: {} });
 // An additive register beside images.json (public/data/images-ext.json, same shape): plates fetched while another run
 // owns images.json. Its entries fill ids the main register does not hold; the main register wins on a clash.
@@ -899,6 +902,7 @@ const years = occList.filter(onTrack).map((o) => o.year);
 const field = {
   meta: {
     generatedAt: process.env.FIELD_GENERATED_AT || new Date().toISOString(),
+    ...(provider ? { provider } : {}),
     vaultPath: VAULT,
     ...(ledgerLine ? { vaultLedgerLine: ledgerLine } : {}),
     counts: { archetypes: archList.length, theoretics: theoList.length, families: cleanFam.length, occurrences: occList.length, cultures: cultures.length, images: imageCount, joins: joins.length },

@@ -9,7 +9,7 @@ export function clipText(text: string, max: number): string {
 }
 
 /**
- * The vault's year display is human truth and can be long prose
+ * The provider's year display is human truth and can be long prose
  * ("c. 250 (sleep begins); woke under Theodosius II"). Labels want the lead.
  */
 export function eraShort(display: string, max = 24): string {

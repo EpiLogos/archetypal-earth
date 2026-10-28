@@ -10,10 +10,11 @@ import { sanitiseTitle } from './credit';
 import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
-import { eraShort, jungLine, placeLine, shortWork } from './format';
+import { citeLine, eraShort, placeLine, shortWork } from './format';
 import { loadLensData, qlBlock, qlSource, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { relatedPlates, relatedRows, SYSTEM_LABEL } from './related';
+import { providerLabels } from '../data/labels';
 
 /** The part of a page the renderer reads: its reading line, its sections with their quotations, the subjects it reaches. */
 interface PageBody {
@@ -153,7 +154,7 @@ export class DeepSheet {
         tied.forEach(({ t, arch: other }, i) => {
           if (i) row.append(' · ');
           row.append(el('button', { class: 'link-quiet', type: 'button', text: other!.name, onclick: () => this.h.onSubject({ type: 'archetype', id: other!.id }) }));
-          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }));
+          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }));
         });
         a.append(row);
       }
@@ -186,7 +187,7 @@ export class DeepSheet {
           if (i) row.append(' · ');
           row.append(el('button', { class: 'link-quiet', type: 'button', text: arch.name, onclick: () => this.h.onSubject({ type: 'archetype', id: arch.id }) }));
           // Jung's own tie vs. one this site reads in — never present the latter as his word
-          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }));
+          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }));
         });
         a.append(row);
       }
@@ -303,7 +304,7 @@ export class DeepSheet {
         // Jung's own tie vs. one this site reads in — the same wording as the archetypal ground above
         const text: (Node | null)[] = [
           el('button', { class: 'link-quiet', type: 'button', text: r.name, onclick: () => this.h.onSubject(r.other) }),
-          el('span', { class: 'dp-basis', text: r.basis === 'jung' ? ' (Jung’s tie)' : ' (read here)' }),
+          el('span', { class: 'dp-basis', text: r.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }),
           r.voice ? el('span', { class: 'dp-basis', text: ` · ${r.voice}` }) : null,
           el('p', { class: 'lp-note', text: r.note }),
         ];
@@ -376,7 +377,7 @@ export class DeepSheet {
         el('p', { class: 'th-line', text: p.line }),
       ];
       if (p.jung.length) {
-        out.push(el('h3', { class: 'as-h3', text: 'Jung' }));
+        out.push(el('h3', { class: 'as-h3', text: providerLabels().voiceHeading }));
         for (const q of p.jung) out.push(quoteBlock(q, this.h.passage));
       }
       if (p.vonFranz.length) {
@@ -447,7 +448,7 @@ export class DeepSheet {
       if (e) e.n++; else seen.set(k, { c, n: 1 });
     }
     if (!seen.size) return;
-    this.article.append(el('h3', { class: 'dp-sub', text: 'Jung’s texts' }));
+    this.article.append(el('h3', { class: 'dp-sub', text: providerLabels().citesHeading }));
     const ul = el('ul', { class: 'dp-cites' });
     [...seen.values()].sort((a, b) => b.n - a.n).slice(0, 14).forEach(({ c }) => {
       ul.append(el('li', {}, [shortWork(c.workTitle), el('span', { class: 'dp-cite-year', text: ` ${c.year}` })]));
@@ -472,9 +473,9 @@ export class DeepSheet {
     if (o.quote) a.append(o.caption ? el('p', { class: 'dp-caption', text: o.quote }) : el('blockquote', { class: 'dp-def' }, [el('p', { text: o.quote })]));
     o.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
     if (o.jung.length) {
-      a.append(el('h3', { class: 'dp-sub', text: 'Where Jung meets it' }));
+      a.append(el('h3', { class: 'dp-sub', text: providerLabels().citesMeet }));
       const ul = el('ul', { class: 'dp-cites' });
-      o.jung.forEach((c) => ul.append(el('li', {}, [this.citeLine(c)])));
+      o.jung.forEach((c) => ul.append(el('li', {}, [this.citeLink(c)])));
       a.append(ul);
     }
     if (fam) {
@@ -497,13 +498,14 @@ export class DeepSheet {
   }
 
   /** A cite line; when the corpus holds the work it opens the actual passage. */
-  private citeLine(c: Cite): HTMLElement {
-    const text = jungLine(c);
+  private citeLink(c: Cite): HTMLElement {
+    const text = citeLine(c);
     if (!this.h.onCite || !this.h.passage?.known(c.work)) return el('span', { text });
     return el('button', { class: 'link-quiet dp-cite-link', type: 'button', text, title: 'Open the passage in the corpus', 'aria-label': `${text} — open the passage`, onclick: () => this.h.onCite!(c.work, c.locator) });
   }
 
   private appendFooter() {
-    this.article.append(el('p', { class: 'dp-foot', text: 'Drawn from the Jung corpus' }));
+    // the corpus is named here by its provider, from the field's data (C2-b8)
+    this.article.append(el('p', { class: 'dp-foot', text: `Drawn from ${this.model.field.meta.provider?.name ?? 'the corpus'}` }));
   }
 }

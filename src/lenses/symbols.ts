@@ -10,6 +10,7 @@ import { amplify, findImages, vocabulary, type Vocabulary } from '../practice/am
 import { amplificationView, type AmplifyActions } from '../practice/amplify-view';
 import { loadLensData, quoteBlock, tuneGlobe, type LensQuote } from './ui';
 import { DEEP_FIELDS, depthView, type DepthData } from './depth';
+import { providerLabels } from '../data/labels';
 
 interface PracticeData { dreams: { method: LensQuote[] } }
 
@@ -40,7 +41,7 @@ export function mount(ctx: LensContext): LensInstance {
         el('span', {}, [el('span', { class: 'as-tie-name', text: t.type === 'family' ? m.famById.get(t.id)!.name : m.archById.get(t.id)!.name }), el('span', { class: 'as-basis', text: t.type === 'family' ? `${(m.famOcc.get(t.id) ?? []).length} instances` : 'archetype' })]),
         icon('next', 14),
       ])));
-      if (input.value.trim() && !hits.length) results.append(el('p', { class: 'lp-note', text: `The field has no image by the name “${input.value.trim()}”. It holds the images Jung wrote about, under the names his texts use.` }));
+      if (input.value.trim() && !hits.length) results.append(el('p', { class: 'lp-note', text: `The field has no image by the name “${input.value.trim()}”. ${providerLabels().symbolsNone}` }));
     };
     input.addEventListener('input', run);
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const first = results.querySelector('button'); (first as HTMLButtonElement | null)?.click(); } });
@@ -54,7 +55,7 @@ export function mount(ctx: LensContext): LensInstance {
     const top = [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)!).filter(Boolean);
     const box = searchBox();
     show([
-      el('p', { class: 'th-line', text: 'Name a symbol and see how it runs through the field: what Jung said it is, every dated instance of it, the dreams and visions it turns up in, and what it expresses.' }),
+      el('p', { class: 'th-line', text: providerLabels().symbolsIntro }),
       box.node,
       el('h3', { class: 'as-h3', text: 'The images with the most instances' }),
       el('div', { class: 'am-chips' }, top.map((f) => el('button', { type: 'button', class: 'sf-pill', text: f.name, onclick: () => ctx.setPath([f.id]) }))),

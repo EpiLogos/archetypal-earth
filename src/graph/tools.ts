@@ -3,6 +3,7 @@
 // the sheet does not repeat them.
 import { el } from '../ui/dom';
 import type { TieBasis } from '../types/field';
+import { providerLabels } from '../data/labels';
 import { DEFAULT_FORCES, FORCE_ROWS, forceMultiple, type Forces } from './forces';
 import { DEFAULT_DISPLAY, DEFAULT_KINDS, DISPLAY_ROWS, type Display, type KindFlags } from './settings';
 
@@ -72,7 +73,7 @@ export class GraphTools {
       kindGroup.append(button);
     }
     const tieGroup = el('div', { class: 'gvt-ties', role: 'group', 'aria-label': 'Family to archetype relations' });
-    for (const [basis, label] of [['jung', 'Jung'], ['inferred', 'Inferred'], ['site', 'Read here']] as const) {
+    for (const [basis, label] of [['jung', providerLabels().basisOwn], ['inferred', 'Inferred'], ['site', 'Read here']] as const) {
       const button = el('button', { class: 'gvt-filter', type: 'button', text: label, 'aria-pressed': 'true', onclick: () => h.onTies(this.state.ties.includes(basis) ? this.state.ties.filter((b) => b !== basis) : [...this.state.ties, basis]) }) as HTMLButtonElement;
       this.ties.set(basis, button);
       tieGroup.append(button);

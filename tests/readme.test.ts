@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { LENSES } from '../src/shell/lens';
 
 // The README is the product's front door, not a build report. This keeps its figures and lens names the app's own, so
 // "update the README" is a matter of re-running this, not of rewriting it. The contract is in AGENTS.md.
@@ -23,8 +24,8 @@ describe('README', () => {
   });
 
   it('names every lens the menu offers, in the app’s own words', () => {
-    const src = read('src/shell/lens.ts');
-    const lenses = [...src.matchAll(/id: '[a-z]+', label: '([^']+)'[^\n]*blurb: '([^']+)'/g)];
+    // the lines as the menu shows them: two are the provider's words (src/data/labels.ts), which the suite binds
+    const lenses = LENSES.map((l) => [l.id, l.label, l.blurb] as const);
     expect(lenses.length).toBeGreaterThanOrEqual(9);
     for (const [, label, blurb] of lenses) {
       expect(readme).toContain(`**${label}**`);

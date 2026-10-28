@@ -217,8 +217,103 @@ export interface Occurrence {
   image?: ImageRef; // occurrence-specific image when one was found
 }
 
+/**
+ * The provider's own words for every line that names whose field this is, whose word a tie is, or whose reading a page
+ * follows (C2-b8): the corpus is named by its provider, in data, never in code. Each key is optional; the code holds a
+ * neutral default for each (src/data/labels.ts), so a field whose provider gives none reads in a voice that names no one.
+ * Archetypal Earth's own words are its provider data: curation/provider.json, published as field.json meta.provider.
+ */
+export interface ProviderLabels {
+  /** the landing line (shell/landing.ts) */
+  landing?: string;
+  /** the Aion lens's line in the menu (shell/lens.ts) */
+  lensAion?: string;
+  /** the Astrology lens's line in the menu (shell/lens.ts) */
+  lensAstrology?: string;
+  /** the Aion reading's line in its Options (aion/view.ts) */
+  readingTagline?: string;
+  /** the title of the J chip: a passage asserted in the reading's own text (aion/view.ts) */
+  readingOwnText?: string;
+  /** the equal-months convention's name (aion/precession.ts) */
+  conventionOwn?: string;
+  /** the sky clock's opening sentences (aion/skyclock.ts) */
+  skyClockLede?: string;
+  /** the row of the reading's own span of a sign (aion/skyclock.ts) */
+  skyClockOwnSpan?: string;
+  /** the note under a sign the reading divides in two (aion/skyclock-view.ts) */
+  skyClockFishes?: string;
+  /** whose conditional dating of Aquarius the rows give (aion/skyclock-view.ts) */
+  skyClockMarkBy?: string;
+  /** the J chip's title on a concept's quotation (dynamics/marks.ts) */
+  dynamicsOwnText?: string;
+  /** the V chip's title: another reader's reading, not the author's (dynamics/marks.ts) */
+  dynamicsOtherText?: string;
+  /** the Options row that opens the Theory lens (dynamics/view.ts, lenses/theory.ts) */
+  theoryRoute?: string;
+  /** the heading over the author's own lines (lenses/theory.ts, ui/deep.ts) */
+  voiceHeading?: string;
+  /** the strongest basis's name: the tie filter and the joins' own system (graph/tools.ts, ui/related.ts) */
+  basisOwn?: string;
+  /** after a tie the author makes (ui/deep.ts) */
+  tieOwnNote?: string;
+  /** the heading over the works an archetype is cited from (ui/deep.ts) */
+  citesHeading?: string;
+  /** the heading over an occurrence's cites (ui/deep.ts) */
+  citesMeet?: string;
+  /** the voice a cite reads in when it names none of its own (ui/format.ts) */
+  citePrefix?: string;
+  /** a tie the author makes, as the sky and the Astrology walk name it (lenses/astrology.ts, sky/orbits.ts) */
+  tieOwnLink?: string;
+  /** the Astrology lens's opening line (lenses/astrology.ts) */
+  astrologyIntro?: string;
+  /** the line under the Sun, where every walk ends (lenses/astrology.ts) */
+  astrologySun?: string;
+  /** the atlas's own links, beside the author's (lenses/astrology.ts) */
+  astrologyOtherTies?: string;
+  /** the atlas's own links, where the author gives none (lenses/astrology.ts) */
+  astrologyOtherTiesOnly?: string;
+  /** the Charts option's description (lenses/astrology.ts) */
+  astrologyCharts?: string;
+  /** the link from four to the quaternity (lenses/card-reading.ts) */
+  quaternityLink?: string;
+  /** the framing a coincidence log opens (lenses/coincidences.ts) */
+  coincidencesFraming?: string;
+  /** the Dreams lens's opening line (lenses/dreams.ts) */
+  dreamsIntro?: string;
+  /** the framing a dream journal opens (lenses/dreams.ts) */
+  dreamsMethod?: string;
+  /** the Symbols lens's opening line (lenses/symbols.ts) */
+  symbolsIntro?: string;
+  /** what the field holds, when a symbol is not in it (lenses/symbols.ts) */
+  symbolsNone?: string;
+  /** an archetype the author ties to an image (practice/amplify-view.ts) */
+  amplifyTieOwn?: string;
+  /** the note over an image's dreams and visions (practice/amplify-view.ts) */
+  amplifyDreams?: string;
+  /** an image with no definition (practice/amplify-view.ts) */
+  amplifyNoDefinition?: string;
+  /** a dream or vision that is the author's own (practice/amplify-view.ts, lenses/depth.ts) */
+  subjectOwn?: string;
+  /** the Red Book's opening line (redbook/view.ts) */
+  redbookLede?: string;
+  /** what a birth chart is read in (sky/chart.ts) */
+  birthFraming?: string;
+  /** what a birth chart states and does not (sky/chart.ts) */
+  birthLimits?: string;
+}
+
+/** Who publishes the field: a stable id, its name (the one place the corpus is named), and its own words. */
+export interface FieldProvider {
+  id: string;
+  /** with its article, as it reads after "Drawn from" */
+  name: string;
+  labels?: ProviderLabels;
+}
+
 export interface FieldMeta {
   generatedAt: string; // ISO
+  /** [C2-b8] the provider of the field; absent, the field is the provider's own in the neutral voice */
+  provider?: FieldProvider;
   vaultPath: string;
   vaultLedgerLine?: string; // last ledger heading, so the site can say how fresh it is
   counts: { archetypes: number; theoretics: number; families: number; occurrences: number; cultures: number; images: number; joins?: number };

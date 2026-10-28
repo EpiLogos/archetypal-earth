@@ -227,6 +227,12 @@ export function validateField(f) {
     if (c.archetypes !== f.archetypes.length || c.theoretics !== f.theoretics.length || c.families !== f.families.length || c.occurrences !== f.occurrences.length || c.cultures !== f.cultures.length) err('meta.counts disagree with arrays');
     if ('joins' in c && c.joins !== (Array.isArray(f.joins) ? f.joins.length : 0)) err('meta.counts.joins disagrees with joins');
     if (f.occurrences.length && (f.meta.yearMin !== yMin || f.meta.yearMax !== yMax)) err('meta.yearMin/Max disagree with occurrences');
+    // the provider names the corpus in its own words (C2-b8): an id, a name, and labels that are words
+    const p = f.meta.provider;
+    if (p !== undefined) {
+      if (typeof p?.id !== 'string' || !p.id || typeof p.name !== 'string' || !p.name) err('meta.provider needs a non-empty id and name');
+      for (const [k, v] of Object.entries(p?.labels ?? {})) if (typeof v !== 'string') err(`meta.provider.labels.${k} is not a string`);
+    }
   }
   return errs;
 }
