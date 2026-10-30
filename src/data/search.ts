@@ -1,11 +1,12 @@
-// Type-ahead across archetypes, the theoretics, families (+aliases), occurrences, cultures,
+// Type-ahead across archetypes, the theoretics, families (+aliases), works, people, occurrences, cultures,
 // places and periods. Pure: results carry an action, the UI decides how to act.
 import type { ImageRef } from '../types/field';
-import type { Model, Subject } from './model';
+import { subjectPalette, type Model, type Subject } from './model';
+import { averagePalettes, rgbToHex } from './palette';
 import { formatYear, type TimeScale } from './time';
 import { eraShort } from './text';
 
-export type SearchKind = 'archetype' | 'theoretic' | 'family' | 'occurrence' | 'culture' | 'place' | 'period';
+export type SearchKind = 'archetype' | 'theoretic' | 'family' | 'work' | 'person' | 'occurrence' | 'culture' | 'place' | 'period';
 
 export type SearchAction =
   | { type: 'subject'; subject: Subject }
@@ -53,7 +54,7 @@ export function norm(s: string): string {
     .trim();
 }
 
-const BIAS: Record<SearchKind, number> = { theoretic: 15, archetype: 14, family: 12, period: 9, culture: 6, place: 5, occurrence: 0 };
+const BIAS: Record<SearchKind, number> = { theoretic: 15, archetype: 14, work: 13, person: 13, family: 12, period: 9, culture: 6, place: 5, occurrence: 0 };
 /** The two keystones carry this sub-line: they are the field's ground, not two more entries in it. */
 export const GROUND_SUB = 'the ground';
 
@@ -75,6 +76,35 @@ export function buildSearchIndex(m: Model): SearchIndex {
     entries.push({
       kind: 'family', key: `f:${f.id}`, label: f.name, names: [norm(f.name)], aliases: f.aliases.map(norm).filter(Boolean), secondary: [norm(f.oneLine)],
       sub: 'form', action: { type: 'subject', subject: { type: 'family', id: f.id } }, image: f.image, tone: f.palette.core, bias: BIAS.family,
+    });
+  }
+  for (const w of m.workById.values()) {
+    // the title whole, without its "(CW12)" tail, and ahead of its subtitle ("Aion: Researches…" -> "aion"); the volume's id
+    // spaced as people say it ("cw 12"); the other cite keys of the same text — except the author's own name, which is
+    // the Person's, not the Work's ("jung" is the key for CW11)
+    const bare = w.title.replace(/\s*\([^)]*\)\s*$/, '');
+    const head = bare.split(':')[0];
+    const names = [...new Set([norm(w.title), norm(bare), ...(head.length >= 3 ? [norm(head)] : [])].filter(Boolean))];
+    const voice = norm(w.voice);
+    const keys = [w.id, ...w.aliases].map(norm).filter((k) => k && k !== voice);
+    const spaced = /^([a-z]+)(\d.*)$/.exec(norm(w.id));
+    const aliases = [...new Set([...keys, ...(spaced ? [`${spaced[1]} ${spaced[2]}`] : [])])];
+    const core = subjectPalette(m, { type: 'work', id: w.id }, averagePalettes)?.core;
+    entries.push({
+      kind: 'work', key: `w:${w.id}`, label: w.title, names, aliases, secondary: [],
+      sub: `work · ${w.voice}${w.display ? `, ${w.display}` : ''}`, action: { type: 'subject', subject: { type: 'work', id: w.id } },
+      tone: core ? rgbToHex(core) : undefined, bias: BIAS.work,
+    });
+  }
+  for (const p of m.personById.values()) {
+    // the name whole and the surname alone ("Marie-Louise von Franz" -> "franz")
+    const full = norm(p.name);
+    const names = [...new Set([full, full.split(' ').pop()!].filter(Boolean))];
+    const core = subjectPalette(m, { type: 'person', id: p.id }, averagePalettes)?.core;
+    entries.push({
+      kind: 'person', key: `n:${p.id}`, label: p.name, names, aliases: [], secondary: [norm(p.role ?? '')],
+      sub: p.role ?? 'person', action: { type: 'subject', subject: { type: 'person', id: p.id } },
+      tone: core ? rgbToHex(core) : undefined, bias: BIAS.person,
     });
   }
   for (const c of m.field.cultures) {
