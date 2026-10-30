@@ -524,6 +524,7 @@ body.deep-open .time, body.pane-contents .time { left: calc((100vw - var(--pane-
 
 /* Work and Person pages in the reading sheet */
 .dp-acts { margin: 18px 0 0; display: flex; gap: 10px; flex-wrap: wrap; }
+.dp-verbs { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: 0.06em; }
 .dp-contents { margin: 0; padding: 0; list-style: none; }
 .dp-contents li { padding: 4px 0 4px calc(var(--lvl, 0) * 16px); font-family: var(--serif); font-size: 1.04rem; line-height: 1.45; }
 .dp-contents .link-quiet { text-align: left; }

@@ -23,6 +23,9 @@ import { modeOptions, optionAction } from '../ui/mode-options';
 import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
 import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
 import { shiftX } from '../shell/layout';
+import { pathOf, stepsTo, upBy } from '../shell/path';
+import { verbFacts, verbsOf, type ContextSources, type ContextSubject, type Verb } from '../shell/context';
+import { localChart } from '../astro/charts';
 import { sliceCount, sliceMask } from '../shell/slice';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
@@ -93,6 +96,8 @@ const isLocalHost = (): boolean => {
   const host = typeof location === 'undefined' ? '' : location.hostname;
   return host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1';
 };
+
+const YOU_SUBJECT: ContextSubject = { type: 'you', id: 'you' };
 
 export class Controller {
   state: AppState = WORLD;
@@ -228,6 +233,7 @@ export class Controller {
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
       onLens: (id) => { this.you.hide(); this.navigate(inLens(id, [])); },
+      verbs: () => this.contextVerbs(YOU_SUBJECT).filter((v) => v.offered && v.id !== 'reading').map((v) => ({ text: v.text, run: () => { this.you.hide(); this.runVerb(YOU_SUBJECT, v); } })),
       onSubject: (s) => { this.you.hide(); if (s.type === 'occurrence') this.openOccurrenceId(s.id); else this.openSubject(s as Subject, withMode(this.state, false)); },
     });
     // the visitor's node follows the practice store: a dream written, a chart saved, a line forgotten
@@ -2396,10 +2402,7 @@ export class Controller {
 
   private setLabelFor(subject: Subject) {
     const m = this.m;
-    const v = this.state.view;
-    const up = v.kind === 'focus' && v.crumbs?.length
-      ? [...v.crumbs.slice().reverse().map((c) => ({ text: subjectName(m, c), onClick: () => this.stepBack() })), { text: 'the whole field', onClick: () => this.wholeField() }]
-      : [{ text: 'the whole field', onClick: () => this.wholeField() }];
+    const up = this.crumbs();
     const content: LabelContent = { name: subjectName(m, subject), line: subjectLine(m, subject) || undefined, up, links: [] };
     if (subject.type === 'family') {
       const fam = m.famById.get(subject.id)!;
@@ -2432,12 +2435,74 @@ export class Controller {
       });
       if (hangs.length) content.hangs = hangs;
     }
+    // every other subject (a theoretic, a Work, a Person, a place) offers the verbs it answers, the same three as any
+    if (subject.type !== 'family' && subject.type !== 'archetype') {
+      for (const v of this.contextVerbs(subject)) if (v.offered && v.id !== 'reading') content.links!.push({ text: v.text, onClick: () => this.runVerb(subject, v) });
+    }
     // persistent sky door: return to the sky we left, or open the body's sky when the subject has a tie
     this.addSeeInSky(content, subject);
     // an archetype with a deep field (the Great Mother is the first) opens it from its focus
     if (subject.type === 'archetype' && DEEP_FIELDS.has(subject.id)) content.links!.push({ text: 'The deep field', onClick: () => this.navigate(inLens('symbols', ['archetype', subject.id])) });
     content.links!.push({ text: 'Reading', onClick: () => this.setDeep(true) });
     this.label.set(content, `f:${subject.type}:${subject.id}`);
+  }
+
+  /**
+   * The Path: the way up from here, nearest first, each crumb the steps back that reaches it (shell/path.ts). A crumb is
+   * `back` applied that many times: what Escape and ✕ do one at a time.
+   */
+  private crumbs(): { text: string; onClick: () => void }[] {
+    return pathOf(this.state).map((c) => ({
+      text: c.subject ? subjectName(this.m, c.subject) : 'the whole field',
+      // the steps are read at the click: a reading opened since the crumb was drawn is one more step on the way
+      onClick: () => { const n = stepsTo(this.state, c.subject); if (n !== undefined) this.up(n); },
+    }));
+  }
+
+  /** Go up `steps` steps in one move (a crumb): the same states Escape passes through, without the stops between. */
+  up(steps: number) {
+    this.navigate(upBy(this.state, steps));
+  }
+
+  /** What the app can say of a subject, for the Context verbs (shell/context.ts). */
+  private contextSources(): ContextSources {
+    const m = this.m;
+    return {
+      threadStops: (s) => (s.type === 'family' || s.type === 'archetype' ? this.plan(s.type, s.id).length : 0),
+      tie: (s) => {
+        if (s.type === 'family' || s.type === 'archetype') {
+          const t = this.skyTies.forSubject(s.type, s.id)[0];
+          return t ? { body: t.body, name: t.name } : null;
+        }
+        // a Work or a Person hangs in the sky where its occurrences do: one place is a door, many are no one body
+        const hangs = subjectSky(m, s);
+        if (hangs.length !== 1) return null;
+        const body: BodyKey = hangs[0].at === 'zodiac' || hangs[0].at === 'pole' ? 'terra' : hangs[0].at;
+        return { body, name: bodyName(body) };
+      },
+      chart: (s) => {
+        if (s === 'you') return localChart()?.id ?? null;
+        const p = s.type === 'person' ? m.personById.get(s.id) : undefined;
+        return p?.natal && p.birth ? p.id : null;
+      },
+    };
+  }
+
+  /** The verbs a subject answers: the same three for an archetype, a family, a Work, a Person and You. */
+  contextVerbs(s: ContextSubject): Verb[] {
+    return verbsOf(verbFacts(s, this.contextSources()));
+  }
+
+  /** Carry out one verb for a subject. */
+  runVerb(s: ContextSubject, verb: Verb) {
+    if (verb.id === 'reading') {
+      if (s.type === 'you') this.you.show();
+      else if (this.state.view.kind === 'focus' && this.state.view.subject.type === s.type && this.state.view.subject.id === s.id) this.setDeep(true);
+      else this.openSubject(s);
+    } else if (verb.id === 'thread') {
+      if (s.type !== 'you') this.followThread();
+    } else if (verb.door?.kind === 'body') this.openBody(verb.door.body);
+    else if (verb.door?.kind === 'chart') this.navigate(astrologyAt([verb.door.chart]));
   }
 
   /** Back to the sky a reading was opened from, in one step (the reading the descent carried closes with it). */
@@ -2624,7 +2689,7 @@ export class Controller {
     this.shell.setContext(o.label);
     const showChrome = () => {
       this.reveal.show(oi);
-      this.label.set({ name: subjectName(m, context), back: () => this.stepBack(), up: [{ text: 'the whole field', onClick: () => this.wholeField() }] }, `m:${context.type}:${context.id}`);
+      this.label.set({ name: subjectName(m, context), back: () => this.stepBack(), up: this.crumbs().slice(1) }, `m:${context.type}:${context.id}`);
       this.syncDeep(this.state);
     };
     if (fromSky) {

@@ -13,6 +13,8 @@ export interface YouHandlers {
   onLens(id: 'dreams' | 'coincidences' | 'astrology'): void;
   /** open a subject the log names */
   onSubject(subject: { type: string; id: string }): void;
+  /** the Context verbs You answers, as the label shows them for any subject (shell/context.ts): the offered ones other than the Reading */
+  verbs?(): { text: string; run(): void }[];
 }
 
 const SHOWN = 40;
@@ -78,6 +80,10 @@ export class YouSheet {
       el('h2', { class: 'dp-title', text: 'You' }),
       el('p', { class: 'dp-lede', text: 'What you have written, charted and opened here. It is kept in this browser and goes nowhere else.' }),
     );
+    const verbs = this.h.verbs?.() ?? [];
+    if (verbs.length) {
+      a.append(el('nav', { class: 'dp-verbs', 'aria-label': 'Go further' }, verbs.map((v) => el('button', { type: 'button', class: 'link-quiet', text: v.text, onclick: () => v.run() }))));
+    }
     // the three things kept in this browser: the chart, the dreams, the coincidences, each with its latest lines and a door to its lens
     type Kept = { id: string; date: string; text: string };
     const latest = (rs: Kept[]) => rs.sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : 0)).slice(0, RECENT);
