@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "mana-personality",
+ "line": "Jung's statements on the mana-personality: the dominant of the collective unconscious that the ego is tempted to take for its own.",
+ "sections": [
+  {
+   "id": "the-dominant",
+   "title": "A dominant of the collective unconscious",
+   "line": "CW7 ¶374–379: what the mana-personality is, and its historical shape.",
+   "quotes": [
+    {
+     "work": "cw07",
+     "quote": "“She” is a mana-personality, a being full of some occult and bewitching quality (mana), endowed with magical knowledge and power.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw07",
+     "quote": "But the mana-personality is a dominant of the collective unconscious, the well-known archetype of the mighty man in the form of hero, chief, magician, medicine-man, saint, the ruler of men and spirits, the friend of God.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw07",
+     "quote": "Historically, the mana-personality is always in possession of the secret name, or of some esoteric knowledge, or has the prerogative of a special way of acting—quod licet Jovi, non licet bovi—in a word, it has an individual distinction.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-danger",
+   "title": "The danger of identification",
+   "line": "CW7 ¶382–390: how the ego becomes a mana-personality, and the warning against it.",
+   "quotes": [
+    {
+     "work": "cw07",
+     "quote": "I have never yet seen a fairly advanced development of this kind where at least a temporary identification with the archetype of the mana-personality did not take place.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw07",
+     "quote": "One must therefore beware of the danger of falling victim to the dominant of the mana-personality.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

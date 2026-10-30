@@ -1,0 +1,52 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "animus",
+ "line": "Jung's statements on the animus: the name, the woman's contrasexual figure and the way it speaks, and its place as a mediator.",
+ "sections": [
+  {
+   "id": "the-name-and-the-figure",
+   "title": "The name and the figure",
+   "line": "CW9ii ¶26–28: why Jung called the projection-making factor in women the animus, and how it shows itself in argument.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "This results in a considerable psychological difference between men and women, and accordingly I have called the projection-making factor in women the animus, which means mind or spirit.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "The animus corresponds to the paternal Logos just as the anima corresponds to the maternal Eros.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "As the animus is partial to argument, he can best be seen at work in disputes where both parties know they are right.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "mediator",
+   "title": "A mediator, and not to be integrated",
+   "line": "CW9ii ¶28 and ¶40–41: the animus as psychopomp, and why anima and animus themselves cannot be integrated.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "Thus the animus is a psychopomp, a mediator between the conscious and the unconscious and a personification of the latter.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Though the effects of anima and animus can be made conscious, they themselves are factors transcending consciousness and beyond the reach of perception and volition.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Here we meet the animus of a woman and the anima of a man, two corresponding archetypes whose autonomy and unconsciousness explain the stubbornness of their projections.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "five",
+ "line": "Jung's statements on the five: the fifth as the unity of the four, the quintessence of the alchemists, and the rotundum as fifth stage.",
+ "sections": [
+  {
+   "id": "the-fifth",
+   "title": "The fifth and the four",
+   "line": "CW9ii ¶ 350 and ¶ 427: the fifth as the unity of the four, and the rotundum at the fifth stage.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "The inhabitant, in his turn, has a relationship to the quaternity, and to the fifth as the unity of the four.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "As the fifth stage, the rotundum would then be identical with the first; that is to say, the heavy darkness of the earth, metal, has a secret relationship to the Anthropos.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "quintessence",
+   "title": "The quintessence",
+   "line": "CW14 ¶ 187 and ¶ 354 and ¶ 429: the arcane substance, the cauda pavonis and the Maid in the fifth circle.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "It is a symbol of the arcane substance and the quintessence, of the aether that contains all four elements, and at the same time a God-image or, to be more accurate, an image of the anima mundi.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The cauda pavonis is also called the “soul of the world, nature, the quintessence, which causes all things to bring forth.”",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The elements are evidently conceived as circles, for the Quinta Essentia, the “Maid,” appears in the fifth.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

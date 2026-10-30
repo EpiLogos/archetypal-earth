@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "three",
+ "line": "Jung's statements on the three: the Trinity, the missing evil in it, and the triad as a defective quaternity.",
+ "sections": [
+  {
+   "id": "the-trinity",
+   "title": "The Trinity",
+   "line": "CW11 ¶ 169–189: the number three as the symbolic number everyone knows, and what the dogma leaves out.",
+   "quotes": [
+    {
+     "work": "cw11",
+     "quote": "It would of course be a different thing with the number three, since the Trinity represents a symbolic number known to everybody.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "In reality the orthodox Christian formula is not quite complete, because the dogmatic aspect of the evil principle is absent from the Trinity and leads a more or less awkward existence on its own as the devil.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "triad-and-fourth",
+   "title": "The triad and what is missing",
+   "line": "CW9ii ¶ 351 and CW14 ¶ 214: the three read as a defective quaternity, and the fourth as the devil's offspring.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "Psychologically, however, three—if the context indicates that it refers to the self—should be understood as a defective quaternity or as a stepping-stone towards it.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "Out of the tension of duality life always produces a “third” that seems somehow incommensurable or paradoxical.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "But since woman, as well as evil, is excluded from the Deity in the dogma of the Trinity, the element of evil would form part of the religious symbol if the latter should be a quaternity.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

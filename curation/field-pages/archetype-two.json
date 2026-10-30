@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "two",
+ "line": "Jung's statements on the two: the duality of psychic life, its heresies and its pairs, and the third that life produces from it.",
+ "sections": [
+  {
+   "id": "duality",
+   "title": "Duality",
+   "line": "CW14 ¶ 129 and CW9ii ¶ 74 and ¶ 357: the duality of the psyche, and the shadow's duality.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "This duality of our psychic life is the prototype and archetype of the Sol-Luna symbolism.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "So much did the alchemist sense the duality of his unconscious assumptions that, in the face of all astronomical evidence, he equipped the sun with a shadow: “The sun and its shadow bring the work to perfection.”",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "Through the Christ crucified between the two thieves man gradually attained knowledge of his shadow and its duality.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "uniting-pairs",
+   "title": "Pairs and what they unite",
+   "line": "CW9ii ¶ 380 and CW11 ¶ 236: the uniting symbols of the pair, and the third that follows the tension.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "As a rule they are \"uniting\" symbols, representing the conjunction of a single or double pair of opposites, the result being either a dyad or a quaternion.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "Out of the tension of duality life always produces a “third” that seems somehow incommensurable or paradoxical.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "four",
+ "line": "Jung's statements on the four: the quaternity as the archetype of order, its place in dreams, and its relation to the Trinity.",
+ "sections": [
+  {
+   "id": "the-quaternity",
+   "title": "The quaternity",
+   "line": "CW9ii ¶ 59 and ¶ 410 and CW11 ¶ 246: the quaternity and mandala symbols, and the squared circle of the self.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "These are the quaternity or mandala symbols, which occur not only in the dreams of modern people who have never heard of them, but are widely disseminated in the historical records of many peoples and many epochs.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "As the Anthropos he corresponds to what is empirically the most important archetype and, as judge of the living and the dead and king of glory, to the real organizing principle of the unconscious, the quaternity, or squared circle of the self.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw11",
+     "quote": "But the quaternity as produced by the modern psyche points directly not only to the God within, but to the identity of God and man.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "four-and-three",
+   "title": "The four and the three",
+   "line": "CW11 ¶ 247–248 and CW9ii ¶ 351: the unconscious turns the three into a four, and what the triad lacks.",
+   "quotes": [
+    {
+     "work": "cw11",
+     "quote": "The unconscious, however, transforms it into a quaternity, which is at the same time a unity, just as the three persons of the Trinity are one and the same God.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "The missing fourth element that would make the triad a quaternity is, in a man, the archetype of the Wise Old Man, which I have not discussed here, and in a woman the Chthonic Mother.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "trickster",
+ "line": "Jung's statements on the trickster: the figure of the Winnebago cycle, the shadow it summarises, and its alchemical relative Mercurius.",
+ "sections": [
+  {
+   "id": "the-figure",
+   "title": "The figure of the cycle",
+   "line": "CW9i ¶465–484: the trickster as a rudimentary stage of consciousness and as a collective shadow.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "Considering the crude primitivity of the trickster cycle, it would not be surprising if one saw in this myth simply the reflection of an earlier, rudimentary stage of consciousness, which is what the trickster obviously seems to be.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Lastly, the story of the trickster is not in the least disagreeable to the Winnebago consciousness or incompatible with it but, on the contrary, pleasurable and therefore not conducive to repression.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The trickster is a collective shadow figure, a summation of all the inferior traits of character in individuals.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "mercurius",
+   "title": "Mercurius the trickster",
+   "line": "CW9i ¶239 and CW9ii ¶297: the alchemists' Mercurius as psychopomp and trickster at once.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "This piece of psychology was expressed by the alchemists in their Mercurius duplex, who on the one hand is Hermes the mystagogue and psychopomp, and on the other hand is the poisonous dragon, the evil spirit and \"trickster.\"",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "That this is how the trickster figure originated can hardly be contested if we look at it from the causal and historical angle.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

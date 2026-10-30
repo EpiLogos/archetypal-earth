@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "syzygy",
+ "line": "Jung's statements on the syzygy: the pairing of anima and animus, and the paired opposites in which God unfolds in the Gnostic accounts.",
+ "sections": [
+  {
+   "id": "anima-animus",
+   "title": "Anima and animus as a pair",
+   "line": "CW9ii ¶422 and CW9i ¶145: the syzygy that analysis of the shadow uncovers.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "Through analysis of the shadow and of the processes contained in it we uncover the ANIMA/ANIMUS syzygy.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "These show that syzygies were projected which were in complete contradiction to the traditional beliefs, and that they were often experienced in the form of a vision.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "paired-opposites",
+   "title": "Paired opposites",
+   "line": "CW9ii ¶300 and ¶345 and CW14 ¶ 118: the syzygy in the doctrine of the pairs.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "The unknown author understands good and evil as the right and left hand of God, and views the whole of creation in terms of syzygies, or pairs of opposites.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "God unfolds himself in the world in the form of syzygies (paired opposites), such as heaven/earth, day/night, male/female, etc.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "All three indicate the essential similarity of the components of the syzygy and their “spiritual” nature.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

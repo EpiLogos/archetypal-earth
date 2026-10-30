@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "kore",
+ "line": "Jung's statements on the Kore: the maiden of the Demeter myth, her appearance as an unknown young girl, and her difference from the anima.",
+ "sections": [
+  {
+   "id": "the-maiden",
+   "title": "The maiden and the mother",
+   "line": "CW9i ¶156 and ¶306–316: Kore with Demeter, and the image of the young girl in dreams.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "Mythology offers many variations of the mother archetype, as for instance the mother who reappears as the maiden in the myth of Demeter and Kore; or the mother who is also the beloved, as in the Cybele-Attis myth.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "At this level the mother is both old and young, Demeter and Persephone, and the son is spouse and sleeping suckling rolled into one.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "In fact, the psychology of the Demeter cult bears all the features of a matriarchal order of society, where the man is an indispensable but on the whole disturbing factor.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "kore-and-anima",
+   "title": "Kore and the anima",
+   "line": "CW9i ¶356: how the Kore and the anima are told apart.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "All that remains for me now is to describe the Kore as observable in man, the anima.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Although the anima can, as we have said, experience herself in Demeter-Kore, she is yet of a wholly different nature.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

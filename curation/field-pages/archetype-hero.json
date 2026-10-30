@@ -1,0 +1,52 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "hero",
+ "line": "Jung's statements on the hero: the hero as the figure of the myth of rebirth, as the one who frees the devoured, and as the risk of identification.",
+ "sections": [
+  {
+   "id": "the-hero-myth",
+   "title": "The hero in the myth",
+   "line": "CW5 ¶300–310 and ¶570–575: the hero as the bearer of rebirth and of the daemon.",
+   "quotes": [
+    {
+     "work": "cw05",
+     "quote": "It is not man as such who has to be regenerated or born again as a renewed whole, but, according to the statements of mythology, it is the hero or god who rejuvenates himself.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw05",
+     "quote": "The hero is an extraordinary being who is inhabited by a daemon, and it is this that makes him a hero.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw05",
+     "quote": "In this tie to the maternal source lies the strength that gives the hero his extraordinary powers, his true genius, which he frees from the embrace of the unconscious by his daring and sovereign independence.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw05",
+     "quote": "Like a true hero, he has snatched life from the jaws of death, from the all-devouring Terrible Mother.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "shadow-and-culture",
+   "title": "The hero and what he meets",
+   "line": "CW5 ¶458 and ¶580: the hero in the culture of personality, and the shadow that can undo him.",
+   "quotes": [
+    {
+     "work": "cw05",
+     "quote": "The cultural point of view gives man a meaning apart from the mass, and this, in the course of centuries, led to the development of personality and the cult of the hero.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw05",
+     "quote": "The shadow becomes fatal when there is too little vitality or too little consciousness in the hero for him to complete his heroic task.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

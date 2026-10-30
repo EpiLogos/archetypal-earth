@@ -4,11 +4,13 @@
   "great-mother": {
    "archetype": "great-mother",
    "line": "Jung drew a line between the Great Mother, a figure of comparative religion, and the mother archetype behind it. Neumann, his student, gave the archetype its fullest single study. This page holds both, then the images, the instances and the dreams the field has for it.",
+   "voice": "atlas",
    "sections": [
     {
      "id": "as-such",
      "title": "The archetype and the image",
      "line": "Jung keeps the Great Mother, the goddess of the religions, apart from the mother archetype it comes from. The archetype itself is never seen; only its images are.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "The concept itself is of no immediate concern to psychology, because the image of a Great Mother in this form is rarely encountered in practice, and then only under very special conditions.",
@@ -41,6 +43,7 @@
      "id": "two-faces",
      "title": "The two faces",
      "line": "Every account of her holds both a giving and a devouring side, and refuses to split them into two figures.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "The mother then appears on the one hand as the supreme goal, and on the other as the most frightful danger—the “Terrible Mother.”",
@@ -73,6 +76,7 @@
      "id": "structure",
      "title": "Her structure",
      "line": "Neumann reads two characters in the Feminine: one that holds and keeps, one that changes. Her central symbol is the vessel.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "The elementary character of the Feminine becomes evident wherever the ego and consciousness are still small and undeveloped and the unconscious is dominant.",
@@ -109,6 +113,7 @@
      "id": "stage",
      "title": "Where she stands in the growth of consciousness",
      "line": "In Origins, Neumann puts the Great Mother at the start of a sequence: the ego held in the unconscious, then slowly freed from it, until the hero. Jung wrote the book's foreword.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "Goethe, WestöstUcher Diwan The mythological stages in the evolution of consciousness begin with the stage when the ego is contained in the unconscious, and lead up to a situation in which the ego not only becomes aware of its own position and defends it heroically,!",
@@ -12013,11 +12018,13 @@
   "self": {
    "archetype": "self",
    "line": "The self in Jung's texts: centre and circumference (CW12 ¶310), the archetype of order par excellence (CW10 ¶805), and the self's symbols in the monad, the dyad, the quaternity and the quinta essentia.",
+   "voice": "atlas",
    "sections": [
     {
      "id": "centre-and-circumference",
      "title": "The centre and the circumference",
      "line": "CW12 ¶310 (Psychology and Alchemy, 1944) with the dreamer's world-clock vision of ¶307; CW9ii ¶343 and Plotinus on the soul's circumambulation of a centre.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "The self is by definition the centre and the circumference of the conscious and unconscious systems.",
@@ -12069,6 +12076,7 @@
      "id": "archetype-of-order",
      "title": "The self is the archetype of order par excellence",
      "line": "Flying Saucers (CW10 ¶803–805, 1958): the pattern of order compared to a viewfinder, the rotundum or mandala as a symbol of the self, and whole numbers as archetypes of order.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "The archetype thereby constellated represents a pattern of order which, like a psychological “viewfinder” marked with a cross or a circle divided into four, is superimposed on the psychic chaos so that each content falls into place and the weltering confusion is held together by the protective circle.",
@@ -12109,6 +12117,7 @@
      "id": "the-monad",
      "title": "The Monad of Monoïmos",
      "line": "Aion (CW9ii ¶340–341, 1951): Hippolytus's report of the single Monad of Monoïmos, and Jung's comment that it describes the psychological nature of the self.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things",
@@ -12134,6 +12143,7 @@
      "id": "the-dyad",
      "title": "The dyad",
      "line": "Aion (CW9ii ¶426, 1951): the self as a union of conscious and unconscious; Flying Saucers (CW10 ¶806, 1958): the complexio oppositorum of Cusanus beside the dyad.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "Psychologically the self is a union of conscious (masculine) and unconscious (feminine). It stands for the psychic totality.",
@@ -12159,6 +12169,7 @@
      "id": "the-quaternity",
      "title": "The quaternity",
      "line": "Aion (CW9ii ¶426, ¶381, pdf p236) on the mandala, the quaternity and the stone derived from the circle and quaternity motif; CW9i pdf p424 (1955) on the archetype of wholeness and the quaternity of the One.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "Empirically, however, the self appears spontaneously in the shape of specific symbols, and its totality is discernible above all in the mandala and its countless variants.",
@@ -12211,6 +12222,7 @@
      "id": "the-fifth",
      "title": "The fifth",
      "line": "Aion (CW9ii ¶345, the egg footnote), Flying Saucers (CW10 ¶738) and CW9i (pdf p382): the punctum solis apart from the four, the quinta essentia as the circle divided into four with the centre, and a patient's pentadic mandala.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "\"In the egg therefore are four things: earth, water, aiT, and fire; but the 'punctum solis' is apart from these four, in the midst of the yolk (which) is the chick.",
@@ -12263,6 +12275,7 @@
      "id": "the-return",
      "title": "Six, in von Franz",
      "line": "Number and Time (pdf p49): von Franz on six as the first numeral of the series to represent the sum of its divisors; Jung on the hexad is on the page for the number six.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "For instance, it 15 immediately evident to us that six is the first numeral of the series to represent the sum of its divisors (one, two, and three).",
@@ -12280,6 +12293,7 @@
      "id": "the-numbers",
      "title": "The numbers themselves",
      "line": "CW8 ¶870 (the synchronicity essay, 1952): Jung defines number psychologically as an archetype of order which has become conscious; the six number archetypes of this site are linked below.",
+     "voice": "atlas",
      "quotes": [
       {
        "text": "Hence it is not such an audacious conclusion after all if we define number psychologically as an archetype of order which has become conscious.",

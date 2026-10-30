@@ -14,6 +14,8 @@ import { citeQuotes, workTitles } from './lib/quotes.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TYPES = ['family', 'archetype', 'theoretic'];
+/** The voice of a page's own lines (its reading line and each section's line): the atlas's framing, never a quotation. */
+const ATLAS = 'atlas';
 
 /** Quotations the cite rail can read: a work and a string. Anything else is named and left out, never guessed at. */
 function wellFormed(quotes, where, errors) {
@@ -70,13 +72,13 @@ export function buildFieldPages({ root = ROOT, vault = DEFAULT_VAULT, curation =
       if (sectionIds.has(s.id)) { errors.push(`${key}: a second section ${s.id}`); continue; }
       sectionIds.add(s.id);
       const quotes = citeQuotes(load, titles, wellFormed(s.quotes, `${key}.${s.id}`, errors), `${key}.${s.id}`, errors, warnings);
-      sections.push({ id: s.id, title: s.title, line: s.line, quotes });
+      sections.push({ id: s.id, title: s.title, line: s.line, voice: ATLAS, quotes });
     }
     const subjects = cur.subjects ?? [];
     for (const l of subjects) {
       if (!nodes[l.type]?.has(l.id)) errors.push(`${key}: no ${l.type} ${l.id} in the field`);
     }
-    pages[key] = { type: cur.type, id: cur.id, line: cur.line, sections, subjects };
+    pages[key] = { type: cur.type, id: cur.id, line: cur.line, voice: ATLAS, sections, subjects };
   }
 
   // the join cites: placed and published by join id. A join id the field does not carry is named as a warning (the ingest

@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "wise-old-man",
+ "line": "Jung's statements on the wise old man: the old man of the fairytale, his ambiguity, and the archetype of meaning he stands for.",
+ "sections": [
+  {
+   "id": "the-old-man",
+   "title": "The old man of the fairytale",
+   "line": "CW9i ¶398–419: what the old man does in the story, and what he is.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "In certain primitive fairytales, the illuminating quality of our archetype is expressed by the fact that the old man is identified with the sun.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "In the same way, the archetype of the wise old man is quite tiny, almost imperceptible, and yet it possesses a fateful potency, as anyone can see when he gets down to fundamentals.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Characteristically enough, the animal ridden by the old man in our fairytale is a goat, a sign that he himself has a dark side.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "ambiguity",
+   "title": "Ambiguity and meaning",
+   "line": "CW9i ¶403 and ¶720: the old man's dark side, and the archetype of meaning.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "In these circumstances, whenever the \"simple\" and \"kindly\" old man appears, it is advisable for heuristic and other reasons to scrutinize the context with some care.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The old man corresponds to the archetype of meaning, or of the spirit, and the dark chthonic figure to the opposite of the Wise Old Man, namely the magical (and sometimes destructive) Luciferian element.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

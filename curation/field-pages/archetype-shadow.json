@@ -1,0 +1,62 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "shadow",
+ "line": "Jung's statements on the shadow: the name, the narrow door it is, and how it reaches beyond the personal.",
+ "sections": [
+  {
+   "id": "the-first-figure",
+   "title": "The first figure met",
+   "line": "CW9i ¶13–19 and ¶43 (the personal shadow) and CW9ii ¶14–15: the shadow as the nearest figure and a living part of the personality.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "I have, I think, found a suitable designation for this character-component when I called it the shadow.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "But since the shadow is the figure nearest his consciousness and the least explosive one, it is also the first component of personality to come up in an analysis of the unconscious.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The shadow is a living part of the personality and therefore wants to live with it in some form.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The shadow is a tight passage, a narrow door, whose painful constriction no one is spared who goes down to the deep well.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "beyond-the-personal",
+   "title": "Beyond the personal",
+   "line": "CW9i ¶472 and ¶571, and CW9ii ¶15 and ¶19: the collective shadow figure, and how far the shadow can be seen through.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "The trickster is a collective shadow figure, a summation of all the inferior traits of character in individuals.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "It is the colossal shadow thrown by man, of which our age had to have such a devastating experience.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "With a little self-criticism one can see through the shadow—so far as its nature is personal.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "What lay furthest away from waking consciousness and seemed unconscious assumes, as it were, a threatening shape, and the affective value increases the higher up the scale you go: ego-consciousness, shadow, anima, self.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

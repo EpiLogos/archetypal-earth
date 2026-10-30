@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "six",
+ "line": "Jung's statements on the six: the number of creation as the conjunction of two and three, the six-rayed mandala, and the six metals under Luna.",
+ "sections": [
+  {
+   "id": "the-six",
+   "title": "The six",
+   "line": "CW9i ¶ 649 and ¶ 664–665: the hexad as a coniunctio, and the mandala with six rays.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "According to old tradition the number 6 means creation and evolution, since it is a coniunctio of 2 and 3 (even and odd = female and male).",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The mandala is unusual on account of its six rays, six mountain peaks, six birds, three human figures.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The upper, bright sphere is in the act of descending into the hexad or triad and has already passed the rim of the wheel.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "the-six-metals",
+   "title": "The six metals",
+   "line": "CW14 ¶ 200: Luna as the six planets or spirits of the metals, with Sol the seventh.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Just as the anima represents and personifies the collective unconscious, so Luna represents the six planets or spirits of the metals.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "She is multi-natured, whereas Sol has an exceptional nature as the “seventh from the six spiritual metals.”",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

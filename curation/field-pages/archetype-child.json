@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "child",
+ "line": "Jung's statements on the child: the child god, the futurity of the motif, and the child as a picture of the preconscious psyche.",
+ "sections": [
+  {
+   "id": "the-motif",
+   "title": "The child motif",
+   "line": "CW9i ¶259–271: the child god, and what the motif represents.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "This archetype of the \"child god\" is extremely widespread and intimately bound up with all the other mythological aspects of the child motif.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "In folklore the child motif appears in the guise of the dwarf or the elf as personifications of the hidden forces of nature.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "I mention this instance only to demonstrate the enduring vitality of the child archetype.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "futurity",
+   "title": "Futurity",
+   "line": "CW9i ¶278–279: the child motif as an anticipation of what is to come, and its forms of wholeness.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "Hence the occurrence of the child motif in the psychology of the individual signifies as a rule an anticipation of future developments, even though at first sight it may seem like a retrospective configuration.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "One of the essential features of the child motif is its futurity.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

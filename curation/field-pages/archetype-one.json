@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "one",
+ "line": "Jung's statements on the one: the unity of the self, the unus mundus, and the one stone of the alchemists.",
+ "sections": [
+  {
+   "id": "unity-and-the-self",
+   "title": "Unity and the self",
+   "line": "CW9ii ¶73 and ¶232 and CW14 ¶ 767–769: the unity of the self as a complexio oppositorum, and the stone as its projection.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "The unity of the stone is the equivalent of individuation, by which man is made one; we would say that the stone is a projection of the unified self.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "This one tittle is the uncompounded, simple, unmixed Monad, having its composition from nothing whatsoever, yet composed of many forms, of many parts.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "unus-mundus",
+   "title": "The unus mundus",
+   "line": "CW14 ¶767–770 and ¶778: the one world beneath the empirical many, and the archetype of unity.",
+   "quotes": [
+    {
+     "work": "cw14",
+     "quote": "Undoubtedly the idea of the unus mundus is founded on the assumption that the multiplicity of the empirical world rests on an underlying unity, and that not two or more fundamentally different worlds exist side by side or are mingled with one another.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "This principle suggests that there is an inter-connection or unity of causally unrelated events, and thus postulates a unitary aspect of being which can very well be described as the unus mundus.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "For no one who is one himself needs oneness as a medicine—nor, we might add, does anyone who is unconscious of his dissociation, for a conscious situation of distress is needed in order to activate the archetype of unity.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "anima",
+ "line": "Jung's statements on the anima: the name, the figure in a man's dreams and projections, and why she cannot be integrated.",
+ "sections": [
+  {
+   "id": "the-name-and-the-figure",
+   "title": "The name and the figure",
+   "line": "CW9ii and CW9i: why Jung chose the word anima, and how the figure appears in a man.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "I have suggested instead the term \"anima,\" as indicating something specific, for which the expression \"soul\" is too general and too vague.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Much of the fear which the female sex arouses in men is due to the projection of the anima-image.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The anima lives beyond all categories, and can therefore dispense with blame as well as with praise.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Besides this ambivalence, the anima also has \"occult\" connections with \"mysteries,\" with the world of darkness in general, and for that reason she often has a religious tinge.",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "her-work",
+   "title": "Her work in the psyche",
+   "line": "CW9i and CW9ii: the anima as the master-piece after the shadow, as a connecting link, and as what stays unassimilated.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "Thus the anima is and remains the representative of that part of the unconscious which can never be assimilated into a humanly attainable whole.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "The recognition of the anima gives rise, in a man, to a triad, one third of which is transcendent: the masculine subject, the opposing feminine subject, and the transcendent anima.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "The star stands for the transcendent totality, the demon for the animus, who, like the anima, is the connecting link between conscious and unconscious.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09ii",
+     "quote": "The animus corresponds to the paternal Logos just as the anima corresponds to the maternal Eros.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}

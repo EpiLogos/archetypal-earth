@@ -1,0 +1,47 @@
+{
+ "version": 1,
+ "type": "archetype",
+ "id": "psychopomp",
+ "line": "Jung's statements on the psychopomp: the guide of souls, in Hermes of the alchemists, and as a function of the anima and animus.",
+ "sections": [
+  {
+   "id": "the-guide",
+   "title": "The guide",
+   "line": "CW9i ¶221 and ¶406 and CW9ii ¶33: Hermes as mystagogue, and the psychopomp in the unconscious.",
+   "quotes": [
+    {
+     "work": "cw09i",
+     "quote": "From the earliest times, Hermes was the mystagogue and psychopomp of the alchemists, their friend and counsellor, who leads them to the goal of their work.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "Unfortunately this is not so, for the anima can appear also as an angel of light, a psychopomp who points the way to the highest meaning, as we know from Faust.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw09i",
+     "quote": "This piece of psychology was expressed by the alchemists in their Mercurius duplex, who on the one hand is Hermes the mystagogue and psychopomp, and on the other hand is the poisonous dragon, the evil spirit and \"trickster.\"",
+     "voice": "Jung"
+    }
+   ]
+  },
+  {
+   "id": "mediator",
+   "title": "A mediator between conscious and unconscious",
+   "line": "CW9ii ¶33 and CW14 ¶ 701: the animus as psychopomp, and the feminine psychopomp of the alchemical vision.",
+   "quotes": [
+    {
+     "work": "cw09ii",
+     "quote": "Thus the animus is a psychopomp, a mediator between the conscious and the unconscious and a personification of the latter.",
+     "voice": "Jung"
+    },
+    {
+     "work": "cw14",
+     "quote": "The mystery alluded to here is not only the encounter with the animal soul but, at the same time and in the same place, the meeting with the anima, a feminine psychopomp who showed him the way to Mercurius and also how to find the phoenix.",
+     "voice": "Jung"
+    }
+   ]
+  }
+ ]
+}
