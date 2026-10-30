@@ -17,7 +17,8 @@ export interface ShellHooks {
   onFilter(next: FieldFilter): void;
   /** how many occurrences a filter leaves, for the menu's count */
   countFor(f: FieldFilter): number;
-  works: { id: string; name: string }[];
+  /** the Sources a filter can slice by: a Work's id and name, and the other cite keys that fold to it */
+  works: { id: string; name: string; aliases?: string[] }[];
   cultures: { id: string; name: string }[];
   /** the field's archetypes and theoretics, for the filter's own dimensions */
   archetypes: { id: string; name: string }[];
@@ -203,12 +204,12 @@ export class Shell {
   private renderFilter() {
     const f = this.filter;
     const set = (next: FieldFilter) => this.hooks.onFilter(next);
-    const select = (label: string, options: { id: string; name: string }[], current: string[] | undefined, apply: (ids: string[]) => FieldFilter) =>
+    const select = (label: string, options: { id: string; name: string; aliases?: string[] }[], current: string[] | undefined, apply: (ids: string[]) => FieldFilter) =>
       el('label', { class: 'sf-field' }, [
         el('span', { class: 'sf-label', text: label }),
         (() => {
           const s = el('select', { onchange: (e: Event) => { const v = (e.target as HTMLSelectElement).value; set(apply(v ? [v] : [])); } }, [el('option', { value: '', text: 'Any' })]);
-          for (const o of options) s.append(el('option', { value: o.id, text: o.name, selected: current?.[0] === o.id }));
+          for (const o of options) s.append(el('option', { value: o.id, text: o.name, selected: !!current?.length && (current[0] === o.id || !!o.aliases?.includes(current[0])) }));
           return s;
         })(),
       ]);
@@ -240,7 +241,7 @@ export class Shell {
 
   private renderChips() {
     clear(this.chipRow);
-    const name = (list: { id: string; name: string }[]) => (id: string) => list.find((x) => x.id === id)?.name ?? id;
+    const name = (list: { id: string; name: string; aliases?: string[] }[]) => (id: string) => (list.find((x) => x.id === id) ?? list.find((x) => x.aliases?.includes(id)))?.name ?? id;
     const cs = chips(this.filter, { work: name(this.hooks.works), culture: name(this.hooks.cultures), archetype: name(this.hooks.archetypes), theoretic: name(this.hooks.theoretics) });
     this.chipRow.hidden = !cs.length;
     for (const c of cs) {

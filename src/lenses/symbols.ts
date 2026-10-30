@@ -20,7 +20,7 @@ export function mount(ctx: LensContext): LensInstance {
   let framing: PracticeData | null = null;
   void loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
   const voc = () => (vocab ??= vocabulary(m));
-  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i]);
+  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i], m.workKey);
 
   const act: AmplifyActions = {
     openOccurrence: (id) => ctx.openOccurrence(id),
@@ -67,6 +67,7 @@ export function mount(ctx: LensContext): LensInstance {
   const family = (id: string) => {
     const a = amplify(m, id, ok);
     if (!a) { home(); return; }
+    ctx.engage('symbol', { type: 'family', id });
     ctx.setContext(a.family.name);
     tuneGlobe(ctx, a.instances, id, 'this symbol');
     show([
@@ -76,6 +77,7 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   const deep = (id: string) => {
+    ctx.engage('symbol', { type: 'archetype', id });
     ctx.setContext(m.archById.get(id)!.name);
     tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok), undefined, 'this archetype');
     loadLensData<DepthData>('depth').then((d) => {
@@ -103,6 +105,7 @@ export function mount(ctx: LensContext): LensInstance {
   const plainArchetype = (id: string) => {
     const arch = m.archById.get(id);
     if (!arch) { home(); return; }
+    ctx.engage('symbol', { type: 'archetype', id });
     ctx.setContext(arch.name);
     tuneGlobe(ctx, (m.archOcc.get(id) ?? []).filter(ok), undefined, 'this archetype');
     const nodes: (HTMLElement | null)[] = [

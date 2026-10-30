@@ -42,6 +42,10 @@ import type { RedBook } from '../types/redbook';
 import type { RedBookView } from '../redbook/view';
 import type { DynamicsView } from '../dynamics/view';
 import { PassageSheet } from '../ui/passage';
+import { YouSheet } from '../ui/you';
+import { practice } from '../practice/store';
+import type { EngagementKind } from '../practice/store';
+import type { PersonalData } from '../graph/build';
 import { loadSky } from '../sky/load';
 import { SkyEphemeris } from '../sky/ephemeris';
 import { SkyLive, formatMoment } from '../sky/live';
@@ -96,6 +100,12 @@ export class Controller {
   private label: FocusLabel;
   private reveal: Reveal;
   private deep: DeepSheet;
+  /** the visitor's own page (the 'you' node of the graph opens it) */
+  private you: YouSheet;
+  /** the reading last noted in the engagement log, so a re-sync of the same reading is noted once */
+  private engagedKey = '';
+  /** the subjects each walk visits, for the visitor's node: built on first use */
+  private walkSubjectsCache: Map<string, { type: string; id: string }[]> | null = null;
   private strip: Strip;
   private hover: HoverLabel;
   private timeControl: TimeControl;
@@ -205,6 +215,13 @@ export class Controller {
       onCite: openCite,
       passage: passages,
     });
+    this.you = new YouSheet(root, m, practice, {
+      onClose: () => this.you.hide(),
+      onLens: (id) => { this.you.hide(); this.navigate(inLens(id, [])); },
+      onSubject: (s) => { this.you.hide(); if (s.type === 'occurrence') this.openOccurrenceId(s.id); else this.navigate(focusOn(withMode(this.state, false), s as Subject)); },
+    });
+    // the visitor's node follows the practice store: a dream written, a chart saved, a line forgotten
+    practice.onChange(() => this.syncPersonal());
     this.strip = new Strip(root, m, {
       onSelect: (i) => this.tourJump(i),
       onOpen: (i) => this.tour && this.openOccurrence(this.tour.steps[i].occ),
@@ -220,14 +237,18 @@ export class Controller {
     });
 
     // the shell: one title, one menu, the filter, the corners. Every lens fills its chrome through it.
-    const workNames = new Map<string, string>();
-    for (const o of m.occ) for (const c of o.jung) if (!workNames.has(c.work)) workNames.set(c.work, c.workTitle);
+    // the Sources are the registry's Works: a cite key that is an alias folds into its Work, so one text is one option
+    const workNames = new Map<string, { name: string; aliases: string[] }>();
+    for (const o of m.occ) for (const c of o.jung) {
+      const id = m.workKey.get(c.work) ?? c.work;
+      if (!workNames.has(id)) workNames.set(id, { name: m.workById.get(id)?.title ?? c.workTitle, aliases: m.workById.get(id)?.aliases ?? [] });
+    }
     this.shell = new Shell(document.body, {
       onLens: (id) => this.openLens(id),
       onSearch: (anchor) => this.search.open(anchor),
       onFilter: (f) => this.setFilter(f),
-      countFor: (f) => m.occ.reduce((n, o, i) => n + (passes(o, f, m.tags[i]) ? 1 : 0), 0),
-      works: [...workNames].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)),
+      countFor: (f) => m.occ.reduce((n, o, i) => n + (passes(o, f, m.tags[i], m.workKey) ? 1 : 0), 0),
+      works: [...workNames].map(([id, w]) => ({ id, name: w.name, aliases: w.aliases })).sort((a, b) => a.name.localeCompare(b.name)),
       cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
       archetypes: m.field.archetypes.map((a) => ({ id: a.id, name: a.name })).sort((a, b) => a.name.localeCompare(b.name)),
       theoretics: m.field.theoretics.map((t) => ({ id: t.id, name: t.name })).sort((a, b) => a.name.localeCompare(b.name)),
@@ -392,6 +413,8 @@ export class Controller {
       hasFamily: (id: string) => m.famById.has(id),
       hasCulture: (id: string) => m.cultureById.has(id),
       hasPlace: (id: string) => m.places.has(id),
+      hasWork: (id: string) => m.workById.has(id),
+      hasPerson: (id: string) => m.personById.has(id),
       familyOf: (id: string) => {
         const i = m.occIndex.get(id);
         return i === undefined ? undefined : m.occ[i].familyId;
@@ -448,8 +471,10 @@ export class Controller {
         onSelect: (key) => this.onGraphSelect(key),
         onEarth: (key) => this.onGraphEarth(key),
         loadSky: () => this.skyAnchors(),
+        walkSubjects: () => this.walkSubjects(),
       }, this.engine.reduced);
       this.root.before(this.graph.root);
+      this.syncPersonal();
     })));
     if (next.history && !this.aion && this.history) jobs.push(this.ensure('aion', () => import('../aion/view').then(({ AionView }) => {
       this.aion = new AionView(this.root, this.m, this.engine, this.time, this.history!, (state) => this.navigate(state), this.passages, (occId) => this.openReading(occId), this.chrome);
@@ -518,6 +543,10 @@ export class Controller {
   }
 
   stepBack() {
+    if (this.you.isOpen) {
+      this.you.hide();
+      return;
+    }
     if (this.passage.isOpen) {
       this.passage.hide();
       return;
@@ -536,6 +565,7 @@ export class Controller {
 
   /** Leave the open reading (and any passage over it) for where it began. */
   private closeReading() {
+    if (this.you.isOpen) { this.you.hide(); return; }
     if (this.passage.isOpen) this.passage.hide();
     if (this.state.deep) this.navigate(back(this.state));
   }
@@ -958,7 +988,7 @@ export class Controller {
 
   private applyFilter(f: FieldFilter) {
     this.filter = f;
-    this.filterMask = maskOf(this.m.occ, f, this.m.tags);
+    this.filterMask = maskOf(this.m.occ, f, this.m.tags, this.m.workKey);
     this.engine.setFilterMask(this.filterMask);
     this.shell.setFilter(f);
     this.setCache.key = '';
@@ -1004,6 +1034,7 @@ export class Controller {
       skyStatus: () => this.skyView.statusLine(),
       skyBody: () => this.state.sky?.body ?? null,
       localSheet: (on) => { if (this.activeLens === id) this.localSheetOpen = on; },
+      engage: (kind, subject) => this.engage(kind, subject),
     };
   }
 
@@ -1167,6 +1198,8 @@ export class Controller {
   private applyState(next: AppState) {
     const prev = this.state;
     const first = !this.started;
+    // the visitor's page is over the state, not in it: any new state takes it down
+    this.you.hide();
     // a new state replaces any deferred landing chrome unless enter* re-queues it for a sky descent
     this.pendingLanding = null;
     this.readingAwaitsLanding = false;
@@ -1890,7 +1923,7 @@ export class Controller {
     let selected: string | null = null;
     let emphasis: number[] | null = null;
     // every node of the graph is a subject it can hold: a theoretic is focused as an archetype or a form is
-    const keyOf = (sub: Subject): string | null => (sub.type === 'archetype' ? `a:${sub.id}` : sub.type === 'family' ? `f:${sub.id}` : sub.type === 'theoretic' ? `t:${sub.id}` : null);
+    const keyOf = (sub: Subject): string | null => (sub.type === 'archetype' ? `a:${sub.id}` : sub.type === 'family' ? `f:${sub.id}` : sub.type === 'theoretic' ? `t:${sub.id}` : sub.type === 'work' ? `w:${sub.id}` : sub.type === 'person' ? `p:${sub.id}` : null);
     if (v.kind === 'focus') {
       subject = keyOf(v.subject);
       if (!subject) emphasis = subjectOccurrences(m, v.subject);
@@ -1926,16 +1959,65 @@ export class Controller {
   }
 
   private splitKey(key: string): { t: string; id: string } {
+    // the visitor's node is the one key without a colon
     const i = key.indexOf(':');
-    return { t: key.slice(0, i), id: key.slice(i + 1) };
+    return i < 0 ? { t: key, id: '' } : { t: key.slice(0, i), id: key.slice(i + 1) };
   }
+
+  /** What the graph is told of the visitor: the records of the practice store, read now. Counts and text matched against names; none of it is kept by the graph. */
+  private personalData(): PersonalData {
+    return {
+      dreams: practice.list<{ id: string; createdAt: string; updatedAt: string; text?: string }>('dreams'),
+      coincidences: practice.list<{ id: string; createdAt: string; updatedAt: string; familyId?: string | null; symbol?: string }>('coincidences'),
+      charts: practice.list('charts'),
+      engagements: practice.engagements(),
+    };
+  }
+
+  /** Hand the graph the visitor's record again (once the graph exists, and whenever the store changes). */
+  private syncPersonal() {
+    this.graph?.setPersonal(this.personalData());
+  }
+
+  /** Each walk's subjects, for the visitor's node: a walk finished ties You to where it went. */
+  private walkSubjects(): ReadonlyMap<string, readonly { type: string; id: string }[]> {
+    if (this.walkSubjectsCache) return this.walkSubjectsCache;
+    const out = new Map<string, { type: string; id: string }[]>();
+    for (const [id, w] of this.m.walkById) {
+      const seen = new Set<string>();
+      const list: { type: string; id: string }[] = [];
+      for (const st of w.stops) {
+        for (const sub of [st.subject && st.subject.type === 'occurrence' ? { type: 'occurrence', id: st.subject.id } : null, st.page ? { type: 'work', id: st.page.work } : null]) {
+          if (!sub) continue;
+          const key = `${sub.type}:${sub.id}`;
+          if (!seen.has(key)) { seen.add(key); list.push(sub); }
+        }
+      }
+      out.set(id, list);
+    }
+    return (this.walkSubjectsCache = out);
+  }
+
+  /** Note that the visitor did something to a subject; the store drops it when recording is off. */
+  private engage(kind: EngagementKind, subject: { type: string; id: string }) {
+    // a lens that re-enters the page it is on (a re-render, a route sync) notes it once
+    const key = `${kind}:${subject.type}:${subject.id}`;
+    const now = Date.now();
+    if (key === this.lastEngaged.key && now - this.lastEngaged.at < 3000) return;
+    this.lastEngaged = { key, at: now };
+    practice.engage(kind, subject);
+  }
+  private lastEngaged = { key: '', at: 0 };
 
   private onGraphSelect(key: string) {
     const { t, id } = this.splitKey(key);
     if (t === 'b') return this.onGraphBody(id as BodyKey);
+    if (t === 'you') { this.you.show(); return; }
     if (t === 'a') this.navigate(focusOn(this.state, { type: 'archetype', id }));
     else if (t === 't') this.navigate(focusOn(this.state, { type: 'theoretic', id }));
     else if (t === 'f') this.navigate(focusOn(this.state, { type: 'family', id }));
+    else if (t === 'w') this.navigate(focusOn(this.state, { type: 'work', id }));
+    else if (t === 'p') this.navigate(focusOn(this.state, { type: 'person', id }));
     else this.openOccurrenceId(id);
   }
 
@@ -1950,6 +2032,10 @@ export class Controller {
     if (key) {
       const { t, id } = this.splitKey(key);
       if (t === 'b') return this.onGraphBody(id as BodyKey);
+      // the visitor has no place on the Earth: their page opens where they are
+      if (t === 'you') { this.you.show(); return; }
+      if (t === 'w') return this.navigate(focusOn(earth, { type: 'work', id }));
+      if (t === 'p') return this.navigate(focusOn(earth, { type: 'person', id }));
       if (t === 'a') return this.navigate(focusOn(earth, { type: 'archetype', id }));
       if (t === 't') return this.navigate(focusOn(earth, { type: 'theoretic', id }));
       if (t === 'f') return this.navigate(focusOn(earth, { type: 'family', id }));
@@ -1983,8 +2069,17 @@ export class Controller {
       this.syncShift();
     }
     document.body.classList.toggle('deep-open', open);
-    if (open) this.deep.show(this.deepTarget(s.view));
-    else this.deep.hide();
+    if (open) {
+      const target = this.deepTarget(s.view);
+      this.deep.show(target);
+      // opening a reading is noted once for the visitor's node, not again when the same reading is only re-synced
+      const subject = target.kind === 'subject' ? target.subject : { type: 'occurrence', id: target.occId };
+      const key = `${subject.type}:${subject.id}`;
+      if (key !== this.engagedKey) { this.engagedKey = key; this.engage('open', subject); }
+    } else {
+      this.engagedKey = '';
+      this.deep.hide();
+    }
   }
 
   private deepTarget(v: View): DeepTarget {

@@ -260,6 +260,7 @@ export function mount(ctx: LensContext): LensInstance {
       if (problems.length) return;
       prefill = null;
       saveLocalChart(name.value.trim() || 'You', birth);
+      ctx.engage('chart', { type: 'chart', id: YOU });
       editing = false;
       refreshCharts();
       ctx.refreshNatal();

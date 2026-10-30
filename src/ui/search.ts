@@ -1,7 +1,20 @@
 // ⌘K / "/" : a centred minimal field over a dimmed globe. Choosing a result
 // closes the field and moves the globe — it never opens a page.
 import { search, type SearchIndex, type SearchResult } from '../data/search';
+import type { ImageRef } from '../types/field';
 import { clear, el, plate } from './dom';
+
+/**
+ * The picture a result stands on: its own, or for a person the portrait file their record holds (a portrait that is an id in
+ * the image registers is not resolved here and the result keeps its tonal chip). Never invented: no portrait, no picture.
+ */
+export function resultImage(index: SearchIndex, r: SearchResult): ImageRef | undefined {
+  if (r.image) return r.image;
+  if (r.kind !== 'person' || r.action.type !== 'subject') return undefined;
+  const p = index.model.personById.get(r.action.subject.id)?.portrait;
+  if (!p || typeof p === 'string') return undefined;
+  return { src: p.src, thumb: p.src, width: p.width ?? 0, height: p.height ?? 0, title: p.title, credit: p.credit, license: p.license, sourceUrl: p.sourceUrl };
+}
 
 export class SearchUI {
   readonly root: HTMLElement;
@@ -15,7 +28,7 @@ export class SearchUI {
   constructor(parent: HTMLElement, private index: SearchIndex, private onChoose: (r: SearchResult) => void, private onToggle: (open: boolean) => void) {
     this.input = el('input', {
       class: 's-input', type: 'text', placeholder: 'Search the field', autocomplete: 'off', spellcheck: 'false',
-      role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 's-list', 'aria-autocomplete': 'list', 'aria-label': 'Search archetypes, forms, places, cultures, periods',
+      role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 's-list', 'aria-autocomplete': 'list', 'aria-label': 'Search archetypes, forms, texts, people, places, cultures, periods',
     }) as HTMLInputElement;
     this.list = el('ul', { class: 's-list', id: 's-list', role: 'listbox' });
     const box = el('div', { class: 's-box', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Search' }, [
@@ -73,8 +86,8 @@ export class SearchUI {
       return;
     }
     this.results.forEach((r, i) => {
-      const chip = plate(r.image, { thumb: true, className: 's-chip', palette: r.tone ? { core: r.tone, glow: r.tone, fog: '#0d1330', deep: '#02030a' } : undefined });
-      if (!r.image) {
+      const chip = plate(resultImage(this.index, r), { thumb: true, className: 's-chip', palette: r.tone ? { core: r.tone, glow: r.tone, fog: '#0d1330', deep: '#02030a' } : undefined });
+      if (!resultImage(this.index, r)) {
         chip.classList.add(`kind-${r.kind}`);
       }
       const li = el('li', { class: 's-row' + (i === this.active ? ' active' : ''), role: 'option', id: `s-opt-${i}`, 'aria-selected': i === this.active ? 'true' : 'false' }, [

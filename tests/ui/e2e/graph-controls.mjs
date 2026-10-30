@@ -502,7 +502,7 @@ async function timeLayout(browser) {
     const s = L.strength();
     let worst = 0;
     const links = L.links();
-    for (const l of links) worst = Math.max(worst, Math.abs(s(l) - F.linkStrength(l.e, g.nodes[l.e.t].g.prime, g.forces)));
+    for (const l of links) worst = Math.max(worst, Math.abs(s(l) - F.linkStrength(l.e, g.nodes[l.e.t].g.prime, g.forces, g.nodes[l.e.t].g.kind)));
     return { liveOn: g.stats.liveOn, worst, n: links.length };
   });
   const allTime = await parity();

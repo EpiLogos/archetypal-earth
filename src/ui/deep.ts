@@ -217,7 +217,7 @@ export class DeepSheet {
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
     } else {
       const idx = subjectOccurrences(m, s);
-      const name = s.type === 'culture' ? m.cultureById.get(s.id)?.name : m.places.get(s.id)?.name;
+      const name = s.type === 'culture' ? m.cultureById.get(s.id)?.name : s.type === 'work' || s.type === 'person' ? subjectName(m, s) : m.places.get(s.id)?.name;
       a.append(el('h2', { class: 'dp-title', text: name ?? s.id }));
       this.appendOccurrenceList(idx);
       this.appendCites(idx.map((i) => m.occ[i]));

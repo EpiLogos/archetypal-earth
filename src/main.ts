@@ -18,6 +18,25 @@ import { GlobeEngine } from './globe/engine';
 import { prefersReducedMotion } from './ui/dom';
 import { TimeModel } from './state/timeModel';
 import { setProviderLabels } from './data/labels';
+import type { WorksData } from './types/works';
+import type { PeopleData } from './types/people';
+import type { WalksData } from './types/walks';
+
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
+
+/** A published data file the field can do without: absent or malformed, it is reported and the field draws as it did before it. */
+async function optional<T>(name: string, ok: (d: T) => boolean): Promise<T | undefined> {
+  try {
+    const res = await fetch(`${BASE}/data/${name}`);
+    if (!res.ok || res.headers.get('content-type')?.includes('text/html')) throw new Error(`HTTP ${res.status}`);
+    const data = (await res.json()) as T;
+    if (!ok(data)) throw new Error('unexpected shape');
+    return data;
+  } catch (error) {
+    console.warn(`${name} unavailable:`, error);
+    return undefined;
+  }
+}
 
 function setPaletteVars(p: RGBPalette) {
   const s = document.documentElement.style;
@@ -39,13 +58,16 @@ async function boot() {
     const { field } = await loadField();
     // the provider names its corpus in its own words (C2-b8): bound before anything is drawn
     setProviderLabels(field.meta.provider?.labels);
-    const [history, symbols, corpus, redbook] = await Promise.all([
+    const [history, symbols, corpus, redbook, works, people, walks] = await Promise.all([
       loadHistory().catch(error => { console.warn(error); return undefined; }),
       loadSymbols().catch(error => { console.warn(error); return undefined; }),
       loadCorpusIndex(),
       loadRedbook(),
+      optional<WorksData>('works.json', (d) => Array.isArray(d?.works)),
+      optional<PeopleData>('people.json', (d) => Array.isArray(d?.people)),
+      optional<WalksData>('walks.json', (d) => Array.isArray(d?.walks)),
     ]);
-    const model = buildModel(field, history ? historyExtent(history) : undefined, symbols);
+    const model = buildModel(field, history ? historyExtent(history) : undefined, symbols, { works, people, walks });
     const time = new TimeModel();
     let ctl: Controller | null = null;
     const engine = new GlobeEngine(

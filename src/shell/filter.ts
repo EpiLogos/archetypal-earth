@@ -25,13 +25,21 @@ export function isEmpty(f: FieldFilter): boolean {
   return !f.works?.length && !f.cultures?.length && !f.era && !f.kinds?.length && !f.archetypes?.length && !f.theoretics?.length;
 }
 
+/** Cite key (a Work's id or any alias) to the Work's id: `Model.workKey`. Absent, a key stands for itself. */
+export type WorkFolds = ReadonlyMap<string, string>;
+
 /**
  * Does the occurrence pass the filter? Every set dimension must hold; within a dimension any value may. The
  * archetype and theoretic dimensions test what governs the occurrence (its family's ties, `Model.tags`): without
  * those tags the question is unanswerable, so a filter naming them passes nothing — never everything.
  */
-export function passes(o: Occurrence, f: FieldFilter, tags?: OccurrenceTags): boolean {
-  if (f.works?.length && !o.jung.some((c) => f.works!.includes(c.work))) return false;
+export function passes(o: Occurrence, f: FieldFilter, tags?: OccurrenceTags, folds?: WorkFolds): boolean {
+  if (f.works?.length) {
+    // a cite keeps its key and the registry folds the aliases: `?w=redbook` and `?w=liber-novus` slice the same text
+    const fold = (k: string) => folds?.get(k) ?? k;
+    const wanted = new Set(f.works.map(fold));
+    if (!o.jung.some((c) => wanted.has(fold(c.work)))) return false;
+  }
   if (f.cultures?.length && !o.cultureIds.some((c) => f.cultures!.includes(c))) return false;
   if (f.era && (o.year < f.era[0] || o.year > f.era[1])) return false;
   if (f.kinds?.length && !f.kinds.includes(o.locusType)) return false;
@@ -44,10 +52,10 @@ export function passes(o: Occurrence, f: FieldFilter, tags?: OccurrenceTags): bo
  * 1 for every occurrence that passes, 0 for the rest; null when nothing is filtered (the engine then draws all).
  * `tags` is the model's per-occurrence governance (Model.tags), index-aligned with `occ`.
  */
-export function maskOf(occ: readonly Occurrence[], f: FieldFilter, tags?: readonly OccurrenceTags[]): Float32Array | null {
+export function maskOf(occ: readonly Occurrence[], f: FieldFilter, tags?: readonly OccurrenceTags[], folds?: WorkFolds): Float32Array | null {
   if (isEmpty(f)) return null;
   const mask = new Float32Array(occ.length);
-  for (let i = 0; i < occ.length; i++) mask[i] = passes(occ[i], f, tags?.[i]) ? 1 : 0;
+  for (let i = 0; i < occ.length; i++) mask[i] = passes(occ[i], f, tags?.[i], folds) ? 1 : 0;
   return mask;
 }
 

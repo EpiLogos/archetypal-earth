@@ -33,7 +33,7 @@ export function mount(ctx: LensContext): LensInstance {
   let vocab: Vocabulary | null = null;
   let framing: PracticeData | null = null;
   const voc = () => (vocab ??= vocabulary(m));
-  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i]);
+  const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i], m.workKey);
   const ready = loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
 
   const show = (label: string, nodes: (HTMLElement | null)[]) => {
@@ -92,6 +92,7 @@ export function mount(ctx: LensContext): LensInstance {
       e.preventDefault();
       if (!text.value.trim()) { text.focus(); return; }
       const stored = practice.put<DreamEntry>('dreams', { ...(d ?? {}), date: date.value || today(), title: title.value.trim(), text: text.value.trim(), context: context.value.trim(), answer: d?.answer ?? '' });
+      ctx.engage('dream', { type: 'dream', id: stored.id });
       ctx.setPath([stored.id]);
     };
     show('Record a dream', [

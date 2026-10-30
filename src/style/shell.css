@@ -491,3 +491,16 @@ body.landing-on .time { opacity: 0.35; }
 .dp-egg-figure { display: grid; place-items: center; margin: 2px 0 10px; }
 .ql-stages { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 2px 0 8px; align-items: baseline; }
 .ql-stage { padding: 4px 9px; border: 1px solid var(--hair); border-radius: 999px; font: 500 11.5px var(--sans); color: var(--ink-2); letter-spacing: 0.02em; }
+
+/* ── the visitor's own page (src/ui/you.ts): what is kept here, and the plain list of what has been recorded ── */
+.you-kept, .you-log { margin: 0; padding: 0; list-style: none; }
+.you-kept li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--hair); font: 400 1.04rem/1.4 var(--serif); }
+.you-n { font: 12px var(--sans); color: var(--ink-3); font-feature-settings: 'tnum'; }
+.you-note { margin: 0 0 12px; font: 400 12.5px/1.55 var(--sans); color: var(--ink-3); max-width: 34rem; }
+.you-acts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 16px; }
+.you-log li { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr) 32px; align-items: baseline; gap: 10px; padding: 3px 0; font: 400 1.02rem/1.4 var(--serif); }
+.you-verb { font: 11.5px var(--sans); letter-spacing: 0.02em; color: var(--ink-3); }
+.you-log .link-quiet { justify-self: start; text-align: left; }
+.you-forget { justify-self: end; width: 32px; height: 28px; font: 16px/1 var(--sans); color: var(--ink-3); border-radius: 6px; transition: color 0.3s; }
+.you-forget:hover { color: var(--ink); }
+@media (max-width: 760px) { .you-log li { grid-template-columns: 5.4rem minmax(0, 1fr) 36px; } }

@@ -143,6 +143,7 @@ export function mount(ctx: LensContext): LensInstance {
       e.preventDefault();
       if (!inner.value.trim() || !outer.value.trim()) { (inner.value.trim() ? outer : inner).focus(); return; }
       const stored = practice.put<Coincidence>('coincidences', { ...(c ?? {}), date: date.value || today(), inner: inner.value.trim(), outer: outer.value.trim(), symbol: symbol.value.trim(), familyId, note: note.value.trim() });
+      ctx.engage('coincidence', { type: 'coincidence', id: stored.id });
       ctx.setPath([stored.id]);
     };
     show([

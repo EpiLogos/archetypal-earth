@@ -71,6 +71,12 @@ export interface LensContext {
    * with its rings, where a walk step's dismissal steps onto the whole sky. Off again with the next walk step.
    */
   localSheet(on: boolean): void;
+  /**
+   * Note that the visitor did something to a subject (a dream written, a symbol looked up, a chart cast): one line in the
+   * engagement log of the practice store, which is how the visitor's node in the field grows from use. The store drops it
+   * when the visitor has turned recording off. Nothing but the kind and the subject's id is kept.
+   */
+  engage(kind: import('../practice/store').EngagementKind, subject: { type: string; id: string }): void;
 }
 
 export interface LensInstance {

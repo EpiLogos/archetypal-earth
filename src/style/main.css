@@ -368,7 +368,8 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
 .s-row { display: grid; grid-template-columns: 32px 1fr auto; gap: 14px; align-items: center; padding: 8px 10px; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
 .s-row.active { background: rgb(var(--glow-rgb) / 0.16); }
 .s-chip { width: 32px; height: 32px; border-radius: 6px; }
-.s-chip.kind-period, .s-chip.kind-culture, .s-chip.kind-place { border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgb(var(--core-rgb) / 0.35), rgb(var(--fog-rgb))); }
+.s-chip.kind-period, .s-chip.kind-culture, .s-chip.kind-place, .s-chip.kind-person { border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgb(var(--core-rgb) / 0.35), rgb(var(--fog-rgb))); }
+.s-chip.kind-work { border-radius: 3px 6px 6px 3px; box-shadow: inset 4px 0 0 rgb(var(--core-rgb) / 0.28); }
 .s-label { font-family: var(--serif); font-size: 1.2rem; line-height: 1.2; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-sub { font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
 .s-empty { padding: 10px; font-family: var(--serif); color: var(--ink-3); font-size: 1.05rem; }
