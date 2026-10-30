@@ -22,7 +22,11 @@
 // (or on the page that follows one of them: a quotation runs over a page break).
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { stripFootnoteMarkers } from './display.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // ---------------------------------------------------------------------------------------------------------------------
 // normalisation and fragments
@@ -145,13 +149,42 @@ export function prepareVolume(doc) {
   return vol;
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// check-time-only sources: a text the repo does not hold (the Book of Symbols), read from its private PDF when the oracle runs
+// ---------------------------------------------------------------------------------------------------------------------
+
+/** The Book of Symbols' private PDF: SYMBOLS_PDF, else the path the reviewed curation (curation/symbols/book-of-symbols.json) names. */
+export function symbolsPdfPath() {
+  if (process.env.SYMBOLS_PDF) return process.env.SYMBOLS_PDF;
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'symbols', 'book-of-symbols.json'), 'utf8')).source?.sourcePath ?? null; } catch { return null; }
+}
+
+const pdfVolumes = new Map();
+/**
+ * A prepared volume of a PDF's pages, read with pdftotext now and never stored: page N of the file is `p: N`. Null when the PDF or
+ * pdftotext is missing, so every record citing it fails as `no-corpus` rather than passing unread.
+ */
+export function pdfVolume(work, pdfPath) {
+  if (!pdfPath || !fs.existsSync(pdfPath)) return null;
+  const stat = fs.statSync(pdfPath);
+  const key = `${pdfPath}:${stat.size}:${stat.mtimeMs}`;
+  if (!pdfVolumes.has(key)) {
+    let text = null;
+    try { text = execFileSync('pdftotext', ['-enc', 'UTF-8', pdfPath, '-'], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }); } catch { text = null; }
+    pdfVolumes.set(key, text === null ? null : prepareVolume({ work, pages: text.split('\f').map((t, i) => ({ p: i + 1, text: t })).filter((pg, i, all) => i < all.length - 1 || pg.text.trim()) }));
+  }
+  return pdfVolumes.get(key);
+}
+
 /** Lazy per-work loader over a corpus directory (public/data/corpus). A work with no file is null. A cite key that the index
- * gives as an alias of a volume's Work (curation/works.json: redbook → liber-novus) reads that volume. */
-export function corpusLoader(dir) {
+ * gives as an alias of a volume's Work (curation/works.json: redbook → liber-novus) reads that volume. `extra` maps a work key to a
+ * function returning its prepared volume (a check-time-only source, see pdfVolume). */
+export function corpusLoader(dir, extra = {}) {
   const cache = new Map();
   let index = null;
   const loader = (work) => {
     if (cache.has(work)) return cache.get(work);
+    if (extra[work]) { const v = extra[work](); cache.set(work, v); return v; }
     let volume = work;
     try { volume = loader.index().works.find((w) => (w.aliases ?? []).includes(work))?.work ?? work; } catch { /* no index: the key itself */ }
     const file = path.join(dir, `${volume}.json`);
@@ -487,18 +520,27 @@ export function collectRecords(dataDir, { index } = {}) {
     if (file === 'field.json') {
       for (const o of doc.occurrences ?? []) {
         if (typeof o.quote !== 'string' || !o.quote) continue;
-        if (o.quoteKind === 'paraphrase') continue; // demoted (curation/quote-fixes.json): labelled paraphrase, no longer presented as a quotation
         const cites = (o.jung ?? []).filter((c) => c.work).map((c) => ({ work: c.work, locator: c.locator ?? '' }));
         add({ dataset: 'field.json#occurrences', id: o.id, text: o.quote, voice: null, cites, shape: 'occurrence' });
       }
       for (const [kind, list] of [['family', doc.families], ['archetype', doc.archetypes], ['theoretic', doc.theoretics]]) {
         for (const x of list ?? []) {
           if (!x.definition?.text) continue;
-          if (x.definition.quoteKind === 'paraphrase') continue; // demoted: labelled paraphrase
           const cite = String(x.definition.cite ?? '');
           const work = workFromCiteString(idx, cite);
           add({ dataset: 'field.json#definitions', id: `${kind}:${x.id}`, text: x.definition.text, voice: null, cites: work ? [{ work, locator: cite }] : [{ work: null, locator: cite }], shape: 'definition' });
         }
+      }
+      continue;
+    }
+
+    if (file === 'symbols.json') {
+      // the Book of Symbols' short quotations: each cites the printed page and the pdf page of the reviewed PDF, which the repo does not hold;
+      // the oracle reads that page from the PDF at check time (symbolsSource below)
+      for (const e of doc.entries ?? []) {
+        (e.quotes ?? []).forEach((q, i) => {
+          add({ dataset: file, id: `${e.familyId}#${i}`, text: q.text, voice: null, cites: [{ work: SYMBOLS_WORK, locator: `pdf p${q.pdfPage}` }], shape: 'book-of-symbols' });
+        });
       }
       continue;
     }
@@ -576,9 +618,11 @@ export function judge(record, load) {
   return { ...primary, citeIndex: 0, cite: record.cites[0], per };
 }
 
-/** Run the whole oracle over a data directory. */
-export function runOracle(dataDir, { exceptions = [], only } = {}) {
-  const load = corpusLoader(path.join(dataDir, 'corpus'));
+export const SYMBOLS_WORK = 'book-of-symbols';
+
+/** Run the whole oracle over a data directory. `symbolsPdf` overrides the Book of Symbols' PDF path (tests). */
+export function runOracle(dataDir, { exceptions = [], only, symbolsPdf } = {}) {
+  const load = corpusLoader(path.join(dataDir, 'corpus'), fs.existsSync(path.join(dataDir, 'symbols.json')) ? { [SYMBOLS_WORK]: () => pdfVolume(SYMBOLS_WORK, symbolsPdf ?? symbolsPdfPath()) } : {});
   const { records, unclassified } = collectRecords(dataDir, { index: load.index() });
   const excepted = new Map(exceptions.map((e) => [`${e.dataset}\u0000${e.id}`, e]));
   const results = [];

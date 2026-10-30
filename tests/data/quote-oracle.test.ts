@@ -349,12 +349,20 @@ describe('regression: every quotation in the published data is verbatim, or exce
   it('never lets the exceptions grow: it only shrinks (34 on 30 Oct)', () => {
     expect(doc.exceptions.length).toBeLessThanOrEqual(34);
   });
-  it('does not check a demoted record: labelled a paraphrase, it is no longer presented as a quotation', () => {
+  it('does not show a demoted record as a quotation: the 7 Pauli-letter records keep their body and cite and carry no quote', () => {
     const checked = new Set(all.results.map((r) => r.id));
     const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json'), 'utf8'));
-    const demoted = field.occurrences.filter((o: { quoteKind?: string }) => o.quoteKind === 'paraphrase');
+    const fixes = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation/quote-fixes.json'), 'utf8')).fixes as Record<string, { demote?: boolean }>;
+    const demoted = Object.entries(fixes).filter(([, f]) => f.demote).map(([id]) => id);
     expect(demoted.length).toBe(7);
-    for (const o of demoted) expect(checked.has(o.id), o.id).toBe(false);
+    for (const id of demoted) {
+      const o = field.occurrences.find((x: { id: string }) => x.id === id);
+      expect(o, id).toBeDefined();
+      expect(o.quote, id).toBeUndefined();
+      expect(o.body.length, id).toBeGreaterThan(0);
+      expect(o.jung.length, id).toBeGreaterThan(0);
+      expect(checked.has(id), id).toBe(false);
+    }
   });
 });
 
@@ -393,32 +401,19 @@ describe('quote-fixes: the reviewed override layer', () => {
     applyQuoteFixes(f, { version: 1, fixes: { 'family:fam': { text: 'New definition.', cite: 'Aion (CW9ii) ¶10 (pdf p31)', basis: 'cw09ii pdf p31' } } });
     expect(f.families[0].definition).toEqual({ text: 'New definition.', cite: 'Aion (CW9ii) ¶10 (pdf p31)' });
   });
-  it('demotes a record to labelled paraphrase: the record stays, its words are marked, and the oracle no longer asks it to be verbatim', () => {
+  it('demotes a record: the record stays with its body and cite, its quote is not published, and the oracle has nothing to ask of it', () => {
     const f = field();
     const r = applyQuoteFixes(f, { version: 1, fixes: { 'occ-a': { demote: true, basis: 'no corpus page carries these words; the record retells the passage' }, 'family:fam': { demote: true, basis: 'the definition paraphrases the cited page' } } });
     expect(r.problems).toEqual([]);
     expect(r.applied).toEqual(['occ-a', 'family:fam']);
-    expect(f.occurrences[0]).toMatchObject({ id: 'occ-a', quote: 'Old words.', quoteKind: 'paraphrase' });
-    expect(f.families[0].definition).toMatchObject({ text: 'Old definition.', quoteKind: 'paraphrase' });
+    expect(f.occurrences[0].id).toBe('occ-a');
+    expect(f.occurrences[0]).not.toHaveProperty('quote');
+    expect(f.occurrences[0]).not.toHaveProperty('quoteKind');
+    expect(f.families[0]).not.toHaveProperty('definition');
   });
   it('refuses a demotion that also changes words, or a demotion that is not true', () => {
     expect(validateQuoteFixes({ version: 1, fixes: { a: { demote: true, text: 'x', basis: 'b' } } })).toEqual(['a: a demotion changes nothing else']);
     expect(validateQuoteFixes({ version: 1, fixes: { a: { demote: false, basis: 'b' } } })).toEqual(['a: "demote" must be true']);
-  });
-  it('the oracle skips a demoted occurrence and a demoted definition (they are no longer presented as a quotation)', () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'quote-oracle-demote-'));
-    made.push(dir);
-    fs.mkdirSync(path.join(dir, 'corpus'));
-    fs.writeFileSync(path.join(dir, 'corpus', 'index.json'), JSON.stringify({ works: [{ work: 'cw08', title: 'Structure', file: 'cw08.json', pages: 1, paras: 0, chapters: 0 }] }));
-    fs.writeFileSync(path.join(dir, 'corpus', 'cw08.json'), JSON.stringify({ work: 'cw08', title: 'Structure', chapters: [], paras: [], pages: [{ p: 1, text: 'Nothing like it is here.' }] }));
-    const occ = (id: string, kind?: string) => ({ id, quote: 'An entirely different set of words.', jung: [{ work: 'cw08', locator: 'pdf p1' }], ...(kind ? { quoteKind: kind } : {}) });
-    fs.writeFileSync(path.join(dir, 'field.json'), JSON.stringify({
-      occurrences: [occ('plain'), occ('demoted', 'paraphrase')],
-      families: [{ id: 'a', definition: { text: 'Words that are not there at all.', cite: 'Structure (CW8) pdf p1' } }, { id: 'b', definition: { text: 'Words that are not there at all.', cite: 'Structure (CW8) pdf p1', quoteKind: 'paraphrase' } }],
-      archetypes: [], theoretics: [],
-    }));
-    const { results } = runOracle(dir);
-    expect(results.map((r: { id: string }) => r.id).sort()).toEqual(['family:a', 'plain']);
   });
   it('refuses a fix with no basis, an unknown field, a stale id, or a change that changes nothing', () => {
     expect(validateQuoteFixes({ version: 1, fixes: { a: { text: 'x' } } })).toEqual(['a: a "basis" line is required']);

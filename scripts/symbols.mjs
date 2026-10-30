@@ -1,4 +1,5 @@
-// Generate the distinct Book of Symbols layer from reviewed paraphrases and the actual PDF.
+// Generate the distinct Book of Symbols layer from reviewed short quotations and the actual PDF. The quotations' words are
+// proved verbatim against the PDF's own text by the quote oracle (scripts/lib/quote-oracle.mjs, a check-time-only source).
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -51,9 +52,18 @@ export function validateSymbols(symbols, { field } = {}) {
       if (pdfPages[i] !== pages[i] + 4 || [82, 83].includes(pages[i])) fail(where, 'incorrect printed/PDF page binding');
       if (i && (pages[i] <= pages[i - 1] || pdfPages[i] <= pdfPages[i - 1])) fail(where, 'page pairs not strictly ordered');
     }
-    const body = list(entry.body, `${where}.body`);
-    if (!body.length) fail(where, 'missing substantive paraphrase');
-    for (const para of body) if (!nonempty(para) || para.trim().length < 60) fail(where, 'missing substantive paraphrase');
+    // the entry is its quotations; a paraphrase paragraph of the atlas's own does not ship beside them
+    if ('body' in entry) fail(where, 'a paraphrase body remains; the entry is its quotations');
+    const quotes = list(entry.quotes, `${where}.quotes`);
+    if (!quotes.length) fail(where, 'missing quotations');
+    const seenText = new Set();
+    for (const q of quotes) {
+      if (!q || typeof q !== 'object' || !nonempty(q.text) || q.text.trim().length < 40 || q.text.length > 400) { fail(where, 'a quotation needs its words (40 to 400 characters)'); continue; }
+      const at = pages.indexOf(q.page);
+      if (at < 0 || pdfPages[at] !== q.pdfPage) fail(where, `quotation cites a page the entry does not (printed ${q.page}, pdf ${q.pdfPage})`);
+      if (seenText.has(q.text)) fail(where, 'duplicate quotation');
+      seenText.add(q.text);
+    }
     const resonances = list(entry.resonances, `${where}.resonances`);
     if (new Set(resonances).size !== resonances.length) fail(where, 'duplicate comparison');
     for (const id of resonances) if (!nonempty(id) || id === entry.familyId || (known && !known.has(id))) fail(where, `unresolved or self comparison ${id}`);

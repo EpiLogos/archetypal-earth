@@ -9,7 +9,8 @@ export function symbolReading(model: Model, familyId: string, onFamily: (id: str
   const section = el(compact ? 'details' : 'section', { class: `symbol-reading ${compact ? 'symbol-compact' : ''}`, 'aria-label': 'The Book of Symbols reading' });
   section.append(el(compact ? 'summary' : 'h3', { class: compact ? 'symbol-summary' : 'dp-sub', text: 'The Book of Symbols' }),
     el('p', { class: 'symbol-source', text: `${entry.title} · ${entry.pages.length > 1 ? 'pp.' : 'p.'} ${entry.pages.join(', ')} · ${source.year}` }));
-  for (const text of entry.body) section.append(el('p', { class: compact ? 'rv-para' : 'dp-para', text }));
+  // the entry's own words, short, each with its printed page (hook for the Quote component: quote = q.text, cite = q.page / q.pdfPage)
+  for (const q of entry.quotes) section.append(el('p', { class: compact ? 'rv-para' : 'dp-para', text: `“${q.text}” (p. ${q.page})` }));
   if (entry.resonances.length) {
     const links = el('p', { class: 'symbol-links' }, [el('span', { text: 'Related symbols · ' })]);
     for (const id of entry.resonances) {
