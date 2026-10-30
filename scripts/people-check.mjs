@@ -30,6 +30,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function parseSource(src) {
   const s = String(src).trim();
+  if (/^https?:\/\/\S+$/.test(s)) return { kind: 'url', url: s };
   let m = s.match(/^corpus (\S+) p(\d+)(?:\s+“([^”]*)”)?/);
   if (m) return { kind: 'corpus', vol: m[1], page: Number(m[2]), phrase: m[3] ?? null };
   m = s.match(/^vault (\S+)(?:\s+“([^”]*)”)?/);
@@ -49,9 +50,13 @@ function resolvePath(obj, path) {
   return cur;
 }
 
-function checkSource(src) {
+function checkSource(src, person) {
   const p = parseSource(src);
   if (p.kind === 'unparsed') return { ok: false, msg: `unparsed source: ${src}` };
+  // a web address is a source only for a portrait file that names it as its own sourceUrl (the page the file came from)
+  if (p.kind === 'url') {
+    return person?.portrait?.sourceUrl === p.url ? { ok: true } : { ok: false, msg: `${p.url} is not the sourceUrl of this person's portrait file` };
+  }
   if (p.kind === 'corpus') {
     const f = join(ROOT, 'public/data/corpus', `${p.vol}.json`);
     if (!existsSync(f)) return { ok: false, msg: `no corpus volume ${p.vol}` };
@@ -124,22 +129,23 @@ for (const [key, person] of Object.entries(people.people || {})) {
       continue;
     }
     if (!src) { fail(`${id}.${f}: filled with no source`); cells[f] = 'X'; continue; }
-    const r = checkSource(src);
+    const r = checkSource(src, person);
     if (!r.ok) { fail(`${id}.${f}: ${r.msg}`); cells[f] = 'X'; continue; }
-    if (f === 'portrait' && !imageIds.has(val)) { fail(`${id}.portrait: ${val} is not an image id in images.json or images-ext*.json`); cells[f] = 'X'; continue; }
+    if (f === 'portrait' && typeof val === 'object') {
+      const miss = ['src', 'title', 'credit', 'license', 'sourceUrl'].filter((k) => !val[k]);
+      if (miss.length) { fail(`${id}.portrait: file portrait lacks ${miss.join(', ')}`); cells[f] = 'X'; continue; }
+      if (!existsSync(join(ROOT, 'public', val.src))) { fail(`${id}.portrait: ${val.src} is not under public/`); cells[f] = 'X'; continue; }
+    } else if (f === 'portrait' && !imageIds.has(val)) { fail(`${id}.portrait: ${val} is not an image id in images.json or images-ext*.json`); cells[f] = 'X'; continue; }
     cells[f] = 'S';
   }
-  // A Jung birth copied from astrology.json must equal the source record, portrait included.
+  // A birth is the person's own record (the Astrology lens reads it through scripts/astrology.mjs): its date is the born
+  // field, and a charted person has a curated entry there for the lens's line and quotation.
   if (person.birth) {
-    const a = astro.people?.find((x) => x.id === id);
-    if (!a) fail(`${id}.birth: no ${id} record in curation/astrology.json to copy from`);
-    else {
-      const { portrait: bp, ...bRest } = person.birth;
-      const { portrait: ap, ...aRest } = a.birth;
-      if (JSON.stringify(bRest) !== JSON.stringify(aRest) || JSON.stringify(bp) !== JSON.stringify(a.portrait)) {
-        fail(`${id}.birth: differs from curation/astrology.json people[0]`);
-      }
+    if (typeof person.born === 'string' ? person.born !== person.birth.date : String(person.born) !== person.birth.date.slice(0, 4)) {
+      fail(`${id}.birth: date ${person.birth.date} does not agree with born ${person.born}`);
     }
+    if (!astro.people?.some((x) => x.id === id)) fail(`${id}.birth: no ${id} entry in curation/astrology.json to chart it`);
+    if (astro.people?.some((x) => x.id === id && (x.birth || x.portrait))) fail(`${id}.birth: curation/astrology.json also holds a birth or portrait; the record is here`);
   }
   // Works and occurrences.
   const surname = String(person.name).replace(/[.,]+$/, '').split(/\s+/).pop();

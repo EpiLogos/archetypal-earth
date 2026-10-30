@@ -53,7 +53,13 @@ export function buildAstrology({ vault = DEFAULT_VAULT } = {}) {
   const signs = {};
   for (const [sign, q] of Object.entries(cur.signs)) signs[sign] = { ...one(q, `sign ${sign}`), voice: 'burt' };
 
-  const people = cur.people.map((p) => ({ id: p.id, label: p.label, birth: p.birth, line: p.line, quote: one(p.quote, `person ${p.id}`), portrait: p.portrait ?? null }));
+  // a charted person's birth and portrait live in curation/people.json (the one record of a person); the lens reads them here
+  const registry = read('curation', 'people.json').people;
+  const people = cur.people.map((p) => {
+    const rec = registry[p.id];
+    if (!rec?.birth) errors.push(`person ${p.id}: no birth in curation/people.json`);
+    return { id: p.id, label: p.label, birth: rec?.birth, line: p.line, quote: one(p.quote, `person ${p.id}`), portrait: rec?.portrait ?? null };
+  });
 
   // the place list for the form: the sky's own sourced gazetteer, so a birth place is chosen here, never looked up online
   const sky = read('public', 'data', 'sky.json');

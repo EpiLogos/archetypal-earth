@@ -1,0 +1,572 @@
+{
+ "schema": 1,
+ "source": "curation/people.json + curation/works.json + public/data/field.json",
+ "people": [
+  {
+   "id": "jung",
+   "name": "C. G. Jung",
+   "born": "1875-07-26",
+   "died": "1961-06-06",
+   "role": "Analytical psychologist",
+   "portrait": {
+    "src": "/img/jung-portrait.jpg",
+    "title": "Carl Gustav Jung",
+    "credit": "Unknown author",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+    "_file": "File:Carl Gustav Jung portrait.jpg",
+    "width": 366,
+    "height": 567
+   },
+   "subjectKey": "jung",
+   "birth": {
+    "date": "1875-07-26",
+    "time": "19:32",
+    "timeSource": "Gret Baumann-Jung, his daughter, who cast his chart (published in Jung on Astrology, 2017). Other records give 19:20 to 19:41, so the rising degree is approximate.",
+    "place": "Kesswil, Thurgau",
+    "lat": 47.6,
+    "lon": 9.32,
+    "offset": "mean-time"
+   },
+   "works": [
+    "cw01",
+    "cw02",
+    "cw03",
+    "cw04",
+    "cw05",
+    "cw06",
+    "cw07",
+    "cw08",
+    "cw09i",
+    "cw09ii",
+    "cw10",
+    "cw11",
+    "cw12",
+    "cw13",
+    "cw14",
+    "cw15",
+    "cw16",
+    "cw17",
+    "cw18",
+    "letters-corrie",
+    "letters-pauli",
+    "liber-novus",
+    "mdr",
+    "sem-1925",
+    "sem-childrens-dreams",
+    "sem-dream-analysis",
+    "sem-kundalini",
+    "sem-visions",
+    "sem-zarathustra",
+    "sup-zofingia",
+    "sync"
+   ],
+   "own": 82,
+   "natal": {
+    "input": {
+     "local": "1875-07-26T19:32",
+     "lat": 47.6,
+     "lon": 9.32,
+     "tz": "UTC+0:37",
+     "utcOffsetMinutes": 37
+    },
+    "utc": "1875-07-26T18:55:00Z",
+    "jd": 2406096.2881944445,
+    "approximate": true,
+    "approximateReason": "Before 1900 clocks were not standardised; the offset given is the one used, and local mean time is the usual choice.",
+    "warnings": [],
+    "zodiac": "tropical",
+    "bodies": {
+     "sun": {
+      "lon": 123.31068756168605,
+      "sign": "Leo",
+      "signIndex": 4,
+      "degree": 3.310687561686052,
+      "retrograde": false,
+      "house": null
+     },
+     "moon": {
+      "lon": 45.51556815741628,
+      "sign": "Taurus",
+      "signIndex": 1,
+      "degree": 15.515568157416283,
+      "retrograde": false,
+      "house": null
+     },
+     "mercury": {
+      "lon": 103.76806839494043,
+      "sign": "Cancer",
+      "signIndex": 3,
+      "degree": 13.768068394940428,
+      "retrograde": false,
+      "house": null
+     },
+     "venus": {
+      "lon": 107.49869433702378,
+      "sign": "Cancer",
+      "signIndex": 3,
+      "degree": 17.498694337023778,
+      "retrograde": false,
+      "house": null
+     },
+     "mars": {
+      "lon": 261.3731211085835,
+      "sign": "Sagittarius",
+      "signIndex": 8,
+      "degree": 21.37312110858352,
+      "retrograde": false,
+      "house": null
+     },
+     "jupiter": {
+      "lon": 203.79947034416352,
+      "sign": "Libra",
+      "signIndex": 6,
+      "degree": 23.799470344163524,
+      "retrograde": false,
+      "house": null
+     },
+     "saturn": {
+      "lon": 324.19443696575786,
+      "sign": "Aquarius",
+      "signIndex": 10,
+      "degree": 24.19443696575786,
+      "retrograde": true,
+      "house": null
+     },
+     "uranus": {
+      "lon": 134.80560277119145,
+      "sign": "Leo",
+      "signIndex": 4,
+      "degree": 14.805602771191445,
+      "retrograde": false,
+      "house": null
+     },
+     "neptune": {
+      "lon": 33.04193503859767,
+      "sign": "Taurus",
+      "signIndex": 1,
+      "degree": 3.0419350385976713,
+      "retrograde": false,
+      "house": null
+     },
+     "pluto": {
+      "lon": 53.51347707996035,
+      "sign": "Taurus",
+      "signIndex": 1,
+      "degree": 23.513477079960353,
+      "retrograde": false,
+      "house": null
+     }
+    },
+    "angles": {
+     "ascendant": {
+      "lon": 301.6463604242206,
+      "sign": "Aquarius",
+      "signIndex": 10,
+      "degree": 1.6463604242205747,
+      "retrograde": false,
+      "house": null
+     },
+     "midheaven": {
+      "lon": 239.33902406482343,
+      "sign": "Scorpio",
+      "signIndex": 7,
+      "degree": 29.339024064823434,
+      "retrograde": false,
+      "house": null
+     }
+    },
+    "houses": {
+     "requested": "Equal",
+     "effective": "Equal (from the Ascendant)",
+     "cusps": [
+      301.6463604242206,
+      331.6463604242206,
+      1.6463604242205747,
+      31.646360424220575,
+      61.646360424220575,
+      91.64636042422057,
+      121.64636042422057,
+      151.64636042422057,
+      181.64636042422057,
+      211.64636042422057,
+      241.64636042422057,
+      271.6463604242206
+     ]
+    },
+    "aspects": [
+     {
+      "a": "sun",
+      "b": "neptune",
+      "type": "square",
+      "orb": 0.2687525230883807
+     },
+     {
+      "a": "moon",
+      "b": "mercury",
+      "type": "sextile",
+      "orb": 1.7474997624758544
+     },
+     {
+      "a": "moon",
+      "b": "venus",
+      "type": "sextile",
+      "orb": 1.9831261796074955
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "type": "square",
+      "orb": 0.7099653862248374
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "type": "conjunction",
+      "orb": 7.99790892254407
+     },
+     {
+      "a": "mercury",
+      "b": "venus",
+      "type": "conjunction",
+      "orb": 3.73062594208335
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "type": "sextile",
+      "orb": 6.014782742936575
+     },
+     {
+      "a": "mars",
+      "b": "jupiter",
+      "type": "sextile",
+      "orb": 2.4263492355800054
+     },
+     {
+      "a": "mars",
+      "b": "saturn",
+      "type": "sextile",
+      "orb": 2.8213158571743406
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "type": "trine",
+      "orb": 6.567518337392073
+     },
+     {
+      "a": "jupiter",
+      "b": "saturn",
+      "type": "trine",
+      "orb": 0.39496662159433527
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "type": "opposition",
+      "orb": 9.242464694434148
+     },
+     {
+      "a": "saturn",
+      "b": "uranus",
+      "type": "opposition",
+      "orb": 9.388834194566414
+     },
+     {
+      "a": "saturn",
+      "b": "pluto",
+      "type": "square",
+      "orb": 0.6809598857975061
+     }
+    ],
+    "moon": {
+     "name": "Last Quarter",
+     "major": "Last Quarter",
+     "stage": "waning"
+    },
+    "gmst": 227.80759459260537,
+    "timeKnown": true
+   },
+   "sources": {
+    "name": "curation/astrology.json people[0].label “C. G. Jung”",
+    "born": "curation/astrology.json people[0].line “come from the public record”",
+    "died": "corpus cw01 p9 “following Jung’s death on June 6, 1961”",
+    "role": "corpus cw07 p5 “the history of analytical psychology”",
+    "portrait": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+    "subjectKey": "public/data/field.json occurrences “jung” (82 occurrences carry subject jung)",
+    "birth": "curation/people.json people.jung.birth.timeSource “Gret Baumann-Jung”"
+   },
+   "reasons": {}
+  },
+  {
+   "id": "von-franz",
+   "name": "Marie-Louise von Franz",
+   "born": null,
+   "died": null,
+   "role": "Jungian lecturer; author of Number and Time",
+   "portrait": null,
+   "works": [
+    "vonzfranz-number-time"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus vonzfranz-number-time p4 “Marie-Louise von Franz”",
+    "born": null,
+    "died": null,
+    "role": "corpus vonzfranz-number-time p4 “a lecturer at the C. G. Jung Institute, Zurich”",
+    "portrait": null
+   },
+   "reasons": {
+    "born": "no date in the vault or corpus",
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of her in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "neumann",
+   "name": "Erich Neumann",
+   "born": 1905,
+   "died": "1960-11-05",
+   "role": "Analytical psychologist; theorist of feminine development",
+   "portrait": null,
+   "works": [
+    "neumann-great-mother",
+    "neumann-origins"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus cw18 p989 “Erich Neumann (1905–1960)”",
+    "born": "corpus cw18 p989 “Erich Neumann (1905–1960)”",
+    "died": "corpus neumann-great-mother p214 “on November 5, 1960”",
+    "role": "corpus neumann-great-mother p214 “a coherent theory of feminine development”",
+    "portrait": null
+   },
+   "reasons": {
+    "portrait": "no portrait of him in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "pauli",
+   "name": "Wolfgang Pauli",
+   "born": 1900,
+   "died": "1958-12-15",
+   "role": "Swiss physicist; Jung's correspondent",
+   "portrait": null,
+   "works": [
+    "letters-pauli"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus cw18 p939 “Wolfgang Pauli (1900–1958)”",
+    "born": "corpus cw18 p939 “Wolfgang Pauli (1900–1958)”",
+    "died": "corpus letters-pauli p233 “Pauli died in Zurich on 15 December 1958”",
+    "role": "corpus cw18 p939 “Swiss physicist and Nobel Prize winner”",
+    "portrait": null
+   },
+   "reasons": {
+    "portrait": "no portrait of him in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "crowley",
+   "name": "Aleister Crowley",
+   "born": null,
+   "died": null,
+   "role": "Occultist; author of The Book of Thoth",
+   "portrait": null,
+   "works": [
+    "book-of-thoth"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus book-of-thoth p1 “(Aleister Crowley)”",
+    "born": null,
+    "died": null,
+    "role": "corpus book-of-thoth p1 “A SHORT ESSAY ON THE TAROT”",
+    "portrait": null
+   },
+   "reasons": {
+    "born": "no date in the vault or corpus",
+    "died": "no date in the vault or corpus",
+    "portrait": "the registers hold Thoth cards by Frieda Harris, not a portrait of him"
+   }
+  },
+  {
+   "id": "hillman",
+   "name": "James Hillman",
+   "born": null,
+   "died": null,
+   "role": "Archetypal psychologist",
+   "portrait": null,
+   "works": [
+    "a-blue-fire"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus a-blue-fire p2 “JAMES HILLMAN”",
+    "born": null,
+    "died": null,
+    "role": "corpus a-blue-fire p2 “on archetypal psychology”",
+    "portrait": null
+   },
+   "reasons": {
+    "born": "no date in the vault or corpus",
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of him in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "van-eenwyk",
+   "name": "John Richter Van Eenwyk",
+   "born": 1946,
+   "died": null,
+   "role": "American Jungian analyst",
+   "portrait": null,
+   "works": [
+    "van-eenwyk"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "vault wiki/figures/van-eenwyk-john-r.md “John Richter Van Eenwyk”",
+    "born": "corpus van-eenwyk p5 “Van Eenwyk, John R. (John Richter), 1946-”",
+    "died": null,
+    "role": "vault wiki/figures/van-eenwyk-john-r.md “American Jungian analyst”",
+    "portrait": null
+   },
+   "reasons": {
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of him in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "burt",
+   "name": "Kathleen Burt",
+   "born": "1943-09-12",
+   "died": null,
+   "role": "Astrologer; author of Archetypes of the Zodiac",
+   "portrait": null,
+   "works": [
+    "burt-zodiac"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "corpus burt-zodiac p6 “Kathleen Burt was born September 12, 1943”",
+    "born": "corpus burt-zodiac p6 “Kathleen Burt was born September 12, 1943”",
+    "died": null,
+    "role": "corpus burt-zodiac p5 “Kathleen Burt has given the reader a deeper look at astrology”",
+    "portrait": null
+   },
+   "reasons": {
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of her in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "ami-ronnberg",
+   "name": "Ami Ronnberg",
+   "born": null,
+   "died": null,
+   "role": "Editor-in-chief, The Book of Symbols",
+   "portrait": null,
+   "works": [
+    "book-of-symbols"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "curation/symbols/book-of-symbols.json source.editor “Ami Ronnberg (editor-in-chief)”",
+    "born": null,
+    "died": null,
+    "role": "curation/symbols/book-of-symbols.json source.editor “Ami Ronnberg (editor-in-chief)”",
+    "portrait": null
+   },
+   "reasons": {
+    "born": "no date in the vault or corpus",
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of him in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "kathleen-martin",
+   "name": "Kathleen Martin",
+   "born": null,
+   "died": null,
+   "role": "Editor, The Book of Symbols",
+   "portrait": null,
+   "works": [
+    "book-of-symbols"
+   ],
+   "own": 0,
+   "sources": {
+    "name": "curation/symbols/book-of-symbols.json source.editor “Kathleen Martin (editor)”",
+    "born": null,
+    "died": null,
+    "role": "curation/symbols/book-of-symbols.json source.editor “Kathleen Martin (editor)”",
+    "portrait": null
+   },
+   "reasons": {
+    "born": "no date in the vault or corpus",
+    "died": "no date in the vault or corpus",
+    "portrait": "no portrait of her in images.json or images-ext*.json"
+   }
+  },
+  {
+   "id": "khunrath",
+   "name": "Heinrich Khunrath",
+   "born": "c. 1560",
+   "died": "c. 1605",
+   "role": "Paracelsan physician and cabbalist alchemist",
+   "portrait": null,
+   "works": [],
+   "own": 0,
+   "sources": {
+    "name": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+    "born": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+    "died": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+    "role": "vault wiki/figures/khunrath.md “Paracelsan physician and cabbalist alchemist”",
+    "portrait": null
+   },
+   "reasons": {
+    "portrait": "the registers hold his plates (families pentagram), not a portrait of him"
+   }
+  },
+  {
+   "id": "paracelsus",
+   "name": "Paracelsus",
+   "born": "1493-11-10",
+   "died": 1541,
+   "role": "Renaissance physician; Jung's prime figure-locus",
+   "portrait": null,
+   "works": [],
+   "own": 0,
+   "sources": {
+    "name": "vault wiki/figures/paracelsus.md “Paracelsus (Theophrastus Bombast von Hohenheim, 1493-1541)”",
+    "born": "vault wiki/figures/paracelsus.md “born Einsiedeln 10 Nov 1493”",
+    "died": "vault wiki/figures/paracelsus.md “died Salzburg 1541”",
+    "role": "vault wiki/figures/paracelsus.md “Paracelsus is Jung's prime figure-locus for the Renaissance psyche”",
+    "portrait": null
+   },
+   "reasons": {
+    "portrait": "the registers hold his plates, not a portrait of him"
+   }
+  },
+  {
+   "id": "nietzsche",
+   "name": "Friedrich Nietzsche",
+   "born": 1844,
+   "died": 1900,
+   "role": "Philologist-turned-prophet; Jung's modern case-history",
+   "portrait": "eagle-klinger-nietzsche-bust-germany-1902",
+   "works": [],
+   "own": 0,
+   "sources": {
+    "name": "vault wiki/figures/nietzsche.md “Friedrich Nietzsche (1844-1900)”",
+    "born": "vault wiki/figures/nietzsche.md “born Röcken 1844”",
+    "died": "vault wiki/figures/nietzsche.md “died Weimar 1900”",
+    "role": "vault wiki/figures/nietzsche.md “philologist-turned-prophet”",
+    "portrait": "public/data/images.json occurrences “Portrait Bust of Friedrich Nietzsche”"
+   },
+   "reasons": {}
+  }
+ ]
+}

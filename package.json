@@ -10,7 +10,7 @@
     "ingest": "node scripts/ingest.mjs",
     "images": "node scripts/images.mjs",
     "images:verify": "node scripts/images-verify.mjs",
-    "data": "npm run ingest && npm run images && npm run ingest && npm run works && npm run works:publish && npm run aion && npm run aionbook && npm run redbook && npm run theory && npm run theory-pages && npm run field-pages && npm run alchemy && npm run numbers &&npm run astrology && npm run practice && npm run depth && npm run dynamics && npm run dynamics-route && npm run walks && npm run sky-cards",
+    "data": "npm run ingest && npm run images && npm run ingest && npm run works && npm run works:publish && npm run people:publish && npm run aion && npm run aionbook && npm run redbook && npm run theory && npm run theory-pages && npm run field-pages && npm run alchemy && npm run numbers &&npm run astrology && npm run practice && npm run depth && npm run dynamics && npm run dynamics-route && npm run walks && npm run sky-cards",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "textures": "node scripts/textures/prepare.mjs",
@@ -53,6 +53,8 @@
     "works:check": "node scripts/works-registry.mjs --check",
     "works:publish": "node scripts/works-publish.mjs",
     "works:publish:check": "node scripts/works-publish.mjs --check",
+    "people:publish": "node scripts/people-publish.mjs",
+    "people:publish:check": "node scripts/people-publish.mjs --check",
     "harvest:check": "node scripts/harvest-check.mjs",
     "quote-oracle": "node scripts/quote-oracle.mjs",
     "quote-oracle:check": "node scripts/quote-oracle.mjs --check"

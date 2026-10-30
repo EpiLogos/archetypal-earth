@@ -2,12 +2,13 @@
 import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Join, Occurrence, Field, SkyLocus, Theoretic, TheoreticId } from '../types/field';
 import type { BodyKey } from '../types/sky';
 import type { Symbols, SymbolEntry } from '../types/symbols';
+import type { PeopleData, Person, PersonId } from '../types/people';
 import type { Work, WorkId, WorksData } from '../types/works';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
 
-export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place' | 'work';
+export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place' | 'work' | 'person';
 export interface Subject {
   type: SubjectType;
   id: string;
@@ -84,6 +85,13 @@ export interface Model {
    * ascending. Read through the registry, so `redbook` and `liber-novus` are one Work. What `subjectMembers` returns.
    */
   workMem: Map<WorkId, number[]>;
+  /** the people (public/data/people.json); empty when the file was not loaded */
+  personById: Map<PersonId, Person>;
+  /**
+   * The occurrences that belong to a person, year ascending: those that carry his own `subject` (Jung's 82); for a person
+   * with no subject of his own, those that cite a Work he wrote. What `subjectMembers` returns.
+   */
+  personMem: Map<PersonId, number[]>;
   /** the field's joins (curation/joins.json), any node to any node */
   joins: Join[];
   /** joins by endpoint, keyed `${type}:${id}`: each join is listed under both of its ends */
@@ -110,9 +118,10 @@ export function shortPlace(place: string): string {
 
 const FALLBACK_PALETTE = { core: '#c3d2f2', glow: '#4f78cf', fog: '#10193a', deep: '#02030a' };
 
-/** What the model reads beside the Field: the published Works. Absent, the Work indexes are empty and nothing else changes. */
+/** What the model reads beside the Field: the published Works and People. Absent, their indexes are empty and nothing else changes. */
 export interface ModelExtras {
   works?: WorksData;
+  people?: PeopleData;
 }
 
 export function buildModel(field: Field, extent?: { from: number; to: number }, symbols?: Symbols, extras: ModelExtras = {}): Model {
@@ -195,6 +204,14 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   for (const list of famMem.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of cultureOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of workMem.values()) list.sort((a, b) => occ[a].year - occ[b].year);
+  const personById = new Map<PersonId, Person>((extras.people?.people ?? []).map((p) => [p.id, p]));
+  const personMem = new Map<PersonId, number[]>();
+  for (const p of personById.values()) {
+    const set = new Set<number>();
+    if (p.subjectKey) occ.forEach((o, i) => { if (o.subject === p.subjectKey) set.add(i); });
+    else for (const wid of p.works) for (const i of workMem.get(wid) ?? []) set.add(i);
+    personMem.set(p.id, [...set].sort((a, b) => occ[a].year - occ[b].year || a - b));
+  }
   for (const list of skyOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year || a - b);
   for (const p of places.values()) p.occ.sort((a, b) => occ[a].year - occ[b].year);
   // a single-occurrence "place" is just that occurrence; keep only real regions of recurrence
@@ -248,7 +265,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     }
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, workById, workKey, workMem, joins, joinsBy };
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, workById, workKey, workMem, personById, personMem, joins, joinsBy };
 }
 
 const BASIS_ORDER: Record<string, number> = { jung: 0, inferred: 1, site: 2 };
@@ -275,6 +292,7 @@ export function subjectMembers(m: Model, s: Subject): number[] {
   else if (s.type === 'family') list = m.famMem.get(s.id);
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
   else if (s.type === 'work') list = m.workMem.get(s.id);
+  else if (s.type === 'person') list = m.personMem.get(s.id);
   else list = m.places.get(s.id)?.occ;
   return list ?? [];
 }
@@ -296,6 +314,7 @@ export function subjectHome(m: Model, s: Subject): number[] {
   else if (s.type === 'family') list = m.famOcc.get(s.id);
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
   else if (s.type === 'work') list = m.workMem.get(s.id);
+  else if (s.type === 'person') list = m.personMem.get(s.id);
   else list = m.places.get(s.id)?.occ;
   return (list ?? []).filter((i) => m.located[i]);
 }
@@ -328,6 +347,7 @@ export function subjectName(m: Model, s: Subject): string {
   if (s.type === 'family') return m.famById.get(s.id)?.name ?? s.id;
   if (s.type === 'culture') return m.cultureById.get(s.id)?.name ?? s.id;
   if (s.type === 'work') return m.workById.get(s.id)?.title ?? s.id;
+  if (s.type === 'person') return m.personById.get(s.id)?.name ?? s.id;
   return m.places.get(s.id)?.name ?? s.id;
 }
 
@@ -339,6 +359,7 @@ export function subjectLine(m: Model, s: Subject): string {
     const w = m.workById.get(s.id);
     return w ? [w.voice, w.display].filter(Boolean).join(', ') : '';
   }
+  if (s.type === 'person') return m.personById.get(s.id)?.role ?? '';
   return '';
 }
 
@@ -348,6 +369,7 @@ export function subjectExists(m: Model, s: Subject): boolean {
   if (s.type === 'family') return m.famById.has(s.id);
   if (s.type === 'culture') return m.cultureById.has(s.id);
   if (s.type === 'work') return m.workById.has(s.id);
+  if (s.type === 'person') return m.personById.has(s.id);
   return m.places.has(s.id);
 }
 
@@ -360,6 +382,13 @@ export function subjectPalette(m: Model, s: Subject, avg: (ps: { p: RGBPalette; 
   if (s.type === 'work') {
     const w = m.workById.get(s.id);
     return avg((w?.ties.families ?? []).map((t) => ({ p: m.famPalette.get(t.id)!, w: t.weight })).filter((x) => x.p));
+  }
+  // a person takes no hue of his own: the cite-weighted mean of the families the Works he wrote touch, else of his own occurrences
+  if (s.type === 'person') {
+    const w = new Map<string, number>();
+    for (const wid of m.personById.get(s.id)?.works ?? []) for (const t of m.workById.get(wid)?.ties.families ?? []) w.set(t.id, (w.get(t.id) ?? 0) + t.weight);
+    const byWorks = avg([...w].map(([id, weight]) => ({ p: m.famPalette.get(id)!, w: weight })).filter((x) => x.p));
+    if (byWorks) return byWorks;
   }
   const items = subjectOccurrences(m, s).map((i) => ({ p: m.famPalette.get(m.occ[i].familyId)!, w: 1 })).filter((x) => x.p);
   return avg(items);

@@ -8,7 +8,16 @@
       "born": "1875-07-26",
       "died": "1961-06-06",
       "role": "Analytical psychologist",
-      "portrait": null,
+      "portrait": {
+        "src": "/img/jung-portrait.jpg",
+        "title": "Carl Gustav Jung",
+        "credit": "Unknown author",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+        "_file": "File:Carl Gustav Jung portrait.jpg",
+        "width": 366,
+        "height": 567
+      },
       "subjectKey": "jung",
       "birth": {
         "date": "1875-07-26",
@@ -17,30 +26,18 @@
         "place": "Kesswil, Thurgau",
         "lat": 47.6,
         "lon": 9.32,
-        "offset": "mean-time",
-        "portrait": {
-          "src": "/img/jung-portrait.jpg",
-          "title": "Carl Gustav Jung",
-          "credit": "Unknown author",
-          "license": "Public domain",
-          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
-          "_file": "File:Carl Gustav Jung portrait.jpg",
-          "width": 366,
-          "height": 567
-        }
+        "offset": "mean-time"
       },
       "sources": {
         "name": "curation/astrology.json people[0].label “C. G. Jung”",
-        "born": "curation/astrology.json people[0].birth.date",
+        "born": "curation/astrology.json people[0].line “come from the public record”",
         "died": "corpus cw01 p9 “following Jung’s death on June 6, 1961”",
         "role": "corpus cw07 p5 “the history of analytical psychology”",
-        "portrait": null,
+        "portrait": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
         "subjectKey": "public/data/field.json occurrences “jung” (82 occurrences carry subject jung)",
-        "birth": "curation/astrology.json people[0].birth"
+        "birth": "curation/people.json people.jung.birth.timeSource “Gret Baumann-Jung”"
       },
-      "reasons": {
-        "portrait": "no registry id for Jung in images.json or images-ext*.json; his Commons portrait is carried in birth.portrait, copied from curation/astrology.json people[0]"
-      }
+      "reasons": {}
     },
     "von-franz": {
       "id": "von-franz",
