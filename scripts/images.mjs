@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Wikimedia Commons image fetcher: hero images for archetypes + families, selected occurrences.
-// Usage: node scripts/images.mjs [--only archetypes|families|occurrences|theoretics] [--id a,b] [--redo a,b] [--dry]
+// Usage: node scripts/images.mjs [--only archetypes|families|occurrences|theoretics] [--id a,b] [--redo a,b] [--dry] [--prune]
 //        node scripts/images.mjs --family-batch [--workers 6]   (parallel lanes, shared request gate)
 //        node scripts/images.mjs --remeta   (refresh baked title/credit/license from Commons; bytes untouched)
 // Re-runnable: already-downloaded ids are skipped (their ImageRef lives in public/data/images.json).
@@ -46,6 +46,9 @@ const only = RAW_ONLY && GROUPS.includes(RAW_ONLY) ? RAW_ONLY : null;
 const onlyIds = RAW_ONLY && !only ? (opt('--id')?.split(',') || RAW_ONLY.split(',')) : opt('--id')?.split(',');
 const redo = new Set(opt('--redo')?.split(',') || []);
 const dry = args.includes('--dry');
+// a `skip` in image-queries.json removes a plate already in the register only when asked: the register can hold plates
+// restored on purpose after the skip was written (d544905), and a routine `npm run data` must not undo that
+const prune = args.includes('--prune');
 
 fs.mkdirSync(CACHE, { recursive: true });
 for (const g of GROUPS) fs.mkdirSync(path.join(IMG_DIR, g), { recursive: true });
@@ -963,6 +966,7 @@ async function runFamilyBatch() {
 if (familyBatch) { await runFamilyBatch(); process.exit(0); }
 
 const summary = { archetypes: [0, 0], families: [0, 0], theoretics: [0, 0], occurrences: [0, 0] };
+let keptSkipped = 0;
 const missing = [];
 let occDone = Object.keys(images.occurrences).length;
 for (const group of groups) {
@@ -985,6 +989,7 @@ for (const group of groups) {
     summary[group][1]++;
     const spec = (queries[group] || {})[id];
     if (spec?.skip) {
+      if (images[group][id] && !prune) { keptSkipped++; continue; }
       if (images[group][id]) {
         for (const f of [`${id}.jpg`, `${id}.thumb.jpg`]) fs.rmSync(path.join(IMG_DIR, group, f), { force: true });
         deleted.add(`${group}/${id}`);
@@ -1050,6 +1055,7 @@ function dir_over_budget() { return dirSize(IMG_DIR) > BUDGET_BYTES; }
 
 save();
 const mb = (dirSize(IMG_DIR) / 1048576).toFixed(1);
+if (keptSkipped) console.log(`\nkept ${keptSkipped} plate(s) whose query says skip (pass --prune to remove them)`);
 console.log(`\ncoverage: archetypes ${summary.archetypes[0]}/${field.archetypes.length}, families ${summary.families[0]}/${field.families.length}, theoretics ${summary.theoretics[0]}/${field.theoretics.length}, occurrences ${Object.keys(images.occurrences).length} (${summary.occurrences[1]} requested); total ${mb} MB`);
 if (missing.length) {
   const show = missing.slice(0, 60);
