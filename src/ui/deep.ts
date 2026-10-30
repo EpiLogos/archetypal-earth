@@ -1,7 +1,9 @@
 // DEEP: the optional reading layer — longer body text, the definition, all cites,
 // related forms. A wide translucent sheet; the globe stays visible behind it.
 import type { Model, Subject } from '../data/model';
-import { archetypesOfFamily, occurrenceImage, subjectName, subjectOccurrences, subjectSky } from '../data/model';
+import { archetypesOfFamily, occurrenceImage, subjectMembers, subjectName, subjectOccurrences, subjectSky } from '../data/model';
+import { plates } from '../data/plates';
+import { workLens } from '../data/texts';
 import { bodyOfLocus, locusPhrase } from '../data/skyplace';
 import type { BodyKey } from '../types/sky';
 import type { Cite, Occurrence } from '../types/field';
@@ -11,7 +13,7 @@ import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
 import { citeLine, eraShort, placeLine, shortWork } from './format';
-import { quote } from './quote';
+import { quote, quoteList, type ListedQuote } from './quote';
 import { definitionQuote, loadLensData, occurrenceQuote, qlBlock, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { relatedPlates, relatedRows, SYSTEM_LABEL } from './related';
@@ -65,6 +67,12 @@ export interface DeepHandlers {
   onBody?(key: BodyKey): void;
   /** present when the corpus index is available: cites become deep links */
   onCite?(work: string, locator: string): void;
+  /** open a Work's page (a cite names the Work it is from) */
+  onWork?(workId: string): void;
+  /** read a Work through its page walk (the Texts lens, or the Work's own lens), from stop `at` when given */
+  onReadText?(workId: string, at?: number): void;
+  /** open a Person's chart in Astrology (only a Person whose record holds a birth) */
+  onOpenChart?(personId: string): void;
   passage?: PassageBridge;
 }
 
@@ -212,13 +220,146 @@ export class DeepSheet {
       this.appendRelated(s);
       this.appendOccurrenceList(subjectOccurrences(m, s));
       this.appendCites(subjectOccurrences(m, s).map((i) => m.occ[i]));
+    } else if (s.type === 'work') {
+      this.renderWork(s.id);
+    } else if (s.type === 'person') {
+      this.renderPerson(s.id);
     } else {
       const idx = subjectOccurrences(m, s);
-      const name = s.type === 'culture' ? m.cultureById.get(s.id)?.name : s.type === 'work' || s.type === 'person' ? subjectName(m, s) : m.places.get(s.id)?.name;
+      const name = s.type === 'culture' ? m.cultureById.get(s.id)?.name : m.places.get(s.id)?.name;
       a.append(el('h2', { class: 'dp-title', text: name ?? s.id }));
       this.appendOccurrenceList(idx);
       this.appendCites(idx.map((i) => m.occ[i]));
     }
+    this.appendFooter();
+  }
+
+  // ── a Work: a text, read through its cites ─────────────────────────────
+  private renderWork(id: string) {
+    const m = this.model;
+    const a = this.article;
+    const w = m.workById.get(id);
+    const wl = workLens(m, id);
+    if (!w || !wl) return;
+    a.append(el('h2', { class: 'dp-title', text: w.title }));
+    const byline = [w.voice, w.year ? String(w.year) : ''].filter(Boolean).join(' · ');
+    if (byline) a.append(el('p', { class: 'dp-lede', text: byline }));
+    // the hand behind the work, where the field holds a record of them
+    const author = m.personById.get(w.author);
+    if (author && this.h.onSubject) {
+      a.append(el('p', { class: 'dp-by' }, [el('span', { text: 'By ' }), el('button', { type: 'button', class: 'link-quiet dp-author', text: author.name, onclick: () => this.h.onSubject({ type: 'person', id: author.id }) })]));
+    }
+    if (wl.walk?.stops.length || wl.lens) {
+      a.append(el('p', { class: 'dp-acts' }, [
+        el('button', { type: 'button', class: 'lp-btn primary dp-read', text: 'Read through this text', onclick: () => this.h.onReadText?.(w.id) }),
+      ]));
+    }
+    this.appendWorkPlates(wl);
+    if (wl.contents.length) {
+      a.append(el('h3', { class: 'dp-sub', text: 'Contents' }));
+      const ol = el('ol', { class: 'dp-contents' });
+      for (const c of wl.contents) {
+        const has = c.to > c.from;
+        ol.append(el('li', { style: `--lvl:${Math.max(0, c.level - 1)}` }, [
+          has ? el('button', { type: 'button', class: 'link-quiet', text: c.title, onclick: () => this.h.onReadText?.(w.id, c.from) }) : el('span', { text: c.title }),
+          has ? el('span', { class: 'dp-cite-year', text: ` ${c.to - c.from}` }) : null,
+        ]));
+      }
+      a.append(ol);
+    }
+    // its cites in page order: the quotations first (through the one list form), then the instances that cite it
+    const stops = wl.walk?.stops ?? [];
+    const quotes: ListedQuote[] = [];
+    for (const st of stops) {
+      const i = st.subject?.type === 'occurrence' ? m.occIndex.get(st.subject.id) : undefined;
+      if (i === undefined) continue;
+      const o = m.occ[i];
+      const q = occurrenceQuote(o);
+      if (!q || typeof q.cite === 'string' || m.workKey.get(q.cite.work) !== w.id) continue;
+      quotes.push({ ...q, cite: q.cite });
+    }
+    if (quotes.length) a.append(quoteList(quotes, { title: 'Quotations', passages: this.h.passage, emphasis: 'compact' }));
+    if (stops.length) {
+      a.append(el('h3', { class: 'dp-sub', text: providerLabels().citesHeading }));
+      const ul = el('ul', { class: 'dp-occ dp-work-cites' });
+      const SHOW = 12;
+      const all = stops.flatMap((st) => {
+        const i = st.subject?.type === 'occurrence' ? m.occIndex.get(st.subject.id) : undefined;
+        return i === undefined ? [] : [{ o: m.occ[i], page: st.page?.page }];
+      });
+      const row = ({ o, page }: { o: (typeof m.occ)[number]; page?: number }) => el('li', {}, [
+        el('span', { class: 'dp-occ-year', text: page ? `pdf p${page}` : '' }),
+        el('button', { class: 'link-quiet', type: 'button', text: o.label, onclick: () => this.h.onOccurrence(o.id) }),
+      ]);
+      ul.append(...all.slice(0, SHOW).map(row));
+      a.append(ul);
+      if (all.length > SHOW) {
+        const more = el('p', { class: 'qs-more' }, [el('button', { type: 'button', class: 'link-quiet', text: `Show all ${all.length}`, onclick: () => { ul.append(...all.slice(SHOW).map(row)); more.remove(); } })]);
+        a.append(more);
+      }
+    }
+    this.appendFooter();
+  }
+
+  /** The plates the Work's cited instances carry, once each: a strip, each opening the instance it is from. */
+  private appendWorkPlates(wl: NonNullable<ReturnType<typeof workLens>>) {
+    const m = this.model;
+    const seen = new Set<string>();
+    const items: { id: string; label: string; plate: ReturnType<typeof plates> }[] = [];
+    for (const st of wl.walk?.stops ?? []) {
+      if (st.subject?.type !== 'occurrence' || items.length >= 8) continue;
+      const i = m.occIndex.get(st.subject.id);
+      if (i === undefined) continue;
+      const pl = plates(m, { type: 'occurrence', id: st.subject.id });
+      if (!pl.image || pl.standIn || seen.has(pl.image.src)) continue;
+      seen.add(pl.image.src);
+      items.push({ id: st.subject.id, label: m.occ[i].label, plate: pl });
+    }
+    if (items.length < 2) return;
+    const strip = el('ul', { class: 'dp-strip', role: 'list' });
+    for (const it of items) {
+      strip.append(el('li', {}, [
+        el('button', { class: 'dp-strip-item', type: 'button', title: it.label, 'aria-label': it.label, onclick: () => this.h.onOccurrence(it.id) }, [
+          plate(it.plate.image, { thumb: true, className: 'dp-strip-plate', palette: it.plate.palette, alt: it.label }),
+          el('span', { class: 'dp-strip-name', text: it.label, 'aria-hidden': 'true' }),
+        ]),
+      ]));
+    }
+    this.article.append(strip);
+  }
+
+  // ── a Person: the hand behind the words ───────────────────────────────
+  private renderPerson(id: string) {
+    const m = this.model;
+    const a = this.article;
+    const p = m.personById.get(id);
+    if (!p) return;
+    a.append(el('h2', { class: 'dp-title', text: p.name }));
+    // dates and role only where a record gives them: a blank is nothing on the page
+    const dates = [p.born, p.died].filter((x) => x !== null && x !== undefined && x !== '').map((x) => String(x).slice(0, 4));
+    const years = p.born && p.died ? `${dates[0]} – ${dates[1]}` : dates.length === 1 ? (p.born ? `born ${dates[0]}` : `died ${dates[0]}`) : '';
+    const line = [p.role ?? '', years].filter(Boolean).join(' · ');
+    if (line) a.append(el('p', { class: 'dp-lede', text: line }));
+    const pl = plates(m, { type: 'person', id });
+    if (pl.image) a.append(plate(pl.image, { credit: true, className: 'dp-figure dp-portrait', palette: pl.palette, eager: true, alt: p.name }));
+    if (p.natal) {
+      const b = p.natal.bodies;
+      const bits = [b.sun && `Sun in ${b.sun.sign}`, b.moon && `Moon in ${b.moon.sign}`, p.natal.timeKnown !== false ? `${p.natal.angles.ascendant.sign} rising` : ''].filter(Boolean);
+      if (bits.length) a.append(el('p', { class: 'dp-chart-line', text: bits.join(' · ') }));
+      if (this.h.onOpenChart && p.birth) a.append(el('p', { class: 'dp-acts' }, [el('button', { type: 'button', class: 'lp-btn primary dp-chart', text: 'Open the chart', onclick: () => this.h.onOpenChart!(p.id) })]));
+    }
+    const works = p.works.map((wid) => m.workById.get(wid)).filter((w): w is NonNullable<typeof w> => !!w);
+    if (works.length) {
+      a.append(el('h3', { class: 'dp-sub', text: 'Works' }));
+      const row = el('p', { class: 'dp-flow dp-works' });
+      works.forEach((w, i) => {
+        if (i) row.append(' · ');
+        row.append(el('button', { class: 'link-quiet', type: 'button', text: w.title, onclick: () => this.h.onWork?.(w.id) }));
+      });
+      a.append(row);
+    }
+    // the field's occurrences that are about them (their own subject), where there are any
+    if (p.subjectKey) this.appendOccurrenceList(subjectMembers(m, { type: 'person', id }));
     this.appendFooter();
   }
 
@@ -469,7 +610,7 @@ export class DeepSheet {
     if (o.jung.length) {
       a.append(el('h3', { class: 'dp-sub', text: providerLabels().citesMeet }));
       const ul = el('ul', { class: 'dp-cites' });
-      o.jung.forEach((c) => ul.append(el('li', {}, [this.citeLink(c)])));
+      o.jung.forEach((c) => ul.append(el('li', {}, [this.citeLink(c), this.workDoor(c)])));
       a.append(ul);
     }
     if (fam) {
@@ -496,6 +637,13 @@ export class DeepSheet {
     const text = citeLine(c);
     if (!this.h.onCite || !this.h.passage?.known(c.work)) return el('span', { text });
     return el('button', { class: 'link-quiet dp-cite-link', type: 'button', text, title: 'Open the passage in the corpus', 'aria-label': `${text} — open the passage`, onclick: () => this.h.onCite!(c.work, c.locator) });
+  }
+
+  /** The door from a cite to the Work it is from: its page. Absent where the Work has no record. */
+  private workDoor(c: Cite): HTMLElement | null {
+    const id = this.model.workKey.get(c.work);
+    if (!id || !this.h.onWork) return null;
+    return el('button', { class: 'link-quiet dp-cite-work', type: 'button', text: 'the work', title: `Open ${this.model.workById.get(id)?.title ?? 'the work'}`, 'aria-label': `Open the work: ${this.model.workById.get(id)?.title ?? id}`, onclick: () => this.h.onWork!(id) });
   }
 
   private appendFooter() {

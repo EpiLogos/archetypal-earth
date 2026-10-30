@@ -210,16 +210,19 @@ export class Controller {
     this.deep = new DeepSheet(root, m, {
       // the sheet's close is the same step back as Escape: a walk's reading returns to the walk (store.back)
       onClose: () => this.closeReading(),
-      onSubject: (s) => this.navigate(focusOn(this.state, s)),
+      onSubject: (s) => this.openSubject(s),
       onOccurrence: (id) => this.openOccurrenceId(id),
       onBody: (key) => this.openBody(key),
       onCite: openCite,
+      onWork: (id) => this.openSubject({ type: 'work', id }),
+      onReadText: (id, at) => this.navigate(inLens('texts', at === undefined ? [id] : [id, String(at)])),
+      onOpenChart: (id) => this.navigate(astrologyAt([id])),
       passage: passages,
     });
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
       onLens: (id) => { this.you.hide(); this.navigate(inLens(id, [])); },
-      onSubject: (s) => { this.you.hide(); if (s.type === 'occurrence') this.openOccurrenceId(s.id); else this.navigate(focusOn(withMode(this.state, false), s as Subject)); },
+      onSubject: (s) => { this.you.hide(); if (s.type === 'occurrence') this.openOccurrenceId(s.id); else this.openSubject(s as Subject, withMode(this.state, false)); },
     });
     // the visitor's node follows the practice store: a dream written, a chart saved, a line forgotten
     practice.onChange(() => this.syncPersonal());
@@ -561,6 +564,16 @@ export class Controller {
     }
     if (w?.lens === 'redbook' && this.redbookData) return { view: { kind: 'world' }, deep: false, redbook: {} };
     return next;
+  }
+
+  /**
+   * Focus a subject. A Work or a Person is a node whose page is its substance, so it is focused with its page open (the graph,
+   * search, a cite, a person's list of works and the visitor's own trail all arrive here); any other subject is focused as
+   * `focusOn` does. `from` is the state to focus from (the standing one by default).
+   */
+  private openSubject(subject: Subject, from: AppState = this.state) {
+    const next = focusOn(from, subject);
+    this.navigate(subject.type === 'work' || subject.type === 'person' ? { ...next, deep: true } : next);
   }
 
   /**
@@ -2064,8 +2077,8 @@ export class Controller {
     if (t === 'a') this.navigate(focusOn(this.state, { type: 'archetype', id }));
     else if (t === 't') this.navigate(focusOn(this.state, { type: 'theoretic', id }));
     else if (t === 'f') this.navigate(focusOn(this.state, { type: 'family', id }));
-    else if (t === 'w') this.navigate(focusOn(this.state, { type: 'work', id }));
-    else if (t === 'p') this.navigate(focusOn(this.state, { type: 'person', id }));
+    else if (t === 'w') this.openSubject({ type: 'work', id });
+    else if (t === 'p') this.openSubject({ type: 'person', id });
     else this.openOccurrenceId(id);
   }
 
@@ -2082,8 +2095,8 @@ export class Controller {
       if (t === 'b') return this.onGraphBody(id as BodyKey);
       // the visitor has no place on the Earth: their page opens where they are
       if (t === 'you') { this.you.show(); return; }
-      if (t === 'w') return this.navigate(focusOn(earth, { type: 'work', id }));
-      if (t === 'p') return this.navigate(focusOn(earth, { type: 'person', id }));
+      if (t === 'w') return this.openSubject({ type: 'work', id }, earth);
+      if (t === 'p') return this.openSubject({ type: 'person', id }, earth);
       if (t === 'a') return this.navigate(focusOn(earth, { type: 'archetype', id }));
       if (t === 't') return this.navigate(focusOn(earth, { type: 'theoretic', id }));
       if (t === 'f') return this.navigate(focusOn(earth, { type: 'family', id }));
