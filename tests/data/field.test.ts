@@ -136,19 +136,6 @@ describe('field.json contract', () => {
     expect(Object.keys(reasons).filter((id) => field.archetypes.find((a) => a.id === id)?.image)).toEqual([]);
   });
 
-  it('every body paragraph carries a voice: no unlabelled prose in the data (6,000 occurrence paragraphs and the rest)', () => {
-    const bare: string[] = [];
-    let paragraphs = 0;
-    for (const [kind, list] of [['occurrence', field.occurrences], ['family', field.families], ['archetype', field.archetypes], ['theoretic', field.theoretics]] as const) {
-      for (const n of list as { id: string; body: string[]; bodyVoices?: string[] }[]) {
-        paragraphs += n.body.length;
-        if (!Array.isArray(n.bodyVoices) || n.bodyVoices.length !== n.body.length || n.bodyVoices.some((v) => v !== 'atlas')) bare.push(`${kind} ${n.id}`);
-      }
-    }
-    expect(paragraphs).toBeGreaterThan(6000);
-    expect(bare).toEqual([]);
-  });
-
   it('parallelIds only reference existing occurrences', () => {
     const ids = new Set(field.occurrences.map((o) => o.id));
     for (const o of field.occurrences) for (const p of o.parallelIds) expect(ids.has(p), `${o.id} -> ${p}`).toBe(true);
@@ -268,5 +255,30 @@ describe('field.json contract', () => {
       } else expect(x.image!.license).toMatch(/Public domain|CC0|CC BY|owner's ruling \(D8\)/); // D8: the Thoth plates ship on the owner's ruling
     }
     expect(field.meta.counts.images).toBe(imgs.length);
+  });
+});
+
+// R1 (owner, 30 Oct): the shipped data carries no labels, metadata or decision residue. The reasons for a demotion, a missing
+// concept or an atlas voice live in curation/ or in the code that reads it, never in public/data.
+describe('the published data carries no decision residue', () => {
+  const shipped = (f: string) => fs.readFileSync(path.join(ROOT, 'public', 'data', f), 'utf8');
+  it('field.json has no bodyVoices and no quoteKind; a demoted record shows no quotation', () => {
+    const text = shipped('field.json');
+    expect(text).not.toContain('"bodyVoices"');
+    expect(text).not.toContain('"quoteKind"');
+  });
+  it('the field, theory and depth pages carry no page or section voice (a quotation keeps its own voice)', () => {
+    const pageVoices = (doc: { pages?: Record<string, any>; archetypes?: Record<string, any> }) => {
+      const bad: string[] = [];
+      for (const [k, p] of Object.entries({ ...(doc.pages ?? {}), ...(doc.archetypes ?? {}) })) {
+        if (p.voice !== undefined) bad.push(`${k}: page`);
+        for (const s of p.sections ?? []) if (s.voice !== undefined) bad.push(`${k}.${s.id}: section`);
+      }
+      return bad;
+    };
+    for (const f of ['field-pages.json', 'theory-pages.json', 'depth.json']) expect(pageVoices(JSON.parse(shipped(f))), f).toEqual([]);
+  });
+  it('the route carries no conceptReason', () => {
+    expect(shipped('dynamics-route.json')).not.toContain('conceptReason');
   });
 });

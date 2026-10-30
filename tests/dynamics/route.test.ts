@@ -19,16 +19,18 @@ describe('the route through Van Eenwyk', () => {
     for (const s of stops) expect(Object.keys(FIGURES)).toContain(s.figure);
   });
 
-  it('every stop resolves a concept or records the reason it has none', () => {
+  it('every stop resolves a concept or records, in the curation, the reason it has none; the reason is not published', () => {
+    const cur = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'dynamics-route.json'), 'utf8'));
     const pub = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', 'dynamics-route.json'), 'utf8'));
     const concepts = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', 'dynamics.json'), 'utf8')).concepts.map((c: { id: string }) => c.id));
-    const stops = pub.movements.flatMap((m: { stops: { id: string; concept?: string; conceptReason?: string }[] }) => m.stops);
+    const stops = cur.movements.flatMap((m: { stops: { id: string; concept?: string; conceptReason?: string }[] }) => m.stops);
     const bare = stops.filter((s: { concept?: string }) => !s.concept).map((s: { id: string }) => s.id);
     expect(bare).toEqual(['neumann-stages', 'ql-cycle']);
     for (const s of stops) {
       if (s.concept) { expect(concepts.has(s.concept)).toBe(true); expect(s.conceptReason).toBeUndefined(); }
       else expect((s.conceptReason ?? '').length).toBeGreaterThan(40);
     }
+    expect(JSON.stringify(pub)).not.toContain('conceptReason');
   });
 
   it('the generator and the client know the same figures, each captioned as drawn here', () => {

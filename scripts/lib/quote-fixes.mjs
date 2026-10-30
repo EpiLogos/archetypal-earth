@@ -9,9 +9,9 @@
 //   work      (occurrence) the work of the primary cite, when the fix changes it
 //   locator   (occurrence) the corrected locator of the primary cite, e.g. "¶449 (pdf p240)"
 //   cite      (definition) the corrected cite string, e.g. "Aion (CW9ii) ¶426"
-//   demote    true: no corpus page carries these words, so the record stays and its text is LABELLED paraphrase (occurrence: quoteKind
-//             "paraphrase"; definition: definition.quoteKind "paraphrase"). A demotion changes nothing else, and nothing is deleted.
-//             scripts/quote-oracle.mjs skips a demoted record: it is no longer presented as a quotation.
+//   demote    true: no corpus page carries these words, so they are not shown as a quotation: the published record drops its `quote`
+//             (a definition: its `definition`) and keeps everything else, its body and its cite. The demotion lives here and only
+//             here; nothing about it is published. A record with no quote is not a quotation, so scripts/quote-oracle.mjs has nothing to ask of it.
 //   basis     required: the line that proves the fix (the corpus page the words stand on)
 // scripts/quote-oracle.mjs is what proves a fix: after `npm run ingest` the record must pass. Nothing here is typed from memory.
 
@@ -55,7 +55,8 @@ export function applyQuoteFixes({ occurrences = [], families = [], archetypes = 
     if (o) {
       if (f.demote === true) {
         if (!o.quote) { problems.push(`${id}: the occurrence has no quote to demote`); continue; }
-        o.quoteKind = 'paraphrase';
+        delete o.quote;
+        delete o.caption;
         applied.push(id);
         continue;
       }
@@ -78,7 +79,7 @@ export function applyQuoteFixes({ occurrences = [], families = [], archetypes = 
       applied.push(id);
     } else if (d) {
       if (!d.definition) { problems.push(`${id}: no definition to correct`); continue; }
-      if (f.demote === true) { d.definition.quoteKind = 'paraphrase'; applied.push(id); continue; }
+      if (f.demote === true) { delete d.definition; applied.push(id); continue; }
       if (f.primary !== undefined || f.work !== undefined || f.locator !== undefined) { problems.push(`${id}: a definition takes "text" and "cite" only`); continue; }
       if (f.text !== undefined) d.definition.text = f.text;
       if (f.cite !== undefined) d.definition.cite = f.cite;

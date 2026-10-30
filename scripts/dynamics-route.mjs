@@ -40,7 +40,7 @@ export function buildRoute({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
       seen.add(id);
       if (s.concept && !concepts.has(s.concept)) errors.push(`${where}: no concept ${s.concept} in public/data/dynamics.json`);
       if (!s.concept && (!s.name || !s.familyIds?.length)) errors.push(`${where}: a stop of its own needs a name and its families`);
-      if (!s.concept && !(typeof s.conceptReason === 'string' && s.conceptReason.length > 20)) errors.push(`${where}: a stop without a concept records the reason it has none (conceptReason)`);
+      if (!s.concept && !(typeof s.conceptReason === 'string' && s.conceptReason.length > 20)) errors.push(`${where}: a stop without a concept records the reason it has none in the curation (conceptReason; never published)`);
       if (s.concept && s.conceptReason) errors.push(`${where}: a stop with a concept carries no conceptReason`);
       if (!FIGURES.includes(s.figure)) errors.push(`${where}: no figure ${s.figure}`);
       if (!s.line) errors.push(`${where}: a stop needs its line`);
@@ -49,7 +49,7 @@ export function buildRoute({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
       const quotes = citeQuotes(load, titles, (s.quotes ?? []).map((q) => ({ ...q, voice: VOICE[q.work] })), where, errors, warnings);
       return {
         id, figure: s.figure, line: s.line,
-        ...(s.concept ? { concept: s.concept } : { name: s.name, familyIds: s.familyIds, conceptReason: s.conceptReason }),
+        ...(s.concept ? { concept: s.concept } : { name: s.name, familyIds: s.familyIds }),
         ...(quotes.length ? { quotes } : {}),
         ...(s.ql?.length ? { ql: s.ql } : {}),
       };

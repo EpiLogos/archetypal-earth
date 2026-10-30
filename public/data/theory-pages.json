@@ -4,13 +4,11 @@
   "aion-time": {
    "concept": "aion-time",
    "line": "Passages on the aeon, enantiodromia, the quality of the moment, kairos and chronos, the world clock and the eternal return, with two statements of Van Eenwyk's.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-aeon",
      "title": "The aeon",
      "line": "Aion (CW9ii, 1951), its foreword and ¶136, and Flying Saucers (CW10 ¶589, 1958): the Pisces aeon, and the spring-point's entry into Aquarius.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It is therefore only natural that my reflections should gravitate mainly round the symbol of the Fishes, for the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development.",
@@ -50,7 +48,6 @@
      "id": "enantiodromia",
      "title": "Enantiodromia",
      "line": "CW6 ¶708–709, where Jung defines the term (Psychological Types, Definitions); CW13 ¶294, CW7 ¶111 and CW11 ¶526, where he uses it.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "it is used to designate the play of opposites in the course of events—the view that everything that exists turns into its opposite.",
@@ -98,7 +95,6 @@
      "id": "the-moment",
      "title": "The quality of the moment",
      "line": "Jung on time: the quality of a moment (CW15 ¶82, Richard Wilhelm: In Memoriam, 1930), kairos (CW10 ¶398), time and energy (the seminars of 4 December 1929 and 8 June 1932) and the unconscious's space-time continuum (CW9ii ¶45).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "In other words, whatever is born or done at this particular moment of time has the quality of this moment of time.",
@@ -157,7 +153,6 @@
      "id": "the-world-clock",
      "title": "The world clock",
      "line": "CW12 ¶307 (Psychology and Alchemy, Part II, the Vision of the World Clock) and the Zarathustra seminar's statement on the eternal return (pdf p1375).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "There is a vertical and a horizontal circle, having a common centre. This is the world clock",
@@ -181,7 +176,6 @@
      "id": "as-a-system",
      "title": "The turn as a system",
      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): two sentences from his account of chaos and order; the words are his, not Jung's.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Mathematically, this self-or- ganization takes place at a homoclinic point, which designates not only where a dynamic becomes unstable, but where it becomes stable as well.",
@@ -222,13 +216,11 @@
   "archetype-as-such": {
    "concept": "archetype-as-such",
    "line": "Where Jung defines the archetype as such and sets it beside the word's ancestry, the instincts and typical situations: CW9i, CW8, CW16 and the Dream Analysis seminar of 1930.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-model",
      "title": "The model",
      "line": "CW9i ¶6 and ¶155, and the Dream Analysis seminar of 12 March 1930: the archetype called a hypothetical and irrepresentable model, empty and purely formal, perfectly indescribable.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The archetype as such is a hypothetical and irrepresentable model, something like the \"pattern of behaviour\" in biology.",
@@ -263,7 +255,6 @@
      "id": "the-name",
      "title": "The name",
      "line": "CW8 ¶275, in Instinct and the Unconscious (1919): Jung names Augustine as the source of the idea of the archetype; the vault records ¶270 of that essay as his first use of the term.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "from whom I have borrowed the idea of the archetype",
@@ -287,7 +278,6 @@
      "id": "the-instincts-side",
      "title": "The instinct's side",
      "line": "CW8 ¶339 (The Structure of the Psyche, 1927), CW8 ¶277 and a passage of CW16: the archetypes set beside the instincts.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It is not just a gigantic historical prejudice, so to speak, an a priori historical condition; it is also the source of the instincts, for the archetypes are simply the forms which the instincts assume.",
@@ -319,7 +309,6 @@
      "id": "as-many-as-situations",
      "title": "As many as situations",
      "line": "CW9i ¶99: how many archetypes there are, in Jung's words.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "as many archetypes as there are typical situations",
@@ -363,13 +352,11 @@
   "collective-unconscious": {
    "concept": "collective-unconscious",
    "line": "Jung's statements defining the collective unconscious (CW3, CW6, CW9i), on what is inherited (CW8, CW10), on its relation to the instincts (CW8, CW9i) and on its inference from individual phenomenology (CW9ii, CW8).",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-deeper-layer",
      "title": "The deeper layer",
      "line": "CW9i ¶2 (1934, Eranos; rev. 1954): the definition; ¶88: the collective unconscious distinguished negatively from the personal unconscious.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "A more or less superficial layer of the unconscious is undoubtedly personal. I call it the personal unconscious. But this personal unconscious rests upon a deeper layer, which does not derive from personal experience and is not a personal acquisition but is inborn. This deeper layer I call the collective unconscious.",
@@ -394,7 +381,6 @@
      "id": "birth",
      "title": "The concept's birth",
      "line": "CW3 ¶550 and CW6 ¶842 (Psychological Types, 1921): two earlier statements of a deeper stratum of a collective nature.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "We must rather suppose that they are something like universally existent constituents of the unconscious psyche, which form, as it were, a deeper stratum of a collective nature, in contradistinction to the personally acquired contents of the more superficial layers, or what one may call the personal unconscious.",
@@ -418,7 +404,6 @@
      "id": "the-formula",
      "title": "Inherited possibilities of ideas",
      "line": "CW10 ¶14 (the 1918 form, in the vault note's dating) and CW8 ¶99: innate and inherited possibilities of ideas.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "There are, however, innate possibilities of ideas, a priori conditions for fantasy-production, which are somewhat similar to the Kantian categories.",
@@ -442,7 +427,6 @@
      "id": "instinct",
      "title": "Instinct and its correlates",
      "line": "CW9i pdf p54 (the section The Concept of the Collective Unconscious) and CW8 ¶280, which names the instincts and their correlates, the archetypes.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "there exists a second psychic system of a collective, universal, and impersonal nature which is identical in all individuals",
@@ -466,7 +450,6 @@
      "id": "phenomenology",
      "title": "Inferred from phenomenology",
      "line": "CW9ii ¶278: the existence of the collective unconscious inferred only from individual phenomenology; CW8 ¶729: a world-image that counterbalances the conscious picture of the world.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "This disposition I have called the collective unconscious, the existence of which can be inferred only from individual phenomenology.",
@@ -509,13 +492,11 @@
   "compensation": {
    "concept": "compensation",
    "line": "Jung's statements on compensation: the definition against Adler's use (CW6), the self-regulating psyche (CW8, CW7), dreams, neurosis, ordering factors, and one sentence of Van Eenwyk's.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-definition",
      "title": "The definition",
      "line": "CW6 ¶694 (Psychological Types, 1921): Jung's definition, set against Adler's restriction of the word to the balancing of inferiority feelings.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Whereas Adler restricts his concept of compensation to the balancing of inferiority feelings, I conceive it as functional adjustment in general, an inherent self-regulation of the psychic apparatus.",
@@ -531,7 +512,6 @@
      "id": "self-regulation",
      "title": "The self-regulating psyche",
      "line": "CW8 ¶159 and ¶132 and CW7 ¶274: the psyche called a self-regulating system like the body, and the unconscious as compensatory or complementary to the conscious.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Since the psyche is a self-regulating system, just as the body is, the regulating counteraction will always develop in the unconscious.",
@@ -563,7 +543,6 @@
      "id": "the-dream",
      "title": "The dream's other side",
      "line": "CW7 ¶170 and CW18 ¶1391: Jung on dreams as compensatory to the conscious attitude.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "That would not be impossible, for in my experience the vast majority of dreams are compensatory. They always stress the other side in order to maintain the psychic equilibrium.",
@@ -587,7 +566,6 @@
      "id": "not-opposition",
      "title": "Not opposition",
      "line": "CW5 ¶98 (Symbols of Transformation) and CW16 ¶12: compensatory set beside mechanical and complementary.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Since the relation of the unconscious to the conscious mind is not merely mechanical or complementary, but rather compensatory, taking its cue from the anfractuosities of the conscious attitude, the intelligent character of this unconscious activity can hardly be denied.",
@@ -611,7 +589,6 @@
      "id": "the-ordering-factor",
      "title": "The ordering factor",
      "line": "CW11 ¶447 and CW3 ¶582: the phrase compensatory ordering factor, said of a factor independent of the ego and of mandala symbols in moments of psychic disorientation.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "My own personal experience, going back over several decades and garnered from many individuals, and the experience of many other doctors and psychologists, not to mention the statements— terminologically different, but essentially the same—of all the great religions, all confirm the existence of a compensatory ordering factor which is independent of the ego and whose nature transcends consciousness.",
@@ -635,7 +612,6 @@
      "id": "as-a-system",
      "title": "The counteraction as a system",
      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): one sentence on the shadow and compensation; the words are his, not Jung's.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Because the shadow compensates consciousness, whenever we think we know what the shadow is, its opposite automatically begins to emerge from the unconscious.",
@@ -675,13 +651,11 @@
   "complex": {
    "concept": "complex",
    "line": "Jung's statements on the complex from the association experiments (CW2) to the restatement of 1934 (CW8), with the passages on its autonomy and on energy.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-founding",
      "title": "The founding definition",
      "line": "CW2 ¶166 (1904–05): the definition of the emotionally charged complex; CW18 ¶832: Jung on how the experiments led him to the word.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The 7 We should like to compare this case with a distraction ex- 18 By \"emotionally charged complex\" we mean the sum of ideas referring to a particular feeling-toned event. We shall always use the term \"complex\" in this sense in what follows.",
@@ -705,7 +679,6 @@
      "id": "how-they-behave",
      "title": "How a complex behaves",
      "line": "CW2 ¶902, ¶861 and ¶1353, and CW11 ¶21: the complex as a second personality to which ego-consciousness is subjected, and as secondary or partial personalities.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The complex plays the part of a second and stronger personality, to which ego-consciousness is subjected.",
@@ -745,7 +718,6 @@
      "id": "what-one-is",
      "title": "What one is",
      "line": "CW8 ¶200–201 and ¶204 (1934, A Review of the Complex Theory): Jung's definition of the feeling-toned complex, his statement that complexes can have us, and his naming them splinter psyches.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "What then, scientifically speaking, is a \"feeling-toned complex\"? It is the image of a certain psychic situation which is strongly accentuated emotionally and is, moreover, incompatible with the habitual attitude of consciousness.",
@@ -777,7 +749,6 @@
      "id": "the-ground",
      "title": "The ground of psychic life",
      "line": "CW2 ¶664 and ¶610 on complexes and the background of consciousness, and the Dream Analysis seminar (pdf p442) on complexes and energy.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The background of our consciousness (or the unconscious) consists of such complexes.",
@@ -837,13 +808,11 @@
   "individuation": {
    "concept": "individuation",
    "line": "Jung's definitions and statements on individuation (CW6, CW7, CW9i, CW12, CW16, CW14), with the passages that name its two aspects, its aim, and the two tensions the vault note records.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-process",
      "title": "The process",
      "line": "CW6 ¶757, ¶758 and ¶762 (Definitions, 1921): the definition, and individuation as a natural necessity and as the development of consciousness out of the original state of identity.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "In general, it is the process by which individual beings are formed and differentiated; in particular, it is the development of the psychological individual (q.v.) as a being distinct from the general, collective psychology.",
@@ -875,7 +844,6 @@
      "id": "becoming-in-dividual",
      "title": "Becoming an 'in-dividual'",
      "line": "CW7 ¶266 (1928), CW12 ¶330 and CW9i ¶490: Jung's statements of what the word means, as in-dividual, as self and as whole.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Individuation means becoming an “in-dividual,” and, in so far as “individuality” embraces our innermost, last, and incomparable uniqueness, it also implies becoming one’s own self.",
@@ -907,7 +875,6 @@
      "id": "two-aspects",
      "title": "Two aspects",
      "line": "CW16 ¶448: the two principal aspects Jung names; CW7 ¶269: the aim of individuation as he states it against the persona and primordial images.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Individuation has two principal aspects: in the first place it is an internal and subjective process of integration, and in the second it is an equally indispensable process of objective relationship.",
@@ -931,7 +898,6 @@
      "id": "the-aim",
      "title": "The aim, and what it costs",
      "line": "CW7 ¶405 on the goal of individuation, CW14 ¶778 on the experience of the self and the ego, CW9i ¶256 on its psychological meaning and CW9i ¶705 on the union of opposites.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Sensing the self as something irrational, as an indefinable existent, to which the ego is neither opposed nor subjected, but merely attached, and about which it revolves very much as the earth revolves round the sun—thus we come to the goal of individuation.",
@@ -973,7 +939,6 @@
      "id": "the-dismantling",
      "title": "What it requires",
      "line": "CW7 ¶505: the dissolution of the persona as an indispensable condition, and what Jung says of conscious intention.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention, because conscious intention invariably leads to a typical attitude that excludes whatever does not fit in with it.",
@@ -1028,13 +993,11 @@
   "libido": {
    "concept": "libido",
    "line": "Jung's statements on libido: its definition as an energy-value (CW5), the energic viewpoint (CW4, CW5), canalization, mana and the types, and one sentence of Van Eenwyk's.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-redefinition",
      "title": "The redefinition",
      "line": "CW5 ¶197 (the 1928 revision of Wandlungen, in the vault note's dating): the definition of libido as an energy-value.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "We would be better advised, therefore, when speaking of libido, to understand it as an energy-value which is able to communicate itself to any field of activity whatsoever, be it power, hunger, hatred, sexuality, or religion, without ever being itself a specific instinct.",
@@ -1050,7 +1013,6 @@
      "id": "the-energic-view",
      "title": "The energic viewpoint",
      "line": "CW4 ¶567 and CW5 ¶189: psychological phenomena as manifestations of energy, and libido set beside energy in physics since Robert Mayer.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "All psychological phenomena can be considered as manifestations of energy, in the same way that all physical phenomena have been understood as energic manifestations ever since Robert Mayer discovered the law of the conservation of energy.",
@@ -1074,7 +1036,6 @@
      "id": "not-instinct",
      "title": "Not one instinct",
      "line": "CW5 ¶185: the reason Jung gives against a one-sided definition of libido.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The very fact that it is impossible to derive the whole mass of psychic phenomena from a single instinct forbids a one-sided definition of “libido.”",
@@ -1090,7 +1051,6 @@
      "id": "canalization",
      "title": "Canalization",
      "line": "CW5 ¶337, ¶344 and ¶398: the archetypes as river-beds of psychic life, symbols as transformers of libido, and sacrifice as a canalization of libido.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Christ is here touching on the archetype, and that, if anything, will convince Nicodemus, for the archetypes are the forms or river-beds along which the current of psychic life has always flowed.",
@@ -1122,7 +1082,6 @@
      "id": "the-charge",
      "title": "The charge",
      "line": "CW8 ¶128 (the primitive view of mana as a forerunner of the concept of psychic energy), CW5 ¶170 (libido as by nature daemonic) and CW6 ¶869 (the localization of libido in the types).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "We cannot escape the impression that the primitive view of mana is a forerunner of our concept of psychic energy and, most probably, of energy in general.",
@@ -1154,7 +1113,6 @@
      "id": "as-a-system",
      "title": "The current as a system",
      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): his phrase for what archetypes do with psychic energy; the words are his, not Jung's.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The Structure of the Psyche Archetypes play a key role in the synchronic dynamics of individuation by mobilizing psychic energy into a kind of alternating current between consciousness and the unconscious.",
@@ -1190,13 +1148,11 @@
   "mana": {
    "concept": "mana",
    "line": "Jung's statements on mana: Lehmann's definition and the primitive energetics around it (CW8), its occurrence in CW10 and CW16, the mana-personality (CW7) and later uses.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-definition",
      "title": "The definition",
      "line": "CW8 ¶114 and ¶128 (On Psychic Energy, 1928): the thesis on a magical potency, Lehmann's definition of mana, and Jung's remark that the primitive view of mana is a forerunner of the concept of psychic energy.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "the most primitive ideas concerning a magical potency, which is regarded both as an objective force and as a subjective state of intensity.",
@@ -1228,7 +1184,6 @@
      "id": "experience-not-concept",
      "title": "An experience, not a concept",
      "line": "CW10 ¶128 (the thing which is astonishing), CW16 ¶4 (mana as a universal medicinal or healing power) and CW8 ¶130 (the need to represent the sensed dynamism of psychic events in a concrete way).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "In the face of something extraordinary it is not he who is astonished, but rather the thing which is astonishing.",
@@ -1260,7 +1215,6 @@
      "id": "not-a-concept",
      "title": "The reservations",
      "line": "CW8 ¶127: mana called a representation and not a concept; CW8 ¶129: Jung, following Lehmann, writes that nothing divine attaches to mana.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Thus mana is not a concept but a representation based on the perception of a \"phenomenal\" relationship.",
@@ -1284,7 +1238,6 @@
      "id": "the-mana-personality",
      "title": "The mana-personality",
      "line": "CW7 ¶388: Jung's name for a personality consistent with the extraordinarily potent (Napoleon and Lao-tzu are the two figures in the passage), and what he says it corresponds to.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It corresponds to a dominant of the collective unconscious, to an archetype which has taken shape in the human psyche through untold ages of just that kind of experience.",
@@ -1300,7 +1253,6 @@
      "id": "mana-now",
      "title": "Mana now",
      "line": "CW10 ¶845 and ¶583 (Civilization in Transition): two later uses of the word, for conscience and for the effect of deepened consciousness.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Conscience is a manifestation of mana, of the “extraordinarily powerful,” a quality which is the especial peculiarity of archetypal ideas.",
@@ -1351,13 +1303,11 @@
   "numinosum": {
    "concept": "numinosum",
    "line": "Jung's uses of Otto's word: its definition in CW11 ¶6, and later passages in CW8, CW10 and CW18.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-term",
      "title": "The term",
      "line": "CW11 ¶6 and ¶9 (Psychology and Religion): Jung credits Rudolf Otto with the word and gives his own definition; ¶9 on religion and the experience of the numinosum.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "On the contrary, it seizes and controls the human subject, who is always rather its victim than its creator.",
@@ -1389,7 +1339,6 @@
      "id": "its-effect",
      "title": "What it does to a person",
      "line": "CW8 ¶216, where Jung again credits Otto's expression, and CW18 ¶787, where he lists what belongs to a nocturnal, numinous experience.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "the numinosum, to use an apt expression of Rudolf Otto's",
@@ -1414,7 +1363,6 @@
      "id": "never-indifferent",
      "title": "Never indifferent",
      "line": "CW8 ¶405: Jung on the numinous character of the archetypes when they appear, and on its effects.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "That is, the archetypes have, when they appear, a distinctly numinous character which can only be described as \"spiritual,\" if \"magical\" is too strong a word.",
@@ -1438,7 +1386,6 @@
      "id": "in-a-life",
      "title": "In a life",
      "line": "CW10 ¶864, ¶871 and ¶874 (Good and Evil in Analytical Psychology): the numinosum, the tremendum and the fascinosum.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Anything that comes upon me with this intensity I experience as numinous, no matter whether I call it divine or devilish or just “fate.”",
@@ -1470,7 +1417,6 @@
      "id": "and-the-doctrine",
      "title": "And the doctrines",
      "line": "CW18 ¶1160: the numinous quality of the archetypes, and what Jung says follows for theology.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "As the archetypes have a “numinous” quality and underlie all religious and dogmatic ideas, depth psychology is also of importance for theology.",
@@ -1513,13 +1459,11 @@
   "participation-mystique": {
    "concept": "participation-mystique",
    "line": "Jung's definition of Lévy-Bruhl's term (CW6), his statements on what it means (CW10, CW17), its form between two people, and its occurrences in art, alchemy and the analogies of the unconscious.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-definition",
      "title": "The definition",
      "line": "CW6 ¶781 (Psychological Types, Definitions, 1921): Jung's definition of the term, which he attributes to Lévy-Bruhl; a footnote in CW18 (pdf p933) on Lévy-Bruhl's retraction.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It denotes a peculiar kind of psychological connection with objects, and consists in the fact that the subject cannot clearly distinguish himself from the object but is bound to it by a direct relationship which amounts to partial identity (q.v.).",
@@ -1543,7 +1487,6 @@
      "id": "identity",
      "title": "Identity, not sympathy",
      "line": "CW10 ¶69 and ¶130 and CW17 ¶83: Jung's statements of what the term means, and of the word mystical.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "To put it briefly, it means a state of identity in mutual unconsciousness.",
@@ -1575,7 +1518,6 @@
      "id": "in-the-clinic",
      "title": "In the clinic",
      "line": "CW10 ¶852: what Jung says happens when a dialogue between two people touches something fundamental, essential and numinous.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It is an unconscious identity in which two individual psychic spheres interpenetrate to such a degree that it is impossible to say what belongs to whom.",
@@ -1591,7 +1533,6 @@
      "id": "art-and-matter",
      "title": "In art, and in matter",
      "line": "CW15 ¶162 on artistic creation, CW14 ¶336 on the alchemists and their substance, and CW5 ¶203, the vault note's earliest adoption of the term (Wandlungen, 1912).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "This re-immersion in the state of participation mystique is the secret of artistic creation and of the effect which great art has upon us, for at that level of experience it is no longer the weal or woe of the individual that counts, but the life of the collective.",
@@ -1646,13 +1587,11 @@
   "persona": {
    "concept": "persona",
    "line": "Jung's statements on the persona: its definition (CW6), its description as a mask and as a compromise between individual and society (CW7), the mask worn by the collective psyche, and the dissolution of the persona.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-mask",
      "title": "The mask",
      "line": "CW6 ¶800 (Definitions, 1921), CW7 ¶305 and ¶246: the name from the masks of actors in antiquity, and Jung's descriptions of the persona as a kind of mask and as a compromise between individual and society.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "He puts on a mask, which he knows is in keeping with his conscious intentions, while it also meets the requirements and fits the opinions of society, first one motive and then the other gaining the upper hand. [Soul as persona] This mask, i.e., the ad hoc adopted attitude, I have called the persona, which was the name for the masks worn by actors in antiquity.",
@@ -1684,7 +1623,6 @@
      "id": "the-function",
      "title": "Its function",
      "line": "CW6 ¶801: Jung's definition of the persona as a functional complex concerned with the relation to objects.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The persona is thus a functional complex that comes into existence for reasons of adaptation or personal convenience, but is by no means identical with the individuality. The persona is exclusively concerned with the relation to objects.",
@@ -1700,7 +1638,6 @@
      "id": "the-collectives-mask",
      "title": "The collective's mask",
      "line": "CW7 ¶465 (the mask worn by the collective psyche) and CW18 ¶1334 (the persona as a composite of the individual's behaviour and the role attributed to him by the public).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It is, as its name implies, only the mask worn by the collective psyche, a mask that feigns individuality, making others and oneself believe that one is individual, whereas one is simply acting a role through which the collective psyche speaks.",
@@ -1724,7 +1661,6 @@
      "id": "the-taking-off",
      "title": "Taking it off",
      "line": "CW7 ¶505: the dissolution of the persona as an indispensable condition for individuation, and what Jung says of conscious intention; CW6 ¶807: what he says follows for anyone who is himself his outward role.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The dissolution of the persona is therefore an indispensable condition for individuation. It is, however, impossible to achieve individuation by conscious intention, because conscious intention invariably leads to a typical attitude that excludes whatever does not fit in with it.",
@@ -1767,13 +1703,11 @@
   "psychoid": {
    "concept": "psychoid",
    "line": "Where Jung uses the word and what he says it names: in the essays of 1946–1954, in the synchronicity essay, and in his letters with the physicist Wolfgang Pauli.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "naming",
      "title": "The naming",
      "line": "The synchronicity essay (CW8 ¶840, 1952) says what Jung has named psychoid and why.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The latter represents a psyche that is identical in all individuals.",
@@ -1797,7 +1731,6 @@
      "id": "reservations",
      "title": "The three reservations",
      "line": "On the Nature of the Psyche (CW8 ¶368): the three reservations on his use of the word, and Bleuler as its source.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "If I make use of the term \"psychoid\" 34 I do so with three reservations: firstly, I use it as an adjective, not as a noun; secondly, no psychic quality in the proper sense of the word is implied, but only a \"quasi-psychic\" one such as the reflex-processes possess; and thirdly, it is meant to distinguish a category of events from merely vitalistic phenomena on the one hand and from specifically psychic processes on the other.",
@@ -1829,7 +1762,6 @@
      "id": "under-the-image",
      "title": "The form under the image",
      "line": "The Spirit Mercurius (CW13 ¶350): the psychoid form underlying an archetypal image.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The psychoid form underlying any archetypal image retains its character at all stages of development, though empirically it is capable of endless variations.",
@@ -1845,7 +1777,6 @@
      "id": "ultra-violet",
      "title": "The ultra-violet end",
      "line": "On the Nature of the Psyche (CW8 ¶417): the archetype as such is placed at the ultra-violet end of the psychic spectrum.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The archetypal representations (images and ideas) mediated to us by the unconscious should not be confused with the archetype as such. They are very varied structures which all point back to one essentially \"irrepresentable\" basic form.",
@@ -1885,7 +1816,6 @@
      "id": "physics",
      "title": "The physics parallel",
      "line": "CW8 ¶419–420: the psychic spectrum set beside the physicist's irrepresentable models, and what Jung says follows for psyche and matter.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "When the existence of two or more irrepresentables is assumed, there is always the possibility—which we tend to overlook—that it may not be a question of two or more factors but of one only.",
@@ -1942,7 +1872,6 @@
      "id": "specific-charge",
      "title": "The specific charge",
      "line": "CW8 ¶841, the paragraph after the naming: what the archetypes are said to be and to do.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The archetypes are formal factors responsible for the organization of unconscious psychic processes: they are \"patterns of behaviour.\"",
@@ -1966,7 +1895,6 @@
      "id": "not-localized",
      "title": "Not localized in one person",
      "line": "Flying Saucers: A Modern Myth (CW10 ¶851): how the psychoid archetype is said to behave.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The psychoid archetype has a tendency to behave as though it were not localized in one person but were active in the whole environment.",
@@ -1982,7 +1910,6 @@
      "id": "letters-jung",
      "title": "In Jung's letters to Pauli",
      "line": "Atom and Archetype, the Pauli–Jung letters: Jung's statements of 1951 and 1953 on the archetype's physical and psychic occurrence.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "With the merely psychoid (transcendental) nature of the archetype, its purely physical occurrence is by no means precluded.",
@@ -2018,7 +1945,6 @@
      "id": "number",
      "title": "Whole numbers",
      "line": "Letter 63 (October 1953): Jung on whole numbers and the psychoid archetype.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "In, ~~~=~ this, whole numbers possess that characteristic of the psychoid a classical form-namely, that they are as much inside as outside. Thus, one can never make out whether they have been devised or discovered; as numbers they are inside and as a quantity they are outside.",
@@ -2035,7 +1961,6 @@
      "id": "letters-pauli",
      "title": "Pauli's side",
      "line": "Pauli's own words: the objection of December 1950, and a letter of December 1953 (66P).",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "In quantum physics, there are not just effects tbat appear with large numbers instead of with small ones, and not only is the term \"meaning\" not the right one bere (which you have written about at great length) but also the concept of the (psychic or psychoid) archetype cannot be used so lightly in the acausalities of microphysics.",
@@ -2063,7 +1988,6 @@
      "id": "late-admission",
      "title": "The late admission",
      "line": "CW8 ¶599, a note added in 1948 to 'The Psychological Foundations of Belief in Spirits'.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Not only the findings of parapsychology, but my own theoretical reflections, outlined in \"On the Nature of the Psyche,\" have led me to certain postulates which touch on the realm of nuclear physics and the conception of the space-time continuum. This opens up the whole question of the transpsychic reality immediately underlying the psyche.",
@@ -2079,7 +2003,6 @@
      "id": "last-word",
      "title": "The last word",
      "line": "CW18 ¶1208, a letter to Michael Fordham (1955): the term in its late form.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Synchronicity tells us something about the nature of what I call the psychoid factor, i.e., the unconscious archetype (not its conscious representation!).",
@@ -2118,13 +2041,11 @@
   "synchronicity": {
    "concept": "synchronicity",
    "line": "Jung's definition of synchronicity in CW8 (1952), its two factors, its description as an acausal orderedness, and two statements on where the word came from.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-definition",
      "title": "The definition",
      "line": "CW8 ¶849–850 (Synchronicity: An Acausal Connecting Principle, 1952): the definition, and the distinction from synchronism.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Synchronicity therefore means the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state—and, in certain cases, vice versa.",
@@ -2150,7 +2071,6 @@
      "id": "the-principle",
      "title": "A principle, in its own right",
      "line": "CW8 ¶840, ¶858 and ¶965: the term as a hypothetical factor equal in rank to causality, the two factors of synchronicity, and acausal orderedness.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Because of this quality of simultaneity, I have picked on the term \"synchronicity\" to designate a hypothetical factor equal in rank to causality as a principle of explanation.",
@@ -2182,7 +2102,6 @@
      "id": "not-a-cause",
      "title": "Not a cause, an orderedness",
      "line": "CW8 ¶947: synchronicity called a highly abstract and irrepresentable quantity with a psychoid property; CW8 ¶440: what Jung says happens to the synchronistic marginal phenomena once a psychic content crosses the threshold of consciousness.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "I am only too conscious that synchronicity is a highly abstract and \"irrepresentable\" quantity. It ascribes to the moving body a certain psychoid property which, like space, time, and causality, forms a criterion of its behaviour.",
@@ -2206,7 +2125,6 @@
      "id": "the-coinage",
      "title": "The coinage",
      "line": "The Dream Analysis seminar (4 December 1929, pdf p443), where Jung says he has invented the word, and the editorial preface of the monograph's volume (pdf p13), which quotes Jung on Einstein's influence.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Since I have seen many other examples of the same kind in which people not concerned were affected, I have invented the word synchronicitf as a term to cover these phenomena, that is, things happening at the same moment as an expression of the same time content.",
@@ -2250,13 +2168,11 @@
   "transcendent-function": {
    "concept": "transcendent-function",
    "line": "Jung's definitions and statements on the transcendent function (CW6, CW7, CW8, CW11, CW14, CW18) and the Dream Analysis seminar, with one sentence of Van Eenwyk's.",
-   "voice": "atlas",
    "sections": [
     {
      "id": "the-name",
      "title": "The name",
      "line": "CW6 ¶184 (1921), CW8 ¶131, CW6 ¶828 and CW7 ¶121: Jung's definitions of the name and his comparison with a mathematical function; in the Dream Analysis seminar of 4 June 1930 (pdf p674) he says he did not take the term from higher mathematics.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "This function of mediation between the opposites I have termed the transcendent function, by which I mean nothing mysterious, but merely a combined function of conscious and unconscious elements, or, as in mathematics, a common function of real and imaginary quantities.",
@@ -2305,7 +2221,6 @@
      "id": "the-transition",
      "title": "The transition",
      "line": "CW8 ¶145 and CW11 ¶780: why Jung says it is called transcendent, and that it is a process and a method at the same time.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "It is called \"transcendent\" because it makes the transition from one attitude to another organically possible, without loss of the unconscious.",
@@ -2329,7 +2244,6 @@
      "id": "the-living-third",
      "title": "The living third",
      "line": "CW8 ¶189 (a living, third thing), CW7 ¶360 (the secret of alchemy) and the Dream Analysis seminar (pdf p674) on the tortoise.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "The confrontation of the two positions generates a tension charged with energy and creates a living, third thing—not a logical stillbirth in accordance with the principle tertium 7ion datur but a movement out of the suspension between opposites, a living birth that leads to a new level of being, a new situation.",
@@ -2362,7 +2276,6 @@
      "id": "the-method",
      "title": "The method",
      "line": "CW14 ¶257 (Mysterium Coniunctionis) and CW18 ¶1554 (1954, in the vault note's dating): Jung on getting to know the counterposition in the unconscious and on the cooperation of conscious reasoning with the data of the unconscious.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "This continual process of getting to know the counterposition in the unconscious I have called the “transcendent function,” because the confrontation of conscious (rational) data with those that are unconscious (irrational) necessarily results in a modification of standpoint.",
@@ -2386,7 +2299,6 @@
      "id": "as-a-system",
      "title": "The third as a system",
      "line": "Van Eenwyk, Archetypes and Strange Attractors (1997): one sentence on chaotic dynamics and a higher order; the words are his, not Jung's.",
-     "voice": "atlas",
      "quotes": [
       {
        "text": "Furthermore, that psychological de- velopment is a function primarily of the resolution of tensions (empha- sizing the ego’s awareness), corresponds with one of the more intriguing hypotheses about chaotic dynamics, that of symmetry-building bifurca- tions, whereby chaotic dynamics actually generate a higher order result coming out than existed going in.",

@@ -185,8 +185,7 @@ suite(real ? 'the published field pages' : `the published field pages (skipped: 
 
 
 // N15: every archetype of the field has a page to read. Self and the Great Mother stand in depth.json; the others stand here.
-// A page's own lines (its reading line, each section's line) are the atlas's framing and are marked so; its quotations are
-// short (a sentence or a few), each placed on a corpus page by the rail above.
+// Its quotations are short (a sentence or a few), each placed on a corpus page by the rail above.
 suite('every archetype has a page', () => {
   const data = JSON.parse(fs.readFileSync(REAL, 'utf8'));
   const field = JSON.parse(fs.readFileSync(FIELD, 'utf8'));
@@ -210,17 +209,5 @@ suite('every archetype has a page', () => {
       for (const s of page.sections) for (const q of s.quotes) if (q.text.length > 700) long.push(`${key}: ${q.text.slice(0, 50)}`);
     }
     expect(long).toEqual([]);
-  });
-  it('marks the page line and every section line as the atlas\'s own voice (field pages, theory pages and depth pages)', () => {
-    const bare: string[] = [];
-    const check = (where: string, p: { voice?: string; sections: { id: string; voice?: string }[] }) => {
-      if (p.voice !== 'atlas') bare.push(`${where}: page line`);
-      for (const s of p.sections) if (s.voice !== 'atlas') bare.push(`${where}.${s.id}: section line`);
-    };
-    for (const [k, p] of Object.entries(data.pages)) check(k, p as never);
-    const theory = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'data', 'theory-pages.json'), 'utf8'));
-    for (const [k, p] of Object.entries(theory.pages)) check(`theory:${k}`, p as never);
-    for (const [k, p] of Object.entries(depth.archetypes)) check(`depth:${k}`, p as never);
-    expect(bare).toEqual([]);
   });
 });

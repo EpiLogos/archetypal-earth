@@ -976,13 +976,6 @@ if (qf.applied.length) console.log(`quote fixes applied: ${qf.applied.length}`);
 // Jung's engagement year of each cite, parsed from its `year` string (scripts/lib/cite-year.mjs); a cite whose string names no year has none.
 for (const o of field.occurrences) for (const c of o.jung) { const y = citeYear(c.year); if (y !== null) c.citeYear = y; else delete c.citeYear; }
 
-// Every body paragraph (occurrence, family, archetype, theoretic) is the atlas's own prose, written in the reading pass over the vault
-// and never a quotation of the author: each carries its voice, one per paragraph, so no prose reaches the reading unlabelled. A
-// quotation lives in `quote`, `definition` and the field pages, each with a cite.
-for (const list of [field.archetypes, field.theoretics, field.families, field.occurrences]) {
-  for (const n of list) if (Array.isArray(n.body)) n.bodyVoices = n.body.map(() => 'atlas');
-}
-
 const errors = validateField(field);
 if (errors.length) {
   console.error(`VALIDATION FAILED (${errors.length} errors):`);

@@ -32,7 +32,7 @@ export function buildTheoryPages({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     if (pages[cur.concept]) { errors.push(`${file}: a second page for ${cur.concept}`); continue; }
     const sections = cur.sections.map((s) => {
       const quotes = citeQuotes(load, titles, s.quotes, `${cur.concept}.${s.id}`, errors, warnings);
-      return { id: s.id, title: s.title, line: s.line, voice: 'atlas', quotes };
+      return { id: s.id, title: s.title, line: s.line, quotes };
     });
     const subjects = cur.subjects ?? [];
     for (const l of subjects) {
@@ -40,7 +40,7 @@ export function buildTheoryPages({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
       if (l.type === 'family' && !families.has(l.id)) errors.push(`${cur.concept}: no family ${l.id} in the field`);
       if (l.type === 'theoretic' && !concepts.has(l.id)) errors.push(`${cur.concept}: no theoretic ${l.id} in the field`);
     }
-    pages[cur.concept] = { concept: cur.concept, line: cur.line, voice: 'atlas', sections, subjects };
+    pages[cur.concept] = { concept: cur.concept, line: cur.line, sections, subjects };
   }
   // every node of the tier has a page — a missing one is named, never quietly skipped (the tests hold it loud)
   for (const t of field.theoretics) if (!pages[t.id]) warnings.push(`${t.id}: no page under curation/theory-pages/`);
