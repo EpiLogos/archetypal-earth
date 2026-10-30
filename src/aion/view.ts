@@ -9,7 +9,8 @@ import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } 
 import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
-import { eraShort, passageLine } from '../ui/format';
+import { eraShort, passageCite } from '../ui/format';
+import { quote } from '../ui/quote';
 import type { PassageBridge } from '../ui/passage';
 import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
@@ -218,22 +219,18 @@ export class AionView {
       .trim();
   }
 
-  /** One passage as an open quotation, its cite in the same voice as every other cite in the field. */
-  private quote(p: Passage): HTMLElement {
-    const line = passageLine(this.model, p.work, p.locator);
-    const cite = this.passages?.known(p.work)
-      ? el('button', { class: 'link-quiet', type: 'button', text: line, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(p.work, p.locator) })
-      : line;
-    const mark = p.basis === 'S'
-      ? el('span', { class: 'aion-basis', title: 'Standard scholarship, quoted for orientation', text: 'S' })
-      : el('span', { class: 'aion-basis', title: providerLabels().readingOwnText, text: 'J' });
-    return el('blockquote', { class: 'dp-def' }, [el('p', { text: this.shown(p.text) }), el('footer', {}, [cite, ' ', mark])]);
+  /** One passage as an open quotation: the one Quote component, the cite by the registry's work and its title. */
+  private quote(p: Passage, lead = false): HTMLElement {
+    const m = this.model;
+    const work = m.workKey.get(p.work) ?? p.work;
+    const workTitle = m.workById.get(work)?.title ?? passageCite(m, p.work, p.locator).workTitle;
+    return quote({ text: this.shown(p.text), cite: { work, workTitle, locator: p.locator }, ...(lead ? { emphasis: 'lead' as const } : {}) }, { passages: this.passages });
   }
 
   /** The key passage, open, before the body. */
   private keyQuote(passages: Passage[]): HTMLElement[] {
     const key = this.keyPassage(passages);
-    return key ? [this.quote(key)] : [];
+    return key ? [this.quote(key, true)] : [];
   }
 
   /** Every other passage, quietly, after the links. */

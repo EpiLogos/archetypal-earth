@@ -8,7 +8,8 @@ import type { LensContext, LensInstance } from '../shell/lens';
 import { passes } from '../shell/filter';
 import { amplify, findImages, vocabulary, type Vocabulary } from '../practice/amplify';
 import { amplificationView, type AmplifyActions } from '../practice/amplify-view';
-import { loadLensData, quoteBlock, tuneGlobe, type LensQuote } from './ui';
+import { quote } from '../ui/quote';
+import { definitionQuote, loadLensData, quoteBlock, tuneGlobe, type LensQuote } from './ui';
 import { DEEP_FIELDS, depthView, type DepthData } from './depth';
 import { providerLabels } from '../data/labels';
 
@@ -112,7 +113,7 @@ export function mount(ctx: LensContext): LensInstance {
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another symbol' })]),
       el('p', { class: 'am-kicker', text: 'archetype · known only through its images' }),
       el('h2', { class: 'lp-h', text: arch.name }),
-      arch.definition ? el('blockquote', { class: 'lq' }, [el('p', { text: arch.definition.text }), el('footer', {}, [el('span', { class: 'lq-cite', text: arch.definition.cite })])]) : null,
+      arch.definition ? quote(definitionQuote(m, arch.definition), { passages: ctx.passages, emphasis: 'compact' }) : null,
       el('h3', { class: 'as-h3', text: 'Its images' }),
       el('div', { class: 'am-chips' }, arch.familyIds.slice(0, 24).map((fid) => el('button', { type: 'button', class: 'sf-pill', text: m.famById.get(fid)?.name ?? fid, onclick: () => ctx.setPath([fid]) }))),
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus({ type: 'archetype', id }) }, [el('span', { text: `${arch.name} on the globe` }), icon('next', 14)]),

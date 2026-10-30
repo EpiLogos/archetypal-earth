@@ -43,7 +43,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-dream.png`) });
   await page.click('.dr-img:text("snakes")');
   await page.waitForSelector('.am-dream', { timeout: 15000 });
-  const amp = await page.evaluate(() => ({ hash: location.hash, dreams: document.querySelectorAll('.am-dream').length, cites: document.querySelectorAll('.am-dream .lq-cite').length, h: document.querySelector('.lens-panel .lp-h')?.textContent }));
+  const amp = await page.evaluate(() => ({ hash: location.hash, dreams: document.querySelectorAll('.am-dream').length, cites: document.querySelectorAll('.am-dream .q-cite').length, h: document.querySelector('.lens-panel .lp-h')?.textContent }));
   check(amp.h === 'Serpent' && amp.dreams >= 3 && amp.cites >= 3, `${s.name}: the image opens the corpus's dreams of it, cited`, JSON.stringify(amp));
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-dream-image.png`) });
   await page.click('.am-back');

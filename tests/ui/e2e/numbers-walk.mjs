@@ -60,7 +60,7 @@ const b = await launch('chromium');
       hasSnake: /egg encircled by the snake/.test(text),
       hasPauli: /Pauli/.test(text),
       canvas: !!sheet.querySelector('canvas'),
-      cites: sheet.querySelectorAll('.lq-cite').length,
+      cites: sheet.querySelectorAll('.q-cite').length,
     };
   });
   ok(!!page1, 'focusing Five opens its page in the reading layer');
@@ -125,7 +125,7 @@ const b = await launch('chromium');
       title: sheet?.querySelector('.dp-title')?.textContent ?? '',
       reservations: /three reservations/.test(text),
       letters: /psychoid archetype, which, as experience has shown/.test(text),
-      pauli: [...(sheet?.querySelectorAll('.lq-voice') ?? [])].some((v) => v.textContent === 'Pauli'),
+      pauli: [...(sheet?.querySelectorAll('.q-voice') ?? [])].some((v) => v.textContent === 'Pauli'),
     };
   });
   ok(views.deepOpen, 'the graph focus opens the node\'s page');

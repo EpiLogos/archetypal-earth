@@ -30,8 +30,6 @@ export interface DepthInstance {
   /** the text is a plate caption as printed, shown as one (see lenses/ui.ts captionBlock) */
   caption?: true;
   cite: LensQuote['cite'];
-  /** the reader marked the scan damaged here: the words are as the scan reads them */
-  scan?: true;
 }
 export interface DepthEntry { archetype: string; line: string; sections: DepthSection[]; instances?: { line: string; items: DepthInstance[]; undated: DepthInstance[] }; records?: number }
 export interface DepthData { version: 1; archetypes: Record<string, DepthEntry> }
@@ -52,11 +50,8 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
   const dreams = occ.filter((i) => m.occ[i].locusType === 'dream' || m.occ[i].locusType === 'vision');
   const quotes = d.sections.reduce((n, s) => n + s.quotes.length, 0);
   const stat = (n: number, label: string) => el('div', { class: 'dp-stat' }, [el('span', { class: 'dp-n', text: n.toLocaleString() }), el('span', { class: 'dp-l', text: label })]);
-  const quote = (q: LensQuote & { speaker?: string }) => {
-    const b = quoteBlock(q, passages, { compact: true });
-    if (q.speaker) b.querySelector('.lq-voice')?.replaceChildren(q.speaker);
-    return b;
-  };
+  // a quotation that names its speaker (Jung's foreword to Neumann) is chipped with that name, not the book's author
+  const quote = (q: LensQuote & { speaker?: string }) => quoteBlock(q.speaker ? { ...q, voice: q.speaker } : q, passages, { compact: true });
   const chip = (id: string) => el('button', { type: 'button', class: 'sf-pill', text: m.famById.get(id)?.name ?? id, onclick: () => act.amplifyFamily(id) });
   const nameOfSubject = (l: { type: 'archetype' | 'family' | 'theoretic'; id: string }) => (l.type === 'family' ? m.famById.get(l.id)?.name : l.type === 'archetype' ? m.archById.get(l.id)?.name : m.theoById.get(l.id)?.name) ?? l.id;
   const subjectRow = (subjects: DepthSection['subjects']) => {
@@ -77,7 +72,6 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
       el('span', { class: 'dp-term', text: x.terms.map(nameOf).join(' · ') }),
       el('span', { class: 'dp-place', text: [x.place, x.year === undefined ? x.yearDisplay : ''].filter(Boolean).join(' · ') }),
       quoteBlock({ text: x.text, cite: x.cite, ...(x.caption ? { caption: true } : {}) }, passages, { compact: true }),
-      x.scan ? el('span', { class: 'dp-scan', text: 'Damaged scan: the words are as the scan reads them' }) : null,
       x.families.length ? el('div', { class: 'am-chips' }, x.families.map(chip)) : null,
     ]),
   ]);

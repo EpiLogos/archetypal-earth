@@ -30,7 +30,7 @@ const CONTROL = 'a, button, summary, input, select, textarea, [role="button"], [
  * a quotation is copied), and opens nothing. The reading is reached from the plate, the title, the header, the
  * surface's whitespace, or the 'Reading' link.
  */
-const PROSE = 'blockquote, p, li, q, cite, figcaption, dd, pre, .dp-def';
+const PROSE = 'blockquote, p, li, q, cite, figcaption, dd, pre';
 
 /**
  * A double-click on a card surface opens its reading (SPEC §12: layer 3 is one gesture away from layer 1).

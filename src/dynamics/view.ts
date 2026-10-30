@@ -2,7 +2,8 @@
 // Red Book, built to the same pattern: show(state) / hide() / update(dt), a root section, a reveal card.
 // The globe is not touched here: the engine is exposed read-only, and the controller owns every globe effect
 // (the chronology is offered by chronology() for it to light).
-import { entered } from '../lenses/ui';
+import { citeOfString } from '../lenses/ui';
+import { entered, quote, type QuoteCite } from '../ui/quote';
 import { averagePalettes, rgbToHex } from '../data/palette';
 import { selfSubject, subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
@@ -14,7 +15,6 @@ import { clear, el } from '../ui/dom';
 import { modeOptions, optionAction } from '../ui/mode-options';
 import type { PassageBridge } from '../ui/passage';
 import { closeGlyph } from '../ui/reveal';
-import { jMark, nMark, vMark } from './marks';
 import { construction, figureOf, FIGURES, paintFractal, paletteOf as figurePalette, type Figure } from './figures';
 import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
@@ -379,7 +379,7 @@ export class DynamicsView {
   }
 
   private conceptBlock(c: DynamicsConcept): (HTMLElement | string)[] {
-    const out: (HTMLElement | string)[] = [el('h2', { class: 'rv-name dy-name' }, [c.name, ' ', vMark()]), this.quote(c.quote, true)];
+    const out: (HTMLElement | string)[] = [el('h2', { class: 'rv-name dy-name' }, [c.name]), this.quote(c.quote, true)];
     if (c.jung) out.push(this.quote(c.jung, false));
     if (this.related.length > 1) {
       out.push(el('button', { type: 'button', class: 'link-quiet dy-next', text: 'Next', onclick: () => this.step(1) }));
@@ -387,14 +387,15 @@ export class DynamicsView {
     return out;
   }
 
-  /** One quotation, open, with its page cite and voice mark. A cite is a link only when its work is in the corpus. */
-  private quote(q: DynamicsQuote, voice: boolean): HTMLElement {
-    const c = q.cite;
-    const label = `${c.workTitle}${c.year ? ` (${c.year})` : ''}, ${c.locator}`;
-    const cited = c.work && this.passages?.known(c.work)
-      ? el('button', { type: 'button', class: 'link-quiet', text: label, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(c.work!, c.locator) })
-      : label;
-    return el('blockquote', { class: 'dp-def dy-quote' }, [el('p', { text: entered(q.text) }), el('footer', {}, [cited, ' ', voice ? vMark() : jMark()])]);
+  /** A cite as the Quote component takes it: the Work by registry key; where the data holds only a title, by its title. */
+  private citeOf(c: { work?: string; workTitle: string; locator: string; print?: string }): QuoteCite | string {
+    if (c.work) return { work: this.model.workKey.get(c.work) ?? c.work, workTitle: c.workTitle, locator: c.locator, ...(c.print ? { print: c.print } : {}) };
+    return citeOfString(this.model, `${c.workTitle} ${c.locator}`);
+  }
+
+  /** One quotation, open: the one Quote component. `other` is Van Eenwyk's reading; the Jung text wears no voice. */
+  private quote(q: DynamicsQuote, other: boolean): HTMLElement {
+    return quote({ text: q.text, cite: this.citeOf(q.cite), ...(other ? { voice: 'vaneenwyk' } : {}) }, { passages: this.passages ?? undefined });
   }
 
   private step(delta: number) {
@@ -540,7 +541,7 @@ export class DynamicsView {
       text.append(
         this.routeMap(),
         this.heroFigure(figureOf('lorenz')),
-        el('h2', { class: 'rv-name dy-name' }, [route.title, ' ', vMark()]),
+        el('h2', { class: 'rv-name dy-name' }, [route.title]),
         el('p', { class: 'rv-para aion-lede', text: route.line }),
       );
       for (const mv of route.movements) {
@@ -570,16 +571,13 @@ export class DynamicsView {
         ]),
         ...(s.figure === 'torus' ? [this.heroFigure(construction)] : []),
         this.heroFigure(figureOf(s.figure)),
-        el('h2', { class: 'rv-name dy-name' }, [this.stopName(s), ' ', concept ? vMark() : '']),
+        el('h2', { class: 'rv-name dy-name' }, [this.stopName(s)]),
         el('p', { class: 'rv-para aion-lede', text: s.line }),
       );
       if (concept) text.append(this.quote(concept.quote, true));
       if (concept?.jung) text.append(this.quote(concept.jung, false));
       for (const q of s.quotes ?? []) text.append(this.routeQuote(q));
-      for (const q of s.ql ?? []) text.append(el('blockquote', { class: 'lq lq-ql' }, [
-        el('p', { text: entered(q.text) }),
-        el('footer', {}, [el('span', { class: 'lq-voice ql', text: 'QL' }), el('span', { class: 'lq-cite', text: `epi-logos.org, ${q.source.replace(/^W /, '')}` })]),
-      ]));
+      for (const q of s.ql ?? []) text.append(quote({ kind: 'ql', text: entered(q.text), source: q.source }));
     }
     this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
     // where the map scrolls sideways (a phone), the standing stop is brought into its view
@@ -589,15 +587,9 @@ export class DynamicsView {
     this.paintHero();
   }
 
-  /** A further quotation on the route (Neumann, or Van Eenwyk reading Neumann), its voice marked. */
+  /** A further quotation on the route (Neumann, or Van Eenwyk reading Neumann), its voice named by the component. */
   private routeQuote(q: RouteQuote): HTMLElement {
-    const c = q.cite;
-    const label = `${c.workTitle}, ${c.locator}${c.print ? ` · p. ${c.print}` : ''}`;
-    const cited = this.passages?.known(c.work)
-      ? el('button', { type: 'button', class: 'link-quiet', text: label, title: 'Open the passage in the corpus', onclick: () => this.passages!.open(c.work, c.locator) })
-      : label;
-    const mark = q.voice === 'neumann' ? nMark() : vMark();
-    return el('blockquote', { class: 'dp-def dy-quote' }, [el('p', { text: entered(q.text) }), el('footer', {}, [cited, ' ', mark])]);
+    return quote({ text: q.text, cite: this.citeOf(q.cite), ...(q.voice ? { voice: q.voice } : {}) }, { passages: this.passages ?? undefined });
   }
 
   /** Arrow-key walking through the route; wired by the controller. False when there is no route to walk. */

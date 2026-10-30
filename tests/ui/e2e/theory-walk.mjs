@@ -14,18 +14,18 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   await revealSheet(page, 'Theory');
   await page.waitForTimeout(6000);
   check(await page.getByText('One to six, beside #0 to #5').isVisible(), `${tag}: Number opens on the six positions`);
-  const ql = await page.locator('.lq-ql .lq-cite').allTextContents();
-  check(ql.length > 0 && ql.every((t) => /epi-logos\.org, § [IV]+/.test(t)), `${tag}: every QL formulation is the published site's, by section`, ql.slice(0, 3).join(' | '));
+  const ql = await page.locator('.q-ql .q-cite').allTextContents();
+  check(ql.length > 0 && ql.every((t) => /epi-logos\.org · § [IV]+/.test(t)), `${tag}: every QL formulation is the published site's, by section`, ql.slice(0, 3).join(' | '));
   await page.locator('.th-walk').first().click();
   await page.waitForTimeout(2500);
   check(/#\/theory\/number\/0$/.test(page.url()), `${tag}: the walk starts at #0`, page.url());
   const head = (await page.locator('.ql-head').textContent()) ?? '';
   check(/1\s*↔\s*#0/.test(head) && /Origin/.test(head), `${tag}: #0 holds the number one`, head);
-  for (let i = 0; i < 3; i++) { await page.locator('[aria-label="Next position"]').click(); await page.waitForTimeout(700); }
+  for (let i = 0; i < 3; i++) { await page.locator('.rb-rail [aria-label="Next"]').click(); await page.waitForTimeout(700); }
   await page.waitForTimeout(2000);
   const head3 = (await page.locator('.ql-head').textContent()) ?? '';
   check(/4\s*↔\s*#3/.test(head3) && /State 10/.test(head3), `${tag}: the walk steps on in order`, head3);
-  const text = (await page.locator('.lq').allTextContents()).join(' ');
+  const text = (await page.locator('blockquote.q').allTextContents()).join(' ');
   check(/symbol-making/.test(text) && /transcendent function/.test(text) && /quaternary structure/.test(text), `${tag}: the stop sets the site's words beside von Franz and Jung`);
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   check(/in four at #3/.test(line), `${tag}: the globe shows the stop's own set`, line);

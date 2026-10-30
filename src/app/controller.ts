@@ -480,7 +480,7 @@ export class Controller {
       this.aion = new AionView(this.root, this.m, this.engine, this.time, this.history!, (state) => this.navigate(state), this.passages, (occId) => this.openReading(occId), this.chrome);
     })));
     if (next.redbook && !this.redbook && this.redbookData) jobs.push(this.ensure('redbook', () => import('../redbook/view').then(({ RedBookView }) => {
-      this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (id) => this.tuneToFolio(id), (occId) => this.openReading(occId), this.chrome);
+      this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (id) => this.tuneToFolio(id), (occId) => this.openReading(occId), this.chrome, this.passages);
     })));
     if (next.dynamics && !this.lens) jobs.push(this.ensure('dynamics', () => Promise.all([import('../dynamics/view'), import('../dynamics/load')]).then(([{ DynamicsView }, { loadDynamics, loadRoute }]) => {
       const lens = new DynamicsView(this.root, this.m, this.engine, this.time, (state) => this.navigate(state), this.passages, null, this.chrome);

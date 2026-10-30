@@ -58,11 +58,11 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   const reading = await page.evaluate(() => ({
     title: document.querySelector('.cr-title')?.textContent, sign: !!document.querySelector('.cr-sign svg'),
     tint: getComputedStyle(document.querySelector('.cr')).getPropertyValue('--cr-tint').trim(),
-    cites: [...document.querySelectorAll('.cr .lq-cite')].map((c) => c.textContent), phase: document.body.dataset.skyPhase, hash: location.hash,
+    cites: [...document.querySelectorAll('.cr .q-cite')].map((c) => c.textContent), phase: document.body.dataset.skyPhase, hash: location.hash,
   }));
   check(reading.title === 'Two of Wands', `${s.name}: the first decan card opens its reading`, reading.title);
   check(reading.sign && /rgb/.test(reading.tint), `${s.name}: the sign's glyph and its band hue tint the sheet`, reading.tint);
-  check(reading.cites.length >= 2 && reading.cites.every((c) => /pdf p\d+/.test(c)), `${s.name}: the reading rests on placed quotations`, reading.cites.slice(0, 2).join(' | '));
+  check(reading.cites.length >= 2 && reading.cites.every((c) => /(pdf p|p\. )\d+/.test(c)), `${s.name}: the reading rests on placed quotations`, reading.cites.slice(0, 2).join(' | '));
   check(reading.phase === 'approach' && reading.hash === hashBefore, `${s.name}: it stays at the planet — no gaze at the Earth, no route change`, `${reading.phase} ${reading.hash}`);
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-mars-card.png`) });
 

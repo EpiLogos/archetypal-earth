@@ -9,13 +9,16 @@ import { occurrenceImage } from '../data/model';
 import { toRgbPalette } from '../data/palette';
 import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
+import type { Occurrence } from '../types/field';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
 import { clear, el, onReadGesture, plate } from '../ui/dom';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { closeGlyph } from '../ui/reveal';
 import { eraShort } from '../ui/format';
 import { WalkStrip, type WalkItem } from '../ui/walk-strip';
-import { genesisCite, keyPassage, readerBody, READING_TITLES } from './text';
+import { genesisCite, keyPassage, readerBody, readerCite, READING_TITLES, RED_BOOK_WORKS, type KeyPassage } from './text';
+import { quote, type CitedQuote } from '../ui/quote';
+import type { PassageBridge } from '../ui/passage';
 import type { LensChrome } from '../shell/lens';
 import { providerLabels } from '../data/labels';
 
@@ -40,7 +43,7 @@ export class RedBookView {
    * `onRead`: the standing folio's core reading, opened by a double-click on its card (the controller keeps this mode to return to).
    */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void,
-    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome) {
+    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome, private passages?: PassageBridge) {
     this.mode = redbook;
     this.navigate = navigate;
     for (const s of redbook.sections) this.sectionName.set(s.id, s.name);
@@ -165,9 +168,20 @@ export class RedBookView {
     return img;
   }
 
-  /** The key words, open: a blockquote that is never collapsed, its footer the cite. */
-  private quote(words: string, footer: string): HTMLElement {
-    return el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${words}”` }), footer ? el('footer', { text: footer }) : null]);
+  /** A genesis row's words with their cite as the curation holds it ("redbook pdf p232"): the Work by registry key, the locator as written. */
+  private genesisQuote(row: { words: string; cite: string }): CitedQuote {
+    const parts = /^(\S+)\s+(.+)$/.exec(row.cite.trim());
+    const title = parts ? RED_BOOK_WORKS[parts[1]] : undefined;
+    return { text: row.words, cite: parts && title ? { work: this.model.workKey.get(parts[1]) ?? parts[1], workTitle: title, locator: parts[2] } : genesisCite(row.cite) };
+  }
+
+  /** The key words, open: the one Quote component, with the cite of whichever source the words were drawn from. */
+  private keyQuote(o: Occurrence, key: KeyPassage, genesis: GenesisRow | undefined): HTMLElement {
+    if (genesis && key.words === genesis.words) return quote(this.genesisQuote(genesis), { passages: this.passages });
+    const c = o.jung[0];
+    if (!c) return quote({ text: key.words, cite: key.footer });
+    const r = readerCite(c);
+    return quote({ text: key.words, cite: { work: this.model.workKey.get(r.work) ?? r.work, workTitle: r.workTitle, locator: r.locator }, ...(c.voice ? { voice: c.voice } : {}) }, { passages: this.passages });
   }
 
   private showStop(stop: RedBookStop) {
@@ -190,7 +204,7 @@ export class RedBookView {
       el('h2', { class: 'rv-name', text: o.title }),
     );
     const key = keyPassage(o, this.genesisFor(stop.id));
-    if (key) text.append(this.quote(key.words, key.footer));
+    if (key) text.append(this.keyQuote(o, key, this.genesisFor(stop.id)));
     for (const para of readerBody(o.body)) text.append(el('p', { class: 'rv-para', text: para }));
     const links = el('div', { class: 'aion-links' });
     for (const t of fam?.archetypes ?? []) {
@@ -251,7 +265,7 @@ export class RedBookView {
     if (row.also) { sep(); link(row.also); }
     row2.append(
       head,
-      el('blockquote', { class: 'dp-def rb-quote' }, [el('p', { text: `“${row.words}”` }), el('footer', { text: genesisCite(row.cite) })]),
+      quote(this.genesisQuote(row), { passages: this.passages }),
       el('p', { class: 'rv-para rb-doctrine', text: row.doctrine }),
     );
     const stop = this.stops.find((s) => s.id === row.stopId);

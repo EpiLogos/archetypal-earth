@@ -30,12 +30,12 @@ await page.waitForTimeout(400);
 report.aionEvent = await page.evaluate(() => ({
   name: document.querySelector('.aion-card .rv-name')?.textContent,
   // the key passage is an open blockquote with its cite in the footer; the rest sit in 'More from the text'
-  sources: [...document.querySelectorAll('.aion-card blockquote.dp-def footer')].slice(0, 3).map((f) => f.textContent),
-  basis: [...document.querySelectorAll('.aion-card .aion-basis')].slice(0, 3).map((b) => b.textContent),
+  sources: [...document.querySelectorAll('.aion-card blockquote.q .q-foot')].slice(0, 3).map((f) => f.textContent),
+  basis: [...document.querySelectorAll('.aion-card .aion-basis')].length,
 }));
 must('aion event name (.aion-card .rv-name)', report.aionEvent.name);
-must('aion key passage footer (.aion-card blockquote.dp-def footer)', report.aionEvent.sources.length ? 'yes' : null);
-must('aion basis chip (.aion-card .aion-basis)', report.aionEvent.basis.length ? 'yes' : null);
+must('aion key passage footer (.aion-card blockquote.q .q-foot)', report.aionEvent.sources.length ? 'yes' : null);
+must('aion passages carry no basis chip (.aion-card .aion-basis)', report.aionEvent.basis === 0 ? 'none' : null);
 await page.screenshot({ path: `${shots}/aion-event.png` });
 
 // corpus deep link: open the key passage's cite (a button only where the corpus holds the work)
@@ -111,11 +111,11 @@ report.redbookWalk = await page.evaluate(() => ({
   progress: document.querySelector('.rb-progress')?.textContent,
   section: document.querySelector('.rb-section')?.textContent,
   stopName: document.querySelector('.redbook .rb-card .rv-name')?.textContent,
-  folio: document.querySelector('.redbook .rb-quote footer')?.textContent,
+  folio: document.querySelector('.redbook .q .q-foot')?.textContent,
   plateLoaded: (() => { const img = document.querySelector('.redbook .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
 }));
 must('.redbook .rb-card .rv-name (walk)', report.redbookWalk.stopName);
-must('.redbook .rb-quote footer (walk)', report.redbookWalk.folio);
+must('.redbook .q .q-foot (walk)', report.redbookWalk.folio);
 must('.redbook .rv-hero img (walk)', report.redbookWalk.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-elijah.png` });
 
@@ -128,7 +128,7 @@ await page.waitForTimeout(1200);
 report.genesis = await page.evaluate(() => ({
   rows: document.querySelectorAll('.rb-genesis').length,
   firstRow: document.querySelector('.rb-genesis-name')?.textContent?.slice(0, 60),
-  quotes: document.querySelectorAll('.rb-genesis .rb-quote').length,
+  quotes: document.querySelectorAll('.rb-genesis .q').length,
 }));
 await page.screenshot({ path: `${shots}/genesis.png` });
 

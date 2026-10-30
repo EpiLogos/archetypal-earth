@@ -11,7 +11,8 @@ import { closeGlyph } from './reveal';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
 import { citeLine, eraShort, placeLine, shortWork } from './format';
-import { loadLensData, qlBlock, qlSource, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
+import { quote } from './quote';
+import { definitionQuote, loadLensData, occurrenceQuote, qlBlock, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { relatedPlates, relatedRows, SYSTEM_LABEL } from './related';
 import { providerLabels } from '../data/labels';
@@ -131,9 +132,7 @@ export class DeepSheet {
       if (arch.oneLine) a.append(el('p', { class: 'dp-lede', text: arch.oneLine }));
       this.appendPlateStrip(s);
       if (arch.image) a.append(plate(arch.image, { credit: true, className: 'dp-figure', palette: arch.palette, eager: true }));
-      if (arch.definition) {
-        a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: arch.definition.text }), el('footer', { text: arch.definition.cite })]));
-      }
+      if (arch.definition) a.append(quote(definitionQuote(m, arch.definition), { passages: this.h.passage }));
       arch.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
       this.appendFieldPage(s);
       const fams = arch.familyIds.map((id) => m.famById.get(id)).filter((f) => !!f);
@@ -169,9 +168,7 @@ export class DeepSheet {
       if (fam.oneLine) a.append(el('p', { class: 'dp-lede', text: fam.oneLine }));
       this.appendPlateStrip(s);
       if (fam.image) a.append(plate(fam.image, { credit: true, className: 'dp-figure', palette: fam.palette, eager: true }));
-      if (fam.definition) {
-        a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: fam.definition.text }), el('footer', { text: fam.definition.cite })]));
-      }
+      if (fam.definition) a.append(quote(definitionQuote(m, fam.definition), { passages: this.h.passage }));
       fam.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
       this.appendSkyHangs(s);
       this.appendFieldPage(s);
@@ -203,7 +200,7 @@ export class DeepSheet {
       if (t.oneLine) a.append(el('p', { class: 'dp-lede', text: t.oneLine }));
       this.appendPlateStrip(s);
       if (t.image) a.append(plate(t.image, { credit: true, className: 'dp-figure', palette: t.palette, eager: true }));
-      if (t.definition) a.append(el('blockquote', { class: 'dp-def' }, [el('p', { text: t.definition.text }), el('footer', { text: t.definition.cite })]));
+      if (t.definition) a.append(quote(definitionQuote(m, t.definition), { passages: this.h.passage }));
       t.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
       const host = el('div', { class: 'dp-page' });
       a.append(host);
@@ -400,11 +397,7 @@ export class DeepSheet {
     const box = el('div', { class: 'dp-egg' });
     box.append(el('h3', { class: 'as-h3', text: 'The egg' }));
     if (d.egg.stages?.labels?.length) {
-      const row = el('div', { class: 'ql-stages', role: 'img', 'aria-label': `The count as six stages: ${d.egg.stages.labels.join('; ')}` },
-        d.egg.stages.labels.map((s) => el('span', { class: 'ql-stage', text: s })));
-      box.append(row, el('blockquote', { class: 'lq lq-ql lq-compact' }, [
-        el('footer', {}, [el('span', { class: 'lq-voice ql', text: 'QL' }), el('span', { class: 'lq-cite', text: qlSource(d.egg.stages.source) })]),
-      ]));
+      box.append(quote({ kind: 'ql', text: d.egg.stages.labels.join(' → '), source: d.egg.stages.source, emphasis: 'compact' }));
     }
     box.append(quoteBlock(d.egg.dream, this.h.passage));
     for (const q of d.egg.footnote) box.append(quoteBlock(q, this.h.passage));
@@ -470,7 +463,8 @@ export class DeepSheet {
       a.append(plate(img, { credit: true, className: 'dp-figure', palette: fam?.palette, eager: true, alt: o.title }));
       if (img.sourceUrl) a.append(el('p', { class: 'dp-source' }, [sanitiseTitle(img.title) ? `${sanitiseTitle(img.title)} — ` : '', el('a', { href: img.sourceUrl, target: '_blank', rel: 'noopener noreferrer', text: 'source' })]));
     }
-    if (o.quote) a.append(o.caption ? el('p', { class: 'dp-caption', text: o.quote }) : el('blockquote', { class: 'dp-def' }, [el('p', { text: o.quote })]));
+    const oq = occurrenceQuote(o);
+    if (oq) a.append(quote(oq, { passages: this.h.passage }));
     o.body.filter(Boolean).forEach((p) => a.append(el('p', { class: 'dp-para', text: p })));
     if (o.jung.length) {
       a.append(el('h3', { class: 'dp-sub', text: providerLabels().citesMeet }));

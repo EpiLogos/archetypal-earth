@@ -223,7 +223,6 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .rv-text { padding: 18px 24px 26px; }
 .rv-name { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height: 1.1; letter-spacing: -0.006em; }
 .rv-line { margin: 9px 0 0; font-family: var(--sans); font-size: 12px; letter-spacing: 0.02em; color: var(--ink-3); }
-.rv-quote { margin: 16px 0 0; padding-left: 14px; border-left: 1px solid rgb(var(--core-rgb) / 0.4); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1rem; line-height: 1.45; color: var(--ink); }
 .rv-para { margin: 13px 0 0; font-family: var(--serif); font-size: 1.02rem; line-height: 1.55; color: var(--ink-2); font-weight: 400; }
 .rv-jung { margin: 16px 0 0; padding-top: 13px; border-top: 1px solid var(--hair); font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.02em; color: var(--ink-3); display: flex; gap: 8px; }
 .rv-jung-mark { color: rgb(var(--core-rgb) / 0.6); }
@@ -252,11 +251,6 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-lede { margin: 16px 0 0; font-family: var(--serif); font-weight: 400; font-size: 1.28rem; line-height: 1.4; color: var(--ink-2); }
 .dp-figure { width: 100%; aspect-ratio: var(--ar, 1.4); max-height: 42vh; margin: 28px 0 6px; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.2); outline-offset: 5px; }
 .dp-source { margin: 10px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); }
-.dp-def { margin: 30px 0 4px; padding: 0 0 0 20px; border-left: 1px solid rgb(var(--core-rgb) / 0.5); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.28rem; line-height: 1.5; }
-.dp-def p { margin: 0; }
-.dp-def footer { margin-top: 10px; font-family: var(--sans); font-style: normal; font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-3); display: flex; align-items: baseline; gap: 8px; }
-/* the cite is a button: it shrinks and wraps left-aligned inside the row, and the basis chip stays beside it (a wrapping row would push the chip to a line of its own) */
-.dp-def footer .link-quiet { display: inline; min-width: 0; text-align: left; text-decoration: none; }
 .dp-para { margin: 22px 0 0; font-family: var(--serif); font-weight: 400; font-size: 1.16rem; line-height: 1.66; color: rgb(236 241 252 / 0.86); hyphens: auto; }
 .dp-sub { margin: 46px 0 14px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--sans); font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
 .dp-flow { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.14rem; line-height: 1.7; }
@@ -443,7 +437,6 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
   .rv-text { padding: 14px 18px 22px; }
   .rv-links { padding: 11px 18px 14px; }
   .rv-name { font-size: 1.5rem; }
-  .rv-quote { font-size: 1.04rem; }
   .rv-para { font-size: 1rem; }
 
   .deep { width: 100%; border-left: 0; }

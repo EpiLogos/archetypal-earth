@@ -62,14 +62,15 @@ try {
       });
       check(!!heroFirst, `${scene.name}: the hero is the first thing in the card body`);
 
-      const key = card.locator('blockquote.dp-def').first();
-      const keyCount = await card.locator('blockquote.dp-def').count();
+      const key = card.locator('blockquote.q').first();
+      const keyCount = await card.locator('blockquote.q').count();
       check(keyCount >= 1 && (await key.isVisible()), `${scene.name}: the key passage is an open blockquote, visible with no click`, `${keyCount} blockquote`);
-      const footer = (await key.locator('footer').textContent())?.trim() ?? '';
-      // a ¶ cite is the norm; a passage whose source has no ¶ marker keeps its pdf-page locator (AION-SOURCES), with no parenthesis noise
-      const paragraph = /^Jung · .* · ¶\d/.test(footer);
-      const pdfOnly = /^Jung · .* · pdf p\d+ [JS]$/.test(footer);
-      check((paragraph || pdfOnly) && !/cw0?9ii/i.test(footer) && !/\(pdf/i.test(footer), `${scene.name}: the cite reads in the field's voice`, `${footer}${pdfOnly ? '  [pdf-page locator: the source has no ¶ marker]' : ''}`);
+      const footer = (await key.locator('.q-cite').textContent())?.trim() ?? '';
+      const chip = await key.locator('.q-voice').count();
+      // the cite is work · locator (¶ or pdf page) as the Quote component draws it; Jung wears no chip; no raw key, no basis mark
+      const paragraph = /¶\d/.test(footer);
+      const pdfOnly = /pdf p\d+$/.test(footer);
+      check((paragraph || pdfOnly) && !/cw0?9ii/i.test(footer) && !/\(pdf/i.test(footer) && chip === 0 && (await card.locator('.aion-basis').count()) === 0, `${scene.name}: the cite reads work · locator, no chip, no basis mark`, `${footer}${pdfOnly ? '  [pdf-page locator: the source has no ¶ marker]' : ''}`);
       const quoteText = (await key.locator('p').first().textContent())?.trim() ?? '';
       check(quoteText.length > 20, `${scene.name}: the key passage is verbatim text`, quoteText.slice(0, 70) + '…');
 

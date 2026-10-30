@@ -4,7 +4,7 @@
 //   (b) the Aion chapter walk leaves the clock alone; a thread walk moves it
 //   (c) entering the sky leaves the time strip alone (the sky's moment is its own)
 //   (d) a sky card's reading and Jung's portrait carry their credit
-//   (e) a quotation draws its cite footer in the page; the damaged-scan notice shows on a scanned quote
+//   (e) every quotation on a page carries its cite (work · locator · page); no notice stands beside a scanned one
 //   (f) the Book of Symbols reading links to its related symbols, and a link goes there
 //   (g) the dynamical route walks in its curated order (the arrow keys visit all sixteen stops as the data lists them)
 //   npx vite --port 5293 --strictPort &
@@ -138,18 +138,30 @@ try {
     await ctx.close();
   }
 
-  // ── (e) a quotation draws its cite footer; a scanned one says so ──
+  // ── (e) every quotation draws its cite; nothing is said beside a scanned one ──
   {
     const { ctx, page, logs } = await open(browser, { hash: '#/th/psychoid/deep' });
     await page.waitForTimeout(3000);
-    const quotes = await page.locator('blockquote.lq').count();
-    const footers = await page.locator('blockquote.lq > footer .lq-cite').count();
-    check(quotes >= 10 && footers === quotes, 'every quotation on the psychoid page has a cite footer', `${footers} of ${quotes}`);
-    const first = await page.locator('blockquote.lq > footer .lq-cite').first().textContent();
-    check(/, (¶|pdf p)[^,]*$/.test(first) || /¶\d+/.test(first), 'the cite names the work and the locator', first);
-    check(await page.locator('.dp-scan').count() === 2, 'the two scanned quotations say "Damaged scan"', `${await page.locator('.dp-scan').count()} notices`);
-    check((await page.locator('.dp-scan').first().textContent()) === 'Damaged scan: the words are as the scan reads them', 'in the notice\'s words');
+    const quotes = await page.locator('blockquote.q:not(.q-ql)').count();
+    const footers = await page.locator('blockquote.q:not(.q-ql) > .q-foot .q-cite').count();
+    check(quotes >= 10 && footers === quotes, 'every quotation on the psychoid page has a cite', `${footers} of ${quotes}`);
+    const first = await page.locator('blockquote.q:not(.q-ql) > .q-foot .q-cite').first().getAttribute('aria-label');
+    check(/, (¶|pdf p)/.test(first ?? '') || /¶\d+/.test(first ?? ''), 'the cite names the work and the locator', first ?? '');
+    const parts = await page.locator('blockquote.q:not(.q-ql) > .q-foot .q-cite').first().locator('span').allTextContents();
+    check(parts.length >= 2 && parts[0].length > 3, 'drawn as work, locator, page', parts.join(' | '));
+    check(await page.locator('.dp-scan').count() === 0 && !/damaged scan/i.test(await page.locator('.deep').first().innerText()), 'no notice of a damaged scan is shown');
     check(logs.length === 0, '(e) no page errors', logs.slice(0, 2).join(' | '));
+    await ctx.close();
+  }
+  // the QL formulations stand on the number pages: chipped QL, with the published site's section
+  {
+    const { ctx, page, logs } = await open(browser, { hash: '#/a/four/deep' });
+    await page.waitForSelector('blockquote.q.q-ql .q-voice', { timeout: 20000 }).catch(() => {});
+    const chips = await page.locator('blockquote.q.q-ql .q-voice').allTextContents();
+    const src = await page.locator('blockquote.q.q-ql .q-cite').first().textContent().catch(() => '');
+    check(chips.length >= 1 && chips.every((c) => c === 'QL'), 'a QL formulation is chipped QL', chips.join(' | '));
+    check(/^epi-logos\.org · §/.test(src ?? ''), 'and names the published site\'s section', src ?? '');
+    check(logs.length === 0, '(e) QL: no page errors', logs.slice(0, 2).join(' | '));
     await ctx.close();
   }
 

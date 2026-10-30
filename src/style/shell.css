@@ -191,18 +191,6 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
 .lp-sub { margin: 0 0 14px; font: 13px/1.5 var(--sans); color: var(--ink-3); }
 .lp-privacy { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 16px; padding: 9px 12px; border: 1px solid var(--hair); border-radius: 10px; font: 12px/1.45 var(--sans); color: var(--ink-2); background: rgb(var(--core-rgb) / 0.04); }
 .lp-privacy .ico { flex: none; margin-top: 2px; color: var(--core); }
-.lq { margin: 16px 0; padding: 2px 0 2px 16px; border-left: 2px solid rgb(var(--core-rgb) / 0.45); }
-.lq p { margin: 0; font: italic 400 1.02rem/1.55 var(--serif); color: var(--ink); }
-.lq footer { margin-top: 7px; font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: 0.01em; }
-.lq-cite.link-quiet { color: var(--ink-3); border-bottom-color: rgb(var(--core-rgb) / 0.18); }
-.lq-cite.link-quiet:hover { color: var(--ink); }
-.lq-compact p { font-size: 0.95rem; }
-/* a plate caption: an object's label as printed, not a quotation: upright sans, dotted rule, no quotation mark */
-.lq-caption { margin: 16px 0; padding: 2px 0 2px 16px; border-left: 1px dotted rgb(var(--core-rgb) / 0.5); }
-.lq-caption-text { margin: 0; font: 400 0.95rem/1.45 var(--sans); color: var(--ink); letter-spacing: 0.01em; }
-.lq-caption footer { margin-top: 7px; font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: 0.01em; }
-.rv-caption, .dp-caption { margin: 14px 0 0; font: 400 0.95rem/1.45 var(--sans); color: var(--ink); }
-.lq-voice { display: inline-block; margin-right: 6px; padding: 0 5px; border: 1px solid var(--hair); border-radius: 4px; font: 500 10px var(--sans); letter-spacing: 0.06em; color: var(--ink-2); }
 .lp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 20px; border: 1px solid rgb(var(--core-rgb) / 0.4); font: 500 12.5px var(--sans); color: var(--ink); background: rgb(var(--core-rgb) / 0.08); transition: background 0.2s, border-color 0.2s; }
 .lp-btn:hover { background: rgb(var(--core-rgb) / 0.16); border-color: var(--core); }
 .lp-btn.primary { background: var(--core); color: var(--deep); border-color: var(--core); }
@@ -365,9 +353,6 @@ body.landing-on .time { opacity: 0.35; }
 }
 
 /* ── Theory → Number: the QL lens ──────────────────────────────────── */
-.lq-ql { border-left-color: rgb(var(--glow-rgb) / 0.9); background: rgb(var(--glow-rgb) / 0.06); padding: 8px 12px 8px 14px; border-radius: 0 8px 8px 0; }
-.lq-ql p { font-style: normal; font-family: var(--sans); font-size: 0.92rem; }
-.lq-voice.ql { color: var(--deep); background: rgb(var(--glow-rgb)); border-color: rgb(var(--glow-rgb)); }
 .ql-wheel { width: 100%; max-width: 280px; height: auto; overflow: visible; }
 .ql-wheel.small { max-width: 200px; display: block; margin: 0 auto; }
 .ql-ring { fill: none; stroke: var(--hair); }
@@ -408,7 +393,7 @@ body.landing-on .time { opacity: 0.35; }
 .dp-instances { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
 .dp-instances li { display: grid; grid-template-columns: 78px 1fr; gap: 10px; align-items: start; padding-top: 6px; border-top: 1px solid var(--hair); }
 .dp-place { display: block; font: 12px var(--sans); color: var(--ink-2); margin-top: 2px; }
-.dp-instances .lq { margin: 6px 0 4px; }
+.dp-instances .q { margin: 6px 0 4px; }
 .dp-dreams { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 12px; }
 
 .dp-term { display: block; font: 600 13px var(--sans); color: var(--ink); }
@@ -471,7 +456,7 @@ body.landing-on .time { opacity: 0.35; }
 .cr-place { margin: 2px 0 0; font: 12px var(--sans); color: var(--ink-3); }
 .cr-fig { margin: 14px 0; display: flex; justify-content: center; }
 .cr-plate { width: min(210px, 62%); aspect-ratio: var(--ar, 0.637); border-radius: 6px; box-shadow: 0 0 0 1px var(--cr-tint), 0 0 30px color-mix(in srgb, var(--cr-tint) 38%, transparent); }
-.cr .lq { border-left-color: var(--cr-tint); }
+.cr .q { --q-tint: var(--cr-tint); }
 .cr-chain .cr-chip { border-left: 2px solid var(--cr-tint); border-radius: 0 8px 8px 0; margin: 4px 0; }
 .as-whole { list-style: none; margin: 8px 0 14px; padding: 0; }
 @media (max-width: 720px) { body.po-holding .sky-caption { display: none; } }
@@ -489,8 +474,6 @@ body.landing-on .time { opacity: 0.35; }
 .dp-page { margin: 2px 0 0; }
 .dp-egg { margin: 6px 0 0; }
 .dp-egg-figure { display: grid; place-items: center; margin: 2px 0 10px; }
-.ql-stages { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 2px 0 8px; align-items: baseline; }
-.ql-stage { padding: 4px 9px; border: 1px solid var(--hair); border-radius: 999px; font: 500 11.5px var(--sans); color: var(--ink-2); letter-spacing: 0.02em; }
 
 /* ── the visitor's own page (src/ui/you.ts): what is kept here, and the plain list of what has been recorded ── */
 .you-kept, .you-log { margin: 0; padding: 0; list-style: none; }

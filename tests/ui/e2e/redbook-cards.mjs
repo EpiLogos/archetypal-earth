@@ -1,7 +1,7 @@
 // Gate: the Red Book card, walked stop by stop (all 37, by the arrow key and the rail), against the card rules:
 //   · every stop has a figure.plate hero;
-//   · exactly the expected 32 stops lead with a key passage: an open blockquote.dp-def as the first content
-//     block after the name, its footer in Jung's voice; the other 5 have none (hero and title lead);
+//   · exactly the expected 32 stops lead with a key passage: an open blockquote.q as the first content
+//     block after the name, its cite = work · locator with no voice chip (Jung wears none); the other 5 have none (hero and title lead);
 //   · no paragraph is plate inventory (PLATE / PLATES / Plate), whole or merged into its prose;
 //   · no footer carries a raw work slug (liber-novus, redbook, memories) or a cw key;
 //   · the Aion card is not visible and not in the accessibility tree while the Red Book stands;
@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { launch, open } from './lib.mjs';
 
 const kind = process.argv[2] ?? 'chromium';
-const SHOTS = '/home/user/archetypal-earth/.cache/screens/remediation-2026-10-09/redbook';
+const SHOTS = process.env.SHOTS_DIR ?? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '.cache/screens/remediation-2026-10-09/redbook');
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 fs.mkdirSync(SHOTS, { recursive: true });
 let failed = 0;
@@ -59,17 +59,18 @@ const snapshot = () => {
   const hero = card?.querySelector('figure.plate.rv-hero') ?? null;
   const paragraphs = [...(card?.querySelectorAll('p') ?? [])].map((p) => p.textContent.trim());
   const footers = [...(card?.querySelectorAll('footer') ?? [])].map((f) => f.textContent.trim());
-  const quote = card?.querySelector('blockquote.dp-def');
+  const quote = card?.querySelector('blockquote.q');
   const aionCards = [...document.querySelectorAll('section.aion .aion-card')];
   return {
     progress: document.querySelector('.rb-progress')?.textContent ?? '',
     name: name?.textContent ?? '',
     hero: !!hero,
     heroState: hero ? (hero.classList.contains('loaded') ? 'image' : hero.classList.contains('plate-empty') ? 'tonal' : 'pending') : 'none',
-    firstBlock: next ? next.tagName.toLowerCase() + (next.classList.contains('dp-def') ? '.dp-def' : '') : '',
+    firstBlock: next ? next.tagName.toLowerCase() + (next.classList.contains('q') ? '.q' : '') : '',
     firstBlockVisible: inA11y(next),
     hasQuote: !!quote,
-    quoteFooter: quote?.querySelector('footer')?.textContent?.trim() ?? '',
+    quoteFooter: quote?.querySelector('.q-cite')?.textContent?.trim() ?? '',
+    quoteChip: !!quote?.querySelector('.q-voice'),
     leaks: paragraphs.filter((t) => /^PLATES?\b/.test(t) || /\bPLATES?\s*[(:]\s*p\d{4}\.jpg/i.test(t)),
     footers,
     slugs: footers.filter((t) => /liber-novus|redbook|memories|\bcw\d/i.test(t)),
@@ -116,8 +117,8 @@ try {
     if (s.heroState === 'tonal') tonal.push(s.progress);
     if (s.heroState === 'image') images.push(s.progress);
     if (expectedKey.has(id)) {
-      check(s.firstBlock === 'blockquote.dp-def' && s.firstBlockVisible, `${tag} leads with an open key passage (blockquote.dp-def)`, `first block "${s.firstBlock}" visible ${s.firstBlockVisible} after "${s.name}"`);
-      check(/^Jung · /.test(s.quoteFooter), `${tag} key passage footer is in Jung's voice`, s.quoteFooter);
+      check(s.firstBlock === 'blockquote.q' && s.firstBlockVisible, `${tag} leads with an open key passage (blockquote.q)`, `first block "${s.firstBlock}" visible ${s.firstBlockVisible} after "${s.name}"`);
+      check(/^(The Red Book|Liber Novus|Memories)/.test(s.quoteFooter) && !s.quoteChip, `${tag} key passage cites its work and wears no voice chip`, s.quoteFooter);
     } else {
       check(!s.hasQuote, `${tag} has no key passage (none invented)`, s.firstBlock || 'no content block');
     }
@@ -149,15 +150,16 @@ try {
     const rows = [...document.querySelectorAll('.redbook .rb-card .rb-genesis')];
     return rows.map((r) => ({
       name: r.querySelector('.rb-genesis-name strong')?.textContent ?? '',
-      quoteFirst: r.firstElementChild?.tagName === 'P' && r.querySelector('blockquote.dp-def') !== null,
-      footer: r.querySelector('footer')?.textContent ?? '',
+      quoteFirst: r.firstElementChild?.tagName === 'P' && r.querySelector('blockquote.q') !== null,
+      footer: r.querySelector('.q-cite')?.textContent ?? '',
+      chip: !!r.querySelector('.q-voice'),
       doctrine: r.querySelector('.rb-doctrine')?.textContent ?? '',
       stop: r.querySelector('.rb-genesis-stop')?.textContent ?? '',
     }));
   });
   check(genesis.length === rb.genesis.length && genesis.length >= 14, 'the genesis table carries every row', `${genesis.length} rows`);
   for (const row of genesis) {
-    check(!/liber-novus|redbook|memories/i.test(row.footer) && /^Jung · /.test(row.footer), `genesis "${row.name}" cites through the core voice`, row.footer);
+    check(!/liber-novus|redbook|memories/i.test(row.footer) && /^(The Red Book|Liber Novus|Memories)/.test(row.footer) && !row.chip, `genesis "${row.name}" cites its work with no voice chip`, row.footer);
     check(!/\bcw\d|sem-\d/i.test(row.doctrine), `genesis "${row.name}" doctrine carries no raw work key`);
   }
   await page.screenshot({ path: `${SHOTS}/genesis.png` });

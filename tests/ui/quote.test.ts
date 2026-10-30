@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { citeParts, entered, qlSource, quote, quoteList, voiceOf, type ListedQuote, type QuoteCite, type QuoteSpec } from '../../src/ui/quote';
 import type { PassageBridge } from '../../src/ui/passage';
@@ -264,5 +265,23 @@ describe('quoteList', () => {
     expect(l.find('button.q-open')).toHaveLength(2);
     l.find('button.q-open')[0].click();
     expect(held.opened).toEqual([['cw09ii', 'pdf p3']]);
+  });
+});
+
+// The gate of Q8c: the component is the only thing that draws a quotation, and the hand-built quotation classes are gone.
+const walkSrc = (dir: string, ext: string): string[] => readdirSync(dir).flatMap((n) => {
+  const p = path.join(dir, n);
+  return statSync(p).isDirectory() ? walkSrc(p, ext) : p.endsWith(ext) ? [p] : [];
+});
+describe('no hand-built blockquote', () => {
+  const root = path.resolve(import.meta.dirname, '../../src');
+  it('no el(\'blockquote\' outside src/ui/quote.ts', () => {
+    const offenders = walkSrc(root, '.ts').filter((f) => !f.endsWith(path.join('src', 'ui', 'quote.ts')) && /el\(\s*['"]blockquote['"]/.test(readFileSync(f, 'utf8')));
+    expect(offenders.map((f) => path.relative(root, f))).toEqual([]);
+  });
+  it('the old quotation classes (lq, dp-def, rv-quote, rv-caption, dp-caption, rb-quote, dy-quote, aion-basis, ql-stage) are gone from src', () => {
+    const old = /(?<![\w-])(lq(-[a-z]+)*|dp-def|rv-quote|rv-caption|dp-caption|rb-quote|dy-quote|aion-basis|ql-stages?)(?![\w-])/;
+    const offenders = [...walkSrc(root, '.ts'), ...walkSrc(root, '.css')].filter((f) => old.test(readFileSync(f, 'utf8')));
+    expect(offenders.map((f) => path.relative(root, f))).toEqual([]);
   });
 });

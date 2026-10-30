@@ -4,6 +4,8 @@ import { occurrenceImage } from '../data/model';
 import { symbolReading } from './symbol-reading';
 import { clear, el, onReadGesture, plate } from './dom';
 import { citeLine, clipText, placeLine } from './format';
+import { quote } from './quote';
+import { occurrenceQuote } from '../lenses/ui';
 import { glyphOf, type SkyTies } from '../sky/ties';
 import { bodyOfLocus, locusPhrase } from '../data/skyplace';
 import type { Occurrence } from '../types/field';
@@ -58,11 +60,13 @@ export class Reveal {
       const text = el('div', { class: 'rv-text' });
       text.append(el('h2', { class: 'rv-name', text: o.label }));
       text.append(el('p', { class: 'rv-line', text: placeLine(m, o) }));
-      if (o.quote) text.append(o.caption ? el('p', { class: 'rv-caption', text: o.quote }) : el('blockquote', { class: 'rv-quote', text: o.quote }));
+      const oq = occurrenceQuote(o);
+      if (oq) text.append(quote(oq, { emphasis: 'compact' }));
       // a quote takes the place of a second paragraph: the reveal stays short
       const paras = o.body.filter(Boolean).slice(0, o.quote ? 1 : 2);
       paras.forEach((p) => text.append(el('p', { class: 'rv-para', text: clipText(p, o.quote ? 260 : 220) })));
-      if (o.jung.length) {
+      // the quotation carries its own cite; the line stands only where there is no quotation to carry it
+      if (o.jung.length && !oq) {
         const j = o.jung[0];
         text.append(el('p', { class: 'rv-jung' }, [el('span', { class: 'rv-jung-mark', 'aria-hidden': 'true', text: '◦' }), citeLine(j)]));
       }

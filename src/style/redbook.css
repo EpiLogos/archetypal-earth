@@ -40,13 +40,12 @@
 .rb-card[hidden] { display: none; }
 .rb-card .aion-date { margin: 0 22px 9px 0; }
 .rb-card .aion-lede { color: var(--ink); }
-.rb-quote { margin: 18px 0 4px; }
 .rb-doctrine { color: var(--ink-3) !important; font-size: 0.98rem !important; }
 
 .rb-genesis { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--hair); }
 .rb-genesis-name { margin: 0; font-family: var(--serif); font-size: 1.14rem; line-height: 1.5; }
 .rb-genesis-name strong { font-weight: 600; }
-.rb-genesis .rb-quote { margin: 10px 0 0; }
+.rb-genesis .q { margin: 10px 0 0; }
 .rb-genesis-stop { display: inline-block; margin-top: 8px; }
 
 body.redbook-mode .time { opacity: 0.35; }

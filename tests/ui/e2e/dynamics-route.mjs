@@ -44,20 +44,20 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(700);
   const f2 = await figure(page);
   check(f1 && f2 && f1.sum !== f2.sum, `${tag}: the figure moves`);
-  const chips = await page.locator('.dy-card .dy-chip').allTextContents();
-  check(chips.includes('V') && chips.includes('J'), `${tag}: Van Eenwyk and Jung, each marked`, chips.join(' '));
+  const chips = await page.locator('.dy-card .q-voice').allTextContents();
+  check(chips.length >= 1 && chips.every((c) => c === 'Van Eenwyk'), `${tag}: Van Eenwyk is named where he speaks; Jung wears no chip`, chips.join(' '));
   const line2 = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   check(/“Energy as an oscillation between poles”/.test(line2), `${tag}: the globe tunes to the stop's families`, line2);
   if (shots) await page.screenshot({ path: `${shots}/dy-${tag}-stop.png` });
   // walk to centroversion: Neumann beside Jung
   await page.evaluate(() => { location.hash = '#/dynamics/s/self-organization'; });
   await page.waitForTimeout(2500);
-  const chips2 = await page.locator('.dy-card .dy-chip').allTextContents();
-  check(chips2.includes('N') && /Centroversion/.test((await page.locator('.dy-card').textContent()) ?? ''), `${tag}: Neumann speaks where he speaks to it`, chips2.join(' '));
+  const chips2 = await page.locator('.dy-card .q-voice').allTextContents();
+  check(chips2.includes('Neumann') && /Centroversion/.test((await page.locator('.dy-card').textContent()) ?? ''), `${tag}: Neumann speaks where he speaks to it`, chips2.join(' '));
   await page.locator('.dy-route-dot[aria-label="The 4+2 and its return"]').click();
   await page.waitForTimeout(2500);
-  const ql = await page.locator('.dy-card .lq-ql .lq-cite').allTextContents();
-  check(/ql-cycle$/.test(page.url()) && ql.length === 3 && ql.every((t) => /epi-logos\.org, § [IV]+/.test(t)), `${tag}: the route ends on the QL framework's cycle, in the published site's words`, ql.join(' | '));
+  const ql = await page.locator('.dy-card .q-ql .q-cite').allTextContents();
+  check(/ql-cycle$/.test(page.url()) && ql.length === 3 && ql.every((t) => /epi-logos\.org · § [IV]+/.test(t)), `${tag}: the route ends on the QL framework's cycle, in the published site's words`, ql.join(' | '));
   if (shots) await page.screenshot({ path: `${shots}/dy-${tag}-ql.png` });
   if (w > 500) {
     await page.keyboard.press('ArrowRight');
