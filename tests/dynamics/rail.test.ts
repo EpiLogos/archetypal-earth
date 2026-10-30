@@ -68,7 +68,7 @@ function curation(over: Record<string, unknown> = {}, concept: Record<string, un
     id: 'bounded-orbit',
     name: 'Bounded orbit',
     familyIds: ['serpent'],
-    quote: { work: 'fakevee', page: 110, locator: 'p. 96', match: VEE_MATCH },
+    quote: { work: 'fakevee', page: 110, locator: 'p. 96 (pdf p110)', match: VEE_MATCH },
     jung: { work: 'fakejung', page: 40, locator: '¶1 (pdf p40)', match: JUNG_MATCH },
     render: 'lorenz',
   };
@@ -89,7 +89,7 @@ describe('the verbatim rail', () => {
     const { data, errors } = buildFromVault(curation(), { families, vault });
     expect(errors).toEqual([]);
     expect(data.concepts[0].quote.text).toBe(VEE_MATCH);
-    expect(data.concepts[0].quote.cite).toEqual({ workTitle: 'Archetypes & Strange Attractors', year: '1997', locator: 'p. 96' });
+    expect(data.concepts[0].quote.cite).toEqual({ workTitle: 'Archetypes & Strange Attractors', year: '1997', locator: 'p. 96 (pdf p110)' });
     expect(data.concepts[0].jung.cite).toEqual({ work: 'fakejung', workTitle: 'Fake Jung', year: '1951', locator: '¶1 (pdf p40)' });
     expect(data.concepts[0].render).toBe('lorenz');
     // the same contract the site reads: parseDynamics accepts it, and it round-trips
@@ -98,7 +98,7 @@ describe('the verbatim rail', () => {
 
   it('a one-word change fails loudly and names the concept', () => {
     const edited = VEE_MATCH.replace('holds', 'holding');
-    const { data, errors } = buildFromVault(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96', match: edited } }), { families, vault });
+    const { data, errors } = buildFromVault(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96 (pdf p110)', match: edited } }), { families, vault });
     expect(data).toBeNull();
     expect(errors.join('\n')).toMatch(/concept bounded-orbit quote: the match is not found verbatim/);
   });
@@ -148,7 +148,7 @@ describe('the verbatim rail', () => {
   });
 
   it('the match must already be in normalized form, so the curation shows exactly what is published', () => {
-    const errors = validateCuration(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96', match: 'FAKE CORPUS:  the bounded' } }), { families });
+    const errors = validateCuration(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96 (pdf p110)', match: 'FAKE CORPUS:  the bounded' } }), { families });
     expect(errors.join('\n')).toMatch(/normalized form/);
   });
 
@@ -217,7 +217,7 @@ describe('the rail CLI core: empty curation and the published file', () => {
     fs.mkdirSync(path.join(r, 'curation'), { recursive: true });
     fs.mkdirSync(path.join(r, 'public/data'), { recursive: true });
     fs.writeFileSync(path.join(r, 'public/data/field.json'), JSON.stringify({ families: [{ id: 'serpent' }] }));
-    const bad = curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96', match: 'FAKE CORPUS: the bounded orbit holding its shape across the page.' } });
+    const bad = curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96 (pdf p110)', match: 'FAKE CORPUS: the bounded orbit holding its shape across the page.' } });
     fs.writeFileSync(path.join(r, 'curation/dynamics.json'), JSON.stringify(bad));
     fs.writeFileSync(path.join(r, 'public/data/dynamics.json'), 'KEEP');
     expect(() => generateDynamics({ root: r, vault })).toThrow(/bounded-orbit quote/);
@@ -231,7 +231,7 @@ describe('adversarial (A): the cite is the matched page, as the corpus marker pr
   it('a Van Eenwyk locator that is not the printed page of the matched pdf page is refused', () => {
     const { data, errors } = buildFromVault(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 999', match: VEE_MATCH } }), { families, vault });
     expect(data).toBeNull();
-    expect(errors.join('\n')).toMatch(/concept bounded-orbit quote: locator "p\. 999" must be "p\. 96", the printed page of pdf page 110/);
+    expect(errors.join('\n')).toMatch(/concept bounded-orbit quote: locator "p\. 999" must be "p\. 96 \(pdf p110\)", the printed page of pdf page 110/);
   });
 
   it('a Van Eenwyk passage on a page with no printed label cannot be cited to a page', () => {
@@ -278,7 +278,7 @@ describe('adversarial (B): a match starts and ends at a word, and names at least
   });
 
   it('the curation refuses a short match before anything is read', () => {
-    const errors = validateCuration(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96', match: 'FAKE CORPUS: the bounded' } }), { families });
+    const errors = validateCuration(curation({}, { quote: { work: 'fakevee', page: 110, locator: 'p. 96 (pdf p110)', match: 'FAKE CORPUS: the bounded' } }), { families });
     expect(errors.join('\n')).toMatch(/at least 6 words/);
   });
 });
@@ -308,10 +308,10 @@ describe('adversarial (D): a Van Eenwyk cite names the source that matched', () 
   it('a quotation from a second V source is cited to that source, not to the curation source', () => {
     const c = curation();
     (c.sources as Record<string, unknown>).fakevee2 = { file: 'corpus/fakevee2.md', sha256: sha(VEE2_TEXT), title: 'A Second Van Eenwyk Work', year: '2003', voice: 'V' };
-    c.concepts[0].quote = { work: 'fakevee2', page: 7, locator: 'p. 3', match: VEE2_MATCH };
+    c.concepts[0].quote = { work: 'fakevee2', page: 7, locator: 'p. 3 (pdf p7)', match: VEE2_MATCH };
     const { data, errors } = buildFromVault(c, { families, vault });
     expect(errors).toEqual([]);
-    expect(data.concepts[0].quote.cite).toEqual({ workTitle: 'A Second Van Eenwyk Work', year: '2003', locator: 'p. 3' });
+    expect(data.concepts[0].quote.cite).toEqual({ workTitle: 'A Second Van Eenwyk Work', year: '2003', locator: 'p. 3 (pdf p7)' });
     expect(data.concepts[0].quote.cite.workTitle).not.toBe(c.source.work);
   });
 });

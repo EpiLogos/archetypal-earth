@@ -214,10 +214,12 @@ function resolveQuote(curation, pages, labels, q, voice, where, errors) {
   const m = matchQuotation(text, q.match);
   if (!m.ok) { errors.push(`${where}: ${m.reason} (pdf page ${q.page} of ${q.work})`); return null; }
   if (voice === 'V') {
-    // a Van Eenwyk cite names the printed page the passage is on, as the corpus marker gives it: never a freehand locator
+    // a Van Eenwyk cite names the printed page the passage is on, as the corpus marker gives it, and the pdf page the
+    // passage opens at (the way a Jung cite pairs its ¶ with its pdf page): never a freehand locator
     const print = labels.get(q.work)?.get(q.page) ?? null;
     if (!print) { errors.push(`${where}: pdf page ${q.page} of ${q.work} has no printed page label, so the cite cannot name its page`); return null; }
-    if (q.locator !== `p. ${print}`) { errors.push(`${where}: locator "${q.locator}" must be "p. ${print}", the printed page of pdf page ${q.page} of ${q.work}`); return null; }
+    const want = `p. ${print} (pdf p${q.page})`;
+    if (q.locator !== want) { errors.push(`${where}: locator "${q.locator}" must be "${want}", the printed page of pdf page ${q.page} of ${q.work}`); return null; }
   } else if (!new RegExp(`pdf p${q.page}(?!\\d)`).test(q.locator)) {
     // a Jung cite is his paragraph or page; it must name the pdf page the passage was matched on
     errors.push(`${where}: locator "${q.locator}" must name the matched page (pdf p${q.page})`);
