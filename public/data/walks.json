@@ -1,0 +1,8562 @@
+{
+ "version": 1,
+ "walks": [
+  {
+   "id": "jung-aion/christ-antichrist",
+   "kind": "aion-thread",
+   "title": "Christ and Antichrist",
+   "source": "history.json#jung-aion/threads/christ-antichrist",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "christ-first-fish"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 102
+     },
+     "year": 0,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶147 (pdf p102)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "apocalypse-lamb"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 118
+     },
+     "year": 90,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶167–168 (pdf p118)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "valentinus-shadow"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 53
+     },
+     "year": 140,
+     "place": {
+      "lat": 41.9822,
+      "lon": 12.4781
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶75 (pdf p53)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "millennial-reversal"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 161
+     },
+     "year": 1000,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶231 (pdf p161)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "cathar-bogomil-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 159
+     },
+     "year": 1111,
+     "place": {
+      "lat": 43.2189,
+      "lon": 2.2954
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶229 (pdf p159–160)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "second-fish-dawn"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 98
+     },
+     "year": 1150,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶141 (pdf p98)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "joachim-holy-ghost"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 94
+     },
+     "year": 1200,
+     "place": {
+      "lat": 39.4527,
+      "lon": 16.7425
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶137 (pdf p94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "renaissance-outward-turn"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 106
+     },
+     "year": 1500,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149 (pdf p106)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "reformation-threshold"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 105
+     },
+     "year": 1550,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149 (pdf p105)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "nostradamus-letter"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 107
+     },
+     "year": 1558,
+     "place": {
+      "lat": 46.241,
+      "lon": 1.3275
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶151 (pdf p107)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "revolutionary-calendar"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 110
+     },
+     "year": 1792,
+     "place": {
+      "lat": 48.86,
+      "lon": 2.35
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶156 (pdf p110)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "wars-end-of-aeon"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 74
+     },
+     "year": 1914,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶115 (pdf p74)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "jung-modern-crisis"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 48
+     },
+     "year": 1945,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶68 (pdf p48)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "assumption-declared"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 99
+     },
+     "year": 1950,
+     "place": {
+      "lat": 41.9022,
+      "lon": 12.4539
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p99"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "ufo-end-of-era"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 294
+     },
+     "year": 1958,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶614 (pdf p294)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aquarius-alternative-2154"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 106
+     },
+     "year": 2154,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149, n.84 (pdf p106)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-aion/fish-symbol",
+   "kind": "aion-thread",
+   "title": "The changing fish",
+   "source": "history.json#jung-aion/threads/fish-symbol",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "spring-point-crossings"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 105
+     },
+     "year": -146,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149, n.83 (pdf p105)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "denderah-zodiac"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 103
+     },
+     "year": -50,
+     "place": {
+      "lat": 26.1085,
+      "lon": 32.6557
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶147 (pdf p103)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "pisces-conjunction"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 89
+     },
+     "year": -7,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶130 (pdf p89)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "christ-first-fish"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 102
+     },
+     "year": 0,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶147 (pdf p102)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "fishers-of-men"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 101
+     },
+     "year": 30,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶145 (pdf p101)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "farnese-atlas"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 103
+     },
+     "year": 150,
+     "place": {
+      "lat": 40.8961,
+      "lon": 14.2259
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶147 (pdf p103)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "alexandria-ichthys"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 101
+     },
+     "year": 200,
+     "place": {
+      "lat": 31.2,
+      "lon": 29.92
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶145 (pdf p101)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "abercius-fish"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 101
+     },
+     "year": 217,
+     "place": {
+      "lat": 37.8675,
+      "lon": 29.1259
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶145, n.71 (pdf p101)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "pectrorios-inscription"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 125
+     },
+     "year": 375,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶175 (pdf p125)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "augustine-two-powers"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 159
+     },
+     "year": 390,
+     "place": {
+      "lat": 36.8466,
+      "lon": 7.7164
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶228 (pdf p159)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "tanninim-prophecy"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 91
+     },
+     "year": 530,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶133 (pdf p91–92)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "messiah-in-pisces"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 86
+     },
+     "year": 1100,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶128 (pdf p86)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "cathar-bogomil-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 159
+     },
+     "year": 1111,
+     "place": {
+      "lat": 43.2189,
+      "lon": 2.2954
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶229 (pdf p159–160)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "grail-lapsit-exillis"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 654
+     },
+     "year": 1210,
+     "cite": {
+      "work": "cw12",
+      "locator": "pdf p654"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "abarbanel-house-of-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 86
+     },
+     "year": 1470,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶128 (pdf p86)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "lambspringk-opposed-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 162
+     },
+     "year": 1590,
+     "place": {
+      "lat": 50.1009,
+      "lon": 8.5905
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p162"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "childrens-fish-1940"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 371
+     },
+     "year": 1940,
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p371"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "april-fish"
+     },
+     "page": {
+      "work": "sync",
+      "page": 25
+     },
+     "year": 1949,
+     "place": {
+      "lat": 47.2796,
+      "lon": 8.5657
+     },
+     "cite": {
+      "work": "sync",
+      "locator": "pdf p25"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aion-published"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 9
+     },
+     "year": 1951,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p9"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-aion/alchemical-countercurrent",
+   "kind": "aion-thread",
+   "title": "The alchemical countercurrent",
+   "source": "history.json#jung-aion/threads/alchemical-countercurrent",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "valentinus-shadow"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 53
+     },
+     "year": 140,
+     "place": {
+      "lat": 41.9822,
+      "lon": 12.4781
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶75 (pdf p53)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "morienus-inner-work"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 178
+     },
+     "year": 700,
+     "place": {
+      "lat": 31.7801,
+      "lon": 35.265
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶256 (pdf p178)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "cathar-bogomil-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 159
+     },
+     "year": 1111,
+     "place": {
+      "lat": 43.2189,
+      "lon": 2.2954
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶229 (pdf p159–160)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "latin-alchemy"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 99
+     },
+     "year": 1200,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶143 (pdf p99)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "dorn-unified-self"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 182
+     },
+     "year": 1570,
+     "place": {
+      "lat": 49.6539,
+      "lon": 9.3682
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶264 (pdf p182)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "lambspringk-opposed-fishes"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 162
+     },
+     "year": 1590,
+     "place": {
+      "lat": 50.1009,
+      "lon": 8.5905
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p162"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "alchemy-science"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 185
+     },
+     "year": 1600,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶267 (pdf p185)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "faith-knowledge-rift"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 185
+     },
+     "year": 1750,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶268 (pdf p185)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-aion/living-spirit",
+   "kind": "aion-thread",
+   "title": "The living spirit",
+   "source": "history.json#jung-aion/threads/living-spirit",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "benedict-latent-spirit"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 94
+     },
+     "year": 530,
+     "place": {
+      "lat": 41.49,
+      "lon": 13.81
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶137 (pdf p94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "joachim-holy-ghost"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 94
+     },
+     "year": 1200,
+     "place": {
+      "lat": 39.4527,
+      "lon": 16.7425
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶137 (pdf p94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "latin-alchemy"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 99
+     },
+     "year": 1200,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶143 (pdf p99)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "lateran-condemnation"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 94
+     },
+     "year": 1215,
+     "place": {
+      "lat": 41.89,
+      "lon": 12.49
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶137 (pdf p94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "gerard-eternal-gospel"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 94
+     },
+     "year": 1254,
+     "place": {
+      "lat": 48.86,
+      "lon": 2.35
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶137 (pdf p94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "dorn-unified-self"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 182
+     },
+     "year": 1570,
+     "place": {
+      "lat": 49.6539,
+      "lon": 9.3682
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶264 (pdf p182)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "jung-modern-crisis"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 48
+     },
+     "year": 1945,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶68 (pdf p48)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aquarius-alternative-2154"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 106
+     },
+     "year": 2154,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149, n.84 (pdf p106)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-aquarius-horizon/aqh-forecast-arc",
+   "kind": "aion-thread",
+   "title": "The forecast arc",
+   "source": "history.json#jung-aquarius-horizon/threads/aqh-forecast-arc",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1929-spring-point"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 144
+     },
+     "year": 1929,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "pdf p144"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1929-theosophists"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 633
+     },
+     "year": 1929,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "pdf p633"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1930-time-quality"
+     },
+     "page": {
+      "work": "cw15",
+      "page": 51
+     },
+     "year": 1930,
+     "cite": {
+      "work": "cw15",
+      "locator": "¶82 (pdf p51–52)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1932-first-stars"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 612
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p612"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1932-water-bearer"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 801
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p801"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1935-vessel"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 528
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p528"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1935-aerial-sign"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 404
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p404"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1936-kairos"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 181
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶398 (pdf p181)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1940-threshold"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 375
+     },
+     "year": 1940,
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p375"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1940-second-fish"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 240
+     },
+     "year": 1940,
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p240"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1950-world-week"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 93
+     },
+     "year": 1950,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶136 (pdf p93–94)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1950-union-of-opposites"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 99
+     },
+     "year": 1950,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p99"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1950-third-millennium"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 105
+     },
+     "year": 1950,
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶149 (pdf p105–106)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1952-lucifer"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 372
+     },
+     "year": 1952,
+     "cite": {
+      "work": "cw11",
+      "locator": "¶733 (pdf p372)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1952-pegasus"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 751
+     },
+     "year": 1952,
+     "cite": {
+      "work": "cw11",
+      "locator": "pdf p751"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1957-apocalyptic"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 228
+     },
+     "year": 1957,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶488 (pdf p228)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1957-checkpoints"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 626
+     },
+     "year": 1957,
+     "cite": {
+      "work": "cw10",
+      "locator": "pdf p626"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1958-coming-events"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 284
+     },
+     "year": 1958,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶589 (pdf p284)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "aqh-1958-ticking"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 334
+     },
+     "year": 1958,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶696 (pdf p334)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-turn/turn-wotan-arc",
+   "kind": "aion-thread",
+   "title": "The Wotan arc",
+   "source": "history.json#jung-turn/threads/turn-wotan-arc",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-oak-deposal-1931"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 88
+     },
+     "year": 1931,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶174 (pdf p88)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-wotans-fires-1931"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 352
+     },
+     "year": 1931,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p352"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-re-reading-1934"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1415
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p1415"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-wotan-essay-1936"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 175
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶385 (pdf p175)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-churches-seized-1936"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 619
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw10",
+      "locator": "pdf p619"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-holocaust-aside-1938"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1454
+     },
+     "year": 1938,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p1454"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-after-catastrophe-1945"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 209
+     },
+     "year": 1945,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶454 (pdf p209)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-wotans-host-1958"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 337
+     },
+     "year": 1958,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶701 (pdf p337)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-turn/turn-counter-sun",
+   "kind": "aion-thread",
+   "title": "The counter-sun",
+   "source": "history.json#jung-turn/threads/turn-counter-sun",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-counter-sun-1935"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 401
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "pdf p401"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-archaic-symbol-1936"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 58
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶97–99 (pdf p58–59)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-ideologies-antichrist-1936"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 402
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw11",
+      "locator": "¶778–779 (pdf p402–403)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-symptom-track-1936"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 534
+     },
+     "year": 1936,
+     "cite": {
+      "work": "cw18",
+      "locator": "¶1328–1333 (pdf p534–536)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-turn/turn-dark-counter-saviors",
+   "kind": "aion-thread",
+   "title": "The dark counter-saviors",
+   "source": "history.json#jung-turn/threads/turn-dark-counter-saviors",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-discover-shadow-1931"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 299
+     },
+     "year": 1931,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p299"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-iron-wolf-1932"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 893
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.3769,
+      "lon": 8.5417
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "pdf p893"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-dark-brother-1944"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 600
+     },
+     "year": 1944,
+     "cite": {
+      "work": "cw18",
+      "locator": "pdf p600"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-possession-1944"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 459
+     },
+     "year": 1944,
+     "cite": {
+      "work": "cw12",
+      "locator": "¶563 (pdf p459–460)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-after-catastrophe-1945"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 209
+     },
+     "year": 1945,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶454 (pdf p209)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "jung-turn/turn-compensation-row",
+   "kind": "aion-thread",
+   "title": "The compensation",
+   "source": "history.json#jung-turn/threads/turn-compensation-row",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-aeon-scheme-1940"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 375
+     },
+     "year": 1940,
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p375"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-assumption-1950"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 119
+     },
+     "year": 1950,
+     "place": {
+      "lat": 41.9022,
+      "lon": 12.4539
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "pdf p119"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-kairos-1957"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 279
+     },
+     "year": 1957,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶585 (pdf p279)"
+     }
+    },
+    {
+     "subject": {
+      "type": "event",
+      "id": "turn-ufo-myth-1958"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 284
+     },
+     "year": 1958,
+     "cite": {
+      "work": "cw10",
+      "locator": "¶589 (pdf p284)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "aion-chapters",
+   "kind": "aion-chapters",
+   "title": "Aion: Researches into the Phenomenology of the Self",
+   "source": "aionbook.json#chapters",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "foreword"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 9
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p9"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-1"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 15
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p15"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-2"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 20
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p20"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-3"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 23
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p23"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-4"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 43
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p43"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-5"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 49
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p49"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-6"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 84
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p84"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-7"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 107
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p107"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-8"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 115
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p115"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-9"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 130
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p130"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-10"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 138
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶193 (pdf p138)"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-11"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 166
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p166"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-12"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 185
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p185"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-13"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 196
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶287 (pdf p196)"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-14"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 234
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "¶347 (pdf p234)"
+     }
+    },
+    {
+     "subject": {
+      "type": "chapter",
+      "id": "ch-15"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 282
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "pdf p282"
+     }
+    }
+   ]
+  },
+  {
+   "id": "redbook",
+   "kind": "redbook",
+   "title": "Liber Novus, folio by folio",
+   "source": "redbook.json#stops",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-flood-vision-northern-lands-fol1v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.4002,
+      "lon": 8.5558
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-soul-white-bird-refinding-fol2r"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2485,
+      "lon": 8.5605
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-descent-into-hell-cave-fol3v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2537,
+      "lon": 8.6665
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-three-prophecies-war-magic-religion-1914"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.3767,
+      "lon": 8.5835
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-siegfried-murder-hero-fol4v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2783,
+      "lon": 8.6287
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-coming-god-proclamation-fol4v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2904,
+      "lon": 8.6971
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-elijah-salome-mysterium-fol5v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2796,
+      "lon": 8.5657
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-crucifixion-salome-healing-fol6v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2714,
+      "lon": 8.5844
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-instruction-crystal-visions-kali-fol6r"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3184,
+      "lon": 8.4967
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-serpents-duel-sun-temple-fol6v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3691,
+      "lon": 8.6369
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-castle-maiden-red-roses-fol05"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.4071,
+      "lon": 8.5293
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-red-one-joy-devil-fol01"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3687,
+      "lon": 8.5419
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-one-of-the-lowly-tramp-death-fol12"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3715,
+      "lon": 8.666
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-death-dark-one-sea-of-dead-fol29"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.308,
+      "lon": 8.6915
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-desert-of-self-fol3r"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3763,
+      "lon": 8.5219
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-helios-four-horses-dawn-fol20"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.3845,
+      "lon": 8.6406
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-remains-temples-greening-fol33"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.3467,
+      "lon": 8.6309
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-izdubar-serpent-weave-image-fol36"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2315,
+      "lon": 8.632
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-izdubar-bull-man-first-day-fol37"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.292,
+      "lon": 8.4768
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-izdubar-carried-fantasy-egg-fol46"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.3901,
+      "lon": 8.6761
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-god-in-egg-incantations-ms50"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.5123,
+      "lon": 8.4778
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-izdubar-reborn-from-egg-ms65"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.2675,
+      "lon": 8.3907
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-anchorite-ammonius-fol15"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2614,
+      "lon": 8.6729
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-mandala-four-cardinal-figures-ms105"
+     },
+     "year": 1917,
+     "place": {
+      "lat": 47.3014,
+      "lon": 8.583
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-dead-serpent-umbilical-cord-ms111"
+     },
+     "year": 1922,
+     "place": {
+      "lat": 47.2721,
+      "lon": 8.6067
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-atmavictu-kabir-manikin-ms117"
+     },
+     "year": 1917,
+     "place": {
+      "lat": 47.2143,
+      "lon": 8.9721
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-cabiri-holy-water-caster-ms123"
+     },
+     "year": 1920,
+     "place": {
+      "lat": 47.4631,
+      "lon": 8.5663
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-philemon-magician-baucis-garden-ms139"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 39.8403,
+      "lon": 31.6677
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-lapis-atmavictu-stone-face-ms122"
+     },
+     "year": 1919,
+     "place": {
+      "lat": 47.4556,
+      "lon": 8.7072
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-sigg-memorial-mandala-liverpool-ms159"
+     },
+     "year": 1927,
+     "place": {
+      "lat": 53.3326,
+      "lon": -3.0195
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-satan-dialogue-absolute-vs-life-ms162"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 42.1029,
+      "lon": 12.0026
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-phallos-hap-daimons-of-the-dead-pdf370"
+     },
+     "year": 1915,
+     "place": {
+      "lat": 47.3549,
+      "lon": 8.5769
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-communion-of-the-dead-last-supper-1916"
+     },
+     "year": 1916,
+     "place": {
+      "lat": 47.4015,
+      "lon": 8.5537
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377"
+     },
+     "year": 1916,
+     "place": {
+      "lat": 31.176,
+      "lon": 29.9536
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-sermones-abraxas-hymn-pdf381"
+     },
+     "year": 1916,
+     "place": {
+      "lat": 31.2105,
+      "lon": 29.8611
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-sermones-man-is-a-gateway-lonely-star-pdf385"
+     },
+     "year": 1916,
+     "place": {
+      "lat": 31.2134,
+      "lon": 30.0097
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-epilogue-1959-ms190"
+     },
+     "year": 1959,
+     "place": {
+      "lat": 47.3764,
+      "lon": 8.5262
+     }
+    }
+   ]
+  },
+  {
+   "id": "theory-route",
+   "kind": "theory-route",
+   "title": "Archetypes & Strange Attractors",
+   "source": "dynamics-route.json#movements",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "concept",
+      "id": "alternating-current"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 26
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p26"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "homoclinic-point"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 63
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p63"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "stuck-attractor"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 145
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p145"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "cascade-into-chaos"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 113
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p113"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "chaotic-edge"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 14
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p14"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "strange-attractor"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 54
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p54"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "phase-transition"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "symmetry-building"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "symbol-emergence"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 115
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p115"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "self-organization"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 63
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p63"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "relationship"
+     },
+     "page": {
+      "work": "van-eenwyk",
+      "page": 156
+     },
+     "cite": {
+      "work": "van-eenwyk",
+      "locator": "pdf p156"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "manifold"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "mandala-attractor"
+     }
+    },
+    {
+     "subject": {
+      "type": "concept",
+      "id": "fractal-irreducibility"
+     }
+    },
+    {
+     "subject": {
+      "type": "route-stop",
+      "id": "neumann-stages"
+     },
+     "page": {
+      "work": "neumann-origins",
+      "page": 41
+     },
+     "cite": {
+      "work": "neumann-origins",
+      "locator": "pdf p41"
+     }
+    },
+    {
+     "subject": {
+      "type": "route-stop",
+      "id": "ql-cycle"
+     }
+    }
+   ]
+  },
+  {
+   "id": "alchemy-stages",
+   "kind": "alchemy-stages",
+   "title": "The opus: four stages",
+   "source": "alchemy.json#opus.stages",
+   "ordered": "curated",
+   "stops": [
+    {
+     "subject": {
+      "type": "stage",
+      "id": "nigredo"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 245
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶334 (pdf p245)"
+     }
+    },
+    {
+     "subject": {
+      "type": "stage",
+      "id": "albedo"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 246
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶334 (pdf p246)"
+     }
+    },
+    {
+     "subject": {
+      "type": "stage",
+      "id": "citrinitas"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 243
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶333 (pdf p243)"
+     }
+    },
+    {
+     "subject": {
+      "type": "stage",
+      "id": "rubedo"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 172
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶307 (pdf p172)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/psychoid",
+   "kind": "theoretic",
+   "title": "The Psychoid",
+   "source": "field.json#theoretics/psychoid",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "i-ching-hexagrams-king-wen-china"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 36.1108,
+      "lon": 108.2352
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp92–93, 96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-fear-first-made-gods-statius-thebaid-92ce"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 605
+     },
+     "year": 92,
+     "place": {
+      "lat": 41.8849,
+      "lon": 12.6036
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "ch.7 fn 9 (pdf p605; main text ch.7, Worringer's argument ~¶289-91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stone-mithras-rock-birth-mithraic-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 121
+     },
+     "year": 150,
+     "place": {
+      "lat": 41.4302,
+      "lon": 12.8131
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶128 (pdf p121)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tauroctony-bull-death-vegetation-altar-slabs-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 551
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1243,
+      "lon": 8.7339
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "2 December 1931 (pdf p551-552)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-zosimos-divine-water-hen-to-pan-alexandria-3c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 348
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.2584,
+      "lon": 29.8589
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶370-372 (pdf p348-49)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "uroboros-plate-page-53-plate-2-caption-mandaean-bowl-mesopotamia-c-500-a-d"
+     },
+     "page": {
+      "work": "neumann-origins",
+      "page": 53
+     },
+     "year": 500,
+     "place": {
+      "lat": 32.5445,
+      "lon": 44.5689
+     },
+     "cite": {
+      "work": "neumann-origins",
+      "locator": "pdf p53"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-wotan-sleipnir-tombstone-gotland"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 327
+     },
+     "year": 1000,
+     "place": {
+      "lat": 57.2144,
+      "lon": 18.4035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶421 (pdf p327)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-carriage-eight-wheels-mandala-india"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 206
+     },
+     "year": 1200,
+     "place": {
+      "lat": 22.3881,
+      "lon": 79.703
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p206"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 187
+     },
+     "year": 1335,
+     "place": {
+      "lat": 45.3083,
+      "lon": 8.3892
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶295 (pdf p187)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "glanville-christ-anthropos-globe-1482"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 156
+     },
+     "year": 1482,
+     "place": {
+      "lat": 46.1842,
+      "lon": -0.2358
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "fig. 64, ¶172–173 (pdf p156)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-general-soul-israel-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 310
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.5345,
+      "lon": 11.7791
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶593 (pdf p310)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wollunqua-serpent-ancestor-australia"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1290
+     },
+     "year": 1900,
+     "place": {
+      "lat": -23.5523,
+      "lon": 136.673
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "6 Dec. 1933 (pdf p1290)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-luke-137-annunciation-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3655,
+      "lon": 8.4601
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶146–152 (pdf pp57–58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-slayer-spanish-flu-dream-officers-wife-1918"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 671
+     },
+     "year": 1918,
+     "place": {
+      "lat": 46.2452,
+      "lon": 8.312
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "4 June 1930 (pdf p671)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-aluminous-flower-fig-a3-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 73
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4429,
+      "lon": 8.6036
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p73"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-birds-cover-skin-dream-girl-1938"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 225
+     },
+     "year": 1938,
+     "place": {
+      "lat": 46.9213,
+      "lon": 8.7291
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶525-526 (pdf p225-226)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/archetype-as-such",
+   "kind": "theoretic",
+   "title": "The Archetype as Such",
+   "source": "field.json#theoretics/archetype-as-such",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "i-ching-hexagrams-king-wen-china"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 36.1108,
+      "lon": 108.2352
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp92–93, 96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-fear-first-made-gods-statius-thebaid-92ce"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 605
+     },
+     "year": 92,
+     "place": {
+      "lat": 41.8849,
+      "lon": 12.6036
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "ch.7 fn 9 (pdf p605; main text ch.7, Worringer's argument ~¶289-91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stone-mithras-rock-birth-mithraic-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 121
+     },
+     "year": 150,
+     "place": {
+      "lat": 41.4302,
+      "lon": 12.8131
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶128 (pdf p121)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tauroctony-bull-death-vegetation-altar-slabs-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 551
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1243,
+      "lon": 8.7339
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "2 December 1931 (pdf p551-552)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-zosimos-divine-water-hen-to-pan-alexandria-3c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 348
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.2584,
+      "lon": 29.8589
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶370-372 (pdf p348-49)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "unicorn-reem-ark-talmud-babylonia-6c"
+     },
+     "year": 500,
+     "place": {
+      "lat": 31.7519,
+      "lon": 44.3097
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶540–545 (pdf pp441–442)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-wotan-sleipnir-tombstone-gotland"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 327
+     },
+     "year": 1000,
+     "place": {
+      "lat": 57.2144,
+      "lon": 18.4035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶421 (pdf p327)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "holy-ghost-albigenses-southern-france-12c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1570
+     },
+     "year": 1200,
+     "place": {
+      "lat": 47.708,
+      "lon": 3.3128
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "15 February 1939 (pdf p1570)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 187
+     },
+     "year": 1335,
+     "place": {
+      "lat": 45.3083,
+      "lon": 8.3892
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶295 (pdf p187)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wheel-picture-brother-klaus-pilgrims-tract-1488"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 21
+     },
+     "year": 1488,
+     "place": {
+      "lat": 46.372,
+      "lon": 8.7589
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶18-19 (pdf p21)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-kadmon-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 772
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.4974,
+      "lon": 11.841
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "nn.195–198, 205 to ch. V (pdf p772f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-wheel-sidpe-korlo-tibetan-banner"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 123
+     },
+     "year": 1900,
+     "place": {
+      "lat": 31.6166,
+      "lon": 88.7377
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶123 + fig. 40 (pdf p123)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-luke-137-annunciation-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3655,
+      "lon": 8.4601
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶146–152 (pdf pp57–58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-slayer-spanish-flu-dream-officers-wife-1918"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 671
+     },
+     "year": 1918,
+     "place": {
+      "lat": 46.2452,
+      "lon": 8.312
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "4 June 1930 (pdf p671)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-aluminous-flower-fig-a3-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 73
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4429,
+      "lon": 8.6036
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p73"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-birds-cover-skin-dream-girl-1938"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 225
+     },
+     "year": 1938,
+     "place": {
+      "lat": 46.9213,
+      "lon": 8.7291
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶525-526 (pdf p225-226)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/aion-time",
+   "kind": "theoretic",
+   "title": "Aion-Time",
+   "source": "field.json#theoretics/aion-time",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "zrvan-akarana-duration-persia"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 455
+     },
+     "year": -500,
+     "place": {
+      "lat": 32.5463,
+      "lon": 55.2616
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "11 Dec 1929 (pdf p455)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horace-aevum-river-epistles"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 456
+     },
+     "year": -20,
+     "place": {
+      "lat": 41.8648,
+      "lon": 12.4867
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "11 Dec 1929 (pdf p456)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "aion-leontocephalus-zrvan-akarana-mithraeum"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 226
+     },
+     "year": 200,
+     "place": {
+      "lat": 41.6188,
+      "lon": 13.1829
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p226"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "lion-headed-god-leontocephalus-saalburg-mithraeum"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 85
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1008,
+      "lon": 8.864
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p85 (Winter Term 1936/37)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dragon-all-seeing-pole-hippolytus-elenchos-3c"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 209
+     },
+     "year": 230,
+     "place": {
+      "lat": 41.9085,
+      "lon": 12.3666
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p209)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "christ-zodiacal-snake-twelve-stars-early-christian"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 226
+     },
+     "year": 300,
+     "place": {
+      "lat": 41.9003,
+      "lon": 12.479
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p226"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "everything-passes-ring-tunis-arab-story"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 253
+     },
+     "year": 1000,
+     "place": {
+      "lat": 36.8653,
+      "lon": 10.203
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p253"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ragnarok-prophecy-voluspa-iceland-13c"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 181
+     },
+     "year": 1270,
+     "place": {
+      "lat": 50.3766,
+      "lon": 9.179
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶399 (pdf p181–182)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "guillaume-pelerinage-ame-calendar-circle-1355"
+     },
+     "year": 1355,
+     "place": {
+      "lat": 49.136,
+      "lon": 2.8435
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶315–322 (pdf pp226–231)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "chronos-morienus-time-transformation-basel-1610"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 1040
+     },
+     "year": 1610,
+     "place": {
+      "lat": 47.498,
+      "lon": 7.5838
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "'Faust and Alchemy', Psychological Club lecture, 8 Oct. 1949 (pdf p1040 n.5)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "chance-series-clock-frederick-great-sans-souci-1786"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 208
+     },
+     "year": 1786,
+     "place": {
+      "lat": 50.4013,
+      "lon": 10.0818
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶480 (pdf p208)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dream-pendulum-clock-eternity-cw12"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 130
+     },
+     "year": 1933,
+     "place": {
+      "lat": 47.4729,
+      "lon": 8.4619
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶134-135 (pdf p130-131)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dream-pole-unknown-woman-cw12-1933"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 206
+     },
+     "year": 1933,
+     "place": {
+      "lat": 47.3657,
+      "lon": 8.5367
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶264–265 (pdf p206)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "vision-world-clock-cw12-1933"
+     },
+     "year": 1933,
+     "place": {
+      "lat": 47.4574,
+      "lon": 8.4255
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶307–313 (pdf pp220–223)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "divine-pair-planetarium-dream-young-woman-1930s"
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3732,
+      "lon": 8.6432
+     },
+     "cite": {
+      "work": "cw11",
+      "locator": "¶162–165 (pdf pp90–91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "watch-swelling-half-three-dream-boy-1936"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 62
+     },
+     "year": 1936,
+     "place": {
+      "lat": 47.4625,
+      "lon": 8.4971
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p62-77 (Winter Term 1936/37)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-clock-pauli-dark-man-light-zone-dream-zurich-1936"
+     },
+     "page": {
+      "work": "letters-pauli",
+      "page": 86
+     },
+     "year": 1936,
+     "place": {
+      "lat": 47.3908,
+      "lon": 8.493
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "letter 28P (pdf p86)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-clock-pauli-three-rhythms-clock-dream-zurich-1938"
+     },
+     "year": 1938,
+     "place": {
+      "lat": 47.4726,
+      "lon": 8.6669
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "letter 23P (pdf pp82-83, Appendix 1)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "locomotive-death-vision-dream-girl-zurich-1939"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 253
+     },
+     "year": 1939,
+     "place": {
+      "lat": 47.4618,
+      "lon": 8.6273
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p253"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "seven-white-geese-vision-dream-girl-zurich-1939"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 253
+     },
+     "year": 1939,
+     "place": {
+      "lat": 47.3736,
+      "lon": 8.5779
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p253"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-clock-definite-hours-dream-1958"
+     },
+     "page": {
+      "work": "letters-pauli",
+      "page": 237
+     },
+     "year": 1958,
+     "place": {
+      "lat": 47.372,
+      "lon": 8.6811
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "Letter 78/79, Jaffe to Pauli (pdf p237)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/collective-unconscious",
+   "kind": "theoretic",
+   "title": "The Collective Unconscious",
+   "source": "field.json#theoretics/collective-unconscious",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "i-ching-hexagrams-king-wen-china"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 36.1108,
+      "lon": 108.2352
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp92–93, 96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-fear-first-made-gods-statius-thebaid-92ce"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 605
+     },
+     "year": 92,
+     "place": {
+      "lat": 41.8849,
+      "lon": 12.6036
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "ch.7 fn 9 (pdf p605; main text ch.7, Worringer's argument ~¶289-91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stone-mithras-rock-birth-mithraic-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 121
+     },
+     "year": 150,
+     "place": {
+      "lat": 41.4302,
+      "lon": 12.8131
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶128 (pdf p121)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tauroctony-bull-death-vegetation-altar-slabs-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 551
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1243,
+      "lon": 8.7339
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "2 December 1931 (pdf p551-552)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-zosimos-divine-water-hen-to-pan-alexandria-3c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 348
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.2584,
+      "lon": 29.8589
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶370-372 (pdf p348-49)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "unicorn-reem-ark-talmud-babylonia-6c"
+     },
+     "year": 500,
+     "place": {
+      "lat": 31.7519,
+      "lon": 44.3097
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶540–545 (pdf pp441–442)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-wotan-sleipnir-tombstone-gotland"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 327
+     },
+     "year": 1000,
+     "place": {
+      "lat": 57.2144,
+      "lon": 18.4035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶421 (pdf p327)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "holy-ghost-albigenses-southern-france-12c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1570
+     },
+     "year": 1200,
+     "place": {
+      "lat": 47.708,
+      "lon": 3.3128
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "15 February 1939 (pdf p1570)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 187
+     },
+     "year": 1335,
+     "place": {
+      "lat": 45.3083,
+      "lon": 8.3892
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶295 (pdf p187)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wheel-picture-brother-klaus-pilgrims-tract-1488"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 21
+     },
+     "year": 1488,
+     "place": {
+      "lat": 46.372,
+      "lon": 8.7589
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶18-19 (pdf p21)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-kadmon-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 772
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.4974,
+      "lon": 11.841
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "nn.195–198, 205 to ch. V (pdf p772f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-wheel-sidpe-korlo-tibetan-banner"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 123
+     },
+     "year": 1900,
+     "place": {
+      "lat": 31.6166,
+      "lon": 88.7377
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶123 + fig. 40 (pdf p123)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-luke-137-annunciation-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3655,
+      "lon": 8.4601
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶146–152 (pdf pp57–58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-slayer-spanish-flu-dream-officers-wife-1918"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 671
+     },
+     "year": 1918,
+     "place": {
+      "lat": 46.2452,
+      "lon": 8.312
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "4 June 1930 (pdf p671)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-aluminous-flower-fig-a3-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 73
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4429,
+      "lon": 8.6036
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p73"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-birds-cover-skin-dream-girl-1938"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 225
+     },
+     "year": 1938,
+     "place": {
+      "lat": 46.9213,
+      "lon": 8.7291
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶525-526 (pdf p225-226)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/compensation",
+   "kind": "theoretic",
+   "title": "Compensation",
+   "source": "field.json#theoretics/compensation",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "city-hieroglyph-cross-circle-egypt"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 205
+     },
+     "year": -2500,
+     "place": {
+      "lat": 25.1833,
+      "lon": 31.2965
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "¶435 (pdf p205)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-bird-kaineus-lapiths-greece"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 337
+     },
+     "year": -800,
+     "place": {
+      "lat": 39.5954,
+      "lon": 22.7895
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶439 (pdf p337)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dismemberment-pentheus-maenads-thebes"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 450
+     },
+     "year": -405,
+     "place": {
+      "lat": 38.29,
+      "lon": 23.41
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶662 (pdf p450)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "helen-simon-magus-brothel-rome-1c"
+     },
+     "page": {
+      "work": "sem-1925",
+      "page": 84
+     },
+     "year": 50,
+     "place": {
+      "lat": 32.3187,
+      "lon": 35.1789
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf p84 (Lecture 8)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "simon-magus-helen-tyre-2c"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 42
+     },
+     "year": 150,
+     "place": {
+      "lat": 32.2165,
+      "lon": 35.1632
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶64 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tree-attis-pine-castration-phrygia"
+     },
+     "year": 200,
+     "place": {
+      "lat": 41.9548,
+      "lon": 12.5638
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶659-662 (pdf pp448-450)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "christ-zodiacal-serpent-twelve-signs"
+     },
+     "year": 400,
+     "place": {
+      "lat": 42.1183,
+      "lon": 12.3737
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "11 Dec 1929 (pdf pp460, 479)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mercurius-nine-eagles-vision-senior-950"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 224
+     },
+     "year": 950,
+     "place": {
+      "lat": 33.7167,
+      "lon": 41.984
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶416 (pdf p224)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mayan-tree-serpent-dresden-codex"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 350
+     },
+     "year": 1200,
+     "place": {
+      "lat": 51.1188,
+      "lon": 13.7569
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶451 (pdf p350)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "maiden-eckhart-daughter-anecdote-germany-14c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 70
+     },
+     "year": 1320,
+     "place": {
+      "lat": 52.8357,
+      "lon": 9.6618
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶¶102-103 (pdf p70-71)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ascent-descent-poliphilo-hypnerotomachia-1499"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 168
+     },
+     "year": 1499,
+     "place": {
+      "lat": 45.3734,
+      "lon": 12.2638
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶297 (pdf p168)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-two-headed-mercurial-fountain-rosarium-1550"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 737
+     },
+     "year": 1550,
+     "place": {
+      "lat": 50.077,
+      "lon": 8.7687
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶1784 (pdf p737)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "penotus-virgin-earth-queen-of-sheba-1600"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 286
+     },
+     "year": 1600,
+     "place": {
+      "lat": 49.3286,
+      "lon": 7.2231
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶533 (pdf p286)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-woman-dragon-grave-scrutinium-1687"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 165
+     },
+     "year": 1687,
+     "place": {
+      "lat": 52.5308,
+      "lon": 9.4561
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶293 (pdf p165)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "magician-megissogwon-hiawatha"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 387
+     },
+     "year": 1855,
+     "place": {
+      "lat": 47.4457,
+      "lon": -90.2613
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶541 (pdf p387)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-adder-bite-zarathustra-fig-tree-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 780
+     },
+     "year": 1883,
+     "place": {
+      "lat": 47.0957,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "11 December 1935 (pdf p780–790)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "raven-crucified-world-tree-german-fairytale"
+     },
+     "year": 1900,
+     "place": {
+      "lat": 51.116,
+      "lon": 13.5953
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶421-429, 437-441 (pdf pp242-251)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-hoisted-horse-dream-zurich-1906"
+     },
+     "page": {
+      "work": "cw03",
+      "page": 53
+     },
+     "year": 1906,
+     "place": {
+      "lat": 47.4061,
+      "lon": 8.7472
+     },
+     "cite": {
+      "work": "cw03",
+      "locator": "¶123-132 (pdf p53-58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "anima-voice-art-dialogue-jung-1913"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3001,
+      "lon": 8.609
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp62, 64–66 (Lectures 5–6)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-under-bed-girl-9-1924"
+     },
+     "page": {
+      "work": "cw17",
+      "page": 114
+     },
+     "year": 1924,
+     "place": {
+      "lat": 40.6811,
+      "lon": -74.0141
+     },
+     "cite": {
+      "work": "cw17",
+      "locator": "¶217 (pdf p114)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "drawing-breast-house-crescent-child-zurich-1929"
+     },
+     "year": 1929,
+     "place": {
+      "lat": 47.3578,
+      "lon": 8.531
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "27 Nov 1929 (pdf pp427-428)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "peacock-animus-back-vision-zurich-1930"
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.2953,
+      "lon": 8.5756
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "15 Oct 1930 (pdf pp81-83)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-sacrifice-earth-mother-vision-zurich-1932"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 855
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.4224,
+      "lon": 8.7181
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p855-860)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "odin-equal-armed-cross-window-bremen-1933"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1041
+     },
+     "year": 1933,
+     "place": {
+      "lat": 50.7978,
+      "lon": 9.443
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p1041)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "kore-girl-red-dress-cross-dream-case-y"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 209
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.4823,
+      "lon": 8.6658
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶351 (pdf p209)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "magic-herb-lion-stone-dream-boy-15-zurich-1939"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 228
+     },
+     "year": 1939,
+     "place": {
+      "lat": 47.3156,
+      "lon": 8.6676
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p228"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/complex",
+   "kind": "theoretic",
+   "title": "The Complex",
+   "source": "field.json#theoretics/complex",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-river-map-trigrams-yellow-river-china"
+     },
+     "page": {
+      "work": "sem-1925",
+      "page": 96
+     },
+     "year": -2000,
+     "place": {
+      "lat": 37.1544,
+      "lon": 106.9113
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf p96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ascent-descent-elijah-fiery-chariot-israel"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 214
+     },
+     "year": -850,
+     "place": {
+      "lat": 31.4383,
+      "lon": 34.6242
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "24 October 1934 (pdf p214)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-tishtriya-apaosha-rain-lake-persia"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 314
+     },
+     "year": -500,
+     "place": {
+      "lat": 32.2303,
+      "lon": 50.323
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶395 (pdf p314)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "agdistis-zeus-semen-earth-castrated-phrygia"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 994
+     },
+     "year": -200,
+     "place": {
+      "lat": 40.8631,
+      "lon": 31.5052
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p994)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "book-swallow-bitter-belly-revelation-patmos-95ce"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 915
+     },
+     "year": 95,
+     "place": {
+      "lat": 37.3031,
+      "lon": 26.4701
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "4 March 1936 (pdf p915)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "leontocephalus-arles-british-museum-2c-3c"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 246
+     },
+     "year": 200,
+     "place": {
+      "lat": 51.4847,
+      "lon": -0.1926
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p246"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "anima-figure-psyche-imprisoned-iranian-myth-3c"
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.0788,
+      "lon": 55.6432
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "12 Dec 1934 (pdf pp333-334)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "khidr-quran-sura-18-arabia-7c"
+     },
+     "year": 620,
+     "place": {
+      "lat": 24.797,
+      "lon": 44.256
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶240, 247-258 (pdf pp146-158)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-milarepa-self-song-tibet-1100"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 336
+     },
+     "year": 1100,
+     "place": {
+      "lat": 32.2502,
+      "lon": 87.5571
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "12 Dec 1934 (pdf p336)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "divine-child-naked-boy-vision-eckhart-14c"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 169
+     },
+     "year": 1350,
+     "place": {
+      "lat": 50.9547,
+      "lon": 6.8563
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶267 (pdf p169)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tree-greverus-secretum-opus-garden-leiden-1588"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 339
+     },
+     "year": 1588,
+     "place": {
+      "lat": 52.1089,
+      "lon": 4.534
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶355-358 (pdf p339-342)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "infirm-old-man-dragon-nigredo-aurelia-occulta-1659"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 386
+     },
+     "year": 1659,
+     "place": {
+      "lat": 50.0591,
+      "lon": 8.6734
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶733 (pdf p386)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "rumpelstiltskin-name-power-grimm-khm55"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 390
+     },
+     "year": 1812,
+     "place": {
+      "lat": 50.806,
+      "lon": 9.8076
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶735 (pdf p390)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horses-black-elk-vision-1881"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 717
+     },
+     "year": 1881,
+     "place": {
+      "lat": 43.055,
+      "lon": -98.7389
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "n.493 to ch. III (pdf p717)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ghost-imperator-control-group-piper-boston-1890"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 107
+     },
+     "year": 1890,
+     "place": {
+      "lat": 47.057,
+      "lon": 8.4981
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "29 Oct 1930 (pdf p107)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "magician-rope-trick-headless-officer-india-19c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 645
+     },
+     "year": 1900,
+     "place": {
+      "lat": 22.3883,
+      "lon": 77.033
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "16 Oct 1935 (pdf p645)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-b-st-emperor-francis-dream-burgholzli-1905"
+     },
+     "page": {
+      "work": "cw03",
+      "page": 121
+     },
+     "year": 1905,
+     "place": {
+      "lat": 47.3032,
+      "lon": 8.6566
+     },
+     "cite": {
+      "work": "cw03",
+      "locator": "¶287-289 (pdf p121-122)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-figure-pius-x-dinner-dream-europe-1908"
+     },
+     "year": 1908,
+     "place": {
+      "lat": 51.2592,
+      "lon": 6.1336
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶82–93 (pdf pp37–39)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-father-god-nelken-1912"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 209
+     },
+     "year": 1912,
+     "place": {
+      "lat": 51.5965,
+      "lon": 11.6224
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶378 (pdf p209)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-masai-medicine-man-prophecy-kenya-1914"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 598
+     },
+     "year": 1914,
+     "place": {
+      "lat": 5.9986,
+      "lon": 17.8533
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "20 Jan 1932 (pdf p598)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "holy-man-elgonyi-medicine-man-no-dreams-mt-elgon-1925"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 107
+     },
+     "year": 1925,
+     "place": {
+      "lat": 0.9591,
+      "lon": 38.1619
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "29 Oct 1930 (pdf p107)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "bull-pinnacle-supplication-vision-zurich-1930"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 206
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.4678,
+      "lon": 8.4229
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 Dec 1930 (pdf p206-211)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dionysian-youth-blind-old-man-vision-zurich-1931"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 249
+     },
+     "year": 1931,
+     "place": {
+      "lat": 47.4513,
+      "lon": 8.6739
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "21 Jan & 4 Feb 1931 (pdf p249-256, 259-260)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "collective-conflict-tall-man-dream-1933"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1007
+     },
+     "year": 1933,
+     "place": {
+      "lat": 47.3228,
+      "lon": 8.6078
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p1007)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-figure-pauli-seven-diamonds-dream-zurich-1936"
+     },
+     "page": {
+      "work": "letters-pauli",
+      "page": 77
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3731,
+      "lon": 8.3297
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "letter 16P (pdf p77)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "bird-eagle-concentration-camp-dream-philosophical-tree-1945"
+     },
+     "year": 1945,
+     "place": {
+      "lat": 47.4173,
+      "lon": 8.3932
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree, final dream series — ¶ pin tbd (print 342–47)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/individuation",
+   "kind": "theoretic",
+   "title": "Individuation",
+   "source": "field.json#theoretics/individuation",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ritual-agni-fire-boring-vedic-india"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 23.5803,
+      "lon": 78.7862
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "¶350–353 (pdf pp200–201)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dismemberment-dionysos-titans-heart-zeus-500bce"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 732
+     },
+     "year": -500,
+     "place": {
+      "lat": 37.8033,
+      "lon": 23.0216
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "20 November 1935 (pdf p732)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-of-ra-left-eye-egyptian-calendar"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 434
+     },
+     "year": -300,
+     "place": {
+      "lat": 26.9178,
+      "lon": 29.1372
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "27 Nov 1929 (pdf p434)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sophia-new-jerusalem-foursquare-bride-rev-21-patmos-95ce"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 369
+     },
+     "year": 95,
+     "place": {
+      "lat": 37.37,
+      "lon": 26.4884
+     },
+     "cite": {
+      "work": "cw11",
+      "locator": "¶726-728 (pdf p369-370)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eros-psyche-apuleius-golden-ass-rome-2c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1193
+     },
+     "year": 160,
+     "place": {
+      "lat": 41.9214,
+      "lon": 12.3737
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "16 June 1937 (pdf p1193–1194)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dragon-all-seeing-pole-hippolytus-elenchos-3c"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 209
+     },
+     "year": 230,
+     "place": {
+      "lat": 41.9085,
+      "lon": 12.3666
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p209)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "devil-athanasius-stillness-criterion-egypt-357"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 986
+     },
+     "year": 357,
+     "place": {
+      "lat": 41.3915,
+      "lon": 12.153
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "3 June 1936 (pdf p986); 3 June 1936 (pdf p1002-03)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "naga-birth-of-ganga-mamallapuram-7c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1318
+     },
+     "year": 700,
+     "place": {
+      "lat": 21.1663,
+      "lon": 79.6846
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "Lecture V (pdf p1318)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "moon-plant-blood-sponge-allegoriae-turbae-12c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 101
+     },
+     "year": 1100,
+     "place": {
+      "lat": 49.4236,
+      "lon": 11.5835
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶¶157-158 (pdf p101-102)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "cathedral-tarantula-den-temple-ruins-zarathustra-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1139
+     },
+     "year": 1250,
+     "place": {
+      "lat": 48.9058,
+      "lon": 2.4135
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "26 May 1937 (pdf p1139–1145)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stag-crucifix-hubert-eustace-legend"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 354
+     },
+     "year": 1400,
+     "place": {
+      "lat": 41.894,
+      "lon": 12.5285
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "fishing/hunting amplification (pdf p354)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "anima-figure-salamander-vision-cellini-florence-16c"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 195
+     },
+     "year": 1512,
+     "place": {
+      "lat": 43.7602,
+      "lon": 11.3424
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶310 n5 (pdf p195)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tree-kalpataru-wish-tree-anahata-cakra-1577"
+     },
+     "page": {
+      "work": "sem-kundalini",
+      "page": 127
+     },
+     "year": 1577,
+     "place": {
+      "lat": 20.0872,
+      "lon": 79.046
+     },
+     "cite": {
+      "work": "sem-kundalini",
+      "locator": "Appendix 1 (pdf p127)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-castration-rubens-last-judgment"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 460
+     },
+     "year": 1617,
+     "place": {
+      "lat": 48.1441,
+      "lon": 11.5978
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶681 (pdf p460)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "uniped-king-priest-abraham-le-juif-1772"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 380
+     },
+     "year": 1772,
+     "place": {
+      "lat": 48.8493,
+      "lon": 2.4502
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶720 (pdf p380)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ascent-descent-home-levitation-crookes-london-1871"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 289
+     },
+     "year": 1871,
+     "place": {
+      "lat": 51.559,
+      "lon": -0.0938
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶716–722 (pdf p289–291)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "anima-figure-lilith-macdonald-london-1895"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 905
+     },
+     "year": 1895,
+     "place": {
+      "lat": 51.5125,
+      "lon": -0.1318
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "26 February 1936 (pdf p905)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "cathedral-song-of-the-bell-association-girl-15-zurich-1900s"
+     },
+     "page": {
+      "work": "cw17",
+      "page": 17
+     },
+     "year": 1905,
+     "place": {
+      "lat": 47.3072,
+      "lon": 8.428
+     },
+     "cite": {
+      "work": "cw17",
+      "locator": "¶7 (pdf p17-18)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-god-works-like-clock-woman-washington-1911"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 950
+     },
+     "year": 1911,
+     "place": {
+      "lat": 47.3823,
+      "lon": 8.5181
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p950; cf. CW5 par. 154, CW6 par. 747, CW18 pars. 81ff)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "voice-gods-voice-breastbone-widow-burgholzli-1900s"
+     },
+     "year": 1920,
+     "place": {
+      "lat": 47.3739,
+      "lon": 8.6905
+     },
+     "cite": {
+      "work": "cw03",
+      "locator": "¶540 (pdf pp214-215)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-miss-x-picture-2-lightning-rotundum-1928"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 305
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.5053,
+      "lon": 8.6032
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶531-532, 538-544 (pdf p305-340)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "paradise-meadow-iron-gate-near-death-vision-patient"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 519
+     },
+     "year": 1930,
+     "place": {
+      "lat": 46.5721,
+      "lon": 8.7802
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶950-952 (pdf p519-521)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "osiris-figure-staff-bowl-mirror-vision-zurich-1932"
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.3339,
+      "lon": 8.3927
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "20 Jan 1932 (pdf pp587-593)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "animus-man-from-ruined-pyramid-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.2884,
+      "lon": 8.6598
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "14 Mar 1934 (pdf pp1426-1429)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "quaternion-christ-ahriman-ormazd-square-vision-zurich-1938"
+     },
+     "year": 1938,
+     "place": {
+      "lat": 47.4732,
+      "lon": 8.5784
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "26 October 1938 (pdf pp1403–1404)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/libido",
+   "kind": "theoretic",
+   "title": "Libido",
+   "source": "field.json#theoretics/libido",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "i-ching-hexagrams-king-wen-china"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 36.1108,
+      "lon": 108.2352
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp92–93, 96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-fear-first-made-gods-statius-thebaid-92ce"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 605
+     },
+     "year": 92,
+     "place": {
+      "lat": 41.8849,
+      "lon": 12.6036
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "ch.7 fn 9 (pdf p605; main text ch.7, Worringer's argument ~¶289-91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stone-mithras-rock-birth-mithraic-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 121
+     },
+     "year": 150,
+     "place": {
+      "lat": 41.4302,
+      "lon": 12.8131
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶128 (pdf p121)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tauroctony-bull-death-vegetation-altar-slabs-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 551
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1243,
+      "lon": 8.7339
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "2 December 1931 (pdf p551-552)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-zosimos-divine-water-hen-to-pan-alexandria-3c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 348
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.2584,
+      "lon": 29.8589
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶370-372 (pdf p348-49)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "unicorn-reem-ark-talmud-babylonia-6c"
+     },
+     "year": 500,
+     "place": {
+      "lat": 31.7519,
+      "lon": 44.3097
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶540–545 (pdf pp441–442)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-wotan-sleipnir-tombstone-gotland"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 327
+     },
+     "year": 1000,
+     "place": {
+      "lat": 57.2144,
+      "lon": 18.4035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶421 (pdf p327)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "holy-ghost-albigenses-southern-france-12c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1570
+     },
+     "year": 1200,
+     "place": {
+      "lat": 47.708,
+      "lon": 3.3128
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "15 February 1939 (pdf p1570)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 187
+     },
+     "year": 1335,
+     "place": {
+      "lat": 45.3083,
+      "lon": 8.3892
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶295 (pdf p187)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wheel-picture-brother-klaus-pilgrims-tract-1488"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 21
+     },
+     "year": 1488,
+     "place": {
+      "lat": 46.372,
+      "lon": 8.7589
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶18-19 (pdf p21)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-kadmon-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 772
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.4974,
+      "lon": 11.841
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "nn.195–198, 205 to ch. V (pdf p772f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-wheel-sidpe-korlo-tibetan-banner"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 123
+     },
+     "year": 1900,
+     "place": {
+      "lat": 31.6166,
+      "lon": 88.7377
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶123 + fig. 40 (pdf p123)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-luke-137-annunciation-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3655,
+      "lon": 8.4601
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶146–152 (pdf pp57–58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-slayer-spanish-flu-dream-officers-wife-1918"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 671
+     },
+     "year": 1918,
+     "place": {
+      "lat": 46.2452,
+      "lon": 8.312
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "4 June 1930 (pdf p671)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-aluminous-flower-fig-a3-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 73
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4429,
+      "lon": 8.6036
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p73"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-birds-cover-skin-dream-girl-1938"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 225
+     },
+     "year": 1938,
+     "place": {
+      "lat": 46.9213,
+      "lon": 8.7291
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶525-526 (pdf p225-226)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/mana",
+   "kind": "theoretic",
+   "title": "Mana",
+   "source": "field.json#theoretics/mana",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-river-map-trigrams-yellow-river-china"
+     },
+     "page": {
+      "work": "sem-1925",
+      "page": 96
+     },
+     "year": -2000,
+     "place": {
+      "lat": 37.1544,
+      "lon": 106.9113
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf p96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ascent-descent-elijah-fiery-chariot-israel"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 214
+     },
+     "year": -850,
+     "place": {
+      "lat": 31.4383,
+      "lon": 34.6242
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "24 October 1934 (pdf p214)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-tishtriya-apaosha-rain-lake-persia"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 314
+     },
+     "year": -500,
+     "place": {
+      "lat": 32.2303,
+      "lon": 50.323
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶395 (pdf p314)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "diogenes-lantern-seeking-man-athens-4cbce"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 437
+     },
+     "year": -350,
+     "place": {
+      "lat": 38.0289,
+      "lon": 23.7097
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "27 Feb 1935 (pdf p437)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "book-swallow-bitter-belly-revelation-patmos-95ce"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 915
+     },
+     "year": 95,
+     "place": {
+      "lat": 37.3031,
+      "lon": 26.4701
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "4 March 1936 (pdf p915)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "leontocephalus-arles-british-museum-2c-3c"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 246
+     },
+     "year": 200,
+     "place": {
+      "lat": 51.4847,
+      "lon": -0.1926
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p246"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "lion-headed-god-mithraic-aion-vatican-2c-3c"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 2
+     },
+     "year": 250,
+     "place": {
+      "lat": 41.8874,
+      "lon": 12.4492
+     },
+     "cite": {
+      "work": "cw09ii",
+      "locator": "par. n/a (frontispiece) (pdf p2)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "khidr-quran-sura-18-arabia-7c"
+     },
+     "year": 620,
+     "place": {
+      "lat": 24.797,
+      "lon": 44.256
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶240, 247-258 (pdf pp146-158)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "saturn-invocation-jewish-dress-ghaya-al-hakim-1000"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 723
+     },
+     "year": 1000,
+     "place": {
+      "lat": 36.797,
+      "lon": 39.0307
+     },
+     "cite": {
+      "work": "cw11",
+      "locator": "'Transformation Symbolism in the Mass' n.18 (pdf p723)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "saturn-providence-scientia-aurora-consurgens-14c"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 723
+     },
+     "year": 1300,
+     "place": {
+      "lat": 48.5597,
+      "lon": 6.5067
+     },
+     "cite": {
+      "work": "cw11",
+      "locator": "'Transformation Symbolism in the Mass' n.22 (pdf p723)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coronatio-mariae-rosarium-1550"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 250
+     },
+     "year": 1550,
+     "place": {
+      "lat": 50.1717,
+      "lon": 8.7014
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "¶495-496 (pdf p250-251)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "infirm-old-man-dragon-nigredo-aurelia-occulta-1659"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 386
+     },
+     "year": 1659,
+     "place": {
+      "lat": 50.0591,
+      "lon": 8.6734
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶733 (pdf p386)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "kleist-kant-critique-suicide-1811"
+     },
+     "year": 1811,
+     "place": {
+      "lat": 52.5237,
+      "lon": 13.5294
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "14 Mar 1934 (pdf pp1418-1419, 1423)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horses-black-elk-vision-1881"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 717
+     },
+     "year": 1881,
+     "place": {
+      "lat": 43.055,
+      "lon": -98.7389
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "n.493 to ch. III (pdf p717)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ghost-imperator-control-group-piper-boston-1890"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 107
+     },
+     "year": 1890,
+     "place": {
+      "lat": 47.057,
+      "lon": 8.4981
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "29 Oct 1930 (pdf p107)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-dirty-old-man-stepdaughter-estonian-tale"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 236
+     },
+     "year": 1900,
+     "place": {
+      "lat": 59.2283,
+      "lon": 25.906
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶412 (pdf p236)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-cab-phobia-st-petersburg-1905"
+     },
+     "year": 1905,
+     "place": {
+      "lat": 47.3162,
+      "lon": 8.5322
+     },
+     "cite": {
+      "work": "cw07",
+      "locator": "¶¶417–419 (pdf pp222–223)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "magician-white-black-keys-paradise-dream-zurich-1900s"
+     },
+     "page": {
+      "work": "cw07",
+      "page": 162
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3678,
+      "lon": 8.7268
+     },
+     "cite": {
+      "work": "cw07",
+      "locator": "¶287 (pdf p162)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "elijah-salome-serpent-vision-jung-1913"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3361,
+      "lon": 8.5005
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp83–84, 109, 112–115 (Lectures 8, 11–12)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-phallos-hap-daimons-of-the-dead-pdf370"
+     },
+     "year": 1915,
+     "place": {
+      "lat": 47.3549,
+      "lon": 8.5769
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "khidr-dream-somali-headman-kenya-1926"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 154
+     },
+     "year": 1925,
+     "place": {
+      "lat": 0.031,
+      "lon": 37.6189
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶¶250-251 (pdf p154)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "bull-pinnacle-supplication-vision-zurich-1930"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 206
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.4678,
+      "lon": 8.4229
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 Dec 1930 (pdf p206-211)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-black-stallion-sea-vision-zurich-1931"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 500
+     },
+     "year": 1931,
+     "place": {
+      "lat": 47.45,
+      "lon": 8.5059
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "11 November 1931 (pdf p500-505)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "collective-conflict-tall-man-dream-1933"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1007
+     },
+     "year": 1933,
+     "place": {
+      "lat": 47.3228,
+      "lon": 8.6078
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p1007)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-figure-pauli-seven-diamonds-dream-zurich-1936"
+     },
+     "page": {
+      "work": "letters-pauli",
+      "page": 77
+     },
+     "year": 1935,
+     "place": {
+      "lat": 47.3731,
+      "lon": 8.3297
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "letter 16P (pdf p77)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "bird-eagle-concentration-camp-dream-philosophical-tree-1945"
+     },
+     "year": 1945,
+     "place": {
+      "lat": 47.4173,
+      "lon": 8.3932
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree, final dream series — ¶ pin tbd (print 342–47)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/numinosum",
+   "kind": "theoretic",
+   "title": "Numinosum",
+   "source": "field.json#theoretics/numinosum",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "i-ching-hexagrams-king-wen-china"
+     },
+     "year": -1000,
+     "place": {
+      "lat": 36.1108,
+      "lon": 108.2352
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp92–93, 96 (Lecture 10)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "eye-all-seeing-chronos-chaeronea-338bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 210
+     },
+     "year": -338,
+     "place": {
+      "lat": 38.3377,
+      "lon": 23.3208
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶394 (pdf p210)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-image-fear-first-made-gods-statius-thebaid-92ce"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 605
+     },
+     "year": 92,
+     "place": {
+      "lat": 41.8849,
+      "lon": 12.6036
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "ch.7 fn 9 (pdf p605; main text ch.7, Worringer's argument ~¶289-91)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "stone-mithras-rock-birth-mithraic-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 121
+     },
+     "year": 150,
+     "place": {
+      "lat": 41.4302,
+      "lon": 12.8131
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶128 (pdf p121)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tauroctony-bull-death-vegetation-altar-slabs-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 551
+     },
+     "year": 200,
+     "place": {
+      "lat": 50.1243,
+      "lon": 8.7339
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "2 December 1931 (pdf p551-552)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-zosimos-divine-water-hen-to-pan-alexandria-3c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 348
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.2584,
+      "lon": 29.8589
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶370-372 (pdf p348-49)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "uroboros-plate-page-53-plate-2-caption-mandaean-bowl-mesopotamia-c-500-a-d"
+     },
+     "page": {
+      "work": "neumann-origins",
+      "page": 53
+     },
+     "year": 500,
+     "place": {
+      "lat": 32.5445,
+      "lon": 44.5689
+     },
+     "cite": {
+      "work": "neumann-origins",
+      "locator": "pdf p53"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "horse-wotan-sleipnir-tombstone-gotland"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 327
+     },
+     "year": 1000,
+     "place": {
+      "lat": 57.2144,
+      "lon": 18.4035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶421 (pdf p327)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "god-carriage-eight-wheels-mandala-india"
+     },
+     "page": {
+      "work": "sem-childrens-dreams",
+      "page": 206
+     },
+     "year": 1200,
+     "place": {
+      "lat": 22.3881,
+      "lon": 79.703
+     },
+     "cite": {
+      "work": "sem-childrens-dreams",
+      "locator": "pdf p206"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-opicinus-de-canistris-drawings-pavia-1330s"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 187
+     },
+     "year": 1335,
+     "place": {
+      "lat": 45.3083,
+      "lon": 8.3892
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶295 (pdf p187)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "glanville-christ-anthropos-globe-1482"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 156
+     },
+     "year": 1482,
+     "place": {
+      "lat": 46.1842,
+      "lon": -0.2358
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "fig. 64, ¶172–173 (pdf p156)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-general-soul-israel-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 310
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.5345,
+      "lon": 11.7791
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶593 (pdf p310)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wollunqua-serpent-ancestor-australia"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1290
+     },
+     "year": 1900,
+     "place": {
+      "lat": -23.5523,
+      "lon": 136.673
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "6 Dec. 1933 (pdf p1290)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-luke-137-annunciation-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.3655,
+      "lon": 8.4601
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶146–152 (pdf pp57–58)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-slayer-spanish-flu-dream-officers-wife-1918"
+     },
+     "page": {
+      "work": "sem-dream-analysis",
+      "page": 671
+     },
+     "year": 1918,
+     "place": {
+      "lat": 46.2452,
+      "lon": 8.312
+     },
+     "cite": {
+      "work": "sem-dream-analysis",
+      "locator": "4 June 1930 (pdf p671)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-aluminous-flower-fig-a3-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 73
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4429,
+      "lon": 8.6036
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p73"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "soul-birds-cover-skin-dream-girl-1938"
+     },
+     "page": {
+      "work": "cw18",
+      "page": 225
+     },
+     "year": 1938,
+     "place": {
+      "lat": 46.9213,
+      "lon": 8.7291
+     },
+     "cite": {
+      "work": "cw18",
+      "locator": "¶525-526 (pdf p225-226)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/participation-mystique",
+   "kind": "theoretic",
+   "title": "Participation Mystique",
+   "source": "field.json#theoretics/participation-mystique",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-palaeolithic-sun-wheel-rhodesia"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 42
+     },
+     "year": -10000,
+     "place": {
+      "lat": -19.2607,
+      "lon": 30.5682
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "¶45 (pdf p42)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "jewel-mani-indra-serpent-veda-india"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 654
+     },
+     "year": -1000,
+     "place": {
+      "lat": 20.8701,
+      "lon": 77.6569
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "17 Feb 1932 (pdf p654)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "andromeda-chained-rock-cetus-greek-myth"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 796
+     },
+     "year": -500,
+     "place": {
+      "lat": 39.7537,
+      "lon": 20.6892
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p796-798)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "fire-hearth-spirit-chi-chuang-tzu-350bce"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 451
+     },
+     "year": -350,
+     "place": {
+      "lat": 36.0082,
+      "lon": 104.0308
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶663 (pdf p451)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "bread-epiousion-lords-prayer-matthew-1c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 211
+     },
+     "year": 80,
+     "place": {
+      "lat": 50.937,
+      "lon": 7.5656
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "24 October 1934 (pdf p211)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sophia-achamoth-fall-plenum-2c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 398
+     },
+     "year": 150,
+     "place": {
+      "lat": 46.2591,
+      "lon": 5.1213
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "The Philosophical Tree ¶451-456 (pdf p398-400)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "spark-spinther-soul-pleroma-gnostic-2c"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 750
+     },
+     "year": 200,
+     "place": {
+      "lat": 25.8649,
+      "lon": 30.8412
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "27 November 1935 (pdf p750)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "voice-chroshtag-call-awakens-ormuzd-iran-3c"
+     },
+     "year": 300,
+     "place": {
+      "lat": 31.5649,
+      "lon": 53.9783
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "12 Dec 1934 (pdf pp334-335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "unicorn-ark-flood-talmud-5c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 701
+     },
+     "year": 500,
+     "place": {
+      "lat": 32.4692,
+      "lon": 44.6456
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "pdf p701 (Part II ch. 6, nn. 62–69)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ghost-king-corpse-vetala-india"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1293
+     },
+     "year": 1000,
+     "place": {
+      "lat": 21.2535,
+      "lon": 79.6761
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "Lecture IV (pdf p1293-1294 + footnote)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "fire-boring-priapus-ritual-fentone-12c"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 702
+     },
+     "year": 1200,
+     "place": {
+      "lat": 49.1302,
+      "lon": 5.8418
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "ch. III n. 18 (pdf p702)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "aurora-consurgens-sapientia-dei-14c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 367
+     },
+     "year": 1330,
+     "place": {
+      "lat": 47.6406,
+      "lon": 8.6372
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶464 (pdf p367)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "glanville-christ-anthropos-globe-1482"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 156
+     },
+     "year": 1482,
+     "place": {
+      "lat": 46.1842,
+      "lon": -0.2358
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "fig. 64, ¶172–173 (pdf p156)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "ufo-nuremberg-broadsheet-1561"
+     },
+     "page": {
+      "work": "cw10",
+      "page": 363
+     },
+     "year": 1561,
+     "place": {
+      "lat": 41.5217,
+      "lon": 12.9836
+     },
+     "cite": {
+      "work": "cw10",
+      "locator": "¶760–761 (pdf p363–364)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tractatus-aristotelis-serpent-hypostatica-16c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 264
+     },
+     "year": 1600,
+     "place": {
+      "lat": 47.9926,
+      "lon": 8.8289
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶354–355 (pdf p264)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "adam-kadmon-kabbala-denudata-1677"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 772
+     },
+     "year": 1677,
+     "place": {
+      "lat": 49.4974,
+      "lon": 11.841
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "nn.195–198, 205 to ch. V (pdf p772f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mothers-of-faust-realm-of-the-mothers-faust-1830"
+     },
+     "year": 1830,
+     "place": {
+      "lat": 50.9932,
+      "lon": 11.2844
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶¶180-182 (pdf pp127-128)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "sun-staff-serpent-zarathustra-bestowing-virtue-1883"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 825
+     },
+     "year": 1883,
+     "place": {
+      "lat": 46.9268,
+      "lon": 7.9636
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "29 January 1936 (pdf p825–830)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "world-wheel-sidpe-korlo-tibetan-banner"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 123
+     },
+     "year": 1900,
+     "place": {
+      "lat": 31.6166,
+      "lon": 88.7377
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶123 + fig. 40 (pdf p123)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "number-season-ticket-2477-dream-zurich-1910"
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.4264,
+      "lon": 8.5292
+     },
+     "cite": {
+      "work": "cw04",
+      "locator": "¶130–133 (pdf pp53–54)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "divine-child-puer-fa-reich-ohne-raum-germany-1919"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 170
+     },
+     "year": 1919,
+     "place": {
+      "lat": 49.5999,
+      "lon": 10.3089
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶268 (pdf p170)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-jung-fortified-city-fig-a10-1928c"
+     },
+     "page": {
+      "work": "cw13",
+      "page": 80
+     },
+     "year": 1928,
+     "place": {
+      "lat": 47.4126,
+      "lon": 8.6448
+     },
+     "cite": {
+      "work": "cw13",
+      "locator": "plates, pdf p80"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pope-fishermans-ring-vatican"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 799
+     },
+     "year": 1932,
+     "place": {
+      "lat": 41.929,
+      "lon": 12.5005
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "8 June 1932 (pdf p799)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
+     },
+     "year": 1934,
+     "place": {
+      "lat": 47.3296,
+      "lon": 8.6509
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-chaos-coils-patient-picture-zurich-1930s"
+     },
+     "year": 1938,
+     "place": {
+      "lat": 47.3943,
+      "lon": 8.4859
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "16 November 1938 (pdf pp1444–1446)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/persona",
+   "kind": "theoretic",
+   "title": "Persona",
+   "source": "field.json#theoretics/persona",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "arrow-philoctetes-wounded-king-chryse"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 724
+     },
+     "year": -1200,
+     "place": {
+      "lat": 37.8066,
+      "lon": 23.6904
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "ch. VI n. 57-58 (pdf p724-725)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "wounded-physician-greek-myth-antiquity"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 115
+     },
+     "year": -700,
+     "place": {
+      "lat": 38.9147,
+      "lon": 20.8862
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "¶239 (pdf p115)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "grail-amfortas-wound-parsifal-bayreuth-1882"
+     },
+     "page": {
+      "work": "cw06",
+      "page": 76
+     },
+     "year": 1882,
+     "place": {
+      "lat": 50.001,
+      "lon": 11.6315
+     },
+     "cite": {
+      "work": "cw06",
+      "locator": "¶105, ¶114 (pdf p76, p82)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "empress-role-twilight-state-girl-pick-prague-1896"
+     },
+     "page": {
+      "work": "cw01",
+      "page": 149
+     },
+     "year": 1896,
+     "place": {
+      "lat": 50.1177,
+      "lon": 14.4013
+     },
+     "cite": {
+      "work": "cw01",
+      "locator": "¶304 (pdf p149)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "persona-mask-becomes-real-simulation-i-g-zurich-1903"
+     },
+     "page": {
+      "work": "cw01",
+      "page": 162
+     },
+     "year": 1903,
+     "place": {
+      "lat": 47.3056,
+      "lon": 8.7469
+     },
+     "cite": {
+      "work": "cw01",
+      "locator": "¶329 (pdf p162)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/synchronicity",
+   "kind": "theoretic",
+   "title": "Synchronicity",
+   "source": "field.json#theoretics/synchronicity",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-khepri-tenth-station-amduat-egypt-1400bce"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 451
+     },
+     "year": -1400,
+     "place": {
+      "lat": 25.4311,
+      "lon": 30.4665
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶845 (pdf p451)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "uroboros-harpokrates-gnostic-gem-2c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 434
+     },
+     "year": 250,
+     "place": {
+      "lat": 31.186,
+      "lon": 29.9848
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶530 (pdf p434)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-unicornis-horapollo-hieroglyphica-5c"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 434
+     },
+     "year": 480,
+     "place": {
+      "lat": 31.2534,
+      "lon": 29.8711
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶530 (pdf p434)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-water-of-scarabs-consilium-coniugii-15c"
+     },
+     "year": 1450,
+     "place": {
+      "lat": 48.5828,
+      "lon": 7.6685
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶531 (pdf pp434–435)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-dog-transformation-penitentiary-1895"
+     },
+     "page": {
+      "work": "cw01",
+      "page": 120
+     },
+     "year": 1895,
+     "place": {
+      "lat": 46.5969,
+      "lon": 8.8606
+     },
+     "cite": {
+      "work": "cw01",
+      "locator": "¶215 (pdf p120)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "cave-descent-scarab-sun-serpents-jung-1913"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.3533,
+      "lon": 8.4654
+     },
+     "cite": {
+      "work": "sem-1925",
+      "locator": "pdf pp67–68, 81–82 (Lectures 6, 8)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-descent-into-hell-cave-fol3v"
+     },
+     "year": 1913,
+     "place": {
+      "lat": 47.2537,
+      "lon": 8.6665
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "liber-novus-helios-four-horses-dawn-fol20"
+     },
+     "year": 1914,
+     "place": {
+      "lat": 47.3845,
+      "lon": 8.6406
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "mandala-rug-woman-doctor-1930c"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 403
+     },
+     "year": 1930,
+     "place": {
+      "lat": 52.8245,
+      "lon": 10.2162
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶663 (pdf p403)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-golden-scarab-dream-rose-chafer-zurich"
+     },
+     "page": {
+      "work": "cw08",
+      "page": 450
+     },
+     "year": 1930,
+     "place": {
+      "lat": 47.3804,
+      "lon": 8.5961
+     },
+     "cite": {
+      "work": "cw08",
+      "locator": "¶844, ¶845 (pdf p450f.); full narrative ¶982 (pdf p537f.)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-ring-forehead-vision-zurich-1931"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 238
+     },
+     "year": 1931,
+     "place": {
+      "lat": 47.3574,
+      "lon": 8.4154
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "21 Jan 1931 (pdf p238, 240-247)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "scarab-green-grave-dwarfs-vision-zurich-1932"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 712
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.4364,
+      "lon": 8.409
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "16 Mar 1932 (pdf p712-714)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dream-grey-snake-scarab-road-swiss-girl-1938"
+     },
+     "page": {
+      "work": "sem-zarathustra",
+      "page": 1332
+     },
+     "year": 1938,
+     "place": {
+      "lat": 47.4508,
+      "lon": 8.6921
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "Lecture VI (pdf p1332-1334)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "theoretic/transcendent-function",
+   "kind": "theoretic",
+   "title": "The Transcendent Function",
+   "source": "field.json#theoretics/transcendent-function",
+   "ordered": "chronological",
+   "stops": [
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "pharaoh-possesses-his-mothers-pyramid-texts-egypt"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 235
+     },
+     "year": -2300,
+     "place": {
+      "lat": 27.3507,
+      "lon": 30.5032
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶391 (pdf p235)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-isis-heavenly-cow-heliopolis"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 320
+     },
+     "year": -1200,
+     "place": {
+      "lat": 30.2011,
+      "lon": 31.3179
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶408 (pdf p320)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hera-lygos-tree-festival-samos-greece"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 225
+     },
+     "year": -600,
+     "place": {
+      "lat": 37.684,
+      "lon": 27.035
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶363 (pdf p225)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-maxima-triple-jupiter-saturn-pisces-7bce"
+     },
+     "page": {
+      "work": "cw11",
+      "page": 334
+     },
+     "year": -7,
+     "place": {
+      "lat": 41.8374,
+      "lon": 11.7369
+     },
+     "cite": {
+      "work": "cw11",
+      "locator": "¶644 (pdf p334)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "isis-osiris-spirit-harpocrates-plutarch-2c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 383
+     },
+     "year": 120,
+     "place": {
+      "lat": 27.4941,
+      "lon": 31.4239
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶726 (pdf p383)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "salome-dialogue-two-one-evangel-egyptians-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 1001
+     },
+     "year": 150,
+     "place": {
+      "lat": 26.8473,
+      "lon": 31.0132
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "(pdf p1001)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "gospel-egyptians-neither-male-nor-female-2c"
+     },
+     "page": {
+      "work": "sem-visions",
+      "page": 588
+     },
+     "year": 200,
+     "place": {
+      "lat": 31.1441,
+      "lon": 29.9697
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "20 Jan 1932 (pdf p588)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "caduceus-servius-commentary-rome-400"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 722
+     },
+     "year": 400,
+     "place": {
+      "lat": 41.8806,
+      "lon": 12.4724
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "n.584 to ch. III (pdf p722)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "hermaphrodite-aphrodite-number-six-lydus-6c"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 419
+     },
+     "year": 550,
+     "place": {
+      "lat": 40.9923,
+      "lon": 28.8916
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "footnote to the Rosarium 'Naked Truth' section (pdf p419)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "king-queen-pair-cock-hen-senior-de-chemia-10c"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 408
+     },
+     "year": 950,
+     "place": {
+      "lat": 48.6027,
+      "lon": 7.6925
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "Transference Introduction footnote (pdf p408)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "turba-woman-slaying-husbands-dragon-12c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 30
+     },
+     "year": 1150,
+     "place": {
+      "lat": 51.897,
+      "lon": 11.2871
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶15 (pdf p30)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "malchuth-statue-stone-of-bethel-zohar-13c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 299
+     },
+     "year": 1280,
+     "place": {
+      "lat": 41.4428,
+      "lon": -4.5149
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶568 (pdf p299)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "moon-slays-sun-consilium-coniugii-15c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 34
+     },
+     "year": 1450,
+     "place": {
+      "lat": 41.6189,
+      "lon": 11.1707
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶¶21-22 (pdf p34-35)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-tinctura-alba-queen-conception-16c"
+     },
+     "page": {
+      "work": "cw16",
+      "page": 428
+     },
+     "year": 1500,
+     "place": {
+      "lat": 47.5795,
+      "lon": 7.5078
+     },
+     "cite": {
+      "work": "cw16",
+      "locator": "'Psychology of the Transference' §9 n.4 (pdf p428)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "aelia-laelia-crispis-epitaph-bologna-16c"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 50
+     },
+     "year": 1548,
+     "place": {
+      "lat": 44.4271,
+      "lon": 11.2981
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶¶51-103 (pdf p50-71)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "rosarium-man-woman-circle-recipe-1550"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 151
+     },
+     "year": 1550,
+     "place": {
+      "lat": 50.0833,
+      "lon": 8.7437
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "¶167 (pdf p151)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "monas-hieroglyphica-dee-antwerp-1564"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 704
+     },
+     "year": 1564,
+     "place": {
+      "lat": 51.1771,
+      "lon": 4.3533
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "n.260 to ch. III (pdf p704)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tree-pandora-woodcut-reusner-basel-1588"
+     },
+     "year": 1588,
+     "place": {
+      "lat": 47.5201,
+      "lon": 7.5031
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "9 Dec 1931 (pdf pp561-565)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "senex-old-man-cosmogony-kieser-cabala-chymica-1606"
+     },
+     "year": 1606,
+     "place": {
+      "lat": 48.7067,
+      "lon": 9.3626
+     },
+     "cite": {
+      "work": "sem-zarathustra",
+      "locator": "12 Dec 1934 (pdf pp339-340)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "widow-marries-son-beya-gabritius-maier-1617"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 28
+     },
+     "year": 1617,
+     "place": {
+      "lat": 51.1939,
+      "lon": 8.0092
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶¶14-16 (pdf p28-30)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-woman-dragon-grave-scrutinium-1687"
+     },
+     "page": {
+      "work": "cw14",
+      "page": 165
+     },
+     "year": 1687,
+     "place": {
+      "lat": 52.5308,
+      "lon": 9.4561
+     },
+     "cite": {
+      "work": "cw14",
+      "locator": "¶293 (pdf p165)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "water-fire-union-indian-painting"
+     },
+     "page": {
+      "work": "cw12",
+      "page": 169
+     },
+     "year": 1800,
+     "place": {
+      "lat": 21.9548,
+      "lon": 77.56
+     },
+     "cite": {
+      "work": "cw12",
+      "locator": "fig. 72, ¶186–188 (pdf p169)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "dream-poisonous-tree-paradise-patient-zurich"
+     },
+     "page": {
+      "work": "cw05",
+      "page": 206
+     },
+     "year": 1910,
+     "place": {
+      "lat": 47.4947,
+      "lon": 8.5465
+     },
+     "cite": {
+      "work": "cw05",
+      "locator": "¶325-326 (pdf p206)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "coniunctio-miss-x-picture-14-royal-pair-1929"
+     },
+     "page": {
+      "work": "cw09i",
+      "page": 381
+     },
+     "year": 1929,
+     "place": {
+      "lat": 40.6778,
+      "lon": -74.0452
+     },
+     "cite": {
+      "work": "cw09i",
+      "locator": "¶613 (pdf p381)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "serpent-coil-well-bottom-vision-zurich-1932"
+     },
+     "year": 1932,
+     "place": {
+      "lat": 47.3125,
+      "lon": 8.5832
+     },
+     "cite": {
+      "work": "sem-visions",
+      "locator": "24 Feb 1932 (pdf pp660-667)"
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "house-new-eth-cherries-568-dream-1954"
+     },
+     "year": 1954,
+     "place": {
+      "lat": 47.3263,
+      "lon": 8.5956
+     },
+     "cite": {
+      "work": "letters-pauli",
+      "locator": "Jung's Letter 71 (pdf pp200-201, 217)"
+     }
+    }
+   ]
+  }
+ ]
+}
