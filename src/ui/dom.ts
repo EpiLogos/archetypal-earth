@@ -73,8 +73,8 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   fig.style.setProperty('--pf', fog);
   if (ref && ref.width && ref.height) fig.style.setProperty('--ar', String(ref.width / ref.height));
   if (!ref) {
+    // a tonal plate says nothing: no word stands in for a picture that is not there
     fig.classList.add('plate-empty');
-    if (!opts.thumb) fig.dataset.none = 'No plate yet';
     return fig;
   }
   const img = el('img', { alt: opts.alt ?? sanitiseTitle(ref.title), decoding: 'async', draggable: 'false' });
@@ -88,12 +88,24 @@ export function plate(ref: ImageRef | undefined, opts: PlateOptions = {}): HTMLE
   img.addEventListener('error', () => {
     img.remove();
     fig.classList.add('plate-empty', 'plate-failed');
-    if (!opts.thumb) fig.dataset.none = 'Plate could not load';
   });
   img.src = imgUrl(ref, opts.thumb);
   fig.append(img);
-  const credit = opts.credit ? creditLine(ref) : '';
-  if (credit) fig.append(el('figcaption', { class: 'plate-credit', text: credit, title: creditLineFull(ref) }));
+  // Every picture carries its credit (P12). A full plate shows it, with a link to the source where the register holds one; a
+  // thumb or a float keeps it as a tooltip and as text for a reader that cannot see the small type.
+  const credit = creditLine(ref);
+  if (credit) {
+    const full = creditLineFull(ref);
+    fig.title = full;
+    const shown = !!opts.credit && !opts.thumb;
+    const cap = el('figcaption', { class: shown || opts.credit ? 'plate-credit' : 'plate-credit sr-only', title: full, text: credit });
+    fig.append(cap);
+    // a link to the source where the register holds one, beside the caption of a full plate
+    if (shown && ref.sourceUrl && /^https?:\/\//i.test(ref.sourceUrl)) {
+      fig.classList.add('has-source');
+      fig.append(el('a', { class: 'plate-source', href: ref.sourceUrl, target: '_blank', rel: 'noopener noreferrer', text: 'source', 'aria-label': `Source of the image: ${full}` }));
+    }
+  }
   return fig;
 }
 

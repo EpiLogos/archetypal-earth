@@ -26,6 +26,7 @@ import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
 import { DeepSheet, type DeepTarget } from '../ui/deep';
 import { Floats, type FloatItem, type FloatTarget } from '../ui/floats';
+import { floatPlate } from '../data/plates';
 import { HoverLabel } from '../ui/hover-label';
 import { Reveal } from '../ui/reveal';
 import { SearchUI } from '../ui/search';
@@ -1707,7 +1708,10 @@ export class Controller {
     if (chosen.length < k) chosen.push(...spread(placed.filter((i) => !m.occ[i].image), k - chosen.length));
     for (const i of chosen) {
       const o = m.occ[i];
-      items.push({ dir: m.dir[i], img: o.image, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } });
+      // the picture is the reveal card's: the occurrence's own, else its family's (S13); a family plate already on show is not repeated
+      let img = floatPlate(m, o).image;
+      if (img && !o.image) { if (seen.has(img.src)) img = undefined; else seen.add(img.src); }
+      items.push({ dir: m.dir[i], img, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } });
     }
     return items;
   }
@@ -2421,7 +2425,7 @@ export class Controller {
     // occurrences with their own images
     for (const i of idx) {
       const o = m.occ[i];
-      if (o.image && visible(i)) add({ anchor: i, priority: 2, item: { dir: m.dir[i], img: o.image, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } } });
+      if (o.image && visible(i)) add({ anchor: i, priority: 2, item: { dir: m.dir[i], img: floatPlate(m, o).image, label: o.label, era: eraShort(o.yearDisplay, 22), palette: m.famById.get(o.familyId)?.palette, target: { type: 'occurrence', occIdx: i } } });
     }
     // forms within the subject that carry an image (archetype/culture/place focus)
     if (subject.type !== 'family') {
@@ -2471,7 +2475,7 @@ export class Controller {
         if (best < 0 || bd < 0.08) break;
         picks.push(best);
       }
-      chosen = picks.map((i) => ({ anchor: i, priority: 0, item: { dir: m.dir[i], img: undefined, label: m.occ[i].label, era: eraShort(m.occ[i].yearDisplay, 22), palette: m.famById.get(m.occ[i].familyId)?.palette, target: { type: 'occurrence', occIdx: i } } }));
+      chosen = picks.map((i) => ({ anchor: i, priority: 0, item: { dir: m.dir[i], img: floatPlate(m, m.occ[i]).image, label: m.occ[i].label, era: eraShort(m.occ[i].yearDisplay, 22), palette: m.famById.get(m.occ[i].familyId)?.palette, target: { type: 'occurrence', occIdx: i } } }));
     }
     return chosen.map((x) => x.item);
   }
