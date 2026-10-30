@@ -7,10 +7,13 @@ import { providerLabels } from '../data/labels';
 import { DEFAULT_FORCES, FORCE_ROWS, forceMultiple, type Forces } from './forces';
 import { DEFAULT_DISPLAY, DEFAULT_KINDS, DISPLAY_ROWS, type Display, type KindFlags } from './settings';
 
+/** The tier toggles, in the order they are shown, each with the word on its button. */
+export const KIND_TOGGLES = [['archetype', 'Archetypes'], ['theoretic', 'Theoretics'], ['family', 'Families'], ['work', 'Texts'], ['person', 'People'], ['you', 'You']] as const;
+
 export interface ToolHandlers {
   onDepth(depth: number): void;
   onDust(on: boolean): void;
-  /** the tiers drawn: archetypes, theoretics, families (occurrences answer to onDust) */
+  /** the tiers drawn: archetypes, theoretics, families, texts, people, you (occurrences answer to onDust) */
   onKinds(kinds: KindFlags): void;
   onTies(bases: TieBasis[]): void;
   /** all four forces, as the person set them: applied to the live layout */
@@ -61,12 +64,12 @@ export class GraphTools {
     this.plus = el('button', { class: 'gvt-step', type: 'button', 'aria-label': 'More steps from the subject', text: '+', onclick: () => h.onDepth(this.state.depth + 1) }) as HTMLButtonElement;
     this.depthN = el('span', { class: 'gvt-n' });
     this.depthWrap = el('div', { class: 'gvt-row', role: 'group', 'aria-label': 'Depth of the local graph' }, [el('span', { text: 'Steps' }), el('span', { class: 'gvt-depth' }, [this.minus, this.depthN, this.plus])]);
-    // what is drawn, one toggle per tier: occurrences (the dust, where it always was) and the field's three node
-    // tiers. A tier switched off is absent from the drawing with its ties, so nothing is left stranded.
+    // what is drawn, one toggle per tier: occurrences (the dust, where it always was), the field's three node tiers,
+    // and the texts, the people and the visitor. A tier switched off is absent from the drawing with its ties, so nothing is left stranded.
     const kindGroup = el('div', { class: 'gvt-kinds', role: 'group', 'aria-label': 'What is drawn' });
     this.dust = el('button', { class: 'gvt-filter', type: 'button', text: 'Occurrences', 'aria-pressed': 'true', onclick: () => h.onDust(!this.state.dust) }) as HTMLButtonElement;
     kindGroup.append(this.dust);
-    for (const [kind, label] of [['archetype', 'Archetypes'], ['theoretic', 'Theoretics'], ['family', 'Families']] as const) {
+    for (const [kind, label] of KIND_TOGGLES) {
       const button = el('button', { class: 'gvt-filter', type: 'button', text: label, 'aria-pressed': 'true',
         onclick: () => h.onKinds({ ...this.state.kinds, [kind]: !this.state.kinds[kind] }) }) as HTMLButtonElement;
       this.kindButtons.set(kind, button);

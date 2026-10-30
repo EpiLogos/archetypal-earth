@@ -69,6 +69,10 @@ export function chargeStrength(kind: string, prime: boolean, rank: number, local
   if (kind === 'theoretic') return -(prime ? 1100 : 260 + 320 * rank) * gr;
   if (kind === 'family') return -(90 + 170 * rank) * gr;
   if (kind === 'body') return -60 * f.repel;
+  // a text is a body of the same order as a form, a person a little less; the visitor holds a clear place of their own
+  if (kind === 'work') return -(40 + 90 * rank) * gr;
+  if (kind === 'person') return -(60 + 80 * rank) * gr;
+  if (kind === 'you') return -200 * gr;
   return -13 * gr;
 }
 
@@ -85,18 +89,27 @@ export function linkDistance(e: GEdge, local: boolean, f: Forces): number {
     case 'sky': return (e.basis === 'jung' ? 150 : e.basis === 'inferred' ? 190 : 240) * d;
     case 'instance': return (local ? 30 : 17) * Math.max(f.distance, 1);
     case 'co': return 80 * d;
+    // the cites hold a text a long way off its material; a person sits nearer his texts; the visitor stands apart from what they name
+    case 'cite': return 150 * d;
+    case 'wrote': return 70 * d;
+    case 'you': return 170 * d;
     default: return 96 * d;
   }
 }
 
 /** How hard a tie holds its ends. A tie to the Self is drawn but never drags the Self from the centre. */
-export function linkStrength(e: GEdge, toPrime: boolean, f: Forces): number {
+export function linkStrength(e: GEdge, toPrime: boolean, f: Forces, toKind?: string): number {
   let s: number;
   switch (e.kind) {
     case 'tie': s = e.basis === 'jung' ? 0.5 : e.basis === 'inferred' ? 0.26 : 0.12; break;
     case 'sky': s = toPrime ? 0.004 : e.basis === 'jung' ? 0.2 : e.basis === 'inferred' ? 0.1 : 0.05; break;
     case 'instance': s = 0.85; break;
     case 'co': s = 0.05; break;
+    // a cite pulls by how many there are, softly: a text is placed among what it touches, never dragged from the rest
+    // (the field keeps the arrangement it had: texts and people are placed among it, they do not rearrange it)
+    case 'cite': s = toKind === 'occurrence' ? 0.004 : 0.004 + 0.022 * (1 - Math.exp(-(e.weight ?? 1) / 25)); break;
+    case 'wrote': s = toKind === 'occurrence' ? 0.03 : 0.18; break;
+    case 'you': s = 0.008 + 0.03 * (1 - Math.exp(-(e.weight ?? 1) / 4)); break;
     default: s = 0.035;
   }
   return s * f.link;

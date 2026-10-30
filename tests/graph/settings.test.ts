@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_FORCES, FORCE_ROWS } from '../../src/graph/forces';
-import { clampDisplay, clampForces, DEFAULT_DISPLAY, DEFAULT_SETTINGS, DISPLAY_ROWS, loadLayout, loadSettings, parseLayout, parseSettings, saveLayout, saveSettings, SETTINGS_KEY, type KeyValueStore } from '../../src/graph/settings';
+import { clampDisplay, clampForces, clampKinds, DEFAULT_DISPLAY, DEFAULT_KINDS, DEFAULT_SETTINGS, DISPLAY_ROWS, loadLayout, loadSettings, parseLayout, parseSettings, saveLayout, saveSettings, SETTINGS_KEY, type KeyValueStore } from '../../src/graph/settings';
 
 // A store that keeps what it is given, as localStorage does.
 const memory = (initial: Record<string, string> = {}): KeyValueStore & { data: Record<string, string> } => {
@@ -12,6 +12,8 @@ const blocked: KeyValueStore = {
   getItem: () => { throw new DOMException('blocked', 'SecurityError'); },
   setItem: () => { throw new DOMException('full', 'QuotaExceededError'); },
 };
+
+const ALL_ON = { archetype: true, theoretic: true, family: true, work: true, person: true, you: true };
 
 describe('the graph settings: clamp and parse', () => {
   it('a missing or empty store is the defaults', () => {
@@ -68,18 +70,35 @@ describe('the graph settings: clamp and parse', () => {
   });
 
   it('the tiers are flags, and anything else is the default (drawn)', () => {
-    expect(parseSettings(JSON.stringify({ kinds: { theoretic: false } })).kinds).toEqual({ archetype: true, theoretic: false, family: true });
-    expect(parseSettings(JSON.stringify({ kinds: { theoretic: 0, family: 'off' } })).kinds).toEqual({ archetype: true, theoretic: true, family: true });
-    expect(parseSettings(JSON.stringify({ kinds: 'none' })).kinds).toEqual({ archetype: true, theoretic: true, family: true });
-    expect(parseSettings(null).kinds).toEqual({ archetype: true, theoretic: true, family: true });
+    expect(parseSettings(JSON.stringify({ kinds: { theoretic: false } })).kinds).toEqual({ ...ALL_ON, theoretic: false });
+    expect(parseSettings(JSON.stringify({ kinds: { theoretic: 0, family: 'off' } })).kinds).toEqual(ALL_ON);
+    expect(parseSettings(JSON.stringify({ kinds: 'none' })).kinds).toEqual(ALL_ON);
+    expect(parseSettings(null).kinds).toEqual(ALL_ON);
+  });
+
+  it('the Texts, People and You tiers are flags too, on by default, and each can be off on its own', () => {
+    expect(DEFAULT_KINDS).toEqual({ archetype: true, theoretic: true, family: true, work: true, person: true, you: true });
+    expect(parseSettings(JSON.stringify({ kinds: { work: false } })).kinds).toEqual({ ...ALL_ON, work: false });
+    expect(parseSettings(JSON.stringify({ kinds: { person: false, you: false } })).kinds).toEqual({ ...ALL_ON, person: false, you: false });
+    expect(parseSettings(JSON.stringify({ kinds: { work: 'no', person: 0, you: null } })).kinds).toEqual(ALL_ON);
+  });
+
+  it('a setting stored before the Texts, People and You existed (three keys) still loads, with the new flags on', () => {
+    const before = JSON.stringify({ v: 1, forces: DEFAULT_FORCES, dust: false, ties: ['jung'], kinds: { archetype: true, theoretic: false, family: true }, display: { size: 1.2, links: 1, text: 1 } });
+    const s = loadSettings(memory({ [SETTINGS_KEY]: before }));
+    expect(s.kinds).toEqual({ archetype: true, theoretic: false, family: true, work: true, person: true, you: true });
+    expect(s.dust).toBe(false);
+    expect(s.ties).toEqual(['jung']);
+    expect(s.display.size).toBe(1.2);
+    expect(clampKinds({ archetype: false, theoretic: true, family: true })).toEqual({ ...ALL_ON, archetype: false });
   });
 
   it('a saved set reads back as it was written', () => {
     const store = memory();
-    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[], kinds: { archetype: true, theoretic: false, family: true }, display: { size: 1.4, links: 0.6, text: 1.5 } };
+    const s = { forces: { ...DEFAULT_FORCES, centre: 3.2, link: 2.1 }, dust: false, ties: ['jung'] as ('jung')[], kinds: { archetype: true, theoretic: false, family: true, work: false, person: true, you: false }, display: { size: 1.4, links: 0.6, text: 1.5 } };
     saveSettings(s, store);
     expect(store.data[SETTINGS_KEY]).toBeTruthy();
-    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'], kinds: { archetype: true, theoretic: false, family: true }, display: { size: 1.4, links: 0.6, text: 1.5 } });
+    expect(loadSettings(store)).toEqual({ forces: s.forces, dust: false, ties: ['jung'], kinds: s.kinds, display: { size: 1.4, links: 0.6, text: 1.5 } });
   });
 });
 

@@ -1,15 +1,25 @@
 // The graph as data: nodes, edges, neighbourhoods and time-liveness. Pure — no DOM, no d3.
 // Derived from the Model, so the graph is a second view of exactly the field the globe shows.
-import type { Model } from '../data/model';
+import { subjectPalette, type Model } from '../data/model';
 import type { RGB } from '../data/palette';
 import type { TieBasis } from '../types/field';
 import { timeVisibility, type TimeWindow } from '../data/time';
-import { hexToRgb } from '../data/palette';
+import { averagePalettes, hexToRgb } from '../data/palette';
 import type { BodyKey } from '../types/sky';
 
-export type NodeKind = 'archetype' | 'theoretic' | 'family' | 'occurrence' | 'body';
-/** 'sky' joins a body to the family or archetype it is tied to; it carries the basis of that tie. */
-export type EdgeKind = 'instance' | 'co' | 'tie' | 'parallel' | 'sky';
+/**
+ * 'work' and 'person' come from the Works and People the Model was built with (public/data/works.json, people.json); absent,
+ * the graph has neither. 'you' is the visitor, added by withYou from the practice store and nothing else.
+ */
+export type NodeKind = 'archetype' | 'theoretic' | 'family' | 'occurrence' | 'body' | 'work' | 'person' | 'you';
+/**
+ * 'sky' joins a body to the family or archetype it is tied to; it carries the basis of that tie.
+ * 'cite' joins a Work to what its cites stand on, and carries the number of cites as `weight` (drawn as width): to an
+ * archetype, theoretic or family aggregated over the whole Work, to an occurrence for that occurrence alone.
+ * 'wrote' joins a Person to a Work he wrote, or to an occurrence that is his own (Jung's dreams and visions).
+ * 'you' joins the visitor to what their own record names; its `weight` is how many times.
+ */
+export type EdgeKind = 'instance' | 'co' | 'tie' | 'parallel' | 'sky' | 'cite' | 'wrote' | 'you';
 
 export interface GNode {
   /** index in Graph.nodes */
@@ -48,6 +58,8 @@ export interface GEdge {
   kind: EdgeKind;
   /** only on 'tie' and 'sky' edges: whose word the tie is */
   basis?: TieBasis;
+  /** only on 'cite' and 'you' edges: how many cites / how many times; drawn as width */
+  weight?: number;
 }
 
 export interface Graph {
@@ -64,13 +76,31 @@ export interface Graph {
   occurrenceIds: number[];
   /** the sky's bodies (empty unless the graph was extended with withSkyAnchors) */
   bodyIds: number[];
+  /** the Works and the People (empty unless the Model was built with them) */
+  workIds: number[];
+  personIds: number[];
+  /** the visitor: one node, or none (empty unless the graph was extended with withYou) */
+  youIds: number[];
 }
 
 const aKey = (id: string) => `a:${id}`;
 const tKey = (id: string) => `t:${id}`;
 const fKey = (id: string) => `f:${id}`;
 const oKey = (id: string) => `o:${id}`;
-export const graphKey = { archetype: aKey, theoretic: tKey, family: fKey, occurrence: oKey };
+const wKey = (id: string) => `w:${id}`;
+const pKey = (id: string) => `p:${id}`;
+/** The visitor's one node: a fixed key, never anything of theirs. */
+export const YOU_KEY = 'you';
+export const graphKey = { archetype: aKey, theoretic: tKey, family: fKey, occurrence: oKey, work: wKey, person: pKey };
+
+/**
+ * Whether the occurrence-level cites (Work to occurrence) are drawn in the whole-field view when the occurrences are on.
+ * They are the fine strands (about 3,100 of them); the aggregated Work ties are always drawn. The local graph follows them
+ * whenever occurrences are on. If the global view reads badly at defaults this is the one switch: false.
+ */
+export const CITE_OCCURRENCES_IN_GLOBAL = true;
+
+const FALLBACK = { core: [0.76, 0.82, 0.95] as RGB, glow: [0.3, 0.47, 0.8] as RGB };
 
 /** Build the whole graph of a field. Occurrences the globe cannot place are still nodes: the graph is not geographic. */
 export function buildGraph(m: Model): Graph {
@@ -129,6 +159,34 @@ export function buildGraph(m: Model): Graph {
       rank: t.ground ? 1 : 0.5 + 0.45 * (members.length / maxTheo),
       colour: pal?.core ?? [0.76, 0.82, 0.95], glow: pal?.glow ?? [0.3, 0.47, 0.8], spectrum: t.spectrum?.position ?? 0.5,
       u: NaN, yearDisplay: '', prime: false, hasImage: !!t.image, ground: !!t.ground,
+    });
+  }
+
+  // Works and People after everything else the field has, so every node it already had keeps its id. A Work takes the
+  // cite-weighted mean of the colours of what it touches, a Person that of his Works: no hue of their own.
+  const maxCites = Math.max(1, ...[...m.workById.values()].map((w) => w.cites));
+  for (const w of m.workById.values()) {
+    const pal = subjectPalette(m, { type: 'work', id: w.id }, averagePalettes);
+    const members = m.workMem.get(w.id) ?? [];
+    push({
+      kind: 'work', key: wKey(w.id), ref: w.id, label: shortTitle(w.title), occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
+      rank: Math.sqrt(w.cites / maxCites),
+      colour: pal?.core ?? FALLBACK.core, glow: pal?.glow ?? FALLBACK.glow, spectrum: pal?.spectrum ?? 0.5,
+      u: NaN, yearDisplay: w.display ?? '', prime: false, hasImage: false, ground: false,
+    });
+  }
+  const citesOf = new Map<string, number>();
+  for (const w of m.workById.values()) citesOf.set(w.id, w.cites);
+  const maxWrote = Math.max(1, ...[...m.personById.values()].map((p) => p.works.reduce((n, id) => n + (citesOf.get(id) ?? 0), 0)));
+  for (const p of m.personById.values()) {
+    const pal = subjectPalette(m, { type: 'person', id: p.id }, averagePalettes);
+    const members = m.personMem.get(p.id) ?? [];
+    const wrote = p.works.reduce((n, id) => n + (citesOf.get(id) ?? 0), 0);
+    push({
+      kind: 'person', key: pKey(p.id), ref: p.id, label: p.name, occIdx: -1, members, count: members.length, placed: members.some((i) => !!m.located[i]),
+      rank: Math.sqrt(wrote / maxWrote),
+      colour: pal?.core ?? FALLBACK.core, glow: pal?.glow ?? FALLBACK.glow, spectrum: pal?.spectrum ?? 0.5,
+      u: NaN, yearDisplay: '', prime: false, hasImage: !!p.portrait, ground: false,
     });
   }
 
@@ -200,6 +258,48 @@ export function buildGraph(m: Model): Graph {
     if (ai !== undefined && bi !== undefined && ai !== bi) edges.push({ s: ai, t: bi, kind: 'tie', basis: j.basis });
   }
 
+  // The cites, from the Works' published ties (derived from the cites, never typed): a Work to the archetypes, theoretics and
+  // families its cites stand on, one tie per pair, its weight the number of cites; and to each occurrence that cites it,
+  // its weight the number of cites on that occurrence.
+  for (const w of m.workById.values()) {
+    const wi = byKey.get(wKey(w.id));
+    if (wi === undefined) continue;
+    for (const [list, key] of [[w.ties.archetypes, aKey], [w.ties.theoretics, tKey], [w.ties.families, fKey]] as const) {
+      for (const t of list) {
+        const ti = byKey.get(key(t.id));
+        if (ti !== undefined) edges.push({ s: wi, t: ti, kind: 'cite', weight: t.weight });
+      }
+    }
+  }
+  for (let i = 0; i < m.occ.length; i++) {
+    const o = m.occ[i];
+    const per = new Map<string, number>();
+    for (const c of o.jung ?? []) {
+      const wid = m.workKey.get(c.work);
+      if (wid) per.set(wid, (per.get(wid) ?? 0) + 1);
+    }
+    for (const [wid, n] of per) {
+      const wi = byKey.get(wKey(wid));
+      const oi = byKey.get(oKey(o.id));
+      if (wi !== undefined && oi !== undefined) edges.push({ s: wi, t: oi, kind: 'cite', weight: n });
+    }
+  }
+  // authorship: a Person to the Works he wrote; and to the occurrences that are his own (a subject of his own: Jung's 82)
+  for (const p of m.personById.values()) {
+    const pi = byKey.get(pKey(p.id));
+    if (pi === undefined) continue;
+    for (const wid of p.works) {
+      const wi = byKey.get(wKey(wid));
+      if (wi !== undefined) edges.push({ s: pi, t: wi, kind: 'wrote' });
+    }
+    if (p.subjectKey) {
+      for (const i of m.personMem.get(p.id) ?? []) {
+        const oi = byKey.get(oKey(m.occ[i].id));
+        if (oi !== undefined) edges.push({ s: pi, t: oi, kind: 'wrote' });
+      }
+    }
+  }
+
   const adj: number[][] = nodes.map(() => []);
   const incident: number[][] = nodes.map(() => []);
   edges.forEach((e, k) => {
@@ -216,7 +316,17 @@ export function buildGraph(m: Model): Graph {
     familyIds: nodes.filter((n) => n.kind === 'family').map((n) => n.id),
     occurrenceIds: nodes.filter((n) => n.kind === 'occurrence').map((n) => n.id),
     bodyIds: [],
+    workIds: nodes.filter((n) => n.kind === 'work').map((n) => n.id),
+    personIds: nodes.filter((n) => n.kind === 'person').map((n) => n.id),
+    youIds: [],
   };
+}
+
+/** "Psychology and Alchemy (CW12)" -> "Psychology and Alchemy"; "Aion: Researches into the Phenomenology of the Self (CW9ii)" -> "Aion". */
+export function shortTitle(title: string): string {
+  const bare = title.replace(/\s*\([^)]*\)\s*$/, '');
+  const head = bare.split(':')[0].trim();
+  return head.length >= 3 ? head : bare;
 }
 
 /** What the sky contributes to the graph: the bodies, their ties to the field, and where each stands. */
@@ -300,7 +410,7 @@ export interface Neighbourhood {
   edges: number[];
 }
 
-const PRIORITY: Record<NodeKind, number> = { theoretic: 4, archetype: 3, family: 2, body: 2, occurrence: 1 };
+const PRIORITY: Record<NodeKind, number> = { you: 5, theoretic: 4, archetype: 3, work: 2.5, person: 2.2, family: 2, body: 2, occurrence: 1 };
 
 export interface NeighbourhoodOptions {
   /** breadth-first depth (Obsidian's local-graph depth) */
@@ -367,10 +477,17 @@ export function neighbourhood(g: Graph, seeds: number[], opts: NeighbourhoodOpti
 /** What the global view shows: archetypes, theoretics and families, and occurrences as dust when asked. */
 export function globalSet(g: Graph, occurrences: boolean, tieBases?: readonly TieBasis[], kinds?: ReadonlySet<NodeKind>): Neighbourhood {
   const dist = new Map<number, number>();
-  for (const n of g.nodes) if ((n.kind !== 'occurrence' || occurrences) && kindShown(n, kinds)) dist.set(n.id, n.kind === 'archetype' || n.kind === 'theoretic' || n.kind === 'body' ? 0 : n.kind === 'family' ? 1 : 2);
+  for (const n of g.nodes) {
+    if ((n.kind !== 'occurrence' || occurrences) && kindShown(n, kinds)) {
+      dist.set(n.id, n.kind === 'archetype' || n.kind === 'theoretic' || n.kind === 'body' || n.kind === 'you' ? 0 : n.kind === 'family' || n.kind === 'work' || n.kind === 'person' ? 1 : 2);
+    }
+  }
   const edges: number[] = [];
   g.edges.forEach((e, k) => {
-    if (dist.has(e.s) && dist.has(e.t) && edgeAllowed(e, tieBases)) edges.push(k);
+    if (!dist.has(e.s) || !dist.has(e.t) || !edgeAllowed(e, tieBases)) return;
+    // the occurrence-level cites are the fine strands; one switch holds them back from the whole field (never from a local graph)
+    if (!CITE_OCCURRENCES_IN_GLOBAL && e.kind === 'cite' && g.nodes[e.t].kind === 'occurrence') return;
+    edges.push(k);
   });
   return { dist, edges };
 }

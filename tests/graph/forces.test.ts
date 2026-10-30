@@ -107,3 +107,30 @@ describe('the readouts', () => {
     expect(forceMultiple('centre', 1.6)).toBeCloseTo(2, 9);
   });
 });
+
+describe('the texts, the people and the visitor in the layout', () => {
+  const cite = (weight: number): GEdge => ({ s: 0, t: 1, kind: 'cite', weight });
+  it('push as nodes of their own order, never as hard as an archetype, and every force still scales with its slider', () => {
+    for (const kind of ['work', 'person', 'you']) {
+      const d = chargeStrength(kind, false, 0.5, false, DEFAULT_FORCES);
+      expect(d).toBeLessThan(0);
+      expect(d).toBeGreaterThan(chargeStrength('archetype', false, 0, false, DEFAULT_FORCES));
+      expect(chargeStrength(kind, false, 0.5, false, { ...DEFAULT_FORCES, repel: DEFAULT_FORCES.repel * 2 })).toBeCloseTo(d * 2, 9);
+    }
+    // a more cited text pushes harder
+    expect(chargeStrength('work', false, 1, false, DEFAULT_FORCES)).toBeLessThan(chargeStrength('work', false, 0, false, DEFAULT_FORCES));
+  });
+
+  it('a cite holds by how many there are, softly, and a cite on one occurrence holds least', () => {
+    expect(linkStrength(cite(100), false, DEFAULT_FORCES)).toBeGreaterThan(linkStrength(cite(1), false, DEFAULT_FORCES));
+    expect(linkStrength(cite(1000), false, DEFAULT_FORCES)).toBeLessThan(linkStrength(tie('jung'), false, DEFAULT_FORCES));
+    expect(linkStrength(cite(2), false, DEFAULT_FORCES, 'occurrence')).toBeLessThan(linkStrength(cite(2), false, DEFAULT_FORCES, 'family'));
+    expect(linkStrength({ s: 0, t: 1, kind: 'wrote' }, false, DEFAULT_FORCES, 'occurrence')).toBeLessThan(linkStrength({ s: 0, t: 1, kind: 'wrote' }, false, DEFAULT_FORCES, 'work'));
+    for (const kind of ['cite', 'wrote', 'you'] as const) {
+      const e: GEdge = { s: 0, t: 1, kind, weight: 3 };
+      expect(linkDistance(e, false, DEFAULT_FORCES)).toBeGreaterThan(0);
+      expect(linkDistance(e, true, DEFAULT_FORCES)).toBeGreaterThan(linkDistance(e, false, DEFAULT_FORCES));
+      expect(linkStrength(e, false, { ...DEFAULT_FORCES, link: DEFAULT_FORCES.link * 2 })).toBeCloseTo(linkStrength(e, false, DEFAULT_FORCES) * 2, 9);
+    }
+  });
+});

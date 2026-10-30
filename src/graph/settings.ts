@@ -6,15 +6,21 @@ import { DEFAULT_FORCES, FORCE_ROWS, type Forces } from './forces';
 
 /**
  * The tiers the graph draws. Occurrences answer to `dust` (the toggle that was always there); the three node tiers
- * of the field answer here — a tier switched off is absent from the drawing with its ties, never left stranded.
+ * of the field answer here, and so do the texts (`work`), the people (`person`) and the visitor (`you`) — a tier switched
+ * off is absent from the drawing with its ties, never left stranded. All are on by default.
  */
 export interface KindFlags {
   archetype: boolean;
   theoretic: boolean;
   family: boolean;
+  work: boolean;
+  person: boolean;
+  you: boolean;
 }
 
-export const DEFAULT_KINDS: KindFlags = { archetype: true, theoretic: true, family: true };
+export const DEFAULT_KINDS: KindFlags = { archetype: true, theoretic: true, family: true, work: true, person: true, you: true };
+/** The flags in the order the toggles show them. */
+export const KIND_KEYS: readonly (keyof KindFlags)[] = ['archetype', 'theoretic', 'family', 'work', 'person', 'you'];
 
 /** How the graph is drawn (Obsidian's Display): multipliers on the drawing only, never on the layout. 1 is as drawn. */
 export interface Display {
@@ -107,12 +113,15 @@ export function clampDisplay(raw: unknown): Display {
   return out;
 }
 
-/** The tier flags from whatever was stored: a missing or non-boolean key is the default (drawn). */
+/**
+ * The tier flags from whatever was stored: a missing or non-boolean key is the default (drawn). So a setting stored before
+ * the texts, people and visitor existed (three keys) reads the three new ones as on.
+ */
 export function clampKinds(raw: unknown): KindFlags {
   const out: KindFlags = { ...DEFAULT_KINDS };
   if (!raw || typeof raw !== 'object') return out;
   const o = raw as Record<string, unknown>;
-  for (const k of ['archetype', 'theoretic', 'family'] as const) if (typeof o[k] === 'boolean') out[k] = o[k] as boolean;
+  for (const k of KIND_KEYS) if (typeof o[k] === 'boolean') out[k] = o[k] as boolean;
   return out;
 }
 

@@ -24,7 +24,7 @@ import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
 import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, dustLiveFactor, linkDistance, linkStrength, liveFactor, type Forces } from './forces';
 import { clampZoom, Coast, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_ZOOM, type Click } from './motion';
-import { loadLayout, loadSettings, saveLayout, saveSettings, DEFAULT_DISPLAY, DEFAULT_KINDS, type Display, type KindFlags } from './settings';
+import { loadLayout, loadSettings, saveLayout, saveSettings, DEFAULT_DISPLAY, DEFAULT_KINDS, KIND_KEYS, type Display, type KindFlags } from './settings';
 import { forceCluster, forceField, type FieldForce } from './field-force';
 
 // outside the local lens the field recedes to a whisper that is still clickable
@@ -134,6 +134,10 @@ function nodeRadius(n: GNode): number {
   // a theoretic is a small body of its own, a seed rather than a form; the ground is the larger base the others stand on
   if (n.kind === 'theoretic') return n.ground ? 7 : 3 + 1.8 * n.rank;
   if (n.kind === 'family') return 3.4 + 6 * n.rank;
+  // a text is a small square, larger the more of the field cites it; a person a lozenge a little larger than a family; the visitor is its own light
+  if (n.kind === 'work') return 3.6 + 5 * n.rank;
+  if (n.kind === 'person') return 5.2 + 3.2 * n.rank;
+  if (n.kind === 'you') return 9;
   return n.hasImage ? 2.3 : 1.8;
 }
 
@@ -154,8 +158,20 @@ const STYLE: Record<string, EdgeStyle> = {
   'sky-jung': { width: 1.1, alpha: 0.46, dash: [] },
   'sky-inferred': { width: 0.85, alpha: 0.27, dash: [] },
   'sky-site': { width: 0.8, alpha: 0.17, dash: [2.5, 5] },
+  // authorship and the visitor's own strands
+  wrote: { width: 1.3, alpha: 0.5, dash: [] },
+  you: { width: 1.1, alpha: 0.4, dash: [] },
 };
-const styleOf = (e: GEdge) => (e.kind === 'tie' ? `tie-${e.basis ?? 'site'}` : e.kind === 'sky' ? `sky-${e.basis ?? 'site'}` : e.kind);
+/** The cites are drawn by weight: their width (and a little of their strength) rises with how many there are, in a few steps so they bucket. */
+const CITE_STEPS = 6;
+export function citeStep(weight: number | undefined): number {
+  const w = Math.max(1, weight ?? 1);
+  return Math.min(CITE_STEPS - 1, Math.floor((CITE_STEPS - 1) * Math.min(1, Math.log(w) / Math.log(150))));
+}
+const CITE_STYLES: EdgeStyle[] = Array.from({ length: CITE_STEPS }, (_, i) => ({ width: 0.45 + 0.3 * i, alpha: 0.07 + 0.032 * i, dash: [] }));
+const YOU_STYLES: EdgeStyle[] = Array.from({ length: CITE_STEPS }, (_, i) => ({ width: 0.8 + 0.3 * i, alpha: 0.3 + 0.05 * i, dash: [] }));
+const styleOf = (e: GEdge) => (e.kind === 'tie' ? `tie-${e.basis ?? 'site'}` : e.kind === 'sky' ? `sky-${e.basis ?? 'site'}` : e.kind === 'cite' ? `cite-${citeStep(e.weight)}` : e.kind === 'you' ? `you-${citeStep(e.weight)}` : e.kind);
+const edgeStyle = (e: GEdge): EdgeStyle => (e.kind === 'cite' ? CITE_STYLES[citeStep(e.weight)] : e.kind === 'you' ? YOU_STYLES[citeStep(e.weight)] : STYLE[styleOf(e)]);
 
 const MAX_K = MAX_ZOOM;
 const MIN_K = MIN_ZOOM;
@@ -423,6 +439,34 @@ export class GraphView {
       v.x = base.x + Math.cos(ang) * rad;
       v.y = base.y + Math.sin(ang) * rad;
     }
+    // a text begins beside the archetype its cites weigh on most; a person among his texts (or on a wide ring where he has none)
+    const heaviest = new Map<number, { t: number; w: number }>();
+    for (const e of g.edges) {
+      if (e.kind !== 'cite' || g.nodes[e.t].kind !== 'archetype') continue;
+      const cur = heaviest.get(e.s);
+      if (!cur || (e.weight ?? 0) > cur.w) heaviest.set(e.s, { t: e.t, w: e.weight ?? 0 });
+    }
+    for (const id of g.workIds) {
+      const top = heaviest.get(id);
+      const base = top ? this.nodes[top.t] : this.nodes[arch[0]];
+      const ang = hash01(g.nodes[id].key, 5) * Math.PI * 2;
+      const rad = 120 + hash01(g.nodes[id].key, 6) * 80;
+      this.nodes[id].x = base.x + Math.cos(ang) * rad;
+      this.nodes[id].y = base.y + Math.sin(ang) * rad;
+    }
+    for (const id of g.personIds) {
+      const mine = g.adj[id].filter((n) => g.nodes[n].kind === 'work');
+      const ang = hash01(g.nodes[id].key, 7) * Math.PI * 2;
+      if (mine.length) {
+        const cx = mine.reduce((n, w) => n + this.nodes[w].x, 0) / mine.length;
+        const cy = mine.reduce((n, w) => n + this.nodes[w].y, 0) / mine.length;
+        this.nodes[id].x = cx + Math.cos(ang) * 60;
+        this.nodes[id].y = cy + Math.sin(ang) * 60;
+      } else {
+        this.nodes[id].x = Math.cos(ang) * 420;
+        this.nodes[id].y = Math.sin(ang) * 420;
+      }
+    }
   }
 
   // ── public ───────────────────────────────────────────────────────────────
@@ -544,7 +588,10 @@ export class GraphView {
     let bodyLive = 1;
     for (const id of this.active.keys()) if (this.nodes[id].g.kind === 'body') { bodies++; bodyLive = Math.min(bodyLive, this.nodes[id].live); }
     const skyEdges = this.activeEdges.filter((k) => this.g.edges[k].kind === 'sky').length;
-    return { sky: this.sky.status, bodies, bodyLive, skyEdges, nodes: n, edges: this.activeEdges.length, alpha: this.sim.alpha(), k: this.t.k, mode: this.mode, depth: this.depth, hover: this.hover, subject: this.subject, tieBases: this.ties.slice(), occurrences: this.dust, liveOn: this.liveOn, coasting: this.coast.moving, touching: this.touches.size };
+    let works = 0, people = 0, you = 0;
+    for (const id of this.active.keys()) { const kd = this.nodes[id].g.kind; if (kd === 'work') works++; else if (kd === 'person') people++; else if (kd === 'you') you++; }
+    const citeEdges = this.activeEdges.filter((k) => this.g.edges[k].kind === 'cite').length;
+    return { sky: this.sky.status, bodies, bodyLive, skyEdges, works, people, you, citeEdges, nodes: n, edges: this.activeEdges.length, alpha: this.sim.alpha(), k: this.t.k, mode: this.mode, depth: this.depth, hover: this.hover, subject: this.subject, tieBases: this.ties.slice(), occurrences: this.dust, liveOn: this.liveOn, coasting: this.coast.moving, touching: this.touches.size };
   }
 
   /** Settle the simulation synchronously (tests, screenshots). */
@@ -582,14 +629,14 @@ export class GraphView {
 
   /** A signature of the tier flags, for the layout key: switching a tier off re-lays the picture. */
   private kindSig(): string {
-    return `${this.kinds.archetype ? 1 : 0}${this.kinds.theoretic ? 1 : 0}${this.kinds.family ? 1 : 0}`;
+    return KIND_KEYS.map((k) => (this.kinds[k] ? 1 : 0)).join('');
   }
 
   /** The kinds drawn, as the set builders take them; undefined while every tier is on (nothing to filter). */
   private kindSet(): ReadonlySet<NodeKind> | undefined {
-    if (this.kinds.archetype && this.kinds.theoretic && this.kinds.family) return undefined;
+    if (KIND_KEYS.every((k) => this.kinds[k])) return undefined;
     const out = new Set<NodeKind>();
-    for (const k of ['archetype', 'theoretic', 'family'] as const) if (this.kinds[k]) out.add(k);
+    for (const k of KIND_KEYS) if (this.kinds[k]) out.add(k);
     // occurrences answer to the dust toggle, not to the tiers
     if (this.dust) out.add('occurrence');
     return out;
@@ -721,7 +768,7 @@ export class GraphView {
 
   /** A tier switched on or off: its nodes and its ties leave the drawing together. */
   private setKinds(next: KindFlags) {
-    if (next.archetype === this.kinds.archetype && next.theoretic === this.kinds.theoretic && next.family === this.kinds.family) return;
+    if (KIND_KEYS.every((k) => next[k] === this.kinds[k])) return;
     this.kinds = { ...next };
     this.remember();
     this.pushTools();
@@ -758,7 +805,7 @@ export class GraphView {
     return {
       dist: (l: SimLink) => linkDistance(l.e, local, f),
       // time-aware (audit T1): the ties and instances of the live hold harder than those of the ghosts; exactly as drawn in 'all time'
-      str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f)
+      str: (l: SimLink) => linkStrength(l.e, this.nodes[l.e.t].g.prime, f, this.nodes[l.e.t].g.kind)
         * (l.e.kind === 'tie' || l.e.kind === 'instance' ? liveFactor(this.nodes[l.e.s].live, this.nodes[l.e.t].live, on) : 1),
       charge: (v: VNode) => chargeStrength(v.g.kind, v.g.prime || v.g.ground, v.g.rank, local, f) * dustLiveFactor(v.g.kind, v.live, on),
       centre: centreStrength(local, f),
@@ -1328,7 +1375,7 @@ export class GraphView {
           const reach = (v.r * Math.pow(k, 0.55) * this.display.size) / k + slop;
           if (d <= reach) {
             // nearest edge wins; bigger things win ties so a form (or a small theoretic) is never hidden under the dust
-            const score = d / reach - (v.g.kind === 'archetype' ? 0.6 : v.g.kind === 'body' ? 0.5 : v.g.kind === 'theoretic' ? 0.4 : v.g.kind === 'family' ? 0.3 : 0);
+            const score = d / reach - (v.g.kind === 'archetype' || v.g.kind === 'you' ? 0.6 : v.g.kind === 'body' ? 0.5 : v.g.kind === 'theoretic' ? 0.4 : v.g.kind === 'family' || v.g.kind === 'work' || v.g.kind === 'person' ? 0.3 : 0);
             if (score < bestScore) { bestScore = score; best = v; }
           }
           n = (n as unknown as { next?: typeof node }).next;
@@ -1553,6 +1600,9 @@ export class GraphView {
     if (v.g.kind === 'theoretic') return (v.g.ground ? 14.5 : 12 + 2.4 * v.g.rank) * Math.min(1.22, 0.9 + 0.11 * k);
     if (v.g.kind === 'family') return (12.2 + 2.6 * v.g.rank) * Math.min(1.2, 0.9 + 0.1 * k);
     if (v.g.kind === 'body') return 12.5 * Math.min(1.2, 0.9 + 0.1 * k);
+    if (v.g.kind === 'work') return (11.8 + 2 * v.g.rank) * Math.min(1.18, 0.9 + 0.1 * k);
+    if (v.g.kind === 'person') return 13 * Math.min(1.2, 0.9 + 0.1 * k);
+    if (v.g.kind === 'you') return 15 * Math.min(1.25, 0.88 + 0.12 * k);
     return 11.5 * Math.min(1.15, 0.92 + 0.08 * k);
   }
 
@@ -1615,8 +1665,8 @@ export class GraphView {
       if (kind === 'occurrence') continue;
       const a = v.vis * v.hl * v.live;
       if (a < 0.02) continue;
-      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'theoretic' ? (v.g.ground ? 5.2 : 3.6) : kind === 'body' ? 3.2 : 2.7);
-      const strength = kind === 'archetype' ? 0.36 : kind === 'theoretic' ? (v.g.ground ? 0.4 : 0.2 + 0.1 * v.g.rank) : kind === 'body' ? 0.3 : 0.15 + 0.09 * v.g.rank;
+      const rad = v.sr * (kind === 'archetype' ? 3.7 : kind === 'theoretic' ? (v.g.ground ? 5.2 : 3.6) : kind === 'body' ? 3.2 : kind === 'you' ? 4.2 : 2.7);
+      const strength = kind === 'archetype' ? 0.36 : kind === 'theoretic' ? (v.g.ground ? 0.4 : 0.2 + 0.1 * v.g.rank) : kind === 'body' ? 0.3 : kind === 'you' ? 0.34 : kind === 'work' ? 0.12 + 0.08 * v.g.rank : 0.15 + 0.09 * v.g.rank;
       ctx.globalAlpha = Math.min(1, strength * a * (1 + 0.5 * v.hv));
       ctx.drawImage(this.halo(v.glow), v.sx - rad, v.sy - rad, rad * 2, rad * 2);
     }
@@ -1673,14 +1723,59 @@ export class GraphView {
     for (const v of hollow) hollowRing(v, v.vis * (0.28 + 0.72 * v.hl) * v.live * dustK);
 
     // then forms, theoretics, archetypes and bodies
-    for (const pass of ['family', 'theoretic', 'archetype', 'body'] as const) {
+    for (const pass of ['family', 'work', 'person', 'theoretic', 'archetype', 'body', 'you'] as const) {
       for (const v of stage) {
         if (v.g.kind !== pass) continue;
         const a = v.vis * (0.28 + 0.72 * v.hl) * (0.35 + 0.65 * v.live);
         if (a < 0.015) continue;
         // (a theoretic is a concept: its place is its ties', so it is always drawn as the seed it is)
-        if (!v.g.placed && pass !== 'body' && pass !== 'theoretic') { hollowRing(v, a); continue; }
-        if (pass === 'body') {
+        // (a text, a person and the visitor are not places: they are always drawn whole)
+        if (!v.g.placed && pass !== 'body' && pass !== 'theoretic' && pass !== 'work' && pass !== 'person' && pass !== 'you') { hollowRing(v, a); continue; }
+        if (pass === 'work') {
+          // a text is a small square, a book: its own colour, a pale hairline round it
+          const half = v.sr * 0.86;
+          ctx.fillStyle = rgba(v.rgb, 0.9 * a);
+          ctx.fillRect(v.sx - half, v.sy - half, half * 2, half * 2);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = rgba('255 255 255', 0.34 * a);
+          ctx.strokeRect(v.sx - half - 0.5, v.sy - half - 0.5, half * 2 + 1, half * 2 + 1);
+        } else if (pass === 'person') {
+          // a person is a lozenge: a square stood on its corner, lighter at the centre
+          const r = v.sr * 1.12;
+          ctx.fillStyle = rgba(v.rgb, 0.92 * a);
+          ctx.beginPath();
+          ctx.moveTo(v.sx, v.sy - r); ctx.lineTo(v.sx + r, v.sy); ctx.lineTo(v.sx, v.sy + r); ctx.lineTo(v.sx - r, v.sy);
+          ctx.closePath();
+          ctx.fill();
+          ctx.fillStyle = rgba('255 255 255', 0.5 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, Math.max(0.8, r * 0.28), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = rgba(v.rgb, 0.55 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, r + 2.6, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (pass === 'you') {
+          // the visitor: a bright point inside two thin rings, in the mean colour of what they name
+          const gr = ctx.createRadialGradient(v.sx, v.sy, 0, v.sx, v.sy, v.sr);
+          gr.addColorStop(0, rgba('255 255 255', 1 * a));
+          gr.addColorStop(0.5, rgba(v.rgb, 0.96 * a));
+          gr.addColorStop(1, rgba(v.glow, 0.6 * a));
+          ctx.fillStyle = gr;
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, v.sr * 0.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = rgba(v.rgb, 0.6 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, v.sr + 2.6, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.strokeStyle = rgba(v.rgb, 0.28 * a);
+          ctx.beginPath();
+          ctx.arc(v.sx, v.sy, v.sr + 6.4, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (pass === 'body') {
           // a body is a point of light on a thin ring: a star, not a dot of the field
           const gr = ctx.createRadialGradient(v.sx, v.sy, 0, v.sx, v.sy, v.sr);
           gr.addColorStop(0, rgba('255 255 255', 0.98 * a));
@@ -1803,9 +1898,11 @@ export class GraphView {
       let gate = 1;
       if (e.kind === 'instance' || e.kind === 'co') gate = fine;
       else if (e.kind === 'parallel') gate = parFine;
+      // a text's cite on one occurrence is a fine strand, like an instance; its aggregated ties to the forms are not
+      else if (e.kind === 'cite' && this.nodes[e.t].g.kind === 'occurrence') gate = fine;
       const isHot = hov && (a === hov || b === hov);
       if (!isHot && gate < 0.02) continue;
-      const style = STYLE[styleOf(e)];
+      const style = edgeStyle(e);
       const vis = Math.min(a.vis, b.vis);
       const lit = Math.min(a.hl, b.hl);
       const live = Math.min(a.live, b.live);
@@ -1815,7 +1912,7 @@ export class GraphView {
       // cheap cull: both ends off the same side of the screen
       if ((a.sx < 0 && b.sx < 0) || (a.sx > w && b.sx > w) || (a.sy < 0 && b.sy < 0) || (a.sy > h && b.sy > h)) continue;
       // tie strands wear the archetype's colour; the fine strands share one soft tone
-      const trip = e.kind === 'tie' ? this.nodes[e.t].rgb : e.kind === 'sky' ? this.nodes[e.s].rgb : '188 204 238';
+      const trip = e.kind === 'tie' || e.kind === 'cite' || e.kind === 'you' ? this.nodes[e.t].rgb : e.kind === 'sky' || e.kind === 'wrote' ? this.nodes[e.s].rgb : '188 204 238';
       const q = Math.round(alpha * 14) / 14;
       const bk = `${styleOf(e)}|${trip}|${q}`;
       let bucket = buckets.get(bk);
@@ -1848,7 +1945,7 @@ export class GraphView {
       for (const e of hot) {
         const p = this.nodes[e.s] === hov ? this.nodes[e.s] : this.nodes[e.t];
         const q = p === this.nodes[e.s] ? this.nodes[e.t] : this.nodes[e.s];
-        const style = STYLE[styleOf(e)];
+        const style = edgeStyle(e);
         const vis = Math.min(p.vis, q.vis);
         const live = 0.3 + 0.7 * Math.min(p.live, q.live);
         const base = Math.min(0.56, style.alpha * 1.3 + 0.12) * vis * live * breath;
@@ -1914,7 +2011,15 @@ export class GraphView {
       else if (v.id === this.subject) { a = 1; pri = 90; }
       else if (v.id === this.selected) { a = 1; pri = 80; }
       else if (kind === 'archetype') { a = 1; pri = 70 + (v.g.prime ? 5 : 0); }
+      else if (kind === 'you') { a = 1; pri = 92; }
       else if (kind === 'body') { a = 1; pri = 66; }
+      else if (kind === 'person') { a = 1; pri = 62; }
+      else if (kind === 'work') {
+        // the most cited texts are named from afar, the rest as you come near
+        const need = 1.5 - 1.0 * v.g.rank;
+        a = smoothstep(need - 0.22, need + 0.12, kText);
+        pri = 44 + 14 * v.g.rank;
+      }
       else if (kind === 'theoretic') { a = 1; pri = v.g.ground ? 88 : 58 + 10 * v.g.rank; }
       else if (kind === 'family') {
         // larger forms are named sooner; the rest as you come near (Text fade brings every name sooner or later)
@@ -1930,7 +2035,7 @@ export class GraphView {
       a *= v.vis * (0.12 + 0.88 * v.hl) * (kind === 'occurrence' ? 0.25 + 0.75 * v.live : 0.5 + 0.5 * v.live);
       if (a < 0.04) continue;
       const size = this.fontSize(v, k);
-      const weight = kind === 'archetype' || (kind === 'theoretic' && v.g.ground) ? 600 : kind === 'family' || kind === 'body' || kind === 'theoretic' ? 500 : 400;
+      const weight = kind === 'archetype' || kind === 'you' || (kind === 'theoretic' && v.g.ground) ? 600 : kind === 'family' || kind === 'body' || kind === 'theoretic' || kind === 'person' || kind === 'work' ? 500 : 400;
       cands.push({ v, a, pri, text: v.g.label, font: `${weight} ${size.toFixed(1)}px ${SERIF}`, size, weight, sub: kind === 'occurrence' && (v === hov || v.id === this.selected) ? v.g.yearDisplay : undefined });
     }
     cands.sort((x, y) => y.pri - x.pri || y.v.g.rank - x.v.g.rank);
@@ -1965,7 +2070,7 @@ export class GraphView {
       ctx.lineWidth = Math.max(2.5, c.size * 0.26);
       ctx.strokeStyle = rgba('2 3 10', 0.62 * c.a);
       ctx.strokeText(text, x, y);
-      ctx.fillStyle = rgba(c.v.g.kind === 'occurrence' ? '226 233 249' : '240 244 253', (c.v.g.kind === 'archetype' || c.v.g.ground ? 0.97 : c.v.g.kind === 'family' || c.v.g.kind === 'theoretic' ? 0.86 : 0.78) * c.a);
+      ctx.fillStyle = rgba(c.v.g.kind === 'occurrence' ? '226 233 249' : '240 244 253', (c.v.g.kind === 'archetype' || c.v.g.kind === 'you' || c.v.g.ground ? 0.97 : c.v.g.kind === 'family' || c.v.g.kind === 'theoretic' || c.v.g.kind === 'work' || c.v.g.kind === 'person' ? 0.86 : 0.78) * c.a);
       ctx.fillText(text, x, y);
       if (c.sub) {
         ctx.font = `500 10.5px ${SANS}`;

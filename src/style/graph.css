@@ -55,7 +55,7 @@ body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-link { position: relative; }
 .gvt-link::before { content: ''; position: absolute; inset: -16px -14px; }
 .gvt-panel {
-  position: absolute; top: 29px; right: 0; width: 236px; max-width: calc(100vw - 32px);
+  position: absolute; top: 29px; right: 0; width: 260px; max-width: calc(100vw - 32px);
   max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain;
   padding: 15px 16px; border: 1px solid var(--hair); border-radius: 14px;
   background: var(--glass); backdrop-filter: blur(20px) saturate(1.15); box-shadow: 0 20px 60px rgb(0 0 0 / 0.4);
@@ -72,8 +72,8 @@ body.deep-open .gv-tools { visibility: hidden; pointer-events: none; }
 .gvt-range { width: 66px; height: 14px; accent-color: rgb(var(--core-rgb)); cursor: ew-resize; }
 .gvt-row .gvt-n { font-feature-settings: 'tnum'; color: var(--ink-3); }
 .gvt-ties { display: flex; gap: 6px; }
-.gvt-filter { padding: 4px 7px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
-/* the kinds row (Occurrences · Archetypes · Theoretics · Families) wraps in the panel's own grid */
+.gvt-filter { padding: 4px 6px; color: var(--ink-3); border: 1px solid var(--hair); border-radius: 4px; }
+/* the kinds row (Occurrences · Archetypes · Theoretics · Families · Texts · People · You) wraps in two lines: the panel is wide enough for that */
 .gvt-kinds { display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
 .gvt-filter[aria-pressed="true"] { color: var(--ink); background: rgb(var(--core-rgb) / 0.1); border-color: rgb(var(--core-rgb) / 0.3); }
 .gvt-settings[aria-expanded="true"] { color: var(--ink); border-bottom-color: rgb(var(--core-rgb) / 0.4); }
