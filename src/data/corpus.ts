@@ -40,10 +40,19 @@ export interface LocatorParts {
 
 export function parseLocator(locator: string): LocatorParts {
   const para = /¶\s*(\d+)/.exec(locator);
-  const page = /pdf\s+p\.?\s*(\d+)(?:\s*[–-]\s*(\d+))?/i.exec(locator);
+  // "pdf p12", "pdf p12–14", "pdf pp12–14", "pdf pp 62, 64–66": the first run of pages the cite names. A comma continues the
+  // run only before another number ("pdf p12, n.3" is a page and a note).
+  const page = /pdf\s+pp?\.?\s*(\d+(?:\s*[–-]\s*\d+)?(?:\s*,\s*\d+(?:\s*[–-]\s*\d+)?)*)/i.exec(locator);
+  let pages: [number, number?] | undefined;
+  if (page) {
+    const nums = page[1].split(/[,–-]/).map((x) => Number(x.trim()));
+    const from = nums[0];
+    const to = Math.max(...nums);
+    pages = [from, to > from ? to : undefined];
+  }
   return {
     ...(para ? { para: Number(para[1]) } : {}),
-    ...(page ? { pages: [Number(page[1]), page[2] ? Number(page[2]) : undefined] } : {}),
+    ...(pages ? { pages } : {}),
   };
 }
 

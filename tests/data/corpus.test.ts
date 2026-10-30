@@ -84,6 +84,26 @@ describe('corpus index (citation deep links)', () => {
     expect(parseLocator('fig. 131, ¶357 (pdf p268)')).toEqual({ para: 357, pages: [268, undefined] });
   });
 
+  it('opens a "pdf pp N–M" cite: the plural page marker and page lists name pages like "pdf p"', () => {
+    // hundreds of cites in field.json are written "pdf pp169–170" or "pdf pp62, 64–66"; the singular-only reading opened none of them
+    expect(parseLocator('¶289–293 (pdf pp169–170)')).toEqual({ para: 289, pages: [169, 170] });
+    expect(parseLocator('24 Feb + 2 Mar 1932 (pdf pp669-675)')).toEqual({ pages: [669, 675] });
+    expect(parseLocator('Lectures 5–6 (pdf pp 62, 64–66)')).toEqual({ pages: [62, 66] });
+    expect(parseLocator('Letters 58/59 (pdf pp147, 159)')).toEqual({ pages: [147, 159] });
+    expect(parseLocator('¶¶335-336 (pdf pp204-205)')).toEqual({ para: 335, pages: [204, 205] });
+    // the first run governs; a note number after a comma is not a page
+    expect(parseLocator('pdf p12, n.3')).toEqual({ pages: [12, undefined] });
+    expect(parseLocator('Lecture 3 (pdf p105) and Lecture 4 (pdf p111)')).toEqual({ pages: [105, undefined] });
+    // and the passage opens: the page range lands on the first cited page of the volume
+    const ref = resolveInWork(cw12, '¶452–453 (pdf pp350–351)');
+    expect(ref).not.toBeNull();
+    expect(ref!.para).toBe(452);
+    expect(ref!.page).toBe(351); // the ¶'s own page, inside the cited range
+    const noPara = resolveInWork(semVisions, 'pdf pp804–805');
+    expect(noPara).not.toBeNull();
+    expect(noPara!.page).toBe(804);
+  });
+
   // the spine round-trip parses every corpus volume; give it room beyond the 5s default under load
   it('round-trips the vault citation spine through the parsed corpus', { timeout: 60_000 }, () => {
     const spine = fs.readFileSync(path.join(vault, 'data', 'paragraphs.jsonl'), 'utf8').split('\n').filter(Boolean);
