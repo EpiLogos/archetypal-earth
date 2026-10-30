@@ -11,6 +11,10 @@ export interface Resolver {
   hasFamily(id: string): boolean;
   hasCulture(id: string): boolean;
   hasPlace(id: string): boolean;
+  /** a Work of public/data/works.json by its own id (`#/w/<id>`); absent, no Work door opens */
+  hasWork?(id: string): boolean;
+  /** a Person of public/data/people.json (`#/p/<id>`, after a Place of that id); absent, no Person door opens */
+  hasPerson?(id: string): boolean;
   /** family id of an occurrence, or undefined when it doesn't exist */
   familyOf(occId: string): string | undefined;
   hasReading?(id: string): boolean;
@@ -158,6 +162,8 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
       : k === 'f' && r.hasFamily(id) ? { type: 'family', id }
       : k === 'c' && r.hasCulture(id) ? { type: 'culture', id }
       : k === 'p' && r.hasPlace(id) ? { type: 'place', id }
+      : k === 'w' && r.hasWork?.(id) ? { type: 'work', id }
+      : k === 'p' && r.hasPerson?.(id) ? { type: 'person', id }
       : undefined;
     return { state: { view: { kind: 'world' }, deep: false, dynamics: { ...(subject ? { subject } : {}), ...(stop ? { stop } : {}) } } };
   }
@@ -196,7 +202,12 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
       if (a && r.hasCulture(a)) return withDeep(focusState({ type: 'culture', id: a }));
       break;
     case 'p':
+      // a Place and a Person share this door: the Place has it where an id is both (the data tests keep the two apart)
       if (a && r.hasPlace(a)) return withDeep(focusState({ type: 'place', id: a }));
+      if (a && r.hasPerson?.(a)) return withDeep(focusState({ type: 'person', id: a }));
+      break;
+    case 'w':
+      if (a && r.hasWork?.(a)) return withDeep(focusState({ type: 'work', id: a }));
       break;
     case 'o': {
       const fam = a ? r.familyOf(a) : undefined;
