@@ -1,35 +1,341 @@
 {
  "_note": "Voices and dates for works that are not Jung's. `voice` says whose words a cite is (the interface names it: Crowley, Burt, Neumann …; absent means Jung). `year`/`display` date an attestation by a work the field holds no engagement years of: Jung's own volumes carry theirs in the vault's cites and need no entry. The year is the work's first publication, read off its copyright page in the corpus (the English edition's year is kept in the display where it differs).",
- "version": 1,
+ "_schema": "Each key is a Work id. `aliases` are the other cite keys for the same text (a cite resolves through them). `kind` is the vocabulary checked by scripts/works-registry.mjs. `author` is a person id (curation/people.json where it has one); `with` and `editor` name a second person where the title page gives one. `corpus` is the file under public/data/corpus/ (null where the text has no corpus volume). `lens` is set only where the Work has its own reading lens (cw09ii: aion; liber-novus: redbook). `yearSource` names the corpus page (p.N) that states `year`; a collected volume's copyright line dates the edition, not the work, so Jung's collected volumes carry no year here (the cites date them). Only the fields above are read by scripts/ingest.mjs and scripts/lib/attest.mjs (`voice`, `year`, `display`); a record added without a voice adds none to its cites.",
+ "version": 2,
  "works": {
   "book-of-thoth": {
+   "title": "The Book of Thoth",
+   "kind": "deck",
+   "author": "crowley",
+   "aliases": [],
+   "corpus": "book-of-thoth.json",
    "year": 1944,
    "display": "1944",
+   "yearSource": "book-of-thoth.json p.2 — \"First published 1944 e.v.\"",
    "voice": "Crowley"
   },
   "burt-zodiac": {
+   "title": "Archetypes of the Zodiac",
+   "kind": "book",
+   "author": "burt",
+   "aliases": [],
+   "corpus": "burt-zodiac.json",
    "year": 1988,
    "display": "1988",
+   "yearSource": "burt-zodiac.json p.8 — \"Archetypes of the Zodiac. Copyright © 1988 by Kathleen Burt\"",
    "voice": "Burt"
   },
   "vonzfranz-number-time": {
+   "title": "Number and Time: Reflections Leading toward a Unification of Depth Psychology and Physics",
+   "kind": "book",
+   "author": "von-franz",
+   "aliases": [],
+   "corpus": "vonzfranz-number-time.json",
    "year": 1970,
    "display": "1970 (English 1974)",
+   "yearSource": "vonzfranz-number-time.json p.4 — \"Ernst Klett Verlag, Stuttgart 1970\" (German original); the English edition is COPYRIGHT 1974",
    "voice": "von Franz"
   },
   "van-eenwyk": {
+   "title": "Archetypes & Strange Attractors: The Chaotic World of Symbols",
+   "kind": "book",
+   "author": "van-eenwyk",
+   "aliases": [],
+   "corpus": "van-eenwyk.json",
    "year": 1997,
    "display": "1997",
+   "yearSource": "van-eenwyk.json p.5 — \"Copyright © 1997 by John R. Van Eenwyk\"",
    "voice": "Van Eenwyk"
   },
+  "a-blue-fire": {
+   "title": "A Blue Fire",
+   "kind": "anthology",
+   "author": "hillman",
+   "aliases": [],
+   "corpus": "a-blue-fire.json",
+   "year": 1989,
+   "display": "1989",
+   "yearSource": "a-blue-fire.json p.5 — \"© 1989 James Hillman\" (the page also gives \"First published in Great Britain 1990\")",
+   "voice": "Hillman"
+  },
   "neumann-great-mother": {
+   "title": "The Great Mother: An Analysis of the Archetype",
+   "kind": "book",
+   "author": "neumann",
+   "aliases": [],
+   "corpus": "neumann-great-mother.json",
+   "year": 1955,
+   "display": "1955",
+   "yearSource": "neumann-great-mother.json p.2 — copyright line \"1955, © 1963 BY BOLLINGEN FOUNDATION INC.\" (the scan reads \"copynicnt 1955\")",
    "voice": "Neumann"
   },
   "neumann-origins": {
+   "title": "The Origins and History of Consciousness",
+   "kind": "book",
+   "author": "neumann",
+   "aliases": [],
+   "corpus": "neumann-origins.json",
+   "year": 1954,
+   "display": "1954",
+   "yearSource": "neumann-origins.json p.8 — \"Copyright 1954 by Bollingen Foundation Inc.\"",
    "voice": "Neumann"
   },
-  "a-blue-fire": {
-   "voice": "Hillman"
+  "letters-pauli": {
+   "title": "Atom and Archetype: The Pauli-Jung Letters, 1932-1958",
+   "kind": "letters",
+   "author": "jung",
+   "with": "pauli",
+   "aliases": [],
+   "corpus": "letters-pauli.json"
+  },
+  "sem-1925": {
+   "title": "Analytical Psychology: Notes of the Seminar Given in 1925",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-1925.json"
+  },
+  "sem-childrens-dreams": {
+   "title": "Children's Dreams: Notes from the Seminar Given in 1936-1940",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-childrens-dreams.json"
+  },
+  "sem-dream-analysis": {
+   "title": "Dream Analysis: Notes of the Seminar Given in 1928-1930",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-dream-analysis.json"
+  },
+  "sem-kundalini": {
+   "title": "The Psychology of Kundalini Yoga: Notes of the Seminar Given in 1932",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-kundalini.json"
+  },
+  "sem-visions": {
+   "title": "Visions: Notes of the Seminar Given in 1930-1934",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-visions.json"
+  },
+  "sem-zarathustra": {
+   "title": "Nietzsche's Zarathustra: Notes of the Seminar Given in 1934-1939",
+   "kind": "seminar",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sem-zarathustra.json"
+  },
+  "sup-zofingia": {
+   "title": "The Zofingia Lectures",
+   "kind": "lectures",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sup-zofingia.json"
+  },
+  "sync": {
+   "title": "Synchronicity: An Acausal Connecting Principle",
+   "kind": "book",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "sync.json"
+  },
+  "cw01": {
+   "title": "Psychiatric Studies (CW1)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw01.json"
+  },
+  "cw02": {
+   "title": "Experimental Researches (CW2)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw02.json"
+  },
+  "cw03": {
+   "title": "Psychogenesis of Mental Disease (CW3)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw03.json"
+  },
+  "cw04": {
+   "title": "Freud and Psychoanalysis (CW4)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw04.json"
+  },
+  "cw05": {
+   "title": "Symbols of Transformation (CW5)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw05.json"
+  },
+  "cw06": {
+   "title": "Psychological Types (CW6)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": ["cw06psychologicaltypes"],
+   "corpus": "cw06.json"
+  },
+  "cw07": {
+   "title": "Two Essays on Analytical Psychology (CW7)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw07.json"
+  },
+  "cw08": {
+   "title": "The Structure and Dynamics of the Psyche (CW8)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw08.json"
+  },
+  "cw09i": {
+   "title": "The Archetypes and the Collective Unconscious (CW9i)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw09i.json"
+  },
+  "cw09ii": {
+   "title": "Aion: Researches into the Phenomenology of the Self (CW9ii)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw09ii.json",
+   "lens": "aion"
+  },
+  "cw10": {
+   "title": "Civilization in Transition (CW10)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw10.json"
+  },
+  "cw11": {
+   "title": "Psychology and Religion: West and East (CW11)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": ["jung"],
+   "corpus": "cw11.json"
+  },
+  "cw12": {
+   "title": "Psychology and Alchemy (CW12)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw12.json"
+  },
+  "cw13": {
+   "title": "Alchemical Studies (CW13)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw13.json"
+  },
+  "cw14": {
+   "title": "Mysterium Coniunctionis (CW14)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw14.json"
+  },
+  "cw15": {
+   "title": "The Spirit in Man, Art and Literature (CW15)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw15.json"
+  },
+  "cw16": {
+   "title": "The Practice of Psychotherapy (CW16)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw16.json"
+  },
+  "cw17": {
+   "title": "The Development of Personality (CW17)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw17.json"
+  },
+  "cw18": {
+   "title": "The Symbolic Life: Miscellaneous Writings (CW18)",
+   "kind": "collected-volume",
+   "author": "jung",
+   "aliases": [],
+   "corpus": "cw18.json"
+  },
+  "liber-novus": {
+   "title": "Liber Novus (The Red Book)",
+   "kind": "manuscript",
+   "author": "jung",
+   "aliases": ["redbook"],
+   "corpus": null,
+   "lens": "redbook"
+  },
+  "mdr": {
+   "title": "Memories, Dreams, Reflections",
+   "kind": "memoir",
+   "author": "jung",
+   "aliases": ["memories"],
+   "corpus": null
+  },
+  "letters-corrie": {
+   "title": "Letters to Joan Corrie",
+   "kind": "letters",
+   "author": "jung",
+   "aliases": ["letters"],
+   "corpus": null
+  },
+  "corrie-abc": {
+   "title": "A B C of Jung's Psychology",
+   "kind": "secondary",
+   "author": "corrie",
+   "aliases": ["joancorrieabcofjungspsychology"],
+   "corpus": null
+  },
+  "fierz-david": {
+   "title": "The Dream of Poliphilo",
+   "kind": "secondary",
+   "author": "fierz-david",
+   "aliases": [],
+   "corpus": null
+  },
+  "freud": {
+   "title": "Leonardo da Vinci and a Memory of His Childhood",
+   "kind": "book",
+   "author": "freud",
+   "aliases": [],
+   "corpus": null
+  },
+  "holler": {
+   "title": "Nietzsches Lehre von der ewigen Wiederkehr",
+   "kind": "secondary",
+   "author": "holler",
+   "aliases": [],
+   "corpus": null
+  },
+  "book-of-symbols": {
+   "title": "The Book of Symbols: Reflections on Archetypal Images",
+   "kind": "dictionary",
+   "author": "ronnberg",
+   "with": "martin",
+   "publisher": "Archive for Research in Archetypal Symbolism (ARAS)",
+   "aliases": [],
+   "corpus": null
   }
  }
 }

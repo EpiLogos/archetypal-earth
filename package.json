@@ -49,6 +49,8 @@
     "people:check": "node scripts/people-check.mjs",
     "walks": "node scripts/walks.mjs",
     "walks:check": "node scripts/walks.mjs --check",
+    "works": "node scripts/works-registry.mjs",
+    "works:check": "node scripts/works-registry.mjs --check",
     "harvest:check": "node scripts/harvest-check.mjs"
   },
   "dependencies": {
