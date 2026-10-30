@@ -44,7 +44,7 @@ import type { RedBookView } from '../redbook/view';
 import type { DynamicsView } from '../dynamics/view';
 import { PassageSheet } from '../ui/passage';
 import { YouSheet } from '../ui/you';
-import { practice } from '../practice/store';
+import { practice, RECORD_COLLECTIONS } from '../practice/store';
 import type { EngagementKind } from '../practice/store';
 import type { PersonalData } from '../graph/build';
 import { loadSky } from '../sky/load';
@@ -238,7 +238,7 @@ export class Controller {
     this.search = new SearchUI(root, this.searchIndex, (r) => this.chooseResult(r), (open) => {
       document.body.classList.toggle('search-open', open);
       if (open) this.hover.hide();
-    });
+    }, (q) => this.youResults(q));
 
     // the shell: one title, one menu, the filter, the corners. Every lens fills its chrome through it.
     // the Sources are the registry's Works: a cite key that is an alias folds into its Work, so one text is one option
@@ -566,6 +566,13 @@ export class Controller {
     return next;
   }
 
+  /** The visitor's own page as a search result: only once the browser holds something of theirs, and only for a word that names them. */
+  private youResults(q: string): SearchResult[] {
+    if (!/^(you|your|yours|your page|you page|me|my page)$/.test(q)) return [];
+    if (!RECORD_COLLECTIONS.some((c) => practice.list(c).length)) return [];
+    return [{ kind: 'person', key: 'you', label: 'You', sub: 'your page', score: 1000, action: { type: 'subject', subject: { type: 'person', id: 'you' } } }];
+  }
+
   /**
    * Focus a subject. A Work or a Person is a node whose page is its substance, so it is focused with its page open (the graph,
    * search, a cite, a person's list of works and the visitor's own trail all arrive here); any other subject is focused as
@@ -705,8 +712,9 @@ export class Controller {
     const a = r.action;
     // from the sky a pick is a descent like any other: the sky stays behind (See in sky), the reading opens on the landing
     if (a.type === 'subject') {
-      if (this.state.sky) this.openFromSky(a.subject);
-      else this.navigate(focusOn(this.state, a.subject));
+      if (r.key === 'you') this.you.show();
+      else if (this.state.sky) this.openFromSky(a.subject);
+      else this.openSubject(a.subject);
     } else if (a.type === 'occurrence') {
       const i = this.m.occIndex.get(a.occId);
       const manifest: AppState | null = i === undefined ? null : { view: { kind: 'manifest', occId: a.occId, context: { type: 'family', id: this.m.occ[i].familyId } }, deep: false };

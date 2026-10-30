@@ -1,6 +1,6 @@
 // ⌘K / "/" : a centred minimal field over a dimmed globe. Choosing a result
 // closes the field and moves the globe — it never opens a page.
-import { search, type SearchIndex, type SearchResult } from '../data/search';
+import { norm, search, type SearchIndex, type SearchResult } from '../data/search';
 import type { ImageRef } from '../types/field';
 import { clear, el, plate } from './dom';
 
@@ -25,7 +25,7 @@ export class SearchUI {
   private opener: HTMLElement | null = null;
   isOpen = false;
 
-  constructor(parent: HTMLElement, private index: SearchIndex, private onChoose: (r: SearchResult) => void, private onToggle: (open: boolean) => void) {
+  constructor(parent: HTMLElement, private index: SearchIndex, private onChoose: (r: SearchResult) => void, private onToggle: (open: boolean) => void, private extra?: (query: string) => SearchResult[]) {
     this.input = el('input', {
       class: 's-input', type: 'text', placeholder: 'Search the field', autocomplete: 'off', spellcheck: 'false',
       role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 's-list', 'aria-autocomplete': 'list', 'aria-label': 'Search archetypes, forms, texts, people, places, cultures, periods',
@@ -74,7 +74,8 @@ export class SearchUI {
   }
 
   private refresh() {
-    this.results = search(this.index, this.input.value, 7);
+    // results the browser alone can name (the visitor's own page) come first; the index never holds them
+    this.results = [...(this.extra?.(norm(this.input.value)) ?? []), ...search(this.index, this.input.value, 7)].slice(0, 7);
     this.active = 0;
     this.renderList();
   }

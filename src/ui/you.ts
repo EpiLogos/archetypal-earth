@@ -3,7 +3,7 @@
 // else, and shows what the store holds to the person it belongs to; none of it goes anywhere (MODES-RFC §8).
 import type { Model } from '../data/model';
 import { subjectName } from '../data/model';
-import type { PracticeStore, Engagement } from '../practice/store';
+import type { PracticeStore, PracticeRecord, Engagement } from '../practice/store';
 import { clear, el } from './dom';
 import { closeGlyph } from './reveal';
 
@@ -16,6 +16,7 @@ export interface YouHandlers {
 }
 
 const SHOWN = 40;
+const RECENT = 4;
 const VERB: Record<Engagement['kind'], string> = { open: 'Opened', walk: 'Walked', dream: 'Wrote down', symbol: 'Looked up', coincidence: 'Logged', chart: 'Cast' };
 
 /** What an engagement's subject is called: a registry name, or the plain word for one of the person's own records. */
@@ -80,20 +81,29 @@ export class YouSheet {
       el('h2', { class: 'dp-title', text: 'You' }),
       el('p', { class: 'dp-lede', text: 'What you have written, charted and opened here. It is kept in this browser and goes nowhere else.' }),
     );
-    const counts: [string, number, 'dreams' | 'coincidences' | 'astrology'][] = [
-      ['Dreams', s.list('dreams').length, 'dreams'],
-      ['Coincidences', s.list('coincidences').length, 'coincidences'],
-      ['Charts', s.list('charts').length, 'astrology'],
-    ];
-    a.append(el('h3', { class: 'dp-sub', text: 'Kept' }));
-    const kept = el('ul', { class: 'you-kept' });
-    for (const [label, n, lens] of counts) {
-      kept.append(el('li', {}, [
-        el('button', { type: 'button', class: 'link-quiet', text: label, onclick: () => this.h.onLens(lens) }),
+    // the three things kept in this browser: the chart, the dreams, the coincidences, each with its latest lines and a door to its lens
+    type Kept = { id: string; date: string; text: string };
+    const latest = (rs: Kept[]) => rs.sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : 0)).slice(0, RECENT);
+    const dreams = latest(s.list<PracticeRecord & { date?: string; title?: string; text?: string }>('dreams')
+      .map((r) => ({ id: r.id, date: r.date ?? r.createdAt.slice(0, 10), text: (r.title || r.text || 'A dream').trim() })));
+    const coincidences = latest(s.list<PracticeRecord & { date?: string; symbol?: string; outer?: string; inner?: string }>('coincidences')
+      .map((r) => ({ id: r.id, date: r.date ?? r.createdAt.slice(0, 10), text: (r.symbol || r.outer || r.inner || 'A coincidence').trim() })));
+    const charts = s.list<PracticeRecord & { label?: string; birth?: { date?: string; place?: string } }>('charts');
+    const section = (label: string, n: number, lens: 'dreams' | 'coincidences' | 'astrology', door: string, rows: Kept[]) => {
+      a.append(el('h3', { class: 'dp-sub', text: label }));
+      const ul = el('ul', { class: 'you-kept', 'data-kept': lens });
+      ul.append(el('li', {}, [
+        el('button', { type: 'button', class: 'link-quiet', text: door, onclick: () => this.h.onLens(lens) }),
         el('span', { class: 'you-n', text: n ? String(n) : 'none yet' }),
       ]));
-    }
-    a.append(kept);
+      for (const r of rows) ul.append(el('li', { class: 'you-row' }, [el('span', { class: 'you-date', text: r.date }), el('span', { class: 'you-text', text: r.text })]));
+      a.append(ul);
+    };
+    const chart = charts[0];
+    section('Your chart', charts.length, 'astrology', chart ? 'Open the chart' : 'Cast your chart',
+      chart ? [{ id: chart.id, date: chart.birth?.date ?? '', text: [chart.label, chart.birth?.place].filter(Boolean).join(' · ') }] : []);
+    section('Dreams', s.list('dreams').length, 'dreams', 'Your dreams', dreams);
+    section('Coincidences', s.list('coincidences').length, 'coincidences', 'Your coincidences', coincidences);
 
     const log = s.engagements();
     a.append(el('h3', { class: 'dp-sub', text: 'What has been recorded' }));
