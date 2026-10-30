@@ -290,6 +290,57 @@ body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointe
 .dp-foot { margin: 56px 0 0; font-family: var(--sans); font-size: 11px; color: var(--ink-3); letter-spacing: 0.03em; }
 body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body.deep-open .reveal { opacity: 0 !important; pointer-events: none !important; }
 
+/* ── the quotation (src/ui/quote.ts): the one block every quotation is drawn from; uses only the shell's own tokens ── */
+/* the quotation: a blockquote, italic serif, a bar in the surface's own tint (--q-tint, as .cr sets --cr-tint) */
+.q { margin: 18px 0; padding: 2px 0 2px 16px; border-left: 2px solid var(--q-tint, rgb(var(--core-rgb) / 0.45)); }
+.q-text { margin: 0; font: italic 400 1.02rem/1.55 var(--serif); color: var(--ink); text-wrap: pretty; hyphens: auto; overflow-wrap: anywhere; }
+.q-lead { margin: 28px 0 6px; padding-left: 20px; border-left-width: 1px; border-left-color: var(--q-tint, rgb(var(--core-rgb) / 0.5)); }
+.q-lead .q-text { font-size: 1.28rem; line-height: 1.5; }
+.q-compact .q-text { font-size: 0.95rem; }
+.q-compact { margin: 14px 0; padding-left: 13px; }
+
+/* the foot: who speaks (when not Jung), where it is from, how to open it. One run of text: "open the page" sits on the cite's line when it fits and drops to its own line, whole, when it does not. */
+.q-foot { margin-top: 8px; display: block; font: 11.5px/1.7 var(--sans); font-style: normal; letter-spacing: 0.01em; color: var(--ink-3); }
+.q-voice { display: inline-block; margin-right: 9px; padding: 0 5px; border: 1px solid var(--hair); border-radius: 4px; font: 500 10px/1.5 var(--sans); letter-spacing: 0.06em; color: var(--ink-2); white-space: nowrap; vertical-align: 1px; }
+.q-cite > span + span::before { content: '·'; margin: 0 0.45em; color: rgb(var(--core-rgb) / 0.4); }
+.q-work { color: var(--ink-2); }
+.q-loc, .q-pg { white-space: nowrap; }
+.q-acts { display: inline; margin-left: 12px; white-space: nowrap; }
+.q-open { display: inline-flex; align-items: baseline; gap: 4px; color: rgb(var(--core-rgb) / 0.95); font: 11.5px var(--sans); border-bottom: 1px solid rgb(var(--core-rgb) / 0.28); white-space: nowrap; }
+.q-open:hover { color: #fff; border-bottom-color: rgb(var(--core-rgb) / 0.8); }
+/* on a phone the shell's thumb pass (touch.css) makes .link-quiet a 44px box with a text-decoration underline: keep that and drop the border rule so no line floats under the box */
+@media (max-width: 760px), (pointer: coarse) {
+  .q-open { border-bottom: 0; align-items: center; }
+}
+
+/* a plate caption as printed: an object's label, never set between quotation marks */
+.q-caption { border-left: 1px dotted rgb(var(--core-rgb) / 0.5); }
+.q-caption .q-text { font: 400 0.95rem/1.45 var(--sans); font-style: normal; letter-spacing: 0.01em; }
+
+/* the QL framework's own words : sans, glow-tinted, always chipped QL */
+.q-ql { border-left-color: rgb(var(--glow-rgb) / 0.9); background: rgb(var(--glow-rgb) / 0.06); padding: 8px 12px 8px 14px; border-radius: 0 8px 8px 0; }
+.q-ql .q-text { font: normal 400 0.92rem/1.5 var(--sans); }
+.q-ql .q-voice { color: var(--deep); background: rgb(var(--glow-rgb)); border-color: rgb(var(--glow-rgb)); }
+
+
+
+/* the list form */
+.qs { margin: 30px 0 0; }
+.qs-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding-top: 18px; border-top: 1px solid var(--hair); }
+.qs-title { margin: 0; font: 500 11px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
+.qs-count { font: 12px var(--sans); color: var(--ink-3); }
+.qs-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; width: 100%; }
+.qs-filter .sf-pill { display: inline-flex; align-items: baseline; gap: 6px; }
+.qs-filter .sf-pill .qs-n { font-size: 11px; opacity: 0.7; }
+.qs-select { width: 100%; margin-top: 12px; min-height: 36px; padding: 0 10px; font: 12.5px var(--sans); color: var(--ink); background: rgb(var(--deep-rgb) / 0.6); border: 1px solid var(--hair); border-radius: 8px; }
+.qs-group { margin-top: 22px; }
+.qs-group[hidden] { display: none; }
+.qs-work { display: flex; align-items: baseline; gap: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--hair); font: 500 12.5px/1.35 var(--sans); color: var(--ink-2); }
+.qs-work .qs-n { margin-left: auto; font-weight: 400; color: var(--ink-3); white-space: nowrap; }
+.qs-group .q { margin: 14px 0; }
+.qs-more { margin: 4px 0 0; font: 12px var(--sans); }
+.qs-empty { margin: 16px 0 0; }
+
 /* ── passage (a cite opened at its corpus source) ──────────────────── */
 .ps-article { max-width: 33rem; }
 .ps-where { margin: 4px 0 0; font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.85); }
