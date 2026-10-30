@@ -5,7 +5,7 @@
 import type { CorpusIndex } from '../types/corpus';
 import { neighbourPara, resolvePassage, type PassageRef } from '../data/corpus';
 import { clear, el } from './dom';
-import { closeGlyph } from './reveal';
+import { paneFrame } from './pane';
 
 /** What the cite-rendering surfaces use to offer (only) real deep links. */
 export interface PassageBridge {
@@ -23,12 +23,9 @@ export class PassageSheet {
   private hideTimer = 0;
 
   constructor(parent: HTMLElement, private index: CorpusIndex | null) {
-    this.article = el('article', { class: 'dp-article ps-article' });
-    const scroller = el('div', { class: 'dp-scroll', tabindex: 0 }, [this.article]);
-    this.root = el('section', { class: 'deep passage', role: 'dialog', 'aria-label': 'Source passage', 'aria-modal': 'false', hidden: true }, [
-      el('button', { class: 'dp-close', type: 'button', 'aria-label': 'Close passage', onclick: () => this.hide() }, [closeGlyph()]),
-      scroller,
-    ]);
+    const frame = paneFrame({ className: 'passage', label: 'Source passage', closeLabel: 'Close passage', onClose: () => this.hide(), articleClass: 'ps-article' });
+    this.article = frame.article;
+    this.root = frame.root;
     parent.append(this.root);
   }
 

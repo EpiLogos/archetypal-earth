@@ -5,7 +5,7 @@ import type { Model } from '../data/model';
 import { subjectName } from '../data/model';
 import type { PracticeStore, PracticeRecord, Engagement } from '../practice/store';
 import { clear, el } from './dom';
-import { closeGlyph } from './reveal';
+import { paneFrame } from './pane';
 
 export interface YouHandlers {
   onClose(): void;
@@ -35,13 +35,10 @@ export class YouSheet {
   private off: (() => void) | null = null;
 
   constructor(parent: HTMLElement, private model: Model, private store: PracticeStore, private h: YouHandlers) {
-    this.article = el('article', { class: 'dp-article' });
-    this.scroller = el('div', { class: 'dp-scroll', tabindex: 0 }, [this.article]);
-    this.root = el('section', { class: 'deep you-sheet', role: 'dialog', 'aria-label': 'You', 'aria-modal': 'false' }, [
-      el('button', { class: 'dp-close', type: 'button', 'aria-label': 'Close', onclick: () => h.onClose() }, [closeGlyph()]),
-      this.scroller,
-    ]);
-    this.root.hidden = true;
+    const frame = paneFrame({ className: 'you-sheet', label: 'You', closeLabel: 'Close', onClose: () => h.onClose() });
+    this.article = frame.article;
+    this.scroller = frame.scroller;
+    this.root = frame.root;
     parent.append(this.root);
   }
 

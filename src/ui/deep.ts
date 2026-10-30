@@ -9,7 +9,8 @@ import type { BodyKey } from '../types/sky';
 import type { Cite, Occurrence } from '../types/field';
 import { clear, el, plate } from './dom';
 import { sanitiseTitle } from './credit';
-import { closeGlyph } from './reveal';
+import { paneFrame, type PaneFrame } from './pane';
+import { paneMode, type PaneMode } from '../shell/layout';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
 import { citeLine, eraShort, placeLine, shortWork } from './format';
@@ -74,6 +75,17 @@ export interface DeepHandlers {
   /** open a Person's chart in Astrology (only a Person whose record holds a birth) */
   onOpenChart?(personId: string): void;
   passage?: PassageBridge;
+  /** the pane's state changed (widened, narrowed, Contents shown or hidden): the scene re-reads the room it is given */
+  onPaneChange?(mode: PaneMode): void;
+}
+
+/** One group of the pane's Contents list: a heading over the entries a visitor can open. */
+export interface ContentsGroup { title?: string; items: { label: string; note?: string; level?: number; onPick(): void }[] }
+
+/** What kind of thing the pane reads, set small above its title. */
+const KIND_NAME: Record<string, string> = { archetype: 'Archetype', theoretic: 'Theory', family: 'Form', work: 'Work', person: 'Person', culture: 'Culture', place: 'Place' };
+function eyebrowOf(t: DeepTarget): string {
+  return t.kind === 'occurrence' ? 'Occurrence' : (KIND_NAME[t.subject.type] ?? 'Reading');
 }
 
 export type DeepTarget = { kind: 'subject'; subject: Subject } | { kind: 'occurrence'; occId: string };
@@ -82,17 +94,23 @@ export class DeepSheet {
   readonly root: HTMLElement;
   private scroller: HTMLElement;
   private article: HTMLElement;
+  private frame: PaneFrame;
   private open = false;
   private key = '';
+  private wide = false;
+  private contentsShown = false;
+  private lastMode: PaneMode = 'closed';
 
   constructor(parent: HTMLElement, private model: Model, private h: DeepHandlers) {
-    this.article = el('article', { class: 'dp-article' });
-    this.scroller = el('div', { class: 'dp-scroll', tabindex: 0 }, [this.article]);
-    this.root = el('section', { class: 'deep', role: 'dialog', 'aria-label': 'Reading', 'aria-modal': 'false' }, [
-      el('button', { class: 'dp-close', type: 'button', 'aria-label': 'Close reading', onclick: () => h.onClose() }, [closeGlyph()]),
-      this.scroller,
-    ]);
-    this.root.hidden = true;
+    this.frame = paneFrame({
+      label: 'Reading',
+      closeLabel: 'Close reading',
+      onClose: () => h.onClose(),
+      onToggleWide: () => this.setWide(!this.wide),
+    });
+    this.root = this.frame.root;
+    this.scroller = this.frame.scroller;
+    this.article = this.frame.article;
     parent.append(this.root);
   }
 
@@ -100,9 +118,89 @@ export class DeepSheet {
     return this.open;
   }
 
+  /** Whether the pane is widened (the reading's own width, taken up to the wide one). */
+  get isWide() {
+    return this.wide;
+  }
+
+  /** Whether the pane stands open in its Contents state. */
+  get isContentsOpen() {
+    return this.contentsShown;
+  }
+
+  /** The pane's state now: closed, contents, reading or wide. */
+  get mode(): PaneMode {
+    return paneMode({ open: this.open, contents: this.contentsShown, wide: this.wide });
+  }
+
+  /** Widen or narrow the pane. A pane that stands at Contents or is closed keeps the choice for the reading that comes. */
+  setWide(on: boolean) {
+    if (this.wide === on) return;
+    this.wide = on;
+    this.applyMode();
+  }
+
+  /** Show the Contents list in the pane (the narrow state): `groups` under a title, an entry's pick is its own act. */
+  showContents(title: string, groups: ContentsGroup[]) {
+    const c = this.frame.contents;
+    clear(c);
+    c.append(el('p', { class: 'dp-eyebrow', text: 'Contents' }), el('h2', { class: 'dp-title dp-contents-title', text: title }));
+    for (const g of groups) {
+      if (g.title) c.append(el('h3', { class: 'dp-sub', text: g.title }));
+      const ol = el('ol', { class: 'dp-contents' });
+      for (const it of g.items) {
+        ol.append(el('li', { style: `--lvl:${it.level ?? 0}` }, [
+          el('button', { type: 'button', class: 'link-quiet', text: it.label, onclick: () => it.onPick() }),
+          it.note ? el('span', { class: 'dp-cite-year', text: ` ${it.note}` }) : null,
+        ]));
+      }
+      c.append(ol);
+    }
+    this.contentsShown = true;
+    this.root.hidden = false;
+    this.frame.article.hidden = true;
+    c.hidden = false;
+    this.scroller.scrollTop = 0;
+    requestAnimationFrame(() => this.root.classList.add('on'));
+    this.applyMode();
+  }
+
+  /** Take the Contents list down (the pane closes with it unless a reading stands). */
+  hideContents() {
+    if (!this.contentsShown) return;
+    this.contentsShown = false;
+    this.frame.contents.hidden = true;
+    this.frame.article.hidden = false;
+    if (!this.open) this.closePane();
+    this.applyMode();
+  }
+
+  private applyMode() {
+    const mode = this.mode;
+    this.frame.setMode(mode);
+    const b = document.body.classList;
+    b.toggle('deep-wide', mode === 'wide');
+    b.toggle('pane-contents', mode === 'contents');
+    if (mode !== this.lastMode) {
+      this.lastMode = mode;
+      this.h.onPaneChange?.(mode);
+    }
+  }
+
+  private closePane() {
+    this.root.classList.remove('on');
+    window.setTimeout(() => { if (!this.open && !this.contentsShown) this.root.hidden = true; }, 420);
+  }
+
   show(t: DeepTarget) {
     const key = t.kind === 'subject' ? `s:${t.subject.type}:${t.subject.id}` : `o:${t.occId}`;
     const fresh = !(this.open && key === this.key);
+    // a reading opened from the Contents list takes the pane over: the list gives way to it
+    if (this.contentsShown) {
+      this.contentsShown = false;
+      this.frame.contents.hidden = true;
+      this.frame.article.hidden = false;
+    }
     // unhidden first: a display:none scroller ignores scrollTop, and the browser gives back the offset it had when it
     // was hidden, so a reading that opened after a scrolled one opened part-way down
     this.root.hidden = false;
@@ -111,6 +209,7 @@ export class DeepSheet {
       clear(this.article);
       if (t.kind === 'subject') this.renderSubject(t.subject);
       else this.renderOccurrence(t.occId);
+      this.article.prepend(el('p', { class: 'dp-eyebrow', text: eyebrowOf(t) }));
       this.scroller.scrollTop = 0;
     }
     requestAnimationFrame(() => {
@@ -118,15 +217,22 @@ export class DeepSheet {
       if (fresh) this.scroller.scrollTop = 0;
     });
     this.open = true;
+    this.applyMode();
     this.scroller.focus({ preventScroll: true });
   }
 
   hide() {
-    if (!this.open) return;
+    if (!this.open && !this.contentsShown) return;
     this.open = false;
     this.key = '';
-    this.root.classList.remove('on');
-    window.setTimeout(() => { if (!this.open) this.root.hidden = true; }, 420);
+    this.wide = false;
+    if (this.contentsShown) {
+      this.contentsShown = false;
+      this.frame.contents.hidden = true;
+      this.frame.article.hidden = false;
+    }
+    this.applyMode();
+    this.closePane();
   }
 
   // ── subjects ──────────────────────────────────────────────────────────

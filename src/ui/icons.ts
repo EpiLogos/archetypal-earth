@@ -7,6 +7,9 @@ const PATHS = {
   search: `<circle cx="6.8" cy="6.8" r="4.6" ${S}/><path d="M10.4 10.4L14 14" ${S}/>`,
   menu: `<path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" ${S}/>`,
   close: `<path d="M3.5 3.5l9 9M12.5 3.5l-9 9" ${S}/>`,
+  // the pane's width: two corners pulling apart, and the same two drawn in
+  expand: `<path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9.2 6.8M2.5 13.5l4.3-4.3" ${S}/>`,
+  shrink: `<path d="M13 6.5H9.5V3M3 9.5h3.5V13M9.5 6.5L13.8 2.2M6.5 9.5L2.2 13.8" ${S}/>`,
   chevron: `<path d="M4.5 6.2L8 9.7l3.5-3.5" ${S}/>`,
   back: `<path d="M9.8 3.5L5.3 8l4.5 4.5" ${S}/>`,
   next: `<path d="M6.2 3.5L10.7 8l-4.5 4.5" ${S}/>`,

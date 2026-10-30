@@ -59,6 +59,8 @@ body.search-open .shell > *, body.deep-open .shell > * { pointer-events: none; }
 .sh-corner .sh-corner-btn { opacity: 0.75; }
 .sh-corner .sh-corner-btn:hover { opacity: 1; }
 body.search-open .sh-corner, body.deep-open .sh-corner, body.menu-open .sh-corner { opacity: 0; pointer-events: none; }
+/* the Contents list stands over the right edge: the corner keeps clear of it */
+body.pane-contents .sh-corner { right: calc(var(--pane-w) + var(--shell-x) - 4px); }
 
 /* ── the menu ──────────────────────────────────────────────────────── */
 .sm-scrim { position: fixed; inset: 0; z-index: 40; background: rgb(var(--deep-rgb) / 0.32); }

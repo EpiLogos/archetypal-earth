@@ -22,6 +22,7 @@ import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type
 import { modeOptions, optionAction } from '../ui/mode-options';
 import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
 import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
+import { shiftX } from '../shell/layout';
 import { sliceCount, sliceMask } from '../shell/slice';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
@@ -221,6 +222,7 @@ export class Controller {
       onReadText: (id, at) => this.navigate(inLens('texts', at === undefined ? [id] : [id, String(at)])),
       onOpenChart: (id) => this.navigate(astrologyAt([id])),
       passage: passages,
+      onPaneChange: () => this.syncShift(),
     });
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
@@ -601,7 +603,7 @@ export class Controller {
       case 'passage': this.passage.hide(); return;
       case 'sheet': this.closeSheet(); return;
       case 'gaze': this.endGaze(); return;
-      case 'contents': return;
+      case 'contents': this.deep.hideContents(); return;
       case 'deep':
       case 'up':
       case 'out': this.navigate(back(this.state)); return;
@@ -625,8 +627,8 @@ export class Controller {
       // a panel lens with its sheet on screen; with the sheet hidden, or while gazing at a planet, the stack passes it by
       sheetVisible: !!this.activeLens && this.panel.isVisible && !gaze,
       deepOpen: !!s.deep,
-      // the reading pane's Contents list is not a surface of its own yet (H2 gives it one)
-      contentsOpen: false,
+      // the reading pane's Contents list, when it stands open on its own
+      contentsOpen: this.deep.isContentsOpen,
       gaze,
       back: stays,
     };
@@ -2233,7 +2235,10 @@ export class Controller {
     const s = this.state;
     let x = 0, y = 0;
     if (s.deep && s.view.kind !== 'world' && !this.readingAwaitsLanding) {
-      if (!narrow) x = -0.46;
+      // the room the pane takes: -0.46 for a reading, more when it is widened (layout.ts), none on a phone
+      if (!narrow) x = shiftX(this.deep.mode === 'closed' ? 'reading' : this.deep.mode, window.innerWidth);
+    } else if (this.deep.isContentsOpen && !narrow) {
+      x = shiftX('contents', window.innerWidth);
     } else if (s.view.kind === 'manifest' || s.sky?.body) {
       // a card stands on the right (or the bottom, on a phone): the scene gives it room. An approached planet's disc
       // is centred in the space the sheet leaves above it, so the disc is not drawn under the sheet.
