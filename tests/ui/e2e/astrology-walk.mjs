@@ -38,10 +38,17 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.fill('.as-form input[placeholder^="Longitude"]', BIRTH.lon);
   await page.fill('.as-form input[type=number][step="0.25"]', '2');
   await page.click('.as-form button[type=submit]');
-  try { await page.waitForFunction(() => location.hash.startsWith('#/astrology/you/'), null, { timeout: 15000 }); } catch { console.log('form says:', await page.evaluate(() => [location.hash, document.querySelector('.as-errors')?.textContent, [...document.querySelectorAll('.as-form input')].map((i) => i.type + '=' + i.value).join(' ')])); throw new Error('no walk'); }
+  // casting lands on the whole birth sky: a walk is a choice, not the way in (the same landing as main's astrology.ts)
+  try { await page.waitForFunction(() => location.hash === '#/astrology/you', null, { timeout: 15000 }); } catch { console.log('form says:', await page.evaluate(() => [location.hash, document.querySelector('.as-errors')?.textContent, [...document.querySelectorAll('.as-form input')].map((i) => i.type + '=' + i.value).join(' ')])); throw new Error('no chart'); }
+  await page.waitForTimeout(2000);
+  check(await page.evaluate(() => location.hash) === '#/astrology/you', `${s.name}: casting lands on the whole birth sky`, await page.evaluate(() => location.hash));
+  // the walk is the Options action
+  await page.locator('.sh-controls details.mode-options > summary').click();
+  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Walk the planets' }).first().click();
+  try { await page.waitForFunction(() => location.hash === '#/astrology/you/moon', null, { timeout: 15000 }); } catch { throw new Error('the Walk the planets action did not open the walk: ' + await page.evaluate(() => location.hash)); }
   await page.waitForTimeout(2500);
   const first = await page.evaluate(() => ({ hash: location.hash, quotes: document.querySelectorAll('.lens-panel blockquote').length, cites: [...document.querySelectorAll('.lens-panel .q-cite')].map((c) => c.textContent).slice(0, 3), who: [...document.querySelectorAll('.as-cmp-who')].map((x) => x.textContent), stored: localStorage.getItem('aae.practice.v1.charts') ?? '' }));
-  check(first.hash === '#/astrology/you/moon', `${s.name}: casting opens the walk at its first planet`, first.hash);
+  check(first.hash === '#/astrology/you/moon', `${s.name}: Walk the planets opens the walk at its first planet`, first.hash);
   check(first.quotes >= 3 && first.cites.every((c) => /(pdf p|p\. )\d+/.test(c)), `${s.name}: the step quotes the corpus with cites`, `${first.quotes} quotes · ${first.cites.join(' | ')}`);
   check(first.who.includes('You') && first.who.includes('C. G. Jung'), `${s.name}: your place stands beside Jung's`, first.who.join(', '));
   check(first.stored.includes(BIRTH.date), `${s.name}: the chart is kept in this browser's storage`);
@@ -54,7 +61,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-walk-sun.png`) });
   await page.click('.as-to-self');
   await page.waitForTimeout(1500);
-  check(await page.evaluate(() => location.hash) === '#/a/self', `${s.name}: Go to the Self opens the Self`);
+  check(await page.evaluate(() => location.hash) === '#/a/self/deep', `${s.name}: Go to the Self opens the Self's reading`, await page.evaluate(() => location.hash));
 
   const after = requests.slice(before);
   const leaks = after.filter((r) => [BIRTH.date, BIRTH.time, '1990', BIRTH.lat, BIRTH.lon].some((v) => r.url.includes(v) || r.body.includes(v)));
