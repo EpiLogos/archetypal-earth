@@ -4,6 +4,7 @@ import type { BodyKey } from '../types/sky';
 import type { Symbols, SymbolEntry } from '../types/symbols';
 import type { PeopleData, Person, PersonId } from '../types/people';
 import type { Work, WorkId, WorksData } from '../types/works';
+import type { Walk, WalksData } from '../types/walks';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
@@ -85,6 +86,8 @@ export interface Model {
    * ascending. Read through the registry, so `redbook` and `liber-novus` are one Work. What `subjectMembers` returns.
    */
   workMem: Map<WorkId, number[]>;
+  /** the walks (public/data/walks.json) by id: `text/<workId>` is a Work's page walk; empty when the file was not loaded */
+  walkById: Map<string, Walk>;
   /** the people (public/data/people.json); empty when the file was not loaded */
   personById: Map<PersonId, Person>;
   /**
@@ -122,6 +125,7 @@ const FALLBACK_PALETTE = { core: '#c3d2f2', glow: '#4f78cf', fog: '#10193a', dee
 export interface ModelExtras {
   works?: WorksData;
   people?: PeopleData;
+  walks?: WalksData;
 }
 
 export function buildModel(field: Field, extent?: { from: number; to: number }, symbols?: Symbols, extras: ModelExtras = {}): Model {
@@ -265,7 +269,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     }
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, workById, workKey, workMem, personById, personMem, joins, joinsBy };
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, workById, workKey, workMem, walkById: new Map((extras.walks?.walks ?? []).map((w) => [w.id, w])), personById, personMem, joins, joinsBy };
 }
 
 const BASIS_ORDER: Record<string, number> = { jung: 0, inferred: 1, site: 2 };

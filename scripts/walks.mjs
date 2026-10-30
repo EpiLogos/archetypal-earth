@@ -3,12 +3,16 @@
 // (redbook.json), the Theory route (dynamics-route.json), the alchemy opus stages (alchemy.json), and one derived walk per
 // theoretic (field.json: the members the model gives it, placed, by year, thinned as thread.ts thins a thread).
 // A stop's year and place are its subject's own; its cite is the subject's first citation, its page the pdf page of it.
+// One more walk per Work whose cites the field places on its corpus volume (S10b): the occurrences that cite it, in the
+// order of the pages they cite, an occurrence once at the lowest page it cites (aliases folded: `redbook` is Liber Novus).
 //   npm run walks          write public/data/walks.json
 //   npm run walks:check    build in memory, verify every stop (scripts/verify-walks.mjs), and fail if the file differs
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSources, pdfPage, ROOT, verifyWalks } from './verify-walks.mjs';
+import { citeYear } from './lib/cite-year.mjs';
+import { keyMap, loadWorks, placeCite, volume } from './works-registry.mjs';
 
 /** The most stops a derived walk keeps: thread.ts's THREAD_MAX, one per time bucket. */
 export const THEORETIC_MAX = 26;
@@ -181,11 +185,51 @@ function theoreticWalks(src) {
   });
 }
 
+/**
+ * One page-ordered walk per Work. The Work's cites are placed on its corpus volume the way the works-index places them (a ¶
+ * through the volume's paragraph anchors, else `pdf p`); an occurrence that cites the Work more than once stands at the
+ * lowest page it cites, and its stop carries the engagement year of that cite where the cite names one. A Work with no
+ * placed cite has no walk.
+ */
+function textWalks(src) {
+  const works = loadWorks();
+  const { map } = keyMap(works);
+  const byWork = new Map();
+  for (const o of src.field.occurrences) {
+    o.jung?.forEach((c, k) => {
+      const id = map.get(c.work);
+      if (!id || !works[id].corpus) return;
+      const placed = placeCite(volume(works[id].corpus), c.locator ?? '');
+      if (!placed) return;
+      if (!byWork.has(id)) byWork.set(id, new Map());
+      const mine = byWork.get(id);
+      const had = mine.get(o.id);
+      if (!had || placed.page < had.page) mine.set(o.id, { o, page: placed.page, year: citeYear(c.year) });
+    });
+  }
+  return Object.keys(works).sort().filter((id) => byWork.has(id)).map((id) => {
+    const picks = [...byWork.get(id).values()].sort((a, b) => a.page - b.page || (a.o.id < b.o.id ? -1 : a.o.id > b.o.id ? 1 : 0));
+    return {
+      id: `text/${id}`,
+      kind: 'text',
+      title: works[id].title,
+      source: `works-index.json#works/${id}`,
+      ordered: 'page',
+      stops: picks.map(({ o, page, year }) => {
+        const out = { subject: { type: 'occurrence', id: o.id }, page: { work: id, page }, year: o.year };
+        if (year !== null) out.citeYear = year;
+        if (o.geoPrecision !== 'none' && isPlaced(o.lat, o.lon)) out.place = { lat: o.lat, lon: o.lon };
+        return out;
+      }),
+    };
+  });
+}
+
 /** Every walk, from the sources as they stand. */
 export function buildWalks(src) {
   corpusWorks = new Set(src.corpus.works.map((w) => w.work));
   citesDropped = 0;
-  return [...aionThreads(src), aionChapters(src), redBook(src), theoryRoute(src), alchemyStages(src), ...theoreticWalks(src)];
+  return [...aionThreads(src), aionChapters(src), redBook(src), theoryRoute(src), alchemyStages(src), ...theoreticWalks(src), ...textWalks(src)];
 }
 
 const pad = (s, n) => String(s).padEnd(n);
@@ -220,7 +264,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       process.exit(1);
     }
     report(walks, counts);
-    console.log('walks: verified (every stop resolves; chronological walks monotone; curated walks keep their source order)');
+    console.log('walks: verified (every stop resolves; chronological walks monotone; curated walks keep their source order; page walks monotone in page)');
   } else {
     fs.writeFileSync(out, text);
     report(walks, counts);

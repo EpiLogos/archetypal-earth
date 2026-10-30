@@ -7,8 +7,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const KINDS = ['aion-thread', 'aion-chapters', 'redbook', 'theory-route', 'alchemy-stages', 'theoretic'];
-const ORDER_OF_KIND = { 'aion-thread': 'curated', 'aion-chapters': 'curated', redbook: 'curated', 'theory-route': 'curated', 'alchemy-stages': 'curated', theoretic: 'chronological' };
+export const KINDS = ['aion-thread', 'aion-chapters', 'redbook', 'theory-route', 'alchemy-stages', 'theoretic', 'text'];
+const ORDER_OF_KIND = { 'aion-thread': 'curated', 'aion-chapters': 'curated', redbook: 'curated', 'theory-route': 'curated', 'alchemy-stages': 'curated', theoretic: 'chronological', text: 'page' };
 const SUBJECT_TYPES = ['occurrence', 'event', 'chapter', 'stage', 'concept', 'route-stop'];
 
 /** The data the walks are read from, loaded from disk. */
@@ -24,7 +24,51 @@ export function loadSources(root = ROOT) {
     dynamics: read('public', 'data', 'dynamics.json'),
     alchemy: read('public', 'data', 'alchemy.json'),
     corpus: read('public', 'data', 'corpus', 'index.json'),
+    registry: read('curation', 'works.json').works,
   };
+}
+
+/** The first four-digit year of a cite's engagement string ("1936/44" -> 1936), or null. Read here, not by the generator. */
+const engagementYear = (text) => { const m = /\b(1[5-9]\d\d|20\d\d)\b/.exec(String(text ?? '')); return m ? Number(m[1]) : null; };
+
+/**
+ * The page walk each Work must have, made from field.json, the registry and the corpus volumes alone: the occurrences that
+ * cite the Work (every key folded through its aliases) at the lowest page their cites name, in page order. A ¶ is read
+ * through the volume's paragraph anchors (the one on the cited pdf page when several match), else `pdf p`.
+ */
+export function expectedTextWalks(src, cache = new Map()) {
+  const keyOf = new Map();
+  for (const [id, w] of Object.entries(src.registry)) for (const k of [id, ...(w.aliases ?? [])]) keyOf.set(k, id);
+  const vols = new Map();
+  const vol = (id) => {
+    if (!vols.has(id)) vols.set(id, src.registry[id].corpus ? JSON.parse(fs.readFileSync(path.join(src.root, 'public', 'data', 'corpus', src.registry[id].corpus), 'utf8')) : null);
+    return vols.get(id);
+  };
+  const out = new Map();
+  for (const o of src.field.occurrences) {
+    for (const c of o.jung ?? []) {
+      const id = keyOf.get(c.work);
+      if (!id || !vol(id)) continue;
+      const loc = c.locator ?? '';
+      const para = /¶\s*(\d+)/.exec(loc);
+      const pdf = /pdf\s*p\.?\s*(\d+)/.exec(loc);
+      let page = null;
+      if (para) {
+        let cands = (vol(id).paras ?? []).filter((x) => x.para === Number(para[1]));
+        if (pdf) { const on = cands.filter((x) => x.p === Number(pdf[1])); if (on.length) cands = on; }
+        if (cands.length) page = cands[0].p;
+      }
+      if (page === null && pdf) page = Number(pdf[1]);
+      if (page === null) continue;
+      if (!out.has(id)) out.set(id, new Map());
+      const mine = out.get(id);
+      const had = mine.get(o.id);
+      if (!had || page < had.page) mine.set(o.id, { id: o.id, page, citeYear: engagementYear(c.year) });
+    }
+  }
+  const res = new Map();
+  for (const [id, m] of out) res.set(id, [...m.values()].sort((a, b) => a.page - b.page || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)));
+  return res;
 }
 
 /** The pdf page a locator names ("¶149 (pdf p105)" -> 105; "pdf p91–92" -> 91), or undefined. */
@@ -152,6 +196,24 @@ export function verifyWalks(walks, src) {
       });
     }
 
+    if (walk.ordered === 'page') {
+      walk.stops.forEach((stop, i) => {
+        if (!stop.page) fail(`${where} stop ${i}`, 'a page-ordered stop needs a page');
+        else if (i > 0 && walk.stops[i - 1].page && stop.page.page < walk.stops[i - 1].page.page) fail(`${where} stop ${i}`, `page ${stop.page.page} goes back from ${walk.stops[i - 1].page.page}`);
+        if (stop.page && stop.page.work !== wid.replace(/^text\//, '')) fail(`${where} stop ${i}`, `page is of ${stop.page.work}, not of the walk's Work`);
+        if (stop.subject?.type !== 'occurrence') fail(`${where} stop ${i}`, 'a text stop is an occurrence');
+      });
+      const want = expectedTextWalks(src).get(wid.replace(/^text\//, ''));
+      if (!want) fail(where, 'no Work of this id cites a placed page');
+      else {
+        const got = walk.stops.map((s) => `${s.subject?.id}@${s.page?.page}`);
+        const exp = want.map((w) => `${w.id}@${w.page}`);
+        if (got.length !== want.length) fail(where, `${got.length} stops, the field's cites give ${want.length}`);
+        else if (got.some((g, i) => g !== exp[i])) fail(where, 'stops are not the field\'s cites in page order');
+        else walk.stops.forEach((s, i) => { if ((s.citeYear ?? null) !== want[i].citeYear) fail(`${where} stop ${i}`, `citeYear ${s.citeYear} is not the cite's ${want[i].citeYear}`); });
+      }
+    }
+
     if (walk.ordered === 'curated') {
       const expected = curatedSequence(src, walk);
       if (!expected) fail(where, 'no source for this curated walk');
@@ -171,6 +233,8 @@ export function verifyWalks(walks, src) {
   for (const id of ['aion-chapters', 'redbook', 'theory-route', 'alchemy-stages']) {
     if (!walks.some((w) => w.kind === id)) fail('walks', `no ${id} walk`);
   }
+  // every Work whose cites the field places has its page walk (and no other Work has one)
+  for (const id of expectedTextWalks(src, cache).keys()) if (!seen.has(`text/${id}`)) fail('walks', `Work ${id} has placed cites and no page walk`);
   return { errors, counts };
 }
 
