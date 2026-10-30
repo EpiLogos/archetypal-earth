@@ -271,10 +271,10 @@ describe('quote-fixes: the reviewed override layer', () => {
     archetypes: [{ id: 'arc' }],
     theoretics: [],
   });
-  it('is valid empty today', () => {
+  it('is valid, and every fix names its basis', () => {
     const doc = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation/quote-fixes.json'), 'utf8'));
     expect(validateQuoteFixes(doc)).toEqual([]);
-    expect(doc.fixes).toEqual({});
+    for (const [id, fix] of Object.entries(doc.fixes as Record<string, { basis?: string }>)) expect(fix.basis, id).toMatch(/\S/);
   });
   it('corrects the words and the primary cite of an occurrence', () => {
     const f = field();

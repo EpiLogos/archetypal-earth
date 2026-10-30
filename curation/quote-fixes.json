@@ -1,5 +1,767 @@
 {
-  "version": 1,
-  "_note": "Reviewed corrections to a quotation or the page it cites, applied in scripts/ingest.mjs (as year-overrides.json is). Key: an occurrence id, or family:<id> / archetype:<id> / theoretic:<id> for a definition. A fix: text (the corrected verbatim words), locator and work (the cite the quote stands on, which becomes the primary cite; for a definition, cite: the cite string), basis (the line that proves it: the corpus page the words stand on). The vault is never edited; this layer is the correction.",
-  "fixes": {}
+ "version": 1,
+ "_note": "Reviewed corrections to a quotation or the page it cites, applied in scripts/ingest.mjs (as year-overrides.json is). Key: an occurrence id, or family:<id> / archetype:<id> / theoretic:<id> for a definition. A fix: text (the corrected verbatim words), locator and work (the cite the quote stands on, which becomes the primary cite; for a definition, cite: the cite string), basis (the line that proves it: the corpus page the words stand on). The vault is never edited; this layer is the correction.",
+ "fixes": {
+  "adamanus-360-spirits-arabic-hermes-10c": {
+   "text": "three hundred and sixty spirits in all, mixed them together and created out of them Adamanus, the first man, “after the form of the highest heaven.”",
+   "basis": "oracle: corpus words for cw14 pdf p308",
+   "locator": "¶587 (pdf p308)"
+  },
+  "baader-adams-helpmeet-eve-1830": {
+   "text": "God, recognizing this possibility, thereupon created Eve as a “salutary counter-institution [rettende Gegenanstalt], to prevent an otherwise unavoidable and deeper descent of man . . . into animal nature.”",
+   "basis": "oracle: corpus words for cw14 pdf p305",
+   "locator": "¶581 (pdf p305)"
+  },
+  "boehme-heavenly-virgin-womans-seed-1620": {
+   "text": "“she is given to be a companion to thee in thy soul,” and at the same time, as divine power and wisdom, she is in heaven and in paradise.",
+   "basis": "oracle: corpus words for cw14 pdf p305",
+   "locator": "¶580 (pdf p305)"
+  },
+  "christ-figure-headless-sun-disk-autun-cathedral-1135": {
+   "text": "The spiritual sun in Christianity is the specific truth of Christianity, it is the Logos, and it is symbolized as the circle with the cross, which in the East is called a mandala.",
+   "basis": "oracle: corpus words for sem-visions pdf p436",
+   "locator": "27 May 1931 (pdf p436)"
+  },
+  "divine-birth-amenhotep-iii-thebes-1380bce": {
+   "text": "Thou art reborn in the renewal of the Sed festival” (Moret, Du caractère religieux de la royauté pharaonique, pp. 255f.).",
+   "basis": "oracle: corpus words for cw14 pdf p732",
+   "locator": "n.30–31 to ch. IV (pdf p732)"
+  },
+  "dream-black-man-room-7-burgholzli-1905": {
+   "text": "He is dressed like a judge of a Vehmic court",
+   "basis": "oracle: corpus words for cw02 pdf p216",
+   "locator": "pdf p216"
+  },
+  "dream-burning-house-white-figure-burgholzli-1905": {
+   "text": "We both saw that a house was on fire. Suddenly a white figure emerged from behind the house; we both got scared and exclaimed simultaneously: 'Lord Jesus!'",
+   "basis": "oracle: corpus words for cw02 pdf p217",
+   "locator": "pdf p217"
+  },
+  "jung-cook-chicken-saviour-1890s": {
+   "text": "when the Saviour of men came down to earth, the chicken saviour also came to the chickens, and that’s why they must repent of their sins before they die if they want to go to heaven.”",
+   "basis": "oracle: corpus words for cw12 pdf p398",
+   "locator": "¶494 (pdf p398)"
+  },
+  "kubin-mad-white-horse-andere-seite-1909": {
+   "text": "In the ghostly town where he is living, which is the collective unconscious, there is a peculiar uncanny feeling, and he discovers the reason to be that a mad white horse is galloping through the underground cellars of the town, never finding its way out-a life that got lost in the tombs of the collective unconscious and went mad.",
+   "basis": "oracle: corpus words for sem-visions pdf p1244",
+   "locator": "8 & 15 November 1933 (pdf p1244)"
+  },
+  "meditation-internal-talk-ruland-1612": {
+   "text": "The name of an Internal Talk of one person with another who is invisible, as in the invocation of the Deity, or communion with one’s self, or with one’s good angel.”",
+   "basis": "oracle: corpus words for cw14 pdf p373",
+   "locator": "¶707 (pdf p373)"
+  },
+  "melchior-cibinensis-alchemical-mass-16c": {
+   "text": "Behold a wondrous restoration and renewal of the Ethiopian! Because of the bath of rebirth he takes a new name, which the philosophers call the natural sulphur and their son, this being the stone of the philosophers.",
+   "basis": "oracle: corpus words for cw12 pdf p389",
+   "locator": "¶484 (pdf p389)"
+  },
+  "melchisedec-bread-wine-offering-salem-genesis-14": {
+   "text": "The manifestation of an order outside time involves the idea of a miracle which takes place “vere, realiter, substantialiter” at the moment of transubstantiation, for the substances offered are no different from natural objects, and must in fact be definite commodities whose nature is known to everybody, namely pure wheaten bread and wine.",
+   "basis": "oracle: corpus words for cw11 pdf p172",
+   "locator": "¶307 (pdf p172)"
+  },
+  "pernety-osiris-isis-fables-1758": {
+   "text": "Osiris was “the fire hidden in nature, the igneous principle . . . which animates all things”",
+   "basis": "oracle: corpus words for cw14 pdf p386",
+   "locator": "¶734 (pdf p386)"
+  },
+  "sapphire-stone-power-of-fate-kabbala-denudata-1677": {
+   "text": "administering at times good, at others evil, now life, now death, now sickness, now healing, now poverty, now riches.”",
+   "basis": "oracle: corpus words for cw14 pdf p335",
+   "locator": "¶640 (pdf p335)"
+  },
+  "son-of-man-seven-stars-brass-feet-revelation-95": {
+   "text": "his feet like unto fine brass, as if they burned in a furnace, and his voice as the sound of many waters.",
+   "basis": "oracle: corpus words for cw14 pdf p331",
+   "locator": "¶633 (pdf p331)"
+  },
+  "water-cow-milk-rain-magic-russia-1931": {
+   "text": "They were leading the cow to the crossroads to sprinkle her milk in the dust to the four corners of the world, in order to make the rain ashamed, to show it they could do better.",
+   "basis": "oracle: corpus words for sem-visions pdf p291",
+   "locator": "18 Feb 1931 (pdf p291)"
+  },
+  "yin-yang-dragon-tiger-wei-po-yang-2c": {
+   "text": "“Yin and yang drink and devour one another” (p. 244); “Yang donates and yin receives” (p. 245), and, in another form: “The Dragon breathes into the Tiger and the Tiger receives the spirit from the Dragon.",
+   "basis": "oracle: corpus words for cw14 pdf p741",
+   "locator": "nn.135, 142, 11 to chs. IV–VI (pdf p741)"
+  },
+  "edem-virgin-serpent-justin-2c": {
+   "text": "The Justinian Gnosis depicts her as Edem, virgin above, serpent below33 (fig. 157).",
+   "basis": "oracle: corpus words for cw12 pdf p309"
+  },
+  "trinity-holy-ghost-winged-man-berlin-passion-15c": {
+   "text": "He is often represented as a winged old man, i.e., Mercurius in the form of the god of revelation, who is identical with Hermes Trismegistus66 and, together with the King and the King’s Son, forms the alchemical trinity (figs. 179, 180).",
+   "basis": "oracle: corpus words for cw12 pdf p340"
+  },
+  "treasure-talisman-casket-runaway-neurotic-1909": {
+   "text": "it was a casket containing his old childhood books, old dried flowers, stones, and even small bottles of water from … the well at his home and from a river along which he used to walk with his parents.",
+   "basis": "oracle: corpus words for cw02 pdf p262"
+  },
+  "adam-chooses-intelligence-islamic-legend-9c": {
+   "text": "But they refused, invoking God’s own command never to part from intelligence, wherever it might be found.",
+   "basis": "oracle: corpus words for cw14 pdf p306"
+  },
+  "adam-general-soul-israel-kabbala-denudata-1677": {
+   "locator": "¶593 (pdf p311)",
+   "basis": "oracle: verbatim at cw14 pdf p311"
+  },
+  "adamas-cornerstone-zion-naassene-3c": {
+   "text": "This, they say, is Adamas, the chief corner-stone [ ], who has become the head [ ] of the corner.",
+   "basis": "oracle: corpus words for cw14 pdf p330"
+  },
+  "adamas-masculofeminine-hymn-naassene-3c": {
+   "text": "“From thee the father, through thee the mother, the two immortal names, parents of the Aeons, O citizen of heaven, O Man of the Great Name!”",
+   "basis": "oracle: corpus words for cw14 pdf p307"
+  },
+  "alchemist-nigredo-meditatio-jamsthaler-1625": {
+   "locator": "¶390 (pdf p282)",
+   "basis": "oracle: verbatim at cw12 pdf p282"
+  },
+  "angel-death-hereafter-suicide-hysteric-burgholzli-1905": {
+   "text": "With angel the image of death and the hereafter immediately appeared, this time with persisting feeling-tone that hindered the subsequent reactions in a way shown by the decrease in reaction-times.",
+   "basis": "oracle: corpus words for cw02 pdf p164"
+  },
+  "anima-figure-brolante-harlot-tale-of-the-otter-1932": {
+   "locator": "¶1721 (pdf p707)",
+   "basis": "oracle: verbatim at cw18 pdf p707"
+  },
+  "anima-figure-brunhilde-spirit-mother-ring": {
+   "locator": "¶559 (pdf p396)",
+   "basis": "oracle: verbatim at cw05 pdf p396"
+  },
+  "anima-figure-molly-bloom-penelope-monologue-dublin-1904": {
+   "locator": "¶200 (pdf p114)",
+   "basis": "oracle: verbatim at cw15 pdf p114"
+  },
+  "anima-figure-prometheus-soul-lady-spitteler-1881": {
+   "text": "But it does not lie with me to judge of the face of my soul, for lo, she is my Lady and Mistress, and she is my God in joy and sorrow, and all that I am, I owe to her alone.",
+   "basis": "oracle: corpus words for cw06 pdf p162"
+  },
+  "anima-mundi-thurneisser-1574": {
+   "locator": "fig. 91, ¶265 (pdf p206)",
+   "basis": "oracle: verbatim at cw12 pdf p206"
+  },
+  "anthropos-anima-mundi-albertus-1650": {
+   "locator": "fig. 117, ¶335 (pdf p247)",
+   "basis": "oracle: verbatim at cw12 pdf p247"
+  },
+  "anthropos-purusha-flaming-bow-serpent-vision-zurich-1932": {
+   "locator": "pdf p886",
+   "basis": "oracle: verbatim at sem-visions pdf p886"
+  },
+  "arrow-seven-golden-all-seeing-eye-leade-1683": {
+   "text": "the last, the seventh arrow, is the symbol of an all-seeing eye with two wings, which enable the arrow to fly over the pool; that is the idea of penetration, of overcoming the obstacle, and penetrating the secret chamber.",
+   "basis": "oracle: corpus words for sem-visions pdf p374"
+  },
+  "ascent-descent-elijah-ascent-mss-mithraic-model": {
+   "locator": "¶1528 (pdf p626)",
+   "basis": "oracle: verbatim at cw18 pdf p626"
+  },
+  "ass-lucius-isis-roses-apuleius-160ce": {
+   "locator": "21 May 1931 (pdf p420)",
+   "basis": "oracle: verbatim at sem-visions pdf p420"
+  },
+  "astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century": {
+   "text": "ASTARTE Gold plaque, Syria, c. xu century B.c.",
+   "basis": "oracle: corpus words for neumann-great-mother pdf p222"
+  },
+  "aurora-consurgens-sapientia-dei-14c": {
+   "locator": "¶466 (pdf p370)",
+   "basis": "oracle: verbatim at cw12 pdf p370"
+  },
+  "basilius-valentinus-allegoria-trinitatis-1600": {
+   "text": "So, too, is the gold without flaw … yet, for the sake of its imperfect and sick brothers and sisters, it dies and rises again, glorious and redeemed, and tinctures them to eternal life, making them perfect like to pure gold.",
+   "basis": "oracle: corpus words for cw12 pdf pundefined"
+  },
+  "baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu": {
+   "text": "Terra cotta, Priene, Asia Minor, v century B.c.",
+   "basis": "oracle: corpus words for neumann-great-mother pdf p240"
+  },
+  "bear-goddess-artio-berne-gallic-roman": {
+   "primary": 1,
+   "basis": "oracle: verbatim at sem-childrens-dreams pdf p436"
+  },
+  "bird-of-hermes-flies-without-wings-novum-lumen-1604": {
+   "locator": "¶727 (pdf p383)",
+   "basis": "oracle: verbatim at cw14 pdf p383"
+  },
+  "black-man-hypnagogic-vision-hysteric-burgholzli-1905": {
+   "locator": "pdf p216",
+   "basis": "oracle: verbatim at cw02 pdf p216"
+  },
+  "blood-baptism-scarlet-robe-spiral-vision-zurich-1931": {
+   "locator": "25 Feb 1931 (pdf p305)",
+   "basis": "oracle: verbatim at sem-visions pdf p305"
+  },
+  "bull-apis-priestess-burial-memphis-300bce": {
+   "text": "she was buried in an eternal embrace with the god, a very beautiful idea but of course represented in a terribly naive way.",
+   "basis": "oracle: corpus words for sem-visions pdf p356"
+  },
+  "bull-world-bull-horn-legend-mount-elgon-1926": {
+   "locator": "21 May 1931 (pdf p417)",
+   "basis": "oracle: verbatim at sem-visions pdf p417"
+  },
+  "burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175": {
+   "text": "“To fall into a jar of honey’ is to be identified with ‘to die.’ ” 7\" The custom of burying the dead in a great jar is known to us from pre-Hellenie Asia Minor (3500 1750 B.c.), while the use of honey in the cult of the dead and in emhalming was also widely distributed.",
+   "basis": "oracle: corpus words for neumann-great-mother pdf p158"
+  },
+  "cantilena-riplaei-sterile-king-15c": {
+   "locator": "¶491 (pdf p395)",
+   "basis": "oracle: verbatim at cw12 pdf p395"
+  },
+  "cave-hecate-crypt-antioch-365-steps": {
+   "locator": "¶577 (pdf p404)",
+   "basis": "oracle: verbatim at cw05 pdf p404"
+  },
+  "cave-plato-parable-republic-380bce": {
+   "text": "He tries by that rather clumsy parable to explain the subjectivity of our judgment, which is really the same idea which was called later on in the history of philosophy the theory of cognition.",
+   "basis": "oracle: corpus words for sem-kundalini pdf p105"
+  },
+  "celestial-city-new-jerusalem-revelation-95ce": {
+   "text": "And the city lieth foursquare, and the length is as large as the breadth … And the twelve gates were twelve pearls; every several gate was of one pearl: and the street of the city was pure gold, as it were transparent glass.",
+   "basis": "oracle: corpus words for sem-visions pdf pundefined"
+  },
+  "chakra-cakra-illustrations-serpent-power-madras-1919": {
+   "locator": "Lectures 1-3 (pdf p35)",
+   "basis": "oracle: verbatim at sem-kundalini pdf p35"
+  },
+  "chakra-shat-cakra-nirupana-purnananda-bengal-1577": {
+   "locator": "whole seminar (pdf p23)",
+   "basis": "oracle: verbatim at sem-kundalini pdf p23"
+  },
+  "chance-series-clock-frederick-great-sans-souci-1786": {
+   "text": "There are numerous well-authenticated stories of a clock that stopped at the moment of its owner’s death, like Frederick the Great’s pendulum clock at Sans Souci; of a mirror that broke, or a boiling coffee-pot that exploded, just before or during a crisis; and so on.",
+   "basis": "oracle: corpus words for cw18 pdf p208"
+  },
+  "chance-series-esp-transoceanic-durham-zagreb-1942": {
+   "locator": "¶834 (pdf p445)",
+   "basis": "oracle: verbatim at cw08 pdf p445"
+  },
+  "christ-bridegroom-cross-augustine-5c": {
+   "locator": "notes (pdf p663)",
+   "basis": "oracle: verbatim at cw14 pdf p663"
+  },
+  "christ-figure-crucifix-pulling-nails-nuremberg-1050": {
+   "text": "a socalled crucifix of the eleventh century, which represents Christ pulling the nails out of the cross and coming away from it, a most extraordinary thing.",
+   "basis": "oracle: corpus words for sem-visions pdf p349"
+  },
+  "christ-mandorla-evangelists-guerets-12c": {
+   "locator": "fig. 101, ¶314 (pdf p223)",
+   "basis": "oracle: verbatim at cw12 pdf p223"
+  },
+  "circle-god-centre-everywhere-bonaventure-1259": {
+   "text": "“Deus est circulus cuius centrum est ubique, circumferentia vero nusquam” (God is a circle whose centre is everywhere and the circumference nowhere); see “A Psychological Approach to the Dogma of the Trinity,” par. 229, n. 6.",
+   "basis": "oracle: corpus words for cw06 pdf p612"
+  },
+  "circle-zarathustra-ring-eternal-return-1885": {
+   "locator": "5 May 1937 (pdf p1078)",
+   "basis": "oracle: verbatim at sem-zarathustra pdf p1078"
+  },
+  "coniunctio-soul-body-grandes-heures-1413": {
+   "text": "Da nobis per huius aquae et vini mysterium, eius divinitatis esse consortes, qui humanitatis nostrae fieri dignatus est particeps, Jesus Christus … (Grant that through the mystery of this water and wine, we may have fellowship in the divine nature of Him who vouchsafed to become partaker of our humanity …).",
+   "basis": "oracle: corpus words for cw12 pdf p315"
+  },
+  "coniunctio-tinctura-alba-queen-conception-16c": {
+   "text": "…concipiam et ero praegnans et tempore meo pariam filium potentissimum, dominantem et regnantem prae cunctis regibus et principibus terrae, coronatum aurea corona victoriae, ad omnia a Deo altissimo, qui vivit et regnat in seculorum secula.”",
+   "basis": "oracle: corpus words for cw16 pdf pundefined"
+  },
+  "cross-nestorian-stele-sianfu-781": {
+   "text": "The Christians, also, went into China; the famous Nestorian monument in Sianfu was erected in 781, with the inscription in both Chinese and Syrian.",
+   "basis": "oracle: corpus words for sem-visions pdf p513"
+  },
+  "cross-stepmother-mary-dispute-england-14c": {
+   "locator": "¶26 (pdf p37)",
+   "basis": "oracle: verbatim at cw14 pdf p37"
+  },
+  "crown-shekinah-diadem-malchuth-kether-1677": {
+   "text": "[Corona] sic vocatur Malchuth, quando ascendit usque ad Kether; ibi enim existens est Corona super caput mariti sui” ([The Crown] is called Malchuth when its ascends up to Kether; for there is the crown upon the head of the husband).",
+   "basis": "oracle: corpus words for cw16 pdf p429"
+  },
+  "dionysus-diabolical-anticipation-justin-martyr-190ce": {
+   "text": "the devil told the Greeks the myth of Dionysus, foreseeing that God would later on send his son to redeem the world; and then when his messengers came to announce the news to the Greeks, they could spoil their effect by saying: \"Oh, that is an old story.\"",
+   "basis": "oracle: corpus words for sem-visions pdf p283"
+  },
+  "dorn-three-unions-unio-mentalis-1583": {
+   "locator": "¶663 (pdf p348)",
+   "basis": "oracle: verbatim at cw14 pdf p348"
+  },
+  "dorn-transmutemini-living-stones-16c": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw12 pdf p278"
+  },
+  "double-drunken-prostitute-lady-dream-1931": {
+   "text": "The “other” person we dream of is not our friend and neighbour, but the other in us, of whom we prefer to say: “I thank thee, Lord, that I am not as this publican and sinner.”",
+   "basis": "oracle: corpus words for cw10 pdf p147"
+  },
+  "double-ivenes-higher-ego-zurich-1899": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw01 pdf p70"
+  },
+  "double-ulrich-von-gerbenstein-persona-zurich-1899": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw01 pdf p78"
+  },
+  "dragon-mechanical-dragon-de-promissionibus": {
+   "locator": "¶576 (pdf p402)",
+   "basis": "oracle: verbatim at cw05 pdf p402"
+  },
+  "dragon-sylvester-tarpeian-dragon-rome": {
+   "locator": "¶573 (pdf p401)",
+   "basis": "oracle: verbatim at cw05 pdf p401"
+  },
+  "dream-06-brother-in-law-business-zurich-1929": {
+   "text": "It is as though his brother-in-law, being his shadow, informs him that there is disorder in the business, that is, disorder in his life (in his unconscious), so that he does not live up to obligations that are fully recognized.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p172"
+  },
+  "dream-10-double-heart-spring-zurich-1929": {
+   "text": "Nature hates this petrification … the unconscious is going to root up this mechanistic idea, that is the meaning of the machine for pulling up the weeds.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf pundefined"
+  },
+  "dream-12-naked-boy-white-bread-zurich-1929": {
+   "locator": "15 May 1929 (pdf p228)",
+   "basis": "oracle: verbatim at sem-dream-analysis pdf p228"
+  },
+  "dream-black-dog-shop-burgholzli-1905": {
+   "text": "A big black dog that is very hungry comes along and jumps up on her} as if she could give him something to eat.\"",
+   "basis": "oracle: corpus words for cw02 pdf p216"
+  },
+  "dream-blood-fire-stereotyped-burgholzli-1905": {
+   "text": "Often I dream I am wading in blood, the whole room is full of blood or blood is gushing out of my nose, mouth, eyes, and ears.",
+   "basis": "oracle: corpus words for cw02 pdf p198"
+  },
+  "dual-mother-leonardo-two-mothers-freud-1910": {
+   "locator": "¶100 (pdf p61)",
+   "basis": "oracle: verbatim at cw07 pdf p61"
+  },
+  "fates-three-ladies-magic-flute-vienna-1791": {
+   "text": "Worthy of consideration as a further parallel are also the three ladies in the Magic Flute (Mozart) who, as we know, hand over the magic flute and the enchantingly beautiful picture to the young man:",
+   "basis": "oracle: corpus words for sem-childrens-dreams pdf p55"
+  },
+  "filius-macrocosmi-khunrath-amphitheatrum-1595": {
+   "text": "Without blasphemy I say: In the Book or Mirror of Nature, the Stone of the Philosophers, the Preserver of the Macrocosm, is the symbol of Christ Jesus Crucified, Saviour of the whole race of men, that is, of the Microcosm.",
+   "basis": "oracle: corpus words for cw13 pdf p151"
+  },
+  "fish-eye-dried-sea-ripley-15c": {
+   "locator": "¶394 (pdf p208)",
+   "basis": "oracle: verbatim at cw08 pdf p208"
+  },
+  "flaming-sword-pneuma-simon-magus-hippolytus-2c": {
+   "text": "“For if the flaming sword turned not, then would that fair Tree be destroyed, and perish utterly; but if it turneth into semen and milk, and there be added the Logos and the place of the Lord where the Logos is begotten, he who dwelleth potentially in the semen and milk shall grow to full stature from the littlest spark, and shall increase and become a power boundless and immutable, like to an unchanging Aeon, which suffereth no more change until measureless eternity.”",
+   "basis": "oracle: corpus words for cw11 pdf p195"
+  },
+  "fountain-youth-codex-de-sphaera-modena-15c": {
+   "locator": "fig. 56, ¶157 (pdf p145)",
+   "basis": "oracle: verbatim at cw12 pdf p145"
+  },
+  "four-seasons-goddesses-round-table-stolcius-1624": {
+   "text": "The arrangement of the opposites in a quaternity is shown in an interesting illustration in Stolcenberg’s Viridarium chymicum (Fig. XLII), which can also be found in the Philosophia reformata of Mylius (1622, p. 117).",
+   "basis": "oracle: corpus words for cw14 pdf p22"
+  },
+  "four-strongholds-dorn-spec-phil-1569": {
+   "text": "The lowest is of crystal and shelters “philosophical love”; the second is of silver and contains Sophia; the third is of diamond (adamantina) and only a few get there, “who are taken up by the will of God”; the fourth is golden but “not perceptible to the senses,” “a place of eternal felicity, free from care and filled with every manner of eternal joy” (“Spec, phil.,” p. 279).",
+   "basis": "oracle: corpus words for cw14 pdf p797"
+  },
+  "genius-natale-comes-horace-epistles-rome-20bce": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw04 pdf p294"
+  },
+  "ghost-two-grandfathers-carriage-vision-zurich-1899": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw01 pdf p63"
+  },
+  "goat-cavern-black-snake-vision-zurich-1931": {
+   "locator": "11 Mar 1931 (pdf p338)",
+   "basis": "oracle: verbatim at sem-visions pdf p338"
+  },
+  "god-image-fear-first-made-gods-statius-thebaid-92ce": {
+   "text": "“Primus in orbe deos fecit timor” (fear was what first brought gods into the world).",
+   "basis": "oracle: corpus words for cw06 pdf p605"
+  },
+  "god-image-hitler-altar-pictures-germany-1936": {
+   "locator": "¶1329 (pdf p534)",
+   "basis": "oracle: verbatim at cw18 pdf p534"
+  },
+  "god-image-sol-invisibilis-dorn-philosophia-meditativa-1602": {
+   "locator": "¶389 (pdf p205)",
+   "basis": "oracle: verbatim at cw08 pdf p205"
+  },
+  "god-image-unjust-steward-parable-luke-90": {
+   "locator": "10 June 1936 (pdf p1028)",
+   "basis": "oracle: verbatim at sem-zarathustra pdf p1028"
+  },
+  "gorgon-flanked-by-lions-perugia-plate-gorgon-flanked-by-lions-bronze-relief-perugia-vi-perugia-v": {
+   "text": "Bronze relief, Perugia, vi century B.c.",
+   "basis": "oracle: corpus words for neumann-great-mother pdf p256"
+  },
+  "grail-amfortas-wound-parsifal-bayreuth-1882": {
+   "locator": "¶108 (pdf p78)",
+   "basis": "oracle: verbatim at cw06 pdf p78"
+  },
+  "grave-island-silent-isle-zarathustra-1883": {
+   "primary": 1,
+   "basis": "oracle: verbatim at sem-zarathustra pdf p1217"
+  },
+  "great-mother-underworld-initiation-vision-zurich-1931": {
+   "locator": "25 Mar 1931 (pdf p382)",
+   "basis": "oracle: verbatim at sem-visions pdf p382"
+  },
+  "holy-ghost-secret-mother-eucharistic-prayer": {
+   "locator": "¶558 (pdf p395)",
+   "basis": "oracle: verbatim at cw05 pdf p395"
+  },
+  "holy-man-simeon-stylites-pillar-antioch-5c": {
+   "text": "That was the psychology of the early saints, like St. Simeon Stylites, who stood on one leg upon a pillar for seven years.",
+   "basis": "oracle: corpus words for sem-visions pdf p843"
+  },
+  "horse-plato-charioteer-black-white-horses-380bce": {
+   "text": "one is a white, docile, pious horse, and the other is black, disobedient, obstinate, rebellious, and so on.",
+   "basis": "oracle: corpus words for sem-visions pdf p500"
+  },
+  "horse-wotan-sleipnir-tombstone-gotland": {
+   "locator": "¶421 (pdf p328)",
+   "basis": "oracle: verbatim at cw05 pdf p328"
+  },
+  "horses-black-elk-vision-1881": {
+   "locator": "n.493 to ch. III (pdf p718)",
+   "basis": "oracle: verbatim at cw14 pdf p718"
+  },
+  "illumination-jewelled-heart-vision-zurich-1931": {
+   "locator": "6 May 1931 (pdf pp404–406)",
+   "basis": "oracle: verbatim at sem-visions pdf p404"
+  },
+  "isis-osiris-spirit-harpocrates-plutarch-2c": {
+   "text": "Isis copulated with the spirit of the dead Osiris, and from this union sprang the god of the mysteries, Harpocrates.",
+   "basis": "oracle: corpus words for cw14 pdf p383"
+  },
+  "jezoth-le-juste-fils-de-lhomme-fr-14765-1772": {
+   "text": "there is an illustration of the “fils de l’homme ” (= Mercurius) … bearing the name “Jezoth le Juste,” who is assigned the significant number 4 × 4 in the form of sixteen points (Pl. 3).",
+   "basis": "oracle: corpus words for cw14 pdf pundefined"
+  },
+  "lady-of-the-beasts-boeotian-amphora-plate-lady-of-the-beasts-painting-on-terra-cotta-amphora-boe": {
+   "text": "Painting, terra-cotta amphora, Boeotian, vit century B.c.",
+   "basis": "oracle: corpus words for neumann-great-mother pdf p283"
+  },
+  "leviathan-male-female-baba-bathra-6c": {
+   "text": "He castrated the male and killed the female, preserving it in salt for the righteous in the world to come; for it is written: And he will slay the dragon that is in the sea.”",
+   "basis": "oracle: corpus words for cw14 pdf p727"
+  },
+  "libavius-opus-stages-alchymia-1606": {
+   "locator": "¶400 (pdf p292)",
+   "basis": "oracle: verbatim at cw12 pdf p292"
+  },
+  "liber-platonis-quartorum-deus-invisibilis-12c": {
+   "text": "“Res ex qua sunt res, est Deus invisibilis et immobilis” (That from which things arise is the invisible and immovable God).",
+   "basis": "oracle: corpus words for cw12 pdf p323"
+  },
+  "liver-clay-tablets-babylonia-900bce": {
+   "locator": "18 Feb 1931 (pdf p291)",
+   "basis": "oracle: verbatim at sem-visions pdf p291"
+  },
+  "magician-megissogwon-hiawatha": {
+   "locator": "¶541 (pdf p388)",
+   "basis": "oracle: verbatim at cw05 pdf p388"
+  },
+  "mandala-akbar-diwan-khas-fatehpur-sikri-1575": {
+   "text": "the Mogul sits in a sort of saucer of red sandstone supported by a slender pillar, so that the saucer appears almost to be suspended from heaven.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p141"
+  },
+  "mandala-chaos-frontispiece-cinquecento-1590": {
+   "text": "in the center is one little magic circle which is the Happy Island… here the flame and the tear are held together exactly as in the Lamaistic mandala, the union of the opposites in the center.",
+   "basis": "oracle: corpus words for sem-visions pdf pundefined"
+  },
+  "mandala-chichen-itza-warrior-temple-yucatan-11c": {
+   "text": "It was a mandala based on the principle of eight, a circle inside of green and turquoise-blue fields.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p141"
+  },
+  "mandala-divan-i-khas-akbar-fatehpur-sikri-1580": {
+   "text": "Akbar used to sit in a sort of saucer in the middle of it, while learned men from all parts of the world told him about all sorts of religions and philosophies and discussed them with him.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p140"
+  },
+  "mandala-square-inch-field-golden-flower-china-8c": {
+   "text": "by meditation on the mandala all the constituents of the subtle body are withdrawn from the outside and are concentrated in the innermost man, where they build up the imperishable body.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p142"
+  },
+  "medicine-man-dismembered-four-directions-north-america": {
+   "locator": "13 March 1935 (pdf p477)",
+   "basis": "oracle: verbatim at sem-zarathustra pdf p477"
+  },
+  "mercurius-boy-charioteer-faust-1832": {
+   "text": "the Boy Charioteer, a Mercurius juvenis, on the one hand hermaphrodite like his preform, the Devil, a kyllenios, and on the other an analogy to Christ and the Holy Spirit; at the same time he brings the wild host (Wotan!).",
+   "basis": "oracle: corpus words for cw18 pdf p694"
+  },
+  "mercurius-monocolus-albertus-magnus-13c": {
+   "locator": "¶714 (pdf p376)",
+   "basis": "oracle: verbatim at cw14 pdf p376"
+  },
+  "monster-vidarr-fenriswolf-gosforth-cross": {
+   "locator": "¶539 (pdf p386)",
+   "basis": "oracle: verbatim at cw05 pdf p386"
+  },
+  "moor-beheaded-chymical-wedding-1616": {
+   "locator": "¶730 (pdf p384)",
+   "basis": "oracle: verbatim at cw14 pdf p384"
+  },
+  "mother-of-gods-isis-dew-papyrus-4c": {
+   "text": "“I am the mother of the gods, named heaven; I am Osiris, named water; I am Isis, named dew; . . . I am Eidolos, likened to the true spirits.”",
+   "basis": "oracle: corpus words for cw14 pdf p384"
+  },
+  "mountain-castle-cliff-patient-dream-jung-zurich-1900s": {
+   "locator": "¶281 (pdf p160)",
+   "basis": "oracle: verbatim at cw07 pdf p160"
+  },
+  "nietzsche-god-professor-letter-turin-1889": {
+   "text": "\"Alas, I would have much preferred to be a professor in Basel rather than God, but I did not dare to push my private egotism so far as to omit the creation of the world on account of that professorship.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p1351"
+  },
+  "night-sea-journey-hiawatha-mishe-nahma": {
+   "locator": "¶538 (pdf p385)",
+   "basis": "oracle: verbatim at cw05 pdf p385"
+  },
+  "old-man-river-of-souls-vision-zurich-1931": {
+   "locator": "25 Mar 1931 (pdf p385)",
+   "basis": "oracle: verbatim at sem-visions pdf p385"
+  },
+  "one-soul-all-individuals-plotinus-270": {
+   "text": "whether all individuals are merely one soul, and he believes he has good grounds for affirming this question.",
+   "basis": "oracle: corpus words for cw14 pdf p403"
+  },
+  "ophite-diagram-circles-leviathan-celsus-origen-180": {
+   "text": "The outermost circle was labelled “Leviathan” and the innermost “Behemoth,” the two apparently coinciding, for “Leviathan” was the name for the centre as well as the circumference.",
+   "basis": "oracle: corpus words for cw14 pdf p303"
+  },
+  "orphic-night-silver-egg-5c-bce": {
+   "text": "The product of this union was the silver egg, which in the Orphic view contained heaven above and earth below, and was therefore a cosmos in itself, i.e., the Microcosm.",
+   "basis": "oracle: corpus words for cw14 pdf p386"
+  },
+  "osiris-four-sons-horus-lotus": {
+   "locator": "fig. 102, ¶314 (pdf p223)",
+   "basis": "oracle: verbatim at cw12 pdf p223"
+  },
+  "papyrus-magicae-hermes-round-square-4c": {
+   "locator": "¶172 (pdf p156)",
+   "basis": "oracle: verbatim at cw12 pdf p156"
+  },
+  "persona-mask-becomes-real-simulation-i-g-zurich-1903": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw01 pdf p185"
+  },
+  "petrus-bonus-pretiosa-margarita-1330-39": {
+   "locator": "¶462 (pdf p366)",
+   "basis": "oracle: verbatim at cw12 pdf p366"
+  },
+  "phallus-unternahrer-devils-communion": {
+   "locator": "¶584 (pdf p409)",
+   "basis": "oracle: verbatim at cw05 pdf p409"
+  },
+  "philosophers-egg-prajapati-hiranyagarbha": {
+   "locator": "¶590 (pdf p412)",
+   "basis": "oracle: verbatim at cw05 pdf p412"
+  },
+  "quaternity-gitche-manito-egg-hieroglyph": {
+   "locator": "¶550 (pdf p391)",
+   "basis": "oracle: verbatim at cw05 pdf p391"
+  },
+  "quaternity-tractatus-aureus-secret-square-1610": {
+   "locator": "pdf p649",
+   "basis": "oracle: verbatim at cw12 pdf p649"
+  },
+  "queen-of-south-john-bosom-honorius-autun-12c": {
+   "text": "For while the Queen of the South gave her body and her blood to the disciples, John lay in the bosom of Jesus and drank from that fount of wisdom; which secret of the Word he afterward committed to the world; the Word, namely, which is hidden in the Father, because in the bosom of Jesus are hidden all the treasures of wisdom and knowledge.",
+   "basis": "oracle: corpus words for cw14 pdf p287"
+  },
+  "ragnarok-prophecy-voluspa-iceland-13c": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw10 pdf p183"
+  },
+  "raziel-book-of-wisdom-zohar-13c": {
+   "locator": "¶572 (pdf p302)",
+   "basis": "oracle: verbatim at cw14 pdf p302"
+  },
+  "resurrection-lucius-gates-death-apuleius-2c": {
+   "locator": "ch. VIII n. 35 (pdf p744)",
+   "basis": "oracle: verbatim at cw05 pdf p744"
+  },
+  "rex-marinus-splendor-solis-1582": {
+   "locator": "¶434 (pdf p326)",
+   "basis": "oracle: verbatim at cw12 pdf p326"
+  },
+  "sacrifice-huitzilopochtli-eucharist-aztec": {
+   "locator": "¶526 (pdf p379)",
+   "basis": "oracle: verbatim at cw05 pdf p379"
+  },
+  "senex-figure-grandfather-control-spirit-zurich-1899": {
+   "locator": "¶55 (pdf p39) — the guide",
+   "basis": "oracle: verbatim at cw01 pdf p39"
+  },
+  "senex-figure-pauli-seven-diamonds-dream-zurich-1936": {
+   "text": "the step from the personified Mary to the 7 of diamonds went much further than Catholicism (which fits in beautifully with your interpretation of \"expeJling\" as excommunication).",
+   "basis": "oracle: corpus words for letters-pauli pdf p77"
+  },
+  "serpent-agathodaimon-antique-gem": {
+   "locator": "¶593 (pdf p413)",
+   "basis": "oracle: verbatim at cw05 pdf p413"
+  },
+  "serpent-black-snake-face-dream-boy-8-zurich-1909": {
+   "locator": "¶732 (pdf p290)",
+   "basis": "oracle: verbatim at cw04 pdf p290"
+  },
+  "serpent-chnuphis-gnostic-gems-2c": {
+   "locator": "¶469 (pdf p370)",
+   "basis": "oracle: verbatim at cw12 pdf p370"
+  },
+  "serpent-granite-money-box-ptolemais": {
+   "locator": "¶578 (pdf p406)",
+   "basis": "oracle: verbatim at cw05 pdf p406"
+  },
+  "serpent-ra-isis-true-name-egypt": {
+   "locator": "¶455 (pdf p344)",
+   "basis": "oracle: verbatim at cw05 pdf p344"
+  },
+  "seven-images-lully-norton-ordinall-1477": {
+   "text": "Three were good Silver, in shape like Ladies bright, Everie each of Foure were Gold and like a Knight: In borders of their Clothing Letters did appeare, Signifying in Sentence as it sheweth here.",
+   "basis": "oracle: corpus words for cw14 pdf p297"
+  },
+  "simia-dei-monkey-demon-14c": {
+   "locator": "fig. 67, ¶181 (pdf p164)",
+   "basis": "oracle: verbatim at cw12 pdf p164"
+  },
+  "socrates-silenus-statues-gods-within-4c-bce": {
+   "locator": "¶564 (pdf p297)",
+   "basis": "oracle: verbatim at cw14 pdf p297"
+  },
+  "sophia-wheel-within-wheel-pordage-1699": {
+   "text": "She is my divine, eternal, essential self-sufficiency. She is my wheel within my wheel,” etc.",
+   "basis": "oracle: corpus words for cw16 pdf p431"
+  },
+  "soul-bird-kaineus-lapiths-greece": {
+   "locator": "¶441 (pdf p338)",
+   "basis": "oracle: verbatim at cw05 pdf p338"
+  },
+  "spider-black-spider-gotthelf-switzerland-1842": {
+   "locator": "19 May 1937 (pdf p1120)",
+   "basis": "oracle: verbatim at sem-zarathustra pdf p1120"
+  },
+  "st-sebastian-arrows-pillar-rome-3c": {
+   "text": "He is now a sort of St. Sebastian at the pillar, a complete victim of certain enemies who are shooting arrows at him.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p1221"
+  },
+  "statue-barbarian-slaves-boboli-gardens-florence-2c": {
+   "text": "the stone speaks, it is really the stone;",
+   "basis": "oracle: corpus words for sem-visions pdf p516"
+  },
+  "statue-of-hermes-senior-ibn-umail-10c": {
+   "locator": "¶560 (pdf p297)",
+   "basis": "oracle: verbatim at cw14 pdf p297"
+  },
+  "stone-twelve-facet-crystal-cairo-700bce": {
+   "text": "In the Musee Egyptien at Cairo there is a beautiful blue crystal-well, it is made of glass-that represents the number twelve, and each surface consists of a triangle which is another mana number; so the whole thing is mana and probably used for magic purposes.",
+   "basis": "oracle: corpus words for sem-visions pdf p375"
+  },
+  "sun-bark-pharaoh-night-journey-egypt": {
+   "text": "The Pharaoh climbs into the sun bark and travels through the night and conquers the serpent, and then rises again with the god, and is riding over the heavens for all eternity.",
+   "basis": "oracle: corpus words for sem-kundalini pdf p81"
+  },
+  "sun-ra-sky-mother-hymn-egypt": {
+   "locator": "¶408 (pdf p321)",
+   "basis": "oracle: verbatim at cw05 pdf p321"
+  },
+  "sword-fiery-egg-ostanes-tractatus-micreris-12c": {
+   "locator": "¶361 (pdf p195)",
+   "basis": "oracle: verbatim at cw11 pdf p195"
+  },
+  "tarantism-tarantula-dance-taranto-16c": {
+   "primary": 1,
+   "basis": "oracle: verbatim at sem-zarathustra pdf p1145"
+  },
+  "telesphorus-asclepius-familiaris-roman-gaul": {
+   "locator": "fig. 77, ¶203 (pdf p177)",
+   "basis": "oracle: verbatim at cw12 pdf p177"
+  },
+  "thoth-cynocephalus-amenherkhopshef-1200bc": {
+   "locator": "fig. 68, ¶175 (pdf p160)",
+   "basis": "oracle: verbatim at cw12 pdf p160"
+  },
+  "tractatus-aristotelis-serpent-hypostatica-16c": {
+   "locator": "¶355 (pdf p265)",
+   "basis": "oracle: verbatim at cw12 pdf p265"
+  },
+  "treasure-head-body-warning-hypnerotomachia-1499": {
+   "locator": "¶1712 (pdf p703)",
+   "basis": "oracle: verbatim at cw18 pdf p703"
+  },
+  "tree-christmas-lights-sun-magic-1931": {
+   "text": "On 2 5 December we put lights on our Christmas tree in order that the sun may rise; and we have … an evergreen tree so that it will bring forth fruit; it is a magic ceremonial to produce or increase the sun.",
+   "basis": "oracle: corpus words for sem-visions pdf p288"
+  },
+  "tree-haoma-vouru-kasha-persia": {
+   "primary": 1,
+   "basis": "oracle: verbatim at cw05 pdf p716"
+  },
+  "turba-adam-four-elements-12c": {
+   "text": "“For out of the four elements were created our Father Adam and his children,” says the Turba.",
+   "basis": "oracle: corpus words for cw14 pdf p292"
+  },
+  "ufo-eye-blue-white-machine-dream-1957": {
+   "locator": "¶627 (pdf p302)",
+   "basis": "oracle: verbatim at cw10 pdf p302"
+  },
+  "vessel-cista-mystica-ephesus-coin": {
+   "locator": "¶530 (pdf p381)",
+   "basis": "oracle: verbatim at cw05 pdf p381"
+  },
+  "vessel-tavistock-patient-bowl-breaking-lines-london-1935": {
+   "text": "The motif of the vessel is itself an archetypal image which has a certain purpose, and I can prove from this picture what the purpose is.",
+   "basis": "oracle: corpus words for cw18 pdf p177"
+  },
+  "visio-arislei-glass-house-12c": {
+   "locator": "¶438 (pdf p333)",
+   "basis": "oracle: verbatim at cw12 pdf p333"
+  },
+  "water-benedictio-fontis-holy-saturday-roman-rite-8c": {
+   "locator": "¶161 (pdf p90)",
+   "basis": "oracle: verbatim at cw11 pdf p90"
+  },
+  "water-fiancee-ice-crack-fantasy-zurich-1900s": {
+   "locator": "¶343 (pdf p191)",
+   "basis": "oracle: verbatim at cw07 pdf p191"
+  },
+  "water-fire-union-indian-painting": {
+   "locator": "fig. 72, ¶186 (pdf p168)",
+   "basis": "oracle: verbatim at cw12 pdf p168"
+  },
+  "wind-wenonah-west-wind-longfellow": {
+   "locator": "¶485 (pdf p361)",
+   "basis": "oracle: verbatim at cw05 pdf p361"
+  },
+  "world-wheel-great-wheel-clutching-hands-vision-zurich-1932": {
+   "text": "The wheel of fortune is the wheel of life, and it is also the sun's course, the rising, the culmination, and the downfall-the sunset and midnight, the lowest point.",
+   "basis": "oracle: corpus words for sem-visions pdf p920"
+  },
+  "world-wheel-manichaean-twelve-urceos-4c": {
+   "locator": "Part II ch. 5, n. 110 (pdf p688)",
+   "basis": "oracle: verbatim at cw12 pdf p688"
+  },
+  "wotan-langmann-gustloff-funeral-sermon-germany-1936": {
+   "text": "He sped the deceased on his journey to Hades, and directed him to Valhalla, to the home of Siegfried and Baldur, the heroes who “nourish the life of the German people by the sacrifice of their blood”—like Christ among others.",
+   "basis": "oracle: corpus words for cw10 pdf p619"
+  },
+  "wotan-thawing-wind-wanderer-omen-germanic": {
+   "text": "There are legends of his having been seen as a wanderer, and soon after a war would break out. When Wotan appears, it is like the thawing wind in Spring which melts the ice and snow, as Nietzsche says here very clearly.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p1555"
+  },
+  "zwiefalten-breviary-lamb-mandala-12c": {
+   "locator": "fig. 62, ¶169 (pdf p152)",
+   "basis": "oracle: verbatim at cw12 pdf p152"
+  },
+  "family:soma": {
+   "cite": "sem-dream-analysis Dream Analysis (null) pdf p422",
+   "basis": "oracle: verbatim at sem-dream-analysis pdf p422"
+  },
+  "family:uebermensch": {
+   "cite": "cw09i The Archetypes and the Collective Unconscious (CW9i) ¶190",
+   "basis": "oracle: verbatim at cw09i pdf p115 (¶190 opens on p115)"
+  }
+ }
 }
