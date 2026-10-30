@@ -21,6 +21,8 @@ const PATHS = {
   aion: `<circle cx="8" cy="8" r="5.6" ${S}/><path d="M8 2.4v1.6M8 12v1.6M2.4 8H4M12 8h1.6" ${S}/><path d="M8 8l2.6-2.6" ${S}/>`,
   // the Red Book: a bound book
   redbook: `<path d="M3 3.2c1.8-.6 3.6-.4 5 .8 1.4-1.2 3.2-1.4 5-.8v9.6c-1.8-.6-3.6-.4-5 .8-1.4-1.2-3.2-1.4-5-.8z" ${S}/><path d="M8 4v9.6" ${S}/>`,
+  // texts: an open page and its lines
+  texts: `<path d="M3.2 2.8h6.4l3.2 3.2v7.2H3.2z" ${S}/><path d="M9.4 2.9v3.3h3.3M5.2 8.2h5.6M5.2 10.4h5.6" ${S}/>`,
   // astrology: a planet on its orbit round the sun
   astrology: `<circle cx="8" cy="8" r="1.8" ${S}/><ellipse cx="8" cy="8" rx="6" ry="3.4" transform="rotate(-24 8 8)" ${S}/><circle cx="13" cy="5.3" r="1" ${S}/>`,
   // dreams: the crescent

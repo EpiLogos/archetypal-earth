@@ -31,6 +31,7 @@ One globe, one centre, several lenses. The menu at the top left switches between
 | **Alchemy** | The opus from nigredo to rubedo, its operations and matter. |
 | **Aion** | Jung's history of the aeons, Pisces to Aquarius. |
 | **Red Book** | The book the rest of the field grew from. |
+| **Texts** | Read through any one of the works the field draws on, page by page. |
 | **Astrology** | Your birth sky beside Jung's, read through the corpus. |
 | **Dreams** | Keep your dreams and amplify their images. |
 | **Symbols** | Take one symbol through its history and doctrine. |

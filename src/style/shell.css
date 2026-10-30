@@ -487,3 +487,16 @@ body.landing-on .time { opacity: 0.35; }
 .you-forget { justify-self: end; width: 32px; height: 28px; font: 16px/1 var(--sans); color: var(--ink-3); border-radius: 6px; transition: color 0.3s; }
 .you-forget:hover { color: var(--ink); }
 @media (max-width: 760px) { .you-log li { grid-template-columns: 5.4rem minmax(0, 1fr) 36px; } }
+
+/* Texts: a work read through its page walk */
+.tx-kind { margin: 14px 0 4px; font: 500 10.5px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.tx-works { display: grid; gap: 2px; }
+.tx-count { margin: 4px 0 14px; font: 12px var(--sans); color: var(--ink-3); }
+.tx-step { min-height: 3rem; margin: 6px 0 4px; }
+.tx-chapter { margin: 0 0 6px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
+.tx-occ { display: inline-block; margin: 0 0 10px; text-align: left; font: 13px var(--sans); }
+.tx-page { margin-top: 8px; }
+.tx-contents { margin: 0; padding: 0; list-style: none; }
+.tx-chap { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 4px 0 4px calc(var(--lvl, 0) * 14px); font: 13px/1.4 var(--sans); color: var(--ink-2); }
+.tx-chap .link-quiet { text-align: left; }
+.tx-chap-n { font: 11px var(--sans); color: var(--ink-3); font-feature-settings: 'tnum'; }

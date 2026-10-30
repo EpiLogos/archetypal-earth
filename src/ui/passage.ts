@@ -11,6 +11,8 @@ import { closeGlyph } from './reveal';
 export interface PassageBridge {
   known(work: string): boolean;
   open(work: string, locator: string): void;
+  /** the passage a cite names, to read where it stands (a text's walk reads its pages in the lens's own sheet); null when the corpus has none */
+  read?(work: string, locator: string): Promise<PassageRef | null>;
 }
 
 export class PassageSheet {
@@ -40,6 +42,7 @@ export class PassageSheet {
     return {
       known: (work) => knownWorks.has(work),
       open: (work, locator) => void this.show(work, locator),
+      read: (work, locator) => resolvePassage(this.index, work, locator),
     };
   }
 

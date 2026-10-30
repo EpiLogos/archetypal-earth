@@ -382,6 +382,7 @@ export class Controller {
     const rig = this.engine.rig;
     rig.dist = rig.targetDist = this.worldDist();
     const parsed = hashToState(location.hash, this.resolver());
+    parsed.state = this.textHandOff(parsed.state);
     if (parsed.birthPrefill) this.birthPrefill = parsed.birthPrefill;
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
@@ -440,6 +441,8 @@ export class Controller {
     }
     this.pendingHash = null;
     const parsed = hashToState(h, this.resolver());
+    const asked = parsed.state;
+    const handed = (parsed.state = this.textHandOff(parsed.state));
     if (parsed.birthPrefill) {
       // the birth leaves the address bar and history at once; the form holds it until it is saved or left
       this.birthPrefill = parsed.birthPrefill;
@@ -449,6 +452,8 @@ export class Controller {
       this.time.scrub(this.m.scale.toU(parsed.year));
     }
     if (!filterEq(parsed.filter, this.filter)) this.applyFilter(parsed.filter);
+    // a Work handed to its own lens takes that lens's address, so the bar says where the reading is
+    if (handed !== asked) history.replaceState(history.state, '', hashWithFilter(parsed.state, this.filter));
     if (!this.whenReady(parsed.state, () => this.apply(parsed.state))) this.apply(parsed.state);
   };
 
@@ -540,6 +545,21 @@ export class Controller {
    * "X as a dynamical system" made Theory links and node clicks unusable.)
    */
   private lensRoute(next: AppState): AppState {
+    return this.textHandOff(next);
+  }
+
+  /**
+   * A Work with a reading lens of its own is read in that lens, not in the generic Texts one: CW9ii in Aion, Liber Novus in
+   * the Red Book. `#/texts/cw09ii` (a link, the picker, a Contents row) lands there. Any other Work stays in Texts.
+   */
+  private textHandOff(next: AppState): AppState {
+    const key = next.lens?.id === 'texts' ? next.lens.path[0] : undefined;
+    const w = key ? this.m.workById.get(this.m.workKey.get(key) ?? key) : undefined;
+    if (w?.lens === 'aion' && this.history) {
+      const reading = this.history.readings.find((r) => r.work === w.id)?.id ?? defaultReadingId(this.history.readings);
+      if (reading) return { view: { kind: 'world' }, deep: false, history: { reading } };
+    }
+    if (w?.lens === 'redbook' && this.redbookData) return { view: { kind: 'world' }, deep: false, redbook: {} };
     return next;
   }
 
