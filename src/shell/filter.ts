@@ -2,6 +2,7 @@
 // (ProjectCentral/docs/MODES-RFC.md §4). Pure: parse, serialise, test an occurrence, and build the engine's mask.
 import type { LocusType, Occurrence } from '../types/field';
 import type { OccurrenceTags } from '../data/model';
+import { ERA_TABLE, ERA_CEIL, ERA_FLOOR } from '../data/eras';
 
 export interface FieldFilter {
   /** Jung volumes the occurrence is cited from (Occurrence.jung[].work) */
@@ -96,15 +97,12 @@ export function filterEq(a: FieldFilter, b: FieldFilter): boolean {
   return filterQuery(a) === filterQuery(b);
 }
 
-/** The era buckets the vault's own instances-by-era map uses; offered as the filter's era choices. */
-export const ERAS: { id: string; label: string; range: [number, number] }[] = [
-  { id: 'bce', label: 'Before the common era', range: [-40000, -1] },
-  { id: 'antiquity', label: '0–499', range: [0, 499] },
-  { id: 'medieval', label: '500–1499', range: [500, 1499] },
-  { id: 'early-modern', label: '1500–1799', range: [1500, 1799] },
-  { id: 'nineteenth', label: '1800–1899', range: [1800, 1899] },
-  { id: 'modern', label: '1900 on', range: [1900, 2100] },
-];
+/** The era chips: the one era table (src/data/eras.ts) the time strip names its eras from, as inclusive whole-year ranges. */
+export const ERAS: { id: string; label: string; range: [number, number] }[] = ERA_TABLE.map((e) => ({
+  id: e.id,
+  label: e.name,
+  range: [Math.max(e.from, ERA_FLOOR), Number.isFinite(e.to) ? e.to - 1 : ERA_CEIL],
+}));
 
 export const KIND_LABELS: Record<LocusType, string> = {
   artifact: 'Artifacts',

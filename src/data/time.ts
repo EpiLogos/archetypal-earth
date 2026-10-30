@@ -1,6 +1,8 @@
 // The non-linear time scale and the visibility curve of the time control.
 // Pure — mirrored in GLSL (src/globe/presences.ts) with identical constants.
 
+import { ERA_TABLE } from './eras';
+
 export interface Era {
   name: string;
   from: number; // year
@@ -55,15 +57,8 @@ export function createTimeScale(yearMin: number, yearMax: number): TimeScale {
     return xs[i - 1] + (xs[i] - xs[i - 1]) * t;
   };
 
-  const eraDefs: [string, number, number][] = [
-    ['Antiquity', -Infinity, 250],
-    ['Late antiquity', 250, 750],
-    ['Middle Ages', 750, 1400],
-    ['Renaissance', 1400, 1700],
-    ['Modern', 1700, Infinity],
-  ];
   const eras: Era[] = [];
-  for (const [name, f, t] of eraDefs) {
+  for (const { name, from: f, to: t } of ERA_TABLE) {
     const from = Math.max(f, lo);
     const to = Math.min(t, hi);
     if (to - from > 1) eras.push({ name, from, to });
