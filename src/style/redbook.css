@@ -25,6 +25,10 @@
 .ws-frame.past { opacity: .72; }
 .ws-frame.current { opacity: 1; transform: scale(1.18); }
 .ws-frame:hover { opacity: 1; }
+/* a folio the field filter leaves out keeps its place on the rail, dimmed and drained of colour */
+.ws-frame.filtered { opacity: .26; filter: grayscale(1); }
+.ws-frame.filtered.current { opacity: .6; }
+.ws-frame.filtered:hover { opacity: .7; }
 .ws-frame:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.6); outline-offset: 4px; }
 .ws-plate { width: 40px; height: 54px; border-radius: 2px; outline: 1px solid rgb(var(--core-rgb) / 0.2); outline-offset: 0; transition: outline-color 0.5s, box-shadow 0.5s; }
 .ws-frame.current .ws-plate { outline-color: rgb(var(--core-rgb) / 0.85); outline-offset: 3px; box-shadow: 0 10px 34px rgb(0 0 0 / 0.55), 0 0 36px rgb(var(--glow-rgb) / 0.4); }

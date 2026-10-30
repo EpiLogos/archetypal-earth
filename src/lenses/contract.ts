@@ -8,7 +8,7 @@
 import { subjectMembers, type Model, type Subject } from '../data/model';
 import { workLens } from '../data/texts';
 import type { PlateSubject } from '../data/plates';
-import { ERAS, type FieldFilter } from '../shell/filter';
+import { ERAS, PERSON_SUBJECTS, SKY_RINGS, type FieldFilter, type PersonSubject, type SkyRing } from '../shell/filter';
 import type { LensId } from '../shell/lens';
 import type { EngagementKind, PracticeStore } from '../practice/store';
 import type { History } from '../types/history';
@@ -33,9 +33,9 @@ export interface LensData {
   symbols?: Pick<Symbols, 'entries'>;
 }
 
-/** The six dimensions of the field filter (`FieldFilter`). */
+/** The dimensions of the field filter (`FieldFilter`): the six of the field, and the two facets of whose and where in the sky. */
 export type FilterDimension = keyof FieldFilter;
-export const DIMENSIONS: readonly FilterDimension[] = ['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics'];
+export const DIMENSIONS: readonly FilterDimension[] = ['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics', 'subjects', 'rings'];
 
 /** A mark a lens puts on the time strip: a band over a span (an epoch) or a tick at a year (an event, a folio). */
 export interface TimeMark {
@@ -44,6 +44,8 @@ export interface TimeMark {
   label: string;
   from: number;
   to: number;
+  /** the occurrence a tick stands for, when it stands for one (a folio): the filter can then say it is out */
+  occ?: number;
 }
 
 /** One stop of a lens's ordered walk: the walk's own record, and the stop's index in it. */
@@ -64,10 +66,19 @@ export interface LensContract {
   id: LensId;
   /** the occurrences the lens stands on (indices into `Model.occ`), placed or not, in index order */
   set: number[];
-  /** how many of the set stand on the Earth: what the count under the filter should say */
+  /** how many of the set stand on the Earth */
   placed: number;
-  /** the filter dimensions that take more than one value inside the set; a dimension that cannot vary there is not offered */
+  /**
+   * What the filter and the strip count over: the set, where the lens has one. Astrology reads the occurrences that hang in
+   * the sky; Dreams and Coincidences match the visitor's own material against the whole field, so they slice all of it.
+   */
+  slice: number[];
+  /** how many of the slice stand on the Earth: what the count under the filter says */
+  slicePlaced: number;
+  /** the filter dimensions that take more than one value inside the slice; a dimension that cannot vary there is not offered */
   dimensions: FilterDimension[];
+  /** the values of the two facets that the slice holds, so only those are offered as pills */
+  facets: { subjects: PersonSubject[]; rings: SkyRing[] };
   /** what the lens writes on the strip; empty where it writes none */
   marks: TimeMark[];
   /** the lens's ordered stops, across its walks, in the walks' own order */
@@ -147,7 +158,29 @@ export function dimensionsOf(m: Model, set: readonly number[]): FilterDimension[
   if (distinct((i) => [m.occ[i].locusType])) out.push('kinds');
   if (distinct((i) => m.tags[i].archetypes)) out.push('archetypes');
   if (distinct((i) => m.tags[i].theoretics)) out.push('theoretics');
+  // the two facets: a value of `none` (no one's experience, no sky place) counts, so a lens holding some of each can slice
+  if (distinct((i) => [m.occ[i].subject])) out.push('subjects');
+  if (distinct((i) => { const r = (m.occ[i].sky ?? []).map((l) => l.ring); return r.length ? r : ['none']; })) out.push('rings');
   return out;
+}
+
+/** The values of the two facets that occur inside a set, in the order the filter names them. */
+export function facetsOf(m: Model, set: readonly number[]): LensContract['facets'] {
+  const subjects = new Set<string>();
+  const rings = new Set<string>();
+  for (const i of set) {
+    subjects.add(m.occ[i].subject);
+    for (const l of m.occ[i].sky ?? []) rings.add(l.ring);
+  }
+  return { subjects: PERSON_SUBJECTS.filter((x) => subjects.has(x)), rings: SKY_RINGS.filter((x) => rings.has(x)) };
+}
+
+/** The occurrences the filter and the strip count over for a lens (see `LensContract.slice`). */
+export function sliceOf(id: LensId, m: Model, set: number[]): number[] {
+  if (set.length) return set;
+  if (id === 'astrology') return m.occ.flatMap((o, i) => ((o.sky?.length ?? 0) > 0 ? [i] : []));
+  if (id === 'dreams' || id === 'coincidences') return m.occ.map((_, i) => i);
+  return set;
 }
 
 function marksOf(id: LensId, m: Model, d: LensData): TimeMark[] {
@@ -163,7 +196,7 @@ function marksOf(id: LensId, m: Model, d: LensData): TimeMark[] {
     const out: TimeMark[] = [];
     for (const s of d.redbook?.stops ?? []) {
       const i = m.occIndex.get(s.id);
-      if (i !== undefined) out.push({ kind: 'tick', id: s.id, label: m.occ[i].label, from: m.occ[i].year, to: m.occ[i].year });
+      if (i !== undefined) out.push({ kind: 'tick', id: s.id, label: m.occ[i].label, from: m.occ[i].year, to: m.occ[i].year, occ: i });
     }
     return out;
   }
@@ -221,12 +254,16 @@ const ENGAGES: Partial<Record<LensId, EngagementKind>> = { dreams: 'dream', symb
 /** The contract of one of the nine lenses. */
 export function lensContract(id: LensId, m: Model, d: LensData = {}): LensContract {
   const set = setOf(id, m, d);
+  const slice = sliceOf(id, m, set);
   const walks = (WALK_KIND[id] ?? []).flatMap((k) => walksOf(m, k));
   return {
     id,
     set,
     placed: set.filter((i) => m.located[i]).length,
-    dimensions: dimensionsOf(m, set),
+    slice,
+    slicePlaced: slice.filter((i) => m.located[i]).length,
+    dimensions: dimensionsOf(m, slice),
+    facets: facetsOf(m, slice),
     marks: marksOf(id, m, d),
     stops: stopsOf(walks),
     plates: platesOf(id, d),
@@ -253,7 +290,10 @@ export function textsContract(m: Model, workKey: string): LensContract | undefin
     id: 'texts',
     set,
     placed: set.filter((i) => m.located[i]).length,
+    slice: set,
+    slicePlaced: set.filter((i) => m.located[i]).length,
     dimensions: dimensionsOf(m, set),
+    facets: facetsOf(m, set),
     marks: [],
     stops: (wl.walk?.stops ?? []).map((_, i) => ({ walk: wl.walk!.id, i, kind: 'text' as const })),
     plates: (wl.walk?.stops ?? []).flatMap((s) => (s.subject?.type === 'occurrence' ? [{ type: 'occurrence' as const, id: s.subject.id }] : [])),

@@ -3,7 +3,8 @@
 import type { ImageRef, Palette } from '../types/field';
 import { clear, el, plate } from './dom';
 
-export interface WalkItem { id: string; image?: ImageRef; label: string; sub?: string; palette?: Palette }
+/** `filtered`: the field filter leaves this one out; it keeps its place on the rail, drawn as filtered. */
+export interface WalkItem { id: string; image?: ImageRef; label: string; sub?: string; palette?: Palette; filtered?: boolean }
 export interface WalkLabels { prev: string; next: string; list: string }
 
 /**
@@ -61,6 +62,8 @@ export class WalkStrip {
     this.index = index;
     this.frames.forEach((f, i) => {
       const on = i === index;
+      // the filter is read on every update, not only when the frames are rebuilt: it changes without the ids changing
+      f.classList.toggle('filtered', !!items[i]?.filtered);
       f.classList.toggle('current', on);
       f.classList.toggle('past', i < index);
       f.tabIndex = on ? 0 : -1;

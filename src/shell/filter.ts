@@ -1,6 +1,7 @@
 // The one filter: slices of the field (a book, a culture, an era, a kind of material) are filters, never modes
 // (ProjectCentral/docs/MODES-RFC.md §4). Pure: parse, serialise, test an occurrence, and build the engine's mask.
-import type { LocusType, Occurrence } from '../types/field';
+import { providerLabels } from '../data/labels';
+import type { LocusType, Occurrence, SkyLocus } from '../types/field';
 import type { OccurrenceTags } from '../data/model';
 import { ERA_TABLE, ERA_CEIL, ERA_FLOOR } from '../data/eras';
 
@@ -15,14 +16,23 @@ export interface FieldFilter {
   archetypes?: string[];
   /** the theoretics whose material the occurrence is — the concept the field reads it under */
   theoretics?: string[];
+  /** whose experience it is: Jung's own dream or vision, or an anonymised patient's (`Occurrence.subject`; `n/a` is no one's) */
+  subjects?: PersonSubject[];
+  /** the ring of the sky an occurrence hangs on (`Occurrence.sky[].ring`) */
+  rings?: SkyRing[];
 }
+
+export type PersonSubject = 'jung' | 'patient-anon';
+export const PERSON_SUBJECTS: readonly PersonSubject[] = ['jung', 'patient-anon'];
+export type SkyRing = SkyLocus['ring'];
+export const SKY_RINGS: readonly SkyRing[] = ['body', 'zodiac', 'rank', 'wheel', 'pole'];
 
 export const NO_FILTER: FieldFilter = {};
 
 const LOCUS: readonly LocusType[] = ['artifact', 'text-passage', 'myth-episode', 'ritual', 'dream', 'vision', 'active-imagination', 'clinical-case', 'historical-event'];
 
 export function isEmpty(f: FieldFilter): boolean {
-  return !f.works?.length && !f.cultures?.length && !f.era && !f.kinds?.length && !f.archetypes?.length && !f.theoretics?.length;
+  return !f.works?.length && !f.cultures?.length && !f.era && !f.kinds?.length && !f.archetypes?.length && !f.theoretics?.length && !f.subjects?.length && !f.rings?.length;
 }
 
 /** Cite key (a Work's id or any alias) to the Work's id: `Model.workKey`. Absent, a key stands for itself. */
@@ -45,6 +55,8 @@ export function passes(o: Occurrence, f: FieldFilter, tags?: OccurrenceTags, fol
   if (f.kinds?.length && !f.kinds.includes(o.locusType)) return false;
   if (f.archetypes?.length && !(tags?.archetypes ?? []).some((id) => f.archetypes!.includes(id))) return false;
   if (f.theoretics?.length && !(tags?.theoretics ?? []).some((id) => f.theoretics!.includes(id))) return false;
+  if (f.subjects?.length && !f.subjects.includes(o.subject as PersonSubject)) return false;
+  if (f.rings?.length && !(o.sky ?? []).some((l) => f.rings!.includes(l.ring))) return false;
   return true;
 }
 
@@ -78,6 +90,13 @@ export function parseFilter(query: string): FieldFilter {
       if (kinds.length) f.kinds = [...new Set(kinds)];
     } else if (key === 'a' && list.length) f.archetypes = [...new Set(list)];
     else if (key === 't' && list.length) f.theoretics = [...new Set(list)];
+    else if (key === 's') {
+      const subjects = list.filter((x): x is PersonSubject => (PERSON_SUBJECTS as readonly string[]).includes(x));
+      if (subjects.length) f.subjects = [...new Set(subjects)];
+    } else if (key === 'r') {
+      const rings = list.filter((x): x is SkyRing => (SKY_RINGS as readonly string[]).includes(x));
+      if (rings.length) f.rings = [...new Set(rings)];
+    }
     else if (key === 'e') {
       const m = /^(-?\d+)\.\.(-?\d+)$/.exec(value);
       if (m) {
@@ -98,6 +117,8 @@ export function filterQuery(f: FieldFilter): string {
   if (f.kinds?.length) parts.push(`k=${f.kinds.join(',')}`);
   if (f.archetypes?.length) parts.push(`a=${f.archetypes.map(encodeURIComponent).join(',')}`);
   if (f.theoretics?.length) parts.push(`t=${f.theoretics.map(encodeURIComponent).join(',')}`);
+  if (f.subjects?.length) parts.push(`s=${f.subjects.join(',')}`);
+  if (f.rings?.length) parts.push(`r=${f.rings.join(',')}`);
   return parts.join('&');
 }
 
@@ -111,6 +132,21 @@ export const ERAS: { id: string; label: string; range: [number, number] }[] = ER
   label: e.name,
   range: [Math.max(e.from, ERA_FLOOR), Number.isFinite(e.to) ? e.to - 1 : ERA_CEIL],
 }));
+
+/** A subject facet's pill and chip: the field's author reads in the provider's words (data/labels), a patient's as it is. */
+export function subjectLabel(x: PersonSubject): string {
+  if (x !== 'jung') return 'A patient’s';
+  const own = providerLabels().subjectOwn;
+  return own.charAt(0).toUpperCase() + own.slice(1);
+}
+
+export const RING_LABELS: Record<SkyRing, string> = {
+  body: 'At a body',
+  zodiac: 'In the zodiac',
+  rank: 'On a rank ring',
+  wheel: 'On a decan wheel',
+  pole: 'At the pole',
+};
 
 export const KIND_LABELS: Record<LocusType, string> = {
   artifact: 'Artifacts',
@@ -137,6 +173,8 @@ export function chips(f: FieldFilter, names: { work(id: string): string; culture
   for (const k of f.kinds ?? []) out.push({ label: KIND_LABELS[k], without: { ...f, kinds: f.kinds!.filter((x) => x !== k) } });
   for (const a of f.archetypes ?? []) out.push({ label: names.archetype(a), without: { ...f, archetypes: f.archetypes!.filter((x) => x !== a) } });
   for (const t of f.theoretics ?? []) out.push({ label: names.theoretic(t), without: { ...f, theoretics: f.theoretics!.filter((x) => x !== t) } });
+  for (const x of f.subjects ?? []) out.push({ label: subjectLabel(x), without: { ...f, subjects: f.subjects!.filter((y) => y !== x) } });
+  for (const x of f.rings ?? []) out.push({ label: RING_LABELS[x], without: { ...f, rings: f.rings!.filter((y) => y !== x) } });
   return out.map((c) => ({ ...c, without: tidy(c.without) }));
 }
 
@@ -148,5 +186,7 @@ function tidy(f: FieldFilter): FieldFilter {
   if (f.kinds?.length) out.kinds = f.kinds;
   if (f.archetypes?.length) out.archetypes = f.archetypes;
   if (f.theoretics?.length) out.theoretics = f.theoretics;
+  if (f.subjects?.length) out.subjects = f.subjects;
+  if (f.rings?.length) out.rings = f.rings;
   return out;
 }

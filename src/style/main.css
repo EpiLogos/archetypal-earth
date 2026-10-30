@@ -385,6 +385,17 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .t-era.is-skip { display: none; }
 .t-tick { position: absolute; top: 19px; width: 1px; height: 9px; background: rgb(var(--core-rgb) / 0.32); }
 .t-band { position: absolute; top: 21px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.55)); pointer-events: none; opacity: 0; }
+/* the marks a lens puts on the strip: epochs as bands, events and folios as ticks (the cursor's own trail is .t-band) */
+.t-marks { position: absolute; inset: 0; pointer-events: none; }
+.t-mark { position: absolute; display: block; background: rgb(var(--core-rgb) / 0.55); }
+.t-mark[data-kind='band'] { top: 26px; height: 3px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.3); box-shadow: 1px 0 0 var(--bg, #000); }
+.t-mark[data-kind='band']:nth-child(even) { background: rgb(var(--core-rgb) / 0.5); }
+.t-mark[data-kind='tick'] { top: 16px; width: 1px; height: 14px; margin-left: -0.5px; }
+.t-mark.out { opacity: 0.22; }
+.t-axis { position: absolute; left: 0; bottom: -2px; width: 96px; text-align: right; font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink-3); opacity: 0.8; padding: 2px 0; }
+.t-axis:hover, .t-axis[aria-pressed='true'] { color: var(--ink); opacity: 1; }
+.t-axis[aria-pressed='true'] { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(var(--core-rgb) / 0.6); }
+.time.is-axis .t-handle, .time.is-axis .t-band { display: none; }
 .t-handle { position: absolute; top: 23px; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--core); box-shadow: 0 0 0 5px rgb(var(--core-rgb) / 0.14), 0 0 22px 3px rgb(var(--core-rgb) / 0.75); pointer-events: none; opacity: 0; transition: box-shadow 0.3s; }
 .t-track.dragging .t-handle { box-shadow: 0 0 0 8px rgb(var(--core-rgb) / 0.18), 0 0 28px 5px rgb(var(--core-rgb) / 0.9); }
 .t-track:hover .t-line { background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.8) 5%, rgb(var(--core-rgb) / 0.8) 95%, transparent); }
@@ -450,6 +461,8 @@ body.deep-open .time { left: 27%; width: min(560px, 46vw); }
   .st-plate { width: 46px; height: 62px; }
 
   .time { grid-template-columns: 62px 1fr 26px; gap: 10px; bottom: 10px; }
+  /* the cite-year axis is a strip toggle for a desk; a phone's strip keeps its 44px play and readout targets clear */
+  .t-axis { display: none; }
   .t-readout { font-size: 9.5px; letter-spacing: 0.08em; }
   .time.is-cursor .t-readout { font-size: 12px; }
   .credit { display: none; }

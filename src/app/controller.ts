@@ -20,7 +20,9 @@ import { dismissal, type DismissFacts } from '../shell/dismiss';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
 import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
 import { modeOptions, optionAction } from '../ui/mode-options';
-import { filterEq, isEmpty, maskOf, passes, type FieldFilter } from '../shell/filter';
+import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
+import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
+import { sliceCount, sliceMask } from '../shell/slice';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
@@ -252,7 +254,8 @@ export class Controller {
       onLens: (id) => this.openLens(id),
       onSearch: (anchor) => this.search.open(anchor),
       onFilter: (f) => this.setFilter(f),
-      countFor: (f) => m.occ.reduce((n, o, i) => n + (passes(o, f, m.tags[i], m.workKey) ? 1 : 0), 0),
+      // placed and in the lens's slice: the number of presences the globe can show for this lens under this filter
+      countFor: (f) => sliceCount(m, this.contract(), f),
       works: [...workNames].map(([id, w]) => ({ id, name: w.name, aliases: w.aliases })).sort((a, b) => a.name.localeCompare(b.name)),
       cultures: m.field.cultures.filter((c) => c.occurrenceCount > 0).map((c) => ({ id: c.id, name: c.name })).sort((a, b) => a.name.localeCompare(b.name)),
       archetypes: m.field.archetypes.map((a) => ({ id: a.id, name: a.name })).sort((a, b) => a.name.localeCompare(b.name)),
@@ -1056,10 +1059,68 @@ export class Controller {
     this.syncHash(s, true);
   }
 
+  /** The lens's data files the slice needs, as they have arrived (history and the Red Book are here from the start). */
+  private lensData: LensData = {};
+  private contracts = new Map<string, LensContract>();
+  private lensDataAsked = new Set<string>();
+
+  /**
+   * The contract of the lens that stands: its slice, the filter dimensions that vary inside it and its marks (S2). The data a
+   * lens reads from its own file is asked for when the lens is entered, and the contract is drawn again when it arrives.
+   */
+  private contract(): LensContract {
+    const s = this.state;
+    const id = lensOf(s);
+    const key = id === 'texts' ? `texts:${s.lens?.path[0] ?? ''}` : id;
+    const ready = `${this.lensData.dynamics ? 'd' : ''}${this.lensData.alchemy ? 'a' : ''}${this.lensData.symbols ? 's' : ''}`;
+    const k = `${key}|${ready}`;
+    let c = this.contracts.get(k);
+    if (!c) {
+      const data: LensData = { ...this.lensData, history: this.history, redbook: this.redbookData };
+      c = (id === 'texts' && s.lens?.path[0] ? textsContract(this.m, s.lens.path[0]) : undefined) ?? lensContract(id === 'texts' ? 'field' : id, this.m, data);
+      this.contracts.set(k, c);
+    }
+    return c;
+  }
+
+  /** Ask for the data file the standing lens's set is read from (once), and re-read the slice when it lands. */
+  private askLensData(id: LensId) {
+    const want: Partial<Record<LensId, { key: 'dynamics' | 'alchemy' | 'symbols'; load: () => Promise<unknown> }>> = {
+      theory: { key: 'dynamics', load: () => loadLensData('dynamics') },
+      alchemy: { key: 'alchemy', load: () => loadLensData('alchemy') },
+      symbols: { key: 'symbols', load: () => loadLensData('symbols') },
+    };
+    const w = want[id];
+    if (!w || this.lensDataAsked.has(w.key)) return;
+    this.lensDataAsked.add(w.key);
+    w.load().then((d) => {
+      (this.lensData as Record<string, unknown>)[w.key] = d;
+      this.syncSlice();
+    }).catch(() => { /* a lens whose file is absent keeps the slice it has: the whole field's dimensions are not guessed */ });
+  }
+
+  /** The filter's offer, its count and the strip's density follow the lens that stands (S2, S3, S5). */
+  private syncSlice() {
+    const id = lensOf(this.state);
+    this.askLensData(id);
+    const c = this.contract();
+    const text = id === 'texts' ? (this.m.workById.get(this.m.workKey.get(this.state.lens?.path[0] ?? '') ?? this.state.lens?.path[0] ?? '')?.title ?? 'this text') : id === 'redbook' ? 'the Red Book' : lensDef(id).label;
+    this.shell.setFilterScope({ label: text, whole: c.slice.length === this.m.occ.length, dimensions: c.dimensions, facets: c.facets });
+    this.timeControl.setSlice(sliceMask(this.m, c, this.filterMask));
+    // what the lens writes on the strip: Aion's epochs and events of the standing reading, the Red Book's folios (S6)
+    const mask = this.filterMask;
+    const reading = this.state.history?.reading;
+    this.timeControl.setMarks(id === 'aion' && reading
+      ? c.marks.filter((k) => k.id.startsWith(`${reading}/`))
+      : id === 'redbook' ? c.marks.map((k) => ({ ...k, out: !!mask && k.occ !== undefined && mask[k.occ] === 0 })) : []);
+    this.redbook?.setFilter((i) => !mask || mask[i] > 0);
+  }
+
   private applyFilter(f: FieldFilter) {
     this.filter = f;
     this.filterMask = maskOf(this.m.occ, f, this.m.tags, this.m.workKey);
     this.engine.setFilterMask(this.filterMask);
+    this.syncSlice();
     this.shell.setFilter(f);
     this.setCache.key = '';
     document.body.classList.toggle('filtered', !isEmpty(f));
@@ -1274,6 +1335,7 @@ export class Controller {
     this.pendingLanding = null;
     this.readingAwaitsLanding = false;
     this.state = next;
+    this.syncSlice();
     this.syncChronology(next);
     const v = next.view;
     const pv = prev.view;

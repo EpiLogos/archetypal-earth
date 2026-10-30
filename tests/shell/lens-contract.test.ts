@@ -57,8 +57,10 @@ describe('the lens contract', () => {
 
   it('offers a filter dimension only where it varies inside the set (the Red Book spans one era)', () => {
     expect(lensContract('redbook', m, data).dimensions).not.toContain('era');
-    expect(lensContract('field', m, data).dimensions).toEqual(['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics']);
-    expect(lensContract('astrology', m, data).dimensions).toEqual([]);
+    expect(lensContract('field', m, data).dimensions).toEqual(['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics', 'subjects', 'rings']);
+    // Astrology has no set of its own; its slice is the occurrences that hang in the sky, so it can offer the sky ring
+    expect(lensContract('astrology', m, data).set).toEqual([]);
+    expect(lensContract('astrology', m, data).dimensions).toContain('rings');
   });
 
   it('puts marks on the strip for Aion (14 epochs as bands, 86 events as ticks) and the Red Book (37 folios), none elsewhere', () => {

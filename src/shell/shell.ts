@@ -3,7 +3,7 @@
 import { el, clear, isNarrow } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
 import { BUILT, LENSES, lensDef, type LensDef, type LensId } from './lens';
-import { chips, ERAS, isEmpty, KIND_LABELS, type FieldFilter } from './filter';
+import { chips, ERAS, isEmpty, KIND_LABELS, RING_LABELS, subjectLabel, type FieldFilter, type PersonSubject, type SkyRing } from './filter';
 import type { LocusType } from '../types/field';
 
 export const REPO_URL = 'https://github.com/EpiLogos/archetypal-earth';
@@ -11,11 +11,23 @@ export const RELEASES_URL = `${REPO_URL}/releases`;
 export const ISSUES_URL = `${REPO_URL}/issues`;
 const SITE = 'An Archetypal Earth';
 
+/** What the filter offers for the lens that stands: the dimensions that vary inside its slice, and the values of the two facets. */
+export interface FilterScope {
+  /** the lens's name, for the count line */
+  label: string;
+  /** true while the whole field is the slice (the Field): the count line then says so */
+  whole: boolean;
+  dimensions: readonly string[];
+  facets: { subjects: readonly PersonSubject[]; rings: readonly SkyRing[] };
+}
+
+const ALL_DIMENSIONS = ['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics', 'subjects', 'rings'];
+
 export interface ShellHooks {
   onLens(id: LensId): void;
   onSearch(anchor?: HTMLElement): void;
   onFilter(next: FieldFilter): void;
-  /** how many occurrences a filter leaves, for the menu's count */
+  /** how many occurrences a filter leaves in the lens's slice and on the Earth, for the menu's count */
   countFor(f: FieldFilter): number;
   /** the Sources a filter can slice by: a Work's id and name, and the other cite keys that fold to it */
   works: { id: string; name: string; aliases?: string[] }[];
@@ -42,6 +54,7 @@ export class Shell {
   private chipRow: HTMLElement;
   private lens: LensId = 'field';
   private filter: FieldFilter = {};
+  private scope: FilterScope = { label: 'the field', whole: true, dimensions: ALL_DIMENSIONS, facets: { subjects: ['jung', 'patient-anon'], rings: ['body', 'zodiac', 'rank', 'wheel', 'pole'] } };
   private context = '';
 
   constructor(parent: HTMLElement, private hooks: ShellHooks) {
@@ -145,6 +158,12 @@ export class Shell {
     this.renderChips();
   }
 
+  /** The filter follows the lens: only the dimensions that vary inside its slice are offered (one a filter already holds stays, so it can be taken off). */
+  setFilterScope(scope: FilterScope) {
+    this.scope = scope;
+    this.renderFilter();
+  }
+
   openMenu() {
     if (!this.menu.hidden) return;
     this.renderFilter();
@@ -215,26 +234,39 @@ export class Shell {
       ]);
     const pill = (text: string, on: boolean, onclick: () => void) => el('button', { type: 'button', class: 'sf-pill', 'aria-pressed': String(on), text, onclick });
     clear(this.filterHost);
-    this.filterHost.append(
-      select('Source', this.hooks.works, f.works, (ids) => ({ ...f, works: ids })),
-      select('Culture', this.hooks.cultures, f.cultures, (ids) => ({ ...f, cultures: ids })),
-      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Era' }), el('div', { class: 'sf-pills' }, ERAS.map((e) => {
+    const shown = (dim: keyof FieldFilter, active: boolean) => this.scope.dimensions.includes(dim) || active;
+    const rows: (HTMLElement | null)[] = [
+      shown('works', !!f.works?.length) ? select('Source', this.hooks.works, f.works, (ids) => ({ ...f, works: ids })) : null,
+      shown('cultures', !!f.cultures?.length) ? select('Culture', this.hooks.cultures, f.cultures, (ids) => ({ ...f, cultures: ids })) : null,
+      shown('era', !!f.era) ? el('div', { class: 'sf-field', 'data-dim': 'era' }, [el('span', { class: 'sf-label', text: 'Era' }), el('div', { class: 'sf-pills' }, ERAS.map((e) => {
         const on = !!f.era && f.era[0] === e.range[0] && f.era[1] === e.range[1];
         return pill(e.label, on, () => { const { era: _e, ...rest } = f; set(on ? rest : { ...f, era: e.range }); });
-      }))]),
-      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Kind' }), el('div', { class: 'sf-pills' }, FILTER_KINDS.map((k) => {
+      }))]) : null,
+      shown('kinds', !!f.kinds?.length) ? el('div', { class: 'sf-field', 'data-dim': 'kinds' }, [el('span', { class: 'sf-label', text: 'Kind' }), el('div', { class: 'sf-pills' }, FILTER_KINDS.map((k) => {
         const on = !!f.kinds?.includes(k);
         return pill(KIND_LABELS[k], on, () => set({ ...f, kinds: on ? f.kinds!.filter((x) => x !== k) : [...(f.kinds ?? []), k] }));
-      }))]),
-      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Archetype' }), el('div', { class: 'sf-pills' }, this.hooks.archetypes.map((a) => {
+      }))]) : null,
+      shown('archetypes', !!f.archetypes?.length) ? el('div', { class: 'sf-field', 'data-dim': 'archetypes' }, [el('span', { class: 'sf-label', text: 'Archetype' }), el('div', { class: 'sf-pills' }, this.hooks.archetypes.map((a) => {
         const on = !!f.archetypes?.includes(a.id);
         return pill(a.name, on, () => set({ ...f, archetypes: on ? f.archetypes!.filter((x) => x !== a.id) : [...(f.archetypes ?? []), a.id] }));
-      }))]),
-      el('div', { class: 'sf-field' }, [el('span', { class: 'sf-label', text: 'Theory' }), el('div', { class: 'sf-pills' }, this.hooks.theoretics.map((t) => {
+      }))]) : null,
+      shown('theoretics', !!f.theoretics?.length) ? el('div', { class: 'sf-field', 'data-dim': 'theoretics' }, [el('span', { class: 'sf-label', text: 'Theory' }), el('div', { class: 'sf-pills' }, this.hooks.theoretics.map((t) => {
         const on = !!f.theoretics?.includes(t.id);
         return pill(t.name, on, () => set({ ...f, theoretics: on ? f.theoretics!.filter((x) => x !== t.id) : [...(f.theoretics ?? []), t.id] }));
-      }))]),
-      el('p', { class: 'sf-count', role: 'status', text: isEmpty(f) ? 'Showing the whole field.' : `${this.hooks.countFor(f).toLocaleString()} instances pass the filter.` }),
+      }))]) : null,
+      shown('subjects', !!f.subjects?.length) ? el('div', { class: 'sf-field', 'data-dim': 'subjects' }, [el('span', { class: 'sf-label', text: 'Whose' }), el('div', { class: 'sf-pills' }, this.scope.facets.subjects.map((x) => {
+        const on = !!f.subjects?.includes(x);
+        return pill(subjectLabel(x), on, () => set({ ...f, subjects: on ? f.subjects!.filter((y) => y !== x) : [...(f.subjects ?? []), x] }));
+      }))]) : null,
+      shown('rings', !!f.rings?.length) ? el('div', { class: 'sf-field', 'data-dim': 'rings' }, [el('span', { class: 'sf-label', text: 'Sky ring' }), el('div', { class: 'sf-pills' }, this.scope.facets.rings.map((x) => {
+        const on = !!f.rings?.includes(x);
+        return pill(RING_LABELS[x], on, () => set({ ...f, rings: on ? f.rings!.filter((y) => y !== x) : [...(f.rings ?? []), x] }));
+      }))]) : null,
+    ];
+    const n = this.hooks.countFor(f).toLocaleString();
+    this.filterHost.append(
+      ...rows.filter((r): r is HTMLElement => !!r),
+      el('p', { class: 'sf-count', role: 'status', text: isEmpty(f) && this.scope.whole ? 'Showing the whole field.' : isEmpty(f) ? `${n} placed in ${this.scope.label}.` : `${n} placed instances pass the filter.` }),
     );
     if (!isEmpty(f)) this.filterHost.append(el('button', { type: 'button', class: 'link-quiet sf-clear', text: 'Clear the filter', onclick: () => set({}) }));
   }

@@ -37,6 +37,8 @@ export class RedBookView {
   private stops: RedBookStop[] = [];
   private current: RedBookStop | undefined;
   private sectionName = new Map<string, string>();
+  /** does the field filter leave this occurrence in? Set by the controller; every folio is in until it is told otherwise */
+  private passing: (occIndex: number) => boolean = () => true;
 
   /**
    * `onStop`: a folio stands (by its stop id); the controller tunes the clock to its year.
@@ -98,6 +100,12 @@ export class RedBookView {
     this.state = undefined;
   }
 
+  /** The field filter changed: a folio it leaves out is drawn as filtered on the rail (it keeps its place, and can still be walked to). */
+  setFilter(passing: (occIndex: number) => boolean) {
+    this.passing = passing;
+    if (!this.root.hidden) this.buildRail();
+  }
+
   /** The aside is out of the keyboard path and the accessibility tree whenever the mode is not showing. */
   private setCardActive(active: boolean) {
     this.card.hidden = !active;
@@ -148,6 +156,7 @@ export class RedBookView {
         image: o ? occurrenceImage(m, o) : undefined,
         label: o?.title ?? stop.id,
         palette: o ? m.famById.get(o.familyId)?.palette : undefined,
+        filtered: i !== undefined && !this.passing(i),
       };
     });
   }

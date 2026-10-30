@@ -34,7 +34,7 @@ async function countOf(browser, kind, id) {
   });
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   const toggles = await page.$$eval('.gvt-kinds .gvt-filter', (els) => els.map((e) => ({ text: e.textContent, pressed: e.getAttribute('aria-pressed') })));
-  ok(JSON.stringify(toggles.map((t) => t.text)) === JSON.stringify(['Occurrences', 'Archetypes', 'Theoretics', 'Families']), `the settings carry one toggle per tier (got ${JSON.stringify(toggles.map((t) => t.text))})`);
+  ok(JSON.stringify(toggles.map((t) => t.text)) === JSON.stringify(['Occurrences', 'Archetypes', 'Theoretics', 'Families', 'Texts', 'People', 'You']), `the settings carry one toggle per tier (got ${JSON.stringify(toggles.map((t) => t.text))})`);
   ok(toggles.every((t) => t.pressed === 'true'), 'every tier is on by default');
   await page.getByRole('button', { name: 'Theoretics', exact: true }).click();
   await page.waitForTimeout(1800);
@@ -87,13 +87,13 @@ async function countOf(browser, kind, id) {
     const model = window.__earth.model;
     const f = ctl.filter;
     const on = new Set();
-    for (const id of f.archetypes ?? []) for (const i of model.archOcc.get(id) ?? []) on.add(i);
+    for (const id of f.archetypes ?? []) for (const i of model.archOcc.get(id) ?? []) if (model.located[i]) on.add(i);
     const text = document.querySelector('.sf-count')?.textContent ?? '';
     const m = text.match(/^([\d,]+)/);
     return { hash: location.hash, archetypes: f.archetypes ?? [], union: on.size, shown: m ? Number(m[1].replace(/,/g, '')) : null, chips: [...document.querySelectorAll('.sh-chip')].map((c) => c.textContent) };
   });
   ok(clickState.archetypes.includes('self'), `the Archetype pill turns the dimension on (${JSON.stringify(clickState.archetypes)})`);
-  ok(clickState.shown === clickState.union, `the count is exactly the union of the archetypes on (${clickState.shown} vs ${clickState.union})`);
+  ok(clickState.shown === clickState.union, `the count is exactly the union of the placed archetypes on (${clickState.shown} vs ${clickState.union})`);
   ok(clickState.chips.some((c) => c.includes('The Self')), `a chip names the archetype (got ${JSON.stringify(clickState.chips)})`);
   ok(clickState.hash.includes('a=') && clickState.hash.includes('self'), `the filter rides in the address (${clickState.hash})`);
   // a filter can also be linked: the same dimension through the hash, deterministic
@@ -120,8 +120,8 @@ async function countOf(browser, kind, id) {
   ok(theo.mask === theo.expected && theo.mask === psychoidCount, `#/?t=psychoid leaves the concept's own presences (mask ${theo.mask} vs model ${theo.expected})`);
   ok(theo.chip.some((c) => c.includes('The Psychoid')), `a chip names the concept (got ${JSON.stringify(theo.chip)})`);
   await page.screenshot({ path: '.cache/screens/filters/02-field-theory.png' });
-  // clearing returns the whole field
-  await page.click('.sh-lens');
+  // clearing returns the whole field (the menu stays open across a hash-only navigation)
+  if (await page.$('#shell-menu[hidden]')) await page.click('.sh-lens');
   await page.waitForSelector('#shell-menu:not([hidden])');
   await page.getByRole('region', { name: 'Filter the field' }).getByRole('button', { name: 'Clear the filter', exact: true }).click();
   await page.waitForTimeout(700);
@@ -129,6 +129,36 @@ async function countOf(browser, kind, id) {
   ok(/whole field/.test(cleared.text) && !cleared.hash.includes('t=') && !cleared.hash.includes('a=') && !cleared.mask, `clearing returns the whole field (${JSON.stringify(cleared)})`);
   ok(total > selfCount && total > psychoidCount && selfCount > 0 && psychoidCount > 0, `the counts are real slices (all ${total}, self ${selfCount}, psychoid ${psychoidCount})`);
   ok(logs.length === 0, `no console errors in the field filter (got ${logs.slice(0, 3).join(' | ')})`);
+  await ctx.close();
+}
+
+// 2b. the filter follows the lens: only the dimensions that vary inside the lens's slice are offered, and the count is the placed
+// presences of that slice (S2, S3, S5)
+{
+  const { ctx, page, logs } = await open(b, { hash: '#/redbook' });
+  await page.waitForTimeout(3000);
+  await page.click('.sh-lens');
+  await page.waitForSelector('#shell-menu:not([hidden])');
+  await page.waitForTimeout(300);
+  const rows = await page.$$eval('.sf-field .sf-label', (els) => els.map((e) => e.textContent));
+  ok(!rows.includes('Era'), `the Red Book offers no Era (its folios are one era): ${JSON.stringify(rows)}`);
+  ok(!rows.includes('Whose') && !rows.includes('Sky ring'), `nor a facet it cannot vary: ${JSON.stringify(rows)}`);
+  const text = await page.$eval('.sf-count', (e) => e.textContent ?? '');
+  const n = Number((text.match(/^([\d,]+)/) ?? [])[1]?.replace(/,/g, ''));
+  ok(n > 0 && n <= 37, `its empty-filter count is its own folios, at most 37 (got "${text}")`);
+  await page.keyboard.press('Escape');
+  // the Field offers the whole set of dimensions, the new facets among them, and a facet filter rides in the address
+  await page.goto(`${URL}#/?s=jung`, { waitUntil: 'load' });
+  await page.waitForTimeout(2500);
+  const jung = await page.evaluate(() => {
+    const { ctl, model } = window.__earth;
+    let on = 0;
+    if (ctl.filterMask) for (let i = 0; i < ctl.filterMask.length; i++) if (ctl.filterMask[i] === 1) on++;
+    return { on, expected: model.occ.filter((o) => o.subject === 'jung').length, chips: [...document.querySelectorAll('.sh-chip')].map((c) => c.textContent) };
+  });
+  ok(jung.on === jung.expected && jung.on === 82, `#/?s=jung leaves Jung's own 82 (got ${jung.on})`);
+  ok(jung.chips.some((c) => /Jung/.test(c)), `a chip names it (got ${JSON.stringify(jung.chips)})`);
+  ok(logs.length === 0, `no console errors in the per-lens filter (got ${logs.slice(0, 3).join(' | ')})`);
   await ctx.close();
 }
 
