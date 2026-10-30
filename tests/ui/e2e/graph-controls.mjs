@@ -285,7 +285,7 @@ async function keysAndExits(browser) {
   await ctx.close();
 
   const pill = await openGraph(browser, { hash: '#/graph/f/serpent' });
-  await pill.page.locator('.mode-switch').click();
+  await pill.page.locator('.view-control [data-view="earth"]').click();
   await pill.page.waitForFunction(() => !document.body.classList.contains('mode-graph'), null, { timeout: 5000 }).catch(() => undefined);
   const e = await pill.page.evaluate(() => location.hash);
   check(e === '#/f/serpent', 'the mode pill takes the focused form to the Earth', e);

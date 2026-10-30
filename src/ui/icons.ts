@@ -10,6 +10,8 @@ const PATHS = {
   // the pane's width: two corners pulling apart, and the same two drawn in
   expand: `<path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9.2 6.8M2.5 13.5l4.3-4.3" ${S}/>`,
   shrink: `<path d="M13 6.5H9.5V3M3 9.5h3.5V13M9.5 6.5L13.8 2.2M6.5 9.5L2.2 13.8" ${S}/>`,
+  // settings: a slider's two stops
+  gear: `<path d="M2.5 5h6.2M11.6 5h1.9M2.5 11h1.9M7.3 11h6.2" ${S}/><circle cx="10.1" cy="5" r="1.4" ${S}/><circle cx="5.8" cy="11" r="1.4" ${S}/>`,
   chevron: `<path d="M4.5 6.2L8 9.7l3.5-3.5" ${S}/>`,
   back: `<path d="M9.8 3.5L5.3 8l4.5 4.5" ${S}/>`,
   next: `<path d="M6.2 3.5L10.7 8l-4.5 4.5" ${S}/>`,

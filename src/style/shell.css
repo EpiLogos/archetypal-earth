@@ -28,7 +28,18 @@
 .sh-chev { display: grid; place-items: center; color: var(--ink-3); transition: transform 0.3s var(--ease); }
 .sh-lens[aria-expanded="true"] .sh-chev { transform: rotate(180deg); }
 .sh-aside { display: flex; align-items: center; }
-.sh-aside .mode-switch { position: relative; top: auto; right: auto; }
+/* the View control: Earth | Graph | Sky and the settings, one pill in the aside beside the lens button */
+.view-control { display: flex; align-items: center; gap: 4px; }
+.vc-segs { display: flex; align-items: center; gap: 2px; height: 32px; padding: 2px; border-radius: 17px; border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.34); backdrop-filter: blur(8px); }
+.vc-seg { display: inline-flex; align-items: center; gap: 6px; height: 26px; min-width: 30px; padding: 0 7px; justify-content: center; border-radius: 14px; color: var(--ink-3); font: 500 11.5px var(--sans); letter-spacing: 0.04em; transition: color 0.3s, background 0.4s; }
+.vc-seg:hover { color: var(--ink-2); }
+.vc-seg.on { color: var(--ink); background: rgb(var(--core-rgb) / 0.13); box-shadow: 0 0 14px rgb(var(--glow-rgb) / 0.18) inset; padding: 0 10px 0 8px; }
+.vc-ico { display: grid; place-items: center; }
+.vc-name { display: none; }
+.vc-seg.on .vc-name { display: inline; }
+.sh-corner .vc-gear[hidden] { display: none; }
+.view-control button:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 2px; }
+body.search-open .view-control, body.deep-open .view-control { opacity: 0; pointer-events: none; }
 .sh-title {
   margin: 12px 0 0 2px; font: 600 clamp(1.35rem, 1.9vw, 1.75rem)/1.12 var(--serif); letter-spacing: -0.004em; color: var(--ink);
   text-shadow: 0 2px 28px rgb(var(--deep-rgb) / 0.9);
@@ -149,9 +160,11 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
   .sh-corner { gap: 2px; }
   .sh-corner .sh-corner-btn { min-width: var(--tap); min-height: var(--tap); }
   .sh-corner .sg-key { display: none; }
-  .sh-aside .mode-switch { height: var(--tap); width: 76px; border-radius: 22px; grid-template-columns: 1fr 1fr; }
-  .sh-aside .mode-switch .ms-thumb { width: 34px; height: 38px; border-radius: 19px; }
-  .sh-aside .mode-switch.is-graph .ms-thumb { transform: translateX(36px); }
+  /* a phone's segments are 44px targets and carry no names; the ⚙ is not drawn (the lens's Options and the graph's Settings stay on screen) */
+  .vc-segs { height: var(--tap); padding: 0; gap: 0; border: 0; box-shadow: inset 0 0 0 1px var(--hair); border-radius: 22px; }
+  .vc-seg, .vc-seg.on { height: var(--tap); min-width: var(--tap); padding: 0; border-radius: 22px; }
+  .vc-seg.on .vc-name { display: none; }
+  .sh-corner .vc-gear { display: none; }
 
   .shell-menu.sheet {
     left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 86vh; border-radius: 20px 20px 0 0; border-bottom: 0;

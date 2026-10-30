@@ -114,7 +114,7 @@ try {
     await page.waitForTimeout(800);
     const m = await page.evaluate(() => {
       const box = (s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom }; };
-      return { dy: box('.dy-switch'), rb: box('.rb-switch'), sky: box('.sky-switch'), aion: box('.aion-switch'), pill: box('.mode-switch'), search: box('#search-btn'), row: box('.mode-row'), overflowX: document.documentElement.scrollWidth - innerWidth };
+      return { dy: box('.dy-switch'), rb: box('.rb-switch'), sky: box('.sky-switch'), aion: box('.aion-switch'), pill: box('.view-control'), search: box('#search-btn'), row: box('.mode-row'), overflowX: document.documentElement.scrollWidth - innerWidth };
     });
     const four = [m.dy, m.rb, m.sky, m.aion];
     const gaps = four.slice(1).map((s, i) => s.l - four[i].r);

@@ -38,7 +38,8 @@ import { TimeControl } from '../ui/time-control';
 import { el, isNarrow, onReadGesture } from '../ui/dom';
 import { eraShort } from '../data/text';
 import type { GraphView, Insets } from '../graph/view';
-import { ModeSwitch } from '../graph/switch';
+import { ViewControl } from '../shell/view-control';
+import { viewOf, viewTarget, type View as ViewName } from '../shell/view';
 import type { AionView } from '../aion/view';
 import { walksOf } from '../aion/walk';
 import type { History } from '../types/history';
@@ -126,7 +127,7 @@ export class Controller {
   private navTok = 0;
   private root: HTMLElement;
   private passages: ReturnType<PassageSheet['bridge']>;
-  private modeSwitch: ModeSwitch;
+  private viewControl: ViewControl;
   /** true while the graph mode (not the globe) is the main view */
   private graphMode = false;
   private pauseTimer = 0;
@@ -271,7 +272,7 @@ export class Controller {
     this.panel.onChange(() => this.syncSheet());
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
-    this.modeSwitch = new ModeSwitch(document.body, () => this.toggleMode());
+    this.viewControl = new ViewControl({ onView: (v) => this.viewTo(v), onSettings: () => this.openSettings() });
 
     const redbook = redbookData;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
@@ -298,10 +299,13 @@ export class Controller {
       setPhase: (p) => {
         document.body.dataset.skyPhase = p;
         document.body.classList.toggle('sky-gazing', p === 'gaze');
+        this.syncView();
       },
     });
-    // the Earth ⇄ Graph pill is the Field's own control: it stands beside the lens button while the Field is the lens
-    this.shell.setAside(this.modeSwitch.root);
+    // the View control (Earth | Graph | Sky) stands beside the lens button while the Field or the sky is the lens; its ⚙ at the corner
+    this.shell.setAside(this.viewControl.root);
+    this.shell.setCornerTool(this.viewControl.gearButton);
+    new MutationObserver(() => this.syncSettings()).observe(this.shell.root, { childList: true, subtree: true });
     window.addEventListener('keydown', this.onKey);
     window.addEventListener('hashchange', this.onHash);
     window.addEventListener('resize', () => { this.syncRig(); this.syncShift(); this.strip.recenter(); this.measureLabel(); this.syncGraphInsets(); });
@@ -1036,7 +1040,8 @@ export class Controller {
     const lens = lensOf(next);
     this.shell.setLens(lens);
     const fieldLens = lens === 'field';
-    this.shell.setAside(fieldLens ? this.modeSwitch.root : null);
+    // the camera's lens: the Field and the live sky (Astrology) are the two the View control reads and moves
+    this.shell.setAside(fieldLens || lens === 'astrology' ? this.viewControl.root : null);
     // every lens fills its own context and controls as it shows; the field's context is its focus (set below)
     this.shell.setControls(null);
     if (fieldLens && next.view.kind === 'world') this.shell.setContext(next.sky ? 'The sky' : '');
@@ -1857,6 +1862,7 @@ export class Controller {
     }
     // the open card's body is what the camera approaches (a no-op where the entry above has already framed it)
     if (on) this.syncApproach();
+    this.syncView();
   }
 
   // ── the birth sky ─────────────────────────────────────────────────────
@@ -2022,6 +2028,53 @@ export class Controller {
   toggleMode() {
     this.navigate(withMode(this.state, !this.state.graph));
   }
+
+  /** Where the camera is, read from the route and the sky camera's phase (`data-sky-phase`): what the View control shows. */
+  viewNow(): ViewName {
+    return viewOf({ graph: !!this.state.graph, sky: !!this.state.sky, phase: document.body.dataset.skyPhase });
+  }
+
+  private syncView() {
+    this.viewControl?.set(this.viewNow(), document.body.dataset.skyPhase);
+    this.syncSettings();
+  }
+
+  /**
+   * A click on the View control: the transition the gesture makes, sent through the controller's own entries. Leaving the sky
+   * is the descent (`navigate` to the Earth reaches `descendFromSky`); entering it is the lift (`syncSky` reaches
+   * `enterSkyView`); the graph is the mode switch every other path uses. The camera is never written from here.
+   */
+  viewTo(to: ViewName) {
+    const move = viewTarget(this.viewNow(), to);
+    switch (move) {
+      case 'none': return;
+      case 'graph': this.navigate(withMode(this.state, true)); return;
+      case 'earth': this.navigate(withMode(this.state, false)); return;
+      case 'descend': this.navigate(WORLD); return;
+      case 'lift': this.navigate(astrologyLive()); return;
+    }
+  }
+
+  /** The ⚙ answers while the graph's settings or a lens's Options stand on screen. */
+  private settingsTarget(): HTMLElement | null {
+    if (this.graphMode) return document.querySelector<HTMLElement>('.gv-tools .gvt-settings');
+    return this.shell.root.querySelector<HTMLElement>('details.mode-options > summary');
+  }
+
+  private syncSettings() {
+    this.viewControl?.setSettings(!!this.settingsTarget());
+  }
+
+  /** Open the settings of what is on screen: the graph's panel, or the lens's Options popover. */
+  openSettings() {
+    const t = this.settingsTarget();
+    if (!t) return;
+    if (t.tagName === 'SUMMARY') {
+      const d = t.parentElement as HTMLDetailsElement;
+      d.open = !d.open;
+      if (d.open) t.focus();
+    } else t.click();
+  }
   private toggleAion() {
     if (!this.history) return;
     const reading = defaultReadingId(this.history.readings);
@@ -2035,7 +2088,7 @@ export class Controller {
 
   private syncMode(graph: boolean, first: boolean, changed: boolean) {
     this.graphMode = graph;
-    this.modeSwitch.set(graph);
+    this.syncView();
     if (!changed) return;
     window.clearTimeout(this.pauseTimer);
     if (graph) {

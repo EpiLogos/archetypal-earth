@@ -45,6 +45,7 @@ export class Shell {
   private lensIcon: HTMLElement;
   private lensName: HTMLElement;
   private aside: HTMLElement;
+  private corner: HTMLElement;
   private title: HTMLElement;
   private controls: HTMLElement;
   private scopeLine: HTMLElement;
@@ -74,6 +75,7 @@ export class Shell {
     const github = el('a', { class: 'sh-corner-btn icon-btn', href: REPO_URL, target: '_blank', rel: 'noopener', 'aria-label': 'The project on GitHub', title: 'GitHub' }, [icon('github', 17)]);
     const search = document.getElementById('search-btn');
     const corner = el('div', { class: 'sh-corner' });
+    this.corner = corner;
     if (search) {
       search.classList.add('sh-corner-btn', 'icon-btn');
       search.addEventListener('click', (e) => this.hooks.onSearch(e.currentTarget as HTMLElement));
@@ -147,6 +149,11 @@ export class Shell {
   }
 
   /** Something that sits beside the lens button (the Field's Earth ⇄ Graph pill). */
+  /** A tool at the corner's near end (before the search): the View control's ⚙ stands here. */
+  setCornerTool(node: Node) {
+    this.corner.prepend(node);
+  }
+
   setAside(node: Node | null) {
     clear(this.aside);
     if (node) this.aside.append(node);
