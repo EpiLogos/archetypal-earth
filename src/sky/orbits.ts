@@ -11,6 +11,7 @@
 // cards of its sephira's number with the Atu the field gives it. A card sways a little about its place and breathes in
 // its radius; the rank ring turns slowly, since nothing on it is a longitude.
 import { el } from '../ui/dom';
+import { creditLine } from '../ui/credit';
 import type { SkyLayer } from './layer';
 import type { BodyKey } from '../types/sky';
 import { decanOf, imageUrl, type CardPlate, type RingCard } from './cards';
@@ -165,9 +166,11 @@ export class PlanetOrbits {
     this.cardsKey = nodes.length ? key : null;
     nodes.forEach((n, i) => {
       const img = el('img', { src: imageUrl(n.plate), alt: '', decoding: 'async', draggable: 'false', loading: 'lazy' });
+      // the card's picture carries its credit like any plate (P12): in the tooltip, and for a reader in the card itself
+      const credit = creditLine(n.plate);
       const btn = el('button', {
-        type: 'button', class: `po-card po-card-${n.ring.ring} po-card-${n.ring.role}`, title: `${n.name} — ${n.hint}`, 'aria-label': `${n.name}: ${n.hint}`, onclick: () => n.open(),
-      }, [img, el('span', { class: 'po-card-name', text: n.name })]) as HTMLButtonElement;
+        type: 'button', class: `po-card po-card-${n.ring.ring} po-card-${n.ring.role}`, title: credit ? `${n.name} — ${n.hint}\n${credit}` : `${n.name} — ${n.hint}`, 'aria-label': `${n.name}: ${n.hint}`, onclick: () => n.open(),
+      }, [img, el('span', { class: 'po-card-name', text: n.name }), credit ? el('span', { class: 'plate-credit sr-only', text: credit }) : null]) as HTMLButtonElement;
       btn.style.setProperty('--ct', holoCssAt(n.ring.tintLon));
       btn.style.setProperty('--ct-soft', holoCssAt(n.ring.tintLon, 0.5));
       btn.style.opacity = '0';
