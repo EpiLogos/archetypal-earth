@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "_note": "Reviewed exceptions to scripts/quote-oracle.mjs --check: a quotation that cannot be verbatim on its cited page and is kept on purpose. Each: dataset, id, reason. Starts empty; it only shrinks.",
+  "exceptions": []
+}

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "_note": "Reviewed corrections to a quotation or the page it cites, applied in scripts/ingest.mjs (as year-overrides.json is). Key: an occurrence id, or family:<id> / archetype:<id> / theoretic:<id> for a definition. A fix: text (the corrected verbatim words), locator and work (the cite the quote stands on, which becomes the primary cite; for a definition, cite: the cite string), basis (the line that proves it: the corpus page the words stand on). The vault is never edited; this layer is the correction.",
+  "fixes": {}
+}

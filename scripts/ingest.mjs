@@ -19,6 +19,7 @@ import { workLoader } from './lib/cite.mjs';
 import { citeQuotes, workTitles as corpusWorkTitles } from './lib/quotes.mjs';
 import { skyAddresses, parseRank, parseCourt } from './lib/sky-address.mjs';
 import { workDates, buildAttestations } from './lib/attest.mjs';
+import { applyQuoteFixes } from './lib/quote-fixes.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -942,6 +943,17 @@ if (ocrResidual.length) {
   ocrResidual.slice(0, 40).forEach((h) => console.error(`  - ${h.where} [${h.kind}] ${h.token} :: ${h.context}`));
   if (process.env.OCR_STRICT === '1') process.exit(3);
 }
+
+// Reviewed quotation corrections (curation/quote-fixes.json), applied last so the OCR pass above cannot touch the corrected
+// words again. The vault is never edited: this layer is the correction. scripts/quote-oracle.mjs proves each fix stands.
+const quoteFixes = readJson(CUR('quote-fixes.json'), { version: 1, fixes: {} });
+const qf = applyQuoteFixes(field, quoteFixes, { workTitle: (w) => workLabel(w).title });
+if (qf.problems.length) {
+  console.error(`QUOTE FIXES INVALID (${qf.problems.length}):`);
+  qf.problems.forEach((e) => console.error('  - ' + e));
+  process.exit(2);
+}
+if (qf.applied.length) console.log(`quote fixes applied: ${qf.applied.length}`);
 
 const errors = validateField(field);
 if (errors.length) {

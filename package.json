@@ -51,7 +51,9 @@
     "walks:check": "node scripts/walks.mjs --check",
     "works": "node scripts/works-registry.mjs",
     "works:check": "node scripts/works-registry.mjs --check",
-    "harvest:check": "node scripts/harvest-check.mjs"
+    "harvest:check": "node scripts/harvest-check.mjs",
+    "quote-oracle": "node scripts/quote-oracle.mjs",
+    "quote-oracle:check": "node scripts/quote-oracle.mjs --check"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19",
