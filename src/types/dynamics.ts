@@ -60,6 +60,8 @@ export interface RouteStop {
   concept?: string;
   name?: string;
   familyIds?: string[];
+  /** why a stop of its own has no concept (the atlas's own note; shown, never hidden) */
+  conceptReason?: string;
   quotes?: RouteQuote[];
   /** the QL framework's own words, from the published site by section (W § I) */
   ql?: { text: string; source: string }[];

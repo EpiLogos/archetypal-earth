@@ -92,6 +92,7 @@
         { "id": "neumann-stages", "name": "Neumann's stages", "figure": "landscape",
           "line": "One round valley splits in two and comes back as one, higher up: Neumann's stages drawn as a landscape that changes shape. The drawing is mine; the stages and the words are his.",
           "familyIds": ["uroboros", "dragon", "battle-with-dragon", "mandala"],
+          "conceptReason": "No concept: a concept in curation/dynamics.json requires a verbatim Van Eenwyk passage, and the Van Eenwyk book names Neumann only on Amor and Psyche and on myth in general (pdf p140-155), never on his stages. The stages stand on Neumann's own words, placed in the corpus.",
           "quotes": [
             { "work": "neumann-origins", "quote": "The uroboros appears as the round \"container,\" i.e., the maternal womb, but also as the union of masculine and feminine opposites, the World Parents joined in perpetual cohabitation." },
             { "work": "neumann-origins", "quote": "The separation of the World Parents is not merely an interruption of the original cohabitation, and a destruction of the perfect cosmic state symbolized by the uroboros." },
@@ -100,6 +101,7 @@
         { "id": "ql-cycle", "name": "The 4+2 and its return", "figure": "torus",
           "line": "The QL framework's own figure: four positions held between two poles, and a return that does not close the circle but opens the next turn. Drawn as a path winding round a torus, never retracing itself.",
           "familyIds": ["mandala", "quaternity", "world-wheel", "circle"],
+          "conceptReason": "No concept: the words of the QL cycle come from the published QL site (W § I, III, VI), not from a corpus work, so no Van Eenwyk passage exists to pin a concept to. The stop stands on the QL formulations with their sections.",
           "ql": [
             { "text": "The psyche invariably produces a field of four distinct explicate positions (4) bounded by a dual vertical axis of descent and return (+2).", "source": "W § I" },
             { "text": "It is the Möbius return that closes the cycle while simultaneously opening the next cycle's ground enriched.", "source": "W § VI" },
