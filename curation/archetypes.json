@@ -261,7 +261,11 @@
       "body": [
         "The Psychopomp leads across: Hermes with the dead, the bird that carries the soul out of the vessel, the unexpected companion on the road. It is a function more than a face, and it keeps the passage between worlds open.",
         "Its colour is dusk, between the instinct and spirit ends."
-      ]
+      ],
+      "definitionQuote": {
+        "work": "cw09ii",
+        "quote": "Thus the animus is a psychopomp, a mediator between the conscious and the unconscious and a personification of the latter."
+      }
     },
     "syzygy": {
       "name": "Syzygy",
@@ -453,7 +457,11 @@
       "body": [
         "Jung writes that the seven refer to the gods of the planets, or the seven metals (CW14 ¶563), and that the antique company of seven gods later took up their abode in the seven metals of alchemy (CW12 ¶468). Of the Book of Enoch he writes that the seven stars were originally the seven great Babylonian gods and had by the time of Enoch's revelation become the seven Archons (CW12 ¶298). The stages of the alchemical work are marked by seven colours associated with the planets (CW14 ¶390).",
         "Jung writes no essay on seven; the passages show where he names it. Pauli, in a letter of 1936, says of the seven in his own early dreams that it is an indication of the birth of the anima; that is Pauli's reading, and the page gives it in his name."
-      ]
+      ],
+      "definitionQuote": {
+        "work": "cw14",
+        "quote": "The “seven” refer to the gods of the planets, or the seven metals."
+      }
     },
     "eight": {
       "name": "Eight",
@@ -475,7 +483,11 @@
       "body": [
         "In Flying Saucers (CW10 ¶692–693, 1958) Jung writes that eight is a double quaternity and, as an individuation symbol in mandalas, plays almost as great a role as the quaternity itself, and that the ogdoad is a totality symbol. In Mysterium Coniunctionis (CW14 ¶8) he writes that the double quaternio or ogdoad stands for a totality, for something that is at once heavenly and earthly, spiritual or corporeal.",
         "Of the series of seven and eight he writes that the seven form an uninterrupted series while the step to the eighth involves hesitation or uncertainty, as with three and four in the Axiom of Maria (CW14 ¶574), and that this may be a reason why the eighth is feminine, the mother of a new series (CW14 ¶579)."
-      ]
+      ],
+      "definitionQuote": {
+        "work": "cw11",
+        "quote": "The “ogdoad,” being a double quaternity, belongs to the symbolism of the mandala."
+      }
     },
     "nine": {
       "name": "Nine",
@@ -497,7 +509,11 @@
       "body": [
         "In his account of Gerhard Dorn in Paracelsus as a Spiritual Phenomenon (CW13, 1942), Jung writes that the One is the midpoint of the circle, the centre of the triad, and also the novenary foetus, that is, as the number nine to the ogdoad or as the quintessence to the quaternity; the note to the sentence cites Dorn's Duellum animi cum corpore.",
         "Elsewhere Jung writes that a company of gods described as nine often proves to be ten or more (CW12 ¶84); that a line of six or nine in the I Ching has an inner tension so great that it changes into its opposite (CW11 ¶996); and, in a note, that Jezoth, that is Yesod, is the ninth and middle Sefira in the lowest triad (CW14 ¶634)."
-      ]
+      ],
+      "definitionQuote": {
+        "work": "vonzfranz-number-time",
+        "quote": "In number symbolism nine stands for the number of the Holy Ghost (V. F. Hopper, Medieval Number Symbolism [New York, 1939], pp. 122-23), and for all particularly potent dynamisms."
+      }
     },
     "ten": {
       "name": "Ten",
@@ -519,7 +535,11 @@
       "body": [
         "In his interpretation of a dream of the numbers eight and eleven (CW10 ¶692, 1958) Jung gives, from the traditional symbolism, ten as the perfect unfolding of unity and the numbers one to ten as the significance of a completed cycle, so that 10 + 1 = 11 denotes the beginning of a new cycle.",
         "Jung names the tetraktys for the number four (CW10 ¶805); von Franz writes that the Pythagorean tetractys is the sum of 1, 2, 3 and 4, which is 10. In Number and Time she also reports Fa-tsang's simile of ten copper coins, in which ten signifies the whole inexhaustible multiplicity of existence."
-      ]
+      ],
+      "definitionQuote": {
+        "work": "cw10",
+        "quote": "Ten is the perfect unfolding of unity, and the numbers one to ten have the significance of a completed cycle."
+      }
     },
     "court-knight": {
       "name": "The Knight",
@@ -540,7 +560,11 @@
           "id": "wise-old-man",
           "basis": "site"
         }
-      ]
+      ],
+      "definitionQuote": {
+        "work": "book-of-thoth",
+        "quote": "The Knights represent the powers of the letter Yodh in the Name."
+      }
     },
     "court-queen": {
       "name": "The Queen",
@@ -561,7 +585,11 @@
           "id": "great-mother",
           "basis": "site"
         }
-      ]
+      ],
+      "definitionQuote": {
+        "work": "book-of-thoth",
+        "quote": "The Queens represent the letter Hé of the Name."
+      }
     },
     "court-prince": {
       "name": "The Prince",
@@ -582,7 +610,11 @@
           "id": "child",
           "basis": "site"
         }
-      ]
+      ],
+      "definitionQuote": {
+        "work": "book-of-thoth",
+        "quote": "The Princes represent the Forces of the letter Vau in the Name."
+      }
     },
     "court-princess": {
       "name": "The Princess",
@@ -603,7 +635,11 @@
           "id": "kore",
           "basis": "site"
         }
-      ]
+      ],
+      "definitionQuote": {
+        "work": "book-of-thoth",
+        "quote": "The Princesses represent the Hé final of the Name."
+      }
     }
   }
 }

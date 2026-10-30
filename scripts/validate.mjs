@@ -20,6 +20,11 @@ export function validateField(f) {
   const noLinks = (where, v) => {
     if (isStr(v) && /\[\[|\]\]/.test(v)) err(`${where}: wikilink syntax left in text: ${v.slice(0, 60)}`);
   };
+  // one voice per body paragraph, so no prose reaches the reading unlabelled; 'atlas' is the atlas's own prose
+  const bodyVoices = (where, n) => {
+    if (!Array.isArray(n.bodyVoices) || n.bodyVoices.length !== n.body.length) return err(`${where}: bodyVoices must hold one voice per body paragraph`);
+    n.bodyVoices.forEach((v, i) => { if (v !== 'atlas') err(`${where}: bodyVoices[${i}] must be 'atlas', not ${v}`); });
+  };
   const palette = (where, p) => {
     if (!p || typeof p !== 'object') return err(`${where}: palette missing`);
     for (const k of ['core', 'glow', 'fog', 'deep']) if (!isStr(p[k]) || !HEX.test(p[k])) err(`${where}: palette.${k} not #rrggbb (${p[k]})`);
@@ -47,7 +52,7 @@ export function validateField(f) {
     palette(w, a.palette);
     if (a.definition && (!isStr(a.definition.text) || !isStr(a.definition.cite))) err(`${w}: definition shape`);
     if (!Array.isArray(a.body)) err(`${w}: body`);
-    else a.body.forEach((p) => noLinks(w, p));
+    else { a.body.forEach((p) => noLinks(w, p)); bodyVoices(w, a); }
     image(w, a.image);
     if (!Array.isArray(a.familyIds)) err(`${w}: familyIds`);
     if (!isNum(a.occurrenceCount)) err(`${w}: occurrenceCount`);
@@ -86,7 +91,7 @@ export function validateField(f) {
     spectrum(w, fam.spectrum);
     palette(w, fam.palette);
     if (!Array.isArray(fam.body)) err(`${w}: body`);
-    else fam.body.forEach((p) => noLinks(w, p));
+    else { fam.body.forEach((p) => noLinks(w, p)); bodyVoices(w, fam); }
     if (fam.definition && (!isStr(fam.definition.text) || !isStr(fam.definition.cite))) err(`${w}: definition shape`);
     image(w, fam.image);
     if (typeof fam.synthesised !== 'boolean') err(`${w}: synthesised`);
@@ -106,7 +111,7 @@ export function validateField(f) {
     palette(w, t.palette);
     if (t.definition && (!isStr(t.definition.text) || !isStr(t.definition.cite))) err(`${w}: definition shape`);
     if (!Array.isArray(t.body)) err(`${w}: body`);
-    else t.body.forEach((p) => noLinks(w, p));
+    else { t.body.forEach((p) => noLinks(w, p)); bodyVoices(w, t); }
     if (!isNum(t.occurrenceCount)) err(`${w}: occurrenceCount`);
     for (const k of ['section', 'lens']) if (t[k] != null && !isStr(t[k])) err(`${w}: ${k}`);
     image(w, t.image);
@@ -182,6 +187,7 @@ export function validateField(f) {
     if (!Array.isArray(o.jung)) err(`${w}: jung`);
     else for (const c of o.jung) for (const k of ['work', 'workTitle', 'year', 'locator']) if (!isStr(c[k])) err(`${w}: cite.${k}`);
     if (!Array.isArray(o.body)) err(`${w}: body`);
+    else bodyVoices(w, o);
     // the extraterrestrial placement: where an occurrence hangs in the sky, independent of its place on the Earth
     if (o.sky != null) {
       if (!Array.isArray(o.sky) || !o.sky.length) err(`${w}: sky must be a non-empty list`);

@@ -20,6 +20,7 @@ import { citeQuotes, workTitles as corpusWorkTitles } from './lib/quotes.mjs';
 import { skyAddresses, parseRank, parseCourt } from './lib/sky-address.mjs';
 import { workDates, buildAttestations } from './lib/attest.mjs';
 import { applyQuoteFixes } from './lib/quote-fixes.mjs';
+import { citeYear } from './lib/cite-year.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -191,6 +192,7 @@ for (const n of archNotes.filter((x) => !x.failed)) {
     occurrenceCount: 0,
   };
   foldArchDefinition(c, a);
+  if (!a.definition) foldArchQuote(c, a);
   archById[a.id] = a;
   archList.push(a);
 }
@@ -213,6 +215,21 @@ function foldFamilyDefinition(over, fam) {
       cite: definitionCite(short, wl, { para: p0.para, pdfPage: recs[0].pdf_page }),
     };
   } else warn(`definitionPick for ${fam.id} not found verbatim in mentions.jsonl; definition omitted`);
+}
+
+// An archetype whose definition no vault mention carries may name a sentence of the corpus instead (`definitionQuote`:
+// { work, quote }): the cite rail places it on its page exactly as a field page's quotations are placed, or it is omitted
+// and said. The text is never typed from memory: a sentence the rail cannot find fails to place.
+function foldArchQuote(c, a) {
+  const q = c.definitionQuote;
+  if (!q) return;
+  const errs = [];
+  const placed = citeQuotes(workLoader(VAULT), corpusWorkTitles(ROOT), [{ work: q.work, quote: q.quote }], `definitionQuote ${a.id}`, errs, []);
+  errs.forEach((e) => warn(`definitionQuote ${a.id}: ${e}`));
+  if (placed.length !== 1) { warn(`definitionQuote for ${a.id} did not place; definition omitted`); return; }
+  const wl = workLabel(q.work);
+  const title = wl.short ? (wl.bare || wl.title).split(':')[0] : placed[0].cite.workTitle;
+  a.definition = { text: placed[0].text, cite: wl.short ? `${title} (${wl.short}) ${placed[0].cite.locator}` : `${title} ${placed[0].cite.locator}` };
 }
 
 // Number archetypes (and any later synthesised archetype) are admitted from curation alone
@@ -244,6 +261,7 @@ for (const [id, c] of Object.entries(curArch)) {
     synthesised: true,
   };
   foldArchDefinition(c, a);
+  if (!a.definition) foldArchQuote(c, a);
   archById[a.id] = a;
   archList.push(a);
   archSlugs.add(id);
@@ -954,6 +972,16 @@ if (qf.problems.length) {
   process.exit(2);
 }
 if (qf.applied.length) console.log(`quote fixes applied: ${qf.applied.length}`);
+
+// Jung's engagement year of each cite, parsed from its `year` string (scripts/lib/cite-year.mjs); a cite whose string names no year has none.
+for (const o of field.occurrences) for (const c of o.jung) { const y = citeYear(c.year); if (y !== null) c.citeYear = y; else delete c.citeYear; }
+
+// Every body paragraph (occurrence, family, archetype, theoretic) is the atlas's own prose, written in the reading pass over the vault
+// and never a quotation of the author: each carries its voice, one per paragraph, so no prose reaches the reading unlabelled. A
+// quotation lives in `quote`, `definition` and the field pages, each with a cite.
+for (const list of [field.archetypes, field.theoretics, field.families, field.occurrences]) {
+  for (const n of list) if (Array.isArray(n.body)) n.bodyVoices = n.body.map(() => 'atlas');
+}
 
 const errors = validateField(field);
 if (errors.length) {

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "_note": "Where a node of the field carries no plate, the reason. A plate is never chosen to fill a gap: it must show the node and carry its provenance. Group, id, reason; a reason is removed the day a plate with a recorded source lands. tests/data/field.test.ts holds every archetype to a plate or a line here.",
+  "archetypes": {
+    "nine": {
+      "reason": "No register holds a plate of nine with one agreed source. The one candidate, the miniature of the nine choirs of angels (Hildegard of Bingen, Scivias), stands under an occurrence whose two register entries disagree about the file: public/data/images.json names it File:02018 0907 Uroboros, Jormungand.jpg at 424 px wide, public/data/images-ext-uroboros.json names File:07angels-hildegard von bingen.jpg at 546 px, and both point at the same bytes. Until one source is settled and the file re-fetched from it, the same bytes cannot be shown under a second node. The number nine's page rests on its quotations (Jung CW13, von Franz) and carries no plate."
+    }
+  }
+}

@@ -16,6 +16,8 @@ export type TheoreticId = string; // slug, e.g. "psychoid"
 export type FamilyId = string; // slug, e.g. "serpent"
 export type OccurrenceId = string; // vault filename slug
 export type CultureId = string; // normalised slug, e.g. "latin-alchemy"
+/** Whose voice a body paragraph is in. 'atlas' is the atlas's own prose (the reading pass over the vault), never a quotation of the author. */
+export type BodyVoice = 'atlas';
 
 /** Where an archetype tie comes from. Never present "site" or "inferred" as Jung's word. */
 export type TieBasis = 'jung' | 'inferred' | 'site';
@@ -78,6 +80,8 @@ export interface Cite {
   workTitle: string;
   /** Year(s) of Jung's engagement as written, e.g. "1936/44". */
   year: string;
+  /** The first four-digit year of `year` ("1936/44" gives 1936): the axis of Jung's engagement. Absent where the string names no year. */
+  citeYear?: number;
   /** Locator as written, e.g. "fig. 131, ¶357 (pdf p268)". */
   locator: string;
   /** Whose words the passage is, when not Jung's ("Crowley", "Burt", "von Franz"); absent means Jung. */
@@ -113,6 +117,8 @@ export interface Archetype {
   definition?: { text: string; cite: string };
   /** 1–3 short paragraphs of plain text for the deep layer. May be empty. */
   body: string[];
+  /** Whose voice each `body` paragraph is in, one per paragraph: 'atlas' is the atlas's own prose, never a quotation. */
+  bodyVoices?: BodyVoice[];
   image?: ImageRef;
   familyIds: FamilyId[]; // families tied to it (any basis), most occurrences first
   occurrenceCount: number; // via its families
@@ -146,6 +152,7 @@ export interface Theoretic {
   /** Verbatim Jung quote with cite, picked from the vault's mentions — never typed. */
   definition?: { text: string; cite: string };
   body: string[]; // plain text paragraphs; may be empty
+  bodyVoices?: BodyVoice[]; // one per paragraph of `body`
   archetypes: TheoreticTie[];
   families: TheoreticTie[];
   theoretics: TheoreticTie[]; // the theoretical web: this concept's own neighbours
@@ -168,6 +175,7 @@ export interface Family {
   spectrum: Spectrum;
   palette: Palette;
   body: string[]; // plain text paragraphs; may be empty
+  bodyVoices?: BodyVoice[]; // one per paragraph of `body`
   /** Verbatim Jung quote with cite, picked from the vault's mentions — never typed. */
   definition?: { text: string; cite: string };
   image?: ImageRef;
@@ -208,6 +216,8 @@ export interface Occurrence {
   caption?: true;
   /** Plain-text paragraphs of the vault body (wikilinks resolved to names). */
   body: string[];
+  /** One voice per `body` paragraph, so the UI can label it; every paragraph is the atlas's own prose. */
+  bodyVoices?: BodyVoice[];
   parallelIds: OccurrenceId[]; // resolvable vault parallels only
   /**
    * Where it hangs in the sky, when a source puts it there (the Thoth card on its ruler's decan wheel, a sign on the

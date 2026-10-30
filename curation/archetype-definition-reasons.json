@@ -1,0 +1,1 @@
+{ "version": 1, "_note": "Where an archetype has no definition, the reason. Every archetype has a definition today, so this file is empty; a definition is never typed, it is picked from a mention or placed from a corpus sentence (curation/archetypes.json: definitionPick, definitionQuote).", "archetypes": {} }

@@ -118,6 +118,37 @@ describe('field.json contract', () => {
     expect(unresolved).toEqual([]);
   }, 60_000);
 
+  it('every archetype has a definition (verbatim, with a resolvable cite) or a recorded reason', () => {
+    const reasons = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'archetype-definition-reasons.json'), 'utf8')).archetypes as Record<string, { reason: string }>;
+    const bare = field.archetypes.filter((a) => !(a.definition?.text && a.definition.cite) && !reasons[a.id]?.reason?.trim()).map((a) => a.id);
+    expect(bare).toEqual([]);
+    // a reason stands only while the definition is absent: a definition that landed retires its reason
+    const stale = Object.keys(reasons).filter((id) => field.archetypes.find((a) => a.id === id)?.definition);
+    expect(stale).toEqual([]);
+  });
+
+  it('every archetype carries a plate or a recorded reason (27 of 27)', () => {
+    const reasons = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'image-reasons.json'), 'utf8')).archetypes as Record<string, { reason: string }>;
+    expect(field.archetypes.length).toBe(27);
+    const bare = field.archetypes.filter((a) => !a.image && !reasons[a.id]?.reason?.trim()).map((a) => a.id);
+    expect(bare).toEqual([]);
+    // a reason is retired the day the plate lands
+    expect(Object.keys(reasons).filter((id) => field.archetypes.find((a) => a.id === id)?.image)).toEqual([]);
+  });
+
+  it('every body paragraph carries a voice: no unlabelled prose in the data (6,000 occurrence paragraphs and the rest)', () => {
+    const bare: string[] = [];
+    let paragraphs = 0;
+    for (const [kind, list] of [['occurrence', field.occurrences], ['family', field.families], ['archetype', field.archetypes], ['theoretic', field.theoretics]] as const) {
+      for (const n of list as { id: string; body: string[]; bodyVoices?: string[] }[]) {
+        paragraphs += n.body.length;
+        if (!Array.isArray(n.bodyVoices) || n.bodyVoices.length !== n.body.length || n.bodyVoices.some((v) => v !== 'atlas')) bare.push(`${kind} ${n.id}`);
+      }
+    }
+    expect(paragraphs).toBeGreaterThan(6000);
+    expect(bare).toEqual([]);
+  });
+
   it('parallelIds only reference existing occurrences', () => {
     const ids = new Set(field.occurrences.map((o) => o.id));
     for (const o of field.occurrences) for (const p of o.parallelIds) expect(ids.has(p), `${o.id} -> ${p}`).toBe(true);
@@ -126,7 +157,7 @@ describe('field.json contract', () => {
   it('archetype definitions are verbatim vault quotes with a cite, never invented', () => {
     for (const a of field.archetypes) if (a.definition) {
       expect(a.definition.text.length).toBeGreaterThan(20);
-      expect(a.definition.cite).toMatch(/¶\d+/);
+      expect(a.definition.cite, a.id).toMatch(/¶\d+|pdf p\d+/);
     }
     const self = field.archetypes.find((a) => a.id === 'self');
     expect(self?.definition?.cite).toContain('426');
