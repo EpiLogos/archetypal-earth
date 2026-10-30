@@ -122,7 +122,7 @@
       "target": { "kind": "reading", "id": "jung-aion" },
       "stopId": "liber-novus-izdubar-bull-man-first-day-fol37",
       "words": "the month of the fish will soon be over",
-      "cite": "redbook pdf p345–46",
+      "cite": "redbook pdf p345–346",
       "doctrine": "Aion 1951: the Platonic month (Aion ¶135–49) and the aeon thesis of the foreword — the Red Book is the doctrine’s earliest witness."
     },
     {
@@ -154,7 +154,7 @@
       "target": { "kind": "family", "id": "abraxas" },
       "stopId": "liber-novus-sermones-abraxas-hymn-pdf381",
       "words": "Effectiveness... is a God above God... We call him by his name ABRAXAS",
-      "cite": "redbook pdf p379",
+      "cite": "redbook pdf p380",
       "doctrine": "The Christ↔Antichrist doctrine (Aion ch. III, Aion ¶76); the anti-privatio-boni argument of Aion and Answer to Job."
     },
     {
@@ -162,7 +162,7 @@
       "target": { "kind": "archetype", "id": "child" },
       "stopId": "liber-novus-coming-god-proclamation-fol4v",
       "words": "I have received your sprout, you who are to come!",
-      "cite": "redbook pdf p273",
+      "cite": "redbook pdf p274",
       "doctrine": "The child-archetype essay (The Archetypes and the Collective Unconscious, 1940); individuation’s beginning (editor n.123)."
     },
     {
@@ -170,7 +170,7 @@
       "target": { "kind": "archetype", "id": "shadow" }, "also": { "kind": "family", "id": "the-red-one" },
       "stopId": "liber-novus-red-one-joy-devil-fol01",
       "words": "he was my joy, the joy of the serious person",
-      "cite": "redbook pdf p292",
+      "cite": "redbook pdf p291",
       "doctrine": "The shadow essays (The Archetypes and the Collective Unconscious / Aion: Researches into the Phenomenology of the Self ¶13–19); the flaying before one’s own I, later read as shadow-confrontation (editor n.8, citing The Archetypes and the Collective Unconscious)."
     },
     {
@@ -178,7 +178,7 @@
       "target": { "kind": "family", "id": "antichrist" },
       "stopId": "liber-novus-coming-god-proclamation-fol4v",
       "words": "The image of the Antichrist, which has come down to us from the ancients, announces the new God",
-      "cite": "redbook pdf p274",
+      "cite": "redbook pdf p273",
       "doctrine": "Aion ch. III: “an imitating spirit of evil who follows in Christ’s footsteps like a shadow” (Aion: Researches into the Phenomenology of the Self ¶76); “an inexorable psychological law” (¶77)."
     }
   ]

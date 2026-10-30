@@ -15,7 +15,8 @@ import { trustedPrint } from './cite.mjs';
 import { externalMarkdown } from './external.mjs';
 import { stripFootnoteMarkers } from './display.mjs';
 
-const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>]+))?\s*-->\s*$/;
+// a page marker: the work, the pdf page, its printed label, and `· no text layer` where the scan has no text for the page
+const PAGE_RE = /^<!--\s*([\w-]+)\s*·\s*pdf p(\d+)(?:\s*·\s*print p([^\s>·]+))?(?:\s*·\s*(no text layer))?\s*-->\s*$/;
 const PARA_RE = /\*\*¶(\d+)\*\*/g;
 const slug = (s) => s
   .toLowerCase()
@@ -45,18 +46,18 @@ export function parseCorpusMarkdown(work, raw) {
   const chapters = [];
   const pages = [];
   let title = '';
-  let cur = null; // { p, print, ch, lines: [] }
+  let cur = null; // { p, print, ch, noText, lines: [] }
   const closePage = () => {
     if (!cur) return;
     const text = cur.lines.join('\n').replace(/\s+$/, '');
-    pages.push({ p: cur.p, ...(cur.print ? { print: cur.print } : {}), ...(cur.ch ? { ch: cur.ch } : {}), text });
+    pages.push({ p: cur.p, ...(cur.print ? { print: cur.print } : {}), ...(cur.ch ? { ch: cur.ch } : {}), ...(cur.noText ? { noText: true } : {}), text });
     cur = null;
   };
   for (const line of lines) {
     const m = line.match(PAGE_RE);
     if (m && m[1] === work) {
       closePage();
-      cur = { p: Number(m[2]), print: m[3] || null, ch: chapters.length ? chapters[chapters.length - 1].id : null, lines: [] };
+      cur = { p: Number(m[2]), print: m[3] || null, ch: chapters.length ? chapters[chapters.length - 1].id : null, noText: !!m[4], lines: [] };
       continue;
     }
     if (!cur) { // anything before the first page marker: the file's front matter, whose title is the work's own
@@ -115,8 +116,11 @@ export function checkAgainstSpine(built, spineLines, log) {
   return { checked, missing: missing.length };
 }
 
-/** Build every volume and write public/data/corpus/. Returns the summary for stats. */
-export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], externals = {}, log = () => {} }) {
+/**
+ * Build every volume and write public/data/corpus/. Returns the summary for stats. `aliases` maps a Work id to its other cite
+ * keys (curation/works.json), so the index carries them and a cite key resolves to its volume (scripts/lib/quote-oracle.mjs).
+ */
+export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = [], externals = {}, aliases = {}, log = () => {} }) {
   const srcDir = path.join(vault, 'corpus');
   if (!fs.existsSync(srcDir)) throw new Error(`no corpus at ${srcDir}`);
   const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.md')).sort();
@@ -127,7 +131,7 @@ export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = []
   // the corpus volumes, then the works the vault keeps outside corpus/ (external.mjs), read in the same shape
   const sources = [
     ...files.map((f) => ({ work: f.replace(/\.md$/, ''), read: () => fs.readFileSync(path.join(srcDir, f), 'utf8') })),
-    ...Object.entries(externals).filter(([w]) => !files.includes(`${w}.md`)).map(([work, x]) => ({ work, read: () => externalMarkdown(vault, work, x.title) })),
+    ...Object.entries(externals).filter(([w]) => !files.includes(`${w}.md`)).map(([work, x]) => ({ work, read: () => externalMarkdown(vault, work, x.title, x) })),
   ];
   for (const { work, read } of sources) {
     const raw = read();
@@ -149,7 +153,8 @@ export function buildCorpusIndex({ vault, outDir, manifest = [], spineLines = []
     };
     fs.writeFileSync(path.join(outDir, `${work}.json`), JSON.stringify(doc));
     built.set(work, parsed);
-    works.push({ work, title: doc.title, file: `${work}.json`, pages: parsed.pages.length, paras: parsed.paras.length, chapters: parsed.chapters.length });
+    const keys = (aliases[work] ?? []).filter(Boolean);
+    works.push({ work, title: doc.title, file: `${work}.json`, pages: parsed.pages.length, paras: parsed.paras.length, chapters: parsed.chapters.length, ...(keys.length ? { aliases: keys } : {}) });
     log(`corpus ${work}: ${parsed.pages.length} pages, ${parsed.paras.length} ¶ anchors, ${parsed.chapters.length} chapters`);
   }
   // the same clock the field uses (FIELD_GENERATED_AT pins it for tests), so two ingests of one vault are byte-identical

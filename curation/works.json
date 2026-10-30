@@ -283,7 +283,7 @@
    "kind": "manuscript",
    "author": "jung",
    "aliases": ["redbook"],
-   "corpus": null,
+   "corpus": "liber-novus.json",
    "lens": "redbook"
   },
   "mdr": {

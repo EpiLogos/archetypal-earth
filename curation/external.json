@@ -1,5 +1,5 @@
 {
-  "_note": "Works the vault keeps outside corpus/ (_raw-ext/<work>/pages, one file per pdf page, counted from 0 at the cover). scripts/lib/external.mjs reads them in the corpus's own shape. The title is the book's, as the vault note records it (author and year in the form the corpus uses).",
+  "_note": "Works the vault keeps outside corpus/. By default the page files are _raw-ext/<work>/pages, one file per pdf page, counted from 0 at the cover; scripts/lib/external.mjs reads them in the corpus's own shape. An entry may name its own `source` (a vault-relative directory of pdf-numbered page files), the `pdf` range it holds, and a `printOffset` (printed page = pdf page − offset); a pdf page in the range with no file is kept empty as having no text layer. The title is the book's, as the vault note records it (author and year in the form the corpus uses).",
   "works": {
     "van-eenwyk": {
       "title": "Archetypes & Strange Attractors: The Chaotic World of Symbols (John R. Van Eenwyk, 1997)",
@@ -7,6 +7,13 @@
     },
     "book-of-thoth": {
       "title": "The Book of Thoth: A Short Essay on the Tarot of the Egyptians (Aleister Crowley, 1944)"
+    },
+    "liber-novus": {
+      "title": "Liber Novus (The Red Book)",
+      "source": "_raw/redbook/pages",
+      "pdf": [224, 402],
+      "printOffset": 31,
+      "note": "the English translation (OCR) of the Red Book, pdf 224–402; pdf 14–223 are the facsimile, which has no text. Printed page = pdf − 31 (the running heads)."
     }
   }
 }

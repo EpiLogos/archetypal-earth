@@ -15043,33 +15043,9 @@
    "aliases": [
     "redbook"
    ],
+   "corpus": "liber-novus",
    "lens": "redbook",
    "chapters": [
-    {
-     "title": "Cover",
-     "page": 1,
-     "level": 1
-    },
-    {
-     "title": "Contents",
-     "page": 6,
-     "level": 1
-    },
-    {
-     "title": "Preface",
-     "page": 9,
-     "level": 1
-    },
-    {
-     "title": "Acknowledgments",
-     "page": 12,
-     "level": 1
-    },
-    {
-     "title": "Original work (in German) 1-192",
-     "page": 14,
-     "level": 1
-    },
     {
      "title": "English translation OCR'ed 193-372",
      "page": 224,

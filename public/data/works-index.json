@@ -2,8 +2,8 @@
   "schema": 1,
   "source": "public/data/field.json",
   "total": 3228,
-  "ordered": 2952,
-  "unresolved": 276,
+  "ordered": 2953,
+  "unresolved": 275,
   "works": {
     "a-blue-fire": {
       "cites": [],
@@ -755,11 +755,6 @@
           "page": 16
         },
         {
-          "id": "senex-figure-grandfather-control-spirit-zurich-1899",
-          "kind": "para",
-          "page": 28
-        },
-        {
           "id": "devil-black-daemonic-figure-sister-vision-zurich-1899",
           "kind": "para",
           "page": 31
@@ -773,6 +768,11 @@
           "id": "double-ulrich-von-gerbenstein-persona-zurich-1899",
           "kind": "para",
           "page": 37
+        },
+        {
+          "id": "senex-figure-grandfather-control-spirit-zurich-1899",
+          "kind": "para",
+          "page": 39
         },
         {
           "id": "double-ivenes-higher-ego-zurich-1899",
@@ -994,11 +994,6 @@
           "page": 187
         },
         {
-          "id": "black-man-hypnagogic-vision-hysteric-burgholzli-1905",
-          "kind": "pdf",
-          "page": 198
-        },
-        {
           "id": "dream-blood-fire-stereotyped-burgholzli-1905",
           "kind": "pdf",
           "page": 198
@@ -1014,6 +1009,11 @@
           "page": 215
         },
         {
+          "id": "black-man-hypnagogic-vision-hysteric-burgholzli-1905",
+          "kind": "pdf",
+          "page": 216
+        },
+        {
           "id": "dream-black-dog-shop-burgholzli-1905",
           "kind": "pdf",
           "page": 216
@@ -1021,12 +1021,12 @@
         {
           "id": "dream-black-man-room-7-burgholzli-1905",
           "kind": "pdf",
-          "page": 217
+          "page": 216
         },
         {
           "id": "dream-burning-house-white-figure-burgholzli-1905",
           "kind": "pdf",
-          "page": 218
+          "page": 217
         },
         {
           "id": "dream-worm-drawn-from-mouth-burgholzli-1905",
@@ -1971,7 +1971,7 @@
         {
           "id": "soul-bird-kaineus-lapiths-greece",
           "kind": "para",
-          "page": 337
+          "page": 338
         },
         {
           "id": "fish-vishnu-matsya-vedas-india",
@@ -1981,7 +1981,7 @@
         {
           "id": "serpent-ra-isis-true-name-egypt",
           "kind": "para",
-          "page": 343
+          "page": 344
         },
         {
           "id": "moon-nokomis-moon-fall-longfellow",
@@ -1991,7 +1991,7 @@
         {
           "id": "wind-wenonah-west-wind-longfellow",
           "kind": "para",
-          "page": 363
+          "page": 361
         },
         {
           "id": "star-maya-elephant-dream-gandhara",
@@ -2041,7 +2041,7 @@
         {
           "id": "sacrifice-huitzilopochtli-eucharist-aztec",
           "kind": "para",
-          "page": 377
+          "page": 379
         },
         {
           "id": "coniunctio-asterius-hieros-gamos-eleusis",
@@ -2104,12 +2104,12 @@
           "page": 383
         },
         {
-          "id": "night-sea-journey-hiawatha-mishe-nahma",
+          "id": "monster-vidarr-fenriswolf-gosforth-cross",
           "kind": "para",
-          "page": 384
+          "page": 385
         },
         {
-          "id": "monster-vidarr-fenriswolf-gosforth-cross",
+          "id": "night-sea-journey-hiawatha-mishe-nahma",
           "kind": "para",
           "page": 385
         },
@@ -2129,24 +2129,24 @@
           "page": 389
         },
         {
-          "id": "quaternity-gitche-manito-egg-hieroglyph",
-          "kind": "para",
-          "page": 390
-        },
-        {
           "id": "tree-hollow-oak-rejuvenation-longfellow",
           "kind": "para",
           "page": 390
         },
         {
+          "id": "quaternity-gitche-manito-egg-hieroglyph",
+          "kind": "para",
+          "page": 391
+        },
+        {
           "id": "anima-figure-brunhilde-spirit-mother-ring",
           "kind": "para",
-          "page": 394
+          "page": 395
         },
         {
           "id": "holy-ghost-secret-mother-eucharistic-prayer",
           "kind": "para",
-          "page": 396
+          "page": 395
         },
         {
           "id": "sophia-kore-hymn-acts-of-thomas",
@@ -2169,11 +2169,6 @@
           "page": 400
         },
         {
-          "id": "dragon-sylvester-tarpeian-dragon-rome",
-          "kind": "para",
-          "page": 400
-        },
-        {
           "id": "well-spring-amphiaraion-oropos",
           "kind": "para",
           "page": 400
@@ -2184,9 +2179,14 @@
           "page": 400
         },
         {
-          "id": "dragon-mechanical-dragon-de-promissionibus",
+          "id": "dragon-sylvester-tarpeian-dragon-rome",
           "kind": "para",
           "page": 401
+        },
+        {
+          "id": "dragon-mechanical-dragon-de-promissionibus",
+          "kind": "para",
+          "page": 402
         },
         {
           "id": "sun-moon-oiled-paper-schizophrenic-dream",
@@ -2206,12 +2206,12 @@
         {
           "id": "serpent-granite-money-box-ptolemais",
           "kind": "para",
-          "page": 403
+          "page": 406
         },
         {
           "id": "phallus-unternahrer-devils-communion",
           "kind": "para",
-          "page": 407
+          "page": 409
         },
         {
           "id": "serpent-bitten-genitals-patient-dream",
@@ -2224,14 +2224,14 @@
           "page": 409
         },
         {
-          "id": "philosophers-egg-prajapati-hiranyagarbha",
-          "kind": "para",
-          "page": 411
-        },
-        {
           "id": "serpent-snake-throat-patient-zurich",
           "kind": "pdf",
           "page": 411
+        },
+        {
+          "id": "philosophers-egg-prajapati-hiranyagarbha",
+          "kind": "para",
+          "page": 412
         },
         {
           "id": "serpent-agathodaimon-antique-gem",
@@ -2586,7 +2586,7 @@
         {
           "id": "resurrection-lucius-gates-death-apuleius-2c",
           "kind": "pdf",
-          "page": 743
+          "page": 744
         },
         {
           "id": "sacrifice-lamb-substitute-man-assyria-7cbce",
@@ -2651,7 +2651,7 @@
         {
           "id": "grail-amfortas-wound-parsifal-bayreuth-1882",
           "kind": "para",
-          "page": 76
+          "page": 78
         },
         {
           "id": "sacrifice-dionysian-satyr-festival-greece-550bce",
@@ -5782,12 +5782,12 @@
           "page": 143
         },
         {
-          "id": "fountain-youth-codex-de-sphaera-modena-15c",
+          "id": "dream-chemist-special-water-cw12-1933",
           "kind": "para",
-          "page": 144
+          "page": 145
         },
         {
-          "id": "dream-chemist-special-water-cw12-1933",
+          "id": "fountain-youth-codex-de-sphaera-modena-15c",
           "kind": "para",
           "page": 145
         },
@@ -5837,11 +5837,6 @@
           "page": 154
         },
         {
-          "id": "simia-dei-monkey-demon-14c",
-          "kind": "para",
-          "page": 156
-        },
-        {
           "id": "tetramorph-vatopedi-athos-1213",
           "kind": "para",
           "page": 156
@@ -5865,6 +5860,11 @@
           "id": "dream-gothic-cathedral-bulls-cw12",
           "kind": "para",
           "page": 163
+        },
+        {
+          "id": "simia-dei-monkey-demon-14c",
+          "kind": "para",
+          "page": 164
         },
         {
           "id": "dream-transformation-snakes-corners-cw12-1933",
@@ -6067,14 +6067,14 @@
           "page": 243
         },
         {
-          "id": "dragons-bite-brother-sister-bath-1652",
+          "id": "anthropos-anima-mundi-albertus-1650",
           "kind": "para",
           "page": 247
         },
         {
-          "id": "anthropos-anima-mundi-albertus-1650",
+          "id": "dragons-bite-brother-sister-bath-1652",
           "kind": "para",
-          "page": 250
+          "page": 247
         },
         {
           "id": "maria-prophetissa-unum-vas-1c",
@@ -6135,11 +6135,6 @@
           "id": "alchemist-nigredo-meditatio-jamsthaler-1625",
           "kind": "para",
           "page": 282
-        },
-        {
-          "id": "visio-arislei-glass-house-12c",
-          "kind": "para",
-          "page": 283
         },
         {
           "id": "mercurius-salamander-maier-1687",
@@ -6247,6 +6242,11 @@
           "page": 331
         },
         {
+          "id": "visio-arislei-glass-house-12c",
+          "kind": "para",
+          "page": 332
+        },
+        {
           "id": "jonah-whale-early-christian-lamp",
           "kind": "para",
           "page": 336
@@ -6319,7 +6319,7 @@
         {
           "id": "aurora-consurgens-sapientia-dei-14c",
           "kind": "para",
-          "page": 367
+          "page": 369
         },
         {
           "id": "serpent-chnuphis-gnostic-gems-2c",
@@ -6342,14 +6342,14 @@
           "page": 383
         },
         {
-          "id": "melchior-cibinensis-alchemical-mass-16c",
-          "kind": "para",
-          "page": 385
-        },
-        {
           "id": "ave-praeclara-albertus-magnus-14c",
           "kind": "para",
           "page": 386
+        },
+        {
+          "id": "melchior-cibinensis-alchemical-mass-16c",
+          "kind": "para",
+          "page": 388
         },
         {
           "id": "melchior-cibinensis-alchemical-mass-16c",
@@ -6559,7 +6559,7 @@
         {
           "id": "quaternity-tractatus-aureus-secret-square-1610",
           "kind": "pdf",
-          "page": 648
+          "page": 649
         },
         {
           "id": "senex-krates-vision-hermes-white-9c",
@@ -6604,7 +6604,7 @@
         {
           "id": "world-wheel-manichaean-twelve-urceos-4c",
           "kind": "pdf",
-          "page": 686
+          "page": 688
         },
         {
           "id": "resurrection-gloria-mundi-stone-reborn-1622",
@@ -7908,11 +7908,6 @@
           "page": 298
         },
         {
-          "id": "christ-bridegroom-cross-augustine-5c",
-          "kind": "para",
-          "page": 299
-        },
-        {
           "id": "malchuth-statue-stone-of-bethel-zohar-13c",
           "kind": "para",
           "page": 299
@@ -8120,7 +8115,7 @@
         {
           "id": "mercurius-monocolus-albertus-magnus-13c",
           "kind": "para",
-          "page": 375
+          "page": 376
         },
         {
           "id": "bonaventure-threefold-illumination-1259",
@@ -8238,6 +8233,11 @@
           "page": 662
         },
         {
+          "id": "christ-bridegroom-cross-augustine-5c",
+          "kind": "pdf",
+          "page": 663
+        },
+        {
           "id": "adam-iota-hook-naassene-elenchos-3c",
           "kind": "pdf",
           "page": 670
@@ -8325,7 +8325,7 @@
         {
           "id": "horses-black-elk-vision-1881",
           "kind": "pdf",
-          "page": 717
+          "page": 718
         },
         {
           "id": "caduceus-servius-commentary-rome-400",
@@ -8350,7 +8350,7 @@
         {
           "id": "divine-birth-amenhotep-iii-thebes-1380bce",
           "kind": "pdf",
-          "page": 731
+          "page": 732
         },
         {
           "id": "isis-lament-drowned-osiris-egypt-1300bce",
@@ -8361,6 +8361,11 @@
           "id": "prayer-ruach-hokhmah-el-khunrath-1595",
           "kind": "pdf",
           "page": 738
+        },
+        {
+          "id": "yin-yang-dragon-tiger-wei-po-yang-2c",
+          "kind": "pdf",
+          "page": 741
         },
         {
           "id": "hexastichon-brant-evangelists-1502",
@@ -8431,10 +8436,6 @@
         {
           "id": "ms-figurarum-aegyptiorum-jung-18c",
           "locator": "nn.126, 150–151 to chs. IV–VI (pdf pp738, 794)"
-        },
-        {
-          "id": "yin-yang-dragon-tiger-wei-po-yang-2c",
-          "locator": "nn.135, 142, 11 to chs. IV–VI (pdf pp739f., 786)"
         }
       ]
     },
@@ -8461,11 +8462,6 @@
           "page": 63
         },
         {
-          "id": "anima-figure-molly-bloom-penelope-monologue-dublin-1904",
-          "kind": "para",
-          "page": 107
-        },
-        {
           "id": "elijah-light-crumpled-throwaway-liffey-dublin-1904",
           "kind": "para",
           "page": 108
@@ -8479,6 +8475,11 @@
           "id": "demiurge-ulysses-creator-god-dublin-1922",
           "kind": "para",
           "page": 111
+        },
+        {
+          "id": "anima-figure-molly-bloom-penelope-monologue-dublin-1904",
+          "kind": "para",
+          "page": 114
         },
         {
           "id": "nekyia-picasso-blue-period-paris-1903",
@@ -9378,7 +9379,7 @@
         {
           "id": "treasure-head-body-warning-hypnerotomachia-1499",
           "kind": "para",
-          "page": 702
+          "page": 703
         },
         {
           "id": "anima-figure-brolante-harlot-tale-of-the-otter-1932",
@@ -11606,6 +11607,11 @@
           "page": 217
         },
         {
+          "id": "dream-12-naked-boy-white-bread-zurich-1929",
+          "kind": "pdf",
+          "page": 228
+        },
+        {
           "id": "worm-snails-eating-dream-woman-zurich-1929",
           "kind": "pdf",
           "page": 261
@@ -12131,10 +12137,6 @@
           "locator": "6 & 13 Mar 1929 (pdf pp183-196)"
         },
         {
-          "id": "dream-12-naked-boy-white-bread-zurich-1929",
-          "locator": "13, 20 & 27 Mar 1929 (pdf pp196-221)"
-        },
-        {
           "id": "dream-13-aquarium-brothel-brown-cap-zurich-1929",
           "locator": "27 Mar & 15 & 22 May 1929 (pdf pp221-245)"
         },
@@ -12347,9 +12349,14 @@
     "sem-kundalini": {
       "cites": [
         {
+          "id": "chakra-shat-cakra-nirupana-purnananda-bengal-1577",
+          "kind": "pdf",
+          "page": 23
+        },
+        {
           "id": "chakra-cakra-illustrations-serpent-power-madras-1919",
           "kind": "pdf",
-          "page": 8
+          "page": 35
         },
         {
           "id": "mandala-child-gold-rings-vision-zurich-1932",
@@ -12500,11 +12507,6 @@
           "id": "lotus-eight-leafed-heart-hamsa-upanishad",
           "kind": "pdf",
           "page": 125
-        },
-        {
-          "id": "chakra-shat-cakra-nirupana-purnananda-bengal-1577",
-          "kind": "pdf",
-          "page": 126
         },
         {
           "id": "star-ray-forehead-child-vision-zurich-1930",
@@ -12922,19 +12924,19 @@
           "page": 290
         },
         {
+          "id": "liver-clay-tablets-babylonia-900bce",
+          "kind": "pdf",
+          "page": 291
+        },
+        {
           "id": "water-cow-milk-rain-magic-russia-1931",
           "kind": "pdf",
-          "page": 290
+          "page": 291
         },
         {
           "id": "water-frog-choir-rain-charm-rig-veda-1200bce",
           "kind": "pdf",
           "page": 291
-        },
-        {
-          "id": "liver-clay-tablets-babylonia-900bce",
-          "kind": "pdf",
-          "page": 292
         },
         {
           "id": "vision-discover-our-shadow-world-war-zurich-1931",
@@ -12944,7 +12946,7 @@
         {
           "id": "blood-baptism-scarlet-robe-spiral-vision-zurich-1931",
           "kind": "pdf",
-          "page": 304
+          "page": 305
         },
         {
           "id": "god-image-pool-of-gold-vision-zurich-1931",
@@ -12967,14 +12969,14 @@
           "page": 326
         },
         {
-          "id": "goat-cavern-black-snake-vision-zurich-1931",
-          "kind": "pdf",
-          "page": 331
-        },
-        {
           "id": "serpent-curse-inscription-palatine-rome-100ce",
           "kind": "pdf",
           "page": 333
+        },
+        {
+          "id": "goat-cavern-black-snake-vision-zurich-1931",
+          "kind": "pdf",
+          "page": 338
         },
         {
           "id": "serpent-golden-snake-transitus-sabazios-150ce",
@@ -13044,17 +13046,12 @@
         {
           "id": "great-mother-underworld-initiation-vision-zurich-1931",
           "kind": "pdf",
-          "page": 376
+          "page": 382
         },
         {
           "id": "old-man-river-of-souls-vision-zurich-1931",
           "kind": "pdf",
-          "page": 384
-        },
-        {
-          "id": "illumination-jewelled-heart-vision-zurich-1931",
-          "kind": "pdf",
-          "page": 404
+          "page": 385
         },
         {
           "id": "corn-eckhart-wheat-gold-man-quote-1300",
@@ -13062,24 +13059,19 @@
           "page": 405
         },
         {
-          "id": "bull-world-bull-horn-legend-mount-elgon-1926",
-          "kind": "pdf",
-          "page": 416
-        },
-        {
           "id": "world-giant-boiling-blood-egg-vision-zurich-1931",
           "kind": "pdf",
           "page": 416
         },
         {
-          "id": "ass-lucius-isis-roses-apuleius-160ce",
+          "id": "bull-world-bull-horn-legend-mount-elgon-1926",
           "kind": "pdf",
-          "page": 421
+          "page": 417
         },
         {
-          "id": "christ-figure-headless-sun-disk-autun-cathedral-1135",
+          "id": "ass-lucius-isis-roses-apuleius-160ce",
           "kind": "pdf",
-          "page": 428
+          "page": 420
         },
         {
           "id": "logion-city-of-god-know-yourselves-oxyrhynchus-200",
@@ -13090,6 +13082,11 @@
           "id": "head-black-marble-head-in-egg-vision-zurich-1931",
           "kind": "pdf",
           "page": 434
+        },
+        {
+          "id": "christ-figure-headless-sun-disk-autun-cathedral-1135",
+          "kind": "pdf",
+          "page": 436
         },
         {
           "id": "sun-christians-adore-rising-sun-hippolytus-rome-2c",
@@ -13572,11 +13569,6 @@
           "page": 864
         },
         {
-          "id": "anthropos-purusha-flaming-bow-serpent-vision-zurich-1932",
-          "kind": "pdf",
-          "page": 869
-        },
-        {
           "id": "mouse-mouseturm-bishop-hatto-rhine-10c",
           "kind": "pdf",
           "page": 882
@@ -13585,6 +13577,11 @@
           "id": "placenta-white-birth-iron-wolf-suckling-vision-zurich-1932",
           "kind": "pdf",
           "page": 885
+        },
+        {
+          "id": "anthropos-purusha-flaming-bow-serpent-vision-zurich-1932",
+          "kind": "pdf",
+          "page": 886
         },
         {
           "id": "melothesia-hildegard-cosmic-man-lucca-12c",
@@ -13992,11 +13989,6 @@
           "page": 1216
         },
         {
-          "id": "kubin-mad-white-horse-andere-seite-1909",
-          "kind": "pdf",
-          "page": 1222
-        },
-        {
           "id": "star-blue-star-mandala-vision-zurich-1933",
           "kind": "pdf",
           "page": 1226
@@ -14005,6 +13997,11 @@
           "id": "horse-ape-man-rider-vision-zurich-1933",
           "kind": "pdf",
           "page": 1243
+        },
+        {
+          "id": "kubin-mad-white-horse-andere-seite-1909",
+          "kind": "pdf",
+          "page": 1244
         },
         {
           "id": "horse-mad-riderless-girl-atrophy-death-dream",
@@ -14187,6 +14184,10 @@
         {
           "id": "green-goddess-apotheosis-self-vision-zurich-1934",
           "locator": "31 Jan. 1934 (pdf pp1335-1340)"
+        },
+        {
+          "id": "illumination-jewelled-heart-vision-zurich-1931",
+          "locator": "6 May 1931 (pdf pp404–406)"
         },
         {
           "id": "janet-somnambule-personalities-automatisme-paris-1889",
@@ -14810,14 +14811,14 @@
           "page": 476
         },
         {
-          "id": "medicine-man-dismembered-four-directions-north-america",
+          "id": "pharmakon-athanasias-eucharist-ignatius-107",
           "kind": "pdf",
           "page": 476
         },
         {
-          "id": "pharmakon-athanasias-eucharist-ignatius-107",
+          "id": "medicine-man-dismembered-four-directions-north-america",
           "kind": "pdf",
-          "page": 476
+          "page": 477
         },
         {
           "id": "anima-daughters-desert-zarathustra-1885",
@@ -15302,7 +15303,7 @@
         {
           "id": "god-image-unjust-steward-parable-luke-90",
           "kind": "pdf",
-          "page": 1027
+          "page": 1028
         },
         {
           "id": "christ-logion-knowest-what-thou-doest-egypt-2c",
@@ -15337,7 +15338,7 @@
         {
           "id": "circle-zarathustra-ring-eternal-return-1885",
           "kind": "pdf",
-          "page": 1077
+          "page": 1078
         },
         {
           "id": "well-spring-zarathustra-well-of-delight-poisoned-1885",
@@ -15370,14 +15371,14 @@
           "page": 1113
         },
         {
-          "id": "spider-black-spider-gotthelf-switzerland-1842",
-          "kind": "pdf",
-          "page": 1117
-        },
-        {
           "id": "trinity-three-snakes-vas-hermeticus-alchemy-16c",
           "kind": "pdf",
           "page": 1119
+        },
+        {
+          "id": "spider-black-spider-gotthelf-switzerland-1842",
+          "kind": "pdf",
+          "page": 1120
         },
         {
           "id": "spider-sapphire-golden-web-dream-zurich-1937",

@@ -1027,6 +1027,8 @@ try {
     manifest,
     spineLines,
     externals,
+    // each Work's other cite keys (curation/works.json aliases), so a cite key reads its volume (the quote oracle)
+    aliases: Object.fromEntries(Object.entries(worksCur.works ?? {}).map(([id, w]) => [id, w.aliases ?? []])),
     log: (m) => console.log(m),
   });
   stats.corpus = corpus;

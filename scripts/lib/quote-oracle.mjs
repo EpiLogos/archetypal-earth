@@ -137,15 +137,18 @@ export function prepareVolume(doc) {
   return vol;
 }
 
-/** Lazy per-work loader over a corpus directory (public/data/corpus). A work with no file is null. */
+/** Lazy per-work loader over a corpus directory (public/data/corpus). A work with no file is null. A cite key that the index
+ * gives as an alias of a volume's Work (curation/works.json: redbook → liber-novus) reads that volume. */
 export function corpusLoader(dir) {
   const cache = new Map();
   let index = null;
   const loader = (work) => {
     if (cache.has(work)) return cache.get(work);
-    const file = path.join(dir, `${work}.json`);
+    let volume = work;
+    try { volume = loader.index().works.find((w) => (w.aliases ?? []).includes(work))?.work ?? work; } catch { /* no index: the key itself */ }
+    const file = path.join(dir, `${volume}.json`);
     let vol = null;
-    if (/^[\w-]+$/.test(work) && work !== 'index' && fs.existsSync(file)) vol = prepareVolume(JSON.parse(fs.readFileSync(file, 'utf8')));
+    if (/^[\w-]+$/.test(volume) && volume !== 'index' && fs.existsSync(file)) vol = prepareVolume(JSON.parse(fs.readFileSync(file, 'utf8')));
     cache.set(work, vol);
     return vol;
   };
@@ -325,8 +328,9 @@ function workFromCiteString(index, cite) {
     const w = `cw${String(cw[1]).padStart(2, '0')}${(cw[2] ?? '').toLowerCase()}`;
     if (index.works.some((x) => x.work === w)) return w;
   }
+  // a leading key names its volume's Work, or one of that Work's aliases (redbook → liber-novus)
   const lead = /^([a-z0-9-]+)\s/.exec(String(cite));
-  if (lead && index.works.some((x) => x.work === lead[1])) return lead[1];
+  if (lead && index.works.some((x) => x.work === lead[1] || (x.aliases ?? []).includes(lead[1]))) return lead[1];
   return workFromTitle(index, cite) ?? null;
 }
 
