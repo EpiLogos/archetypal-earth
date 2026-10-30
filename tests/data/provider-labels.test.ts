@@ -18,7 +18,6 @@ import { CONVENTION_INFO } from '../../src/aion/precession';
 import { skyClockLede, signSpans } from '../../src/aion/skyclock';
 import { SYSTEM_LABEL } from '../../src/ui/related';
 import { citeLine } from '../../src/ui/format';
-import { jTitle, vTitle } from '../../src/dynamics/marks';
 import type { HistoryReading } from '../../src/types/history';
 
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -31,14 +30,11 @@ const FORMER: Required<ProviderLabels> = {
   lensAion: 'Jung’s history of the aeons, Pisces to Aquarius.', // shell/lens.ts, the Aion blurb
   lensAstrology: 'Your birth sky beside Jung’s, read through the corpus.', // shell/lens.ts, the Astrology blurb
   readingTagline: 'Jung’s history of the aeons — the precession of the equinoxes through Pisces into Aquarius, read on the Earth.', // aion/view.ts
-  readingOwnText: 'Asserted in Jung’s own text', // aion/view.ts, the J chip's title
   conventionOwn: 'Jung’s equal months', // aion/precession.ts CONVENTION_INFO['jung-equal']
   skyClockLede: 'Where the spring equinox lies among the stars is a calculation, and it depends on how the zodiac is drawn. These are the sky’s own boundaries under stated conventions, set beside Jung’s months, which stay as the reading gives them. Nothing here is a forecast.', // aion/skyclock.ts SKY_CLOCK_LEDE
   skyClockOwnSpan: 'Jung’s display boundaries', // aion/skyclock.ts signSpans
   skyClockFishes: 'The two fishes are Jung’s division of Pisces; no astronomical convention divides it.', // aion/skyclock-view.ts
   skyClockMarkBy: 'Jung', // aion/skyclock-view.ts, 'Jung, conditional' and 'Jung’s range'
-  dynamicsOwnText: "Asserted in Jung's own text", // dynamics/marks.ts J_TITLE
-  dynamicsOtherText: "Van Eenwyk's reading — not Jung's", // dynamics/marks.ts V_TITLE
   theoryRoute: "Jung's theory", // dynamics/view.ts and lenses/theory.ts Options
   voiceHeading: 'Jung', // lenses/theory.ts and ui/deep.ts, the heading over the author's own lines
   basisOwn: 'Jung', // graph/tools.ts tie filter and ui/related.ts SYSTEM_LABEL
@@ -123,8 +119,6 @@ describe('the founding corpus is named by its provider, in data (C2-b8)', () => 
     expect(skyClockLede()).toBe(FORMER.skyClockLede);
     expect(signSpans(reading(), 'Pisces')[0].label).toBe(FORMER.skyClockOwnSpan);
     expect(SYSTEM_LABEL.jung).toBe('Jung');
-    expect(jTitle()).toBe(FORMER.dynamicsOwnText);
-    expect(vTitle()).toBe(FORMER.dynamicsOtherText);
     expect(citeLine({ work: 'cw12', workTitle: 'Psychology and Alchemy (CW12)', year: '1944', locator: '¶561' })).toBe('Jung · Psychology and Alchemy · 1944 · ¶561');
     expect(citeLine({ work: 'thoth', workTitle: 'The Book of Thoth', year: '1944', locator: 'p. 7', voice: 'Crowley' })).toBe('Crowley · The Book of Thoth · 1944 · p. 7');
   });
@@ -133,7 +127,7 @@ describe('the founding corpus is named by its provider, in data (C2-b8)', () => 
     setProviderLabels(undefined);
     expect(providerLabels()).toEqual(NEUTRAL_LABELS);
     for (const [key, words] of Object.entries(NEUTRAL_LABELS)) expect(words, key).not.toMatch(/Jung/);
-    for (const line of [landingCopy(), lensDef('aion').blurb, lensDef('astrology').blurb, birthFraming(), birthLimits(), CONVENTION_INFO['jung-equal'].label, skyClockLede(), signSpans(reading(), 'Pisces')[0].label, SYSTEM_LABEL.jung, jTitle(), vTitle()]) {
+    for (const line of [landingCopy(), lensDef('aion').blurb, lensDef('astrology').blurb, birthFraming(), birthLimits(), CONVENTION_INFO['jung-equal'].label, skyClockLede(), signSpans(reading(), 'Pisces')[0].label, SYSTEM_LABEL.jung]) {
       expect(line).not.toMatch(/Jung/);
     }
     // no prefix at all: the cite reads from its work

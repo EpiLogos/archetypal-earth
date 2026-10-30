@@ -236,8 +236,6 @@ export interface ProviderLabels {
   lensAstrology?: string;
   /** the Aion reading's line in its Options (aion/view.ts) */
   readingTagline?: string;
-  /** the title of the J chip: a passage asserted in the reading's own text (aion/view.ts) */
-  readingOwnText?: string;
   /** the equal-months convention's name (aion/precession.ts) */
   conventionOwn?: string;
   /** the sky clock's opening sentences (aion/skyclock.ts) */
@@ -248,10 +246,6 @@ export interface ProviderLabels {
   skyClockFishes?: string;
   /** whose conditional dating of Aquarius the rows give (aion/skyclock-view.ts) */
   skyClockMarkBy?: string;
-  /** the J chip's title on a concept's quotation (dynamics/marks.ts) */
-  dynamicsOwnText?: string;
-  /** the V chip's title: another reader's reading, not the author's (dynamics/marks.ts) */
-  dynamicsOtherText?: string;
   /** the Options row that opens the Theory lens (dynamics/view.ts, lenses/theory.ts) */
   theoryRoute?: string;
   /** the heading over the author's own lines (lenses/theory.ts, ui/deep.ts) */
