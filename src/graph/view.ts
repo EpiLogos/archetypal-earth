@@ -19,7 +19,8 @@ import type { Model } from '../data/model';
 import type { RGB } from '../data/palette';
 import { smoothstep } from '../data/palette';
 import type { TimeModel } from '../state/timeModel';
-import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, type GEdge, type GNode, type Graph, type Neighbourhood, type NodeKind, type SkyAnchorSource } from './build';
+import { buildGraph, edgeAllowed, globalSet, hash01, neighbourhood, nodeLiveness, skyRingPosition, withSkyAnchors, withYou, type GEdge, type GNode, type Graph, type Neighbourhood, type NodeKind, type PersonalData, type SkyAnchorSource, type YouContext } from './build';
+import { vocabulary } from '../practice/amplify';
 import type { TieBasis } from '../types/field';
 import { GraphTools, type ToolState } from './tools';
 import { centreStrength, chargeReach, chargeStrength, DEFAULT_FORCES, dustLiveFactor, linkDistance, linkStrength, liveFactor, type Forces } from './forces';
@@ -53,6 +54,8 @@ export interface GraphHandlers {
   onEarth(key: string | null): void;
   /** The sky's bodies, ties and standing longitudes, loaded on demand; null when the sky cannot be had. */
   loadSky?(): Promise<{ source: SkyAnchorSource; asOf: string } | null>;
+  /** The subjects each walk visits, by walk id, so a finished walk can be tied to where it went. Optional: absent, a walk adds nothing to the visitor's node. */
+  walkSubjects?(): ReadonlyMap<string, readonly { type: string; id: string }[]> | undefined;
 }
 
 export interface GraphTarget {
@@ -173,6 +176,7 @@ const YOU_STYLES: EdgeStyle[] = Array.from({ length: CITE_STEPS }, (_, i) => ({ 
 const styleOf = (e: GEdge) => (e.kind === 'tie' ? `tie-${e.basis ?? 'site'}` : e.kind === 'sky' ? `sky-${e.basis ?? 'site'}` : e.kind === 'cite' ? `cite-${citeStep(e.weight)}` : e.kind === 'you' ? `you-${citeStep(e.weight)}` : e.kind);
 const edgeStyle = (e: GEdge): EdgeStyle => (e.kind === 'cite' ? CITE_STYLES[citeStep(e.weight)] : e.kind === 'you' ? YOU_STYLES[citeStep(e.weight)] : STYLE[styleOf(e)]);
 
+const YOU_SPAWN = 'you-spawn';
 const MAX_K = MAX_ZOOM;
 const MIN_K = MIN_ZOOM;
 
@@ -187,6 +191,9 @@ export class GraphView {
   private nodes: VNode[];
   private sky: { on: boolean; status: ToolState['sky']; asOf: string; source: SkyAnchorSource | null } = { on: false, status: 'off', asOf: '', source: null };
   private skyReq = 0;
+  /** the visitor's record as last given (counts are all that reach the graph) and the field's names for images, built when first needed */
+  private personal: PersonalData | null = null;
+  private vocab: ReturnType<typeof vocabulary> | null = null;
   private sim: Simulation<VNode, SimLink>;
   private qt: Quadtree<VNode> | null = null;
   private qtStale = true;
@@ -675,15 +682,44 @@ export class GraphView {
     });
   }
 
-  private applySky(src: SkyAnchorSource | null) {
+  /**
+   * The visitor's own record, from the practice store: dreams, coincidences, charts and the engagement log. The view draws one
+   * 'you' node tied to what they name, and none when there is nothing (or nothing that names a node). Nothing of it is kept
+   * here but counts on edges: the text never enters the graph. Pass null (or empty) to take the node down. Asked of the
+   * controller whenever the store changes.
+   */
+  setPersonal(p: PersonalData | null) {
+    if (!p && !this.personal) return;
+    this.personal = p;
+    this.compose();
+  }
+
+  private applySky(_src: SkyAnchorSource | null) {
+    this.compose();
+  }
+
+  /** The graph the view draws: the field's, with the sky hung from it when on, with the visitor in it when there is one. Extra nodes come after the field's, so every other node keeps its id. */
+  private compose() {
     const base = this.gBase.nodes.length;
-    this.nodes.length = base; // any earlier bodies go; the field's nodes stay exactly as they are
-    this.g = src ? withSkyAnchors(this.gBase, src) : this.gBase;
+    const src = this.sky.on ? this.sky.source : null;
+    this.nodes.length = base; // any earlier bodies and visitor go; the field's nodes stay exactly as they are
+    let g = src ? withSkyAnchors(this.gBase, src) : this.gBase;
+    if (this.personal) {
+      const ctx: YouContext = { vocab: (this.vocab ??= vocabulary(this.model)), walks: this.h_.walkSubjects?.() };
+      g = withYou(g, this.personal, ctx);
+    }
+    this.g = g;
     for (let i = base; i < this.g.nodes.length; i++) {
       const v = this.makeNode(this.g.nodes[i]);
-      const p = skyRingPosition((src?.lon[this.g.nodes[i].ref as keyof SkyAnchorSource['lon']]) ?? 0);
-      v.x = p.x;
-      v.y = p.y;
+      if (this.g.nodes[i].kind === 'body') {
+        const p = skyRingPosition((src?.lon[this.g.nodes[i].ref as keyof SkyAnchorSource['lon']]) ?? 0);
+        v.x = p.x;
+        v.y = p.y;
+      } else {
+        // the visitor starts near the heart and is drawn out by what they name
+        v.x = (hash01(YOU_SPAWN, 1) - 0.5) * 40;
+        v.y = (hash01(YOU_SPAWN, 2) - 0.5) * 40;
+      }
       this.nodes.push(v);
     }
     this.live = new Float32Array(this.g.nodes.length).fill(1);

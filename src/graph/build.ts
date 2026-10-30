@@ -5,7 +5,8 @@ import type { RGB } from '../data/palette';
 import type { TieBasis } from '../types/field';
 import { timeVisibility, type TimeWindow } from '../data/time';
 import { averagePalettes, hexToRgb } from '../data/palette';
-import type { BodyKey } from '../types/sky';
+import { BODY_KEYS, type BodyKey } from '../types/sky';
+import { matchImages, type Vocabulary } from '../practice/amplify';
 
 /**
  * 'work' and 'person' come from the Works and People the Model was built with (public/data/works.json, people.json); absent,
@@ -401,6 +402,91 @@ export function withSkyAnchors(base: Graph, src: SkyAnchorSource): Graph {
     incident[e.s].push(k); incident[e.t].push(k);
   }
   return { ...base, nodes, edges, adj, incident, byKey, bodyIds };
+}
+
+/**
+ * What the visitor has made and done, passed in from the practice store. The graph never reads storage itself. Only the
+ * fields named here are read, and none of their text reaches the graph: a dream is matched against the field's names and
+ * what is kept is a count on an edge.
+ */
+export interface PersonalData {
+  dreams?: readonly { text?: string }[];
+  coincidences?: readonly { familyId?: string | null; symbol?: string }[];
+  /** any chart at all: its bodies are tied when the sky is hung from the graph */
+  charts?: readonly unknown[];
+  engagements?: readonly { kind: string; subject: { type: string; id: string } }[];
+}
+
+export interface YouContext {
+  /** the field's names for its images (practice/amplify `vocabulary(model)`) */
+  vocab: Vocabulary;
+  /** the subjects a walk visits, by walk id: a finished walk is tied to where it went (optional; absent, a walk adds nothing) */
+  walks?: ReadonlyMap<string, readonly { type: string; id: string }[]>;
+}
+
+const SUBJECT_KEY: Record<string, (id: string) => string> = { archetype: aKey, theoretic: tKey, family: fKey, occurrence: oKey, work: wKey, person: pKey };
+
+/**
+ * The graph with the visitor in it: one 'you' node, tied to what their own record names, and nothing else. A tie's weight is
+ * how many times: the families and archetypes a dream names (`matchImages`), the family a coincidence was tied to, each
+ * thing opened or looked up or walked (the engagements), and each body of a chart when the sky is hung from the graph. No
+ * tie, no node: with no data the graph is returned as it was. Pure, and every existing node keeps its id. Apply it to a
+ * graph that does not have the node yet (the field's, or the field's with the sky).
+ */
+export function withYou(base: Graph, personal: PersonalData, ctx: YouContext): Graph {
+  if (base.byKey.has(YOU_KEY)) throw new Error('withYou: the graph already has the visitor');
+  const ties = new Map<number, number>();
+  const add = (key: string | undefined, n = 1) => {
+    const i = key === undefined ? undefined : base.byKey.get(key);
+    if (i !== undefined) ties.set(i, (ties.get(i) ?? 0) + n);
+  };
+  const named = (text: string | undefined) => {
+    if (!text) return;
+    for (const hit of matchImages(ctx.vocab, text)) add((hit.target.type === 'family' ? fKey : aKey)(hit.target.id));
+  };
+  for (const d of personal.dreams ?? []) named(d.text);
+  for (const c of personal.coincidences ?? []) {
+    if (c.familyId) add(fKey(c.familyId));
+    else named(c.symbol);
+  }
+  if (personal.charts?.length) for (const k of BODY_KEYS) if (k !== 'terra') add(bodyKey(k));
+  const subject = (s: { type: string; id: string }) => add(SUBJECT_KEY[s.type]?.(s.id));
+  for (const e of personal.engagements ?? []) {
+    if (e.subject.type === 'walk') for (const s of ctx.walks?.get(e.subject.id) ?? []) subject(s);
+    else subject(e.subject);
+  }
+  if (!ties.size) return base;
+
+  const id = base.nodes.length;
+  const targets = [...ties].sort((a, b) => a[0] - b[0]);
+  let total = 0;
+  const colour: RGB = [0, 0, 0];
+  const glow: RGB = [0, 0, 0];
+  let spectrum = 0;
+  for (const [i, w] of targets) {
+    total += w;
+    const n = base.nodes[i];
+    for (let c = 0; c < 3; c++) { colour[c] += n.colour[c] * w; glow[c] += n.glow[c] * w; }
+    spectrum += n.spectrum * w;
+  }
+  for (let c = 0; c < 3; c++) { colour[c] /= total; glow[c] /= total; }
+  const nodes = base.nodes.slice();
+  nodes.push({
+    id, kind: 'you', key: YOU_KEY, ref: YOU_KEY, label: 'You', occIdx: -1, members: [], count: 0, placed: true, rank: 0.95,
+    colour, glow, spectrum: spectrum / total, u: NaN, yearDisplay: '', prime: false, hasImage: false, ground: false,
+  });
+  const edges = base.edges.slice();
+  for (const [i, w] of targets) edges.push({ s: id, t: i, kind: 'you', weight: w });
+  const byKey = new Map(base.byKey);
+  byKey.set(YOU_KEY, id);
+  const adj: number[][] = nodes.map((_, i) => (base.adj[i] ? base.adj[i].slice() : []));
+  const incident: number[][] = nodes.map((_, i) => (base.incident[i] ? base.incident[i].slice() : []));
+  for (let k = base.edges.length; k < edges.length; k++) {
+    const e = edges[k];
+    adj[e.s].push(e.t); adj[e.t].push(e.s);
+    incident[e.s].push(k); incident[e.t].push(k);
+  }
+  return { ...base, nodes, edges, adj, incident, byKey, youIds: [id] };
 }
 
 export interface Neighbourhood {
