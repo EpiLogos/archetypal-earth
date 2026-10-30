@@ -1,11 +1,37 @@
-// The one place personal material is kept (MODES-RFC §8): birth charts, dreams and coincidences, in this browser's
+// The one place personal material is kept (MODES-RFC §8): birth charts, dreams, coincidences and the log of what the person
+// has opened, walked and read (`engagements`), in this browser's
 // localStorage and nowhere else. Nothing here touches the network. Every practice lens reads and writes through this
 // module, so the promise each lens states in its UI ("stays in this browser") is kept in one place.
 //
 // The shape is a set of named collections of records with ids. A later shared layer would be a second backend behind the
 // same interface (`PracticeBackend`), chosen per collection, so the lenses would not change.
 
-export type Collection = 'charts' | 'dreams' | 'coincidences';
+export type Collection = 'charts' | 'dreams' | 'coincidences' | 'engagements' | 'settings';
+
+/** The collections that hold the person's records: what the export carries, the import merges and a full wipe deletes. `settings` is the device's own and is none of these. */
+export const RECORD_COLLECTIONS: readonly Collection[] = ['charts', 'dreams', 'coincidences', 'engagements'];
+
+/** What an engagement can be of: a page opened, a walk walked, a dream written, a symbol looked up, a coincidence logged, a chart cast. */
+export const ENGAGEMENT_KINDS = ['open', 'walk', 'dream', 'symbol', 'coincidence', 'chart'] as const;
+export type EngagementKind = (typeof ENGAGEMENT_KINDS)[number];
+
+/** The log keeps this many; the oldest go first. */
+export const ENGAGEMENT_CAP = 500;
+
+/**
+ * One thing the person did, and to what: a kind and a subject (`{type, id}`, a registry id or the id of one of their own
+ * records), with the time. No text of theirs is copied here; a dream's words stay in the `dreams` collection.
+ */
+export interface Engagement extends PracticeRecord {
+  kind: EngagementKind;
+  subject: { type: string; id: string };
+}
+
+const isEngagement = (x: unknown): x is Engagement => {
+  const e = x as Engagement;
+  return !!e && typeof e === 'object' && typeof e.id === 'string' && (ENGAGEMENT_KINDS as readonly string[]).includes(e.kind)
+    && !!e.subject && typeof e.subject.type === 'string' && typeof e.subject.id === 'string';
+};
 
 export interface PracticeRecord {
   id: string;
@@ -103,16 +129,52 @@ export class PracticeStore {
     this.emit(c);
   }
 
-  /** Delete everything in one collection, or in all of them. */
+  /** Delete everything in one collection, or every record of the person's (the recording switch stays as it was set). */
   wipe(c?: Collection) {
-    for (const k of c ? [c] : (['charts', 'dreams', 'coincidences'] as Collection[])) this.backend.write(k, []);
-    for (const k of c ? [c] : (['charts', 'dreams', 'coincidences'] as Collection[])) this.emit(k);
+    const which = c ? [c] : [...RECORD_COLLECTIONS];
+    for (const k of which) this.backend.write(k, []);
+    for (const k of which) this.emit(k);
+  }
+
+  // ── the engagement log ────────────────────────────────────────────────────
+
+  /** Whether the log is being written. On until the person turns it off; the choice is kept on this device and is not in the export. */
+  get recording(): boolean {
+    return this.get<PracticeRecord & { on: boolean }>('settings', 'recording')?.on !== false;
+  }
+
+  setRecording(on: boolean) {
+    this.put<PracticeRecord & { on: boolean }>('settings', { id: 'recording', on });
+  }
+
+  /** Record that the person did something to a subject. Returns the record, or null when the recording is off. */
+  engage(kind: EngagementKind, subject: { type: string; id: string }): Engagement | null {
+    if (!(ENGAGEMENT_KINDS as readonly string[]).includes(kind)) throw new TypeError(`unknown engagement kind: ${String(kind)}`);
+    if (!this.recording) return null;
+    const now = new Date().toISOString();
+    const rec: Engagement = { id: newId(), kind, subject: { type: subject.type, id: subject.id }, createdAt: now, updatedAt: now };
+    this.backend.write('engagements', [...this.list<Engagement>('engagements'), rec].slice(-ENGAGEMENT_CAP));
+    this.emit('engagements');
+    return rec;
+  }
+
+  /** The log, newest first. */
+  engagements(): Engagement[] {
+    return this.list<Engagement>('engagements').filter(isEngagement).reverse();
+  }
+
+  forgetEngagement(id: string) {
+    this.remove('engagements', id);
+  }
+
+  clearEngagements() {
+    this.wipe('engagements');
   }
 
   /** Everything, as one JSON document the person can keep. */
   exportAll(): string {
     const out: Record<string, unknown> = { kind: 'archetypal-earth-practice', version: 1, exportedAt: new Date().toISOString() };
-    for (const c of ['charts', 'dreams', 'coincidences'] as Collection[]) out[c] = this.list(c);
+    for (const c of RECORD_COLLECTIONS) out[c] = this.list(c);
     return JSON.stringify(out, null, 2);
   }
 
@@ -121,15 +183,18 @@ export class PracticeStore {
     const doc = JSON.parse(json) as Record<string, unknown>;
     if (doc?.kind !== 'archetypal-earth-practice') throw new Error('This file is not an export from this site.');
     let added = 0, kept = 0;
-    for (const c of ['charts', 'dreams', 'coincidences'] as Collection[]) {
+    for (const c of RECORD_COLLECTIONS) {
       const incoming = Array.isArray(doc[c]) ? (doc[c] as PracticeRecord[]) : [];
       const items = this.list(c);
       for (const r of incoming) {
         if (!r || typeof r.id !== 'string') continue;
+        if (c === 'engagements' && !isEngagement(r)) continue;
         const at = items.findIndex((x) => x.id === r.id);
         if (at < 0) { items.push(r); added++; } else if ((r.updatedAt ?? '') > (items[at].updatedAt ?? '')) { items[at] = r; added++; } else kept++;
       }
-      this.backend.write(c, items);
+      // the log keeps its order in time and its cap, whatever an old file brings
+      if (c === 'engagements') items.sort((a, b) => (a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0));
+      this.backend.write(c, c === 'engagements' ? items.slice(-ENGAGEMENT_CAP) : items);
       this.emit(c);
     }
     return { added, kept };
