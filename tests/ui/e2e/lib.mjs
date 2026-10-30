@@ -6,8 +6,10 @@ export const URL = process.env.EARTH_URL ?? 'http://localhost:5183/';
 
 // EARTH_HEADLESS=1 runs without a display (a cloud clone): software GL through the system Chromium.
 const CLOUD = process.env.EARTH_HEADLESS === '1';
+// EARTH_HEADED=0 runs headless on this machine's own GPU (a local run that must not open windows)
+const HEADED = !CLOUD && process.env.EARTH_HEADED !== '0';
 
-export async function launch(kind = 'chromium', { headed = !CLOUD } = {}) {
+export async function launch(kind = 'chromium', { headed = HEADED } = {}) {
   if (kind === 'webkit') return webkit.launch({ headless: !headed });
   if (CLOUD) {
     return chromium.launch({
