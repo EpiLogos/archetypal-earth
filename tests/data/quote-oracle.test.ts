@@ -163,6 +163,104 @@ describe('matchQuote: verbatim on the cited page', () => {
   });
 });
 
+describe('matchQuote: the furniture a scan puts inside a quotation (running heads, folios, footnotes, footnote calls)', () => {
+  // pdf 20 ends on a sentence that goes on at the top of pdf 21; between them the scan holds a footnote block and, on 21, a running head
+  const book = prepareVolume({
+    work: 'bk',
+    paras: [],
+    pages: [
+      { p: 19, print: '1', text: 'An unrelated page that ends here.' },
+      {
+        p: 20,
+        print: '2',
+        text: 'The anima stood on the other bank and the dreamer on this one, and they talked to each other about how to\n12 Cf. Aion, p. 14.\n13 See also the letter of 3 May.\nSEMINAR 5\n396',
+      },
+      { p: 21, print: '3', text: 'SPRING TERM\nbuild a function between them, for the bridge must be made from both sides, not from one side only.' },
+      { p: 22, print: '4', text: '3 DECEMBER 1930\nThere is a black Virgin at Einsiedeln, 11 though they say it is black from a fire; and the marble4 was cold, the souls21 slept.' },
+      { p: 23, print: '5', text: 'The government of the old world was gov-' },
+      { p: 24, print: '6', text: 'WINTER TERM\nernment by the dead, and nothing else. Then a new paragraph begins.' },
+    ],
+  });
+  it('lets a quotation run over a page break past a footnote block and a running head', () => {
+    const q = 'the dreamer on this one, and they talked to each other about how to build a function between them, for the bridge must be made from both sides';
+    expect(matchQuote(book, q, 'pdf p20')).toMatchObject({ cls: 'scan', scanKind: 'page-break' });
+  });
+  it('lets a word divided by the page break stand (a hyphen at the foot, the rest after the head)', () => {
+    expect(matchQuote(book, 'The government of the old world was government by the dead, and nothing else.', 'pdf p23')).toMatchObject({ cls: 'scan', scanKind: 'page-break' });
+  });
+  it('does not bridge a quotation that joins two places that are not a page break', () => {
+    // the first half is on p20, the second half is on p21, but not at its head: a line of the page's own text lies between
+    const q = 'the dreamer on this one, and they talked to each other about how to not from one side only.';
+    expect(matchQuote(book, q, 'pdf p20').cls).not.toBe('scan');
+    // a changed word is still not verbatim
+    expect(matchQuote(book, 'the dreamer on this one, and they talked to each other about how to construct a function between them', 'pdf p20').cls).toBe('not-verbatim');
+  });
+  it('does not bridge to a page that is not next', () => {
+    expect(matchQuote(book, 'the dreamer on this one, and they talked to each other about how to build a function between them', 'pdf p19').cls).not.toBe('scan');
+  });
+  it('lets a footnote call stand in the page and not in the quotation', () => {
+    expect(matchQuote(book, 'There is a black Virgin at Einsiedeln, though they say it is black from a fire', 'pdf p22')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+    expect(matchQuote(book, 'and the marble was cold, the souls slept.', 'pdf p22')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+  });
+  it('lets a footnote call after a capitalised name stand in the page and not in the quotation', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 5, print: '1', text: 'the drawings of Opicinus de Canistris 40 afford us an interesting glimpse of the way in which it was used' }], paras: [] });
+    expect(matchQuote(v, 'the drawings of Opicinus de Canistris afford us an interesting glimpse of the way', 'pdf p5')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+    const w = prepareVolume({ work: 'x', pages: [{ p: 5, print: '1', text: 'the farmers in that valley had 12 sons and a great many more daughters than anyone' }], paras: [] });
+    expect(matchQuote(w, 'the farmers in that valley had sons and a great many more daughters than anyone', 'pdf p5').cls).not.toBe('scan');
+  });
+  it('lets a footnote call and a split word stand together in the page (the scan: "Magdeburg 39-approached", "s ublimated")', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 7, print: '1', text: 'the image of the hieros gamos was s ublimated on a lofty plane, as for instance with Mechthild of\nMagdeburg \n39-approached the physical sphere in emotional intensity' }], paras: [] });
+    expect(matchQuote(v, 'the image of the hieros gamos was sublimated on a lofty plane, as for instance with Mechthild of Magdeburg-approached the physical sphere', 'pdf p7')).toMatchObject({ cls: 'scan', scanKind: 'notes+spacing' });
+  });
+  it('lets the page break fall inside the first words of the quotation ("His" at the foot, "death induces" after the head)', () => {
+    const v = prepareVolume({ work: 'x', pages: [
+      { p: 30, print: '1', text: 'The only one she really loves is the young man Tammuz, mentioned earlier. His\nSEMINAR ON CHILDREN’S DREAMS, 1936/37' },
+      { p: 31, print: '2', text: 'death induces her to go on a journey through the underworld. In doing so, she falls into the hands of Ereshkigal.' },
+    ], paras: [] });
+    expect(matchQuote(v, 'His death induces her to go on a journey through the underworld. In doing so, she falls into the hands of Ereshkigal.', 'pdf pp30-31')).toMatchObject({ cls: 'scan', scanKind: 'page-break' });
+  });
+  it('bridges each fragment of an ellipsis quotation across a footnote block and a running head', () => {
+    const v = prepareVolume({ work: 'x', pages: [
+      { p: 40, print: '1', text: 'It demanded the sacrifice) from among a great crowd of peoPle) of a young man) who obeyed this demand. The dream was repeated a little later, but this time the snake\n57 Miss X was referring to my remarks in an earlier essay.' },
+      { p: 41, print: '2', text: 'A STUDY IN THE PROCESS OF INDIVIDUATION\npicked on the dreamer herself. The assembled people regarded her compassionately.' },
+    ], paras: [] });
+    expect(matchQuote(v, 'It demanded the sacrifice … of a young man … The dream was repeated a little later, but this time the snake picked on the dreamer herself.', 'pdf pp40-41')).toMatchObject({ cls: 'scan', scanKind: 'page-break' });
+  });
+  it('folds a footnote call the scan reads as letter and digits ("Goddessl86-it"), a doubled opening mark ("\'\'Apage") and a stray middle dot, in the page only', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 9, print: '1', text: 'a many-armed bloody Goddessl86-it is Salome desperately wringing her handsl87-it takes hold of me, she is my own soul' }, { p: 10, print: '2', text: "Ammonius exclaims horrified: ''Apage, Satanas!\" The Red One: \"Damned pagan riffraff!\" If one wounds the abdominal region in order to create the · anahata psychology, it is right" }], paras: [] });
+    expect(matchQuote(v, 'a many-armed bloody Goddess-it is Salome desperately wringing her hands', 'pdf p9')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+    expect(matchQuote(v, 'Ammonius exclaims horrified: \"Apage, Satanas!\" The Red One: \"Damned pagan riffraff!\"', 'pdf p10')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+    expect(matchQuote(v, 'If one wounds the abdominal region in order to create the anahata psychology, it is right', 'pdf p10')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+  });
+  it('folds a caret the scan sets after a word for a footnote mark ("Cabiri^ were"), in the page only', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 9, print: '1', text: 'and then the Greek Cabiri^ were adorned with pointed caps. I think it was Pausanias who reported' }], paras: [] });
+    expect(matchQuote(v, 'the Greek Cabiri were adorned with pointed caps. I think it was Pausanias', 'pdf p9')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+  });
+  it('lets a short last word stand over the page break ("Kundalini" at the foot, "serpent" after the head)', () => {
+    const v = prepareVolume({ work: 'x', pages: [
+      { p: 50, print: '1', text: 'this ring of mine with the snake engraved on it is two thousand years old; 2 it is the agathodaimon, and it is also the Kundalini\n1 The philosophers’ stone: one of the goals of the alchemical process.' },
+      { p: 51, print: '2', text: 'serpent in the mind of the dreamer, and nothing else.' },
+    ], paras: [] });
+    expect(matchQuote(v, 'this ring of mine with the snake engraved on it is two thousand years old; it is the agathodaimon, and it is also the Kundalini serpent', 'pdf pp50-51')).toMatchObject({ cls: 'scan', scanKind: 'notes+page-break' });
+  });
+  it('lets a footnote call that the layout sets on a line of its own stand in the page, not in the quotation', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 9, print: '1', text: 'The worst case was the prophet Hosea, \n1 \nwho married a prostitute as a symbolic act because the Lord ordered him to do so' }], paras: [] });
+    expect(matchQuote(v, 'The worst case was the prophet Hosea, who married a prostitute as a symbolic act', 'pdf p9')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+  });
+  it('folds a lone number between two plain words when the same page opens a footnote line with that number', () => {
+    const v = prepareVolume({ work: 'x', pages: [{ p: 9, print: '1', text: 'The churinga 70 of the Australian aborigines is a similar energic concept and the sacred bull-roarer also.\nthe farmers came and 12 men came in with them that day\n70 Spencer and Gillen, Native Tribes of Central Australia.' }], paras: [] });
+    expect(matchQuote(v, 'The churinga of the Australian aborigines is a similar energic concept', 'pdf p9')).toMatchObject({ cls: 'scan', scanKind: 'notes' });
+    // 12 is not a footnote number on this page (no footnote line opens with it): a quotation that drops it is not matched
+    expect(matchQuote(v, 'the farmers came and men came in with them that day', 'pdf p9').cls).not.toBe('scan');
+  });
+  it('keeps a real number: a quotation that carries a number the page lacks is not lenient', () => {
+    expect(matchQuote(book, 'There is a black Virgin at Einsiedeln, 12 though they say it is black', 'pdf p22').cls).not.toBe('scan');
+  });
+  it('still calls a plain verbatim quotation exact, and a footnote-free break exact', () => {
+    expect(matchQuote(book, 'An unrelated page that ends here.', 'pdf p19').cls).toBe('exact');
+  });
+});
+
 describe('judge: the primary cite is the gate', () => {
   const load = (w: string) => (w === 'tv' ? vol : null);
   it('passes on the primary cite', () => {
@@ -227,36 +325,36 @@ describe('quote-oracle --check: the gate', () => {
 // regression: the 13 generated datasets that verify today (plan Q6), against the real published data
 // ---------------------------------------------------------------------------------------------------------------------
 
-const GREEN = ['theory-pages.json', 'field-pages.json', 'theory.json', 'alchemy.json', 'numbers.json', 'astrology.json', 'practice.json', 'aionbook.json', 'depth.json', 'dynamics-route.json', 'sky-cards.json', 'history.json', 'sky.json'];
-// The only three records of those datasets the oracle holds red, found by the 30 Oct measurement. The build's own verifier accepts
-// them; the oracle is stricter: two close on a period where the cited sentence goes on ("…not individual but universal."), and one
-// joins a section heading to a sentence that begins on the next page. They can be fixed (never added to): the list only shrinks.
-const KNOWN_RESIDUE = new Set([
-  'field-pages.json#pages.family:quintessence.sections[3].quotes[1]',
-  'theory-pages.json#pages.archetype-as-such.sections[0].quotes[2]',
-  'theory-pages.json#pages.collective-unconscious.sections[0].quotes[0]',
-]);
+const EXCEPTIONS_FILE = path.join(ROOT, 'curation/quote-oracle-exceptions.json');
 
-describe('regression: the datasets that verify today keep verifying', () => {
-  type Row = { dataset: string; id: string; cls: string; pass: boolean };
-  let all: { results: Row[]; unclassified: unknown[] };
-  beforeAll(() => { all = runOracle(path.join(ROOT, 'public/data')); }, 60_000);
-  it('holds at least 3,208 of the 3,211 quotations of the 13 datasets verbatim on their cited pages', () => {
-    const green = all.results.filter((r) => GREEN.includes(r.dataset));
-    expect(green.length).toBeGreaterThanOrEqual(3211);
-    expect(green.filter((r) => r.pass).length).toBeGreaterThanOrEqual(3208);
+describe('regression: every quotation in the published data is verbatim, or excepted for a reason', () => {
+  type Row = { dataset: string; id: string; cls: string; pass: boolean; excepted?: unknown };
+  const doc = JSON.parse(fs.readFileSync(EXCEPTIONS_FILE, 'utf8')) as { exceptions: { dataset: string; id: string; reason: string }[] };
+  let all: { results: Row[]; unclassified: unknown[]; stale: unknown[] };
+  beforeAll(() => { all = runOracle(path.join(ROOT, 'public/data'), { exceptions: doc.exceptions }); }, 60_000);
+  it('holds every quotation of every dataset verbatim on its cited pages (the gate is green)', () => {
+    const red = all.results.filter((r) => !r.pass && r.excepted === undefined).map((r) => `${r.cls} ${r.dataset} ${r.id}`);
+    expect(red).toEqual([]);
   });
-  it('fails no quotation of those datasets beyond the three known', () => {
-    const bad = all.results.filter((r) => GREEN.includes(r.dataset) && !r.pass && !KNOWN_RESIDUE.has(r.id)).map((r) => `${r.cls} ${r.id}`);
-    expect(bad).toEqual([]);
+  it('checks the whole published data (5,300 quotations and more)', () => {
+    expect(all.results.length).toBeGreaterThanOrEqual(5300);
   });
   it('finds every quotation-shaped record in the published data (no unclassified shape)', () => {
     expect(all.unclassified).toEqual([]);
   });
-  it('does not let field.json get worse than the 30 Oct baseline (it is still being repaired; this is a ceiling, not a target)', () => {
-    const failing = (ds: string) => all.results.filter((r) => r.dataset === ds && !r.pass).length;
-    expect(failing('field.json#occurrences')).toBeLessThanOrEqual(317);
-    expect(failing('field.json#definitions')).toBeLessThanOrEqual(35);
+  it('keeps no stale exception, and every exception names what the scan does', () => {
+    expect(all.stale).toEqual([]);
+    for (const e of doc.exceptions) expect(e.reason, e.id).toMatch(/^damaged scan: .{20,}/);
+  });
+  it('never lets the exceptions grow: it only shrinks (34 on 30 Oct)', () => {
+    expect(doc.exceptions.length).toBeLessThanOrEqual(34);
+  });
+  it('does not check a demoted record: labelled a paraphrase, it is no longer presented as a quotation', () => {
+    const checked = new Set(all.results.map((r) => r.id));
+    const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json'), 'utf8'));
+    const demoted = field.occurrences.filter((o: { quoteKind?: string }) => o.quoteKind === 'paraphrase');
+    expect(demoted.length).toBe(7);
+    for (const o of demoted) expect(checked.has(o.id), o.id).toBe(false);
   });
 });
 
@@ -294,6 +392,33 @@ describe('quote-fixes: the reviewed override layer', () => {
     const f = field();
     applyQuoteFixes(f, { version: 1, fixes: { 'family:fam': { text: 'New definition.', cite: 'Aion (CW9ii) ¶10 (pdf p31)', basis: 'cw09ii pdf p31' } } });
     expect(f.families[0].definition).toEqual({ text: 'New definition.', cite: 'Aion (CW9ii) ¶10 (pdf p31)' });
+  });
+  it('demotes a record to labelled paraphrase: the record stays, its words are marked, and the oracle no longer asks it to be verbatim', () => {
+    const f = field();
+    const r = applyQuoteFixes(f, { version: 1, fixes: { 'occ-a': { demote: true, basis: 'no corpus page carries these words; the record retells the passage' }, 'family:fam': { demote: true, basis: 'the definition paraphrases the cited page' } } });
+    expect(r.problems).toEqual([]);
+    expect(r.applied).toEqual(['occ-a', 'family:fam']);
+    expect(f.occurrences[0]).toMatchObject({ id: 'occ-a', quote: 'Old words.', quoteKind: 'paraphrase' });
+    expect(f.families[0].definition).toMatchObject({ text: 'Old definition.', quoteKind: 'paraphrase' });
+  });
+  it('refuses a demotion that also changes words, or a demotion that is not true', () => {
+    expect(validateQuoteFixes({ version: 1, fixes: { a: { demote: true, text: 'x', basis: 'b' } } })).toEqual(['a: a demotion changes nothing else']);
+    expect(validateQuoteFixes({ version: 1, fixes: { a: { demote: false, basis: 'b' } } })).toEqual(['a: "demote" must be true']);
+  });
+  it('the oracle skips a demoted occurrence and a demoted definition (they are no longer presented as a quotation)', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'quote-oracle-demote-'));
+    made.push(dir);
+    fs.mkdirSync(path.join(dir, 'corpus'));
+    fs.writeFileSync(path.join(dir, 'corpus', 'index.json'), JSON.stringify({ works: [{ work: 'cw08', title: 'Structure', file: 'cw08.json', pages: 1, paras: 0, chapters: 0 }] }));
+    fs.writeFileSync(path.join(dir, 'corpus', 'cw08.json'), JSON.stringify({ work: 'cw08', title: 'Structure', chapters: [], paras: [], pages: [{ p: 1, text: 'Nothing like it is here.' }] }));
+    const occ = (id: string, kind?: string) => ({ id, quote: 'An entirely different set of words.', jung: [{ work: 'cw08', locator: 'pdf p1' }], ...(kind ? { quoteKind: kind } : {}) });
+    fs.writeFileSync(path.join(dir, 'field.json'), JSON.stringify({
+      occurrences: [occ('plain'), occ('demoted', 'paraphrase')],
+      families: [{ id: 'a', definition: { text: 'Words that are not there at all.', cite: 'Structure (CW8) pdf p1' } }, { id: 'b', definition: { text: 'Words that are not there at all.', cite: 'Structure (CW8) pdf p1', quoteKind: 'paraphrase' } }],
+      archetypes: [], theoretics: [],
+    }));
+    const { results } = runOracle(dir);
+    expect(results.map((r: { id: string }) => r.id).sort()).toEqual(['family:a', 'plain']);
   });
   it('refuses a fix with no basis, an unknown field, a stale id, or a change that changes nothing', () => {
     expect(validateQuoteFixes({ version: 1, fixes: { a: { text: 'x' } } })).toEqual(['a: a "basis" line is required']);

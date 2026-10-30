@@ -1840,10 +1840,18 @@
       "type": "occurrence",
       "id": "liber-novus-flood-vision-northern-lands-fol1v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 262
+     },
      "year": 1913,
      "place": {
       "lat": 47.4002,
       "lon": 8.5558
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. i(v)/ii(r) (pdf p262)"
      }
     },
     {
@@ -1851,10 +1859,18 @@
       "type": "occurrence",
       "id": "liber-novus-soul-white-bird-refinding-fol2r"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 261
+     },
      "year": 1913,
      "place": {
       "lat": 47.2485,
       "lon": 8.5605
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. i(v)/ii(r) (pdf p261-263)"
      }
     },
     {
@@ -1862,10 +1878,18 @@
       "type": "occurrence",
       "id": "liber-novus-descent-into-hell-cave-fol3v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 268
+     },
      "year": 1913,
      "place": {
       "lat": 47.2537,
       "lon": 8.6665
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. iii(v) (pdf p268-270)"
      }
     },
     {
@@ -1884,10 +1908,18 @@
       "type": "occurrence",
       "id": "liber-novus-siegfried-murder-hero-fol4v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 272
+     },
      "year": 1913,
      "place": {
       "lat": 47.2783,
       "lon": 8.6287
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. iv(v) (pdf p272-273)"
      }
     },
     {
@@ -1895,10 +1927,18 @@
       "type": "occurrence",
       "id": "liber-novus-coming-god-proclamation-fol4v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 273
+     },
      "year": 1913,
      "place": {
       "lat": 47.2904,
       "lon": 8.6971
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. iv(v)-v(r) (pdf p273-274)"
      }
     },
     {
@@ -1906,10 +1946,18 @@
       "type": "occurrence",
       "id": "liber-novus-elijah-salome-mysterium-fol5v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 276
+     },
      "year": 1913,
      "place": {
       "lat": 47.2796,
       "lon": 8.5657
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. v(v) (pdf p276-278)"
      }
     },
     {
@@ -1917,10 +1965,18 @@
       "type": "occurrence",
       "id": "liber-novus-crucifixion-salome-healing-fol6v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 283
+     },
      "year": 1913,
      "place": {
       "lat": 47.2714,
       "lon": 8.5844
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. vi(v) (pdf p283)"
      }
     },
     {
@@ -1928,10 +1984,18 @@
       "type": "occurrence",
       "id": "liber-novus-instruction-crystal-visions-kali-fol6r"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 279
+     },
      "year": 1913,
      "place": {
       "lat": 47.3184,
       "lon": 8.4967
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. vi(r) (pdf p279-282)"
      }
     },
     {
@@ -1939,10 +2003,18 @@
       "type": "occurrence",
       "id": "liber-novus-serpents-duel-sun-temple-fol6v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 282
+     },
      "year": 1913,
      "place": {
       "lat": 47.3691,
       "lon": 8.6369
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. vi(v) (pdf p282-283)"
      }
     },
     {
@@ -1950,10 +2022,18 @@
       "type": "occurrence",
       "id": "liber-novus-castle-maiden-red-roses-fol05"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 292
+     },
      "year": 1913,
      "place": {
       "lat": 47.4071,
       "lon": 8.5293
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 5/6-9/12 (pdf p292-295)"
      }
     },
     {
@@ -1961,10 +2041,18 @@
       "type": "occurrence",
       "id": "liber-novus-red-one-joy-devil-fol01"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 290
+     },
      "year": 1913,
      "place": {
       "lat": 47.3687,
       "lon": 8.5419
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 1/2-5/6 (pdf p290-292)"
      }
     },
     {
@@ -1972,10 +2060,18 @@
       "type": "occurrence",
       "id": "liber-novus-one-of-the-lowly-tramp-death-fol12"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 296
+     },
      "year": 1913,
      "place": {
       "lat": 47.3715,
       "lon": 8.666
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 12/13 (pdf p296-297)"
      }
     },
     {
@@ -1983,10 +2079,18 @@
       "type": "occurrence",
       "id": "liber-novus-death-dark-one-sea-of-dead-fol29"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 304
+     },
      "year": 1914,
      "place": {
       "lat": 47.308,
       "lon": 8.6915
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 28/29-31/32 (pdf p304-306)"
      }
     },
     {
@@ -1994,10 +2098,18 @@
       "type": "occurrence",
       "id": "liber-novus-desert-of-self-fol3r"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 266
+     },
      "year": 1913,
      "place": {
       "lat": 47.3763,
       "lon": 8.5219
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. iii(r)-iii(v) (pdf p266-268)"
      }
     },
     {
@@ -2005,10 +2117,18 @@
       "type": "occurrence",
       "id": "liber-novus-helios-four-horses-dawn-fol20"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 301
+     },
      "year": 1914,
      "place": {
       "lat": 47.3845,
       "lon": 8.6406
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 20/24-23/24 (pdf p301-302)"
      }
     },
     {
@@ -2016,10 +2136,18 @@
       "type": "occurrence",
       "id": "liber-novus-remains-temples-greening-fol33"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 306
+     },
      "year": 1914,
      "place": {
       "lat": 47.3467,
       "lon": 8.6309
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 33/37 (pdf p306-308)"
      }
     },
     {
@@ -2027,10 +2155,18 @@
       "type": "occurrence",
       "id": "liber-novus-izdubar-serpent-weave-image-fol36"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 308
+     },
      "year": 1913,
      "place": {
       "lat": 47.2315,
       "lon": 8.632
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 36 (pdf p308, image legend)"
      }
     },
     {
@@ -2038,10 +2174,18 @@
       "type": "occurrence",
       "id": "liber-novus-izdubar-bull-man-first-day-fol37"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 308
+     },
      "year": 1914,
      "place": {
       "lat": 47.292,
       "lon": 8.4768
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 37/40 (pdf p308-310)"
      }
     },
     {
@@ -2049,10 +2193,18 @@
       "type": "occurrence",
       "id": "liber-novus-izdubar-carried-fantasy-egg-fol46"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 312
+     },
      "year": 1914,
      "place": {
       "lat": 47.3901,
       "lon": 8.6761
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 46/49 (pdf p312-314)"
      }
     },
     {
@@ -2082,10 +2234,18 @@
       "type": "occurrence",
       "id": "liber-novus-anchorite-ammonius-fol15"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 298
+     },
      "year": 1913,
      "place": {
       "lat": 47.2614,
       "lon": 8.6729
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 15/16-19/20 (pdf p298-300)"
      }
     },
     {
@@ -2675,7 +2835,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 327
+      "page": 328
      },
      "year": 1000,
      "place": {
@@ -2684,7 +2844,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶421 (pdf p327)"
+      "locator": "¶421 (pdf p328)"
      }
     },
     {
@@ -2770,7 +2930,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -2779,7 +2939,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -2789,7 +2949,7 @@
      },
      "page": {
       "work": "cw14",
-      "page": 310
+      "page": 311
      },
      "year": 1677,
      "place": {
@@ -2798,7 +2958,7 @@
      },
      "cite": {
       "work": "cw14",
-      "locator": "¶593 (pdf p310)"
+      "locator": "¶593 (pdf p311)"
      }
     },
     {
@@ -2931,10 +3091,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -2942,7 +3098,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -3158,7 +3314,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 327
+      "page": 328
      },
      "year": 1000,
      "place": {
@@ -3167,7 +3323,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶421 (pdf p327)"
+      "locator": "¶421 (pdf p328)"
      }
     },
     {
@@ -3253,7 +3409,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -3262,7 +3418,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -3414,10 +3570,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -3425,7 +3577,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -3630,7 +3782,7 @@
      },
      "page": {
       "work": "cw10",
-      "page": 181
+      "page": 183
      },
      "year": 1270,
      "place": {
@@ -3639,7 +3791,7 @@
      },
      "cite": {
       "work": "cw10",
-      "locator": "¶399 (pdf p181–182)"
+      "locator": "¶400 (pdf p183)"
      }
     },
     {
@@ -4052,7 +4204,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 327
+      "page": 328
      },
      "year": 1000,
      "place": {
@@ -4061,7 +4213,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶421 (pdf p327)"
+      "locator": "¶421 (pdf p328)"
      }
     },
     {
@@ -4147,7 +4299,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -4156,7 +4308,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -4308,10 +4460,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -4319,7 +4467,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -4391,7 +4539,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 337
+      "page": 338
      },
      "year": -800,
      "place": {
@@ -4400,7 +4548,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶439 (pdf p337)"
+      "locator": "¶441 (pdf p338)"
      }
     },
     {
@@ -4630,7 +4778,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 387
+      "page": 388
      },
      "year": 1855,
      "place": {
@@ -4639,7 +4787,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶541 (pdf p387)"
+      "locator": "¶541 (pdf p388)"
      }
     },
     {
@@ -5090,7 +5238,7 @@
      },
      "page": {
       "work": "cw14",
-      "page": 717
+      "page": 718
      },
      "year": 1881,
      "place": {
@@ -5099,7 +5247,7 @@
      },
      "cite": {
       "work": "cw14",
-      "locator": "n.493 to ch. III (pdf p717)"
+      "locator": "n.493 to ch. III (pdf p718)"
      }
     },
     {
@@ -5984,7 +6132,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 327
+      "page": 328
      },
      "year": 1000,
      "place": {
@@ -5993,7 +6141,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶421 (pdf p327)"
+      "locator": "¶421 (pdf p328)"
      }
     },
     {
@@ -6079,7 +6227,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -6088,7 +6236,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -6240,10 +6388,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -6251,7 +6395,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -6543,7 +6687,7 @@
      },
      "page": {
       "work": "cw14",
-      "page": 717
+      "page": 718
      },
      "year": 1881,
      "place": {
@@ -6552,7 +6696,7 @@
      },
      "cite": {
       "work": "cw14",
-      "locator": "n.493 to ch. III (pdf p717)"
+      "locator": "n.493 to ch. III (pdf p718)"
      }
     },
     {
@@ -6946,7 +7090,7 @@
      },
      "page": {
       "work": "cw05",
-      "page": 327
+      "page": 328
      },
      "year": 1000,
      "place": {
@@ -6955,7 +7099,7 @@
      },
      "cite": {
       "work": "cw05",
-      "locator": "¶421 (pdf p327)"
+      "locator": "¶421 (pdf p328)"
      }
     },
     {
@@ -7041,7 +7185,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -7050,7 +7194,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -7060,7 +7204,7 @@
      },
      "page": {
       "work": "cw14",
-      "page": 310
+      "page": 311
      },
      "year": 1677,
      "place": {
@@ -7069,7 +7213,7 @@
      },
      "cite": {
       "work": "cw14",
-      "locator": "¶593 (pdf p310)"
+      "locator": "¶593 (pdf p311)"
      }
     },
     {
@@ -7202,10 +7346,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -7213,7 +7353,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -7471,7 +7611,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 367
+      "page": 370
      },
      "year": 1330,
      "place": {
@@ -7480,7 +7620,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶464 (pdf p367)"
+      "locator": "¶466 (pdf p370)"
      }
     },
     {
@@ -7528,7 +7668,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 264
+      "page": 265
      },
      "year": 1600,
      "place": {
@@ -7537,7 +7677,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "¶354–355 (pdf p264)"
+      "locator": "¶355 (pdf p265)"
      }
     },
     {
@@ -7689,10 +7829,6 @@
       "type": "occurrence",
       "id": "pope-fishermans-ring-vatican"
      },
-     "page": {
-      "work": "sem-visions",
-      "page": 799
-     },
      "year": 1932,
      "place": {
       "lat": 41.929,
@@ -7700,7 +7836,7 @@
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "8 June 1932 (pdf p799)"
+      "locator": "8 June 1932 (pdf pp798–799)"
      }
     },
     {
@@ -7787,7 +7923,7 @@
      },
      "page": {
       "work": "cw06",
-      "page": 76
+      "page": 78
      },
      "year": 1882,
      "place": {
@@ -7796,7 +7932,7 @@
      },
      "cite": {
       "work": "cw06",
-      "locator": "¶105, ¶114 (pdf p76, p82)"
+      "locator": "¶108 (pdf p78)"
      }
     },
     {
@@ -7825,7 +7961,7 @@
      },
      "page": {
       "work": "cw01",
-      "page": 162
+      "page": 184
      },
      "year": 1903,
      "place": {
@@ -7834,7 +7970,7 @@
      },
      "cite": {
       "work": "cw01",
-      "locator": "¶329 (pdf p162)"
+      "locator": "¶419-423 (pdf p184-186)"
      }
     }
    ]
@@ -7957,10 +8093,18 @@
       "type": "occurrence",
       "id": "liber-novus-descent-into-hell-cave-fol3v"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 268
+     },
      "year": 1913,
      "place": {
       "lat": 47.2537,
       "lon": 8.6665
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. iii(v) (pdf p268-270)"
      }
     },
     {
@@ -7968,10 +8112,18 @@
       "type": "occurrence",
       "id": "liber-novus-helios-four-horses-dawn-fol20"
      },
+     "page": {
+      "work": "liber-novus",
+      "page": 301
+     },
      "year": 1914,
      "place": {
       "lat": 47.3845,
       "lon": 8.6406
+     },
+     "cite": {
+      "work": "liber-novus",
+      "locator": "fol. 20/24-23/24 (pdf p301-302)"
      }
     },
     {
@@ -8476,7 +8628,7 @@
      },
      "page": {
       "work": "cw12",
-      "page": 169
+      "page": 168
      },
      "year": 1800,
      "place": {
@@ -8485,7 +8637,7 @@
      },
      "cite": {
       "work": "cw12",
-      "locator": "fig. 72, ¶186–188 (pdf p169)"
+      "locator": "fig. 72, ¶186 (pdf p168)"
      }
     },
     {

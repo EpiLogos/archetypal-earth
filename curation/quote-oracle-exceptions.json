@@ -1,5 +1,176 @@
 {
-  "version": 1,
-  "_note": "Reviewed exceptions to scripts/quote-oracle.mjs --check: a quotation that cannot be verbatim on its cited page and is kept on purpose. Each: dataset, id, reason. Starts empty; it only shrinks.",
-  "exceptions": []
+ "version": 1,
+ "_note": "Reviewed exceptions to scripts/quote-oracle.mjs --check: a quotation that cannot be verbatim on its cited page and is kept on purpose, because the scan of that page is damaged and the quotation keeps the printed letters. Each: dataset, id, reason (what the scan does). It only shrinks: a scan that is re-read or a normaliser rule that learns the damage removes its row.",
+ "exceptions": [
+  {
+   "dataset": "field.json#definitions",
+   "id": "family:churinga",
+   "reason": "damaged scan: cw08 pdf p74 sets the footnote call '70' inside the sentence ('The churinga 70 of the Australian aborigines') and the page's foot carries no note numbered 70; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#definitions",
+   "id": "family:ghost",
+   "reason": "damaged scan: cw08 pdf pp286-287 reads 'has an object' as 'has O O an object' and sets a footnote (17) inside the sentence across the page break; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#definitions",
+   "id": "family:satori",
+   "reason": "damaged scan: cw11 pdf p445 reads 'raison d’être' as 'raison d’âtre'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "anima-figure-unknown-woman-dream-series-cw9i",
+   "reason": "damaged scan: cw09i pdf p211 reads 'Suddenly' as 'Sctddenly'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "dance-shiva-elephanta-island-6c",
+   "reason": "damaged scan: letters-pauli pdf p152 reads 'Westerner,' as 'Westeme~'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "demeter-and-kore-eleusis-relief-plate-demeter-and-kore-stone-relief-eleusis-v-century-eleusis-v",
+   "reason": "damaged scan: the plate caption on neumann-great-mother pdf p290 reads 'century B.C.' as 'conlury TC.'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "divine-child-homunculi-schreber-germany-1903",
+   "reason": "damaged scan: cw09i pdf p170 reads 'case,' as 'c ase,lT' (the footnote call glued on as 'lT') and splits 'Schreber' and 'swarms'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "dog-maid-dog-attack-reactions-burgholzli-1904",
+   "reason": "damaged scan: cw02 pdf p80 prints the sentence in two columns that the layout interleaves ('The reaction wolf is also repeated twice. To the stimulus-' ... '353' ... 'cunning the subject reacts with wolf'); the quote keeps the printed reading order"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "dream-cats-mating-room-burgholzli-1905",
+   "reason": "damaged scan: cw02 pdf p214 breaks the sentence across the page's column layout ('The room is full of cats) which are' ... 'making a terrific noise.') and reads the comma as ')'; the quote keeps the printed reading order"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "egg-seven-pictures-circle-equinox-dream-1957",
+   "reason": "damaged scan: letters-pauli pdf p257 reads 'aod' for 'and', 'produciug' for 'producing' and the square root of minus one as '-.1-1'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "hierosgamos-negro-wedding-vision-zurich-1931",
+   "reason": "damaged scan: sem-visions pdf p490 reads 'me.' as 'ine.\"' and its opening quotation marks as apostrophes; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "i-ching-tortoise-shells-china-legend",
+   "reason": "damaged scan: sem-dream-analysis pdf p673 reads the italic I of 'I Ching' as a slash; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "kore-case-x-vision-series-cw9i",
+   "reason": "damaged scan: cw09i pdf pp202-204 reads the commas of the vision series as ')'; the quote keeps the printed letters and commas"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "kore-dancer-bees-lily-dream-case-y",
+   "reason": "damaged scan: cw09i pdf p209 reads the commas of the dream as ')'; the quote keeps the printed letters and commas"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "kore-dragon-faceless-girl-dream-case-y",
+   "reason": "damaged scan: cw09i pdf p208 reads the commas of the dream as ')'; the elided middle ('for as soon as she moves ... and so catches her again') is marked in the quote; the quote keeps the printed letters and commas"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "kundalini-recumbent-figure-roots-golden-flower-1929",
+   "reason": "damaged scan: sem-visions pdf p486 reads the footnote call after 'Flower,' as the letter 's'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "liber-novus-coming-god-proclamation-fol4v",
+   "reason": "damaged scan: liber-novus pdf p274 sets the folio mark '[0 B iv (v)]' in the line and reads the initial 'I' of 'I have received' as '(1'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mandala-four-paintings-plates-29-32-zurich-1930",
+   "reason": "damaged scan: sem-visions pdf pp20-23 lists the plate captions with a stray mark '~\\' between plates 31 and 32; the quote keeps the printed captions"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mandala-kepler-spherical-trinity-1596",
+   "reason": "damaged scan: letters-pauli pdf p267 reads 'Jung' as 'lung', 'form' as 'fOrrD' and 'contain' as 'eontain'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mandala-pauli-two-leaves-rotation-dream-zollikon-1946",
+   "reason": "damaged scan: letters-pauli pdf p97 reads '(Self)' as '(SelI)'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mirror-spiegler-krishna-manuscript-dream-1957",
+   "reason": "damaged scan: letters-pauli pdf p226 reads '[Reflector]' as '[ReAector]'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mother-goddess-ancient-mother-grain-wheat-vision-zurich-1930",
+   "reason": "damaged scan: sem-visions pdf p3 reads the plate caption 'The Ancient Mother' as 'The Ancienl MOLhcr'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mother-goddess-moon-lady-dream-case-y-childhood",
+   "reason": "damaged scan: cw09i pdf p207 reads the commas of the dream as ')'; the quote keeps the printed letters and commas"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "mother-goddess-moon-lady-fantasy-earth-mother-case-y",
+   "reason": "damaged scan: cw09i pdf pp207-208 interleaves the dream's columns (the lines of the next dream are set inside it) and reads its commas as ')'; the quote keeps the printed reading order and letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "red-figured-vase-attic-detail-plate-b-detail-of-a-red-figured-vase-attic-vulci-v-attica-vulci-v",
+   "reason": "damaged scan: the plate caption on neumann-great-mother pdf p285 reads 'Vulci,' as 'Vulei,'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "redeemer-figure-manda-d-hayye-mandaeans-iraq-3c",
+   "reason": "damaged scan: sem-dream-analysis pdf p265 reads 'manda' as 'tnanda'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "serpent-cobra-pair-tropics-dream-1954",
+   "reason": "damaged scan: letters-pauli pdf p218 reads 'coniunctio' as 'caniunctia'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "simon-magus-helen-tyre-2c",
+   "reason": "damaged scan: cw09i pdf pp41-42 reads 'is' as 'lis', splits 'a Tyrian' as 'aT yrian' and sets the running head inside the sentence; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "tree-become-tree-face-sun-vision-zurich-1930",
+   "reason": "damaged scan: sem-visions pdf p8 reads the plate caption 'a tree and lifted' as 'a Lrcc and Ji fled'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "tree-wotan-hanged-hovamol-norse",
+   "reason": "damaged scan: cw09i pdf p257 reads the pronoun 'I' as '1' ('I ween that 1 hung', 'the spear 1 was wounded', 'offered 1 was'); the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "trickster-festum-asinorum-beauvais-12c",
+   "reason": "damaged scan: cw09i pdf pp269-270 splits 'words' and 'gratias' and reads the quote marks around 'Y-a' as middle dots; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "vessel-baptism-goblet-card-vienna-1900",
+   "reason": "damaged scan: letters-pauli pdf p165 reads 'spirits' as 'spirib'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "world-clock-pauli-three-rhythms-clock-dream-zurich-1938",
+   "reason": "damaged scan: letters-pauli pdf p83 reads 'world-clock' as 'world.cJock' and 'the' as 'tbe'; the quote keeps the printed letters"
+  },
+  {
+   "dataset": "redbook.json",
+   "id": "redbook.json#genesis.genesis-divine-child",
+   "reason": "damaged scan: liber-novus pdf p274 sets the folio mark in the line and reads the initial 'I' of 'I have received your sprout' as '(1'; the quote keeps the printed letters (the same line as the stop liber-novus-coming-god-proclamation-fol4v)"
+  }
+ ]
 }

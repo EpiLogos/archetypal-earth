@@ -9,10 +9,13 @@
 //   work      (occurrence) the work of the primary cite, when the fix changes it
 //   locator   (occurrence) the corrected locator of the primary cite, e.g. "¶449 (pdf p240)"
 //   cite      (definition) the corrected cite string, e.g. "Aion (CW9ii) ¶426"
+//   demote    true: no corpus page carries these words, so the record stays and its text is LABELLED paraphrase (occurrence: quoteKind
+//             "paraphrase"; definition: definition.quoteKind "paraphrase"). A demotion changes nothing else, and nothing is deleted.
+//             scripts/quote-oracle.mjs skips a demoted record: it is no longer presented as a quotation.
 //   basis     required: the line that proves the fix (the corpus page the words stand on)
 // scripts/quote-oracle.mjs is what proves a fix: after `npm run ingest` the record must pass. Nothing here is typed from memory.
 
-const FIELDS = new Set(['text', 'primary', 'work', 'locator', 'cite', 'basis']);
+const FIELDS = new Set(['text', 'primary', 'work', 'locator', 'cite', 'demote', 'basis']);
 
 /** Check the shape of a fixes document. Returns the list of problems (empty when valid). */
 export function validateQuoteFixes(doc) {
@@ -27,7 +30,9 @@ export function validateQuoteFixes(doc) {
     if (f.text !== undefined && (typeof f.text !== 'string' || !f.text.trim())) problems.push(`${id}: "text" must be non-empty text`);
     for (const k of ['work', 'locator', 'cite']) if (f[k] !== undefined && (typeof f[k] !== 'string' || !f[k].trim())) problems.push(`${id}: "${k}" must be a non-empty string`);
     if (f.primary !== undefined && !(Number.isInteger(f.primary) && f.primary >= 0)) problems.push(`${id}: "primary" must be an index into jung[]`);
-    if (f.text === undefined && f.primary === undefined && f.work === undefined && f.locator === undefined && f.cite === undefined) problems.push(`${id}: the fix changes nothing`);
+    if (f.demote !== undefined && f.demote !== true) problems.push(`${id}: "demote" must be true`);
+    else if (f.demote === true && (f.text !== undefined || f.primary !== undefined || f.work !== undefined || f.locator !== undefined || f.cite !== undefined)) problems.push(`${id}: a demotion changes nothing else`);
+    else if (f.text === undefined && f.primary === undefined && f.work === undefined && f.locator === undefined && f.cite === undefined && f.demote === undefined) problems.push(`${id}: the fix changes nothing`);
   }
   return problems;
 }
@@ -48,6 +53,12 @@ export function applyQuoteFixes({ occurrences = [], families = [], archetypes = 
     const o = occ.get(id);
     const d = defs.get(id);
     if (o) {
+      if (f.demote === true) {
+        if (!o.quote) { problems.push(`${id}: the occurrence has no quote to demote`); continue; }
+        o.quoteKind = 'paraphrase';
+        applied.push(id);
+        continue;
+      }
       if (f.cite !== undefined) { problems.push(`${id}: "cite" is for a definition; an occurrence takes "locator"`); continue; }
       if (f.text !== undefined) {
         if (!o.quote) { problems.push(`${id}: the occurrence has no quote to correct`); continue; }
@@ -67,6 +78,7 @@ export function applyQuoteFixes({ occurrences = [], families = [], archetypes = 
       applied.push(id);
     } else if (d) {
       if (!d.definition) { problems.push(`${id}: no definition to correct`); continue; }
+      if (f.demote === true) { d.definition.quoteKind = 'paraphrase'; applied.push(id); continue; }
       if (f.primary !== undefined || f.work !== undefined || f.locator !== undefined) { problems.push(`${id}: a definition takes "text" and "cite" only`); continue; }
       if (f.text !== undefined) d.definition.text = f.text;
       if (f.cite !== undefined) d.definition.cite = f.cite;

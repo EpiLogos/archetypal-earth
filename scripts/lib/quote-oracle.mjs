@@ -11,6 +11,13 @@
 //     that kept the break as "dedi- cated" folds the same way);
 //   - a slash is a space (verse lines are set "a / b" in a quotation and run on in the corpus); runs of whitespace are one space;
 //     case is folded.
+// Two more folds apply only as a named fallback, reported as class "scan" with a scanKind, because they are the scan's own furniture:
+//   - scanKind "page-break": a quotation that runs over a page break skips what the scan sets between the two halves: a footnote block and
+//     a folio at the foot of the first page (at most BREAK_TAIL characters), a running head at the top of the next (at most BREAK_HEAD);
+//     a word the break divides ("gov-" / "ernment") is rejoined;
+//   - scanKind "notes": a footnote call the scan leaves in the page ("river,” 31 probably", "marble4", "souls21", "Goddessl86-it"), a doubled opening mark and a stray
+//     middle dot are not part of the words;
+//     it is folded out of the page only, so a quotation that carries a number the page lacks does not pass.
 // An ellipsis ("…", "...", ". . .") splits a quotation into fragments; each fragment must stand, in order, on the cited pages
 // (or on the page that follows one of them: a quotation runs over a page break).
 import fs from 'node:fs';
@@ -118,6 +125,7 @@ export function prepareVolume(doc) {
   };
   const vol = {
     work: doc.work,
+    source: doc.pages,
     pages,
     flat,
     starts,
@@ -177,6 +185,113 @@ export function citedPages(vol, locator) {
     return { pages, via: 'para', missing: pages.length ? [] : paras };
   }
   return { pages: [], via: null, missing: [] };
+}
+
+
+/** the words with the scan's footnote calls taken out (the named fallback "notes"): digits glued to a word or its closing mark, and a
+ * lone 1-3 digit number set after a sentence mark or a name inside a sentence before a word ("river,” 31 probably", "Canistris 40 afford"). Applied to the PAGE only: a quotation that
+ * carries a number the page does not is not matched by this fold. */
+export function normaliseNotes(s) {
+  let t = String(s ?? '').normalize('NFKC');
+  t = t.replace(/(?<=\p{Ll}{3})[lI1]\d{2,3}(?=[-–—]\p{L})/gu, ''); // "Goddessl86-it": the call read as a letter and digits
+  t = t.replace(/(?<=\p{Ll}{2}[\]”"')]*[,.:;!?]?[\]”"')]*)\d{1,3}(?![\p{L}\d])/gu, '');
+  t = t.replace(/(?<=\p{Ll}{2}[,;:.?!][”"’')\]]*|[”"’')\]]|\p{Ll}\s+\p{Lu}\p{Ll}+)\s+\d{1,3}\s+(?=\p{L})/gu, ' ');
+  t = t.replace(/(?<=\p{Ll}\s+\p{Lu}\p{Ll}+)\s+\d{1,3}(?=[-–—]\p{L})/gu, ''); // "Magdeburg 39-approached"
+  t = t.replace(/(['"‘’“”])\1+/g, '$1'); // a doubled mark: ''Apage
+  // a lone number between plain words that the same page opens a footnote line with ("churinga 70 of ..." and a line "70 Spencer ...")
+  const noteNumbers = [...t.matchAll(/^[ \t]*(\d{1,3})[ \t]+\S/gm)].map((m) => m[1]);
+  if (noteNumbers.length) t = t.replace(new RegExp(String.raw`(?<=\S)[ \t]+(?:${[...new Set(noteNumbers)].join('|')})(?=\s+\p{L})`, 'gu'), '');
+  t = t.replace(/(^|\s)·(?=\s)/g, '$1'); // a stray middle dot
+  t = t.replace(/(?<=\p{L})\^(?=\s|[,.;:])/gu, ''); // a caret for a footnote mark: Cabiri^
+  return normalise(t);
+}
+
+const BREAK_TAIL = 1600; // characters of footnotes and folio the scan may set at the foot of the page a quotation leaves
+const BREAK_HEAD = 60; // characters of running head the scan may set at the top of the page it enters
+const MAX_BREAKS = 3;
+
+/** the page texts of a volume under one fold ('flat' = normalise, 'notes' = normaliseNotes), built on first use */
+function pageTexts(vol, kind) {
+  vol.pageTextCache ??= {};
+  if (!vol.pageTextCache[kind]) {
+    const f = kind === 'flat' ? normalise : normaliseNotes;
+    const squash = kind === 'notes-compact' ? (x) => x.replace(/[\s-]+/g, '') : (x) => x;
+    vol.pageTextCache[kind] = vol.source.map((pg) => squash(f(pg.text)));
+  }
+  return vol.pageTextCache[kind];
+}
+
+const commonPrefix = (a, b) => {
+  const n = Math.min(a.length, b.length);
+  let i = 0;
+  while (i < n && a.charCodeAt(i) === b.charCodeAt(i)) i++;
+  return i;
+};
+
+/**
+ * Match the needles in order, allowing each to run over page breaks as the scan makes them (see the header). A needle starts on one of the
+ * `allowed` pdf pages. Returns { crossed } (whether any break was crossed) or null. The first fragment may start anywhere; each later one
+ * starts at or after the end of the one before.
+ */
+function bridged(vol, kind, needles, allowed) {
+  const texts = pageTexts(vol, kind);
+  const pageNo = (i) => vol.pages[i].p;
+  /** walk q from (pi, off); returns { pi, off, crossed } at its end, or null */
+  const walk = (pi, off, q, crossed, breaks) => {
+    const text = texts[pi];
+    const L = commonPrefix(q, text.slice(off));
+    if (L >= q.length) return { pi, off: off + L, crossed };
+    if (pi + 1 >= texts.length || breaks >= MAX_BREAKS) return null;
+    if (pageNo(pi + 1) !== pageNo(pi) + 1) return null;
+    if (text.length - (off + L) > BREAK_TAIL) return null;
+    const rest = q.slice(L).replace(/^\s+/, '');
+    if (rest.length < 4) return null;
+    const head = texts[pi + 1].slice(0, BREAK_HEAD + 16);
+    const key = rest.slice(0, 16);
+    for (let h = head.indexOf(key); h >= 0; h = head.indexOf(key, h + 1)) {
+      const r = walk(pi + 1, h, rest, true, breaks + 1);
+      if (r) return r;
+    }
+    return null;
+  };
+  /** the first place q stands at or after (pi, off), starting on an allowed page */
+  const find = (q, from) => {
+    const key = q.slice(0, Math.min(q.length, 24));
+    for (let pi = from.pi; pi < texts.length; pi++) {
+      if (!allowed.has(pageNo(pi))) continue;
+      const text = texts[pi];
+      for (let at = text.indexOf(key, pi === from.pi ? from.off : 0); at >= 0; at = text.indexOf(key, at + 1)) {
+        const r = walk(pi, at, q, false, 0);
+        if (r) return r;
+      }
+    }
+    // the page break may fall inside the first words: look for a shorter start in the foot of the page
+    for (let pi = from.pi; pi < texts.length; pi++) {
+      if (!allowed.has(pageNo(pi))) continue;
+      const text = texts[pi];
+      const floor = Math.max(pi === from.pi ? from.off : 0, text.length - BREAK_TAIL - 40);
+      for (const k of [16, 8, 3]) {
+        if (q.length <= k) continue;
+        for (let at = text.indexOf(q.slice(0, k), floor); at >= 0; at = text.indexOf(q.slice(0, k), at + 1)) {
+          const r = walk(pi, at, q, false, 0);
+          if (r) return r;
+        }
+      }
+    }
+    return null;
+  };
+  let pos = { pi: 0, off: 0 };
+  let crossed = false;
+  for (const raw of needles) {
+    const q0 = normalise(raw).trim(); // the quotation is read as it stands: only the page's furniture is folded away
+    const q = kind === 'notes-compact' ? q0.replace(/[\s-]+/g, '') : q0;
+    if (q.length < 3) return null;
+    const r = find(q, pos);
+    if (!r) return null;
+    pos = { pi: r.pi, off: r.off };
+    crossed ||= r.crossed;
+  }
+  return { crossed };
 }
 
 const needleOf = (view, s) => (view === 'flat' ? normalise(s) : view === 'compact' ? normalise(s).replace(/[\s-]+/g, '') : skeleton(s));
@@ -256,6 +371,12 @@ export function matchQuote(vol, text, locator) {
     ...(parts ? [['ellipsis', 'flat', parts.map((x) => needleOf('flat', x)), run, 0]] : []),
     ['scan', 'compact', [needleOf('compact', text)], on, MIN_LOOSE],
     ...(parts ? [['scan', 'compact', parts.map((x) => needleOf('compact', x)), run, MIN_LOOSE]] : []),
+    ['scan', 'bridge-flat', [text], on, MIN_LOOSE],
+    ...(parts ? [['scan', 'bridge-flat', parts, run, MIN_LOOSE]] : []),
+    ['scan', 'bridge-notes', [text], on, MIN_LOOSE],
+    ...(parts ? [['scan', 'bridge-notes', parts, run, MIN_LOOSE]] : []),
+    ['scan', 'bridge-notes-compact', [text], on, MIN_LOOSE],
+    ...(parts ? [['scan', 'bridge-notes-compact', parts, run, MIN_LOOSE]] : []),
     ['ending-only', 'flat', [trimEnd(needleOf('flat', text))], on, MIN_LOOSE],
     ['ending-only', 'compact', [trimEnd(needleOf('compact', text))], on, MIN_LOOSE],
     ...(parts ? [['ending-only', 'flat', trimLast(parts.map((x) => needleOf('flat', x))), run, MIN_LOOSE]] : []),
@@ -267,6 +388,7 @@ export function matchQuote(vol, text, locator) {
   if (cited.via === null) {
     // no page named at all: say where the words stand, if anywhere
     for (const [cls, view, needles, , min] of tries) {
+      if (view.startsWith('bridge-')) continue;
       if (needles.some((n) => n.length < Math.max(min, 3))) continue;
       const at = chain(vol, view, needles, null);
       if (at !== null) return verdict('no-locator', { foundPdf: pageAt(at), foundAs: cls });
@@ -277,6 +399,16 @@ export function matchQuote(vol, text, locator) {
 
   for (const [cls, view, needles, allowed, min] of tries) {
     if (unresolved) break;
+    if (view.startsWith('bridge-')) {
+      if (needles.reduce((n, x) => n + normalise(x).length, 0) < min) continue; // ellipsis fragments are each short; the whole must be long enough to name a place
+      const kind = view.slice('bridge-'.length);
+      const hit = bridged(vol, kind, needles, allowed);
+      if (hit && (hit.crossed || kind !== 'flat')) {
+        const base = kind === 'flat' ? 'page-break' : kind === 'notes' ? 'notes' : 'notes+spacing';
+        return verdict('scan', { scanKind: hit.crossed && kind !== 'flat' ? `${base}+page-break` : base, ...(cited.via === 'printed' ? { pdfPages: cited.pages } : {}) });
+      }
+      continue;
+    }
     if (needles.some((n) => n.length < Math.max(min, 3))) continue;
     if (chain(vol, view, needles, allowed) !== null) {
       // a printed-page cite holds the words but opens nothing
@@ -291,6 +423,7 @@ export function matchQuote(vol, text, locator) {
     return best;
   };
   for (const [cls, view, needles, , min] of tries) {
+    if (view.startsWith('bridge-')) continue;
     if (needles.some((n) => n.length < Math.max(min, 3))) continue;
     let offs;
     if (needles.length === 1) offs = allHits(vol, view, needles[0]);
@@ -354,12 +487,14 @@ export function collectRecords(dataDir, { index } = {}) {
     if (file === 'field.json') {
       for (const o of doc.occurrences ?? []) {
         if (typeof o.quote !== 'string' || !o.quote) continue;
+        if (o.quoteKind === 'paraphrase') continue; // demoted (curation/quote-fixes.json): labelled paraphrase, no longer presented as a quotation
         const cites = (o.jung ?? []).filter((c) => c.work).map((c) => ({ work: c.work, locator: c.locator ?? '' }));
         add({ dataset: 'field.json#occurrences', id: o.id, text: o.quote, voice: null, cites, shape: 'occurrence' });
       }
       for (const [kind, list] of [['family', doc.families], ['archetype', doc.archetypes], ['theoretic', doc.theoretics]]) {
         for (const x of list ?? []) {
           if (!x.definition?.text) continue;
+          if (x.definition.quoteKind === 'paraphrase') continue; // demoted: labelled paraphrase
           const cite = String(x.definition.cite ?? '');
           const work = workFromCiteString(idx, cite);
           add({ dataset: 'field.json#definitions', id: `${kind}:${x.id}`, text: x.definition.text, voice: null, cites: work ? [{ work, locator: cite }] : [{ work: null, locator: cite }], shape: 'definition' });

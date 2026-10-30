@@ -6,7 +6,7 @@ import path from 'node:path';
 // @ts-expect-error plain ESM script
 import { stripLinks, linkTargets, parseFm, splitFrontmatter } from '../../scripts/lib/vault.mjs';
 // @ts-expect-error plain ESM script
-import { shortLabel, parseInstanceBody, plain, oneLineFromForm } from '../../scripts/lib/text.mjs';
+import { shortLabel, parseInstanceBody, plain, oneLineFromForm, definitionCite } from '../../scripts/lib/text.mjs';
 // @ts-expect-error plain ESM script
 import { loadGazetteer, matchPlace, jitter, normCultureSlug } from '../../scripts/lib/geo.mjs';
 // @ts-expect-error plain ESM script
@@ -126,4 +126,15 @@ describe('ingest', () => {
     // two full vault ingests, and the suite runs other files beside this one
     expect(run(d1)).toBe(run(d2));
   }, 600_000);
+});
+
+describe('definitionCite', () => {
+  it('names the work in brackets only when the work has a short label', () => {
+    expect(definitionCite('Aion', { short: 'CW9ii' }, { para: 134 })).toBe('Aion (CW9ii) ¶134');
+    expect(definitionCite('Aion', { short: 'CW9ii' }, { pdfPage: 93 })).toBe('Aion (CW9ii) pdf p93');
+  });
+  it('never prints a bracket with "null" or "undefined" for a work without a short label', () => {
+    expect(definitionCite('The Zofingia Lectures', { short: null }, { para: 129 })).toBe('The Zofingia Lectures ¶129');
+    expect(definitionCite('Visions', {}, { pdfPage: 896 })).toBe('Visions pdf p896');
+  });
 });

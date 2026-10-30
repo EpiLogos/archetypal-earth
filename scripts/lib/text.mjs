@@ -63,6 +63,15 @@ function balanced(s) {
   return (s.match(/\(/g) || []).length === (s.match(/\)/g) || []).length;
 }
 
+/**
+ * The cite of a definition picked from a mention record: "Title (CW9ii) ¶134", or "Title (CW9ii) pdf p93" where the
+ * record carries no paragraph number. A work with no short label has no bracket (the label was printed "(null)").
+ */
+export function definitionCite(short, wl, { para = null, pdfPage = null } = {}) {
+  const work = wl?.short ? `${short} (${wl.short})` : short;
+  return para != null ? `${work} ¶${para}` : `${work} pdf p${pdfPage}`;
+}
+
 /** Short evocative label (<= 48 chars) from a long vault title. */
 export function shortLabel(title, max = 48) {
   return fixQuotes(shortLabelRaw(title, max));

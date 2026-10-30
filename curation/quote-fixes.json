@@ -756,12 +756,374 @@
    "basis": "oracle: verbatim at cw12 pdf p152"
   },
   "family:soma": {
-   "cite": "sem-dream-analysis Dream Analysis (null) pdf p422",
+   "cite": "Dream Analysis pdf p422",
    "basis": "oracle: verbatim at sem-dream-analysis pdf p422"
   },
   "family:uebermensch": {
    "cite": "cw09i The Archetypes and the Collective Unconscious (CW9i) ¶190",
    "basis": "oracle: verbatim at cw09i pdf p115 (¶190 opens on p115)"
+  },
+  "adam-lifeless-statue-mandaeans-3c": {
+   "text": "Ptahil, the world-creator, tried to “throw the soul into the statue,” but Manda d’Hayye, the redeemer, “took the soul in his arms” and completed the work without Ptahil.",
+   "basis": "oracle: corpus words for cw14 pdf p298"
+  },
+  "anima-kundry-messenger-grail-1882": {
+   "text": "It is as if the anima were standing on the other bank and I on this bank, and we were talking to each other, deliberating about how to produce a function in between, for we must build a bridge from both sides, not from one side only.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf pp1265-1266 (the sentence runs over the page break; the running head SPRING TERM stands between)"
+  },
+  "black-man-wicked-sword-bed-dream-boy-8-zurich-1909": {
+   "text": "it seemed to him that a wicked black man with a sword or a gun was lying on his bed, a tall thin man who wanted to kill him.",
+   "basis": "oracle: corpus words for cw04 pdf p291"
+  },
+  "bull-bound-net-market-place-vision-zurich-1933": {
+   "text": "I saw brought into the market place a great bull. (In comes an animal, a mythological factor.) Its feet were tied and over it was a strong net.",
+   "basis": "oracle: corpus words for sem-visions pdf p1180"
+  },
+  "anthropos-man-of-light-zosimos-panopolis-3c": {
+   "text": "In Zosimos the “man of light” … is simply called φώς. He is the spiritual man who has clothed himself in Adam’s body.",
+   "basis": "oracle: corpus words for cw13 pdf p155 (the Greek gloss between the fragments is damaged in the scan and left out, marked)"
+  },
+  "anima-unknown-woman-diffraction-dream-1955": {
+   "demote": true,
+   "basis": "the cited letters-pauli pages are too damaged in the scan ('UlJCODICious', 'die ....') for the words to be confirmed; the record is kept as a paraphrase of Jung's remark"
+  },
+  "provisional-life-happy-neurosis-island-zurich-1910s": {
+   "text": "part of the neurosis consists of that suspended life, or rather, the provisional life.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p694"
+  },
+  "camel-window-yellow-glasses-dream-boy-5": {
+   "text": "“So I’ve got yellow glasses, and when I look through them things just are that big.”— The mother: “Where have you got the yellow glasses?”—The boy: “I’ve got them in here!”",
+   "basis": "oracle: corpus words for sem-childrens-dreams pdf p100"
+  },
+  "coniunctio-mechthild-flowing-light-magdeburg-13c": {
+   "text": "While, in Church mysticism, the primordial image of the hieros gamos was sublimated on a lofty plane and only occasionally-as for instance with Mechthild of Magdeburg-approached the physical sphere in emotional intensity, for the rest of the world it remained very much alive and continued to be the object of especial psychic preoccupation.",
+   "basis": "oracle: corpus words for cw09i pdf p187 (the sentence goes on after the comma; a footnote call and a split word are the scan's)"
+  },
+  "devil-diabolical-mimicry-justin-martyr-rome-155": {
+   "text": "the devil went to Greece and told them all about it; he arranged that the myth of Dionysus should be made known, in order that, when Christ came, they could say: Oh, we have heard all that before!-which would of course deflate Christianity.",
+   "basis": "oracle: corpus words for sem-visions pdf pp100-101 (the sentence goes on after 'known'; the running head 22 OCTOBER 1930 stands between)"
+  },
+  "dorn-caelum-recipe-herbs-blood-1583": {
+   "text": "Will now the unbelievers, who have imitated the Physicists, marvel that we handle in our hands the heaven and the stars?",
+   "locator": "¶681 (pdf p358)",
+   "basis": "oracle: corpus words for cw14 pdf p358"
+  },
+  "dream-mice-glowing-eyes-kennels-burgholzli-1905": {
+   "text": "they also have peculiar glowing hot eyes.",
+   "basis": "oracle: corpus words for cw02 pdf p215 (the record left out 'also')"
+  },
+  "hand-arresting-hand-hallucination-burgholzli-1900s": {
+   "text": "He inhaled the gas vigorously for a few seconds, then suddenly felt an enormous hand grasp him by the chest and throw him to the floor, where he gradually recovered from his fright.",
+   "basis": "oracle: corpus words for cw03 pdf p130"
+  },
+  "key-b-st-master-key-key-of-heaven-burgholzli-1905": {
+   "text": "a key that unlocks all doors—therefore it includes the house—it is a keystone— monopoly—Schiller’s Bell.”",
+   "basis": "oracle: corpus words for cw03 pdf pp101-102"
+  },
+  "krishna-rhada-mandala-dance-nritya-india": {
+   "text": "\"In India there is a special name for this: mandala nritya, the mandala dance. The dance figures express the same meanings as the drawings\"",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p1187"
+  },
+  "mercurius-helyas-artista-dorn-theatrum-1602": {
+   "text": "In these circumstances, it is not very surprising that Elijah should become “Helyas Artista” in medieval alchemy (e.g., Dorn, “De transmut. met.,” Theatr. chem., 1602, I, p. 610: “usque in adventum Heliae Artistae quo tempore nihil tam occultum quod non revelabitur”).",
+   "basis": "oracle: corpus words for cw18 pdf p627"
+  },
+  "net-house-of-the-net-temple-thoth-egypt": {
+   "text": "Now peculiarly enough, the temple of Thoth is called the house of the net-the fisherman's net-and the Babylonian Marduk is the Logos and his attribute is also the net.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p347"
+  },
+  "fire-old-men-circle-cellar-vision-zurich-1933": {
+   "text": "\"Sitting around a fire was a circle of old men.\" … They said to me: \"Have you seen the birds?\" I said: \"Yes, they wounded me but I was healed. Is there no healing fire in the city? All seems blood and destruction.\"",
+   "basis": "oracle: corpus words for sem-visions pdf p1209 (two stretches of the same page, marked)"
+  },
+  "guillaume-pelerinage-ame-calendar-circle-1355": {
+   "text": "Ce cercle que tu vois est le calendrier Qui en faisant son tour entier, Montre des Saints les journées Quand elles doivent être fêtées.",
+   "basis": "oracle: corpus words for cw12 pdf p227"
+  },
+  "mandala-fire-stars-garden-vision-zurich-1932": {
+   "text": "I entered a room. In the center of the room there shot up a great fire which reached high into the sky and melted many stars which fell into the fire.",
+   "basis": "oracle: corpus words for sem-visions pdf p699"
+  },
+  "logos-dog-cynosura-aratus-hippolytus-2c": {
+   "text": "For the Logos is a dog … and begets all things. For Cyon … they say, means the Begetter.",
+   "basis": "oracle: corpus words for cw14 pdf p111 (the bracketed blanks in the text are marked)"
+  },
+  "serpent-bronze-pillar-st-ambrogio-milan-10c": {
+   "text": "just opposite a pillar that has a cross on top. It is not the ouroboros. It is very old and very simple.",
+   "basis": "oracle: corpus words for sem-zarathustra pdf p1344"
+  },
+  "adam-golgotha-centre-earth-cave-of-treasures-6c": {
+   "text": "When Shem laid the body on the ground, the four sides moved away from one another, the earth opened in the form of a cross, and Shem and Melchizedek laid the body inside.",
+   "locator": "¶556 (pdf pp294–295)",
+   "basis": "oracle: corpus words for cw14 pdf pp294-295 (the sentence runs over the page break)"
+  },
+  "doll-monster-dream-girl-6-1938": {
+   "text": "I undressed the doll of my eldest sister and put it into the doll bed. On coming up again, the doll is sitting fully dressed in its chair. I undress it again and go downstairs. A moment later I go up again, curious what might have happened now. The doll is dressed again. Once again, I undress her and go down the stairs. But in turning around I’m seeing a monster that did that, and which is now following me on the stairs. The monster has a very big body, which completely fills up the staircase. It moves sluggishly and clumsily, with short, nearly invisible paws—meaty. I am terribly afraid.",
+   "basis": "oracle: corpus words for sem-childrens-dreams pdf p133 (the dream as the girl wrote it; the record had joined its sentences with a gloss)"
+  },
+  "dove-church-virgin-mother-acts-thomas-2c": {
+   "text": "come, woman who layest bare the hidden things, and makest manifest things not to be spoken, holy dove which hath brought forth twin nestlings; come, secret mother …”",
+   "basis": "oracle: corpus words for cw05 pdf p712 (Jung's own ellipsis closes the invocation)"
+  },
+  "dream-05-saint-shrine-surf-zurich-1929": {
+   "text": "One could call the sea the womb of nature. The majestic rollers that come in from the sea: \"One could say that our unconscious is like that. The unconscious sends powerful waves with almost certain regularity into our conscious, which is like the valley that contains the bay.\"",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p152"
+  },
+  "dream-chief-turns-woman-great-dream-1940": {
+   "text": "A very bellicose chief dreamed in his fortieth year that he turned into a woman, and had to dress in women’s clothes and eat their food—in our eyes an absolutely ridiculous transformation.",
+   "basis": "oracle: corpus words for sem-childrens-dreams pdf pp339-340 (the word 'fortieth' is divided by the page break)"
+  },
+  "dream-jung-negro-barber-tongs-africa-1925": {
+   "text": "I dreamed that a Negro barber was trying to curl my hair with curling tongs; you see, that would make my hair kinky.",
+   "basis": "oracle: corpus words for sem-visions pdf pp683-684 (a running head stands in the sentence)"
+  },
+  "dwarf-cabiri-samothrace-greece-400bce": {
+   "text": "the Greek Cabiri were adorned with pointed caps. … Ordinarily the Cabiri were little things, and were kept hidden in cases, and always wrapped up carefully.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p241"
+  },
+  "father-imago-asmodeus-seven-bridegrooms-tobit-ecbatana-2cbce": {
+   "text": "But her evil fate wills it that seven times, one after the other, she chooses a husband who dies on the wedding-night. It is the evil spirit Asmodeus, by whom she is persecuted, that kills these men.",
+   "basis": "oracle: corpus words for cw04 pdf p293 (Jung retells Tobit in the present tense)"
+  },
+  "i-ching-tortoise-shells-china-legend": {
+   "text": "Remember that the I Ching was brought to land on the shells of one hundred tortoises.",
+   "basis": "oracle: corpus words for sem-dream-analysis pdf p673 (the record had added a date and an editor's note inside the quotation)"
+  },
+  "liber-novus-izdubar-serpent-weave-image-fol36": {
+   "text": "\"This image was printed on Christmas 1915.\" The depiction of Izdubar strongly resembles an illustration of him in Wilhelm Roscher's …",
+   "basis": "oracle: corpus words for liber-novus pdf p308 (the legend, with its closing mark; the rest of the sentence is garbled in the scan and left out, marked)"
+  },
+  "melusina-de-vita-longa-final-chapter-1526": {
+   "text": "And in this manner, through the intervention of the Scaiolae, Melusina departs from her nymphididic nature, to remain in another transmutation if that difficult Adech permit, who rules over both the death and life of the Scaiolae.",
+   "basis": "oracle: corpus words for cw13 pdf p205"
+  },
+  "mother-daemon-god-his-father-barlach-toter-tag-1912": {
+   "text": "In Ernst Barlach’s tragedy The Dead Day, the mother-daemon says at the end: “The strange thing is that man will not learn that God is his father.”",
+   "basis": "oracle: corpus words for cw04 pdf p308"
+  },
+  "ostanes-nile-stone-zosimos-3c": {
+   "text": "Go to the waters of the Nile and there you will find a stone that has a spirit … Take this, divide it, thrust in your hand and draw out its heart: for its soul … is in its heart",
+   "basis": "oracle: corpus words for cw12 pdf p301 (the bracketed Greek glosses are left out, marked)"
+  },
+  "parvati-blackness-golden-skin-india": {
+   "text": "We can only interpret this as meaning that the Shulamite experienced a transformation similar to Parvati’s, who, saddened by her blackness, was given a golden skin by the gods.",
+   "basis": "oracle: corpus words for cw14 pdf p319"
+  },
+  "prima-materia-david-dinant-god-1210": {
+   "text": "“Sunt quidam haeretici dicentes Deum et materiam primam et … sive mentem idem esse”",
+   "basis": "oracle: corpus words for cw16 pdf p435 ('quidam' as printed; the Greek word between the fragments is lost in the scan and marked)"
+  },
+  "quaternity-pauli-four-children-dream-zollikon-1949": {
+   "text": "It seems fairly obvious that the children-there are supposed to be four actually, and sometimes there were-should be linked with your function schema.",
+   "basis": "oracle: corpus words for letters-pauli pdf p106"
+  },
+  "rohita-one-footed-goat-atharva-veda-1000bce": {
+   "text": "who was called the “one-footed goat” (agá ékapada).",
+   "basis": "oracle: corpus words for cw14 pdf p387"
+  },
+  "veil-black-bridal-rumour-chain-n-switzerland-1910": {
+   "text": "The teacher buys a jacket, the girls get a long thick veil, such as is worn only in case of death or at weddings.",
+   "basis": "oracle: corpus words for cw04 pdf p43 (Jung's retelling is in the present tense)"
+  },
+  "voice-hosea-marries-prostitute-israel-750bce": {
+   "text": "The worst case was the prophet Hosea, who married a prostitute as a symbolic act because the Lord ordered him to do so, expressing in that way that the people had prostituted themselves to the heathen-he showed the people what they were by marrying a prostitute by divine order.",
+   "basis": "oracle: corpus words for sem-visions pdf p104"
+  },
+  "sabaoth-adamas-ruler-aeons-pistis-sophia-3c": {
+   "text": "In the Pistis Sophia we meet a Sabaoth Adamas, the ruler … of the Aeons, who fights against the light of Pistis Sophia and is thus wholly on the side of evil.",
+   "basis": "oracle: corpus words for cw14 pdf pp308-309 (the Greek gloss in the parenthesis is lost in the scan and marked)"
+  },
+  "salt-harpocrates-denarius-khunrath-1595": {
+   "text": "“Audi atque attende: Sal antiquissimum Mysterium! Cuius nucleum in Denario, Harpocratice, sile.”",
+   "basis": "oracle: corpus words for cw16 pdf p433"
+  },
+  "senex-one-sided-old-man-siberian-tale": {
+   "text": "In a Siberian tale, he appears as a one-legged, one-handed, and one-eyed greybeard who wakens a dead man with an iron staff.",
+   "basis": "oracle: corpus words for cw09i pdf p237 (the scan divides 'a one-legged' and 'one-handed'; the record's 'awakens' is not the printed word)"
+  },
+  "mandala-pauli-two-leaves-rotation-dream-zollikon-1946": {
+   "text": "Is it not a fact that when one looks more closely at the drawing, the mandala circle is split into two leaves lying on top of each other, which, in accordance with a set pattern, overlap in the center (Self)?",
+   "basis": "oracle: corpus words for letters-pauli pdf p97 (the record had cut the sentence with ellipses and left out its middle)"
+  },
+  "mirror-spiegler-krishna-manuscript-dream-1957": {
+   "text": "\"Spiegler\" [Reflector] is a dominant archetype, the producer of the mirror image, the point type.",
+   "basis": "oracle: corpus words for letters-pauli pdf p226"
+  },
+  "number-aucker-206-306-dream-1954": {
+   "demote": true,
+   "basis": "letters-pauli pdf p200 reads the sentence as 'rea\\ia. tion.!' at its close, so the record's wording and spelling cannot be confirmed from the scan"
+  },
+  "quaternity-preacher-french-formulas-dream-1955": {
+   "demote": true,
+   "basis": "the French line in letters-pauli pdf p212 is too damaged in the scan ('un. uprmion de.', 'quantit ..') for the record's wording to be confirmed"
+  },
+  "quaternity-sommerfeld-h-atom-splitting-dream-1948": {
+   "demote": true,
+   "basis": "letters-pauli pdf p170 reads the Greek transliterations as '(.idolon)', '(.ide.)', '(homcrusia)'; the record's 'homousia' does not agree with the scan ('homoousia') and its wording cannot be confirmed"
+  },
+  "mandala-pauli-rotation-inquisition-dream-zurich-1946": {
+   "demote": true,
+   "basis": "letters-pauli pdf p93 reads 'wives have objectified' as '__ haft ob;r fWd', so the record's wording cannot be confirmed from the scan"
+  },
+  "nigredo-secret-laboratory-radioactive-dream-sweden-1954": {
+   "demote": true,
+   "basis": "letters-pauli pdf p196 reads 'laboratory', 'that' and 'unconscious' as 'labocatUll', 'tbd', 'seious', so the record's wording cannot be confirmed from the scan"
+  },
+  "scales-pauli-spindles-scales-dream-zollikon-1950": {
+   "demote": true,
+   "basis": "letters-pauli pdf p114 reads the sentence as '01 the \"ruseaux\\' descnbed on your letter is translormed', so the record's wording ('fusaux', 'in your letter') cannot be confirmed from the scan"
+  },
+  "family:clairvoyance": {
+   "text": "In this letter Kant describes how Swedenborg, while he was in Gothenburg, had a clairvoyant vision of the great fire which took place in Stockholm in 1756, and how hour after hour he reported to the horrified public the progress of the fire.",
+   "cite": "The Zofingia Lectures ¶129 (pdf p68)",
+   "basis": "oracle: the sentence is verbatim on sup-zofingia pdf p68; the cite gains the page it resolves to"
+  },
+  "family:dioscuri": {
+   "text": "The Greeks interpreted them as the Dioscuri ('boys of Zeus'), the sons of Leda who were begotten by the swan and hatched out of an egg. Pollux was immortal, but Castor shared the human lot.",
+   "cite": "Aion (CW9ii) ¶134 (pdf p93)",
+   "basis": "oracle: the sentence is verbatim on cw09ii pdf p93; the cite gains the page it resolves to"
+  },
+  "family:spirit": {
+   "text": "Spirits, therefore, viewed from the psychological angle, are unconscious autonomous complexes which appear as projections because they have no direct association with the ego.",
+   "cite": "The Structure and Dynamics of the Psyche (CW8) ¶585 (pdf p321)",
+   "basis": "oracle: the sentence is verbatim on cw08 pdf p321; the cite gains the page it resolves to"
+  },
+  "family:yin-yang": {
+   "text": "When yang has reached its greatest strength, the dark power of yin is born within its depths, for night begins at midday when yang breaks up and begins to change into yin.",
+   "cite": "Alchemical Studies (CW13) ¶13 (pdf p27)",
+   "basis": "oracle: the sentence is verbatim on cw13 pdf p27; the cite gains the page it resolves to"
+  },
+  "archetype:animus": {
+   "text": "I have called the projection-making factor in women the animus, which means mind or spirit. The animus corresponds to the paternal Logos just as the anima corresponds to the maternal Eros.",
+   "cite": "Aion (CW9ii) ¶29 (pdf p26)",
+   "basis": "oracle: the sentence is verbatim on cw09ii pdf p26; the cite gains the page it resolves to"
+  },
+  "archetype:child": {
+   "text": "The child motif represents the preconscious, childhood aspect of the collective psyche.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶270 (pdf p172)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p172; the cite gains the page it resolves to"
+  },
+  "archetype:five": {
+   "text": "In the centre is the egg encircled by the snake; outside, apotropaic wings and eyes. The mandala is exceptional in that it has a pentadic structure.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶615 (pdf p382)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p382; the cite gains the page it resolves to"
+  },
+  "archetype:one": {
+   "text": "This Man is a single Monad, uncompounded [and] indivisible, [yet] compounded [and] divisible; loving and at peace with all things [yet] warring with all things and at war with itself in all things; unlike and like [itself], as it were a musical harmony containing all things",
+   "cite": "Aion (CW9ii) ¶340 (pdf p230)",
+   "basis": "oracle: the sentence is verbatim on cw09ii pdf p230; the cite gains the page it resolves to"
+  },
+  "archetype:shadow": {
+   "text": "The first of these is the SHADOW, that hidden, repressed, for the most part inferior and guilt-laden personality whose ultimate ramifications reach back into the realm of our animal ancestors and so comprise the whole historical aspect of the unconscious.",
+   "cite": "Aion (CW9ii) ¶422 (pdf p282)",
+   "basis": "oracle: the sentence is verbatim on cw09ii pdf p282; the cite gains the page it resolves to"
+  },
+  "archetype:anima": {
+   "text": "Like the 'supraordinate personality,' the anima is bipolar and can therefore appear positive one moment and negative the next; now young, now old; now mother, now maiden; now a good fairy, now a witch; now a saint, now a whore.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶352 (pdf p210)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p210; the cite gains the page it resolves to"
+  },
+  "archetype:kore": {
+   "text": "The 'Kore' has her psychological counterpart in those archetypes which I have called the self or supraordinate personality on the one hand, and the anima on the other.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶306 (pdf p193)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p193; the cite gains the page it resolves to"
+  },
+  "archetype:wise-old-man": {
+   "text": "Mostly, therefore, it is the figure of a 'wise old man' who symbolizes the spiritual factor. Sometimes the part is played by a 'real' spirit, namely the ghost of one dead, or, more rarely, by grotesque gnome-like figures or talking animals.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶397 (pdf p226)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p226; the cite gains the page it resolves to"
+  },
+  "family:premonition": {
+   "text": "The theory of long-range effects in time is among the most obscure and complex topics in the realm of occult phenomena. Under this heading we classify premonitions, prophecies, second sight, and clairvoyance in the strict sense.",
+   "cite": "The Zofingia Lectures ¶131 (pdf p69)",
+   "basis": "oracle: the sentence is verbatim on sup-zofingia pdf p69; the cite gains the page it resolves to"
+  },
+  "family:churinga": {
+   "text": "The churinga of the Australian aborigines is a similar energic concept. It means: (1) the ritual object; (2) the body of an individual ancestor (from whom the life force comes); (3) the mystical property of any object.",
+   "cite": "The Structure and Dynamics of the Psyche (CW8) ¶119 (pdf p74)",
+   "basis": "cite gains the page; text unchanged"
+  },
+  "family:clear-light": {
+   "text": "O nobly-born, thy present intellect, in real nature void, not formed into anything as regards characteristics or colour, naturally void, is the very Reality, the All-Good. … This realization is the Dharmakāya state of perfect enlightenment; or, as we should express it in our own language, the creative ground of all metaphysical assertion is consciousness, as the invisible, intangible manifestation of the soul.",
+   "cite": "Psychology and Religion (CW11) ¶837 (pdf p423)",
+   "basis": "oracle: cw11 pdf p423 sets two sentences between these ('Thine own intellect, which is now voidness … the All-good Buddha.'); the omission is marked"
+  },
+  "family:father-imago": {
+   "text": "For the parental imago is possessed of a quite extraordinary power; it influences the psychic life of the child so enormously that we must ask ourselves whether we may attribute such magical power to an ordinary human being at all.",
+   "cite": "Freud and Psychoanalysis (CW4) ¶728 (pdf p289)",
+   "basis": "oracle: cw04 pdf p289 prints the first sentence there; the next sentence of the record stands elsewhere in the chapter and is cut"
+  },
+  "family:fettered-soul": {
+   "text": "This idea was formulated in the conception of the “anima in compedibus,” the fettered or imprisoned soul. (Cf. Dorn, “Speculativa philosophia,” Theatr. chem., I, pp. 272, 298; “De spagirico artificio,” etc., ibid., I, pp. 457, 497.) … Those “enchained in Hades” are mentioned very early on, in the Comarius text dating from the 1st century (Berthelot, Alch. grecs, IV, xx, 8.)",
+   "cite": "Psychology and Religion (CW11) (pdf p697)",
+   "basis": "oracle: cw11 pdf p697 sets a sentence between the two ('So far, I have found no evidence …'); the omission is marked"
+  },
+  "family:ghost": {
+   "text": "The unconscious imago, which no longer has an object to correspond to it, becomes a ghost and now exerts influences on the subject which cannot be distinguished in principle from psychic phenomena.",
+   "cite": "The Structure and Dynamics of the Psyche (CW8) ¶522 (pdf p286)",
+   "basis": "cite gains the page; text unchanged"
+  },
+  "family:materialization": {
+   "text": "I should make it clear here that we use our libido for such a projection, and libido is energy, and energy is substantial, it has mass. That fact explains the possibility of spook phenomena, materialization and such things, which really do occur.",
+   "cite": "Nietzsche's Zarathustra (pdf p1184)",
+   "basis": "oracle: sem-zarathustra pdf p1184 continues \"such things, which really do occur.\"; the spliced second sentence is cut"
+  },
+  "family:monocolus": {
+   "text": "On the left there is a crowned man in a yellow robe, and on the right a priest in a white robe with a mitre. Each of them has only one foot. The inscription under the picture begins with the sign for Mercurius ( ) and runs: “There they make but one.”",
+   "cite": "Mysterium Coniunctionis (CW14) ¶720 (pdf p380)",
+   "basis": "oracle: cw14 pdf p380 prints these sentences; the closing remark of the record stands elsewhere in the paragraph and is cut"
+  },
+  "family:placenta": {
+   "text": "… they believe that man always has a double, the double being a ghostly brother who was the life of the placenta-the afterbirth is also a birth, but a ghostly one.",
+   "cite": "Visions (pdf p895)",
+   "basis": "oracle: sem-visions pdf p895 prints the sentence; the closing fragment (Synopados …) is cut"
+  },
+  "family:satori": {
+   "text": "“Satori is the raison d’être of Zen without which Zen is not Zen,” says Suzuki.",
+   "cite": "Psychology and Religion (CW11) ¶877 (pdf p445)",
+   "basis": "cite gains the page; text unchanged"
+  },
+  "family:sibyl": {
+   "text": "such stories, where boys or little girls functioned as mediums in a somnambulistic state. In antiquity it was a sort of profession. A very interesting example of that was found in an excavation in Egypt. They discovered a list of the servants in the house of a Roman official in imperial times, and among them was a name written in Greek, Walburga Sibylla.",
+   "cite": "Dream Analysis (pdf p705)",
+   "basis": "oracle: sem-dream-analysis pdf p705 prints the sentence the record had dropped ('A very interesting example of that …'); restored"
+  },
+  "family:transitus": {
+   "text": "The concept of the transitus is part of the mystery rituals, it means the carrying of the symbol or the carrying of the god. … Transitus means the passing over or the change from one condition to another by carrying out a difficult task. It is therefore comparable to the heroic deeds of Hercules, who had to accomplish twelve athla.",
+   "cite": "Visions (pdf p1277)",
+   "basis": "oracle: sem-visions pdf p1277 prints the first sentence and p1278 the rest; the omission between them is marked"
+  },
+  "archetype:syzygy": {
+   "text": "This youth is an animus-figure, the embodiment of the masculine element in a woman. Youth and young girl together form a syzygy or coniunctio which symbolizes the essence of wholeness (as also does the Platonic hermaphrodite, who later became the symbol of perfected wholeness in alchemical philosophy).",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶322 (pdf p202)",
+   "basis": "oracle: the sentence is verbatim on cw09i pdf p202 (the scan sets a footnote inside it, which the oracle folds); the cite gains the page"
+  },
+  "theoretic:psychoid": {
+   "text": "It cannot be directly perceived or \"represented,\" in contrast to the perceptible psychic phenomena, and on account of its \"irrepresentable\" nature I have called it \"psychoid.\"",
+   "cite": "The Structure and Dynamics of the Psyche (CW8) ¶840 (pdf p448)",
+   "basis": "oracle: cw08 pdf p448 prints this sentence; the two that follow in the record stand in cw10 (¶851) and are cut"
+  },
+  "theoretic:archetype-as-such": {
+   "text": "One must, for the sake of accuracy, distinguish between \"archetype\" and \"archetypal ideas.\" The archetype as such is a hypothetical and irrepresentable model, something like the \"pattern of behaviour\" in biology.",
+   "cite": "The Archetypes and the Collective Unconscious (CW9i) ¶6 (pdf p16)",
+   "basis": "oracle: cw09i pdf p16 prints these two sentences; the rest of the record stands at pdf p90 (¶155) and is cut"
+  },
+  "family:philemon": {
+   "text": "He recalled that Philemon evolved out of the figure of Elijah, who had previously appeared in his fantasies: Philemon was a pagan and brought with him an Egypto-Hellenic atmosphere with a Gnostic coloration … It was he who taught me psychic objectivity, the reality of the psyche. Through the conversations with Philemon, the distinction was clarified between myself and the object of my thought …",
+   "cite": "redbook pdf p232",
+   "basis": "oracle: redbook pdf p232 prints an editorial ellipsis after 'coloration' and after 'thought'; the record had dropped both marks"
+  },
+  "animus-helene-smith-planet-mars-geneva-1899": {
+   "locator": "pdf pp38-39 (session of 8 Nov 1938)",
+   "basis": "oracle: the quotation begins at the foot of sem-childrens-dreams pdf p38 and runs on pdf p39 (a footnote block lies between)"
+  },
+  "mother-goddess-sleeper-hal-saflieni-malta-3000bce": {
+   "locator": "¶311 (pdf pp196–197)",
+   "basis": "oracle: the sentence begins at the foot of cw09i pdf p196 and runs on pdf p197"
+  },
+  "pope-fishermans-ring-vatican": {
+   "locator": "8 June 1932 (pdf pp798–799)",
+   "basis": "oracle: the sentence begins at the foot of sem-visions pdf p798 and runs on pdf p799 (a running head stands between 'The' and 'Pope')"
   }
  }
 }

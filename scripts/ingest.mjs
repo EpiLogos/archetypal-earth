@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT, readNotes, asList, linkTargets, slugify, stripLinks } from './lib/vault.mjs';
-import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse } from './lib/text.mjs';
+import { plain, shortLabel, parseInstanceBody, oneLineFromForm, collapse, definitionCite } from './lib/text.mjs';
 import { loadGazetteer, matchPlace, loadCultures, normCultureSlug, jitter, JIT } from './lib/geo.mjs';
 import { validateField } from './validate.mjs';
 import { buildVocab, createNormalizer, visitFieldText } from './lib/ocr.mjs';
@@ -210,7 +210,7 @@ function foldFamilyDefinition(over, fam) {
     const short = (wl.bare || wl.title).split(':')[0];
     fam.definition = {
       text: collapse(recs.map((r) => r.quote).join(' ')),
-      cite: p0.para != null ? `${short} (${wl.short}) ¶${p0.para}` : `${short} (${wl.short}) pdf p${recs[0].pdf_page}`,
+      cite: definitionCite(short, wl, { para: p0.para, pdfPage: recs[0].pdf_page }),
     };
   } else warn(`definitionPick for ${fam.id} not found verbatim in mentions.jsonl; definition omitted`);
 }
@@ -225,7 +225,7 @@ function foldArchDefinition(c, a) {
     const p0 = c.definitionPick[0];
     const wl = workLabel(p0.vol);
     const short = (wl.bare || wl.title).split(':')[0];
-    a.definition = { text: collapse(recs.map((r) => r.quote).join(' ')), cite: `${short} (${wl.short}) ¶${p0.para}` };
+    a.definition = { text: collapse(recs.map((r) => r.quote).join(' ')), cite: definitionCite(short, wl, { para: p0.para }) };
   } else warn(`definitionPick for ${a.id} not found verbatim in mentions.jsonl; definition omitted`);
 }
 for (const [id, c] of Object.entries(curArch)) {
@@ -786,7 +786,7 @@ for (const n of theoNotes.filter((x) => !x.failed)) {
       const short = (wl.bare || wl.title).split(':')[0];
       t.definition = {
         text: collapse(recs.map((r) => r.quote).join(' ')),
-        cite: p0.para != null ? `${short} (${wl.short}) ¶${p0.para}` : `${short} (${wl.short}) pdf p${recs[0].pdf_page}`,
+        cite: definitionCite(short, wl, { para: p0.para, pdfPage: recs[0].pdf_page }),
       };
     } else warn(`definitionPick for ${n.slug} not found verbatim in mentions.jsonl; definition omitted`);
   }

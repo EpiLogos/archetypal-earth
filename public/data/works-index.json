@@ -2,8 +2,8 @@
   "schema": 1,
   "source": "public/data/field.json",
   "total": 3228,
-  "ordered": 2953,
-  "unresolved": 275,
+  "ordered": 2950,
+  "unresolved": 278,
   "works": {
     "a-blue-fire": {
       "cites": [],
@@ -3527,11 +3527,6 @@
           "page": 196
         },
         {
-          "id": "mother-goddess-sleeper-hal-saflieni-malta-3000bce",
-          "kind": "pdf",
-          "page": 197
-        },
-        {
           "id": "ascent-descent-dorn-mundi-peregrinatio-via-veritatis-1602",
           "kind": "para",
           "page": 204
@@ -3919,6 +3914,10 @@
         {
           "id": "mother-goddess-moon-lady-fantasy-earth-mother-case-y",
           "locator": "¶¶345-347 (pdf pp207-208)"
+        },
+        {
+          "id": "mother-goddess-sleeper-hal-saflieni-malta-3000bce",
+          "locator": "¶311 (pdf pp196–197)"
         },
         {
           "id": "mother-goddess-ursanna-bear-temple-dream-case-y",
@@ -7843,11 +7842,6 @@
           "page": 290
         },
         {
-          "id": "adam-golgotha-centre-earth-cave-of-treasures-6c",
-          "kind": "para",
-          "page": 292
-        },
-        {
           "id": "oxford-master-scoler-riddles-adam-15c",
           "kind": "para",
           "page": 292
@@ -7861,6 +7855,11 @@
           "id": "turba-adam-four-elements-12c",
           "kind": "para",
           "page": 292
+        },
+        {
+          "id": "adam-golgotha-centre-earth-cave-of-treasures-6c",
+          "kind": "para",
+          "page": 294
         },
         {
           "id": "statue-erected-light-divinity-komarios-1c",
@@ -10702,11 +10701,6 @@
           "page": 38
         },
         {
-          "id": "animus-helene-smith-planet-mars-geneva-1899",
-          "kind": "pdf",
-          "page": 39
-        },
-        {
           "id": "red-corset-old-woman-pursuit-dream-girl-4",
           "kind": "pdf",
           "page": 39
@@ -11497,7 +11491,12 @@
           "page": 490
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        {
+          "id": "animus-helene-smith-planet-mars-geneva-1899",
+          "locator": "pdf pp38-39 (session of 8 Nov 1938)"
+        }
+      ]
     },
     "sem-dream-analysis": {
       "cites": [
@@ -13489,11 +13488,6 @@
           "page": 796
         },
         {
-          "id": "pope-fishermans-ring-vatican",
-          "kind": "pdf",
-          "page": 799
-        },
-        {
           "id": "aboriginal-maiaurli-fire-spark-australia",
           "kind": "pdf",
           "page": 802
@@ -14244,6 +14238,10 @@
         {
           "id": "pieta-animus-fire-tree-star-vision-zurich-1934",
           "locator": "24 Jan. 1934 (pdf pp1322-1325)"
+        },
+        {
+          "id": "pope-fishermans-ring-vatican",
+          "locator": "8 June 1932 (pdf pp798–799)"
         },
         {
           "id": "prophet-limbs-fashioned-fire-vision-zurich-1934",

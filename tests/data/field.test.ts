@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 // @ts-expect-error plain ESM script
 import { validateField } from '../../scripts/validate.mjs';
+// @ts-expect-error plain ESM script
+import { runOracle } from '../../scripts/lib/quote-oracle.mjs';
 import type { Field } from '../../src/types/field';
 
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -98,6 +101,22 @@ describe('field.json contract', () => {
     }
     expect(seen, 'the enrichment pass has landed').toBeGreaterThan(50);
   });
+
+  it('a definition presented as a quotation carries a cite that resolves to the page it stands on (never "(null)")', () => {
+    const defs = [...field.families, ...field.archetypes, ...field.theoretics].filter((x) => x.definition);
+    const dem = defs.filter((x) => (x.definition as { quoteKind?: string }).quoteKind === 'paraphrase');
+    const quoted = defs.filter((x) => !dem.includes(x));
+    for (const x of quoted) expect(x.definition!.cite, x.id).not.toMatch(/\((null|undefined)\)/);
+    // the oracle reads the definition's cite against the corpus: the page or ¶ must exist in the cited volume
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ae-defs-'));
+    fs.symlinkSync(FIELD_PATH, path.join(dir, 'field.json'));
+    fs.symlinkSync(path.join(ROOT, 'public', 'data', 'corpus'), path.join(dir, 'corpus'));
+    const exc = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation', 'quote-oracle-exceptions.json'), 'utf8')).exceptions;
+    const res = runOracle(dir, { exceptions: exc }).results.filter((r: { dataset: string }) => r.dataset === 'field.json#definitions');
+    expect(res.length, 'every quoted definition is checked').toBe(quoted.length);
+    const unresolved = res.filter((r: { cls: string }) => r.cls === 'locator-unresolved' || r.cls === 'no-locator').map((r: { id: string; cls: string }) => `${r.cls} ${r.id}`);
+    expect(unresolved).toEqual([]);
+  }, 60_000);
 
   it('parallelIds only reference existing occurrences', () => {
     const ids = new Set(field.occurrences.map((o) => o.id));
