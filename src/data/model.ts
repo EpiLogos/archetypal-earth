@@ -2,11 +2,12 @@
 import type { Archetype, ArchetypeId, Culture, Family, FamilyId, ImageRef, Join, Occurrence, Field, SkyLocus, Theoretic, TheoreticId } from '../types/field';
 import type { BodyKey } from '../types/sky';
 import type { Symbols, SymbolEntry } from '../types/symbols';
+import type { Work, WorkId, WorksData } from '../types/works';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
 
-export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place';
+export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place' | 'work';
 export interface Subject {
   type: SubjectType;
   id: string;
@@ -74,6 +75,15 @@ export interface Model {
   colour: RGB[];
   /** what governs each occurrence (its family's archetypes and theoretics), index-aligned with `occ` */
   tags: OccurrenceTags[];
+  /** the Works (public/data/works.json); empty when the file was not loaded */
+  workById: Map<WorkId, Work>;
+  /** every cite key (a Work's id and each alias) -> the Work it names: a cite keeps its key and is read through this */
+  workKey: Map<string, WorkId>;
+  /**
+   * The occurrences that cite a Work, by membership (an occurrence once per Work, however many of its cites name it), year
+   * ascending. Read through the registry, so `redbook` and `liber-novus` are one Work. What `subjectMembers` returns.
+   */
+  workMem: Map<WorkId, number[]>;
   /** the field's joins (curation/joins.json), any node to any node */
   joins: Join[];
   /** joins by endpoint, keyed `${type}:${id}`: each join is listed under both of its ends */
@@ -100,7 +110,12 @@ export function shortPlace(place: string): string {
 
 const FALLBACK_PALETTE = { core: '#c3d2f2', glow: '#4f78cf', fog: '#10193a', deep: '#02030a' };
 
-export function buildModel(field: Field, extent?: { from: number; to: number }, symbols?: Symbols): Model {
+/** What the model reads beside the Field: the published Works. Absent, the Work indexes are empty and nothing else changes. */
+export interface ModelExtras {
+  works?: WorksData;
+}
+
+export function buildModel(field: Field, extent?: { from: number; to: number }, symbols?: Symbols, extras: ModelExtras = {}): Model {
   const occ = field.occurrences;
   const yMin = Number.isFinite(field.meta.yearMin) ? field.meta.yearMin : Math.min(...occ.map((o) => o.year), 0);
   const yMax = Number.isFinite(field.meta.yearMax) ? field.meta.yearMax : Math.max(...occ.map((o) => o.year), 1960);
@@ -118,6 +133,11 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   for (const a of field.archetypes) archPalette.set(a.id, toRgbPalette(a.palette ?? FALLBACK_PALETTE, a.spectrum?.position ?? 0.5));
   const theoPalette = new Map<TheoreticId, RGBPalette>();
   for (const t of field.theoretics ?? []) theoPalette.set(t.id, toRgbPalette(t.palette ?? FALLBACK_PALETTE, t.spectrum?.position ?? 0.5));
+
+  const workById = new Map<WorkId, Work>((extras.works?.works ?? []).map((w) => [w.id, w]));
+  const workKey = new Map<string, WorkId>();
+  for (const w of workById.values()) for (const k of [w.id, ...w.aliases]) workKey.set(k, w.id);
+  const workMem = new Map<WorkId, number[]>();
 
   const n = occ.length;
   const dir: Vec3[] = new Array(n);
@@ -146,6 +166,11 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
       const mem = famMem.get(fid);
       if (mem) mem.push(i); else famMem.set(fid, [i]);
     }
+    for (const wid of new Set((o.jung ?? []).map((c) => workKey.get(c.work)))) {
+      if (!wid) continue;
+      const wm = workMem.get(wid);
+      if (wm) wm.push(i); else workMem.set(wid, [i]);
+    }
     if (o.sky?.length) {
       skyAt[i] = 1;
       for (const k of new Set(o.sky.map((l) => l.body ?? l.ring))) {
@@ -169,6 +194,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
   for (const list of famOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of famMem.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of cultureOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year);
+  for (const list of workMem.values()) list.sort((a, b) => occ[a].year - occ[b].year);
   for (const list of skyOcc.values()) list.sort((a, b) => occ[a].year - occ[b].year || a - b);
   for (const p of places.values()) p.occ.sort((a, b) => occ[a].year - occ[b].year);
   // a single-occurrence "place" is just that occurrence; keep only real regions of recurrence
@@ -222,7 +248,7 @@ export function buildModel(field: Field, extent?: { from: number; to: number }, 
     }
   }
 
-  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, joins, joinsBy };
+  return { field, symbols: new Map(symbols?.entries.filter(e => famById.has(e.familyId)).map(e => [e.familyId, e]) ?? []), symbolSource: symbols?.source, scale, occ, archById, theoById, famById, cultureById, occIndex, dir, u, located, skyAt, skyOcc, famPalette, archPalette, theoPalette, famOcc, archOcc, theoOcc, famMem, archMem, theoMem, cultureOcc, places, occPlace, colour, tags, workById, workKey, workMem, joins, joinsBy };
 }
 
 const BASIS_ORDER: Record<string, number> = { jung: 0, inferred: 1, site: 2 };
@@ -248,6 +274,7 @@ export function subjectMembers(m: Model, s: Subject): number[] {
   else if (s.type === 'theoretic') list = m.theoMem.get(s.id);
   else if (s.type === 'family') list = m.famMem.get(s.id);
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
+  else if (s.type === 'work') list = m.workMem.get(s.id);
   else list = m.places.get(s.id)?.occ;
   return list ?? [];
 }
@@ -268,6 +295,7 @@ export function subjectHome(m: Model, s: Subject): number[] {
   else if (s.type === 'theoretic') list = m.theoOcc.get(s.id);
   else if (s.type === 'family') list = m.famOcc.get(s.id);
   else if (s.type === 'culture') list = m.cultureOcc.get(s.id);
+  else if (s.type === 'work') list = m.workMem.get(s.id);
   else list = m.places.get(s.id)?.occ;
   return (list ?? []).filter((i) => m.located[i]);
 }
@@ -299,6 +327,7 @@ export function subjectName(m: Model, s: Subject): string {
   if (s.type === 'theoretic') return m.theoById.get(s.id)?.name ?? s.id;
   if (s.type === 'family') return m.famById.get(s.id)?.name ?? s.id;
   if (s.type === 'culture') return m.cultureById.get(s.id)?.name ?? s.id;
+  if (s.type === 'work') return m.workById.get(s.id)?.title ?? s.id;
   return m.places.get(s.id)?.name ?? s.id;
 }
 
@@ -306,6 +335,10 @@ export function subjectLine(m: Model, s: Subject): string {
   if (s.type === 'archetype') return m.archById.get(s.id)?.oneLine ?? '';
   if (s.type === 'theoretic') return m.theoById.get(s.id)?.oneLine ?? '';
   if (s.type === 'family') return m.famById.get(s.id)?.oneLine ?? '';
+  if (s.type === 'work') {
+    const w = m.workById.get(s.id);
+    return w ? [w.voice, w.display].filter(Boolean).join(', ') : '';
+  }
   return '';
 }
 
@@ -314,6 +347,7 @@ export function subjectExists(m: Model, s: Subject): boolean {
   if (s.type === 'theoretic') return m.theoById.has(s.id);
   if (s.type === 'family') return m.famById.has(s.id);
   if (s.type === 'culture') return m.cultureById.has(s.id);
+  if (s.type === 'work') return m.workById.has(s.id);
   return m.places.has(s.id);
 }
 
@@ -322,6 +356,11 @@ export function subjectPalette(m: Model, s: Subject, avg: (ps: { p: RGBPalette; 
   if (s.type === 'archetype') return m.archPalette.get(s.id) ?? null;
   if (s.type === 'theoretic') return m.theoPalette.get(s.id) ?? null;
   if (s.type === 'family') return m.famPalette.get(s.id) ?? null;
+  // a Work takes no hue of its own: the cite-weighted mean of the families its cites stand on
+  if (s.type === 'work') {
+    const w = m.workById.get(s.id);
+    return avg((w?.ties.families ?? []).map((t) => ({ p: m.famPalette.get(t.id)!, w: t.weight })).filter((x) => x.p));
+  }
   const items = subjectOccurrences(m, s).map((i) => ({ p: m.famPalette.get(m.occ[i].familyId)!, w: 1 })).filter((x) => x.p);
   return avg(items);
 }

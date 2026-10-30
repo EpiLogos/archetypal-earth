@@ -76,7 +76,7 @@ export function stateToHash(s: AppState): string {
     // the lens: #/dynamics (the Self), or #/dynamics/<code>/<id> for a subject, the focus route's own codes
     // a stop of the route follows: #/dynamics[/<code>/<id>]/s/<stop>
     const sub = s.dynamics.subject;
-    return `#/dynamics${sub ? `/${{ archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
+    return `#/dynamics${sub ? `/${{ archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p', work: 'w' }[sub.type]}/${enc(sub.id)}` : ''}${s.dynamics.stop ? `/s/${enc(s.dynamics.stop)}` : ''}`;
   }
   if (s.trail && s.view.kind === 'manifest') {
     return `${stateToHash({ view: s.trail, deep: false })}/o/${enc(s.view.occId)}${s.deep ? '/deep' : ''}`;
@@ -89,7 +89,7 @@ export function stateToHash(s: AppState): string {
     case 'world':
       return g ? '#/graph' : '#/';
     case 'focus': {
-      const k = { archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p' }[v.subject.type];
+      const k = { archetype: 'a', theoretic: 'th', family: 'f', culture: 'c', place: 'p', work: 'w' }[v.subject.type];
       return `#${g}/${k}/${enc(v.subject.id)}${deep}`;
     }
     case 'manifest':
