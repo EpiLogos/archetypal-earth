@@ -46,6 +46,7 @@
     "practice:check": "node scripts/practice.mjs --check",
     "depth": "node scripts/depth.mjs",
     "depth:check": "node scripts/depth.mjs --check",
+    "people:check": "node scripts/people-check.mjs",
     "walks": "node scripts/walks.mjs",
     "walks:check": "node scripts/walks.mjs --check",
     "harvest:check": "node scripts/harvest-check.mjs"

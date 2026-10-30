@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "_note": "Person records behind the voices in the field's cites and the vault's figures (N17a). One record per person; Van Eenwyk is merged (the works voice and the vault figure). Every field is either sourced or blank with a reason; nothing is filled from outside these files. A source is a corpus volume and page (public/data/corpus/<vol>.json, page p), a vault path under the vault root with the quoted phrase, or a repo curation or public/data path with an optional JSON path and quoted phrase. Quoted phrases are checked verbatim by scripts/people-check.mjs. Dates: a year as a number; a day as ISO; an approximate year as 'c. YYEAR' (the source's own 'c.'). subjectKey names the field's subject value (Jung's 82 own-subject occurrences). The Book of Symbols' editors come from curation/symbols/book-of-symbols.json source.editor, checked against the title page (PDF page 7: Editor-in-Chief Ami Ronnberg; Editor Kathleen Martin). Jung's birth is copied from curation/astrology.json people[0] and stays there until the later package moves it.",
+  "people": {
+    "jung": {
+      "id": "jung",
+      "name": "C. G. Jung",
+      "born": "1875-07-26",
+      "died": "1961-06-06",
+      "role": "Analytical psychologist",
+      "portrait": null,
+      "subjectKey": "jung",
+      "birth": {
+        "date": "1875-07-26",
+        "time": "19:32",
+        "timeSource": "Gret Baumann-Jung, his daughter, who cast his chart (published in Jung on Astrology, 2017). Other records give 19:20 to 19:41, so the rising degree is approximate.",
+        "place": "Kesswil, Thurgau",
+        "lat": 47.6,
+        "lon": 9.32,
+        "offset": "mean-time",
+        "portrait": {
+          "src": "/img/jung-portrait.jpg",
+          "title": "Carl Gustav Jung",
+          "credit": "Unknown author",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Jung_portrait.jpg",
+          "_file": "File:Carl Gustav Jung portrait.jpg",
+          "width": 366,
+          "height": 567
+        }
+      },
+      "sources": {
+        "name": "curation/astrology.json people[0].label “C. G. Jung”",
+        "born": "curation/astrology.json people[0].birth.date",
+        "died": "corpus cw01 p9 “following Jung’s death on June 6, 1961”",
+        "role": "corpus cw07 p5 “the history of analytical psychology”",
+        "portrait": null,
+        "subjectKey": "public/data/field.json occurrences “jung” (82 occurrences carry subject jung)",
+        "birth": "curation/astrology.json people[0].birth"
+      },
+      "reasons": {
+        "portrait": "no registry id for Jung in images.json or images-ext*.json; his Commons portrait is carried in birth.portrait, copied from curation/astrology.json people[0]"
+      }
+    },
+    "von-franz": {
+      "id": "von-franz",
+      "name": "Marie-Louise von Franz",
+      "born": null,
+      "died": null,
+      "role": "Jungian lecturer; author of Number and Time",
+      "portrait": null,
+      "sources": {
+        "name": "corpus vonzfranz-number-time p4 “Marie-Louise von Franz”",
+        "born": null,
+        "died": null,
+        "role": "corpus vonzfranz-number-time p4 “a lecturer at the C. G. Jung Institute, Zurich”",
+        "portrait": null
+      },
+      "reasons": {
+        "born": "no date in the vault or corpus",
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of her in images.json or images-ext*.json"
+      }
+    },
+    "neumann": {
+      "id": "neumann",
+      "name": "Erich Neumann",
+      "born": 1905,
+      "died": "1960-11-05",
+      "role": "Analytical psychologist; theorist of feminine development",
+      "portrait": null,
+      "sources": {
+        "name": "corpus cw18 p989 “Erich Neumann (1905–1960)”",
+        "born": "corpus cw18 p989 “Erich Neumann (1905–1960)”",
+        "died": "corpus neumann-great-mother p214 “on November 5, 1960”",
+        "role": "corpus neumann-great-mother p214 “a coherent theory of feminine development”",
+        "portrait": null
+      },
+      "reasons": {
+        "portrait": "no portrait of him in images.json or images-ext*.json"
+      }
+    },
+    "pauli": {
+      "id": "pauli",
+      "name": "Wolfgang Pauli",
+      "born": 1900,
+      "died": "1958-12-15",
+      "role": "Swiss physicist; Jung's correspondent",
+      "portrait": null,
+      "sources": {
+        "name": "corpus cw18 p939 “Wolfgang Pauli (1900–1958)”",
+        "born": "corpus cw18 p939 “Wolfgang Pauli (1900–1958)”",
+        "died": "corpus letters-pauli p233 “Pauli died in Zurich on 15 December 1958”",
+        "role": "corpus cw18 p939 “Swiss physicist and Nobel Prize winner”",
+        "portrait": null
+      },
+      "reasons": {
+        "portrait": "no portrait of him in images.json or images-ext*.json"
+      }
+    },
+    "crowley": {
+      "id": "crowley",
+      "name": "Aleister Crowley",
+      "born": null,
+      "died": null,
+      "role": "Occultist; author of The Book of Thoth",
+      "portrait": null,
+      "sources": {
+        "name": "corpus book-of-thoth p1 “(Aleister Crowley)”",
+        "born": null,
+        "died": null,
+        "role": "corpus book-of-thoth p1 “A SHORT ESSAY ON THE TAROT”",
+        "portrait": null
+      },
+      "reasons": {
+        "born": "no date in the vault or corpus",
+        "died": "no date in the vault or corpus",
+        "portrait": "the registers hold Thoth cards by Frieda Harris, not a portrait of him"
+      }
+    },
+    "hillman": {
+      "id": "hillman",
+      "name": "James Hillman",
+      "born": null,
+      "died": null,
+      "role": "Archetypal psychologist",
+      "portrait": null,
+      "sources": {
+        "name": "corpus a-blue-fire p2 “JAMES HILLMAN”",
+        "born": null,
+        "died": null,
+        "role": "corpus a-blue-fire p2 “on archetypal psychology”",
+        "portrait": null
+      },
+      "reasons": {
+        "born": "no date in the vault or corpus",
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of him in images.json or images-ext*.json"
+      }
+    },
+    "van-eenwyk": {
+      "id": "van-eenwyk",
+      "name": "John Richter Van Eenwyk",
+      "born": 1946,
+      "died": null,
+      "role": "American Jungian analyst",
+      "portrait": null,
+      "sources": {
+        "name": "vault wiki/figures/van-eenwyk-john-r.md “John Richter Van Eenwyk”",
+        "born": "corpus van-eenwyk p5 “Van Eenwyk, John R. (John Richter), 1946-”",
+        "died": null,
+        "role": "vault wiki/figures/van-eenwyk-john-r.md “American Jungian analyst”",
+        "portrait": null
+      },
+      "reasons": {
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of him in images.json or images-ext*.json"
+      }
+    },
+    "burt": {
+      "id": "burt",
+      "name": "Kathleen Burt",
+      "born": "1943-09-12",
+      "died": null,
+      "role": "Astrologer; author of Archetypes of the Zodiac",
+      "portrait": null,
+      "sources": {
+        "name": "corpus burt-zodiac p6 “Kathleen Burt was born September 12, 1943”",
+        "born": "corpus burt-zodiac p6 “Kathleen Burt was born September 12, 1943”",
+        "died": null,
+        "role": "corpus burt-zodiac p5 “Kathleen Burt has given the reader a deeper look at astrology”",
+        "portrait": null
+      },
+      "reasons": {
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of her in images.json or images-ext*.json"
+      }
+    },
+    "ami-ronnberg": {
+      "id": "ami-ronnberg",
+      "name": "Ami Ronnberg",
+      "born": null,
+      "died": null,
+      "role": "Editor-in-chief, The Book of Symbols",
+      "portrait": null,
+      "sources": {
+        "name": "curation/symbols/book-of-symbols.json source.editor “Ami Ronnberg (editor-in-chief)”",
+        "born": null,
+        "died": null,
+        "role": "curation/symbols/book-of-symbols.json source.editor “Ami Ronnberg (editor-in-chief)”",
+        "portrait": null
+      },
+      "reasons": {
+        "born": "no date in the vault or corpus",
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of him in images.json or images-ext*.json"
+      }
+    },
+    "kathleen-martin": {
+      "id": "kathleen-martin",
+      "name": "Kathleen Martin",
+      "born": null,
+      "died": null,
+      "role": "Editor, The Book of Symbols",
+      "portrait": null,
+      "sources": {
+        "name": "curation/symbols/book-of-symbols.json source.editor “Kathleen Martin (editor)”",
+        "born": null,
+        "died": null,
+        "role": "curation/symbols/book-of-symbols.json source.editor “Kathleen Martin (editor)”",
+        "portrait": null
+      },
+      "reasons": {
+        "born": "no date in the vault or corpus",
+        "died": "no date in the vault or corpus",
+        "portrait": "no portrait of her in images.json or images-ext*.json"
+      }
+    },
+    "khunrath": {
+      "id": "khunrath",
+      "name": "Heinrich Khunrath",
+      "born": "c. 1560",
+      "died": "c. 1605",
+      "role": "Paracelsan physician and cabbalist alchemist",
+      "portrait": null,
+      "sources": {
+        "name": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+        "born": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+        "died": "vault wiki/figures/khunrath.md “Heinrich Khunrath (c. 1560-1605)”",
+        "role": "vault wiki/figures/khunrath.md “Paracelsan physician and cabbalist alchemist”",
+        "portrait": null
+      },
+      "reasons": {
+        "portrait": "the registers hold his plates (families pentagram), not a portrait of him"
+      }
+    },
+    "paracelsus": {
+      "id": "paracelsus",
+      "name": "Paracelsus",
+      "born": "1493-11-10",
+      "died": 1541,
+      "role": "Renaissance physician; Jung's prime figure-locus",
+      "portrait": null,
+      "sources": {
+        "name": "vault wiki/figures/paracelsus.md “Paracelsus (Theophrastus Bombast von Hohenheim, 1493-1541)”",
+        "born": "vault wiki/figures/paracelsus.md “born Einsiedeln 10 Nov 1493”",
+        "died": "vault wiki/figures/paracelsus.md “died Salzburg 1541”",
+        "role": "vault wiki/figures/paracelsus.md “Paracelsus is Jung's prime figure-locus for the Renaissance psyche”",
+        "portrait": null
+      },
+      "reasons": {
+        "portrait": "the registers hold his plates, not a portrait of him"
+      }
+    },
+    "nietzsche": {
+      "id": "nietzsche",
+      "name": "Friedrich Nietzsche",
+      "born": 1844,
+      "died": 1900,
+      "role": "Philologist-turned-prophet; Jung's modern case-history",
+      "portrait": "eagle-klinger-nietzsche-bust-germany-1902",
+      "sources": {
+        "name": "vault wiki/figures/nietzsche.md “Friedrich Nietzsche (1844-1900)”",
+        "born": "vault wiki/figures/nietzsche.md “born Röcken 1844”",
+        "died": "vault wiki/figures/nietzsche.md “died Weimar 1900”",
+        "role": "vault wiki/figures/nietzsche.md “philologist-turned-prophet”",
+        "portrait": "public/data/images.json occurrences “Portrait Bust of Friedrich Nietzsche”"
+      },
+      "reasons": {}
+    }
+  }
+}
