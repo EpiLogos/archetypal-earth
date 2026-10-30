@@ -3,9 +3,8 @@
 // registry (curation/works.json) + the occurrences of public/data/field.json  ->  public/data/people.json.
 //
 // A Person is a record; what is read off other files is never typed into it:
-//   works  the Works whose `author`, `with` or `editor` names him. A Work names its author by a slug that is a person id, or
-//          the last hyphen segment of one (the registry says "ronnberg" for ami-ronnberg, "martin" for kathleen-martin); a
-//          slug that would name two people is an error, a slug that names none is an author with no record here.
+//   works  the Works whose `author`, `with` or `editor` names him, by his id exactly; a slug that is no person's id is an
+//          author with no record here.
 //   own    how many occurrences carry his own `subject` (82 for Jung).
 //   natal  where a birth is given, the placements src/astro/natal.ts computes for it (the same natalChart the Astrology
 //          lens runs; offset "mean-time" is the place's local mean time, as in src/astro/charts.ts). Computed at build, so a
@@ -24,12 +23,6 @@ const OUT = path.join(DATA, 'people.json');
 const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const serialise = (o) => `${JSON.stringify(o, null, 1)}\n`;
 
-/** The person ids a Work's author slug names: the id itself, else ids ending in `-<slug>`. */
-export function personOfSlug(slug, ids) {
-  const exact = ids.filter((id) => id === slug);
-  return exact.length ? exact : ids.filter((id) => id.split('-').pop() === slug);
-}
-
 export function birthData(b) {
   const offsetMinutes = b.offset === 'mean-time' ? meanTimeOffset(b.lon) : b.offset;
   return { date: b.date, time: b.time, offsetMinutes, lat: b.lat, lon: b.lon, place: b.place };
@@ -41,9 +34,8 @@ export function buildPeople({ people, works, field }) {
   for (const [wid, w] of Object.entries(works)) {
     for (const slug of [w.author, w.with, w.editor]) {
       if (!slug) continue;
-      const hit = personOfSlug(slug, ids);
-      if (hit.length > 1) throw new Error(`Work ${wid}: "${slug}" names ${hit.join(' and ')}`);
-      if (hit.length) authored.get(hit[0]).add(wid);
+      // a Work names its author by a person id exactly; a slug with no record here is an author with no person (freud, corrie)
+      if (authored.has(slug)) authored.get(slug).add(wid);
     }
   }
   const own = new Map();

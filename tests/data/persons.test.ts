@@ -24,8 +24,8 @@ const m = buildModel(field, undefined, undefined, { works, people: published });
 
 const idOfKey = new Map<string, string>();
 for (const [id, w] of Object.entries(registry)) for (const k of [id, ...(w.aliases ?? [])]) idOfKey.set(k, id);
-// a Work's author slug names a person by the person's id or by its last hyphen segment (ronnberg -> ami-ronnberg)
-const personOf = (slug: string) => Object.keys(curated).filter((id) => id === slug || id.split('-').pop() === slug);
+// a Work's author slug names a person by the person's id, exactly
+const personOf = (slug: string) => Object.keys(curated).filter((id) => id === slug);
 const authoredBy = (pid: string) => Object.entries(registry).filter(([, w]) => [w.author, w.with, w.editor].some((s) => s && personOf(s).includes(pid))).map(([id]) => id);
 
 describe('a Person is a Subject', () => {
@@ -34,8 +34,14 @@ describe('a Person is a Subject', () => {
     expect(JSON.parse(JSON.stringify(buildPeople(load())))).toEqual(published);
   });
 
-  it('a Work author slug names exactly one person, or none', () => {
-    for (const w of Object.values(registry)) for (const s of [w.author, w.with, w.editor]) if (s) expect(personOf(s).length, s).toBeLessThanOrEqual(1);
+  it('a Work author slug is a person id or the slug of someone with no record; never the short form of an id', () => {
+    for (const w of Object.values(registry)) {
+      for (const s of [w.author, w.with, w.editor]) {
+        if (!s) continue;
+        if (personOf(s).length) continue;
+        expect(Object.keys(curated).filter((id) => id.endsWith(`-${s}`)), `${s} is a short form of a person id`).toEqual([]);
+      }
+    }
   });
 
   it('lists the Works a person wrote, with, or edited, read from the registry', () => {
