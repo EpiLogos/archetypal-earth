@@ -16,6 +16,7 @@ import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSk
 import { Shell } from '../shell/shell';
 import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
+import { dismissal, type DismissFacts } from '../shell/dismiss';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
 import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
 import { modeOptions, optionAction } from '../ui/mode-options';
@@ -542,25 +543,62 @@ export class Controller {
     return next;
   }
 
+  /**
+   * Take down the next thing: the one act behind Escape, a panel's ✕ and a crumb (`shell/dismiss.ts` names the order).
+   * Closing a reading answers before any step out of the mode, so it never leaves the mode it was opened in.
+   */
+  dismiss() {
+    const d = dismissal(this.dismissFacts());
+    switch (d.effect) {
+      case 'search': this.search.close(); return;
+      case 'menu': this.shell.closeMenu(); return;
+      case 'popover': this.closePopover(); return;
+      case 'you': this.you.hide(); return;
+      case 'passage': this.passage.hide(); return;
+      case 'sheet': this.closeSheet(); return;
+      case 'gaze': this.endGaze(); return;
+      case 'contents': return;
+      case 'deep':
+      case 'up':
+      case 'out': this.navigate(back(this.state)); return;
+      case 'none': return;
+    }
+  }
+
+  /** The facts the stack reads, taken from the app as it stands. */
+  private dismissFacts(): DismissFacts {
+    const s = this.state;
+    const next = back(s);
+    const here = lensOf(s);
+    const stays = stateEq(next, s) ? 'none' : here !== 'field' && lensOf(next) === 'field' ? 'out' : 'up';
+    const gaze = this.skyCam.phase === 'gaze';
+    return {
+      searchOpen: this.search.isOpen,
+      menuOpen: this.shell.menuOpen,
+      popoverOpen: !!document.querySelector('details.mode-options[open]'),
+      youOpen: this.you.isOpen,
+      passageOpen: this.passage.isOpen,
+      // a panel lens with its sheet on screen; with the sheet hidden, or while gazing at a planet, the stack passes it by
+      sheetVisible: !!this.activeLens && this.panel.isVisible && !gaze,
+      deepOpen: !!s.deep,
+      // the reading pane's Contents list is not a surface of its own yet (H2 gives it one)
+      contentsOpen: false,
+      gaze,
+      back: stays,
+    };
+  }
+
+  /** An open Options popover closes and hands focus back to its button (a <details> does not close on Escape by itself). */
+  private closePopover() {
+    const d = document.querySelector<HTMLDetailsElement>('details.mode-options[open]');
+    if (!d) return;
+    d.removeAttribute('open');
+    d.querySelector('summary')?.focus();
+  }
+
+  /** The step back every ✕, crumb and Escape shares. */
   stepBack() {
-    if (this.you.isOpen) {
-      this.you.hide();
-      return;
-    }
-    if (this.passage.isOpen) {
-      this.passage.hide();
-      return;
-    }
-    if (this.search.isOpen) {
-      this.search.close();
-      return;
-    }
-    // in an orbit-gaze, Escape is "look back at the planet", not "let the planet go" (the spec's cancel-gaze)
-    if (this.skyCam.phase === 'gaze') {
-      this.endGaze();
-      return;
-    }
-    this.navigate(back(this.state));
+    this.dismiss();
   }
 
   /** Leave the open reading (and any passage over it) for where it began. */
@@ -717,17 +755,7 @@ export class Controller {
       return;
     }
     if (e.key === 'Escape') {
-      // an open Options disclosure closes first (a <details> does not close on Escape by itself)
-      const options = document.querySelector<HTMLDetailsElement>('details.mode-options[open]');
-      if (options) { options.open = false; e.preventDefault(); return; }
-      // a panel lens with its sheet on screen: Escape dismisses the sheet as X does (Astrology's X steps onto its sky).
-      // With the sheet hidden it falls through to stepBack, as it always did (one level out, then the Field)
-      if (this.activeLens && this.panel.isVisible && !this.passage.isOpen && !this.search.isOpen && this.skyCam.phase !== 'gaze') {
-        this.closeSheet();
-        e.preventDefault();
-        return;
-      }
-      this.stepBack();
+      this.dismiss();
       e.preventDefault();
       return;
     }

@@ -35,15 +35,21 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
     check(st.h1 === 1, `${s.name}: ${id} keeps one h1`, String(st.h1));
     if (out) await page.screenshot({ path: path.join(out, `${s.name}-${id}.png`) });
   }
-  // the last lens is a panel lens: Escape hides its sheet and never leaves the mode (its Options stay)
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(1500);
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(1500);
+  // the last lens is a panel lens. Closing its reading (the sheet) stays in the mode and keeps its Options; only the next
+  // Escape, with nothing left open, steps out to the Field (the dismissal stack: reading, then lens, then Field)
   const last = lenses.at(-1);
+  await page.click('.sh-controls details.mode-options > summary');
+  await page.locator('.sh-controls .mode-options-body button').filter({ hasText: /^Open / }).first().click();
+  await page.waitForTimeout(900);
+  check(await page.evaluate(() => !!document.querySelector('.lens-panel:not([hidden])')), `${s.name}: the ${last} sheet is open before Escape`);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(1500);
   check(await page.evaluate(() => document.body.dataset.lens) === last, `${s.name}: Escape keeps the mode (${last})`);
   check(await page.evaluate(() => !document.querySelector('.lens-panel:not([hidden])')), `${s.name}: Escape hid the sheet`);
   check(await page.evaluate(() => !!document.querySelector('.sh-controls .mode-options')), `${s.name}: the Options remain after Escape`);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(1500);
+  check(await page.evaluate(() => document.body.dataset.lens) === 'field', `${s.name}: the next Escape steps out to the Field`);
   // links straight into a lazily loaded view: the view arrives, and the lens is the right one
   for (const [hash, lens, sel] of [['#/graph', 'field', '.gv-canvas'], ['#/aion/jung-turn', 'aion', '.aion:not([hidden])'], ['#/redbook/genesis', 'redbook', '.redbook:not([hidden])'], ['#/dynamics', 'theory', '.dynamics:not([hidden])']]) {
     await page.goto(URL + hash, { waitUntil: 'load' });
