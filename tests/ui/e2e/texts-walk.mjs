@@ -66,7 +66,13 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
   const chapters = await page.$$(`${SHEET} .dp-contents-pane li button`);
   check(chapters.length > 5, `${tag}: the chapters are the Contents`, String(chapters.length));
   const before = await counter(page);
-  await chapters[chapters.length - 2].click();
+  // the last chapter of the work that carries cites (a chapter with none opens its page of the text instead)
+  const cited = await page.evaluate(() => {
+    const m = window.__earth.model, ch = m.workById.get('cw12')?.chapters ?? [], pages = (m.walkById.get('text/cw12')?.stops ?? []).map((s) => s.page?.page ?? -1);
+    const has = ch.map((c, k) => { let end = Infinity; for (let j = k + 1; j < ch.length; j++) if (ch[j].level <= c.level) { end = ch[j].page; break; } return pages.some((p) => p >= c.page && p < end); });
+    return has.lastIndexOf(true);
+  });
+  await chapters[cited].click();
   await page.waitForFunction((was) => document.querySelector('section.deep:not(.passage):not(.you-sheet) .pane-foot .pane-count')?.textContent !== was, before, { timeout: 8000 });
   check(true, `${tag}: a chapter jumps to its first cite`, `${before} → ${await counter(page)}`);
 
