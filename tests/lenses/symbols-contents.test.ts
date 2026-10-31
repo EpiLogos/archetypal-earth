@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const symbols = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/symbols.json'), 'utf8')) as { entries: { familyId: string; title: string }[] };
 const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json'), 'utf8')) as { families: { id: string }[] };
 const held = new Set(field.families.map((f) => f.id));
-const top = [{ id: 'serpent', name: 'Serpent' }, { id: 'tower', name: 'Tower' }];
+const top = [{ id: 'serpent', name: 'Serpent', count: 1234 }, { id: 'tower', name: 'Tower', count: 1 }];
 
 describe('the Symbols Contents', () => {
   it('leads with the way in, then the busiest images, then the dictionary', () => {
@@ -17,6 +17,12 @@ describe('the Symbols Contents', () => {
     expect(g.map((x) => x.title)).toEqual(['Find', 'The images with the most instances', 'Symbols']);
     expect(g[0].items.map((i) => i.label)).toEqual(['Find a symbol']);
     expect(g[1].items.map((i) => i.label)).toEqual(['Serpent', 'Tower']);
+  });
+
+  it('says how many instances the busiest images hold, from the count the field gives', () => {
+    const g = symbolsContentsGroups({ top, entries: symbols.entries, held }, [], () => {});
+    expect(g[1].items.map((i) => i.sub)).toEqual(['1,234 instances', '1 instance']);
+    expect(symbolsContentsGroups({ top: [{ id: 'x', name: 'X' }], entries: [], held }, [], () => {})[1].items[0].sub).toBeUndefined();
   });
 
   it("lists the dictionary's entries in the dictionary's order, only those whose image the field holds", () => {

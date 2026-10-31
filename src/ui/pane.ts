@@ -69,9 +69,18 @@ export function paneFrame(o: PaneFrameOptions): PaneFrame {
   return { root, scroller, article, contents, foot, close, tool, contentsTool, setMode };
 }
 
-/** The walk's stepper under a reading in the pane: the neighbours either side, and where in the walk the visitor stands. */
-export function paneStepper(label: { prev: string; next: string }, at: string, onPrev: () => void, onNext: () => void, off: { prev?: boolean; next?: boolean } = {}): Node[] {
-  const prev = el('button', { type: 'button', 'aria-label': label.prev, disabled: off.prev, onclick: onPrev }, [icon('back', 14)]);
-  const next = el('button', { type: 'button', 'aria-label': label.next, disabled: off.next, onclick: onNext }, [icon('next', 14)]);
-  return [el('div', { class: 'th-step pane-step' }, [prev, el('span', { class: 'th-count pane-count', text: at }), next])];
+/**
+ * The walk's stepper under a reading in the pane: "‹ previous name · n / N · next name ›". The names are the neighbouring stops'
+ * own (a name the walk has not got to is left out, and the arrow stands alone); each is shortened to fit, further on a phone.
+ * Either arrow steps, whether it is the arrow or the name that is pressed.
+ */
+export function paneStepper(
+  label: { prev: string; next: string }, at: string, onPrev: () => void, onNext: () => void,
+  off: { prev?: boolean; next?: boolean } = {}, names: { prev?: string | null; next?: string | null } = {},
+): Node[] {
+  const name = (n: string | null | undefined, side: 'prev' | 'next') => (n ? el('span', { class: `pane-step-name ${side}`, text: n, title: n }) : null);
+  const prev = el('button', { type: 'button', 'aria-label': label.prev, disabled: off.prev, onclick: onPrev }, [icon('back', 14), name(names.prev, 'prev')]);
+  const next = el('button', { type: 'button', 'aria-label': label.next, disabled: off.next, onclick: onNext }, [name(names.next, 'next'), icon('next', 14)]);
+  const named = !!(names.prev || names.next);
+  return [el('div', { class: `th-step pane-step${named ? ' named' : ''}` }, [prev, el('span', { class: 'th-count pane-count', text: at }), next])];
 }

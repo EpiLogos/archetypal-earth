@@ -61,6 +61,14 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(1500);
   check(/^2 \/ \d+$/.test(await count(page)) && /#\/astrology\/you\/[a-z]+$/.test(await hash(page)) && (await hash(page)) !== '#/astrology/you/moon', `${tag}: the stepper walks to the next planet`, `${await count(page)} ${await hash(page)}`);
   check(await page.locator('.pane-foot [aria-label="Previous planet"]').isEnabled(), `${tag}: and back is open once past the first`);
+  // the stepper names its neighbours: ‹ previous · n / N · next ›, shortened to fit (further on a phone)
+  const step = await page.evaluate(() => ({
+    prev: document.querySelector('.pane-step-name.prev')?.textContent ?? '', next: document.querySelector('.pane-step-name.next')?.textContent ?? '',
+    wide: Math.max(0, ...[...document.querySelectorAll('.pane-step-name')].map((x) => x.getBoundingClientRect().width)),
+    over: (() => { const f = document.querySelector('.pane-foot'); return !f || f.scrollWidth > f.clientWidth + 1; })(),
+  }));
+  check(step.prev === 'Moon' && step.next === 'Venus', `${tag}: the stepper names the planets either side`, `‹ ${step.prev} · 2 / 10 · ${step.next} ›`);
+  check(!step.over && step.wide <= (phone ? 100 : 170), `${tag}: and the names fit the foot`, `widest ${Math.round(step.wide)}px`);
   // closing a reading stays in the mode
   await page.keyboard.press('Escape');
   await page.waitForTimeout(900);

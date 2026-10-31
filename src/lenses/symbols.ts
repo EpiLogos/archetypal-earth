@@ -40,7 +40,7 @@ export function mount(ctx: LensContext): LensInstance {
   };
   const contents = () => symbolsContentsGroups(
     {
-      top: [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)).filter((f): f is NonNullable<typeof f> => !!f).map((f) => ({ id: f.id, name: f.name })),
+      top: [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id, members]) => ({ f: m.famById.get(id), count: members.length })).filter((x): x is { f: NonNullable<typeof x.f>; count: number } => !!x.f).map((x) => ({ id: x.f.id, name: x.f.name, count: x.count })),
       entries: [...m.symbols.values()],
       held: new Set(m.famById.keys()),
     },

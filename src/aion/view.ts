@@ -7,7 +7,6 @@ import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } from '../types/history';
 import { clear, el, plate } from '../ui/dom';
-import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
 import { paneStepper } from '../ui/pane';
 import type { ContentsGroup } from '../ui/deep';
 import type { Walk } from '../types/walks';
@@ -35,7 +34,6 @@ const NO_SNAPSHOT = { u: 0, focus: null, reading: null, centre: null, walk: null
  */
 export class AionView {
   readonly root: HTMLElement;
-  private heading: HTMLElement;
   private epochs: HTMLElement;
   /** Shared next/prev rail over the timeline (same look as the Red Book's): the walk strip of the open walk. */
   private rail: HTMLElement;
@@ -68,8 +66,6 @@ export class AionView {
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, private time: TimeModel,
     readonly history: History, private navigate: (state: AppState) => void, private passages?: PassageBridge,
     private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome) {
-    // the lens's own controls: the shell places them under its title (MODES-RFC §2); this view draws no heading
-    this.heading = el('div', { class: 'aion-controls' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.rail = el('nav', { class: 'rb-rail', hidden: true, 'aria-label': 'Walk' });
     this.markers = el('div', { class: 'aion-markers' });
@@ -93,6 +89,13 @@ export class AionView {
     const at = this.state?.selection;
     const here = (kind: string, id: string) => at?.kind === kind && at.id === id;
     const groups: ContentsGroup[] = [{
+      title: 'Reading',
+      lede: providerLabels().readingTagline,
+      items: [...this.history.readings].sort((a, b) => a.from - b.from).map((r) => ({
+        label: r.title, sub: `${yearLabel(r.from)} – ${yearLabel(r.to)}`, current: r.id === reading.id,
+        onPick: () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }),
+      })),
+    }, {
       title: 'Threads',
       items: [wholeReadingWalk(reading), ...reading.threads].map((t) => ({ label: t.name, note: String(t.eventIds.length), current: here('thread', t.id), onPick: () => this.select({ kind: 'thread', id: t.id }) })),
     }];
@@ -105,7 +108,7 @@ export class AionView {
     }
     groups.push({
       title: 'Epochs',
-      items: reading.epochs.filter((e) => !e.parentId).map((e) => ({ label: e.name, current: here('epoch', e.id), onPick: () => this.select({ kind: 'epoch', id: e.id }) })),
+      items: reading.epochs.filter((e) => !e.parentId).map((e) => ({ label: e.name, sub: `${yearLabel(e.from)} – ${yearLabel(e.to)}`, current: here('epoch', e.id), onPick: () => this.select({ kind: 'epoch', id: e.id }) })),
     });
     return groups;
   }
@@ -119,7 +122,9 @@ export class AionView {
   /** The walk's stepper under a reading: the neighbours, and where in the walk the visitor stands. */
   private stepper(kind: 'chapter' | 'thread', step: WalkStep): Node[] {
     const label = kind === 'chapter' ? { prev: 'Previous chapter', next: 'Next chapter' } : { prev: 'Previous historical event', next: 'Next historical event' };
-    return paneStepper(label, `${step.i + 1} / ${step.count}`, () => this.walkStep(kind, -1), () => this.walkStep(kind, 1));
+    const n = step.count;
+    const name = (k: number) => (kind === 'chapter' ? this.history.book?.chapters[(k + n) % n]?.title : this.threadEvents[(k + n) % n]?.name) ?? null;
+    return paneStepper(label, `${step.i + 1} / ${n}`, () => this.walkStep(kind, -1), () => this.walkStep(kind, 1), {}, { prev: name(step.i - 1), next: name(step.i + 1) });
   }
 
   /** The walk begins (or carries on, when the runner already stands in it) at stop `at`. */
@@ -214,8 +219,7 @@ export class AionView {
     this.strip?.recenter();
     // the title and the reading's own controls stay at the left: the reading stands in the pane, on the right
     this.chrome?.setContext(`${reading.title} · ${reading.author}`);
-    this.buildHeading(reading);
-    this.chrome?.setControls([this.heading]);
+    this.chrome?.setControls(null);
   }
 
   hide() {
@@ -236,17 +240,6 @@ export class AionView {
   private select(selection?: Selection) {
     if (!this.reading) return;
     this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: this.reading.id, ...(selection ? { selection } : {}) } });
-  }
-
-  /** The mode's own control: which reading stands. Its walks and the book are in the pane's Contents. */
-  private buildHeading(reading: HistoryReading) {
-    clear(this.heading);
-    const readings = [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
-      optionAction(r.title, () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }), { pressed: r.id === reading.id }));
-    this.heading.append(modeOptions([
-      el('p', { class: 'mode-opt-blurb', text: providerLabels().readingTagline }),
-      optionGroup('Reading', readings),
-    ]));
   }
 
   private buildMarkers(reading: HistoryReading) {

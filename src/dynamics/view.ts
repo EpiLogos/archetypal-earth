@@ -537,7 +537,7 @@ export class DynamicsView {
       const concept = s.concept ? this.concepts.find((c) => c.id === s.concept) : undefined;
       // the walk: the runner stands on this stop (it begins here when the route is entered at a stop)
       if (this.runner.active) this.runner.goto(i); else this.runner.start(routeWalk(this.model.walkById, route), { u: 0, focus: null, reading: null, centre: null, walk: null }, i);
-      foot = paneStepper({ prev: 'Previous stop', next: 'Next stop' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1));
+      foot = paneStepper({ prev: 'Previous stop', next: 'Next stop' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1), {}, { prev: this.stopName(this.stops[(i - 1 + n) % n].stop), next: this.stopName(this.stops[(i + 1) % n].stop) });
       text.append(
         this.routeMap(),
         el('p', { class: 'aion-date rv-line dy-mv-head' }, [

@@ -12,7 +12,9 @@ import type { Walk, WalksData } from '../../src/types/walks';
 const ROOT = path.resolve(__dirname, '..', '..');
 const json = <T>(f: string) => JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data', f), 'utf8')) as T;
 interface Named { id: string; name: string }
-const alchemy = json<{ opus: { stages: Named[] }; operations: Named[]; matter: Named[] }>('alchemy.json');
+interface Stage extends Named { colour: string }
+interface Operation extends Named { stage?: string }
+const alchemy = json<{ opus: { stages: Stage[] }; operations: Operation[]; matter: Named[] }>('alchemy.json');
 const walks = new Map(json<WalksData>('walks.json').walks.map((w) => [w.id, w] as [string, Walk]));
 const stages = alchemy.opus.stages;
 const ids = stages.map((s) => s.id);
@@ -62,6 +64,16 @@ describe('the Alchemy Contents', () => {
     expect(groups[0].items.map((i) => i.label)).toEqual(['The whole opus', ...stages.map((s) => s.name)]);
     expect(groups[1].items.map((i) => i.label)).toEqual(['All operations', ...alchemy.operations.map((o) => o.name)]);
     expect(groups[2].items.map((i) => i.label)).toEqual(['All matter', ...alchemy.matter.map((m) => m.name)]);
+  });
+
+  it('gives each stage its colour and each operation its stage on the line under it, from the data alone', () => {
+    const groups = alchemyContentsGroups(names, null, () => {});
+    expect(groups[0].items[0].sub).toBeUndefined();
+    expect(groups[0].items.slice(1).map((i) => i.sub)).toEqual(stages.map((s) => s.colour[0].toUpperCase() + s.colour.slice(1)));
+    const stageOf = (id: string) => stages.find((s) => s.id === id)?.name;
+    expect(groups[1].items.slice(1).map((i) => i.sub)).toEqual(alchemy.operations.map((o) => (o.stage ? stageOf(o.stage) : undefined)));
+    // the matter carries no short line of its own, so it carries none here
+    expect(groups[2].items.every((i) => i.sub === undefined)).toBe(true);
   });
 
   it('marks the one the lens stands on, and an entry goes to the route it names', () => {

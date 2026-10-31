@@ -21,6 +21,8 @@ const walks = new Map(data('walks.json').walks.map((w) => [w.id, w]));
 const reading = history.readings.find((r) => r.id === 'jung-aion');
 const topEpochs = reading.epochs.filter((e) => !e.parentId);
 const thread = reading.threads[0];
+const readingsByYear = [...history.readings].sort((a, b) => a.from - b.from);
+const R = readingsByYear.length;
 const SHOTS = process.env.SHOTS_DIR ?? '';
 
 const fails = [];
@@ -42,7 +44,9 @@ const pane = (page) => page.evaluate(() => {
     footShown: !!foot && !foot.hidden,
     items: [...r.querySelectorAll('.dp-contents-pane .dp-contents button')].map((x) => x.textContent),
     groups: [...r.querySelectorAll('.dp-contents-pane .dp-sub')].map((x) => x.textContent),
-    current: r.querySelector('.dp-contents-pane [aria-current="true"]')?.textContent ?? '',
+    // the first mark is the reading that stands; the second, where in it the visitor stands
+    current: [...r.querySelectorAll('.dp-contents-pane [aria-current="true"]')].map((x) => x.textContent)[1] ?? '',
+    reading: r.querySelector('.dp-contents-pane [aria-current="true"]')?.textContent ?? '',
     hero: r.querySelectorAll('.dp-article:not([hidden]) figure.plate.rv-hero').length,
     quotes: r.querySelectorAll('.dp-article:not([hidden]) blockquote').length,
   };
@@ -84,10 +88,22 @@ const pick = async (page, label) => {
   await settle(page);
   let p = await pane(page);
   ok(p && p.mode === 'contents' && p.w === 380, `Contents opens in the pane at 380 (${p?.mode} ${p?.w})`);
-  ok(p && JSON.stringify(p.groups) === JSON.stringify(['Threads', book.title, 'Epochs']), `grouped as the threads, the book, the epochs (${p?.groups.join(' | ')})`);
-  ok(p && p.items.length === 1 + reading.threads.length + book.chapters.length + topEpochs.length, `it lists the whole reading, ${reading.threads.length} threads, ${book.chapters.length} chapters and ${topEpochs.length} epochs (${p?.items.length})`);
-  ok(p && p.items[0].startsWith('The whole reading, in order') && p.items[1].startsWith(thread.name), 'the whole reading first, then the curated threads in their order');
-  ok(book.chapters.every((c, i) => p.items[1 + reading.threads.length + i].startsWith(c.title)), 'the chapters are the book\'s, in its order');
+  ok(p && JSON.stringify(p.groups) === JSON.stringify(['Reading', 'Threads', book.title, 'Epochs']), `grouped as the reading, the threads, the book, the epochs (${p?.groups.join(' | ')})`);
+  ok(p && p.items.length === R + 1 + reading.threads.length + book.chapters.length + topEpochs.length, `it lists the ${R} readings, the whole reading, ${reading.threads.length} threads, ${book.chapters.length} chapters and ${topEpochs.length} epochs (${p?.items.length})`);
+  ok(p && p.items[R].startsWith('The whole reading, in order') && p.items[R + 1].startsWith(thread.name), 'the whole reading first, then the curated threads in their order');
+  ok(book.chapters.every((c, i) => p.items[R + 1 + reading.threads.length + i].startsWith(c.title)), 'the chapters are the book\'s, in its order');
+  // the reading itself is chosen in the Contents' first group (the three readings), not in an Options disclosure
+  ok(readingsByYear.every((r, i) => p.items[i].startsWith(r.title)), `the readings stand first, in the order of their years (${p.items.slice(0, R).join(' | ')})`);
+  ok(await page.locator('details.mode-options').count() === 0, 'Aion carries no Options: the reading choice is in the Contents');
+  ok(await page.locator('.dp-contents-pane li > .dp-ct-sub').count() >= R + topEpochs.length, 'the readings and the epochs carry their span on the line under them');
+  const other = readingsByYear.find((r) => r.id !== 'jung-aion');
+  await page.locator('.dp-contents-pane li button', { hasText: new RegExp(`^${other.title}`) }).first().click();
+  await settle(page, 2500);
+  ok((await hash(page)).includes(other.id), `choosing another reading from the Contents opens it (${await hash(page)})`);
+  await page.evaluate(() => { location.hash = '#/aion/jung-aion'; });
+  await settle(page, 2500);
+  if (!(await page.locator('.dp-contents-pane li button').first().isVisible().catch(() => false))) await page.locator('.sh-contents').click();
+  await settle(page);
   await page.locator('.sh-contents').click();
   await settle(page, 2200);
   ok(await pane(page) === null, 'the trigger takes the list down again');
@@ -101,6 +117,8 @@ const pick = async (page, label) => {
   ok((await hash(page)).includes(`/thread/${thread.id}`), `a pick opens the thread (${await hash(page)})`);
   ok(p && p.mode === 'reading' && p.w === 780 && p.eyebrow === 'Event', `the first event reads in the pane (${p?.mode} ${p?.w} ${p?.eyebrow})`);
   ok(p && p.name === evName(thread.eventIds[0]) && p.footShown && p.count === `1 / ${n}`, `it stands at 1 / ${n} (${p?.name}, ${p?.count})`);
+  const names = await page.evaluate(() => ({ prev: document.querySelector('.pane-step-name.prev')?.textContent ?? '', next: document.querySelector('.pane-step-name.next')?.textContent ?? '' }));
+  ok(n > 1 && names.next === evName(thread.eventIds[1]) && names.prev === evName(thread.eventIds[n - 1]), `the stepper names its neighbours: ‹ ${names.prev} · 1 / ${n} · ${names.next} ›`);
   let r = await rail(page);
   ok(r && r.progress === `1 / ${n}` && r.r <= (p?.x ?? 0) + 1, `the rail agrees and keeps to the room the pane leaves (${r?.progress}, right ${r?.r}, pane ${p?.x})`);
   const ring = await box(page, '.aion-ring');
@@ -135,7 +153,7 @@ const pick = async (page, label) => {
   await page.locator('.sh-contents').click();
   await settle(page);
   p = await pane(page);
-  ok(p && p.mode === 'contents' && p.current.startsWith('The whole reading'), `Contents over an event marks the thread that stands (${p?.current})`);
+  ok(p && p.mode === 'contents' && p.current.startsWith('The whole reading') && p.reading === 'Aion', `Contents over an event marks the reading and the thread that stand (${p?.reading} / ${p?.current})`);
   await page.keyboard.press('Escape');
   await settle(page, 1400);
   p = await pane(page);

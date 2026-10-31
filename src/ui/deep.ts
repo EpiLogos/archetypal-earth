@@ -80,7 +80,22 @@ export interface DeepHandlers {
 }
 
 /** One group of the pane's Contents list: a heading over the entries a visitor can open. */
-export interface ContentsGroup { title?: string; items: { label: string; note?: string; level?: number; /** the entry the lens stands on now */ current?: boolean; onPick(): void }[] }
+export interface ContentsItem {
+  label: string;
+  note?: string;
+  /** one line under the label, from the entry's own data (a date, a span, a colour); never where the entry came from */
+  sub?: string;
+  level?: number;
+  /** the entry the lens stands on now */
+  current?: boolean;
+  onPick(): void;
+}
+export interface ContentsGroup {
+  title?: string;
+  /** a line under the group's title that says what the group is */
+  lede?: string;
+  items: ContentsItem[];
+}
 
 /**
  * A lens's own reading in the pane (a folio, a stage, a position): the lens builds the nodes, the pane frames them. `foot` is
@@ -218,11 +233,13 @@ export class DeepSheet {
     c.append(el('p', { class: 'dp-eyebrow', text: 'Contents' }), el('h2', { class: 'dp-title dp-contents-title', text: title }));
     for (const g of groups) {
       if (g.title) c.append(el('h3', { class: 'dp-sub', text: g.title }));
+      if (g.lede) c.append(el('p', { class: 'dp-ct-lede', text: g.lede }));
       const ol = el('ol', { class: 'dp-contents' });
       for (const it of g.items) {
         ol.append(el('li', { style: `--lvl:${it.level ?? 0}` }, [
           el('button', { type: 'button', class: 'link-quiet', text: it.label, 'aria-current': it.current ? 'true' : undefined, onclick: () => it.onPick() }),
           it.note ? el('span', { class: 'dp-cite-year', text: ` ${it.note}` }) : null,
+          it.sub ? el('span', { class: 'dp-ct-sub', text: it.sub }) : null,
         ]));
       }
       c.append(ol);

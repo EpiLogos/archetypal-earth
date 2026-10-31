@@ -5,7 +5,7 @@ import type { ContentsGroup } from '../ui/deep';
 
 export interface SymbolsNames {
   /** the images the field holds most instances of, most first */
-  top: readonly { id: string; name: string }[];
+  top: readonly { id: string; name: string; count?: number }[];
   /** the dictionary's entries, in its own order; an entry whose image the field does not hold is not offered */
   entries: readonly { familyId: string; title: string }[];
   /** the ids of the images the field holds */
@@ -19,7 +19,7 @@ export function symbolsContentsGroups(names: SymbolsNames, at: readonly string[]
   return [
     { title: 'Find', items: [{ label: 'Find a symbol', current: at.length === 0, onPick: () => go([]) }] },
     ...(names.top.length
-      ? [{ title: 'The images with the most instances', items: names.top.map((t) => ({ label: t.name, current: onFamily(t.id), onPick: () => go([t.id]) })) }]
+      ? [{ title: 'The images with the most instances', items: names.top.map((t) => ({ label: t.name, ...(t.count ? { sub: `${t.count.toLocaleString('en-GB')} ${t.count === 1 ? 'instance' : 'instances'}` } : {}), current: onFamily(t.id), onPick: () => go([t.id]) })) }]
       : []),
     ...(entries.length
       ? [{ title: 'Symbols', items: entries.map((e) => ({ label: e.title, current: onFamily(e.familyId), onPick: () => go([e.familyId]) })) }]

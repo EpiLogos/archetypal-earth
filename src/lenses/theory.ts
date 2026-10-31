@@ -84,6 +84,8 @@ const LENS_LINK: Record<string, { text: string; state: () => import('../state/st
   dreams: { text: 'Bring your own dreams', state: () => inLens('dreams') },
 };
 
+const NUMBER_WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+
 export function mount(ctx: LensContext): LensInstance {
   let data: TheoryData | null = null;
   let current = '';
@@ -125,8 +127,8 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   /** Prev / next under a reading, in the pane's own stepper. */
-  const stepper = (label: string, prev: () => void, next: () => void, at: string) =>
-    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next);
+  const stepper = (label: string, prev: () => void, next: () => void, at: string, names?: { prev: string; next: string }) =>
+    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next, {}, names);
 
   /** The number archetypes seven to ten, and the Tree's family, as links where the field holds them; null when it holds none. */
   const pastSixLinks = (): HTMLElement | null => {
@@ -196,7 +198,8 @@ export function mount(ctx: LensContext): LensInstance {
     const r = d.numbers[i];
     const all = d.numbers.length;
     const go = (k: number) => ctx.setPath(['number', String((k + all) % all)]);
-    const word = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'][r.n];
+    const word = NUMBER_WORDS[r.n];
+    const numberName = (x: { n: number; position: string }) => `${NUMBER_WORDS[x.n]} at ${x.position}`;
     ctx.setContext(`${word} at ${r.position}`);
     const links = el('div', { class: 'th-links' });
     for (const subject of r.subjects) links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(subject) }, [el('span', { text: subjectName(ctx.model, subject) }), icon('next', 14)]));
@@ -225,7 +228,7 @@ export function mount(ctx: LensContext): LensInstance {
         ? el('button', { type: 'button', class: 'th-walk', onclick: () => ctx.passages!.open(first.cite.work, first.cite.locator) }, [el('span', { text: `Read ${first.cite.workTitle} at ${first.cite.locator}` }), icon('next', 14)])
         : null,
       links.childElementCount ? links : null,
-    ], stepper('position', () => go(i - 1), () => go(i + 1), `${i + 1} / ${all}`));
+    ], stepper('position', () => go(i - 1), () => go(i + 1), `${i + 1} / ${all}`, { prev: numberName(d.numbers[(i - 1 + all) % all]), next: numberName(d.numbers[(i + 1) % all]) }));
     tuneSubjects(r.subjects, `${word.toLowerCase()} at ${r.position}`);
   };
 
@@ -263,7 +266,7 @@ export function mount(ctx: LensContext): LensInstance {
       el('p', { class: 'th-line', text: s.line }),
       ...s.quotes.map((q) => quoteBlock(q, ctx.passages)),
       links.childElementCount ? links : null,
-    ], stepper('section', () => step(-1), () => step(1), `${i + 1} / ${sections.length}`));
+    ], stepper('section', () => step(-1), () => step(1), `${i + 1} / ${sections.length}`, { prev: sections[(i - 1 + sections.length) % sections.length].name, next: sections[(i + 1) % sections.length].name }));
     tune(s);
   };
 
@@ -280,9 +283,11 @@ export function mount(ctx: LensContext): LensInstance {
       const next = step?.stop.subject?.id;
       if (next) ctx.setPath(['theoretics', next]);
     };
+    // the neighbours' names (past the last comes the first)
+    const theoreticName = (k: number) => ctx.model.theoById.get(theoretics.stops[(k + theoretics.stops.length) % theoretics.stops.length].subject?.id ?? '')?.name ?? '';
     ctx.setContext(t.name);
     standing = { kind: 'theoretic', id };
-    show(`theoretics/${id}`, 'Theory', nodes, stepper('theoretic', () => go(-1), () => go(1), `${at + 1} / ${theoretics.stops.length}`), { type: 'theoretic', id });
+    show(`theoretics/${id}`, 'Theory', nodes, stepper('theoretic', () => go(-1), () => go(1), `${at + 1} / ${theoretics.stops.length}`, { prev: theoreticName(at - 1), next: theoreticName(at + 1) }), { type: 'theoretic', id });
     tuneSubjects([{ type: 'theoretic', id }], t.name);
   };
 

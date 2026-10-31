@@ -122,8 +122,8 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   /** Prev / next under a reading, in the pane's own stepper. */
-  const stepper = (label: string, prev: () => void, next: () => void, at: string) =>
-    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next);
+  const stepper = (label: string, prev: () => void, next: () => void, at: string, names?: { prev: string; next: string }) =>
+    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next, {}, names);
 
   const subjectLink = (s: Subject) => el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(s) }, [el('span', { text: subjectName(ctx.model, s) }), icon('next', 14)]);
   const walkLink = (label: string, path: string[]) => el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath(path) }, [el('span', { text: label }), icon('next', 14)]);
@@ -188,7 +188,7 @@ export function mount(ctx: LensContext): LensInstance {
         subjectLink({ type: 'family', id: st.family }),
         ...st.subjects.map(subjectLink),
       ]),
-    ], stepper('stage', () => go(-1), () => go(1), `${i + 1} / ${n}`), { type: 'family', id: st.family });
+    ], stepper('stage', () => go(-1), () => go(1), `${i + 1} / ${n}`, { prev: d.opus.stages[(i - 1 + n) % n].name, next: d.opus.stages[(i + 1) % n].name }), { type: 'family', id: st.family });
     tuneSubjects([{ type: 'family', id: st.family }], st.name.toLowerCase());
   };
 
@@ -212,7 +212,7 @@ export function mount(ctx: LensContext): LensInstance {
       stage ? el('div', { class: 'th-links' }, [walkLink(`${stage.name}, ${stage.colour}`, ['opus', stage.id])]) : null,
       it.subjects.length ? el('h3', { class: 'as-h3', text: 'In the field' }) : null,
       it.subjects.length ? el('div', { class: 'th-links' }, it.subjects.map(subjectLink)) : null,
-    ], stepper(section === 'operations' ? 'operation' : 'matter', () => go(i - 1), () => go(i + 1), `${i + 1} / ${n}`));
+    ], stepper(section === 'operations' ? 'operation' : 'matter', () => go(i - 1), () => go(i + 1), `${i + 1} / ${n}`, { prev: items[(i - 1 + n) % n].name, next: items[(i + 1) % n].name }));
     tuneSubjects(it.subjects, it.name.toLowerCase());
   };
 

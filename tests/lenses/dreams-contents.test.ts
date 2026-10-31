@@ -20,6 +20,14 @@ describe('the Dreams Contents', () => {
     expect(g[1].items.map((i) => i.note)).toEqual(['2026-10-20', '2026-10-20', '2026-10-01']);
   });
 
+  it('adds the dream\'s first words under a title it was given, and nothing under a dream called by its words', () => {
+    const g = dreamsContentsGroups(list, [], () => {});
+    const sub = (id: string) => g[1].items[newestFirst(list).findIndex((x) => x.id === id)].sub;
+    expect(sub('a')).toBe('text a');
+    expect(sub('b')).toBeUndefined();
+    expect(sub('c')).toBe('text c');
+  });
+
   it('calls a dream by its title, else its first sixty characters, else Untitled', () => {
     expect(dreamName(list[0])).toBe('The orchard');
     expect(dreamName(list[1])).toHaveLength(60);

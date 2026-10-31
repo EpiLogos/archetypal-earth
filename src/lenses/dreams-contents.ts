@@ -27,7 +27,7 @@ export function dreamsContentsGroups(dreams: readonly DreamListing[], at: readon
       ],
     },
     ...(dreams.length
-      ? [{ title: 'Your dreams', items: newestFirst(dreams).map((d) => ({ label: dreamName(d), note: d.date, current: onDream(d.id), onPick: () => go([d.id]) })) }]
+      ? [{ title: 'Your dreams', items: newestFirst(dreams).map((d) => ({ label: dreamName(d), note: d.date, ...(d.title.trim() && d.text.trim() ? { sub: d.text.trim().replace(/\s+/g, ' ').slice(0, 90) } : {}), current: onDream(d.id), onPick: () => go([d.id]) })) }]
       : []),
   ];
 }

@@ -83,7 +83,13 @@ const until = (page, fn, ms = 14000) => page.waitForFunction(fn, null, { timeout
   await settle(page, 3500);
   r = await read(page);
   ok(!r.present, 'a lens with a camera of its own (Aion) carries no View control');
-  ok(r.gear, 'but its Options answer the ⚙');
+  ok(!r.gear, 'and, with its reading chosen in the Contents, nothing for the ⚙ to answer');
+  // a lens that still carries Options: they answer the ⚙
+  await page.goto(page.url().replace(/#.*$/, '#/texts')); await page.reload();
+  await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'));
+  await settle(page, 3500);
+  r = await read(page);
+  ok(r.gear, 'a lens with Options (Texts) has them answer the ⚙');
   await page.locator('.vc-gear').click();
   ok(await page.evaluate(() => !!document.querySelector('details.mode-options[open]')), 'the ⚙ opens the lens Options');
   await page.keyboard.press('Escape');

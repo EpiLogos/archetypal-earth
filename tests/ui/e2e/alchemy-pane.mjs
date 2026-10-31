@@ -21,10 +21,14 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   check((await page.locator('.sh-controls .mode-options-body button').filter({ hasText: /^(Open|Close) Alchemy$/ }).count()) === 0, `${tag}: the Options carry no Open row`);
   await page.locator('.sh-contents').click();
   await page.waitForTimeout(600);
+  const subs = await page.locator('.dp-contents-pane li > .dp-ct-sub').allTextContents();
+  check(subs.slice(0, 4).join(',') === 'Black,White,Yellow,Red', `${tag}: each stage carries its colour on the line under it`, subs.slice(0, 4).join(','));
   await page.locator('.dp-contents-pane li button', { hasText: /^Albedo/ }).first().click();
   await page.waitForTimeout(1800);
   check(/#\/alchemy\/opus\/albedo$/.test(await hash(page)) && await reading(page), `${tag}: a stage opens in the pane`, await hash(page));
   check((await count(page)) === '2 / 4', `${tag}: the stepper stands at 2 / 4`, await count(page));
+  const stepNames = await page.evaluate(() => ({ prev: document.querySelector('.pane-step-name.prev')?.textContent ?? '', next: document.querySelector('.pane-step-name.next')?.textContent ?? '' }));
+  check(stepNames.prev === 'Nigredo' && stepNames.next === 'Citrinitas', `${tag}: the stepper names the stages either side`, `‹ ${stepNames.prev} · ${await count(page)} · ${stepNames.next} ›`);
   const fam = await engaged(page);
   check(fam.length === 1, `${tag}: the stage's form is noted once for the visitor's node`, JSON.stringify(fam));
   await page.locator('.pane-foot [aria-label="Next stage"]').click();

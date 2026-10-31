@@ -180,7 +180,12 @@ export class RedBookView {
 
   /** The walk's stepper under a folio: the neighbours, and where in the book the visitor stands. */
   private stepper(i: number, n: number): Node[] {
-    return paneStepper({ prev: 'Previous folio', next: 'Next folio' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1));
+    const name = (k: number) => {
+      const id = this.stops[(k + n) % n]?.id;
+      const at = id === undefined ? undefined : this.model.occIndex.get(id);
+      return at === undefined ? null : this.model.occ[at].title;
+    };
+    return paneStepper({ prev: 'Previous folio', next: 'Next folio' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1), {}, { prev: name(i - 1), next: name(i + 1) });
   }
 
   private showStop(stop: RedBookStop) {

@@ -9,8 +9,8 @@ import type { AlchemyRoute } from './alchemy-route';
 
 /** What the Contents read of the published data: the names of the opus's stages, its operations and its matter, in the data's order. */
 export interface AlchemyNames {
-  stages: readonly { id: string; name: string }[];
-  operations: readonly { id: string; name: string }[];
+  stages: readonly { id: string; name: string; colour?: string }[];
+  operations: readonly { id: string; name: string; stage?: string }[];
   matter: readonly { id: string; name: string }[];
 }
 
@@ -27,6 +27,12 @@ export function stagesWalk(walks: ReadonlyMap<string, Walk>, stages: readonly { 
  * The Contents: the opus whole and its stages, the operations and the matter (each with its list first), the elements. `at` is the route the lens stands at;
  * the entry it names is marked.
  */
+/** The stage an operation belongs to, as the line under it (nothing when the data names none). */
+const stageSub = (names: AlchemyNames, stage?: string): { sub?: string } => {
+  const name = stage === undefined ? undefined : names.stages.find((x) => x.id === stage)?.name;
+  return name ? { sub: name } : {};
+};
+
 export function alchemyContentsGroups(names: AlchemyNames, at: AlchemyRoute | null, go: (path: string[]) => void): ContentsGroup[] {
   const onOpus = at?.section === 'opus';
   return [
@@ -34,14 +40,14 @@ export function alchemyContentsGroups(names: AlchemyNames, at: AlchemyRoute | nu
       title: 'The opus',
       items: [
         { label: 'The whole opus', current: onOpus && at.stage === undefined, onPick: () => go([]) },
-        ...names.stages.map((s, i) => ({ label: s.name, note: String(i + 1), current: onOpus && at.stage === s.id, onPick: () => go(['opus', s.id]) })),
+        ...names.stages.map((s, i) => ({ label: s.name, note: String(i + 1), ...(s.colour ? { sub: s.colour[0].toUpperCase() + s.colour.slice(1) } : {}), current: onOpus && at.stage === s.id, onPick: () => go(['opus', s.id]) })),
       ],
     },
     {
       title: 'Operations',
       items: [
         { label: 'All operations', current: at?.section === 'operations' && at.id === undefined, onPick: () => go(['operations']) },
-        ...names.operations.map((o) => ({ label: o.name, current: at?.section === 'operations' && at.id === o.id, onPick: () => go(['operations', o.id]) })),
+        ...names.operations.map((o) => ({ label: o.name, ...stageSub(names, o.stage), current: at?.section === 'operations' && at.id === o.id, onPick: () => go(['operations', o.id]) })),
       ],
     },
     {

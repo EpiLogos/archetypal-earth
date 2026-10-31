@@ -392,6 +392,7 @@ export function mount(ctx: LensContext): LensInstance {
       () => { if (i > 0) ctx.setPath([chartId, order[i - 1]]); },
       () => { if (!last) ctx.setPath([chartId, order[i + 1]]); },
       { prev: i === 0, next: last },
+      { prev: i > 0 ? data.bodies[order[i - 1]].name : null, next: last ? null : data.bodies[order[i + 1]].name },
     );
     show(`walk/${chartId}/${key}`, [el('h2', { class: 'dp-title', text: `${who} ${r.name}` }), ...body], foot);
   };
