@@ -7,6 +7,7 @@
 //   - a Work's page carries its footer once
 //   - an engagement re-ties You in the graph without snapping it back to its spawn
 //   - on a phone You's forget button is a 44px target
+//   - a link that names a theoretic's walk stop opens that reading; the bare Theory route opens with nothing read
 //   EARTH_HEADED=0 EARTH_URL=http://localhost:5299/ node tests/ui/e2e/steps-keep.mjs
 import { launch, open } from './lib.mjs';
 
@@ -56,6 +57,24 @@ const opens = (page, id) => page.evaluate((id) => JSON.parse(localStorage.getIte
     await page.waitForTimeout(1500);
     ok(await page.evaluate(() => !!document.querySelector('section.passage:not([hidden]) .ps-article')?.textContent?.trim()), 'an uncited chapter opens its page of the text');
   } else ok(false, 'cw12 has a chapter with no cite to try', String(uncited));
+  await ctx.close();
+}
+
+// ── a named theoretic walk stop is a request to read it ───────────────
+for (const size of [{}, { width: 390, height: 844, mobile: true }]) {
+  const tag = size.mobile ? 'phone' : 'desk';
+  const { ctx, page } = await open(b, { ...size, hash: '#/theory/theoretics/psychoid/3' });
+  await page.waitForTimeout(4500);
+  const text = await page.evaluate((sel) => document.querySelector(`${sel}`)?.innerText ?? '', SHEET);
+  ok((await reading(page)) && /psychoid/i.test(text), `${tag}: a link to a psychoid walk stop opens its reading`, `reading=${await reading(page)}`);
+  await go(page, '#/theory');
+  await page.waitForTimeout(2500);
+  await ctx.close();
+}
+{
+  const { ctx, page } = await open(b, { hash: '#/theory' });
+  await page.waitForTimeout(3500);
+  ok(!(await reading(page)), 'the bare Theory route opens with nothing read');
   await ctx.close();
 }
 

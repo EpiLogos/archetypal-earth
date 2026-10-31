@@ -354,7 +354,11 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   const showRoute = (path: string[]) => {
-    if (path[0] === 'theoretics' && path[1]) renderTheoretic(path[1], path[2] === undefined ? 0 : Number(path[2])); else render(path[0] ?? '', path[1]);
+    if (path[0] === 'theoretics' && path[1]) {
+      renderTheoretic(path[1], path[2] === undefined ? 0 : Number(path[2]));
+      // a route that names a theoretic's walk is a request to read it (the bare Theory route opens with nothing read)
+      ctx.pane.reveal();
+    } else render(path[0] ?? '', path[1]);
   };
 
   return {
