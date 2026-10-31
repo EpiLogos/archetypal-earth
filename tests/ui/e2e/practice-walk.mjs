@@ -61,7 +61,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.waitForTimeout(300);
   await page.click('.sy-results button >> nth=0');
   await page.waitForSelector('.am-list li', { timeout: 15000 });
-  const sym = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.am-list li').length, h: document.querySelector('.lens-panel .lp-h')?.textContent }));
+  const sym = await page.evaluate(() => ({ hash: location.hash, n: document.querySelectorAll('.am-list li').length, h: document.querySelector('.dp-article .lp-h')?.textContent }));
   check(sym.hash === '#/symbols/tower' && sym.n >= 1, `${s.name}: a word finds its family and its dated instances`, JSON.stringify(sym));
 
   // Coincidences

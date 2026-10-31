@@ -15,8 +15,8 @@ const MODES = [
   { id: 'alchemy', label: 'Alchemy', pane: true },
   { id: 'theory', label: 'Theory', pane: true },
   { id: 'dreams', label: 'Dreams' },
-  { id: 'symbols', label: 'Symbols' },
   { id: 'coincidences', label: 'Coincidences' },
+  { id: 'symbols', label: 'Symbols', pane: true },
 ];
 const SIZES = [
   { name: '1280', width: 1280, height: 800, mobile: false },

@@ -2,6 +2,7 @@
 // Jung's definition, the dated instances in order, the dreams and visions among them, what it expresses, what it is found
 // with. Routes: #/symbols, #/symbols/<family>, #/symbols/archetype/<id>.
 import { el } from '../ui/dom';
+import { symbolsContentsGroups } from './symbols-contents';
 import { icon } from '../ui/icons';
 import { startThread, WORLD } from '../state/store';
 import type { LensContext, LensInstance } from '../shell/lens';
@@ -31,7 +32,21 @@ export function mount(ctx: LensContext): LensInstance {
     amplifyFamily: (id) => ctx.setPath([id]),
   };
 
-  const show = (nodes: HTMLElement[]) => { if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('Symbols', nodes); };
+  /** the route the lens stands at, for the Contents to mark */
+  let standing: string[] = [];
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (key: string, nodes: (HTMLElement | null)[]) => {
+    ctx.pane.load({ key: `symbols/${key}`, eyebrow: 'Symbols', nodes: nodes.filter((n): n is HTMLElement => !!n) });
+  };
+  const contents = () => symbolsContentsGroups(
+    {
+      top: [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)).filter((f): f is NonNullable<typeof f> => !!f).map((f) => ({ id: f.id, name: f.name })),
+      entries: [...m.symbols.values()],
+      held: new Set(m.famById.keys()),
+    },
+    standing,
+    (p) => ctx.setPath(p),
+  );
 
   const searchBox = (initial = '') => {
     const input = el('input', { type: 'search', value: initial, placeholder: 'A symbol: serpent, tower, rose, well…', 'aria-label': 'Find a symbol', autocomplete: 'off', enterkeyhint: 'search' });
@@ -55,7 +70,8 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.engine.setEmphasis(null, null);
     const top = [...m.famMem].sort((a, b) => b[1].length - a[1].length).slice(0, 12).map(([id]) => m.famById.get(id)!).filter(Boolean);
     const box = searchBox();
-    show([
+    show('home', [
+      el('h2', { class: 'dp-title', text: 'Symbols' }),
       el('p', { class: 'th-line', text: providerLabels().symbolsIntro }),
       box.node,
       el('h3', { class: 'as-h3', text: 'The images with the most instances' }),
@@ -71,7 +87,7 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.engage('symbol', { type: 'family', id });
     ctx.setContext(a.family.name);
     tuneGlobe(ctx, a.instances, id, 'this symbol');
-    show([
+    show(id, [
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another symbol' })]),
       ...amplificationView(m, a, act, ctx.passages),
     ]);
@@ -94,7 +110,7 @@ export function mount(ctx: LensContext): LensInstance {
           openSubject: (s) => ctx.focus(s),
         }, ctx.passages, ok),
       ];
-      if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open('The deep field', nodes, { height: 'full', wide: true });
+      show(`archetype/${id}`, nodes);
     }).catch(() => plainArchetype(id));
   };
 
@@ -118,11 +134,14 @@ export function mount(ctx: LensContext): LensInstance {
       el('div', { class: 'am-chips' }, arch.familyIds.slice(0, 24).map((fid) => el('button', { type: 'button', class: 'sf-pill', text: m.famById.get(fid)?.name ?? fid, onclick: () => ctx.setPath([fid]) }))),
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus({ type: 'archetype', id }) }, [el('span', { text: `${arch.name} on the globe` }), icon('next', 14)]),
     ];
-    show(nodes.filter((n): n is HTMLElement => !!n));
+    show(`archetype/${id}`, nodes);
   };
 
   return {
     enter(path) {
+      standing = path;
+      ctx.setControls(null);
+      ctx.pane.contents('Symbols', contents);
       if (path[0] === 'archetype' && path[1]) archetype(path[1]);
       else if (path[0]) family(path[0]);
       else home();

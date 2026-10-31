@@ -78,7 +78,8 @@ export const paneReading = (page) => page.evaluate(() => document.body.classList
  * `nth` entry. A pick is a request to read, so the pane then holds a reading.
  */
 export async function openFromContents(page, nth) {
-  if (!(await page.$('.dp-contents-pane li button'))) await page.click('.sh-contents');
+  // (a list another lens left in the pane is hidden, not open)
+  if (!(await page.locator('.dp-contents-pane li button').first().isVisible())) await page.click('.sh-contents');
   await page.waitForSelector('.dp-contents-pane li button', { timeout: 8000 });
   const pick = nth === undefined ? page.locator('.dp-contents-pane li button[aria-current="true"]') : page.locator('.dp-contents-pane li button').nth(nth);
   await (nth === undefined && !(await pick.count()) ? page.locator('.dp-contents-pane li button').first() : pick.first()).click();
