@@ -15,6 +15,8 @@
     "vaultRelativeDir": "_raw/redbook/plates",
     "urlPrefix": "/redbook-plates/",
     "served": "dev-only",
+    "credit": "C. G. Jung",
+    "license": "© Foundation of the Works of C. G. Jung",
     "note": "Plate files are named for the facsimile’s own pdf pages, p0014–p0223; the vault’s plate mapping (plate pNNNN = ms page NNNN − 31, once the manuscript numbering begins) is the vault’s, not ours."
   },
   "sections": [
@@ -30,10 +32,10 @@
     { "id": "the-epilogue", "name": "The epilogue", "oneLine": "1959: sixteen years, closed by alchemy." }
   ],
   "stops": [
-    { "id": "liber-novus-flood-vision-northern-lands-fol1v", "section": "flood-and-soul" },
+    { "id": "liber-novus-flood-vision-northern-lands-fol1v", "section": "flood-and-soul", "plate": "p0017.jpg", "plateCaption": "fol. i(v): \"Der Weg des Kommenden\" — the great D holds a flooded lowland under a starred night sky." },
     { "id": "liber-novus-soul-white-bird-refinding-fol2r", "section": "flood-and-soul" },
     { "id": "liber-novus-descent-into-hell-cave-fol3v", "section": "flood-and-soul" },
-    { "id": "liber-novus-three-prophecies-war-magic-religion-1914", "section": "flood-and-soul" },
+    { "id": "liber-novus-three-prophecies-war-magic-religion-1914", "section": "flood-and-soul", "plate": "p0155.jpg", "plateCaption": "ms p. 124: \"Die drei Prophezeyungen. Cap. XVIII\", the D initial on a blue-green ground." },
     { "id": "liber-novus-siegfried-murder-hero-fol4v", "section": "siegfried" },
     { "id": "liber-novus-coming-god-proclamation-fol4v", "section": "elijah-salome" },
     { "id": "liber-novus-elijah-salome-mysterium-fol5v", "section": "elijah-salome" },
@@ -57,13 +59,13 @@
     { "id": "liber-novus-dead-serpent-umbilical-cord-ms111", "section": "philemon" },
     { "id": "liber-novus-atmavictu-kabir-manikin-ms117", "section": "philemon" },
     { "id": "liber-novus-cabiri-holy-water-caster-ms123", "section": "philemon" },
-    { "id": "liber-novus-philemon-magician-baucis-garden-ms139", "section": "philemon" },
+    { "id": "liber-novus-philemon-magician-baucis-garden-ms139", "section": "philemon", "plate": "p0170.jpg", "plateCaption": "ms p. 139: \"Der Zauberer. Cap. XXI\", the D set in a violet lattice." },
     { "id": "liber-novus-lapis-atmavictu-stone-face-ms122", "section": "philemon" },
     { "id": "liber-novus-sigg-memorial-mandala-liverpool-ms159", "section": "philemon" },
     { "id": "liber-novus-satan-dialogue-absolute-vs-life-ms162", "section": "philemon" },
     { "id": "liber-novus-phallos-hap-daimons-of-the-dead-pdf370", "section": "the-sermones" },
     { "id": "liber-novus-communion-of-the-dead-last-supper-1916", "section": "the-sermones" },
-    { "id": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377", "section": "the-sermones" },
+    { "id": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377", "section": "the-sermones", "plate": "p0185.jpg", "plateCaption": "ms p. 154: Philemon, winged, haloed, in a blue and red robe above the garden." },
     { "id": "liber-novus-sermones-abraxas-hymn-pdf381", "section": "the-sermones" },
     { "id": "liber-novus-sermones-man-is-a-gateway-lonely-star-pdf385", "section": "the-sermones" },
     { "id": "liber-novus-epilogue-1959-ms190", "section": "the-epilogue" }

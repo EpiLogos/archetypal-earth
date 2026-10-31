@@ -9,7 +9,7 @@ import './style/touch.css';
 import { loadSymbols } from './data/symbols';
 import { historyExtent, loadHistory } from './aion/model';
 import { loadCorpusIndex } from './data/corpus';
-import { loadRedbook } from './redbook/load';
+import { loadRedbook, useFolios } from './redbook/load';
 import { Controller } from './app/controller';
 import { loadField } from './data/load';
 import { buildModel } from './data/model';
@@ -67,6 +67,8 @@ async function boot() {
       optional<PeopleData>('people.json', (d) => Array.isArray(d?.people)),
       optional<WalksData>('walks.json', (d) => Array.isArray(d?.walks)),
     ]);
+    // the Red Book's folios are served on this machine's dev server only (see vite.config.ts)
+    if (redbook && import.meta.env.DEV) useFolios(field, redbook);
     const model = buildModel(field, history ? historyExtent(history) : undefined, symbols, { works, people, walks });
     const time = new TimeModel();
     let ctl: Controller | null = null;

@@ -18,6 +18,9 @@ export interface RedBookPlates {
   urlPrefix: string;
   served: 'dev-only';
   note: string;
+  /** The credit and licence line a folio carries as an instance's picture. */
+  credit?: string;
+  license?: string;
 }
 
 export interface RedBookSection {
@@ -33,6 +36,8 @@ export interface RedBookStop {
   sectionId: string;
   /** Facsimile plate file ("p0028.jpg") when the folio has one — local-only. */
   plate?: string;
+  /** The plate's pixel size, [width, height]. */
+  plateSize?: [number, number];
   /** The vault's own plate note, when the instance body carries one. */
   plateCaption?: string;
 }

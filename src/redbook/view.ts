@@ -157,6 +157,9 @@ export class RedBookView {
    */
   private facsimile(stop: RedBookStop): HTMLElement | null {
     if (!import.meta.env.DEV || !stop.plate) return null;
+    // the folio already stands as the instance's own picture (useFolios): it is not shown twice
+    const o = this.model.occ[this.model.occIndex.get(stop.id) ?? -1];
+    if (o?.image?.src.endsWith(`/${stop.plate}`) || o?.image?.src.endsWith(stop.plate)) return null;
     const img = el('img', { class: 'rb-plate', alt: stop.plateCaption ?? 'Facsimile plate — Liber Novus', loading: 'lazy', src: `${this.mode.plates.urlPrefix}${stop.plate}` });
     img.addEventListener('error', () => img.remove());
     return img;

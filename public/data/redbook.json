@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T10:40:03.104Z",
+  "generatedAt": "2026-10-31T10:45:02.106Z",
   "licence": {
     "plates": "The facsimile plates are copyrighted pages of the Norton/Liber Novus facsimile (W. W. Norton, 2009). The site’s Commons-only provenance law applies to anything shipped or committed: the plates therefore never enter git and never enter dist. They are referenced as LOCAL-ONLY runtime assets, read at runtime from the owner’s own vault copy over a dev-server-only route; any served build degrades gracefully to a cited note.",
     "text": "The mode’s translated text comes from the vault’s Red Book harvest (Reader-edition English, folio/ms/pdf-cited) and follows the vault’s quotation law; translation quotes are cited to the Reader pagination as the vault cites them.",
@@ -9,6 +9,8 @@
     "vaultRelativeDir": "_raw/redbook/plates",
     "urlPrefix": "/redbook-plates/",
     "served": "dev-only",
+    "credit": "C. G. Jung",
+    "license": "© Foundation of the Works of C. G. Jung",
     "note": "Plate files are named for the facsimile’s own pdf pages, p0014–p0223; the vault’s plate mapping (plate pNNNN = ms page NNNN − 31, once the manuscript numbering begins) is the vault’s, not ours."
   },
   "mode": {
@@ -72,7 +74,13 @@
   "stops": [
     {
       "id": "liber-novus-flood-vision-northern-lands-fol1v",
-      "sectionId": "flood-and-soul"
+      "sectionId": "flood-and-soul",
+      "plate": "p0017.jpg",
+      "plateSize": [
+        1778,
+        2381
+      ],
+      "plateCaption": "fol. i(v): \"Der Weg des Kommenden\" — the great D holds a flooded lowland under a starred night sky."
     },
     {
       "id": "liber-novus-soul-white-bird-refinding-fol2r",
@@ -96,7 +104,13 @@
     },
     {
       "id": "liber-novus-three-prophecies-war-magic-religion-1914",
-      "sectionId": "flood-and-soul"
+      "sectionId": "flood-and-soul",
+      "plate": "p0155.jpg",
+      "plateSize": [
+        1778,
+        2406
+      ],
+      "plateCaption": "ms p. 124: \"Die drei Prophezeyungen. Cap. XVIII\", the D initial on a blue-green ground."
     },
     {
       "id": "liber-novus-siegfried-murder-hero-fol4v",
@@ -330,7 +344,13 @@
     },
     {
       "id": "liber-novus-philemon-magician-baucis-garden-ms139",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0170.jpg",
+      "plateSize": [
+        1778,
+        2419
+      ],
+      "plateCaption": "ms p. 139: \"Der Zauberer. Cap. XXI\", the D set in a violet lattice."
     },
     {
       "id": "liber-novus-lapis-atmavictu-stone-face-ms122",
@@ -372,7 +392,13 @@
     },
     {
       "id": "liber-novus-sermones-philemon-preaches-to-the-dead-pdf377",
-      "sectionId": "the-sermones"
+      "sectionId": "the-sermones",
+      "plate": "p0185.jpg",
+      "plateSize": [
+        1778,
+        2306
+      ],
+      "plateCaption": "ms p. 154: Philemon, winged, haloed, in a blue and red robe above the garden."
     },
     {
       "id": "liber-novus-sermones-abraxas-hymn-pdf381",
