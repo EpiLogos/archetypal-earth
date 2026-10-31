@@ -10,6 +10,7 @@ import type { LensContext, LensInstance } from '../shell/lens';
 import { practice, saveFile, type PracticeRecord } from '../practice/store';
 import { findImages, vocabulary, type Vocabulary } from '../practice/amplify';
 import { inLens } from '../state/store';
+import { coincidencesContentsGroups } from './coincidences-contents';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { providerLabels } from '../data/labels';
 
@@ -37,13 +38,16 @@ export function mount(ctx: LensContext): LensInstance {
   let framing: PracticeData | null = null;
   const voc = () => (vocab ??= vocabulary(m));
   const ready = loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
-  const show = (nodes: (HTMLElement | SVGElement | null)[]) => {
-    const list = nodes.filter((n): n is HTMLElement => !!n);
-    if (ctx.panel.isOpen) ctx.panel.replace(list); else ctx.panel.open('Coincidences', list, { height: 'full' });
+  /** the route the lens stands at, for the Contents to mark */
+  let standing: string[] = [];
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (key: string, nodes: (HTMLElement | SVGElement | null)[]) => {
+    ctx.pane.load({ key: `coincidences/${key}`, eyebrow: 'Coincidences', nodes: nodes.filter((n): n is HTMLElement => !!n) });
   };
   const entries = () => practice.list<Coincidence>('coincidences').sort((a, b) => a.date.localeCompare(b.date) || a.createdAt.localeCompare(b.createdAt));
   const symbolKey = (c: Coincidence) => (c.familyId ? `f:${c.familyId}` : `t:${c.symbol.trim().toLowerCase()}`);
   const symbolName = (c: Coincidence) => (c.familyId ? m.famById.get(c.familyId)?.name ?? c.symbol : c.symbol.trim()) || 'no image named';
+  const contents = () => coincidencesContentsGroups(practice.list<Coincidence>('coincidences').map((c) => ({ id: c.id, date: c.date, createdAt: c.createdAt, name: symbolName(c) })), standing, (p) => ctx.setPath(p));
 
   /** Your series: time across, one row per connecting image; a row with more than one mark is a series. */
   const seriesChart = (list: Coincidence[]): HTMLElement => {
@@ -94,7 +98,8 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.engine.setEmphasis(null, null);
     const list = entries();
     const recurring = new Set(list.map(symbolKey).filter((k, i, a) => a.indexOf(k) !== i));
-    show([
+    show('log', [
+      el('h2', { class: 'dp-title', text: 'Coincidences' }),
       privacyLine(practice.persistent ? 'Your log is kept only in this browser’s storage.' : 'This browser is not letting the page store anything, so entries last only until you close the tab.'),
       el('p', { class: 'th-line', text: 'Keep a note when something inside you and something outside meet in a way that feels meant: a dream, then the thing it showed. Over time the log draws your own series.' }),
       framing ? quoteBlock(framing.coincidences.definition, ctx.passages, { compact: true }) : null,
@@ -146,7 +151,7 @@ export function mount(ctx: LensContext): LensInstance {
       ctx.engage('coincidence', { type: 'coincidence', id: stored.id });
       ctx.setPath([stored.id]);
     };
-    show([
+    show(`edit/${c?.id ?? 'new'}`, [
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath(c ? [c.id] : []) }, [icon('back', 13), el('span', { text: c ? 'The entry' : 'Your log' })]),
       el('form', { class: 'dr-form', onsubmit: save }, [
         el('label', { class: 'lp-field' }, [el('span', { text: 'Date' }), date]),
@@ -168,7 +173,7 @@ export function mount(ctx: LensContext): LensInstance {
       const sc = scopeOf(m, m.famOcc.get(c.familyId) ?? [], 'this symbol');
       ctx.engine.setEmphasis(sc.rel, m.famPalette.get(c.familyId)?.core ?? null, sc.info);
     } else ctx.engine.setEmphasis(null, null);
-    show([
+    show(`entry/${c.id}`, [
       el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Your log' })]),
       el('p', { class: 'am-kicker', text: c.date }),
       el('h2', { class: 'lp-h', text: symbolName(c) }),
@@ -194,7 +199,12 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   return {
-    enter(path) { void ready.then(() => route(path)); },
+    enter(path) {
+      standing = path;
+      ctx.setControls(null);
+      ctx.pane.contents('Coincidences', contents);
+      void ready.then(() => route(path));
+    },
     leave() { ctx.engine.setEmphasis(null, null); },
   };
 }
