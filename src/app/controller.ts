@@ -1476,9 +1476,12 @@ export class Controller {
         this.time.scrub(this.m.scale.toU(0));
         this.enterWorld(first);
       }
-      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+      // stepping within Aion keeps the pane where it stands (a reading replaces itself in place)
+      if (!prev.history) this.deep.hide();
+      this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
-      this.engine.rig.setShift(next.history.selection ? -0.18 : 0, 0);
+      // the reading stands in the pane: the globe gives it room as it does for every pane reading
+      this.syncShift();
       this.syncSky(prev, next, first, false);
       this.aion.show(next.history);
       return;

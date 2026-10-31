@@ -1,10 +1,12 @@
 // Gate (Phase 6): the sky's clock in Aion mode. The equinox ring carries the zodiacal ticks and the spring equinox walks
-// backward as the clock plays; the card's "The sky's clock" disclosure sets the conventions beside Jung's boundaries;
+// backward as the clock plays; the reading's "The sky's clock" disclosure sets the conventions beside Jung's boundaries;
 // the two clocks are never conflated (opening the disclosure and choosing a convention leave the historical clock alone).
 //   npx vite --port 5183 --strictPort &      node tests/ui/e2e/aion-clock.mjs [chromium|webkit]
 import { launch, URL } from './lib.mjs';
 
 const kind = process.argv[2] ?? 'chromium';
+/** The reading the pane stands on (an epoch or an event, read in the reading pane since H5). */
+const PANE = 'section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])';
 let failed = 0;
 const check = (ok, label, detail = '') => {
   if (!ok) failed++;
@@ -88,8 +90,8 @@ try {
 
   cardFlow: {
     const { page, logs, ctx } = await openAt(browser, '#/aion/jung-aion/epoch/pisces');
-    await page.waitForSelector('.aion-card .aion-skyclock', { timeout: 10000 });
-    check(await page.evaluate(() => !document.querySelector('.aion-skyclock').open), 'the card gains “The sky’s clock”, closed until asked');
+    await page.waitForSelector(`${PANE} .aion-skyclock`, { timeout: 10000 });
+    check(await page.evaluate(() => !document.querySelector('.aion-skyclock').open), 'the reading gains “The sky’s clock”, closed until asked');
     const yearBefore = await year(page);
     await page.locator('.aion-skyclock summary').click();
     await page.waitForTimeout(300);
@@ -112,13 +114,13 @@ try {
 
     // a child epoch (a fish) inherits Pisces and says no convention divides it
     await page.goto(URL + '#/aion/jung-aion/epoch/pisces-first-fish', { waitUntil: 'load' });
-    await page.waitForSelector('.aion-card .aion-skyclock', { timeout: 10000 });
+    await page.waitForSelector(`${PANE} .aion-skyclock`, { timeout: 10000 });
     await page.locator('.aion-skyclock summary').click();
     check(/no astronomical convention divides it/.test(await page.locator('.aion-skyclock').innerText()), 'the two fishes say plainly that no astronomical convention divides Pisces');
 
     // an event: the 7 BCE conjunction, and a conditional Aquarian calculation
     await page.goto(URL + '#/aion/jung-aion/event/aquarius-alternative-1997', { waitUntil: 'load' });
-    await page.waitForSelector('.aion-card .aion-skyclock', { timeout: 10000 });
+    await page.waitForSelector(`${PANE} .aion-skyclock`, { timeout: 10000 });
     await page.locator('.aion-skyclock summary').click();
     const ev = await page.locator('.aion-skyclock').innerText();
     check(/Where Aquarius begins/.test(ev) && /a calculation/.test(ev), 'the 1997 calculation’s card shows Aquarius’s beginnings as calculations', ev.slice(0, 120));

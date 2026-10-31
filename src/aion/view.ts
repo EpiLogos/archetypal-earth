@@ -6,15 +6,18 @@ import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import type { AppState } from '../state/store';
 import type { History, HistoryReading, AeonEvent, Epoch, Passage, BookChapter } from '../types/history';
-import { clear, el, onReadGesture, plate } from '../ui/dom';
+import { clear, el, plate } from '../ui/dom';
 import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
-import { closeGlyph } from '../ui/reveal';
+import { paneStepper } from '../ui/pane';
+import type { ContentsGroup } from '../ui/deep';
+import type { Walk } from '../types/walks';
 import { eraShort, passageCite } from '../ui/format';
 import { quote } from '../ui/quote';
 import type { PassageBridge } from '../ui/passage';
 import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { epochAt, epochHeroImage, eventHeroImage, eventOccurrences } from './model';
-import { findWalk, wholeReadingWalk } from './walk';
+import { WalkRunner, type WalkStep } from '../walk/runner';
+import { chaptersWalk, findWalk, threadWalk, wholeReadingWalk } from './walk';
 import { yearText } from './skyclock';
 import { EquinoxRing, skyClockDisclosure } from './skyclock-view';
 import type { LensChrome } from '../shell/lens';
@@ -23,7 +26,13 @@ import { providerLabels } from '../data/labels';
 type Selection = NonNullable<NonNullable<AppState['history']>['selection']>;
 const yearLabel = (year: number) => year < 0 ? `${Math.abs(Math.round(year)).toLocaleString()} BCE` : `${Math.round(year).toLocaleString()} CE`;
 
-/** One authored reading over the same Earth and the same live clock. */
+const NO_SNAPSHOT = { u: 0, focus: null, reading: null, centre: null, walk: null };
+
+/**
+ * One authored reading over the same Earth and the same live clock. What is read of it (an epoch, an event, a chapter of the
+ * book) stands in the reading pane (H5), and the pane's Contents are the reading's threads, the book's chapters and its epochs.
+ * A thread and the book are walked by the Walk runner (S9); the plate rail over the timeline shows the walk that is open.
+ */
 export class AionView {
   readonly root: HTMLElement;
   private heading: HTMLElement;
@@ -32,8 +41,10 @@ export class AionView {
   private rail: HTMLElement;
   private strip: WalkStrip | null = null;
   private stripKind: 'chapter' | 'thread' | null = null;
-  private card: HTMLElement;
   private markers: HTMLElement;
+  /** the one runner: a thread or the book's chapters, wrapping past either end as the old index did */
+  private runner: WalkRunner;
+  private walkKind: 'chapter' | 'thread' | null = null;
   private reading: HistoryReading | null = null;
   private state: AppState['history'];
   private dots: { element: HTMLElement; event: AeonEvent; dir: ReturnType<typeof dirFromLatLon> }[] = [];
@@ -41,9 +52,8 @@ export class AionView {
   private currentEvent: AeonEvent | undefined;
   /** the standing chapter of the book, when the book is open */
   private chapter: BookChapter | undefined;
-  private bookToggle: HTMLButtonElement | null = null;
-  private threadIndex = 0;
   private threadTimer = 0;
+  /** the events of the open thread, in the walk's order (the rail's frames) */
   private threadEvents: AeonEvent[] = [];
   private ring: EquinoxRing;
   /** The field as the cursor has reached it: what has entered the world by now stands; what came later recedes. */
@@ -62,13 +72,66 @@ export class AionView {
     this.heading = el('div', { class: 'aion-controls' });
     this.epochs = el('nav', { class: 'aion-epochs', 'aria-label': 'Historical epochs' });
     this.rail = el('nav', { class: 'rb-rail', hidden: true, 'aria-label': 'Walk' });
-    this.card = el('aside', { class: 'aion-card reveal on', 'aria-label': 'Aion reading' });
     this.markers = el('div', { class: 'aion-markers' });
-    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.rail, this.card]);
+    this.root = el('section', { class: 'aion', hidden: true, 'aria-label': 'Archetypal history' }, [this.markers, this.epochs, this.rail]);
     parent.append(this.root);
     this.ring = new EquinoxRing(this.root);
-    // a double-click on an event card opens the reading of its first resolvable occurrence; an epoch's card has none
-    onReadGesture(this.card, () => this.readEvent());
+    this.runner = new WalkRunner({ scale: model.scale, wrap: true });
+  }
+
+  private get pane() {
+    return this.chrome?.pane;
+  }
+
+  /**
+   * The Contents of the reading: its threads (the whole reading in order, then the curated ones), the book's chapters when it is
+   * published, and the reading's epochs. The one that stands is marked. The events are not listed: each is a dot on the globe.
+   */
+  private contentsGroups(): ContentsGroup[] {
+    const reading = this.reading;
+    if (!reading) return [];
+    const at = this.state?.selection;
+    const here = (kind: string, id: string) => at?.kind === kind && at.id === id;
+    const groups: ContentsGroup[] = [{
+      title: 'Threads',
+      items: [wholeReadingWalk(reading), ...reading.threads].map((t) => ({ label: t.name, note: String(t.eventIds.length), current: here('thread', t.id), onPick: () => this.select({ kind: 'thread', id: t.id }) })),
+    }];
+    const book = this.history.book;
+    if (book) {
+      groups.push({
+        title: book.title,
+        items: book.chapters.map((c) => ({ label: c.title, ...(c.n !== c.title ? { note: c.n } : {}), current: here('chapter', c.id), onPick: () => this.select({ kind: 'chapter', id: c.id }) })),
+      });
+    }
+    groups.push({
+      title: 'Epochs',
+      items: reading.epochs.filter((e) => !e.parentId).map((e) => ({ label: e.name, current: here('epoch', e.id), onPick: () => this.select({ kind: 'epoch', id: e.id }) })),
+    });
+    return groups;
+  }
+
+  /** A reading put in the pane: the plate (if any) and the text, framed by the pane; `foot` is the walk's stepper. */
+  private read(key: string, eyebrow: string, hero: HTMLElement | null, text: HTMLElement, extra: { foot?: Node[]; onRead?(): void; engages?: { type: string; id: string } } = {}) {
+    const body = el('div', { class: 'rv-body' }, hero ? [hero, text] : [text]);
+    this.pane?.read({ key, eyebrow, nodes: [body], ...(extra.foot ? { foot: extra.foot } : {}), ...(extra.onRead ? { onRead: extra.onRead } : {}), ...(extra.engages ? { engages: extra.engages } : {}) });
+  }
+
+  /** The walk's stepper under a reading: the neighbours, and where in the walk the visitor stands. */
+  private stepper(kind: 'chapter' | 'thread', step: WalkStep): Node[] {
+    const label = kind === 'chapter' ? { prev: 'Previous chapter', next: 'Next chapter' } : { prev: 'Previous historical event', next: 'Next historical event' };
+    return paneStepper(label, `${step.i + 1} / ${step.count}`, () => this.walkStep(kind, -1), () => this.walkStep(kind, 1));
+  }
+
+  /** The walk begins (or carries on, when the runner already stands in it) at stop `at`. */
+  private walking(kind: 'chapter' | 'thread', walk: Walk, at: number): WalkStep | null {
+    this.walkKind = kind;
+    return this.runner.active && this.runner.position?.walkId === walk.id ? this.runner.goto(at) : this.runner.start(walk, NO_SNAPSHOT, at);
+  }
+
+  private endWalk() {
+    this.runner.interrupt();
+    this.walkKind = null;
+    this.threadEvents = [];
   }
 
   /** The event's first occurrence that exists in the field, opened as its core reading. Nothing when it has none. */
@@ -100,58 +163,67 @@ export class AionView {
     this.threadEvents = [];
     this.currentEvent = undefined;
     this.chapter = undefined;
-    this.bookToggle?.setAttribute('aria-pressed', String(state.selection?.kind === 'chapter'));
     this.engine.arcs.clear();
     this.engine.markers.sel.hide();
     const selection = state.selection;
+    // the reading's Contents stand in the pane whatever is read; a pick is a request to read
+    this.pane?.contents('Aion', () => this.contentsGroups());
     if (selection?.kind === 'epoch') {
+      this.endWalk();
       const epoch = reading.epochs.find(e => e.id === selection.id);
       if (epoch) {
         if (changed || previous?.id !== epoch.id || previous.kind !== 'epoch') this.time.scrub(this.model.scale.toU((epoch.from + epoch.to) / 2));
         this.showEpoch(epoch);
       }
     } else if (selection?.kind === 'event') {
+      this.endWalk();
       const event = reading.events.find(e => e.id === selection.id);
       if (event) this.showEvent(event, true);
     } else if (selection?.kind === 'thread') {
-      // a walk: the derived whole-reading walk, or a curated thread (the walks Options offers)
+      // a walk: the derived whole-reading walk, or a curated thread; the runner begins it at its first event
       const thread = findWalk(reading, selection.id);
       if (thread) {
-        this.threadEvents = thread.eventIds.map(id => reading.events.find(e => e.id === id)).filter((e): e is AeonEvent => !!e);
-        this.threadIndex = 0;
+        const walk = threadWalk(this.model.walkById, reading, thread);
+        this.threadEvents = walk.stops.map(s => reading.events.find(e => e.id === s.subject?.id)).filter((e): e is AeonEvent => !!e);
         const located = this.threadEvents.filter(e => Number.isFinite(e.lat) && Number.isFinite(e.lon));
         this.engine.arcs.build(located.map(e => dirFromLatLon(e.lat!, e.lon!)), located.map((_, i) => i > 0));
         this.engine.arcs.uniforms.uDraw.value = located.length + 1;
         this.engine.arcs.uniforms.uTour.value = 0;
-        this.showThreadEvent();
+        this.runner.interrupt();
+        const step = this.walking('thread', walk, 0);
+        if (step) this.showThreadStop(step);
       }
     } else if (selection?.kind === 'chapter') {
-      const chapter = this.history.book?.chapters.find((c) => c.id === selection.id);
-      if (chapter) this.showChapter(chapter);
+      const book = this.history.book;
+      const chapter = book?.chapters.find((c) => c.id === selection.id);
+      if (book && chapter) {
+        const step = this.walking('chapter', chaptersWalk(this.model.walkById, book), book.chapters.indexOf(chapter));
+        if (step) this.showChapter(chapter, step);
+      }
     } else {
-      this.card.hidden = true;
+      // landing: nothing read, the Contents waiting
+      this.endWalk();
+      this.pane?.hide();
       this.engine.setEmphasis(null, null);
     }
     this.update(0);
-    const walking = selection?.kind === 'chapter' || selection?.kind === 'thread';
+    const walking = this.walkKind !== null;
     this.epochs.hidden = walking;
     this.rail.hidden = !walking;
     // the strip was built while the rail was hidden: centre it now that it shows
     this.strip?.recenter();
-    document.body.classList.toggle('aion-card-open', !!selection);
-    // a card owns the left: no title, no reading tabs under the close
-    this.chrome?.setContext(selection ? '' : `${reading.title} · ${reading.author}`);
-    if (selection) this.chrome?.setControls(null);
-    else {
-      this.buildHeading(reading);
-      this.chrome?.setControls([this.heading]);
-    }
+    // the title and the reading's own controls stay at the left: the reading stands in the pane, on the right
+    this.chrome?.setContext(`${reading.title} · ${reading.author}`);
+    this.buildHeading(reading);
+    this.chrome?.setControls([this.heading]);
   }
 
   hide() {
     if (this.root.hidden) return;
     this.root.hidden = true;
-    document.body.classList.remove('aion-mode', 'aion-card-open');
+    document.body.classList.remove('aion-mode');
+    this.pane?.release();
+    this.endWalk();
     this.engine.arcs.clear();
     this.reading = null;
     this.state = undefined;
@@ -166,30 +238,14 @@ export class AionView {
     this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: this.reading.id, ...(selection ? { selection } : {}) } });
   }
 
+  /** The mode's own control: which reading stands. Its walks and the book are in the pane's Contents. */
   private buildHeading(reading: HistoryReading) {
     clear(this.heading);
-    const book = this.history.book;
-    const sel = this.state?.selection;
-    this.bookToggle = book ? optionAction('Read the book', () => this.select(sel?.kind === 'chapter' ? undefined : { kind: 'chapter', id: book.chapters[0].id }),
-      { pressed: sel?.kind === 'chapter', description: `${book.title}, chapter by chapter` }) : null;
     const readings = [...this.history.readings].sort((a, b) => a.from - b.from).map((r) =>
       optionAction(r.title, () => this.navigate({ view: { kind: 'world' }, deep: false, history: { reading: r.id } }), { pressed: r.id === reading.id }));
-    // the walks: the whole reading in time order (derived), the curated threads, then the book's chapter walk when it is published
-    const whole = wholeReadingWalk(reading);
-    const walks = [
-      optionAction(whole.name, () => this.select({ kind: 'thread', id: whole.id }), {
-        pressed: sel?.kind === 'thread' && sel.id === whole.id, description: `${whole.eventIds.length} events, earliest to latest`,
-      }),
-      ...reading.threads.map((thread) => optionAction(thread.name, () => this.select({ kind: 'thread', id: thread.id }), {
-        pressed: sel?.kind === 'thread' && sel.id === thread.id, description: thread.oneLine,
-      })),
-      this.bookToggle,
-    ];
-    // the events are not listed: each one is a dot on the globe, and the walks above carry them in order
     this.heading.append(modeOptions([
       el('p', { class: 'mode-opt-blurb', text: providerLabels().readingTagline }),
       optionGroup('Reading', readings),
-      optionGroup('Walk', walks),
     ]));
   }
 
@@ -240,22 +296,8 @@ export class AionView {
     return rest.length ? [el('details', { class: 'aion-sources' }, [el('summary', { text: 'More from the text' }), ...rest.map(p => this.quote(p))])] : [];
   }
 
-  private closeButton() {
-    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close history detail', onclick: () => this.select() }, [closeGlyph()]);
-  }
-
-  private openCard() {
-    clear(this.card);
-    this.card.hidden = false;
-    const body = el('div', { class: 'rv-body' });
-    const text = el('div', { class: 'rv-text' });
-    body.append(text);
-    this.card.append(this.closeButton(), body);
-    return text;
-  }
-
   private showEpoch(epoch: Epoch) {
-    const text = this.openCard();
+    const text = el('div', { class: 'rv-text' });
     const children = this.reading!.epochs.filter(e => e.parentId === epoch.id);
     const links = el('div', { class: 'aion-links' });
     for (const id of epoch.archetypeIds ?? []) {
@@ -263,23 +305,30 @@ export class AionView {
       if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id } }, deep: false }) }));
     }
     for (const e of children) links.append(el('button', { type: 'button', class: 'link-quiet', text: e.name, onclick: () => this.select({ kind: 'epoch', id: e.id }) }));
-    text.before(plate(epochHeroImage(this.model, this.reading!, epoch), { className: 'rv-hero', credit: true, palette: epoch.palette, alt: epoch.name }));
-    text.append(el('p', { class: 'aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
-      el('h2', { class: 'rv-name', text: epoch.name }), el('p', { class: 'rv-para aion-lede', text: this.shown(epoch.oneLine) }),
-      ...this.keyQuote(epoch.passages), ...epoch.body.map(para => el('p', { class: 'rv-para', text: this.shown(para) })),
+    const hero = plate(epochHeroImage(this.model, this.reading!, epoch), { className: 'rv-hero dp-figure', credit: true, palette: epoch.palette, alt: epoch.name, eager: true });
+    text.append(el('p', { class: 'dp-by aion-date rv-line', text: `${yearText(epoch.from, true)} – ${yearText(epoch.to, true)}` }),
+      el('h2', { class: 'dp-title rv-name', text: epoch.name }), el('p', { class: 'dp-lede rv-para aion-lede', text: this.shown(epoch.oneLine) }),
+      ...this.keyQuote(epoch.passages), ...epoch.body.map(para => el('p', { class: 'dp-para rv-para', text: this.shown(para) })),
       links, ...this.moreSources(epoch.passages), skyClockDisclosure(this.reading!, epoch));
+    this.read(`epoch:${epoch.id}`, 'Epoch', hero, text);
   }
 
-  private showEvent(event: AeonEvent, move: boolean) {
+  /**
+   * An event read in the pane. A walk's step carries the effects the runner planned for it (the clock to the event's year, the
+   * globe to its place); an event opened by itself, from its dot, plans the same two from the event.
+   */
+  private showEvent(event: AeonEvent, move: boolean, step?: WalkStep) {
     this.currentEvent = event;
     if (move) {
       this.time.pause();
-      this.time.scrub(this.model.scale.toU(event.year));
-      if (Number.isFinite(event.lat) && Number.isFinite(event.lon)) this.engine.rig.flyTo(event.lat!, event.lon!, 2.8, { duration: 1.8 });
+      const fx = step?.effects;
+      this.time.scrub(fx?.setClock ?? this.model.scale.toU(event.year));
+      const at = fx ? fx.flyTo : Number.isFinite(event.lat) && Number.isFinite(event.lon) ? { lat: event.lat!, lon: event.lon! } : null;
+      if (at) this.engine.rig.flyTo(at.lat, at.lon, 2.8, { duration: 1.8 });
     }
-    const text = this.openCard();
+    const text = el('div', { class: 'rv-text' });
     const epoch = this.reading!.epochs.find(e => e.id === event.epochId);
-    text.before(plate(eventHeroImage(this.model, event), { className: 'rv-hero', credit: true, palette: epoch?.palette, alt: event.name }));
+    const hero = plate(eventHeroImage(this.model, event), { className: 'rv-hero dp-figure', credit: true, palette: epoch?.palette, alt: event.name, eager: true });
     const links = el('div', { class: 'aion-links' });
     for (const id of event.archetypeIds ?? []) {
       const archetype = this.model.archById.get(id);
@@ -293,9 +342,16 @@ export class AionView {
       const i = this.model.occIndex.get(id);
       if (i !== undefined) links.append(el('button', { type: 'button', class: 'link-quiet', text: this.model.occ[i].label, onclick: () => this.navigate({ view: { kind: 'manifest', occId: id, context: { type: 'family', id: this.model.occ[i].familyId } }, deep: false }) }));
     }
-    text.append(el('p', { class: 'aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'rv-name', text: event.name }),
-      el('p', { class: 'rv-para aion-lede', text: this.shown(event.oneLine) }), ...this.keyQuote(event.passages), ...event.body.map(para => el('p', { class: 'rv-para', text: this.shown(para) })),
+    text.append(el('p', { class: 'dp-by aion-date rv-line', text: [event.yearDisplay, event.place].filter(Boolean).join(' · ') }), el('h2', { class: 'dp-title rv-name', text: event.name }),
+      el('p', { class: 'dp-lede rv-para aion-lede', text: this.shown(event.oneLine) }), ...this.keyQuote(event.passages), ...event.body.map(para => el('p', { class: 'dp-para rv-para', text: this.shown(para) })),
       links, ...this.moreSources(event.passages), skyClockDisclosure(this.reading!, event));
+    // opening an event is noted for the visitor's node as the occurrence it stands on, where the field holds one
+    const occId = event.occurrenceIds.find((id) => this.model.occIndex.has(id));
+    this.read(`event:${event.id}`, 'Event', hero, text, {
+      ...(step && this.walkKind === 'thread' ? { foot: this.stepper('thread', step) } : {}),
+      onRead: () => this.readEvent(),
+      ...(occId ? { engages: { type: 'occurrence', id: occId } } : {}),
+    });
   }
 
   /** A chapter takes the same plate as every other card: a family it names, else an event it grounds. */
@@ -314,20 +370,19 @@ export class AionView {
 
   /**
    * One chapter of the book: Jung's own words from inside it; the field it speaks of, tuned on the globe; and the
-   * events of the readings whose passages stand in its pages. Walk controls sit on the timeline rail, not in the card.
+   * events of the readings whose passages stand in its pages. The walk is stepped from the pane's stepper and the timeline rail.
    */
-  private showChapter(chapter: BookChapter) {
+  private showChapter(chapter: BookChapter, step: WalkStep) {
     const book = this.history.book!;
     this.chapter = chapter;
     const all = book.chapters;
-    const i = all.indexOf(chapter);
-    this.walkStrip('chapter').update(all.map((c) => ({ id: c.id, image: this.chapterImage(c), label: c.title })), i);
-    const text = this.openCard();
+    this.walkStrip('chapter').update(all.map((c) => ({ id: c.id, image: this.chapterImage(c), label: c.title })), step.i);
+    const text = el('div', { class: 'rv-text' });
     const image = this.chapterImage(chapter);
-    if (image) text.before(plate(image, { className: 'rv-hero', credit: true, alt: chapter.title }));
+    const hero = image ? plate(image, { className: 'rv-hero dp-figure', credit: true, alt: chapter.title, eager: true }) : null;
     text.append(
-      el('h2', { class: 'rv-name', text: chapter.title }),
-      el('p', { class: 'rv-para aion-lede', text: this.shown(chapter.line) }),
+      el('h2', { class: 'dp-title rv-name', text: chapter.title }),
+      el('p', { class: 'dp-lede rv-para aion-lede', text: this.shown(chapter.line) }),
       ...chapter.quotes.map((q) => this.quote({ text: q.text, work: q.cite.work, locator: q.cite.locator })),
     );
     const links = el('div', { class: 'aion-links' });
@@ -347,21 +402,24 @@ export class AionView {
     const located = chapter.events.map((e) => this.history.readings.find((r) => r.id === e.reading)?.events.find((x) => x.id === e.id))
       .find((e) => e && Number.isFinite(e.lat) && Number.isFinite(e.lon));
     if (located) this.engine.rig.flyTo(located.lat!, located.lon!, 2.8, { duration: 1.8 });
+    this.read(`chapter:${chapter.id}`, 'Chapter', hero, text, { foot: this.stepper('chapter', step), engages: { type: 'work', id: this.model.workKey.get(book.work) ?? book.work } });
   }
 
-  /** Arrow-key walking through the book's chapters; wired by the controller. */
+  /** Arrow-key walking through the book's chapters (wired by the controller), the rail's steps and the pane's stepper: the runner names the neighbour. */
   walkBook(delta: number): boolean {
-    const book = this.history.book;
-    if (!book || !this.chapter) return false;
-    const i = book.chapters.indexOf(this.chapter);
-    this.select({ kind: 'chapter', id: book.chapters[(i + delta + book.chapters.length) % book.chapters.length].id });
+    if (!this.history.book || this.walkKind !== 'chapter') return false;
+    const step = delta > 0 ? this.runner.next() : this.runner.prev();
+    const id = step?.stop.subject?.id;
+    if (!id) return false;
+    this.select({ kind: 'chapter', id });
     return true;
   }
 
-  private showThreadEvent() {
-    const event = this.threadEvents[this.threadIndex];
+  /** The thread's step the runner stands on, read in the pane with the rail's frames set to it. */
+  private showThreadStop(step: WalkStep) {
+    const event = this.threadEvents.find((e) => e.id === step.stop.subject?.id);
     if (!event) return;
-    this.showEvent(event, true);
+    this.showEvent(event, true, step);
     const items: WalkItem[] = this.threadEvents.map((e) => ({
       id: e.id,
       image: eventHeroImage(this.model, e),
@@ -369,7 +427,7 @@ export class AionView {
       sub: eraShort(e.yearDisplay, 13),
       palette: this.reading?.epochs.find((x) => x.id === e.epochId)?.palette,
     }));
-    this.walkStrip('thread').update(items, this.threadIndex);
+    this.walkStrip('thread').update(items, step.i);
   }
 
   /** The walk strip on the rail: one per walk kind, with that walk's labels; its frames rebuild when the walk changes. */
@@ -394,15 +452,17 @@ export class AionView {
     }
     const n = this.threadEvents.length;
     if (!n) return;
-    this.threadIndex = (i + n) % n;
     this.threadTimer = 0;
-    this.showThreadEvent();
+    const step = this.runner.goto((i + n) % n);
+    if (step) this.showThreadStop(step);
   }
 
   /** One step along the open walk, wrapping at either end. */
   private walkStep(kind: 'chapter' | 'thread', delta: number) {
-    if (kind === 'chapter') this.walkBook(delta);
-    else this.walkTo('thread', this.threadIndex + delta);
+    if (kind === 'chapter') { this.walkBook(delta); return; }
+    this.threadTimer = 0;
+    const step = delta > 0 ? this.runner.next() : this.runner.prev();
+    if (step) this.showThreadStop(step);
   }
 
   /** The timeline's Play walks the thread; there is no second Play on the rail. */
@@ -496,11 +556,13 @@ export class AionView {
       dot.element.tabIndex = alpha > 0.2 && projected.facing > 0 ? 0 : -1;
     }
     // the clock's Play advances the thread; Pause on the clock stops it
-    if (this.threadEvents.length && this.time.playing) {
+    if (this.walkKind === 'thread' && this.time.playing) {
       this.threadTimer += dt;
       if (this.threadTimer > 5) {
         this.threadTimer = 0;
-        if (this.threadIndex + 1 < this.threadEvents.length) { this.threadIndex++; this.showThreadEvent(); }
+        const at = this.runner.current();
+        const step = at && !at.last ? this.runner.next() : null;
+        if (step) this.showThreadStop(step);
         else this.time.pause();
       }
     } else this.threadTimer = 0;

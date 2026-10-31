@@ -16,7 +16,7 @@ const report = {};
 await page.goto(URL + '#/aion/jung-turn/epoch/turn-eruption', { waitUntil: 'load' });
 await page.waitForTimeout(2500);
 report.aionTurn = await page.evaluate(() => ({
-  card: document.querySelector('.aion-card')?.textContent?.slice(0, 120) ?? null,
+  card: document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])')?.textContent?.slice(0, 120) ?? null,
   epochs: [...document.querySelectorAll('.aion-epochs button')].map((b) => b.textContent),
   reading: document.querySelector('select[aria-label="Historical reading"]')?.selectedOptions[0]?.textContent ?? null,
 }));
@@ -28,18 +28,18 @@ await page.waitForTimeout(2200);
 await page.evaluate(() => document.querySelector('.aion-sources')?.setAttribute('open', ''));
 await page.waitForTimeout(400);
 report.aionEvent = await page.evaluate(() => ({
-  name: document.querySelector('.aion-card .rv-name')?.textContent,
+  name: document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name')?.textContent,
   // the key passage is an open blockquote with its cite in the footer; the rest sit in 'More from the text'
-  sources: [...document.querySelectorAll('.aion-card blockquote.q .q-foot')].slice(0, 3).map((f) => f.textContent),
-  basis: [...document.querySelectorAll('.aion-card .aion-basis')].length,
+  sources: [...document.querySelectorAll('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) blockquote.q .q-cite')].slice(0, 3).map((f) => f.textContent),
+  basis: [...document.querySelectorAll('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .aion-basis')].length,
 }));
-must('aion event name (.aion-card .rv-name)', report.aionEvent.name);
-must('aion key passage footer (.aion-card blockquote.q .q-foot)', report.aionEvent.sources.length ? 'yes' : null);
-must('aion passages carry no basis chip (.aion-card .aion-basis)', report.aionEvent.basis === 0 ? 'none' : null);
+must('aion event name (the pane .rv-name)', report.aionEvent.name);
+must('aion key passage footer (the pane blockquote.q .q-cite)', report.aionEvent.sources.length ? 'yes' : null);
+must('aion passages carry no basis chip (the pane .aion-basis)', report.aionEvent.basis === 0 ? 'none' : null);
 await page.screenshot({ path: `${shots}/aion-event.png` });
 
 // corpus deep link: open the key passage's cite (a button only where the corpus holds the work)
-const aionCite = '.aion-card blockquote footer button';
+const aionCite = 'section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) blockquote footer button';
 const hasAionCite = (await page.$(aionCite)) !== null;
 must(`aion cite button (${aionCite})`, hasAionCite ? 'yes' : null);
 if (hasAionCite) {
@@ -83,21 +83,21 @@ if ((report.citeButtons ?? []).length) {
 // ── Red Book: walk + plate + genesis ──
 await page.goto(URL + '#/redbook', { waitUntil: 'load' });
 await page.waitForTimeout(2000);
-// the bare landing shows no folio: the walk is entered from the Options row 'The walk' (folio 1)
-await page.locator('.sh-controls details.mode-options > summary').click();
-await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'The walk' }).click();
+// the bare landing shows no folio: the walk is entered from the Contents (folio 1 is its first entry)
+await page.locator('.sh-contents').click();
+await page.locator('.dp-contents-pane li button').first().click();
 await page.waitForTimeout(1500);
 report.redbook = await page.evaluate(() => ({
   heading: document.querySelector('.rb-heading h1')?.textContent,
   subject: document.querySelector('.rb-subject')?.textContent,
   progress: document.querySelector('.rb-progress')?.textContent,
   section: document.querySelector('.rb-section')?.textContent,
-  stopName: document.querySelector('.rb-rail') ? document.querySelector('.redbook .rb-card .rv-name')?.textContent : null,
-  plateLoaded: (() => { const img = document.querySelector('.redbook .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
+  stopName: document.querySelector('.rb-rail') ? document.querySelector('section.deep:not(.passage):not(.you-sheet) .rv-name')?.textContent : null,
+  plateLoaded: (() => { const img = document.querySelector('section.deep:not(.passage):not(.you-sheet) .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
 }));
-must('.redbook .rb-card .rv-name', report.redbook.stopName);
+must('section.deep:not(.passage):not(.you-sheet) .rv-name', report.redbook.stopName);
 must('.rb-progress', report.redbook.progress);
-must('.redbook .rv-hero img', report.redbook.plateLoaded);
+must('section.deep:not(.passage):not(.you-sheet) .rv-hero img', report.redbook.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-flood.png` });
 
 // walk to Elijah–Salome, folio 6 of 37 (The conception of the God: a field quote), one next-click at a time
@@ -110,20 +110,20 @@ await page.waitForTimeout(1600);
 report.redbookWalk = await page.evaluate(() => ({
   progress: document.querySelector('.rb-progress')?.textContent,
   section: document.querySelector('.rb-section')?.textContent,
-  stopName: document.querySelector('.redbook .rb-card .rv-name')?.textContent,
-  folio: document.querySelector('.redbook .q .q-foot')?.textContent,
-  plateLoaded: (() => { const img = document.querySelector('.redbook .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
+  stopName: document.querySelector('section.deep:not(.passage):not(.you-sheet) .rv-name')?.textContent,
+  folio: document.querySelector('section.deep:not(.passage):not(.you-sheet) blockquote .q-cite')?.textContent,
+  plateLoaded: (() => { const img = document.querySelector('section.deep:not(.passage):not(.you-sheet) .rv-hero img'); return img ? img.complete && img.naturalWidth > 0 : null; })(),
 }));
-must('.redbook .rb-card .rv-name (walk)', report.redbookWalk.stopName);
-must('.redbook .q .q-foot (walk)', report.redbookWalk.folio);
-must('.redbook .rv-hero img (walk)', report.redbookWalk.plateLoaded);
+must('section.deep:not(.passage):not(.you-sheet) .rv-name (walk)', report.redbookWalk.stopName);
+must('section.deep:not(.passage):not(.you-sheet) blockquote .q-cite (walk)', report.redbookWalk.folio);
+must('section.deep:not(.passage):not(.you-sheet) .rv-hero img (walk)', report.redbookWalk.plateLoaded);
 await page.screenshot({ path: `${shots}/redbook-elijah.png` });
 
-// genesis view: closing the folio's card returns to the landing, where Options stand
-await page.click('.redbook .rb-card .rv-close');
-await page.waitForTimeout(400);
-await page.locator('.sh-controls details.mode-options > summary').click();
-await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Genesis' }).click();
+// genesis view: closing the folio returns to the landing, where the Contents stand
+await page.click('button[aria-label="Close reading"]');
+await page.waitForTimeout(900);
+await page.locator('.sh-contents').click();
+await page.locator('.dp-contents-pane li button', { hasText: 'Genesis' }).click();
 await page.waitForTimeout(1200);
 report.genesis = await page.evaluate(() => ({
   rows: document.querySelectorAll('.rb-genesis').length,

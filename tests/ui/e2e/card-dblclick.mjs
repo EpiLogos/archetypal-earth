@@ -300,11 +300,11 @@ try {
   {
     const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: `#/aion/${aionReading.id}/event/${aionEvent.id}` });
     track(page);
-    await until(page, (name) => document.querySelector('.aion-card .rv-name')?.textContent === name, aionEvent.name);
+    await until(page, (name) => document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name')?.textContent === name, aionEvent.name);
     await page.waitForTimeout(500);
     const a0 = await state(page);
     check(a0.aion?.selection?.id === aionEvent.id, 'the Aion event card stands for the event', a0.hash);
-    await page.locator('.aion-card .rv-name').dblclick();
+    await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').dblclick();
     await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
     await page.waitForTimeout(500);
     const a1 = await state(page);
@@ -320,7 +320,7 @@ try {
       await page.evaluate((hash) => { location.hash = hash; }, `#/aion/${aionReading.id}/event/${aionBare.id}`);
       await until(page, (id) => window.__earth.ctl.state.aion?.selection?.id === id, aionBare.id);
       await page.waitForTimeout(500);
-      await page.locator('.aion-card .rv-name').dblclick();
+      await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').dblclick();
       await page.waitForTimeout(500);
       const bare = await state(page);
       check(!bare.deep && bare.kind === 'world' && bare.aion?.selection?.id === aionBare.id, 'an event with no occurrence in the field opens nothing', bare.hash);
@@ -330,7 +330,7 @@ try {
     await page.evaluate((hash) => { location.hash = hash; }, `#/aion/${aionReading.id}/epoch/${aionEpoch.id}`);
     await until(page, (id) => window.__earth.ctl.state.aion?.selection?.id === id, aionEpoch.id);
     await page.waitForTimeout(500);
-    await page.locator('.aion-card .rv-name').dblclick();
+    await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').dblclick();
     await page.waitForTimeout(500);
     const ep = await state(page);
     check(!ep.deep && ep.kind === 'world' && ep.aion?.selection?.id === aionEpoch.id, 'an epoch card\'s double-click opens nothing', ep.hash);

@@ -114,7 +114,7 @@ ARRIVALS.push(
     for (let i = 0; i < n; i++) {
       const hit = await page.evaluate(([i, arch]) => {
         document.querySelectorAll('.aion-dot')[i].click();
-        const b = [...document.querySelectorAll('.aion-card button')].find((x) => arch.includes(x.textContent.trim()));
+        const b = [...document.querySelectorAll('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) button')].find((x) => arch.includes(x.textContent.trim()));
         if (!b) return null;
         b.click();
         return b.textContent.trim();

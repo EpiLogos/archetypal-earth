@@ -64,7 +64,7 @@ const browser = await launch('chromium', { headed: false });
   const { ctx, page, logs } = await open(browser, { hash: '#/aion/jung-aion/event/denderah-zodiac', width: 1200, height: 800 });
   try {
     await page.evaluate(FREEZE);
-    await page.waitForSelector('section.aion .aion-card:not([hidden])', { timeout: 30000 });
+    await page.waitForSelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])', { timeout: 30000 });
     await page.waitForFunction(() => {
       const { engine, model } = window.__earth;
       for (let i = 0; i < engine.presences.rel.length; i++) if (model.located[i] && engine.presences.rel[i] >= 1.55) return true;

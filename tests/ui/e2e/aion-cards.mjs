@@ -1,4 +1,4 @@
-// Gate (remediation C1/C3/C4): the Aion card. Every card carries its hero slot (an image, or a tonal plate when there is
+// Gate (remediation C1/C3/C4): the Aion reading (an epoch or an event, in the reading pane since H5). Every card carries its hero slot (an image, or a tonal plate when there is
 // none); the key passage is the first open blockquote, visible without a click, cited in the field's own voice; the
 // remaining passages sit in "More from the text"; and no excuse-narration or raw yearDisplay suffix reaches the reader.
 //   npx vite --port 5183 --strictPort &      EARTH_HEADLESS=1 node tests/ui/e2e/aion-cards.mjs [chromium|webkit]
@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { launch, open } from './lib.mjs';
 
 const kind = process.argv[2] ?? 'chromium';
+/** The reading the pane stands on: the pane's open article. */
+const PANE = 'section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])';
 const SHOTS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../.cache/screens/remediation-2026-10-09/aion');
 mkdirSync(SHOTS, { recursive: true });
 let failed = 0;
@@ -26,7 +28,7 @@ const REMOVED = [
 
 /** Everything a reader sees on the card, and in the Browse event list, as text. */
 const readerText = (page) => page.evaluate(() => {
-  const card = document.querySelector('section.aion .aion-card');
+  const card = document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])');
   const browse = [...document.querySelectorAll('.aion-browse option')].map((o) => o.textContent);
   return { card: card ? card.innerText : '', browse: browse.join('\n') };
 });
@@ -48,18 +50,17 @@ try {
   for (const scene of SCENES) {
     const { ctx, page, logs } = await open(browser, { hash: scene.hash });
     try {
-      await page.waitForSelector('section.aion .aion-card:not([hidden]) .rv-text', { timeout: 30000 });
+      await page.waitForSelector(`${PANE} .rv-text`, { timeout: 30000 });
       await page.waitForTimeout(2600); // the camera flies to an event; let the card settle
-      // scoped to the Aion section: the Red Book view also renders an 'aion-card' aside in the same document
-      const card = page.locator('section.aion .aion-card:not([hidden])');
+      const card = page.locator(PANE);
       const heroes = await card.locator('figure.plate.rv-hero').count();
       const tonal = await card.locator('figure.plate.rv-hero.plate-empty').count();
       check(heroes === 1, `${scene.name}: a hero plate is present on the card`, `${heroes} hero, ${tonal ? 'tonal' : 'image'}`);
       // the hero sits before the text, in the same slot for epochs and events
-      const heroFirst = await page.evaluate(() => {
-        const body = document.querySelector('.aion-card .rv-body');
+      const heroFirst = await page.evaluate((pane) => {
+        const body = document.querySelector(`${pane} .rv-body`);
         return body && body.firstElementChild && body.firstElementChild.matches('figure.plate.rv-hero');
-      });
+      }, PANE);
       check(!!heroFirst, `${scene.name}: the hero is the first thing in the card body`);
 
       const key = card.locator('blockquote.q').first();

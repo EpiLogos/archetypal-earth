@@ -69,11 +69,11 @@ try {
     await park(page, 1500);
     await page.waitForTimeout(400);
     const before = await clock(page);
-    await page.locator('.mode-options > summary').click();
-    await page.locator('.mode-options-body button', { hasText: 'Read the book' }).click();
+    await page.locator('.sh-contents').click();
+    await page.locator('.dp-contents-pane li button', { hasText: /^Foreword/ }).first().click();
     await page.waitForTimeout(2500);
     check(/\/chapter\/foreword$/.test(page.url()), 'the book opens at the Foreword', page.url());
-    for (let i = 0; i < 3; i++) { await page.locator('[aria-label="Next chapter"]').click(); await page.waitForTimeout(600); }
+    for (let i = 0; i < 3; i++) { await page.locator('.pane-foot [aria-label="Next chapter"]').click(); await page.waitForTimeout(600); }
     await page.waitForTimeout(1500);
     const afterChapters = await clock(page);
     check(/\/chapter\/ch-3$/.test(page.url()) && sameClock(before, afterChapters), 'three chapters on, the clock has not moved', `year ${before.year} → ${afterChapters.year}`);
@@ -83,7 +83,7 @@ try {
     await page.waitForTimeout(3500);
     const atThread = await clock(page);
     check(new RegExp(`/thread/${thread.id}$`).test(page.url()) && Math.abs(atThread.year - firstYear) < 1, 'a thread walk puts the clock on its first event', `year ${atThread.year} (event ${firstYear})`);
-    await page.locator('[aria-label="Next historical event"]').click();
+    await page.locator('.pane-foot [aria-label="Next historical event"]').click();
     await page.waitForTimeout(3000);
     const next = await clock(page);
     check(Math.abs(next.year - secondYear) < 1, 'and the next event moves it on', `year ${next.year} (event ${secondYear})`);
