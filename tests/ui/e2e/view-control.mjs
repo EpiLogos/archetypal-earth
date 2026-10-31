@@ -1,7 +1,7 @@
 // H3: the View control (Earth | Graph | Sky) is a readout of the camera, and a click asks for the transition the gesture makes.
 //   - it reads the route and `data-sky-phase`: Earth, then Sky once the route is in the sky, Sky through the descent, Earth when settled
 //   - a click on Sky lifts the camera, on Earth drops it, on Graph takes the graph; the M/S/G keys and a zoom gesture move it the same way
-//   - ⚙ answers while the graph's settings or a lens's Options stand on screen, and hides when nothing does
+//   - ⚙ answers while the graph's settings or a lens's settings (the names a sky is read in) stand on screen, and hides when nothing does
 //   EARTH_HEADED=0 EARTH_URL=http://localhost:5294/ node tests/ui/e2e/view-control.mjs
 import { launch, open } from './lib.mjs';
 
@@ -77,23 +77,29 @@ const until = (page, fn, ms = 14000) => page.waitForFunction(fn, null, { timeout
   await page.keyboard.press('g');
   await settle(page, 1500);
 
-  // a lens's Options answer the ⚙
+  // a lens's settings answer the ⚙
   await page.goto(page.url().replace(/#.*$/, '#/aion')); await page.reload();
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'));
   await settle(page, 3500);
   r = await read(page);
   ok(!r.present, 'a lens with a camera of its own (Aion) carries no View control');
   ok(!r.gear, 'and, with its reading chosen in the Contents, nothing for the ⚙ to answer');
-  // a lens that still carries Options: they answer the ⚙
+  // the Options are gone (H7): a lens with nothing to set has no ⚙ (Texts); a lens with settings (Astrology's names) has them answer it
   await page.goto(page.url().replace(/#.*$/, '#/texts')); await page.reload();
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'));
   await settle(page, 3500);
   r = await read(page);
-  ok(r.gear, 'a lens with Options (Texts) has them answer the ⚙');
+  ok(!r.gear, 'a lens with nothing to set (Texts) shows no ⚙');
+  await page.goto(page.url().replace(/#.*$/, '#/astrology')); await page.reload();
+  await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'));
+  await settle(page, 4500);
+  r = await read(page);
+  ok(r.gear, 'a lens with settings (Astrology) has them answer the ⚙');
   await page.locator('.vc-gear').click();
-  ok(await page.evaluate(() => !!document.querySelector('details.mode-options[open]')), 'the ⚙ opens the lens Options');
+  ok(await page.evaluate(() => !!document.querySelector('.settings-pop:not([hidden])')), 'the ⚙ opens the lens settings');
   await page.keyboard.press('Escape');
-  ok(await page.evaluate(() => !document.querySelector('details.mode-options[open]')), 'and Escape closes them');
+  ok(await page.evaluate(() => !document.querySelector('.settings-pop:not([hidden])')), 'and Escape closes them');
+  ok(await page.evaluate(() => !document.querySelector('details.mode-options')), 'no Options disclosure stands anywhere');
   ok(logs.length === 0, `no console errors (${logs.slice(0, 2).join(' | ')})`);
   await ctx.close();
 }
@@ -116,16 +122,23 @@ const until = (page, fn, ms = 14000) => page.waitForFunction(fn, null, { timeout
   await ctx.close();
 }
 
-// a phone: the control fits beside the lens button and its segments are touch targets
+// a phone: the control is compact (one 44px button that names the view and goes to the next on a press) and fits beside the lens button
 {
   const { ctx, page } = await open(b, { width: 390, height: 844, hash: '#/', mobile: true });
   await settle(page, 2500);
   const m = await page.evaluate(() => {
-    const r = (s) => { const e = document.querySelector(s); const q = e?.getBoundingClientRect(); return q ? { l: q.left, r: q.right, w: q.width, h: q.height } : null; };
-    return { lens: r('.sh-lens'), segs: r('.vc-segs'), corner: r('.sh-corner'), seg: r('.vc-seg'), over: document.documentElement.scrollWidth - innerWidth };
+    const r = (s) => { const e = document.querySelector(s); const q = e?.getBoundingClientRect(); return q && q.width ? { l: q.left, r: q.right, w: q.width, h: q.height } : null; };
+    const c = document.querySelector('.vc-compact');
+    return { lens: r('.sh-lens'), segs: r('.vc-segs'), btn: r('.vc-compact'), corner: r('.sh-corner'), label: c?.getAttribute('aria-label'), name: c?.textContent, over: document.documentElement.scrollWidth - innerWidth };
   });
-  ok(m.segs && m.lens && m.segs.l >= m.lens.r - 1 && m.segs.r <= m.corner.l, `390: Earth | Graph | Sky sit between the lens button and the corner (${JSON.stringify(m.segs)})`);
-  ok(m.seg && m.seg.h >= 43.5 && m.seg.w >= 43.5, `390: a segment is a 44px touch target (${m.seg?.w}×${m.seg?.h})`);
+  ok(!m.segs, '390: the three segments make way for the compact form');
+  ok(m.btn && m.lens && m.btn.l >= m.lens.r - 1 && m.btn.r <= m.corner.l, `390: the compact View control sits between the lens button and the corner (${JSON.stringify(m.btn)})`);
+  ok(m.btn && m.btn.h >= 43.5 && m.btn.w >= 43.5, `390: it is a 44px touch target (${m.btn?.w}×${m.btn?.h})`);
+  ok(m.name === 'Earth' && /Tap for Graph/.test(m.label ?? ''), `390: it names the view and the next one (${m.name} · ${m.label})`);
+  await page.locator('.vc-compact').click();
+  await settle(page, 2500);
+  const g = await page.evaluate(() => ({ view: document.querySelector('.view-control').dataset.view, name: document.querySelector('.vc-compact').textContent, hash: location.hash }));
+  ok(g.view === 'graph' && g.name === 'Graph', `390: a press goes to the next view (${JSON.stringify(g)})`);
   ok(m.over <= 0, '390: no horizontal overflow');
   await ctx.close();
 }
