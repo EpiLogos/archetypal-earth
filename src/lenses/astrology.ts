@@ -50,7 +50,6 @@ interface AstrologyData {
   people: (CuratedPerson & { quote: LensQuote; portrait?: Portrait | null })[];
 }
 
-const BASIS: Record<Tie['basis'], string> = { get jung() { return providerLabels().tieOwnLink; }, inferred: 'the atlas’s inference', site: 'the atlas’s own link' };
 const ASPECT_WORD: Record<string, string> = { conjunction: 'conjunct', opposition: 'opposite', trine: 'trine', square: 'square', sextile: 'sextile' };
 const fmtDeg = (d: number) => `${Math.floor(d)}°`;
 const placeIn = (c: SidecarChart, k: ChartBody) => { const p = c.bodies[k as BodyKey]!; return `${p.sign} ${fmtDeg(p.degree)}${p.retrograde ? ' (retrograde)' : ''}`; };
@@ -354,7 +353,7 @@ export function mount(ctx: LensContext): LensInstance {
     const jungTies = r.ties.filter((t) => t.basis === 'jung');
     const otherTies = r.ties.filter((t) => t.basis !== 'jung');
     const tieBlock = (t: Tie) => el('div', { class: 'as-tie' }, [
-      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.descend(t.target) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), el('span', { class: 'as-basis', text: BASIS[t.basis] })]), icon('next', 14)]),
+      el('button', { type: 'button', class: 'th-link', onclick: () => ctx.descend(t.target) }, [el('span', { class: 'as-tie-name', text: subjectName(ctx.model, t.target) }), icon('next', 14)]),
       ...t.quotes.slice(0, 1).map((q) => quoteBlock(q, ctx.passages, { compact: true })),
       t.basis !== 'jung' && t.note ? el('p', { class: 'lp-note', text: t.note }) : null,
     ]);
@@ -372,7 +371,9 @@ export function mount(ctx: LensContext): LensInstance {
       ...r.quotes.map((q) => quoteBlock(q, ctx.passages)),
       jungTies.length ? el('h3', { class: 'as-h3', text: `What ${r.name} touches in the field` }) : null,
       ...jungTies.map(once).map(tieBlock),
-      otherTies.length ? el('details', { class: 'as-more' }, [el('summary', { text: jungTies.length ? providerLabels().astrologyOtherTies : providerLabels().astrologyOtherTiesOnly }), ...otherTies.map(once).map(tieBlock)]) : null,
+      // the ties beyond the source's own: under a plain disclosure when the source's stand above them, as the list itself when it gives none
+      otherTies.length && jungTies.length ? el('details', { class: 'as-more' }, [el('summary', { text: 'More links' }), ...otherTies.map(once).map(tieBlock)]) : null,
+      otherTies.length && !jungTies.length ? el('div', { class: 'as-ties' }, otherTies.map(once).map(tieBlock)) : null,
       el('h3', { class: 'as-h3', text: `${r.name} in ${pos.sign}, as Kathleen Burt reads it` }),
       signQuote ? quoteBlock(signQuote, ctx.passages, { compact: true }) : null,
       ...r.burt.slice(0, 2).map((q) => quoteBlock(q, ctx.passages, { compact: true })),

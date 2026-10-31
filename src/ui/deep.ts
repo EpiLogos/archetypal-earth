@@ -338,15 +338,14 @@ export class DeepSheet {
         });
         a.append(row);
       }
-      // an archetype's ties to other archetypes (the numbers' tie to the Self): named, with whose word the tie is
+      // an archetype's ties to other archetypes (the numbers' tie to the Self): named
       const tied = (arch.archetypes ?? []).map((t) => ({ t, arch: m.archById.get(t.id) })).filter((x) => !!x.arch);
       if (tied.length) {
         a.append(el('h3', { class: 'dp-sub', text: 'Tied to' }));
         const row = el('p', { class: 'dp-flow' });
-        tied.forEach(({ t, arch: other }, i) => {
+        tied.forEach(({ arch: other }, i) => {
           if (i) row.append(' · ');
           row.append(el('button', { class: 'link-quiet', type: 'button', text: other!.name, onclick: () => this.h.onSubject({ type: 'archetype', id: other!.id }) }));
-          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }));
         });
         a.append(row);
       }
@@ -376,8 +375,6 @@ export class DeepSheet {
           if (!arch) return;
           if (i) row.append(' · ');
           row.append(el('button', { class: 'link-quiet', type: 'button', text: arch.name, onclick: () => this.h.onSubject({ type: 'archetype', id: arch.id }) }));
-          // Jung's own tie vs. one this site reads in — never present the latter as his word
-          row.append(el('span', { class: 'dp-basis', text: t.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }));
         });
         a.append(row);
       }
@@ -624,10 +621,8 @@ export class DeepSheet {
       box.append(el('p', { class: 'dp-rel-sys', text: SYSTEM_LABEL[g.system] ?? g.system }));
       const ul = el('ul', {});
       for (const r of g.rows) {
-        // Jung's own tie vs. one this site reads in — the same wording as the archetypal ground above
         const text: (Node | null)[] = [
           el('button', { class: 'link-quiet', type: 'button', text: r.name, onclick: () => this.h.onSubject(r.other) }),
-          el('span', { class: 'dp-basis', text: r.basis === 'jung' ? providerLabels().tieOwnNote : ' (read here)' }),
           r.voice ? el('span', { class: 'dp-basis', text: ` · ${r.voice}` }) : null,
           el('p', { class: 'lp-note', text: r.note }),
         ];

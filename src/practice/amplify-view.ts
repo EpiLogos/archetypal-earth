@@ -22,7 +22,6 @@ export interface AmplifyActions {
 }
 
 const yearOf = (y: number) => (y < 0 ? `${Math.abs(Math.round(y))} BCE` : `${Math.round(y)}`);
-const BASIS = { get jung() { return providerLabels().amplifyTieOwn; }, inferred: 'inferred by the vault', site: 'linked by this site' };
 const SHOW = 12;
 
 /** A dream's own words with their cite, in the one Quote component; none when the occurrence holds no quotation. */
@@ -72,7 +71,7 @@ export function amplificationView(m: Model, a: Amplification, act: AmplifyAction
     opts.dreamFirst ? dreamBlock : null,
     a.archetypes.length ? el('section', { class: 'am-sec' }, [
       el('h3', { class: 'as-h3', text: 'What it expresses' }),
-      ...a.archetypes.map((x) => el('button', { type: 'button', class: 'th-link', onclick: () => act.focusArchetype(x.archetype.id) }, [el('span', {}, [el('span', { class: 'as-tie-name', text: x.archetype.name }), el('span', { class: 'as-basis', text: BASIS[x.basis] })]), icon('next', 14)])),
+      ...a.archetypes.map((x) => el('button', { type: 'button', class: 'th-link', onclick: () => act.focusArchetype(x.archetype.id) }, [el('span', { class: 'as-tie-name', text: x.archetype.name }), icon('next', 14)])),
     ]) : null,
     el('section', { class: 'am-sec' }, [el('h3', { class: 'as-h3', text: `Through time (${a.instances.length})` }), list, more]),
     opts.dreamFirst ? null : dreamBlock,

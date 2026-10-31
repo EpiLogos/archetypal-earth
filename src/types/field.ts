@@ -252,24 +252,16 @@ export interface ProviderLabels {
   voiceHeading?: string;
   /** the strongest basis's name: the tie filter and the joins' own system (graph/tools.ts, ui/related.ts) */
   basisOwn?: string;
-  /** after a tie the author makes (ui/deep.ts) */
-  tieOwnNote?: string;
   /** the heading over the works an archetype is cited from (ui/deep.ts) */
   citesHeading?: string;
   /** the heading over an occurrence's cites (ui/deep.ts) */
   citesMeet?: string;
   /** the voice a cite reads in when it names none of its own (ui/format.ts) */
   citePrefix?: string;
-  /** a tie the author makes, as the sky and the Astrology walk name it (lenses/astrology.ts, sky/orbits.ts) */
-  tieOwnLink?: string;
   /** the Astrology lens's opening line (lenses/astrology.ts) */
   astrologyIntro?: string;
   /** the line under the Sun, where every walk ends (lenses/astrology.ts) */
   astrologySun?: string;
-  /** the atlas's own links, beside the author's (lenses/astrology.ts) */
-  astrologyOtherTies?: string;
-  /** the atlas's own links, where the author gives none (lenses/astrology.ts) */
-  astrologyOtherTiesOnly?: string;
   /** the Charts option's description (lenses/astrology.ts) */
   astrologyCharts?: string;
   /** the link from four to the quaternity (lenses/card-reading.ts) */
@@ -284,8 +276,6 @@ export interface ProviderLabels {
   symbolsIntro?: string;
   /** what the field holds, when a symbol is not in it (lenses/symbols.ts) */
   symbolsNone?: string;
-  /** an archetype the author ties to an image (practice/amplify-view.ts) */
-  amplifyTieOwn?: string;
   /** the note over an image's dreams and visions (practice/amplify-view.ts) */
   amplifyDreams?: string;
   /** an image with no definition (practice/amplify-view.ts) */

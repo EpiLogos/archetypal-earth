@@ -38,15 +38,11 @@ const FORMER: Required<ProviderLabels> = {
   theoryRoute: "Jung's theory", // dynamics/view.ts and lenses/theory.ts Options
   voiceHeading: 'Jung', // lenses/theory.ts and ui/deep.ts, the heading over the author's own lines
   basisOwn: 'Jung', // graph/tools.ts tie filter and ui/related.ts SYSTEM_LABEL
-  tieOwnNote: ' (Jung’s tie)', // ui/deep.ts
   citesHeading: 'Jung’s texts', // ui/deep.ts
   citesMeet: 'Where Jung meets it', // ui/deep.ts
   citePrefix: 'Jung', // ui/format.ts jungLine
-  tieOwnLink: 'Jung’s own link', // lenses/astrology.ts BASIS and sky/orbits.ts
   astrologyIntro: 'Enter a birthday and you get a walk through that sky, planet by planet, with what Jung and Kathleen Burt wrote about each planet and sign. Jung’s own chart is here as the first one, so you can read yours beside his.',
   astrologySun: 'Every walk here ends at the Sun, and Jung reads the sun as a symbol of the self. So whoever’s chart it is, the line runs to the same centre.',
-  astrologyOtherTies: 'Links the atlas draws, not Jung',
-  astrologyOtherTiesOnly: 'Links the atlas draws (Jung gives none)',
   astrologyCharts: 'Jung’s chart and your birth form',
   quaternityLink: 'Jung’s four: the elements, the functions', // lenses/card-reading.ts
   coincidencesFraming: 'Jung on what counts, and on runs of chance', // lenses/coincidences.ts
@@ -54,7 +50,6 @@ const FORMER: Required<ProviderLabels> = {
   dreamsMethod: 'How Jung read a dream',
   symbolsIntro: 'Name a symbol and see how it runs through the field: what Jung said it is, every dated instance of it, the dreams and visions it turns up in, and what it expresses.',
   symbolsNone: 'It holds the images Jung wrote about, under the names his texts use.',
-  amplifyTieOwn: 'Jung ties it', // practice/amplify-view.ts BASIS
   amplifyDreams: 'The dreams and visions in the corpus where this image appears: the parallels Jung lined up beside a dream image.',
   amplifyNoDefinition: 'Jung gives no definition of this image in the vault’s records.',
   subjectOwn: 'Jung’s own', // practice/amplify-view.ts and lenses/depth.ts, a record of the author's own

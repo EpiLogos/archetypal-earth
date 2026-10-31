@@ -121,7 +121,7 @@ export class Reveal {
     row.append(el('span', { class: 'rv-sky-mark', 'aria-hidden': 'true', text: '◦' }), 'In the sky: ');
     o.sky.forEach((l, i) => {
       if (i) row.append(' · ');
-      row.append(el('button', { class: 'link-quiet rv-sky-body', type: 'button', title: l.basis === 'jung' ? 'tie basis: jung' : `placed by the field’s joins (basis: ${l.basis})`, onclick: () => this.h.onBody?.(bodyOfLocus(l)) }, [locusPhrase(l)]));
+      row.append(el('button', { class: 'link-quiet rv-sky-body', type: 'button', onclick: () => this.h.onBody?.(bodyOfLocus(l)) }, [locusPhrase(l)]));
     });
     return row;
   }
@@ -138,7 +138,7 @@ export class Reveal {
       row.append(el('span', { class: 'rv-sky-mark', 'aria-hidden': 'true', text: '◦' }), 'In the sky: ');
       ties.forEach((t, i) => {
         if (i) row.append(' · ');
-        row.append(el('button', { class: 'link-quiet rv-sky-body', type: 'button', title: `${t.name} — tie basis: ${t.basis}`, onclick: () => this.h.onBody?.(t.body) }, [el('span', { class: 'rv-sky-glyph', 'aria-hidden': 'true', text: glyphOf(t.body) }), ` ${t.name}`]));
+        row.append(el('button', { class: 'link-quiet rv-sky-body', type: 'button', title: t.name, onclick: () => this.h.onBody?.(t.body) }, [el('span', { class: 'rv-sky-glyph', 'aria-hidden': 'true', text: glyphOf(t.body) }), ` ${t.name}`]));
       });
     };
     const row = el('p', { class: 'rv-sky' });
