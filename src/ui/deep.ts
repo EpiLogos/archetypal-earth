@@ -88,7 +88,8 @@ export interface ContentsItem {
   level?: number;
   /** the entry the lens stands on now */
   current?: boolean;
-  onPick(): void;
+  /** absent for an entry with nothing to open (a chapter none of whose pages is cited): the row is shown, not pressed */
+  onPick?(): void;
 }
 export interface ContentsGroup {
   title?: string;
@@ -237,7 +238,9 @@ export class DeepSheet {
       const ol = el('ol', { class: 'dp-contents' });
       for (const it of g.items) {
         ol.append(el('li', { style: `--lvl:${it.level ?? 0}` }, [
-          el('button', { type: 'button', class: 'link-quiet', text: it.label, 'aria-current': it.current ? 'true' : undefined, onclick: () => it.onPick() }),
+          it.onPick
+            ? el('button', { type: 'button', class: 'link-quiet', text: it.label, 'aria-current': it.current ? 'true' : undefined, onclick: () => it.onPick?.() })
+            : el('span', { class: 'dp-ct-still', text: it.label }),
           it.note ? el('span', { class: 'dp-cite-year', text: ` ${it.note}` }) : null,
           it.sub ? el('span', { class: 'dp-ct-sub', text: it.sub }) : null,
         ]));
@@ -497,7 +500,6 @@ export class DeepSheet {
         a.append(more);
       }
     }
-    this.appendFooter();
   }
 
   /** The plates the Work's cited instances carry, once each: a strip, each opening the instance it is from. */
@@ -559,7 +561,6 @@ export class DeepSheet {
     }
     // the field's occurrences that are about them (their own subject), where there are any
     if (p.subjectKey) this.appendOccurrenceList(subjectMembers(m, { type: 'person', id }));
-    this.appendFooter();
   }
 
   /**

@@ -235,6 +235,7 @@ export class Controller {
     });
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
+      readingOpen: () => !!this.state.deep && this.state.view.kind !== 'world',
       onLens: (id) => { this.you.hide(); this.navigate(inLens(id, [])); },
       verbs: () => this.contextVerbs(YOU_SUBJECT).filter((v) => v.offered && v.id !== 'reading').map((v) => ({ text: v.text, run: () => { this.you.hide(); this.runVerb(YOU_SUBJECT, v); } })),
       onSubject: (s) => { this.you.hide(); if (s.type === 'occurrence') this.openOccurrenceId(s.id); else this.openSubject(s as Subject, withMode(this.state, false)); },
@@ -957,7 +958,9 @@ export class Controller {
       this.lensTime = this.time.snapshot();
       this.lensRange = { fromU: this.time.fromU, toU: this.time.toU };
     }
-    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    // stepping within the lens keeps the pane where it stands (a stop replaces itself in place, widened or not)
+    if (!prev.dynamics) this.deep.hide();
+    this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
     document.body.classList.remove('deep-open', 'thread-inspecting');
     this.syncShift();
     // a mode that returns early must still let the sky go (the sky's own flight, if any, then wins)
@@ -1196,7 +1199,9 @@ export class Controller {
     if (this.tour) this.endThread();
     if (prev.history) this.leaveAion();
     if (prev.redbook) this.leaveRedbook(next);
-    this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+    // stepping within the lens keeps the pane where it stands (a stop replaces itself in place, widened or not)
+    if (!prev.lens || prev.lens.id !== id) this.deep.hide();
+    this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
     document.body.classList.remove('deep-open', 'thread-inspecting');
     this.syncSky(prev, next, first, false);
     // R1 (C7): the Field's time range and selection marker do not carry into Astrology
@@ -1340,8 +1345,8 @@ export class Controller {
     // every entry is a request to read: a lens that holds its reading until it is asked for (a panel lens) shows it now, even
     // when the entry carried the visitor into another lens of the same mode (Theory ↔ Dynamics)
     // (a pick that leads to no reading, a chart's sky, leaves the Contents no reason to stay over it)
-    const groups = spec.groups().map((g) => ({ ...g, items: g.items.map((it) => ({ ...it, onPick: () => {
-      it.onPick();
+    const groups = spec.groups().map((g) => ({ ...g, items: g.items.map((it) => (!it.onPick ? it : { ...it, onPick: () => {
+      it.onPick?.();
       if (this.activeLens) this.lensPane.reveal();
       if (this.deep.isContentsOpen && !this.deep.isLensReading) this.deep.hideContents();
     } })) }));

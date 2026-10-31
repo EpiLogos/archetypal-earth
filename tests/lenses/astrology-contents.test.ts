@@ -35,9 +35,9 @@ describe('the Astrology Contents', () => {
   it('a pick goes to the route: a chart to its sky, a planet to its reading in the walked chart', () => {
     const log: string[][] = [];
     const g = astrologyContentsGroups([you, jung], jung, planets, [], (p) => { log.push(p); });
-    g[0].items[0].onPick();
-    g[0].items[2].onPick();
-    g[1].items[1].onPick();
+    g[0].items[0].onPick!();
+    g[0].items[2].onPick!();
+    g[1].items[1].onPick!();
     expect(log).toEqual([[], ['jung'], ['jung', 'sun']]);
   });
 });

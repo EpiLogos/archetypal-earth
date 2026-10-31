@@ -9,6 +9,7 @@
   .link-quiet:hover { border-bottom-color: transparent; text-decoration-color: rgb(var(--core-rgb) / 0.8); }
   .fl-ties, .fl-links, .fl-up { row-gap: 4px; }
   summary { display: inline-flex; align-items: center; min-height: 44px; }
+  .you-forget { width: 44px; height: 44px; margin: -8px -4px; }
 
   .t-play { width: 44px; height: 44px; margin: -8px; }
   .t-readout { display: inline-flex; align-items: center; justify-content: flex-end; min-height: 44px; margin-block: -15px; padding-inline: 4px; }

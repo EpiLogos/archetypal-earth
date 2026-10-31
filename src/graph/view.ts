@@ -702,6 +702,9 @@ export class GraphView {
   private compose() {
     const base = this.gBase.nodes.length;
     const src = this.sky.on ? this.sky.source : null;
+    // a body or the visitor that stands before and after keeps its place: an engagement re-ties You, it does not snap it back
+    const was = new Map(this.nodes.slice(base).map((v) => [v.g.key, v] as const));
+    const hovered = this.hover;
     this.nodes.length = base; // any earlier bodies and visitor go; the field's nodes stay exactly as they are
     let g = src ? withSkyAnchors(this.gBase, src) : this.gBase;
     if (this.personal) {
@@ -711,7 +714,10 @@ export class GraphView {
     this.g = g;
     for (let i = base; i < this.g.nodes.length; i++) {
       const v = this.makeNode(this.g.nodes[i]);
-      if (this.g.nodes[i].kind === 'body') {
+      const old = was.get(v.g.key);
+      if (old) {
+        Object.assign(v, { x: old.x, y: old.y, vx: old.vx, vy: old.vy, fx: old.fx, fy: old.fy, pinned: old.pinned, vis: old.vis, visT: old.visT });
+      } else if (this.g.nodes[i].kind === 'body') {
         const p = skyRingPosition((src?.lon[this.g.nodes[i].ref as keyof SkyAnchorSource['lon']]) ?? 0);
         v.x = p.x;
         v.y = p.y;
@@ -723,7 +729,7 @@ export class GraphView {
       this.nodes.push(v);
     }
     this.live = new Float32Array(this.g.nodes.length).fill(1);
-    this.hover = -1;
+    this.hover = hovered < base ? hovered : -1;
     this.pushTools();
     this.timeDirty = true;
     this.qtStale = true;

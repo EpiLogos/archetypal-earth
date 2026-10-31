@@ -55,7 +55,7 @@ describe('the Theory Contents', () => {
     const groups = theoryContentsGroups(a);
     expect(groups[0].title).toBe('Families it passes through');
     expect(groups[0].items.map((i) => i.label)).toEqual(['Serpent', 'Tree']);
-    groups[0].items[1].onPick();
+    groups[0].items[1].onPick!();
     expect(family).toHaveBeenCalledWith('tree');
     expect(theoryContentsGroups({ ...a, families: [] })[0].title).toBe('The theory');
   });
@@ -72,9 +72,9 @@ describe('the Theory Contents', () => {
   it('an entry goes where it names; without the route the list is the theory route and the theoretics', () => {
     const a = input({ kind: 'none' });
     const groups = theoryContentsGroups(a);
-    groups[1].items[1].onPick();
+    groups[1].items[1].onPick!();
     expect(a.go.theoretic).toHaveBeenCalledWith(field.theoretics[1].id);
-    groups[3].items[0].onPick();
+    groups[3].items[0].onPick!();
     expect(a.go.stop).toHaveBeenCalledWith(route.movements[0].stops[0].id);
     expect(theoryContentsGroups(input({ kind: 'none' }, false)).map((g) => g.title)).toEqual(['The theory', 'The fourteen theoretics']);
   });

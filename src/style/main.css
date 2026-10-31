@@ -530,6 +530,7 @@ body.deep-open .time, body.pane-contents .time, body.pane-reading .time { width:
 .dp-contents { margin: 0; padding: 0; list-style: none; }
 .dp-contents li { padding: 4px 0 4px calc(var(--lvl, 0) * 16px); font-family: var(--serif); font-size: 1.04rem; line-height: 1.45; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; column-gap: 12px; }
 .dp-contents li > .link-quiet { justify-self: start; }
+.dp-contents li > .dp-ct-still { color: var(--ink-3, var(--ink-2)); }
 .dp-contents li > .dp-cite-year { grid-column: 2; grid-row: 1; font-variant-numeric: tabular-nums; }
 /* the one line under a label: from the entry's own data, a single line that gives way at its end */
 .dp-contents li > .dp-ct-sub { grid-column: 1 / -1; grid-row: 2; font: 400 12px/1.4 var(--sans); color: var(--ink-3, var(--ink-2)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -43,8 +43,8 @@ describe('the Dreams Contents', () => {
     expect(marked(['a', 'serpent'])).toEqual(['The orchard']);
     const log: string[][] = [];
     const g = dreamsContentsGroups(list, [], (p) => { log.push(p); });
-    g[0].items[1].onPick();
-    g[1].items[0].onPick();
+    g[0].items[1].onPick!();
+    g[1].items[0].onPick!();
     expect(log).toEqual([['new'], ['c']]);
   });
 });

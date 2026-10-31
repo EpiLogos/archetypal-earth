@@ -44,9 +44,9 @@ describe('the Symbols Contents', () => {
   it("a pick goes to the entry's own route", () => {
     const log: string[][] = [];
     const g = symbolsContentsGroups({ top, entries: symbols.entries, held }, [], (p) => { log.push(p); });
-    g[0].items[0].onPick();
-    g[1].items[0].onPick();
-    g[2].items[0].onPick();
+    g[0].items[0].onPick!();
+    g[1].items[0].onPick!();
+    g[2].items[0].onPick!();
     expect(log[0]).toEqual([]);
     expect(log[1]).toEqual(['serpent']);
     expect(log[2]).toEqual([symbols.entries.find((e) => held.has(e.familyId))!.familyId]);

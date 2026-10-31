@@ -15,6 +15,8 @@ export interface YouHandlers {
   onSubject(subject: { type: string; id: string }): void;
   /** the Context verbs You answers, as the label shows them for any subject (shell/context.ts): the offered ones other than the Reading */
   verbs?(): { text: string; run(): void }[];
+  /** whether a reading stands under the page: closing You then leaves its room (`deep-open`) as it was */
+  readingOpen?(): boolean;
 }
 
 const SHOWN = 40;
@@ -67,7 +69,7 @@ export class YouSheet {
     this.off?.();
     this.off = null;
     this.root.classList.remove('on');
-    document.body.classList.remove('deep-open');
+    if (!this.h.readingOpen?.()) document.body.classList.remove('deep-open');
     window.setTimeout(() => { if (!this.open) this.root.hidden = true; }, 420);
   }
 

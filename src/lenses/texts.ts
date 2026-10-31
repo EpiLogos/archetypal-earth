@@ -5,7 +5,6 @@
 // Everything the lens shows is derived by src/data/texts.ts and the walk runner; nothing is authored here.
 // The reading is in the pane (a list of the works, or a cite with its stepper); the Contents are the chapters of the work that is
 // open and the way back to the list. Routes: #/texts (the list), #/texts/<work>, #/texts/<work>/<stop>.
-import { subjectName } from '../data/model';
 import { workLens, worksByVoice, type TextChapter, type WorkLens } from '../data/texts';
 import type { PassageRef } from '../data/corpus';
 import { WalkRunner, type AppSnapshot, type WalkStep } from '../walk/runner';
@@ -63,7 +62,7 @@ export function mount(ctx: LensContext): LensInstance {
         title: wl.title,
         items: wl.contents.map((c) => ({
           label: c.title, level: Math.max(0, c.level - 1), note: c.to > c.from ? String(c.to - c.from) : undefined, current: c === here,
-          onPick: () => ctx.setPath([wl.id, String(Math.min(c.from, last))], { replace: true }),
+          onPick: c.to > c.from ? () => ctx.setPath([wl.id, String(Math.min(c.from, last))], { replace: true }) : undefined,
         })),
       });
     }
@@ -125,13 +124,16 @@ export function mount(ctx: LensContext): LensInstance {
     else paint(null);
   };
 
-  const work = (key: string, at: number) => {
+  /** `reveal`: the reading comes up now (a work entered, a cite stepped to); a step back up to the work leaves the pane as it stands. */
+  const work = (key: string, at: number, reveal: boolean) => {
     const wl = workLens(m, key);
     if (!wl) { picker(); return; }
     const w = m.workById.get(wl.id)!;
     const myTok = ++tok;
+    const entered = !standing || standing.wl.id !== wl.id;
     ctx.setContext(wl.title);
-    ctx.engage('open', { type: 'work', id: wl.id });
+    // opening the work is one line of the visitor's trail; reading on through it is not another
+    if (entered) ctx.engage('open', { type: 'work', id: wl.id });
     tuneGlobe(ctx, [...wl.scope].filter((i) => m.located[i]), undefined, wl.title);
 
     const stepHost = el('div', { class: 'tx-step' });
@@ -155,11 +157,9 @@ export function mount(ctx: LensContext): LensInstance {
       if (s.effects.flyTo) ctx.engine.rig.flyTo(s.effects.flyTo.lat, s.effects.flyTo.lon, 2.8, { duration: 1.8 });
       // a walk read to its last page is noted once, for the visitor's own node
       if (s.last && finished !== walk.id) { finished = walk.id; ctx.engage('walk', { type: 'walk', id: walk.id }); }
-    } else {
-      stepHost.append(el('p', { class: 'lp-note', text: `${subjectName(m, { type: 'work', id: wl.id })} has no cite on a page of its own volume to walk through.` }));
     }
     if (!standing || standing.wl !== wl) standing = { wl, i: at };
-    show(`${wl.id}/${standing.i}`, nodes, foot);
+    show(`${wl.id}/${standing.i}`, nodes, foot, reveal || entered);
   };
 
   return {
@@ -168,7 +168,7 @@ export function mount(ctx: LensContext): LensInstance {
       ctx.pane.contents('Texts', contents);
       if (!key) { picker(); return; }
       const n = Number(at);
-      work(key, Number.isInteger(n) && n >= 0 ? n : 0);
+      work(key, Number.isInteger(n) && n >= 0 ? n : 0, at !== undefined);
     },
     leave() {
       standing = null;

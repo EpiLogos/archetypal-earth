@@ -59,6 +59,17 @@ describe('the Book of Symbols reading (today)', () => {
     expect(s.find('p.symbol-links')[0].find('button.link-quiet').length).toBe(entry.resonances.filter((id) => model.famById.has(id)).length);
   });
 
+  it('each of the entry\'s words is a quotation of the Quote component: verbatim, with its printed page in the foot', () => {
+    const s = read(entry.familyId)!;
+    const qs = s.find('blockquote.q');
+    expect(qs.length).toBe(entry.quotes.length);
+    qs.forEach((q, i) => {
+      const t = q.first('p.q-text')!.textContent;
+      expect(t.replace(/^…/, '')).toBe(entry.quotes[i].text);
+      expect(q.textContent).toContain(`p. ${entry.quotes[i].page}`);
+    });
+  });
+
   it('draws nothing for a family the book does not hold', () => {
     expect(read('not-a-family')).toBeNull();
   });
