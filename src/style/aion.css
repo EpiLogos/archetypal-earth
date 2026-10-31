@@ -3,7 +3,7 @@
 .aion select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; }
 .aion option { background: #0a1020; color: #e5eafa; }
 
-/* the popover: the shell menu's surface, radius, border and shadow; anchored under the Options icon, left-aligned with the title */
+/* the popover's surface, head and sheet are the panel family's (shell.css: .pn); what stays here is what a lens puts inside */
 .settings-pop {
   position: absolute; top: calc(100% + 8px); left: 0; z-index: 30;
   width: min(320px, calc(100vw - 2 * var(--shell-x, 22px))); max-height: min(70vh, 520px); overflow-y: auto; overscroll-behavior: contain;
@@ -16,7 +16,6 @@
 }
 .settings-pop::-webkit-scrollbar { width: 6px; }
 
-.mode-opt-grab { display: none; }
 /* the View's settings: the same popover, fixed under the View control at the right, a sheet on a phone */
 .settings-pop { position: fixed; top: 58px; left: auto; right: 22px; width: min(320px, calc(100vw - 44px)); z-index: 44; }
 .settings-pop[hidden] { display: none; }
@@ -61,7 +60,6 @@
     z-index: 45; background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);
     animation: sm-up .32s var(--ease);
   }
-  .mode-opt-grab { display: block; width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / .3); margin: 4px auto 8px; }
   .mode-opt-row { min-height: 48px; }
 }
 .aion-epochs { position: absolute; bottom: calc(var(--dock-h) + 23px); left: 50%; transform: translateX(-50%); z-index: 12; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 32px; max-width: min(920px, 94vw); pointer-events: auto; }

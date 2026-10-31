@@ -18,6 +18,8 @@ const RETIRED_FILES = ['graph/switch.ts', 'shell/panel.ts', 'shell/panel-state.t
 const RETIRED_NAMES = [
   'mode-switch', 'lens-panel', 'mode-options', 'mode-opt-btn', 'sh-scope', 'Show the whole field',
   'setLensOptions', 'modeOptions', 'sheetAction', 'class: \'lp-body\'',
+  // the filter's button floated over the globe in the dock row and opened a toast-style popover; the panels have one head and one handle
+  'dock-add', 'filter-pop', 'fp-head', 'sm-grab', 'mode-opt-grab',
 ];
 
 describe('the retired surfaces', () => {

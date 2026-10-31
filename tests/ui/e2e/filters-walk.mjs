@@ -9,10 +9,12 @@ const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`);
 
 const b = await launch('chromium');
 
-/** The filter lives in the slice dock's popover; open it from the dock's button unless it already stands. */
+/** The filter is a panel the shell's Filter button opens; open it unless it already stands. */
 async function openFilter(page) {
-  if (!(await page.$('.filter-pop:not([hidden])'))) await page.click('.dock-add');
-  await page.waitForSelector('.filter-pop:not([hidden])');
+  if (!(await page.$('.filter-panel:not([hidden])'))) await page.click('.sh-filter');
+  await page.waitForSelector('.filter-panel:not([hidden])');
+  // a long group stands folded to its first pills: open them all out, as a visitor looking for one would
+  for (let more = page.locator('.filter-panel .sf-more[aria-expanded="false"]'); await more.count(); more = page.locator('.filter-panel .sf-more[aria-expanded="false"]')) await more.first().click();
 }
 
 /** The field's totals, from a throwaway page: the model's own maps. */
@@ -127,10 +129,10 @@ async function countOf(browser, kind, id) {
   await page.screenshot({ path: '.cache/screens/filters/02-field-theory.png' });
   // clearing returns the whole field (the menu stays open across a hash-only navigation)
   await openFilter(page);
-  await page.getByRole('dialog', { name: 'Filter the field' }).getByRole('button', { name: 'Clear the filter', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Filter the field' }).getByRole('button', { name: 'Clear', exact: true }).click();
   await page.waitForTimeout(700);
   const cleared = await page.evaluate(() => ({ text: document.querySelector('.sf-count')?.textContent ?? '', hash: location.hash, mask: !!window.__earth.ctl.filterMask }));
-  ok(/whole field/.test(cleared.text) && !cleared.hash.includes('t=') && !cleared.hash.includes('a=') && !cleared.mask, `clearing returns the whole field (${JSON.stringify(cleared)})`);
+  ok(/^[\d,]+ instances$/.test(cleared.text) && !cleared.hash.includes('t=') && !cleared.hash.includes('a=') && !cleared.mask, `clearing returns the whole field (${JSON.stringify(cleared)})`);
   ok(total > selfCount && total > psychoidCount && selfCount > 0 && psychoidCount > 0, `the counts are real slices (all ${total}, self ${selfCount}, psychoid ${psychoidCount})`);
   ok(logs.length === 0, `no console errors in the field filter (got ${logs.slice(0, 3).join(' | ')})`);
   await ctx.close();

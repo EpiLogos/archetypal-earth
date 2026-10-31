@@ -4,7 +4,7 @@ import { el, clear, isNarrow } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
 import { BUILT, LENSES, lensDef, type LensDef, type LensId } from './lens';
 import type { FieldFilter } from './filter';
-import { SliceDock, type DockHooks, type FilterScope } from './dock';
+import { SliceDock, panelGrab, panelHead, swipeDownToClose, type DockHooks, type FilterScope } from './dock';
 import type { ScopeState } from './scope-chip';
 
 export type { FilterScope } from './dock';
@@ -31,6 +31,8 @@ export class Shell {
   private contentsBtn: HTMLButtonElement;
   private contentsAct: (() => void) | null = null;
   private menu: HTMLElement;
+  private menuBody: HTMLElement;
+  private head: HTMLElement;
   private menuScrim: HTMLElement;
   private lens: LensId = 'field';
   /** the slice dock: the scope and filter chips over the time strip (src/shell/dock.ts) */
@@ -52,7 +54,8 @@ export class Shell {
     this.controls.append(this.contentsBtn);
     this.controls.hidden = true;
     // lens → title → Options (icon); Options must not sit above the title
-    this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.controls]);
+    this.head = el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]);
+    this.root = el('header', { class: 'shell' }, [this.head, this.title, this.controls]);
 
     const github = el('a', { class: 'sh-corner-btn icon-btn', href: REPO_URL, target: '_blank', rel: 'noopener', 'aria-label': 'The project on GitHub', title: 'GitHub' }, [icon('github', 17)]);
     const search = document.getElementById('search-btn');
@@ -66,8 +69,14 @@ export class Shell {
     corner.append(github);
 
     this.menuScrim = el('div', { class: 'sm-scrim', hidden: true, onclick: () => this.closeMenu() });
-    this.menu = el('div', { class: 'shell-menu', id: 'shell-menu', role: 'dialog', 'aria-label': 'Lenses and filters', hidden: true });
+    this.menuBody = el('div', { class: 'pn-body' });
+    const menuGrab = panelGrab();
+    const menuHead = panelHead('Lenses', () => this.closeMenu());
+    this.menu = el('div', { class: 'pn shell-menu', id: 'shell-menu', role: 'dialog', 'aria-label': 'Lenses', hidden: true }, [menuGrab, menuHead, this.menuBody]);
+    swipeDownToClose(this.menu, [menuGrab, menuHead], () => this.closeMenu());
     this.dock = new SliceDock(parent, hooks);
+    // the filter's button stands in the cluster with the lens and the view controls, in the same row, never over the globe
+    this.head.append(this.dock.button);
 
     parent.append(this.root, corner, this.menuScrim, this.menu);
     this.buildMenu();
@@ -194,12 +203,11 @@ export class Shell {
     ]);
     const group = (name: string, g: LensDef['group']) => {
       const lenses = LENSES.filter((l) => l.group === g && BUILT.has(l.id));
-      return lenses.length ? el('section', { class: 'sm-group', 'aria-label': name }, [el('h2', { class: 'sm-head', text: name }), ...lenses.map(row)]) : null;
+      return lenses.length ? el('section', { class: 'sm-group', 'aria-label': name }, [el('h3', { class: 'sm-head', text: name }), ...lenses.map(row)]) : null;
     };
     const foot = (href: string, ico: IconName, text: string) => el('a', { class: 'sm-foot-link', href, target: '_blank', rel: 'noopener' }, [icon(ico, 15), el('span', { text })]);
     const groups = [group('Read the field', 'read'), group('Bring your own material', 'practice')].filter((g): g is HTMLElement => !!g);
-    this.menu.append(
-      el('div', { class: 'sm-grab', 'aria-hidden': 'true' }),
+    this.menuBody.append(
       ...groups,
       el('footer', { class: 'sm-foot' }, [
         el('div', { class: 'sm-foot-links' }, [foot(RELEASES_URL, 'download', 'Downloads'), foot(ISSUES_URL, 'issue', 'Report a problem'), foot(REPO_URL, 'github', 'Source')]),

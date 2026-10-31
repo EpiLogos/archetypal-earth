@@ -81,17 +81,12 @@ body.pane-contents .sh-corner { right: calc(var(--pane-w) + var(--shell-x) - 4px
 .sm-scrim[hidden], .shell-menu[hidden] { display: none; }
 .shell-menu {
   position: fixed; z-index: 41; left: var(--shell-x); top: calc(var(--shell-y) + 50px); width: min(400px, calc(100vw - 2 * var(--shell-x)));
-  max-height: calc(100vh - var(--shell-y) - 70px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 8px 14px;
-  background: var(--glass); background-color: rgb(var(--deep-rgb) / 0.86); backdrop-filter: blur(22px) saturate(1.15);
-  border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 30px 90px rgb(0 0 0 / 0.55);
-  scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent;
-  animation: sm-in 0.28s var(--ease);
+  max-height: calc(100vh - var(--shell-y) - 70px);
 }
-@keyframes sm-in { from { transform: translateY(-6px); } to { transform: none; } }
-.sm-grab { display: none; }
+@keyframes sm-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 .sm-group { padding: 6px 0 4px; }
 .sm-group + .sm-group { border-top: 1px solid var(--hair); margin-top: 6px; padding-top: 10px; }
-.sm-head { margin: 4px 12px 6px; font: 500 10px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+.sm-head { margin: 4px 12px 6px; font: 500 12px var(--sans); letter-spacing: 0.02em; color: var(--ink-2); }
 .sm-row { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 52px; padding: 7px 12px; border-radius: 11px; text-align: left; transition: background 0.2s; }
 .sm-row:hover, .sm-row:focus-visible { background: rgb(var(--core-rgb) / 0.08); outline: none; }
 .sm-row.on { background: rgb(var(--core-rgb) / 0.12); }
@@ -101,17 +96,23 @@ body.pane-contents .sh-corner { right: calc(var(--pane-w) + var(--shell-x) - 4px
 .sm-label { font: 600 0.98rem/1.2 var(--serif); color: var(--ink); }
 .sm-blurb { font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: 0.01em; }
 .sm-key { flex: none; font: 500 10px var(--sans); color: var(--ink-3); border: 1px solid var(--hair); border-radius: 5px; padding: 2px 6px; }
-.sm-filter { display: grid; gap: 12px; padding: 2px 12px 4px; }
-.sf-field { display: grid; gap: 6px; }
-.sf-label { font: 500 10.5px var(--sans); letter-spacing: 0.08em; color: var(--ink-3); }
+.sm-filter { display: grid; gap: 22px; padding: 8px 0 6px; }
+.sf-field { display: grid; gap: 9px; }
+.sf-head { display: flex; align-items: center; gap: 8px; }
+.sf-label { font: 500 12.5px var(--sans); letter-spacing: 0.02em; color: var(--ink); }
+.sf-n { min-width: 18px; height: 18px; padding: 0 5px; display: inline-grid; place-items: center; border-radius: 9px; background: rgb(var(--core-rgb) / 0.18); color: var(--core); font: 600 10.5px var(--sans); font-variant-numeric: tabular-nums; }
 .sf-field select { width: 100%; min-height: 38px; color: var(--ink); background: rgb(var(--deep-rgb) / 0.5); border: 1px solid var(--hair); border-radius: 9px; padding: 6px 10px; font: 12.5px var(--sans); }
 .sf-field option { background: #0a1020; color: #e5eafa; }
-.sf-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-.sf-pill { min-height: 32px; padding: 4px 11px; border-radius: 16px; border: 1px solid var(--hair); font: 12px var(--sans); color: var(--ink-2); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.sf-pills { --pill-h: 30px; display: flex; flex-wrap: wrap; gap: 6px; }
+.sf-pill { min-height: var(--pill-h); max-width: 100%; padding: 0 12px; border-radius: calc(var(--pill-h) / 2); border: 1px solid var(--hair); font: 12px var(--sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink-2); transition: border-color 0.2s, color 0.2s, background 0.2s; }
 .sf-pill:hover { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.4); }
 .sf-pill[aria-pressed="true"] { color: var(--deep); background: var(--core); border-color: var(--core); }
-.sf-count { margin: 2px 0 0; font: 11.5px var(--sans); color: var(--ink-3); }
-.sf-clear { justify-self: start; font: 11.5px var(--sans); }
+.sf-more { justify-self: start; min-height: 24px; padding: 0; font: 500 12px var(--sans); letter-spacing: 0.02em; color: var(--ink-3); transition: color 0.2s; }
+.sf-more:hover, .sf-more:focus-visible { color: var(--ink); }
+.sf-count { margin: 0; font: 12.5px var(--sans); letter-spacing: 0.01em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.sf-clear { flex: none; min-height: 30px; padding: 0 14px; border: 1px solid var(--hair); border-radius: 15px; font: 500 12px var(--sans); letter-spacing: 0.02em; color: var(--ink); transition: border-color 0.2s; }
+.sf-clear:hover { border-color: rgb(var(--core-rgb) / 0.5); }
+.sf-clear[hidden] { display: none; }
 .sm-foot { border-top: 1px solid var(--hair); margin-top: 10px; padding: 12px 12px 2px; display: grid; gap: 10px; }
 .sm-foot-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .sm-foot-link { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; font: 12px var(--sans); color: var(--ink-2); text-decoration: none; }
@@ -120,8 +121,8 @@ body.pane-contents .sh-corner { right: calc(var(--pane-w) + var(--shell-x) - 4px
 .sm-fine .ico { flex: none; margin-top: 2px; }
 .sm-credits { padding-left: 21px; }
 
-/* ── the slice dock (H6): the chips row over the time strip, and the filter popover over its button ───── */
-/* the row is always reserved (32px), so the strip never jumps when a chip comes or goes; the dock leaves the pane its side */
+/* ── the slice dock (H6): the chips row over the time strip ───── */
+/* the row is always reserved (32px), so the strip never jumps when a chip comes or goes; empty, it draws nothing; the dock leaves the pane its side */
 :root { --dock-h: 102px; }
 .dock {
   position: fixed; left: 0; bottom: 16px; z-index: 14; width: 100vw;
@@ -138,18 +139,54 @@ body.deep-open .dock, body.pane-contents .dock, body.pane-reading .dock { width:
 /* the lens's own set: dashed; removed, it stays as the way back */
 .sh-chip.scope { border-style: dashed; }
 .sh-chip.scope.off { color: var(--ink-3); border-color: var(--hair); background: rgb(var(--deep-rgb) / 0.38); }
-.dock-add { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 3px 12px 3px 10px; border-radius: 15px; border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.38); backdrop-filter: blur(8px); font: 500 11.5px var(--sans); letter-spacing: 0.04em; color: var(--ink-2); transition: color 0.3s, border-color 0.3s; }
-.dock-add:hover, .dock-add[aria-pressed='true'] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); }
-
 body.landing-on .dock { opacity: 0.35; }
-.filter-pop {
-  position: fixed; z-index: 44; width: min(360px, calc(100vw - 24px)); max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain; padding: 12px 8px 14px;
-  background: var(--glass); background-color: rgb(var(--deep-rgb) / 0.9); backdrop-filter: blur(22px) saturate(1.15);
-  border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 30px 90px rgb(0 0 0 / 0.55);
-  scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent; animation: sm-in 0.28s var(--ease);
+
+/* ── the filter's button: in the top-left cluster, the lens control's height and surface ───── */
+.sh-filter {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 12px; border-radius: 20px;
+  border: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.38); backdrop-filter: blur(10px) saturate(1.1);
+  font: 500 12.5px var(--sans); letter-spacing: 0.05em; color: var(--ink-2); transition: border-color 0.3s, background 0.3s, color 0.3s;
 }
-.filter-pop[hidden] { display: none; }
-.fp-head { margin: 2px 12px 8px; font: 500 10px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+.sh-filter .ico { color: var(--ink-2); transition: color 0.3s; }
+.sh-filter:hover, .sh-filter[aria-expanded="true"] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); background: rgb(var(--fog-rgb) / 0.55); }
+.sh-filter.on .ico, .sh-filter[aria-expanded="true"] .ico { color: var(--core); }
+.sh-filter-n { min-width: 18px; height: 18px; padding: 0 5px; display: inline-grid; place-items: center; border-radius: 9px; background: var(--core); color: var(--deep); font: 600 10.5px var(--sans); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.sh-filter:focus-visible { outline: 1px solid rgb(var(--core-rgb) / 0.8); outline-offset: 2px; }
+body.search-open .sh-filter, body.menu-open .sh-filter { pointer-events: none; }
+
+/* ── the panel family: the filter panel, the lens menu and the view settings are one surface, the reading pane's ───── */
+.pn {
+  display: flex; flex-direction: column; overflow: hidden; color: var(--ink-2); font: 13px var(--sans);
+  background: linear-gradient(180deg, rgb(var(--fog-rgb) / 0.5), rgb(var(--deep-rgb) / 0.86)); backdrop-filter: blur(26px) saturate(1.1);
+  border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 30px 90px rgb(0 0 0 / 0.55);
+  animation: sm-in 0.28s var(--ease);
+}
+.pn[hidden], .settings-pop.pn[hidden], .sm-scrim[hidden] { display: none; }
+.pn-grab { display: none; }
+.pn-head { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 56px; padding: 0 14px 0 20px; }
+.pn-title { margin: 0; font: 600 1.12rem/1.2 var(--serif); letter-spacing: -0.004em; color: var(--ink); }
+.pn-close { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-2); border: 1px solid var(--hair); transition: color 0.3s, border-color 0.3s; }
+.pn-close:hover { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
+.pn-body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 8px 14px;
+  scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent;
+}
+.pn-foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 54px; padding: 10px 20px; border-top: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.4); }
+
+/* the filter: a left panel under the cluster, down to just above the time strip; it keeps clear of the reading pane's side */
+.filter-panel {
+  position: fixed; z-index: 44; left: 0; top: calc(var(--shell-y) + 52px); bottom: calc(var(--dock-h) + 6px);
+  width: min(352px, 100vw); border-left: 0; border-radius: 0 16px 16px 0;
+  animation: pn-in-left 0.32s var(--ease);
+}
+.filter-panel .pn-body { padding: 0 20px 24px; -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 22px), transparent); }
+body.deep-open .filter-panel, body.pane-contents .filter-panel, body.pane-reading .filter-panel { max-width: calc(100vw - var(--pane-w)); }
+@keyframes pn-in-left { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+
+/* the view's settings hang from the ⚙ (shell/settings-pop.ts places them); aion.css holds what a lens puts inside */
+.settings-pop.pn { display: flex; gap: 0; padding: 0; width: min(340px, calc(100vw - 24px)); max-height: min(70vh, 540px); font: 13px var(--sans); border-radius: 16px; }
+.settings-pop.pn .pn-body { display: grid; align-content: start; gap: 2px; }
+.settings-pop .mode-opt-label { margin: 0 12px 6px; font: 500 12px var(--sans); letter-spacing: 0.02em; text-transform: none; color: var(--ink-2); }
 
 .lp-error { color: var(--ink-2); font: 13px/1.5 var(--sans); margin: 30px 0; }
 
@@ -176,24 +213,41 @@ body.landing-on .dock { opacity: 0.35; }
   .vc-compact .vc-name { display: inline; }
   .sh-corner .vc-gear:not([data-own]) { display: none; }
 
-  .shell-menu.sheet {
-    left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 86vh; border-radius: 20px 20px 0 0; border-bottom: 0;
-    padding: 8px 10px calc(16px + env(safe-area-inset-bottom)); animation: sm-up 0.32s var(--ease);
+  /* the three panels are bottom sheets on a phone: a grab handle, the same head and footer, over everything */
+  .filter-panel, .shell-menu, .settings-pop.pn {
+    position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-width: none; max-height: 82dvh;
+    border-radius: 20px 20px 0 0; border-width: 1px 0 0; box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5); animation: sm-up 0.32s var(--ease);
+    padding-bottom: env(safe-area-inset-bottom);
   }
-  @keyframes sm-up { from { transform: translateY(40px); } to { transform: none; } }
-  .shell-menu.sheet .sm-grab { display: block; width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.3); margin: 4px auto 8px; }
+  .filter-panel { height: 82dvh; z-index: 45; }
+  .pn-grab { display: block; position: relative; flex: none; height: 24px; touch-action: none; cursor: grab; }
+  .pn-grab-bar { position: absolute; top: 9px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.3); }
+  .pn-head { height: 44px; padding: 0 12px 0 20px; touch-action: none; }
+  .pn-close { width: var(--tap); height: var(--tap); }
+  .pn-body { padding-bottom: 16px; }
+  .filter-panel .pn-body { padding-bottom: 24px; }
+  @keyframes sm-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
   .sm-row { min-height: 56px; }
-  .sf-pill { min-height: var(--tap); padding: 4px 14px; }
+  .sf-pills { --pill-h: var(--tap); }
+  .sf-more { min-height: var(--tap); }
+  .sf-clear { min-height: var(--tap); padding: 0 20px; border-radius: 22px; }
   .sf-field select { min-height: var(--tap); }
   .sm-foot-link { min-height: var(--tap); }
 
-  /* the dock: the row's chips and its button are 44px targets; the filter is a sheet */
+  /* the dock: the row's chips are 44px targets; the filter's button is an icon in the cluster, with its count on its corner */
   :root { --dock-h: 106px; }
   .dock { bottom: 10px; }
   .dock-chips { min-height: var(--tap); }
-  .sh-chip, .dock-add { min-height: var(--tap); padding-top: 0; padding-bottom: 0; }
-  .filter-pop { left: 12px !important; right: 12px !important; width: auto; top: auto; bottom: 12px !important; border-radius: 18px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); max-height: 72vh; }
-  .filter-pop .mode-opt-grab { display: block; width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.3); margin: 0 auto 8px; }
+  .sh-chip { min-height: var(--tap); padding-top: 0; padding-bottom: 0; }
+  .sh-head { gap: 8px; }
+  .sh-filter { width: var(--tap); height: var(--tap); padding: 0; justify-content: center; border-radius: 22px; }
+  .sh-filter-t { display: none; }
+  .sh-filter-n { position: absolute; top: 2px; right: 0; min-width: 16px; height: 16px; padding: 0 4px; font-size: 10px; }
+  /* beside the ⚙ the View control gives up its name, so the cluster keeps clear of the corner */
+  body.view-gear .vc-compact .vc-name, body.view-gear .sh-chev { display: none; }
+  .sh-head > * { flex: none; }
+  /* a chip row with something in it lifts the reading card above it (an empty one is not there to meet) */
+  body.dock-chips-on .reveal { bottom: calc(var(--dock-h) - 6px); max-height: calc(54vh - 40px); }
 }
 
 @media (pointer: coarse) {
@@ -201,7 +255,7 @@ body.landing-on .dock { opacity: 0.35; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shell-menu { animation: none; transition: none; }
+  .pn { animation: none; transition: none; }
 }
 
 /* ── panel lens content (shared) ───────────────────────────────────── */
