@@ -116,6 +116,23 @@ const opens = (page, id) => page.evaluate((id) => JSON.parse(localStorage.getIte
   await ctx.close();
 }
 
+// ── phone: a Contents row that wraps keeps clear of the next ──────────
+{
+  const { ctx, page } = await open(b, { width: 390, height: 844, mobile: true, hash: '#/texts' });
+  await page.waitForTimeout(3500);
+  await page.locator('.sh-contents').click();
+  await page.waitForSelector(`${SHEET}[data-pane="contents"]`, { timeout: 8000 });
+  await page.waitForTimeout(700);
+  const clash = await page.evaluate((sel) => {
+    const bs = [...document.querySelectorAll(`${sel} .dp-contents li > .link-quiet`)].map((e) => e.getBoundingClientRect()).filter((r) => r.height > 0);
+    const out = [];
+    for (let i = 1; i < bs.length; i++) if (bs[i].top < bs[i - 1].bottom - 1 && bs[i].left < bs[i - 1].right && bs[i - 1].left < bs[i].right) out.push(i);
+    return { rows: bs.length, overlaps: out.length, min: Math.round(Math.min(...bs.map((r) => r.height))) };
+  }, SHEET);
+  ok(clash.rows > 10 && clash.overlaps === 0 && clash.min >= 44, 'Contents rows on a phone are 44px and none overlaps the next', JSON.stringify(clash));
+  await ctx.close();
+}
+
 await b.close();
 console.log(fails.length ? `${fails.length} failure(s)` : 'all ok');
 process.exit(fails.length ? 1 : 0);

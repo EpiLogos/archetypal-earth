@@ -71,7 +71,7 @@ export class PassageSheet {
     this.article.append(el('p', { class: 'ps-where', text: where }));
     if (ref.para !== undefined) {
       this.article.append(el('p', { class: 'ps-mark', text: `¶${ref.para}` }));
-      this.article.append(el('p', { class: 'ps-text', text: ref.text.replace(/^\*\*¶\d+\*\*\s*/, '') }));
+      this.article.append(el('p', { class: 'ps-text', text: ref.text.replace(/^¶\d+\s*/, '') }));
     } else {
       this.article.append(el('p', { class: 'ps-text', text: ref.text }));
     }

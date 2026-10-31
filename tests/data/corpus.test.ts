@@ -51,6 +51,13 @@ describe('corpus index (citation deep links)', () => {
     expect(next!.para).toBe(453);
   });
 
+  it('reads a page without the markdown the corpus marks its paragraph numbers in (**¶452** is shown ¶452)', () => {
+    const ref = resolveInWork(cw12, '¶452 (pdf p350)')!;
+    const next = neighbourInWork(cw12, ref.index, 1)!;
+    for (const t of [ref.text, ref.pageText, next.text, next.pageText]) expect(t).not.toContain('**');
+    expect(ref.pageText).toMatch(/¶452\b/);
+  });
+
   it('resolves an anchored footnote locator and a seminar page cite', () => {
     const fn = resolveInWork(cw09ii, '¶149, n.84 (pdf p106)');
     expect(fn).not.toBeNull();
@@ -118,7 +125,7 @@ describe('corpus index (citation deep links)', () => {
       const ref = resolveInWork(doc, `¶${rec.para} (pdf p${rec.pdf_page})`);
       // the span opens at the ¶ marker itself; the spine snippet may carry the
       // page's figure captions before it, so anchor on the marker, not the head
-      expect(ref!.text.startsWith(`**¶${rec.para}**`), `${rec.vol} ¶${rec.para} span`).toBe(true);
+      expect(ref!.text.startsWith(`¶${rec.para}`), `${rec.vol} ¶${rec.para} span`).toBe(true);
       expect(Math.abs(ref!.page - rec.pdf_page), `${rec.vol} ¶${rec.para} page`).toBeLessThanOrEqual(1);
       if (++checked >= 500) break; // a full sweep is the ingest's own spine check
     }

@@ -79,6 +79,9 @@ export interface PassageRef {
  * range; then the ¶ anywhere in the work (essay numbering restarts, so the page
  * disambiguates); then the cited page itself (seminars have no ¶s).
  */
+/** A page's words as a reader sees them: the corpus marks each paragraph number in markdown (**¶452**); the number stays, the marks go. */
+export const readable = (t: string) => t.replace(/\*\*(¶\s*\d+[a-z]?)\*\*/g, '$1');
+
 export function resolveInWork(doc: CorpusWork, locator: string): PassageRef | null {
   if (!doc.pages.length) return null;
   const { para, pages } = parseLocator(locator);
@@ -102,8 +105,8 @@ export function resolveInWork(doc: CorpusWork, locator: string): PassageRef | nu
     ...(page.print ? { print: page.print } : {}),
     ...(chapter ? { chapter: { id: chapter.id, title: chapter.title } } : {}),
     ...(anchor ? { para: anchor.para } : {}),
-    text,
-    pageText: page.text,
+    text: readable(text),
+    pageText: readable(page.text),
     index,
   };
 }
@@ -137,8 +140,8 @@ export function neighbourInWork(doc: CorpusWork, index: number, delta: number): 
     ...(page.print ? { print: page.print } : {}),
     ...(chapter ? { chapter: { id: chapter.id, title: chapter.title } } : {}),
     para: next.para,
-    text: page.text.slice(next.off, next.off + next.len),
-    pageText: page.text,
+    text: readable(page.text.slice(next.off, next.off + next.len)),
+    pageText: readable(page.text),
     index: index + delta,
   };
 }
