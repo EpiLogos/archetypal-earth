@@ -1201,26 +1201,6 @@
      },
      {
       "year": -450,
-      "yearDisplay": "V century B.C. (as printed)",
-      "place": "Attica; Vulci (?)",
-      "locus": "artifact",
-      "terms": [
-       "red-figured-vase-attic-detail"
-      ],
-      "text": "Detail, red-figured vase, Attic, Vulei, v century B.c,",
-      "caption": true,
-      "cite": {
-       "work": "neumann-great-mother",
-       "workTitle": "The Great Mother",
-       "locator": "pdf p285"
-      },
-      "scan": true,
-      "families": [
-       "red-figured-vase-attic-detail"
-      ]
-     },
-     {
-      "year": -450,
       "yearDisplay": "early V century B.C. (as given)",
       "place": "Pharsalus, Greece",
       "locus": "artifact",
@@ -1236,26 +1216,6 @@
       },
       "families": [
        "demeter-and-kore-pharsalus-stele"
-      ]
-     },
-     {
-      "year": -450,
-      "yearDisplay": "V century B.C. (as printed, OCR-garbled)",
-      "place": "Eleusis",
-      "locus": "artifact",
-      "terms": [
-       "demeter-and-kore-eleusis-relief"
-      ],
-      "text": "Stone relief, Eleusis, v conlury",
-      "caption": true,
-      "cite": {
-       "work": "neumann-great-mother",
-       "workTitle": "The Great Mother",
-       "locator": "pdf p290"
-      },
-      "scan": true,
-      "families": [
-       "demeter-and-kore-eleusis-relief"
       ]
      },
      {

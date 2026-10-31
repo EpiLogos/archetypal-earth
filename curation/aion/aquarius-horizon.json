@@ -11,7 +11,7 @@
     },
     "cw11": {
       "file": "corpus/cw11.md",
-      "sha256": "fbeea3e90c5a516793c83f4530bfd5598cb98cc3aaaa71c4d0b61447c8c03084"
+      "sha256": "2862018addd10ebfc3a2c8950f4f772c94cb2322ff3d0f3aaf87640a64c5e6ff"
     },
     "cw15": {
       "file": "corpus/cw15.md",
@@ -23,11 +23,11 @@
     },
     "sem-dream-analysis": {
       "file": "corpus/sem-dream-analysis.md",
-      "sha256": "287335a80bed8624bfa881966ef4688d966c14687c429fe0d630280789530dd5"
+      "sha256": "c02bd7dd35ba50000bf6b212012d30ae401b1979097ec9766181289b1cd4d242"
     },
     "sem-visions": {
       "file": "corpus/sem-visions.md",
-      "sha256": "d266ebe9c5da435a600e9b26175d946872b75d252d866f441a8c5362d1dbd708"
+      "sha256": "4cef1d9d9f21060c3db0940f40048b36e33a023834ddb8f9541e4846db9e90e1"
     },
     "sem-zarathustra": {
       "file": "corpus/sem-zarathustra.md",

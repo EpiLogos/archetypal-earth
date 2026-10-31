@@ -596,8 +596,8 @@
    "basis": "oracle: verbatim at cw01 pdf p39"
   },
   "senex-figure-pauli-seven-diamonds-dream-zurich-1936": {
-   "text": "the step from the personified Mary to the 7 of diamonds went much further than Catholicism (which fits in beautifully with your interpretation of \"expeJling\" as excommunication).",
-   "basis": "oracle: corpus words for letters-pauli pdf p77"
+   "text": "the step from the personified Mary to the 7 of diamonds went much further than Catholicism (which fits in beautifully with your interpretation of “expelling” as excommunication).",
+   "basis": "re-read from the page: letters-pauli pdf p77"
   },
   "serpent-agathodaimon-antique-gem": {
    "locator": "¶593 (pdf p413)",
@@ -783,10 +783,6 @@
    "text": "In Zosimos the “man of light” … is simply called φώς. He is the spiritual man who has clothed himself in Adam’s body.",
    "basis": "oracle: corpus words for cw13 pdf p155 (the Greek gloss between the fragments is damaged in the scan and left out, marked)"
   },
-  "anima-unknown-woman-diffraction-dream-1955": {
-   "demote": true,
-   "basis": "the cited letters-pauli pages are too damaged in the scan ('UlJCODICious', 'die ....') for the words to be confirmed; the record is kept as a paraphrase of Jung's remark"
-  },
   "provisional-life-happy-neurosis-island-zurich-1910s": {
    "text": "part of the neurosis consists of that suspended life, or rather, the provisional life.",
    "basis": "oracle: corpus words for sem-dream-analysis pdf p694"
@@ -946,32 +942,9 @@
    "basis": "oracle: corpus words for letters-pauli pdf p97 (the record had cut the sentence with ellipses and left out its middle)"
   },
   "mirror-spiegler-krishna-manuscript-dream-1957": {
-   "text": "\"Spiegler\" [Reflector] is a dominant archetype, the producer of the mirror image, the point type.",
-   "basis": "oracle: corpus words for letters-pauli pdf p226"
-  },
-  "number-aucker-206-306-dream-1954": {
-   "demote": true,
-   "basis": "letters-pauli pdf p200 reads the sentence as 'rea\\ia. tion.!' at its close, so the record's wording and spelling cannot be confirmed from the scan"
-  },
-  "quaternity-preacher-french-formulas-dream-1955": {
-   "demote": true,
-   "basis": "the French line in letters-pauli pdf p212 is too damaged in the scan ('un. uprmion de.', 'quantit ..') for the record's wording to be confirmed"
-  },
-  "quaternity-sommerfeld-h-atom-splitting-dream-1948": {
-   "demote": true,
-   "basis": "letters-pauli pdf p170 reads the Greek transliterations as '(.idolon)', '(.ide.)', '(homcrusia)'; the record's 'homousia' does not agree with the scan ('homoousia') and its wording cannot be confirmed"
-  },
-  "mandala-pauli-rotation-inquisition-dream-zurich-1946": {
-   "demote": true,
-   "basis": "letters-pauli pdf p93 reads 'wives have objectified' as '__ haft ob;r fWd', so the record's wording cannot be confirmed from the scan"
-  },
-  "nigredo-secret-laboratory-radioactive-dream-sweden-1954": {
-   "demote": true,
-   "basis": "letters-pauli pdf p196 reads 'laboratory', 'that' and 'unconscious' as 'labocatUll', 'tbd', 'seious', so the record's wording cannot be confirmed from the scan"
-  },
-  "scales-pauli-spindles-scales-dream-zollikon-1950": {
-   "demote": true,
-   "basis": "letters-pauli pdf p114 reads the sentence as '01 the \"ruseaux\\' descnbed on your letter is translormed', so the record's wording ('fusaux', 'in your letter') cannot be confirmed from the scan"
+   "text": "“Spiegler” [Reflector] is a dominant archetype, the producer of the mirror image, the point through which two sides are inverted, a minimal dimension.",
+   "locator": "Letter 76 + Jung's Letter 77 (pdf pp226-227, 230-231)",
+   "basis": "re-read from the page: letters-pauli pdf pp230-231"
   },
   "family:clairvoyance": {
    "text": "In this letter Kant describes how Swedenborg, while he was in Gothenburg, had a clairvoyant vision of the great fire which took place in Stockholm in 1756, and how hour after hour he reported to the horrified public the progress of the fire.",
@@ -1124,6 +1097,52 @@
   "pope-fishermans-ring-vatican": {
    "locator": "8 June 1932 (pdf pp798–799)",
    "basis": "oracle: the sentence begins at the foot of sem-visions pdf p798 and runs on pdf p799 (a running head stands between 'The' and 'Pope')"
+  },
+  "house-new-eth-cherries-568-dream-1954": {
+   "text": "The final total is 568 Swiss francs, which I have to pay.",
+   "basis": "re-read from the page: letters-pauli pdf p200"
+  },
+  "i-ching-quantum-physics-hsieh-shanghai-1937": {
+   "text": "Hsieh, C. H. [Quantum Physics and I Ching], Shanghai, 1937. No known European translation.",
+   "basis": "re-read from the page: letters-pauli pdf p296"
+  },
+  "serpent-stella-nova-ophiuchus-prague-1606": {
+   "text": "De stella nova in pede serpentarii. Prague, 1606.",
+   "basis": "re-read from the page: letters-pauli pdf p299"
+  },
+  "quaternity-preacher-french-formulas-dream-1955": {
+   "text": "Le sujet de mon sermon sera ces formules de M. le prof. Pauli. Il y a ici une expression des quatre quantités",
+   "basis": "re-read from the page: letters-pauli pdf p211"
+  },
+  "scales-pauli-spindles-scales-dream-zollikon-1950": {
+   "text": "the arrangement of the “fuseaux” described on your letter is transformed into a pair of scales.",
+   "basis": "re-read from the page: letters-pauli pdf p114"
+  },
+  "family:radioactive-nucleus": {
+   "text": "The radioactive nucleus is an excellent symbol for the source of energy of the collective unconscious, the ultimate external stratum of which appears as individual consciousness.",
+   "basis": "re-read from the page: letters-pauli pdf p76"
+  },
+  "anima-unknown-woman-diffraction-dream-1955": {
+   "text": "the more unconscious the lower triad becomes, the greater the power of the dark anima over the ego.",
+   "basis": "re-read from the page: letters-pauli pdf p210"
+  },
+  "number-aucker-206-306-dream-1954": {
+   "text": "The transformation from 2 to 3 seems positive, indicating some sort of realization.",
+   "locator": "Letters 70–71 (pdf pp199–200, 216)",
+   "basis": "re-read from the page: letters-pauli pdf p200"
+  },
+  "quaternity-sommerfeld-h-atom-splitting-dream-1948": {
+   "text": "The “Self” that appears here in the form of the physics teacher states that the physis carries permanently with it the image (eidolon) of the tones (eides), so that there is a consubstantial unity (homo-usia) of both.",
+   "locator": "Letter 60 (pdf p170); recurs Appendix 3 (pdf p254)",
+   "basis": "re-read from the page: letters-pauli pdf p170"
+  },
+  "trinity-pauli-three-wood-pieces-dream-zurich-1950": {
+   "text": "there are 3 pieces of wood with an apparently archetypal significance",
+   "basis": "re-read from the page: letters-pauli pdf p112"
+  },
+  "simon-magus-helen-tyre-2c": {
+   "locator": "¶64 (pdf pp41–42)",
+   "basis": "the sentence begins on pdf p41"
   }
  }
 }

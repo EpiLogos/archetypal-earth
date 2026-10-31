@@ -41,7 +41,7 @@
     "dream": 341,
     "active-imagination": 86
   },
-  "quotes": 1950,
+  "quotes": 1957,
   "occurrencesWithJungCites": 3085,
   "labelMaxLen": 48,
   "yearRange": [
@@ -1015,19 +1015,19 @@
         "sync.md",
         "vonzfranz-number-time.md"
       ],
-      "key": "5522839d045f2c51",
-      "words": 50975,
+      "key": "e3dddb1ee77b4ee6",
+      "words": 50544,
       "cached": true
     },
     "stringsChanged": 186,
     "changes": 590,
     "byKind": {
-      "join": 523,
-      "curated": 53,
-      "reflow": 13,
+      "join": 524,
+      "curated": 50,
+      "reflow": 15,
       "hyphen-break": 1
     },
-    "unique": 407,
+    "unique": 408,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1066,17 +1066,6 @@
       },
       {
         "kind": "curated",
-        "before": "B.c",
-        "after": "B.C.",
-        "count": 8,
-        "where": [
-          "occ:astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century.quote",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote",
-          "occ:burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175.quote"
-        ]
-      },
-      {
-        "kind": "curated",
         "before": "v century",
         "after": "V century",
         "count": 8,
@@ -1084,6 +1073,17 @@
           "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.title",
           "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.body[0]",
           "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "B.c",
+        "after": "B.C.",
+        "count": 7,
+        "where": [
+          "occ:astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century.quote",
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote",
+          "occ:burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175.quote"
         ]
       },
       {
@@ -1883,15 +1883,6 @@
       },
       {
         "kind": "join",
-        "before": "\"clover leaf\"",
-        "after": "\"cloverleaf\"",
-        "count": 1,
-        "where": [
-          "occ:anima-unknown-woman-diffraction-dream-1955.body[1]"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "\"discrim inate",
         "after": "\"discriminate",
         "count": 1,
@@ -2512,15 +2503,6 @@
         ]
       },
       {
-        "kind": "curated",
-        "before": "conlury",
-        "after": "century",
-        "count": 1,
-        "where": [
-          "occ:demeter-and-kore-eleusis-relief-plate-demeter-and-kore-stone-relief-eleusis-v-century-eleusis-v.quote"
-        ]
-      },
-      {
         "kind": "join",
         "before": "contem plated",
         "after": "contemplated",
@@ -2581,6 +2563,15 @@
         "count": 1,
         "where": [
           "occ:hermes-hymn-magic-papyrus-egypt-3c.quote"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "da ting",
+        "after": "dating",
+        "count": 1,
+        "where": [
+          "occ:trickster-festum-asinorum-beauvais-12c.quote"
         ]
       },
       {
@@ -3109,15 +3100,6 @@
         "kind": "join",
         "before": "id en ti fy",
         "after": "identify",
-        "count": 1,
-        "where": [
-          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
-        ]
-      },
-      {
-        "kind": "reflow",
-        "before": "identify th ea ni mus at",
-        "after": "identify the animus at",
         "count": 1,
         "where": [
           "occ:tree-picture-animus-gambler-patient-1935.body[0]"
@@ -3926,6 +3908,15 @@
       },
       {
         "kind": "join",
+        "before": "No ir\"",
+        "after": "Noir\"",
+        "count": 1,
+        "where": [
+          "occ:tree-soleil-noir-noel-pierre-france-1952.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
         "before": "no t",
         "after": "not",
         "count": 1,
@@ -4555,6 +4546,24 @@
         ]
       },
       {
+        "kind": "reflow",
+        "before": "th eN aas.",
+        "after": "the Naas.",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[2]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "th eN aas\"",
+        "after": "the Naas\"",
+        "count": 1,
+        "where": [
+          "occ:tree-baruch-wood-of-life-justin-2c.body[0]"
+        ]
+      },
+      {
         "kind": "join",
         "before": "Th ey",
         "after": "They",
@@ -4615,6 +4624,15 @@
         "count": 1,
         "where": [
           "occ:coniunctio-crucified-royal-pair-ripley-15c.body[0]"
+        ]
+      },
+      {
+        "kind": "reflow",
+        "before": "to identify th ea ni mus at",
+        "after": "to identify the animus at",
+        "count": 1,
+        "where": [
+          "occ:tree-picture-animus-gambler-patient-1935.body[0]"
         ]
       },
       {
@@ -4705,15 +4723,6 @@
         "count": 1,
         "where": [
           "occ:sophia-achamoth-fall-plenum-2c.body[0]"
-        ]
-      },
-      {
-        "kind": "curated",
-        "before": "Vulei",
-        "after": "Vulci",
-        "count": 1,
-        "where": [
-          "occ:red-figured-vase-attic-detail-plate-b-detail-of-a-red-figured-vase-attic-vulci-v-attica-vulci-v.quote"
         ]
       },
       {

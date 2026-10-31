@@ -349,19 +349,15 @@ describe('regression: every quotation in the published data is verbatim, or exce
   it('never lets the exceptions grow: it only shrinks (34 on 30 Oct)', () => {
     expect(doc.exceptions.length).toBeLessThanOrEqual(34);
   });
-  it('does not show a demoted record as a quotation: the 7 Pauli-letter records keep their body and cite and carry no quote', () => {
-    const checked = new Set(all.results.map((r) => r.id));
+  it('the seven Pauli-letter records the scan once hid are quotations again: none is demoted, each is verbatim on its page', () => {
+    const passed = new Set(all.results.filter((r) => r.pass).map((r) => r.id));
     const field = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/field.json'), 'utf8'));
     const fixes = JSON.parse(fs.readFileSync(path.join(ROOT, 'curation/quote-fixes.json'), 'utf8')).fixes as Record<string, { demote?: boolean }>;
-    const demoted = Object.entries(fixes).filter(([, f]) => f.demote).map(([id]) => id);
-    expect(demoted.length).toBe(7);
-    for (const id of demoted) {
+    expect(Object.entries(fixes).filter(([, f]) => f.demote).map(([id]) => id)).toEqual([]);
+    for (const id of ['anima-unknown-woman-diffraction-dream-1955', 'number-aucker-206-306-dream-1954', 'quaternity-preacher-french-formulas-dream-1955', 'quaternity-sommerfeld-h-atom-splitting-dream-1948', 'mandala-pauli-rotation-inquisition-dream-zurich-1946', 'nigredo-secret-laboratory-radioactive-dream-sweden-1954', 'scales-pauli-spindles-scales-dream-zollikon-1950']) {
       const o = field.occurrences.find((x: { id: string }) => x.id === id);
-      expect(o, id).toBeDefined();
-      expect(o.quote, id).toBeUndefined();
-      expect(o.body.length, id).toBeGreaterThan(0);
-      expect(o.jung.length, id).toBeGreaterThan(0);
-      expect(checked.has(id), id).toBe(false);
+      expect(o?.quote, id).toBeTruthy();
+      expect([...passed].some((r) => r.includes(id)), id).toBe(true);
     }
   });
 });

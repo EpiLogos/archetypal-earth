@@ -4594,10 +4594,6 @@
       "type": "occurrence",
       "id": "simon-magus-helen-tyre-2c"
      },
-     "page": {
-      "work": "cw09i",
-      "page": 42
-     },
      "year": 150,
      "place": {
       "lat": 32.2165,
@@ -4605,7 +4601,7 @@
      },
      "cite": {
       "work": "cw09i",
-      "locator": "¶64 (pdf p42)"
+      "locator": "¶64 (pdf pp41–42)"
      }
     },
     {
@@ -36529,7 +36525,7 @@
      },
      "page": {
       "work": "letters-pauli",
-      "page": 169
+      "page": 170
      },
      "year": 1948,
      "citeYear": 1953,

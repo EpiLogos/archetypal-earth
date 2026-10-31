@@ -75,8 +75,8 @@ describe('the theory nodes have pages', () => {
     const letters = all.filter((q) => q.cite.work === 'letters-pauli');
     expect(letters.length).toBe(6);
     expect(letters.filter((q) => String(q.voice).toLowerCase() === 'pauli').length).toBe(2);
-    // a quotation kept as a damaged scan reads it says so; the generated display of a clean span says nothing
-    expect(letters.some((q) => q.scan === true)).toBe(true);
+    // the letters are read from the page images: no quotation keeps the letters of a damaged scan
+    expect(letters.filter((q) => q.scan === true)).toEqual([]);
   });
 
   it('the other voices are kept apart: von Franz and Van Eenwyk are never Jung\'s', () => {
