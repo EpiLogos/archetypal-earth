@@ -61,8 +61,9 @@ export function mount(ctx: LensContext): LensInstance {
       groups.push({
         title: wl.title,
         items: wl.contents.map((c) => ({
-          label: c.title, level: Math.max(0, c.level - 1), note: c.to > c.from ? String(c.to - c.from) : undefined, current: c === here,
-          onPick: c.to > c.from ? () => ctx.setPath([wl.id, String(Math.min(c.from, last))], { replace: true }) : undefined,
+          label: c.title, level: Math.max(0, c.level - 1), current: c === here,
+          // a chapter with cites opens its first; one without opens its own first page of the text
+          onPick: c.to > c.from ? () => ctx.setPath([wl.id, String(Math.min(c.from, last))], { replace: true }) : () => ctx.passages.open(wl.id, `pdf p${c.page}`),
         })),
       });
     }
@@ -128,7 +129,6 @@ export function mount(ctx: LensContext): LensInstance {
   const work = (key: string, at: number, reveal: boolean) => {
     const wl = workLens(m, key);
     if (!wl) { picker(); return; }
-    const w = m.workById.get(wl.id)!;
     const myTok = ++tok;
     const entered = !standing || standing.wl.id !== wl.id;
     ctx.setContext(wl.title);
@@ -143,7 +143,6 @@ export function mount(ctx: LensContext): LensInstance {
     const nodes: Node[] = [
       el('h2', { class: 'dp-title', text: wl.title }),
       el('p', { class: 'th-line', text: [wl.voice, wl.year ? String(wl.year) : ''].filter(Boolean).join(' · ') }),
-      el('p', { class: 'tx-count', text: `${w.cites} ${w.cites === 1 ? 'cite' : 'cites'} in the field, from ${w.occurrences} ${w.occurrences === 1 ? 'instance' : 'instances'}` }),
       stepHost,
     ];
 

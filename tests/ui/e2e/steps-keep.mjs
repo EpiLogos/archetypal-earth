@@ -1,7 +1,7 @@
 // What a step keeps (Pass H findings): a step inside a mode leaves what the visitor set as it stands.
 //   - Texts: Escape closes the reading, and the next Escape steps up to the work without opening it again
 //   - Texts: reading on through a work is one line of the trail, not one per cite
-//   - Texts: a chapter none of whose pages is cited is listed in the Contents, not offered as a pick
+//   - Texts: every chapter is a pick; one none of whose pages is cited opens its own first page of the text; no counts are shown
 //   - a widened reading stays wide across the stepper in a panel lens (Theory)
 //   - closing You leaves a reading that stands under it its room (`deep-open`)
 //   - a Work's page carries its footer once
@@ -42,8 +42,20 @@ const opens = (page, id) => page.evaluate((id) => JSON.parse(localStorage.getIte
   await page.waitForSelector(`${SHEET}[data-pane="contents"]`, { timeout: 8000 });
   await page.waitForTimeout(500);
   const rows = await page.evaluate((sel) => [...document.querySelectorAll(`${sel} .dp-contents li`)].slice(0, -1).map((li) => ({ pick: !!li.querySelector('button'), count: !!li.querySelector('.dp-cite-year') })), SHEET);
-  ok(rows.some((r) => !r.count), 'cw12 lists a chapter with no cite', String(rows.length));
-  ok(rows.every((r) => r.pick === r.count), 'only a chapter with cites is a pick', JSON.stringify(rows.filter((r) => r.pick !== r.count).length));
+  ok(rows.length > 5 && rows.every((r) => r.pick), 'every chapter of cw12 is a pick', `${rows.filter((r) => !r.pick).length} of ${rows.length} are not`);
+  ok(rows.every((r) => !r.count), 'the Contents show no counts', String(rows.filter((r) => r.count).length));
+  ok(!(await page.$('.tx-count')), 'the reading carries no count line');
+  // the chapter with no cite in the field opens the text at its own first page
+  const uncited = await page.evaluate(() => {
+    // a chapter none of whose pages up to the next chapter of its rank carries a stop of the work's walk
+    const m = window.__earth.model, ch = m.workById.get('cw12')?.chapters ?? [], pages = (m.walkById.get('text/cw12')?.stops ?? []).map((s) => s.page?.page ?? -1);
+    return ch.findIndex((c, k) => { let end = Infinity; for (let j = k + 1; j < ch.length; j++) if (ch[j].level <= c.level) { end = ch[j].page; break; } return !pages.some((p) => p >= c.page && p < end); });
+  });
+  if (uncited >= 0) {
+    await page.locator(`${SHEET} .dp-contents li`).nth(uncited).locator('button').click();
+    await page.waitForTimeout(1500);
+    ok(await page.evaluate(() => !!document.querySelector('section.passage:not([hidden]) .ps-article')?.textContent?.trim()), 'an uncited chapter opens its page of the text');
+  } else ok(false, 'cw12 has a chapter with no cite to try', String(uncited));
   await ctx.close();
 }
 
