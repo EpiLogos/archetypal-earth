@@ -5926,16 +5926,16 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "animus-man-from-ruined-pyramid-vision-zurich-1934"
+      "id": "blue-robe-woman-cavern-guide-vision-zurich-1934"
      },
      "year": 1934,
      "place": {
-      "lat": 47.2884,
-      "lon": 8.6598
+      "lat": 47.3296,
+      "lon": 8.6509
      },
      "cite": {
       "work": "sem-visions",
-      "locator": "14 Mar 1934 (pdf pp1426-1429)"
+      "locator": "31 Jan. 1934 (pdf pp1329-1335)"
      }
     },
     {
@@ -6611,20 +6611,20 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "saturn-providence-scientia-aurora-consurgens-14c"
+      "id": "divine-child-naked-boy-vision-eckhart-14c"
      },
      "page": {
-      "work": "cw11",
-      "page": 723
+      "work": "cw09i",
+      "page": 169
      },
-     "year": 1300,
+     "year": 1350,
      "place": {
-      "lat": 48.5597,
-      "lon": 6.5067
+      "lat": 50.9547,
+      "lon": 6.8563
      },
      "cite": {
-      "work": "cw11",
-      "locator": "'Transformation Symbolism in the Mass' n.22 (pdf p723)"
+      "work": "cw09i",
+      "locator": "¶267 (pdf p169)"
      }
     },
     {

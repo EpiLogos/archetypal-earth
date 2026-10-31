@@ -7819,7 +7819,9 @@
    "relaxed": true,
    "visual": "direct match, Haiku visual review (2026-10)"
   },
-  "corn-god-ear-of-corn-epopteia-eleusis": {},
+  "corn-god-ear-of-corn-epopteia-eleusis": {
+   "skip": "automatic pick rejected on title review (wrong subject: \"Frances\")"
+  },
   "animus-man-from-ruined-pyramid-vision-zurich-1934": {
    "skip": "automatic pick rejected on title review (wrong subject: \"Frances\")"
   },

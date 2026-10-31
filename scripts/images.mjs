@@ -990,6 +990,8 @@ for (const group of groups) {
     const spec = (queries[group] || {})[id];
     if (spec?.skip) {
       if (images[group][id] && !prune) { keptSkipped++; continue; }
+      // a dry run changes nothing: it names the plate it would prune
+      if (images[group][id] && dry) { say(`[dry] would prune ${group}/${id}: ${spec.skip}`); continue; }
       if (images[group][id]) {
         for (const f of [`${id}.jpg`, `${id}.thumb.jpg`]) fs.rmSync(path.join(IMG_DIR, group, f), { force: true });
         deleted.add(`${group}/${id}`);
