@@ -9,6 +9,12 @@ const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`);
 
 const b = await launch('chromium');
 
+/** The filter lives in the slice dock's popover; open it from the dock's button unless it already stands. */
+async function openFilter(page) {
+  if (!(await page.$('.filter-pop:not([hidden])'))) await page.click('.dock-add');
+  await page.waitForSelector('.filter-pop:not([hidden])');
+}
+
 /** The field's totals, from a throwaway page: the model's own maps. */
 async function pageTotal(browser) {
   const { ctx, page } = await open(browser, { hash: '#/' });
@@ -71,13 +77,12 @@ async function countOf(browser, kind, id) {
   const psychoidCount = await countOf(b, 'theo', 'psychoid');
   const { ctx, page, logs } = await open(b, { hash: '#/' });
   await page.waitForTimeout(3000);
-  await page.click('.sh-lens');
-  await page.waitForSelector('#shell-menu:not([hidden])');
+  await openFilter(page);
   await page.waitForTimeout(300);
   const rows = await page.$$eval('.sf-field .sf-label', (els) => els.map((e) => e.textContent));
   ok(rows.includes('Archetype') && rows.includes('Theory'), `the "Filter the field" section carries Archetype and Theory rows (got ${JSON.stringify(rows)})`);
   // a pill works: clicking The Self turns the archetype dimension on, and the count is the union of what is on
-  const pill = await page.getByRole('region', { name: 'Filter the field' }).getByRole('button', { name: 'The Self', exact: true }).elementHandle();
+  const pill = await page.getByRole('dialog', { name: 'Filter the field' }).getByRole('button', { name: 'The Self', exact: true }).elementHandle();
   await pill.scrollIntoViewIfNeeded();
   await page.waitForTimeout(250);
   await pill.click();
@@ -121,9 +126,8 @@ async function countOf(browser, kind, id) {
   ok(theo.chip.some((c) => c.includes('The Psychoid')), `a chip names the concept (got ${JSON.stringify(theo.chip)})`);
   await page.screenshot({ path: '.cache/screens/filters/02-field-theory.png' });
   // clearing returns the whole field (the menu stays open across a hash-only navigation)
-  if (await page.$('#shell-menu[hidden]')) await page.click('.sh-lens');
-  await page.waitForSelector('#shell-menu:not([hidden])');
-  await page.getByRole('region', { name: 'Filter the field' }).getByRole('button', { name: 'Clear the filter', exact: true }).click();
+  await openFilter(page);
+  await page.getByRole('dialog', { name: 'Filter the field' }).getByRole('button', { name: 'Clear the filter', exact: true }).click();
   await page.waitForTimeout(700);
   const cleared = await page.evaluate(() => ({ text: document.querySelector('.sf-count')?.textContent ?? '', hash: location.hash, mask: !!window.__earth.ctl.filterMask }));
   ok(/whole field/.test(cleared.text) && !cleared.hash.includes('t=') && !cleared.hash.includes('a=') && !cleared.mask, `clearing returns the whole field (${JSON.stringify(cleared)})`);
@@ -137,8 +141,7 @@ async function countOf(browser, kind, id) {
 {
   const { ctx, page, logs } = await open(b, { hash: '#/redbook' });
   await page.waitForTimeout(3000);
-  await page.click('.sh-lens');
-  await page.waitForSelector('#shell-menu:not([hidden])');
+  await openFilter(page);
   await page.waitForTimeout(300);
   const rows = await page.$$eval('.sf-field .sf-label', (els) => els.map((e) => e.textContent));
   ok(!rows.includes('Era'), `the Red Book offers no Era (its folios are one era): ${JSON.stringify(rows)}`);

@@ -11,8 +11,7 @@ import type { TimeModel } from '../state/timeModel';
 import { inLens, type AppState } from '../state/store';
 import type { Palette } from '../types/field';
 import type { DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender, DynamicsRoute, RouteMovement, RouteQuote, RouteStop } from '../types/dynamics';
-import { clear, el } from '../ui/dom';
-import { modeOptions, optionAction } from '../ui/mode-options';
+import { el } from '../ui/dom';
 import type { PassageBridge } from '../ui/passage';
 import { paneStepper } from '../ui/pane';
 import { WalkRunner } from '../walk/runner';
@@ -70,7 +69,6 @@ export class DynamicsView {
   readonly root: HTMLElement;
   /** The phase strip, exposed for the harness and tests. */
   readonly strip: PhaseStrip;
-  private heading: HTMLElement;
   /** the route's stops are walked by the one runner (S9); past the last comes the first */
   private runner: WalkRunner;
   /** Jung's theory, named for the Contents (the Theory lens's own sections) */
@@ -112,7 +110,6 @@ export class DynamicsView {
     // the hero is painted at the device's pixel ratio, so a zoom or a move between screens repaints it too
     onPixelRatio(() => this.paintHero()); // the lens lives as long as the page: its disposer is not needed
     // the subject is the shell's context line; the visited families are this lens's controls (MODES-RFC §2)
-    this.heading = el('div', { class: 'dy-controls' });
     this.runner = new WalkRunner({ scale: model.scale, wrap: true });
     this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root]);
     void loadLensData<{ sections: { id: string; name: string }[]; number?: unknown }>('theory')
@@ -171,8 +168,10 @@ export class DynamicsView {
       sections: this.sections,
       route: this.route,
       stopName: (st) => this.stopName(st as RouteStop),
+      families: this.familiesHere().map((id) => ({ id, name: this.model.famById.get(id)?.name ?? id })),
       at: this.stop ? { kind: 'stop', id: this.stop.stop.id } : this.routeOpen && this.route ? { kind: 'overview' } : { kind: 'none' },
       go: {
+        family: (id) => this.navigate({ view: { kind: 'focus', subject: { type: 'family', id } }, deep: false }),
         section: (id) => this.navigate(inLens('theory', id === this.sections[0]?.id ? [] : [id])),
         theoretic: (id) => this.navigate(inLens('theory', ['theoretics', id])),
         overview: () => to({ view: { kind: 'world' }, deep: false, dynamics: { ...sub, route: true } }),
@@ -182,8 +181,8 @@ export class DynamicsView {
   }
 
   /**
-   * The title and the controls name what the globe shows. Options hold the families the standing subject passes through;
-   * the two readings of Theory are in the pane's Contents.
+   * The title names what the globe shows. The families the standing subject passes through, and the two readings of Theory,
+   * are in the pane's Contents.
    */
   private refreshChrome() {
     if (!this.subject || this.root.hidden) return;
@@ -195,15 +194,15 @@ export class DynamicsView {
       : standing ? (this.chosen ? `${standing.name} · ${subject}` : standing.name)
       : this.route && !this.chosen ? this.route.title : subject;
     this.chrome?.setContext(this.routeOpen ? '' : context);
-    clear(this.heading);
-    const fams = standing ? standing.familyIds.filter((f) => m.famById.has(f))
-      : this.chosen || !this.route ? this.topBasins() : [];
-    const famActions = fams.map((familyId) => optionAction(m.famById.get(familyId)?.name ?? familyId, () =>
-      this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: familyId } }, deep: false })));
-    // the Contents carry the two readings of Theory; Options keep only the families the standing subject passes through
-    if (this.routeOpen || !famActions.length) { this.chrome?.setControls(null); return; }
-    this.heading.append(modeOptions(famActions));
-    this.chrome?.setControls([this.heading]);
+    // the families the standing subject passes through are the Contents' first group (a list that may have changed is read when it opens)
+  }
+
+  /** The families the standing stop or subject passes through, for the Contents' first group. */
+  private familiesHere(): string[] {
+    const standing = this.standing();
+    if (this.routeOpen) return [];
+    const fams = standing ? standing.familyIds.filter((f) => this.model.famById.has(f)) : this.chosen || !this.route ? this.topBasins() : [];
+    return fams;
   }
 
   /** The most-visited families the subject passes through, in the order they were first visited. */

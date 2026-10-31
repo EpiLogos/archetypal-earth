@@ -64,16 +64,16 @@ for (const [hash, name] of [['#/redbook', 'the Red Book'], ['#/aion/jung-aion', 
     await page.locator('.dp-contents-pane li button').first().click();
     await page.waitForTimeout(2500);
   }
-  const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
-  check(/ in .* · Show the whole field/.test(line) && !/nearby, dimmed/.test(line), `${name} names its own set`, line);
+  const line = (await page.locator('.sh-chip.scope').textContent().catch(() => '')) ?? '';
+  check(/^[\d,]+ in /.test(line) && !/nearby, dimmed/.test(line) && (await page.locator('.dock-chips .sh-chip.scope[aria-pressed="true"]').count()) === 1, `${name} names its own set as a removable chip in the dock`, line);
   const before = await drawn(page);
   const total = await placedTotal(page);
   check(before !== null && before < total * 0.6, `${name} draws its set, not the whole field`, `${before} presences drawn of ${total.toLocaleString('en-US')}`);
-  await page.locator('.sh-scope-toggle').click();
+  await page.locator('.sh-chip.scope').click();
   await page.waitForTimeout(1500);
   const after = await drawn(page);
-  const line2 = (await page.locator('.sh-scope').textContent()) ?? '';
-  check(after > before && /Only this set/.test(line2), `${name}: "Show the whole field" brings the rest back, receded`, `${after} drawn`);
+  const line2 = (await page.locator('.sh-chip.scope').textContent()) ?? '';
+  check(after > before && /^Only /.test(line2), `${name}: removing the scope chip brings the rest back, receded, and the chip stays as the way back`, `${after} drawn`);
   check(!logs.length, `${name}: no page errors`, logs.slice(0, 2).join(' | '));
   await ctx.close();
 }

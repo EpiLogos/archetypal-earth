@@ -49,6 +49,17 @@ describe('the Theory Contents', () => {
     expect(groups.slice(3).flatMap((g) => g.items.map((i) => i.label))).toEqual(routeStops(route).map((r) => r.stop.id));
   });
 
+  it('opens with the families the standing stop passes through, each going to its family; none, no group', () => {
+    const family = vi.fn();
+    const a = { ...input({ kind: 'none' }), families: [{ id: 'serpent', name: 'Serpent' }, { id: 'tree', name: 'Tree' }], go: { ...go(), family } };
+    const groups = theoryContentsGroups(a);
+    expect(groups[0].title).toBe('Families it passes through');
+    expect(groups[0].items.map((i) => i.label)).toEqual(['Serpent', 'Tree']);
+    groups[0].items[1].onPick();
+    expect(family).toHaveBeenCalledWith('tree');
+    expect(theoryContentsGroups({ ...a, families: [] })[0].title).toBe('The theory');
+  });
+
   it('marks the one the visitor stands on, and only that one', () => {
     const marked = (at: Parameters<typeof input>[0]) => theoryContentsGroups(input(at)).flatMap((g) => g.items).filter((i) => i.current).map((i) => i.label);
     expect(marked({ kind: 'theoretic', id: 'psychoid' })).toEqual(['The Psychoid']);

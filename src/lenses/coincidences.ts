@@ -201,7 +201,6 @@ export function mount(ctx: LensContext): LensInstance {
   return {
     enter(path) {
       standing = path;
-      ctx.setControls(null);
       ctx.pane.contents('Coincidences', contents);
       void ready.then(() => route(path));
     },

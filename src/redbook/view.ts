@@ -86,7 +86,6 @@ export class RedBookView {
     this.root.hidden = false;
     document.body.classList.add('redbook-mode');
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
-    this.chrome?.setControls(null);
     this.pane?.contents('Liber Novus', () => this.contentsGroups());
     if (state?.genesis) {
       this.chrome?.setContext('Genesis');
@@ -94,7 +93,8 @@ export class RedBookView {
       this.showGenesis();
     } else if (state?.stop) {
       const stop = this.stops.find((s) => s.id === state.stop) ?? this.stops[0];
-      this.chrome?.setContext('');
+      // the folio is read in the pane under its own name; the tab and history carry it too
+      this.chrome?.setContext(this.model.occ[this.model.occIndex.get(stop.id) ?? -1]?.title ?? '', true);
       this.showStop(stop);
     } else {
       // landing: no folio read, the Contents waiting

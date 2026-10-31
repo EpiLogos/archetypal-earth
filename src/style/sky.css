@@ -20,7 +20,7 @@ body.sky-gazing .sky-label { pointer-events: none; }
 }
 .sky-caption.on { opacity: 1; }
 @media (max-width: 760px) {
-  .sky-caption { left: 18px; bottom: 92px; }
+  .sky-caption { left: 18px; bottom: calc(var(--dock-h) + 6px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .sky-layer, .sky-label, .sky-caption { transition: none; }
@@ -31,8 +31,6 @@ body.sky-gazing .sky-label { pointer-events: none; }
 .rv-sky[hidden] { display: none; }
 .rv-sky-mark { color: rgb(var(--core-rgb) / .6); margin-right: 8px; }
 .rv-sky-glyph { font-family: var(--sans); opacity: .85; }
-
-/* ── the birth sky: a quiet disclosure under the culture selector ───── */
 
 /* the chart ring's own names: sign names and the two angles, placed over the scene */
 .sky-chart-mark { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity .4s var(--ease); font: 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); text-shadow: 0 1px 12px rgb(var(--deep-rgb)); white-space: nowrap; }

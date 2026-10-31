@@ -3,7 +3,8 @@
 // it as its scope on the globe and its page-ordered walk as the way through it. CW9ii and Liber Novus keep their own lenses:
 // the controller hands those two to Aion and the Red Book before this module is reached (`Controller.lensRoute`).
 // Everything the lens shows is derived by src/data/texts.ts and the walk runner; nothing is authored here.
-// Routes: #/texts (the picker), #/texts/<work>, #/texts/<work>/<stop>.
+// The reading is in the pane (a list of the works, or a cite with its stepper); the Contents are the chapters of the work that is
+// open and the way back to the list. Routes: #/texts (the list), #/texts/<work>, #/texts/<work>/<stop>.
 import { subjectName } from '../data/model';
 import { workLens, worksByVoice, type TextChapter, type WorkLens } from '../data/texts';
 import type { PassageRef } from '../data/corpus';
@@ -13,6 +14,8 @@ import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
 import { quote } from '../ui/quote';
 import type { LensContext, LensInstance } from '../shell/lens';
+import type { ContentsGroup } from '../ui/deep';
+import { paneStepper } from '../ui/pane';
 import { tuneGlobe } from './ui';
 
 /** The kinds as the picker names them. */
@@ -43,9 +46,33 @@ export function mount(ctx: LensContext): LensInstance {
   let tok = 0;
   let finished = '';
 
-  const show = (nodes: Node[], foot: Node[] | null = null) => {
-    if (ctx.panel.isOpen) ctx.panel.replace(nodes as HTMLElement[], { foot });
-    else ctx.panel.open('Texts', nodes, { foot });
+  /** A reading of this lens, held for the pane; `reveal` brings it up now (a work's cite is read at once, the list only when asked for). */
+  const show = (key: string, nodes: Node[], foot: Node[] | null = null, reveal = true) => {
+    ctx.pane.load({ key: `texts/${key}`, eyebrow: 'Texts', nodes, foot });
+    if (reveal) ctx.pane.reveal();
+  };
+  /** What the Contents list shows: the open work's chapters (the one the walk stands in marked), and the way back to the list of texts. */
+  let standing: { wl: WorkLens; i: number } | null = null;
+  const contents = (): ContentsGroup[] => {
+    const groups: ContentsGroup[] = [];
+    if (standing && standing.wl.contents.length) {
+      const { wl, i } = standing;
+      const here = chapterOfStop(wl.contents, i);
+      const last = Math.max(0, (wl.walk?.stops.length ?? 1) - 1);
+      groups.push({
+        title: wl.title,
+        items: wl.contents.map((c) => ({
+          label: c.title, level: Math.max(0, c.level - 1), note: c.to > c.from ? String(c.to - c.from) : undefined, current: c === here,
+          onPick: () => ctx.setPath([wl.id, String(Math.min(c.from, last))], { replace: true }),
+        })),
+      });
+    }
+    if (standing) { groups.push({ title: 'Another text', items: [{ label: 'The list of texts', onPick: () => ctx.setPath([]) }] }); return groups; }
+    // at the list itself the Contents are the works, by voice and kind
+    for (const g of worksByVoice(m)) {
+      for (const k of g.kinds) groups.push({ title: `${g.voice} · ${KIND_LABEL[k.kind] ?? k.kind}`, items: k.works.map((w) => ({ label: w.title, note: w.year ? String(w.year) : undefined, onPick: () => ctx.setPath([w.id]) })) });
+    }
+    return groups;
   };
 
   const snapshot = (): AppSnapshot => ({ u: ctx.time.cursorU, focus: null, reading: null, centre: null, walk: null });
@@ -55,7 +82,8 @@ export function mount(ctx: LensContext): LensInstance {
     runner.interrupt();
     ctx.setContext('');
     ctx.engine.setEmphasis(null, null);
-    const nodes: HTMLElement[] = [el('h2', { class: 'lp-h', text: 'Texts' })];
+    standing = null;
+    const nodes: HTMLElement[] = [el('h2', { class: 'dp-title', text: 'Texts' })];
     for (const g of worksByVoice(m)) {
       nodes.push(el('h3', { class: 'as-h3', text: g.voice }));
       for (const k of g.kinds) {
@@ -66,8 +94,7 @@ export function mount(ctx: LensContext): LensInstance {
         ]))));
       }
     }
-    show(nodes);
-    ctx.panel.reveal();
+    show('list', nodes, null, false);
   };
 
   // ── a work ────────────────────────────────────────────────────────────
@@ -108,41 +135,22 @@ export function mount(ctx: LensContext): LensInstance {
     tuneGlobe(ctx, [...wl.scope].filter((i) => m.located[i]), undefined, wl.title);
 
     const stepHost = el('div', { class: 'tx-step' });
-    const counter = el('span', { class: 'th-count' });
     const walk = wl.walk;
     const go = (to: number) => ctx.setPath([wl.id, String(to)], { replace: true });
 
-    const contents = wl.contents.length
-      ? el('ol', { class: 'tx-contents', 'aria-label': 'Contents' }, wl.contents.map((c) => {
-        const hasStops = c.to > c.from;
-        return el('li', { class: 'tx-chap', style: `--lvl:${Math.max(0, c.level - 1)}` }, [
-          hasStops
-            ? el('button', { type: 'button', class: 'link-quiet', text: c.title, onclick: () => go(c.from) })
-            : el('span', { class: 'tx-chap-bare', text: c.title }),
-          hasStops ? el('span', { class: 'tx-chap-n', text: String(c.to - c.from) }) : null,
-        ]);
-      }))
-      : null;
-
     const nodes: Node[] = [
-      el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath([]) }, [icon('back', 13), el('span', { text: 'Another text' })]),
-      el('h2', { class: 'lp-h', text: wl.title }),
-      el('p', { class: 'lp-sub', text: [wl.voice, wl.year ? String(wl.year) : ''].filter(Boolean).join(' · ') }),
+      el('h2', { class: 'dp-title', text: wl.title }),
+      el('p', { class: 'th-line', text: [wl.voice, wl.year ? String(wl.year) : ''].filter(Boolean).join(' · ') }),
       el('p', { class: 'tx-count', text: `${w.cites} ${w.cites === 1 ? 'cite' : 'cites'} in the field, from ${w.occurrences} ${w.occurrences === 1 ? 'instance' : 'instances'}` }),
       stepHost,
     ];
-    if (contents) nodes.push(el('h3', { class: 'as-h3', text: 'Contents' }), contents);
 
     let foot: Node[] | null = null;
     if (walk && walk.stops.length) {
       const stepNow = runner.active && runner.position?.walkId === walk.id ? runner.goto(at) : runner.start(walk, snapshot(), at);
       const s = stepNow ?? runner.start(walk, snapshot(), 0)!;
-      const prev = el('button', { type: 'button', 'aria-label': 'Previous cite', onclick: () => go(Math.max(0, s.i - 1)) }, [icon('back', 14)]) as HTMLButtonElement;
-      const next = el('button', { type: 'button', 'aria-label': 'Next cite', onclick: () => go(Math.min(s.count - 1, s.i + 1)) }, [icon('next', 14)]) as HTMLButtonElement;
-      prev.disabled = s.first;
-      next.disabled = s.last;
-      counter.textContent = `${s.i + 1} / ${s.count}`;
-      foot = [el('div', { class: 'th-step' }, [prev, counter, next])];
+      standing = { wl, i: s.i };
+      foot = paneStepper({ prev: 'Previous cite', next: 'Next cite' }, `${s.i + 1} / ${s.count}`, () => go(Math.max(0, s.i - 1)), () => go(Math.min(s.count - 1, s.i + 1)), { prev: s.first, next: s.last });
       step(wl, s, stepHost, myTok);
       if (s.effects.flyTo) ctx.engine.rig.flyTo(s.effects.flyTo.lat, s.effects.flyTo.lon, 2.8, { duration: 1.8 });
       // a walk read to its last page is noted once, for the visitor's own node
@@ -150,18 +158,20 @@ export function mount(ctx: LensContext): LensInstance {
     } else {
       stepHost.append(el('p', { class: 'lp-note', text: `${subjectName(m, { type: 'work', id: wl.id })} has no cite on a page of its own volume to walk through.` }));
     }
-    show(nodes, foot);
-    ctx.panel.reveal();
+    if (!standing || standing.wl !== wl) standing = { wl, i: at };
+    show(`${wl.id}/${standing.i}`, nodes, foot);
   };
 
   return {
     enter(path) {
       const [key, at] = path;
+      ctx.pane.contents('Texts', contents);
       if (!key) { picker(); return; }
       const n = Number(at);
       work(key, Number.isInteger(n) && n >= 0 ? n : 0);
     },
     leave() {
+      standing = null;
       tok++;
       runner.interrupt();
       finished = '';

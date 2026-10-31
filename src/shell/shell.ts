@@ -3,41 +3,21 @@
 import { el, clear, isNarrow } from '../ui/dom';
 import { icon, type IconName } from '../ui/icons';
 import { BUILT, LENSES, lensDef, type LensDef, type LensId } from './lens';
-import { chips, ERAS, isEmpty, KIND_LABELS, RING_LABELS, subjectLabel, type FieldFilter, type PersonSubject, type SkyRing } from './filter';
-import type { LocusType } from '../types/field';
+import type { FieldFilter } from './filter';
+import { SliceDock, type DockHooks, type FilterScope } from './dock';
+import type { ScopeState } from './scope-chip';
+
+export type { FilterScope } from './dock';
 
 export const REPO_URL = 'https://github.com/EpiLogos/archetypal-earth';
 export const RELEASES_URL = `${REPO_URL}/releases`;
 export const ISSUES_URL = `${REPO_URL}/issues`;
 const SITE = 'An Archetypal Earth';
 
-/** What the filter offers for the lens that stands: the dimensions that vary inside its slice, and the values of the two facets. */
-export interface FilterScope {
-  /** the lens's name, for the count line */
-  label: string;
-  /** true while the whole field is the slice (the Field): the count line then says so */
-  whole: boolean;
-  dimensions: readonly string[];
-  facets: { subjects: readonly PersonSubject[]; rings: readonly SkyRing[] };
-}
-
-const ALL_DIMENSIONS = ['works', 'cultures', 'era', 'kinds', 'archetypes', 'theoretics', 'subjects', 'rings'];
-
-export interface ShellHooks {
+export interface ShellHooks extends DockHooks {
   onLens(id: LensId): void;
   onSearch(anchor?: HTMLElement): void;
-  onFilter(next: FieldFilter): void;
-  /** how many occurrences a filter leaves in the lens's slice and on the Earth, for the menu's count */
-  countFor(f: FieldFilter): number;
-  /** the Sources a filter can slice by: a Work's id and name, and the other cite keys that fold to it */
-  works: { id: string; name: string; aliases?: string[] }[];
-  cultures: { id: string; name: string }[];
-  /** the field's archetypes and theoretics, for the filter's own dimensions */
-  archetypes: { id: string; name: string }[];
-  theoretics: { id: string; name: string }[];
 }
-
-const FILTER_KINDS: LocusType[] = ['dream', 'vision', 'artifact', 'myth-episode', 'ritual', 'text-passage'];
 
 export class Shell {
   readonly root: HTMLElement;
@@ -50,14 +30,11 @@ export class Shell {
   private controls: HTMLElement;
   private contentsBtn: HTMLButtonElement;
   private contentsAct: (() => void) | null = null;
-  private scopeLine: HTMLElement;
   private menu: HTMLElement;
   private menuScrim: HTMLElement;
-  private filterHost: HTMLElement;
-  private chipRow: HTMLElement;
   private lens: LensId = 'field';
-  private filter: FieldFilter = {};
-  private scope: FilterScope = { label: 'the field', whole: true, dimensions: ALL_DIMENSIONS, facets: { subjects: ['jung', 'patient-anon'], rings: ['body', 'zodiac', 'rank', 'wheel', 'pole'] } };
+  /** the slice dock: the scope and filter chips over the time strip (src/shell/dock.ts) */
+  readonly dock: SliceDock;
   private context = '';
 
   constructor(parent: HTMLElement, private hooks: ShellHooks) {
@@ -74,9 +51,8 @@ export class Shell {
     this.contentsBtn = el('button', { type: 'button', class: 'sh-contents', 'aria-label': 'Contents', 'aria-pressed': 'false', hidden: true, onclick: () => this.contentsAct?.() }, [icon('list', 15), el('span', { text: 'Contents' })]) as HTMLButtonElement;
     this.controls.append(this.contentsBtn);
     this.controls.hidden = true;
-    this.scopeLine = el('p', { class: 'sh-scope', hidden: true, role: 'status' });
-    // lens → title → scope → Options (icon); Options must not sit above the title
-    this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.scopeLine, this.controls]);
+    // lens → title → Options (icon); Options must not sit above the title
+    this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.controls]);
 
     const github = el('a', { class: 'sh-corner-btn icon-btn', href: REPO_URL, target: '_blank', rel: 'noopener', 'aria-label': 'The project on GitHub', title: 'GitHub' }, [icon('github', 17)]);
     const search = document.getElementById('search-btn');
@@ -89,12 +65,11 @@ export class Shell {
     }
     corner.append(github);
 
-    this.filterHost = el('div', { class: 'sm-filter' });
     this.menuScrim = el('div', { class: 'sm-scrim', hidden: true, onclick: () => this.closeMenu() });
     this.menu = el('div', { class: 'shell-menu', id: 'shell-menu', role: 'dialog', 'aria-label': 'Lenses and filters', hidden: true });
-    this.chipRow = el('div', { class: 'sh-chips', 'aria-label': 'Active filters' });
+    this.dock = new SliceDock(parent, hooks);
 
-    parent.append(this.root, corner, this.chipRow, this.menuScrim, this.menu);
+    parent.append(this.root, corner, this.menuScrim, this.menu);
     this.buildMenu();
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !this.menu.hidden) { e.stopImmediatePropagation(); e.preventDefault(); this.closeMenu(); }
@@ -124,34 +99,17 @@ export class Shell {
   }
 
   /** The one line under the lens: the reading, the folio, the subject. Empty hides it. */
-  setContext(text: string) {
+  setContext(text: string, quiet = false) {
     this.context = text;
-    this.title.textContent = text;
-    this.title.hidden = !text;
+    // a quiet context names the page's tab and history entry only: what is read in the pane already carries its own name
+    this.title.textContent = quiet ? '' : text;
+    this.title.hidden = !text || quiet;
     this.syncDocTitle();
   }
 
-  /**
-   * What the globe shows in this mode: its own presences, the nearby ones dimmed, the rest set aside — and the whole
-   * field back on request. Null hides the line (the whole field is showing).
-   */
-  setScope(scope: { label: string; own: number; nearby: number } | null, wholeField: boolean, onWhole: (on: boolean) => void) {
-    clear(this.scopeLine);
-    this.scopeLine.hidden = !scope;
-    if (!scope) return;
-    const n = (x: number) => x.toLocaleString();
-    this.scopeLine.append(
-      el('span', { text: `${n(scope.own)} in ${scope.label}${wholeField ? ' · the rest of the field receded' : ''}` }),
-      ' · ',
-      el('button', { type: 'button', class: 'link-quiet sh-scope-toggle', text: wholeField ? 'Only this set' : 'Show the whole field', onclick: () => onWhole(!wholeField) }),
-    );
-  }
-
-  /** The lens's own few controls; the shell places them. Null clears. */
-  setControls(nodes: Node[] | null) {
-    for (const c of [...this.controls.children]) if (c !== this.contentsBtn) c.remove();
-    if (nodes?.length) this.controls.append(...nodes);
-    this.controls.hidden = !nodes?.length && this.contentsBtn.hidden;
+  /** What the globe shows in this mode: its own set, the rest of the field set back. The slice dock carries it as a chip. */
+  setScope(scope: ScopeState | null, wholeField: boolean, onWhole: (on: boolean) => void) {
+    this.dock.setScope(scope, wholeField, onWhole);
   }
 
   /** The Contents trigger of the lens that stands: shown while the lens lists something, pressed while its list is open. Null takes it away. */
@@ -159,7 +117,7 @@ export class Shell {
     this.contentsAct = onToggle;
     this.contentsBtn.hidden = !onToggle;
     if (!onToggle) this.contentsBtn.setAttribute('aria-pressed', 'false');
-    this.controls.hidden = this.contentsBtn.hidden && this.controls.children.length <= 1;
+    this.controls.hidden = this.contentsBtn.hidden;
   }
 
   /** The pane's Contents list opened or closed: the trigger follows. */
@@ -179,20 +137,26 @@ export class Shell {
   }
 
   setFilter(f: FieldFilter) {
-    this.filter = f;
-    this.renderFilter();
-    this.renderChips();
+    this.dock.setFilter(f);
   }
 
-  /** The filter follows the lens: only the dimensions that vary inside its slice are offered (one a filter already holds stays, so it can be taken off). */
+  /** The filter follows the lens: only the dimensions that vary inside its slice are offered. */
   setFilterScope(scope: FilterScope) {
-    this.scope = scope;
-    this.renderFilter();
+    this.dock.setFilterScope(scope);
+  }
+
+  /** Whether the filter popover stands open (a layer of the dismissal stack). */
+  get filterOpen(): boolean {
+    return this.dock.filterOpen;
+  }
+
+  closeFilter() {
+    this.dock.closeFilter();
   }
 
   openMenu() {
     if (!this.menu.hidden) return;
-    this.renderFilter();
+    this.dock.closeFilter();
     this.menu.hidden = false;
     this.menuScrim.hidden = false;
     this.menu.classList.toggle('sheet', isNarrow());
@@ -237,73 +201,11 @@ export class Shell {
     this.menu.append(
       el('div', { class: 'sm-grab', 'aria-hidden': 'true' }),
       ...groups,
-      el('section', { class: 'sm-group', 'aria-label': 'Filter the field' }, [el('h2', { class: 'sm-head', text: 'Filter the field' }), this.filterHost]),
       el('footer', { class: 'sm-foot' }, [
         el('div', { class: 'sm-foot-links' }, [foot(RELEASES_URL, 'download', 'Downloads'), foot(ISSUES_URL, 'issue', 'Report a problem'), foot(REPO_URL, 'github', 'Source')]),
         el('p', { class: 'sm-fine' }, [icon('lock', 13), el('span', { text: 'Anything you write in Astrology, Dreams or Coincidences stays in this browser. Nothing is sent anywhere.' })]),
         el('p', { class: 'sm-fine sm-credits', text: 'Globe imagery: NASA Blue Marble and NASA GIBS. Plates: Wikimedia Commons, credited on each.' }),
       ]),
     );
-  }
-
-  private renderFilter() {
-    const f = this.filter;
-    const set = (next: FieldFilter) => this.hooks.onFilter(next);
-    const select = (label: string, options: { id: string; name: string; aliases?: string[] }[], current: string[] | undefined, apply: (ids: string[]) => FieldFilter) =>
-      el('label', { class: 'sf-field' }, [
-        el('span', { class: 'sf-label', text: label }),
-        (() => {
-          const s = el('select', { onchange: (e: Event) => { const v = (e.target as HTMLSelectElement).value; set(apply(v ? [v] : [])); } }, [el('option', { value: '', text: 'Any' })]);
-          for (const o of options) s.append(el('option', { value: o.id, text: o.name, selected: !!current?.length && (current[0] === o.id || !!o.aliases?.includes(current[0])) }));
-          return s;
-        })(),
-      ]);
-    const pill = (text: string, on: boolean, onclick: () => void) => el('button', { type: 'button', class: 'sf-pill', 'aria-pressed': String(on), text, onclick });
-    clear(this.filterHost);
-    const shown = (dim: keyof FieldFilter, active: boolean) => this.scope.dimensions.includes(dim) || active;
-    const rows: (HTMLElement | null)[] = [
-      shown('works', !!f.works?.length) ? select('Source', this.hooks.works, f.works, (ids) => ({ ...f, works: ids })) : null,
-      shown('cultures', !!f.cultures?.length) ? select('Culture', this.hooks.cultures, f.cultures, (ids) => ({ ...f, cultures: ids })) : null,
-      shown('era', !!f.era) ? el('div', { class: 'sf-field', 'data-dim': 'era' }, [el('span', { class: 'sf-label', text: 'Era' }), el('div', { class: 'sf-pills' }, ERAS.map((e) => {
-        const on = !!f.era && f.era[0] === e.range[0] && f.era[1] === e.range[1];
-        return pill(e.label, on, () => { const { era: _e, ...rest } = f; set(on ? rest : { ...f, era: e.range }); });
-      }))]) : null,
-      shown('kinds', !!f.kinds?.length) ? el('div', { class: 'sf-field', 'data-dim': 'kinds' }, [el('span', { class: 'sf-label', text: 'Kind' }), el('div', { class: 'sf-pills' }, FILTER_KINDS.map((k) => {
-        const on = !!f.kinds?.includes(k);
-        return pill(KIND_LABELS[k], on, () => set({ ...f, kinds: on ? f.kinds!.filter((x) => x !== k) : [...(f.kinds ?? []), k] }));
-      }))]) : null,
-      shown('archetypes', !!f.archetypes?.length) ? el('div', { class: 'sf-field', 'data-dim': 'archetypes' }, [el('span', { class: 'sf-label', text: 'Archetype' }), el('div', { class: 'sf-pills' }, this.hooks.archetypes.map((a) => {
-        const on = !!f.archetypes?.includes(a.id);
-        return pill(a.name, on, () => set({ ...f, archetypes: on ? f.archetypes!.filter((x) => x !== a.id) : [...(f.archetypes ?? []), a.id] }));
-      }))]) : null,
-      shown('theoretics', !!f.theoretics?.length) ? el('div', { class: 'sf-field', 'data-dim': 'theoretics' }, [el('span', { class: 'sf-label', text: 'Theory' }), el('div', { class: 'sf-pills' }, this.hooks.theoretics.map((t) => {
-        const on = !!f.theoretics?.includes(t.id);
-        return pill(t.name, on, () => set({ ...f, theoretics: on ? f.theoretics!.filter((x) => x !== t.id) : [...(f.theoretics ?? []), t.id] }));
-      }))]) : null,
-      shown('subjects', !!f.subjects?.length) ? el('div', { class: 'sf-field', 'data-dim': 'subjects' }, [el('span', { class: 'sf-label', text: 'Whose' }), el('div', { class: 'sf-pills' }, this.scope.facets.subjects.map((x) => {
-        const on = !!f.subjects?.includes(x);
-        return pill(subjectLabel(x), on, () => set({ ...f, subjects: on ? f.subjects!.filter((y) => y !== x) : [...(f.subjects ?? []), x] }));
-      }))]) : null,
-      shown('rings', !!f.rings?.length) ? el('div', { class: 'sf-field', 'data-dim': 'rings' }, [el('span', { class: 'sf-label', text: 'Sky ring' }), el('div', { class: 'sf-pills' }, this.scope.facets.rings.map((x) => {
-        const on = !!f.rings?.includes(x);
-        return pill(RING_LABELS[x], on, () => set({ ...f, rings: on ? f.rings!.filter((y) => y !== x) : [...(f.rings ?? []), x] }));
-      }))]) : null,
-    ];
-    const n = this.hooks.countFor(f).toLocaleString();
-    this.filterHost.append(
-      ...rows.filter((r): r is HTMLElement => !!r),
-      el('p', { class: 'sf-count', role: 'status', text: isEmpty(f) && this.scope.whole ? 'Showing the whole field.' : isEmpty(f) ? `${n} placed in ${this.scope.label}.` : `${n} placed instances pass the filter.` }),
-    );
-    if (!isEmpty(f)) this.filterHost.append(el('button', { type: 'button', class: 'link-quiet sf-clear', text: 'Clear the filter', onclick: () => set({}) }));
-  }
-
-  private renderChips() {
-    clear(this.chipRow);
-    const name = (list: { id: string; name: string; aliases?: string[] }[]) => (id: string) => (list.find((x) => x.id === id) ?? list.find((x) => x.aliases?.includes(id)))?.name ?? id;
-    const cs = chips(this.filter, { work: name(this.hooks.works), culture: name(this.hooks.cultures), archetype: name(this.hooks.archetypes), theoretic: name(this.hooks.theoretics) });
-    this.chipRow.hidden = !cs.length;
-    for (const c of cs) {
-      this.chipRow.append(el('button', { type: 'button', class: 'sh-chip', 'aria-label': `Remove the filter: ${c.label}`, onclick: () => this.hooks.onFilter(c.without) }, [el('span', { text: c.label }), icon('close', 12)]));
-    }
   }
 }

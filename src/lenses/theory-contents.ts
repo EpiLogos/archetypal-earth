@@ -54,7 +54,10 @@ export interface TheoryContentsInput {
   /** the names of the route's concept stops (a stop with a concept is named by it) */
   stopName(stop: { id: string; concept?: string; name?: string }): string;
   at: TheoryAt;
+  /** the families the standing stop or subject passes through (the first group when there are any) */
+  families?: { id: string; name: string }[];
   go: {
+    family?(id: string): void;
     section(id: string): void;
     theoretic(id: string): void;
     overview(): void;
@@ -78,6 +81,7 @@ export function theoryContentsGroups(a: TheoryContentsInput): ContentsGroup[] {
       items: (a.model.field.theoretics ?? []).map((t, i) => ({ label: t.name, note: String(i + 1), current: at.kind === 'theoretic' && at.id === t.id, onPick: () => a.go.theoretic(t.id) })),
     },
   ];
+  if (a.families?.length) groups.unshift({ title: 'Families it passes through', items: a.families.map((f) => ({ label: f.name, onPick: () => a.go.family?.(f.id) })) });
   if (a.route) {
     groups.push({ title: 'Dynamics', items: [{ label: a.route.title, current: at.kind === 'overview', onPick: () => a.go.overview() }] });
     for (const mv of a.route.movements) {

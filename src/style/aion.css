@@ -2,16 +2,9 @@
 .aion[hidden], .aion-dot[hidden] { display: none; }
 .aion select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; }
 .aion option { background: #0a1020; color: #e5eafa; }
-/* Options: the icon under the title opens a popover anchored under it, in the shell menu's family (a bottom sheet on a phone) */
-.mode-options, .aion-browse { position: relative; margin-top: 8px; font: 11.5px var(--sans); letter-spacing: .05em; }
-.mode-options > summary, .aion-browse > summary { display: inline-grid; place-items: center; list-style: none; cursor: pointer; }
-.mode-options > summary::-webkit-details-marker, .aion-browse > summary::-webkit-details-marker { display: none; }
-.mode-opt-btn { width: 34px; height: 34px; color: var(--ink-2); border: 1px solid var(--hair); border-radius: 10px; background: rgb(0 0 0 / 0.22); }
-.mode-opt-btn:hover { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); }
-.mode-opt-ico { display: block; transition: transform .28s var(--ease, ease); }
-.mode-options[open] .mode-opt-ico { transform: rotate(90deg); color: var(--core); }
+
 /* the popover: the shell menu's surface, radius, border and shadow; anchored under the Options icon, left-aligned with the title */
-.mode-options-body, .aion-choices, .settings-pop {
+.settings-pop {
   position: absolute; top: calc(100% + 8px); left: 0; z-index: 30;
   width: min(320px, calc(100vw - 2 * var(--shell-x, 22px))); max-height: min(70vh, 520px); overflow-y: auto; overscroll-behavior: contain;
   display: grid; align-content: start; gap: 2px; padding: 8px 8px 12px;
@@ -21,9 +14,8 @@
   scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / .25) transparent;
   animation: sm-in .28s var(--ease);
 }
-.mode-options-body::-webkit-scrollbar, .aion-choices::-webkit-scrollbar, .settings-pop::-webkit-scrollbar { width: 6px; }
-.mode-options-body::-webkit-scrollbar-track, .aion-choices::-webkit-scrollbar-track { background: transparent; }
-.mode-options-body::-webkit-scrollbar-thumb, .aion-choices::-webkit-scrollbar-thumb { background: rgb(var(--core-rgb) / .25); border-radius: 3px; }
+.settings-pop::-webkit-scrollbar { width: 6px; }
+
 .mode-opt-grab { display: none; }
 /* the View's settings: the same popover, fixed under the View control at the right, a sheet on a phone */
 .settings-pop { position: fixed; top: 58px; left: auto; right: 22px; width: min(320px, calc(100vw - 44px)); z-index: 44; }
@@ -31,9 +23,7 @@
 @media (max-width: 720px) { .settings-pop { top: auto; right: 0; } }
 .mode-opt-group { display: grid; gap: 2px; padding: 6px 0 4px; }
 .mode-opt-group + .mode-opt-group { border-top: 1px solid var(--hair); margin-top: 6px; padding-top: 10px; }
-.mode-opt-field, .aion-choices label { display: grid; gap: 4px; min-width: 0; }
-.mode-opt-field > span, .aion-choices label > span { color: var(--ink-3); font-size: 10.5px; letter-spacing: .08em; }
-.mode-opt-field select, .aion-choices select, .mode-options-body select { width: 100%; font: 11.5px var(--sans); letter-spacing: .01em; border: 0; border-bottom: 0; padding: 0; }
+
 /* a row: the shell menu's row (title in the serif, one line under it); the current choice has an accent dot and a tint */
 .mode-opt-row {
   display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; padding: 7px 12px; margin: 0;
@@ -51,7 +41,7 @@
 .mode-opt-text { display: grid; gap: 1px; min-width: 0; flex: 1; }
 .mode-opt-title { font: 600 .92rem/1.25 var(--serif); color: var(--ink); }
 .mode-opt-desc { font: 11.5px/1.4 var(--sans); color: var(--ink-3); letter-spacing: .01em; }
-.mode-opt-blurb { margin: 2px 12px 8px; padding: 0; font: 12.5px/1.45 var(--serif); color: var(--ink-2); max-width: 46ch; }
+
 .mode-opt-label {
   display: block; margin: 0 12px 4px; padding: 0;
   font: 500 10px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
@@ -62,11 +52,10 @@
   content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: rgb(var(--core-rgb) / .85);
 }
 .mode-opt-live:empty { display: none; }
-.mode-options-body .rb-modes { display: contents; }
-.mode-options-body .rb-modes button { display: block; width: 100%; text-align: left; padding: 8px 0; }
+
 /* a phone: the same popover as a bottom sheet (the shell menu's sheet), rows at 48px */
 @media (max-width: 720px) {
-  .mode-options-body, .aion-choices, .settings-pop {
+  .settings-pop {
     position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: auto; max-width: none; max-height: 70vh;
     border-radius: 20px 20px 0 0; border-bottom: 0; padding: 8px 10px calc(16px + env(safe-area-inset-bottom));
     z-index: 45; background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);
@@ -75,7 +64,7 @@
   .mode-opt-grab { display: block; width: 40px; height: 4px; border-radius: 2px; background: rgb(var(--core-rgb) / .3); margin: 4px auto 8px; }
   .mode-opt-row { min-height: 48px; }
 }
-.aion-epochs { position: absolute; bottom: 89px; left: 50%; transform: translateX(-50%); z-index: 12; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 32px; max-width: min(920px, 94vw); pointer-events: auto; }
+.aion-epochs { position: absolute; bottom: calc(var(--dock-h) + 23px); left: 50%; transform: translateX(-50%); z-index: 12; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 32px; max-width: min(920px, 94vw); pointer-events: auto; }
 .aion-epochs[hidden] { display: none; }
 .aion-epochs button { color: var(--ink-3); font: 11.5px var(--sans); letter-spacing: .04em; padding: 6px 0; border-bottom: 1px solid transparent; white-space: nowrap; transition: color .4s, border-color .4s; }
 .aion-epochs button[aria-pressed=true] { color: var(--core); border-color: var(--core); }
@@ -92,15 +81,16 @@ body.pane-reading .aion .rb-rail, body.pane-contents .aion .rb-rail { left: calc
 .aion-links button { text-align: left; }
 .aion-thread { margin: 0 20px 16px 0; border-bottom: 1px solid var(--hair); padding-bottom: 14px; }
 .aion-thread > div { display: flex; gap: 16px; margin-top: 10px; }
-.aion-thread-line { font: 11.5px/1.6 var(--sans); letter-spacing: .01em; color: var(--ink-3); margin: 8px 0; }
+
 .aion-dot { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--core); box-shadow: 0 0 0 4px rgb(var(--core-rgb) / .12), 0 0 16px rgb(var(--core-rgb) / .7); transition: opacity .8s; }
 .aion-dot.selected { box-shadow: 0 0 0 7px rgb(var(--core-rgb) / .2), 0 0 20px var(--core); }
 .aion-dot span { display: none; position: absolute; left: 15px; top: -4px; width: max-content; max-width: 220px; padding: 4px 8px; background: rgb(var(--deep-rgb) / .9); color: var(--ink); font: 11px/1.3 var(--sans); text-align: left; }
 .aion-dot:hover span, .aion-dot:focus-visible span { display: block; }
 body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .aion-context { font-size: 10.5px; }
-  .aion-epochs { bottom: 56px; gap: 16px 20px; }
+  /* one row of names across the width (a centred, shrink-to-fit box would wrap the fourth onto a line of its own) */
+  .aion-epochs { bottom: calc(var(--dock-h) + 6px); left: 0; right: 0; transform: none; max-width: none; gap: 4px 18px; padding: 0 12px; }
+  body.pane-reading .aion-epochs, body.pane-contents .aion-epochs { left: 0; max-width: none; }
   .aion-epochs button { font-size: 11px; }
   body.pane-reading .aion-epochs, body.pane-contents .aion-epochs { display: none; }
 }
@@ -110,7 +100,7 @@ body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 .symbol-source { font: 11px/1.5 var(--sans); color: var(--ink-3); margin: 12px 0; }
 .symbol-links { font: 11px/1.8 var(--sans); color: var(--ink-3); margin: 18px 0; }
 .symbol-links button { color: var(--ink-2); margin-right: 8px; }
-.aion-ring { position: absolute; left: 30px; bottom: 112px; width: 172px; display: grid; justify-items: center; gap: 4px; pointer-events: auto; transition: opacity .6s; }
+.aion-ring { position: absolute; left: 30px; bottom: calc(var(--dock-h) + 10px); width: 172px; display: grid; justify-items: center; gap: 4px; pointer-events: auto; transition: opacity .6s; }
 .aion-ring[hidden] { display: none; }
 .aion-ring svg { overflow: visible; }
 .aion-ring-circle { stroke: var(--hair); stroke-width: 1; }
@@ -132,10 +122,11 @@ body.thread-inspecting .strip { opacity: 0; pointer-events: none; }
 .aion-sc-table td { color: var(--ink-3); }
 .aion-sc-table tr.primary th, .aion-sc-table tr.primary td { color: var(--ink); }
 @media (max-width: 760px) {
-  .aion-ring { left: 12px; bottom: auto; top: 232px; width: 120px; }
-  /* under the mode's controls; the pane open over the lower half leaves it no room */
+  /* beside the epoch names, above the dock, as on the desk; the pane open over the lower half leaves it no room */
+  .aion-ring { left: 8px; bottom: calc(var(--dock-h) + 58px); top: auto; width: 116px; }
   body.pane-reading .aion-ring, body.pane-contents .aion-ring { display: none; }
-  .aion-ring svg { width: 120px; height: 120px; }
+  .aion-ring svg { width: 116px; height: 116px; }
+  .aion-ring-ticks text { font-size: 12.5px; }
   .aion-ring-read, .aion-ring select { display: none; }
 }
 /* Aion, the book: the chapter walk (prev/next is the shared rb-rail over the timeline, and the pane's stepper) */

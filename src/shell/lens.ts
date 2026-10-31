@@ -1,7 +1,7 @@
 import type { BirthPrefill } from '../state/router';
 // The lens contract (ProjectCentral/docs/MODES-RFC.md §2): a lens is a plugin the shell lists and loads on first use.
 // The four reading lenses over the globe (Field, Theory, Aion, Red Book) are driven by the controller's state;
-// the panel lenses (Theory's text, Astrology and the practice tools) mount into the shell's panel.
+// the panel lenses (Astrology, Texts and the practice tools) put their Contents and readings in the pane.
 import type { IconName } from '../ui/icons';
 import type { Model, Subject } from '../data/model';
 import type { GlobeEngine } from '../globe/engine';
@@ -10,7 +10,6 @@ import type { AppState, PanelLensId } from '../state/store';
 import type { PassageBridge } from '../ui/passage';
 import type { ContentsGroup, LensReading } from '../ui/deep';
 import type { FieldFilter } from './filter';
-import type { Panel } from './panel';
 import { providerLabels } from '../data/labels';
 
 export type LensId = 'field' | 'theory' | 'aion' | 'redbook' | PanelLensId;
@@ -47,10 +46,10 @@ export interface LensPane {
   readonly reading: boolean;
 }
 
-/** The pieces of the shell's chrome a lens may fill: its context line, its own few controls and the reading pane. */
+/** The pieces of the shell's chrome a lens may fill: its context line and the reading pane. */
 export interface LensChrome {
-  setContext(text: string): void;
-  setControls(nodes: Node[] | null): void;
+  /** `quiet`: the name goes to the tab and history only, not under the lens button (the pane's reading carries its own) */
+  setContext(text: string, quiet?: boolean): void;
   pane?: LensPane;
 }
 
@@ -59,11 +58,8 @@ export interface LensContext {
   model: Model;
   engine: GlobeEngine;
   time: TimeModel;
-  panel: Panel;
   /** the lens's one line under the shell's title (and the document title) */
   setContext(text: string): void;
-  /** a small row of the lens's own controls, placed and styled by the shell; null clears it */
-  setControls(nodes: Node[] | null): void;
   /** what the lens lets the visitor set, drawn in the ⚙ popover of the View control (rows built when it opens); null takes it away */
   setSettings(build: (() => Node[]) | null): void;
   /** the ⚙ popover is open and the lens's choices changed: draw its rows again */

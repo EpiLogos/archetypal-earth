@@ -219,7 +219,6 @@ export class AionView {
     this.strip?.recenter();
     // the title and the reading's own controls stay at the left: the reading stands in the pane, on the right
     this.chrome?.setContext(`${reading.title} · ${reading.author}`);
-    this.chrome?.setControls(null);
   }
 
   hide() {

@@ -88,14 +88,7 @@ body.search-open .search-glyph { opacity: 0; pointer-events: none; }
 
 /* ── credit: a small ⓘ, quiet until hovered or focused; its text and issue link rise above it ───── */
 .credit { position: fixed; left: 24px; bottom: 22px; z-index: 13; display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.03em; color: var(--ink-3); }
-.credit-i { width: 17px; height: 17px; display: grid; place-items: center; border: 1px solid rgb(var(--core-rgb) / 0.3); border-radius: 50%; font-size: 10px; font-weight: 500; line-height: 1; opacity: 0.45; transition: opacity 0.3s; cursor: default; }
-/* hidden by opacity, not display, so the link stays in the Tab order; out of the flex row, stacked above the ⓘ */
-.credit-t, .credit-link { position: absolute; left: 0; padding: 4px 0; line-height: 13px; white-space: nowrap; opacity: 0; transform: translateX(-4px); transition: opacity 0.3s, transform 0.4s var(--ease); pointer-events: none; }
-.credit-t { bottom: 100%; }
-.credit-link { bottom: calc(100% + 21px); }
-.credit-sep { display: none; }
-.credit:hover .credit-i, .credit:focus-within .credit-i { opacity: 0.9; }
-.credit:hover .credit-t, .credit:focus-within .credit-t, .credit:hover .credit-link, .credit:focus-within .credit-link { opacity: 0.85; transform: none; pointer-events: auto; }
+
 .credit a { text-decoration: none; border-bottom: 1px solid rgb(var(--core-rgb) / 0.25); }
 body[data-state="manifest"] .credit, body.deep-open .credit { opacity: 0; pointer-events: none; }
 
@@ -248,6 +241,8 @@ body.deep-wide { --pane-w: min(76vw, 1000px); }
 body.pane-contents { --pane-w: 380px; }
 .pane-head { position: relative; flex: none; display: flex; align-items: center; gap: 10px; height: 64px; padding: 0 20px 0 22px; }
 .pane-spacer { flex: 1; }
+/* the phone sheet's handle (a phone's rule below shows it) */
+.pane-grab { display: none; }
 .dp-close, .pane-tool { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-2); border: 1px solid var(--hair); transition: color 0.3s, border-color 0.3s; }
 .pane-tool { border-color: transparent; }
 .pane-tool[hidden] { display: none; }
@@ -330,8 +325,6 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .q-ql .q-text { font: normal 400 0.92rem/1.5 var(--sans); }
 .q-ql .q-voice { color: var(--deep); background: rgb(var(--glow-rgb)); border-color: rgb(var(--glow-rgb)); }
 
-
-
 /* the list form */
 .qs { margin: 30px 0 0; }
 .qs-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding-top: 18px; border-top: 1px solid var(--hair); }
@@ -362,7 +355,7 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 
 /* ── thread strip ──────────────────────────────────────────────────── */
 .strip {
-  position: fixed; left: 50%; bottom: 86px; z-index: 9; width: min(760px, 92vw);
+  position: fixed; left: 50%; bottom: calc(var(--dock-h) + 14px); z-index: 9; width: min(760px, 92vw);
   transform: translate3d(-50%, 14px, 0); opacity: 0; pointer-events: none;
   transition: opacity 0.9s ease, transform 1s var(--ease);
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -386,10 +379,8 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 /* ── the time control ──────────────────────────────────────────────── */
 .time {
   container-type: inline-size;
-  position: fixed; left: 50%; bottom: 20px; z-index: 12; width: min(780px, 90vw);
-  transform: translateX(-50%);
+  position: relative; width: min(780px, 92%); pointer-events: auto;
   display: grid; grid-template-columns: 96px 1fr 28px; align-items: center; gap: 16px;
-  transition: left 0.9s var(--ease), width 0.9s var(--ease);
 }
 .t-readout { text-align: right; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); transition: color 0.4s; font-feature-settings: 'tnum'; white-space: nowrap; }
 .time.is-cursor .t-readout { font-size: 13px; letter-spacing: 0.02em; text-transform: none; color: var(--ink); }
@@ -418,7 +409,7 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .t-track:hover .t-line { background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.8) 5%, rgb(var(--core-rgb) / 0.8) 95%, transparent); }
 .t-play { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-3); transition: color 0.3s; }
 .t-play:hover, .time.is-playing .t-play { color: rgb(var(--core-rgb)); }
-body.deep-open .time, body.pane-contents .time, body.pane-reading .time { left: calc((100vw - var(--pane-w)) / 2); width: min(560px, calc(100vw - var(--pane-w) - 48px)); }
+body.deep-open .time, body.pane-contents .time, body.pane-reading .time { width: min(560px, 92%); }
 @container (max-width: 640px) { .t-era { display: none; } }
 
 /* ── search ────────────────────────────────────────────────────────── */
@@ -464,11 +455,17 @@ body.deep-open .time, body.pane-contents .time, body.pane-reading .time { left: 
   .rv-name { font-size: 1.5rem; }
   .rv-para { font-size: 1rem; }
 
-  /* a phone's pane is a bottom sheet with a grab handle: a reading 86dvh tall, the Contents list 52dvh */
+  /* a phone's pane is a bottom sheet with a grab handle and three rests (ui/pane.ts DETENT_SHARE): a peek, half, full. A reading opens full,
+     the Contents list half; the handle drags to any of them and a tap on it steps to the next */
   .deep { top: auto; width: 100%; height: 86dvh; border-left: 0; border-top: 1px solid var(--hair); border-radius: 18px 18px 0 0; transform: translate3d(0, 36px, 0); }
-  .deep[data-pane='contents'] { height: 52dvh; }
+  .deep[data-detent='peek'] { height: 26dvh; }
+  .deep[data-detent='half'] { height: 52dvh; }
+  .deep[data-detent='full'] { height: 86dvh; }
+  .deep.dragging { transition: opacity 0.9s ease, transform 1s var(--ease); user-select: none; }
   .pane-head { height: 52px; padding: 8px 16px 0 16px; }
-  .pane-head::before { content: ''; position: absolute; top: 7px; left: 50%; width: 38px; height: 4px; margin-left: -19px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.28); }
+  .pane-grab { display: block; position: absolute; top: 0; left: 50%; z-index: 2; width: 120px; height: 44px; margin-left: -60px; touch-action: none; cursor: grab; }
+  .pane-grab-bar { position: absolute; top: 7px; left: 50%; width: 38px; height: 4px; margin-left: -19px; border-radius: 2px; background: rgb(var(--core-rgb) / 0.28); transition: background 0.3s; }
+  .pane-grab:hover .pane-grab-bar, .pane-grab:focus-visible .pane-grab-bar, .deep.dragging .pane-grab-bar { background: rgb(var(--core-rgb) / 0.7); }
   .dp-scroll { padding: 6px 22px 14vh; }
   .dp-article, .deep[data-wide='true'] .dp-article { max-width: none; }
   .pane-tool { display: none; }
@@ -479,14 +476,14 @@ body.deep-open .time, body.pane-contents .time, body.pane-reading .time { left: 
   .dp-title { font-size: 2.1rem; }
   .dp-para { font-size: 1.1rem; }
   .dp-occ li { grid-template-columns: 6.2rem 1fr; }
-  body.deep-open .time, body.pane-contents .time, body.pane-reading .time { display: none; }
+  body.deep-open .dock, body.pane-contents .dock, body.pane-reading .dock { display: none; }
 
-  .strip { bottom: 66px; }
+  .strip { bottom: calc(var(--dock-h) + 8px); }
   .st-name { font-size: 1.1rem; }
   .st-frame { width: 46px; }
   .st-plate { width: 46px; height: 62px; }
 
-  .time { grid-template-columns: 62px 1fr 26px; gap: 10px; bottom: 10px; }
+  .time { grid-template-columns: 62px 1fr 26px; gap: 10px; }
   /* the cite-year axis is a strip toggle for a desk; a phone's strip keeps its 44px play and readout targets clear */
   .t-axis { display: none; }
   .t-readout { font-size: 9.5px; letter-spacing: 0.08em; }

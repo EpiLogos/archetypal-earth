@@ -10,7 +10,7 @@ import { subjectName, type Subject } from '../data/model';
 import { ASTROLOGY_LIVE, astrologyAt, astrologyLive } from '../state/store';
 import type { BirthPrefill } from '../state/router';
 import type { LensContext, LensInstance } from '../shell/lens';
-import { optionAction, optionGroup } from '../ui/mode-options';
+import { optionAction, optionGroup } from '../ui/choice-rows';
 import { paneStepper } from '../ui/pane';
 import { astrologyContentsGroups, type ChartListing } from './astrology-contents';
 import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData, type ChartBody } from '../astro/natal';
@@ -587,7 +587,6 @@ export function mount(ctx: LensContext): LensInstance {
       inLens = true;
       standing = path;
       syncSettings(path);
-      ctx.setControls(null);
       ctx.pane.contents('Astrology', contents);
       if (data) { render(path); syncOrbits(); return; }
       if (failed) return;
@@ -616,7 +615,6 @@ export function mount(ctx: LensContext): LensInstance {
       namesReady = false;
       orbitsBody = null;
       orbits.set(null);
-      ctx.setControls(null);
       ctx.setSettings(null);
     },
     update(dt) {

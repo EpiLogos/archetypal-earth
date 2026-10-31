@@ -14,12 +14,10 @@ import { chronologyPath } from '../globe/chronology';
 import { defaultReadingId, hashToState, hashWithFilter, type BirthPrefill } from '../state/router';
 import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, back, focusOn, inLens, inSky, openedFrom, skyArrival, skyGestureState, startThread, stateEq, threadSubject, viewEq, withMode, WORLD, type AppState, type PanelLensId, type ThreadTarget, type View } from '../state/store';
 import { Shell } from '../shell/shell';
-import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
 import { dismissal, type DismissFacts } from '../shell/dismiss';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
 import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance, type LensPane } from '../shell/lens';
-import { modeOptions, optionAction } from '../ui/mode-options';
 import { SettingsPopover } from '../shell/settings-pop';
 import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
 import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
@@ -140,18 +138,14 @@ export class Controller {
   private graphMode = false;
   private pauseTimer = 0;
   private aion: AionView | null = null;
-  /** the one frame of chrome (MODES-RFC §2) and its panel for the panel lenses */
+  /** the one frame of chrome (MODES-RFC §2) */
   readonly shell: Shell;
-  private panel: Panel;
   private chrome: LensChrome;
   /** the field filter (MODES-RFC §4): one for every lens; the engine composes it with any emphasis */
   private filter: FieldFilter = {};
   private filterMask: Float32Array | null = null;
   private lensInst = new Map<PanelLensId, LensInstance>();
   private activeLens: PanelLensId | null = null;
-  /** the standard first Options action of the active panel lens (Open / Close its sheet), and whether the lens set its Options this entry */
-  private sheetAction: HTMLButtonElement | null = null;
-  private lensOptionsSet = false;
   private lensTok = 0;
   private landing = new Landing();
   private aionTime: TimeSnapshot | null = null;
@@ -254,8 +248,6 @@ export class Controller {
       onOpenOcc: (oi) => this.openOccurrence(oi),
     });
     this.hover = new HoverLabel(root);
-    this.timeControl = new TimeControl(root, m, time, () => this.onUserTime());
-    this.timeControl.setTour(null, () => this.tourToggle());
     this.search = new SearchUI(root, this.searchIndex, (r) => this.chooseResult(r), (open) => {
       document.body.classList.toggle('search-open', open);
       if (open) this.hover.hide();
@@ -279,13 +271,13 @@ export class Controller {
       archetypes: m.field.archetypes.map((a) => ({ id: a.id, name: a.name })).sort((a, b) => a.name.localeCompare(b.name)),
       theoretics: m.field.theoretics.map((t) => ({ id: t.id, name: t.name })).sort((a, b) => a.name.localeCompare(b.name)),
     });
+    // the time strip stands in the slice dock, under the row that holds the scope and the filters
+    this.timeControl = new TimeControl(this.shell.dock.timeHost, m, time, () => this.onUserTime());
+    this.timeControl.setTour(null, () => this.tourToggle());
     this.lensPane = this.buildLensPane();
-    this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n), pane: this.lensPane };
+    this.chrome = { setContext: (t, quiet) => this.shell.setContext(t, quiet), pane: this.lensPane };
     // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
     this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
-    this.panel = new Panel(root, () => this.closeSheet());
-    // the sheet's visibility is the Options' first action and the globe's shift: both follow it (panel.ts)
-    this.panel.onChange(() => this.syncSheet());
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
     this.viewControl = new ViewControl({ onView: (v) => this.viewTo(v), onSettings: () => this.openSettings() });
@@ -643,11 +635,11 @@ export class Controller {
     return {
       searchOpen: this.search.isOpen,
       menuOpen: this.shell.menuOpen,
-      popoverOpen: !!document.querySelector('details.mode-options[open]') || this.settingsPop.isOpen,
+      popoverOpen: this.settingsPop.isOpen || this.shell.filterOpen,
       youOpen: this.you.isOpen,
       passageOpen: this.passage.isOpen,
-      // a panel lens with its sheet (or its reading in the pane) on screen; with it hidden, or while gazing at a planet, the stack passes it by
-      sheetVisible: !!this.activeLens && (this.panel.isVisible || lensRead) && !gaze,
+      // a panel lens with its reading in the pane; with it hidden, or while gazing at a planet, the stack passes it by
+      sheetVisible: !!this.activeLens && lensRead && !gaze,
       // a reading in the pane; the Contents list drawn over it is dismissed first
       deepOpen: (!!s.deep || (lensRead && !this.activeLens)) && !this.deep.isContentsOpen,
       // the reading pane's Contents list, when it stands open on its own
@@ -660,10 +652,7 @@ export class Controller {
   /** An open popover closes and hands focus back to its button (a <details> does not close on Escape by itself). */
   private closePopover() {
     if (this.settingsPop.isOpen) { this.settingsPop.close(); this.viewControl.gearButton.focus({ preventScroll: true }); return; }
-    const d = document.querySelector<HTMLDetailsElement>('details.mode-options[open]');
-    if (!d) return;
-    d.removeAttribute('open');
-    d.querySelector('summary')?.focus();
+    if (this.shell.filterOpen) this.shell.closeFilter();
   }
 
   /** The step back every ✕, crumb and Escape shares. */
@@ -1065,8 +1054,7 @@ export class Controller {
     const fieldLens = lens === 'field';
     // the camera's lens: the Field and the live sky (Astrology) are the two the View control reads and moves
     this.shell.setAside(fieldLens || lens === 'astrology' ? this.viewControl.root : null);
-    // every lens fills its own context and controls as it shows; the field's context is its focus (set below)
-    this.shell.setControls(null);
+    // every lens fills its own context as it shows; the field's context is its focus (set below)
     // a state no lens stands in has no Contents and no reading of a lens's in the pane
     if (!next.redbook && !next.history && !next.dynamics && !next.lens) this.releasePane();
     if (fieldLens && next.view.kind === 'world') this.shell.setContext(next.sky ? 'The sky' : '');
@@ -1175,9 +1163,7 @@ export class Controller {
       model: this.m,
       engine: this.engine,
       time: this.time,
-      panel: this.panel,
       setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
-      setControls: (n) => { if (this.activeLens === id) this.setLensOptions(n); },
       setSettings: (build) => { if (this.activeLens === id || !build) this.settingsPop.set(build); },
       refreshSettings: () => this.settingsPop.refresh(),
       pane: this.lensPane,
@@ -1224,8 +1210,8 @@ export class Controller {
     }
     this.activeLens = id;
     const path = next.lens!.path;
-    // a lens entered from elsewhere starts with its sheet hidden; its content is built below, its Options are set by enterLensInstance
-    if (!prev.lens || prev.lens.id !== id) { this.panel.enterLens(); this.releasePane(); }
+    // a lens entered from elsewhere starts with its reading held; its content is built below
+    if (!prev.lens || prev.lens.id !== id) this.releasePane();
     this.lensShift(next);
     const have = this.lensInst.get(id);
     if (have) { this.enterLensInstance(have, path); return; }
@@ -1239,17 +1225,14 @@ export class Controller {
     }).catch((err) => {
       document.body.classList.remove('lens-loading');
       console.error(err);
-      this.panel.open('Lens unavailable', [el('p', { class: 'lp-error', text: 'This lens could not be loaded. Check the connection and try again.' })]);
-      this.panel.reveal();
+      this.lensPane.load({ key: 'unavailable', eyebrow: 'Lens', nodes: [el('p', { class: 'lp-error', text: 'This lens could not be loaded. Check the connection and try again.' })] });
+      this.lensPane.reveal();
     });
   }
 
-  /** Hand a lens its route. A lens that sets no Options of its own still gets the standard one, so the mode is never empty. */
+  /** Hand a lens its route. */
   private enterLensInstance(inst: LensInstance, path: string[]) {
-    this.lensOptionsSet = false;
     inst.enter(path);
-    // a lens that keeps its Contents in the pane carries its own entry (the Contents trigger): no standard Options action stands for it
-    if (!this.lensOptionsSet && !this.contentsSpec) this.setLensOptions([]);
   }
 
   /** The globe makes room for the sheet only while the sheet is on screen. Astrology's sky-only states never do. */
@@ -1259,59 +1242,9 @@ export class Controller {
     // Astrology live sky / [chart] alone: sky-only (no sheet). Walk / Charts home still give the sheet room.
     const asSkyOnly = id === 'astrology' && (path[0] === ASTROLOGY_LIVE || path.length === 1);
     // a lens whose reading (or Contents) stands in the pane gives the pane its room, as the Field's reading does
-    const inPane = !this.panel.isVisible && (this.deep.isLensReading || this.deep.isContentsOpen);
+    const inPane = this.deep.isLensReading || this.deep.isContentsOpen;
     if (inPane && !asSkyOnly) this.engine.rig.setShift(isNarrow() ? 0 : shiftX(this.deep.mode, window.innerWidth), isNarrow() ? 0.26 : 0);
-    else if (asSkyOnly || !this.panel.isVisible) this.engine.rig.setShift(0, 0);
-    else this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
-  }
-
-  /**
-   * A panel lens's Options. The lens's own disclosure gets the standard first action (Open, or Close, its sheet), placed
-   * by the shell here and nowhere in the lenses. Null (the lens leaving) clears the shell's controls.
-   */
-  private setLensOptions(nodes: Node[] | null) {
-    if (!nodes) { this.sheetAction = null; this.shell.setControls(null); return; }
-    this.lensOptionsSet = true;
-    // a lens with its Contents in the pane is opened from the Contents trigger: its Options carry no Open/Close row
-    const act = this.contentsSpec ? null : optionAction('', () => this.toggleSheet(), { pressed: false });
-    this.sheetAction = act;
-    const disclosure = nodes.find((n): n is HTMLElement => n instanceof HTMLElement && n.classList.contains('mode-options')) ?? modeOptions([]);
-    const body = disclosure.querySelector<HTMLElement>('.mode-options-body');
-    if (act) body?.prepend(act);
-    // a content choice in the Options is a request to read: it reveals the sheet. Capture phase, so the sheet is revealed
-    // before the choice navigates. The standard toggle and any row marked data-no-reveal (Astrology's names) do not.
-    body?.addEventListener('click', (e) => {
-      const row = (e.target as HTMLElement).closest('button');
-      if (!row || row === act || !body.contains(row) || row.hasAttribute('data-no-reveal') || row.disabled) return;
-      this.panel.reveal();
-    }, true);
-    this.shell.setControls([disclosure, ...nodes.filter((n) => n !== disclosure)]);
-    this.syncSheetAction();
-  }
-
-  /** The standard action names what it does: Open the sheet, or Close it while it is revealed. No content yet: disabled. */
-  private syncSheetAction() {
-    const act = this.sheetAction;
-    if (!act || !this.activeLens) return;
-    const shown = this.panel.isRevealed;
-    // the row's title sits in its own span (optionRow); the label goes there, never over the row's structure
-    const title = `${shown ? 'Close' : 'Open'} ${lensDef(this.activeLens).label}`;
-    const span = act.querySelector<HTMLElement>('.mode-opt-title');
-    if (span) span.textContent = title; else act.textContent = title;
-    act.setAttribute('aria-pressed', String(shown));
-    act.disabled = !this.panel.isOpen;
-  }
-
-  /** The sheet changed: its Options action follows, and the globe follows the sheet's visibility. */
-  private syncSheet() {
-    this.syncSheetAction();
-    if (this.activeLens && this.state.lens?.id === this.activeLens) this.lensShift(this.state);
-  }
-
-  /** The standard action: reveal the sheet, or hide it (the person's dismiss: the content stays, the mode stays). */
-  private toggleSheet() {
-    if (this.panel.isRevealed) this.panel.hide();
-    else this.panel.reveal();
+    else this.engine.rig.setShift(0, 0);
   }
 
   /**
@@ -1327,7 +1260,6 @@ export class Controller {
     if (this.localSheetOpen && s.lens?.id === 'astrology' && s.sky?.body) {
       this.localSheetOpen = false;
       this.lensPane.hide();
-      this.panel.hide();
       return;
     }
     // Astrology X: dismiss the sheet onto the sky still in Astrology — never Field, never bare inSky().
@@ -1342,13 +1274,11 @@ export class Controller {
         })()
         : astrologyLive({ culture: s.sky?.culture });
       this.lensPane.hide();
-      if (stateEq(next, s)) this.panel.close();
-      else this.navigate(next);
+      if (!stateEq(next, s)) this.navigate(next);
       return;
     }
     // the reading a panel lens put in the pane: it is hidden, held for the next time it is asked for, and the lens stays
-    if (this.deep.isLensReading && this.activeLens) { this.paneRevealed = false; this.deep.hide(); return; }
-    this.panel.hide();
+    if (this.deep.isLensReading && this.activeLens) { this.paneRevealed = false; this.deep.hide(); }
   }
 
   private leavePanelLens() {
@@ -1357,9 +1287,7 @@ export class Controller {
     if (id) this.lensInst.get(id)?.leave();
     this.activeLens = null;
     this.localSheetOpen = false;
-    this.sheetAction = null;
     this.lensTok++;
-    this.panel.close();
     this.releasePane();
     this.engine.rig.setShift(0, 0);
   }
@@ -2155,27 +2083,22 @@ export class Controller {
     }
   }
 
-  /** The ⚙ answers while the graph's settings, a lens's settings (the names a sky is read in) or a lens's Options stand on screen. */
+  /** The ⚙ answers while the graph's settings, a lens's settings (the names a sky is read in) stand on screen. */
   private settingsTarget(): HTMLElement | null {
     if (this.graphMode) return document.querySelector<HTMLElement>('.gv-tools .gvt-settings');
-    if (this.settingsPop?.available) return this.viewControl.gearButton;
-    return this.shell.root.querySelector<HTMLElement>('details.mode-options > summary');
+    return this.settingsPop?.available ? this.viewControl.gearButton : null;
   }
 
   private syncSettings() {
     this.viewControl?.setSettings(!!this.settingsTarget(), !this.graphMode && !!this.settingsPop?.available);
   }
 
-  /** Open the settings of what is on screen: the graph's panel, the lens's popover, or the lens's Options. */
+  /** Open the settings of what is on screen: the graph's panel or the lens's popover. */
   openSettings() {
     if (!this.graphMode && this.settingsPop.available) { this.settingsPop.toggle(); return; }
     const t = this.settingsTarget();
     if (!t) return;
-    if (t.tagName === 'SUMMARY') {
-      const d = t.parentElement as HTMLDetailsElement;
-      d.open = !d.open;
-      if (d.open) t.focus();
-    } else t.click();
+    t.click();
   }
   private toggleAion() {
     if (!this.history) return;

@@ -316,7 +316,6 @@ export function mount(ctx: LensContext): LensInstance {
 
   return {
     enter(path) {
-      ctx.setControls(null);
       ctx.pane.contents('Theory', contents);
       const key = path[1] !== undefined ? `${path[0]}/${path[1]}` : (path[0] ?? '');
       if (!route) {
@@ -335,7 +334,6 @@ export function mount(ctx: LensContext): LensInstance {
       current = '';
       standing = { kind: 'none' };
       runner.interrupt();
-      ctx.setControls(null);
       ctx.engine.setEmphasis(null, null);
     },
   };

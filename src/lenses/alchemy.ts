@@ -273,7 +273,6 @@ export function mount(ctx: LensContext): LensInstance {
   return {
     enter(path) {
       wanted = path;
-      ctx.setControls(null);
       ctx.pane.contents('Alchemy', contents);
       if (data) {
         if (canon(data, path) !== current) render(data, path);
@@ -290,7 +289,6 @@ export function mount(ctx: LensContext): LensInstance {
       current = '';
       standing = null;
       runner.interrupt();
-      ctx.setControls(null);
       ctx.engine.setEmphasis(null, null);
     },
   };

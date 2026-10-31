@@ -87,15 +87,12 @@ export async function openFromContents(page, nth) {
 }
 
 /**
- * A panel lens's reading is held until the person asks for it. A lens with its Contents in the pane is asked from the Contents
- * trigger; another lens by its Options' first action (Open <label>). Does nothing when the reading is already on screen.
+ * A panel lens's reading is held until the person asks for it: every lens has its Contents in the pane (a trigger beside the
+ * title), and a pick from it reads in the pane. Does nothing when the reading is already on screen.
  */
-export async function revealSheet(page, label) {
-  if (await page.$('.lens-panel:not([hidden])')) return;
+export async function revealSheet(page, _label) {
   if (await paneReading(page)) return;
-  if (await page.$('.sh-contents:not([hidden])')) { await openFromContents(page); return; }
-  await page.click('.sh-controls details.mode-options > summary');
-  // the row's title is its own span (optionRow); the row is matched by its whole title
-  await page.locator('.sh-controls .mode-options-body button').filter({ hasText: new RegExp(`^Open ${label}$`) }).first().click();
+  await page.waitForSelector('.sh-contents:not([hidden])', { timeout: 10000 });
+  await openFromContents(page);
   await page.waitForTimeout(600);
 }

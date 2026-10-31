@@ -161,20 +161,23 @@ export const KIND_LABELS: Record<LocusType, string> = {
 };
 
 /** Short chip labels for the active filter, each with the filter that removes it. */
-export function chips(f: FieldFilter, names: { work(id: string): string; culture(id: string): string; archetype(id: string): string; theoretic(id: string): string }): { label: string; without: FieldFilter }[] {
-  const out: { label: string; without: FieldFilter }[] = [];
-  for (const w of f.works ?? []) out.push({ label: names.work(w), without: { ...f, works: f.works!.filter((x) => x !== w) } });
-  for (const c of f.cultures ?? []) out.push({ label: names.culture(c), without: { ...f, cultures: f.cultures!.filter((x) => x !== c) } });
+/** What a chip's value is a value of (the filter row it comes from), in the words the filter's own rows use. */
+export type ChipKind = 'Source' | 'Culture' | 'Era' | 'Kind' | 'Archetype' | 'Theory' | 'Whose' | 'Sky ring';
+
+export function chips(f: FieldFilter, names: { work(id: string): string; culture(id: string): string; archetype(id: string): string; theoretic(id: string): string }): { kind: ChipKind; label: string; without: FieldFilter }[] {
+  const out: { kind: ChipKind; label: string; without: FieldFilter }[] = [];
+  for (const w of f.works ?? []) out.push({ kind: 'Source', label: names.work(w), without: { ...f, works: f.works!.filter((x) => x !== w) } });
+  for (const c of f.cultures ?? []) out.push({ kind: 'Culture', label: names.culture(c), without: { ...f, cultures: f.cultures!.filter((x) => x !== c) } });
   if (f.era) {
     const era = ERAS.find((e) => e.range[0] === f.era![0] && e.range[1] === f.era![1]);
     const { era: _e, ...rest } = f;
-    out.push({ label: era?.label ?? `${f.era[0]}–${f.era[1]}`, without: rest });
+    out.push({ kind: 'Era', label: era?.label ?? `${f.era[0]}–${f.era[1]}`, without: rest });
   }
-  for (const k of f.kinds ?? []) out.push({ label: KIND_LABELS[k], without: { ...f, kinds: f.kinds!.filter((x) => x !== k) } });
-  for (const a of f.archetypes ?? []) out.push({ label: names.archetype(a), without: { ...f, archetypes: f.archetypes!.filter((x) => x !== a) } });
-  for (const t of f.theoretics ?? []) out.push({ label: names.theoretic(t), without: { ...f, theoretics: f.theoretics!.filter((x) => x !== t) } });
-  for (const x of f.subjects ?? []) out.push({ label: subjectLabel(x), without: { ...f, subjects: f.subjects!.filter((y) => y !== x) } });
-  for (const x of f.rings ?? []) out.push({ label: RING_LABELS[x], without: { ...f, rings: f.rings!.filter((y) => y !== x) } });
+  for (const k of f.kinds ?? []) out.push({ kind: 'Kind', label: KIND_LABELS[k], without: { ...f, kinds: f.kinds!.filter((x) => x !== k) } });
+  for (const a of f.archetypes ?? []) out.push({ kind: 'Archetype', label: names.archetype(a), without: { ...f, archetypes: f.archetypes!.filter((x) => x !== a) } });
+  for (const t of f.theoretics ?? []) out.push({ kind: 'Theory', label: names.theoretic(t), without: { ...f, theoretics: f.theoretics!.filter((x) => x !== t) } });
+  for (const x of f.subjects ?? []) out.push({ kind: 'Whose', label: subjectLabel(x), without: { ...f, subjects: f.subjects!.filter((y) => y !== x) } });
+  for (const x of f.rings ?? []) out.push({ kind: 'Sky ring', label: RING_LABELS[x], without: { ...f, rings: f.rings!.filter((y) => y !== x) } });
   return out.map((c) => ({ ...c, without: tidy(c.without) }));
 }
 
