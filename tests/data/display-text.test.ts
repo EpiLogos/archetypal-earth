@@ -115,6 +115,13 @@ describe('a fragment is completed from the corpus sentence it cut', () => {
     expect(completeQuote(load, 'nowhere', 'words wholly missing from every page of the book…').reason).toMatch(/no corpus/);
   });
 
+  it('takes no stray scan number before a whole sentence into the quotation (Aion ch. V, the "5 In the world…" quote)', () => {
+    const stray = fakeLoader('ax', [{ page: 4, text: 'whose nature is in accord with the Christian aeon of the Fishes, now running to its end. \n"5 \nIn the world of Christian ideas Christ undoubtedly represents the self. As the apotheosis of individuality it stands.' }]);
+    const r = completeQuote(stray, 'ax', 'In the world of Christian ideas Christ undoubtedly represents the self.');
+    expect(r.text).toBe('In the world of Christian ideas Christ undoubtedly represents the self.');
+    expect(r.done).toBe(false);
+  });
+
   it('leaves a whole sentence alone, and invents no words the corpus does not hold', () => {
     const whole = completeQuote(load, 'wx', 'The treasure is the self.');
     expect(whole.done).toBe(false);

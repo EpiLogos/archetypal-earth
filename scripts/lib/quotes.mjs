@@ -123,7 +123,11 @@ export function completeQuote(load, work, quote) {
   const at = matches[0].index;
   const to = at + matches[0][0].length;
   if (at > 0 && /\p{L}/u.test(corpus.text[at - 1]) && /\p{L}/u.test(stem[0])) return { text: quote, done: false, stem, reason: 'the stem begins inside a word' };
-  const begin = sentenceStartBefore(corpus.text, at);
+  let begin = sentenceStartBefore(corpus.text, at);
+  // a scan number standing alone between two sentences ('"5' on its own line, a damaged ¶ or note marker) is apparatus,
+  // not the start of the sentence after it
+  const stray = begin === null ? null : /^[“"]?\d{1,3}\s+/u.exec(corpus.text.slice(begin, at));
+  if (stray) begin += stray[0].length;
   if (begin === null) return { text: quote, done: false, stem, reason: 'no sentence start in reach' };
   // a stem that already ends its sentence keeps the words as they stand: what follows is the scan's footnote, not more text
   const stemEndsSentence = /[.!?…][”"’')\]]*$/.test(stem) && !(stem.endsWith('.') && abbreviatedBefore(stem, stem.length - 1));
