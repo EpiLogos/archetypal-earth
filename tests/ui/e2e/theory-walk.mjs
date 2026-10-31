@@ -27,7 +27,7 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   check(/4\s*↔\s*#3/.test(head3) && /State 10/.test(head3), `${tag}: the walk steps on in order`, head3);
   const text = (await page.locator('blockquote.q').allTextContents()).join(' ');
   check(/symbol-making/.test(text) && /transcendent function/.test(text) && /quaternary structure/.test(text), `${tag}: the stop sets the site's words beside von Franz and Jung`);
-  const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
+  const line = (await page.locator('.sh-chip.scope').textContent().catch(() => '')) ?? '';
   check(/in four at #3/.test(line), `${tag}: the globe shows the stop's own set`, line);
   if (shots) await page.screenshot({ path: `${shots}/theory-${tag}.png` });
   await page.locator('.th-walk').first().click();

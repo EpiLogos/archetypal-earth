@@ -1,7 +1,7 @@
 // The Astrology form's place picker: typing opens a suggestion list; a keyboard Enter (desktop) or a tap (phone)
 // chooses a city, fills its coordinates, and the chart casts. An unknown name says so and leaves the coordinates empty.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/city-picker.mjs
-import { launch, open } from './lib.mjs';
+import { launch, open, openFromContents } from './lib.mjs';
 
 let failed = 0;
 const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}${detail ? ` — ${detail}` : ''}`); if (!ok) failed++; };
@@ -9,7 +9,10 @@ const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} 
 const browser = await launch('chromium');
 for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {
   const { ctx, page, logs } = await open(browser, { width: s.width, height: s.height, mobile: s.mobile, hash: '#/astrology' });
-  await page.waitForSelector('.as-form', { timeout: 90000 });
+  // the form is the first entry of the lens's Contents ("Charts"), read in the pane
+  await page.waitForSelector('.sh-contents', { timeout: 90000 });
+  await openFromContents(page, 0);
+  await page.waitForSelector('.as-form', { timeout: 30000 });
   const place = page.locator('.as-form input[role=combobox]');
   check(await place.count() === 1, `${s.name}: the place field is a combobox`);
   check(await page.locator('.as-form datalist').count() === 0, `${s.name}: no native datalist is left`);

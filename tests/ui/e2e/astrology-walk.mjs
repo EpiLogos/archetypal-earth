@@ -43,9 +43,9 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.waitForTimeout(2000);
   check(await page.evaluate(() => location.hash) === '#/astrology/you', `${s.name}: casting lands on the whole birth sky`, await page.evaluate(() => location.hash));
   // the walk is the Contents' planets: the first of them opens the walk at the Moon
-  if (s.mobile && await page.evaluate(() => document.body.classList.contains('pane-reading'))) await page.keyboard.press('Escape');
+  if (await page.evaluate(() => document.body.classList.contains('pane-reading'))) await page.keyboard.press('Escape');
   await page.waitForTimeout(500);
-  if (!(await page.locator('.dp-contents-pane li button').first().isVisible())) await page.click(s.mobile && await page.locator('.pane-contents-tool').isVisible() ? '.pane-contents-tool' : '.sh-contents');
+  if (!(await page.locator('.dp-contents-pane li button').first().isVisible())) await page.click('.sh-contents');
   await page.locator('.dp-contents-pane li button', { hasText: /^Moon/ }).first().click();
   try { await page.waitForFunction(() => location.hash === '#/astrology/you/moon', null, { timeout: 15000 }); } catch { throw new Error('the Contents planet did not open the walk: ' + await page.evaluate(() => location.hash)); }
   await page.waitForTimeout(2500);

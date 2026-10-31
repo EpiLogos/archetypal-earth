@@ -17,16 +17,20 @@ const snap = (page) => page.evaluate(() => {
     dist: engine.rig.dist, lat: engine.rig.lat, lon: engine.rig.lon, flying: engine.rig.flying,
     sky: !!ctl.state.sky, body: b ?? null, hash: location.hash, hist: history.length,
     camDir: engine.camera.position.clone().sub(engine.rig.focus).normalize().toArray(),
-    visible: !!engine.sky?.group.visible,
+    visible: !!engine.sky?.group.visible, phase: document.body.dataset.skyPhase ?? '',
+    held: engine.sky?.approached ?? null, approach: engine.sky?.approach ?? 0, stage: engine.stageDist,
   };
 });
 
+// the camera's own phase contract: a move is under way while the phase is approach / descend / return, though the rig
+// itself is still for a beat before the flight starts
+const MOVING = /^(approach|descend|return)$/;
 const settle = async (page, ms = 12000) => {
   const t0 = Date.now();
   for (;;) {
     await page.waitForTimeout(150);
     const s = await snap(page);
-    if (!s.flying) return { ...s, took: Date.now() - t0 };
+    if (!s.flying && !MOVING.test(s.phase)) return { ...s, took: Date.now() - t0 };
     if (Date.now() - t0 > ms) return { ...s, took: Date.now() - t0, timedOut: true };
   }
 };
@@ -100,7 +104,8 @@ try {
 
     const m = await open(browser, { width: 1280, height: 800, hash: '#/sky/moon' });
     const d = await settle(m.page);
-    check(d.sky && d.body === 'moon' && d.dist > 8000, 'the link #/sky/moon opens the system with the Moon selected', `body ${d.body}, dist ${d.dist.toFixed(0)}`);
+    // a body in the link is held, not merely selected: the camera stands at the Moon, with the system's scale behind it
+    check(d.sky && d.body === 'moon' && d.held === 'moon' && d.approach > 0.95 && d.stage > 1000, 'the link #/sky/moon opens the sky held on the Moon', `body ${d.body}, held ${d.held}, approach ${d.approach.toFixed(2)}, stage ${d.stage.toFixed(0)}`);
     await m.page.context().close();
 
     const v = await open(browser, { width: 1280, height: 800, hash: '#/sky/vulcan' });

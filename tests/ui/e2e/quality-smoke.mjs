@@ -92,10 +92,11 @@ try {
   await page.screenshot({ path: `${directory}/${kind}-path-inspection.png` });
   await page.locator('.reveal').getByRole('button', { name: 'Reading', exact: true }).click();
   await page.waitForFunction(() => window.__earth.ctl.state.deep);
+  // closing a reading opened on a walk's step lands back in the walk where it began: one Escape, not two
   await page.keyboard.press('Escape');
-  await page.waitForFunction(() => !window.__earth.ctl.state.deep);
-  await page.keyboard.press('Escape');
-  await page.waitForFunction(() => window.__earth.ctl.state.view.kind === 'thread');
+  await page.waitForFunction(() => !window.__earth.ctl.state.deep && window.__earth.ctl.state.view.kind === 'thread', null, { timeout: 15000 }).catch(async (e) => {
+    throw new Error(`Escape did not return to the path: ${await page.evaluate(() => `${location.hash} view ${window.__earth.ctl.state.view.kind} deep ${window.__earth.ctl.state.deep} tour ${!!window.__earth.ctl.tour}`)} (${e.message.split('\n')[0]})`);
+  });
   const retained = await page.evaluate(() => ({ same: window.__earth.ctl.tour === window.__qualityTour, index: window.__earth.ctl.tour.i }));
   assert(retained.same && retained.index === tour.index, 'Returning must keep the same tour and current step');
   await page.getByRole('button', { name: 'Resume tour', exact: true }).click();

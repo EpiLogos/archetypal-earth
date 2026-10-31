@@ -18,9 +18,23 @@ await page.waitForTimeout(2500);
 report.aionTurn = await page.evaluate(() => ({
   card: document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden])')?.textContent?.slice(0, 120) ?? null,
   epochs: [...document.querySelectorAll('.aion-epochs button')].map((b) => b.textContent),
-  reading: document.querySelector('select[aria-label="Historical reading"]')?.selectedOptions[0]?.textContent ?? null,
 }));
 await page.screenshot({ path: `${shots}/aion-turn.png` });
+// the three readings are the first group of the Contents (the reading choice left the Options with them)
+await page.locator('.sh-contents').click();
+await page.waitForSelector('.dp-contents-pane li button', { timeout: 8000 });
+report.aionReadings = await page.evaluate(() => {
+  const g = document.querySelector('.dp-contents-pane .dp-sub');
+  let list = g?.nextElementSibling;
+  while (list && list.tagName !== 'OL') list = list.nextElementSibling;
+  return { group: g?.textContent ?? null, readings: [...(list?.querySelectorAll('button') ?? [])].map((b) => b.textContent), current: list?.querySelector('[aria-current="true"]')?.textContent ?? null };
+});
+must('aion Contents: the Reading group', report.aionReadings.group);
+must('aion Contents: three readings (Aion, Turn, Horizon)', report.aionReadings.readings.length === 3 ? 'three' : null);
+must('aion Contents: the standing reading is marked', report.aionReadings.current);
+await page.screenshot({ path: `${shots}/aion-contents.png` });
+await page.keyboard.press('Escape');
+await page.waitForTimeout(500);
 
 // open the Wotan essay event (direct link, as the browse menu produces)
 await page.goto(URL + '#/aion/jung-turn/event/turn-wotan-essay-1936', { waitUntil: 'load' });
@@ -64,8 +78,8 @@ await page.goto(URL + '#/aion/jung-aquarius-horizon', { waitUntil: 'load' });
 await page.waitForTimeout(2200);
 report.aquarius = await page.evaluate(() => ({
   epochs: [...document.querySelectorAll('.aion-epochs button')].map((b) => b.textContent),
-  events: (document.querySelector('select[aria-label="Historical event"]') || {}).options?.length,
 }));
+must('the Horizon reading names its epochs', report.aquarius.epochs.length ? 'yes' : null);
 await page.screenshot({ path: `${shots}/aquarius.png` });
 
 // ── deep-sheet cite link (corpus): a CW-cited occurrence, deep sheet open ──

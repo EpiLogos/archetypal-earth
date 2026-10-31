@@ -38,7 +38,7 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(2500);
   check(await page.locator('body.pane-reading').count() === 1, `${tag}: the overview is read in the pane`);
   check(await page.locator('.dy-route-dot').count() === 16, `${tag}: the overview maps the route, sixteen stops in four movements`);
-  const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
+  const line = (await page.locator('.sh-chip.scope').textContent().catch(() => '')) ?? '';
   const own = Number((/^([\d,]+) in/.exec(line)?.[1] ?? '0').replace(/,/g, ''));
   check(/in the route’s families/.test(line) && own > 0 && own < (await page.evaluate(() => Array.from(window.__earth.ctl.m.located).filter(Boolean).length)) * 0.5, `${tag}: the globe shows the lens's own set and names it`, `${line} · ${await drawn(page)} drawn`);
   await page.locator('.th-walk').click();
@@ -51,7 +51,7 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   check(f1 && f2 && f1.sum !== f2.sum, `${tag}: the figure moves`);
   const chips = await page.locator('.dy-reading .q-voice').allTextContents();
   check(chips.length >= 1 && chips.every((c) => c === 'Van Eenwyk'), `${tag}: Van Eenwyk is named where he speaks; Jung wears no chip`, chips.join(' '));
-  const line2 = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
+  const line2 = (await page.locator('.sh-chip.scope').textContent().catch(() => '')) ?? '';
   check(/“Energy as an oscillation between poles”/.test(line2), `${tag}: the globe tunes to the stop's families`, line2);
   if (shots) await page.screenshot({ path: `${shots}/dy-${tag}-stop.png` });
   // walk to centroversion: Neumann beside Jung
@@ -93,7 +93,7 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 860, hash: '#/dynamics/f/serpent/s/cascade-into-chaos' });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.waitForTimeout(6500);
-  const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
+  const line = (await page.locator('.sh-chip.scope').textContent().catch(() => '')) ?? '';
   check(/Serpent and “Oscillation cascading into chaos”/.test(line), 'a chosen subject joins the stop on the globe', line);
   const a = await figure(page);
   await page.waitForTimeout(800);

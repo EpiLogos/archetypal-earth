@@ -3,6 +3,7 @@
 // to the whole birth sky by "Back to the Earth", and a satellite opens its field node framed (not the sky's pose).
 //   EARTH_HEADLESS=1 node tests/ui/e2e/planet-walk.mjs
 import { launch, open } from './lib.mjs';
+import { plateReachable } from './lib-sky.mjs';
 
 let failed = 0;
 const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}${detail ? ` — ${detail}` : ''}`); if (!ok) failed++; };
@@ -24,7 +25,9 @@ let s = await settle();
 check(s.hash === '#/astrology/jung/moon' && s.approach > 0.95, 'the walk opens held on the Moon', `${s.hash} approach ${s.approach.toFixed(2)}`);
 check(s.orbits && s.sats.length > 0, 'the Moon’s ties circle it', s.sats.join(', '));
 
-await page.locator('.as-step', { hasText: /^Ma$/ }).click();
+// the walk's planets are the Contents' second group: Mars is a pick from it
+await page.locator('.sh-contents').click();
+await page.locator('.dp-contents-pane li button', { hasText: /^Mars/ }).first().click();
 s = await settle();
 check(s.hash === '#/astrology/jung/mars', 'stepping to Mars stays on Mars (no fall back to the globe)', s.hash);
 check(s.approach > 0.95 && s.stage > SKY_EXIT, 'the camera holds Mars, far from the Earth', `approach ${s.approach.toFixed(2)}, ${Math.round(s.stage)} R⊕ from the Earth`);
@@ -33,7 +36,7 @@ check(!!disc?.on && disc.px > 120, 'Mars fills the view', disc ? `${Math.round(d
 
 await page.locator('.po-earth').click();
 s = await settle(7000);
-check(s.hash === '#/astrology/jung/terra','"Back to the Earth" returns to the whole birth sky', s.hash);
+check(s.hash === '#/astrology/jung','"Whole sky" returns to the whole birth sky of the chart', s.hash);
 check(s.approach < 0.05 && !s.orbits, 'and lets the planet go', `approach ${s.approach.toFixed(2)}`);
 
 await page.goto(page.url().replace(/#.*$/, '#/astrology/jung/saturn'));
@@ -41,8 +44,13 @@ await page.waitForFunction(() => document.body.classList.contains('sky-ready'), 
 s = await settle();
 check(s.sats.includes('Sol niger'), 'Saturn carries Sol niger among its satellites', s.sats.join(', '));
 await page.locator('.po-sat', { hasText: 'Sol niger' }).click({ force: true });
+// a satellite gazes at its node from the planet; the node's plate is the way down (the camera is the sky's own)
+s = await settle(9000);
+const plate = await plateReachable(page, 8000);
+check(plate.ok && s.hash === '#/astrology/jung/saturn', 'a satellite gazes at its node from the planet and shows its plate', `${s.hash} plate ${plate.pe}`);
+await page.locator('.floats .float').first().click({ force: true });
 s = await settle(10000);
-check(s.hash === '#/f/sol-niger', 'a satellite opens its field node', s.hash);
+check(/^#\/f\/sol-niger(\/deep)?$/.test(s.hash), 'the plate opens the field node (its reading opens on the landing)', s.hash);
 check(Math.abs(s.lat - 47.4) < 6 && Math.abs(((s.lon - 8.35 + 540) % 360) - 180) < 8 && s.dist < 4, 'and the camera frames the node, not the sky’s pose', `${s.lat.toFixed(1)}, ${s.lon.toFixed(1)} at ${s.dist.toFixed(2)}`);
 
 // a network fetch the sandbox cannot make (map tiles from NASA GIBS) is not a page error
