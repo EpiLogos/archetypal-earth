@@ -1,7 +1,8 @@
 // THEORY: the psychodynamics the rest of the field runs on (MODES-RFC §3) — the Self as centre, energy, compensation,
 // enantiodromia, the transcendent function, and number. Every claim is a verbatim quotation placed by the corpus
 // (public/data/theory.json, built by scripts/theory.mjs). The globe tunes to what a section names; the dynamical lens is
-// this lens's picture of a subject in motion.
+// this lens's picture of a subject in motion. Each of the fourteen theoretics is a walk of its own (`theoretic/<id>` of
+// public/data/walks.json): the quotations of its page, one stop each, played by the one Walk runner like Aion's threads and the Texts.
 import { scopeOf } from '../data/scope';
 import { el } from '../ui/dom';
 import { icon } from '../ui/icons';
@@ -11,10 +12,12 @@ import { BUILT, type LensContext, type LensInstance } from '../shell/lens';
 import type { PanelLensId } from '../state/store';
 import { inLens } from '../state/store';
 import { paneStepper } from '../ui/pane';
-import { WalkRunner } from '../walk/runner';
+import { WalkRunner, type WalkStep } from '../walk/runner';
 import type { DynamicsConcept, DynamicsRoute } from '../types/dynamics';
-import { theoreticReading, theoreticsWalk, theoryContentsGroups, type TheoryAt } from './theory-contents';
+import type { Walk, WalkStop } from '../types/walks';
+import { theoreticActs, theoreticOpening, theoryContentsGroups, walkSections, type TheoryAt } from './theory-contents';
 import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
+import { quote } from '../ui/quote';
 import { treeFigure } from './tree';
 import { providerLabels } from '../data/labels';
 
@@ -115,10 +118,11 @@ export function mount(ctx: LensContext): LensInstance {
   let standing: TheoryAt = { kind: 'none' };
   let route: DynamicsRoute | null = null;
   let concepts: DynamicsConcept[] = [];
-  /** the fourteen theoretics, walked by the one runner (past the last comes the first) */
-  const theoretics = theoreticsWalk(ctx.model);
+  /** a theoretic's walk is played by the one runner (past its last stop comes its first) */
   const runner = new WalkRunner({ scale: ctx.model.scale, wrap: true });
   const SNAPSHOT = { u: 0, focus: null, reading: null, centre: null, walk: null };
+  /** the theoretic walk last read to its end, noted once for the visitor's own node */
+  let finished = '';
 
   /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
   const show = (key: string, eyebrow: string, nodes: (HTMLElement | null)[], foot?: Node[] | null, engages?: { type: string; id: string }) => {
@@ -270,25 +274,57 @@ export function mount(ctx: LensContext): LensInstance {
     tune(s);
   };
 
-  /** One theoretic, read in the pane, with the walk of the fourteen under it. */
-  const renderTheoretic = (id: string) => {
-    const at = theoretics.stops.findIndex((x) => x.subject?.id === id);
-    const nodes = at >= 0 ? theoreticReading(ctx.model, id, { passages: ctx.passages, open: (s) => ctx.focus(s) }) : null;
-    if (!nodes) { render('', undefined); return; }
-    const t = ctx.model.theoById.get(id)!;
-    // the walk: the runner stands on this theoretic (it begins here when the route is entered at one)
-    if (runner.active) runner.goto(at); else runner.start(theoretics, SNAPSHOT, at);
+  /** The standing theoretic's walk, for the Contents (its sections, the one the walk stands in marked). */
+  let playing: { id: string; walk: Walk; i: number } | null = null;
+
+  /** One stop of a theoretic's walk: the section it stands in, Jung's words there with their cite, and the clock at the passage's year. */
+  const stopNodes = (st: WalkStop): HTMLElement[] => {
+    const nodes: HTMLElement[] = [];
+    if (st.section) {
+      nodes.push(el('h3', { class: 'as-h3', text: st.section.title }));
+      if (st.section.line) nodes.push(el('p', { class: 'th-line', text: st.section.line }));
+    }
+    if (st.cite && st.text) {
+      nodes.push(quote({
+        text: st.text,
+        cite: { work: st.cite.work, workTitle: ctx.model.workById.get(st.cite.work)?.title ?? st.cite.work, locator: st.cite.locator },
+        ...(st.voice ? { voice: st.voice } : {}),
+        ...(st.caption ? { kind: 'caption' as const } : {}),
+      }, { passages: ctx.passages }));
+    }
+    return nodes;
+  };
+
+  /** A theoretic is its walk: the runner stands on stop `at`, the pane reads that stop, the time strip stands on its year. */
+  const renderTheoretic = (id: string, at = 0) => {
+    const t = ctx.model.theoById.get(id);
+    const walk = ctx.model.walkById.get(`theoretic/${id}`);
+    if (!t || !walk?.stops.length) { render('', undefined); return; }
+    const n = walk.stops.length;
+    const want = Number.isInteger(at) && at >= 0 && at < n ? at : 0;
+    const same = runner.active && runner.position?.walkId === walk.id;
+    const step: WalkStep = (same ? runner.goto(want) : runner.start(walk, SNAPSHOT, want))!;
     const go = (delta: number) => {
-      const step = delta > 0 ? runner.next() : runner.prev();
-      const next = step?.stop.subject?.id;
-      if (next) ctx.setPath(['theoretics', next]);
+      const next = delta > 0 ? runner.next() : runner.prev();
+      if (next) ctx.setPath(['theoretics', id, String(next.i)], { replace: true });
     };
-    // the neighbours' names (past the last comes the first)
-    const theoreticName = (k: number) => ctx.model.theoById.get(theoretics.stops[(k + theoretics.stops.length) % theoretics.stops.length].subject?.id ?? '')?.name ?? '';
+    const nameAt = (k: number) => walk.stops[(k + n) % n].section?.title ?? '';
     ctx.setContext(t.name);
     standing = { kind: 'theoretic', id };
-    show(`theoretics/${id}`, 'Theory', nodes, stepper('theoretic', () => go(-1), () => go(1), `${at + 1} / ${theoretics.stops.length}`, { prev: theoreticName(at - 1), next: theoreticName(at + 1) }), { type: 'theoretic', id });
+    playing = { id, walk, i: step.i };
+    show(`theoretics/${id}/${step.i}`, 'Theory', [
+      el('h2', { class: 'dp-title', text: t.name }),
+      // the walk opens on the theoretic itself: its plate, Jung's definition of it, the field's account
+      ...(step.i === 0 ? theoreticOpening(ctx.model, id, { passages: ctx.passages }) : []),
+      ...stopNodes(step.stop),
+      theoreticActs(ctx.model, id, (s) => ctx.focus(s)),
+    ], stepper('passage', () => go(-1), () => go(1), `${step.i + 1} / ${n}`, { prev: nameAt(step.i - 1), next: nameAt(step.i + 1) }), { type: 'theoretic', id });
+    // the clock stands on the passage's year (a passage the data does not date leaves it where it is), the globe on the theoretic
+    if (step.effects.setClock !== null) { ctx.time.pause(); ctx.time.scrub(step.effects.setClock); }
+    if (step.effects.flyTo) ctx.engine.rig.flyTo(step.effects.flyTo.lat, step.effects.flyTo.lon, 2.8, { duration: 1.8 });
     tuneSubjects([{ type: 'theoretic', id }], t.name);
+    // a walk read to its last passage is noted once, for the visitor's own node
+    if (step.last && finished !== walk.id) { finished = walk.id; ctx.engage('walk', { type: 'walk', id: walk.id }); }
   };
 
   /** The Contents: Jung's theory, the fourteen theoretics, the route (Dynamics). Each pick is a request to read: the pane shows the reading. */
@@ -301,6 +337,13 @@ export function mount(ctx: LensContext): LensInstance {
       route,
       stopName: (st) => (st.concept ? concepts.find((c) => c.id === st.concept)?.name : st.name) ?? st.id,
       at: standing,
+      walk: playing && standing.kind === 'theoretic' && standing.id === playing.id ? {
+        title: ctx.model.theoById.get(playing.id)?.name ?? playing.id,
+        sections: walkSections(playing.walk).map((x) => {
+          const here = playing!.walk.stops[playing!.i].section?.id === x.id;
+          return { title: x.title, current: here, onPick: () => ctx.setPath(['theoretics', playing!.id, String(x.first)], { replace: true }) };
+        }),
+      } : undefined,
       go: {
         section: (id) => { ctx.setPath(id === sections[0]?.id ? [] : [id]); },
         theoretic: (id) => { ctx.setPath(['theoretics', id]); },
@@ -311,13 +354,13 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   const showRoute = (path: string[]) => {
-    if (path[0] === 'theoretics' && path[1]) renderTheoretic(path[1]); else render(path[0] ?? '', path[1]);
+    if (path[0] === 'theoretics' && path[1]) renderTheoretic(path[1], path[2] === undefined ? 0 : Number(path[2])); else render(path[0] ?? '', path[1]);
   };
 
   return {
     enter(path) {
       ctx.pane.contents('Theory', contents);
-      const key = path[1] !== undefined ? `${path[0]}/${path[1]}` : (path[0] ?? '');
+      const key = path[0] === 'theoretics' && path[1] ? `theoretics/${path[1]}/${Number(path[2] ?? 0)}` : path[1] !== undefined ? `${path[0]}/${path[1]}` : (path[0] ?? '');
       if (!route) {
         void Promise.all([loadLensData<DynamicsRoute>('dynamics-route'), loadLensData<{ concepts: DynamicsConcept[] }>('dynamics')])
           .then(([r, d]) => { route = r; concepts = d.concepts; }).catch(() => { /* the route is optional: Contents then lists Jung's theory and the theoretics */ });
@@ -333,6 +376,8 @@ export function mount(ctx: LensContext): LensInstance {
     leave() {
       current = '';
       standing = { kind: 'none' };
+      playing = null;
+      finished = '';
       runner.interrupt();
       ctx.engine.setEmphasis(null, null);
     },

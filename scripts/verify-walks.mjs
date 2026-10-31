@@ -1,5 +1,6 @@
 // The walk oracle (S10): every stop of public/data/walks.json resolves to a subject, a page or a cite of the corpus; a
-// chronological walk is monotone in year; a curated walk keeps the order of the source it was read from. The sources are
+// chronological walk is monotone in year; a curated walk keeps the order of the source it was read from (a theoretic's walk is
+// its theory page's quotations, one stop each, in the page's own section order, every one on a corpus page, dated only as the field attests). The sources are
 // read here from disk, independently of scripts/walks.mjs, so the check does not trust the generator's own reading.
 //   node scripts/verify-walks.mjs     verify public/data/walks.json (exit 1 on any error)
 import fs from 'node:fs';
@@ -8,8 +9,8 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const KINDS = ['aion-thread', 'aion-chapters', 'redbook', 'theory-route', 'alchemy-stages', 'theoretic', 'text'];
-const ORDER_OF_KIND = { 'aion-thread': 'curated', 'aion-chapters': 'curated', redbook: 'curated', 'theory-route': 'curated', 'alchemy-stages': 'curated', theoretic: 'chronological', text: 'page' };
-const SUBJECT_TYPES = ['occurrence', 'event', 'chapter', 'stage', 'concept', 'route-stop'];
+const ORDER_OF_KIND = { 'aion-thread': 'curated', 'aion-chapters': 'curated', redbook: 'curated', 'theory-route': 'curated', 'alchemy-stages': 'curated', theoretic: 'curated', text: 'page' };
+const SUBJECT_TYPES = ['occurrence', 'event', 'chapter', 'stage', 'concept', 'route-stop', 'theoretic'];
 
 /** The data the walks are read from, loaded from disk. */
 export function loadSources(root = ROOT) {
@@ -23,8 +24,10 @@ export function loadSources(root = ROOT) {
     route: read('public', 'data', 'dynamics-route.json'),
     dynamics: read('public', 'data', 'dynamics.json'),
     alchemy: read('public', 'data', 'alchemy.json'),
+    theoryPages: read('public', 'data', 'theory-pages.json'),
     corpus: read('public', 'data', 'corpus', 'index.json'),
     registry: read('curation', 'works.json').works,
+    chapters: read('curation', 'work-chapters.json').works,
   };
 }
 
@@ -103,7 +106,72 @@ export function curatedSequence(src, walk) {
   if (walk.kind === 'theory-route') {
     return src.route.movements.flatMap((m) => m.stops).map((s) => (s.concept ? { type: 'concept', id: s.concept } : { type: 'route-stop', id: s.id }));
   }
+  if (walk.kind === 'theoretic') {
+    const page = src.theoryPages.pages[walk.id.replace(/^theoretic\//, '')];
+    return page ? page.sections.flatMap((sec) => sec.quotes.map(() => ({ type: 'theoretic', id: page.concept }))) : null;
+  }
   return null;
+}
+
+/**
+ * The years a passage may stand on, read from the field and the registry alone (never from the generator): the engagement years
+ * of the field's cites that fall in the passage's chapter of the Work's table, the year the chapter's title names in brackets, and the
+ * Work's registered year. A passage none of these dates may carry no year.
+ */
+export function attestedYears(src, work, page) {
+  const chapterAt = (p) => (src.chapters[work]?.chapters ?? []).reduce((best, c) => (c.page <= p && (!best || c.page >= best.page) ? c : best), null);
+  const ch = chapterAt(page);
+  const years = new Set();
+  const keyOf = new Map();
+  for (const [id, w] of Object.entries(src.registry)) for (const k of [id, ...(w.aliases ?? [])]) keyOf.set(k, id);
+  if (ch) {
+    for (const o of src.field.occurrences) {
+      for (const c of o.jung ?? []) {
+        if (keyOf.get(c.work) !== work) continue;
+        const p = pdfPage(c.locator);
+        const y = engagementYear(c.year);
+        if (p !== undefined && y !== null && chapterAt(p)?.page === ch.page && chapterAt(p)?.title === ch.title) years.add(y);
+      }
+    }
+    const titled = /\(((?:1[5-9]|20)\d\d)\)\s*$/.exec(ch.title);
+    if (titled) years.add(Number(titled[1]));
+  }
+  if (Number.isInteger(src.registry[work]?.year)) years.add(src.registry[work].year);
+  return years;
+}
+
+/**
+ * A theoretic's walk: its theory page's quotations in the page's own order, one stop each. Every stop names the theoretic, carries
+ * the quotation's words, voice and cite exactly as the page holds them, the section it stands in, and the corpus page of its cite;
+ * no stop is placed (the page names no place for a passage); a year is carried only where the field or the registry attests it.
+ */
+function verifyTheoretic(walk, where, src, theoretics, fail) {
+  const id = walk.id.replace(/^theoretic\//, '');
+  if (!theoretics.has(id)) return fail(where, 'no such theoretic in field.json');
+  const page = src.theoryPages.pages[id];
+  if (!page) return fail(where, 'the theoretic has no page in theory-pages.json');
+  if (walk.source !== `theory-pages.json#pages/${id}`) fail(where, `source ${walk.source} is not the theoretic's page`);
+  const want = page.sections.flatMap((sec) => sec.quotes.map((q) => ({ sec, q })));
+  if (walk.stops.length !== want.length) return fail(where, `${walk.stops.length} stops, the page holds ${want.length} quotations`);
+  walk.stops.forEach((s, i) => {
+    const at = `${where} stop ${i}`;
+    const { sec, q } = want[i];
+    if (s.subject?.type !== 'theoretic' || s.subject.id !== id) fail(at, 'a theoretic stop is of its theoretic');
+    if (s.cite?.work !== q.cite.work || s.cite?.locator !== q.cite.locator) fail(at, 'cite is not the quotation\'s');
+    if (!s.page) fail(at, 'a theoretic stop opens a corpus page');
+    if (s.place) fail(at, 'a theoretic stop is not placed: the page names no place for a passage');
+    if (s.text !== q.text) fail(at, 'text is not the quotation\'s, verbatim');
+    if ((s.voice ?? null) !== (q.voice ?? null)) fail(at, 'voice is not the quotation\'s');
+    if ((s.caption ?? null) !== (q.caption ?? null)) fail(at, 'caption is not the quotation\'s');
+    if (s.section?.id !== sec.id || s.section?.title !== sec.title || s.section?.line !== sec.line) fail(at, `section is not ${sec.id} as the page holds it`);
+    if (s.citeYear !== undefined) fail(at, 'a theoretic stop carries no citeYear');
+    const pg = s.page?.page;
+    if (pg === undefined) return;
+    const attested = attestedYears(src, q.cite.work, pg);
+    if (s.year === undefined) {
+      if (attested.size) fail(at, `no year, though the field attests ${[...attested].join('/')}`);
+    } else if (!attested.has(s.year)) fail(at, `year ${s.year} is attested by neither the field's cites of the chapter, its title nor the Work (${[...attested].join('/') || 'none'})`);
+  });
 }
 
 /**
@@ -128,6 +196,7 @@ export function verifyWalks(walks, src) {
     stage: (id) => stages.has(id),
     concept: (id) => concepts.has(id),
     'route-stop': (id) => routeOwn.has(id),
+    theoretic: (id) => theoretics.has(id),
   };
   const pages = new Map();
   const counts = {};
@@ -185,7 +254,6 @@ export function verifyWalks(walks, src) {
         if (stop.year !== undefined && stop.year !== o.year) fail(at, `year ${stop.year} is not the occurrence's ${o.year}`);
         const located = o.geoPrecision !== 'none' && isNum(o.lat) && isNum(o.lon);
         if (stop.place && (!located || stop.place.lat !== o.lat || stop.place.lon !== o.lon)) fail(at, 'place is not the occurrence\'s own');
-        if (!stop.place && located && walk.kind === 'theoretic') fail(at, 'a theoretic stop must be placed (thread.ts walks located members only)');
       }
     });
 
@@ -224,7 +292,7 @@ export function verifyWalks(walks, src) {
       }
     }
 
-    if (walk.kind === 'theoretic' && !theoretics.has(wid.replace(/^theoretic\//, ''))) fail(where, 'no such theoretic in field.json');
+    if (walk.kind === 'theoretic') verifyTheoretic(walk, where, src, theoretics, fail);
   }
 
   // every curated source appears once: each Aion thread, the chapters, the Red Book, the route, the stages

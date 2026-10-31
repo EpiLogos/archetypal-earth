@@ -1,11 +1,14 @@
 // Theory in the reading pane (H5, N14): one Contents for the mode (Jung's theory, the fourteen theoretics, the route), a pick opens
-// its reading in the same pane, the fourteen theoretics are walked by the pane's stepper (past the last comes the first), closing
-// a reading stays in the mode, and Theory and Dynamics lead into one another from the list. Desktop and phone.
+// the theoretic's own walk in the same pane (the quotations of its page, one stop each, stepped by the pane's stepper; past the
+// last comes the first), closing a reading stays in the mode, and Theory and Dynamics lead into one another from the list.
+// Desktop and phone.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/theory-pane.mjs
 import { launch, open } from './lib.mjs';
 
 let failed = 0;
 const check = (ok, what, detail = '') => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}${detail ? ` — ${detail}` : ''}`); if (!ok) failed++; };
+// (the live-sky sidecar's probe of its own /now fails when no sidecar runs on this machine; that is the sky's, not the theory's)
+const appLogs = (logs) => logs.filter((l) => !/\/now\b/.test(l));
 const browser = await launch('chromium');
 const PANE = 'section.deep:not(.passage):not(.you-sheet)';
 const hash = (page) => page.evaluate(() => location.hash);
@@ -30,19 +33,38 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(1800);
   check(/#\/theory\/theoretics\/psychoid$/.test(await hash(page)) && await reading(page), `${tag}: a theoretic opens in the pane`, await hash(page));
   check((await page.locator(`${PANE} .dp-article .dp-title`).textContent()) === 'The Psychoid', `${tag}: the reading is the theoretic`);
-  check((await page.locator('.pane-foot .pane-count').textContent()) === '1 / 14', `${tag}: the stepper stands at 1 / 14`);
+  const walk = await page.evaluate(() => window.__earth.model.walkById.get('theoretic/psychoid').stops.map((st) => ({ title: st.section.title, year: st.year ?? null })));
+  const n = walk.length;
+  const count = () => page.locator('.pane-foot .pane-count').textContent();
+  check(n > 14 && (await count()) === `1 / ${n}`, `${tag}: the stepper stands at 1 / ${n}, the stops of the psychoid's own walk, not 1 / 14`, await count());
   check(JSON.stringify(await engaged(page)) === '["psychoid"]', `${tag}: the engagement is recorded once`, JSON.stringify(await engaged(page)));
-  // the walk: forward through the field's own order; back from the first comes the last
-  await page.locator('.pane-foot [aria-label="Next theoretic"]').click();
+  const heading = () => page.locator(`${PANE} .dp-article h3.as-h3`).first().textContent();
+  check((await heading()) === walk[0].title, `${tag}: the first stop is the section it opens (${walk[0].title})`, await heading());
+  // the walk: forward through the page's own order, the engagement still once; back from the first comes the last
+  await page.locator('.pane-foot [aria-label="Next passage"]').click();
+  await page.waitForTimeout(1200);
+  check(/theoretics\/psychoid\/1$/.test(await hash(page)) && (await count()) === `2 / ${n}`, `${tag}: the stepper walks on to the next passage`, await hash(page));
+  check((await page.locator(`${PANE} blockquote.q`).count()) >= 1 && (await page.locator(`${PANE} .q-cite`).count()) >= 1, `${tag}: the stop shows Jung's passage with its cite`);
+  check(JSON.stringify(await engaged(page)) === '["psychoid"]', `${tag}: stepping on through the walk is not another engagement`, JSON.stringify(await engaged(page)));
+  await page.locator('.pane-foot [aria-label="Previous passage"]').click();
+  await page.locator('.pane-foot [aria-label="Previous passage"]').click();
+  await page.waitForTimeout(1200);
+  check(new RegExp(`theoretics/psychoid/${n - 1}$`).test(await hash(page)) && (await count()) === `${n} / ${n}`, `${tag}: back past the first comes the last passage of the same walk`, await hash(page));
+  await page.locator('.pane-foot [aria-label="Next passage"]').click();
+  await page.waitForTimeout(1200);
+  check(/theoretics\/psychoid\/0$/.test(await hash(page)) && (await count()) === `1 / ${n}`, `${tag}: past the last comes the first`, await hash(page));
+  // the Contents leads with the theoretic's sections; a pick opens the walk at that section's first stop; moving to another theoretic is the Contents' too
+  if (w > 500) { await page.locator('.sh-contents').click(); } else { await page.locator(`${PANE} .pane-contents-tool`).click(); }
+  await page.waitForTimeout(600);
+  const second = walk.findIndex((st, i) => i > 0 && st.title !== walk[i - 1].title);
+  await page.locator('.dp-contents-pane li button', { hasText: new RegExp(`^${walk[second].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`) }).first().click();
+  await page.waitForTimeout(1200);
+  check(new RegExp(`theoretics/psychoid/${second}$`).test(await hash(page)), `${tag}: a section of the Contents opens the walk at its first stop`, await hash(page));
+  if (w > 500) { await page.locator('.sh-contents').click(); } else { await page.locator(`${PANE} .pane-contents-tool`).click(); }
+  await page.waitForTimeout(600);
+  await page.locator('.dp-contents-pane li button', { hasText: /^The Archetype as Such/ }).first().click();
   await page.waitForTimeout(1500);
-  check(/theoretics\/archetype-as-such$/.test(await hash(page)) && (await page.locator('.pane-foot .pane-count').textContent()) === '2 / 14', `${tag}: the stepper walks on`, await hash(page));
-  await page.locator('.pane-foot [aria-label="Previous theoretic"]').click();
-  await page.locator('.pane-foot [aria-label="Previous theoretic"]').click();
-  await page.waitForTimeout(1500);
-  check(/theoretics\/transcendent-function$/.test(await hash(page)) && (await page.locator('.pane-foot .pane-count').textContent()) === '14 / 14', `${tag}: back past the first comes the fourteenth`, await hash(page));
-  await page.locator('.pane-foot [aria-label="Next theoretic"]').click();
-  await page.waitForTimeout(1500);
-  check(/theoretics\/psychoid$/.test(await hash(page)), `${tag}: past the last comes the first`, await hash(page));
+  check(/theoretics\/archetype-as-such(\/0)?$/.test(await hash(page)) && (await page.locator(`${PANE} .dp-article .dp-title`).textContent()) === 'The Archetype as Such', `${tag}: the Contents moves from one theoretic to the next`, await hash(page));
   // closing the reading stays in the mode; Escape does the same
   await page.keyboard.press('Escape');
   await page.waitForTimeout(900);
@@ -50,7 +72,7 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   // asking again for the same reading brings it back (the Contents' marked entry)
   await page.locator('.sh-contents').click();
   await page.waitForTimeout(500);
-  await page.locator('.dp-contents-pane li button[aria-current="true"]').click();
+  await page.locator('.dp-contents-pane li button[aria-current="true"]').last().click();
   await page.waitForTimeout(1200);
   check(await reading(page), `${tag}: the entry the mode stands on shows its reading again`);
   // Theory → Dynamics from the same list
@@ -68,7 +90,7 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   await page.locator('.dp-contents-pane li button', { hasText: /^Energy$/ }).first().click();
   await page.waitForTimeout(2800);
   check(/#\/theory\/energy$/.test(await hash(page)) && await reading(page), `${tag}: Jung's theory opens in the pane from the route`, await hash(page));
-  check(!logs.length, `${tag}: no page errors`, logs.slice(0, 2).join(' | '));
+  check(!appLogs(logs).length, `${tag}: no page errors`, appLogs(logs).slice(0, 2).join(' | '));
   await ctx.close();
 }
 await browser.close();

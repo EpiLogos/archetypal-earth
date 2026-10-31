@@ -1,5 +1,6 @@
 // S8: a thread for a theoretic and for a text. planThread takes the two subjects by data alone: the same located members,
-// year order and thinning as the family and archetype threads, so the thread of a theoretic is the walk the walk file holds.
+// year order and thinning as the family and archetype threads. (A theoretic's walk is another thing: the quotations of its page,
+// held in tests/lenses/theoretic-walks.test.ts.)
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,12 +18,11 @@ const walks = json('public/data/walks.json') as WalksData;
 const m = buildModel(field, undefined, undefined, { works, walks });
 
 describe('planThread for a theoretic', () => {
-  it('aion-time is 22 stops, the same occurrences the theoretic walk of walks.json holds', () => {
+  it('aion-time is 22 stops, each a located member of the theoretic, in year order', () => {
     const steps = planThread(m, 'theoretic', 'aion-time');
     expect(steps).toHaveLength(22);
-    const walk = walks.walks.find((w) => w.id === 'theoretic/aion-time')!;
-    expect(steps.map((s) => m.occ[s.occ].id)).toEqual(walk.stops.map((s) => s.subject!.id));
     for (const s of steps) expect(m.located[s.occ]).toBe(1);
+    for (let k = 1; k < steps.length; k++) expect(m.occ[steps[k].occ].year).toBeGreaterThanOrEqual(m.occ[steps[k - 1].occ].year);
   });
 
   it('is capped as a family thread is, and every step is a member of the theoretic', () => {

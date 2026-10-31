@@ -200,13 +200,14 @@ describe('the clock of a chronological walk is monotone', () => {
     return out;
   };
 
-  it('each of the 14 theoretic walks sets the clock at every stop, never moving it back', () => {
-    const walks = data.walks.filter((w) => w.ordered === 'chronological');
+  it('the 14 theoretic walks are curated by their page, not by year: no walk is chronological, and the clock follows the stops as written', () => {
+    expect(data.walks.filter((w) => w.ordered === 'chronological')).toHaveLength(0);
+    const walks = data.walks.filter((w) => w.kind === 'theoretic');
     expect(walks).toHaveLength(14);
     for (const w of walks) {
-      const c = clocks(w);
-      expect(c, w.id).toHaveLength(w.stops.length);
-      expect(c, w.id).toEqual([...c].sort((a, b) => a - b));
+      expect(w.ordered, w.id).toBe('curated');
+      const dated = w.stops.filter((s) => s.year !== undefined);
+      expect(clocks(w), w.id).toEqual(dated.map((s) => scale.toU(s.year!)));
     }
   });
 

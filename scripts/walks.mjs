@@ -1,7 +1,7 @@
 // Build public/data/walks.json: the walks the Walk runner steps (S9). No stop is authored here. Each is a record of a file
 // that already exists: the Aion threads (history.json), the Aion chapters (aionbook.json), the Red Book folios
-// (redbook.json), the Theory route (dynamics-route.json), the alchemy opus stages (alchemy.json), and one derived walk per
-// theoretic (field.json: the members the model gives it, placed, by year, thinned as thread.ts thins a thread).
+// (redbook.json), the Theory route (dynamics-route.json), the alchemy opus stages (alchemy.json), and one walk per theoretic
+// (theory-pages.json: the theoretic's own page, every quotation of it one stop, in the page's own section order).
 // A stop's year and place are its subject's own; its cite is the subject's first citation, its page the pdf page of it.
 // One more walk per Work whose cites the field places on its corpus volume (S10b): the occurrences that cite it, in the
 // order of the pages they cite, an occurrence once at the lowest page it cites (aliases folded: `redbook` is Liber Novus).
@@ -14,8 +14,6 @@ import { loadSources, pdfPage, ROOT, verifyWalks } from './verify-walks.mjs';
 import { citeYear } from './lib/cite-year.mjs';
 import { keyMap, loadWorks, placeCite, volume } from './works-registry.mjs';
 
-/** The most stops a derived walk keeps: thread.ts's THREAD_MAX, one per time bucket. */
-export const THEORETIC_MAX = 26;
 const OUT = path.join('public', 'data', 'walks.json');
 
 const isPlaced = (lat, lon) => Number.isFinite(lat) && Number.isFinite(lon);
@@ -39,19 +37,6 @@ function stop({ subject, cite, year, place }) {
   if (year !== undefined) out.year = year;
   if (place) out.place = place;
   if (cite) out.cite = cite;
-  return out;
-}
-
-/** thread.ts's thinBuckets: the sorted list cut into `max` buckets, each keeping its image-bearing member if it has one. */
-function thinBuckets(sorted, max, prefer) {
-  if (sorted.length <= max) return sorted.slice();
-  const out = [];
-  for (let b = 0; b < max; b++) {
-    const lo = Math.floor((b * sorted.length) / max);
-    const hi = Math.max(lo + 1, Math.floor(((b + 1) * sorted.length) / max));
-    const slice = sorted.slice(lo, hi);
-    out.push(slice.find(prefer) ?? slice[Math.floor(slice.length / 2)]);
-  }
   return out;
 }
 
@@ -137,51 +122,84 @@ function alchemyStages(src) {
   };
 }
 
+/** The chapter of a Work's table (curation/work-chapters.json) that holds a pdf page: the last that begins on or before it, or null. */
+function chapterAt(src, work, page) {
+  let best = null;
+  for (const c of src.chapters[work]?.chapters ?? []) if (c.page <= page && (!best || c.page >= best.page)) best = c;
+  return best;
+}
+const chapterKey = (work, ch) => `${work}|${ch.page}|${ch.title}`;
+
 /**
- * A theoretic's members, the way src/data/model.ts gives them: the families it names, and the families of the archetypes
- * it names (an archetype's families are its own plus those that list it). Each family's members are its home and its
- * co-manifests. Returns occurrence indices sorted by year.
+ * The year each chapter of a Work's table stands in, as the field attests it: the engagement years of the cites that fall in the chapter
+ * (the first year of the cite's own `year`, as the text walks read it), the most often named, the earliest on a tie. A Work
+ * folded through its aliases. Keyed by `chapterKey`.
  */
-function theoreticMembers(field, t) {
-  const occ = field.occurrences;
-  const famMem = new Map();
-  occ.forEach((o, i) => {
-    for (const f of new Set([o.familyId, ...(o.coFamilyIds ?? [])])) {
-      if (!famMem.has(f)) famMem.set(f, []);
-      famMem.get(f).push(i);
+function chapterYears(src) {
+  const works = loadWorks();
+  const { map } = keyMap(works);
+  const tally = new Map();
+  for (const o of src.field.occurrences) {
+    for (const c of o.jung ?? []) {
+      const id = map.get(c.work);
+      const year = citeYear(c.year);
+      const page = pdfPage(c.locator);
+      if (!id || year === null || page === undefined) continue;
+      const ch = chapterAt(src, id, page);
+      if (!ch) continue;
+      const key = chapterKey(id, ch);
+      if (!tally.has(key)) tally.set(key, new Map());
+      tally.get(key).set(year, (tally.get(key).get(year) ?? 0) + 1);
     }
-  });
-  const archFamilies = (id) => {
-    const a = field.archetypes.find((x) => x.id === id);
-    const fams = new Set(a?.familyIds ?? []);
-    for (const f of field.families) if (f.archetypes.some((x) => x.id === id)) fams.add(f.id);
-    return fams;
-  };
-  const set = new Set();
-  for (const tie of t.archetypes) for (const f of archFamilies(tie.id)) for (const i of famMem.get(f) ?? []) set.add(i);
-  for (const tie of t.families) for (const i of famMem.get(tie.id) ?? []) set.add(i);
-  return [...set].sort((a, b) => occ[a].year - occ[b].year || a - b);
+  }
+  const out = new Map();
+  for (const [key, years] of tally) out.set(key, [...years].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0]);
+  return out;
 }
 
-/** One walk per theoretic: its placed members by year, thinned to THEORETIC_MAX (thread.ts thins a thread the same way). */
+/**
+ * The year of a passage: its chapter's year as the field attests it; else the year the chapter's own title names ("Depth
+ * Psychology (1948)"); else the Work's registered year. A passage none of these dates has no year, and its stop leaves the
+ * clock where it is (the runner's rule for a stop without one).
+ */
+function passageYear(src, chapterYear, works, work, page) {
+  const w = works[work];
+  const ch = chapterAt(src, work, page);
+  if (ch) {
+    const attested = chapterYear.get(chapterKey(work, ch));
+    if (attested !== undefined) return attested;
+    const titled = /\(((?:1[5-9]|20)\d\d)\)\s*$/.exec(ch.title);
+    if (titled) return Number(titled[1]);
+  }
+  return Number.isInteger(w?.year) ? w.year : undefined;
+}
+
+/**
+ * One walk per theoretic: its own page (curation/theory-pages, built into theory-pages.json), every quotation one stop, in the
+ * page's own section order. A stop's page is the pdf page of its cite, its year the passage's, its subject the theoretic. No stop
+ * is placed: the page names no place for a passage. A quotation that stands on no corpus page is an error, never dropped.
+ */
 function theoreticWalks(src) {
-  const occ = src.field.occurrences;
+  const works = loadWorks();
+  const { map } = keyMap(works);
+  const years = chapterYears(src);
   return src.field.theoretics.map((t) => {
-    const placed = theoreticMembers(src.field, t).filter((i) => occ[i].geoPrecision !== 'none' && isPlaced(occ[i].lat, occ[i].lon));
-    const picks = thinBuckets(placed, THEORETIC_MAX, (i) => !!occ[i].image);
-    return {
-      id: `theoretic/${t.id}`,
-      kind: 'theoretic',
-      title: t.name,
-      source: `field.json#theoretics/${t.id}`,
-      ordered: 'chronological',
-      stops: picks.map((i) => stop({
-        subject: { type: 'occurrence', id: occ[i].id },
-        year: occ[i].year,
-        place: { lat: occ[i].lat, lon: occ[i].lon },
-        cite: citeOf(occ[i].jung?.[0]),
-      })),
-    };
+    const page = src.theoryPages.pages[t.id];
+    if (!page) throw new Error(`walks: theoretic ${t.id} has no page in theory-pages.json`);
+    const stops = page.sections.flatMap((sec) => sec.quotes.map((q, k) => {
+      const at = `walks: theoretic ${t.id}, section ${sec.id}, quotation ${k + 1}`;
+      const pdf = pdfPage(q.cite?.locator);
+      if (pdf === undefined) throw new Error(`${at}: its cite ${JSON.stringify(q.cite)} names no pdf page`);
+      const work = map.get(q.cite.work);
+      if (!work || !corpusWorks.has(q.cite.work)) throw new Error(`${at}: ${q.cite.work} has no corpus volume`);
+      const out = stop({ subject: { type: 'theoretic', id: t.id }, cite: { work: q.cite.work, locator: q.cite.locator }, year: passageYear(src, years, works, work, pdf) });
+      out.section = { id: sec.id, title: sec.title, line: sec.line };
+      out.text = q.text;
+      if (q.voice) out.voice = q.voice;
+      if (q.caption) out.caption = true;
+      return out;
+    }));
+    return { id: `theoretic/${t.id}`, kind: 'theoretic', title: t.name, source: `theory-pages.json#pages/${t.id}`, ordered: 'curated', stops };
   });
 }
 

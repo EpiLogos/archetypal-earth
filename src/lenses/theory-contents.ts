@@ -1,34 +1,30 @@
-// THEORY: the one Contents of the Theory mode (H5), and the two walks it stands on (S9, N14).
+// THEORY: the one Contents of the Theory mode (H5), and the walks it stands on (S9, N14).
 // Theory is one mode with two readings: the theory route (its sections and the Number walk) and the dynamical route through
 // Van Eenwyk. Both stand in the reading pane and both carry the same Contents, so a visitor moves between them from the
-// list, not from a menu. Between them stand the fourteen theoretics, walked as one walk.
+// list, not from a menu. Between them stand the fourteen theoretics, each its own walk (public/data/walks.json, `theoretic/<id>`):
+// the quotations of its page, one stop each, played by the one Walk runner. Moving from one theoretic to another is the Contents'.
 import type { Model, Subject } from '../data/model';
 import type { DynamicsRoute } from '../types/dynamics';
 import type { Walk } from '../types/walks';
 import type { ContentsGroup } from '../ui/deep';
 import { el, plate } from '../ui/dom';
-import { definitionQuote, loadLensData, quoteBlock, type LensQuote } from './ui';
+import { definitionQuote, loadLensData } from './ui';
 import { quote } from '../ui/quote';
 import type { PassageBridge } from '../ui/passage';
 
 /** The route Theory walks (the dynamical lens's own data, public/data/dynamics-route.json). */
 export const THEORY_ROUTE = 'theory-route';
-/** The id of the fourteen-theoretics walk: the field's concepts, in the field's own order. */
-export const THEORETICS_WALK = 'theoretics';
-
-/**
- * The fourteen theoretics as one walk (N14): a stop for each concept the field carries, in the order the field names them.
- * No stop has a year or a place (a concept is not an event), so walking it leaves the clock and the camera where they are.
- */
-export function theoreticsWalk(m: Pick<Model, 'field'>): Walk {
-  return {
-    id: THEORETICS_WALK,
-    kind: 'theoretic',
-    title: 'The fourteen theoretics',
-    source: 'field.json#theoretics',
-    ordered: 'curated',
-    stops: (m.field.theoretics ?? []).map((t) => ({ subject: { type: 'concept', id: t.id } })),
-  };
+/** The sections a theoretic's walk passes through, each with the first stop it holds and how many stops it has (the walk's own order). */
+export function walkSections(walk: Pick<Walk, 'stops'>): { id: string; title: string; first: number; count: number }[] {
+  const out: { id: string; title: string; first: number; count: number }[] = [];
+  walk.stops.forEach((st, i) => {
+    const sec = st.section;
+    if (!sec) return;
+    const last = out[out.length - 1];
+    if (last && last.id === sec.id) last.count++;
+    else out.push({ id: sec.id, title: sec.title, first: i, count: 1 });
+  });
+  return out;
 }
 
 /** The route's stops, flat and in the route's own order (movement by movement). */
@@ -56,6 +52,8 @@ export interface TheoryContentsInput {
   at: TheoryAt;
   /** the families the standing stop or subject passes through (the first group when there are any) */
   families?: { id: string; name: string }[];
+  /** the theoretic whose walk is playing: its sections, each opening the walk at its first stop (the first group when there is one) */
+  walk?: { title: string; sections: { title: string; current: boolean; onPick(): void }[] };
   go: {
     family?(id: string): void;
     section(id: string): void;
@@ -82,6 +80,7 @@ export function theoryContentsGroups(a: TheoryContentsInput): ContentsGroup[] {
     },
   ];
   if (a.families?.length) groups.unshift({ title: 'Families it passes through', items: a.families.map((f) => ({ label: f.name, onPick: () => a.go.family?.(f.id) })) });
+  if (a.walk?.sections.length) groups.unshift({ title: a.walk.title, items: a.walk.sections.map((x) => ({ label: x.title, current: x.current, onPick: x.onPick })) });
   if (a.route) {
     groups.push({ title: 'Dynamics', items: [{ label: a.route.title, current: at.kind === 'overview', onPick: () => a.go.overview() }] });
     for (const mv of a.route.movements) {
@@ -94,21 +93,17 @@ export function theoryContentsGroups(a: TheoryContentsInput): ContentsGroup[] {
   return groups;
 }
 
-/** The part of a theory node's page the pane reads (public/data/theory-pages.json). */
-interface TheoryPage {
-  line: string;
-  sections: { title: string; line: string; quotes: LensQuote[] }[];
-  subjects: { type: Subject['type']; id: string }[];
-}
+/** The part of a theory node's page the pane reads on the walk's opening (public/data/theory-pages.json): the line that orients it. */
+interface TheoryPage { line: string }
 
 /**
- * One theoretic read in the pane: its name, the line that orients it, its plate, Jung's definition of it, the field's account,
- * and the page the corpus places for it. The field's own page of the concept (its ties, its evidence) is one link away.
+ * One theoretic's opening, read at the first stop of its walk: its name, the line that orients it, its plate, Jung's definition
+ * of it, the field's account, and the line of its page. The sections and their quotations are the walk's own stops.
  */
-export function theoreticReading(m: Model, id: string, h: { passages?: PassageBridge; open(subject: Subject): void }): HTMLElement[] | null {
+export function theoreticOpening(m: Model, id: string, h: { passages?: PassageBridge }): HTMLElement[] {
   const t = m.theoById.get(id);
-  if (!t) return null;
-  const out: HTMLElement[] = [el('h2', { class: 'dp-title', text: t.name })];
+  if (!t) return [];
+  const out: HTMLElement[] = [];
   if (t.oneLine) out.push(el('p', { class: 'dp-lede', text: t.oneLine }));
   if (t.image) out.push(plate(t.image, { credit: true, className: 'dp-figure', palette: t.palette, eager: true }));
   if (t.definition) out.push(quote(definitionQuote(m, t.definition), { passages: h.passages }));
@@ -116,19 +111,15 @@ export function theoreticReading(m: Model, id: string, h: { passages?: PassageBr
   const host = el('div', { class: 'dp-page' });
   out.push(host);
   loadLensData<{ version: 1; pages: Record<string, TheoryPage> }>('theory-pages').then((d) => {
-    const page = d.pages[id];
-    if (!page) { host.remove(); return; }
-    const nodes: HTMLElement[] = [];
-    if (page.line) nodes.push(el('p', { class: 'th-line', text: page.line }));
-    for (const s of page.sections) {
-      nodes.push(el('h3', { class: 'as-h3', text: s.title }));
-      if (s.line) nodes.push(el('p', { class: 'th-line', text: s.line }));
-      for (const q of s.quotes) nodes.push(quoteBlock(q, h.passages));
-    }
-    host.replaceChildren(...nodes);
+    const line = d.pages[id]?.line;
+    if (line) host.replaceChildren(el('p', { class: 'th-line', text: line })); else host.remove();
   }).catch(() => host.remove());
-  out.push(el('p', { class: 'dp-acts' }, [
-    el('button', { type: 'button', class: 'lp-btn dp-read', text: `${t.name} in the field`, onclick: () => h.open({ type: 'theoretic', id }) }),
-  ]));
   return out;
+}
+
+/** The way from a theoretic's reading to its node in the field. */
+export function theoreticActs(m: Model, id: string, open: (subject: Subject) => void): HTMLElement | null {
+  const t = m.theoById.get(id);
+  if (!t) return null;
+  return el('p', { class: 'dp-acts' }, [el('button', { type: 'button', class: 'lp-btn dp-read', text: `${t.name} in the field`, onclick: () => open({ type: 'theoretic', id }) })]);
 }

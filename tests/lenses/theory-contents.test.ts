@@ -1,11 +1,9 @@
-// H5 + N14, Theory: the Contents of the mode lists the theory route, the fourteen theoretics and the route; the theoretics are one
-// walk of fourteen stops in the field's own order.
+// H5 + N14, Theory: the Contents of the mode lists the theory route, the fourteen theoretics and the route. (Each theoretic's own
+// walk is held in tests/lenses/theoretic-walks.test.ts.)
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
-import { routeStops, theoreticsWalk, theoryContentsGroups } from '../../src/lenses/theory-contents';
-import { WalkRunner } from '../../src/walk/runner';
-import { createTimeScale } from '../../src/data/time';
+import { routeStops, theoryContentsGroups } from '../../src/lenses/theory-contents';
 import type { Field } from '../../src/types/field';
 import type { DynamicsRoute } from '../../src/types/dynamics';
 
@@ -15,26 +13,6 @@ const field = json<Field>('field.json');
 const route = json<DynamicsRoute>('dynamics-route.json');
 const SECTIONS = [{ id: 'self', name: 'The Self' }, { id: 'number', name: 'Number' }];
 const go = () => ({ section: vi.fn(), theoretic: vi.fn(), overview: vi.fn(), stop: vi.fn() });
-
-describe('the fourteen theoretics are one walk (N14)', () => {
-  const w = theoreticsWalk({ field });
-
-  it('has fourteen stops, one for each theoretic the field carries, in the field\'s order', () => {
-    expect(w.stops).toHaveLength(14);
-    expect(w.stops.map((s) => s.subject!.id)).toEqual(field.theoretics.map((t) => t.id));
-    expect(new Set(w.stops.map((s) => s.subject!.id)).size).toBe(14);
-    expect(w.kind).toBe('theoretic');
-  });
-
-  it('leaves the clock and the camera alone, and the runner wraps past the last to the first', () => {
-    const run = new WalkRunner({ scale: createTimeScale(1900, 2030), wrap: true });
-    const first = run.start(w, { u: 0, focus: null, reading: null, centre: null, walk: null }, 13)!;
-    expect(first.effects.setClock).toBeNull();
-    expect(first.effects.flyTo).toBeNull();
-    expect(run.next()!.stop.subject!.id).toBe(field.theoretics[0].id);
-    expect(run.prev()!.stop.subject!.id).toBe(field.theoretics[13].id);
-  });
-});
 
 describe('the Theory Contents', () => {
   const input = (at: Parameters<typeof theoryContentsGroups>[0]['at'], withRoute = true) => ({
