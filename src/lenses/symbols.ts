@@ -34,9 +34,13 @@ export function mount(ctx: LensContext): LensInstance {
 
   /** the route the lens stands at, for the Contents to mark */
   let standing: string[] = [];
-  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  /**
+   * A reading of this lens: the lens's own page is held in the pane until the visitor asks for it (the Contents does); a route
+   * that names a symbol or an archetype is a request to read it (a link to it, as Texts reads a named cite), so it comes up.
+   */
   const show = (key: string, nodes: (HTMLElement | null)[]) => {
     ctx.pane.load({ key: `symbols/${key}`, eyebrow: 'Symbols', nodes: nodes.filter((n): n is HTMLElement => !!n) });
+    if (standing.length) ctx.pane.reveal();
   };
   const contents = () => symbolsContentsGroups(
     {
