@@ -33,7 +33,7 @@ export const NEUTRAL_LABELS: Labels = {
   symbolsIntro: 'Name a symbol and see how it runs through the field: what its source says it is, every dated instance of it, the dreams and visions it turns up in, and what it expresses.',
   symbolsNone: 'It holds the images its sources write about, under the names they use.',
   amplifyDreams: 'The dreams and visions in the corpus where this image appears: the parallels lined up beside a dream image.',
-  amplifyNoDefinition: 'The source gives no definition of this image in its records.',
+  amplifyNoDefinition: 'The source gives no definition of this image.',
   subjectOwn: 'the author’s own',
   redbookLede: 'Each vision of the book, and what it became in the later work.',
   birthFraming: 'the sky at that moment, read in the field’s keys',

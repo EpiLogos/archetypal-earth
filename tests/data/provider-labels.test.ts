@@ -51,7 +51,7 @@ const FORMER: Required<ProviderLabels> = {
   symbolsIntro: 'Name a symbol and see how it runs through the field: what Jung said it is, every dated instance of it, the dreams and visions it turns up in, and what it expresses.',
   symbolsNone: 'It holds the images Jung wrote about, under the names his texts use.',
   amplifyDreams: 'The dreams and visions in the corpus where this image appears: the parallels Jung lined up beside a dream image.',
-  amplifyNoDefinition: 'Jung gives no definition of this image in the vault’s records.',
+  amplifyNoDefinition: 'Jung gives no definition of this image.',
   subjectOwn: 'Jung’s own', // practice/amplify-view.ts and lenses/depth.ts, a record of the author's own
   redbookLede: 'Each vision of the book, and what it became in Jung’s later work.', // redbook/view.ts
   birthFraming: 'the sky at that moment, read in Jung’s keys', // sky/chart.ts BIRTH_FRAMING

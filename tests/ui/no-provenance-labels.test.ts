@@ -22,7 +22,7 @@ function withoutComments(text: string): string {
 const apos = (s: string) => s.replace(/’/g, "['’]");
 const PHRASES = [
   'atlas’s inference', 'atlas’s own link', 'A link the atlas draws', 'Links the atlas draws', '(read here)', 'tie basis',
-  'placed by the field’s joins', 'inferred by the vault', 'linked by this site',
+  'placed by the field’s joins', 'inferred by the vault', 'linked by this site', 'in its records', 'the vault’s records',
 ];
 const KEYS = ['tieOwnNote', 'tieOwnLink', 'astrologyOtherTies', 'astrologyOtherTiesOnly', 'amplifyTieOwn'];
 
@@ -45,4 +45,13 @@ describe('no provenance label ships', () => {
       expect(code.filter((c) => c.text.includes(key)).map((c) => c.f)).toEqual([]);
     });
   }
+});
+
+describe('no provider label says where its words were kept', () => {
+  const file = process.env.PROVIDER_JSON ?? path.resolve(__dirname, '..', '..', 'curation', 'provider.json');
+  const labels = (JSON.parse(fs.readFileSync(file, 'utf8')) as { labels: Record<string, string> }).labels;
+
+  it('names the vault, the atlas or its records nowhere', () => {
+    expect(Object.entries(labels).filter(([, v]) => /\bvault|\bthe atlas\b|\bits records\b/i.test(v)).map(([k]) => k)).toEqual([]);
+  });
 });
