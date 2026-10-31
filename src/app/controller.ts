@@ -1241,7 +1241,8 @@ export class Controller {
   private enterLensInstance(inst: LensInstance, path: string[]) {
     this.lensOptionsSet = false;
     inst.enter(path);
-    if (!this.lensOptionsSet) this.setLensOptions([]);
+    // a lens that keeps its Contents in the pane carries its own entry (the Contents trigger): no standard Options action stands for it
+    if (!this.lensOptionsSet && !this.contentsSpec) this.setLensOptions([]);
   }
 
   /** The globe makes room for the sheet only while the sheet is on screen. Astrology's sky-only states never do. */
@@ -1264,11 +1265,12 @@ export class Controller {
   private setLensOptions(nodes: Node[] | null) {
     if (!nodes) { this.sheetAction = null; this.shell.setControls(null); return; }
     this.lensOptionsSet = true;
-    const act = optionAction('', () => this.toggleSheet(), { pressed: false });
+    // a lens with its Contents in the pane is opened from the Contents trigger: its Options carry no Open/Close row
+    const act = this.contentsSpec ? null : optionAction('', () => this.toggleSheet(), { pressed: false });
     this.sheetAction = act;
     const disclosure = nodes.find((n): n is HTMLElement => n instanceof HTMLElement && n.classList.contains('mode-options')) ?? modeOptions([]);
     const body = disclosure.querySelector<HTMLElement>('.mode-options-body');
-    body?.prepend(act);
+    if (act) body?.prepend(act);
     // a content choice in the Options is a request to read: it reveals the sheet. Capture phase, so the sheet is revealed
     // before the choice navigates. The standard toggle and any row marked data-no-reveal (Astrology's names) do not.
     body?.addEventListener('click', (e) => {
@@ -1396,7 +1398,11 @@ export class Controller {
   private toggleContents() {
     if (this.deep.isContentsOpen) { this.deep.hideContents(); return; }
     const spec = this.contentsSpec;
-    if (spec) this.deep.showContents(spec.title, spec.groups());
+    if (!spec) return;
+    // every entry is a request to read: a lens that holds its reading until it is asked for (a panel lens) shows it now, even
+    // when the entry carried the visitor into another lens of the same mode (Theory ↔ Dynamics)
+    const groups = spec.groups().map((g) => ({ ...g, items: g.items.map((it) => ({ ...it, onPick: () => { it.onPick(); if (this.activeLens) this.lensPane.reveal(); } })) }));
+    this.deep.showContents(spec.title, groups);
   }
 
   // ── applying a state ──────────────────────────────────────────────────

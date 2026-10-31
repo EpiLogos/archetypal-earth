@@ -233,6 +233,8 @@ export function back(s: AppState): AppState {
       if (p.length >= 2) return astrologyAt([p[0]]);
       return WORLD;
     }
+    // a theoretic stands one rung under Theory itself (the fourteen are walked as one, not nested)
+    if (s.lens.id === 'theory' && s.lens.path[0] === 'theoretics') return { ...s, lens: { id: 'theory', path: [] } };
     if (s.lens.path.length) return { ...s, lens: { id: s.lens.id, path: s.lens.path.slice(0, -1) } };
     if (s.lens.id === 'theory') return { view: { kind: 'world' }, deep: false, dynamics: {} };
     return WORLD;
@@ -240,7 +242,7 @@ export function back(s: AppState): AppState {
   if (s.history) return s.history.selection ? { ...s, history: { reading: s.history.reading } } : WORLD;
   if (s.redbook) return s.redbook.stop || s.redbook.genesis ? { ...s, redbook: {} } : WORLD;
   // the lens: a subject climbs to the lens itself (the Self), and the lens closes onto the Earth
-  if (s.dynamics) return s.dynamics.stop ? { ...s, dynamics: s.dynamics.subject ? { subject: s.dynamics.subject } : {} } : s.dynamics.subject ? { ...s, dynamics: {} } : WORLD;
+  if (s.dynamics) return s.dynamics.stop || s.dynamics.route ? { ...s, dynamics: s.dynamics.subject ? { subject: s.dynamics.subject } : {} } : s.dynamics.subject ? { ...s, dynamics: {} } : WORLD;
   const v = s.view;
   switch (v.kind) {
     case 'world':

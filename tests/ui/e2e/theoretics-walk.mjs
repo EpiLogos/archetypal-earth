@@ -1,7 +1,7 @@
 // The theoretics in the field, in a real browser: the ground is offered first, a concept is a focusable subject,
 // and the node is drawn in the graph. Run: npx vite --port 5183 --strictPort & then node tests/ui/e2e/theoretics-walk.mjs
 import fs from 'node:fs';
-import { launch, open } from './lib.mjs';
+import { launch, open, revealSheet } from './lib.mjs';
 
 const fails = [];
 const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`); if (!cond) fails.push(msg); };
@@ -73,6 +73,7 @@ const b = await launch('chromium');
 {
   const { ctx, page, logs } = await open(b, { hash: '#/theory/self' });
   await page.waitForTimeout(2000);
+  await revealSheet(page, 'Theory');
   const links = await page.$$eval('.th-link', (els) => els.map((e) => e.textContent.trim()));
   ok(links.includes('The Psychoid'), `Theory's self section links to the psychoid node (got ${JSON.stringify(links)})`);
   await ctx.close();

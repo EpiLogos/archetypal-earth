@@ -21,7 +21,7 @@ for (const [w, h, tag] of [[1280, 800, 'desk'], [390, 844, 'phone']]) {
   check(/#\/theory\/number\/0$/.test(page.url()), `${tag}: the walk starts at #0`, page.url());
   const head = (await page.locator('.ql-head').textContent()) ?? '';
   check(/1\s*↔\s*#0/.test(head) && /Origin/.test(head), `${tag}: #0 holds the number one`, head);
-  for (let i = 0; i < 3; i++) { await page.locator('.rb-rail [aria-label="Next"]').click(); await page.waitForTimeout(700); }
+  for (let i = 0; i < 3; i++) { await page.locator('.pane-foot [aria-label="Next position"]').click(); await page.waitForTimeout(700); }
   await page.waitForTimeout(2000);
   const head3 = (await page.locator('.ql-head').textContent()) ?? '';
   check(/4\s*↔\s*#3/.test(head3) && /State 10/.test(head3), `${tag}: the walk steps on in order`, head3);

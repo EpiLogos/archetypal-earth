@@ -1,9 +1,13 @@
 // The dynamical lens walks Van Eenwyk: an overview of four movements, then sixteen stops, each drawn as the system it
 // names (a native figure that moves, still under reduced motion), with his words (V), Jung's (J), Neumann's (N) where
 // he speaks to it, and the QL framework's own (QL) at the end. The globe shows the lens's own set and says so; the
-// address names the stop; the arrow keys walk on.
+// address names the stop; the arrow keys and the pane's stepper walk on. The route is read in the reading pane; its Contents
+// (the Theory mode's one list) open it.
 //   EARTH_HEADLESS=1 node tests/ui/e2e/dynamics-route.mjs
+import fs from 'node:fs';
 import { launch, open } from './lib.mjs';
+
+const ROUTE_TITLE = JSON.parse(fs.readFileSync(new URL('../../../public/data/dynamics-route.json', import.meta.url), 'utf8')).title;
 
 // this gate reads the figure's pixels back itself; the browser's advice about that readback is the test's, not the app's
 const appLogs = (logs) => logs.filter((l) => !/Multiple readback operations using getImageData/.test(l));
@@ -25,13 +29,14 @@ const figure = (page) => page.evaluate(() => {
 for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   const { ctx, page, logs } = await open(browser, { width: w, height: h, hash: '#/dynamics', mobile: w < 500 });
   await page.waitForTimeout(6500);
-  // Theory lands with Options icon; Dynamics opens the route overview
-  const dynOpt = page.locator('.mode-options-body button', { hasText: 'Dynamics' });
-  if (!(await dynOpt.isVisible().catch(() => false))) {
-    await page.locator('.mode-opt-btn').click();
-  }
-  await dynOpt.click();
+  // Theory lands with its Contents waiting (no reading, no Options row for either route); the route's overview is an entry of it
+  check(await page.locator('.sh-contents').isVisible(), `${tag}: the landing offers the Contents`);
+  check(!(await page.locator('body.pane-reading').count()), `${tag}: the landing reads nothing yet`);
+  await page.locator('.sh-contents').click();
+  await page.waitForTimeout(500);
+  await page.locator('.dp-contents-pane li button', { hasText: ROUTE_TITLE }).first().click();
   await page.waitForTimeout(2500);
+  check(await page.locator('body.pane-reading').count() === 1, `${tag}: the overview is read in the pane`);
   check(await page.locator('.dy-route-dot').count() === 16, `${tag}: the overview maps the route, sixteen stops in four movements`);
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   const own = Number((/^([\d,]+) in/.exec(line)?.[1] ?? '0').replace(/,/g, ''));
@@ -44,7 +49,7 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   await page.waitForTimeout(700);
   const f2 = await figure(page);
   check(f1 && f2 && f1.sum !== f2.sum, `${tag}: the figure moves`);
-  const chips = await page.locator('.dy-card .q-voice').allTextContents();
+  const chips = await page.locator('.dy-reading .q-voice').allTextContents();
   check(chips.length >= 1 && chips.every((c) => c === 'Van Eenwyk'), `${tag}: Van Eenwyk is named where he speaks; Jung wears no chip`, chips.join(' '));
   const line2 = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   check(/“Energy as an oscillation between poles”/.test(line2), `${tag}: the globe tunes to the stop's families`, line2);
@@ -52,11 +57,11 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
   // walk to centroversion: Neumann beside Jung
   await page.evaluate(() => { location.hash = '#/dynamics/s/self-organization'; });
   await page.waitForTimeout(2500);
-  const chips2 = await page.locator('.dy-card .q-voice').allTextContents();
-  check(chips2.includes('Neumann') && /Centroversion/.test((await page.locator('.dy-card').textContent()) ?? ''), `${tag}: Neumann speaks where he speaks to it`, chips2.join(' '));
+  const chips2 = await page.locator('.dy-reading .q-voice').allTextContents();
+  check(chips2.includes('Neumann') && /Centroversion/.test((await page.locator('.dy-reading').textContent()) ?? ''), `${tag}: Neumann speaks where he speaks to it`, chips2.join(' '));
   await page.locator('.dy-route-dot[aria-label="The 4+2 and its return"]').click();
   await page.waitForTimeout(2500);
-  const ql = await page.locator('.dy-card .q-ql .q-cite').allTextContents();
+  const ql = await page.locator('.dy-reading .q-ql .q-cite').allTextContents();
   check(/ql-cycle$/.test(page.url()) && ql.length === 3 && ql.every((t) => /epi-logos\.org · § [IV]+/.test(t)), `${tag}: the route ends on the QL framework's cycle, in the published site's words`, ql.join(' | '));
   if (shots) await page.screenshot({ path: `${shots}/dy-${tag}-ql.png` });
   if (w > 500) {
@@ -64,6 +69,21 @@ for (const [w, h, tag] of [[1280, 860, 'desk'], [390, 844, 'phone']]) {
     await page.waitForTimeout(1500);
     check(/alternating-current$/.test(page.url()), `${tag}: the arrow key walks on (and round)`, page.url());
   }
+  // the pane's stepper walks the same route: forward from the first stop, back past the first to the last (the rail's wrap)
+  await page.evaluate(() => { location.hash = '#/dynamics/s/alternating-current'; });
+  await page.waitForTimeout(1800);
+  check((await page.locator('.pane-foot .pane-count').textContent()) === '1 / 16', `${tag}: the stepper stands at 1 / 16`);
+  await page.locator('.pane-foot [aria-label="Next stop"]').click();
+  await page.waitForTimeout(1800);
+  check(/#\/dynamics\/s\/homoclinic-point$/.test(page.url()) && (await page.locator('.pane-foot .pane-count').textContent()) === '2 / 16', `${tag}: the stepper walks on in the route's own order`, page.url());
+  await page.locator('.pane-foot [aria-label="Previous stop"]').click();
+  await page.locator('.pane-foot [aria-label="Previous stop"]').click();
+  await page.waitForTimeout(1800);
+  check(/#\/dynamics\/s\/ql-cycle$/.test(page.url()), `${tag}: back past the first stop comes the last`, page.url());
+  // closing the reading stays in the mode: the Contents wait on the landing
+  await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-close').click();
+  await page.waitForTimeout(1500);
+  check(/#\/dynamics$/.test(page.url()) && !(await page.locator('body.pane-reading').count()) && await page.locator('.sh-contents').isVisible(), `${tag}: closing the reading stays in the mode, Contents waiting`, page.url());
   const scroll = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   check(scroll <= 0, `${tag}: no horizontal scroll`, String(scroll));
   check(!appLogs(logs).length, `${tag}: no page errors`, appLogs(logs).slice(0, 2).join(' | '));

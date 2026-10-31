@@ -70,12 +70,29 @@ export async function waitTiles(page, timeout = 8000) {
   }
 }
 
+/** A lens's reading stands in the pane (the pane is a reading, not Contents). */
+export const paneReading = (page) => page.evaluate(() => document.body.classList.contains('pane-reading'));
+
 /**
- * A panel lens's sheet is hidden until the person asks for it: its Options' first action (Open <label>) reveals it.
- * Does nothing when the sheet is already on screen.
+ * Open the standing lens's Contents from its trigger and pick an entry: the one the lens stands on (marked current) or the
+ * `nth` entry. A pick is a request to read, so the pane then holds a reading.
+ */
+export async function openFromContents(page, nth) {
+  if (!(await page.$('.dp-contents-pane li button'))) await page.click('.sh-contents');
+  await page.waitForSelector('.dp-contents-pane li button', { timeout: 8000 });
+  const pick = nth === undefined ? page.locator('.dp-contents-pane li button[aria-current="true"]') : page.locator('.dp-contents-pane li button').nth(nth);
+  await (nth === undefined && !(await pick.count()) ? page.locator('.dp-contents-pane li button').first() : pick.first()).click();
+  await page.waitForTimeout(900);
+}
+
+/**
+ * A panel lens's reading is held until the person asks for it. A lens with its Contents in the pane is asked from the Contents
+ * trigger; another lens by its Options' first action (Open <label>). Does nothing when the reading is already on screen.
  */
 export async function revealSheet(page, label) {
   if (await page.$('.lens-panel:not([hidden])')) return;
+  if (await paneReading(page)) return;
+  if (await page.$('.sh-contents:not([hidden])')) { await openFromContents(page); return; }
   await page.click('.sh-controls details.mode-options > summary');
   // the row's title is its own span (optionRow); the row is matched by its whole title
   await page.locator('.sh-controls .mode-options-body button').filter({ hasText: new RegExp(`^Open ${label}$`) }).first().click();

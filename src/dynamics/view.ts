@@ -2,7 +2,7 @@
 // Red Book, built to the same pattern: show(state) / hide() / update(dt), a root section, a reveal card.
 // The globe is not touched here: the engine is exposed read-only, and the controller owns every globe effect
 // (the chronology is offered by chronology() for it to light).
-import { citeOfString } from '../lenses/ui';
+import { citeOfString, loadLensData } from '../lenses/ui';
 import { entered, quote, type QuoteCite } from '../ui/quote';
 import { averagePalettes, rgbToHex } from '../data/palette';
 import { selfSubject, subjectExists, subjectName, subjectPalette, type Model, type Subject } from '../data/model';
@@ -14,12 +14,16 @@ import type { DynamicsConcept, DynamicsData, DynamicsQuote, DynamicsRender, Dyna
 import { clear, el } from '../ui/dom';
 import { modeOptions, optionAction } from '../ui/mode-options';
 import type { PassageBridge } from '../ui/passage';
-import { closeGlyph } from '../ui/reveal';
+import { paneStepper } from '../ui/pane';
+import { WalkRunner } from '../walk/runner';
+import { routeWalk } from './walk';
+import { providerLabels } from '../data/labels';
+import { theoryContentsGroups } from '../lenses/theory-contents';
+import type { ContentsGroup } from '../ui/deep';
 import { construction, figureOf, FIGURES, paintFractal, paletteOf as figurePalette, type Figure } from './figures';
 import { onPixelRatio, PhaseStrip } from './strip';
 import { basinsOf, companions, trajectoryOf, type Basin, type Trajectory } from './trajectory';
 import type { LensChrome } from '../shell/lens';
-import { providerLabels } from '../data/labels';
 
 type FractalKind = 'julia' | 'mandelbrot';
 interface FractalView {
@@ -67,8 +71,10 @@ export class DynamicsView {
   /** The phase strip, exposed for the harness and tests. */
   readonly strip: PhaseStrip;
   private heading: HTMLElement;
-  private card: HTMLElement;
-  private rail: HTMLElement;
+  /** the route's stops are walked by the one runner (S9); past the last comes the first */
+  private runner: WalkRunner;
+  /** Jung's theory, named for the Contents (the Theory lens's own sections) */
+  private sections: { id: string; name: string }[] = [];
   private heroKind: DynamicsRender = 'lorenz';
   /** repaints the hero when its box changes size */
   private heroRo: ResizeObserver | null = null;
@@ -107,9 +113,11 @@ export class DynamicsView {
     onPixelRatio(() => this.paintHero()); // the lens lives as long as the page: its disposer is not needed
     // the subject is the shell's context line; the visited families are this lens's controls (MODES-RFC §2)
     this.heading = el('div', { class: 'dy-controls' });
-    this.card = el('aside', { class: 'dy-card reveal on', 'aria-label': 'Dynamical reading' });
-    this.rail = el('nav', { class: 'dy-rail', hidden: true, 'aria-label': 'The route' });
-    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root, this.rail, this.card]);
+    this.runner = new WalkRunner({ scale: model.scale, wrap: true });
+    this.root = el('section', { class: 'dynamics', 'aria-label': 'The dynamical lens' }, [this.strip.root]);
+    void loadLensData<{ sections: { id: string; name: string }[]; number?: unknown }>('theory')
+      .then((d) => { this.sections = [...d.sections.map((x) => ({ id: x.id, name: x.name })), ...(d.number ? [{ id: 'number', name: 'Number' }] : [])]; })
+      .catch(() => { /* Jung's theory is then absent from the Contents, as it is where its data is absent */ });
     this.setActive(false);
     parent.append(this.root);
   }
@@ -123,21 +131,14 @@ export class DynamicsView {
     this.stateStop = state.stop;
     this.chosen = !!state.subject;
     this.resolveStop();
-    if (state.route && !state.stop) this.holdingOverview = true;
-    else if (state.stop || state.subject) this.holdingOverview = false;
-    // a stop, a chosen subject, or an overview we are holding open; plain Theory entry leaves Options waiting
-    this.routeOpen = !!state.stop || !!state.subject || this.holdingOverview || !!state.route;
+    // a stop, a chosen subject or the overview is a reading in the pane; the plain landing leaves the Contents waiting
+    this.routeOpen = !!state.stop || !!state.subject || !!state.route;
     this.root.classList.toggle('dy-route-open', this.routeOpen);
     this.refreshChrome();
-    if (this.routeOpen) {
-      this.card.hidden = false;
-      this.renderCard();
-    } else {
-      this.card.hidden = true;
-      this.rail.hidden = true;
-      clear(this.rail);
-      clear(this.card);
-    }
+    this.pane?.contents('Theory', () => this.contentsGroups());
+    this.shows++;
+    if (this.routeOpen) this.renderCard();
+    else { this.runner.interrupt(); this.pane?.hide(); }
     this.onScope();
     this.update(0);
   }
@@ -150,14 +151,39 @@ export class DynamicsView {
   /** whether the subject was chosen (a deep link or a pick), not the Self the lens lands on */
   private chosen = false;
   private basins: Basin[] = [];
-  /** the route card is open (overview or a stop); landing Theory keeps Options only */
+  /** a reading of the route stands in the pane (the overview or a stop); the landing keeps only the Contents */
   private routeOpen = false;
-  /** overview kept open after closing a stop (plain dynamics:{} would otherwise look like a fresh landing) */
-  private holdingOverview = false;
+  /** how many times the lens has been shown: an entry that changed nothing is told from one that did */
+  private shows = 0;
+
+  private get pane() {
+    return this.chrome?.pane;
+  }
+
+  /** The Contents of Theory (Jung's theory, the fourteen, the route), the standing stop marked. */
+  private contentsGroups(): ContentsGroup[] {
+    const sub = this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {};
+    // an entry that is already where the visitor stands changes no state: the pane then reads it again, with the list taken down
+    const to = (state: AppState) => { const before = this.shows; this.navigate(state); if (this.shows === before && this.routeOpen) this.renderCard(); };
+    return theoryContentsGroups({
+      model: this.model,
+      theoryTitle: providerLabels().theoryRoute,
+      sections: this.sections,
+      route: this.route,
+      stopName: (st) => this.stopName(st as RouteStop),
+      at: this.stop ? { kind: 'stop', id: this.stop.stop.id } : this.routeOpen && this.route ? { kind: 'overview' } : { kind: 'none' },
+      go: {
+        section: (id) => this.navigate(inLens('theory', id === this.sections[0]?.id ? [] : [id])),
+        theoretic: (id) => this.navigate(inLens('theory', ['theoretics', id])),
+        overview: () => to({ view: { kind: 'world' }, deep: false, dynamics: { ...sub, route: true } }),
+        stop: (id) => to({ view: { kind: 'world' }, deep: false, dynamics: { ...sub, stop: id } }),
+      },
+    });
+  }
 
   /**
-   * The title and the controls name what the globe shows. Options holds the two equal Theory routes — Jung's theory and
-   * the dynamical walk — plus any families the standing stop speaks of.
+   * The title and the controls name what the globe shows. Options hold the families the standing subject passes through;
+   * the two readings of Theory are in the pane's Contents.
    */
   private refreshChrome() {
     if (!this.subject || this.root.hidden) return;
@@ -174,32 +200,10 @@ export class DynamicsView {
       : this.chosen || !this.route ? this.topBasins() : [];
     const famActions = fams.map((familyId) => optionAction(m.famById.get(familyId)?.name ?? familyId, () =>
       this.navigate({ view: { kind: 'focus', subject: { type: 'family', id: familyId } }, deep: false })));
-    if (this.routeOpen) { this.chrome?.setControls(null); return; }
-    this.heading.append(modeOptions([
-      optionAction(providerLabels().theoryRoute, () => this.navigate(inLens('theory')), { title: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
-      optionAction('Dynamics', () => this.openRoute(), { title: this.route?.title ?? 'Archetypes & Strange Attractors' }),
-      ...famActions,
-    ]));
+    // the Contents carry the two readings of Theory; Options keep only the families the standing subject passes through
+    if (this.routeOpen || !famActions.length) { this.chrome?.setControls(null); return; }
+    this.heading.append(modeOptions(famActions));
     this.chrome?.setControls([this.heading]);
-  }
-
-  /** Open the dynamical route (overview first). Local when already on #/dynamics so hash equality cannot no-op. */
-  private openRoute() {
-    this.holdingOverview = true;
-    this.routeOpen = true;
-    this.root.classList.add('dy-route-open');
-    const sub = this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {};
-    const next = { view: { kind: 'world' } as const, deep: false, dynamics: { ...sub, route: true as const } };
-    // if the hash is already the landing, navigate would no-op — open the card here
-    if (!this.stateStop && !sub.subject) {
-      this.card.hidden = false;
-      this.renderCard();
-      this.refreshChrome();
-      this.onScope();
-      this.navigate(next);
-      return;
-    }
-    this.navigate(next);
   }
 
   /** The most-visited families the subject passes through, in the order they were first visited. */
@@ -261,10 +265,8 @@ export class DynamicsView {
     document.body.classList.remove('dynamics-mode');
     this.root.classList.remove('dy-route-open');
     this.routeOpen = false;
-    this.holdingOverview = false;
-    this.rail.hidden = true;
-    clear(this.rail);
-    clear(this.card);
+    this.pane?.release();
+    this.runner.interrupt();
     this.heroRo?.disconnect();
     this.heroRo = null;
     this.shots = [];
@@ -337,27 +339,6 @@ export class DynamicsView {
     this.conceptAt = 0;
   }
 
-  private closeButton() {
-    // close the route card; stay in Theory with Options waiting
-    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close reading', onclick: () => this.dismissRoute() }, [closeGlyph()]);
-  }
-
-  private dismissRoute() {
-    // from a stop → overview; from overview → Theory landing (must work even when hash is already #/dynamics)
-    if (this.stop) { this.holdingOverview = true; this.go(); return; }
-    this.holdingOverview = false;
-    this.routeOpen = false;
-    this.root.classList.remove('dy-route-open');
-    this.card.hidden = true;
-    this.rail.hidden = true;
-    clear(this.rail);
-    clear(this.card);
-    this.refreshChrome();
-    this.onScope();
-    const sub = this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {};
-    this.navigate({ view: { kind: 'world' }, deep: false, dynamics: { ...sub } });
-  }
-
   /**
    * The reveal card: the hero, captioned with the native system it draws (an illustration of the lens, not of the
    * subject), then one concept only when the data offers one. The subject's name is the heading; no line of Jung's is
@@ -367,14 +348,12 @@ export class DynamicsView {
     if (!this.subject) return;
     if (this.route) { this.renderRoute(); return; }
     this.shots = [];
-    this.rail.hidden = true;
-    clear(this.rail);
-    clear(this.card);
+    this.runner.interrupt();
     const concept = this.related[this.conceptAt];
     this.heroKind = concept?.render ?? 'lorenz';
     const text = el('div', { class: 'rv-text' }, [this.heroFigure(figureOf(this.heroKind))]);
     if (concept) text.append(...this.conceptBlock(concept));
-    this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
+    this.pane?.read({ key: `concept:${concept?.id ?? 'lens'}`, eyebrow: 'Dynamics', nodes: [el('div', { class: 'rv-body dy-reading' }, [text])] });
     this.paintHero();
   }
 
@@ -508,7 +487,7 @@ export class DynamicsView {
   }
 
   private go(stop?: string) {
-    this.navigate({ view: { kind: 'world' }, deep: false, dynamics: { ...(this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {}), ...(stop ? { stop } : {}) } });
+    this.navigate({ view: { kind: 'world' }, deep: false, dynamics: { ...(this.subject && keyOf(this.subject) !== keyOf(selfSubject(this.model)) ? { subject: this.subject } : {}), ...(stop ? { stop } : { route: true as const }) } });
   }
 
   /** The route's map: four movements, a dot for each stop, the standing one lit; every dot opens its stop. */
@@ -531,13 +510,12 @@ export class DynamicsView {
     this.figT = 0;
     this.heroRo?.disconnect();
     this.heroRo = null;
-    clear(this.card);
-    clear(this.rail);
     const route = this.route!;
     const text = el('div', { class: 'rv-text' });
     const cur = this.stop;
+    let foot: Node[] | null = null;
     if (!cur) {
-      this.rail.hidden = true;
+      this.runner.interrupt();
       text.append(
         this.routeMap(),
         this.heroFigure(figureOf('lorenz')),
@@ -557,12 +535,9 @@ export class DynamicsView {
       const i = this.stops.indexOf(cur);
       const n = this.stops.length;
       const concept = s.concept ? this.concepts.find((c) => c.id === s.concept) : undefined;
-      this.rail.hidden = false;
-      this.rail.append(
-        el('button', { type: 'button', text: '←', 'aria-label': 'Previous stop', onclick: () => this.go(this.stops[(i - 1 + n) % n].stop.id) }),
-        el('span', { class: 'rb-progress', text: `${i + 1} / ${n}` }),
-        el('button', { type: 'button', text: '→', 'aria-label': 'Next stop', onclick: () => this.go(this.stops[(i + 1) % n].stop.id) }),
-      );
+      // the walk: the runner stands on this stop (it begins here when the route is entered at a stop)
+      if (this.runner.active) this.runner.goto(i); else this.runner.start(routeWalk(this.model.walkById, route), { u: 0, focus: null, reading: null, centre: null, walk: null }, i);
+      foot = paneStepper({ prev: 'Previous stop', next: 'Next stop' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1));
       text.append(
         this.routeMap(),
         el('p', { class: 'aion-date rv-line dy-mv-head' }, [
@@ -579,7 +554,7 @@ export class DynamicsView {
       for (const q of s.quotes ?? []) text.append(this.routeQuote(q));
       for (const q of s.ql ?? []) text.append(quote({ kind: 'ql', text: entered(q.text), source: q.source }));
     }
-    this.card.append(this.closeButton(), el('div', { class: 'rv-body' }, [text]));
+    this.pane?.read({ key: cur ? `stop:${cur.stop.id}` : 'route', eyebrow: 'Dynamics', nodes: [el('div', { class: 'rv-body dy-reading' }, [text])], foot });
     // where the map scrolls sideways (a phone), the standing stop is brought into its view
     const map = text.querySelector<HTMLElement>('.dy-route');
     const on = map?.querySelector<HTMLElement>('[aria-current=step]');
@@ -592,12 +567,15 @@ export class DynamicsView {
     return quote({ text: q.text, cite: this.citeOf(q.cite), ...(q.voice ? { voice: q.voice } : {}) }, { passages: this.passages ?? undefined });
   }
 
-  /** Arrow-key walking through the route; wired by the controller. False when there is no route to walk. */
+  /** Arrow-key walking and the pane's stepper: the runner names the neighbour, past either end comes the other. False when there is no route to walk. */
   walk(delta: number): boolean {
     if (!this.route || !this.stops.length) return false;
-    const i = this.stop ? this.stops.indexOf(this.stop) : -1;
-    const n = this.stops.length;
-    this.go(this.stops[(i + delta + n) % n].stop.id);
+    let step;
+    if (this.runner.active) step = delta > 0 ? this.runner.next() : this.runner.prev();
+    else step = this.runner.start(routeWalk(this.model.walkById, this.route), { u: 0, focus: null, reading: null, centre: null, walk: null }, delta > 0 ? 0 : this.stops.length - 1);
+    const id = step?.stop.subject?.id;
+    if (!id) return false;
+    this.go(id);
     return true;
   }
 

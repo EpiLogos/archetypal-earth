@@ -10,7 +10,10 @@ import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '.
 import { BUILT, type LensContext, type LensInstance } from '../shell/lens';
 import type { PanelLensId } from '../state/store';
 import { inLens } from '../state/store';
-import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
+import { paneStepper } from '../ui/pane';
+import { WalkRunner } from '../walk/runner';
+import type { DynamicsConcept, DynamicsRoute } from '../types/dynamics';
+import { theoreticReading, theoreticsWalk, theoryContentsGroups, type TheoryAt } from './theory-contents';
 import { loadLensData, qlBlock, quoteBlock, type LensQuote, type QL } from './ui';
 import { treeFigure } from './tree';
 import { providerLabels } from '../data/labels';
@@ -106,22 +109,24 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.engine.setEmphasis(sc.rel, pal?.core ?? null, sc.info);
   };
 
-  const sectionNav = (sections: TheorySection[], id: string) => el('nav', { class: 'th-nav', 'aria-label': 'Theory sections' }, sections.map((x) =>
-    el('button', { type: 'button', class: 'th-tab', 'aria-current': x.id === id ? 'true' : undefined, text: x.name, onclick: () => ctx.setPath(x.id === sections[0].id ? [] : [x.id]) })));
+  /** Where the visitor stands, for the Contents to mark. */
+  let standing: TheoryAt = { kind: 'none' };
+  let route: DynamicsRoute | null = null;
+  let concepts: DynamicsConcept[] = [];
+  /** the fourteen theoretics, walked by the one runner (past the last comes the first) */
+  const theoretics = theoreticsWalk(ctx.model);
+  const runner = new WalkRunner({ scale: ctx.model.scale, wrap: true });
+  const SNAPSHOT = { u: 0, focus: null, reading: null, centre: null, walk: null };
 
-  const show = (key: string, nodes: (HTMLElement | null)[], foot?: HTMLElement | null, wide = true) => {
-    const body = nodes.filter((n): n is HTMLElement => !!n);
-    const footNodes = foot ? [foot] : null;
-    if (ctx.panel.isOpen) ctx.panel.replace(body, { foot: footNodes }); else ctx.panel.open('Theory', body, { wide, foot: footNodes });
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (key: string, eyebrow: string, nodes: (HTMLElement | null)[], foot?: Node[] | null, engages?: { type: string; id: string }) => {
+    ctx.pane.load({ key, eyebrow, nodes: nodes.filter((n): n is HTMLElement => !!n), foot: foot ?? null, engages });
     current = key;
   };
 
-  /** Same prev/next circles as the Red Book / Dynamics rail. */
-  const walkRail = (label: string, prev: () => void, next: () => void, at: string) => el('nav', { class: 'rb-rail', 'aria-label': label }, [
-    el('button', { type: 'button', text: '←', 'aria-label': 'Previous', onclick: prev }),
-    el('span', { class: 'rb-progress', text: at }),
-    el('button', { type: 'button', text: '→', 'aria-label': 'Next', onclick: next }),
-  ]);
+  /** Prev / next under a reading, in the pane's own stepper. */
+  const stepper = (label: string, prev: () => void, next: () => void, at: string) =>
+    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next);
 
   /** The number archetypes seven to ten, and the Tree's family, as links where the field holds them; null when it holds none. */
   const pastSixLinks = (): HTMLElement | null => {
@@ -135,7 +140,7 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   /** Number: the overview — the six positions on their wheel, Jung and von Franz on number, the psychoid and time. */
-  const renderNumber = (sections: TheorySection[]) => {
+  const renderNumber = () => {
     const d = data!.number!;
     ctx.setContext('Number');
     ctx.engine.setEmphasis(null, null);
@@ -144,8 +149,9 @@ export function mount(ctx: LensContext): LensInstance {
       el('button', { type: 'button', class: 'th-link', onclick: () => openStop(i) }, [
         el('span', { class: 'ql-stop-name' }, [el('strong', { text: `${r.n} ↔ ${r.position}` }), el('span', { text: ` ${r.ql.name ?? ''}` })]), icon('next', 14)])));
     const q = (x: { terms: string[] }) => el('div', { class: 'ql-quaternio', role: 'img', 'aria-label': `The quaternio: ${x.terms.join('; ')}` }, x.terms.map((t, i) => el('span', { class: `ql-q q${i}`, text: t })));
-    show('number', [
-      sectionNav(sections, 'number'),
+    standing = { kind: 'section', id: 'number' };
+    show('number', 'Theory', [
+      el('h2', { class: 'dp-title', text: 'Number' }),
       el('p', { class: 'th-line', text: d.line }),
       ...d.jung.map((x) => quoteBlock(x, ctx.passages, { compact: true })),
       qlBlock(d.pauli),
@@ -197,8 +203,8 @@ export function mount(ctx: LensContext): LensInstance {
     const sec = r.section ? sections.find((x) => x.id === r.section) : undefined;
     if (sec) links.append(el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath([sec.id]) }, [el('span', { text: `Theory: ${sec.name}` }), icon('next', 14)]));
     const first = r.jung[0] ?? r.quotes[0];
-    show(`number/${i}`, [
-      sectionNav(sections, 'number'),
+    standing = { kind: 'section', id: 'number' };
+    show(`number/${i}`, 'Number', [
       el('div', { class: 'ql-walk-head' }, [
         el('button', { type: 'button', class: 'link-quiet', text: 'Number', onclick: () => ctx.setPath(['number']) }),
         el('span', { class: 'th-count', text: `${i + 1} of ${all}` }),
@@ -219,7 +225,7 @@ export function mount(ctx: LensContext): LensInstance {
         ? el('button', { type: 'button', class: 'th-walk', onclick: () => ctx.passages!.open(first.cite.work, first.cite.locator) }, [el('span', { text: `Read ${first.cite.workTitle} at ${first.cite.locator}` }), icon('next', 14)])
         : null,
       links.childElementCount ? links : null,
-    ], walkRail('Number positions', () => go(i - 1), () => go(i + 1), `${i + 1} / ${all}`));
+    ], stepper('position', () => go(i - 1), () => go(i + 1), `${i + 1} / ${all}`));
     tuneSubjects(r.subjects, `${word.toLowerCase()} at ${r.position}`);
   };
 
@@ -228,15 +234,14 @@ export function mount(ctx: LensContext): LensInstance {
     const sections = data.number ? [...data.sections, NUMBER] : data.sections;
     if (id === 'number' && data.number) {
       const i = stop === undefined ? -1 : Number(stop);
-      if (Number.isInteger(i) && i >= 0 && i < data.number.numbers.length) renderStop(sections, i); else renderNumber(sections);
+      if (Number.isInteger(i) && i >= 0 && i < data.number.numbers.length) renderStop(sections, i); else renderNumber();
       return;
     }
     const i = Math.max(0, sections.findIndex((s) => s.id === id));
     const s = sections[i];
     current = s.id;
     ctx.setContext(s.name);
-    const nav = el('nav', { class: 'th-nav', 'aria-label': 'Theory sections' }, sections.map((x) =>
-      el('button', { type: 'button', class: 'th-tab', 'aria-current': x.id === s.id ? 'true' : undefined, text: x.name, onclick: () => ctx.setPath(x.id === sections[0].id ? [] : [x.id]) })));
+    standing = { kind: 'section', id: s.id };
     const links = el('div', { class: 'th-links' });
     for (const l of s.links) {
       if (l.type === 'lens') {
@@ -253,43 +258,80 @@ export function mount(ctx: LensContext): LensInstance {
       const n = sections[(i + d + sections.length) % sections.length];
       ctx.setPath(n.id === sections[0].id ? [] : [n.id]);
     };
-    show(s.id, [
-      nav,
+    show(s.id, 'Theory', [
+      el('h2', { class: 'dp-title', text: s.name }),
       el('p', { class: 'th-line', text: s.line }),
       ...s.quotes.map((q) => quoteBlock(q, ctx.passages)),
       links.childElementCount ? links : null,
-    ], walkRail('Theory sections', () => step(-1), () => step(1), `${i + 1} / ${sections.length}`));
+    ], stepper('section', () => step(-1), () => step(1), `${i + 1} / ${sections.length}`));
     tune(s);
   };
 
-  const theoryOptions = () => {
-    ctx.setControls([modeOptions([
-      optionGroup('Read the theory', [
-        optionAction(providerLabels().theoryRoute, () => {}, { pressed: true, description: 'Psychodynamics: energy, compensation, enantiodromia, the transcendent function, number' }),
-        optionAction('Dynamics', () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }), { description: 'Archetypes & Strange Attractors' }),
-      ]),
-    ], 'Options')]);
+  /** One theoretic, read in the pane, with the walk of the fourteen under it. */
+  const renderTheoretic = (id: string) => {
+    const at = theoretics.stops.findIndex((x) => x.subject?.id === id);
+    const nodes = at >= 0 ? theoreticReading(ctx.model, id, { passages: ctx.passages, open: (s) => ctx.focus(s) }) : null;
+    if (!nodes) { render('', undefined); return; }
+    const t = ctx.model.theoById.get(id)!;
+    // the walk: the runner stands on this theoretic (it begins here when the route is entered at one)
+    if (runner.active) runner.goto(at); else runner.start(theoretics, SNAPSHOT, at);
+    const go = (delta: number) => {
+      const step = delta > 0 ? runner.next() : runner.prev();
+      const next = step?.stop.subject?.id;
+      if (next) ctx.setPath(['theoretics', next]);
+    };
+    ctx.setContext(t.name);
+    standing = { kind: 'theoretic', id };
+    show(`theoretics/${id}`, 'Theory', nodes, stepper('theoretic', () => go(-1), () => go(1), `${at + 1} / ${theoretics.stops.length}`), { type: 'theoretic', id });
+    tuneSubjects([{ type: 'theoretic', id }], t.name);
+  };
+
+  /** The Contents: Jung's theory, the fourteen theoretics, the route (Dynamics). Each pick is a request to read: the pane shows the reading. */
+  const contents = () => {
+    const sections = data ? (data.number ? [...data.sections, NUMBER] : data.sections) : [];
+    return theoryContentsGroups({
+      model: ctx.model,
+      theoryTitle: providerLabels().theoryRoute,
+      sections: sections.map((x) => ({ id: x.id, name: x.name })),
+      route,
+      stopName: (st) => (st.concept ? concepts.find((c) => c.id === st.concept)?.name : st.name) ?? st.id,
+      at: standing,
+      go: {
+        section: (id) => { ctx.setPath(id === sections[0]?.id ? [] : [id]); },
+        theoretic: (id) => { ctx.setPath(['theoretics', id]); },
+        overview: () => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { route: true } }),
+        stop: (id) => ctx.navigate({ view: { kind: 'world' }, deep: false, dynamics: { stop: id } }),
+      },
+    });
+  };
+
+  const showRoute = (path: string[]) => {
+    if (path[0] === 'theoretics' && path[1]) renderTheoretic(path[1]); else render(path[0] ?? '', path[1]);
   };
 
   return {
     enter(path) {
-      theoryOptions();
-      const want = path[0] ?? '';
-      const key = path[1] !== undefined ? `${want}/${path[1]}` : want;
-      if (data) { if (key !== current || !ctx.panel.isOpen) render(want, path[1]); return; }
+      ctx.setControls(null);
+      ctx.pane.contents('Theory', contents);
+      const key = path[1] !== undefined ? `${path[0]}/${path[1]}` : (path[0] ?? '');
+      if (!route) {
+        void Promise.all([loadLensData<DynamicsRoute>('dynamics-route'), loadLensData<{ concepts: DynamicsConcept[] }>('dynamics')])
+          .then(([r, d]) => { route = r; concepts = d.concepts; }).catch(() => { /* the route is optional: Contents then lists Jung's theory and the theoretics */ });
+      }
+      if (data) { if (key !== current) showRoute(path); return; }
       if (failed) return;
-      ctx.panel.open('Theory', [el('p', { class: 'lp-sub', text: 'Loading…' })]);
-      loadLensData<TheoryData>('theory').then((d) => { data = d; render(want, path[1]); }).catch((err) => {
+      loadLensData<TheoryData>('theory').then((d) => { data = d; showRoute(path); }).catch((err) => {
         failed = true;
         console.error(err);
-        ctx.panel.replace([el('p', { class: 'lp-error', text: 'The theory data is not available in this build.' })]);
+        ctx.pane.load({ key: 'unavailable', eyebrow: 'Theory', nodes: [el('p', { class: 'lp-error', text: 'The theory data is not available in this build.' })] });
       });
     },
     leave() {
       current = '';
+      standing = { kind: 'none' };
+      runner.interrupt();
       ctx.setControls(null);
       ctx.engine.setEmphasis(null, null);
     },
   };
 }
-
