@@ -11,6 +11,7 @@ import { passes } from '../shell/filter';
 import { practice, saveFile, type PracticeRecord } from '../practice/store';
 import { amplify, matchImages, vocabulary, type ImageMatch, type Vocabulary } from '../practice/amplify';
 import { amplificationView, type AmplifyActions } from '../practice/amplify-view';
+import { dreamName, dreamsContentsGroups, newestFirst } from './dreams-contents';
 import { loadLensData, privacyLine, quoteBlock, tuneGlobe, type LensQuote } from './ui';
 import { providerLabels } from '../data/labels';
 
@@ -36,11 +37,14 @@ export function mount(ctx: LensContext): LensInstance {
   const ok = (i: number) => passes(m.occ[i], ctx.filter(), m.tags[i], m.workKey);
   const ready = loadLensData<PracticeData>('practice').then((d) => { framing = d; }).catch(() => { framing = null; });
 
-  const show = (label: string, nodes: (HTMLElement | null)[]) => {
-    const list = nodes.filter((n): n is HTMLElement => !!n);
-    if (ctx.panel.isOpen) ctx.panel.replace(list); else ctx.panel.open(label, list, { height: 'full' });
+  /** the route the lens stands at, for the Contents to mark */
+  let standing: string[] = [];
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (key: string, nodes: (HTMLElement | null)[]) => {
+    ctx.pane.load({ key: `dreams/${key}`, eyebrow: 'Dreams', nodes: nodes.filter((n): n is HTMLElement => !!n) });
   };
-  const entries = () => practice.list<DreamEntry>('dreams').sort((a, b) => (b.date + b.createdAt).localeCompare(a.date + a.createdAt));
+  const entries = () => newestFirst(practice.list<DreamEntry>('dreams'));
+  const contents = () => dreamsContentsGroups(practice.list<DreamEntry>('dreams'), standing, (p) => ctx.setPath(p));
   const back = (text: string, path: string[]) => el('button', { type: 'button', class: 'link-quiet am-back', onclick: () => ctx.setPath(path) }, [icon('back', 13), el('span', { text })]);
 
   // ── the journal ──────────────────────────────────────────────────────
@@ -53,13 +57,14 @@ export function mount(ctx: LensContext): LensInstance {
       if (!f) return;
       try { const r = practice.importAll(await f.text()); alert(`Read back ${r.added} entr${r.added === 1 ? 'y' : 'ies'}.`); journal(); } catch (err) { alert(err instanceof Error ? err.message : 'That file could not be read.'); }
     } });
-    show('Dreams', [
+    show('journal', [
+      el('h2', { class: 'dp-title', text: 'Dreams' }),
       privacyLine(practice.persistent ? 'Your dreams are kept only in this browser’s storage.' : 'This browser is not letting the page store anything, so entries last only until you close the tab.'),
       el('p', { class: 'th-line', text: providerLabels().dreamsIntro }),
       el('div', { class: 'lp-row' }, [el('button', { type: 'button', class: 'lp-btn primary', onclick: () => ctx.setPath(['new']) }, [icon('plus', 14), el('span', { text: 'Record a dream' })])]),
       list.length ? el('ol', { class: 'dr-list' }, list.map((d) => el('li', {}, [el('button', { type: 'button', class: 'dr-row', onclick: () => ctx.setPath([d.id]) }, [
         el('span', { class: 'am-year', text: d.date }),
-        el('span', { class: 'dr-title', text: d.title || d.text.slice(0, 60) || 'Untitled' }),
+        el('span', { class: 'dr-title', text: dreamName(d) }),
         el('span', { class: 'dr-n', text: `${matchImages(voc(), d.text).length} images` }),
       ])]))) : el('p', { class: 'lp-note', text: 'No dreams recorded yet.' }),
       framing ? el('details', { class: 'as-more' }, [el('summary', { text: providerLabels().dreamsMethod }), quoteBlock(framing.dreams.portrait, ctx.passages, { compact: true }), ...framing.dreams.method.map((q) => quoteBlock(q, ctx.passages, { compact: true }))]) : null,
@@ -95,7 +100,7 @@ export function mount(ctx: LensContext): LensInstance {
       ctx.engage('dream', { type: 'dream', id: stored.id });
       ctx.setPath([stored.id]);
     };
-    show('Record a dream', [
+    show(`edit/${d?.id ?? 'new'}`, [
       back(d ? 'The dream' : 'The journal', d ? [d.id] : []),
       el('form', { class: 'dr-form', onsubmit: save }, [
         el('label', { class: 'lp-field' }, [el('span', { text: 'Date' }), date]),
@@ -135,7 +140,7 @@ export function mount(ctx: LensContext): LensInstance {
     answer.value = d.answer;
     const saved = el('span', { class: 'lp-note dr-saved', 'aria-live': 'polite' });
     answer.addEventListener('change', () => { practice.put<DreamEntry>('dreams', { ...d, answer: answer.value.trim() }); saved.textContent = 'Kept.'; });
-    show('A dream', [
+    show(`dream/${d.id}`, [
       back('The journal', []),
       el('p', { class: 'am-kicker', text: d.date }),
       el('h2', { class: 'lp-h', text: d.title || 'Untitled' }),
@@ -168,7 +173,7 @@ export function mount(ctx: LensContext): LensInstance {
       walkFamily: (id) => ctx.navigate(startThread(WORLD, { type: 'family', id })),
       amplifyFamily: (id) => ctx.setPath([d.id, id]),
     };
-    show('An image in the dream', [back(d.title || 'The dream', [d.id]), ...amplificationView(m, a, act, ctx.passages, { dreamFirst: true })]);
+    show(`dream/${d.id}/${familyId}`, [back(d.title || 'The dream', [d.id]), ...amplificationView(m, a, act, ctx.passages, { dreamFirst: true })]);
   };
 
   const route = (path: string[]) => {
@@ -182,7 +187,12 @@ export function mount(ctx: LensContext): LensInstance {
   };
 
   return {
-    enter(path) { void ready.then(() => route(path)); },
+    enter(path) {
+      standing = path;
+      ctx.setControls(null);
+      ctx.pane.contents('Dreams', contents);
+      void ready.then(() => route(path));
+    },
     leave() { ctx.engine.setEmphasis(null, null); },
   };
 }

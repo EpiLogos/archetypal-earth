@@ -14,8 +14,8 @@ const MODES = [
   // pick: the Options row (index among the rows, the standard Open row is 0) that is a content choice; none for the rest
   { id: 'alchemy', label: 'Alchemy', pane: true },
   { id: 'theory', label: 'Theory', pane: true },
-  { id: 'dreams', label: 'Dreams' },
   { id: 'coincidences', label: 'Coincidences' },
+  { id: 'dreams', label: 'Dreams', pane: true },
   { id: 'symbols', label: 'Symbols', pane: true },
 ];
 const SIZES = [

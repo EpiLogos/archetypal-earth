@@ -28,11 +28,11 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.goto(URL + '#/dreams', { waitUntil: 'load' });
   await page.waitForFunction(() => document.getElementById('loading')?.classList.contains('done'), null, { timeout: 60000 });
   await revealSheet(page, 'Dreams');
-  await page.waitForSelector('.lens-panel .lp-privacy', { timeout: 30000 });
+  await page.waitForSelector('.dp-article .lp-privacy', { timeout: 30000 });
   const before = requests.length;
 
   // Dreams
-  await page.click('.lens-panel .lp-btn.primary');
+  await page.click('.dp-article .lp-btn.primary');
   await page.waitForSelector('.dr-form textarea');
   await page.fill('.dr-form textarea >> nth=0', DREAM);
   await page.fill('.dr-form textarea >> nth=1', 'Waiting to hear about a new job; my sister phoned that week.');
@@ -43,7 +43,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-dream.png`) });
   await page.click('.dr-img:text("snakes")');
   await page.waitForSelector('.am-dream', { timeout: 15000 });
-  const amp = await page.evaluate(() => ({ hash: location.hash, dreams: document.querySelectorAll('.am-dream').length, cites: document.querySelectorAll('.am-dream .q-cite').length, h: document.querySelector('.lens-panel .lp-h')?.textContent }));
+  const amp = await page.evaluate(() => ({ hash: location.hash, dreams: document.querySelectorAll('.am-dream').length, cites: document.querySelectorAll('.am-dream .q-cite').length, h: document.querySelector('.dp-article .lp-h')?.textContent }));
   check(amp.h === 'Serpent' && amp.dreams >= 3 && amp.cites >= 3, `${s.name}: the image opens the corpus's dreams of it, cited`, JSON.stringify(amp));
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-dream-image.png`) });
   await page.click('.am-back');
