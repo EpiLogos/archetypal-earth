@@ -219,13 +219,7 @@ export class PlanetOrbits {
     });
     // the line home: from the planet toward where the Earth stands (off screen, it runs to the edge)
     const earth = layer.screenDisc('terra');
-    // the open panel is the screen's edge: a side panel on a desktop, a bottom sheet on a phone
-    let W = this.root.clientWidth || window.innerWidth, H = this.root.clientHeight || window.innerHeight;
-    const panel = document.querySelector<HTMLElement>('.lens-panel:not([hidden])')?.getBoundingClientRect();
-    if (panel && panel.width > 0) {
-      if (panel.left > W * 0.35) W = panel.left - 12;
-      else if (panel.top > H * 0.25) H = panel.top + 96; // (the edge math below keeps 120px off the bottom)
-    }
+    const W = this.root.clientWidth || window.innerWidth, H = this.root.clientHeight || window.innerHeight;
     let ex = earth ? earth.x : cx - W, ey = earth ? earth.y : cy + H;
     const dx = ex - cx, dy = ey - cy, len = Math.hypot(dx, dy) || 1;
     // stop at the screen's edge (inset), so the control stays on screen
