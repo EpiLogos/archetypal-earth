@@ -1,10 +1,11 @@
-// Gate: the Red Book card, walked stop by stop (all 37, by the arrow key and the rail), against the card rules:
+// Gate: the Red Book folio in the reading pane, walked stop by stop (all 37, by the arrow key and the rail), against the card rules:
 //   · every stop has a figure.plate hero;
 //   · exactly the expected 32 stops lead with a key passage: an open blockquote.q as the first content
 //     block after the name, its cite = work · locator with no voice chip (Jung wears none); the other 5 have none (hero and title lead);
 //   · no paragraph is plate inventory (PLATE / PLATES / Plate), whole or merged into its prose;
 //   · no footer carries a raw work slug (liber-novus, redbook, memories) or a cw key;
 //   · the Aion card is not visible and not in the accessibility tree while the Red Book stands;
+//   (H5: the folio stands in the reading pane, entered from the Contents; the rules are the card's own, unchanged)
 //   · the genesis table keeps the same rules.
 // The expected set is computed from the published data: 20 field quotes, 5 curated genesis words, 7 vetted body quotes.
 // Screenshots: .cache/screens/remediation-2026-10-09/redbook/
@@ -53,7 +54,7 @@ const snapshot = () => {
     }
     return node.getBoundingClientRect().height > 0;
   };
-  const card = document.querySelector('.redbook .rb-card');
+  const card = document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article');
   const name = card?.querySelector('.rv-name');
   const next = name?.nextElementSibling ?? null;
   const hero = card?.querySelector('figure.plate.rv-hero') ?? null;
@@ -83,10 +84,10 @@ const browser = await launch(kind, { headed: false });
 try {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/redbook' });
   await page.evaluate(() => { window.__earth.engine.rig.interacted = true; document.body.classList.add('interacted'); });
-  // the bare landing shows no folio: the walk is entered from the Options row 'The walk', which opens folio 1
-  await page.locator('.sh-controls details.mode-options > summary').click();
-  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'The walk' }).click();
-  await page.waitForSelector('.redbook .rb-card .rv-name', { timeout: 20000 });
+  // the bare landing shows no folio: the walk is entered from the Contents, whose first entry is folio 1
+  await page.locator('.sh-controls .sh-contents').click();
+  await page.locator('.dp-contents-pane .dp-contents button').first().click();
+  await page.waitForSelector('section.deep .dp-article .rv-name', { timeout: 20000 });
   await page.waitForTimeout(800);
 
   const start = await page.evaluate(() => document.querySelector('.rb-progress')?.textContent ?? '');
@@ -103,7 +104,7 @@ try {
     const expected = `${((first - 1 + step) % total) + 1} / ${total}`;
     // the hero is an image or a tonal plate: wait for the image to settle (or fail) before reading the card
     await page.waitForFunction(() => {
-      const h = document.querySelector('.redbook .rb-card figure.plate.rv-hero');
+      const h = document.querySelector('section.deep:not(.passage):not(.you-sheet) figure.plate.rv-hero');
       return !h || h.classList.contains('loaded') || h.classList.contains('plate-empty') || h.classList.contains('plate-failed');
     }, null, { timeout: 4000 }).catch(() => {});
     const s = await page.evaluate(snapshot);
@@ -139,15 +140,15 @@ try {
   check(tonal.length === 0, 'no stop is a tonal plate without an image', tonal.length ? tonal.join(', ') : 'all stops carry an image');
   console.log(`INFO ${kind} hero images loaded on ${images.length}/${total} stops; tonal ${tonal.length}`);
 
-  // the genesis table, from the Options row 'Genesis': closing the folio's card returns to the landing, where Options stand
-  await page.click('.redbook .rb-card .rv-close');
-  await page.waitForTimeout(400);
-  await page.locator('.sh-controls details.mode-options > summary').click();
-  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Genesis' }).click();
+  // the genesis table, from the Contents: closing the folio returns to the landing, where the Contents wait
+  await page.click('button[aria-label="Close reading"]');
+  await page.waitForTimeout(900);
+  await page.locator('.sh-controls .sh-contents').click();
+  await page.locator('.dp-contents-pane .dp-contents button', { hasText: 'Genesis' }).click();
   await page.waitForSelector('.rb-genesis', { timeout: 5000 });
   await page.waitForTimeout(400);
   const genesis = await page.evaluate(() => {
-    const rows = [...document.querySelectorAll('.redbook .rb-card .rb-genesis')];
+    const rows = [...document.querySelectorAll('section.deep .rb-genesis')];
     return rows.map((r) => ({
       name: r.querySelector('.rb-genesis-name strong')?.textContent ?? '',
       quoteFirst: r.firstElementChild?.tagName === 'P' && r.querySelector('blockquote.q') !== null,

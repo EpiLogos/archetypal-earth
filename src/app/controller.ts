@@ -18,7 +18,7 @@ import { Panel } from '../shell/panel';
 import { Landing } from '../shell/landing';
 import { dismissal, type DismissFacts } from '../shell/dismiss';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
-import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance } from '../shell/lens';
+import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance, type LensPane } from '../shell/lens';
 import { modeOptions, optionAction } from '../ui/mode-options';
 import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
 import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
@@ -30,7 +30,7 @@ import { sliceCount, sliceMask } from '../shell/slice';
 import { subjectSpan, uSpan, type TimeModel, type TimeSnapshot, type TimeSpan } from '../state/timeModel';
 import { DEFAULT_RAMP } from '../data/time';
 import { FocusLabel, type LabelContent } from '../ui/focus-label';
-import { DeepSheet, type DeepTarget } from '../ui/deep';
+import { DeepSheet, type ContentsGroup, type DeepTarget, type LensReading } from '../ui/deep';
 import { Floats, type FloatItem, type FloatTarget } from '../ui/floats';
 import { floatPlate } from '../data/plates';
 import { HoverLabel } from '../ui/hover-label';
@@ -153,6 +153,12 @@ export class Controller {
   private landing = new Landing();
   private aionTime: TimeSnapshot | null = null;
   private redbook: RedBookView | null = null;
+  /** the reading pane as lenses are given it: what the standing lens lists as Contents, the reading it holds, whether it has been asked for */
+  private contentsSpec: { title: string; groups: () => ContentsGroup[] } | null = null;
+  private paneHeld: LensReading | null = null;
+  private paneRevealed = false;
+  private paneEngaged = '';
+  private readonly lensPane: LensPane;
   private rbTime: TimeSnapshot | null = null;
   /** the range the control held before the Red Book (restored with rbTime), and the Book's own span on the scale */
   private rbRange: TimeSpan | null = null;
@@ -228,7 +234,7 @@ export class Controller {
       onReadText: (id, at) => this.navigate(inLens('texts', at === undefined ? [id] : [id, String(at)])),
       onOpenChart: (id) => this.navigate(astrologyAt([id])),
       passage: passages,
-      onPaneChange: () => this.syncShift(),
+      onPaneChange: () => { this.shell.syncContents(this.deep.isContentsOpen); if (this.state.lens) this.lensShift(this.state); else this.syncShift(); },
     });
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
@@ -270,7 +276,8 @@ export class Controller {
       archetypes: m.field.archetypes.map((a) => ({ id: a.id, name: a.name })).sort((a, b) => a.name.localeCompare(b.name)),
       theoretics: m.field.theoretics.map((t) => ({ id: t.id, name: t.name })).sort((a, b) => a.name.localeCompare(b.name)),
     });
-    this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n) };
+    this.lensPane = this.buildLensPane();
+    this.chrome = { setContext: (t) => this.shell.setContext(t), setControls: (n) => this.shell.setControls(n), pane: this.lensPane };
     // a mode's own set on the globe is named under its title, with the whole field one click away (src/data/scope.ts)
     this.engine.onScope = (scope, whole) => this.shell.setScope(scope, whole, (on) => this.engine.setWholeField(on));
     this.panel = new Panel(root, () => this.closeSheet());
@@ -505,7 +512,7 @@ export class Controller {
       this.aion = new AionView(this.root, this.m, this.engine, this.time, this.history!, (state) => this.navigate(state), this.passages, (occId) => this.openReading(occId), this.chrome);
     })));
     if (next.redbook && !this.redbook && this.redbookData) jobs.push(this.ensure('redbook', () => import('../redbook/view').then(({ RedBookView }) => {
-      this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (id) => this.tuneToFolio(id), (occId) => this.openReading(occId), this.chrome, this.passages);
+      this.redbook = new RedBookView(this.root, this.m, this.engine, this.redbookData!, (state) => this.navigate(state), (u) => this.tuneToFolio(u), (occId) => this.openReading(occId), this.chrome, this.passages);
     })));
     if (next.dynamics && !this.lens) jobs.push(this.ensure('dynamics', () => Promise.all([import('../dynamics/view'), import('../dynamics/load')]).then(([{ DynamicsView }, { loadDynamics, loadRoute }]) => {
       const lens = new DynamicsView(this.root, this.m, this.engine, this.time, (state) => this.navigate(state), this.passages, null, this.chrome);
@@ -628,15 +635,17 @@ export class Controller {
     const here = lensOf(s);
     const stays = stateEq(next, s) ? 'none' : here !== 'field' && lensOf(next) === 'field' ? 'out' : 'up';
     const gaze = this.skyCam.phase === 'gaze';
+    const lensRead = this.deep.isLensReading && !this.deep.isContentsOpen;
     return {
       searchOpen: this.search.isOpen,
       menuOpen: this.shell.menuOpen,
       popoverOpen: !!document.querySelector('details.mode-options[open]'),
       youOpen: this.you.isOpen,
       passageOpen: this.passage.isOpen,
-      // a panel lens with its sheet on screen; with the sheet hidden, or while gazing at a planet, the stack passes it by
-      sheetVisible: !!this.activeLens && this.panel.isVisible && !gaze,
-      deepOpen: !!s.deep,
+      // a panel lens with its sheet (or its reading in the pane) on screen; with it hidden, or while gazing at a planet, the stack passes it by
+      sheetVisible: !!this.activeLens && (this.panel.isVisible || lensRead) && !gaze,
+      // a reading in the pane; the Contents list drawn over it is dismissed first
+      deepOpen: (!!s.deep || (lensRead && !this.activeLens)) && !this.deep.isContentsOpen,
       // the reading pane's Contents list, when it stands open on its own
       contentsOpen: this.deep.isContentsOpen,
       gaze,
@@ -661,7 +670,11 @@ export class Controller {
   private closeReading() {
     if (this.you.isOpen) { this.you.hide(); return; }
     if (this.passage.isOpen) this.passage.hide();
-    if (this.state.deep) this.navigate(back(this.state));
+    // the pane's ✕ at its Contents list takes the list down (a reading under it, if any, shows again)
+    if (this.deep.isContentsOpen) { this.deep.hideContents(); return; }
+    // a panel lens's reading hides where it stands (the route and the mode stay); a mode's reading steps back out of its folio
+    if (this.deep.isLensReading && this.activeLens) { this.closeSheet(); return; }
+    if (this.state.deep || this.deep.isLensReading) this.navigate(back(this.state));
   }
 
   private setDeep(deep: boolean) {
@@ -895,12 +908,11 @@ export class Controller {
   }
 
   /** The Red Book's standing folio: the clock glides to its year (never a scrub, never a play); the control's readout shows the year. */
-  private tuneToFolio(stopId: string) {
-    const i = this.m.occIndex.get(stopId);
-    if (i === undefined) return;
+  private tuneToFolio(u: number | null) {
+    if (u === null) return;
     this.time.pause();
     this.time.setCumulative(false);
-    this.time.glideTo(this.m.u[i]);
+    this.time.glideTo(u);
   }
 
   /** Leave Aion's mode: its view, the time range it set, and the clock it held. */
@@ -1050,6 +1062,8 @@ export class Controller {
     this.shell.setAside(fieldLens || lens === 'astrology' ? this.viewControl.root : null);
     // every lens fills its own context and controls as it shows; the field's context is its focus (set below)
     this.shell.setControls(null);
+    // a state no lens stands in has no Contents and no reading of a lens's in the pane
+    if (!next.redbook && !next.history && !next.dynamics && !next.lens) this.releasePane();
     if (fieldLens && next.view.kind === 'world') this.shell.setContext(next.sky ? 'The sky' : '');
   }
 
@@ -1159,6 +1173,7 @@ export class Controller {
       panel: this.panel,
       setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
       setControls: (n) => { if (this.activeLens === id) this.setLensOptions(n); },
+      pane: this.lensPane,
       navigate: (st) => this.navigate(st),
       filter: () => this.filter,
       passages: this.passage.bridge(),
@@ -1203,7 +1218,7 @@ export class Controller {
     this.activeLens = id;
     const path = next.lens!.path;
     // a lens entered from elsewhere starts with its sheet hidden; its content is built below, its Options are set by enterLensInstance
-    if (!prev.lens || prev.lens.id !== id) this.panel.enterLens();
+    if (!prev.lens || prev.lens.id !== id) { this.panel.enterLens(); this.releasePane(); }
     this.lensShift(next);
     const have = this.lensInst.get(id);
     if (have) { this.enterLensInstance(have, path); return; }
@@ -1235,7 +1250,10 @@ export class Controller {
     const path = next.lens!.path;
     // Astrology live sky / [chart] alone: sky-only (no sheet). Walk / Charts home still give the sheet room.
     const asSkyOnly = id === 'astrology' && (path[0] === ASTROLOGY_LIVE || path.length === 1);
-    if (asSkyOnly || !this.panel.isVisible) this.engine.rig.setShift(0, 0);
+    // a lens whose reading (or Contents) stands in the pane gives the pane its room, as the Field's reading does
+    const inPane = !this.panel.isVisible && (this.deep.isLensReading || this.deep.isContentsOpen);
+    if (inPane && !asSkyOnly) this.engine.rig.setShift(isNarrow() ? 0 : shiftX(this.deep.mode, window.innerWidth), isNarrow() ? 0.26 : 0);
+    else if (asSkyOnly || !this.panel.isVisible) this.engine.rig.setShift(0, 0);
     else this.engine.rig.setShift(isNarrow() ? 0 : -0.22, isNarrow() ? (this.approachFor(next.sky) ? 0.56 : next.sky?.natal ? 0.36 : 0.26) : 0);
   }
 
@@ -1296,6 +1314,8 @@ export class Controller {
 
   private closeSheet() {
     const s = this.state;
+    // the reading a panel lens put in the pane: it is hidden, held for the next time it is asked for, and the lens stays
+    if (this.deep.isLensReading && this.activeLens) { this.paneRevealed = false; this.deep.hide(); return; }
     if (this.localSheetOpen && s.lens?.id === 'astrology' && s.sky?.body) {
       this.localSheetOpen = false;
       this.panel.hide();
@@ -1328,7 +1348,55 @@ export class Controller {
     this.sheetAction = null;
     this.lensTok++;
     this.panel.close();
+    this.releasePane();
     this.engine.rig.setShift(0, 0);
+  }
+
+  // ── the reading pane, as lenses use it ─────────────────────────────────
+  private buildLensPane(): LensPane {
+    const self = this;
+    return {
+      contents(title, groups) {
+        if (!groups) { self.contentsSpec = null; self.shell.setContents(null); self.deep.setContentsTool(null); if (self.deep.isContentsOpen) self.deep.hideContents(); return; }
+        self.contentsSpec = { title, groups };
+        self.shell.setContents(() => self.toggleContents());
+        self.deep.setContentsTool(() => self.toggleContents());
+      },
+      read(r) { self.paneHeld = r; self.paneRevealed = true; self.showLensReading(r); },
+      load(r) { self.paneHeld = r; if (self.paneRevealed) self.showLensReading(r); },
+      reveal() { self.paneRevealed = true; if (self.paneHeld) self.showLensReading(self.paneHeld); },
+      hide() { self.paneHeld = null; self.paneRevealed = false; self.paneEngaged = ''; if (self.deep.isLensReading) self.deep.hide(); },
+      release() { self.releasePane(); },
+      get reading() { return self.deep.isLensReading; },
+    };
+  }
+
+  /** Put a lens's reading in the pane, and note once for the visitor's node that it was opened. */
+  private showLensReading(r: LensReading) {
+    this.deep.showReading(r);
+    if (r.engages) {
+      const key = `${r.engages.type}:${r.engages.id}`;
+      if (key !== this.paneEngaged) { this.paneEngaged = key; this.engage('open', r.engages); }
+    }
+  }
+
+  /** The lens lets go of the pane: its reading and its Contents come down, and nothing is held for it. */
+  private releasePane() {
+    this.paneHeld = null;
+    this.paneRevealed = false;
+    this.paneEngaged = '';
+    this.contentsSpec = null;
+    this.shell.setContents(null);
+    this.deep.setContentsTool(null);
+    if (this.deep.isLensReading) this.deep.hide();
+    else if (this.deep.isContentsOpen) this.deep.hideContents();
+  }
+
+  /** The Contents trigger: the list opens in the pane over a reading (which shows again when it closes), or comes down. */
+  private toggleContents() {
+    if (this.deep.isContentsOpen) { this.deep.hideContents(); return; }
+    const spec = this.contentsSpec;
+    if (spec) this.deep.showContents(spec.title, spec.groups());
   }
 
   // ── applying a state ──────────────────────────────────────────────────
@@ -1377,7 +1445,9 @@ export class Controller {
         const span = this.rbSpan ?? this.fullSpan();
         this.timeControl.setRange(span.fromU, span.toU);
       }
-      this.deep.hide(); this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
+      // stepping within the Red Book keeps the pane where it stands (the folio replaces itself in place)
+      if (!prev.redbook) this.deep.hide();
+      this.hover.hide(); this.reveal.hide(); this.floats.clear(); this.label.set(null);
       document.body.classList.remove('deep-open', 'thread-inspecting');
       // the Red Book holds no shift of its own: Aion's card offset does not carry over
       this.syncShift();
@@ -2296,8 +2366,8 @@ export class Controller {
     if (s.deep && s.view.kind !== 'world' && !this.readingAwaitsLanding) {
       // the room the pane takes: -0.46 for a reading, more when it is widened (layout.ts), none on a phone
       if (!narrow) x = shiftX(this.deep.mode === 'closed' ? 'reading' : this.deep.mode, window.innerWidth);
-    } else if (this.deep.isContentsOpen && !narrow) {
-      x = shiftX('contents', window.innerWidth);
+    } else if ((this.deep.isLensReading || this.deep.isContentsOpen) && this.deep.mode !== 'closed') {
+      if (!narrow) x = shiftX(this.deep.mode, window.innerWidth);
     } else if (s.view.kind === 'manifest' || s.sky?.body) {
       // a card stands on the right (or the bottom, on a phone): the scene gives it room. An approached planet's disc
       // is centred in the space the sheet leaves above it, so the disc is not drawn under the sheet.

@@ -7,7 +7,7 @@ import { workLens } from '../data/texts';
 import { bodyOfLocus, locusPhrase } from '../data/skyplace';
 import type { BodyKey } from '../types/sky';
 import type { Cite, Occurrence } from '../types/field';
-import { clear, el, plate } from './dom';
+import { clear, el, onReadGesture, plate } from './dom';
 import { sanitiseTitle } from './credit';
 import { paneFrame, type PaneFrame } from './pane';
 import { paneMode, type PaneMode } from '../shell/layout';
@@ -80,7 +80,22 @@ export interface DeepHandlers {
 }
 
 /** One group of the pane's Contents list: a heading over the entries a visitor can open. */
-export interface ContentsGroup { title?: string; items: { label: string; note?: string; level?: number; onPick(): void }[] }
+export interface ContentsGroup { title?: string; items: { label: string; note?: string; level?: number; /** the entry the lens stands on now */ current?: boolean; onPick(): void }[] }
+
+/**
+ * A lens's own reading in the pane (a folio, a stage, a position): the lens builds the nodes, the pane frames them. `foot` is
+ * the walk's stepper, pinned under the article. A double-click on the article answers `onRead` (a mode's core reading).
+ */
+export interface LensReading {
+  key: string;
+  /** what kind of thing is read, set small above the title */
+  eyebrow: string;
+  nodes: Node[];
+  foot?: Node[] | null;
+  onRead?(): void;
+  /** the subject this reading is of, noted once in the visitor's engagement log when it opens */
+  engages?: { type: string; id: string };
+}
 
 /** What kind of thing the pane reads, set small above its title. */
 const KIND_NAME: Record<string, string> = { archetype: 'Archetype', theoretic: 'Theory', family: 'Form', work: 'Work', person: 'Person', culture: 'Culture', place: 'Place' };
@@ -100,6 +115,9 @@ export class DeepSheet {
   private wide = false;
   private contentsShown = false;
   private lastMode: PaneMode = 'closed';
+  /** the key of the lens's own reading while one stands in the pane, else '' */
+  private lensKey = '';
+  private lensRead: (() => void) | undefined;
 
   constructor(parent: HTMLElement, private model: Model, private h: DeepHandlers) {
     this.frame = paneFrame({
@@ -112,6 +130,59 @@ export class DeepSheet {
     this.scroller = this.frame.scroller;
     this.article = this.frame.article;
     parent.append(this.root);
+    // a double-click on a lens's reading opens that reading's core (a folio's occurrence), as the card it replaces did
+    onReadGesture(this.article, () => { if (this.lensKey) this.lensRead?.(); });
+  }
+
+  /** The head's Contents button (a phone's way to a lens's Contents while a reading covers the Path): shown while `onContents` is given. */
+  setContentsTool(onContents: (() => void) | null) {
+    const t = this.frame.contentsTool;
+    t.hidden = !onContents;
+    t.onclick = onContents ? () => onContents() : null;
+  }
+
+  /** Whether a lens's own reading (not a subject's or an occurrence's) stands in the pane. */
+  get isLensReading() {
+    return this.lensKey !== '';
+  }
+
+  /** The key of the lens reading in the pane ('' when none). */
+  get readingKey() {
+    return this.lensKey;
+  }
+
+  /**
+   * Show a lens's reading in the pane. The same key again re-renders it in place (a stepper changes the nodes under a key);
+   * a new key opens fresh at the top. Contents gives way to it; the pane is a reading, whatever it was.
+   */
+  showReading(r: LensReading) {
+    const fresh = !(this.open && this.lensKey === r.key);
+    if (this.contentsShown) {
+      this.contentsShown = false;
+      this.frame.contents.hidden = true;
+      this.frame.article.hidden = false;
+    }
+    this.root.hidden = false;
+    this.key = `l:${r.key}`;
+    this.lensKey = r.key;
+    this.lensRead = r.onRead;
+    clear(this.article);
+    this.article.append(el('p', { class: 'dp-eyebrow', text: r.eyebrow }), ...r.nodes);
+    this.setFoot(r.foot ?? null);
+    if (fresh) this.scroller.scrollTop = 0;
+    requestAnimationFrame(() => {
+      this.root.classList.add('on');
+      if (fresh) this.scroller.scrollTop = 0;
+    });
+    this.open = true;
+    this.applyMode();
+  }
+
+  private setFoot(nodes: Node[] | null) {
+    const f = this.frame.foot;
+    clear(f);
+    if (nodes?.length) f.append(...nodes);
+    f.hidden = !nodes?.length;
   }
 
   get isOpen() {
@@ -150,7 +221,7 @@ export class DeepSheet {
       const ol = el('ol', { class: 'dp-contents' });
       for (const it of g.items) {
         ol.append(el('li', { style: `--lvl:${it.level ?? 0}` }, [
-          el('button', { type: 'button', class: 'link-quiet', text: it.label, onclick: () => it.onPick() }),
+          el('button', { type: 'button', class: 'link-quiet', text: it.label, 'aria-current': it.current ? 'true' : undefined, onclick: () => it.onPick() }),
           it.note ? el('span', { class: 'dp-cite-year', text: ` ${it.note}` }) : null,
         ]));
       }
@@ -181,6 +252,8 @@ export class DeepSheet {
     const b = document.body.classList;
     b.toggle('deep-wide', mode === 'wide');
     b.toggle('pane-contents', mode === 'contents');
+    // a lens's own reading stands in the pane: the scene and the chrome make way for it as they do for the Field's
+    b.toggle('pane-reading', this.lensKey !== '' && this.open);
     if (mode !== this.lastMode) {
       this.lastMode = mode;
       this.h.onPaneChange?.(mode);
@@ -195,6 +268,9 @@ export class DeepSheet {
   show(t: DeepTarget) {
     const key = t.kind === 'subject' ? `s:${t.subject.type}:${t.subject.id}` : `o:${t.occId}`;
     const fresh = !(this.open && key === this.key);
+    this.lensKey = '';
+    this.lensRead = undefined;
+    this.setFoot(null);
     // a reading opened from the Contents list takes the pane over: the list gives way to it
     if (this.contentsShown) {
       this.contentsShown = false;
@@ -225,6 +301,9 @@ export class DeepSheet {
     if (!this.open && !this.contentsShown) return;
     this.open = false;
     this.key = '';
+    this.lensKey = '';
+    this.lensRead = undefined;
+    this.setFoot(null);
     this.wide = false;
     if (this.contentsShown) {
       this.contentsShown = false;

@@ -8,6 +8,7 @@ import type { GlobeEngine } from '../globe/engine';
 import type { TimeModel } from '../state/timeModel';
 import type { AppState, PanelLensId } from '../state/store';
 import type { PassageBridge } from '../ui/passage';
+import type { ContentsGroup, LensReading } from '../ui/deep';
 import type { FieldFilter } from './filter';
 import type { Panel } from './panel';
 import { providerLabels } from '../data/labels';
@@ -25,10 +26,32 @@ export interface LensDef {
   key?: string;
 }
 
-/** The two pieces of the shell's chrome a lens may fill: its context line and its own few controls. */
+/**
+ * The reading pane as a lens is given it (H5). A lens states its Contents (groups of entries; the shell draws the one trigger for
+ * them in the lens's own place) and puts its reading in the pane; it never draws a card or a sheet of its own.
+ *   · `read` shows a reading now (a state-driven lens: the folio that stands is the reading);
+ *   · `load` holds a reading for the pane and shows it only once asked (`reveal`), the way a panel lens's sheet always waited
+ *     for its Options: a route that is entered, or walked, never opens the pane by itself;
+ *   · `hide` takes a lens's reading down and leaves the route and the Contents as they are; `release` lets go of all of it.
+ */
+export interface LensPane {
+  contents(title: string, groups: (() => ContentsGroup[]) | null): void;
+  read(r: LensReading): void;
+  load(r: LensReading): void;
+  reveal(): void;
+  /** take this lens's reading down, keeping its Contents (the mode stays: a closed folio leaves the Contents waiting) */
+  hide(): void;
+  /** the lens lets go of the pane altogether: its reading, its Contents and the trigger */
+  release(): void;
+  /** the pane stands open on a reading this lens put there */
+  readonly reading: boolean;
+}
+
+/** The pieces of the shell's chrome a lens may fill: its context line, its own few controls and the reading pane. */
 export interface LensChrome {
   setContext(text: string): void;
   setControls(nodes: Node[] | null): void;
+  pane?: LensPane;
 }
 
 /** What a panel lens is given. It never reaches past this into the controller or another lens. */
@@ -41,6 +64,8 @@ export interface LensContext {
   setContext(text: string): void;
   /** a small row of the lens's own controls, placed and styled by the shell; null clears it */
   setControls(nodes: Node[] | null): void;
+  /** the reading pane: the lens's Contents and its readings (H5) */
+  pane: LensPane;
   navigate(state: AppState): void;
   /** the field's current filter, and a way to be told when it changes */
   filter(): FieldFilter;

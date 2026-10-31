@@ -96,7 +96,8 @@ const settle = (page, ms = 1400) => page.waitForTimeout(ms);
   // a reading opened from Contents takes the frame over
   await page.evaluate(() => { window.__earth.ctl.deep.showContents('Test contents', [{ items: [{ label: 'One', onPick: () => {} }] }]); });
   await settle(page);
-  await page.evaluate(() => { const c = window.__earth.ctl; c.navigate({ ...c.state, deep: true }); });
+  // (Escape took Contents down above and left the reading's own state as it was: the state is stepped out and in, so the reading opens anew)
+  await page.evaluate(() => { const c = window.__earth.ctl; c.navigate({ ...c.state, deep: false }); c.navigate({ ...c.state, deep: true }); });
   await settle(page);
   p = await pane(page);
   ok(p && p.mode === 'reading' && p.w === 780, `a reading opened over Contents is a reading (${p?.mode} ${p?.w})`);

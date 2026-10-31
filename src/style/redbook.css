@@ -37,13 +37,6 @@
 
 
 .rb-plate { width: 100%; aspect-ratio: 0.72; object-fit: cover; object-position: center; border-radius: 3px; outline: 1px solid rgb(var(--core-rgb) / 0.25); outline-offset: 5px; }
-/* the card: the Red Book's own aside (its look is the reveal's, as the Aion card's is) */
-.rb-card { bottom: 126px; max-height: calc(100vh - 210px); }
-/* the walk strip is taller than the old arrows: the card stands above it (Genesis has no rail and keeps its place) */
-.redbook:has(.rb-rail:not([hidden])) .rb-card { bottom: 190px; max-height: calc(100vh - 270px); }
-.rb-card[hidden] { display: none; }
-.rb-card .aion-date { margin: 0 22px 9px 0; }
-.rb-card .aion-lede { color: var(--ink); }
 .rb-doctrine { color: var(--ink-3) !important; font-size: 0.98rem !important; }
 
 .rb-genesis { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--hair); }
@@ -53,10 +46,13 @@
 .rb-genesis-stop { display: inline-block; margin-top: 8px; }
 
 body.redbook-mode .time { opacity: 0.35; }
+/* the folio rail keeps to the room the pane leaves, as the time control does; on a phone the pane's own stepper carries the walk */
+body.pane-reading .rb-rail, body.pane-contents .rb-rail { left: calc((100vw - var(--pane-w)) / 2); width: min(560px, calc(100vw - var(--pane-w) - 48px)); }
 
 @media (max-width: 760px) {
   .rb-section { display: none; }
   .rb-rail { bottom: 54px; }
+  body.pane-reading .rb-rail, body.pane-contents .rb-rail { display: none; }
   .rb-rail.ws-host { width: min(100%, 92vw); }
   /* the hit box is 44 wide; the plate is drawn at 34 */
   .ws-frame { width: 44px; }
@@ -64,6 +60,4 @@ body.redbook-mode .time { opacity: 0.35; }
   .ws-plate { width: 34px; height: 46px; }
   .ws-viewport { padding: 6px 0 4px; }
   .rb-rail button:not(.ws-frame) { width: 28px; height: 28px; }
-  .rb-card { bottom: 100px; max-height: 48vh; }
-  .redbook:has(.rb-rail:not([hidden])) .rb-card { bottom: 150px; max-height: 42vh; }
 }

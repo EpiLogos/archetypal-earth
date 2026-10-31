@@ -1,6 +1,7 @@
 // THE RED BOOK: Liber Novus as a folio-sequence walk over the same field.
 // A mode alongside Aion: the globe stays the anchor (the standing stop tunes
-// the world to its family), the walk and the genesis table stand over it.
+// the world to its family), the folio rail stands over it, and a folio or the genesis table is read in the reading pane
+// (H5): the book's Contents are its folios by section, its walk is the Walk runner over the `redbook` walk.
 // Everything here is subject: Jung — the book is the one corpus-document
 // where analyst, patient and commentator are the same body.
 import { scopeOf } from '../data/scope';
@@ -11,10 +12,13 @@ import type { GlobeEngine } from '../globe/engine';
 import type { AppState } from '../state/store';
 import type { Occurrence } from '../types/field';
 import type { RedBook, RedBookStop, GenesisRow } from '../types/redbook';
-import { clear, el, onReadGesture, plate } from '../ui/dom';
-import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
-import { closeGlyph } from '../ui/reveal';
+import { el, plate } from '../ui/dom';
+import { paneStepper } from '../ui/pane';
 import { eraShort } from '../ui/format';
+import type { ContentsGroup } from '../ui/deep';
+import { lensContract } from '../lenses/contract';
+import { WalkRunner, type WalkEffects } from '../walk/runner';
+import { redbookWalk } from './walk';
 import { WalkStrip, type WalkItem } from '../ui/walk-strip';
 import { genesisCite, keyPassage, readerBody, readerCite, READING_TITLES, RED_BOOK_WORKS, type KeyPassage } from './text';
 import { quote, type CitedQuote } from '../ui/quote';
@@ -27,10 +31,9 @@ const REDBOOK_PALETTE = { core: '#c0554a', glow: '#8a342e', fog: '#2a1110', deep
 
 export class RedBookView {
   readonly root: HTMLElement;
-  private heading: HTMLElement;
   private rail: HTMLElement;
   private strip: WalkStrip;
-  private card: HTMLElement;
+  private runner: WalkRunner;
   private mode: RedBook;
   private state: AppState['redbook'];
   private navigate: (state: AppState) => void;
@@ -41,52 +44,65 @@ export class RedBookView {
   private passing: (occIndex: number) => boolean = () => true;
 
   /**
-   * `onStop`: a folio stands (by its stop id); the controller tunes the clock to its year.
-   * `onRead`: the standing folio's core reading, opened by a double-click on its card (the controller keeps this mode to return to).
+   * `onStop`: a folio stands; the controller glides the clock to the year the walk's stop names (null: leave the clock).
+   * `onRead`: the standing folio's core reading, opened by a double-click on its reading (the controller keeps this mode to return to).
    */
   constructor(parent: HTMLElement, private model: Model, private engine: GlobeEngine, redbook: RedBook, navigate: (state: AppState) => void,
-    private onStop: (stopId: string) => void = () => {}, private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome, private passages?: PassageBridge) {
+    private onStop: (clockU: number | null) => void = () => {}, private onRead: (occId: string) => void = () => {}, private chrome?: LensChrome, private passages?: PassageBridge) {
     this.mode = redbook;
     this.navigate = navigate;
     for (const s of redbook.sections) this.sectionName.set(s.id, s.name);
     this.stops = redbook.stops;
-    // the walk/genesis toggle is this lens's one control; the shell places it (MODES-RFC §2)
-    this.heading = el('div', { class: 'rb-controls' });
+    // the book is walked by the one runner; past the last folio comes the first, as the rail has always done
+    this.runner = new WalkRunner({ scale: model.scale, wrap: true });
     this.rail = el('nav', { class: 'rb-rail', 'aria-label': 'Folio walk' });
     this.strip = new WalkStrip(this.rail, { prev: 'Previous folio', next: 'Next folio', list: 'Folio walk' },
       (i) => this.select({ stop: this.stops[i].id }), (delta) => this.walk(delta));
-    this.card = el('aside', { class: 'rb-card reveal on', 'aria-label': 'Red Book reading', hidden: true });
-    this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.rail, this.card]);
-    this.setCardActive(false);
+    this.root = el('section', { class: 'redbook', hidden: true, 'aria-label': 'The Red Book' }, [this.rail]);
     parent.append(this.root);
-    // a double-click on a folio's card opens its occurrence's core reading; the genesis table has no folio to open
-    onReadGesture(this.card, () => { if (this.current) this.onRead(this.current.id); });
+  }
+
+  private get pane() {
+    return this.chrome?.pane;
+  }
+
+  /** The Contents of the book: its folios by section, and the genesis table; the folio that stands is marked. */
+  private contentsGroups(): ContentsGroup[] {
+    const m = this.model;
+    const groups = lensContract('redbook', m, { redbook: this.mode }).groups;
+    const at = new Map(this.stops.map((s, i) => [s.id, i]));
+    const standing = this.state?.stop && !this.state.genesis ? this.state.stop : undefined;
+    return [
+      ...groups.map((g) => ({
+        title: g.title,
+        items: g.items.map((it) => ({ label: it.title, note: String((at.get(it.id) ?? 0) + 1), current: it.id === standing, onPick: () => this.select({ stop: it.id }) })),
+      })),
+      { title: 'Where the roots became', items: [{ label: 'Genesis', current: !!this.state?.genesis, onPick: () => this.select({ genesis: true }) }] },
+    ];
   }
 
   show(state: AppState['redbook']) {
     this.state = state;
     this.root.hidden = false;
     document.body.classList.add('redbook-mode');
-    this.buildHeading();
     this.engine.setPalette(toRgbPalette(REDBOOK_PALETTE, 0.24), 1.6);
+    this.chrome?.setControls(null);
+    this.pane?.contents('Liber Novus', () => this.contentsGroups());
     if (state?.genesis) {
       this.chrome?.setContext('Genesis');
-      this.chrome?.setControls(null);
-      this.setCardActive(true);
+      this.runner.interrupt();
       this.showGenesis();
     } else if (state?.stop) {
       const stop = this.stops.find((s) => s.id === state.stop) ?? this.stops[0];
       this.chrome?.setContext('');
-      this.chrome?.setControls(null);
-      this.setCardActive(true);
       this.showStop(stop);
     } else {
-      // landing: Options waiting, no folio card
+      // landing: no folio read, the Contents waiting
       this.current = undefined;
-      this.setCardActive(false);
+      this.runner.interrupt();
+      this.pane?.hide();
       this.rail.hidden = true;
       this.chrome?.setContext(this.mode.mode.subtitle.split(' · ')[0]);
-      this.chrome?.setControls([this.heading]);
       this.engine.setEmphasis(null, null);
     }
   }
@@ -95,7 +111,8 @@ export class RedBookView {
     if (this.root.hidden) return;
     this.root.hidden = true;
     document.body.classList.remove('redbook-mode');
-    this.setCardActive(false);
+    this.pane?.release();
+    this.runner.interrupt();
     this.current = undefined;
     this.state = undefined;
   }
@@ -106,35 +123,8 @@ export class RedBookView {
     if (!this.root.hidden) this.buildRail();
   }
 
-  /** The aside is out of the keyboard path and the accessibility tree whenever the mode is not showing. */
-  private setCardActive(active: boolean) {
-    this.card.hidden = !active;
-    this.card.inert = !active;
-    if (active) this.card.removeAttribute('aria-hidden');
-    else this.card.setAttribute('aria-hidden', 'true');
-  }
-
   private select(next: AppState['redbook']) {
     this.navigate({ view: { kind: 'world' }, deep: false, ...(next && (next.stop || next.genesis) ? { redbook: next } : { redbook: {} }) });
-  }
-
-  private buildHeading() {
-    clear(this.heading);
-    const genesis = !!this.state?.genesis;
-    const walking = !!this.state?.stop && !genesis;
-    // the walk opens on folio 1
-    const firstId = this.stops[0]?.id;
-    // two rows: the folio walk (the rail moves folio by folio) and the genesis table; the folios are not listed
-    this.heading.append(modeOptions([
-      optionGroup('Walk', [
-        optionAction('The walk', () => this.select(firstId ? { stop: firstId } : {}), {
-          pressed: walking, description: 'Each folio of the book, in sequence, one at a time',
-        }),
-        optionAction('Genesis', () => this.select({ genesis: true }), {
-          pressed: genesis, description: 'Where each root became: an archetype, a family or an Aion reading',
-        }),
-      ]),
-    ]));
   }
 
   private buildRail() {
@@ -159,11 +149,6 @@ export class RedBookView {
         filtered: i !== undefined && !this.passing(i),
       };
     });
-  }
-
-  private closeButton() {
-    // close the folio/genesis card; stay in the Red Book with Options waiting
-    return el('button', { type: 'button', class: 'rv-close', 'aria-label': 'Close reading', onclick: () => this.select({}) }, [closeGlyph()]);
   }
 
   /**
@@ -193,6 +178,11 @@ export class RedBookView {
     return quote({ text: key.words, cite: { work: this.model.workKey.get(r.work) ?? r.work, workTitle: r.workTitle, locator: r.locator }, ...(c.voice ? { voice: c.voice } : {}) }, { passages: this.passages });
   }
 
+  /** The walk's stepper under a folio: the neighbours, and where in the book the visitor stands. */
+  private stepper(i: number, n: number): Node[] {
+    return paneStepper({ prev: 'Previous folio', next: 'Next folio' }, `${i + 1} / ${n}`, () => this.walk(-1), () => this.walk(1));
+  }
+
   private showStop(stop: RedBookStop) {
     this.current = stop;
     this.buildRail();
@@ -201,21 +191,25 @@ export class RedBookView {
     if (i === undefined) return;
     const o = m.occ[i];
     const fam = m.famById.get(o.familyId);
-    clear(this.card);
-    this.card.append(this.closeButton());
+    // the walk: the runner stands on this folio (it begins here when the book is entered at a folio)
+    const at = Math.max(0, this.stops.findIndex((s) => s.id === stop.id));
+    const walk = redbookWalk(m, this.mode);
+    const step = this.runner.active && this.runner.position?.walkId === walk.id
+      ? this.runner.goto(at)
+      : this.runner.start(walk, { u: 0, focus: null, reading: null, centre: null, walk: null }, at);
     const body = el('div', { class: 'rv-body' });
     const text = el('div', { class: 'rv-text' });
-    body.append(plate(occurrenceImage(m, o), { className: 'rv-hero', credit: true, palette: fam?.palette, alt: o.title, eager: true }));
+    body.append(plate(occurrenceImage(m, o), { className: 'rv-hero dp-figure', credit: true, palette: fam?.palette, alt: o.title, eager: true }));
     const facsimile = this.facsimile(stop);
     if (facsimile) body.append(facsimile);
     text.append(
-      el('p', { class: 'aion-date rv-line', text: [this.sectionName.get(stop.sectionId) ?? '', eraShort(o.yearDisplay, 40)].filter(Boolean).join(' · ') }),
-      el('h2', { class: 'rv-name', text: o.title }),
+      el('p', { class: 'dp-by rv-line', text: [this.sectionName.get(stop.sectionId) ?? '', eraShort(o.yearDisplay, 40)].filter(Boolean).join(' · ') }),
+      el('h2', { class: 'dp-title rv-name', text: o.title }),
     );
     const key = keyPassage(o, this.genesisFor(stop.id));
     if (key) text.append(this.keyQuote(o, key, this.genesisFor(stop.id)));
-    for (const para of readerBody(o.body)) text.append(el('p', { class: 'rv-para', text: para }));
-    const links = el('div', { class: 'aion-links' });
+    for (const para of readerBody(o.body)) text.append(el('p', { class: 'dp-para rv-para', text: para }));
+    const links = el('div', { class: 'dp-flow aion-links' });
     for (const t of fam?.archetypes ?? []) {
       const archetype = m.archById.get(t.id);
       if (archetype) links.append(el('button', { type: 'button', class: 'link-quiet', text: archetype.name, onclick: () => this.navigate({ view: { kind: 'focus', subject: { type: 'archetype', id: archetype.id } }, deep: false }) }));
@@ -224,11 +218,16 @@ export class RedBookView {
     links.append(el('button', { type: 'button', class: 'link-quiet', text: 'On the globe', onclick: () => this.navigate({ view: { kind: 'manifest', occId: o.id, context: { type: 'family', id: o.familyId } }, deep: false }) }));
     text.append(links);
     body.append(text);
-    this.card.append(body);
+    this.pane?.read({ key: `folio:${stop.id}`, eyebrow: 'Folio', nodes: [body], foot: this.stepper(at, this.stops.length), onRead: () => this.onRead(stop.id), engages: { type: 'occurrence', id: stop.id } });
     this.emphasise(o.familyId, i);
-    this.onStop(stop.id);
+    this.arrive(step?.effects ?? null, i);
+  }
+
+  /** The walk's stop carried out through the entries the controller and the rig give: the clock glides to its year, the globe flies to its place. */
+  private arrive(fx: WalkEffects | null, i: number) {
+    this.onStop(fx ? fx.setClock : null);
     // the standing stop is where the world looks: all stops are the book's one place
-    if (m.located[i]) this.engine.rig.flyTo(o.lat, o.lon, 2.55, { duration: 1.7 });
+    if (fx?.flyTo && this.model.located[i]) this.engine.rig.flyTo(fx.flyTo.lat, fx.flyTo.lon, 2.55, { duration: 1.7 });
   }
 
   private genesisFor(stopId: string): GenesisRow | undefined {
@@ -239,17 +238,15 @@ export class RedBookView {
     this.current = undefined;
     this.buildRail();
     const m = this.model;
-    clear(this.card);
-    this.card.append(this.closeButton());
     const body = el('div', { class: 'rv-body' });
     const text = el('div', { class: 'rv-text' });
     text.append(
-      el('h2', { class: 'rv-name', text: 'Genesis' }),
-      el('p', { class: 'rv-para aion-lede', text: providerLabels().redbookLede }),
+      el('h2', { class: 'dp-title rv-name', text: 'Genesis' }),
+      el('p', { class: 'dp-lede rv-para aion-lede', text: providerLabels().redbookLede }),
     );
     for (const row of this.mode.genesis) text.append(this.genesisRow(row, m));
     body.append(text);
-    this.card.append(body);
+    this.pane?.read({ key: 'genesis', eyebrow: 'Liber Novus', nodes: [body] });
     this.engine.setEmphasis(null, null);
   }
 
@@ -275,7 +272,7 @@ export class RedBookView {
     row2.append(
       head,
       quote(this.genesisQuote(row), { passages: this.passages }),
-      el('p', { class: 'rv-para rb-doctrine', text: row.doctrine }),
+      el('p', { class: 'dp-para rv-para rb-doctrine', text: row.doctrine }),
     );
     const stop = this.stops.find((s) => s.id === row.stopId);
     const o = stop && m.occIndex.has(stop.id) ? m.occ[m.occIndex.get(stop.id)!] : undefined;
@@ -296,11 +293,11 @@ export class RedBookView {
     this.engine.setEmphasis(sc.rel, null, sc.info);
   }
 
-  /** Arrow-key walking; wired by the controller. */
+  /** Arrow-key walking, the rail's steps and the pane's stepper: the runner names the neighbour, past either end comes the other. */
   walk(delta: number) {
     if (this.state?.genesis || !this.current) return;
-    const i = this.stops.findIndex((s) => s.id === this.current!.id);
-    const next = this.stops[(i + delta + this.stops.length) % this.stops.length];
-    this.select({ stop: next.id });
+    const step = delta > 0 ? this.runner.next() : this.runner.prev();
+    const id = step?.stop.subject?.id;
+    if (id) this.select({ stop: id });
   }
 }

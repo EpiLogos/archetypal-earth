@@ -28,7 +28,7 @@ const aionEvent = aionReading.events.find((e) => (e.occurrenceIds ?? []).some((i
 const aionEventOcc = aionEvent.occurrenceIds.find((id) => occIds.has(id));
 const aionBare = aionReading.events.find((e) => !(e.occurrenceIds ?? []).some((id) => occIds.has(id)));
 const aionEpoch = aionReading.epochs.find((e) => !e.parentId);
-// the null landing centres The Self: the folio its genesis row names (as modes-switch.mjs reads it)
+// The Self's folio: the one its genesis row names (as modes-switch.mjs reads it)
 const rbSelfStop = redbook.genesis.find((g) => g.target?.kind === 'archetype' && g.target.id === 'self').stopId;
 
 let failed = 0;
@@ -258,34 +258,34 @@ try {
     }
   }
 
-  // ── (iii) the Red Book folio card: dblclick → its core reading; Escape → the same folio (W1c) ───────
+  // ── (iii) the Red Book folio, read in the pane: dblclick → its core reading; Escape → the same folio (W1c) ───────
   {
-    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: '#/redbook' });
+    const { ctx, page } = await open(browser, { width: 1280, height: 800, hash: `#/redbook/${rbSelfStop}` });
     track(page);
-    await until(page, () => document.querySelector('.redbook .rv-name')?.textContent);
+    await until(page, () => document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name')?.textContent);
     await page.waitForTimeout(300);
     const before = await state(page);
-    const landingName = await page.locator('.redbook .rv-name').textContent();
-    check(before.redbook && before.redbookStop === null && before.kind === 'world', 'the Red Book stands on its null landing before the gesture', before.hash);
-    await page.locator('.redbook .rv-name').dblclick();
+    const landingName = await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').textContent();
+    check(before.redbook && before.redbookStop === rbSelfStop && before.kind === 'world', 'the Red Book stands on The Self\'s folio before the gesture', before.hash);
+    await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').dblclick();
     await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
     await page.waitForTimeout(500);
     const rb = await state(page);
     check(rb.kind === 'manifest' && rb.deep && rb.deepOpen && rb.from, 'a double-click on a Red Book folio opens that folio\'s core reading, at depth', rb.hash);
     const landedOn = rb.occId;
-    check(landedOn === rbSelfStop, 'the reading is the standing folio\'s own occurrence (The Self\'s folio on the null landing)', `${landedOn}`);
+    check(landedOn === rbSelfStop, 'the reading is the standing folio\'s own occurrence (The Self\'s folio, as opened)', `${landedOn}`);
     await page.keyboard.press('Escape');
     await until(page, () => window.__earth.ctl.state.redbook && !window.__earth.ctl.state.deep);
     await page.waitForTimeout(500);
     const back = await state(page);
-    const backName = await page.locator('.redbook .rv-name').textContent();
-    check(back.redbook && !back.deep && !back.from && backName === landingName, 'Escape returns to the Red Book folio the reader was on (the null landing), and the memory is spent', `${back.hash}, "${backName}"`);
+    const backName = await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').textContent();
+    check(back.redbook && !back.deep && !back.from && backName === landingName, 'Escape returns to the Red Book folio the reader was on, and the memory is spent', `${back.hash}, "${backName}"`);
     // the same walk, from a folio the reader walked to: the return is to that folio, not the landing
     await page.keyboard.press('ArrowRight');
     await until(page, (id) => !!window.__earth.ctl.state.redbook?.stop && window.__earth.ctl.state.redbook.stop !== id, landedOn);
     await page.waitForTimeout(500);
     const next = await state(page);
-    await page.locator('.redbook .rv-name').dblclick();
+    await page.locator('section.deep:not(.passage):not(.you-sheet) .dp-article:not([hidden]) .rv-name').dblclick();
     await until(page, () => window.__earth.ctl.state.deep === true && window.__earth.ctl.state.view.kind === 'manifest');
     await page.waitForTimeout(400);
     await page.keyboard.press('Escape');

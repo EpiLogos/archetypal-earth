@@ -2,7 +2,10 @@
 // 1440×900 and 390×844, across the states a visitor passes through: the Field, a focus, its reading, the wide reading,
 // Contents, Aion, the Red Book, the Texts. A region is measured as drawn: shown, and not faded out.
 //   EARTH_HEADED=0 EARTH_URL=http://localhost:5294/ node tests/ui/e2e/layout-contract.mjs
+import fs from 'node:fs';
 import { launch, open } from './lib.mjs';
+
+const FIRST_FOLIO = JSON.parse(fs.readFileSync(new URL('../../../public/data/redbook.json', import.meta.url), 'utf8')).stops[0].id;
 
 const fails = [];
 const ok = (cond, msg) => { console.log(`${cond ? '  ok  ' : ' FAIL '} ${msg}`); if (!cond) fails.push(msg); };
@@ -18,6 +21,10 @@ const STATES = [
   ['the sky', '#/sky', null],
   ['Aion', '#/aion', null],
   ['the Red Book', '#/redbook', null],
+  ['the Red Book Contents', '#/redbook', async (page) => { await page.locator('.sh-contents').click(); }],
+  ['a Red Book folio', `#/redbook/${FIRST_FOLIO}`, null],
+  // a phone's Path makes way for the sheet, so there the head of the pane carries the way to the Contents
+  ['a Red Book folio over its Contents', `#/redbook/${FIRST_FOLIO}`, async (page) => { await page.locator('.sh-contents:visible, section.deep[aria-label="Reading"] .pane-contents-tool:visible').first().click(); }],
   ['the Texts', '#/texts', null],
   ['a Work', '#/', async (page) => { await page.evaluate(() => { const c = window.__earth.ctl; const id = [...window.__earth.model.workById.keys()][0]; c.openSubject({ type: 'work', id }); }); }],
 ];

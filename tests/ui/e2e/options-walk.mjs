@@ -119,18 +119,29 @@ try {
   }
 
   // ── every other mode: row counts, and the theory/alchemy screenshots ─────────────────────────────────────────────
+  // a mode whose Contents stand in the pane (`pane: true`) is entered from its Contents trigger: it has no Options hamburger of its own
   const others = [
     { mode: 'theory', hash: '#/theory' },
     { mode: 'alchemy', hash: '#/alchemy' },
     { mode: 'astrology', hash: '#/astrology' },
-    { mode: 'redbook', hash: '#/redbook' },
+    { mode: 'redbook', hash: '#/redbook', pane: true },
   ];
-  for (const { mode, hash } of others) {
+  for (const { mode, hash, pane } of others) {
     for (const width of [1280, 390]) {
       const mobile = width < 500;
       const { ctx, page, logs } = await open(browser, { width, height: width < 500 ? 844 : 800, mobile, hash });
       try {
         const has = (await page.locator(`${popover} > summary`).count()) > 0;
+        if (pane) {
+          await page.waitForSelector('.sh-contents', { timeout: 15000 }).catch(() => {});
+          check(await page.locator('.sh-contents').isVisible().catch(() => false), `${mode} ${width}: the Contents trigger is present`);
+          check(!has, `${mode} ${width}: no Options hamburger carries what the Contents carry`);
+          await page.locator('.sh-contents').click().catch(() => {});
+          await page.waitForTimeout(500);
+          if (mode === 'theory' || mode === 'alchemy') await page.screenshot({ path: path.join(SHOTS, `contents-${mode}-${width}.png`) });
+          check(logs.filter((l) => /pageerror/.test(l)).length === 0, `${mode} ${width}: no page errors`, logs.filter((l) => /pageerror/.test(l)).join(' | '));
+          continue;
+        }
         if (!has) { check(false, `${mode} ${width}: an Options control is present`); continue; }
         await openOptions(page);
         const titles = (await rowTitles(page)).map((t) => t.trim());

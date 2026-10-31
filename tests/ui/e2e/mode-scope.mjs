@@ -58,14 +58,11 @@ const placedTotal = (page) => page.evaluate(() => Array.from(window.__earth.ctl.
 for (const [hash, name] of [['#/redbook', 'the Red Book'], ['#/aion/jung-aion', 'Aion']]) {
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash });
   await page.waitForTimeout(8000);
-  // Red Book lands without a folio; open the walk so the mode's set is on the globe
+  // Red Book lands without a folio; open a folio from its Contents so the mode's set is on the globe
   if (name === 'the Red Book') {
-    const options = page.locator('.mode-options > summary');
-    if (await options.isVisible().catch(() => false)) {
-      await options.click();
-      await page.locator('.mode-options-body button', { hasText: 'The walk' }).click();
-      await page.waitForTimeout(2500);
-    }
+    await page.locator('.sh-contents').click();
+    await page.locator('.dp-contents-pane li button').first().click();
+    await page.waitForTimeout(2500);
   }
   const line = (await page.locator('.sh-scope').textContent().catch(() => '')) ?? '';
   check(/ in .* · Show the whole field/.test(line) && !/nearby, dimmed/.test(line), `${name} names its own set`, line);

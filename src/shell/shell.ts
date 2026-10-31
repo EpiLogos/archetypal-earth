@@ -48,6 +48,8 @@ export class Shell {
   private corner: HTMLElement;
   private title: HTMLElement;
   private controls: HTMLElement;
+  private contentsBtn: HTMLButtonElement;
+  private contentsAct: (() => void) | null = null;
   private scopeLine: HTMLElement;
   private menu: HTMLElement;
   private menuScrim: HTMLElement;
@@ -68,6 +70,10 @@ export class Shell {
     this.aside = el('div', { class: 'sh-aside' });
     this.title = el('h1', { class: 'sh-title' });
     this.controls = el('div', { class: 'sh-controls' });
+    // the lens's Contents trigger: one button in the lens's own place, first in its controls; the lens states what it lists
+    this.contentsBtn = el('button', { type: 'button', class: 'sh-contents', 'aria-label': 'Contents', 'aria-pressed': 'false', hidden: true, onclick: () => this.contentsAct?.() }, [icon('list', 15), el('span', { text: 'Contents' })]) as HTMLButtonElement;
+    this.controls.append(this.contentsBtn);
+    this.controls.hidden = true;
     this.scopeLine = el('p', { class: 'sh-scope', hidden: true, role: 'status' });
     // lens → title → scope → Options (icon); Options must not sit above the title
     this.root = el('header', { class: 'shell' }, [el('div', { class: 'sh-head' }, [this.lensBtn, this.aside]), this.title, this.scopeLine, this.controls]);
@@ -143,9 +149,22 @@ export class Shell {
 
   /** The lens's own few controls; the shell places them. Null clears. */
   setControls(nodes: Node[] | null) {
-    clear(this.controls);
+    for (const c of [...this.controls.children]) if (c !== this.contentsBtn) c.remove();
     if (nodes?.length) this.controls.append(...nodes);
-    this.controls.hidden = !nodes?.length;
+    this.controls.hidden = !nodes?.length && this.contentsBtn.hidden;
+  }
+
+  /** The Contents trigger of the lens that stands: shown while the lens lists something, pressed while its list is open. Null takes it away. */
+  setContents(onToggle: (() => void) | null) {
+    this.contentsAct = onToggle;
+    this.contentsBtn.hidden = !onToggle;
+    if (!onToggle) this.contentsBtn.setAttribute('aria-pressed', 'false');
+    this.controls.hidden = this.contentsBtn.hidden && this.controls.children.length <= 1;
+  }
+
+  /** The pane's Contents list opened or closed: the trigger follows. */
+  syncContents(open: boolean) {
+    this.contentsBtn.setAttribute('aria-pressed', String(open));
   }
 
   /** Something that sits beside the lens button (the Field's Earth ⇄ Graph pill). */

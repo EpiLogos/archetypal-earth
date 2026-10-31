@@ -5,6 +5,7 @@ const S = 'fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="
 
 const PATHS = {
   search: `<circle cx="6.8" cy="6.8" r="4.6" ${S}/><path d="M10.4 10.4L14 14" ${S}/>`,
+  list: `<path d="M5.6 4.5h8M5.6 8h8M5.6 11.5h8" ${S}/><path d="M2.6 4.5h.1M2.6 8h.1M2.6 11.5h.1" ${S}/>`,
   menu: `<path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" ${S}/>`,
   close: `<path d="M3.5 3.5l9 9M12.5 3.5l-9 9" ${S}/>`,
   // the pane's width: two corners pulling apart, and the same two drawn in

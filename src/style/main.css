@@ -251,6 +251,10 @@ body.pane-contents { --pane-w: 380px; }
 .dp-close, .pane-tool { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-2); border: 1px solid var(--hair); transition: color 0.3s, border-color 0.3s; }
 .pane-tool { border-color: transparent; }
 .pane-tool[hidden] { display: none; }
+/* the head's Contents button: only a phone needs it (there the Path makes way for the sheet); a desktop has the trigger beside the title */
+.pane-contents-tool { display: none; align-items: center; gap: 7px; height: 32px; padding: 0 12px 0 10px; border: 1px solid var(--hair); border-radius: 16px; font: 500 11px var(--sans); letter-spacing: 0.06em; color: var(--ink-2); }
+.pane-contents-tool:hover { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
+.pane-contents-tool[data-pane='contents'], .pane-contents-tool[data-pane='closed'] { display: none !important; }
 .dp-close:hover, .pane-tool:hover { color: #fff; border-color: rgb(var(--core-rgb) / 0.6); }
 .dp-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 10px min(7vw, 72px) 14vh 58px; scroll-padding-top: 1rem; outline: none; scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / 0.25) transparent; overscroll-behavior: contain; }
 .dp-article { max-width: 35rem; transition: max-width 0.5s var(--ease); }
@@ -414,7 +418,7 @@ body.deep-open .floats, body.deep-open .float-lines, body.deep-open .strip, body
 .t-track:hover .t-line { background: linear-gradient(90deg, transparent, rgb(var(--core-rgb) / 0.8) 5%, rgb(var(--core-rgb) / 0.8) 95%, transparent); }
 .t-play { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-3); transition: color 0.3s; }
 .t-play:hover, .time.is-playing .t-play { color: rgb(var(--core-rgb)); }
-body.deep-open .time, body.pane-contents .time { left: calc((100vw - var(--pane-w)) / 2); width: min(560px, calc(100vw - var(--pane-w) - 48px)); }
+body.deep-open .time, body.pane-contents .time, body.pane-reading .time { left: calc((100vw - var(--pane-w)) / 2); width: min(560px, calc(100vw - var(--pane-w) - 48px)); }
 @container (max-width: 640px) { .t-era { display: none; } }
 
 /* ── search ────────────────────────────────────────────────────────── */
@@ -468,13 +472,14 @@ body.deep-open .time, body.pane-contents .time { left: calc((100vw - var(--pane-
   .dp-scroll { padding: 6px 22px 14vh; }
   .dp-article, .deep[data-wide='true'] .dp-article { max-width: none; }
   .pane-tool { display: none; }
+  .pane-contents-tool:not([hidden]) { display: inline-flex; min-height: 44px; }
   /* the sheet leaves the top of the screen to the subject's name and its way up; the rest of its label is the sheet's to say */
   body.deep-open .focus-label { top: 14px; }
   body.deep-open .fl-line, body.deep-open .fl-ties, body.deep-open .fl-links { display: none; }
   .dp-title { font-size: 2.1rem; }
   .dp-para { font-size: 1.1rem; }
   .dp-occ li { grid-template-columns: 6.2rem 1fr; }
-  body.deep-open .time, body.pane-contents .time { display: none; }
+  body.deep-open .time, body.pane-contents .time, body.pane-reading .time { display: none; }
 
   .strip { bottom: 66px; }
   .st-name { font-size: 1.1rem; }
@@ -528,6 +533,17 @@ body.deep-open .time, body.pane-contents .time { left: calc((100vw - var(--pane-
 .dp-contents { margin: 0; padding: 0; list-style: none; }
 .dp-contents li { padding: 4px 0 4px calc(var(--lvl, 0) * 16px); font-family: var(--serif); font-size: 1.04rem; line-height: 1.45; }
 .dp-contents .link-quiet { text-align: left; }
+.dp-contents .link-quiet[aria-current='true'] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.7); }
+.dp-contents-title { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
+.dp-contents-pane .dp-sub:first-of-type { margin-top: 22px; }
+/* a lens's reading in the pane: the walk's stepper pinned under the article, and the folio laid out as the pane's own page */
+.pane-foot { flex: none; display: flex; justify-content: center; padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--hair); background: rgb(var(--deep-rgb) / 0.55); }
+.pane-foot[hidden] { display: none; }
+.pane-foot .th-step { margin: 0; }
+.deep .rv-text { padding: 0; }
+.deep .rv-text .rv-line { margin-top: 18px; }
+.deep .rv-body { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+.deep .rv-hero { max-height: 42vh; }
 .dp-chart-line { margin: 18px 0 0; font-family: var(--sans); font-size: 13px; letter-spacing: 0.02em; color: var(--ink-2); }
 .dp-portrait { max-width: 15rem; }
 .dp-cite-work { margin-left: 10px; font-family: var(--sans); font-size: 11.5px; }

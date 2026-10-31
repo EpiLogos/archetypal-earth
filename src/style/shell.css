@@ -49,6 +49,12 @@ body.search-open .view-control, body.deep-open .view-control { opacity: 0; point
 body[data-lens="field"] .sh-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
 .sh-controls { margin: 10px 0 0 2px; font: 11.5px var(--sans); letter-spacing: 0.04em; color: var(--ink-2); }
 .sh-controls:empty { display: none; }
+/* the lens's Contents trigger: one button in the lens's own place, first in its controls (H5) */
+.sh-contents { display: inline-flex; align-items: center; gap: 8px; height: 34px; margin: 2px 0 6px; padding: 0 13px 0 11px; font: 500 11.5px var(--sans); letter-spacing: 0.06em; color: var(--ink-2); border: 1px solid var(--hair); border-radius: 10px; background: rgb(0 0 0 / 0.22); transition: color 0.3s, border-color 0.3s; }
+.sh-contents[hidden] { display: none; }
+.sh-contents:hover { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.45); }
+.sh-contents[aria-pressed='true'] { color: var(--ink); border-color: rgb(var(--core-rgb) / 0.55); }
+.sh-contents[aria-pressed='true'] svg { color: var(--core); }
 .sh-controls[hidden] { display: none; }
 .sh-controls select { color: var(--ink-2); background: transparent; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 18px 8px 0; max-width: 100%; font: inherit; }
 .sh-controls .mode-opt-action { border-bottom: 0; text-decoration: none; }
@@ -69,7 +75,7 @@ body.search-open .shell > *, body.deep-open .shell > * { pointer-events: none; }
 .sh-corner .search-glyph { position: static; opacity: 0.75; padding: 0 10px; border-radius: 18px; min-height: 36px; display: inline-flex; gap: 8px; }
 .sh-corner .sh-corner-btn { opacity: 0.75; }
 .sh-corner .sh-corner-btn:hover { opacity: 1; }
-body.search-open .sh-corner, body.deep-open .sh-corner, body.menu-open .sh-corner { opacity: 0; pointer-events: none; }
+body.search-open .sh-corner, body.deep-open .sh-corner, body.menu-open .sh-corner, body.pane-reading .sh-corner { opacity: 0; pointer-events: none; }
 /* the Contents list stands over the right edge: the corner keeps clear of it */
 body.pane-contents .sh-corner { right: calc(var(--pane-w) + var(--shell-x) - 4px); }
 
@@ -157,6 +163,10 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
   .sh-lens { height: var(--tap); padding: 0 14px 0 12px; }
   .sh-title { margin-top: 10px; font-size: 1.3rem; }
   .sh-controls { font-size: 11px; }
+  .sh-contents { height: var(--tap); }
+  /* a lens's reading is a sheet over most of a phone's screen: the Path makes way for it, as it does for the Field's reading */
+  body.pane-reading .shell { opacity: 0; pointer-events: none; }
+  body.pane-reading .shell > * { pointer-events: none; }
   .sh-corner { gap: 2px; }
   .sh-corner .sh-corner-btn { min-width: var(--tap); min-height: var(--tap); }
   .sh-corner .sg-key { display: none; }
