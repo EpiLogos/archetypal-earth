@@ -44,7 +44,7 @@ async function openCard(page, name) {
     return true;
   }, name);
   if (!ok) throw new Error(`no card "${name}" on the held planet's rings`);
-  await page.waitForSelector('.lens-panel:not([hidden]) .cr', { timeout: 10000 });
+  await page.waitForSelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"] .cr', { timeout: 10000 });
 }
 
 /** Records the page every 50 ms from now on: the sheet, the reading, the phase, the state. Stamps `window.__t0` at the click. */
@@ -58,7 +58,7 @@ async function record(page) {
       const c = W.__earth.ctl;
       const s = c.state;
       const sheet = c.deep.root;
-      const panel = document.querySelector('.lens-panel');
+      const panel = document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]');
       const shown = (el) => !!el && !el.hidden && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden' && el.getBoundingClientRect().width > 0;
       W.__rec.push({
         t: performance.now(),
@@ -318,7 +318,7 @@ parts.t = async () => {
           sats: [...document.querySelectorAll('.po-sat')].filter((c) => shown(c) && eff(c) > 0.05).length,
           floats: [...document.querySelectorAll('.floats .float')].filter(shown).length,
           line: !!document.querySelector('.po-earth-line') && shown(document.querySelector('.po-earth-line')),
-          panel: !!document.querySelector('.lens-panel:not([hidden])'),
+          panel: !!document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]'),
           lens: W.__earth.ctl.state.lens?.id ?? null, body: W.__earth.ctl.state.sky?.body ?? null,
         });
       });
@@ -330,7 +330,7 @@ parts.t = async () => {
     await page.evaluate(() => {
       const W = window;
       W.__panelGoneAt = null;
-      const seen = () => { if (W.__panelGoneAt === null && !document.querySelector('.lens-panel:not([hidden])')) W.__panelGoneAt = performance.now(); };
+      const seen = () => { if (W.__panelGoneAt === null && !document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]')) W.__panelGoneAt = performance.now(); };
       new MutationObserver(seen).observe(document.documentElement, { subtree: true, childList: true, attributes: true });
     });
     const t0 = await clickStamped(page, '.cr .cr-planet', BODY_NAME[tr.to]);
@@ -340,7 +340,7 @@ parts.t = async () => {
     const { fr, R } = await page.evaluate(() => { window.__frOn = false; return { fr: window.__fr, R: window.__skyRadius }; });
     const run = fr.filter((x) => x.t >= t0);
     const arrived = run.find((x) => x.phase === 'approach' && x.approached === tr.to && x.t - t0 > 400);
-    const state = await page.evaluate(() => ({ lens: window.__earth.ctl.state.lens?.id, body: window.__earth.ctl.state.sky?.body, hash: location.hash, panel: !!document.querySelector('.lens-panel:not([hidden])'), sky: !!window.__earth.ctl.state.sky }));
+    const state = await page.evaluate(() => ({ lens: window.__earth.ctl.state.lens?.id, body: window.__earth.ctl.state.sky?.body, hash: location.hash, panel: !!document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]'), sky: !!window.__earth.ctl.state.sky }));
     check(state.lens === 'astrology' && state.body === tr.to && state.sky && state.hash === `#/sky/${tr.to}`, `${tag}: Astrology on ${BODY_NAME[tr.to]} (sky.body ${state.body}, ${state.hash})`);
     check(!state.panel, `${tag}: the card's sheet is gone`);
     const panelGone = run.find((x) => !x.panel);

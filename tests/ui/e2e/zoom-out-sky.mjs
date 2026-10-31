@@ -24,7 +24,8 @@ const snap = (page) => page.evaluate(() => {
     bareSky: !!s.sky && !s.lens,
     lensName: document.querySelector('.sh-lens-name')?.textContent ?? null,
     context: document.querySelector('.sh-title')?.textContent ?? null,
-    options: !!document.querySelector('.sh-controls details.mode-options'),
+    options: !!document.querySelector('.sh-contents:not([hidden])'),
+    reading: !!document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]') && document.body.classList.contains('pane-reading'),
     skyOn: document.body.classList.contains('sky-on'),
     skyVisible: !!engine.sky?.group.visible,
     bodies: engine.sky?.data.bodies.length ?? 0,
@@ -68,7 +69,7 @@ try {
     check(out.lens?.id === 'astrology' && out.lens.path[0] === 'sky', 'zooming out from the focus enters Astrology on the live sky', `lens ${JSON.stringify(out.lens)}`);
     check(!out.bareSky, 'and never a bare sky (a sky with no lens)');
     check(out.lensName === 'Astrology', 'the shell names Astrology', `lens name "${out.lensName}"`);
-    check(out.options, 'the Options control is present');
+    check(out.options, 'the Contents control is present');
     check(out.skyOn && out.skyVisible, 'the sky is shown, the body layer on', `sky-on ${out.skyOn}, visible ${out.skyVisible}`);
     check(out.bodies >= 10 && out.skyLabels >= 10, 'the planets and their names are loaded', `bodies ${out.bodies}, labels ${out.skyLabels}`);
     check(out.oldNamesStrip === 0 && out.namesSelect === 0, 'the old Names strip (the planet-name menu of the bare sky) is absent', `strip ${out.oldNamesStrip}, select ${out.namesSelect}`);
@@ -85,7 +86,7 @@ try {
     check(!field.skyOn, 'the sky layer is no longer on');
     // the sky's exit edge is SKY_EXIT (30) in stage distance: the camera is on the Field's side of it, the user's own zoom goes on
     check(field.stage < 30, 'the camera is on the Field side of the sky’s edge', `stage ${field.stage}`);
-    check(field.view === 'world' && !field.bareSky && !field.options, 'no Astrology Options remain on the Field');
+    check(field.view === 'world' && !field.bareSky && !field.options, 'no Astrology Contents remain on the Field');
     await ctx.close();
   }
 
@@ -104,7 +105,7 @@ try {
     check(out.lens?.id === 'astrology' && !out.bareSky, 'zooming out from the globe enters Astrology, not a bare sky', `lens ${JSON.stringify(out.lens)}`);
     // the live sky is sky-only: it opens with no sheet (its standard Open action is disabled), so Escape steps out of the mode
     // onto the Field (the controller's stepBack). The sheet-closing Escape is checked below, on Charts
-    check(!(await page.$('.lens-panel:not([hidden])')), 'zooming out opens Astrology with no sheet');
+    check(!out.reading, 'zooming out opens Astrology with no reading');
     await page.keyboard.press('Escape');
     await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
     await settle(page);
@@ -133,7 +134,7 @@ try {
     await settle(page);
     const on = await snap(page);
     check(on.lens?.id === 'astrology' && on.lens.path[0] === 'sky' && !on.bareSky, 'S from the focus enters Astrology on the live sky', `hash "${on.hash}"`);
-    check(on.options && on.lensName === 'Astrology', 'and its Options and name stand');
+    check(on.options && on.lensName === 'Astrology', 'and its Contents and name stand');
     await page.keyboard.press('s');
     await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
     await settle(page);
@@ -165,19 +166,17 @@ try {
     await page.waitForFunction(() => window.__earth.ctl.state.lens?.id === 'astrology', null, { timeout: 30000 }).catch(() => {});
     await settle(page);
     const link = await snap(page);
-    check(link.lens?.id === 'astrology' && !link.bareSky && link.lensName === 'Astrology' && link.options, 'the link #/sky opens Astrology with its Options', `lens ${JSON.stringify(link.lens)}`);
+    check(link.lens?.id === 'astrology' && !link.bareSky && link.lensName === 'Astrology' && link.options, 'the link #/sky opens Astrology with its Contents', `lens ${JSON.stringify(link.lens)}`);
     check(link.oldNamesStrip === 0, 'and no old Names strip');
-    // Charts is a sheet: its Options row reveals it, Escape closes that sheet only (Astrology and its Options stand), the next leaves
-    await page.click('.sh-controls details.mode-options > summary');
-    await page.locator('.sh-controls .mode-options-body button').filter({ hasText: /^Charts/ }).first().click();
-    await page.waitForFunction(() => !!document.querySelector('.lens-panel:not([hidden])'), null, { timeout: 15000 }).catch(() => {});
-    check(!!(await page.$('.lens-panel:not([hidden])')), 'the Charts row of the Options reveals the sheet');
-    // an open Options disclosure takes the first Escape; the sheet is then closed by the next
-    if (await page.$eval('.sh-controls details.mode-options', (d) => d.open)) { await page.keyboard.press('Escape'); await page.waitForTimeout(300); }
+    // Charts is a reading in the pane: its Contents entry reveals it, Escape closes that reading only (Astrology and its Contents stand), the next leaves
+    await page.click('.sh-contents');
+    await page.locator('.dp-contents-pane li button').filter({ hasText: /^Charts/ }).first().click();
+    await page.waitForFunction(() => document.body.classList.contains('pane-reading'), null, { timeout: 15000 }).catch(() => {});
+    check((await snap(page)).reading, 'the Charts entry of the Contents reveals the reading');
     await page.keyboard.press('Escape');
     await page.waitForTimeout(800);
     const closed = await snap(page);
-    check(closed.lens?.id === 'astrology' && closed.options && !(await page.$('.lens-panel:not([hidden])')), 'Escape closes the Charts sheet and keeps Astrology with its Options', `hash "${closed.hash}"`);
+    check(closed.lens?.id === 'astrology' && closed.options && !closed.reading, 'Escape closes the Charts reading and keeps Astrology with its Contents', `hash "${closed.hash}"`);
     await page.keyboard.press('Escape');
     await page.waitForFunction(() => !window.__earth.ctl.state.sky, null, { timeout: 15000 }).catch(() => {});
     await settle(page);

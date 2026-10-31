@@ -10,7 +10,9 @@ import { subjectName, type Subject } from '../data/model';
 import { ASTROLOGY_LIVE, astrologyAt, astrologyLive } from '../state/store';
 import type { BirthPrefill } from '../state/router';
 import type { LensContext, LensInstance } from '../shell/lens';
-import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
+import { optionAction, optionGroup } from '../ui/mode-options';
+import { paneStepper } from '../ui/pane';
+import { astrologyContentsGroups, type ChartListing } from './astrology-contents';
 import { birthProblems, deviceOffset, meanTimeOffset, natalChart, type BirthData, type ChartBody } from '../astro/natal';
 import { chartSources, forgetLocalChart, saveLocalChart, YOU, type ChartRecord, type CuratedPerson } from '../astro/charts';
 import type { BodyKey, GazetteerPlace, SidecarChart } from '../types/sky';
@@ -88,13 +90,19 @@ export function mount(ctx: LensContext): LensInstance {
     for (const rec of chartSources(data.people)) charts.set(rec.id, { rec, chart: natalChart(rec.birth) });
   };
 
-  // the walk opens its sheet at half height: on a phone the body it holds stands in the space above it
-  const show = (label: string, body: (HTMLElement | null)[], height?: 'half' | 'full') => {
-    const nodes = body.filter((n): n is HTMLElement => !!n);
-    if (ctx.panel.isOpen) ctx.panel.replace(nodes); else ctx.panel.open(label, nodes);
-    if (height) ctx.panel.setHeight(height);
-    // a walk step's sheet is not a local reading: its dismissal steps onto the whole sky, as it always did
+  /** the route the lens stands at, for the Contents to mark */
+  let standing: string[] = [];
+
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (key: string, body: (HTMLElement | null)[], foot?: Node[] | null) => {
+    ctx.pane.load({ key: `astrology/${key}`, eyebrow: 'Astrology', nodes: body.filter((n): n is HTMLElement => !!n), foot: foot ?? null });
+    // a walk step's reading is not a local one: its dismissal steps onto the whole sky, as it always did
     ctx.localSheet(false);
+  };
+  /** A reading at a planet (a card on its ring, a thing with no family): opened at once, and its dismissal holds the planet. */
+  const showHere = (key: string, body: (HTMLElement | null)[]) => {
+    ctx.localSheet(true);
+    ctx.pane.read({ key: `astrology/${key}`, eyebrow: 'Astrology', nodes: body.filter((n): n is HTMLElement => !!n), foot: null });
   };
 
   // ── the Self and the charts linked to it ───────────────────────────────
@@ -170,6 +178,7 @@ export function mount(ctx: LensContext): LensInstance {
       ]);
     };
     const body: (HTMLElement | null)[] = [
+      el('h2', { class: 'dp-title', text: 'Astrology' }),
       privacyLine('Your birth data and your chart are kept only in this browser’s storage, and you can delete them below.'),
       el('p', { class: 'th-line', text: providerLabels().astrologyIntro }),
       quoteBlock(data.frame[0], ctx.passages),
@@ -195,7 +204,7 @@ export function mount(ctx: LensContext): LensInstance {
         el('button', { type: 'button', class: 'lp-btn quiet', onclick: () => { if (confirm('Delete your chart from this browser?')) { forgetLocalChart(); refreshCharts(); ctx.refreshNatal(); renderHome(); } } }, [icon('trash', 14), el('span', { text: 'Delete my chart' })]),
       ]) : null,
     ];
-    show('Astrology', body);
+    show('charts', body);
   };
 
   // ── the birth form ─────────────────────────────────────────────────────
@@ -298,7 +307,7 @@ export function mount(ctx: LensContext): LensInstance {
     const held = ctx.skyBody();
     const bodyName = held && held !== 'terra' ? data!.bodies[held as ChartBody]?.name : undefined;
     ctx.setContext(bodyName ? `${who} ${bodyName}` : `${who} birth sky`);
-    ctx.panel.close();
+    ctx.pane.hide();
   };
 
   const renderWalk = (chartId: string, bodyKey?: string) => {
@@ -375,14 +384,15 @@ export function mount(ctx: LensContext): LensInstance {
       last ? selfDiagram() : null,
       last ? quoteBlock(data.order.quote, ctx.passages, { compact: true }) : null,
       last ? el('button', { type: 'button', class: 'lp-btn primary as-to-self', onclick: () => ctx.descend({ type: 'archetype', id: 'self' }) }, [icon('self', 15), el('span', { text: 'Go to the Self' })]) : null,
-      el('div', { class: 'th-step' }, [
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Previous planet', disabled: i === 0, onclick: () => ctx.setPath([chartId, order[i - 1]]) }, [icon('back')]),
-        el('span', { class: 'th-count', text: `${i + 1} of ${order.length}` }),
-        el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'Next planet', disabled: last, onclick: () => ctx.setPath([chartId, order[i + 1]]) }, [icon('next')]),
-      ]),
       el('button', { type: 'button', class: 'th-link', onclick: () => ctx.navigate(astrologyAt([])) }, [el('span', { text: 'Back to the charts' }), icon('next', 14)]),
     ];
-    show('Astrology walk', body, 'half');
+    const foot = paneStepper(
+      { prev: 'Previous planet', next: 'Next planet' }, `${i + 1} / ${order.length}`,
+      () => { if (i > 0) ctx.setPath([chartId, order[i - 1]]); },
+      () => { if (!last) ctx.setPath([chartId, order[i + 1]]); },
+      { prev: i === 0, next: last },
+    );
+    show(`walk/${chartId}/${key}`, [el('h2', { class: 'dp-title', text: `${who} ${r.name}` }), ...body], foot);
   };
 
   const render = (path: string[]) => {
@@ -394,7 +404,7 @@ export function mount(ctx: LensContext): LensInstance {
       // the Earth is held like a planet (the camera goes in to it): it is the sky's subject, so it titles the sky
       const bodyName = held === 'terra' ? 'Earth' : held ? data.bodies[held as ChartBody]?.name : undefined;
       ctx.setContext(bodyName ?? 'The sky');
-      ctx.panel.close();
+      ctx.pane.hide();
       return;
     }
     if (path[0] && path[1] && path[1] !== 'terra') renderWalk(path[0], path[1]);
@@ -467,9 +477,7 @@ export function mount(ctx: LensContext): LensInstance {
       ...quotes.map((q) => quoteBlock(q as LensQuote, ctx.passages, { compact: true })),
       el('p', { class: 'lp-note', text: 'The field holds no family for this, so there is no page to read it in; these are the words it rests on.' }),
     ];
-    show(title, nodes, 'half');
-    ctx.localSheet(true);
-    ctx.panel.reveal();
+    showHere(`anchor/${title}`, nodes);
   };
 
   /**
@@ -486,9 +494,7 @@ export function mount(ctx: LensContext): LensInstance {
         open: (s) => ctx.descend(s),
         openBody: (k) => ctx.openBody(k),
       });
-      show('A card at the planet', nodes, 'half');
-      ctx.localSheet(true);
-      ctx.panel.reveal();
+      showHere(`card/${id}`, nodes);
     });
   };
 
@@ -532,65 +538,65 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.navigate(culture ? astrologySky(path, culture) : astrologyAt(path));
   };
 
-  const astrologyOptions = (path: string[]) => {
-    pathNow = path;
+  /**
+   * What the ⚙ of the View holds while the sky is Astrology's: the names the sky is read in, and where the sky stands now.
+   * The rows are built when the popover opens, and drawn again when a choice changes under it.
+   */
+  const settingsRows = (): Node[] => {
+    const path = pathNow;
     const skyCultures = ctx.engine.sky?.data.cultures;
-    if (skyCultures) namesReady = true;
-    paintLive();
     const live = path[0] === ASTROLOGY_LIVE;
     const chart = live ? null : path[0];
     const onSky = live || (!!chart && !path[1]);
+    const choose = (id: string | null) => {
+      nameCulture = id;
+      if (live) ctx.navigate(astrologyLive({ body: path[1] as BodyKey | undefined, ...(id ? { culture: id } : {}) }));
+      else goPath(onSky && chart ? [chart] : path, id);
+      ctx.refreshSettings();
+    };
     const names = [
-      optionAction('Greco-Roman (default)', () => {
-        nameCulture = null;
-        if (live) ctx.navigate(astrologyLive({ body: path[1] as BodyKey | undefined }));
-        else goPath(onSky && chart ? [chart] : path, null);
-      }, { pressed: !nameCulture }),
-      ...(skyCultures
-        ? Object.keys(skyCultures).map((id) => optionAction(
-          ctx.model.cultureById.get(id)?.name ?? id,
-          () => {
-            nameCulture = id;
-            if (live) ctx.navigate(astrologyLive({ body: path[1] as BodyKey | undefined, culture: id }));
-            else goPath(onSky && chart ? [chart] : path, id);
-          },
-          { pressed: nameCulture === id },
-        ))
-        : []),
+      optionAction('Greco-Roman (default)', () => choose(null), { pressed: !nameCulture }),
+      ...(skyCultures ? Object.keys(skyCultures).map((id) => optionAction(ctx.model.cultureById.get(id)?.name ?? id, () => choose(id), { pressed: nameCulture === id })) : []),
     ];
-    // the names are a reading choice, not a request to read: they never open the sheet (the shell reads data-no-reveal)
-    for (const n of names) n.setAttribute('data-no-reveal', '');
-    const walk = chart && data
-      ? optionAction('Walk the planets', () => goPath([chart, data!.order.bodies[0]]), {
-        pressed: !!path[1] && path[1] !== 'terra',
-        description: 'Planet by planet through the birth sky',
-      })
-      : null;
-    ctx.setControls([modeOptions([
-      optionGroup('Read the chart', [
-        optionAction('Charts', () => goPath([]), { pressed: !path[0], description: providerLabels().astrologyCharts }),
-        walk,
-      ]),
-      optionGroup('Names', names),
-      liveLine,
-      liveLine,
-    ])]);
+    return [optionGroup('Names', names), liveLine];
+  };
+
+  const syncSettings = (path: string[]) => {
+    pathNow = path;
+    if (ctx.engine.sky?.data.cultures) namesReady = true;
+    paintLive();
+    ctx.setSettings(settingsRows);
+  };
+
+  /** The Contents: the charts, and the planets of the chart that is walked, each with its placement. */
+  const contents = () => {
+    if (!data) return [];
+    const list = [...charts.values()];
+    const listing = (c: { rec: ChartRecord }): ChartListing => ({ id: c.rec.id, label: c.rec.label, own: c.rec.id === YOU });
+    const walkedChart = charts.get(standing[0] ?? '') ?? charts.get(YOU) ?? charts.get('jung') ?? list[0];
+    const planets = walkedChart
+      ? data.order.bodies.filter((k) => walkedChart.chart.bodies[k as BodyKey]).map((k) => ({ key: k, name: data!.bodies[k].name, placement: placeIn(walkedChart.chart, k) }))
+      : [];
+    return astrologyContentsGroups(list.map(listing), walkedChart ? listing(walkedChart) : null, planets, standing, (p) => goPath(p));
   };
 
   return {
     enter(path) {
       inLens = true;
-      astrologyOptions(path);
+      standing = path;
+      syncSettings(path);
+      ctx.setControls(null);
+      ctx.pane.contents('Astrology', contents);
       if (data) { render(path); syncOrbits(); return; }
       if (failed) return;
       const token = ++loadToken;
-      ctx.panel.open('Astrology', [el('p', { class: 'lp-sub', text: 'Loading…' })], { height: 'full' });
+      ctx.pane.load({ key: 'astrology/loading', eyebrow: 'Astrology', nodes: [el('p', { class: 'lp-sub', text: 'Loading…' })] });
       loadLensData<AstrologyData>('astrology').then((d) => {
         // the user left while the data loaded (or left and came back: the newer load renders): nothing reopens
         if (!inLens || token !== loadToken) return;
         data = d;
         refreshCharts();
-        astrologyOptions(path);
+        syncSettings(path);
         render(path);
         syncOrbits();
       }).catch((err) => {
@@ -598,7 +604,7 @@ export function mount(ctx: LensContext): LensInstance {
         // a failure after leaving is not shown; it is not remembered either, so the next enter tries again
         if (!inLens || token !== loadToken) return;
         failed = true;
-        ctx.panel.replace([el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })]);
+        ctx.pane.load({ key: 'astrology/unavailable', eyebrow: 'Astrology', nodes: [el('p', { class: 'lp-error', text: 'The astrology data is not available in this build.' })] });
       });
     },
     leave() {
@@ -609,9 +615,10 @@ export function mount(ctx: LensContext): LensInstance {
       orbitsBody = null;
       orbits.set(null);
       ctx.setControls(null);
+      ctx.setSettings(null);
     },
     update(dt) {
-      if (!namesReady && ctx.engine.sky?.data.cultures) astrologyOptions(pathNow);
+      if (!namesReady && ctx.engine.sky?.data.cultures) { namesReady = true; ctx.refreshSettings(); }
       paintLive();
       syncOrbits();
       orbits.update(ctx.engine.sky ?? null, dt, ctx.engine.reduced);

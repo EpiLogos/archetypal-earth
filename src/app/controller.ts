@@ -20,6 +20,7 @@ import { dismissal, type DismissFacts } from '../shell/dismiss';
 import { DEEP_FIELDS } from '../lenses/deep-fields';
 import { lensDef, lensOf, PANEL_LOADERS, type LensChrome, type LensContext, type LensId, type LensInstance, type LensPane } from '../shell/lens';
 import { modeOptions, optionAction } from '../ui/mode-options';
+import { SettingsPopover } from '../shell/settings-pop';
 import { filterEq, isEmpty, maskOf, type FieldFilter } from '../shell/filter';
 import { lensContract, textsContract, type LensContract, type LensData } from '../lenses/contract';
 import { shiftX } from '../shell/layout';
@@ -133,6 +134,8 @@ export class Controller {
   private root: HTMLElement;
   private passages: ReturnType<PassageSheet['bridge']>;
   private viewControl: ViewControl;
+  /** the ⚙ of the View: what the standing lens lets the visitor set, as a popover under the control */
+  private settingsPop: SettingsPopover;
   /** true while the graph mode (not the globe) is the main view */
   private graphMode = false;
   private pauseTimer = 0;
@@ -286,6 +289,7 @@ export class Controller {
 
     // the graph: a second view of the same field, between the globe and the quiet overlay
     this.viewControl = new ViewControl({ onView: (v) => this.viewTo(v), onSettings: () => this.openSettings() });
+    this.settingsPop = new SettingsPopover(document.body, () => this.syncSettings());
 
     const redbook = redbookData;
     if (redbook) for (const stop of redbook.stops) this.redbookStops.add(stop.id);
@@ -639,7 +643,7 @@ export class Controller {
     return {
       searchOpen: this.search.isOpen,
       menuOpen: this.shell.menuOpen,
-      popoverOpen: !!document.querySelector('details.mode-options[open]'),
+      popoverOpen: !!document.querySelector('details.mode-options[open]') || this.settingsPop.isOpen,
       youOpen: this.you.isOpen,
       passageOpen: this.passage.isOpen,
       // a panel lens with its sheet (or its reading in the pane) on screen; with it hidden, or while gazing at a planet, the stack passes it by
@@ -653,8 +657,9 @@ export class Controller {
     };
   }
 
-  /** An open Options popover closes and hands focus back to its button (a <details> does not close on Escape by itself). */
+  /** An open popover closes and hands focus back to its button (a <details> does not close on Escape by itself). */
   private closePopover() {
+    if (this.settingsPop.isOpen) { this.settingsPop.close(); this.viewControl.gearButton.focus({ preventScroll: true }); return; }
     const d = document.querySelector<HTMLDetailsElement>('details.mode-options[open]');
     if (!d) return;
     d.removeAttribute('open');
@@ -1173,6 +1178,8 @@ export class Controller {
       panel: this.panel,
       setContext: (t) => { if (this.activeLens === id) this.shell.setContext(t); },
       setControls: (n) => { if (this.activeLens === id) this.setLensOptions(n); },
+      setSettings: (build) => { if (this.activeLens === id || !build) this.settingsPop.set(build); },
+      refreshSettings: () => this.settingsPop.refresh(),
       pane: this.lensPane,
       navigate: (st) => this.navigate(st),
       filter: () => this.filter,
@@ -1316,10 +1323,10 @@ export class Controller {
 
   private closeSheet() {
     const s = this.state;
-    // the reading a panel lens put in the pane: it is hidden, held for the next time it is asked for, and the lens stays
-    if (this.deep.isLensReading && this.activeLens) { this.paneRevealed = false; this.deep.hide(); return; }
+    // a card or a thing at a planet (Astrology): its reading comes down and the planet stays held with its rings
     if (this.localSheetOpen && s.lens?.id === 'astrology' && s.sky?.body) {
       this.localSheetOpen = false;
+      this.lensPane.hide();
       this.panel.hide();
       return;
     }
@@ -1334,10 +1341,13 @@ export class Controller {
           return n;
         })()
         : astrologyLive({ culture: s.sky?.culture });
+      this.lensPane.hide();
       if (stateEq(next, s)) this.panel.close();
       else this.navigate(next);
       return;
     }
+    // the reading a panel lens put in the pane: it is hidden, held for the next time it is asked for, and the lens stays
+    if (this.deep.isLensReading && this.activeLens) { this.paneRevealed = false; this.deep.hide(); return; }
     this.panel.hide();
   }
 
@@ -1401,7 +1411,12 @@ export class Controller {
     if (!spec) return;
     // every entry is a request to read: a lens that holds its reading until it is asked for (a panel lens) shows it now, even
     // when the entry carried the visitor into another lens of the same mode (Theory ↔ Dynamics)
-    const groups = spec.groups().map((g) => ({ ...g, items: g.items.map((it) => ({ ...it, onPick: () => { it.onPick(); if (this.activeLens) this.lensPane.reveal(); } })) }));
+    // (a pick that leads to no reading, a chart's sky, leaves the Contents no reason to stay over it)
+    const groups = spec.groups().map((g) => ({ ...g, items: g.items.map((it) => ({ ...it, onPick: () => {
+      it.onPick();
+      if (this.activeLens) this.lensPane.reveal();
+      if (this.deep.isContentsOpen && !this.deep.isLensReading) this.deep.hideContents();
+    } })) }));
     this.deep.showContents(spec.title, groups);
   }
 
@@ -2140,18 +2155,20 @@ export class Controller {
     }
   }
 
-  /** The ⚙ answers while the graph's settings or a lens's Options stand on screen. */
+  /** The ⚙ answers while the graph's settings, a lens's settings (the names a sky is read in) or a lens's Options stand on screen. */
   private settingsTarget(): HTMLElement | null {
     if (this.graphMode) return document.querySelector<HTMLElement>('.gv-tools .gvt-settings');
+    if (this.settingsPop?.available) return this.viewControl.gearButton;
     return this.shell.root.querySelector<HTMLElement>('details.mode-options > summary');
   }
 
   private syncSettings() {
-    this.viewControl?.setSettings(!!this.settingsTarget());
+    this.viewControl?.setSettings(!!this.settingsTarget(), !this.graphMode && !!this.settingsPop?.available);
   }
 
-  /** Open the settings of what is on screen: the graph's panel, or the lens's Options popover. */
+  /** Open the settings of what is on screen: the graph's panel, the lens's popover, or the lens's Options. */
   openSettings() {
+    if (!this.graphMode && this.settingsPop.available) { this.settingsPop.toggle(); return; }
     const t = this.settingsTarget();
     if (!t) return;
     if (t.tagName === 'SUMMARY') {

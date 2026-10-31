@@ -189,7 +189,7 @@ export function installSampler() {
       plates,
       labelVisible: !!lab && lab.classList.contains('on') && boxShown(lab),
       fieldFilter: boxShown(document.querySelector('.sm-filter')),
-      lensPanel: boxShown(document.querySelector('.lens-panel')),
+      lensPanel: boxShown(document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]')),
       classes: ['sky-gazing', 'po-holding', 'sky-on', 'sky-ready', 'interacted'].filter((c) => body.classList.contains(c)),
     });
   });

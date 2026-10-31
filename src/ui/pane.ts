@@ -70,8 +70,8 @@ export function paneFrame(o: PaneFrameOptions): PaneFrame {
 }
 
 /** The walk's stepper under a reading in the pane: the neighbours either side, and where in the walk the visitor stands. */
-export function paneStepper(label: { prev: string; next: string }, at: string, onPrev: () => void, onNext: () => void): Node[] {
-  const prev = el('button', { type: 'button', 'aria-label': label.prev, onclick: onPrev }, [icon('back', 14)]);
-  const next = el('button', { type: 'button', 'aria-label': label.next, onclick: onNext }, [icon('next', 14)]);
+export function paneStepper(label: { prev: string; next: string }, at: string, onPrev: () => void, onNext: () => void, off: { prev?: boolean; next?: boolean } = {}): Node[] {
+  const prev = el('button', { type: 'button', 'aria-label': label.prev, disabled: off.prev, onclick: onPrev }, [icon('back', 14)]);
+  const next = el('button', { type: 'button', 'aria-label': label.next, disabled: off.next, onclick: onNext }, [icon('next', 14)]);
   return [el('div', { class: 'th-step pane-step' }, [prev, el('span', { class: 'th-count pane-count', text: at }), next])];
 }

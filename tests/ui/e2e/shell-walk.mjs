@@ -35,18 +35,20 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
     check(st.h1 === 1, `${s.name}: ${id} keeps one h1`, String(st.h1));
     if (out) await page.screenshot({ path: path.join(out, `${s.name}-${id}.png`) });
   }
-  // the last lens is a panel lens. Closing its reading (the sheet) stays in the mode and keeps its Options; only the next
+  // the last lens reads in the pane. Closing its reading stays in the mode and keeps its Contents; only the next
   // Escape, with nothing left open, steps out to the Field (the dismissal stack: reading, then lens, then Field)
   const last = lenses.at(-1);
-  await page.click('.sh-controls details.mode-options > summary');
-  await page.locator('.sh-controls .mode-options-body button').filter({ hasText: /^Open / }).first().click();
-  await page.waitForTimeout(900);
-  check(await page.evaluate(() => !!document.querySelector('.lens-panel:not([hidden])')), `${s.name}: the ${last} sheet is open before Escape`);
+  await page.waitForSelector('.sh-contents', { timeout: 15000 });
+  await page.click('.sh-contents');
+  await page.waitForSelector('.dp-contents-pane li button', { timeout: 8000 });
+  await page.locator('.dp-contents-pane li button').first().click();
+  await page.waitForTimeout(1200);
+  check(await page.evaluate(() => document.body.classList.contains('pane-reading')), `${s.name}: the ${last} reading is open before Escape`);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1500);
   check(await page.evaluate(() => document.body.dataset.lens) === last, `${s.name}: Escape keeps the mode (${last})`);
-  check(await page.evaluate(() => !document.querySelector('.lens-panel:not([hidden])')), `${s.name}: Escape hid the sheet`);
-  check(await page.evaluate(() => !!document.querySelector('.sh-controls .mode-options')), `${s.name}: the Options remain after Escape`);
+  check(await page.evaluate(() => !document.body.classList.contains('pane-reading')), `${s.name}: Escape closed the reading`);
+  check(await page.evaluate(() => !!document.querySelector('.sh-contents')), `${s.name}: the Contents remain after Escape`);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1500);
   check(await page.evaluate(() => document.body.dataset.lens) === 'field', `${s.name}: the next Escape steps out to the Field`);

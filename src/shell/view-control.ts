@@ -61,8 +61,13 @@ export class ViewControl {
     document.body.dataset.mode = graph ? 'graph' : 'earth';
   }
 
-  /** The ⚙ shows only while something answers it. */
-  setSettings(available: boolean) {
+  /**
+   * The ⚙ shows only while something answers it. `own` is a lens's settings popover (the ⚙ is then its only way in, so a phone
+   * keeps it); the graph's panel and a lens's Options stand on a phone's screen themselves.
+   */
+  setSettings(available: boolean, own = false) {
     this.gearButton.hidden = !available;
+    if (own) this.gearButton.dataset.own = ''; else delete this.gearButton.dataset.own;
+    document.body.classList.toggle('view-gear', own && available);
   }
 }

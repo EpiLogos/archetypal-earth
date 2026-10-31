@@ -64,6 +64,10 @@ export interface LensContext {
   setContext(text: string): void;
   /** a small row of the lens's own controls, placed and styled by the shell; null clears it */
   setControls(nodes: Node[] | null): void;
+  /** what the lens lets the visitor set, drawn in the ⚙ popover of the View control (rows built when it opens); null takes it away */
+  setSettings(build: (() => Node[]) | null): void;
+  /** the ⚙ popover is open and the lens's choices changed: draw its rows again */
+  refreshSettings(): void;
   /** the reading pane: the lens's Contents and its readings (H5) */
   pane: LensPane;
   navigate(state: AppState): void;

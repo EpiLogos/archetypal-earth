@@ -11,7 +11,7 @@
 .mode-opt-ico { display: block; transition: transform .28s var(--ease, ease); }
 .mode-options[open] .mode-opt-ico { transform: rotate(90deg); color: var(--core); }
 /* the popover: the shell menu's surface, radius, border and shadow; anchored under the Options icon, left-aligned with the title */
-.mode-options-body, .aion-choices {
+.mode-options-body, .aion-choices, .settings-pop {
   position: absolute; top: calc(100% + 8px); left: 0; z-index: 30;
   width: min(320px, calc(100vw - 2 * var(--shell-x, 22px))); max-height: min(70vh, 520px); overflow-y: auto; overscroll-behavior: contain;
   display: grid; align-content: start; gap: 2px; padding: 8px 8px 12px;
@@ -21,10 +21,14 @@
   scrollbar-width: thin; scrollbar-color: rgb(var(--core-rgb) / .25) transparent;
   animation: sm-in .28s var(--ease);
 }
-.mode-options-body::-webkit-scrollbar, .aion-choices::-webkit-scrollbar { width: 6px; }
+.mode-options-body::-webkit-scrollbar, .aion-choices::-webkit-scrollbar, .settings-pop::-webkit-scrollbar { width: 6px; }
 .mode-options-body::-webkit-scrollbar-track, .aion-choices::-webkit-scrollbar-track { background: transparent; }
 .mode-options-body::-webkit-scrollbar-thumb, .aion-choices::-webkit-scrollbar-thumb { background: rgb(var(--core-rgb) / .25); border-radius: 3px; }
 .mode-opt-grab { display: none; }
+/* the View's settings: the same popover, fixed under the View control at the right, a sheet on a phone */
+.settings-pop { position: fixed; top: 58px; left: auto; right: 22px; width: min(320px, calc(100vw - 44px)); z-index: 44; }
+.settings-pop[hidden] { display: none; }
+@media (max-width: 720px) { .settings-pop { top: auto; right: 0; } }
 .mode-opt-group { display: grid; gap: 2px; padding: 6px 0 4px; }
 .mode-opt-group + .mode-opt-group { border-top: 1px solid var(--hair); margin-top: 6px; padding-top: 10px; }
 .mode-opt-field, .aion-choices label { display: grid; gap: 4px; min-width: 0; }
@@ -62,7 +66,7 @@
 .mode-options-body .rb-modes button { display: block; width: 100%; text-align: left; padding: 8px 0; }
 /* a phone: the same popover as a bottom sheet (the shell menu's sheet), rows at 48px */
 @media (max-width: 720px) {
-  .mode-options-body, .aion-choices {
+  .mode-options-body, .aion-choices, .settings-pop {
     position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: auto; max-width: none; max-height: 70vh;
     border-radius: 20px 20px 0 0; border-bottom: 0; padding: 8px 10px calc(16px + env(safe-area-inset-bottom));
     z-index: 45; background-color: rgb(var(--deep-rgb) / 0.9); box-shadow: 0 -20px 60px rgb(0 0 0 / 0.5);

@@ -54,7 +54,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   const hashBefore = st.hash;
   // (dispatched on the control itself: two cards may overlap on a phone, and a click at a point reaches the top one)
   await page.evaluate(() => document.querySelector('.po-card-decan').click());
-  await page.waitForSelector('.lens-panel:not([hidden]) .cr', { timeout: 10000 });
+  await page.waitForSelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"] .cr', { timeout: 10000 });
   const reading = await page.evaluate(() => ({
     title: document.querySelector('.cr-title')?.textContent, sign: !!document.querySelector('.cr-sign svg'),
     tint: getComputedStyle(document.querySelector('.cr')).getPropertyValue('--cr-tint').trim(),
@@ -67,7 +67,7 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-mars-card.png`) });
 
   // closing the reading leaves the rings standing
-  await page.click('.lens-panel .lp-close');
+  await page.click('section.deep.pane:not(.passage):not(.you-sheet) .dp-close');
   await page.waitForTimeout(700);
   st = await state(page);
   check(st.cards.length === 12 && st.phase === 'approach', `${s.name}: closing the reading returns to the planet with its rings`, `${st.cards.length} cards, ${st.phase}`);
@@ -82,10 +82,10 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   check(st.cards.length === 0 && st.sats > 0, `${s.name}: Uranus has archetypes and no card`, `${st.cards.length} cards, ${st.sats} satellites`);
   // …and the Abyss Crowley's list gives it, as the words alone
   await page.locator('.po-sat', { hasText: 'The Abyss' }).click({ force: true });
-  await page.waitForSelector('.lens-panel:not([hidden])', { timeout: 10000 });
-  const abyss = await page.evaluate(() => document.querySelector('.lens-panel .lp-body')?.innerText ?? '');
+  await page.waitForSelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]', { timeout: 10000 });
+  const abyss = await page.evaluate(() => document.querySelector('section.deep.pane:not(.passage):not(.you-sheet) .dp-article')?.innerText ?? '');
   check(/Abyss/.test(abyss) && /Herschel/.test(abyss) && /pdf p111/.test(abyss), `${s.name}: the Abyss reads from Crowley's words, placed`, abyss.slice(0, 60).replace(/\n/g, ' '));
-  await page.click('.lens-panel .lp-close');
+  await page.click('section.deep.pane:not(.passage):not(.you-sheet) .dp-close');
 
   // the Earth, held like any body (the camera goes in to it): the four elements beside it, the Tens and its elemental Atu round it
   await page.evaluate(() => window.__earth.ctl.openBody('terra'));

@@ -42,13 +42,15 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   try { await page.waitForFunction(() => location.hash === '#/astrology/you', null, { timeout: 15000 }); } catch { console.log('form says:', await page.evaluate(() => [location.hash, document.querySelector('.as-errors')?.textContent, [...document.querySelectorAll('.as-form input')].map((i) => i.type + '=' + i.value).join(' ')])); throw new Error('no chart'); }
   await page.waitForTimeout(2000);
   check(await page.evaluate(() => location.hash) === '#/astrology/you', `${s.name}: casting lands on the whole birth sky`, await page.evaluate(() => location.hash));
-  // the walk is the Options action
-  await page.locator('.sh-controls details.mode-options > summary').click();
-  await page.locator('.sh-controls details.mode-options[open] .mode-opt-row', { hasText: 'Walk the planets' }).first().click();
-  try { await page.waitForFunction(() => location.hash === '#/astrology/you/moon', null, { timeout: 15000 }); } catch { throw new Error('the Walk the planets action did not open the walk: ' + await page.evaluate(() => location.hash)); }
+  // the walk is the Contents' planets: the first of them opens the walk at the Moon
+  if (s.mobile && await page.evaluate(() => document.body.classList.contains('pane-reading'))) await page.keyboard.press('Escape');
+  await page.waitForTimeout(500);
+  if (!(await page.locator('.dp-contents-pane li button').first().isVisible())) await page.click(s.mobile && await page.locator('.pane-contents-tool').isVisible() ? '.pane-contents-tool' : '.sh-contents');
+  await page.locator('.dp-contents-pane li button', { hasText: /^Moon/ }).first().click();
+  try { await page.waitForFunction(() => location.hash === '#/astrology/you/moon', null, { timeout: 15000 }); } catch { throw new Error('the Contents planet did not open the walk: ' + await page.evaluate(() => location.hash)); }
   await page.waitForTimeout(2500);
-  const first = await page.evaluate(() => ({ hash: location.hash, quotes: document.querySelectorAll('.lens-panel blockquote').length, cites: [...document.querySelectorAll('.lens-panel .q-cite')].map((c) => c.textContent).slice(0, 3), who: [...document.querySelectorAll('.as-cmp-who')].map((x) => x.textContent), stored: localStorage.getItem('aae.practice.v1.charts') ?? '' }));
-  check(first.hash === '#/astrology/you/moon', `${s.name}: Walk the planets opens the walk at its first planet`, first.hash);
+  const first = await page.evaluate(() => ({ hash: location.hash, quotes: document.querySelectorAll('.dp-article blockquote').length, cites: [...document.querySelectorAll('.dp-article .q-cite')].map((c) => c.textContent).slice(0, 3), who: [...document.querySelectorAll('.as-cmp-who')].map((x) => x.textContent), stored: localStorage.getItem('aae.practice.v1.charts') ?? '' }));
+  check(first.hash === '#/astrology/you/moon', `${s.name}: a Contents planet opens the walk at the Moon`, first.hash);
   check(first.quotes >= 3 && first.cites.every((c) => /(pdf p|p\. )\d+/.test(c)), `${s.name}: the step quotes the corpus with cites`, `${first.quotes} quotes · ${first.cites.join(' | ')}`);
   check(first.who.includes('You') && first.who.includes('C. G. Jung'), `${s.name}: your place stands beside Jung's`, first.who.join(', '));
   check(first.stored.includes(BIRTH.date), `${s.name}: the chart is kept in this browser's storage`);

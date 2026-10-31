@@ -160,6 +160,7 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
 @media (max-width: 760px) {
   :root { --shell-x: 14px; --shell-y: 12px; --shell-below: 66px; }
   .shell { max-width: calc(100vw - 2 * var(--shell-x) - 100px); }
+  body.view-gear .shell { max-width: calc(100vw - 2 * var(--shell-x) - 144px); }
   .sh-lens { height: var(--tap); padding: 0 14px 0 12px; }
   .sh-title { margin-top: 10px; font-size: 1.3rem; }
   .sh-controls { font-size: 11px; }
@@ -170,11 +171,11 @@ body.panel-open .reveal { opacity: 0 !important; pointer-events: none !important
   .sh-corner { gap: 2px; }
   .sh-corner .sh-corner-btn { min-width: var(--tap); min-height: var(--tap); }
   .sh-corner .sg-key { display: none; }
-  /* a phone's segments are 44px targets and carry no names; the ⚙ is not drawn (the lens's Options and the graph's Settings stay on screen) */
+  /* a phone's segments are 44px targets and carry no names; the ⚙ is drawn only where it is the way in to a lens's settings (the graph's Settings and a lens's Options stay on screen) */
   .vc-segs { height: var(--tap); padding: 0; gap: 0; border: 0; box-shadow: inset 0 0 0 1px var(--hair); border-radius: 22px; }
   .vc-seg, .vc-seg.on { height: var(--tap); min-width: var(--tap); padding: 0; border-radius: 22px; }
   .vc-seg.on .vc-name { display: none; }
-  .sh-corner .vc-gear { display: none; }
+  .sh-corner .vc-gear:not([data-own]) { display: none; }
 
   .shell-menu.sheet {
     left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 86vh; border-radius: 20px 20px 0 0; border-bottom: 0;

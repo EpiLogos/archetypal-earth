@@ -75,10 +75,10 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
 
   // 2. a card opens at the Earth; the sky stays held
   await page.evaluate(() => document.querySelector('.po-card').click());
-  await page.waitForSelector('.lens-panel:not([hidden]) .cr', { timeout: 10000 });
+  await page.waitForSelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"] .cr', { timeout: 10000 });
   st = await read(page);
   check(st.phase === 'approach' && /#\/sky\/terra$/.test(st.hash), `${s.name}: a card reads at the Earth, no gaze and no route change`, `${st.phase} ${st.hash}`);
-  await page.click('.lens-panel .lp-close');
+  await page.click('section.deep.pane:not(.passage):not(.you-sheet) .dp-close');
   await page.waitForTimeout(700);
 
   // 3. zoom in toward the Earth: still Astrology with the cards, until the Field's own edge

@@ -268,14 +268,14 @@ async function flowA(page, M, R, cfg) {
 
   if (cfg.natal) {
     // the sheet's own close: X on the sheet must not put the shell in Field
-    const x = page.locator('.lens-panel .lp-close').first();
+    const x = page.locator('section.deep.pane:not(.passage):not(.you-sheet) .dp-close').first();
     if (await x.isVisible().catch(() => false)) {
       M.sheetX = await markEvent(page);
-      R.sheetX = '.lens-panel .lp-close';
+      R.sheetX = 'section.deep.pane:not(.passage):not(.you-sheet) .dp-close';
       await x.click({ timeout: 8000 }).catch((e) => { R.sheetWhy = e.message.split('\n')[0]; });
       await page.waitForTimeout(1500);
       M.sheetEnd = await markEvent(page);
-    } else R.sheetWhy = 'no visible sheet close button (.lens-panel .lp-close)';
+    } else R.sheetWhy = 'no visible sheet close button (section.deep.pane:not(.passage):not(.you-sheet) .dp-close)';
   }
 }
 
