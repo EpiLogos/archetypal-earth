@@ -21,6 +21,7 @@ import { skyAddresses, parseRank, parseCourt } from './lib/sky-address.mjs';
 import { workDates, buildAttestations } from './lib/attest.mjs';
 import { applyQuoteFixes } from './lib/quote-fixes.mjs';
 import { citeYear } from './lib/cite-year.mjs';
+import { readerBody, readerTitle } from './lib/reader-text.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -54,6 +55,7 @@ if (!fs.existsSync(path.join(VAULT, 'wiki'))) {
 // ---------- color / blend helpers ----------
 const hex2rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const rgb2hex = (c) => '#' + c.map((x) => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2, '0')).join('');
+
 function blendPalettes(items) {
   const tot = items.reduce((s, i) => s + i.w, 0);
   const out = {};
@@ -364,7 +366,7 @@ function guessYear(display) {
 for (const n of instNotes.filter((x) => !x.failed)) {
   const d = n.data;
   const id = n.slug;
-  const title = fixText(collapse(plain(d.title || '')), `occ:${id}.title`);
+  const title = fixText(readerTitle(collapse(plain(d.title || ''))), `occ:${id}.title`);
   if (!title) { skip('instance', id, 'no title'); continue; }
   const primaryRaw = linkTargets(d.instance_of)[0];
   if (!primaryRaw) { skip('instance', id, 'no instance_of'); continue; }
@@ -432,7 +434,7 @@ for (const n of instNotes.filter((x) => !x.failed)) {
   // the note's own first engagement hints which corpus completes a quote whose line names no volume
   const jung = asList(d.jung_engagement).map(parseCite).filter((c) => c.work);
   const parsed = parseInstanceBody(n.body, { workHint: jung[0]?.work });
-  parsed.body = parsed.body.map((b, k) => fixText(b, `occ:${id}.body[${k}]`));
+  parsed.body = readerBody(parsed.body).map((b, k) => fixText(b, `occ:${id}.body[${k}]`));
   if (parsed.quote) parsed.quote = fixText(parsed.quote, `occ:${id}.quote`);
   let yearRange;
   const yr = Array.isArray(d.year_range) ? d.year_range.map(Number) : null;

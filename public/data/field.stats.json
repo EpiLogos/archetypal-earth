@@ -1019,15 +1019,15 @@
       "words": 50544,
       "cached": true
     },
-    "stringsChanged": 186,
-    "changes": 590,
+    "stringsChanged": 181,
+    "changes": 585,
     "byKind": {
-      "join": 524,
-      "curated": 50,
+      "join": 523,
+      "curated": 46,
       "reflow": 15,
       "hyphen-break": 1
     },
-    "unique": 408,
+    "unique": 407,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -1062,28 +1062,6 @@
           "occ:filius-regis-mystagogue-lambspringk-musaeum-1678.quote",
           "occ:leonardo-st-anne-virgin-child-1510.body[0]",
           "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[1]"
-        ]
-      },
-      {
-        "kind": "curated",
-        "before": "v century",
-        "after": "V century",
-        "count": 8,
-        "where": [
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.title",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.body[0]",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote"
-        ]
-      },
-      {
-        "kind": "curated",
-        "before": "B.c",
-        "after": "B.C.",
-        "count": 7,
-        "where": [
-          "occ:astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century.quote",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote",
-          "occ:burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175.quote"
         ]
       },
       {
@@ -1128,6 +1106,28 @@
           "occ:lion-rose-blood-khunrath-chaos-1597.body[0]",
           "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
           "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "v century",
+        "after": "V century",
+        "count": 6,
+        "where": [
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.title",
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.body[0]",
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote"
+        ]
+      },
+      {
+        "kind": "curated",
+        "before": "B.c",
+        "after": "B.C.",
+        "count": 5,
+        "where": [
+          "occ:astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century.quote",
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote",
+          "occ:burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175.quote"
         ]
       },
       {
@@ -3067,15 +3067,6 @@
         "count": 1,
         "where": [
           "occ:self-knowledge-theosebeia-zosimos-alexandria-3c.body[0]"
-        ]
-      },
-      {
-        "kind": "join",
-        "before": "I n.",
-        "after": "In.",
-        "count": 1,
-        "where": [
-          "occ:resurrection-gloria-mundi-stone-reborn-1622.body[1]"
         ]
       },
       {

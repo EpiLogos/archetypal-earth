@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T10:31:58.189Z",
+  "generatedAt": "2026-10-31T10:36:00.639Z",
   "licence": {
     "plates": "The facsimile plates are copyrighted pages of the Norton/Liber Novus facsimile (W. W. Norton, 2009). The site’s Commons-only provenance law applies to anything shipped or committed: the plates therefore never enter git and never enter dist. They are referenced as LOCAL-ONLY runtime assets, read at runtime from the owner’s own vault copy over a dev-server-only route; any served build degrades gracefully to a cited note.",
     "text": "The mode’s translated text comes from the vault’s Red Book harvest (Reader-edition English, folio/ms/pdf-cited) and follows the vault’s quotation law; translation quotes are cited to the Reader pagination as the vault cites them.",
@@ -78,11 +78,21 @@
       "id": "liber-novus-soul-white-bird-refinding-fol2r",
       "sectionId": "flood-and-soul",
       "plate": "p0019.jpg",
-      "plateCaption": "illuminated initial D of \"Die Wiederfindung der Seele Cap I\" — a white bird (the soul) on a dark blue ground — heading the chapter; lower right the S initial of \"Seele und Gott Cap II.\""
+      "plateSize": [
+        1778,
+        2370
+      ],
+      "plateCaption": "/ii(r) spread): illuminated initial D of \"Die Wiederfindung der Seele Cap I\" — a white bird (the soul) on a dark blue ground — heading the chapter; lower right the S initial of \"Seele und Gott Cap II.\""
     },
     {
       "id": "liber-novus-descent-into-hell-cave-fol3v",
-      "sectionId": "flood-and-soul"
+      "sectionId": "flood-and-soul",
+      "plate": "p0024.jpg",
+      "plateSize": [
+        1778,
+        2367
+      ],
+      "plateCaption": "/iv(r)): two paintings — above, a small dark panel with a glowing red sun-disc in a cavernous field; below, a larger blue-gray cave scene with a white-robed figure bending toward a red radiant form. The chapter initial \"Höllenfahrt in die Zukunft Cap V\" shows a horned red goggle-face (lion-serpent countenance)."
     },
     {
       "id": "liber-novus-three-prophecies-war-magic-religion-1914",
@@ -92,121 +102,231 @@
       "id": "liber-novus-siegfried-murder-hero-fol4v",
       "sectionId": "siegfried",
       "plate": "p0025.jpg",
-      "plateCaption": "top left, framed illumination of a radiant golden sun-star flanked by two robed figures (the white-silk garden); mid-page the heading \"Heldenmord. Cap VII\"; lower left, a framed mountain landscape at dawn with a tiny chariot-figure on the pass (the murder scene); below, \"Des Gottes Empfängnis Cap VIII\" with flowering border panel."
+      "plateSize": [
+        1778,
+        2424
+      ],
+      "plateCaption": "/iv(v)): top left, framed illumination of a radiant golden sun-star flanked by two robed figures (the white-silk garden); mid-page the heading \"Heldenmord. Cap VII\"; lower left, a framed mountain landscape at dawn with a tiny chariot-figure on the pass (the murder scene); below, \"Des Gottes Empfängnis Cap VIII\" with flowering border panel."
     },
     {
       "id": "liber-novus-coming-god-proclamation-fol4v",
       "sectionId": "elijah-salome",
       "plate": "p0026.jpg",
-      "plateCaption": "a full illuminated page — the proclamation set in white script on a deep red-blue diagonally striped frame, a compass/wind-rose star at the head, a chalice at the foot; opposite, a painted border of red flowers on orange ground."
+      "plateSize": [
+        1778,
+        2388
+      ],
+      "plateCaption": "/v(r)): a full illuminated page — the proclamation set in white script on a deep red-blue diagonally striped frame, a compass/wind-rose star at the head, a chalice at the foot; opposite, a painted border of red flowers on orange ground."
     },
     {
       "id": "liber-novus-elijah-salome-mysterium-fol5v",
       "sectionId": "elijah-salome",
       "plate": "p0028.jpg",
-      "plateCaption": "the famous painting atop the chapter — night-blue mountains, a white-domed columned house at right, Elijah in white-blue robe leading red-robed Salome toward the door, a white bird on the ground before them, and red serpents writhing around all four sides of the frame; above, \"MYSTERIUM\" in gold Gothic on a red-gold chevron band over the great B initial \"Begegnung. Cap. IX.\""
+      "plateSize": [
+        1778,
+        2441
+      ],
+      "plateCaption": "/vi(r)): the famous painting atop the chapter — night-blue mountains, a white-domed columned house at right, Elijah in white-blue robe leading red-robed Salome toward the door, a white bird on the ground before them, and red serpents writhing around all four sides of the frame; above, \"MYSTERIUM\" in gold Gothic on a red-gold chevron band over the great B initial \"Begegnung. Cap. IX.\""
     },
     {
       "id": "liber-novus-crucifixion-salome-healing-fol6v",
       "sectionId": "elijah-salome",
       "plate": "p0031.jpg",
-      "plateCaption": "tiny figures in white and red within the Auflösung initial; the full scene is text-borne — the only surviving image evidence of the mystery in this range."
+      "plateSize": [
+        1778,
+        2385
+      ],
+      "plateCaption": "): tiny figures in white and red within the Auflösung initial; the full scene is text-borne — the only surviving image evidence of the mystery in this range."
     },
     {
       "id": "liber-novus-instruction-crystal-visions-kali-fol6r",
       "sectionId": "elijah-salome",
       "plate": "p0027.jpg",
-      "plateCaption": "\"Die Belehrung Cap X\" — great blue B initial hung with red flame-spikes (the Buddha in the circle of fire) in a dense text spread."
+      "plateSize": [
+        1778,
+        2437
+      ],
+      "plateCaption": "/v(v)): \"Die Belehrung Cap X\" — great blue B initial hung with red flame-spikes (the Buddha in the circle of fire) in a dense text spread."
     },
     {
       "id": "liber-novus-serpents-duel-sun-temple-fol6v",
       "sectionId": "elijah-salome",
       "plate": "p0031.jpg",
-      "plateCaption": "\"Die Auflösung Cap XI\" — illuminated initial inset with a miniature painting of white- and red-robed figures (the serpents' meeting), red marginalia; the book's own \"finis partis primi\" follows at fol. vii(r) (plate p0029)."
+      "plateSize": [
+        1778,
+        2385
+      ],
+      "plateCaption": "/vi(v)): \"Die Auflösung Cap XI\" — illuminated initial inset with a miniature painting of white- and red-robed figures (the serpents' meeting), red marginalia; the book's own \"finis partis primi\" follows at fol. vii(r) (plate p0029)."
     },
     {
       "id": "liber-novus-castle-maiden-red-roses-fol05",
       "sectionId": "elijah-salome",
       "plate": "p0036.jpg",
+      "plateSize": [
+        1778,
+        2399
+      ],
       "plateCaption": "illuminated D of \"Das Schloß im Walde. Cap. II\" — a night-blue castle with lit windows and moon above dark water, painted inside the initial."
     },
     {
       "id": "liber-novus-red-one-joy-devil-fol01",
-      "sectionId": "the-red-one"
+      "sectionId": "the-red-one",
+      "plate": "p0032.jpg",
+      "plateSize": [
+        1778,
+        2419
+      ],
+      "plateCaption": "— the Liber Secundus title \"DIE BILDER DES IRRENDEN\" beneath a great D containing a single red EYE on mosaic-tile ground, a red-blue serpent zigzagging down its edge; p0033.jpg (LS p.2) — \"Der Rote Cap I\" initial painting: tiny green-clad Jung on a red tower, a huge red wing-like shape sweeping the blue sky over water."
     },
     {
       "id": "liber-novus-one-of-the-lowly-tramp-death-fol12",
-      "sectionId": "the-red-one"
+      "sectionId": "the-red-one",
+      "plate": "p0043.jpg",
+      "plateSize": [
+        1778,
+        2452
+      ],
+      "plateCaption": "text pages in Jung's brown-black hand with red rubrics for the tramp's speeches — the Kiniematograph dialogue; no painting in this chapter."
     },
     {
       "id": "liber-novus-death-dark-one-sea-of-dead-fol29",
       "sectionId": "the-red-one",
       "plate": "p0061.jpg",
+      "plateSize": [
+        1778,
+        2462
+      ],
       "plateCaption": "text page with small red-and-green initial at \"Ich schreite um...\" — the sea-of-blood passage and the note \"es war die zweite Nacht des Jahres 1914\" are text-borne here."
     },
     {
       "id": "liber-novus-desert-of-self-fol3r",
       "sectionId": "the-desert",
       "plate": "p0021.jpg",
-      "plateCaption": "illuminated D of \"Die Wüste Cap. IV\" — a small human figure standing within the initial on deep color grounds."
+      "plateSize": [
+        1778,
+        2444
+      ],
+      "plateCaption": "/iii(r)): illuminated D of \"Die Wüste Cap. IV\" — a small human figure standing within the initial on deep color grounds."
     },
     {
       "id": "liber-novus-helios-four-horses-dawn-fol20",
       "sectionId": "the-desert",
       "plate": "p0052.jpg",
+      "plateSize": [
+        1778,
+        2400
+      ],
       "plateCaption": "the great Gothic display page of Dies II — \"Wenn du schläfst, so ruhst du, wie all das was je war...\" in large black and red textura — the sleep through the millennia and the temple chants; no figurative painting."
     },
     {
       "id": "liber-novus-remains-temples-greening-fol33",
       "sectionId": "the-desert",
       "plate": "p0065.jpg",
+      "plateSize": [
+        1778,
+        2467
+      ],
       "plateCaption": "display page of ch. vii — \"Nach Flucht kommt das Licht, damit die Ferne errettet werde von dem Tod\" in large textura with A initials; the greening is text-borne in this range."
     },
     {
       "id": "liber-novus-izdubar-serpent-weave-image-fol36",
       "sectionId": "izdubar",
       "plate": "p0067.jpg",
+      "plateSize": [
+        1778,
+        2445
+      ],
       "plateCaption": "a frontal standing giant filling the page — black-bearded, crowned with bull horns, eyes wide, wearing a blue-black scale corselet and a red kilt patterned with cuneiform-like ornament; his right hand plants a double-axe (the bull-slaying labrys) point-down. The entire ground is a tiled textile of pale-blue serpents interlaced with brown winged dragons on blue; stepped ziggurat-like brick flanks descend at both sides, rows of dark serpents crawling on them; at the bottom, behind a fence, a tiny white-robed human figure with raised arms faces the colossus. Jung's margin inscription records that the image was painted around Christmas 1913 — i.e. BEFORE the Jan 8, 1914 fantasy it \"illustrates\": the painting led the text."
     },
     {
       "id": "liber-novus-izdubar-bull-man-first-day-fol37",
       "sectionId": "izdubar",
       "plate": "p0068.jpg",
+      "plateSize": [
+        1778,
+        2385
+      ],
       "plateCaption": "\"Erster Tag. Cap. VIII.\" — the great E initial on deep-blue starfield with a golden rayed sun-disc at its center and a red-orange serpent coiling down the panel's right edge; the meeting scene itself is text-borne."
     },
     {
       "id": "liber-novus-izdubar-carried-fantasy-egg-fol46",
-      "sectionId": "izdubar"
+      "sectionId": "izdubar",
+      "plate": "p0072.jpg",
+      "plateSize": [
+        1778,
+        2414
+      ],
+      "plateCaption": "— \"Der mächtige fiel, er liegt am Boden\" set in a Ravenna-style red mosaic border of tiny blue figure-tiles, beneath the great apostrophe \"Ach, herrlich äußerlich schöner Freund... wie ganz eins sind Schlange und Gott\"; p0075.jpg (LS p.44) — the wide night painting: star-filled sky between two dark brick pillars over blue mountains, a band of glowing fire-colored light at the horizon, a tiny dark figure with raised arms before it (Images 44/45; Atharva-veda 4,1,4 virility charm cited in legend — the healing of the wounded bull-god)."
     },
     {
       "id": "liber-novus-god-in-egg-incantations-ms50",
-      "sectionId": "the-egg"
+      "sectionId": "the-egg",
+      "plate": "p0081.jpg",
+      "plateSize": [
+        1778,
+        2444
+      ],
+      "plateCaption": "Full-page illumination on a dense red ground: bold blue, white and ochre totemic meander-ornament frames a central blackletter text column opening \"Weihnacht ist gekommen: der Gott ist im Ei...\" — under a blue cloud-arc holding a many-domed temple and a lotus; at the base, a golden egg rests in a dark vessel-niche. Corner-marked \"50\"."
     },
     {
       "id": "liber-novus-izdubar-reborn-from-egg-ms65",
-      "sectionId": "the-egg"
+      "sectionId": "the-egg",
+      "plate": "p0096.jpg",
+      "plateSize": [
+        1778,
+        2424
+      ],
+      "plateCaption": "Rubricated title \"die eröffnung des eies · Cap. XI\"; a square gold block holding a red-and-black interlaced fantastic animal initial A opens the blackletter text: \"Am Abend des dritten tages kniete ich auf dem Teppich nieder u öffnete behutsam das Ei. Wie ein Rauch stieg es daraus empor u plötzlich steht Izdubar vor mir / riesengroß u verwandelt u vollkommen...\" — followed by the sun-monologue in verse lines."
     },
     {
       "id": "liber-novus-anchorite-ammonius-fol15",
       "sectionId": "philemon",
       "plate": "p0046.jpg",
+      "plateSize": [
+        1778,
+        2399
+      ],
       "plateCaption": "\"Der Anachoret. Cap. IV. Dies. I.\" — the great illuminated D set inside a square panel of Ravenna-like mosaic: interlaced red-orange-purple maze bands around a blue field; the eye-opening page of the desert cycle."
     },
     {
       "id": "liber-novus-mandala-four-cardinal-figures-ms105",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0136.jpg",
+      "plateSize": [
+        1778,
+        2381
+      ],
+      "plateCaption": "A four-lobed black-outlined mandala: at center a blue eight-pointed star on a brown-black ring segmented like a zodiac with red/white counter-chips; around it eight scroll-filled lobes in blue, yellow and white beneath red bands; at the cardinal points four small roundels — top: white-robed old man seated in contemplation; left: woman in red robe; right: woman in blue robe; bottom: dark chthonic figure against purple. Corner-marked \"105\"."
     },
     {
       "id": "liber-novus-dead-serpent-umbilical-cord-ms111",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0142.jpg",
+      "plateSize": [
+        1778,
+        2455
+      ],
+      "plateCaption": "Full-page painting: a black serpent patterned with white eye-spots winds up from lower left, head at upper right above a cluster of red cloud-blossoms ringed in red, over a swirling purple-red-and-olive vegetal ground. Blackletter legend above; corner-marked \"111\"."
     },
     {
       "id": "liber-novus-atmavictu-kabir-manikin-ms117",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0148.jpg",
+      "plateSize": [
+        1778,
+        2453
+      ],
+      "plateCaption": "Left half: a tall vertical serpent-dragon in scaled greens, small human arms sprouting in tiers along its body, a black eye and red fanged open mouth at the top, labelled \"ATMAVICTV\"; a pale sun disc floats above. Right half: a dense blackletter text block; beneath it the three small figures with Latin labels; the blackletter legend runs across the foot. Corner-marked \"117\"."
     },
     {
       "id": "liber-novus-cabiri-holy-water-caster-ms123",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0154.jpg",
+      "plateSize": [
+        1778,
+        2381
+      ],
+      "plateCaption": "Gold ground. Upper left: a white domed temple on a small cloud. Upper right: a dark-haired man in a green-and-white striped robe stands on a wide blue-and-white disc beneath a red sun disc, pouring a zigzag stream of holy water from a vessel. Below, dark red-tipped flowers rise from a black earthen band in which the prone dragon's body lies traced with lightning squiggles; water drips onto the blossoms. Corner-marked \"123\"."
     },
     {
       "id": "liber-novus-philemon-magician-baucis-garden-ms139",
@@ -214,15 +334,33 @@
     },
     {
       "id": "liber-novus-lapis-atmavictu-stone-face-ms122",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0153.jpg",
+      "plateSize": [
+        1778,
+        2438
+      ],
+      "plateCaption": "A monumental horned mask-face fills the sheet: orange-red speckled skin, large eyes with blue lids and rayed irises, shaggy black mane and long pointed beard, small dark horns. The ground is cracked cream-and-rose stone strewn with dark fossils — an ammonite, a crinoid frond, bone fragments, a trilobite-like shell, a horn. Inscription \"a der MCMXIX\" at lower left; legend in blackletter across the foot."
     },
     {
       "id": "liber-novus-sigg-memorial-mandala-liverpool-ms159",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0190.jpg",
+      "plateSize": [
+        1778,
+        2459
+      ],
+      "plateCaption": "Square black frame enclosing an orange-red lattice of interlocking triangles; white star-points glint at the lattice crossings. At the center a dark-green eight-pointed star/rose-window holds a white-and-rose layered rosette \"like ruby-colored glass.\" Blackletter dedication beneath. Corner-marked \"159\"."
     },
     {
       "id": "liber-novus-satan-dialogue-absolute-vs-life-ms162",
-      "sectionId": "philemon"
+      "sectionId": "philemon",
+      "plate": "p0193.jpg",
+      "plateSize": [
+        1778,
+        2456
+      ],
+      "plateCaption": "Full page of blackletter dialogue in red (\"I:\") and green (the devil's initial) alternating — the page ends \"ich glaube / du wirst bald am aussterben\" (\"I believe [the dead] will soon become extinct,\" pdf p353). Corner-marked \"162\"."
     },
     {
       "id": "liber-novus-phallos-hap-daimons-of-the-dead-pdf370",
@@ -246,7 +384,13 @@
     },
     {
       "id": "liber-novus-epilogue-1959-ms190",
-      "sectionId": "the-epilogue"
+      "sectionId": "the-epilogue",
+      "plate": "p0221.jpg",
+      "plateSize": [
+        1778,
+        2448
+      ],
+      "plateCaption": "Plain cream page, dense blue ink in Jung's everyday script within a ruled margin, \"1959\" at top left. The final plate of the facsimile (p0223) is a blank endpaper."
     }
   ],
   "genesis": [

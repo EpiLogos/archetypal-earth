@@ -43,12 +43,9 @@ describe('plate inventory never reaches the reader', () => {
   const bodies = walk.flatMap((o) => o.body);
   const leaks = bodies.filter((p) => PLATE_LEAK.test(p.trim()));
 
-  it('the field really carries the leaking paragraphs (PLATE (, Plate (, PLATES (, PLATES:)', () => {
-    expect(leaks.length).toBeGreaterThanOrEqual(20);
-    expect(leaks.some((p) => p.startsWith('PLATES (p0024.jpg'))).toBe(true);
-    expect(leaks.some((p) => p.startsWith('PLATES: p0072.jpg'))).toBe(true);
-    expect(leaks.some((p) => p.startsWith('Plate (p0148.jpg'))).toBe(true);
-    expect(leaks.some((p) => p.startsWith('PLATE (p0046.jpg'))).toBe(true);
+  it('the field carries none of the leaking paragraphs: ingest keeps the vault plate inventory out of every body', () => {
+    expect(leaks).toEqual([]);
+    expect(bodies.filter((p) => PLATE_MARK.test(p))).toEqual([]);
   });
 
   it('readerBody removes every one of them and keeps every other paragraph', () => {
@@ -77,7 +74,7 @@ describe('plate inventory never reaches the reader', () => {
 
   it('a plate note merged into prose leaves the prose: the sentence before the marker stays, the inventory goes', () => {
     const serpent = field.occurrences.find((o) => o.id.endsWith('izdubar-serpent-weave-image-fol36'))!;
-    expect(serpent.body[0]).toContain('PLATE (p0067.jpg');
+    expect(serpent.body[0]).not.toContain('PLATE (p0067.jpg');
     expect(readerBody(serpent.body)[0]).toBe('The one fully worked painting of the Izdubar cycle, inserted at the end of the "great wandering" before First Day.');
     expect(readerBody(serpent.body).join(' ')).not.toMatch(/p0067|LS p\.|PLATE/);
   });

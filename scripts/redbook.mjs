@@ -1,8 +1,8 @@
 // Build public/data/redbook.json — the Red Book mode's data — from
 // curation/redbook.json + public/data/field.json + the vault's Red Book layer.
 // Laws kept here:
-//   · the vault is read-only; plates are looked at (existence, dimensions never
-//     needed) and never copied;
+//   · the vault is read-only; plates are looked at (existence and pixel size) and
+//     never copied;
 //   · plates stay OUT of git and OUT of dist: redbook.json records plate file
 //     names only, and they resolve against a dev-server-only route;
 //   · every stop must be an ingested occurrence with subject "jung";
@@ -20,7 +20,24 @@ export { DEFAULT_VAULT } from './lib/vault.mjs';
 import { DEFAULT_VAULT } from './lib/vault.mjs';
 const normalizer = createNormalizer({ freq: new Map(), english: new Set(), pairs: new Map() });
 const norm = (t) => normalizer.normalize(t, { mode: 'safe' }).text;
-const PLATE_RE = /PLATE \((p\d{4})\.jpg[\s\S]*?\)\s*[:：]\s*([\s\S]+)/;
+// the vault's plate note in an instance file, in each of the forms the notes use: "PLATE (p0046.jpg = LS p.15): …",
+// "PLATES (p0024.jpg = …): …", "PLATES: p0032.jpg (LS p.1) — …", "**Plate (p0081.jpg = ms p. 50, image 50).** …",
+// at the start of a line or inside a paragraph
+const PLATE_RE = /(?:^|\s)\**\s*PLATES?\b[^\n]*?(p\d{4})\.jpg[^\n]*?(?:\)\s*[:：.]?\**|\s—)\s*([^\n]+)/im;
+
+/** The pixel size of a baseline or progressive JPEG, read from its frame header; null when the file is not one. */
+function jpegSize(file) {
+  const b = fs.readFileSync(file);
+  if (b[0] !== 0xff || b[1] !== 0xd8) return null;
+  for (let i = 2; i + 9 < b.length;) {
+    if (b[i] !== 0xff) { i++; continue; }
+    const marker = b[i + 1];
+    const len = b.readUInt16BE(i + 2);
+    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)];
+    i += 2 + len;
+  }
+  return null;
+}
 
 export function buildRedbook({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const curation = JSON.parse(fs.readFileSync(path.join(root, 'curation/redbook.json'), 'utf8'));
@@ -50,21 +67,22 @@ export function buildRedbook({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     if (!o) { errors.push(`stop ${stop.id}: not in field.json`); return stop; }
     if (o.subject !== 'jung') errors.push(`stop ${stop.id}: subject is ${o.subject}, expected jung`);
     if (!sections.has(stop.section)) errors.push(`stop ${stop.id}: unknown section ${stop.section}`);
-    // the vault's own PLATE note in the instance body is the only plate source
+    // a plate the curation names, else the vault's own PLATE note for the instance
     let plate = stop.plate ?? null;
     let plateCaption = stop.plateCaption ?? null;
     if (!plate) {
-      for (const para of o.body ?? []) {
-        const m = PLATE_RE.exec(para);
-        if (m) { plate = `${m[1]}.jpg`; plateCaption = m[2].replace(/\s+/g, ' ').trim() || null; break; }
-      }
+      // the vault's own note for the instance (the field's body no longer carries the vault's plate inventory)
+      const note = path.join(vault, 'wiki/instances', `${stop.id}.md`);
+      const m = fs.existsSync(note) ? PLATE_RE.exec(fs.readFileSync(note, 'utf8')) : null;
+      if (m) { plate = `${m[1]}.jpg`; plateCaption = m[2].replace(/\*\*/g, '').replace(/\s+/g, ' ').trim() || null; }
     }
     if (plate && !/^[a-z0-9_.-]+$/i.test(plate)) { errors.push(`stop ${stop.id}: bad plate name ${plate}`); plate = null; }
     if (plate && !fs.existsSync(path.join(platesDir, plate))) {
       warnings.push(`stop ${stop.id}: plate ${plate} not in the vault; dropped`);
       plate = null; plateCaption = null;
     }
-    return { id: stop.id, sectionId: stop.section, ...(plate ? { plate, ...(plateCaption ? { plateCaption } : {}) } : {}) };
+    const plateSize = plate ? jpegSize(path.join(platesDir, plate)) : null;
+    return { id: stop.id, sectionId: stop.section, ...(plate ? { plate, ...(plateSize ? { plateSize } : {}), ...(plateCaption ? { plateCaption } : {}) } : {}) };
   });
 
   const bearingPath = path.join(vault, 'wiki/maps/red-book-bearing.md');
