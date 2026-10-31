@@ -26,8 +26,14 @@ fs.mkdirSync(shots, { recursive: true });
   const stops = await page.$$eval('.ql-wheel .ql-stop', (els) => els.map((e) => e.getAttribute('aria-label')));
   ok(stops.length === 4, `the opus shows four stage stops on its circle (got ${stops.length})`);
   ok(stops.length === 4 && /nigredo/i.test(stops[0]) && /rubedo/i.test(stops[3]), `the stops run nigredo to rubedo (got ${JSON.stringify(stops)})`);
-  const tabs = await page.$$eval('.th-nav .th-tab', (els) => els.map((e) => e.textContent.trim()));
-  ok(JSON.stringify(tabs) === JSON.stringify(['Opus', 'Operations', 'Matter', 'Elements']), `the four sections are the tabs (got ${JSON.stringify(tabs)})`);
+  // the four sections are the Contents' groups (the tabs they replace are gone from the reading)
+  ok((await page.locator('.th-nav .th-tab').count()) === 0, 'the reading carries no section tabs');
+  await page.click('.sh-contents');
+  await page.waitForTimeout(500);
+  const groups = await page.$$eval('.dp-contents-pane h3.dp-sub', (els) => els.map((e) => e.textContent.trim()));
+  ok(JSON.stringify(groups.slice(0, 4)) === JSON.stringify(['The opus', 'Operations', 'Matter', 'Elements']), `the four sections are the Contents' groups (got ${JSON.stringify(groups)})`);
+  const stageItems = await page.$$eval('.dp-contents-pane li button', (els) => els.slice(0, 5).map((e) => e.textContent.trim().replace(/\d+$/, '')));
+  ok(JSON.stringify(stageItems) === JSON.stringify(['The whole opus', 'Nigredo', 'Albedo', 'Citrinitas', 'Rubedo']), `the Contents list the opus and its four stages (got ${JSON.stringify(stageItems)})`);
   await page.screenshot({ path: `${shots}/01-opus-overview.png` });
   ok(logs.length === 0, `no console errors on the overview (got ${logs.slice(0, 3).join(' | ')})`);
   await ctx.close();
@@ -41,15 +47,15 @@ fs.mkdirSync(shots, { recursive: true });
   await page.click('.ql-wheel .ql-stop >> nth=0');
   await page.waitForTimeout(400);
   ok((await hash(page)) === '#/alchemy/opus/nigredo', `the first stop opens the nigredo stage (got ${await hash(page)})`);
-  ok((await page.textContent('.rb-progress')) === '1 / 4', 'the rail reads "1 / 4" at the first stage');
+  ok((await page.textContent('.pane-foot .pane-count')) === '1 / 4', 'the stepper reads "1 / 4" at the first stage');
   const names = [];
   for (let i = 0; i < 4; i++) {
     names.push((await page.textContent('.ql-head .ql-big'))?.trim());
     await page.screenshot({ path: `${shots}/02-stage-${i + 1}.png` });
-    if (i < 3) { await page.click('.rb-rail button[aria-label="Next"]'); await page.waitForTimeout(300); }
+    if (i < 3) { await page.click('.pane-foot [aria-label="Next stage"]'); await page.waitForTimeout(300); }
   }
-  ok(JSON.stringify(names) === JSON.stringify(['Nigredo', 'Albedo', 'Citrinitas', 'Rubedo']), `the rail walks the four stages in order (got ${JSON.stringify(names)})`);
-  ok((await page.textContent('.rb-progress')) === '4 / 4', 'the rail reads "4 / 4" at the last stage');
+  ok(JSON.stringify(names) === JSON.stringify(['Nigredo', 'Albedo', 'Citrinitas', 'Rubedo']), `the stepper walks the four stages in order (got ${JSON.stringify(names)})`);
+  ok((await page.textContent('.pane-foot .pane-count')) === '4 / 4', 'the stepper reads "4 / 4" at the last stage');
   ok(/^#\/alchemy\/opus\/rubedo$/.test(await hash(page)), `the hash follows the walk (got ${await hash(page)})`);
   ok(logs.length === 0, `no console errors on the walk (got ${logs.slice(0, 3).join(' | ')})`);
   await ctx.close();

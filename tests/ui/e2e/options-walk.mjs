@@ -122,7 +122,7 @@ try {
   // a mode whose Contents stand in the pane (`pane: true`) is entered from its Contents trigger: it has no Options hamburger of its own
   const others = [
     { mode: 'theory', hash: '#/theory', pane: true },
-    { mode: 'alchemy', hash: '#/alchemy' },
+    { mode: 'alchemy', hash: '#/alchemy', pane: true },
     { mode: 'astrology', hash: '#/astrology' },
     { mode: 'redbook', hash: '#/redbook', pane: true },
   ];

@@ -9,7 +9,9 @@ import { icon } from '../ui/icons';
 import { averagePalettes } from '../data/palette';
 import { subjectName, subjectOccurrences, subjectPalette, type Subject } from '../data/model';
 import type { LensContext, LensInstance } from '../shell/lens';
-import { modeOptions, optionAction, optionGroup } from '../ui/mode-options';
+import { paneStepper } from '../ui/pane';
+import { WalkRunner } from '../walk/runner';
+import { alchemyContentsGroups, stagesWalk } from './alchemy-contents';
 import { loadLensData, quoteBlock, type LensQuote } from './ui';
 import { alchemyPath, parseAlchemyRoute, type AlchemyIds, type AlchemyRoute } from './alchemy-route';
 
@@ -29,15 +31,6 @@ interface AlchemyData {
   matter: AlchemyMatter[];
   elements: { line: string; quotes: LensQuote[]; subjects: Subject[] };
 }
-
-type Section = AlchemyRoute['section'];
-/** The four tabs, each with the lens path it stands at (the Opus tab is the overview, the empty path). */
-const SECTIONS: { id: Section; name: string; path: string[] }[] = [
-  { id: 'opus', name: 'Opus', path: [] },
-  { id: 'operations', name: 'Operations', path: ['operations'] },
-  { id: 'matter', name: 'Matter', path: ['matter'] },
-  { id: 'elements', name: 'Elements', path: ['elements'] },
-];
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -117,35 +110,23 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.engine.setEmphasis(sc.rel, pal?.core ?? null, sc.info);
   };
 
-  const show = (nodes: (HTMLElement | null)[], foot?: HTMLElement | null, wide = true) => {
-    const body = nodes.filter((n): n is HTMLElement => !!n);
-    const footNodes = foot ? [foot] : null;
-    if (ctx.panel.isOpen) ctx.panel.replace(body, { foot: footNodes }); else ctx.panel.open('Alchemy', body, { wide, foot: footNodes });
+  /** the route the lens stands at, for the Contents to mark */
+  let standing: AlchemyRoute | null = null;
+  /** the opus's stages are walked by the one runner (past the last comes the first) */
+  const runner = new WalkRunner({ scale: ctx.model.scale, wrap: true });
+  const SNAPSHOT = { u: 0, focus: null, reading: null, centre: null, walk: null };
+
+  /** A reading of this lens: held in the pane until the visitor asks for it (the Contents does), shown at once when it already is. */
+  const show = (nodes: (HTMLElement | null)[], foot?: Node[] | null, engages?: { type: string; id: string }) => {
+    ctx.pane.load({ key: `alchemy/${current}`, eyebrow: 'Alchemy', nodes: nodes.filter((n): n is HTMLElement => !!n), foot: foot ?? null, engages });
   };
 
-  /** Same prev/next circles as Theory's walk and the Red Book rail. */
-  const walkRail = (label: string, prev: () => void, next: () => void, at: string) => el('nav', { class: 'rb-rail', 'aria-label': label }, [
-    el('button', { type: 'button', text: '←', 'aria-label': 'Previous', onclick: prev }),
-    el('span', { class: 'rb-progress', text: at }),
-    el('button', { type: 'button', text: '→', 'aria-label': 'Next', onclick: next }),
-  ]);
-
-  const sectionNav = (section: Section) => el('nav', { class: 'th-nav', 'aria-label': 'Alchemy sections' }, SECTIONS.map((x) =>
-    el('button', { type: 'button', class: 'th-tab', 'aria-current': x.id === section ? 'true' : undefined, text: x.name, onclick: () => ctx.setPath(x.path) })));
+  /** Prev / next under a reading, in the pane's own stepper. */
+  const stepper = (label: string, prev: () => void, next: () => void, at: string) =>
+    paneStepper({ prev: `Previous ${label}`, next: `Next ${label}` }, at, prev, next);
 
   const subjectLink = (s: Subject) => el('button', { type: 'button', class: 'th-link', onclick: () => ctx.focus(s) }, [el('span', { text: subjectName(ctx.model, s) }), icon('next', 14)]);
   const walkLink = (label: string, path: string[]) => el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath(path) }, [el('span', { text: label }), icon('next', 14)]);
-
-  const alchemyOptions = (section: Section) => {
-    ctx.setControls([modeOptions([
-      optionGroup('Walk the work', [
-        optionAction('Opus', () => ctx.setPath([]), { pressed: section === 'opus', description: 'The opus, nigredo to rubedo' }),
-        optionAction('Operations', () => ctx.setPath(['operations']), { pressed: section === 'operations', description: 'The workings of the opus' }),
-        optionAction('Matter', () => ctx.setPath(['matter']), { pressed: section === 'matter', description: 'What the work is done on' }),
-        optionAction('Elements', () => ctx.setPath(['elements']), { pressed: section === 'elements', description: 'Fire, water, earth, air and the fifths' }),
-      ]),
-    ], 'Options')]);
-  };
 
   /** The opus overview: the lens line, the four stages on their circle, the stage list, then the bridge block. */
   const renderOpus = (d: AlchemyData) => {
@@ -159,7 +140,7 @@ export function mount(ctx: LensContext): LensInstance {
           el('span', { class: 'ql-stop-name' }, [el('strong', { text: s.name }), el('span', { text: ` ${s.colour}` })]),
         ]), icon('next', 14)])));
     show([
-      sectionNav('opus'),
+      el('h2', { class: 'dp-title', text: 'Alchemy' }),
       el('p', { class: 'th-line', text: d.line }),
       el('h3', { class: 'as-h3', text: 'The opus' }),
       el('p', { class: 'th-line', text: d.opus.line }),
@@ -175,16 +156,23 @@ export function mount(ctx: LensContext): LensInstance {
   const renderStage = (d: AlchemyData, i: number) => {
     const st = d.opus.stages[i];
     const n = d.opus.stages.length;
-    const go = (k: number) => ctx.setPath(['opus', d.opus.stages[(k + n) % n].id]);
+    // the wheel's stops open their stage; the stepper asks the runner for the neighbour
+    const open = (k: number) => ctx.setPath(['opus', d.opus.stages[(k + n) % n].id]);
+    const go = (delta: number) => {
+      const step = delta > 0 ? runner.next() : runner.prev();
+      const id = step?.stop.subject?.id;
+      if (id) ctx.setPath(['opus', id]);
+    };
     ctx.setContext(`${st.name}, ${st.colour}`);
     const ops = st.operations.map((id) => d.operations.find((o) => o.id === id)).filter((o): o is AlchemyOperation => !!o);
+    // the walk: the runner stands on this stage (it begins here when the opus is entered at a stage)
+    if (runner.active) runner.goto(i); else runner.start(stagesWalk(ctx.model.walkById, d.opus.stages), SNAPSHOT, i);
     show([
-      sectionNav('opus'),
       el('div', { class: 'ql-walk-head' }, [
         el('button', { type: 'button', class: 'link-quiet', text: 'Opus', onclick: () => ctx.setPath([]) }),
         el('span', { class: 'th-count', text: `${i + 1} of ${n}` }),
       ]),
-      opusWheel(d.opus.stages, d.opus.stages.map((s) => famCore(s.family)), go, i, true),
+      opusWheel(d.opus.stages, d.opus.stages.map((s) => famCore(s.family)), open, i, true),
       el('div', { class: 'ql-head' }, [el('span', { class: 'ql-big pos', text: st.name }), el('span', { class: 'ql-name', text: st.colour })]),
       stagePlate(st, 'figure'),
       el('p', { class: 'th-line', text: st.line }),
@@ -200,7 +188,7 @@ export function mount(ctx: LensContext): LensInstance {
         subjectLink({ type: 'family', id: st.family }),
         ...st.subjects.map(subjectLink),
       ]),
-    ], walkRail('Opus stages', () => go(i - 1), () => go(i + 1), `${i + 1} / ${n}`));
+    ], stepper('stage', () => go(-1), () => go(1), `${i + 1} / ${n}`), { type: 'family', id: st.family });
     tuneSubjects([{ type: 'family', id: st.family }], st.name.toLowerCase());
   };
 
@@ -213,7 +201,6 @@ export function mount(ctx: LensContext): LensInstance {
       ? d.opus.stages.find((s) => s.id === (it as AlchemyOperation).stage) : undefined;
     ctx.setContext(it.name);
     show([
-      sectionNav(section),
       el('div', { class: 'ql-walk-head' }, [
         el('button', { type: 'button', class: 'link-quiet', text: section === 'operations' ? 'Operations' : 'Matter', onclick: () => ctx.setPath([section]) }),
         el('span', { class: 'th-count', text: `${i + 1} of ${n}` }),
@@ -225,7 +212,7 @@ export function mount(ctx: LensContext): LensInstance {
       stage ? el('div', { class: 'th-links' }, [walkLink(`${stage.name}, ${stage.colour}`, ['opus', stage.id])]) : null,
       it.subjects.length ? el('h3', { class: 'as-h3', text: 'In the field' }) : null,
       it.subjects.length ? el('div', { class: 'th-links' }, it.subjects.map(subjectLink)) : null,
-    ], walkRail(section === 'operations' ? 'Operations' : 'Matter', () => go(i - 1), () => go(i + 1), `${i + 1} / ${n}`));
+    ], stepper(section === 'operations' ? 'operation' : 'matter', () => go(i - 1), () => go(i + 1), `${i + 1} / ${n}`));
     tuneSubjects(it.subjects, it.name.toLowerCase());
   };
 
@@ -235,7 +222,7 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.setContext(section === 'operations' ? 'Operations' : 'Matter');
     ctx.engine.setEmphasis(null, null);
     show([
-      sectionNav(section),
+      el('h2', { class: 'dp-title', text: section === 'operations' ? 'Operations' : 'Matter' }),
       el('div', { class: 'th-links ql-stops' }, items.map((it) => {
         const stage = section === 'operations' ? d.opus.stages.find((s) => s.id === (it as AlchemyOperation).stage) : undefined;
         return el('button', { type: 'button', class: 'th-link', onclick: () => ctx.setPath([section, it.id]) }, [
@@ -248,7 +235,7 @@ export function mount(ctx: LensContext): LensInstance {
     ctx.setContext('Elements');
     ctx.engine.setEmphasis(null, null);
     show([
-      sectionNav('elements'),
+      el('h2', { class: 'dp-title', text: 'Elements' }),
       el('p', { class: 'th-line', text: d.elements.line }),
       ...d.elements.quotes.map((q) => quoteBlock(q, ctx.passages)),
       d.elements.subjects.length ? el('h3', { class: 'as-h3', text: 'In the field' }) : null,
@@ -259,7 +246,8 @@ export function mount(ctx: LensContext): LensInstance {
 
   const render = (d: AlchemyData, path: string[]) => {
     const r = parseAlchemyRoute(path, idsOf(d));
-    alchemyOptions(r.section);
+    standing = r;
+    current = alchemyPath(r).join('/');
     switch (r.section) {
       case 'opus': {
         const i = r.stage !== undefined ? d.opus.stages.findIndex((s) => s.id === r.stage) : -1;
@@ -275,27 +263,33 @@ export function mount(ctx: LensContext): LensInstance {
       }
       case 'elements': renderElements(d); break;
     }
-    current = alchemyPath(r).join('/');
   };
+
+  /** The Contents: the opus whole and its stages, the operations, the matter, the elements. Each pick is a request to read: the pane shows the reading. */
+  const contents = () => data
+    ? alchemyContentsGroups({ stages: data.opus.stages, operations: data.operations, matter: data.matter }, standing, (p) => ctx.setPath(p))
+    : [];
 
   return {
     enter(path) {
       wanted = path;
+      ctx.setControls(null);
+      ctx.pane.contents('Alchemy', contents);
       if (data) {
-        if (canon(data, path) !== current || !ctx.panel.isOpen) render(data, path);
+        if (canon(data, path) !== current) render(data, path);
         return;
       }
       if (failed) return;
-      alchemyOptions('opus');
-      ctx.panel.open('Alchemy', [el('p', { class: 'lp-sub', text: 'Loading…' })]);
       loadLensData<AlchemyData>('alchemy').then((d) => { data = d; render(d, wanted); }).catch((err) => {
         failed = true;
         console.error(err);
-        ctx.panel.replace([el('p', { class: 'lp-error', text: 'The alchemy data is not available in this build.' })]);
+        ctx.pane.load({ key: 'unavailable', eyebrow: 'Alchemy', nodes: [el('p', { class: 'lp-error', text: 'The alchemy data is not available in this build.' })] });
       });
     },
     leave() {
       current = '';
+      standing = null;
+      runner.interrupt();
       ctx.setControls(null);
       ctx.engine.setEmphasis(null, null);
     },
