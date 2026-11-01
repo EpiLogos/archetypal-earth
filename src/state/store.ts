@@ -150,15 +150,18 @@ export function inLens(id: PanelLensId, path: string[] = []): AppState {
  */
 export const ASTROLOGY_LIVE = 'sky';
 
-/** Astrology over the live sky (no natal). Optional approached body + name culture. */
-export function astrologyLive(opts: { body?: BodyKey; culture?: string } = {}): AppState {
+/**
+ * Astrology over the live sky (no natal). Optional approached body + name culture, and a tarot card open on that body's
+ * ring (`#/sky/<body>/card/<id>`): a card's place is the planet, so it is read there.
+ */
+export function astrologyLive(opts: { body?: BodyKey; culture?: string; card?: string } = {}): AppState {
   const sky: SkyState = {};
   if (opts.body) sky.body = opts.body;
   if (opts.culture) sky.culture = opts.culture;
   return {
     view: { kind: 'world' },
     deep: false,
-    lens: { id: 'astrology', path: opts.body ? [ASTROLOGY_LIVE, opts.body] : [ASTROLOGY_LIVE] },
+    lens: { id: 'astrology', path: opts.body ? [ASTROLOGY_LIVE, opts.body, ...(opts.card ? [opts.card] : [])] : [ASTROLOGY_LIVE] },
     sky,
   };
 }
@@ -166,7 +169,7 @@ export function astrologyLive(opts: { body?: BodyKey; culture?: string } = {}): 
 /** The Astrology lens at [chart, body]: the panel, and the sky held at that chart's moment with that body approached. */
 export function astrologyAt(path: string[]): AppState {
   const [a, b] = path;
-  if (a === ASTROLOGY_LIVE) return astrologyLive({ body: b as BodyKey | undefined });
+  if (a === ASTROLOGY_LIVE) return astrologyLive({ body: b as BodyKey | undefined, card: path[2] });
   const sky: SkyState = {};
   if (a) sky.natal = a;
   if (a && b) sky.body = b as BodyKey;
@@ -226,6 +229,8 @@ export function back(s: AppState): AppState {
       const p = s.lens.path;
       // live sky: release an approached body, then leave the mode
       if (p[0] === ASTROLOGY_LIVE) {
+        // a card open at its planet closes onto the planet, its rings still standing
+        if (p.length >= 3) return astrologyLive({ body: p[1] as BodyKey, culture: s.sky?.culture });
         if (p.length >= 2 || s.sky?.body) return astrologyLive({ culture: s.sky?.culture });
         return WORLD;
       }

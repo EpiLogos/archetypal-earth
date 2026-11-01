@@ -1,6 +1,6 @@
 // URL hash <-> state, so every state is linkable and Back works.
 import type { Subject } from '../data/model';
-import { ASTROLOGY_LIVE, astrologyAt, inSky, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
+import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, inSky, PANEL_LENSES, WORLD, type AppState, type PanelLensId, type ThreadTarget } from './store';
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { canonicalBodyKey } from '../types/sky';
@@ -65,7 +65,8 @@ export function defaultReadingId(readings: readonly { id: string }[]): string | 
 
 export function stateToHash(s: AppState): string {
   if (s.lens?.id === 'astrology' && s.lens.path[0] === ASTROLOGY_LIVE) {
-    return `#/sky${s.sky?.body ? `/${enc(s.sky.body)}` : ''}${s.sky?.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
+    const card = s.sky?.body && s.lens.path[2] ? `/card/${enc(s.lens.path[2])}` : '';
+    return `#/sky${s.sky?.body ? `/${enc(s.sky.body)}` : ''}${card}${s.sky?.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
   }
   if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
   if (s.history) {
@@ -139,8 +140,12 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
     }
     const skyBody = rest[0] ? canonicalBodyKey(rest[0]) : undefined;
     if (skyBody && r.hasBody?.(skyBody)) { sky.body = skyBody as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
+    // a tarot card open on the body's ring: a card of the deck the field holds, else the planet alone
+    let card: string | undefined;
+    if (sky.body && rest[0] === 'card' && rest[1]) { if (rest[1].startsWith('thoth-') && r.hasFamily(rest[1])) card = rest[1]; rest = rest.slice(2); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     // a sky link is the live sky in Astrology, never a bare sky
+    if (card) return { state: astrologyLive({ body: sky.body, culture: sky.culture, card }) };
     return { state: inSky(sky) };
   }
   if (parts[0] === 'redbook') {

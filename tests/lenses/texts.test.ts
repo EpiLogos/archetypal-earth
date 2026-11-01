@@ -5,8 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { buildModel } from '../../src/data/model';
-import { workLens, worksByVoice } from '../../src/data/texts';
-import { chapterOfStop } from '../../src/lenses/texts';
+import { workInstances, workLens, worksByVoice } from '../../src/data/texts';
 import { textsContract } from '../../src/lenses/contract';
 import { WalkRunner } from '../../src/walk/runner';
 import type { Field } from '../../src/types/field';
@@ -46,34 +45,35 @@ describe('the Texts lens', () => {
     for (const s of raw.stops) { expect(s.page?.work).toBe('cw12'); expect(s.page!.page).toBeGreaterThan(0); }
   });
 
-  it('its title is the work, its scope the work\'s members, its contents the chapters', () => {
+  it('its title is the work, its scope the work\'s members, its contents its instances', () => {
     const lens = workLens(m, 'cw12')!;
     expect(lens.title).toBe(m.workById.get('cw12')!.title);
     expect([...lens.scope].sort((a, b) => a - b)).toEqual([...(m.workMem.get('cw12') ?? [])].sort((a, b) => a - b));
     const c = textsContract(m, 'cw12')!;
     expect(c.set).toHaveLength(lens.scope.size);
-    expect(c.stops).toHaveLength(204);
-    expect(c.groups[0].items).toHaveLength(m.workById.get('cw12')!.chapters.length);
+    // read through its instances: no page walk, and no chapter of the pdf in its Contents
+    expect(c.stops).toHaveLength(0);
+    expect(c.groups[0].items).toHaveLength(lens.scope.size);
   });
 
-  it('a chapter holds the stops from its page to the next chapter of its rank; chapterOfStop finds the narrowest', () => {
-    const lens = workLens(m, 'cw12')!;
-    const stops = lens.walk!.stops;
-    for (const [i, s] of stops.entries()) {
-      const ch = chapterOfStop(lens.contents, i);
-      if (!ch) continue;
-      expect(ch.from).toBeLessThanOrEqual(i);
-      expect(i).toBeLessThan(ch.to);
-      expect(s.page!.page).toBeGreaterThanOrEqual(ch.page);
-    }
-    // at least one stop sits in a chapter at all
-    expect(stops.some((_, i) => chapterOfStop(lens.contents, i))).toBe(true);
-  });
-
-  it('the picker lists every Work exactly once, grouped by voice and kind', () => {
+  it('the picker lists every Work an instance cites, once each, grouped by voice and kind; a Work with none is not listed', () => {
     const listed = worksByVoice(m).flatMap((g) => g.kinds.flatMap((k) => k.works.map((w) => w.id)));
-    expect(listed.sort()).toEqual(works.works.map((w) => w.id).sort());
+    // made again from the raw cites: the Works some occurrence names by id or alias
+    const key = new Map<string, string>();
+    for (const w of works.works) for (const k of [w.id, ...(w.aliases ?? [])]) key.set(k, w.id);
+    const cited = new Set(field.occurrences.flatMap((o) => o.jung.map((c) => key.get(c.work)).filter((x): x is string => !!x)));
+    expect(listed.sort()).toEqual([...cited].sort());
     expect(new Set(listed).size).toBe(listed.length);
+    for (const empty of ['a-blue-fire', 'book-of-symbols', 'van-eenwyk']) expect(listed).not.toContain(empty);
+  });
+
+  it('a work is read through its instances, by date, as an archetype is; every one cites the work', () => {
+    const idx = workInstances(m, 'cw12');
+    expect(idx).toHaveLength(workLens(m, 'cw12')!.scope.size);
+    const years = idx.map((i) => m.occ[i].year);
+    expect(years).toEqual([...years].sort((a, b) => a - b));
+    for (const i of idx) expect(m.occ[i].jung.some((c) => m.workKey.get(c.work) === 'cw12')).toBe(true);
+    expect(workInstances(m, 'nonesuch')).toEqual([]);
   });
 
   it('opening CW9ii and Liber Novus names the lens each has of its own, which the controller hands to', () => {

@@ -25,7 +25,7 @@ const STATES = [
   ['the alchemy lens', '#/alchemy', null],
   ['the Red Book', '#/redbook/genesis', null],
   ['Jung’s page', '#/p/jung', null],
-  ['a text', '#/texts/cw12/3', null],
+  ['a text', '#/texts/cw12', null],
 ];
 
 for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {

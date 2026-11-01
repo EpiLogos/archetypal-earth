@@ -26,25 +26,20 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
     await ctl(page, (c) => c.onGraphSelect('w:cw12'));
     check(await pageOpen(page, WORK_TITLE), `${tag}: the Work's page opens from the graph`, String(await title(page)));
     check((await page.evaluate(() => location.hash)) === '#/graph/w/cw12/deep', `${tag}: and its address names it`, await page.evaluate(() => location.hash));
+    // a work is read as an archetype is: whose it is, then the instances it attests, each a pictured row; the text itself
+    // (its chapters, its pages, a read-through) is not on the site
     const facts = await page.evaluate(() => ({
       read: !!document.querySelector('.deep.on .dp-read'),
       contents: document.querySelectorAll('.deep.on .dp-contents li').length,
-      list: !!document.querySelector('.deep.on .qs'),
-      listCount: document.querySelector('.deep.on .qs-count')?.textContent ?? '',
-      cites: document.querySelectorAll('.deep.on .dp-work-cites li').length,
-      blockquotes: document.querySelectorAll('.deep.on blockquote').length,
+      rows: [...document.querySelectorAll('.deep.on .dp-rows li')].filter((li) => li.querySelector('.dp-row-plate') && li.querySelector('.dp-row-name')).length,
+      heading: [...document.querySelectorAll('.deep.on .dp-sub')].map((h) => h.textContent),
       byline: document.querySelector('.deep.on .dp-lede')?.textContent ?? '',
       author: document.querySelector('.deep.on .dp-author')?.textContent ?? '',
     }));
-    check(facts.read, `${tag}: "Read through this text" is on the Work's page`);
-    check(facts.contents > 5, `${tag}: its Contents lists the chapters`, String(facts.contents));
-    check(facts.list && /^\d+ from 1 work$/.test(facts.listCount), `${tag}: its cites stand in the one quote list`, facts.listCount);
-    check(facts.cites === 12, `${tag}: and the instances that cite it follow, twelve at first`, String(facts.cites));
+    check(!facts.read && facts.contents === 0, `${tag}: no chapters and no read-through on the Work's page`, `read ${facts.read}, ${facts.contents} chapters`);
+    check(facts.heading.includes('Its instances') && facts.rows === 24, `${tag}: its instances follow as pictured rows, 24 at first`, `${facts.rows}; ${facts.heading.join(' | ')}`);
     check(/Jung/.test(facts.byline), `${tag}: the voice stands under the title`, facts.byline);
     check(facts.author === 'C. G. Jung', `${tag}: the author is a door to the person`, facts.author);
-    // the quote list's quotations are in page order
-    const pages = await page.$$eval('.deep.on .qs-group .q-pg', (els) => els.map((e) => Number((/(\d+)/.exec(e.textContent) ?? [])[1])));
-    check(pages.length > 1 && pages.every((p, i) => i === 0 || p >= pages[i - 1]), `${tag}: the quotations are in page order`, pages.slice(0, 6).join(','));
     // Escape closes the page and stays on the field
     await page.keyboard.press('Escape');
     await page.waitForTimeout(900);
@@ -53,7 +48,7 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
     await ctx.close();
   }
 
-  // ── the Work: from search, and its page's "Read through this text" ────
+  // ── the Work: from search, its page listing its instances ─────────────
   {
     const { ctx, page } = await open(b, { ...size, hash: '#/' });
     await page.keyboard.press('/');
@@ -63,10 +58,10 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
     check(first === WORK_TITLE, `${tag}: search finds the Work first`, String(first));
     await page.keyboard.press('Enter');
     check(await pageOpen(page, WORK_TITLE), `${tag}: the Work's page opens from search`);
-    await page.click('.deep.on .dp-read');
-    await page.waitForFunction(() => document.body.dataset.lens === 'texts', null, { timeout: 8000 }).catch(() => {});
-    const st = await page.evaluate(() => ({ lens: document.body.dataset.lens, hash: location.hash }));
-    check(st.lens === 'texts' && st.hash.startsWith('#/texts/cw12'), `${tag}: "Read through this text" enters the Texts lens`, `${st.lens} ${st.hash}`);
+    // the text itself is not on the site: the page reads the work through the instances it attests, each with its picture
+    const rows = await page.$$eval('.deep.on .dp-rows li', (li) => li.map((x) => !!x.querySelector('.dp-row-plate') && !!x.querySelector('.dp-row-name')));
+    check(rows.length > 0 && rows.every(Boolean), `${tag}: the Work's page lists its instances as pictured rows`, String(rows.length));
+    check(!(await page.$('.deep.on .dp-read')), `${tag}: and offers no read-through of the text`);
     await ctx.close();
   }
 

@@ -9,6 +9,58 @@
     },
     "voice": "Crowley"
   },
+  "tenBodies": [
+    {
+      "position": 1,
+      "body": "pluto",
+      "line": "The primum mobile, represented by Pluto. (Compare the doctrine of the alpha particles of radium.)"
+    },
+    {
+      "position": 2,
+      "body": "neptune",
+      "line": "The sphere of the Zodiac or fixed stars, represented by Neptune."
+    },
+    {
+      "position": 3,
+      "body": "saturn",
+      "line": "Saturn. The Abyss. This is represented by Herschel, the planet of disintegration and explosion."
+    },
+    {
+      "position": 4,
+      "body": "jupiter",
+      "line": "Jupiter"
+    },
+    {
+      "position": 5,
+      "body": "mars",
+      "line": "Mars."
+    },
+    {
+      "position": 6,
+      "body": "sun",
+      "line": "The Sun."
+    },
+    {
+      "position": 7,
+      "body": "venus",
+      "line": "Venus."
+    },
+    {
+      "position": 8,
+      "body": "mercury",
+      "line": "Mercury."
+    },
+    {
+      "position": 9,
+      "body": "moon",
+      "line": "The Moon."
+    },
+    {
+      "position": 10,
+      "body": "terra",
+      "line": "The Earth. (The Four Elements)."
+    }
+  ],
   "tree": [
     "kether",
     "chokmah",

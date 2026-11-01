@@ -167,7 +167,7 @@ export function buildAttestations({ pages, include, loci, earthOf, dates, titleO
       // Crowley's own region for an Ace or a Princess rides on the work that says it
       if (earth && voice === 'Crowley') {
         a.place = earth.place;
-        a.body = [...body, `Crowley, pdf p${earth.page}: “${earth.quote}”`, ...(earth.pole ? [`Crowley, pdf p${earth.page}: “${earth.pole}”`] : [])];
+        a.body = [...body, `Crowley: “${earth.quote}”`, ...(earth.pole ? [`Crowley: “${earth.pole}”`] : [])];
         const at = `pdf p${earth.page}`;
         if (!locator.split('; ').includes(at)) cite.locator = [locator, at].filter(Boolean).join('; ');
       }

@@ -512,18 +512,33 @@ body.deep-open .filter-panel, body.pane-contents .filter-panel, body.pane-readin
 
 /* a card read at its planet (src/lenses/card-reading.ts): the sheet takes the hue the zodiac band has at the card's place */
 .cr { --cr-tint: rgb(214 214 232); position: relative; }
-.cr::before { content: ''; position: absolute; inset: -22px -24px auto -24px; height: 150px; background: linear-gradient(to bottom, color-mix(in srgb, var(--cr-tint) 24%, transparent), transparent); pointer-events: none; }
+.cr::before { content: ''; position: absolute; inset: -40px -40px auto -40px; height: 220px; background: radial-gradient(ellipse 70% 100% at 25% 0%, color-mix(in srgb, var(--cr-tint) 18%, transparent), transparent 72%); pointer-events: none; }
 .cr > * { position: relative; }
-.cr-head { display: flex; align-items: center; gap: 12px; }
-.cr-sign { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--cr-tint); color: var(--cr-tint); background: color-mix(in srgb, var(--cr-tint) 14%, transparent); }
-.cr-sign .zg { width: 26px; height: 26px; overflow: visible; }
-.cr-sign .zg path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
 .cr-title { margin: 0; }
-.cr-place { margin: 2px 0 0; font: 12px var(--sans); color: var(--ink-3); }
-.cr-fig { margin: 14px 0; display: flex; justify-content: center; }
-.cr-plate { width: min(210px, 62%); aspect-ratio: var(--ar, 0.637); border-radius: 6px; box-shadow: 0 0 0 1px var(--cr-tint), 0 0 30px color-mix(in srgb, var(--cr-tint) 38%, transparent); }
+/* where the card hangs, under its name: the sign's glyph in the sign's colour, then the sign, the decan and the ring */
+.cr-place { display: flex; align-items: center; gap: 10px; margin: 12px 0 0; font: 500 12.5px/1.4 var(--sans); letter-spacing: 0.02em; color: var(--ink-2); }
+.cr-sign { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--cr-tint); color: var(--cr-tint); background: color-mix(in srgb, var(--cr-tint) 14%, transparent); }
+.cr-sign .zg { width: 17px; height: 17px; overflow: visible; }
+.cr-sign .zg path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.cr-fig { margin: 26px 0 8px; display: flex; justify-content: center; }
+.cr-plate { width: min(260px, 70%); aspect-ratio: var(--ar, 0.637); border-radius: 6px; box-shadow: 0 0 0 1px var(--cr-tint), 0 0 30px color-mix(in srgb, var(--cr-tint) 38%, transparent); }
 .cr .q { --q-tint: var(--cr-tint); }
-.cr-chain .cr-chip { border-left: 2px solid var(--cr-tint); border-radius: 0 8px 8px 0; margin: 4px 0; }
+.cr-lede { margin-top: 22px; }
+.cr-para { margin: 0 0 14px; }
+/* a planet the reading names: a disc in the card's tint beside its name, the row the Related list sets a node in */
+.cr-row { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 14px; align-items: center; margin: 4px 0 18px; }
+.cr-disc { justify-self: center; width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--cr-tint) 85%, white), color-mix(in srgb, var(--cr-tint) 45%, black)); box-shadow: 0 0 14px color-mix(in srgb, var(--cr-tint) 45%, transparent); }
+.cr-planet.here .cr-disc { outline: 1px solid var(--cr-tint); outline-offset: 4px; }
+.cr-row-name { font-family: var(--serif); font-size: 1.04rem; line-height: 1.35; color: var(--ink); }
+/* Crowley's list of the ten bodies, as printed, the line of the planet that holds the card's number marked */
+.cr-list { margin: 4px 0 22px; padding: 14px 18px 12px; border-left: 2px solid color-mix(in srgb, var(--cr-tint) 60%, transparent); background: rgb(var(--core-rgb) / 0.03); border-radius: 0 6px 6px 0; }
+.cr-list-cap { margin: 0 0 8px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.cr-list ol { margin: 0; padding-left: 1.9em; font: italic 400 1rem/1.55 var(--serif); color: var(--ink-3); }
+.cr-list li { padding: 1px 0; }
+.cr-list li::marker { font: 400 0.82rem var(--sans); color: var(--ink-3); }
+.cr-list li.on { color: var(--ink); }
+.cr-list li.on::marker { color: var(--cr-tint); }
+.cr-chain .dp-rows { margin-top: 6px; }
 
 @media (max-width: 720px) { body.po-holding .sky-caption { display: none; } }
 @media (max-width: 720px) { body.natal-sky .sky-caption { display: none; } }
@@ -551,11 +566,4 @@ body.deep-open .filter-panel, body.pane-contents .filter-panel, body.pane-readin
 .you-forget:hover { color: var(--ink); }
 @media (max-width: 760px) { .you-log li { grid-template-columns: 5.4rem minmax(0, 1fr) 36px; } }
 
-/* Texts: a work read through its page walk */
-.tx-kind { margin: 14px 0 4px; font: 500 10.5px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
-.tx-works { display: grid; gap: 2px; }
-.tx-step { min-height: 3rem; margin: 6px 0 4px; }
-.tx-chapter { margin: 0 0 6px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgb(var(--core-rgb) / 0.9); }
-.tx-occ { display: inline-block; margin: 0 0 10px; text-align: left; font: 13px var(--sans); }
-.tx-page { margin-top: 8px; }
 

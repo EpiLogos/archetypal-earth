@@ -94,13 +94,23 @@ export interface VoiceGroup {
 const KIND_ORDER: WorkKind[] = ['collected-volume', 'seminar', 'lectures', 'book', 'letters', 'memoir', 'manuscript', 'anthology', 'dictionary', 'deck', 'secondary'];
 
 /**
- * Every Work once, grouped for the picker: by voice (the voice with most Works first, the field's own, then the rest by their
- * number of Works and by name; no voice is named in code) and, within a
- * voice, by kind in KIND_ORDER; within a kind, the registry's order (by id).
+ * The instances a Work attests, as an archetype's are listed: indices into `Model.occ`, by date (`Model.workMem` keeps them
+ * so). A text is read through these, each linking back to it; the text itself is never put on the page.
+ */
+export function workInstances(m: Model, key: string): number[] {
+  const w = workOfCite(m, key);
+  return w ? [...(m.workMem.get(w.id) ?? [])] : [];
+}
+
+/**
+ * Every Work that attests an instance, once, grouped for the picker: by voice (the voice with most Works first, the field's
+ * own, then the rest by their number of Works and by name; no voice is named in code) and, within a voice, by kind in
+ * KIND_ORDER; within a kind, the registry's order (by id). A Work no instance cites has nothing to show and is not listed.
  */
 export function worksByVoice(m: Model): VoiceGroup[] {
   const byVoice = new Map<string, Work[]>();
   for (const w of m.workById.values()) {
+    if (!m.workMem.get(w.id)?.length) continue;
     const l = byVoice.get(w.voice);
     if (l) l.push(w); else byVoice.set(w.voice, [w]);
   }

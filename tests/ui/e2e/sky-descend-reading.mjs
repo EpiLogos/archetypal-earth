@@ -1,10 +1,11 @@
 // Gate: a descent from the sky is a reading, and a planet named in a card is a flight to that planet.
 //
-//  1. One click on a card's Earth action closes the sheet and starts the descent (look at the Earth, drop, settle); the node's
-//     reading (the deep sheet) is never open during the drop and opens by itself when the camera has landed. The same for a
-//     float click from a gaze, a tie link in a reading (a family with located occurrences and one with none), a sign's glyph on
-//     a birth chart, a body picked from the graph then a card's action. X on the arrived reading closes it onto the node
-//     (label, See in sky); Escape then returns to the sky, the planet held.
+//  1. A Thoth card's place is the sky (owner, 1 Nov 2026): its reading stands at its planet and has no Earth action, and a
+//     Field address for the card hands off to it there (#/f/<card> -> #/sky/<planet>/card/<card>); X on it holds the planet.
+//     A descent is still a reading: a float click from a gaze, a tie link in a card's reading (a family with located
+//     occurrences and one with none), a sign's glyph on a birth chart close the sheet and drop (look at the Earth, drop,
+//     settle); the node's reading is never open during the drop and opens by itself when the camera has landed. A body
+//     picked from the graph opens Astrology on that planet, and its cards are read there.
 //  2. A planet in a card's reading (its decan's ruler, the body that holds its number) goes to that planet in the sky: the
 //     camera flies from the held planet to the other (distance to it only falls, no zoom-out pop, no jump cut), the sheet and
 //     the old planet's rings and floats are gone, the new planet's rings stand, Back returns to the first planet. The same
@@ -12,7 +13,7 @@
 //
 //   npx vite --port 5202 --strictPort &   and the ephemeris sidecar on :5187
 //   EARTH_URL=http://localhost:5202/ node tests/ui/e2e/sky-descend-reading.mjs [outdir]
-// SKY_DESCEND_ONLY=a,b,c,d,e,t limits the parts (a..e: descents; t: planet transitions).
+// SKY_DESCEND_ONLY=a,b,c,d,e,t limits the parts (a: a card at its planet; b..e: descents; t: planet transitions).
 import fs from 'node:fs';
 import path from 'node:path';
 import { launch, open } from './lib.mjs';
@@ -95,54 +96,27 @@ const clickStamped = (page, selector, text) => page.evaluate(([sel, txt]) => {
 /** The focus label stands within a moment of the reading (the same step; its class lands a frame later). */
 const labelWith = (rec, opened) => !!opened && rec.some((r) => r.t >= opened.t && r.t - opened.t < 600 && r.label);
 
-/** What a descent must look like, read off the recording that began before the click at `t0`. */
-function judge(tag, rec, t0, { clicks, subject }) {
-  const after = rec.filter((r) => r.t >= t0);
-  const closed = after.find((r) => !r.panel);
-  const first = after[0];
-  check(!!closed && closed.t - t0 < 1200, `${tag}: the sheet closes with the click`, closed ? `${f(closed.t - t0, 0)} ms` : 'never');
-  const carried = after.find((r) => r.stateDeep && r.kind === 'focus');
-  check(!!carried && carried.t - t0 < 1500 && carried.subject === subject && !carried.sky, `${tag}: the descent carries the reading in the state at once (deep, ${subject})`, carried ? `${f(carried.t - t0, 0)} ms, subject ${carried.subject}` : JSON.stringify(first));
-  const during = after.filter((r) => r.phase === 'descend');
-  check(during.length > 5, `${tag}: the camera descends (phase "descend" for ${during.length} samples, ${during.length ? f(during[during.length - 1].t - during[0].t, 0) : 0} ms)`);
-  check(!during.some((r) => r.deepOpen), `${tag}: the reading is not open during the drop`);
-  check(!after.some((r) => r.t - t0 < 2000 && r.deepOpen), `${tag}: the reading is not open in the first 2 s`);
-  const opened = after.find((r) => r.deepOpen);
-  check(!!opened, `${tag}: the reading opens by itself`, opened ? `${f(opened.t - t0, 0)} ms after the click, phase ${opened.phase}` : 'never');
-  check(!!opened && opened.phase === 'settled' && labelWith(after, opened), `${tag}: it opens on the landing (camera settled, focus label on)`, opened ? `${opened.phase}, label ${labelWith(after, opened)}` : '');
-  note(`${tag}: ${clicks} click(s) to the reading, ${opened ? f((opened.t - t0) / 1000, 1) : 'n/a'} s`);
-  return opened;
-}
-
 const browser = await launch('chromium', { headed: false });
 const parts = {};
 
-// ── a. a card's Earth action, once ───────────────────────────────────────────────────────────────────────────────────
+// ── a. a card is read at its planet: no Earth action, and a Field address hands off there ─────────────────────────────
 parts.a = async () => {
-  for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {
-    const { ctx, page, logs } = await open(browser, { width: s.width, height: s.height, mobile: s.mobile });
-    await hold(page, 'mars');
-    await openCard(page, 'Two of Wands');
-    await record(page);
-    await page.waitForTimeout(300);
-    const t0 = await clickStamped(page, '.cr button', 'Read it in the field');
-    check(t0 !== null, `a ${s.name}: the card has a "Read it in the field" action`);
-    await page.waitForFunction(() => window.__earth.ctl.state.deep && document.body.classList.contains('deep-open') && document.body.dataset.skyPhase === 'settled', null, { timeout: 30000 });
-    await page.waitForTimeout(800);
-    const rec = await stopRecord(page);
-    const opened = judge(`a ${s.name}`, rec, t0, { clicks: 1, subject: 'thoth-two-of-wands' });
-    if (out && opened) await page.screenshot({ path: path.join(out, `${s.name}-a-landed.png`) });
-    // X closes the reading onto the node; the sky is one step further
+  for (const sz of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {
+    const { ctx, page, logs } = await open(browser, { width: sz.width, height: sz.height, mobile: sz.mobile, hash: '#/f/thoth-two-of-wands' });
+    await page.waitForFunction(() => { const x = window.__earth.ctl.state; return x.lens?.id === 'astrology' && x.sky?.body === 'mars'; }, null, { timeout: 60000 }).catch(() => {});
+    await page.waitForSelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"] .cr', { timeout: 30000 }).catch(() => {});
+    let st = await page.evaluate(() => { const x = window.__earth.ctl.state; return { lens: x.lens?.id, body: x.sky?.body, hash: location.hash, card: !!document.querySelector('.cr .cr-title'), title: document.querySelector('.cr .cr-title')?.textContent }; });
+    check(st.lens === 'astrology' && st.body === 'mars' && st.hash === '#/sky/mars/card/thoth-two-of-wands', `a ${sz.name}: a Field address for the Two of Wands hands off to Mars`, JSON.stringify(st));
+    check(st.card && st.title === 'Two of Wands', `a ${sz.name}: the card's reading stands at the planet`, String(st.title));
+    const earth = await page.evaluate(() => [...document.querySelectorAll('.cr button')].some((b) => /in the field|on the earth/i.test(b.textContent ?? '')));
+    check(!earth, `a ${sz.name}: the card has no Earth action`);
+    if (out) await page.screenshot({ path: path.join(out, `${sz.name}-a-card.png`) });
+    // X closes the card onto the planet, held
     await page.click('.deep.on .dp-close');
-    await page.waitForTimeout(900);
-    let st = await page.evaluate(() => { const x = window.__earth.ctl.state; return { kind: x.view.kind, subject: x.view.subject?.id, deep: x.deep, from: !!x.from, sky: !!x.sky, label: !!document.querySelector('.focus-label.on'), seeInSky: [...document.querySelectorAll('.focus-label a, .focus-label button')].some((b) => /See in sky/.test(b.textContent)) }; });
-    check(st.kind === 'focus' && st.subject === 'thoth-two-of-wands' && !st.deep && st.from && !st.sky && st.label, `a ${s.name}: X closes the reading onto the node (label on, the sky kept behind)`, JSON.stringify(st));
-    check(st.seeInSky, `a ${s.name}: "See in sky" stands`);
-    await page.keyboard.press('Escape');
-    await page.waitForFunction(() => { const x = window.__earth.ctl.state; return !!x.sky && x.lens?.id === 'astrology' && !x.from; }, null, { timeout: 10000 }).catch(() => {});
-    st = await page.evaluate(() => { const x = window.__earth.ctl.state; return { lens: x.lens?.id, body: x.sky?.body, kind: x.view.kind }; });
-    check(st.lens === 'astrology' && st.body === 'mars' && st.kind === 'world', `a ${s.name}: Escape returns to the sky, Mars held`, JSON.stringify(st));
-    check(logs.filter((l) => !/ephemeris|sidecar|sky camera:/i.test(l)).length === 0, `a ${s.name}: no console errors`, logs.slice(0, 2).join(' | '));
+    await page.waitForFunction(() => location.hash === '#/sky/mars', null, { timeout: 10000 }).catch(() => {});
+    st = await page.evaluate(() => { const x = window.__earth.ctl.state; return { lens: x.lens?.id, body: x.sky?.body, hash: location.hash, panel: !!document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"] .cr') }; });
+    check(st.lens === 'astrology' && st.body === 'mars' && st.hash === '#/sky/mars' && !st.panel, `a ${sz.name}: X closes the card, Mars held`, JSON.stringify(st));
+    check(logs.filter((l) => !/ephemeris|sidecar|sky camera:/i.test(l)).length === 0, `a ${sz.name}: no console errors`, logs.slice(0, 2).join(' | '));
     await ctx.close();
   }
 };
@@ -185,14 +159,14 @@ parts.c = async () => {
     await hold(p.page, 'mars');
     await openCard(p.page, 'Two of Wands');
     const placed = await p.page.evaluate((label) => {
-      const b = [...document.querySelectorAll('.cr .cr-chain button.cr-chip')].find((x) => (x.textContent ?? '').includes(label));
-      return b ? { name: b.querySelector('.as-tie-name')?.textContent } : null;
+      const b = [...document.querySelectorAll('.cr .dp-rows button.dp-row-name')].find((x) => (x.textContent ?? '').includes(label));
+      return b ? { name: b.textContent } : null;
     }, want.label);
     check(!!placed, `${want.tag}: the link is there`, JSON.stringify(placed));
     if (!placed) { await p.ctx.close(); continue; }
     await record(p.page);
     await p.page.waitForTimeout(200);
-    const t0 = await clickStamped(p.page, '.cr .cr-chain button.cr-chip', want.label);
+    const t0 = await clickStamped(p.page, '.cr .dp-rows button.dp-row-name', want.label);
     await p.page.waitForFunction(() => window.__earth.ctl.state.deep && document.body.classList.contains('deep-open') && document.body.dataset.skyPhase === 'settled', null, { timeout: 30000 });
     await p.page.waitForTimeout(700);
     const rec = await stopRecord(p.page);
@@ -238,7 +212,7 @@ parts.d = async () => {
   await ctx.close();
 };
 
-// ── e. a body picked in the graph, then a card's action ──────────────────────────────────────────────────────────────
+// ── e. a body picked in the graph, then a card read there ──────────────────────────────────────────────────────────────
 parts.e = async () => {
   const { ctx, page } = await open(browser, { width: 1440, height: 900, hash: '#/graph' });
   await page.waitForFunction(() => window.__earth.ctl.graph?.isVisible, null, { timeout: 30000 });
@@ -267,13 +241,8 @@ parts.e = async () => {
   note('e: the planet is held', `${((Date.now() - t0) / 1000).toFixed(1)} s`);
   await page.waitForTimeout(1200);
   await openCard(page, 'Two of Wands');
-  await record(page);
-  await page.waitForTimeout(200);
-  const c0 = await clickStamped(page, '.cr button', 'Read it in the field');
-  await page.waitForFunction(() => window.__earth.ctl.state.deep && document.body.classList.contains('deep-open') && document.body.dataset.skyPhase === 'settled', null, { timeout: 30000 });
-  await page.waitForTimeout(700);
-  const rec = await stopRecord(page);
-  judge('e', rec, c0, { clicks: 1, subject: 'thoth-two-of-wands' });
+  const card = await page.evaluate(() => ({ hash: location.hash, earth: [...document.querySelectorAll('.cr button')].some((b) => /in the field|on the earth/i.test(b.textContent ?? '')) }));
+  check(card.hash === '#/sky/mars/card/thoth-two-of-wands' && !card.earth, 'e: its card is read at Mars, its address the planet\'s, no Earth action', JSON.stringify(card));
   await ctx.close();
 };
 
@@ -291,7 +260,7 @@ parts.t = async () => {
     const { ctx, page, logs } = await open(browser, { width: 1440, height: 900 });
     await hold(page, tr.from);
     await openCard(page, tr.card);
-    const links = await page.evaluate(() => [...document.querySelectorAll('.cr .cr-planet')].map((b) => ({ body: b.dataset.body, disabled: b.disabled, text: b.textContent })));
+    const links = await page.evaluate(() => [...document.querySelectorAll('.cr .cr-planet')].map((b) => ({ body: b.dataset.body, disabled: b.classList.contains('here') || !b.querySelector('button'), text: b.textContent })));
     const link = links.find((l) => l.body === tr.to);
     check(!!link && !link.disabled, `${tag}: the ${tr.card} reading offers ${BODY_NAME[tr.to]} as a planet link (${tr.note})`, links.map((l) => `${l.body}${l.disabled ? '(here)' : ''}`).join(', '));
     check(!links.some((l) => l.body === 'terra') && !links.some((l) => l.body === tr.from && !l.disabled), `${tag}: the Earth is never a planet link, and the planet it is at is not one`);
@@ -333,7 +302,7 @@ parts.t = async () => {
       const seen = () => { if (W.__panelGoneAt === null && !document.querySelector('section.deep.pane:not(.passage):not(.you-sheet)[data-pane="reading"]')) W.__panelGoneAt = performance.now(); };
       new MutationObserver(seen).observe(document.documentElement, { subtree: true, childList: true, attributes: true });
     });
-    const t0 = await clickStamped(page, '.cr .cr-planet', BODY_NAME[tr.to]);
+    const t0 = await clickStamped(page, '.cr .cr-planet button', BODY_NAME[tr.to]);
     check(t0 !== null, `${tag}: the planet link is clicked once`);
     await page.waitForFunction((k) => { const { engine } = window.__earth; return engine.sky?.approached === k && engine.sky.approach > 0.99 && document.body.dataset.skyPhase === 'approach'; }, tr.to, { timeout: 30000 });
     await page.waitForTimeout(1200);
@@ -395,7 +364,7 @@ parts.t = async () => {
   const ph = await page.evaluate(() => { window.__phOn = false; return [...new Set(window.__ph)]; });
   check(ph.length === 1 && ph[0] === 'approach', 'the planet already held is a no-op (the camera stays at its station)', ph.join(', '));
   await openCard(page, 'Five of Cups');
-  const same = await page.evaluate(() => [...document.querySelectorAll('.cr .cr-planet')].map((b) => `${b.dataset.body}${b.disabled ? '(here)' : ''}`));
+  const same = await page.evaluate(() => [...document.querySelectorAll('.cr .cr-planet')].map((b) => `${b.dataset.body}${b.classList.contains('here') ? '(here)' : ''}`));
   check(same.includes('mars(here)') && !same.some((x) => x.startsWith('terra')), 'a card ruled by the planet it is read at shows it as "here", not a link', same.join(', '));
   await ctx.close();
 };

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT } from './lib/vault.mjs';
 import { workLoader } from './lib/cite.mjs';
 import { citeQuotes, workTitles } from './lib/quotes.mjs';
+import { readerSectionLine } from './lib/reader-text.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TYPES = ['family', 'archetype', 'theoretic'];
@@ -70,13 +71,13 @@ export function buildFieldPages({ root = ROOT, vault = DEFAULT_VAULT, curation =
       if (sectionIds.has(s.id)) { errors.push(`${key}: a second section ${s.id}`); continue; }
       sectionIds.add(s.id);
       const quotes = citeQuotes(load, titles, wellFormed(s.quotes, `${key}.${s.id}`, errors), `${key}.${s.id}`, errors, warnings);
-      sections.push({ id: s.id, title: s.title, line: s.line, quotes });
+      sections.push({ id: s.id, title: s.title, line: readerSectionLine(s.line ?? ''), quotes });
     }
     const subjects = cur.subjects ?? [];
     for (const l of subjects) {
       if (!nodes[l.type]?.has(l.id)) errors.push(`${key}: no ${l.type} ${l.id} in the field`);
     }
-    pages[key] = { type: cur.type, id: cur.id, line: cur.line, sections, subjects };
+    pages[key] = { type: cur.type, id: cur.id, line: readerSectionLine(cur.line ?? ''), sections, subjects };
   }
 
   // the join cites: placed and published by join id. A join id the field does not carry is named as a warning (the ingest

@@ -108,7 +108,7 @@ describe('the attestations of a page set', () => {
   it('gives an Ace Crowley’s region, with his line placed beside the card’s own', () => {
     const a = run().attestations.find((x: { id: string }) => x.id === 'thoth-ace-of-wands-in-book-of-thoth');
     expect(a.place).toBe('Asia');
-    expect(a.body.at(-1)).toBe('Crowley, pdf p175: “Thus, roughly, Aces‐Princesses Wands cover Asia.”');
+    expect(a.body.at(-1)).toBe('Crowley: “Thus, roughly, Aces‐Princesses Wands cover Asia.”');
     expect(a.jung[0].locator).toBe('pdf p190; pdf p175');
   });
 

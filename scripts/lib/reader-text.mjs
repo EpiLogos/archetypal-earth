@@ -10,7 +10,7 @@ const PLATE_ASIDE = /\s*\(plates? verified against p\d{4}\.jpg\)/gi;
 const NOTE_PARAGRAPH = /^(Source:[^\n]*reading pass\.?|The quotation is verbatim from the scan\b.*|.*\bthe reading pass dates and places the locus\b.*)$/i;
 
 /** Words that make a parenthetical the vault's note. */
-const NOTE_WORDS = /\bOCR\b|garbled|\bas printed\b|\bas given\b|reading[- ]pass|\bthe scan\b|\bnoise\b|verified (?:against|on)\b|\bchunks?\b|\bplate (?:image|render)\b|\bdescribed from the image\b/i;
+const NOTE_WORDS = /\bOCR\b|\bmentions? record\b|garbled|\bas printed\b|\bas given\b|reading[- ]pass|\bthe scan\b|\bnoise\b|verified (?:against|on)\b|\bchunks?\b|\bplate (?:image|render)\b|\bdescribed from the image\b/i;
 
 /** Bookkeeping phrases inside a sentence that otherwise carries the reading. */
 const NOTE_PHRASES = [
@@ -62,6 +62,44 @@ export function withoutNoteSentences(text) {
   return parts.filter((x) => !NOTE_SENTENCE.test(x)).join(' ').replace(/\s+([.,;:])/g, '$1').trim();
 }
 
+/** A parenthesis that only says which pdf page a thing is on: "(pdf p178)", "(pdf pp. 23–58)", "(pdf p24, p79 and p139)". */
+const PDF_ASIDE = /\s*\(\s*(?:cf\.\s*)?(?:[a-z][a-z0-9-]*\s+(?:¶\?\s+)?)?pdf\s+pp?\.?\s*\d(?:[\d\s,;–\-]|\bp\.?(?=\s*\d)|\band\b|&)*\)/gi;
+/** The pdf page at the head of an aside that goes on to say something: "(pdf p1483, on the hero …)" keeps "(on the hero …)". */
+const PDF_LEAD = /\(\s*(?:[a-z][a-z0-9-]*\s+)?pdf\s+pp?\.?\s*\d[\d–\-]*\s*[,;:]\s*/gi;
+/** A pdf page at the tail of an aside that says something first: "(v.26, sem-kundalini pdf p165)" keeps "(v.26)". */
+const PDF_TAIL = /(?:\s*[,;]\s*|(?<=["”'’])\s+)(?:[a-z][a-z0-9-]*\s+)?(?:footnote\s+)?pdf\s+pp?\.?\s*\d[\d–\-]*(?=\s*[);])/gi;
+/** A voice's name with the pdf page before its quotation: "Crowley, pdf p175: “…”" reads "Crowley: “…”". */
+const PDF_BYLINE = /^([A-Z][\w ]{0,30}),\s*pdf\s+pp?\.?\s*\d[\d–\-]*\s*:/;
+
+/** A sentence that indexes pages rather than reading them ("Burt, chapter on Aries: pdf p23, p24 and p37."): it quotes
+ *  nothing and ends on the pdf pages it lists once its asides are gone. A sentence that quotes is the reading, and keeps its words. */
+const INDEX_SENTENCE = /\bpdf\s+pp?\.?\s*\d[^"“”()]{0,60}$/i;
+const QUOTES = /["“”]/;
+/** A sentence that only names what a quotation is about: "Crowley on the title; on Mars in Leo." Jung's own "on" lines in an
+ *  instance's body can carry the reading ("Jung on the numbers: 5 + 6 + 8 = 19 …"), so there only Crowley's and Burt's go. */
+const CAPTION_SENTENCE = /^(?:Crowley|Burt)\s+on\b/;
+/** Over a section's quotations every "<voice> on …" line is a caption of them ("Jung on the ram: Dream Analysis seminar …"). */
+const SECTION_CAPTION = /^(?:Crowley|Burt|Jung)\s+on\b/;
+
+/** Text the reader is shown with the pdf pages taken out: the cite under a quotation says where it is, the prose does not. */
+export function withoutPdfPages(text) {
+  const out = String(text).replace(PDF_ASIDE, '').replace(PDF_LEAD, '(');
+  const parts = out.split(/(?<=[.!?][”"’']?)\s+(?=[A-Z“"(])/).filter((x) => !(INDEX_SENTENCE.test(x) && !QUOTES.test(x)));
+  return parts.join(' ').replace(PDF_TAIL, '').replace(PDF_BYLINE, '$1:').replace(/\s+([.,;:])/g, '$1').trim();
+}
+
+/** A paragraph's text without its pdf pages and without the sentences that only caption a quotation. */
+export function readerLine(text) {
+  const parts = withoutPdfPages(text).split(/(?<=[.!?][”"’']?)\s+(?=[A-Z“"(])/);
+  return parts.filter((x) => !CAPTION_SENTENCE.test(x)).join(' ').trim();
+}
+
+/** A page's or a section's line over its quotations: a caption of them goes (the title already says what they are about). */
+export function readerSectionLine(text) {
+  const out = withoutPdfPages(text);
+  return SECTION_CAPTION.test(out) ? '' : out;
+}
+
 /** A cite's locator without the vault's note on it: "pdf p80 (print ¶¶ 350-352 — unmarked in chunk)" -> "pdf p80 (print ¶¶ 350-352)". */
 export function readerLocator(locator) {
   return String(locator).replace(/\s*[—–;]\s*[^—–;()]*(?:\bchunk\b|\bOCR\b)[^—–;()]*/g, '').trim();
@@ -85,7 +123,7 @@ export function readerBody(paragraphs) {
   for (const p of paragraphs) {
     if (PLATE_PARAGRAPH.test(p.trim()) || NOTE_PARAGRAPH.test(p.trim())) continue;
     const at = p.search(PLATE_INVENTORY);
-    const text = withoutNoteSentences(withoutAsides((at < 0 ? p : p.slice(0, at)).replace(PLATE_ASIDE, '')));
+    const text = readerLine(withoutNoteSentences(withoutAsides((at < 0 ? p : p.slice(0, at)).replace(PLATE_ASIDE, ''))));
     if (text) kept.push(text);
   }
   return kept;

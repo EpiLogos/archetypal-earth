@@ -3,7 +3,7 @@
 import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
 import { scopeOf } from '../data/scope';
-import { archetypesOfFamily, selfSubject, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette, subjectSky } from '../data/model';
+import { archetypesOfFamily, selfSubject, skyCardHome, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette, subjectSky } from '../data/model';
 import { bodyName, locusPhrase } from '../data/skyplace';
 import { angleBetween, dirFromLatLon, fitDistance, latLonFromDir, spreadOf, worldDistance, type Vec3 } from '../data/geo';
 import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../data/palette';
@@ -232,6 +232,7 @@ export class Controller {
       onOpenChart: (id) => this.navigate(astrologyAt([id])),
       passage: passages,
       onPaneChange: () => { this.shell.syncContents(this.deep.isContentsOpen); if (this.state.lens) this.lensShift(this.state); else this.syncShift(); },
+      captureReturn: () => this.returnToReading(),
     });
     this.you = new YouSheet(root, m, practice, {
       onClose: () => this.you.hide(),
@@ -405,7 +406,7 @@ export class Controller {
     const rig = this.engine.rig;
     rig.dist = rig.targetDist = this.worldDist();
     const parsed = hashToState(location.hash, this.resolver());
-    parsed.state = this.textHandOff(parsed.state);
+    parsed.state = this.lensRoute(parsed.state);
     if (parsed.birthPrefill) this.birthPrefill = parsed.birthPrefill;
     if (parsed.year !== undefined) {
       this.time.scrub(this.m.scale.toU(parsed.year));
@@ -465,7 +466,7 @@ export class Controller {
     this.pendingHash = null;
     const parsed = hashToState(h, this.resolver());
     const asked = parsed.state;
-    const handed = (parsed.state = this.textHandOff(parsed.state));
+    const handed = (parsed.state = this.lensRoute(parsed.state));
     if (parsed.birthPrefill) {
       // the birth leaves the address bar and history at once; the form holds it until it is saved or left
       this.birthPrefill = parsed.birthPrefill;
@@ -475,7 +476,7 @@ export class Controller {
       this.time.scrub(this.m.scale.toU(parsed.year));
     }
     if (!filterEq(parsed.filter, this.filter)) this.applyFilter(parsed.filter);
-    // a Work handed to its own lens takes that lens's address, so the bar says where the reading is
+    // a Work handed to its own lens, or a card to its planet, takes that address, so the bar says where the reading is
     if (handed !== asked) history.replaceState(history.state, '', hashWithFilter(parsed.state, this.filter));
     if (!this.whenReady(parsed.state, () => this.apply(parsed.state))) this.apply(parsed.state);
   };
@@ -568,7 +569,21 @@ export class Controller {
    * "X as a dynamical system" made Theory links and node clicks unusable.)
    */
   private lensRoute(next: AppState): AppState {
-    return this.textHandOff(next);
+    return this.cardHandOff(this.textHandOff(next));
+  }
+
+  /**
+   * A tarot card's place is the sky: the ring of its planet, never the Earth (owner, 1 Nov 2026). A card focused, or one of
+   * its instances opened, from anywhere (search, a link, the graph, a work's instances) is read at its planet with the card
+   * open on the ring. A card Crowley also gives a region of the Earth keeps its place on the globe (`skyCardHome`).
+   */
+  private cardHandOff(next: AppState): AppState {
+    if (next.lens || next.history || next.redbook || next.dynamics) return next;
+    const v = next.view;
+    const fam = v.kind === 'focus' && v.subject.type === 'family' ? v.subject.id
+      : v.kind === 'manifest' ? this.m.occ[this.m.occIndex.get(v.occId) ?? -1]?.familyId : undefined;
+    const body = fam ? skyCardHome(this.m, fam) : undefined;
+    return body && fam ? astrologyLive({ body, card: fam, culture: next.sky?.culture ?? this.state.sky?.culture }) : next;
   }
 
   /**
@@ -1265,6 +1280,8 @@ export class Controller {
     if (this.localSheetOpen && s.lens?.id === 'astrology' && s.sky?.body) {
       this.localSheetOpen = false;
       this.lensPane.hide();
+      // a card read at its planet has a route of its own: closing it stands at the planet
+      if (s.lens.path[0] === ASTROLOGY_LIVE && s.lens.path[2]) this.navigate(back(s));
       return;
     }
     // Astrology X: dismiss the sheet onto the sky still in Astrology — never Field, never bare inSky().
@@ -1313,6 +1330,27 @@ export class Controller {
       hide() { self.paneHeld = null; self.paneRevealed = false; self.paneEngaged = ''; if (self.deep.isLensReading) self.deep.hide(); },
       release() { self.releasePane(); },
       get reading() { return self.deep.isLensReading; },
+    };
+  }
+
+  /**
+   * The way back to the reading standing now, for the pane's crumb: its state (a card at its planet, a work, a node's
+   * reading carry their route), then, for a lens's reading the route does not rebuild by itself (a card on a natal sky),
+   * the reading as it was. A reading given back is the same nodes, so its links still answer.
+   */
+  private returnToReading(): () => void {
+    const st = this.state;
+    const held = this.deep.isLensReading ? this.paneHeld : null;
+    const local = this.localSheetOpen;
+    return () => {
+      this.navigate(st);
+      if (!held) return;
+      // after the state has been applied (a lens entered anew builds its reading first, and then this one is not needed)
+      queueMicrotask(() => {
+        if (!stateEq(this.state, st) || this.deep.readingKey === held.key) return;
+        this.lensPane.read(held);
+        if (local) this.localSheetOpen = true;
+      });
     };
   }
 

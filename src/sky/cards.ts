@@ -60,6 +60,8 @@ export interface BodyCards {
 export interface SkyCardsData {
   version: 1;
   list: PlacedQuote | null;
+  /** Crowley's list of the ten bodies, each line as printed (the cite is `list`'s) */
+  tenBodies?: { position: number; body: BodyKey; line: string }[];
   tree: string[];
   suits: { suit: string; element: string | null }[];
   bodies: Partial<Record<BodyKey, BodyCards>>;

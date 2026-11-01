@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 // @ts-expect-error plain ESM script
-import { readerBody, readerLocator, readerPlace, readerTitle, withoutAsides } from '../../scripts/lib/reader-text.mjs';
+import { readerBody, readerLocator, readerPlace, readerSectionLine, readerTitle, withoutAsides, withoutPdfPages } from '../../scripts/lib/reader-text.mjs';
 
 // The cases are the vault's own sentences, as field.json carried them before the reader's text was cut from them.
 describe('the reader is not shown the vault bookkeeping', () => {
@@ -61,6 +61,36 @@ describe('the reader is not shown the vault bookkeeping', () => {
     };
     for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.json'))) walk(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')), '', f);
     expect(leaks.slice(0, 12), `${leaks.length} strings`).toEqual([]);
+  });
+
+  // owner, 1 Nov 2026: the Crowley lines on a card read as a ledger ("Crowley on the title (pdf p178); on Mars in Leo (pdf p192).")
+  it('the pdf pages a line was drawn from go; the cite under a quotation says where it is', () => {
+    expect(withoutPdfPages('Crowley’s Seven of Wands: Valour (pdf p178); Mars in Leo (pdf p192); Netzach (pdf p178).')).toBe('Crowley’s Seven of Wands: Valour; Mars in Leo; Netzach.');
+    expect(withoutPdfPages('Crowley on the Knights: Yodh (pdf p24, p79, p139, p141, p26).')).toBe('Crowley on the Knights: Yodh.');
+    expect(withoutPdfPages('The liver (pdf p1483, on the hero in the whale-dragon’s belly) — what the shadow-bird feeds on.')).toBe('The liver (on the hero in the whale-dragon’s belly) — what the shadow-bird feeds on.');
+    expect(withoutPdfPages('"she must be a ghost" (sem-kundalini pdf p148). Jung proposed it.')).toBe('"she must be a ghost". Jung proposed it.');
+    expect(withoutPdfPages('a lamp in a windless place" (v.26, sem-kundalini pdf p165).')).toBe('a lamp in a windless place" (v.26).');
+    expect(withoutPdfPages('early struck (CW10 ¶384; footnote pdf p904; cf. 5 June 1935).')).toBe('early struck (CW10 ¶384; cf. 5 June 1935).');
+    expect(withoutPdfPages('Crowley, pdf p175: “Thus, roughly.”')).toBe('Crowley: “Thus, roughly.”');
+  });
+
+  it('a line that only indexes pages, or only captions the quotations under it, goes; a reading that names a page stays', () => {
+    expect(readerBody(['Burt, chapter on Aries (pdf pp. 23–58): pdf p23, p24, p25 and p37.'])).toEqual([]);
+    expect(readerBody(['Images of air, breath and wind: CW9i pdf p347 and p357.'])).toEqual([]);
+    expect(readerBody(['Crowley on the title (pdf p178); on Mars in Leo (pdf p192).'])).toEqual([]);
+    expect(readerBody(['Jung on the numbers: 5 + 6 + 8 = 19. The cherries are red.'])).toEqual(['Jung on the numbers: 5 + 6 + 8 = 19. The cherries are red.']);
+    expect(readerSectionLine('Jung on the ram: Dream Analysis seminar, pdf p448 and p434; CW9ii pdf p101.')).toBe('');
+    expect(readerSectionLine('Crowley on the Sevens and Netzach (pdf p178).')).toBe('');
+  });
+
+  it('no page line, section line or card instance in the published field reads as a ledger', () => {
+    const read = (f: string) => JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../public/data', f), 'utf8'));
+    const pages = read('field-pages.json').pages as Record<string, { line: string; sections: { line: string }[] }>;
+    const lines = Object.entries(pages).flatMap(([k, p]) => [p.line, ...p.sections.map((x) => x.line)].map((l) => `${k}: ${l}`));
+    expect(lines.filter((l) => /\bpdf\s+pp?\.?\s*\d/.test(l)).slice(0, 8)).toEqual([]);
+    expect(lines.filter((l) => /: (?:Crowley|Burt) on\b/.test(l)).slice(0, 8)).toEqual([]);
+    const occ = read('field.json').occurrences as { id: string; body?: string[] }[];
+    expect(occ.filter((o) => o.id.startsWith('thoth-') && (o.body ?? []).some((b) => /\bpdf\s+p|^Crowley on\b/.test(b))).map((o) => o.id).slice(0, 8)).toEqual([]);
   });
 
   it('a place says where, not how the harvest worked it out', () => {

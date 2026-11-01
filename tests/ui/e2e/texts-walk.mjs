@@ -1,7 +1,8 @@
-// N12: a text is a lens. The Texts lens takes a Work as its subject: the list of texts is a reading in the pane that lists every work
-// once, a work opens with its title in the Path, its chapters as the pane's Contents and its cites read in page order, stepped under
-// the reading; CW9ii opens the Aion lens and Liber Novus the
-// Red Book. Closing the reading stays in the mode.
+// N12: a text is a lens. The Texts lens takes a Work as its subject and reads it as an archetype is read (owner, 1 Nov 2026):
+// the list of texts is a reading in the pane that lists every work the field cites, once, each with its picture; a work opens with
+// its title in the Path and its page: whose it is, then the instances it attests, each a row with its picture that opens the
+// instance. The text itself is not on the site: no chapters, no pages, no read-through. The Contents are the works, the open one
+// marked. CW9ii opens the Aion lens and Liber Novus the Red Book. Closing the reading stays in the mode.
 //   EARTH_HEADED=0 EARTH_URL=http://localhost:5294/ node tests/ui/e2e/texts-walk.mjs
 import { launch, open } from './lib.mjs';
 
@@ -10,7 +11,6 @@ const check = (ok, what, detail = '') => { results.push(ok); console.log(`${ok ?
 const b = await launch('chromium');
 const lensOf = (page) => page.evaluate(() => document.body.dataset.lens);
 const SHEET = 'section.deep:not(.passage):not(.you-sheet)';
-const counter = (page) => page.$eval(`${SHEET} .pane-foot .pane-count`, (e) => e.textContent).catch(() => null);
 const openContents = async (page, phone) => {
   if (phone && (await page.evaluate(() => document.body.classList.contains('pane-reading')))) await page.locator(`${SHEET} .pane-contents-tool`).click();
   else await page.locator('.sh-contents').click();
@@ -21,7 +21,8 @@ const hash = (page) => page.evaluate(() => location.hash);
 for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { name: 'phone', width: 390, height: 844, mobile: true }]) {
   const tag = size.name;
   const { ctx, page, logs } = await open(b, { ...size, hash: '#/' });
-  const workCount = await page.evaluate(() => window.__earth.model.workById.size);
+  // a work no instance cites has nothing to read through it, and is not listed
+  const workCount = await page.evaluate(() => { const m = window.__earth.model; return [...m.workById.keys()].filter((id) => m.workMem.get(id)?.length).length; });
 
   // the lens is in the menu, and its picker lists every Work once
   await page.click('.sh-lens');
@@ -34,47 +35,44 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
   await page.locator('.sh-contents').click();
   await page.waitForSelector(`${SHEET} .dp-contents-pane li button`, { timeout: 10000 });
   const listed = await page.$$eval(`${SHEET} .dp-contents-pane li button`, (b) => b.map((x) => x.textContent));
-  check(listed.length === workCount && new Set(listed).size === workCount, `${tag}: the Contents list every Work once`, `${listed.length} of ${workCount}`);
+  check(listed.length === workCount && new Set(listed).size === workCount, `${tag}: the Contents list every cited Work once`, `${listed.length} of ${workCount}`);
+  const pictured = await page.$$eval(`${SHEET} .dp-contents-pane li .dp-ct-plate`, (x) => x.length);
+  check(pictured === listed.length, `${tag}: each work in the Contents has its picture`, `${pictured} of ${listed.length}`);
   const groups = await page.$$eval(`${SHEET} .dp-contents-pane .dp-sub`, (h) => h.map((x) => x.textContent));
   check(groups.length >= 3 && /^Jung/.test(groups[0] ?? ''), `${tag}: grouped by voice, Jung's first`, groups.slice(0, 4).join(' | '));
   check((await lensOf(page)) === 'texts' && (await hash(page)) === '#/texts', `${tag}: the route is #/texts`, await hash(page));
 
-  // a work: its title in the Path, the walk at its first cite
+  // a work: its title in the Path, its page, its instances as pictured rows
   const cw12 = await page.evaluate(() => window.__earth.model.workById.get('cw12').title);
   await page.locator(`${SHEET} .dp-contents-pane li button`, { hasText: new RegExp(`^${cw12.replace(/[()]/g, '\\$&')}`) }).first().click();
-  await page.waitForSelector(`${SHEET} .pane-foot .pane-count`, { timeout: 10000 });
+  await page.waitForSelector(`${SHEET} .dp-rows li`, { timeout: 10000 });
   const title = await page.$eval('.sh-title', (e) => e.textContent);
   check(title === 'Psychology and Alchemy (CW12)', `${tag}: the work is the title in the Path`, title);
-  check((await counter(page)) === '1 / 204', `${tag}: cw12 is read through in 204 steps`, String(await counter(page)));
-  await page.waitForSelector(`${SHEET} .tx-step blockquote`, { timeout: 10000 });
-  const pdfOf = () => page.$eval(`${SHEET} .tx-step .q-pg`, (e) => Number((/(\d+)/.exec(e.textContent) ?? [])[1])).catch(() => NaN);
-  const pages = [await pdfOf()];
-  for (let i = 0; i < 8; i++) {
-    await page.click(`${SHEET} .pane-foot button[aria-label="Next cite"]`);
-    await page.waitForFunction((n) => document.querySelector('section.deep:not(.passage):not(.you-sheet) .pane-foot .pane-count')?.textContent === `${n} / 204`, i + 2, { timeout: 8000 });
-    await page.waitForSelector(`${SHEET} .tx-step blockquote`, { timeout: 8000 }).catch(() => {});
-    pages.push(await pdfOf());
+  check((await hash(page)) === '#/texts/cw12', `${tag}: the route is #/texts/cw12`, await hash(page));
+  const inst = await page.evaluate(() => window.__earth.model.workMem.get('cw12').length);
+  const rows = await page.$$eval(`${SHEET} .dp-rows li`, (li) => li.map((x) => ({ name: x.querySelector('.dp-row-name')?.textContent ?? '', plate: !!x.querySelector('.dp-row-plate') })));
+  check(rows.length === Math.min(24, inst) && rows.every((r) => r.name && r.plate), `${tag}: its instances are rows, each with its picture`, `${rows.length} of ${inst}`);
+  check(!(await page.$(`${SHEET} .pane-foot .pane-count`)) && !(await page.evaluate(() => /\bpdf\s+pp?\.?\s*\d/i.test(document.querySelector('section.deep:not(.passage):not(.you-sheet) .dp-scroll')?.textContent ?? ''))), `${tag}: no read-through and no pdf pages`);
+  if (inst > 24) {
+    await page.locator(`${SHEET} button`, { hasText: /^Show all/ }).first().click();
+    const all = await page.$$eval(`${SHEET} .dp-rows li`, (li) => li.length);
+    check(all === inst, `${tag}: "Show all" lists every instance`, `${all} of ${inst}`);
   }
-  check((await hash(page)) === '#/texts/cw12/8', `${tag}: each step is in the address`, await hash(page));
-  check(pages.every((p, i) => Number.isFinite(p) && (i === 0 || p >= pages[i - 1])), `${tag}: the cites come in page order`, pages.join(','));
-  await page.click(`${SHEET} .pane-foot button[aria-label="Previous cite"]`);
-  await page.waitForFunction(() => document.querySelector('section.deep:not(.passage):not(.you-sheet) .pane-foot .pane-count')?.textContent === '8 / 204', null, { timeout: 8000 });
-  check(true, `${tag}: Previous steps back`);
 
-  // Contents: a chapter jumps to its first cite
+  // Contents: the works again, the open one marked
   await openContents(page, size.mobile);
-  const chapters = await page.$$(`${SHEET} .dp-contents-pane li button`);
-  check(chapters.length > 5, `${tag}: the chapters are the Contents`, String(chapters.length));
-  const before = await counter(page);
-  // the last chapter of the work that carries cites (a chapter with none opens its page of the text instead)
-  const cited = await page.evaluate(() => {
-    const m = window.__earth.model, ch = m.workById.get('cw12')?.chapters ?? [], pages = (m.walkById.get('text/cw12')?.stops ?? []).map((s) => s.page?.page ?? -1);
-    const has = ch.map((c, k) => { let end = Infinity; for (let j = k + 1; j < ch.length; j++) if (ch[j].level <= c.level) { end = ch[j].page; break; } return pages.some((p) => p >= c.page && p < end); });
-    return has.lastIndexOf(true);
-  });
-  await chapters[cited].click();
-  await page.waitForFunction((was) => document.querySelector('section.deep:not(.passage):not(.you-sheet) .pane-foot .pane-count')?.textContent !== was, before, { timeout: 8000 });
-  check(true, `${tag}: a chapter jumps to its first cite`, `${before} → ${await counter(page)}`);
+  const current = await page.$$eval(`${SHEET} .dp-contents-pane li button[aria-current="true"]`, (b) => b.map((x) => x.textContent));
+  check(current.length === 1 && current[0].startsWith(cw12), `${tag}: the Contents mark the open work`, current.join(' | '));
+  await page.locator(`${SHEET} .dp-contents-pane li button[aria-current="true"]`).first().click();
+  await page.waitForSelector(`${SHEET} .dp-rows li`, { timeout: 10000 });
+
+  // an instance row opens the instance
+  const firstId = await page.evaluate(() => { const m = window.__earth.model; return m.occ[m.workMem.get('cw12')[0]].id; });
+  await page.locator(`${SHEET} .dp-rows li .dp-row-name`).first().click();
+  await page.waitForFunction((id) => location.hash.startsWith(`#/o/${id}`), firstId, { timeout: 10000 }).catch(() => {});
+  check((await hash(page)).startsWith(`#/o/${firstId}`), `${tag}: an instance row opens the instance`, await hash(page));
+  await page.goBack();
+  await page.waitForFunction(() => location.hash === '#/texts/cw12', null, { timeout: 10000 }).catch(() => {});
 
   // the work is a node of the visitor's own record, and nothing personal is in the address
   const log = await page.evaluate(() => JSON.parse(localStorage.getItem('aae.practice.v1.engagements') ?? '[]'));

@@ -6,7 +6,7 @@
 //
 // Pure: the Model and the lens data files in, plain objects out. Nothing here draws, loads or writes (`engage` takes the store).
 import { subjectMembers, type Model, type Subject } from '../data/model';
-import { workLens } from '../data/texts';
+import { workInstances, workLens } from '../data/texts';
 import type { PlateSubject } from '../data/plates';
 import { ERAS, PERSON_SUBJECTS, SKY_RINGS, type FieldFilter, type PersonSubject, type SkyRing } from '../shell/filter';
 import type { LensId } from '../shell/lens';
@@ -295,9 +295,10 @@ export function textsContract(m: Model, workKey: string): LensContract | undefin
     dimensions: dimensionsOf(m, set),
     facets: facetsOf(m, set),
     marks: [],
-    stops: (wl.walk?.stops ?? []).map((_, i) => ({ walk: wl.walk!.id, i, kind: 'text' as const })),
-    plates: (wl.walk?.stops ?? []).flatMap((s) => (s.subject?.type === 'occurrence' ? [{ type: 'occurrence' as const, id: s.subject.id }] : [])),
-    groups: [{ id: 'chapters', title: 'Contents', items: wl.contents.map((c, i) => ({ id: String(i), title: c.title })) }],
+    // a text is read through its instances, not walked page by page: it has no stops, and its Contents are the works
+    stops: [],
+    plates: workInstances(m, wl.id).map((i) => ({ type: 'occurrence' as const, id: m.occ[i].id })),
+    groups: [{ id: 'instances', title: 'Its instances', items: workInstances(m, wl.id).map((i) => ({ id: m.occ[i].id, title: m.occ[i].label })) }],
     engages: 'open',
   };
 }

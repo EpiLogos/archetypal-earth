@@ -1,7 +1,6 @@
 // What a step keeps (Pass H findings): a step inside a mode leaves what the visitor set as it stands.
-//   - Texts: Escape closes the reading, and the next Escape steps up to the work without opening it again
-//   - Texts: reading on through a work is one line of the trail, not one per cite
-//   - Texts: every chapter is a pick; one none of whose pages is cited opens its own first page of the text; no counts are shown
+//   - Texts: Escape closes a work's reading, and the next Escape steps up to the list without opening it
+//   - Texts: opening a work is one line of the trail; the Contents are the works, with no counts
 //   - a widened reading stays wide across the stepper in a panel lens (Theory)
 //   - closing You leaves a reading that stands under it its room (`deep-open`)
 //   - a Work's page carries its footer once
@@ -22,41 +21,25 @@ const opens = (page, id) => page.evaluate((id) => JSON.parse(localStorage.getIte
 
 // ── Texts: the Escape ladder, the trail, the Contents ─────────────────
 {
-  const { ctx, page } = await open(b, { hash: '#/texts/cw12/3' });
+  const { ctx, page } = await open(b, { hash: '#/texts/cw12' });
   await page.waitForTimeout(3500);
-  ok(await reading(page), 'a cite of a work opens its reading', await hash(page));
+  ok(await reading(page), 'a work opens its reading', await hash(page));
+  ok((await opens(page, 'cw12')) === 1, 'opening the work is one line of the trail', String(await opens(page, 'cw12')));
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1000);
   ok(!(await reading(page)), 'Escape closes the reading');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1300);
-  ok((await hash(page)) === '#/texts/cw12' && !(await reading(page)), 'the next Escape steps up to the work and leaves the reading closed', `${await hash(page)} reading=${await reading(page)}`);
-
-  await go(page, '#/texts/cw12/0');
-  await page.waitForTimeout(1500);
-  const before = await opens(page, 'cw12');
-  const next = page.locator(`${SHEET} .pane-foot button[aria-label="Next cite"]`);
-  for (let i = 0; i < 3; i++) { await next.click(); await page.waitForTimeout(3300); }
-  ok((await opens(page, 'cw12')) === before, 'reading on through the work adds no line to the trail', `${before} → ${await opens(page, 'cw12')}`);
+  ok((await hash(page)) === '#/texts' && !(await reading(page)), 'the next Escape steps up to the list and leaves the reading closed', `${await hash(page)} reading=${await reading(page)}`);
 
   await page.locator('.sh-contents').click();
   await page.waitForSelector(`${SHEET}[data-pane="contents"]`, { timeout: 8000 });
   await page.waitForTimeout(500);
-  const rows = await page.evaluate((sel) => [...document.querySelectorAll(`${sel} .dp-contents li`)].slice(0, -1).map((li) => ({ pick: !!li.querySelector('button'), count: !!li.querySelector('.dp-cite-year') })), SHEET);
-  ok(rows.length > 5 && rows.every((r) => r.pick), 'every chapter of cw12 is a pick', `${rows.filter((r) => !r.pick).length} of ${rows.length} are not`);
-  ok(rows.every((r) => !r.count), 'the Contents show no counts', String(rows.filter((r) => r.count).length));
-  ok(!(await page.$('.tx-count')), 'the reading carries no count line');
-  // the chapter with no cite in the field opens the text at its own first page
-  const uncited = await page.evaluate(() => {
-    // a chapter none of whose pages up to the next chapter of its rank carries a stop of the work's walk
-    const m = window.__earth.model, ch = m.workById.get('cw12')?.chapters ?? [], pages = (m.walkById.get('text/cw12')?.stops ?? []).map((s) => s.page?.page ?? -1);
-    return ch.findIndex((c, k) => { let end = Infinity; for (let j = k + 1; j < ch.length; j++) if (ch[j].level <= c.level) { end = ch[j].page; break; } return !pages.some((p) => p >= c.page && p < end); });
-  });
-  if (uncited >= 0) {
-    await page.locator(`${SHEET} .dp-contents li`).nth(uncited).locator('button').click();
-    await page.waitForTimeout(1500);
-    ok(await page.evaluate(() => !!document.querySelector('section.passage:not([hidden]) .ps-article')?.textContent?.trim()), 'an uncited chapter opens its page of the text');
-  } else ok(false, 'cw12 has a chapter with no cite to try', String(uncited));
+  // a work's note is its year, never a count of its cites
+  const rows = await page.evaluate((sel) => [...document.querySelectorAll(`${sel} .dp-contents li`)].map((li) => ({ pick: !!li.querySelector('button'), note: li.querySelector('.dp-cite-year')?.textContent.trim() ?? '' })), SHEET);
+  ok(rows.length > 5 && rows.every((r) => r.pick), 'every work is a pick', `${rows.filter((r) => !r.pick).length} of ${rows.length} are not`);
+  ok(rows.every((r) => !r.note || /^\d{4}$/.test(r.note)), 'the Contents show no counts, a year at most', rows.filter((r) => r.note && !/^\d{4}$/.test(r.note)).map((r) => r.note).join(', '));
+  ok(!(await page.$(`${SHEET} .pane-foot .pane-count`)), 'the Contents carry no stepper under them');
   await ctx.close();
 }
 

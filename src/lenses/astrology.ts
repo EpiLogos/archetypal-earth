@@ -406,6 +406,12 @@ export function mount(ctx: LensContext): LensInstance {
       // the Earth is held like a planet (the camera goes in to it): it is the sky's subject, so it titles the sky
       const bodyName = held === 'terra' ? 'Earth' : held ? data.bodies[held as ChartBody]?.name : undefined;
       ctx.setContext(bodyName ?? 'The sky');
+      // a card open on the planet's ring (`#/sky/<body>/card/<id>`): its reading stands at the planet
+      if (path[1] && path[2]) {
+        const key = path[1] as BodyKey, id = path[2];
+        void loadSkyCards().then((cards) => { if (cards?.cards[id] && inLens && pathNow[2] === id) readCard(cards, id, key); });
+        return;
+      }
       ctx.pane.hide();
       return;
     }
@@ -488,6 +494,11 @@ export function mount(ctx: LensContext): LensInstance {
    * with its rings still standing.
    */
   const openCard = (cards: SkyCardsData, id: string, key: BodyKey) => {
+    // on the live sky a card has a route of its own, so Back, a link and the trail of readings all return to it
+    if (pathNow[0] === ASTROLOGY_LIVE) { ctx.setPath([ASTROLOGY_LIVE, key, id]); return; }
+    readCard(cards, id, key);
+  };
+  const readCard = (cards: SkyCardsData, id: string, key: BodyKey) => {
     void loadLensData<FieldPages>('field-pages').catch(() => null).then((pages) => {
       if (!inLens) return;
       const nodes = cardReading({

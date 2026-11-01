@@ -21,6 +21,36 @@ export { TREE, SIGNS, SUITS };
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 
+/**
+ * Crowley's list of the ten bodies, each numbered line read off the printed page the list's quotation is placed on (pdf
+ * p111): a number, then its line to the first line that ends a sentence ("3. Saturn. The Abyss. This is represented by
+ * Herschel, the planet of disintegration and explosion."). Each body takes the line of the number curated for it.
+ */
+export function tenBodies(root, cur, errors = []) {
+  const file = path.join(root, 'public', 'data', 'corpus', `${cur.list.work}.json`);
+  const page = fs.existsSync(file) ? read(file).pages.find((x) => x.p === cur.list.page)?.text ?? '' : '';
+  const start = page.search(/^1\.\s*$/m);
+  const lines = new Map();
+  if (start >= 0) {
+    for (const chunk of page.slice(start).split(/\n(?=\d{1,2}\.\s)/)) {
+      const m = /^(\d{1,2})\.\s*([\s\S]*)$/.exec(chunk);
+      if (!m) continue;
+      const kept = [];
+      for (const l of m[2].split('\n').map((x) => x.trim()).filter(Boolean)) { kept.push(l); if (/[.)]$/.test(l)) break; }
+      lines.set(Number(m[1]), kept.join(' '));
+    }
+  }
+  const out = [];
+  for (const key of BODY_KEYS) {
+    const n = cur.bodies[key]?.position;
+    if (!n) continue;
+    const line = lines.get(n);
+    if (!line) { errors.push(`list: no line ${n} for ${key} on ${cur.list.work} pdf p${cur.list.page}`); continue; }
+    out.push({ position: n, body: key, line });
+  }
+  return out.sort((a, b) => a.position - b.position);
+}
+
 export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   const cur = read(path.join(root, 'curation', 'sky', 'cards.json'));
   const field = read(path.join(root, 'public', 'data', 'field.json'));
@@ -107,6 +137,9 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
   return {
     version: 1,
     list: listQuote,
+    // the list itself, line by line as Crowley prints it (each line placed above as its body's quotation): a card's reading
+    // shows it whole, its planet's line marked, where one completed line read as a run of the list's neighbours
+    tenBodies: tenBodies(root, cur, errors),
     tree: TREE,
     suits: SUITS.map((s) => ({ suit: s, element: suitElement[s] })),
     bodies,

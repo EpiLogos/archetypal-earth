@@ -345,6 +345,20 @@ export function subjectSky(m: Model, s: Subject): SkyHang[] {
   return [...by.values()];
 }
 
+/**
+ * The planet a tarot card is read at: its place is in the sky, on a planet's ring, and the Earth holds none of it. The decan
+ * whose ruler wears it on the wheel first, else the body its number or attribution gives it. Undefined for a family that is
+ * not a card of the deck, for a card with no place in the sky, and for one with an instance on the Earth (an Ace or a
+ * Princess Crowley also gives a region of the world), which keeps its place on the globe.
+ */
+export function skyCardHome(m: Model, familyId: string): BodyKey | undefined {
+  if (!familyId.startsWith('thoth-') || !m.famById.has(familyId)) return undefined;
+  const members = subjectMembers(m, { type: 'family', id: familyId });
+  if (members.some((i) => m.located[i])) return undefined;
+  const loci = members.flatMap((i) => m.occ[i].sky ?? []).filter((l) => l.body);
+  return (loci.find((l) => l.ring === 'wheel') ?? loci[0])?.body;
+}
+
 export function subjectName(m: Model, s: Subject): string {
   if (s.type === 'archetype') return m.archById.get(s.id)?.name ?? s.id;
   if (s.type === 'theoretic') return m.theoById.get(s.id)?.name ?? s.id;

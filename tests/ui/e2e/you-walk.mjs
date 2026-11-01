@@ -21,7 +21,7 @@ for (const size of [{ name: 'desk', width: 1440, height: 900, mobile: false }, {
     localStorage.setItem('aae.practice.v1.coincidences', JSON.stringify([{ id: 'c1', date: '2026-10-02', inner: 'i', outer: 'o', symbol: 'a white bird', familyId: null, note: '', createdAt: now, updatedAt: now }]));
     localStorage.setItem('aae.practice.v1.charts', JSON.stringify([{ id: 'you', label: 'You', birth: { date: '1990-05-17', time: '08:30', offsetMinutes: 60, lat: 51.5, lon: -0.12, place: 'London' }, createdAt: now, updatedAt: now }]));
   }, now);
-  await page.goto(page.url().replace(/#.*$/, '') + '#/texts/cw12/2', { waitUntil: 'load' });
+  await page.goto(page.url().replace(/#.*$/, '') + '#/texts/cw12', { waitUntil: 'load' });
   await ready(page);
 
   const openYou = async () => {

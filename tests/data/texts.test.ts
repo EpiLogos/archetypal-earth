@@ -155,12 +155,12 @@ describe('the lens of a Work', () => {
 });
 
 describe('the picker and the cite door', () => {
-  it('groups all 43 Works once, by voice and then kind', () => {
+  it('groups the 40 Works that attest an instance once, by voice and then kind (the three no instance cites have nothing to show)', () => {
     const groups = worksByVoice(m);
     const ids = groups.flatMap((g) => g.kinds.flatMap((k) => k.works.map((w) => w.id)));
-    expect(ids).toHaveLength(43);
-    expect(new Set(ids).size).toBe(43);
-    expect(new Set(ids)).toEqual(new Set(works.works.map((w) => w.id)));
+    expect(ids).toHaveLength(40);
+    expect(new Set(ids).size).toBe(40);
+    expect(new Set(ids)).toEqual(new Set(works.works.map((w) => w.id).filter((id) => (m.workMem.get(id) ?? []).length)));
     expect(groups.map((g) => g.voice)[0]).toBe('Jung');
     const sizes = groups.map((g) => g.kinds.reduce((n, k) => n + k.works.length, 0));
     expect(sizes).toEqual([...sizes].sort((a, b) => b - a));

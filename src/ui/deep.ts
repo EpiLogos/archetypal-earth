@@ -3,18 +3,19 @@
 import type { Model, Subject } from '../data/model';
 import { archetypesOfFamily, occurrenceImage, subjectMembers, subjectName, subjectOccurrences, subjectSky } from '../data/model';
 import { plates } from '../data/plates';
-import { workLens } from '../data/texts';
+import { workInstances, workLens } from '../data/texts';
 import { bodyOfLocus, locusPhrase } from '../data/skyplace';
 import type { BodyKey } from '../types/sky';
-import type { Cite, Occurrence } from '../types/field';
+import type { Cite, ImageRef, Occurrence, Palette } from '../types/field';
 import { clear, el, onReadGesture, plate } from './dom';
 import { sanitiseTitle } from './credit';
 import { paneFrame, type PaneFrame } from './pane';
+import { icon } from './icons';
 import { paneMode, type PaneMode } from '../shell/layout';
 import { symbolReading } from './symbol-reading';
 import type { PassageBridge } from './passage';
 import { citeLine, eraShort, placeLine, shortWork } from './format';
-import { quote, quoteList, type ListedQuote } from './quote';
+import { quote } from './quote';
 import { definitionQuote, loadLensData, occurrenceQuote, qlBlock, quoteBlock, stillFigure, type LensQuote, type QL } from '../lenses/ui';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { relatedPlates, relatedRows, SYSTEM_LABEL } from './related';
@@ -77,7 +78,17 @@ export interface DeepHandlers {
   passage?: PassageBridge;
   /** the pane's state changed (widened, narrowed, Contents shown or hidden): the scene re-reads the room it is given */
   onPaneChange?(mode: PaneMode): void;
+  /**
+   * How to come back to the reading now standing in the pane (its route, and a lens's reading that has none): asked as each
+   * reading opens, kept for the crumb the next reading shows. Absent, no crumb is drawn.
+   */
+  captureReturn?(): () => void;
 }
+
+/** A reading the pane stood on: its key, the name its crumb shows, and the way back to it. */
+interface Visited { key: string; label: string; back: () => void; walk: boolean }
+/** How many readings back the crumb trail remembers. */
+const TRAIL_MAX = 30;
 
 /** One group of the pane's Contents list: a heading over the entries a visitor can open. */
 export interface ContentsItem {
@@ -88,6 +99,8 @@ export interface ContentsItem {
   level?: number;
   /** the entry the lens stands on now */
   current?: boolean;
+  /** the entry's picture, set small beside its name (as the Related list sets a node's); absent, the row is a name alone */
+  plate?: { image?: ImageRef; palette?: Palette };
   /** absent for an entry with nothing to open (a chapter none of whose pages is cited): the row is shown, not pressed */
   onPick?(): void;
 }
@@ -119,6 +132,90 @@ function eyebrowOf(t: DeepTarget): string {
   return t.kind === 'occurrence' ? 'Occurrence' : (KIND_NAME[t.subject.type] ?? 'Reading');
 }
 
+/** How many rows of instances a list shows before "Show all". */
+const ROWS_SHOWN = 24;
+
+/**
+ * Instances as rows: each its plate, its name and one line of when and where, opening the instance. The plate is beside the
+ * name, as the Related list sets a node; an instance with no picture keeps its row's tone so the names stay in one column.
+ */
+export function instanceRows(m: Model, idx: readonly number[], onOccurrence: (id: string) => void): HTMLElement[] {
+  if (!idx.length) return [];
+  const ul = el('ul', { class: 'dp-rows' });
+  const row = (i: number) => {
+    const o = m.occ[i];
+    const pl = plates(m, { type: 'occurrence', id: o.id });
+    const open = () => onOccurrence(o.id);
+    return el('li', {}, [
+      el('button', { class: 'dp-row-plate', type: 'button', tabindex: -1, 'aria-hidden': 'true', onclick: open }, [
+        plate(pl.image, { thumb: true, className: 'dp-row-img', palette: pl.palette, alt: o.label }),
+      ]),
+      el('div', { class: 'dp-row-body' }, [
+        el('button', { class: 'link-quiet dp-row-name', type: 'button', text: o.label, onclick: open }),
+        el('span', { class: 'dp-row-sub', text: placeLine(m, o) }),
+      ]),
+    ]);
+  };
+  ul.append(...idx.slice(0, ROWS_SHOWN).map(row));
+  if (idx.length <= ROWS_SHOWN) return [ul];
+  const more = el('p', { class: 'qs-more' }, [el('button', { type: 'button', class: 'link-quiet', text: `Show all ${idx.length}`, onclick: () => { ul.append(...idx.slice(ROWS_SHOWN).map(row)); more.remove(); } })]);
+  return [ul, more];
+}
+
+/**
+ * A Work's page, read as an archetype's is (owner, 1 Nov 2026): what it is and whose, its plates, and the instances it
+ * attests, each linking back to it. The text itself is not on the site: no chapters of the pdf, no pages, no read-through.
+ * CW9ii and Liber Novus keep the door to the lens each is read in.
+ */
+export function workPage(m: Model, id: string, h: Pick<DeepHandlers, 'onSubject' | 'onOccurrence' | 'onReadText'>): HTMLElement[] {
+  const w = m.workById.get(id);
+  const wl = workLens(m, id);
+  if (!w || !wl) return [];
+  const out: HTMLElement[] = [el('h2', { class: 'dp-title', text: w.title })];
+  const byline = [w.voice, w.year ? String(w.year) : ''].filter(Boolean).join(' · ');
+  if (byline) out.push(el('p', { class: 'dp-lede', text: byline }));
+  // the hand behind the work, where the field holds a record of them
+  const author = m.personById.get(w.author);
+  if (author) {
+    out.push(el('p', { class: 'dp-by' }, [el('span', { text: 'By ' }), el('button', { type: 'button', class: 'link-quiet dp-author', text: author.name, onclick: () => h.onSubject({ type: 'person', id: author.id }) })]));
+  }
+  if (wl.lens) {
+    out.push(el('p', { class: 'dp-acts' }, [
+      el('button', { type: 'button', class: 'lp-btn primary dp-read', text: wl.lens === 'aion' ? 'Read it in Aion' : 'Read it in the Red Book', onclick: () => h.onReadText?.(w.id) }),
+    ]));
+  }
+  const strip = workPlates(m, wl, h.onOccurrence);
+  if (strip) out.push(strip);
+  const idx = workInstances(m, id);
+  if (idx.length) out.push(el('h3', { class: 'dp-sub', text: 'Its instances' }), ...instanceRows(m, idx, h.onOccurrence));
+  return out;
+}
+
+/** The plates the Work's instances carry, once each: a strip, each opening the instance it is from. */
+function workPlates(m: Model, wl: NonNullable<ReturnType<typeof workLens>>, onOccurrence: (id: string) => void): HTMLElement | null {
+  const seen = new Set<string>();
+  const items: { id: string; label: string; plate: ReturnType<typeof plates> }[] = [];
+  for (const i of wl.scope) {
+    if (items.length >= 8) break;
+    const o = m.occ[i];
+    const pl = plates(m, { type: 'occurrence', id: o.id });
+    if (!pl.image || pl.standIn || seen.has(pl.image.src)) continue;
+    seen.add(pl.image.src);
+    items.push({ id: o.id, label: o.label, plate: pl });
+  }
+  if (items.length < 2) return null;
+  const strip = el('ul', { class: 'dp-strip', role: 'list' });
+  for (const it of items) {
+    strip.append(el('li', {}, [
+      el('button', { class: 'dp-strip-item', type: 'button', title: it.label, 'aria-label': it.label, onclick: () => onOccurrence(it.id) }, [
+        plate(it.plate.image, { thumb: true, className: 'dp-strip-plate', palette: it.plate.palette, alt: it.label }),
+        el('span', { class: 'dp-strip-name', text: it.label, 'aria-hidden': 'true' }),
+      ]),
+    ]));
+  }
+  return strip;
+}
+
 export type DeepTarget = { kind: 'subject'; subject: Subject } | { kind: 'occurrence'; occId: string };
 
 export class DeepSheet {
@@ -133,6 +230,11 @@ export class DeepSheet {
   private lastMode: PaneMode = 'closed';
   /** the key of the lens's own reading while one stands in the pane, else '' */
   private lensKey = '';
+  /** the readings the visitor came through, the last one first to go back to; and the one standing now */
+  private trail: Visited[] = [];
+  private visited: Visited | null = null;
+  /** the key a crumb is taking the visitor back to: arriving there does not add the reading left to the trail */
+  private returningTo = '';
   private lensRead: (() => void) | undefined;
 
   constructor(parent: HTMLElement, private model: Model, private h: DeepHandlers) {
@@ -185,6 +287,7 @@ export class DeepSheet {
     clear(this.article);
     this.article.append(el('p', { class: 'dp-eyebrow', text: r.eyebrow }), ...r.nodes);
     this.setFoot(r.foot ?? null);
+    this.arrive(`l:${r.key}`, !!r.foot?.length);
     if (fresh) this.scroller.scrollTop = 0;
     requestAnimationFrame(() => {
       this.root.classList.add('on');
@@ -235,9 +338,11 @@ export class DeepSheet {
     for (const g of groups) {
       if (g.title) c.append(el('h3', { class: 'dp-sub', text: g.title }));
       if (g.lede) c.append(el('p', { class: 'dp-ct-lede', text: g.lede }));
-      const ol = el('ol', { class: 'dp-contents' });
+      const pictured = g.items.some((it) => it.plate);
+      const ol = el('ol', { class: `dp-contents${pictured ? ' dp-ct-pictured' : ''}` });
       for (const it of g.items) {
         ol.append(el('li', { style: `--lvl:${it.level ?? 0}` }, [
+          pictured ? el('span', { class: 'dp-ct-plate', 'aria-hidden': 'true' }, [plate(it.plate?.image, { thumb: true, className: 'dp-ct-img', palette: it.plate?.palette })]) : null,
           it.onPick
             ? el('button', { type: 'button', class: 'link-quiet', text: it.label, 'aria-current': it.current ? 'true' : undefined, onclick: () => it.onPick?.() })
             : el('span', { class: 'dp-ct-still', text: it.label }),
@@ -250,6 +355,8 @@ export class DeepSheet {
     this.contentsShown = true;
     this.root.hidden = false;
     this.frame.article.hidden = true;
+    // the reading's stepper belongs to the reading: the list stands alone, and the stepper comes back with the reading
+    this.frame.foot.hidden = true;
     c.hidden = false;
     this.scroller.scrollTop = 0;
     requestAnimationFrame(() => this.root.classList.add('on'));
@@ -262,8 +369,35 @@ export class DeepSheet {
     this.contentsShown = false;
     this.frame.contents.hidden = true;
     this.frame.article.hidden = false;
+    this.frame.foot.hidden = !this.open || !this.frame.foot.childElementCount;
     if (!this.open) this.closePane();
     this.applyMode();
+  }
+
+  /**
+   * A reading has been drawn under `key`: the one it replaced joins the trail (a step along a walk replaces its stop and adds
+   * nothing, the walk's own stepper goes back), and the crumb to the last reading is set at the top of the article.
+   */
+  private arrive(key: string, walk: boolean) {
+    const was = this.visited;
+    if (was && was.key !== key) {
+      if (this.returningTo === key) this.returningTo = '';
+      else if (this.trail.length && this.trail[this.trail.length - 1].key === key) this.trail.pop();
+      else if (!(walk && was.walk)) {
+        this.trail = this.trail.filter((v) => v.key !== was.key);
+        this.trail.push(was);
+        if (this.trail.length > TRAIL_MAX) this.trail.shift();
+      }
+    }
+    const label = (this.article.querySelector('h2')?.textContent ?? '').trim();
+    const back = this.h.captureReturn?.();
+    this.visited = back && label ? { key, label, back, walk } : null;
+    const last = this.trail[this.trail.length - 1];
+    if (!last || last.key === key) return;
+    this.article.prepend(el('button', {
+      type: 'button', class: 'dp-crumb', title: `Back to ${last.label}`, 'aria-label': `Back to ${last.label}`,
+      onclick: () => { this.trail.pop(); this.returningTo = last.key; last.back(); },
+    }, [icon('back', 12), el('span', { text: last.label })]));
   }
 
   private applyMode() {
@@ -306,6 +440,7 @@ export class DeepSheet {
       if (t.kind === 'subject') this.renderSubject(t.subject);
       else this.renderOccurrence(t.occId);
       this.article.prepend(el('p', { class: 'dp-eyebrow', text: eyebrowOf(t) }));
+      this.arrive(key, false);
       this.scroller.scrollTop = 0;
     }
     requestAnimationFrame(() => {
@@ -436,97 +571,9 @@ export class DeepSheet {
     this.appendFooter();
   }
 
-  // ── a Work: a text, read through its cites ─────────────────────────────
+  // ── a Work: a text, read as an archetype is, through the instances it attests ─────
   private renderWork(id: string) {
-    const m = this.model;
-    const a = this.article;
-    const w = m.workById.get(id);
-    const wl = workLens(m, id);
-    if (!w || !wl) return;
-    a.append(el('h2', { class: 'dp-title', text: w.title }));
-    const byline = [w.voice, w.year ? String(w.year) : ''].filter(Boolean).join(' · ');
-    if (byline) a.append(el('p', { class: 'dp-lede', text: byline }));
-    // the hand behind the work, where the field holds a record of them
-    const author = m.personById.get(w.author);
-    if (author && this.h.onSubject) {
-      a.append(el('p', { class: 'dp-by' }, [el('span', { text: 'By ' }), el('button', { type: 'button', class: 'link-quiet dp-author', text: author.name, onclick: () => this.h.onSubject({ type: 'person', id: author.id }) })]));
-    }
-    if (wl.walk?.stops.length || wl.lens) {
-      a.append(el('p', { class: 'dp-acts' }, [
-        el('button', { type: 'button', class: 'lp-btn primary dp-read', text: 'Read through this text', onclick: () => this.h.onReadText?.(w.id) }),
-      ]));
-    }
-    this.appendWorkPlates(wl);
-    if (wl.contents.length) {
-      a.append(el('h3', { class: 'dp-sub', text: 'Contents' }));
-      const ol = el('ol', { class: 'dp-contents' });
-      for (const c of wl.contents) {
-        const has = c.to > c.from;
-        ol.append(el('li', { style: `--lvl:${Math.max(0, c.level - 1)}` }, [
-          has ? el('button', { type: 'button', class: 'link-quiet', text: c.title, onclick: () => this.h.onReadText?.(w.id, c.from) }) : el('span', { text: c.title }),
-          has ? el('span', { class: 'dp-cite-year', text: ` ${c.to - c.from}` }) : null,
-        ]));
-      }
-      a.append(ol);
-    }
-    // its cites in page order: the quotations first (through the one list form), then the instances that cite it
-    const stops = wl.walk?.stops ?? [];
-    const quotes: ListedQuote[] = [];
-    for (const st of stops) {
-      const i = st.subject?.type === 'occurrence' ? m.occIndex.get(st.subject.id) : undefined;
-      if (i === undefined) continue;
-      const o = m.occ[i];
-      const q = occurrenceQuote(o);
-      if (!q || typeof q.cite === 'string' || m.workKey.get(q.cite.work) !== w.id) continue;
-      quotes.push({ ...q, cite: q.cite });
-    }
-    if (quotes.length) a.append(quoteList(quotes, { title: 'Quotations', passages: this.h.passage, emphasis: 'compact' }));
-    if (stops.length) {
-      a.append(el('h3', { class: 'dp-sub', text: providerLabels().citesHeading }));
-      const ul = el('ul', { class: 'dp-occ dp-work-cites' });
-      const SHOW = 12;
-      const all = stops.flatMap((st) => {
-        const i = st.subject?.type === 'occurrence' ? m.occIndex.get(st.subject.id) : undefined;
-        return i === undefined ? [] : [{ o: m.occ[i], page: st.page?.page }];
-      });
-      const row = ({ o, page }: { o: (typeof m.occ)[number]; page?: number }) => el('li', {}, [
-        el('span', { class: 'dp-occ-year', text: page ? `pdf p${page}` : '' }),
-        el('button', { class: 'link-quiet', type: 'button', text: o.label, onclick: () => this.h.onOccurrence(o.id) }),
-      ]);
-      ul.append(...all.slice(0, SHOW).map(row));
-      a.append(ul);
-      if (all.length > SHOW) {
-        const more = el('p', { class: 'qs-more' }, [el('button', { type: 'button', class: 'link-quiet', text: `Show all ${all.length}`, onclick: () => { ul.append(...all.slice(SHOW).map(row)); more.remove(); } })]);
-        a.append(more);
-      }
-    }
-  }
-
-  /** The plates the Work's cited instances carry, once each: a strip, each opening the instance it is from. */
-  private appendWorkPlates(wl: NonNullable<ReturnType<typeof workLens>>) {
-    const m = this.model;
-    const seen = new Set<string>();
-    const items: { id: string; label: string; plate: ReturnType<typeof plates> }[] = [];
-    for (const st of wl.walk?.stops ?? []) {
-      if (st.subject?.type !== 'occurrence' || items.length >= 8) continue;
-      const i = m.occIndex.get(st.subject.id);
-      if (i === undefined) continue;
-      const pl = plates(m, { type: 'occurrence', id: st.subject.id });
-      if (!pl.image || pl.standIn || seen.has(pl.image.src)) continue;
-      seen.add(pl.image.src);
-      items.push({ id: st.subject.id, label: m.occ[i].label, plate: pl });
-    }
-    if (items.length < 2) return;
-    const strip = el('ul', { class: 'dp-strip', role: 'list' });
-    for (const it of items) {
-      strip.append(el('li', {}, [
-        el('button', { class: 'dp-strip-item', type: 'button', title: it.label, 'aria-label': it.label, onclick: () => this.h.onOccurrence(it.id) }, [
-          plate(it.plate.image, { thumb: true, className: 'dp-strip-plate', palette: it.plate.palette, alt: it.label }),
-          el('span', { class: 'dp-strip-name', text: it.label, 'aria-hidden': 'true' }),
-        ]),
-      ]));
-    }
-    this.article.append(strip);
+    this.article.append(...workPage(this.model, id, this.h));
   }
 
   // ── a Person: the hand behind the words ───────────────────────────────

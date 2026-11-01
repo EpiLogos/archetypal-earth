@@ -123,7 +123,7 @@ export const LENSES: readonly LensDef[] = [
   { id: 'alchemy', label: 'Alchemy', icon: 'alchemy', group: 'read', blurb: 'The opus from nigredo to rubedo, its operations and matter.', key: 'L' },
   { id: 'aion', label: 'Aion', icon: 'aion', group: 'read', get blurb() { return providerLabels().lensAion; }, key: 'A' },
   { id: 'redbook', label: 'Red Book', icon: 'redbook', group: 'read', blurb: 'The book the rest of the field grew from.', key: 'R' },
-  { id: 'texts', label: 'Texts', icon: 'texts', group: 'read', blurb: 'Read through any one of the works the field draws on, page by page.' },
+  { id: 'texts', label: 'Texts', icon: 'texts', group: 'read', blurb: 'Every work the field draws on, read through the instances it attests.' },
   { id: 'astrology', label: 'Astrology', icon: 'astrology', group: 'practice', get blurb() { return providerLabels().lensAstrology; } },
   { id: 'dreams', label: 'Dreams', icon: 'dreams', group: 'practice', blurb: 'Keep your dreams and amplify their images.' },
   { id: 'symbols', label: 'Symbols', icon: 'symbols', group: 'practice', blurb: 'Take one symbol through its history and doctrine.' },
