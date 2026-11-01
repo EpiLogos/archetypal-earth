@@ -1,4 +1,4 @@
-// S7 data: Jung's engagement year of every cite (occurrence.jung[].citeYear), parsed from the cite's year string. 3,221 of 3,228
+// S7 data: Jung's engagement year of every cite (occurrence.jung[].citeYear), parsed from the cite's year string. 3,220 of 3,227
 // cites name a four-digit year; the other seven are listed by scripts/verify-cite-years.mjs and carry none.
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
@@ -23,10 +23,10 @@ describe('the cite-year axis', () => {
     expect(citeYear('')).toBeNull();
   });
 
-  it('3,221 of the 3,228 cites carry citeYear, the seven others none, and every citeYear agrees with its string', () => {
+  it('3,220 of the 3,227 cites carry citeYear, the seven others none, and every citeYear agrees with its string', () => {
     const r = verifyCiteYears(field);
-    expect(r.cites).toBe(3228);
-    expect(r.parsed).toBe(3221);
+    expect(r.cites).toBe(3227);
+    expect(r.parsed).toBe(3220);
     expect(r.unparsed.length).toBe(7);
     expect(r.wrong).toEqual([]);
   });
@@ -34,7 +34,7 @@ describe('the cite-year axis', () => {
   it('scripts/verify-cite-years.mjs exits 0 and lists the seven unparsed cites', () => {
     const run = spawnSync('node', [path.join(ROOT, 'scripts/verify-cite-years.mjs')], { encoding: 'utf8' });
     expect(run.status, run.stderr).toBe(0);
-    expect(run.stdout).toContain('3221 of 3228');
+    expect(run.stdout).toContain('3220 of 3227');
     expect(run.stdout.match(/unparsed:/g)?.length).toBe(7);
   });
 });

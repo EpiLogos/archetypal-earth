@@ -366,6 +366,8 @@ function guessYear(display) {
 for (const n of instNotes.filter((x) => !x.failed)) {
   const d = n.data;
   const id = n.slug;
+  // a note that redirects stands for a locus another note already carries (two harvest names for one plate)
+  if (String(d.status || '').toLowerCase() === 'redirect') { skip('instance', id, 'redirect: the locus is carried by another note'); continue; }
   const title = fixText(readerTitle(collapse(plain(d.title || ''))), `occ:${id}.title`);
   if (!title) { skip('instance', id, 'no title'); continue; }
   const primaryRaw = linkTargets(d.instance_of)[0];

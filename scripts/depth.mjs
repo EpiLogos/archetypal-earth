@@ -1,7 +1,7 @@
 // An archetype at full depth (Thread 6, the Great Mother as exemplar): curation/depth/<id>.json → public/data/depth.json.
 // Quotations are placed in the read-only vault corpus by scripts/lib/cite.mjs; one that will not place fails. The author's
-// instances come from the reading-pass records: every one whose quotation places on its page is kept, dated or not; where
-// the reader marked the scan as damaged, the instance says so instead of being dropped.
+// instances come from the reading-pass records: every one whose quotation places on its page is kept, dated or not, and
+// named as its page names it where the record carries that name (a plate's title).
 //   npm run depth | npm run depth:check
 import fs from 'node:fs';
 import path from 'node:path';
@@ -50,9 +50,11 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
         // a caption too short to name one place in the book still names its page: kept when its words stand there
         if (loc.error && Number.isInteger(r.pdf_page) && !verify(load, { work: src.vol, locator: `pdf p${r.pdf_page}`, quote: r.quote })) loc = { locator: `pdf p${r.pdf_page}`, page: r.pdf_page };
         if (loc.error) { unplaced++; continue; }
-        const key = `${src.vol}|${loc.page}|${r.quote}`;
+        // two records that name one plate on one page (its title, its caption) are one instance
+        const key = r.name ? `${src.vol}|${loc.page}|name:${r.name}` : `${src.vol}|${loc.page}|${r.quote}`;
         const prev = seen.get(key);
-        if (prev) { if (!prev.terms.includes(r.term)) prev.terms.push(r.term); continue; }
+        // a second record of the same plate (another harvest name for it) adds nothing to read; a second name for the same quotation is kept
+        if (prev) { if (!r.name && !prev.terms.includes(r.term)) { prev.terms.push(r.term); prev.names.push(''); } continue; }
         const instanceText = stripFootnoteMarkers(completeQuote(load, src.vol, r.quote).text);
         seen.set(key, {
           ...(Number.isInteger(r.year_int) ? { year: r.year_int } : {}),
@@ -60,15 +62,16 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
           place: readerPlace(r.place ?? ''),
           locus: r.locus_type ?? '',
           terms: [r.term],
+          // the name the book prints for it where the record carries one (a plate's title), for a term that is no family
+          names: [r.name ?? ''],
           // the harvest's trimmed window is completed to its corpus sentence where the corpus holds one; a caption stands as written
           text: instanceText,
           ...(isPlateCaption(instanceText) ? { caption: true } : {}),
           cite: { work: src.vol, workTitle: titles.get(src.vol) ?? src.vol, locator: loc.locator, ...(loc.print ? { print: loc.print } : {}) },
-          ...(r.ocr || loc.scan ? { scan: true } : {}),
         });
       }
     }
-    const all = [...seen.values()].map((x) => ({ ...x, families: x.terms.filter((t) => families.has(t)) }));
+    const all = [...seen.values()].map(({ names, ...x }) => ({ ...x, ...(names.some(Boolean) ? { names } : {}), families: x.terms.filter((t) => families.has(t)) }));
     const byPage = (a, b) => a.cite.work.localeCompare(b.cite.work) || Number(a.cite.locator.replace(/\D+/g, '')) - Number(b.cite.locator.replace(/\D+/g, ''));
     const dated = all.filter((x) => x.year !== undefined).sort((a, b) => a.year - b.year || byPage(a, b));
     const undated = all.filter((x) => x.year === undefined).sort(byPage);

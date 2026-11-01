@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "source": "public/data/field.json",
-  "total": 3228,
-  "ordered": 2950,
+  "total": 3227,
+  "ordered": 2949,
   "unresolved": 278,
   "works": {
     "a-blue-fire": {
@@ -10210,11 +10210,6 @@
           "id": "symbol-of-great-mother-with-animals-sumer-plate-symbol-of-the-great-mother-with-animals-stone-su",
           "kind": "pdf",
           "page": 278
-        },
-        {
-          "id": "bronze-mirror-hormone-goddess-plate-bronze-mirror-hormone-possibly-greek-c-400-b-c-greece-inferr",
-          "kind": "pdf",
-          "page": 279
         },
         {
           "id": "goddess-soul-birds-on-lion-sumer-plate-goddess-with-soul-birds-standing-on-a-lion-sumer-c-2000-b",

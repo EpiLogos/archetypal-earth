@@ -7,7 +7,8 @@
     "seven-planets": "planetary-gods",
     "trickster": "trickster-figure",
     "wise-old-man": "senex-figure",
-    "shadow": "devil"
+    "shadow": "devil",
+    "bronze-mirror-hormone-goddess": "goddess-soul-birds-on-lion-sumer"
   },
   "families": {
     "anima-figure": {
@@ -2974,7 +2975,7 @@
       "oneLine": "The alcheringa grandfather, the ancestor of the rice-planting peoples, as told in Zurich."
     },
     "aphrodite-with-pomegranate-cyprus": {
-      "oneLine": "Aphrodite with a pomegranate, Cyprus, VI century B.C. (as printed; partly garbled)."
+      "oneLine": "Aphrodite with a pomegranate, terra cotta, Cyprus, vi–v century B.C."
     },
     "apple": {
       "oneLine": "Apples given to the brother: a patient's dream at the Burghölzli clinic, Zurich, 1905."
@@ -2989,7 +2990,7 @@
       "oneLine": "A stone Artemis from Italy, 500 B.C. (as printed)."
     },
     "astarte-gold-plaque-syria": {
-      "oneLine": "A gold plaque of Astarte from Syria, c. XII century B.C. (as printed)."
+      "oneLine": "A gold plaque of Astarte from Syria, c. xiii century B.C."
     },
     "baptism-les-grandes-heures": {
       "oneLine": "The baptism miniature of Les Grandes Heures du duc de Berry, France, c. 1400 (as printed)."
@@ -3021,9 +3022,6 @@
     "breast-motif": {
       "oneLine": "A breast motif on a clay figure from Hagia Triada, Crete, Late Minoan III."
     },
-    "bronze-mirror-hormone-goddess": {
-      "oneLine": "A bronze mirror with a hormone goddess, Greece, c. 400 B.C. (as printed)."
-    },
     "burial-jar-asia-minor": {
       "oneLine": "A burial jar from Asia Minor, 3500–1750 B.C. (as printed)."
     },
@@ -3031,7 +3029,7 @@
       "oneLine": "The soul as a winged insect: psyche is the Greek word for both soul and butterfly."
     },
     "cabirian-group-thebes-vessel": {
-      "oneLine": "A Cabirian group on a vessel from Thebes, V century B.C. (as printed)."
+      "oneLine": "A Cabirian group on a vessel from Thebes, iv century B.C."
     },
     "cap": {
       "oneLine": "The magic cap: Siegfried’s Tarnhut, the Phrygian cap, the brownies’ hood."
@@ -3040,16 +3038,18 @@
       "oneLine": "A Gothic cathedral pictured as a tarantula's nest: Zarathustra (1883) and Gothic Europe."
     },
     "christ-asleep-on-a-sheep": {
-      "oneLine": "Christ asleep on a sheep, a plate of the 9th century (as printed; caption partly garbled)."
+      "oneLine": "Christ asleep in a ship, a miniature from an Austrian lectionary, xi century.",
+      "name": "Christ asleep in a ship"
     },
     "cone-mesopotamia-goddesses": {
-      "oneLine": "Cone-shaped figures of goddesses from Mesopotamia, c. XXIV century B.C. (as printed)."
+      "oneLine": "Terra-cotta goddesses from Mesopotamia, c. xxiv century B.C."
     },
     "cow-with-emerging-calves-cylinder-seal": {
-      "oneLine": "A cow with emerging calves on a cylinder seal, Mesopotamia, c. 1000 B.C. (as printed)."
+      "oneLine": "A byre with emerging calves on cylinder seals, Mesopotamia, c. 3000 B.C.",
+      "name": "Byre with emerging calves"
     },
     "cybele-lion-drawn-procession-car": {
-      "oneLine": "Cybele in a lion-drawn procession car, Rome, I century A.D. (as printed)."
+      "oneLine": "Cybele on a lion-drawn procession car, bronze, Rome, ii century A.D."
     },
     "dance": {
       "oneLine": "The gods of Elephanta and Siva's dance: rock-cut caves near Bombay, seen by Pauli in 1952."
@@ -3070,7 +3070,7 @@
       "oneLine": "Gideon's dew on the fleece, the sign of Jahveh in Judges 6, Israel, 12th–11th century BCE."
     },
     "diana-of-ephesus-alabaster-bronze": {
-      "oneLine": "Diana of Ephesus in alabaster and bronze, Rome, I century A.D. (as printed)."
+      "oneLine": "Diana of Ephesus in alabaster and bronze, Rome, ii century A.D."
     },
     "divination": {
       "oneLine": "A divination bowl of Patricius and Hilarius, Rome, A.D. 371."
@@ -3106,7 +3106,7 @@
       "oneLine": "Female figurines from Ur, c. 3000 B.C. (as printed; the date is partly garbled)."
     },
     "fertility-goddess-ivory-box-ras-shamra": {
-      "oneLine": "A fertility goddess on an ivory box from Ras Shamra, Syria, XII century B.C. (as printed)."
+      "oneLine": "A fertility goddess on an ivory box lid, Ras Shamra, Syria, xiii century B.C."
     },
     "fig-66-resurrection-of-kore-attic": {
       "oneLine": "The resurrection of Kore, an Attic relief, fig. 66, IV century B.C."
@@ -3130,10 +3130,11 @@
       "oneLine": "A goddess from Phoenicia, c. 2500 B.C. (as given)."
     },
     "goddess-soul-birds-on-lion-sumer": {
-      "oneLine": "A goddess with soul birds on a lion, Sumer, c. 2000 B.C. (as printed)."
+      "oneLine": "A goddess with soul birds on a lion: a bronze mirror, Hermione, Greece, c. 550 B.C.",
+      "name": "Goddess with soul birds on a lion"
     },
     "goddess-with-child-hittite": {
-      "oneLine": "A goddess with child from the Hittite region, c. 1000 B.C. (as printed)."
+      "oneLine": "A bronze goddess holding a child, on a lion, Hittite, c. 1500 B.C."
     },
     "goddess-with-flower-cyprus-stone": {
       "oneLine": "A goddess with a flower, carved in stone on Cyprus, V century B.C. (as printed)."
@@ -3163,7 +3164,7 @@
       "oneLine": "The second plate of the Gundestrup caldron, Jutland, III–II century B.C. (as printed)."
     },
     "harpy-tomb-xanthos": {
-      "oneLine": "The Harpy Tomb, a marble relief from Xanthos, Lycia, c. 600 B.C. (as printed)."
+      "oneLine": "The Harpy Tomb, a marble relief from Xanthos, Lycia, c. 500 B.C."
     },
     "helios": {
       "oneLine": "The sun-god in his chariot of four winged white horses, rising over the desert at dawn."
@@ -3178,7 +3179,7 @@
       "oneLine": "Chained cult images in Mediterranean antiquity, Archaic to Hellenistic (inferred)."
     },
     "isis-hathor-suckling-horus": {
-      "oneLine": "Isis or Hathor suckling Horus, Egypt, VII–VI century B.C. (as printed)."
+      "oneLine": "Isis-Hathor suckling Horus, bronze, Egypt, viii–vi century B.C."
     },
     "lady-of-the-beasts-boeotian-amphora": {
       "oneLine": "The Lady of the Beasts on a Boeotian amphora, VII century B.C. (as printed)."
@@ -3214,7 +3215,7 @@
       "oneLine": "Lenin's mummy in the Red Square mausoleum, Moscow, from 1924."
     },
     "nut-tree-goddess-sun-disk-bronze": {
-      "oneLine": "The nut-tree goddess on a bronze sun disk, Egypt, Saite period, c. 600 B.C. (as printed)."
+      "oneLine": "Nut as tree goddess with the sun disk, a bronze vessel, Egypt, c. 600 B.C."
     },
     "orb": {
       "oneLine": "The Reichsapfel, the imperial orb of the Holy Roman Empire's regalia."
@@ -3271,7 +3272,7 @@
       "oneLine": "The sun phallus: a psychotic patient's vision, recorded in an asylum about 1906."
     },
     "symbol-of-great-mother-with-animals-sumer": {
-      "oneLine": "The Great Mother with animals, Sumerian symbol, c. 3000 B.C. (as printed; partly garbled)."
+      "oneLine": "The symbol of the Great Mother with animals, stone reliefs, Sumer, c. 3000 B.C."
     },
     "the-night-epstein": {
       "oneLine": "Jacob Epstein's stone sculpture The Night, London, 1929 (as given)."

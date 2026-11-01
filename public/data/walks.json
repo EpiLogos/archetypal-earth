@@ -3273,7 +3273,7 @@
       "title": "The model",
       "line": "CW9i ¶6 and ¶155, and the Dream Analysis seminar of 12 March 1930: the archetype called a hypothetical and irrepresentable model, empty and purely formal, perfectly indescribable."
      },
-     "text": "The archetype in itself is empty and purely formal, nothing but a tacultas praetormandi) a possibility of representation which is given apriori."
+     "text": "The archetype in itself is empty and purely formal, nothing but a tacultas praetormandi) a possibility of representation which is given a priori."
     },
     {
      "subject": {
@@ -3870,7 +3870,7 @@
       "title": "The deeper layer",
       "line": "CW9i ¶2 (1934, Eranos; rev. 1954): the definition; ¶88: the collective unconscious distinguished negatively from the personal unconscious."
      },
-     "text": "The collective unconscious is a part of the psyche which can be negatively distinguished from a personal unconscious by the fact that it does not, like the latter, owe its existence to personal experience"
+     "text": "Definition The collective unconscious is a part of the psyche which can be negatively distinguished from a personal unconscious by the fact that it does not, like the latter, owe its existence to personal experience and consequently is not a personal acquisition."
     },
     {
      "subject": {
@@ -35367,7 +35367,7 @@
       "work": "neumann-great-mother",
       "page": 222
      },
-     "year": -1150,
+     "year": -1250,
      "citeYear": 1955,
      "place": {
       "lat": 34.1917,
@@ -35399,7 +35399,7 @@
       "work": "neumann-great-mother",
       "page": 223
      },
-     "year": -1000,
+     "year": -650,
      "citeYear": 1955,
      "place": {
       "lat": 19.6268,
@@ -35495,7 +35495,7 @@
       "work": "neumann-great-mother",
       "page": 233
      },
-     "year": 50,
+     "year": 150,
      "citeYear": 1955,
      "place": {
       "lat": 41.9797,
@@ -35511,7 +35511,7 @@
       "work": "neumann-great-mother",
       "page": 234
      },
-     "year": -1000,
+     "year": -1500,
      "citeYear": 1955,
      "place": {
       "lat": 40.7666,
@@ -35559,7 +35559,7 @@
       "work": "neumann-great-mother",
       "page": 247
      },
-     "year": 1420,
+     "year": 1425,
      "citeYear": 1955,
      "place": {
       "lat": 45.4609,
@@ -35591,7 +35591,7 @@
       "work": "neumann-great-mother",
       "page": 252
      },
-     "year": -1000,
+     "year": -3000,
      "citeYear": 1955,
      "place": {
       "lat": 34.1233,
@@ -35655,7 +35655,7 @@
       "work": "neumann-great-mother",
       "page": 260
      },
-     "year": -900,
+     "year": -850,
      "citeYear": 1955,
      "place": {
       "lat": 33.6054,
@@ -35738,8 +35738,8 @@
      "year": 1500,
      "citeYear": 1955,
      "place": {
-      "lat": 45.5011,
-      "lon": 10.3675
+      "lat": 43.6711,
+      "lon": 11.7999
      }
     },
     {
@@ -35751,7 +35751,7 @@
       "work": "neumann-great-mother",
       "page": 275
      },
-     "year": 850,
+     "year": 1050,
      "citeYear": 1955
     },
     {
@@ -35779,7 +35779,7 @@
       "work": "neumann-great-mother",
       "page": 277
      },
-     "year": -1150,
+     "year": -1250,
      "citeYear": 1955,
      "place": {
       "lat": 35.5689,
@@ -35821,33 +35821,17 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "bronze-mirror-hormone-goddess-plate-bronze-mirror-hormone-possibly-greek-c-400-b-c-greece-inferr"
-     },
-     "page": {
-      "work": "neumann-great-mother",
-      "page": 279
-     },
-     "year": -400,
-     "citeYear": 1955,
-     "place": {
-      "lat": 38.6576,
-      "lon": 22.4958
-     }
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "goddess-soul-birds-on-lion-sumer-plate-goddess-with-soul-birds-standing-on-a-lion-sumer-c-2000-b"
      },
      "page": {
       "work": "neumann-great-mother",
       "page": 279
      },
-     "year": -2000,
+     "year": -550,
      "citeYear": 1955,
      "place": {
-      "lat": 32.2075,
-      "lon": 46.4784
+      "lat": 39.7075,
+      "lon": 22.5249
      }
     },
     {
@@ -35859,7 +35843,7 @@
       "work": "neumann-great-mother",
       "page": 280
      },
-     "year": 50,
+     "year": 150,
      "citeYear": 1955,
      "place": {
       "lat": 41.957,
@@ -35955,7 +35939,7 @@
       "work": "neumann-great-mother",
       "page": 286
      },
-     "year": -250,
+     "year": -200,
      "citeYear": 1955,
      "place": {
       "lat": 55.7736,
@@ -35987,7 +35971,7 @@
       "work": "neumann-great-mother",
       "page": 288
      },
-     "year": -550,
+     "year": -525,
      "citeYear": 1955,
      "place": {
       "lat": 35.1417,
@@ -36031,7 +36015,7 @@
       "work": "neumann-great-mother",
       "page": 290
      },
-     "year": -450,
+     "year": -475,
      "citeYear": 1955,
      "place": {
       "lat": 38.5517,
@@ -36063,7 +36047,7 @@
       "work": "neumann-great-mother",
       "page": 291
      },
-     "year": -600,
+     "year": -500,
      "citeYear": 1955,
      "place": {
       "lat": 36.351,
@@ -36079,7 +36063,7 @@
       "work": "neumann-great-mother",
       "page": 292
      },
-     "year": -550,
+     "year": -500,
      "citeYear": 1955,
      "place": {
       "lat": 34.7381,
@@ -36127,7 +36111,7 @@
       "work": "neumann-great-mother",
       "page": 295
      },
-     "year": -450,
+     "year": -350,
      "citeYear": 1955,
      "place": {
       "lat": 38.292,
@@ -36159,7 +36143,7 @@
       "work": "neumann-great-mother",
       "page": 298
      },
-     "year": 1180,
+     "year": 1150,
      "citeYear": 1955,
      "place": {
       "lat": 47.6665,

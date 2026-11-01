@@ -2,17 +2,17 @@
   "counts": {
     "archetypes": 27,
     "theoretics": 14,
-    "families": 559,
-    "occurrences": 3085,
+    "families": 558,
+    "occurrences": 3084,
     "cultures": 64,
-    "images": 2949,
+    "images": 2948,
     "joins": 410
   },
   "vaultLedgerLine": "2026-10-10 — THREE NEW TEXTS INGESTED + CLOUD HANDOFF ✅",
   "geoPrecision": {
     "place": 1576,
-    "region": 1062,
-    "culture": 206,
+    "region": 1060,
+    "culture": 207,
     "none": 241,
     "place+region %": 85.5,
     "pct": {
@@ -23,17 +23,17 @@
     }
   },
   "geoSource": {
-    "place": 2570,
+    "place": 2567,
     "patient-default": 51,
-    "title": 17,
-    "culture": 206,
+    "title": 18,
+    "culture": 207,
     "none": 241
   },
-  "imagesAttached": 2949,
+  "imagesAttached": 2948,
   "locusTypes": {
     "ritual": 166,
     "myth-episode": 310,
-    "artifact": 521,
+    "artifact": 520,
     "text-passage": 1170,
     "vision": 249,
     "clinical-case": 122,
@@ -41,8 +41,8 @@
     "dream": 341,
     "active-imagination": 86
   },
-  "quotes": 1957,
-  "occurrencesWithJungCites": 3085,
+  "quotes": 1956,
+  "occurrencesWithJungCites": 3084,
   "labelMaxLen": 48,
   "yearRange": [
     -10000,
@@ -382,7 +382,8 @@
     "seven-planets": "planetary-gods",
     "trickster": "trickster-figure",
     "wise-old-man": "senex-figure",
-    "shadow": "devil"
+    "shadow": "devil",
+    "bronze-mirror-hormone-goddess": "goddess-soul-birds-on-lion-sumer"
   },
   "familiesWithoutOccurrences": [],
   "listedMembership": {
@@ -833,11 +834,12 @@
     "Land of Uz (literary setting)",
     "Land of the West, beyond the waters of death (Gilgamesh, tablet XI)",
     "Landsberg (Herrad of Landsberg)",
+    "Lombard School",
     "Lower Rhine (cited from Salzer, Sinnbilder und Beiworte Mariens, p. 21)",
     "Lugano (unidentified collection)",
     "Mainz",
     "Matthean text (Novum Testamentum Graece et Latine)",
-    "Megara (?)",
+    "Megara",
     "Memphis",
     "Memphis (Serapeum)",
     "Mesoamerica",
@@ -1015,22 +1017,33 @@
         "sync.md",
         "vonzfranz-number-time.md"
       ],
-      "key": "8f81fceacf71c332",
-      "words": 50536,
+      "key": "8a31cded9a5663c0",
+      "words": 50328,
       "cached": true
     },
-    "stringsChanged": 181,
-    "changes": 585,
+    "stringsChanged": 194,
+    "changes": 598,
     "byKind": {
       "join": 523,
-      "curated": 46,
+      "curated": 59,
       "reflow": 15,
       "hyphen-break": 1
     },
-    "unique": 407,
+    "unique": 406,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
+      {
+        "kind": "curated",
+        "before": "v century",
+        "after": "V century",
+        "count": 24,
+        "where": [
+          "occ:aphrodite-with-pomegranate-cyprus-plate-aphrodite-with-pomegranate-terra-cotta-cyprus-vi-cyprus.title",
+          "occ:aphrodite-with-pomegranate-cyprus-plate-aphrodite-with-pomegranate-terra-cotta-cyprus-vi-cyprus.body[0]",
+          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.title"
+        ]
+      },
       {
         "kind": "join",
         "before": "m an",
@@ -1106,28 +1119,6 @@
           "occ:lion-rose-blood-khunrath-chaos-1597.body[0]",
           "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[1]",
           "occ:quaternion-four-beasts-daniel-vision-babylon-2cbce.body[2]"
-        ]
-      },
-      {
-        "kind": "curated",
-        "before": "v century",
-        "after": "V century",
-        "count": 6,
-        "where": [
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.title",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.body[0]",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote"
-        ]
-      },
-      {
-        "kind": "curated",
-        "before": "B.c",
-        "after": "B.C.",
-        "count": 5,
-        "where": [
-          "occ:astarte-gold-plaque-syria-plate-astarte-gold-plaque-syria-c-xii-century-b-c-syria-c-xii-century.quote",
-          "occ:baubo-figure-priene-plate-baubo-figure-terra-cotta-priene-asia-minor-v-priene-asia-minor-v-centu.quote",
-          "occ:burial-jar-asia-minor-burial-of-the-dead-in-a-great-jar-in-pre-hellenic-asia-asia-minor-3500-175.quote"
         ]
       },
       {
@@ -2567,15 +2558,6 @@
       },
       {
         "kind": "join",
-        "before": "da ting",
-        "after": "dating",
-        "count": 1,
-        "where": [
-          "occ:trickster-festum-asinorum-beauvais-12c.quote"
-        ]
-      },
-      {
-        "kind": "join",
         "before": "de mon",
         "after": "demon",
         "count": 1,
@@ -2662,6 +2644,15 @@
         "count": 1,
         "where": [
           "occ:chen-yen-true-man-wei-po-yang-china-2c.body[0]"
+        ]
+      },
+      {
+        "kind": "join",
+        "before": "dis coveries",
+        "after": "discoveries",
+        "count": 1,
+        "where": [
+          "occ:great-mother-tell-halaf-discoveries-show-near-eastern-female-figures-tell-halaf-near-east-before.quote"
         ]
       },
       {
@@ -4809,6 +4800,11 @@
       "kind": "family",
       "id": "great-mother ↔ cow",
       "reason": "id is not a slug and no instance names it (vault stub)"
+    },
+    {
+      "kind": "instance",
+      "id": "bronze-mirror-hormone-goddess-plate-bronze-mirror-hormone-possibly-greek-c-400-b-c-greece-inferr",
+      "reason": "redirect: the locus is carried by another note"
     },
     {
       "kind": "instance",

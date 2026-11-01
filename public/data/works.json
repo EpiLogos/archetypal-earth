@@ -15483,13 +15483,13 @@
     }
    ],
    "chaptersDerived": true,
-   "cites": 80,
-   "occurrences": 80,
+   "cites": 79,
+   "occurrences": 79,
    "ties": {
     "archetypes": [
      {
       "id": "great-mother",
-      "weight": 80
+      "weight": 79
      },
      {
       "id": "self",
@@ -15585,10 +15585,6 @@
      },
      {
       "id": "breast-motif",
-      "weight": 1
-     },
-     {
-      "id": "bronze-mirror-hormone-goddess",
       "weight": 1
      },
      {

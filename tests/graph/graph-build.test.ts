@@ -76,7 +76,7 @@ describe('cite ties, from the cites and nothing else', () => {
     for (const [k, w] of aggregated) expect(got.get(k), k).toBe(w);
     // every cite stands on exactly one family
     expect(agg.filter((e) => g.nodes[e.t].kind === 'family').reduce((n, e) => n + (e.weight ?? 0), 0)).toBe(totalCites);
-    expect(totalCites).toBe(3228);
+    expect(totalCites).toBe(3227);
   });
 
   it('one tie per work and occurrence that cites it, weighted by the cites on that occurrence', () => {

@@ -160,7 +160,7 @@ describe('the strip counts the filtered in-lens set', () => {
 describe('Jung\'s cite-year axis over the field', () => {
   it('spans the years the cites carry, and counts each placed occurrence\'s distinct cite years', () => {
     const years = field.occurrences.flatMap((o) => o.jung.map((c) => c.citeYear)).filter((y): y is number => y !== undefined);
-    expect(years.length).toBe(3221);
+    expect(years.length).toBe(3220);
     const span = citeSpan(m.occ)!;
     expect(span).toEqual([Math.min(...years), Math.max(...years)]);
     const want = field.occurrences.reduce((n, o) => (placed(o) ? n + new Set(o.jung.map((c) => c.citeYear).filter((y) => y !== undefined)).size : n), 0);

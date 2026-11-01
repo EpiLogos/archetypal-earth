@@ -26,6 +26,8 @@ export interface DepthInstance {
   terms: string[];
   /** those names that are also families of the field */
   families: string[];
+  /** beside each term, the name the book prints for it ("Christ Asleep in a Ship"), where the record carries one */
+  names?: string[];
   text: string;
   /** the text is a plate caption as printed, shown as one (see lenses/ui.ts captionBlock) */
   caption?: true;
@@ -69,7 +71,7 @@ export function depthView(m: Model, d: DepthEntry, act: DepthActions, passages: 
   const instanceRow = (x: DepthInstance) => el('li', {}, [
     el('span', { class: 'am-year', text: x.year !== undefined ? yearText(x.year) : '' }),
     el('div', {}, [
-      el('span', { class: 'dp-term', text: x.terms.map(nameOf).join(' · ') }),
+      el('span', { class: 'dp-term', text: x.terms.map((t, i) => (m.famById.has(t) || m.archById.has(t) ? nameOf(t) : x.names?.[i] || nameOf(t))).join(' · ') }),
       el('span', { class: 'dp-place', text: [x.place, x.year === undefined ? x.yearDisplay : ''].filter(Boolean).join(' · ') }),
       quoteBlock({ text: x.text, cite: x.cite, ...(x.caption ? { caption: true } : {}) }, passages, { compact: true }),
       x.families.length ? el('div', { class: 'am-chips' }, x.families.map(chip)) : null,

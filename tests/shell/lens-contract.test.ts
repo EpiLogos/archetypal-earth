@@ -23,7 +23,7 @@ const data: LensData = {
 
 /** Measured (own, placed) per lens: lens-sets.mjs on the field as it stands. Astrology, Dreams and Coincidences have no field set. */
 const MEASURED: Record<string, [number, number]> = {
-  field: [3085, 2844],
+  field: [3084, 2843],
   theory: [1194, 1188],
   aion: [704, 701],
   redbook: [37, 37],
