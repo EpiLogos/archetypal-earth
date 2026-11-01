@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 // @ts-expect-error plain ESM script
-import { readerBody, readerTitle } from '../../scripts/lib/reader-text.mjs';
+import { readerBody, readerLocator, readerPlace, readerTitle, withoutAsides } from '../../scripts/lib/reader-text.mjs';
 
 // The cases are the vault's own sentences, as field.json carried them before the reader's text was cut from them.
 describe('the reader is not shown the vault bookkeeping', () => {
@@ -32,10 +32,46 @@ describe('the reader is not shown the vault bookkeeping', () => {
     expect(readerBody(['The bull-gnawing-saint interpretation proper falls beyond this chunk\'s page range.'])).toEqual([]);
   });
 
+  it('a date, a caption and a locator lose the note and keep their own punctuation', () => {
+    expect(withoutAsides('A Baubo figure from Priene, Asia Minor, V century B.C. (as printed).')).toBe('A Baubo figure from Priene, Asia Minor, V century B.C.');
+    expect(withoutAsides('c. 450 B.C. (as printed, OCR \'ec. 450 nc.\')')).toBe('c. 450 B.C.');
+    expect(withoutAsides('he breaks off... (as given)')).toBe('he breaks off...');
+    expect(readerLocator('¶232-235 (pdf p163-165; ¶s unmarked in chunk)')).toBe('¶232-235 (pdf p163-165)');
+    expect(readerLocator('¶33 (pdf p28) — ¶ marker lost in OCR, reconstructed')).toBe('¶33 (pdf p28)');
+  });
+
   it('the published field carries none of it', () => {
     const field = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../public/data/field.json'), 'utf8')) as { occurrences: { id: string; title: string; body?: string[] }[] };
     const NOTE = /\bOCR\b|garbled|\bas printed\b|reading[- ]pass|verbatim from the scan|p0\d{3}\.jpg|\bthis vault\b|\bthe vault's\b|\bchunk\b|\bflag(?:ged)? for\b|\bmention record\b/i;
     const leaks = field.occurrences.filter((o) => NOTE.test(o.title) || (o.body ?? []).some((p) => NOTE.test(p))).map((o) => o.id);
     expect(leaks.slice(0, 8), `${leaks.length} instances`).toEqual([]);
+  });
+
+  // Every published file, every string the reader can be shown: dates, places, captions, locators, section lines, chapter
+  // titles. Ids and file paths are slugs nobody reads; a person's `reasons` and the plates' `note` are never rendered.
+  it('no published file shows it either', () => {
+    const dir = path.resolve(__dirname, '../../public/data');
+    const NOTE = /\bOCR(?:'ed)?\b|garbled|\(as printed|\(as given|\bas printed\b|reading[- ]pass(?:es)?\b|\bthe scan\b|\bscan (?:of the letter )?is damaged|\bthis vault\b|\bthe vault(?:'s| note| records| reads| keeps)\b|\bvault note\b|\bvault’s\b|\bchunk\b|\bunmarked in\b/i;
+    const UNREAD = /(?:^|\.)(?:id|src|thumb|sourceUrl|sha256|occurrenceIds|reasons|cites\[\]\.id|subject\.id|plates\.note|licence)(?:$|\.|\[)/;
+    const leaks: string[] = [];
+    const walk = (v: unknown, at: string, file: string) => {
+      if (typeof v === 'string') { if (NOTE.test(v) && !UNREAD.test(at)) leaks.push(`${file}${at}: ${v.slice(0, 90)}`); }
+      else if (Array.isArray(v)) v.forEach((x) => walk(x, `${at}[]`, file));
+      else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, `${at}.${k}`, file);
+    };
+    for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.json'))) walk(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')), '', f);
+    expect(leaks.slice(0, 12), `${leaks.length} strings`).toEqual([]);
+  });
+
+  it('a place says where, not how the harvest worked it out', () => {
+    expect(readerPlace("Greece (inferred from 'Gren')")).toBe('Greece');
+    expect(readerPlace('Möttlingen, Württemberg (inferred from Zündel)')).toBe('Möttlingen, Württemberg');
+    expect(readerPlace("Zurich? (Jung's practice)")).toBe("Zurich? (Jung's practice)");
+    expect(readerPlace('not legible (OCR)')).toBe('');
+    const read = (f: string) => JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../public/data', f), 'utf8'));
+    const gm = read('depth.json').archetypes['great-mother'].instances as { items: { place: string }[]; undated: { place: string }[] };
+    const places = [...(read('field.json').occurrences as { place: string }[]), ...gm.items, ...gm.undated].map((o) => o.place);
+    const leaks = places.filter((p) => /\binferred\b|^not (?:given|legible)$/i.test(p));
+    expect(leaks.slice(0, 8), `${leaks.length} places`).toEqual([]);
   });
 });

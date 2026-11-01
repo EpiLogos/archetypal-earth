@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-11T22:08:01.812Z",
+    "generatedAt": "2026-11-01T11:32:12.536Z",
     "sidecar": {
       "name": "archetypal-earth-ephemeris",
       "version": "1.2.0",
@@ -1373,7 +1373,7 @@
             "id": "wise-old-man"
           },
           "basis": "inferred",
-          "note": "The vault reads Saturn's Senex as the Wise Old Man by inference.",
+          "note": "Saturn's Senex is read as the Wise Old Man by inference.",
           "restates": true,
           "cites": [
             {

@@ -10,6 +10,7 @@ import { DEFAULT_VAULT } from './lib/vault.mjs';
 import { workLoader, locate, verify } from './lib/cite.mjs';
 import { citeQuotes, completeQuote, isPlateCaption, workTitles } from './lib/quotes.mjs';
 import { stripFootnoteMarkers } from './lib/display.mjs';
+import { readerPlace, withoutAsides } from './lib/reader-text.mjs';
 import { readRecords } from './harvest-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -55,8 +56,8 @@ export function buildDepth({ vault = DEFAULT_VAULT } = {}) {
         const instanceText = stripFootnoteMarkers(completeQuote(load, src.vol, r.quote).text);
         seen.set(key, {
           ...(Number.isInteger(r.year_int) ? { year: r.year_int } : {}),
-          yearDisplay: r.year_display ?? (Number.isInteger(r.year_int) ? String(r.year_int) : ''),
-          place: r.place ?? '',
+          yearDisplay: withoutAsides(r.year_display ?? (Number.isInteger(r.year_int) ? String(r.year_int) : '')),
+          place: readerPlace(r.place ?? ''),
           locus: r.locus_type ?? '',
           terms: [r.term],
           // the harvest's trimmed window is completed to its corpus sentence where the corpus holds one; a caption stands as written

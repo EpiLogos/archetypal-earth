@@ -159,7 +159,7 @@
     }
    ],
    "instances": {
-    "line": "Every instance Neumann gives of her, as the reading passes recorded them from The Great Mother, with the instances Origins records of the Great Mother and the uroboros: dated ones in order, the rest by the kind of thing they are. Where the scan of a plate caption is damaged, the words are as the scan reads them and the entry says so.",
+    "line": "Every instance Neumann gives of her in The Great Mother, with the instances Origins gives of the Great Mother and the uroboros: dated ones in order, the rest by the kind of thing they are.",
     "items": [
      {
       "year": -4000,
@@ -198,7 +198,7 @@
      },
      {
       "year": -3500,
-      "yearDisplay": "3500-1750 B.C. (as printed)",
+      "yearDisplay": "3500-1750 B.C.",
       "place": "Asia Minor",
       "locus": "ritual",
       "terms": [
@@ -235,7 +235,7 @@
      },
      {
       "year": -3000,
-      "yearDisplay": "c. 3000 B.C. (as printed 'S000')",
+      "yearDisplay": "c. 3000 B.C.",
       "place": "Ur",
       "locus": "artifact",
       "terms": [
@@ -255,7 +255,7 @@
      },
      {
       "year": -3000,
-      "yearDisplay": "c. 3000 B.C. (as printed)",
+      "yearDisplay": "c. 3000 B.C.",
       "place": "Ur",
       "locus": "artifact",
       "terms": [
@@ -275,7 +275,7 @@
      },
      {
       "year": -3000,
-      "yearDisplay": "c. 3000 B.C. (as printed, OCR 'S000')",
+      "yearDisplay": "c. 3000 B.C.",
       "place": "Sumer",
       "locus": "artifact",
       "terms": [
@@ -294,7 +294,7 @@
      },
      {
       "year": -3000,
-      "yearDisplay": "c. 3000 B.C. (as printed, OCR 'e. 8000')",
+      "yearDisplay": "c. 3000 B.C.",
       "place": "Sumer",
       "locus": "artifact",
       "terms": [
@@ -314,8 +314,8 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "middle of the third millennium B.C. (as given)",
-      "place": "Mesopotamia (Akkadian; inferred)",
+      "yearDisplay": "middle of the third millennium B.C.",
+      "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
        "akkadian-relief-mother-with-child"
@@ -332,7 +332,7 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "c. 2500 B.C. (as given)",
+      "yearDisplay": "c. 2500 B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -352,7 +352,7 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "c. 2500 B.C. (as given)",
+      "yearDisplay": "c. 2500 B.C.",
       "place": "Phoenicia",
       "locus": "artifact",
       "terms": [
@@ -371,7 +371,7 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "c. 2500 B.C. (as given)",
+      "yearDisplay": "c. 2500 B.C.",
       "place": "Aegean Islands",
       "locus": "artifact",
       "terms": [
@@ -390,7 +390,7 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "c. 2500 B.C. (as given)",
+      "yearDisplay": "c. 2500 B.C.",
       "place": "Cyclades",
       "locus": "artifact",
       "terms": [
@@ -409,7 +409,7 @@
      },
      {
       "year": -2500,
-      "yearDisplay": "c. 2500 B.C. (as printed)",
+      "yearDisplay": "c. 2500 B.C.",
       "place": "Mari, Syria",
       "locus": "artifact",
       "terms": [
@@ -429,7 +429,7 @@
      },
      {
       "year": -2350,
-      "yearDisplay": "c. XXIV century B.C. (as printed)",
+      "yearDisplay": "c. XXIV century B.C.",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -516,7 +516,7 @@
      },
      {
       "year": -2000,
-      "yearDisplay": "c. 2000 B.C. (as given)",
+      "yearDisplay": "c. 2000 B.C.",
       "place": "perhaps Egypt",
       "locus": "artifact",
       "terms": [
@@ -535,7 +535,7 @@
      },
      {
       "year": -2000,
-      "yearDisplay": "c. 2000 B.C. (as printed)",
+      "yearDisplay": "c. 2000 B.C.",
       "place": "Sumer",
       "locus": "artifact",
       "terms": [
@@ -573,7 +573,7 @@
      },
      {
       "year": -1500,
-      "yearDisplay": "2nd millennium B.C. (caption OCR-garbled)",
+      "yearDisplay": "2nd millennium B.C.",
       "place": "Palace of Knossos, Crete",
       "locus": "artifact",
       "terms": [
@@ -590,8 +590,8 @@
      },
      {
       "year": -1500,
-      "yearDisplay": "c. 1500 B.C. (as printed, OCR-garbled)",
-      "place": "not given",
+      "yearDisplay": "c. 1500 B.C.",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "great-mother-signet-rings"
@@ -610,7 +610,7 @@
      },
      {
       "year": -1450,
-      "yearDisplay": "c. 15th century B.C. (OCR-garbled caption)",
+      "yearDisplay": "c. 15th century B.C.",
       "place": "near Sparta",
       "locus": "artifact",
       "terms": [
@@ -729,7 +729,7 @@
      },
      {
       "year": -1150,
-      "yearDisplay": "c. XII century B.C. (as printed)",
+      "yearDisplay": "c. XII century B.C.",
       "place": "Syria",
       "locus": "artifact",
       "terms": [
@@ -749,7 +749,7 @@
      },
      {
       "year": -1150,
-      "yearDisplay": "XII century B.C. (as printed)",
+      "yearDisplay": "XII century B.C.",
       "place": "Ras Shamra, Syria",
       "locus": "artifact",
       "terms": [
@@ -768,7 +768,7 @@
      },
      {
       "year": -1000,
-      "yearDisplay": "1000-300 B.C. (as given)",
+      "yearDisplay": "1000-300 B.C.",
       "place": "India",
       "locus": "artifact",
       "terms": [
@@ -787,7 +787,7 @@
      },
      {
       "year": -1000,
-      "yearDisplay": "c. 1000 B.C. (as printed)",
+      "yearDisplay": "c. 1000 B.C.",
       "place": "Hittite region",
       "locus": "artifact",
       "terms": [
@@ -807,7 +807,7 @@
      },
      {
       "year": -1000,
-      "yearDisplay": "c. 1000 B.C. (as printed)",
+      "yearDisplay": "c. 1000 B.C.",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -827,7 +827,7 @@
      },
      {
       "year": -900,
-      "yearDisplay": "IX century B.C. (as printed)",
+      "yearDisplay": "IX century B.C.",
       "place": "Tell Halaf, Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -847,7 +847,7 @@
      },
      {
       "year": -740,
-      "yearDisplay": "c. 740 (as printed; 'ws' probably B.C.)",
+      "yearDisplay": "c. 740",
       "place": "Sparta",
       "locus": "artifact",
       "terms": [
@@ -885,7 +885,7 @@
      },
      {
       "year": -650,
-      "yearDisplay": "vii century B.C. (as given: 'vii century B.c.')",
+      "yearDisplay": "vii century B.C.",
       "place": "Susa",
       "locus": "artifact",
       "terms": [
@@ -904,7 +904,7 @@
      },
      {
       "year": -650,
-      "yearDisplay": "vii-vi century B.C. (as printed)",
+      "yearDisplay": "vii-vi century B.C.",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -923,7 +923,7 @@
      },
      {
       "year": -650,
-      "yearDisplay": "VII century B.C. (as printed)",
+      "yearDisplay": "VII century B.C.",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -943,7 +943,7 @@
      },
      {
       "year": -600,
-      "yearDisplay": "Saite period, c. 600 B.C. (as printed)",
+      "yearDisplay": "Saite period, c. 600 B.C.",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -963,7 +963,7 @@
      },
      {
       "year": -600,
-      "yearDisplay": "c. 600 B.C. (as printed, OCR 'GOO WLC')",
+      "yearDisplay": "c. 600 B.C.",
       "place": "Greece",
       "locus": "artifact",
       "terms": [
@@ -983,7 +983,7 @@
      },
      {
       "year": -600,
-      "yearDisplay": "c. 600 B.C. (as printed)",
+      "yearDisplay": "c. 600 B.C.",
       "place": "Xanthos, Lycia",
       "locus": "artifact",
       "terms": [
@@ -1002,7 +1002,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "c. VI century B.C. (as printed)",
+      "yearDisplay": "c. VI century B.C.",
       "place": "Corfu",
       "locus": "artifact",
       "terms": [
@@ -1022,7 +1022,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "VI century B.C. (as printed)",
+      "yearDisplay": "VI century B.C.",
       "place": "Perugia",
       "locus": "artifact",
       "terms": [
@@ -1042,7 +1042,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "VI century B.C. (as printed)",
+      "yearDisplay": "VI century B.C.",
       "place": "Etruria",
       "locus": "artifact",
       "terms": [
@@ -1062,7 +1062,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "VI century B.C. (as printed)",
+      "yearDisplay": "VI century B.C.",
       "place": "Megara (?)",
       "locus": "artifact",
       "terms": [
@@ -1081,7 +1081,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "late VI century B.C. (as printed)",
+      "yearDisplay": "late VI century B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -1101,7 +1101,7 @@
      },
      {
       "year": -550,
-      "yearDisplay": "VI century B.C. (as printed, OCR-garbled)",
+      "yearDisplay": "VI century B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -1121,7 +1121,7 @@
      },
      {
       "year": -500,
-      "yearDisplay": "500 B.C. (as printed)",
+      "yearDisplay": "500 B.C.",
       "place": "Italy",
       "locus": "artifact",
       "terms": [
@@ -1141,7 +1141,7 @@
      },
      {
       "year": -480,
-      "yearDisplay": "c. 480 B.C. (as printed)",
+      "yearDisplay": "c. 480 B.C.",
       "place": "Attica",
       "locus": "artifact",
       "terms": [
@@ -1161,7 +1161,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "v century B.C. (as printed)",
+      "yearDisplay": "v century B.C.",
       "place": "Priene, Asia Minor",
       "locus": "artifact",
       "terms": [
@@ -1181,7 +1181,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "V century B.C. (as printed, OCR 'Y century')",
+      "yearDisplay": "V century B.C.",
       "place": "Etruria",
       "locus": "artifact",
       "terms": [
@@ -1201,7 +1201,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "early V century B.C. (as given)",
+      "yearDisplay": "early V century B.C.",
       "place": "Pharsalus, Greece",
       "locus": "artifact",
       "terms": [
@@ -1220,7 +1220,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "V century B.C. (as printed)",
+      "yearDisplay": "V century B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -1239,7 +1239,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "v century B.C. (as printed)",
+      "yearDisplay": "v century B.C.",
       "place": "Rome (Greek style)",
       "locus": "artifact",
       "terms": [
@@ -1258,7 +1258,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "c. 450 B.C. (as printed, OCR 'ec. 450 nc.')",
+      "yearDisplay": "c. 450 B.C.",
       "place": "Eleusis",
       "locus": "artifact",
       "terms": [
@@ -1277,7 +1277,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "V century B.C. (as printed, OCR-garbled)",
+      "yearDisplay": "V century B.C.",
       "place": "Thebes",
       "locus": "artifact",
       "terms": [
@@ -1297,7 +1297,7 @@
      },
      {
       "year": -450,
-      "yearDisplay": "V century B.C. (as printed)",
+      "yearDisplay": "V century B.C.",
       "place": "Attica",
       "locus": "artifact",
       "terms": [
@@ -1351,8 +1351,8 @@
      },
      {
       "year": -400,
-      "yearDisplay": "c. 400 B.C. (as printed)",
-      "place": "Greece (inferred from 'Gren')",
+      "yearDisplay": "c. 400 B.C.",
+      "place": "Greece",
       "locus": "artifact",
       "terms": [
        "bronze-mirror-hormone-goddess"
@@ -1371,7 +1371,7 @@
      },
      {
       "year": -350,
-      "yearDisplay": "IV century B.C. (OCR 'Iv century Tc.')",
+      "yearDisplay": "IV century B.C.",
       "place": "Attica",
       "locus": "artifact",
       "terms": [
@@ -1423,7 +1423,7 @@
      },
      {
       "year": -250,
-      "yearDisplay": "III-II century B.C. (as printed, OCR-garbled)",
+      "yearDisplay": "III-II century B.C.",
       "place": "Jutland",
       "locus": "artifact",
       "terms": [
@@ -1529,7 +1529,7 @@
      },
      {
       "year": 50,
-      "yearDisplay": "I century A.D. (as printed)",
+      "yearDisplay": "I century A.D.",
       "place": "Rome",
       "locus": "artifact",
       "terms": [
@@ -1549,7 +1549,7 @@
      },
      {
       "year": 50,
-      "yearDisplay": "I century A.D. (as printed)",
+      "yearDisplay": "I century A.D.",
       "place": "Rome",
       "locus": "artifact",
       "terms": [
@@ -1638,7 +1638,7 @@
      },
      {
       "year": 240,
-      "yearDisplay": "Gordian III epoch (caption 'a.d.' OCR)",
+      "yearDisplay": "Gordian III epoch",
       "place": "Phoenicia",
       "locus": "artifact",
       "terms": [
@@ -1713,8 +1713,8 @@
      },
      {
       "year": 850,
-      "yearDisplay": "9th century (as printed, OCR-garbled)",
-      "place": "not given",
+      "yearDisplay": "9th century",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "christ-asleep-on-a-sheep"
@@ -1733,7 +1733,7 @@
      },
      {
       "year": 1050,
-      "yearDisplay": "XI century (as given)",
+      "yearDisplay": "XI century",
       "place": "Monte Cassino (Abbey)",
       "locus": "artifact",
       "terms": [
@@ -1753,8 +1753,8 @@
      },
      {
       "year": 1100,
-      "yearDisplay": "twelfth century (as given)",
-      "place": "not given",
+      "yearDisplay": "twelfth century",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "philosophia-twelfth-century"
@@ -1808,7 +1808,7 @@
      },
      {
       "year": 1180,
-      "yearDisplay": "XII century (as printed)",
+      "yearDisplay": "XII century",
       "place": "Landsberg (Herrad of Landsberg)",
       "locus": "artifact",
       "terms": [
@@ -1846,7 +1846,7 @@
      },
      {
       "year": 1400,
-      "yearDisplay": "c. 1400 (as printed, OCR '6. L400')",
+      "yearDisplay": "c. 1400",
       "place": "Germany (Upper Rhine)",
       "locus": "artifact",
       "terms": [
@@ -1865,7 +1865,7 @@
      },
      {
       "year": 1400,
-      "yearDisplay": "c. 1400 (as printed, OCR-garbled)",
+      "yearDisplay": "c. 1400",
       "place": "France (Les Grandes Heures du duc de Berry)",
       "locus": "artifact",
       "terms": [
@@ -1884,7 +1884,7 @@
      },
      {
       "year": 1420,
-      "yearDisplay": "early XV century (as given)",
+      "yearDisplay": "early XV century",
       "place": "School of Verona",
       "locus": "artifact",
       "terms": [
@@ -1903,7 +1903,7 @@
      },
      {
       "year": 1420,
-      "yearDisplay": "c. 1420 (as printed, OCR-garbled)",
+      "yearDisplay": "c. 1420",
       "place": "Flanders (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -1923,7 +1923,7 @@
      },
      {
       "year": 1450,
-      "yearDisplay": "c. 1450 (as printed)",
+      "yearDisplay": "c. 1450",
       "place": "Bavaria (perhaps)",
       "locus": "artifact",
       "terms": [
@@ -1943,7 +1943,7 @@
      },
      {
       "year": 1500,
-      "yearDisplay": "c. 1500 (as printed)",
+      "yearDisplay": "c. 1500",
       "place": "Lombardy",
       "locus": "artifact",
       "terms": [
@@ -2143,7 +2143,7 @@
      },
      {
       "year": 1929,
-      "yearDisplay": "1929 (as given)",
+      "yearDisplay": "1929",
       "place": "London",
       "locus": "artifact",
       "terms": [
@@ -5627,7 +5627,7 @@
       "families": []
      },
      {
-      "yearDisplay": "c. ?000-3000 B.C. (caption OCR-garbled)",
+      "yearDisplay": "c. ?000-3000 B.C.",
       "place": "Istria (Yugoslavia)",
       "locus": "artifact",
       "terms": [
@@ -7526,7 +7526,7 @@
       "families": []
      },
      {
-      "yearDisplay": "xvi Dynasty (OCR; as printed)",
+      "yearDisplay": "xvi Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -7559,7 +7559,7 @@
       "families": []
      },
      {
-      "yearDisplay": "xvur Dynasty (OCR; as printed)",
+      "yearDisplay": "xvur Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -7592,7 +7592,7 @@
       "families": []
      },
      {
-      "yearDisplay": "xvin Dynasty (OCR; as printed)",
+      "yearDisplay": "xvin Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -7626,7 +7626,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "ritual",
       "terms": [
        "buddhist-candle-tree"
@@ -7657,7 +7657,7 @@
      },
      {
       "yearDisplay": "thirteenth century (Zohar)",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "zohar-shekinah"
@@ -7673,7 +7673,7 @@
      },
      {
       "yearDisplay": "early cabalistic text (no date given)",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "book-of-bahir-tree"
@@ -7703,8 +7703,8 @@
       "families": []
      },
      {
-      "yearDisplay": "xvi century (OCR 'xvi ecatury', as printed)",
-      "place": "Iceland (Edda; inferred from source edition)",
+      "yearDisplay": "xvi century",
+      "place": "Iceland",
       "locus": "artifact",
       "terms": [
        "yggdrasill"
@@ -7737,7 +7737,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "Norway (Jarl Haakon; inferred)",
+      "place": "Norway",
       "locus": "historical-event",
       "terms": [
        "thorgerd-seeress"
@@ -7752,7 +7752,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "odin-hanging-verse"
@@ -7767,7 +7767,7 @@
      },
      {
       "yearDisplay": "Latin poem; oldest MS early 14th century",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "hanged-man-cosmic-revelation"
@@ -7783,7 +7783,7 @@
      },
      {
       "yearDisplay": "XV century",
-      "place": "Switzerland (Swiss manuscript; inferred)",
+      "place": "Switzerland",
       "locus": "artifact",
       "terms": [
        "fig-56-tree-of-knowledge-church-synagogue"
@@ -7799,7 +7799,7 @@
       "families": []
      },
      {
-      "yearDisplay": "before xat century (OCR; as printed)",
+      "yearDisplay": "before xat century",
       "place": "Scotland",
       "locus": "artifact",
       "terms": [
@@ -7817,7 +7817,7 @@
      },
      {
       "yearDisplay": "not dated by author (Ephraem Syrus)",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "cross-as-marriage-bed"
@@ -7832,7 +7832,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Bronze Age to Norman period (as given)",
+      "yearDisplay": "Bronze Age to Norman period",
       "place": "Germanic peoples (Norse ship tombs)",
       "locus": "ritual",
       "terms": [
@@ -7880,7 +7880,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "Colombia (Kagaba; inferred from footnote)",
+      "place": "Colombia",
       "locus": "text-passage",
       "terms": [
        "kagaba-mother-of-stones"
@@ -7896,7 +7896,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "tree-hung-with-bacchus-masks"
@@ -7944,7 +7944,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "Syracuse (Sicily; inferred)",
+      "place": "Syracuse",
       "locus": "ritual",
       "terms": [
        "syracusan-thesmophoria-mylloi"
@@ -7976,7 +7976,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "homeric-hymn-mother-of-gods-beasts"
@@ -8070,7 +8070,7 @@
       "families": []
      },
      {
-      "yearDisplay": "late Palace period (as printed)",
+      "yearDisplay": "late Palace period",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -8103,7 +8103,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "homeric-hymn-aphrodite-beasts"
@@ -8165,7 +8165,7 @@
       "families": []
      },
      {
-      "yearDisplay": "primordial to modern (as given)",
+      "yearDisplay": "primordial to modern",
       "place": "Crete to Spain (multiple)",
       "locus": "ritual",
       "terms": [
@@ -8228,7 +8228,7 @@
       "families": []
      },
      {
-      "yearDisplay": "prehistoric (as given)",
+      "yearDisplay": "prehistoric",
       "place": "Roman Forum",
       "locus": "artifact",
       "terms": [
@@ -8243,7 +8243,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic (as given)",
+      "yearDisplay": "archaic",
       "place": "Rome",
       "locus": "ritual",
       "terms": [
@@ -8385,8 +8385,8 @@
       "families": []
      },
      {
-      "yearDisplay": "Ice Age (as given)",
-      "place": "not given",
+      "yearDisplay": "Ice Age",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "ice-age-dance-cave-painting"
@@ -8417,7 +8417,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic (as given)",
+      "yearDisplay": "archaic",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -8433,8 +8433,8 @@
       "families": []
      },
      {
-      "yearDisplay": "palaeolithic (as printed 'pateolithic')",
-      "place": "Cogul (Coged), Spain (inferred)",
+      "yearDisplay": "palaeolithic",
+      "place": "Cogul (Coged), Spain",
       "locus": "artifact",
       "terms": [
        "fig-64-dance-group"
@@ -8466,7 +8466,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Stone Age (as given)",
+      "yearDisplay": "Stone Age",
       "place": "pile dwellings (Stone Age; place not given)",
       "locus": "artifact",
       "terms": [
@@ -8607,7 +8607,7 @@
       "families": []
      },
      {
-      "yearDisplay": "late Helladic period (as printed)",
+      "yearDisplay": "late Helladic period",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -8657,7 +8657,7 @@
      },
      {
       "yearDisplay": "Akkadian (no date given)",
-      "place": "Mesopotamia (inferred)",
+      "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
        "fig-67-mother-goddess-with-son"
@@ -8674,7 +8674,7 @@
      },
      {
       "yearDisplay": "Akkadian (no date given)",
-      "place": "Mesopotamia (inferred)",
+      "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
        "fig-68-goddess-with-daughter"
@@ -8707,7 +8707,7 @@
       "families": []
      },
      {
-      "yearDisplay": "vi century A.D. (as printed)",
+      "yearDisplay": "vi century A.D.",
       "place": "Naples",
       "locus": "artifact",
       "terms": [
@@ -8847,7 +8847,7 @@
      },
      {
       "yearDisplay": "not dated by author (Rosarium philosophorum)",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "rosarium-gold-greenness"
@@ -8923,7 +8923,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XI century (OCR 'x1 century')",
+      "yearDisplay": "XI century",
       "place": "Roda (Bible)",
       "locus": "artifact",
       "terms": [
@@ -8957,7 +8957,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "crescent-madonna"
@@ -8972,7 +8972,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "queen-with-child-paradise"
@@ -8987,7 +8987,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "alchemical-pillar-tree-mercury-queen"
@@ -9002,8 +9002,8 @@
       "families": []
      },
      {
-      "yearDisplay": "late (as given)",
-      "place": "not given",
+      "yearDisplay": "late",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "annunciation-vessel-lily"
@@ -9019,7 +9019,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "text-passage",
       "terms": [
        "apocalypse-water-of-life"
@@ -9035,7 +9035,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "alchemical-cosmic-egg"
@@ -9051,7 +9051,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "vierge-ouvrante"
@@ -9067,7 +9067,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "st-anne-virgin-child"
@@ -9082,7 +9082,7 @@
      },
      {
       "yearDisplay": "not dated by author",
-      "place": "Flanders (Joos van Cleve; inferred)",
+      "place": "Flanders",
       "locus": "artifact",
       "terms": [
        "joos-van-cleve-st-anne"
@@ -9162,7 +9162,7 @@
       "families": []
      },
      {
-      "yearDisplay": "paleolithic (as given in plate section)",
+      "yearDisplay": "paleolithic",
       "place": "Austria",
       "locus": "artifact",
       "terms": [
@@ -9179,7 +9179,7 @@
       "families": []
      },
      {
-      "yearDisplay": "paleolithic (as given)",
+      "yearDisplay": "paleolithic",
       "place": "Menton, France (caption ambiguous: 'Soapstone, Austria' / 'Ivory, France')",
       "locus": "artifact",
       "terms": [
@@ -9196,7 +9196,7 @@
       "families": []
      },
      {
-      "yearDisplay": "neolithic (as given)",
+      "yearDisplay": "neolithic",
       "place": "Malta",
       "locus": "artifact",
       "terms": [
@@ -9212,7 +9212,7 @@
       "families": []
      },
      {
-      "yearDisplay": "paleolithic (as given)",
+      "yearDisplay": "paleolithic",
       "place": "Laussel, France",
       "locus": "artifact",
       "terms": [
@@ -9228,7 +9228,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XIX Dynasty (as given)",
+      "yearDisplay": "XIX Dynasty",
       "place": "Abydos, Temple of Seti I, Egypt",
       "locus": "artifact",
       "terms": [
@@ -9245,7 +9245,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XX century (as given)",
+      "yearDisplay": "XX century",
       "place": "Germany",
       "locus": "artifact",
       "terms": [
@@ -9262,7 +9262,7 @@
       "families": []
      },
      {
-      "yearDisplay": "neolithic (as given)",
+      "yearDisplay": "neolithic",
       "place": "Thrace",
       "locus": "artifact",
       "terms": [
@@ -9278,7 +9278,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -9295,7 +9295,7 @@
       "families": []
      },
      {
-      "yearDisplay": "first stratum (as given)",
+      "yearDisplay": "first stratum",
       "place": "Troy (probably Mesopotamian origin)",
       "locus": "artifact",
       "terms": [
@@ -9312,7 +9312,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9328,7 +9328,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Benin, Nigeria",
       "locus": "artifact",
       "terms": [
@@ -9344,7 +9344,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Bronze Age (as given)",
+      "yearDisplay": "Bronze Age",
       "place": "Yugoslavia",
       "locus": "artifact",
       "terms": [
@@ -9377,7 +9377,7 @@
       "families": []
      },
      {
-      "yearDisplay": "late neolithic (as given)",
+      "yearDisplay": "late neolithic",
       "place": "southern France",
       "locus": "artifact",
       "terms": [
@@ -9394,7 +9394,7 @@
       "families": []
      },
      {
-      "yearDisplay": "predynastic (as given)",
+      "yearDisplay": "predynastic",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -9411,7 +9411,7 @@
       "families": []
      },
      {
-      "yearDisplay": "IV stratum (as printed)",
+      "yearDisplay": "IV stratum",
       "place": "Troy",
       "locus": "artifact",
       "terms": [
@@ -9427,7 +9427,7 @@
       "families": []
      },
      {
-      "yearDisplay": "predynastic (as given)",
+      "yearDisplay": "predynastic",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -9443,7 +9443,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Minoan period (as given)",
+      "yearDisplay": "Minoan period",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9459,7 +9459,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9476,7 +9476,7 @@
       "families": []
      },
      {
-      "yearDisplay": "early Minoan III (as given)",
+      "yearDisplay": "early Minoan III",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9493,7 +9493,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XX century (as given)",
+      "yearDisplay": "XX century",
       "place": "Germany",
       "locus": "artifact",
       "terms": [
@@ -9509,7 +9509,7 @@
       "families": []
      },
      {
-      "yearDisplay": "x-viii century B.C. (as printed)",
+      "yearDisplay": "x-viii century B.C.",
       "place": "Prussia",
       "locus": "artifact",
       "terms": [
@@ -9526,7 +9526,7 @@
       "families": []
      },
      {
-      "yearDisplay": "viii-v century B.C. (as printed)",
+      "yearDisplay": "viii-v century B.C.",
       "place": "Prussia",
       "locus": "artifact",
       "terms": [
@@ -9543,7 +9543,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII-VI century B.C. (as printed)",
+      "yearDisplay": "XII-VI century B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -9560,7 +9560,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XX-XVIII century B.C. (as printed)",
+      "yearDisplay": "XX-XVIII century B.C.",
       "place": "Cyprus",
       "locus": "artifact",
       "terms": [
@@ -9577,7 +9577,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Akkadian period (as printed)",
+      "yearDisplay": "Akkadian period",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -9594,7 +9594,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -9610,7 +9610,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Roman period (as given)",
+      "yearDisplay": "Roman period",
       "place": "Dendera, Temple of Hathor, Egypt",
       "locus": "artifact",
       "terms": [
@@ -9626,8 +9626,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
-      "place": "Congo (inferred from OCR)",
+      "yearDisplay": "not dated",
+      "place": "Congo",
       "locus": "artifact",
       "terms": [
        "mother-and-child-congo-wood"
@@ -9643,8 +9643,8 @@
       "families": []
      },
      {
-      "yearDisplay": "c. 2040-1700 B.C. (as printed)",
-      "place": "not legible (OCR 'Baypl.')",
+      "yearDisplay": "c. 2040-1700 B.C.",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "isis-with-horus-copper"
@@ -9660,7 +9660,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -9676,7 +9676,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Yoruba, Nigeria",
       "locus": "artifact",
       "terms": [
@@ -9692,7 +9692,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Yoruba, Nigeria",
       "locus": "artifact",
       "terms": [
@@ -9709,8 +9709,8 @@
       "families": []
      },
      {
-      "yearDisplay": "CE century (as printed, OCR 'CE century Acts')",
-      "place": "not given",
+      "yearDisplay": "CE century",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "celtic-mother-goddess-stone"
@@ -9726,7 +9726,7 @@
       "families": []
      },
      {
-      "yearDisplay": "prehistoric (as given)",
+      "yearDisplay": "prehistoric",
       "place": "Sardinia",
       "locus": "artifact",
       "terms": [
@@ -9743,7 +9743,7 @@
       "families": []
      },
      {
-      "yearDisplay": "prehistoric (as given)",
+      "yearDisplay": "prehistoric",
       "place": "Sardinia",
       "locus": "artifact",
       "terms": [
@@ -9760,8 +9760,8 @@
       "families": []
      },
      {
-      "yearDisplay": "c. I-II century A.D. (as printed)",
-      "place": "Parthia (inferred)",
+      "yearDisplay": "c. I-II century A.D.",
+      "place": "Parthia",
       "locus": "artifact",
       "terms": [
        "baubo-figure-parthian"
@@ -9777,7 +9777,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic (as given)",
+      "yearDisplay": "archaic",
       "place": "Ionia (style)",
       "locus": "artifact",
       "terms": [
@@ -9794,7 +9794,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Mexico (Aztec)",
       "locus": "artifact",
       "terms": [
@@ -9811,7 +9811,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Mexico",
       "locus": "artifact",
       "terms": [
@@ -9828,7 +9828,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Sanctuary of Delphi",
       "locus": "artifact",
       "terms": [
@@ -9844,7 +9844,7 @@
       "families": []
      },
      {
-      "yearDisplay": "early Minoan I (as given)",
+      "yearDisplay": "early Minoan I",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9861,7 +9861,7 @@
       "families": []
      },
      {
-      "yearDisplay": "I Dynasty; XV century B.C. (as printed)",
+      "yearDisplay": "I Dynasty; XV century B.C.",
       "place": "Babylon; Syria",
       "locus": "artifact",
       "terms": [
@@ -9878,7 +9878,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Florence",
       "locus": "artifact",
       "terms": [
@@ -9895,7 +9895,7 @@
       "families": []
      },
      {
-      "yearDisplay": "middle Minoan III (as given)",
+      "yearDisplay": "middle Minoan III",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -9912,7 +9912,7 @@
       "families": []
      },
      {
-      "yearDisplay": "vi century B.C. (as printed, Greece)",
+      "yearDisplay": "vi century B.C.",
       "place": "Syria (Atargatis); Greece (caption block)",
       "locus": "artifact",
       "terms": [
@@ -9929,7 +9929,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Pompeii",
       "locus": "ritual",
       "terms": [
@@ -9946,8 +9946,8 @@
       "families": []
      },
      {
-      "yearDisplay": "Hellenistic (as given)",
-      "place": "not given",
+      "yearDisplay": "Hellenistic",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "siren-as-incubus"
@@ -9961,7 +9961,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XIX century (as printed)",
+      "yearDisplay": "XIX century",
       "place": "Bali; India",
       "locus": "artifact",
       "terms": [
@@ -9978,7 +9978,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVII-XVIII century (as printed)",
+      "yearDisplay": "XVII-XVIII century",
       "place": "northern India",
       "locus": "artifact",
       "terms": [
@@ -9995,7 +9995,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XIX century (as printed)",
+      "yearDisplay": "XIX century",
       "place": "southern India",
       "locus": "artifact",
       "terms": [
@@ -10012,8 +10012,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
-      "place": "Mexico (Aztec; inferred)",
+      "yearDisplay": "not dated",
+      "place": "Mexico",
       "locus": "artifact",
       "terms": [
        "coatlicue"
@@ -10029,8 +10029,8 @@
       "families": []
      },
      {
-      "yearDisplay": "modern (as given)",
-      "place": "Bali (inferred)",
+      "yearDisplay": "modern",
+      "place": "Bali",
       "locus": "artifact",
       "terms": [
        "rangda-stealing-child"
@@ -10045,7 +10045,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XXVI Dynasty (as given)",
+      "yearDisplay": "XXVI Dynasty",
       "place": "Thebes",
       "locus": "artifact",
       "terms": [
@@ -10061,7 +10061,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Attica",
       "locus": "artifact",
       "terms": [
@@ -10077,7 +10077,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Marquesas Islands",
       "locus": "artifact",
       "terms": [
@@ -10094,7 +10094,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Mexico",
       "locus": "artifact",
       "terms": [
@@ -10110,7 +10110,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Mexico",
       "locus": "artifact",
       "terms": [
@@ -10126,7 +10126,7 @@
       "families": []
      },
      {
-      "yearDisplay": "VIII century (as given)",
+      "yearDisplay": "VIII century",
       "place": "Maya region",
       "locus": "artifact",
       "terms": [
@@ -10142,7 +10142,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Belgian Congo",
       "locus": "artifact",
       "terms": [
@@ -10158,8 +10158,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
-      "place": "France (inferred)",
+      "yearDisplay": "not legible",
+      "place": "France",
       "locus": "artifact",
       "terms": [
        "souls-in-jaws-of-death-choir-stall"
@@ -10175,7 +10175,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -10191,7 +10191,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -10206,7 +10206,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -10221,7 +10221,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -10237,7 +10237,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Peru",
       "locus": "artifact",
       "terms": [
@@ -10253,7 +10253,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Egypt (papyrus)",
       "locus": "artifact",
       "terms": [
@@ -10269,7 +10269,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Egypt (papyrus)",
       "locus": "artifact",
       "terms": [
@@ -10286,7 +10286,7 @@
      },
      {
       "yearDisplay": "not dated",
-      "place": "not legible (OCR)",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "female-figurines-lower-assyria-clay"
@@ -10302,8 +10302,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
-      "place": "not given",
+      "yearDisplay": "not dated",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "veiled-sphinx"
@@ -10319,7 +10319,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Thebes",
       "locus": "artifact",
       "terms": [
@@ -10336,7 +10336,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XXI Dynasty (as given)",
+      "yearDisplay": "XXI Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -10352,7 +10352,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -10367,7 +10367,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -10384,7 +10384,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Ptolemaic period (as given)",
+      "yearDisplay": "Ptolemaic period",
       "place": "Dendera, Egypt",
       "locus": "artifact",
       "terms": [
@@ -10400,7 +10400,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XXX Dynasty (as printed)",
+      "yearDisplay": "XXX Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -10417,7 +10417,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XIV century (as given)",
+      "yearDisplay": "XIV century",
       "place": "Italy",
       "locus": "artifact",
       "terms": [
@@ -10433,7 +10433,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII century (as printed)",
+      "yearDisplay": "XII century",
       "place": "Spain",
       "locus": "artifact",
       "terms": [
@@ -10450,7 +10450,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Tibet; French manuscript",
       "locus": "artifact",
       "terms": [
@@ -10467,7 +10467,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Akkadian period (as given)",
+      "yearDisplay": "Akkadian period",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -10483,7 +10483,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Argos, Greece",
       "locus": "artifact",
       "terms": [
@@ -10499,7 +10499,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVIII Dynasty (as printed)",
+      "yearDisplay": "XVIII Dynasty",
       "place": "Egypt",
       "locus": "artifact",
       "terms": [
@@ -10516,7 +10516,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "East Africa",
       "locus": "ritual",
       "terms": [
@@ -10532,7 +10532,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII century (as printed)",
+      "yearDisplay": "XII century",
       "place": "South India",
       "locus": "artifact",
       "terms": [
@@ -10548,7 +10548,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Cambodia",
       "locus": "artifact",
       "terms": [
@@ -10565,7 +10565,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Assyria",
       "locus": "artifact",
       "terms": [
@@ -10581,7 +10581,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "China",
       "locus": "artifact",
       "terms": [
@@ -10597,7 +10597,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "China",
       "locus": "artifact",
       "terms": [
@@ -10614,7 +10614,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVI century (as printed)",
+      "yearDisplay": "XVI century",
       "place": "Switzerland",
       "locus": "artifact",
       "terms": [
@@ -10630,7 +10630,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Italy",
       "locus": "artifact",
       "terms": [
@@ -10646,7 +10646,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII century (as given)",
+      "yearDisplay": "XII century",
       "place": "Gotland",
       "locus": "artifact",
       "terms": [
@@ -10662,7 +10662,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Roman (as given)",
+      "yearDisplay": "Roman",
       "place": "Bonn",
       "locus": "artifact",
       "terms": [
@@ -10678,7 +10678,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII century (as printed)",
+      "yearDisplay": "XII century",
       "place": "Sion, Switzerland",
       "locus": "artifact",
       "terms": [
@@ -10694,7 +10694,7 @@
       "families": []
      },
      {
-      "yearDisplay": "VI century (as printed, OCR 'vay century')",
+      "yearDisplay": "VI century",
       "place": "Antioch",
       "locus": "artifact",
       "terms": [
@@ -10711,7 +10711,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Ireland",
       "locus": "artifact",
       "terms": [
@@ -10728,7 +10728,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Bologna",
       "locus": "artifact",
       "terms": [
@@ -10744,7 +10744,7 @@
       "families": []
      },
      {
-      "yearDisplay": "IX century (as printed)",
+      "yearDisplay": "IX century",
       "place": "County Kilkenny, Ireland",
       "locus": "artifact",
       "terms": [
@@ -10761,7 +10761,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Yugoslavia",
       "locus": "artifact",
       "terms": [
@@ -10777,7 +10777,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Italy",
       "locus": "artifact",
       "terms": [
@@ -10793,7 +10793,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic period (as given)",
+      "yearDisplay": "archaic period",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -10809,7 +10809,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -10826,8 +10826,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
-      "place": "not given",
+      "yearDisplay": "not dated",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "isis-or-demeter-rose-wheeled-car"
@@ -10843,7 +10843,7 @@
       "families": []
      },
      {
-      "yearDisplay": "medieval (manuscript, as given)",
+      "yearDisplay": "medieval",
       "place": "Etruria / Italy (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -10860,7 +10860,7 @@
      },
      {
       "yearDisplay": "XIV century (caption: 'Wall hanging, xiv century')",
-      "place": "not given",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "madonna-on-the-lion-throne"
@@ -10875,7 +10875,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Mycenae",
       "locus": "artifact",
       "terms": [
@@ -10909,7 +10909,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Jutland",
       "locus": "artifact",
       "terms": [
@@ -10924,7 +10924,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Jutland",
       "locus": "artifact",
       "terms": [
@@ -10940,7 +10940,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Wee century uc. (as printed, OCR-garbled)",
+      "yearDisplay": "Wee century uc.",
       "place": "Jutland",
       "locus": "artifact",
       "terms": [
@@ -10956,7 +10956,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic period (as given)",
+      "yearDisplay": "archaic period",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -10973,7 +10973,7 @@
       "families": []
      },
      {
-      "yearDisplay": "classical period (as printed, OCR-garbled)",
+      "yearDisplay": "classical period",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -11006,8 +11006,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
-      "place": "not given",
+      "yearDisplay": "not dated",
+      "place": "",
       "locus": "ritual",
       "terms": [
        "revivification-sacrificed-ram"
@@ -11023,7 +11023,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Thessaly",
       "locus": "ritual",
       "terms": [
@@ -11039,7 +11039,7 @@
       "families": []
      },
      {
-      "yearDisplay": "pre-Columbian (as given)",
+      "yearDisplay": "pre-Columbian",
       "place": "Mexico",
       "locus": "artifact",
       "terms": [
@@ -11055,7 +11055,7 @@
       "families": []
      },
      {
-      "yearDisplay": "archaic period (as given)",
+      "yearDisplay": "archaic period",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -11072,7 +11072,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Thebes, Boeotia",
       "locus": "artifact",
       "terms": [
@@ -11088,8 +11088,8 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
-      "place": "not legible (OCR)",
+      "yearDisplay": "not legible",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "goddess-with-pomegranate-marble"
@@ -11105,7 +11105,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Roman period (as given)",
+      "yearDisplay": "Roman period",
       "place": "Eleusis",
       "locus": "artifact",
       "terms": [
@@ -11121,7 +11121,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Greece",
       "locus": "artifact",
       "terms": [
@@ -11137,7 +11137,7 @@
       "families": []
      },
      {
-      "yearDisplay": "prehistoric (as given)",
+      "yearDisplay": "prehistoric",
       "place": "Canaan",
       "locus": "artifact",
       "terms": [
@@ -11153,7 +11153,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Carthage",
       "locus": "artifact",
       "terms": [
@@ -11169,7 +11169,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Akkad period (as given; OCR 'Akckad')",
+      "yearDisplay": "Akkad period",
       "place": "Mesopotamia",
       "locus": "artifact",
       "terms": [
@@ -11186,7 +11186,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Boeotia",
       "locus": "artifact",
       "terms": [
@@ -11204,7 +11204,7 @@
      },
      {
       "yearDisplay": "not dated",
-      "place": "not given",
+      "place": "",
       "locus": "ritual",
       "terms": [
        "funeral-banquet-plate-b"
@@ -11219,7 +11219,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Eleusis",
       "locus": "artifact",
       "terms": [
@@ -11236,7 +11236,7 @@
       "families": []
      },
      {
-      "yearDisplay": "Roman (as given)",
+      "yearDisplay": "Roman",
       "place": "Rome (Roman)",
       "locus": "artifact",
       "terms": [
@@ -11253,7 +11253,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Italy (Divina Commedia manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11269,7 +11269,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Pompeii",
       "locus": "artifact",
       "terms": [
@@ -11285,7 +11285,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Crete",
       "locus": "artifact",
       "terms": [
@@ -11302,7 +11302,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XIV century (as printed)",
+      "yearDisplay": "XIV century",
       "place": "Germany (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11318,7 +11318,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Italy (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11334,7 +11334,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVI century (as printed)",
+      "yearDisplay": "XVI century",
       "place": "England (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11350,7 +11350,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVI century (as printed)",
+      "yearDisplay": "XVI century",
       "place": "France (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11366,7 +11366,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XI century (as printed; OCR 'XUV comliry')",
+      "yearDisplay": "XI century",
       "place": "Commentary on the Apocalypse (Beatus)",
       "locus": "artifact",
       "terms": [
@@ -11382,7 +11382,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XVI century (as printed)",
+      "yearDisplay": "XVI century",
       "place": "Cologne",
       "locus": "artifact",
       "terms": [
@@ -11399,7 +11399,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII century (as printed, OCR-garbled)",
+      "yearDisplay": "XII century",
       "place": "Germany (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11416,7 +11416,7 @@
       "families": []
      },
      {
-      "yearDisplay": "medieval (as given)",
+      "yearDisplay": "medieval",
       "place": "Italy (manuscript)",
       "locus": "artifact",
       "terms": [
@@ -11432,7 +11432,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "France",
       "locus": "artifact",
       "terms": [
@@ -11449,7 +11449,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not legible (OCR)",
+      "yearDisplay": "not legible",
       "place": "Siena",
       "locus": "artifact",
       "terms": [
@@ -11466,7 +11466,7 @@
      },
      {
       "yearDisplay": "XV? century (not legible)",
-      "place": "not legible (OCR)",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "spring-of-life-stone-plate"
@@ -11482,7 +11482,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XV century (as printed)",
+      "yearDisplay": "XV century",
       "place": "Florence",
       "locus": "artifact",
       "terms": [
@@ -11498,7 +11498,7 @@
       "families": []
      },
      {
-      "yearDisplay": "XII-XV century (as printed)",
+      "yearDisplay": "XII-XV century",
       "place": "South India",
       "locus": "artifact",
       "terms": [
@@ -11515,8 +11515,8 @@
       "families": []
      },
      {
-      "yearDisplay": "XIII century (as printed, OCR 'xin century')",
-      "place": "not legible (OCR)",
+      "yearDisplay": "XIII century",
+      "place": "",
       "locus": "artifact",
       "terms": [
        "white-tara-stone"
@@ -11532,7 +11532,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Tibet",
       "locus": "artifact",
       "terms": [
@@ -11549,7 +11549,7 @@
       "families": []
      },
      {
-      "yearDisplay": "not dated (as given)",
+      "yearDisplay": "not dated",
       "place": "Tibet",
       "locus": "artifact",
       "terms": [

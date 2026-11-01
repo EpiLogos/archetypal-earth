@@ -49,7 +49,8 @@ export function withoutAsides(text) {
     if (!changed && depth > 0 && start >= 0 && NOTE_WORDS.test(out.slice(start))) { out = out.slice(0, start).replace(/\s+$/, ''); changed = true; }
     if (!changed) break;
   }
-  return out.replace(/\s+([.,;:])/g, '$1').trim();
+  // "B.C. (as printed)." loses its aside and keeps one full stop; an ellipsis stays whole
+  return out.replace(/\s+([.,;:])/g, '$1').replace(/(?<!\.)\.\.(?!\.)/g, '.').trim();
 }
 
 /** Cut bookkeeping phrases from sentences of content, then drop the sentences that are only bookkeeping. */
@@ -59,6 +60,18 @@ export function withoutNoteSentences(text) {
   out = out.replace(/^Vault reading:\s*(\p{L})/u, (_, c) => c.toUpperCase());
   const parts = out.split(/(?<=[.!?][”"’']?)\s+(?=[A-Z“"(])/);
   return parts.filter((x) => !NOTE_SENTENCE.test(x)).join(' ').replace(/\s+([.,;:])/g, '$1').trim();
+}
+
+/** A cite's locator without the vault's note on it: "pdf p80 (print ¶¶ 350-352 — unmarked in chunk)" -> "pdf p80 (print ¶¶ 350-352)". */
+export function readerLocator(locator) {
+  return String(locator).replace(/\s*[—–;]\s*[^—–;()]*(?:\bchunk\b|\bOCR\b)[^—–;()]*/g, '').trim();
+}
+
+/** A place as the reader is shown it: the harvest's account of how it inferred the place goes, and a place it could not
+ *  read is no place; a "?" stays, as the reading's own doubt about where. */
+export function readerPlace(place) {
+  const out = withoutAsides(place).replace(/\s*\([^()]*\binferred\b[^()]*\)/gi, '').trim();
+  return /^(not given|not legible|unknown|n\/a)$/i.test(out) ? '' : out;
 }
 
 /** An instance's title, without the vault's asides. */

@@ -21,7 +21,7 @@ import { skyAddresses, parseRank, parseCourt } from './lib/sky-address.mjs';
 import { workDates, buildAttestations } from './lib/attest.mjs';
 import { applyQuoteFixes } from './lib/quote-fixes.mjs';
 import { citeYear } from './lib/cite-year.mjs';
-import { readerBody, readerTitle } from './lib/reader-text.mjs';
+import { readerBody, readerLocator, readerPlace, readerTitle, withoutAsides } from './lib/reader-text.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VAULT = process.env.VAULT || DEFAULT_VAULT;
@@ -172,7 +172,7 @@ function parseCite(s) {
   }
   const wl = workLabel(work.replace(/[^\w-]/g, ''));
   const voice = worksCur.works?.[wl.key]?.voice;
-  return { work: wl.key, workTitle: wl.title, year: collapse(year), locator: collapse(locator), ...(voice ? { voice } : {}) };
+  return { work: wl.key, workTitle: wl.title, year: collapse(year), locator: readerLocator(collapse(locator)), ...(voice ? { voice } : {}) };
 }
 
 // ---------- archetypes ----------
@@ -377,6 +377,7 @@ for (const n of instNotes.filter((x) => !x.failed)) {
   if (year === null) year = guessYear(d.year_display);
   if (year === null) { skip('instance', id, `no usable year (year_display: ${yearDisplay || 'none'})`); continue; }
   if (year < -10000 || year > 2030) { skip('instance', id, `year ${year} out of range`); continue; }
+  yearDisplay = withoutAsides(yearDisplay);
   if (!yearDisplay) yearDisplay = year < 0 ? `${-year} BCE` : `${year}`;
   let locusType = String(d.locus_type || '').trim().toLowerCase();
   if (!LOCUS.has(locusType)) { warn(`${id}: unknown locus_type "${locusType}" -> text-passage`); locusType = 'text-passage'; }
@@ -449,7 +450,7 @@ for (const n of instNotes.filter((x) => !x.failed)) {
     locusType,
     subject,
     cultureIds,
-    place,
+    place: readerPlace(place),
     lat,
     lon,
     geoPrecision: precision,
@@ -743,6 +744,7 @@ const formFallbacks = [];
 for (const fam of Object.values(famMap)) {
   fam.occurrenceIds.sort((a, b) => occById[a].year - occById[b].year || a.localeCompare(b));
   // a family the vault gives no line for simply has no line; the interface lets the image show
+  fam.oneLine = withoutAsides(fam.oneLine || '');
   if (!fam.oneLine) { formFallbacks.push(fam.id); fam.oneLine = ''; }
 }
 
