@@ -4150,7 +4150,7 @@
    "relaxed": true
   },
   "mother-goddesses-india": {
-   "pin": "File:The Seven Mother Goddesses (Matrikas) Flanked by Shiva-Virabhadra and Ganesha, Lord of Obstacles LACMA M.80.157 (4 of 4).jpg"
+   "pin": "File:India northeast Mauryan period c 200 BC - Mother goddess in terracotta IMG 9625 Museum of Asian Civilisation.jpg"
   },
   "akkadian-relief-mother-with-child": {
    "queries": [
@@ -4173,22 +4173,7 @@
    "relaxed": true
   },
   "aphrodite-with-pomegranate-cyprus": {
-   "queries": [
-    "Aphrodite Cyprus terracotta",
-    "Cypriot Aphrodite figurine"
-   ],
-   "require": [
-    [
-     "aphrodite",
-     "venus"
-    ],
-    [
-     "cyprus",
-     "cypriot",
-     "terracotta"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Paestum Museum (6120215739).jpg"
   },
   "astarte-gold-plaque-syria": {
    "queries": [
@@ -4244,23 +4229,7 @@
    "relaxed": true
   },
   "birth-of-the-goddess-rome-relief": {
-   "queries": [
-    "Birth of the Goddess Rome marble relief",
-    "birth of Aphrodite Rome relief"
-   ],
-   "require": [
-    [
-     "birth",
-     "goddess",
-     "aphrodite",
-     "venus"
-    ],
-    [
-     "rome",
-     "relief"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Ludovisi throne Altemps Inv8570.jpg"
   },
   "bronze-mirror-hormone-goddess": {
    "queries": [
@@ -4313,40 +4282,10 @@
    "relaxed": true
   },
   "christ-asleep-on-a-sheep": {
-   "queries": [
-    "Christ asleep sheep Good Shepherd",
-    "Christ resting on sheep sarcophagus"
-   ],
-   "require": [
-    [
-     "christ",
-     "jesus",
-     "shepherd"
-    ],
-    [
-     "sheep",
-     "lamb"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:HitdaMeschedeDarmstadtCod1640fol117r.jpg"
   },
   "cone-mesopotamia-goddesses": {
-   "queries": [
-    "Mesopotamian goddess cone terracotta",
-    "votive cone goddess Mesopotamia"
-   ],
-   "require": [
-    [
-     "cone",
-     "goddess"
-    ],
-    [
-     "mesopotamia",
-     "sumer",
-     "babylon"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Figurine of a nude female 880-710 BCE, Nimrud, Ashmolean Museum.jpg"
   },
   "cow-with-emerging-calves-cylinder-seal": {
    "queries": [
@@ -4367,24 +4306,7 @@
    "relaxed": true
   },
   "demeter-and-kore-pharsalus-stele": {
-   "queries": [
-    "Demeter Persephone relief Louvre",
-    "Exaltation of the Flower Louvre",
-    "Demeter Kore stele"
-   ],
-   "require": [
-    [
-     "demeter",
-     "persephone",
-     "kore"
-    ],
-    [
-     "relief",
-     "stele",
-     "louvre"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:L'Exaltation de la Fleur - Musée du Louvre AGER Ma 701.jpg"
   },
   "earth-monte-cassino-manuscript": {
    "queries": [
@@ -4442,21 +4364,7 @@
    "relaxed": true
   },
   "fertility-goddess-ivory-box-ras-shamra": {
-   "queries": [
-    "Ras Shamra ivory box goddess",
-    "Ugarit ivory fertility goddess"
-   ],
-   "require": [
-    [
-     "ras shamra",
-     "ugarit",
-     "ivory"
-    ],
-    [
-     "goddess"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Pyxis lid goddess feeding goats-AO 11601-IMG 1145-white.jpg"
   },
   "fig-66-resurrection-of-kore-attic": {
    "queries": [
@@ -4511,22 +4419,7 @@
    "relaxed": true
   },
   "goddess-soul-birds-on-lion-sumer": {
-   "queries": [
-    "Sumerian goddess birds lion",
-    "Inanna lion birds seal"
-   ],
-   "require": [
-    [
-     "sumer",
-     "inanna",
-     "ishtar"
-    ],
-    [
-     "lion",
-     "bird"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Bronze mirror with a support in the form of a nude girl MET DT229145.jpg"
   },
   "goddesses-clay-cyprus": {
    "queries": [
@@ -4620,22 +4513,7 @@
    "relaxed": true
   },
   "isis-hathor-suckling-horus": {
-   "queries": [
-    "Isis Hathor suckling Horus bronze",
-    "Isis nursing Horus statue"
-   ],
-   "require": [
-    [
-     "isis",
-     "hathor"
-    ],
-    [
-     "horus",
-     "suckling",
-     "nursing"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Iside Lactans (suckling Isis); Late Period (664-332 CE); Napoli,Made of bronze Inv. 245.jpg"
   },
   "lady-of-the-beasts-boeotian-amphora": {
    "queries": [
@@ -4656,38 +4534,10 @@
    "relaxed": true
   },
   "lady-of-the-beasts-bronze-hydria": {
-   "queries": [
-    "Lady of the Beasts bronze hydria",
-    "Potnia Theron bronze hydria"
-   ],
-   "require": [
-    [
-     "hydria",
-     "beasts",
-     "potnia"
-    ],
-    [
-     "bronze"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Età del ferro, recipiente greco da Grächwil vicino Meikirch, 570 ac. ca 03.JPG"
   },
   "lamp-with-gorgon-head-etruscan": {
-   "queries": [
-    "Etruscan lamp Gorgon head",
-    "Gorgoneion oil lamp Etruscan"
-   ],
-   "require": [
-    [
-     "gorgon",
-     "gorgoneion"
-    ],
-    [
-     "lamp",
-     "etruscan"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Lampadario etrusco di cortona, dalla zona di fratta, 350 ac ca. 01.jpg"
   },
   "libation-vessel-branches-seated-goddess-sumer": {
    "queries": [
@@ -4778,38 +4628,10 @@
    "relaxed": true
   },
   "philosophia-world-disk-flemish": {
-   "queries": [
-    "Philosophy world disk Flemish",
-    "Philosophia holding world Flemish"
-   ],
-   "require": [
-    [
-     "philosoph"
-    ],
-    [
-     "world",
-     "disk",
-     "globe",
-     "flemish"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:The figure of Philosophy appearing to Boethius. Chromolithog Wellcome V0007541.jpg"
   },
   "reclining-nude-goddess-megara": {
-   "queries": [
-    "reclining goddess Megara terracotta",
-    "nude goddess Megara figurine"
-   ],
-   "require": [
-    [
-     "megara",
-     "reclining"
-    ],
-    [
-     "goddess"
-    ]
-   ],
-   "relaxed": true
+   "pin": "File:Terracotta statuette of a woman reclining on a couch MET DP122068.jpg"
   },
   "stone-of-pessinus": {
    "queries": [
@@ -4895,7 +4717,7 @@
   },
   "lily": {},
   "red-figured-vase-attic-detail": {
-   "pin": "File:Attic Red-figure Ceramic Kylix Picture of the Women's Room, painted by Douris, c. 480 BC; found in Vulci, Etruria (28706528436).jpg"
+   "pin": "File:Copenhagen Painter ARV 257 8 Medea and Pelias 05.jpg"
   },
   "sensation": {
    "pin": "File:Theodoor Rombouts - Allegory of the Five Senses - S-76 - Museum of Fine Arts Ghent (MSK).jpg"
@@ -4959,6 +4781,9 @@
   },
   "citrinitas": {
    "pin": "File:Winged Sun alchemical.jpg"
+  },
+  "triumph-of-venus-verona": {
+   "pin": "File:Master Taking of Tarento - Triumph of Venus (Louvre).jpeg"
   }
  },
  "occurrences": {
@@ -7347,9 +7172,7 @@
   "dream-worm-drawn-from-mouth-burgholzli-1905": {},
   "magic-mirror-child-mirror-devils-face-zarathustra-1883": {},
   "baptism-les-grandes-heures-plate-baptism-miniature-from-the-manuscript-les-grandes-france-les-gr": {
-   "pin": "File:Grandes Heures de Jean de Berry - Saints Pierre et Paul baptisant (fol. 97).jpg",
-   "relaxed": true,
-   "visual": "direct match, Haiku visual review (2026-10)"
+   "skip": "a text page; the family carries the baptism miniature itself"
   },
   "tractatus-aureus-crowned-king-passage": {},
   "vision-younger-selves-country-doctor-europe-19c": {},
@@ -7417,7 +7240,9 @@
   "vision-veiled-woman-stair-cw12": {},
   "animal-eyes-face-vision-zurich-1930": {},
   "big-dream-elgonyi-two-kinds-mt-elgon-1925": {},
-  "birth-of-the-goddess-rome-relief-plate-the-birth-of-the-goddess-marble-relief-rome-greek-rome-gr": {},
+  "birth-of-the-goddess-rome-relief-plate-the-birth-of-the-goddess-marble-relief-rome-greek-rome-gr": {
+   "skip": "a veiled head, not the Ludovisi relief of the goddess's birth"
+  },
   "book-swallow-bitter-belly-revelation-patmos-95ce": {
    "pin": "File:Johannes, das Buch verschlingend - Der \"Starke Engel\", aus der Folge der Apokalypse, Latein-Ausgabe 1511 (SM 31514d).png",
    "relaxed": true,
@@ -8269,7 +8094,9 @@
   "god-rays-longing-schreber-memoirs-1903": {},
   "god-telephone-b-st-burgholzli-zurich-1906": {},
   "god-youth-wells-invisible-king-london-1917": {},
-  "goddess-with-flower-cyprus-stone-plate-b-goddess-with-flower-stone-cyprus-v-century-b-c-cyprus-v": {},
+  "goddess-with-flower-cyprus-stone-plate-b-goddess-with-flower-stone-cyprus-v-century-b-c-cyprus-v": {
+   "skip": "a cylinder seal, not the Cypriot goddess with a flower"
+  },
   "golden-ball-frog-king-grimm-1812": {
    "pin": "File:Frog Prince - 53064141340 - Jack Zipes Historic Fairy Tale Postcard Collection - Hey, Paul (German, 1867-1952).jpg",
    "relaxed": true,
@@ -9559,9 +9386,7 @@
    "skip": "round-3 visual check: the pinned Coptic page was St Athanasius, not the Jung Codex"
   },
   "goddess-soul-birds-on-lion-sumer-plate-goddess-with-soul-birds-standing-on-a-lion-sumer-c-2000-b": {
-   "pin": "File:Relieve Reina de la Noche (ca. 1800 a.C).jpg",
-   "relaxed": true,
-   "visual": "direct match, round-4 visual review (2026-10)"
+   "skip": "the Burney Relief (Lilith, the plate beside it), not the Hermione mirror"
   },
   "liver-clay-tablets-babylonia-900bce": {
    "pin": "File:Inscribed model of a sheep liver - BM.jpg",
@@ -9577,6 +9402,12 @@
    "pin": "File:Plaque with libation scene BM 120850.jpg",
    "relaxed": true,
    "visual": "likely match, full-size check round 4 (2026-10)"
+  },
+  "demeter-and-kore-pharsalus-stele-plate-demeter-and-kore-marble-stele-pharsalus-pharsalus-greece": {
+   "skip": "the Great Eleusinian Relief, not the Pharsalus stele"
+  },
+  "lamp-with-gorgon-head-etruscan-plate-lamp-with-gorgon-head-bronze-etruscan-v-century-etruria-v-c": {
+   "skip": "a bronze Medusa finial, not the Cortona lamp; the family carries the lamp"
   }
  },
  "theoretics": {
