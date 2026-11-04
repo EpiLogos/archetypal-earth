@@ -162,12 +162,16 @@ export function instanceRows(m: Model, idx: readonly number[], onOccurrence: (id
   return [ul, more];
 }
 
+/** A blurb up to this many words is set at the lead size (as a definition is); a longer one at the body size, so it does not fill a phone's first screen. */
+const BLURB_LEAD_WORDS = 60;
+
 /**
- * A Work's page, read as an archetype's is (owner, 1 Nov 2026): what it is and whose, its plates, and the instances it
- * attests, each linking back to it. The text itself is not on the site: no chapters of the pdf, no pages, no read-through.
+ * A Work's page, read as an archetype's is (owner, 1 Nov 2026): what it is and whose, a passage of its own introduction, its
+ * plates, and the instances it attests, each linking back to it. The text itself is not on the site: no chapters of the pdf, no
+ * pages, no read-through; the passage opens its page in the source sheet like any quotation.
  * CW9ii and Liber Novus keep the door to the lens each is read in.
  */
-export function workPage(m: Model, id: string, h: Pick<DeepHandlers, 'onSubject' | 'onOccurrence' | 'onReadText'>): HTMLElement[] {
+export function workPage(m: Model, id: string, h: Pick<DeepHandlers, 'onSubject' | 'onOccurrence' | 'onReadText' | 'passage'>): HTMLElement[] {
   const w = m.workById.get(id);
   const wl = workLens(m, id);
   if (!w || !wl) return [];
@@ -178,6 +182,11 @@ export function workPage(m: Model, id: string, h: Pick<DeepHandlers, 'onSubject'
   const author = m.personById.get(w.author);
   if (author) {
     out.push(el('p', { class: 'dp-by' }, [el('span', { text: 'By ' }), el('button', { type: 'button', class: 'link-quiet dp-author', text: author.name, onclick: () => h.onSubject({ type: 'person', id: author.id }) })]));
+  }
+  // what the text says of itself, before the instances it attests: the visitor learns what it is first
+  if (w.blurb) {
+    const emphasis = w.blurb.text.split(/\s+/).length > BLURB_LEAD_WORDS ? 'body' : 'lead';
+    out.push(quote({ text: w.blurb.text, cite: w.blurb.cite, emphasis, ...(w.blurb.voice ? { voice: w.blurb.voice } : {}) }, { passages: h.passage }));
   }
   if (wl.lens) {
     out.push(el('p', { class: 'dp-acts' }, [

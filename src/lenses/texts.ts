@@ -1,7 +1,8 @@
 // TEXTS: a text is a lens. One module, a Work as its subject. Entered from anywhere a work is named (a cite, search, a graph
 // node, a person's page, Contents), it takes the work's name as its title, the occurrences that cite it as its scope on the
 // globe, and reads it as an archetype is read (owner, 1 Nov 2026): the work and whose it is, then the instances it attests,
-// each linking back to it. The text itself is not on the site: no chapters of the pdf, no pages, no read-through.
+// each linking back to it. The page opens with a short passage of the work's own introduction (`Work.blurb`, drawn by the Quote
+// component, which opens its page in the source sheet). The text itself is not on the site: no chapters of the pdf, no read-through.
 // CW9ii and Liber Novus keep their own lenses: the controller hands those two to Aion and the Red Book before this module is
 // reached (`Controller.lensRoute`). Everything the lens shows is derived by src/data/texts.ts; nothing is authored here.
 // The reading is in the pane (the list of the works, or one work's page); the Contents are the works, the open one marked.
@@ -106,6 +107,7 @@ export function mount(ctx: LensContext): LensInstance {
     const nodes = workPage(m, wl.id, {
       onSubject: (s) => ctx.focus(s),
       onOccurrence: (id) => ctx.openOccurrence(id),
+      passage: ctx.passages,
     });
     show(wl.id, nodes, true);
   };

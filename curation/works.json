@@ -1,6 +1,6 @@
 {
  "_note": "Voices and dates for works that are not Jung's. `voice` says whose words a cite is (the interface names it: Crowley, Burt, Neumann …; absent means Jung). `year`/`display` date an attestation by a work the field holds no engagement years of: Jung's own volumes carry theirs in the vault's cites and need no entry. The year is the work's first publication, read off its copyright page in the corpus (the English edition's year is kept in the display where it differs).",
- "_schema": "Each key is a Work id. `aliases` are the other cite keys for the same text (a cite resolves through them). `kind` is the vocabulary checked by scripts/works-registry.mjs. `author` is a person id (curation/people.json where it has one); `with` and `editor` name a second person where the title page gives one. `corpus` is the file under public/data/corpus/ (null where the text has no corpus volume). `lens` is set only where the Work has its own reading lens (cw09ii: aion; liber-novus: redbook). `yearSource` names the corpus page (p.N) that states `year`; a collected volume's copyright line dates the edition, not the work, so Jung's collected volumes carry no year here (the cites date them). Only the fields above are read by scripts/ingest.mjs and scripts/lib/attest.mjs (`voice`, `year`, `display`); a record added without a voice adds none to its cites.",
+ "_schema": "Each key is a Work id. `aliases` are the other cite keys for the same text (a cite resolves through them). `kind` is the vocabulary checked by scripts/works-registry.mjs. `author` is a person id (curation/people.json where it has one); `with` and `editor` name a second person where the title page gives one. `corpus` is the file under public/data/corpus/ (null where the text has no corpus volume). `lens` is set only where the Work has its own reading lens (cw09ii: aion; liber-novus: redbook). `yearSource` names the corpus page (p.N) that states `year`; a collected volume's copyright line dates the edition, not the work, so Jung's collected volumes carry no year here (the cites date them). Only the fields above are read by scripts/ingest.mjs and scripts/lib/attest.mjs (`voice`, `year`, `display`); a record added without a voice adds none to its cites. `blurb` is a passage of the Work's own introductory matter, verbatim from its corpus volume: `text`, `locator` (\"pdf pN\" or \"pdf pN-M\", the page it starts on), and `voice` only where the words are not the author's (\"The editors\", an introducer's name). The Work's page opens with it; the quote oracle checks it on the published file, and scripts/works-registry.mjs checks its shape.",
  "version": 2,
  "works": {
   "book-of-thoth": {
@@ -12,7 +12,11 @@
    "year": 1944,
    "display": "1944",
    "yearSource": "book-of-thoth.json p.2 — \"First published 1944 e.v.\"",
-   "voice": "Crowley"
+   "voice": "Crowley",
+   "blurb": {
+    "text": "The only theory of ultimate interest about the Tarot is that it is an admirable symbolic picture of the Universe, based on the data of the Holy Qabalah.",
+    "locator": "pdf p13"
+   }
   },
   "burt-zodiac": {
    "title": "Archetypes of the Zodiac",
@@ -23,7 +27,11 @@
    "year": 1988,
    "display": "1988",
    "yearSource": "burt-zodiac.json p.8 — \"Archetypes of the Zodiac. Copyright © 1988 by Kathleen Burt\"",
-   "voice": "Burt"
+   "voice": "Burt",
+   "blurb": {
+    "text": "The personality can be viewed as a wheel whose 12 spokes, the signs of the zodiac, are in constant motion. At the center of the wheel is the Self, the unmoving, silent, tranquil eye of the storm. All of us are unconsciously attempting to reach the hub of the wheel, for it is here that we peacefully slow down to make calmer, wiser choices among our desires: mundane decisions about career, romance, family issues, health, investments.",
+    "locator": "pdf p13"
+   }
   },
   "vonzfranz-number-time": {
    "title": "Number and Time: Reflections Leading toward a Unification of Depth Psychology and Physics",
@@ -34,7 +42,11 @@
    "year": 1970,
    "display": "1970 (English 1974)",
    "yearSource": "vonzfranz-number-time.json p.4 — \"Ernst Klett Verlag, Stuttgart 1970\" (German original); the English edition is COPYRIGHT 1974",
-   "voice": "von Franz"
+   "voice": "von Franz",
+   "blurb": {
+    "text": "The book is not mathematical in the strict sense of the word, nor is it intended to be a study of number symbolism; rather it is in principle an attempt to observe the phenomenon of number from a new angle, one based on a consideration of the unconscious.",
+    "locator": "pdf p9"
+   }
   },
   "van-eenwyk": {
    "title": "Archetypes & Strange Attractors: The Chaotic World of Symbols",
@@ -45,7 +57,11 @@
    "year": 1997,
    "display": "1997",
    "yearSource": "van-eenwyk.json p.5 — \"Copyright © 1997 by John R. Van Eenwyk\"",
-   "voice": "Van Eenwyk"
+   "voice": "Van Eenwyk",
+   "blurb": {
+    "text": "This book is an elaboration of Jung’s ideas in light of what we have learned from physics and mathematics about complex dynamic systems. Some of the material may be a bit chewy. But that is necessary to provide as complete an account as possible of what chaos is, how it appears in our psychological lives, and what we can do when we find ourselves in the thick of it.",
+    "locator": "pdf p12"
+   }
   },
   "a-blue-fire": {
    "title": "A Blue Fire",
@@ -56,7 +72,12 @@
    "year": 1989,
    "display": "1989",
    "yearSource": "a-blue-fire.json p.5 — \"© 1989 James Hillman\" (the page also gives \"First published in Great Britain 1990\")",
-   "voice": "Hillman"
+   "voice": "Hillman",
+   "blurb": {
+    "text": "Hillman takes philosophy into his hands and speaks elegantly about it, but his words do not sound like philosophy. He speaks of religion in ways that worry theologians and devotees and yet give religious language new life. He takes up ancient mythology and alchemy and turns them so that they speak to the most recent concerns. Above all, he re-visions psychology, taking it back from those who use it as a science of behavior, to treat it as an art of the soul.",
+    "locator": "pdf p13",
+    "voice": "Thomas Moore"
+   }
   },
   "neumann-great-mother": {
    "title": "The Great Mother: An Analysis of the Archetype",
@@ -67,7 +88,11 @@
    "year": 1955,
    "display": "1955",
    "yearSource": "neumann-great-mother.json p.2 — copyright line \"1955, © 1963 BY BOLLINGEN FOUNDATION INC.\" (the scan reads \"copynicnt 1955\")",
-   "voice": "Neumann"
+   "voice": "Neumann",
+   "blurb": {
+    "text": "The investigation of the special character of the feminine psyche is one of the most necessary and important tasks of depth psychology in its preoccupation with the creative health and development of the individual. But this problem of the Feminine has equal importance for the psychologist of culture, who recognizes that the peril of present-day mankind springs in large part from the one-sidedly patriarchal development of the male intellectual consciousness, which is no longer kept in balance by the matriarchal world of the psyche.",
+    "locator": "pdf p21"
+   }
   },
   "neumann-origins": {
    "title": "The Origins and History of Consciousness",
@@ -78,7 +103,11 @@
    "year": 1954,
    "display": "1954",
    "yearSource": "neumann-origins.json p.8 — \"Copyright 1954 by Bollingen Foundation Inc.\"",
-   "voice": "Neumann"
+   "voice": "Neumann",
+   "blurb": {
+    "text": "In the course of its ontogenetic development, the individual ego consciousness has to pass through the same archetypal stages which determined the evolution of consciousness in the life of humanity. The individual has in his own life to follow the road that humanity has trod before him, leaving traces of its journey in the archetypal sequence of the mythological images we are now about to examine.",
+    "locator": "pdf p20"
+   }
   },
   "letters-pauli": {
    "title": "Atom and Archetype: The Pauli-Jung Letters, 1932-1958",
@@ -86,126 +115,207 @@
    "author": "jung",
    "with": "pauli",
    "aliases": [],
-   "corpus": "letters-pauli.json"
+   "corpus": "letters-pauli.json",
+   "blurb": {
+    "text": "This collection of letters between Jung and Pauli offers insightful information about a relationship that was valuable for both analytical psychology and quantum physics, two realms of investigation that at first seem to have no point of contact.",
+    "locator": "pdf p25",
+    "voice": "Beverley Zabriskie"
+   }
   },
   "sem-1925": {
    "title": "Analytical Psychology: Notes of the Seminar Given in 1925",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-1925.json"
+   "corpus": "sem-1925.json",
+   "blurb": {
+    "text": "No one seriously interested in analytical psychology can fail to have been struck with the astonishing width of the field embraced by it, and so I have thought it would be useful to all of us if, in the course of these lectures, we could obtain a view of that field. At the beginning, I would like to give you a brief sketch of the development of my own conceptions from the time I first became interested in problems of the unconscious.",
+    "locator": "pdf p23"
+   }
   },
   "sem-childrens-dreams": {
    "title": "Children's Dreams: Notes from the Seminar Given in 1936-1940",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-childrens-dreams.json"
+   "corpus": "sem-childrens-dreams.json",
+   "blurb": {
+    "text": "Without doubt, the four seminars on children’s dreams are of great importance within the scope of Jung’s complete works because they offer a rich introduction to the practice of Jungian dream interpretation. We find a particularly impressive application of the theory of the archetypes, because the personal context largely fades into the background in children’s dreams, most of them remembered only in adulthood, and because archetypal images and situations come to the fore, owing to the child’s greater proximity to the collective unconscious.",
+    "locator": "pdf p17",
+    "voice": "The editors"
+   }
   },
   "sem-dream-analysis": {
    "title": "Dream Analysis: Notes of the Seminar Given in 1928-1930",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-dream-analysis.json"
+   "corpus": "sem-dream-analysis.json",
+   "blurb": {
+    "text": "Dream analysis is the central problem of the analytical treatment, because it is the most important technical means of opening up an avenue to the unconscious. The main object in this treatment, as you know, is to get at the message of the unconscious. The patient comes to the analyst usually because he finds himself in an impasse or cul-de-sac, where there seems to be no way out, and he assumes that the doctor will know a way.",
+    "locator": "pdf p29"
+   }
   },
   "sem-kundalini": {
    "title": "The Psychology of Kundalini Yoga: Notes of the Seminar Given in 1932",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-kundalini.json"
+   "corpus": "sem-kundalini.json",
+   "blurb": {
+    "text": "Jung claimed that the symbolism of Kundalini yoga suggested that the bizarre symptomatology that patients at times presented actually resulted from the awakening of the Kundalini. He argued that knowledge of such symbolism enabled much that would otherwise be seen as the meaningless by-products of a disease process to be understood as meaningful symbolic processes, and explicated the often peculiar physical localizations of symptoms.",
+    "locator": "pdf p23",
+    "voice": "Sonu Shamdasani"
+   }
   },
   "sem-visions": {
    "title": "Visions: Notes of the Seminar Given in 1930-1934",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-visions.json"
+   "corpus": "sem-visions.json",
+   "blurb": {
+    "text": "Jung used the Visions Seminar to bring his emerging theory of archetypal psychology to life through the clinical material of an analysand, Christiana Morgan. She was an American woman who, at twenty-eight and during a period of personal crisis, set out on an imaginal quest similar in many respects to the one Jung had undertaken after his traumatic break with Freud.",
+    "locator": "pdf p36",
+    "voice": "Claire Douglas"
+   }
   },
   "sem-zarathustra": {
    "title": "Nietzsche's Zarathustra: Notes of the Seminar Given in 1934-1939",
    "kind": "seminar",
    "author": "jung",
    "aliases": [],
-   "corpus": "sem-zarathustra.json"
+   "corpus": "sem-zarathustra.json",
+   "blurb": {
+    "text": "These seminar notes evidence over and again an uneasy awareness even in this protected environment of the violence abroad in Europe. Certainly Jung was intensely conscious of the importance of Zarathustra as a foreshadowing of the cataclysm about to overtake Europe and the world.",
+    "locator": "pdf p17",
+    "voice": "James L. Jarrett"
+   }
   },
   "sup-zofingia": {
    "title": "The Zofingia Lectures",
    "kind": "lectures",
    "author": "jung",
    "aliases": [],
-   "corpus": "sup-zofingia.json"
+   "corpus": "sup-zofingia.json",
+   "blurb": {
+    "text": "Although I believe that Jung himself would not have cared to publish these juvenilia, they are highly interesting, readable, and important. They are lectures he gave to his fellow students at Basel University when he was between twenty-one and twenty-three years of age. On the 18th of May 1895 he had joined the Basel section of the color-wearing fraternity \"Zofingia,\" in which it was a tradition for the members to give, from time to time, lectures about their special fields of interest.",
+    "locator": "pdf p14",
+    "voice": "Marie-Louise von Franz"
+   }
   },
   "sync": {
    "title": "Synchronicity: An Acausal Connecting Principle",
    "kind": "book",
    "author": "jung",
    "aliases": [],
-   "corpus": "sync.json"
+   "corpus": "sync.json",
+   "blurb": {
+    "text": "The philosophical principle that underlies our conception of natural law is causality. But if the connection between cause and effect turns out to be only statistically valid and only relatively true, then the causal principle is only of relative use for explaining natural processes and therefore presupposes the existence of one or more other factors which would be necessary for an explanation. This is as much as to say that the connection of events may in certain circumstances be other than causal, and requires another principle of explanation.",
+    "locator": "pdf p20"
+   }
   },
   "cw01": {
    "title": "Psychiatric Studies (CW1)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw01.json"
+   "corpus": "cw01.json",
+   "blurb": {
+    "text": "The present volume, first of the Collected Works, though not large, is sufficient to contain the studies in descriptive psychiatry. It opens with Jung’s first published work, his dissertation for the medical degree: “On the Psychology and Pathology of So-called Occult Phenomena” (1902), a study that adumbrates very much of his later work.",
+    "locator": "pdf p6",
+    "voice": "The editors"
+   }
   },
   "cw02": {
    "title": "Experimental Researches (CW2)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw02.json"
+   "corpus": "cw02.json",
+   "blurb": {
+    "text": "The principal contents of this volume are Jung's six contributions to the famous Studies in Word Association (Diagnostische Assoziationsstudien). The experiments underlying the Studies were carried out under Jung's direction at the Psychiatric Clinic of the University of Zurich, beginning about 1902.",
+    "locator": "pdf p6",
+    "voice": "The editors"
+   }
   },
   "cw03": {
    "title": "Psychogenesis of Mental Disease (CW3)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw03.json"
+   "corpus": "cw03.json",
+   "blurb": {
+    "text": "The important thing is that I should be able to show the reader how, through psychological investigation, I have been led to certain views which I think will provoke new and fruitful questions concerning the individual psychological basis of dementia praecox.",
+    "locator": "pdf p10"
+   }
   },
   "cw04": {
    "title": "Freud and Psychoanalysis (CW4)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw04.json"
+   "corpus": "cw04.json",
+   "blurb": {
+    "text": "In these lectures I have attempted to reconcile my practical experiences in psychoanalysis with the existing theory, or rather, with the approaches to such a theory. It is really an attempt to outline my attitude to the guiding principles which my honoured teacher Sigmund Freud has evolved from the experience of many decades.",
+    "locator": "pdf p83"
+   }
   },
   "cw05": {
    "title": "Symbols of Transformation (CW5)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw05.json"
+   "corpus": "cw05.json",
+   "blurb": {
+    "text": "This book has to perform the thankless task of making clear to my contemporaries that the problems of the human psyche cannot be tackled with the meagre equipment of the doctor’s consulting-room, any more than they can be tackled with the layman’s famous “understanding of the world and human nature.” Psychology cannot dispense with the contribution made by the humane sciences, and certainly not with that made by the history of the human mind.",
+    "locator": "pdf p28"
+   }
   },
   "cw06": {
    "title": "Psychological Types (CW6)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": ["cw06psychologicaltypes"],
-   "corpus": "cw06.json"
+   "corpus": "cw06.json",
+   "blurb": {
+    "text": "My typology is far rather a critical apparatus serving to sort out and organize the welter of empirical material, but not in any sense to stick labels on people at first sight. It is not a physiognomy and not an anthropological system, but a critical psychology dealing with the organization and delimitation of psychic processes that can be shown to be typical.",
+    "locator": "pdf p14"
+   }
   },
   "cw07": {
    "title": "Two Essays on Analytical Psychology (CW7)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw07.json"
+   "corpus": "cw07.json",
+   "blurb": {
+    "text": "My intention is simply to give a broad survey of the most recent views on the nature and psychology of the unconscious. I regard the problem of the unconscious as so important and so topical that it would, in my opinion, be a great loss if this question, which touches each one of us so closely, were to disappear from the orbit of the educated lay public by being banished to some inaccessible technical journal, there to lead a shadowy paper-existence on the shelves of libraries.",
+    "locator": "pdf p10"
+   }
   },
   "cw08": {
    "title": "The Structure and Dynamics of the Psyche (CW8)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw08.json"
+   "corpus": "cw08.json",
+   "blurb": {
+    "text": "Of the first importance for understanding Jung's thinking is \"Synchronicity: An Acausal Connecting Principle\" (1952). Here he advocates the inclusion of \"meaningful coincidence\" as a dimension of understanding over and above causality.",
+    "locator": "pdf p7",
+    "voice": "The editors"
+   }
   },
   "cw09i": {
    "title": "The Archetypes and the Collective Unconscious (CW9i)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw09i.json"
+   "corpus": "cw09i.json",
+   "blurb": {
+    "text": "Psychic existence can be recognized only by the presence of contents that are capable of consciousness. We can therefore speak of an unconscious only insofar as we are able to demonstrate its contents. The contents of the personal unconscious are chiefly the feeling-toned complexes, as they are called; they constitute the personal and private side of psychic life. The contents of the collective unconscious, on the other hand, are known as archetypes.",
+    "locator": "pdf p15"
+   }
   },
   "cw09ii": {
    "title": "Aion: Researches into the Phenomenology of the Self (CW9ii)",
@@ -213,70 +323,116 @@
    "author": "jung",
    "aliases": [],
    "corpus": "cw09ii.json",
-   "lens": "aion"
+   "lens": "aion",
+   "blurb": {
+    "text": "I have been requested so often by my readers to discuss the relations between the traditional Christ-figure and the natural symbols of wholeness, or the self, that I finally decided to take this task in hand. Considering the unusual difficulties of such an undertaking, my decision did not come easily to me, for, in order to surmount all the obstacles and possibilities of error, a knowledge and caution would be needed which, unfortunately, are vouchsafed me only in limited degree.",
+    "locator": "pdf p10"
+   }
   },
   "cw10": {
    "title": "Civilization in Transition (CW10)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw10.json"
+   "corpus": "cw10.json",
+   "blurb": {
+    "text": "In 1918 Jung published a paper, \"The Role of the Unconscious,\" which sounds the keynote of the present volume. There he put forward the arresting theory that the conflict in Europe, then almost exclusively interpreted in materialistic terms, was basically a psychological crisis originating in the collective unconscious of the individuals that form groups and nations. Subsequently he wrote a considerable number of essays bearing on the contemporary scene and, in particular, on the relation of the individual to society.",
+    "locator": "pdf p5",
+    "voice": "The editors"
+   }
   },
   "cw11": {
    "title": "Psychology and Religion: West and East (CW11)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": ["jung"],
-   "corpus": "cw11.json"
+   "corpus": "cw11.json",
+   "blurb": {
+    "text": "It will not be out of place to remember that Jung's definition of religion is a wide one. Religion, he says, is \"a careful and scrupulous observation of what Rudolf Otto aptly termed the numinosum.\" From this standpoint, Jung was struck by the contrasting methods of observation employed by religious men of the East and by those of the predominantly Christian West.",
+    "locator": "pdf p6",
+    "voice": "The editors"
+   }
   },
   "cw12": {
    "title": "Psychology and Alchemy (CW12)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw12.json"
+   "corpus": "cw12.json",
+   "blurb": {
+    "text": "To the reader who knows little or nothing of my work, a word of explanation may be helpful. Some thirty-five years ago I noticed to my amazement that European and American men and women coming to me for psychological advice were producing in their dreams and fantasies symbols similar to, and often identical with, the symbols found in the mystery religions of antiquity, in mythology, folklore, fairytales, and the apparently meaningless formulations of such esoteric cults as alchemy.",
+    "locator": "pdf p5"
+   }
   },
   "cw13": {
    "title": "Alchemical Studies (CW13)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw13.json"
+   "corpus": "cw13.json",
+   "blurb": {
+    "text": "The \"Commentary on The Secret of the Golden Flower\" is of considerable historical interest. Jung says in Memories, Dreams, Reflections (ch. 7): \"Light on the nature of alchemy began to come to me only after I had read the text of the Golden Flower, that specimen of Chinese alchemy which Richard Wilhelm sent me in 1928, I was stirred by the desire to become more closely acquainted with the alchemical texts.\"",
+    "locator": "pdf p5",
+    "voice": "The editors"
+   }
   },
   "cw14": {
    "title": "Mysterium Coniunctionis (CW14)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw14.json"
+   "corpus": "cw14.json",
+   "blurb": {
+    "text": "As is indicated by the very name which he chose for it—the “spagyric” art—or by the oft-repeated saying “solve et coagula” (dissolve and coagulate), the alchemist saw the essence of his art in separation and analysis on the one hand and synthesis and consolidation on the other. For him there was first of all an initial state in which opposite tendencies or forces were in conflict; secondly there was the great question of a procedure which would be capable of bringing the hostile elements and qualities, once they were separated, back to unity again.",
+    "locator": "pdf p14"
+   }
   },
   "cw15": {
    "title": "The Spirit in Man, Art and Literature (CW15)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw15.json"
+   "corpus": "cw15.json",
+   "blurb": {
+    "text": "Jung’s attention was directed mainly to the great cultural movements—alchemy in particular—which compensated the Zeitgeist or arose from it, and to the creative spirit that introduced pioneering interpretations into realms as diverse as those of medicine, psychoanalysis, Oriental studies, the visual arts, and literature. The essays on Paracelsus, Freud, the sinologist Richard Wilhelm, Picasso, and Joyce’s Ulysses have been brought together in illustration of this central theme; two others consider literary products independently of personality structure and the psychology of the individual artist.",
+    "locator": "pdf p6",
+    "voice": "The editors"
+   }
   },
   "cw16": {
    "title": "The Practice of Psychotherapy (CW16)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw16.json"
+   "corpus": "cw16.json",
+   "blurb": {
+    "text": "It was, indeed, my endeavours as a medical psychologist to understand the ills of the soul that led me, in more than fifty years of psychotherapeutic practice, to all my later insights and conclusions, and in turn compelled me to re-examine my findings and to modify them in the light of new experience.",
+    "locator": "pdf p7"
+   }
   },
   "cw17": {
    "title": "The Development of Personality (CW17)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw17.json"
+   "corpus": "cw17.json",
+   "blurb": {
+    "text": "Personality as the expression of the wholeness of man is defined by Jung as an adult ideal whose conscious realization through individuation is the aim of human development in the second half of life. It is to the study of this aim that Jung has devoted his main attention in all his later work. It is manifest that in childhood and adolescence the ego is brought into being and firmly established; no account of individuation, therefore, would be complete without a psychological outline of the early formative period of development.",
+    "locator": "pdf p5",
+    "voice": "The editors"
+   }
   },
   "cw18": {
    "title": "The Symbolic Life: Miscellaneous Writings (CW18)",
    "kind": "collected-volume",
    "author": "jung",
    "aliases": [],
-   "corpus": "cw18.json"
+   "corpus": "cw18.json",
+   "blurb": {
+    "text": "Volume 18 now contains more than one hundred and thirty items, ranging in time from 1901, when Jung at 26 had just accepted his first professional appointment as an assistant at the Burghölzli, to 1961, shortly before his death. The collection, touching upon virtually every aspect of Jung’s professional and intellectual interest during a long life devoted to the exegesis of the symbol, justifies its title, taken from a characteristic work of Jung’s middle years, the seminar given to the Guild of Pastoral Psychology in London, 1939.",
+    "locator": "pdf p7",
+    "voice": "The editors"
+   }
   },
   "liber-novus": {
    "title": "Liber Novus (The Red Book)",
@@ -284,7 +440,12 @@
    "author": "jung",
    "aliases": ["redbook"],
    "corpus": "liber-novus.json",
-   "lens": "redbook"
+   "lens": "redbook",
+   "blurb": {
+    "text": "The overall theme of the book is how Jung regains his soul and overcomes the contemporary malaise of spiritual alienation. This is ultimately achieved through enabling the rebirth of a new image of God in his soul and developing a new worldview in the form of a psychological and theological cosmology.",
+    "locator": "pdf p238",
+    "voice": "Sonu Shamdasani"
+   }
   },
   "mdr": {
    "title": "Memories, Dreams, Reflections",

@@ -20,6 +20,18 @@ export interface WorkTie {
   weight: number;
 }
 
+/**
+ * A passage of the Work's own introductory matter (its foreword, preface or introduction), verbatim, that says what the text is.
+ * The Work's page opens with it, before the instances it attests. The cite is the Quote component's, so the passage is
+ * checked against the corpus volume by the quote oracle like every other quotation.
+ */
+export interface WorkBlurb {
+  text: string;
+  /** whose words they are, only where they are not the author's: 'The editors' on an editorial note, an introducer's name */
+  voice?: string;
+  cite: { work: WorkId; workTitle: string; /** 'pdf p7' or 'pdf p7-8' */ locator: string; /** the printed page, where the volume labels its pages */ print?: string };
+}
+
 export interface Work {
   id: WorkId;
   title: string;
@@ -43,6 +55,8 @@ export interface Work {
   chapters: WorkChapter[];
   /** the chapter table was derived from page runs, not read from a table of contents */
   chaptersDerived: boolean;
+  /** what the text says of itself, from its introductory matter; absent where the corpus holds none that qualifies */
+  blurb?: WorkBlurb;
   /** how many cites of the field name it, after the aliases fold */
   cites: number;
   /** how many occurrences carry at least one of them */

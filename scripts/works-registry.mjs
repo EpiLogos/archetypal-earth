@@ -142,6 +142,20 @@ function checkYear(id, w, errors) {
   if (!new RegExp(`(^|\\D)${w.year}(\\D|$)`).test(pg.text)) errors.push(`${id}: p.${m[1]} does not state ${w.year}`);
 }
 
+/** A blurb is a passage of the Work's own corpus volume: words, and the pdf page(s) it starts on, both of which the volume holds. Verbatim-ness is the quote oracle's, on the published file. */
+function checkBlurb(id, w, errors) {
+  const b = w.blurb;
+  if (!w.corpus) return errors.push(`${id}: a blurb needs a corpus volume to be quoted from`);
+  if (!nonEmpty(b?.text)) return errors.push(`${id}: blurb needs its text`);
+  const m = /^pdf p(\d+)(?:-(\d+))?$/.exec(b.locator ?? '');
+  if (!m) return errors.push(`${id}: blurb locator "${b.locator}" must read "pdf pN" or "pdf pN-M"`);
+  if (b.voice !== undefined && !nonEmpty(b.voice)) errors.push(`${id}: blurb voice, when given, names whose words they are`);
+  const words = b.text.trim().split(/\s+/).length;
+  if (words < 20 || words > 130) errors.push(`${id}: blurb is ${words} words; a blurb is a short passage (20-130)`);
+  const pages = new Set(readJson(path.join(CORPUS, w.corpus)).pages.map((x) => x.p));
+  for (const p of [Number(m[1]), Number(m[2] ?? m[1])]) if (!pages.has(p)) errors.push(`${id}: blurb names pdf p${p}, which is not in the corpus volume`);
+}
+
 function checkChapters(works, errors) {
   if (!fs.existsSync(CHAPTERS)) return errors.push('curation/work-chapters.json is missing');
   const { works: chapters } = readJson(CHAPTERS);
@@ -182,6 +196,7 @@ export function check() {
     if (w.corpus && !fs.existsSync(path.join(CORPUS, w.corpus))) errors.push(`${id}: corpus file ${w.corpus} is missing`);
     if (w.lens !== undefined && LENSES[id] !== w.lens) errors.push(`${id}: lens "${w.lens}" is not one of its lenses`);
     if (w.year !== undefined) checkYear(id, w, errors);
+    if (w.blurb !== undefined) checkBlurb(id, w, errors);
   }
 
   const corpusIndex = readJson(path.join(CORPUS, 'index.json')).works;

@@ -14,6 +14,8 @@ export class FakeEl {
   attrs = new Map<string, string>();
   children: (FakeEl | FakeNode)[] = [];
   listeners = new Map<string, ((e: unknown) => void)[]>();
+  /** inline custom properties (`plate()` sets its colours and ratio this way) */
+  style = { props: new Map<string, string>(), setProperty(k: string, v: string) { this.props.set(k, v); }, getPropertyValue(k: string) { return this.props.get(k) ?? ''; } };
   private own: string | null = null;
   constructor(tag: string) { this.tagName = tag.toUpperCase(); }
 

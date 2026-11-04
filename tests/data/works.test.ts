@@ -9,6 +9,8 @@ import type { Field } from '../../src/types/field';
 import type { WorksData } from '../../src/types/works';
 // @ts-expect-error plain ESM generator
 import { buildWorks, load } from '../../scripts/works-publish.mjs';
+// @ts-expect-error plain ESM script
+import { corpusLoader, matchQuote } from '../../scripts/lib/quote-oracle.mjs';
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const json = (f: string) => JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'));
@@ -138,5 +140,52 @@ describe('the published file', () => {
     expect(published.works.find((w) => w.id === 'cw12')).toMatchObject({ corpus: 'cw12', cites: 218, occurrences: 204 });
     expect(published.works.find((w) => w.id === 'mdr')!.corpus).toBeUndefined();
     for (const w of published.works) if (w.corpus) expect(fs.existsSync(path.join(ROOT, 'public/data/corpus', `${w.corpus}.json`))).toBe(true);
+  });
+});
+
+// A Work's page opens with a passage of the text's own introductory matter. The curation carries the words and the page; the file
+// the app reads carries them with the Quote component's cite; and the words must stand on that page of the Work's own volume.
+describe('a Work\'s blurb', () => {
+  const volumes = corpusLoader(path.join(ROOT, 'public/data/corpus'));
+  const verdict = (id: string, text: string, locator: string) => matchQuote(volumes(id), text, locator).cls as string;
+  const withCorpus = published.works.filter((w) => w.corpus);
+
+  it('is held by every Work that has a corpus volume to take it from, and by no other', () => {
+    expect(published.works.filter((w) => w.blurb).map((w) => w.id).sort()).toEqual(withCorpus.map((w) => w.id).sort());
+    expect(withCorpus.length).toBeGreaterThanOrEqual(36);
+  });
+
+  it('is the registry\'s words, cited as the Work itself, a short passage that starts on a page of its volume', () => {
+    for (const w of withCorpus) {
+      const b = w.blurb!;
+      const rec = (registry as unknown as Record<string, { blurb: { text: string; locator: string; voice?: string } }>)[w.id].blurb;
+      expect(b.text, `${w.id} text`).toBe(rec.text);
+      expect(b.voice, `${w.id} voice`).toBe(rec.voice);
+      expect(b.cite, `${w.id} cite`).toMatchObject({ work: w.id, workTitle: w.title, locator: rec.locator });
+      expect(/^pdf p\d+(-\d+)?$/.test(b.cite.locator), `${w.id} locator ${b.cite.locator}`).toBe(true);
+      const words = b.text.trim().split(/\s+/).length;
+      expect(words, `${w.id} words`).toBeGreaterThanOrEqual(20);
+      expect(words, `${w.id} words`).toBeLessThanOrEqual(130);
+      // no markup, footnote digit run or bracket the reader would see as residue
+      expect(/[\[\]]|\*\*|\s{2,}/.test(b.text), `${w.id} residue`).toBe(false);
+    }
+  });
+
+  it('is verbatim on the page it cites, in the volume the corpus holds (and a doctored one is not)', () => {
+    for (const w of withCorpus) {
+      const b = w.blurb!;
+      expect(['exact', 'ellipsis'], `${w.id} → ${verdict(w.id, b.text, b.cite.locator)}`).toContain(verdict(w.id, b.text, b.cite.locator));
+    }
+    const b = published.works.find((w) => w.id === 'cw05')!.blurb!;
+    expect(verdict('cw05', b.text.replace('thankless', 'welcome'), b.cite.locator)).not.toBe('exact');
+    expect(verdict('cw05', b.text, 'pdf p400')).not.toBe('exact');
+  }, 60000);
+
+  it('names whose words they are only where they are not the author\'s', () => {
+    const voices = published.works.filter((w) => w.blurb?.voice).map((w) => `${w.id}:${w.blurb!.voice}`);
+    expect(voices).toContain('cw10:The editors');
+    expect(voices).toContain('liber-novus:Sonu Shamdasani');
+    // Jung's own forewords wear no chip
+    for (const id of ['cw05', 'cw07', 'cw12', 'cw16']) expect(published.works.find((w) => w.id === id)!.blurb!.voice).toBeUndefined();
   });
 });

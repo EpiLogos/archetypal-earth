@@ -36,7 +36,20 @@ export function theoreticsOfFamilies(field) {
   return byFam;
 }
 
-export function buildWorks({ works, chapters, field }) {
+/** The printed page the volume labels the first pdf page of a locator with ('pdf p7', 'pdf p7-8'), or undefined where it labels none. */
+function printedPage(doc, locator) {
+  const pdf = /pdf\s*pp?\.?\s*(\d+)/i.exec(locator)?.[1];
+  const pg = pdf === undefined ? undefined : doc?.pages.find((x) => x.p === Number(pdf));
+  return pg?.print ? String(pg.print) : undefined;
+}
+
+/** A Work's blurb as the app reads it: the words, and the Quote component's cite (the printed page read off the volume). */
+function blurbOf(id, w, corpus) {
+  const print = printedPage(corpus(w.corpus), w.blurb.locator);
+  return { text: w.blurb.text, ...(w.blurb.voice ? { voice: w.blurb.voice } : {}), cite: { work: id, workTitle: w.title, locator: w.blurb.locator, ...(print ? { print } : {}) } };
+}
+
+export function buildWorks({ works, chapters, field, corpus = () => null }) {
   const key = new Map();
   for (const [id, w] of Object.entries(works)) for (const k of [id, ...(w.aliases ?? [])]) key.set(k, id);
   const famArch = new Map(field.families.map((f) => [f.id, (f.archetypes ?? []).map((t) => t.id)]));
@@ -73,6 +86,7 @@ export function buildWorks({ works, chapters, field }) {
       ...(w.lens ? { lens: w.lens } : {}),
       chapters: (ch?.chapters ?? []).map((c) => ({ title: c.title, page: c.page, level: c.level ?? 1 })),
       chaptersDerived: ch ? ch.derived === true : false,
+      ...(w.blurb ? { blurb: blurbOf(id, w, corpus) } : {}),
       cites: a.cites,
       occurrences: a.occ.size,
       ties: { archetypes: byWeight(a.arch), theoretics: byWeight(a.theo), families: byWeight(a.fam) },
@@ -87,6 +101,7 @@ export function load() {
     works: readJson(path.join(ROOT, 'curation', 'works.json')).works,
     chapters: readJson(path.join(ROOT, 'curation', 'work-chapters.json')).works,
     field: readJson(path.join(DATA, 'field.json')),
+    corpus: (file) => (file ? readJson(path.join(DATA, 'corpus', file)) : null),
   };
 }
 
