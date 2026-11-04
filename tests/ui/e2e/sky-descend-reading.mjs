@@ -2,9 +2,10 @@
 //
 //  1. A Thoth card's place is the sky (owner, 1 Nov 2026): its reading stands at its planet and has no Earth action, and a
 //     Field address for the card hands off to it there (#/f/<card> -> #/sky/<planet>/card/<card>); X on it holds the planet.
-//     A descent is still a reading: a float click from a gaze, a tie link in a card's reading (a family with located
-//     occurrences and one with none), a sign's glyph on a birth chart close the sheet and drop (look at the Earth, drop,
-//     settle); the node's reading is never open during the drop and opens by itself when the camera has landed. A body
+//     A descent is still a reading: a float click from a gaze, a tie link in a card's reading (the suit's element), a sign's
+//     glyph on a birth chart close the sheet and drop (look at the Earth, drop, settle); the node's reading is never open
+//     during the drop and opens by itself when the camera has landed. A sephira named in a card is not a descent: its place
+//     is the planet that holds its number (owner, 3 Nov 2026), so Chokmah flies to Neptune and is read there. A body
 //     picked from the graph opens Astrology on that planet, and its cards are read there.
 //  2. A planet in a card's reading (its decan's ruler, the body that holds its number) goes to that planet in the sky: the
 //     camera flies from the held planet to the other (distance to it only falls, no zoom-out pop, no jump cut), the sheet and
@@ -151,10 +152,29 @@ parts.b = async () => {
   await ctx.close();
 };
 
-// ── c. a tie link in a planet's reading: a family with placed instances, and one with none ────────────────────────────
+// ── c. a tie link in a planet's reading: the element descends to the Earth; the sephira goes to its planet ───────────
 parts.c = async () => {
-  // the sephira (Chokmah) is a family with no placed instance of its own; the element (Fire) has some: both descend and open
-  for (const want of [{ label: 'Chokmah', tag: 'c sephira' }, { label: 'Wands', tag: 'c element' }]) {
+  // a sephira's place is the planet that holds its number (owner, 3 Nov 2026): Chokmah from the Two of Wands flies to Neptune
+  // and is read there, nothing descends and no Earth reading opens
+  {
+    const p = await open(browser, { width: 1440, height: 900 });
+    await hold(p.page, 'mars');
+    await openCard(p.page, 'Two of Wands');
+    await record(p.page);
+    await p.page.waitForTimeout(200);
+    const t0 = await clickStamped(p.page, '.cr .dp-rows button.dp-row-name', 'Chokmah');
+    const at = await p.page.waitForFunction(() => {
+      const sky = window.__earth.engine.sky;
+      return location.hash === '#/sky/neptune/sephira/chokmah' && sky?.approached === 'neptune' && sky.approach > 0.99
+        && document.querySelector('.cr .cr-title')?.textContent === 'Chokmah';
+    }, null, { timeout: 30000 }).then(() => true).catch(() => false);
+    const rec = await stopRecord(p.page);
+    const after = rec.filter((r) => r.t >= t0);
+    check(at, 'c sephira: Chokmah opens at Neptune, read there', await p.page.evaluate(() => `${location.hash} · ${document.querySelector('.cr .cr-title')?.textContent}`));
+    check(!after.some((r) => r.phase === 'descend' || r.deepOpen), 'c sephira: nothing descends to the Earth and no Earth reading opens');
+    await p.ctx.close();
+  }
+  for (const want of [{ label: 'Wands', tag: 'c element' }]) {
     const p = await open(browser, { width: 1440, height: 900 });
     await hold(p.page, 'mars');
     await openCard(p.page, 'Two of Wands');

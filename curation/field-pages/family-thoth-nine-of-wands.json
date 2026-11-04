@@ -2,55 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-wands",
- "line": "Crowley’s Nine of Wands: Strength (pdf p180); the Moon in Sagittarius (pdf p194); Yesod (pdf p180).",
+ "line": "Strength that comes from staying in motion: the fire is back in balance and holds by constant change, as a cyclist stays upright only by going fast enough. It is the strength of a defender who keeps moving, not of a wall. Drawn, the card asks you to stay alert and adaptable, and promises that you can hold your ground if you keep moving with events. The Moon in Sagittarius, weakest planet in the most elusive sign, works here in Yesod, the Foundation.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p180); on the Moon in Sagittarius (pdf p194).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Nine of Wands is called Strength",
-     "page": 180,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is also governed by the Moon in Sagittarius",
+     "quote": "This card is also governed by the Moon in Sagittarius; so here is a double influence of the Moon on the Tree of Life. Hence the aphorism “Change is Stability”.",
      "page": 194,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Moon and Yesod, and on the direct ray from Tiphareth (pdf p180).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "It is ruled by the Moon and Yesod.",
-     "page": 180,
-     "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "What saves Yesod is the direct ray from Tiphareth;",
+     "quote": "Here the Moon, the weakest of the planets, is in Sagittarius, the most elusive of the Signs; yet it dares call itself Strength. Defence, to be effective, must be mobile.",
      "page": 180,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the Nine and the fullest development of the Force (pdf p194).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Nine represents always the fullest development of the Force",
+     "quote": "The Wands have now become arrows. There are eight of them in the background, and in front of them one master arrow. This has the Moon for its point, and the Sun for the driving Force above it; for the path of Sagittarius on the Tree of Life joins the Sun and Moon. The flames in the card are tenfold, implying that the Energy is directed downwards.",
      "page": 194,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Nines",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Yesod. After the double excursion into misfortune, the current returns to the middle pillar. This Sephira is the seat of the great crystallization of Energy.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Of all important doctrines concerning equilibrium, this is the easiest to understand, that change is stability; that stability is guaranteed by change; that if anything should stop changing for the fraction of a split second, it would go to pieces.",
+     "page": 180,
      "voice": "Crowley"
     }
    ]

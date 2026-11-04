@@ -2,67 +2,35 @@
  "version": 1,
  "type": "family",
  "id": "binah",
- "line": "Crowley on Binah (The Book of Thoth); Jung on Binah in CW13 ¶411.",
+ "line": "Understanding, the Great Mother: the third sephira, the dark Great Sea in which the Father’s will is conceived and given form, closing the supernal triangle above the Abyss. Its number gives each suit a fertile, stable form from which a child can issue: Virtue in Wands, Abundance in Cups, Sorrow in Swords, Work in Disks. Among the ten bodies of the solar system on the Tree, it is Saturn.",
  "sections": [
   {
-   "id": "crowley-number-three",
-   "title": "Crowley's number 3",
-   "line": "Crowley on Binah, Understanding, and the Threes: The Book of Thoth, pdf p59, p176 and p214.",
+   "id": "crowley",
+   "title": "Crowley on Binah",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "shows the third Sephira, Binah, Understanding, as not yet formulated",
-     "page": 59,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding.",
+     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding. The idea has become fertilized; the triangle has been formulated. In each case, the idea is of a certain stability which can never be upset, but from which a child can issue.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Binah, the Great Mother, here rules the realm of Air.",
-     "page": 214,
+     "quote": "The idea of division, of mutability, the idea of the airy quality of things, manifests itself in the Three of Swords, the Lord of Sorrow. Here one is reminded of the darkness of Binah, of the mourning of Isis; but this is not any vulgar sorrow dependent upon any individual disappointment or discontent. It is Weltschmerz, the universal sorrow; it is the quality of melancholy.",
+     "page": 176,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "saturn-and-the-moon",
-   "title": "Saturn and the Moon",
-   "line": "Crowley's attributions for Binah: The Book of Thoth, pdf p199 and p110.",
-   "quotes": [
+    },
     {
      "work": "book-of-thoth",
-     "quote": "Binah, the Great Sea, is the Moon in one aspect, but Saturn in another;",
+     "quote": "Binah, the Great Sea, is the Moon in one aspect, but Saturn in another; and Mercury, besides being the Word or Will of the All‐One, is the guide of the souls of the Dead.",
      "page": 199,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Yet Saturn appears in Binah in respect of its blackness in the",
+     "quote": "Yet Saturn appears in Binah in respect of its blackness in the Queen’s scale, which is the scale of Observed Nature; but always, as soon as the end of a process is reached, it returns automatically to the beginning.",
      "page": 110,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "where-the-lists-disagree",
-   "title": "Saturn, the Abyss and Daath",
-   "line": "Crowley on Saturn and the Abyss, and Saturn at the position of Daath: The Book of Thoth, pdf p111 and p265.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Saturn. The Abyss. This is represented by Herschel,",
-     "page": 111,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Saturn is in the position of the non‐existent Sephira, Daäth,",
-     "page": 265,
      "voice": "Crowley"
     }
    ]
@@ -70,17 +38,11 @@
   {
    "id": "jung-root-of-the-tree",
    "title": "Jung's root of the tree",
-   "line": "Jung on Binah and the tree of life: CW13 ¶411.",
+   "line": "",
    "quotes": [
     {
      "work": "cw13",
-     "quote": "in Binah is rooted the tree of life",
-     "para": 411,
-     "voice": "Jung"
-    },
-    {
-     "work": "cw13",
-     "quote": "which was as it were the trunk of the Sefiroth system, it brought life down to earth from Binah",
+     "quote": "Because this stood in the middle of the garden, it was called the linea media (middle line). Through this middle line, which was as it were the trunk of the Sefiroth system, it brought life down to earth from Binah.",
      "para": 411,
      "voice": "Jung"
     }

@@ -6,7 +6,7 @@
     "occurrences": 3084,
     "cultures": 64,
     "images": 2942,
-    "joins": 410
+    "joins": 413
   },
   "vaultLedgerLine": "2026-10-10 — THREE NEW TEXTS INGESTED + CLOUD HANDOFF ✅",
   "geoPrecision": {
@@ -364,7 +364,7 @@
     "decan-virgo-2",
     "decan-virgo-3"
   ],
-  "joins": 410,
+  "joins": 413,
   "joinsDropped": 0,
   "joinsDuplicates": [],
   "unresolvedFamilyTargets": {
@@ -1021,15 +1021,15 @@
       "words": 50328,
       "cached": true
     },
-    "stringsChanged": 194,
-    "changes": 598,
+    "stringsChanged": 193,
+    "changes": 597,
     "byKind": {
-      "join": 523,
+      "join": 522,
       "curated": 59,
       "reflow": 15,
       "hyphen-break": 1
     },
-    "unique": 406,
+    "unique": 405,
     "residual": 0,
     "residualSuspects": [],
     "samples": [
@@ -4417,15 +4417,6 @@
         "count": 1,
         "where": [
           "occ:tree-golden-hook-dorn-speculativa-16c.body[1]"
-        ]
-      },
-      {
-        "kind": "join",
-        "before": "sym pathetic;",
-        "after": "sympathetic;",
-        "count": 1,
-        "where": [
-          "occ:chesed-in-book-of-thoth.quote"
         ]
       },
       {

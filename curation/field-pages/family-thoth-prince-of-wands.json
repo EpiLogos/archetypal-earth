@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-prince-of-wands",
- "line": "Crowley's Prince of Wands: Vau of the Name (pdf p139); the airy part of Fire and the span from Cancer to Leo (pdf p145).",
+ "line": "Fire set going: swift, strong, noble and generous, with an enormous capacity for work done for its own sake and a courage that keeps fighting against the odds. Drawn, the card brings bold drive and vigorous opinion, but warns of impulse, boasting and pride, and at its worst of cruelty, intolerance and cowardice. The Prince of Wands is the airy part of Fire, ruling from the last decan of Cancer through the first two of Leo.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princes (pdf p139) and on the Prince of Wands (pdf p145).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
-     "page": 139,
+     "quote": "The moral qualities appropriate to this figure are swiftness and strength. But he is sometimes inclined to act on impulse; sometimes easily led by external influences; sometimes, especially in trifles, a prey to indecision. He is often violent, especially in the expression of an opinion, but he does not necessarily hold the opinion about which he is so emphatic. He states a vigorous proposition for the sake of stating it.",
+     "page": 145,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Prince of Wands represents the airy part of Fire, with its faculty of expanding and volatilising.",
+     "quote": "When this card is badly dignified, the character degenerates. Each of the qualities mentioned above is found in its antithesis. There is great cruelty in him, partly sadistic and partly due to callousness arising from indifference‐and, in a sense, laziness! So too he may be intolerant, prejudiced and idle‐principally because it saves trouble. He may furthermore be an empty boaster and a great coward.",
+     "page": 146,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "He is a warrior in complete armour of scale mail, but his arms are bare on account of his vigour and activity. He wears a rayed crown surmounted by a lion’s head winged, and from this crown depends a curtain of flame. On his breast is the sigil of To Mega Therion. In his left hand he bears the Phoenix wand of the Second Adept (in the Ritual of 5°=6° of R.R. at A.C.), the wand of Power and Energy, while with his other arm he reins the lion which draws his chariot, the chariot which is fortified by a wheel radiating flame. He rides upon a sea of flames, both waved and salient.",
      "page": 145,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Cancer to the 20th degree of Leo (pdf p145); on the decans and the elemental attribution (pdf p139).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He rules from the 21st degree of Cancer to the 20th degree of Leo.",
+     "quote": "The Prince of Wands represents the airy part of Fire, with its faculty of expanding and volatilising. He rules from the 21st degree of Cancer to the 20th degree of Leo.",
      "page": 145,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name. The Prince is the Son of the Queen (the old King’s daughter) by the Knight who has won her; he is therefore represented as in a chariot, going forth to carry out the combined Energy of his parents. He is the active issue of their union, and its manifestation. He is the intellectual image of their union. His action is consequently more enduring than that of his forbears.",
      "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Prince of Wands (pdf p145).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The moral qualities appropriate to this figure are swiftness and strength.",
-     "page": 145,
      "voice": "Crowley"
     }
    ]

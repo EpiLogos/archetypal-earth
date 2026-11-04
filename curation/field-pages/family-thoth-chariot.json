@@ -2,12 +2,50 @@
  "version": 1,
  "type": "family",
  "id": "thoth-chariot",
- "line": "Crowley on Atu VII: Cancer, the cardinal sign of Water, the path from Binah to Geburah, and the Holy Grail (pdf p74, p75).",
+ "line": "The Chariot is triumph carried with discipline: the armoured warrior whose only task is to bear the Grail, the life of the spirit, through the world. Drawn, it brings victory, hope, faithfulness and obedience to a higher authority, but also ruthlessness and the die-hard's violence in defending old ideas. The visor is down and the face hidden; the force is in the carrying, not the driving. It is the path of Cheth and of Cancer, the first rush of Water, house of the Moon.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Sign, element and the number 418",
-   "line": "Crowley on Cancer, the cardinal sign of Water, and on Cheth in the number 418 (pdf p74).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Triumph, victory, hope, memory, digestion, violence in maintaining traditional ideas, the “die‐hard”, ruthlessness, lust of destruction, obedience, faithfulness, authority under authority.",
+     "page": 251,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Cancer also represents the path which leads from the great Mother Binah to Geburah, and is thus the influence of the Supernals descending through the Veil of Water (which is blood) upon the energy of man, and so inspires it.",
+     "page": 74,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The canopy of the Chariot is the night‐sky‐blue of Binah. The pillars are the four pillars of the Universe, the regimen of Tetragrammaton. The scarlet wheels represent the original energy of Geburah which causes the revolving motion. This chariot is drawn by four sphinxes composed of the four Kerubs, the Bull, the Lion, the Eagle and the Man. In each sphinx these elements are counter‐changed; thus the whole represents the sixteen sub‐elements.",
+     "page": 75,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "His only function is to bear the Holy Grail. Upon his armour are ten Stars of Assiah, the inheritance of celestial dew from his mother. He bears as a crest the Crab appropriate to the sign. The vizor of his helmet is lowered, for no man may look upon his face and live. For the same reason, no part of his body is exposed.",
+     "page": 75,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -17,32 +55,7 @@
     },
     {
      "work": "book-of-thoth",
-     "quote": "Cancer is the cardinal sign of the element of Water,",
-     "page": 74,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Note that Cheth—Cheth 8—Yod 10—Tan 400—has the value of 418.",
-     "page": 74,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-path",
-   "title": "From Binah to Geburah",
-   "line": "Crowley on Cancer as the path leading from Binah to Geburah (pdf p74) and on the function of the figure (pdf p75).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Cancer also represents the path which leads from the great Mother Binah to Geburah",
-     "page": 74,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "His only function is to bear the Holy Grail.",
+     "quote": "Cancer is the house of the Moon; there are thus certain analogies between this card and that of the High Priestess. But, also, Jupiter is exalted in Cancer, and here one recalls the card called Fortune (Atu X) attributed to Jupiter.",
      "page": 75,
      "voice": "Crowley"
     }

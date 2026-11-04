@@ -2,55 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-seven-of-swords",
- "line": "Crowley’s Seven of Swords: Futility (pdf p178); the Moon in Aquarius (pdf p219); Netzach (pdf p178, p219).",
+ "line": "Futility: effort without the strength to see it through. The mind wavers, looks for compromise and tolerates what it should resist, hoping to buy peace from forces that will simply take what is offered; its little energy is no more than daydreaming. Drawn, the card warns that half-hearted plans and appeasement fail, however reasonable they look, unless sustained work stands behind them. Netzach, the sphere of Venus and victory, and the Moon in Aquarius soften the wreck into wavering.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p178); on the Moon in Aquarius (pdf p219).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Seven of Swords is called Futility.",
+     "quote": "The intellectual wreckage of the card is thus not so vehement as in the Five. There is vacillation, a wish to compromise, a certain toleration. But, in certain circumstances, the results may be more disastrous than ever. This naturally depends upon the success of the policy. This is always in doubt as long as there exist violent, uncompromising forces which take it as a natural prey.",
+     "page": 219,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Seven of Swords is called Futility. This is a yet weaker card than the Seven of Wands. It has a passive sign instead of an active one, a passive planet instead of an active one. It is like a rheumatic boxer trying to “come back” after being out of the ring for years. Its ruler is the Moon.",
      "page": 178,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the celestial rule of the Moon in Aquarius",
+     "quote": "Netzach, in the suit of Swords, does not represent such catastrophe as in the other suits, for Netzach, the Sephira of Venus, means victory. There is, therefore, a modifying influence; and this is accentuated by the celestial rule of the Moon in Aquarius.",
      "page": 219,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on Netzach, the Sephira of Venus (pdf p219); on the Sevens and Netzach (pdf p178).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Netzach, the Sephira of Venus, means victory.",
+     "quote": "The symbol shows six Swords with their hilts in crescent formation. Their points meet below the centre of the card, impinging upon a blade of a much larger up‐thrusting sword, as if there were a contest between the many feeble and the one strong. He strives in vain.",
      "page": 219,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "These cards are attributed to Netzach.",
-     "page": 178,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the card and the Five (pdf p219).",
+   "id": "number",
+   "title": "The Sevens",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The intellectual wreckage of the card is thus not so vehement as in the Five.",
-     "page": 219,
+     "quote": "These cards are attributed to Netzach. The position is doubly unbalanced; off the middle pillar, and very low down on the Tree. It is taking a very great risk to descend so far into illusion, and, above all, to do it by frantic struggle.",
+     "page": 178,
      "voice": "Crowley"
     }
    ]

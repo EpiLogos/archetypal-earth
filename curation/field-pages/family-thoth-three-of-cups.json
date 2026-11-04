@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-three-of-cups",
- "line": "Crowley’s Three of Cups: Lord of Abundance (pdf p176); Binah and Mercury in Cancer (pdf p199).",
+ "line": "Abundance: love has borne fruit, and the cups brim over with plenty, the joy of harvest and of shared celebration. It is the card of Demeter and Persephone, fertility with a spiritual root. Drawn, it promises good things, friendship, festivity and plans coming to fruition, and warns that the good things of life, however enjoyed, are not to be trusted: Persephone's pomegranate bound her to the underworld. Mercury in Cancer works here in Binah, the dark Mother, the sphere of Understanding.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Three of Cups is called the Lord of Abundance.",
+     "quote": "The Three of Cups is called the Lord of Abundance. The idea of love has come to fruition; but this is now sufficiently far down the Tree to introduce a very definite differentiation between the suits, which was not previously possible.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Binah in the suit of Water and on Mercury in Cancer (pdf p199).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card refers to Binah in the suit of Water.",
+     "quote": "The card is referred to the influence of Mercury in Cancer; this carries further the above thesis. Mercury is the Will or Word of the All‐Father; here its influence descends upon the most receptive of the Signs.",
      "page": 199,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card is referred to the influence of Mercury in Cancer",
+     "quote": "This card requires great subtlety of interpretation. The pomegranate was the fruit which Persephone ate in the realms of Pluto, thereby enabling him to hold her in the lower world, even after the most powerful influence had been brought to bear. The lesson seems to be that the good things of life, although enjoyed, should be distrusted.",
      "page": 199,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the card as the spiritual basis of fertility, and on Binah, the Great Sea (pdf p199).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "It is the spiritual basis of fertility.",
+     "quote": "This card refers to Binah in the suit of Water. This is the card of Demeter or Persephone. The Cups are pomegranates: they are filled bountifully to overflowing from a single lotus, arising from the dark calm sea characteristic of Binah.",
      "page": 199,
      "voice": "Crowley"
-    },
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Threes",
+   "line": "",
+   "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Binah, the Great Sea, is the Moon in one aspect, but Saturn in another;",
-     "page": 199,
+     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding. The idea has become fertilized; the triangle has been formulated. In each case, the idea is of a certain stability which can never be upset, but from which a child can issue.",
+     "page": 176,
      "voice": "Crowley"
     }
    ]

@@ -531,14 +531,16 @@ body.deep-open .filter-panel, body.pane-contents .filter-panel, body.pane-readin
 .cr-planet.here .cr-disc { outline: 1px solid var(--cr-tint); outline-offset: 4px; }
 .cr-row-name { font-family: var(--serif); font-size: 1.04rem; line-height: 1.35; color: var(--ink); }
 /* Crowley's list of the ten bodies, as printed, the line of the planet that holds the card's number marked */
-.cr-list { margin: 4px 0 22px; padding: 14px 18px 12px; border-left: 2px solid color-mix(in srgb, var(--cr-tint) 60%, transparent); background: rgb(var(--core-rgb) / 0.03); border-radius: 0 6px 6px 0; }
-.cr-list-cap { margin: 0 0 8px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
-.cr-list ol { margin: 0; padding-left: 1.9em; font: italic 400 1rem/1.55 var(--serif); color: var(--ink-3); }
+.cr-list { margin: 4px 0 22px; padding: 12px 18px; border-left: 2px solid color-mix(in srgb, var(--cr-tint) 60%, transparent); background: rgb(var(--core-rgb) / 0.03); border-radius: 0 6px 6px 0; }
+.cr-list > summary { font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.cr-list ol { margin: 10px 0 0; padding-left: 1.9em; font: italic 400 1rem/1.55 var(--serif); color: var(--ink-3); }
 .cr-list li { padding: 1px 0; }
 .cr-list li::marker { font: 400 0.82rem var(--sans); color: var(--ink-3); }
 .cr-list li.on { color: var(--ink); }
 .cr-list li.on::marker { color: var(--cr-tint); }
 .cr-chain .dp-rows { margin-top: 6px; }
+/* whose reading of a planet follows: Burt's, under the planet's row */
+.cr-voice { margin: 18px 0 8px; font: 500 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 
 @media (max-width: 720px) { body.po-holding .sky-caption { display: none; } }
 @media (max-width: 720px) { body.natal-sky .sky-caption { display: none; } }

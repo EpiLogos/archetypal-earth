@@ -2,41 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-fortune",
- "line": "Crowley on Atu X: the planet Jupiter, the letter Kaph, a continual change of state, and the element of luck (pdf p81).",
+ "line": "Fortune is change itself: the wheel of the universe turning, luck as the incalculable factor rather than plain good fortune. Drawn, it means a change of fortune, usually for the better, since one seldom consults the cards when content. Nothing stays on top or at the bottom: what rises will sink and what is dull will begin to stir, while only the axle stands still. It is the path of Kaph, the palm of the hand, and of Jupiter, the Greater Fortune.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Planet and letter",
-   "line": "Crowley on Jupiter, the Greater Fortune, and on the letter Kaph (pdf p81).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the planet Jupiter, “the Greater Fortune” in astrology.",
+     "quote": "It would be narrow to think of Jupiter as good fortune; he represents the element of luck. The incalculable factor. This card thus represents the Universe in its aspect as a continual change of state.",
      "page": 81,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It corresponds to the letter Kaph1, which means 1Kaph 20 Pé 80=100, Qoph, Pisces. The initials K Ph are those of ?τεις and Φαλλος the palm of the hand",
-     "page": 81,
+     "quote": "One of the most important aphorisms of Hindu philosophy is: “the Gunas revolve”. This means that, according to the doctrine of continual change, nothing can remain in any phase where one of these Gunas is predominant; however dense and dull that thing may be, a time will come when it begins to stir. The end and reward of the effort is a state of lucid quietude, which, however, tends ultimately to sink into the original inertia.",
+     "page": 82,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Change of fortune. (This generally means good fortune because the fact of consultation implies anxiety or discontent.)",
+     "page": 251,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "Change of state and luck",
-   "line": "Crowley on the card as the Universe in its aspect as a continual change of state, and on Jupiter as the element of luck (pdf p81).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card thus represents the Universe in its aspect as a continual change of state.",
+     "quote": "Above, the firmament of stars. These appear distorted in shape, although they are balanced, some being brilliant and some dark. From them, through the firmament, issue lightnings; they churn it into a mass of blue and violet plumes. In the midst of all this is suspended a wheel of ten spokes, according to the number of the Sephiroth, and of the sphere of Malkuth, indicating governance of physical affairs. On this wheel are three figures, the Sworded Sphinx, Hermanubis, and Typhon; they symbolize the three forms of energy which govern the movement of phenomena.",
      "page": 81,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It would be narrow to think of Jupiter as good fortune; he represents the element of luck.",
+     "quote": "This Sphinx represents the element of sulphur, and is exalted, temporarily, upon the summit of the wheel. She is armed with a sword of the short Roman pattern, held upright between the paws of the lion. Climbing up the left‐hand side of the wheel is Hermanubis, who represents the alchemical Mercury. He is a composite god; but in him the simian element predominates. On the right hand side, precipitating himself downward, is Typhon, who represents the element of salt.",
+     "page": 82,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the planet Jupiter, “the Greater Fortune” in astrology.",
      "page": 81,
      "voice": "Crowley"
     }

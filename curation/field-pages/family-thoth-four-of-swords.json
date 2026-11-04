@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-four-of-swords",
- "line": "Crowley’s Four of Swords: Truce (pdf p177); Chesed (pdf p176); Jupiter and Libra (pdf p215).",
+ "line": "Truce: the mind has called a halt and settled its quarrels by rule and agreement instead of thinking them through. Convention and dogma take charge, a refuge from mental chaos chosen for comfort, an armed peace that holds while no one tests it. Drawn, the card asks whether your calm rests on understanding or on appeasement, and warns that a rest without real grounds will not last. Chesed, the sphere of law, under Jupiter in Libra, sets authority over the intellect.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Four of Swords is called Truce.",
+     "quote": "Chesed refers to Jupiter who rules in Libra in this decanate. The sum of these symbols is therefore without opposition; hence the card proclaims the idea of authority in the intellectual world. It is the establishment of dogma, and law concerning it. It represents a refuge from mental chaos, chosen in an arbitrary manner. It argues for convention.",
+     "page": 215,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Four of Swords is called Truce. This seems rather on the lines of “the strong man armed, keeping his house in peace”. The masculine nature of air makes it dominant. The card is almost a picture of the formation of the military clan system of society.",
      "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
+     "quote": "Minds too indolent or too cowardly to think out their own problems hail joyfully this policy of appeasement. As always, the Four is the term; as in this case there is no true justification for repose, its disturbance by the Five holds no promise of advance; its static shams go pell‐mell into the melting‐pot; the issue is mere mess, usually signalized by foetid stench. But it has to be done!",
+     "page": 215,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on the Fours and Chesed (pdf p176); on Chesed, Jupiter and Libra (pdf p215).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Chesed.",
+     "quote": "The hilts of the four Swords are at the corner of a St. Andrew’s cross. Their shape suggests fixation and rigidity. Their points are sheathed—in a rather large rose of forty‐nine petals representing social harmony. Here, too, is compromise.",
+     "page": 215,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Fours",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Chesed. The connection between the number Four and the number Three is extremely complex. The important characteristic is that Four is “below the Abyss”; therefore, in practice, it means solidification, materialization. Things have become manifest. The essential point is that it expresses the Rule of Law.",
      "page": 176,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Chesed refers to Jupiter who rules in Libra in this decanate.",
-     "page": 215,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on authority in the intellectual world and on a refuge from mental chaos (pdf p215).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "the card proclaims the idea of authority in the intellectual world",
-     "page": 215,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It represents a refuge from mental chaos, chosen in an arbitrary manner.",
-     "page": 215,
      "voice": "Crowley"
     }
    ]

@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-knight-of-swords",
- "line": "Crowley's Knight of Swords: Yodh of the Name (pdf p139); the fiery part of Air and the span from Taurus to Gemini (pdf p157).",
+ "line": "The storm: a mind seized by an idea and charging after it, active, skilful, clever, fierce and courageous. Drawn, the card brings sudden inspiration and a swift attack on the problem in hand, and warns that without real vigour behind it the attack comes to nothing and any opposition brushes it aside. The Knight of Swords is the fiery part of Air, ruling from the last decan of Taurus through the first two of Gemini.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Knights (pdf p139) and on the Knight of Swords (pdf p157).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Knights represent the powers of the letter Yodh in the Name.",
-     "page": 139,
+     "quote": "The moral qualities of a person thus indicated are activity and skill, subtlety and cleverness. He is fierce, delicate and courageous, but altogether the prey of his idea, which comes to him as an inspiration without reflection. If ill‐dignified, the vigour in all these qualities being absent, he is incapable of decision or purpose. Any action that he takes is easily brushed aside by opposition. Inadequate violence spells futility.",
+     "page": 157,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Knight of Swords represents the fiery part of Air; he is the wind, the storm.",
+     "quote": "It is the True Will exploding the mind spontaneously. The influence of Taurus makes for steadiness, and that of the first decanate of Gemini for inspiration.",
+     "page": 158,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "He is a warrior helmed, and for his crest he bears a revolving wing. Mounted upon a maddened steed, he drives down the Heavens, the Spirit of the Tempest. In one hand is a sword, in the other a poniard. He represents the idea of attack.",
      "page": 157,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Taurus to the 20th degree of Gemini (pdf p157); on the decans and the elemental attribution (pdf p139).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He rules from the 21st degree of Taurus to the 20th degree of Gemini.",
+     "quote": "The Knight of Swords represents the fiery part of Air; he is the wind, the storm. He represents the violent power of motion applied to an apparently manageable element. He rules from the 21st degree of Taurus to the 20th degree of Gemini.",
      "page": 157,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "quote": "The Knights represent the powers of the letter Yodh in the Name. They are the most sublime, original, active part of the Energy of the Element; for this reason they are represented on horseback and clad in complete armour. Their action is swift and violent, but transient. In the Element of Fire, for instance, the Knight corresponds to the Lightning flash; in the Element of Water, to Rain and Springs; in that of Air, to Wind; in that of Earth, to Mountains.",
      "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Knight of Swords (pdf p157).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The moral qualities of a person thus indicated are activity and skill, subtlety and cleverness.",
-     "page": 157,
      "voice": "Crowley"
     }
    ]

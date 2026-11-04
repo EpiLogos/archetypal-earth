@@ -2,55 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-disks",
- "line": "Crowley's Princess of Disks: Hé final of the Name (pdf p140); the earthy part of Earth (pdf p171); no zodiacal attribution (pdf p140).",
+ "line": "Earth on the brink of transfiguration: womanhood in its fullest projection, strong, beautiful and brooding, carrying the secret of the future within her. Drawn, the card brings pregnancy in every sense, a latent possibility about to show itself, and a character that takes its form from whatever influences reach it. The Princess of Disks is the earthy part of Earth; she has no span of the zodiac but rules a quarter of the heavens around the North Pole.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Disks (pdf p171).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses represent the Hé final of the Name.",
-     "page": 140,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The Princess of Disks, the last of the Court cards, represents the earthy part of Earth.",
+     "quote": "The characteristics of an individual signified by this card are too various to enumerate; one must summarize by saying that she is Womanhood in its ultimate projection. She contains all the characteristics of woman, and it would depend entirely upon the influences to which she is subjected whether one or another becomes manifest. But in every case her attributes will be pure in themselves, and not necessarily connected with any other attributes which in the normal way one regards as symbolic. In one sense, then, her general reputation will be of bewildering inconsistency.",
      "page": 171,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-place-in-the-heavens",
-   "title": "Zodiacal attribution",
-   "line": "Crowley on the Princesses and the Zodiac (pdf p140).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses have no Zodiacal attribution.",
-     "page": 140,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "The figure",
-   "line": "Crowley on the crest and sceptre of the Princess of Disks, and on Womanhood (pdf p171).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Her crest is the head of the ram, and her sceptre descends into the earth.",
+     "quote": "She is strong and beautiful, with an expression of intense brooding, as if about to become aware of secret wonder. Her crest is the head of the ram, and her sceptre descends into the earth. There its head becomes a diamond, the precious stone of Kether, thus symbolizing the birth of the highest and purest light in the deepest and darkest of the Elements. She stands within a grove of sacred trees before an altar suggesting a wheatsheaf, for she is a priestess of Demeter. She bears within her body the secret of the future.",
      "page": 171,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "she is Womanhood in its ultimate projection",
+     "quote": "Her sublimity is further emphasized by the disk which she bears; for in the centre thereof is the Chinese ideogram denoting the twin spiral force of Creation in perfect equilibrium; from this is born the rose of Isis, the great fertile Mother.",
      "page": 171,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princess of Disks, the last of the Court cards, represents the earthy part of Earth. She is consequently on the brink of transfiguration.",
+     "page": 171,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "They form a link between the small cards and the Princesses, who rule the Heavens around the North Pole. The Meridian is the Great Pyramid, and the Elements rule, going Eastward, in the order of Tetragrammaton, Fire, Water, Air, Earth. Thus, roughly, Aces‐Princesses Wands cover Asia, Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princesses represent the Hé final of the Name. They represent the ultimate issue of the original Energy in its completion, its crystallization, its materialization. They also represent the counter‐balancing, the re‐absorption of the Energy. They represent the Silence into which all things return. They are thus at the same time permanent and non‐existent.",
+     "page": 140,
      "voice": "Crowley"
     }
    ]

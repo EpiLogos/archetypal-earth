@@ -2,67 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-aeon",
- "line": "Crowley on Atu XX: the old Angel renamed, the letter Shin for Fire, and the child Horus born of the marriage (pdf p107, p108).",
+ "line": "The Aeon is judgement made new: not the last trumpet over the dead but the birth of a new age, a decisive break with what was. Drawn, it means a final decision about the past and a new current for the future; it always marks the taking of a definite step. Its counsel: let every act be an act of love, and the decree of a god. It is the path of Shin and of Fire, the element that also stands for Spirit.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "The old title and the letter Shin",
-   "line": "Crowley on the old card called The Angel, or The Last Judgment, and on the letter Shin, which refers to Fire (pdf p107).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The old card was called The Angel: or, The Last Judgment.",
+     "quote": "In this card it has been necessary to depart completely from the tradition of the cards, in order to carry on that tradition. The old card was called The Angel: or, The Last Judgment. It represented an Angel or Messenger blowing a trumpet, attached to which was a flag, bearing the symbol of the Aeon of Osiris. Below him the graves were opening, the dead rising up.",
      "page": 107,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the letter Shin, which refers to Fire.",
-     "page": 107,
+     "quote": "Be every Act the Fiat of a God. Be every Act a Source of radiant Glory. Final decision in respect of the past, new current in respect of the future; always represents the taking of a definite step.",
+     "page": 253,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "The Paths and the letters",
-   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These paths are the paths which join the ten numbers on the",
-     "page": 36,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "and one letter goes to each path.",
-     "page": 36,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "Fire, the child and the flower",
-   "line": "Crowley on the destruction of the world by Fire, the child Horus born of the marriage, and the letter Shin in a form suggestive of a flower (pdf p107, p108).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The card therefore represented the destruction of the world by Fire.",
+     "quote": "Around the top of the card is the body of Nuith, the star‐goddess, who is the category of unlimited possibility; her mate is Hadit, the ubiquitous point‐of‐view, the only philosophically tenable conception of Reality. He is represented by a globe of fire, representing eternal energy; winged, to show his power of Going. As a result of the marriage of these two, the child Horus is born.",
      "page": 107,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "As a result of the marriage of these two, the child Horus is born.",
-     "page": 107,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "At the bottom of the card we see the letter Shin itself in a form suggestive of a flower;",
+     "quote": "At the bottom of the card we see the letter Shin itself in a form suggestive of a flower; the three Yods are occupied by three human figures arising to partake in the Essence of the new Aeon.",
      "page": 108,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The central one had his hands raised with right angles at the elbows and shoulders, so as to form the letter Shin, which refers to Fire. The card therefore represented the destruction of the world by Fire. This was accomplished in the year of the vulgar era 1904, when the fiery god Horus took the place of the airy god Osiris in the East as Hierophant (see Atu V).",
+     "page": 107,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The element of Fire is very close kin to the idea of Spirit; so the letter Shin, belonging to Fire, may be taken to mean Spirit as well.",
+     "page": 36,
      "voice": "Crowley"
     }
    ]

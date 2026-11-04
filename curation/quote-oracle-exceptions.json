@@ -1,5 +1,16 @@
 {
  "version": 1,
  "_note": "Reviewed exceptions to scripts/quote-oracle.mjs --check: a quotation that cannot be verbatim on its cited page and is kept on purpose, because the scan of that page is damaged and the quotation keeps the printed letters. Each: dataset, id, reason (what the scan does). It only shrinks: a scan that is re-read or a normaliser rule that learns the damage removes its row.",
- "exceptions": []
+ "exceptions": [
+  {
+   "dataset": "field-pages.json",
+   "id": "field-pages.json#pages.family:libra.sections[2].quotes[2]",
+   "reason": "damaged scan: CW9ii pdf p95 drops the apostrophe of the printed “Christ’s ascendent” (the scan reads “Christ s”); the quotation keeps the printed word."
+  },
+  {
+   "dataset": "field.json#occurrences",
+   "id": "libra-in-cw09ii",
+   "reason": "damaged scan: CW9ii pdf p95 drops the apostrophe of the printed “Christ’s ascendent” (the scan reads “Christ s”); the quotation keeps the printed word."
+  }
+ ]
 }

@@ -43,7 +43,9 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   let st = await state(page);
   const decan = st.cards.filter((c) => c.ring === 'decan');
   const rank = st.cards.filter((c) => c.ring === 'rank');
-  check(decan.length === 6 && rank.length === 6, `${s.name}: Mars floats its six decan cards and six on the rank ring`, `${decan.length} + ${rank.length}`);
+  // the rank ring: the Tower, the Atu of the two signs Mars rules (Death, the Emperor), their court cards (the Queen of
+  // Wands, the Prince of Cups) and the four Fives — the whole deck stands in the sky (owner, 4 Nov 2026)
+  check(decan.length === 6 && rank.length === 9, `${s.name}: Mars floats its six decan cards and nine on the rank ring`, `${decan.length} + ${rank.length}`);
   check(st.sats > 0, `${s.name}: the archetypes' two orbits are kept`, `${st.sats} satellites`);
   const inside = st.cards.every((c) => c.cx > 0 && c.cx < st.vw && c.cy > 0 && c.cy < st.vh);
   check(inside, `${s.name}: every card stands on screen`);
@@ -63,14 +65,15 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   check(reading.title === 'Two of Wands', `${s.name}: the first decan card opens its reading`, reading.title);
   check(reading.sign && /rgb/.test(reading.tint), `${s.name}: the sign's glyph and its band hue tint the sheet`, reading.tint);
   check(reading.cites.length >= 2 && reading.cites.every((c) => /(pdf p|p\. )\d+/.test(c)), `${s.name}: the reading rests on placed quotations`, reading.cites.slice(0, 2).join(' | '));
-  check(reading.phase === 'approach' && reading.hash === hashBefore, `${s.name}: it stays at the planet — no gaze at the Earth, no route change`, `${reading.phase} ${reading.hash}`);
+  // a card has an address of its own at its planet (owner, 1 Nov 2026): the route changes to it, the sky does not move
+  check(reading.phase === 'approach' && reading.hash === `${hashBefore}/card/thoth-two-of-wands`, `${s.name}: it stays at the planet — no gaze at the Earth; the route is the card's at Mars`, `${reading.phase} ${reading.hash}`);
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-mars-card.png`) });
 
   // closing the reading leaves the rings standing
   await page.click('section.deep.pane:not(.passage):not(.you-sheet) .dp-close');
   await page.waitForTimeout(700);
   st = await state(page);
-  check(st.cards.length === 12 && st.phase === 'approach', `${s.name}: closing the reading returns to the planet with its rings`, `${st.cards.length} cards, ${st.phase}`);
+  check(st.cards.length === 15 && st.phase === 'approach', `${s.name}: closing the reading returns to the planet with its rings`, `${st.cards.length} cards, ${st.phase}`);
 
   // the outer planets carry what Crowley's list gives them
   await hold(page, 'pluto');
@@ -93,18 +96,21 @@ for (const s of [{ name: 'desk', width: 1440, height: 900, mobile: false }, { na
   await page.waitForTimeout(1200);
   st = await state(page);
   const earthSats = await page.evaluate(() => [...document.querySelectorAll('.po-sat')].map((x) => x.textContent));
-  check(st.cards.length === 8 && st.phase === 'approach', `${s.name}: the Earth floats the four Tens and its four elemental Atu`, `${st.cards.length} cards, ${st.phase}`);
+  check(st.cards.length === 12 && st.phase === 'approach', `${s.name}: the Earth floats the four Tens, its four elemental Atu and the four Princesses`, `${st.cards.length} cards, ${st.phase}`);
   check(['Fire', 'Water', 'Air', 'Earth'].every((e) => earthSats.includes(e)), `${s.name}: the four elements stand at the Earth`, earthSats.join(', '));
   check(st.cards.every((c) => c.cx > 0 && c.cx < st.vw && c.cy > 0 && c.cy < st.vh), `${s.name}: the Earth's cards stand on screen`);
   if (out) await page.screenshot({ path: path.join(out, `${s.name}-earth-rings.png`) });
 
-  // a card's own page says where it hangs: the sky tie the cards give the reveal (a fresh page: no sky behind it)
-  const p2 = await ctx.newPage();
-  await p2.goto(`${process.env.EARTH_URL ?? 'http://localhost:5183/'}#/f/thoth-five-of-cups`, { waitUntil: 'load' });
-  await p2.waitForFunction(() => /See in sky/.test(document.body.innerText), null, { timeout: 30000 }).catch(() => {});
-  const seen = await p2.evaluate(() => (document.body.innerText.match(/See in sky \([^)]+\)/g) ?? []));
-  check(seen.some((t) => /Mars/.test(t)), `${s.name}: a card's reveal offers "See in sky" at its planet`, seen.join(', '));
-  await p2.close();
+  // a card's Field address is its planet (owner, 1 Nov 2026), and so is a sephira's (owner, 3 Nov 2026): a fresh page on
+  // #/f/<id> lands on the ring of the planet that holds it, its reading open there, never on the globe
+  for (const [id, want, title] of [['thoth-five-of-cups', '#/sky/mars/card/thoth-five-of-cups', 'Five of Cups'], ['geburah', '#/sky/mars/sephira/geburah', 'Geburah']]) {
+    const p2 = await ctx.newPage();
+    await p2.goto(`${process.env.EARTH_URL ?? 'http://localhost:5183/'}#/f/${id}`, { waitUntil: 'load' });
+    const at = await p2.waitForFunction((t) => document.querySelector('.cr .cr-title')?.textContent === t, title, { timeout: 30000 }).then(() => true).catch(() => false);
+    const where = await p2.evaluate(() => ({ hash: location.hash, body: window.__earth.ctl.state.sky?.body ?? null }));
+    check(at && where.hash === want && where.body === 'mars', `${s.name}: #/f/${id} is read at Mars`, `${where.hash} · ${where.body}`);
+    await p2.close();
+  }
 
   check(logs.filter((l) => !/ephemeris|sidecar|sky camera:/i.test(l)).length === 0, `${s.name}: no console errors`, logs.slice(0, 3).join(' | '));
   await ctx.close();

@@ -2,61 +2,49 @@
  "version": 1,
  "type": "family",
  "id": "thoth-four-of-cups",
- "line": "Crowley’s Four of Cups: Luxury (pdf p176); Chesed and the Moon in Cancer (pdf p200).",
+ "line": "Luxury: pleasure has been secured and settled, and in the settling something of its first purity is lost. Comfort slides into indulgence, ease into a slackness that cannot quite govern itself, and the seeds of decay are already in the fruit. Drawn, the card speaks of emotional security and enjoyment that has begun to go stale, and asks whether satisfaction has made you passive. The Moon in her own sign of Cancer gives way to desire here, in Chesed, the sphere of Mercy.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Four of Cups is called Luxury.",
-     "page": 176,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Chesed in the sphere of Water and on the Moon in Cancer (pdf p200).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card refers to Chesed in the sphere of Water.",
-     "page": 200,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The card refers to the Moon in Cancer, which is her own house",
+     "quote": "This card refers to Chesed in the sphere of Water. Here, below the Abyss, the energy of this element, although ordered, balanced and (for the moment) stabilized, has lost the original purity of the conception. The card refers to the Moon in Cancer, which is her own house; but Cancer itself is so placed that this implies a certain weakness, an abandonment to desire. This tends to introduce the seeds of decay into the fruit of pleasure.",
      "page": 200,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the Fours and the Abyss (pdf p176); on the energy of Water below the Abyss (pdf p200).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Four is “below the Abyss”",
+     "quote": "The sea is still shown, but its surface is ruffled, and the four Cups which stand upon it are no longer so stable. The Lotus from which the water Springs has a multiple stem, as if to show that the influence of the Dyad has gathered strength. For although the number Four is the manifestation and consolidation of the dyad, it is also secretly preparing catastrophe by emphasizing individuality.",
+     "page": 200,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Fours",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The important characteristic is that Four is “below the Abyss”; therefore, in practice, it means solidification, materialization. Things have become manifest. The essential point is that it expresses the Rule of Law.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Here, below the Abyss, the energy of this element, although ordered, balanced and (for the moment) stabilized, has lost the original purity of the conception.",
-     "page": 200,
+     "quote": "The weakness in the element of water threatens its purity; it is not quite strong enough to control itself properly; so the Lord of Pleasure is a little unstable. Purity has somehow been lost in the process of satisfaction.",
+     "page": 176,
      "voice": "Crowley"
     }
    ]

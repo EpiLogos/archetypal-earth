@@ -2,42 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-art",
- "line": "Crowley on Atu XIV: Sagittarius, the path from Yesod to Tiphareth, and the Arrow of directed Will (pdf p92, p94, p95).",
+ "line": "Art is the alchemy that joins opposites into something new: fire and water mixed in one vessel, the two halves of the Lovers made one figure. Drawn, it brings a combination of forces, action based on careful calculation, success after elaborate effort, the way out. Its counsel is to go down into the depths and set right what you find there, and so find the hidden stone. It is the path of Samekh and of Sagittarius, the Archer, whose arrow pierces the rainbow.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Sagittarius and the Arrow",
-   "line": "Crowley on Sagittarius, the opposite to Gemini (pdf p92), and on the Arrow as the glyph of Mercury and the symbol of directed Will (pdf p94).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "It pertains to Sagittarius, the opposite to Gemini in the Zodiac,",
-     "page": 92,
+     "quote": "At the bottom of this card, for example, are seen Fire and Water harmoniously mingled. But this is only a crude symbol of the spiritual idea, which is the satisfaction of the desire of the incomplete element of one kind to satisfy its formula by assimilation of its equal and opposite. This state of the great Work therefore consisted in the mingling of the contradictory elements in a cauldron.",
+     "page": 93,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Arrow is, in fact, the simplest and purest glyph of Mercury, being the symbol of directed Will.",
-     "page": 94,
+     "quote": "To sum up, the whole of this card represents the hidden content of the Egg described in Atu VI. It is the same formula, but in a more advanced stage. The original duality has been completely compensated; but after birth comes growth; after growth, puberty; and after puberty, purification.",
+     "page": 93,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Combination of forces, realization, action based on accurate calculation; the way of escape, success after elaborate manoeuvres.",
+     "page": 252,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "The path of the card",
-   "line": "Crowley on the path from the Moon of Yesod to the Sun of Tiphareth (pdf p92) and on Atu XIV between Atu XIII and XV (pdf p95).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "his path leads from the Moon of Yesod to the Sun of Tiphareth.",
+     "quote": "This card represents the Consummation of the Royal Marriage which took place in Atu VI. The black and white personages are now united in a single androgyne figure. Even the Bees and the Serpents on their robes have made an alliance.",
      "page": 92,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Between them, Atu XIV leads similarly to the sphere which formulates Existence.",
-     "page": 95,
+     "quote": "Rising from the cauldron, as the result of the operation performed therein, is a stream of light which becomes two rainbows; they form the cape of the androgyne figure. In the centre, an arrow shoots upwards. This is connected with the general symbolism previously explained, the spiritualization of the result of the Great Work.",
+     "page": 93,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It pertains to Sagittarius, the opposite to Gemini in the Zodiac, and therefore, “after another manner,” one with it. Sagittarius means the Archer; and the card is (in its simplest and most primitive form) a picture of Diana the Huntress.",
+     "page": 92,
      "voice": "Crowley"
     }
    ]

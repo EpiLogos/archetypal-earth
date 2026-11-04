@@ -73,9 +73,9 @@ describe('plates: the picture a subject shows', () => {
     expect(p.standIn).toBe(false);
   });
 
-  it('every one of the 54 sky cards resolves to the family plate with the same src as the card\'s own file', () => {
+  it('every one of the 78 sky cards (the whole deck stands in the sky) resolves to the family plate with the same src as the card\'s own file', () => {
     const ids = Object.keys(skyCards.cards);
-    expect(ids).toHaveLength(54);
+    expect(ids).toHaveLength(78);
     for (const id of ids) expect(plates(m, { type: 'card', id }, ctx).image?.src, id).toBe(skyCards.cards[id].image.src);
   });
 

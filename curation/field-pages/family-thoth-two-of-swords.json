@@ -2,61 +2,49 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-swords",
- "line": "Crowley’s Two of Swords: Peace (pdf p212); formerly the Lord of Peace Restored (pdf p175); Chokmah in the Element of Air and the Moon in Libra (pdf p212).",
+ "line": "Peace, and not a peace restored after a quarrel, because here there has been no quarrel. The Sword is the most restless of the suits, yet in this card its energy stays above the onslaught it could unleash: two blades crossed and bound by a rose. Drawn, the card asks for the poise that holds opposing thoughts in balance instead of forcing a verdict. Chokmah gives the suit its purest form here, and the Moon in Libra, change set on the scales, keeps it level.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p175); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Two of Swords was formerly called the Lord of Peace Restored",
+     "quote": "But the purity and exaltation of Chokmah are such that this card manifests the very best idea possible to the suit. The energy abides above the onslaught of disruption. This comparative calm is emphasized by the celestial attribution: the Moon in Libra. The Moon is change, but Nature is peaceful; moreover, Libra represents balance; between them, they regulate the energy of the Swords.",
+     "page": 212,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Swords was formerly called the Lord of Peace Restored; but this word “restored” is incorrect, because there has been no disturbance. The Lord of Peace is therefore a better title: but it needs thinking hard to work this out, since the Sword is so intensely active.",
      "page": 175,
      "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Chokmah in the Element of Air and on the Moon in Libra (pdf p212).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is ruled by Chokmah in the Element of Air.",
-     "page": 212,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the celestial attribution: the Moon in Libra",
+     "quote": "In the card appear two swords crossed; they are united by a blue rose with five petals. This rose represents the influence of the Mother, whose harmonizing influence compounds the latent antagonism native to the suit. The Rose emits white rays, producing a geometrical pattern that emphasizes the equilibrium of the symbol.",
      "page": 212,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the Moon, Libra and the energy of the Swords (pdf p212).",
+   "id": "number",
+   "title": "The Twos",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Moon is change, but Nature is peaceful; moreover, Libra represents balance; between them, they regulate the energy of the Swords.",
-     "page": 212,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The energy abides above the onslaught of disruption.",
-     "page": 212,
+     "quote": "Hence, only on reaching the Deuces does an element appear as the element itself. Chokmah is uncontaminated by any influence; therefore the elements here appear in their original harmonious condition.",
+     "page": 175,
      "voice": "Crowley"
     }
    ]

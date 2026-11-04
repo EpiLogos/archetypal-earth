@@ -2,60 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-adjustment",
- "line": "Crowley on Atu VIII: Justice renamed, Libra under Venus, the letters Aleph Lamed, and the exactness of Nature (pdf p76, p77).",
+ "line": "Adjustment is balance, not human justice: nature is exact, and every act, down to a dropped pin, draws its precise answer. Drawn, it calls for weighing and readjustment, a pause in action until the decision is made; in practical affairs it can mean lawsuits, marriage agreements or treaties. She is karma, the dancer who cancels every excess by its opposite. It is the path of Lamed and of Libra, the Balance, ruled by Venus, where Saturn is exalted.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Justice and Libra",
-   "line": "Crowley on the old name Justice, on Libra, ruled by Venus, with Saturn exalted, and on the equilibrium of all things (pdf p76).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card in the old pack was called Justice.",
+     "quote": "This card in the old pack was called Justice. This word has none but a purely human and therefore relative sense; so it is not to be considered as one of the facts of Nature. Nature is not just, according to any theological or ethical idea; but Nature is exact.",
      "page": 76,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This card represents the sign of Libra, ruled by Venus; in it Saturn is exalted.",
-     "page": 76,
+     "quote": "Equilibrium stands apart from any individual prejudices; therefore the title, in France, should rather be Justesse. In this sense, Nature is scrupulously just. It is impossible to drop a pin without exciting a corresponding reaction in every Star. The action has disturbed the balance of the Universe.",
+     "page": 77,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The equilibrium of all things is hereby symbolized.",
-     "page": 76,
+     "quote": "She is wrapped in a cloak of mystery, the more mysterious because diaphanous; she is the sphinx without a secret, because she is purely a matter of calculation. In Eastern philosophy she is Karma.",
+     "page": 77,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "Aleph Lamed, the Fool and Nature",
-   "line": "Crowley on the letters Aleph Lamed, the feminine complement of the Fool, and Nature as exact and scrupulously just (pdf p76, p77).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "the letters Aleph Lamed constitute the secret key of the Book of the Law",
+     "quote": "Not only therefore, because Libra is a sign of Venus, but because she is the partner of the Fool, is the Goddess represented as dancing, with the suggestion of Harlequin. The figure is that of a young and slender woman poised exactly upon toetip.",
      "page": 76,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "this card is the feminine complement of the Fool",
-     "page": 76,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Nature is not just, according to any theological or ethical idea; but Nature is exact.",
-     "page": 76,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "In this sense, Nature is scrupulously just.",
+     "quote": "She is masked, and her expression shows her secret intimate satisfaction in her domination of every element of dis‐equilibrium in the Universe. This condition is symbolized by the Magic Sword which she holds in both hands, and the balances or spheres in which she weighs the Universe, Alpha the First balanced exactly against Omega the Last.",
      "page": 77,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents the sign of Libra, ruled by Venus; in it Saturn is exalted. The equilibrium of all things is hereby symbolized. It is the final adjustment in the formula of Tetragrammaton, when the daughter, redeemed by her marriage with the Son, is thereby set up on the throne of the mother; thus, finally, she “awakens the Eld of the All‐Father.” In the greatest symbolism of all, however, the symbolism beyond all planetary and Zodiacal considerations, this card is the feminine complement of the Fool, for the letters Aleph Lamed constitute the secret key of the Book of the Law, and this is the basis of a complete qabalistic system of greater depth and sublimity than any other.",
+     "page": 76,
      "voice": "Crowley"
     }
    ]

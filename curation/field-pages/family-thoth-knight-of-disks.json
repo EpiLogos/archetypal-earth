@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-knight-of-disks",
- "line": "Crowley's Knight of Disks: Yodh of the Name (pdf p139); the fiery part of Earth and the span from Leo to Virgo (pdf p165).",
+ "line": "Fire in the earth: the slow, patient, productive force of growth, all labour and instinct, concerned above all with food and the harvest. Drawn, the card brings steady practical work and a sure return for patience, and warns of dullness, a lack of initiative and petty, jealous meddling. The Knight of Disks is the fiery part of Earth, ruling from the last decan of Leo through the first two of Virgo.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Knights (pdf p139) and on the Knight of Disks (pdf p165).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Knights represent the powers of the letter Yodh in the Name.",
-     "page": 139,
+     "quote": "Those whom he symbolizes tend to be dull, heavy and pre‐occupied with material things. They are laborious and patient, but would have little intellectual grasp even of matters which concern them most closely. Their success in these is due to instinct, to imitation of Nature. They lack initiative; their fire is the smouldering fire of the process of growth.",
+     "page": 165,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Knight of Disks represents the fiery part of Earth, and refers in particular to the phenomena of mountains, earthquakes, and gravitation",
+     "quote": "If ill‐dignified, these people are hopelessly stupid, slavish, quite incapable of foresight even in their own affairs, or of taking an intelligent interest in anything outside them. They are churlish, surly, and jealous (in a dull sort of way) of what they instinctively realize is the superior state of others; but they have not the courage or intelligence to better themselves. Yet they are always irritably meddling about petty matters; they interfere with, and inevitably spoil, whatever comes their way.",
      "page": 165,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Leo to the 20th degree of Virgo (pdf p165); on the decans and the elemental attribution (pdf p139).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He rules from the 21st degree of Leo to the 20th degree of Virgo",
+     "quote": "This warrior is short and sturdy in type. He is clothed in great solidity of plate armour; but his helmet, which is crested with the head of a stag, is thrown back, for at the moment his function is entirely confined to the production of food. For this reason he is armed with a flail. The disk which he bears, moreover, is very solid; it represents nutrition. These characteristics are borne out by his horse; a shire horse, solidly planted on all four feet, as was not the case with the other Knights.",
      "page": 165,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Knight of Disks (pdf p165).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Those whom he symbolizes tend to be dull, heavy and pre‐occupied with material things.",
+     "quote": "The Knight of Disks represents the fiery part of Earth, and refers in particular to the phenomena of mountains, earthquakes, and gravitation; but it also represents the activity of Earth regarded as the producer of Life. He rules from the 21st degree of Leo to the 20th degree of Virgo, and is thus concerned greatly with agriculture.",
      "page": 165,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Knights represent the powers of the letter Yodh in the Name. They are the most sublime, original, active part of the Energy of the Element; for this reason they are represented on horseback and clad in complete armour. Their action is swift and violent, but transient. In the Element of Fire, for instance, the Knight corresponds to the Lightning flash; in the Element of Water, to Rain and Springs; in that of Air, to Wind; in that of Earth, to Mountains.",
+     "page": 139,
      "voice": "Crowley"
     }
    ]

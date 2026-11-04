@@ -2,85 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "yesod",
- "line": "Crowley on Yesod (The Book of Thoth); Jung on Jezoth and Yesod in CW14 ¶18, ¶634 and ¶635.",
+ "line": "The Foundation: the ninth sephira, back on the middle pillar beneath Tiphareth, where the energies above crystallise in the formative world of images. Its number gives each suit the full impact of its force, balanced once more: Strength in Wands, Happiness in Cups, Cruelty in Swords, Gain in Disks. Among the ten bodies of the solar system on the Tree, it is the Moon.",
  "sections": [
+  {
+   "id": "crowley",
+   "title": "Crowley on Yesod",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Yesod. After the double excursion into misfortune, the current returns to the middle pillar. This Sephira is the seat of the great crystallization of Energy. But it takes place very far down the Tree, at the apex of the third descending triangle, and a flat triangle at that. There is little help from low, unbalanced spheres like Netzach and Hod.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "What saves Yesod is the direct ray from Tiphareth; this Sephira is in the direct line of succession. Each of these cards gives the full impact of the elemental force, but in its most material sense; that is, of the idea of the force, for Yesod is still in Yetzirah, the formative world.",
+     "page": 180,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to Yesod, the Foundation; this brings the Energy back into balance. The Nine represents always the fullest development of the Force in its relation with the Forces above it.",
+     "page": 194,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Number Nine, Yesod, in the suit of Water, restores the stability lost by the excursions of Netzach and Hod from the Middle Pillar. It is also the number of the Moon, thus strengthening the idea of Water.",
+     "page": 207,
+     "voice": "Crowley"
+    }
+   ]
+  },
   {
    "id": "jung-ninth",
    "title": "Jung's ninth Sefira",
-   "line": "Jung on Jezoth as the ninth and middle Sefira, and the genital region of the Original Man: CW14 ¶634 and ¶18.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "is the ninth and middle Sefira in the lowest triad of the Cabalistic tree",
+     "quote": "“Jezoth” (= Yesod) is the ninth and middle Sefira in the lowest triad of the Cabalistic tree, and was interpreted as the creative and procreative power in the universe. Alchemically he corresponds to the spiritus vegetativus, Mercurius.",
      "para": 634,
      "voice": "Jung"
-    },
-    {
-     "work": "cw14",
-     "quote": "signifies the genital region of the Original Man, whose head is Kether",
-     "para": 18,
-     "voice": "Jung"
-    }
-   ]
-  },
-  {
-   "id": "the-moon-of-yesod",
-   "title": "The Moon of Yesod",
-   "line": "Crowley on the Moon of Yesod and Yesod as the foundation of the Tree: The Book of Thoth, pdf p110, p207 and p180.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "the moon of Yesod, the foundation of the Tree",
-     "page": 110,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It is also the number of the Moon,",
-     "page": 207,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It is ruled by the Moon and Yesod.",
-     "page": 180,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "the-nines",
-   "title": "The Nines",
-   "line": "Crowley on the Nines and Yesod: The Book of Thoth, pdf p180 and p221.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "These cards are attributed to Yesod.",
-     "page": 180,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "What saves Yesod is the direct ray from Tiphareth;",
-     "page": 180,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The number Nine, Yesod, brings back the Energy to the central pillar of the Tree of Life.",
-     "page": 221,
-     "voice": "Crowley"
     }
    ]
   },
   {
    "id": "the-two-sides",
    "title": "The two sides Yesod unites",
-   "line": "Jung on Yesod uniting Nezach on the right with Hod on the left: CW14 ¶635.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty)",
+     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty).",
      "para": 635,
      "voice": "Jung"
     }

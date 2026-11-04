@@ -67,7 +67,7 @@ export function voiceOf(work: string): string | null {
 }
 
 /** A curated `voice` (the correspondence's Pauli, a foreword's speaker) shown by its own name. */
-const VOICE_LABEL: Record<string, string> = { pauli: 'Pauli', 'von-franz': 'von Franz', neumann: 'Neumann', vaneenwyk: 'Van Eenwyk', ronnberg: 'Ronnberg' };
+const VOICE_LABEL: Record<string, string> = { pauli: 'Pauli', 'von-franz': 'von Franz', neumann: 'Neumann', vaneenwyk: 'Van Eenwyk', ronnberg: 'Ronnberg', burt: 'Burt' };
 
 /** A quote taken up mid-sentence is shown as such: the words stay verbatim, the ellipsis marks where they begin. */
 export const entered = (t: string) => (/^\p{Ll}/u.test(t) ? `…${t}` : t);

@@ -2,48 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hermit",
- "line": "Crowley on Atu IX: the letter Yod, the Hand, Virgo ruled by Mercury, and the Father who is Wisdom (pdf p79, p80).",
+ "line": "The Hermit is the light carried inward: wisdom ripening in solitude and silence, the secret seed of life at work unseen. Drawn, it brings illumination from within, a quiet impulse that shapes practical plans, and a withdrawal from current affairs. He walks alone with lamp and staff, a guide through the dark places, needing no one's notice. It is the path of Yod, the Hand, and of Virgo, the Virgin, the most receptive earth, ruled by Mercury.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Letter and sign",
-   "line": "Crowley on the letter Yod, the Hand (pdf p79), and on Virgo, ruled by Mercury, with Mercury exalted there (pdf p80).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Yod, which means the Hand.",
-     "page": 79,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "this is reflected in the attribution of the card to the sign of Virgo",
+     "quote": "Concealed within Mercury is a light which pervades all parts of the Universe equally; one of his titles is Psychopompos, the guide of the soul through the lower regions.",
      "page": 80,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Yet not only is Virgo ruled by Mercury, but Mercury is exalted therein.",
+     "quote": "Illumination from within, secret impulse from within; practical plans derived accordingly. Retirement from participation in current events.",
+     "page": 251,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The figure of the Hermit himself recalls the shape of the letter Yod, and the colour of his cloak is the colour of Binah, in whom he gestates. In his hand he holds a Lamp whose centre is the Sun, portrayed in the likeness of the Sigil of the great King of Fire (Yod is the secret Fire). It seems that he is contemplating—in a certain sense, adoring—the Orphic egg (greenish in colour) because it is conterminous with the Universe, while the snake which surrounds it is many‐coloured to signify the iridescence of Mercury.",
+     "page": 79,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Following him is Cerberus, the three‐headed Hound of Hell whom he has tamed. In this Trump is shewn the entire mystery of Life in its most secret workings.",
      "page": 80,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "Yod as the Father",
-   "line": "Crowley on Yod as the symbol of the Father, who is Wisdom, and on the Father as the highest form of Mercury and the Logos (pdf p79).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The letter Yod is the first letter of the name Tetragrammaton, and this symbolizes the Father, who is Wisdom;",
+     "quote": "This card is attributed to the letter Yod, which means the Hand. Hence, the hand, which is the tool or instrument par excellence, is in the centre of the picture. The letter Yod is the foundation of all the other letters of the Hebrew alphabet, which are merely combinations of it in various ways.",
      "page": 79,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "he is the highest form of Mercury, and the Logos, the Creator of all",
-     "page": 79,
+     "quote": "The highest symbolism of this card is, therefore, Fertility in its most exalted sense, and this is reflected in the attribution of the card to the sign of Virgo, which is another aspect of the same quality. Virgo is an earthy sign, and is referred especially to Corn, so that the background of the card is a field of wheat. Virgo represents the lowest, most receptive, most feminine form of earth, and forms the crust over Hades. Yet not only is Virgo ruled by Mercury, but Mercury is exalted therein.",
+     "page": 80,
      "voice": "Crowley"
     }
    ]

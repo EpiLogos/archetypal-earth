@@ -2,97 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-fool",
- "line": "Crowley on Atu 0: its number, letter and element, the Path of Aleph, and the Fool and the Universe (pdf p46, p56, p67, p110, p116).",
+ "line": "The Fool is the first breath before anything has begun: pure potential, innocence, the leap taken without reasons. Drawn, it brings an original, sudden impulse from a quite unexpected quarter; it is right if rightly received, and badly placed it can mean folly, eccentricity or even mania. He is the holy madman, wise where reason has reached its impasse. It is the path of Aleph, the Ox, and of Air in its purest sense, the empty space from which all things come.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Number, letter and element",
-   "line": "Crowley on the number 0, the letter Aleph and Air in the card of the Fool (pdf p46).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The really important feature of this card is that its number should be 0. It represents therefore the Negative above the Tree of Life, the source of all things.",
+     "quote": "In spiritual matters, the Fool means idea, thought, spirituality, that which endeavours to transcend earth. In material matters, it may, if badly dignified, mean folly, eccentricity, or even mania. But the essential of this card is that it represents an original, subtle, sudden impulse or impact, coming from a completely strange quarter. All such impulses are right, if rightly received; and the good or ill interpretation of the card depends entirely on the right attitude of the Querent.",
+     "page": 249,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The really important feature of this card is that its number should be 0. It represents therefore the Negative above the Tree of Life, the source of all things. It is the Qabalistic Zero. It is the equation of the Universe, the initial and final balance of the opposites; Air, in this card, therefore quintessentially means a vacuum.",
      "page": 46,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Aleph, which means an Ox, but by its shape the Hebrew letter (so it is said) represents a plough‐ share; thus the significance is primarily Phallic.",
-     "page": 46,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It is the equation of the Universe, the initial and final balance of the opposites; Air, in this card, therefore quintessentially means a vacuum.",
-     "page": 46,
+     "quote": "The world is always looking for a saviour, and the doctrine in question is philosophically more than a doctrine; it is a plain fact. Salvation, whatever salvation may mean, is not to be obtained on any reasonable terms. Reason is an impasse, reason is damnation; only madness, divine madness, offers an issue.",
+     "page": 49,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "The path of Aleph",
-   "line": "Crowley on the Path of Aleph and Kether (pdf p56), on Wisdom, the Crown and the Path of the Pure Fool (pdf p116), and on Chokmah (pdf p67).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Kether: see the position of the Path of Aleph on the Tree of Life.",
+     "quote": "He is shown against the background of air, dawning from space; and his attitude is that of one bursting unexpectedly upon the world. He is clad in green, according to the tradition of Spring; but his shoes are of the phallic gold of the sun. In his right hand he bears the wand, tipped with a pyramid of white, of the All‐Father.",
      "page": 56,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "though Wisdom be the Second Emanation of His Essence, there is a path to separate and to join them,",
-     "page": 116,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the Reference thereof being Aleph, that is One indeed,",
-     "page": 116,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the Summit of Wisdom is the Opening of the Way that leadeth unto the Crown and Essence of all",
-     "page": 116,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This is the Path of the Pure Fool.",
-     "page": 116,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
-     "page": 67,
+     "quote": "Fawning upon him is the tiger; and beneath his feet in the Nile with its lotus stems crouches the crocodile. Resuming all his many forms and many‐coloured images in the centre of the figure, the focus of the microcosm is the radiant sun. The whole picture is a glyph of the creative light.",
+     "page": 57,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "The Fool and the Universe",
-   "line": "Crowley on the gold of air (pdf p56), on the Fool and the Universe (pdf p110), and on the phrase in whom all complex is resolved (pdf p116).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Fool is of the gold of air.",
-     "page": 56,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return.",
-     "page": 110,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "in whom all complex is resolved",
-     "page": 116,
+     "quote": "This card is attributed to the letter Aleph, which means an Ox, but by its shape the Hebrew letter (so it is said) represents a plough‐share; thus the significance is primarily Phallic. It is the first of the three Mother letters, Aleph, Mem, and Shin, which correspond in various interwoven fashions with all the triads that occur in these cards, notably Fire, Water, Air; Father, Mother, Son; Sulphur, Salt, Mercury; Rajas, Sattvas and Tamas.",
+     "page": 46,
      "voice": "Crowley"
     }
    ]

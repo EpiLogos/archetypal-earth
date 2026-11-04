@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-death",
- "line": "Crowley on Atu XIII: the letter Nun, Scorpio ruled by Mars, the dance of death, and Atu XIII and XV from Tiphareth (pdf p90, p91, p95).",
+ "line": "Death is transformation, not an ending: the old form rots down so that the new can grow from its seed. Drawn, it means change, chosen or forced, that follows logically from how things already stand, though it may come suddenly; what looks like death or destruction is an illusion. The skeleton dances with his scythe, and new forms take shape in the bubbles of his dance. It is the path of Nun, the Fish, and of Scorpio, ruled by Mars.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter and sign",
-   "line": "Crowley refers the card to the letter Nun, a fish, and to the sign of Scorpio, ruled by Mars (pdf p90).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Nun, which means a fish;",
+     "quote": "Transformation, change, voluntary or involuntary, in either case logical development of existing conditions, yet perhaps sudden and unexpected. Apparent death or destruction, but such interpretation is illusion.",
+     "page": 252,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In alchemy, this card explains the idea of putrefaction, the technical name given by its adepts to the series of chemical changes which develops the final form of life from the original latent seed in the Orphic egg.",
      "page": 90,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It refers to the Zodiacal sign of Scorpio, which is ruled by Mars,",
-     "page": 90,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-path",
-   "title": "Atu XIII and XV on the Tree",
-   "line": "Crowley on Atu XIII and XV, symmetrically placed on the Tree of Life and leading from Tiphareth (pdf p95), and on the Paths that join the ten numbers (pdf p36).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "On the Tree of Life, Atu XIII and XV are symmetrically placed; they lead from Tiphareth, the human consciousness, to the spheres in which Thought (on the one hand) and Bliss (on the other) are developed.",
-     "page": 95,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "These paths are the paths which join the ten numbers on the",
-     "page": 36,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "The dance of death",
-   "line": "Crowley on the card as the dance of death, the figure a skeleton bearing a scythe (pdf p91), and as the symbol of life beneath the waters (pdf p90).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The card itself represents the dance of death; the figure is a skeleton bearing a scythe,",
+     "quote": "This card must then be considered as of greater importance and catholicity than would be expected from the plain Zodiacal attribution. It is even a compendium of universal energy in its most secret form.",
      "page": 91,
      "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card itself represents the dance of death; the figure is a skeleton bearing a scythe, and both the skeleton and the scythe are importantly Saturnian symbols. This appears strange, as Saturn has no overt connection with Scorpio; but Saturn represents the essential structure of existing things. He is that elemental nature of things which is not destroyed by the ordinary changes which occur in the operations of Nature.",
+     "page": 91,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Nun, which means a fish; the symbol of life beneath the waters; life travelling through the waters. It refers to the Zodiacal sign of Scorpio, which is ruled by Mars, the planet of fiery energy in its lowest form, which is therefore necessary to provide the impulse.",
+     "page": 90,
+     "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the symbol of life beneath the waters; life travelling through the waters.",
+     "quote": "It is formally divided into three parts; the lowest is symbolized by the Scorpion, which was supposed by early observers of Nature to commit suicide when finding itself ringed with fire, or otherwise in a desperate situation. This represents putrefaction in its lowest form.",
      "page": 90,
      "voice": "Crowley"
     }

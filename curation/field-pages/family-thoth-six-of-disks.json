@@ -2,42 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-disks",
- "line": "Crowley’s Six of Disks: Success (pdf p178); the Moon in Taurus (pdf p232); Tiphareth (pdf p177, p232).",
+ "line": "Success: the work has come to a balanced, harmonious result, and things settle down. The card is solid and heavy, more content than imaginative, and its good fortune is real but passing; success is a brief halt on the road of labour. Drawn, it promises a fair return and a time of balance and well-being, and asks you to enjoy it without supposing it will last. Tiphareth, the sun at the centre, fully realised in Earth, under the Moon exalted in Taurus.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p178); on the Moon in Taurus (pdf p232).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Six of Disks is called Success",
+     "quote": "The Six of Disks is called Success; the ruler is the Moon. This is a card of settling down; it is very heavy, wholly lacking in imagination, yet somewhat dreamy. Change is soon coming upon it; the weight of earth will ultimately drag the current down to a mere eventuation of material things. Yet the Moon, being in Taurus, the sign of her exaltation, the best of the Lunar qualities are inherent.",
      "page": 178,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Moon in Taurus rules the card",
+     "quote": "The card is worthy of the name Success. Remember only that all success is temporary; how brief a halt upon the Path of Labour.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Number Six, Tiphareth, as before, represents the full harmonious establishment of the Energy of the Element. The Moon in Taurus rules the card; and this, while increasing the approach to perfection (for the Moon is exalted in Taurus and therefore in her highest form) marks that the condition is transient.",
      "page": 232,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Sixes and Tiphareth (pdf p177); on the Number Six, Tiphareth (pdf p232).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Tiphareth.",
-     "page": 177,
+     "quote": "The disks are arranged in the form of the Hexagram, which is shown in skeleton. In the centre blushes and glows the light rose‐madder of dawn, and without are three concentric circles, golden yellow, salmon‐pink, and amber. These colours show Tiphareth fully realized on Earth; it reaffirms in form what was mathematically set forth in describing the Ace.",
+     "page": 232,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Number Six, Tiphareth, as before, represents the full harmonious establishment of the Energy of the Element.",
+     "quote": "The planets are arranged in accordance with their usual attribution; but they are only shown as disks irradiated by the Sun in their centre. This Sun is idolized as the Rose and Cross; the Rose has forty‐nine petals, the interplay of the Seven with the Seven.",
      "page": 232,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Sixes",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Tiphareth. This Sephira is in some respects the most important of all. It is the centre of the whole system; it is the only Sephira below the Abyss which communicates directly with Kether.",
+     "page": 177,
      "voice": "Crowley"
     }
    ]

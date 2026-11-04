@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "taurus",
- "line": "Burt, Archetypes of the Zodiac, chapter on Taurus (pdf pp. 59–94); Jung on the bull (Dream Analysis seminar; CW5).",
+ "line": "Taurus is Fixed Earth, the sign of the bull and the goddess: the search for value and meaning in what can be held, built and enjoyed. Its gift is patience, loyalty, sensuous beauty and the stamina to sit still; its shadow is inertia, possessiveness and a stubborn clinging to comfort. Venus rules it in the world; Vulcan, its esoteric ruler, shakes rigid structures from within until Taurus learns to build for something larger than itself.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Taurus (pdf pp. 59–94): pdf p59 and p72.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "As symbols for the Age of Taurus we have the bull, the goddess, and the Buddha.",
+     "quote": "As symbols for the Age of Taurus we have the bull, the goddess, and the Buddha. Venus/Aphrodite is the mundane ruler and Vulcan/Hephaestus the esoteric.",
      "page": 59,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Venus/Aphrodite is the mundane ruler and Vulcan/Hephaestus the esoteric.",
+     "quote": "With the double-feminine influence we have the receptivity of the Earth Mother herself which Isabel Hickey has described as, “the freshly plowed earth of springtime, ready for the seed.” Passive, patient, and placid, Taurus earth is fertile and fecund sexuality. As the mundane, instinctual ruler of Taurus, Venus, the principle of attraction, has a strong physical magnetism.",
      "page": 59,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Passive, patient, and placid, Taurus earth is fertile and fecund sexuality.",
-     "page": 59,
+     "quote": "Taurus, in most textbooks, is associated with the key words I POSSESS. But the key words I BUILD are also important because the esoteric client, attuned to Vulcan/Hephaestus, is often a builder.",
+     "page": 76,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Since Taurus is the first of the Fixed signs (Fixed Earth or prime matter),",
-     "page": 72,
+     "quote": "Taurus and Scorpio are esoterically associated with concentration or single-pointed focus. To the yogi, the bull’s eye or the third eye of meditation is the esoteric meaning of Taurus. The Buddha has often been called the Bull, and legend places his birth in Taurus.",
+     "page": 73,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Taurus (pdf pp. 59–94): pdf p72, p65, p66 and p70.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "The wild bull and the lion are two land animals to be reckoned with.",
-     "page": 72,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Taurus almost seems to invite Vulcan to do his work against the forces of inertia.",
+     "quote": "Aphrodite was married by Zeus to Hephaestus/Vulcan— Beauty married to the Beast. The mundane ruler of Taurus married to the esoteric. The dwarf god whose hammer brings abrupt change (even chaos) married to the goddess of harmony, peace, and order.",
      "page": 65,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Vulcan erupts on some transit to Venus/Aphrodite and threatens the security of Taurus’ relationships, whether personal or financial.",
-     "page": 66,
+     "quote": "Sometimes complacency in the successful Taurus almost seems to invite Vulcan to do his work against the forces of inertia. The structure seems to collapse suddenly from within.",
+     "page": 65,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "C.G. Jung tells us that Hephaestus is an archetypal Wise Old Man.",
-     "page": 70,
+     "quote": "When Hephaestus awoke to the Light of Olympus he felt much better. He felt drained of all his negative emotions and full of the bliss of Dionysius’ sacred cup. He loosened Hera’s bonds and immediately discovered, to his surprise, that he had loosened the bonds and obstacles to his own creativity as well.",
+     "page": 71,
      "voice": "Burt"
     }
    ]
@@ -69,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the bull: Dream Analysis seminar, pdf p434, p287 and p448; CW5 ¶294.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",
@@ -85,7 +79,7 @@
     },
     {
      "work": "cw05",
-     "quote": "The Mithraic bull-sacrifice is often represented as flanked by the two dadophors, Cautes and Cautopates,",
+     "quote": "The Mithraic bull-sacrifice is often represented as flanked by the two dadophors, Cautes and Cautopates, one with a raised and the other with a lowered torch.",
      "para": 294,
      "voice": "Jung"
     },

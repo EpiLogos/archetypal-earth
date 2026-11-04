@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "gemini",
- "line": "Burt, Archetypes of the Zodiac, chapter on Gemini (pdf pp. 95–134); Jung on the twins (Dream Analysis seminar; CW5).",
+ "line": "Gemini is Mutable Air, the light and quick-witted sign of the Twins: the search for variety, a mind that gathers facts, ideas and people and will not stay long in one place. Its gift is curiosity, wit, versatility and the eternal youth of Hermes; its shadow is the divided, restless mind that dodges commitment and boring reality. Mercury rules it in the world; Venus, its esoteric ruler, brings the warmth that unites its two halves, and Sagittarius across the wheel turns its facts into wisdom.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Gemini (pdf pp. 95–134): pdf p95, p98, p102 and p115.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes.",
+     "quote": "Now we reach the light and breezy sign of Gemini. Gemini is cheerful, playful, and somewhat glib, like its ruling planet Mercury/Hermes. Hermes was known to the Greeks as Guide to the Three Worlds, Dweller of the Twilight, Lord of the Shepherds (esoteric ruler of the ram), Patron of Merchants, Patron of Thieves.",
      "page": 95,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "In Gemini, we deal with Mutable Air which represents observation, analysis, rational classification of data, and objectivity.",
+     "quote": "In Gemini, we deal with Mutable Air which represents observation, analysis, rational classification of data, and objectivity. We have the conscious mind (Mercury) processing information.",
      "page": 98,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Gemini stands at a crossroads and seeks a guide.",
-     "page": 102,
+     "quote": "Gemini’s mercurial nature seeks variety; his/her curiosity and dilettante spirit carry him/her down many different paths as s/he moves explorer-like through the avenues of his/her own mind during his/her first 30 years.",
+     "page": 123,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Gemini is the most versatile archetype.",
-     "page": 115,
+     "quote": "As the fluid mind, Hermes himself seemed happiest when in motion. He preferred not to remain too long in the same place. If he stayed, he might become rooted to it.",
+     "page": 98,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Gemini (pdf pp. 95–134): pdf p95, p113 and p98.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Hermes was known to the Greeks as Guide to the Three Worlds, Dweller of the Twilight, Lord of the Shepherds (esoteric ruler of the ram), Patron of Merchants, Patron of Thieves.",
-     "page": 95,
+     "quote": "Also, the thinking (Hermes) and feeling (Aphrodite) polarities which complete the personality—symbolically, the masculine and feminine, when the Eternal Airy Child meets the Goddess of Love. It is such a meaningful union that their androgynous offspring, the Hermaphrodite, has been over the centuries an important subject for artists. It is an archetype of wholeness—a symbol of the Self.",
+     "page": 122,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Hermes was forever young—a perpetual adolescent.",
-     "page": 95,
+     "quote": "The mind by itself (apart from the rest of the psyche) is dual and amoral. It can lead us in either a positive or a negative direction. Hermes is “of two minds,” especially as ruler of Gemini.",
+     "page": 96,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Hermes is a catalyst; a messenger. He communicates information and brings people together.",
-     "page": 113,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Hermes corresponds to Peter Pan, the Eternal Youth (Puer Aeternis)",
-     "page": 98,
+     "quote": "In Labours of Hercules, Alice Bailey amplifies Aphrodite’s role as esoteric ruler when she reminds us that she is harmony—the Eros’ power to reconcile opposites, to heal all misunderstandings and transcend duality in all its forms. She is the unity principle that spans the Gates of Hercules.",
+     "page": 122,
      "voice": "Burt"
     }
    ]
@@ -69,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the twins and the Dioscuri: Dream Analysis seminar, pdf p434; CW5 ¶296.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",

@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "libra",
- "line": "Burt, Archetypes of the Zodiac, chapter on Libra (pdf pp. 253–294); Jung on Libra (Dream Analysis seminar; Aion).",
+ "line": "Libra is Cardinal Air, the sign of the autumn equinox, when day and night hang in balance. It searches for the soul mate: its scales come to rest in relationship, in love, beauty and harmony shared with another. Its gift is grace, fairness and the art of relating; its shadow is doubt and indecision, and losing itself in a partner or in an ideal no human can match. Venus rules it in the world and Uranus esoterically, widening personal love toward the community.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Libra (pdf pp. 253–294): pdf p253.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign.",
+     "quote": "The scales (equilibrium) seem intrinsically connected with the partner. Eros (relating), Aphrodite’s child with the bow and arrows, seems to follow Libra about the same way he did Aphrodite in myths.",
+     "page": 260,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Libra is the seventh sign of the zodiac. It is the second Air sign and because the third seasonal change occurs in Libra, it is the third Cardinal sign. As autumn begins the Earth becomes quieter, more subdued, withdrawn and peaceful.",
      "page": 253,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "She is Aphrodite, Goddess of Love, aesthetics and civilized good taste.",
+     "quote": "The mundane ruler of Libra has an energy that is appropriate to the season. She is Aphrodite, Goddess of Love, aesthetics and civilized good taste. She has a son named Eros (love or relationship) and a daughter named Harmonia.",
      "page": 253,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "When we consider the polarity from Aries to Libra, we are observing two Cardinal, or managerial signs.",
-     "page": 253,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "The mundane ruler of Libra has an energy that is appropriate to the season.",
-     "page": 253,
+     "quote": "Plato and his philosopher friends called her “chaste and pure Aphrodite,” or “heavenly Aphrodite clothed in stars.” They worshipped her under the title, Aphrodite Urania. Aphrodite Urania is the Platonic friend, a spiritual role many Libran Sun sign people seem to play.",
+     "page": 261,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Libra (pdf pp. 253–294): pdf p258, p256 and p260.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "the anima (the man’s inner feminine) as a rather naive ideal that is",
-     "page": 258,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Though she chose to live in the air, she is primarily a feeling goddess.",
-     "page": 256,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "As a benefic planet, Aphrodite does not like to work or to confront.",
-     "page": 256,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Because the Seventh House is, for Libra, life’s major issue,",
+     "quote": "In their search for the soul-mate, many Librans have the Pygmalion approach—projecting their personal ideal upon a human being in the outer world and feeling great disappointment when he or she turns out to be human rather than Adonis or Aphrodite.",
      "page": 260,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Doubt is a problem endemic to the Air signs, while the Fire polarity, as represented by Krishna or Athena, impels to action, to a decisive resolution of doubt—toward courage in adversity; beyond likes and dislikes, and in the end to fulfillment of the warrior’s or hero’s duty (Saturn’s dharmic exaltation). Mars (Ares), ruler of the polarity, endows Libra with these exact qualities.",
+     "page": 275,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Every Libran will have both Venus, the feeling planet, and Uranus, the thinking planet, somewhere in the horoscope. The well-integrated Uranus broadens Libra’s perspective beyond self and partner to the community at large. Uranus brings detachment, originality, and an expansion of the Libran value system.",
+     "page": 291,
      "voice": "Burt"
     }
    ]
@@ -69,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the balance, and Libra as an air sign: Dream Analysis seminar, pdf p435 and p434; CW9ii pdf p95.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",
@@ -85,7 +79,7 @@
     },
     {
      "work": "cw09ii",
-     "quote": "Libra is another double sign with a pneumatic nature (air trigon), like Gemini,",
+     "quote": "Libra is another double sign with a pneumatic nature (air trigon), like Gemini, and for this reason it was taken by Pierre d'Ailly as Christ's ascendent.",
      "page": 95,
      "voice": "Jung"
     }

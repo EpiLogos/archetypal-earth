@@ -2,42 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-wands",
- "line": "Crowley’s Six of Wands: Victory (pdf p178); Jupiter and Leo (pdf p191); Tiphareth (pdf p177, p191).",
+ "line": "Victory: the energy that broke out as strife has been won into balance, and now burns steadily, like lamps instead of wildfire. It is success earned, ordered and self-supporting, and a blessing rests on its harmony as much as on its triumph. Drawn, the card promises a win, recognition and confidence, with the warning that so much fire is never perfectly stable. Jupiter in Leo blesses it here, in Tiphareth, the sphere of Beauty at the centre of the Tree.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p178); on Jupiter and Leo (pdf p191).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Six of Wands is called Victory.",
-     "page": 178,
+     "quote": "This card represents Tiphareth of the suit of Fire. This shows Energy in completely balanced manifestation. The Five has broken up the closed forces of the Four with revolutionary ardour, but a marriage has taken place between them; and the result is the Son, and the Sun. The reference is also to Jupiter and Leo, which seems to imply a benediction on the harmony and beauty of this arrangement.",
+     "page": 191,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The reference is also to Jupiter and Leo",
+     "quote": "The outburst of energy in the Five of Wands, which was so sudden and violent that it even gave the idea of strife, has now completely won success. The rule, or lordship, in the suit of Wands is not quite as stable as it might have been if there had been less energy displayed. So, from this point, as soon as the current leaves the middle pillar, the inherent weakness in the element of Fire (which is this: that, for all its purity, it is not completely balanced) leads to very undesirable developments.",
+     "page": 178,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "It Will be seen that the Three Wands of the Three Adepts are now orderly arranged; and the flames themselves, instead of shooting out in all directions, burn steadily as in lamps. They are nine in number, in reference to Yesod and the Moon. This shows the stabilization of the Energy, and its reception and reflection by the Feminine. There is no circle to enclose the system. It is self‐supporting, like the Sun.",
      "page": 191,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Sixes and Tiphareth (pdf p177); on Tiphareth of the suit of Fire (pdf p191).",
+   "id": "number",
+   "title": "The Sixes",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Tiphareth.",
+     "quote": "These cards are attributed to Tiphareth. This Sephira is in some respects the most important of all. It is the centre of the whole system; it is the only Sephira below the Abyss which communicates directly with Kether.",
      "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This card represents Tiphareth of the suit of Fire.",
-     "page": 191,
+     "quote": "It represents consciousness in its most harmonized and balanced form; definitely in form, not only in idea, as in the case of the number Two. In other words, the Son is an interpretation of the Father in terms of the mind.",
+     "page": 177,
      "voice": "Crowley"
     }
    ]

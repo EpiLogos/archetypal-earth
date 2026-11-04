@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-magus",
- "line": "Crowley on Atu I: the letter Beth, Mercury, and the path of Beth from Kether to Binah (pdf p45, p58, p59, p121).",
+ "line": "The Magus is will and word in action: skill, intelligence, the quick impulse, the message that sets things moving. He is creative and double, so the same gift is craft and cunning, wisdom and trickery; drawn, the card asks what you are making with your cleverness, and warns that every message carries some illusion. Here the Fool's pure impulse becomes deliberate act. It is the path of Beth, the House, and of Mercury, messenger of the gods.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title, letter and planet",
-   "line": "Crowley's list of titles for Atu I to XXI (pdf p45) and his attribution of the card to the letter Beth and to Mercury (pdf p58).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "I. to XXI. The Juggler; The High Priestess; The Empress",
-     "page": 45,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is referred to the letter Beth, which means a house, and is attributed to the planet Mercury.",
-     "page": 58,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-path",
-   "title": "The path of Beth",
-   "line": "Crowley on Mercury as the path leading from Kether to Binah (pdf p58) and on the path of Beth descending from Kether upon Binah (pdf p121).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "But Mercury is the Path leading from Kether to Binah",
+     "quote": "Mercury is pre‐eminently the bearer of the Wand: Energy sent forth. This card therefore represents the Wisdom, the Will, the Word, the Logos by whom the worlds were created. (See the Gospel according to St. John, chapter I.) It represents the Will. In brief, he is the Son, the manifestation in act of the idea of the Father.",
      "page": 58,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The path of Beth on the Tree of Life shows him descending from Kether, the Crown, upon Binah, the",
-     "page": 121,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-the-card-figures",
-   "title": "The Wisdom, the Will, the Word",
-   "line": "Crowley on the Logos by whom the worlds were created (pdf p58) and on Mercury and the path of Beth (pdf p59).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card therefore represents the Wisdom, the Will, the Word, the Logos by whom the worlds were created.",
-     "page": 58,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Mercury, however, represents action in all forms and phases.",
+     "quote": "Being the unexpected, he unsettles any established idea, and therefore appears tricky. He has no conscience, being creative. If he cannot attain his ends by fair means, he does it by foul. The legends of the youthful Mercury are therefore legends of cunning. He cannot be understood, because he is the Unconscious Will.",
      "page": 59,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "In this card, the emphasis is upon the creative and dualistic character of the path of Beth.",
+     "quote": "Skill, wisdom, adroitness, elasticity, craft, cunning, deceit, theft. Sometimes occult wisdom or power, sometimes a quick impulse, “a brain‐wave”. It may imply messages, business transactions, the interference of learning or intelligence with the matter in hand.",
+     "page": 249,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "He is the messenger of the gods; he transmits their will by hieroglyphs intelligible to the initiate, and records their acts; but it was seen from very early times that the use of speech, or writing, meant the introduction of ambiguity at the best, and falsehood at the worst; they therefore represented Thoth as followed by an ape, the cynocephalus, whose business was to distort the Word of the god; to mock, to simulate and to deceive. In philosophical language one may say: Manifestation implies illusion.",
+     "page": 60,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to the letter Beth, which means a house, and is attributed to the planet Mercury.",
+     "page": 58,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "From the above it will appear that this card is the second emanation from the Crown, and therefore, in a sense, the adult form of the first emanation, the Fool, whose letter is Aleph, the Unity.",
      "page": 59,
      "voice": "Crowley"
     }

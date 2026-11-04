@@ -2,48 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-universe",
- "line": "Crowley on Atu XXI: the letter Tau, Saturn, earth thrust upon the symbol, the path of Tau, and the Great Work accomplished (pdf p109, p110).",
+ "line": "The Universe is the end of the matter: the work completed, the whole crystallised, the maiden dancing at the close of the journey the Fool began. Drawn, it points to the heart of the question and its outcome, but it can also mean delay, opposition and inertia, asking for patience and perseverance. Here the material world is no longer dark but bright green: the Great Work accomplished. It is the path of Tau, the Cross, and of Saturn and Earth.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter, planet and element",
-   "line": "Crowley on the letter Tau attributed to Saturn, and on the element of earth thrust upon the symbol (pdf p109).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The letter Tau is attributed to Saturn, the outermost and slowest of the seven sacred planets;",
-     "page": 109,
+     "quote": "In the card itself there is consequently a glyph of the completion of the Great Work in its highest sense, exactly as the Atu of the Fool symbolizes its beginning. The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return. The twenty cards that lie between these two exhibit the Great Work and its agents in various stages.",
+     "page": 110,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the element of earth was thrust upon the symbol.",
-     "page": 109,
+     "quote": "The matter of the question itself, synthesis, the end of the matter, may mean delay, opposition, obstinacy, inertia, patience, perseverance, persistent stubbornness in difficulty. The crystallization of the whole matter involved.",
+     "page": 254,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path-and-figure",
-   "title": "The path of Tau and the Great Work",
-   "line": "Crowley on the path of Tau as an emanation from the Moon of Yesod descending upon Malkuth, on the Great Work accomplished, and on the Fool and the Universe (pdf p110).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "the letter Tau upon the Tree of Life appears as an emanation from the moon of Yesod, the foundation of the Tree and representative of the reproductive process and of the equilibrium between change and stability, or rather their identification. The influence of the path descends upon the earth, Malkuth, the daughter.",
+     "quote": "The image of the Universe in this sense is accordingly that of a maiden, the final letter of Tetragrammaton. In the present card she is represented as a dancing figure. In her hands she manipulates the radiant spiral force, the active and passive, each possessing its dual polarity.",
      "page": 110,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Universe, so states the theme, is the Celebration of the Great Work accomplished.",
-     "page": 110,
+     "quote": "The general colour of the traditional card is subfusc; it represents the confusion and darkness of the material world. But the New Aeon has brought fullness of Light; in the Minutum Mundum, Earth is no longer black, or of mixed colours, but is pure bright green.",
+     "page": 111,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The first and most obvious characteristic of this card is that it comes at the end of all, and is therefore the complement of the Fool. It is attributed to the letter Tau. The two cards together accordingly spell the word Ath, which means Essence.",
+     "page": 109,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Fool is the negative issuing into manifestation; the Universe is that manifestation, its purpose accomplished, ready to return.",
-     "page": 110,
+     "quote": "The letter Tau is attributed to Saturn, the outermost and slowest of the seven sacred planets; because of these dull, heavy qualities, the element of earth was thrust upon the symbol.",
+     "page": 109,
      "voice": "Crowley"
     }
    ]

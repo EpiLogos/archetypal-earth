@@ -2,67 +2,54 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-swords",
- "line": "Crowley’s Ten of Swords: Ruin (pdf p181); the Sun in Gemini (pdf p222); Malkuth (pdf p181).",
+ "line": "Ruin: the mind driven past all sense until it wrecks itself. Reason cut loose from reality turns into mad logic and soulless mechanism, and a fight carried on long enough ends, as it always does, in destruction. Drawn, the card names a collapse that cannot be argued away, yet not a final one: once things are bad enough, rebuilding begins, and there is still a garden to cultivate. Malkuth, the end of the descent, under the Sun in Gemini, whose rays the restless sign scatters.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on the Sun in Gemini (pdf p222).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Ten of Swords is called Ruin.",
+     "quote": "The number Ten, Malkuth, as always, represents the culmination of the unmitigated energy of the idea. It shows reason run mad, ramshackle riot of soulless mechanism; it represents the logic of lunatics and (for the most part) of philosophers. It is reason divorced from reality. The card is also ruled by the Sun in Gemini, but the mercurial airy quality of the Sign serves to disperse his rays; this card shows the disruption and disorder of harmonious and stable energy.",
+     "page": 222,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Swords is called Ruin. It teaches the lesson which statesmen should have learned, and have not; that if one goes on fighting long enough, all ends in destruction.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card is also ruled by the Sun in Gemini",
+     "quote": "Yet this card is not entirely without hope. The Solar influence rules; ruin can never be complete, because disaster is a sthenic disease. As soon as things are bad enough, one begins to build up again. When all the Governments have smashed each other, there still remains the peasant. At the end of Candide’s misadventures, he could still cultivate his garden.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The hilts of the Swords occupy the positions of the Sephiroth, but the points One to Five and Seven to Nine touch and shatter the central Sword (six) which represents the Sun, the Heart, the child of Chokmah and Binah. The tenth Sword is also in splinters. It is the ruin of the Intellect, and even of all mental and moral qualities.",
      "page": 222,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Tens and Malkuth, and on Malkuth in the world of Assiah (pdf p181).",
+   "id": "number",
+   "title": "The Tens",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Malkuth.",
-     "page": 181,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
-     "page": 181,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on reason run mad (pdf p222).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "It shows reason run mad, ramshackle riot of soulless mechanism",
-     "page": 222,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "conflicts",
-   "title": "Crowley’s group note on the Tens",
-   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "There is now no planetary attribution to consider.",
+     "quote": "These cards are attributed to Malkuth. Here is the end of all energy; it is away from the “formative world” altogether, where things are elastic.",
      "page": 181,
      "voice": "Crowley"
     }

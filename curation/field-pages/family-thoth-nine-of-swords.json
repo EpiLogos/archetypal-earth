@@ -2,49 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-swords",
- "line": "Crowley’s Nine of Swords: Cruelty (pdf p181); Mars in Gemini (pdf p221); Yesod (pdf p221).",
+ "line": "Cruelty: the mind turned against itself. Thought has run through every possibility and arrived at despair, and what drives it now is not reason but the blind stir of heartless passions, the temper of the fanatic and the inquisitor. Drawn, the card names anguish of mind, self-torment or cruelty from others, and offers two answers: patient endurance, or implacable revenge. Yesod, the foundation, delivers the suit's full force, and Mars in Gemini makes it raw rage in an intellectual dress.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on Mars in Gemini (pdf p221).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Nine of Swords is called Cruelty.",
+     "quote": "The Nine of Swords is called Cruelty. Here the original disruption inherent in Swords is raised to its highest power. The card is ruled by Mars in Gemini; it is agony of mind. The Ruach consumes itself in this card; thought has gone through every possible stage, and the conclusion is despair.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The celestial ruler is Mars in Gemini",
+     "quote": "But the general idea of the suit has been constantly degenerating. The Swords no longer represent pure intellect so much as the automatic stirring of heartless passions. Consciousness has fallen into a realm unenlightened by reason. This is the world of the unconscious primitive instincts, of the psychopath, of the fanatic. The celestial ruler is Mars in Gemini, crude rage of hunger operating without restraint; although its form is intellectual, it is the temper of the inquisitor.",
+     "page": 221,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "There is, however, a way of dealing with this card: the way of passive resistance, resignation, the acceptance of martyrdom. Nor is an alien formula that of implacable revenge.",
      "page": 221,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the number Nine, Yesod, and the central pillar of the Tree of Life (pdf p221).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The number Nine, Yesod, brings back the Energy to the central pillar of the Tree of Life.",
+     "quote": "The symbol shows nine swords of varying lengths, all striking downwards to a point. They are jagged and rusty. Poison and blood drip from their blades.",
      "page": 221,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the Swords and the stirring of heartless passions (pdf p221).",
+   "id": "number",
+   "title": "The Nines",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Swords no longer represent pure intellect so much as the automatic stirring of heartless passions.",
-     "page": 221,
+     "quote": "What saves Yesod is the direct ray from Tiphareth; this Sephira is in the direct line of succession. Each of these cards gives the full impact of the elemental force, but in its most material sense; that is, of the idea of the force, for Yesod is still in Yetzirah, the formative world.",
+     "page": 180,
      "voice": "Crowley"
     }
    ]

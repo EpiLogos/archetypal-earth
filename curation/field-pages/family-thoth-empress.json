@@ -2,12 +2,50 @@
  "version": 1,
  "type": "family",
  "id": "thoth-empress",
- "line": "Crowley on Atu III: the letter Daleth, Venus, and the path from Chokmah to Binah (pdf p64).",
+ "line": "The Empress is love as the law of the world: beauty, fertility, pleasure, and the one life that binds all nature together. Drawn, she brings love, happiness, success, grace and friendship, and at her worst luxury, idleness and dissipation. She joins the highest spirit to the lowest matter, and asks to be seen whole rather than in her dazzling parts. It is the path of Daleth, the Door, and of Venus, uniting the Father with the Mother.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Letter, planet and path",
-   "line": "Crowley on the letter Daleth and the planet Venus, and on Daleth as the path leading from Chokmah to Binah (pdf p64).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card, she is shown in her most general manifestation. She combines the highest spiritual with the lowest material qualities. For this reason, she is fitted to represent one of the three alchemical forms of energy, Salt. Salt is the inactive principle of Nature; Salt is matter which must be energized by Sulphur to maintain the whirling equilibrium of the Universe.",
+     "page": 64,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "This card, summed up, may be called the Gate of Heaven. But, because of the beauty of the symbol, because of its omniform presentation, the student who is dazzled by any given manifestation may be led astray. In no other card is it so necessary to disregard the parts, to concentrate upon the whole.",
+     "page": 65,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "She represents a woman with the imperial crown and vestments, seated upon a throne, whose uprights suggest blue twisted flames symbolic of her birth from water, the feminine, fluid element. In her right hand she bears the lotus of Isis; the lotus represents the feminine, or passive power.",
+     "page": 65,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The heraldry of the Empress is two‐fold: on the one side, the Pelican of tradition feeding its young from the blood of its own heart; on the other, the White Eagle of the Alchemist.",
+     "page": 65,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -17,26 +55,7 @@
     },
     {
      "work": "book-of-thoth",
-     "quote": "On the Tree of Life, Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother.",
-     "page": 64,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-the-card-figures",
-   "title": "The doctrine of the card",
-   "line": "Crowley on the formula of the Universe as Love and on the qualities the Empress combines (pdf p64).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The doctrine implied is that the fundamental formula of the Universe is Love.",
-     "page": 64,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "She combines the highest spiritual with the lowest material qualities.",
+     "quote": "On the Tree of Life, Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother. Daleth is one of the three paths which are altogether above the Abyss. There is furthermore the alchemical symbol of Venus, the only one of the planetary symbols which comprises all the Sephiroth of the Tree of Life. The doctrine implied is that the fundamental formula of the Universe is Love.",
      "page": 64,
      "voice": "Crowley"
     }

@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-lust",
- "line": "Crowley on Atu XI: the letter Teth, the sign Leo, the influence from Chesed upon Geburah, and the act of the original marriage (pdf p83, p84, p85).",
+ "line": "Lust is strength enjoyed: not force held in check but the joy of strength exercised, vigour and the rapture of vigour. Drawn, it brings courage, energy and action, a great passion, and the use of magical power. The woman rides the beast, drunk and a little mad, bound to it only by passion; this energy is primal and owes nothing to reason. It is the path of Teth, the Serpent, and of Leo, the Lion, fixed Fire ruled by the Sun.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Sign and letter",
-   "line": "Crowley assigns the Trump to the sign of Leo and attributes the card to the letter Teth, a serpent (pdf p84).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This Trump is assigned to the sign of Leo in the Zodiac.",
-     "page": 84,
+     "quote": "This Trump was formerly called Strength. But it implies far more than strength in the ordinary sense of the word.",
+     "page": 83,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Teth, which means a serpent.",
-     "page": 84,
+     "quote": "Lust implies not only strength, but the joy of strength exercised. It is vigour, and the rapture of vigour.",
+     "page": 83,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "From Chesed upon Geburah",
-   "line": "Crowley on the path corresponding to the card as the influence from Chesed upon Geburah (pdf p83) and on the paths of Gimel and Teth (pdf p85).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Technical analysis shows that the Path corresponding to the card is not the Strength of Geburah, but the influence from Chesed upon Geburah",
-     "page": 83,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the influence from Chesed upon Geburah, the Path balanced both vertically and horizontally on the Tree of Life",
-     "page": 83,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "path of Gimel, the Moon, descending from the highest, cuts the path of Teth, Leo, the house of",
+     "quote": "She rides astride the Beast; in her left hand she holds the reins, representing the passion which unites them. In her right she holds aloft the cup, the Holy Grail aflame with love and death. In this cup are mingled the elements of the sacrament of the Aeon.",
      "page": 85,
      "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "There is in this card a divine drunkenness or ecstasy. The woman is shown as more than a little drunk, and more than a little mad; and the lion also is aflame with lust. This signifies that the type of energy described is of the primitive, creative order; it is completely independent of the criticism of reason. This card portrays the will of the Aeon.",
+     "page": 86,
+     "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "The Kerub of Fire",
-   "line": "Crowley on the figure as the Kerub of Fire, ruled by the Sun, and on the act of the original marriage (pdf p84).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "It is the Kerub of Fire, and is ruled by the Sun.",
+     "quote": "This Trump is assigned to the sign of Leo in the Zodiac. It is the Kerub of Fire, and is ruled by the Sun.",
      "page": 84,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It represents the act of the original marriage as it occurs in nature,",
+     "quote": "(This card is attributed to the letter Teth, which means a serpent.)",
      "page": 84,
      "voice": "Crowley"
     }

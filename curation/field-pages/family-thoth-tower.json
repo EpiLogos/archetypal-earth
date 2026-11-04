@@ -2,61 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-tower",
- "line": "Crowley on Atu XVI: the letter Pé, Mars, the destruction of existing material by fire, and the Eye of Horus (pdf p98, p99).",
+ "line": "The Tower is the lightning-strike: the existing structure destroyed by fire, suddenly and completely. Drawn, it brings quarrel, combat, danger, ruin, the wreck of plans, and also escape from prison. What falls was confining you; it was unwise to cling to it, and the destruction is also a release. It is the path of Pé, the Mouth, and of Mars, energy in its rawest form.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter, planet and picture",
-   "line": "Crowley on the letter Pé, the planet Mars and the picture of destruction by fire (pdf p98).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In its simplest interpretation it refers to the manifestation of cosmic energy in its grossest form. The picture shows the destruction of existing material by fire. It may be taken as the preface to Atu XX, the Last Judgment, i.e., the Coming of a New Aeon.",
+     "page": 98,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "To obtain perfection, all existing things must be annihilated. The destruction of the garrison may therefore be taken to mean their emancipation from the prison of organized life, which was confining them. It was their unwisdom to cling to it.",
+     "page": 99,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Quarrel, combat, danger, ruin, destruction of plans, sudden death, escape from prison.",
+     "page": 253,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In the right‐hand corner are the jaws of Dis, belching flame at the root of the structure. Falling from the tower are broken figures of the garrison. It will be noticed that they have lost their human shape. They have become mere geometrical expressions.",
+     "page": 98,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The dominating feature of this card is the Eye of Horus. This is also the Eye of Shiva, on the opening of which, according to the legend of this cult, the Universe is destroyed.",
+     "page": 99,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
      "quote": "This card is attributed to the letter Pé, which means a mouth; it refers to the planet Mars.",
      "page": 98,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The picture shows the destruction of existing material by fire.",
-     "page": 98,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-path",
-   "title": "The Paths and the letters",
-   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "These paths are the paths which join the ten numbers on the",
-     "page": 36,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "and one letter goes to each path.",
-     "page": 36,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "Cosmic energy and the Eye of Horus",
-   "line": "Crowley on the manifestation of cosmic energy in its grossest form (pdf p98) and on the Eye of Horus (pdf p99).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "In its simplest interpretation it refers to the manifestation of cosmic energy in its grossest form.",
-     "page": 98,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The dominating feature of this card is the Eye of Horus.",
-     "page": 99,
      "voice": "Crowley"
     }
    ]

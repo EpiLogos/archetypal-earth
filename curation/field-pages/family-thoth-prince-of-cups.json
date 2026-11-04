@@ -2,61 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-prince-of-cups",
- "line": "Crowley's Prince of Cups: Vau of the Name (pdf p139); the airy part of Water and the span from Libra to Scorpio (pdf p153).",
+ "line": "Water turned to steam: calm and imperturbable on the surface, intensely passionate beneath, subtle, secret and an artist in all his ways. Drawn, the card points to hidden motives, deep feeling held under control and great power quietly used, and warns of ruthlessness, a lack of conscience and overweening ambition. The Prince of Cups is the airy part of Water, ruling from the last decan of Libra through the first two of Scorpio.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princes (pdf p139) and on the Prince of Cups (pdf p153).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
-     "page": 139,
+     "quote": "The moral characteristics of the person pictured in this card are subtlety, secret violence, and craft. He is intensely secret, an artist in all his ways. On the surface he appears calm and imperturbable, but this is a mask of the most intense passion. He is on the surface susceptible to external influences, but he accepts them only to transmute them to the advantage of his secret designs.",
+     "page": 153,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Prince of Cups represents the airy part of Water.",
+     "quote": "He is thus completely without conscience in the ordinary sense of the word, and is therefore usually distrusted by his neighbours. They feel they do not, and can never, understand him. Thus he inspires unreasonable fear. He is in fact perfectly ruthless. He cares intensely for power, wisdom, and his own aims.",
+     "page": 154,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "To such people good will, sincerity, and right mating are the essentials of success; their danger is overweening ambition.",
+     "page": 154,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In his right hand he bears a Lotus flower, sacred to the element of Water, and in his left hand is a cup from which issues a serpent. The third totem, the scorpion, is not shewn in the picture, for the putrefaction which it represents is an extremely secret process. Beneath his chariot is the calm and stagnant water of a lake upon which rain falls heavily.",
      "page": 153,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Libra to the 20th degree of Scorpio (pdf p153); on the decans and the elemental attribution (pdf p139).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He rules from the 21st degree of Libra to the 20th degree of Scorpio.",
+     "quote": "The Prince of Cups represents the airy part of Water. On the one hand, elasticity, volatility, hydrostatic equilibrium; on the other hand, the catalytic faculty and the energy of steam. He rules from the 21st degree of Libra to the 20th degree of Scorpio.",
      "page": 153,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name. The Prince is the Son of the Queen (the old King’s daughter) by the Knight who has won her; he is therefore represented as in a chariot, going forth to carry out the combined Energy of his parents. He is the active issue of their union, and its manifestation. He is the intellectual image of their union. His action is consequently more enduring than that of his forbears.",
      "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Prince of Cups (pdf p153).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The moral characteristics of the person pictured in this card are subtlety, secret violence, and craft.",
-     "page": 153,
      "voice": "Crowley"
     }
    ]

@@ -2,48 +2,35 @@
  "version": 1,
  "type": "family",
  "id": "chesed",
- "line": "Crowley on Chesed (The Book of Thoth); Jung on kesed in CW9ii ¶105.",
+ "line": "Mercy, the Father below the Abyss: the fourth sephira, where the ideas above become solid and manifest under the rule of law, the highest idea the intellect can grasp. Its number gives each suit settled, established power: Completion in Wands, Luxury in Cups, Truce in Swords, Power in Disks. Among the ten bodies of the solar system on the Tree, it is Jupiter.",
  "sections": [
   {
-   "id": "crowley-fours",
-   "title": "Crowley's Fours",
-   "line": "Crowley on the Fours and Chesed, Jupiter and the number 4: The Book of Thoth, pdf p176 and p33.",
+   "id": "crowley",
+   "title": "Crowley on Chesed",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Chesed.",
+     "quote": "These cards are attributed to Chesed. The connection between the number Four and the number Three is extremely complex. The important characteristic is that Four is “below the Abyss”; therefore, in practice, it means solidification, materialization. Things have become manifest. The essential point is that it expresses the Rule of Law.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "is attributed to Jupiter, who is the Demiurge.",
+     "quote": "Chesed, Jupiter‐Ammon, the Father, the first below the Abyss, is the highest idea which can be understood in an intellectual way, and that is why the Sephira is attributed to Jupiter, who is the Demiurge.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It symbolises such ideas as Law, Restraint, Power, Protection and Stability.",
+     "quote": "The number 4, for instance, is not so specially the result of adding one to three, or squaring two, or halving eight. It is a thing in itself, with all sorts of moral, sensible, and intellectual qualities. It symbolises such ideas as Law, Restraint, Power, Protection and Stability.",
      "page": 33,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "jupiter-and-water",
-   "title": "Jupiter and Water",
-   "line": "Crowley's attributions for Chesed: The Book of Thoth, pdf p207 and p263.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Jupiter is the planet of Chesed which represents Water in its highest material",
-     "page": 207,
-     "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "In the place of Chesed, which is Water in our Qabalah",
-     "page": 263,
+     "quote": "The Four, Chesed, shows the establishment of the Universe in three dimensions, that is, below the Abyss. The generating idea is exhibited in its full material sense.",
+     "page": 229,
      "voice": "Crowley"
     }
    ]
@@ -51,11 +38,11 @@
   {
    "id": "jung-two-sides",
    "title": "Jung's two sides of the Tree",
-   "line": "Jung on kesed and din as the two sides of the Tree: CW9ii ¶105.",
+   "line": "",
    "quotes": [
     {
      "work": "cw09ii",
-     "quote": "found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice)",
+     "quote": "In this respect, therefore, it is significant that the doctrine of the two antithetical sons of God originated with the Jewish Christians living in Palestine. Inside Christianity itself the doctrine spread to the Bogomils and Cathars; in Judaism it influenced religious speculation and found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice).",
      "para": 105,
      "voice": "Jung"
     }

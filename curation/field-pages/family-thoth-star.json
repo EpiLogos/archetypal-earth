@@ -2,61 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-star",
- "line": "Crowley on Atu XVII: the letter Hé, Aquarius, Nuith our Lady of the Stars, and the Path of Hé (pdf p100, p101, p211).",
+ "line": "The Star is hope and renewal: the goddess of the night sky pouring the waters of life on herself and on the earth, so that existence is endlessly renewed. Drawn, it brings hope, unexpected help, clear vision and spiritual insight; badly placed, error of judgement, dreaminess and disappointment. Its nature is love, and its energy moves in spirals, not straight lines. It is the path of Hé and of Aquarius, the Water-bearer.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter, sign and picture",
-   "line": "Crowley on the letter Hé, Aquarius, and Nuith, our Lady of the Stars (pdf p100).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Hé, as has been explained elsewhere. It refers to the Zodiacal sign of Aquarius, the water‐ bearer.",
+     "quote": "From the golden cup she pours this ethereal water, which is also milk and oil and blood, upon her own head, indicating the eternal renewal of the categories, the inexhaustible possibilities of existence.",
      "page": 100,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The picture represents Nuith, our Lady of the Stars.",
+     "quote": "This is a glyph of the Economy of the Universe. It continually pours forth energy and continually reabsorbs it.",
+     "page": 38,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Hope, unexpected help, clearness of vision, realization of possibilities, spiritual insight, with bad aspects, error of judgment, dreaminess, disappointment.",
+     "page": 253,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In this card she is definitely personified as a human‐seeming figure; she is represented as bearing two cups, one golden, held high above her head, from which she pours water upon it.",
+     "page": 100,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Behind the figure of the goddess is the celestial globe. Most prominent among its features is the seven‐pointed Star of Venus, as if declaring the principal characteristic of her nature to be Love.",
      "page": 100,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "The figure of Nuith",
-   "line": "Crowley on the figure personified as human-seeming (pdf p100) and on heaven as a veil before the face of the goddess (pdf p101).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "In this card she is definitely personified as a human‐seeming figure;",
+     "quote": "This card is attributed to the letter Hé, as has been explained elsewhere. It refers to the Zodiacal sign of Aquarius, the water‐bearer.",
      "page": 100,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Heaven itself is no more than a veil before the face of the immortal goddess.",
-     "page": 101,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "tree-and-conflict",
-   "title": "The Path of Hé",
-   "line": "Crowley on the Path of Hé, the Great Mother, the Star, our Lady Nuit (pdf p211), and on Chokmah and Tiphareth (pdf p67).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Path of Hé, the Great Mother, the Star, our Lady Nuit,",
-     "page": 211,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
-     "page": 67,
      "voice": "Crowley"
     }
    ]

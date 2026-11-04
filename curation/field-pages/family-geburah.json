@@ -2,48 +2,35 @@
  "version": 1,
  "type": "family",
  "id": "geburah",
- "line": "Crowley on Geburah (The Book of Thoth); Jung on din in CW9ii ¶105.",
+ "line": "Severity, or Strength: the fifth sephira, the fiery force that sets the settled order moving and breaks it open, though it springs from the gentle influence of the Mother. Its number brings storm and stress into each suit: Strife in Wands, Disappointment in Cups, Defeat in Swords, Worry in Disks. Among the ten bodies of the solar system on the Tree, it is Mars.",
  "sections": [
   {
-   "id": "crowley-fives",
-   "title": "Crowley's Fives",
-   "line": "Crowley on the Fives and Geburah: The Book of Thoth, pdf p40, p231 and p189.",
+   "id": "crowley",
+   "title": "Crowley on Geburah",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "and to the Sephira Geburah because it is a Five.",
-     "page": 40,
+     "quote": "In the “Naples arrangement”, the introduction of the number Five shows the idea of motion coming to the aid of that of matter. This is quite a revolutionary conception; the result is a complete upset of the statically stabilized system. Now appear storm and stress. This must not be regarded as something “evil”.",
+     "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Number Five, Geburah, in the suit of Earth,",
-     "page": 231,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is referred to Geburah of the suit of Fire.",
+     "quote": "One of the most difficult doctrines with regard to Geburah is that, while it represents all this tameless irrational energy and disturbance, yet it derives from the benign and gentle influence of the feminine. The Egyptians understood this doctrine perfectly.",
      "page": 189,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "mars-indirectly",
-   "title": "The lowest plane of Geburah",
-   "line": "Crowley on the lowest plane of Geburah, and on the Five of Wands: The Book of Thoth, pdf p202 and p189.",
-   "quotes": [
+    },
     {
      "work": "book-of-thoth",
-     "quote": "manifestation on the lowest plane of Geburah,",
+     "quote": "This card is ruled by Geburah in the suit of Water. Geburah being fiery, there is a natural antipathy. Hence arises the idea of disturbance, just when least expected, in a time of ease. The attribution is also to Mars in Scorpio, which is his own house; and Mars is the manifestation on the lowest plane of Geburah, while Scorpio, in its worst aspect, suggests the putrefying power of Water.",
      "page": 202,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It is ruled also by Saturn and Leo.",
-     "page": 189,
+     "quote": "The Number Five, Geburah, in the suit of Earth, shows the disruption of the Elements, just as in the other suits.",
+     "page": 231,
      "voice": "Crowley"
     }
    ]
@@ -51,11 +38,11 @@
   {
    "id": "jung-din-and-the-notes",
    "title": "Jung's din",
-   "line": "Jung on kesed and din as the two sides of the Tree: CW9ii ¶105.",
+   "line": "",
    "quotes": [
     {
      "work": "cw09ii",
-     "quote": "found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice)",
+     "quote": "In this respect, therefore, it is significant that the doctrine of the two antithetical sons of God originated with the Jewish Christians living in Palestine. Inside Christianity itself the doctrine spread to the Bogomils and Cathars; in Judaism it influenced religious speculation and found lasting expression in the two sides of the cabalistic Tree of the Sephiroth, which were named kesed (love) and din (justice).",
      "para": 105,
      "voice": "Jung"
     }

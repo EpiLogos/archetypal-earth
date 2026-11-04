@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "scorpio",
- "line": "Burt, Archetypes of the Zodiac, chapter on Scorpio (pdf pp. 295–338); Jung on the scorpion (Dream Analysis seminar).",
+ "line": "Scorpio is Fixed Water, the deep, turbulent water of late autumn, when the year descends into the underworld. It searches for transformation: to face the dark, release what is outworn and be reborn. Its gift is depth, courage, psychic insight and the will to transcend; its shadow is secrecy, suspicion, jealousy and compulsions that grow back like the Hydra’s heads. Mars and Pluto are its mundane rulers, and Mars, turned inward, its esoteric one.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Scorpio (pdf pp. 295–338): pdf p295 and p301.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio).",
+     "quote": "We now leave the balanced, orderly world of Cardinal Air (Libra) for the turbulent swampy waters of the underworld (Scorpio). Every year in Scorpio the Earth passes through its transition from autumn to winter and symbolically, we make our descent into Pluto’s Underworld: the Eighth House of death, transformation, and rebirth.",
      "page": 295,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The mundane rulers of Scorpio are Mars and Pluto.",
+     "quote": "Taurus represents attachment to form and Scorpio’s work is to transform, to change and refine the form. Taurus is structured Earth and Scorpio is amorphous, murky Water. Yet, the two signs have in common the Fixed mode, which is resourceful, persevering, stubborn, magnetic and powerful.",
+     "page": 301,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The mundane rulers of Scorpio are Mars and Pluto. Pluto, appropriately, is Hades, Lord of the Greek Underworld. Pluto rules the unconscious depths of the Scorpio or Eighth House personality, with its residue of instinctual drives, emotional attachments, and compulsive-obsessive tendencies carried forward from past lives to the present.",
      "page": 295,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Scorpio’s work is to transform, to change and refine the form.",
-     "page": 301,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Taurus is structured Earth and Scorpio is amorphous,",
-     "page": 301,
+     "quote": "Mars also makes sense as esoteric ruler if we consider it in its retrograde phase, as the introverted, sublimated instincts consciously focused upon a specific goal.",
+     "page": 296,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Scorpio (pdf pp. 295–338): pdf p296, p295 and p297.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Is he dealing with his own inner shadow (the karmic residue at the depths of his own Eighth House)",
-     "page": 296,
+     "quote": "Hercules, in the “Scorpio Quest,” (Labours of Hercules, Labour 7), kept kneeling in the mud, strangling the hydra’s heads, but a new one would grow just as fast as he killed an old one. He finally made the hydra conscious by lifting it from the mire (Eighth House, Underworld) into the clarity of daylight (consciousness), and it died immediately. Conscious understanding of the nature of the demon is the first step.",
+     "page": 301,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Pluto rules the unconscious depths of the Scorpio or Eighth House personality, with its residue of instinctual drives, emotional attachments, and compulsive-obsessive tendencies carried forward from past lives to the present.",
-     "page": 295,
+     "quote": "As an archetype, Taurus is warm, open, trusting, honest and sometimes gullible. Scorpio, its polarity, is withdrawn, secretive, and at its worst is negative or cynical, devious, suspicious and manipulative.",
+     "page": 301,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "According to Alice Bailey it is Mars, not Pluto, that functions as esoteric ruler of Scorpio.",
-     "page": 295,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "The Uroboros (the snake biting its own tail), which was the alchemical symbol of the transformation,",
-     "page": 297,
+     "quote": "The final type of Scorpio is a rare bird—the Phoenix. S/he has been through the fire this lifetime; s/he has burned away the dross like an alchemist and transformed his/her baser nature into gold.",
+     "page": 318,
      "voice": "Burt"
     }
    ]
@@ -69,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the scorpion and the sun: Dream Analysis seminar, pdf p435 and p434.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",

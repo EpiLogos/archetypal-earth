@@ -2,48 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hierophant",
- "line": "Crowley on Atu V: the letter Vau, Taurus, the uniting of microcosm and macrocosm, and the aeon of Horus (pdf p68, p69, p74).",
+ "line": "The Hierophant is the initiator who reveals the mystery: teaching, explanation, the joining of the small self to the greater world. Drawn, he brings steady strength, patience, organisation, help from those above you, and peace. Yet his smile hides a secret joke: the mystery he teaches belongs to a new age, the age of the Child, and only events will show how it works out. It is the path of Vau, the Nail, and of Taurus, earth at its strongest, ruled by Venus.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Letter and sign",
-   "line": "Crowley refers the card to the letter Vau, a Nail, and to Taurus (pdf p68).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is referred to the letter Vau, which means a Nail;",
+     "quote": "But the main reference is to the particular arcanum which is the principal business, the essential, of all magical work; the uniting of the microcosm with the macrocosm. Accordingly, the oriel is diaphanous; before the Manifestor of the Mystery is a hexagram representing the macrocosm. In its centre is a pentagram, representing a dancing male child.",
      "page": 68,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card is referred to Taurus; therefore the Throne of the Hierophant is surrounded",
+     "quote": "It is impossible at the present time to explain this card thoroughly, for only the course of events can show how the new current of initiation will work out. It is the aeon of Horus, of the Child. Though the face of the Hierophant appears benignant and smiling, and the child himself seems glad with wanton innocence, it is hard to deny that in the expression of the initiator is something mysterious, even sinister. He seems to be enjoying a very secret joke at somebody’s expense.",
+     "page": 69,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Stubborn strength, toil, endurance, placidity, manifestation, explanation, teaching, goodness of heart, help from superiors, patience, organization, peace.",
+     "page": 250,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is referred to Taurus; therefore the Throne of the Hierophant is surrounded by elephants, which are of the nature of Taurus; and he is actually seated upon a bull. Around him are the four beasts or Kerubs, one in each corner of the card; for these are the guardians of every shrine.",
      "page": 68,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "The arcanum, the Child and the Tree",
-   "line": "Crowley on the uniting of the microcosm with the macrocosm (pdf p68), the aeon of Horus, of the Child (pdf p69), and the Hierophant on the other side of the Tree of Life (pdf p74).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "But the main reference is to the particular arcanum which is the principal business, the essential, of all magical work; the uniting of the microcosm with the macrocosm.",
+     "quote": "This card is referred to the letter Vau, which means a Nail; of this instrument nine appear at the top of the card; they serve to fix the oriel behind the main figure of the picture.",
      "page": 68,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It is the aeon of Horus, of the Child.",
+     "quote": "Taurus, the sign of the Zodiac represented by this card, is itself the Bull Kerub; that is, Earth in its strongest and most balanced form. The ruler of this sign is Venus; she is represented by the woman standing before the hierophant.",
      "page": 69,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The Hierophant, which, on the other side of the Tree of Life, brings down the fire of Chokmah.",
-     "page": 74,
      "voice": "Crowley"
     }
    ]

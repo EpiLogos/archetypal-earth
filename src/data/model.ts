@@ -8,6 +8,7 @@ import type { Walk, WalksData } from '../types/walks';
 import { createTimeScale, type TimeScale } from './time';
 import { dirFromLatLon, type Vec3 } from './geo';
 import { hexToRgb, toRgbPalette, type RGB, type RGBPalette } from './palette';
+import { TREE_NODES } from '../lenses/tree';
 
 export type SubjectType = 'archetype' | 'theoretic' | 'family' | 'culture' | 'place' | 'work' | 'person';
 export interface Subject {
@@ -346,17 +347,33 @@ export function subjectSky(m: Model, s: Subject): SkyHang[] {
 }
 
 /**
- * The planet a tarot card is read at: its place is in the sky, on a planet's ring, and the Earth holds none of it. The decan
- * whose ruler wears it on the wheel first, else the body its number or attribution gives it. Undefined for a family that is
- * not a card of the deck, for a card with no place in the sky, and for one with an instance on the Earth (an Ace or a
- * Princess Crowley also gives a region of the world), which keeps its place on the globe.
+ * The planet a tarot card is read at: its place is in the sky, on a planet's ring. The decan whose ruler wears it on the
+ * wheel first, else the body its number, its attribution or its sign's ruler gives it. One rule for the whole deck (owner,
+ * 4 Nov 2026: "there's one deck, it has a set number of cards"): an Ace or a Princess Crowley also gives a quarter of the
+ * Earth is still read at its planet, its instance on the globe a place it is named, not its home. Undefined for a family
+ * that is not a card of the deck and for one with no place in the sky.
  */
 export function skyCardHome(m: Model, familyId: string): BodyKey | undefined {
   if (!familyId.startsWith('thoth-') || !m.famById.has(familyId)) return undefined;
   const members = subjectMembers(m, { type: 'family', id: familyId });
-  if (members.some((i) => m.located[i])) return undefined;
   const loci = members.flatMap((i) => m.occ[i].sky ?? []).filter((l) => l.body);
   return (loci.find((l) => l.ring === 'wheel') ?? loci[0])?.body;
+}
+
+/** A sephira of the Tree (Kether … Malkuth), by its family id. */
+export const isSephira = (familyId: string): boolean => TREE_NODES.some((n) => n.id === familyId);
+
+/**
+ * The planet a node is read at when its place is the sky and not the Earth: a tarot card (`skyCardHome`), or a sephira,
+ * which stands on the body Crowley's list of the ten bodies gives its number (Geburah on Mars, Tiphareth on the Sun,
+ * Malkuth on the Earth held as a planet). A sephira has no place on the globe of its own, so it is always read there.
+ * Undefined for every other node.
+ */
+export function skyHome(m: Model, familyId: string): BodyKey | undefined {
+  if (!isSephira(familyId)) return skyCardHome(m, familyId);
+  if (!m.famById.has(familyId)) return undefined;
+  const loci = subjectMembers(m, { type: 'family', id: familyId }).flatMap((i) => m.occ[i].sky ?? []);
+  return loci.find((l) => l.ring === 'body' && l.body)?.body;
 }
 
 export function subjectName(m: Model, s: Subject): string {

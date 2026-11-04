@@ -33,15 +33,14 @@ const placedTotal = (page) => page.evaluate(() => Array.from(window.__earth.ctl.
   await ctx.close();
 }
 {
-  // a card hangs in the sky and has no place on the Earth: it offers no thread, says nothing of an absence, and says where it hangs
+  // a card hangs in the sky and has no place on the Earth (owner, 1 Nov 2026): its Field address is read at its planet, with
+  // no thread and no word of an absence, and its reading says where it hangs
   const { ctx, page, logs } = await open(browser, { width: 1280, height: 800, hash: '#/f/thoth-two-of-wands' });
-  await page.waitForTimeout(5000);
-  const label = ((await page.locator('.focus-label').textContent()) ?? '').replace(/\s+/g, ' ');
-  check(!/Follow the thread/.test(label), 'a symbol with no place on the Earth offers no thread', label.slice(0, 160));
-  check(!/No thread|records no instance|no recorded place/i.test(label), 'and says nothing of an absence', label.slice(0, 160));
-  check(/in the sky/i.test(label) && /Mars/.test(label) && /decan wheel/.test(label), 'it says where it hangs: Mars’s decan wheel', label.slice(0, 200));
-  const door = page.locator('.fl-hangs button').first();
-  check(await door.count() > 0, 'each place it hangs is a door to that body', `${await door.count()} doors`);
+  await page.waitForFunction(() => document.querySelector('.cr .cr-title')?.textContent === 'Two of Wands', null, { timeout: 30000 }).catch(() => {});
+  const at = await page.evaluate(() => ({ hash: location.hash, place: document.querySelector('.cr .cr-place')?.textContent ?? '', text: document.querySelector('.cr')?.textContent ?? '' }));
+  check(at.hash === '#/sky/mars/card/thoth-two-of-wands', 'a symbol with no place on the Earth is read at its planet', at.hash);
+  check(!/Follow the thread|No thread|records no instance|no recorded place/i.test(at.text), 'it offers no thread and says nothing of an absence', at.text.slice(0, 120));
+  check(/Aries/.test(at.place) && /Mars/.test(at.place), 'it says where it hangs: Aries, on Mars’s ring', at.place);
   check(!logs.length, 'sky-hung: no page errors', logs.slice(0, 2).join(' | '));
   await ctx.close();
 }

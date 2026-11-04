@@ -6,7 +6,7 @@
 //   - the scan's glued footnote digits folded away on both sides (display.mjs stripFootnoteMarkers, the fold the build's own
 //     verifier applies), the corpus's ¶ anchors removed, editorial square brackets dropped (their words stay);
 //   - every quote mark, single or double, curly or straight, is one mark (the vault nests a quotation's inner "…" as '…');
-//     every dash (– — ‒ ― −) is a hyphen;
+//     every dash (‐ ‑ – — ‒ ― −) is a hyphen (the Book of Thoth's scan sets U+2010, the hyphen proper, at its line-end breaks);
 //   - a hyphen at a line end folds into the word: "dedi-\ncated" -> "dedicated" (the scan keeps line-end hyphens; a quotation
 //     that kept the break as "dedi- cated" folds the same way);
 //   - a slash is a space (verse lines are set "a / b" in a quotation and run on in the corpus); runs of whitespace are one space;
@@ -38,7 +38,7 @@ export function normalise(s) {
   t = t.replace(/­/g, '');
   t = t.replace(/\*\*¶\d+\*\*/g, ' ');
   t = t.replace(/[“”„‟«»‘’‚‛′`´']/g, '"');
-  t = t.replace(/[–—‒―−]/g, '-');
+  t = t.replace(/[‐‑–—‒―−]/g, '-');
   t = t.replace(/(\p{L})-\s+(\p{Ll})/gu, '$1$2');
   t = t.replace(/[\[\]]/g, '');
   t = t.replace(/\s*\/\s*/g, ' '); // a verse line break set as " / " (the corpus runs the lines on, or keeps a bare "/")

@@ -2,73 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-priestess",
- "line": "Crowley on Atu II: the letter Gimel, the Moon, the path of Gimel, and Isis the Eternal Virgin (pdf p27, p61, p62, p211).",
+ "line": "The High Priestess is pure possibility: the spirit's light before anything is conceived, virgin and whole in herself. Drawn, she brings a gracious, exalted influence, and with it change, ebb and flow; the risk is to be carried away by enthusiasm and grow moon-struck. She is the veil of light over what is hidden, the one link between idea and form. It is the path of Gimel, the Camel crossing the Abyss, and of the Moon in its highest form.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Letter and planet",
-   "line": "Crowley refers the card to the letter Gimel and to the Moon (pdf p61).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is referred to the letter Gimel, which means a Camel.",
+     "quote": "The card represents the most spiritual form of Isis the Eternal Virgin; the Artemis of the Greeks. She is clothed only in the luminous veil of light. It is important for high initiation to regard Light not as the perfect manifestation of the Eternal Spirit, but rather as the veil which hides that Spirit.",
      "page": 61,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card refers to the Moon. The Moon (being the general feminine symbol, the symbol of the second order corresponding to the Sun as the Yoni does to the Lingam) is universal, and goes from the highest to the lowest.",
-     "page": 61,
+     "quote": "Pure, exalted and gracious influence enters the matter. Hence, change, alternation, increase and decrease, fluctuation. There is, however, a liability to be led away by enthusiasm; one may become “moon‐struck” unless careful balance is maintained.",
+     "page": 249,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "The path of Gimel",
-   "line": "Crowley on the path of Gimel (pdf p61, p211) and on the card joining the number 1 to the number 6 (pdf p27).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "her path, as shown in the diagram, makes a direct connection between the Father in his highest aspect, and the Son in his most perfect manifestation.",
-     "page": 61,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "upon him, though the Path of Gimel, the High Priestess, the triune light of Initiation.",
-     "page": 211,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This path is in exact balance in the middle pillar.",
-     "page": 61,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Consider again the card joining the number I to the number 6.",
-     "page": 27,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-the-card-figures",
-   "title": "Isis and the path upwards",
-   "line": "Crowley on the card as Isis the Eternal Virgin and the Artemis of the Greeks (pdf p61) and on the path which leads upwards (pdf p62).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The card represents the most spiritual form of Isis the Eternal Virgin; the Artemis of the Greeks.",
-     "page": 61,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "this is the path which leads upwards;",
+     "quote": "Upon her knees is the bow of Artemis, which is also a musical instrument, for she is huntress, and hunts by enchantment. Now, regard this idea as from behind the Veil of Light, the third Veil of the original Nothing. This light is the menstruum of manifestation, the goddess Nuith, the possibility of Form.",
      "page": 62,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "At the bottom of the card, accordingly, are shown nascent forms, whorls, crystals, seeds, pods, symbolising the beginnings of life. In the midst is the Camel which is mentioned in the chapter quoted above. In this card is the one link between the archetypal and formative worlds.",
+     "page": 62,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is referred to the letter Gimel, which means a Camel. (The symbolism of the Camel is explained later.) The card refers to the Moon.",
+     "page": 61,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "But in the earlier Trumps the concern is with Nature above the Abyss; the High Priestess is the first card which connects the Supernal Triad with the Hexad; and her path, as shown in the diagram, makes a direct connection between the Father in his highest aspect, and the Son in his most perfect manifestation. This path is in exact balance in the middle pillar. There is here, therefore, the purest and most exalted conception of the Moon.",
+     "page": 61,
      "voice": "Crowley"
     }
    ]

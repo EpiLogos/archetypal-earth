@@ -9461,6 +9461,75 @@
      "voice": "Jung"
     }
    ]
+  },
+  {
+   "id": "scorpio-mars-burt",
+   "a": {
+    "type": "family",
+    "id": "scorpio"
+   },
+   "b": {
+    "type": "family",
+    "id": "mars"
+   },
+   "basis": "site",
+   "system": "burt",
+   "voice": "Burt",
+   "note": "Burt names Mars, with Pluto, as the mundane ruler of Scorpio (pdf p295).",
+   "cites": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The mundane rulers of Scorpio are Mars and Pluto.",
+     "page": 295,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "aquarius-saturn-burt",
+   "a": {
+    "type": "family",
+    "id": "aquarius"
+   },
+   "b": {
+    "type": "family",
+    "id": "saturn"
+   },
+   "basis": "site",
+   "system": "burt",
+   "voice": "Burt",
+   "note": "Burt names Saturn as for centuries the only mundane ruler of Aquarius (pdf p450).",
+   "cites": [
+    {
+     "work": "burt-zodiac",
+     "quote": "Saturn, the principle of cosmic order, duty, limitation, Father Time, authority figures, and obedience to the collective’s standards was for centuries the only mundane ruler of the sign Aquarius.",
+     "page": 450,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "pisces-jupiter-burt",
+   "a": {
+    "type": "family",
+    "id": "pisces"
+   },
+   "b": {
+    "type": "family",
+    "id": "jupiter"
+   },
+   "basis": "site",
+   "system": "burt",
+   "voice": "Burt",
+   "note": "Burt names Jupiter as the classical ruler of Pisces before Neptune's discovery (pdf p500).",
+   "cites": [
+    {
+     "work": "burt-zodiac",
+     "quote": "As the classical ruler of Pisces prior to Neptune’s discovery, Jupiter is a spiritual, generous-natured planet.",
+     "page": 500,
+     "voice": "Burt"
+    }
+   ]
   }
  ]
 }

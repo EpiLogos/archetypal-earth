@@ -2,67 +2,54 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-cups",
- "line": "Crowley’s Ten of Cups: Satiety (pdf p181); Mars in Pisces (pdf p209); Malkuth (pdf p181).",
+ "line": "Satiety: every cup has been filled and the pursuit of pleasure crowned with complete success, and that is exactly the trouble. Having got everything you wanted, you find you did not want it after all, and the perfect arrangement begins to tilt and spill. Drawn, the card speaks of fulfilment turning to surfeit, and warns that once the work is done, disturbance is due. Violent Mars breaks into peaceful Pisces here, in Malkuth, the Kingdom, the last sphere of the Tree.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on Mars in Pisces (pdf p209).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Ten of Cups is called Satiety.",
-     "page": 181,
+     "quote": "The work proper to water is complete: and disturbance is due. This comes from the influence of Mars in Pisces. Mars is the gross, violent and disruptive force which inevitably attacks every supposed perfection. His energy displays the greatest possible contrast with that of Pisces, which is both peaceful and spiritualized.",
+     "page": 209,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This comes from the influence of Mars in Pisces.",
+     "quote": "The watery sign has sunk into a stagnant dream, but in it broods and breeds the violent quality of Mars, to putrefy it. As it is written: “Until a dart strike through his liver.” The pursuit of pleasure has been crowned with perfect success; and constantly it is discovered that, having got everything that one wanted, one did not want it after all; now one must pay.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card represents a conflicting element. On the one hand, it receives the influence of the Ten, Malkah the Virgin. The arrangement of the cups is that of the Tree of Life. But, on the other hand, they are themselves unstable. They are tilted; they spill the water from the great Lotus which overhangs the whole system from one into the other.",
      "page": 209,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Tens and Malkuth, and on Malkuth in the world of Assiah (pdf p181).",
+   "id": "number",
+   "title": "The Tens",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Malkuth.",
+     "quote": "These cards are attributed to Malkuth. Here is the end of all energy; it is away from the “formative world” altogether, where things are elastic.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
-     "page": 181,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on Mars in this card (pdf p209).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Mars is the gross, violent and disruptive force which inevitably attacks every supposed perfection.",
-     "page": 209,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "conflicts",
-   "title": "Crowley’s group note on the Tens",
-   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "There is now no planetary attribution to consider.",
+     "quote": "By the mere fact of having devised four elements, the current has derogated from the original perfection. The Tens are a warning; see whither it leads‐to take the first wrong step!",
      "page": 181,
      "voice": "Crowley"
     }

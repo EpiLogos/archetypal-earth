@@ -2,61 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-queen-of-disks",
- "line": "Crowley's Queen of Disks: Hé of the Name (pdf p139); the watery part of Earth and the span from Sagittarius to Capricornus (pdf p167).",
+ "line": "Earth as Mother: quiet, fertile and patient, with immense funds of affection, kindness and greatness of heart, ambitious only in useful directions. Drawn, the card brings nurture, practical good sense and the slow ripening of what has been planted, and warns of dullness and drudgery, a life lived mechanically. The Queen of Disks is the watery part of Earth, ruling from the last decan of Sagittarius through the first two of Capricorn.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Queens (pdf p139) and on the Queen of Disks (pdf p167).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Queens represent the letter Hé of the Name.",
-     "page": 139,
+     "quote": "Persons signified by this card possess the finest of the quieter qualities. They are ambitious, but only in useful directions. They possess immense funds of affection, kindness, and greatness of heart. They are not intellectual, and not particularly intelligent; but instinct and intuition are more than adequate for their needs.",
+     "page": 167,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Queen of Disks represents the watery part of Earth, the function of that element as Mother.",
+     "quote": "If ill dignified, they are dull, servile, foolish; they are drudges rather than workers. Life for them is purely mechanical; and they cannot rise, or even seek to rise, above their appointed lot.",
+     "page": 168,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queen of Disks is throned upon the life of vegetation. She contemplates the background, where a calm river winds through a sandy desert to bring to it fertility. Oases are beginning to shew themselves amid the wastes. Before her stands a goat upon a sphere. There is here a reference to the dogma that the Great Work is fertility.",
+     "page": 167,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "She thus represents the ambition of matter to take part in the great work of Creation.",
      "page": 167,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Sagittarius to the 20th degree of Capricornus (pdf p167); on the decans and the elemental attribution (pdf p139).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "She rules from the 21st degree of Sagittarius to the 20th degree of Capricornus.",
+     "quote": "The Queen of Disks represents the watery part of Earth, the function of that element as Mother. She rules from the 21st degree of Sagittarius to the 20th degree of Capricornus. She represents passivity, usually in its highest aspect.",
      "page": 167,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "quote": "The Queens represent the letter Hé of the Name. They are the complements of the Knights. They receive, ferment, and transmit the original Energy of their Knight. Quick to receive that Energy, they are also fitted to endure for the period of their function; but they are not the final product. They represent the second stage in the process of creation whose fourth and last state is material realization.",
      "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Queen of Disks (pdf p167).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "She represents passivity, usually in its highest aspect.",
-     "page": 167,
      "voice": "Crowley"
     }
    ]

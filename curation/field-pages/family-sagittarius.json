@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "sagittarius",
- "line": "Burt, Archetypes of the Zodiac, chapter on Sagittarius (pdf pp. 339–378); Jung on the archer (Dream Analysis seminar).",
+ "line": "Sagittarius is Mutable Fire, and its search is for wisdom: the archer aims at Truth, the highest target, and fires up others with vision, optimism and enthusiasm. Its gift is the spark of Zeus, honest speech and generous teaching; its shadow is scattered energy, broken promises, arrogance, and the blame it shoots outward rather than healing its own wound. Jupiter, the great benefic, is its mundane ruler; Earth, which grounds it in practical common sense, is its esoteric ruler.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Sagittarius (pdf pp. 339–378): pdf p339 and p342.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or “fire up” others.",
+     "quote": "Now, in Sagittarius, we bask once more in the sunlight of a solar Fire sign and again experience conscious, extroverted energy. Traditionally astrologers have associated Sagittarius with Spirit, expansion of awareness, aspiring to greatness, and the ability to motivate, inspire, or “fire up” others.",
      "page": 339,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Now, in Sagittarius, we bask once more in the sunlight of a solar Fire sign and again experience conscious, extroverted energy.",
-     "page": 339,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "It is both mental and active, just as Sagittarius is Mutable and fiery.",
+     "quote": "Archery is thus both a spiritual science and an art form. It is both mental and active, just as Sagittarius is Mutable and fiery. The Master says that the archer’s goal must be seen as distant or far off.",
      "page": 342,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Zeus, or Jupiter, as the Romans called him, the ruler of Sagittarius.",
-     "page": 339,
+     "quote": "What is the highest target at which s/he could aim? The answer, I believe, is Truth. This is what Zeus, in his highest manifestation, meant to the Greeks, and this is what is implied in the Sagittarian search for honesty, sincerity, integrity and just judgment.",
+     "page": 349,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Zeus and Theos (God) are one and the same. From the word Theos we derive the word enthusiasm. In every Sagittarian client—even those who seem to burn like forest fires out of control—there is this pure spark of Zeus’ enthusiasm.",
+     "page": 350,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Sagittarius (pdf pp. 339–378): pdf p345, p346 and p361.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "The story of Hercules and his beloved friend and teacher adds another dimension to our understanding of Sagittarius—the generosity of the Sage.",
-     "page": 345,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Chiron, the Immortal, could not stop his own wound from aching",
+     "quote": "Chiron clearly represented the mind in control of the instincts, or riding of the horse. A kindly and educated Centaur, he apparently had aimed higher in life than the others. Yet, in his encounter with Hercules, even Chiron was vulnerable in the horse part of his body—his leg.",
      "page": 346,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Though Mutable, Sagittarius is a Fire sign and does have a temper.",
-     "page": 361,
+     "quote": "When it comes to other people, the wounded Chiron can be a most effective, insightful counselor, for Apollo did give him the gift of prophecy. But when it comes to his own wound, the wise Sagittarian who serves others well prefers to avoid facing the issue as long as possible. Fire signs are very adept at projecting blame—the arrow, after all, is a projectile.",
+     "page": 348,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Perhaps this is why Alice Bailey in Esoteric Astrology has Earth as the esoteric ruler of Sagittarius. The wisest Sagittarians I have met, those who are spiritual as well as spirited, and the happiest too, manifest in their everyday lives a practical, common-sense wisdom. Earth represents structure, organizing ability, commitment and responsibility.",
+     "page": 345,
      "voice": "Burt"
     }
    ]
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the archer and the centaur: Dream Analysis seminar, pdf p435.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",

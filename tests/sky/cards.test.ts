@@ -2,6 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { cardTies, decanOf, restAngle, ringsFor, type SkyCardsData } from '../../src/sky/cards';
+import { buildModel, skyCardHome, skyHome } from '../../src/data/model';
+import { TREE_NODES } from '../../src/lenses/tree';
+import { astrologyLive, focusOn, WORLD } from '../../src/state/store';
+import { hashToState, stateToHash, type Resolver } from '../../src/state/router';
 
 const ROOT = path.resolve(__dirname, '../..');
 const read = (f: string) => JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'));
@@ -69,13 +73,13 @@ describe('the card rings’ data', () => {
     expect(r.decan.map((c) => c.id)).toEqual(['thoth-two-of-wands', 'thoth-nine-of-swords', 'thoth-seven-of-wands', 'thoth-five-of-cups', 'thoth-three-of-disks', 'thoth-ten-of-cups']);
   });
 
-  it('spreads the rank ring evenly from its start, the planet’s own Atu first and then the four of its number', () => {
+  it('spreads the rank ring evenly from its start: the planet’s own Atu, those of the signs it rules, their court cards, the four of its number', () => {
     const r = ringsFor(data, 'mars')!;
-    expect(r.rank.map((c) => c.id)).toEqual(['thoth-tower', 'thoth-emperor', 'thoth-five-of-wands', 'thoth-five-of-cups', 'thoth-five-of-swords', 'thoth-five-of-disks']);
+    expect(r.rank.map((c) => c.id)).toEqual(['thoth-tower', 'thoth-death', 'thoth-emperor', 'thoth-queen-of-wands', 'thoth-prince-of-cups', 'thoth-five-of-wands', 'thoth-five-of-cups', 'thoth-five-of-swords', 'thoth-five-of-disks']);
     const step = 360 / r.rank.length;
     const start = r.rank[0].lon;
     r.rank.forEach((c, i) => expect(c.lon).toBeCloseTo((start + i * step) % 360, 6));
-    // …turned to stand as far as it can from the decan cards (six and six cannot do better than 5° apart)
+    // …turned to stand as far as it can from the decan cards (nine and six cannot do better than 5° apart)
     const near = (a: number, b: number) => Math.abs((((a - b) % 360) + 540) % 360 - 180);
     for (const c of r.rank) for (const d of r.decan) expect(near(c.lon, d.lon)).toBeGreaterThanOrEqual(5 - 1e-9);
     // a sign’s Atu a planet rules is tinted by its sign, not by where the spread put it
@@ -106,5 +110,73 @@ describe('the card rings’ data', () => {
     expect(ties.find((t) => t.body === 'jupiter' && t.id === 'thoth-four-of-cups')).toBeTruthy();
     expect(ties.find((t) => t.body === 'terra' && t.id === 'fire')).toBeTruthy();
     expect(ties.every((t) => t.basis === 'site')).toBe(true);
+  });
+});
+
+// Owner, 3 Nov 2026: "geburah goes to earth instead of the planetary locale (mars) its genuinely related to … tarot cards keep you
+// out at the planet, need to make these interplanetary shifts more accurate for the sephira too".
+describe('a sephira is read at the planet that holds its number', () => {
+  const model = buildModel(field);
+  const r: Resolver = {
+    hasArchetype: (id) => model.archById.has(id), hasTheoretic: (id) => model.theoById.has(id), hasFamily: (id) => model.famById.has(id),
+    hasCulture: () => false, hasPlace: (id) => model.places.has(id), hasBody: (k) => k in data.bodies,
+    familyOf: (id) => { const i = model.occIndex.get(id); return i === undefined ? undefined : model.occ[i].familyId; },
+  };
+
+  it('stands each sephira on the body Crowley’s list gives its number, Geburah on Mars and Malkuth on the Earth', () => {
+    expect(data.tree).toEqual(TREE_NODES.map((n) => n.id));
+    const held = Object.entries(data.bodies).filter(([, b]) => b?.sephira).map(([k, b]) => [b!.sephira!, k]);
+    expect(held).toHaveLength(10);
+    for (const [sephira, key] of held) expect(skyHome(model, sephira), sephira).toBe(key);
+    expect(skyHome(model, 'geburah')).toBe('mars');
+    expect(skyHome(model, 'malkuth')).toBe('terra');
+  });
+
+  it('leaves the cards to their own rule and every other node on the Earth', () => {
+    for (const id of ['thoth-five-of-swords', 'thoth-tower', 'thoth-ace-of-wands']) expect(skyHome(model, id)).toBe(skyCardHome(model, id));
+    for (const id of ['aries', 'mars', 'tree', 'fire']) expect(skyHome(model, id), id).toBeUndefined();
+  });
+
+  it('is addressed at its planet, #/sky/<body>/sephira/<id>, and the address reads back', () => {
+    const at = astrologyLive({ body: 'mars', card: 'geburah' });
+    expect(stateToHash(at)).toBe('#/sky/mars/sephira/geburah');
+    expect(hashToState('#/sky/mars/sephira/geburah', r).state).toEqual(at);
+    // a card keeps its own word; a sephira is not a card and a card is not a sephira
+    expect(stateToHash(astrologyLive({ body: 'venus', card: 'thoth-five-of-swords' }))).toBe('#/sky/venus/card/thoth-five-of-swords');
+    expect(hashToState('#/sky/mars/card/geburah', r).state).toEqual(astrologyLive({ body: 'mars' }));
+    expect(hashToState('#/sky/mars/sephira/thoth-five-of-swords', r).state).toEqual(astrologyLive({ body: 'mars' }));
+    // the Field's address for it is still a focus; the controller hands it to the planet (skyHome)
+    expect(hashToState('#/f/geburah', r).state).toEqual(focusOn(WORLD, { type: 'family', id: 'geburah' }));
+  });
+});
+
+// Owner, 4 Nov 2026: "theres one deck, it has a set number of cards, why are there issues there?"
+describe('the whole deck stands in the sky', () => {
+  it('puts all 78 cards on a planet’s rings: 22 Atu, 40 numbered cards, 16 court cards', () => {
+    const kinds = Object.values(data.cards).reduce<Record<string, number>>((n, c) => ({ ...n, [c.kind]: (n[c.kind] ?? 0) + 1 }), {});
+    expect(kinds).toEqual({ major: 22, pip: 40, court: 16 });
+  });
+
+  it('stands a sign’s Atu and its court card at the sign’s ruler, as Burt names it', () => {
+    const at = (key: keyof typeof data.bodies) => data.bodies[key]!;
+    expect(at('jupiter').majors.filter((m) => m.via === 'ruler').map((m) => [m.card, m.sign])).toEqual([['thoth-art', 8], ['thoth-moon', 11]]);
+    expect(at('saturn').majors.filter((m) => m.via === 'ruler').map((m) => m.card)).toEqual(['thoth-devil', 'thoth-star']);
+    // the Queen of Cups runs from Gemini 21° to Cancer 20°: two of her three decans are Cancer's, and the Moon rules Cancer
+    expect(at('moon').courts).toEqual([expect.objectContaining({ card: 'thoth-queen-of-cups', court: 'queen', sign: 3, from: 80 })]);
+    expect(data.cards['thoth-queen-of-cups']).toEqual(expect.objectContaining({ kind: 'court', court: 'queen', suit: 'cups', sign: 3, from: 80 }));
+  });
+
+  it('stands the Princesses at the Earth with the four elements, the Aces at Pluto with the number one', () => {
+    expect(data.bodies.terra!.courts.map((c) => c.card)).toEqual(['thoth-princess-of-wands', 'thoth-princess-of-cups', 'thoth-princess-of-swords', 'thoth-princess-of-disks']);
+    expect(data.bodies.pluto!.ranks.map((r) => r.card)).toEqual(['thoth-ace-of-wands', 'thoth-ace-of-cups', 'thoth-ace-of-swords', 'thoth-ace-of-disks']);
+  });
+
+  it('reads every card at its planet, an Ace or a Princess Crowley also gives a quarter of the Earth included', () => {
+    const model = buildModel(field);
+    const homeless = Object.keys(data.cards).filter((id) => !skyCardHome(model, id));
+    expect(homeless).toEqual([]);
+    expect(skyCardHome(model, 'thoth-ace-of-wands')).toBe('pluto');
+    expect(skyCardHome(model, 'thoth-princess-of-cups')).toBe('terra');
+    expect(skyCardHome(model, 'thoth-knight-of-swords')).toBe('mercury');
   });
 });

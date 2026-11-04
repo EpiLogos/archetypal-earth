@@ -2,42 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-moon",
- "line": "Crowley on Atu XVIII: the letter Qoph, Pisces, the Moon as the most universal of the Planets, and Netzach and Malkuth (pdf p103, p104).",
+ "line": "The Moon is the dark threshold before dawn: illusion, deception, fear and bewilderment, the poisoned night through which new light must be born. Drawn, it means crisis, error and confusion, even madness, the darkest hour before the dawn and the brink of an important change. It takes unconquerable courage to walk this path, and the right answer to its horrors is: how splendid is the adventure. It is the path of Qoph, the back of the head, and of Pisces, the last sign of winter.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter, sign and planet",
-   "line": "Crowley on the letter Qoph and Pisces, and on the Moon as the most universal of the Planets (pdf p103).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Eighteenth Trump is attributed to the letter Qoph, which represents Pisces in the Zodiac.",
-     "page": 103,
+     "quote": "This is the waning moon, the moon of witchcraft and abominable deeds. She is the poisoned darkness which is the condition of the rebirth of light. This path is guarded by Tabu. She is uncleanliness and sorcery.",
+     "page": 104,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Moon, partaking as she does of the highest and the lowest, and filling all the space between, is the most universal of the Planets.",
-     "page": 103,
+     "quote": "Illusion, deception, bewilderment, hysteria, even madness, dreaminess, falsehood, error, crisis, “the darkest hour before the dawn”, the brink of important change.",
+     "page": 253,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "But the best men, the true men, do not consider the matter in such terms at all. Whatever horrors may afflict the soul, whatever abominations may excite the loathing of the heart, whatever terrors may assail the mind, the answer is the same at every stage: “How splendid is the Adventure!”",
+     "page": 104,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "Netzach and Malkuth",
-   "line": "Crowley on the Moon in her lowest avatar joining Netzach with Malkuth (pdf p103) and on the threshold of life and the threshold of death (pdf p104).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "In this Trump, her lowest avatar, she joins the earthy sphere of Netzach with Malkuth,",
+     "quote": "It is this Beetle that bears the Sun in his Silence through the darkness of Night and the bitterness of Winter. Above the surface of the water is a sinister and forbidding landscape. We see a path or stream, serum tinged with blood, which flows from a gap between two barren mountains; nine drops of impure blood, drop‐shaped like Yods, fall upon it from the Moon.",
      "page": 103,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This is the threshold of life; this is the threshold of death.",
+     "quote": "It is Anubis, the watcher in the twilight, the god that stands upon the threshold, the jackal god of Khem, who stands in double form between the Ways. At his feet, on watch, wait the jackals themselves, to devour the carcasses of those who have not seen Him, or who have not known His Name.",
      "page": 104,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eighteenth Trump is attributed to the letter Qoph, which represents Pisces in the Zodiac. It is called the Moon. Pisces is the last of the Signs; it represents the last stage of winter. It might be called the Gateway of Resurrection (the letter Qoph means the back of the head, and is connected with the potencies of the cerebellum).",
+     "page": 103,
      "voice": "Crowley"
     }
    ]

@@ -2,72 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "cancer",
- "line": "Burt, Archetypes of the Zodiac, chapter on Cancer (pdf pp. 135–174); Jung on the crab (Dream Analysis seminar; CW14).",
+ "line": "Cancer is Cardinal Water, the Cosmic Womb: the search for the Mother Goddess, the nurturing power that gives form to life and brings creativity to birth. Its gift is feeling, intuition, protection and a home others come back to; its shadow is the clinging crab and the devouring mother who will not let her children go. The Moon rules it in the world; Neptune, its esoteric ruler, dissolves outworn forms, and Capricorn across the wheel lends it structure.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Cancer (pdf pp. 135–174): pdf p135, p149 and p144.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Cancer, the Cosmic Womb, is also the first Water sign.",
+     "quote": "Cancer, the Cosmic Womb, is also the first Water sign. The connection between Cancer and water is really important. As the physical birth process involves the breaking of waters, so also does the process of Cancer involve creativity.",
      "page": 135,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity.",
+     "quote": "To review the symbolism, we have the seeds (Cancer’s glyph), the womb, Shakti (or power over life and death), and the Moon, the giver of form, as mundane ruler. The Moon represents feelings and emotions. She is an instinctual, intuitive, nurturing planet, but also a planet that fosters emotional attachment to the form she provides.",
+     "page": 137,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Within the Great Mother archetype are two distinct personalities—the Gentle Mother like Kwan Yin the Merciful and Compassionate of Chinese Mythology, and the Terrible Mother, like India’s Kali Ma and the Greek Medusa.",
+     "page": 137,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "The archetype of Cancer is the Cosmic Womb in which the seeds of creativity grow and burst forth in diverse ways—biological, artistic or intuitive creativity, imaginative creativity, even business creativity. There is also, at the esoteric level, mystical creativity—giving birth to the Divine Child within.",
      "page": 135,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Cancer is a cardinal sign and for many a Cancer, business is the strongest creative outlet in the horoscope.",
-     "page": 149,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "In the shell-home, Cancer is safe and protected and has everything comfortably arranged.",
-     "page": 144,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Cancer (pdf pp. 135–174): pdf p135, p153, p136 and p15.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "The Magna Mater is the most ancient personal manifestation of divinity found around the world.",
-     "page": 135,
+     "quote": "The Greek goddess that I perceive as closest to the archetype of the Great Mother is Demeter, Goddess of the Grain Harvest. When Persephone, her daughter, was abducted by Hades and taken to the underworld, Demeter sat and pined away by her sacred well in Eleusis till the Earth itself suffered; the crops failed.",
+     "page": 143,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Cancer is attached to the past—tradition, home and hearth.",
-     "page": 153,
+     "quote": "While reading Bolen on Demeter’s withdrawal, an image came to my mind of the Cancer crab pulling its head back into its shell-home and refusing to come out till the world cooperated again. In the shell-home, Cancer is safe and protected and has everything comfortably arranged. Cancer is in control at home, too.",
+     "page": 144,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The Mother Goddess opposes Old Man Winter.",
-     "page": 136,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "the Cancer archetype or Jung’s Magna Mater, for instance",
-     "page": 15,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "The Moon, Cancer’s ruler, has been called in both India and the West (in Plato’s writings, particularly) the Giver of Form.",
-     "page": 136,
+     "quote": "Neptune is the planet of faith, and faith is needed to let go of the past and open up to the future, rather than attempt to hang on to outworn forms with crab-like tenacity. For those who can willingly sacrifice the old way, the old role, the old career, the old attachments, to Neptune; for those who dare to create, to use their imagination, to trust their intuition, Neptune is a liberator.",
+     "page": 162,
      "voice": "Burt"
     }
    ]
@@ -75,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the crab, and on the four seasons of the sun in the Zodiac: Dream Analysis seminar, pdf p434; CW14 ¶5.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",
@@ -85,7 +73,7 @@
     },
     {
      "work": "cw14",
-     "quote": "The goddesses represent the four seasons of the sun in the circle of the Zodiac (Aries, Cancer, Libra, Capricorn)",
+     "quote": "The goddesses represent the four seasons of the sun in the circle of the Zodiac (Aries, Cancer, Libra, Capricorn) and at the same time the four degrees of heating,22 as well as the four elements “combined” around the circular table.23 The synthesis of the elements is effected by means of the circular movement in time (circulatio, rota) of the sun through the houses of the Zodiac.",
      "para": 5,
      "voice": "Jung"
     }

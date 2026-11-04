@@ -2,67 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-swords",
- "line": "Crowley’s Ace of Swords: the Root of the Powers of Air (pdf p210); Kether (pdf p175, p211).",
+ "line": "The first clean stroke of the mind: clarity, intellect and the power to cut through confusion. Drawn, the card brings a breakthrough in understanding, a decisive idea or a truth that clears the air, though air has no impulse of its own and strikes only once it is set in motion. It is the root of the powers of Air, the sword of the Magus, the Crown’s seed in the suit of Swords.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the chapter heading (pdf p210); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "THE ROOT OF THE POWERS OF AIR",
+     "quote": "The Ace of Swords is the primordial Energy of Air, the Essence of the Vau of Tetragrammaton, the integration of the Ruach. Air is the result of the conjunction of Fire and Water; thus it lacks the purity of its superiors in the male hierarchy, Fire, Sol and the Phallus. But for this same reason it is the first card directly to be apprehended by the normal consciousness of Mankind.",
      "page": 210,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
+     "quote": "In nature, the obvious symbol of Air is the Wind “which bloweth whithersoever it listeth”. It lacks the concentrated Will of Fire to unite with Water: it has no corresponding passion for its Twin Element, Earth. There is indeed, a notable passivity in its nature; evidently, it has no self‐generated impulse. But, set in motion by its Father and Mother, its power is manifestly terrific. It visibly attacks its objective, as they, being of subtler and more tenuous character, can never do.",
+     "page": 210,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on Kether (pdf p211); on Spirit and Kether (pdf p175).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Finally, from Kether, the supreme, descends directly",
+     "quote": "The card represents the Sword of the Magus (see Book 4, Part II) crowned with the twenty‐two rayed diadem of pure Light. The number refers to the Atu; also 22=2x11, the Magical manifestation of Chokmah, Wisdom, the Logos. Upon the blade, accordingly, is inscribed the Word of the Law, Θελημα. This Word sends forth a blaze of Light, dispersing the dark clouds of the Mind.",
      "page": 211,
      "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "On the other hand, Spirit represents Kether.",
-     "page": 175,
-     "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the Ace of Swords as the primordial Energy of Air, and on Air and the Wind (pdf p210).",
+   "id": "element",
+   "title": "The root of the element",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Ace of Swords is the primordial Energy of Air, the Essence of the Vau of Tetragrammaton",
-     "page": 210,
+     "quote": "The Aces represent the roots of the four elements. They are quite above, and distinct from, the other small cards in the same way as Kether is said to be symbolized only by the topmost point of the Yod of Tetragrammaton. In these cards is no real manifestation of the element in its material form.",
+     "page": 175,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Air is the result of the conjunction of Fire and Water",
-     "page": 210,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "In nature, the obvious symbol of Air is the Wind",
-     "page": 210,
+     "quote": "The point to remember is that, both in their appearance and in their meaning, the Aces are not the elements themselves, but the seeds of those elements.",
+     "page": 175,
      "voice": "Crowley"
     }
    ]

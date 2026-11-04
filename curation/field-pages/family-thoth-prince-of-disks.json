@@ -2,61 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-prince-of-disks",
- "line": "Crowley's Prince of Disks: Vau of the Name (pdf p139); the airy part of Earth and the span from Aries to Taurus (pdf p169).",
+ "line": "Earth made intelligible: great energy brought to bear on the most solid practical matters, a capable manager and a steady, persevering worker. Drawn, the card brings patient building, careful planning and slow but sure progress, and warns of dullness, a lack of feeling and a slow anger that becomes implacable once roused. The Prince of Disks is the airy part of Earth, ruling from the last decan of Aries through the first two of Taurus.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princes (pdf p139) and on the Prince of Disks (pdf p169).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The Princes represent the Forces of the letter Vau in the Name.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The Prince of Disks represents the airy part of Earth, indicating the florescence and fructification of that element.",
-     "page": 169,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Aries to the 20th degree of Taurus (pdf p169); on the decans and the elemental attribution (pdf p139).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "He rules from the 21st degree of Aries to the 20th degree of Taurus.",
-     "page": 169,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Prince of Disks (pdf p169).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
      "quote": "The character denoted by this card is that of great energy brought to bear upon the most solid of practical matters.",
      "page": 169,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "He may often appear stupid, and is inclined to be resentful of more spiritual types. He is slow to anger, but, if driven, becomes implacable. It is not very practicable to distinguish between the good and evil dignities in this card; one can merely say that, in case of his being ill‐dignified, both the quality and quantity of his characteristics are somewhat degraded.",
+     "page": 170,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In the Yî King, the airy part of Earth is represented by the 53rd hexagram, Kien. The commentary concerns the flight of wild geese, “gradually approaching the shore”, then “the large rocks”, then “advanced to the dry plains—the trees—the high mound”; finally, to “the large heights”. It thus symbolizes slow, steady emancipation from repressive conditions.",
+     "page": 170,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Clothed in light armour, his helmet is crowned with the head of a bull; and his chariot is drawn by an ox, this animal being peculiarly sacred to the Element of Earth. In his left hand he holds his disk, which is an orb resembling a globe, marked with mathematical symbols as if to imply the planning involved in agriculture. In his right hand he bears an orbed sceptre surmounted by a cross, a symbol of the Great Work accomplished; for it is his function to bring forth from the material of the element that vegetation which is the sustenance of the Spirit itself.",
+     "page": 169,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Prince of Disks represents the airy part of Earth, indicating the florescence and fructification of that element. He rules from the 21st degree of Aries to the 20th degree of Taurus. The figure of this Prince is meditative. He is the element of Earth become intelligible.",
+     "page": 169,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princes represent the Forces of the letter Vau in the Name. The Prince is the Son of the Queen (the old King’s daughter) by the Knight who has won her; he is therefore represented as in a chariot, going forth to carry out the combined Energy of his parents. He is the active issue of their union, and its manifestation. He is the intellectual image of their union. His action is consequently more enduring than that of his forbears.",
+     "page": 139,
      "voice": "Crowley"
     }
    ]

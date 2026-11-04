@@ -2,49 +2,49 @@
  "version": 1,
  "type": "family",
  "id": "thoth-nine-of-disks",
- "line": "Crowley’s Nine of Disks: Gain (pdf p181); Venus in Virgo (pdf p236); Yesod (pdf p180).",
+ "line": "Gain: good luck and good management together, and the harvest brought in. Material affairs prosper, favour and popularity come, and the card sits back content, counting its winnings without asking what they are worth. Drawn, it promises profit, comfort and well-earned ease, with a warning that satisfaction can settle into smugness. Yesod, the foundation, restores the balance of force in fulfilment, under Venus in Virgo, grace in the sign of the harvest.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on Venus in Virgo (pdf p236).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Nine of Disks is called Gain.",
-     "page": 181,
+     "quote": "The number Nine, Yesod, inevitably brings back the balance of Force in fulfilment. The card is ruled by Venus in Virgo. It shows good luck attending material affairs, favour and popularity.",
+     "page": 236,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card is ruled by Venus in Virgo.",
+     "quote": "The Nine of Disks is called Gain. The suit of Disks is much too dull to care; it reckons up its winnings; it does not worry its head about whether anything is won when all is won. This card is ruled by Venus. It purrs with satisfaction at having harvested what it sowed; it rubs its hands and sits at ease.",
+     "page": 181,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The disks are arranged as an equilateral triangle of three, apex upwards, close together; and, surrounded at some distance by a ring, six larger disks in the form of a hexagon. This signifies the multiplication of the original established Word‐by the mingling of “good luck and good management”. The three central disks are of the magical pattern as in earlier cards; but the others, since the descent into matter implies the gradual exhaustion of the original whirling energy, now take on the form of coins.",
      "page": 236,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Nines and Yesod (pdf p180).",
+   "id": "number",
+   "title": "The Nines",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Yesod.",
+     "quote": "These cards are attributed to Yesod. After the double excursion into misfortune, the current returns to the middle pillar. This Sephira is the seat of the great crystallization of Energy.",
      "page": 180,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on good luck in material affairs, favour and popularity (pdf p236).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "It shows good luck attending material affairs, favour and popularity.",
-     "page": 236,
      "voice": "Crowley"
     }
    ]

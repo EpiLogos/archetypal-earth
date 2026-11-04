@@ -4,6 +4,7 @@ import { ASTROLOGY_LIVE, astrologyAt, astrologyLive, inSky, PANEL_LENSES, WORLD,
 import { filterQuery, parseFilter, type FieldFilter } from '../shell/filter';
 import { NUMBER_ARCHETYPES } from '../lenses/deep-fields';
 import { canonicalBodyKey } from '../types/sky';
+import { TREE_NODES } from '../lenses/tree';
 
 export interface Resolver {
   hasArchetype(id: string): boolean;
@@ -65,7 +66,8 @@ export function defaultReadingId(readings: readonly { id: string }[]): string | 
 
 export function stateToHash(s: AppState): string {
   if (s.lens?.id === 'astrology' && s.lens.path[0] === ASTROLOGY_LIVE) {
-    const card = s.sky?.body && s.lens.path[2] ? `/card/${enc(s.lens.path[2])}` : '';
+    const id = s.lens.path[2];
+    const card = s.sky?.body && id ? `/${TREE_NODES.some((n) => n.id === id) ? 'sephira' : 'card'}/${enc(id)}` : '';
     return `#/sky${s.sky?.body ? `/${enc(s.sky.body)}` : ''}${card}${s.sky?.culture ? `/c/${enc(s.sky.culture)}` : ''}`;
   }
   if (s.lens) return `#/${s.lens.id}${s.lens.path.map((p) => `/${enc(p)}`).join('')}`;
@@ -140,9 +142,10 @@ function routeToState(hash: string, r: Resolver): Omit<Parsed, 'filter'> {
     }
     const skyBody = rest[0] ? canonicalBodyKey(rest[0]) : undefined;
     if (skyBody && r.hasBody?.(skyBody)) { sky.body = skyBody as NonNullable<AppState['sky']>['body']; rest = rest.slice(1); }
-    // a tarot card open on the body's ring: a card of the deck the field holds, else the planet alone
+    // a tarot card open on the body's ring, or a sephira at the planet that holds its number: one the field holds, else the planet alone
     let card: string | undefined;
     if (sky.body && rest[0] === 'card' && rest[1]) { if (rest[1].startsWith('thoth-') && r.hasFamily(rest[1])) card = rest[1]; rest = rest.slice(2); }
+    else if (sky.body && rest[0] === 'sephira' && rest[1]) { if (TREE_NODES.some((n) => n.id === rest[1]) && r.hasFamily(rest[1])) card = rest[1]; rest = rest.slice(2); }
     if (rest[0] === 'c' && rest[1] && r.hasCulture(rest[1])) sky.culture = rest[1];
     // a sky link is the live sky in Astrology, never a bare sky
     if (card) return { state: astrologyLive({ body: sky.body, culture: sky.culture, card }) };

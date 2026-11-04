@@ -2,66 +2,54 @@
  "version": 1,
  "type": "family",
  "id": "leo",
- "line": "Burt, Archetypes of the Zodiac, chapter on Leo (pdf pp. 175–210); Jung on the lion (CW5; Dream Analysis seminar).",
+ "line": "Leo is Fixed Fire, the sign of the Sun at midsummer: warm, steady and dramatic. It searches for being and wholeness, to become fully itself on the way to the Self. Its gift is heart: courage, constancy, generosity and creative joy; its shadow is pride and hybris, a shadow it cannot see at noon until the world thwarts its will. The Sun rules Leo on both levels, as the will to shine and, esoterically, as illumination.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Leo (pdf pp. 175–210): pdf p175 and p178.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "In Leo, we arrive at the solar, or Masculine principle—the confident energy of the Sun.",
-     "page": 175,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Gone are the subtleties of Cancer; we are now directly experiencing the golden rays of the Sun.",
-     "page": 175,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "There is a constancy to the Leo archetype which seems to be derived from the orbit of Sol himself.",
-     "page": 175,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "the two levels at which the sun operates in ruling Leo—as mundane and as esoteric ruler.",
-     "page": 178,
-     "voice": "Burt"
-    }
-   ]
-  },
-  {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Leo (pdf pp. 175–210): pdf p186, p183, p191 and p184.",
-   "quotes": [
-    {
-     "work": "burt-zodiac",
-     "quote": "Myths for Leo are Solar in nature, involve the color gold, the kingship, and the conquest or re-conquest of the throne.",
-     "page": 186,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "The lion ritual symbolized bringing under control the inner lion of strong emotional reactions,",
+     "quote": "For Leo, who proceeds from the heart (that’s Leo in medical astrology), the issue is self-control—self-mastery is the road to success and fulfillment. For some Leos, the quest is entirely mundane, of course. Like Taurus, they exercise willpower and perseverance, but these Fixed qualities are combined with fiery energy.",
      "page": 183,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "So often the outer world acts to confront Leo with his Shadow, forcing him or her to face the dark side and integrate its positive aspects.",
+     "quote": "In Leo, we arrive at the solar, or Masculine principle—the confident energy of the Sun. Gone are the subtleties of Cancer; we are now directly experiencing the golden rays of the Sun. There is a constancy to the Leo archetype which seems to be derived from the orbit of Sol himself.",
+     "page": 175,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "In Labours of Hercules, Alice Bailey also tells us that Hercules fought the Nemean Lion barehanded in his Leo Quest. The lion ritual symbolized bringing under control the inner lion of strong emotional reactions, just as the Cretan bull initiation symbolized bringing the physical instincts under control.",
+     "page": 183,
+     "voice": "Burt"
+    }
+   ]
+  },
+  {
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
+   "quotes": [
+    {
+     "work": "burt-zodiac",
+     "quote": "The Prahlad story is important because it illustrates more clearly than many other Solar myths the lack of support from the father, seemingly a part of Leo’s karma. This lack of parental support frequently is an issue to be resolved on the emotional level during the individuation process—the process of becoming a spiritual adult.",
+     "page": 186,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "But this midsummer sign tends to remain unaware of its own shadow for long stretches of time, till, thwarted as Job was by the outer world, Leo relaxes its conscious control and begins to listen to the Self. Wilfullness changes to willingness and leadership to cooperation. How hard it is to see the shadow at noon on a midsummer day, with the Sun directly overhead.",
      "page": 191,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The constancy or loyalty of the Fixed sign is also characteristic of the astrological lion, who is no philanderer.",
-     "page": 184,
+     "quote": "Those of us who follow the path to wholeness, or to the Self, or to the Divine in an active, conscious, fearless but constant way are a lot like the archetypal Leo. We need to guard against hybris, to keep our compassion in victory and our cheerfulness when emotionally wounded.",
+     "page": 190,
      "voice": "Burt"
     }
    ]
@@ -69,17 +57,17 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the lion: CW5 ¶176; Dream Analysis seminar, pdf p434.",
+   "line": "",
    "quotes": [
     {
      "work": "cw05",
-     "quote": "The sun is not only beneficial, but also destructive; hence the zodiacal sign for August heat is the ravaging lion",
+     "quote": "The sun is not only beneficial, but also destructive; hence the zodiacal sign for August heat is the ravaging lion which Samson1 slew in order to rid the parched earth of its torment.",
      "para": 176,
      "voice": "Jung"
     },
     {
      "work": "sem-dream-analysis",
-     "quote": "The lion does not look like a lion, but man called it that because the sun was really at its culmination",
+     "quote": "The lion does not look like a lion, but man called it that because the sun was really at its culmination in that devastating time of the year when the heat is insupportable and everything is dried up and burnt. It is like a destroying power, so they said the sun was raging like a mad lion.",
      "page": 434,
      "voice": "Jung (seminar)"
     }

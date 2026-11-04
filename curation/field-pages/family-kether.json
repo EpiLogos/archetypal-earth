@@ -2,44 +2,31 @@
  "version": 1,
  "type": "family",
  "id": "kether",
- "line": "Crowley on Kether (The Book of Thoth); Jung on Kether in CW14 ¶18.",
+ "line": "The Crown: the first point of being, the number One drawn out of nothing, so concealed at the top of the Tree of Life that nothing can be known of it. Its number appears in each suit only as the Ace, the root and seed of Fire, Water, Air or Earth before any of them is manifest. Among the ten bodies of the solar system on the Tree, it is the primum mobile, represented by Pluto.",
  "sections": [
   {
-   "id": "crowley-number-one",
-   "title": "Crowley's number 1",
-   "line": "Crowley on Kether: The Book of Thoth, pdf p33, p175, p110 and p211.",
+   "id": "crowley",
+   "title": "Crowley on Kether",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This gives the number 1, which is called Kether, the",
+     "quote": "One may now proceed to imagine any point in this “light”, to select it for observation; the fact of doing so makes it Positive. This gives the number 1, which is called Kether, the Crown.",
      "page": 33,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "concealed, so that nobody knows anything about it at all.",
+     "quote": "The first is Kether, the pure Being invented as an aspect of pure Nothing. In his manifestation, he is not One, but Two; he is only One because he is 0. He exists; Eheieh, his divine name, which signifies “I Am” or “I shall Be”, is merely another way of saying that he Is Not; because One leads to nowhere, which is where it came from.",
+     "page": 51,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Aces represent the roots of the four elements. They are quite above, and distinct from, the other small cards in the same way as Kether is said to be symbolized only by the topmost point of the Yod of Tetragrammaton.",
      "page": 175,
      "voice": "Crowley"
     },
-    {
-     "work": "book-of-thoth",
-     "quote": "topmost point of the Yod of Tetragrammaton.",
-     "page": 110,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Finally, from Kether, the supreme, descends directly",
-     "page": 211,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "the-list-without-its-name",
-   "title": "The primum mobile in Crowley's list",
-   "line": "Crowley's list of the Universe, its first item: The Book of Thoth, pdf p111.",
-   "quotes": [
     {
      "work": "book-of-thoth",
      "quote": "The primum mobile, represented by Pluto.",
@@ -50,39 +37,14 @@
   },
   {
    "id": "jung-root-and-head",
-   "title": "Jung's root and head",
-   "line": "Jung on Kether as the root of the Tree of the Sefiroth and the head of the Original Man: CW14 ¶18.",
+   "title": "Jung's root of the Tree",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth",
+     "quote": "Kether, the Crown, corresponds to the upward-growing root of the Tree of the Sefiroth.",
      "para": 18,
      "voice": "Jung"
-    },
-    {
-     "work": "cw14",
-     "quote": "signifies the genital region of the Original Man, whose head is Kether",
-     "para": 18,
-     "voice": "Jung"
-    }
-   ]
-  },
-  {
-   "id": "above-the-abyss",
-   "title": "The Supernals",
-   "line": "Crowley on the Supernals beyond the Abyss, and the Supernal Triad: The Book of Thoth, pdf p133 and p61.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "And this is the great Mystery of the Supernals that are beyond the Abyss.",
-     "page": 133,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the High Priestess is the first card which connects the Supernal Triad with the Hexad;",
-     "page": 61,
-     "voice": "Crowley"
     }
    ]
   }

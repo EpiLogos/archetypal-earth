@@ -2,60 +2,54 @@
  "version": 1,
  "type": "family",
  "id": "thoth-four-of-wands",
- "line": "Crowley’s Four of Wands: Completion (pdf p176); Chesed and Venus in Aries (pdf p188).",
+ "line": "Completion: the first fire of will has been built into something that stands, an order, a household, a working rule over your affairs. It is settled, balanced and finished within its bounds. Drawn, the card speaks of work established and celebrated, and reminds you that it holds only through tact and gentleness, and that limits kept too tightly sow their own disorder. Venus in Aries softens the Ram here, in Chesed, the sphere of Mercy and of ordered rule.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "In the Wand suit, the card is called Completion.",
+     "quote": "This card refers to Chesed in the suit of Fire. Being below the Abyss, it is the Lord of all manifested active Power. The original Will of the Two has been transmitted through the Three, and is now built up into a solid system:—Order, Law, Government. It is also referred to Venus in Aries, which indicates that one cannot establish one’s work without tact and gentleness.",
+     "page": 188,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The wands are headed by the Ram, sacred to Chesed, the Father‐god Amoun‐Ra, as also to Aries; but at the other end of the wands are the Doves of Venus.",
+     "page": 188,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "In the symbol, the ends of the wands touch a circle, showing the completion and limitation of the original work. It is within this circle that the flames (four double, as if to assert the balance) of the Energy are seen to play, and there is no intention to increase the scope of the original Will. But this limitation bears in itself the seeds of disorder.",
+     "page": 188,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Fours",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In the Wand suit, the card is called Completion. The manifestation promised by Binah has now taken place. This number must be very solid, because it is the actual dominating influence on all the following cards.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Chesed in the suit of Fire and on Venus in Aries (pdf p188).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card refers to Chesed in the suit of Fire.",
-     "page": 188,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It is also referred to Venus in Aries",
-     "page": 188,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the card below the Abyss (pdf p188); on the Fours and the Abyss (pdf p176).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Being below the Abyss, it is the Lord of all manifested active Power.",
-     "page": 188,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Four is “below the Abyss”",
+     "quote": "The important characteristic is that Four is “below the Abyss”; therefore, in practice, it means solidification, materialization. Things have become manifest. The essential point is that it expresses the Rule of Law.",
      "page": 176,
      "voice": "Crowley"
     }

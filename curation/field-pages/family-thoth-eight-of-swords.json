@@ -2,49 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-eight-of-swords",
- "line": "Crowley’s Eight of Swords: Interference (pdf p179); Jupiter in Gemini (pdf p220); Hod (pdf p179).",
+ "line": "Interference: good intentions thwarted by bad luck. The will is there but lacks staying power, and it is too good-natured for a fight that needs one decisive blow; then some trivial accident upsets the whole plan. Drawn, the card asks you to stop softening a stroke that has to be struck, and to expect the unforeseen hitch that derails a scheme half pursued. Hod, the sphere of the intellect, under Jupiter in Gemini, lends luck to weakened efforts but no persistence.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p179); on Jupiter in Gemini (pdf p220).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Eight of Swords is called Interference.",
+     "quote": "The number Eight, Hod, here signifies lack of persistence in matters of the intellect and of contest. Good fortune, however, attends even these weakened efforts, thanks to the influence of Jupiter in Gemini, ruling the Decan. Yet the Will is constantly thwarted by accidental interference.",
+     "page": 220,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The card is attributed to Jupiter and Gemini; accordingly, there is no weighing down of the will by internal or external stress. It is simply the error of being good‐natured when good‐nature is disastrous. Gemini is an airy sign, an intellectual sign; Jupiter is geniality and optimism. This will not do in the world of Swords; if one must hit at all, a knock‐out blow is best.",
      "page": 179,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the influence of Jupiter in Gemini, ruling the Decan",
-     "page": 220,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Eights and Hod (pdf p179).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The four Eights are attributed to Hod.",
+     "quote": "But there is another element in this card; that of unexpected (the Eights, being at heart Mercurial, are always that) interference, sheer unforeseen bad luck. Trivial incidents have often altered the destiny of empires, brought to naught “the best‐laid plans of mice and men”.",
      "page": 179,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the Will and accidental interference (pdf p220).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Yet the Will is constantly thwarted by accidental interference.",
+     "quote": "The centre of the card is occupied by two long Swords pointed downward. These are crossed by six small swords, three on each side. They remind one of weapons peculiar to their countries or their cults; we see here the Kriss, the Kukri, the Scramasax, the Dagger, the Machete and the Yataghan.",
      "page": 220,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Eights",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod. Being in the same plane as the Sevens on the Tree of Life, but on the other side, the same inherent defects as are found in the Sevens will apply. Yet one may perhaps urge this alleviation, that the Eights come as (in a sense) a remedy for the error of the Sevens. The mischief has been done; and there is now a reaction against it.",
+     "page": 179,
      "voice": "Crowley"
     }
    ]

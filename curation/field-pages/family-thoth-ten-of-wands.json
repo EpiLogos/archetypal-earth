@@ -2,67 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-wands",
- "line": "Crowley’s Ten of Wands: Oppression (pdf p181); Saturn in Sagittarius (pdf p195); Malkuth (pdf p181, p195).",
+ "line": "Oppression: force, force and nothing but force, until the will has done its work too well and does not know when to stop. Cut off from its source, the fire runs wild and turns into a burden and a cruelty with no way out, government become tyranny. Drawn, the card warns of overload, of carrying or imposing too much, and of a purpose so blind it will devour itself. Heavy Saturn weighs on swift Sagittarius here, in Malkuth, the Kingdom, where the current ends.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on Saturn in Sagittarius (pdf p195).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Ten of Wands is called Oppression.",
+     "quote": "The Ten of Wands is called Oppression. This is what happens when one uses force, force, and nothing else but force all the time.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The card also refers to the influence of Saturn in Sagittarius.",
+     "quote": "The card also refers to the influence of Saturn in Sagittarius. Here is the greatest antipathy. Sagittarius is spiritual, swift, light, elusive, and luminous; Saturn is material, slow, heavy, obstinate, and obscure.",
      "page": 195,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Tens and Malkuth (pdf p181); on the number Ten and Malkuth (pdf p195).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Malkuth.",
+     "quote": "The eight Wands are still crossed, showing the enormous power of the completed energies of Fire; but they have lost their patents of nobility. Their ends seem more like claws; they lack the authority and intelligence shown in the earlier cards; and in front are the two formidable Dorjes of the Two of Wands, but lengthened to bars.",
+     "page": 195,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The whole picture suggests Oppression and repression. It is a stupid and obstinate cruelty from which there is no escape. It is a Will which has not understood anything beyond its dull purpose, its “lust of result”, and will devour itself in the conflagrations it has evoked.",
+     "page": 195,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Tens",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Malkuth. Here is the end of all energy; it is away from the “formative world” altogether, where things are elastic.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The number Ten refers to Malkuth, which depends from the other nine Sephiroth,",
-     "page": 195,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the picture as Oppression and repression (pdf p195).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The whole picture suggests Oppression and repression.",
-     "page": 195,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "conflicts",
-   "title": "Crowley’s group note on the Tens",
-   "line": "Crowley on the planetary attribution of the Tens (pdf p181).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "There is now no planetary attribution to consider.",
+     "quote": "See the Archer, not shooting forth benign rays, but dealing the sharp rain of death! The Wand has conquered; it has done its work; it has done its work too well; it did not know when to stop; Government has become Tyranny.",
      "page": 181,
      "voice": "Crowley"
     }

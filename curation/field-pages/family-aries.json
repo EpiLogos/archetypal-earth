@@ -2,12 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "aries",
- "line": "Burt, Archetypes of the Zodiac, chapter on Aries (pdf pp. 23–58); Jung on the ram (Dream Analysis seminar; Aion).",
+ "line": "Aries is Cardinal Fire, the first sign and the burst of spring: the search for a separate identity, the hero’s drive to go out and prove itself in the world. Its gift is courage, candour, pride in the body and the confidence to begin; its shadow is impatience, anger and an “I” that forgets other people. Mars rules it in the world; Mercury, its esoteric ruler, is the reflecting mind that reins in the ram, and Libra across the wheel teaches it Eros.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Aries (pdf pp. 23–58): pdf p23, p24, p25 and p37.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
@@ -17,57 +17,45 @@
     },
     {
      "work": "burt-zodiac",
-     "quote": "Aries’ energy is like the Sun’s rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all.",
+     "quote": "Aries’ energy is like the Sun’s rays—clear or conscious, frank, direct, obvious, full of light and heat and visible to all. Though all three Fire signs are solar in nature, Aries is the most exuberant, just as spring is the most exuberant season.",
      "page": 24,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Aries, remember, is outward drive and Logos.",
+     "quote": "Aries is the ram’s horns and the battering ram. Aries makes a place for himself in a crowd or in a waiting line. He lets the restaurant hostess know, “I’m here.” Aries represents the “Irresistible Force,” as Dane Rudhyar put it.",
      "page": 25,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "When we think of Cardinal Fire (Aries) we think of the competitive drive toward success, of the quest in the outer world",
-     "page": 37,
+     "quote": "The archetypal Aries takes pride at being on Earth in that physical form or body, pride in him/herself and his/her creative capacity, his/her drive to fulfill his desires in the outside world.",
+     "page": 25,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Aries (pdf pp. 23–58): pdf p41, p27, p30 and p32.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Both are solar, heroic stories about young, naive, independent, supremely confident heroes.",
+     "quote": "Both are solar, heroic stories about young, naive, independent, supremely confident heroes. In the first story Hercules learns the importance of tuning in to Hermes/Mercury, his esoteric ruler. In the second, Jason learns the need to acknowledge at least the principle of Eros, child of Goddess Aphrodite, if not also the need to sacrifice his restless independence to Eros and settle down with a mate.",
      "page": 41,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Mars needs to temper Logos with Eros.",
-     "page": 27,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Mars is passionate, but not exactly tender or aware of others’ feelings!",
-     "page": 27,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "The Aries at the esoteric level has begun to work consciously with Mercury (Logos), his/her spiritual ruler.",
+     "quote": "Aries as Conscious Seeker, like Hermes and Athene, has developed and disciplined his intellect so that it controls his restless, angry Mars. Hermes or Athene knows the appropriate uses of Mars’ energy. They are able to put the immediate situation on hold, distance themselves from spontaneous anger and reflect: Is this emotion constructive or destructive?",
      "page": 30,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "belong to the heroic Aries archetype.",
-     "page": 32,
+     "quote": "Mars needs to temper Logos with Eros. Mars is independent, but 180 degrees away, Venus ruled Libra wants to be liked, wants to make a good impression. She can help Mars to curb his spontaneity, to think before speaking, to broaden his I-thinking to we-thinking.",
+     "page": 27,
      "voice": "Burt"
     }
    ]
@@ -75,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the ram: Dream Analysis seminar, pdf p448 and p434; CW9ii pdf p101.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",
@@ -91,7 +79,7 @@
     },
     {
      "work": "cw09ii",
-     "quote": "Attis, the Lord of the sacred Ram and the thousand-eyed shepherd of glittering stars.",
+     "quote": "Dieterich (Die Crabschrift des Aberkios), in the course of a brilliant argument, demonstrates that the \"holy shepherd\" mentioned in the inscription is Attis, the Lord of the sacred Ram and the thousand-eyed shepherd of glittering stars.",
      "page": 101,
      "voice": "Jung"
     }

@@ -39,6 +39,22 @@ export function parseCourt(id) {
   return m ? { court: m[1], suit: m[2] } : null;
 }
 
+/**
+ * A Knight's, Queen's or Prince's thirty degrees: from the 20th of one sign to the 20th of the next, the pair of adjacent
+ * signs the field joins it to. `first` is the sign it enters at its 21st degree, `main` the next, which holds two of its
+ * three decans. Null (with the reason in `error`) for any other card or a pair that is not adjacent.
+ */
+export function courtSpan(joined, id) {
+  const c = parseCourt(id);
+  if (!c || c.court === 'princess') return null;
+  const s = joined(id).map((j) => ({ idx: SIGNS.indexOf(j.other), j })).filter((x) => x.idx >= 0);
+  if (s.length !== 2) return s.length ? { error: `${id}: joined to ${s.length} signs, not the two a court card spans` } : null;
+  const [a, b] = s.map((x) => x.idx);
+  const first = (a + 1) % 12 === b ? a : (b + 1) % 12 === a ? b : null;
+  if (first === null) return { error: `${id}: joined signs ${SIGNS[a]} and ${SIGNS[b]} are not adjacent` };
+  return { first, main: (first + 1) % 12, lon: (first * 30 + 20) % 360, joins: s.map((x) => x.j.id) };
+}
+
 /** Every join as an index: family id → [{ other, id, system }] (both ends), family-to-family only. */
 export function joinIndex(joins) {
   const out = new Map();
@@ -69,7 +85,7 @@ export function deriveCardGeometry({ cur, famIds, famName, joined, errors }) {
   for (const key of BODY_KEYS) {
     const c = cur.bodies[key];
     if (!c) continue;
-    const out = { god: c.god ? { ...c.god } : null, position: c.position ?? null, sephira: null, decans: [], ranks: [], majors: [], elements: [], abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
+    const out = { god: c.god ? { ...c.god } : null, position: c.position ?? null, sephira: null, decans: [], ranks: [], majors: [], courts: [], elements: [], abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
     if (c.position) {
       out.sephira = TREE[c.position - 1];
       if (!has(out.sephira)) errors.push(`body ${key}: the field has no family ${out.sephira}`);
@@ -123,8 +139,48 @@ export function deriveCardGeometry({ cur, famIds, famName, joined, errors }) {
           out.majors.push({ card: j.other, via: 'element', element: e, joins: [j.id] });
         }
       }
+      // the Princesses: no sign (Crowley, Book of Thoth p140), each the earthy part of her element; they stand where the
+      // four elements stand, at the Earth Crowley's list numbers ten
+      for (const e of c.elements) {
+        for (const j of joined(e)) {
+          const ct = parseCourt(j.other);
+          if (ct?.court !== 'princess') continue;
+          used.add(j.other);
+          out.courts.push({ card: j.other, court: ct.court, suit: ct.suit, element: e, joins: [j.id] });
+        }
+      }
+      out.courts.sort((a, b) => SUITS.indexOf(a.suit) - SUITS.indexOf(b.suit));
     }
     bodies[key] = out;
+  }
+
+  // the signs a planet rules, as Burt names each sign's mundane ruler (sign ↔ the planet's god, system burt): the Atu of
+  // the sign stands at its ruler where the field does not join the Atu to a planet itself (Art at Jupiter, the Star at
+  // Saturn), and so does the court card whose span lies mostly in the sign (the Queen of Cups, Gemini 21° to Cancer 20°,
+  // at the Moon). Every card of the deck has a planet to be read at.
+  const direct = new Set(Object.values(bodies).flatMap((b) => b.majors.map((m) => m.card)));
+  const signOfAtu = (id) => joined(id).map((x) => SIGNS.indexOf(x.other)).find((i) => i >= 0);
+  for (const key of BODY_KEYS) {
+    const c = cur.bodies[key];
+    const out = bodies[key];
+    if (!c?.god || !out) continue;
+    for (const r of joined(c.god.family).filter((j) => j.system === 'burt' && SIGNS.includes(j.other))) {
+      const sign = SIGNS.indexOf(r.other);
+      for (const j of joined(r.other)) {
+        if (isMajor(j.other) && !direct.has(j.other) && signOfAtu(j.other) === sign) {
+          used.add(j.other);
+          out.majors.push({ card: j.other, via: 'ruler', sign, joins: [j.id, r.id] });
+          continue;
+        }
+        const span = courtSpan(joined, j.other);
+        if (!span || span.error || span.main !== sign) continue;
+        used.add(j.other);
+        const ct = parseCourt(j.other);
+        out.courts.push({ card: j.other, court: ct.court, suit: ct.suit, sign, from: span.lon, joins: [...span.joins, r.id] });
+      }
+    }
+    out.majors.sort((a, b) => (a.via === b.via ? a.card.localeCompare(b.card) : a.via === 'planet' ? -1 : 1));
+    out.courts.sort((a, b) => (a.sign ?? 0) - (b.sign ?? 0) || COURTS.indexOf(a.court) - COURTS.indexOf(b.court));
   }
   return { bodies, used, isMajor };
 }
@@ -138,11 +194,13 @@ export function deriveCardGeometry({ cur, famIds, famName, joined, errors }) {
  *   <sign>                    the zodiac, thirty degrees
  *   thoth pip 2–10            its ruler's decan wheel at its decan's span, and the rank ring of its number's body
  *   thoth Ace                 the rank ring of the body whose number is one
- *   Atu via planet/ruler/el.  the rank ring of that body; with a sign join, also the sign's span
+ *   Atu via planet/ruler/el.  the rank ring of that body (a sign's ruler as Burt names it, where the field joins the Atu to
+ *                             no planet itself); with a sign join, also the sign's span
  *   Atu with a sign, no ring  the zodiac, the sign's span
- *   knight/queen/prince       the thirty degrees from the 20th of one sign to the 20th of the next (the two signs the
- *                             field joins are adjacent)
- *   princess                  the heavens round the North Pole, the quadrant of her suit (Crowley, Book of Thoth p147)
+ *   knight/queen/prince       the rank ring of the ruler of the sign holding most of its span, and the thirty degrees
+ *                             from the 20th of one sign to the 20th of the next (the two signs the field joins are adjacent)
+ *   princess                  the rank ring of the Earth, with the elements, and the heavens round the North Pole, the
+ *                             quadrant of her suit (Crowley, Book of Thoth p147)
  *   a sephira                 the body that carries its number
  *   an element on a body      the body itself
  */
@@ -174,6 +232,8 @@ export function skyAddresses({ cur, famIds, famName, joins, errors }) {
     for (const r of b.ranks) put(r.card, { body: key, ring: 'rank', slot: SUITS.indexOf(r.suit), basis: 'site', via: r.joins });
     if (b.sephira) put(b.sephira, { body: key, ring: 'body', basis: 'site', via: [] });
     for (const e of b.elements) put(e, { body: key, ring: 'body', basis: 'site', via: [] });
+    // the court cards: at the ruler of the sign their span lies mostly in, the Princesses at the Earth
+    for (const ct of b.courts) put(ct.card, { body: key, ring: 'rank', basis: 'site', via: ct.joins });
     // the Atu: the planet's, a sign's ruler's, an element's
     for (const m of b.majors) {
       put(m.card, { body: key, ring: 'rank', basis: 'site', via: m.joins });
@@ -190,12 +250,10 @@ export function skyAddresses({ cur, famIds, famName, joins, errors }) {
     const c = parseCourt(id);
     if (!c) continue;
     if (c.court === 'princess') { put(id, { ring: 'pole', slot: SUITS.indexOf(c.suit), basis: 'site', via: [] }); continue; }
-    const s = signOf(id).filter((x) => x.j.system === 'thoth' || x.j.system === undefined || true);
-    if (s.length !== 2) { if (s.length) errors.push(`${id}: joined to ${s.length} signs, not the two a court card spans`); continue; }
-    const [a, b] = s.map((x) => x.idx);
-    const first = (a + 1) % 12 === b ? a : (b + 1) % 12 === a ? b : null;
-    if (first === null) { errors.push(`${id}: joined signs ${SIGNS[a]} and ${SIGNS[b]} are not adjacent`); continue; }
-    put(id, { ring: 'zodiac', lon: (first * 30 + 20) % 360, span: 30, basis: 'site', via: s.map((x) => x.j.id) });
+    const span = courtSpan(joined, id);
+    if (!span) continue;
+    if (span.error) { errors.push(span.error); continue; }
+    put(id, { ring: 'zodiac', lon: span.lon, span: 30, basis: 'site', via: span.joins });
   }
 
   const final = new Map();

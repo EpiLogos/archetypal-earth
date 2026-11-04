@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-queen-of-wands",
- "line": "Crowley's Queen of Wands: Hé of the Name (pdf p139); the watery part of Fire and the span from Pisces to Aries (pdf p143).",
+ "line": "Fire held and steadied: warm, adaptable, persistent energy with calm authority, generous in friendship and love but always on her own terms. Drawn, the card shows confidence, magnetism and the strength to rule her own sphere, and warns of the other side: vanity, brooding, and a quick offence that turns to savage revenge. The Queen of Wands is the watery part of Fire, ruling from the last decan of Pisces through the first two of Aries.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Queens (pdf p139) and on the Queen of Wands (pdf p143).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Queens represent the letter Hé of the Name.",
-     "page": 139,
+     "quote": "The characteristics of the Queen are adaptability, persistent energy, calm authority which she knows how to use to enhance her attractiveness. She is kindly and generous, but impatient of opposition. She has immense capacity for friendship and for love, but always on her own initiative.",
+     "page": 143,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Queen of Wands represents the watery part of Fire, its fluidity and colour.",
+     "quote": "There is as much pride in this card as in the Knight, but it lacks the spontaneous nobility which excuses that error. It is not true pride, but self‐complacent vanity and even snobbery. The other side of her character is that she may have a tendency to brood, come to a wrong decision thereon, and react with great savagery. She may be easily deceived; then she is likely to shew herself stupid, obstinate, tyrannical. She may be quick to take offence, and harbour revenge without good cause.",
      "page": 143,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Pisces to the 20th degree of Aries (pdf p143); on the decans and the elemental attribution (pdf p139).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "she rules in the Zodiac from the 21st degree of Pisces to the 20th degree of Aries",
+     "quote": "She is seated upon a throne of flame, ordered into geometrical light by her material power. Beneath the throne the surging flames are steady. She bears a wand in her left hand; but it is topped with a cone suggestive of the mysteries of Bacchus. She is attended by a couchant leopard upon whose head she lays her hand. Her face expresses the ecstasy of one whose mind is well in‐drawn to the mystery borne beneath her bosom.",
      "page": 143,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Queen of Wands (pdf p143).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The characteristics of the Queen are adaptability, persistent energy, calm authority which she knows how to use to enhance her attractiveness.",
+     "quote": "The Queen of Wands represents the watery part of Fire, its fluidity and colour. Also, she rules in the Zodiac from the 21st degree of Pisces to the 20th degree of Aries.",
      "page": 143,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Queens represent the letter Hé of the Name. They are the complements of the Knights. They receive, ferment, and transmit the original Energy of their Knight. Quick to receive that Energy, they are also fitted to endure for the period of their function; but they are not the final product. They represent the second stage in the process of creation whose fourth and last state is material realization.",
+     "page": 139,
      "voice": "Crowley"
     }
    ]

@@ -82,7 +82,7 @@ const direct = [
   ['#/th/psychoid', 'theoretic psychoid'],
   ['#/t/psychoid', 'NOT A ROUTE (#/t/ takes a family or an archetype); boots to the Self'],
   ['#/f/air', 'family air'],
-  ['#/f/thoth-star', 'family thoth-star'],
+  // (a card of the deck has no focus on the Earth: #/f/thoth-star is read at Saturn — sky-card-rings and sky-descend-reading)
   ['#/f/aries', 'family aries'],
 ];
 for (const [route, what] of direct) {

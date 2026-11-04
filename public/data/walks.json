@@ -6414,179 +6414,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-ace-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944,
-     "place": {
-      "lat": 21.8862,
-      "lon": 22.4526
-     }
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-ace-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944,
-     "place": {
-      "lat": 5.1043,
-      "lon": -76.1363
-     }
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-five-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-five-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-four-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-four-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-four-of-wands-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-three-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-three-of-wands-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-two-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-two-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "thoth-wands-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
       "page": 24
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-ace-of-wands-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 35
-     },
-     "year": 1944,
-     "citeYear": 1944,
-     "place": {
-      "lat": 44.5206,
-      "lon": 94.0815
-     }
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-two-of-wands-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 35
      },
      "year": 1944,
      "citeYear": 1944
@@ -6606,11 +6438,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-magus-in-book-of-thoth"
+      "id": "thoth-fool-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 58
+      "page": 57
      },
      "year": 1944,
      "citeYear": 1944
@@ -6622,7 +6454,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 61
+      "page": 62
      },
      "year": 1944,
      "citeYear": 1944
@@ -6634,7 +6466,19 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 64
+      "page": 65
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-emperor-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 66
      },
      "year": 1944,
      "citeYear": 1944
@@ -6646,19 +6490,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 68
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-lovers-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 70
+      "page": 69
      },
      "year": 1944,
      "citeYear": 1944
@@ -6670,7 +6502,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 74
+      "page": 75
      },
      "year": 1944,
      "citeYear": 1944
@@ -6718,7 +6550,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 83
+      "page": 85
      },
      "year": 1944,
      "citeYear": 1944
@@ -6738,6 +6570,18 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-death-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 90
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-art-in-book-of-thoth"
      },
      "page": {
@@ -6750,23 +6594,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-death-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 95
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "thoth-devil-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 95
+      "page": 96
      },
      "year": 1944,
      "citeYear": 1944
@@ -6786,59 +6618,23 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-star-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 100
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-moon-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 103
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-sun-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 105
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-aeon-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 108
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-universe-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 109
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "binah-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 110
+      "page": 104
      },
      "year": 1944,
      "citeYear": 1944
@@ -6858,11 +6654,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-fool-in-book-of-thoth"
+      "id": "thoth-universe-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 116
+      "page": 111
      },
      "year": 1944,
      "citeYear": 1944
@@ -6870,50 +6666,18 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "malkuth-in-book-of-thoth"
+      "id": "thoth-princess-of-swords-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 123
+      "page": 140
      },
      "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-knight-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-knight-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-knight-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
+     "citeYear": 1944,
+     "place": {
+      "lat": 13.6399,
+      "lon": -75.2929
+     }
     },
     {
      "subject": {
@@ -6922,67 +6686,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-prince-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-prince-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-prince-of-swords-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-prince-of-wands-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-queen-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 139
+      "page": 141
      },
      "year": 1944,
      "citeYear": 1944
@@ -6994,7 +6698,19 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 139
+      "page": 143
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-prince-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 145
      },
      "year": 1944,
      "citeYear": 1944
@@ -7018,11 +6734,35 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-knight-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 149
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-queen-of-cups-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
       "page": 151
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-prince-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 153
      },
      "year": 1944,
      "citeYear": 1944
@@ -7046,6 +6786,18 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-knight-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 157
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-queen-of-swords-in-book-of-thoth"
      },
      "page": {
@@ -7058,18 +6810,50 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-princess-of-swords-in-book-of-thoth"
+      "id": "thoth-prince-of-swords-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 163
+      "page": 161
      },
      "year": 1944,
-     "citeYear": 1944,
-     "place": {
-      "lat": 13.6399,
-      "lon": -75.2929
-     }
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-knight-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 165
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-queen-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 167
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-prince-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 169
+     },
+     "year": 1944,
+     "citeYear": 1944
     },
     {
      "subject": {
@@ -7138,6 +6922,58 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-ace-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 175
+     },
+     "year": 1944,
+     "citeYear": 1944,
+     "place": {
+      "lat": 5.1043,
+      "lon": -76.1363
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-two-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 175
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "binah-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "chesed-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "decan-capricorn-2-in-book-of-thoth"
      },
      "page": {
@@ -7162,7 +6998,79 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "thoth-four-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-four-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-four-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-three-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-three-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-three-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 176
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-three-of-wands-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7210,7 +7118,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-five-of-cups-in-book-of-thoth"
+      "id": "thoth-five-of-disks-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7222,11 +7130,119 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "netzach-in-book-of-thoth"
+      "id": "thoth-five-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 177
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-four-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 177
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-six-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 177
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-six-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 177
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "tiphareth-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 177
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-seven-of-cups-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
       "page": 178
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-eight-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 179
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-eight-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 179
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-eight-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 179
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-seven-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 179
      },
      "year": 1944,
      "citeYear": 1944
@@ -7246,11 +7262,87 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "yesod-in-book-of-thoth"
+      "id": "thoth-eight-of-disks-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
       "page": 180
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-nine-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 180
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-ten-of-cups-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 181
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-ten-of-disks-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 181
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-ten-of-swords-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 181
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-ace-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 183
+     },
+     "year": 1944,
+     "citeYear": 1944,
+     "place": {
+      "lat": 44.5206,
+      "lon": 94.0815
+     }
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-two-of-wands-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 185
      },
      "year": 1944,
      "citeYear": 1944
@@ -7282,6 +7374,18 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "geburah-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 189
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-five-of-wands-in-book-of-thoth"
      },
      "page": {
@@ -7295,18 +7399,6 @@
      "subject": {
       "type": "occurrence",
       "id": "decan-leo-2-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 191
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-six-of-wands-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7354,7 +7446,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-eight-of-wands-in-book-of-thoth"
+      "id": "hod-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7378,11 +7470,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-nine-of-wands-in-book-of-thoth"
+      "id": "decan-sagittarius-3-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 194
+      "page": 195
      },
      "year": 1944,
      "citeYear": 1944
@@ -7390,7 +7482,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "decan-sagittarius-3-in-book-of-thoth"
+      "id": "malkuth-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7454,11 +7546,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "decan-cancer-2-in-book-of-thoth"
+      "id": "thoth-two-of-cups-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 199
+      "page": 197
      },
      "year": 1944,
      "citeYear": 1944
@@ -7466,7 +7558,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-three-of-cups-in-book-of-thoth"
+      "id": "decan-cancer-2-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7490,19 +7582,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-four-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 200
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "geburah-in-book-of-thoth"
+      "id": "thoth-five-of-cups-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7526,31 +7606,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-six-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 203
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "decan-scorpio-3-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 205
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-seven-of-cups-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7574,19 +7630,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-eight-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 206
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "chesed-in-book-of-thoth"
+      "id": "decan-pisces-2-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7598,7 +7642,7 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "decan-pisces-2-in-book-of-thoth"
+      "id": "yesod-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7614,7 +7658,7 @@
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 207
+      "page": 208
      },
      "year": 1944,
      "citeYear": 1944
@@ -7627,54 +7671,6 @@
      "page": {
       "work": "book-of-thoth",
       "page": 209
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-ten-of-cups-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 209
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-emperor-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 211
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-star-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 211
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "tiphareth-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 211
      },
      "year": 1944,
      "citeYear": 1944
@@ -7730,6 +7726,18 @@
     {
      "subject": {
       "type": "occurrence",
+      "id": "netzach-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 219
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
       "id": "thoth-seven-of-swords-in-book-of-thoth"
      },
      "page": {
@@ -7743,18 +7751,6 @@
      "subject": {
       "type": "occurrence",
       "id": "decan-gemini-1-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 220
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-eight-of-swords-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
@@ -7802,14 +7798,18 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-ten-of-swords-in-book-of-thoth"
+      "id": "thoth-ace-of-disks-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 222
+      "page": 225
      },
      "year": 1944,
-     "citeYear": 1944
+     "citeYear": 1944,
+     "place": {
+      "lat": 21.8862,
+      "lon": 22.4526
+     }
     },
     {
      "subject": {
@@ -7910,30 +7910,6 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-seven-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 233
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
-      "id": "thoth-eight-of-disks-in-book-of-thoth"
-     },
-     "page": {
-      "work": "book-of-thoth",
-      "page": 234
-     },
-     "year": 1944,
-     "citeYear": 1944
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "decan-virgo-2-in-book-of-thoth"
      },
      "page": {
@@ -7970,11 +7946,11 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "hod-in-book-of-thoth"
+      "id": "thoth-magus-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 237
+      "page": 249
      },
      "year": 1944,
      "citeYear": 1944
@@ -7982,11 +7958,35 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "thoth-ten-of-disks-in-book-of-thoth"
+      "id": "thoth-lovers-in-book-of-thoth"
      },
      "page": {
       "work": "book-of-thoth",
-      "page": 237
+      "page": 250
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-aeon-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 253
+     },
+     "year": 1944,
+     "citeYear": 1944
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "thoth-sun-in-book-of-thoth"
+     },
+     "page": {
+      "work": "book-of-thoth",
+      "page": 253
      },
      "year": 1944,
      "citeYear": 1944
@@ -8007,7 +8007,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 37
+      "page": 27
      },
      "year": 1988,
      "citeYear": 1988
@@ -8019,7 +8019,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 66
+      "page": 73
      },
      "year": 1988,
      "citeYear": 1988
@@ -8031,7 +8031,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 95
+      "page": 123
      },
      "year": 1988,
      "citeYear": 1988
@@ -8055,7 +8055,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 183
+      "page": 190
      },
      "year": 1988,
      "citeYear": 1988
@@ -8067,7 +8067,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 216
+      "page": 235
      },
      "year": 1988,
      "citeYear": 1988
@@ -8079,7 +8079,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 260
+      "page": 261
      },
      "year": 1988,
      "citeYear": 1988
@@ -8091,7 +8091,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 295
+      "page": 301
      },
      "year": 1988,
      "citeYear": 1988
@@ -8115,7 +8115,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 381
+      "page": 399
      },
      "year": 1988,
      "citeYear": 1988
@@ -8127,7 +8127,7 @@
      },
      "page": {
       "work": "burt-zodiac",
-      "page": 450
+      "page": 449
      },
      "year": 1988,
      "citeYear": 1988
@@ -17661,18 +17661,6 @@
     {
      "subject": {
       "type": "occurrence",
-      "id": "aquarius-in-cw09ii"
-     },
-     "page": {
-      "work": "cw09ii",
-      "page": 94
-     },
-     "year": 1951,
-     "citeYear": 1951
-    },
-    {
-     "subject": {
-      "type": "occurrence",
       "id": "holy-ghost-joachim-third-aeon-1202"
      },
      "page": {
@@ -17694,6 +17682,18 @@
      "page": {
       "work": "cw09ii",
       "page": 95
+     },
+     "year": 1951,
+     "citeYear": 1951
+    },
+    {
+     "subject": {
+      "type": "occurrence",
+      "id": "aquarius-in-cw09ii"
+     },
+     "page": {
+      "work": "cw09ii",
+      "page": 99
      },
      "year": 1951,
      "citeYear": 1951

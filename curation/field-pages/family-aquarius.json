@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "aquarius",
- "line": "Burt, Archetypes of the Zodiac, chapter on Aquarius (pdf pp. 447–508); Jung on the Water Carrier (Aion; Dream Analysis seminar).",
+ "line": "Aquarius is Fixed Air, and its search is for the Holy Grail: like the angel or the water carrier, it seeks the cup of renewal to pour out for everyone. Its gift is altruism, friendship, quick insight and the courage to ask the right question; its shadow is rebellion, a utopian refusal to bend to earthly rules, and shock when friends or groups cut it off. Uranus, with Saturn, is its mundane ruler, and Jupiter, opportunity, is its esoteric ruler.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Aquarius (pdf pp. 447–508): pdf p447 and p449.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs.",
+     "quote": "Aquarius is the last of the four powerful, magnetic, opinionated Fixed signs. Symbolically, Aquarius is the ideal man, often artistically depicted as an angel, an immortal messenger to mankind from the gods, a perfected being who has liberated himself from the limitations of time and space (the orbits of Saturn and Jupiter) so that he can fly between Heaven and Earth with his lofty concepts.",
      "page": 447,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Symbolically, Aquarius is the ideal man, often artistically depicted as an angel, an immortal messenger to mankind from the gods,",
-     "page": 447,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Aquarius is an Air sign and as such has a mental approach to life",
-     "page": 447,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "In Greek mythology Uranus is, literally, Heaven—the sky above,",
+     "quote": "Pisces and Aquarius are also the two most altruistic signs in the zodiac. A person born with many planets in these two signs may well be a Seeker after the Holy Grail, Omar Khayyam’s blissful cup. Yet, s/he is not a Seeker for personal, selfish motives.",
      "page": 449,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "In Greek mythology Uranus is, literally, Heaven—the sky above, an impersonal force of nature. His wife Ga, the Earth mother, seems to balance his airy nature and ground him in reality. Uranian Aquarians look skyward and tend to be utopian souls unless they have many planets in Earth, Capricorn Rising, or a strong Saturn in the chart.",
+     "page": 449,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "It is easier to understand Aquarius once we grasp the difficulty involved for that sign in the integration of the two mundane ruling planets, Saturn and Uranus. These are such different energies—Saturn, with its limiting, structuring function and Uranus with its electrical impulses, forever destroying structures that are in decay and need to be replaced.",
+     "page": 450,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Aquarius (pdf pp. 447–508): pdf p450 and p471.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "a question that, as we will see, is central to the Grail Quest.",
+     "quote": "Terrible consequences result in the grail story if the seeker forgets to ask the right question at the right time. Life, to my Aquarian clients, seems very much a matter of asking the right questions; so there seems to be a genuine affinity between the sign of the Cup (Holy Grail), Aquarius, and the legend itself.",
      "page": 450,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Terrible consequences result in the grail story if the seeker forgets to ask the right question at the right time.",
-     "page": 450,
+     "quote": "As “fixed” personalities, Aquarius Sun sign and Aquarius rising children need to learn to compromise their rebellious natures somewhat, to bend to the rules of the Earth plane in order to survive and function here. Unless they can do this, they’ll have difficulty leading the rest of us to their blissful Grail.",
+     "page": 449,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "How will the Perfect Knight be able to heal the King",
-     "page": 471,
+     "quote": "Red, of course, is the color of courage, of self-mastery, of the hero who has been tested and has proven himself. It is the fearlessness of Leo, the integration of the polarity to Aquarius. But the subordination of one’s own will to the will of God for the greater good of the group, the transition from willful human to Angel, Avatar or Bodhisattva—that is the work of Aquarius.",
+     "page": 458,
      "voice": "Burt"
     }
    ]
@@ -63,12 +63,12 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the water-carrier and the precession: CW9ii pdf p94; Dream Analysis seminar, pdf p435.",
+   "line": "",
    "quotes": [
     {
      "work": "cw09ii",
-     "quote": "spring-point will have moved from its present position 18 degrees into Aquarius, the next aeon, that of the Water Carrier.",
-     "page": 94,
+     "quote": "If, as seems probable, the aeon of the fishes is ruled by the archetypal motif of the hostile brothers, then the approach of the next Platonic month, namely Aquarius, will constellate the problem of the union of opposites.",
+     "page": 99,
      "voice": "Jung"
     },
     {

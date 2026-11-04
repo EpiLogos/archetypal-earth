@@ -2,50 +2,12 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ace-of-disks",
- "line": "Crowley’s Ace of Disks: the Root of the Powers of Earth (pdf p224); the Disk as a whirling emblem (pdf p225).",
+ "line": "The seed of the material world, which is not dead matter but living, whirling energy: the ground of body, work and every concrete result. Drawn, the card promises a solid beginning or an opening in practical life, and affirms that matter itself is alive and holy. It is the root of the powers of Earth, the Crown’s seed in the suit of Disks, where the Sun and the Earth are one.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the chapter heading (pdf p224); on the suit and its element (pdf p24).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "THE ROOT OF THE POWERS OF EARTH",
-     "page": 224,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Kether and the quarters of the world",
-   "line": "Crowley on Spirit and Kether, and on the quarters of the world and the suits (pdf p175).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "On the other hand, Spirit represents Kether.",
-     "page": 175,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa",
-     "page": 175,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the Ace of Disks and the Energy called Earth (pdf p224); on the Disk as a whirling emblem (pdf p225).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
@@ -55,7 +17,45 @@
     },
     {
      "work": "book-of-thoth",
-     "quote": "Nor are the Disks any more to be considered as Coins; the Disk is a whirling emblem.",
+     "quote": "Thus, in particular, the old conception of the Earth as a passive, immobile, even dead, even “evil” element, had to go. It was imperative to restore the King‐Scale colour attribution to that of the Aeon of Isis, Emerald Green, as was understood by the Egyptian Hierophants. This green is, however, not the original vegetable green of Isis, but the new green of spring following the resurrection of Osiris as Horus. Nor are the Disks any more to be considered as Coins; the Disk is a whirling emblem.",
+     "page": 225,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "About this whirling Disk are its six Wings; the entire symbol is not only a glyph of Earth as understood in this New Aeon of Horus, but of the number 6, the number of the Sun. This card is thus an affirmation of the identity of Sol and Terra‐and that will be best understood by those who have punctually practised Liber Resh for the necessary number of years, preferably in such Hermitages as those of the Sahara Desert, where the Sun and the Earth can soon be instinctively recognized as living Beings, one’s constant companions in a Universe of Pure Joy.",
+     "page": 226,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The central symbol of the Ace of Disks is consequently the personal Hieroglyph of “the chosen priest and apostle of infinite space”, “the prince‐priest the Beast”.",
+     "page": 225,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "element",
+   "title": "The root of the element",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The point to remember is that, both in their appearance and in their meaning, the Aces are not the elements themselves, but the seeds of those elements.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Atom, again, is no more the hard, intractable, dead Particle of Dalton, but a system of whirling forces, comparable to the Solar hierarchy itself. This thesis dovetails perfectly with the new Doctrine of Tetragrammaton, where the Earthy component, Hé final, the Daughter, is set upon the Throne of the Mother, to awaken the Eld of the All‐Father.",
      "page": 225,
      "voice": "Crowley"
     }

@@ -221,6 +221,29 @@
           "joins": [
             "thoth-sun-sun-thoth"
           ]
+        },
+        {
+          "card": "thoth-lust",
+          "via": "ruler",
+          "sign": 4,
+          "joins": [
+            "thoth-lust-leo-thoth",
+            "leo-sun-burt"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-prince-of-wands",
+          "court": "prince",
+          "suit": "wands",
+          "sign": 4,
+          "from": 110,
+          "joins": [
+            "thoth-prince-of-wands-cancer-thoth",
+            "thoth-prince-of-wands-leo-thoth",
+            "leo-sun-burt"
+          ]
         }
       ],
       "elements": [],
@@ -355,6 +378,29 @@
           "joins": [
             "thoth-priestess-moon-thoth"
           ]
+        },
+        {
+          "card": "thoth-chariot",
+          "via": "ruler",
+          "sign": 3,
+          "joins": [
+            "thoth-chariot-cancer-thoth",
+            "cancer-moon-burt"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-queen-of-cups",
+          "court": "queen",
+          "suit": "cups",
+          "sign": 3,
+          "from": 80,
+          "joins": [
+            "thoth-queen-of-cups-cancer-thoth",
+            "thoth-queen-of-cups-gemini-thoth",
+            "cancer-moon-burt"
+          ]
         }
       ],
       "elements": [],
@@ -441,6 +487,44 @@
           "element": "earth-element",
           "joins": [
             "thoth-universe-earth-element-thoth"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-princess-of-wands",
+          "court": "princess",
+          "suit": "wands",
+          "element": "fire",
+          "joins": [
+            "thoth-princess-of-wands-fire-thoth"
+          ]
+        },
+        {
+          "card": "thoth-princess-of-cups",
+          "court": "princess",
+          "suit": "cups",
+          "element": "water",
+          "joins": [
+            "thoth-princess-of-cups-water-thoth"
+          ]
+        },
+        {
+          "card": "thoth-princess-of-swords",
+          "court": "princess",
+          "suit": "swords",
+          "element": "air",
+          "joins": [
+            "thoth-princess-of-swords-air-thoth"
+          ]
+        },
+        {
+          "card": "thoth-princess-of-disks",
+          "court": "princess",
+          "suit": "disks",
+          "element": "earth-element",
+          "joins": [
+            "thoth-princess-of-disks-earth-element-thoth"
           ]
         }
       ],
@@ -600,6 +684,32 @@
           ]
         }
       ],
+      "courts": [
+        {
+          "card": "thoth-knight-of-swords",
+          "court": "knight",
+          "suit": "swords",
+          "sign": 2,
+          "from": 50,
+          "joins": [
+            "thoth-knight-of-swords-gemini-thoth",
+            "thoth-knight-of-swords-taurus-thoth",
+            "gemini-mercurius-burt"
+          ]
+        },
+        {
+          "card": "thoth-knight-of-disks",
+          "court": "knight",
+          "suit": "disks",
+          "sign": 5,
+          "from": 140,
+          "joins": [
+            "thoth-knight-of-disks-leo-thoth",
+            "thoth-knight-of-disks-virgo-thoth",
+            "virgo-mercurius-burt"
+          ]
+        }
+      ],
       "elements": [],
       "abyss": false
     },
@@ -740,6 +850,41 @@
           "sign": 6,
           "joins": [
             "thoth-adjustment-venus-thoth"
+          ]
+        },
+        {
+          "card": "thoth-hierophant",
+          "via": "ruler",
+          "sign": 1,
+          "joins": [
+            "thoth-hierophant-taurus-thoth",
+            "taurus-venus-burt"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-prince-of-disks",
+          "court": "prince",
+          "suit": "disks",
+          "sign": 1,
+          "from": 20,
+          "joins": [
+            "thoth-prince-of-disks-aries-thoth",
+            "thoth-prince-of-disks-taurus-thoth",
+            "taurus-venus-burt"
+          ]
+        },
+        {
+          "card": "thoth-queen-of-swords",
+          "court": "queen",
+          "suit": "swords",
+          "sign": 6,
+          "from": 170,
+          "joins": [
+            "thoth-queen-of-swords-libra-thoth",
+            "thoth-queen-of-swords-virgo-thoth",
+            "libra-venus-burt"
           ]
         }
       ],
@@ -888,11 +1033,46 @@
           ]
         },
         {
+          "card": "thoth-death",
+          "via": "ruler",
+          "sign": 7,
+          "joins": [
+            "thoth-death-scorpio-thoth",
+            "scorpio-mars-burt"
+          ]
+        },
+        {
           "card": "thoth-emperor",
           "via": "ruler",
           "sign": 0,
           "joins": [
             "thoth-emperor-mars-thoth"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-queen-of-wands",
+          "court": "queen",
+          "suit": "wands",
+          "sign": 0,
+          "from": 350,
+          "joins": [
+            "thoth-queen-of-wands-aries-thoth",
+            "thoth-queen-of-wands-pisces-thoth",
+            "aries-mars-burt"
+          ]
+        },
+        {
+          "card": "thoth-prince-of-cups",
+          "court": "prince",
+          "suit": "cups",
+          "sign": 7,
+          "from": 200,
+          "joins": [
+            "thoth-prince-of-cups-libra-thoth",
+            "thoth-prince-of-cups-scorpio-thoth",
+            "scorpio-mars-burt"
           ]
         }
       ],
@@ -1028,6 +1208,50 @@
           "joins": [
             "thoth-fortune-jupiter-thoth"
           ]
+        },
+        {
+          "card": "thoth-art",
+          "via": "ruler",
+          "sign": 8,
+          "joins": [
+            "thoth-art-sagittarius-thoth",
+            "sagittarius-jupiter-burt"
+          ]
+        },
+        {
+          "card": "thoth-moon",
+          "via": "ruler",
+          "sign": 11,
+          "joins": [
+            "thoth-moon-pisces-thoth",
+            "pisces-jupiter-burt"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-knight-of-wands",
+          "court": "knight",
+          "suit": "wands",
+          "sign": 8,
+          "from": 230,
+          "joins": [
+            "thoth-knight-of-wands-sagittarius-thoth",
+            "thoth-knight-of-wands-scorpio-thoth",
+            "sagittarius-jupiter-burt"
+          ]
+        },
+        {
+          "card": "thoth-knight-of-cups",
+          "court": "knight",
+          "suit": "cups",
+          "sign": 11,
+          "from": 320,
+          "joins": [
+            "thoth-knight-of-cups-aquarius-thoth",
+            "thoth-knight-of-cups-pisces-thoth",
+            "pisces-jupiter-burt"
+          ]
         }
       ],
       "elements": [],
@@ -1162,6 +1386,50 @@
           "joins": [
             "thoth-universe-saturn-thoth"
           ]
+        },
+        {
+          "card": "thoth-devil",
+          "via": "ruler",
+          "sign": 9,
+          "joins": [
+            "thoth-devil-capricorn-thoth",
+            "capricorn-saturn-burt"
+          ]
+        },
+        {
+          "card": "thoth-star",
+          "via": "ruler",
+          "sign": 10,
+          "joins": [
+            "thoth-star-aquarius-thoth",
+            "aquarius-saturn-burt"
+          ]
+        }
+      ],
+      "courts": [
+        {
+          "card": "thoth-queen-of-disks",
+          "court": "queen",
+          "suit": "disks",
+          "sign": 9,
+          "from": 260,
+          "joins": [
+            "thoth-queen-of-disks-capricorn-thoth",
+            "thoth-queen-of-disks-sagittarius-thoth",
+            "capricorn-saturn-burt"
+          ]
+        },
+        {
+          "card": "thoth-prince-of-swords",
+          "court": "prince",
+          "suit": "swords",
+          "sign": 10,
+          "from": 290,
+          "joins": [
+            "thoth-prince-of-swords-aquarius-thoth",
+            "thoth-prince-of-swords-capricorn-thoth",
+            "aquarius-saturn-burt"
+          ]
         }
       ],
       "elements": [],
@@ -1185,6 +1453,7 @@
       "decans": [],
       "ranks": [],
       "majors": [],
+      "courts": [],
       "elements": [],
       "abyss": true,
       "note": "The list sets the Abyss under the number 3 and gives it to Herschel (Uranus). The Abyss is not a sephira and carries no rank, so Uranus has no rank ring."
@@ -1240,6 +1509,7 @@
         }
       ],
       "majors": [],
+      "courts": [],
       "elements": [],
       "abyss": false,
       "note": "Crowley's number 2 is Chokmah; the list gives the sphere of the fixed stars to Neptune."
@@ -1295,6 +1565,7 @@
         }
       ],
       "majors": [],
+      "courts": [],
       "elements": [],
       "abyss": false,
       "note": "Crowley's number 1 is Kether; the list writes the number and the planet, not the sephira's name."
@@ -1403,6 +1674,70 @@
         "license": "All rights reserved; shipped on the owner's ruling (D8)",
         "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_20.jpg"
       }
+    },
+    "thoth-art": {
+      "name": "Atu XIV · Art",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-art.jpg",
+        "thumb": "img/families/thoth-art.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#a5ae91",
+        "title": "Art — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_14.jpg"
+      },
+      "sign": 8
+    },
+    "thoth-chariot": {
+      "name": "Atu VII · The Chariot",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-chariot.jpg",
+        "thumb": "img/families/thoth-chariot.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#a7a48d",
+        "title": "The Chariot — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_07.jpg"
+      },
+      "sign": 3
+    },
+    "thoth-death": {
+      "name": "Atu XIII · Death",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-death.jpg",
+        "thumb": "img/families/thoth-death.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#879a7d",
+        "title": "Death — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_13.jpg"
+      },
+      "sign": 7
+    },
+    "thoth-devil": {
+      "name": "Atu XV · The Devil",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-devil.jpg",
+        "thumb": "img/families/thoth-devil.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#aeac9c",
+        "title": "The Devil — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_15.jpg"
+      },
+      "sign": 9
     },
     "thoth-eight-of-cups": {
       "name": "Eight of Cups",
@@ -1760,6 +2095,102 @@
       },
       "sign": 5
     },
+    "thoth-hierophant": {
+      "name": "Atu V · The Hierophant",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-hierophant.jpg",
+        "thumb": "img/families/thoth-hierophant.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#9a906e",
+        "title": "The Hierophant — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_05.jpg"
+      },
+      "sign": 1
+    },
+    "thoth-knight-of-cups": {
+      "name": "Knight of Cups",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-knight-of-cups.jpg",
+        "thumb": "img/families/thoth-knight-of-cups.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#85aba2",
+        "title": "Knight of Cups — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/cups_14.jpg"
+      },
+      "court": "knight",
+      "suit": "cups",
+      "element": "water",
+      "sign": 11,
+      "from": 320
+    },
+    "thoth-knight-of-disks": {
+      "name": "Knight of Disks",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-knight-of-disks.jpg",
+        "thumb": "img/families/thoth-knight-of-disks.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#958f73",
+        "title": "Knight of Disks — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/pentacles_14.jpg"
+      },
+      "court": "knight",
+      "suit": "disks",
+      "element": "earth-element",
+      "sign": 5,
+      "from": 140
+    },
+    "thoth-knight-of-swords": {
+      "name": "Knight of Swords",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-knight-of-swords.jpg",
+        "thumb": "img/families/thoth-knight-of-swords.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#b5c4b6",
+        "title": "Knight of Swords — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/swords_14.jpg"
+      },
+      "court": "knight",
+      "suit": "swords",
+      "element": "air",
+      "sign": 2,
+      "from": 50
+    },
+    "thoth-knight-of-wands": {
+      "name": "Knight of Wands",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-knight-of-wands.jpg",
+        "thumb": "img/families/thoth-knight-of-wands.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#c39b74",
+        "title": "Knight of Wands — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/wands_14.jpg"
+      },
+      "court": "knight",
+      "suit": "wands",
+      "element": "fire",
+      "sign": 8,
+      "from": 230
+    },
     "thoth-lovers": {
       "name": "Atu VI · The Lovers",
       "kind": "major",
@@ -1776,6 +2207,22 @@
       },
       "sign": 2
     },
+    "thoth-lust": {
+      "name": "Atu XI · Lust",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-lust.jpg",
+        "thumb": "img/families/thoth-lust.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#b5906d",
+        "title": "Lust — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_08.jpg"
+      },
+      "sign": 4
+    },
     "thoth-magus": {
       "name": "Atu I · The Magus",
       "kind": "major",
@@ -1790,6 +2237,22 @@
         "license": "All rights reserved; shipped on the owner's ruling (D8)",
         "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_01.jpg"
       }
+    },
+    "thoth-moon": {
+      "name": "Atu XVIII · The Moon",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-moon.jpg",
+        "thumb": "img/families/thoth-moon.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#97a992",
+        "title": "The Moon — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_18.jpg"
+      },
+      "sign": 11
     },
     "thoth-nine-of-cups": {
       "name": "Nine of Cups",
@@ -1893,6 +2356,238 @@
         "license": "All rights reserved; shipped on the owner's ruling (D8)",
         "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_02.jpg"
       }
+    },
+    "thoth-prince-of-cups": {
+      "name": "Prince of Cups",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-prince-of-cups.jpg",
+        "thumb": "img/families/thoth-prince-of-cups.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#85aaa9",
+        "title": "Prince of Cups — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/cups_12.jpg"
+      },
+      "court": "prince",
+      "suit": "cups",
+      "element": "water",
+      "sign": 7,
+      "from": 200
+    },
+    "thoth-prince-of-disks": {
+      "name": "Prince of Disks",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-prince-of-disks.jpg",
+        "thumb": "img/families/thoth-prince-of-disks.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#8b8670",
+        "title": "Prince of Disks — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/pentacles_12.jpg"
+      },
+      "court": "prince",
+      "suit": "disks",
+      "element": "earth-element",
+      "sign": 1,
+      "from": 20
+    },
+    "thoth-prince-of-swords": {
+      "name": "Prince of Swords",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-prince-of-swords.jpg",
+        "thumb": "img/families/thoth-prince-of-swords.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#b8c39e",
+        "title": "Prince of Swords — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/swords_12.jpg"
+      },
+      "court": "prince",
+      "suit": "swords",
+      "element": "air",
+      "sign": 10,
+      "from": 290
+    },
+    "thoth-prince-of-wands": {
+      "name": "Prince of Wands",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-prince-of-wands.jpg",
+        "thumb": "img/families/thoth-prince-of-wands.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#cba37b",
+        "title": "Prince of Wands — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/wands_12.jpg"
+      },
+      "court": "prince",
+      "suit": "wands",
+      "element": "fire",
+      "sign": 4,
+      "from": 110
+    },
+    "thoth-princess-of-cups": {
+      "name": "Princess of Cups",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-princess-of-cups.jpg",
+        "thumb": "img/families/thoth-princess-of-cups.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#9ab1a8",
+        "title": "Princess of Cups — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/cups_11.jpg"
+      },
+      "court": "princess",
+      "suit": "cups",
+      "element": "water"
+    },
+    "thoth-princess-of-disks": {
+      "name": "Princess of Disks",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-princess-of-disks.jpg",
+        "thumb": "img/families/thoth-princess-of-disks.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#b9b695",
+        "title": "Princess of Disks — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/pentacles_11.jpg"
+      },
+      "court": "princess",
+      "suit": "disks",
+      "element": "earth-element"
+    },
+    "thoth-princess-of-swords": {
+      "name": "Princess of Swords",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-princess-of-swords.jpg",
+        "thumb": "img/families/thoth-princess-of-swords.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#9fb8a1",
+        "title": "Princess of Swords — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/swords_11.jpg"
+      },
+      "court": "princess",
+      "suit": "swords",
+      "element": "air"
+    },
+    "thoth-princess-of-wands": {
+      "name": "Princess of Wands",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-princess-of-wands.jpg",
+        "thumb": "img/families/thoth-princess-of-wands.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#ca976b",
+        "title": "Princess of Wands — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/wands_11.jpg"
+      },
+      "court": "princess",
+      "suit": "wands",
+      "element": "fire"
+    },
+    "thoth-queen-of-cups": {
+      "name": "Queen of Cups",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-queen-of-cups.jpg",
+        "thumb": "img/families/thoth-queen-of-cups.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#8eb5b3",
+        "title": "Queen of Cups — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/cups_13.jpg"
+      },
+      "court": "queen",
+      "suit": "cups",
+      "element": "water",
+      "sign": 3,
+      "from": 80
+    },
+    "thoth-queen-of-disks": {
+      "name": "Queen of Disks",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-queen-of-disks.jpg",
+        "thumb": "img/families/thoth-queen-of-disks.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#899179",
+        "title": "Queen of Disks — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/pentacles_13.jpg"
+      },
+      "court": "queen",
+      "suit": "disks",
+      "element": "earth-element",
+      "sign": 9,
+      "from": 260
+    },
+    "thoth-queen-of-swords": {
+      "name": "Queen of Swords",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-queen-of-swords.jpg",
+        "thumb": "img/families/thoth-queen-of-swords.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#9cb6b5",
+        "title": "Queen of Swords — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/swords_13.jpg"
+      },
+      "court": "queen",
+      "suit": "swords",
+      "element": "air",
+      "sign": 6,
+      "from": 170
+    },
+    "thoth-queen-of-wands": {
+      "name": "Queen of Wands",
+      "kind": "court",
+      "image": {
+        "src": "img/families/thoth-queen-of-wands.jpg",
+        "thumb": "img/families/thoth-queen-of-wands.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#d8b492",
+        "title": "Queen of Wands — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/wands_13.jpg"
+      },
+      "court": "queen",
+      "suit": "wands",
+      "element": "fire",
+      "sign": 0,
+      "from": 350
     },
     "thoth-seven-of-cups": {
       "name": "Seven of Cups",
@@ -2069,6 +2764,22 @@
       "n": 2,
       "lon": 130,
       "decan": "decan-leo-2"
+    },
+    "thoth-star": {
+      "name": "Atu XVII · The Star",
+      "kind": "major",
+      "image": {
+        "src": "img/families/thoth-star.jpg",
+        "thumb": "img/families/thoth-star.thumb.jpg",
+        "width": 800,
+        "height": 1255,
+        "tone": "#98a5ae",
+        "title": "The Star — The Thoth Tarot (Frieda Harris, for Aleister Crowley)",
+        "credit": "Frieda Harris, The Thoth Tarot (for Aleister Crowley); local pack of the Quaternal Tarot app",
+        "license": "All rights reserved; shipped on the owner's ruling (D8)",
+        "sourceUrl": "https://cdn.arcanika.com/cards/thoth/en/major_17.jpg"
+      },
+      "sign": 10
     },
     "thoth-sun": {
       "name": "Atu XIX · The Sun",

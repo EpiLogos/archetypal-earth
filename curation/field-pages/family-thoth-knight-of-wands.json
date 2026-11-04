@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-knight-of-wands",
- "line": "Crowley's Knight of Wands: Yodh of the Name (pdf p139); the fiery part of Fire and the span from Scorpio to Sagittarius (pdf p141).",
+ "line": "Fire at its most sudden: a rider of lightning, all activity, generosity, fierceness and pride, who acts before anyone can think. Drawn, the card brings a burst of bold, impulsive energy and a swift start, but warns that such force cannot adapt: if the first charge fails there is nothing in reserve, and misdirected it turns cruel and bigoted. The Knight of Wands is the fiery part of Fire, ruling the last decan of Scorpio and the first two of Sagittarius.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Knights (pdf p139) and on the Knight of Wands (pdf p141).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Knights represent the powers of the letter Yodh in the Name.",
-     "page": 139,
+     "quote": "The moral qualities appropriate to this figure are activity, generosity, fierceness, impetuosity, pride, impulsiveness, swiftness in unpredictable actions. If wrongly energized, he is evil‐minded, cruel, bigoted and brutal. He is in either case ill‐fitted to carry on his action; he has no means of modifying it according to circumstances. If he fails in his first effort, he has no resource.",
+     "page": 141,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Knight of Wands represents the fiery part of Fire",
+     "quote": "The Querent is advised to be apprehensive, yet cool, resolute and energetic: to beware of untimely action, but to go forward with tense confidence in his own ability.",
      "page": 141,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Scorpio to the 20th degree of Sagittarius (pdf p141); on the decans and the elemental attribution (pdf p139).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "he rules from the 21St degree of Scorpio to the 20th degree of Sagittarius",
+     "quote": "He is a warrior in complete armour. On his helmet for a crest he wears a black horse. In his hand he bears a flaming torch; a flame also in his mantle; and upon the flames does he ride. His steed is a black horse leaping.",
      "page": 141,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Knight of Wands (pdf p141).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The moral qualities appropriate to this figure are activity, generosity, fierceness, impetuosity, pride",
-     "page": 141,
+     "quote": "The Knights represent the powers of the letter Yodh in the Name. They are the most sublime, original, active part of the Energy of the Element; for this reason they are represented on horseback and clad in complete armour. Their action is swift and violent, but transient. In the Element of Fire, for instance, the Knight corresponds to the Lightning flash; in the Element of Water, to Rain and Springs; in that of Air, to Wind; in that of Earth, to Mountains.",
+     "page": 139,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "For instance, one might anticipate that the fiery part of Fire would refer to the most active of the fiery signs, namely, Aries. On the contrary, it represents the last decan of Scorpio and the first two of Sagittarius, which is the watery part of Fire in the Zodiac, and the mildest in influence.",
+     "page": 139,
      "voice": "Crowley"
     }
    ]

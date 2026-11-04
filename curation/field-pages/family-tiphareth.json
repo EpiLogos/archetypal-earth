@@ -2,66 +2,28 @@
  "version": 1,
  "type": "family",
  "id": "tiphareth",
- "line": "Crowley on Tiphareth (The Book of Thoth); Jung on Tifereth in CW14 ¶18, ¶592 and ¶638.",
+ "line": "Beauty, the Son and the Sun: the sixth sephira at the centre of the Tree, the only one below the Abyss in direct touch with the Crown, and consciousness in its most balanced form. Its number gives each suit its element in harmonious success: Victory in Wands, Pleasure in Cups, Science in Swords, Success in Disks. Among the ten bodies of the solar system on the Tree, it is the Sun.",
  "sections": [
   {
-   "id": "crowley-sixes",
-   "title": "Crowley's Sixes",
-   "line": "Crowley on the Sixes and Tiphareth, and the number Six as the centre of the system: The Book of Thoth, pdf p177, p232 and p21.",
+   "id": "crowley",
+   "title": "Crowley on Tiphareth",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Tiphareth.",
+     "quote": "This Sephira is in some respects the most important of all. It is the centre of the whole system; it is the only Sephira below the Abyss which communicates directly with Kether. It is fed directly from Chokmah and Binah; also from Chesed and Geburah.",
      "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Number Six, Tiphareth, as before,",
-     "page": 232,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Here is the number Six, the centre of the system:",
-     "page": 21,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "sun-and-son",
-   "title": "Sun and Son",
-   "line": "Crowley on Tiphareth in the planetary system and in the system of Tetragrammaton: The Book of Thoth, pdf p177.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "In the planetary system it represents the Sun;",
+     "quote": "In the planetary system it represents the Sun; in the system of Tetragrammaton it represents the Son. The entire geometrical complex of the Ruach may be regarded as an expansion from Tiphareth. It represents consciousness in its most harmonized and balanced form; definitely in form, not only in idea, as in the case of the number Two. In other words, the Son is an interpretation of the Father in terms of the mind.",
      "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "in the system of Tetragrammaton it represents the Son.",
-     "page": 177,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "direct-line-and-the-airy-sephira",
-   "title": "Kether and the airy Sephira",
-   "line": "Crowley on Tiphareth and Kether, and on the Ruach centred in the airy Sephira: The Book of Thoth, pdf p177 and p211.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "which communicates directly with Kether.",
-     "page": 177,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The Ruach is centred in the airy Sephira, Tiphareth, who is the Son,",
+     "quote": "The Ruach is centred in the airy Sephira, Tiphareth, who is the Son, the first‐born of the Father, and the Sun, the first emanation of the creative Phallus.",
      "page": 211,
      "voice": "Crowley"
     }
@@ -70,23 +32,23 @@
   {
    "id": "jung-order-and-the-sun",
    "title": "Jung's Tifereth",
-   "line": "Jung on the usual arrangement of the Sefiroth, the middle position, and the sun: CW14 ¶18, ¶592 and ¶638.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "in the usual arrangement of the Sefiroth he occupies the second place",
+     "quote": "The Sefira Tifereth is the King, and in the usual arrangement of the Sefiroth he occupies the second place: Kether Tifereth Yesod Malchuth.",
      "para": 18,
      "voice": "Jung"
     },
     {
      "work": "cw14",
-     "quote": "The figure of Tifereth belongs to the Sefiroth system, which is conceived to be a tree. Tifereth occupies the middle position",
+     "quote": "The figure of Tifereth belongs to the Sefiroth system, which is conceived to be a tree. Tifereth occupies the middle position.",
      "para": 592,
      "voice": "Jung"
     },
     {
      "work": "cw14",
-     "quote": "Yesod is as a part to the whole, and the whole is Tifereth, who is named the sun",
+     "quote": "Yesod is as a part to the whole, and the whole is Tifereth, who is named the sun.",
      "para": 638,
      "voice": "Jung"
     }

@@ -2,67 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-emperor",
- "line": "Crowley on Atu IV: the letter Tzaddi, Aries under Mars, Chokmah and Tiphareth, and the Path of Hé (pdf p66, p67, p211).",
+ "line": "The Emperor is power made concrete: swift, fiery, initiating energy set to govern, the father's authority and the rule of law. Drawn, he brings ambition, conquest, vigour and originality, but also rashness, stubbornness and megalomania. His force is sudden and does not last; held too long, it burns and destroys. It is the path of Tzaddi and of Aries, the Ram, ruled by Mars, where the Sun is exalted.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Letter and sign",
-   "line": "Crowley refers the card to the letter Tzaddi and to the sign Aries, ruled by Mars (pdf p66).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card is attributed to the letter Tzaddi, and it refers to the sign of Aries in the Zodiac.",
+     "quote": "Sulphur is the male fiery energy of the Universe, the Rajas of Hindu philosophy. This is the swift creative energy, the initiative of all Being.",
      "page": 66,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This sign is ruled by Mars, and therein the Sun is exalted.",
-     "page": 66,
+     "quote": "With regard to the quality of this power, it must be noted that it represents sudden, violent, but impermanent activity. If it persists too long, it burns and destroys.",
+     "page": 67,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "War, conquest, victory, strife, ambition, originality, overweening confidence and megalomania, quarrelsomeness, energy, vigour, stubbornness, impracticability, rashness, ill‐temper.",
+     "page": 250,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "Chokmah, Tiphareth and the Path of Hé",
-   "line": "Crowley on authority derived from Chokmah and exerted upon Tiphareth (pdf p67), on the white light that indicates the card's position in the Tree of Life (pdf p67), and on the Path of Hé (pdf p211).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "His authority is derived from Chokmah, the creative Wisdom, the Word, and is exerted upon Tiphareth, the organized man.",
-     "page": 67,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "the white light which descends upon him indicates the position of this card in the Tree of Life",
-     "page": 67,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Path of Hé, the Great Mother, the Star, our Lady Nuit,",
-     "page": 211,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-the-card-figures",
-   "title": "The figure and its power",
-   "line": "Crowley's description of the crowned male figure (pdf p66) and of the sudden, violent, impermanent activity it represents (pdf p67).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The card represents a crowned male figure, with imperial vestments and regalia.",
+     "quote": "The card represents a crowned male figure, with imperial vestments and regalia. He is seated upon the throne whose capitals are the heads of the Himalayan wild ram, since Aries means a Ram. At his feet, couchant, is the Lamb and Flag, to confirm this attribution on the lower plane; for the ram, by nature, is a wild and courageous animal, lonely in lonely places, whereas when tamed and made to lie down in green pastures, nothing is left but the docile, cowardly, gregarious and succulent beast. This is the theory of government.",
      "page": 66,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "With regard to the quality of this power, it must be noted that it represents sudden, violent, but impermanent activity.",
+     "quote": "The Emperor bears a sceptre (surmounted by a ram’s head for the reasons given above) and an orb surmounted by a Maltese cross, which signifies that his energy has reached a successful issue, that his government has been established.",
      "page": 67,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "This card is attributed to the letter Tzaddi, and it refers to the sign of Aries in the Zodiac. This sign is ruled by Mars, and therein the Sun is exalted. The sign is thus a combination of energy in its most material form with the idea of authority.",
+     "page": 66,
      "voice": "Crowley"
     }
    ]

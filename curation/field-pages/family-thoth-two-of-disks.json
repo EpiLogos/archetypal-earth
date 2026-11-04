@@ -2,80 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-disks",
- "line": "Crowley’s Two of Disks: Chokmah in the suit of Earth (pdf p227); Jupiter and Capricornus (pdf p227); formerly the Lord of Harmonious Change (pdf p176).",
+ "line": "Change: the endless turning by which things stay alive. Two wheels spin in opposite directions inside a serpent biting its tail, and their constant movement is what holds the whole together; stability is kept up by change. Drawn, the card asks you to keep things moving, to juggle and adapt instead of holding still, and not to count on more than modest luck. Chokmah, the first force, takes its most fixed form in Earth, under Jupiter in Capricorn, the Wheel in an uneasy sign.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Two of Pentacles was of old time called the Lord of Harmonious Change.",
+     "quote": "The number Two, Chokmah, here rules in the suit pertaining to Earth. It shows the type of Energy appropriate to Two, in its most fixed form. According to the doctrine that Change is the support of stability, the card is called Change.",
+     "page": 227,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Two of Pentacles was of old time called the Lord of Harmonious Change. Now, more simply, Change; and here the doctrine must be stated a little more clearly. This suit being of Earth, there is a connection with the Princesses, and therefore with the final Hé of Tetragrammaton. Earth is the throne of Spirit; having got to the bottom, one immediately comes out again at the top. Hence, the card manifests the symbolism of the serpent of the endless band.",
      "page": 176,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Two and Chokmah in the suit of Earth (pdf p227); on the Twos and Chokmah (pdf p35).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The number Two, Chokmah, here rules in the suit pertaining to Earth.",
-     "page": 227,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The 2 pertains to Chokmah.",
-     "page": 35,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the card as the picture of the manifested Universe and on the interplay of the Four Elements (pdf p227).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "One may in fact consider the card as the picture of the complete manifested Universe",
-     "page": 227,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "They thus represent the harmonious interplay of the Four Elements in constant movement.",
+     "quote": "Its celestial rulers are Jupiter and Capricornus; and these symbols are most inharmonious, so that in practical matters the good fortune of Jupiter is very limited. Their influence on the card is not great. Yet, Jupiter being himself the Wheel (Atu X), he emphasizes that idea.",
      "page": 227,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "conflicts-and-gaps",
-   "title": "Jupiter and Capricornus",
-   "line": "Crowley on the card’s celestial rulers (pdf p227).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Its celestial rulers are Jupiter and Capricornus",
+     "quote": "The card represents two Pantacles, one above the other; they are the Chinese symbols of the Yang and Yin duplicated as in the Hsiang. One wheel is dextro‐ and the other laevorotatory. They thus represent the harmonious interplay of the Four Elements in constant movement. One may in fact consider the card as the picture of the complete manifested Universe, in respect of its dynamics.",
      "page": 227,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "these symbols are most inharmonious, so that in practical matters the good fortune of Jupiter is very limited.",
+     "quote": "About them is entwined a green Serpent (see Liber 65, chapter iii, verses 17‐20). His tail is in his mouth. He forms the figure Eight, the symbol of the Infinite, the equation 0=2.",
      "page": 227,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Twos",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Hence, only on reaching the Deuces does an element appear as the element itself. Chokmah is uncontaminated by any influence; therefore the elements here appear in their original harmonious condition.",
+     "page": 175,
      "voice": "Crowley"
     }
    ]

@@ -2,55 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-swords",
- "line": "Crowley's Princess of Swords: Hé final of the Name (pdf p140); the earthy part of Air (pdf p163); no zodiacal attribution (pdf p140).",
+ "line": "Thought brought down to earth: stern, firm and aggressive, with great practical wisdom and a gift for settling quarrels. Drawn, the card brings a decisive, combative intelligence that cuts through controversy and avenges what has been profaned, and warns that when ill placed it scatters into incoherence and low cunning. The Princess of Swords is the earthy part of Air; she has no span of the zodiac but rules a quarter of the heavens around the North Pole.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Swords (pdf p163).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses represent the Hé final of the Name.",
-     "page": 140,
+     "quote": "The character of the Princess is stern and revengeful. Her logic is destructive. She is firm and aggressive, with great practical wisdom and subtlety in material things. She shews great cleverness and dexterity in the management of practical affairs, especially where they are of a controversial nature. She is very adroit in the settlement of controversies.",
+     "page": 163,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Princess of Swords represents the earthy part of Air, the fixation of the volatile.",
+     "quote": "If ill‐dignified, all these qualities are dispersed; she becomes incoherent, and all her gifts tend to combine to form a species of low cunning whose object is unworthy of the means.",
      "page": 163,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-place-in-the-heavens",
-   "title": "Zodiacal attribution",
-   "line": "Crowley on the Princesses and the Zodiac (pdf p140).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses have no Zodiacal attribution.",
-     "page": 140,
+     "quote": "She partakes of the characteristics of Minerva and Artemis, and there is some suggestion of the Valkyrie. She represents to some extent the anger of the Gods, and she appears helmed, with serpent‐haired Medusa for her crest. She stands in front of a barren altar as if to avenge its profanation, and she stabs downward with her sword. The heaven and the clouds, which are her home, seem angry.",
+     "page": 163,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Princess of Swords (pdf p163).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The character of the Princess is stern and revengeful.",
+     "quote": "The Princess of Swords represents the earthy part of Air, the fixation of the volatile. She brings about the materialization of Idea. She represents the influence of Heaven upon Earth.",
      "page": 163,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "She brings about the materialization of Idea.",
-     "page": 163,
+     "quote": "They form a link between the small cards and the Princesses, who rule the Heavens around the North Pole. The Meridian is the Great Pyramid, and the Elements rule, going Eastward, in the order of Tetragrammaton, Fire, Water, Air, Earth. Thus, roughly, Aces‐Princesses Wands cover Asia, Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa.",
+     "page": 175,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princesses have no Zodiacal attribution. Yet evidently they represent four types of human being. They are those numerous “elemental” people whom we recognize by their lack of all sense of responsibility, whose moral qualities seem to lack “bite”.",
+     "page": 140,
      "voice": "Crowley"
     }
    ]

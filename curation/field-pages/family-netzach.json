@@ -2,48 +2,29 @@
  "version": 1,
  "type": "family",
  "id": "netzach",
- "line": "Crowley on Netzach (The Book of Thoth); Jung on Nezach in CW14 ¶635.",
+ "line": "Victory: the seventh sephira, off the middle pillar and low on the Tree, the sphere of Venus, where force descends into illusion and risks losing its heavenly origin. Its number weakens each suit and exposes its defects: Valour in Wands, Debauch in Cups, Futility in Swords, Failure in Disks. Among the ten bodies of the solar system on the Tree, it is Venus.",
  "sections": [
   {
-   "id": "crowley-sevens",
-   "title": "Crowley's Sevens",
-   "line": "Crowley on the Sevens and Netzach, the Sephira of Venus: The Book of Thoth, pdf p178, p219 and p233.",
+   "id": "crowley",
+   "title": "Crowley on Netzach",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Netzach.",
+     "quote": "These cards are attributed to Netzach. The position is doubly unbalanced; off the middle pillar, and very low down on the Tree. It is taking a very great risk to descend so far into illusion, and, above all, to do it by frantic struggle. Netzach pertains to Venus; Netzach pertains to Earth; and the greatest catastrophe that can befall Venus is to lose her Heavenly origin. The four Sevens are not capable of bringing any comfort; each one represents the degeneration of the element.",
      "page": 178,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Netzach, the Sephira of Venus, means victory.",
+     "quote": "This card derives from Netzach (Victory) in the suit of Fire. But the Seven is a weak, earthy, feminine number as regards the Tree of Life, and represents a departure from the balance so low down on the Tree that this implies a loss of confidence.",
+     "page": 192,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Netzach, in the suit of Swords, does not represent such catastrophe as in the other suits, for Netzach, the Sephira of Venus, means victory. There is, therefore, a modifying influence; and this is accentuated by the celestial rule of the Moon in Aquarius.",
      "page": 219,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The number Seven, Netzach, has its customary enfeebling effect,",
-     "page": 233,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "earth-venus-and-the-moon",
-   "title": "Earth, Venus and the Moon",
-   "line": "Crowley on Netzach, Earth, Venus and the Moon: The Book of Thoth, pdf p178 and p103.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "to Earth; and the greatest catastrophe that can befall Venus is to lose her Heavenly origin.",
-     "page": 178,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "she joins the earthy sphere of Netzach with Malkuth,",
-     "page": 103,
      "voice": "Crowley"
     }
    ]
@@ -51,11 +32,11 @@
   {
    "id": "jung-nezach",
    "title": "Jung's Nezach",
-   "line": "Jung on Nezach and the right, masculine side: CW14 ¶635.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty)",
+     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty).",
      "para": 635,
      "voice": "Jung"
     }

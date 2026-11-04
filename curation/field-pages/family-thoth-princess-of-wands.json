@@ -2,55 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-wands",
- "line": "Crowley's Princess of Wands: Hé final of the Name (pdf p140); the earthy part of Fire and one quadrant of the heavens about the North Pole (pdf p147).",
+ "line": "Fire’s own fuel: a brilliant, daring nature whose vigour makes her beautiful, sudden and implacable in anger or in love, consuming all that comes near her. Drawn, the card brings enthusiasm, ambition and a bold leap into action, and warns of theatrical shallowness and a patience that waits only to avenge. The Princess of Wands is the earthy part of Fire; she has no span of the zodiac but rules a quarter of the heavens around the North Pole.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Wands (pdf p147).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses represent the Hé final of the Name.",
-     "page": 140,
+     "quote": "The character of the Princess is extremely individual. She is brilliant and daring. She creates her own beauty by her essential vigour and energy. The force of her character imposes the impression of beauty upon the beholder. In anger or love she is sudden, violent, and implacable.",
+     "page": 147,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Princess of Wands represents the earthy part of Fire; one might say, she is the fuel of Fire.",
+     "quote": "She consumes all that comes into her sphere. She is ambitious and aspiring, full of enthusiasm which is often irrational. She never forgets an injury, and the only quality of patience to be found in her is the patience with which she lies in ambush to avenge. Such a woman, ill‐dignified, shews the defects of these qualities. She is superficial and theatrical, completely shallow and false, yet without suspecting that she is anything of the sort, for she believes entirely in herself, even when it is apparent to the most ordinary observer that she is merely in the spasm of mood.",
      "page": 147,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-place-in-the-heavens",
-   "title": "Its place in the heavens",
-   "line": "Crowley on the Princesses and the Zodiac (pdf p140); on the Princess of Wands and the heavens (pdf p147).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses have no Zodiacal attribution.",
-     "page": 140,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "She rules the Heavens for one quadrant of the portion around the North Pole.",
+     "quote": "The Princess is therefore shewn with the plumes of justice streaming like flames from her brow; and she is unclothed, shewing that chemical action can only take place when the element is perfectly free to combine with its partner. She bears a wand crowned with the disk of the Sun; and she is leaping in a surging flame which re‐calls by its shape the letter Yodh.",
      "page": 147,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Princess of Wands (pdf p147).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The character of the Princess is extremely individual.",
+     "quote": "The Princess of Wands represents the earthy part of Fire; one might say, she is the fuel of Fire. This expression implies the irresistible chemical attraction of the combustible substance. She rules the Heavens for one quadrant of the portion around the North Pole.",
      "page": 147,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Princesses represent the Hé final of the Name. They represent the ultimate issue of the original Energy in its completion, its crystallization, its materialization. They also represent the counter‐balancing, the re‐absorption of the Energy. They represent the Silence into which all things return. They are thus at the same time permanent and non‐existent.",
+     "page": 140,
      "voice": "Crowley"
     }
    ]

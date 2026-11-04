@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "capricorn",
- "line": "Burt, Archetypes of the Zodiac, chapter on Capricorn (pdf pp. 379–446); Jung on the goat-fish (CW5; Dream Analysis seminar).",
+ "line": "Capricorn is Cardinal Earth, and its search is for dharma: the soul’s long journey through duty, ambition and time toward freedom in the Divine. Its gift is patience, discipline and introspection, the climb of the mountain goat that turns hard work into lasting achievement; its shadow is rigidity, pessimism and the cold, judging senex who cannot let go. Saturn, Father Time, is both its mundane and its esoteric ruler, and Cancer’s mercy is the balance it must learn.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Capricorn (pdf pp. 379–446): pdf p381, p379 and p384.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "The Capricorn archetype includes every concept, sense and meaning of time, from the most abstract Hindu, Mayan, and Greek ages of the gods, aeonic time, to the concrete calendar year and the lifespan of an individual,",
-     "page": 381,
+     "quote": "Dharma, then, astrologically represented by esoteric Saturn, is about the Soul’s evolutionary journey, over time, toward oneness with and freedom in the Divine. Within this long journey there are Saturnine lifetimes of repaying old debts and ambitiously working off desires, and Jupiterian lifetimes of harvesting past-life merit.",
+     "page": 389,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle,",
+     "quote": "At the mundane level, the Capricorn archetype can be recognized every year in conversations about shoulds and oughts, conflicting family duties, traditions, growing older, and an overwhelming feeling of being under pressure because “there’s so little time.” One can almost see Chronus, or Saturn, as the Romans called him (Father Time) standing to one side holding his hour glass, or his sickle, while people make these Winter Solstice remarks.",
      "page": 379,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Symbolically, souls, which the Greeks believed to have descended through the Womb, or Gate of Cancer in fertile summertime, departed in great numbers through the Death Gate of Capricorn during Winter Solstice.",
-     "page": 381,
+     "quote": "We have met two of the Capricorn goats—the hardy, aspiring, Mountain Goat and the seemingly unmotivated Pan Goat. A third, equally important and somewhat more esoteric goat remains to be encountered—the Scapegoat.",
+     "page": 423,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "These are the rulers of Sagittarius and Capricorn.",
-     "page": 384,
+     "quote": "Saturn simplifies our lives by dissolving things we hang onto that don’t really make us happy, so that we can get on with life. One sees this constantly as an astrologer. Saturn is the greatest of teachers for those of us who are observant.",
+     "page": 399,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Capricorn (pdf pp. 379–446): pdf p382, p398 and p389.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Saturn is not a Wise Old Man but a senile, rigid symbol it has become",
-     "page": 382,
+     "quote": "Like the other aeonic lords before him, Chronus refused to retire gracefully at the end of his 2,400-year reign and had to be overthrown by his son, in this case Zeus (Jupiter). As a result of my client work I have come to see the banishment of Chronus as connected to the Jungian Scapegoat archetype, and as central to the life journey of the Capricorn/Saturn archetype.",
+     "page": 423,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Wise Old Man who was mistakenly perceived as rigid Senex.",
-     "page": 398,
+     "quote": "But if we consider ourselves the hard working but undeserving heirs of Saturn, a cold Father who judges us harshly and focuses on our limitations, not what we actually accomplished but what we should have accomplished more perfectly, more thoroughly, more rapidly, we tend to draw more of Saturn’s tests, hurdles, delays, and frustrations because we are looking for them—pessimistically expecting them.",
+     "page": 384,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Dharma, then, astrologically represented by esoteric Saturn, is about the Soul’s evolutionary journey, over time, toward oneness with and freedom in the Divine.",
-     "page": 389,
+     "quote": "Strict Justice that is not tempered with mercy can be a real burden for the subjects to bear. Capricorn has Cancer as its polarity sign, ruled by the Great Mother, the Moon. One major aspect of the Mother is her Mercy (see Chapter 4, Cancer, Kwan Yin) which tempers Capricornian strict Justice.",
+     "page": 422,
      "voice": "Burt"
     }
    ]
@@ -63,17 +63,11 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the goat-fish: CW5 ¶290; Dream Analysis seminar, pdf p435.",
+   "line": "",
    "quotes": [
     {
      "work": "cw05",
-     "quote": "The symbol for that portion of the zodiac in which the sun reenters the yearly cycle at the time of the winter solstice is Capricorn,",
-     "para": 290,
-     "voice": "Jung"
-    },
-    {
-     "work": "cw05",
-     "quote": "the sun mounts like a goat to the tops of the highest mountains, and then plunges into the depths of the sea like a fish.",
+     "quote": "The symbol for that portion of the zodiac in which the sun reenters the yearly cycle at the time of the winter solstice is Capricorn, originally known as the “Goat-Fish” (aíγóχερωs, ‘goat-horned’): the sun mounts like a goat to the tops of the highest mountains, and then plunges into the depths of the sea like a fish.",
      "para": 290,
      "voice": "Jung"
     },

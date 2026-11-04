@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-six-of-cups",
- "line": "Crowley’s Six of Cups: Pleasure (pdf p178); Scorpio and the Sun (pdf p178, p203); Tiphareth (pdf p177).",
+ "line": "Pleasure in its highest sense: well-being, ease and the harmony of natural forces working without strain. The sun's heat on the waters breaks things down only to make them fertile, and life springs from it. Drawn, this is one of the best cards in the pack, a sign of contentment, fruitful love and desire fulfilled rather than merely gratified. The Sun in Scorpio works here in Tiphareth, the sphere of Beauty and of the Sun itself, at the centre of the Tree.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title and the sign Scorpio (pdf p178); on the Sun (pdf p203).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Six of Cups is called Pleasure.",
-     "page": 178,
+     "quote": "Pleasure, in the title of this card, must be understood in its highest sense: it implies well‐being, harmony of natural forces without effort or strain, ease, satisfaction. Foreign to the idea of the card is the gratification of natural or artificial desires. Yet it does represent emphatically the fulfilment of the sexual Will, as shown by the ruling Sephira, planet, element, and sign.",
+     "page": 203,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The zodiacal sign governing the card being Scorpio",
-     "page": 178,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "influence is fortified by that of the Sun, who also represents the Six",
+     "quote": "This card shows the influence of the number Six, Tiphareth, in the suit of Water. This influence is fortified by that of the Sun, who also represents the Six. The whole image is that of the influence of the Sun on Water. His fierce, but balanced power operates that type of putrefaction‐he is in the Sign of Scorpio‐which is the basis of all fertility, all life.",
      "page": 203,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Sixes and Tiphareth, and on Tiphareth and the Sun (pdf p177).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Tiphareth.",
-     "page": 177,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "In the planetary system it represents the Sun;",
-     "page": 177,
+     "quote": "The lotus stems are grouped in an elaborate dancing movement. From their blossoms water gushes into the Cups, but they are not yet full to overflowing, as they are in the corresponding card below; the Nine.",
+     "page": 203,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on Pleasure in its highest sense (pdf p203).",
+   "id": "number",
+   "title": "The Sixes",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Pleasure, in the title of this card, must be understood in its highest sense",
-     "page": 203,
+     "quote": "The Six of Cups is called Pleasure. This pleasure is a kind of pleasure which is completely harmonized. The zodiacal sign governing the card being Scorpio, pleasure is here rooted in its most convenient soil. This is pre‐eminently a fertile card; it is one of the best in the pack.",
+     "page": 178,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Tiphareth. This Sephira is in some respects the most important of all. It is the centre of the whole system; it is the only Sephira below the Abyss which communicates directly with Kether.",
+     "page": 177,
      "voice": "Crowley"
     }
    ]

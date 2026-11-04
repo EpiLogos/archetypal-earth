@@ -2,66 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "pisces",
- "line": "Burt, Archetypes of the Zodiac, chapter on Pisces (pdf pp. 509–558); Jung on the fishes (Aion; Dream Analysis seminar).",
+ "line": "Pisces is Mutable Water, the cosmic ocean, and its search is for the Castle of Peace, the inner dwelling where the soul meets God beyond any earthly paradise. Its gift is boundless compassion, imagination and a feeling of kinship with all life; its shadow is losing itself in others’ pain, escapism, vast mood swings and drifting with the current. Neptune is its mundane ruler and Pluto, which dissolves its attachments on the night sea journey, its esoteric ruler, while Virgo brings it clarity.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Pisces (pdf pp. 509–558): pdf p509 and p514.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Pisces is the last of the four Mutable signs—Mutable Water.",
+     "quote": "Pisces is the last of the four Mutable signs—Mutable Water. As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, “Who shall bind the Infinite?”",
      "page": 509,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
+     "quote": "Sensitive, caring, and adaptable, Pisces is the last sign of the zodiac, the last of the Twelve Houses, and the end of the astrological year. Spiritually, the Pisces lifetime is about dissolving of attachment without losing contact with feelings of kindness and compassion.",
      "page": 509,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "As the cosmic ocean of infinity, it is boundless and universal, for as William Blake wrote, “Who shall bind the Infinite?”",
-     "page": 509,
+     "quote": "This universality, swimming in the ocean of life, connects Pisces to Dionysius as ruling deity. Dionysius, the shape shifter deity, did not limit himself to appearing in human form but appeared in Euripides’ play “The Bacchae” as all the powerful animals that rule the Fixed signs—the Lion, the Serpent, the Bull.",
+     "page": 514,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Astrologically, Pisces is the sign of the actor or the chameleon",
+     "quote": "The archetypal Pisces fish, then, swims in the ocean of life, conscious not simply of his interconnectedness with human beings, but with all life forms—plants, animals and people. It is this wider sense of belonging to the great chain of being that distinguishes Pisces from, for instance, Aquarius, which is a universal sign also but has a mental connectedness to humanity, rather than a feeling of connectedness with all life.",
      "page": 514,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Pisces (pdf pp. 509–558): pdf p509, p515, p513 and p517.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Though our modern zodiac represents Pisces as two fish swimming in opposite directions, through the ages many cultures chose the dolphin to symbolize Pisces.",
-     "page": 509,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Dionysius, the Divine Child, Zeus’ wife Hera became jealous",
+     "quote": "What was Dionysius doing in the underworld during those months when he left the mask behind for the devotees? He tried to rescue Semele, his mother, who was stuck in Hades as punishment for her hubris, her pride and presumption.",
      "page": 515,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "This is what I mean by Piscean absolutism.",
-     "page": 513,
+     "quote": "Neptune/Bacchus/Dionysius is not a rulership of moderation, but of vast mood swings. The sea of life is also the sea of emotionality. Many Pisceans drift with the current.",
+     "page": 520,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "Dionysius was timid, fearful and hypersensitive as a child.",
-     "page": 517,
+     "quote": "The big fish or Jonah’s whale, or the wave that engulfs Pisces in his dreams, or the loss of the loved one, the beloved city, the beloved possessions, are all symbolic of Pluto’s work dissolving the cord that attaches the spiritual fish to matter. The whale or the flood in our dreams is the transformational process, the Pluto process.",
+     "page": 541,
      "voice": "Burt"
     }
    ]
@@ -69,23 +63,23 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the fishes: CW9ii pdf p9, p102 and p104; Dream Analysis seminar, pdf p448.",
+   "line": "",
    "quotes": [
     {
      "work": "cw09ii",
-     "quote": "the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development.",
+     "quote": "It is therefore only natural that my reflections should gravitate mainly round the symbol of the Fishes, for the Pisces aeon is the synchronistic concomitant of two thousand years of Christian development.",
      "page": 9,
      "voice": "Jung"
     },
     {
      "work": "cw09ii",
-     "quote": "it would be clear to anyone acquainted with astrology that he was born as the first fish of the Pisces era,",
+     "quote": "But, to the extent that Christ was regarded as the new aeon, it would be clear to anyone acquainted with astrology that he was born as the first fish of the Pisces era, and was doomed to die as the last ram74 (άρνίον, lamb) of the declining Aries era.",
      "page": 102,
      "voice": "Jung"
     },
     {
      "work": "cw09ii",
-     "quote": "who was born as a fish and was sacrificed as a ram, who had fishermen for disciples",
+     "quote": "It becomes a matter for astonishment only when, through the precession of the equinoxes, the spring-point moves into this sign and thus inaugurates an age in which the \"fish\" was used as a name for the God who became a man, who was born as a fish and was sacrificed as a ram, who had fishermen for disciples and wanted to make them fishers of men, who fed the multitude with miraculously multiplying fishes, who was himself eaten as a fish, the \"holier food,\" and whose followers are little fishes, the \"pisciculi.\"",
      "page": 104,
      "voice": "Jung"
     },

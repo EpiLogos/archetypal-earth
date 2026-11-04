@@ -2,48 +2,35 @@
  "version": 1,
  "type": "family",
  "id": "hod",
- "line": "Crowley on Hod (The Book of Thoth); Jung on Hod in CW14 ¶635.",
+ "line": "Splendour: the eighth sephira, facing Netzach low on the Tree, the sphere of Mercury, of intellect, speech and calculation. Its number reacts against the errors of the Sevens without reaching perfection: Swiftness in Wands, Indolence in Cups, Interference in Swords, Prudence in Disks. Among the ten bodies of the solar system on the Tree, it is Mercury.",
  "sections": [
   {
-   "id": "crowley-eights",
-   "title": "Crowley's Eights",
-   "line": "Crowley on the Eights and Hod, and the number Eight and Mercury: The Book of Thoth, pdf p179 and p234.",
+   "id": "crowley",
+   "title": "Crowley on Hod",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The four Eights are attributed to Hod.",
+     "quote": "The four Eights are attributed to Hod. Being in the same plane as the Sevens on the Tree of Life, but on the other side, the same inherent defects as are found in the Sevens will apply. Yet one may perhaps urge this alleviation, that the Eights come as (in a sense) a remedy for the error of the Sevens. The mischief has been done; and there is now a reaction against it.",
      "page": 179,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in",
+     "quote": "The card also refers to Hod, splendour, in the suit of Fire, whence it refers to the phenomena of speech, light, electricity.",
+     "page": 193,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in his most spiritual aspect, and he both rules and is exalted in the sign of Virgo, which belongs to the Decan, and is governed by the Sun. It signifies intelligence lovingly applied to material matters, especially those of the agriculturalist, the artificer and the engineer.",
      "page": 234,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Eight of Wands is called Swiftness, as one might expect from its attribution to Mercury and Sagittarius.",
-     "page": 179,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "mercury-on-the-tree",
-   "title": "Hod and Mercury",
-   "line": "Crowley on Hod as Mercury on the Tree, airy and mercurial: The Book of Thoth, pdf p237 and p263.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "coin in the place of Hod (Mercury) on the Tree is marked with the cipher of the Sun.",
-     "page": 237,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "for the Sephira Hod, which in our system is Airy and Mercurial",
-     "page": 263,
+     "quote": "The number Eight, Hod, here signifies lack of persistence in matters of the intellect and of contest.",
+     "page": 220,
      "voice": "Crowley"
     }
    ]
@@ -51,11 +38,11 @@
   {
    "id": "jung-hod",
    "title": "Jung's Hod",
-   "line": "Jung on Hod, beauty, and the left, feminine side: CW14 ¶635.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty)",
+     "quote": "Yesod unites the emanation of the right, masculine side (Nezach, life-force) with the left, feminine side (Hod, beauty).",
      "para": 635,
      "voice": "Jung"
     }

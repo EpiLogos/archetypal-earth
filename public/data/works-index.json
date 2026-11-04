@@ -26,74 +26,9 @@
           "page": 22
         },
         {
-          "id": "thoth-ace-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-ace-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-five-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-five-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-four-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-four-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-four-of-wands-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-three-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-three-of-wands-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-two-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
-          "id": "thoth-two-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 24
-        },
-        {
           "id": "thoth-wands-in-book-of-thoth",
           "kind": "pdf",
           "page": 24
-        },
-        {
-          "id": "thoth-ace-of-wands-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 35
-        },
-        {
-          "id": "thoth-two-of-wands-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 35
         },
         {
           "id": "thoth-swords-in-book-of-thoth",
@@ -101,34 +36,34 @@
           "page": 46
         },
         {
-          "id": "thoth-magus-in-book-of-thoth",
+          "id": "thoth-fool-in-book-of-thoth",
           "kind": "pdf",
-          "page": 58
+          "page": 57
         },
         {
           "id": "thoth-priestess-in-book-of-thoth",
           "kind": "pdf",
-          "page": 61
+          "page": 62
         },
         {
           "id": "thoth-empress-in-book-of-thoth",
           "kind": "pdf",
-          "page": 64
+          "page": 65
+        },
+        {
+          "id": "thoth-emperor-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 66
         },
         {
           "id": "thoth-hierophant-in-book-of-thoth",
           "kind": "pdf",
-          "page": 68
-        },
-        {
-          "id": "thoth-lovers-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 70
+          "page": 69
         },
         {
           "id": "thoth-chariot-in-book-of-thoth",
           "kind": "pdf",
-          "page": 74
+          "page": 75
         },
         {
           "id": "thoth-adjustment-in-book-of-thoth",
@@ -148,7 +83,7 @@
         {
           "id": "thoth-lust-in-book-of-thoth",
           "kind": "pdf",
-          "page": 83
+          "page": 85
         },
         {
           "id": "thoth-hanged-man-in-book-of-thoth",
@@ -156,19 +91,19 @@
           "page": 89
         },
         {
+          "id": "thoth-death-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 90
+        },
+        {
           "id": "thoth-art-in-book-of-thoth",
           "kind": "pdf",
           "page": 92
         },
         {
-          "id": "thoth-death-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 95
-        },
-        {
           "id": "thoth-devil-in-book-of-thoth",
           "kind": "pdf",
-          "page": 95
+          "page": 96
         },
         {
           "id": "thoth-tower-in-book-of-thoth",
@@ -176,29 +111,14 @@
           "page": 98
         },
         {
+          "id": "thoth-star-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 100
+        },
+        {
           "id": "thoth-moon-in-book-of-thoth",
           "kind": "pdf",
-          "page": 103
-        },
-        {
-          "id": "thoth-sun-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 105
-        },
-        {
-          "id": "thoth-aeon-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 108
-        },
-        {
-          "id": "thoth-universe-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 109
-        },
-        {
-          "id": "binah-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 110
+          "page": 104
         },
         {
           "id": "thoth-major-arcana-in-book-of-thoth",
@@ -206,64 +126,29 @@
           "page": 110
         },
         {
-          "id": "thoth-fool-in-book-of-thoth",
+          "id": "thoth-universe-in-book-of-thoth",
           "kind": "pdf",
-          "page": 116
+          "page": 111
         },
         {
-          "id": "malkuth-in-book-of-thoth",
+          "id": "thoth-princess-of-swords-in-book-of-thoth",
           "kind": "pdf",
-          "page": 123
-        },
-        {
-          "id": "thoth-knight-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-knight-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-knight-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
+          "page": 140
         },
         {
           "id": "thoth-knight-of-wands-in-book-of-thoth",
           "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-prince-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-prince-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-prince-of-swords-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-prince-of-wands-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
-        },
-        {
-          "id": "thoth-queen-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 139
+          "page": 141
         },
         {
           "id": "thoth-queen-of-wands-in-book-of-thoth",
           "kind": "pdf",
-          "page": 139
+          "page": 143
+        },
+        {
+          "id": "thoth-prince-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 145
         },
         {
           "id": "thoth-princess-of-wands-in-book-of-thoth",
@@ -271,9 +156,19 @@
           "page": 147
         },
         {
+          "id": "thoth-knight-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 149
+        },
+        {
           "id": "thoth-queen-of-cups-in-book-of-thoth",
           "kind": "pdf",
           "page": 151
+        },
+        {
+          "id": "thoth-prince-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 153
         },
         {
           "id": "thoth-princess-of-cups-in-book-of-thoth",
@@ -281,14 +176,34 @@
           "page": 155
         },
         {
+          "id": "thoth-knight-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 157
+        },
+        {
           "id": "thoth-queen-of-swords-in-book-of-thoth",
           "kind": "pdf",
           "page": 159
         },
         {
-          "id": "thoth-princess-of-swords-in-book-of-thoth",
+          "id": "thoth-prince-of-swords-in-book-of-thoth",
           "kind": "pdf",
-          "page": 163
+          "page": 161
+        },
+        {
+          "id": "thoth-knight-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 165
+        },
+        {
+          "id": "thoth-queen-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 167
+        },
+        {
+          "id": "thoth-prince-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 169
         },
         {
           "id": "thoth-princess-of-disks-in-book-of-thoth",
@@ -316,6 +231,26 @@
           "page": 175
         },
         {
+          "id": "thoth-ace-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 175
+        },
+        {
+          "id": "thoth-two-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 175
+        },
+        {
+          "id": "binah-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "chesed-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
           "id": "decan-capricorn-2-in-book-of-thoth",
           "kind": "pdf",
           "page": 176
@@ -326,7 +261,37 @@
           "page": 176
         },
         {
+          "id": "thoth-four-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "thoth-four-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "thoth-four-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "thoth-three-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
           "id": "thoth-three-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "thoth-three-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 176
+        },
+        {
+          "id": "thoth-three-of-wands-in-book-of-thoth",
           "kind": "pdf",
           "page": 176
         },
@@ -346,14 +311,59 @@
           "page": 177
         },
         {
-          "id": "thoth-five-of-cups-in-book-of-thoth",
+          "id": "thoth-five-of-disks-in-book-of-thoth",
           "kind": "pdf",
           "page": 177
         },
         {
-          "id": "netzach-in-book-of-thoth",
+          "id": "thoth-five-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 177
+        },
+        {
+          "id": "thoth-four-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 177
+        },
+        {
+          "id": "thoth-six-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 177
+        },
+        {
+          "id": "thoth-six-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 177
+        },
+        {
+          "id": "tiphareth-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 177
+        },
+        {
+          "id": "thoth-seven-of-cups-in-book-of-thoth",
           "kind": "pdf",
           "page": 178
+        },
+        {
+          "id": "thoth-eight-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 179
+        },
+        {
+          "id": "thoth-eight-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 179
+        },
+        {
+          "id": "thoth-eight-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 179
+        },
+        {
+          "id": "thoth-seven-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 179
         },
         {
           "id": "decan-virgo-1-in-book-of-thoth",
@@ -361,9 +371,39 @@
           "page": 180
         },
         {
-          "id": "yesod-in-book-of-thoth",
+          "id": "thoth-eight-of-disks-in-book-of-thoth",
           "kind": "pdf",
           "page": 180
+        },
+        {
+          "id": "thoth-nine-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 180
+        },
+        {
+          "id": "thoth-ten-of-cups-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 181
+        },
+        {
+          "id": "thoth-ten-of-disks-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 181
+        },
+        {
+          "id": "thoth-ten-of-swords-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 181
+        },
+        {
+          "id": "thoth-ace-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 183
+        },
+        {
+          "id": "thoth-two-of-wands-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 185
         },
         {
           "id": "decan-aries-2-in-book-of-thoth",
@@ -376,17 +416,17 @@
           "page": 188
         },
         {
+          "id": "geburah-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 189
+        },
+        {
           "id": "thoth-five-of-wands-in-book-of-thoth",
           "kind": "pdf",
           "page": 189
         },
         {
           "id": "decan-leo-2-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 191
-        },
-        {
-          "id": "thoth-six-of-wands-in-book-of-thoth",
           "kind": "pdf",
           "page": 191
         },
@@ -406,7 +446,7 @@
           "page": 193
         },
         {
-          "id": "thoth-eight-of-wands-in-book-of-thoth",
+          "id": "hod-in-book-of-thoth",
           "kind": "pdf",
           "page": 193
         },
@@ -416,12 +456,12 @@
           "page": 194
         },
         {
-          "id": "thoth-nine-of-wands-in-book-of-thoth",
+          "id": "decan-sagittarius-3-in-book-of-thoth",
           "kind": "pdf",
-          "page": 194
+          "page": 195
         },
         {
-          "id": "decan-sagittarius-3-in-book-of-thoth",
+          "id": "malkuth-in-book-of-thoth",
           "kind": "pdf",
           "page": 195
         },
@@ -446,12 +486,12 @@
           "page": 197
         },
         {
-          "id": "decan-cancer-2-in-book-of-thoth",
+          "id": "thoth-two-of-cups-in-book-of-thoth",
           "kind": "pdf",
-          "page": 199
+          "page": 197
         },
         {
-          "id": "thoth-three-of-cups-in-book-of-thoth",
+          "id": "decan-cancer-2-in-book-of-thoth",
           "kind": "pdf",
           "page": 199
         },
@@ -461,12 +501,7 @@
           "page": 200
         },
         {
-          "id": "thoth-four-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 200
-        },
-        {
-          "id": "geburah-in-book-of-thoth",
+          "id": "thoth-five-of-cups-in-book-of-thoth",
           "kind": "pdf",
           "page": 202
         },
@@ -476,17 +511,7 @@
           "page": 203
         },
         {
-          "id": "thoth-six-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 203
-        },
-        {
           "id": "decan-scorpio-3-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 205
-        },
-        {
-          "id": "thoth-seven-of-cups-in-book-of-thoth",
           "kind": "pdf",
           "page": 205
         },
@@ -496,49 +521,24 @@
           "page": 206
         },
         {
-          "id": "thoth-eight-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 206
-        },
-        {
-          "id": "chesed-in-book-of-thoth",
+          "id": "decan-pisces-2-in-book-of-thoth",
           "kind": "pdf",
           "page": 207
         },
         {
-          "id": "decan-pisces-2-in-book-of-thoth",
+          "id": "yesod-in-book-of-thoth",
           "kind": "pdf",
           "page": 207
         },
         {
           "id": "thoth-nine-of-cups-in-book-of-thoth",
           "kind": "pdf",
-          "page": 207
+          "page": 208
         },
         {
           "id": "decan-pisces-3-in-book-of-thoth",
           "kind": "pdf",
           "page": 209
-        },
-        {
-          "id": "thoth-ten-of-cups-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 209
-        },
-        {
-          "id": "thoth-emperor-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 211
-        },
-        {
-          "id": "thoth-star-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 211
-        },
-        {
-          "id": "tiphareth-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 211
         },
         {
           "id": "decan-libra-3-in-book-of-thoth",
@@ -561,17 +561,17 @@
           "page": 219
         },
         {
+          "id": "netzach-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 219
+        },
+        {
           "id": "thoth-seven-of-swords-in-book-of-thoth",
           "kind": "pdf",
           "page": 219
         },
         {
           "id": "decan-gemini-1-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 220
-        },
-        {
-          "id": "thoth-eight-of-swords-in-book-of-thoth",
           "kind": "pdf",
           "page": 220
         },
@@ -591,9 +591,9 @@
           "page": 222
         },
         {
-          "id": "thoth-ten-of-swords-in-book-of-thoth",
+          "id": "thoth-ace-of-disks-in-book-of-thoth",
           "kind": "pdf",
-          "page": 222
+          "page": 225
         },
         {
           "id": "thoth-disks-in-book-of-thoth",
@@ -636,16 +636,6 @@
           "page": 233
         },
         {
-          "id": "thoth-seven-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 233
-        },
-        {
-          "id": "thoth-eight-of-disks-in-book-of-thoth",
-          "kind": "pdf",
-          "page": 234
-        },
-        {
           "id": "decan-virgo-2-in-book-of-thoth",
           "kind": "pdf",
           "page": 236
@@ -661,14 +651,24 @@
           "page": 237
         },
         {
-          "id": "hod-in-book-of-thoth",
+          "id": "thoth-magus-in-book-of-thoth",
           "kind": "pdf",
-          "page": 237
+          "page": 249
         },
         {
-          "id": "thoth-ten-of-disks-in-book-of-thoth",
+          "id": "thoth-lovers-in-book-of-thoth",
           "kind": "pdf",
-          "page": 237
+          "page": 250
+        },
+        {
+          "id": "thoth-aeon-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 253
+        },
+        {
+          "id": "thoth-sun-in-book-of-thoth",
+          "kind": "pdf",
+          "page": 253
         }
       ],
       "unresolved": []
@@ -678,17 +678,17 @@
         {
           "id": "aries-in-burt-zodiac",
           "kind": "pdf",
-          "page": 37
+          "page": 27
         },
         {
           "id": "taurus-in-burt-zodiac",
           "kind": "pdf",
-          "page": 66
+          "page": 73
         },
         {
           "id": "gemini-in-burt-zodiac",
           "kind": "pdf",
-          "page": 95
+          "page": 123
         },
         {
           "id": "cancer-in-burt-zodiac",
@@ -698,22 +698,22 @@
         {
           "id": "leo-in-burt-zodiac",
           "kind": "pdf",
-          "page": 183
+          "page": 190
         },
         {
           "id": "virgo-in-burt-zodiac",
           "kind": "pdf",
-          "page": 216
+          "page": 235
         },
         {
           "id": "libra-in-burt-zodiac",
           "kind": "pdf",
-          "page": 260
+          "page": 261
         },
         {
           "id": "scorpio-in-burt-zodiac",
           "kind": "pdf",
-          "page": 295
+          "page": 301
         },
         {
           "id": "sagittarius-in-burt-zodiac",
@@ -723,12 +723,12 @@
         {
           "id": "capricorn-in-burt-zodiac",
           "kind": "pdf",
-          "page": 381
+          "page": 399
         },
         {
           "id": "aquarius-in-burt-zodiac",
           "kind": "pdf",
-          "page": 450
+          "page": 449
         },
         {
           "id": "pisces-in-burt-zodiac",
@@ -4031,11 +4031,6 @@
           "page": 91
         },
         {
-          "id": "aquarius-in-cw09ii",
-          "kind": "pdf",
-          "page": 94
-        },
-        {
           "id": "holy-ghost-joachim-third-aeon-1202",
           "kind": "pdf",
           "page": 94
@@ -4044,6 +4039,11 @@
           "id": "libra-in-cw09ii",
           "kind": "pdf",
           "page": 95
+        },
+        {
+          "id": "aquarius-in-cw09ii",
+          "kind": "pdf",
+          "page": 99
         },
         {
           "id": "aries-in-cw09ii",

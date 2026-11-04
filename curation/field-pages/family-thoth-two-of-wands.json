@@ -2,67 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-two-of-wands",
- "line": "Crowley’s Two of Wands: Lord of Dominion (pdf p175); Chokmah (pdf p35); Mars in Aries (pdf p185).",
+ "line": "Dominion: will at its first and purest, a power to begin that no aim has yet narrowed. It is force breaking open the way, the thunderbolt that destroys only as the first step of making. Drawn, the card calls you to lead and to act from the whole of your will, not from hunger for a result. Mars in his own sign of Aries opens the year here, in Chokmah, the sphere of Wisdom where fire first appears as itself.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p175); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Two of Wands is called the Lord of Dominion",
+     "quote": "This card, pertaining to Chokmah in the suit of Fire, represents the Will in its most exalted form. It is an ideal Will, independent of any given object.",
+     "page": 185,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The background of this card shows the power of the planet Mars in his own sign Aries, the first of the Signs. It there represents Energy initiating a Current of Force.",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The pictorial representation is two Dorjes crossed. The Dorje is the Tibetan symbol of the thunderbolt, the emblem of celestial Power, but more in its destructive than its creative form. More, that is, in its earlier rather than its later form. For destruction may be regarded as the first step in the creative process.",
+     "page": 185,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Six flames issue from the centre. This indicates the influence of the Sun, who is exalted in Aries. This is the creative Will.",
+     "page": 185,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Twos",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Hence, only on reaching the Deuces does an element appear as the element itself. Chokmah is uncontaminated by any influence; therefore the elements here appear in their original harmonious condition. The Two of Wands is called the Lord of Dominion, and represents the energy of fire; fire in its best and highest form.",
      "page": 175,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Chokmah and the first decan of Aries (pdf p35); on Mars in Aries (pdf p185).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The 2 pertains to Chokmah.",
-     "page": 35,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is attributed to the first Decan of the fiery sign Aries, which is ruled by Mars; this, then, gives the idea of a violent and aggressive force.",
-     "page": 35,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The background of this card shows the power of the planet Mars in his own sign Aries,",
-     "page": 185,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the card as the Will in its most exalted form, and on the crossed Dorjes (pdf p185).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card, pertaining to Chokmah in the suit of Fire, represents the Will in its most exalted form.",
-     "page": 185,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The pictorial representation is two Dorjes crossed.",
-     "page": 185,
      "voice": "Crowley"
     }
    ]

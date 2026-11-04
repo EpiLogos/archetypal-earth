@@ -2,49 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-seven-of-wands",
- "line": "Crowley’s Seven of Wands: Valour (pdf p178); Mars in Leo (pdf p192); Netzach (pdf p178).",
+ "line": "Valour: the fire has dropped out of balance and lost its confidence, and fights on by courage alone. Order has broken down, the weapon is the first club to hand, and the battle must be won soldier by soldier. Drawn, the card asks you to stand your ground against the odds on sheer nerve, knowing that grit alone may not be enough. Mars in Leo props up a wavering fire here, in Netzach, the sphere of Victory, low and off balance on the Tree.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p178); on Mars in Leo (pdf p192).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Seven of Wands is called Valour.",
+     "quote": "The Seven of Wands is called Valour. Energy feels itself at its last gasp; it struggles desperately, and may be overcome. This card brings out the defect inherent in the idea of Mars. Patriotism, so to speak, is not enough.",
      "page": 178,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "the card is also attributed to Mars in Leo.",
+     "quote": "Fortunately, the card is also attributed to Mars in Leo. Leo is still the Sun in his full strength, but the marks of decadence are already to be seen. It is as if the wavering fire summoned the brutal energy of Mars to its support.",
      "page": 192,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Sevens and Netzach (pdf p178).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Netzach.",
+     "quote": "The army has been thrown into disorder; if victory is to be won, it will be by dint of individual valour‐a “soldiers’ battle”. The pictorial representation shows the fixed and balanced wands of the last card relegated to the background, diminished, and become commonplace. In front is a large crude uneven club, the first weapon to hand; evidently unsatisfactory in ordered combat. The flames are dispersed, and seem to attack in all directions without systematic purpose.",
+     "page": 192,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Sevens",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "These cards are attributed to Netzach. The position is doubly unbalanced; off the middle pillar, and very low down on the Tree. It is taking a very great risk to descend so far into illusion, and, above all, to do it by frantic struggle. Netzach pertains to Venus; Netzach pertains to Earth; and the greatest catastrophe that can befall Venus is to lose her Heavenly origin.",
      "page": 178,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the army thrown into disorder and on individual valour (pdf p192).",
-   "quotes": [
+    },
     {
      "work": "book-of-thoth",
-     "quote": "The army has been thrown into disorder; if victory is to be won, it will be by dint of individual valour",
-     "page": 192,
+     "quote": "The four Sevens are not capable of bringing any comfort; each one represents the degeneration of the element. Its utmost weakness is exposed in every case.",
+     "page": 178,
      "voice": "Crowley"
     }
    ]

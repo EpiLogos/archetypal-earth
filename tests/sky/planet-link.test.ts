@@ -4,7 +4,7 @@ import type { BodyKey } from '../../src/types/sky';
 
 const body = (...gods: string[]): BodyCards => ({
   gods: gods.map((family) => ({ family, basis: 'jung', voice: 'Jung', quotes: [] })),
-  position: null, sephira: null, positionQuotes: [], decans: [], ranks: [], majors: [], elements: [], abyss: false,
+  position: null, sephira: null, positionQuotes: [], decans: [], ranks: [], majors: [], courts: [], elements: [], abyss: false,
 });
 
 const data = {

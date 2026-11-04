@@ -2,68 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-eight-of-disks",
- "line": "Crowley’s Eight of Disks: Prudence (pdf p180); Sol in Virgo (pdf p180); Mercury in Virgo (pdf p234); Hod (pdf p179).",
+ "line": "Prudence: patient, careful work on material things, and the good sense to wait. Intelligence is applied lovingly to the soil, the craft and the machine; the husbandman sows the seed, sits back and lets the harvest come, and in money matters there is strength in not acting rashly. Drawn, the card counsels saving, tending and biding your time. Hod, the sphere of Mercury, works here with the Sun in Virgo, the sign of the seed in fallow earth.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title and Sol in Virgo (pdf p180).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Eight of Disks is called Prudence.",
+     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in his most spiritual aspect, and he both rules and is exalted in the sign of Virgo, which belongs to the Decan, and is governed by the Sun. It signifies intelligence lovingly applied to material matters, especially those of the agriculturalist, the artificer and the engineer.",
+     "page": 234,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Eight of Disks is called Prudence. This card is a great deal better than the last two, because, in purely material matters, especially those relating to actual money, there is a sort of strength in doing nothing at all. The problem of every financier is, first of all, to gain time; if his resources are sufficient, he always beats the market. This is the card of “putting something away for a rainy day”.",
      "page": 180,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Its attribution is Sol in Virgo",
+     "quote": "Its attribution is Sol in Virgo; it is the card of the husbandman; he can do little more than sow the seed, sit back, and wait for the harvest.",
      "page": 180,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Eights and Hod (pdf p179).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The four Eights are attributed to Hod.",
+     "quote": "The interest of this card is the interest of the common people. The rulership of the Sun in Virgo suggests also birth. The disks are arranged in the form of the geomantic figure Populus. These disks may be represented as the flowers or fruits of a great tree, its solid roots in fertile land.",
+     "page": 234,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Eights",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The four Eights are attributed to Hod. Being in the same plane as the Sevens on the Tree of Life, but on the other side, the same inherent defects as are found in the Sevens will apply. Yet one may perhaps urge this alleviation, that the Eights come as (in a sense) a remedy for the error of the Sevens. The mischief has been done; and there is now a reaction against it.",
      "page": 179,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on intelligence applied to material matters (pdf p234).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "It signifies intelligence lovingly applied to material matters",
-     "page": 234,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "conflicts",
-   "title": "Mercury and the Sun in Virgo",
-   "line": "Crowley on Mercury and the Sun in Virgo (pdf p234).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The number Eight, Hod, is very helpful in this card, because it represents Mercury in his most spiritual aspect, and he both rules and is exalted in the sign of Virgo, which belongs to the Decan, and is governed by the Sun.",
-     "page": 234,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The rulership of the Sun in Virgo suggests also birth.",
-     "page": 234,
      "voice": "Crowley"
     }
    ]

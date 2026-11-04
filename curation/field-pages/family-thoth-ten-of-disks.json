@@ -2,74 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-ten-of-disks",
- "line": "Crowley’s Ten of Disks: Wealth (pdf p181); Mercury in Virgo (pdf p237); Malkuth (pdf p181).",
+ "line": "Wealth: everything gathered in, the last and heaviest settling of matter. Riches piled past a certain point either go dead or must be turned by intelligence to some use beyond themselves; that is the only way out of mere accumulation. Drawn, the card speaks of fortune, riches and settled prosperity, and asks what the wealth is for. Malkuth, the end of the descent, under Mercury in Virgo, where the bottom turns over into the top and the cycle starts again.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Title and attribution",
-   "line": "Crowley on the title (pdf p181); on Mercury in Virgo (pdf p237).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Ten of Disks is called Wealth",
+     "quote": "The number Ten, Malkuth, as always, represents the final issue of the Energy. Here is great and final solidification. The force is completely expended and results in death. Mercury rules this card in Virgo; and this may imply that the acquired wealth, being inert, will be dissipated unless put to further use by devoting its power to objects other than mere accumulation.",
+     "page": 237,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Ten of Disks is called Wealth. Here again is written this constantly recurring doctrine, that as soon as one gets to the bottom one finds oneself at the top; and Wealth is given to Mercury in Virgo. When wealth accumulates beyond a certain point, it must either become completely inert and cease to be wealth, or call in the aid of intelligence to use it rightly.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Mercury rules this card in Virgo",
+     "quote": "At the end of matter must be complete stagnation, were it not that in it is always inherent the Will of the Father, the Great Architect, the Great Arithmetician, the Great Geometer. In this case, then, Mercury will represent the Logos, the Word, the Will, the Wisdom, the Eternal Son, and Virgo the Virgin, in every implication of that symbol. This card is in fact a hieroglyph of the cycle of regeneration.",
      "page": 237,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "tree",
-   "title": "Its place on the Tree",
-   "line": "Crowley on the Tens and Malkuth, and on Malkuth in the world of Assiah (pdf p181).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Malkuth.",
-     "page": 181,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
-     "page": 181,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "figures",
-   "title": "What the card figures",
-   "line": "Crowley on the card as a hieroglyph of the cycle of regeneration (pdf p237).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is in fact a hieroglyph of the cycle of regeneration.",
+     "quote": "The disks, or (as they have now become) coins, are arranged on the Tree of Life, but the Tenth coin is much larger than the rest; the image indicates the futility of material gain. These disks are inscribed with various symbols of mercurial character, except that the coin in the place of Hod (Mercury) on the Tree is marked with the cipher of the Sun. This indicates the only possibility of issue from the impasse produced by the exhaustion of all the elemental forces.",
      "page": 237,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "conflicts",
-   "title": "Group note on the Tens, and the coin in the place of Hod",
-   "line": "Crowley on the planetary attribution of the Tens (pdf p181); on the coin in the place of Hod (pdf p237).",
+   "id": "number",
+   "title": "The Tens",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "There is now no planetary attribution to consider.",
+     "quote": "By the mere fact of having devised four elements, the current has derogated from the original perfection. The Tens are a warning; see whither it leads‐to take the first wrong step!",
      "page": 181,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "coin in the place of Hod (Mercury) on the Tree is marked with the cipher of the Sun.",
-     "page": 237,
      "voice": "Crowley"
     }
    ]

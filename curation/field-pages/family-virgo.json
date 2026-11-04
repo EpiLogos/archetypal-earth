@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "virgo",
- "line": "Burt, Archetypes of the Zodiac, chapter on Virgo (pdf pp. 211–252); Jung on the virgin (Dream Analysis seminar).",
+ "line": "Virgo is Mutable Earth, the quiet turn of the year toward harvest and reflection. It searches for meaningful service: work done with patience, skill and humility that heals and makes whole. Its gift is the craft of Hermes, turning humble clay into a work of perfection; its shadow is the critic and the worrier, a mind that neglects the body and the heart. Mercury is its mundane ruler and the nurturing Moon its esoteric one.",
  "sections": [
   {
-   "id": "burt-character",
-   "title": "Burt's characterisation",
-   "line": "Burt, chapter on Virgo (pdf pp. 211–252): pdf p216, p211 and p221.",
+   "id": "burt",
+   "title": "The archetype",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Virgo is Mutable, or passive-responsive to events and circumstances, especially those involved with the Sixth House of labor,",
+     "quote": "In the process of alchemical purification Hermes’ virtues are those of the Virgo archetype: patience, purification or perfectionism, meticulous attention to technique and procedure, obedience to methodology, industriousness, and most important, humility.",
+     "page": 212,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Leo was active, dynamic and most of all, in control. Virgo is Mutable, or passive-responsive to events and circumstances, especially those involved with the Sixth House of labor, health, service and study.",
      "page": 216,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The earthy nature of Virgo seems to provide Hermes the patience and powers of concentration required for his serious healing and alchemical work.",
-     "page": 211,
+     "quote": "Hermes can take the common soil of Virgo Earth, humble clay, and fashion from it a work of perfection. My experience of those who participate in the Virgo archetype through either planets in Virgo or Sixth House planets has been that they can do the smallest, most ordinary or commonplace job with such detailed, skilled precision that they make of it an art. Behind many a shy, simple Virgo personality hides magical Hermes.",
+     "page": 212,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "As ruler of the Earth sign Virgo, Hermes seems less flighty, more grounded, stable and consistent in his behavior than he was as ruler of airy Gemini.",
-     "page": 211,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Virgo is pure in the sense that it is open and receptive to life.",
-     "page": 221,
+     "quote": "When Virgo feels that his/her work is not useful, or meaningful to him/her, that s/he is no longer learning or growing in some way, his/her body begins to exhibit symptoms as a warning that a change is needed. The body is a barometer of the satisfaction or lack of it in the various meanings of the Sixth House.",
+     "page": 213,
      "voice": "Burt"
     }
    ]
   },
   {
-   "id": "burt-myth-shadow",
-   "title": "Burt's myths and shadow",
-   "line": "Burt, chapter on Virgo (pdf pp. 211–252): pdf p211, p236 and p221.",
+   "id": "burt-myth",
+   "title": "Its myths and its shadow",
+   "line": "",
    "quotes": [
     {
      "work": "burt-zodiac",
-     "quote": "Hermes Psychopompous (Guide to Hades)",
-     "page": 211,
+     "quote": "In this myth, Isis does nothing by her own authority. She is a humble vehicle, the Temple of Horus through which healing techniques come. The Virgo Goddess studies, waits, prays, has faith (Pisces polarity), and responds efficiently and appropriately in a crisis.",
+     "page": 229,
      "voice": "Burt"
     },
     {
      "work": "burt-zodiac",
-     "quote": "The esoteric ruler of Virgo is the Moon, an intuitive, nurturing planet.",
+     "quote": "People are imperfect, and when Virgo is too critical, they may become too depressed to improve. As Virgo progresses in integrating Piscean inner peace and faith, many self-doubts disappear. The ego begins to depend upon God more and to rely less on its own resources.",
+     "page": 235,
+     "voice": "Burt"
+    },
+    {
+     "work": "burt-zodiac",
+     "quote": "Those Virgos who are true lunar intuitives, true nurturers combine the Hermes’ discrimination and magical power to transform, to heal, with the caring nature of the Moon. They encourage others to believe in themselves and develop their resources.",
      "page": 236,
-     "voice": "Burt"
-    },
-    {
-     "work": "burt-zodiac",
-     "quote": "Virginity is a matter of attitude, not a matter of bodily intactness.",
-     "page": 221,
      "voice": "Burt"
     }
    ]
@@ -63,7 +63,7 @@
   {
    "id": "jung",
    "title": "What Jung says",
-   "line": "Jung on the virgin: Dream Analysis seminar, pdf p434 and p449.",
+   "line": "",
    "quotes": [
     {
      "work": "sem-dream-analysis",

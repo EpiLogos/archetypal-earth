@@ -55,13 +55,14 @@ describe('the addresses', () => {
     expect(at('thoth-ace-of-swords')).toEqual([expect.objectContaining({ body: 'pluto', ring: 'rank', slot: SUITS.indexOf('swords') })]);
   });
 
-  it('give a court card thirty degrees from the 20th of one sign to the 20th of the next, across the year’s end too', () => {
-    expect(at('thoth-knight-of-wands')).toEqual([expect.objectContaining({ ring: 'zodiac', lon: 7 * 30 + 20, span: 30 })]);
-    expect(at('thoth-queen-of-wands')).toEqual([expect.objectContaining({ ring: 'zodiac', lon: 11 * 30 + 20, span: 30 })]);
+  it('give a court card the ruler of the sign holding most of its span, and its thirty degrees from the 20th of one sign to the 20th of the next, across the year’s end too', () => {
+    // Scorpio 21° to Sagittarius 20°: Jupiter rules Sagittarius; Pisces 21° to Aries 20°: Mars rules Aries
+    expect(at('thoth-knight-of-wands')).toEqual([expect.objectContaining({ body: 'jupiter', ring: 'rank' }), expect.objectContaining({ ring: 'zodiac', lon: 7 * 30 + 20, span: 30 })]);
+    expect(at('thoth-queen-of-wands')).toEqual([expect.objectContaining({ body: 'mars', ring: 'rank' }), expect.objectContaining({ ring: 'zodiac', lon: 11 * 30 + 20, span: 30 })]);
   });
 
-  it('give a Princess the heavens round the pole, a quadrant to a suit in Crowley’s order', () => {
-    for (const [i, s] of SUITS.entries()) expect(at(`thoth-princess-of-${s}`)).toEqual([expect.objectContaining({ ring: 'pole', slot: i })]);
+  it('give a Princess the Earth, with the four elements, and the heavens round the pole, a quadrant to a suit in Crowley’s order', () => {
+    for (const [i, s] of SUITS.entries()) expect(at(`thoth-princess-of-${s}`)).toEqual([expect.objectContaining({ body: 'terra', ring: 'rank' }), expect.objectContaining({ ring: 'pole', slot: i })]);
   });
 
   it('put a sephira on the body that carries its number and an element on the Earth', () => {
@@ -71,8 +72,8 @@ describe('the addresses', () => {
     expect(at('air')).toEqual([expect.objectContaining({ body: 'terra', ring: 'body' })]);
   });
 
-  it('stand a sign’s Atu on the sign’s span when no ring holds it, and keep it on the ruler’s ring when one does', () => {
-    expect(at('thoth-hierophant')).toEqual([expect.objectContaining({ ring: 'zodiac', lon: 30, span: 30 })]);
+  it('stand a sign’s Atu on its ruler’s ring (the ruler Burt names, where the field joins the Atu to no planet) and on the sign’s span', () => {
+    expect(at('thoth-hierophant')).toEqual([expect.objectContaining({ body: 'venus', ring: 'rank' }), expect.objectContaining({ ring: 'zodiac', lon: 30, span: 30 })]);
     expect(at('thoth-tower')).toContainEqual(expect.objectContaining({ body: 'mars', ring: 'rank' }));
   });
 

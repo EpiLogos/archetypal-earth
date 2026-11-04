@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-knight-of-cups",
- "line": "Crowley's Knight of Cups: Yodh of the Name (pdf p139); the fiery part of Water and the span from Aquarius to Pisces (pdf p149).",
+ "line": "Water at its most active, carried by a gentle, passive nature: graceful, amiable, quick to be attracted and quick to enthuse, but not enduring. Drawn, the card brings an invitation, a romance or a wave of feeling with innocence and purity at its core, and warns of superficiality, idleness and untruth when it is ill placed. The Knight of Cups is the fiery part of Water, ruling from the last decan of Aquarius through the first two of Pisces.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Knights (pdf p139) and on the Knight of Cups (pdf p149).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Knights represent the powers of the letter Yodh in the Name.",
-     "page": 139,
+     "quote": "The characteristics of the person signified by this card are nevertheless mostly passive, in accordance with the Zodiacal attribution. He is graceful, dilettante, with the qualities of Venus, or a weak Jupiter. He is amiable in a passive way. He is quick to respond to attraction, and easily becomes enthusiastic under such stimulus; but he is not very enduring. He is exceedingly sensitive to external influence, but with no material depth in his character.",
+     "page": 149,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Knight of Cups represents the fiery part of Water, the swift passionate attack of rain and springs",
+     "quote": "When the card is ill dignified, he is sensual, idle and untruthful. Yet with all this he possesses an innocence and purity which are the essence of his nature. But he is, on the whole, so superficial that it is hard to reach this depth. “His name is writ in water.”",
      "page": 149,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Aquarius to the 20th degree of Pisces (pdf p149); on the decans and the elemental attribution (pdf p139).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He rules the Heavens from the 21st degree of Aquarius to the 20th degree of Pisces.",
+     "quote": "He is clothed in black armour furnished with bright wings which, together with the leaping attitude of his white charger, indicates that he represents the most active aspect of Water. In his right hand he bears a cup from which issues a crab, the cardinal sign of Water, for aggressiveness. His totem is the peacock, for one of the stigmata of water in its most active form is brilliance.",
      "page": 149,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
-     "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Knight of Cups (pdf p149).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "He is graceful, dilettante, with the qualities of Venus, or a weak Jupiter.",
+     "quote": "The Knight of Cups represents the fiery part of Water, the swift passionate attack of rain and springs; more intimately, Water’s power of solution. He rules the Heavens from the 21st degree of Aquarius to the 20th degree of Pisces.",
      "page": 149,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The Knights represent the powers of the letter Yodh in the Name. They are the most sublime, original, active part of the Energy of the Element; for this reason they are represented on horseback and clad in complete armour. Their action is swift and violent, but transient. In the Element of Fire, for instance, the Knight corresponds to the Lightning flash; in the Element of Water, to Rain and Springs; in that of Air, to Wind; in that of Earth, to Mountains.",
+     "page": 139,
      "voice": "Crowley"
     }
    ]

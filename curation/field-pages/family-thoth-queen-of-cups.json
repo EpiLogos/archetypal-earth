@@ -2,61 +2,49 @@
  "version": 1,
  "type": "family",
  "id": "thoth-queen-of-cups",
- "line": "Crowley's Queen of Cups: Hé of the Name (pdf p139); the watery part of Water and the span from Gemini to Cancer (pdf p151).",
+ "line": "Water at rest, reflecting: the perfect receiver, who takes in everything and gives it back without being touched by it. Drawn, the card brings dreaminess, tranquillity and intuition, a mirror for whoever looks into her, and warns that what passes through her can be bent into illusion, since she has little character apart from the influences upon her. The Queen of Cups is the watery part of Water, ruling from the last decan of Gemini through the first two of Cancer.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Queens (pdf p139) and on the Queen of Cups (pdf p151).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Queens represent the letter Hé of the Name.",
-     "page": 139,
+     "quote": "The characteristics associated with this card are principally dreaminess, illusion and tranquillity. She is the perfect agent and patient, able to receive and transmit everything without herself being affected thereby. If ill‐dignified, all these qualities are degraded. Everything that passes through her is refracted and distorted. But, speaking generally, her characteristics depend mostly upon the influences which affect her.",
+     "page": 151,
      "voice": "Crowley"
-    },
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "She is represented as enthroned upon still water. In her hand she bears a shell‐like cup, from which issues a crayfish, and she bears also the Lotus of Isis, of the Great Mother. She is robed in, and veiled by, endless curves of light, and the sea upon which she is enthroned conveys the almost unbroken images of the image which she represents.",
+     "page": 151,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
+   "quotes": [
     {
      "work": "book-of-thoth",
      "quote": "The Queen of Cups represents the watery part of Water, its power of reception and reflection.",
      "page": 151,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-span-in-the-zodiac",
-   "title": "Its span in the Zodiac",
-   "line": "Crowley on the span from the 21st degree of Gemini to the 20th degree of Cancer (pdf p151); on the decans and the elemental attribution (pdf p139).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "In the Zodiac it rules from the 21st degree of Gemini to the 20th degree of Cancer",
-     "page": 151,
-     "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "instead of assigning the three decans of each sign to one card, the influence begins with the last decan of one Sign and continues to the second decan of the next.",
+     "quote": "The Queens represent the letter Hé of the Name. They are the complements of the Knights. They receive, ferment, and transmit the original Energy of their Knight. Quick to receive that Energy, they are also fitted to endure for the period of their function; but they are not the final product. They represent the second stage in the process of creation whose fourth and last state is material realization.",
      "page": 139,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It might well be expected that the elemental attribution would harmonize with the Zodiacal attribution; but it is not so.",
-     "page": 139,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Queen of Cups (pdf p151).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "She is the perfect agent and patient, able to receive and transmit everything without herself being affected thereby.",
-     "page": 151,
      "voice": "Crowley"
     }
    ]

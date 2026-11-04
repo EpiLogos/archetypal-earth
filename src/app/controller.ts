@@ -3,7 +3,7 @@
 import { CHART_RADIUS } from '../sky/chart-overlay';
 import type { Model, Subject } from '../data/model';
 import { scopeOf } from '../data/scope';
-import { archetypesOfFamily, selfSubject, skyCardHome, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette, subjectSky } from '../data/model';
+import { archetypesOfFamily, selfSubject, skyHome, subjectExists, subjectLine, subjectName, subjectOccurrences, subjectPalette, subjectSky } from '../data/model';
 import { bodyName, locusPhrase } from '../data/skyplace';
 import { angleBetween, dirFromLatLon, fitDistance, latLonFromDir, spreadOf, worldDistance, type Vec3 } from '../data/geo';
 import { averagePalettes, rgbToHex, WORLD_PALETTE, type RGBPalette } from '../data/palette';
@@ -575,14 +575,15 @@ export class Controller {
   /**
    * A tarot card's place is the sky: the ring of its planet, never the Earth (owner, 1 Nov 2026). A card focused, or one of
    * its instances opened, from anywhere (search, a link, the graph, a work's instances) is read at its planet with the card
-   * open on the ring. A card Crowley also gives a region of the Earth keeps its place on the globe (`skyCardHome`).
+   * open on the ring. A card Crowley also gives a region of the Earth keeps its place on the globe (`skyCardHome`). A
+   * sephira is read the same way at the planet that holds its number, Geburah at Mars (owner, 3 Nov 2026: `skyHome`).
    */
   private cardHandOff(next: AppState): AppState {
     if (next.lens || next.history || next.redbook || next.dynamics) return next;
     const v = next.view;
     const fam = v.kind === 'focus' && v.subject.type === 'family' ? v.subject.id
       : v.kind === 'manifest' ? this.m.occ[this.m.occIndex.get(v.occId) ?? -1]?.familyId : undefined;
-    const body = fam ? skyCardHome(this.m, fam) : undefined;
+    const body = fam ? skyHome(this.m, fam) : undefined;
     return body && fam ? astrologyLive({ body, card: fam, culture: next.sky?.culture ?? this.state.sky?.culture }) : next;
   }
 
@@ -1884,7 +1885,9 @@ export class Controller {
   /** Lens / orbit tie: gaze from the planet when held; otherwise leave into the field. */
   private focusFromLens(subject: Subject) {
     const held = this.skyCam.key ?? this.skyLayer?.approached ?? this.approachFor(this.state.sky);
-    if (this.state.sky && held) {
+    // a node whose place is a planet (a card, a sephira) is never gazed at on the Earth: the sky goes to its planet
+    const home = subject.type === 'family' ? skyHome(this.m, subject.id) : undefined;
+    if (this.state.sky && held && !home) {
       this.gazeEarthFromPlanet(subject);
       return;
     }

@@ -2,67 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-lovers",
- "line": "Crowley on Atu VI: Gemini under Mercury, the letter Zain, the path from Binah to Tiphareth, and the Royal Marriage (pdf p27, p70, p71, p72, p92, p211).",
+ "line": "The Lovers is the card of division and union: analysis followed by synthesis, the splitting into opposites that must come before any true marriage. Drawn, it brings openness to inspiration and intuition, and also indecision, self-contradiction and shallow ties. Its question is what must be separated before it can be joined. It is the path of Zain, the Sword, and of Gemini, the Twins, ruled by Mercury.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Sign and letter",
-   "line": "Crowley on Gemini, ruled by Mercury, and the letter Zain, and on the first card in which more than one figure appears (pdf p70).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "Atu VI refers to Gemini, ruled by Mercury. It means The Twins. The Hebrew letter corresponding is Zain, which means a Sword,",
+     "quote": "The Sword is primarily an engine of division. In the intellectual world‐which is the world of the Sword suit‐it represents analysis. This card and Atu XIV together compose the comprehensive alchemical maxim: Solve et coagula.",
      "page": 70,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It is the first card in which more than one figure appears.",
-     "page": 70,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-path",
-   "title": "From Binah to Tiphareth",
-   "line": "Crowley on Gemini leading from Binah to Tiphareth (pdf p72), on the card leading from the number 3 to the number 6 (pdf p27), and on the Path of Zain (pdf p211).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Gemini leads from Binah to Tiphareth.",
+     "quote": "But the essence of the analysis is the continuous see‐saw of contradictory ideas. It is a glyph of duality.",
      "page": 72,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "leads from the number 3 to the number 6.",
-     "page": 27,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "his mother Binah through the Path of Zain, the sublime intuitive sense,",
-     "page": 211,
+     "quote": "Openness to inspiration, intuition, intelligence, second sight, childishness, frivolity, thoughtfulness divorced from practical consideration, indecision, self‐contradiction, union in a shallow degree with others, instability, contradiction, triviality, the “high‐brow”.",
+     "page": 250,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-the-card-figures",
-   "title": "Analysis and Synthesis",
-   "line": "Crowley on the subject of the card, Analysis followed by Synthesis (pdf p71), and on the Royal Marriage that took place in Atu VI (pdf p92).",
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The subject of this card is Analysis, followed by Synthesis.",
-     "page": 71,
+     "quote": "The Royal persons concerned are the Black or Moorish King with a golden crown, and the White Queen with a silver crown. He is accompanied by the Red Lion, and she by the White Eagle. These are symbols of the male and female principles in Nature; they are therefore equally, in various stages of manifestation, Sun and Moon, Fire and Water, Air and Earth.",
+     "page": 72,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "This card represents the Consummation of the Royal Marriage which took place in Atu VI.",
-     "page": 92,
+     "quote": "The hooded figure which occupies the centre of the Card is another form of The Hermit, who is further explained in Atu IX. He is himself a form of the god Mercury, described in Atu I; he is closely shrouded, as if to signify that the ultimate reason of things lies in a realm beyond manifestation and intellect.",
+     "page": 71,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "Yet the attribution is the essence of simplicity. Atu VI refers to Gemini, ruled by Mercury. It means The Twins. The Hebrew letter corresponding is Zain, which means a Sword, and the framework of the card is therefore the Arch of Swords, beneath which the Royal Marriage takes place.",
+     "page": 70,
      "voice": "Crowley"
     }
    ]

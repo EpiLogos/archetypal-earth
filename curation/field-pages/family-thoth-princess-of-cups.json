@@ -2,49 +2,61 @@
  "version": 1,
  "type": "family",
  "id": "thoth-princess-of-cups",
- "line": "Crowley's Princess of Cups: Hé final of the Name (pdf p140); the earthy part of Water (pdf p155); no zodiacal attribution (pdf p140).",
+ "line": "Water given shape: infinitely gracious, sweet, gentle and tender, living in a dream of romance while she silently and effortlessly gets her work done. Drawn, the card brings kindness, imagination and a helpful, devoted presence, and warns of too much dependence on others and too little weight of one’s own. The Princess of Cups is the earthy part of Water; she has no span of the zodiac but rules a quarter of the heavens around the North Pole.",
  "sections": [
   {
-   "id": "the-court-and-its-element",
-   "title": "The court and its element",
-   "line": "Crowley on the Princesses (pdf p140) and on the Princess of Cups (pdf p155).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses represent the Hé final of the Name.",
-     "page": 140,
+     "quote": "The character of the Princess is infinitely gracious. All sweetness, all voluptuousness, gentleness, kindness and tenderness are in her character. She lives in the world of Romance, in the perpetual dream of rapture. On a superficial examination she might be thought selfish and indolent, but this is a quite false impression; silently and effortlessly she goes about her work.",
+     "page": 155,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Princess of Cups represents the earthy part of Water; in particular, the faculty of crystallization.",
+     "quote": "In the Yî King, the earthy part of Water is represented by the 41st Hexagram, Sun. This means diminution, the dissolution of all solidity. People described by this card are very dependent on others, but at the same time helpful to them. Rarely, at the best, are they of individual importance. As helpmeets, they are unsurpassed.",
+     "page": 156,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "She is represented as a dancing figure, robed in a flowing garment on whose edges crystals are seen to form. For her crest she wears a swan with open wings.",
+     "page": 155,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "She bears a covered cup from which issues a tortoise. This is again the tortoise which in Hindu philosophy supports the elephant on whose back is the Universe. She is dancing upon a foaming sea in which disports himself a dolphin, the royal fish, which symbolizes the power of Creation.",
      "page": 155,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-place-in-the-heavens",
-   "title": "Zodiacal attribution",
-   "line": "Crowley on the Princesses and the Zodiac (pdf p140).",
+   "id": "element",
+   "title": "Element and span",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The Princesses have no Zodiacal attribution.",
-     "page": 140,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "its-character",
-   "title": "Character",
-   "line": "Crowley on the character of the Princess of Cups (pdf p155).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The character of the Princess is infinitely gracious.",
+     "quote": "The Princess of Cups represents the earthy part of Water; in particular, the faculty of crystallization. She represents the power of Water to give substance to idea, to support life, and to form the basis of chemical combination.",
      "page": 155,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "They form a link between the small cards and the Princesses, who rule the Heavens around the North Pole. The Meridian is the Great Pyramid, and the Elements rule, going Eastward, in the order of Tetragrammaton, Fire, Water, Air, Earth. Thus, roughly, Aces‐Princesses Wands cover Asia, Cups the Pacific Ocean, Swords the Americas, Disks Europe and Africa.",
+     "page": 175,
      "voice": "Crowley"
     }
    ]

@@ -2,61 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-five-of-cups",
- "line": "Crowley’s Five of Cups: Disappointment (pdf p177); Geburah and Mars in Scorpio (pdf p202).",
+ "line": "Disappointment: trouble arrives just when you were at ease, and the pleasure you counted on does not come. Nothing has rotted yet, but the flowers are torn and no water flows into the cups. Drawn, the card speaks of hopes frustrated and loss felt keenly in a time of calm; what has begun is a destruction, not yet the end. Mars in his own sign of Scorpio stirs the waters here, in Geburah, the fiery sphere of Severity.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p177); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "the Five of Cups is called Disappointment",
+     "quote": "This card is ruled by Geburah in the suit of Water. Geburah being fiery, there is a natural antipathy. Hence arises the idea of disturbance, just when least expected, in a time of ease.",
+     "page": 202,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "The attribution is also to Mars in Scorpio, which is his own house; and Mars is the manifestation on the lowest plane of Geburah, while Scorpio, in its worst aspect, suggests the putrefying power of Water. Yet the powerful male influences do not show actual decay, only the beginning of destruction; hence, the anticipated pleasure is frustrated.",
+     "page": 202,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The Lotuses have their petals torn by fiery winds; the sea is arid and stagnant, a dead sea, like a “chott” in North Africa. No water flows into the cups. Moreover, these cups are arranged in the form of an inverted pentagram, symbolizing the triumph of matter over spirit.",
+     "page": 202,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "number",
+   "title": "The Fives",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "In the “Naples arrangement”, the introduction of the number Five shows the idea of motion coming to the aid of that of matter. This is quite a revolutionary conception; the result is a complete upset of the statically stabilized system. Now appear storm and stress.",
      "page": 177,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "“Wands”, attributed to Fire; “Cups”, to Water; “Swords”, to Air;",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Geburah in the suit of Water and on Mars in Scorpio (pdf p202).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "This card is ruled by Geburah in the suit of Water.",
-     "page": 202,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The attribution is also to Mars in Scorpio, which is his own house",
-     "page": 202,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the lowest plane of Geburah and on the inverted pentagram of the cups (pdf p202).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "manifestation on the lowest plane of Geburah,",
-     "page": 202,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Moreover, these cups are arranged in the form of an inverted pentagram, symbolizing the triumph of matter over spirit.",
-     "page": 202,
+     "quote": "On the other hand, the Five of Cups is called Disappointment, as is only natural, because Fire delights in superabundant energy, whereas the water of Pleasure is naturally placid, and any disturbance of ease can only be regarded as misfortune.",
+     "page": 177,
      "voice": "Crowley"
     }
    ]

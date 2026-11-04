@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { DEFAULT_VAULT } from './lib/vault.mjs';
 import { workLoader } from './lib/cite.mjs';
 import { citeQuotes, workTitles } from './lib/quotes.mjs';
-import { BODY_KEYS, TREE, SIGNS, SUITS, ELEMENT_OF_SUIT, parseDecan, parseRank, joinIndex, deriveCardGeometry } from './lib/sky-address.mjs';
+import { BODY_KEYS, TREE, SIGNS, SUITS, ELEMENT_OF_SUIT, parseDecan, parseRank, parseCourt, courtSpan, joinIndex, deriveCardGeometry } from './lib/sky-address.mjs';
 export { TREE, SIGNS, SUITS };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -91,7 +91,7 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     const c = cur.bodies[key];
     if (!c) continue;
     const g0 = geometry.bodies[key];
-    const out = { gods: [], position: c.position ?? null, sephira: g0.sephira, positionQuotes: placed([{ work: cur.list.work, page: cur.list.page, voice: cur.list.voice, quote: c.quote }], `body ${key}`), decans: g0.decans, ranks: g0.ranks, majors: g0.majors, elements: g0.elements, abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
+    const out = { gods: [], position: c.position ?? null, sephira: g0.sephira, positionQuotes: placed([{ work: cur.list.work, page: cur.list.page, voice: cur.list.voice, quote: c.quote }], `body ${key}`), decans: g0.decans, ranks: g0.ranks, majors: g0.majors, courts: g0.courts, elements: g0.elements, abyss: !!c.abyss, ...(c.note ? { note: c.note } : {}) };
 
     // the planet's god: a family the sky ties already name, or the one curated here with Jung's words
     if (c.god) {
@@ -108,7 +108,7 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
       if (g.basis === 'jung' && !g.quotes.length) errors.push(`body ${key}: a jung tie to ${g.family} needs a placed quotation`);
       out.gods.push(g);
     }
-    for (const x of [...out.decans, ...out.majors, ...out.ranks]) use(x.joins);
+    for (const x of [...out.decans, ...out.majors, ...out.courts, ...out.ranks]) use(x.joins);
     bodies[key] = out;
   }
 
@@ -119,14 +119,19 @@ export function buildSkyCards({ root = ROOT, vault = DEFAULT_VAULT } = {}) {
     if (!f) { errors.push(`card ${id}: not in the field`); continue; }
     if (!f.image?.thumb) { errors.push(`card ${id}: no plate in the field`); continue; }
     const r = parseRank(id);
+    const court = parseCourt(id);
+    const span = courtSpan(joined, id);
     const dec = joined(id).map((j) => parseDecan(j.other)).find((d) => d);
     const decanId = joined(id).find((j) => parseDecan(j.other))?.other ?? null;
     const { src, thumb, width, height, tone, title, credit, license, sourceUrl } = f.image;
     cards[id] = {
       name: f.name,
-      kind: isMajor(id) ? 'major' : 'pip',
+      kind: isMajor(id) ? 'major' : court ? 'court' : 'pip',
       image: { src, thumb, width, height, tone, title, credit, license, sourceUrl },
       ...(r ? { number: r.number, suit: r.suit, element: suitElement[r.suit] } : {}),
+      // a court: its suit and element, and (Knight, Queen, Prince) the sign holding most of its span and where the span starts
+      ...(court ? { court: court.court, suit: court.suit, element: suitElement[court.suit] } : {}),
+      ...(span && !span.error ? { sign: span.main, from: span.lon } : {}),
       ...(dec ? { sign: dec.sign, n: dec.n, lon: dec.lon, decan: decanId } : {}),
       ...(isMajor(id) ? { sign: joined(id).map((x) => SIGNS.indexOf(x.other)).find((i) => i >= 0) } : {}),
     };

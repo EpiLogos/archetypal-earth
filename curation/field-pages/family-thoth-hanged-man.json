@@ -2,60 +2,60 @@
  "version": 1,
  "type": "family",
  "id": "thoth-hanged-man",
- "line": "Crowley on Atu XII: the letter Mem, the element Water, and the sacrifice of the male child (pdf p87, p89).",
+ "line": "The Hanged Man is the self given up to the waters: a baptism that is also a death, light let down into darkness so that new life can stir. Drawn, it speaks of enforced sacrifice, loss, suffering or defeat, chosen or not. The card keeps the old way of the dying god, yet sacrifice is a wrong idea where it is not needed; ask what is truly being surrendered, and whether it must be. It is the path of Mem, the Mother letter of Water.",
  "sections": [
   {
-   "id": "what-it-is",
-   "title": "Letter and element",
-   "line": "Crowley on the card attributed to the letter Mem and representing Water (pdf p87), and on Mem as one of the three great Mother Letters (pdf p89).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "This card, attributed to the letter Mem, represents the element of Water.",
+     "quote": "This card is beautiful in a strange, immemorial, moribund manner. It is the card of the Dying God; its importance in the present pack is merely that of the Cenotaph. It says: “If ever things get bad like that again, in the new Dark Ages which appear to threaten, this is the way to put things right.” But if things have to be put right, it shows that they are very wrong.",
+     "page": 88,
+     "voice": "Crowley"
+    },
+    {
+     "work": "book-of-thoth",
+     "quote": "Enforced sacrifice, punishment, loss, fatal or voluntary, suffering, defeat, failure, death.",
+     "page": 252,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The whole figure is suspended from the Ankh, another way of figuring the formula of the Rose and Cross, while around the left foot is the Serpent, creator and destroyer, who operates all change.",
      "page": 87,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Yet the card in itself is essentially a glyph of Water; Mem is one of the three great Mother Letters",
+     "quote": "His background is an unbounded grill of small squares; these are the Elemental Tablets which exhibit the names and sigilla of all the energies of Nature. Through his Work a Child is begotten, as shewn by the Serpent stirring in the Darkness of the Abyss below him.",
      "page": 89,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "its-path",
-   "title": "The Paths and the letters",
-   "line": "Crowley on the Paths that join the ten numbers on the Tree of Life and on one letter to each path (pdf p36).",
+   "id": "attribution",
+   "title": "Letter and attribution",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These paths are the paths which join the ten numbers on the",
-     "page": 36,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "and one letter goes to each path.",
-     "page": 36,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "what-it-figures",
-   "title": "Baptism and sacrifice",
-   "line": "Crowley on baptism and death (pdf p87) and on the sacrifice of a male child of perfect innocence and high intelligence (pdf p89).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "it is a baptism which is also a death.",
+     "quote": "This card, attributed to the letter Mem, represents the element of Water. It would perhaps be better to say that it represents the spiritual function of water in the economy of initiation; it is a baptism which is also a death.",
      "page": 87,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The Atu represents the sacrifice of “a male child of perfect innocence and high intelligence”",
+     "quote": "Yet the card in itself is essentially a glyph of Water; Mem is one of the three great Mother Letters, and its value is 40, the might of Tetragrammaton fully developed by Malkuth, the symbol of the Universe under the Demiourgos.",
      "page": 89,
      "voice": "Crowley"
     }

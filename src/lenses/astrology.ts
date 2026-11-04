@@ -22,7 +22,7 @@ import { glyphSvg, SIGN_FAMILY_IDS } from '../sky/zodiac';
 import { combobox } from '../ui/combobox';
 import { PlanetOrbits, type CardNode, type Satellite } from '../sky/orbits';
 import { loadSkyCards, ringsFor, type PlacedQuote, type SkyCardsData } from '../sky/cards';
-import { cardReading, type FieldPages } from './card-reading';
+import { cardReading, sephiraReading, type CardReadingInput, type FieldPages } from './card-reading';
 import { practice, saveFile } from '../practice/store';
 import { loadLensData, privacyLine, quoteBlock, type LensQuote } from './ui';
 import { creditLine } from '../ui/credit';
@@ -406,10 +406,15 @@ export function mount(ctx: LensContext): LensInstance {
       // the Earth is held like a planet (the camera goes in to it): it is the sky's subject, so it titles the sky
       const bodyName = held === 'terra' ? 'Earth' : held ? data.bodies[held as ChartBody]?.name : undefined;
       ctx.setContext(bodyName ?? 'The sky');
-      // a card open on the planet's ring (`#/sky/<body>/card/<id>`): its reading stands at the planet
+      // a card open on the planet's ring (`#/sky/<body>/card/<id>`), or the sephira the planet holds (`#/sky/<body>/sephira/<id>`):
+      // its reading stands at the planet
       if (path[1] && path[2]) {
         const key = path[1] as BodyKey, id = path[2];
-        void loadSkyCards().then((cards) => { if (cards?.cards[id] && inLens && pathNow[2] === id) readCard(cards, id, key); });
+        void loadSkyCards().then((cards) => {
+          if (!cards || !inLens || pathNow[2] !== id) return;
+          if (cards.cards[id]) readCard(cards, id, key);
+          else if (cards.tree.includes(id)) readSephira(cards, id, key);
+        });
         return;
       }
       ctx.pane.hide();
@@ -440,13 +445,15 @@ export function mount(ctx: LensContext): LensInstance {
     if (key === 'terra') {
       if (key === orbitsBody) return;
       orbitsBody = key;
+      heldSats = [];
       orbits.set(key, []);
       void loadSkyCards().then((cards) => {
         if (!cards || orbitsBody !== key) return;
         const elements = (cards.bodies.terra?.elements ?? []).filter((id) => ctx.model.famById.has(id));
-        orbits.set(key, elements.map((id) => ({
+        heldSats = elements.map((id) => ({
           id: `family:${id}`, name: subjectName(ctx.model, { type: 'family', id }), inner: false, open: () => ctx.focus({ type: 'family', id }),
-        })));
+        }));
+        orbits.set(key, heldSats);
         loadCards(key);
       });
       return;
@@ -498,16 +505,26 @@ export function mount(ctx: LensContext): LensInstance {
     if (pathNow[0] === ASTROLOGY_LIVE) { ctx.setPath([ASTROLOGY_LIVE, key, id]); return; }
     readCard(cards, id, key);
   };
+  /** What a reading at a planet is handed: the field, the sky's cards, the pages, and Burt from this lens's own data. */
+  const readingAt = (cards: SkyCardsData, pages: FieldPages | null, id: string, key: BodyKey): CardReadingInput => ({
+    model: ctx.model, passages: ctx.passages, data: cards, pages, id, body: key,
+    bodyName: (k) => (k === 'terra' ? 'Earth' : data?.bodies[k as ChartBody]?.name ?? k),
+    open: (s) => ctx.descend(s),
+    openBody: (k) => ctx.openBody(k),
+    burtOn: (k) => data?.bodies[k as ChartBody]?.burt ?? [],
+    burtSign: (sign) => data?.signs[sign],
+  });
   const readCard = (cards: SkyCardsData, id: string, key: BodyKey) => {
     void loadLensData<FieldPages>('field-pages').catch(() => null).then((pages) => {
       if (!inLens) return;
-      const nodes = cardReading({
-        model: ctx.model, passages: ctx.passages, data: cards, pages, id, body: key,
-        bodyName: (k) => (k === 'terra' ? 'Earth' : data?.bodies[k as ChartBody]?.name ?? k),
-        open: (s) => ctx.descend(s),
-        openBody: (k) => ctx.openBody(k),
-      });
-      showHere(`card/${id}`, nodes);
+      showHere(`card/${id}`, cardReading(readingAt(cards, pages, id, key)));
+    });
+  };
+  /** The sephira a planet holds, read at the planet: Geburah at Mars, as a card is read at its ring. */
+  const readSephira = (cards: SkyCardsData, id: string, key: BodyKey) => {
+    void loadLensData<FieldPages>('field-pages').catch(() => null).then((pages) => {
+      if (!inLens) return;
+      showHere(`sephira/${id}`, sephiraReading(readingAt(cards, pages, id, key)));
     });
   };
 
@@ -517,6 +534,12 @@ export function mount(ctx: LensContext): LensInstance {
       if (!cards || orbitsBody !== key) return;
       // the Abyss: Crowley's list gives it to Uranus; the field has no family for it, so it stands as a quotation only
       const b = cards.bodies[key];
+      // the sephira that holds the planet's number stands at the planet as one of its bodies, and is read there
+      const seph = b?.sephira;
+      if (seph && ctx.model.famById.has(seph) && !heldSats.some((x) => x.id === `family:${seph}`)) {
+        heldSats = [...heldSats, { id: `family:${seph}`, name: subjectName(ctx.model, { type: 'family', id: seph }), inner: false, open: () => ctx.setPath([ASTROLOGY_LIVE, key, seph]) } satisfies Satellite];
+        orbits.set(key, heldSats);
+      }
       if (b?.abyss && b.positionQuotes.length && !heldSats.some((x) => x.id === 'anchor:abyss')) {
         heldSats = [...heldSats, { id: 'anchor:abyss', name: 'The Abyss', inner: false, open: () => openAnchor('The Abyss', 'Crowley’s list of the ten bodies of the solar system sets the Abyss under the number 3 and gives it to Herschel, which is Uranus. It is not a sephira, so it has no number of its own and no cards.', [...(cards.list ? [cards.list] : []), ...b.positionQuotes]) } satisfies Satellite];
         orbits.set(key, heldSats);
@@ -530,6 +553,7 @@ export function mount(ctx: LensContext): LensInstance {
         if (rc.role === 'rank') return `the ${c.number === 1 ? 'Aces' : `${['', '', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes', 'Sevens', 'Eights', 'Nines', 'Tens'][c.number ?? 0]}`}: ${bodyName}’s number in Crowley’s list`;
         if (rc.role === 'ruler') return `an Atu of ${SIGNS[c.sign ?? 0]}, which ${bodyName} rules`;
         if (rc.role === 'element') return 'an Atu Crowley gives to an element';
+        if (rc.role === 'court') return c.court === 'princess' ? 'a Princess: the earthy part of her element, with the elements at the Earth' : `a court card mostly in ${SIGNS[c.sign ?? 0]}, which ${bodyName} rules`;
         return `an Atu attributed to ${bodyName}`;
       };
       const nodes: CardNode[] = [...rings.decan, ...rings.rank].map((rc) => ({

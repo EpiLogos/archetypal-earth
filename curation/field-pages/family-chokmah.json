@@ -2,70 +2,37 @@
  "version": 1,
  "type": "family",
  "id": "chokmah",
- "line": "Crowley on Chokmah (The Book of Thoth); Jung on Hokhmah in CW12 ¶313.",
+ "line": "Wisdom, the Father: the second sephira, where the hidden Crown first shows itself as the creative Word and Will. Its number gives each suit its element in a first pure, harmonious form: Dominion in Wands, Love in Cups, Peace in Swords, Change in Disks. Among the ten bodies of the solar system on the Tree, it is the sphere of the Zodiac or fixed stars, represented by Neptune.",
  "sections": [
   {
-   "id": "crowley-number-two",
-   "title": "Crowley's number 2",
-   "line": "Crowley on Chokmah as the number 2 and the first manifestation: The Book of Thoth, pdf p35, p175 and p211.",
+   "id": "crowley",
+   "title": "Crowley on Chokmah",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "The 2 pertains to Chokmah.",
-     "page": 35,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "Chokmah is really No. I and not No.2, because he is the first manifestation;",
+     "quote": "Hence, only on reaching the Deuces does an element appear as the element itself. Chokmah is uncontaminated by any influence; therefore the elements here appear in their original harmonious condition.",
      "page": 175,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Magical manifestation of Chokmah, Wisdom, the Logos.",
-     "page": 211,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "wisdom-the-father-mercury",
-   "title": "Wisdom, the Father and Mercury",
-   "line": "Crowley on Chokmah as Wisdom, the Father and Mercury: The Book of Thoth, pdf p79 and p121.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Father, who is Wisdom; he is the highest form of Mercury",
-     "page": 79,
+     "quote": "The Two always represents the Word and the Will. It is the first manifestation.",
+     "page": 197,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "Mercury as Chokmah “through whom alone we can approach Kether.”",
-     "page": 121,
+     "quote": "This card, pertaining to Chokmah in the suit of Fire, represents the Will in its most exalted form. It is an ideal Will, independent of any given object.",
+     "page": 185,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "the-path-to-binah",
-   "title": "The path to Binah",
-   "line": "Crowley on Daleth as the path from Chokmah to Binah: The Book of Thoth, pdf p64.",
-   "quotes": [
+    },
     {
      "work": "book-of-thoth",
-     "quote": "On the Tree of Life, Daleth is the path leading from Chokmah to Binah, uniting the Father with the Mother.",
-     "page": 64,
+     "quote": "The 2 pertains to Chokmah. But here is already no more the simplicity of the idea of fire. An Idea in action or in manifestation is no more the pure Idea.",
+     "page": 35,
      "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "the-universe-list",
-   "title": "The sphere of the fixed stars",
-   "line": "Crowley's list of the Universe, its second item: The Book of Thoth, pdf p111.",
-   "quotes": [
+    },
     {
      "work": "book-of-thoth",
      "quote": "The sphere of the Zodiac or fixed stars, represented by Neptune.",
@@ -77,11 +44,11 @@
   {
    "id": "jung-trinity",
    "title": "Hokhmah in Franck's trinity",
-   "line": "Jung on Franck's connection between 32 and the cabalistic trinity Kether, Binah and Hokhmah: CW12 ¶313.",
+   "line": "",
    "quotes": [
     {
      "work": "cw12",
-     "quote": "Franck establishes a connection between 32 and the cabalistic trinity, Kether, Binah, and Hokhmah",
+     "quote": "Franck establishes a connection between 32 and the cabalistic trinity, Kether, Binah, and Hokhmah: “These three persons contain and unite in themselves everything that exists, and they in turn are united in the White Head, the Ancient of Days, for he is everything and everything is he. Sometimes he is represented with three heads which make but a single head, and sometimes he is likened to the brain which, without impairing its unity, divides into three parts and spreads through the whole body by means of thirty-two pairs of nerves, just as God spreads through the universe along thirty-two miraculous paths.”",
      "para": 313,
      "voice": "Jung"
     }

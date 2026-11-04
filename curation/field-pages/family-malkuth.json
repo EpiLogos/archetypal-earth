@@ -2,66 +2,28 @@
  "version": 1,
  "type": "family",
  "id": "malkuth",
- "line": "Crowley on Malkuth (The Book of Thoth); Jung on Malchuth in CW14; von Franz on the sephiroth in Number and Time.",
+ "line": "The Kingdom: the tenth sephira at the foot of the Tree, the material world, where all energy reaches its end, cut off from its spiritual sources yet destined to be lifted to the throne of the Mother. Its number drives each suit to its extreme: Oppression in Wands, Satiety in Cups, Ruin in Swords, Wealth in Disks. Among the ten bodies of the solar system on the Tree, it is the Earth, the four elements.",
  "sections": [
   {
-   "id": "crowley-tens",
-   "title": "Crowley's Tens",
-   "line": "Crowley on the Tens and Malkuth, and Assiah: The Book of Thoth, pdf p181 and p195.",
+   "id": "crowley",
+   "title": "Crowley on Malkuth",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "These cards are attributed to Malkuth.",
+     "quote": "These cards are attributed to Malkuth. Here is the end of all energy; it is away from the “formative world” altogether, where things are elastic. There is now no planetary attribution to consider. So far as the Sephira is concerned, it is right down in the world of Assiah. By the mere fact of having devised four elements, the current has derogated from the original perfection.",
      "page": 181,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "The number Ten refers to Malkuth, which depends from the other nine Sephiroth,",
+     "quote": "The number Ten refers to Malkuth, which depends from the other nine Sephiroth, but is not directly in communication with them. It shows the Force detached from its spiritual sources.",
      "page": 195,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "So far as the Sephira is concerned, it is right down in the world of Assiah.",
-     "page": 181,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "earth-and-no-planet",
-   "title": "Earth and the planetary attribution",
-   "line": "Crowley on Malkuth, Earth, the planetary attribution and the number Ten in the diagram: The Book of Thoth, pdf p181, p266 and p23.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "There is now no planetary attribution to consider.",
-     "page": 181,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The tenth Sephira, which refers to Earth, is not shown on this figure.",
-     "page": 266,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "It is the number Ten suspended from the 7, 8, 9 in the diagram.",
-     "page": 23,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "the-throne-of-binah",
-   "title": "Malkuth on the throne of Binah",
-   "line": "Crowley on Malkuth and the throne of Binah: The Book of Thoth, pdf p123.",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "Malkuth shall be uplifted and set upon the throne of Binah.",
+     "quote": "And this is that which is written: Malkuth shall be uplifted and set upon the throne of Binah.",
      "page": 123,
      "voice": "Crowley"
     }
@@ -70,17 +32,17 @@
   {
    "id": "jung-malchuth",
    "title": "Jung's Malchuth",
-   "line": "Jung on Malchuth as the underlying feminine principle, and Knorr von Rosenroth on the name: CW14 ¶18 and ¶640.",
+   "line": "",
    "quotes": [
     {
      "work": "cw14",
-     "quote": "Malchuth, conforming to the archetypal pattern, is the underlying feminine principle",
+     "quote": "Malchuth, conforming to the archetypal pattern, is the underlying feminine principle.",
      "para": 18,
      "voice": "Jung"
     },
     {
      "work": "cw14",
-     "quote": "the name of the last Sefira, and Malchuth herself, the Kingdom, are so called",
+     "quote": "The lapis also figures in the Cabala: “Sometimes Adonai, the name of the last Sefira, and Malchuth herself, the Kingdom, are so called; for the latter is the foundation of the whole fabric of the world.”",
      "para": 640,
      "voice": "Jung (quoting Knorr von Rosenroth)"
     }
@@ -89,17 +51,17 @@
   {
    "id": "von-franz-on-the-ten",
    "title": "Von Franz on the ten",
-   "line": "Von Franz on the ten primal numbers, the sephiroth: von Franz, Number and Time, pdf p95.",
+   "line": "",
    "quotes": [
     {
      "work": "vonzfranz-number-time",
-     "quote": "the ten primal numbers, the sephiroth, are considered to be emanations of divine immaterial origin",
+     "quote": "The cabalistic doctrine of numbers is in itself a revival of ancient Gnostic ideas about numbers. In the latter doctrine numbers, as archons or divine powers, continually stream forth from the unknowable arché of the one. All are manifestations of single aspects of the primal one.",
      "page": 95,
      "voice": "von Franz"
     },
     {
      "work": "vonzfranz-number-time",
-     "quote": "They are “spheres” and “totalities” of the unknowable primal one",
+     "quote": "They are “spheres” and “totalities” of the unknowable primal one.",
      "page": 95,
      "voice": "von Franz"
     }

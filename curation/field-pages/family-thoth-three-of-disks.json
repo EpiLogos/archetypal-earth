@@ -2,67 +2,55 @@
  "version": 1,
  "type": "family",
  "id": "thoth-three-of-disks",
- "line": "Crowley’s Three of Disks: Lord of Work (pdf p176); Binah and Mars in Capricornus (pdf p228).",
+ "line": "Work: the plan has taken solid shape and something has definitely been done. This is the builder's card, energy put to constructive use, laying the base on which a structure can stand. Drawn, it asks for steady, skilled, practical effort, and promises that the effort will leave something real behind it. Binah, the Mother who gives form, rules here in Earth, with Mars at his best, exalted in Capricorn.",
  "sections": [
   {
-   "id": "what-crowley-names",
-   "title": "Title and suit",
-   "line": "Crowley on the card’s title (pdf p176); on the suit and its element (pdf p24).",
+   "id": "meaning",
+   "title": "What it means",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "so the Three of Pentacles is called the Lord of Work",
-     "page": 176,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "“Disks” (“Coins”, or “Pantacles”), to Earth.",
-     "page": 24,
-     "voice": "Crowley"
-    }
-   ]
-  },
-  {
-   "id": "place-on-the-tree",
-   "title": "Its place on the Tree and in the zodiac",
-   "line": "Crowley on Binah in the sphere of Earth (pdf p228); on the Threes and Binah (pdf p176); on Mars in Capricornus (pdf p228).",
-   "quotes": [
-    {
-     "work": "book-of-thoth",
-     "quote": "The influence of Binah in the sphere of Earth shows the material establishment of the idea of the Universe, the determination of its basic form.",
+     "quote": "The influence of Binah in the sphere of Earth shows the material establishment of the idea of the Universe, the determination of its basic form. It is ruled by Mars in Capricornus; he is exalted in that Sign, and therefore at his best. His energy is constructive, like that of the builder or engineer.",
      "page": 228,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding.",
+     "quote": "The Three of Pentacles, in a similar manner, exhibits the result of the idea of Earth, of the crystallization of forces; and so the Three of Pentacles is called the Lord of Work. Something has definitely been done.",
      "page": 176,
+     "voice": "Crowley"
+    }
+   ]
+  },
+  {
+   "id": "picture",
+   "title": "The picture",
+   "line": "",
+   "quotes": [
+    {
+     "work": "book-of-thoth",
+     "quote": "The card represents a pyramid viewed from above the apex. The base is formed by three wheels‐Mercury, Sulphur, and Salt; Sattvas, Rajas, and Tamas in the Hindu system; Aleph, Shin, and Mem‐Air, Fire, and Water‐the three Mother letters of the Hebrew alphabet.",
+     "page": 228,
      "voice": "Crowley"
     },
     {
      "work": "book-of-thoth",
-     "quote": "It is ruled by Mars in Capricornus; he is exalted in that Sign",
+     "quote": "This pyramid is situated in the great Sea of Binah in the Night of Time, but the sea is solidified; hence the colours of the background are mottled, a cold thin dark grey with a pattern of indigo and green. The sides of the pyramid have a strong reddish tint, showing the influence of Mars.",
      "page": 228,
      "voice": "Crowley"
     }
    ]
   },
   {
-   "id": "what-it-figures",
-   "title": "What it figures",
-   "line": "Crowley on the energy of Mars as constructive and on the pyramid viewed from above the apex (pdf p228).",
+   "id": "number",
+   "title": "The Threes",
+   "line": "",
    "quotes": [
     {
      "work": "book-of-thoth",
-     "quote": "His energy is constructive, like that of the builder or engineer.",
-     "page": 228,
-     "voice": "Crowley"
-    },
-    {
-     "work": "book-of-thoth",
-     "quote": "The card represents a pyramid viewed from above the apex.",
-     "page": 228,
+     "quote": "These cards are referred to Binah; in each of them is expressed the symbolism of Understanding. The idea has become fertilized; the triangle has been formulated. In each case, the idea is of a certain stability which can never be upset, but from which a child can issue.",
+     "page": 176,
      "voice": "Crowley"
     }
    ]

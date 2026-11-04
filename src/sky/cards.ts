@@ -21,14 +21,19 @@ export interface CardPlate {
 
 export interface CardInfo {
   name: string;
-  kind: 'major' | 'pip';
+  kind: 'major' | 'pip' | 'court';
   image: CardPlate;
   /** a pip's rank (1 = Ace … 10), its suit and the element that suit stands for */
   number?: number;
   suit?: string;
   element?: string | null;
-  /** the sign (Aries 0 … Pisces 11) a decan card or a sign's Atu stands in; a decan card also its decan and start longitude */
+  /** a court card's rank (its suit and element as a pip's) */
+  court?: 'knight' | 'queen' | 'prince' | 'princess';
+  /** the sign (Aries 0 … Pisces 11) a decan card or a sign's Atu stands in, or the one holding most of a court's span; a
+   *  decan card also its decan and start longitude */
   sign?: number;
+  /** a Knight's, Queen's or Prince's thirty degrees start here: the 20th degree of the sign before `sign` */
+  from?: number;
   n?: number;
   lon?: number;
   decan?: string | null;
@@ -43,6 +48,8 @@ export interface PlacedQuote {
 export interface DecanCard { card: string; decan: string; sign: number; n: number; lon: number; joins: string[] }
 export interface RankCard { card: string; suit: string; number: number; joins: string[] }
 export interface MajorCard { card: string; via: 'planet' | 'ruler' | 'element'; sign?: number; element?: string; joins: string[] }
+/** A court card at a body: a Knight, Queen or Prince at the ruler of the sign holding most of its span; a Princess at the Earth. */
+export interface CourtCard { card: string; court: 'knight' | 'queen' | 'prince' | 'princess'; suit: string; sign?: number; from?: number; element?: string; joins: string[] }
 
 export interface BodyCards {
   gods: { family: string; basis: TieBasis | null; voice: string | null; quotes: PlacedQuote[] }[];
@@ -52,6 +59,7 @@ export interface BodyCards {
   decans: DecanCard[];
   ranks: RankCard[];
   majors: MajorCard[];
+  courts: CourtCard[];
   elements: string[];
   abyss: boolean;
   note?: string;
@@ -96,7 +104,7 @@ export interface RingCard {
   /** which ring: the decan wheel (a card sits at its decan's longitude) or the rank ring (spread round) */
   ring: 'decan' | 'rank';
   /** what it stands as on that ring */
-  role: 'decan' | 'rank' | 'planet' | 'ruler' | 'element';
+  role: 'decan' | 'rank' | 'planet' | 'ruler' | 'element' | 'court';
   /** the ecliptic longitude it hangs at, degrees; for the rank ring, where the spread put it */
   lon: number;
   /** a decan card's own span (start longitude), so the wheel can say where the planet stands now */
@@ -130,8 +138,8 @@ export function restAngle(n: number, away: number[]): number {
 
 /**
  * The two card rings of a body. The decan ring is the zodiac in little: each pip card at the middle of its ten degrees.
- * The rank ring holds, in order, the Atu the field joins to the planet itself, those of a sign it rules, and the four
- * cards of its number in Crowley's suit order. A body with no card in the data has no rings.
+ * The rank ring holds, in order, the Atu the field joins to the planet itself, those of a sign it rules, the court cards
+ * it holds, and the four cards of its number in Crowley's suit order. A body with no card in the data has no rings.
  */
 export function ringsFor(data: SkyCardsData | null, key: BodyKey): BodyRings | null {
   const b = data?.bodies[key];
@@ -142,6 +150,7 @@ export function ringsFor(data: SkyCardsData | null, key: BodyKey): BodyRings | n
   const order: { id: string; role: RingCard['role']; sign?: number }[] = [
     ...b.majors.filter((m) => m.via === 'planet' || m.via === 'element').map((m) => ({ id: m.card, role: (m.via === 'element' ? 'element' : 'planet') as RingCard['role'] })),
     ...b.majors.filter((m) => m.via === 'ruler').map((m) => ({ id: m.card, role: 'ruler' as const, sign: m.sign })),
+    ...b.courts.map((c) => ({ id: c.card, role: 'court' as const, sign: c.sign })),
     ...b.ranks.map((r) => ({ id: r.card, role: 'rank' as const })),
   ].filter((x) => data.cards[x.id]);
   // the rank ring is not a longitude, so its spread is turned to stand as far from the decan cards as it can (they would
@@ -177,6 +186,7 @@ export function cardTies(data: SkyCardsData): { body: BodyKey; type: 'family'; i
     for (const d of b.decans) add(key, d.card);
     for (const r of b.ranks) add(key, r.card);
     for (const m of b.majors) add(key, m.card);
+    for (const c of b.courts) add(key, c.card);
     for (const e of b.elements) add(key, e);
     if (b.sephira) add(key, b.sephira);
   }
