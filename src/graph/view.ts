@@ -28,6 +28,9 @@ import { clampZoom, Coast, frameSeconds, isCamera, isDoubleClick, MAX_ZOOM, MIN_
 import { loadLayout, loadSettings, saveLayout, saveSettings, DEFAULT_DISPLAY, DEFAULT_KINDS, KIND_KEYS, type Display, type KindFlags } from './settings';
 import { forceCluster, forceField, type FieldForce } from './field-force';
 
+/** The Barnes–Hut criterion of the far field among the forms, and of the near field inside a form above a thousand members. */
+const FIELD_THETA = 0.95;
+
 // outside the local lens the field recedes to a whisper that is still clickable
 const GHOST_VIS = 0.05;
 // a cursor that has stopped for this long (frame seconds) is when the layout re-reads who is live
@@ -976,8 +979,8 @@ export class GraphView {
     this.sim
       .nodes(this.simNodes)
       .force('link', forceLink<VNode, SimLink>(links).distance(fns.dist).strength(fns.str).iterations(1))
-      .force('charge', forceField<VNode>().parent(this.parentOf).strength(fns.charge).theta(0.95).distanceMax(fns.reach))
-      .force('cluster', forceCluster<VNode>().group(this.parentOf).strength(fns.charge).distanceMax(fns.reach))
+      .force('charge', forceField<VNode>().parent(this.parentOf).strength(fns.charge).theta(FIELD_THETA).distanceMax(fns.reach))
+      .force('cluster', forceCluster<VNode>().group(this.parentOf).strength(fns.charge).theta(FIELD_THETA).distanceMax(fns.reach))
       .force('collide', collideHeavy)
       .force('x', forceX<VNode>(0).strength(fns.centre))
       .force('y', forceY<VNode>(0).strength(fns.centre))
