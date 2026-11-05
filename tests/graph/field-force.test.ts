@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { forceManyBody } from 'd3-force';
-import { forceCluster, forceField } from '../../src/graph/field-force';
+import { CLUSTER_PAIRWISE_MAX, forceCluster, forceField } from '../../src/graph/field-force';
 
 interface N { x: number; y: number; vx: number; vy: number; index: number; kind: 'form' | 'dust'; parent: N | null; s: number }
 
@@ -112,5 +112,89 @@ describe('the cluster force', () => {
       }
       expect(a.vx).toBeCloseTo(vx, 9);
     }
+  });
+});
+
+/** One form and its dust laid on a sunflower spiral: `count` occurrences within `spread` of the form, none on another. */
+function formOf(count: number, spread = 400): N[] {
+  const form: N = { x: 0, y: 0, vx: 0, vy: 0, index: 0, kind: 'form', parent: null, s: -200 };
+  const dust = Array.from({ length: count }, (_, i): N => {
+    const a = i * 2.399963;
+    const r = Math.sqrt((i + 0.5) / count) * spread;
+    return { x: Math.cos(a) * r, y: Math.sin(a) * r, vx: 0, vy: 0, index: i + 1, kind: 'dust', parent: form, s: -13 };
+  });
+  return [form, ...dust];
+}
+
+/** The exact near field of one form's dust, pair by pair, at alpha 1. */
+function exactPush(ns: N[]): [number, number][] {
+  const v = ns.map((): [number, number] => [0, 0]);
+  for (let i = 1; i < ns.length; i++) {
+    for (let j = i + 1; j < ns.length; j++) {
+      const x = ns[j].x - ns[i].x;
+      const y = ns[j].y - ns[i].y;
+      const l = x * x + y * y;
+      v[i][0] += (x * -13) / l; v[i][1] += (y * -13) / l;
+      v[j][0] -= (x * -13) / l; v[j][1] -= (y * -13) / l;
+    }
+  }
+  return v;
+}
+
+/** One tick's CPU time once warm: the median of five, the velocities put back each time. */
+function warmTick(force: (alpha: number) => void, ns: N[]): number {
+  const kept = ns.map((n) => [n.vx, n.vy]);
+  const times: number[] = [];
+  for (let k = 0; k < 7; k++) {
+    const start = process.cpuUsage();
+    force(1);
+    const used = process.cpuUsage(start);
+    times.push((used.user + used.system) / 1000);
+  }
+  ns.forEach((n, i) => { n.vx = kept[i][0]; n.vy = kept[i][1]; });
+  return times.slice(2).sort((a, b) => a - b)[2];
+}
+
+// The near field's cost is the sum of each form's members squared: a form of a few thousand occurrences makes it the whole tick.
+// Up to CLUSTER_PAIRWISE_MAX members a form's dust repels pair by pair, exactly; above that it is Barnes–Hut, a quadtree of the
+// form's own members at the far field's theta, so a form's tick grows as n log n.
+describe('the cluster force at scale', () => {
+  it('repels a form of up to a thousand members pair by pair, exactly', () => {
+    expect(CLUSTER_PAIRWISE_MAX).toBe(1000);
+    const ns = formOf(1000);
+    const c = forceCluster<N>().strength((n) => n.s).group((n) => n.parent);
+    c.initialize(ns);
+    c(1);
+    const exact = exactPush(ns);
+    for (let i = 1; i < ns.length; i++) {
+      expect(ns[i].vx).toBeCloseTo(exact[i][0], 9);
+      expect(ns[i].vy).toBeCloseTo(exact[i][1], 9);
+    }
+  });
+
+  it('above a thousand members is Barnes–Hut: the same push within a few per cent, at a fraction of the pairs’ cost', () => {
+    const ns = formOf(6000, 800);
+    const c = forceCluster<N>().strength((n) => n.s).group((n) => n.parent).theta(0.95);
+    c.initialize(ns);
+    c(1);
+    const exact = exactPush(ns);
+    let err = 0;
+    let norm = 0;
+    for (let i = 1; i < ns.length; i++) {
+      err += (ns[i].vx - exact[i][0]) ** 2 + (ns[i].vy - exact[i][1]) ** 2;
+      norm += exact[i][0] ** 2 + exact[i][1] ** 2;
+    }
+    expect(Math.sqrt(err / norm)).toBeLessThan(0.05);
+    const tree = warmTick(c, ns);
+    const copy = formOf(6000, 800);
+    const pairs = forceCluster<N>().strength((n) => n.s).group((n) => n.parent).pairwiseMax(Infinity);
+    pairs.initialize(copy);
+    expect(tree * 2.5).toBeLessThan(warmTick(pairs, copy));
+  });
+
+  it('takes the far field’s theta in the graph view', async () => {
+    const { readFile } = await import('node:fs/promises');
+    const view = await readFile(new URL('../../src/graph/view.ts', import.meta.url), 'utf8');
+    expect(view).toMatch(/\.force\('charge', forceField<VNode>\(\)\.parent\(this\.parentOf\)\.strength\(fns\.charge\)\.theta\(FIELD_THETA\)\.distanceMax\(fns\.reach\)\)\n\s*\.force\('cluster', forceCluster<VNode>\(\)\.group\(this\.parentOf\)\.strength\(fns\.charge\)\.theta\(FIELD_THETA\)\.distanceMax\(fns\.reach\)\)/);
   });
 });

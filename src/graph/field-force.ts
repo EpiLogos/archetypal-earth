@@ -4,7 +4,9 @@
 // (Barnes–Hut, exactly as d3 does it), and each occurrence's own push is carried by its form, so the far field is the
 // one the whole set used to make. An occurrence sits a few units from its form, where the far field is the form's: it
 // moves with its form in it, and is pushed apart from it by the form's own strength. The near field among the dust is
-// the cluster force's: an occurrence repels the other occurrences of its own form, pair by pair.
+// the cluster force's: an occurrence repels the other occurrences of its own form, pair by pair up to CLUSTER_PAIRWISE_MAX
+// members, and through a quadtree of the form above that (the pairs cost the sum of each form's members squared: measured in
+// O:I's World graph, 15.4 ms a tick at 2,104 occurrences and 204 ms at 8,416).
 import { quadtree, type QuadtreeInternalNode, type QuadtreeLeaf } from 'd3-quadtree';
 
 export interface FieldBody {
@@ -212,10 +214,14 @@ export function forceField<N extends FieldBody>(): FieldForce<N> {
   return force;
 }
 
+/** The most members a form's dust repels pair by pair; above it the form's near field is Barnes–Hut. */
+export const CLUSTER_PAIRWISE_MAX = 1000;
+
 /**
- * The near field of the dust: the light nodes of one parent repel each other pair by pair, each with its own
- * strength (as forceManyBody would, with no approximation). Groups are small (the largest form has ~140), so the
- * cost is the sum of their squares, a few tens of thousands of pairs for the whole field.
+ * The near field of the dust: the light nodes of one parent repel each other, each with its own strength (as forceManyBody
+ * would). Up to CLUSTER_PAIRWISE_MAX members they do so pair by pair, with no approximation: the cost is the sum of the
+ * forms' squares, a few tens of thousands of pairs for the founding field (its largest form has ~140). A larger form is a
+ * quadtree of its own members, each pushed by the cells far enough to be one body at the theta the far field uses.
  */
 export interface ClusterForce<N extends FieldBody> {
   (alpha: number): void;
@@ -224,6 +230,10 @@ export interface ClusterForce<N extends FieldBody> {
   /** the group a light node belongs to (its parent), or null when it is a source of the field */
   group(fn: (n: N) => N | null): ClusterForce<N>;
   distanceMax(d: number): ClusterForce<N>;
+  /** the Barnes–Hut criterion for a form above the pairwise bound (the far field's, forceField.theta) */
+  theta(t: number): ClusterForce<N>;
+  /** the most members a form repels pair by pair (CLUSTER_PAIRWISE_MAX; tests and measurement) */
+  pairwiseMax(n: number): ClusterForce<N>;
 }
 
 export function forceCluster<N extends FieldBody>(): ClusterForce<N> {
@@ -234,6 +244,10 @@ export function forceCluster<N extends FieldBody>(): ClusterForce<N> {
   let groupFn: (n: N) => N | null = () => null;
   let distMax2 = Infinity;
   const distMin2 = 1;
+  let theta2 = 0.81;
+  let pairwise = CLUSTER_PAIRWISE_MAX;
+  let target: N;
+  let alphaNow = 0;
 
   const prepare = () => {
     let max = 0;
@@ -252,9 +266,82 @@ export function forceCluster<N extends FieldBody>(): ClusterForce<N> {
     groups = [...by.values()].filter((g) => g.length > 1);
   };
 
+  // A form's own quadtree: each cell's strength and its strength-weighted centre, as forceField accumulates its sources.
+  function accumulate(quad: Quad<N>) {
+    let strength = 0;
+    if (quad.length) {
+      let weight = 0;
+      let x = 0;
+      let y = 0;
+      for (let i = 0; i < 4; i++) {
+        const q = (quad as QuadtreeInternalNode<N>)[i] as Quad<N> | undefined;
+        if (!q) continue;
+        const c = Math.abs(q.value ?? 0);
+        if (!c) continue;
+        strength += q.value!;
+        weight += c;
+        x += c * q.x!;
+        y += c * q.y!;
+      }
+      quad.x = weight ? x / weight : 0;
+      quad.y = weight ? y / weight : 0;
+    } else {
+      let q: QuadtreeLeaf<N> | undefined = quad as QuadtreeLeaf<N>;
+      quad.x = q.data.x;
+      quad.y = q.data.y;
+      do strength += str[q.data.index!];
+      while ((q = q.next));
+    }
+    quad.value = strength;
+  }
+
+  // The push of one cell on the member in hand: the whole cell when it is far enough to be one body, else its members one by one.
+  function apply(quad: Quad<N>, x1: number, _y1: number, x2: number): boolean | void {
+    if (!quad.value) return true;
+    let x = quad.x! - target.x;
+    let y = quad.y! - target.y;
+    let w = x2 - x1;
+    let l = x * x + y * y;
+    if ((w * w) / theta2 < l) {
+      if (l < distMax2) {
+        if (x === 0) { x = nudge(target.index!); l += x * x; }
+        if (y === 0) { y = nudge(target.index! + 3); l += y * y; }
+        if (l < distMin2) l = Math.sqrt(distMin2 * l);
+        target.vx += (x * quad.value * alphaNow) / l;
+        target.vy += (y * quad.value * alphaNow) / l;
+      }
+      return true;
+    }
+    if (quad.length || l >= distMax2) return;
+    let q: QuadtreeLeaf<N> | undefined = quad as QuadtreeLeaf<N>;
+    if (q.data !== target || q.next) {
+      if (x === 0) { x = nudge(target.index!); l += x * x; }
+      if (y === 0) { y = nudge(target.index! + 3); l += y * y; }
+      if (l < distMin2) l = Math.sqrt(distMin2 * l);
+    }
+    do {
+      if (q.data !== target) {
+        w = (str[q.data.index!] * alphaNow) / l;
+        target.vx += x * w;
+        target.vy += y * w;
+      }
+    } while ((q = q.next));
+  }
+
+  /** A form above the pairwise bound: one quadtree of its members a tick, and each member pushed through it. */
+  const nearField = (g: N[], alpha: number) => {
+    alphaNow = alpha;
+    const tree = quadtree<N>(g, (d) => d.x, (d) => d.y).visitAfter(accumulate as (q: QuadtreeInternalNode<N> | QuadtreeLeaf<N>) => void);
+    for (const v of g) {
+      target = v;
+      tree.visit(apply as (q: QuadtreeInternalNode<N> | QuadtreeLeaf<N>, x0: number, y0: number, x1: number, y1: number) => boolean | void);
+    }
+  };
+
   const force = ((alpha: number) => {
     for (const g of groups) {
       const n = g.length;
+      if (n > pairwise) { nearField(g, alpha); continue; }
       for (let i = 0; i < n; i++) {
         const a = g[i];
         for (let j = i + 1; j < n; j++) {
@@ -293,6 +380,14 @@ export function forceCluster<N extends FieldBody>(): ClusterForce<N> {
   };
   force.distanceMax = (d) => {
     distMax2 = d * d;
+    return force;
+  };
+  force.theta = (t) => {
+    theta2 = t * t;
+    return force;
+  };
+  force.pairwiseMax = (n) => {
+    pairwise = n;
     return force;
   };
   return force;
